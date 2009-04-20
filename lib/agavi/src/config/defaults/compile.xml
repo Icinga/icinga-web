@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/compile/1.0">
+	<ae:configuration>
+		<compiles>
+			<compile>%core.agavi_dir%/util/AgaviAttributeHolder.class.php</compile>
+			<compile>%core.agavi_dir%/util/AgaviArrayPathDefinition.class.php</compile>
+			<compile>%core.agavi_dir%/action/AgaviAction.class.php</compile>
+			<compile>%core.agavi_dir%/core/AgaviContext.class.php</compile>
+			<compile>%core.agavi_dir%/controller/AgaviController.class.php</compile>
+			<compile>%core.agavi_dir%/controller/AgaviExecutionContainer.class.php</compile>
+			<compile>%core.agavi_dir%/controller/AgaviOutputType.class.php</compile>
+			<compile>%core.agavi_dir%/filter/AgaviFilter.class.php</compile>
+			<compile>%core.agavi_dir%/filter/AgaviDispatchFilter.class.php</compile>
+			<compile>%core.agavi_dir%/filter/AgaviExecutionFilter.class.php</compile>
+			<compile>%core.agavi_dir%/filter/AgaviFilterChain.class.php</compile>
+			<compile>%core.agavi_dir%/renderer/AgaviRenderer.class.php</compile>
+			<compile>%core.agavi_dir%/request/AgaviRequestDataHolder.class.php</compile>
+			<compile>%core.agavi_dir%/request/AgaviRequest.class.php</compile>
+			<compile>%core.agavi_dir%/response/AgaviResponse.class.php</compile>
+			<compile>%core.agavi_dir%/routing/AgaviRouting.class.php</compile>
+			<compile>%core.agavi_dir%/storage/AgaviStorage.class.php</compile>
+			<compile>%core.agavi_dir%/user/AgaviUser.class.php</compile>
+			<compile>%core.agavi_dir%/view/AgaviTemplateLayer.class.php</compile>
+			<compile>%core.agavi_dir%/view/AgaviView.class.php</compile>
+		</compiles>
+	</ae:configuration>
+</ae:configurations>

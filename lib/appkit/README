@@ -1,0 +1,7 @@
+NETWAYSAppKit core components
+
+These are the components to modify agavi to our needs. So there living modified agavi classes like
+users or some handlers for logging or storage.
+
+Also there is an autoloader which loads only (!) AppKit classes. This behavior makes shure that
+all AppKit objects you need are allocated lazy at your needs.

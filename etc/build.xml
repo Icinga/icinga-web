@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="NETWAYSAppKit" default="hello" basedir="..">
+	
+	<!-- Load our default property file -->
+	<property name="properties" value="etc/build.properties" override="false" />
+	<property file="${properties}" />
+	
+	<property environment="env"/>
+	<property name="package" value="${phing.project.name}" override="true" />
+	<property name="srcdir" value="${project.basedir}" override="true" />
+	<property name="builddir" value=".build" override="false" />
+	
+	<target name="hello">
+		<echo msg="Welcome to the NETWAYS AppKit build system" />
+		<echo msg="Project: ${package}" />
+		<echo msg="Srcdir: ${srcdir}" />
+	</target>
+	
+	<target name="prepare">
+		<mkdir dir="${builddir}" />
+		<fail unless="appkit.targetdir" message="appkit.targetdir is empty!" />
+	</target>
+	
+	<target name="apache2-config">
+		<phingcall target="prepare" />
+		
+		<copy todir="${builddir}" overwrite="yes">
+			<fileset dir="${appkit.etcdir}">
+				<include name="${httpd.file}" />
+			</fileset>
+			
+			<filterchain>
+				<replacetokens>
+					<token key="server_listen" value="${httpd.server_listen}" />
+					<token key="server_name" value="${httpd.server_name}" />
+					<token key="server_root" value="${httpd.server_root}" />
+					<token key="appkit_target" value="${appkit.targetdir}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+	
+</project>

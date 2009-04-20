@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+/* Charts */
+
+div.chartPlace {
+	z-index: -1;
+}
+
+div.chartFrame {
+	padding: 5px;	
+}
+
+/* layouts */
+
+table.gridLayout {
+	border-collapse: collapse;
+}
+
+table.gridLayout tr td.dragOver {
+	background-color: #f1f1f1;	
+}
+
+table.gridLayout tr td {
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	vertical-align: middle;
+	
+	border: 1px #f1f1f1 dashed;
+}
+
+table.gridLayout tr td div.panelDisplay {
+
+}
+
+div.addAPanel {
+	padding: 20px;
+}
+
+div.panelDisplay div.actionFrame {
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 2px;	
+}
+
+div.addAPanel div {
+
+	cursor: pointer; 
+	border: 1px #666666 dashed; 
+	padding: 20px; 
+	width: 150px; 
+	height: 150px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	
+	padding-top: 25px;
+	
+	text-align: center;
+	
+	background: transparent url("../images/grapher/graph_preview.png") bottom center no-repeat;
+}
+
+div.addAPanel div span {
+	font-size: 1.6em;
+}

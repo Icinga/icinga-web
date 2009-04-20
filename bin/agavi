@@ -1,0 +1,4 @@
+#! /bin/sh
+DIR=$(dirname $(dirname $0))
+AGAVI=$DIR/lib/agavi/bin
+cd $AGAVI && /bin/sh agavi $@

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/AppKit/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators method="read">
+			<validator class="string" name="autocomplete_query" required="false">
+			
+				<argument>query</argument>
+				
+				<ae:parameter name="min">1</ae:parameter>
+				<ae:parameter name="max">255</ae:parameter>
+				
+				<errors>
+					<error for="min">AC querystring to small</error>
+					<error for="max">AC querystring to big (255)</error>
+					<error>AC querystring validation fails</error>
+				</errors>
+			
+			</validator>
+			
+			<validator class="string" name="autocomplete_type" required="true">
+			
+				<argument>type</argument>
+				
+				<ae:parameter name="min">1</ae:parameter>
+				<ae:parameter name="max">255</ae:parameter>
+				
+				<errors>
+					<error for="min">AC type to small</error>
+					<error for="max">AC type to big (255)</error>
+					<error>AC type validation fails</error>
+				</errors>
+			
+			</validator>
+			
+			<validator class="isset" name="autocomplete_parents" required="false">
+				<arguments base="parent[]">
+					<argument />
+				</arguments>
+				
+				<error>AC parent validation failed</error>
+				
+			</validator>
+			
+			<validator class="isset" name="autocomplete_noout" required="false">
+				<argument>noout</argument>
+			</validator>
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

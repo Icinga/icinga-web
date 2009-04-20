@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations xmlns="http://agavi.org/agavi/1.0/config">
+
+	<configuration>
+
+		<loggers default="appkit_default">
+
+			<!-- logs only INFO messages -->
+			<logger name="appkit_default" class="AgaviLogger" level="AgaviLogger::ALL">
+				<appenders>
+					<appender>AppKitLogAppender</appender>
+					<appender>AppKitQueueAppender</appender>
+				</appenders>
+			</logger>
+
+		</loggers>
+		
+		<appenders>
+			<appender name="AppKitLogAppender" class="AppKitDoctrineLoggerAppender" layout="PassThru" />
+			<appender name="AppKitQueueAppender" class="AppKitMessageQueueLoggerAppender" layout="DateTimeLayout" />
+		</appenders>
+		
+		<layouts>
+			<layout name="DateTimeLayout" class="AgaviTimestampLoggerLayout" />
+			<layout name="PassThru" class="AgaviPassthruLoggerLayout" />
+		</layouts>
+
+	</configuration>
+
+</configurations>

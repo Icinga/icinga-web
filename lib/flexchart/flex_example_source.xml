@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ngData>
+  <panel>
+    <title>Host: fsc-rhel - Service: net-PING - View: MONTH</title>
+    <width>990</width>
+    <height>400</height>
+    <layout>vertical</layout>
+  </panel>
+  <charts>
+    <c1>
+      <type>area</type>
+      <subType>overlaid</subType>
+      <showDataTips>1</showDataTips>
+      <width>100%</width>
+      <height>100%</height>
+      <axes>
+        <horizontal>
+          <title>Time</title>
+          <type>time</type>
+        </horizontal>
+        <vertical>
+          <title/>
+        </vertical>
+      </axes>
+      <legend>
+        <labelPlacement>right</labelPlacement>
+        <direction>horizontal</direction>
+      </legend>
+      <series>
+        <s1>
+          <name>pl</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>pl</yField>
+          <color>#7957ba</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>pl</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s1>
+        <s2>
+          <name>pl_critical</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>pl_critical</yField>
+          <color>#b9c05</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>pl_critical</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s2>
+        <s3>
+          <name>pl_warning</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>pl_warning</yField>
+          <color>#25ade</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>pl_warning</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s3>
+        <s4>
+          <name>rta</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>rta</yField>
+          <color>#c44140</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>rta</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s4>
+        <s5>
+          <name>rta_critical</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>rta_critical</yField>
+          <color>#d8b22</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>rta_critical</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s5>
+        <s6>
+          <name>rta_min</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>rta_min</yField>
+          <color>#dc6bf6</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>rta_min</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s6>
+        <s7>
+          <name>rta_warning</name>
+          <type>line</type>
+          <form>curve</form>
+          <xField>t</xField>
+          <yField>rta_warning</yField>
+          <color>#9618a8</color>
+          <alpha>0.5</alpha>
+          <weight>2</weight>
+          <axes>
+            <vertical>
+              <title>rta_warning</title>
+              <weight>5</weight>
+              <alpha>0.5</alpha>
+              <caps>round</caps>
+            </vertical>
+          </axes>
+        </s7>
+      </series>
+    </c1>
+  </charts>
+  <data>
+    <row>
+      <t>1233619200</t>
+      <pair key="pl" value="0.578034682081"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="4.31424855491"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1233705600</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="9.3115170068"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1233792000</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="10.7928694444"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1233878400</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="7.71683484955"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1233964800</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="5.14497013889"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1234051200</t>
+      <pair key="pl" value="0.0694444444444"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="6.80545277778"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1234137600</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="5.87253384508"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1234224000</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="3.54694297636"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+    <row>
+      <t>1234310400</t>
+      <pair key="pl" value="0"/>
+      <pair key="pl_critical" value="70"/>
+      <pair key="pl_warning" value="40"/>
+      <pair key="rta" value="4.48631115276"/>
+      <pair key="rta_critical" value="300"/>
+      <pair key="rta_min" value="0"/>
+      <pair key="rta_warning" value="100"/>
+    </row>
+  </data>
+</ngData>

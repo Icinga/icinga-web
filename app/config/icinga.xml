@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings prefix="de.netways." xmlns="http://agavi.org/agavi/1.0/config">
+	
+	<setting name="appkit.php_settings">
+		<parameter name="session.gc_probability">3</parameter>
+		<parameter name="session.gc_divisor">100</parameter>
+		<parameter name="session.gc_maxlifetime">86400</parameter>
+	</setting>
+	
+	<!-- This does not work if the config cache is recreated! (DON'T USE THIS, COMPAT STATE) -->
+	<!-- <setting name="appkit.lib_path">%core.root_dir%/lib</setting> -->
+	
+	<setting name="appkit.autoloader.paths">
+		<parameter>%core.root_dir%/lib/appkit</parameter>
+	</setting>
+	
+	<setting name="appkit.autoloader.prefixes">
+		<parameter>AppKit</parameter>
+	</setting>
+	
+	<!-- Relative to AppKit::bootstrap, otherwise throws errors! -->
+	<setting name="appkit.doctrine_path">../lib/doctrine/lib</setting>
+	<setting name="appkit.doctrine_model_path">%core.root_dir%/lib/appkit/database/models</setting>
+	
+	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
+
+	<setting name="appkit.menu_extender">
+		
+	</setting>
+
+	<setting name="appkit.include_styles">		
+	
+		<!-- NETWAYSWireFrame css -->
+		<parameter>/styles/WireFrameDefault.css</parameter>
+		<parameter>/styles/WireFrameStructural.css</parameter>
+		<parameter>/styles/Grapher.css</parameter>
+	
+		<!-- YUI css -->
+		<parameter>/js/yui/build/fonts/fonts-min.css</parameter>
+		<parameter>/js/yui/build/menu/assets/skins/sam/menu.css</parameter>
+		<parameter>/js/yui/build/tabview/assets/skins/sam/tabview.css</parameter>
+		<parameter>/js/yui/build/autocomplete/assets/skins/sam/autocomplete.css</parameter>
+		<parameter>/js/yui/build/container/assets/skins/sam/container.css</parameter>
+		<parameter>/js/yui/build/button/assets/skins/sam/button.css</parameter>
+		<parameter>/js/yui/build/resize/assets/skins/sam/resize.css</parameter>
+		<parameter>/js/yui/build/calendar/assets/skins/sam/calendar.css</parameter>
+		<parameter>/styles/WireFrameYUI.css</parameter>
+		
+		
+		<!-- Misc css -->
+		<parameter>/js/gc-prettify/prettify.css</parameter>
+		
+	</setting>
+	
+	<setting name="appkit.meta_tags">
+		<parameter name="author">(c) 2009 ICINGA - www.icinga.org</parameter>
+		<parameter name="robots">noindex</parameter>
+	</setting>
+	
+	<setting name="appkit.include_javascript">
+	
+		<!-- YUI -->
+		<parameter>/js/yui/build/yahoo/yahoo-min.js</parameter>
+		<parameter>/js/yui/build/event/event-min.js</parameter>
+		<parameter>/js/yui/build/yahoo-dom-event/yahoo-dom-event.js</parameter>
+		<parameter>/js/yui/build/container/container-min.js</parameter>
+		<parameter>/js/yui/build/datasource/datasource-min.js</parameter>
+		<parameter>/js/yui/build/get/get-min.js</parameter>
+		<parameter>/js/yui/build/element/element-beta-min.js</parameter>
+		<parameter>/js/yui/build/connection/connection-min.js</parameter>
+		<parameter>/js/yui/build/json/json-min.js</parameter>
+		<parameter>/js/yui/build/animation/animation-min.js</parameter>
+		<parameter>/js/yui/build/autocomplete/autocomplete-min.js</parameter>
+		<parameter>/js/yui/build/menu/menu-min.js</parameter>
+		<parameter>/js/yui/build/tabview/tabview-min.js</parameter>
+		<parameter>/js/yui/build/tabview/tabview-min.js</parameter>
+		<parameter>/js/yui/build/dragdrop/dragdrop-min.js</parameter>
+		<parameter>/js/yui/build/button/button-min.js</parameter>
+		<parameter>/js/yui/build/calendar/calendar-min.js</parameter>
+		<parameter>/js/yui/build/resize/resize-min.js</parameter>
+		<parameter>/js/yui/build/cookie/cookie-min.js</parameter>
+		
+		<!-- JQuery -->
+		<parameter>/js/jquery/jquery-1.3.1.min.js</parameter>
+		
+		<!-- mootools -->
+		<!-- <parameter>/js/mootools/mootools-1.2.1-core-yc.js</parameter> -->	
+		
+		<!--AppKit JS -->
+		<parameter>/js/appkit/AppKit.js</parameter>
+		<parameter>/js/appkit/Grapher.js</parameter>
+		<parameter>/js/appkit/dump.js</parameter>	
+		
+		<!-- SWF Object -->
+		<parameter>/js/swfobject/swfobject.js</parameter>
+		
+		<!-- Google Code Prettify -->
+		<parameter>/js/gc-prettify/prettify.js</parameter>
+		
+		<!-- Firebug lite for debug purposes -->
+		<!-- <parameter>/js/firebug/firebug-lite-compressed.js</parameter> -->
+	</setting>
+
+	<setting name="appkit.pager.default_items">20</setting>
+
+	<setting name="appkit.factories">
+		<!-- GLOBAL MESSAGE QUEUE -->
+		<parameter name="MessageQueue">
+			<parameter name="class">AppKitMessageQueue</parameter>
+		</parameter>
+	
+		<!-- GLOBAL AUTH PROVIDER -->
+		<parameter name="AuthProvider">
+		<!-- Authenticate with Doctrine -->
+			<parameter name="class">AppKitAuthProviderDatabase</parameter>
+		 
+		 <!-- Authentificate against ldap
+		 	<parameter name="class">AppKitAuthProviderLdap</parameter>
+		 	<parameter name="ldap_dsn">ldap://int.netways.de/</parameter>
+		 	<parameter name="ldap_basedn">DC=int,DC=netways,DC=de</parameter>
+		 	<parameter name="ldap_domain">INT.NETWAYS.DE</parameter>
+		 	<parameter name="ldap_binddn">USER@INT.NETWAYS.DE</parameter>
+		 	<parameter name="ldap_bindpw">password</parameter>
+		 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_MSAD</parameter>
+		 	<parameter name="ldap_filter_user"><![CDATA[(&(SAMAccountName=__USERNAME__))]]></parameter>
+		 -->
+		 
+		 <!-- Authentificate with http basic auth
+		 	<parameter name="class">AppKitAuthProviderHttpBasic</parameter>
+		 	<parameter name="field">REMOTE_USER</parameter>
+		  -->
+		</parameter>
+	</setting>
+	
+	<!-- Placeholder for doctrine autocomplete configurations -->
+	<setting name="appkit.ajax.ac.prefix">de.netways.appkit.ajax.ac.types</setting>
+	<setting name="appkit.ajax.ac.types">
+	
+	</setting>
+	
+	<!-- AJAX FILESOURCE -->
+	<setting name="appkit.ajax.fs.prefix">de.netways.appkit.ajax.fs.sources</setting>
+	
+
+</settings>

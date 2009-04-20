@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+html * {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 0.98em;
+}
+
+h1 {
+	font-size: 2.0em;	
+}
+
+h4 {
+	font-size: 1.1em;	
+}
+
+img { border: 0px }
+
+a {
+	color: #666666;
+}
+
+div.preformatted {
+	font-family: "Monospace", "Courier New", "Courier", "sans-serif", "serif";
+	background-color: #fafafa;
+}

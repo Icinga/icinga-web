@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
+	
+	<ae:configuration>
+		<databases default="appkit_default">
+			
+			<database name="appkit_default" class="AgaviDoctrineDatabase">
+				<ae:parameter name="dsn">mysql://ng_dev:ng_dev@127.0.0.1:3307/icinga</ae:parameter>
+				<ae:parameter name="username">ng_dev</ae:parameter>
+				<ae:parameter name="password">ng_dev</ae:parameter>
+				<ae:parameter name="charset">utf8</ae:parameter>
+				
+				<ae:parameter name="manager_attributes">
+					<!-- This allows lazy loading of the models -->
+					<ae:parameter name="MODEL_LOADING">CONSERVATIVE</ae:parameter>
+				</ae:parameter>
+				
+				<ae:parameter name="load_models">%de.netways.appkit.doctrine_model_path%</ae:parameter>
+				
+			</database>
+
+		</databases>
+	</ae:configuration>
+	
+	<!-- 
+	<ae:configuration environment="development-joecool">
+		<databases default="pdo_mysql_main">
+			
+			<database name="pdo_mysql_main">
+				<ae:parameter name="dsn">mysql:host=localhost;dbname=agavisample</ae:parameter>
+				<ae:parameter name="username">agavisample</ae:parameter>
+				<ae:parameter name="password">123qwe</ae:parameter>
+			</database>
+			
+		</databases>
+	</ae:configuration>
+	-->
+	
+</ae:configurations>
