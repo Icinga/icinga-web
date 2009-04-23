@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataAction extends NETWAYSAppKitBaseAction
+class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -24,20 +24,20 @@ class AppKit_Widgets_AddHeaderDataAction extends NETWAYSAppKitBaseAction
 		$header = $this->getContext()->getModel('HeaderData', 'AppKit');
 		
 		// Adding preconfigured style files
-		if (is_array( ($css_files = AgaviConfig::get('de.netways.appkit.include_styles')) )) {
+		if (is_array( ($css_files = AgaviConfig::get('de.icinga.appkit.include_styles')) )) {
 			foreach ($css_files as $css_file) {
 				$header->addCssFile($css_file);
 			}
 		}
 		
 		// Adding preconfigured javascript files
-		if (is_array( ($js_files = AgaviConfig::get('de.netways.appkit.include_javascript')) )) {
+		if (is_array( ($js_files = AgaviConfig::get('de.icinga.appkit.include_javascript')) )) {
 			foreach ($js_files as $js_file) {
 				$header->addJsFile($js_file);
 			}
 		}
 		
-		if (is_array( ($tags = AgaviConfig::get('de.netways.appkit.meta_tags')) )) {
+		if (is_array( ($tags = AgaviConfig::get('de.icinga.appkit.meta_tags')) )) {
 			foreach ($tags as $tag_name => $tag_val) {
 				$header->addMetaTag($tag_name, $tag_val);
 			}

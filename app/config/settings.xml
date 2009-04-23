@@ -37,7 +37,7 @@
 		</system_actions>
 
 		<settings>
-			<setting name="app_name">NETWAYS</setting>
+			<setting name="app_name">ICINGA</setting>
 
 			<setting name="available">true</setting>
 			<setting name="debug">false</setting>
@@ -48,7 +48,7 @@
 			<setting name="use_translation">false</setting>
 		</settings>
 
-		<!-- Include our netways settings -->
+		<!-- Include our icinga settings -->
 		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.xml"/>
 
 		<exception_templates>

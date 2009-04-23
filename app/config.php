@@ -20,7 +20,7 @@ AgaviConfig::set('core.debug', false);
 // | This constant will be auto-set by Agavi if you do not supply it.          |
 // | The default value is the name of the directory "agavi.php" resides in.    |
 // +---------------------------------------------------------------------------+
-// AgaviConfig::set('core.agavi_dir', '/data/mhein/workspace/NETWAYSAppKit/lib/agavi/src');
+// AgaviConfig::set('core.agavi_dir', '/data/mhein/workspace/ICINGAAppKit/lib/agavi/src');
 
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to your web application directory. This       |

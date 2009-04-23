@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Error404SuccessView extends NETWAYSAppKitBaseView
+class AppKit_Error404SuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

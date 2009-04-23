@@ -3,9 +3,9 @@
 	<ae:configuration>
 		
 		<!-- MVC base classes -->
-		<autoload name="NETWAYSBaseAction">%core.lib_dir%/action/NETWAYSBaseAction.class.php</autoload>
-		<autoload name="NETWAYSBaseModel">%core.lib_dir%/model/NETWAYSBaseModel.class.php</autoload>
-		<autoload name="NETWAYSBaseView">%core.lib_dir%/view/NETWAYSBaseView.class.php</autoload>
+		<autoload name="ICINGABaseAction">%core.lib_dir%/action/ICINGABaseAction.class.php</autoload>
+		<autoload name="ICINGABaseModel">%core.lib_dir%/model/ICINGABaseModel.class.php</autoload>
+		<autoload name="ICINGABaseView">%core.lib_dir%/view/ICINGABaseView.class.php</autoload>
 		
 		<!-- AppKit needed classes -->
 		<autoload name="AppKit">%core.root_dir%/lib/appkit/AppKit.class.php</autoload>

@@ -18,32 +18,32 @@ AgaviConfig::fromArray(array (
   'actions.secure_action' => 'Secure',
   'actions.login_module' => 'AppKit',
   'actions.login_action' => 'Login',
-  'core.app_name' => 'NETWAYS',
+  'core.app_name' => 'ICINGA',
   'core.available' => true,
   'core.debug' => false,
   'core.use_database' => true,
   'core.use_logging' => true,
   'core.use_security' => true,
   'core.use_translation' => false,
-  'de.netways.appkit.php_settings' => 
+  'de.icinga.appkit.php_settings' => 
   array (
     'session.gc_probability' => '3',
     'session.gc_divisor' => '100',
     'session.gc_maxlifetime' => '86400',
   ),
-  'de.netways.appkit.autoloader.paths' => 
+  'de.icinga.appkit.autoloader.paths' => 
   array (
     0 => '/data/mhein/workspace-icinga/icinga-web/lib/appkit',
   ),
-  'de.netways.appkit.autoloader.prefixes' => 
+  'de.icinga.appkit.autoloader.prefixes' => 
   array (
     0 => 'AppKit',
   ),
-  'de.netways.appkit.doctrine_path' => '../lib/doctrine/lib',
-  'de.netways.appkit.doctrine_model_path' => '/data/mhein/workspace-icinga/icinga-web/lib/appkit/database/models',
-  'de.netways.appkit.image_path' => '/data/mhein/workspace-icinga/icinga-web/pub/images',
-  'de.netways.appkit.menu_extender' => '',
-  'de.netways.appkit.include_styles' => 
+  'de.icinga.appkit.doctrine_path' => '../lib/doctrine/lib',
+  'de.icinga.appkit.doctrine_model_path' => '/data/mhein/workspace-icinga/icinga-web/lib/appkit/database/models',
+  'de.icinga.appkit.image_path' => '/data/mhein/workspace-icinga/icinga-web/pub/images',
+  'de.icinga.appkit.menu_extender' => '',
+  'de.icinga.appkit.include_styles' => 
   array (
     0 => '/styles/WireFrameDefault.css',
     1 => '/styles/WireFrameStructural.css',
@@ -59,12 +59,12 @@ AgaviConfig::fromArray(array (
     11 => '/styles/WireFrameYUI.css',
     12 => '/js/gc-prettify/prettify.css',
   ),
-  'de.netways.appkit.meta_tags' => 
+  'de.icinga.appkit.meta_tags' => 
   array (
     'author' => '(c) 2009 ICINGA - www.icinga.org',
     'robots' => 'noindex',
   ),
-  'de.netways.appkit.include_javascript' => 
+  'de.icinga.appkit.include_javascript' => 
   array (
     0 => '/js/yui/build/yahoo/yahoo-min.js',
     1 => '/js/yui/build/event/event-min.js',
@@ -92,8 +92,8 @@ AgaviConfig::fromArray(array (
     23 => '/js/swfobject/swfobject.js',
     24 => '/js/gc-prettify/prettify.js',
   ),
-  'de.netways.appkit.pager.default_items' => '20',
-  'de.netways.appkit.factories' => 
+  'de.icinga.appkit.pager.default_items' => '20',
+  'de.icinga.appkit.factories' => 
   array (
     'MessageQueue' => 
     array (
@@ -104,9 +104,9 @@ AgaviConfig::fromArray(array (
       'class' => 'AppKitAuthProviderDatabase',
     ),
   ),
-  'de.netways.appkit.ajax.ac.prefix' => 'de.netways.appkit.ajax.ac.types',
-  'de.netways.appkit.ajax.ac.types' => '',
-  'de.netways.appkit.ajax.fs.prefix' => 'de.netways.appkit.ajax.fs.sources',
+  'de.icinga.appkit.ajax.ac.prefix' => 'de.netways.appkit.ajax.ac.types',
+  'de.icinga.appkit.ajax.ac.types' => '',
+  'de.icinga.appkit.ajax.fs.prefix' => 'de.netways.appkit.ajax.fs.sources',
   'exception.default_template' => '/data/mhein/workspace-icinga/icinga-web/lib/agavi/src/exception/templates/shiny.php',
   'exception.templates.console' => '/data/mhein/workspace-icinga/icinga-web/lib/agavi/src/exception/templates/plaintext.php',
 ));

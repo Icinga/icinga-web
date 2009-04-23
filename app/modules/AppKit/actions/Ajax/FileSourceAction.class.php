@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ajax_FileSourceAction extends NETWAYSAppKitBaseAction
+class AppKit_Ajax_FileSourceAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -20,7 +20,7 @@ class AppKit_Ajax_FileSourceAction extends NETWAYSAppKitBaseAction
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		$prefix = AgaviConfig::get('de.netways.appkit.ajax.fs.prefix');
+		$prefix = AgaviConfig::get('de.icinga.appkit.ajax.fs.prefix');
 		$search = sprintf('%s.%s', $prefix, $rd->getParameter('type'));
 
 		if (($config = AgaviConfig::get($search))) {

@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ajax_TestSuccessView extends NETWAYSAppKitBaseView
+class AppKit_Ajax_TestSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

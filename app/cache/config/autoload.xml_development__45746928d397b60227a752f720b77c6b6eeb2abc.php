@@ -248,9 +248,9 @@ return array (
   'AgaviTestSuite' => '/data/mhein/workspace-icinga/icinga-web/lib/agavi/src/testing/AgaviTestSuite.class.php',
   'AgaviConstraintActionHandlesMethod' => '/data/mhein/workspace-icinga/icinga-web/lib/agavi/src/testing/PHPUnit/Constraint/AgaviConstraintActionHandlesMethod.php',
   'AgaviConstraintViewHandlesOutputType' => '/data/mhein/workspace-icinga/icinga-web/lib/agavi/src/testing/PHPUnit/Constraint/AgaviConstraintViewHandlesOutputType.php',
-  'NETWAYSBaseAction' => '/data/mhein/workspace-icinga/icinga-web/app/lib/action/NETWAYSBaseAction.class.php',
-  'NETWAYSBaseModel' => '/data/mhein/workspace-icinga/icinga-web/app/lib/model/NETWAYSBaseModel.class.php',
-  'NETWAYSBaseView' => '/data/mhein/workspace-icinga/icinga-web/app/lib/view/NETWAYSBaseView.class.php',
+  'ICINGABaseAction' => '/data/mhein/workspace-icinga/icinga-web/app/lib/action/NETWAYSBaseAction.class.php',
+  'ICINGABaseModel' => '/data/mhein/workspace-icinga/icinga-web/app/lib/model/NETWAYSBaseModel.class.php',
+  'ICINGABaseView' => '/data/mhein/workspace-icinga/icinga-web/app/lib/view/NETWAYSBaseView.class.php',
   'AppKit' => '/data/mhein/workspace-icinga/icinga-web/lib/appkit/AppKit.class.php',
 );
 

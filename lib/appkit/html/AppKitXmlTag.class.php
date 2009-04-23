@@ -141,7 +141,7 @@ class AppKitXmlTag extends AppKitBaseClass {
 	
 	/**
 	 * (non-PHPdoc)
-	 * @see app/modules/AppKit/lib/class/NETWAYSAppKitBaseClass#toString()
+	 * @see app/modules/AppKit/lib/class/ICINGAAppKitBaseClass#toString()
 	 */
 	public function toString() {
 		return $this->renderElement();

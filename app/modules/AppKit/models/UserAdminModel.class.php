@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_UserAdminModel extends NETWAYSAppKitBaseModel
+class AppKit_UserAdminModel extends ICINGAAppKitBaseModel
 {
 
 	private static $editableAttributes = array (

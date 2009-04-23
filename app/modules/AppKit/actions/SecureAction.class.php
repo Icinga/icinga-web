@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_SecureAction extends NETWAYSAppKitBaseAction
+class AppKit_SecureAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

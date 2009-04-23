@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_LoginErrorView extends NETWAYSAppKitBaseView
+class AppKit_LoginErrorView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

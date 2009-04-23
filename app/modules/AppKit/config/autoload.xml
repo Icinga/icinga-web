@@ -3,9 +3,9 @@
 	<ae:configuration>
 		
 		<!-- MVC classes -->
-		<autoload name="NETWAYSAppKitBaseAction">%core.module_dir%/AppKit/lib/action/NETWAYSAppKitBaseAction.class.php</autoload>
-		<autoload name="NETWAYSAppKitBaseModel">%core.module_dir%/AppKit/lib/model/NETWAYSAppKitBaseModel.class.php</autoload>
-		<autoload name="NETWAYSAppKitBaseView">%core.module_dir%/AppKit/lib/view/NETWAYSAppKitBaseView.class.php</autoload>
+		<autoload name="ICINGAAppKitBaseAction">%core.module_dir%/AppKit/lib/action/ICINGAAppKitBaseAction.class.php</autoload>
+		<autoload name="ICINGAAppKitBaseModel">%core.module_dir%/AppKit/lib/model/ICINGAAppKitBaseModel.class.php</autoload>
+		<autoload name="ICINGAAppKitBaseView">%core.module_dir%/AppKit/lib/view/ICINGAAppKitBaseView.class.php</autoload>
 		
 	</ae:configuration>
 </ae:configurations>

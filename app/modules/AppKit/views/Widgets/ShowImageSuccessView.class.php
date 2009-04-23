@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_ShowImageSuccessView extends NETWAYSAppKitBaseView
+class AppKit_Widgets_ShowImageSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeImage(AgaviRequestDataHolder $rd)
 	{

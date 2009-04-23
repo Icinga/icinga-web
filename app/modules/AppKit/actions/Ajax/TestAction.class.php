@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ajax_TestAction extends NETWAYSAppKitBaseAction
+class AppKit_Ajax_TestAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

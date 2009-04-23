@@ -68,7 +68,7 @@ $this->controller->initialize($this, array (
 $this->storage = new AppKitDoctrineSessionStorage();
 $this->storage->initialize($this, array (
   'session_cookie_lifetime' => '3600',
-  'session_name' => 'NETWAYSAppKit',
+  'session_name' => 'ICINGAAppKit',
   'gzip_level' => '6',
 ));
 $this->storage->startup();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<settings prefix="de.netways." xmlns="http://agavi.org/agavi/1.0/config">
+<settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
 	
 	<setting name="appkit.php_settings">
 		<parameter name="session.gc_probability">3</parameter>
@@ -31,7 +31,7 @@
 
 	<setting name="appkit.include_styles">		
 	
-		<!-- NETWAYSWireFrame css -->
+		<!-- ICINGAWireFrame css -->
 		<parameter>/styles/WireFrameDefault.css</parameter>
 		<parameter>/styles/WireFrameStructural.css</parameter>
 		<parameter>/styles/Grapher.css</parameter>
@@ -117,10 +117,10 @@
 		 
 		 <!-- Authentificate against ldap
 		 	<parameter name="class">AppKitAuthProviderLdap</parameter>
-		 	<parameter name="ldap_dsn">ldap://int.netways.de/</parameter>
-		 	<parameter name="ldap_basedn">DC=int,DC=netways,DC=de</parameter>
-		 	<parameter name="ldap_domain">INT.NETWAYS.DE</parameter>
-		 	<parameter name="ldap_binddn">USER@INT.NETWAYS.DE</parameter>
+		 	<parameter name="ldap_dsn">ldap://int.icinga.de/</parameter>
+		 	<parameter name="ldap_basedn">DC=int,DC=icinga,DC=de</parameter>
+		 	<parameter name="ldap_domain">INT.ICINGA.DE</parameter>
+		 	<parameter name="ldap_binddn">USER@INT.ICINGA.DE</parameter>
 		 	<parameter name="ldap_bindpw">password</parameter>
 		 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_MSAD</parameter>
 		 	<parameter name="ldap_filter_user"><![CDATA[(&(SAMAccountName=__USERNAME__))]]></parameter>
@@ -134,13 +134,13 @@
 	</setting>
 	
 	<!-- Placeholder for doctrine autocomplete configurations -->
-	<setting name="appkit.ajax.ac.prefix">de.netways.appkit.ajax.ac.types</setting>
+	<setting name="appkit.ajax.ac.prefix">de.icinga.appkit.ajax.ac.types</setting>
 	<setting name="appkit.ajax.ac.types">
 	
 	</setting>
 	
 	<!-- AJAX FILESOURCE -->
-	<setting name="appkit.ajax.fs.prefix">de.netways.appkit.ajax.fs.sources</setting>
+	<setting name="appkit.ajax.fs.prefix">de.icinga.appkit.ajax.fs.sources</setting>
 	
 
 </settings>

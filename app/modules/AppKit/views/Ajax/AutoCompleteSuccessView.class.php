@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ajax_AutoCompleteSuccessView extends NETWAYSAppKitBaseView
+class AppKit_Ajax_AutoCompleteSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

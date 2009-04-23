@@ -34,7 +34,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 	
 	private function registerMenuExtender() {
 		// Register the following handler
-		if (is_array(($handler = AgaviConfig::get('de.netways.appkit.menu_extender')))) {
+		if (is_array(($handler = AgaviConfig::get('de.icinga.appkit.menu_extender')))) {
 			foreach ($handler as $class) {
 				$ref = new ReflectionClass($class);
 				if ($ref->isInstantiable()) {
