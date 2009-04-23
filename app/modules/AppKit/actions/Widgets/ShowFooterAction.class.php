@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_ShowFooterAction extends NETWAYSAppKitBaseAction
+class AppKit_Widgets_ShowFooterAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

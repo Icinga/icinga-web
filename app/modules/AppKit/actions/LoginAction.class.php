@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_LoginAction extends NETWAYSAppKitBaseAction
+class AppKit_LoginAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

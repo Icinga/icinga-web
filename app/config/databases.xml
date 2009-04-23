@@ -5,9 +5,9 @@
 		<databases default="appkit_default">
 			
 			<database name="appkit_default" class="AgaviDoctrineDatabase">
-				<ae:parameter name="dsn">mysql://ng_dev:ng_dev@127.0.0.1:3307/icinga</ae:parameter>
-				<ae:parameter name="username">ng_dev</ae:parameter>
-				<ae:parameter name="password">ng_dev</ae:parameter>
+				<ae:parameter name="dsn">mysql://icinga_dev:icinga_dev@localhost:3306/icinga</ae:parameter>
+				<ae:parameter name="username">icinga_dev</ae:parameter>
+				<ae:parameter name="password">icinga_dev</ae:parameter>
 				<ae:parameter name="charset">utf8</ae:parameter>
 				
 				<ae:parameter name="manager_attributes">
@@ -15,7 +15,7 @@
 					<ae:parameter name="MODEL_LOADING">CONSERVATIVE</ae:parameter>
 				</ae:parameter>
 				
-				<ae:parameter name="load_models">%de.netways.appkit.doctrine_model_path%</ae:parameter>
+				<ae:parameter name="load_models">%de.icinga.appkit.doctrine_model_path%</ae:parameter>
 				
 			</database>
 

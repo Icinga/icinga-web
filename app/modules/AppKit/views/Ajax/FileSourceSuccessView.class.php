@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ajax_FileSourceSuccessView extends NETWAYSAppKitBaseView
+class AppKit_Ajax_FileSourceSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

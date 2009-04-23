@@ -33,17 +33,17 @@
  *
  *	</setting>
  * 
- * @package NETWAYSAppKit
+ * @package ICINGAAppKit
  * @subpackage AppKit
  * 
  * @author Marius Hein
  * 
  * @copyright Authors
- * @copyright NETWAYS GmbH
+ * @copyright ICINGA GmbH
  * 
  * @version $Id$
  */
-class AppKit_Ajax_AutoCompleteAction extends NETWAYSAppKitBaseAction
+class AppKit_Ajax_AutoCompleteAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -63,7 +63,7 @@ class AppKit_Ajax_AutoCompleteAction extends NETWAYSAppKitBaseAction
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		$prefix = AgaviConfig::get('de.netways.appkit.ajax.ac.prefix');
+		$prefix = AgaviConfig::get('de.icinga.appkit.ajax.ac.prefix');
 		$search = sprintf('%s.%s', $prefix, $rd->getParameter('type'));
 		
 		if ($rd->getParameter('noout', false) !== false) {

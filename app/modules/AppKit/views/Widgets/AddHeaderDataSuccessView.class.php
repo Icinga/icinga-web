@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataSuccessView extends NETWAYSAppKitBaseView
+class AppKit_Widgets_AddHeaderDataSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

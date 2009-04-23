@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_ViewLogsAction extends NETWAYSAppKitBaseAction
+class AppKit_Admin_ViewLogsAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

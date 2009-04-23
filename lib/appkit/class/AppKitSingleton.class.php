@@ -1,8 +1,8 @@
 <?php
-// This file is part of the NETWAYSAppKit
-// (c) 2009 NETWAYS GmbH
+// This file is part of the ICINGAAppKit
+// (c) 2009 ICINGA GmbH
 //
-// NETWAYSAppKit is a framework build on top of Agavi to
+// ICINGAAppKit is a framework build on top of Agavi to
 // develop applications with the same context as modules
 //
 // For the complete license information please take a look
@@ -14,12 +14,12 @@
  * implemnt the getInstance method in the childs. Also protects
  * the constructor
  * 
- * @package     NETWAYSAppKit
+ * @package     ICINGAAppKit
  * @subpackage  AppKit
  * 
  * @author      Marius Hein
  * @copyright   Authors
- * @copyright   NETWAYS GmbH
+ * @copyright   ICINGA GmbH
  * 
  * @version     $Id$
  *
@@ -95,12 +95,12 @@ abstract class AppKitSingleton extends AppKitBaseClass {
 /**
  * Singleton exception inheritance
  * 
- * @package     NETWAYSAppKit
+ * @package     ICINGAAppKit
  * @subpackage  AppKit
  * 
  * @author      Marius Hein
  * @copyright   Authors
- * @copyright   NETWAYS GmbH
+ * @copyright   ICINGA GmbH
  * 
  * @version     $Id$
  *

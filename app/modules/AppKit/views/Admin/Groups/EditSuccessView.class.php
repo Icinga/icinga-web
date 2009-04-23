@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Groups_EditSuccessView extends NETWAYSAppKitBaseView
+class AppKit_Admin_Groups_EditSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

@@ -22,17 +22,17 @@
 					</renderer>
 				</renderers>
 				
-				<layouts default="NETWAYSWireFrame">
+				<layouts default="ICINGAWireFrame">
 				
 					<!-- standard layout with a content and a decorator layer -->
-					<layout name="NETWAYSWireFrame">
+					<layout name="ICINGAWireFrame">
 						<!-- content layer without further params. this means the standard template is used, i.e. the one with the same name as the current view -->
 						<layer name="content" />
 						<!-- decorator layer with the HTML skeleton, navigation etc; set to a specific template here -->
 						<layer name="decorator">
 						
 							<parameter name="directory">%core.template_dir%</parameter>
-							<parameter name="template">NETWAYSWireFrameMaster</parameter>
+							<parameter name="template">ICINGAWireFrameMaster</parameter>
 							
 							<!-- Headerdata -->
 							<slot name="additional_header_data" module="AppKit" action="Widgets.AddHeaderData" />

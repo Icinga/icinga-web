@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_User_IndexAction extends NETWAYSAppKitBaseAction
+class AppKit_User_IndexAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

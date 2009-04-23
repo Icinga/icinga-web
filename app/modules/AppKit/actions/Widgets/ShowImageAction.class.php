@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_ShowImageAction extends NETWAYSAppKitBaseAction
+class AppKit_Widgets_ShowImageAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

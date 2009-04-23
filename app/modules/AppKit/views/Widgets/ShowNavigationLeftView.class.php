@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_ShowNavigationLeftView extends NETWAYSAppKitBaseView
+class AppKit_Widgets_ShowNavigationLeftView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

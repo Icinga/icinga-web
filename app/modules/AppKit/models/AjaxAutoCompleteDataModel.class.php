@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_AjaxAutoCompleteDataModel extends NETWAYSAppKitBaseModel
+class AppKit_AjaxAutoCompleteDataModel extends ICINGAAppKitBaseModel
 {
 	
 	private $component 		= null;

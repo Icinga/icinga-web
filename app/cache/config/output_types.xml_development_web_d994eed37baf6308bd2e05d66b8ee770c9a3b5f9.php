@@ -31,7 +31,7 @@ $ot->initialize($this->context, array (
     ),
   ),
 ), 'php', array (
-  'NETWAYSWireFrame' => 
+  'ICINGAWireFrame' => 
   array (
     'layers' => 
     array (
@@ -52,7 +52,7 @@ $ot->initialize($this->context, array (
         'parameters' => 
         array (
           'directory' => '/data/mhein/workspace-icinga/icinga-web/app/templates',
-          'template' => 'NETWAYSWireFrameMaster',
+          'template' => 'ICINGAWireFrameMaster',
         ),
         'renderer' => NULL,
         'slots' => 
@@ -157,7 +157,7 @@ $ot->initialize($this->context, array (
     array (
     ),
   ),
-), 'NETWAYSWireFrame', NULL);
+), 'ICINGAWireFrame', NULL);
 $this->outputTypes['html'] = $ot;
 $ot = new AgaviOutputType();
 $ot->initialize($this->context, array (

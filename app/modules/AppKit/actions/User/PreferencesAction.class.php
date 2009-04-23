@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_User_PreferencesAction extends NETWAYSAppKitBaseAction
+class AppKit_User_PreferencesAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

@@ -1,8 +1,8 @@
 <?php
-// This file is part of the NETWAYSAppKit
-// (c) 2009 NETWAYS GmbH
+// This file is part of the ICINGAAppKit
+// (c) 2009 ICINGA GmbH
 //
-// NETWAYSAppKit is a framework build on top of Agavi to
+// ICINGAAppKit is a framework build on top of Agavi to
 // develop applications with the same context as modules
 //
 // For the complete license information please take a look
@@ -14,12 +14,12 @@
  * rules and holding the bootstrab method to init the framework
  * before agavi starts.
  * 
- * @package     NETWAYSAppKit
+ * @package     ICINGAAppKit
  * @subpackage  AppKit
  * 
  * @author      Marius Hein
  * @copyright   Authors
- * @copyright   NETWAYS GmbH
+ * @copyright   ICINGA GmbH
  * 
  * @version     $Id$
  *
@@ -50,24 +50,24 @@ class AppKit {
 		// var_dump(AgaviConfig::toArray());
 		
 		// Init the autoloader
-		if (is_array(($autoloader_paths = AgaviConfig::get('de.netways.appkit.autoloader.paths'))) && count($autoloader_paths)) {
+		if (is_array(($autoloader_paths = AgaviConfig::get('de.icinga.appkit.autoloader.paths'))) && count($autoloader_paths)) {
 			foreach ($autoloader_paths as $path) AppKitAutoloader::addSearchPath($path);
 		}
 		else {
-			throw new AppKitAutoloaderException('de.netways.appkit.autoloader.paths is incorrect');
+			throw new AppKitAutoloaderException('de.icinga.appkit.autoloader.paths is incorrect');
 		}
 		
-		if (is_array(($autoloader_prefixes = AgaviConfig::get('de.netways.appkit.autoloader.prefixes'))) && count($autoloader_prefixes)) {
+		if (is_array(($autoloader_prefixes = AgaviConfig::get('de.icinga.appkit.autoloader.prefixes'))) && count($autoloader_prefixes)) {
 			foreach ($autoloader_prefixes as $prefix) AppKitAutoloader::addNamePrefix($prefix);
 		}
 		else {
-			throw new AppKitAutoloaderException('de.netways.appkit.autoloader.prefixes is incorrect');
+			throw new AppKitAutoloaderException('de.icinga.appkit.autoloader.prefixes is incorrect');
 		}
 		
 		AppKitAutoloader::getInstance()->registerAutoloadRequests();
 		
 		// Try to include doctrine
-		if (file_exists($doctrine_dir = AgaviConfig::get('de.netways.appkit.doctrine_path'))) {
+		if (file_exists($doctrine_dir = AgaviConfig::get('de.icinga.appkit.doctrine_path'))) {
 			require_once($doctrine_dir. '/Doctrine.php');
 		}
 		else {
@@ -76,10 +76,10 @@ class AppKit {
 		}
 		
 		// Init our factories (mostly the AuthProvider)
-		AppKitFactories::loadFactoriesFromConfig('de.netways.appkit.factories');
+		AppKitFactories::loadFactoriesFromConfig('de.icinga.appkit.factories');
 		
 		// Applying PHP settings
-		if (is_array($settings = AgaviConfig::get('de.netways.appkit.php_settings'))) {
+		if (is_array($settings = AgaviConfig::get('de.icinga.appkit.php_settings'))) {
 			foreach ($settings as $ini_key=>$ini_val) {
 				if (ini_set($ini_key, $ini_val) === false) {
 					throw new AppKitException("Could not set ini setting $ini_key to '$ini_val'");

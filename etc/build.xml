@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="NETWAYSAppKit" default="hello" basedir="..">
+<project name="ICINGAAppKit" default="hello" basedir="..">
 	
 	<!-- Load our default property file -->
 	<property name="properties" value="etc/build.properties" override="false" />
@@ -12,7 +12,7 @@
 	<property name="builddir" value=".build" override="false" />
 	
 	<target name="hello">
-		<echo msg="Welcome to the NETWAYS AppKit build system" />
+		<echo msg="Welcome to the ICINGA AppKit build system" />
 		<echo msg="Project: ${package}" />
 		<echo msg="Srcdir: ${srcdir}" />
 	</target>

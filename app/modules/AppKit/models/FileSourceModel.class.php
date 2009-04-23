@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_FileSourceModel extends NETWAYSAppKitBaseModel
+class AppKit_FileSourceModel extends ICINGAAppKitBaseModel
 {
 
 	public function fileExists($filename) {

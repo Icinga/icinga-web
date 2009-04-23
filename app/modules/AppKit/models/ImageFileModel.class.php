@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_ImageFileModel extends NETWAYSAppKitBaseModel
+class AppKit_ImageFileModel extends ICINGAAppKitBaseModel
 implements AgaviISingletonModel
 {
 	
@@ -71,7 +71,7 @@ implements AgaviISingletonModel
 	}
 	
 	public function getImagePath() {
-		return AgaviConfig::get('de.netways.appkit.image_path');
+		return AgaviConfig::get('de.icinga.appkit.image_path');
 	}
 	
 }	

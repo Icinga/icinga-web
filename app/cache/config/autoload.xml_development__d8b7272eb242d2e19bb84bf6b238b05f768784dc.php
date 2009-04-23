@@ -6,9 +6,9 @@
 // Date: 2009-04-20T08:08:55+0000
 
 return array (
-  'NETWAYSAppKitBaseAction' => '/data/mhein/workspace-icinga/icinga-web/app/modules/AppKit/lib/action/NETWAYSAppKitBaseAction.class.php',
-  'NETWAYSAppKitBaseModel' => '/data/mhein/workspace-icinga/icinga-web/app/modules/AppKit/lib/model/NETWAYSAppKitBaseModel.class.php',
-  'NETWAYSAppKitBaseView' => '/data/mhein/workspace-icinga/icinga-web/app/modules/AppKit/lib/view/NETWAYSAppKitBaseView.class.php',
+  'ICINGAAppKitBaseAction' => '/data/mhein/workspace-icinga/icinga-web/app/modules/AppKit/lib/action/NETWAYSAppKitBaseAction.class.php',
+  'ICINGAAppKitBaseModel' => '/data/mhein/workspace-icinga/icinga-web/app/modules/AppKit/lib/model/NETWAYSAppKitBaseModel.class.php',
+  'ICINGAAppKitBaseView' => '/data/mhein/workspace-icinga/icinga-web/app/modules/AppKit/lib/view/NETWAYSAppKitBaseView.class.php',
 );
 
 ?>

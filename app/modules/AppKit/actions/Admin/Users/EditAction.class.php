@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Users_EditAction extends NETWAYSAppKitBaseAction
+class AppKit_Admin_Users_EditAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

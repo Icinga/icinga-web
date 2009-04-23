@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_LogAdminModel extends NETWAYSAppKitBaseModel
+class AppKit_LogAdminModel extends ICINGAAppKitBaseModel
 {
 
 	/**

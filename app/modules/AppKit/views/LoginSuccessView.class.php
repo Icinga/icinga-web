@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_LoginSuccessView extends NETWAYSAppKitBaseView
+class AppKit_LoginSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
