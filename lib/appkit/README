@@ -1,4 +1,4 @@
-NETWAYSAppKit core components
+ICINGAAppKit core components
 
 These are the components to modify agavi to our needs. So there living modified agavi classes like
 users or some handlers for logging or storage.

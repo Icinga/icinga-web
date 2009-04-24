@@ -1,6 +1,6 @@
 <?php
 // This file is part of the ICINGAAppKit
-// (c) 2009 ICINGA GmbH
+// (c) 2009 Netways GmbH
 //
 // ICINGAAppKit is a framework build on top of Agavi to
 // develop applications with the same context as modules
@@ -19,7 +19,7 @@
  * 
  * @author      Marius Hein
  * @copyright   Authors
- * @copyright   ICINGA GmbH
+ * @copyright   Netways GmbH
  * 
  * @version     $Id$
  *

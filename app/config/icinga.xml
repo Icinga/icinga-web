@@ -54,7 +54,7 @@
 	</setting>
 	
 	<setting name="appkit.meta_tags">
-		<parameter name="author">(c) 2009 ICINGA - www.icinga.org</parameter>
+		<parameter name="author">(c) 2009 Netways - www.icinga.org</parameter>
 		<parameter name="robots">noindex</parameter>
 	</setting>
 	
