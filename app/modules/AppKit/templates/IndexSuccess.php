@@ -4,7 +4,7 @@
 <p>ICINGA AppKit is a application framework build on to of Agavi to implement as fast as
 possible applications within the same context.</p>
 
-<p>The first implemented module is the ICINGAGrapher, a versatile, flash-driven plotting application to display
+<p>The first implemented module is the NETWAYSGrapher, a versatile, flash-driven plotting application to display
 performance data from other applications (e.g. NAGIOS).</p>
 
 <?php if (!$us->isAuthenticated()) { ?>

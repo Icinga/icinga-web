@@ -1,2 +1,4 @@
 app/cache/config/*.php
-
+icinga-web.session
+icinga-web.webprj
+*~
