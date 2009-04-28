@@ -13,10 +13,12 @@
 	
 	<setting name="appkit.autoloader.paths">
 		<parameter>%core.root_dir%/lib/appkit</parameter>
+		<parameter>%core.module_dir%/Web/lib/icinga</parameter>
 	</setting>
 	
 	<setting name="appkit.autoloader.prefixes">
 		<parameter>AppKit</parameter>
+		<parameter>Icinga</parameter>
 	</setting>
 	
 	<!-- Relative to AppKit::bootstrap, otherwise throws errors! -->
@@ -26,7 +28,7 @@
 	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
 
 	<setting name="appkit.menu_extender">
-		
+		<parameter>IcingaMenuExtender</parameter>
 	</setting>
 
 	<setting name="appkit.include_styles">		

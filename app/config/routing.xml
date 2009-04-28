@@ -51,13 +51,9 @@
 				</route>
 			</route>
 			
-			<!-- Monitoring routes (AppKit preferences) -->
-			<route name="monitoring" pattern="^/monitoring" module="AppKit">
-				<route pattern="^$" action="Monitoring.Index" />
-				
-				<route name=".tacticalOverview" pattern="^/tacticalOverview">
-					<route pattern="^$" action="Monitoring.TacticalOverview" /> 
-				</route>
+			<!-- ICINGA routes -->
+			<route name="icinga" pattern="^/icinga" module="Web">
+				<route pattern="^$" action="Index" />
 			</route>
 			
 		</routes>

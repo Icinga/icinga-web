@@ -3,53 +3,42 @@
 	<configuration>
 		<roles>
 			<role name="guest">
-			
+
 				<permissions>
 					<permission>appkit.access</permission>
 				</permissions>
+
 				<roles>
-				<role name="grapher_user">
-				
-					<permissions>
-						<permission>grapher.access</permission>
-					</permissions>
-					
-					<roles>
-					<role name="grapher_admin">
-						
+					<role name="appkit_user">
+
 						<permissions>
-							<permission>grapher.admin.access</permission>
-							<permission>grapher.admin</permission>
+							<permission>appkit.user.dummy</permission>
 						</permissions>
-				
+
 						<roles>
-						<role name="appkit_user">
-						
-							<permissions>
-								<permission>appkit.user.dummy</permission>
-							</permissions>
-						
-							<roles>
 							<role name="appkit_admin">
-								
+
 								<permissions>
 									<permission>appkit.admin</permission>
 									<permission>appkit.admin.users</permission>
 									<permission>appkit.admin.groups</permission>
 								</permissions>
-								
+
 							</role>
-							</roles>
-						
-						</role>
 						</roles>
-						
+
 					</role>
-					</roles>
 					
-				</role>
+					<role name="icinga_user">
+					
+						<permissions>
+							<permission>icinga.access</permission>
+						</permissions>
+					
+					</role>
+					
 				</roles>
-			
+
 			</role>
 		</roles>
 	</configuration>

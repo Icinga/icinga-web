@@ -102,52 +102,6 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 				$my->addSubItem(AppKitNavItem::create('my.preferences', 'my.preferences')
 				->setCaption('Preferences')
 				);
-
-				// Navigation for "Monitoring"
-				$monitoring =
-				$nav->getContainer()->addItem(AppKitNavItem::create('monitoring', 'monitoring')
-				->setCaption('Monitoring')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.tacticalOverview', 'monitoring.tacticalOverview')
-				->setCaption('Tactical Overview')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.serviceDetail', 'monitoring.serviceDetail')
-				->setCaption('Service Detail')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.hostDetail', 'monitoring.hostDetail')
-				->setCaption('Host Detail')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.hostgroupOverview', 'monitoring.hostgroupOverview')
-				->setCaption('Hostgroup Overview')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.hostgroupSummary', 'monitoring.hostgroupSummary')
-				->setCaption('Hostgroup Summary')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.hostgroupGrid', 'monitoring.hostgroupGrid')
-				->setCaption('Hostgroup Grid')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.servicegroupOverview', 'monitoring.servicegroupOverview')
-				->setCaption('Servicegroup Overview')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.servicegroupSummary', 'monitoring.servicegroupSummary')
-				->setCaption('Servicegroup Summary')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.servicegroupGrid', 'monitoring.servicegroupGrid')
-				->setCaption('Servicegroup Grid')
-				);
-
-				$monitoring->addSubItem(AppKitNavItem::create('monitoring.statusMap', 'monitoring.statusMap')
-				->setCaption('Status Map')
-				);
 			}
 			
 			// MENU FOR ADMIN
