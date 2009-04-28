@@ -2,7 +2,7 @@
 
 class AppKitArrayUtil {
 	
-	public static function arrayKeyInsertBefore(array &$input, $before, array &$insert) {
+	public static function arrayKeyInsertBefore(array $input, $before, array $insert) {
 		$new = array ();
 		$old = $input;
 		
@@ -10,11 +10,11 @@ class AppKitArrayUtil {
 			
 			if ($key == $before) {
 				foreach ($insert as $iKey=>$iVal) {
-					$new[$iKey] =& $iVal;
+					$new[$iKey] = $iVal;
 				}
 			}
 			
-			$new[$key] =& $val;
+			$new[$key] = $val;
 		}
 		return $new;
 		
