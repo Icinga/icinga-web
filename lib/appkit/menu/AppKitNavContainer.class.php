@@ -18,6 +18,19 @@ implements RecursiveIterator
 		return $item;
 	}
 	
+	public function addItemBefore($name, AppKitNavItem &$item) {
+		if (array_key_exists($name, $this->items)) {
+			$replace = array($item->getName() => &$item);
+			$this->items = AppKitArrayUtil::arrayKeyInsertBefore($this->items, $name, $replace);
+			return $item;
+		}
+		
+		throw new AppKitNavContainerException('Name nicht gefunden!');
+		
+		return false;
+		
+	}
+	
 	/**
 	 * 
 	 * @param string $parent_name
@@ -76,5 +89,9 @@ implements RecursiveIterator
 	}
 	
 }
+
+class AppKitNavContainerException extends AppKitException { }
+
+
 
 ?>
