@@ -102,6 +102,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 				$my->addSubItem(AppKitNavItem::create('my.preferences', 'my.preferences')
 				->setCaption('Preferences')
 				);
+				
 			}
 			
 			// MENU FOR ADMIN
