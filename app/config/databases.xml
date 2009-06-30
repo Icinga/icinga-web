@@ -5,7 +5,7 @@
 		<databases default="appkit_default">
 			
 			<database name="appkit_default" class="AgaviDoctrineDatabase">
-				<ae:parameter name="dsn">mysql://icinga_dev:icinga_dev@localhost:3306/icinga</ae:parameter>
+				<ae:parameter name="dsn">mysql://icinga_dev:icinga_dev@127.0.0.1:3307/icinga</ae:parameter>
 				<ae:parameter name="username">icinga_dev</ae:parameter>
 				<ae:parameter name="password">icinga_dev</ae:parameter>
 				<ae:parameter name="charset">utf8</ae:parameter>
