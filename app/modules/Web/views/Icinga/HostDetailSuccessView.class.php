@@ -10,7 +10,7 @@ class Web_Icinga_HostDetailSuccessView extends ICINGAWebBaseView
 		
 		$result = $data->API()->createSearch()
 			->setSearchTarget(IcingaApi::TARGET_HOST)
-			->setResultColumns('HOST_NAME')
+			->setResultColumns(array('HOST_NAME', 'HOST_ALIAS', 'HOST_CURRENT_STATE'))
 			->fetch();
 		
 		$this->setAttributeByRef('result', $result);
