@@ -54,6 +54,8 @@
 			<!-- ICINGA routes -->
 			<route name="icinga" pattern="^/icinga" module="Web">
 				<route pattern="^$" action="Index" />
+				
+				<route name=".hostDetail" pattern="/hostdetail" action="Icinga.HostDetail" />
 			</route>
 			
 		</routes>

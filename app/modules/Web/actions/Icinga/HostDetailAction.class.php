@@ -1,6 +1,6 @@
 <?php
 
-class Web_IndexAction extends ICINGAWebBaseAction
+class Web_Icinga_HostDetailAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -17,11 +17,6 @@ class Web_IndexAction extends ICINGAWebBaseAction
 	public function getDefaultViewName()
 	{
 		return 'Success';
-	}
-	
-	public function executeRead(AgaviParameterHolder $rd) {
-		return $this->getDefaultViewName();
-		
 	}
 }
 

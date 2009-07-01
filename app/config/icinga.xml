@@ -22,7 +22,7 @@
 	</setting>
 	
 	<!-- Relative to AppKit::bootstrap, otherwise throws errors! -->
-	<setting name="appkit.doctrine_path">../lib/doctrine/lib</setting>
+	<setting name="appkit.doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
 	<setting name="appkit.doctrine_model_path">%core.root_dir%/lib/appkit/database/models</setting>
 	
 	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
@@ -56,7 +56,7 @@
 	</setting>
 	
 	<setting name="appkit.meta_tags">
-		<parameter name="author">(c) 2009 Netways - www.icinga.org</parameter>
+		<parameter name="author">(c) 2009 Icinga developer team - www.icinga.org</parameter>
 		<parameter name="robots">noindex</parameter>
 	</setting>
 	
@@ -132,6 +132,20 @@
 		 	<parameter name="class">AppKitAuthProviderHttpBasic</parameter>
 		 	<parameter name="field">REMOTE_USER</parameter>
 		  -->
+		</parameter>
+		
+		<parameter name="IcingaData">
+			<parameter name="class">IcingaData</parameter>
+			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
+			<parameter name="api_type">IcingaApi::CONNECTION_IDO</parameter>
+			
+			<parameter name="config_type">mysql</parameter>
+			<parameter name="config_host">127.0.0.1</parameter>
+			<parameter name="config_port">3307</parameter>
+			<parameter name="config_database">ndo_demo</parameter>
+			<parameter name="config_user">icinga</parameter>
+			<parameter name="config_password">icinga</parameter>
+			<parameter name="config_table_prefix">nagios_</parameter>
 		</parameter>
 	</setting>
 	
