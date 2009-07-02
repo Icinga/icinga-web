@@ -53,6 +53,9 @@
 		<!-- Misc css -->
 		<parameter>/js/gc-prettify/prettify.css</parameter>
 		
+		<!-- ICINGA -->
+		<parameter>/styles/Icinga.css</parameter>
+		
 	</setting>
 	
 	<setting name="appkit.meta_tags">

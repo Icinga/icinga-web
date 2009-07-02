@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+/** THE STATUS **/
+div.icinga-status {
+	padding: 4px;
+	text-align: center;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+div.icinga-status span {
+	font-size: 8pt;
+}
+
+div.icinga-status-ok {
+	background-color: #00cc00;
+}
+
+div.icinga-status-down {
+	background-color: #cc0000;
+}
+
+div.icinga-status-down span {
+	color: #fff;	
+}
+
+div.icinga-status-unreachable {
+	background-color: #cccccc;
+}
+
+div.icinga-status-unknown {
+	background-color: #cccccc;
+}
+
+/** tables **/
+
+table.icinga-data-table {
+	border-collapse: collapse;
+}
+
+table.icinga-data-table tr td {
+	vertical-align: middle;
+	padding: 1px;
+}
+
+table .icinga-odd {
+	background-color: #e4e4e4;
+}
+
+table .icinga-even {
+	background-color: #f1f1f1;
+}

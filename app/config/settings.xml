@@ -45,7 +45,7 @@
 			<setting name="use_database">true</setting>
 			<setting name="use_logging">true</setting>
 			<setting name="use_security">true</setting>
-			<setting name="use_translation">false</setting>
+			<setting name="use_translation">true</setting>
 		</settings>
 
 		<!-- Include our icinga settings -->

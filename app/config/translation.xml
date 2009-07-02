@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
 	<ae:configuration>
 		
-		<available_locales default_locale="en_US">
+		<available_locales default_locale="de_DE" default_timezone="Europe/London">
 			<!-- German, Germany -->
 			<available_locale identifier="de_DE">
 				<ae:parameter name="description">Deutsch</ae:parameter>
@@ -41,21 +41,17 @@
 			</available_locale>
 		</available_locales>
 		
-		<translators default_domain="default">
-			<translator domain="default">
+		<translators default_domain="icinga">
+			<translator domain="icinga">
 				<message_translator class="AgaviGettextTranslator">
 					<ae:parameter name="text_domains">
-						<ae:parameter name="menu">%core.app_dir%/data/i18n</ae:parameter>
-						<ae:parameter name="layout">%core.app_dir%/data/i18n</ae:parameter>
-						<ae:parameter name="Login">%core.app_dir%/data/i18n</ae:parameter>
-						<ae:parameter name="SearchEngineSpam">%core.app_dir%/data/i18n</ae:parameter>
-						<ae:parameter name="ErrorActions">%core.app_dir%/data/i18n</ae:parameter>
+						<ae:parameter name="icinga">%core.app_dir%/data/i18n</ae:parameter>
 					</ae:parameter>
 				</message_translator>
 				
 				<date_formatter>
 					<ae:parameter name="type">date</ae:parameter>
-					<ae:parameter name="format">full</ae:parameter>
+					<ae:parameter name="format">dd.MM.yyyy hh:mm:ss</ae:parameter>
 				</date_formatter>
 				
 			</translator>
