@@ -32,7 +32,7 @@
 					<role name="icinga_user">
 					
 						<permissions>
-							<permission>icinga.access</permission>
+							<permission>icinga.user</permission>
 						</permissions>
 					
 					</role>

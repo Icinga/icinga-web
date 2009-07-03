@@ -30,6 +30,9 @@ class AppKit_SecureAction extends ICINGAAppKitBaseAction
 			$this->getContext()->getUser()->getAttribute('userobj')->givenName()
 		);
 		
+		// Return an unauthorized http response
+		$this->getContainer()->getResponse()->setHttpStatusCode(401);
+		
 		return $this->getDefaultViewName();
 	}
 }

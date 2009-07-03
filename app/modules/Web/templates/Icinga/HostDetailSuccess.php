@@ -20,11 +20,11 @@
 
 <tr class="<?php echo AppKitHtmlHelper::Obj()->classAlternate('icinga-odd', 'icinga-even'); ?>">
 	<td>
-		<?php echo $row->host_name; ?>
-		<small>(<?php echo $row->host_alias; ?>)</small>
+		<?php echo AppKitHtmlHelper::Obj()->LinkToRoute('icinga.hostDetail.single', $row->host_name, array('hostname' => $row->host_name)) ?>
+		<!--  <small>(<?php // echo $row->host_alias; ?>)</small> -->
 	</td>
 	<td>
-		<?php echo IcingaHostStateInfo::Create($row->host_current_state)->getCurrentStateAsHtml(); ?><br />
+		<?php echo IcingaHostStateInfo::Create($row->host_current_state)->getCurrentStateAsHtml(); ?>
 	</td>
 	<td>
 		<?php echo $tm->_d($row->host_last_check); ?>

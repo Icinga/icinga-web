@@ -16,7 +16,7 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 
 		$user = $nav->getContext()->getUser();
 
-		if ($user->hasCredential('icinga.access')) {
+		if ($user->hasCredential('icinga.user')) {
 			
 				// Navigation for "icinga"
 				$icinga = $nav->getContainer()->addItemBefore('appkit.admin', AppKitNavItem::create('icinga', 'icinga')

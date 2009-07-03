@@ -16,6 +16,10 @@ div.icinga-status-ok {
 	background-color: #00cc00;
 }
 
+div.icinga-status-up {
+	background-color: #00cc00;
+}
+
 div.icinga-status-down {
 	background-color: #cc0000;
 }
@@ -25,11 +29,11 @@ div.icinga-status-down span {
 }
 
 div.icinga-status-unreachable {
-	background-color: #cccccc;
+	background-color: #ff8000;
 }
 
 div.icinga-status-unknown {
-	background-color: #cccccc;
+	background-color: #ff8000;
 }
 
 /** tables **/
@@ -40,7 +44,7 @@ table.icinga-data-table {
 
 table.icinga-data-table tr td {
 	vertical-align: middle;
-	padding: 1px;
+	padding: 1px 4px 1px 4px;
 }
 
 table .icinga-odd {
@@ -49,4 +53,27 @@ table .icinga-odd {
 
 table .icinga-even {
 	background-color: #f1f1f1;
+}
+
+table.icinga-attribute-table {
+	background-color: #FFE87C;
+	border-bottom: 1px #a1a1a1 solid;
+	border-left: 1px #a1a1a1 solid;
+	border-top: 1px #c0c0c0 solid;
+	border-right: 1px #c0c0c0 solid;
+	border-collapse: collapse;
+}
+
+table.icinga-attribute-table td, table.icinga-attribute-table tr {
+	margin: 0;
+	padding: 0;
+}
+
+table.icinga-attribute-table td.key {
+	padding: 2px 2px 2px 2px;
+	border-right: 1px #c0c0c0 solid;
+}
+
+table.icinga-attribute-table td.val {
+	padding: 2px 2px 2px 2px;
 }
