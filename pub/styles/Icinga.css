@@ -16,6 +16,15 @@ div.icinga-status-ok {
 	background-color: #00cc00;
 }
 
+div.icinga-status-warning {
+	background-color: #ffff00;
+}
+
+div.icinga-status-critical {
+	background-color: #ff0000;
+	color: #fff;
+}
+
 div.icinga-status-up {
 	background-color: #00cc00;
 }
@@ -48,11 +57,11 @@ table.icinga-data-table tr td {
 }
 
 table .icinga-odd {
-	background-color: #e4e4e4;
+	background-color: #f1f1f1;
 }
 
 table .icinga-even {
-	background-color: #f1f1f1;
+	background-color: #fff;
 }
 
 table.icinga-attribute-table {

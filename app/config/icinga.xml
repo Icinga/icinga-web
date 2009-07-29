@@ -161,5 +161,6 @@
 	<!-- AJAX FILESOURCE -->
 	<setting name="appkit.ajax.fs.prefix">de.icinga.appkit.ajax.fs.sources</setting>
 	
+	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 
 </settings>

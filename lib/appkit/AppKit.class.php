@@ -140,6 +140,18 @@ class AppKit {
 		throw new AppKitException('Class '. $class_name. ' is not instantiable!');
 	}
 	
+	public static function debugOut($mixed) {
+		$queue = AppKitFactories::getInstance()->getFactory('MessageQueue');
+		if ($queue instanceof AppKitQueue) {
+			$args = func_get_args();
+			if (count($args) == 1) $args = $args[0];
+			ob_start();
+			var_dump($args);
+			$data = ob_get_clean();
+			$queue->enqueue(AppKitMessageQueueItem::Debug($data));
+		}
+	}
+	
 }
 
 ?>

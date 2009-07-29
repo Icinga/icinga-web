@@ -55,9 +55,15 @@
 			<route name="icinga" pattern="^/icinga" module="Web">
 				<route pattern="^$" action="Index" />
 				
-				<route name=".hostDetail" pattern="/hostdetail" action="Icinga.HostDetail">
+				<route name=".hostDetail" pattern="/host" action="Icinga.HostDetail">
 					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))$" action="Icinga.HostDetailSingle" />
 				</route>
+				
+				<route name=".serviceDetail" pattern="/service" action="Icinga.ServiceDetail">
+					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))/(servicename:([\w\.\-\_\s]+))$" action="Icinga.ServiceDetailSingle" />
+				</route>
+				
+				<route name=".templateView" pattern="/template" action="Icinga.TemplateView" />
 			</route>
 			
 		</routes>

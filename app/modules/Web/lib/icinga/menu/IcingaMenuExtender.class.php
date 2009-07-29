@@ -23,9 +23,9 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 				->setCaption('Monitoring')
 				);
 
-				$icinga->addSubItem(AppKitNavItem::create('icinga.tacticalOverview', 'icinga.tacticalOverview')
-				->setCaption('Tactical Overview')
-				);
+				//$icinga->addSubItem(AppKitNavItem::create('icinga.tacticalOverview', 'icinga.tacticalOverview')
+				//->setCaption('Tactical Overview')
+				//);
 
 				$icinga->addSubItem(AppKitNavItem::create('icinga.serviceDetail', 'icinga.serviceDetail')
 				->setCaption('Service Detail')
@@ -34,7 +34,12 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 				$icinga->addSubItem(AppKitNavItem::create('icinga.hostDetail', 'icinga.hostDetail')
 				->setCaption('Host Detail')
 				);
-
+				
+				$icinga->addSubItem(AppKitNavItem::create('icinga.templateView', 'icinga.templateView')
+				->setCaption('Templated')
+				);
+				
+				/*
 				$icinga->addSubItem(AppKitNavItem::create('icinga.hostgroupOverview', 'icinga.hostgroupOverview')
 				->setCaption('Hostgroup Overview')
 				);
@@ -62,6 +67,7 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 				$icinga->addSubItem(AppKitNavItem::create('icinga.statusMap', 'icinga.statusMap')
 				->setCaption('Status Map')
 				);
+				*/
 				
 		}
 		

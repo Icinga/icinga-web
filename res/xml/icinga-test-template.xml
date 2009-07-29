@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    
+    <meta>
+        <parameter name="name">The template name</parameter>
+        <parameter name="description">A test xml stub template</parameter>
+        <parameter name="author">Marius Hein</parameter>
+    </meta>
+    
+    <option>
+        <parameter name="mode">default</parameter>   
+    </option>
+    
+    <datasource>
+        <parameter name="target">IcingaApi::TARGET_SERVICE</parameter>
+    </datasource>
+    
+    <fields>
+    
+        <field name="host_name">
+            <datasource>
+            	<parameter name="field">HOST_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
+            </order>
+        </field>
+        
+        <field name="service_name">
+            <datasource>
+            	<parameter name="field">SERVICE_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
+            </order>
+        </field>
+        
+    </fields>
+    
+</template>

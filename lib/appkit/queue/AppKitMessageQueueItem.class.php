@@ -5,6 +5,7 @@ class AppKitMessageQueueItem extends AppKitQueueItem {
 	const ERROR		= 1;
 	const INFO		= 2;
 	const LOG		= 4;
+	const DEBUG		= 8;
 	
 	/**
 	 * @param $message
@@ -33,6 +34,10 @@ class AppKitMessageQueueItem extends AppKitQueueItem {
 	 */
 	public static function Log($message) {
 		return new AppKitMessageQueueItem($message, self::LOG);
+	}
+	
+	public static function Debug($message) {
+		return new AppKitMessageQueueItem($message, self::DEBUG);
 	}
 	
 	private $type = null;

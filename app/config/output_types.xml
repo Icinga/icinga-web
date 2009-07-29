@@ -48,7 +48,7 @@
 							
 							<!-- Errors -->
 							<slot name="error_frame" module="AppKit" action="Widgets.ShowErrors">
-								<parameter name="type">7</parameter>
+								<parameter name="type">15</parameter>
 							</slot>
 							
 							<!-- Footer -->

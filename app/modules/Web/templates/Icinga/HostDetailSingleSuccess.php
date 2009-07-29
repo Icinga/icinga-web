@@ -11,7 +11,7 @@
 <script type="text/javascript">
 <!-- // <![CDATA[
 	YAHOO.util.Event.onContentReady("host_tabs", function () { 
-		var groupTabs = new YAHOO.widget.TabView('host_tabs');
+		var hostTabs = new YAHOO.widget.TabView('host_tabs');
 	});
 // ]]> -->
 </script>

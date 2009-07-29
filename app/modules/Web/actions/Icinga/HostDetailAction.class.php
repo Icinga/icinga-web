@@ -19,6 +19,10 @@ class Web_Icinga_HostDetailAction extends ICINGAWebBaseAction
 		return 'Success';
 	}
 	
+	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
 	public function isSecure() {
 		return true;
 	}

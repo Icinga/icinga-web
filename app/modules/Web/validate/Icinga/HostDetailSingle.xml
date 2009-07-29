@@ -7,7 +7,7 @@
 	<ae:configuration>
 		
 	<validators method="read">
-			<validator class="string" name="oid" required="true">
+			<validator class="string" name="hostname" required="true">
 						<argument>hostname</argument>
 						
 						<errors>
