@@ -63,7 +63,11 @@
 					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))/(servicename:([\w\.\-\_\s]+))$" action="Icinga.ServiceDetailSingle" />
 				</route>
 				
-				<route name=".templateView" pattern="/template" action="Icinga.TemplateView" />
+				<route pattern="/template" >
+					<route name=".templateView" pattern="/(template:([\w\.\-\_\s]+))" action="Icinga.TemplateView">
+						<route name=".json" pattern="/json" output_type="json" />
+					</route>
+				</route>
 			</route>
 			
 		</routes>

@@ -23,6 +23,10 @@ class Web_Icinga_TemplateViewAction extends ICINGAWebBaseAction
 		return $this->getDefaultViewName();
 	}
 	
+	public function executeWrite(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
 	public function isSecure() {
 		return true;
 	}

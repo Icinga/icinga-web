@@ -15,6 +15,30 @@
 					</errors>
 		</validator>
 		
+		<validator class="number" name="fieldsonly" required="false">
+					<argument>fieldsonly</argument>
+					
+					<errors>
+						<error>Validation of fieldsonly failed!</error>
+					</errors>
+		</validator>
+
+		<validator class="number" name="start" required="false">
+					<argument>start</argument>
+					
+					<errors>
+						<error>Validation of start failed!</error>
+					</errors>
+		</validator>
+		
+		<validator class="number" name="limit" required="false">
+					<argument>limit</argument>
+					
+					<errors>
+						<error>Validation of start failed!</error>
+					</errors>
+		</validator>
+		
 	</validators>
 	</ae:configuration>
 </ae:configurations>

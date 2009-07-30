@@ -5,12 +5,21 @@ class IcingaTemplateWorker {
 	/**
 	 * @var IcingaTemplateXmlParser
 	 */
-	private $template	= null;
+	private $template		= null;
 	
 	/**
 	 * @var IcingaApiConnectionIdo
 	 */
-	private $api		= null;
+	private $api			= null;
+	
+	/**
+	 * @var IcingaApiSearchIdo
+	 */
+	private $api_search		= null;
+	private $api_count		= null;
+	
+	private $pager_limit	= null;
+	private $pager_start	= null;
 	
 	public function __construct(IcingaTemplateXmlParser &$template = null) {
 		if ($template) $this->setTemplate($template);
@@ -43,34 +52,77 @@ class IcingaTemplateWorker {
 		$this->buildDataSource();
 	}
 	
+	public function fetchDataArray() {
+		if ($this->api_search !== null) {
+			$data = array ();
+			foreach ($this->api_search->fetch() as $result) {
+				$data[] = $result->getRow();
+			}
+			return $data;
+		}
+	}
+	
+	public function countResults() {
+		if ($this->api_count !== null) {
+			$this->api_count->setSearchType(IcingaApi::SEARCH_TYPE_COUNT);
+			
+			$params = $this->getTemplate()->getSectionParams('datasource');
+			
+			if (is_array(($fields = $params->getParameter('countfields'))) && count($fields)) {
+				$this->api_count->setResultColumns($fields);
+			}
+			else {
+				throw new IcingaTemplateWorkerException('Countfields are empty!');
+			}
+			
+			$result  = $this->api_count->fetch();
+			
+			return $result->getRow()->count;
+		}
+		
+		return 0;
+	}
+	
+	public function setResultLimit($start, $limit) {
+		$this->pager_limit = $limit;
+		$this->pager_start = $start;
+		return true;
+	}
+	
 	private function getApiField($field_name) {
 		return $this->getTemplate()->getFieldByName($field_name, 'datasource')->getParameter('field');
 	}
 	
 	private function buildDataSource() {
-		$params = $this->getTemplate()->getSectionParams('datasource');
+		if ($this->api_search === null) {
+			$params = $this->getTemplate()->getSectionParams('datasource');
+			
+			// The wonderfull api
+			$search = $this->getApi()->createSearch();
+			
+			// our query target
+			$search->setSearchTarget( AppKit::getConstant($params->getParameter('target')) );
+			
+			// setting the orders
+			foreach ($this->collectOrders() as $sortfield=>$sortorder) {
+				$search->setSearchOrder($sortfield, $sortorder);
+			}
 		
-		// The wonderfull api
-		$search = $this->getApi()->createSearch();
-		
-		// our query target
-		$search->setSearchTarget( AppKit::getConstant($params->getParameter('target')) );
-		
-		// the result columns
-		$search->setResultColumns($this->collectCollumns());
-		
-		// setting the orders
-		foreach ($this->collectOrders() as $sortfield=>$sortorder) {
-			$search->setSearchOrder($sortfield, $sortorder);
+			// Clone our count query
+			$this->api_count = clone $search;
+			
+			// the result columns
+			$search->setResultColumns($this->collectCollumns());
+			
+			// limits
+			if (is_numeric($this->pager_limit) && is_numeric($this->pager_start)) {
+				$search->setSearchLimit($this->pager_start, $this->pager_limit);
+			}
+			
+			$this->api_search =& $search;
 		}
-		
-		// ...
-		
-		$result = $search->fetch();
-		
-		foreach ($result as $row) {
-			AppKit::debugOut($row->getRow());
-		}
+
+		return true;
 	}
 	
 	private function collectOrders() {
@@ -96,5 +148,7 @@ class IcingaTemplateWorker {
 	}
 	
 }
+
+class IcingaTemplateWorkerException extends AppKitException { }
 
 ?>

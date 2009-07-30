@@ -8,11 +8,16 @@
     </meta>
     
     <option>
-        <parameter name="mode">default</parameter>   
+        <parameter name="mode">default</parameter>
+        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
     </option>
     
     <datasource>
         <parameter name="target">IcingaApi::TARGET_SERVICE</parameter>
+        
+        <parameter name="countfields">
+        	<parameter>SERVICE_ID</parameter>
+        </parameter>
     </datasource>
     
     <fields>
@@ -24,6 +29,7 @@
             
             <display>
                 <parameter name="visible">true</parameter>
+                <parameter name="label">Host</parameter>
             </display>
             
             <filter>
@@ -44,6 +50,8 @@
             
             <display>
                 <parameter name="visible">true</parameter>
+                <parameter name="label">Service</parameter>
+                <parameter name="id">true</parameter>
             </display>
             
             <filter>

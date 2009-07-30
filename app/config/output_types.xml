@@ -90,8 +90,8 @@
 			
 			<output_type name="json">
 				<parameter name="http_headers">
-					<parameter name="Content-Type">text/x-json; charset=UTF-8</parameter>
-					<!-- <parameter name="Content-Type">text/plain; charset=UTF-8</parameter> -->
+					<!-- <parameter name="Content-Type">text/x-json; charset=UTF-8</parameter> -->
+					<parameter name="Content-Type">text/plain; charset=UTF-8</parameter>
 				</parameter>
 			</output_type>
 			

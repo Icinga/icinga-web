@@ -227,6 +227,17 @@ class IcingaTemplateXmlParser {
 			}
 		}
 	}
+	
+	public function getHeaderArray() {
+		$header = array();
+		foreach ($this->getFieldKeys() as $field) {
+			$params = $this->getFieldByName($field, 'display');
+			if ($params->getParameter('visible') == true) {
+				$header[$field] = $params->getParameter('label', $field);
+			}
+		}
+		return $header;
+	}
 }
 
 class IcingaTemplateXmlParserException extends AppKitException { }

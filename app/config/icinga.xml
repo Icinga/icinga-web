@@ -49,12 +49,16 @@
 		<parameter>/js/yui/build/calendar/assets/skins/sam/calendar.css</parameter>
 		<parameter>/styles/WireFrameYUI.css</parameter>
 		
+		<!-- ExtJS -->
+		<parameter>/js/ext/resources/css/ext-all.css</parameter>
 		
 		<!-- Misc css -->
-		<parameter>/js/gc-prettify/prettify.css</parameter>
+		<!-- <parameter>/js/gc-prettify/prettify.css</parameter> -->
 		
 		<!-- ICINGA -->
 		<parameter>/styles/Icinga.css</parameter>
+		
+		
 		
 	</setting>
 	
@@ -101,10 +105,14 @@
 		<parameter>/js/swfobject/swfobject.js</parameter>
 		
 		<!-- Google Code Prettify -->
-		<parameter>/js/gc-prettify/prettify.js</parameter>
+		<!-- <parameter>/js/gc-prettify/prettify.js</parameter> -->
 		
 		<!-- Firebug lite for debug purposes -->
 		<!-- <parameter>/js/firebug/firebug-lite-compressed.js</parameter> -->
+		
+		<!-- ExtJS -->
+		<parameter>/js/ext/adapter/ext/ext-base.js</parameter>
+		<parameter>/js/ext/ext-all.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
