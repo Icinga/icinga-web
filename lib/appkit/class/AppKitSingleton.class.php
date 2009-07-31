@@ -26,7 +26,9 @@
  */
 abstract class AppKitSingleton extends AppKitBaseClass {
 	
-	private static $instances = array ();
+	protected static $class_name	= null;
+	
+	private static $instances		= array ();
 	
 	/**
 	 * Returns the instance, also initiates the
@@ -39,6 +41,8 @@ abstract class AppKitSingleton extends AppKitBaseClass {
 	public static function getInstance() {
 		$args = func_get_args();
 		$class_name = array_shift($args);
+		
+		if (!$class_name) $class_name = AppKitClassUtil::getCalledClass();
 		
 		if (!self::checkInstance($class_name)) {
 			self::$instances[$class_name] =

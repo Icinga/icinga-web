@@ -27,8 +27,6 @@ class Web_Icinga_TemplateViewSuccessView extends ICINGAWebBaseView
 		$layout->setWorker($worker);
 		$layout->setParameters($rd);
 		
-		//$this->setAttribute('title', 'Icinga.TemplateView');
-		
 		return $layout->getLayoutContent();
 	}
 	
@@ -51,7 +49,7 @@ class Web_Icinga_TemplateViewSuccessView extends ICINGAWebBaseView
 			$worker->setTemplate($template);
 			$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
 			
-			if ($rd->getParameter('start') && $rd->getParameter('limit')) {
+			if (is_numeric($rd->getParameter('start')) && is_numeric($rd->getParameter('limit'))) {
 				$worker->setResultLimit($rd->getParameter('start'), $rd->getParameter('limit'));
 			}
 			

@@ -44,6 +44,7 @@ class AppKit {
 		
 		// Require all to make the autoloader work.
 		require_once(self::$class_dir. '/class/AppKitBaseClass.class.php');
+		require_once(self::$class_dir. '/util/AppKitClassUtil.class.php');
 		require_once(self::$class_dir. '/class/AppKitSingleton.class.php');
 		require_once(self::$class_dir. '/class/AppKitAutoloader.class.php');
 		

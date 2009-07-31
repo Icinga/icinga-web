@@ -115,7 +115,7 @@ class AgaviGettextTranslator extends AgaviBasicTranslator
 			$oldLocale = $this->locale;
 			$this->localeChanged($locale);
 		}
-
+		
 		// load domain data from file
 		if(!isset($this->domainData[$domain])) {
 			$this->loadDomainData($domain);

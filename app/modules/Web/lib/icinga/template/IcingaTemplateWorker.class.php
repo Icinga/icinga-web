@@ -53,13 +53,7 @@ class IcingaTemplateWorker {
 	}
 	
 	public function fetchDataArray() {
-		if ($this->api_search !== null) {
-			$data = array ();
-			foreach ($this->api_search->fetch() as $result) {
-				$data[] = $result->getRow();
-			}
-			return $data;
-		}
+		return $this->getDataAsArray();
 	}
 	
 	public function countResults() {
@@ -87,6 +81,45 @@ class IcingaTemplateWorker {
 		$this->pager_limit = $limit;
 		$this->pager_start = $start;
 		return true;
+	}
+	
+	private function getDataAsArray() {
+		if ($this->api_search !== null) {
+			$data = array ();
+			foreach ($this->api_search->fetch() as $result) {
+				$data[] = $this->rewriteResultRow($result);
+			}
+			return $data;
+		}
+	}
+	
+	private function rewriteResultRow(IcingaApiResult $result) {
+		$row = new ArrayObject($result->getRow());
+		
+		foreach ($row as $key=>$val) {
+			$field = $this->getTemplate()->getFieldByName($key, 'display');
+			
+			if (($param = $field->getParameter('userFunc'))) {
+				if ($param['class'] && $param['method']) {
+					$row[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments']);
+				}
+			}
+		}
+		
+		
+		return $row;
+	}
+	
+	private function rewritePerClassMethod($class, $method, $data_val, array $params = array ()) {
+		$ref = new ReflectionClass($class);
+		if ($ref->isSubclassOf('IcingaTemplateDisplay') && $ref->hasMethod('getInstance') && $ref->hasMethod($method)) {
+			$minstance = $ref->getMethod('getInstance');
+			$obj = $minstance->invoke(null);
+			if ($obj instanceof IcingaTemplateDisplay) {
+				$change = $ref->getMethod($method);
+				return $change->invoke($obj, $data_val, new AgaviParameterHolder($params));
+			}
+		}
 	}
 	
 	private function getApiField($field_name) {

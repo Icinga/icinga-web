@@ -386,7 +386,7 @@ class AgaviTranslationManager
 		$domainExtra = '';
 		$translator = $this->getTranslators($domain, $domainExtra, self::NUMBER);
 
-		$retval = $translator->translate($number, $domainExtra, $locale);
+		$retval = $translator->translate($number, $domainExtra ? $domainExtra : $domain, $locale);
 		
 		$retval = $this->applyFilters($retval, $domain, self::NUMBER);
 		
@@ -423,7 +423,7 @@ class AgaviTranslationManager
 		$domainExtra = '';
 		$translator = $this->getTranslators($domain, $domainExtra, self::MESSAGE);
 
-		$retval = $translator->translate($message, $domainExtra, $locale);
+		$retval = $translator->translate($message, $domain, $locale);
 		if(is_array($parameters)) {
 			$retval = vsprintf($retval, $parameters);
 		}
@@ -486,6 +486,7 @@ class AgaviTranslationManager
 		} while(!isset($this->translators[$td]) || ($type && !isset($this->translators[$td][$type])));
 
 		$domainExtra = substr($domain, strlen($td) + 1);
+		
 		$domain = $td;
 		return $type ? $this->translators[$td][$type] : $this->translators[$td];
 	}
