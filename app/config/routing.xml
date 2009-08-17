@@ -65,7 +65,9 @@
 				
 				<route pattern="/template" >
 					<route name=".templateView" pattern="/(template:([\w\.\-\_\s]+))" action="Icinga.TemplateView">
-						<route name=".json" pattern="/json" output_type="json" />
+						<route name=".json" pattern="/json" output_type="json">
+							<route name=".metaInfo" pattern="/inf" action="Icinga.Templates.MetaInformation" />
+						</route>
 					</route>
 				</route>
 			</route>

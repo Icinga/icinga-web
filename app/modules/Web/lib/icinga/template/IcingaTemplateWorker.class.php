@@ -95,19 +95,41 @@ class IcingaTemplateWorker {
 	
 	private function rewriteResultRow(IcingaApiResult $result) {
 		$row = new ArrayObject($result->getRow());
-		
-		foreach ($row as $key=>$val) {
-			$field = $this->getTemplate()->getFieldByName($key, 'display');
+		$out = new ArrayObject();
+		foreach ($this->getTemplate()->getFields() as $key=>$field) {
 			
-			if (($param = $field->getParameter('userFunc'))) {
+			$meta = $this->getTemplate()->getFieldByName($key, 'display');
+			$data = $this->getFieldData($row, $key);
+			
+			// Ommit blank data!
+			if (!$meta->getParameter('visible') === true) continue;
+			
+			if (($param = $meta->getParameter('userFunc'))) {
 				if ($param['class'] && $param['method']) {
-					$row[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments']);
+					if (!is_array($param['arguments'])) $param['arguments'] = array();
+					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $data, $param['arguments']);
 				}
 			}
+			else {
+				$out[$key] = $data;
+			}
+			
 		}
 		
+		unset($row);
 		
-		return $row;
+		return $out;
+	}
+	
+	private function getFieldData(ArrayObject &$row, $field) {
+		$datasource = $this->getTemplate()->getFieldByName($field, 'datasource');
+		if ($datasource->getParameter('field')) {
+			if (array_key_exists( strtolower( $datasource->getParameter('field') ), $row )) {
+				return $row[ strtolower( $datasource->getParameter('field') ) ];
+			} 
+		}
+		
+		return null;
 	}
 	
 	private function rewritePerClassMethod($class, $method, $data_val, array $params = array ()) {
