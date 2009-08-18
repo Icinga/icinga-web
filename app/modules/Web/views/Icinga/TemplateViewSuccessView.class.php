@@ -42,23 +42,27 @@ class Web_Icinga_TemplateViewSuccessView extends ICINGAWebBaseView
 		$template->parseTemplate();
 		
 		$data = array ();
+
+		$worker = new IcingaTemplateWorker();
+		$worker->setTemplate($template);
+		$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
 		
-		$data['columns'] = $template->getHeaderArray();
-		if (!$rd->getParameter('fieldsonly', false)) {
-			$worker = new IcingaTemplateWorker();
-			$worker->setTemplate($template);
-			$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
-			
-			if (is_numeric($rd->getParameter('start')) && is_numeric($rd->getParameter('limit'))) {
-				$worker->setResultLimit($rd->getParameter('start'), $rd->getParameter('limit'));
-			}
-			
-			$worker->buildAll();
-			
-			$data['resultCount'] = $worker->countResults();
-			$data['resultRows'] = $worker->fetchDataArray();
-			 
+		if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
+			$worker->setResultLimit($rd->getParameter('page_start'), $rd->getParameter('page_limit'));
 		}
+		
+		if ($rd->getParameter('sort_field', null) !== null) {
+			$worker->setOrderColumn($rd->getParameter('sort_field'), $rd->getParameter('sort_dir', 'ASC'));
+		}
+		
+		$worker->buildAll();
+
+		$data['resultRows'] = $worker->fetchDataArray();
+		$data['resultCount'] = $worker->countResults();
+		
+		// OK hopefully all done
+		$data['resultSuccess'] = true; 
+
 		
 		return json_encode($data);
 	}

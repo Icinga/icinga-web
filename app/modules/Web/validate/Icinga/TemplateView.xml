@@ -14,28 +14,36 @@
 						<error>Validation of template failed!</error>
 					</errors>
 		</validator>
-		
-		<validator class="number" name="fieldsonly" required="false">
-					<argument>fieldsonly</argument>
-					
-					<errors>
-						<error>Validation of fieldsonly failed!</error>
-					</errors>
-		</validator>
 
-		<validator class="number" name="start" required="false">
-					<argument>start</argument>
+		<validator class="number" name="page_start" required="false">
+					<argument>page_start</argument>
 					
 					<errors>
 						<error>Validation of start failed!</error>
 					</errors>
 		</validator>
 		
-		<validator class="number" name="limit" required="false">
-					<argument>limit</argument>
+		<validator class="number" name="page_limit" required="false">
+					<argument>page_limit</argument>
 					
 					<errors>
 						<error>Validation of start failed!</error>
+					</errors>
+		</validator>
+		
+		<validator class="string" name="sort_field" required="false">
+					<argument>sort_field</argument>
+					
+					<errors>
+						<error>Validation of sort_field failed!</error>
+					</errors>
+		</validator>
+		
+		<validator class="string" name="sort_dir" required="false">
+					<argument>sort_dir</argument>
+					
+					<errors>
+						<error>Validation of sort_dir failed!</error>
 					</errors>
 		</validator>
 		

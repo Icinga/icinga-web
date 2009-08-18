@@ -16,10 +16,31 @@ class IcingaTemplateWorker {
 	 * @var IcingaApiSearchIdo
 	 */
 	private $api_search		= null;
+	
+	/**
+	 * @var IcingaApiSearchIdo
+	 */
 	private $api_count		= null;
 	
+	/**
+	 * Calculated number of results
+	 * @var integer
+	 */
+	private $result_count	= null;
+	
+	/**
+	 * The size of a page
+	 * @var integer
+	 */
 	private $pager_limit	= null;
+	
+	/**
+	 * Where the page starts
+	 * @var integer
+	 */
 	private $pager_start	= null;
+	
+	private $sort_orders	= array();
 	
 	public function __construct(IcingaTemplateXmlParser &$template = null) {
 		if ($template) $this->setTemplate($template);
@@ -56,25 +77,29 @@ class IcingaTemplateWorker {
 		return $this->getDataAsArray();
 	}
 	
+	/**
+	 * Return the number of result rows.
+	 * @return integer
+	 */
 	public function countResults() {
-		if ($this->api_count !== null) {
-			$this->api_count->setSearchType(IcingaApi::SEARCH_TYPE_COUNT);
-			
-			$params = $this->getTemplate()->getSectionParams('datasource');
-			
-			if (is_array(($fields = $params->getParameter('countfields'))) && count($fields)) {
-				$this->api_count->setResultColumns($fields);
+		
+		$params = $this->getTemplate()->getSectionParams('datasource');
+		
+		if ($params->getParameter('countmode', null) !== 'simple') {
+			if ($this->api_count !== null) {
+				$this->api_count->setSearchType(IcingaApi::SEARCH_TYPE_COUNT);
+				
+				if (is_array(($fields = $params->getParameter('countfields'))) && count($fields)) {
+					$this->api_count->setResultColumns($fields);
+					$result  = $this->api_count->fetch();
+					$this->result_count = $result->getRow()->count;
+				}
 			}
-			else {
-				throw new IcingaTemplateWorkerException('Countfields are empty!');
-			}
 			
-			$result  = $this->api_count->fetch();
 			
-			return $result->getRow()->count;
 		}
 		
-		return 0;
+		return $this->result_count;
 	}
 	
 	public function setResultLimit($start, $limit) {
@@ -83,10 +108,32 @@ class IcingaTemplateWorker {
 		return true;
 	}
 	
+	public function setOrderColumn($column, $direction = 'ASC') {
+		$this->sort_orders = array();
+		return $this->addOrderColumn($column, $direction);
+	}
+	
+	public function addOrderColumn($column, $direction = 'ASC') {
+		if ($this->getApiField($column)) {
+			$this->sort_orders[] = array($column, $direction);
+			return true;
+		}
+		
+		
+		return false;
+		
+	}
+	
 	private function getDataAsArray() {
 		if ($this->api_search !== null) {
 			$data = array ();
+			
 			foreach ($this->api_search->fetch() as $result) {
+				
+				if ($this->result_count === null) {
+					$this->result_count = $result->getResultCount();
+				}
+				
 				$data[] = $this->rewriteResultRow($result);
 			}
 			return $data;
@@ -159,10 +206,14 @@ class IcingaTemplateWorker {
 			$search->setSearchTarget( AppKit::getConstant($params->getParameter('target')) );
 			
 			// setting the orders
-			foreach ($this->collectOrders() as $sortfield=>$sortorder) {
-				$search->setSearchOrder($sortfield, $sortorder);
+			
+			// Order by
+			
+			// Overwrite default orders
+			foreach ($this->collectOrders() as $order) {
+				$search->setSearchOrder($order[0], $order[1]);
 			}
-		
+			
 			// Clone our count query
 			$this->api_count = clone $search;
 			
@@ -181,15 +232,29 @@ class IcingaTemplateWorker {
 	}
 	
 	private function collectOrders() {
-		$orders = array ();
-		foreach ($this->getTemplate()->getFieldKeys() as $key) {
-			$params = $this->getTemplate()->getFieldByName($key, 'order');
-			if ($params->getParameter('enabled') && $params->getParameter('default')) {
-				$orders[ $params->getParameter('field', $this->getApiField($key)) ] = 
-					$params->getParameter('order', 'ASC');
+		$fields = array();
+		if (count($this->sort_orders)) {
+			foreach ($this->sort_orders as $order) {
+				$params = $this->getTemplate()->getFieldByName($order[0], 'order');
+				$fields[] = array (
+					$params->getParameter('field', $this->getApiField($order[0])),
+					$order[1] ? $order[1] : 'ASC'
+				);
 			}
 		}
-		return $orders;
+		else {
+			foreach ($this->getTemplate()->getFieldKeys() as $key) {
+				$params = $this->getTemplate()->getFieldByName($key, 'order');
+				if ($params->getParameter('enabled') && $params->getParameter('default')) {
+					$fields[] = array (
+						$params->getParameter('field', $this->getApiField($key)),
+						$params->getParameter('order', 'ASC')
+					);
+				}
+			}
+		}
+		
+		return $fields;
 	}
 	
 	private function collectCollumns() {
