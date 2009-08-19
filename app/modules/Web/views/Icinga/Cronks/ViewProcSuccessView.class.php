@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_TemplateViewSuccessView extends ICINGAWebBaseView
+class Web_Icinga_Cronks_ViewProcSuccessView extends ICINGAWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
@@ -22,6 +22,10 @@ class Web_Icinga_TemplateViewSuccessView extends ICINGAWebBaseView
 		
 		$layout_class = $template->getSectionParams('option')->getParameter('layout');
 		$layout = AppKitClassUtil::createInstance($layout_class);
+		
+		if ($rd->getParameter('htmlid', null) == null) {
+			$rd->setParameter('htmlid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
+		}
 		
 		$layout->setContainer($this->getContainer());
 		$layout->setWorker($worker);

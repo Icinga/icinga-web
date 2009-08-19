@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_Templates_AjaxGridLayoutSuccessView extends ICINGAWebBaseView
+class Web_Icinga_Cronks_ViewProc_AjaxGridLayoutSuccessView extends ICINGAWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

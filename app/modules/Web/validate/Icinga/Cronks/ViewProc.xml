@@ -47,6 +47,14 @@
 					</errors>
 		</validator>
 		
+		<validator class="string" name="htmlid" required="false">
+					<argument>htmlid</argument>
+					
+					<errors>
+						<error>Validation of htmlid failed!</error>
+					</errors>
+		</validator>
+		
 	</validators>
 	</ae:configuration>
 </ae:configurations>

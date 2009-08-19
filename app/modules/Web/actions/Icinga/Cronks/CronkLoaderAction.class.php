@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_Templates_MetaInformationAction extends ICINGAWebBaseAction
+class Web_Icinga_Cronks_CronkLoaderAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -20,6 +20,10 @@ class Web_Icinga_Templates_MetaInformationAction extends ICINGAWebBaseAction
 	}
 	
 	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviParameterHolder $rd) {
 		return $this->getDefaultViewName();
 	}
 	

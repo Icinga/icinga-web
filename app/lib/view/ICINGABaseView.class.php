@@ -74,6 +74,18 @@ class ICINGABaseView extends AgaviView implements AppKitContextInterface
 	public function getAuthProvider() {
 		return $this->getFactory(self::FACTORY_AUTHPROVIDER);
 	}
+	
+	/**
+	 * Execute html within a slot layout only without 
+	 * implementing a new layout method in the corresponding
+	 * views
+	 * 
+	 * @param AgaviRequestDataHolder $rd
+	 * @return mixed
+	 */
+	public function executeSimplecontent(AgaviRequestDataHolder $rd) {
+		return $this->executeHtml($rd);
+	}
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_Templates_MetaInformationSuccessView extends ICINGAWebBaseView
+class Web_Icinga_Cronks_ViewProc_MetaInformationSuccessView extends ICINGAWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

@@ -63,13 +63,19 @@
 					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))/(servicename:([\w\.\-\_\s]+))$" action="Icinga.ServiceDetailSingle" />
 				</route>
 				
-				<route pattern="/template" >
-					<route name=".templateView" pattern="/(template:([\w\.\-\_\s]+))" action="Icinga.TemplateView">
-						<route name=".json" pattern="/json" output_type="json">
-							<route name=".metaInfo" pattern="/inf" action="Icinga.Templates.MetaInformation" />
+				<route name=".viewTest" pattern="^/test$" action="Icinga.ViewTest" />
+				
+				<route pattern="^/cronks" name=".cronks" >
+
+					<route name=".loader" pattern="^/loader/(cronk:([\w\.\-\_\s]+))" action="Icinga.Cronks.CronkLoader" />
+				
+					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))" action="Icinga.Cronks.ViewProc">
+						<route name=".json" pattern="^/json" output_type="json">
+							<route name=".metaInfo" pattern="^/inf" action="Icinga.Cronks.ViewProc.MetaInformation" />
 						</route>
 					</route>
 				</route>
+				
 			</route>
 			
 		</routes>

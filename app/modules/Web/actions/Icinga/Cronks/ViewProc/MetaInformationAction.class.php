@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_Templates_AjaxGridLayoutAction extends ICINGAWebBaseAction
+class Web_Icinga_Cronks_ViewProc_MetaInformationAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

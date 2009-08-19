@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_TemplateViewAction extends ICINGAWebBaseAction
+class Web_Icinga_Cronks_ViewProcAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

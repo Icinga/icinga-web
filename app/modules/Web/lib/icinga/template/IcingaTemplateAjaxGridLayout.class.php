@@ -1,7 +1,7 @@
 <?php
 
 class IcingaTemplateAjaxGridLayout extends IcingaTemplateLayout {
-	const LAYOUT_ACTION = 'Icinga.Templates.AjaxGridLayout';
+	const LAYOUT_ACTION = 'Icinga.Cronks.ViewProc.AjaxGridLayout';
 	const LAYOUT_MODULE = 'Web';
 	
 	public function getLayoutContent() {

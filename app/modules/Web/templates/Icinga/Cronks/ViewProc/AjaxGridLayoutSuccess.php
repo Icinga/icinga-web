@@ -1,10 +1,12 @@
+<?php 
+	$htmlid = $rd->getParameter('htmlid');
+?>
+<div id="<?php echo $htmlid; ?>"></div>
 
-<div id="data-grid"></div>
 <script type="text/javascript">
-<!--
+<!-- /* <![CDATA[ */
 
-Ext.onReady(function(){
-
+YAHOO.util.Event.onContentReady('<?php echo $htmlid; ?>', function() {
 	
 	function loadAjaxGrid(meta) {	
 		// Prepare structures for the gridconfig
@@ -67,7 +69,7 @@ Ext.onReady(function(){
 			autoLoad: false,
 			 
 			proxy: new Ext.data.HttpProxy({
-				url: '<?php echo $ro->gen('icinga.templateView.json', array('template' => $rd->getParameter('template'))); ?>'
+				url: '<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>'
 			}),
 			
 			reader: reader,
@@ -104,7 +106,7 @@ Ext.onReady(function(){
 	        disableSelection:	false,
 	        loadMask:			true,
 	        
-			renderTo:			'data-grid',
+			renderTo:			'<?php echo $rd->getParameter('htmlid'); ?>',
 			
 			collapsible:		true,
 	        animCollapse:		true,
@@ -113,7 +115,7 @@ Ext.onReady(function(){
 			// If width is null defaults to auto
 			// width:				750,
 			
-			height:				600,
+			height:				300,
 			autoHeight:			false,
 	
 			columns:			column_array,
@@ -144,7 +146,7 @@ Ext.onReady(function(){
 				emptyMsg:		'No topics to display'
 			});
 
-			store.load({params:{start: pager_array.start, limit: pager_array.size}});
+			store.load({params:{page_start: pager_array.start, page_limit: pager_array.size}});
 		}
 		else {
 			store.load();
@@ -154,7 +156,7 @@ Ext.onReady(function(){
 	}
 
 	// Try to load template info for column info
-	var request = YAHOO.util.Connect.asyncRequest('GET', '<?php echo $ro->gen('icinga.templateView.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>', {
+	var request = YAHOO.util.Connect.asyncRequest('GET', '<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>', {
 		success: function(o) {
 			var meta = {};
 			try {
@@ -175,5 +177,5 @@ Ext.onReady(function(){
     
 });
 
--->
+/* ]]> */ -->
 </script>

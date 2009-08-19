@@ -171,4 +171,10 @@
 	
 	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 
+	<setting name="web.cronks">
+		<parameter name="viewProc">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.ViewProc</parameter>
+		</parameter>
+	</setting>
 </settings>
