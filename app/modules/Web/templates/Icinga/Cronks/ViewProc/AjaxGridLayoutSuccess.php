@@ -2,11 +2,9 @@
 	$htmlid = $rd->getParameter('htmlid');
 ?>
 <div id="<?php echo $htmlid; ?>"></div>
-
 <script type="text/javascript">
 <!-- /* <![CDATA[ */
-
-YAHOO.util.Event.onContentReady('<?php echo $htmlid; ?>', function() {
+// YAHOO.util.Event.onContentReady('<?php echo $htmlid; ?>', function() {
 	
 	function loadAjaxGrid(meta) {	
 		// Prepare structures for the gridconfig
@@ -175,7 +173,7 @@ YAHOO.util.Event.onContentReady('<?php echo $htmlid; ?>', function() {
 		cache: false
 	});
     
-});
+// });
 
 /* ]]> */ -->
 </script>

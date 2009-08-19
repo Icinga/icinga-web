@@ -69,8 +69,8 @@
 
 					<route name=".loader" pattern="^/loader/(cronk:([\w\.\-\_\s]+))" action="Icinga.Cronks.CronkLoader" />
 				
-					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))" action="Icinga.Cronks.ViewProc">
-						<route name=".json" pattern="^/json" output_type="json">
+					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
+						<route name=".json" pattern="^/json" output_type="json" action="Icinga.Cronks.ViewProc">
 							<route name=".metaInfo" pattern="^/inf" action="Icinga.Cronks.ViewProc.MetaInformation" />
 						</route>
 					</route>
