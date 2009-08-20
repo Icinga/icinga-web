@@ -4,25 +4,38 @@ class Web_Icinga_Cronks_CronkLoaderSuccessView extends ICINGAWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
+		
 		$this->setAttribute('title', 'Icinga.CronkLoader');
 		
-		$cronks		= AgaviConfig::get('de.icinga.web.cronks');
-		$cronk		= $rd->getParameter('cronk');
-		$parameters	= $rd->getParameter('p', array());
-		
-		if (array_key_exists($cronk, $cronks)) {
-			$module = $cronks[$cronk]['module'];
-			$action = $cronks[$cronk]['action'];
+		try {
+			$cronks		= AgaviConfig::get('de.icinga.web.cronks');
+			$cronk		= $rd->getParameter('cronk'); 
 			
-			$c = $this->createForwardContainer($module, $action, $parameters, 'simplecontent', 'read')
-				->execute()
-				->getContent();
+			$parameters = new AgaviParameterHolder($rd->getParameter('p', array()));
+			if ($parameters->getParameter('htmlid', null) == null) {
+				$parameters->setParameter('htmlid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
+			}
 			
+			if (array_key_exists($cronk, $cronks)) {
+				$module = $cronks[$cronk]['module'];
+				$action = $cronks[$cronk]['action'];
 				
-			return $c;
+				$c = $this->createForwardContainer($module, $action, $parameters->getParameters(), 'simplecontent', 'read')
+					->execute()
+					->getContent();
+				
+					
+				return $c;
+			}
+			else {
+				return 'Sorry, the cronk could not be loaded (not exist)';
+			}
+		}
+		catch (Exception $e) {
+			return $e->getMessage();
 		}
 		
-		$this->setupHtml($rd);
+		return 'Some strange error occured';
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_ViewTestAction extends ICINGAWebBaseAction
+class Web_Icinga_Cronks_PortalHelloAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -17,14 +17,6 @@ class Web_Icinga_ViewTestAction extends ICINGAWebBaseAction
 	public function getDefaultViewName()
 	{
 		return 'Success';
-	}
-	
-	public function isSecure() {
-		return true;
-	}
-	
-	public function getCredentials() {
-		return array ('icinga.user');
 	}
 }
 

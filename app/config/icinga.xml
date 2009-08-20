@@ -51,6 +51,8 @@
 		
 		<!-- ExtJS -->
 		<parameter>/js/ext/resources/css/ext-all.css</parameter>
+		<parameter>/js/ext/examples/ux/css/ux-all.css</parameter>
+		
 		
 		<!-- Misc css -->
 		<!-- <parameter>/js/gc-prettify/prettify.css</parameter> -->
@@ -113,6 +115,11 @@
 		<!-- ExtJS -->
 		<parameter>/js/ext/adapter/ext/ext-base.js</parameter>
 		<parameter>/js/ext/ext-all.js</parameter>
+		<parameter>/js/ext/examples/ux/Portal.js</parameter>
+		<parameter>/js/ext/examples/ux/PortalColumn.js</parameter>
+		<parameter>/js/ext/examples/ux/Portlet.js</parameter>
+		<parameter>/js/ext/examples/ux/SlidingPager.js</parameter>
+		<parameter>/js/ext/examples/ux/SliderTip.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
@@ -172,6 +179,16 @@
 	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 
 	<setting name="web.cronks">
+		<parameter name="portal">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.CronkPortal</parameter>
+		</parameter>
+	
+		<parameter name="portalHello">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.PortalHello</parameter>
+		</parameter>
+	
 		<parameter name="viewProc">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.ViewProc</parameter>

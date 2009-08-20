@@ -4,7 +4,7 @@
 <div id="<?php echo $htmlid; ?>"></div>
 <script type="text/javascript">
 <!-- /* <![CDATA[ */
-// YAHOO.util.Event.onContentReady('<?php echo $htmlid; ?>', function() {
+if (Ext.get("<?php echo $htmlid; ?>")) {
 	
 	function loadAjaxGrid(meta) {	
 		// Prepare structures for the gridconfig
@@ -111,7 +111,7 @@
 			frame:				true,
 
 			// If width is null defaults to auto
-			// width:				750,
+			width:				600,
 			
 			height:				300,
 			autoHeight:			false,
@@ -141,7 +141,8 @@
 				store:			store,
 				displayInfo:	true,
 				displayMsg:		'Displaying topics {0} - {1} of {2}',
-				emptyMsg:		'No topics to display'
+				emptyMsg:		'No topics to display',
+				plugins:		new Ext.ux.SlidingPager()
 			});
 
 			store.load({params:{page_start: pager_array.start, page_limit: pager_array.size}});
@@ -153,27 +154,19 @@
 		grid = new Ext.grid.GridPanel(grid_config);
 	}
 
-	// Try to load template info for column info
-	var request = YAHOO.util.Connect.asyncRequest('GET', '<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>', {
-		success: function(o) {
-			var meta = {};
-			try {
-				meta = YAHOO.lang.JSON.parse(o.responseText);
-			}
-			catch (x) { 
-				alert("Parsing template meta information failed!");
-				return;
-			}
-
-			// Load the grid
-			loadAjaxGrid(meta);
-		},
-
-		// Disable meta data caching
-		cache: false
+	// First loading the meta info to configure the grid
+	Ext.Ajax.request({
+		   url: '<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>',
+		   success: function(response, opts) {
+		      var meta = Ext.decode(response.responseText);
+		      loadAjaxGrid(meta); // Build the grid
+		   },
+		   failure: function(response, opts) {
+			   Ext.Msg.alert('Error', 'Could not load template meta information');
+		   }
 	});
     
-// });
+};
 
 /* ]]> */ -->
 </script>

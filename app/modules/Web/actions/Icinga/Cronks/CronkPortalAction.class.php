@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_ViewTestAction extends ICINGAWebBaseAction
+class Web_Icinga_Cronks_CronkPortalAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -19,12 +19,24 @@ class Web_Icinga_ViewTestAction extends ICINGAWebBaseAction
 		return 'Success';
 	}
 	
+	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
 	public function isSecure() {
 		return true;
 	}
 	
 	public function getCredentials() {
 		return array ('icinga.user');
+	}
+	
+	public function handleError(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
 	}
 }
 
