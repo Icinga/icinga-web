@@ -33,26 +33,13 @@
 
 <?php if (is_array($t['js_files']) && count($t['js_files'])) { ?>
 		<!-- JS included files -->
-		<script type="text/javascript" src="/js/appkit/JSLoader.js">
-		<!-- // <![CDATA[
-		// This is the source for a javascript dyna loader
-		// ]]> -->
-		</script>
-		
-		<script type="text/javascript">
-		<!-- // <![CDATA[
-		
-			var JSLoader = new JSLoader();
-			
 	<?php foreach ($t['js_files'] as $js_file) { ?>
-		JSLoader.addFile("<?php echo $js_file; ?>");
-	<?php } ?>
-
-			JSLoader.bulkInclude();
-	
+		<script type="text/javascript" src="<?php echo $js_file; ?>">
+		<!-- // <![CDATA[
+		// NO INLINE SCRIPT
 		// ]]> -->
 		</script>
-
+	<?php } ?>
 <?php } ?>
 
 <?php if (is_array($t['js_raw']) && count($t['js_raw'])) { ?>

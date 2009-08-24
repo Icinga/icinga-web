@@ -13,6 +13,8 @@
 				<route name="appkit.logout" pattern="^/logout" action="Logout"/>
 				<route name="appkit.about" pattern="^/about" action="%actions.default_action%"/>
 				
+				<route name="appkit.squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simplecontent" />
+				
 				<!-- AJAX handlers -->
 				<route name=".ajax" pattern="^/ajax">
 					<route name=".autocomplete" pattern="^/autocomplete/(type:[\w\._]+)" action="Ajax.AutoComplete" output_type="json" />

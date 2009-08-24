@@ -30,12 +30,8 @@ class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 			}
 		}
 		
-		// Adding preconfigured javascript files
-		if (is_array( ($js_files = AgaviConfig::get('de.icinga.appkit.include_javascript')) )) {
-			foreach ($js_files as $js_file) {
-				$header->addJsFile($js_file);
-			}
-		}
+		// Adding squished javascript files
+		$header->addJsFile($this->getContext()->getRouting()->gen('appkit.squishloader', array('type' => AppKitBulkLoader::CODE_TYPE_JAVASCRIPT)));
 		
 		if (is_array( ($tags = AgaviConfig::get('de.icinga.appkit.meta_tags')) )) {
 			foreach ($tags as $tag_name => $tag_val) {

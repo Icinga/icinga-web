@@ -1,6 +1,0 @@
-<div class="footerContent">
-<?php echo AgaviConfig::get('de.icinga.appkit.release'); ?>
-&#160;(<?php echo AgaviConfig::get('agavi.release'); ?>)
-&#160;&#169;&#160;2009&#160;ICINGA&#160;GmbH
-&#160;<a href="http://www.icinga.de/">www.netways.de</a>
-</div>

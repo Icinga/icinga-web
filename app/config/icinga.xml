@@ -72,54 +72,53 @@
 	<setting name="appkit.include_javascript">
 	
 		<!-- YUI -->
-		<parameter>/js/yui/build/yahoo/yahoo-min.js</parameter>
-		<parameter>/js/yui/build/event/event-min.js</parameter>
-		<parameter>/js/yui/build/yahoo-dom-event/yahoo-dom-event.js</parameter>
-		<parameter>/js/yui/build/container/container-min.js</parameter>
-		<parameter>/js/yui/build/datasource/datasource-min.js</parameter>
-		<parameter>/js/yui/build/get/get-min.js</parameter>
-		<parameter>/js/yui/build/element/element-beta-min.js</parameter>
-		<parameter>/js/yui/build/connection/connection-min.js</parameter>
-		<parameter>/js/yui/build/json/json-min.js</parameter>
-		<parameter>/js/yui/build/animation/animation-min.js</parameter>
-		<parameter>/js/yui/build/autocomplete/autocomplete-min.js</parameter>
-		<parameter>/js/yui/build/menu/menu-min.js</parameter>
-		<parameter>/js/yui/build/tabview/tabview-min.js</parameter>
-		<parameter>/js/yui/build/tabview/tabview-min.js</parameter>
-		<parameter>/js/yui/build/dragdrop/dragdrop-min.js</parameter>
-		<parameter>/js/yui/build/button/button-min.js</parameter>
-		<parameter>/js/yui/build/calendar/calendar-min.js</parameter>
-		<parameter>/js/yui/build/resize/resize-min.js</parameter>
-		<parameter>/js/yui/build/cookie/cookie-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/yahoo/yahoo-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/event/event-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/yahoo-dom-event/yahoo-dom-event.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/container/container-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/datasource/datasource-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/get/get-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/element/element-beta-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/connection/connection-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/json/json-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/animation/animation-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/autocomplete/autocomplete-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/menu/menu-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/tabview/tabview-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/tabview/tabview-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/dragdrop/dragdrop-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/button/button-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/calendar/calendar-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/resize/resize-min.js</parameter>
+		<parameter>%core.root_dir%/lib/yui/build/cookie/cookie-min.js</parameter>
 		
 		<!-- JQuery -->
-		<parameter>/js/jquery/jquery-1.3.1.min.js</parameter>
+		<parameter>%core.root_dir%/lib/jquery/jquery-1.3.1.min.js</parameter>
 		
 		<!-- mootools -->
-		<!-- <parameter>/js/mootools/mootools-1.2.1-core-yc.js</parameter> -->	
+		<!-- <parameter>%core.root_dir%/lib/mootools/mootools-1.2.1-core-yc.js</parameter> -->	
 		
 		<!--AppKit JS -->
-		<parameter>/js/appkit/AppKit.js</parameter>
-		<parameter>/js/appkit/Grapher.js</parameter>
-		<parameter>/js/appkit/dump.js</parameter>	
+		<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>	
 		
 		<!-- SWF Object -->
-		<parameter>/js/swfobject/swfobject.js</parameter>
+		<parameter>%core.root_dir%/lib/swfobject/swfobject.js</parameter>
 		
 		<!-- Google Code Prettify -->
-		<!-- <parameter>/js/gc-prettify/prettify.js</parameter> -->
+		<!-- <parameter>%core.root_dir%/lib/gc-prettify/prettify.js</parameter> -->
 		
 		<!-- Firebug lite for debug purposes -->
-		<!-- <parameter>/js/firebug/firebug-lite-compressed.js</parameter> -->
+		<!-- <parameter>%core.root_dir%/lib/firebug/firebug-lite-compressed.js</parameter> -->
 		
 		<!-- ExtJS -->
-		<parameter>/js/ext/adapter/ext/ext-base.js</parameter>
-		<parameter>/js/ext/ext-all.js</parameter>
-		<parameter>/js/ext/examples/ux/Portal.js</parameter>
-		<parameter>/js/ext/examples/ux/PortalColumn.js</parameter>
-		<parameter>/js/ext/examples/ux/Portlet.js</parameter>
-		<parameter>/js/ext/examples/ux/SlidingPager.js</parameter>
-		<parameter>/js/ext/examples/ux/SliderTip.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/adapter/ext/ext-base.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/ext-all.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/examples/ux/Portal.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/examples/ux/PortalColumn.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/examples/ux/Portlet.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/examples/ux/SlidingPager.js</parameter>
+		<parameter>%core.root_dir%/lib/ext/examples/ux/SliderTip.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
