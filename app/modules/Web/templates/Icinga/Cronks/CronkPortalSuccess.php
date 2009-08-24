@@ -5,8 +5,6 @@
 
 </div>
 <script type="text/javascript">
-<!-- /* <![CDATA[ */
-
 var tools = [{
 
     id:'gear',
@@ -29,13 +27,12 @@ var exampleHtml = 'LAOLA, das ist ein Test';
 var portal = new Ext.ux.Portal({
     height: 500,
     layout: 'column',
-    autoScroll:true,
+    autoScroll: true,
     title: 'portal',
-    // width: 200,
 
     items:[{
 
-        columnWidth:.09,
+        columnWidth: .09,
         style: 'padding: 10px;',
         items:[{
             title: 'Another Panel 1',
@@ -53,7 +50,7 @@ var portal = new Ext.ux.Portal({
         }]
 
     }, {
-    	columnWidth:.09,
+    	columnWidth: .09,
     	style: 'padding: 10px;',
     	items:[{
             title: 'Another Panel 2',
@@ -126,8 +123,4 @@ var container = new Ext.Container({
 });
 
 container.render("<?php echo $htmlid; ?>");
-
-
-
-/* ]]> */ -->
 </script>

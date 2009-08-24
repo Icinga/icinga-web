@@ -31,6 +31,7 @@
 		</style>
 <?php } ?>
 
+
 <?php if (is_array($t['js_files']) && count($t['js_files'])) { ?>
 		<!-- JS included files -->
 	<?php foreach ($t['js_files'] as $js_file) { ?>

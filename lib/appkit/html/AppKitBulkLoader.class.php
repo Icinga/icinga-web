@@ -273,7 +273,7 @@ class AppKitBulkLoader {
 				foreach ($this->fileList as $file) {
 					$content = @file_get_contents($file);
 					if ($content !== false) {
-						$this->fileContent .= $content . "\n";
+						$this->fileContent .= $content . "\n\n";
 					} else {
 						$readOk = false;
 						$this->fileContent = null;

@@ -3,10 +3,12 @@
 ?>
 <div id="<?php echo $htmlid; ?>"></div>
 <script type="text/javascript">
-<!-- /* <![CDATA[ */
-if (Ext.get("<?php echo $htmlid; ?>")) {
+<!-- // <![CDATA[
+
+// if (Ext.get("<?php echo $htmlid; ?>")) {
 	
 	function loadAjaxGrid(meta) {	
+		
 		// Prepare structures for the gridconfig
 		var mapping_array	= new Array(meta.keys.length);
 		var column_array	= new Array(meta.keys.length);
@@ -16,6 +18,7 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 
 		var ii				= 0;
 		
+		
 		for (var i=0; i<meta.keys.length; i++) {
 			var index = meta.keys[i];
 			var field = meta.fields[index];
@@ -24,17 +27,17 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 			
 			column_array[i] = {
 				header:			field.display.label,
-				// width:			(field.display.width ? field.display.width : 120),
+				width:			(field.display.width ? field.display.width : 120),
 				dataIndex:		index,
 				sortable:		(field.order.enabled ? true : false),
 				hidden:			(field.display.visible ? false : true)
 			};
 
-			if (field.order.default == true) {
+			if (field.order['default'] == true) {
 				sort_array[ii] = {
-					direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
-					field: index
-				};
+						direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
+						field: index
+					};
 
 				ii++;
 			}
@@ -116,8 +119,7 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 			height:				300,
 			autoHeight:			false,
 	
-			columns:			column_array,
-
+			columns:			column_array
 		};
 
 		var view_config = {
@@ -141,8 +143,10 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 				store:			store,
 				displayInfo:	true,
 				displayMsg:		'Displaying topics {0} - {1} of {2}',
-				emptyMsg:		'No topics to display',
-				plugins:		new Ext.ux.SlidingPager()
+				emptyMsg:		'No topics to display'
+
+				// ,
+				// plugins:		new Ext.ux.SlidingPager()
 			});
 
 			store.load({params:{page_start: pager_array.start, page_limit: pager_array.size}});
@@ -152,6 +156,8 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 		}
 
 		grid = new Ext.grid.GridPanel(grid_config);
+
+		
 	}
 
 	// First loading the meta info to configure the grid
@@ -166,7 +172,8 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 		   }
 	});
     
-};
+// };
 
-/* ]]> */ -->
+
+// ]]>-->
 </script>
