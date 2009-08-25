@@ -178,9 +178,14 @@
 	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 
 	<setting name="web.cronks">
-		<parameter name="portal">
+		<parameter name="crportal">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.CronkPortal</parameter>
+		</parameter>
+		
+		<parameter name="crlist">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.CronkListing</parameter>
 		</parameter>
 	
 		<parameter name="portalHello">

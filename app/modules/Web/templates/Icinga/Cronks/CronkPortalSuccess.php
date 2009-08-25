@@ -63,37 +63,40 @@ var portal = new Ext.ux.Portal({
 
 });
 
-var container = new Ext.Container({
+var tabPanel = new Ext.TabPanel({
+	autoHeight: true,
+	autoScroll: true,
+	autoWidth: true,
+	border: false
+});
+
+tabPanel.add({
+	autoLoad: { url: '<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>' },
+	title: 'Welcome'
+});
+
+tabPanel.add({
+	autoLoad: {
+		url: '<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'viewProc')); ?>',
+		params: { 'p[template]': 'icinga-test-template' },
+		scripts: true
+	},
+	title: 'Grid'
+});
+
+
+
+var container = new Ext.Panel({
 	layout: 'border',
+	monitorResize: true,
+	border: false,
 	height: 500,
 	
 	items: [{
 		region: 'center',
 		title: 'MyView',
         margins: '0 0 0 5',
-        layout: 'column',
-        items: new Ext.TabPanel({
-        	border: false,
-        	activeTab: 0,
-        	
-        	
-        	
-        	items: [{
-				title: 'Welcome',
-				autoLoad: {
-					url: '<?php echo $ro->gen('icinga.cronks.loader', array('cronk' => 'portalHello')); ?>'
-        		},
-				closable: true
-        	}, portal, {
-				title: 'Grid',
-				autoLoad: {
-					url: '<?php echo $ro->gen('icinga.cronks.loader', array('cronk' => 'viewProc')); ?>',
-					params: { 'p[template]': 'icinga-test-template' },
-					scripts: true
-        		},
-				closable: true
-        	}]
-        })
+        items: tabPanel
 	}, {
 		region: 'west',
 		title: 'Misc',
@@ -103,24 +106,31 @@ var container = new Ext.Container({
         width: 200,
         collapsible: true,
         margins: '0 0 0 5',
+        
         layout: {
         	type: 'accordion',
             animate: true
         },
+
+        defaults: {
+			border: false
+        },
         
         items: [{
-            title: 'Navigation',
-            border: false,
-            iconCls: 'nav' // see the HEAD section for style used
+            title: 'Navigation'
         }, {
             title: 'Settings',
-            html: 'Some settings in here.',
-            border: false,
-            iconCls: 'settings'
+            html: 'Some settings in here.'
+        }, {
+            title: 'Cronks',
+            autoLoad: '<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>'
         }]
 
 	}]
 });
 
 container.render("<?php echo $htmlid; ?>");
+
+container.doLayout();
+
 </script>
