@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_Cronks_CronkListingAction extends ICINGAWebBaseAction
+class Web_Icinga_Cronks_PortalViewAction extends ICINGAWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

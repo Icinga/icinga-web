@@ -24,9 +24,13 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
 		parent::__construct();
 	}
 	
+	public function imageUrl($image_name) {
+		return $this->getAgaviRouter()->gen(self::ROUTE_NAME_IMAGE, array('image' => $image_name));
+	}
+	
 	public function Image($image_name, $alt=false, array $attributes = array ()) {
 		$tag = AppKitXmlTag::create('img')
-		->addAttribute('src', $this->getAgaviRouter()->gen(self::ROUTE_NAME_IMAGE, array('image' => $image_name)));
+		->addAttribute('src', $this->imageUrl($image_name));
 		
 		if ($title !== false) {
 			$tag->addAttribute('alt', $alt);

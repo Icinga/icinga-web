@@ -116,8 +116,7 @@
 			// If width is null defaults to auto
 			// width:				600,
 			
-			height:				300,
-			autoHeight:			false,
+			height:				450,
 	
 			columns:			column_array
 		};

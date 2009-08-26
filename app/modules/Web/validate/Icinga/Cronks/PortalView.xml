@@ -16,6 +16,14 @@
 					</errors>
 		</validator>
 		
+		<validator class="number" name="columns" required="false">
+					<argument>columns</argument>
+					
+					<errors>
+						<error>Validation of columns failed!</error>
+					</errors>
+		</validator>
+		
 		</validators>
 		
 	</ae:configuration>

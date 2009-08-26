@@ -117,6 +117,7 @@
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
+		<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
 		<!-- <parameter>%core.root_dir%/lib/ext2/examples/ux/SlidingPager.js</parameter>
 		<parameter>%core.root_dir%/lib/ext2/examples/ux/SliderTip.js</parameter> -->
 	</setting>
@@ -181,21 +182,58 @@
 		<parameter name="crportal">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.CronkPortal</parameter>
+			<parameter name="hide">true</parameter>
+			<parameter name="description">The cronkportal itself (icinga application)</parameter>
+			<parameter name="name">Cronk portal</parameter>
 		</parameter>
 		
 		<parameter name="crlist">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.CronkListing</parameter>
+			<parameter name="hide">true</parameter>
+			<parameter name="description">Lists available cronks</parameter>
+			<parameter name="name">Cronk dataview provider</parameter>
 		</parameter>
 	
 		<parameter name="portalHello">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.PortalHello</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Say hello to the world</parameter>
+			<parameter name="name">HelloWorld</parameter>
 		</parameter>
 	
-		<parameter name="viewProc">
+		<parameter name="gridServiceView">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.ViewProc</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="name">Serviceview</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-service-template</parameter>
+			</parameter>
+		</parameter>
+		
+		<parameter name="portalView2Col">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.PortalView</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Portalgrid 2 column</parameter>
+			<parameter name="name">Portal 2columns</parameter>
+			<parameter name="parameter">
+				<parameter name="columns">2</parameter>
+			</parameter>
+		</parameter>
+		
+		<parameter name="portalView3Col">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.PortalView</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Portalgrid 3 column</parameter>
+			<parameter name="name">Portal 3columns</parameter>
+			<parameter name="parameter">
+				<parameter name="columns">3</parameter>
+			</parameter>
 		</parameter>
 	</setting>
 </settings>
