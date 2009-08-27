@@ -24,7 +24,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_SERVICE</parameter>
+        <parameter name="target">IcingaApi::TARGET_HOST</parameter>
         
         <parameter name="id">service_object_id</parameter>
         
@@ -38,15 +38,9 @@
 			If the counting differs from data result you can specify a field to count
 		-->
         <parameter name="countfields">
-        	<parameter>SERVICE_ID</parameter>
+        	<parameter>HOST_ID</parameter>
         </parameter>
         
-        <!-- Additional fields we would like to work with it -->
-       	<parameter name="additional_fields">
-       		<parameter name="current_attempt">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
-       		<parameter name="max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
-       	</parameter>
-         
     </datasource>
     
     <!-- 
@@ -59,8 +53,8 @@
     </pager>
     
     <grouping>
-    	<parameter name="enabled">true</parameter>
-    	<parameter name="field">host_name</parameter>
+    	<parameter name="enabled">false</parameter>
+    	<parameter name="field">A_XML_FIELD_TO_GROUP</parameter>
     </grouping>
     
     <!--
@@ -68,9 +62,9 @@
     -->
     <fields>
     
-        <field name="service_object_id">
+        <field name="host_object_id">
         	<datasource>
-        		<parameter name="field">SERVICE_OBJECT_ID</parameter>
+        		<parameter name="field">HOST_OBJECT_ID</parameter>
         	</datasource>
         	
         	<display>
@@ -108,7 +102,8 @@
             </display>
             
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">string</parameter> 
             </filter>
             
             <order>
@@ -118,32 +113,11 @@
                 
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
-        </field>
+        </field>  
         
-        <field name="service_name">
-            <datasource>
-            	<parameter name="field">SERVICE_NAME</parameter>
-            </datasource>
-            
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label">Service</parameter>
-            </display>
-            
-            <filter>
-                <parameter name="enabled">false</parameter>    
-            </filter>
-            
-            <order>
-                <parameter name="enabled">true</parameter>
-                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
-            </order>
-        </field>
-        
-        
-        <field name="service_status">
+        <field name="host_status">
         	<datasource>
-        		<parameter name="field">SERVICE_CURRENT_STATE</parameter>
+        		<parameter name="field">HOST_CURRENT_STATE</parameter>
         	</datasource>
         	
             <display>
@@ -152,7 +126,7 @@
                 
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
-                	<parameter name="method">serviceStatus</parameter>
+                	<parameter name="method">hostStatus</parameter>
 					
                 </parameter>
             </display>
@@ -170,12 +144,18 @@
         
         <field name="plugin_output">
         	<datasource>
-        		<parameter name="field">SERVICE_OUTPUT</parameter>
+        		<parameter name="field">HOST_OUTPUT</parameter>
         	</datasource>
         	
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
+                
+                <parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="method">truncateOutput</parameter>
+					
+                </parameter>
             </display>
         	
             <filter>
@@ -187,7 +167,6 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
         
     </fields>
     

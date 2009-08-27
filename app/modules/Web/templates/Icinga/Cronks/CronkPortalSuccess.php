@@ -62,7 +62,7 @@ var container = new Ext.Panel({
 	layout: 'border',
 	monitorResize: true,
 	border: false,
-	height: 500,
+	height: 600,
 	
 	items: [{
 		region: 'center',

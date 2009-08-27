@@ -14,6 +14,7 @@
 		var column_array	= new Array(meta.keys.length);
 		var sort_array		= new Array(meta.keys.length);
 		var pager_array		= new Array(3);
+		var filter_array	= new Array(meta.keys.length);
 		var sort_info		= new Array(2);
 
 		var ii				= 0;
@@ -42,7 +43,8 @@
 				ii++;
 			}
 		}
-		
+
+		// Pager config
 		pager_array = {
 			enabled:	(meta.template.pager.enabled ? true : false),
 			size:		(meta.template.pager.size ? meta.template.pager.size : 25),
@@ -115,6 +117,7 @@
 
 			// If width is null defaults to auto
 			// width:				600,
+			autoWidth:			true,
 			
 			height:				450,
 	

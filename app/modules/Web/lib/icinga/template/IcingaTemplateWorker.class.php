@@ -134,7 +134,13 @@ class IcingaTemplateWorker {
 					$this->result_count = $result->getResultCount();
 				}
 				
-				$data[] = $this->rewriteResultRow($result);
+				$tmp = $this->rewriteResultRow($result);
+				
+				/*
+				 * @todo add additional fields and content here
+				 */
+				
+				$data[] = $tmp;
 			}
 			return $data;
 		}
@@ -154,7 +160,7 @@ class IcingaTemplateWorker {
 			if (($param = $meta->getParameter('userFunc'))) {
 				if ($param['class'] && $param['method']) {
 					if (!is_array($param['arguments'])) $param['arguments'] = array();
-					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $data, $param['arguments']);
+					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $data, $param['arguments'], (array)$row);
 				}
 			}
 			else {
@@ -162,6 +168,8 @@ class IcingaTemplateWorker {
 			}
 			
 		}
+		
+		
 		
 		unset($row);
 		
@@ -179,14 +187,16 @@ class IcingaTemplateWorker {
 		return null;
 	}
 	
-	private function rewritePerClassMethod($class, $method, $data_val, array $params = array ()) {
+	private function rewritePerClassMethod($class, $method, $data_val, array $params = array (), array $row = array()) {
 		$ref = new ReflectionClass($class);
 		if ($ref->isSubclassOf('IcingaTemplateDisplay') && $ref->hasMethod('getInstance') && $ref->hasMethod($method)) {
 			$minstance = $ref->getMethod('getInstance');
 			$obj = $minstance->invoke(null);
 			if ($obj instanceof IcingaTemplateDisplay) {
 				$change = $ref->getMethod($method);
-				return $change->invoke($obj, $data_val, new AgaviParameterHolder($params));
+				return $change->invoke($obj, 
+					$data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row)
+				);
 			}
 		}
 	}

@@ -14,6 +14,21 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 		return (string)IcingaHostStateInfo::Create($val)->getCurrentStateAsHtml();
 	}
 	
+	public function truncateOutput($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+		
+		$length = $method_params->getParameter('langth', 10);
+		
+		if (strlen($val) > $length) {
+			
+			$org = $val;
+			$val = substr($val, 0, $length). ' ...';
+			
+			return $val;
+			
+		}
+		
+		return $val;
+	}
 }
 
 ?>

@@ -5,23 +5,23 @@
 div.cronk-data-view div.cronk-preview {
 	float: left;
 	margin-right: 0;
+	margin: 5px;
 	padding: 5px;
 }
 
-div.cronk-data-view div.cronk-preview span{
+div.cronk-data-view div.cronk-preview span {
 	display: block;
 	overflow: hidden;
 	text-align: center;
 }
 
 div.cronk-data-view .x-view-over{
-    border:1px solid #dddddd;
+	background-color: #f1f1f1;
 	padding: 4px;
 }
 
 div.cronk-data-view .x-view-selected{
 	background: #eff5fb  no-repeat right bottom;
-	border:1px solid #99bbe8;
 	padding: 4px;
 }
 
