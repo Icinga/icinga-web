@@ -41,9 +41,11 @@
         	<parameter>SERVICE_ID</parameter>
         </parameter>
         
-        <!-- Additional fields we would like to work with it -->
+        <!-- 
+        	Additional fields we would like to work with it (append them on the datasource
+        	without working the default structures, e.g. for user classes)
+        -->
        	<parameter name="additional_fields">
-       		<parameter name="current_attempt">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
        		<parameter name="max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
        	</parameter>
          
@@ -165,6 +167,34 @@
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="field">SERVICE_CURRENT_STATE</parameter>
+            </order>
+        </field>
+
+        <field name="check_attempt">
+        	<datasource>
+        		<parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
+        	</datasource>
+        	
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Attempt</parameter>
+                
+				<parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="method">formatTemplate</parameter>
+					<parameter name="arguments">
+						<parameter name="format"><![CDATA[${field.check_attempt} / ${field.max_attempt}]]></parameter>
+					</parameter>
+                </parameter>
+            </display>
+        	
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
             </order>
         </field>
         

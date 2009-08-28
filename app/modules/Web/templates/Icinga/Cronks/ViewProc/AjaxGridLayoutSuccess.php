@@ -1,7 +1,6 @@
 <?php 
 	$htmlid = $rd->getParameter('htmlid');
 ?>
-<div id="<?php echo $htmlid; ?>"></div>
 <script type="text/javascript">
 <!-- // <![CDATA[
 
@@ -157,9 +156,9 @@
 			store.load();
 		}
 
-		grid = new Ext.grid.GridPanel(grid_config);
-
-		
+		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+		cmp.add(new Ext.grid.GridPanel(grid_config));
+		container.doLayout();		
 	}
 
 	// First loading the meta info to configure the grid

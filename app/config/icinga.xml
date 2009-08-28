@@ -246,5 +246,16 @@
 				<parameter name="columns">3</parameter>
 			</parameter>
 		</parameter>
+		
+		<parameter name="iframeView">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.IframeView</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">View something within an iframe</parameter>
+			<parameter name="name">WebTest</parameter>
+			<parameter name="parameter">
+				<parameter name="url"><![CDATA[http://www.google.de/]]></parameter>
+			</parameter>
+		</parameter>
 	</setting>
 </settings>

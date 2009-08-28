@@ -12,6 +12,7 @@ var tabPanel = new Ext.TabPanel({
 	autoScroll: true,
 	autoWidth: true,
 	border: false,
+	id: 'cronk-tabs',
 	
 	// Here comes the drop zone
 	listeners: {
@@ -25,7 +26,11 @@ function initTabPanelDropZone(t) {
 					
 					notifyDrop: function(dd, e, data){
 						
-						var params = {};
+						var id = AppKit.genRandomId('cronk-');
+						
+						var params = {
+							'p[htmlid]': id
+						};
 					
 						if (data.dragData.parameter) {
 							for (var k in data.dragData.parameter) {
@@ -36,10 +41,11 @@ function initTabPanelDropZone(t) {
 						tabPanel.add({
 							title: data.dragData.name,
 							closable: true,
+							id: id,
 							autoLoad: { 
 								url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 								scripts: true,
-								params: params
+								params: params,
 							}
 						});
 						
@@ -60,8 +66,8 @@ tabPanel.add({
 
 var container = new Ext.Panel({
 	layout: 'border',
-	monitorResize: true,
 	border: false,
+	monitorResize: true,
 	height: 600,
 	
 	items: [{

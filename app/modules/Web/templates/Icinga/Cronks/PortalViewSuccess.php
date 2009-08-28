@@ -4,7 +4,6 @@
 	
 	$width		= floor(100 / $columns) / 100;
 ?>
-<div id="<?php echo $htmlid; ?>"></div>
 <script type="text/javascript">
 
 	function createPortal() {
@@ -30,8 +29,8 @@
 		}];
 		
 		var portal_config = {
-			height: 500,
 		    layout: 'column',
+		    height: 600,
 		    autoScroll: true,
 		    
 		    listeners: {
@@ -45,7 +44,11 @@
 					
 					notifyDrop: function(dd, e, data){
 						
-						var params = {};
+						var id = AppKit.genRandomId('cronk-');
+						
+						var params = {
+							'p[htmlid]': id
+						};
 					
 						if (data.dragData.parameter) {
 							for (var k in data.dragData.parameter) {
@@ -53,10 +56,11 @@
 							}
 						}
 						
-						portal.items.get(0).add({
+						p.items.get(0).add({
 							title: data.dragData.name,
 							closable: true,
 							tools: tools,
+							id: id,
 							autoLoad: { 
 								url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 								scripts: true,
@@ -64,7 +68,7 @@
 							}
 						});
 						
-						portal.doLayout();
+						p.doLayout();
 					}
 				});
 		}
@@ -80,9 +84,10 @@
 		
 		portal_config.items = items_config;
 		
-		var portal = new Ext.ux.Portal(portal_config);
+		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+		cmp.add(new Ext.ux.Portal(portal_config));
 		
-		portal.render('<?php echo $htmlid; ?>');
+		container.doLayout();
 	}
 	
 	createPortal();

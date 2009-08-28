@@ -146,32 +146,64 @@ class IcingaTemplateWorker {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param IcingaApiResult$result
+	 * @return ArrayObject
+	 */
+	private function addAdditionalFieldResults(IcingaApiResult $result) {
+		$out = new ArrayObject();
+		$ds = $this->getTemplate()->getSection('datasource');
+		
+		if ($ds['additional_fields'] && is_array($ds['additional_fields'])) {
+			$row = new ArrayObject($result->getRow());
+
+			foreach ($ds['additional_fields'] as $name=>$resname) {
+				$resname = strtolower($resname);
+				
+				if ($row->offsetExists($resname)) {
+					$out[ $name ] = $row[ $resname ];
+				}
+			}
+			
+		}
+		
+		return $out;
+	}
+	
+	/**
+	 * 
+	 * @param IcingaApiResult $result
+	 * @return ArrayObject
+	 */
 	private function rewriteResultRow(IcingaApiResult $result) {
 		$row = new ArrayObject($result->getRow());
 		$out = new ArrayObject();
+		
 		foreach ($this->getTemplate()->getFields() as $key=>$field) {
 			
 			$meta = $this->getTemplate()->getFieldByName($key, 'display');
 			$data = $this->getFieldData($row, $key);
 			
-			// Ommit blank data!
-			if (!$meta->getParameter('visible') === true) continue;
-			
-			if (($param = $meta->getParameter('userFunc'))) {
-				if ($param['class'] && $param['method']) {
-					if (!is_array($param['arguments'])) $param['arguments'] = array();
-					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $data, $param['arguments'], (array)$row);
-				}
-			}
-			else {
-				$out[$key] = $data;
-			}
+			$out[$key] = $data;
 			
 		}
 		
-		
+		// Adding additional fields
+		$out = array_merge((array)$out, (array)$this->addAdditionalFieldResults($result));
 		
 		unset($row);
+
+		$raw = (array)$out;		
+		foreach ($out as $key=>$val) {
+			$meta = $this->getTemplate()->getFieldByName($key, 'display');
+			if (($param = $meta->getParameter('userFunc'))) {
+				if ($param['class'] && $param['method']) {
+					if (!is_array($param['arguments'])) $param['arguments'] = array();
+					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments'], (array)$raw);
+				}
+			}
+		}
 		
 		return $out;
 	}
@@ -270,8 +302,15 @@ class IcingaTemplateWorker {
 	private function collectCollumns() {
 		$fields = array ();
 		
+		// The regular fields
 		foreach ($this->getTemplate()->getFieldKeys() as $key) {
 			$fields[ $this->getApiField($key) ] = false;
+		}
+		
+		// Additional fields
+		$ds = $this->getTemplate()->getSection('datasource');
+		if ($ds['additional_fields'] && is_array($ds['additional_fields'])) {
+			$fields = array_merge($fields, array_flip($ds['additional_fields']));
 		}
 		
 		return array_keys($fields);
