@@ -247,15 +247,29 @@
 			</parameter>
 		</parameter>
 		
-		<parameter name="iframeView">
+		<parameter name="iframeViewGoogle">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.IframeView</parameter>
 			<parameter name="hide">false</parameter>
 			<parameter name="description">View something within an iframe</parameter>
-			<parameter name="name">WebTest</parameter>
+			<parameter name="name">Google</parameter>
 			<parameter name="parameter">
 				<parameter name="url"><![CDATA[http://www.google.de/]]></parameter>
 			</parameter>
 		</parameter>
+		
+		<parameter name="iframeViewIcinga">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.IframeView</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">View something within an iframe</parameter>
+			<parameter name="name">Icinga</parameter>
+			<parameter name="parameter">
+				<parameter name="url"><![CDATA[http://demo.icinga.org/icinga/]]></parameter>
+				<parameter name="user">guest</parameter>
+				<parameter name="password">guest</parameter>
+			</parameter>
+		</parameter>
+		
 	</setting>
 </settings>

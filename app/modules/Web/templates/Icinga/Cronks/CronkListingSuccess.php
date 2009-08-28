@@ -1,7 +1,7 @@
 <?php
 	$htmlid = $rd->getParameter('htmlid');
 ?>
-<div class="cronk-data-view" id="<?php echo $htmlid; ?>"></div>
+<!--<div class="cronk-data-view" id="<?php echo $htmlid; ?>"></div>-->
 
 <script type="text/javascript">
 
@@ -38,7 +38,9 @@ function loadCronkDataView() {
         multiSelect: true,
         overClass:'x-view-over',
         itemSelector:'div.cronk-preview',
-        emptyText: 'No images to display',
+        emptyText: 'No data',
+        
+       	cls: 'cronk-data-view',
         
         // Create the drag zone
         listeners: {
@@ -48,7 +50,11 @@ function loadCronkDataView() {
         
     });
 	
-	view.render('<?php echo $htmlid; ?>');	
+	// view.render('<?php echo $htmlid; ?>');
+	var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+	cmp.add(view);
+	
+	// container.doLayout();	
 	
 	function initCronkDragZone(v) {
 		v.dragZone = new Ext.dd.DragZone(v.getEl(), {

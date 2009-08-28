@@ -16,6 +16,22 @@
 					</errors>
 		</validator>
 		
+		<validator class="string" name="user" required="false">
+					<argument>user</argument>
+					
+					<errors>
+						<error>Validation of user failed!</error>
+					</errors>
+		</validator>
+		
+		<validator class="string" name="password" required="false">
+					<argument>password</argument>
+					
+					<errors>
+						<error>Validation of password failed!</error>
+					</errors>
+		</validator>
+		
 		<validator class="string" name="htmlid" required="false">
 					<argument>htmlid</argument>
 					

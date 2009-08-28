@@ -1,11 +1,24 @@
 <?php 
-	$url = $rd->getParameter('url');
+	$url = $t['url'];
+	
 	$htmlid = $rd->getParameter('htmlid');
+	$newid = 'iframe-'. AppKitRandomUtil::genSimpleId(10);
 ?>
+<?php if ($url) { ?>
+<iframe id="<?php echo $newid; ?>" src="<?php echo $url; ?>">
+
+</iframe>
 <script type="text/javascript">
-	alert("<?php echo $htmlid; ?>");
-	var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
-	cmp.add(new Ext.Panel({title: 'test', html: 'Das ist ein test'}));
-	cmp.add({html: 'test'});
-	// container.doLayout();
+	var cmp = Ext.getCmp('center-frame');
+	
+	var iframe = Ext.get("<?php echo $newid; ?>");
+	iframe.setWidth(cmp.getWidth());
+	iframe.setHeight(cmp.getHeight());
+	
+	Ext.getCmp('center-frame').on('resize', function(o) {
+		iframe.setWidth(Ext.getCmp('center-frame').getWidth());
+		iframe.setHeight(Ext.getCmp('center-frame').getHeight());
+	});
+
 </script>
+<?php } ?>

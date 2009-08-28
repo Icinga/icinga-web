@@ -67,7 +67,7 @@
 				
 				<route name=".viewTest" pattern="^/test$" action="Icinga.ViewTest" />
 				
-				<route pattern="^/cronks" name=".cronks" >
+				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" >
 
 					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="Icinga.Cronks.CronkLoader" />
 				
