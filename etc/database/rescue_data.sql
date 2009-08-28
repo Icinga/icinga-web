@@ -4,4 +4,7 @@ INSERT INTO `nsm_user` VALUES
 INSERT INTO `nsm_role` VALUES
 (1,'grapher_user','Grapher usage privileges',0,'2009-02-17 10:17:10','0000-00-00 00:00:00'),(2,'grapher_admin','Grapher admin privileges',0,'2009-02-17 10:17:10','0000-00-00 00:00:00'),(3,'appkit_user','Appkit user',0,'2009-02-19 09:17:37','2009-02-19 09:17:37'),(4,'appkit_admin','AppKit admin',0,'2009-02-17 10:17:10','0000-00-00 00:00:00');
 
-INSERT INTO `nsm_user_role` VALUES (1,4);
+INSERT INTO `nsm_role` VALUES 
+(3,'appkit_user','Appkit user',0,'2009-02-19 09:17:37','2009-04-20 16:12:17'),(4,'appkit_admin','AppKit admin',0,'2009-02-17 10:17:10','0000-00-00 00:00:00'),(5,'icinga_user','The default representation of a ICINGA user',0,'2009-04-20 15:56:52','2009-04-20 15:56:52');
+
+INSERT INTO `nsm_user_role` VALUES (1,4),(1,5);
