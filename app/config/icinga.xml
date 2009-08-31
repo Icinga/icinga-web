@@ -119,6 +119,7 @@
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
+		<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/RowLayout.js</parameter> -->
 		<!-- <parameter>%core.root_dir%/lib/ext2/examples/ux/SlidingPager.js</parameter>
 		<parameter>%core.root_dir%/lib/ext2/examples/ux/SliderTip.js</parameter> -->
 	</setting>
@@ -253,15 +254,29 @@
 			</parameter>
 		</parameter>
 		
-		<parameter name="iframeView">
+		<parameter name="iframeViewGoogle">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.IframeView</parameter>
 			<parameter name="hide">false</parameter>
 			<parameter name="description">View something within an iframe</parameter>
-			<parameter name="name">WebTest</parameter>
+			<parameter name="name">Google</parameter>
 			<parameter name="parameter">
 				<parameter name="url"><![CDATA[http://www.google.de/]]></parameter>
 			</parameter>
 		</parameter>
+		
+		<parameter name="iframeViewIcinga">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.IframeView</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">View something within an iframe</parameter>
+			<parameter name="name">Icinga</parameter>
+			<parameter name="parameter">
+				<parameter name="url"><![CDATA[http://demo.icinga.org/icinga/]]></parameter>
+				<parameter name="user">guest</parameter>
+				<parameter name="password">guest</parameter>
+			</parameter>
+		</parameter>
+		
 	</setting>
 </settings>

@@ -6,11 +6,14 @@
 </div>
 <script type="text/javascript">
 
+Ext.onReady(function(){
+
+Ext.BLANK_IMAGE_URL = '/images/ajax/s.gif';
 
 var tabPanel = new Ext.TabPanel({
 	autoHeight: true,
 	autoScroll: true,
-	autoWidth: true,
+
 	border: false,
 	id: 'cronk-tabs',
 	
@@ -41,6 +44,8 @@ function initTabPanelDropZone(t) {
 						tabPanel.add({
 							title: data.dragData.name,
 							closable: true,
+							height: Ext.getCmp('center-frame').getHeight(),
+							
 							id: id,
 							autoLoad: { 
 								url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
@@ -56,13 +61,7 @@ function initTabPanelDropZone(t) {
 
 }
 
-
-tabPanel.add({
-	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
-	title: 'Welcome'
-});
-
-
+var cronk_list_id = AppKit.genRandomId('cronk-');
 
 var container = new Ext.Panel({
 	layout: 'border',
@@ -70,12 +69,16 @@ var container = new Ext.Panel({
 	monitorResize: true,
 	height: 600,
 	
+	id: 'cronk-container', // OUT CENTER COMPONENT!!!!!
+	
 	items: [{
 		region: 'center',
 		title: 'MyView',
         margins: '0 0 0 5',
         cls: 'cronk-center-content',
         items: tabPanel
+        id: 'center-frame',
+        layout: 'fit'
 	}, {
 		region: 'west',
 		title: 'Misc',
@@ -103,9 +106,11 @@ var container = new Ext.Panel({
             html: 'Some settings in here.'
         }, {
             title: 'Cronks',
+            id: cronk_list_id,
             autoLoad: {
             	url: '<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>',
-            	scripts: true
+            	scripts: true,
+            	params: { 'p[htmlid]': cronk_list_id }
         	}
         }]
 
@@ -114,9 +119,16 @@ var container = new Ext.Panel({
 
 container.render("<?php echo $htmlid; ?>");
 
+tabPanel.add({
+	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
+	title: 'Welcome',
+	height: Ext.getCmp('center-frame').getHeight()
+});
+
 tabPanel.setActiveTab(0);
 tabPanel.doLayout();
 
 container.doLayout();
 
+});
 </script>

@@ -6,7 +6,7 @@ class Web_Icinga_ViewTestSuccessView extends ICINGAWebBaseView
 	{
 		$this->setupHtml($rd);
 		
-		$this->setAttribute('title', 'Icinga.Templates.ViewTest');
+		// $this->setAttribute('title', 'Icinga.Templates.ViewTest');
 	}
 }
 

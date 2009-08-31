@@ -30,7 +30,8 @@
 		
 		var portal_config = {
 		    layout: 'column',
-		    height: 600,
+		    
+		    height: Ext.getCmp("<?php echo $htmlid; ?>").getHeight(),
 		    autoScroll: true,
 		    
 		    listeners: {
@@ -59,14 +60,63 @@
 						p.items.get(0).add({
 							title: data.dragData.name,
 							closable: true,
+							canResize: true,
+						    heightIncrement:16,
+						    pinned:false,
+						    duration: .6,
+						    easing: 'backIn',
+						    transparent:false,
+							
 							tools: tools,
 							id: id,
+							
 							autoLoad: { 
 								url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 								scripts: true,
 								params: params
+							},
+							
+							listeners: {
+								/* render: function(ct, position) {
+								    
+								    var createProxyProtoType=Ext.Element.prototype.createProxy;
+								    
+							        Ext.Element.prototype.createProxy=function(config){
+								        return Ext.DomHelper.append(this.dom, config, true);
+								    };
+								    
+								    
+								    if(this.canResize==true){
+							        	this.resizer = new Ext.Resizable(this.el, {
+							            	animate: true,
+							            	duration: this.duration,
+							            	easing: this.easing,
+							            	handles: 's',
+							            	transparent:this.transparent,
+							            	heightIncrement:this.heightIncrement,
+							            	minHeight: this.minHeight || 100,
+							            	pinned: this.pinned
+							        	});
+							        	this.resizer.on('resize', this.onResizer, this);
+									}
+									
+									Ext.Element.prototype.createProxy=createProxyProtoType;
+									
+								},
+								
+								onResizer : function(oResizable, iWidth, iHeight, e) {
+        							this.setHeight(iHeight);
+    							},
+    							
+    							onCollapse : function(doAnim, animArg) {
+							        this.el.setHeight('');  
+							        Ext.ux.Portlet.superclass.onCollapse.call(this, doAnim, animArg);
+							    } */
+    								
 							}
 						});
+						
+						
 						
 						p.doLayout();
 					}
@@ -87,7 +137,8 @@
 		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
 		cmp.add(new Ext.ux.Portal(portal_config));
 		
-		container.doLayout();
+		Ext.getCmp('cronk-tabs').doLayout();
+		Ext.getCmp('cronk-container').doLayout();
 	}
 	
 	createPortal();

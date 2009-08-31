@@ -100,6 +100,8 @@
 			store = new Ext.data.Store(store_config); 
 		}
 		
+		var h = Ext.getCmp('<?php echo $rd->getParameter('htmlid'); ?>').getHeight()-50;
+		
 		// Our grid
 		var grid_config = {
 			store:				store,
@@ -107,8 +109,6 @@
 			trackMouseOver:		false,
 	        disableSelection:	false,
 	        loadMask:			true,
-	        
-			renderTo:			'<?php echo $rd->getParameter('htmlid'); ?>',
 			
 			collapsible:		true,
 	        animCollapse:		true,
@@ -117,8 +117,7 @@
 			// If width is null defaults to auto
 			// width:				600,
 			autoWidth:			true,
-			
-			height:				450,
+			height:				h > 300 ? h : 300,
 	
 			columns:			column_array
 		};
@@ -158,7 +157,8 @@
 
 		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
 		cmp.add(new Ext.grid.GridPanel(grid_config));
-		container.doLayout();		
+		
+		Ext.getCmp('cronk-container').doLayout();
 	}
 
 	// First loading the meta info to configure the grid

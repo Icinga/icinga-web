@@ -11,7 +11,7 @@ Ext.onReady(function() {
 	
 	var ele = Ext.get('icinga-cronk-portal-frame').load({
 		url:		'<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crportal')); ?>',
-		params:		{ 'p[htmlid]': 'icinga-cronk-portal', 'p[template]': 'icinga-test-template' },
+		params:		{ 'p[htmlid]': 'icinga-cronk-portal' },
 		scripts:	true
 	});
 
