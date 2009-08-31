@@ -74,6 +74,7 @@ var container = new Ext.Panel({
 		region: 'center',
 		title: 'MyView',
         margins: '0 0 0 5',
+        cls: 'cronk-center-content',
         items: tabPanel
 	}, {
 		region: 'west',
@@ -84,6 +85,7 @@ var container = new Ext.Panel({
         width: 200,
         collapsible: true,
         margins: '0 0 0 5',
+        cls: 'cronk-left-content',
         
         layout: {
         	type: 'accordion',

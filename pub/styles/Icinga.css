@@ -11,7 +11,7 @@ div.cronk-data-view div.cronk-preview {
 
 div.cronk-data-view div.cronk-preview span {
 	display: block;
-	overflow: hidden;
+	overflow: hidden; 
 	text-align: center;
 }
 
@@ -27,6 +27,15 @@ div.cronk-data-view .x-view-selected{
 
 div.cronk-data-view .x-view-selected .thumb{
 	background:transparent;
+}
+
+/* div.x-portlet div.x-panel-body { */
+.cronk-left-content {
+	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom right;
+}
+
+.cronk-center-content {
+	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
 }
 
 /** THE STATUS **/
