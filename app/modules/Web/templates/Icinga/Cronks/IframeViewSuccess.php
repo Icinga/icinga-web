@@ -9,16 +9,17 @@
 
 </iframe>
 <script type="text/javascript">
-	var cmp = Ext.getCmp('center-frame');
+	var cmp = Ext.getCmp('<?php echo $htmlid; ?>');
 	
 	var iframe = Ext.get("<?php echo $newid; ?>");
 	iframe.setWidth(cmp.getWidth());
 	iframe.setHeight(cmp.getHeight());
 	
+	// Ext.Msg.alert('TEST', cmp.getHeight());
+	
 	Ext.getCmp('center-frame').on('resize', function(o) {
-		iframe.setWidth(Ext.getCmp('center-frame').getWidth());
-		iframe.setHeight(Ext.getCmp('center-frame').getHeight());
+		iframe.setWidth(Ext.getCmp('<?php echo $htmlid; ?>').getWidth());
+		iframe.setHeight(Ext.getCmp('<?php echo $htmlid; ?>').getHeight());
 	});
-
 </script>
 <?php } ?>

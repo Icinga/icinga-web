@@ -44,7 +44,8 @@ function initTabPanelDropZone(t) {
 						tabPanel.add({
 							title: data.dragData.name,
 							closable: true,
-							autoHeight: true,
+							height: Ext.getCmp('center-frame').getHeight(),
+							
 							id: id,
 							autoLoad: { 
 								url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
@@ -81,7 +82,8 @@ var container = new Ext.Panel({
 		title: 'MyView',
         margins: '0 0 0 5',
         items: tabPanel,
-        id: 'center-frame'
+        id: 'center-frame',
+        layout: 'fit'
 	}, {
 		region: 'west',
 		title: 'Misc',
