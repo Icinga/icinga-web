@@ -61,12 +61,6 @@ function initTabPanelDropZone(t) {
 
 }
 
-
-tabPanel.add({
-	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
-	title: 'Welcome'
-});
-
 var cronk_list_id = AppKit.genRandomId('cronk-');
 
 var container = new Ext.Panel({
@@ -122,6 +116,12 @@ var container = new Ext.Panel({
 });
 
 container.render("<?php echo $htmlid; ?>");
+
+tabPanel.add({
+	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
+	title: 'Welcome',
+	height: Ext.getCmp('center-frame').getHeight()
+});
 
 tabPanel.setActiveTab(0);
 tabPanel.doLayout();
