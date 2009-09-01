@@ -17,11 +17,7 @@
 				<div id="navigationTop">
 					<?php echo $slots['navigation_top']; ?>
 				</div>
-				
-				<div>
-					<?php echo AppKitHtmlHelper::Obj()->Image('icinga.icinga-logo', 'ICINGA'); ?>
-				</div>
-				
+
 			</div>
 			
 			<div id="frameMiddle">
