@@ -76,7 +76,7 @@ var container = new Ext.Panel({
 		title: 'MyView',
         margins: '0 0 0 5',
         cls: 'cronk-center-content',
-        items: tabPanel
+        items: tabPanel,
         id: 'center-frame',
         layout: 'fit'
 	}, {
