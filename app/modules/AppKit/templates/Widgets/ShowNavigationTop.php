@@ -25,6 +25,7 @@ YAHOO.util.Event.onContentReady("yahooTopMenu", function () {
 // ]]> -->
 </script>
 
+<div id="topBar">
 <div id="yahooTopMenu" class="yuimenubar yuimenubarnav">
 <div class="bd"> 
 <ul class="first-of-type">
@@ -61,10 +62,12 @@ YAHOO.util.Event.onContentReady("yahooTopMenu", function () {
 <?php } ?>
 
 <?php for ($i=$open; $i>0; $i--) {?>
-	</ul></div></div></li>
+	</ul></div></div>
+	</li>
 <?php } ?>
 </ul>
 </div>
 </div>
-
 <?php } ?>
+<a href="http://www.icinga.org/" target="_blank"><div id="icinga-logo-top"></div></a>
+</div>

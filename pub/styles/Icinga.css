@@ -35,6 +35,8 @@ div.cronk-data-view .x-view-selected .thumb{
 }
 
 .cronk-center-content .x-panel-body-noborder {
+	position: absolute;
+	right: 0px;
 	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
 }
 
@@ -123,4 +125,37 @@ table.icinga-attribute-table td.key {
 
 table.icinga-attribute-table td.val {
 	padding: 2px 2px 2px 2px;
+}
+
+/** MISC **/
+#topBar {
+	width: 100%;
+	/* border: 1px solid #ff0000; */
+	height: 21px;
+	background: white url(../images/background/navigation-top-bg.png) repeat top right;
+}
+
+.yui-skin-sam .yuimenubar {
+	border: none;
+}
+
+.yui-skin-sam .yuimenubaritemlabel {
+	border-top: none;
+	border-bottom: none;
+}
+
+.yui-skin-sam .yuimenubaritemlabel-selected {
+	border-left: solid 1px #ccc;
+}
+
+#yahooTopMenu {
+	width: 90%;
+	float: left;
+}
+
+#icinga-logo-top {
+	float: right;
+	width: 10%;
+	height: 21px;
+	background: url(../images/icinga/icinga-logo-small.png) no-repeat bottom right;
 }
