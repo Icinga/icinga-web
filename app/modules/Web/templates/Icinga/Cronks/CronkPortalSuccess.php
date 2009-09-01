@@ -8,7 +8,35 @@
 
 Ext.onReady(function(){
 
-Ext.BLANK_IMAGE_URL = '/images/ajax/s.gif';
+var tabContextmenut =  {
+	ctxItem : null,
+	
+	handle : function (panel, tab, e) {
+		if (!this.contextmenu) {
+			this.contextmenu = new Ext.menu.Menu({
+				items: [{
+					text: 'Close tab',
+					id: panel.id + '-close',
+					handler: function() {
+						panel.remove(ctxItem);
+					}
+				}, {
+					text: 'Refresh',
+					
+					handler: function() {
+						ctxItem.getUpdater().refresh();
+					}
+				}]
+			});
+		}
+		
+		ctxItem = tab;
+		
+		this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
+		
+		this.contextmenu.showAt(e.getPoint());
+	}
+}
 
 var tabPanel = new Ext.TabPanel({
 	autoHeight: true,
@@ -19,7 +47,8 @@ var tabPanel = new Ext.TabPanel({
 	
 	// Here comes the drop zone
 	listeners: {
-		render: initTabPanelDropZone
+		render: initTabPanelDropZone,
+		contextmenu: tabContextmenut.handle
 	}
 });
 
@@ -41,21 +70,30 @@ function initTabPanelDropZone(t) {
 							}
 						}
 						
-						tabPanel.add({
+						// out panel
+						var panel = new Ext.Panel({
+							height: Ext.getCmp('center-frame').getHeight(),
 							title: data.dragData.name,
 							closable: true,
-							height: Ext.getCmp('center-frame').getHeight(),
-							
-							id: id,
-							autoLoad: { 
-								url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
-								scripts: true,
-								params: params,
-							}
+							id: id
 						});
 						
+						// add them to the tabs
+						tabPanel.add(panel);
+						
+						// Render and set active
 						tabPanel.setActiveTab(tabPanel.items.length-1);
 						tabPanel.doLayout();
+						
+						// Reconfigure the updater to have the ability to refresh.
+						panel.getUpdater().setDefaultUrl({
+							url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
+							scripts: true,
+							params: params
+						})
+						
+						// initial refresh
+						panel.getUpdater().refresh();
 					}
 	});
 

@@ -156,6 +156,7 @@
 		}
 
 		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+		cmp.removeAll(true);
 		cmp.add(new Ext.grid.GridPanel(grid_config));
 		
 		Ext.getCmp('cronk-container').doLayout();

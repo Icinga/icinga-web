@@ -98,10 +98,6 @@
 		<!-- mootools -->
 		<!-- <parameter>%core.root_dir%/lib/mootools/mootools-1.2.1-core-yc.js</parameter> -->	
 		
-		<!--AppKit JS -->
-		<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter> 
-		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>
-		
 		<!-- SWF Object -->
 		<!-- <parameter>%core.root_dir%/lib/swfobject/swfobject.js</parameter> -->
 		
@@ -121,6 +117,11 @@
 		<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/RowLayout.js</parameter> -->
 		<!-- <parameter>%core.root_dir%/lib/ext2/examples/ux/SlidingPager.js</parameter>
 		<parameter>%core.root_dir%/lib/ext2/examples/ux/SliderTip.js</parameter> -->
+		
+		<!--AppKit JS -->
+		<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter> 
+		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/startup.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>

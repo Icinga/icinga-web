@@ -1,0 +1,14 @@
+#Tue Sep 01 14:00:43 CEST 2009
+eclipse.preferences.version=1
+org.eclipse.wst.jsdt.core.compiler.doc.comment.support=disabled
+org.eclipse.wst.jsdt.core.compiler.problem.invalidJavadoc=ignore
+org.eclipse.wst.jsdt.core.compiler.problem.invalidJavadocTags=disabled
+org.eclipse.wst.jsdt.core.compiler.problem.invalidJavadocTagsDeprecatedRef=disabled
+org.eclipse.wst.jsdt.core.compiler.problem.invalidJavadocTagsNotVisibleRef=disabled
+org.eclipse.wst.jsdt.core.compiler.problem.invalidJavadocTagsVisibility=public
+org.eclipse.wst.jsdt.core.compiler.problem.missingJavadocComments=ignore
+org.eclipse.wst.jsdt.core.compiler.problem.missingJavadocCommentsOverriding=disabled
+org.eclipse.wst.jsdt.core.compiler.problem.missingJavadocCommentsVisibility=public
+org.eclipse.wst.jsdt.core.compiler.problem.missingJavadocTags=ignore
+org.eclipse.wst.jsdt.core.compiler.problem.missingJavadocTagsOverriding=disabled
+org.eclipse.wst.jsdt.core.compiler.problem.missingJavadocTagsVisibility=public
