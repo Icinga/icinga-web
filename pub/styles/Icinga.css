@@ -35,8 +35,6 @@ div.cronk-data-view .x-view-selected .thumb{
 }
 
 .cronk-center-content .x-panel-body-noborder {
-	position: absolute;
-	right: 0px;
 	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
 }
 

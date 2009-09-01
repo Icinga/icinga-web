@@ -10,9 +10,9 @@
 				<ae:parameter name="username">icinga_dev</ae:parameter>
 				<ae:parameter name="password">icinga_dev</ae:parameter>
 				-->
-				<ae:parameter name="dsn">mysql://icinga_dev:icinga_dev@127.0.0.1:3307/icinga</ae:parameter>
-				<ae:parameter name="username">icinga_dev</ae:parameter>
-				<ae:parameter name="password">icinga_dev</ae:parameter>
+				<ae:parameter name="dsn">mysql://icinga_web:icinga_web@127.0.0.1:3306/icinga_web</ae:parameter>
+				<ae:parameter name="username">icinga_web</ae:parameter>
+				<ae:parameter name="password">icinga_web</ae:parameter>
 				<ae:parameter name="charset">utf8</ae:parameter>
 				
 				<ae:parameter name="manager_attributes">
