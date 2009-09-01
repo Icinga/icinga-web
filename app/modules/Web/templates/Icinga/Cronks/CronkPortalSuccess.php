@@ -118,6 +118,7 @@ var container = new Ext.Panel({
         layout: 'fit'
 	}, {
 		region: 'west',
+		id: 'west-frame',
 		title: 'Misc',
         split: true,
         minSize: 200,
@@ -144,7 +145,7 @@ var container = new Ext.Panel({
             title: 'Cronks',
             id: cronk_list_id,
             autoLoad: {
-            	url: '<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>',
+            	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>",
             	scripts: true,
             	params: { 'p[htmlid]': cronk_list_id }
         	}
@@ -160,6 +161,8 @@ tabPanel.add({
 	title: 'Welcome',
 	height: Ext.getCmp('center-frame').getHeight()
 });
+
+Ext.getCmp('west-frame').getLayout().setActiveItem(2);
 
 tabPanel.setActiveTab(0);
 tabPanel.doLayout();
