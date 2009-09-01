@@ -50,14 +50,15 @@
 		<parameter>/styles/WireFrameYUI.css</parameter>
 		
 		<!-- ExtJS -->
-		<parameter>/js/ext3/resources/css/ext-all.css</parameter>
-		<parameter>/js/ext3/examples/ux/css/ux-all.css</parameter>
+		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
 		
 		
 		<!-- Misc css -->
 		<!-- <parameter>/js/gc-prettify/prettify.css</parameter> -->
 		
 		<!-- ICINGA -->
+		<parameter>/styles/extjs/ext-all.css</parameter>
+		<parameter>/styles/extjs/ux-all.css</parameter>
 		<parameter>/styles/Icinga.css</parameter>
 		
 		
@@ -161,11 +162,18 @@
 			
 			<parameter name="config_type">mysql</parameter>
 			<parameter name="config_host">127.0.0.1</parameter>
+
 			<parameter name="config_port">3307</parameter>
 			<parameter name="config_database">ndo_demo</parameter>
+			
+			<!--
+			<parameter name="config_port">3306</parameter>
+			<parameter name="config_database">icinga</parameter>
+			-->
 			<parameter name="config_user">icinga</parameter>
 			<parameter name="config_password">icinga</parameter>
 			<parameter name="config_table_prefix">nagios_</parameter>
+			<!-- <parameter name="config_table_prefix">icinga_</parameter> -->
 		</parameter>
 	</setting>
 	
