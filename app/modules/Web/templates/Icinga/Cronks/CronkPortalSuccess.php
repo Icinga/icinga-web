@@ -20,6 +20,10 @@ var tabPanel = new Ext.TabPanel({
 	// Here comes the drop zone
 	listeners: {
 		render: initTabPanelDropZone
+	},
+
+	defaults: {
+		cls: ''
 	}
 });
 

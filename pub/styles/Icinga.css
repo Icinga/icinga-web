@@ -30,11 +30,11 @@ div.cronk-data-view .x-view-selected .thumb{
 }
 
 /* div.x-portlet div.x-panel-body { */
-.cronk-left-content {
+.cronk-left-content .x-panel-body-noborder {
 	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom right;
 }
 
-.cronk-center-content {
+.cronk-center-content .x-panel-body-noborder {
 	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
 }
 
