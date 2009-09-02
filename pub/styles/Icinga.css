@@ -125,7 +125,7 @@ table.icinga-attribute-table td.val {
 	padding: 2px 2px 2px 2px;
 }
 
-/** MISC **/
+/** TOP BAR **/
 #topBar {
 	width: 100%;
 	/* border: 1px solid #ff0000; */
@@ -168,4 +168,8 @@ table.icinga-attribute-table td.val {
 	float: right;
 	margin-top: 4px;	
 	font-size: 10px;
+}
+
+/** TOP-VIEW BAR **/
+#viewBarTop {
 }
