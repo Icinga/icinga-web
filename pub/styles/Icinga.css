@@ -147,13 +147,25 @@ table.icinga-attribute-table td.val {
 }
 
 #yahooTopMenu {
-	width: 90%;
+	width: 50%;
 	float: left;
 }
 
 #icinga-logo-top {
 	float: right;
-	width: 10%;
+	width: 65px;
 	height: 21px;
 	background: url(../images/icinga/icinga-logo-small.png) no-repeat bottom right;
+}
+
+#rss-top {
+	float: right;
+	margin-top: 4px;
+	margin-left: 12px;	
+}
+
+#links-top {
+	float: right;
+	margin-top: 4px;	
+	font-size: 10px;
 }
