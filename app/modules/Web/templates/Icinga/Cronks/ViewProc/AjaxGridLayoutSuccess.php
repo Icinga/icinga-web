@@ -100,7 +100,7 @@
 			store = new Ext.data.Store(store_config); 
 		}
 		
-		var h = Ext.getCmp('<?php echo $rd->getParameter('htmlid'); ?>').getHeight()-50;
+		var h = Ext.getCmp('<?php echo $rd->getParameter('htmlid'); ?>').getHeight()-53;
 		
 		// Our grid
 		var grid_config = {

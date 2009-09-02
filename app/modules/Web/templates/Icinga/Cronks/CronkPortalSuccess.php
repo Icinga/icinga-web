@@ -8,35 +8,38 @@
 
 Ext.onReady(function(){
 
-var tabContextmenut =  {
-	ctxItem : null,
+var TabContextMenu =  function(){
+	var ctxItem = null;
 	
-	handle : function (panel, tab, e) {
-		if (!this.contextmenu) {
-			this.contextmenu = new Ext.menu.Menu({
-				items: [{
-					text: 'Close tab',
-					id: panel.id + '-close',
-					handler: function() {
-						panel.remove(ctxItem);
-					}
-				}, {
-					text: 'Refresh',
-					
-					handler: function() {
-						ctxItem.getUpdater().refresh();
-					}
-				}]
-			});
+	return {
+		handle : function (panel, tab, e) {
+			if (!this.contextmenu) {
+				this.contextmenu = new Ext.menu.Menu({
+					items: [{
+						text: 'Close tab',
+						id: panel.id + '-close',
+						handler: function() {
+							panel.remove(ctxItem);
+						}
+					}, {
+						text: 'Refresh',
+						
+						handler: function() {
+							ctxItem.getUpdater().refresh();
+						}
+					}]
+				});
+			}
+			
+			ctxItem = tab;
+			
+			this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
+			
+			this.contextmenu.showAt(e.getPoint());
 		}
-		
-		ctxItem = tab;
-		
-		this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
-		
-		this.contextmenu.showAt(e.getPoint());
-	}
-}
+	};
+	
+}();
 
 var tabPanel = new Ext.TabPanel({
 	autoHeight: true,
@@ -48,7 +51,7 @@ var tabPanel = new Ext.TabPanel({
 	// Here comes the drop zone
 	listeners: {
 		render: initTabPanelDropZone,
-		contextmenu: tabContextmenut.handle
+		contextmenu: TabContextMenu.handle
 	}
 });
 
@@ -100,6 +103,7 @@ function initTabPanelDropZone(t) {
 }
 
 var cronk_list_id = AppKit.genRandomId('cronk-');
+var cronk_search_id = AppKit.genRandomId('cronk-');
 
 var container = new Ext.Panel({
 	layout: 'border',
@@ -110,6 +114,30 @@ var container = new Ext.Panel({
 	id: 'cronk-container', // OUT CENTER COMPONENT!!!!!
 	
 	items: [{
+		region: 'north',
+		id: 'north-frame',
+		layout: 'column',
+		height: 29,
+		
+		defaults: {
+			border: false
+		},
+		
+		style: {
+			'margin-left': '5px'
+		},
+		
+		items: [{
+			columnWidth: .33,
+			id: cronk_search_id
+		}, {
+			columnWidth: .33,
+			html: 'test2'	
+		}, {
+			columnWidth: .33,
+			html: 'test3'	
+		}]
+	}, {
 		region: 'center',
 		title: 'MyView',
         margins: '0 0 0 5',
@@ -145,12 +173,7 @@ var container = new Ext.Panel({
             html: 'Some settings in here.'
         }, {
             title: 'Cronks',
-            id: cronk_list_id,
-            autoLoad: {
-            	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>",
-            	scripts: true,
-            	params: { 'p[htmlid]': cronk_list_id }
-        	}
+            id: cronk_list_id
         }]
 
 	}]
@@ -158,18 +181,40 @@ var container = new Ext.Panel({
 
 container.render("<?php echo $htmlid; ?>");
 
+// Adding the first cronk (say hello here)
 tabPanel.add({
 	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
 	title: 'Welcome',
 	height: Ext.getCmp('center-frame').getHeight()
 });
 
+// Adding the cronk list
+var coList = Ext.getCmp(cronk_list_id)
+coList.getUpdater().setDefaultUrl({
+	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>",
+	scripts: true,
+    params: { 'p[htmlid]': cronk_list_id }
+});
+coList.getUpdater().refresh();
+
+// Search component
+var coSearch = Ext.getCmp(cronk_search_id)
+coSearch.getUpdater().setDefaultUrl({
+	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'icingaSearch')); ?>",
+	scripts: true,
+    params: { 'p[htmlid]': cronk_search_id }
+});
+coSearch.getUpdater().refresh();
+
+
+// Set default active items
 Ext.getCmp('west-frame').getLayout().setActiveItem(2);
-
 tabPanel.setActiveTab(0);
-tabPanel.doLayout();
 
+// Inform about layout changes
 container.doLayout();
+
+
 
 });
 </script>
