@@ -19,6 +19,12 @@
 				</div>
 
 			</div>
+
+			<div id="viewBarTop">
+
+				
+
+			</div>
 			
 			<div id="frameMiddle">
 				
