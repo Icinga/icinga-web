@@ -24,6 +24,14 @@
 					</errors>
 		</validator>
 		
+		<validator class="string" name="t" required="true">
+					<argument>t</argument>
+					
+					<errors>
+						<error>Validation of search type (t) failed!</error>
+					</errors>
+		</validator>
+		
 		</validators>
 		
 	</ae:configuration>

@@ -16,6 +16,12 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 	private $query = null;
 	
 	/**
+	 * A searchtype
+	 * @var string
+	 */
+	private $type = null;
+	
+	/**
 	 * The mapping array
 	 * @var array
 	 */
@@ -51,7 +57,7 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 			)
 		),
 		
-		'service_group' => array (
+		'servicegroup' => array (
 			'target'		=> IcingaApi::TARGET_SERVICEGROUP,
 			'search'		=> 'SERVICEGROUP_NAME',
 		
@@ -76,6 +82,10 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 		$this->query = $query;
 	}
 	
+	public function setSearchType($type) {
+		$this->type = $type;
+	}
+	
 	public function getData() {
 		return $this->bulkQuery();
 	}
@@ -84,7 +94,16 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 		
 		$data = array ();
 		
-		foreach (array_keys($this->mapping) as $mapping) {
+		// We want only one specific type
+		if ($this->type && array_key_exists($this->type, $this->mapping)) {
+			$mappings = array($this->type);
+			
+		}
+		else {
+			$mappings = array_keys($this->mapping);
+		}
+		
+		foreach ($mappings as $mapping) {
 			$md = $this->mapping[$mapping];
 			$fields = $md['fields'];
 			$search = $fields[ $md[''] ];

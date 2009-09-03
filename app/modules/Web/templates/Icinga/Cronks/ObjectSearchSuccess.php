@@ -44,7 +44,10 @@
 				oStores[type] = new Ext.data.Store({
 					autoLoad: false,
 					proxy: oProxy(),
-					reader: reader
+					reader: reader,
+					baseParams: {
+						t: type
+					}
 				});
 				
 				// Write the sums to the title
@@ -91,7 +94,7 @@
 					singleSelect: true,
 					
 					prepareData: function(data) {
-						data.object_name = Ext.util.Format.ellipsis(data.object_name, 10);
+						data.object_name = Ext.util.Format.ellipsis(data.object_name, 15);
 						return data;
 					},
 					
@@ -163,6 +166,10 @@
 								title: 'Hostgroups (0)',
 								items: oList('hostgroup'),
 								id: 'osearch-tab-hostgroup'
+							},{
+								title: 'Servicegroups (0)',
+								items: oList('servicegroup'),
+								id: 'osearch-tab-servicegroup'
 							}]
 						}]
 					}]
@@ -174,6 +181,9 @@
 		
 		return {
 			
+			/*
+			 * Keyup handler
+			 */
 			keyup : function(field, e) {
 				val = field.getValue();
 				if (val && val.length >= 1) {
@@ -187,6 +197,7 @@
 					
 					oWindow().setTitle('Search: ' + val);
 					
+					// On keyup, reload all available stores
 					var stores = ['host', 'service', 'hostgroup', 'servicegroup'];
 					for (var i=0;i<stores.length;i++) {
 						oStore(stores[i]).reload({ params: { q: val } });
@@ -208,7 +219,10 @@
 		enableKeyEvents: true,
 		
 		listeners: {
-			keyup: oSearchHandler.keyup
+			keyup: {
+				fn: oSearchHandler.keyup,
+				delay: 100
+			}
 		}
 	});
 	

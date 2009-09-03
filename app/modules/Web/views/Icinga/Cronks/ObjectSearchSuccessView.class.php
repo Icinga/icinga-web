@@ -20,6 +20,11 @@ class Web_Icinga_Cronks_ObjectSearchSuccessView extends ICINGAWebBaseView
 		
 		$this->model = $this->getContext()->getModel('Icinga.Cronks.ObjectSearchResult', 'Web');
 		$this->model->setQuery($rd->getParameter('q'));
+		
+		if ($rd->getParameter('t')) {
+			$this->model->setSearchType($rd->getParameter('t'));
+		}
+		
 		$data = $this->model->getData();
 		
 		return json_encode($data);
