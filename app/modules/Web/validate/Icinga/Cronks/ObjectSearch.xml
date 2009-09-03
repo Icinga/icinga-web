@@ -16,6 +16,14 @@
 					</errors>
 		</validator>
 		
+		<validator class="string" name="q" required="true">
+					<argument>q</argument>
+					
+					<errors>
+						<error>Validation of search query (q) failed!</error>
+					</errors>
+		</validator>
+		
 		</validators>
 		
 	</ae:configuration>

@@ -2,6 +2,29 @@
 
 /** CRONKS **/
 
+div.icinga-osearch-frame div.icinga-osearch-wrap {
+	float: left;
+	margin: 4px;
+	margin-right: 0;
+	padding: 5px;
+	width: 50px;
+
+}
+
+div.icinga-osearch-frame div.icinga-osearch-wrap img {
+	text-align: center;	
+}
+
+div.icinga-osearch-frame .x-view-over {
+	background-color: #f1f1f1;
+	padding: 5px;
+}
+
+div.icinga-osearch-frame .x-view-selected {
+	background-color: #F5A9A9;
+	padding: 5px;
+}
+
 div.cronk-data-view div.cronk-preview {
 	float: left;
 	margin-right: 0;
