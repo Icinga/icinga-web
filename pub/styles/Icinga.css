@@ -186,3 +186,11 @@ table.icinga-attribute-table td.val {
 	margin-top: 4px;	
 	font-size: 10px;
 }
+
+/** NORTH FRAME **/
+#north-frame {
+}
+
+#north-frame div {
+	border: none;
+}
