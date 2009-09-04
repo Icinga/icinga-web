@@ -6,6 +6,7 @@
 	var coParent = Ext.getCmp(oid);
 	
 	var oSearchHandler =  function() {
+		
 		var val;
 		var ctWindow;
 		var proxy;
@@ -13,12 +14,18 @@
 		var oStores = {};
 		var oViews = {};
 		
+		var keytime;
+		
+		var noresult = false;
+		
 		var titles = {
 			'host': 		'Hosts ({0})',
 			'service':		'Services ({0})',
 			'hostgroup':	'Hostgroups ({0})',
 			'servicegroup':	'Servicegroups ({0})'
 		};
+		
+		var stores = ['host', 'service', 'hostgroup', 'servicegroup'];
 		
 		function oProxy() {
 			if (!proxy) {
@@ -32,7 +39,14 @@
 		function oStore(type) {
 			if (!oStores[type]) {
 				var record = new Ext.data.Record.create([
+					{name: 'object_id'},
 	    			{name: 'object_name'},
+	    			{name: 'description'},
+	    			{name: 'object_name2'},
+	    			
+	    			{name: 'data1'},
+	    			{name: 'data2'},
+	    			{name: 'data3'}
 				]);
 				
 				var reader = new Ext.data.JsonReader({      
@@ -53,10 +67,55 @@
 				// Write the sums to the title
 				oStores[type].on('load', function(store, record, o) {
 					Ext.getCmp('osearch-tab-' + type).setTitle(String.format(titles[type], store.getTotalCount()));
+					oSearchHandler.calcResultApproach();
+					oSearchHandler.checkNoResult();
 				})
 			}
 			
 			return oStores[type];
+		}
+		
+		function oTemplate(type) {
+			
+			var template;
+			
+			switch (type) {
+				
+				case 'host':
+					template = new Ext.XTemplate(
+					    '<tpl for=".">',
+					        '<div class="icinga-osearch-wrap" id="{object_name}">',
+					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
+					        '<div><span>{object_short_name}</span><br /><span>({data1})</span></div></div>',
+					    '</tpl>',
+					    '<div class="x-clear"></div>'
+					);
+				break;
+				
+				case 'service':
+					template = new Ext.XTemplate(
+					    '<tpl for=".">',
+					        '<div class="icinga-osearch-wrap" id="{object_name}" ext:qtip="{description}">',
+					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
+					        '<div><span>{object_short_name}</span><br /><span>({object_name2})</span></div></div>',
+					    '</tpl>',
+					    '<div class="x-clear"></div>'
+					);
+				break;
+				
+				default:
+					template = new Ext.XTemplate(
+					    '<tpl for=".">',
+					        '<div class="icinga-osearch-wrap" id="{object_name}">',
+					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
+					        '<div><span>{object_short_name}</span></div></div>',
+					    '</tpl>',
+					    '<div class="x-clear"></div>'
+					);
+				break;
+			}
+			
+			return template;
 		}
 		
 		function oList(type) {
@@ -66,14 +125,7 @@
 				var store = oStore(type);
 				// store.load({params: {q: 'f'}});
 				
-				var tpl = new Ext.XTemplate(
-				    '<tpl for=".">',
-				        '<div class="icinga-osearch-wrap" id="{object_name}" ext:qtip="{description}">',
-				        '<div class="thumb"><img src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>" title="{object_name}"></div>',
-				        '<span>{object_name}</span></div>',
-				    '</tpl>',
-				    '<div class="x-clear"></div>'
-				);
+				var tpl = oTemplate(type);
 				
 				oViews[type] = new Ext.DataView({
 					store: store,
@@ -94,8 +146,17 @@
 					singleSelect: true,
 					
 					prepareData: function(data) {
-						data.object_name = Ext.util.Format.ellipsis(data.object_name, 15);
+						data.object_short_name = Ext.util.Format.ellipsis(data.object_name, 10);
+						
+						if (type == 'host') {
+							data.description = String.format('{0}, {1}', data.description, data.data1);
+						}
+						
 						return data;
+					},
+					
+					listeners: {
+						dblclick: oSearchHandler.doubleClickProc
 					},
 					
 					tpl: tpl
@@ -105,6 +166,8 @@
 			
 			return oViews[type];
 		}
+		
+		
 		
 		function oWindow() {
 			if (!ctWindow) {
@@ -152,6 +215,8 @@
 								autoScroll: true
 							},
 							
+							id: 'osearch-result-tabs',
+							
 							items: [{
 								title: 'Objects'
 							}, {
@@ -187,6 +252,7 @@
 			keyup : function(field, e) {
 				val = field.getValue();
 				if (val && val.length >= 1) {
+					
 					if (!oWindow().isVisible()) {
 						var xy = field.getPosition();
 						xy[0] += field.getSize().width + 10;
@@ -197,21 +263,93 @@
 					
 					oWindow().setTitle('Search: ' + val);
 					
-					// On keyup, reload all available stores
-					var stores = ['host', 'service', 'hostgroup', 'servicegroup'];
-					for (var i=0;i<stores.length;i++) {
-						oStore(stores[i]).reload({ params: { q: val } });
-					}
+					// Buffer the ajax load
+					keytime = new Date();
+					
+					oSearchHandler.reloadAllStores.defer(90);
+					
 				}
 				else {
 					oWindow().hide();
 				}
+			},
+			
+			reloadAllStores : function() {
+				var testdate = new Date();
+				if (keytime && (testdate.getTime() - keytime.getTime()) > 50) {
+					
+					Ext.each(stores, function(key, index, ary) {
+						oStore(key).reload({ params: { q: val } });	
+					})
+				}
+			},
+			
+			calcResultApproach : function() {
+				var mStore = new Array(null,0);
+				
+				Ext.each(stores, function(key, index, ary) {
+						if (oStore(key).getTotalCount() > mStore[1]) {
+							mStore[0] = key;
+							mStore[1] = oStore(key).getTotalCount();
+						}	
+				});
+				
+				if (mStore[0]) {
+					Ext.getCmp('osearch-result-tabs').setActiveTab( 'osearch-tab-' + mStore[0] );
+				}
+			},
+			
+			checkNoResult : function() {
+				var test = 0;
+				
+				Ext.each(stores, function(key, index, ary) {
+					test += oStore(key).getTotalCount();
+				});
+				
+				if (test > 0 && noresult == true) {
+					noresult = false;
+				}
+				
+				if (noresult == false && test == 0) {
+					noresult = true;
+					AppKit.Ext.Message('Search', 'No results!');
+				}
+			},
+			
+			doubleClickProc : function(view, index, node, e) {
+				var re = view.getStore().getAt(index);
+				
+				// Create a self loading crong :-)
+				var panel = AppKit.Ext.createCronk({
+					htmlid: 'search-result',
+					title: 'Search result (DUMMY)',
+					crname: 'gridProc',
+					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+					closable: true,
+					
+					params: {
+						'template': 'icinga-service-template'
+					},
+					
+					height: Ext.getCmp('center-frame').getHeight()
+				});
+
+				// Add them to the panel and set active				
+				var tab = Ext.getCmp('cronk-tabs').add(panel);
+				Ext.getCmp('cronk-tabs').setActiveTab(tab);
+				
+				// Remove our window!
+				oTextField.setValue('');
+				oWindow().hide();
+				
+				// Notify about changes!
+				Ext.getCmp('cronk-container').doLayout();
 			}
 
 		};
 		
 	}();
-	
+
 	var oTextField = new Ext.form.TextField({
 		title: 'Search',
 		xtype: 'textfield',

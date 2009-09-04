@@ -33,7 +33,10 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOST_NAME',
-				'object_id'		=> 'HOST_OBJECT_ID'
+				'object_id'		=> 'HOST_OBJECT_ID',
+				'description'	=> 'HOST_ALIAS',
+	
+				'data1'			=> 'HOST_ADDRESS'
 			)
 		),
 		
@@ -43,7 +46,9 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICE_NAME',
-				'object_id'		=> 'SERVICE_OBJECT_ID'
+				'object_id'		=> 'SERVICE_OBJECT_ID',
+				'object_name2'	=> 'HOST_NAME',
+				'description'	=> 'SERVICE_DISPLAY_NAME'
 			)
 		),
 		
@@ -53,7 +58,8 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOSTGROUP_NAME',
-				'object_id'		=> 'HOSTGROUP_OBJECT_ID'
+				'object_id'		=> 'HOSTGROUP_OBJECT_ID',
+				'description'	=> 'HOSTGROUP_ALIAS'
 			)
 		),
 		
@@ -63,7 +69,8 @@ class Web_Icinga_Cronks_ObjectSearchResultModel extends ICINGAWebBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICEGROUP_NAME',
-				'object_id'		=> 'SERVICEGROUP_OBJECT_ID'
+				'object_id'		=> 'SERVICEGROUP_OBJECT_ID',
+				'description'	=> 'SERVICEGROUP_ALIAS'
 			)
 		),
 	);

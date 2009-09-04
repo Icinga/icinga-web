@@ -219,6 +219,16 @@
 			<parameter name="name">HelloWorld</parameter>
 		</parameter>
 	
+		<parameter name="gridProc">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.ViewProc</parameter>
+			<parameter name="hide">true</parameter>
+			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="parameter">
+				
+			</parameter>
+		</parameter>
+	
 		<parameter name="gridServiceView">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">Icinga.Cronks.ViewProc</parameter>
