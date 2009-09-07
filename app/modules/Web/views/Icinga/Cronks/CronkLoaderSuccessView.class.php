@@ -16,6 +16,19 @@ class Web_Icinga_Cronks_CronkLoaderSuccessView extends ICINGAWebBaseView
 				$parameters->setParameter('htmlid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
 			}
 			
+			// Adding default parameters if they are not overwritten
+			$meta = AgaviConfig::get('de.icinga.web.cronks');
+			if (array_key_exists($cronk, $meta)) {
+				$meta = $meta[$cronk];
+				if (array_key_exists('parameter', $meta) && is_array($meta['parameter'])) {
+					foreach ($meta['parameter'] as $pKey=>$pVal) {
+						if ($parameters->getParameter($pKey, null) == null) {
+							$parameters->setParameter($pKey, $pVal);
+						}
+					}
+				} 
+			}
+			
 			if (array_key_exists($cronk, $cronks)) {
 				$module = $cronks[$cronk]['module'];
 				$action = $cronks[$cronk]['action'];

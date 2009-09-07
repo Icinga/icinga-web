@@ -15,6 +15,14 @@
 					</errors>
 				</validator>
 				
+				<validator class="number" name="height" required="false">
+					<argument>height</argument>
+					
+					<errors>
+						<error>Validation of height failed!</error>
+					</errors>
+				</validator>
+				
 				<validator class="string" name="htmlid" required="false">
 					<argument>htmlid</argument>
 					

@@ -109,11 +109,11 @@ var container = new Ext.Panel({
 	layout: 'border',
 	border: false,
 	monitorResize: true,
-	height: 600,
+	height: 776,
 	
 	id: 'cronk-container', // OUT CENTER COMPONENT!!!!!
 	
-	items: [{
+	items: [{	// -- NORTH
 		region: 'north',
 		id: 'north-frame',
 		layout: 'column',
@@ -122,11 +122,7 @@ var container = new Ext.Panel({
 		defaults: {
 			border: false
 		},
-		
-		style: {
-			'margin-left': '5px'
-		},
-		
+				
 		items: [{
 			columnWidth: .33,
 			id: cronk_search_id
@@ -137,7 +133,16 @@ var container = new Ext.Panel({
 			columnWidth: .33,
 			html: 'test3'	
 		}]
-	}, {
+	}, { // -- SOUTH
+		region: 'south',
+		title: '<?php echo $tm->_("Log"); ?>',
+		collapsible: true,
+		id: 'south-frame',
+		height: 156,
+		style: {
+			'margin-top': '5px'
+		}
+	}, { // -- CENTER
 		region: 'center',
 		title: 'MyView',
         margins: '0 0 0 5',
@@ -145,7 +150,7 @@ var container = new Ext.Panel({
         items: tabPanel,
         id: 'center-frame',
         layout: 'fit'
-	}, {
+	}, { // -- WEST
 		region: 'west',
 		id: 'west-frame',
 		title: 'Misc',
@@ -206,6 +211,31 @@ coSearch.getUpdater().setDefaultUrl({
 });
 coSearch.getUpdater().refresh();
 
+// LOG bottom component
+var coLog = Ext.getCmp('south-frame');
+coLog.getUpdater().setDefaultUrl({
+	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'gridLogView')); ?>",
+	scripts: true,
+    params: { 'p[htmlid]': 'south-frame' }
+});
+
+// After the LOG component is added, start autorefresh
+coLog.on('add', function(el, component, index) {
+	if (index == 0) {
+		var refreshHander = function() {
+			component.getStore().reload();
+		}
+		
+		Ext.TaskMgr.start({
+			run: refreshHander,
+			interval: 60 * 1000 // 60s
+		});
+	}
+});
+
+// Load the LOG component
+coLog.getUpdater().refresh();
+
 
 // Set default active items
 Ext.getCmp('west-frame').getLayout().setActiveItem(2);
@@ -213,8 +243,6 @@ tabPanel.setActiveTab(0);
 
 // Inform about layout changes
 container.doLayout();
-
-
 
 });
 </script>
