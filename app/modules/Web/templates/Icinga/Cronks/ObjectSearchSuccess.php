@@ -32,7 +32,7 @@
 		
 		items: [{
 			title: 'Search',
-			xtype: 'textfield',
+			xtype: 'fancytextfield',
 			name: 'q',
 			enableKeyEvents: true,
 			

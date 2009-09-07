@@ -117,7 +117,6 @@ var container = new Ext.Panel({
 		region: 'north',
 		id: 'north-frame',
 		layout: 'column',
-		height: 29,
 		
 		defaults: {
 			border: false
