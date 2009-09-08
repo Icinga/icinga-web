@@ -42,11 +42,8 @@ var TabContextMenu =  function(){
 }();
 
 var tabPanel = new Ext.TabPanel({
-	autoHeight: true,
-	autoScroll: true,
-
-	border: false,
 	id: 'cronk-tabs',
+	border: false,
 	
 	// Here comes the drop zone
 	listeners: {
@@ -73,12 +70,12 @@ function initTabPanelDropZone(t) {
 							}
 						}
 						
-						// out panel
+						// our panel
 						var panel = new Ext.Panel({
-							height: Ext.getCmp('center-frame').getHeight(),
 							title: data.dragData.name,
 							closable: true,
-							id: id
+							id: id,
+							layout: 'fit'
 						});
 						
 						// add them to the tabs
@@ -86,7 +83,6 @@ function initTabPanelDropZone(t) {
 						
 						// Render and set active
 						tabPanel.setActiveTab(tabPanel.items.length-1);
-						tabPanel.doLayout();
 						
 						// Reconfigure the updater to have the ability to refresh.
 						panel.getUpdater().setDefaultUrl({
@@ -111,14 +107,16 @@ var container = new Ext.Panel({
 	monitorResize: true,
 	height: 776,
 	
-	id: 'cronk-container', // OUT CENTER COMPONENT!!!!!
+	id: 'view-container', // OUT CENTER COMPONENT!!!!!
 	
 	items: [{	// -- NORTH
 		region: 'north',
 		id: 'north-frame',
 		layout: 'column',
+		border: false,
 		
 		defaults: {
+			layout: 'fit',
 			border: false
 		},
 				
@@ -137,7 +135,8 @@ var container = new Ext.Panel({
 		title: '<?php echo $tm->_("Log"); ?>',
 		collapsible: true,
 		id: 'south-frame',
-		height: 156,
+		layout: 'fit',
+		height: 150,
 		style: {
 			'margin-top': '5px'
 		}
@@ -145,9 +144,10 @@ var container = new Ext.Panel({
 		region: 'center',
 		title: 'MyView',
         margins: '0 0 0 5',
-        items: tabPanel,
+        cls: 'cronk-center-content',
         id: 'center-frame',
-        layout: 'fit'
+        layout: 'fit',
+        items: tabPanel
 	}, { // -- WEST
 		region: 'west',
 		id: 'west-frame',
@@ -181,13 +181,23 @@ var container = new Ext.Panel({
 	}]
 });
 
+// Resize the container on windowResize
+Ext.EventManager.onWindowResize(function(w,h) {
+	this.setHeight(h-80);
+	this.doLayout();
+}, container);
+
+// Set initial size
+container.setHeight(Ext.lib.Dom.getViewHeight()-80);
+
+// Render the container
 container.render("<?php echo $htmlid; ?>");
 
 // Adding the first cronk (say hello here)
 tabPanel.add({
 	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
 	title: 'Welcome',
-	height: Ext.getCmp('center-frame').getHeight()
+	// height: Ext.getCmp('center-frame').getHeight()
 });
 
 // Adding the cronk list
@@ -240,6 +250,9 @@ tabPanel.setActiveTab(0);
 
 // Inform about layout changes
 container.doLayout();
+
+
+
 
 });
 </script>

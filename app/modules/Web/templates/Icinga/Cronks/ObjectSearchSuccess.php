@@ -326,12 +326,11 @@
 					crname: 'gridProc',
 					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 					closable: true,
+					layout: 'fit',
 					
 					params: {
 						'template': 'icinga-service-template'
-					},
-					
-					height: Ext.getCmp('center-frame').getHeight()
+					}
 				});
 
 				// Add them to the panel and set active				
@@ -343,7 +342,8 @@
 				oWindow().hide();
 				
 				// Notify about changes!
-				Ext.getCmp('cronk-container').doLayout();
+				tab.doLayout();
+				Ext.getCmp('view-container').doLayout();
 			}
 
 		};
