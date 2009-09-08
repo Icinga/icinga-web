@@ -113,10 +113,10 @@ var container = new Ext.Panel({
 		region: 'north',
 		id: 'north-frame',
 		layout: 'column',
-		autoHeight: true,
 		border: false,
 		
 		defaults: {
+			layout: 'fit',
 			border: false
 		},
 				
@@ -158,7 +158,6 @@ var container = new Ext.Panel({
         width: 200,
         collapsible: true,
         margins: '0 0 0 5',
-        cls: 'cronk-left-content',
         
         layout: {
         	type: 'accordion',

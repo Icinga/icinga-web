@@ -20,12 +20,6 @@
 
 			</div>
 
-			<div id="viewBarTop">
-
-				
-
-			</div>
-			
 			<div id="frameMiddle">
 				
 				<?php echo $slots['navigation_left']; ?>

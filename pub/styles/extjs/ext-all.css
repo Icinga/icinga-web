@@ -839,7 +839,9 @@ ul.x-tab-strip li.x-tab-edge {
     border-top:0 none;
     overflow:hidden;
     padding:2px;
-}/* all fields */
+}
+
+/* all fields */
 .x-form-field{
     margin: 0 0 0 0;
 }
@@ -850,7 +852,7 @@ ul.x-tab-strip li.x-tab-edge {
 
 /* ---- text fields ---- */
 .x-form-text, textarea.x-form-field{
-    padding:1px 3px;
+    /*padding:1px 3px;*/
     background:repeat-x 0 0;
     border:1px solid;
 }
@@ -961,7 +963,8 @@ textarea {
 
 .x-form-field-wrap {
     position:relative;
-    left:0;top:0;
+    left:0;
+    top:0;
     zoom:1;
     white-space: nowrap;
 }
@@ -1071,7 +1074,7 @@ textarea {
 
 .x-form-item {
     display:block;
-    margin-bottom:4px;
+    /*margin-bottom:4px;*/
     zoom:1;
 }
 
@@ -1079,8 +1082,8 @@ textarea {
     display:block;
     float:left;
     width:100px;
-    padding:3px;
-    padding-left:0;
+    /*padding:3px;
+    padding-left:0;*/
     clear:left;
     z-index:2;
     position:relative;
@@ -1112,7 +1115,7 @@ textarea {
     float:none;
     clear:none;
     display:inline;
-    margin-bottom:4px;
+    /*margin-bottom:4px;*/
     position:static;
 }
 
@@ -1122,7 +1125,7 @@ textarea {
 }
 
 .x-form-label-top .x-form-item {
-    padding-bottom:4px;
+    /*padding-bottom:4px;*/
 }
 
 /* Editor small font for grid, toolbar and tree */
@@ -1166,7 +1169,10 @@ textarea {
     height:19px;
 }
 
-.ext-webkit .x-small-editor .x-form-text{padding-top:3px;font-size:100%;}
+.ext-webkit .x-small-editor .x-form-text{
+	padding-top:3px;
+	font-size:100%;
+}
 
 .x-form-clear {
     clear:both;
@@ -3761,24 +3767,25 @@ a.x-menu-item {
 
 .x-box-ml {
 	background: transparent repeat-y 0;
-	padding-left: 4px;
+	/*padding-left: 4px;*/
 	overflow: hidden;
     zoom:1;
 }
 
 .x-box-mc {
 	background: repeat-x 0 -16px;
-	padding: 4px 10px;
+	/*padding: 4px 10px;*/
+	padding: 0px 5px 0px 5px;
 }
 
 .x-box-mc h3 {
-	margin: 0 0 4px 0;
+	/*margin: 0 0 4px 0;*/
     zoom:1;
 }
 
 .x-box-mr {
 	background: transparent repeat-y right;
-	padding-right: 4px;
+	/*padding-right: 4px;*/
 	overflow: hidden;
 }
 
@@ -3789,7 +3796,7 @@ a.x-menu-item {
 
 .x-box-bc {
 	background: transparent repeat-x 0 -8px;
-	height: 8px;
+	/*height: 8px;*/
 	overflow: hidden;
 }
 
@@ -3798,15 +3805,15 @@ a.x-menu-item {
 }
 
 .x-box-tl, .x-box-bl {
-	padding-left: 8px;
+	/*padding-left: 8px;*/
 	overflow: hidden;
 }
 
 .x-box-tr, .x-box-br {
-	padding-right: 8px;
+	/*padding-right: 8px;*/
 	overflow: hidden;
 }#x-debug-browser .x-tree .x-tree-node a span {
-    padding-top:2px;
+    /*padding-top:2px;*/
     line-height:18px;
 }
 
@@ -5531,7 +5538,9 @@ ul.x-tab-strip-bottom{
 
 .x-tab-panel-bbar .x-toolbar, .x-tab-panel-tbar .x-toolbar {
     border-color:#b6b6b6;
-}.x-form-field{
+}
+
+.x-form-field{
     font:normal 12px tahoma, arial, helvetica, sans-serif;
 }
 

@@ -52,11 +52,11 @@ div.cronk-data-view .x-view-selected .thumb{
 }
 
 /* div.x-portlet div.x-panel-body { */
-.cronk-left-content .x-panel-body-noborder {
+#west-frame .x-panel-body-noborder {
 	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom right;
 }
 
-.cronk-center-content .x-panel-body-noborder {
+#center-frame .x-panel-body-noborder {
 	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
 }
 
@@ -209,6 +209,52 @@ table.icinga-attribute-table td.val {
 	font-size: 10px;
 }
 
-/** TOP-VIEW BAR **/
-#viewBarTop {
+/** NORTH FRAME **/
+#north-frame {
+	height: 50px;
+}
+
+#north-frame div {
+	border: none;
+}
+
+/** MISC **/
+.fancytextfield-box {
+	width: 220px;
+}
+
+.fancytextfield-container {
+	width: 200px;
+	height: 20px;
+	position: relative;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+.fancytextfield-icon {
+	position: absolute;
+	top: 5px;
+	left: 0px;
+	width: 11px;
+	height: 11px;
+	background: url(../images/icons/fancytextfield-icon.png) no-repeat center left;
+}
+
+.fancytextfield-input {
+	position: absolute;
+	top: 2px;
+	left: 16px;
+	background: none;
+	border: none;
+	font:normal 10px tahoma, arial, helvetica, sans-serif;
+}
+
+.fancytextfield-reset-button {
+	position: absolute;
+	top: 5px;
+	right: 0px;
+	width: 11px;
+	height: 11px;
+	background: url(../images/icons/fancytextfield-reset.png) no-repeat center right;
+	cursor: pointer;
 }

@@ -93,12 +93,9 @@ div#main-container {
 }
 
 div#navigationTop {
-	margin-bottom: 10px;
 }
 
-
 div#frameMiddle {
-	margin-top: 10px;	
 	overflow: visible;
 }
 
@@ -116,7 +113,7 @@ div.footerContent, div.footerContent a {
 
 div#contentArea {
 	margin-left: 200px;	
-	padding: 10px;
+	padding: 0px 10px 10px 10px;
 }
 
 div#navigationLeft {

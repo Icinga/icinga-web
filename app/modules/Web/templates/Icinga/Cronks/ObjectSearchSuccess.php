@@ -377,7 +377,16 @@
 			padding: '2px 2px 2px 2px'
 		},
 		
-		items: [oTextField],
+		items: [{
+			title: 'Search',
+			xtype: 'fancytextfield',
+			name: 'q',
+			enableKeyEvents: true,
+			
+			listeners: {
+				keyup: oSearchHandler.keyup
+			}
+		}],
 	});
 	
 	coParent.add(oSearch);
