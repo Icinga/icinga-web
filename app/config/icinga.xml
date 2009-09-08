@@ -124,7 +124,8 @@
 		<!--AppKit JS -->
 		<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter> 
 		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ExtJs.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/HttpProvider.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
