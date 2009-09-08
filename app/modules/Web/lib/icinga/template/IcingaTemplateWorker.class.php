@@ -274,6 +274,9 @@ class IcingaTemplateWorker {
 			if (is_numeric($this->pager_limit) && is_numeric($this->pager_start)) {
 				$search->setSearchLimit($this->pager_start, $this->pager_limit);
 			}
+			elseif ($params->getParameter('limit', null)) {
+				$search->setSearchLimit(0, $params->getParameter('limit'));
+			}
 			
 			$this->api_search =& $search;
 		}

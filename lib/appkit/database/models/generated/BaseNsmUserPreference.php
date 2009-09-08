@@ -8,6 +8,7 @@
  * @property integer $upref_id
  * @property integer $upref_user_id
  * @property string $upref_val
+ * @property blob $upref_longval
  * @property string $upref_key
  * @property timestamp $upref_created
  * @property timestamp $upref_modified
@@ -25,7 +26,8 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
         $this->setTableName('nsm_user_preference');
         $this->hasColumn('upref_id', 'integer', 4, array('type' => 'integer', 'length' => 4, 'primary' => true, 'autoincrement' => true));
         $this->hasColumn('upref_user_id', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => true));
-        $this->hasColumn('upref_val', 'string', 100, array('type' => 'string', 'length' => 100, 'notnull' => true));
+        $this->hasColumn('upref_val', 'string', 100, array('type' => 'string', 'length' => 100));
+        $this->hasColumn('upref_longval', 'blob', null, array('type' => 'blob'));
         $this->hasColumn('upref_key', 'string', 50, array('type' => 'string', 'length' => 50, 'notnull' => true));
         $this->hasColumn('upref_created', 'timestamp', null, array('type' => 'timestamp', 'notnull' => true));
         $this->hasColumn('upref_modified', 'timestamp', null, array('type' => 'timestamp', 'notnull' => true));

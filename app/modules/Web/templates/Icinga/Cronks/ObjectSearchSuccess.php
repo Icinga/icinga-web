@@ -255,7 +255,7 @@
 					
 					if (!oWindow().isVisible()) {
 						var xy = field.getPosition();
-						xy[0] += field.getSize().width + 10;
+						xy[0] += field.getSize().width + 55;
 						
 						oWindow().setPagePosition(xy);
 						oWindow().show(field);

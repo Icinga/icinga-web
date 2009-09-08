@@ -80,6 +80,8 @@
 							<route name=".metaInfo" pattern="^/inf" action="Icinga.Cronks.ViewProc.MetaInformation" />
 						</route>
 					</route>
+					
+					<route name=".persistentprovider.json" pattern="^/persistenceProvider/json" output_type="json" action="Icinga.Cronks.PersistenceProvider" />
 				</route>
 				
 			</route>

@@ -26,6 +26,8 @@
     <datasource>
         <parameter name="target">IcingaApi::TARGET_LOG</parameter>
         
+        <parameter name="limit">25</parameter>
+        
         <parameter name="id">log_id</parameter>
         
         <!--
