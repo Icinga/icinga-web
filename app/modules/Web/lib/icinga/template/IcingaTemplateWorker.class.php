@@ -91,8 +91,16 @@ class IcingaTemplateWorker {
 				
 				if (is_array(($fields = $params->getParameter('countfields'))) && count($fields)) {
 					$this->api_count->setResultColumns($fields);
+					$this->api_count->setResultType(IcingaApi::RESULT_ARRAY);
 					$result  = $this->api_count->fetch();
-					$this->result_count = $result->getRow()->count;
+					
+					// Try to determine the fields
+					$row = $result->getRow();
+					$fields = array_keys($row);
+					$field = array_shift($fields);
+					
+					
+					$this->result_count = (int)$row[ $field ];
 				}
 			}
 			

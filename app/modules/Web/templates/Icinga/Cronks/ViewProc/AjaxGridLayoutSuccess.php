@@ -100,7 +100,14 @@
 			store = new Ext.data.Store(store_config); 
 		}
 		
+		<?php if ($rd->getParameter('height')) { ?>
+		// height was set through template
+		var h = <?php echo $rd->getParameter('height'); ?>;
+		<?php } else { ?>
+		// auto height (parent component)
 		var h = Ext.getCmp('<?php echo $rd->getParameter('htmlid'); ?>').getHeight()-53;
+		h = h > 300 ? h : 300;
+		<?php } ?>
 		
 		// Our grid
 		var grid_config = {
@@ -117,7 +124,7 @@
 			// If width is null defaults to auto
 			// width:				600,
 			autoWidth:			true,
-			height:				h > 300 ? h : 300,
+			height:				h,
 	
 			columns:			column_array
 		};
