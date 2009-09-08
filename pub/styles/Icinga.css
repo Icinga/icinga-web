@@ -251,10 +251,18 @@ table.icinga-attribute-table td.val {
 
 .fancytextfield-reset-button {
 	position: absolute;
-	top: 5px;
+	top: -1px;
 	right: 0px;
 	width: 11px;
 	height: 11px;
 	background: url(../images/icons/fancytextfield-reset.png) no-repeat center right;
-	cursor: pointer;
+	border: none;
+	/*cursor: pointer;*/
+}
+
+.fancytextfield-reset-button table, .fancytextfield-reset-button tr, .fancytextfield-reset-button td {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	border: none;
+	background: none;
 }

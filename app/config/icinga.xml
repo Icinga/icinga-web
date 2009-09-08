@@ -120,13 +120,13 @@
 		<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/RowLayout.js</parameter> -->
 		<!-- <parameter>%core.root_dir%/lib/ext2/examples/ux/SlidingPager.js</parameter>
 		<parameter>%core.root_dir%/lib/ext2/examples/ux/SliderTip.js</parameter> -->
-		<parameter>%core.root_dir%/lib/appkit/js/FancyTextField.js</parameter>
 		
 		<!--AppKit JS -->
 		<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter> 
 		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/HttpProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
@@ -167,20 +167,20 @@
 			<parameter name="config_type">mysql</parameter>
 			<parameter name="config_host">127.0.0.1</parameter>
 
-			 			
+			<!-- 			
 			<parameter name="config_port">3307</parameter>
 			<parameter name="config_database">ndo_demo</parameter>
+			-->
 			
-			<!--
 			<parameter name="config_port">3306</parameter>
 			<parameter name="config_database">icinga</parameter>
-			-->
+			
 			<parameter name="config_user">icinga</parameter>
 			<parameter name="config_password">icinga</parameter>
 			
 			
-			<parameter name="config_table_prefix">nagios_</parameter>
-			<!-- <parameter name="config_table_prefix">icinga_</parameter> -->
+			<!-- <parameter name="config_table_prefix">nagios_</parameter> -->
+			<parameter name="config_table_prefix">icinga_</parameter>
 		</parameter>
 	</setting>
 	
