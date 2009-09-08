@@ -119,13 +119,12 @@
 			
 			collapsible:		true,
 	        animCollapse:		true,
-			frame:				true,
 
 			// If width is null defaults to auto
 			// width:				600,
-			autoWidth:			true,
-			height:				h,
-	
+			// autoWidth:			true,
+			// height:				h,
+			
 			columns:			column_array
 		};
 
@@ -162,11 +161,11 @@
 			store.load();
 		}
 
+		// Insert the grid in the parent
 		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
-		cmp.removeAll(true);
-		cmp.add(new Ext.grid.GridPanel(grid_config));
+		cmp.insert(0, new Ext.grid.GridPanel(grid_config));
 		
-		Ext.getCmp('cronk-container').doLayout();
+		Ext.getCmp('view-container').doLayout();
 	}
 
 	// First loading the meta info to configure the grid

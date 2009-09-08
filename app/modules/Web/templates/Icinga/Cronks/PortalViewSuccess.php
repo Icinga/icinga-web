@@ -32,10 +32,7 @@
 		
 		var portal_config = {
 		    layout: 'column',
-		    
-		    height: Ext.getCmp("<?php echo $htmlid; ?>").getHeight(),
 		    autoScroll: true,
-		    
 		    listeners: {
 		    	render: createPortletDragZone
 		    }
@@ -63,10 +60,47 @@
 						var portlet = new Ext.ux.Portlet({
 							title: data.dragData.name,
 							closable: true,
+							layout: 'fit',
 							
 							tools: tools,
-							id: id
+							id: id,
+							
+							height: 200,
+							
+							// Resizer properties
+							heightIncrement:16,
+						    pinned:true,
+						    duration: .6,
+						    transparent:false
+							
 						})
+						
+						// Adding an resizer
+						portlet.on('render', function(ct,position) {
+							
+							var createProxyProtoType=Ext.Element.prototype.createProxy;
+					        Ext.Element.prototype.createProxy=function(config){
+						        return Ext.DomHelper.append(ct.getEl(), config, true);
+						    };
+							
+							this.resizer = new Ext.Resizable(this.el, {
+					            animate: true,
+					            duration: this.duration,
+					            easing: this.easing,
+					            handles: 's',
+					            transparent:this.transparent,
+					            heightIncrement:this.heightIncrement,
+					            minHeight: this.minHeight || 100,
+					            pinned: this.pinned
+					        });
+					        
+					        this.resizer.on('resize', function(oResizable, iWidth, iHeight, e) {
+					        	this.setHeight(iHeight);				        	
+					        }, this);
+					        
+					        Ext.Element.prototype.createProxy=createProxyProtoType;
+					        
+						});
 						
 						// Add them to the portal
 						p.items.get(0).add(portlet);
@@ -93,17 +127,16 @@
 		for (var i=0; i<p_columns; i++) {
 			items_config[i] = {
 				columnWidth: p_width,
-	        	style: 'padding: 3px;'
+	        	style: 'padding: 3px;',
 			};
 		}
 		
 		portal_config.items = items_config;
 		
 		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
-		cmp.add(new Ext.ux.Portal(portal_config));
+		cmp.insert(0,new Ext.ux.Portal(portal_config));
 		
-		Ext.getCmp('cronk-tabs').doLayout();
-		Ext.getCmp('cronk-container').doLayout();
+		Ext.getCmp('view-container').doLayout();
 	}
 	
 	createPortal();
