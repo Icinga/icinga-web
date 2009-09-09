@@ -8,7 +8,7 @@
 
 Ext.onReady(function(){
 
-var TabContextMenu =  function(){
+var TabContextMenu =  function() {
 	var ctxItem = null;
 	
 	return {
@@ -41,60 +41,70 @@ var TabContextMenu =  function(){
 	
 }();
 
+var CronkTabHandler = function() {
+	
+	return {
+		
+		tabPanelDropTarget : function(t) {
+			new Ext.dd.DropTarget(t.header, {
+							ddGroup: 'cronk',
+							
+							notifyDrop: function(dd, e, data){
+
+								// Create the cronk we want
+								var panel = AppKit.Ext.createCronk({
+									htmlid: AppKit.genRandomId('cronk-'),
+									title: data.dragData['name'],
+									crname: data.dragData.id,
+									loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+									closable: true,
+									layout: 'fit',
+									params: data.dragData.parameter
+								});
+								
+								// add them to the tabs
+								tabPanel.add(panel);
+								
+								// Set active
+								tabPanel.setActiveTab(panel);
+							}
+			});
+		}
+		
+	}
+	
+}();
+
 var tabPanel = new Ext.TabPanel({
 	id: 'cronk-tabs',
 	border: false,
 	
+	// This component is stateful!
+	/* stateId: 'cronk-tab-panel',
+	stateful: true,
+	
+	stateEvents: ['tabchange'],
+	getState: function() {
+		return {
+			tab: function() {
+				return this.getActiveTab().id;
+			}
+		}
+	},
+	
+	applyState: function(state) {
+		Ext.Msg.alert('ok', 'state');
+	}, */
+	
 	// Here comes the drop zone
 	listeners: {
-		render: initTabPanelDropZone,
+		render: CronkTabHandler.tabPanelDropTarget,
 		contextmenu: TabContextMenu.handle
 	}
 });
 
 function initTabPanelDropZone(t) {
-	new Ext.dd.DropTarget(t.header, {
-					ddGroup: 'cronk',
-					
-					notifyDrop: function(dd, e, data){
-						
-						var id = AppKit.genRandomId('cronk-');
-						
-						var params = {
-							'p[htmlid]': id
-						};
-					
-						if (data.dragData.parameter) {
-							for (var k in data.dragData.parameter) {
-								params['p[' + k + ']'] = data.dragData.parameter[k];
-							}
-						}
-						
-						// our panel
-						var panel = new Ext.Panel({
-							title: data.dragData.name,
-							closable: true,
-							id: id,
-							layout: 'fit'
-						});
-						
-						// add them to the tabs
-						tabPanel.add(panel);
-						
-						// Render and set active
-						tabPanel.setActiveTab(tabPanel.items.length-1);
-						
-						// Reconfigure the updater to have the ability to refresh.
-						panel.getUpdater().setDefaultUrl({
-							url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
-							scripts: true,
-							params: params
-						})
-						
-						// initial refresh
-						panel.getUpdater().refresh();
-					}
-	});
+
 
 }
 
@@ -165,17 +175,15 @@ var container = new Ext.Panel({
         },
 
         defaults: {
-			border: false
+			border: false,
+			autoScroll: true
         },
         
         items: [{
-            title: 'Navigation'
+            title: '<?php echo $tm->_("Navigation"); ?>'
         }, {
-            title: 'Settings',
+            title: '<?php echo $tm->_("Settings"); ?>',
             html: 'Some settings in here.'
-        }, {
-            title: 'Cronks',
-            id: cronk_list_id
         }]
 
 	}]
@@ -194,59 +202,81 @@ container.setHeight(Ext.lib.Dom.getViewHeight()-80);
 container.render("<?php echo $htmlid; ?>");
 
 // Adding the first cronk (say hello here)
-tabPanel.add({
-	autoLoad: { url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'portalHello')); ?>" },
-	title: 'Welcome',
-	// height: Ext.getCmp('center-frame').getHeight()
-});
+if (tabPanel) {
+	var cHello = AppKit.Ext.createCronk({
+		title: '<?php echo $tm->_("Welcome"); ?>',
+		crname: 'portalHello',
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+		layout: 'fit'
+	});
+	
+	tabPanel.add(cHello);
+	
+	tabPanel.doLayout();
+	
+	tabPanel.setActiveTab(cHello);
+}
 
 // Adding the cronk list
-var coList = Ext.getCmp(cronk_list_id)
-coList.getUpdater().setDefaultUrl({
-	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crlist')); ?>",
-	scripts: true,
-    params: { 'p[htmlid]': cronk_list_id }
-});
-coList.getUpdater().refresh();
+if ((west = Ext.getCmp('west-frame'))) {
+	
+	var cList = AppKit.Ext.createCronk({
+		htmlid: cronk_list_id ,
+		title: '<?php echo $tm->_("Cronks"); ?>',
+		crname: 'crlist',
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+		layout: 'fit'
+	});
+	
+	west.add(cList);
+	west.doLayout();
+	
+	west.getLayout().setActiveItem(cList);
+}
+
 
 // Search component
-var coSearch = Ext.getCmp(cronk_search_id)
-coSearch.getUpdater().setDefaultUrl({
-	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'icingaSearch')); ?>",
-	scripts: true,
-    params: { 'p[htmlid]': cronk_search_id }
-});
-coSearch.getUpdater().refresh();
+if ((search = Ext.getCmp(cronk_search_id))) {
+	
+	var cSearch = AppKit.Ext.createCronk({
+		htmlid: cronk_search_id ,
+		crname: 'icingaSearch',
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+		layout: 'fit',
+		height: 100
+	});
+	
+	search.add(cSearch);
+	cSearch.doLayout();
+}
 
 // LOG bottom component
-var coLog = Ext.getCmp('south-frame');
-coLog.getUpdater().setDefaultUrl({
-	url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'gridLogView')); ?>",
-	scripts: true,
-    params: { 'p[htmlid]': 'south-frame' }
-});
+if ((south = Ext.getCmp('south-frame'))) {
+	
+	var cLog = AppKit.Ext.createCronk({
+		htmlid: AppKit.genRandomId('cronk-'),
+		crname: 'gridLogView',
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+		layout: 'fit'
+	});
 
-// After the LOG component is added, start autorefresh
-coLog.on('add', function(el, component, index) {
-	if (index == 0) {
-		var refreshHander = function() {
-			component.getStore().reload();
+	// After the LOG component is added, start autorefresh
+	cLog.on('add', function(el, component, index) {
+		if (index == 0) {
+			var refreshHander = function() {
+				component.getStore().reload();
+			}
+			
+			Ext.TaskMgr.start({
+				run: refreshHander,
+				interval: 60 * 1000 // 60s
+			});
 		}
-		
-		Ext.TaskMgr.start({
-			run: refreshHander,
-			interval: 60 * 1000 // 60s
-		});
-	}
-});
-
-// Load the LOG component
-coLog.getUpdater().refresh();
-
-
-// Set default active items
-Ext.getCmp('west-frame').getLayout().setActiveItem(2);
-tabPanel.setActiveTab(0);
+	});
+	
+	south.add(cLog);
+	south.doLayout();
+}
 
 // Inform about layout changes
 container.doLayout();

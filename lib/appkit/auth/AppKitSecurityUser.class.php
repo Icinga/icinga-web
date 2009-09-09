@@ -119,22 +119,24 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @param string $key
 	 * @param mixed $val
 	 * @param boolean $overwrite
+	 * @param boolean $blob
 	 * @return mixed
 	 * @author Marius Hein
 	 */
-	public function setPref($key, $val, $overwrite = true) {
-		return $this->getNsmUser()->setPref($key, $val, $overwrite);
+	public function setPref($key, $val, $overwrite = true, $blob = false) {
+		return $this->getNsmUser()->setPref($key, $val, $overwrite, $blob);
 	}
 	
 	/**
 	 * reduced call for getPrefVal within NsmUser
 	 * @param string $key
 	 * @param mixed $default
+	 * @param boolean $blob
 	 * @return mixed
 	 * @author Marius Hein
 	 */
-	public function getPrefVal($key, $default=null) {
-		return $this->getNsmUser()->getPrefVal($key, $default);
+	public function getPrefVal($key, $default=null, $blob = false) {
+		return $this->getNsmUser()->getPrefVal($key, $default, $blob);
 	}
 	
 	/**

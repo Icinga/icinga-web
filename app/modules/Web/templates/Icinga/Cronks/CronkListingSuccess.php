@@ -6,6 +6,60 @@
 <script type="text/javascript">
 
 function loadCronkDataView() {
+
+	var CronkListing = function() {
+
+		return {
+			initCronkDragZone : function (v) {
+				v.dragZone = new Ext.dd.DragZone(v.getEl(), {
+					ddGroup: 'cronk',
+					
+					getDragData: function(e) {
+					var sourceEl = e.getTarget(v.itemSelector, 10);
+
+			            if (sourceEl) {
+			                d = sourceEl.cloneNode(true);
+			                d.id = Ext.id();
+			                return v.dragData = {
+			                    sourceEl: sourceEl,
+			                    repairXY: Ext.fly(sourceEl).getXY(),
+			                    ddel: d,
+			                    dragData: v.getRecord(sourceEl).data
+			                }
+			
+			            }
+					
+					},
+					
+					getRepairXY: function() {
+						return this.dragData.repairXY;
+					}
+				
+				});
+			},
+
+			dblClickHandler: function(oView, index, node, e) {
+				var record = oView.getStore().getAt(index);
+				
+				var panel = AppKit.Ext.createCronk({
+					htmlid: AppKit.genRandomId('cronk-'),
+					title: record.data['name'],
+					crname: record.data.id,
+					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+					closable: true,
+					layout: 'fit',
+					params: record.data.parameter
+				});
+				
+				var tabPanel = Ext.getCmp('cronk-tabs');
+				if (tabPanel) {
+					tabPanel.add(panel);
+					tabPanel.setActiveTab(panel);
+				}
+			}
+		}
+		
+	}(); 
 	
 	// Our store to retrieve the cronks
 	var store = new Ext.data.JsonStore({
@@ -44,7 +98,8 @@ function loadCronkDataView() {
         
         // Create the drag zone
         listeners: {
-            render: initCronkDragZone
+            render: CronkListing.initCronkDragZone,
+            dblclick: CronkListing.dblClickHandler
         }
         
         
@@ -52,37 +107,7 @@ function loadCronkDataView() {
 	
 	// view.render('<?php echo $htmlid; ?>');
 	var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
-	cmp.add(view);
-	
-	// container.doLayout();	
-	
-	function initCronkDragZone(v) {
-		v.dragZone = new Ext.dd.DragZone(v.getEl(), {
-			ddGroup: 'cronk',
-			
-			getDragData: function(e) {
-			var sourceEl = e.getTarget(v.itemSelector, 10);
-
-	            if (sourceEl) {
-	                d = sourceEl.cloneNode(true);
-	                d.id = Ext.id();
-	                return v.dragData = {
-	                    sourceEl: sourceEl,
-	                    repairXY: Ext.fly(sourceEl).getXY(),
-	                    ddel: d,
-	                    dragData: v.getRecord(sourceEl).data
-	                }
-	
-	            }
-			
-			},
-			
-			getRepairXY: function() {
-				return this.dragData.repairXY;
-			}
-		
-		});
-	}
+	cmp.add(view);	
 }
 
 loadCronkDataView();

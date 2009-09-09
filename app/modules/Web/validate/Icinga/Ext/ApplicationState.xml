@@ -7,15 +7,6 @@
 	<ae:configuration>
 		
 		<validators>
-		
-		<validator class="string" name="cmd" required="true">
-					<argument>cmd</argument>
-					
-					<errors>
-						<error>Validation of command failed!</error>
-					</errors>
-		</validator>
-		
 		</validators>
 		
 	</ae:configuration>

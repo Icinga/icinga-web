@@ -56,14 +56,20 @@
 							}
 						}
 						
-						// Our portlet
-						var portlet = new Ext.ux.Portlet({
+						var portlet  = AppKit.Ext.createCronk({
+							htmlid: id,
+							id: id,
+							
+							params: data.dragData.parameter,
+							loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+							crname: data.dragData.id,
+							
 							title: data.dragData.name,
 							closable: true,
 							layout: 'fit',
+							xtype: 'portlet',
 							
 							tools: tools,
-							id: id,
 							
 							height: 200,
 							
@@ -72,8 +78,7 @@
 						    pinned:true,
 						    duration: .6,
 						    transparent:false
-							
-						})
+						});
 						
 						// Adding an resizer
 						portlet.on('render', function(ct,position) {
@@ -109,14 +114,14 @@
 						p.doLayout();
 						
 						// Redefine the updater to held default properties
-						portlet.getUpdater().setDefaultUrl({
+						/* portlet.getUpdater().setDefaultUrl({
 							url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 							params: params,
 							scripts: true
 						});
 						
 						// initial refresh
-						portlet.getUpdater().refresh();
+						portlet.getUpdater().refresh(); */
 						
 					}
 				});
