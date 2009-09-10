@@ -319,7 +319,18 @@
 			<parameter name="parameter">
 
 			</parameter>
-		</parameter>
+		</parameter><!--
 		
-	</setting>
+		<parameter name="icingaStatusSummary">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">Icinga.Cronks.StatusSummary</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Status Summary</parameter>
+			<parameter name="name">Status Summary</parameter>
+			<parameter name="parameter">
+				<parameter name="type">text</parameter>
+			</parameter>
+		</parameter>
+
+	--></setting>
 </settings>

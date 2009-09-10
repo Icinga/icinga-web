@@ -218,7 +218,7 @@ table.icinga-attribute-table td.val {
 	border: none;
 }
 
-/** MISC **/
+/** FANCY TEXT FIELDS **/
 .fancytextfield-box {
 	width: 220px;
 }
@@ -264,5 +264,10 @@ table.icinga-attribute-table td.val {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 	border: none;
+	background: none;
+}
+
+/** MISC **/
+.no-background {
 	background: none;
 }

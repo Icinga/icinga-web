@@ -72,8 +72,8 @@
 					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="Icinga.Cronks.CronkLoader" />
 				
 					<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="Icinga.Cronks.CronkListing" />
-				
 					<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="Icinga.Cronks.ObjectSearch" />
+					<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="Icinga.Cronks.StatusSummary" />
 				
 					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
 						<route name=".json" pattern="^/json" output_type="json" action="Icinga.Cronks.ViewProc">
