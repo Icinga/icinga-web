@@ -1,7 +1,20 @@
 <?php
-
+/**
+ * @author Christian Doebler <christian.doebler@netways.de>
+ */
 class Web_Icinga_Cronks_StatusSummarySuccessView extends ICINGAWebBaseView
 {
+
+	private $objectDefs = array(
+		'host'		=> array (
+			'column'	=> 'host_state',
+			'target'	=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
+		),
+		'service'		=> array (
+			'column'	=> 'service_state',
+			'target'	=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
+		),
+	);
 
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
@@ -23,50 +36,20 @@ class Web_Icinga_Cronks_StatusSummarySuccessView extends ICINGAWebBaseView
 		$model = $this->getContext()->getModel('Icinga.Cronks.StatusSummary', 'Web');
 		$api = AppKitFactories::getInstance()->getFactory('IcingaData');
 
-		// get host data
-		$result = $api->API()->createSearch()
-			->setSearchTarget(IcingaApi::TARGET_HOST_STATUS_SUMMARY)
-			->fetch();
+		foreach ($this->objectDefs as $objectKey => $objectData) {
 
-		// process host data
-		$statesSet = array();
-		$dataCollection = array();
-		foreach ($result as $row) {
-			$state = (int)$row->host_state;
-			$count = (int)$row->count;
-			$data = $model->getStatusDataCollection('host', $state, $count);
-			$dataCollection[$state] = $data;
-			array_push($statesSet, $state);
-		}
-		for ($state = 0; $state < 3; $state++) {
-			if (!in_array($state, $statesSet)) {
-				$data = $model->getStatusDataCollection('host', $state);
-				$dataCollection[$state] = $data;
+			// get object data
+			$result = $api->API()->createSearch()
+				->setSearchTarget($objectData['target'])
+				->fetch();
+
+			// process object data
+			$model->init($objectKey);
+			foreach ($result as $row) {
+				$model->addData($row->{$objectData['column']}, $row->count);
 			}
-			array_push($jsonData['status_data']['data'], $dataCollection[$state]);
-		}
+			$jsonData['status_data']['data'] = array_merge($jsonData['status_data']['data'], $model->getStatusData());
 
-		// get service data
-		$result = $api->API()->createSearch()
-			->setSearchTarget(IcingaApi::TARGET_SERVICE_STATUS_SUMMARY)
-			->fetch();
-
-		// process service data
-		$statesSet = array();
-		$dataCollection = array();
-		foreach ($result as $row) {
-			$state = (int)$row->service_state;
-			$count = (int)$row->count;
-			$data = $model->getStatusDataCollection('service', $state, $count);
-			$dataCollection[$state] = $data;
-			array_push($statesSet, $state);
-		}
-		for ($state = 0; $state < 4; $state++) {
-			if (!in_array($state, $statesSet)) {
-				$data = $model->getStatusDataCollection('service', $state);
-				$dataCollection[$state] = $data;
-			}
-			array_push($jsonData['status_data']['data'], $dataCollection[$state]);
 		}
 
 		// store final count

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author Christian Doebler <christian.doebler@netways.de>
+ */
 class Web_Icinga_Cronks_StatusSummaryAction extends ICINGAWebBaseAction
 {
 	/**
