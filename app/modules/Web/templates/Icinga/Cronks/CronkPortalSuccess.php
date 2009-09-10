@@ -18,15 +18,12 @@ var TabContextMenu =  function() {
 					items: [{
 						text: 'Close tab',
 						id: panel.id + '-close',
-						handler: function() {
-							panel.remove(ctxItem);
-						}
+						iconCls: 'silk-cross',
+						handler: function() { panel.remove(ctxItem); }
 					}, {
 						text: 'Refresh',
-						
-						handler: function() {
-							ctxItem.getUpdater().refresh();
-						}
+						iconCls: 'silk-arrow-refresh',
+						handler: function() { ctxItem.getUpdater().refresh(); }
 					}]
 				});
 			}

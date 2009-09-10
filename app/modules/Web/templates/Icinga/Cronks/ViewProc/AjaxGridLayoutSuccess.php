@@ -4,167 +4,263 @@
 <script type="text/javascript">
 <!-- // <![CDATA[
 
-// if (Ext.get("<?php echo $htmlid; ?>")) {
+if (Ext.get("<?php echo $htmlid; ?>")) {
+	
+	AppKit.Ext.Widgets.IcingaAjaxGridPanel = Ext.extend(Ext.grid.GridPanel, {
+
+		initComponent : function() {
+			this.tbar = this.buildTopToolbar();
+			
+			AppKit.Ext.Widgets.IcingaAjaxGridPanel.superclass.initComponent.call(this);
+		},
+	
+		// Top toolbar of the grid
+		buildTopToolbar : function() {
+			return [{
+				text: '<?php echo $tm->_("Refresh"); ?>',
+				iconCls: 'silk-arrow-refresh',
+				tooltip: '<?php echo $tm->_("Refresh the data in the grid"); ?>',
+				handler: function(oBtn, e) { this.store.reload(); },
+				scope: this
+			}];
+		},
+		
+
+	
+	});
+	
+	var IcingaMetaGridCreator = function() {
+		return {
+
+		store_url : undefined, 
+		meta_store : undefined,
+		meta_reader : undefined,
+			
+		setStoreUrl : function(url) {
+			this.store_url = url;
+		},
+		
+		createGridFrom : function(meta) {
+				this.meta = meta;
+				
+				this.mapping_array = new Array(meta.keys.length);
+				this.column_array = new Array(meta.keys.length);
+				this.sort_array = new Array(meta.keys.length);
+				this.pager_array = new Array(3);
+				this.filter_array = new Array(meta.keys.length);
+				this.sortinfo = new Array(2);
+
+				var ii = 0;
+
+				for (var i=0; i<meta.keys.length; i++) {
+					var index = meta.keys[i];
+					var field = meta.fields[index];
+		 			
+					this.mapping_array[i] = {name: index};
+					
+					this.column_array[i] = {
+						header:			field.display.label,
+						width:			(field.display.width ? field.display.width : 120),
+						dataIndex:		index,
+						sortable:		(field.order.enabled ? true : false),
+						hidden:			(field.display.visible ? false : true)
+					};
+		
+					if (field.order['default'] == true) {
+						this.sort_array[ii] = {
+								direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
+								field: index
+							};
+		
+						ii++;
+					}
+				}
+				
+				return this.applyMetaGrid();			
+		},
+		
+		applyMetaGrid : function() {
+			// Our grid
+			var grid_config = {
+				store:				this.getMetaStore(),	
+				trackMouseOver:		false,
+				disableSelection:	false,
+				loadMask:			true,
+				collapsible:		true,
+				animCollapse:		true,
+				border:				false,
+				columns:			this.column_array
+			};
+			
+			var view_config = {
+	            forceFit: true,
+	            groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
+        	};
+        	
+        	if (this.meta.template.grouping.enabled == true) {
+				view_config.hideGroupedColumn = false;
+			
+				grid_config.view = new Ext.grid.GroupingView(view_config);
+			}
+			else {
+				grid_config.view = new Ext.grid.GridView(view_config);
+			}
+			
+			// Adding a pager bar if wanted
+			if (this.pager_array.enabled == true) {
+				grid_config.bbar = new Ext.PagingToolbar({
+					pageSize:		this.pager_array.size,
+					store:			this.getMetaStore(),
+					displayInfo:	true,
+					displayMsg:		'Displaying topics {0} - {1} of {2}',
+					emptyMsg:		'No topics to display'
+	
+					// ,
+					// plugins:		new Ext.ux.SlidingPager()
+				});
+	
+				this.getMetaStore().load({params:{page_start: pager_array.start, page_limit: pager_array.size}});
+			}
+			else {
+				this.getMetaStore().load();
+			}
+			
+			return new AppKit.Ext.Widgets.IcingaAjaxGridPanel(grid_config);
+		},
+		
+		getMetaMapping : function() {
+			return Ext.data.Record.create(this.mapping_array);
+		},
+		
+		getMetaReader : function() {
+			if (!this.meta_reader) {
+				// Readerconfig
+				var reader_config = {
+						root:				'resultRows',
+						totalProperty:		'resultCount',
+						successProperty:	'resultSuccess'
+				};
+		
+				if (this.meta.template.datasource.id) {
+					reader_config.idProperty = this.meta.template.datasource.id;
+				}
+		
+				this.meta_reader = new Ext.data.JsonReader(reader_config, this.getMetaMapping());
+			}
+			
+			return this.meta_reader;
+		},
+		
+		getMetaStore : function() {
+			if (!this.meta_store) {
+				var store_config = { 
+					autoLoad: false,
+					 
+					proxy: new Ext.data.HttpProxy({
+						url: this.store_url
+					}),
+					
+					reader:			this.getMetaReader(),
+		
+					remoteSort:		true,
+		
+					paramNames: {
+						start:	'page_start',
+						limit:	'page_limit',
+						dir:	'sort_dir',
+						sort:	'sort_field'
+					}
+				};
+	
+				this.meta_store = new Object();
+				
+				if (this.meta.template.grouping.enabled == true) {
+		
+					store_config.sortInfo = sort_array[0];
+					store_config.groupField = this.meta.template.grouping.field;
+					store.groupOnSort = true;
+					
+					this.meta_store = new Ext.data.GroupingStore(store_config);
+				}
+				else {
+					this.meta_store = new Ext.data.Store(store_config); 
+				}
+			}
+			
+			return this.meta_store;
+		}
+		}
+	}();
+	
+	// The filter window object
+	var IcingaGridFilterWindow = function() {
+		var oWin;
+		
+		function oWindow() {
+			if (!oWin) {
+				oWin = new Ext.Window({
+					title: '<?php echo $tm->_("Modify filter"); ?>',
+					width: 200,
+					height: 200,
+					closeAction: 'hide',
+					layout: 'form'
+				});
+			}
+			
+			return oWin;
+		} 
+			
+		return {
+			
+			// Our clickhandler to start the window
+			startHandler : function(b, e) {
+				var win = oWindow();
+				win.setPosition(b.el.getLeft(), b.el.getTop());
+				win.show(b.el);
+			}
+			
+		}
+		
+	}();
 	
 	function loadAjaxGrid(meta) {	
+
+		IcingaMetaGridCreator.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		var grid = IcingaMetaGridCreator.createGridFrom(meta);
 		
-		// Prepare structures for the gridconfig
-		var mapping_array	= new Array(meta.keys.length);
-		var column_array	= new Array(meta.keys.length);
-		var sort_array		= new Array(meta.keys.length);
-		var pager_array		= new Array(3);
-		var filter_array	= new Array(meta.keys.length);
-		var sort_info		= new Array(2);
-
-		var ii				= 0;
+		// Add the window to a toolbar button
+		grid.on('render', function(g) {
+			this.topToolbar.add([
+				'-', {
+					text: '<?php echo $tm->_("Filter"); ?>',
+					iconCls: 'silk-pencil',
+					menu: { 
+						items: [{ 
+							text: '<?php echo $tm->_("Modify"); ?>', 
+							iconCls: 'silk-application-form',
+							handler: IcingaGridFilterWindow.startHandler,
+							scope: this
+						},{ 
+							text: '<?php echo $tm->_("Re-apply"); ?>', 
+							iconCls: 'silk-building-go',
+							handler: AppKit.Ext.bogusHandler,
+							scope: this
+						},{ 
+							text: '<?php echo $tm->_("Remove"); ?>', 
+							iconCls: 'silk-cancel',
+							handler: AppKit.Ext.bogusHandler,
+							scope: this
+						}]
+					}
+				}
+			]);
+		});
 		
-		
-		for (var i=0; i<meta.keys.length; i++) {
-			var index = meta.keys[i];
-			var field = meta.fields[index];
- 			
-			mapping_array[i] = {name: index};
-			
-			column_array[i] = {
-				header:			field.display.label,
-				width:			(field.display.width ? field.display.width : 120),
-				dataIndex:		index,
-				sortable:		(field.order.enabled ? true : false),
-				hidden:			(field.display.visible ? false : true)
-			};
-
-			if (field.order['default'] == true) {
-				sort_array[ii] = {
-						direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
-						field: index
-					};
-
-				ii++;
-			}
-		}
-
-		// Pager config
-		pager_array = {
-			enabled:	(meta.template.pager.enabled ? true : false),
-			size:		(meta.template.pager.size ? meta.template.pager.size : 25),
-			start:		(meta.template.pager.start ? meta.template.pager.start : 0)
-		};
-		
-		// The field mapping
-		var mapping = Ext.data.Record.create(mapping_array);
-
-		// Readerconfig
-		var reader_config = {
-				root:				'resultRows',
-				totalProperty:		'resultCount',
-				successProperty:	'resultSuccess'
-		};
-
-		if (meta.template.datasource.id) {
-			reader_config.idProperty = meta.template.datasource.id;
-		}
-
-		var reader = new Ext.data.JsonReader(reader_config, mapping);
-
-		// Store configuration
-		var store_config = { 
-			autoLoad: false,
-			 
-			proxy: new Ext.data.HttpProxy({
-				url: '<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>'
-			}),
-			
-			reader: reader,
-
-			remoteSort:		true,
-
-			paramNames: {
-				start:	'page_start',
-				limit:	'page_limit',
-				dir:	'sort_dir',
-				sort:	'sort_field'
-			}
-		};
-
-		var store = new Object();
-		
-		if (meta.template.grouping.enabled == true) {
-
-			store_config.sortInfo = sort_array[0];
-			store_config.groupField = meta.template.grouping.field;
-			store.groupOnSort = true;
-			
-			store = new Ext.data.GroupingStore(store_config);
-		}
-		else {
-			store = new Ext.data.Store(store_config); 
-		}
-		
-		<?php if ($rd->getParameter('height')) { ?>
-		// height was set through template
-		var h = <?php echo $rd->getParameter('height'); ?>;
-		<?php } else { ?>
-		// auto height (parent component)
-		var h = Ext.getCmp('<?php echo $rd->getParameter('htmlid'); ?>').getHeight()-53;
-		h = h > 300 ? h : 300;
-		<?php } ?>
-		
-		// Our grid
-		var grid_config = {
-			store:				store,
-			
-			trackMouseOver:		false,
-	        disableSelection:	false,
-	        loadMask:			true,
-			
-			collapsible:		true,
-	        animCollapse:		true,
-
-			// If width is null defaults to auto
-			// width:				600,
-			// autoWidth:			true,
-			// height:				h,
-			
-			columns:			column_array
-		};
-
-		var view_config = {
-            forceFit: true,
-            groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
-        };
-
-		if (meta.template.grouping.enabled == true) {
-			view_config.hideGroupedColumn = false;
-			
-			grid_config.view = new Ext.grid.GroupingView(view_config);
-		}
-		else {
-			grid_config.view = new Ext.grid.GridView(view_config);
-		}
-
-		// Adding a pager bar if wanted
-		if (pager_array.enabled == true) {
-			grid_config.bbar = new Ext.PagingToolbar({
-				pageSize:		pager_array.size,
-				store:			store,
-				displayInfo:	true,
-				displayMsg:		'Displaying topics {0} - {1} of {2}',
-				emptyMsg:		'No topics to display'
-
-				// ,
-				// plugins:		new Ext.ux.SlidingPager()
-			});
-
-			store.load({params:{page_start: pager_array.start, page_limit: pager_array.size}});
-		}
-		else {
-			store.load();
-		}
-
-		// Insert the grid in the parent
+		//Insert the grid in the parent
 		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
-		cmp.insert(0, new Ext.grid.GridPanel(grid_config));
+		cmp.insert(0, grid);
 		
+		// Refresh the container layout
 		Ext.getCmp('view-container').doLayout();
 	}
 
@@ -180,7 +276,7 @@
 		   }
 	});
     
-// };
+};
 
 
 // ]]>-->

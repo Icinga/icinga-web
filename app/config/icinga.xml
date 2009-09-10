@@ -36,7 +36,6 @@
 		<!-- ICINGAWireFrame css -->
 		<parameter>/styles/WireFrameDefault.css</parameter>
 		<parameter>/styles/WireFrameStructural.css</parameter>
-		<parameter>/styles/Grapher.css</parameter>
 	
 		<!-- YUI css -->
 		<parameter>/js/yui/build/fonts/fonts-min.css</parameter>
@@ -57,6 +56,7 @@
 		<!-- <parameter>/js/gc-prettify/prettify.css</parameter> -->
 		
 		<!-- ICINGA -->
+		<parameter>/styles/silk-icons.css</parameter>
 		<parameter>/styles/extjs/ext-all.css</parameter>
 		<parameter>/styles/extjs/ux-all.css</parameter>
 		<parameter>/styles/Icinga.css</parameter>
