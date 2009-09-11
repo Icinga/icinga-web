@@ -5,16 +5,7 @@
 class Web_Icinga_Cronks_StatusSummarySuccessView extends ICINGAWebBaseView
 {
 
-	private $objectDefs = array(
-		'host'		=> array (
-			'column'	=> 'host_state',
-			'target'	=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
-		),
-		'service'		=> array (
-			'column'	=> 'service_state',
-			'target'	=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
-		),
-	);
+	private $objects = array('host', 'service');
 
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
@@ -34,22 +25,11 @@ class Web_Icinga_Cronks_StatusSummarySuccessView extends ICINGAWebBaseView
 		);
 
 		$model = $this->getContext()->getModel('Icinga.Cronks.StatusSummary', 'Web');
-		$api = AppKitFactories::getInstance()->getFactory('IcingaData');
 
-		foreach ($this->objectDefs as $objectKey => $objectData) {
-
-			// get object data
-			$result = $api->API()->createSearch()
-				->setSearchTarget($objectData['target'])
-				->fetch();
-
-			// process object data
-			$model->init($objectKey);
-			foreach ($result as $row) {
-				$model->addData($row->{$objectData['column']}, $row->count);
-			}
-			$jsonData['status_data']['data'] = array_merge($jsonData['status_data']['data'], $model->getStatusData());
-
+		foreach ($this->objects as $object) {
+			// fetch process object data
+			$statusData = $model->init($object)->fetchData()->getStatusData();
+			$jsonData['status_data']['data'] = array_merge($jsonData['status_data']['data'], $statusData);
 		}
 
 		// store final count

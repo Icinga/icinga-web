@@ -5,6 +5,8 @@
 class Web_Icinga_Cronks_StatusSummaryModel extends ICINGAWebBaseModel
 {
 
+	private $api = false;
+
 	private $dataStates = array (
 		'host'		=> array (
 			0	=> 'OK',
@@ -23,27 +25,58 @@ class Web_Icinga_Cronks_StatusSummaryModel extends ICINGAWebBaseModel
 		),
 	);
 
+	private $dataSources = array (
+		'host'		=> array (
+			'target'	=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
+			'column'	=> 'host_state',
+		),
+		'service'	=> array (
+			'target'	=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
+			'column'	=> 'service_state',
+		),
+	);
+
 	private $type = false;
 	private $dataTmp = array();
 	private $data = false;
 	private $countNotOk = 0;
 	private $countAll = 0;
 
+	public function __construct () {
+		$this->api = AppKitFactories::getInstance()->getFactory('IcingaData');
+	}
+
 	public function init ($type) {
-		$this->type = $type;
+		if (array_key_exists($type, $this->dataSources)) {
+			$this->type = $type;
+		} else {
+			$this->type = false;
+		}
 		$this->dataTmp = array();
 		$this->data = false;
 		$this->countAll = 0;
 		$this->countNotOk = 0;
+		return $this;
 	}
 
-	public function addData ($state, $count) {
+	private function addData ($state, $count) {
 		$count = (int)$count;
 		$this->dataTmp[$state] = $count;
 		if ($state != 0) {
 			$this->countNotOk += $count;
 		}
 		$this->countAll += $count;
+		return $this;
+	}
+
+	private function getStatusDataCollection ($type, $state, $count = 0) {
+		$data = array (
+			'state_id'		=> $state,
+			'state_name'	=> $this->dataStates[$type][$state],
+			'count'			=> $count,
+			'type'			=> $type,
+		);
+		return $data;
 	}
 
 	public function getStatusData () {
@@ -70,14 +103,16 @@ class Web_Icinga_Cronks_StatusSummaryModel extends ICINGAWebBaseModel
 		return $this->data;
 	}
 
-	public function getStatusDataCollection ($type, $state, $count = 0) {
-		$data = array (
-			'state_id'		=> $state,
-			'state_name'	=> $this->dataStates[$type][$state],
-			'count'			=> $count,
-			'type'			=> $type,
-		);
-		return $data;
+	public function fetchData () {
+		if ($this->type !== false) {
+			$result = $this->api->API()->createSearch()
+				->setSearchTarget($this->dataSources[$this->type]['target'])
+				->fetch();
+			foreach ($result as $row) {
+				$this->addData($row->{$this->dataSources[$this->type]['column']}, $row->count);
+			}
+		}
+		return $this;
 	}
 
 }
