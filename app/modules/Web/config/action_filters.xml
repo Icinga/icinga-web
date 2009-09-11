@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/filters/1.0">
 
 	<!-- only for web contexts in development envs -->
-	<ae:configuration context="web">
+	<!-- <ae:configuration context="web">
 		<filters>
 
 			<filter name="IcingaExtApplicationState" class="IcingaExtApplicationState">
@@ -10,6 +10,6 @@
 			</filter>
 
 		</filters>
-	</ae:configuration>
+	</ae:configuration> -->
 
 </ae:configurations>

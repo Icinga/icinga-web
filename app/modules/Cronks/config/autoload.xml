@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<autoload name="ICINGACronksBaseAction">%core.module_dir%/Cronks/lib/action/ICINGACronksBaseAction.class.php</autoload>
+		<autoload name="ICINGACronksBaseModel">%core.module_dir%/Cronks/lib/model/ICINGACronksBaseModel.class.php</autoload>
+		<autoload name="ICINGACronksBaseView">%core.module_dir%/Cronks/lib/view/ICINGACronksBaseView.class.php</autoload>
+		
+	</ae:configuration>
+</ae:configurations>
