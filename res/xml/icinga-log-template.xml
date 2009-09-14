@@ -16,8 +16,28 @@
     	want to display
     -->
     <option>
-        <parameter name="mode">default</parameter>
-        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+    	<!-- 
+    		Some layout modes:
+    			- default: full featured view
+    			- minimal: reduce space consumption (e.g. filters, pagers, ...)
+    	-->
+        <parameter name="mode">minimal</parameter>
+        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
+        
+        <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
+        <parameter name="Ext.grid.GridView">
+        	<parameter name="headersDisabled">true</parameter>
+        </parameter>
+        
+        <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
+        <!-- 
+        	!!! Attention: this options goes to the main grid panel, only change layout attributes, all other
+        	will corrupt the auto build of the GridPanel
+        -->
+        <!-- <parameter name="Ext.grid.GridPanel">
+        	<parameter name="disable">true</parameter>
+        	<parameter name="hidden">false</parameter>
+        </parameter> -->
     </option>
     
     <!-- 
@@ -26,6 +46,7 @@
     <datasource>
         <parameter name="target">IcingaApi::TARGET_LOG</parameter>
         
+        <!-- Limit the result (LOAD) -->
         <parameter name="limit">25</parameter>
         
         <parameter name="id">log_id</parameter>
@@ -92,6 +113,12 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
+                <parameter name="width">200</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
             </display>
             
             <filter>

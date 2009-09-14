@@ -67,21 +67,25 @@
 				
 				<route name=".viewTest" pattern="^/test$" action="Icinga.ViewTest" />
 				
-				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" >
+				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" module="Cronks">
 
-					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="Icinga.Cronks.CronkLoader" />
+					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="System.CronkLoader" />
 				
-					<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="Icinga.Cronks.CronkListing" />
-					<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="Icinga.Cronks.ObjectSearch" />
-					<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="Icinga.Cronks.StatusSummary" />
+					<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="System.CronkListing" />
+					<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="System.ObjectSearch" />
+					<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="System.StatusSummary" />
 				
 					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
-						<route name=".json" pattern="^/json" output_type="json" action="Icinga.Cronks.ViewProc">
-							<route name=".metaInfo" pattern="^/inf" action="Icinga.Cronks.ViewProc.MetaInformation" />
+						<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">
+							<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation" />
 						</route>
 					</route>
 					
 					<route name=".persistentprovider.json" pattern="^/persistenceProvider/json" output_type="json" action="Icinga.Cronks.PersistenceProvider" />
+				</route>
+				
+				<route pattern="^/ext" name=".ext">
+					<route pattern="/applicationState" name=".applicationState" output_type="javascript" action="Icinga.Ext.ApplicationState" />
 				</route>
 				
 			</route>

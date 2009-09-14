@@ -69,11 +69,12 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	 * @param string $key
 	 * @param mixed $val
 	 * @param boolean $overwrite
+	 * @param boolean $blob
 	 * @return unknown_type
 	 * @throws AppKitException
 	 * @author Marius Hein
 	 */
-	public function setPref($key, $val, $overwrite = true) {
+	public function setPref($key, $val, $overwrite = true, $blob = false) {
 		
 		try {
 			$pref = $this->getPrefObject($key);
@@ -81,13 +82,26 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 			// DO NOT OVERWRITE
 			if ($overwrite === false) return false;
 			
-			$pref->upref_val = $val;
+			if ($blob == true) {
+				$pref->upref_longval = $val;
+			}
+			else {
+				$pref->upref_val = $val;
+			}
+			
 			$pref->save();
 		}
 		catch (AppKitDoctrineException $e) {
 			$pref = new NsmUserPreference();
 			$pref->upref_key = $key;
-			$pref->upref_val = $val;
+
+			if ($blob == true) {
+				$pref->upref_longval = $val;
+			}
+			else {
+				$pref->upref_val = $val;
+			}
+			
 			$pref->NsmUser = $this;
 			$pref->save();
 		}
@@ -123,9 +137,15 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	 * @return mixed
 	 * @author Marius Hein
 	 */
-	public function getPrefVal($key, $default=null) {
+	public function getPrefVal($key, $default=null, $blob = false) {
 		try {
-			return $this->getPrefObject($key)->upref_val;
+			$obj = $this->getPrefObject($key);
+			if ($obj->upref_longval || $blob) {
+				return $obj->upref_longval;
+			}
+			else {
+				return $obj->upref_val;
+			}
 		}
 		catch (AppKitDoctrineException $e) {
 			return $default;
@@ -160,13 +180,13 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	
 	public function getPreferences() {
 		$res = Doctrine_Query::create()
-		->select('p.upref_val, p.upref_key')
+		->select('p.upref_val, p.upref_key, p.upref_longval')
 		->from('NsmUserPreference p INDEXBY p.upref_key')
 		->where('p.upref_user_id=?', array($this->user_id))
 		->execute(array(), Doctrine::HYDRATE_ARRAY);
 		
 		$out = array();
-		foreach ($res as $key=>$d) $out[$key] = $d['upref_val'];
+		foreach ($res as $key=>$d) $out[$key] = $d['upref_longval'] ? 'BLOB' : $d['upref_val'];
 		
 		return $out;
 	}

@@ -95,6 +95,13 @@
 				</parameter>
 			</output_type>
 			
+			<output_type name="javascript">
+				<parameter name="http_headers">
+					<parameter name="Content-Type">text/javascript; charset=UTF-8</parameter>
+					<!-- <parameter name="Content-Type">text/plain; charset=UTF-8</parameter> -->
+				</parameter>
+			</output_type>
+			
 			<output_type name="ajax">
 				<renderers default="php">
 					<renderer name="php" class="AgaviPhpRenderer">
