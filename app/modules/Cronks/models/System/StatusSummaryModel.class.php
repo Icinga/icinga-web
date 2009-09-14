@@ -15,6 +15,11 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			10	=> 'NOT OK',
 			20	=> 'All',
 		),
+		'hostchart'	=> array (
+			0	=> 'OK',
+			1	=> 'UNKNOWN',
+			2	=> 'DOWN',
+		),
 		'service'	=> array (
 			0	=> 'OK',
 			1	=> 'WARNING',
@@ -23,16 +28,32 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			10	=> 'NOT OK',
 			20	=> 'All',
 		),
+		'servicechart'	=> array (
+			0	=> 'OK',
+			1	=> 'WARNING',
+			2	=> 'CRITICAL',
+			3	=> 'UNKNOWN',
+		),
 	);
 
 	private $dataSources = array (
-		'host'		=> array (
-			'target'	=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
-			'column'	=> 'host_state',
+		'host'			=> array (
+			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
+			'column'		=> 'host_state',
 		),
-		'service'	=> array (
-			'target'	=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
-			'column'	=> 'service_state',
+		'hostchart'		=> array (
+			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
+			'column'		=> 'host_state',
+			'title'			=> 'Hosts',
+		),
+		'service'		=> array (
+			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
+			'column'		=> 'service_state',
+		),
+		'servicechart'	=> array (
+			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
+			'column'		=> 'service_state',
+			'title'			=> 'Services',
 		),
 	);
 
@@ -96,7 +117,15 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 							break;
 					}
 					$data = $this->getStatusDataCollection($this->type, $stateId, $stateCount);
-					array_push($this->data, $data);
+					if ($this->type == 'host' || $this->type == 'service') {
+						array_push($this->data, $data);
+					} else {
+						$this->data[$data['state_name']] = $data['count'];
+					}
+				}
+				if ($this->type != 'host' && $this->type != 'service') {
+					$this->data['type'] = $this->dataSources[$this->type]['title'];
+					$this->data = array($this->data);
 				}
 			}
 		}

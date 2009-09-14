@@ -10,22 +10,20 @@
 var CronkDisplayStateSummary = {
 
 	cmp : Ext.getCmp("<?php echo $htmlid; ?>"),
-	url : "<?php echo $ro->gen('icinga.cronks.statusSummary.json'); ?>",
+	url : "<?php echo $ro->gen('icinga.cronks.statusSummary.json'); ?>?dtype=",
 
 	panelDefs : {
 		host : {
-			itemId : "panel-hosts",
+			itemId : AppKit.genRandomId('cronk-'),
 			title : false,
 		},
 		service : {
-			itemId : "panel-services",
+			itemId : AppKit.genRandomId('cronk-'),
 			title : false,
 		},
 		chart : {
-			itemId : "panel-chart",
-			title : "charts",
-			width: 600,
-			height: 400
+			itemId : AppKit.genRandomId('cronk-'),
+			title : false
 		}
 	},
 
@@ -34,21 +32,31 @@ var CronkDisplayStateSummary = {
 	view : false,
 	panel : false,
 
+	loaded : false,
 	storeCollection : new Array(),
 
 	init : function () {
 		this.createPanel();
-		this.showGrid("host");
-		//this.reset();
-		this.showGrid("service");
-		this.showCharts();
 		Ext.getCmp("view-container").doLayout();
+		Ext.TaskMgr.start({
+			run: this.refresh,
+			interval: 300 * 1000
+		});
 	},
 
-	reset : function () {
-		this.store = false;
-		this.tpl = false;
-		this.view = false;
+	refresh : function () {
+		if (CronkDisplayStateSummary.loaded !== false) {
+			var numStores = CronkDisplayStateSummary.storeCollection.length;
+			for (var x = 0; x < numStores; x++) {
+				CronkDisplayStateSummary.storeCollection[x].reload();
+			}
+		} else {
+			CronkDisplayStateSummary.showGrid("host");
+			CronkDisplayStateSummary.showGrid("service");
+			CronkDisplayStateSummary.showChart("host");
+			CronkDisplayStateSummary.showChart("service");
+			CronkDisplayStateSummary.loaded = true;
+		}
 	},
 
 	createPanel : function () {
@@ -61,10 +69,16 @@ var CronkDisplayStateSummary = {
 			items: [
 				{
 					itemId: this.panelDefs.host.itemId,
-					title: ((this.panelDefs.host.title !== false) ? this.panelDefs.host.title : false)
+					title: ((this.panelDefs.host.title !== false) ? this.panelDefs.host.title : false),
+					style: {
+						marginRight: "10px"
+					}
 				},{
 					itemId: this.panelDefs.service.itemId,
-					title: ((this.panelDefs.service.title !== false) ? this.panelDefs.service.title : false)
+					title: ((this.panelDefs.service.title !== false) ? this.panelDefs.service.title : false),
+					style: {
+						marginRight: "10px"
+					}
 				},{
 					itemId: this.panelDefs.chart.itemId,
 					title: ((this.panelDefs.chart.title !== false) ? this.panelDefs.chart.title : false)
@@ -78,7 +92,7 @@ var CronkDisplayStateSummary = {
 
 		// Our store to retrieve the cronks
 		this.store = new Ext.data.JsonStore({
-			url: this.url,
+			url: this.url + type,
 			root: "status_data.data",
 			autoLoad: false,
 			fields: ["state_id", "state_name", "type", "count"],
@@ -105,7 +119,7 @@ var CronkDisplayStateSummary = {
 	
 		// The dataview container
 		this.view = new Ext.DataView({
-			id: "huha" + type,
+			id: AppKit.genRandomId('cronk-'),
 			title: "test",
 			store: this.store,
 			tpl: this.tpl,
@@ -113,43 +127,53 @@ var CronkDisplayStateSummary = {
 			emptyText: "No data"
 		});
 
-		//this.cmp.add(this.view);
 		this.panel.getComponent(this.panelDefs[type].itemId).add(this.view);
 
-		// process data source for graphing
-		var storeTmp = new Ext.data.JsonStore({
-			fields: [0, 1, 2, 3],
-			data: new Array()
-		});
-		
-		// save data source
 		this.storeCollection.push(this.store);
 
 	},
 
-	showCharts : function () {
+	showChart : function (type) {
 
-		var numStores = this.storeCollection.length;
+		this.store = new Ext.data.JsonStore({
+			url: this.url + type + "chart",
+			root: "status_data.data",
+			autoLoad: false,
+			fields: ["type", "OK", "UNKNOWN", "DOWN", "WARNING", "CRITICAL"]
+		});
+		this.store.load();
 
-		for (var x = 0; x < numStores; x++) {
+		var chart = new Ext.chart.StackedBarChart({
+			width: 100,
+			height: 50,
+			store: this.store,
+			yField: "type",
+			xAxis: new Ext.chart.NumericAxis({
+				stackingEnabled: true
+			}),
+			series: [
+				{
+					xField: "OK",
+					displayName: "OK"
+				},{
+					xField: "UNKNOWN",
+					displayName: "UNKNOWN"
+				},{
+					xField: "DOWN",
+					displayName: "DOWN"
+				},{
+					xField: "WARNING",
+					displayName: "WARNING"
+				},{
+					xField: "CRITICAL",
+					displayName: "CRITICAL"
+				}
+			]
+		});
 
-			var chart = new Ext.chart.StackedBarChart({
-				width: 200,
-				height: 100,
-				store: this.storeCollection[x],
-				yField: "type",
-				xAxis: new Ext.chart.NumericAxis({
-					stackingEnabled: true,
-				}),
-				series: [{
-					xField: "count",
-					displayName: "Count"
-				}]
-			});
+		this.panel.getComponent(this.panelDefs.chart.itemId).add(chart);
 
-			this.panel.getComponent(this.panelDefs.chart.itemId).add(chart);
-
-		}
+		this.storeCollection.push(this.store);
 
 	}
 

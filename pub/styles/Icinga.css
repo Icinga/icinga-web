@@ -211,7 +211,7 @@ table.icinga-attribute-table td.val {
 
 /** NORTH FRAME **/
 #north-frame {
-	height: 50px;
+	height: 80px;
 }
 
 #north-frame div {

@@ -10,7 +10,6 @@
 
 			<validator class="string" name="htmlid" required="false">
 					<argument>htmlid</argument>
-					
 					<errors>
 						<error>Validation of htmlid failed!</error>
 					</errors>
@@ -18,9 +17,15 @@
 
 			<validator class="string" name="type" required="true">
 					<argument>type</argument>
-					
 					<errors>
 						<error>Validation of type failed!</error>
+					</errors>
+			</validator>
+
+			<validator class="string" name="dtype" required="true">
+					<argument>dtype</argument>
+					<errors>
+						<error>Validation of dtype failed!</error>
 					</errors>
 			</validator>
 

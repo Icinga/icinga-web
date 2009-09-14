@@ -5,8 +5,6 @@
 class Cronks_System_StatusSummarySuccessView extends ICINGACronksBaseView
 {
 
-	private $objects = array('host', 'service');
-
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);
@@ -25,31 +23,14 @@ class Cronks_System_StatusSummarySuccessView extends ICINGACronksBaseView
 		);
 
 		$model = $this->getContext()->getModel('System.StatusSummary', 'Cronks');
-		$api = AppKitFactories::getInstance()->getFactory('IcingaData');
 
-		foreach ($this->objectDefs as $objectKey => $objectData) {
-
-			// get object data
-			$result = $api->API()->createSearch()
-				->setSearchTarget($objectData['target'])
-				->fetch();
-
-			// process object data
-			$model->init($objectKey);
-			foreach ($result as $row) {
-				$model->addData($row->{$objectData['column']}, $row->count);
-			}
-			$jsonData['status_data']['data'] = array_merge($jsonData['status_data']['data'], $model->getStatusData());
-
-		foreach ($this->objects as $object) {
-			// fetch process object data
-			$statusData = $model->init($object)->fetchData()->getStatusData();
-			$jsonData['status_data']['data'] = array_merge($jsonData['status_data']['data'], $statusData);
-		}
+		// fetch process object data
+		$jsonData['status_data']['data'] = $model->init($rd->getParameter('dtype'))->fetchData()->getStatusData();
 
 		// store final count
 		$jsonData['status_data']['count'] = count($jsonData['status_data']['data']);
 
+		//return '{"status_data":{"count":1,"data":[{"OK":52,"UNKNOWN":8,"DOWN":0,"type":"Hosts"}]}}';
 		return json_encode($jsonData);
 	}
 

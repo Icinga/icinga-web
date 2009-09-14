@@ -126,6 +126,7 @@ function initTabPanelDropZone(t) {
 
 var cronk_list_id = AppKit.genRandomId('cronk-');
 var cronk_search_id = AppKit.genRandomId('cronk-');
+var cronk_status_summary_id = AppKit.genRandomId('cronk-');
 
 var container = new Ext.Panel({
 	layout: 'border',
@@ -154,7 +155,7 @@ var container = new Ext.Panel({
 			html: 'test2'	
 		}, {
 			columnWidth: .33,
-			html: 'test3'	
+			id: cronk_status_summary_id
 		}]
 	}, { // -- SOUTH
 		region: 'south',
@@ -264,6 +265,21 @@ if ((search = Ext.getCmp(cronk_search_id))) {
 	
 	search.add(cSearch);
 	cSearch.doLayout();
+}
+
+// Status-summary component
+if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
+
+	var cStatusSummary = AppKit.Ext.createCronk({
+		htmlid: cronk_status_summary_id ,
+		crname: 'icingaStatusSummary',
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+		layout: 'fit',
+		height: 100
+	});
+
+	status_summary.add(cStatusSummary);
+	cStatusSummary.doLayout();
 }
 
 // LOG bottom component
