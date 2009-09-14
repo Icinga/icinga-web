@@ -144,13 +144,18 @@ var CronkDisplayStateSummary = {
 		this.store.load();
 
 		var chart = new Ext.chart.StackedBarChart({
-			width: 100,
-			height: 50,
+			width: 200,
+			height: 75,
 			store: this.store,
 			yField: "type",
 			xAxis: new Ext.chart.NumericAxis({
 				stackingEnabled: true
 			}),
+			chartStyle: {
+				xAxis: {
+					majorGridLines: {size: 0}
+				},
+			},
 			series: [
 				{
 					xField: "OK",
