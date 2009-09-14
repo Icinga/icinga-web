@@ -7,7 +7,9 @@
 if (Ext.get("<?php echo $htmlid; ?>")) {
 	
 	AppKit.Ext.Widgets.IcingaAjaxGridPanel = Ext.extend(Ext.grid.GridPanel, {
-
+		meta : {},
+		filter: {},
+		
 		initComponent : function() {
 			this.tbar = this.buildTopToolbar();
 			
@@ -25,8 +27,14 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 			}];
 		},
 		
-
-	
+		setMeta : function(m) {
+			this.meta = m;
+		},
+		
+		setFilter : function(f) {
+			this.filter = f;
+		}
+		
 	});
 	
 	var IcingaMetaGridCreator = function() {
@@ -47,7 +55,7 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 				this.column_array = new Array(meta.keys.length);
 				this.sort_array = new Array(meta.keys.length);
 				this.pager_array = new Array(3);
-				this.filter_array = new Array(meta.keys.length);
+				this.filter_array = new Object();
 				this.sortinfo = new Array(2);
 
 				var ii = 0;
@@ -75,6 +83,7 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 						Ext.apply(this.column_array[i], field.display['Ext.grid.Column']);
 					}
 		
+					// Filling sort info
 					if (field.order['default'] == true) {
 						this.sort_array[ii] = {
 								direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
@@ -82,6 +91,33 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 							};
 		
 						ii++;
+					}
+					
+					// Build a filter array
+					if (field.filter['enabled'] == true && field.filter['type'] == 'extjs' && field.filter['subtype']) {
+						var f = field.filter;
+						
+						if (!f.name) {
+							f.name = index;
+						}
+						
+						//if (!f.id) {
+						//	f.id = 'f-' + f.name;
+						//}
+						
+						if (!f.xtype) {
+							f.xtype = f.subtype;
+						} 
+						
+						if (!f['label']) {
+							f['label'] = field.display['label']
+						}
+						
+						if (!f['fieldLabel']) {
+							f['fieldLabel'] = f['label'];
+						}
+						
+						this.filter_array[ index ] = f
 					}
 				}
 				
@@ -98,7 +134,12 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 				collapsible:		true,
 				animCollapse:		true,
 				border:				false,
-				columns:			this.column_array
+				columns:			this.column_array,
+				
+				// Custom properties for our custom
+				// object
+				meta:				this.meta,
+				filter:				this.filter_array
 			};
 			
 			var view_config = {
@@ -209,27 +250,115 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 			}
 			
 			return this.meta_store;
+		},
+		
+		getFilterCfg : function() {
+			return this.filter_array || {};
 		}
-		}
+		
+		} // END RETURN
 	}();
 	
 	// The filter window object
 	var IcingaGridFilterWindow = function() {
 		var oWin;
+		var oFilter;
+		var oCoPanel;
+		var oTargetPanel;
+		var oGrid;
+		var oRestrictions = {};
 		
 		function oWindow() {
 			if (!oWin) {
 				oWin = new Ext.Window({
 					title: '<?php echo $tm->_("Modify filter"); ?>',
-					width: 200,
-					height: 200,
+					// width: 200,
+					// height: 200,
 					closeAction: 'hide',
-					layout: 'form'
+					width: 400,
+					layout: 'fit',
+					
+					defaults: {
+						border: false
+					},
+					
+					listeners: {
+						add: function(co, oNew, index) {
+							this.doLayout();
+						}
+					}
 				});
 			}
 			
 			return oWin;
-		} 
+		}
+		
+		function prepareFilter() {
+			var w = oWindow();
+			
+			if (!oCoPanel) {
+				
+				oCoPanel = new Ext.form.FormPanel({
+					id: 'filter-' + oGrid.getId()
+				});
+				
+				var fields = [];
+				var i=0;
+				for (var k in oFilter) {
+					fields.push([i++, k, oFilter[k]['label']]);
+				}
+				
+				var oCombo = new Ext.ux.form.SelectBox({
+					store: new Ext.data.ArrayStore({
+						id: 0,
+						fields: ['fId', 'fType', 'fLabel'],
+						data: fields
+					}),
+					
+					fieldLabel: '<?php echo $tm->_("Add filter"); ?>',
+					
+					valueField: 'fType',
+					displayField: 'fLabel',
+					
+					listeners: {
+						select: function(oCombo, record, index) {
+							addResctriction(record.data['fType']);
+						}
+					}
+			});
+			
+				oCoPanel.add(oCombo);
+				w.add(oCoPanel);
+				
+				// Target
+				/*oTargetPanel = new Ext.form.FormPanel({
+					id: 'items-' + oGrid.getId()
+				});
+				
+				w.add(oTargetPanel);*/
+			}	
+			
+			return true;		
+			
+		}
+		
+		function addResctriction(type) {
+			if (!oRestrictions[type] && oFilter[type]) {
+				oRestrictions[type] = Ext.ComponentMgr.create(oFilter[type]);
+				
+				// Recalc the window size
+				oRestrictions[type].on('render', function(oF) {
+					var w = oF.findParentByType('window');
+					if (w) {
+						w.setHeight(w.getHeight()+oF.getHeight()+5);
+					}
+				})
+				
+				// Adding the item to panel
+				oCoPanel.add(oRestrictions[type]);
+			}
+				
+		}
 			
 		return {
 			
@@ -238,6 +367,15 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 				var win = oWindow();
 				win.setPosition(b.el.getLeft(), b.el.getTop());
 				win.show(b.el);
+			},
+			
+			setFilterCfg : function(f) {
+				oFilter = f;
+				prepareFilter();
+			},
+			
+			setGrid : function(g) {
+				oGrid = g;
 			}
 			
 		}
@@ -248,6 +386,11 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 
 		IcingaMetaGridCreator.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		var grid = IcingaMetaGridCreator.createGridFrom(meta);
+		
+		
+		IcingaGridFilterWindow.setGrid(grid);
+		IcingaGridFilterWindow.setFilterCfg( IcingaMetaGridCreator.getFilterCfg() );
+		
 		
 		// Add the window to a toolbar button
 		grid.on('render', function(g) {

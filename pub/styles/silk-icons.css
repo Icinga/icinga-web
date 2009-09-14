@@ -158,7 +158,7 @@
 .silk-shape-align-bottom { background-image: url(../images/fam/shape_align_bottom.png) !important; background-repeat: no-repeat; }
 .silk-stop { background-image: url(../images/fam/stop.png) !important; background-repeat: no-repeat; }
 .silk-table { background-image: url(../images/fam/table.png) !important; background-repeat: no-repeat; }
-.silk-table-edit { background-image: url(../images/fam/table_edit.png) !important; background-repeat: no-repeat; }
+.x-tool-edit, .silk-table-edit { background-image: url(../images/fam/table_edit.png) !important; background-repeat: no-repeat; }
 .silk-table-multiple { background-image: url(../images/fam/table_multiple.png) !important; background-repeat: no-repeat; }
 .silk-table-refresh { background-image: url(../images/fam/table_refresh.png) !important; background-repeat: no-repeat; }
 .silk-tag-blue-edit { background-image: url(../images/fam/tag_blue_edit.png) !important; background-repeat: no-repeat; }

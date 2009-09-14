@@ -196,8 +196,6 @@ var container = new Ext.Panel({
         },
         
         items: [{
-            title: '<?php echo $tm->_("Navigation"); ?>'
-        }, {
             title: '<?php echo $tm->_("Settings"); ?>',
             html: 'Some settings in here.'
         }]
@@ -279,12 +277,12 @@ if ((south = Ext.getCmp('south-frame'))) {
 	// After the LOG component is added, start autorefresh
 	cLog.on('add', function(el, component, index) {
 		if (index == 0) {
-			var refreshHander = function() {
+			var refreshHandler = function() {
 				component.getStore().reload();
 			}
 			
 			Ext.TaskMgr.start({
-				run: refreshHander,
+				run: refreshHandler,
 				interval: 60 * 1000 // 60s
 			});
 		}
