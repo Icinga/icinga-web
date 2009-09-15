@@ -101,20 +101,12 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 							f.name = index;
 						}
 						
-						//if (!f.id) {
-						//	f.id = 'f-' + f.name;
-						//}
-						
-						if (!f.xtype) {
-							f.xtype = f.subtype;
-						} 
+						if (!f.id) {
+							f.id = index;
+						}
 						
 						if (!f['label']) {
 							f['label'] = field.display['label']
-						}
-						
-						if (!f['fieldLabel']) {
-							f['fieldLabel'] = f['label'];
 						}
 						
 						this.filter_array[ index ] = f
@@ -275,7 +267,7 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 					// width: 200,
 					// height: 200,
 					closeAction: 'hide',
-					width: 400,
+					width: 500,
 					layout: 'fit',
 					
 					defaults: {
@@ -284,8 +276,21 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 					
 					listeners: {
 						add: function(co, oNew, index) {
-							this.doLayout();
+							co.doLayout();
 						}
+					},
+					
+					bbar: {
+						items: [{
+							text: '<?php echo $tm->_("Apply"); ?>',
+							iconCls: 'silk-accept',
+							handler: function(b, e) {
+								IcingaGridFilterWindow.applyFilters();
+							}
+						},{
+							text: '<?php echo $tm->_("Discard"); ?>',
+							iconCls: 'silk-cross'
+						}]
 					}
 				});
 			}
@@ -299,7 +304,11 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 			if (!oCoPanel) {
 				
 				oCoPanel = new Ext.form.FormPanel({
-					id: 'filter-' + oGrid.getId()
+					id: 'filter-' + oGrid.getId(),
+					
+					defaults: {
+						border: false
+					}
 				});
 				
 				var fields = [];
@@ -308,34 +317,39 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 					fields.push([i++, k, oFilter[k]['label']]);
 				}
 				
-				var oCombo = new Ext.ux.form.SelectBox({
+				var oCombo = new Ext.form.ComboBox({
+					
 					store: new Ext.data.ArrayStore({
 						id: 0,
 						fields: ['fId', 'fType', 'fLabel'],
 						data: fields
 					}),
 					
-					fieldLabel: '<?php echo $tm->_("Add filter"); ?>',
+					name: '__restriction_selector',
+					
+					mode: 'local',
+					typeAhead: true,
+					triggerAction: 'all',
+					forceSelection: true,
+					
+					
+					fieldLabel: '<?php echo $tm->_("Add restriction"); ?>',
 					
 					valueField: 'fType',
 					displayField: 'fLabel',
 					
 					listeners: {
 						select: function(oCombo, record, index) {
+							oCombo.setValue('');
 							addResctriction(record.data['fType']);
 						}
 					}
-			});
-			
-				oCoPanel.add(oCombo);
-				w.add(oCoPanel);
-				
-				// Target
-				/*oTargetPanel = new Ext.form.FormPanel({
-					id: 'items-' + oGrid.getId()
 				});
+			
+				oCoPanel.add({ layout: 'form', style: 'padding: 5px;', items: oCombo });
 				
-				w.add(oTargetPanel);*/
+				// Glue together
+				w.add(oCoPanel);
 			}	
 			
 			return true;		
@@ -343,21 +357,25 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 		}
 		
 		function addResctriction(type) {
-			if (!oRestrictions[type] && oFilter[type]) {
-				oRestrictions[type] = Ext.ComponentMgr.create(oFilter[type]);
+			if (oFilter[type]) {
 				
-				// Recalc the window size
-				oRestrictions[type].on('render', function(oF) {
-					var w = oF.findParentByType('window');
-					if (w) {
-						w.setHeight(w.getHeight()+oF.getHeight()+5);
-					}
-				})
-				
-				// Adding the item to panel
-				oCoPanel.add(oRestrictions[type]);
+				oCoPanel.add( AppKit.Ext.FilterHandler.createComponent(oFilter[type]) );
+				oCoPanel.doLayout();
 			}
 				
+		}
+		
+		function getFormValues() {
+			var data = oCoPanel.getForm().getValues();
+			var o = {};
+			
+			for (var k in data) {
+				if (k.indexOf('__') !== 0) {
+					o['f[' + k + ']'] = data[k];
+				}
+			}
+			
+			return o;
 		}
 			
 		return {
@@ -376,6 +394,21 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 			
 			setGrid : function(g) {
 				oGrid = g;
+			},
+			
+			destroyHandler : function() {
+				oWindow().hide();
+				oWindow().destroy();
+			},
+			
+			applyFilters : function() {
+				var data = getFormValues();
+				
+				oWindow().hide();
+				
+				oGrid.getStore().baseParams = data;
+				
+				oGrid.getStore().reload();
 			}
 			
 		}
@@ -391,6 +424,10 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 		IcingaGridFilterWindow.setGrid(grid);
 		IcingaGridFilterWindow.setFilterCfg( IcingaMetaGridCreator.getFilterCfg() );
 		
+		// Distribute destroy events
+		grid.on('destroy', function() {
+			IcingaGridFilterWindow.destroyHandler();
+		});
 		
 		// Add the window to a toolbar button
 		grid.on('render', function(g) {
@@ -418,7 +455,10 @@ if (Ext.get("<?php echo $htmlid; ?>")) {
 							},{ 
 								text: '<?php echo $tm->_("Remove"); ?>', 
 								iconCls: 'silk-cancel',
-								handler: AppKit.Ext.bogusHandler,
+								handler: function(b, e) {
+									this.getStore().baseParams = {};
+									this.getStore().reload();
+								},
 								scope: this
 							}]
 						}

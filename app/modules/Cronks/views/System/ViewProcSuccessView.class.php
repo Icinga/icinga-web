@@ -55,6 +55,13 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 			$worker->setOrderColumn($rd->getParameter('sort_field'), $rd->getParameter('sort_dir', 'ASC'));
 		}
 		
+		// Apply the filter to our template worker
+		if (is_array($rd->getParameter('f'))) {
+			$pm = $this->getContext()->getModel('System.ViewProcFilterParams', 'Cronks');
+			$pm->setParams($rd->getParameter('f'));
+			$pm->applyToWorker($worker);
+		}
+		
 		$worker->buildAll();
 
 		$data['resultRows'] = $worker->fetchDataArray();

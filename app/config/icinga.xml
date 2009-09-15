@@ -127,6 +127,7 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
