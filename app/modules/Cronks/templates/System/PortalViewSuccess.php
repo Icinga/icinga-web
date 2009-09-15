@@ -6,17 +6,23 @@
 ?>
 <script type="text/javascript">
 
-	function createPortal() {
+	(function() {
 		
 		var p_columns = "<?php echo $columns; ?>";
 		var p_width   = "<?php echo $width; ?>";
 		
+		// Toolbar of the portlet panels
 		var tools = [{
-		    id: 'gear',
-		    handler: function() {
-		        Ext.Msg.alert('Message', 'The Settings tool was clicked.');
-		    }
-		
+			id: 'edit', // x-tools-edit (with a slik icon in silk-icons.css)
+			handler: function(e, target, panel) {
+				var msg = Ext.Msg.prompt('<?php echo $tm->_("Enter title"); ?>', '<?php echo $tm->_("Change title for this portlet"); ?>', function(btn, text) {
+					if (btn == 'ok' && text) {
+						panel.setTitle(text);
+					}		
+				}, this, false, panel.title);
+				
+				msg.getDialog().alignTo(panel.getEl(), 'tr-tr');
+		    }	
 		},{
 			id:'refresh',
 			handler: function(e, target, panel) {
@@ -30,9 +36,13 @@
 		
 		}];
 		
+		// The configuration for the
+		// portal component
 		var portal_config = {
 		    layout: 'column',
 		    autoScroll: true,
+		    border: false,
+		    
 		    listeners: {
 		    	render: createPortletDragZone
 		    }
@@ -142,9 +152,8 @@
 		cmp.insert(0,new Ext.ux.Portal(portal_config));
 		
 		Ext.getCmp('view-container').doLayout();
-	}
-	
-	createPortal();
+		
+	})();
 	
 	
 </script>

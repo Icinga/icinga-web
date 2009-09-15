@@ -199,15 +199,6 @@
 						tabWidth: 130,
 						
 						items: [{
-							defaults: {
-								style: 'padding: 10px;'
-							},
-							
-							items: [{
-								title: 'Absolut',
-								html: AppKit.Ext.bogusMarkup
-							}]
-						}, {
 							expanded: true,
 							
 							defaults: {
@@ -384,7 +375,10 @@
 			enableKeyEvents: true,
 			
 			listeners: {
-				keyup: oSearchHandler.keyup
+				keyup: {
+					fn: oSearchHandler.keyup,
+					delay: 100
+				}
 			}
 		}],
 	});

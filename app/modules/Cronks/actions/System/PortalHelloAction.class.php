@@ -18,6 +18,26 @@ class Cronks_System_PortalHelloAction extends ICINGACronksBaseAction
 	{
 		return 'Success';
 	}
+	
+	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function isSecure() {
+		return true;
+	}
+	
+	public function getCredentials() {
+		return array ('icinga.user');
+	}
+	
+	public function handleError(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
 }
 
 ?>

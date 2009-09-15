@@ -8,5 +8,6 @@
 </p>
 
 <p>
-<strong>random-<?php echo AppKitRandomUtil::genSimpleId('15'); ?></strong>
+<strong>random-<?php echo AppKitRandomUtil::genSimpleId('15'); ?></strong><br />
+Parent component: <i><?php echo $rd->getParameter('htmlid'); ?></i>
 </p>

@@ -11,6 +11,7 @@
 (function() { 
 	var cParent = Ext.getCmp('<?php echo $htmlid; ?>');
 	
+	// Create a new panel with a modified body element
 	var iframe = new Ext.Panel({
 		id: '<?php echo $newid; ?>',
 		listeners: {
@@ -25,7 +26,10 @@
 		}
 	});
 	
-	cParent.add(iframe);
+	// Insert the element (no add, because reload results in multiple items)
+	cParent.insert(0, iframe);
+	
+	// Notify about changes
 	cParent.doLayout();
 	
 })();

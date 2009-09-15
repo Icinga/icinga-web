@@ -118,15 +118,17 @@ SET character_set_client = utf8;
 CREATE TABLE `nsm_user_preference` (
   `upref_id` int(10) NOT NULL AUTO_INCREMENT,
   `upref_user_id` int(10) NOT NULL,
-  `upref_val` varchar(100) NOT NULL,
+  `upref_val` varchar(100) DEFAULT NULL,
+  `upref_longval` blob,
   `upref_key` varchar(50) NOT NULL,
   `upref_created` datetime NOT NULL,
   `upref_modified` datetime NOT NULL,
   PRIMARY KEY (`upref_id`),
   UNIQUE KEY `nsm_user_preference_userkey` (`upref_user_id`,`upref_key`),
   CONSTRAINT `nsm_user_nsm_user_preference_fk` FOREIGN KEY (`upref_user_id`) REFERENCES `nsm_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 SET character_set_client = @saved_cs_client;
+
 
 
 
