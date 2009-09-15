@@ -6,7 +6,7 @@
 ?>
 <script type="text/javascript">
 	
-var dummy = function () {
+var dummyCronkDisplayStateSummary = function () {
 
 	var CronkDisplayStateSummary = {
 	
