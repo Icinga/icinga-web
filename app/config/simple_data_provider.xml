@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<setting name="simpledataprovider" xmlns="http://agavi.org/agavi/1.0/config">
+
+		<parameter name="hostinfo">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">IcingaApiSimpleDataProvider</parameter>
+			<parameter name="description">query for host information</parameter>
+			<parameter name="target">IcingaApi::TARGET_HOST</parameter>
+			<parameter name="result_columns">
+				<parameter>HOST_ADDRESS</parameter>
+			</parameter>
+			<parameter name="filter">
+				<parameter>
+					<parameter name="column">CONTACTGROUP_NAME</parameter>
+					<parameter name="value">%</parameter>
+					<parameter name="match_type">IcingaApi::MATCH_LIKE</parameter>
+				</parameter>
+			</parameter>
+			<parameter name="user_filters">
+				<parameter name="host">
+					<parameter name="column">HOST_NAME</parameter>
+					<parameter name="match_type">IcingaApi::MATCH_EXACT</parameter>
+				</parameter>
+			</parameter>
+		</parameter>
+
+</setting>

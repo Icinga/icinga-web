@@ -127,6 +127,7 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
@@ -197,4 +198,7 @@
 	
 	<!-- Our cronks config goes here -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
+
+	<!-- Include settings for simple-data provider -->
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml"/>
 </settings>
