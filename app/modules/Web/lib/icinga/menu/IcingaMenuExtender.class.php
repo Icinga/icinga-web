@@ -35,7 +35,7 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 				->setCaption('Host Detail')
 				);
 				
-				$icinga->addSubItem(AppKitNavItem::create('icinga.viewTest', 'icinga.viewTest')
+				$icinga->addSubItem(AppKitNavItem::create('icinga.portalView', 'icinga.portalView')
 				->setCaption('Portal')
 				);
 				

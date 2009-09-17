@@ -17,6 +17,7 @@ class IcingaExtApplicationState extends AgaviFilter implements AgaviIActionFilte
 		
 		// Check if we have a valid user
 		if ($this->getContext()->getUser()->isAuthenticated()) {
+			
 			$request = $this->getContext()->getRequest();
 			$response = $container->getResponse();
 			$cookies = $request->getRequestData()->getCookies();
@@ -27,15 +28,13 @@ class IcingaExtApplicationState extends AgaviFilter implements AgaviIActionFilte
 			foreach ($cookies as $name=>$val) {
 				if(strpos($name, self::EXT_COOKIE_PATTERN) === 0) {
 					$data[ substr($name, 3) ] = $val;
+					
 					/*
 					 * @todo check why this is not working
 					 */
 					// $response->unsetCookie($name);	// 1st try
 					
-					/**
-					 * @todo ExtJS hybrid state provider does not work
-					 */
-					// setCookie($name, '', time()-1000, '/'); // okay this works really
+					setCookie($name, '', time()-1000, '/'); // okay this works really
 				}
 				
 				

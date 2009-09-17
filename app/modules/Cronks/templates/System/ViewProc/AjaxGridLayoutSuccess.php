@@ -3,7 +3,6 @@
 ?>
 <script type="text/javascript">
 
-// Our own scope, hopefully
 (function() {
 	
 	var CreateGridProcessor = function (meta) {	
@@ -113,4 +112,5 @@
 	oContainer.call(oContainer);
     
 })();
+
 </script>
