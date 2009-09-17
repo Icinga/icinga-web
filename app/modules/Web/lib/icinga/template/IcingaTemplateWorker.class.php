@@ -42,6 +42,8 @@ class IcingaTemplateWorker {
 	
 	private $sort_orders	= array();
 	
+	private $conditions		= array();
+	
 	public function __construct(IcingaTemplateXmlParser &$template = null) {
 		if ($template) $this->setTemplate($template);
 	}
@@ -264,6 +266,13 @@ class IcingaTemplateWorker {
 				$search->setSearchOrder($order[0], $order[1]);
 			}
 			
+			// Restrictions
+			if (is_array($this->conditions) && count($this->conditions) > 0) {
+				foreach ($this->conditions as $condition) {
+					$search->setSearchFilter($condition['field'], $condition['val'], $condition['op']);
+				}
+			}
+			
 			// Clone our count query
 			$this->api_count = clone $search;
 			
@@ -325,6 +334,51 @@ class IcingaTemplateWorker {
 		}
 		
 		return array_keys($fields);
+	}
+	
+	/**
+	 * Add a condition by a defined xml field
+	 * @param string $field
+	 * @param mixed $val
+	 * @param integer $op
+	 * @return string the id of the condition (for deletion)
+	 */
+	public function setCondition($field, $val, $op = null) {
+		if ($op === null) $op = AppKitSQLConstants::SQL_OP_IS;
+		$id = 'c-'. AppKitRandomUtil::genSimpleId(15);
+		
+		$filter = $this->getTemplate()->getFieldByName($field, 'filter');
+		$database = $this->getTemplate()->getFieldByName($field, 'datasource');
+		$new_field = null;
+		
+		if ($filter->getParameter('field', null)) {
+			$new_field = $filter->getParameter('field');
+		} 
+		else {
+			$new_field = $database->getParameter('field');
+		}
+		
+		if (!$new_field) {
+			throw new IcingaTemplateWorkerException('Could not determine the icinga api field');
+		}
+		
+		if ($op = AppKitSQLConstants::SQL_OP_CONTAIN) {
+			$val = '%'. $val. '%';
+		}
+		
+		$new_op = AppKitSQLConstants::getIcingaMatch($op);
+		
+		if ($new_op == false) {
+			throw new IcingaTemplateWorkerException('No existing icinga search match operator found!');
+		}
+		
+		$this->conditions[ $id ] = array (
+			'val'	=> $val,
+			'field'	=> $new_field,
+			'op'	=> $new_op
+		);
+		
+		return $id;
 	}
 	
 }

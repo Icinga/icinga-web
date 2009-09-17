@@ -63,6 +63,15 @@
 					</errors>
 		</validator>
 		
+		<validator class="string" name="f" required="false">
+			<arguments base="f[]">
+				<argument />
+			</arguments>
+					
+			<errors>
+				<error>Filter validation fails!</error>
+			</errors>
+		</validator>		
 	</validators>
 	</ae:configuration>
 </ae:configurations>

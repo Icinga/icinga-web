@@ -6,9 +6,9 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">The template name</parameter>
-        <parameter name="description">A test xml stub template</parameter>
-        <parameter name="author">Marius Hein</parameter>
+        <parameter name="name">Default icinga host status template</parameter>
+        <parameter name="description">Displays object status information</parameter>
+        <parameter name="author">icinga-web developers</parameter>
     </meta>
     
     <!-- 
@@ -84,9 +84,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-                <parameter name="subtype">textfield</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
                 
-                
+                <parameter name="no_operator">false</parameter>
+               	                
+				<parameter name="field">HOST_OBJECT_ID</parameter>
             </filter>
             
             <order>
@@ -119,7 +121,7 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-                <parameter name="subtype">textfield</parameter>
+				<parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
             
             <order>

@@ -16,7 +16,7 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 	
 	public function truncateOutput($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		
-		$length = $method_params->getParameter('langth', 10);
+		$length = $method_params->getParameter('length', 10);
 		
 		if (strlen($val) > $length) {
 			

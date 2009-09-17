@@ -6,9 +6,9 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">Logview</parameter>
-        <parameter name="description">Structure for log entries</parameter>
-        <parameter name="author">Marius Hein</parameter>
+        <parameter name="name">Default logviewer template</parameter>
+        <parameter name="description">Displays the process log</parameter>
+        <parameter name="author">icinga-web developers</parameter>
     </meta>
     
     <!-- 
