@@ -198,8 +198,14 @@
                 <parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">truncateOutput</parameter>
-					
                 </parameter>
+
+				<!--
+                <parameter name="jsFunc">
+                	<parameter name="class"></parameter>
+                	<parameter name="method"></parameter>
+                </parameter>
+                -->
             </display>
         	
             <filter>

@@ -65,11 +65,40 @@ class Web_IcingaApiSimpleDataProviderModel extends ICINGAWebBaseModel
 		return $this;
 	}
 
+	public function setOrder () {
+		if (array_key_exists('order', $this->config) && $this->config['order'] !== false) {
+			$orderDefs = (array_key_exists('column', $this->config['order'])) ? array($this->config['order']) : $this->config['order'];
+			foreach ($orderDefs as $currentDef) {
+				if (array_key_exists('direction', $currentDef)) {
+					$this->setSearchOrder($currentDef['column'], $currentDef['direction']);
+				} else {
+					$this->setSearchOrder($currentDef['column']);
+				}
+			}
+		}
+		return $this;
+	}
+
+	public function setLimit () {
+		if (array_key_exists('limit', $this->config) && $this->config['limit'] !== false) {
+			$limitDefs = $this->config['limit'];
+			if (array_key_exists('length', $limitDefs)) {
+				$this->setSearchLimit($limitDefs['start'], $limitDefs['length']);
+			} else {
+				$this->setSearchLimit($limitDefs['start']);
+			}
+		}
+		return $this;
+	}
+
 	public function fetch () {
 		$result = false;
-		if ($this->filterSet === true) {
-			$result = $this->apiSearch->fetch();
+		if ($this->filterSet === false) {
+			$this->applyFilter();
 		}
+		$this->setOrder();
+		$this->setLimit();
+		$result = $this->apiSearch->fetch();
 //var_dump(array(
 //	'config'	=> $this->config,
 //	'result'	=> $result
@@ -95,6 +124,16 @@ class Web_IcingaApiSimpleDataProviderModel extends ICINGAWebBaseModel
 
 	private function setResultColumns ($column) {
 		$this->apiSearch->setResultColumns($column);
+		return $this;
+	}
+
+	private function setSearchOrder ($column, $direction = 'asc') {
+		$this->apiSearch->setSearchOrder($column, $direction);
+		return $this;
+	}
+
+	private function setSearchLimit ($start, $length = false) {
+		$this->apiSearch->setSearchLimit($start, $length);
 		return $this;
 	}
 

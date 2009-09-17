@@ -14,16 +14,30 @@ class Web_IcingaApiSimpleDataProviderSuccessView extends ICINGAWebBaseView
 	public function executeJson(AgaviRequestDataHolder $rd) {
 
 		// init
-		$jsonData = array();
+		$jsonData = array(
+			'result'	=> array (
+				'count'	=> 0,
+				'data'	=> array(),
+			),
+		);
 		$model = $this->getContext()->getModel('IcingaApiSimpleDataProvider', 'Web');
 
 		$srcId = $rd->getParameter('src_id');
 		$filter = $rd->getParameter('filter');
 
-		$jsonData = $model->setSourceId($srcId)->setFilter($filter)->fetch();
+		$result = $model->setSourceId($srcId)->setFilter($filter)->fetch();
+
+		foreach ($result as $row) {
+			$dataTmp = array();
+			foreach ($result->getRow() as $key => $value) {
+				$dataTmp[$key] = $value;
+			}
+			array_push($jsonData['result']['data'], $dataTmp);
+		}
 
 		// store final count
-		//$jsonData['status_data']['count'] = count($jsonData['status_data']['data']);
+		$jsonData['result']['count'] = count($jsonData['result']['data']);
+		//var_dump($jsonData);
 
 		return json_encode($jsonData);
 
