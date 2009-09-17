@@ -6,87 +6,120 @@
 var IcingaMetaGridCreator = function() {
 		return {
 			
-			store_url : undefined, 
+			// Url of the store
+			store_url : undefined,
+			
+			// ExtJS store object 
 			meta_store : undefined,
+			
+			// ExtJS reader object
 			meta_reader : undefined,
-				
+			
+			// Template json
+			meta : {},
+			
+			// Extracted column mappings
+			mapping_array : [],
+			
+			// Extracted columns (ColumnModel)
+			column_array : [],
+			
+			// Sorting information
+			sort_array : [],
+			
+			// Info about pager bbar
+			pager_array : {},
+			
+			// Configured filters
+			filter_array : {},
+			
+			
 			setStoreUrl : function(url) {
 				this.store_url = url;
 			},
 			
 			createGridFrom : function(meta) {
-					this.meta = meta;
+			
+				// Copy the meta information
+				Ext.apply(this.meta, meta);
+			
+//				this.mapping_array = [];
+//				this.column_array = [];
+//				this.sort_array = [];
+//				this.pager_array = {};
+//				this.filter_array = {};
+//				this.sortinfo = new Array(2);
+
+				// stubid index counter
+				var ii = 0;
+
+				for (var i=0; i<meta.keys.length; i++) {
+					var index = meta.keys[i];
+					var field = meta.fields[index];
+		 			
+					this.mapping_array[i] = {name: index};
 					
-					this.mapping_array = new Array(meta.keys.length);
-					this.column_array = new Array(meta.keys.length);
-					this.sort_array = new Array(meta.keys.length);
-					this.pager_array = new Array(3);
-					this.filter_array = new Object();
-					this.sortinfo = new Array(2);
-	
-					var ii = 0;
-	
-					for (var i=0; i<meta.keys.length; i++) {
-						var index = meta.keys[i];
-						var field = meta.fields[index];
-			 			
-						this.mapping_array[i] = {name: index};
-						
-						// default column array
-						this.column_array[i] = {
-							header:			field.display['label'],
-							dataIndex:		index,
-							sortable:		(field.order.enabled ? true : false),
-							hidden:			(field.display.visible ? false : true)
-						};
-	
-						if (field.display.width) {
-							this.column_array[i].width = field.display.width;
-						}
-						
-						// Apply special config
-						if (field.display['Ext.grid.Column']) {
-							Ext.apply(this.column_array[i], field.display['Ext.grid.Column']);
-						}
-			
-						// Filling sort info
-						if (field.order['default'] == true) {
-							this.sort_array[ii] = {
-									direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
-									field: index
-								};
-			
-							ii++;
-						}
-						
-						// Build a filter array
-						if (field.filter['enabled'] == true && field.filter['type'] == 'extjs' && field.filter['subtype']) {
-							var f = field.filter;
-							
-							// Switch types
-							// f.type = f.subtype;
-							// delete(f.subtype);
-							
-							// Setting the name
-							if (!f.name) {
-								f.name = index;
-							}
-							
-							// Copy the id
-							// if (!f.id) {
-								f.id = index;
-							// }
-							
-							// Get the label from the display conf
-							if (!f['label']) {
-								f['label'] = field.display['label']
-							}
-							
-							this.filter_array[ index ] = f
-						}
+					// default column array
+					this.column_array[i] = {
+						header:			field.display['label'],
+						dataIndex:		index,
+						sortable:		(field.order.enabled ? true : false),
+						hidden:			(field.display.visible ? false : true)
+					};
+
+					if (field.display.width) {
+						this.column_array[i].width = field.display.width;
 					}
 					
-					return this.applyMetaGrid();			
+					// Apply special config
+					if (field.display['Ext.grid.Column']) {
+						Ext.apply(this.column_array[i], field.display['Ext.grid.Column']);
+					}
+		
+					// Filling sort info
+					if (field.order['default'] == true) {
+						this.sort_array[ii] = {
+								direction: (field.order.direction ? field.order.direction.toUpperCase() : 'ASC'),
+								field: index
+							};
+		
+						ii++;
+					}
+					
+					// Build a filter array
+					if (field.filter['enabled'] == true && field.filter['type'] == 'extjs' && field.filter['subtype']) {
+						var f = field.filter;
+						
+						// Switch types
+						// f.type = f.subtype;
+						// delete(f.subtype);
+						
+						// Setting the name
+						if (!f.name) {
+							f.name = index;
+						}
+						
+						// Copy the id
+						// if (!f.id) {
+							f.id = index;
+						// }
+						
+						// Get the label from the display conf
+						if (!f['label']) {
+							f['label'] = field.display['label']
+						}
+						
+						this.filter_array[ index ] = f
+					}
+				}
+				
+				Ext.apply(this.pager_array, {
+					enabled : meta.template.pager.enabled || false ,
+					size : meta.template.pager.size || 25,
+					start : meta.template.pager.start || 0
+				});
+				
+				return this.applyMetaGrid();			
 			},
 			
 			applyMetaGrid : function() {
@@ -135,11 +168,16 @@ var IcingaMetaGridCreator = function() {
 						displayMsg:		'Displaying topics {0} - {1} of {2}',
 						emptyMsg:		'No topics to display'
 		
-						// ,
-						// plugins:		new Ext.ux.SlidingPager()
+//						,
+//						plugins:		new Ext.ux.SlidingPager()
 					});
 		
-					this.getMetaStore().load({params:{page_start: pager_array.start, page_limit: pager_array.size}});
+					this.getMetaStore().load({
+						params: {
+							page_start: this.pager_array.start,
+							page_limit: this.pager_array.size
+						}
+					});
 				}
 				else {
 					this.getMetaStore().load();

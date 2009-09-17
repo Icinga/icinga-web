@@ -2,6 +2,8 @@
 	$htmlid = $rd->getParameter('htmlid');
 ?>
 <script type="text/javascript">
+
+// Our own scope, hopefully
 (function() {
 	
 	var CreateGridProcessor = function (meta) {	
@@ -25,12 +27,13 @@
 			}
 			else {
 			
-				var c = 0;
-				for (var t in IcingaMetaGridCreator.getFilterCfg()) {
-					c++;
-				}
+				var bFilters = false;
+				
+				Ext.iterate(IcingaMetaGridCreator.getFilterCfg(), function() {
+					if (bFilters == false) bFilters = true;
+				});
 			
-				if (c>0) {
+				if (bFilters == true) {
 				
 					IcingaGridFilterWindow.setGrid(grid);
 					IcingaGridFilterWindow.setFilterCfg( IcingaMetaGridCreator.getFilterCfg() );
@@ -81,18 +84,33 @@
 	}
 
 	// First loading the meta info to configure the grid
-	Ext.Ajax.request({
-		   url: '<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>',
-		   success: function(response, opts) {
-		   	
-		      var meta = Ext.decode(response.responseText);
-		      
-		      CreateGridProcessor(meta); // Build the grid
-		   },
-		   failure: function(response, opts) {
-			   Ext.Msg.alert('Error', 'Could not load template meta information');
-		   }
-	});
+	var oContainer = function() {
+		
+		Ext.Ajax.request({
+			   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
+			   
+			   success: function(response, opts) {
+			   	
+			      var meta = Ext.decode(response.responseText);
+			      
+			      CreateGridProcessor(meta); // Build the grid
+			      
+			   },
+			   
+			   failure: function(response, opts) {
+
+					AppKit.Ext.notifyMessage(
+						"Ext.Ajax.request: request failed!",
+						String.format("{0} ({1})", response.statusText, response.status)
+					);
+					
+			   },
+			   
+			   scope : oContainer
+		});
+	}
+	
+	oContainer.call(oContainer);
     
 })();
 </script>

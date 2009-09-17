@@ -6,9 +6,9 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">The template name</parameter>
-        <parameter name="description">A test xml stub template</parameter>
-        <parameter name="author">Marius Hein</parameter>
+        <parameter name="name">Default icinga host status template</parameter>
+        <parameter name="description">Displays object status information</parameter>
+        <parameter name="author">icinga-web developers</parameter>
     </meta>
     
     <!-- 

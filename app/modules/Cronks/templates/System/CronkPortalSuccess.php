@@ -277,14 +277,31 @@ if ((south = Ext.getCmp('south-frame'))) {
 	// After the LOG component is added, start autorefresh
 	cLog.on('add', function(el, component, index) {
 		if (index == 0) {
+			
+			// Refresh the component
 			var refreshHandler = function() {
 				component.getStore().reload();
 			}
 			
-			Ext.TaskMgr.start({
+			// Creating a task
+			var task = Ext.TaskMgr.start({
 				run: refreshHandler,
 				interval: 60 * 1000 // 60s
 			});
+			
+			// Run if needed
+			var switchHandler = function(c) {
+				if (c.collapsed == true) {
+					Ext.TaskMgr.stop(task);
+				}
+				else {
+					Ext.TaskMgr.start(task);
+				}
+			}
+			
+			// Register corresponding events
+			south.on('collapse', switchHandler);
+			south.on('expand', switchHandler);
 		}
 	});
 	
