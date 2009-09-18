@@ -51,7 +51,9 @@
 				</route>
 				
 				
-				
+				<route pattern="^/ext" name=".ext">
+					<route pattern="/applicationState" name=".applicationState" output_type="javascript" action="Ext.ApplicationState" />
+				</route>
 			</route>
 			
 			<!-- My routes (AppKit preferences) -->
@@ -92,10 +94,6 @@
 					</route>
 					
 					<route name=".persistentprovider.json" pattern="^/persistenceProvider/json" output_type="json" action="Icinga.Cronks.PersistenceProvider" />
-				</route>
-				
-				<route pattern="^/ext" name=".ext">
-					<route pattern="/applicationState" name=".applicationState" output_type="javascript" action="Icinga.Ext.ApplicationState" />
 				</route>
 				
 			</route>

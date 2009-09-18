@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_Ext_ApplicationStateAction extends ICINGAWebBaseAction
+class AppKit_Ext_ApplicationStateAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

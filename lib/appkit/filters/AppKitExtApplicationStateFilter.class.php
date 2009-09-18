@@ -4,7 +4,7 @@
  * @author mhein
  *
  */
-class IcingaExtApplicationState extends AgaviFilter implements AgaviIActionFilter {
+class AppKitExtApplicationStateFilter extends AgaviFilter implements AgaviIActionFilter {
 	
 	const EXT_COOKIE_PATTERN	= 'ys-';
 	const DATA_NAMESPACE		= 'de.icinga.ext.appstate';

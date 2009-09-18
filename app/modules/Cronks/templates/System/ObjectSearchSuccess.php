@@ -2,6 +2,9 @@
 	$htmlid = $rd->getParameter('htmlid');
 ?>
 <script type="text/javascript">
+
+(function() {
+
 	var oid = '<?php echo $htmlid; ?>';
 	var coParent = Ext.getCmp(oid);
 	
@@ -303,7 +306,7 @@
 				
 				if (noresult == false && test == 0) {
 					noresult = true;
-					AppKit.Ext.Message('Search', 'No results!');
+					AppKit.Ext.notifyMessage('Search', 'No results!');
 				}
 			},
 			
@@ -386,4 +389,7 @@
 	coParent.add(oSearch);
 	
 	Ext.getCmp('north-frame').doLayout();
+
+})();
+
 </script>

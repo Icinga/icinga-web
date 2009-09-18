@@ -31,15 +31,17 @@ class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 		}
 		
 		// Adding squished javascript files
-		$header->addJsFile($this->getContext()->getRouting()->gen('appkit.squishloader', array('type' => AppKitBulkLoader::CODE_TYPE_JAVASCRIPT)));
+		$squish_url = $this->getContext()->getRouting()->gen('appkit.squishloader', array('type' => AppKitBulkLoader::CODE_TYPE_JAVASCRIPT));
+		$header->addJsFile($squish_url);
 		
+		// Adding some meta tags to the page header
 		if (is_array( ($tags = AgaviConfig::get('de.icinga.appkit.meta_tags')) )) {
 			foreach ($tags as $tag_name => $tag_val) {
 				$header->addMetaTag($tag_name, $tag_val);
 			}
 		}
 		
-		return 'Success';
+		return $this->getDefaultViewName();
 		
 	}
 }

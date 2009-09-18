@@ -31,6 +31,29 @@
 		<parameter>IcingaMenuExtender</parameter>
 	</setting>
 
+	<setting name="appkit.custom_events">
+	
+		<!-- This is our root menu -->
+		<parameter name="AppKitMenuEventDistributor">
+			<parameter name="event">appkit.menu</parameter>
+			<parameter name="class">AppKitMenuCreator</parameter>
+		</parameter>
+	
+		<!-- Providing ExtJS stateful information -->
+		<parameter name="AppKitExtApplicationStateData">
+			<parameter name="event">appkit.headerdata.publish</parameter>
+			<parameter name="class">AppKitExtStateProviderData</parameter>
+			
+			<!-- 
+				constructor argument:
+				we need the route name where the browser can load our data
+			-->
+			<parameter name="parameter">
+				<parameter name="route">appkit.ext.applicationState</parameter>
+			</parameter>
+		</parameter>
+	</setting>
+
 	<setting name="appkit.include_styles">		
 	
 		<!-- ICINGAWireFrame css -->

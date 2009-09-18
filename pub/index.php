@@ -26,7 +26,12 @@ AppKit::bootstrap();
 // +---------------------------------------------------------------------------+
 // | Call the controller's dispatch method on the default context              |
 // +---------------------------------------------------------------------------+
+
+// AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.dispatch', 'Agavi is starting its container');
+
 AgaviContext::getInstance('web')->getController()->dispatch();
+
+// AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.afterdispatch', 'Agavi stoped, response is served');
 
 exit (0);
 
