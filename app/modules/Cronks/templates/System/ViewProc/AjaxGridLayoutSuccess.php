@@ -90,10 +90,24 @@
 			   
 			   success: function(response, opts) {
 			   	
-			      var meta = Ext.decode(response.responseText);
-			      
-			      CreateGridProcessor(meta); // Build the grid
-			      
+					var meta = Ext.decode(response.responseText);
+					// Include needed javascript by the xml template
+					if (meta.template.option.dynamicscript) {
+						Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
+							AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
+						});
+						
+						// Wait 200ms before executing
+						
+						/**
+						 * @todo Make this event driven
+						 */
+						var f = CreateGridProcessor.createCallback(meta);
+						f.defer(200);
+					}
+					else {
+						CreateGridProcessor(meta);
+					}
 			   },
 			   
 			   failure: function(response, opts) {
@@ -109,7 +123,7 @@
 		});
 	}
 	
-	oContainer.call(oContainer);
+	oContainer.call(this);
     
 })();
 

@@ -40,6 +40,8 @@ var IcingaGridFilterWindow = function() {
 			}
 		});
 		
+		oWindow().doLayout();
+		
 		return true;
 	});
 	
@@ -71,7 +73,7 @@ var IcingaGridFilterWindow = function() {
 							IcingaGridFilterWindow.applyFilters();
 						}
 					},{
-						text: '<?php echo $tm->_("Disvard"); ?>',
+						text: '<?php echo $tm->_("Discard"); ?>',
 						iconCls: 'silk-cross',
 						handler: function(b, y) {
 							oWin.hide();
@@ -168,7 +170,6 @@ var IcingaGridFilterWindow = function() {
 			// Create a filter panel component and add them
 			// to the form
 			oCoPanel.add( oFilterHandler.createComponent( oFilter[type]) );
-			
 			
 			// Notify about changes
 			oCoPanel.doLayout();
@@ -268,7 +269,7 @@ var IcingaGridFilterWindow = function() {
 		},
 		
 		resetFilterForm : function() {
-			
+			oFilterHandler.removeAllComponents();
 		}
 		
 	};

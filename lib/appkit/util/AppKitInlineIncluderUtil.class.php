@@ -7,6 +7,11 @@ class AppKitInlineIncluderUtil {
 		return $real_file;
 	}
 	
+	public static function getFileContent($file) {
+		$real_file = self::getFile($file);
+		return file_get_contents($real_file);
+	}
+	
 	private static function getFile($file, $path = null) {
 		
 		if ($path !== null) {

@@ -362,8 +362,14 @@ class IcingaTemplateWorker {
 			throw new IcingaTemplateWorkerException('Could not determine the icinga api field');
 		}
 		
-		if ($op = AppKitSQLConstants::SQL_OP_CONTAIN) {
-			$val = '%'. $val. '%';
+		// Add or replace some asterix within count
+		if ($op == AppKitSQLConstants::SQL_OP_CONTAIN) {
+			if (strpos($val, '*') === false) {
+				$val = $val. '%';
+			}
+			else {
+				$val = str_replace('*', '%', $val);
+			}
 		}
 		
 		$new_op = AppKitSQLConstants::getIcingaMatch($op);

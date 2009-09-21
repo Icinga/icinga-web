@@ -18,6 +18,11 @@
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        
+        <!-- These are a dynamic js lib for using specific column renderes within this template -->
+        <parameter name="dynamicscript">
+        	<parameter>IcingaColumnRenderer</parameter>
+        </parameter>
     </option>
     
     <!-- 
@@ -114,6 +119,21 @@
 					</parameter>
                 </parameter>
                 -->
+                
+                <parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+                	<parameter name="function">servicesForHost</parameter>
+                	
+                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                	<parameter name="type">celldblclick</parameter>
+                	
+                	<parameter name="arguments">
+						<parameter name="targetTemplate">icinga-service-template</parameter>
+						<parameter name="sourceField">host_object_id</parameter>
+						<parameter name="targetField">host_object_id</parameter>
+                	</parameter>
+                </parameter>
+                
             </display>
             
             <filter>
@@ -197,10 +217,19 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
                 
+                <!--
                 <parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">truncateOutput</parameter>
-					
+                </parameter>
+                -->
+                
+                <parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
                 </parameter>
             </display>
         	

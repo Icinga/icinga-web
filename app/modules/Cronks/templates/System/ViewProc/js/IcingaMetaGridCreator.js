@@ -33,6 +33,9 @@ var IcingaMetaGridCreator = function() {
 			// Configured filters
 			filter_array : {},
 			
+			// Custom grid events applied after creating the component
+			grid_events : {},
+			
 			
 			setStoreUrl : function(url) {
 				this.store_url = url;
@@ -52,7 +55,6 @@ var IcingaMetaGridCreator = function() {
 
 				// stubid index counter
 				var ii = 0;
-
 				for (var i=0; i<meta.keys.length; i++) {
 					var index = meta.keys[i];
 					var field = meta.fields[index];
@@ -66,7 +68,42 @@ var IcingaMetaGridCreator = function() {
 						sortable:		(field.order.enabled ? true : false),
 						hidden:			(field.display.visible ? false : true)
 					};
+					
+					// Here we're adding a renderer to our column
+					if (field.display['jsFunc'] && field.display['jsFunc']['function'] && field.display['jsFunc']['namespace']) {
 
+						// Try to gen a defined namespace
+						var ns = eval(field.display['jsFunc']['namespace']);
+						
+						if (ns) {
+						
+							// Configure the renderer/event					
+							if (field.display['jsFunc']['arguments']) {
+								var cfg = field.display['jsFunc']['arguments'];
+								Ext.apply(cfg, {
+									field: index
+								});
+								ns.setConfig(field.display['jsFunc']['function'], cfg);
+							}
+						
+							// Adding a renderer
+							if (!field.display['jsFunc']['type'] || field.display['jsFunc']['type'] == 'renderer') {
+								// And add them to out column model array
+								this.column_array[i].renderer = {
+									fn: ns[ field.display['jsFunc']['function'] ],
+									scope: ns
+								}
+							}
+							
+							// Adding an event
+							else {
+								this.addGridEvent(field.display['jsFunc']['type'], field.display['jsFunc']['function'], ns)
+							}
+						
+						}
+					}
+
+					// Width of the column
 					if (field.display.width) {
 						this.column_array[i].width = field.display.width;
 					}
@@ -188,7 +225,11 @@ var IcingaMetaGridCreator = function() {
 					Ext.apply(grid_config, this.meta.template.option['Ext.grid.GridPanel']);
 				}
 				
-				return new AppKit.Ext.Widgets.IcingaAjaxGridPanel(grid_config);
+				var grid =  new AppKit.Ext.Widgets.IcingaAjaxGridPanel(grid_config);
+				
+				this.applyEventsToGrid(grid);
+				
+				return grid;
 			},
 			
 			getMetaMapping : function() {
@@ -257,6 +298,26 @@ var IcingaMetaGridCreator = function() {
 			
 			getFilterCfg : function() {
 				return this.filter_array || {};
+			},
+			
+			addGridEvent : function(type, fn, ns) {
+				if (!this.grid_events[type]) {
+					this.grid_events[type] = [];
+				}
+				this.grid_events[type].push({
+					fn: ns[ fn ],
+					scope: ns
+				});
+			},
+			
+			applyEventsToGrid : function(grid) {
+				Ext.iterate(this.grid_events, function(e, arry) {
+					Ext.each(arry, function(item, index, allArry) {
+						if (typeof item.fn == "function") {
+							grid.on(e, item.fn, item.scope || window);
+						}
+					});
+				})
 			}
 		
 		} // END RETURN
