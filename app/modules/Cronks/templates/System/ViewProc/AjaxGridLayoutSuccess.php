@@ -89,21 +89,23 @@
 			   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 			   
 			   success: function(response, opts) {
-			   	
+			   		
 					var meta = Ext.decode(response.responseText);
 					// Include needed javascript by the xml template
 					if (meta.template.option.dynamicscript) {
+						// Register the create grid event
+						var f = CreateGridProcessor.createCallback(meta);
+						AppKit.Ext.ScriptDynaLoader.on('bulkfinish', function() {
+							f.call();
+							run = true;
+						}, this, { single : true });
+						
+						AppKit.Ext.ScriptDynaLoader.startBulkMode();
+						
 						Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
 							AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
 						});
 						
-						// Wait 200ms before executing
-						
-						/**
-						 * @todo Make this event driven
-						 */
-						var f = CreateGridProcessor.createCallback(meta);
-						f.defer(200);
 					}
 					else {
 						CreateGridProcessor(meta);

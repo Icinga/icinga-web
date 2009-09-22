@@ -152,12 +152,11 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ConfigurableColumnRenderer.js</parameter>
 	</setting>
 
 	<!-- This scripts are included dynamically by modules if needed -->
 	<setting name="appkit.include_dynamic_javascript">
-		<parameter name="IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
+		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>

@@ -70,37 +70,40 @@ var IcingaMetaGridCreator = function() {
 					};
 					
 					// Here we're adding a renderer to our column
-					if (field.display['jsFunc'] && field.display['jsFunc']['function'] && field.display['jsFunc']['namespace']) {
-
-						// Try to gen a defined namespace
-						var ns = eval(field.display['jsFunc']['namespace']);
-						
-						if (ns) {
-						
-							// Configure the renderer/event					
-							if (field.display['jsFunc']['arguments']) {
-								var cfg = field.display['jsFunc']['arguments'];
-								Ext.apply(cfg, {
-									field: index
-								});
-								ns.setConfig(field.display['jsFunc']['function'], cfg);
-							}
-						
-							// Adding a renderer
-							if (!field.display['jsFunc']['type'] || field.display['jsFunc']['type'] == 'renderer') {
-								// And add them to out column model array
-								this.column_array[i].renderer = {
-									fn: ns[ field.display['jsFunc']['function'] ],
-									scope: ns
-								}
-							}
+					
+					if (field.display['jsFunc']) {
+						Ext.each(field.display['jsFunc'], function(item, fIndex, allItem) {
 							
-							// Adding an event
-							else {
-								this.addGridEvent(field.display['jsFunc']['type'], field.display['jsFunc']['function'], ns)
+							if (item['function'] && item['namespace']) {
+							
+								var ns = eval(item['namespace']);
+								if (ns) {
+									
+									// The config for the function
+									var cfg = item['arguments'] || {};
+									Ext.apply(cfg, {
+										field: index
+									});
+									
+									// Get our function
+									var f = ns[ item['function'] ].call(this, cfg);
+									
+									// Adding a renderer
+									if (!item['type'] || item['type'] == 'renderer') {
+										// And add them to out column model array
+										this.column_array[i].renderer = {
+											fn: f,
+											scope: ns
+										}
+									}
+									else {
+										this.addGridEvent(item['type'], f, ns);
+									}
+									
+								}
+							
 							}
-						
-						}
+						}, this);
 					}
 
 					// Width of the column
@@ -305,7 +308,7 @@ var IcingaMetaGridCreator = function() {
 					this.grid_events[type] = [];
 				}
 				this.grid_events[type].push({
-					fn: ns[ fn ],
+					fn: fn,
 					scope: ns
 				});
 			},

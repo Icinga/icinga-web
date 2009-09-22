@@ -35,3 +35,5 @@ AppKit.Ext.Widgets.IcingaAjaxGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	}
 	
 });
+
+Ext.reg('icingagrid', AppKit.Ext.Widgets.IcingaAjaxGridPanel);

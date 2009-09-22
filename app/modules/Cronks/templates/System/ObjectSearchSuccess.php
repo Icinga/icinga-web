@@ -318,7 +318,6 @@
 					htmlid: 'search-result',
 					title: 'Search result (DUMMY)',
 					crname: 'gridProc',
-					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 					closable: true,
 					layout: 'fit',
 					
@@ -326,7 +325,9 @@
 						'template': 'icinga-service-template'
 					}
 				});
-
+				
+				console.log(re);
+				
 				// Add them to the panel and set active				
 				var tab = Ext.getCmp('cronk-tabs').add(panel);
 				Ext.getCmp('cronk-tabs').setActiveTab(tab);
@@ -344,9 +345,9 @@
 		
 	}();
 
-	var oTextField = new Ext.form.TextField({
+	var oTextField = new Ext.ux.form.FancyTextField({
 		title: 'Search',
-		xtype: 'textfield',
+		xtype: 'fancytextfield',
 		name: 'q',
 		enableKeyEvents: true,
 		
@@ -371,19 +372,7 @@
 			padding: '2px 2px 2px 2px'
 		},
 		
-		items: [{
-			title: 'Search',
-			xtype: 'fancytextfield',
-			name: 'q',
-			enableKeyEvents: true,
-			
-			listeners: {
-				keyup: {
-					fn: oSearchHandler.keyup,
-					delay: 100
-				}
-			}
-		}],
+		items: [oTextField],
 	});
 	
 	coParent.add(oSearch);

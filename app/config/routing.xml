@@ -53,7 +53,7 @@
 				
 				<route pattern="^/ext" name=".ext">
 					<route pattern="^/applicationState$" name=".applicationState" output_type="javascript" action="Ext.ApplicationState" />
-					<route pattern="^/dynascript/(script:([\w-_]+))$" name=".dynamicScriptSource" output_type="javascript" action="Ext.DynamicJavascriptSource" />
+					<route pattern="^/dynascript/(script:([\w-_\.]+))$" name=".dynamicScriptSource" output_type="javascript" action="Ext.DynamicJavascriptSource" />
 				</route>
 			</route>
 			

@@ -18,6 +18,11 @@
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        
+        <!-- These are a dynamic js lib for using specific column renderes within this template -->
+        <parameter name="dynamicscript">
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        </parameter>
     </option>
     
     <!-- 
@@ -69,6 +74,31 @@
     	Field decleration: What to display and how
     -->
     <fields>
+    
+		<field name="host_object_id">
+            <datasource>
+            	<parameter name="field">HOST_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">HostId</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.number</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field>
     
         <field name="service_object_id">
         	<datasource>
@@ -168,6 +198,13 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
                 
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+                
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">serviceStatus</parameter>
@@ -194,6 +231,13 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
+                
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
                 
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
@@ -222,6 +266,14 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
+                
+                <parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
+                </parameter>
             </display>
         	
             <filter>

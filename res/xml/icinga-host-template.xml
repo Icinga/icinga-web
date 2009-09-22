@@ -21,7 +21,7 @@
         
         <!-- These are a dynamic js lib for using specific column renderes within this template -->
         <parameter name="dynamicscript">
-        	<parameter>IcingaColumnRenderer</parameter>
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
         </parameter>
     </option>
     
@@ -121,17 +121,34 @@
                 -->
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
-                	<parameter name="function">servicesForHost</parameter>
-                	
-                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                	<parameter name="type">celldblclick</parameter>
-                	
-                	<parameter name="arguments">
-						<parameter name="targetTemplate">icinga-service-template</parameter>
-						<parameter name="sourceField">host_object_id</parameter>
-						<parameter name="targetField">host_object_id</parameter>
-                	</parameter>
+                
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">columnStyle</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="style"><![CDATA[color: #0000ff; cursor: pointer]]></parameter>
+	                	</parameter>
+	                </parameter>
+                
+	                <parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">servicesForHost</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="targetTemplate">icinga-service-template</parameter>
+							<parameter name="sourceField">host_object_id</parameter>
+							<parameter name="targetField">host_object_id</parameter>
+							<parameter name="labelField">host_name</parameter>
+	                	</parameter>
+	                </parameter>
+                
                 </parameter>
                 
             </display>
@@ -176,7 +193,6 @@
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
-                <parameter name="field">SERVICE_CURRENT_STATE</parameter>
             </order>
         </field>
         
