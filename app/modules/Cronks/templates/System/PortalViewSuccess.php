@@ -1,5 +1,5 @@
 <?php 
-	$htmlid		= $rd->getParameter('htmlid');
+	$parentid		= $rd->getParameter('parentid');
 	$columns	= $rd->getParameter('columns');  
 	
 	$width		= floor(100 / $columns) / 100;
@@ -54,10 +54,10 @@
 					
 					notifyDrop: function(dd, e, data){
 						
-						var id = AppKit.genRandomId('cronk-');
+						var id = AppKit.Ext.genRandomId('cronk-');
 						
 						var params = {
-							'p[htmlid]': id
+							'p[parentid]': id
 						};
 					
 						if (data.dragData.parameter) {
@@ -66,8 +66,8 @@
 							}
 						}
 						
-						var portlet  = AppKit.Ext.createCronk({
-							htmlid: id,
+						var portlet  = AppKit.Ext.CronkMgr.create({
+							parentid: id,
 							id: id,
 							
 							params: data.dragData.parameter,
@@ -148,7 +148,7 @@
 		
 		portal_config.items = items_config;
 		
-		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
 		cmp.insert(0,new Ext.ux.Portal(portal_config));
 		
 		Ext.getCmp('view-container').doLayout();

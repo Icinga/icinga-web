@@ -51,7 +51,7 @@
         	without working the default structures, e.g. for user classes)
         -->
        	<parameter name="additional_fields">
-       		<parameter name="max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
+       		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
        	</parameter>
          
     </datasource>
@@ -68,6 +68,10 @@
     <grouping>
     	<parameter name="enabled">true</parameter>
     	<parameter name="field">host_name</parameter>
+    	
+    	<parameter name="Ext.grid.GroupingView">
+    		<parameter name="hideGroupedColumn">true</parameter>
+    	</parameter>
     </grouping>
     
     <!--
@@ -223,7 +227,7 @@
             </order>
         </field>
 
-        <field name="check_attempt">
+        <field name="service_check_attempt">
         	<datasource>
         		<parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
         	</datasource>
@@ -243,7 +247,7 @@
                 	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.check_attempt} / ${field.max_attempt}]]></parameter>
+						<parameter name="format"><![CDATA[${field.service_check_attempt} / ${field.service_max_attempt}]]></parameter>
 					</parameter>
                 </parameter>
             </display>

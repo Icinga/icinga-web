@@ -9,10 +9,9 @@ class IcingaHostStateInfo extends IcingaStateInfo {
 	 * @var array
 	 */
 	protected $state_list = array (
-		0	=> 'UP',
-		1	=> 'DOWN',
-		2	=> 'UNREACHABLE',
-		3	=> 'UNKNOWN',
+		IcingaConstants::HOST_UP			=> 'UP',
+		IcingaConstants::HOST_DOWN			=> 'DOWN',
+		IcingaConstants::HOST_UNREACHABLE	=> 'UNREACHABLE'
 	);
 	
 	/**

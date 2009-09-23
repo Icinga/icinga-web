@@ -1,7 +1,7 @@
 <?php 
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
-<div id="<?php echo $htmlid; ?>">
+<div id="<?php echo $parentid; ?>">
 
 </div>
 <script type="text/javascript">
@@ -68,8 +68,8 @@ var CronkTabHandler = function() {
 							notifyDrop: function(dd, e, data){
 
 								// Create the cronk we want
-								var panel = AppKit.Ext.createCronk({
-									htmlid: AppKit.genRandomId('cronk-'),
+								var panel = AppKit.Ext.CronkMgr.create({
+									parentid: AppKit.Ext.genRandomId('cronk'),
 									title: data.dragData['name'],
 									crname: data.dragData.id,
 									loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
@@ -119,13 +119,8 @@ var tabPanel = new Ext.TabPanel({
 	}
 });
 
-function initTabPanelDropZone(t) {
-
-
-}
-
-var cronk_list_id = AppKit.genRandomId('cronk-');
-var cronk_search_id = AppKit.genRandomId('cronk-');
+var cronk_list_id = AppKit.Ext.genRandomId('cronklist');
+var cronk_search_id = AppKit.Ext.genRandomId('cronksearch');
 
 var container = new Ext.Panel({
 	layout: 'border',
@@ -213,29 +208,25 @@ Ext.EventManager.onWindowResize(function(w,h) {
 container.setHeight(Ext.lib.Dom.getViewHeight()-80);
 
 // Render the container
-container.render("<?php echo $htmlid; ?>");
+container.render("<?php echo $parentid; ?>");
 
 // Adding the first cronk (say hello here)
 if (tabPanel) {
-	var cHello = AppKit.Ext.createCronk({
+	var cHello = AppKit.Ext.CronkMgr.create({
 		title: '<?php echo $tm->_("Welcome"); ?>',
-		crname: 'portalHello',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit'
+		crname: 'portalHello'
 	});
 	
 	tabPanel.add(cHello);
-	
-	tabPanel.doLayout();
-	
+	tabPanel.doLayout();	
 	tabPanel.setActiveTab(cHello);
 }
 
 // Adding the cronk list
 if ((west = Ext.getCmp('west-frame'))) {
 	
-	var cList = AppKit.Ext.createCronk({
-		htmlid: cronk_list_id ,
+	var cList = AppKit.Ext.CronkMgr.create({
+		parentid: cronk_list_id ,
 		title: '<?php echo $tm->_("Cronks"); ?>',
 		crname: 'crlist',
 		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
@@ -252,10 +243,9 @@ if ((west = Ext.getCmp('west-frame'))) {
 // Search component
 if ((search = Ext.getCmp(cronk_search_id))) {
 	
-	var cSearch = AppKit.Ext.createCronk({
-		htmlid: cronk_search_id ,
+	var cSearch = AppKit.Ext.CronkMgr.create({
+		parentid: cronk_search_id,
 		crname: 'icingaSearch',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 		layout: 'fit',
 		height: 100
 	});
@@ -267,11 +257,9 @@ if ((search = Ext.getCmp(cronk_search_id))) {
 // LOG bottom component
 if ((south = Ext.getCmp('south-frame'))) {
 	
-	var cLog = AppKit.Ext.createCronk({
-		htmlid: AppKit.genRandomId('cronk-'),
-		crname: 'gridLogView',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit'
+	var cLog = AppKit.Ext.CronkMgr.create({
+		parentid: AppKit.Ext.genRandomId('cronksouth'),
+		crname: 'gridLogView'
 	});
 
 	// After the LOG component is added, start autorefresh

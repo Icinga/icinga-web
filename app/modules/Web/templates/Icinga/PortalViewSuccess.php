@@ -4,9 +4,7 @@
  * This create the complete view (simply loading a cronk which is doing for us)
  */
 
-(function() {
-	
-var oPortalViewSuccessScope = function() { 	
+Ext.onReady(function() {
 	
 	var sPortalCronk = "crportal";
 	var sRenderElement = "contentArea";
@@ -24,7 +22,7 @@ var oPortalViewSuccessScope = function() {
 			url : String.format("<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => 'crportal')); ?>/{0}", sPortalCronk),
 			scripts : true,
 			params : {
-				'p[htmlid]' : oCA.id
+				'p[parentid]' : oCA.id
 			}
 		};
 		
@@ -32,11 +30,6 @@ var oPortalViewSuccessScope = function() {
 		
 		oCA.getUpdater().refresh();
 	}
-
-}
-
-Ext.onReady(oPortalViewSuccessScope, oPortalViewSuccessScope);
-
-})();
+});
 
 </script>

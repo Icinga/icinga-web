@@ -1,11 +1,11 @@
 <?php 
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
 
 (function() {
 
-	var oid = '<?php echo $htmlid; ?>';
+	var oid = '<?php echo $parentid; ?>';
 	var coParent = Ext.getCmp(oid);
 	
 	var oSearchHandler =  function() {
@@ -314,19 +314,16 @@
 				var re = view.getStore().getAt(index);
 				
 				// Create a self loading crong :-)
-				var panel = AppKit.Ext.createCronk({
-					htmlid: 'search-result',
+				var panel = AppKit.Ext.CronkMgr.create({
+					parentid: 'search-result',
 					title: 'Search result (DUMMY)',
 					crname: 'gridProc',
 					closable: true,
-					layout: 'fit',
 					
 					params: {
 						'template': 'icinga-service-template'
 					}
 				});
-				
-				console.log(re);
 				
 				// Add them to the panel and set active				
 				var tab = Ext.getCmp('cronk-tabs').add(panel);

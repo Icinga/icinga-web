@@ -4,9 +4,9 @@ Ext.ns('AppKit.Ext.grid');
 // the namespace
 AppKit.Ext.grid.IcingaColumnRenderer = {
 
-	bogusRenderer : function(cfg) {
-		return function(value, metaData, record, rowIndex, colIndex, store) {
-			return 'BOGUS';
+	bogusGroupRenderer : function(cfg) {
+		return function(value, garbage, record, rowIndex, colIndex, store) {
+			return "GROUP: " + v;
 		}
 	},
 	
@@ -28,61 +28,52 @@ AppKit.Ext.grid.IcingaColumnRenderer = {
 		}
 	},
 	
-	servicesForHost : function(cfg) {
+	columnElement : function(cfg) {
+		return function(value, metaData, record, rowIndex, colIndex, store) {
+			Ext.apply(metaData, cfg);
+			
+			if (cfg.value) {
+				return cfg.value;
+			}
+			
+			if (cfg.noValue != true) {
+				return value;
+			}
+		}
+	},
+	
+	columnImage : function(cfg) {
+		return function(value, metaData, record, rowIndex, colIndex, store) {
+			if (cfg.style) {
+				metaData.attr += ' style="' + cfg.style + '"';
+			}
+			
+			return String.format('<img src="/appkit/image/{0}" />', cfg.image);
+		}
+	},
+	
+	subGrid : function(cfg) {
 		return function(grid, rowIndex, colIndex, e) {
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
 			if (fieldName == cfg.field) {
 				
 				var record = grid.getStore().getAt(rowIndex);
 				var val = record.data[ cfg.sourceField ];
+				var id = (cfg.idPrefix || 'empty') + 'subGridComponent';
 				
+				var cronk = {
+					parentid: id,
+					title: (cfg.titlePrefix || '') + " " + record.data[ cfg.labelField ],
+					crname: 'gridProc',
+					closable: true,
+					params: { template: cfg.targetTemplate }
+				};
 				
-				var tabs = Ext.getCmp('cronk-tabs');
+				var filter = {};
+				filter["f[" + cfg.targetField + "-value]"] = val;
+				filter["f[" + cfg.targetField + "-operator]"] = 50;
 				
-				var id="servicesForHostPanel";
-				
-				var panel=Ext.getCmp(id);
-				
-				if (!panel) {
-					panel = AppKit.Ext.createCronk({
-						htmlid: id,
-						title: 'Services for host',
-						crname: 'gridProc',
-						closable: true,
-						layout: 'fit',
-						params: { template: cfg.targetTemplate }
-					});					
-					tabs.add(panel);
-					
-					panel.on('add', function(p, c, i) {
-						if (i==0 && (c.getXType() == 'grid' || c.getXType() == 'icingagrid')) {
-							
-							var store = c.getStore();
-							
-							store.setBaseParam('f[' + cfg.targetField + '-value]', val);
-							store.setBaseParam('f[' + cfg.targetField + '-operator]', 50);
-							
-							store.reload();
-							
-						}
-					});
-					
-				}
-				else {
-					grids = panel.findByType('icingagrid');
-					if (grids[0]) {
-						grids[0].getStore().setBaseParam('f[' + cfg.targetField + '-value]', val);
-						grids[0].getStore().setBaseParam('f[' + cfg.targetField + '-operator]', 50);
-						
-						grids[0].getStore().reload();
-					}
-				}
-				
-				panel.setTitle('Services for ' + (record.data[ cfg.labelField ] || 'UNKNOWN'));
-				tabs.setActiveTab(panel);
-				
-				tabs.doLayout();
-				Ext.getCmp('view-container').doLayout();
+				AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
 			}
 		}
 	}

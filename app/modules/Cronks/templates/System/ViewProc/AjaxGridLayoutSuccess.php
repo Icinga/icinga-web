@@ -1,5 +1,5 @@
 <?php 
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
 
@@ -7,13 +7,10 @@
 	
 	var CreateGridProcessor = function (meta) {	
 		
-		// Magick includes (the grid class)
-		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaGrid.js')); ?>
-
-		// Magick includes (GridMetaCreator)
-		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaMetaGridCreator.js')); ?>
-		IcingaMetaGridCreator.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
-		var grid = IcingaMetaGridCreator.createGridFrom(meta);
+		var MetaGrid = new AppKit.Ext.grid.MetaGridCreator(meta);
+		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		
+		var grid = MetaGrid.createGrid();
 		
 		// Magick includes (Grid filters)
 		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaGridFilterHandler.js')); ?>
@@ -28,14 +25,14 @@
 			
 				var bFilters = false;
 				
-				Ext.iterate(IcingaMetaGridCreator.getFilterCfg(), function() {
+				Ext.iterate(MetaGrid.getFilterCfg(), function() {
 					if (bFilters == false) bFilters = true;
 				});
 			
 				if (bFilters == true) {
 				
 					IcingaGridFilterWindow.setGrid(grid);
-					IcingaGridFilterWindow.setFilterCfg( IcingaMetaGridCreator.getFilterCfg() );
+					IcingaGridFilterWindow.setFilterCfg( MetaGrid.getFilterCfg() );
 				
 					// Distribute destroy events
 					grid.on('destroy', function() {
@@ -75,7 +72,7 @@
 		});
 		
 		//Insert the grid in the parent
-		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
 		cmp.insert(0, grid);
 		
 		// Refresh the container layout

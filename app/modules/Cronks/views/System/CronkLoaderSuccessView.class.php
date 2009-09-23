@@ -12,8 +12,9 @@ class Cronks_System_CronkLoaderSuccessView extends ICINGACronksBaseView
 			$cronk		= $rd->getParameter('cronk'); 
 			
 			$parameters = new AgaviParameterHolder($rd->getParameter('p', array()));
-			if ($parameters->getParameter('htmlid', null) == null) {
-				$parameters->setParameter('htmlid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
+			
+			if ($parameters->getParameter('cmpid', null) == null) {
+				$parameters->setParameter('cmpid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
 			}
 				
 			// Adding default parameters if they are not overwritten

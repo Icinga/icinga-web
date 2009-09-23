@@ -2,14 +2,14 @@
 	/**
 	* @author Christian Doebler <christian.doebler@netways.de>
 	*/
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
 
 <script type="text/javascript">
 
 var CronkDisplayStateSummary = {
 
-	cmp : Ext.getCmp("<?php echo $htmlid; ?>"),
+	cmp : Ext.getCmp("<?php echo $parentid; ?>"),
 	url : "<?php echo $ro->gen('icinga.cronks.statusSummary.json'); ?>",
 
 	panelDefs : {
