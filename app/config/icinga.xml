@@ -140,9 +140,8 @@
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/RowLayout.js</parameter> -->
-		<!-- <parameter>%core.root_dir%/lib/ext2/examples/ux/SlidingPager.js</parameter>
-		<parameter>%core.root_dir%/lib/ext2/examples/ux/SliderTip.js</parameter> -->
+		<parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
+		<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter>
 		
 		<!--AppKit JS -->
 		<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>  --> 
@@ -153,9 +152,11 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
 	</setting>
 
 	<!-- This scripts are included dynamically by modules if needed -->

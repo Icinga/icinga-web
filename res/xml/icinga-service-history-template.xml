@@ -19,9 +19,9 @@
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
         
-        <parameter name="dynamicscript">
+        <!-- <parameter name="dynamicscript">
         	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
-        </parameter>
+        </parameter> -->
     </option>
     
     <!-- 
@@ -240,8 +240,9 @@
             </filter>
             
             <order>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
+                <parameter name="field">STATEHISTORY_STATE</parameter>
             </order>
         </field>
 
@@ -340,7 +341,7 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
                 	<parameter name="arguments">
 						<parameter name="length">40</parameter>

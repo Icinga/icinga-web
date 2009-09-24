@@ -8,7 +8,9 @@
 	var CreateGridProcessor = function (meta) {	
 		
 		var MetaGrid = new AppKit.Ext.grid.MetaGridCreator(meta);
+		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
 		
 		var grid = MetaGrid.createGrid();
 		

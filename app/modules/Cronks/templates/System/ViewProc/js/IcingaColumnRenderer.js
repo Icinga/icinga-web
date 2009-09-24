@@ -3,55 +3,6 @@ Ext.ns('AppKit.Ext.grid');
 // This are the javascript methods available within
 // the namespace
 AppKit.Ext.grid.IcingaColumnRenderer = {
-
-	bogusGroupRenderer : function(cfg) {
-		return function(value, garbage, record, rowIndex, colIndex, store) {
-			return "GROUP: " + v;
-		}
-	},
-	
-	truncateText : function(cfg) {
-		return function(value, metaData, record, rowIndex, colIndex, store) {
-			var out = Ext.util.Format.ellipsis(value, (cfg.length || 50));
-			if (out.indexOf('...', (out.length-3)) != -1) {
-				metaData.attr = 'ext:qtip="' + value + '"';
-			}
-			
-			return out;
-		}
-	},
-	
-	columnStyle : function(cfg) {
-		return function(value, metaData, record, rowIndex, colIndex, store) {
-			metaData.attr = 'style="' + cfg.style + '"';
-			return value;
-		}
-	},
-	
-	columnElement : function(cfg) {
-		return function(value, metaData, record, rowIndex, colIndex, store) {
-			Ext.apply(metaData, cfg);
-			
-			if (cfg.value) {
-				return cfg.value;
-			}
-			
-			if (cfg.noValue != true) {
-				return value;
-			}
-		}
-	},
-	
-	columnImage : function(cfg) {
-		return function(value, metaData, record, rowIndex, colIndex, store) {
-			if (cfg.style) {
-				metaData.attr += ' style="' + cfg.style + '"';
-			}
-			
-			return String.format('<img src="/appkit/image/{0}" />', cfg.image);
-		}
-	},
-	
 	subGrid : function(cfg) {
 		return function(grid, rowIndex, colIndex, e) {
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
@@ -77,5 +28,4 @@ AppKit.Ext.grid.IcingaColumnRenderer = {
 			}
 		}
 	}
-	
 };

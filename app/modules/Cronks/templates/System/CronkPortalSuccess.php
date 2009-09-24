@@ -10,6 +10,7 @@ Ext.onReady(function(){
 
 var TabContextMenu =  function() {
 	var ctxItem = null;
+	var tp = null;
 	
 	return {
 		handle : function (panel, tab, e) {
@@ -20,6 +21,16 @@ var TabContextMenu =  function() {
 						id: panel.id + '-close',
 						iconCls: 'silk-cross',
 						handler: function() { panel.remove(ctxItem); }
+					}, {
+						text: '<?php echo $tm->_("Close others"); ?>',
+						id: panel.id + '-close-others',
+						handler: function() {
+							tp.items.each(function(item){
+								if(item.closable && item != ctxItem){
+									tp.remove(item);
+								}
+							});
+						}
 					}, {
 						text: '<?php echo $tm->_("Rename"); ?>',
 						id: panel.id + '-rename',
@@ -37,7 +48,10 @@ var TabContextMenu =  function() {
 			
 			ctxItem = tab;
 			
+			if (!tp) tp = panel;
+			
 			this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
+			this.contextmenu.items.get(panel.id + '-close-others').setDisabled(!tab.closable);
 			this.contextmenu.items.get(panel.id + '-rename').setDisabled(!tab.closable);
 			
 			this.contextmenu.showAt(e.getPoint());
@@ -92,8 +106,10 @@ var CronkTabHandler = function() {
 }();
 
 var tabPanel = new Ext.TabPanel({
-	id: 'cronk-tabs',
-	border: false,
+	id : 'cronk-tabs',
+	border : false,
+	enableTabScroll :true,
+	resizeTabs : false,
 	
 	// This component is stateful!
 	/* stateId: 'cronk-tab-panel',
@@ -272,10 +288,11 @@ if ((south = Ext.getCmp('south-frame'))) {
 			}
 			
 			// Creating a task
-			var task = Ext.TaskMgr.start({
+			var interval = 60 * 1000; // 60s
+			var task = Ext.TaskMgr.start.defer(interval, this, [{
 				run: refreshHandler,
-				interval: 60 * 1000 // 60s
-			});
+				interval: interval
+			}]);
 			
 			// Run if needed
 			var switchHandler = function(c) {

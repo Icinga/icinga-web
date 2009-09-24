@@ -110,27 +110,23 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
-                <!--
-                <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayTest</parameter>
-                	<parameter name="method">Test</parameter>
-					<parameter name="arguments">
-						<parameter name="val">Test</parameter>
-					</parameter>
-                </parameter>
-                -->
                 
                 <parameter name="jsFunc">
                 
                 	<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">columnStyle</parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnElement</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="style"><![CDATA[color: #0000ff; cursor: pointer]]></parameter>
+	                		<parameter name="css">x-icinga-grid-link</parameter>
+	                		
+							<parameter name="attr">
+								<parameter name="qtip">Click to view covered services</parameter>
+							</parameter>
+							
 	                	</parameter>
 	                </parameter>
                 
@@ -192,7 +188,7 @@
                 <parameter name="jsFunc">
                 
                 	<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
 	                	<parameter name="function">columnImage</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -200,7 +196,10 @@
 	                	
 	                	<parameter name="arguments">
 							<parameter name="image">fam.book</parameter>
-							<parameter name="style"><![CDATA[cursor:pointer;]]></parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here for history</parameter>
+							</parameter>
 	                	</parameter>
 	                </parameter>
 	                
@@ -303,7 +302,7 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
                 	<parameter name="arguments">
 						<parameter name="length">40</parameter>

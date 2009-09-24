@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <setting name="web.cronks" xmlns="http://agavi.org/agavi/1.0/config">
+
+		<!-- 
+			Default grid proc, do not change anything
+		-->
+		<parameter name="gridProc">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">true</parameter>
+			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="parameter">
+				
+			</parameter>
+		</parameter>
+
 		<parameter name="crportal">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.CronkPortal</parameter>
@@ -25,21 +39,11 @@
 			<parameter name="name">HelloWorld</parameter>
 		</parameter>
 	
-		<parameter name="gridProc">
-			<parameter name="module">Cronks</parameter>
-			<parameter name="action">System.ViewProc</parameter>
-			<parameter name="hide">true</parameter>
-			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
-			<parameter name="parameter">
-				
-			</parameter>
-		</parameter>
-	
 		<parameter name="gridServiceView">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>
 			<parameter name="hide">false</parameter>
-			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="description">Viewing service status in a grid</parameter>
 			<parameter name="name">ServiceStatus</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-service-template</parameter>
@@ -50,7 +54,7 @@
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>
 			<parameter name="hide">false</parameter>
-			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="description">Statushistory for services</parameter>
 			<parameter name="name">ServiceHistory</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-service-template</parameter>
@@ -61,7 +65,7 @@
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>
 			<parameter name="hide">false</parameter>
-			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="description">Display icinga process log</parameter>
 			<parameter name="name">LogView</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-log-template</parameter>
@@ -75,7 +79,7 @@
 			<parameter name="hide">false
 			
 			</parameter>
-			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="description">Viewing host status in a grid</parameter>
 			<parameter name="name">HostStatus
 			
 			</parameter>
@@ -88,7 +92,7 @@
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>
 			<parameter name="hide">false</parameter>
-			<parameter name="description">A generic ajax grid xml processor to display icinga information</parameter>
+			<parameter name="description">Host status history information</parameter>
 			<parameter name="name">HostHistory</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-host-history-template</parameter>
