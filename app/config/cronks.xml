@@ -171,18 +171,16 @@
 				
 			</parameter>
 		</parameter>
-		
-		<!--
+
 		<parameter name="icingaStatusSummary">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.StatusSummary</parameter>
-			<parameter name="hide">false</parameter>
+			<parameter name="hide">true</parameter>
 			<parameter name="description">Status Summary</parameter>
 			<parameter name="name">Status Summary</parameter>
 			<parameter name="parameter">
 				<parameter name="type">text</parameter>
 			</parameter>
 		</parameter>
-		-->
-		
+
 </setting>

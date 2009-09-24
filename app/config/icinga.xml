@@ -150,6 +150,7 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
@@ -202,11 +203,11 @@
 			<parameter name="config_type">mysql</parameter>
 			<parameter name="config_host">127.0.0.1</parameter>
 
-			 			
+			 			 			
 			<parameter name="config_port">3307</parameter>
 			<parameter name="config_database">ndo_demo</parameter>
 			
-			<!-- 
+			<!--
 			<parameter name="config_port">3306</parameter>
 			<parameter name="config_database">icinga</parameter>
 			-->
@@ -232,4 +233,7 @@
 	
 	<!-- Our cronks config goes here -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
+
+	<!-- Include settings for simple-data provider -->
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml"/>
 </settings>

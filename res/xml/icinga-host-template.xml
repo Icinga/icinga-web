@@ -308,6 +308,13 @@
 						<parameter name="length">40</parameter>
                 	</parameter>
                 </parameter>
+
+				<!--
+                <parameter name="jsFunc">
+                	<parameter name="class"></parameter>
+                	<parameter name="method"></parameter>
+                </parameter>
+                -->
             </display>
         	
             <filter>

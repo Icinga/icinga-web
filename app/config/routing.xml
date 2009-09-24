@@ -83,11 +83,11 @@
 				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" module="Cronks">
 
 					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="System.CronkLoader" />
-				
+
 					<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="System.CronkListing" />
 					<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="System.ObjectSearch" />
 					<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="System.StatusSummary" />
-				
+
 					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
 						<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">
 							<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation" />
@@ -97,6 +97,12 @@
 					<route name=".persistentprovider.json" pattern="^/persistenceProvider/json" output_type="json" action="Icinga.Cronks.PersistenceProvider" />
 				</route>
 				
+				<route pattern="^/ext" name=".ext">
+					<route pattern="/applicationState" name=".applicationState" output_type="javascript" action="Icinga.Ext.ApplicationState" />
+				</route>
+
+				<route name=".simpleDataProvider.json" pattern="^/simpleDataProvider/json" output_type="json" action="IcingaApiSimpleDataProvider" />
+
 			</route>
 			
 		</routes>

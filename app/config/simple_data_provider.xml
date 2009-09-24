@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<setting name="simpledataprovider" xmlns="http://agavi.org/agavi/1.0/config">
+
+		<parameter name="hostinfo">
+			<parameter name="module">Web</parameter>
+			<parameter name="action">IcingaApiSimpleDataProvider</parameter>
+			<parameter name="description">query for host information</parameter>
+			<parameter name="target">IcingaApi::TARGET_HOST</parameter>
+			<parameter name="result_columns">
+				<parameter>HOST_ADDRESS</parameter>
+				<parameter>HOST_ALIAS</parameter>
+				<parameter>HOST_DISPLAY_NAME</parameter>
+				<parameter>HOST_CURRENT_STATE</parameter>
+				<!-- 
+				Host Status: UP (for 5d 18h 24m 43s)
+				-->
+				<parameter>HOST_OUTPUT</parameter>
+				<parameter>HOST_PERFDATA</parameter>
+				<parameter>HOST_CURRENT_CHECK_ATTEMPT</parameter>
+				<parameter>HOST_MAX_CHECK_ATTEMPTS</parameter>
+				<parameter>HOST_LAST_CHECK</parameter>
+				<parameter>HOST_CHECK_TYPE</parameter>
+				<parameter>HOST_LATENCY</parameter>
+				<parameter>HOST_EXECUTION_TIME</parameter>
+				<parameter>HOST_NEXT_CHECK</parameter>
+				<parameter>HOST_LAST_HARD_STATE_CHANGE</parameter>
+				<parameter>HOST_LAST_NOTIFICATION</parameter>
+				<parameter>HOST_IS_FLAPPING</parameter>
+				<!-- 
+				Is This Host Flapping? NO (0.00% state change)
+				-->
+				<parameter>HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
+				<parameter>HOST_STATUS_UPDATE_TIME</parameter>
+				<!-- 
+				Active Checks:	ENABLED  
+				Passive Checks:	ENABLED  
+				Obsessing:	ENABLED  
+				Notifications: ENABLED  
+				Event Handler:	ENABLED  
+				Flap Detection:	ENABLED
+				-->  
+			</parameter>
+			<parameter name="filter">
+				<parameter>
+					<parameter name="column">CONTACTGROUP_NAME</parameter>
+					<parameter name="value">%</parameter>
+					<parameter name="match_type">IcingaApi::MATCH_LIKE</parameter>
+				</parameter>
+			</parameter>
+			<parameter name="user_filters">
+				<parameter name="host">
+					<parameter name="column">HOST_NAME</parameter>
+					<parameter name="match_type">IcingaApi::MATCH_EXACT</parameter>
+				</parameter>
+			</parameter>
+			<parameter name="order">
+				<parameter name="column">HOST_NEXT_CHECK</parameter>
+				<parameter name="direction">desc</parameter>
+			</parameter>
+			<parameter name="limit">
+				<parameter name="start">1</parameter>
+				<!-- <parameter name="length">1</parameter> -->
+			</parameter>
+		</parameter>
+
+</setting>
