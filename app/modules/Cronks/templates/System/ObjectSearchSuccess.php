@@ -164,6 +164,9 @@
 					
 					tpl: tpl
 				});
+				
+				// Setting the type
+				oViews[type].object_type = type;
 			
 			}
 			
@@ -312,30 +315,46 @@
 			
 			doubleClickProc : function(view, index, node, e) {
 				var re = view.getStore().getAt(index);
+				var type = view.object_type;
+				var params = {};
+				var filter = {};
 				
-				// Create a self loading crong :-)
-				var panel = AppKit.Ext.CronkMgr.create({
-					parentid: 'search-result',
-					title: 'Search result (DUMMY)',
+				
+				var id = (type || 'empty') + 'searchResultComponent';
+				
+				switch (type) {
+					case 'host':
+						filter['f[host_object_id-value]'] = re.data.object_id;
+						filter['f[host_object_id-operator]'] = 50;
+						params['template'] = 'icinga-host-template';
+					break;
+					
+					case 'service':
+						filter['f[service_object_id-value]'] = re.data.object_id;
+						filter['f[service_object_id-operator]'] = 50;
+						params['template'] = 'icinga-service-template';
+					break;
+					
+					default:
+						Ext.Msg.alert('Search', 'This type is not ready implemented yet!');
+						return;
+					break;
+				}
+				
+				var cronk = {
+					parentid: id,
+					title: 'Search result ' + type,
 					crname: 'gridProc',
 					closable: true,
-					
-					params: {
-						'template': 'icinga-service-template'
-					}
-				});
+					params: params
+				};
 				
-				// Add them to the panel and set active				
-				var tab = Ext.getCmp('cronk-tabs').add(panel);
-				Ext.getCmp('cronk-tabs').setActiveTab(tab);
+				AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
 				
-				// Remove our window!
-				oTextField.setValue('');
 				oWindow().hide();
+				oTextField.setValue('');
 				
-				// Notify about changes!
-				tab.doLayout();
-				Ext.getCmp('view-container').doLayout();
+				return true;
 			}
 
 		};
