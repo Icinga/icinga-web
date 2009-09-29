@@ -36,6 +36,31 @@ abstract class AppKitBaseClass extends AppKit {
 	
 }
 
-class AppKitException extends Exception { }
+/**
+ * Custom exception class to use printf formats
+ * @author mhein
+ *
+ */
+class AppKitException extends Exception {
+	
+	/**
+	 * Customized constructor
+	 * @param $mixed
+	 */
+	public function __construct($mixed) {
+		
+		$args = func_get_args();
+		
+		if (AppKitStringUtil::detectFormatSyntax($mixed)) {
+			$format = array_shift($args);
+			
+			parent::__construct( vsprintf($format, $args) );
+		}
+		else {
+			call_user_method_array('parent::__construct', &$this, $args);
+		}
+	}
+	
+}
 
 ?>
