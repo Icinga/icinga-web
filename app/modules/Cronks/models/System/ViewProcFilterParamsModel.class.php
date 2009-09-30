@@ -42,7 +42,7 @@ class Cronks_System_ViewProcFilterParamsModel extends ICINGACronksBaseModel
 				$op = array_key_exists($name. '-operator', $this->params_array) 
 					? $this->params_array[ $name. '-operator' ] 
 					: null;
-				
+					
 				// Add a template worker condition
 				$template->setCondition($name, $val, $op);
 			}

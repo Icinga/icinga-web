@@ -22,7 +22,8 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends ICINGACronksBase
 		return json_encode(array(
 			'template'	=> $template->getTemplateData(),
 			'fields'	=> $template->getFields(),
-			'keys'		=> $template->getFieldKeys()
+			'keys'		=> $template->getFieldKeys(),
+			'params'	=> $rd->getParameters()
 		));
 	}
 }

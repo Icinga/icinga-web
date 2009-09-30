@@ -132,6 +132,16 @@ class AppKitEvent extends AppKitBaseClass {
 	}
 	
 	/**
+	 * Fills the complete array, overwrite everything
+	 * @param array $data
+	 * @return boolean always true
+	 */
+	public function setData(array &$data) {
+		$this->data =& $data;
+		return true;
+	}
+	
+	/**
 	 * Returns the data as array
 	 * @return array
 	 * @author Marius Hein

@@ -4,6 +4,24 @@ class AppKitEventDispatcher extends AppKitSingleton {
 	
 	const ASTERISK		= '*';
 	
+	public static function registerEventClasses(array $events) {
+		foreach ($events as $name=>$event) {
+			if ($event['event'] && $event['class']) {
+				
+				if (!array_key_exists('parameter', $events)) {
+					$events['parameter'] = array();
+				}
+				
+				self::getInstance()->addListener( 
+					$event['event'], 
+					AppKit::getInstance($event['class'], $event['parameter']) 
+				);
+			}
+		}
+		
+		return true;
+	}
+	
 	/**
 	 * 
 	 * @return AppKitEventDispatcher
@@ -143,11 +161,21 @@ class AppKitEventDispatcher extends AppKitSingleton {
 	 * @return AppKitEvent
 	 * @author Marius Hein
 	 */
-	public function triggerSimpleEvent($name, $info = null, &$object=null) {
+	public function triggerSimpleEvent($name, $info = null, &$object=null, array &$data = null) {
 		
 		$event = new AppKitEvent($name);
-		if ($object) $event->setObject($object);
-		if ($info) $event->setInfo($info);
+		
+		if ($object !== null) {
+			$event->setObject($object);
+		}
+		
+		if ($info !== null) {
+			$event->setInfo($info);
+		}
+		
+		if ($data !== null) {
+			$event->setData($data);
+		}
 		
 		$this->triggerEvent($event);
 		
@@ -161,6 +189,14 @@ class AppKitEventDispatcher extends AppKitSingleton {
 	 */
 	public function getStats() {
 		return $this->stats;
+	}
+	
+	/**
+	 * Returns all registered event names
+	 * @return array
+	 */
+	public function getEvents() {
+		return array_keys( $this->listeners );
 	}
 }
 

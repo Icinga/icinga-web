@@ -1,11 +1,11 @@
 <?php
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
-<!--<div class="cronk-data-view" id="<?php echo $htmlid; ?>"></div>-->
+<!--<div class="cronk-data-view" id="<?php echo $parentid; ?>"></div>-->
 
 <script type="text/javascript">
 
-function loadCronkDataView() {
+(function() {
 
 	var CronkListing = function() {
 
@@ -41,8 +41,8 @@ function loadCronkDataView() {
 			dblClickHandler: function(oView, index, node, e) {
 				var record = oView.getStore().getAt(index);
 				
-				var panel = AppKit.Ext.createCronk({
-					htmlid: AppKit.genRandomId('cronk-'),
+				var panel = AppKit.Ext.CronkMgr.create({
+					parentid: AppKit.Ext.genRandomId('cronk-'),
 					title: record.data['name'],
 					crname: record.data.id,
 					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
@@ -105,11 +105,10 @@ function loadCronkDataView() {
         
     });
 	
-	// view.render('<?php echo $htmlid; ?>');
-	var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
-	cmp.add(view);	
-}
+	var cmp = Ext.getCmp("<?php echo $parentid; ?>");
+	cmp.add(view);
+		
+})();
 
-loadCronkDataView();
 
 </script>

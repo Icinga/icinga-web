@@ -1,8 +1,11 @@
 <?php 
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
-	var oid = '<?php echo $htmlid; ?>';
+
+(function() {
+
+	var oid = '<?php echo $parentid; ?>';
 	var coParent = Ext.getCmp(oid);
 	
 	var oSearchHandler =  function() {
@@ -161,6 +164,9 @@
 					
 					tpl: tpl
 				});
+				
+				// Setting the type
+				oViews[type].object_type = type;
 			
 			}
 			
@@ -303,47 +309,61 @@
 				
 				if (noresult == false && test == 0) {
 					noresult = true;
-					AppKit.Ext.Message('Search', 'No results!');
+					AppKit.Ext.notifyMessage('Search', 'No results!');
 				}
 			},
 			
 			doubleClickProc : function(view, index, node, e) {
 				var re = view.getStore().getAt(index);
+				var type = view.object_type;
+				var params = {};
+				var filter = {};
 				
-				// Create a self loading crong :-)
-				var panel = AppKit.Ext.createCronk({
-					htmlid: 'search-result',
-					title: 'Search result (DUMMY)',
-					crname: 'gridProc',
-					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-					closable: true,
-					layout: 'fit',
+				
+				var id = (type || 'empty') + 'searchResultComponent';
+				
+				switch (type) {
+					case 'host':
+						filter['f[host_object_id-value]'] = re.data.object_id;
+						filter['f[host_object_id-operator]'] = 50;
+						params['template'] = 'icinga-host-template';
+					break;
 					
-					params: {
-						'template': 'icinga-service-template'
-					}
-				});
-
-				// Add them to the panel and set active				
-				var tab = Ext.getCmp('cronk-tabs').add(panel);
-				Ext.getCmp('cronk-tabs').setActiveTab(tab);
+					case 'service':
+						filter['f[service_object_id-value]'] = re.data.object_id;
+						filter['f[service_object_id-operator]'] = 50;
+						params['template'] = 'icinga-service-template';
+					break;
+					
+					default:
+						Ext.Msg.alert('Search', 'This type is not ready implemented yet!');
+						return;
+					break;
+				}
 				
-				// Remove our window!
-				oTextField.setValue('');
+				var cronk = {
+					parentid: id,
+					title: 'Search result ' + type,
+					crname: 'gridProc',
+					closable: true,
+					params: params
+				};
+				
+				AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
+				
 				oWindow().hide();
+				oTextField.setValue('');
 				
-				// Notify about changes!
-				tab.doLayout();
-				Ext.getCmp('view-container').doLayout();
+				return true;
 			}
 
 		};
 		
 	}();
 
-	var oTextField = new Ext.form.TextField({
+	var oTextField = new Ext.ux.form.FancyTextField({
 		title: 'Search',
-		xtype: 'textfield',
+		xtype: 'fancytextfield',
 		name: 'q',
 		enableKeyEvents: true,
 		
@@ -368,22 +388,13 @@
 			padding: '2px 2px 2px 2px'
 		},
 		
-		items: [{
-			title: 'Search',
-			xtype: 'fancytextfield',
-			name: 'q',
-			enableKeyEvents: true,
-			
-			listeners: {
-				keyup: {
-					fn: oSearchHandler.keyup,
-					delay: 100
-				}
-			}
-		}],
+		items: [oTextField],
 	});
 	
 	coParent.add(oSearch);
 	
 	Ext.getCmp('north-frame').doLayout();
+
+})();
+
 </script>

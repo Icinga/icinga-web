@@ -9,10 +9,10 @@ class IcingaServiceStateInfo extends IcingaStateInfo {
 	 * @var array
 	 */
 	protected $state_list = array (
-		0	=> 'OK',
-		1	=> 'WARNING',
-		2	=> 'CRITICAL',
-		3	=> 'UNKNOWN',
+		IcingaConstants::STATE_OK		=> 'OK',
+		IcingaConstants::STATE_WARNING	=> 'WARNING',
+		IcingaConstants::STATE_CRITICAL	=> 'CRITICAL',
+		IcingaConstants::STATE_UNKNOWN	=> 'UNKNOWN',
 	);
 	
 	/**

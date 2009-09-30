@@ -18,6 +18,11 @@
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        
+        <!-- These are a dynamic js lib for using specific column renderes within this template -->
+        <parameter name="dynamicscript">
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        </parameter>
     </option>
     
     <!-- 
@@ -46,7 +51,7 @@
         	without working the default structures, e.g. for user classes)
         -->
        	<parameter name="additional_fields">
-       		<parameter name="max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
+       		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
        	</parameter>
          
     </datasource>
@@ -63,12 +68,41 @@
     <grouping>
     	<parameter name="enabled">true</parameter>
     	<parameter name="field">host_name</parameter>
+    	
+    	<parameter name="Ext.grid.GroupingView">
+    		<parameter name="hideGroupedColumn">true</parameter>
+    	</parameter>
     </grouping>
     
     <!--
     	Field decleration: What to display and how
     -->
     <fields>
+    
+		<field name="host_object_id">
+            <datasource>
+            	<parameter name="field">HOST_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">HostId</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.number</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field>
     
         <field name="service_object_id">
         	<datasource>
@@ -80,8 +114,16 @@
                 <parameter name="label">Id</parameter>
             </display>
             
-            <filter>
-                <parameter name="enabled">false</parameter>    
+			<filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
+                
+                <parameter name="no_operator">false</parameter>
+               	                
+				<parameter name="field">SERVICE_OBJECT_ID</parameter>
             </filter>
             
             <order>
@@ -110,7 +152,11 @@
             </display>
             
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
             
             <order>
@@ -133,7 +179,11 @@
             </display>
             
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
             
             <order>
@@ -142,6 +192,70 @@
             </order>
         </field>
         
+        <field name="service_history_link">
+            <datasource>
+            	<parameter name="field">SERVICE_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">22</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">fam.book</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here for history</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+	                
+					<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">historyForService</parameter>
+	                		<parameter name="titlePrefix">Statehistory for</parameter>
+							<parameter name="targetTemplate">icinga-service-history-template</parameter>
+							<parameter name="sourceField">service_object_id</parameter>
+							<parameter name="targetField">service_object_id</parameter>
+							<parameter name="labelField">service_name</parameter>
+	                	</parameter>
+	                </parameter>
+                
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
         
         <field name="service_status">
         	<datasource>
@@ -151,6 +265,13 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
+                
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
                 
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
@@ -170,7 +291,7 @@
             </order>
         </field>
 
-        <field name="check_attempt">
+        <field name="service_check_attempt">
         	<datasource>
         		<parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
         	</datasource>
@@ -179,11 +300,18 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Attempt</parameter>
                 
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+                
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.check_attempt} / ${field.max_attempt}]]></parameter>
+						<parameter name="format"><![CDATA[${field.service_check_attempt} / ${field.service_max_attempt}]]></parameter>
 					</parameter>
                 </parameter>
             </display>
@@ -206,6 +334,14 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
+                
+                <parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
+                </parameter>
             </display>
         	
             <filter>

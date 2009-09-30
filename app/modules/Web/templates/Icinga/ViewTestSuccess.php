@@ -1,3 +1,8 @@
+<?php
+
+// This is deprecated, look into PortalViewSuccess for the real action
+
+/*
 <div id="icinga-cronk-portal-frame"></div>
 <script type="text/javascript">
 Ext.onReady(function() {
@@ -17,3 +22,6 @@ Ext.onReady(function() {
 
 });
 </script>
+*/
+
+?>

@@ -270,3 +270,15 @@ table.icinga-attribute-table td.val {
 .no-background {
 	background: none;
 }
+
+/** ExtJS grid classes **/
+.x-icinga-grid-link {
+	color: #0000ff;
+	cursor: pointer;	
+}
+
+.x-icinga-grid-link:hover {
+	text-decoration: underline;
+}
+
+/* EOF */

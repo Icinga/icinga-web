@@ -22,5 +22,23 @@ class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
 		
 		return $parser->parseData($method_params->getParameter('format', '${*}'));
 	}
+	
+	public function formatDate($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+		$source = $method_params->getParameter('source');
+		$format = $method_params->getParameter('format');
+		
+		if (!$format) return $val;
+		
+		$date = null;
+		
+		if ($source && !preg_match('@iso@', $source)) {
+			
+		}
+		else {
+			$date = strtotime($val);
+		}
+		
+		return date($format, $date);
+	}
 }
 ?>

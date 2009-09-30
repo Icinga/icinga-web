@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    
+    <!-- 
+    	Meta description of the templates, that anybody
+    	knows what the template is doing
+    -->
+    <meta>
+        <parameter name="name">Default icinga service history template</parameter>
+        <parameter name="description">Displays status history about a service</parameter>
+        <parameter name="author">icinga-web developers</parameter>
+    </meta>
+    
+    <!-- 
+    	Options for the template. Change layout and view style to fit the type you
+    	want to display
+    -->
+    <option>
+        <parameter name="mode">default</parameter>
+        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        
+        <!-- <parameter name="dynamicscript">
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        </parameter> -->
+    </option>
+    
+    <!-- 
+    	What data to display? Define icinga data targets and countfields
+    -->
+    <datasource>
+        <parameter name="target">IcingaApi::TARGET_SERVICE_STATUS_HISTORY</parameter>
+        
+        <parameter name="id">statehistory_id</parameter>
+        
+        <!--
+        	If the countmode is 'simple' countfields will be ignored always! To use with a pager
+        	you have to use the 'field' mode to count all data independent from data
+        -->
+		<parameter name="countmode">field</parameter>
+		
+		<!-- 
+			If the counting differs from data result you can specify a field to count
+		-->
+        <parameter name="countfields">
+        	<parameter>STATEHISTORY_ID</parameter>
+        </parameter>
+        
+        <!-- 
+        	Additional fields we would like to work with it (append them on the datasource
+        	without working the default structures, e.g. for user classes)
+        -->
+       	<parameter name="additional_fields">
+       		<parameter name="state_max_check_attempts">STATEHISTORY_MAX_CHECK_ATTEMPTS</parameter>
+       	</parameter>
+    </datasource>
+    
+    <!-- 
+    	Paging record on its result
+    -->
+    <pager>
+    	<parameter name="enabled">true</parameter>
+    	<parameter name="size">25</parameter>
+    	<parameter name="start">0</parameter>
+    </pager>
+    
+    <grouping>
+    	<parameter name="enabled">true</parameter>
+    	<parameter name="field">state_group_date</parameter>
+    	
+    	<!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
+    	<parameter name="Ext.grid.GroupingView">
+    		<parameter name="hideGroupedColumn">true</parameter>
+    		<parameter name="startCollapsed">false</parameter>
+    	</parameter>
+    	
+    	<!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
+    	<!-- <parameter name="Ext.data.GroupingStore">
+    		
+    	</parameter> -->
+    </grouping>
+    
+    <!--
+    	Field decleration: What to display and how
+    -->
+    <fields>
+        
+		<field name="statehistory_id">
+        	<datasource>
+        		<parameter name="field">STATEHISTORY_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Statehistory Id</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
+                
+                <parameter name="no_operator">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+		<field name="host_object_id">
+        	<datasource>
+        		<parameter name="field">HOST_OBJECT_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">HostId</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
+                
+                <parameter name="no_operator">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+		<field name="host_name">
+        	<datasource>
+        		<parameter name="field">HOST_NAME</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Host</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.text</parameter>
+                
+                <parameter name="no_operator">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="service_object_id">
+        	<datasource>
+        		<parameter name="field">SERVICE_OBJECT_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">ServiceId</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
+                
+                <parameter name="no_operator">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+		<field name="service_name">
+        	<datasource>
+        		<parameter name="field">SERVICE_NAME</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Service</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.text</parameter>
+                
+                <parameter name="no_operator">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="statehistory_status">
+        	<datasource>
+        		<parameter name="field">STATEHISTORY_STATE</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Status</parameter>
+				<parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+                
+                <parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="method">hostStatus</parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="field">STATEHISTORY_STATE</parameter>
+            </order>
+        </field>
+
+        <field name="state_date">
+        	<datasource>
+        		<parameter name="field">STATEHISTORY_STATE_TIME</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Timestamp</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="order">DESC</parameter>
+            </order>
+        </field>
+        
+        <field name="state_group_date">
+        	<datasource>
+        		<parameter name="field">STATEHISTORY_STATE_TIME</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Groupdate</parameter>
+                
+                <parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="method">formatDate</parameter>
+					<parameter name="arguments">
+						<parameter name="format"><![CDATA[Y-m-d H:00:00]]></parameter>
+					</parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+                <parameter name="order">DESC</parameter>
+            </order>
+        </field>
+        
+        <field name="state_check_attempt">
+        	<datasource>
+        		<parameter name="field">STATEHISTORY_CURRENT_CHECK_ATTEMPT</parameter>
+        	</datasource>
+        	
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Attempt</parameter>
+                
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+                
+				<parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="method">formatTemplate</parameter>
+					<parameter name="arguments">
+						<parameter name="format"><![CDATA[${field.state_check_attempt} / ${field.state_max_check_attempts}]]></parameter>
+					</parameter>
+                </parameter>
+            </display>
+        	
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="state_output">
+        	<datasource>
+        		<parameter name="field">STATEHISTORY_OUTPUT</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Output</parameter>
+                
+                <parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="order">DESC</parameter>
+            </order>
+        </field>
+        
+    </fields>
+    
+</template>

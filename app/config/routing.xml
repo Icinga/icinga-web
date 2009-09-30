@@ -3,6 +3,9 @@
 	<configuration>
 		<routes>
 		
+			<!-- INDEX -->
+			<route name="index_page" pattern="^/$" module="%actions.default_module%" action="%actions.default_action%" />
+		
 			<!-- ICINGAAppKit routes -->
 			<route name="appkit" pattern="^/appkit" module="%actions.default_module%" action="%actions.default_action%">
 				
@@ -10,7 +13,14 @@
 				<route name="appkit.image" pattern="^/image/(image:[\w\d-_\/\.]+)$" action="Widgets.ShowImage" output_type="image" />
 				
 				<route name="appkit.login" pattern="^/login" action="Login"/>
+				
+				<!-- <route name="appkit.login" pattern="^/login" action="AjaxLogin">
+					<route name="appkit.login.provider" pattern="^/json" action="AjaxLogin" output_type="json" />
+				</route> -->
+				
 				<route name="appkit.logout" pattern="^/logout" action="Logout"/>
+				
+				
 				<route name="appkit.about" pattern="^/about" action="%actions.default_action%"/>
 				
 				<route name="appkit.squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simplecontent" />
@@ -41,7 +51,10 @@
 				</route>
 				
 				
-				
+				<route pattern="^/ext" name=".ext">
+					<route pattern="^/applicationState$" name=".applicationState" output_type="javascript" action="Ext.ApplicationState" />
+					<route pattern="^/dynascript/(script:([\w-_\.]+))$" name=".dynamicScriptSource" output_type="javascript" action="Ext.DynamicJavascriptSource" />
+				</route>
 			</route>
 			
 			<!-- My routes (AppKit preferences) -->
@@ -65,7 +78,7 @@
 					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))/(servicename:([\w\.\-\_\s]+))$" action="Icinga.ServiceDetailSingle" />
 				</route>
 				
-				<route name=".viewTest" pattern="^/test$" action="Icinga.ViewTest" />
+				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
 				
 				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" module="Cronks">
 

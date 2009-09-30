@@ -2,7 +2,7 @@
 	/**
 	* @author Christian Doebler <christian.doebler@netways.de>
 	*/
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
 	
@@ -10,20 +10,20 @@ var dummyCronkDisplayStateSummary = function () {
 
 	var CronkDisplayStateSummary = {
 	
-		cmp : Ext.getCmp("<?php echo $htmlid; ?>"),
+		cmp : Ext.getCmp("<?php echo $parentid; ?>"),
 		url : "<?php echo $ro->gen('icinga.cronks.statusSummary.json'); ?>?dtype=",
 	
 		panelDefs : {
 			host : {
-				itemId : AppKit.genRandomId('cronk-'),
+				itemId : AppKit.Ext.genRandomId('cronk'),
 				title : false,
 			},
 			service : {
-				itemId : AppKit.genRandomId('cronk-'),
+				itemId : AppKit.Ext.genRandomId('cronk'),
 				title : false,
 			},
 			chart : {
-				itemId : AppKit.genRandomId('cronk-'),
+				itemId : AppKit.Ext.genRandomId('cronk'),
 				title : false
 			}
 		},
@@ -142,7 +142,7 @@ var dummyCronkDisplayStateSummary = function () {
 	
 			// The dataview container
 			this.view = new Ext.DataView({
-				id: AppKit.genRandomId('cronk-'),
+				id: AppKit.Ext.genRandomId('cronk'),
 				title: "test",
 				store: this.store,
 				tpl: this.tpl,

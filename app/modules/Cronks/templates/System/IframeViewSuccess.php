@@ -1,6 +1,6 @@
 <?php 
 	$url = $t['url'];
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 	$newid = 'iframe-'. AppKitRandomUtil::genSimpleId(10);
 ?>
 <?php if ($url) { ?>
@@ -9,7 +9,7 @@
 <script type="text/javascript">
 
 (function() { 
-	var cParent = Ext.getCmp('<?php echo $htmlid; ?>');
+	var cParent = Ext.getCmp('<?php echo $parentid; ?>');
 	
 	// Create a new panel with a modified body element
 	var iframe = new Ext.Panel({

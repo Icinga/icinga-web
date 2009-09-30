@@ -3,11 +3,14 @@
 class AppKit_HeaderDataModel extends ICINGAAppKitBaseModel
 implements AgaviISingletonModel
 {
-	const TYPE_CSS_RAW		= 1;
-	const TYPE_CSS_FILE		= 2;
-	const TYPE_META			= 3;
-	const TYPE_JS_RAW		= 4;
-	const TYPE_JS_FILE		= 5;
+	const TYPE_CSS_RAW		= 'css_raw';
+	const TYPE_CSS_FILE		= 'css_files';
+	const TYPE_META			= 'meta_tags';
+	const TYPE_JS_RAW		= 'javascript_inline';
+	const TYPE_JS_FILE		= 'javascript_files';
+	
+	const INSERT_FIRST		= 'insert';
+	const INSERT_PUSH		= 'push';
 	
 	private $data = array (
 		self::TYPE_CSS_RAW		=> array (),
@@ -18,17 +21,15 @@ implements AgaviISingletonModel
 	);
 	
 	public function addCssData($name, $data) {
-		$this->data[self::TYPE_CSS_RAW][$name] = $data;
-		return true;
+		return $this->addFileToStore(self::TYPE_CSS_RAW, $name, $data);
 	}
 	
 	public function getCssData() {
 		return $this->data[self::TYPE_CSS_RAW];
 	}
 	
-	public function addCssFile($file) {
-		$this->data[self::TYPE_CSS_FILE][$file] = $file;
-		return true;
+	public function addCssFile($file, $insert_type = self::INSERT_PUSH) {
+		return $this->addFileToStore(self::TYPE_CSS_FILE, $file, $file, $insert_type);
 	}
 	
 	public function getCssFiles() {
@@ -36,15 +37,15 @@ implements AgaviISingletonModel
 	}
 	
 	public function addJsData($name, $data) {
-		$this->data[self::TYPE_JS_RAW][$name] = $data;
+		return $this->addFileToStore(self::TYPE_JS_RAW, $name, $data);
 	}
 	
 	public function getJsData() {
 		return $this->data[self::TYPE_JS_RAW];
 	}
 	
-	public function addJsFile($file) {
-		$this->data[self::TYPE_JS_FILE][$file] = $file; 
+	public function addJsFile($file, $insert_type = self::INSERT_PUSH) {
+		return $this->addFileToStore(self::TYPE_JS_FILE, $file, $file, $insert_type); 
 	}
 	
 	public function getJsFiles() {
@@ -52,12 +53,19 @@ implements AgaviISingletonModel
 	}
 	
 	public function addMetaTag($name, $value) {
-		$this->data[self::TYPE_META][$name] = $value;
-		return true;
+		return $this->addFileToStore(self::TYPE_META, $name, $value);
 	}
 	
 	public function getMetaTags() {
 		return $this->data[self::TYPE_META];
+	}
+	
+	private function addFileToStore($type, $name, $file, $insert_type = self::INSERT_PUSH) {
+		if (array_key_exists($type, $this->data)) {
+			$this->data[$type][$name] = $file;
+			return true;
+		}
+		return false;
 	}
 }
 

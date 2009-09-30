@@ -18,6 +18,11 @@
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        
+        <!-- These are a dynamic js lib for using specific column renderes within this template -->
+        <parameter name="dynamicscript">
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        </parameter>
     </option>
     
     <!-- 
@@ -105,15 +110,45 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Host</parameter>
-                <!--
-                <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayTest</parameter>
-                	<parameter name="method">Test</parameter>
-					<parameter name="arguments">
-						<parameter name="val">Test</parameter>
-					</parameter>
+                
+                <parameter name="jsFunc">
+                
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnElement</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="css">x-icinga-grid-link</parameter>
+	                		
+							<parameter name="attr">
+								<parameter name="qtip">Click to view covered services</parameter>
+							</parameter>
+							
+	                	</parameter>
+	                </parameter>
+                
+	                <parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">servicesForHost</parameter>
+	                		<parameter name="titlePrefix">Services for</parameter>
+							<parameter name="targetTemplate">icinga-service-template</parameter>
+							<parameter name="sourceField">host_object_id</parameter>
+							<parameter name="targetField">host_object_id</parameter>
+							<parameter name="labelField">host_name</parameter>
+	                	</parameter>
+	                </parameter>
+                
                 </parameter>
-                -->
+                
             </display>
             
             <filter>
@@ -133,6 +168,71 @@
             </order>
         </field>  
         
+        <field name="host_history_link">
+            <datasource>
+            	<parameter name="field">HOST_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">22</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">fam.book</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here for history</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+	                
+					<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">historyForHost</parameter>
+	                		<parameter name="titlePrefix">Statehistory for</parameter>
+							<parameter name="targetTemplate">icinga-host-history-template</parameter>
+							<parameter name="sourceField">host_object_id</parameter>
+							<parameter name="targetField">host_object_id</parameter>
+							<parameter name="labelField">host_name</parameter>
+	                	</parameter>
+	                </parameter>
+                
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
         <field name="host_status">
         	<datasource>
         		<parameter name="field">HOST_CURRENT_STATE</parameter>
@@ -141,11 +241,16 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
                 
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">hostStatus</parameter>
-					
                 </parameter>
             </display>
         	
@@ -156,7 +261,6 @@
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
-                <parameter name="field">SERVICE_CURRENT_STATE</parameter>
             </order>
         </field>
         
@@ -197,9 +301,12 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
                 
-                <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
-                	<parameter name="method">truncateOutput</parameter>
+                <parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
                 </parameter>
 
 				

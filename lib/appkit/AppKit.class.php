@@ -88,6 +88,11 @@ class AppKit {
 			}
 		}
 		
+		// Register additional events from config file
+		if (is_array($events = AgaviConfig::get('de.icinga.appkit.custom_events'))) {
+			AppKitEventDispatcher::registerEventClasses($events);
+		}
+		
 		// Trigger an event!
 		AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.bootstrap', 'AppKit bootstrap finished');
 		

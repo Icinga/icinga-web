@@ -39,6 +39,15 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		return number_format($a,($c ? 2 : 0),",",".")." ".$unim[$c];
 	}
 	
+	/**
+	 * Checks if the given string contains a prinf format
+	 * @param string $string
+	 * @return boolean
+	 */
+	public static function detectFormatSyntax($string) {
+		return preg_match('@%([bcdeufFosxX]|\d+\$[bcdeufFosxX])@',  $string);
+	}
+	
 }
 
 ?>

@@ -152,6 +152,7 @@ class IcingaTemplateWorker {
 				
 				$data[] = $tmp;
 			}
+			
 			return $data;
 		}
 	}
@@ -207,7 +208,7 @@ class IcingaTemplateWorker {
 		$raw = (array)$out;		
 		foreach ($out as $key=>$val) {
 			$meta = $this->getTemplate()->getFieldByName($key, 'display');
-			if (($param = $meta->getParameter('userFunc'))) {
+			if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
 				if ($param['class'] && $param['method']) {
 					if (!is_array($param['arguments'])) $param['arguments'] = array();
 					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments'], (array)$raw);
@@ -362,8 +363,14 @@ class IcingaTemplateWorker {
 			throw new IcingaTemplateWorkerException('Could not determine the icinga api field');
 		}
 		
-		if ($op = AppKitSQLConstants::SQL_OP_CONTAIN) {
-			$val = '%'. $val. '%';
+		// Add or replace some asterix within count
+		if ($op == AppKitSQLConstants::SQL_OP_CONTAIN) {
+			if (strpos($val, '*') === false) {
+				$val = $val. '%';
+			}
+			else {
+				$val = str_replace('*', '%', $val);
+			}
 		}
 		
 		$new_op = AppKitSQLConstants::getIcingaMatch($op);

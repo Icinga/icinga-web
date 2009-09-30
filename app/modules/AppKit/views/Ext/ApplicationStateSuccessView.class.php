@@ -4,7 +4,7 @@
  * @author mhein
  *
  */
-class Web_Icinga_Ext_ApplicationStateSuccessView extends ICINGAWebBaseView
+class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
@@ -18,7 +18,8 @@ class Web_Icinga_Ext_ApplicationStateSuccessView extends ICINGAWebBaseView
 		$data = array ();
 		
 		if ($this->getContext()->getUser()->isAuthenticated()) {
-			$data = $this->getContext()->getUser()->getPrefVal(IcingaExtApplicationState::DATA_NAMESPACE, null, true);
+			$data = $this->getContext()->getUser()->getPrefVal(AppKitExtApplicationStateFilter::DATA_NAMESPACE, null, true);
+			
 			if ($data !== null) {
 				$data = unserialize(base64_decode($data));
 			}
@@ -27,11 +28,12 @@ class Web_Icinga_Ext_ApplicationStateSuccessView extends ICINGAWebBaseView
 			}
 		}
 		
-		return 'var AppKitData = {};'
-			. chr(13)
-			. 'AppKitData.applicationState = '
-			. json_encode($data)
-			. ';';
+		return sprintf(
+			'Ext.onReady(function() {'. "\n"
+			. "\t". 'AppKit.Ext.setAppState(%s);'. "\n"
+			. '});'. "\n", json_encode($data)
+		);
+		
 	}
 }
 

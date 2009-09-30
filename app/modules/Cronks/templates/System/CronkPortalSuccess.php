@@ -1,7 +1,7 @@
 <?php 
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
-<div id="<?php echo $htmlid; ?>">
+<div id="<?php echo $parentid; ?>">
 
 </div>
 <script type="text/javascript">
@@ -10,6 +10,7 @@ Ext.onReady(function(){
 
 var TabContextMenu =  function() {
 	var ctxItem = null;
+	var tp = null;
 	
 	return {
 		handle : function (panel, tab, e) {
@@ -20,6 +21,16 @@ var TabContextMenu =  function() {
 						id: panel.id + '-close',
 						iconCls: 'silk-cross',
 						handler: function() { panel.remove(ctxItem); }
+					}, {
+						text: '<?php echo $tm->_("Close others"); ?>',
+						id: panel.id + '-close-others',
+						handler: function() {
+							tp.items.each(function(item){
+								if(item.closable && item != ctxItem){
+									tp.remove(item);
+								}
+							});
+						}
 					}, {
 						text: '<?php echo $tm->_("Rename"); ?>',
 						id: panel.id + '-rename',
@@ -37,7 +48,10 @@ var TabContextMenu =  function() {
 			
 			ctxItem = tab;
 			
+			if (!tp) tp = panel;
+			
 			this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
+			this.contextmenu.items.get(panel.id + '-close-others').setDisabled(!tab.closable);
 			this.contextmenu.items.get(panel.id + '-rename').setDisabled(!tab.closable);
 			
 			this.contextmenu.showAt(e.getPoint());
@@ -68,8 +82,8 @@ var CronkTabHandler = function() {
 							notifyDrop: function(dd, e, data){
 
 								// Create the cronk we want
-								var panel = AppKit.Ext.createCronk({
-									htmlid: AppKit.genRandomId('cronk-'),
+								var panel = AppKit.Ext.CronkMgr.create({
+									parentid: AppKit.Ext.genRandomId('cronk'),
 									title: data.dragData['name'],
 									crname: data.dragData.id,
 									loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
@@ -92,8 +106,10 @@ var CronkTabHandler = function() {
 }();
 
 var tabPanel = new Ext.TabPanel({
-	id: 'cronk-tabs',
-	border: false,
+	id : 'cronk-tabs',
+	border : false,
+	enableTabScroll :true,
+	resizeTabs : false,
 	
 	// This component is stateful!
 	/* stateId: 'cronk-tab-panel',
@@ -119,15 +135,10 @@ var tabPanel = new Ext.TabPanel({
 	}
 });
 
-function initTabPanelDropZone(t) {
-
-
-}
-
-var cronk_list_id = AppKit.genRandomId('cronk-');
-var cronk_search_id = AppKit.genRandomId('cronk-');
-var cronk_status_summary_id = AppKit.genRandomId('cronk-');
-var cronk_status_summary_chart_id = AppKit.genRandomId('cronk-');
+var cronk_list_id = AppKit.Ext.genRandomId('cronk');
+var cronk_search_id = AppKit.Ext.genRandomId('cronk');
+var cronk_status_summary_id = AppKit.Ext.genRandomId('cronk');
+var cronk_status_summary_chart_id = AppKit.Ext.genRandomId('cronk');
 
 var container = new Ext.Panel({
 	layout: 'border',
@@ -215,29 +226,25 @@ Ext.EventManager.onWindowResize(function(w,h) {
 container.setHeight(Ext.lib.Dom.getViewHeight()-80);
 
 // Render the container
-container.render("<?php echo $htmlid; ?>");
+container.render("<?php echo $parentid; ?>");
 
 // Adding the first cronk (say hello here)
 if (tabPanel) {
-	var cHello = AppKit.Ext.createCronk({
+	var cHello = AppKit.Ext.CronkMgr.create({
 		title: '<?php echo $tm->_("Welcome"); ?>',
-		crname: 'portalHello',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit'
+		crname: 'portalHello'
 	});
 	
 	tabPanel.add(cHello);
-	
-	tabPanel.doLayout();
-	
+	tabPanel.doLayout();	
 	tabPanel.setActiveTab(cHello);
 }
 
 // Adding the cronk list
 if ((west = Ext.getCmp('west-frame'))) {
 	
-	var cList = AppKit.Ext.createCronk({
-		htmlid: cronk_list_id ,
+	var cList = AppKit.Ext.CronkMgr.create({
+		parentid: cronk_list_id ,
 		title: '<?php echo $tm->_("Cronks"); ?>',
 		crname: 'crlist',
 		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
@@ -254,10 +261,9 @@ if ((west = Ext.getCmp('west-frame'))) {
 // Search component
 if ((search = Ext.getCmp(cronk_search_id))) {
 	
-	var cSearch = AppKit.Ext.createCronk({
-		htmlid: cronk_search_id ,
+	var cSearch = AppKit.Ext.CronkMgr.create({
+		parentid: cronk_search_id,
 		crname: 'icingaSearch',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 		layout: 'fit',
 		height: 100
 	});
@@ -269,11 +275,9 @@ if ((search = Ext.getCmp(cronk_search_id))) {
 // Status-summary component
 if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 
-	var cStatusSummary = AppKit.Ext.createCronk({
-		htmlid: cronk_status_summary_id ,
+	var cStatusSummary = AppKit.Ext.CronkMgr.create({
+		parentid: cronk_status_summary_id,
 		crname: 'icingaStatusSummary',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit',
 		height: 100,
 		params: {otype: "text"}
 	});
@@ -284,11 +288,9 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 
 if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
 
-	var cStatusSummary = AppKit.Ext.createCronk({
-		htmlid: cronk_status_summary_chart_id ,
+	var cStatusSummary = AppKit.Ext.CronkMgr.create({
+		parentid: cronk_status_summary_chart_id ,
 		crname: 'icingaStatusSummary',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit',
 		height: 100,
 		params: {otype: "chart"}
 	});
@@ -300,11 +302,9 @@ if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
 // LOG bottom component
 if ((south = Ext.getCmp('south-frame'))) {
 	
-	var cLog = AppKit.Ext.createCronk({
-		htmlid: AppKit.genRandomId('cronk-'),
-		crname: 'gridLogView',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit'
+	var cLog = AppKit.Ext.CronkMgr.create({
+		parentid: AppKit.Ext.genRandomId('cronksouth'),
+		crname: 'gridLogView'
 	});
 
 	// After the LOG component is added, start autorefresh
@@ -317,10 +317,11 @@ if ((south = Ext.getCmp('south-frame'))) {
 			}
 			
 			// Creating a task
-			var task = Ext.TaskMgr.start({
+			var interval = 60 * 1000; // 60s
+			var task = Ext.TaskMgr.start.defer(interval, this, [{
 				run: refreshHandler,
-				interval: 60 * 1000 // 60s
-			});
+				interval: interval
+			}]);
 			
 			// Run if needed
 			var switchHandler = function(c) {

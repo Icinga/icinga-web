@@ -8,11 +8,19 @@
 		
 		<validators>
 		
-		<validator class="string" name="htmlid" required="false">
-					<argument>htmlid</argument>
+		<validator class="string" name="cmpid" required="false">
+					<argument>cmpid</argument>
 					
 					<errors>
 						<error>Validation of htmlid failed!</error>
+					</errors>
+		</validator>
+		
+		<validator class="string" name="parentid" required="false">
+					<argument>parentid</argument>
+					
+					<errors>
+						<error>Validation of parentid failed!</error>
 					</errors>
 		</validator>
 		

@@ -15,7 +15,11 @@
 				</ae:parameter>
 			</filter>
 			
-			<filter name="IcingaExtApplicationState" class="IcingaExtApplicationState">
+			<!-- 
+				This receive ExtJS cookies and write the data into the user
+				preference table
+			-->
+			<filter name="AppKitExtApplicationStateFilter" class="AppKitExtApplicationStateFilter">
 				
 			</filter>
 

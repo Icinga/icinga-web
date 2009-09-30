@@ -31,6 +31,29 @@
 		<parameter>IcingaMenuExtender</parameter>
 	</setting>
 
+	<setting name="appkit.custom_events">
+	
+		<!-- This is our root menu -->
+		<parameter name="AppKitMenuEventDistributor">
+			<parameter name="event">appkit.menu</parameter>
+			<parameter name="class">AppKitMenuCreator</parameter>
+		</parameter>
+	
+		<!-- Providing ExtJS stateful information -->
+		<parameter name="AppKitExtApplicationStateData">
+			<parameter name="event">appkit.headerdata.publish</parameter>
+			<parameter name="class">AppKitExtStateProviderData</parameter>
+			
+			<!-- 
+				constructor argument:
+				we need the route name where the browser can load our data
+			-->
+			<parameter name="parameter">
+				<parameter name="route">appkit.ext.applicationState</parameter>
+			</parameter>
+		</parameter>
+	</setting>
+
 	<setting name="appkit.include_styles">		
 	
 		<!-- ICINGAWireFrame css -->
@@ -117,23 +140,45 @@
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/RowLayout.js</parameter> -->
-		<!-- <parameter>%core.root_dir%/lib/ext2/examples/ux/SlidingPager.js</parameter>
-		<parameter>%core.root_dir%/lib/ext2/examples/ux/SliderTip.js</parameter> -->
+		<parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
+		<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter>
 		
 		<!--AppKit JS -->
-		<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter> 
+		<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>  --> 
 		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
+	</setting>
+
+	<!-- This scripts are included dynamically by modules if needed -->
+	<setting name="appkit.include_dynamic_javascript">
+		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
 
 	<setting name="appkit.factories">
+		<!-- Cache provider -->
+		<!-- <parameter name="Cache">
+			<parameter name="class">AppKitCache</parameter>
+			
+			<parameter name="cacheDefaultRegion">appkit.cache.default</parameter>
+			<parameter name="cacheTransactionType">AppKitCache::COMMIT_POOL</parameter>
+			<parameter name="cacheSerializeType">AppKitCache::SERIALIZE_PHP</parameter>
+			<parameter name="cacheProviderName">AppKitCacheProviderFile</parameter>
+			
+		</parameter> -->
+		
 		<!-- GLOBAL MESSAGE QUEUE -->
 		<parameter name="MessageQueue">
 			<parameter name="class">AppKitMessageQueue</parameter>
@@ -161,6 +206,7 @@
 		  -->
 		</parameter>
 		
+		<!-- icinga-api data interface -->
 		<parameter name="IcingaData">
 			<parameter name="class">IcingaData</parameter>
 			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
@@ -169,20 +215,20 @@
 			<parameter name="config_type">mysql</parameter>
 			<parameter name="config_host">127.0.0.1</parameter>
 
-			<!-- 			 			
+			 			 			
 			<parameter name="config_port">3307</parameter>
 			<parameter name="config_database">ndo_demo</parameter>
-			-->
-
+			
+			<!--
 			<parameter name="config_port">3306</parameter>
 			<parameter name="config_database">icinga</parameter>
-
+			-->
 			<parameter name="config_user">icinga</parameter>
 			<parameter name="config_password">icinga</parameter>
 			
 			
-			<!-- <parameter name="config_table_prefix">nagios_</parameter> -->
-			<parameter name="config_table_prefix">icinga_</parameter>
+			<parameter name="config_table_prefix">nagios_</parameter>
+			<!-- <parameter name="config_table_prefix">icinga_</parameter> -->
 		</parameter>
 	</setting>
 	

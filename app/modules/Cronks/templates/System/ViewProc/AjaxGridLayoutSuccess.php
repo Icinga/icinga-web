@@ -1,20 +1,18 @@
 <?php 
-	$htmlid = $rd->getParameter('htmlid');
+	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
 
-// Our own scope, hopefully
 (function() {
 	
 	var CreateGridProcessor = function (meta) {	
 		
-		// Magick includes (the grid class)
-		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaGrid.js')); ?>
-
-		// Magick includes (GridMetaCreator)
-		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaMetaGridCreator.js')); ?>
-		IcingaMetaGridCreator.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
-		var grid = IcingaMetaGridCreator.createGridFrom(meta);
+		var MetaGrid = new AppKit.Ext.grid.MetaGridCreator(meta);
+		
+		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
+		
+		var grid = MetaGrid.createGrid();
 		
 		// Magick includes (Grid filters)
 		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaGridFilterHandler.js')); ?>
@@ -29,14 +27,14 @@
 			
 				var bFilters = false;
 				
-				Ext.iterate(IcingaMetaGridCreator.getFilterCfg(), function() {
+				Ext.iterate(MetaGrid.getFilterCfg(), function() {
 					if (bFilters == false) bFilters = true;
 				});
 			
 				if (bFilters == true) {
 				
 					IcingaGridFilterWindow.setGrid(grid);
-					IcingaGridFilterWindow.setFilterCfg( IcingaMetaGridCreator.getFilterCfg() );
+					IcingaGridFilterWindow.setFilterCfg( MetaGrid.getFilterCfg() );
 				
 					// Distribute destroy events
 					grid.on('destroy', function() {
@@ -76,7 +74,7 @@
 		});
 		
 		//Insert the grid in the parent
-		var cmp = Ext.getCmp("<?php echo $htmlid; ?>");
+		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
 		cmp.insert(0, grid);
 		
 		// Refresh the container layout
@@ -90,11 +88,27 @@
 			   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 			   
 			   success: function(response, opts) {
-			   	
-			      var meta = Ext.decode(response.responseText);
-			      
-			      CreateGridProcessor(meta); // Build the grid
-			      
+			   		
+					var meta = Ext.decode(response.responseText);
+					// Include needed javascript by the xml template
+					if (meta.template.option.dynamicscript) {
+						// Register the create grid event
+						var f = CreateGridProcessor.createCallback(meta);
+						AppKit.Ext.ScriptDynaLoader.on('bulkfinish', function() {
+							f.call();
+							run = true;
+						}, this, { single : true });
+						
+						AppKit.Ext.ScriptDynaLoader.startBulkMode();
+						
+						Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
+							AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
+						});
+						
+					}
+					else {
+						CreateGridProcessor(meta);
+					}
 			   },
 			   
 			   failure: function(response, opts) {
@@ -110,7 +124,8 @@
 		});
 	}
 	
-	oContainer.call(oContainer);
+	oContainer.call(this);
     
 })();
+
 </script>

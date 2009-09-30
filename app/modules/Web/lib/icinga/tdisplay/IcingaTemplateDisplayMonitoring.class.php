@@ -6,25 +6,22 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 		return parent::getInstance(__CLASS__);
 	}
 	
-	public function serviceStatus($val, AgaviParameterHolder $method_params) {
+	public function serviceStatus($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		return (string)IcingaServiceStateInfo::Create($val)->getCurrentStateAsHtml();
 	}
 	
-	public function hostStatus($val, AgaviParameterHolder $method_params) {
+	public function hostStatus($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		return (string)IcingaHostStateInfo::Create($val)->getCurrentStateAsHtml();
 	}
 	
-	public function truncateOutput($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+	public function icingaConstants($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+		$type = $method_params->getParameter('type');
+		$ref = new ReflectionClass('IcingaConstantResolver');
 		
-		$length = $method_params->getParameter('length', 10);
-		
-		if (strlen($val) > $length) {
-			
-			$org = $val;
-			$val = substr($val, 0, $length). ' ...';
-			
-			return $val;
-			
+		if (($m = $ref->getMethod($type))) {
+			if ($m->isPublic() && $m->isStatic()) {
+				return  $m->invoke(null, $val);
+			}
 		}
 		
 		return $val;
