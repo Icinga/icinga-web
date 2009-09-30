@@ -202,12 +202,15 @@
                 	<parameter name="method">truncateOutput</parameter>
                 </parameter>
 
-				<!--
+				
                 <parameter name="jsFunc">
-                	<parameter name="class"></parameter>
-                	<parameter name="method"></parameter>
+                	<parameter name="class">AppKit.Ext.ColumnRenderer.Icinga</parameter>
+                	<parameter name="method">ajaxPopup</parameter>
+                	
+                	<parameter name="filterField">host_object_id</parameter>
+                	<parameter name="type">HostStatus</parameter>
                 </parameter>
-                -->
+                
             </display>
         	
             <filter>
