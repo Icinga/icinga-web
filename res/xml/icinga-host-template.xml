@@ -146,7 +146,7 @@
 							<parameter name="labelField">host_name</parameter>
 	                	</parameter>
 	                </parameter>
-                
+	                
                 </parameter>
                 
             </display>
@@ -167,7 +167,67 @@
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
         </field>  
-        
+
+        <field name="host_info">
+            <datasource>
+            	<parameter name="field">HOST_NAME</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">22</parameter>
+
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">fam.information</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here for information</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+
+					<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">ajaxClick</parameter>
+
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+
+	                	<parameter name="arguments">
+	                		<parameter name="src_id">hostinfo</parameter>
+	                		<parameter name="filter">
+	                			<parameter name="host">host_name</parameter>
+	                		</parameter>
+	                	</parameter>
+	                </parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+
         <field name="host_history_link">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>
