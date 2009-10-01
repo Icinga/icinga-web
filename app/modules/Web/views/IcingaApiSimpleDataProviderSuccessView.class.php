@@ -42,7 +42,6 @@ class Web_IcingaApiSimpleDataProviderSuccessView extends ICINGAWebBaseView
 		// store final count and convert
 		$jsonData['result']['count'] = count($jsonData['result']['data']);
 		$jsonDataEnc = json_encode($jsonData);
-		//var_dump(array($jsonData, $jsonDataEnc));
 
 		return $jsonDataEnc;
 
