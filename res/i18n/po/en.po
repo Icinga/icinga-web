@@ -13,6 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+# table output of host information
 msgid "host_address"
 msgstr "Address"
 
@@ -65,4 +66,53 @@ msgid "host_scheduled_downtime_depth"
 msgstr "Scheduled downtime depth"
 
 msgid "host_status_update_time"
+msgstr "Status update time"
+
+# table output of service information
+msgid "service_display_name"
+msgstr "Display name"
+
+msgid "service_current_state"
+msgstr "Current state"
+
+msgid "service_output"
+msgstr "Output"
+
+msgid "service_perfdata"
+msgstr "Performance data"
+
+msgid "service_current_check_attempt"
+msgstr "Check attempt"
+
+msgid "service_max_check_attempts"
+msgstr "Max check attempts"
+
+msgid "service_last_check"
+msgstr "Last check"
+
+msgid "service_check_type"
+msgstr "Check type"
+
+msgid "service_latency"
+msgstr "Latency"
+
+msgid "service_execution_time"
+msgstr "Execution time"
+
+msgid "service_next_check"
+msgstr "Next check"
+
+msgid "service_last_hard_state_change"
+msgstr "Last hard state change"
+
+msgid "service_last_notification"
+msgstr "Last notification"
+
+msgid "service_is_flapping"
+msgstr "Is flapping"
+
+msgid "service_scheduled_downtime_depth"
+msgstr "Scheduled downtime depth"
+
+msgid "service_status_update_time"
 msgstr "Status update time"
