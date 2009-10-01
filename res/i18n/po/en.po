@@ -1,0 +1,68 @@
+# Orginal translation
+
+msgid ""
+msgstr ""
+
+"Project-Id-Version: Icinga-Web\n" 
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Christian Doebler\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "host_address"
+msgstr "Address"
+
+msgid "host_alias"
+msgstr "Alias"
+
+msgid "host_display_name"
+msgstr "Display name"
+
+msgid "host_current_state"
+msgstr "Current state"
+
+msgid "host_output"
+msgstr "Output"
+
+msgid "host_perfdata"
+msgstr "Performance data"
+
+msgid "host_current_check_attempt"
+msgstr "Current check attempt"
+
+msgid "host_max_check_attempts"
+msgstr "Max check attempts"
+
+msgid "host_last_check"
+msgstr "Last check"
+
+msgid "host_check_type"
+msgstr "Check type"
+
+msgid "host_latency"
+msgstr "Latency"
+
+msgid "host_execution_time"
+msgstr "Execution time"
+
+msgid "host_next_check"
+msgstr "Next check"
+
+msgid "host_last_hard_state_change"
+msgstr "Hard state change"
+
+msgid "host_last_notification"
+msgstr "Last notification"
+
+msgid "host_is_flapping"
+msgstr "Is flapping"
+
+msgid "host_scheduled_downtime_depth"
+msgstr "Scheduled downtime depth"
+
+msgid "host_status_update_time"
+msgstr "Status update time"

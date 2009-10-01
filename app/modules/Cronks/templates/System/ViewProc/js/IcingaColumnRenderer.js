@@ -49,7 +49,7 @@ AppKit.Ext.grid.IcingaColumnRenderer = {
 				var sdp = new SimpleDataProvider({
 					targetXY: [e.getPageX(), e.getPageY() - 50],
 					srcId: cfg.src_id,
-					width: 200,
+					width: 400,
 					delay: 15000,
 					filter: cfg.processedFilterData
 				});

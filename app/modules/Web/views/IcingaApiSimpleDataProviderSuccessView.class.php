@@ -27,19 +27,24 @@ class Web_IcingaApiSimpleDataProviderSuccessView extends ICINGAWebBaseView
 
 		$result = $model->setSourceId($srcId)->setFilter($filter)->fetch();
 
+		$tm = $this->getContext()->getTranslationManager();
+
 		foreach ($result as $row) {
-			$dataTmp = array();
 			foreach ($result->getRow() as $key => $value) {
-				$dataTmp[$key] = $value;
+				$dataTmp = array (
+					'key'	=> $tm->_($key),
+					'value'	=> $value,
+				);
+				array_push($jsonData['result']['data'], $dataTmp);
 			}
-			array_push($jsonData['result']['data'], $dataTmp);
 		}
 
-		// store final count
+		// store final count and convert
 		$jsonData['result']['count'] = count($jsonData['result']['data']);
-		//var_dump($jsonData);
+		$jsonDataEnc = json_encode($jsonData);
+		//var_dump(array($jsonData, $jsonDataEnc));
 
-		return json_encode($jsonData);
+		return $jsonDataEnc;
 
 	}
 
