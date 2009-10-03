@@ -169,15 +169,16 @@
 
 	<setting name="appkit.factories">
 		<!-- Cache provider -->
-		<!-- <parameter name="Cache">
-			<parameter name="class">AppKitCache</parameter>
+		<!--
+		<parameter name="Cache">
+			<parameter name="class">AppKitFileCache</parameter>
 			
 			<parameter name="cacheDefaultRegion">appkit.cache.default</parameter>
 			<parameter name="cacheTransactionType">AppKitCache::COMMIT_POOL</parameter>
 			<parameter name="cacheSerializeType">AppKitCache::SERIALIZE_PHP</parameter>
-			<parameter name="cacheProviderName">AppKitCacheProviderFile</parameter>
 			
-		</parameter> -->
+		</parameter>
+		-->
 		
 		<!-- GLOBAL MESSAGE QUEUE -->
 		<parameter name="MessageQueue">
