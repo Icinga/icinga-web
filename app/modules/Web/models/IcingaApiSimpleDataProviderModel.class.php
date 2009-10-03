@@ -99,10 +99,6 @@ class Web_IcingaApiSimpleDataProviderModel extends ICINGAWebBaseModel
 		$this->setOrder();
 		$this->setLimit();
 		$result = $this->apiSearch->fetch();
-//var_dump(array(
-//	'config'	=> $this->config,
-//	'result'	=> $result
-//));
 		return $result;
 	}
 
