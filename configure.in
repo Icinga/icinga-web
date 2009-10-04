@@ -1,0 +1,44 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.61)
+AC_INIT(pub/index.php)
+AC_PREFIX_DEFAULT(/usr/local/icinga-web)
+
+# Checks for programs.
+AC_PROG_INSTALL
+AC_PROG_CC
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+# Define install options
+AC_ARG_WITH(icinga_user,--with-icinga-user=<user> sets user name to run icinga,icinga_user=$withval,icinga_user=icinga)
+AC_ARG_WITH(icinga_group,--with-icinga-group=<grp> sets group name to run icinga,icinga_grp=$withval,icinga_grp=icinga)
+AC_SUBST(icinga_user)
+AC_SUBST(icinga_grp)
+AC_DEFINE_UNQUOTED(DEFAULT_ICINGA_USER,"$icinga_user")
+AC_DEFINE_UNQUOTED(DEFAULT_NAGIOS_USER,"$icinga_user")
+AC_DEFINE_UNQUOTED(DEFAULT_ICINGA_GROUP,"$icinga_grp")
+AC_DEFINE_UNQUOTED(DEFAULT_NAGIOS_GROUP,"$icinga_grp")
+INSTALL_OPTS="-o $icinga_user -g $icinga_grp"
+AC_SUBST(INSTALL_OPTS)
+
+AC_ARG_WITH(command_user,--with-command-user=<user> sets user name for command access,command_user=$withval,command_user=$icinga_user)
+AC_ARG_WITH(command_group,--with-command-group=<grp> sets group name for command access,command_grp=$withval,command_grp=$icinga_grp)
+AC_SUBST(command_user)
+AC_SUBST(command_grp)
+COMMAND_OPTS="-o $command_user -g $command_grp"
+AC_SUBST(COMMAND_OPTS)
+
+CFLAGS=""
+AC_SUBST(CFLAGS)
+
+AC_CONFIG_FILES([Makefile])
+
+AC_OUTPUT
