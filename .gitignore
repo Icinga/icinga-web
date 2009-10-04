@@ -1,3 +1,4 @@
+autom4te.cache/
 app/cache/config/*.php
 app/cache
 lib/icinga-api
