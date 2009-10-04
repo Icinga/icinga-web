@@ -2,6 +2,9 @@
 
 <settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
 	
+	<!-- The webpath, with a leading slash and no trailing -->
+	<setting name="appkit.web_path"><![CDATA[/icinga-web]]></setting>
+	
 	<setting name="appkit.php_settings">
 		<parameter name="session.gc_probability">3</parameter>
 		<parameter name="session.gc_divisor">100</parameter>
@@ -216,20 +219,20 @@
 			<parameter name="config_type">mysql</parameter>
 			<parameter name="config_host">127.0.0.1</parameter>
 
-			<!--
+			
 			<parameter name="config_port">3307</parameter>
 			<parameter name="config_database">ndo_demo</parameter>
-			-->			
-
+						
+			<!--
 			<parameter name="config_port">3306</parameter>
 			<parameter name="config_database">icinga</parameter>
-
+			-->
 			<parameter name="config_user">icinga</parameter>
 			<parameter name="config_password">icinga</parameter>
 			
 			
-			<!-- <parameter name="config_table_prefix">nagios_</parameter> -->
-			<parameter name="config_table_prefix">icinga_</parameter>
+			<parameter name="config_table_prefix">nagios_</parameter>
+			<!-- <parameter name="config_table_prefix">icinga_</parameter> -->
 		</parameter>
 	</setting>
 	
