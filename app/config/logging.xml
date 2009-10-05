@@ -9,7 +9,8 @@
 			<logger name="appkit_default" class="AgaviLogger" level="AgaviLogger::ALL">
 				<appenders>
 					<appender>AppKitLogAppender</appender>
-					<appender>AppKitQueueAppender</appender>
+					<!-- Appender removed from notify stack -->
+					<!-- <appender>AppKitQueueAppender</appender> -->
 				</appenders>
 			</logger>
 
@@ -17,7 +18,9 @@
 		
 		<appenders>
 			<appender name="AppKitLogAppender" class="AppKitDoctrineLoggerAppender" layout="PassThru" />
-			<appender name="AppKitQueueAppender" class="AppKitMessageQueueLoggerAppender" layout="DateTimeLayout" />
+			
+			<!-- All logs go to the page -->
+			<!-- <appender name="AppKitQueueAppender" class="AppKitMessageQueueLoggerAppender" layout="DateTimeLayout" /> -->
 		</appenders>
 		
 		<layouts>

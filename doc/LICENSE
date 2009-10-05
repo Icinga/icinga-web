@@ -1,50 +1,49 @@
 
-/**
- * COPYRIGHT:
- *  
- * This software is Copyright (c) 2009 NETWAYS GmbH
- *                                Marius Hein, Christian Doebler 
- *                                <support@netways.de>
- * 
- * (Except where explicitly superseded by other copyright notices)
- * 
- * 
- * LICENSE:
- * 
- * This work is made available to you under the terms of Version 2 of
- * the GNU General Public License. A copy of that license should have
- * been provided with this software, but in any event can be snarfed
- * from http://www.fsf.org.
- * 
- * This work is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301 or visit their web page on the internet at
- * http://www.fsf.org.
- * 
- * 
- * CONTRIBUTION SUBMISSION POLICY:
- * 
- * (The following paragraph is not intended to limit the rights granted
- * to you to modify and distribute this software under the terms of
- * the GNU General Public License and is only of importance to you if
- * you choose to contribute your changes and enhancements to the
- * community by submitting them to NETWAYS GmbH.)
- * 
- * By intentionally submitting any modifications, corrections or
- * derivatives to this work, or any other work intended for use with
- * this Software, to NETWAYS GmbH, you confirm that
- * you are the copyright holder for those contributions and you grant
- * NETWAYS GmbH a nonexclusive, worldwide, irrevocable,
- * royalty-free, perpetual, license to use, copy, create derivative
- * works based on those contributions, and sublicense and distribute
- * those contributions and any derivatives thereof.
- * 
- * Nagios and the Nagios logo are registered trademarks of Ethan Galstad.
- */
- 
+--------------------------------------------------------
+
+icinga-web:
+
+a new generation of interface for icinga.
+
+Copyright (c) 2009, Icinga Development Team
+All rights reserved.
+
+http://www.icinga.org
+
+The icinga-web frontend is licensed under the terms of
+the Open Source GPL 2 license.
+
+--------------------------------------------------------
+
+Opensource License:
+
+icinga-web, web2.0 frontend for the icinga core
+Copyright (C) 2009  Icinga Development Team
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+http://www.gnu.org/licenses/gpl-2.0.html
+
+For detailed information see the GPL file in this folder.
+
+--------------------------------------------------------
+
+Vendor and foreign components:
+
+All trademarks and registered trademarks mentioned herein
+are the property of their respective owners and their
+choosen licenses.
+
+--------------------------------------------------------

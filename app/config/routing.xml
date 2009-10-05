@@ -14,18 +14,23 @@
 				
 				<route name="appkit.login" pattern="^/login" action="Login"/>
 				
-				<!-- <route name="appkit.login" pattern="^/login" action="AjaxLogin">
+				<!--
+				Later for ajax logins 
+				<route name="appkit.login" pattern="^/login" action="AjaxLogin">
 					<route name="appkit.login.provider" pattern="^/json" action="AjaxLogin" output_type="json" />
-				</route> -->
+				</route>
+				-->
 				
 				<route name="appkit.logout" pattern="^/logout" action="Logout"/>
-				
 				
 				<route name="appkit.about" pattern="^/about" action="%actions.default_action%"/>
 				
 				<route name="appkit.squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simplecontent" />
 				
 				<!-- AJAX handlers -->
+				<!-- 
+					@todo should be removed
+				-->
 				<route name=".ajax" pattern="^/ajax">
 					<route name=".autocomplete" pattern="^/autocomplete/(type:[\w\._]+)" action="Ajax.AutoComplete" output_type="json" />
 					<route name=".fs" pattern="^/fs/(type:[\w\._]+)" action="Ajax.FileSource" output_type="ajax" />
@@ -51,6 +56,11 @@
 				</route>
 				
 				
+				<!-- 
+					ExtJS specific content.
+					* The app state from the database as json
+					* Loading occasional used javascript on the fly
+				-->
 				<route pattern="^/ext" name=".ext">
 					<route pattern="^/applicationState$" name=".applicationState" output_type="javascript" action="Ext.ApplicationState" />
 					<route pattern="^/dynascript/(script:([\w-_\.]+))$" name=".dynamicScriptSource" output_type="javascript" action="Ext.DynamicJavascriptSource" />
@@ -68,22 +78,25 @@
 			
 			<!-- ICINGA routes -->
 			<route name="icinga" pattern="^/web" module="Web">
+			
+				<!-- Icinga index route -->
 				<route pattern="^$" action="Index" />
 				
-				<route name=".hostDetail" pattern="/host" action="Icinga.HostDetail">
-					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))$" action="Icinga.HostDetailSingle" />
-				</route>
-				
-				<route name=".serviceDetail" pattern="/service" action="Icinga.ServiceDetail">
-					<route name=".single" pattern="^/(hostname:([\w\.\-\_\s]+))/(servicename:([\w\.\-\_\s]+))$" action="Icinga.ServiceDetailSingle" />
-				</route>
-				
+				<!-- The main view -->
 				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
 				
+				<!--
+					Cronks:
+						* loader
+						* json data sources
+						* special content
+				-->
 				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" module="Cronks">
-
+					
+					<!-- The cronkloader -->
 					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="System.CronkLoader" />
 
+					<!-- Datasources for the cronks -->
 					<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="System.CronkListing" />
 					<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="System.ObjectSearch" />
 					<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="System.StatusSummary" />
@@ -96,13 +109,7 @@
 							<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation" />
 						</route>
 					</route>
-					
-					<route name=".persistentprovider.json" pattern="^/persistenceProvider/json" output_type="json" action="Icinga.Cronks.PersistenceProvider" />
 
-				</route>
-				
-				<route pattern="^/ext" name=".ext">
-					<route pattern="/applicationState" name=".applicationState" output_type="javascript" action="Icinga.Ext.ApplicationState" />
 				</route>
 
 				<route name=".simpleDataProvider.json" pattern="^/simpleDataProvider/json" output_type="json" action="IcingaApiSimpleDataProvider" />

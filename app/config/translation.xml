@@ -41,20 +41,34 @@
 			</available_locale>
 		</available_locales>
 		
-		<translators default_domain="icinga">
+		
+		<!--
+		
+			This is quite important. If you're using an gettext translator, the domain
+			have to assembled of translator and text_domain:
+			
+			* icinga.default
+			
+		-->
+		<translators default_domain="icinga.default">
+		
 			<translator domain="icinga">
-				<message_translator class="AgaviGettextTranslator">
-					<ae:parameter name="text_domains">
-						<ae:parameter name="icinga">%core.root_dir%/res/i18n/mo</ae:parameter>
-					</ae:parameter>
-				</message_translator>
-				
-				<date_formatter>
-					<ae:parameter name="type">date</ae:parameter>
-					<ae:parameter name="format">dd.MM.yyyy hh:mm:ss</ae:parameter>
-				</date_formatter>
-				
+			
+					<!-- Text -->
+					<message_translator class="AgaviGettextTranslator">
+						<ae:parameter name="text_domains">
+							<ae:parameter name="default">%core.root_dir%/res/i18n/mo</ae:parameter>
+						</ae:parameter>
+					</message_translator>
+					
+					<!-- Date/time (also important for the validators) -->
+					<date_formatter>
+						<ae:parameter name="type">date</ae:parameter>
+						<ae:parameter name="format">dd.MM.yyyy hh:mm:ss</ae:parameter>
+					</date_formatter>
+					
 			</translator>
+			
 		</translators>
 		
 	</ae:configuration>

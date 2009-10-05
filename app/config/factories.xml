@@ -52,6 +52,10 @@
 			<!-- this is disabled by default so you don't run into surprises when deploying to production envs (which have "strict" mode enabled) without testing on a staging machine first -->
 			<!-- also, it's not recommended to use any mode other than "strict" -->
 			<!-- <ae:parameter name="mode">conditional</ae:parameter> -->
+			<!--
+				never, never, never, disable the validation, this
+				is one of the key concept
+			-->
 		</validation_manager>
 		
 	</ae:configuration>
