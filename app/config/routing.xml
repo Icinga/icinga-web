@@ -88,6 +88,9 @@
 					<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="System.ObjectSearch" />
 					<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="System.StatusSummary" />
 
+					<route name=".statusMap.json" pattern="^/statusMap/json" output_type="json" action="System.StatusMap" />
+					<route name=".statusMap" pattern="^/statusMap" action="System.StatusMap" />
+
 					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
 						<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">
 							<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation" />
@@ -95,6 +98,7 @@
 					</route>
 					
 					<route name=".persistentprovider.json" pattern="^/persistenceProvider/json" output_type="json" action="Icinga.Cronks.PersistenceProvider" />
+
 				</route>
 				
 				<route pattern="^/ext" name=".ext">
