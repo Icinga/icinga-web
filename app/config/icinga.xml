@@ -1,45 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+	ICINGA base configuration
+-->
+
 <settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
-	
-	<!-- The webpath, with a leading slash and no trailing -->
-	<!-- 
-		If the path is empty, we try to detect the path
+
+	<!--
+		The webpath, with a leading slash and no trailing
+		* If the path is empty, we try to detect the path
 	-->
 	<setting name="appkit.web_path"></setting>
 	
+	<!-- 
+		Overwrite php ini settings:
+		* Enable the garbage collector for sessions
+	-->
 	<setting name="appkit.php_settings">
 		<parameter name="session.gc_probability">3</parameter>
 		<parameter name="session.gc_divisor">100</parameter>
 		<parameter name="session.gc_maxlifetime">86400</parameter>
 	</setting>
 	
-	<!-- This does not work if the config cache is recreated! (DON'T USE THIS, COMPAT STATE) -->
-	<!-- <setting name="appkit.lib_path">%core.root_dir%/lib</setting> -->
-	
+	<!-- 
+		AutoLoader
+		* Add additional directory to the loader.
+	-->
 	<setting name="appkit.autoloader.paths">
 		<parameter>%core.root_dir%/lib/appkit</parameter>
 		<parameter>%core.module_dir%/Web/lib/icinga</parameter>
 	</setting>
 	
+	<!-- The class prefixes -->
 	<setting name="appkit.autoloader.prefixes">
 		<parameter>AppKit</parameter>
 		<parameter>Icinga</parameter>
 	</setting>
 	
-	<!-- Relative to AppKit::bootstrap, otherwise throws errors! -->
+	<!--
+		Doctrine setup
+		* Path to lib and to the models
+		* Relative to AppKit::bootstrap, otherwise throws errors!
+	-->
 	<setting name="appkit.doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
 	<setting name="appkit.doctrine_model_path">%core.root_dir%/lib/appkit/database/models</setting>
 	
+	<!--
+		AppKit image dispatcher
+	-->
 	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
 
+	<!-- 
+		Menu extender
+		* Register classes to change the navigation
+	-->
 	<setting name="appkit.menu_extender">
 		<parameter>IcingaMenuExtender</parameter>
 	</setting>
 
+	<!-- 
+		Eventhandling
+		* Code-less, predefined events to register tasks
+	-->
 	<setting name="appkit.custom_events">
 	
-		<!-- This is our root menu -->
+		<!-- This is our root menu (If all ready, the sub menues will be created -->
 		<parameter name="AppKitMenuEventDistributor">
 			<parameter name="event">appkit.menu</parameter>
 			<parameter name="class">AppKitMenuCreator</parameter>
@@ -60,6 +85,11 @@
 		</parameter>
 	</setting>
 
+	<!-- 
+		Stylesheet includes
+		* Relative to your web
+		* The real web oath will be prepended
+	-->
 	<setting name="appkit.include_styles">		
 	
 		<!-- ICINGAWireFrame css -->
@@ -89,16 +119,20 @@
 		<parameter>/styles/extjs/ext-all.css</parameter>
 		<parameter>/styles/extjs/ux-all.css</parameter>
 		<parameter>/styles/Icinga.css</parameter>
-		
-		
-		
 	</setting>
 	
+	<!-- 
+		Metatags
+	-->
 	<setting name="appkit.meta_tags">
 		<parameter name="author">(c) 2009 Icinga developer team - www.icinga.org</parameter>
 		<parameter name="robots">noindex</parameter>
 	</setting>
 	
+	<!-- 
+		Javascript includes
+		* please provide absolute paths, we create one big file later.
+	-->
 	<setting name="appkit.include_javascript">
 	
 		<!-- YUI -->
@@ -106,37 +140,16 @@
 		<parameter>%core.root_dir%/lib/yui/build/event/event-min.js</parameter>
 		<parameter>%core.root_dir%/lib/yui/build/yahoo-dom-event/yahoo-dom-event.js</parameter>
 		<parameter>%core.root_dir%/lib/yui/build/container/container-min.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/yui/build/datasource/datasource-min.js</parameter> -->
 		<parameter>%core.root_dir%/lib/yui/build/get/get-min.js</parameter>
 		<parameter>%core.root_dir%/lib/yui/build/element/element-beta-min.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/yui/build/connection/connection-min.js</parameter> -->
-		<!-- <parameter>%core.root_dir%/lib/yui/build/json/json-min.js</parameter> -->
 		<parameter>%core.root_dir%/lib/yui/build/animation/animation-min.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/yui/build/autocomplete/autocomplete-min.js</parameter> -->
 		<parameter>%core.root_dir%/lib/yui/build/menu/menu-min.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/yui/build/tabview/tabview-min.js</parameter> -->
-		<!-- <parameter>%core.root_dir%/lib/yui/build/dragdrop/dragdrop-min.js</parameter> -->
 		<parameter>%core.root_dir%/lib/yui/build/button/button-min.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/yui/build/calendar/calendar-min.js</parameter> -->
-		<!-- <parameter>%core.root_dir%/lib/yui/build/resize/resize-min.js</parameter> -->
-		<!-- <parameter>%core.root_dir%/lib/yui/build/cookie/cookie-min.js</parameter> -->
-		
-		<!-- JQuery -->
-		<!-- <parameter>%core.root_dir%/lib/jquery/jquery-1.3.1.min.js</parameter> -->
-		
-		<!-- mootools -->
-		<!-- <parameter>%core.root_dir%/lib/mootools/mootools-1.2.1-core-yc.js</parameter> -->	
-		
-		<!-- SWF Object -->
-		<!-- <parameter>%core.root_dir%/lib/swfobject/swfobject.js</parameter> -->
-		
-		<!-- Google Code Prettify -->
-		<!-- <parameter>%core.root_dir%/lib/gc-prettify/prettify.js</parameter> -->
-		
+
 		<!-- Firebug lite for debug purposes -->
 		<!-- <parameter>%core.root_dir%/lib/firebug/firebug-lite-compressed.js</parameter> -->
 		
-		<!-- ExtJS -->
+		<!-- ExtJS base files -->
 		<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
@@ -153,8 +166,6 @@
 		<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
 
 		<!--AppKit JS -->
-		<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>  --> 
-		<parameter>%core.root_dir%/lib/appkit/js/dump.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
@@ -169,13 +180,24 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
 	</setting>
 
-	<!-- This scripts are included dynamically by modules if needed -->
+	<!--
+		ScriptDynaLoader
+		* This scripts are included dynamically by modules if needed (js code)
+		* You have to predefine the libraries
+	-->
 	<setting name="appkit.include_dynamic_javascript">
 		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
 	</setting>
 
+	<!--
+		Doctrine pager configuration
+		* deprecated, test to remove
+	-->
 	<setting name="appkit.pager.default_items">20</setting>
 
+	<!-- 
+		AppKitFactories
+	-->
 	<setting name="appkit.factories">
 		<!-- Cache provider -->
 		<parameter name="CacheProvider">
@@ -261,9 +283,13 @@
 		</parameter>
 	</setting>
 	
+	
+	<!-- 
+		Version information
+		* names, and revisions
+	-->
 	<setting name="appkit.version.copyright"><![CDATA[&#169; 2009 Icinga Developer Team]]></setting>
 	<setting name="appkit.version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
-	
 	<setting name="appkit.version.major">0</setting>
 	<setting name="appkit.version.minor">9</setting>
 	<setting name="appkit.version.patch">0</setting>
@@ -284,9 +310,15 @@
 	
 	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 	
+	<!--
+		XInclude
+		* Include other xml resources
+	-->
+	
 	<!-- Our cronks config goes here -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
 
 	<!-- Include settings for simple-data provider -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml"/>
+	
 </settings>
