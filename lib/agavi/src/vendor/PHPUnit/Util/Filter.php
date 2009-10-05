@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Filter.php 4442 2009-01-08 18:49:37Z sb $
+ * @version    SVN: $Id: Filter.php 4701 2009-03-01 15:29:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -411,7 +411,7 @@ class PHPUnit_Util_Filter
         }
 
         foreach ($eTrace as $frame) {
-            if (!self::$filter || (isset($frame['file']) && !self::isFiltered($frame['file'], $filterTests, TRUE))) {
+            if (!self::$filter || (isset($frame['file']) && is_file($frame['file']) && !self::isFiltered($frame['file'], $filterTests, TRUE))) {
                 if ($asString === TRUE) {
                     $filteredStacktrace .= sprintf(
                       "%s:%s\n",

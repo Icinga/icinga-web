@@ -27,7 +27,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviRequest.class.php 3750 2009-02-02 20:08:47Z david $
+ * @version    $Id: AgaviRequest.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 abstract class AgaviRequest extends AgaviAttributeHolder
 {
@@ -75,7 +75,7 @@ abstract class AgaviRequest extends AgaviAttributeHolder
 	}
 
 	/**
-	 * Retrieve this request's method.
+	 * Retrieve this requests method.
 	 *
 	 * @return     string The request method name
 	 *

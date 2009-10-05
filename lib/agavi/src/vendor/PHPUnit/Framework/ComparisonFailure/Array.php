@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Array.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Array.php 4612 2009-02-06 14:09:24Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -132,7 +132,7 @@ class PHPUnit_Framework_ComparisonFailure_Array extends PHPUnit_Framework_Compar
 
         foreach ($actualOnly as $actualKey) {
             $diff .= sprintf(
-              "array key %s: only in expected %s\n",
+              "array key %s: only in actual %s\n",
 
               PHPUnit_Util_Type::toString($actualKey),
               PHPUnit_Util_Type::toString($this->actual[$actualKey])

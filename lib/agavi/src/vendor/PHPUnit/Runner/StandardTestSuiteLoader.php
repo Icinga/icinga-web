@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: StandardTestSuiteLoader.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: StandardTestSuiteLoader.php 4637 2009-02-14 10:20:20Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -80,6 +80,8 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
             $suiteClassFile = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $suiteClassName) . '.php';
         }
 
+        $suiteClassFile = realpath($suiteClassFile);
+
         if (!class_exists($suiteClassName, FALSE)) {
             if (!file_exists($suiteClassFile)) {
                 $includePaths = explode(PATH_SEPARATOR, get_include_path());
@@ -114,17 +116,19 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
             foreach ($loadedClasses as $loadedClass) {
                 $class = new ReflectionClass($loadedClass);
 
-                if ($class->isSubclassOf('PHPUnit_Framework_TestCase')) {
-                    $suiteClassName = $loadedClass;
-                    break;
-                }
-
-                if ($class->hasMethod('suite')) {
-                    $method = $class->getMethod('suite');
-
-                    if (!$method->isAbstract() && $method->isPublic() && $method->isStatic()) {
+                if ($class->getFileName() == $suiteClassFile) {
+                    if ($class->isSubclassOf('PHPUnit_Framework_TestCase')) {
                         $suiteClassName = $loadedClass;
                         break;
+                    }
+
+                    if ($class->hasMethod('suite')) {
+                        $method = $class->getMethod('suite');
+
+                        if (!$method->isAbstract() && $method->isPublic() && $method->isStatic()) {
+                            $suiteClassName = $loadedClass;
+                            break;
+                        }
                     }
                 }
             }

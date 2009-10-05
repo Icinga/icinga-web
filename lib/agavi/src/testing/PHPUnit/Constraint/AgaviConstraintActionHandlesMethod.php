@@ -12,7 +12,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviConstraintActionHandlesMethod.php 2893 2008-09-19 13:22:47Z felix $
+ * @version    $Id: AgaviConstraintActionHandlesMethod.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviConstraintActionHandlesMethod extends PHPUnit_Framework_Constraint
 {
@@ -28,7 +28,7 @@ class AgaviConstraintActionHandlesMethod extends PHPUnit_Framework_Constraint
 	protected $acceptGeneric;
 	
 	/**
-	 * contstructor
+	 * constructor
 	 * 
 	 * @param      AgaviAction the action to test
 	 * @param      boolean     true if 'execute' should be accepted

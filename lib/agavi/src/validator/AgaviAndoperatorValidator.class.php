@@ -30,12 +30,12 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviAndoperatorValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviAndoperatorValidator.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviAndoperatorValidator extends AgaviOperatorValidator
 {
 	/**
-	 * Validates the operator by executing the child valdators.
+	 * Validates the operator by executing the child validators.
 	 * 
 	 * @return     bool True if all child validators resulted successful.
 	 * 

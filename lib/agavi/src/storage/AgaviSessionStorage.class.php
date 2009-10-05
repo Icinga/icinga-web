@@ -27,7 +27,7 @@
  *                                              limiter header.
  * # <b>session_module_name</b>     - []      - The name of the session module.
  * # <b>session_save_path</b>       - []      - The filesystem location where
- *                                              sesssion data is stored
+ *                                              session data is stored
  * # <b>session_name</b>            - [Agavi] - The name of the session.
  * # <b>session_id</b>              - []      - Static session ID value to set.
  * # <b>session_cookie_lifetime</b> - []      - The session cookie lifetime (in
@@ -53,7 +53,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviSessionStorage.class.php 3892 2009-02-25 00:08:20Z david $
+ * @version    $Id: AgaviSessionStorage.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviSessionStorage extends AgaviStorage
 {

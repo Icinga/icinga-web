@@ -16,7 +16,7 @@
 /**
  * AgaviIssetValidator verifies a parameter is set
  * 
- * The content of the input value is not varified in any manner, it is only
+ * The content of the input value is not verified in any manner, it is only
  * checked if the input value exists. (see isset() in PHP)
  *
  * @package    agavi
@@ -28,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviIssetValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviIssetValidator.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviIssetValidator extends AgaviValidator
 {

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Source.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Source.php 4707 2009-03-08 14:44:17Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -220,7 +220,7 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Source
 
                     $this->directory,
                     PHPUnit_Util_Filesystem::getSafeFilename(
-                      str_replace(DIRECTORY_SEPARATOR, '_', $filename)
+                      basename($filename)
                     )
                   )
                 );
@@ -292,7 +292,7 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Source
 
                     $this->directory,
                     PHPUnit_Util_Filesystem::getSafeFilename(
-                      str_replace(DIRECTORY_SEPARATOR, '_', $filename)
+                      basename($filename)
                     )
                   )
                 );

@@ -48,6 +48,16 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		return preg_match('@%([bcdeufFosxX]|\d+\$[bcdeufFosxX])@',  $string);
 	}
 	
+	public function extractWebPath() {
+		$request_uri = $_SERVER['REQUEST_URI'];
+		
+		if ($_SERVER['QUERY_STRING']) {
+			$request_uri = str_replace($_SERVER['QUERY_STRING'], '', $request_uri);
+		}
+		
+		return $request_uri;
+	}
+	
 }
 
 ?>

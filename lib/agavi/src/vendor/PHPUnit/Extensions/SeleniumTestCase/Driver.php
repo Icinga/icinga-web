@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Driver.php 4570 2009-01-27 15:18:24Z sb $
+ * @version    SVN: $Id: Driver.php 4726 2009-03-22 16:54:49Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -818,7 +818,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
         $context = stream_context_create(
           array(
             'http' => array(
-              'timeout' => $this->timeout
+              'timeout' => ($this->timeout / 1000) + 5
             )
           )
         );
@@ -832,7 +832,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
         }
 
         stream_set_blocking($handle, 1);
-        stream_set_timeout($handle, 0, $this->timeout);
+        stream_set_timeout($handle, 0, $this->timeout + 5000);
 
         $info     = stream_get_meta_data($handle);
         $response = '';

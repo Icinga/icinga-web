@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IsEqual.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: IsEqual.php 4660 2009-02-23 16:33:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -202,6 +202,26 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
 
         if (is_object($a) XOR is_object($b)) {
             return FALSE;
+        }
+
+        if ($a instanceof SplObjectStorage XOR $b instanceof SplObjectStorage) {
+            return FALSE;
+        }
+
+        if ($a instanceof SplObjectStorage) {
+            foreach ($a as $object) {
+                if (!$b->contains($object)) {
+                    return FALSE;
+                }
+            }
+
+            foreach ($b as $object) {
+                if (!$a->contains($object)) {
+                    return FALSE;
+                }
+            }
+
+            return TRUE;
         }
 
         if ($a instanceof DOMDocument || $b instanceof DOMDocument) {

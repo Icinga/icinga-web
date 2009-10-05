@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviValidationIncident.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviValidationIncident.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviValidationIncident
 {
@@ -158,7 +158,7 @@ class AgaviValidationIncident
 	}
 
 	/**
-	 * Retrieves a list of all errorneus arguments of this incident.
+	 * Retrieves a list of all erroneous arguments of this incident.
 	 *
 	 * @return     array An array of AgaviValidationArgument.
 	 *

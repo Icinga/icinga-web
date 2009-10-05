@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestRunner.php 4501 2009-01-19 15:35:25Z sb $
+ * @version    SVN: $Id: TestRunner.php 4718 2009-03-21 06:51:20Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -586,7 +586,8 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      */
     protected function handleConfiguration(array &$arguments)
     {
-        if (isset($arguments['configuration'])) {
+        if (isset($arguments['configuration']) &&
+            !$arguments['configuration'] instanceof PHPUnit_Util_Configuration) {
             $arguments['configuration'] = PHPUnit_Util_Configuration::getInstance(
               $arguments['configuration']
             );

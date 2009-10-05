@@ -12,7 +12,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviConstraintViewHandlesOutputType.php 3012 2008-10-14 12:50:55Z felix $
+ * @version    $Id: AgaviConstraintViewHandlesOutputType.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviConstraintViewHandlesOutputType extends PHPUnit_Framework_Constraint
 {
@@ -28,7 +28,7 @@ class AgaviConstraintViewHandlesOutputType extends PHPUnit_Framework_Constraint
 	protected $acceptGeneric;
 	
 	/**
-	 * contstructor
+	 * constructor
 	 * 
 	 * @param      AgaviAction the action to test
 	 * @param      boolean     true if 'execute' should be accepted

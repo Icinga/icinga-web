@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: SeleniumTestCase.php 4506 2009-01-19 16:15:56Z sb $
+ * @version    SVN: $Id: SeleniumTestCase.php 4701 2009-03-01 15:29:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -161,6 +161,7 @@ abstract class PHPUnit_Extensions_Story_SeleniumTestCase extends PHPUnit_Extensi
     /**
      * Run this test's scenario.
      *
+     * @return mixed
      * @throws RuntimeException
      */
     protected function runTest()
@@ -169,7 +170,7 @@ abstract class PHPUnit_Extensions_Story_SeleniumTestCase extends PHPUnit_Extensi
         $this->autoStop = FALSE;
 
         try {
-            parent::runTest();
+            $testResult = parent::runTest();
             $this->scenario->run($this->world);
             $this->autoStop = $autostop;
         }
@@ -178,6 +179,8 @@ abstract class PHPUnit_Extensions_Story_SeleniumTestCase extends PHPUnit_Extensi
             $this->autoStop = $autostop;
             throw $e;
         }
+
+        return $testResult;
     }
 
     /**

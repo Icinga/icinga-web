@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviValidationError.class.php 3800 2009-02-06 16:41:01Z david $
+ * @version    $Id: AgaviValidationError.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviValidationError
 {
@@ -46,7 +46,7 @@ class AgaviValidationError
 
 	/**
 	 * @var        AgaviValidationIncident The incident in which this error 
-	 *                                     occured.
+	 *                                     occurred.
 	 */
 	protected $incident = null;
 

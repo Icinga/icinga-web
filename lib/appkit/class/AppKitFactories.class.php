@@ -7,8 +7,30 @@ class AppKitFactories extends AppKitSingleton {
 	public static function loadFactoriesFromConfig($namespace) {
 		$config = AgaviConfig::get($namespace);
 		foreach ($config as $name=>$params) {
+			
+			$classes = array (
+				$params['class'] => $params['file']
+			);
+			
+			if (is_array($params['requiredClasses']) && count($params['requiredClasses'])) {
+				$classes = array_merge($params['requiredClasses'], $classes);
+			}
+			
+			self::includeClasses($classes);
+			
 			$params['name'] = $name;
 			self::getInstance()->addFactory($params['name'], $params['class'], $params);
+		}
+	}
+	
+	private static function includeClasses(array $classes) {
+		foreach ($classes as $name=>$file) {
+			if (!class_exists($name) && file_exists($file)) {
+				require_once($file);
+			}
+			else {
+				throw new AppKitFactoryException('Could not load class: %s (%s). File and object does not exists and the autoloader could not handle the factory!', $name, $file);
+			} 
 		}
 	}
 	

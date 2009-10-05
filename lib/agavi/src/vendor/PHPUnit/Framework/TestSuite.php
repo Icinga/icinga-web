@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestSuite.php 4442 2009-01-08 18:49:37Z sb $
+ * @version    SVN: $Id: TestSuite.php 4679 2009-02-25 11:33:48Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -49,6 +49,7 @@ require_once 'PHPUnit/Runner/BaseTestRunner.php';
 require_once 'PHPUnit/Util/Class.php';
 require_once 'PHPUnit/Util/Fileloader.php';
 require_once 'PHPUnit/Util/Filter.php';
+require_once 'PHPUnit/Util/InvalidArgumentHelper.php';
 require_once 'PHPUnit/Util/Test.php';
 require_once 'PHPUnit/Util/TestSuiteIterator.php';
 
@@ -231,23 +232,11 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             return;
         }
 
-        $className         = $theClass->getName();
-        $classDocComment   = $theClass->getDocComment();
-        $names             = array();
-        $classGroups       = PHPUnit_Util_Test::getGroups($classDocComment);
-        $classDependencies = PHPUnit_Util_Test::getDependencies($classDocComment);
+        $names = array();
 
         foreach ($theClass->getMethods() as $method) {
             if (strpos($method->getDeclaringClass()->getName(), 'PHPUnit_') !== 0) {
-                $methodDocComment = $method->getDocComment();
-
-                $this->addTestMethod(
-                  $theClass,
-                  $method,
-                  PHPUnit_Util_Test::getDependencies($methodDocComment, $classDependencies),
-                  PHPUnit_Util_Test::getGroups($methodDocComment, $classGroups),
-                  $names
-                );
+                $this->addTestMethod($theClass, $method, $names);
             }
         }
 
@@ -319,7 +308,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         }
 
         if (!is_object($testClass)) {
-            throw new InvalidArgumentException;
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'class name or object');
         }
 
         if ($testClass instanceof PHPUnit_Framework_TestSuite) {
@@ -450,7 +439,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     {
         if (!(is_array($filenames) ||
              (is_object($filenames) && $filenames instanceof Iterator))) {
-            throw new InvalidArgumentException;
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'array or iterator');
         }
 
         foreach ($filenames as $filename) {
@@ -491,7 +480,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         $method                   = new ReflectionMethod($className, $name);
         $methodDocComment         = $method->getDocComment();
         $runTestInSeparateProcess = FALSE;
-        $backupSettings           = PHPUnit_Util_Test::getBackupSettings($classDocComment, $methodDocComment);
+        $backupSettings           = PHPUnit_Util_Test::getBackupSettings($className, $name);
 
         if (!$theClass->isInstantiable()) {
             return self::warning(
@@ -518,8 +507,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
             // TestCase($name, $data)
             else {
-                $data   = PHPUnit_Util_Test::getProvidedData($className, $name, $methodDocComment);
-                $groups = PHPUnit_Util_Test::getGroups($methodDocComment, $classGroups);
+                $data = PHPUnit_Util_Test::getProvidedData($className, $name);
 
                 if (is_array($data) || $data instanceof Iterator) {
                     $test = new PHPUnit_Framework_TestSuite(
@@ -528,7 +516,8 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
                     foreach ($data as $_dataName => $_data) {
                         $test->addTest(
-                          new $className($name, $_data, $_dataName), $groups
+                          new $className($name, $_data, $_dataName),
+                          PHPUnit_Util_Test::getGroups($className, $name)
                         );
 
                         if ($runTestInSeparateProcess) {
@@ -771,11 +760,9 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     /**
      * @param  ReflectionClass  $class
      * @param  ReflectionMethod $method
-     * @param  array            $dependencies
-     * @param  array            $groups
      * @param  array            $names
      */
-    protected function addTestMethod(ReflectionClass $class, ReflectionMethod $method, array $dependencies, array $groups, array &$names)
+    protected function addTestMethod(ReflectionClass $class, ReflectionMethod $method, array &$names)
     {
         $name = $method->getName();
 
@@ -786,15 +773,15 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         if ($this->isPublicTestMethod($method)) {
             $names[] = $name;
 
-            $test = self::createTest($class, $name, $groups);
+            $test = self::createTest($class, $name);
 
             if (!$test instanceof PHPUnit_Framework_TestSuite) {
                 $test->setDependencies(
-                  PHPUnit_Util_Test::getDependencies($method->getDocComment(), $dependencies)
+                  PHPUnit_Util_Test::getDependencies($class->getName(), $name)
                 );
             }
 
-            $this->addTest($test, $groups);
+            $this->addTest($test, PHPUnit_Util_Test::getGroups($class->getName(), $name));
         }
 
         else if ($this->isTestMethod($method)) {
@@ -876,7 +863,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         if (is_null($this->runTestsInSeparateProcesses) && is_bool($runTestsInSeparateProcesses)) {
             $this->runTestsInSeparateProcesses = $runTestsInSeparateProcesses;
         } else {
-            throw new InvalidArgumentException;
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'boolean');
         }
     }
 

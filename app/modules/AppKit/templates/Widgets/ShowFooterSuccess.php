@@ -1,6 +1,7 @@
 <div class="footerContent">
-<?php echo AgaviConfig::get('de.icinga.appkit.release'); ?>
+&#171;<span style="font-weight: bolder; color: #f39a00;">ICINGA</span>&#187;
+&#8226;&#160;<?php echo AgaviConfig::get('de.icinga.appkit.version.release'); ?>
 &#160;(<?php echo AgaviConfig::get('agavi.release'); ?>)
-&#160;(c) 2009&#160;Netways&#160;
-&#160;<a href="http://www.icinga.org/">www.icinga.org</a>
+&#8226;&#160;<?php echo AgaviConfig::get('de.icinga.appkit.version.copyright'); ?>
+&#160;&#8226;&#160;<?php echo AgaviConfig::get('de.icinga.appkit.version.homeref'); ?>
 </div>

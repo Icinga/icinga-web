@@ -15,6 +15,7 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 	protected $cacheTransactionType	= false;
 	protected $cacheSerializeType	= false;
 	protected $cacheDefaultRegion	= null;
+	protected $cacheDefaultLifetime	= 3600;
 	
 	public function __construct() {
 		
@@ -34,6 +35,10 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 			$this->cacheSerializeType = AppKit::getConstant($parameters['cacheSerializeType']);
 		}
 		
+		if (array_key_exists('cacheDefaultLifetime', $parameters)) {
+			$this->cacheDefaultLifetime = (int)$parameters['cacheDefaultLifetime'];
+		}
+		
 		$this->restoreData();
 		
 	}
@@ -46,7 +51,7 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 	
 	public function setDefaultRegion($region_name) {
 		if (!$this->regionExists($region_name)) {
-			$this->addRegion($region);
+			$this->addRegion($region_name);
 			$this->cacheDefaultRegion = $region_name;
 		}
 	}
@@ -64,6 +69,7 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 			}
 			
 			$this->config[$region_name]['added'] = time();
+			$this->config[$region_name]['lifetime'] = $this->cacheDefaultLifetime;
 			
 			$this->restoreData($region_name);
 			
@@ -119,11 +125,76 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 	}
 	
 	protected function storeData($region_name) {
-		$this->config[$region_name]['stored_at'] = time();
+		if (!array_key_exists('created', $this->config[$region_name])) {
+			$this->config[$region_name]['created'] = time();
+		}
 	}
 	
 	protected function restoreData($region_name) {
-		$this->config[$region_name]['restored_at'] = time();
+		
+	}
+	
+	protected function removeRegionData($region_name) {
+		if ($this->regionExists($region_name)) {
+			unset($this->data[$region_name]);
+			unset($this->config[$region_name]['created']);
+			$this->data[$region_name] = array ();
+			return true;
+		}
+	}
+	
+	protected function getRegionData($region_name) {
+		if ($this->regionExists($region_name)) {
+			return ($this->data[$region_name]);
+		}
+		
+		return null;
+	}
+	
+	protected function getRegionRawData($region_name) {
+		$raw = array (
+			'data'		=> $this->getRegionData($region_name),
+			'config'	=> $this->getRegionConfig($region_name)
+		);
+		
+		return serialize($raw);
+	}
+	
+	protected function getRegionConfig($region_name) {
+		if ($this->regionExists($region_name)) {
+			return ($this->config[$region_name]);
+		}
+		
+		return null;
+	}
+	
+	protected function setRegionData($region_name, array $data) {
+		if ($this->regionExists($region_name)) {
+			$this->data[$region_name] = $data;
+			return true;
+		}
+		
+		throw new AppKitCacheException('Region %s does not exist!', $region_name);
+	}
+	
+	protected function setRegionConfig($region_name, array $config) {
+		if ($this->regionExists($region_name)) {
+			$this->config[$region_name] = $config;
+			return true;
+		}
+		
+		throw new AppKitCacheException('Region %s does not exist!', $region_name);
+	}
+	
+	protected function setRegionRawData($region_name, $data) {
+		$misc = unserialize($data);
+		if (array_key_exists('data', $misc) && array_key_exists('config', $misc)) {
+			$this->setRegionConfig($region_name, $misc['config']);
+			$this->setRegionData($region_name, $misc['data']);
+			return true;
+		}
+		
+		throw new AppKitCacheException('Integrity error for region %s', $region_name);
 	}
 	
 }

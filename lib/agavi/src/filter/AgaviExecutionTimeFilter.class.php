@@ -23,7 +23,7 @@
  *
  * # <b>comment</b> - [Yes] - Should we add an HTML comment to the end of each
  *                            output with the execution time?
- * # <b>replace</b> - [No] - If this exists, every occurance of the value in the
+ * # <b>replace</b> - [No] - If this exists, every occurrence of the value in the
  *                           client response will be replaced by the execution
  *                           time.
  *
@@ -37,7 +37,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviExecutionTimeFilter.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviExecutionTimeFilter.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviExecutionTimeFilter extends AgaviFilter implements AgaviIGlobalFilter, AgaviIActionFilter
 {

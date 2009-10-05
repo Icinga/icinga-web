@@ -42,13 +42,24 @@ class AppKit {
 		// Our directory we live on!
 		self::$class_dir = dirname(__FILE__);
 		
+		// String handling
+		require_once(self::$class_dir. '/html/AppKitHtmlEntitiesInterface.interface.php');
+		require_once(self::$class_dir. '/util/AppKitStringUtil.class.php');
+		
 		// Require all to make the autoloader work.
 		require_once(self::$class_dir. '/class/AppKitBaseClass.class.php');
 		require_once(self::$class_dir. '/util/AppKitClassUtil.class.php');
 		require_once(self::$class_dir. '/class/AppKitSingleton.class.php');
 		require_once(self::$class_dir. '/class/AppKitAutoloader.class.php');
 		
-		// var_dump(AgaviConfig::toArray());
+		// Before we can use the autoloader, register all factories (because the cache is needed)
+		// Factory base classes
+		require_once(self::$class_dir. '/class/AppKitFactoryInterface.interface.php');
+		require_once(self::$class_dir. '/class/AppKitFactory.class.php');
+		require_once(self::$class_dir. '/class/AppKitFactories.class.php');
+		
+		// Init our factories (mostly the AuthProvider)
+		AppKitFactories::loadFactoriesFromConfig('de.icinga.appkit.factories');
 		
 		// Init the autoloader
 		if (is_array(($autoloader_paths = AgaviConfig::get('de.icinga.appkit.autoloader.paths'))) && count($autoloader_paths)) {
@@ -67,6 +78,11 @@ class AppKit {
 		
 		AppKitAutoloader::getInstance()->registerAutoloadRequests();
 		
+		// Try to set the web path to correct urls within the frontend
+		if (AgaviConfig::get('de.icinga.appkit.web_path') == null) {
+			AgaviConfig::set('de.icinga.appkit.web_path', AppKitStringUtil::extractWebPath());
+		}
+		
 		// Try to include doctrine
 		if (file_exists($doctrine_dir = AgaviConfig::get('de.icinga.appkit.doctrine_path'))) {
 			require_once($doctrine_dir. '/Doctrine.php');
@@ -75,9 +91,6 @@ class AppKit {
 			// Cool, not really exists, leave a message :-)
 			throw new AppKitException("Doctrine ('$doctrine_dir') not found!");
 		}
-		
-		// Init our factories (mostly the AuthProvider)
-		AppKitFactories::loadFactoriesFromConfig('de.icinga.appkit.factories');
 		
 		// Applying PHP settings
 		if (is_array($settings = AgaviConfig::get('de.icinga.appkit.php_settings'))) {
@@ -95,6 +108,9 @@ class AppKit {
 		
 		// Trigger an event!
 		AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.bootstrap', 'AppKit bootstrap finished');
+		
+		// Version
+		AgaviConfig::set('de.icinga.appkit.version.release', self::getVersion(), true, true);
 		
 		return true;
 	}
@@ -156,6 +172,17 @@ class AppKit {
 			$data = ob_get_clean();
 			$queue->enqueue(AppKitMessageQueueItem::Debug($data));
 		}
+	}
+	
+	public static function getVersion() {
+		return sprintf(
+			'%s/v%d.%d.%d-%s',
+			AgaviConfig::get('de.icinga.appkit.version.name'),
+			AgaviConfig::get('de.icinga.appkit.version.major'),
+			AgaviConfig::get('de.icinga.appkit.version.minor'),
+			AgaviConfig::get('de.icinga.appkit.version.patch'),
+			AgaviConfig::get('de.icinga.appkit.version.extension')
+		);
 	}
 	
 }

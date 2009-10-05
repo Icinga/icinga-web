@@ -27,7 +27,7 @@
  *
  * @deprecated Not used anymore by XML config handlers, to be removed in Agavi 1.1
  *
- * @version    $Id: AgaviConfigValueHolder.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviConfigValueHolder.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviConfigValueHolder implements ArrayAccess, IteratorAggregate
 {
@@ -113,7 +113,7 @@ class AgaviConfigValueHolder implements ArrayAccess, IteratorAggregate
 			}
 
 			// check if the requested node was specified using the plural version
-			// and create a "virtual" node which reflects the non existant plural node
+			// and create a "virtual" node which reflects the non existent plural node
 			$singularName = $tagNameStart . AgaviInflector::singularize($tagName);
 			if($this->hasChildren($singularName)) {
 

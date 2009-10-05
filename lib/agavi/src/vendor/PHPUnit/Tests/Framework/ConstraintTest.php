@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: ConstraintTest.php 4475 2009-01-15 07:45:55Z sb $
+ * @version    SVN: $Id: ConstraintTest.php 4660 2009-02-23 16:33:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -1556,7 +1556,7 @@ class Framework_ConstraintTest extends PHPUnit_Framework_TestCase
     /**
      * @covers PHPUnit_Framework_Constraint_TraversableContains
      */
-    public function testConstraintTraversableContains()
+    public function testConstraintArrayContains()
     {
         $constraint = new PHPUnit_Framework_Constraint_TraversableContains('foo');
 
@@ -1583,7 +1583,7 @@ class Framework_ConstraintTest extends PHPUnit_Framework_TestCase
     /**
      * @covers PHPUnit_Framework_Constraint_TraversableContains
      */
-    public function testConstraintTraversableContains2()
+    public function testConstraintArrayContains2()
     {
         $constraint = new PHPUnit_Framework_Constraint_TraversableContains('foo');
 
@@ -1608,7 +1608,7 @@ class Framework_ConstraintTest extends PHPUnit_Framework_TestCase
      * @covers PHPUnit_Framework_Constraint_Not
      * @covers PHPUnit_Framework_Assert::logicalNot
      */
-    public function testConstraintTraversableNotContains()
+    public function testConstraintArrayNotContains()
     {
         $constraint = PHPUnit_Framework_Assert::logicalNot(
           new PHPUnit_Framework_Constraint_TraversableContains('foo')
@@ -1639,7 +1639,7 @@ class Framework_ConstraintTest extends PHPUnit_Framework_TestCase
      * @covers PHPUnit_Framework_Constraint_Not
      * @covers PHPUnit_Framework_Assert::logicalNot
      */
-    public function testConstraintTraversableNotContains2()
+    public function testConstraintArrayNotContains2()
     {
         $constraint = PHPUnit_Framework_Assert::logicalNot(
           new PHPUnit_Framework_Constraint_TraversableContains('foo')
@@ -1652,6 +1652,61 @@ class Framework_ConstraintTest extends PHPUnit_Framework_TestCase
         catch (PHPUnit_Framework_ExpectationFailedException $e) {
             $this->assertEquals(
               "custom message\nFailed asserting that an array does not contain <string:foo>.",
+              $e->getDescription()
+            );
+
+            return;
+        }
+
+        $this->fail();
+    }
+
+    /**
+     * @covers PHPUnit_Framework_Constraint_TraversableContains
+     */
+    public function testConstraintSplObjectStorageContains()
+    {
+        $object     = new StdClass;
+        $constraint = new PHPUnit_Framework_Constraint_TraversableContains($object);
+        $this->assertEquals("contains \nstdClass Object\n(\n)\n", $constraint->toString());
+
+        $storage = new SplObjectStorage;
+        $this->assertFalse($constraint->evaluate($storage));
+
+        $storage->attach($object);
+        $this->assertTrue($constraint->evaluate($storage));
+
+        try {
+            $constraint->fail(new SplObjectStorage, '');
+        }
+
+        catch (PHPUnit_Framework_ExpectationFailedException $e) {
+            $this->assertEquals(
+              "Failed asserting that an iterator contains \nstdClass Object\n(\n)\n.",
+              $e->getDescription()
+            );
+
+            return;
+        }
+
+        $this->fail();
+    }
+
+    /**
+     * @covers PHPUnit_Framework_Constraint_TraversableContains
+     */
+    public function testConstraintSplObjectStorageContains2()
+    {
+        $object     = new StdClass;
+        $constraint = new PHPUnit_Framework_Constraint_TraversableContains($object);
+
+        try {
+            $constraint->fail(new SplObjectStorage, 'custom message');
+        }
+
+        catch (PHPUnit_Framework_ExpectationFailedException $e) {
+            $this->assertEquals(
+              "custom message\nFailed asserting that an iterator contains \nstdClass Object\n(\n)\n.",
               $e->getDescription()
             );
 

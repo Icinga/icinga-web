@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviWsdlConfigHandler.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviWsdlConfigHandler.class.php 3912 2009-03-10 16:38:39Z david $
  */
 class AgaviWsdlConfigHandler extends AgaviXmlConfigHandler
 {
@@ -125,6 +125,8 @@ class AgaviWsdlConfigHandler extends AgaviXmlConfigHandler
 						}
 						if($paramSoapBodyNamespace !== null) {
 							$soapBody->setAttribute('namespace', $paramSoapBodyNamespace);
+						} elseif($soapBody->getAttribute('use') == 'literal' && $paramSoapBindingStyle == 'document') {
+							$soapBody->removeAttribute('namespace');
 						}
 						if($soapBody->getAttribute('use') == 'encoded') {
 							$soapBody->setAttribute('encodingStyle', $paramSoapBodyEncodingStyle);
@@ -138,6 +140,8 @@ class AgaviWsdlConfigHandler extends AgaviXmlConfigHandler
 						}
 						if($paramSoapHeaderNamespace !== null) {
 							$soapHeader->setAttribute('namespace', $paramSoapHeaderNamespace);
+						} elseif($soapHeader->getAttribute('use') == 'literal' && $paramSoapBindingStyle == 'document') {
+							$soapHeader->removeAttribute('namespace');
 						}
 						if($soapHeader->getAttribute('use') == 'encoded') {
 							$soapHeader->setAttribute('encodingStyle', $paramSoapHeaderEncodingStyle);
@@ -151,6 +155,8 @@ class AgaviWsdlConfigHandler extends AgaviXmlConfigHandler
 						}
 						if($paramSoapFaultNamespace !== null) {
 							$soapFault->setAttribute('namespace', $paramSoapFaultNamespace);
+						} elseif($soapFault->getAttribute('use') == 'literal' && $paramSoapBindingStyle == 'document') {
+							$soapFault->removeAttribute('namespace');
 						}
 						if($soapFault->getAttribute('use') == 'encoded') {
 							$soapFault->setAttribute('encodingStyle', $paramSoapFaultEncodingStyle);

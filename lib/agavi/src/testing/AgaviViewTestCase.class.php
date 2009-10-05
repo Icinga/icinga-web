@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviViewTestCase.class.php 3776 2009-02-04 19:52:55Z david $
+ * @version    $Id: AgaviViewTestCase.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 abstract class AgaviViewTestCase extends AgaviFragmentTestCase
 {
@@ -241,7 +241,7 @@ abstract class AgaviViewTestCase extends AgaviFragmentTestCase
 	 * @author     Felix Gilcher <felix.gilcher@bitextender.com>
 	 * @since      1.0.0
 	 */
-	protected function assertResponseHasHTTPStatus($expected, $message = 'Failed asserting that the respons status is %1$s.')
+	protected function assertResponseHasHTTPStatus($expected, $message = 'Failed asserting that the response status is %1$s.')
 	{
 		$response = $this->container->getResponse();
 		

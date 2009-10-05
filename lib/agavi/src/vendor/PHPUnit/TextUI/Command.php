@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Command.php 4580 2009-01-30 10:36:58Z sb $
+ * @version    SVN: $Id: Command.php 4685 2009-02-25 15:28:18Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -643,19 +643,21 @@ class PHPUnit_TextUI_Command
                 }
             }
 
-            if (!isset($arguments['test'])) {
-                $testSuite = $configuration->getTestSuiteConfiguration();
-
-                if ($testSuite !== NULL) {
-                    $arguments['test'] = $testSuite;
-                }
-            }
-
             $browsers = $configuration->getSeleniumBrowserConfiguration();
 
             if (!empty($browsers)) {
                 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
                 PHPUnit_Extensions_SeleniumTestCase::$browsers = $browsers;
+            }
+
+            if (!isset($arguments['test'])) {
+                $testSuite = $configuration->getTestSuiteConfiguration(
+                  $arguments['syntaxCheck']
+                );
+
+                if ($testSuite !== NULL) {
+                    $arguments['test'] = $testSuite;
+                }
             }
         }
 

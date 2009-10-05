@@ -18,7 +18,7 @@
  * 
  * Parameters:
  *   'values'  list of values that form the array
- *   'sep'     seperator of values in the list
+ *   'sep'     separator of values in the list
  *   'case'    verifies case sensitive if true
  *
  * @package    agavi
@@ -31,7 +31,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviInarrayValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviInarrayValidator.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviInarrayValidator extends AgaviValidator
 {

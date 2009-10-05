@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestTest.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: TestTest.php 4634 2009-02-11 17:03:22Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.6
  */
@@ -62,29 +62,6 @@ require_once 'PHPUnit/Util/Timer.php';
  */
 class Util_TestTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetDependencies()
-    {
-        $this->assertEquals(
-          array('method'),
-          PHPUnit_Util_Test::getDependencies('@depends method')
-        );
-
-        $this->assertEquals(
-          array('class::method'),
-          PHPUnit_Util_Test::getDependencies('@depends class::method')
-        );
-
-        $this->assertEquals(
-          array('namespace\class::method'),
-          PHPUnit_Util_Test::getDependencies('@depends namespace\class::method')
-        );
-
-        $this->assertEquals(
-          array('namespace\namespace\class::method'),
-          PHPUnit_Util_Test::getDependencies('@depends namespace\namespace\class::method')
-        );
-    }
-
     public function testGetExpectedException()
     {
         $this->assertEquals(

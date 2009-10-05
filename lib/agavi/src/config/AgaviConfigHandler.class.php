@@ -32,7 +32,7 @@
  *
  * @deprecated Superseded by AgaviXmlConfigHandler, will be removed in Agavi 1.1
  *
- * @version    $Id: AgaviConfigHandler.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviConfigHandler.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 abstract class AgaviConfigHandler extends AgaviBaseConfigHandler implements AgaviILegacyConfigHandler
 {
@@ -50,7 +50,7 @@ abstract class AgaviConfigHandler extends AgaviBaseConfigHandler implements Agav
 	/**
 	 * Retrieve the parameter node values of the given item's parameters element.
 	 *
-	 * @param      ConfigValueHolder The node that contains a parameters chiild.
+	 * @param      ConfigValueHolder The node that contains a parameters child.
 	 * @param      array             As associative array of parameters that will
 	 *                               be overwritten if appropriate.
 	 * @param      boolean           Whether or not values should be literalized.

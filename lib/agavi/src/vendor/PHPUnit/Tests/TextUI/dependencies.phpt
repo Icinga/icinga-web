@@ -20,22 +20,23 @@ Test Dependencies
  DependencyFailureTest
  FSS
 
-Time: %d seconds
+Time: %i seconds
 
 There was 1 failure:
 
 1) testOne(DependencyFailureTest)
-%s/dependencies.php:%i
+%s:%i
+%s:%i
 
 There were 2 skipped tests:
 
 1) testTwo(DependencyFailureTest)
 This test depends on "DependencyFailureTest::testOne" to pass.
-%s/dependencies.php:%i
+%s:%i
 
 2) testThree(DependencyFailureTest)
 This test depends on "DependencyFailureTest::testTwo" to pass.
-%s/dependencies.php:%i
+%s:%i
 
 FAILURES!
-Tests: 6, Assertions: 0, Failures: 1, Skipped: 2.
+Tests: 4, Assertions: 0, Failures: 1, Skipped: 2.

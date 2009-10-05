@@ -46,7 +46,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviPropelDatabase.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviPropelDatabase.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviPropelDatabase extends AgaviDatabase
 {
@@ -109,7 +109,7 @@ class AgaviPropelDatabase extends AgaviDatabase
 	 * Returns whether a Propel configuration file path has been explicitly set
 	 * as default for use with Propel::init() in database.xml
 	 *
-	 * @return     bool true, if a Propel configuration file path has explicitely
+	 * @return     bool true, if a Propel configuration file path has explicitly
 	 *                  been set as default in database.ini, otherwise false
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
@@ -144,7 +144,7 @@ class AgaviPropelDatabase extends AgaviDatabase
 	protected function connect()
 	{
 		if($this->agaviCreoleDatabase) {
-			// make concrecte adapter connect
+			// make concrete adapter connect
 			$this->connection = $this->agaviCreoleDatabase->getConnection();
 		} else {
 			// trigger Propel autoload and go go go
