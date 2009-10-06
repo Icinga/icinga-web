@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Configurable.php 5457 2009-02-03 03:55:57Z jwage $
+ *  $Id: Configurable.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5457 $
+ * @version     $Revision: 5876 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Configurable extends Doctrine_Locator_Injectable
@@ -318,7 +318,7 @@ abstract class Doctrine_Configurable extends Doctrine_Locator_Injectable
      * addRecordListener
      *
      * @param Doctrine_EventListener_Interface|Doctrine_Overloadable $listener
-     * @return mixed        this object
+     * @return Doctrine_Configurable        this object
      */
     public function addRecordListener($listener, $name = null)
     {
@@ -370,7 +370,7 @@ abstract class Doctrine_Configurable extends Doctrine_Locator_Injectable
      * addListener
      *
      * @param Doctrine_EventListener_Interface|Doctrine_Overloadable $listener
-     * @return mixed        this object
+     * @return Doctrine_Configurable    this object
      */
     public function addListener($listener, $name = null)
     {

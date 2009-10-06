@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 5286 2008-12-11 09:56:16Z adrive $
+ *  $Id: Oracle.php 5893 2009-06-16 15:25:42Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,10 +27,10 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5286 $
+ * @version     $Revision: 5893 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine_Connection_Oracle extends Doctrine_Connection
+class Doctrine_Connection_Oracle extends Doctrine_Connection_Common
 {
     /**
      * @var string $driverName                  the name of this connection driver
@@ -100,7 +100,7 @@ class Doctrine_Connection_Oracle extends Doctrine_Connection
             }
             if ($limit > 0) {
                 $max = $offset + $limit;
-                $column = $column === null ? '*' : $column;
+                $column = $column === null ? '*' : $this->quoteIdentifier($column);
                 if ($offset > 0) {
                     $min = $offset + 1;
                     $query = 'SELECT b.'.$column.' FROM ('.
@@ -131,5 +131,10 @@ class Doctrine_Connection_Oracle extends Doctrine_Connection
         }
         $column = $columnNames[0];
         return $this->_createLimitSubquery($query, $limit, $offset, $column);
+    }
+
+    public function getTmpConnection($info)
+    {
+        return $this;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Connection.php 5529 2009-02-19 19:29:53Z jwage $
+ *  $Id: Connection.php 6406 2009-09-24 19:25:01Z guilhermeblanco $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -49,7 +49,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5529 $
+ * @version     $Revision: 6406 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (MDB2 library)
  */
@@ -105,7 +105,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @var array $modules                      an array containing all modules
      *              transaction                 Doctrine_Transaction driver, handles savepoint and transaction isolation abstraction
      *
-     *              expression                  Doctrine_Expression driver, handles expression abstraction
+     *              expression                  Doctrine_Expression_Driver, handles expression abstraction
      *
      *              dataDict                    Doctrine_DataDict driver, handles datatype abstraction
      *
@@ -122,7 +122,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * @see Doctrine_Connection::__get()
      * @see Doctrine_DataDict
-     * @see Doctrine_Expression
+     * @see Doctrine_Expression_Driver
      * @see Doctrine_Export
      * @see Doctrine_Transaction
      * @see Doctrine_Sequence
@@ -277,7 +277,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
             $attribute = $this->getAttributeFromString($attribute);
         }
 
-        if ($attribute >= 100) {
+        if ($attribute >= 100 && $attribute < 1000) {
             if ( ! isset($this->attributes[$attribute])) {
                 return parent::getAttribute($attribute);
             }
@@ -340,7 +340,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
             $value = parent::getAttributeValueFromString($attributeString, $value);
         }
 
-        if ($attribute >= 100) {
+        if ($attribute >= 100 && $attribute < 1000) {
             parent::setAttribute($attribute, $value);
         } else {
             if ($this->isConnected) {
@@ -394,7 +394,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * lazy loads given module and returns it
      *
      * @see Doctrine_DataDict
-     * @see Doctrine_Expression
+     * @see Doctrine_Expression_Driver
      * @see Doctrine_Export
      * @see Doctrine_Transaction
      * @see Doctrine_Connection::$modules       all availible modules
@@ -625,13 +625,13 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     }
 
     /**
-     * Updates table row(s) with specified data
+     * Updates table row(s) with specified data.
      *
      * @throws Doctrine_Connection_Exception    if something went wrong at the database level
-     * @param string $table     The table to insert data into
-     * @param array $values     An associateve array containing column-value pairs.
-     * @return mixed            boolean false if empty value array was given,
-     *                          otherwise returns the number of affected rows
+     * @param Doctrine_Table $table     The table to insert data into
+     * @param array $values             An associative array containing column-value pairs.
+     *                                  Values can be strings or Doctrine_Expression instances.
+     * @return integer                  the number of affected rows. Boolean false if empty value array was given,
      */
     public function update(Doctrine_Table $table, array $fields, array $identifier)
     {
@@ -662,10 +662,10 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     /**
      * Inserts a table row with specified data.
      *
-     * @param string $table     The table to insert data into.
-     * @param array $values     An associateve array containing column-value pairs.
-     * @return mixed            boolean false if empty value array was given,
-     *                          otherwise returns the number of affected rows
+     * @param Doctrine_Table $table     The table to insert data into.
+     * @param array $values             An associative array containing column-value pairs.
+     *                                  Values can be strings or Doctrine_Expression instances.
+     * @return integer                  the number of affected rows. Boolean false if empty value array was given,
      */
     public function insert(Doctrine_Table $table, array $fields)
     {
@@ -777,7 +777,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * @param mixed $input      parameter to be quoted
      * @param string $type
-     * @return mixed
+     * @return string
      */
     public function quote($input, $type = null)
     {
@@ -1110,7 +1110,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * returns a table object for given component name
      *
      * @param string $name              component name
-     * @return object Doctrine_Table
+     * @return Doctrine_Table
      */
     public function getTable($name)
     {
@@ -1431,7 +1431,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * Issue create database command for this instance of Doctrine_Connection
      *
-     * @return mixed Returns Doctrine_Exception or success string
+     * @return string       Doctrine_Exception catched in case of failure
      */
     public function createDatabase()
     {
@@ -1465,7 +1465,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * Issue drop database command for this instance of Doctrine_Connection
      *
-     * @return mixed Returns Doctrine_Exception or success string
+     * @return string       success string. Doctrine_Exception if operation failed
      */
     public function dropDatabase()
     {
@@ -1527,7 +1527,11 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
         $username = $this->getOption('username');
         $password = $this->getOption('password');
 
-        return $this->getManager()->openConnection(new PDO($pdoDsn, $username, $password), 'doctrine_tmp_connection', false);
+        $conn = $this->getManager()->openConnection(array($pdoDsn, $username, $password), 'doctrine_tmp_connection', false);
+        $conn->setOption('username', $username);
+        $conn->setOption('password', $password);
+
+        return $conn;
     }
 
     /**
@@ -1636,28 +1640,33 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
         }
 
         $generated = implode('_', $parts);
+        
         // If the final length is greater than 64 we need to create an abbreviated fk name
         if (strlen(sprintf($format, $generated)) > $maxLength) {
             $generated = '';
+
             foreach ($parts as $part) {
                 $generated .= $part[0];
             }
+
             $name = $generated;
         } else {
             $name = $generated;
         }
 
-        $count = 1;
         while (in_array($name, $this->_usedNames[$type])) {
             $e = explode('_', $name);
             $end = end($e);
-            if (is_numeric($end))
-            {
-              unset($e[count($e) - 1]);
-              $fkName = implode('_', $e);
-            }
-            $name = $name . '_' . $count++;
+
+            if (is_numeric($end)) {
+                unset($e[count($e) - 1]);
+                $fkName = implode('_', $e);
+                $name = $fkName . '_' . ++$end; 
+            } else { 
+                $name .= '_1'; 
+	        }
         }
+
         $this->_usedNames[$type][$key] = $name;
 
         return $name;

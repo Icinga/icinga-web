@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Orderby.php 5135 2008-10-23 06:10:49Z guilhermeblanco $
+ *  $Id: Orderby.php 5975 2009-07-01 03:50:26Z guilhermeblanco $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5135 $
+ * @version     $Revision: 5975 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Query_Orderby extends Doctrine_Query_Part
@@ -41,7 +41,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
      */
     public function parse($clause, $append = false)
     {
-        $terms = $this->_tokenizer->clauseExplode($clause, array(' ', '+', '-', '*', '/', '<', '>', '=', '>=', '<='));
+        $terms = $this->_tokenizer->clauseExplode($clause, array(' ', ',', '+', '-', '*', '/', '<', '>', '=', '>=', '<='));
         $str = '';
 
         foreach ($terms as $term) {
@@ -152,7 +152,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
                                                  . '.' . $conn->quoteIdentifier($term[0]);
                                     } else {
                                         // build sql expression
-                                        $term[0] = $this->_conn->quoteIdentifier($term[0]);
+                                        $term[0] = $conn->quoteIdentifier($term[0]);
                                     }
                                 } else {
                                     $found = false;

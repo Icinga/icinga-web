@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Oracle.php 5290 2008-12-12 14:26:00Z guilhermeblanco $
+ *  $Id: Oracle.php 5893 2009-06-16 15:25:42Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5290 $
+ * @version     $Revision: 5893 $
  */
 class Doctrine_Export_Oracle extends Doctrine_Export
 {
@@ -38,30 +38,28 @@ class Doctrine_Export_Oracle extends Doctrine_Export
      *
      * @param object $db database object that is extended by this class
      * @param string $name name of the database that should be created
-     * @return mixed MDB2_OK on success, a MDB2 error on failure
-     * @access public
+     * @return boolean      success of operation
      */
     public function createDatabase($name)
     {
-        if ( ! $this->conn->getAttribute(Doctrine::ATTR_EMULATE_DATABASE))
-            throw new Doctrine_Export_Exception('database creation is only supported if the "emulate_database" attribute is enabled');
+        if ($this->conn->getAttribute(Doctrine::ATTR_EMULATE_DATABASE)) {
+            $username   = $name;
+            $password   = $this->conn->dsn['password'] ? $this->conn->dsn['password'] : $name;
 
-        $username   = sprintf($this->conn->getAttribute(Doctrine::ATTR_DB_NAME_FORMAT), $name);
-        $password   = $this->conn->dsn['password'] ? $this->conn->dsn['password'] : $name;
+            $tablespace = $this->conn->options['default_tablespace']
+                        ? ' DEFAULT TABLESPACE '.$this->conn->options['default_tablespace'] : '';
 
-        $tablespace = $this->conn->getAttribute(Doctrine::ATTR_DB_NAME_FORMAT)
-                    ? ' DEFAULT TABLESPACE '.$this->conn->options['default_tablespace'] : '';
-
-        $query  = 'CREATE USER ' . $username . ' IDENTIFIED BY ' . $password . $tablespace;
-        $result = $this->conn->exec($query);
-
-        try {
-            $query = 'GRANT CREATE SESSION, CREATE TABLE, UNLIMITED TABLESPACE, CREATE SEQUENCE, CREATE TRIGGER TO ' . $username;
+            $query  = 'CREATE USER ' . $username . ' IDENTIFIED BY ' . $password . $tablespace;
             $result = $this->conn->exec($query);
-        } catch (Exception $e) {
-            $query = 'DROP USER '.$username.' CASCADE';
-            $result2 = $this->conn->exec($query);
+
+            try {
+                $query = 'GRANT CREATE SESSION, CREATE TABLE, UNLIMITED TABLESPACE, CREATE SEQUENCE, CREATE TRIGGER TO ' . $username;
+                $result = $this->conn->exec($query);
+            } catch (Exception $e) {
+                $this->dropDatabase($username);
+            }
         }
+
         return true;
     }
 
@@ -70,18 +68,33 @@ class Doctrine_Export_Oracle extends Doctrine_Export
      *
      * @param object $this->conn database object that is extended by this class
      * @param string $name name of the database that should be dropped
-     * @return mixed MDB2_OK on success, a MDB2 error on failure
+     * @return boolean      success of operation
      * @access public
      */
     public function dropDatabase($name)
     {
-        if ( ! $this->conn->getAttribute(Doctrine::ATTR_EMULATE_DATABASE))
-            throw new Doctrine_Export_Exception('database dropping is only supported if the
-                                                       "emulate_database" option is enabled');
+        $sql[] = "BEGIN
+FOR I IN (select table_name from user_tables)
+LOOP 
+EXECUTE IMMEDIATE 'DROP TABLE '||I.table_name||' CASCADE CONSTRAINTS';
+END LOOP;
+END;";
 
-        $username = sprintf($this->conn->getAttribute(Doctrine::ATTR_DB_NAME_FORMAT), $name);
+        $sql[] = "BEGIN
+FOR I IN (SELECT SEQUENCE_NAME, SEQUENCE_OWNER FROM ALL_SEQUENCES WHERE SEQUENCE_OWNER <> 'SYS')
+LOOP 
+EXECUTE IMMEDIATE 'DROP SEQUENCE '||I.SEQUENCE_OWNER||'.'||I.SEQUENCE_NAME;
+END LOOP;
+END;";
 
-        return $this->conn->exec('DROP USER ' . $username . ' CASCADE');
+        foreach ($sql as $query) {
+            $this->conn->exec($query);
+        }
+
+        if ($this->conn->getAttribute(Doctrine::ATTR_EMULATE_DATABASE)) {
+            $username = $name;
+            $this->conn->exec('DROP USER ' . $username . ' CASCADE');
+        }
     }
 
     /**
@@ -90,12 +103,16 @@ class Doctrine_Export_Oracle extends Doctrine_Export
      * @param string $name  name of the PK field
      * @param string $table name of the table
      * @param string $start start value for the sequence
-     * @return mixed        MDB2_OK on success, a MDB2 error on failure
+     * @return string        Sql code
      * @access private
      */
     public function _makeAutoincrement($name, $table, $start = 1)
     {
         $sql   = array();
+
+        if ( ! $this->conn->getAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER)) {
+        	$table = strtoupper($table);
+        }
         $indexName  = $table . '_AI_PK';
         $definition = array(
             'primary' => true,
@@ -132,13 +149,12 @@ DECLARE
    last_Sequence NUMBER;
    last_InsertID NUMBER;
 BEGIN
-   SELECT ' . $this->conn->quoteIdentifier($sequenceName) . '.NEXTVAL INTO :NEW.' . $name . ' FROM DUAL;
    IF (:NEW.' . $name . ' IS NULL OR :NEW.'.$name.' = 0) THEN
       SELECT ' . $this->conn->quoteIdentifier($sequenceName) . '.NEXTVAL INTO :NEW.' . $name . ' FROM DUAL;
    ELSE
       SELECT NVL(Last_Number, 0) INTO last_Sequence
         FROM User_Sequences
-       WHERE UPPER(Sequence_Name) = UPPER(\'' . $sequenceName . '\');
+       WHERE Sequence_Name = \'' . $sequenceName . '\';
       SELECT :NEW.' . $name . ' INTO last_InsertID FROM DUAL;
       WHILE (last_InsertID > last_Sequence) LOOP
          SELECT ' . $this->conn->quoteIdentifier($sequenceName) . '.NEXTVAL INTO last_Sequence FROM DUAL;
@@ -203,7 +219,7 @@ END;';
     public function getAdvancedForeignKeyOptions(array $definition)
     {
         $query = '';
-        if (isset($definition['onDelete'])) {
+        if (isset($definition['onDelete']) && strtoupper(trim($definition['onDelete'])) != 'NO ACTION') {
             $query .= ' ON DELETE ' . $definition['onDelete'];
         }
         if (isset($definition['deferrable'])) {

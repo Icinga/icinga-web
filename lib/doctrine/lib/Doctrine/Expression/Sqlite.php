@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Sqlite.php 4252 2008-04-19 07:37:53Z jwage $
+ *  $Id: Sqlite.php 5788 2009-06-01 08:20:31Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 4252 $
+ * @version     $Revision: 5788 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Expression_Sqlite extends Doctrine_Expression_Driver

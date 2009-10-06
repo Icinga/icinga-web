@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: NestedSet.php 5558 2009-02-27 04:02:18Z guilhermeblanco $
+ *  $Id: NestedSet.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5558 $
+ * @version     $Revision: 5876 $
  * @author      Joe Simms <joe.simms@websites4.com>
  * @author      Roman Borschel <roman@code-factory.org>
  */
@@ -114,7 +114,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
     /**
      * returns root node
      *
-     * @return object $record        instance of Doctrine_Record
+     * @return Doctrine_Record
      * @deprecated Use fetchRoot()
      */
     public function findRoot($rootId = 1)
@@ -289,7 +289,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
      *
      * @param object    $query    Doctrine_Query
      * @param integer   $root_id  id of destination root
-     * @return object   Doctrine_Query
+     * @return Doctrine_Query
      */
     public function returnQueryWithRootId($query, $rootId = 1)
     {

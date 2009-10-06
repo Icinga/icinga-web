@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Common.php 4252 2008-04-19 07:37:53Z jwage $
+ *  $Id: Common.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @link        www.phpdoctrine.org
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @since       1.0
- * @version     $Revision: 4252 $
+ * @version     $Revision: 5798 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Connection_Common extends Doctrine_Connection
