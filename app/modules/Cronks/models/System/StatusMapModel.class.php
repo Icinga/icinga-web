@@ -81,14 +81,29 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 			}
 		}
 
-		$hostsFlat = array(
-			'id'		=> '-1',
-			'name'		=> 'Icinga',
-			'data'		=> array(
-				'relation'	=> 'Icinga Monitoring Process',
-			),
-			'children'	=> $this->flattenStructure($hosts)
-		);
+		$hostsFlatStruct = $this->flattenStructure($hosts);
+
+		if (count($hostsFlatStruct) == 1) {
+			$hostsFlat = $hostsFlatStruct;
+			$icingaProc = array(
+				'id'		=> '-1',
+				'name'		=> 'Icinga',
+				'data'		=> array(
+					'relation'	=> 'Icinga Monitoring Process',
+				),
+				'children'	=> array(),
+			);
+			array_push($hostsFlat[0]['children'], $icingaProc);
+		} else {
+			$hostsFlat = array(
+				'id'		=> '-1',
+				'name'		=> 'Icinga',
+				'data'		=> array(
+					'relation'	=> 'Icinga Monitoring Process',
+				),
+				'children'	=> $hostsFlatStruct,
+			);
+		}
 
 		return $hostsFlat;
 
