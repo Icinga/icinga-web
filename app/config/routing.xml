@@ -12,14 +12,14 @@
 				<!-- Get an image -->
 				<route name="appkit.image" pattern="^/image/(image:[\w\d-_\/\.]+)$" action="Widgets.ShowImage" output_type="image" />
 				
-				<route name="appkit.login" pattern="^/login" action="Login"/>
+				<!-- <route name="appkit.login" pattern="^/login" action="Login"/> -->
 				
 				<!--
-				Later for ajax logins 
+				Later for ajax logins
+				--> 
 				<route name="appkit.login" pattern="^/login" action="AjaxLogin">
 					<route name="appkit.login.provider" pattern="^/json" action="AjaxLogin" output_type="json" />
 				</route>
-				-->
 				
 				<route name="appkit.logout" pattern="^/logout" action="Logout"/>
 				

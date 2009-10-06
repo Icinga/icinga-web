@@ -31,7 +31,6 @@
 
 			<system_action name="login">
 				<module>AppKit</module>
-				<!-- <action>AjaxLogin</action> -->
 				<action>AjaxLogin</action>
 			</system_action>
 
