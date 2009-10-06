@@ -110,10 +110,6 @@
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
 		
-		
-		<!-- Misc css -->
-		<!-- <parameter>/js/gc-prettify/prettify.css</parameter> -->
-		
 		<!-- ICINGA -->
 		<parameter>/styles/silk-icons.css</parameter>
 		<parameter>/styles/extjs/ext-all.css</parameter>
@@ -151,7 +147,7 @@
 		
 		<!-- ExtJS base files -->
 		<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</parameter>
+		<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
