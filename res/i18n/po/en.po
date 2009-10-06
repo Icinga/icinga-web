@@ -14,6 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # table output of host information
+msgid "host_name"
+msgstr "Name"
+
 msgid "host_address"
 msgstr "Address"
 

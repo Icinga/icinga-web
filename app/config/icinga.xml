@@ -73,18 +73,18 @@
 		
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
-		
-		
+
 		<!-- Misc css -->
 		<!-- <parameter>/js/gc-prettify/prettify.css</parameter> -->
 		
+		<!-- JIT - JavaScript InfoVis Toolkit -->
+		<parameter>/styles/statusmap.css</parameter>
+
 		<!-- ICINGA -->
 		<parameter>/styles/silk-icons.css</parameter>
 		<parameter>/styles/extjs/ext-all.css</parameter>
 		<parameter>/styles/extjs/ux-all.css</parameter>
 		<parameter>/styles/Icinga.css</parameter>
-		
-		
 		
 	</setting>
 	
