@@ -99,7 +99,7 @@ function JitStatusMap (config) {
 				if (node._depth <= 1) {
 					style.fontSize = "1em";
 					style.color = "#000000";
-				} else if(node._depth == 2){
+				} else if(node._depth <= 3){
 					style.fontSize = "0.9em";
 					style.color = "#505050";
 				} else {
