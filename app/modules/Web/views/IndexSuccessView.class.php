@@ -6,7 +6,7 @@ class Web_IndexSuccessView extends ICINGAWebBaseView
 	{
 		$this->setupHtml($rd);
 
-		$this->setAttribute('title', 'ICINGA Helo World');
+		$this->setAttribute('title', 'Welcome to icinga-web');
 	}
 }
 

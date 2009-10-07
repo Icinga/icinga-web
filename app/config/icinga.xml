@@ -7,6 +7,14 @@
 <settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
 
 	<!--
+		Add more links under 'home'
+		* The home itself points to index_page route
+	-->
+	<setting name="appkit.home_links">
+		<parameter name="icinga.about">About</parameter>
+	</setting>
+
+	<!--
 		The webpath, with a leading slash and no trailing
 		* If the path is empty, we try to detect the path
 	-->
