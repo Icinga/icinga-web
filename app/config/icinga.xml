@@ -172,6 +172,7 @@
 	<!-- This scripts are included dynamically by modules if needed -->
 	<setting name="appkit.include_dynamic_javascript">
 		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
+		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
 	</setting>
 
 	<setting name="appkit.pager.default_items">20</setting>
