@@ -2,16 +2,8 @@
 	/**
 	* @author Christian Doebler <christian.doebler@netways.de>
 	*/
+	$parentId = $rd->getParameter('parentid');
 ?>
-<div id="jitContainer">
-	<div id="jitContainerCenter">
-		<div id="jitMap"></div>    
-	</div>
-	<div id="jitContainerRight">
-		<div id="jitDetails"></div>
-	</div>
-	<div id="jitLog"></div>
-</div>
 <script type="text/javascript">
 	function jitAddEvent(obj, type, fn) {
 		if (obj.addEventListener) {
@@ -32,6 +24,8 @@
 	};
 
 	function JitStatusMap (config) {
+
+		this.cmp = Ext.getCmp("<?php echo $parentId; ?>");
 
 		this.config = {
 			url: false,
@@ -116,6 +110,7 @@
 
 		this.init = function (config) {
 			this.setConfig(config);
+			this.createContainer();
 			this.getMapData();
 		}
 
@@ -128,6 +123,38 @@
 					this.config[key] = value;
 				}
 			}
+		}
+
+		this.createContainer = function () {
+			var container = new Ext.Container({
+				id: "jitContainer",
+				autoEl: 'div', 
+				layout: 'column',
+				defaults: {
+					xtype: 'container',
+					autoEl: 'div',
+					layout: 'auto',
+					//columnWidth: 0.5,
+					style: {
+						border: "none"
+					}
+				},
+				items : [{
+					id: "jitContainerCenter",
+					items: {
+						id: "jitMap"
+					}
+				},{
+					id: "jitContainerRight",
+					items: {
+						id: "jitDetails"
+					}
+				},{
+					id: "jitLog"
+				}]
+			});
+			this.cmp.add(container);
+			this.cmp.doLayout();
 		}
 
 		this.getMapData = function () {
