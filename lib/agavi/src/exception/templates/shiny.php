@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: shiny.php 3683 2009-01-27 22:40:21Z david $
+ * @version    $Id: shiny.php 3915 2009-03-11 16:09:57Z saracen $
  */
 
 if(!function_exists('buildParamList')) {
@@ -560,7 +560,7 @@ if(isset($fixedTrace[0]['file']) && !($fixedTrace[0]['file'] == $e->getFile() &&
 <?php if($svg): ?>
 			<div style="position:absolute; top:-1.25em; left:-2em; height:5em; width:5em;"><svg:svg viewBox="3 3 42 42" preserveAspectRatio="xMaxYMax meet" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><svg:use xlink:href="#helpSign" /></svg:svg></div>
 <?php endif; ?>
-			This is <em>not</em> an Agavi exception, but likely an error that occured in the application code.</p>
+			This is <em>not</em> an Agavi exception, but likely an error that occurred in the application code.</p>
 <?php endif; ?>
 		<p>An exception of type <strong><?php echo get_class($e); ?></strong> was thrown, but did not get caught during the execution of the request. You will find information provided by the exception along with a stack trace below.</p>
 <?php $msg = nl2br(htmlspecialchars($e->getMessage())); ?>

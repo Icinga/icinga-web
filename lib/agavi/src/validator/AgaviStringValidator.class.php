@@ -22,6 +22,7 @@
  *   'min_error' error message when string is shorter then 'min'
  *   'max'       string should be at most this long
  *   'max_error' error message when string is longer then 'max'
+ *   'trim'      trim whitespace before length checks
  *
  * @package    agavi
  * @subpackage validator
@@ -33,7 +34,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviStringValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviStringValidator.class.php 3990 2009-03-26 07:55:35Z v-dogg $
  */
 class AgaviStringValidator extends AgaviValidator
 {

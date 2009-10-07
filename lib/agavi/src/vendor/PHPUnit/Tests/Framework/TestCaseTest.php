@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestCaseTest.php 4439 2009-01-08 15:57:56Z sb $
+ * @version    SVN: $Id: TestCaseTest.php 4705 2009-03-08 10:55:30Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -218,6 +218,9 @@ class Framework_TestCaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($result));
     }
 
+    /**
+     * @backupGlobals enabled
+     */
     public function testGlobalsBackupPre()
     {
         global $a;
@@ -280,13 +283,25 @@ class Framework_TestCaseTest extends PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('foo', $GLOBALS);
     }
 
+    /**
+     * @backupGlobals enabled
+     * @backupStaticAttributes enabled
+     */
     public function testStaticAttributesBackupPre()
     {
+        if (!version_compare(PHP_VERSION, '5.3', '>')) {
+            $this->markTestSkipped('PHP 5.3 (or later) is required.');
+        }
+
         $GLOBALS['singleton'] = Singleton::getInstance();
     }
 
     public function testStaticAttributesBackupPost()
     {
+        if (!version_compare(PHP_VERSION, '5.3', '>')) {
+            $this->markTestSkipped('PHP 5.3 (or later) is required.');
+        }
+
         $this->assertNotSame($GLOBALS['singleton'], Singleton::getInstance());
     }
 

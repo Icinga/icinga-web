@@ -10,7 +10,5 @@
 		<!-- AppKit needed classes -->
 		<autoload name="AppKit">%core.root_dir%/lib/appkit/AppKit.class.php</autoload>
 		
-		
-
 	</ae:configuration>
 </ae:configurations>

@@ -62,6 +62,13 @@ implements AgaviISingletonModel
 	
 	private function addFileToStore($type, $name, $file, $insert_type = self::INSERT_PUSH) {
 		if (array_key_exists($type, $this->data)) {
+			
+			if ($type == self::TYPE_CSS_FILE || $type == self::TYPE_JS_FILE) {
+				if (!preg_match('@^'. preg_quote(AgaviConfig::get('de.icinga.appkit.web_path')). '@', $file)) {
+					$file = AgaviConfig::get('de.icinga.appkit.web_path').$file;
+				}
+			}
+			
 			$this->data[$type][$name] = $file;
 			return true;
 		}

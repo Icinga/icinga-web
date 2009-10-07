@@ -16,7 +16,7 @@
 /**
  * AgaviIsNotEmptyValidator verifies a parameter is not empty
  * 
- * The content of the input value is not varified in any manner, it is only
+ * The content of the input value is not verified in any manner, it is only
  * checked if the input value exists and is not empty. It lets the data holder
  * implementation decide what is regarded as empty.
  *
@@ -29,7 +29,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviIsNotEmptyValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviIsNotEmptyValidator.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviIsNotEmptyValidator extends AgaviValidator
 {

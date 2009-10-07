@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: File.php 4603 2009-02-02 15:44:24Z sb $
+ * @version    SVN: $Id: File.php 4726 2009-03-22 16:54:49Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.4.0
  */

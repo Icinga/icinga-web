@@ -39,7 +39,7 @@
  * @author     Trond Hansen <trond@xait.no>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Oci.php 4594 2009-02-01 06:48:11Z sb $
+ * @version    SVN: $Id: Oci.php 4639 2009-02-14 10:25:30Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.3
  */
@@ -136,8 +136,8 @@ class PHPUnit_Extensions_Database_DB_MetaData_Oci extends PHPUnit_Extensions_Dat
 
         if (!empty($tableParts['schema']))
         {
-            $ownerQuery = " AND OWNER = '{$schema}'";
-            $conOwnerQuery = " AND a.owner = '{$schema}'";
+            $ownerQuery = " AND OWNER = '{$tableParts['schema']}'";
+            $conOwnerQuery = " AND a.owner = '{$tableParts['schema']}'";
         }
 
         $query = "SELECT DISTINCT COLUMN_NAME

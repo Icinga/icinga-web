@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviTemplateLayer.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviTemplateLayer.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 abstract class AgaviTemplateLayer extends AgaviParameterHolder
 {
@@ -261,7 +261,7 @@ abstract class AgaviTemplateLayer extends AgaviParameterHolder
 	/**
 	 * Check if any slots have been set.
 	 *
-	 * @return     bool true if any slots are defined, falseotherwise.
+	 * @return     bool true if any slots are defined, false otherwise.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0

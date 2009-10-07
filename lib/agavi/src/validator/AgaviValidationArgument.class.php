@@ -14,7 +14,7 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * AgaviValidationArgument is a tupel of argument name and source that specifies 
+ * AgaviValidationArgument is a tuple of argument name and source that specifies 
  * the argument to validate.
  *
  * @package    agavi
@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviValidationArgument.class.php 3776 2009-02-04 19:52:55Z david $
+ * @version    $Id: AgaviValidationArgument.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviValidationArgument
 {

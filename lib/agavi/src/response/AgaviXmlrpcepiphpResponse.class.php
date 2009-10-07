@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviXmlrpcepiphpResponse.class.php 3654 2009-01-25 12:16:46Z david $
+ * @version    $Id: AgaviXmlrpcepiphpResponse.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviXmlrpcepiphpResponse extends AgaviResponse
 {
@@ -140,7 +140,7 @@ class AgaviXmlrpcepiphpResponse extends AgaviResponse
 	/**
 	 * Check if a redirect is set. Not implemented here.
 	 *
-	 * @return     bool true, if a redirect is set, otherwise falsae
+	 * @return     bool true, if a redirect is set, otherwise false
 	 *
 	 * @throws     BadMethodCallException
 	 *
@@ -214,7 +214,7 @@ class AgaviXmlrpcepiphpResponse extends AgaviResponse
 	}
 	
 	/**
-	 * Clear all reponse data.
+	 * Clear all response data.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0

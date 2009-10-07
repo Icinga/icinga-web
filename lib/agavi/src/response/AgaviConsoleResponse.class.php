@@ -25,7 +25,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviConsoleResponse.class.php 3608 2009-01-19 17:32:05Z david $
+ * @version    $Id: AgaviConsoleResponse.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviConsoleResponse extends AgaviResponse
 {
@@ -84,7 +84,7 @@ class AgaviConsoleResponse extends AgaviResponse
 	/**
 	 * Check if a redirect is set. Not implemented here.
 	 *
-	 * @return     bool true, if a redirect is set, otherwise falsae
+	 * @return     bool true, if a redirect is set, otherwise false
 	 *
 	 * @throws     BadMethodCallException
 	 *
@@ -164,7 +164,7 @@ class AgaviConsoleResponse extends AgaviResponse
 	}
 	
 	/**
-	 * Clear all reponse data.
+	 * Clear all response data.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      1.0.0

@@ -29,7 +29,7 @@
  *
  * @deprecated Superseded by AgaviXmlConfigParser, will be removed in Agavi 1.1
  *
- * @version    $Id: AgaviConfigParser.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviConfigParser.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviConfigParser
 {
@@ -74,7 +74,7 @@ class AgaviConfigParser
 	}
 
 	/**
-	 * Iterates thru a list of nodes and stores to each node in the
+	 * Iterates through a list of nodes and stores to each node in the
 	 * ConfigValueHolder
 	 *
 	 * @param      mixed An array or an object that can be iterated over

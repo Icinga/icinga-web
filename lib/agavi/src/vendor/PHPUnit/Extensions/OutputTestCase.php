@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: OutputTestCase.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: OutputTestCase.php 4701 2009-03-01 15:29:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -159,13 +159,15 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
     }
 
     /**
+     * @return mixed
+     * @throws RuntimeException
      */
     protected function runTest()
     {
         ob_start();
 
         try {
-            parent::runTest();
+            $testResult = parent::runTest();
         }
 
         catch (Exception $e) {
@@ -190,6 +192,8 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
             $this->assertEquals($this->expectedString, $this->output);
             $this->expectedString = NULL;
         }
+
+        return $testResult;
     }
 }
 ?>

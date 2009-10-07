@@ -2,46 +2,38 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
 	
 	<ae:configuration>
-		<databases default="appkit_default">
+		<databases default="icinga_web">
 			
-			<database name="appkit_default" class="AgaviDoctrineDatabase">
+			<database name="icinga_web" class="AgaviDoctrineDatabase">
 
-				<!-- 								 
-				<ae:parameter name="dsn">mysql://icinga_dev:icinga_dev@127.0.0.1:3307/icinga</ae:parameter>
-				<ae:parameter name="username">icinga_dev</ae:parameter>
-				<ae:parameter name="password">icinga_dev</ae:parameter>
+				<!--
+					Doctrine dsn strings:
+					
+					http://www.doctrine-project.org/documentation/manual/1_1/en/introduction-to-connections
 				-->
-				
 				<ae:parameter name="dsn">mysql://icinga_web:icinga_web@127.0.0.1:3306/icinga_web</ae:parameter>
+				
+				<!-- Generic credentials  -->
 				<ae:parameter name="username">icinga_web</ae:parameter>
 				<ae:parameter name="password">icinga_web</ae:parameter>
-
+				
+				<!-- DB encoding type -->
 				<ae:parameter name="charset">utf8</ae:parameter>
 				
+				<!--
+					Doctrine_Manager configuration
+				-->
 				<ae:parameter name="manager_attributes">
 					<!-- This allows lazy loading of the models -->
 					<ae:parameter name="MODEL_LOADING">CONSERVATIVE</ae:parameter>
 				</ae:parameter>
 				
+				<!-- The path to our models -->
 				<ae:parameter name="load_models">%de.icinga.appkit.doctrine_model_path%</ae:parameter>
 				
 			</database>
 
 		</databases>
 	</ae:configuration>
-	
-	<!-- 
-	<ae:configuration environment="development-joecool">
-		<databases default="pdo_mysql_main">
-			
-			<database name="pdo_mysql_main">
-				<ae:parameter name="dsn">mysql:host=localhost;dbname=agavisample</ae:parameter>
-				<ae:parameter name="username">agavisample</ae:parameter>
-				<ae:parameter name="password">123qwe</ae:parameter>
-			</database>
-			
-		</databases>
-	</ae:configuration>
-	-->
 	
 </ae:configurations>

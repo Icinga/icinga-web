@@ -46,7 +46,7 @@
  *
  * @since      0.10.0
  *
- * @version    $Id: AgaviCreoleSessionStorage.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviCreoleSessionStorage.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviCreoleSessionStorage extends AgaviSessionStorage
 {
@@ -218,7 +218,7 @@ class AgaviCreoleSessionStorage extends AgaviSessionStorage
 
 		$this->db = $this->getContext()->getDatabaseConnection($database);
 		if($this->db === null || !$this->db instanceof Connection) {
-			$error = 'Creole dabatase connection doesn\'t exist. Unable to open session.';
+			$error = 'Creole database connection doesn\'t exist. Unable to open session.';
 			throw new AgaviDatabaseException($error);
 		}
 

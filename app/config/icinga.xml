@@ -2,6 +2,12 @@
 
 <settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
 	
+	<!-- The webpath, with a leading slash and no trailing -->
+	<!-- 
+		If the path is empty, we try to detect the path
+	-->
+	<setting name="appkit.web_path"></setting>
+	
 	<setting name="appkit.php_settings">
 		<parameter name="session.gc_probability">3</parameter>
 		<parameter name="session.gc_divisor">100</parameter>
@@ -172,28 +178,43 @@
 
 	<setting name="appkit.factories">
 		<!-- Cache provider -->
-		<!-- <parameter name="Cache">
-			<parameter name="class">AppKitCache</parameter>
+		<parameter name="CacheProvider">
+			<parameter name="class">AppKitFileCache</parameter>
+			<parameter name="file">%core.root_dir%/lib/appkit/cache/AppKitFileCache.class.php</parameter>
+			
+			<parameter name="requiredClasses">
+				<parameter name="AppKitCache">%core.root_dir%/lib/appkit/cache/AppKitCache.class.php</parameter>
+			</parameter>
 			
 			<parameter name="cacheDefaultRegion">appkit.cache.default</parameter>
+			<parameter name="cacheDefaultLifetime">86400</parameter> <!-- format in seconds,  24h -->
+			
 			<parameter name="cacheTransactionType">AppKitCache::COMMIT_POOL</parameter>
 			<parameter name="cacheSerializeType">AppKitCache::SERIALIZE_PHP</parameter>
-			<parameter name="cacheProviderName">AppKitCacheProviderFile</parameter>
 			
-		</parameter> -->
+			<parameter name="fileDataDir"><![CDATA[/tmp/icinga_web]]></parameter>
+		</parameter>
 		
 		<!-- GLOBAL MESSAGE QUEUE -->
 		<parameter name="MessageQueue">
 			<parameter name="class">AppKitMessageQueue</parameter>
+			<parameter name="file">%core.root_dir%/lib/appkit/queue/AppKitMessageQueue.class.php</parameter>
+			
+			<parameter name="requiredClasses">
+				<parameter name="AppKitArrayContainer">%core.root_dir%/lib/appkit/class/AppKitArrayContainer.class.php</parameter>
+				<parameter name="AppKitQueue">%core.root_dir%/lib/appkit/queue/AppKitQueue.class.php</parameter>
+			</parameter>
 		</parameter>
 	
 		<!-- GLOBAL AUTH PROVIDER -->
 		<parameter name="AuthProvider">
 		<!-- Authenticate with Doctrine -->
 			<parameter name="class">AppKitAuthProviderDatabase</parameter>
+			<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderDatabase.class.php</parameter>
 		 
 		 <!-- Authentificate against ldap
 		 	<parameter name="class">AppKitAuthProviderLdap</parameter>
+		 	<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderLdap.class.php</parameter>
 		 	<parameter name="ldap_dsn">ldap://int.icinga.de/</parameter>
 		 	<parameter name="ldap_basedn">DC=int,DC=icinga,DC=de</parameter>
 		 	<parameter name="ldap_domain">INT.ICINGA.DE</parameter>
@@ -205,35 +226,52 @@
 		 
 		 <!-- Authentificate with http basic auth
 		 	<parameter name="class">AppKitAuthProviderHttpBasic</parameter>
+		 	<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderHttpBasic.class.php</parameter>
 		 	<parameter name="field">REMOTE_USER</parameter>
 		  -->
+		  
+			<parameter name="requiredClasses">
+				<parameter name="AppKitAuthProvider">%core.root_dir%/lib/appkit/auth/AppKitAuthProvider.class.php</parameter>
+			</parameter>
 		</parameter>
 		
 		<!-- icinga-api data interface -->
 		<parameter name="IcingaData">
 			<parameter name="class">IcingaData</parameter>
+			<parameter name="file">%core.module_dir%/Web/lib/icinga/factory/IcingaData.class.php</parameter>
+			
+			<parameter name="requiredClasses">
+				<!-- NONE -->
+			</parameter>
+			
 			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
 			<parameter name="api_type">IcingaApi::CONNECTION_IDO</parameter>
 			
 			<parameter name="config_type">mysql</parameter>
 			<parameter name="config_host">127.0.0.1</parameter>
 
-			<!--
-			<parameter name="config_port">3307</parameter>
-			<parameter name="config_database">ndo_demo</parameter>
-			-->			
-
+			
 			<parameter name="config_port">3306</parameter>
 			<parameter name="config_database">icinga</parameter>
-
+			
 			<parameter name="config_user">icinga</parameter>
 			<parameter name="config_password">icinga</parameter>
 			
-			
-			<!-- <parameter name="config_table_prefix">nagios_</parameter> -->
 			<parameter name="config_table_prefix">icinga_</parameter>
 		</parameter>
 	</setting>
+	
+	<setting name="appkit.version.copyright"><![CDATA[&#169; 2009 Icinga Developer Team]]></setting>
+	<setting name="appkit.version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
+	
+	<setting name="appkit.version.major">0</setting>
+	<setting name="appkit.version.minor">9</setting>
+	<setting name="appkit.version.patch">0</setting>
+	<setting name="appkit.version.extension">dev</setting>
+	<setting name="appkit.version.name">icinga-web</setting>
+	
+	<!-- PLACEHOLDER -->
+	<setting name="appkit.version.release"></setting>
 	
 	<!-- Placeholder for doctrine autocomplete configurations -->
 	<setting name="appkit.ajax.ac.prefix">de.icinga.appkit.ajax.ac.types</setting>

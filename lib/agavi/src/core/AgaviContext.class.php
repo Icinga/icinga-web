@@ -32,7 +32,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviContext.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviContext.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviContext
 {
@@ -121,7 +121,7 @@ class AgaviContext
 	}
 
 	/**
-	 * Constuctor method, intentionally made protected so the context cannot be
+	 * Constructor method, intentionally made protected so the context cannot be
 	 * created directly.
 	 *
 	 * @param      string The name of this context.

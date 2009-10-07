@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestResult.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: TestResult.php 4679 2009-02-25 11:33:48Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -48,6 +48,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/Util/CodeCoverage.php';
 require_once 'PHPUnit/Util/ErrorHandler.php';
 require_once 'PHPUnit/Util/Filter.php';
+require_once 'PHPUnit/Util/InvalidArgumentHelper.php';
 require_once 'PHPUnit/Util/Printer.php';
 require_once 'PHPUnit/Util/Test.php';
 require_once 'PHPUnit/Util/Timer.php';
@@ -195,7 +196,6 @@ class PHPUnit_Framework_TestResult implements Countable
 
     /**
      * Adds an error to the list of errors.
-     * The passed in exception caused the error.
      *
      * @param  PHPUnit_Framework_Test $test
      * @param  Exception              $e
@@ -325,7 +325,7 @@ class PHPUnit_Framework_TestResult implements Countable
         }
 
         if (!$this->lastTestFailed && $test instanceof PHPUnit_Framework_TestCase) {
-            $this->passed[get_class($test) . '::' . $test->getName()] = TRUE;
+            $this->passed[get_class($test) . '::' . $test->getName()] = $test->getResult();
             $this->time += $time;
         }
     }
@@ -487,7 +487,7 @@ class PHPUnit_Framework_TestResult implements Countable
                 $this->collectCodeCoverageInformation = $flag;
             }
         } else {
-            throw new InvalidArgumentException;
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'boolean');
         }
     }
 
@@ -520,18 +520,16 @@ class PHPUnit_Framework_TestResult implements Countable
             $executableCode = array();
 
             foreach (array_keys($data) as $file) {
-                if (PHPUnit_Util_Filter::isFiltered($file, FALSE))
-                {
+                if (PHPUnit_Util_Filter::isFiltered($file, FALSE)) {
                     unset($data[$file]);
                 }
             }
 
             $newFilesToCollect = array_diff_key($data, PHPUnit_Util_Filter::getCoveredFiles());
 
-            if (sizeof($newFilesToCollect) > 0)
-            {
-                $deadCode       = PHPUnit_Util_CodeCoverage::codeCoverageToBitString($newFilesToCollect, array(-2));
-                $executableCode = PHPUnit_Util_CodeCoverage::codeCoverageToBitString($newFilesToCollect, array(-1, 1));
+            if (count($newFilesToCollect) > 0) {
+                $deadCode       = PHPUnit_Util_CodeCoverage::getDeadLines($newFilesToCollect);
+                $executableCode = PHPUnit_Util_CodeCoverage::getExecutableLines($newFilesToCollect);
 
                 foreach (array_keys($newFilesToCollect) as $file) {
                     PHPUnit_Util_Filter::addCoveredFile($file);
@@ -554,7 +552,7 @@ class PHPUnit_Framework_TestResult implements Countable
                 }
             }
 
-            $executed = PHPUnit_Util_CodeCoverage::codeCoverageToBitString($data, array(1));
+            $executed = PHPUnit_Util_CodeCoverage::getExecutedLines($data);
             unset($data);
 
             $this->codeCoverageInformation[] = array(
@@ -747,6 +745,17 @@ class PHPUnit_Framework_TestResult implements Countable
         } else {
             throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'boolean');
         }
+    }
+
+    /**
+     * Returns the error-to-exception conversion setting.
+     *
+     * @return boolean
+     * @since  Method available since Release 3.4.0
+     */
+    public function getConvertErrorsToExceptions()
+    {
+        return $this->convertErrorsToExceptions;
     }
 
     /**

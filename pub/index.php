@@ -8,6 +8,7 @@ require (dirname(dirname(__FILE__)). '/lib/agavi/src/agavi.php');
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to our app/config.php script.                 |
 // +---------------------------------------------------------------------------+
+// Not needed, we work with bootstrap events
 require('../app/config.php');
 
 // +---------------------------------------------------------------------------+

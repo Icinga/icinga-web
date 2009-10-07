@@ -38,7 +38,7 @@
  *                                      like $_SERVER.
  * # <b>compat_assoc_lower</b> - [Off] - Always lowercase the indexes of assoc 
  *                                      arrays
- * # <b>compat_rtrim_string</b> - [Off] - Trim whitepace from end of string 
+ * # <b>compat_rtrim_string</b> - [Off] - Trim whitespace from end of string 
  *                                        column types
  * # <b>password</b>       - [none]   - The database password.
  * # <b>persistent</b>     - [No]     - Indicates that the connection should
@@ -57,7 +57,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviCreoleDatabase.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviCreoleDatabase.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviCreoleDatabase extends AgaviDatabase
 {

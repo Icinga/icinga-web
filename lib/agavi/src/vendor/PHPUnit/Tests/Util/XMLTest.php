@@ -41,7 +41,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: XMLTest.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: XMLTest.php 4644 2009-02-17 12:10:32Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -133,20 +133,6 @@ class Util_XMLTest extends PHPUnit_Framework_TestCase
 
         catch (InvalidArgumentException $e) {
             $this->assertEquals('Unknown key(s): testD, testE', $e->getMessage());
-        }
-    }
-
-    public function testAssertValidKeysThrowsExceptionWhenTypeIsNotArray()
-    {
-        foreach (array(NULL, 'foo', 42) as $bad) {
-            try {
-                PHPUnit_Util_XML::assertValidKeys($bad, array());
-                $this->fail();
-            }
-
-            catch (InvalidArgumentException $e) {
-                $this->assertRegExp('/expected array/i', $e->getMessage());
-            }
         }
     }
 

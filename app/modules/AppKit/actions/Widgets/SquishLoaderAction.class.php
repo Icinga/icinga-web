@@ -2,6 +2,9 @@
 
 class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
 {
+	
+	const CACHE_REGION = 'appkit.cache.htmlsquishloader';
+	
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.
@@ -40,9 +43,33 @@ class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
 			$loader->addFile($type, $file);
 		}
 		
-		$this->setAttribute('content', $loader->squishContents());
+		
+		$key = sprintf('%s_content', $type);
+		
+		if (($content = $this->getCache()->getValue($key, null, self::CACHE_REGION)) == null) {
+			$content = $loader->squishContents();
+		}
+		
+		$this->setAttribute('content', $content);
+
+		$this->getCache()->setValue($key, $content, self::CACHE_REGION);
 		
 		return $this->getDefaultViewName();
+	}
+	
+	/**
+	 * 
+	 * @return AppKitCache
+	 */
+	private function getCache() {
+		static $cache = null;
+		
+		if ($cache === null) {
+			$cache =& AppKitFactories::getInstance()->getFactory('CacheProvider');
+			$cache->addRegion(self::CACHE_REGION);
+		}
+		
+		return $cache;
 	}
 }
 

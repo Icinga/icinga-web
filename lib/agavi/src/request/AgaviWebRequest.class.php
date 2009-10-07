@@ -29,7 +29,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviWebRequest.class.php 3788 2009-02-05 18:40:28Z david $
+ * @version    $Id: AgaviWebRequest.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviWebRequest extends AgaviRequest
 {
@@ -149,7 +149,7 @@ class AgaviWebRequest extends AgaviRequest
 	 * Retrieve the relative part of the request URL, i.e. path and query.
 	 * Example: "/foo/bar/baz?id=4815162342".
 	 *
-	 * @return     string The relative URL of the curent request.
+	 * @return     string The relative URL of the current request.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0
@@ -192,7 +192,7 @@ class AgaviWebRequest extends AgaviRequest
 	 * necessary), and request URI.
 	 * Example: "http://foo.example.com:8080/foo/bar/baz?id=4815162342".
 	 *
-	 * @return     string The URL of the curent request.
+	 * @return     string The URL of the current request.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0

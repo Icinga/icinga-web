@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviWebResponse.class.php 3654 2009-01-25 12:16:46Z david $
+ * @version    $Id: AgaviWebResponse.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviWebResponse extends AgaviResponse
 {
@@ -136,7 +136,7 @@ class AgaviWebResponse extends AgaviResponse
 	protected $cookies = array();
 	
 	/**
-	 * @var        array An array of rediret information, or null if no redirect.
+	 * @var        array An array of redirect information, or null if no redirect.
 	 */
 	protected $redirect = null;
 	
@@ -230,7 +230,7 @@ class AgaviWebResponse extends AgaviResponse
 	}
 	
 	/**
-	 * Clear all reponse data.
+	 * Clear all response data.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0
@@ -443,7 +443,7 @@ class AgaviWebResponse extends AgaviResponse
 	 *
 	 * @param      string A HTTP header field name.
 	 * @param      mixed  A HTTP header field value, of an array of values.
-	 * @param      bool   If true, a header with that name will be oberwritten,
+	 * @param      bool   If true, a header with that name will be overwritten,
 	 *                    otherwise, the value will be appended.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
@@ -742,7 +742,7 @@ class AgaviWebResponse extends AgaviResponse
 	/**
 	 * Check if a redirect is set.
 	 *
-	 * @return     bool true, if a redirect is set, otherwise falsae
+	 * @return     bool true, if a redirect is set, otherwise false
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0

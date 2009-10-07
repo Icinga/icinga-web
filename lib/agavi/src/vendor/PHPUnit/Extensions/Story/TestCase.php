@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestCase.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: TestCase.php 4701 2009-03-01 15:29:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -179,12 +179,14 @@ abstract class PHPUnit_Extensions_Story_TestCase extends PHPUnit_Framework_TestC
     /**
      * Run this test's scenario.
      *
+     * @return mixed
      * @throws RuntimeException
      */
     protected function runTest()
     {
-        parent::runTest();
+        $testResult = parent::runTest();
         $this->scenario->run($this->world);
+        return $testResult;
     }
 
     /**

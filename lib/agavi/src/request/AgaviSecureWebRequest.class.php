@@ -28,12 +28,12 @@
  *
  * @deprecated To be removed in Agavi 1.1
  *
- * @version    $Id: AgaviSecureWebRequest.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviSecureWebRequest.class.php 3915 2009-03-11 16:09:57Z saracen $
  */
 class AgaviSecureWebRequest extends AgaviWebRequest {
 
 	/**
-	 * Check wether or not the current request is over a secure connection
+	 * Check whether or not the current request is over a secure connection
 	 * (HTTPS)
 	 *
 	 * @return     bool true if HTTPS is on, false otherwise
