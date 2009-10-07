@@ -15,9 +15,9 @@
 
 	var JitLog = {
 		elem: false,
-		write: function(text) {
+		write: function(elementId, text) {
 			if (!this.elem) 
-				this.elem = document.getElementById("jitLog");
+				this.elem = document.getElementById(elementId);
 				this.elem.innerHTML = text;
 				this.elem.style.left = (500 - this.elem.offsetWidth / 2) + "px";
 			}
@@ -37,13 +37,25 @@
 
 		this.configWritable = ["url", "params", "method", "timeout", "disableCaching"];
 
+		this.elementIds = {
+			jitContainer: "jitContainer",
+			jitContainerCenter: "jitContainerCenter",
+			jitMap: "jitMap",
+			jitContainerRight: "jitContainerRight",
+			jitDetails: "jitDetails",
+			jitLog: "jitLog",
+			jitCanvas: "jitCanvas"
+		};
+
+		this.elementIdsWrite = ["jitContainer", "jitContainerCenter", "jitMap", "jitContainerRight", "jitDetails", "jitLog", "jitCanvas"];
+
 		this.jitJson = false;
 
-		function jitInit (json) {
-			var infovis = document.getElementById("jitMap");
+		function jitInit (json, elementIds) {
+			var infovis = document.getElementById(elementIds.jitMap);
 			var w = infovis.offsetWidth, h = infovis.offsetHeight;
-			var canvas = new Canvas("mycanvas", {
-				"injectInto": "jitMap",
+			var canvas = new Canvas(elementIds.jitCanvas, {
+				"injectInto": elementIds.jitMap,
 				"width": w,
 				"height": h,
 				"backgroundCanvas": {
@@ -70,14 +82,14 @@
 					color: "#ccddee"
 				},
 				Edge: {
-					color: "#56A5EC"
+					color: "#56a5ec"
 				},
 				onBeforeCompute: function(node){
-					JitLog.write("centering " + node.name + "...");
-					document.getElementById("jitDetails").innerHTML = node.data.relation;
+					JitLog.write(elementIds.jitLog, "centering " + node.name + "...");
+					document.getElementById(elementIds.jitDetails).innerHTML = node.data.relation;
 				},
 				onAfterCompute: function(){
-					JitLog.write("done");
+					JitLog.write(elementIds.jitLog, "done");
 				},
 				onCreateLabel: function(domElement, node){
 					domElement.innerHTML = node.name;
@@ -105,11 +117,12 @@
 			});
 			rgraph.loadJSON(json);
 			rgraph.refresh();
-			document.getElementById("jitDetails").innerHTML = rgraph.graph.getNode(rgraph.root).data.relation;
+			document.getElementById(elementIds.jitDetails).innerHTML = rgraph.graph.getNode(rgraph.root).data.relation;
 		}
 
 		this.init = function (config) {
 			this.setConfig(config);
+			this.setElementIds();
 			this.createContainer();
 			this.getMapData();
 		}
@@ -125,32 +138,43 @@
 			}
 		}
 
+		this.setElementIds = function () {
+			var numElements = this.elementIdsWrite.length;
+			for (var x = 0; x < numElements; x++) {
+				this.elementIds[this.elementIdsWrite[x]] += AppKit.Ext.genRandomId('cronk');
+			}
+		}
+
 		this.createContainer = function () {
 			var container = new Ext.Container({
-				id: "jitContainer",
+				id: this.elementIds.jitContainer,
 				autoEl: 'div', 
 				layout: 'column',
 				defaults: {
 					xtype: 'container',
 					autoEl: 'div',
 					layout: 'auto',
-					//columnWidth: 0.5,
 					style: {
 						border: "none"
 					}
 				},
 				items : [{
-					id: "jitContainerCenter",
+					id: this.elementIds.jitContainerCenter,
+					cls: "jitContainerCenter",
 					items: {
-						id: "jitMap"
+						id: this.elementIds.jitMap,
+						cls: "jitMap"
 					}
 				},{
-					id: "jitContainerRight",
+					id: this.elementIds.jitContainerRight,
+					cls: "jitContainerRight",
 					items: {
-						id: "jitDetails"
+						id: this.elementIds.jitDetails,
+						cls: "jitDetails"
 					}
 				},{
-					id: "jitLog"
+					id: this.elementIds.jitLog,
+					cls: "jitLog"
 				}]
 			});
 			this.cmp.add(container);
@@ -179,7 +203,7 @@
 		
 		this.getMapDataSuccess = function (response, o) {
 			this.jitJson = Ext.util.JSON.decode(response.responseText);
-			jitInit(this.jitJson);
+			jitInit(this.jitJson, this.elementIds);
 			this.mask.hide();
 			this.mask.disable();
 		}

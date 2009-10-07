@@ -45,6 +45,8 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 		$hosts = array();
 		$hostReferences = array();
 
+		$idPrefix = sha1(microtime()) . '-';
+
 		$apiResHosts = $this->api->API()
 			->createSearch()
 			->setResultType(IcingaApi::RESULT_ARRAY)
@@ -59,8 +61,9 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 			->fetch();
 
 		foreach ($apiResHosts as $row) {
-			$hosts[$row['host_object_id']] = array(
-					'id'		=> $row['host_object_id'],
+			$objectId = $idPrefix . $row['host_object_id'];
+			$hosts[$objectId] = array(
+					'id'		=> $objectId,
 					'name'		=> $row['host_name'],
 					'data'		=> array(
 						'relation'	=> $this->getHostDataTable($row),
@@ -70,14 +73,16 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 		}
 
 		foreach ($apiResHostParents as $row) {
-			if (!array_key_exists($row->host_child_object_id, $hostReferences)) {
-				$hostReferences[$row->host_child_object_id] = $hosts[$row->host_child_object_id];
+			$childObjectId = $idPrefix . $row->host_child_object_id;
+			$parentObjectId = $idPrefix . $row->host_parent_object_id;
+			if (!array_key_exists($childObjectId, $hostReferences)) {
+				$hostReferences[$childObjectId] = $hosts[$childObjectId];
 			}
-			unset($hosts[$row->host_child_object_id]);
-			if (array_key_exists($row->host_parent_object_id, $hosts)) {
-				$hosts[$row->host_parent_object_id]['children'][$row->host_child_object_id] =& $hostReferences[$row->host_child_object_id];
-			} elseif (array_key_exists($row->host_parent_object_id, $hostReferences)) {
-				$hostReferences[$row->host_parent_object_id]['children'][$row->host_child_object_id] =& $hostReferences[$row->host_child_object_id];
+			unset($hosts[$childObjectId]);
+			if (array_key_exists($parentObjectId, $hosts)) {
+				$hosts[$parentObjectId]['children'][$childObjectId] =& $hostReferences[$childObjectId];
+			} elseif (array_key_exists($parentObjectId, $hostReferences)) {
+				$hostReferences[$parentObjectId]['children'][$childObjectId] =& $hostReferences[$childObjectId];
 			}
 		}
 
@@ -86,7 +91,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 		if (count($hostsFlatStruct) == 1) {
 			$hostsFlat = $hostsFlatStruct;
 			$icingaProc = array(
-				'id'		=> '-1',
+				'id'		=> $idPrefix . '-1',
 				'name'		=> 'Icinga',
 				'data'		=> array(
 					'relation'	=> 'Icinga Monitoring Process',
@@ -96,7 +101,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 			array_push($hostsFlat[0]['children'], $icingaProc);
 		} else {
 			$hostsFlat = array(
-				'id'		=> '-1',
+				'id'		=> $idPrefix . '-1',
 				'name'		=> 'Icinga',
 				'data'		=> array(
 					'relation'	=> 'Icinga Monitoring Process',
