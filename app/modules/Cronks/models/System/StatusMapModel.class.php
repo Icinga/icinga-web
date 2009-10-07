@@ -121,6 +121,9 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 			if ($key == 'host_object_id') {
 				continue;
 			}
+			if ($key == 'host_current_state') {
+				$value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
+			}
 			$hostTable .= sprintf('<tr><td>%s</td><td>%s</td></tr>', $this->tm->_($key), $value);
 		}
 		$hostTable = '<table>' . $hostTable . '</table>';
