@@ -32,6 +32,7 @@ function JitStatusMap (config) {
 	this.configWritable = ["url", "params", "method", "timeout", "disableCaching", "parentId"];
 
 	this.elementIds = {
+		set: false,
 		jitContainer: "jitContainer",
 		jitContainerCenter: "jitContainerCenter",
 		jitMap: "jitMap",
@@ -136,9 +137,12 @@ function JitStatusMap (config) {
 	}
 
 	this.setElementIds = function () {
-		var numElements = this.elementIdsWrite.length;
-		for (var x = 0; x < numElements; x++) {
-			this.elementIds[this.elementIdsWrite[x]] += AppKit.Ext.genRandomId('cronk');
+		if (!this.elementIds.set) {
+			var numElements = this.elementIdsWrite.length;
+			for (var x = 0; x < numElements; x++) {
+				this.elementIds[this.elementIdsWrite[x]] = this.config.parentId + this.elementIds[this.elementIdsWrite[x]];
+			}
+			this.elementIds.set = true;
 		}
 	}
 
