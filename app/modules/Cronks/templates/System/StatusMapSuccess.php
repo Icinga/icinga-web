@@ -157,7 +157,13 @@
 			this.cmp.doLayout();
 		}
 
+		this.showMask = function () {
+			this.mask = new Ext.LoadMask(Ext.getBody());
+			this.mask.show();			
+		}
+
 		this.getMapData = function () {
+			this.showMask();
 			var ajax = Ext.Ajax.request({
 				url : this.config.url,
 				params : this.config.params,
@@ -174,6 +180,8 @@
 		this.getMapDataSuccess = function (response, o) {
 			this.jitJson = Ext.util.JSON.decode(response.responseText);
 			jitInit(this.jitJson);
+			this.mask.hide();
+			this.mask.disable();
 		}
 
 		this.getMapDataFail = function (response, o) {
