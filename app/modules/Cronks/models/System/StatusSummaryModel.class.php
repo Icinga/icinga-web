@@ -9,16 +9,16 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 
 	private $dataStates = array (
 		'host'		=> array (
-			0	=> 'OK',
-			1	=> 'UNKNOWN',
-			2	=> 'DOWN',
+			0	=> 'UP',
+			1	=> 'DOWN',
+			2	=> 'UNREACHABLE',
 			10	=> 'NOT OK',
 			20	=> 'All',
 		),
 		'hostchart'	=> array (
-			0	=> 'OK',
-			1	=> 'UNKNOWN',
-			2	=> 'DOWN',
+			0	=> 'UP',
+			1	=> 'DOWN',
+			2	=> 'UNREACHABLE',
 		),
 		'service'	=> array (
 			0	=> 'OK',
@@ -55,6 +55,11 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			'column'		=> 'service_state',
 			'title'			=> 'Services',
 		),
+	);
+
+	private $typeNames = array (
+		'host'		=> 'Hosts',
+		'service'	=> 'Services',
 	);
 
 	private $type = false;
@@ -96,6 +101,7 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			'state_name'	=> $this->dataStates[$type][$state],
 			'count'			=> $count,
 			'type'			=> $type,
+			'type_name'		=> $this->typeNames[$type],
 		);
 		return $data;
 	}

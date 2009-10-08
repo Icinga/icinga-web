@@ -31,6 +31,11 @@ class Web_IcingaApiSimpleDataProviderSuccessView extends ICINGAWebBaseView
 
 		foreach ($result as $row) {
 			foreach ($result->getRow() as $key => $value) {
+				if ($key == 'host_current_state') {
+					$value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
+				} elseif ($key == 'service_current_state') {
+					$value = IcingaServiceStateInfo::Create($value)->getCurrentStateAsText();
+				}
 				$dataTmp = array (
 					'key'	=> $tm->_($key),
 					'value'	=> $value,

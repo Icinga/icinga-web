@@ -30,7 +30,6 @@ class Cronks_System_StatusSummarySuccessView extends ICINGACronksBaseView
 		// store final count
 		$jsonData['status_data']['count'] = count($jsonData['status_data']['data']);
 
-		//return '{"status_data":{"count":1,"data":[{"OK":52,"UNKNOWN":8,"DOWN":0,"type":"Hosts"}]}}';
 		return json_encode($jsonData);
 	}
 

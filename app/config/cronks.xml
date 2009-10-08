@@ -99,6 +99,15 @@
 			</parameter>
 		</parameter>
 		
+		<parameter name="icingaStatusMap">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.StatusMap</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Status Map</parameter>
+			<parameter name="name">Status Map</parameter>
+			<parameter name="parameter"></parameter>
+		</parameter>
+
 		<parameter name="portalView1Col">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.PortalView</parameter>
@@ -182,16 +191,5 @@
 				<parameter name="type">text</parameter>
 			</parameter>
 		</parameter>
-
-		<!--
-		<parameter name="icingaStatusMap">
-			<parameter name="module">Cronks</parameter>
-			<parameter name="action">System.StatusMap</parameter>
-			<parameter name="hide">false</parameter>
-			<parameter name="description">Status Map</parameter>
-			<parameter name="name">Status Map</parameter>
-			<parameter name="parameter"></parameter>
-		</parameter>
-		-->
 
 </setting>

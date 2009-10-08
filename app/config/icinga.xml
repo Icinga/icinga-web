@@ -117,7 +117,10 @@
 		
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
-		
+
+		<!-- JIT - JavaScript InfoVis Toolkit -->
+		<parameter>/styles/statusmap.css</parameter>
+
 		<!-- ICINGA -->
 		<parameter>/styles/silk-icons.css</parameter>
 		<parameter>/styles/extjs/ext-all.css</parameter>
@@ -191,6 +194,7 @@
 	-->
 	<setting name="appkit.include_dynamic_javascript">
 		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
+		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
 	</setting>
 
 	<!--
