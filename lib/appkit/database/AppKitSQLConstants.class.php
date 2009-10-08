@@ -11,6 +11,9 @@ class AppKitSQLConstants {
 	const SQL_OP_LESSTHAN		= 70;
 	const SQL_OP_GREATERTHAN	= 71;
 	
+	const SQL_OP_LESSOREQUAL	= 80;
+	const SQL_OP_GREATEROREQUAL	= 81;
+	
 	private static $SQL_OPERATORS = array (
 		self::SQL_OP_CONTAIN		=> 'LIKE',
 		self::SQL_OP_NOTCONTAIN		=> 'NOT LIKE',
@@ -24,7 +27,11 @@ class AppKitSQLConstants {
 	
 	private static $ICINGA_OPERATORS = array (
 		self::SQL_OP_IS				=> IcingaApi::MATCH_EXACT,
-		self::SQL_OP_CONTAIN		=> IcingaApi::MATCH_LIKE
+		self::SQL_OP_CONTAIN		=> IcingaApi::MATCH_LIKE,
+		self::SQL_OP_GREATERTHAN	=> IcingaApi::MATCH_GREATER_THAN,
+		self::SQL_OP_LESSTHAN		=> IcingaApi::MATCH_LESS_THAN,
+		self::SQL_OP_GREATEROREQUAL	=> IcingaApi::MATCH_GREATER_OR_EQUAL,
+		self::SQL_OP_LESSOREQUAL	=> IcingaApi::MATCH_LESS_OR_EQUAL
 	);
 	
 	/**

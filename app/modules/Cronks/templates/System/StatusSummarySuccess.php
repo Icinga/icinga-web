@@ -5,7 +5,6 @@
 	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
-	
 var dummyCronkDisplayStateSummary = function () {
 
 	var CronkDisplayStateSummary = {
@@ -15,15 +14,15 @@ var dummyCronkDisplayStateSummary = function () {
 	
 		panelDefs : {
 			host : {
-				itemId : AppKit.Ext.genRandomId('cronk'),
+				itemId : AppKit.Ext.genRandomId("cronk"),
 				title : false,
 			},
 			service : {
-				itemId : AppKit.Ext.genRandomId('cronk'),
+				itemId : AppKit.Ext.genRandomId("cronk"),
 				title : false,
 			},
 			chart : {
-				itemId : AppKit.Ext.genRandomId('cronk'),
+				itemId : AppKit.Ext.genRandomId("cronk"),
 				title : false
 			}
 		},
@@ -118,7 +117,7 @@ var dummyCronkDisplayStateSummary = function () {
 				url: this.url + type,
 				root: "status_data.data",
 				autoLoad: false,
-				fields: ["state_id", "state_name", "type", "count"],
+				fields: ["state_id", "state_name", "type", "type_name", "count"],
 				listeners: {
 					load: function(s) {
 						s.filter("type", type);
@@ -132,7 +131,7 @@ var dummyCronkDisplayStateSummary = function () {
 			// Template to display the cronks
 			this.tpl = new Ext.XTemplate(
 				"<tpl for=\".\">",
-					"<div class=\"test-l\" id=\"{state_id}\">",
+					"<div class=\"status-summary-row\" id=\"{state_id}\">",
 						"<span class=\"x-editable\">{count}</span>&nbsp;",
 						"<span class=\"x-editable\">{state_name}</span>",
 					"</div>",
@@ -142,12 +141,77 @@ var dummyCronkDisplayStateSummary = function () {
 	
 			// The dataview container
 			this.view = new Ext.DataView({
-				id: AppKit.Ext.genRandomId('cronk'),
-				title: "test",
+				id: AppKit.Ext.genRandomId("cronk"),
+				title: false,
 				store: this.store,
 				tpl: this.tpl,
-				itemSelector:"div.test-l",
-				emptyText: "No data"
+				itemSelector:"div.status-summary-row",
+				emptyText: "No data",
+				trackOver: true,
+				singleSelect: true,
+
+				listeners: {
+					click: function(view, index, node, e) {
+						var record = view.getStore().getAt(index);
+						var type = record.data.type;
+						var params = {};
+						var filter = {};
+
+						var id = (type || "empty") + "searchResultComponent";
+
+						switch (type) {
+							case "host":
+								switch (record.data.state_id) {
+									case 0:
+									case 1:
+									case 2:
+										filter["f[host_status-value]"] = record.data.state_id;
+										filter["f[host_status-operator]"] = 50;
+										break;
+									case 10:
+										filter["f[host_status-value]"] = 0;
+										filter["f[host_status-operator]"] = 71;
+										break;
+								}
+								params["template"] = "icinga-host-template";
+								break;
+
+							case "service":
+								switch (record.data.state_id) {
+									case 0:
+									case 1:
+									case 2:
+									case 3:
+										filter["f[service_status-value]"] = record.data.state_id;
+										filter["f[service_status-operator]"] = 50;
+										break;
+									case 10:
+										filter["f[service_status-value]"] = 0;
+										filter["f[service_status-operator]"] = 71;
+										break;
+								}
+								params["template"] = "icinga-service-template";
+								break;
+
+							default:
+								Ext.Msg.alert("Search", "This type is not ready implemented yet!");
+								return;
+								break;
+						}
+
+						var cronk = {
+							parentid: id,
+							title: record.data.type_name + " - " + record.data.state_name,
+							crname: "gridProc",
+							closable: true,
+							params: params
+						};
+
+						AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
+
+						return true;
+					}
+				}
 			});
 	
 			this.panel.getComponent(this.panelDefs[type].itemId).add(this.view);
@@ -162,7 +226,7 @@ var dummyCronkDisplayStateSummary = function () {
 				url: this.url + type + "chart",
 				root: "status_data.data",
 				autoLoad: false,
-				fields: ["type", "OK", "UNKNOWN", "DOWN", "WARNING", "CRITICAL"]
+				fields: ["type", "UP", "DOWN", "UNREACHABLE", "OK", "WARNING", "CRITICAL", "UNKNOWN"]
 			});
 			this.store.load();
 	
@@ -191,22 +255,28 @@ var dummyCronkDisplayStateSummary = function () {
 				},
 				series: [
 					{
-						xField: "OK",
-						displayName: "OK",
+						xField: "UP",
+						displayName: "UP",
 						style: {
 							color: 0x00ff00
-						}
-					},{
-						xField: "UNKNOWN",
-						displayName: "UNKNOWN",
-						style: {
-							color: 0xff8040
 						}
 					},{
 						xField: "DOWN",
 						displayName: "DOWN",
 						style: {
 							color: 0xff0000
+						}
+					},{
+						xField: "UNREACHABLE",
+						displayName: "UNREACHABLE",
+						style: {
+							color: 0xff8040
+						}
+					},{
+						xField: "OK",
+						displayName: "OK",
+						style: {
+							color: 0x00ff00
 						}
 					},{
 						xField: "WARNING",
@@ -219,6 +289,12 @@ var dummyCronkDisplayStateSummary = function () {
 						displayName: "CRITICAL",
 						style: {
 							color: 0xff0000
+						}
+					},{
+						xField: "UNKNOWN",
+						displayName: "UNKNOWN",
+						style: {
+							color: 0xff8040
 						}
 					}
 				]
