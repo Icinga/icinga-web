@@ -1,7 +1,8 @@
 <?php 
-	$htmlid = AppKitRandomUtil::genSimpleId(10);
+	$htmlid = AppKitRandomUtil::genSimpleId(10, 'login-box-');
+	$containerid = AppKitHtmlHelper::concatHtmlId($htmlid, 'container');
 ?>
-<div style="width:370px; margin: 150px auto 150px auto;">
+<div style="width:400px; margin: 150px auto 150px auto; padding: 20px;" id="<?php echo $containerid; ?>">
     <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
     <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
         <h3 style="margin-bottom:5px;"><?php echo $tm->_('Login'); ?></h3>
@@ -14,6 +15,7 @@
 
 	var bAuthenticated = false;
 	var sId = '<?php echo $htmlid ?>';
+	var sContainerId = '<?php echo $containerid; ?>';
 	
 	<?php if ($us->isAuthenticated() == true) { ?>
 	bAuthenticated = true;
@@ -22,6 +24,17 @@
 	var oLogin = function() {
 		
 		var pub;
+		
+		var oButton = new Ext.Button({
+			text: '<?php echo $tm->_("Try"); ?>',
+			id: 'login_button',
+			handler: function(b, e) {
+				pub.disableForm();
+				pub.doSubmit();
+			}
+		});
+		
+		var oContainer = Ext.get(sContainerId);
 		
 		var oFormPanel = new Ext.form.FormPanel({
 			labelWidth: 100,
@@ -47,31 +60,25 @@
 			
 			listeners: {
 				afterrender: function(p) {
-					pub.resetForm();
+					pub.resetForm(true);
 				}
 			},
 			
 			keys: [{
 				key: Ext.EventObject.ENTER,
 				scope: pub,
+				stopEvent: true,
 				fn: function() {
 					pub.doSubmit()
 				}
 			}],
 			
-			buttons: [{
-				text: '<?php echo $tm->_("Try"); ?>',
-				id: 'login_button',
-				handler: function(b, e) {
-					pub.doSubmit();
-				}
-			}]
+			buttons: [oButton]
 		});
 		
 		var oFormAction = new Ext.form.Action.Submit(oFormPanel.getForm(), {
 			clientValidation: true,
 			url: '<?php echo $ro->gen("appkit.login.provider"); ?>',
-			waitMsg: '<?php echo $tm->_("Verifying credentials ..."); ?>',
 			
 			params: {
 				dologin: 1
@@ -85,20 +92,48 @@
 					};
 					
 					AppKit.Ext.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
-					
-					pub.resetForm();
-
 				}
 				
-				f.getEl().highlight("f39a00", {
+				/* oContainer.highlight("cc0000", {
 				    attr: 'background-color',
-				    easing: 'easeIn',
-				    duration: 1
-				});
+				    easing: 'easeOutStrong',
+				    duration: 2
+				}); */
+				
+				if (oContainer) {
+					var ox = oContainer.getLeft();
+					oContainer.sequenceFx();
+					
+					for(var i=0; i<1; i++) {
+						oContainer.shift({x: oContainer.getLeft()-20, duration: .02, easing: 'bounceBoth'})
+						.shift({x: oContainer.getLeft()+40, duration: .02 , easing: 'bounceBoth'})
+						.shift({x: oContainer.getLeft()-20, duration: .02, easing: 'bounceBoth'})
+						.pause(.03);
+					}
+					
+					oContainer.shift({ x: ox, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
+				}
+				
+				pub.resetForm();
+				
 			},
 			
 			success: function(f, a) {
-				AppKit.Ext.changeLocation('<?php echo $ro->gen("index_page"); ?>');
+				pub.disableForm(true);
+				
+				var p = new Ext.Panel({
+					style: 'margin-top: 20px;',
+					bodyCssClass: 'x-icinga-simplebox-green',
+					html: '<?php echo $tm->_("Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>.", null, null, array($ro->gen("index_page"))); ?>',
+					unstyled: true,
+					layout: 'fit',
+					forceLayout: true
+				});
+				
+				oFormPanel.add(p);
+				oFormPanel.doLayout();
+				
+				AppKit.Ext.changeLocation.defer(10, null, ['<?php echo $ro->gen("index_page"); ?>']);
 			}
 		});
 		
@@ -120,9 +155,30 @@
 				this.getForm().doAction(this.getAction());
 			},
 			
-			resetForm : function() {
-				this.getForm().reset();
+			resetForm : function(full) {
+				if (full != undefined) {
+					this.getForm().reset();
+				}
+				else {
+					this.getForm().findField('password').setValue("");
+				}
+				
 				this.getForm().findField('username').focus('', 10);
+			},
+			
+			enableForm : function() {
+				this.getForm().findField('username').enable();
+				this.getForm().findField('password').enable();
+				oButton.enable();
+			},
+			
+			disableForm : function(full) {
+				if (full != undefined) {
+					this.getForm().findField('username').disable();
+					this.getForm().findField('password').disable();
+				}
+				
+				oButton.disable();
 			}
 			
 		};

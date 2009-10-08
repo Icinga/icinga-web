@@ -281,4 +281,12 @@ table.icinga-attribute-table td.val {
 	text-decoration: underline;
 }
 
+/** Simple box classes **/
+.x-icinga-simplebox-green {
+	padding: 10px;
+	color: #fff;
+	background-color: #00bb00;
+	border: 1px #00cc00 solid;
+}
+
 /* EOF */

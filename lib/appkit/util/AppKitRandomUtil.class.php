@@ -28,7 +28,7 @@ class AppKitRandomUtil {
 		return $init;
 	}
 	
-	public static function genSimpleId($length=5) {
+	public static function genSimpleId($length=5, $prefix="") {
 		static $chars = null;
 		
 		if ($chars === null) {
@@ -45,7 +45,7 @@ class AppKitRandomUtil {
 			$o .= (chr( $chars[mt_rand(0, count($chars)-1)] ));
 		}
 		
-		return $o;
+		return $prefix. $o;
 	}
 	
 }
