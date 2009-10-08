@@ -268,6 +268,12 @@ table.icinga-attribute-table td.val {
 
 /** STATUS-SUMMARY VIEW **/
 .status-summary-row {
+	color: #000000;
+	cursor: pointer;
+}
+
+.status-summary-row:hover {
+	color: #f88017;
 	cursor: pointer;
 }
 
