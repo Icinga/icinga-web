@@ -19,6 +19,7 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			0	=> 'UP',
 			1	=> 'DOWN',
 			2	=> 'UNREACHABLE',
+			20	=> 'All',
 		),
 		'service'	=> array (
 			0	=> 'OK',
@@ -33,6 +34,7 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			1	=> 'WARNING',
 			2	=> 'CRITICAL',
 			3	=> 'UNKNOWN',
+			20	=> 'All',
 		),
 	);
 
@@ -123,11 +125,11 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 							break;
 					}
 					$data = $this->getStatusDataCollection($this->type, $stateId, $stateCount);
-					if ($this->type == 'host' || $this->type == 'service') {
+//					if ($this->type == 'host' || $this->type == 'service') {
 						array_push($this->data, $data);
-					} else {
-						$this->data[$data['state_name']] = $data['count'];
-					}
+//					} else {
+//						$this->data[$data['state_name']] = $data['count'];
+//					}
 				}
 				if ($this->type != 'host' && $this->type != 'service') {
 					$this->data['type'] = $this->dataSources[$this->type]['title'];
