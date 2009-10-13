@@ -89,24 +89,24 @@ div.icinga-status span {
 	font-size: 8pt;
 }
 
-div.icinga-status-ok {
+div.icinga-status-ok, div.servicechart-0 {
 	background-color: #00cc00;
 }
 
-div.icinga-status-warning {
+div.icinga-status-warning, div.servicechart-1 {
 	background-color: #ffff00;
 }
 
-div.icinga-status-critical {
+div.icinga-status-critical, div.servicechart-2 {
 	background-color: #ff0000;
 	color: #fff;
 }
 
-div.icinga-status-up {
+div.icinga-status-up, div.hostchart-0 {
 	background-color: #00cc00;
 }
 
-div.icinga-status-down {
+div.icinga-status-down, div.hostchart-1 {
 	background-color: #cc0000;
 }
 
@@ -114,12 +114,28 @@ div.icinga-status-down span {
 	color: #fff;	
 }
 
-div.icinga-status-unreachable {
+div.icinga-status-unreachable, div.hostchart-2 {
 	background-color: #ff8000;
 }
 
-div.icinga-status-unknown {
+div.icinga-status-unknown, div.servicechart-3 {
 	background-color: #ff8000;
+}
+
+div.hostchart-0, div.hostchart-1, div.hostchart-2,
+div.servicechart-0, div.servicechart-1, div.servicechart-2, div.servicechart-3 {
+	height: 15px;
+}
+
+div.status-summary-hostchart {
+	float: left;
+	margin-top: 15px;
+}
+
+div.status-summary-servicechart {
+	float: right;
+	margin-top: 15px;
+	margin-right: 50px;
 }
 
 /** tables **/
@@ -268,6 +284,12 @@ table.icinga-attribute-table td.val {
 
 /** STATUS-SUMMARY VIEW **/
 .status-summary-row {
+	color: #000000;
+	cursor: pointer;
+}
+
+.status-summary-row:hover {
+	color: #f88017;
 	cursor: pointer;
 }
 

@@ -11,6 +11,8 @@ var dummyCronkDisplayStateSummary = function () {
 	
 		cmp : Ext.getCmp("<?php echo $parentid; ?>"),
 		url : "<?php echo $ro->gen('icinga.cronks.statusSummary.json'); ?>?dtype=",
+
+		objectType : false,
 	
 		panelDefs : {
 			host : {
@@ -35,7 +37,7 @@ var dummyCronkDisplayStateSummary = function () {
 	
 		loaded : false,
 		storeCollection : new Array(),
-	
+
 		init : function (outputType) {
 			this.outputType = outputType;
 			this.createPanel();
@@ -219,93 +221,99 @@ var dummyCronkDisplayStateSummary = function () {
 			this.storeCollection.push(this.store);
 	
 		},
-	
+
 		showChart : function (type) {
-	
-			this.store = new Ext.data.JsonStore({
-				url: this.url + type + "chart",
-				root: "status_data.data",
-				autoLoad: false,
-				fields: ["type", "UP", "DOWN", "UNREACHABLE", "OK", "WARNING", "CRITICAL", "UNKNOWN"]
+			this.objectType = type;
+
+			var ajax = Ext.Ajax.request({
+				url : this.url + type + "chart",
+				params : false,
+				method : "GET",
+				success : this.showChartAjaxSuccess,
+				failure : this.showChartAjaxFail,
+				callback : this.showChartAjaxDefault,
+				scope: this,
+				timeout : 50000,
+				disableCaching : true,
 			});
-			this.store.load();
-	
-			var chart = new Ext.chart.StackedBarChart({
-				width: 150,
-				height: 80,
-				store: this.store,
-				yField: "type",
-				xAxis: new Ext.chart.NumericAxis({
-					stackingEnabled: true
-				}),
-				chartStyle: {
-					xAxis: {
-						majorGridLines: {size: 0},
-						showLabels: false,
-						margin: 0,
-						padding: 0
-					},
-					yAxis: {
-						showLabels: false,
-						margin: 0,
-						padding: 0
-					},
-					margin: 0,
-					padding: 0
-				},
-				series: [
-					{
-						xField: "UP",
-						displayName: "UP",
-						style: {
-							color: 0x00ff00
-						}
-					},{
-						xField: "DOWN",
-						displayName: "DOWN",
-						style: {
-							color: 0xff0000
-						}
-					},{
-						xField: "UNREACHABLE",
-						displayName: "UNREACHABLE",
-						style: {
-							color: 0xff8040
-						}
-					},{
-						xField: "OK",
-						displayName: "OK",
-						style: {
-							color: 0x00ff00
-						}
-					},{
-						xField: "WARNING",
-						displayName: "WARNING",
-						style: {
-							color: 0xffff00
-						}
-					},{
-						xField: "CRITICAL",
-						displayName: "CRITICAL",
-						style: {
-							color: 0xff0000
-						}
-					},{
-						xField: "UNKNOWN",
-						displayName: "UNKNOWN",
-						style: {
-							color: 0xff8040
-						}
+		},
+
+		showChartAjaxSuccess : function (response, o) {
+			var json = Ext.util.JSON.decode(response.responseText);
+			if (json.status_data.data.length) {
+				this.drawChart(json.status_data.data);
+			}
+		},
+
+		showChartAjaxFail : function (response, o) {
+			
+		},
+
+		showChartAjaxDefault : function (options, success, request) {
+			
+		},
+
+		drawChart : function (data) {
+			var numObjects = 0;
+			var graphElements = [];
+			var dataType = false;
+
+			for (var key in data) {
+				for (var statusDataKey in data[key]) {
+					if (statusDataKey != 0 && statusDataKey != 1 && statusDataKey != 2 && statusDataKey != 3 && statusDataKey != 4) {
+						break;
 					}
-				]
+					var statusData = data[key][statusDataKey];
+					if (dataType == false) {
+						dataType = statusData.type;
+					}
+					if (statusData.state_id == 20) {
+						numObjects = statusData.count;
+						continue;
+					}
+					if (statusData.count) {
+						var currentElement = {
+							status_id: statusData.state_id,
+							status_name: statusData.state_name,
+							status_count: statusData.count
+						};
+						graphElements.push(currentElement);
+					}
+				}
+			}
+
+			var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).body.dom.clientWidth / 2) - 60;
+			var numElements = graphElements.length;
+			var containerItems = [];
+
+			for (var x = 0; x < numElements; x++) {
+				var currentItem = {
+					cls: dataType + "-" + graphElements[x].status_id,
+					style: "width:" + parseInt((graphElements[x].status_count / numObjects) * containerWidth) + "px;"
+				};
+				containerItems.push(currentItem);
+			}
+
+			var container = new Ext.Container({
+				cls: "status-summary-" + dataType,
+				autoEl: 'div', 
+				layout: 'column',
+				defaults: {
+					xtype: 'container',
+					autoEl: 'div',
+					layout: 'auto',
+					style: {
+						border: "none"
+					}
+				},
+				items : containerItems
 			});
-	
-			this.panel.getComponent(this.panelDefs.chart.itemId).add(chart);
-	
-			this.storeCollection.push(this.store);
-	
+
+			var parentCmp = this.panel.getComponent(this.panelDefs.chart.itemId);
+			parentCmp.add(container);
+			parentCmp.doLayout();
 		}
-	
+
 	}
 	
 	CronkDisplayStateSummary.init("<?php echo $rd->getParameter('otype'); ?>");
