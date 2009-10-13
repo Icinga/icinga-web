@@ -69,7 +69,6 @@
 			<parameter name="name">LogView</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-log-template</parameter>
-				<parameter name="height">120</parameter>
 			</parameter>
 		</parameter>
 		
@@ -96,6 +95,17 @@
 			<parameter name="name">HostHistory</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-host-history-template</parameter>
+			</parameter>
+		</parameter>
+		
+		<parameter name="gridNotificationView">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Display icinga notifications</parameter>
+			<parameter name="name">Notifications</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-notification-template</parameter>
 			</parameter>
 		</parameter>
 		
