@@ -70,13 +70,18 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 
 			$user =& self::getUser();
 
-			$nav->getContainer()->addItem(AppKitNavItem::create('appkit', 'appkit')
+			$nav->getContainer()->addItem(AppKitNavItem::create('appkit', 'index_page')
 			->setCaption('Home')
 			);
 
-			$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.about', 'appkit.about')
-			->setCaption('About')
-			);
+			//Add more homelinks
+			if (is_array($home_links = AgaviConfig::get('de.icinga.appkit.home_links'))) {
+				foreach ($home_links as $link_route=>$link_caption) {
+					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create($link_route, $link_route)
+						->setCaption($link_caption)
+					);
+				}
+			}
 
 			// Display only if we do not trust apache
 			if (!AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
@@ -103,22 +108,22 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 				->setCaption('Preferences')
 				);
 				
-			}
-			
-			// MENU FOR ADMIN
-			if ($user->hasCredential('appkit.admin')) {
-				$admin = $nav->getContainer()->addItem(AppKitNavItem::create('appkit.admin', 'appkit.admin')
-				->setCaption('Admin')
-				);
-				$admin->addSubItem(AppKitNavItem::create('appkit.admin.users', 'appkit.admin.users')
-				->setCaption('Users')
-				);
-				$admin->addSubItem(AppKitNavItem::create('appkit.admin.groups', 'appkit.admin.groups')
-				->setCaption('Groups')
-				);
-				$admin->addSubItem(AppKitNavItem::create('appkit.admin.logs', 'appkit.admin.logs')
-				->setCaption('Logs')
-				);
+				// MENU FOR ADMIN
+				if ($user->hasCredential('appkit.admin')) {
+					$admin = $nav->getContainer()->addItem(AppKitNavItem::create('appkit.admin', 'appkit.admin')
+					->setCaption('Admin')
+					);
+					$admin->addSubItem(AppKitNavItem::create('appkit.admin.users', 'appkit.admin.users')
+					->setCaption('Users')
+					);
+					$admin->addSubItem(AppKitNavItem::create('appkit.admin.groups', 'appkit.admin.groups')
+					->setCaption('Groups')
+					);
+					$admin->addSubItem(AppKitNavItem::create('appkit.admin.logs', 'appkit.admin.logs')
+					->setCaption('Logs')
+					);
+				}
+				
 			}
 		}
 

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: UnitOfWork.php 5438 2009-01-30 22:23:36Z jwage $
+ *  $Id: UnitOfWork.php 6124 2009-07-20 17:47:01Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -33,7 +33,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5438 $
+ * @version     $Revision: 6124 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Roman Borschel <roman@code-factory.org>
  */
@@ -372,7 +372,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
     {
         foreach ($record->getReferences() as $k => $v) {
             $rel = $record->getTable()->getRelation($k);
-
+            
             $local = $rel->getLocal();
             $foreign = $rel->getForeign();
 
@@ -387,7 +387,9 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
                     $id = array_values($obj->identifier());
 
                     if ( ! empty($id)) {
-                        foreach ((array) $rel->getLocal() as $k => $field) {
+                        foreach ((array) $rel->getLocal() as $k => $columnName) {
+                            $field = $record->getTable()->getFieldName($columnName);
+                            
                             if (isset($id[$k]) && $id[$k] && $record->getTable()->hasField($field)) {
                                 $record->set($field, $id[$k]);
                             }
@@ -521,10 +523,15 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
     }
 
     /**
-     * inserts a record into database
+     * Inserts a record into database.
      *
-     * @param Doctrine_Record $record   record to be inserted
-     * @return boolean
+     * This method inserts a transient record in the database, and adds it
+     * to the identity map of its correspondent table. It proxies to @see 
+     * processSingleInsert(), trigger insert hooks and validation of data
+     * if required.
+     *
+     * @param Doctrine_Record $record   
+     * @return boolean                  false if record is not valid
      */
     public function insert(Doctrine_Record $record)
     {
@@ -553,7 +560,13 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
     }
 
     /**
-     * @todo DESCRIBE WHAT THIS METHOD DOES, PLEASE!
+     * Inserts a transient record in its table.
+     *
+     * This method inserts the data of a single record in its assigned table, 
+     * assigning to it the autoincrement primary key (if any is defined).
+     * 
+     * @param Doctrine_Record $record
+     * @return void
      */
     public function processSingleInsert(Doctrine_Record $record)
     {
@@ -728,8 +741,8 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
                             continue;
                         }
 
-                        unset($flushList[$index]);
-                        array_splice($flushList, $index3, 0, $assocClassName);
+                        unset($flushList[$index3]);
+                        array_splice($flushList, $index - 1, 0, $assocClassName);
                         $index = $relatedCompIndex;
                     } else {
                         $flushList[] = $assocClassName;

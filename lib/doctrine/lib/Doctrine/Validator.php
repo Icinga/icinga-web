@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Validator.php 5557 2009-02-27 03:59:30Z guilhermeblanco $
+ *  $Id: Validator.php 6399 2009-09-24 14:54:22Z guilhermeblanco $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5557 $
+ * @version     $Revision: 6399 $
  * @author      Roman Borschel <roman@code-factory.org>
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
@@ -89,16 +89,22 @@ class Doctrine_Validator extends Doctrine_Locator_Injectable
      */
     public static function validateLength($value, $type, $maximumLength)
     {
+        if( $maximumLength === null ) {
+            return true;
+        }
         if ($type == 'timestamp' || $type == 'integer' || $type == 'enum') {
             return true;
         } else if ($type == 'array' || $type == 'object') {
             $length = strlen(serialize($value));
-        } else if ($type == 'decimal' || $type == 'float') {
+        } else if ($type == 'decimal' || $type == 'float' || $type == 'double') {
+            $value = abs($value);
             $e = explode('.', $value);
             $length = strlen($e[0]);
             if (isset($e[1])) {
                 $length = $length + strlen($e[1]);
             }
+        } else if ($type == 'blob') {
+            $length = strlen($value);
         } else {
             $length = self::getStringLength($value);
         }

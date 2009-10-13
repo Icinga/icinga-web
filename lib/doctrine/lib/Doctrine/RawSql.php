@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: RawSql.php 5489 2009-02-14 21:11:15Z guilhermeblanco $
+ *  $Id: RawSql.php 6369 2009-09-15 20:54:58Z kriswallsmith $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -33,7 +33,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5489 $
+ * @version     $Revision: 6369 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_RawSql extends Doctrine_Query_Abstract
@@ -56,7 +56,13 @@ class Doctrine_RawSql extends Doctrine_Query_Abstract
         // RawSql expects to be plain SQL + syntax for SELECT part. It is used as is in query execution.
         $this->useQueryCache(false);
     }
-    
+
+    protected function clear()
+    {
+        $this->_preQuery = false;
+        $this->_pendingJoinConditions = array();
+    }
+
     /**
      * @deprecated
      */
@@ -230,7 +236,7 @@ class Doctrine_RawSql extends Doctrine_Query_Abstract
         }
 
         // force-add all primary key fields
-        if ($this->_sqlParts['distinct'] != true) {
+        if ( ! isset($this->_sqlParts['distinct']) || $this->_sqlParts['distinct'] != true) {
             foreach ($this->getTableAliasMap() as $tableAlias => $componentAlias) {
                 $map = $this->_queryComponents[$componentAlias];
 
@@ -246,7 +252,7 @@ class Doctrine_RawSql extends Doctrine_Query_Abstract
 
         $q = 'SELECT ';
 
-        if ($this->_sqlParts['distinct'] == true) {
+        if (isset($this->_sqlParts['distinct']) && $this->_sqlParts['distinct'] == true) {
             $q .= 'DISTINCT ';
         }
 
@@ -431,5 +437,21 @@ class Doctrine_RawSql extends Doctrine_Query_Abstract
         }
 
         return $this;
+    }
+
+    /**
+     * calculateResultCacheHash
+     * calculate hash key for result cache
+     *
+     * @param array $params
+     * @return string    the hash
+     */
+    public function calculateResultCacheHash($params = array())
+    {
+        $sql = $this->getSql();
+        $conn = $this->getConnection();
+        $params = $this->getFlattenedParams($params);
+        $hash = md5($this->_hydrator->getHydrationMode() . $conn->getName() . $conn->getOption('dsn') . $sql . var_export($params, true));
+        return $hash;
     }
 }

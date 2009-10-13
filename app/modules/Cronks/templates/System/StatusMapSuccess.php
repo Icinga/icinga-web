@@ -9,7 +9,7 @@ AppKit.Ext.ScriptDynaLoader.loadScript({
 	url: "<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitStatusMap')) ?>",
 	callback: function() {
 		var statusMap = new JitStatusMap({
-			url: "/web/cronks/statusMap/json",
+			url: "<?php echo $ro->gen('icinga.cronks.statusMap.json'); ?>",
 			parentId: "<?php echo $parentId; ?>"
 		});
 	}

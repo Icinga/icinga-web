@@ -158,7 +158,7 @@ abstract class Doctrine_Query_Abstract
             );
 
     /**
-     * @var array $_dqlParts                an array containing all DQL query parts
+     * @var array $_dqlParts    an array containing all DQL query parts; @see Doctrine_Query::getDqlPart()
      */
     protected $_dqlParts = array(
                             'from'      => array(),
@@ -616,13 +616,17 @@ abstract class Doctrine_Query_Abstract
      */
     public function fixArrayParameterValues($params = array())
     {
-        foreach ($params as $i => $param) {
+        $i = 0;
+	
+        foreach ($params as $param) {
             if (is_array($param)) {
                 $c = count($param);
 
                 array_splice($params, $i, 1, $param);
                 
                 $i += $c;
+            } else {
+                $i++;
             }
         }
         
@@ -690,11 +694,21 @@ abstract class Doctrine_Query_Abstract
             $tableAlias .= '.';
         }
 
-        $field = key($map);
-        $value = current($map);
-        $identifier = $this->_conn->quoteIdentifier($tableAlias . $field);
+        // Fix for 2015: loop through whole inheritanceMap to add all   
+        // keyFields for inheritance (and not only the first) 
+        $retVal = ""; 
+        $count = 0; 
+         
+        foreach ($map as $field => $value) { 
+            if ($count++ > 0) {
+                $retVal .= ' AND ';
+            }
 
-        return $identifier . ' = ' . $this->_conn->quote($value);;
+            $identifier = $this->_conn->quoteIdentifier($tableAlias . $field); 
+            $retVal .= $identifier . ' = ' . $this->_conn->quote($value);
+        }
+
+        return $retVal;
     }
 
     /**
@@ -1001,9 +1015,9 @@ abstract class Doctrine_Query_Abstract
     public function calculateResultCacheHash($params = array())
     {
         $dql = $this->getDql();
-        $params = $this->getParams($params);
         $conn = $this->getConnection();
-        $hash = md5($conn->getName() . $conn->getOption('dsn') . $dql . var_export($params, true));
+        $params = $this->getFlattenedParams($params);
+        $hash = md5($this->_hydrator->getHydrationMode() . $conn->getName() . $conn->getOption('dsn') . $dql . var_export($params, true));
         return $hash;
     }
 
@@ -1108,7 +1122,7 @@ abstract class Doctrine_Query_Abstract
             $this->_hydrator->setHydrationMode($hydrationMode);
         }
 
-        if ($this->_resultCache !== false && $this->_type == self::SELECT && ($this->_resultCache || $this->_conn->getAttribute(Doctrine::ATTR_RESULT_CACHE))) {
+        if ($this->_resultCache && $this->_type == self::SELECT) {
             $cacheDriver = $this->getResultCacheDriver();
             $hash = $this->calculateResultCacheHash($params);
             $cached = ($this->_expireResultCache) ? false : $cacheDriver->fetch($hash);
@@ -1137,6 +1151,7 @@ abstract class Doctrine_Query_Abstract
         if ($this->getConnection()->getAttribute(Doctrine::ATTR_AUTO_FREE_QUERY_OBJECTS)) {
             $this->free();
         }
+
         return $result;
     }
 
@@ -1277,6 +1292,10 @@ abstract class Doctrine_Query_Abstract
         foreach ($cachedComponents as $alias => $components) {
             $e = explode('.', $components['name']);
             if (count($e) === 1) {
+                $manager = Doctrine_Manager::getInstance(); 
+                if ($manager->hasConnectionForComponent($e[0])) { 
+                    $this->_conn = $manager->getConnectionForComponent($e[0]); 
+                }
                 $queryComponents[$alias]['table'] = $this->_conn->getTable($e[0]);
             } else {
                 $queryComponents[$alias]['parent'] = $e[0];
@@ -1330,8 +1349,12 @@ abstract class Doctrine_Query_Abstract
     }
 
     /**
-     * addSelect
-     * adds fields to the SELECT part of the query
+     * Adds fields or aliased functions.
+     *
+     * This method adds fields or dbms functions to the SELECT query part.
+     * <code>
+     * $query->addSelect('COUNT(p.id) as num_phonenumbers');
+     * </code>
      *
      * @param string $select        Query SELECT part
      * @return Doctrine_Query
@@ -1382,12 +1405,8 @@ abstract class Doctrine_Query_Abstract
     }
 
     /**
-     * addWhere
-     * adds conditions to the WHERE part of the query
-     *
-     * @param string $where         Query WHERE part
-     * @param mixed $params         an array of parameters or a simple scalar
-     * @return Doctrine_Query
+     * Alias for @see andWhere().
+     * @return Doctrine_Query   this object
      */
     public function addWhere($where, $params = array())
     {
@@ -1396,7 +1415,10 @@ abstract class Doctrine_Query_Abstract
 
 
     /**
-     * Adds conditions to the WHERE part of the query
+     * Adds conditions to the WHERE part of the query.
+     * <code>
+     * $q->andWhere('u.birthDate > ?', '1975-01-01');
+     * </code>
      *
      * @param string $where Query WHERE part
      * @param mixed $params An array of parameters or a simple scalar
@@ -1420,6 +1442,9 @@ abstract class Doctrine_Query_Abstract
 
     /**
      * Adds conditions to the WHERE part of the query
+     * <code>
+     * $q->orWhere('u.role = ?', 'admin');
+     * </code>
      *
      * @param string $where Query WHERE part
      * @param mixed $params An array of parameters or a simple scalar
@@ -1442,8 +1467,7 @@ abstract class Doctrine_Query_Abstract
 
 
     /**
-     * whereIn
-     * adds IN condition to the query WHERE part
+     * Adds IN condition to the query WHERE part. Alias to @see andWhereIn().
      *
      * @param string $expr          the operand of the IN
      * @param mixed $params         an array of parameters or a simple scalar
@@ -1458,11 +1482,14 @@ abstract class Doctrine_Query_Abstract
 
     /**
      * Adds IN condition to the query WHERE part
+     * <code>
+     * $q->whereIn('u.id', array(10, 23, 44));
+     * </code>
      *
-     * @param string $expr The operand of the IN
-     * @param mixed $params An array of parameters or a simple scalar
-     * @param boolean $not Whether or not to use NOT in front of IN
-     * @return Doctrine_Query
+     * @param string $expr      The operand of the IN
+     * @param mixed $params     An array of parameters or a simple scalar
+     * @param boolean $not      Whether or not to use NOT in front of IN. Defaults to false (simple IN clause)
+     * @return Doctrine_Query   this object.
      */
     public function andWhereIn($expr, $params = array(), $not = false)
     {
@@ -1480,7 +1507,12 @@ abstract class Doctrine_Query_Abstract
 
 
     /**
-     * Adds IN condition to the query WHERE part
+     * Adds IN condition to the query WHERE part, appending it with an OR operator.
+     * <code>
+     * $q->orWhereIn('u.id', array(10, 23))
+     *   ->orWhereIn('u.id', 44);
+     * // will select all record with id equal to 10, 23 or 44
+     * </code>
      *
      * @param string $expr The operand of the IN
      * @param mixed $params An array of parameters or a simple scalar
@@ -1510,7 +1542,7 @@ abstract class Doctrine_Query_Abstract
         $params = (array) $params;
 
         // if there's no params, return (else we'll get a WHERE IN (), invalid SQL)
-        if ( ! count($params)) {
+        if ( ! (count($params) > 0)) {
             throw new Doctrine_Query_Exception('You must pass at least one parameter when using an IN() condition.');
         }
 
@@ -1532,12 +1564,15 @@ abstract class Doctrine_Query_Abstract
 
 
     /**
-     * whereNotIn
-     * adds NOT IN condition to the query WHERE part
+     * Adds NOT IN condition to the query WHERE part.
+     * <code>
+     * $q->whereNotIn('u.id', array(10, 20));
+     * // will exclude users with id 10 and 20 from the select
+     * </code>
      *
      * @param string $expr          the operand of the NOT IN
      * @param mixed $params         an array of parameters or a simple scalar
-     * @return Doctrine_Query
+     * @return Doctrine_Query       this object
      */
     public function whereNotIn($expr, $params = array())
     {
@@ -1547,6 +1582,7 @@ abstract class Doctrine_Query_Abstract
 
     /**
      * Adds NOT IN condition to the query WHERE part
+     * Alias for @see whereNotIn().
      *
      * @param string $expr The operand of the NOT IN
      * @param mixed $params An array of parameters or a simple scalar
@@ -1571,8 +1607,10 @@ abstract class Doctrine_Query_Abstract
     }
 
     /**
-     * addGroupBy
-     * adds fields to the GROUP BY part of the query
+     * Adds fields to the GROUP BY part of the query.
+     * <code>
+     * $q->groupBy('u.id');
+     * </code>
      *
      * @param string $groupby       Query GROUP BY part
      * @return Doctrine_Query
@@ -1583,8 +1621,13 @@ abstract class Doctrine_Query_Abstract
     }
 
     /**
-     * addHaving
-     * adds conditions to the HAVING part of the query
+     * Adds conditions to the HAVING part of the query.
+     *
+     * This methods add HAVING clauses. These clauses are used to narrow the 
+     * results by operating on aggregated values.
+     * <code>
+     * $q->having('num_phonenumbers > ?', 1);
+     * </code>
      *
      * @param string $having        Query HAVING part
      * @param mixed $params         an array of parameters or a simple scalar
@@ -1632,6 +1675,9 @@ abstract class Doctrine_Query_Abstract
     /**
      * distinct
      * Makes the query SELECT DISTINCT.
+     * <code>
+     * $q->distinct();
+     * </code>
      *
      * @param bool $flag            Whether or not the SELECT is DISTINCT (default true).
      * @return Doctrine_Query
@@ -1693,7 +1739,7 @@ abstract class Doctrine_Query_Abstract
      * @param string $update        Query UPDATE part
      * @return Doctrine_Query
      */
-    public function set($key, $value, $params = null)
+    public function set($key, $value = null, $params = null)
     {
         if (is_array($key)) {
             foreach ($key as $k => $v) {
@@ -1716,6 +1762,9 @@ abstract class Doctrine_Query_Abstract
     /**
      * from
      * sets the FROM part of the query
+     * <code>
+     * $q->from('User u');
+     * </code>
      *
      * @param string $from          Query FROM part
      * @return Doctrine_Query
@@ -1815,8 +1864,11 @@ abstract class Doctrine_Query_Abstract
     }
 
     /**
-     * orderBy
-     * sets the ORDER BY part of the query
+     * Sets the ORDER BY part of the query.
+     * <code>
+     * $q->orderBy('u.name');
+     * $query->orderBy('u.birthDate DESC');
+     * </code>
      *
      * @param string $orderby      Query ORDER BY part
      * @return Doctrine_Query
@@ -1863,8 +1915,7 @@ abstract class Doctrine_Query_Abstract
     }
 
     /**
-     * clear
-     * resets all the variables
+     * Resets all the sql parts.
      *
      * @return void
      */
@@ -2023,7 +2074,7 @@ abstract class Doctrine_Query_Abstract
      */
     public function expireResultCache($expire = true)
     {
-        $this->_expireResultCache = true;
+        $this->_expireResultCache = $expire;
         return $this;
     }
 
@@ -2035,7 +2086,7 @@ abstract class Doctrine_Query_Abstract
      */
     public function expireQueryCache($expire = true)
     {
-        $this->_expireQueryCache = true;
+        $this->_expireQueryCache = $expire;
         return $this;
     }
 
@@ -2170,6 +2221,11 @@ abstract class Doctrine_Query_Abstract
     /**
      * Adds a DQL part to the internal parts collection.
      *
+     * This method add the part specified to the array named by $queryPartName.
+     * Most part names support multiple parts addition.
+     *
+     * @see $_dqlParts;
+     * @see Doctrine_Query::getDqlPart()
      * @param string $queryPartName  The name of the query part.
      * @param string $queryPart      The actual query part to add.
      * @param boolean $append        Whether to append $queryPart to already existing

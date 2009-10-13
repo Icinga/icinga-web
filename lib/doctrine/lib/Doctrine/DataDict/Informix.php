@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Informix.php 4768 2008-08-12 02:19:49Z jwage $
+ *  $Id: Informix.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 4768 $
+ * @version     $Revision: 5798 $
  * @link        www.phpdoctrine.org
  * @since       1.0
  */

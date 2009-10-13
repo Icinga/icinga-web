@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Record.php 5593 2009-03-13 02:48:14Z guilhermeblanco $
+ *  $Id: Record.php 6403 2009-09-24 17:54:30Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5593 $
+ * @version     $Revision: 6403 $
  */
 abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Countable, IteratorAggregate, Serializable
 {
@@ -280,7 +280,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * _index
+     * the current instance counter used to generate unique ids for php objects. Contains the next identifier.
      *
      * @return integer
      */
@@ -307,11 +307,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      */
     public function construct()
     { }
+
     /**
-     * getOid
-     * returns the object identifier
+     * @see $_oid;
      *
-     * @return integer
+     * @return integer  the object identifier
      */
     public function getOid()
     {
@@ -322,6 +322,18 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         return $this->_oid;
     }
 
+    /**
+     * calls a subclass hook. Idempotent until @see clearInvokedSaveHooks() is called.
+     *
+     * <code>
+     * $this->invokeSaveHooks('pre', 'save');
+     * </code>
+     *
+     * @param string $when           'post' or 'pre'
+     * @param string $type           serialize, unserialize, save, delete, update, insert, validate, dqlSelect, dqlDelete, hydrate
+     * @param Doctrine_Event $event  event raised
+     * @return Doctrine_Event        the event generated using the type, if not specified
+     */
     public function invokeSaveHooks($when, $type, $event = null)
     {
         $func = $when . ucfirst($type);
@@ -344,15 +356,20 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         return $event;
     }
 
+    /**
+     * makes all the already used save hooks available again
+     */
     public function clearInvokedSaveHooks()
     {
         $this->_invokedSaveHooks = array();
     }
 
     /**
-     * isValid
+     * tests validity of the record using the current data.
      *
-     * @return boolean  whether or not this record is valid
+     * @param boolean $deep   run the validation process on the relations
+     * @param boolean $hooks  invoke save hooks before start
+     * @return boolean        whether or not this record is valid
      */
     public function isValid($deep = false, $hooks = true)
     {
@@ -601,7 +618,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getErrorStack
+     * retrieves the ErrorStack. To be called after a failed validation attempt (@see isValid()).
      *
      * @return Doctrine_Validator_ErrorStack    returns the errorStack associated with this record
      */
@@ -615,8 +632,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * errorStack
-     * assigns / returns record errorStack
+     * assigns the ErrorStack or returns it if called without parameters
      *
      * @param Doctrine_Validator_ErrorStack          errorStack to be assigned for this record
      * @return void|Doctrine_Validator_ErrorStack    returns the errorStack associated with this record
@@ -684,8 +700,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * record and returns the values that were removed from $data.  Also converts
      * any values of 'null' to objects of type Doctrine_Null.
      *
-     * @param array $data       data array to be cleaned
-     * @return array $tmp       values cleaned from data
+     * @param array $data   data array to be cleaned
+     * @return array        values cleaned from data
      */
     public function cleanData(&$data)
     {
@@ -711,11 +727,12 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * hydrates this object from given array
      *
      * @param array $data
-     * @return boolean
+     * @param boolean $overwriteLocalChanges  whether to overwrite the unsaved (dirty) data
+     * @return void
      */
-    public function hydrate(array $data)
+    public function hydrate(array $data, $overwriteLocalChanges = true)
     {
-        if ($this->getTable()->getAttribute(Doctrine::ATTR_HYDRATE_OVERWRITE)) {
+        if ($overwriteLocalChanges) {
             $this->_values = array_merge($this->_values, $this->cleanData($data));
             $this->_data = array_merge($this->_data, $data);
         } else {
@@ -723,10 +740,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
             $this->_data = array_merge($data, $this->_data);
         }
 
-        if (count($this->_values) < $this->_table->getColumnCount()) {
+        if ( ! $this->isModified() && count($this->_values) < $this->_table->getColumnCount()) {
             $this->_state = self::STATE_PROXY;
         }
-        $this->prepareIdentifiers(true);
     }
 
     /**
@@ -768,9 +784,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
 
     /**
      * serialize
-     * this method is automatically called when this Doctrine_Record is serialized
+     * this method is automatically called when an instance of Doctrine_Record is serialized
      *
-     * @return array
+     * @return string
      */
     public function serialize()
     {
@@ -821,8 +837,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * unseralize
-     * this method is automatically called everytime a Doctrine_Record object is unserialized
+     * this method is automatically called everytime an instance is unserialized
      *
      * @param string $serialized                Doctrine_Record as serialized string
      * @throws Doctrine_Record_Exception        if the cleanData operation fails somehow
@@ -876,8 +891,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * state
-     * returns / assigns the state of this record
+     * assigns the state of this record or returns it if called without parameters
      *
      * @param integer|string $state                 if set, this method tries to set the record state to $state
      * @see Doctrine_Record::STATE_* constants
@@ -1008,8 +1022,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getTable
-     * returns the table object for this record
+     * returns the table object for this record.
      *
      * @return Doctrine_Table        a Doctrine_Table object
      */
@@ -1019,8 +1032,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getData
-     * return all the internal data
+     * return all the internal data (columns)
      *
      * @return array                        an array containing all the properties
      */
@@ -1030,9 +1042,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * rawGet
-     * returns the value of a property, if the property is not yet loaded
-     * this method does NOT load it
+     * returns the value of a property (column). If the property is not yet loaded
+     * this method does NOT load it.
      *
      * @param $name                         name of the property
      * @throws Doctrine_Record_Exception    if trying to get an unknown property
@@ -1051,10 +1062,10 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * load
-     * Loads all the uninitialized properties from the database.
+     * loads all the uninitialized properties from the database.
      * Used to move a record from PROXY to CLEAN/DIRTY state.
      *
+     * @param array $data  overwriting data to load in the record. Instance is hydrated from the table if not specified.
      * @return boolean
      */
     public function load(array $data = array())
@@ -1075,6 +1086,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
             
             foreach ($data as $field => $value) {
                if ( ! isset($this->_data[$field]) || $this->_data[$field] === self::$_null) {
+                   // Ticket #2031: null value was causing removal of field during load
+                   if ($value === null) { 
+                       $value = self::$_null; 
+                   }
+
                    $this->_data[$field] = $value;
                }
             }
@@ -1092,8 +1108,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Set a fieldname to have a custom accessor or check if a field has a custom
-     * accessor defined
+     * sets a fieldname to have a custom accessor or check if a field has a custom
+     * accessor defined (when called without $accessor parameter).
      *
      * @param string $fieldName 
      * @param string $accessor 
@@ -1110,7 +1126,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Clear the accessor for a field name
+     * clears the accessor for a field name
      *
      * @param string $fieldName 
      * @return void
@@ -1122,7 +1138,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Get the custom accessor for a field name
+     * gets the custom accessor for a field name
      *
      * @param string $fieldName 
      * @return string $accessor
@@ -1136,7 +1152,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Get all accessors for this component instance
+     * gets all accessors for this component instance
      *
      * @return array $accessors
      */
@@ -1147,8 +1163,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Set a fieldname to have a custom mutator or check if a field has a custom
-     * mutator defined
+     * sets a fieldname to have a custom mutator or check if a field has a custom
+     * mutator defined (when called without the $mutator parameter)
      *
      * @param string $fieldName 
      * @param string $mutator 
@@ -1165,10 +1181,10 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Get the custom accessor for a field name
+     * gets the custom mutator for a field name
      *
-     * @param string $fieldName 
-     * @return string $accessor
+     * @param string $fieldname 
+     * @return string
      */
     public function getMutator($fieldName)
     {
@@ -1179,7 +1195,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Clear the mutator for a field name
+     * clears the custom mutator for a field name
      *
      * @param string $fieldName 
      * @return void
@@ -1191,7 +1207,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Get all mutators for this component instance
+     * gets all custom mutators for this component instance
      *
      * @return array $mutators
      */
@@ -1215,10 +1231,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * get
      * returns a value of a property or a related component
      *
-     * @param mixed $name                       name of the property or related component
+     * @param mixed $fieldName                  name of the property or related component
      * @param boolean $load                     whether or not to invoke the loading procedure
      * @throws Doctrine_Record_Exception        if trying to get a value of unknown property / related component
      * @return mixed
@@ -1291,10 +1306,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * mapValue
-     * This simple method is used for mapping values to $values property.
-     * Usually this method is used internally by Doctrine for the mapping of
-     * aggregate values.
+     * sets a value that will be managed as if it were a field by magic accessor and mutators, @see get() and @see set().
+     * Normally used by Doctrine for the mapping of aggregate values.
      *
      * @param string $name                  the name of the mapped value
      * @param mixed $value                  mixed value to be mapped
@@ -1306,9 +1319,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * set
-     * method for altering properties and Doctrine_Record references
-     * if the load parameter is set to false this method will not try to load uninitialized record data
+     * alters mapped values, properties and related components.
      *
      * @param mixed $name                   name of the property or reference
      * @param mixed $value                  value of the property or reference
@@ -1419,13 +1430,21 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
             return $old * 100 != $new * 100;
         } else if (in_array($type, array('integer', 'int')) && is_numeric($old) && is_numeric($new)) {
             return (int) $old !== (int) $new;
+        } else if ($type == 'timestamp' || $type == 'date') {
+            return strtotime($old) !== strtotime($new);
         } else {
             return $old !== $new;
         }
     }
 
     /**
-     * DESCRIBE WHAT THIS METHOD DOES, PLEASE!
+     * Places a related component in the object graph.
+     *
+     * This method inserts a related component instance in this record 
+     * relations, populating the foreign keys accordingly.
+     *
+     * @param string $name                                  related component alias in the relation
+     * @param Doctrine_Record|Doctrine_Collection $value    object to be linked as a related component
      * @todo Refactor. What about composite keys?
      */
     public function coreSetRelated($name, $value)
@@ -1485,9 +1504,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * contains
+     * test whether a field (column, mapped value, related component) is accessible by @see get()
      *
-     * @param string $name
+     * @param string $fieldName
      * @return boolean
      */
     public function contains($fieldName)
@@ -1512,6 +1531,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
+     * deletes a column or a related component.
      * @param string $name
      * @return void
      */
@@ -1531,9 +1551,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getPendingDeletes
+     * returns Doctrine_Record instances which need to be deleted on save
      *
-     * @return array Array of Doctrine_Records instances which need to be deleted on save
+     * @return array
      */
     public function getPendingDeletes()
     {
@@ -1541,7 +1561,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Get pending un links array
+     * returns Doctrine_Record instances which need to be unlinked (deleting the relation) on save
      *
      * @return array $pendingUnlinks
      */
@@ -1551,7 +1571,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Reset pending un links array
+     * resets pending record unlinks
      *
      * @return void
      */
@@ -1567,7 +1587,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * this method also saves the related components
      *
-     * @param Doctrine_Connection $conn                 optional connection parameter
+     * @param Doctrine_Connection $conn     optional connection parameter
+     * @throws Exception                    if record is not valid and validation is active
      * @return void
      */
     public function save(Doctrine_Connection $conn = null)
@@ -1579,7 +1600,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Tries to save the object and all its related components.
+     * tries to save the object and all its related components.
      * In contrast to Doctrine_Record::save(), this method does not
      * throw an exception when validation fails but returns TRUE on
      * success or FALSE on failure.
@@ -1597,8 +1618,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * replace
-     * Execute a SQL REPLACE query. A REPLACE query is identical to a INSERT
+     * executes a SQL REPLACE query. A REPLACE query is identical to a INSERT
      * query, except that if there is already a row in the table with the same
      * key field values, the REPLACE query just updates its values instead of
      * inserting a new row.
@@ -1634,9 +1654,10 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * returns an array of modified fields and associated new values
-     * specify $old = true to retrieve an array with the old values
-     *
+     * retrieves an array of modified fields and associated new values.
+     * 
+     * @param boolean $old      pick the old values (instead of the new ones)
+     * @param boolean $last     pick only lastModified values (@see getLastModified())
      * @return array $a
      */
     public function getModified($old = false, $last = false)
@@ -1659,8 +1680,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * returns an array of the modified fields from the last transaction.
      *
-     * @param boolean $old Whether or not to return the old values instead of the new
-     * @return array $lastModified
+     * @param boolean $old      pick the old values (instead of the new ones)
+     * @return array
      */
     public function getLastModified($old = false)
     {
@@ -1668,10 +1689,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getPrepared
+     * Retrieves data prepared for a sql transaction.
      *
-     * returns an array of modified fields and values with data preparation
-     * adds column aggregation inheritance and converts Records into primary key values
+     * Returns an array of modified fields and values with data preparation;
+     * adds column aggregation inheritance and converts Records into primary 
+     * key values.
      *
      * @param array $array
      * @return array
@@ -1725,8 +1747,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * count
-     * this class implements countable interface
+     * implements Countable interface
      *
      * @return integer          the number of columns in this record
      */
@@ -1736,7 +1757,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * alias for count()
+     * alias for @see count()
      *
      * @return integer          the number of columns in this record
      */
@@ -1746,10 +1767,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * toArray
-     * returns the record as an array
+     * returns the record representation as an array
      *
-     * @param boolean $deep - Return also the relations
+     * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
+     * @param boolean $deep         whether to include relations
+     * @param boolean $prefixKey    not used
      * @return array
      */
     public function toArray($deep = true, $prefixKey = false)
@@ -1768,17 +1790,23 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
                 $value = null;
             }
 
-            $a[$column] = $this->get($column);
+            $columnValue = $this->get($column);
+
+            if ($columnValue instanceof Doctrine_Record) {
+                $a[$column] = $columnValue->getIncremented();
+            } else {
+                $a[$column] = $columnValue;
+            }
         }
 
         if ($this->_table->getIdentifierType() ==  Doctrine::IDENTIFIER_AUTOINC) {
             $i      = $this->_table->getIdentifier();
             $a[$i]  = $this->getIncremented();
         }
-        
+
         if ($deep) {
             foreach ($this->_references as $key => $relation) {
-                if (! $relation instanceof Doctrine_Null) {
+                if ( ! $relation instanceof Doctrine_Null) {
                     $a[$key] = $relation->toArray($deep, $prefixKey);
                 }
             }
@@ -1786,24 +1814,23 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
 
         // [FIX] Prevent mapped Doctrine_Records from being displayed fully
         foreach ($this->_values as $key => $value) {
-            if ($value instanceof Doctrine_Record) {
-                $a[$key] = $value->toArray($deep, $prefixKey);
-            } else {
-                $a[$key] = $value;
-            }
+            $a[$key] = ($value instanceof Doctrine_Record)
+                ? $value->toArray($deep, $prefixKey) : $value;
         }
-        
+
         $this->_state = $stateBeforeLock;
 
         return $a;
     }
 
     /**
-     * Merges this record with an array of values
+     * merges this record with an array of values
      * or with another existing instance of this object
      *
-     * @param  mixed $data Data to merge. Either another instance of this model or an array
-     * @param  bool  $deep Bool value for whether or not to merge the data deep
+     * @see fromArray()
+     * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
+     * @param string $array  array of data to merge, see link for documentation
+     * @param bool   $deep   whether or not to merge relations
      * @return void
      */
     public function merge($data, $deep = true)
@@ -1818,11 +1845,12 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Import data from a php array
+     * imports data from a php array
      *
-     * @param   string $array Php array of data
-     * @param   bool   $deep  Bool value for whether or not to merge the data deep
-     * @return  void
+     * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
+     * @param string $array  array of data, see link for documentation
+     * @param bool   $deep   whether or not to act on relations
+     * @return void
      */
     public function fromArray(array $array, $deep = true)
     {
@@ -1849,14 +1877,16 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
                         $this->$key->fromArray($value, $deep);
                     }
                 }
-            } else if ($this->getTable()->hasField($key)) {
+            } else if ($this->getTable()->hasField($key) || array_key_exists($key, $this->_values)) {
                 $this->set($key, $value);
             } else {
                 $method = 'set' . Doctrine_Inflector::classify($key);
 
-                if (method_exists($this, $method)) { 
-                    $this->$method($value); 
-                }
+                try {
+                    if (is_callable(array($this, $method))) {
+                        $this->$method($value);
+                    }
+                } catch (Doctrine_Record_Exception $e) {}
             }
         }
 
@@ -1866,14 +1896,16 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * Synchronizes a Doctrine_Record and its relations with data from an array
+     * synchronizes a Doctrine_Record instance and its relations with data from an array
      *
      * it expects an array representation of a Doctrine_Record similar to the return
      * value of the toArray() method. If the array contains relations it will create
      * those that don't exist, update the ones that do, and delete the ones missing
-     * on the array but available on the Doctrine_Record
+     * on the array but available on the Doctrine_Record (unlike @see fromArray() that
+     * does not touch what it is not in $array)
      *
      * @param array $array representation of a Doctrine_Record
+     * @param bool   $deep   whether or not to act on relations
      */
     public function synchronizeWithArray(array $array, $deep = true)
     {
@@ -1900,15 +1932,16 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
                         $this->$key->synchronizeWithArray($value);
                     }
                 }
-            } else if ($this->getTable()->hasField($key)) {
+            } else if ($this->getTable()->hasField($key) || array_key_exists($key, $this->_values)) {
                 $this->set($key, $value);
             }
         }
 
-        // eliminate relationships missing in the $array
+        // Eliminate relationships missing in the $array
         foreach ($this->_references as $name => $relation) {
-            
-            if ( ! isset($array[$name])) {
+	        $rel = $this->getTable()->getRelation($name);
+	
+			if ( ! isset($array[$name]) && ( ! $rel->isOneToOne() || ! isset($array[$rel->getLocalFieldName()]))) {
                 unset($this->$name);
             }
         }
@@ -1919,11 +1952,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * exportTo
+     * exports instance to a chosen format
      *
-     * @param string $type Format type: xml, yml, json
-     * @param string $deep Whether or not to export deep in to all relationships
-     * @return mixed $exported
+     * @param string $type  format type: array, xml, yml, json
+     * @param string $deep  whether or not to export all relationships
+     * @return string       representation as $type format. Array is $type is array
      */
     public function exportTo($type, $deep = true)
     {
@@ -1935,9 +1968,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * importFrom
-     *
-     * Import data from an external data source
+     * imports data from a chosen format in the current instance
      *
      * @param string $type  Format type: xml, yml, json
      * @param string $data  Data to be parsed and imported
@@ -1953,8 +1984,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * exists
-     * returns true if this record is persistent, otherwise false
+     * returns true if this record is saved in the database, otherwise false (it is transient)
      *
      * @return boolean
      */
@@ -1967,9 +1997,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * isModified
      * returns true if this record was modified, otherwise false
      *
+     * @param boolean $deep     whether to process also the relations for changes
      * @return boolean
      */
     public function isModified($deep = false)
@@ -2003,8 +2033,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * method for checking existence of properties and Doctrine_Record references
-     * @param mixed $name               name of the property or reference
+     * checks existence of properties and related components
+     * @param mixed $fieldName   name of the property or reference
      * @return boolean
      */
     public function hasRelation($fieldName)
@@ -2016,8 +2046,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getIterator
-     * @return Doctrine_Record_Iterator     a Doctrine_Record_Iterator that iterates through the data
+     * implements IteratorAggregate interface
+     * @return Doctrine_Record_Iterator     iterator through data
      */
     public function getIterator()
     {
@@ -2030,7 +2060,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * this event can be listened by the onPreDelete and onDelete listeners
      *
-     * @return boolean      true on success, false on failure
+     * @return boolean      true if successful
      */
     public function delete(Doctrine_Connection $conn = null)
     {
@@ -2041,9 +2071,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * copy
-     * returns a copy of this object
+     * generates a copy of this object. Returns an instance of the same class of $this.
      *
+     * @param boolean $deep     whether to duplicates the objects targeted by the relations
      * @return Doctrine_Record
      */
     public function copy($deep = false)
@@ -2081,9 +2111,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * assignIdentifier
+     * assigns an identifier to the instance, for database storage
      *
-     * @param integer $id
+     * @param mixed $id     a key value or an array of keys
      * @return void
      */
     public function assignIdentifier($id = false)
@@ -2141,7 +2171,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
 
     /**
      * getLast
-     * this method is used internally be Doctrine_Query
+     * this method is used internally by Doctrine_Query
      * it is needed to provide compatibility between
      * records and collections
      *
@@ -2153,8 +2183,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * hasRefence
-     * @param string $name
+     * tests whether a relation is set
+     * @param string $name  relation alias
      * @return boolean
      */
     public function hasReference($name)
@@ -2163,9 +2193,10 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * reference
+     * gets a related component
      *
      * @param string $name
+     * @return Doctrine_Record|Doctrine_Collection
      */
     public function reference($name)
     {
@@ -2175,7 +2206,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * obtainReference
+     * gets a related component and fails if it does not exist
      *
      * @param string $name
      * @throws Doctrine_Record_Exception        if trying to get an unknown related component
@@ -2189,8 +2220,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getReferences
-     * @return array    all references
+     * get all related components
+     * @return array    various Doctrine_Collection or Doctrine_Record instances
      */
     public function getReferences()
     {
@@ -2198,7 +2229,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * setRelated
+     * set a related component
      *
      * @param string $alias
      * @param Doctrine_Access $coll
@@ -2213,7 +2244,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * loads a related component
      *
      * @throws Doctrine_Table_Exception             if trying to load an unknown related component
-     * @param string $name
+     * @param string $name                          alias of the relation
      * @return void
      */
     public function loadReference($name)
@@ -2228,7 +2259,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * @param string|array $callback    valid callback
      * @param string $column            column name
      * @param mixed arg1 ... argN       optional callback arguments
-     * @return Doctrine_Record
+     * @return Doctrine_Record provides a fluent interface
      */
     public function call($callback, $column)
     {
@@ -2247,9 +2278,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * getter for node assciated with this record
+     * getter for node associated with this record
      *
-     * @return mixed if tree returns Doctrine_Node otherwise returns false
+     * @return Doctrine_Node    false if component is not a Tree
      */
     public function getNode()
     {
@@ -2279,8 +2310,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @param string $alias     related component alias
      * @param array $ids        the identifiers of the related records
-     * @param boolean $now      wether or not to execute now or set pending
-     * @return Doctrine_Record  this object
+     * @param boolean $now      whether or not to execute now or set as pending unlinks
+     * @return Doctrine_Record  this object (fluent interface)
      */
     public function unlink($alias, $ids = array(), $now = false)
     {
@@ -2316,6 +2347,12 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         }
     }
 
+    /**
+     * unlink now the related components, querying the db
+     * @param string $alias     related component alias
+     * @param array $ids        the identifiers of the related records
+     * @return Doctrine_Record  this object (fluent interface)
+     */
     public function unlinkInDb($alias, $ids = array())
     {
         $q = new Doctrine_Query();
@@ -2347,13 +2384,12 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * link
      * creates links from this record to given records
      *
      * @param string $alias     related component alias
      * @param array $ids        the identifiers of the related records
      * @param boolean $now      wether or not to execute now or set pending
-     * @return Doctrine_Record  this object
+     * @return Doctrine_Record  this object (fluent interface)
      */
     public function link($alias, $ids, $now = false)
     {
@@ -2385,6 +2421,13 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
         }
     }
 
+    /**
+     * creates links from this record to given records now, querying the db
+     *
+     * @param string $alias     related component alias
+     * @param array $ids        the identifiers of the related records
+     * @return Doctrine_Record  this object (fluent interface)
+     */
     public function linkInDb($alias, $ids)
     {
         $identifier = array_values($this->identifier());
@@ -2445,7 +2488,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
 
     /**
      * Reset the modified array and store the old array in lastModified so it 
-     * can be accessed by users after saving a record since the modified array 
+     * can be accessed by users after saving a record, since the modified array 
      * is reset after the object is saved.
      *
      * @return void
@@ -2459,11 +2502,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * __call
-     * this method is a magic method that is being used for method overloading
+     * magic method used for method overloading
      *
-     * the function of this method is to try to find given method from the templates
-     * this record is using and if it finds given method it will execute it
+     * the function of this method is to try to find a given method from the templates (behaviors)
+     * the record is using, and if found, execute it. Note that already existing methods would not be
+     * overloaded.
      *
      * So, in sense, this method replicates the usage of mixins (as seen in some programming languages)
      *
@@ -2505,6 +2548,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * from the instance pool.
      * Note: The entity is no longer useable after free() has been called. Any operations
      * done with the entity afterwards can lead to unpredictable results.
+     * @param boolean $deep     whether to free also the related components
      */
     public function free($deep = false)
     {
@@ -2531,7 +2575,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * __toString alias
      *
-     * @return string $dump
+     * @return string
      */
     public function toString()
     {
@@ -2539,7 +2583,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     }
 
     /**
-     * returns a string representation of this object
+     * magic method
+     * @return string representation of this object
      */
     public function __toString()
     {

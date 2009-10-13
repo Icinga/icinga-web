@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Interface.php 4706 2008-07-23 21:21:13Z guilhermeblanco $
+ *  $Id: Interface.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 4706 $
+ * @version     $Revision: 5876 $
  * @author      Joe Simms <joe.simms@websites4.com>
  */
 interface Doctrine_Tree_Interface {
@@ -35,14 +35,14 @@ interface Doctrine_Tree_Interface {
     /**
      * creates root node from given record or from a new record
      *
-     * @param object $record                    instance of Doctrine_Record
+     * @param Doctrine_Record $record                    instance of Doctrine_Record
      */
     public function createRoot(Doctrine_Record $record = null);
 
     /**
      * returns root node
      *
-     * @return object $record                   instance of Doctrine_Record
+     * @return Doctrine_Record
      */
     public function findRoot($root_id = 1);
 
@@ -51,7 +51,7 @@ interface Doctrine_Tree_Interface {
      *
      * @param array $options                    options
      * @param integer $fetchmode  One of the Doctrine::HYDRATE_* constants.
-     * @return object $iterator                 instance of Doctrine_Node_<Implementation>_PreOrderIterator
+     * @return Iterator                 instance of Doctrine_Node_<Implementation>_PreOrderIterator
      */
     public function fetchTree($options = array(), $hydrationMode = null);
 

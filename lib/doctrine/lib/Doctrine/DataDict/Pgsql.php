@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 5440 2009-01-30 22:41:39Z Kronuz $
+ *  $Id: Pgsql.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Paul Cooper <pgc@ucecom.com>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 5440 $
+ * @version     $Revision: 5798 $
  * @link        www.phpdoctrine.org
  * @since       1.0
  */
@@ -502,6 +502,7 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
             case 'interval':
             case '_varchar':
                 $fixed = false;
+            case 'tsvector':
             case 'unknown':
             case 'char':
             case 'bpchar':
@@ -524,6 +525,7 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
                 break;
             case 'datetime':
             case 'timestamp':
+            case 'timetz':
             case 'timestamptz':
                 $type[] = 'timestamp';
                 $length = null;

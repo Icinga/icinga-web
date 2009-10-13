@@ -27,6 +27,12 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		return $string;
 	}
 	
+	/**
+	 * Convert bytes to an human readable string
+	 * @param integer $val
+	 * @param $arg
+	 * @return string
+	 */
 	public static function bytesReadable($val, $arg = false) {
 		$a =& $val;
 
@@ -48,11 +54,25 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		return preg_match('@%([bcdeufFosxX]|\d+\$[bcdeufFosxX])@',  $string);
 	}
 	
+	/**
+	 * Calculates the real web path, not affected by
+	 * rewrite and agavi routing
+	 * 
+	 * @return string
+	 */
 	public function extractWebPath() {
+		// Starting with the complete string
 		$request_uri = $_SERVER['REQUEST_URI'];
 		
+		// Remove the fake path from the 
+		// uri
 		if ($_SERVER['QUERY_STRING']) {
-			$request_uri = str_replace($_SERVER['QUERY_STRING'], '', $request_uri);
+			$request_uri = preg_replace('@'. preg_quote($_SERVER['QUERY_STRING']). '$@', '', $request_uri);
+		}
+		
+		// Take care about the leading slash
+		if (!preg_match('@^\/@', $request_uri)) {
+			$request_uri = '/'. $request_uri;
 		}
 		
 		return $request_uri;

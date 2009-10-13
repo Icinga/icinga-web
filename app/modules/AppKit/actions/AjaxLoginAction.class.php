@@ -14,9 +14,43 @@ class AppKit_AjaxLoginAction extends ICINGAAppKitBaseAction
 	 *                     executed.</li>
 	 *                   </ul>
 	 */
-	public function getDefaultViewName()
-	{
+	public function getDefaultViewName() {
 		return 'Success';
+	}
+	
+	public function executeRead(AgaviRequestDataHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviRequestDataHolder $rd) {
+		$username = $rd->getParameter('username');
+		$password = $rd->getParameter('password');
+		$do = $rd->getParameter('dologin');
+				
+		$this->setAttribute('authenticated', false);
+		$this->setAttribute('executed', false);
+		
+		
+		if ($do) {
+		
+			$this->setAttribute('executed', true);
+			$user = $this->getContext()->getUser();
+			
+			try {
+				$user->doLogin($username, $password);
+				$this->setAttribute('authenticated', true);
+			}
+			catch (AppKitSecurityUserException $e) {
+				$this->setAttribute('authenticated', false);
+			}
+		
+		}
+		
+		return $this->getDefaultViewName();
+	}
+	
+	public function handleError(AgaviRequestDataHolder $rd) {
+		return $this->getDefaultViewName();
 	}
 }
 

@@ -9,9 +9,6 @@ A list of foreigh component and frameworks used by icinga-web:
 	  
 	* ExtJS
 	  Javascript widget and ajax library
-	  
-	* Google Code Prettify
-	  Colourize source code
 	
 	* Icinga-API ;-)
 	  Data abstraction layer between icinga-core and other software

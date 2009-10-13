@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Relation.php 5268 2008-12-04 23:26:12Z jwage $
+ *  $Id: Relation.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5268 $
+ * @version     $Revision: 5876 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Relation implements ArrayAccess
@@ -49,6 +49,9 @@ abstract class Doctrine_Relation implements ArrayAccess
     
     // TRUE => mandatory, everything else is just a default value. this should be refactored
     // since TRUE can bot be used as a default value this way. All values should be default values.
+    /**
+     * @var array $definition   @see __construct()
+     */
     protected $definition = array('alias'       => true,
                                   'foreign'     => true,
                                   'local'       => true,
@@ -232,7 +235,7 @@ abstract class Doctrine_Relation implements ArrayAccess
      * getTable
      * returns the foreign table object
      *
-     * @return object Doctrine_Table
+     * @return Doctrine_Table
      */
     final public function getTable()
     {
@@ -245,7 +248,7 @@ abstract class Doctrine_Relation implements ArrayAccess
      * getClass
      * returns the name of the related class
      *
-     * @return object Doctrine_Record
+     * @return string
      */
     final public function getClass()
     {

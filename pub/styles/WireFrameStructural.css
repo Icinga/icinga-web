@@ -112,7 +112,10 @@ div.footerContent, div.footerContent a {
 }
 
 div#contentArea {
-	margin-left: 200px;	
+	/**
+	 * No really needed if we do not use the slot
+	 * for the left navigation
+	/* margin-left: 200px; */	
 	padding: 0px 10px 10px 10px;
 }
 

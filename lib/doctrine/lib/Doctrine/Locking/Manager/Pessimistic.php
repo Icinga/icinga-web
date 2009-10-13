@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pessimistic.php 4104 2008-03-24 01:06:27Z jwage $
+ *  $Id: Pessimistic.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -32,7 +32,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @since       1.0
- * @version     $Revision: 4104 $
+ * @version     $Revision: 5876 $
  */
 class Doctrine_Locking_Manager_Pessimistic
 {
@@ -200,8 +200,8 @@ class Doctrine_Locking_Manager_Pessimistic
      * Gets the unique user identifier of a lock
      *
      * @param  string $objectType  The type of the object (component name)
-     * @param  mixed  $key         The unique key of the object
-     * @return mixed  The unique user identifier for the specified lock
+     * @param  mixed  $key         The unique key of the object. Can be string or array
+     * @return string              The unique user identifier for the specified lock
      * @throws Doctrine_Locking_Exception If the query failed due to database errors
      */
     private function _getLockingUserIdent($objectType, $key)

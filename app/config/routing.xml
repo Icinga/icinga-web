@@ -4,28 +4,25 @@
 		<routes>
 		
 			<!-- INDEX -->
-			<route name="index_page" pattern="^/$" module="%actions.default_module%" action="%actions.default_action%" />
+			<route name="index_page" pattern="^/$" module="Web" action="Index" />
 		
 			<!-- ICINGAAppKit routes -->
-			<route name="appkit" pattern="^/appkit" module="%actions.default_module%" action="%actions.default_action%">
+			<route name="appkit" pattern="^/appkit" module="%actions.default_module%">
 				
 				<!-- Get an image -->
-				<route name="appkit.image" pattern="^/image/(image:[\w\d-_\/\.]+)$" action="Widgets.ShowImage" output_type="image" />
+				<route name=".image" pattern="^/image/(image:[\w\d-_\/\.]+)$" action="Widgets.ShowImage" output_type="image" />
 				
-				<route name="appkit.login" pattern="^/login" action="Login"/>
+				<!-- <route name="appkit.login" pattern="^/login" action="Login"/> -->
 				
-				<!--
-				Later for ajax logins 
-				<route name="appkit.login" pattern="^/login" action="AjaxLogin">
-					<route name="appkit.login.provider" pattern="^/json" action="AjaxLogin" output_type="json" />
+				<route name=".login" pattern="^/login" action="AjaxLogin">
+					<route name=".provider" pattern="^/json" output_type="json" />
 				</route>
-				-->
 				
-				<route name="appkit.logout" pattern="^/logout" action="Logout"/>
+				<route name=".logout" pattern="^/logout" action="Logout"/>
 				
-				<route name="appkit.about" pattern="^/about" action="%actions.default_action%"/>
+				<route name=".about" pattern="^/about" action="%actions.default_action%"/>
 				
-				<route name="appkit.squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simplecontent" />
+				<route name=".squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simplecontent" />
 				
 				<!-- AJAX handlers -->
 				<!-- 
@@ -80,7 +77,8 @@
 			<route name="icinga" pattern="^/web" module="Web">
 			
 				<!-- Icinga index route -->
-				<route pattern="^$" action="Index" />
+				<route name=".home" pattern="^$" action="Index" />
+				<route name=".about" pattern="^/about$" action="Index" />
 				
 				<!-- The main view -->
 				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />

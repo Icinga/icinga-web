@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 5276 2008-12-06 19:45:16Z guilhermeblanco $
+ *  $Id: Pgsql.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 5276 $
+ * @version     $Revision: 5798 $
  * @link        www.phpdoctrine.org
  * @since       1.0
  */

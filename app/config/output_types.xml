@@ -42,9 +42,11 @@
 								<parameter name="type">top</parameter>
 							</slot>
 							
+							<!--
 							<slot name="navigation_left" module="AppKit" action="Widgets.ShowNavigation">
 								<parameter name="type">left</parameter>
 							</slot>
+							-->
 							
 							<!-- Errors -->
 							<slot name="error_frame" module="AppKit" action="Widgets.ShowErrors">
@@ -90,8 +92,8 @@
 			
 			<output_type name="json">
 				<parameter name="http_headers">
-					<parameter name="Content-Type">text/x-json; charset=UTF-8</parameter>
-					<!-- <parameter name="Content-Type">text/plain; charset=UTF-8</parameter> -->
+					<!-- <parameter name="Content-Type">text/x-json; charset=UTF-8</parameter> -->
+					<parameter name="Content-Type">text/plain; charset=UTF-8</parameter>
 				</parameter>
 			</output_type>
 			

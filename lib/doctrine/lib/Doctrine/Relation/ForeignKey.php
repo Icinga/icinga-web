@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: ForeignKey.php 4252 2008-04-19 07:37:53Z jwage $
+ *  $Id: ForeignKey.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 4252 $
+ * @version     $Revision: 5798 $
  */
 class Doctrine_Relation_ForeignKey extends Doctrine_Relation
 {

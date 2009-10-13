@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Collection.php 5047 2008-10-03 01:54:03Z jwage $
+ *  $Id: Collection.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 5047 $
+ * @version     $Revision: 5876 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Collection extends Doctrine_Access implements Countable, IteratorAggregate, Serializable
@@ -215,7 +215,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Get the first record in the collection
      *
-     * @return mixed
+     * @return Doctrine_Record
      */
     public function getFirst()
     {
@@ -225,7 +225,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Get the last record in the collection
      *
-     * @return mixed
+     * @return Doctrine_Record
      */
     public function getLast()
     {
@@ -235,7 +235,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Get the last record in the collection
      *
-     * @return mixed
+     * @return Doctrine_Record
      */
     public function end()
     {
@@ -245,7 +245,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Get the current key
      *
-     * @return mixed
+     * @return Doctrine_Record
      */
     public function key()
     {
@@ -920,7 +920,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Get collection data iterator
      *
-     * @return object ArrayIterator
+     * @return Iterator
      */
     public function getIterator()
     {
@@ -941,7 +941,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Returns the relation object
      *
-     * @return object Doctrine_Relation
+     * @return Doctrine_Relation
      */
     public function getRelation()
     {

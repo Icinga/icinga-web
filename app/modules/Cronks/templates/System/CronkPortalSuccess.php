@@ -228,6 +228,7 @@ container.setHeight(Ext.lib.Dom.getViewHeight()-80);
 // Render the container
 container.render("<?php echo $parentid; ?>");
 
+
 // Adding the first cronk (say hello here)
 if (tabPanel) {
 	var cHello = AppKit.Ext.CronkMgr.create({

@@ -18,6 +18,10 @@ class Web_Icinga_PortalViewAction extends ICINGAWebBaseAction
 	{
 		return 'Success';
 	}
+	
+	public function isSecure() {
+		return true;
+	}
 }
 
 ?>

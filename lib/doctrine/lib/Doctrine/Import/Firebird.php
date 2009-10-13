@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 4252 2008-04-19 07:37:53Z jwage $
+ *  $Id: Firebird.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lorenzo Alberton <l.alberton@quipo.it> (PEAR MDB2 Interbase driver)
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 4252 $
+ * @version     $Revision: 5876 $
  * @link        www.phpdoctrine.org
  * @since       1.0
  */
@@ -48,7 +48,7 @@ class Doctrine_Import_Firebird extends Doctrine_Import
      * list all fields in a tables in the current database
      *
      * @param string $table name of table that should be used in method
-     * @return mixed data array on success, a MDB2 error on failure
+     * @return array    can be a MDB2 error (on failure)
      * @access public
      */
     public function listTableColumns($table)

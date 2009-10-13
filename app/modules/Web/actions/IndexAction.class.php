@@ -23,6 +23,10 @@ class Web_IndexAction extends ICINGAWebBaseAction
 		return $this->getDefaultViewName();
 		
 	}
+	
+	public function isSecure() {
+		return true;
+	}
 }
 
 ?>

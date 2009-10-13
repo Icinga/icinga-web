@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Firebird.php 4252 2008-04-19 07:37:53Z jwage $
+ *  $Id: Firebird.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,7 +30,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 4252 $
+ * @version     $Revision: 5876 $
  */
 class Doctrine_Export_Firebird extends Doctrine_Export
 {
@@ -205,8 +205,7 @@ class Doctrine_Export_Firebird extends Doctrine_Export
      * drop an existing table
      *
      * @param string $name name of the table that should be dropped
-     * @return mixed MDB2_OK on success, a MDB2 error on failure
-     * @access public
+     * @return void
      */
     public function dropTable($name)
     {

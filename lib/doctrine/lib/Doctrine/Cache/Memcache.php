@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Memcache.php 4520 2008-06-13 22:29:22Z jwage $
+ *  $Id: Memcache.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        www.phpdoctrine.org
  * @since       1.0
- * @version     $Revision: 4520 $
+ * @version     $Revision: 5798 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Cache_Memcache extends Doctrine_Cache_Driver
@@ -80,7 +80,7 @@ class Doctrine_Cache_Memcache extends Doctrine_Cache_Driver
      */
     public function fetch($id, $testCacheValidity = true) 
     {
-        return $this->_memcache->get($id);
+        return $this->_memcache->get($this->_getKey($id));
     }
 
     /**
@@ -91,7 +91,7 @@ class Doctrine_Cache_Memcache extends Doctrine_Cache_Driver
      */
     public function contains($id) 
     {
-        return (bool) $this->_memcache->get($id);
+        return (bool) $this->_memcache->get($this->_getKey($id));
     }
 
     /**
@@ -112,7 +112,7 @@ class Doctrine_Cache_Memcache extends Doctrine_Cache_Driver
             $flag = 0;
         }
 
-        $result = $this->_memcache->set($id, $data, $flag, $lifeTime);
+        $result = $this->_memcache->set($this->_getKey($id), $data, $flag, $lifeTime);
     }
 
     /**
@@ -123,6 +123,6 @@ class Doctrine_Cache_Memcache extends Doctrine_Cache_Driver
      */
     public function delete($id) 
     {
-        return $this->_memcache->delete($id);
+        return $this->_memcache->delete($this->_getKey($id));
     }
 }
