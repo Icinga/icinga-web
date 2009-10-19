@@ -109,6 +109,41 @@
             </order>
         </field>     
 
+		<field name="notification_type">
+        	<datasource>
+        		<parameter name="field">NOTIFY_TYPE</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Type</parameter>
+                
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+                
+                <parameter name="phpFunc">
+                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="method">icingaConstants</parameter>
+					<parameter name="arguments">
+						<parameter name="type">notificationType</parameter>
+					</parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field> 
+
         <field name="notification_host">
         	<datasource>
         		<parameter name="field">HOST_NAME</parameter>
@@ -124,7 +159,7 @@
             </filter>
             
             <order>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field> 
@@ -137,6 +172,12 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Service</parameter>
+                <parameter name="jsFunc">
+                	<parameter>
+                		<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                		<parameter name="function">nullDisplay</parameter>
+                	</parameter>
+                </parameter>
             </display>
             
             <filter>
@@ -144,7 +185,7 @@
             </filter>
             
             <order>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>

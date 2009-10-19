@@ -20,7 +20,7 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 		
 		if (($m = $ref->getMethod($type))) {
 			if ($m->isPublic() && $m->isStatic()) {
-				return  $m->invoke(null, $val);
+				return  $this->getAgaviTranslationManager()->_($m->invoke(null, $val));
 			}
 		}
 		

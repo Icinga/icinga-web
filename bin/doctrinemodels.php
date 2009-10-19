@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 require_once(dirname(dirname(__FILE__)). '/lib/doctrine/lib/Doctrine.php');

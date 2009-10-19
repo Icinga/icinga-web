@@ -25,6 +25,11 @@ class IcingaConstantResolver {
 		1	=> 'Yes',
 	);
 	
+	static private $notification_types = array (
+		0	=> 'Host',
+		1	=> 'Service'
+	);
+	
 	static private $logentry_types = array (
 		IcingaConstants::NSLOG_RUNTIME_ERROR			=> "runtime error",
 		IcingaConstants::NSLOG_RUNTIME_WARNING			=> "runtime warning",
@@ -88,12 +93,21 @@ class IcingaConstantResolver {
 	}
 	
 	/**
-	 * 
+	 * Return the logentrytype
 	 * @param $key
 	 * @return string
 	 */
 	public static function logentryType($key) {
 		return self::resolveArrayConstants(self::$logentry_types, $key);
+	}
+	
+	/**
+	 * Returns the notification type
+	 * @param $key
+	 * @return unknown_type
+	 */
+	public static function notificationType($key) {
+		return self::resolveArrayConstants(self::$notification_types, $key);
 	}
 	
 }

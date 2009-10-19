@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="ICINGAAppKit" default="hello" basedir="..">
+<project name="icinga-web" default="hello" basedir="..">
+	
+	<!-- Default tstamp properties -->
+	<tstamp />
 	
 	<!-- Load our default property file -->
 	<property name="properties" value="etc/build.properties" override="false" />
@@ -9,36 +12,116 @@
 	<property environment="env"/>
 	<property name="package" value="${phing.project.name}" override="true" />
 	<property name="srcdir" value="${project.basedir}" override="true" />
-	<property name="builddir" value=".build" override="false" />
+	<property name="builddir" value="${srcdir}/.build" override="false" />
 	
 	<target name="hello">
-		<echo msg="Welcome to the ICINGA AppKit build system" />
+		<echo msg="Welcome to the icinga-web build system" />
 		<echo msg="Project: ${package}" />
 		<echo msg="Srcdir: ${srcdir}" />
 	</target>
 	
 	<target name="prepare">
 		<mkdir dir="${builddir}" />
-		<fail unless="appkit.targetdir" message="appkit.targetdir is empty!" />
 	</target>
 	
-	<target name="apache2-config">
-		<phingcall target="prepare" />
+	<target name="db-prepare" depends="prepare">
+		<property name="db.base" value="${srcdir}/etc/database" />
+		<property name="db.deltas" value="${db.base}/deltas" />
+		<property name="db.deploy" value="${db.base}/deploy" />
 		
-		<copy todir="${builddir}" overwrite="yes">
-			<fileset dir="${appkit.etcdir}">
-				<include name="${httpd.file}" />
-			</fileset>
-			
-			<filterchain>
-				<replacetokens>
-					<token key="server_listen" value="${httpd.server_listen}" />
-					<token key="server_name" value="${httpd.server_name}" />
-					<token key="server_root" value="${httpd.server_root}" />
-					<token key="appkit_target" value="${appkit.targetdir}" />
-				</replacetokens>
-			</filterchain>
-		</copy>
+		<property name="db.deploy.deploy_file" value="${db.deploy}/db-deploy.sql" />
+		<property name="db.deploy.undo_file" value="${db.deploy}/db-undo.sql" />
 	</target>
+	
+	<target name="db-create" depends="db-prepare">
+		
+		<property name="db.sql.create" value="CREATE DATABASE ${db.name};" />
+		
+		<exec
+			command="${db.mysql.call_global} -e '${db.sql.create}'"
+			dir="${builddir}"
+			passthru="true"
+			checkreturn="false" />
+	</target>
+	
+	<target name="db-drop" depends="db-prepare">
+		
+		<property name="db.sql.drop" value="DROP DATABASE ${db.name};" />
+		
+		<exec
+			command="${db.mysql.call_global} -e '${db.sql.drop}'"
+			dir="${builddir}"
+			passthru="true"
+			checkreturn="false" />
+	</target>
+	
+	<target name="db-init" depends="db-prepare">
+		<property name="db.init_file" value="${db.base}/deploy/init.sql" />
+		
+		<exec
+			command="${db.mysql.call} &lt; ${db.init_file}"
+			dir="${builddir}"
+			checkreturn="true" />
+	</target>
+	
+	<target name="db-createdeploy" depends="db-prepare">
+		
+		<!-- deploy tasks -->
+		<taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+		
+		<dbdeploy  
+			url="${db.dsn}"  
+			userid="${db.user}"  
+			password="${db.pass}"  
+			dir="${db.deltas}" 
+			outputfile="${db.deploy.deploy_file}"  
+			undooutputfile="${db.deploy.undo_file}" />
+		
+	</target>
+	
+	<target name="db-deploycurrent" depends="db-prepare">
+	
+		<exec
+			command="${db.mysql.call} &lt; ${db.deploy.deploy_file}"
+			dir="${builddir}"
+			checkreturn="true" />
+		
+	</target>
+	
+	<target name="db-undeploycurrent" depends="db-prepare">
+		
+		<exec
+			command="${db.mysql.call} &lt; ${db.deploy.undo_file}"
+			dir="${builddir}"
+			checkreturn="true" />
+			
+	</target>
+	
+	<target name="db-initialize" depends="db-prepare">
+		
+		<phingcall target="db-create" />
+		<phingcall target="db-init" />
+		<phingcall target="db-createdeploy" />
+		<phingcall target="db-deploycurrent" />
+		
+	</target>
+	
+	<target name="db-deinitialize" depends="db-prepare">
+			
+		<phingcall target="db-createdeploy" />
+		<phingcall target="db-undeploycurrent" />
+		<phingcall target="db-drop" />
+			
+	</target>
+	
+	<target name="testdeps" depends="prepare">
+		<property name="build.testdeps" value="${srcdir}/bin/testdeps.php" />
+		<exec
+			command="${php.bin} ${build.testdeps}"
+			dir="${builddir}"
+			passthru="true" 
+			checkreturn="true" />
+	</target>
+
 	
 </project>
