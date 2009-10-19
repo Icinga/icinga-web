@@ -25,7 +25,7 @@
 				<?php echo $slots['navigation_left']; ?>
 				
 				<div id="contentArea">
-				<?php if(isset($t['title'])) echo '<h1>' . htmlspecialchars($t['title']) . '</h1>'; ?>
+				<?php if(isset($t['title'])) echo '<h1 class="pageTitle">' . htmlspecialchars($t['title']) . '</h1>'; ?>
 				
 				<?php echo $slots['error_frame']; ?>
 				

@@ -123,7 +123,7 @@
 			<parameter name="action">System.PortalView</parameter>
 			<parameter name="hide">false</parameter>
 			<parameter name="description">Portalgrid 1 column</parameter>
-			<parameter name="name">Portal 1columns</parameter>
+			<parameter name="name">Portal 1column</parameter>
 			<parameter name="image">cronks.portal</parameter>
 			<parameter name="parameter">
 				<parameter name="columns">1</parameter>
