@@ -10,7 +10,7 @@
     </div></div></div>
     <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" defer="defer">
 (function() {
 
 	var bAuthenticated = false;
