@@ -196,7 +196,7 @@ var container = new Ext.Panel({
         maxSize: 400,
         width: 200,
         collapsible: true,
-        margins: '0 0 0 5',
+        margins: '0 0 0 0',
         
         layout: {
         	type: 'accordion',
