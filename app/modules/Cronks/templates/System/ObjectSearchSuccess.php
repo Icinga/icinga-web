@@ -388,7 +388,7 @@
 			padding: '2px 2px 2px 2px'
 		},
 		
-		items: [oTextField],
+		items: [oTextField]
 	});
 	
 	coParent.add(oSearch);
