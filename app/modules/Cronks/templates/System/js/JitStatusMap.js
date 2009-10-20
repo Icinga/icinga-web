@@ -198,7 +198,7 @@ function JitStatusMap (config) {
 			callback : this.getMapDataDefault,
 			scope: this,
 			timeout : this.config.timeout,
-			disableCaching : this.config.disableCaching,
+			disableCaching : this.config.disableCaching
 		});
 	}
 	

@@ -17,11 +17,11 @@ var dummyCronkDisplayStateSummary = function () {
 		panelDefs : {
 			host : {
 				itemId : AppKit.Ext.genRandomId("cronk"),
-				title : false,
+				title : false
 			},
 			service : {
 				itemId : AppKit.Ext.genRandomId("cronk"),
-				title : false,
+				title : false
 			},
 			chart : {
 				itemId : AppKit.Ext.genRandomId("cronk"),
@@ -234,7 +234,7 @@ var dummyCronkDisplayStateSummary = function () {
 				callback : this.showChartAjaxDefault,
 				scope: this,
 				timeout : 50000,
-				disableCaching : true,
+				disableCaching : true
 			});
 		},
 

@@ -195,6 +195,7 @@
 	<setting name="appkit.include_dynamic_javascript">
 		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
 		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
+		<parameter name="Cronks.JitExCanvas">%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
 	</setting>
 
 	<!--
