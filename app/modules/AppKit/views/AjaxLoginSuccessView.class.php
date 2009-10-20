@@ -5,7 +5,7 @@ class AppKit_AjaxLoginSuccessView extends ICINGAAppKitBaseView
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);
-		$this->setAttribute('title', 'Login');
+		// $this->setAttribute('title', 'Login');
 	}
 	
 	public function executeJson(AgaviRequestDataHolder $rd) {

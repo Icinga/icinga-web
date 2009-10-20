@@ -40,5 +40,10 @@ class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
 		
 		return date($format, $date);
 	}
+	
+	public function agaviDateFormat($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+		$tm = $this->getAgaviTranslationManager();
+		return $tm->_d($val);
+	}
 }
 ?>

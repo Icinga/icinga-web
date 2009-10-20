@@ -308,6 +308,10 @@ table.icinga-attribute-table td.val {
 	text-decoration: underline;
 }
 
+.x-icinga-grid-data-null {
+	color: #0000cc;	
+}
+
 /** Simple box classes **/
 .x-icinga-simplebox-green {
 	padding: 10px;
@@ -315,5 +319,6 @@ table.icinga-attribute-table td.val {
 	background-color: #00bb00;
 	border: 1px #00cc00 solid;
 }
+
 
 /* EOF */

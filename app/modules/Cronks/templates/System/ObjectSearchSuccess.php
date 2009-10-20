@@ -335,6 +335,18 @@
 						params['template'] = 'icinga-service-template';
 					break;
 					
+					case 'hostgroup':
+						filter['f[hostgroup_object_id-value]'] = re.data.object_id;
+						filter['f[hostgroup_object_id-operator]'] = 50;
+						params['template'] = 'icinga-host-template';
+					break;
+					
+					case 'servicegroup':
+						filter['f[servicegroup_object_id-value]'] = re.data.object_id;
+						filter['f[servicegroup_object_id-operator]'] = 50;
+						params['template'] = 'icinga-service-template';
+					break;
+					
 					default:
 						Ext.Msg.alert('Search', 'This type is not ready implemented yet!');
 						return;

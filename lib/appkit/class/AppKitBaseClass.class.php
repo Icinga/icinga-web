@@ -23,7 +23,15 @@ abstract class AppKitBaseClass extends AppKit {
 	 * @return AgaviContext
 	 */
 	public function getAgaviContext() {
-		return AgaviContext::getInstance('web');
+		return AgaviContext::getInstance();
+	}
+	
+	/**
+	 * Returns the agavi translation manager
+	 * @return AgaviTranslationManager
+	 */
+	public function getAgaviTranslationManager() {
+		return $this->getAgaviContext()->getTranslationManager();
 	}
 	
 	/**

@@ -188,15 +188,17 @@ class IcingaTemplateXmlParser {
 	
 	private function rewriteTextContent(DOMElement &$element) {
 		$content = trim($element->textContent);
+		
 		if (is_numeric($content)) {
 			return (float)$content;	
 		}
-		elseif (preg_match('@^yes|true$@', $content)) {
+		elseif (preg_match('@^(yes|true)$@', $content)) {
 			return true;
 		}
-		elseif (preg_match('@^no|false@', $content)) {
+		elseif (preg_match('@^(no|false)$@', $content)) {
 			return false;
 		}
+		
 		return $content;
 	}
 	

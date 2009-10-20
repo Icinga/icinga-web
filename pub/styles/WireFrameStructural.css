@@ -46,6 +46,11 @@ table {
 }
 */
 
+h1.pageTitle {
+	margin: 10px 10px 10px 10px;
+	font-size: 11pt;
+}
+
 table.structural {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;	
@@ -81,7 +86,7 @@ fieldset legend {
 }
 */
 body#default {
-	background-color: #ccc;
+	background-color: #fff;
 }
 
 div#main-container {
@@ -100,9 +105,22 @@ div#frameMiddle {
 }
 
 div#frameBottom {
+	
+	position: absolute;
+	bottom: 0px;
+	right: 10px;
+	
 	border-top: 1px #c0c0c0 solid;
+	border-left: 1px #c0c0c0 solid;
+	border-right: 1px #c0c0c0 solid;
+	
 	text-align: right;
 	padding: 5px;
+		
+}
+
+div.footerContent {
+	
 }
 
 div.footerContent, div.footerContent a {

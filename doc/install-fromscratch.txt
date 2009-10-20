@@ -1,0 +1,65 @@
+Install icinga-web standalone from scratch
+
+1) Prerequisits
+
+Based on the fact that you have a running mysql and php (with PEAR) environment. Also icinga and ido are running
+you can continue with the second step.
+
+2) The place and dependencies
+
+Get the source and copy icinga-web to a place you like (e.g. /usr/local/icinga-web). You should have
+a icinga-api too or get one an copy it to you lib path you want
+
+3) Php dependencies
+
+Test the php dependencies. Go to the etc directory and call the phing test script:
+
+	../bin/phing testdeps
+	
+All required tests should pass succefully. Maybe you have to alter the php.ini for the
+framework.
+
+4) Database installation.
+
+4.1) Manually creation
+
+Create a database and a user you like. The user must have default data privileges like
+SELECT, UPDATE, INSERT, DELETE. Import the schemes
+
+	etc/database/deploy/init.sql
+	etc/database/deploy/db-deploy.sql
+
+to your database. Thats all
+
+4.2) Auto creation
+
+Create a database user with scheme and data privileges (CREATE, DROP, ALTER, INDEX). Go to the
+etc dir and copy the build.properties to a save place (e.g. /tmp). Alter the database
+settings within the properties file. You can also set you database root user to create
+your scheme. Call the phing deploy task:
+
+	../bin/phing -Dproperties=/path/to/your/build.properties db-initialize
+
+You have to manually create a database user to access your database. Add the default data
+privileges that icinga-web can work with the newly created database.
+
+5) Icinga-web settings
+
+Alter the configfiles:
+
+app/config/databases.xml
+	Change the credentials for your database connection
+
+app/config/icinga.xml
+	Go to the appkit.factories section and change the path and the credentials for the icinga-api
+
+6) Apache settings
+
+Go to the pub directory and changes the .htaccess file. You have to alter the RewriteBase direction
+to suite your needs.
+
+7) Try
+
+Go to the webpath and try if the webinterface starts without exceptions (database connections web
+and api). You can login with user 'root' and password 'password'
+

@@ -337,6 +337,22 @@ class IcingaTemplateWorker {
 		return array_keys($fields);
 	}
 	
+	private function getAdditionalFilterFields() {
+		static $fields = null;
+		
+		if ($fields === null) {
+			$ds = $this->getTemplate()->getSection('datasource');
+			if ($ds['additional_filter_fields'] && is_array($ds['additional_filter_fields'])) {
+				$fields = $ds['additional_filter_fields'];
+			}
+			else {
+				$fields = array ();
+			}
+		}
+		
+		return $fields;
+	}
+	
 	/**
 	 * Add a condition by a defined xml field
 	 * @param string $field
@@ -352,7 +368,11 @@ class IcingaTemplateWorker {
 		$database = $this->getTemplate()->getFieldByName($field, 'datasource');
 		$new_field = null;
 		
-		if ($filter->getParameter('field', null)) {
+		$ff = $this->getAdditionalFilterFields();
+		if (array_key_exists($field, $ff) == true) {
+			$new_field = $ff[$field];
+		}
+		elseif ($filter->getParameter('field', null)) {
 			$new_field = $filter->getParameter('field');
 		} 
 		else {

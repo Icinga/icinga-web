@@ -53,7 +53,11 @@
        	<parameter name="additional_fields">
        		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
        	</parameter>
-         
+       	
+       	<parameter name="additional_filter_fields">
+       		<parameter name="servicegroup_object_id">SERVICEGROUP_OBJECT_ID</parameter>
+       		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
+       	</parameter>
     </datasource>
     
     <!-- 
@@ -349,6 +353,33 @@
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="field">SERVICE_CURRENT_STATE</parameter>
+            </order>
+        </field>
+
+        <field name="service_last_check">
+        	<datasource>
+        		<parameter name="field">SERVICE_LAST_CHECK</parameter>
+        	</datasource>
+        	
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Last check</parameter>
+                
+                <!-- Let the agavi translation manager transform the date -->
+                <parameter name="userFunc">
+               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="method">agaviDateFormat</parameter>
+                </parameter>
+            </display>
+        	
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+                <parameter name="order">DESC</parameter>
             </order>
         </field>
 

@@ -2,7 +2,7 @@
 	$htmlid = AppKitRandomUtil::genSimpleId(10, 'login-box-');
 	$containerid = AppKitHtmlHelper::concatHtmlId($htmlid, 'container');
 ?>
-<div style="width:400px; margin: 150px auto 150px auto; padding: 20px;" id="<?php echo $containerid; ?>">
+<div style="width:400px; margin: 150px auto 0px auto; padding: 20px;" id="<?php echo $containerid; ?>">
     <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
     <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
         <h3 style="margin-bottom:5px;"><?php echo $tm->_('Login'); ?></h3>
