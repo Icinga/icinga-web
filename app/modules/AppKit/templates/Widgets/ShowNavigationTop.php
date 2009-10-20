@@ -70,6 +70,7 @@ YAHOO.util.Event.onContentReady("yahooTopMenu", function () {
 </div>
 <?php } ?>
 <a href="http://www.icinga.org/" target="_blank"><div id="icinga-logo-top"></div></a>
-<div id="rss-top"><?php echo AppKitHtmlHelper::Obj()->Image('icons.rss'); ?></div>
-<div id="links-top">User icinga | Logout | Help</div>
+<!-- <div id="rss-top"><?php echo AppKitHtmlHelper::Obj()->Image('icons.rss'); ?></div> -->
+<!-- <div id="links-top">User icinga | Logout | Help</div> -->
+<div id="links-top">User icinga | Logout</div>
 </div>
