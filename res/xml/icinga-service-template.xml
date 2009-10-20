@@ -53,7 +53,11 @@
        	<parameter name="additional_fields">
        		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
        	</parameter>
-         
+       	
+       	<parameter name="additional_filter_fields">
+       		<parameter name="servicegroup_object_id">SERVICEGROUP_OBJECT_ID</parameter>
+       		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
+       	</parameter>
     </datasource>
     
     <!-- 

@@ -53,6 +53,11 @@
        	<parameter name="additional_fields">
        		<parameter name="max_attempt">HOST_MAX_CHECK_ATTEMPTS</parameter>
        	</parameter>
+       	
+       	<parameter name="additional_filter_fields">
+       		<parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
+       		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
+       	</parameter>
     </datasource>
     
     <!-- 
