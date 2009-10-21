@@ -50,6 +50,17 @@
 			</parameter>
 		</parameter>
 
+		<parameter name="gridServicegroupSummary">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Display service summary</parameter>
+			<parameter name="name">Servicegroups</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-servicegroup-summary-template</parameter>
+			</parameter>
+		</parameter>
+
 		<parameter name="gridHostView">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>

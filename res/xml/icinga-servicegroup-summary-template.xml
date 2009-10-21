@@ -6,8 +6,8 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">Default hostgroup summary template</parameter>
-        <parameter name="description">Displays the summary of hostgroups</parameter>
+        <parameter name="name">Default servicegroup summary template</parameter>
+        <parameter name="description">Displays the summary of servicegroups</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
     
@@ -44,7 +44,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_HOSTGROUP_SUMMARY</parameter>
+        <parameter name="target">IcingaApi::TARGET_SERVICEGROUP_SUMMARY</parameter>
         
         <!-- Limit the result (LOAD) -->
         <!-- <parameter name="limit">25</parameter> -->
@@ -65,10 +65,10 @@
         
         <!-- Database group by -->
         <parameter name="groupby">
-        	<parameter>HOSTGROUP_ID</parameter>
-        	<parameter>HOSTGROUP_NAME</parameter>
-        	<parameter>HOSTGROUP_ALIAS</parameter>
-        	<parameter>HOST_CURRENT_STATE</parameter>
+        	<parameter>SERVICEGROUP_ID</parameter>
+        	<parameter>SERVICEGROUP_NAME</parameter>
+        	<parameter>SERVICEGROUP_ALIAS</parameter>
+        	<parameter>SERVICE_CURRENT_STATE</parameter>
         </parameter>
     </datasource>
     
@@ -83,7 +83,7 @@
     
     <grouping>
     	<parameter name="enabled">true</parameter>
-    	<parameter name="field">hostgroup_name</parameter>
+    	<parameter name="field">servicegroup_name</parameter>
     	
     	<!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
     	<parameter name="Ext.grid.GroupingView">
@@ -102,9 +102,9 @@
     -->
     <fields>
     
-        <field name="hostgroup_id">
+        <field name="servicegroup_id">
         	<datasource>
-        		<parameter name="field">HOSTGROUP_ID</parameter>
+        		<parameter name="field">SERVICEGROUP_ID</parameter>
         	</datasource>
         	
         	<display>
@@ -122,14 +122,14 @@
             </order>
         </field> 
         
-		<field name="hostgroup_name">
+		<field name="servicegroup_name">
         	<datasource>
-        		<parameter name="field">HOSTGROUP_NAME</parameter>
+        		<parameter name="field">SERVICEGROUP_NAME</parameter>
         	</datasource>
         	
         	<display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Hostgroup</parameter>
+                <parameter name="label">Servicegroup</parameter>
             </display>
             
             <filter>
@@ -142,9 +142,9 @@
             </order>
         </field>
         
-        <field name="hostgroup_alias">
+        <field name="servicegroup_alias">
         	<datasource>
-        		<parameter name="field">HOSTGROUP_ALIAS</parameter>
+        		<parameter name="field">SERVICEGROUP_ALIAS</parameter>
         	</datasource>
         	
         	<display>
@@ -164,7 +164,7 @@
         
 		<field name="host_status">
         	<datasource>
-        		<parameter name="field">HOST_CURRENT_STATE</parameter>
+        		<parameter name="field">SERVICE_CURRENT_STATE</parameter>
         	</datasource>
         	
             <display>
@@ -195,7 +195,7 @@
         
 		<field name="host_status_count">
         	<datasource>
-        		<parameter name="field">HOSTGROUP_SUMMARY_COUNT</parameter>
+        		<parameter name="field">SERVICEGROUP_SUMMARY_COUNT</parameter>
         	</datasource>
         	
         	<display>
