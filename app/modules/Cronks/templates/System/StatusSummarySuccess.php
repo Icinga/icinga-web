@@ -293,7 +293,7 @@ var dummyCronkDisplayStateSummary = function () {
 								html: dataTypeTitle + " - " + graphElement.status_name + ": " + graphElement.status_count
 							});
 							toolTip.render(Ext.getBody());
-							toolTip.targetXY = [event.getPageX(), event.getPageY()];
+							toolTip.targetXY = [event.getPageX() - 60, event.getPageY() - 45];
 							toolTip.show();
 						},
 						mouseout: function (event, component) {
