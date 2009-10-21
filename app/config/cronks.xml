@@ -34,11 +34,48 @@
 		<parameter name="portalHello">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.PortalHello</parameter>
-			<parameter name="hide">false</parameter>
+			<parameter name="hide">true</parameter>
 			<parameter name="description">Say hello to the world</parameter>
 			<parameter name="name">HelloWorld</parameter>
 		</parameter>
-	
+
+		<parameter name="gridHostgroupSummary">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Display hostgroup summary</parameter>
+			<parameter name="name">Hostgroups</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-hostgroup-summary-template</parameter>
+			</parameter>
+		</parameter>
+
+		<parameter name="gridHostView">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">false
+			
+			</parameter>
+			<parameter name="description">Viewing host status in a grid</parameter>
+			<parameter name="name">HostStatus
+			
+			</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-host-template</parameter>
+			</parameter>
+		</parameter>
+
+		<parameter name="gridHostHistoryView">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Host status history information</parameter>
+			<parameter name="name">HostHistory</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-host-history-template</parameter>
+			</parameter>
+		</parameter>
+
 		<parameter name="gridServiceView">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>
@@ -64,37 +101,11 @@
 		<parameter name="gridLogView">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.ViewProc</parameter>
-			<parameter name="hide">false</parameter>
+			<parameter name="hide">true</parameter>
 			<parameter name="description">Display icinga process log</parameter>
 			<parameter name="name">LogView</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-log-template</parameter>
-			</parameter>
-		</parameter>
-		
-		<parameter name="gridHostView">
-			<parameter name="module">Cronks</parameter>
-			<parameter name="action">System.ViewProc</parameter>
-			<parameter name="hide">false
-			
-			</parameter>
-			<parameter name="description">Viewing host status in a grid</parameter>
-			<parameter name="name">HostStatus
-			
-			</parameter>
-			<parameter name="parameter">
-				<parameter name="template">icinga-host-template</parameter>
-			</parameter>
-		</parameter>
-		
-		<parameter name="gridHostHistoryView">
-			<parameter name="module">Cronks</parameter>
-			<parameter name="action">System.ViewProc</parameter>
-			<parameter name="hide">false</parameter>
-			<parameter name="description">Host status history information</parameter>
-			<parameter name="name">HostHistory</parameter>
-			<parameter name="parameter">
-				<parameter name="template">icinga-host-history-template</parameter>
 			</parameter>
 		</parameter>
 		
@@ -106,17 +117,6 @@
 			<parameter name="name">Notifications</parameter>
 			<parameter name="parameter">
 				<parameter name="template">icinga-notification-template</parameter>
-			</parameter>
-		</parameter>
-		
-		<parameter name="gridHostgroupSummary">
-			<parameter name="module">Cronks</parameter>
-			<parameter name="action">System.ViewProc</parameter>
-			<parameter name="hide">false</parameter>
-			<parameter name="description">Display hostgroup summary</parameter>
-			<parameter name="name">Hostgroupsummary</parameter>
-			<parameter name="parameter">
-				<parameter name="template">icinga-hostgroup-summary-template</parameter>
 			</parameter>
 		</parameter>
 		
