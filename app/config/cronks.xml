@@ -109,6 +109,17 @@
 			</parameter>
 		</parameter>
 		
+		<parameter name="gridHostgroupSummary">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.ViewProc</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Display hostgroup summary</parameter>
+			<parameter name="name">Hostgroupsummary</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-hostgroup-summary-template</parameter>
+			</parameter>
+		</parameter>
+		
 		<parameter name="icingaStatusMap">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.StatusMap</parameter>

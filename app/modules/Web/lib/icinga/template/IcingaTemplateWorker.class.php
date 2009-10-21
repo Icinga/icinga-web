@@ -274,6 +274,12 @@ class IcingaTemplateWorker {
 				}
 			}
 			
+			// Groupby fields
+			$gbf = $this->getGroupByFields();
+			if (is_array($gbf) && count($gbf)>0) {
+				$search->setSearchGroup($gbf);
+			}
+			
 			// Clone our count query
 			$this->api_count = clone $search;
 			
@@ -292,6 +298,17 @@ class IcingaTemplateWorker {
 		}
 
 		return true;
+	}
+	
+	private function getGroupByFields() {
+		static $fields = null;
+		
+		if ($fields === null) {
+			$db = $this->getTemplate()->getSectionParams('datasource');
+			$fields = $db->getParameter('groupby', array());
+		}
+		
+		return $fields;
 	}
 	
 	private function collectOrders() {
