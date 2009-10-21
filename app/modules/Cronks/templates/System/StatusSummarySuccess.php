@@ -5,6 +5,38 @@
 	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
+Ext.DomObserver = Ext.extend(Object, {
+	constructor: function(config) {
+		this.listeners = config.listeners ? config.listeners : config;
+	},
+
+	// Component passes itself into plugin's init method
+	init: function(c) {
+		var p, l = this.listeners;
+		for (p in l) {
+			if (Ext.isFunction(l[p])) {
+				l[p] = this.createHandler(l[p], c);
+			} else {
+				l[p].fn = this.createHandler(l[p].fn, c);
+			}
+		}
+
+		// Add the listeners to the Element immediately following the render call
+		c.render = c.render.createSequence(function() {
+			var e = c.getEl();
+			if (e) {
+				e.on(l);
+			}
+		});
+	},
+
+	createHandler: function(fn, c) {
+		return function(e) {
+			fn.call(this, e, c);
+		};
+	}
+});
+
 var dummyCronkDisplayStateSummary = function () {
 
 	var CronkDisplayStateSummary = {
@@ -245,12 +277,32 @@ var dummyCronkDisplayStateSummary = function () {
 			}
 		},
 
-		showChartAjaxFail : function (response, o) {
-			
-		},
+		showChartAjaxFail : function (response, o) {},
 
-		showChartAjaxDefault : function (options, success, request) {
-			
+		showChartAjaxDefault : function (options, success, request) {},
+
+		createChartPopup : function (dataType, dataTypeTitle, graphElement, numObjects, containerWidth) {
+			var toolTip = false;
+			var currentItem = {
+				cls: dataType + "-" + graphElement.status_id,
+				style: "width:" + parseInt((graphElement.status_count / numObjects) * containerWidth) + "px;",
+				plugins: [
+					new Ext.DomObserver({
+						mouseover: function (event, component) {
+							toolTip = new Ext.ToolTip({
+								html: dataTypeTitle + " - " + graphElement.status_name + ": " + graphElement.status_count
+							});
+							toolTip.render(Ext.getBody());
+							toolTip.targetXY = [event.getPageX(), event.getPageY()];
+							toolTip.show();
+						},
+						mouseout: function (event, component) {
+							toolTip.hide();
+						}
+					})
+				]
+			};
+			return currentItem;
 		},
 
 		drawChart : function (data) {
@@ -275,7 +327,7 @@ var dummyCronkDisplayStateSummary = function () {
 						var currentElement = {
 							status_id: statusData.state_id,
 							status_name: statusData.state_name,
-							status_count: statusData.count
+							status_count: statusData.count,
 						};
 						graphElements.push(currentElement);
 					}
@@ -287,10 +339,7 @@ var dummyCronkDisplayStateSummary = function () {
 			var containerItems = [];
 
 			for (var x = 0; x < numElements; x++) {
-				var currentItem = {
-					cls: dataType + "-" + graphElements[x].status_id,
-					style: "width:" + parseInt((graphElements[x].status_count / numObjects) * containerWidth) + "px;"
-				};
+				var currentItem = this.createChartPopup(dataType, data[0].type, graphElements[x], numObjects, containerWidth);
 				containerItems.push(currentItem);
 			}
 
@@ -315,7 +364,7 @@ var dummyCronkDisplayStateSummary = function () {
 		}
 
 	}
-	
+
 	CronkDisplayStateSummary.init("<?php echo $rd->getParameter('otype'); ?>");
 
 }();

@@ -142,7 +142,7 @@
 		for (var i=0; i<p_columns; i++) {
 			items_config[i] = {
 				columnWidth: p_width,
-	        	style: 'padding: 3px;',
+	        	style: 'padding: 3px;'
 			};
 		}
 		
