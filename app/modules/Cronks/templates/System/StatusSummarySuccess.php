@@ -334,7 +334,7 @@ var dummyCronkDisplayStateSummary = function () {
 				}
 			}
 
-			var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).body.dom.clientWidth / 2) - 60;
+			var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
 			var numElements = graphElements.length;
 			var containerItems = [];
 
@@ -345,12 +345,12 @@ var dummyCronkDisplayStateSummary = function () {
 
 			var container = new Ext.Container({
 				cls: "status-summary-" + dataType,
-				autoEl: 'div', 
-				layout: 'column',
+				autoEl: "div", 
+				layout: "column",
 				defaults: {
-					xtype: 'container',
-					autoEl: 'div',
-					layout: 'auto',
+					xtype: "container",
+					autoEl: "div",
+					layout: "auto",
 					style: {
 						border: "none"
 					}
