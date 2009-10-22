@@ -15,6 +15,10 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 		'HOST_IS_FLAPPING', 'HOST_SCHEDULED_DOWNTIME_DEPTH', 'HOST_STATUS_UPDATE_TIME'
 	);
 
+	private $scriptTemplate = '<a href="#" onclick="return CronkTrigger({objectId:%s,objectName:\'%s\',objectType:\'host\'});">%s</a>';
+	private $tableRowTemplate = '<tr><td>%s</td><td>%s</td></tr>';
+	private $tableTemplate = '<table>%s</table>';
+
 	/**
 	 * class constructor
 	 * @return	Cronks_System_StatusMapModel			class object
@@ -122,16 +126,23 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 	 */
 	private function getHostDataTable ($hostData) {
 		$hostTable = null;
+		$hostObjectId = false;
 		foreach ($hostData as $key => $value) {
 			if ($key == 'host_object_id') {
+				$hostObjectId = $value;
 				continue;
 			}
-			if ($key == 'host_current_state') {
-				$value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
+			switch ($key) {
+				case 'host_current_state':
+					$value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
+					break;
+				case 'host_name':
+					$value = sprintf($this->scriptTemplate, $hostObjectId, $value, $value);
+					break;
 			}
-			$hostTable .= sprintf('<tr><td>%s</td><td>%s</td></tr>', $this->tm->_($key), $value);
+			$hostTable .= sprintf($this->tableRowTemplate, $this->tm->_($key), $value);
 		}
-		$hostTable = '<table>' . $hostTable . '</table>';
+		$hostTable = sprintf($this->tableTemplate, $hostTable);
 		return $hostTable;
 	}
 

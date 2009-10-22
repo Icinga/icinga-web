@@ -106,6 +106,10 @@ div.icinga-status-up, div.hostchart-0 {
 	background-color: #00cc00;
 }
 
+div.statusmap-host-0 {
+	color: #00cc00;
+}
+
 div.icinga-status-down, div.hostchart-1 {
 	background-color: #cc0000;
 }

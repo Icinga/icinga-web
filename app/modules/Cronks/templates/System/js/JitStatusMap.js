@@ -9,11 +9,12 @@ function jitAddEvent(obj, type, fn) {
 var JitLog = {
 	elem: false,
 	write: function(elementId, text) {
-		if (!this.elem) 
+		if (!this.elem) {
 			this.elem = document.getElementById(elementId);
-			this.elem.innerHTML = text;
-			this.elem.style.left = (500 - this.elem.offsetWidth / 2) + "px";
 		}
+		this.elem.innerHTML = text;
+		this.elem.style.left = (500 - this.elem.offsetWidth / 2) + "px";
+	}
 };
 
 function JitStatusMap (config) {
