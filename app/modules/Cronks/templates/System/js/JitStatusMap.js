@@ -75,6 +75,7 @@ function JitStatusMap (config) {
 		});
 		var rgraph = new RGraph(canvas, {
 			Node: {
+				overridable: true,
 				color: "#ccddee"
 			},
 			Edge: {
@@ -87,6 +88,19 @@ function JitStatusMap (config) {
 			onAfterCompute: function(){
 				JitLog.write(elementIds.jitLog, "done");
 			},
+			onBeforePlotNode:function(node) {
+				switch (node.data.status) {
+					case "0":
+						node.data.$color = "#00cc00";
+						break;
+					case "1":
+						node.data.$color = "#cc0000";
+						break;
+					case "2":
+						node.data.$color = "#ff8000";
+						break;
+				}
+  			},
 			onCreateLabel: function(domElement, node){
 				domElement.innerHTML = node.name;
 				domElement.onclick = function(){

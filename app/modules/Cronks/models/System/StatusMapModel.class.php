@@ -70,6 +70,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 					'id'		=> $objectId,
 					'name'		=> $row['host_name'],
 					'data'		=> array(
+						'status'	=> $row['host_current_state'],
 						'relation'	=> $this->getHostDataTable($row),
 					),
 					'children'	=> array(),
@@ -98,6 +99,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 				'id'		=> $idPrefix . '-1',
 				'name'		=> 'Icinga',
 				'data'		=> array(
+					'status'	=> '-1',
 					'relation'	=> 'Icinga Monitoring Process',
 				),
 				'children'	=> array(),
@@ -108,6 +110,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 				'id'		=> $idPrefix . '-1',
 				'name'		=> 'Icinga',
 				'data'		=> array(
+					'status'	=> '-1',
 					'relation'	=> 'Icinga Monitoring Process',
 				),
 				'children'	=> $hostsFlatStruct,
