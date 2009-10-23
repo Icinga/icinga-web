@@ -170,6 +170,7 @@
 		<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter>
 
 		<!-- JIT - JavaScript InfoVis Toolkit -->
+		<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
 		<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
 
 		<!--AppKit JS -->
@@ -194,9 +195,10 @@
 	-->
 	<setting name="appkit.include_dynamic_javascript">
 		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
-		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
+		<!-- <parameter name="Cronks.JitExCanvas">%core.root_dir%/lib/jit/Extras/excanvas.js</parameter> -->
+		<!-- <parameter name="Cronks.JitLib">%core.root_dir%/lib/jit/jit-yc.js</parameter> -->
 		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
-		<parameter name="Cronks.JitExCanvas">%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
+		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
 	</setting>
 
 	<!--

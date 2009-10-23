@@ -18,10 +18,11 @@ AppKit.Ext.ScriptDynaLoader.on(
 	{ single : true }
 );
 
-if (Ext.isIE) {
-	AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitExCanvas')) ?>");
-}
+//if (Ext.isIE) {
+//	AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitExCanvas')) ?>");
+//}
 
+//AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitLib')) ?>");
 AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CronkTrigger')) ?>");
 AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitStatusMap')) ?>");
 </script>
