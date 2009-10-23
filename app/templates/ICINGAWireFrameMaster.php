@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<base href="<?php echo $ro->getBaseHref(); ?>" />
 		<title><?php if(isset($t['title'])) echo htmlspecialchars($t['title']) . ' - '; echo AgaviConfig::get('core.app_name'); ?></title>
+		<link rel="SHORTCUT ICON" href="images/icinga/favicon.ico">
 		<?php echo $slots['additional_header_data']; ?>
 		
 	</head>
