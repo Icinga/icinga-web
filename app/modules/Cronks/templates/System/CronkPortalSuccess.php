@@ -176,13 +176,13 @@ var container = new Ext.Panel({
 		id: 'south-frame',
 		layout: 'fit',
 		height: 150,
-		style: {
-			'margin-top': '5px'
+		defaults: {
+			border: false
 		}
 	}, { // -- CENTER
 		region: 'center',
 		// title: 'MyView',
-        margins: '0 0 0 5',
+        margins: '0 0 10 5',
         cls: 'cronk-center-content',
         id: 'center-frame',
         layout: 'fit',
@@ -196,7 +196,7 @@ var container = new Ext.Panel({
         maxSize: 400,
         width: 200,
         collapsible: true,
-        margins: '0 0 0 0',
+        margins: '0 0 10 0',
         
         layout: {
         	type: 'accordion',
@@ -218,12 +218,12 @@ var container = new Ext.Panel({
 
 // Resize the container on windowResize
 Ext.EventManager.onWindowResize(function(w,h) {
-	this.setHeight(h-80);
+	this.setHeight(h-65);
 	this.doLayout();
 }, container);
 
 // Set initial size
-container.setHeight(Ext.lib.Dom.getViewHeight()-80);
+container.setHeight(Ext.lib.Dom.getViewHeight()-65);
 
 // Render the container
 container.render("<?php echo $parentid; ?>");

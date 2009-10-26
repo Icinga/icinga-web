@@ -4,7 +4,7 @@
 		<routes>
 		
 			<!-- INDEX -->
-			<route name="index_page" pattern="^/$" module="Web" action="Index" />
+			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView" />
 		
 			<!-- ICINGAAppKit routes -->
 			<route name="appkit" pattern="^/appkit" module="%actions.default_module%">
