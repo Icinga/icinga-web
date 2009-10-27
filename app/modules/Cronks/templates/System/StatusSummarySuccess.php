@@ -68,7 +68,12 @@ var dummyCronkDisplayStateSummary = function () {
 		outputType : false,
 	
 		loaded : false,
+		chartLoaded : false,
 		storeCollection : new Array(),
+		chartData : {
+			"status-summary-hostchart" : false,
+			"status-summary-servicechart" : false,
+		},
 
 		init : function (outputType) {
 			this.outputType = outputType;
@@ -81,24 +86,23 @@ var dummyCronkDisplayStateSummary = function () {
 		},
 	
 		refresh : function () {
-			if (CronkDisplayStateSummary.loaded !== false) {
-				var numStores = CronkDisplayStateSummary.storeCollection.length;
-				for (var x = 0; x < numStores; x++) {
-					CronkDisplayStateSummary.storeCollection[x].reload();
-				}
-			} else {
-				switch (CronkDisplayStateSummary.outputType) {
-					case "text":
+			switch (CronkDisplayStateSummary.outputType) {
+				case "text":
+					if (CronkDisplayStateSummary.loaded != false) {
+						var numStores = CronkDisplayStateSummary.storeCollection.length;
+						for (var x = 0; x < numStores; x++) {
+							CronkDisplayStateSummary.storeCollection[x].reload();
+						}
+					} else {
 						CronkDisplayStateSummary.showGrid("host");
 						CronkDisplayStateSummary.showGrid("service");
 						CronkDisplayStateSummary.loaded = true;
-						break;
-					case "chart":
-						CronkDisplayStateSummary.showChart("host");
-						CronkDisplayStateSummary.showChart("service");
-						CronkDisplayStateSummary.loaded = true;
-						break;
-				}
+					}
+					break;
+				case "chart":
+					CronkDisplayStateSummary.showChart("host");
+					CronkDisplayStateSummary.showChart("service");
+					break;
 			}
 		},
 	
@@ -281,10 +285,12 @@ var dummyCronkDisplayStateSummary = function () {
 
 		showChartAjaxDefault : function (options, success, request) {},
 
-		createChartPopup : function (dataType, dataTypeTitle, graphElement, numObjects, containerWidth) {
+		createChartItem : function (dataType, dataTypeTitle, graphElement, numObjects, containerWidth) {
 			var toolTip = false;
+			var itemClassId = dataType + "-" + graphElement.status_id;
 			var currentItem = {
-				cls: dataType + "-" + graphElement.status_id,
+				id: itemClassId,
+				cls: itemClassId,
 				style: "width:" + parseInt((graphElement.status_count / numObjects) * containerWidth) + "px;",
 				plugins: [
 					new Ext.DomObserver({
@@ -323,44 +329,69 @@ var dummyCronkDisplayStateSummary = function () {
 						numObjects = statusData.count;
 						continue;
 					}
-					if (statusData.count) {
-						var currentElement = {
-							status_id: statusData.state_id,
-							status_name: statusData.state_name,
-							status_count: statusData.count,
-						};
-						graphElements.push(currentElement);
-					}
+					var currentElement = {
+						status_id: statusData.state_id,
+						status_name: statusData.state_name,
+						status_count: statusData.count,
+					};
+					graphElements.push(currentElement);
 				}
 			}
 
-			var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
 			var numElements = graphElements.length;
-			var containerItems = [];
+			var graphElementsEncoded = false;
+			var containerIdClass = "status-summary-" + dataType;
+			var updateData = false;
 
-			for (var x = 0; x < numElements; x++) {
-				var currentItem = this.createChartPopup(dataType, data[0].type, graphElements[x], numObjects, containerWidth);
-				containerItems.push(currentItem);
+			if (this.chartData[containerIdClass] != false) {
+				var graphElementsEncoded = Ext.util.JSON.encode(graphElements);
+				if (graphElementsEncoded != this.chartData[containerIdClass]) {
+					this.chartData[containerIdClass] = false;
+					updateData = true;
+				}
 			}
 
-			var container = new Ext.Container({
-				cls: "status-summary-" + dataType,
-				autoEl: "div", 
-				layout: "column",
-				defaults: {
-					xtype: "container",
-					autoEl: "div",
-					layout: "auto",
-					style: {
-						border: "none"
-					}
-				},
-				items : containerItems
-			});
+			if (this.chartData[containerIdClass] == false) {
+				var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
+				var containerItems = [];
 
-			var parentCmp = this.panel.getComponent(this.panelDefs.chart.itemId);
-			parentCmp.add(container);
-			parentCmp.doLayout();
+				for (var x = 0; x < numElements; x++) {
+					var currentItem = this.createChartItem(dataType, data[0].type, graphElements[x], numObjects, containerWidth);
+					containerItems.push(currentItem);
+				}
+
+				var container = new Ext.Container({
+					id: containerIdClass,
+					cls: containerIdClass,
+					autoEl: "div", 
+					layout: "column",
+					defaults: {
+						xtype: "container",
+						autoEl: "div",
+						layout: "auto",
+						style: {
+							border: "none"
+						}
+					},
+					items : containerItems
+				});
+			}
+
+			//var parentCmp = (updateData) ? Ext.ComponentMgr.get(containerIdClass).getEl() : this.panel.getComponent(this.panelDefs.chart.itemId);
+			var parentCmp = (updateData) ? Ext.get(containerIdClass) : this.panel.getComponent(this.panelDefs.chart.itemId);
+
+			if (this.chartData[containerIdClass] == false) {
+				if (!updateData) {
+					parentCmp.add(container);
+					parentCmp.doLayout();
+					this.chartData[containerIdClass] = Ext.util.JSON.encode(graphElements);
+				} else {
+					parentCmp.replaceWith(container);
+					parentCmp.doLayout();
+					thischartData[containerIdClass] = graphElementsEncoded;
+				}
+			}
+
 		}
 
 	}
