@@ -2,7 +2,7 @@ Install icinga-web standalone from scratch
 
 1) Prerequisits
 
-Based on the fact that you have a running mysql and php (with PEAR) environment. Also icinga and ido are running
+Based on the fact that you have a running mysql and php (with PEAR and CLI) environment. Also icinga and ido are running
 you can continue with the second step.
 
 2) The place and dependencies
@@ -18,6 +18,9 @@ Test the php dependencies. Go to the etc directory and call the phing test scrip
 	
 All required tests should pass succefully. Maybe you have to alter the php.ini for the
 framework.
+
+In case of the gpc_magic_quote setting, you have to disable both entries (apache and cli
+php.ini)
 
 4) Database installation.
 
@@ -54,6 +57,16 @@ app/config/icinga.xml
 	Go to the appkit.factories section and change the path and the credentials for the icinga-api
 
 6) Apache settings
+
+This should be prepared:
+
+ - mod_rewrite enabled
+ - Any htaccess enabled alias setting:
+ 
+ Alias /icinga-web /path/to/pub
+ <directory /path/to/pub>
+ 	AllowOverride All
+ </directory>
 
 Go to the pub directory and changes the .htaccess file. You have to alter the RewriteBase direction
 to suite your needs.
