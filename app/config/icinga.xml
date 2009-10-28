@@ -302,8 +302,8 @@
 	-->
 	<setting name="appkit.version.copyright"><![CDATA[&#169; 2009 Icinga Developer Team]]></setting>
 	<setting name="appkit.version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
-	<setting name="appkit.version.major">1</setting>
-	<setting name="appkit.version.minor">0</setting>
+	<setting name="appkit.version.major">0</setting>
+	<setting name="appkit.version.minor">9</setting>
 	<setting name="appkit.version.patch">0</setting>
 	<setting name="appkit.version.extension">alpha</setting>
 	<setting name="appkit.version.name">icinga-web</setting>
