@@ -19,7 +19,7 @@ class AppKit_Widgets_ShowImageSuccessView extends ICINGAAppKitBaseView
 			$response->setHttpHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + 3600), true);
 			$response->setHttpHeader('Cache-Control', 'public', true);
 			$response->setHttpHeader('Age', 10, true);
-			$response->removeHttpHeader('Pragma');
+			$response->setHttpHeader('Pragma', '', true);
 			
 			
 			// Return the resource, because the AgaviResponse understand fpassthrough

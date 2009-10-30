@@ -6,80 +6,103 @@
 	$open = 0;
 ?>
 
+<div id="menuTopTarget"></div>
+
 <script type="text/javascript">
 <!-- // <![CDATA[
-YAHOO.util.Event.onContentReady("yahooTopMenu", function () { 
-	var oMenu = new YAHOO.widget.MenuBar("yahooTopMenu", {
-		autosubmenudisplay: true, 
-		hidedelay: 750, 
-		lazyload: true,
-		effect: {
-			effect: YAHOO.widget.ContainerEffect.FADE,
-			duration: 0.25
+Ext.onReady(function() {
+
+<?php
+
+$d = '[';
+
+foreach ($iterator as $name=>$navItem) {
+
+	$check = false;
+	if ($check_depth <> $iterator->getDepth()) $check = true;
+
+	if ($iterator->getDepth() < $check_depth) {
+
+		for ($i=$check_depth;$i>$iterator->getDepth();$i--) {
+			$open--;
+			$d .= ']}},';
+		} 
+
+	}
+
+	$d .= '{';
+	$d .= 'text: "'. $navItem->getCaption(). '",';
+	
+	if ($navItem->getRoute() !== null) {
+		$d .= 'href: "'. $ro->gen( $navItem->getRoute() ). '",';
+	
+	} else {
+		// UH?
+	}
+
+	if ($navItem->getContainer()->hasChildren()) {
+		$open++;
+		$d .= 'menu: { items: [';
+	} else {
+		$d .= '},';
+	}
+	
+	$check_depth = $iterator->getDepth();
+	
+	}
+
+	for ($i=$open; $i>0; $i--) {
+		$d .= ']}},';
+	}
+
+}
+
+$d .= ']';
+
+?>
+
+var xh = '';
+
+<?php if ($us->isAuthenticated()) { ?>
+xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $us->getNsmUser()->givenName(); ?>'
+xh += '| <a href="<?php echo $ro->gen('appkit.logout'); ?>">Logout</a>'
+<?php } else { ?>
+xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
+<?php } ?>
+
+	var p = new Ext.Panel({
+		applyTo: 'menuTopTarget',
+		layout: 'column',
+		border: false,
+		
+		defaults: {
+			border: false
 		}
 	});
-	
-	oMenu.render();
 
+	p.add({
+		xtype: 'toolbar',
+		defaults: {
+			listeners: {
+				mouseover: function(e) {
+					this.showMenu();
+				}
+			}
+		},
+		columnWidth: .8,
+		cls: 'x-icinga-top-toolbar',
+		items: <?php echo $d?>
+	});
+
+	p.add({
+		xtype: 'panel',
+		columnWidth: .2,
+		html: xh,
+		baseCls: 'x-icinga-top-right',
+		height: 31
+	});
+
+	p.doLayout();
 });
 // ]]> -->
 </script>
-
-<div id="topBar">
-<div id="yahooTopMenu" class="yuimenubar yuimenubarnav">
-<div class="bd"> 
-<ul class="first-of-type">
-
-<?php foreach ($iterator as $name=>$navItem) { ?>
-<?php 
-	$check = false;
-	if ($check_depth <> $iterator->getDepth()) $check = true;
-?>
-<?php if ($iterator->getDepth() < $check_depth) { ?>
-<?php
-	for ($i=$check_depth;$i>$iterator->getDepth();$i--) {
-		$open--;
-		echo '</ul></div></div></li>';
-	} 
-?>
-<?php } ?>
-<li class="yuimenuitem">
-<?php if ($navItem->getRoute() !== null) { ?>
-<?php echo AppKitHtmlHelper::Obj()->LinkToRoute($navItem->getRoute(), $navItem->getCaption() ? $navItem->getCaption() : (string)$navItem, $navItem->getRouteArgs(), array('class' => 'yuimenuitemlabel')) ?>
-<?php } else { ?>
-<a name="<?php echo $navItem->getName(); ?>"><?php echo $navItem->getCaption(); ?></a>
-<?php } ?>
-
-<?php if ($navItem->getContainer()->hasChildren()) { ?>
-<?php $open++; ?>
-
-	<div id="item.<?php echo $navItem->getName(); ?>" class="yuimenubarnav"><div class="bd"><ul>
-<?php } else { ?>
-
-</li>
-<?php } ?>
-<?php $check_depth = $iterator->getDepth(); ?>
-<?php } ?>
-
-<?php for ($i=$open; $i>0; $i--) {?>
-	</ul></div></div>
-	</li>
-<?php } ?>
-</ul>
-</div>
-</div>
-<?php } ?>
-<a href="http://www.icinga.org/" target="_blank"><div id="icinga-logo-top"></div></a>
-<!-- <div id="rss-top"><?php echo AppKitHtmlHelper::Obj()->Image('icons.rss'); ?></div> -->
-<div id="links-top">
-
-<?php if ($us->isAuthenticated()) { ?>
-	<?php echo $tm->_('User')?>:&#160;<?php echo $us->getNsmUser()->givenName(); ?>
-	| <a href="<?php echo $ro->gen('appkit.logout'); ?>">Logout</a>
-<?php } else { ?>
-	<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>
-<?php } ?>
-
-</div>
-
-</div>
