@@ -25,16 +25,18 @@ foreach ($iterator as $name=>$navItem) {
 
 		for ($i=$check_depth;$i>$iterator->getDepth();$i--) {
 			$open--;
-			$d .= ']}},';
+			$d .= ']}}';
 		} 
 
 	}
 
+	if (!preg_match('@(\{|\[)$@', $d)) $d .= ',';
+	
 	$d .= '{';
 	$d .= 'text: "'. $navItem->getCaption(). '",';
 	
 	if ($navItem->getRoute() !== null) {
-		$d .= 'href: "'. $ro->gen( $navItem->getRoute() ). '",';
+		$d .= 'href: "'. $ro->gen( $navItem->getRoute() ). '"';
 	
 	} else {
 		// UH?
@@ -42,9 +44,9 @@ foreach ($iterator as $name=>$navItem) {
 
 	if ($navItem->getContainer()->hasChildren()) {
 		$open++;
-		$d .= 'menu: { items: [';
+		$d .= ',menu: { items: [';
 	} else {
-		$d .= '},';
+		$d .= '}';
 	}
 	
 	$check_depth = $iterator->getDepth();
@@ -52,7 +54,7 @@ foreach ($iterator as $name=>$navItem) {
 	}
 
 	for ($i=$open; $i>0; $i--) {
-		$d .= ']}},';
+		$d .= ']}}';
 	}
 
 }
@@ -65,7 +67,7 @@ var xh = '';
 
 <?php if ($us->isAuthenticated()) { ?>
 xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $us->getNsmUser()->givenName(); ?>'
-xh += '| <a href="<?php echo $ro->gen('appkit.logout'); ?>">Logout</a>'
+xh += ' | <a href="<?php echo $ro->gen('appkit.logout'); ?>">Logout</a>'
 <?php } else { ?>
 xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
 <?php } ?>
