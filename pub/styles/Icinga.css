@@ -207,15 +207,21 @@ table.icinga-attribute-table td.val {
 }
 
 .x-icinga-top-right {
-	background: url(../images/icinga/icinga-logo-small.png) no-repeat center right;
+	background-image: url(../../images/extjs/toolbar/bg.gif);
 	line-height: 28px;
 	padding-left: 3px;
 	background-color: #dcdcdc;
 	border-bottom: 1px #a0a0a0 solid;
 }
 
+.x-icinga-top-right-logo {
+	background: url(../images/icinga/icinga-logo-small.png) no-repeat 32px center;
+	border-bottom: 1px #a0a0a0 solid;
+}
+	
 .x-icinga-top-toolbar {
 	border-bottom: 1px #a0a0a0 solid;
+	background-image: url(../../images/extjs/toolbar/bg.gif);
 }
 
 #icinga-logo-top {

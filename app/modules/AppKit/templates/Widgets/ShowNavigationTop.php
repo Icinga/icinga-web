@@ -91,7 +91,7 @@ xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
 				}
 			}
 		},
-		columnWidth: .8,
+		columnWidth: .7,
 		cls: 'x-icinga-top-toolbar',
 		items: <?php echo $d?>
 	});
@@ -102,6 +102,13 @@ xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
 		html: xh,
 		baseCls: 'x-icinga-top-right',
 		height: 31
+	});
+
+	p.add({
+		xtype: 'panel',
+		columnWidth: .1,
+		height: 31,
+		baseCls: 'x-icinga-top-right-logo'
 	});
 
 	p.doLayout();
