@@ -206,23 +206,28 @@ table.icinga-attribute-table td.val {
 	float: left;
 }
 
+.x-icinga-top-right {
+	background: url(../images/icinga/icinga-logo-small.png) no-repeat center right;
+	line-height: 28px;
+	padding-left: 3px;
+	background-color: #dcdcdc;
+	border-bottom: 1px #a0a0a0 solid;
+}
+
+.x-icinga-top-toolbar {
+	border-bottom: 1px #a0a0a0 solid;
+}
+
 #icinga-logo-top {
-	float: right;
-	width: 65px;
-	height: 21px;
-	background: url(../images/icinga/icinga-logo-small.png) no-repeat bottom right;
+	
 }
 
 #rss-top {
-	float: right;
-	margin-top: 4px;
-	margin-left: 12px;	
+	
 }
 
 #links-top {
-	float: right;
-	margin-top: 4px;	
-	font-size: 10px;
+	
 }
 
 /** NORTH FRAME **/
