@@ -1,19 +1,35 @@
-#!/bin/sh
+#!/bin/bash
 #
-# PNP4Nagios Helper Script
+# Idea borrowed by pnp4nagios :-)  
 #
-DIR=`dirname $0`
-DIR=./
-#cd $DIR/../lib/kohana
-cd $DIR/framework
 
-for D in `find . -type d -printf "%P\n" | grep -v "examples"`;do
-        if [ "$D" != "" ];then
-                echo -e "\t\$(INSTALL) -m 755 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$D"
-        fi
+DIR=$(dirname $0 )
+IGNORE="example"
+SRCDIR="app bin doc etc lib pub res"
+cd $DIR/..
+
+for DIR in $SRCDIR; do
+	
+	for TDIR in $(find $DIR -type d -printf "%P\n" | grep -v "$IGNORE"); do
+		SOURCE="$DIR/$TDIR"
+		
+		if [[ "$SOURCE" != "" && -e "$SOURCE" ]]; then
+			echo -e "\t\$(INSTALL) -m 755 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$SOURCE"
+		fi
+		
+	done
+	
+	for FILE in $(find $DIR -type f -printf "%P\n" | grep -v "$IGNORE"); do
+		SOURCE="$DIR/$FILE"
+		
+		if [[ "$SOURCE" != "" && -e "$SOURCE" ]]; then
+			echo -e "\t\$(INSTALL) -m 644 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$SOURCE"
+		fi
+		
+	done
+	
 done
-for F in `find . -type f -printf "%P\n" | grep -v "examples"`;do
-        if [ "$F" != "" ];then
-                echo -e "\t\$(INSTALL) -m 644 \$(INSTALL_OPTS) framework/$F \$(DESTDIR)\$(prefix)/$F"
-        fi
-done
+
+exit 0
+
+# [EOF]
