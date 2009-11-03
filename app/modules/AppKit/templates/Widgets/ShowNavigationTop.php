@@ -8,7 +8,7 @@
 
 <div id="menuTopTarget"></div>
 
-<script type="text/javascript">
+<script type="text/javascript" defer="defer">
 <!-- // <![CDATA[
 Ext.onReady(function() {
 
