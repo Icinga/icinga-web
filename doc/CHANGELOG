@@ -13,5 +13,8 @@
    * 2009-11-03
      * Removed unused libraries (gc-prettify, jquery, firebug-lite)
      * Cherrypicked hendricks makefile changes
+     * Changed installer toolkit to make basic installs
+   
+   
       
      
