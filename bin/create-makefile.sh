@@ -4,7 +4,7 @@
 #
 
 DIR=$(dirname $0 )
-IGNORE="~"
+IGNORE="~|development__"
 SRCDIR="app bin doc etc lib pub res"
 cd $DIR/..
 

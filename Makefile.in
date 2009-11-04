@@ -40,7 +40,6 @@ fix-libs:
 install: install-files fix-priv
 
 install-files:
-
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache/config
@@ -905,40 +904,6 @@ install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/i18n/mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/i18n/po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/PLACEHOLDER $(DESTDIR)$(prefix)/app/cache/config/PLACEHOLDER
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/en_US.xml_development__05b41d4fd8170c3dd67d0251e06869caf3269d2b.php $(DESTDIR)$(prefix)/app/cache/config/en_US.xml_development__05b41d4fd8170c3dd67d0251e06869caf3269d2b.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/config_handlers.xml_development__d566467d785424abd695d354cb6c1e75bfc2b92f.php $(DESTDIR)$(prefix)/app/cache/config/config_handlers.xml_development__d566467d785424abd695d354cb6c1e75bfc2b92f.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/autoload.xml_development__45746928d397b60227a752f720b77c6b6eeb2abc.php $(DESTDIR)$(prefix)/app/cache/config/autoload.xml_development__45746928d397b60227a752f720b77c6b6eeb2abc.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/settings.xml_development__469bf0b9bf359242001cd5d972bea42d9f3a60bc.php $(DESTDIR)$(prefix)/app/cache/config/settings.xml_development__469bf0b9bf359242001cd5d972bea42d9f3a60bc.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/compile.xml_development__c2f1e0d573477acdfd0697de8ef5ae916b2c728d.php $(DESTDIR)$(prefix)/app/cache/config/compile.xml_development__c2f1e0d573477acdfd0697de8ef5ae916b2c728d.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/factories.xml_development_web_19dab68a0bdfd19ac1551a4463664622aec5e04b.php $(DESTDIR)$(prefix)/app/cache/config/factories.xml_development_web_19dab68a0bdfd19ac1551a4463664622aec5e04b.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/databases.xml_development__56243133a6e778d2392c9391147c534a904390d7.php $(DESTDIR)$(prefix)/app/cache/config/databases.xml_development__56243133a6e778d2392c9391147c534a904390d7.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/logging.xml_development_web_df33ee1d37ccbaa6c588aac8452a7d2b7904a8d3.php $(DESTDIR)$(prefix)/app/cache/config/logging.xml_development_web_df33ee1d37ccbaa6c588aac8452a7d2b7904a8d3.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/translation.xml_development__526eee8efd02102a292d5493ba58d8437966d9e3.php $(DESTDIR)$(prefix)/app/cache/config/translation.xml_development__526eee8efd02102a292d5493ba58d8437966d9e3.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/supplementalData.xml_development__031f8497890de8ae2b974501919a5dd4da3134b9.php $(DESTDIR)$(prefix)/app/cache/config/supplementalData.xml_development__031f8497890de8ae2b974501919a5dd4da3134b9.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/routing.xml_development_web_9b2ff6e7cfa1e289d2cc3c8f7f807e54ac2b9e61.php $(DESTDIR)$(prefix)/app/cache/config/routing.xml_development_web_9b2ff6e7cfa1e289d2cc3c8f7f807e54ac2b9e61.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/output_types.xml_development_web_d994eed37baf6308bd2e05d66b8ee770c9a3b5f9.php $(DESTDIR)$(prefix)/app/cache/config/output_types.xml_development_web_d994eed37baf6308bd2e05d66b8ee770c9a3b5f9.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/rbac_definitions.xml_development_web_66465fffb5385b15a2fbadfcf00e707d154eac2b.php $(DESTDIR)$(prefix)/app/cache/config/rbac_definitions.xml_development_web_66465fffb5385b15a2fbadfcf00e707d154eac2b.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/global_filters.xml_development_web_ac3adaa9273baf197d173bf5bd8fbf0d7081d4f0.php $(DESTDIR)$(prefix)/app/cache/config/global_filters.xml_development_web_ac3adaa9273baf197d173bf5bd8fbf0d7081d4f0.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/module.xml_development__9f1ac45a7c931ea71cbf0a9fc787b1173b6e5eba.php $(DESTDIR)$(prefix)/app/cache/config/module.xml_development__9f1ac45a7c931ea71cbf0a9fc787b1173b6e5eba.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/autoload.xml_development__452dce61ef0f002e892e2aaaa1b0f9caa8f21430.php $(DESTDIR)$(prefix)/app/cache/config/autoload.xml_development__452dce61ef0f002e892e2aaaa1b0f9caa8f21430.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/config_handlers.xml_development__1af000f46385e36a28e12a6e4d6af1c3b5b4dd50.php $(DESTDIR)$(prefix)/app/cache/config/config_handlers.xml_development__1af000f46385e36a28e12a6e4d6af1c3b5b4dd50.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/action_filters.xml_development_web_01503db068cb1146607d9432ee22c872be13d2ff.php $(DESTDIR)$(prefix)/app/cache/config/action_filters.xml_development_web_01503db068cb1146607d9432ee22c872be13d2ff.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/module.xml_development__c5fd49c7c69343ff7782c1ab681060dfeb726501.php $(DESTDIR)$(prefix)/app/cache/config/module.xml_development__c5fd49c7c69343ff7782c1ab681060dfeb726501.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/autoload.xml_development__d8b7272eb242d2e19bb84bf6b238b05f768784dc.php $(DESTDIR)$(prefix)/app/cache/config/autoload.xml_development__d8b7272eb242d2e19bb84bf6b238b05f768784dc.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/config_handlers.xml_development__3051ed104ca324f040d9b7f36e3a7337f29d7c9e.php $(DESTDIR)$(prefix)/app/cache/config/config_handlers.xml_development__3051ed104ca324f040d9b7f36e3a7337f29d7c9e.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/AjaxLogin.xml_development_web_df634e5cae49ba6c33ac823f0bc4843642091723.php $(DESTDIR)$(prefix)/app/cache/config/AjaxLogin.xml_development_web_df634e5cae49ba6c33ac823f0bc4843642091723.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/AjaxLogin.xml_development_web_7dac7c6223666c54ea212dd4ba6207962c480534.php $(DESTDIR)$(prefix)/app/cache/config/AjaxLogin.xml_development_web_7dac7c6223666c54ea212dd4ba6207962c480534.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/AddHeaderData.xml_development_web_b274ea4cb744b830bad293beceb95cd0eef3bf2d.php $(DESTDIR)$(prefix)/app/cache/config/AddHeaderData.xml_development_web_b274ea4cb744b830bad293beceb95cd0eef3bf2d.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/AddHeaderData.xml_development_web_f643a5dc76fd058dc6f9a04b18448e295cb93acc.php $(DESTDIR)$(prefix)/app/cache/config/AddHeaderData.xml_development_web_f643a5dc76fd058dc6f9a04b18448e295cb93acc.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/ShowNavigation.xml_development_web_39346c954a1626d0d3b715e95b38ff85ab11e9c0.php $(DESTDIR)$(prefix)/app/cache/config/ShowNavigation.xml_development_web_39346c954a1626d0d3b715e95b38ff85ab11e9c0.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/ShowNavigation.xml_development_web_5e5d1672521c085475a7035e7eda7343b630cffe.php $(DESTDIR)$(prefix)/app/cache/config/ShowNavigation.xml_development_web_5e5d1672521c085475a7035e7eda7343b630cffe.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/ShowErrors.xml_development_web_5d93d081626e86a2b24a069d7aa79488ca5d529b.php $(DESTDIR)$(prefix)/app/cache/config/ShowErrors.xml_development_web_5d93d081626e86a2b24a069d7aa79488ca5d529b.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/ShowErrors.xml_development_web_7f5a7e5baed7fce32f54744f7971f2634bbcb474.php $(DESTDIR)$(prefix)/app/cache/config/ShowErrors.xml_development_web_7f5a7e5baed7fce32f54744f7971f2634bbcb474.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/ShowFooter.xml_development_web_236d1365739d481c43bac9a88bd429f430c000ec.php $(DESTDIR)$(prefix)/app/cache/config/ShowFooter.xml_development_web_236d1365739d481c43bac9a88bd429f430c000ec.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/ApplicationState.xml_development_web_f50dc1b8713362eb89bcf9501df5bb701e1fd5f5.php $(DESTDIR)$(prefix)/app/cache/config/ApplicationState.xml_development_web_f50dc1b8713362eb89bcf9501df5bb701e1fd5f5.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/SquishLoader.xml_development_web_136926d86766af6c68c998dcce67b28e5ce5d597.php $(DESTDIR)$(prefix)/app/cache/config/SquishLoader.xml_development_web_136926d86766af6c68c998dcce67b28e5ce5d597.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/Error404.xml_development_web_8ea2f3d6be82e4af81dfe14be49be6b812dac862.php $(DESTDIR)$(prefix)/app/cache/config/Error404.xml_development_web_8ea2f3d6be82e4af81dfe14be49be6b812dac862.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/SquishLoader.xml_development_web_61283398678d1a57b7c71a9aec46cd68aa88bed3.php $(DESTDIR)$(prefix)/app/cache/config/SquishLoader.xml_development_web_61283398678d1a57b7c71a9aec46cd68aa88bed3.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/config_handlers.xml $(DESTDIR)$(prefix)/app/config/config_handlers.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/global_filters.xml $(DESTDIR)$(prefix)/app/config/global_filters.xml
