@@ -37,6 +37,7 @@ fix-priv:
 install: install-files fix-priv
 
 install-files:
+
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache/config
@@ -4236,7 +4237,6 @@ install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/phpunit2-noframes.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/str.replace.function.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/str.replace.function.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/run-tests.php $(DESTDIR)$(prefix)/lib/phing/test/run-tests.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/docs/index.html~ $(DESTDIR)$(prefix)/lib/ext3/docs/index.html~
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/docs/index.html $(DESTDIR)$(prefix)/lib/ext3/docs/index.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/docs/output/App.user.FormPanel.html $(DESTDIR)$(prefix)/lib/ext3/docs/output/App.user.FormPanel.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/docs/output/Array.html $(DESTDIR)$(prefix)/lib/ext3/docs/output/Array.html

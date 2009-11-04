@@ -4,7 +4,7 @@
 #
 
 DIR=$(dirname $0 )
-IGNORE="example"
+IGNORE="example|~"
 SRCDIR="app bin doc etc lib pub res"
 cd $DIR/..
 
@@ -14,7 +14,7 @@ for DIR in $SRCDIR; do
 		echo -e "\t\$(INSTALL) -m 755 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$DIR"
 	fi
 	
-	for TDIR in $(find $DIR -type d -printf "%P\n" | grep -v "$IGNORE"); do
+	for TDIR in $(find $DIR -type d -printf "%P\n" | egrep -v "$IGNORE"); do
 		SOURCE="$DIR/$TDIR"
 		
 		if [[ "$SOURCE" != "" && -e "$SOURCE" ]]; then
@@ -27,7 +27,7 @@ done
 
 for DIR in $SRCDIR; do
 	
-	for FILE in $(find $DIR -type f -printf "%P\n" | grep -v "$IGNORE"); do
+	for FILE in $(find $DIR -type f -printf "%P\n" | egrep -v "$IGNORE"); do
 		SOURCE="$DIR/$FILE"
 		
 		if [[ "$SOURCE" != "" && -e "$SOURCE" ]]; then
