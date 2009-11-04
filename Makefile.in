@@ -37,7 +37,7 @@ fix-priv:
 fix-libs:
 	ln -s $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
 
-install: install-files fix-priv
+install: install-files fix-priv fix-libs
 
 install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
