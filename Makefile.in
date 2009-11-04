@@ -37,7 +37,6 @@ fix-priv:
 install: install-files fix-priv
 
 install-files:
-
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache/config
@@ -1131,7 +1130,6 @@ install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/install-fromscratch.txt $(DESTDIR)$(prefix)/doc/install-fromscratch.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/makefile-howto.txt $(DESTDIR)$(prefix)/doc/makefile-howto.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/2-initial-data.sql~ $(DESTDIR)$(prefix)/etc/database/deltas/2-initial-data.sql~
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/1-initial-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/1-initial-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/2-initial-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/2-initial-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/db-deploy.sql
