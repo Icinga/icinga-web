@@ -15,6 +15,8 @@
      * Cherrypicked hendricks makefile changes
      * Changed installer toolkit to make basic installs
    
-   
+   * 2009-11-04
+     * Installer fixes: paths and permissions
+     * Added explicit bin owner for webfiles
       
      
