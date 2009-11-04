@@ -18,13 +18,27 @@ AC_PROG_CC
 # Checks for library functions.
 
 # Define install options
-AC_ARG_WITH(icinga_user,--with-web-user=<user> sets user name to run icinga,web_user=$withval,web_user=www-data)
-AC_ARG_WITH(web_group,--with-web-group=<grp> sets group name to run icinga,web_grp=$withval,web_grp=www-data)
+AC_ARG_WITH(web_user,--with-web-user=<user> sets user name to run icinga,web_user=$withval,web_user=www-data)
+AC_ARG_WITH(web_group,--with-web-group=<group> sets group name to run icinga,web_group=$withval,web_group=www-data)
 AC_SUBST(web_user)
-AC_SUBST(web_grp)
+AC_SUBST(web_group)
 AC_DEFINE_UNQUOTED(DEFAULT_web_user,"$web_user")
-AC_DEFINE_UNQUOTED(DEFAULT_web_group,"$web_grp")
-INSTALL_OPTS="-o $web_user -g $web_grp"
+AC_DEFINE_UNQUOTED(DEFAULT_web_group,"$web_group")
+
+AC_ARG_WITH(bin_user,--with-bin-user=<user> sets user name for common webfiles,bin_user=$withval,bin_user=root)
+AC_ARG_WITH(bin_group,--with-bin-group=<group> sets group for common webfiles,bin_group=$withval,bin_group=bin)
+AC_SUBST(bin_user)
+AC_SUBST(bin_group)
+AC_DEFINE_UNQUOTED(DEFAULT_web_user,"$bin_user")
+AC_DEFINE_UNQUOTED(DEFAULT_web_group,"$bin_group")
+
+BIN_USER="$bin_user"
+AC_SUBST(bin_user)
+
+BIN_GROUP="$bin_group"
+AC_SUBST(bin_group)
+
+INSTALL_OPTS="-o $bin_user -g $bin_group"
 AC_SUBST(INSTALL_OPTS)
 
 CFLAGS=""

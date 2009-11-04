@@ -555,7 +555,9 @@ ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 INSTALL_OPTS
-web_grp
+bin_group
+bin_user
+web_group
 web_user
 OBJEXT
 EXEEXT
@@ -608,8 +610,10 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
-with_icinga_user
+with_web_user
 with_web_group
+with_bin_user
+with_bin_group
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1227,7 +1231,9 @@ Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
 --with-web-user=<user> sets user name to run icinga
---with-web-group=<grp> sets group name to run icinga
+--with-web-group=<group> sets group name to run icinga
+--with-bin-user=<user> sets user name for common webfiles
+--with-bin-group=<group> sets group for common webfiles
 
 Some influential environment variables:
   CC          C compiler command
@@ -2603,9 +2609,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 # Define install options
 
-# Check whether --with-icinga_user was given.
-if test "${with_icinga_user+set}" = set; then :
-  withval=$with_icinga_user; web_user=$withval
+# Check whether --with-web_user was given.
+if test "${with_web_user+set}" = set; then :
+  withval=$with_web_user; web_user=$withval
 else
   web_user=www-data
 fi
@@ -2613,9 +2619,9 @@ fi
 
 # Check whether --with-web_group was given.
 if test "${with_web_group+set}" = set; then :
-  withval=$with_web_group; web_grp=$withval
+  withval=$with_web_group; web_group=$withval
 else
-  web_grp=www-data
+  web_group=www-data
 fi
 
 
@@ -2625,10 +2631,44 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 cat >>confdefs.h <<_ACEOF
-#define DEFAULT_web_group "$web_grp"
+#define DEFAULT_web_group "$web_group"
 _ACEOF
 
-INSTALL_OPTS="-o $web_user -g $web_grp"
+
+
+# Check whether --with-bin_user was given.
+if test "${with_bin_user+set}" = set; then :
+  withval=$with_bin_user; bin_user=$withval
+else
+  bin_user=root
+fi
+
+
+# Check whether --with-bin_group was given.
+if test "${with_bin_group+set}" = set; then :
+  withval=$with_bin_group; bin_group=$withval
+else
+  bin_group=bin
+fi
+
+
+
+cat >>confdefs.h <<_ACEOF
+#define DEFAULT_web_user "$bin_user"
+_ACEOF
+
+cat >>confdefs.h <<_ACEOF
+#define DEFAULT_web_group "$bin_group"
+_ACEOF
+
+
+BIN_USER="$bin_user"
+
+
+BIN_GROUP="$bin_group"
+
+
+INSTALL_OPTS="-o $bin_user -g $bin_group"
 
 
 CFLAGS=""
