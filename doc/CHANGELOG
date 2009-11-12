@@ -2,7 +2,7 @@
    * 2009-10-28
      * This is the initial release, prototyping, testing, think about features
    
- = dev
+ = 0.9.1
    * 2009-10-29
      * Updated install-fromscratch.txt: apache settings ...
      
@@ -20,5 +20,7 @@
      * Added explicit bin owner for webfiles
      * Added rabbit dropping script to clear temp and bak files
      
-      
+   * 2009-11-12
+     * Added deflate to htaccess
+     * Fixed guest users for the menuextender (adding items before admin submenu)
      
