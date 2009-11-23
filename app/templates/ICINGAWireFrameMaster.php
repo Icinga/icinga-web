@@ -23,7 +23,7 @@
 
 			<div id="frameMiddle">
 				
-				<?php echo $slots['navigation_left']; ?>
+				<?php echo (array_key_exists('navigation_left', $slots)) ? $slots['navigation_left'] : null; ?>
 				
 				<div id="contentArea">
 				<?php if(isset($t['title'])) echo '<h1 class="pageTitle">' . htmlspecialchars($t['title']) . '</h1>'; ?>

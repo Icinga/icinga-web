@@ -60,11 +60,11 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 		if (!array_key_exists($region_name, $this->regions)) {
 			$this->regions[$region_name] = true;
 			
-			if (!is_array($this->data[$region_name])) {
+			if (!array_key_exists($region_name, $this->data)) {
 				$this->data[$region_name] = array();
 			}
 			
-			if (!is_array($this->config[$region_name])) {
+			if (!array_key_exists($region_name, $this->config)) {
 				$this->config[$region_name] = array();
 			}
 			
