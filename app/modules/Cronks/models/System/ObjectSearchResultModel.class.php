@@ -113,7 +113,6 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 		foreach ($mappings as $mapping) {
 			$md = $this->mapping[$mapping];
 			$fields = $md['fields'];
-			$search = $fields[ $md[''] ];
 			
 			$result = $this->api->createSearch()
 			->setSearchTarget($md['target'])

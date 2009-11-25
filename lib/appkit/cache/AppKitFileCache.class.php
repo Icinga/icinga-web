@@ -57,9 +57,11 @@ class AppKitFileCache extends AppKitCache {
 			
 			if ((time()-filectime($file))>$config['lifetime']) {
 				$this->removeRegionData($region_name);
+				
 				if (!unlink($file)) {
 					throw new AppKitCacheException('Could not unlink cache file: %s', $file);
 				}
+				
 				return false;
 			}
 			

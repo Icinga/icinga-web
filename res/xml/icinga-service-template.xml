@@ -23,6 +23,66 @@
         <parameter name="dynamicscript">
         	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
         </parameter>
+        
+        <!-- 
+        	Selection model of rows (checkbox/row). This is needed for
+        	commands and maybe other user things ...
+        -->
+        <parameter name="selection_model">checkbox</parameter>
+        
+        <!-- 
+        	Enable/disable commands and specify which of type you'll need
+        -->
+        <parameter name="commands">
+        	<!-- 
+        		Generally enabled od disabled
+        	-->
+        	<parameter name="enabled">true</parameter>
+        
+        	<!--
+        		Sourcefieldmapping
+        		* Which field content comes from the template data source
+        	-->
+        	<parameter name="source">
+        		<parameter name="IcingaApi::COMMAND_HOST">host_name</parameter>
+        		<parameter name="IcingaApi::COMMAND_SERVICE">service_name</parameter>
+        	</parameter>
+        	
+        	<parameter name="predefined">
+        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+        		
+        		<!-- Providing the default instance -->
+        		<parameter name="IcingaApi::COMMAND_INSTANCE">${xmlfn.instance}</parameter>
+        	</parameter>
+        	
+        	<!-- 
+        		Which commands are available in this template and can charged
+        		with template data
+        	-->
+        	<parameter name="items">
+        		<parameter name="SCHEDULE_SVC_CHECK">
+        			<parameter name="title">Schedule next service check</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="PROCESS_SERVICE_CHECK_RESULT">
+        			<parameter name="title">Process service check result</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="ACKNOWLEDGE_SVC_PROBLEM">
+        			<parameter name="title">Acknowledge service check problem</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="SCHEDULE_SVC_DOWNTIME">
+        			<parameter name="title">Schedule a service downtime</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="ADD_SVC_COMMENT">
+        			<parameter name="title">Add a service comment</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        	</parameter>
+        	
+        </parameter>
     </option>
     
     <!-- 
@@ -82,7 +142,7 @@
     	Field decleration: What to display and how
     -->
     <fields>
-    
+    	
 		<field name="host_object_id">
             <datasource>
             	<parameter name="field">HOST_OBJECT_ID</parameter>

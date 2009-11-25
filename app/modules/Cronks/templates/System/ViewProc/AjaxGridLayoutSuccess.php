@@ -69,6 +69,47 @@
 					]);
 				
 				}
+				
+				// If the templates uses commands
+				var Options = MetaGrid.getOptions();
+				var bCommands = (Options['commands'] && Options['commands']['enabled'] == true) ? true : false;
+				
+				if (bCommands == true) {
+					
+					var tbEntry = this.topToolbar.add({
+						text: '<?php echo $tm->_("Commands"); ?>',
+						iconCls: 'silk-server-lightning',
+						menu: {
+							items: []
+						}
+					});
+					
+					// We need a new class
+					AppKit.Ext.ScriptDynaLoader.loadScript({
+						url: "<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CommandHandler')) ?>",
+						
+						callback: function() {
+							
+							// An instance to work with
+							var cHandler = new IcingaCommandHandler(meta);
+							
+							// The entry point to start
+							cHandler.setToolbarEntry(tbEntry);
+							
+							// We need some selection from a grid panel
+							cHandler.setGrid(grid);
+							
+							// Where we can get some info
+							cHandler.setInfoUrl('<?php echo urldecode($ro->gen("icinga.cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
+							cHandler.setSendUrl('<?php echo urldecode($ro->gen("icinga.cronks.commandProc.send", array("command" => "{0}"))); ?>');
+							
+							// We need something to click on :D
+							cHandler.enhanceToolbar();
+							
+						}
+					});
+					
+				}
 			
 			}
 		});

@@ -107,6 +107,12 @@
 							<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation" />
 						</route>
 					</route>
+					
+					<!-- Commanddispatcher json interface -->
+					<route name=".commandProc" pattern="^/commandproc/(command:([\w_]+))/json" output_type="json">
+						<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.CommandMetaInformation" />
+						<route name=".send" pattern="^/send" action="System.ViewProc.SendCommand" />
+					</route>
 
 				</route>
 

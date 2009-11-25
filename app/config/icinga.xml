@@ -164,6 +164,10 @@
 		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
 		<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
+		<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
+		
+		<!-- MISC -->
+		<parameter>%core.root_dir%/lib/appkit/js/rmd160.js</parameter>
 	</setting>
 
 	<!--
@@ -173,8 +177,7 @@
 	-->
 	<setting name="appkit.include_dynamic_javascript">
 		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
-		<!-- <parameter name="Cronks.JitExCanvas">%core.root_dir%/lib/jit/Extras/excanvas.js</parameter> -->
-		<!-- <parameter name="Cronks.JitLib">%core.root_dir%/lib/jit/jit-yc.js</parameter> -->
+		<parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</parameter>
 		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
 		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
 	</setting>

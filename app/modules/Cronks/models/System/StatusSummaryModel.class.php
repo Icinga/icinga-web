@@ -103,7 +103,7 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 			'state_name'	=> $this->dataStates[$type][$state],
 			'count'			=> $count,
 			'type'			=> $type,
-			'type_name'		=> $this->typeNames[$type],
+			'type_name'		=> (isset($this->typeNames[$type])) ? $this->typeNames[$type] : $type,
 		);
 		return $data;
 	}

@@ -62,7 +62,13 @@ implements RecursiveIterator
 	}
 	
 	public function current() {
-		return $this->offsetGet( $this->keys[ $this->key ] );
+		
+		if (isset($this->keys[ $this->key ])) {
+			return $this->offsetGet( $this->keys[ $this->key ] );
+		}
+		
+		return null;
+
 	}
 	
 	public function next() {

@@ -18,6 +18,12 @@ class IcingaTemplateXmlParser {
 	);
 	
 	/**
+	 * Object to replace some values
+	 * @var IcingaTemplateXmlReplace
+	 */
+	private $rewrite			= null;
+	
+	/**
 	 * Generic constructor
 	 * @param string $file
 	 * @return CLASS
@@ -26,6 +32,8 @@ class IcingaTemplateXmlParser {
 		if (file_exists($file)) {
 			$this->loadFile($file);
 		}
+		
+		$this->rewrite = new IcingaTemplateXmlReplace();
 	}
 	
 	/**
@@ -186,20 +194,20 @@ class IcingaTemplateXmlParser {
 		}
 	}
 	
-	private function rewriteTextContent(DOMElement &$element) {
-		$content = trim($element->textContent);
-		
-		if (is_numeric($content)) {
-			return (float)$content;	
+	/**
+	 * Detects constants within parameter names and resolve values
+	 * @param string $name
+	 * @return mixed
+	 */
+	private function rewriteParamName($name) {
+		if (strstr($name, '::')) {
+			
+			if (defined($name)) {
+				$name = AppKit::getConstant($name);
+			}
+			
 		}
-		elseif (preg_match('@^(yes|true)$@', $content)) {
-			return true;
-		}
-		elseif (preg_match('@^(no|false)$@', $content)) {
-			return false;
-		}
-		
-		return $content;
+		return $name;
 	}
 	
 	private function parseDom(DOMElement &$element, array &$storage) {
@@ -208,7 +216,7 @@ class IcingaTemplateXmlParser {
 				if ($child->nodeType == XML_ELEMENT_NODE) {
 					$index = '__BAD_INDEX';
 					if ($child->hasAttribute('name')) {
-						$index = $child->getAttribute('name');
+						$index = $this->rewrite->replaceKey( $child->getAttribute('name') );
 					}
 					elseif ($child->nodeName == 'parameter') {
 						$index = count($storage);
@@ -222,7 +230,9 @@ class IcingaTemplateXmlParser {
 						$this->parseDom($child, $storage [ $index ]);
 					}
 					else {
-						$storage [ $index ] = $this->rewriteTextContent($child);
+						
+						// Substitute boolean or numbers, ...
+						$storage [ $index ] = $this->rewrite->replaceValue( $child->textContent );
 					}
 					
 				}
