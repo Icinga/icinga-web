@@ -260,6 +260,10 @@
 			</parameter>
 			
 			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
+			
+			<!--
+				API connection type
+			-->
 			<parameter name="api_type">IcingaApi::CONNECTION_IDO</parameter>
 			
 			<parameter name="config_type">mysql</parameter>
@@ -273,6 +277,41 @@
 			<parameter name="config_password">icinga</parameter>
 			
 			<parameter name="config_table_prefix">icinga_</parameter>
+		</parameter>
+		
+		<parameter name="IcingaCommand">
+			<parameter name="class">IcingaCommand</parameter>
+			<parameter name="file">%core.module_dir%/Web/lib/icinga/factory/IcingaCommand.class.php</parameter>
+			
+			<parameter name="requiredClasses">
+				<!-- NONE -->
+			</parameter>
+			
+			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
+			
+			<parameter name="interfaces">
+			
+				<parameter name="pipe1">
+					<parameter name="enabled">false</parameter>
+					<parameter name="type">IcingaApi::COMMAND_PIPE</parameter>
+					
+					<parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
+				</parameter>
+			
+				<parameter name="ssh1">
+					<parameter name="enabled">false</parameter>
+					<parameter name="type">IcingaApi::COMMAND_SSH</parameter>
+					
+					<parameter name="ssh_bin">/usr/bin/ssh</parameter>
+					<parameter name="ssh_user">icinga</parameter>
+					<parameter name="ssh_host">127.0.0.15</parameter>
+					<parameter name="ssh_port">22</parameter>
+					<parameter name="ssh_timeout">20</parameter>
+					<parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
+				</parameter>
+			</parameter>
+			
+			
 		</parameter>
 	</setting>
 	

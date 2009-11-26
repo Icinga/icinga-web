@@ -46,8 +46,10 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 		->delete('NsmSession')
 		->execute();
 		
-		$this->getContext()->getLoggerManager()
-		->logDebug('Session garbage collector, deleted %d old sessions.', $result);
+		if ($result > 0) {
+			$this->getContext()->getLoggerManager()
+			->logInfo('Session garbage collector, deleted %d old sessions.', $result);
+		}
 		
 		if ($result > 0) return true;
 		

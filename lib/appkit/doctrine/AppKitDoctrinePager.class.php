@@ -33,9 +33,13 @@ class AppKitDoctrinePager extends Doctrine_Pager {
 	private $layout	= null;
 	private $range	= null;
 	private $url	= null;
+	private $route	= null;
 	
 	public function __construct(Doctrine_Query &$query, $page_offset, $route, $page_items) {
 		parent::__construct($query, $page_offset, $page_items);
+		
+		$this->route = $route;
+		
 		$this->execute();
 	}
 	
@@ -60,7 +64,7 @@ class AppKitDoctrinePager extends Doctrine_Pager {
 	private function initLayout() {
 		if ($this->range === null || $this->layout == null) {
 			$this->range = $this->getRange(self::$rangeType, self::$rangeOptions);
-			$this->url = $this->buildUrl($route);
+			$this->url = $this->buildUrl($this->route);
 			$this->layout = new AppKitDoctrinePagerLayout($this, $this->range, $this->url);
 			
 			

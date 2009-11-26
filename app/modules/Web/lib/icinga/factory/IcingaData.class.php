@@ -16,7 +16,9 @@ class IcingaData extends AppKitFactory {
 		
 		if (!$this->getParameter('api_file')) throw new AppKitFactoryException('api_file does not exist!');
 		
-		$this->includeApiFile($this->getParameter('api_file'));
+		if (!class_exists('IcingaApi')) {
+			$this->includeApiFile($this->getParameter('api_file'));
+		}
 		
 		$this->setParameter('api_type', AppKit::getConstant($this->getParameter('api_type')));
 		

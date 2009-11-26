@@ -68,12 +68,52 @@ IcingaCommandHandler.prototype = {
 			fieldLabel: o.fieldLabel,
 			name: o.fieldName,
 			value: o.fieldValue,
-			width: 200
+			width: 200,
+			allowBlank: (o.fieldRequired == true) ? false : true
 		}
 		
 		switch (o.fieldType) {
+			
+			case 'return_code':
+			
+				delete oDef['name'];
+			
+				Ext.apply(oDef, {
+					store: new Ext.data.ArrayStore({
+						idIndex: 0,
+						fields: ['fId', 'fStatus', 'fLabel'],
+						data: [
+							['1', '0', 'OK'],
+							['2', '1', 'Warning'],
+							['3', '2', 'Critical'],
+							['4', '3', 'Unknown'],
+							['5', '255', 'Return code out of bounds']
+						]
+					}),
+					
+					'name': '__return_value_combo',
+					
+					mode: 'local',
+					typeAhead: true,
+					triggerAction: 'all',
+					forceSelection: true,
+					
+					
+					fieldLabel: 'Status',
+					
+					valueField: 'fStatus',
+					displayField: 'fLabel',
+					
+					hiddenName: o.fieldName
+				});
+					
+				return new Ext.form.ComboBox(oDef);
+			
+			break;
+			
 			case 'date':
 				oDef.format = 'Y-m-d H:i:s';
+				oDef.value = new Date();
 				return new Ext.form.DateField(oDef);
 			break;
 			
@@ -83,8 +123,17 @@ IcingaCommandHandler.prototype = {
 			break;
 			
 			case 'checkbox':
-				oDef.boxLabel = o.fieldLabel;
-				return new Ext.form.Checkbox(oDef);
+				Ext.apply(oDef, {
+					name: o.FieldName + '-group',
+					columns: 2,
+					items: [
+						{boxLabel: 'Yes', inputValue: 1, name: o.fieldName},
+						{boxLabel: 'No', inputValue: 0, name: o.fieldName, checked: true},
+					]
+				});
+				
+				return new Ext.form.RadioGroup(oDef);
+				
 			break;
 			
 			case 'textarea':
@@ -144,15 +193,6 @@ IcingaCommandHandler.prototype = {
 				
 				var o = Ext.decode(response.responseText);
 				
-				var selection = Ext.util.JSON.encode( this.getSelection() );
-				
-				// Auth for the command, key is the timekey given
-				// by the json request (Timekey is valid for 5 minutes)
-				// The complete key is valid for the command and the selection
-				var h_data = command + '-' + selection;
-				var h_key = o.tk;
-				var h_auth = hex_hmac_rmd160(h_key, h_data);
-				
 				var oWin = new Ext.Window({
 					title: String.format('{0} ({1} items)', title, this.grid.getSelectionModel().getCount()),
 					autoDestroy: true,
@@ -178,28 +218,55 @@ IcingaCommandHandler.prototype = {
 					bodyStyle: 'padding: 5px 5px 5px 5px',
 					
 					defaults: {
-						border: false
-					}
+						border: false,
+						msgTarget: 'side'
+					}	
 				});
 				
+				oForm.getForm().on('beforeaction', function(f, a) {
+					
+					var selection = Ext.util.JSON.encode( this.getSelection() );
+					
+					// Auth for the command, key is the timekey given
+					// by the json request (Timekey is valid for 5 minutes)
+					// The complete key is valid for the command and the selection
+					var h_data = command + '-' + selection;
+					h_data += '-' + Ext.util.JSON.encode( f.getValues(false) );
+					
+					var h_key = o.tk;
+					var h_auth = hex_hmac_rmd160(h_key, h_data);
+					
+					a.options.params['auth'] = h_auth;
+					a.options.params['selection'] = selection;
+					
+					return true;
+					
+				}, this);
+				
 				var oFormAction = new Ext.form.Action.JSONSubmit(oForm.getForm(), {
-					clientValidation: false,
+					clientValidation: true,
+					
 					url: String.format(this.url_send, command),
 					
 					// The name of the json store
 					json_namespace: 'data',
 					
 					params: {
-						selection: selection,
-						auth: h_auth
+						
 					},
 					
 					failure: function(f, a) {
-						
+						if (a.failureType != Ext.form.Action.CLIENT_INVALID) {
+							var e = Ext.util.JSON.decode(a.response.responseText);
+							var error = e.errors['default'];
+							
+							AppKit.Ext.notifyMessage('Error sending command', error);
+						}
 					},
 					
 					success: function(f, a) {
-						
+						oWin.close();
+						AppKit.Ext.notifyMessage('Command sent', '{0} command was sent successfully!', command);
 					}
 				});
 				
@@ -211,7 +278,8 @@ IcingaCommandHandler.prototype = {
 						fieldLabel: item,
 						fieldName: item,
 						fieldType: o.types[item].type,
-						fieldValue: this.command_options.predefined[item] || ''
+						fieldValue: this.command_options.predefined[item] || '',
+						fieldRequired: o.types[item].required || false
 					});
 					
 					if (f) {

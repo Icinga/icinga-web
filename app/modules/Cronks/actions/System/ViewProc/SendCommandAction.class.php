@@ -29,10 +29,12 @@ class Cronks_System_ViewProc_SendCommandAction extends ICINGACronksBaseAction
 		$command = $rd->getParameter('command');
 		$auth = $rd->getParameter('auth');
 		
+		$IcingaApiCommand = AppKitFactories::getInstance()->getFactory('IcingaCommand');
+		
 		// The model
 		$sender = $this->getContext()->getModel('System.CommandSender', 'Cronks');
 		
-		if ($sender->checkAuth($rd->getParameter('command'), $rd->getParameter('selection'), $auth) === true) {
+		if ($sender->checkAuth($rd->getParameter('command'), $rd->getParameter('selection'), $rd->getParameter('data'), $auth) === true) {
 			
 			// Prepare the data
 			$sender->setCommandName($command);
@@ -40,7 +42,31 @@ class Cronks_System_ViewProc_SendCommandAction extends ICINGACronksBaseAction
 			$sender->setData($data);
 			
 			// Prepare the data structures
-			$sender->buildCommandObjects();
+			$coa = $sender->buildCommandObjects();
+			
+			if ($IcingaApiCommand->checkDispatcher() !== true) {
+				$this->setAttribute('ok', false);
+				$this->setAttribute('error', 'No command dispatchers configured!');
+				
+				return $this->getDefaultViewName();
+			}
+			
+			// Send the bundle
+			try {
+				$IcingaApiCommand->dispatchCommandArray($coa);
+			}
+			catch (IcingaCommandException $e) {
+				$errors = $IcingaApiCommand->getLastErrors();
+				$error = array();
+				foreach ($errors as $err) {
+					$error[] = sprintf('%s: %s', get_class($err), $err->getMessage());
+				}
+				
+				$this->setAttribute('ok', false);
+				$this->setAttribute('error', join(', ', $error));
+				
+				return $this->getDefaultViewName();
+			}
 		
 			$this->setAttribute('ok', true);
 			$this->setAttribute('error', null);
@@ -48,7 +74,8 @@ class Cronks_System_ViewProc_SendCommandAction extends ICINGACronksBaseAction
 		else {
 			$this->setAttribute('ok', false);
 			$this->setAttribute('error', 'Authentification failed');
-			
+			$this->getContext()->getLoggerManager()
+			->logError('Command auth failed!');
 		}
 		
 		return $this->getDefaultViewName();
