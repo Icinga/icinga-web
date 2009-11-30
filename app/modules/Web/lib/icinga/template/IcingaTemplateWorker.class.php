@@ -153,7 +153,6 @@ class IcingaTemplateWorker {
 				$data[] = $tmp;
 			}
 			
-var_dump($data);
 			return $data;
 		}
 	}
@@ -167,7 +166,7 @@ var_dump($data);
 		$out = new ArrayObject();
 		$ds = $this->getTemplate()->getSection('datasource');
 		
-		if ($ds['additional_fields'] && is_array($ds['additional_fields'])) {
+		if (isset($ds['additional_fields']) && is_array($ds['additional_fields'])) {
 			$row = new ArrayObject($result->getRow());
 
 			foreach ($ds['additional_fields'] as $name=>$resname) {
@@ -346,7 +345,7 @@ var_dump($data);
 		
 		// Additional fields
 		$ds = $this->getTemplate()->getSection('datasource');
-		if ($ds['additional_fields'] && is_array($ds['additional_fields'])) {
+		if (isset($ds['additional_fields']) && is_array($ds['additional_fields'])) {
 			$fields = array_merge($fields, array_flip($ds['additional_fields']));
 		}
 		
