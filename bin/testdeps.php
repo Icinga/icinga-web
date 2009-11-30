@@ -229,7 +229,7 @@ class IcingaWebDependencyTester {
 			
 			$name = $test['name'];
 			
-			self::pout('%s%d/%d %s', chr(9), self::$tresult['all']+1, $tests, $test['description']);
+			self::pout('%s%d/%d %s%s', chr(9), self::$tresult['all']+1, $tests, $test['description'], $test['required'] ? ' (REQUIRED)' : null);
 			self::pspace();
 			
 			$re = false;

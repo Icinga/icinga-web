@@ -5,22 +5,7 @@ $role = $t['role'];
 ?>
 <?php if ($role instanceof NsmRole) { ?>
 
-<script type="text/javascript">
-<!-- // <![CDATA[
-	YAHOO.util.Event.onContentReady("group_tabs", function () { 
-		var groupTabs = new YAHOO.widget.TabView('group_tabs');
-	});
-// ]]> -->
-</script>
-
-<div id="group_tabs" class="yui-navset">
-
-	<ul class="yui-nav">
-		<li class="selected"><a href="#group_data"><em>Settings</em></a></li>
-		<li><a href="#group_members"><em>Members</em></a></li>
-	</ul>
-	
-	<div class="yui-content">
+	<div>
 		<div id="group_data">
 		
 			<h4>Basic data</h4>
@@ -59,15 +44,8 @@ $role = $t['role'];
 				</tr>
 			
 			</table>
-			
-			<div class="submit">
-				<?php echo AppKitFormElement::create('submit', 'submit', 'Update')?>
-			</div>
-			
-			</form>
-		</div>
-	
-		<div id="group_members">
+		
+			<div id="group_members" style="margin-top: 10px">
 			
 			<h4>Memberships</h4>
 			<div>
@@ -90,9 +68,17 @@ $role = $t['role'];
 				<i>Sorry, this role contains no members!</i>
 			<?php } ?>
 			</div>
+			</div>
+			
+			<div class="submit">
+				<?php echo AppKitFormElement::create('submit', 'submit', 'Update')?>
+			</div>
+			
+			</form>
 		</div>
+	
+		
 	</div>
 
-</div>
 
 <?php } ?>

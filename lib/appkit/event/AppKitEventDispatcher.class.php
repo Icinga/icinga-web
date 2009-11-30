@@ -14,7 +14,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
 				
 				self::getInstance()->addListener( 
 					$event['event'], 
-					AppKit::getInstance($event['class'], $event['parameter']) 
+					AppKit::getInstance($event['class'], (array_key_exists('parameter', $event)) ? $event['parameter'] : array()) 
 				);
 			}
 		}

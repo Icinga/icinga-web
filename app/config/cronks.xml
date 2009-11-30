@@ -105,7 +105,7 @@
 			<parameter name="description">Statushistory for services</parameter>
 			<parameter name="name">ServiceHistory</parameter>
 			<parameter name="parameter">
-				<parameter name="template">icinga-service-template</parameter>
+				<parameter name="template">icinga-service-history-template</parameter>
 			</parameter>
 		</parameter>
 		

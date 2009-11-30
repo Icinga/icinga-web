@@ -1,0 +1,12 @@
+1. Edit the Makefile.in and delete all lines behind "install:" target:
+
+install:
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles/extjs
+	...
+	...
+
+2. Execute: ./bin/create-makefile.sh >> Makefile.in
+
+3. Test and check in changes

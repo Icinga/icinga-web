@@ -209,7 +209,7 @@ var_dump($data);
 			$meta = $this->getTemplate()->getFieldByName($key, 'display');
 			if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
 				if ($param['class'] && $param['method']) {
-					if (!is_array($param['arguments'])) $param['arguments'] = array();
+					if (!array_key_exists('arguments', $param) && !isset($param['arguments'])) $param['arguments'] = array();
 					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments'], (array)$raw);
 				}
 			}

@@ -103,17 +103,6 @@
 		<!-- ICINGAWireFrame css -->
 		<parameter>/styles/WireFrameDefault.css</parameter>
 		<parameter>/styles/WireFrameStructural.css</parameter>
-	
-		<!-- YUI css -->
-		<parameter>/js/yui/build/fonts/fonts-min.css</parameter>
-		<parameter>/js/yui/build/menu/assets/skins/sam/menu.css</parameter>
-		<parameter>/js/yui/build/tabview/assets/skins/sam/tabview.css</parameter>
-		<!-- <parameter>/js/yui/build/autocomplete/assets/skins/sam/autocomplete.css</parameter> -->
-		<parameter>/js/yui/build/container/assets/skins/sam/container.css</parameter>
-		<parameter>/js/yui/build/button/assets/skins/sam/button.css</parameter>
-		<!-- <parameter>/js/yui/build/resize/assets/skins/sam/resize.css</parameter> -->
-		<!-- <parameter>/js/yui/build/calendar/assets/skins/sam/calendar.css</parameter> -->
-		<parameter>/styles/WireFrameYUI.css</parameter>
 		
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
@@ -141,17 +130,6 @@
 		* please provide absolute paths, we create one big file later.
 	-->
 	<setting name="appkit.include_javascript">
-	
-		<!-- YUI -->
-		<parameter>%core.root_dir%/lib/yui/build/yahoo/yahoo-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/event/event-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/yahoo-dom-event/yahoo-dom-event.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/container/container-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/get/get-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/element/element-beta-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/animation/animation-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/menu/menu-min.js</parameter>
-		<parameter>%core.root_dir%/lib/yui/build/button/button-min.js</parameter>
 
 		<!-- Firebug lite for debug purposes -->
 		<!-- <parameter>%core.root_dir%/lib/firebug/firebug-lite-compressed.js</parameter> -->
@@ -302,8 +280,8 @@
 	-->
 	<setting name="appkit.version.copyright"><![CDATA[&#169; 2009 Icinga Developer Team]]></setting>
 	<setting name="appkit.version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
-	<setting name="appkit.version.major">1</setting>
-	<setting name="appkit.version.minor">0</setting>
+	<setting name="appkit.version.major">0</setting>
+	<setting name="appkit.version.minor">9</setting>
 	<setting name="appkit.version.patch">0</setting>
 	<setting name="appkit.version.extension">alpha</setting>
 	<setting name="appkit.version.name">icinga-web</setting>

@@ -21,6 +21,18 @@ Allow from all
 	RewriteRule (.*) index.php?/$1 [QSA,L]
 </IfModule>
 
+<IfModule mod_deflate.c>
+	SetOutputFilter DEFLATE
+	
+	BrowserMatch ^Mozilla/4 gzip-only-text/html
+	BrowserMatch ^Mozilla/4\.0[678] no-gzip
+	
+	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+	BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+	
+	Header append Vary User-Agent env=!dont-vary
+</IfModule>
+
 <IfDefine APACHE2>
 	AcceptPathInfo On
 </IfDefine>
