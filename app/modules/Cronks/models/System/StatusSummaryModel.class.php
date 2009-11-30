@@ -60,8 +60,10 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 	);
 
 	private $typeNames = array (
-		'host'		=> 'Hosts',
-		'service'	=> 'Services',
+		'host'			=> 'Hosts',
+		'service'		=> 'Services',
+		'hostchart'		=> 'Hosts',
+		'servicechart'	=> 'Services',
 	);
 
 	private $type = false;
