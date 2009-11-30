@@ -153,6 +153,7 @@ class IcingaTemplateWorker {
 				$data[] = $tmp;
 			}
 			
+var_dump($data);
 			return $data;
 		}
 	}
@@ -170,8 +171,6 @@ class IcingaTemplateWorker {
 			$row = new ArrayObject($result->getRow());
 
 			foreach ($ds['additional_fields'] as $name=>$resname) {
-				$resname = strtolower($resname);
-				
 				if ($row->offsetExists($resname)) {
 					$out[ $name ] = $row[ $resname ];
 				}
@@ -222,8 +221,8 @@ class IcingaTemplateWorker {
 	private function getFieldData(ArrayObject &$row, $field) {
 		$datasource = $this->getTemplate()->getFieldByName($field, 'datasource');
 		if ($datasource->getParameter('field')) {
-			if (array_key_exists( strtolower( $datasource->getParameter('field') ), $row )) {
-				return $row[ strtolower( $datasource->getParameter('field') ) ];
+			if (array_key_exists($datasource->getParameter('field'), $row)) {
+				return $row[$datasource->getParameter('field')];
 			} 
 		}
 		
