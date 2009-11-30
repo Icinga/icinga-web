@@ -251,9 +251,7 @@ IcingaCommandHandler.prototype = {
 					// The name of the json store
 					json_namespace: 'data',
 					
-					params: {
-						
-					},
+					params: {},
 					
 					failure: function(f, a) {
 						if (a.failureType != Ext.form.Action.CLIENT_INVALID) {
