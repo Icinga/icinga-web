@@ -24,3 +24,11 @@
      * Added deflate to htaccess
      * Fixed guest users for the menuextender (adding items before admin submenu)
      
+   * 2009-11-30
+     * Commands should work (Templates, Ajax proc, command factory, auth, ...)
+     * Changing API result keys to uppercase
+     * Opera array type fixes (notification baloon)
+     * Added AC macro to detect the web user
+     * Global xml replacements within the templates (view proc)
+     * Updating ExtJS to 3.0.3
+     * Removed php notice warnings (isset, undef vars)
