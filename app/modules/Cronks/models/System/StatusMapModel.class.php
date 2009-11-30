@@ -65,12 +65,12 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 			->fetch();
 
 		foreach ($apiResHosts as $row) {
-			$objectId = $idPrefix . $row['host_object_id'];
+			$objectId = $idPrefix . $row['HOST_OBJECT_ID'];
 			$hosts[$objectId] = array(
 					'id'		=> $objectId,
-					'name'		=> $row['host_name'],
+					'name'		=> $row['HOST_NAME'],
 					'data'		=> array(
-						'status'	=> $row['host_current_state'],
+						'status'	=> $row['HOST_CURRENT_STATE'],
 						'relation'	=> $this->getHostDataTable($row),
 					),
 					'children'	=> array(),
@@ -131,15 +131,15 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 		$hostTable = null;
 		$hostObjectId = false;
 		foreach ($hostData as $key => $value) {
-			if ($key == 'host_object_id') {
+			if ($key == 'HOST_OBJECT_ID') {
 				$hostObjectId = $value;
 				continue;
 			}
 			switch ($key) {
-				case 'host_current_state':
+				case 'HOST_CURRENT_STATE':
 					$value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
 					break;
-				case 'host_name':
+				case 'HOST_NAME':
 					$value = sprintf($this->scriptTemplate, $hostObjectId, $value, $value);
 					break;
 			}
