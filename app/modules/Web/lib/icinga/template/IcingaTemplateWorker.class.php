@@ -170,8 +170,6 @@ class IcingaTemplateWorker {
 			$row = new ArrayObject($result->getRow());
 
 			foreach ($ds['additional_fields'] as $name=>$resname) {
-				$resname = strtolower($resname);
-				
 				if ($row->offsetExists($resname)) {
 					$out[ $name ] = $row[ $resname ];
 				}
@@ -222,8 +220,8 @@ class IcingaTemplateWorker {
 	private function getFieldData(ArrayObject &$row, $field) {
 		$datasource = $this->getTemplate()->getFieldByName($field, 'datasource');
 		if ($datasource->getParameter('field')) {
-			if (array_key_exists( strtolower( $datasource->getParameter('field') ), $row )) {
-				return $row[ strtolower( $datasource->getParameter('field') ) ];
+			if (array_key_exists($datasource->getParameter('field'), $row)) {
+				return $row[$datasource->getParameter('field')];
 			} 
 		}
 		
@@ -284,7 +282,7 @@ class IcingaTemplateWorker {
 			$this->api_count = clone $search;
 			
 			// the result columns
-			$search->setResultColumns($this->collectCollumns());
+			$search->setResultColumns($this->collectColumns());
 			
 			// limits
 			if (is_numeric($this->pager_limit) && is_numeric($this->pager_start)) {
@@ -337,7 +335,7 @@ class IcingaTemplateWorker {
 		return $fields;
 	}
 	
-	private function collectCollumns() {
+	private function collectColumns() {
 		$fields = array ();
 		
 		// The regular fields
