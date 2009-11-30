@@ -284,7 +284,7 @@ class IcingaTemplateWorker {
 			$this->api_count = clone $search;
 			
 			// the result columns
-			$search->setResultColumns($this->collectCollumns());
+			$search->setResultColumns($this->collectColumns());
 			
 			// limits
 			if (is_numeric($this->pager_limit) && is_numeric($this->pager_start)) {
@@ -337,7 +337,7 @@ class IcingaTemplateWorker {
 		return $fields;
 	}
 	
-	private function collectCollumns() {
+	private function collectColumns() {
 		$fields = array ();
 		
 		// The regular fields
