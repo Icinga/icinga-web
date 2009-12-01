@@ -49,7 +49,7 @@
         <!-- Limit the result (LOAD) -->
         <!-- <parameter name="limit">25</parameter> -->
         
-        <parameter name="id">log_id</parameter>
+        <parameter name="id">notification_id</parameter>
         
         <!--
         	If the countmode is 'simple' countfields will be ignored always! To use with a pager
@@ -61,7 +61,7 @@
 			If the counting differs from data result you can specify a field to count
 		-->
         <parameter name="countfields">
-        	<parameter>NOTIFY_ID</parameter>
+        	<parameter>NOTIFICATION_ID</parameter>
         </parameter>
          
     </datasource>
@@ -91,7 +91,7 @@
     
         <field name="notification_id">
         	<datasource>
-        		<parameter name="field">NOTIFY_ID</parameter>
+        		<parameter name="field">NOTIFICATION_ID</parameter>
         	</datasource>
         	
         	<display>
@@ -111,7 +111,7 @@
 
 		<field name="notification_type">
         	<datasource>
-        		<parameter name="field">NOTIFY_TYPE</parameter>
+        		<parameter name="field">NOTIFICATION_TYPE</parameter>
         	</datasource>
         	
         	<display>
@@ -192,7 +192,7 @@
         
         <field name="notification_state">
         	<datasource>
-        		<parameter name="field">NOTIFY_STATE</parameter>
+        		<parameter name="field">NOTIFICATION_STATE</parameter>
         	</datasource>
         	
             <display>
@@ -225,7 +225,7 @@
 
         <field name="notification_tstamp">
         	<datasource>
-        		<parameter name="field">NOTIFY_STARTTIME</parameter>
+        		<parameter name="field">NOTIFICATION_STARTTIME</parameter>
         	</datasource>
         	
             <display>
@@ -252,7 +252,7 @@
         
         <field name="notification_output">
         	<datasource>
-        		<parameter name="field">NOTIFY_OUTPUT</parameter>
+        		<parameter name="field">NOTIFICATION_OUTPUT</parameter>
         	</datasource>
         	
             <display>

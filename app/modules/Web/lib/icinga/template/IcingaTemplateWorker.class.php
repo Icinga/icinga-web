@@ -98,11 +98,13 @@ class IcingaTemplateWorker {
 					
 					// Try to determine the fields
 					$row = $result->getRow();
-					$fields = array_keys($row);
-					$field = array_shift($fields);
+
+					if ($row !== false) {
+						$fields = array_keys($row);
+						$field = array_shift($fields);
 					
-					
-					$this->result_count = (int)$row[ $field ];
+						$this->result_count = (int)$row[ $field ];
+					}
 				}
 			}
 			
