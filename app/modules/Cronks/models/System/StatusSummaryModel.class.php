@@ -41,20 +41,20 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 	private $dataSources = array (
 		'host'			=> array (
 			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
-			'column'		=> 'host_state',
+			'column'		=> 'HOST_STATE',
 		),
 		'hostchart'		=> array (
 			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
-			'column'		=> 'host_state',
+			'column'		=> 'HOST_STATE',
 			'title'			=> 'Hosts',
 		),
 		'service'		=> array (
 			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
-			'column'		=> 'service_state',
+			'column'		=> 'SERVICE_STATE',
 		),
 		'servicechart'	=> array (
 			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
-			'column'		=> 'service_state',
+			'column'		=> 'SERVICE_STATE',
 			'title'			=> 'Services',
 		),
 	);
@@ -148,7 +148,7 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 				->setSearchTarget($this->dataSources[$this->type]['target'])
 				->fetch();
 			foreach ($result as $row) {
-				$this->addData($row->{$this->dataSources[$this->type]['column']}, $row->count);
+				$this->addData($row->{$this->dataSources[$this->type]['column']}, $row->COUNT);
 			}
 		}
 		return $this;
