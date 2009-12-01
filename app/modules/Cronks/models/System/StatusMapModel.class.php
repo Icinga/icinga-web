@@ -78,8 +78,8 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 		}
 
 		foreach ($apiResHostParents as $row) {
-			$childObjectId = $idPrefix . $row->host_child_object_id;
-			$parentObjectId = $idPrefix . $row->host_parent_object_id;
+			$childObjectId = $idPrefix . $row->HOST_CHILD_OBJECT_ID;
+			$parentObjectId = $idPrefix . $row->HOST_PARENT_OBJECT_ID;
 			if (!array_key_exists($childObjectId, $hostReferences)) {
 				$hostReferences[$childObjectId] = $hosts[$childObjectId];
 			}
