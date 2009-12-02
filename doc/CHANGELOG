@@ -32,3 +32,6 @@
      * Global xml replacements within the templates (view proc)
      * Updating ExtJS to 3.0.3
      * Removed php notice warnings (isset, undef vars)
+     
+   * 1009-12-02
+   	 * Fixed make error (#206)
