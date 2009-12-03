@@ -26,8 +26,8 @@
 	
 	<target name="db-prepare" depends="prepare">
 		<property name="db.base" value="${srcdir}/etc/database" />
-		<property name="db.deltas" value="${db.base}/deltas" />
-		<property name="db.deploy" value="${db.base}/deploy" />
+		<property name="db.deltas" value="${db.base}/deltas/${db.type}" />
+		<property name="db.deploy" value="${db.base}/deploy/${db.type}" />
 		
 		<property name="db.deploy.deploy_file" value="${db.deploy}/db-deploy.sql" />
 		<property name="db.deploy.undo_file" value="${db.deploy}/db-undo.sql" />
@@ -56,7 +56,7 @@
 	</target>
 	
 	<target name="db-init" depends="db-prepare">
-		<property name="db.init_file" value="${db.base}/deploy/init.sql" />
+		<property name="db.init_file" value="${db.base}/deploy/${db.type}/init.sql" />
 		
 		<exec
 			command="${db.mysql.call} &lt; ${db.init_file}"
@@ -95,6 +95,14 @@
 			dir="${builddir}"
 			checkreturn="true" />
 			
+	</target>
+	
+	<target name="db-upgrade" depends="db-prepare">
+		
+		<phingcall target="db-init" />
+		<phingcall target="db-createdeploy" />
+		<phingcall target="db-deploycurrent" />
+		
 	</target>
 	
 	<target name="db-initialize" depends="db-prepare">
