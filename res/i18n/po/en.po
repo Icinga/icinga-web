@@ -84,7 +84,7 @@ msgstr "Output"
 msgid "SERVICE_PERFDATA"
 msgstr "Performance data"
 
-msgid "SUREVICE_CURRENT_CHECK_ATTEMPT"
+msgid "SERVICE_CURRENT_CHECK_ATTEMPT"
 msgstr "Check attempt"
 
 msgid "SERVICE_MAX_CHECK_ATTEMPTS"
