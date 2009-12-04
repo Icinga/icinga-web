@@ -26,7 +26,7 @@ class AppKitTextboxElement extends AppKitFormElement {
 		
 		$this->setNotEmpty();
 		
-		$this->setType($type);
+		// $this->setType($type);
 		$this->setName($name);
 		$this->setCaption($caption);
 		$this->setValue($value);

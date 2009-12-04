@@ -14,18 +14,48 @@
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 5318 2008-12-19 20:44:54Z jwage $
+ * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
  */
-abstract class BaseNsmLog extends AppKitDoctrineRecord
+abstract class BaseNsmLog extends Doctrine_Record
 {
-  public function setTableDefinition()
-  {
-    $this->setTableName('nsm_log');
-    $this->hasColumn('log_id', 'integer', 4, array('type' => 'integer', 'length' => 4, 'primary' => true, 'autoincrement' => true));
-    $this->hasColumn('log_level', 'integer', 4, array('type' => 'integer', 'length' => 4, 'notnull' => true));
-    $this->hasColumn('log_message', 'string', 4000, array('type' => 'string', 'length' => 4000, 'notnull' => true));
-    $this->hasColumn('log_created', 'timestamp', null, array('type' => 'timestamp', 'notnull' => true));
-    $this->hasColumn('log_modified', 'timestamp', null, array('type' => 'timestamp', 'default' => '0000-00-00 00:00:00', 'notnull' => true));
-  }
+    public function setTableDefinition()
+    {
+        $this->setTableName('nsm_log');
+        $this->hasColumn('log_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             'unsigned' => 0,
+             'primary' => true,
+             'autoincrement' => true,
+             ));
+        $this->hasColumn('log_level', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             'unsigned' => 0,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('log_message', 'string', 4000, array(
+             'type' => 'string',
+             'length' => 4000,
+             'fixed' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('log_created', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('log_modified', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+    }
 
 }

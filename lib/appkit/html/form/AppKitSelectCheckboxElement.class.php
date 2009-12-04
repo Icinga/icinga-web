@@ -22,13 +22,13 @@ class AppKitSelectCheckboxElement extends AppKitFormElement {
 	}
 	
 	public function __construct($name, $caption, AppKitSelectSourceInterface $source) {
-		parent::__construct(null, $name, null, $caption, 'select');
+		parent::__construct(self::TYPE_CHECKBOX, $name, 0, $caption, 'div');
 		
-		$this->setType($type);
+		$this->setType(self::TYPE_CHECKBOX);
 		$this->setName($name);
 		$this->setCaption($caption);
-		$this->setValue($value);
-		$this->addClass(self::DEEFAULT_CLASS_PREFIX. $type);
+		$this->setValue(0);
+		$this->addClass(self::DEEFAULT_CLASS_PREFIX. self::TYPE_CHECKBOX);
 		$this->setId($this->generateHtmlId());
 		$this->setSource($source);
 	}

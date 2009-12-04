@@ -886,15 +886,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/i18n/mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/i18n/po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/PLACEHOLDER $(DESTDIR)$(prefix)/app/cache/config/PLACEHOLDER
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/factories.xml_development_web_19dab68a0bdfd19ac1551a4463664622aec5e04b.php $(DESTDIR)$(prefix)/app/cache/config/factories.xml_development_web_19dab68a0bdfd19ac1551a4463664622aec5e04b.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/logging.xml_development_web_df33ee1d37ccbaa6c588aac8452a7d2b7904a8d3.php $(DESTDIR)$(prefix)/app/cache/config/logging.xml_development_web_df33ee1d37ccbaa6c588aac8452a7d2b7904a8d3.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/routing.xml_development_web_9b2ff6e7cfa1e289d2cc3c8f7f807e54ac2b9e61.php $(DESTDIR)$(prefix)/app/cache/config/routing.xml_development_web_9b2ff6e7cfa1e289d2cc3c8f7f807e54ac2b9e61.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/output_types.xml_development_web_d994eed37baf6308bd2e05d66b8ee770c9a3b5f9.php $(DESTDIR)$(prefix)/app/cache/config/output_types.xml_development_web_d994eed37baf6308bd2e05d66b8ee770c9a3b5f9.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/rbac_definitions.xml_development_web_66465fffb5385b15a2fbadfcf00e707d154eac2b.php $(DESTDIR)$(prefix)/app/cache/config/rbac_definitions.xml_development_web_66465fffb5385b15a2fbadfcf00e707d154eac2b.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/global_filters.xml_development_web_ac3adaa9273baf197d173bf5bd8fbf0d7081d4f0.php $(DESTDIR)$(prefix)/app/cache/config/global_filters.xml_development_web_ac3adaa9273baf197d173bf5bd8fbf0d7081d4f0.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/action_filters.xml_development_web_01503db068cb1146607d9432ee22c872be13d2ff.php $(DESTDIR)$(prefix)/app/cache/config/action_filters.xml_development_web_01503db068cb1146607d9432ee22c872be13d2ff.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/AjaxLogin.xml_development_web_df634e5cae49ba6c33ac823f0bc4843642091723.php $(DESTDIR)$(prefix)/app/cache/config/AjaxLogin.xml_development_web_df634e5cae49ba6c33ac823f0bc4843642091723.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/AjaxLogin.xml_development_web_7dac7c6223666c54ea212dd4ba6207962c480534.php $(DESTDIR)$(prefix)/app/cache/config/AjaxLogin.xml_development_web_7dac7c6223666c54ea212dd4ba6207962c480534.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/config_handlers.xml $(DESTDIR)$(prefix)/app/config/config_handlers.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/global_filters.xml $(DESTDIR)$(prefix)/app/config/global_filters.xml
@@ -1251,8 +1242,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-deploy.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-undo.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-undo.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/init.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/init.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_schema.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.properties $(DESTDIR)$(prefix)/etc/build.properties
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
@@ -3555,7 +3546,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserRole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserPreference.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserPreference.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseChangelog.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseChangelog.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmPrincipal.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmPrincipalTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmPrincipalTarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTargetValue.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTargetValue.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmUser.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipal.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipalTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipalTarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmTarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmTargetValue.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmTargetValue.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/AppKitSQLConstants.class.php $(DESTDIR)$(prefix)/lib/appkit/database/AppKitSQLConstants.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/date/AppKitDateTime.class.php $(DESTDIR)$(prefix)/lib/appkit/date/AppKitDateTime.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/doctrine/AppKitDoctrineException.class.php $(DESTDIR)$(prefix)/lib/appkit/doctrine/AppKitDoctrineException.class.php

@@ -32,7 +32,7 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
 		$tag = AppKitXmlTag::create('img')
 		->addAttribute('src', $this->imageUrl($image_name));
 		
-		if ($title !== false) {
+		if ($alt !== false) {
 			$tag->addAttribute('alt', $alt);
 			$tag->addAttribute('title', $alt);
 		}

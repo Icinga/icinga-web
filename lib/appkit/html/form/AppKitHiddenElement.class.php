@@ -13,7 +13,7 @@ class AppKitHiddenElement extends AppKitFormElement {
 	 * @author Marius Hein
 	 */
 	public static function create($name, $value) {
-		return new AppKitHiddenElement($name, $value, $checked, $caption);
+		return new AppKitHiddenElement($name, $value);
 	}
 	
 	public function __construct($name, $value) {
