@@ -33,7 +33,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'length' => 45,
              'fixed' => false,
              'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('target_description', 'string', 100, array(
@@ -49,7 +49,15 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'length' => 45,
              'fixed' => false,
              'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('target_type', 'string', 45, array(
+             'type' => 'string',
+             'length' => 45,
+             'fixed' => false,
+             'primary' => false,
+             'notnull' => true,
              'autoincrement' => false,
              ));
     }

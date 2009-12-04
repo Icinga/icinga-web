@@ -13,12 +13,12 @@ CREATE TABLE `nsm_principal_target` (
   PRIMARY KEY (`pt_id`) ,
   CONSTRAINT `fk_nsm_principal_has_nsm_target_nsm_principal1`
     FOREIGN KEY (`pt_principal_id` )
-    REFERENCES `nsm_principal` (`principal_id` )
+    REFERENCES `icinga_web`.`nsm_principal` (`principal_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_nsm_principal_has_nsm_target_nsm_target1`
     FOREIGN KEY (`pt_target_id` )
-    REFERENCES `nsm_target` (`target_id` )
+    REFERENCES `icinga_web`.`nsm_target` (`target_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -62,9 +62,10 @@ DEFAULT CHARACTER SET = latin1;
 
 CREATE TABLE `nsm_target` (
   `target_id` INT(11) NOT NULL ,
-  `target_name` VARCHAR(45) NULL DEFAULT NULL ,
+  `target_name` VARCHAR(45) NOT NULL ,
   `target_description` VARCHAR(100) NULL DEFAULT NULL ,
-  `target_class` VARCHAR(45) NULL DEFAULT NULL ,
+  `target_class` VARCHAR(45) NOT NULL ,
+  `target_type` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`target_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
