@@ -102,7 +102,7 @@ class AppKitXmlTag extends AppKitBaseClass {
 	public function renderElement() {
 		
 
-		if ($this->tag instanceof DOMElement) {		
+		if (isset($this->tag) && $this->tag instanceof DOMElement) {		
 			if ($this->dom->hasChildNodes()) {
 				$this->dom->insertBefore($this->tag, $this->dom->firstChild);
 			}

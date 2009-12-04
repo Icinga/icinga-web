@@ -135,6 +135,7 @@
 					if (meta.template.option.dynamicscript) {
 						// Register the create grid event
 						var f = CreateGridProcessor.createCallback(meta);
+						
 						AppKit.Ext.ScriptDynaLoader.on('bulkfinish', function() {
 							f.call();
 							run = true;

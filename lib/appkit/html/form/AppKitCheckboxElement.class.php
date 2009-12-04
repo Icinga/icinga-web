@@ -1,13 +1,14 @@
 <?php
 
-class AppKitCheckboxElement extends AppKitFormElement {
-
+class AppKitCheckboxElement extends AppKitFormElement { 
+	
 	private $checked = false;
 	
 	/**
 	 * 
-	 * @param string $type
 	 * @param string $name
+	 * @param mixed $value
+	 * @param bollean $checked
 	 * @param string $caption
 	 * @return AppKitCheckboxElement
 	 * @author Marius Hein
@@ -17,7 +18,7 @@ class AppKitCheckboxElement extends AppKitFormElement {
 	}
 	
 	public function __construct($name, $value, $checked=false, $caption=null) {
-		parent::__construct(self::TYPE_CHECKBOX, $name, $value, $caption);
+		parent::__construct(AppKitFormElement::TYPE_CHECKBOX, $name, $value, $caption);
 		$this->setChecked($checked);
 	}
 
