@@ -112,6 +112,19 @@ $roles = $t['roles'];
 	</tr>
 	
 </table>
+<?php 
+
+?>
+<table class="editTable">
+	<tr>
+		<td colspan="2" class="key">Principal</td> 
+	</tr>
+	
+	<tr>
+		<td class="key">Status:</td>
+		<td class="val"><?php  ?></td>
+	</tr>
+</table>
 	
 </td></tr>
 </table>

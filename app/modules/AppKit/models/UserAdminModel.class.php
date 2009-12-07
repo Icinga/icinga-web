@@ -102,6 +102,11 @@ class AppKit_UserAdminModel extends ICINGAAppKitBaseModel
 			}
 		}
 		
+		// Checking the principal
+		if (!$user ->NsmPrincipal->principal_id) {
+			$user ->NsmPrincipal->principal_type = NsmPrincipal::TYPE_ROLE;
+		}
+		
 		// Save the record
 		$user->save();
 		

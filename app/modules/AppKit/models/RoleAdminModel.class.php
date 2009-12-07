@@ -59,6 +59,12 @@ class AppKit_RoleAdminModel extends ICINGAAppKitBaseModel
 	 */
 	public function updateRoleData(NsmRole &$role, AgaviRequestDataHolder &$rd) {
 		AppKitDoctrineUtil::updateRecordsetFromArray($role, $rd->getParameters(), self::$editableAttributes);
+		
+		// Checking the principal
+		if (!$role->NsmPrincipal->principal_id) {
+			$role->NsmPrincipal->principal_type = NsmPrincipal::TYPE_ROLE;
+		}
+		
 		$role->save();
 		return true;
 	}

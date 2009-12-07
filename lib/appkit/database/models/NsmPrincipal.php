@@ -12,5 +12,6 @@
  */
 class NsmPrincipal extends BaseNsmPrincipal
 {
-
+	const TYPE_ROLE = 'role';
+	const TYPE_USER = 'user';
 }

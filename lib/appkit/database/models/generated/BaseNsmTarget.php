@@ -26,7 +26,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'length' => 4,
              'unsigned' => 0,
              'primary' => true,
-             'autoincrement' => false,
+             'autoincrement' => true,
              ));
         $this->hasColumn('target_name', 'string', 45, array(
              'type' => 'string',
