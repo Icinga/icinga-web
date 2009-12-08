@@ -324,21 +324,12 @@
 	<setting name="appkit.version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
 	<setting name="appkit.version.major">0</setting>
 	<setting name="appkit.version.minor">9</setting>
-	<setting name="appkit.version.patch">0</setting>
+	<setting name="appkit.version.patch">1</setting>
 	<setting name="appkit.version.extension">alpha</setting>
 	<setting name="appkit.version.name">icinga-web</setting>
 	
 	<!-- PLACEHOLDER -->
 	<setting name="appkit.version.release"></setting>
-	
-	<!-- Placeholder for doctrine autocomplete configurations -->
-	<setting name="appkit.ajax.ac.prefix">de.icinga.appkit.ajax.ac.types</setting>
-	<setting name="appkit.ajax.ac.types">
-	
-	</setting>
-	
-	<!-- AJAX FILESOURCE -->
-	<setting name="appkit.ajax.fs.prefix">de.icinga.appkit.ajax.fs.sources</setting>
 	
 	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 	

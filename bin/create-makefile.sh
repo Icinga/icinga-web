@@ -8,6 +8,8 @@ IGNORE="~|development__"
 SRCDIR="app bin doc etc lib pub res"
 cd $DIR/..
 
+echo "# INSTALL_FILES_BEGIN"
+
 for DIR in $SRCDIR; do
 	
 	if [[ "$DIR" != "" && -e "$DIR" ]]; then
@@ -37,6 +39,8 @@ for DIR in $SRCDIR; do
 	done
 	
 done
+
+echo "# INSTALL_FILES_END"
 
 exit 0
 

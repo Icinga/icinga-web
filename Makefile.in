@@ -1,3 +1,7 @@
+PACKAGE_TARNAME=@PACKAGE_TARNAME@
+PACKAGE_NAME=@PACKAGE_NAME@
+PACKAGE_VERSION=@PACKAGE_VERSION@
+TAR_DIR_NAME=$(shell basename `pwd`)
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 LOGDIR=@localstatedir@
@@ -11,11 +15,20 @@ BIN_USER=@bin_user@
 BIN_GROUP=@bin_group@
 WEB_USER=@web_user@
 WEB_GROUP=@web_group@
+SED=@SED@
+INC_MAKE_FILES=./etc/make/files.mk
 
-include ./etc/make/files.mk
+include $(INC_MAKE_FILES)
 
 none:
 	@echo "Please supply a command line argument (i.e. 'make install')."
+
+install-files-list:
+	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
+	./bin/create-makefile.sh >> $(INC_MAKE_FILES)
+
+remove-temp-files:
+	./bin/rabbit.sh
 	
 clean:
 
@@ -23,7 +36,10 @@ distclean: clean
 	rm -f Makefile
 	rm -f config.log config.status
 
-devclean: distclean cacheclean
+devclean: remove-temp-files distclean cacheclean install-files-list
+
+create-tarball:
+	tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
 
 cacheclean:
 	rm -rf app/cache/config/*.php

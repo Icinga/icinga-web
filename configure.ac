@@ -5,13 +5,14 @@
 AC_PREREQ(2.61)
 
 # Init project
-AC_INIT(icinga-web, [0.9.1], [dev.icinga.org])
+AC_INIT(icinga-web, [0.9.1-alpha], [dev.icinga.org])
 
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
 
 # Checks for programs.
 AC_PROG_INSTALL
 AC_PROG_GREP
+AC_PROG_SED
 
 # Check for php
 AC_ARG_VAR([PHP],[Perl interpreter command])

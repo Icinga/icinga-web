@@ -1,5 +1,6 @@
 # included rule
 inc-install-files:
+# INSTALL_FILES_BEGIN
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache/config
@@ -1170,9 +1171,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/SendCommandSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/SendCommandSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProcSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProcSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/CronkTrigger.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/CronkTrigger.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/JitStatusMap.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/JitStatusMap.js
@@ -1234,16 +1235,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VERSION $(DESTDIR)$(prefix)/doc/VERSION
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model.mwb $(DESTDIR)$(prefix)/etc/database/model/model.mwb
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model.mwb.bak $(DESTDIR)$(prefix)/etc/database/model/model.mwb.bak
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/1-initial-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/1-initial-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/2-initial-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/2-initial-data.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/3-principal-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/3-principal-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/4-principal-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/4-principal-data.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-deploy.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/3-principal-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/3-principal-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-undo.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-undo.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/init.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/init.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_schema.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-deploy.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_data.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_schema.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.properties $(DESTDIR)$(prefix)/etc/build.properties
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
@@ -3527,6 +3527,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProviderLdap.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProviderLdap.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitUserPreferences.interface.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitUserPreferences.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitSecurityUser.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitSecurityUser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitPrincipalTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitPrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitPrincipalDummyTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitPrincipalDummyTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitArrayContainer.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitArrayContainer.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitContextInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitContextInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitFactory.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitFactory.class.php
@@ -3540,17 +3542,17 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmSession.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmSession.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmUserPreference.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmUserPreference.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmUserRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmUserRole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmLog.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmLog.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmRole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmSession.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmSession.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUser.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserRole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserPreference.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserPreference.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseChangelog.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseChangelog.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmLog.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmLog.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmPrincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmPrincipalTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmPrincipalTarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmRole.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmSession.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmSession.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTarget.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTargetValue.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTargetValue.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUser.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserPreference.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserPreference.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserRole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmUser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipalTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipalTarget.php
@@ -3569,23 +3571,22 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/event/AppKitEventDispatcher.class.php $(DESTDIR)$(prefix)/lib/appkit/event/AppKitEventDispatcher.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/exception/AppKitModelException.class.php $(DESTDIR)$(prefix)/lib/appkit/exception/AppKitModelException.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitHtmlEntitiesInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitHtmlEntitiesInterface.interface.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitXmlTag.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitXmlTag.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitCheckboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitCheckboxElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitFormElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitFormElement.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitHiddenElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitHiddenElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectArraySource.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectArraySource.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectCheckboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectCheckboxElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectDoctrineSource.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectDoctrineSource.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectSource.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectSource.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectSourceInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectSourceInterface.interface.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitCheckboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitCheckboxElement.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitHiddenElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitHiddenElement.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectCheckboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectCheckboxElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitTextboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitTextboxElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitBulkLoader.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitBulkLoader.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitHtmlHelper.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitHtmlHelper.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitXmlTag.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitXmlTag.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/Grapher.js $(DESTDIR)$(prefix)/lib/appkit/js/Grapher.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/dump.js $(DESTDIR)$(prefix)/lib/appkit/js/dump.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FancyTextField.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FancyTextField.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/SessionProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/SessionProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/GridPanel.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/GridPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/ColumnRenderer.js
@@ -3596,6 +3597,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FilterHandler.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/AppKit.js $(DESTDIR)$(prefix)/lib/appkit/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/SimpleDataProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/rmd160.js $(DESTDIR)$(prefix)/lib/appkit/js/rmd160.js
@@ -7224,3 +7226,4 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/de.po $(DESTDIR)$(prefix)/res/i18n/po/de.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/en.po $(DESTDIR)$(prefix)/res/i18n/po/en.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/updatepo.sh $(DESTDIR)$(prefix)/res/i18n/updatepo.sh
+# INSTALL_FILES_END
