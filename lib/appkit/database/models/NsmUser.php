@@ -262,9 +262,18 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	 * @return Doctrine_Collection
 	 */
 	public function getTargets($type=null) {
-		
+		return $this->getTargetsQuery($type)->execute();
+	}
+	
+	/**
+	 * Returns a DQL providing the user targets
+	 * @param string $type
+	 * @return Doctrine_Query
+	 */
+	protected function getTargetsQuery($type=null) {
 		$q = Doctrine_Query::create()
 		->select('t.*')
+		->distinct(true)
 		->from('NsmTarget t INDEXBY t.target_id')
 		->innerJoin('t.NsmPrincipalTarget pt')
 		->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
@@ -273,7 +282,59 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 			$q->andWhere('t.target_type=?', array($type));
 		}
 		
-		return $q->execute();
+		return $q;
 	}
 
+	/**
+	 * Returns true if a target exists
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function hasTarget($name) {
+		$q = $this->getTargetsQuery();
+		$q->andWhere('t.target_name=?', array($name));
+		
+		if ($q->execute()->count() > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Returns a query with all values to a target
+	 * @param string $name
+	 * @return Doctrine_Query
+	 */
+	protected function getTargetValuesQuery($target_name) {
+		$q = Doctrine_Query::create()
+		->select('tv.*')
+		->from('NsmTargetValue tv')
+		->innerJoin('tv.NsmPrincipalTarget pt')
+		->innerJoin('pt.NsmTarget t with t.target_name=?', $target_name)
+		->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+		return $q;
+	}
+	
+	/**
+	 * Return all target values as Doctrine_Collection
+	 * @param string $target_name
+	 * @return Doctrine_Collection
+	 */
+	public function getTargetValues($target_name) {
+		return $this->getTargetValuesQuery($target_name)->execute() ;
+	}
+	
+	public function getTargetValue($target_name, $value_name) {
+		$q = $this->getTargetValuesQuery($target_name);
+		$q->select('tv.tv_val');
+		$q->andWhere('tv.tv_key=?', array($value_name));
+		$res = $q->execute();
+		
+		$out = array();
+		foreach ($res as $r) {
+			$out[] = $r->tv_val;
+		}
+		return $out;
+	}
 }
