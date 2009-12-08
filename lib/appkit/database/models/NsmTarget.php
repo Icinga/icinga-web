@@ -13,6 +13,8 @@
 class NsmTarget extends BaseNsmTarget
 {
 
+	const TYPE_DUMMY	= 'dummy';
+	
 	private $target_object = null;
 	
 	public function getTargetObject() {

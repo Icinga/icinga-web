@@ -11,6 +11,7 @@ CREATE TABLE `nsm_principal_target` (
   INDEX `fk_nsm_principal_has_nsm_target_nsm_principal1` (`pt_principal_id` ASC) ,
   INDEX `fk_nsm_principal_has_nsm_target_nsm_target1` (`pt_target_id` ASC) ,
   PRIMARY KEY (`pt_id`) ,
+  INDEX `principal_unique` USING HASH (`pt_principal_id` ASC, `pt_target_id` ASC) ,
   CONSTRAINT `fk_nsm_principal_has_nsm_target_nsm_principal1`
     FOREIGN KEY (`pt_principal_id` )
     REFERENCES `icinga_web`.`nsm_principal` (`principal_id` )

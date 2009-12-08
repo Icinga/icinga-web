@@ -8,6 +8,18 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 
 	const HASH_ALGO = 'sha256';
 	
+	/**
+	 * 
+	 * @var Doctrine_Collection
+	 */
+	private $principals			= null;
+	
+	/**
+	 * 
+	 * @var array
+	 */
+	private $principals_list	= null;
+	
 	public function setUp () {
 
 		parent::setUp();
@@ -15,7 +27,7 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 		$this->hasMany('NsmRole', array (	'local'		=> 'usro_user_id',
 											'foreign'	=> 'usro_role_id',
 											'refClass'	=> 'NsmUserRole'));
-
+		
         $options = array (
         	'created' =>  array('name'	=> 'user_created'),
         	'updated' =>  array('name'	=> 'user_modified'),
@@ -203,6 +215,65 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 		foreach ($res as $key=>$d) $out[$key] = $d['upref_val'];
 		
 		return $out;
+	}
+	
+	/**
+	 * Returns a list of all belonging principals
+	 * @return array
+	 */
+	public function getPrincipalsList() {
+		
+		if ($this->principals_list === null) {
+			
+			$this->principals_list = array_keys( $this->getPrincipals()->toArray() );
+				
+		}
+		
+		return $this->principals_list;
+	}
+	
+	
+	/**
+	 * Return all principals belonging to this
+	 * user
+	 * @return Doctrine_Collection
+	 */
+	public function getPrincipals() {
+		
+		if ($this->principals === null) {
+		
+			$this->principals = Doctrine_Query::create()
+			->select('p.*')
+			->from('NsmPrincipal p INDEXBY p.principal_id')
+			->leftJoin('p.NsmRole r')
+			->leftJoin('r.NsmUserRole ur')
+			->andWhere('ur.usro_user_id=? or p.principal_user_id=?', array($this->user_id, $this->user_id))
+			->execute();
+		
+		}
+		
+		return $this->principals;
+		
+	}
+	
+	/**
+	 * Return all targets belonging to thsi user
+	 * @param string $type
+	 * @return Doctrine_Collection
+	 */
+	public function getTargets($type=null) {
+		
+		$q = Doctrine_Query::create()
+		->select('t.*')
+		->from('NsmTarget t INDEXBY t.target_id')
+		->innerJoin('t.NsmPrincipalTarget pt')
+		->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+		
+		if ($type !== null) {
+			$q->andWhere('t.target_type=?', array($type));
+		}
+		
+		return $q->execute();
 	}
 
 }

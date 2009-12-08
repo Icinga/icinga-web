@@ -112,22 +112,22 @@ $roles = $t['roles'];
 	</tr>
 	
 </table>
-<?php 
 
-?>
-<table class="editTable">
+<?php
+/* <table class="editTable">
 	<tr>
 		<td colspan="2" class="key">Principal</td> 
 	</tr>
 	
 	<tr>
 		<td class="key">Status:</td>
-		<td class="val"><?php  ?></td>
+		<td class="val">...</td>
 	</tr>
 </table>
 	
 </td></tr>
-</table>
+</table> */
+?>
 
 <?php echo AppKitHiddenElement::create('id', $user->user_id ? $user->user_id : 'new')?>
 

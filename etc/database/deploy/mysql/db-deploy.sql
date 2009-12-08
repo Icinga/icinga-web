@@ -103,6 +103,7 @@ CREATE TABLE `nsm_principal_target` (
   INDEX `fk_nsm_principal_has_nsm_target_nsm_principal1` (`pt_principal_id` ASC) ,
   INDEX `fk_nsm_principal_has_nsm_target_nsm_target1` (`pt_target_id` ASC) ,
   PRIMARY KEY (`pt_id`) ,
+  INDEX `principal_unique` USING HASH (`pt_principal_id` ASC, `pt_target_id` ASC) ,
   CONSTRAINT `fk_nsm_principal_has_nsm_target_nsm_principal1`
     FOREIGN KEY (`pt_principal_id` )
     REFERENCES `icinga_web`.`nsm_principal` (`principal_id` )
@@ -179,6 +180,9 @@ INSERT INTO `nsm_principal` VALUES
 	(2,NULL,3,'role',0),
 	(3,NULL,4,'role',0),
 	(4,NULL,5,'role',0);
+
+INSERT INTO `nsm_target` VALUES
+	(1, 'DummyTestTarget', 'Just a dummy principal target', 'AppKitPrincipalDummyTarget', 'dummy');
 
 UPDATE changelog SET complete_dt = NOW() WHERE change_number = 4 AND delta_set = 'Main';
 -- Fragment ends: 4 --
