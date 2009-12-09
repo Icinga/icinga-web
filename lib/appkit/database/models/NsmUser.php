@@ -218,6 +218,14 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	}
 	
 	/**
+	 * Returns the status of the corresponding principal
+	 * @return boolean
+	 */
+	public function principalIsValid() {
+		return ($this->NsmPrincipal->principal_id > 0) ? true : false;
+	}
+	
+	/**
 	 * Returns a list of all belonging principals
 	 * @return array
 	 */

@@ -36,6 +36,8 @@
 				
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
 				
+					<route name=".principaledit" pattern="^/principaleditor/(principal:(\d+))" action="Admin.PrincipalEditor" output_type="simplecontent" />
+				
 					<route name=".users" pattern="^/users" action="Admin.Users.Index">
 						<route pattern="^/(id:(\d+|new))">
 							<route name=".edit" pattern="^$" action="Admin.Users.Edit" />

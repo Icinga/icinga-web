@@ -113,21 +113,47 @@ $roles = $t['roles'];
 	
 </table>
 
-<?php
-/* <table class="editTable">
+<?php 
+
+?>
+<table class="editTable">
 	<tr>
 		<td colspan="2" class="key">Principal</td> 
 	</tr>
-	
+
 	<tr>
-		<td class="key">Status:</td>
-		<td class="val">...</td>
+		<td colspan="2" class="val">
+		
+			<!-- Edit frame -->
+			<div id="principal_edit_frame"></div>
+			
+			<!-- Load the principal editor the corresponding principal -->
+			<script type="text/javascript">
+			<!-- // <![CDATA[
+
+			Ext.onReady(function() {
+				var ele = Ext.get('principal_edit_frame');
+				if (ele) {
+					ele.getUpdater().setDefaultUrl({
+						url: '<?php echo $ro->gen("appkit.admin.principaledit", array("principal" => $user->NsmPrincipal->principal_id)); ?>',
+						scripts: true
+					});
+
+					ele.getUpdater().refresh();
+				}
+			});
+            
+			// ]]> -->
+			</script>
+		
+		</td>
 	</tr>
+	
 </table>
 	
 </td></tr>
-</table> */
-?>
+</table>
+
 
 <?php echo AppKitHiddenElement::create('id', $user->user_id ? $user->user_id : 'new')?>
 
