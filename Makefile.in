@@ -52,6 +52,7 @@ fix-priv:
 	chmod -R 775 $(DESTDIR)$(prefix)/app/cache
 
 fix-libs:
+	rm -rf $(DESTDIR)$(prefix)/pub/js/ext3
 	ln -s $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
 
 install: inc-install-files fix-priv fix-libs
