@@ -486,6 +486,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/view
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth/principal
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/class
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/database
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/database/models
@@ -913,6 +914,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/EditAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/IndexAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/ViewLogsAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/ViewLogsAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/PrincipalEditorAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/PrincipalEditorAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ajax/AutoCompleteAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ajax/AutoCompleteAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ajax/FileSourceAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ajax/FileSourceAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ajax/TestAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ajax/TestAction.class.php
@@ -944,6 +946,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Admin/Users/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Admin/Users/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Admin/Users/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Admin/Users/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Admin/ViewLogs.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Admin/ViewLogs.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Admin/PrincipalEditor.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Admin/PrincipalEditor.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Ajax/AutoComplete.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Ajax/AutoComplete.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Ajax/FileReader.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Ajax/FileReader.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Ajax/FileSource.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Ajax/FileSource.xml
@@ -985,16 +988,17 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/MessageQueueAggregatorModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/MessageQueueAggregatorModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/MyPreferencesModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/MyPreferencesModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/NavigationContainerModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/NavigationContainerModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/RoleAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/RoleAdminModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/UserAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/UserAdminModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/SquishFileContainerModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/SquishFileContainerModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/HeaderDataModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/HeaderDataModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/RoleAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/RoleAdminModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/UserAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/UserAdminModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/IndexSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/IndexSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/ViewLogsSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/ViewLogsSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/PrincipalEditorSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/PrincipalEditorSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ajax/AutoCompleteSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ajax/AutoCompleteSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ajax/FileSourceSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ajax/FileSourceSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ajax/FileSrcSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ajax/FileSrcSuccess.php
@@ -1028,6 +1032,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/ViewLogs.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/ViewLogs.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/PrincipalEditor.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/PrincipalEditor.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ajax/AutoComplete.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ajax/AutoComplete.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ajax/FileSource.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ajax/FileSource.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ajax/Test.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ajax/Test.xml
@@ -1055,6 +1060,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Users/EditSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users/EditSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Users/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users/IndexSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/ViewLogsSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/ViewLogsSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/PrincipalEditorSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/PrincipalEditorSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ajax/AutoCompleteSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ajax/AutoCompleteSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ajax/FileSourceSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ajax/FileSourceSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ajax/TestSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ajax/TestSuccessView.class.php
@@ -1223,8 +1229,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/phing $(DESTDIR)$(prefix)/bin/phing
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/rabbit.sh $(DESTDIR)$(prefix)/bin/rabbit.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/GPL $(DESTDIR)$(prefix)/doc/GPL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/LICENSE $(DESTDIR)$(prefix)/doc/LICENSE
@@ -1237,8 +1243,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model.mwb $(DESTDIR)$(prefix)/etc/database/model/model.mwb
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/1-initial-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/1-initial-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/2-initial-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/2-initial-data.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/4-principal-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/4-principal-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/3-principal-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/3-principal-scheme.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/4-principal-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/4-principal-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-undo.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-undo.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/init.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/init.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-deploy.sql
@@ -3527,8 +3533,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProviderLdap.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProviderLdap.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitUserPreferences.interface.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitUserPreferences.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitSecurityUser.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitSecurityUser.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitPrincipalTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitPrincipalTarget.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitPrincipalDummyTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitPrincipalDummyTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/principal/AppKitPrincipalDummyTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/principal/AppKitPrincipalDummyTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/principal/AppKitPrincipalTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/principal/AppKitPrincipalTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitArrayContainer.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitArrayContainer.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitContextInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitContextInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitFactory.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitFactory.class.php
@@ -3546,18 +3552,18 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmLog.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmLog.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmPrincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmPrincipalTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmPrincipalTarget.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmRole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmSession.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmSession.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTarget.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTargetValue.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTargetValue.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserPreference.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserPreference.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmUserRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmUserRole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmUser.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipal.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmRole.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmRole.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/generated/BaseNsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/generated/BaseNsmTarget.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipalTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipalTarget.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmTarget.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmTargetValue.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmTargetValue.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipal.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmTarget.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmTarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmUser.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmUser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/AppKitSQLConstants.class.php $(DESTDIR)$(prefix)/lib/appkit/database/AppKitSQLConstants.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/date/AppKitDateTime.class.php $(DESTDIR)$(prefix)/lib/appkit/date/AppKitDateTime.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/doctrine/AppKitDoctrineException.class.php $(DESTDIR)$(prefix)/lib/appkit/doctrine/AppKitDoctrineException.class.php
