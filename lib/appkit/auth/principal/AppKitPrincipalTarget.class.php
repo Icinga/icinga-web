@@ -10,6 +10,10 @@ abstract class AppKitPrincipalTarget extends AppKitBaseClass {
 		
 	}
 	
+	public function getFields() {
+		return $this->fields;
+	}
+	
 	protected function setFields(array $a) {
 		$this->fields = $a;
 	}
