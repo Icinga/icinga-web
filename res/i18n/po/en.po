@@ -71,6 +71,9 @@ msgstr "Scheduled downtime depth"
 msgid "HOST_STATUS_UPDATE_TIME"
 msgstr "Status update time"
 
+msgid "HOST_NOTES_URL"
+msgstr "Notes url"
+
 # table output of service information
 msgid "SERVICE_DISPLAY_NAME"
 msgstr "Display name"
@@ -119,3 +122,6 @@ msgstr "Scheduled downtime depth"
 
 msgid "SERVICE_STATUS_UPDATE_TIME"
 msgstr "Status update time"
+
+msgid "SERVICE_NOTES_URL"
+msgstr "Notes url"
