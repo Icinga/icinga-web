@@ -32,6 +32,8 @@
 				-->
 				<parameter>HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
 				<parameter>HOST_STATUS_UPDATE_TIME</parameter>
+				
+				<parameter>HOST_NOTES_URL</parameter>
 				<!-- 
 				Active Checks:	ENABLED  
 				Passive Checks:	ENABLED  
@@ -92,6 +94,8 @@
 				-->
 				<parameter>SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
 				<parameter>SERVICE_STATUS_UPDATE_TIME</parameter>
+				
+				<parameter>SERVICE_NOTES_URL</parameter>
 				<!-- 
 				Active Checks:	ENABLED  
 				Passive Checks:	ENABLED  

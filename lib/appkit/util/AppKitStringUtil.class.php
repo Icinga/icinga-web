@@ -78,6 +78,15 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		return $request_uri;
 	}
 	
+	/**
+	 * Returns true if an url is found
+	 * @param string $url
+	 * @return boolean
+	 */
+	public function detectUrl($url) {
+		return preg_match('@^[a-z]{3,8}://.+$@', $url);
+	}
+	
 }
 
 ?>

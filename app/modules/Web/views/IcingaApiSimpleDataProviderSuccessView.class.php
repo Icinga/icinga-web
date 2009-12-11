@@ -33,9 +33,20 @@ class Web_IcingaApiSimpleDataProviderSuccessView extends ICINGAWebBaseView
 			foreach ($result->getRow() as $key => $value) {
 				if ($key == 'HOST_CURRENT_STATE') {
 					$value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
-				} elseif ($key == 'SERVICE_CURRENT_STATE') {
+				} 
+				elseif ($key == 'SERVICE_CURRENT_STATE') {
 					$value = IcingaServiceStateInfo::Create($value)->getCurrentStateAsText();
 				}
+				elseif (strpos($key, 'URL') !== false && AppKitStringUtil::detectUrl($value)) {
+					$value = AppKitXmlTag::create('a', $value)
+					->addAttribute('href', $value)
+					->addAttribute('target', '_blank')
+					->toString();
+				}
+				elseif (strpos($key, 'URL') !== false && !$value) {
+					continue;
+				}
+				
 				$dataTmp = array (
 					'key'	=> $tm->_($key),
 					'value'	=> $value,
