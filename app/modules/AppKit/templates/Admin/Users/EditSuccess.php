@@ -113,7 +113,6 @@ $roles = $t['roles'];
 	
 </table>
 
-<?php /*
 <table class="editTable">
 	<tr>
 		<td colspan="2" class="key">Principal</td> 
@@ -148,8 +147,6 @@ $roles = $t['roles'];
 	</tr>
 	
 </table>
-
-*/ ?>
 
 </td></tr>
 </table>

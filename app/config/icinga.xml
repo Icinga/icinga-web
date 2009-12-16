@@ -292,7 +292,7 @@
 			<parameter name="interfaces">
 			
 				<parameter name="pipe1">
-					<parameter name="enabled">false</parameter>
+					<parameter name="enabled">true</parameter>
 					<parameter name="type">IcingaApi::COMMAND_PIPE</parameter>
 					
 					<parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
