@@ -19,6 +19,26 @@
 						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
 			</validator>
 			
+			<validator class="string" name="principal_value" required="false">
+				<arguments base="principal_value[][][]">
+					<argument />
+				</arguments>
+				
+				<errors>
+					<error>Principal validation failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="principal_target" required="false">
+				<arguments base="principal_target[][][]">
+					<argument />
+				</arguments>
+				
+				<errors>
+					<error>Principal validation failed!</error>
+				</errors>
+			</validator>
+			
 			<validator class="string" name="role_name" required="true">
 					<argument>role_name</argument>
 					<ae:parameter name="min">1</ae:parameter>

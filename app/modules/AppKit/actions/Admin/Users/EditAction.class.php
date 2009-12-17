@@ -42,6 +42,8 @@ class AppKit_Admin_Users_EditAction extends ICINGAAppKitBaseAction
 			// Our user model
 			$useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
 			
+			$padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
+			
 			// This is our user!
 			if ($rd->getParameter('id') == 'new') {
 				$user = new NsmUser();
@@ -60,6 +62,12 @@ class AppKit_Admin_Users_EditAction extends ICINGAAppKitBaseAction
 			
 			// Updating the roles
 			$useradmin->updateUserroles($user, $rd->getParameter('userroles', array()));
+			
+			$padmin->updatePrincipalValueData(
+				$user->NsmPrincipal, 
+				$rd->getParameter('principal_target', array ()),
+				$rd->getParameter('principal_value', array ())
+			);
 			
 			// Give notice!
 			$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Info('Userdata updated.'));

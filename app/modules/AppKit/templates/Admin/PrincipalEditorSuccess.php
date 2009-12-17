@@ -3,6 +3,10 @@
 	
 	// Principal admin model from the view
 	$pa =& $t['pa'];
+	
+	$pid = $rd->getParameter('principal');
+	
+	// var_dump($pa->getSelectedValues($pid));
 ?>
 <div id="<?php echo $eid; ?>"></div>
 <script type="text/javascript">
@@ -17,6 +21,7 @@
 
 		var targets = <?php echo json_encode($pa->getTargetArray()); ?>;
 		
+		var selected = <?php echo json_encode($pa->getSelectedValues($pid)); ?>;
 		
 		var pub = {
 			getMenuItems : function() {
@@ -54,10 +59,24 @@
 				
 				panel.doLayout();
 
+				// Fill the panel with the defaults
+				Ext.iterate(selected, function(tname,tva) {
+					
+					if (Ext.isObject(tva)) {
+						Ext.iterate(tva, function(index, item) {
+							this.addHandler(tname, item);
+						}, this);
+					}
+					
+				}, this);
 				return true;
 			},
 
-			addHandler : function(name) {
+			addHandler : function(name, selected) {
+
+				if (selected == undefined) {
+					selected = {};
+				}
 
 				var aItems = [{
 					'xtype': 'label',
@@ -66,10 +85,30 @@
 
 				var fields = targets[name].fields;
 				
+				aItems.push({
+					xtype: 'hidden',
+					name: 'principal_target[' + targets[name].id + '][set][]',
+					value: 1
+				});
+				
+				aItems.push({
+					xtype: 'hidden',
+					name: 'principal_target[' + targets[name].id + '][name][]',
+					value: name
+				});
+				
 				Ext.iterate(fields, function(k, v) {
+					var val = "";
+					
+					if (selected[k]) {
+						val = selected[k];
+					}
+					
 					aItems.push({
 						xtype: 'textfield',
 						fieldLabel: k,
+						name: 'principal_value[' + targets[name].id + '][' + k + '][]',
+						value: val
 					});
 				});
 				
@@ -81,7 +120,7 @@
 						handler: function(b, e) {
 							var p = b.findParentByType('panel');
 							if (p) {
-								p.hide();
+								p.destroy();
 							}
 						}
 					}, {

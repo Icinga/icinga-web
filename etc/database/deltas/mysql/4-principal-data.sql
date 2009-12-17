@@ -6,8 +6,10 @@ INSERT INTO `nsm_principal` VALUES
 	(3,NULL,4,'role',0),
 	(4,NULL,5,'role',0);
 
-INSERT INTO `nsm_target` VALUES
-	(1, 'DummyTestTarget', 'Just a dummy principal target', 'AppKitPrincipalDummyTarget', 'dummy');
+INSERT INTO `nsm_target` VALUES 
+	(1,'IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga'),
+	(2,'IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga'),
+	(3,'IcingaCustomVariablePair','Limit data access to specific custom variables','IcingaDataCustomVariablePrincipalTarget','icinga');
 
 -- //@UNDO
 

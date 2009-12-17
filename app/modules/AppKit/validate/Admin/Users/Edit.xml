@@ -27,6 +27,26 @@
 					</arguments>
 			</validator>
 			
+			<validator class="string" name="principal_value" required="false">
+				<arguments base="principal_value[][][]">
+					<argument />
+				</arguments>
+				
+				<errors>
+					<error>Principal validation failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="principal_target" required="false">
+				<arguments base="principal_target[][][]">
+					<argument />
+				</arguments>
+				
+				<errors>
+					<error>Principal validation failed!</error>
+				</errors>
+			</validator>
+			
 			<validator class="string" name="user_name" required="true">
 					<argument>user_name</argument>
 					<ae:parameter name="min">3</ae:parameter>

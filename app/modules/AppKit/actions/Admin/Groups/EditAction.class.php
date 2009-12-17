@@ -43,6 +43,7 @@ class AppKit_Admin_Groups_EditAction extends ICINGAAppKitBaseAction
 			
 			
 			$roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
+			$padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
 			
 			if ($rd->getParameter('id') == 'new') {
 				$role = new NsmRole();
@@ -54,6 +55,13 @@ class AppKit_Admin_Groups_EditAction extends ICINGAAppKitBaseAction
 			// Update the basics
 			Doctrine_Manager::connection()->beginTransaction();
 			$roleadmin->updateRoleData($role, $rd);
+			
+			$padmin->updatePrincipalValueData(
+				$role->NsmPrincipal, 
+				$rd->getParameter('principal_target', array ()),
+				$rd->getParameter('principal_value', array ())
+			);
+			
 			Doctrine_Manager::connection()->commit();
 			
 			$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Info('Role successfully updated!'));

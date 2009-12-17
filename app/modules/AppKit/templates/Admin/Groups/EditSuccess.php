@@ -68,6 +68,45 @@ $role = $t['role'];
 				<i>Sorry, this role contains no members!</i>
 			<?php } ?>
 			</div>
+			
+			<h4>Principal</h4>
+			<div>
+			<table class="editTable">
+				<tr>
+					<td colspan="2" class="key">Principal</td> 
+				</tr>
+			
+				<tr>
+					<td colspan="2" class="val">
+					
+						<!-- Edit frame -->
+						<div id="principal_edit_frame"></div>
+						
+						<!-- Load the principal editor the corresponding principal -->
+						<script type="text/javascript">
+						<!-- // <![CDATA[
+			
+						Ext.onReady(function() {
+							var ele = Ext.get('principal_edit_frame');
+							if (ele) {
+								ele.getUpdater().setDefaultUrl({
+									url: '<?php echo $ro->gen("appkit.admin.principaledit", array("principal" => $role->NsmPrincipal->principal_id)); ?>',
+									scripts: true
+								});
+			
+								ele.getUpdater().refresh();
+							}
+						});
+			            
+						// ]]> -->
+						</script>
+					
+					</td>
+				</tr>
+				
+			</table>
+			</div>
+			
 			</div>
 			
 			<div class="submit">
