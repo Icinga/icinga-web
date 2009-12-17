@@ -14,6 +14,9 @@ class IcingaDataHostgroupPrincipalTarget extends IcingaDataPrincipalTarget {
 		
 		$this->setDescription('Limit data access to hostgroups');
 		
+		$this->setApiMappingFields(array(
+			'hostgroup'	=> 'HOSTGROUP_NAME'
+		));
 	}
 	
 }

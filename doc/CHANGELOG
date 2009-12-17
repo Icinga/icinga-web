@@ -2,7 +2,7 @@
    * 2009-10-28
      * This is the initial release, prototyping, testing, think about features
    
- = 0.9.1
+ = 0.9.1-alpha
    * 2009-10-29
      * Updated install-fromscratch.txt: apache settings ...
      
@@ -33,5 +33,13 @@
      * Updating ExtJS to 3.0.3
      * Removed php notice warnings (isset, undef vars)
      
-   * 1009-12-02
+   * 2009-12-02
    	 * Fixed make error (#206)
+   	 
+ = 0.9.1-beta
+   * 1009-12-17
+     * Added some icinga specific principal target classes
+     * Finished editing of principal targets for users and groups
+     * Added editing models for principals
+     * Finished principal target filtering in xml temlates
+     * Added default icinga filter targets

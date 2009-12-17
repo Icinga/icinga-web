@@ -28,6 +28,9 @@
 		<parameter name="session.gc_probability">3</parameter>
 		<parameter name="session.gc_divisor">100</parameter>
 		<parameter name="session.gc_maxlifetime">86400</parameter>
+		
+		<!-- Set the default timezone, this is missing on some systems -->
+		<parameter name="date.timezone">GMT</parameter>
 	</setting>
 	
 	<!-- 
@@ -314,7 +317,6 @@
 			
 		</parameter>
 	</setting>
-	
 	
 	<!-- 
 		Version information

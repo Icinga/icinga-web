@@ -310,6 +310,21 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	}
 	
 	/**
+	 * 
+	 * @param string $name
+	 * @return NsmTarget
+	 */
+	public function getTarget($name) {
+		$col = Doctrine::getTable('NsmTarget')->findByDql('target_name=?', array($name));
+		if ($col->count() == 1 && $this->hasTarget($name)) {
+			return $col->getFirst();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
 	 * Returns a query with all values to a target
 	 * @param string $name
 	 * @return Doctrine_Query
@@ -330,7 +345,7 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 	 * @return Doctrine_Collection
 	 */
 	public function getTargetValues($target_name) {
-		return $this->getTargetValuesQuery($target_name)->execute() ;
+		return $this->getTargetValuesQuery($target_name)->execute();
 	}
 	
 	public function getTargetValue($target_name, $value_name) {

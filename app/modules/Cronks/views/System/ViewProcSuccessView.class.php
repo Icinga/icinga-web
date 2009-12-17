@@ -46,6 +46,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		$worker = new IcingaTemplateWorker();
 		$worker->setTemplate($template);
 		$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
+		$worker->setUser($this->getContext()->getUser()->getNsmUser());
 		
 		if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
 			$worker->setResultLimit($rd->getParameter('page_start'), $rd->getParameter('page_limit'));

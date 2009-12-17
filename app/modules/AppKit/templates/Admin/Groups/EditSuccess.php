@@ -69,6 +69,7 @@ $role = $t['role'];
 			<?php } ?>
 			</div>
 			
+			<div id="group_members" style="margin-top: 10px">
 			<h4>Principal</h4>
 			<div>
 			<table class="editTable">
@@ -105,6 +106,7 @@ $role = $t['role'];
 				</tr>
 				
 			</table>
+			</div>
 			</div>
 			
 			</div>

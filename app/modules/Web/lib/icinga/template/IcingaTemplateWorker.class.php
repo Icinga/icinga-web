@@ -44,6 +44,12 @@ class IcingaTemplateWorker {
 	
 	private $conditions		= array();
 	
+	/**
+	 * User for validating data privileges
+	 * @var NsmUser
+	 */
+	private $user			= null;
+	
 	public function __construct(IcingaTemplateXmlParser &$template = null) {
 		if ($template) $this->setTemplate($template);
 	}
@@ -248,6 +254,32 @@ class IcingaTemplateWorker {
 		return $this->getTemplate()->getFieldByName($field_name, 'datasource')->getParameter('field');
 	}
 	
+	private function setPrivileges(IcingaApiSearchInterface &$search) {
+		$s = $this->getTemplate()->getSection('option');
+		if (isset($s['security']) && is_array($s['security'])) {
+			
+			foreach ($s['security'] as $tname) {
+				$target = $this->user->getTarget($tname);
+				
+				if ($target) {
+					$to = $target->getTargetObject();
+					
+					foreach ($this->user->getTargetValues($tname) as $rv) {
+						$aqlfield = $to->getApiMappingField($rv->tv_key);
+						
+						if ($aqlfield) {
+							$search->setSearchFilter($aqlfield, $rv->tv_val);
+						}
+					}
+					
+					
+				}
+				
+			}
+			
+		}
+	}
+	
 	private function buildDataSource() {
 		if ($this->api_search === null) {
 			$params = $this->getTemplate()->getSectionParams('datasource');
@@ -273,6 +305,8 @@ class IcingaTemplateWorker {
 					$search->setSearchFilter($condition['field'], $condition['val'], $condition['op']);
 				}
 			}
+			
+			$this->setPrivileges($search);
 			
 			// Groupby fields
 			$gbf = $this->getGroupByFields();
@@ -423,6 +457,10 @@ class IcingaTemplateWorker {
 		);
 		
 		return $id;
+	}
+	
+	public function setUser(NsmUser &$u) {
+		$this->user =& $u;
 	}
 	
 }
