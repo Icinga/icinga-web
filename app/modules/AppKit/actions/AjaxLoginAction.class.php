@@ -26,10 +26,9 @@ class AppKit_AjaxLoginAction extends ICINGAAppKitBaseAction
 		$username = $rd->getParameter('username');
 		$password = $rd->getParameter('password');
 		$do = $rd->getParameter('dologin');
-				
+		
 		$this->setAttribute('authenticated', false);
 		$this->setAttribute('executed', false);
-		
 		
 		if ($do) {
 		

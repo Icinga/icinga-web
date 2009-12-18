@@ -113,6 +113,7 @@ $roles = $t['roles'];
 	
 </table>
 
+<?php if ($user->NsmPrincipal->principal_id) { ?>
 <table class="editTable">
 	<tr>
 		<td colspan="2" class="key">Principal</td> 
@@ -147,6 +148,7 @@ $roles = $t['roles'];
 	</tr>
 	
 </table>
+<?php } ?>
 
 </td></tr>
 </table>

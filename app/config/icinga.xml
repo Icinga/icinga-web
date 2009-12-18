@@ -39,7 +39,7 @@
 	-->
 	<setting name="appkit.autoloader.paths">
 		<parameter>%core.root_dir%/lib/appkit</parameter>
-		<parameter>%core.module_dir%/Web/lib/icinga</parameter>
+		<parameter>%core.app_dir%/lib/icinga</parameter>
 	</setting>
 	
 	<!-- The class prefixes -->
@@ -256,7 +256,7 @@
 		<!-- icinga-api data interface -->
 		<parameter name="IcingaData">
 			<parameter name="class">IcingaData</parameter>
-			<parameter name="file">%core.module_dir%/Web/lib/icinga/factory/IcingaData.class.php</parameter>
+			<parameter name="file">%core.root_dir%/app/lib/icinga/factory/IcingaData.class.php</parameter>
 			
 			<parameter name="requiredClasses">
 				<!-- NONE -->
@@ -284,7 +284,7 @@
 		
 		<parameter name="IcingaCommand">
 			<parameter name="class">IcingaCommand</parameter>
-			<parameter name="file">%core.module_dir%/Web/lib/icinga/factory/IcingaCommand.class.php</parameter>
+			<parameter name="file">%core.root_dir%/app/lib/icinga/factory/IcingaCommand.class.php</parameter>
 			
 			<parameter name="requiredClasses">
 				<!-- NONE -->

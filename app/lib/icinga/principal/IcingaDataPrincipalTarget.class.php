@@ -20,6 +20,19 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
 		return null;
 	}
 	
+	public function getMapArray(array $arr) {
+		$p = array ();
+		foreach ($arr as $k=>$v) {
+			$p[] = sprintf('${%s} = \'%s\'', $this->getApiMappingField($k), $v);
+		}
+		
+		return '('. join(' AND ', $p). ')';
+	}
+	
+	public function getCustomMap() {
+		return false;
+	}
+	
 }
 
 ?>

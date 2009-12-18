@@ -37,9 +37,14 @@
    	 * Fixed make error (#206)
    	 
  = 0.9.1-beta
-   * 1009-12-17
+   * 2009-12-17
      * Added some icinga specific principal target classes
      * Finished editing of principal targets for users and groups
      * Added editing models for principals
      * Finished principal target filtering in xml temlates
      * Added default icinga filter targets
+     
+   * 2009-12-18
+     * Moved icinga lib to a new place
+     * Added principal target toolkit for api search queries
+     * Finished principal target framework

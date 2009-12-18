@@ -114,6 +114,7 @@
 				
 				var np = new Ext.Panel({
 					layout: 'hbox',
+					bodyStyle: 'padding: 2px 2px 2px 2px',
 					items: [{
 						xtype: 'button',
 						iconCls: 'silk-cross',

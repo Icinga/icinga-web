@@ -256,27 +256,9 @@ class IcingaTemplateWorker {
 	
 	private function setPrivileges(IcingaApiSearchInterface &$search) {
 		$s = $this->getTemplate()->getSection('option');
+		
 		if (isset($s['security']) && is_array($s['security'])) {
-			
-			foreach ($s['security'] as $tname) {
-				$target = $this->user->getTarget($tname);
-				
-				if ($target) {
-					$to = $target->getTargetObject();
-					
-					foreach ($this->user->getTargetValues($tname) as $rv) {
-						$aqlfield = $to->getApiMappingField($rv->tv_key);
-						
-						if ($aqlfield) {
-							$search->setSearchFilter($aqlfield, $rv->tv_val);
-						}
-					}
-					
-					
-				}
-				
-			}
-			
+			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($s['security'], $search);			
 		}
 	}
 	

@@ -17,7 +17,7 @@
 						<error for="max">Username is too long</error>
 					</errors>
 					<ae:parameters>
-						<ae:parameter name="max">10</ae:parameter>
+						<ae:parameter name="max">18</ae:parameter>
 						<ae:parameter name="min">3</ae:parameter>
 					</ae:parameters>
 			</validator>

@@ -11,6 +11,11 @@ class IcingaDataCustomVariablePrincipalTarget extends IcingaDataPrincipalTarget 
 			'cv_value'	=> 'Value contained ba the variable'
 		));
 		
+		$this->setApiMappingFields(array(
+			'cv_name'	=> 'CUSTOMVARIABLE_NAME',
+			'cv_value'	=> 'CUSTOMVARIABLE_VALUE'
+		));
+		
 		$this->setType('IcingaDataTarget');
 		
 		$this->setDescription('Limit data access to customvariables');

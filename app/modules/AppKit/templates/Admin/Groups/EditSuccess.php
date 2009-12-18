@@ -69,6 +69,7 @@ $role = $t['role'];
 			<?php } ?>
 			</div>
 			
+			<?php if ($role->NsmPrincipal->principal_id) { ?>
 			<div id="group_members" style="margin-top: 10px">
 			<h4>Principal</h4>
 			<div>
@@ -108,6 +109,7 @@ $role = $t['role'];
 			</table>
 			</div>
 			</div>
+			<?php } ?>
 			
 			</div>
 			
