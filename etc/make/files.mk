@@ -9,6 +9,15 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/action
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/model
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/view
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/constants
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/factory
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/menu
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/principal
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/state
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/template
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/view
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions
@@ -66,14 +75,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/config
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/action
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/menu
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/view
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/factory
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/constants
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/state
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/template
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/tdisplay
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/model
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/view
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/templates
@@ -900,19 +901,45 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/model/ICINGABaseModel.class.php $(DESTDIR)$(prefix)/app/lib/model/ICINGABaseModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/view/ICINGABaseView.class.php $(DESTDIR)$(prefix)/app/lib/view/ICINGABaseView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/EditAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/lib/icinga/IcingaBaseException.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstants.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstants.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/factory/IcingaCommand.class.php $(DESTDIR)$(prefix)/app/lib/icinga/factory/IcingaCommand.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/factory/IcingaData.class.php $(DESTDIR)$(prefix)/app/lib/icinga/factory/IcingaData.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/menu/IcingaMenuExtender.class.php $(DESTDIR)$(prefix)/app/lib/icinga/menu/IcingaMenuExtender.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataContactgroupPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataContactgroupPrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataCustomVariablePrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataCustomVariablePrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataHostgroupPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataHostgroupPrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataPrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataServicegroupPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataServicegroupPrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaPrincipalTargetTool.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaPrincipalTargetTool.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/state/IcingaHostStateInfo.class.php $(DESTDIR)$(prefix)/app/lib/icinga/state/IcingaHostStateInfo.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/state/IcingaServiceStateInfo.class.php $(DESTDIR)$(prefix)/app/lib/icinga/state/IcingaServiceStateInfo.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/state/IcingaStateInfo.class.php $(DESTDIR)$(prefix)/app/lib/icinga/state/IcingaStateInfo.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayFormat.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayFormat.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayMonitoring.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayMonitoring.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateLayout.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateLayout.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateWorker.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateWorker.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlParser.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlParser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlReplace.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlReplace.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderLink.class.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderLink.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/IndexAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/EditAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/IndexAction.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/EditAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/IndexAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/EditAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/ViewLogsAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/ViewLogsAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/PrincipalEditorAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/PrincipalEditorAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ajax/AutoCompleteAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ajax/AutoCompleteAction.class.php
@@ -1027,11 +1054,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ext/DynamicJavascriptSourceSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ext/DynamicJavascriptSourceSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/AjaxLoginSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/AjaxLoginSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Index.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Index.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Index.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/ViewLogs.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/ViewLogs.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/PrincipalEditor.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/PrincipalEditor.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ajax/AutoComplete.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ajax/AutoComplete.xml
@@ -1099,26 +1126,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Web/config/validators.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/action/ICINGAWebBaseAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/action/ICINGAWebBaseAction.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/menu/IcingaMenuExtender.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/menu/IcingaMenuExtender.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/IcingaBaseException.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/view/IcingaViewExtenderLink.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/view/IcingaViewExtenderLink.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/factory/IcingaCommand.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/factory/IcingaCommand.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/factory/IcingaData.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/factory/IcingaData.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/constants/IcingaConstants.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/constants/IcingaConstants.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/constants/IcingaConstantResolver.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/state/IcingaStateInfo.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/state/IcingaStateInfo.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/state/IcingaHostStateInfo.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/state/IcingaHostStateInfo.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/state/IcingaServiceStateInfo.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/state/IcingaServiceStateInfo.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/template/IcingaTemplateLayout.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/template/IcingaTemplateLayout.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/template/IcingaTemplateXmlParser.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/template/IcingaTemplateXmlParser.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/template/IcingaTemplateXmlReplace.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/template/IcingaTemplateXmlReplace.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/template/IcingaTemplateWorker.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/template/IcingaTemplateWorker.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplayFormat.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplayFormat.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplayMonitoring.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/icinga/tdisplay/IcingaTemplateDisplayMonitoring.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/model/ICINGAWebBaseModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/model/ICINGAWebBaseModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/view/ICINGAWebBaseView.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/view/ICINGAWebBaseView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/IndexSuccess.php
@@ -1217,9 +1224,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/MetaInformationSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/MetaInformationSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/CommandMetaInformationSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/CommandMetaInformationSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/SendCommandSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/SendCommandSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusMapSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusMapSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusSummarySuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusSummarySuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/Master.php $(DESTDIR)$(prefix)/app/templates/Master.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/_default.php $(DESTDIR)$(prefix)/app/templates/exceptions/_default.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/web-html.php $(DESTDIR)$(prefix)/app/templates/exceptions/web-html.php
@@ -3534,7 +3541,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProviderLdap.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProviderLdap.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitUserPreferences.interface.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitUserPreferences.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitSecurityUser.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitSecurityUser.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/principal/AppKitPrincipalDummyTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/principal/AppKitPrincipalDummyTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/principal/AppKitPrincipalTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/principal/AppKitPrincipalTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitArrayContainer.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitArrayContainer.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitContextInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitContextInterface.interface.php
@@ -3602,9 +3608,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/StructUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/StructUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/CronkMgr.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/CronkMgr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FilterHandler.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FilterHandler.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/AppKit.js $(DESTDIR)$(prefix)/lib/appkit/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/SimpleDataProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/rmd160.js $(DESTDIR)$(prefix)/lib/appkit/js/rmd160.js
@@ -7221,13 +7227,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/index.php $(DESTDIR)$(prefix)/pub/index.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/.htaccess $(DESTDIR)$(prefix)/pub/.htaccess
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-notification-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.mo $(DESTDIR)$(prefix)/res/i18n/mo/de.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.mo $(DESTDIR)$(prefix)/res/i18n/mo/en.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/de.po $(DESTDIR)$(prefix)/res/i18n/po/de.po
