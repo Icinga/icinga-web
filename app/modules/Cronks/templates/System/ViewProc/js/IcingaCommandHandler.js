@@ -50,6 +50,10 @@ IcingaCommandHandler.prototype = {
 				iconCls: v.icon_class || 'silk-bricks'
 			});
 			
+			if (v.seperator && v.seperator === true) {
+				this.toolbaritem.menu.add('-');
+			}
+			
 			b.on('click', function(b, e) { this.showCommandWindow(k, v.title) }, this);
 			
 		}, this);
@@ -73,6 +77,42 @@ IcingaCommandHandler.prototype = {
 		}
 		
 		switch (o.fieldType) {
+			
+			case 'notification_options':
+
+				delete oDef['name'];
+			
+				Ext.apply(oDef, {
+					store: new Ext.data.ArrayStore({
+						idIndex: 0,
+						fields: ['fId', 'fStatus', 'fLabel'],
+						data: [
+							['1', '0', '(default) no option'],
+							['2', '1', 'Broadcast'],
+							['3', '2', 'Forced'],
+							['4', '4', 'Increment current notification']
+						]
+					}),
+					
+					'name': '__return_value_combo',
+					
+					mode: 'local',
+					typeAhead: true,
+					triggerAction: 'all',
+					forceSelection: true,
+					
+					
+					fieldLabel: 'Option',
+					
+					valueField: 'fStatus',
+					displayField: 'fLabel',
+					
+					hiddenName: o.fieldName
+				});
+					
+				return new Ext.form.ComboBox(oDef);
+
+			break;
 			
 			case 'return_code':
 			
@@ -268,6 +308,8 @@ IcingaCommandHandler.prototype = {
 					}
 				});
 				
+				var bAdd = false;
+				
 				Ext.each(o.fields, function(item, index, arry) {
 					
 					if (this.command_options.source[item]) return;
@@ -281,10 +323,18 @@ IcingaCommandHandler.prototype = {
 					});
 					
 					if (f) {
+						bAdd = true; 
 						oForm.add(f);
 					}
 					
 				}, this);
+				
+				if (bAdd === false) {
+					oForm.add({
+						xtype: 'label',
+						text: 'No more fields are required, just press "OK" to send.'
+					});
+				}
 				
 				oWin.add(oForm);
 				

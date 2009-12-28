@@ -21,12 +21,12 @@
     			- default: full featured view
     			- minimal: reduce space consumption (e.g. filters, pagers, ...)
     	-->
-        <parameter name="mode">minimal</parameter>
+        <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
         
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <parameter name="Ext.grid.GridView">
-        	<parameter name="headersDisabled">true</parameter>
+        	<parameter name="headersDisabled">false</parameter>
         </parameter>
         
         <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
@@ -38,6 +38,83 @@
         	<parameter name="disable">true</parameter>
         	<parameter name="hidden">false</parameter>
         </parameter> -->
+        
+        <!-- 
+        	Selection model of rows (checkbox/row). This is needed for
+        	commands and maybe other user things ...
+        -->
+        <parameter name="selection_model">checkbox</parameter>
+        
+		<parameter name="commands">
+        	<!-- 
+        		Generally enabled od disabled
+        	-->
+        	<parameter name="enabled">true</parameter>
+        
+        	<!--
+        		Sourcefieldmapping
+        		* Which field content comes from the template data source
+        	-->
+        	<parameter name="source">
+        		<parameter name="IcingaApi::COMMAND_SERVICEGROUP">servicegroup_name</parameter>
+        	</parameter>
+        	
+        	<parameter name="predefined">
+        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+        		
+        		<!-- Providing the default instance -->
+        		<parameter name="IcingaApi::COMMAND_INSTANCE">${xmlfn.instance}</parameter>
+        	</parameter>
+        	
+        	<!-- 
+        		Which commands are available in this template and can charged
+        		with template data
+        	-->
+        	<parameter name="items">
+        		<parameter name="SCHEDULE_SERVICEGROUP_HOST_DOWNTIME">
+        			<parameter name="title">Schedule downtime for all hosts in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="SCHEDULE_SERVICEGROUP_SVC_DOWNTIME">
+        			<parameter name="title">Schedule downtime for all services in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+				<parameter name="ENABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
+        			<parameter name="title">Enable notifications for all hosts in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
+        			<parameter name="title">Disable notifications for all hosts in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+				<parameter name="ENABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
+        			<parameter name="title">Enable notifications for all services in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
+        			<parameter name="title">Disable notifications for all servuces in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+				<parameter name="ENABLE_SERVICEGROUP_SVC_CHECKS">
+        			<parameter name="title">Enable active checks of all services in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SERVICEGROUP_SVC_CHECKS">
+        			<parameter name="title">Disable active checks of all services in this servicegroup</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        	</parameter>
+        	
+        </parameter>
+        
+		<!-- Working security model in this view -->
+        <parameter name="security">
+        	<parameter>IcingaServicegroup</parameter>
+        </parameter>
+        
     </option>
     
     <!-- 

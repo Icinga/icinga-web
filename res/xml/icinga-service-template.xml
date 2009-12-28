@@ -80,6 +80,65 @@
         			<parameter name="title">Add a service comment</parameter>
         			<parameter name="icon_class">silk-bricks</parameter>
         		</parameter>
+        		<parameter name="SEND_CUSTOM_SVC_NOTIFICATION">
+        			<parameter name="title">Send custom service notification</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="ENABLE_SVC_CHECK">
+        			<parameter name="title">Enable active checks of this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SVC_CHECK">
+        			<parameter name="title">Disable active checks of this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="ENABLE_PASSIVE_SVC_CHECKS">
+        			<parameter name="title">Start accepting passive checks for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_PASSIVE_SVC_CHECKS">
+        			<parameter name="title">Stop accepting passive checks for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="START_OBSESSING_OVER_SVC">
+        			<parameter name="title">Start obsessing over this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="STOP_OBSESSING_OVER_SVC">
+        			<parameter name="title">Stop obsessing over this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="ENABLE_SVC_NOTIFICATIONS">
+        			<parameter name="title">Enable notifications for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SVC_NOTIFICATIONS">
+        			<parameter name="title">Disable notifications for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="ENABLE_SVC_EVENT_HANDLER">
+        			<parameter name="title">Enable event handler for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SVC_EVENT_HANDLER">
+        			<parameter name="title">Disable event handler for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="ENABLE_SVC_FLAP_DETECTION">
+        			<parameter name="title">Enable flap detection for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		<parameter name="DISABLE_SVC_FLAP_DETECTION">
+        			<parameter name="title">Disable flap detection for this service</parameter>
+        			<parameter name="icon_class">silk-bricks</parameter>
+        		</parameter>
+        		
         	</parameter>
         	
         </parameter>
