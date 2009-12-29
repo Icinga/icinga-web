@@ -6,12 +6,10 @@ class IcingaPrincipalTargetTool {
 		$user = AgaviContext::getInstance()->getUser()->getNsmUser();
 		
 		$sarr = $user->getTargetValuesArray();
-		
 		$parts = array ();
 		foreach ($models as $model) {
 			if (isset($sarr[$model])) {
 				$to = $user->getTarget($model)->getTargetObject();
-				
 				if (count($sarr[$model]) > 0) {
 					foreach ($sarr[$model] as $vdata) {
 						$parts[] = $to->getMapArray($vdata);
@@ -27,9 +25,14 @@ class IcingaPrincipalTargetTool {
 			}
 		}
 		
-		$query = join(' OR ', $parts);
+		if (count($parts) > 0) {
+			$query = join(' OR ', $parts);
+			$search->setSearchFilterAppendix($query, IcingaApi::SEARCH_AND);
+			
+			return true;
+		}
 		
-		$search->setSearchFilterAppendix($query, IcingaApi::SEARCH_AND);
+		return false;
 	}
 	
 }

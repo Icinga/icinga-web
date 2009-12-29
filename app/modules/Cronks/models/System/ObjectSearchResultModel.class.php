@@ -37,6 +37,12 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 				'description'	=> 'HOST_ALIAS',
 	
 				'data1'			=> 'HOST_ADDRESS'
+			),
+			
+			'security'		=> array(
+				'IcingaHostgroup',
+				'IcingaCustomVariablePair',
+				'IcingaContactgroup'
 			)
 		),
 		
@@ -49,6 +55,13 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 				'object_id'		=> 'SERVICE_OBJECT_ID',
 				'object_name2'	=> 'HOST_NAME',
 				'description'	=> 'SERVICE_DISPLAY_NAME'
+			),
+			
+			'security'		=> array(
+				'IcingaHostgroup',
+				'IcingaServicegroup',
+				'IcingaCustomVariablePair',
+				'IcingaContactgroup'
 			)
 		),
 		
@@ -60,6 +73,10 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 				'object_name'	=> 'HOSTGROUP_NAME',
 				'object_id'		=> 'HOSTGROUP_OBJECT_ID',
 				'description'	=> 'HOSTGROUP_ALIAS'
+			),
+			
+			'security'		=> array(
+				'IcingaHostgroup'
 			)
 		),
 		
@@ -71,6 +88,10 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 				'object_name'	=> 'SERVICEGROUP_NAME',
 				'object_id'		=> 'SERVICEGROUP_OBJECT_ID',
 				'description'	=> 'SERVICEGROUP_ALIAS'
+			),
+			
+			'security'		=> array(
+				'IcingaServicegroup'
 			)
 		),
 	);
@@ -113,20 +134,24 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 		foreach ($mappings as $mapping) {
 			$md = $this->mapping[$mapping];
 			$fields = $md['fields'];
+			$security = (isset($md['security']) && is_array($md['security'])) ? $md['security'] : array();
 			
-			$result = $this->api->createSearch()
+			$search = $this->api->createSearch()
 			->setSearchTarget($md['target'])
 			->setResultColumns(array_values($md['fields']))
 			->setSearchFilter($md['search'], $this->query, IcingaApi::MATCH_LIKE)
-			->setResultType(IcingaApi::RESULT_ARRAY)
-			->fetch();
+			->setResultType(IcingaApi::RESULT_ARRAY);
+			
+			// Limiting results for security
+			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($security, $search);
+			
+			$result = $search->fetch();
 			
 			$data[ $mapping ] = array (
 				'resultSuccess'		=> true,
 				'resultCount'		=> $result->getResultCount(),
 				'resultRows'		=> $this->resultToArray($result, $fields)
 			);
-			
 		}
 		
 		return $data;
@@ -138,7 +163,7 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 			$row = $oRow->getRow();
 			$tmp = array ();
 			foreach ($fieldDef as $name=>$db) {
-				$db = strtolower($db);
+				$db = strtoupper($db);
 				if (array_key_exists($db, $row)) {
 					$tmp[$name] = $row[$db];
 				}

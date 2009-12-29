@@ -57,6 +57,9 @@ class AppKit_PrincipalAdminModel extends ICINGAAppKitBaseModel
 	public function updatePrincipalValueData(NsmPrincipal &$p, array $pt, array $pv) {
 		
 		// First delete all entries we create new ones
+		/*
+		 * @todo This is not really pretty
+		 */
 		$this->deleteAllPrincipalTargetEntries($p);
 		
 		// var_dump(array($pt, $pv));
@@ -80,14 +83,11 @@ class AppKit_PrincipalAdminModel extends ICINGAAppKitBaseModel
 									$pv_val = $pv_data[$aid];
 								}
 								
-								
-								
 								$target_value = new NsmTargetValue();
 								$target_value->tv_key = $pv_key;
 								$target_value->tv_val = $pv_val;
 								
 								$principal_target->NsmTargetValue[] = $target_value;
-								
 								
 							}
 						}
@@ -100,6 +100,7 @@ class AppKit_PrincipalAdminModel extends ICINGAAppKitBaseModel
 	}
 	
 	private function deleteAllPrincipalTargetEntries(NsmPrincipal &$p) {
+		
 		Doctrine_Manager::connection()->beginTransaction();
 		
 		foreach ($p->NsmPrincipalTarget as $pt) {
@@ -109,6 +110,7 @@ class AppKit_PrincipalAdminModel extends ICINGAAppKitBaseModel
 				
 		Doctrine_Manager::connection()->commit();
 		
+		return true;
 	}
 	
 }

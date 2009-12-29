@@ -48,3 +48,6 @@
      * Moved icinga lib to a new place
      * Added principal target toolkit for api search queries
      * Finished principal target framework
+     
+   * 2009-12-28
+     * Added full command specification
