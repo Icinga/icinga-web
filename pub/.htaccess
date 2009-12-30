@@ -11,7 +11,7 @@ Allow from all
     
     # This depends on your path
     # on independent hosts the base is '/'
-    RewriteBase /~mhein/icinga-web
+    RewriteBase /icinga-web
 	
 	# If the requested URL does not exist (it's likely an agavi route),
 	# pass it as path info to index.php, the Agavi dispatch script.
