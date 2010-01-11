@@ -49,11 +49,9 @@ var IcingaGridFilterWindow = function() {
 		if (!oWin) {
 			oWin = new Ext.Window({
 				title: '<?php echo $tm->_("Modify filter"); ?>',
-				// width: 200,
-				// height: 200,
 				closeAction: 'hide',
 				width: 500,
-				layout: 'fit',
+				// layout: 'fit',
 				
 				defaults: {
 					border: false
@@ -62,6 +60,10 @@ var IcingaGridFilterWindow = function() {
 				listeners: {
 					add: function(co, oNew, index) {
 						co.doLayout();
+					},
+					
+					remove: function(oc, oremove) {
+						oc.doLayout();
 					}
 				},
 				
