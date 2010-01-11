@@ -181,6 +181,7 @@ var IcingaGridFilterWindow = function() {
 	
 	function getFormValues() {
 		var data = oCoPanel.getForm().getValues();
+		
 		var o = {};
 		
 		for (var k in data) {
