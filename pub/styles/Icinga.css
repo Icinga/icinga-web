@@ -312,7 +312,7 @@ table.icinga-attribute-table td.val {
 /** ExtJS grid classes **/
 .x-icinga-grid-link {
 	color: #0000ff;
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 .x-icinga-grid-link:hover {

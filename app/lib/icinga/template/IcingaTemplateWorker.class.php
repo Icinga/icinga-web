@@ -375,7 +375,7 @@ class IcingaTemplateWorker {
 		
 		if ($fields === null) {
 			$ds = $this->getTemplate()->getSection('datasource');
-			if ($ds['additional_filter_fields'] && is_array($ds['additional_filter_fields'])) {
+			if (isset($ds['additional_filter_fields']) && is_array($ds['additional_filter_fields'])) {
 				$fields = $ds['additional_filter_fields'];
 			}
 			else {

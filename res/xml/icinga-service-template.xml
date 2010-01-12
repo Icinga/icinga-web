@@ -28,7 +28,7 @@
         	Selection model of rows (checkbox/row). This is needed for
         	commands and maybe other user things ...
         -->
-        <parameter name="selection_model">checkbox</parameter>
+        <parameter name="selection_model"></parameter>
         
         <!-- 
         	Enable/disable commands and specify which of type you'll need
@@ -466,7 +466,6 @@
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">serviceStatus</parameter>
-					
                 </parameter>
             </display>
         	
@@ -512,6 +511,37 @@
                 <parameter name="default">true</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
+        </field>
+
+        <field name="service_info_icons">
+        	
+        	<datasource>
+        		<parameter name="field">SERVICE_OBJECT_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Info</parameter>
+                <parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayIcinga</parameter>
+                	<parameter name="method">serviceStatusIcons</parameter>
+                	<parameter name="arguments">
+                	
+                		<!-- Column for the service object id -->
+                		<parameter name="field">service_info_icons</parameter>
+                	</parameter>
+                </parameter>
+            </display>
+            
+			<filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        	
         </field>
 
         <field name="service_check_attempt">

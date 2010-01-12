@@ -504,6 +504,45 @@
             </order>
         </field>
         
+        <field name="host_info_icons">
+        	
+        	<datasource>
+        		<parameter name="field">HOST_OBJECT_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Info</parameter>
+                
+                <parameter name="width">50</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                </parameter>
+                
+                <parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayIcinga</parameter>
+                	<parameter name="method">hostStatusIcons</parameter>
+                	<parameter name="arguments">
+                	
+                		<!-- Column for the service object id -->
+                		<parameter name="field">host_info_icons</parameter>
+                	</parameter>
+                </parameter>
+            </display>
+            
+			<filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        	
+        </field>
+        
         <field name="check_attempt">
         	<datasource>
         		<parameter name="field">HOST_CURRENT_CHECK_ATTEMPT</parameter>
