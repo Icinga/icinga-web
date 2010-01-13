@@ -525,6 +525,14 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Info</parameter>
+                
+                <parameter name="width">50</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                </parameter>
+                
                 <parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayServiceIcons</parameter>
                 	<parameter name="method">serviceIcons</parameter>

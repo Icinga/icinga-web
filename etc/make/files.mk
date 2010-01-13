@@ -921,7 +921,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/factory/IcingaData.class.php $(DESTDIR)$(prefix)/app/lib/icinga/factory/IcingaData.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/menu/IcingaMenuExtender.class.php $(DESTDIR)$(prefix)/app/lib/icinga/menu/IcingaMenuExtender.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataContactgroupPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataContactgroupPrincipalTarget.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataCustomVariablePrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataCustomVariablePrincipalTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataHostgroupPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataHostgroupPrincipalTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataPrincipalTarget.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/principal/IcingaDataServicegroupPrincipalTarget.class.php $(DESTDIR)$(prefix)/app/lib/icinga/principal/IcingaDataServicegroupPrincipalTarget.class.php
@@ -1256,7 +1255,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/TODO $(DESTDIR)$(prefix)/doc/TODO
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VERSION $(DESTDIR)$(prefix)/doc/VERSION
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model.mwb.bak $(DESTDIR)$(prefix)/etc/database/model/model.mwb.bak
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model.mwb $(DESTDIR)$(prefix)/etc/database/model/model.mwb
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/1-initial-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/1-initial-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/2-initial-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/2-initial-data.sql

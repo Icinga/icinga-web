@@ -151,7 +151,7 @@ class AppKitFormatParserUtil {
 					
 				}
 				
-				if ($replace) {
+				if (isset($replace)) {
 					$format = preg_replace('@'. preg_quote($match[0]). '@', $replace, $format);
 				}
 				
