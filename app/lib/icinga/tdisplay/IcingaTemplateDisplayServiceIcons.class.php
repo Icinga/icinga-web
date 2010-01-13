@@ -2,23 +2,45 @@
 
 class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 	
+	/**
+	 * Eval condition return constant
+	 * @var integer
+	 */
 	const COND_ERROR = 0xffff;
 	
+	/**
+	 * The image base path, appended to the web base path
+	 * @var string
+	 */
 	private $image_path = '/images/status';
 	
+	/**
+	 * A list of fields to be used in the conditions map
+	 * @var array
+	 */
 	private static $service_fields = array (
 		'SERVICE_NOTIFICATIONS_ENABLED', 'SERVICE_ACTIVE_CHECKS_ENABLED',
 		'SERVICE_PASSIVE_CHECKS_ENABLED', 'SERVICE_CURRENT_STATE',
-		'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
+		'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED', 'SERVICE_IS_FLAPPING',
+		'SERVICE_SCHEDULED_DOWNTIME_DEPTH'
 	);
 	
+	
+	/**
+	 * The conditions map, the array key is php logical with
+	 * format parser syntax, all fields defined in the field list
+	 * can be used. Target array keys are true and false which holds
+	 * another array in it, container an image name and its alt 
+	 * description
+	 * @var array
+	 */
 	private static $service_conditions = array (
 		'${field.SERVICE_NOTIFICATIONS_ENABLED}' => array (
 			false	=> array ('ndisabled.png', 'Notifications disabled')
 		),
 		
 		'!${field.SERVICE_ACTIVE_CHECKS_ENABLED} && !${field.SERVICE_PASSIVE_CHECKS_ENABLED}' => array (
-			true	=> array ('off.png', 'Service disabled')
+			true	=> array ('disabled.png', 'Service disabled')
 		),
 		
 		'!${field.SERVICE_ACTIVE_CHECKS_ENABLED} && ${field.SERVICE_PASSIVE_CHECKS_ENABLED}' => array (
@@ -27,22 +49,43 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		
 		'${field.SERVICE_CURRENT_STATE} && ${field.SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED}' => array (
 			true	=> array ('acknowledged.png', 'Problem has been acknowledged')
+		),
+		
+		'${field.SERVICE_IS_FLAPPING}' => array (
+			true	=> array ('flapping.png', 'Service is flapping')
+		),
+		
+		'${field.SERVICE_SCHEDULED_DOWNTIME_DEPTH}' => array (
+			true	=> array ('downtime.png', 'Service is flapping')
 		)
 	);
 	
+	/**
+	 * A list of fields to be used in the conditions map
+	 * @var array
+	 */
 	private static $host_fields = array (
 		'HOST_NOTIFICATIONS_ENABLED', 'HOST_ACTIVE_CHECKS_ENABLED',
 		'HOST_PASSIVE_CHECKS_ENABLED', 'HOST_CURRENT_STATE',
-		'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
+		'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED', 'HOST_IS_FLAPPING',
+		'HOST_SCHEDULED_DOWNTIME_DEPTH'
 	);
 	
+	/**
+	 * The conditions map, the array key is php logical with
+	 * format parser syntax, all fields defined in the field list
+	 * can be used. Target array keys are true and false which holds
+	 * another array in it, container an image name and its alt 
+	 * description
+	 * @var array
+	 */
 	private static $host_conditions = array (
 		'${field.HOST_NOTIFICATIONS_ENABLED}' => array (
 			false	=> array ('ndisabled.png', 'Notifications disabled')
 		),
 		
 		'${field.HOST_ACTIVE_CHECKS_ENABLED} && ${field.HOST_PASSIVE_CHECKS_ENABLED}' => array (
-			false	=> array ('off.png', 'Service disabled')
+			false	=> array ('disabled.png', 'Service disabled')
 		),
 		
 		'!${field.HOST_ACTIVE_CHECKS_ENABLED} && ${field.HOST_PASSIVE_CHECKS_ENABLED}' => array (
@@ -51,13 +94,32 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		
 		'${field.HOST_CURRENT_STATE} && ${field.HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED}' => array (
 			true	=> array ('acknowledged.png', 'Problem has been acknowledged')
+		),
+		
+		'${field.HOST_IS_FLAPPING}' => array (
+			true	=> array ('flapping.png', 'Host is flapping')
+		),
+		
+		'${field.HOST_SCHEDULED_DOWNTIME_DEPTH}' => array (
+			true	=> array ('downtime.png', 'Service is flapping')
 		)
 	);
 	
+	/**
+	 * Returns a singleton class instance
+	 * @return IcingaTemplateDisplayServiceIcons
+	 */
 	public static function getInstance() {
 		return parent::getInstance(__CLASS__);
 	}
 	
+	/**
+	 * Returns the service status icons from the map above defined
+	 * @param mixed $val
+	 * @param AgaviParameterHolder $method_params
+	 * @param AgaviParameterHolder $row
+	 * @return string
+	 */
 	public function serviceIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		
 		$id = $this->getObjectId($method_params->getParameter('field', null), $row);
@@ -70,6 +132,13 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		return $this->buildIcons($dh, self::$service_conditions);
 	}
 	
+	/**
+	 * Returns the host status icons from the map above defined
+	 * @param mixed $val
+	 * @param AgaviParameterHolder $method_params
+	 * @param AgaviParameterHolder $row
+	 * @return string
+	 */
 	public function hostIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		
 		$id = $this->getObjectId($method_params->getParameter('field', null), $row);
@@ -82,6 +151,12 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		return $this->buildIcons($dh, self::$host_conditions);
 	}
 	
+	/**
+	 * Build the icon frames with the field and the conditions map
+	 * @param IcingaApiSearch $dh
+	 * @param array $mapping
+	 * @return string html code
+	 */
 	private function buildIcons(IcingaApiSearch &$dh, array $mapping) {
 		$out = null;
 		
@@ -123,6 +198,12 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		return $out;
 	}
 	
+	/**
+	 * Evals some code and returns its value
+	 * or self::COND_ERROR if a error occures
+	 * @param string $code
+	 * @return mixed
+	 */
 	private function evalCode($code) {
 		$re = @eval($code);
 		if ($re === false) {
@@ -132,6 +213,12 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		return (bool)$re;
 	}
 	
+	/**
+	 * Returns the id value from the row
+	 * @param string $field_name
+	 * @param AgaviParameterHolder $row
+	 * @return mixed
+	 */
 	private function getObjectId($field_name, AgaviParameterHolder $row) {
 
 		if ($row->hasParameter($field_name)) {

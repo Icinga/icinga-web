@@ -58,3 +58,12 @@
      
    * 2010-01-12
      * Host- / serviceinfo info icons
+     * ExtJs update to version 3.1
+     
+   * 2010-01-13
+      * DB field for class length 80 (principal target)
+      * CVs different for host and service (schema changes)
+      * make fix for files (make)
+      * removed temp files
+      * changes status icon files (from icinga theme, smaller)
+      * added some more state (flapping, downtime)
