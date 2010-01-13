@@ -322,7 +322,7 @@
 		Version information
 		* names, and revisions
 	-->
-	<setting name="appkit.version.copyright"><![CDATA[&#169; 2009 Icinga Developer Team]]></setting>
+	<setting name="appkit.version.copyright"><![CDATA[&#169; 2009-2010 Icinga Developer Team]]></setting>
 	<setting name="appkit.version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
 	<setting name="appkit.version.major">0</setting>
 	<setting name="appkit.version.minor">9</setting>
