@@ -72,7 +72,7 @@ var dummyCronkDisplayStateSummary = function () {
 		storeCollection : new Array(),
 		chartData : {
 			"status-summary-hostchart" : false,
-			"status-summary-servicechart" : false,
+			"status-summary-servicechart" : false
 		},
 
 		init : function (outputType) {
@@ -84,7 +84,7 @@ var dummyCronkDisplayStateSummary = function () {
 				interval: 300 * 1000
 			});
 		},
-	
+
 		refresh : function () {
 			switch (CronkDisplayStateSummary.outputType) {
 				case "text":
@@ -388,7 +388,7 @@ var dummyCronkDisplayStateSummary = function () {
 				} else {
 					parentCmp.replaceWith(container);
 					parentCmp.doLayout();
-					thischartData[containerIdClass] = graphElementsEncoded;
+					this.chartData[containerIdClass] = graphElementsEncoded;
 				}
 			}
 
