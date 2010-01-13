@@ -9,7 +9,8 @@ INSERT INTO `nsm_principal` VALUES
 INSERT INTO `nsm_target` VALUES 
 	(1,'IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga'),
 	(2,'IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga'),
-	(3,'IcingaCustomVariablePair','Limit data access to specific custom variables','IcingaDataCustomVariablePrincipalTarget','icinga');
+	(3,'IcingaHostCustomVariablePair','Limit data access to specific custom variables','IcingaDataHostCustomVariablePrincipalTarget','icinga'),
+	(4,'IcingaServiceCustomVariablePair','Limit data access to specific custom variables','IcingaDataServiceCustomVariablePrincipalTarget','icinga');
 
 -- //@UNDO
 

@@ -44,9 +44,9 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('target_class', 'string', 45, array(
+        $this->hasColumn('target_class', 'string', 80, array(
              'type' => 'string',
-             'length' => 45,
+             'length' => 80,
              'fixed' => false,
              'primary' => false,
              'notnull' => true,

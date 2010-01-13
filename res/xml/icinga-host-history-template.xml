@@ -25,7 +25,7 @@
         
         <parameter name="security">
         	<parameter>IcingaHostgroup</parameter>
-        	<parameter>IcingaCustomVariablePair</parameter>
+        	<parameter>IcingaHostCustomVariablePair</parameter>
         	<parameter>IcingaContactgroup</parameter>
         </parameter>
     </option>

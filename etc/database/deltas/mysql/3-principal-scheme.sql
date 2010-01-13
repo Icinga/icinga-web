@@ -65,7 +65,7 @@ CREATE TABLE `nsm_target` (
   `target_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `target_name` VARCHAR(45) NOT NULL ,
   `target_description` VARCHAR(100) NULL DEFAULT NULL ,
-  `target_class` VARCHAR(45) NOT NULL ,
+  `target_class` VARCHAR(80) NOT NULL ,
   `target_type` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`target_id`) )
 ENGINE = InnoDB

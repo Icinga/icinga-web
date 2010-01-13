@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateDisplayIcinga extends IcingaTemplateDisplay {
+class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 	
 	private $image_path = '/images/status';
 	
@@ -44,7 +44,7 @@ class IcingaTemplateDisplayIcinga extends IcingaTemplateDisplay {
 		return parent::getInstance(__CLASS__);
 	}
 	
-	public function serviceStatusIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+	public function serviceIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		
 		$id = $this->getObjectId($method_params->getParameter('field', null), $row);
 		
@@ -56,7 +56,7 @@ class IcingaTemplateDisplayIcinga extends IcingaTemplateDisplay {
 		return $this->buildIcons($dh, $this->service_fields);
 	}
 	
-	public function hostStatusIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+	public function hostIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		
 		$id = $this->getObjectId($method_params->getParameter('field', null), $row);
 		

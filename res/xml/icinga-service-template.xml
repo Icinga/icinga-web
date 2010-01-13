@@ -145,7 +145,10 @@
         
         <!-- Working security model in this view -->
         <parameter name="security">
+        	<parameter>IcingaServicegroup</parameter>
         	<parameter>IcingaHostgroup</parameter>
+        	<parameter>IcingaHostCustomVariablePair</parameter>
+        	<parameter>IcingaServiceCustomVariablePair</parameter>
         </parameter>
         
     </option>
@@ -523,10 +526,9 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Info</parameter>
                 <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayIcinga</parameter>
-                	<parameter name="method">serviceStatusIcons</parameter>
+                	<parameter name="class">IcingaTemplateDisplayServiceIcons</parameter>
+                	<parameter name="method">serviceIcons</parameter>
                 	<parameter name="arguments">
-                	
                 		<!-- Column for the service object id -->
                 		<parameter name="field">service_info_icons</parameter>
                 	</parameter>

@@ -55,3 +55,6 @@
    * 2010-01-11
      * Fixed filter window bug (#232)
      * Added host- / service status filterund
+     
+   * 2010-01-12
+     * Host- / serviceinfo info icons

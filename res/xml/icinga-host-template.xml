@@ -162,7 +162,7 @@
         <!-- Working security model in this view -->
         <parameter name="security">
         	<parameter>IcingaHostgroup</parameter>
-        	<parameter>IcingaCustomVariablePair</parameter>
+        	<parameter>IcingaHostCustomVariablePair</parameter>
         	<parameter>IcingaContactgroup</parameter>
         </parameter>
     </option>
@@ -522,8 +522,8 @@
                 </parameter>
                 
                 <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayIcinga</parameter>
-                	<parameter name="method">hostStatusIcons</parameter>
+                	<parameter name="class">IcingaTemplateDisplayServiceIcons</parameter>
+                	<parameter name="method">hostIcons</parameter>
                 	<parameter name="arguments">
                 	
                 		<!-- Column for the service object id -->
