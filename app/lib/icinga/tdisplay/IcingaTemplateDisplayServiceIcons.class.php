@@ -2,40 +2,54 @@
 
 class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 	
+	const COND_ERROR = 0xffff;
+	
 	private $image_path = '/images/status';
 	
-	private $service_fields = array (
-		'SERVICE_NOTIFICATIONS_ENABLED' => array (
+	private static $service_fields = array (
+		'SERVICE_NOTIFICATIONS_ENABLED', 'SERVICE_ACTIVE_CHECKS_ENABLED',
+		'SERVICE_PASSIVE_CHECKS_ENABLED', 'SERVICE_CURRENT_STATE',
+		'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
+	);
+	
+	private static $service_conditions = array (
+		'${field.SERVICE_NOTIFICATIONS_ENABLED}' => array (
 			false	=> array ('ndisabled.png', 'Notifications disabled')
 		),
 		
-		'SERVICE_ACTIVE_CHECKS_ENABLED,SERVICE_PASSIVE_CHECKS_ENABLED' => array (
-			false	=> array ('off.png', 'Service disabled')
+		'!${field.SERVICE_ACTIVE_CHECKS_ENABLED} && !${field.SERVICE_PASSIVE_CHECKS_ENABLED}' => array (
+			true	=> array ('off.png', 'Service disabled')
 		),
 		
-		'SERVICE_ACTIVE_CHECKS_ENABLED' => array (
-			false	=> array ('passive.png', 'Passive only')
+		'!${field.SERVICE_ACTIVE_CHECKS_ENABLED} && ${field.SERVICE_PASSIVE_CHECKS_ENABLED}' => array (
+			true	=> array ('passive.png', 'Passive only')
 		),
 		
-		'SERVICE_CURRENT_STATE,SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED' => array (
+		'${field.SERVICE_CURRENT_STATE} && ${field.SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED}' => array (
 			true	=> array ('acknowledged.png', 'Problem has been acknowledged')
 		)
 	);
 	
-	private $host_fields = array (
-		'HOST_NOTIFICATIONS_ENABLED' => array (
+	private static $host_fields = array (
+		'HOST_NOTIFICATIONS_ENABLED', 'HOST_ACTIVE_CHECKS_ENABLED',
+		'HOST_PASSIVE_CHECKS_ENABLED', 'HOST_CURRENT_STATE',
+		'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
+	);
+	
+	private static $host_conditions = array (
+		'${field.HOST_NOTIFICATIONS_ENABLED}' => array (
 			false	=> array ('ndisabled.png', 'Notifications disabled')
 		),
 		
-		'HOST_ACTIVE_CHECKS_ENABLED,HOST_PASSIVE_CHECKS_ENABLED' => array (
+		'${field.HOST_ACTIVE_CHECKS_ENABLED} && ${field.HOST_PASSIVE_CHECKS_ENABLED}' => array (
 			false	=> array ('off.png', 'Service disabled')
 		),
 		
-		'HOST_ACTIVE_CHECKS_ENABLED' => array (
-			false	=> array ('passive.png', 'Passive only')
+		'!${field.HOST_ACTIVE_CHECKS_ENABLED} && ${field.HOST_PASSIVE_CHECKS_ENABLED}' => array (
+			true	=> array ('passive.png', 'Passive only')
 		),
 		
-		'HOST_CURRENT_STATE,HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED' => array (
+		'${field.HOST_CURRENT_STATE} && ${field.HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED}' => array (
 			true	=> array ('acknowledged.png', 'Problem has been acknowledged')
 		)
 	);
@@ -50,10 +64,10 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		
 		$dh = $this->getIcingaApi()->createSearch()
 		->setSearchTarget(IcingaApi::TARGET_SERVICE)
-		->setResultColumns($this->getFields($this->service_fields))
+		->setResultColumns(self::$service_fields)
 		->setSearchFilter('SERVICE_OBJECT_ID', $id);
 		
-		return $this->buildIcons($dh, $this->service_fields);
+		return $this->buildIcons($dh, self::$service_conditions);
 	}
 	
 	public function hostIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
@@ -62,56 +76,30 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		
 		$dh = $this->getIcingaApi()->createSearch()
 		->setSearchTarget(IcingaApi::TARGET_HOST)
-		->setResultColumns($this->getFields($this->host_fields))
+		->setResultColumns(self::$host_fields)
 		->setSearchFilter('HOST_OBJECT_ID', $id);
 		
-		return $this->buildIcons($dh, $this->host_fields);
-	}
-	
-	private function getFields(array $a) {
-		$out = array ();
-		foreach ($a as $k=>$garbage) {
-			$values = split(',', $k);
-			$out = array_merge($out, $values);
-		}
-		
-		return array_unique($out);
-	}
-	
-	private function getBooleanVal($key, array $row) {
-		$keys = split(',', $key);
-		$val = false;
-		
-		foreach ($keys as $sk) {
-			if (array_key_exists($sk, $row)) {
-				$val |= (bool)$row[$sk];
-			}
-		}
-		return (bool)$val;
-	}
-	
-	private function keyExists($key, array $row) {
-		$keys = split(',', $key);
-		$out = array_intersect($keys, array_keys($row));
-		if (count($out)) {
-			return true;
-		}
-		
-		return false;
+		return $this->buildIcons($dh, self::$host_conditions);
 	}
 	
 	private function buildIcons(IcingaApiSearch &$dh, array $mapping) {
 		$out = null;
 		
+		$parser = new AppKitFormatParserUtil();
+		$parser->registerNamespace('field', AppKitFormatParserUtil::TYPE_ARRAY);
+		
 		foreach ($dh->fetch() as $res) {
 			$row = (array)$res->getRow();
+			$parser->registerData('field', $row);
 			
 			foreach ($mapping as $fkey=>$fm) {
-				if ($this->keyExists($fkey, $row)) {
-					$val = $this->getBooleanVal($fkey, $row);
-					
-					if (isset($fm[$val])) {
-						$i = $fm[$val];
+				$cond = 'return (int)('. $parser->parseData($fkey). ');';
+				
+				if (($test = $this->evalCode($cond)) !== self::COND_ERROR) {
+					// var_dump(array($fkey, $cond, $test));
+					if (isset($fm[$test])) {
+						// var_dump(" --> OK");
+						$i = $fm[$test];
 						$tag = AppKitXmlTag::create('img');
 						
 						if (isset($i[0])) {
@@ -126,11 +114,22 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 						$out .= (string)$tag;
 					}
 				}
+				
+				
 			}
 			
 		}
 		
 		return $out;
+	}
+	
+	private function evalCode($code) {
+		$re = @eval($code);
+		if ($re === false) {
+			return self::COND_ERROR;
+		}
+		
+		return (bool)$re;
 	}
 	
 	private function getObjectId($field_name, AgaviParameterHolder $row) {
