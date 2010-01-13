@@ -7269,9 +7269,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/on.png $(DESTDIR)$(prefix)/pub/images/status/on.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/off.png $(DESTDIR)$(prefix)/pub/images/status/off.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/acknowledged.png $(DESTDIR)$(prefix)/pub/images/status/acknowledged.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/indowntime.png $(DESTDIR)$(prefix)/pub/images/status/indowntime.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/passive.png $(DESTDIR)$(prefix)/pub/images/status/passive.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/ndisabled.png $(DESTDIR)$(prefix)/pub/images/status/ndisabled.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/disabled.png $(DESTDIR)$(prefix)/pub/images/status/disabled.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/downtime.png $(DESTDIR)$(prefix)/pub/images/status/downtime.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/flapping.png $(DESTDIR)$(prefix)/pub/images/status/flapping.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/extjs/ext-all.css $(DESTDIR)$(prefix)/pub/styles/extjs/ext-all.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/extjs/ux-all.css $(DESTDIR)$(prefix)/pub/styles/extjs/ux-all.css

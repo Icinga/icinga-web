@@ -67,3 +67,8 @@
       * removed temp files
       * changes status icon files (from icinga theme, smaller)
       * added some more state (flapping, downtime)
+      * makefile bin permission (#245)
+      * drop decision for phing
+      * adapted the phing db targets to gnu make
+      * some makefile fixes, help text, targets
+      

@@ -48,11 +48,22 @@
 		
 		<property name="db.sql.drop" value="DROP DATABASE ${db.name};" />
 		
-		<exec
-			command="${db.mysql.call_global} -e '${db.sql.drop}'"
-			dir="${builddir}"
-			passthru="true"
-			checkreturn="false" />
+		<input propertyname="db.sql.dropchoice" promptChar="?" validArgs="no,DROPMYDATA">Really drop the database</input>
+
+		<if>
+			<equals arg1="${db.sql.dropchoice}" arg2="DROPMYDATA" />
+			<then>
+				<exec
+					command="${db.mysql.call_global} -e '${db.sql.drop}'"
+					dir="${builddir}"
+					passthru="true"
+					checkreturn="false" />
+			</then>
+			
+			<else>
+				<echo>Yes, a really educated decision to keep the data ;-)</echo>
+			</else>
+		</if>
 	</target>
 	
 	<target name="db-init" depends="db-prepare">

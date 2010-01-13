@@ -16,12 +16,28 @@ BIN_GROUP=@bin_group@
 WEB_USER=@web_user@
 WEB_GROUP=@web_group@
 SED=@SED@
+PHP=@PHP@
+PC=$(DESTDIR)$(prefix)/bin/phing -f $(DESTDIR)$(prefix)/etc/build.xml
 INC_MAKE_FILES=./etc/make/files.mk
-
-include $(INC_MAKE_FILES)
 
 none:
 	@echo "Please supply a command line argument (i.e. 'make install')."
+	@echo ""
+	@echo "Generic targets: install, clean"
+	@echo ""
+	@echo "Other usefull targets:"
+	@echo "\ttestdeps - test the php dependencies"
+	@echo "\tcreate-tarball - creates a tarball for packaging"
+	@echo "\tdevclean - to a sourcecode ready for ci or packaging" 
+	@echo ""
+	@echo "Experimental targets:"
+	@echo "\tmake db-initialize - create the db"
+	@echo "\tmake db-deinitialize - reverse the path (removes all data and drop the relations)"
+	@echo "\tmake db-upgrade - tries to upgrade from a available db revision"
+	@echo "\tmake db-drop - create the entire db"
+	@echo ""
+
+include $(INC_MAKE_FILES)
 
 install-files-list:
 	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
@@ -45,14 +61,34 @@ cacheclean:
 	rm -rf app/cache/config/*.php
 
 testdeps:
-	 `which php` bin/testdeps.php
+	 $(PHP) bin/testdeps.php
 
 fix-priv:
 	chown -R $(WEB_USER).$(WEB_GROUP) $(DESTDIR)$(prefix)/app/cache
 	chmod -R 775 $(DESTDIR)$(prefix)/app/cache
+	chmod +x \
+		$(DESTDIR)$(prefix)/bin/agavi \
+		$(DESTDIR)$(prefix)/bin/create-makefile.sh \
+		$(DESTDIR)$(prefix)/bin/doctrinemodels.php \
+		$(DESTDIR)$(prefix)/bin/phing \
+		$(DESTDIR)$(prefix)/bin/rabbit.sh \
+		$(DESTDIR)$(prefix)/bin/testdeps.php
 
 fix-libs:
 	rm -rf $(DESTDIR)$(prefix)/pub/js/ext3
 	ln -s $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
 
 install: inc-install-files fix-priv fix-libs
+
+db-initialize:
+	$(PC) db-initialize
+
+db-deinitialize:
+	$(PC) db-initialize
+
+db-drop:
+	$(PC) db-drop
+
+db-upgrade:
+	$(PC) db-upgrade
+
