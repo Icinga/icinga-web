@@ -1,91 +1,90 @@
-
 THIS INSTALLATION DOCUMENT IS STILL EXPERIMENTAL,
-please report bugs to dev.icinga.org
+please report bugs and typos to dev.icinga.org
 
-1) Prerequisits
+1) Prerequisites
 
-Based on the fact that you have a running mysql and php (with PEAR and CLI) environment. Also icinga and ido (ido2db)
-are running you can continue with the second step.
+You need a running mysql and php (with PEAR and CLI) environment w/ icinga and ido (ido2db).
+If there's something missing on your system, please refer to docs.icinga.org.
 
-2) The beautiful GNU install conglomerate
+2) The beautiful GNU-install conglomerate
 
-The installation is based on autoconf and make now. If the existing configure script fails, try to recreate one
+The installation is based on 'autoconf' and 'make', now. If the existing configure script fails, try to recreate one
 with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' and 'autoconf'.
 
-	2.1 Creating a configure file
+	2.1) Creating a configure file
 		
 		Quite simple. If you have autoconf installed, type autoconf to invoke the GNU tool.
 		
-	2.2 Invoking configure
+	2.2) Executing configure
 	
-		The configure tool helps you to set some important parameter for the software. Also it creates
-		some config or build files for you.
+		The configure tool helps you to set some important parameters for the software. It also creates
+		config and build files for you.
 		
-		To determine which options are provided try 'sh configure --help' to see what's available
+		To determine which options are provided try 'sh configure --help' to see what's available.
 		
-		After you have created your own build command you can fire up the whole thing like:
+		After you have created your own build command you can fire up the whole thing just as in the
+		following example:
 		
-		sh configure \
+		$ sh configure \
 			--prefix=/usr/local/icinga-web \
 			--with-web-user=www-data \
 			--with-web-group=www-data \
 			--with-db-user=my_icinga_user \
 			--with-db-pass=XXXXX 
 		
-		If the command runs out without errors you have a ready configured icinga-web.
+		If the command runs without errors you will have a ready configured icinga-web.
 		
-	2.3 The make command and its targets
+	2.3) The make command and its targets
 	
 		After the configuration step you can install icinga-web by invoking make.
 		
-		Type make to see what is possible.
+		Type 'make' to see a list of available options.
 		
-		To install to the desired location type 'sudo make install' at you prompt. Be sure to use root
+		To install to the desired location type 'sudo make install' at the prompt. Be sure to use root
 		privileges to to this.
 		
-		Install also overwrites your existing directory and all containing configuration. To avoid 
-		data loss make backups or backup your configure command to match you needs.
+		Install also overwrites your existing directory and any old configuration in there. To avoid 
+		data loss make backups or write down your configure command to match you needs.
 		
-		Also make can install and upgrade your new or existing database with the following targets:
+		'make' can also install and upgrade new or existing databases by using the following targets:
 		
-		make db-initialize	- To create a spick-and-span database use this target
-		make db-drop 		- Drops your database with security query to safe you from casualties
-		make db-upgrade		- To upgrade old tables to the new version (Just the same as db-initialize
-							  only with a better name ;-))
+		make db-initialize	- creates a spick-and-span database
+		make db-drop 		- drops your database with a security query to avoid casualties
+		make db-upgrade		- upgrades old tables to a newer version (Just the same as db-initialize
+							  with a better name ;-))
 							  
-		To use the database creation commands you have to privilege the user which executes the commands
-		on your dbms. If the configure user differs from a highly privileged one, you can alter
-		'etc/build.properties' to match your requirements of a root user.
+		To use the database creation commands you have to grant privileges to the user who will execute
+		the commands on your dbms. If the user defined via configure is a low-privileged one, you can alter
+		'etc/build.properties' to match the requirements of a root user.
 		
-		Also you can read the install-fromscratch.txt to get deeper involved how to use the phing build
+		You can also read install-fromscratch.txt to get deeper involved in how to use the phing-build
 		system for icinga-web
 
 3) Database
 
-	Section 2.3 or the install-fromscratch.txt file should give you enough information to do this.
+	Section 2.3 or the install-fromscratch.txt file should give you enough information to set up your database.
 
 4) Webserver configuration
 
-	Three things have to done on system side: Apache have to be running with php5 support and mod_rewrite loaded.
+	Three things have to be available on the system: you have to set up apache, with mod_rewrite and php5.
 	
 	After that you should include the pub (htdocs) directory of icinga-web with an alias directive in global scope
-	(like apache.conf or there your icinga configuration lives):
+	(like apache.conf or where your icinga configuration lives):
 	
 		Alias /icinga-web /path/to/pub
 		<directory /path/to/pub>
 			AllowOverride All
 		</directory>
 		
-	The 'AllowOverride All' construct allows us to use a .htaccess configuration in the pub directory.
+	The 'AllowOverride All' setting allows to use a .htaccess configuration in the pub directory.
 	
-	Also, you should take a look to '/path/to/pub/.htaccess'. Mod_rewrite of Apache needs 'RewriteBase'
-	to operate in subdirectories. Please change this to your webpath (NOT THE PHYSICALLY ONE) .
+	Furthermore you should take a look to '/path/to/pub/.htaccess'. Apache's mod_rewrite needs a correct
+	definition of 'RewriteBase' to operate in subdirectories. Please change this to your webpath (NOT THE PHYSICAL ONE) .
 
-5) Running the interface and be glad
+5) Running the interface and being glad
 
-	After a restart of apache you be able to run the interface in your browser.
-	
-	Use the URL your apache is configured to, e.g. like http://localhost/icinga-web.
+	After a restart of apache you will be able to visit the interface in your browser by using the
+	URL of the recently set up web interface like http://localhost/icinga-web.
 	
 	You can login with the following credentials:
 	
