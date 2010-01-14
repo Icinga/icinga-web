@@ -11,11 +11,11 @@
 					
 					http://www.doctrine-project.org/documentation/manual/1_1/en/introduction-to-connections
 				-->
-				<ae:parameter name="dsn">mysql://icinga_web:icinga_web@127.0.0.1:3306/icinga_web</ae:parameter>
+				<ae:parameter name="dsn">@db_type@://@db_user@:@db_pass@@@db_host@:@db_port@/@db_name@</ae:parameter>
 				
 				<!-- Generic credentials  -->
-				<!-- <ae:parameter name="username">icinga_web</ae:parameter>
-				<ae:parameter name="password">icinga_web</ae:parameter> -->
+				<!-- <ae:parameter name="username">@db_user@</ae:parameter> -->
+				<!-- <ae:parameter name="password">@db_pass@</ae:parameter> -->
 				
 				<!-- DB encoding type -->
 				<ae:parameter name="charset">utf8</ae:parameter>

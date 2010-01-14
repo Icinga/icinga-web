@@ -2207,7 +2207,7 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile etc/build.properties"
+ac_config_files="$ac_config_files Makefile etc/build.properties app/config/databases.xml"
 
 
 cat >confcache <<\_ACEOF
@@ -2907,6 +2907,7 @@ do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
+    "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
 
   *) as_fn_error "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

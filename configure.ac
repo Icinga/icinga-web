@@ -156,6 +156,7 @@ AC_SUBST(INSTALL_OPTS)
 AC_CONFIG_FILES([
 	Makefile
 	etc/build.properties
+	app/config/databases.xml
 ])
 
 AC_OUTPUT

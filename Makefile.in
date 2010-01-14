@@ -54,7 +54,8 @@ distclean: clean
 		Makefile \
 		config.log \
 		config.status \
-		etc/build.properties
+		etc/build.properties \
+		app/config/databases.xml
 
 devclean: remove-temp-files distclean cacheclean install-files-list
 
