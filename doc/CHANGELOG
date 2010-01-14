@@ -67,3 +67,14 @@
       * removed temp files
       * changes status icon files (from icinga theme, smaller)
       * added some more state (flapping, downtime)
+      * makefile bin permission (#245)
+      * drop decision for phing
+      * adapted the phing db targets to gnu make
+      * some makefile fixes, help text, targets
+      
+    * 2010-01-14
+      * Updated phing to stable version 2.3.3
+      * Added AC options for db installing
+      * AC rewrites build.properties for phing
+      * database.xml is now substituted by AC
+      

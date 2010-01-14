@@ -3,22 +3,22 @@ appkit.etcdir=etc/
 
 # Database configuration
 # Only mysql in the moment (this should provide oracle or pgsql schema files)
-db.type=mysql
-db.user=icinga_web
-db.pass=icinga_web
-db.host=127.0.0.1
-db.name=icinga_web
-db.port=3306
+db.type=@db_type@
+db.user=@db_user@
+db.pass=@db_pass@
+db.host=@db_host@
+db.name=@db_name@
+db.port=@db_port@
 
 # The database dsn
 db.dsn=mysql:host=${db.host};dbname=${db.name};port=${db.port}
 
 # Database binaries and calls
-db.mysql.bin=/usr/bin/mysql
+db.mysql.bin=@MYSQL@
 db.mysql.call_global=${db.mysql.bin} --host=${db.host} --port=${db.port} --user=${db.user} --password=${db.pass}
 db.mysql.call=${db.mysql.call_global} ${db.name}
 
 # php executable
-php.bin=/usr/bin/php
+php.bin=@PHP@
 
 # [EOF]

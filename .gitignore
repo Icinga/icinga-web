@@ -4,4 +4,9 @@ app/cache
 lib/icinga-api
 icinga-web.session
 icinga-web.webprj
+Makefile
+config.log
+config.status
+etc/build.properties
+app/config/databases.xml
 *~

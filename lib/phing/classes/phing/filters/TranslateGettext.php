@@ -39,7 +39,7 @@ include_once 'phing/filters/ChainableReader.php';
  * </pre>
  * 
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.11 $ $Date: 2007-12-20 10:44:58 -0500 (Thu, 20 Dec 2007) $
+ * @version   $Revision: 1.11 $ $Date: 2007-12-20 16:44:58 +0100 (Thu, 20 Dec 2007) $
  * @access    public
  * @see       BaseFilterReader
  * @package   phing.filters

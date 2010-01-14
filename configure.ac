@@ -22,6 +22,14 @@ if test "$PHP" = 'not found'; then
         AC_MSG_ERROR([cannot use $PACKAGE_NAME without php])
 fi
 
+# Check for mysql
+AC_ARG_VAR([MYSQL],[MySql client binary not found])
+AC_PATH_PROG([MYSQL], [mysql], [not found])
+
+if test "$MYSQL" = 'not found'; then
+        AC_MSG_ERROR([cannot use $PACKAGE_NAME without MySql client binary])
+fi
+
 # Custom macros
 
 # ACRT_USER_EXISTS( users, variable, default )
@@ -30,7 +38,7 @@ fi
 # - variable is what you set with the result
 #
 
-AC_DEFUN([ACRT_USER_GUESS],
+AC_DEFUN([ACICINGA_USER_GUESS],
  [
    $2=$3
    for x in $1; do
@@ -40,7 +48,7 @@ AC_DEFUN([ACRT_USER_GUESS],
            [ AC_MSG_RESULT([not found]) ])
    done
   ])
-AC_DEFUN([ACRT_GROUP_GUESS],
+AC_DEFUN([ACICINGA_GROUP_GUESS],
  [
    $2=$3
    for x in $1; do
@@ -62,32 +70,93 @@ AC_DEFUN([ACRT_GROUP_GUESS],
 # Checks for library functions.
 
 # Define install options
-AC_ARG_WITH(web_user,--with-web-user=<user> sets user name to run icinga,web_user=$withval,ACRT_USER_GUESS([www www-data apache httpd nobody],[web_user],[www-data]))
-AC_ARG_WITH(web_group,--with-web-group=<group> sets group name to run icinga,web_group=$withval,ACRT_GROUP_GUESS([www www-data apache httpd nogroup nobody],[web_group], [www-data]))
+
+AC_ARG_WITH([web_user],
+	AS_HELP_STRING([--with-web-user=<user>], [username for web writable files (default www-data)]),
+	web_user=$withval,
+	ACICINGA_USER_GUESS([www www-data apache httpd nobody],[web_user],[www-data])
+)
+
+AC_ARG_WITH([web_group],
+	AS_HELP_STRING([--with-web-group=<grp>], [group for web writable files (default www-data)]),
+	web_group=$withval,
+	ACICINGA_GROUP_GUESS([www www-data apache httpd nogroup nobody],[web_group], [www-data])
+)
+
+AC_ARG_WITH([bin_user],
+	AS_HELP_STRING([--with-bin-user=<user>], [user for all other files (default root)]),
+	bin_user=$withval,
+	bin_user=root
+)
+
+AC_ARG_WITH([bin_group],
+	AS_HELP_STRING([--with-bin-group=<grp>], [group for all other files (default bin)]),
+	bin_group=$withval,
+	bin_group=bin
+)
+
+AC_ARG_WITH([db_type],
+	AS_HELP_STRING([--with-db-type=<string>], [Type of dbms (default mysql)]),
+	db_type=$withval,
+	db_type=mysql
+)
+
+AC_ARG_WITH([db_host],
+	AS_HELP_STRING([--with-db-host=<string>], [Host of dbms (default 127.0.0.1)]),
+	db_host=$withval,
+	db_host=127.0.0.1
+)
+
+AC_ARG_WITH([db_port],
+	AS_HELP_STRING([--with-db-port=<int>], [Port of the dbms (default 3306)]),
+	db_port=$withval,
+	db_port=3306
+)
+
+AC_ARG_WITH([db_name],
+	AS_HELP_STRING([--with-db-name=<string>], [DB name for icinga (default icinga_web)]),
+	db_name=$withval,
+	db_name=icinga_web
+)
+
+AC_ARG_WITH([db_user],
+	AS_HELP_STRING([--with-db-user=<string>], [DB user for icinga (default icinga_web)]),
+	db_user=$withval,
+	db_user=icinga_web
+)
+
+AC_ARG_WITH([db_pass],
+	AS_HELP_STRING([--with-db-pass=<string>], [DB pass for icinga (default icinga_web)]),
+	db_pass=$withval,
+	db_pass=icinga_web
+)
+
+# Custom vars
+INSTALL_OPTS="-o $bin_user -g $bin_group"
+CFLAGS=""
+
+# Substitutions
 AC_SUBST(web_user)
 AC_SUBST(web_group)
-AC_DEFINE_UNQUOTED(DEFAULT_web_user,"$web_user")
-AC_DEFINE_UNQUOTED(DEFAULT_web_group,"$web_group")
-
-AC_ARG_WITH(bin_user,--with-bin-user=<user> sets user name for common webfiles,bin_user=$withval,bin_user=root)
-AC_ARG_WITH(bin_group,--with-bin-group=<group> sets group for common webfiles,bin_group=$withval,bin_group=bin)
 AC_SUBST(bin_user)
 AC_SUBST(bin_group)
-AC_DEFINE_UNQUOTED(DEFAULT_web_user,"$bin_user")
-AC_DEFINE_UNQUOTED(DEFAULT_web_group,"$bin_group")
 
-BIN_USER="$bin_user"
-AC_SUBST(bin_user)
+AC_SUBST(db_type)
+AC_SUBST(db_host)
+AC_SUBST(db_port)
+AC_SUBST(db_name)
+AC_SUBST(db_user)
+AC_SUBST(db_pass)
 
-BIN_GROUP="$bin_group"
-AC_SUBST(bin_group)
-
-INSTALL_OPTS="-o $bin_user -g $bin_group"
+AC_SUBST(CFLAGS)
+AC_SUBST(PHP)
+AC_SUBST(MYSQL)
 AC_SUBST(INSTALL_OPTS)
 
-CFLAGS=""
-AC_SUBST(CFLAGS)
-
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([
+	Makefile
+	etc/build.properties
+	app/config/databases.xml
+])
 
 AC_OUTPUT

@@ -557,12 +557,19 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
-CFLAGS
 INSTALL_OPTS
+CFLAGS
+db_pass
+db_user
+db_name
+db_port
+db_host
+db_type
 bin_group
 bin_user
 web_group
 web_user
+MYSQL
 PHP
 SED
 GREP
@@ -614,11 +621,18 @@ with_web_user
 with_web_group
 with_bin_user
 with_bin_group
+with_db_type
+with_db_host
+with_db_port
+with_db_name
+with_db_user
+with_db_pass
 '
       ac_precious_vars='build_alias
 host_alias
 target_alias
-PHP'
+PHP
+MYSQL'
 
 
 # Initialize some variables set by options.
@@ -1228,13 +1242,20 @@ if test -n "$ac_init_help"; then
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
---with-web-user=<user> sets user name to run icinga
---with-web-group=<group> sets group name to run icinga
---with-bin-user=<user> sets user name for common webfiles
---with-bin-group=<group> sets group for common webfiles
+  --with-web-user=<user>  username for web writable files (default www-data)
+  --with-web-group=<grp>  group for web writable files (default www-data)
+  --with-bin-user=<user>  user for all other files (default root)
+  --with-bin-group=<grp>  group for all other files (default bin)
+  --with-db-type=<string> Type of dbms (default mysql)
+  --with-db-host=<string> Host of dbms (default 127.0.0.1)
+  --with-db-port=<int>    Port of the dbms (default 3306)
+  --with-db-name=<string> DB name for icinga (default icinga_web)
+  --with-db-user=<string> DB user for icinga (default icinga_web)
+  --with-db-pass=<string> DB pass for icinga (default icinga_web)
 
 Some influential environment variables:
   PHP         Perl interpreter command
+  MYSQL       MySql client binary not found
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -1967,6 +1988,54 @@ if test "$PHP" = 'not found'; then
         as_fn_error "cannot use $PACKAGE_NAME without php" "$LINENO" 5
 fi
 
+# Check for mysql
+
+# Extract the first word of "mysql", so it can be a program name with args.
+set dummy mysql; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if test "${ac_cv_path_MYSQL+set}" = set; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $MYSQL in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_MYSQL="$MYSQL" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_MYSQL="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_path_MYSQL" && ac_cv_path_MYSQL="not found"
+  ;;
+esac
+fi
+MYSQL=$ac_cv_path_MYSQL
+if test -n "$MYSQL"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $MYSQL" >&5
+$as_echo "$MYSQL" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+
+if test "$MYSQL" = 'not found'; then
+        as_fn_error "cannot use $PACKAGE_NAME without MySql client binary" "$LINENO" 5
+fi
+
 # Custom macros
 
 # ACRT_USER_EXISTS( users, variable, default )
@@ -1990,6 +2059,7 @@ fi
 
 # Define install options
 
+
 # Check whether --with-web_user was given.
 if test "${with_web_user+set}" = set; then :
   withval=$with_web_user; web_user=$withval
@@ -2008,7 +2078,9 @@ $as_echo "not found" >&6; }
 fi
    done
 
+
 fi
+
 
 
 # Check whether --with-web_group was given.
@@ -2029,17 +2101,8 @@ $as_echo "not found" >&6; }
 fi
    done
 
+
 fi
-
-
-
-cat >>confdefs.h <<_ACEOF
-#define DEFAULT_web_user "$web_user"
-_ACEOF
-
-cat >>confdefs.h <<_ACEOF
-#define DEFAULT_web_group "$web_group"
-_ACEOF
 
 
 
@@ -2048,7 +2111,9 @@ if test "${with_bin_user+set}" = set; then :
   withval=$with_bin_user; bin_user=$withval
 else
   bin_user=root
+
 fi
+
 
 
 # Check whether --with-bin_group was given.
@@ -2056,32 +2121,93 @@ if test "${with_bin_group+set}" = set; then :
   withval=$with_bin_group; bin_group=$withval
 else
   bin_group=bin
+
 fi
 
 
 
-cat >>confdefs.h <<_ACEOF
-#define DEFAULT_web_user "$bin_user"
-_ACEOF
+# Check whether --with-db_type was given.
+if test "${with_db_type+set}" = set; then :
+  withval=$with_db_type; db_type=$withval
+else
+  db_type=mysql
 
-cat >>confdefs.h <<_ACEOF
-#define DEFAULT_web_group "$bin_group"
-_ACEOF
-
-
-BIN_USER="$bin_user"
+fi
 
 
-BIN_GROUP="$bin_group"
+
+# Check whether --with-db_host was given.
+if test "${with_db_host+set}" = set; then :
+  withval=$with_db_host; db_host=$withval
+else
+  db_host=127.0.0.1
+
+fi
 
 
+
+# Check whether --with-db_port was given.
+if test "${with_db_port+set}" = set; then :
+  withval=$with_db_port; db_port=$withval
+else
+  db_port=3306
+
+fi
+
+
+
+# Check whether --with-db_name was given.
+if test "${with_db_name+set}" = set; then :
+  withval=$with_db_name; db_name=$withval
+else
+  db_name=icinga_web
+
+fi
+
+
+
+# Check whether --with-db_user was given.
+if test "${with_db_user+set}" = set; then :
+  withval=$with_db_user; db_user=$withval
+else
+  db_user=icinga_web
+
+fi
+
+
+
+# Check whether --with-db_pass was given.
+if test "${with_db_pass+set}" = set; then :
+  withval=$with_db_pass; db_pass=$withval
+else
+  db_pass=icinga_web
+
+fi
+
+
+# Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
-
-
 CFLAGS=""
 
+# Substitutions
 
-ac_config_files="$ac_config_files Makefile"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ac_config_files="$ac_config_files Makefile etc/build.properties app/config/databases.xml"
 
 
 cat >confcache <<\_ACEOF
@@ -2780,6 +2906,8 @@ for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
+    "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
 
   *) as_fn_error "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

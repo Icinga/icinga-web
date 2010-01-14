@@ -176,6 +176,10 @@ var container = new Ext.Panel({
 		id: 'south-frame',
 		layout: 'fit',
 		height: 150,
+		
+		stateful: true,
+		stateId: 'south-frame',
+		
 		defaults: {
 			border: false
 		}
@@ -197,6 +201,9 @@ var container = new Ext.Panel({
         width: 200,
         collapsible: true,
         margins: '0 0 10 0',
+        
+        stateful: true,
+        stateId: 'west-frame',
         
         layout: {
         	type: 'accordion',
