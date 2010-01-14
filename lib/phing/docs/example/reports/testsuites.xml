@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="HelloWorldTest" file="/home/druid/dev/phing/tags/2.3.3/docs/example/src/HelloWorldTest.php" fullPackage="hello.world" package="hello.world" tests="1" assertions="1" failures="0" errors="0" time="0.031229">
+    <testcase name="testSayHello" class="HelloWorldTest" file="/home/druid/dev/phing/tags/2.3.3/docs/example/src/HelloWorldTest.php" line="15" assertions="1" time="0.031229"/>
+  </testsuite>
+</testsuites>

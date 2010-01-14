@@ -72,3 +72,6 @@
       * adapted the phing db targets to gnu make
       * some makefile fixes, help text, targets
       
+    * 2010-01-14
+      * Updated phing to stable version 2.3.3
+      
