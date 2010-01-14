@@ -1,3 +1,4 @@
+SHELL=/bin/sh
 PACKAGE_TARNAME=@PACKAGE_TARNAME@
 PACKAGE_NAME=@PACKAGE_NAME@
 PACKAGE_VERSION=@PACKAGE_VERSION@
@@ -17,7 +18,7 @@ WEB_USER=@web_user@
 WEB_GROUP=@web_group@
 SED=@SED@
 PHP=@PHP@
-PC=$(DESTDIR)$(prefix)/bin/phing -f $(DESTDIR)$(prefix)/etc/build.xml
+PC=bin/phing -f etc/build.xml
 INC_MAKE_FILES=./etc/make/files.mk
 
 none:
@@ -49,8 +50,11 @@ remove-temp-files:
 clean:
 
 distclean: clean
-	rm -f Makefile
-	rm -f config.log config.status
+	rm -f \
+		Makefile \
+		config.log \
+		config.status \
+		etc/build.properties
 
 devclean: remove-temp-files distclean cacheclean install-files-list
 

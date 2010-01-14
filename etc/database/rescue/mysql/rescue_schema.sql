@@ -113,7 +113,7 @@ CREATE TABLE `nsm_target` (
   `target_id` int(11) NOT NULL,
   `target_name` varchar(45) DEFAULT NULL,
   `target_description` varchar(100) DEFAULT NULL,
-  `target_class` varchar(45) DEFAULT NULL,
+  `target_class` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`target_id`)
 ) TYPE=InnoDB;
 
