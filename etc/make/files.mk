@@ -587,85 +587,95 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/util
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/input
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/lib
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/system
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/creole
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pearpackage
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/creole
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pearpackage
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/types
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/lib
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/util
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/input
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/util
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/types
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/docsystem
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/xsl
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/src
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/hello
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/hello/world
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/hello
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/hello/world
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/example/docs
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/export
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/toc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/css
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/css
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/js
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/toc
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/export
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/pt_BR
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/de
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/fr
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/pt_BR
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/etc
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/pear
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/tmp
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/condition
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/filters
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/system
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/example
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/example/tasks
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/example/types
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/filters
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/system
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/condition
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/expected
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/fr_FR
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/fr_FR/LC_MESSAGES
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/expected
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/input
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/resources
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/tokensources
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/types
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a/aa
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/resources
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/reports
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/adapter
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/adapter/ext
@@ -694,8 +704,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/message-box
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/multiselect
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/organizer
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/button
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/button/images
@@ -744,7 +752,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app/controllers
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts
@@ -784,6 +791,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/app/controllers
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/app/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/lib
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/pkgs
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/css
@@ -908,7 +918,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
@@ -930,16 +939,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/state/IcingaHostStateInfo.class.php $(DESTDIR)$(prefix)/app/lib/icinga/state/IcingaHostStateInfo.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/state/IcingaServiceStateInfo.class.php $(DESTDIR)$(prefix)/app/lib/icinga/state/IcingaServiceStateInfo.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/state/IcingaStateInfo.class.php $(DESTDIR)$(prefix)/app/lib/icinga/state/IcingaStateInfo.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayFormat.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayFormat.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayMonitoring.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayMonitoring.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplay.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayServiceIcons.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayServiceIcons.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateLayout.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateLayout.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateWorker.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateWorker.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlParser.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlParser.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlReplace.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlReplace.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateWorker.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateWorker.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderLink.class.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderLink.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/IndexAction.class.php
@@ -1265,9 +1274,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-deploy.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_schema.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.properties $(DESTDIR)$(prefix)/etc/build.properties
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi-dist $(DESTDIR)$(prefix)/lib/agavi/bin/agavi-dist
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi.bat-dist $(DESTDIR)$(prefix)/lib/agavi/bin/agavi.bat-dist
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi $(DESTDIR)$(prefix)/lib/agavi/bin/agavi
@@ -3614,10 +3622,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/InterGridUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/InterGridUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/StructUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/StructUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/CronkMgr.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/CronkMgr.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FilterHandler.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FilterHandler.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/AppKit.js $(DESTDIR)$(prefix)/lib/appkit/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/SimpleDataProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/rmd160.js $(DESTDIR)$(prefix)/lib/appkit/js/rmd160.js
@@ -3641,8 +3649,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitClassUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitClassUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitInlineIncluderUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitInlineIncluderUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitRandomUtil.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitFormatParserUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitStringUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitStringUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitFormatParserUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/cache/AppKitCache.class.php $(DESTDIR)$(prefix)/lib/appkit/cache/AppKitCache.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/cache/AppKitFileCache.class.php $(DESTDIR)$(prefix)/lib/appkit/cache/AppKitFileCache.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/ext/AppKitExtStateProviderData.class.php $(DESTDIR)$(prefix)/lib/appkit/ext/AppKitExtStateProviderData.class.php
@@ -3994,394 +4002,411 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/CHANGELOG $(DESTDIR)$(prefix)/lib/doctrine/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/COPYRIGHT $(DESTDIR)$(prefix)/lib/doctrine/COPYRIGHT
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/LICENSE $(DESTDIR)$(prefix)/lib/doctrine/LICENSE
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/CREDITS $(DESTDIR)$(prefix)/lib/phing/CREDITS
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/LICENSE $(DESTDIR)$(prefix)/lib/phing/LICENSE
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/README $(DESTDIR)$(prefix)/lib/phing/README
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/pear-phing $(DESTDIR)$(prefix)/lib/phing/bin/pear-phing
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/pear-phing.bat $(DESTDIR)$(prefix)/lib/phing/bin/pear-phing.bat
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/phing $(DESTDIR)$(prefix)/lib/phing/bin/phing
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/phing.bat $(DESTDIR)$(prefix)/lib/phing/bin/phing.bat
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/phing.php $(DESTDIR)$(prefix)/lib/phing/bin/phing.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildEvent.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildEvent.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildException.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildListener.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildListener.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildLogger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/ConfigurationException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/ConfigurationException.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/IntrospectionHelper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/IntrospectionHelper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Phing.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Phing.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Project.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Project.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/ProjectComponent.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/ProjectComponent.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/RuntimeConfigurable.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/RuntimeConfigurable.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Target.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Target.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Task.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Task.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/TaskAdapter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/TaskAdapter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/TaskContainer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/TaskContainer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/UnknownElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/UnknownElement.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/BaseFilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/BaseFilterReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/BaseParamFilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/BaseParamFilterReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ChainableReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ChainableReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ExpandProperties.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ExpandProperties.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/HeadFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/HeadFilter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/LineContains.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/LineContains.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/LineContainsRegexp.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/LineContainsRegexp.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/PrefixLines.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/PrefixLines.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ReplaceRegexp.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ReplaceRegexp.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ReplaceTokens.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ReplaceTokens.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripLineBreaks.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripLineBreaks.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripLineComments.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripLineComments.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripPhpComments.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripPhpComments.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripWhitespace.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripWhitespace.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TabToSpaces.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TabToSpaces.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TailFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TailFilter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TidyFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TidyFilter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TranslateGettext.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TranslateGettext.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/XincludeFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/XincludeFilter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/XsltFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/XsltFilter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/util/ChainReaderHelper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/util/ChainReaderHelper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/util/IniFileTokenReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/util/IniFileTokenReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/DefaultInputHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/DefaultInputHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/InputHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/InputHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/InputRequest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/InputRequest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/MultipleChoiceInputRequest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/MultipleChoiceInputRequest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/PropertyFileInputHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/PropertyFileInputHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/YesNoInputRequest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/YesNoInputRequest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/lib/Capsule.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/lib/Capsule.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/lib/Zip.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/lib/Zip.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/AnsiColorLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/AnsiColorLogger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/DefaultLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/DefaultLogger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/NoBannerLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/NoBannerLogger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/PearLogListener.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/PearLogListener.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/StreamRequiredBuildLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/StreamRequiredBuildLogger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/XmlLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/XmlLogger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/defaults.properties $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/defaults.properties
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/FileNameMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/FileNameMapper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/FlattenMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/FlattenMapper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/GlobMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/GlobMapper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/IdentityMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/IdentityMapper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/MergeMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/MergeMapper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/RegexpMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/RegexpMapper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/AbstractHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/AbstractHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/AbstractSAXParser.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/AbstractSAXParser.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/DataTypeHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/DataTypeHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ExpatParseException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ExpatParseException.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ExpatParser.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ExpatParser.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/Location.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/Location.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/NestedElementHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/NestedElementHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ProjectConfigurator.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ProjectConfigurator.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ProjectHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ProjectHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/RootHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/RootHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/TargetHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/TargetHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/TaskHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/TaskHandler.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/BufferedReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/BufferedReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/BufferedWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/BufferedWriter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/ConsoleReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/ConsoleReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileInputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileInputStream.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileOutputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileOutputStream.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/GlobMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/GlobMapper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/FlattenMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/FlattenMapper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/mappers/MergeMapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/mappers/MergeMapper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileInputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileInputStream.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileSystem.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileSystem.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileWriter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FilterReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/IOException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/IOException.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/InputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/InputStream.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/InputStreamReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/InputStreamReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/OutputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/OutputStream.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/OutputStreamWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/OutputStreamWriter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/PhingFile.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/PhingFile.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/Reader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/Reader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/StringReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/StringReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/UnixFileSystem.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/UnixFileSystem.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/Win32FileSystem.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/Win32FileSystem.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/BufferedReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/BufferedReader.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/WinNTFileSystem.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/WinNTFileSystem.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/Win32FileSystem.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/Win32FileSystem.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/BufferedWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/BufferedWriter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/InputStreamReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/InputStreamReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FilterReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/StringReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/StringReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileWriter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/InputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/InputStream.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/UnixFileSystem.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/UnixFileSystem.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/IOException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/IOException.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/PhingFile.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/PhingFile.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/Writer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/Writer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/Character.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/Character.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/EventObject.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/EventObject.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/FileOutputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/FileOutputStream.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/OutputStreamWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/OutputStreamWriter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/ConsoleReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/ConsoleReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/OutputStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/OutputStream.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/io/Reader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/io/Reader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Timer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Timer.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Register.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Register.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Message.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Message.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Properties.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Properties.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/FileNotFoundException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/FileNotFoundException.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/NullPointerException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/NullPointerException.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/SecurityException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/SecurityException.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Message.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Message.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Properties.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Properties.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Register.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Register.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/util/Timer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/util/Timer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/defaults.properties $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/defaults.properties
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/CapsuleTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/CapsuleTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ExtractBaseTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ExtractBaseTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/FtpDeployTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/FtpDeployTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/JslLintTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/JslLintTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/MailTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/MailTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ManifestTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ManifestTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PackageAsPathTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PackageAsPathTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PearPackage2Task.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PearPackage2Task.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PearPackageTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PearPackageTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PhpCodeSnifferTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PhpCodeSnifferTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PhpLintTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PhpLintTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ScpSendTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ScpSendTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/SmartyTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/SmartyTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/TarTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/TarTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/UntarTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/UntarTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/UnzipTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/UnzipTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/XmlLintTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/XmlLintTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ZendCodeAnalyzerTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ZendCodeAnalyzerTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ZipTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ZipTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageMerger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageMerger.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageMergerTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageMergerTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTransformer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTransformer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageSetupTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageSetupTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/creole/CreoleSQLExecTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/creole/CreoleSQLExecTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/creole/CreoleTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/creole/CreoleTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbDeployTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbDeployTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntax.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntax.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxFactory.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxFactory.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMsSql.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMsSql.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMysql.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMysql.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxSQLite.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxSQLite.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ioncube/IoncubeComment.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube/IoncubeComment.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ioncube/IoncubeEncoderTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube/IoncubeEncoderTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ioncube/IoncubeLicenseTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube/IoncubeLicenseTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PlainPDOResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PlainPDOResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/XMLPDOResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/XMLPDOResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pearpackage/Fileset.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pearpackage/Fileset.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpdoc/PhingPhpDocumentorSetup.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc/PhingPhpDocumentorSetup.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorExternalTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorExternalTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/BatchTest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/BatchTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/FormatterElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/FormatterElement.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitReportTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitReportTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTestRunner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTestRunner.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitUtil.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitUtil.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PlainPHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PlainPHPUnit2ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/SummaryPHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/SummaryPHPUnit2ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/XMLPHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/XMLPHPUnit2ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PHPUnit3ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PlainPHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PlainPHPUnit3ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/XMLPHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/XMLPHPUnit3ResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestCountResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestCountResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestFormatterElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestFormatterElement.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestPlainResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestPlainResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestSummaryResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestSummaryResultFormatter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnBaseTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnBaseTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnCheckoutTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnCheckoutTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnExportTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnExportTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnLastRevisionTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnLastRevisionTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnUpdateTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnUpdateTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AdhocTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AdhocTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/EventObject.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/EventObject.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/system/lang/Character.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/system/lang/Character.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/TaskContainer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/TaskContainer.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/ConfigurationException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/ConfigurationException.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/TaskAdapter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/TaskAdapter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/IntrospectionHelper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/IntrospectionHelper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/RuntimeConfigurable.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/RuntimeConfigurable.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Project.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Project.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildLogger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildListener.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildListener.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Target.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Target.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/ProjectComponent.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/ProjectComponent.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildException.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Phing.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Phing.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/Task.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/Task.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/UnknownElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/UnknownElement.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildEvent.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildEvent.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/IfTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/IfTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TouchTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TouchTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AvailableTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AvailableTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/WarnTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/WarnTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ExitTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ExitTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/CvsPassTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/CvsPassTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/IncludePathTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/IncludePathTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/MkdirTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/MkdirTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TypedefTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TypedefTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ExecTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ExecTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/CvsTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/CvsTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/SequentialTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/SequentialTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AppendTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AppendTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ReflexiveTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ReflexiveTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/MatchingTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/MatchingTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TstampTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TstampTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PropertyTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PropertyTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/XsltTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/XsltTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ResolvePathTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ResolvePathTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/InputTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/InputTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/DeleteTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/DeleteTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ChmodTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ChmodTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AdhocTaskdefTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AdhocTaskdefTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AdhocTypedefTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AdhocTypedefTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AppendTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AppendTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AvailableTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AvailableTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ChmodTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ChmodTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ChownTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ChownTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ConditionTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ConditionTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/CopyTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/CopyTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/CvsPassTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/CvsPassTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/CvsTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/CvsTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/DeleteTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/DeleteTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/EchoTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/EchoTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ExecTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ExecTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ExitTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ExitTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ForeachTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ForeachTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/IfTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/IfTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/IncludePathTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/IncludePathTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/InputTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/InputTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/MatchingTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/MatchingTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/MkdirTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/MkdirTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/MoveTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/MoveTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PhingCallTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PhingCallTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/AdhocTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/AdhocTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PhingTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PhingTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PhpEvalTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PhpEvalTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PropertyPromptTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PropertyPromptTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PropertyTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PropertyTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ReflexiveTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ReflexiveTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ResolvePathTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ResolvePathTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/SequentialTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/SequentialTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ForeachTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ForeachTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TaskdefTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TaskdefTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TouchTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TouchTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TstampTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TstampTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/TypedefTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/TypedefTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PropertyPromptTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PropertyPromptTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/CopyTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/CopyTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ConditionTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ConditionTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/UpToDateTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/UpToDateTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/WarnTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/WarnTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/XsltTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/XsltTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/AndCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/AndCondition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/Condition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/Condition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/ConditionBase.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/ConditionBase.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/ContainsCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/ContainsCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PhpEvalTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PhpEvalTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/MoveTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/MoveTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/EchoTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/EchoTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/PhingCallTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/PhingCallTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/ChownTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/ChownTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/OsCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/OsCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/NotCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/NotCondition.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/EqualsCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/EqualsCondition.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/IsFalseCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/IsFalseCondition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/IsSetCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/IsSetCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/Condition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/Condition.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/IsTrueCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/IsTrueCondition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/NotCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/NotCondition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/OrCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/OrCondition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/OsCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/OsCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/ConditionBase.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/ConditionBase.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/ReferenceExistsCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/ReferenceExistsCondition.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/AbstractFileSet.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/AbstractFileSet.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Commandline.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Commandline.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/IsSetCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/IsSetCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/ContainsCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/ContainsCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/OrCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/OrCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/system/condition/AndCondition.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/system/condition/AndCondition.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/defaults.properties $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/defaults.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ioncube/IoncubeComment.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube/IoncubeComment.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ioncube/IoncubeLicenseTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube/IoncubeLicenseTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ioncube/IoncubeEncoderTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ioncube/IoncubeEncoderTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnCheckoutTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnCheckoutTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnBaseTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnBaseTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnExportTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnExportTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnUpdateTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnUpdateTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/svn/SvnLastRevisionTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/svn/SvnLastRevisionTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitUtil.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitUtil.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTestRunner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTestRunner.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/BatchTest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/BatchTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitReportTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/PHPUnitReportTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/FormatterElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/FormatterElement.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/SummaryPHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/SummaryPHPUnit2ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PlainPHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PlainPHPUnit2ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/XMLPHPUnit2ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit2/XMLPHPUnit2ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/XMLPHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/XMLPHPUnit3ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PHPUnit3ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PlainPHPUnit3ResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpunit/phpunit3/PlainPHPUnit3ResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/JslLintTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/JslLintTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PackageAsPathTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PackageAsPathTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ZendCodeAnalyzerTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ZendCodeAnalyzerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/CapsuleTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/CapsuleTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PhpCodeSnifferTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PhpCodeSnifferTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PearPackage2Task.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PearPackage2Task.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/XmlLintTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/XmlLintTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PhpLintTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PhpLintTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/TarTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/TarTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/SmartyTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/SmartyTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/FtpDeployTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/FtpDeployTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ManifestTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ManifestTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/PearPackageTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/PearPackageTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/MailTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/MailTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ZipTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ZipTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ScpSendTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ScpSendTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/UnzipTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/UnzipTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/ExtractBaseTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/ExtractBaseTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/UntarTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/UntarTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/creole/CreoleTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/creole/CreoleTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/creole/CreoleSQLExecTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/creole/CreoleSQLExecTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpdoc/PhingPhpDocumentorSetup.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc/PhingPhpDocumentorSetup.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorExternalTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/phpdoc/PhpDocumentorExternalTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pearpackage/Fileset.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pearpackage/Fileset.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageSetupTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageSetupTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageMergerTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageMergerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageMerger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageMerger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTransformer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/coverage/CoverageReportTransformer.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestCountResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestCountResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestPlainResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestPlainResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestFormatterElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestFormatterElement.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestSummaryResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/simpletest/SimpleTestSummaryResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMysql.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMysql.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntax.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntax.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMsSql.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxMsSql.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxFactory.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxFactory.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxSQLite.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbmsSyntaxSQLite.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/dbdeploy/DbDeployTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/dbdeploy/DbDeployTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PlainPDOResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PlainPDOResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/XMLPDOResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/XMLPDOResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOTask.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/tasks/ext/pdo/PDOResultFormatter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/tasks/ext/pdo/PDOResultFormatter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ExpatParseException.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ExpatParseException.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/NestedElementHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/NestedElementHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/AbstractSAXParser.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/AbstractSAXParser.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/Location.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/Location.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/AbstractHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/AbstractHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ProjectConfigurator.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ProjectConfigurator.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/TargetHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/TargetHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/DataTypeHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/DataTypeHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/TaskHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/TaskHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ExpatParser.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ExpatParser.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/ProjectHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/ProjectHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/parser/RootHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/parser/RootHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/lib/Capsule.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/lib/Capsule.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/lib/Zip.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/lib/Zip.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/PearLogListener.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/PearLogListener.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/XmlLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/XmlLogger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/NoBannerLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/NoBannerLogger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/StreamRequiredBuildLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/StreamRequiredBuildLogger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/AnsiColorLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/AnsiColorLogger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/DefaultLogger.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/DefaultLogger.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/listener/defaults.properties $(DESTDIR)$(prefix)/lib/phing/classes/phing/listener/defaults.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/XincludeFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/XincludeFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TailFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TailFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TranslateGettext.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TranslateGettext.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/BaseFilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/BaseFilterReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripPhpComments.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripPhpComments.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ExpandProperties.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ExpandProperties.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/BaseParamFilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/BaseParamFilterReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ChainableReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ChainableReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TabToSpaces.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TabToSpaces.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/LineContainsRegexp.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/LineContainsRegexp.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/HeadFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/HeadFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/LineContains.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/LineContains.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripLineComments.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripLineComments.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/PrefixLines.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/PrefixLines.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripLineBreaks.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripLineBreaks.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/XsltFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/XsltFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ReplaceTokens.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ReplaceTokens.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/TidyFilter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/TidyFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/StripWhitespace.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/StripWhitespace.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/ReplaceRegexp.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/ReplaceRegexp.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/util/IniFileTokenReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/util/IniFileTokenReader.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/filters/util/ChainReaderHelper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/filters/util/ChainReaderHelper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/YesNoInputRequest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/YesNoInputRequest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/MultipleChoiceInputRequest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/MultipleChoiceInputRequest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/PropertyFileInputHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/PropertyFileInputHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/InputRequest.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/InputRequest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/DefaultInputHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/DefaultInputHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/input/InputHandler.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/input/InputHandler.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/FileUtils.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/FileUtils.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/PathTokenizer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/PathTokenizer.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/StringHelper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/StringHelper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/LogWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/LogWriter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/DirectoryScanner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/DirectoryScanner.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/SourceFileScanner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/SourceFileScanner.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/ExtendedFileStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/ExtendedFileStream.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/regexp/RegexpEngine.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp/RegexpEngine.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/regexp/PregEngine.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp/PregEngine.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/regexp/Regexp.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp/Regexp.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectorContainer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectorContainer.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/PresentSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/PresentSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ContainsSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ContainsSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/DateSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/DateSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectorUtils.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectorUtils.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectorScanner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectorScanner.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/DepthSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/DepthSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/TypeSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/TypeSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ExtendFileSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ExtendFileSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/FilenameSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/FilenameSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SizeSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SizeSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/OrSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/OrSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/FileSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/FileSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/NotSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/NotSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/BaseExtendSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/BaseExtendSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/AndSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/AndSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/NoneSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/NoneSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/MajoritySelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/MajoritySelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/BaseSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/BaseSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/DependSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/DependSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/BaseSelectorContainer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/BaseSelectorContainer.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ContainsRegexpSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ContainsRegexpSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ExtendSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ExtendSelector.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectSelector.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/DataType.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/DataType.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Description.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Description.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Reference.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Reference.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Parameter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Parameter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/TokenSource.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/TokenSource.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/PhingFilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/PhingFilterReader.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/DirSet.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/DirSet.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/FileList.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/FileList.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/FileSet.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/FileSet.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/FilterChain.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/FilterChain.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Mapper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Mapper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Parameter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Parameter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Parameterizable.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Parameterizable.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/RegularExpression.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/RegularExpression.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/AbstractFileSet.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/AbstractFileSet.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Description.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Description.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Path.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Path.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/PatternSet.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/PatternSet.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/PhingFilterReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/PhingFilterReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Reference.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Reference.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/RegularExpression.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/RegularExpression.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/FileList.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/FileList.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Parameterizable.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Parameterizable.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/Commandline.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/Commandline.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/TokenReader.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/TokenReader.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/TokenSource.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/TokenSource.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/defaults.properties $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/defaults.properties
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/AndSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/AndSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/BaseExtendSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/BaseExtendSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/BaseSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/BaseSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/BaseSelectorContainer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/BaseSelectorContainer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ContainsRegexpSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ContainsRegexpSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ContainsSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ContainsSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/DateSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/DateSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/DependSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/DependSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/DepthSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/DepthSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ExtendFileSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ExtendFileSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/ExtendSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/ExtendSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/FileSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/FileSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/FilenameSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/FilenameSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/MajoritySelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/MajoritySelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/NoneSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/NoneSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/NotSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/NotSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/OrSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/OrSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/PresentSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/PresentSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectorContainer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectorContainer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectorScanner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectorScanner.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SelectorUtils.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SelectorUtils.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/SizeSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/SizeSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/types/selectors/TypeSelector.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/types/selectors/TypeSelector.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/DirectoryScanner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/DirectoryScanner.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/ExtendedFileStream.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/ExtendedFileStream.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/FileUtils.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/FileUtils.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/LogWriter.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/LogWriter.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/PathTokenizer.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/PathTokenizer.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/SourceFileScanner.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/SourceFileScanner.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/StringHelper.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/StringHelper.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/regexp/PregEngine.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp/PregEngine.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/regexp/Regexp.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp/Regexp.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/util/regexp/RegexpEngine.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/util/regexp/RegexpEngine.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/html/FrameToCBottom.html $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html/FrameToCBottom.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/html/FrameToCTop.html $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html/FrameToCTop.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/html/StandardToCBottom.html $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html/StandardToCBottom.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/html/StandardToCTop.html $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html/StandardToCTop.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/xsl/Chapters.xsl $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/xsl/Chapters.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/html/StandardToCBottom.html $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html/StandardToCBottom.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/html/FrameToCBottom.html $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/html/FrameToCBottom.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/xsl/Toc.xsl $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/xsl/Toc.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/build.xml $(DESTDIR)$(prefix)/lib/phing/docs/example/build.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/src/HelloWorld.php $(DESTDIR)$(prefix)/lib/phing/docs/example/src/HelloWorld.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/docsystem/xsl/Chapters.xsl $(DESTDIR)$(prefix)/lib/phing/docs/docsystem/xsl/Chapters.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/src/HelloWorldTest.php $(DESTDIR)$(prefix)/lib/phing/docs/example/src/HelloWorldTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/src/HelloWorld.php $(DESTDIR)$(prefix)/lib/phing/docs/example/src/HelloWorld.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/build.xml $(DESTDIR)$(prefix)/lib/phing/docs/example/build.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/testsuites.xml $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/testsuites.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage.db $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage.db
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage.xml $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/allclasses-frame.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/allclasses-frame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/index.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/stylesheet.css $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/stylesheet.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/overview-frame.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/overview-frame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/overview-summary.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/overview-summary.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/hello/world/package-frame.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/hello/world/package-frame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/hello/world/HelloWorld.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/hello/world/HelloWorld.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/coverage/hello/world/package-summary.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/coverage/hello/world/package-summary.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/allclasses-frame.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/allclasses-frame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/index.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/stylesheet.css $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/stylesheet.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/overview-frame.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/overview-frame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/overview-summary.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/overview-summary.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/hello/world/package-frame.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/hello/world/package-frame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/hello/world/package-summary.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/hello/world/package-summary.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/example/reports/tests/hello/world/HelloWorldTest.html $(DESTDIR)$(prefix)/lib/phing/docs/example/reports/tests/hello/world/HelloWorldTest.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/export/PhingGuide_en.pdf $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/export/PhingGuide_en.pdf
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/PhingGuide.book $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/PhingGuide.book
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/AboutThisBook.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/AboutThisBook.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/BasicConcepts.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/BasicConcepts.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/Bibliography.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/Bibliography.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/ExtendingPhing.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/ExtendingPhing.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/GettingStarted.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/GettingStarted.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/Introduction.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/Introduction.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/ProjectComponents.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/ProjectComponents.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/Setup.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/Setup.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixA-FactSheet.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixA-FactSheet.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixB-CoreTasks.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixB-CoreTasks.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixC-OptionalTasks.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixC-OptionalTasks.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD-CoreTypes.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD-CoreTypes.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD2-CoreFilters.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD2-CoreFilters.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD3-CoreMappers.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD3-CoreMappers.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD4-CoreSelectors.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD4-CoreSelectors.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixE-ProjectComponents.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixE-ProjectComponents.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixF-FileFormats.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixF-FileFormats.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/css/Documentation.css $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/css/Documentation.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/css/FrameToc.css $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/css/FrameToc.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/frame/DocFrame.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame/DocFrame.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/frame/NavTop.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame/NavTop.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/frame/TitlePage.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame/TitlePage.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/ExtendingTree.gif $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/ExtendingTree.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/README.txt $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/logo-pdfsm.png $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/logo-pdfsm.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/logo.png $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/logo.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/index.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/index.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/js/BookNav.js $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/js/BookNav.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/js/Chapters.js $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/js/Chapters.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/frame/NavTop.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame/NavTop.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/frame/DocFrame.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame/DocFrame.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/frame/TitlePage.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/frame/TitlePage.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/toc/FrameToC.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/toc/FrameToC.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/toc/ToC.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/toc/ToC.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/ExtendingTree.gif $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/ExtendingTree.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/logo-pdfsm.png $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/logo-pdfsm.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/logo.png $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/logo.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/images/README.txt $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/images/README.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/css/Documentation.css $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/css/Documentation.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/css/FrameToc.css $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/css/FrameToc.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/js/BookNav.js $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/js/BookNav.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/js/Chapters.js $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/js/Chapters.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/Bibliography.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/Bibliography.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/BasicConcepts.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/BasicConcepts.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/GettingStarted.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/GettingStarted.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/ExtendingPhing.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/ExtendingPhing.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/Introduction.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/Introduction.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/Setup.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/Setup.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/ProjectComponents.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/ProjectComponents.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/AboutThisBook.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/AboutThisBook.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixC-OptionalTasks.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixC-OptionalTasks.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD4-CoreSelectors.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD4-CoreSelectors.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixF-FileFormats.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixF-FileFormats.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD-CoreTypes.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD-CoreTypes.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD3-CoreMappers.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD3-CoreMappers.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixE-ProjectComponents.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixE-ProjectComponents.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixA-FactSheet.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixA-FactSheet.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixB-CoreTasks.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixB-CoreTasks.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD2-CoreFilters.html $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/book/chapters/appendixes/AppendixD2-CoreFilters.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/build.xml $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/build.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/export/PhingGuide_en.pdf $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/export/PhingGuide_en.pdf
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/langs/pt_BR/README.txt $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/pt_BR/README.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/langs/de/README.txt $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/de/README.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/langs/fr/README.txt $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/fr/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/docs/phing_guide/langs/pt_BR/README.txt $(DESTDIR)$(prefix)/lib/phing/docs/phing_guide/langs/pt_BR/README.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/VERSION.TXT $(DESTDIR)$(prefix)/lib/phing/etc/VERSION.TXT
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/coverage-frames.xsl $(DESTDIR)$(prefix)/lib/phing/etc/coverage-frames.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/log.xsl $(DESTDIR)$(prefix)/lib/phing/etc/log.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/phpunit2-frames.xsl $(DESTDIR)$(prefix)/lib/phing/etc/phpunit2-frames.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/etc/phpunit2-noframes.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/log.xsl $(DESTDIR)$(prefix)/lib/phing/etc/log.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/str.replace.function.xsl $(DESTDIR)$(prefix)/lib/phing/etc/str.replace.function.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/pear/BuildPhingPEARPackageTask.php $(DESTDIR)$(prefix)/lib/phing/pear/BuildPhingPEARPackageTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/coverage-frames.xsl $(DESTDIR)$(prefix)/lib/phing/etc/coverage-frames.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/etc/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/etc/phpunit2-noframes.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/pear/build.xml $(DESTDIR)$(prefix)/lib/phing/pear/build.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/pear/BuildPhingPEARPackageTask.php $(DESTDIR)$(prefix)/lib/phing/pear/BuildPhingPEARPackageTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/build.xml $(DESTDIR)$(prefix)/lib/phing/test/build.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/example/tasks/TaskdefTestSimpleTask.php $(DESTDIR)$(prefix)/lib/phing/test/classes/example/tasks/TaskdefTestSimpleTask.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/example/types/TypedefTestType.php $(DESTDIR)$(prefix)/lib/phing/test/classes/example/types/TypedefTestType.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/BuildFileTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/BuildFileTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/run-tests.php $(DESTDIR)$(prefix)/lib/phing/test/run-tests.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/IntrospectionHelperTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/IntrospectionHelperTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/filters/LineContainsTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/filters/LineContainsTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/system/FileOutputStreamTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/system/FileOutputStreamTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/BuildFileTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/BuildFileTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/tasks/PropertyTaskTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/PropertyTaskTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/tasks/TypedefTaskTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/TypedefTaskTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/tasks/condition/ContainsConditionTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/condition/ContainsConditionTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/tasks/condition/EqualsConditionTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/condition/EqualsConditionTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/tasks/condition/ContainsConditionTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/tasks/condition/ContainsConditionTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/filters/LineContainsTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/filters/LineContainsTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/types/MapperTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types/MapperTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/types/FileSetTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types/FileSetTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/types/AbstractFileSetTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types/AbstractFileSetTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/types/CommandlineTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types/CommandlineTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/types/FileSetTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types/FileSetTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/types/MapperTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/types/MapperTest.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/expected/linecontains.test $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/expected/linecontains.test
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/phing/system/FileOutputStreamTest.php $(DESTDIR)$(prefix)/lib/phing/test/classes/phing/system/FileOutputStreamTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/example/tasks/TaskdefTestSimpleTask.php $(DESTDIR)$(prefix)/lib/phing/test/classes/example/tasks/TaskdefTestSimpleTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/classes/example/types/TypedefTestType.php $(DESTDIR)$(prefix)/lib/phing/test/classes/example/types/TypedefTestType.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext/fr_FR.po $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/fr_FR.po
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext/fr_FR/LC_MESSAGES/messages.mo $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/fr_FR/LC_MESSAGES/messages.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext/sample.php $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/sample.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/input/linecontains.test $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/input/linecontains.test
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/linecontains.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/linecontains.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/resources/sample.txt $(DESTDIR)$(prefix)/lib/phing/test/etc/resources/sample.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/taskcontainer.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/taskcontainer.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/InputTask.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/InputTask.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/adhoc.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/adhoc.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/cvs.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/cvs.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/pearpackage.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/pearpackage.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property1.properties $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property1.properties
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property2.properties $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property2.properties
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property3.properties $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property3.properties
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/propertyprompt.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/propertyprompt.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/sql.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/sql.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/typedef.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/typedef.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tokensources/build.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tokensources/build.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext/fr_FR.po $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/fr_FR.po
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext/sample.php $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/sample.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/gettext/fr_FR/LC_MESSAGES/messages.mo $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/gettext/fr_FR/LC_MESSAGES/messages.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/expected/linecontains.test $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/expected/linecontains.test
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/filters/input/linecontains.test $(DESTDIR)$(prefix)/lib/phing/test/etc/filters/input/linecontains.test
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tokensources/test.txt $(DESTDIR)$(prefix)/lib/phing/test/etc/tokensources/test.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tokensources/build.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tokensources/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tokensources/tokens.ini $(DESTDIR)$(prefix)/lib/phing/test/etc/tokensources/tokens.ini
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/log.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/log.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/str.replace.function.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/str.replace.function.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/coverage-frames.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/coverage-frames.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/phpunit2-noframes.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/a.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/a/aa.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a/aa.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/a/aa/aaa.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a/aa/aaa.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/mapper.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/types/mapper.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/b.phps $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/b.phps
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/c.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/c.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/d.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/d.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/e.txt $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/e.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/a.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/f.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/f.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/mapper.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/types/mapper.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/coverage-frames.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/coverage-frames.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/log.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/log.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/phpunit2-noframes.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/str.replace.function.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/str.replace.function.xsl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/run-tests.php $(DESTDIR)$(prefix)/lib/phing/test/run-tests.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/d.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/d.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/a/aa.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a/aa.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/types/fileset/a/aa/aaa.php $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a/aa/aaa.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/taskcontainer.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/taskcontainer.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/propertyprompt.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/propertyprompt.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/sql.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/sql.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property2.properties $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property2.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/adhoc.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/adhoc.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/cvs.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/cvs.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/InputTask.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/InputTask.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property3.properties $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property3.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/typedef.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/typedef.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/pearpackage.xml $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/pearpackage.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/tasks/property1.properties $(DESTDIR)$(prefix)/lib/phing/test/etc/tasks/property1.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/resources/sample.txt $(DESTDIR)$(prefix)/lib/phing/test/etc/resources/sample.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/CREDITS $(DESTDIR)$(prefix)/lib/phing/CREDITS
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/LICENSE $(DESTDIR)$(prefix)/lib/phing/LICENSE
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/README $(DESTDIR)$(prefix)/lib/phing/README
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/ext/ext-base-debug-w-comments.js $(DESTDIR)$(prefix)/lib/ext3/adapter/ext/ext-base-debug-w-comments.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/ext/ext-base-debug.js $(DESTDIR)$(prefix)/lib/ext3/adapter/ext/ext-base-debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/ext/ext-base.js $(DESTDIR)$(prefix)/lib/ext3/adapter/ext/ext-base.js
@@ -4391,51 +4416,46 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/prototype/ext-prototype-adapter.js $(DESTDIR)$(prefix)/lib/ext3/adapter/prototype/ext-prototype-adapter.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/yui/ext-yui-adapter-debug.js $(DESTDIR)$(prefix)/lib/ext3/adapter/yui/ext-yui-adapter-debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/yui/ext-yui-adapter.js $(DESTDIR)$(prefix)/lib/ext3/adapter/yui/ext-yui-adapter.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/dutch-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/dutch-form.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/ContactForm-nl.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/ContactForm-nl.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/ContactForm.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/ContactForm.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/dutch-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/dutch-form.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/dutch-provinces.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/dutch-provinces.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/languages.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/languages.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/multi-lang.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/multi-lang.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/multi-lang.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/multi-lang.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/fake.php $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/fake.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-advanced.html $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-advanced.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-advanced.js $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-advanced.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-demo.html $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-demo.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-advanced.js $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-advanced.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-demo.js $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-demo.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/actions.html $(DESTDIR)$(prefix)/lib/ext3/examples/menu/actions.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/actions.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/actions.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/list-items.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/list-items.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menu-show.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menu-show.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.css $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.html $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/preview.png $(DESTDIR)$(prefix)/lib/ext3/examples/menu/preview.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/delete.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/delete.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/edit.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/edit.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/find.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/find.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/group.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/group.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/view.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/view.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/actions.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/actions.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.css $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/ajax1.htm $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/ajax1.htm
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/ajax2.htm $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/ajax2.htm
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.css $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-adv.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-adv.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.css $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-adv.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-adv.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-example.css $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-example.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-example.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/code-display.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/code-display.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/info-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/info-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/lib-bar.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/lib-bar.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/App.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/App.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/extjs2.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/extjs2.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/ft.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/ft.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/site.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/site.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/topbar.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/topbar.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/css/extjs.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/css/extjs.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/arrow.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/arrow.png
@@ -4472,10 +4492,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/side-box.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/side-box.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/top-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/top-bottom.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/topbar.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/topbar.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/App.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/App.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/site.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/site.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/arrow-down.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/arrow-down.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/arrow-up.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/arrow-up.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/save.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/save.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/silk.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/silk.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/accept.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/accept.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/add.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/add.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/add.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/add.png
@@ -4520,6 +4541,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/user_red.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/user_red.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/user_suit.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/user_suit.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/user_suit.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/user_suit.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/silk.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/silk.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-multiselect.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-multiselect.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-spinner.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-spinner.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-grid-binding.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-grid-binding.gif
@@ -4534,8 +4556,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/debug-console.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/debug-console.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/desktop.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/desktop.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/direct.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/direct.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/docs.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/docs.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/editor.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/editor.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/feeds.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/feeds.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/charts.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/charts.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/chooser.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/chooser.gif
@@ -4546,19 +4566,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/chart-stacked.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/chart-stacked.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/chart-pie.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/chart-pie.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/chart-reload.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/chart-reload.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-vbox.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-vbox.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-xml.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-xml.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/forum.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/forum.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/gmap-panel.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/gmap-panel.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-array.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-array.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-buffer.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-buffer.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-columngrouping.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-columngrouping.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-data-binding.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-data-binding.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-edit.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-edit.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-filter.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-filter.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-from-markup.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-from-markup.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-grouping.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-grouping.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-locking.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-locking.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-paging.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-paging.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-plugins.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-plugins.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-property.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-property.gif
@@ -4575,7 +4592,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/layout-column.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/layout-column.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/layout-form.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/layout-form.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/layout-table.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/layout-table.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/layout-vbox.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/layout-vbox.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/list-view.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/list-view.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/locale-dutch.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/locale-dutch.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/locale-switch.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/locale-switch.gif
@@ -4617,11 +4633,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/air.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/air.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/anchor.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/anchor.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/blank.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/blank.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/classes.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/gears.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/gears.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.css $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/docs.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/docs.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/editor.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/editor.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-vbox.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-vbox.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-columngrouping.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-columngrouping.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/grid-locking.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/grid-locking.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/layout-vbox.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/layout-vbox.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/code-display.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/code-display.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.html $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/db/ext-air-db.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/db/ext-air-db.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/db/ext-db.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/db/ext-db.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/db/ext-gears-db.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/db/ext-gears-db.js
@@ -4640,11 +4661,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/icon-show-all.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/icon-show-all.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/icon-show-complete.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/icon-show-complete.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/s.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/s.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/classes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/gears.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/gears.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.css $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-form.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-form.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-tree.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-tree.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/api.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/api.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/config.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/config.php
@@ -4652,46 +4674,29 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/router.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/router.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/classes/Profile.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/classes/Profile.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/classes/TestAction.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/classes/TestAction.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/msg-box.html $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/msg-box.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/msg-box.js $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/msg-box.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/comment-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/comment-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/comment.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/comment.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/download.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/download.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/warning.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/warning.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/data.js $(DESTDIR)$(prefix)/lib/ext3/examples/data.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/index.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/init.js $(DESTDIR)$(prefix)/lib/ext3/examples/init.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/msg-box.js $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/msg-box.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/multiselect/multiselect-demo.html $(DESTDIR)$(prefix)/lib/ext3/examples/multiselect/multiselect-demo.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/multiselect/multiselect-demo.js $(DESTDIR)$(prefix)/lib/ext3/examples/multiselect/multiselect-demo.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/README.txt $(DESTDIR)$(prefix)/lib/ext3/examples/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/samples.css $(DESTDIR)$(prefix)/lib/ext3/examples/samples.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/index.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/index303.html $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/index303.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/application_add.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/application_add.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-cs-f1eedd.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-cs-f1eedd.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-f1eedd.css $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-f1eedd.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-lr.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-lr.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-tb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-tb.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/form-configs.js $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/form-configs.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/grid-configs.js $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/grid-configs.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/tabs.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/tabs.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.css $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.html $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.css $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.js $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.html $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.css $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/images/add.gif $(DESTDIR)$(prefix)/lib/ext3/examples/button/images/add.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/images/add16.gif $(DESTDIR)$(prefix)/lib/ext3/examples/button/images/add16.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/images/add24.gif $(DESTDIR)$(prefix)/lib/ext3/examples/button/images/add24.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedViewer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedWindow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.css $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.js $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/view.html $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/view.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-proxy.php $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-proxy.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/cmp-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/cmp-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/cancel.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/cancel.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/comment-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/comment-bg.gif
@@ -4729,111 +4734,108 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/article.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/article.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/bullet.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/bullet.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedViewer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedWindow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/bubble-panel.html $(DESTDIR)$(prefix)/lib/ext3/examples/panel/bubble-panel.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/bubble-panel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/bubble-panel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/BubblePanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/BubblePanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/panels.html $(DESTDIR)$(prefix)/lib/ext3/examples/panel/panels.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/panels.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/panels.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/css/bubble.css $(DESTDIR)$(prefix)/lib/ext3/examples/panel/css/bubble.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/images/bubble-cs.gif $(DESTDIR)$(prefix)/lib/ext3/examples/panel/images/bubble-cs.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/images/bubble-lr.gif $(DESTDIR)$(prefix)/lib/ext3/examples/panel/images/bubble-lr.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/images/bubble-tb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/panel/images/bubble-tb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/BubblePanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/BubblePanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/bubble-panel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/bubble-panel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/panels.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/panels.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/overflow.html $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/overflow.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/overflow.js $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/overflow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.css $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.html $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.js $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/images/add.gif $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/images/add.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/images/add16.gif $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/images/add16.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/images/add24.gif $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/images/add24.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/overflow.js $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/overflow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.css $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.js $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/bar.gif $(DESTDIR)$(prefix)/lib/ext3/examples/chart/bar.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/chart.gif $(DESTDIR)$(prefix)/lib/ext3/examples/chart/chart.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/charts.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/charts.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/charts.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/charts.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/pie-chart.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/pie-chart.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/pie-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/pie-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/reload-chart.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/reload-chart.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/reload-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/reload-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/stacked-bar-chart.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/stacked-bar-chart.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/charts.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/charts.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/pie-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/pie-chart.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/reload-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/reload-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/stacked-bar-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/stacked-bar-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/check-radio.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/check-radio.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.php $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-errors.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-errors.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/check-radio.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/check-radio.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.php $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forms.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/forms.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/states.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/states.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-errors.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-errors.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/spotlight-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/core/spotlight-example.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/spotlight.html $(DESTDIR)$(prefix)/lib/ext3/examples/core/spotlight.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/templates.html $(DESTDIR)$(prefix)/lib/ext3/examples/core/templates.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/spotlight-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/core/spotlight-example.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/templates.js $(DESTDIR)$(prefix)/lib/ext3/examples/core/templates.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/cmp-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/cmp-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/details.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/details.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.css $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.html $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.js $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/message.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/message.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/messages.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/messages.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/message_edit.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/message_edit.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/preview.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/preview.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.css $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.js $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/ajax-tip.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/ajax-tip.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/images/custom-bar.gif $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/images/custom-bar.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/images/house.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/images/house.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/editor.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/editor.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/editor.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.css $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.css $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/images/custom-bar.gif $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/images/custom-bar.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/images/house.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/images/house.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/album.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tree/album.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/aria-tree.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/aria-tree.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/aria-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/aria-tree.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/ARIA.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/ARIA.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/center-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tree/center-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-nodes.json $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-nodes.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-tree.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-tree.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-data.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/get-nodes.php $(DESTDIR)$(prefix)/lib/ext3/examples/tree/get-nodes.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/reorder.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/reorder.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/reorder.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/reorder.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/save-dep.php $(DESTDIR)$(prefix)/lib/ext3/examples/tree/save-dep.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/two-trees.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/two-trees.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/two-trees.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/two-trees.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-data.xml $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-data.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/cmp-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/cmp-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/dance_fever.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/dance_fever.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/gangster_zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/gangster_zack.jpg
@@ -4848,13 +4850,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/zack_dress.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/zack_dress.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/zack_hat.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/zack_hat.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/zack_sink.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/zack_sink.jpg
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/ARIA.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/ARIA.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/aria-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/aria-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/reorder.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/reorder.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/two-trees.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/two-trees.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-proxy.php $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-proxy.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-viewer.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedViewer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedWindow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/MainPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/view.html $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/view.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/refresh.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/refresh.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/rss.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/rss.gif
@@ -4893,86 +4898,84 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/preview-hide.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/preview-hide.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/preview-right.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/preview-right.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/preview.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/preview.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedViewer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedWindow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/portal.html $(DESTDIR)$(prefix)/lib/ext3/examples/portal/portal.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/portal/portal.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/sample-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/portal/sample-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/sample.css $(DESTDIR)$(prefix)/lib/ext3/examples/portal/sample.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_formpanel.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_formpanel.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_formpanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_formpanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_grid.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_formpanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_formpanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dragdropzones.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dragdropzones.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dragdropzones.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dragdropzones.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/field-to-grid-dd.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/field-to-grid-dd.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/field-to-grid-dd.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/field-to-grid-dd.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sheldon.xml $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sheldon.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor-data.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/plants.xml $(DESTDIR)$(prefix)/lib/ext3/examples/grid/plants.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-examples.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/topic.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/topic.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/gen-names.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/gen-names.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/column-header-group.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/column-header-group.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/ColumnHeaderGroup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/ColumnHeaderGroup.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/details.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/details.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.css $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/ColumnHeaderGroup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/ColumnHeaderGroup.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/column-header-group.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/column-header-group.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/gen-names.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/gen-names.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-examples.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.html $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.js $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/sara.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/sara.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/sara_and_zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/sara_and_zack.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/zack.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.css $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.css $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.js $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.html $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.js $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/images/slider-bg.png $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images/slider-bg.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/images/slider-thumb.png $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images/slider-thumb.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/images/ticks.gif $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images/ticks.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser-example.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.css $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.js $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/get-images.php $(DESTDIR)$(prefix)/lib/ext3/examples/view/get-images.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/selected.gif $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/selected.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/dance_fever.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/dance_fever.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/gangster_zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/gangster_zack.jpg
@@ -4987,15 +4990,23 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/zack_dress.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/zack_dress.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/zack_hat.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/zack_hat.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/zack_sink.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/zack_sink.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/debug-console.html $(DESTDIR)$(prefix)/lib/ext3/examples/debug/debug-console.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser-example.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/debug.png $(DESTDIR)$(prefix)/lib/ext3/examples/debug/debug.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/inspector.gif $(DESTDIR)$(prefix)/lib/ext3/examples/debug/inspector.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/sheldon.xml $(DESTDIR)$(prefix)/lib/ext3/examples/debug/sheldon.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/debug-console.html $(DESTDIR)$(prefix)/lib/ext3/examples/debug/debug-console.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-demo.sql $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-demo.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter-local.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter-local.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter-local.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter-local.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter.php $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter-local.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter-local.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/js/App.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/js/App.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/js/Desktop.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/js/Desktop.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/js/Module.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/js/Module.js
@@ -5010,7 +5021,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/blue.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/blue.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/credits.txt $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/credits.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/desktop.html $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/desktop.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/sample.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/sample.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/css/desktop.css $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/css/desktop.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/images/accordian.gif $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/images/accordian.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/images/bogus.png $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/images/bogus.png
@@ -5057,24 +5067,23 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/images/taskbar/black/taskbar-start-panel-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/images/taskbar/black/taskbar-start-panel-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/images/taskbar/black/taskbutton.gif $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/images/taskbar/black/taskbutton.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/images/taskbar/black/taskbuttons-panel-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/images/taskbar/black/taskbuttons-panel-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/sample.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/sample.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/grouptabs.html $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/grouptabs.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/grouptabs.js $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/grouptabs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/group.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/group.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/subscriptions.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/subscriptions.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/templates.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/templates.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/tickets.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/tickets.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/grouptabs.js $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/grouptabs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/accordion.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/accordion.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/anchor.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/anchor.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/column.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/column.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/complex.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/complex.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/hbox.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/hbox.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/table.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/table.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/hbox.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/hbox.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/vbox.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/vbox.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/app.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/app.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful-thumb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful-thumb.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.css $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.html $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.js $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/lib/application_controller.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/lib/application_controller.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/lib/model.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/lib/model.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/lib/request.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/lib/request.php
@@ -5083,12 +5092,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/init.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/init.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/app/models/user.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app/models/user.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/app/controllers/users.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app/controllers/users.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/tree-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/tree-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid-data.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.css $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.css $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.js $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/tree-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/tree-data.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/disk.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/disk.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/email_go.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/email_go.png
@@ -5100,9 +5106,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layouts/basic.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts/basic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layouts/combination.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts/combination.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layouts/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts/custom.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.css $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.html $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/GridFilters.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/GridFilters.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/css/GridFilters.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/css/GridFilters.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/css/RangeMenu.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/css/RangeMenu.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/filter/BooleanFilter.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/filter/BooleanFilter.js
@@ -5119,6 +5126,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/images/sort_filtered_desc.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/images/sort_filtered_desc.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/menu/ListMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/menu/ListMenu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/menu/RangeMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/menu/RangeMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/GridFilters.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/GridFilters.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/bottom2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/bottom2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/down2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/down2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/elbow-minus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/elbow-minus-nl.gif
@@ -5135,59 +5143,31 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/top2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/top2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/up2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/up2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/x-grouptabs-corners.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/x-grouptabs-corners.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/StatusBar.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/StatusBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/ValidationStatus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/ValidationStatus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/css/statusbar.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/css/statusbar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/accept.png $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/accept.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/exclamation.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/exclamation.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/loading.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/loading.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/saved.png $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/saved.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/saving.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/saving.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/treegrid.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/treegrid.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/StatusBar.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/StatusBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/ValidationStatus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/ValidationStatus.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GMapPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GMapPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTab.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTab.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ItemSelector.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ItemSelector.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/MultiSelect.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/MultiSelect.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PanelResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PanelResizer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PortalColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PortalColumn.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ProgressBarPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ProgressBarPager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowExpander.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowExpander.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SearchField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SearchField.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SlidingPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SlidingPager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGrid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridColumns.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridColumns.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridSorter.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridSorter.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/BufferView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/BufferView.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CenterLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CenterLayout.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CheckColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CheckColumn.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnHeaderGroup.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnHeaderGroup.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnNodeUI.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/DataView-more.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/DataView-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldLabeler.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldLabeler.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldReplicator.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldReplicator.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Focus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Focus.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GMapPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GMapPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupSummary.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupSummary.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTab.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTab.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTabPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTabPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ItemSelector.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ItemSelector.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/LockingGridView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/LockingGridView.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/MultiSelect.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/MultiSelect.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PagingMemoryProxy.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PagingMemoryProxy.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PanelResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PanelResizer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portal.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PortalColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PortalColumn.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portlet.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portlet.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ProgressBarPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ProgressBarPager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowEditor.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowEditor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowExpander.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowExpander.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowLayout.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SearchField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SearchField.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SelectBox.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SelectBox.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SliderTip.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SliderTip.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SlidingPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SlidingPager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spinner.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SpinnerField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SpinnerField.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spotlight.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spotlight.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabCloseMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabCloseMenu.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TableGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TableGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabScrollerMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabScrollerMenu.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all-debug.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/XmlTreeLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/XmlTreeLoader.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/treegrid.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/treegrid.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/CenterLayout.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/CenterLayout.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ColumnHeaderGroup.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ColumnHeaderGroup.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ColumnNodeUI.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ColumnNodeUI.css
@@ -5202,13 +5182,41 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ux-all.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ux-all.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/fileuploadfield/css/fileuploadfield.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/fileuploadfield/css/fileuploadfield.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/fileuploadfield/FileUploadField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/fileuploadfield/FileUploadField.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SpinnerField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SpinnerField.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spotlight.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spotlight.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabCloseMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabCloseMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabScrollerMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabScrollerMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TableGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TableGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/XmlTreeLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/XmlTreeLoader.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all-debug.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/BufferView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/BufferView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CenterLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CenterLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CheckColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CheckColumn.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnHeaderGroup.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnHeaderGroup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnNodeUI.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/DataView-more.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/DataView-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldLabeler.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldLabeler.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldReplicator.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldReplicator.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Focus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Focus.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupSummary.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupSummary.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTabPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTabPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/LockingGridView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/LockingGridView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PagingMemoryProxy.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PagingMemoryProxy.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portal.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portlet.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portlet.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowEditor.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowEditor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SelectBox.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SelectBox.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SliderTip.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SliderTip.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spinner.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/history/history.html $(DESTDIR)$(prefix)/lib/ext3/examples/history/history.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/history/history.js $(DESTDIR)$(prefix)/lib/ext3/examples/history/history.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/hello.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/hello.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/layout.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/layout.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/gmap.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/gmap.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/gmap.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/gmap.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/hello.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/hello.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/hello.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/hello.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/layout.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/layout.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/layout.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/layout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/selected.gif $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/selected.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/icons/arrow_up.png $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/icons/arrow_up.png
@@ -5228,9 +5236,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/thumbs/zack_dress.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/thumbs/zack_dress.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/thumbs/zack_hat.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/thumbs/zack_hat.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/thumbs/zack_sink.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/thumbs/zack_sink.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumsPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumsPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumTree.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumTree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumWin.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumWin.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumsPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumsPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/App.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/App.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/Checkable.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/Checkable.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/DirectCombo.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/DirectCombo.js
@@ -5248,15 +5256,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/php/classes/Images.php $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/php/classes/Images.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/php/classes/Tags.php $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/php/classes/Tags.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/php/sql/setup.php $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/php/sql/setup.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/swfupload.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/swfupload.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/Flash/swfupload.swf $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/Flash/swfupload.swf
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.cookies.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.cookies.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.queue.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.queue.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.speed.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.speed.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.swfobject.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/plugins/swfupload.swfobject.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/img-org.css $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/img-org.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/swfupload.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/swfupload.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/index.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/readme.txt $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/readme.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/img-org.css $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/img-org.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/get-state.php $(DESTDIR)$(prefix)/lib/ext3/examples/state/get-state.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/README.txt $(DESTDIR)$(prefix)/lib/ext3/examples/state/README.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/save-state.php $(DESTDIR)$(prefix)/lib/ext3/examples/state/save-state.php
@@ -5270,12 +5278,29 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/remote/lib/response.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/lib/response.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/remote/lib/session_db.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/lib/session_db.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/app.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/app.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer-thumb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer-thumb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.html $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/UserForm.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/UserForm.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/UserGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/UserGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer-thumb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer-thumb.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.css $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.html $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/data.js $(DESTDIR)$(prefix)/lib/ext3/examples/data.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/init.js $(DESTDIR)$(prefix)/lib/ext3/examples/init.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/samples.css $(DESTDIR)$(prefix)/lib/ext3/examples/samples.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/index303.html $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/index303.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/application_add.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/application_add.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-cs-f1eedd.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-cs-f1eedd.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-f1eedd.css $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-f1eedd.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-lr.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-lr.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/bubble-tb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/bubble-tb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/form-configs.js $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/form-configs.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/grid-configs.js $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/grid-configs.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/resources/tabs.gif $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/resources/tabs.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/tree-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/tree-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid-data.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/pkgs/cmp-foundation-debug.js $(DESTDIR)$(prefix)/lib/ext3/pkgs/cmp-foundation-debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/pkgs/cmp-foundation.js $(DESTDIR)$(prefix)/lib/ext3/pkgs/cmp-foundation.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/pkgs/data-foundation-debug.js $(DESTDIR)$(prefix)/lib/ext3/pkgs/data-foundation-debug.js
@@ -5328,14 +5353,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/pkgs/window.js $(DESTDIR)$(prefix)/lib/ext3/pkgs/window.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/charts.swf $(DESTDIR)$(prefix)/lib/ext3/resources/charts.swf
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/expressinstall.swf $(DESTDIR)$(prefix)/lib/ext3/resources/expressinstall.swf
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/resources.jsb $(DESTDIR)$(prefix)/lib/ext3/resources/resources.jsb
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/debug.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all-notheme.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all-notheme.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/README.txt $(DESTDIR)$(prefix)/lib/ext3/resources/css/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/reset-min.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/reset-min.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-blue.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-blue.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-gray.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-gray.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/borders.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/borders.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/box.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/box.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/button.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/button.css
@@ -5386,6 +5404,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/toolbar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/tree.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/window.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/debug.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all-notheme.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all-notheme.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/reset-min.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/reset-min.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-blue.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-blue.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-gray.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-gray.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/gradient-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/gradient-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/s.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/s.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/bg-center.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/bg-center.gif
@@ -5571,15 +5595,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/scroller-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/scroller-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-inactive-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-inactive-left-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-inactive-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-inactive-right-bg.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-left-bg.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-over-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-over-left-bg.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-over-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-over-right-bg.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-right-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-close.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-close.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-strip-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-strip-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-strip-bg.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-strip-bg.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-strip-btm-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-strip-btm-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tabs-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tabs-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-left-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-over-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-over-left-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-over-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-over-right-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tabs/tab-btm-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tabs/tab-btm-right-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/gradient-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/gradient-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/s.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/s.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/shadow-c.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/shadow-c.png
@@ -5603,7 +5627,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/box/r.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/box/r.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/box/tb-blue.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/box/tb-blue.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/box/tb.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/box/tb.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/arrows.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/arrows.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/drop-add.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/drop-add.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/drop-between.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/drop-between.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/drop-no.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/drop-no.gif
@@ -5626,6 +5649,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/leaf.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/leaf.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/loading.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/loading.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/s.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/s.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/tree/arrows.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/tree/arrows.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/arrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/arrow.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/btn.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/group-cs.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/group-cs.gif
@@ -5633,10 +5657,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/group-tb.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/group-tb.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow-b-noline.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow-b-noline.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow-b.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow-b.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow-bo.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow-bo.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow-noline.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow-noline.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow-o.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow-o.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/button/s-arrow-bo.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/button/s-arrow-bo.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/window/icon-error.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/window/icon-error.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/window/icon-info.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/window/icon-info.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/default/window/icon-question.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/window/icon-question.gif
@@ -5704,10 +5728,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/btn.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/group-cs.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/group-cs.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/group-lr.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/group-lr.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/ext-base-dom-more.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/ext-base-dom-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/jquery-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/jquery-bridge.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/prototype-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/prototype-bridge.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/yui-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/yui-bridge.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/resources.jsb $(DESTDIR)$(prefix)/lib/ext3/resources/resources.jsb
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-ajax.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-ajax.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-anim-extra.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-anim-extra.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-anim.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-anim.js
@@ -5717,6 +5738,24 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-event.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-event.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-point.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-point.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-region.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-region.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/ext-base-dom-more.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/ext-base-dom-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/jquery-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/jquery-bridge.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/prototype-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/prototype-bridge.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/yui-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/yui-bridge.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/CompositeElementLite.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/CompositeElementLite.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomHelper.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomHelper.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomQuery.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomQuery.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.fx.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.insertion.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.insertion.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.position.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.position.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.scroll.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.scroll.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.style.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.style.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.traversal.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.traversal.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/EventManager.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/EventManager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Ext.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Ext.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Fx.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Template.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Template.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/CompositeElement.js $(DESTDIR)$(prefix)/lib/ext3/src/core/CompositeElement.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/CompositeElementLite-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/CompositeElementLite-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/DomHelper-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/DomHelper-more.js
@@ -5735,20 +5774,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/EventManager-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/EventManager-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Ext-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Ext-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Template-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Template-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/CompositeElementLite.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/CompositeElementLite.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomHelper.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomHelper.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomQuery.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomQuery.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.fx.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.insertion.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.insertion.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.position.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.position.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.scroll.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.scroll.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.style.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.style.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.traversal.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.traversal.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/EventManager.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/EventManager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Ext.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Ext.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Fx.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Template.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Template.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/core/Connection.js $(DESTDIR)$(prefix)/lib/ext3/src/data/core/Connection.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/Api.js $(DESTDIR)$(prefix)/lib/ext3/src/data/Api.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/ArrayReader.js $(DESTDIR)$(prefix)/lib/ext3/src/data/ArrayReader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/ArrayStore.js $(DESTDIR)$(prefix)/lib/ext3/src/data/ArrayStore.js
@@ -5775,7 +5801,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/XmlReader.js $(DESTDIR)$(prefix)/lib/ext3/src/data/XmlReader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/XmlStore.js $(DESTDIR)$(prefix)/lib/ext3/src/data/XmlStore.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/XmlWriter.js $(DESTDIR)$(prefix)/lib/ext3/src/data/XmlWriter.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/core/Connection.js $(DESTDIR)$(prefix)/lib/ext3/src/data/core/Connection.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/DDCore.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/DDCore.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/DragSource.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/DragSource.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/DragTracker.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/DragTracker.js
@@ -5840,9 +5865,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/CookieProvider.js $(DESTDIR)$(prefix)/lib/ext3/src/state/CookieProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/Provider.js $(DESTDIR)$(prefix)/lib/ext3/src/state/Provider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/StateManager.js $(DESTDIR)$(prefix)/lib/ext3/src/state/StateManager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/DelayedTask.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/DelayedTask.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/JSON.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/JSON.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/Observable.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/Observable.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/TaskMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/TaskMgr.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/CSS.js $(DESTDIR)$(prefix)/lib/ext3/src/util/CSS.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/ClickRepeater.js $(DESTDIR)$(prefix)/lib/ext3/src/util/ClickRepeater.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/Cookies.js $(DESTDIR)$(prefix)/lib/ext3/src/util/Cookies.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/CSS.js $(DESTDIR)$(prefix)/lib/ext3/src/util/CSS.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/Date.js $(DESTDIR)$(prefix)/lib/ext3/src/util/Date.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/Format.js $(DESTDIR)$(prefix)/lib/ext3/src/util/Format.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/History.js $(DESTDIR)$(prefix)/lib/ext3/src/util/History.js
@@ -5853,10 +5882,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/TextMetrics.js $(DESTDIR)$(prefix)/lib/ext3/src/util/TextMetrics.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/UpdateManager.js $(DESTDIR)$(prefix)/lib/ext3/src/util/UpdateManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/XTemplate.js $(DESTDIR)$(prefix)/lib/ext3/src/util/XTemplate.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/DelayedTask.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/DelayedTask.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/JSON.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/JSON.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/Observable.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/Observable.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/TaskMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/TaskMgr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AbsoluteLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AbsoluteLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AccordionLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AccordionLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AnchorLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AnchorLayout.js
@@ -5897,35 +5922,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreePanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreePanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreeSelectionModel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreeSelectionModel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreeSorter.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreeSorter.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Action.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Action.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/BoxComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/BoxComponent.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Button.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Button.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ButtonGroup.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ButtonGroup.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ColorPalette.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ColorPalette.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Component.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Component.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ComponentMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ComponentMgr.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Container.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Container.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/CycleButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/CycleButton.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DataView.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DataView.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DatePicker.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DatePicker.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Editor.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Editor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Layer.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Layer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/LoadMask.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/LoadMask.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/MessageBox.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/MessageBox.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PagingToolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PagingToolbar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Panel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Panel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PanelDD.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PanelDD.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ProgressBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ProgressBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Resizable.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Resizable.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Shadow.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Shadow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Slider.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Slider.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitButton.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/TabPanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/TabPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Toolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Toolbar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Viewport.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Viewport.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Window.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Window.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/WindowManager.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/WindowManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/chart/Chart.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/chart/Chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/chart/EventProxy.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/chart/EventProxy.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/chart/FlashComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/chart/FlashComponent.js
@@ -5967,14 +5963,43 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/grid/PropertyGrid.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/grid/PropertyGrid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/grid/RowNumberer.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/grid/RowNumberer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/grid/RowSelectionModel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/grid/RowSelectionModel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Action.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Action.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/BoxComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/BoxComponent.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Button.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Button.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ButtonGroup.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ButtonGroup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ColorPalette.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ColorPalette.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Component.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Component.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ComponentMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ComponentMgr.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Container.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Container.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/CycleButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/CycleButton.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DataView.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DataView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DatePicker.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DatePicker.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Editor.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Editor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Layer.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Layer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/LoadMask.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/LoadMask.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/MessageBox.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/MessageBox.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PagingToolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PagingToolbar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Panel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Panel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PanelDD.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PanelDD.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ProgressBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ProgressBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Resizable.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Resizable.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Shadow.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Shadow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Slider.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Slider.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitButton.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/TabPanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/TabPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Toolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Toolbar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Viewport.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Viewport.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Window.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Window.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/WindowManager.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/WindowManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/debug.js $(DESTDIR)$(prefix)/lib/ext3/src/debug.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/CHANGES_ext-3.1.0.html $(DESTDIR)$(prefix)/lib/ext3/CHANGES_ext-3.1.0.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext.jsb2 $(DESTDIR)$(prefix)/lib/ext3/ext.jsb2
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all.js $(DESTDIR)$(prefix)/lib/ext3/ext-all.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/ext-all-debug.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/gpl-3.0.txt $(DESTDIR)$(prefix)/lib/ext3/gpl-3.0.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/INCLUDE_ORDER.txt $(DESTDIR)$(prefix)/lib/ext3/INCLUDE_ORDER.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/license.txt $(DESTDIR)$(prefix)/lib/ext3/license.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/CHANGES_ext-3.1.0.html $(DESTDIR)$(prefix)/lib/ext3/CHANGES_ext-3.1.0.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/ext-all-debug.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all.js $(DESTDIR)$(prefix)/lib/ext3/ext-all.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext.jsb2 $(DESTDIR)$(prefix)/lib/ext3/ext.jsb2
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/gpl-3.0.txt $(DESTDIR)$(prefix)/lib/ext3/gpl-3.0.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example1.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example2.html $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example2.html
@@ -7266,32 +7291,32 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/fam/zoom.png $(DESTDIR)$(prefix)/pub/images/fam/zoom.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/fam/zoom_in.png $(DESTDIR)$(prefix)/pub/images/fam/zoom_in.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/fam/zoom_out.png $(DESTDIR)$(prefix)/pub/images/fam/zoom_out.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/on.png $(DESTDIR)$(prefix)/pub/images/status/on.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/off.png $(DESTDIR)$(prefix)/pub/images/status/off.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/acknowledged.png $(DESTDIR)$(prefix)/pub/images/status/acknowledged.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/passive.png $(DESTDIR)$(prefix)/pub/images/status/passive.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/ndisabled.png $(DESTDIR)$(prefix)/pub/images/status/ndisabled.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/disabled.png $(DESTDIR)$(prefix)/pub/images/status/disabled.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/downtime.png $(DESTDIR)$(prefix)/pub/images/status/downtime.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/flapping.png $(DESTDIR)$(prefix)/pub/images/status/flapping.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/ndisabled.png $(DESTDIR)$(prefix)/pub/images/status/ndisabled.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/off.png $(DESTDIR)$(prefix)/pub/images/status/off.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/on.png $(DESTDIR)$(prefix)/pub/images/status/on.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/passive.png $(DESTDIR)$(prefix)/pub/images/status/passive.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/extjs/ext-all.css $(DESTDIR)$(prefix)/pub/styles/extjs/ext-all.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/extjs/ux-all.css $(DESTDIR)$(prefix)/pub/styles/extjs/ux-all.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameStructural.css $(DESTDIR)$(prefix)/pub/styles/WireFrameStructural.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameDefault.css $(DESTDIR)$(prefix)/pub/styles/WireFrameDefault.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/index.php $(DESTDIR)$(prefix)/pub/index.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/.htaccess $(DESTDIR)$(prefix)/pub/.htaccess
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-notification-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.mo $(DESTDIR)$(prefix)/res/i18n/mo/de.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.mo $(DESTDIR)$(prefix)/res/i18n/mo/en.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/de.po $(DESTDIR)$(prefix)/res/i18n/po/de.po
