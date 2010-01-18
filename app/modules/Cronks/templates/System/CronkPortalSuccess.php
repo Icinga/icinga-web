@@ -112,21 +112,47 @@ var tabPanel = new Ext.TabPanel({
 	resizeTabs : false,
 	
 	// This component is stateful!
-	/* stateId: 'cronk-tab-panel',
 	stateful: true,
+	stateId: 'cronk-tab-panel',
 	
-	stateEvents: ['tabchange'],
+	stateEvents: ['add', 'remove', 'tabchange'],
+	
 	getState: function() {
-		return {
-			tab: function() {
-				return this.getActiveTab().id;
+		
+		var cout = { };
+		
+		this.items.each(function(item, index, l) {
+			if (item.iscronk && AppKit.Ext.CronkMgr.cronkExist(item.cronkkey)) {
+				var c = AppKit.Ext.CronkMgr.getCronk(item.cronkkey);
+				delete c['cronk'];
+				cout[c.cmpid] = c;
 			}
+		});
+		
+		return {
+			cronks: cout,
+			items: this.items.getCount(),
+			active: this.getActiveTab().id
 		}
 	},
 	
 	applyState: function(state) {
-		Ext.Msg.alert('ok', 'state');
-	}, */
+		if (state.cronks) {
+			Ext.iterate(state.cronks, function(index, item, o) {
+				var config = {};
+				Ext.apply(config, item.config, item.crconf);
+				
+				var cronk = AppKit.Ext.CronkMgr.create(config);
+				
+				this.add(cronk);
+				
+			}, this);
+			
+			this.doLayout();
+			
+			this.setActiveTab(state.active);
+		}
+	},
 	
 	// Here comes the drop zone
 	listeners: {
@@ -134,6 +160,7 @@ var tabPanel = new Ext.TabPanel({
 		contextmenu: TabContextMenu.handle
 	}
 });
+
 
 var cronk_list_id = AppKit.Ext.genRandomId('cronk');
 var cronk_search_id = AppKit.Ext.genRandomId('cronk');
@@ -237,10 +264,14 @@ container.render("<?php echo $parentid; ?>");
 
 
 // Adding the first cronk (say hello here)
-if (tabPanel) {
+if (tabPanel && tabPanel.items.getCount() <= 0) {
 	var cHello = AppKit.Ext.CronkMgr.create({
 		title: '<?php echo $tm->_("Welcome"); ?>',
-		crname: 'portalHello'
+		crname: 'portalHello',
+		parentid: undefined,
+		layout: 'fit',
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+		closable: false
 	});
 	
 	tabPanel.add(cHello);
