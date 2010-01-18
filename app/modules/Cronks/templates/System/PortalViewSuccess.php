@@ -51,8 +51,46 @@
 		function createPortletDragZone(p) {
 				var cdz = new Ext.dd.DropTarget(p.getEl(), {
 					ddGroup: 'cronk',
+					grid: undefined,
+					ac: undefined,
 					
-					notifyDrop: function(dd, e, data){
+					notifyOut : function(){
+				        delete this.grid;
+				        delete this.ac;
+				    },
+					
+					notifyOver: function(dd, e, data) {
+						
+//						console.log("--- START ---");
+						
+						if (!this.grid) {
+							this.grid = p.dd.getGrid();
+						}
+						
+						var xy = e.getXY();
+						
+//						console.log(xy);
+//						console.log(this.grid.columnX);
+						
+						Ext.iterate(this.grid.columnX, function (item, index, arry) {
+							
+//						console.log(item);
+// 	
+							if (xy[0] >= item.x && xy[0] < item.x+item.w ) {
+								this.ac = index;
+								return false;
+							}
+							
+					}, this);
+						
+//						console.log(this.ac);
+//						
+//						console.log("--- STOP ---");
+
+						return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
+					},
+					
+					notifyDrop: function(dd, e, data) {
 						
 						var id = AppKit.Ext.genRandomId('cronk-');
 						
@@ -118,7 +156,9 @@
 						});
 						
 						// Add them to the portal
-						p.items.get(0).add(portlet);
+						p.items.get(this.ac || 0).add(portlet);
+						
+						this.ac = undefined;
 						
 						// Bubble the render event
 						p.doLayout();
