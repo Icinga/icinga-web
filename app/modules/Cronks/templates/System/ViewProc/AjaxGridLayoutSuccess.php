@@ -1,5 +1,6 @@
 <?php 
 	$parentid = $rd->getParameter('parentid');
+	$stateuid = $rd->getParameter('stateuid');
 ?>
 <script type="text/javascript">
 
@@ -8,6 +9,7 @@
 	var CreateGridProcessor = function (meta) {	
 		
 		var MetaGrid = new AppKit.Ext.grid.MetaGridCreator(meta);
+		MetaGrid.setStateUid("<?php echo $stateuid; ?>");
 		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);

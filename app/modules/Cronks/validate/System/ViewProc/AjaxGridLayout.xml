@@ -31,6 +31,14 @@
 							</errors>
 				</validator>
 				
+				<validator class="string" name="stateuid" required="false">
+							<argument>stateuid</argument>
+							
+							<errors>
+								<error>Validation of stateuid failed!</error>
+							</errors>
+				</validator>
+				
 				<validator class="string" name="storeDisableAutoload" required="false">
 					<argument>storeDisableAutoload</argument>
 					

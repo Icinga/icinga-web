@@ -57,6 +57,8 @@ class AppKitExtApplicationStateFilter extends AgaviFilter implements AgaviIActio
 				
 				$save = array_merge($save, $data);
 				
+				$this->cleanUpData($save);
+				
 				$save = base64_encode(serialize($save));
 				$this->getContext()->getUser()->setPref(self::DATA_NAMESPACE, $save, true, true);
 			}
@@ -64,6 +66,29 @@ class AppKitExtApplicationStateFilter extends AgaviFilter implements AgaviIActio
 
 		parent::executeOnce($filterChain, $container);
 	}
+	
+	private function cleanUpData(array &$data) {
+		$check = array ();
+		
+		$values = array_keys ($data);
+		
+		foreach ($data as $key=>$json) {
+			$check[] = json_decode($json, true);
+		}
+		
+		foreach ($values as $val) {
+			if (AppKitArrayUtil::searchKeyRecursive($val, $check)) {
+				
+			}
+			else {
+				unset($data[$val]);
+			}
+		}
+		
+		return true;
+	}
+	
+	
 	
 }
 
