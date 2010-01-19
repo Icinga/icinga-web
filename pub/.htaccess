@@ -30,7 +30,10 @@ Allow from all
 	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 	BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
 	
-	Header append Vary User-Agent env=!dont-vary
+	<IfModule mod_headers.c>
+		Header append Vary User-Agent env=!dont-vary
+	</IfModule>
+	
 </IfModule>
 
 <IfDefine APACHE2>

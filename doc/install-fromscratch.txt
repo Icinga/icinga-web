@@ -2,8 +2,8 @@ Install icinga-web standalone from scratch
 
 1) Prerequisits
 
-Based on the fact that you have a running mysql and php (with PEAR and CLI) environment. Also icinga and ido are running
-you can continue with the second step.
+You need a running mysql and php (with PEAR and CLI) environment w/ icinga and ido (ido2db).
+If there's something missing on your system, please refer to docs.icinga.org.
 
 2) The place and dependencies
 

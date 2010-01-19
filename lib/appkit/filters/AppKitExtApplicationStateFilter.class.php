@@ -27,8 +27,7 @@ class AppKitExtApplicationStateFilter extends AgaviFilter implements AgaviIActio
 			// Iterate through the cookies and find extjs cookies
 			foreach ($cookies as $name=>$val) {
 				if(strpos($name, self::EXT_COOKIE_PATTERN) === 0) {
-					$data[ substr($name, 3) ] = $val;
-					
+					$data[ substr($name, 3) ] = ($val);
 					/*
 					 * @todo check why this is not working
 					 */
@@ -40,10 +39,26 @@ class AppKitExtApplicationStateFilter extends AgaviFilter implements AgaviIActio
 				
 			}
 			
+			
+			
 			// Yes, we have data, serialize and push to db
 			if (count($data)) {
-				$data = base64_encode(serialize($data));
-				$this->getContext()->getUser()->setPref(self::DATA_NAMESPACE, $data, true, true);
+				
+				/*
+				 * We need the old data so we didn't loose the existing state
+				 */
+				$save = $this->getContext()->getUser()->getPrefVal(self::DATA_NAMESPACE, null, true);
+				if ($save) {
+					$save = unserialize( base64_decode( $save ) );
+				}
+				else {
+					$save = array ();
+				}
+				
+				$save = array_merge($save, $data);
+				
+				$save = base64_encode(serialize($save));
+				$this->getContext()->getUser()->setPref(self::DATA_NAMESPACE, $save, true, true);
 			}
 		}
 
