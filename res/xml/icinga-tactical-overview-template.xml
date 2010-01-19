@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    
+    <!-- 
+    	Meta description of the templates, that anybody
+    	knows what the template is doing
+    -->
+    <meta>
+        <parameter name="name">Default template for Tactical Overview</parameter>
+        <parameter name="description">Displays a Tactical Overview</parameter>
+        <parameter name="author">icinga-web developers</parameter>
+    </meta>
+
+	<datasources>
+		<datasource>
+			<type>IcingaApi</type>
+			<target></target>
+			
+		</datasource>
+	</datasources>
+
+    <!--
+    	html template
+    -->
+    <template>
+    	<!-- /* <![CDATA[ */
+			<table border="0" cellpadding="0" cellspacing="4">
+				<tr>
+					<td>Monitoring Performance</td>
+				</tr>
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td>Service Check Execution Time:</td>
+								<td>0.04 / 81.01 / 0.782 sec</td>
+							</tr>
+							<tr>
+								<td>Service Check Latency:</td>
+								<td>0.00 / 90.91 / 1.878 sec</td>
+							</tr>
+							<tr>
+								<td>Host Check Execution Time:</td>
+								<td>0.04 / 10.21 / 0.195 sec</td>
+							</tr>
+							<tr>
+								<td>Host Check Latency:</td>
+								<td>0.00 / 5.94 / 2.388 sec</td>
+							</tr>
+							<tr>
+								<td># Active Host / Service Checks:</td>
+								<td>205 / 3295</td>
+							</tr>
+							<tr>
+								<td># Passive Host / Service Checks:</td>
+								<td>0 / 13</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		/* ]]> */ -->
+    </template>    
+</template>
