@@ -118,10 +118,12 @@
 		
 		//Insert the grid in the parent
 		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
+		
+		// Add to parent component
 		cmp.insert(0, grid);
 		
-		// Refresh the container layout
-		Ext.getCmp('view-container').doLayout();
+		// Refresh
+		cmp.doLayout();
 	}
 
 	// First loading the meta info to configure the grid

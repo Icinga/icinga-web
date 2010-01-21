@@ -232,8 +232,6 @@
 				
 //				console.log(d);
 				
-				console.log(this);
-				
 				return {
 					col: d,
 					title: this.title
@@ -241,24 +239,32 @@
 			},
 			
 			applyState: function (state) {
-				if (state.col) {
-					Ext.each(state.col, function (item, index, arry) {
-						Ext.iterate(item, function (key, citem, o) {
-							var c = {}
-							Ext.apply(c, citem.config || {}, citem.crconf || {});
-							c.tools = tools;
-							
-							var cronk = AppKit.Ext.CronkMgr.create(c);
-							
-							createResizer(cronk);
-							
-							this.get(index).add(cronk);
+
+				// Defered execution
+				(function() {
+
+					if (state.col) {
+						Ext.each(state.col, function (item, index, arry) {
+							Ext.iterate(item, function (key, citem, o) {
+								var c = {}
+								Ext.apply(c, citem.config || {}, citem.crconf || {});
+								c.tools = tools;
+								
+								var cronk = AppKit.Ext.CronkMgr.create(c);
+								
+								createResizer(cronk);
+								
+								this.get(index).add(cronk);
+								
+							}, this);
 							
 						}, this);
-					}, this);
-				}
+						
+						this.doLayout();
+					}
+
+				}).defer(200, this);
 				
-				// console.log(state);
 			}
 		});
 		
