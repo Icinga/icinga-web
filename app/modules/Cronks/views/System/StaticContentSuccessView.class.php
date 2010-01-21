@@ -4,8 +4,6 @@ class Cronks_System_StaticContentSuccessView extends ICINGACronksBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
-		$this->setupHtml($rd);
-
 		$templateFile = sprintf(
 			'%s/%s.xml', 
 			AgaviConfig::get('de.icinga.web.xml_template_folder'), 
@@ -13,11 +11,9 @@ class Cronks_System_StaticContentSuccessView extends ICINGACronksBaseView
 		);
 
 		$model = $this->getContext()->getModel('System.StaticContent', 'Cronks');
-		$model->getContent($templateFile);
+		$content = $model->getContent($templateFile);
 
-		
-
-		return true;
+		return $content;
 	}
 }
 

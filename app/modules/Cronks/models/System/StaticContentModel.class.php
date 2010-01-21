@@ -9,7 +9,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 * API variables
 	 */
 	private $api = false;
-	private $apiData = array();
+	private $templateData = array();
 
 	/*
 	 * XML variables
@@ -37,7 +37,8 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		$this->getTemplateData($xmlFile);
 		$this->fetchData();
 		$html = $this->getHtmlContent();
-		return true;
+
+		return $html;
 	}
 
 	/*
@@ -94,7 +95,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 					$index = '__BAD_INDEX__';
 					if ($child->hasAttribute('name')) {
 						$index = $child->getAttribute('name');
-					} elseif ($child->nodeName == 'parameter') {
+					} elseif ($child->nodeName == 'datasource') {
 						$index = count($data);
 					} else {
 						$index = $child->nodeName;
@@ -129,8 +130,8 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			foreach ($this->xmlData['datasources'] as $dataSource) {
 				switch ($dataSource['source_type']) {
 					case 'IcingaApi':
-						if (!($success = $this->fetchApiData($dataSource))) {
-							break;;
+						if (!($success = $this->fetchTemplateData($dataSource))) {
+							break;
 						}
 						break;
 
@@ -143,7 +144,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		}
 
 		if (!$success) {
-			$this->apiData = array();
+			$this->templateData = array();
 		}
 
 		return $success;
@@ -155,12 +156,12 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 * @return	boolean								true on successful retrieval of data otherwise false
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
-	private function fetchApiData ($dataSource) {
+	private function fetchTemplateData ($dataSource) {
 		$success = true;
 
 		if (!array_key_exists('id', $dataSource)) {
 
-			throw new Cronks_System_StaticContentModelException('fetchApiData(): no id in datasource!');
+			throw new Cronks_System_StaticContentModelException('fetchTemplateData(): no id in datasource!');
 			$success = false;
 
 		} else {
@@ -168,7 +169,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			$apiSearch = $this->api->API()->createSearch();
 			if (!array_key_exists('target', $dataSource)) {
 
-				throw new Cronks_System_StaticContentModelException('fetchApiData(): no target in datasource!');
+				throw new Cronks_System_StaticContentModelException('fetchTemplateData(): no target in datasource!');
 				$success = false;
 
 			} else {
@@ -193,11 +194,11 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 				if (array_key_exists('filter', $dataSource) && array_key_exists('columns', $dataSource['filter'])) {
 					foreach ($dataSource['filter'] as $filter) {
 						if (!array_key_exists('column', $filter)) {
-							throw new Cronks_System_StaticContentModelException('fetchApiData(): no column defined in filter definition!');
+							throw new Cronks_System_StaticContentModelException('fetchTemplateData(): no column defined in filter definition!');
 							$success = false;
 						}
 						if ($success && !array_key_exists('value', $filter)) {
-							throw new Cronks_System_StaticContentModelException('fetchApiData(): no value defined in filter definition!');
+							throw new Cronks_System_StaticContentModelException('fetchTemplateData(): no value defined in filter definition!');
 							$success = false;
 						}
 
@@ -219,7 +220,27 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 				// execute query and fetch result
 				if ($success) {
 					$apiRes = $apiSearch->fetch();
-					$this->apiData[$dataSource['id']] = $apiRes;
+
+					// set output type
+					if (array_key_exists('output_type', $dataSource)) {
+						$outputType = $dataSource['output_type'];
+					} else {
+						$outputType = 'single';
+					}
+
+					// set function
+					if (array_key_exists('function', $dataSource)) {
+						$function = $dataSource['function'];
+					} else {
+						$function = false;
+					}
+
+					// set result data
+					$this->templateData[$dataSource['id']] = array(
+						'data'			=> $apiRes,
+						'output_type'	=> $outputType,
+						'function'		=> $function,
+					);
 				}
 
 			}
@@ -245,12 +266,77 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		if (array_key_exists('template_code', $this->xmlData)) {
 			$html = $this->xmlData['template_code'];
 
-			// TODO: continue here
+			// fetch variables from template
+			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/m';
+			preg_match_all($variablePattern, $html, $templateVariables);
+			// determine number of found template variables
+			$numMatches = count($templateVariables[0]);
+			
+			// replace template variables by found values
+			for ($x = 0; $x < $numMatches; $x++) {
+				$id = $templateVariables[1][$x];
+				$column = $templateVariables[2][$x];
+
+				// determine template values and set them
+				$substitution = null;
+				if (array_key_exists($id, $this->templateData)) {
+					$templateData = $this->templateData[$id];
+
+					switch ($templateData['output_type']) {
+						case 'single':
+						default:
+							if ($templateData['data']->getResultCount() == 1) {
+								$substitution = $templateData['data']->current()->$column;
+							}
+							break;
+					}
+				}
+
+				// apply function
+				if ($templateData['function'] !== false) {
+					$substitution = $this->applyFunction(
+						$substitution,
+						$templateData['function']
+					);
+				}
+
+				$html = str_replace(
+					$templateVariables[0][$x],
+					$substitution,
+					$html
+				);
+			}
 		} else {
 			throw new Cronks_System_StaticContentModelException('getHtmlContent(): no template_code defined!');
 		}
 
 		return $html;
+	}
+
+	/**
+	 * applies post-processing function to fetched value
+	 * @param	mixed			$value					value to post-process
+	 * @param	array			$function				function definition
+	 * @return	mixed									processed value
+	 * @author	Christian Doebler <christian.doebler@netways.de>
+	 */
+	private function applyFunction ($value, array $function) {
+		if (array_key_exists('name', $function)) {
+			switch ($function['name']) {
+				case 'round':
+					if (array_key_exists('param', $function)) {
+						$precision = (int)$function['param'];
+					} else {
+						$precision = 0;
+					}
+					$value = round($value, $precision);
+					break;
+			}
+		} else {
+			throw new Cronks_System_StaticContentModelException('applyFunction(): no function name defined!');
+		}
+
+		return $value;
 	}
 
 }
