@@ -44,6 +44,18 @@
 			checkreturn="false" />
 	</target>
 	
+	<target name="db-purge-userprefs" depends="db-prepare">
+		
+		<property name="db.sql.truncateprefs" value="truncate table ${db.name}.nsm_user_preference" />
+		
+		<exec
+			command="${db.mysql.call_global} -e '${db.sql.truncateprefs}'"
+			dir="${builddir}"
+			passthru="true"
+			checkreturn="false" />
+		
+	</target>
+	
 	<target name="db-drop" depends="db-prepare">
 		
 		<property name="db.sql.drop" value="DROP DATABASE ${db.name};" />
