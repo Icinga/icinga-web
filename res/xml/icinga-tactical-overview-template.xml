@@ -115,14 +115,12 @@
 			</filter>
 		</datasource>
 
-		<!--
 		<datasource>
 			<id>HOST_NAMES</id>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_NAME</columns>
 		</datasource>
-		-->
 	</datasources>
 
     <!--
@@ -165,6 +163,11 @@
 					</td>
 				</tr>
 			</table>
+			${HOST_NAMES:repeat}
+				<br/>
+				${HOST_NAMES:HOST_NAME} |
+				<br/> 
+			${HOST_NAMES:repeat_end}
 		]]>
     </template_code>
 </template>

@@ -166,7 +166,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 		} else {
 
-			$apiSearch = $this->api->API()->createSearch();
+			$apiSearch = $this->api->API()->createSearch()->setResultType(IcingaApi::RESULT_ARRAY);
 			if (!array_key_exists('target', $dataSource)) {
 
 				throw new Cronks_System_StaticContentModelException('fetchTemplateData(): no target in datasource!');
@@ -219,7 +219,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 				// execute query and fetch result
 				if ($success) {
-					$apiRes = $apiSearch->fetch();
+					$apiRes = $apiSearch->fetch()->getAll();
 
 					// set function
 					if (array_key_exists('function', $dataSource)) {
@@ -253,18 +253,65 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
 	private function processTemplate () {
-		$content = false;
+		$content = null;
 
 		if (array_key_exists('template_code', $this->xmlData)) {
 			$content = $this->xmlData['template_code'];
 
-			// fetch variables from template and call substitution routine
-			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/m';
+			// fetch repeating variables from template and call substitution routine
+			$variablePattern = '/\${([A-Za-z0-9_\-]+):repeat}/s';
+			preg_match_all($variablePattern, $content, $templateVariables);
+			$content = $this->substituteRepeatingTemplateVariables($content, $templateVariables);
+
+			// fetch remaining variables from template and call substitution routine
+			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/s';
 			preg_match_all($variablePattern, $content, $templateVariables);
 			$content = $this->substituteTemplateVariables($content, $templateVariables);
 
 		} else {
 			throw new Cronks_System_StaticContentModelException('processTemplate(): no template_code defined!');
+		}
+
+		return $content;
+	}
+
+	/**
+	 * substitutes repeating template variables by fetched data
+	 * @param	string			$content			template
+	 * @param	array			$templateVariables	template variables extracted via preg_match_all
+	 * @return	string								processed template
+	 * @author	Christian Doebler <christian.doebler@netways.de>
+	 */
+	private function substituteRepeatingTemplateVariables ($content, $templateVariables) {
+		// determine number of repeating sub templates
+		$numRepeatDefinitions = count($templateVariables[0]);
+
+		for ($x = 0; $x < $numRepeatDefinitions; $x++) {
+			$currentVariable = $templateVariables[1][$x];
+			$variablePattern = '/\${' . $currentVariable . ':repeat}(.*)\${' . $currentVariable . ':repeat_end}/s';
+			preg_match_all($variablePattern, $content, $templateSubVariables);
+			$numSubTemplates = count($templateSubVariables[0]);
+
+			// loop through sub templates and create sub content
+			$subContent = null;
+			for ($y = 0; $y < $numSubTemplates; $y++) {
+				$subContentTemplate = $templateSubVariables[1][$y];
+
+				$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/s';
+				preg_match_all($variablePattern, $subContentTemplate, $subTemplateSubVariables);
+				$numSubTemplateSubVariables = count($subTemplateSubVariables);
+				for ($z = 0; $z < $numSubTemplateSubVariables; $z++) {
+					$subContent .= $this->substituteTemplateVariables($subContentTemplate, $subTemplateSubVariables, $z);
+				}
+
+				// substitute template variable by generated sub content
+				$content = $content = str_replace(
+					$templateSubVariables[0][$y],
+					$subContent,
+					$content
+				);
+			}
+
 		}
 
 		return $content;
@@ -277,7 +324,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 * @return	string								processed template
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
-	private function substituteTemplateVariables ($content, $templateVariables) {
+	private function substituteTemplateVariables ($content, $templateVariables, $offset = 0) {
 		// determine number of found template variables
 		$numMatches = count($templateVariables[0]);
 
@@ -290,10 +337,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			$substitution = null;
 			if (array_key_exists($id, $this->templateData)) {
 				$templateData = $this->templateData[$id];
-
-				if ($templateData['data']->getResultCount() == 1) {
-					$substitution = $templateData['data']->current()->$column;
-				}
+				$substitution = $templateData['data'][$offset][$column];
 			}
 
 			// apply function
