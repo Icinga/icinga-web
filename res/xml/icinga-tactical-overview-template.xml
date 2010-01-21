@@ -17,7 +17,6 @@
 	<datasources>
 		<datasource>
 			<id>SERVICE_EXECUTION_TIME</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_EXECUTION_TIME_MIN,SERVICE_EXECUTION_TIME_MAX,SERVICE_EXECUTION_TIME_AVG</columns>
@@ -29,7 +28,6 @@
 
 		<datasource>
 			<id>SERVICE_LATENCY</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_LATENCY_MIN,SERVICE_LATENCY_MAX,SERVICE_LATENCY_AVG</columns>
@@ -41,7 +39,6 @@
 
 		<datasource>
 			<id>HOST_EXECUTION_TIME</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_EXECUTION_TIME_MIN,HOST_EXECUTION_TIME_MAX,HOST_EXECUTION_TIME_AVG</columns>
@@ -53,7 +50,6 @@
 
 		<datasource>
 			<id>HOST_LATENCY</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_LATENCY_MIN,HOST_LATENCY_MAX,HOST_LATENCY_AVG</columns>
@@ -65,7 +61,6 @@
 
 		<datasource>
 			<id>NUM_ACTIVE_HOST_CHECKS</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -80,7 +75,6 @@
 
 		<datasource>
 			<id>NUM_ACTIVE_SERVICE_CHECKS</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_OBJECT_ID</columns>
@@ -95,7 +89,6 @@
 
 		<datasource>
 			<id>NUM_PASSIVE_HOST_CHECKS</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -110,7 +103,6 @@
 
 		<datasource>
 			<id>NUM_PASSIVE_SERVICE_CHECKS</id>
-			<output_type>single</output_type>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_OBJECT_ID</columns>
@@ -122,6 +114,15 @@
 				</columns>
 			</filter>
 		</datasource>
+
+		<!--
+		<datasource>
+			<id>HOST_NAMES</id>
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_NAME</columns>
+		</datasource>
+		-->
 	</datasources>
 
     <!--

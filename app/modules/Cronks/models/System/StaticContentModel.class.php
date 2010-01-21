@@ -28,7 +28,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	}	
 
 	/**
-	 * main function to generate HTML content
+	 * main function to generate content
 	 * @param	string			$xmlFile			absolute filename of XML template
 	 * @return	unknown_type
 	 * @author	Christian Doebler <christian.doebler@netways.de>
@@ -36,9 +36,9 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	public function getContent ($xmlFile) {
 		$this->getTemplateData($xmlFile);
 		$this->fetchData();
-		$html = $this->getHtmlContent();
+		$content = $this->processTemplate();
 
-		return $html;
+		return $content;
 	}
 
 	/*
@@ -221,13 +221,6 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 				if ($success) {
 					$apiRes = $apiSearch->fetch();
 
-					// set output type
-					if (array_key_exists('output_type', $dataSource)) {
-						$outputType = $dataSource['output_type'];
-					} else {
-						$outputType = 'single';
-					}
-
 					// set function
 					if (array_key_exists('function', $dataSource)) {
 						$function = $dataSource['function'];
@@ -238,7 +231,6 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 					// set result data
 					$this->templateData[$dataSource['id']] = array(
 						'data'			=> $apiRes,
-						'output_type'	=> $outputType,
 						'function'		=> $function,
 					);
 				}
@@ -255,62 +247,71 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 */
 
 	/**
-	 * generates HTML content from template and fetched data
+	 * generates content from template and fetched data
 	 * @param	void
-	 * @return	string								HTML content
+	 * @return	string								processed content
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
-	private function getHtmlContent () {
-		$html = false;
+	private function processTemplate () {
+		$content = false;
 
 		if (array_key_exists('template_code', $this->xmlData)) {
-			$html = $this->xmlData['template_code'];
+			$content = $this->xmlData['template_code'];
 
-			// fetch variables from template
+			// fetch variables from template and call substitution routine
 			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/m';
-			preg_match_all($variablePattern, $html, $templateVariables);
-			// determine number of found template variables
-			$numMatches = count($templateVariables[0]);
-			
-			// replace template variables by found values
-			for ($x = 0; $x < $numMatches; $x++) {
-				$id = $templateVariables[1][$x];
-				$column = $templateVariables[2][$x];
+			preg_match_all($variablePattern, $content, $templateVariables);
+			$content = $this->substituteTemplateVariables($content, $templateVariables);
 
-				// determine template values and set them
-				$substitution = null;
-				if (array_key_exists($id, $this->templateData)) {
-					$templateData = $this->templateData[$id];
-
-					switch ($templateData['output_type']) {
-						case 'single':
-						default:
-							if ($templateData['data']->getResultCount() == 1) {
-								$substitution = $templateData['data']->current()->$column;
-							}
-							break;
-					}
-				}
-
-				// apply function
-				if ($templateData['function'] !== false) {
-					$substitution = $this->applyFunction(
-						$substitution,
-						$templateData['function']
-					);
-				}
-
-				$html = str_replace(
-					$templateVariables[0][$x],
-					$substitution,
-					$html
-				);
-			}
 		} else {
-			throw new Cronks_System_StaticContentModelException('getHtmlContent(): no template_code defined!');
+			throw new Cronks_System_StaticContentModelException('processTemplate(): no template_code defined!');
 		}
 
-		return $html;
+		return $content;
+	}
+
+	/**
+	 * substitutes template variables by fetched data
+	 * @param	string			$content			template
+	 * @param	array			$templateVariables	template variables extracted via preg_match_all
+	 * @return	string								processed template
+	 * @author	Christian Doebler <christian.doebler@netways.de>
+	 */
+	private function substituteTemplateVariables ($content, $templateVariables) {
+		// determine number of found template variables
+		$numMatches = count($templateVariables[0]);
+
+		// replace template variables by found values
+		for ($x = 0; $x < $numMatches; $x++) {
+			$id = $templateVariables[1][$x];
+			$column = $templateVariables[2][$x];
+
+			// determine template values and set them
+			$substitution = null;
+			if (array_key_exists($id, $this->templateData)) {
+				$templateData = $this->templateData[$id];
+
+				if ($templateData['data']->getResultCount() == 1) {
+					$substitution = $templateData['data']->current()->$column;
+				}
+			}
+
+			// apply function
+			if ($templateData['function'] !== false) {
+				$substitution = $this->applyFunction(
+					$substitution,
+					$templateData['function']
+				);
+			}
+
+			$content = str_replace(
+				$templateVariables[0][$x],
+				$substitution,
+				$content
+			);
+		}
+
+		return $content;
 	}
 
 	/**
