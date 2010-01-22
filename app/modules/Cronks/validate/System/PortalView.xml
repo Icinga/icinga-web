@@ -23,6 +23,14 @@
 						<error>Validation of parentid failed!</error>
 					</errors>
 		</validator>
+
+		<validator class="string" name="stateuid" required="false">
+					<argument>stateuid</argument>
+					
+					<errors>
+						<error>Validation of stateuid failed!</error>
+					</errors>
+		</validator>
 		
 		<validator class="number" name="columns" required="false">
 					<argument>columns</argument>

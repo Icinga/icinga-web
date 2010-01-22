@@ -32,10 +32,11 @@ none:
 	@echo "\tdevclean - to a sourcecode ready for ci or packaging" 
 	@echo ""
 	@echo "Experimental targets:"
-	@echo "\tmake db-initialize - create the db"
-	@echo "\tmake db-deinitialize - reverse the path (removes all data and drop the relations)"
-	@echo "\tmake db-upgrade - tries to upgrade from a available db revision"
-	@echo "\tmake db-drop - create the entire db"
+	@echo "\tmake db-initialize			- create the db"
+	@echo "\tmake db-deinitialize		- reverse the path (removes all data and drop the relations)"
+	@echo "\tmake db-upgrade			- tries to upgrade from a available db revision"
+	@echo "\tmake db-drop				- create the entire db"
+	@echo "\tmake db-purge-userprefs	- purge existing user preferences"
 	@echo ""
 
 include $(INC_MAKE_FILES)
@@ -97,3 +98,6 @@ db-drop:
 db-upgrade:
 	$(PC) db-upgrade
 
+db-purge-userprefs:
+	$(PC) db-purge-userprefs
+	

@@ -16,6 +16,7 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 	protected $cacheSerializeType	= false;
 	protected $cacheDefaultRegion	= null;
 	protected $cacheDefaultLifetime	= 3600;
+	protected $cacheBypass			= false;
 	
 	public function __construct() {
 		
@@ -38,6 +39,11 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 		if (array_key_exists('cacheDefaultLifetime', $parameters)) {
 			$this->cacheDefaultLifetime = (int)$parameters['cacheDefaultLifetime'];
 		}
+		
+		if (array_key_exists('cacheBypass', $parameters)) {
+			$this->cacheBypass = (bool)$parameters['cacheBypass'];
+		}
+		
 		
 		$this->restoreData();
 		
@@ -84,6 +90,11 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 	}
 	
 	public function setValue($name, $value, $region=null) {
+		
+		if ($this->cacheBypass === true) {
+			return true;
+		}
+		
 		if ($region===null) $region=$this->cacheDefaultRegion;
 		if (!$this->regionExists($region)) {
 			throw new AppKitCacheException('Region %s does not exist!', $region);
@@ -99,7 +110,13 @@ abstract class AppKitCache extends AppKitBaseClass implements AppKitFactoryInter
 	}
 	
 	public function getValue($name, $default=null,$region=null) {
+		
+		if ($this->cacheBypass === true) {
+			return $default;
+		}
+		
 		if ($region===null) $region=$this->cacheDefaultRegion;
+		
 		if (!$this->regionExists($region)) {
 			throw new AppKitCacheException('Region %s does not exist!', $region);
 		}

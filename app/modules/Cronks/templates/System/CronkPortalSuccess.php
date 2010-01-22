@@ -73,7 +73,7 @@ var TabContextMenu =  function() {
 
 var CronkTabHandler = function() {
 	
-	return {
+	var pub = {
 		
 		tabPanelDropTarget : function(t) {
 			new Ext.dd.DropTarget(t.header, {
@@ -99,9 +99,46 @@ var CronkTabHandler = function() {
 								tabPanel.setActiveTab(panel);
 							}
 			});
+		},
+		
+		createWelcomeCronk : function() {
+			return AppKit.Ext.CronkMgr.create({
+				title: '<?php echo $tm->_("Welcome"); ?>',
+				crname: 'portalHello',
+				parentid: undefined,
+				layout: 'fit',
+				loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+				closable: false
+			});
+		},
+		
+		itemObserver : function(tabPanel) {
+			
+			(function() {
+				
+				if (tabPanel.items.getCount() <= 0) {
+					tabPanel.add(pub.createWelcomeCronk());
+				}
+				
+			}).defer(200);
+			
+			return true;
+		},
+		
+		itemRemoveActiveHandler : function (tabPanel) {
+			if (tabPanel.items.getCount() <= 1) {
+				return false;
+			}
+			else {
+				tabPanel.setActiveTab( (tabPanel.items.getCount() - 1) );
+			}
+			
+			return true;
 		}
 		
-	}
+	};
+	
+	return pub;
 	
 }();
 
@@ -137,27 +174,38 @@ var tabPanel = new Ext.TabPanel({
 	},
 	
 	applyState: function(state) {
-		if (state.cronks) {
-			Ext.iterate(state.cronks, function(index, item, o) {
-				var config = {};
-				Ext.apply(config, item.config, item.crconf);
-				
-				var cronk = AppKit.Ext.CronkMgr.create(config);
-				
-				this.add(cronk);
-				
-			}, this);
+		(function() {
 			
-			this.doLayout();
+			if (state.cronks) {
+
+				// Adding all cronks
+				Ext.iterate(state.cronks, function(index, item, o) {
+					var config = {};
+					Ext.apply(config, item.config, item.crconf);
+					
+					var cronk = AppKit.Ext.CronkMgr.create(config);
+	
+					this.add(cronk);
+					
+				}, this);
+
+				// Sets tehe active tab
+				this.setActiveTab(state.active);
+			}
 			
-			this.setActiveTab(state.active);
-		}
+						
+		}).defer(200, this);
+		
+		return true;
 	},
 	
 	// Here comes the drop zone
 	listeners: {
 		render: CronkTabHandler.tabPanelDropTarget,
-		contextmenu: TabContextMenu.handle
+		contextmenu: TabContextMenu.handle,
+		staterestore: CronkTabHandler.itemObserver,
+		removed: CronkTabHandler.itemObserver,
+		beforeremove: CronkTabHandler.itemRemoveActiveHandler,
 	}
 });
 
@@ -263,21 +311,13 @@ container.setHeight(Ext.lib.Dom.getViewHeight()-65);
 container.render("<?php echo $parentid; ?>");
 
 
-// Adding the first cronk (say hello here)
-if (tabPanel && tabPanel.items.getCount() <= 0) {
-	var cHello = AppKit.Ext.CronkMgr.create({
-		title: '<?php echo $tm->_("Welcome"); ?>',
-		crname: 'portalHello',
-		parentid: undefined,
-		layout: 'fit',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		closable: false
-	});
-	
-	tabPanel.add(cHello);
-	tabPanel.doLayout();	
-	tabPanel.setActiveTab(cHello);
-}
+//// Adding the first cronk (say hello here)
+//if (tabPanel && tabPanel.items.getCount() <= 0) {
+//	
+//	tabPanel.add(cHello);
+//	tabPanel.doLayout();	
+//	tabPanel.setActiveTab(cHello);
+//}
 
 // Adding the cronk list
 if ((west = Ext.getCmp('west-frame'))) {

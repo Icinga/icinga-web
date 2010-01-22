@@ -210,6 +210,9 @@
 			<parameter name="cacheTransactionType">AppKitCache::COMMIT_POOL</parameter>
 			<parameter name="cacheSerializeType">AppKitCache::SERIALIZE_PHP</parameter>
 			
+			<!-- DISABLE THE CACHE FOR DEVELOPMENT REASONS -->
+			<parameter name="cacheBypass">true</parameter>
+			
 			<parameter name="fileDataDir"><![CDATA[/tmp/icinga_web]]></parameter>
 		</parameter>
 		
