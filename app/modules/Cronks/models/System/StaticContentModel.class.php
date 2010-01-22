@@ -264,7 +264,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			$content = $this->substituteRepeatingTemplateVariables($content, $templateVariables);
 
 			// fetch remaining variables from template and call substitution routine
-			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/s';
+			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)(:.*)?}/s';
 			preg_match_all($variablePattern, $content, $templateVariables);
 			$content = $this->substituteTemplateVariables($content, $templateVariables);
 
@@ -297,7 +297,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			for ($y = 0; $y < $numSubTemplates; $y++) {
 				$subContentTemplate = $templateSubVariables[1][$y];
 
-				$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/s';
+				$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)(:.*)?}/s';
 				preg_match_all($variablePattern, $subContentTemplate, $subTemplateSubVariables);
 				$numSubTemplateSubVariables = count($subTemplateSubVariables[0]);
 
@@ -336,6 +336,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		for ($x = 0; $x < $numMatches; $x++) {
 			$id = $templateVariables[1][$x];
 			$column = $templateVariables[2][$x];
+			$outputWrapperFunction = $templateVariables[3][$x];
 
 			// determine template values and set them
 			$substitution = null;
@@ -350,6 +351,15 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 					$substitution,
 					$templateData['function']
 				);
+			}
+
+			// apply output wrapper
+			if (!empty($outputWrapperFunction)) {
+				$funcDef = explode(':', $outputWrapperFunction);
+				eval("\$funcInstance = $funcDef[1]::getInstance();");
+
+				$funcCall = str_replace('__VALUE__', $substitution, $funcDef[2]);
+				eval("\$substitution = \$funcInstance->$funcCall;");
 			}
 
 			$content = str_replace(

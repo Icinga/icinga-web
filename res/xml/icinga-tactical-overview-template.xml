@@ -119,7 +119,7 @@
 			<id>HOST_NAMES</id>
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_NAME</columns>
+			<columns>HOST_NAME,HOST_STATE</columns>
 		</datasource>
 	</datasources>
 
@@ -166,7 +166,7 @@
 			<!--
 			${HOST_NAMES:repeat}
 				<br/>
-				${HOST_NAMES:HOST_NAME} |
+				${HOST_NAMES:HOST_NAME} | ${HOST_NAMES:HOST_STATE:IcingaTemplateDisplayMonitoring:hostStatus(__VALUE__,new AgaviParameterHolder(),new AgaviParameterHolder())}
 				<br/> 
 			${HOST_NAMES:repeat_end}
 			-->
