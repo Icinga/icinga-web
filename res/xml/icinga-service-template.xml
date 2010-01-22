@@ -28,7 +28,7 @@
         	Selection model of rows (checkbox/row). This is needed for
         	commands and maybe other user things ...
         -->
-        <parameter name="selection_model"></parameter>
+        <parameter name="selection_model">checkbox</parameter>
         
         <!-- 
         	Enable/disable commands and specify which of type you'll need
