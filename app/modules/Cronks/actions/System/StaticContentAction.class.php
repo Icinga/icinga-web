@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_TacticalOverviewAction extends ICINGACronksBaseAction
+class Cronks_System_StaticContentAction extends ICINGACronksBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -17,6 +17,26 @@ class Cronks_System_TacticalOverviewAction extends ICINGACronksBaseAction
 	public function getDefaultViewName()
 	{
 		return 'Success';
+	}
+
+	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function isSecure() {
+		return true;
+	}
+	
+	public function getCredentials() {
+		return array ('icinga.user');
+	}
+	
+	public function handleError(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
 	}
 }
 

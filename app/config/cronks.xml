@@ -140,6 +140,17 @@
 			<parameter name="parameter"></parameter>
 		</parameter>
 
+		<parameter name="icingaTacticalOverview">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.StaticContent</parameter>
+			<parameter name="hide">true</parameter>
+			<parameter name="description">Icinga Tactical Overview</parameter>
+			<parameter name="name">Tactical Overview</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-tactical-overview-template</parameter>
+			</parameter>
+		</parameter>
+
 		<parameter name="portalView1Col">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.PortalView</parameter>
