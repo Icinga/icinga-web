@@ -163,11 +163,13 @@
 					</td>
 				</tr>
 			</table>
+			<!--
 			${HOST_NAMES:repeat}
 				<br/>
 				${HOST_NAMES:HOST_NAME} |
 				<br/> 
 			${HOST_NAMES:repeat_end}
+			-->
 		]]>
     </template_code>
 </template>

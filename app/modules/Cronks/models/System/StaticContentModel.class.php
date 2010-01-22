@@ -287,8 +287,8 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		$numRepeatDefinitions = count($templateVariables[0]);
 
 		for ($x = 0; $x < $numRepeatDefinitions; $x++) {
-			$currentVariable = $templateVariables[1][$x];
-			$variablePattern = '/\${' . $currentVariable . ':repeat}(.*)\${' . $currentVariable . ':repeat_end}/s';
+			$id = $templateVariables[1][$x];
+			$variablePattern = '/\${' . $id . ':repeat}(.*)\${' . $id . ':repeat_end}/s';
 			preg_match_all($variablePattern, $content, $templateSubVariables);
 			$numSubTemplates = count($templateSubVariables[0]);
 
@@ -299,9 +299,13 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 				$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)}/s';
 				preg_match_all($variablePattern, $subContentTemplate, $subTemplateSubVariables);
-				$numSubTemplateSubVariables = count($subTemplateSubVariables);
-				for ($z = 0; $z < $numSubTemplateSubVariables; $z++) {
-					$subContent .= $this->substituteTemplateVariables($subContentTemplate, $subTemplateSubVariables, $z);
+				$numSubTemplateSubVariables = count($subTemplateSubVariables[0]);
+
+				$numDataResults = count($this->templateData[$id]['data']);
+				for ($dataOffset = 0; $dataOffset < $numDataResults; $dataOffset++) {
+					for ($z = 0; $z < $numSubTemplateSubVariables; $z++) {
+						$subContent .= $this->substituteTemplateVariables($subContentTemplate, $subTemplateSubVariables, $dataOffset);
+					}
 				}
 
 				// substitute template variable by generated sub content
