@@ -28,29 +28,7 @@
 	if (stateuid) {
 		Ext.apply(config, {
 			stateful: true,
-			stateId: stateuid,
-			stateEvents: ['resize'],
-			
-			getState: function() {
-				return {
-					height: this.getHeight()
-				}
-			},
-			
-			applyState: function(state) {
-				if (state.height) {
-					this.on('added', function(panel, ownerCt, index)  {
-						
-						var container = panel.findParentByType('portlet');
-						if (container && container.resizer) {
-							container.setHeight(state.height);
-						}
-						
-						return true;
-						
-					}, null, { single: true });
-				}
-			}
+			stateId: stateuid
 		});
 	}
 	
