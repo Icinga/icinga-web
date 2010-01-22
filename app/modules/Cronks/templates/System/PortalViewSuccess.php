@@ -57,7 +57,9 @@
 							
 							notifyOver: function(dd, e, data) {
 								
-		//						console.log("--- START ---");
+								if (data.dragData.id.indexOf('portalView') == 0) {
+									return false;
+								}
 								
 								if (!this.grid) {
 									this.grid = p.dd.getGrid();
@@ -65,23 +67,14 @@
 								
 								var xy = e.getXY();
 								
-		//						console.log(xy);
-		//						console.log(this.grid.columnX);
-								
 								Ext.iterate(this.grid.columnX, function (item, index, arry) {
 									
-		//						console.log(item);
-		// 	
 									if (xy[0] >= item.x && xy[0] < item.x+item.w ) {
 										this.ac = index;
 										return false;
 									}
 									
 							}, this);
-								
-		//						console.log(this.ac);
-		//						
-		//						console.log("--- STOP ---");
 		
 								return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
 							},
