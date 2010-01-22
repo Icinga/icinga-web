@@ -219,6 +219,19 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 				// execute query and fetch result
 				if ($success) {
+					// add access control to query
+					$secureSearchModels = array(
+						'IcingaHostgroup',
+						'IcingaServicegroup',
+						'IcingaHostCustomVariablePair',
+						'IcingaServiceCustomVariablePair'
+					);
+					IcingaPrincipalTargetTool::applyApiSecurityPrincipals(
+						$secureSearchModels,
+						$apiSearch
+					);
+
+					// fetch data
 					$apiRes = $apiSearch->fetch()->getAll();
 
 					// set function
