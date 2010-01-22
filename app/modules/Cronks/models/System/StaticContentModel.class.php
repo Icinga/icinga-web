@@ -36,7 +36,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	public function getContent ($xmlFile) {
 		$this->getTemplateData($xmlFile);
 		$this->fetchData();
-		$content = $this->processTemplate();
+		$content = $this->processTemplates();
 
 		return $content;
 	}
@@ -260,30 +260,52 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 */
 
 	/**
-	 * generates content from template and fetched data
+	 * calls the template generator for each template
 	 * @param	void
 	 * @return	string								processed content
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
-	private function processTemplate () {
+	private function processTemplates () {
 		$content = null;
+		$subContent = array();
 
 		if (array_key_exists('template_code', $this->xmlData)) {
-			$content = $this->xmlData['template_code'];
+			if (is_array($this->xmlData) && array_key_exists('MAIN', $this->xmlData['template_code'])) {
+				$templates = $this->xmlData['template_code'];
 
-			// fetch repeating variables from template and call substitution routine
-			$variablePattern = '/\${([A-Za-z0-9_\-]+):repeat}/s';
-			preg_match_all($variablePattern, $content, $templateVariables);
-			$content = $this->substituteRepeatingTemplateVariables($content, $templateVariables);
+				foreach ($templates as $tplId => $tpl) {
+					if ($tplId != 'MAIN') {
+						$subContent[$tplId] = $this->createTemplateContent($tpl);
+					}
+				}
 
-			// fetch remaining variables from template and call substitution routine
-			$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)(:.*)?}/s';
-			preg_match_all($variablePattern, $content, $templateVariables);
-			$content = $this->substituteTemplateVariables($content, $templateVariables);
-
+				$content = $this->createTemplateContent($templates['MAIN']);
+			} else {
+				throw new Cronks_System_StaticContentModelException('processTemplates(): no template "MAIN" defined!');
+			}
 		} else {
-			throw new Cronks_System_StaticContentModelException('processTemplate(): no template_code defined!');
+			throw new Cronks_System_StaticContentModelException('processTemplates(): no template_code defined!');
 		}
+
+		return $content;
+	}
+
+	/**
+	 * generates content from template and fetched data
+	 * @param	string			$content			content template
+	 * @return	string								processed content
+	 * @author	Christian Doebler <christian.doebler@netways.de>
+	 */
+	private function createTemplateContent ($content) {
+		// fetch repeating variables from template and call substitution routine
+		$variablePattern = '/\${([A-Za-z0-9_\-]+):repeat}/s';
+		preg_match_all($variablePattern, $content, $templateVariables);
+		$content = $this->substituteRepeatingTemplateVariables($content, $templateVariables);
+
+		// fetch remaining variables from template and call substitution routine
+		$variablePattern = '/\${([A-Za-z0-9_\-]+):([A-Z_]+)(:.*)?}/s';
+		preg_match_all($variablePattern, $content, $templateVariables);
+		$content = $this->substituteTemplateVariables($content, $templateVariables);
 
 		return $content;
 	}

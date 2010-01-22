@@ -127,49 +127,51 @@
     	html template
     -->
     <template_code>
-    	<![CDATA[
-			<table border="0" cellpadding="0" cellspacing="4">
-				<tr>
-					<td>Monitoring Performance</td>
-				</tr>
-				<tr>
-					<td>
-						<table border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td>Service Check Execution Time:</td>
-								<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
-							</tr>
-							<tr>
-								<td>Service Check Latency:</td>
-								<td>${SERVICE_LATENCY:SERVICE_LATENCY_MIN} / ${SERVICE_LATENCY:SERVICE_LATENCY_MAX} / ${SERVICE_LATENCY:SERVICE_LATENCY_AVG} sec</td>
-							</tr>
-							<tr>
-								<td>Host Check Execution Time:</td>
-								<td>${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MIN} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MAX} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_AVG} sec</td>
-							</tr>
-							<tr>
-								<td>Host Check Latency:</td>
-								<td>${HOST_LATENCY:HOST_LATENCY_MIN} / ${HOST_LATENCY:HOST_LATENCY_MAX} / ${HOST_LATENCY:HOST_LATENCY_AVG} sec</td>
-							</tr>
-							<tr>
-								<td># Active Host / Service Checks:</td>
-								<td>${NUM_ACTIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_ACTIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
-							</tr>
-							<tr>
-								<td># Passive Host / Service Checks:</td>
-								<td>${NUM_PASSIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_PASSIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-			<!--
-			${HOST_NAMES:repeat}
-				<br/>
-				${HOST_NAMES:HOST_NAME} | ${HOST_NAMES:HOST_STATE:IcingaTemplateDisplayMonitoring:hostStatus(__VALUE__,new AgaviParameterHolder(),new AgaviParameterHolder())}
-				<br/> 
-			${HOST_NAMES:repeat_end}
-			-->
-		]]>
+    	<MAIN>
+	    	<![CDATA[
+				<table border="0" cellpadding="0" cellspacing="4">
+					<tr>
+						<td>Monitoring Performance</td>
+					</tr>
+					<tr>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td>Service Check Execution Time:</td>
+									<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
+								</tr>
+								<tr>
+									<td>Service Check Latency:</td>
+									<td>${SERVICE_LATENCY:SERVICE_LATENCY_MIN} / ${SERVICE_LATENCY:SERVICE_LATENCY_MAX} / ${SERVICE_LATENCY:SERVICE_LATENCY_AVG} sec</td>
+								</tr>
+								<tr>
+									<td>Host Check Execution Time:</td>
+									<td>${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MIN} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MAX} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_AVG} sec</td>
+								</tr>
+								<tr>
+									<td>Host Check Latency:</td>
+									<td>${HOST_LATENCY:HOST_LATENCY_MIN} / ${HOST_LATENCY:HOST_LATENCY_MAX} / ${HOST_LATENCY:HOST_LATENCY_AVG} sec</td>
+								</tr>
+								<tr>
+									<td># Active Host / Service Checks:</td>
+									<td>${NUM_ACTIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_ACTIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
+								</tr>
+								<tr>
+									<td># Passive Host / Service Checks:</td>
+									<td>${NUM_PASSIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_PASSIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<!--
+				${HOST_NAMES:repeat}
+					<br/>
+					${HOST_NAMES:HOST_NAME} | ${HOST_NAMES:HOST_STATE:IcingaTemplateDisplayMonitoring:hostStatus(__VALUE__,new AgaviParameterHolder(),new AgaviParameterHolder())}
+					<br/> 
+				${HOST_NAMES:repeat_end}
+				-->
+			]]>
+		</MAIN>
     </template_code>
 </template>
