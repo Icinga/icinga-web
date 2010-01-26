@@ -76,7 +76,9 @@
 				var Options = MetaGrid.getOptions();
 				var bCommands = (Options['commands'] && Options['commands']['enabled'] == true) ? true : false;
 				
-				if (bCommands == true) {
+				var bCommandRo = '<?php echo $us->getNsmUser()->hasTarget("IcingaCommandRo"); ?>';
+				
+				if (bCommands == true && !bCommandRo == 1) {
 					
 					var tbEntry = this.topToolbar.add({
 						text: '<?php echo $tm->_("Commands"); ?>',

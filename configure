@@ -559,6 +559,7 @@ ac_subst_vars='LTLIBOBJS
 LIBOBJS
 INSTALL_OPTS
 CFLAGS
+icinga_api
 db_pass
 db_user
 db_name
@@ -621,6 +622,7 @@ with_web_user
 with_web_group
 with_bin_user
 with_bin_group
+with_icinga_api
 with_db_type
 with_db_host
 with_db_port
@@ -1246,6 +1248,8 @@ Optional Packages:
   --with-web-group=<grp>  group for web writable files (default www-data)
   --with-bin-user=<user>  user for all other files (default root)
   --with-bin-group=<grp>  group for all other files (default bin)
+  --with-icinga-api=<string>
+                          Path to icinga-api
   --with-db-type=<string> Type of dbms (default mysql)
   --with-db-host=<string> Host of dbms (default 127.0.0.1)
   --with-db-port=<int>    Port of the dbms (default 3306)
@@ -2126,6 +2130,16 @@ fi
 
 
 
+# Check whether --with-icinga_api was given.
+if test "${with_icinga_api+set}" = set; then :
+  withval=$with_icinga_api; icinga_api=$withval
+else
+  icinga_api=/usr/local/icinga-api
+
+fi
+
+
+
 # Check whether --with-db_type was given.
 if test "${with_db_type+set}" = set; then :
   withval=$with_db_type; db_type=$withval
@@ -2190,6 +2204,8 @@ INSTALL_OPTS="-o $bin_user -g $bin_group"
 CFLAGS=""
 
 # Substitutions
+
+
 
 
 

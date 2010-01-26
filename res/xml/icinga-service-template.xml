@@ -149,6 +149,7 @@
         	<parameter>IcingaHostgroup</parameter>
         	<parameter>IcingaHostCustomVariablePair</parameter>
         	<parameter>IcingaServiceCustomVariablePair</parameter>
+        	<parameter>IcingaContactgroup</parameter>
         </parameter>
         
     </option>
