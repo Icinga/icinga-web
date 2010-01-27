@@ -314,6 +314,7 @@ var IcingaGridFilterWindow = function() {
 //			console.log(oGrid.getStore().baseParams);
 			
 			oGrid.getStore().reload();
+			oGrid.fireEvent('activate');
 			
 			oWindow().hide();
 		},
