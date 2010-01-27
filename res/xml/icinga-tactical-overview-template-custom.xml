@@ -24,11 +24,11 @@
 		<datasource id="HOST_STATUS_UP">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_STATE</columns>
+			<columns>HOST_CURRENT_STATE</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
-					<column>HOST_STATE</column>
+					<column>HOST_CURRENT_STATE</column>
 					<value>0</value>
 				</columns>
 			</filter>
@@ -37,11 +37,11 @@
 		<datasource id="HOST_STATUS_DOWN">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_STATE</columns>
+			<columns>HOST_CURRENT_STATE</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
-					<column>HOST_STATE</column>
+					<column>HOST_CURRENT_STATE</column>
 					<value>1</value>
 				</columns>
 			</filter>
@@ -50,16 +50,67 @@
 		<datasource id="HOST_STATUS_UNREACHABLE">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_STATE</columns>
+			<columns>HOST_CURRENT_STATE</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
-					<column>HOST_STATE</column>
+					<column>HOST_CURRENT_STATE</column>
 					<value>2</value>
 				</columns>
 			</filter>
 		</datasource>
 
+		<datasource id="SERVICE_STATUS_OK">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="SERVICE_STATUS_WARNING">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="SERVICE_STATUS_CRITICAL">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>2</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="SERVICE_STATUS_UNKNOWN">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>3</value>
+				</columns>
+			</filter>
+		</datasource>
 	</datasources>
 
     <!--
@@ -69,9 +120,9 @@
     	<host_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
-    				<tr><td>${HOST_STATUS_UP:COUNT_HOST_STATE} UP</td></tr>
-    				<tr><td>${HOST_STATUS_DOWN:COUNT_HOST_STATE} DOWN</td></tr>
-    				<tr><td>${HOST_STATUS_UNREACHABLE:COUNT_HOST_STATE} UNREACHABLE</td></tr>
+    				<tr><td>${HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
+    				<tr><td>${HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
+    				<tr><td>${HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
     			</table>
     		]]>
     	</host_status>
@@ -79,10 +130,10 @@
     	<service_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
-    				<tr><td>OK</td></tr>
-    				<tr><td>WARNING</td></tr>
-    				<tr><td>CRITICAL</td></tr>
-    				<tr><td>UNKNOWN</td></tr>
+    				<tr><td>${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
+    				<tr><td>${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
+    				<tr><td>${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
+    				<tr><td>${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
     			</table>
     		]]>
     	</service_status>
@@ -96,18 +147,9 @@
 			]]>
     	</locations>
 
-    	<services>
-    		<![CDATA[
-				<tr>
-					<td>Service Check Execution Time:</td>
-					<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
-				</tr>
-			]]> 
-    	</services>
-
     	<MAIN>
 	    	<![CDATA[
-				<table border="0" cellpadding="0" cellspacing="4">
+				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>Locations</td>
 						<td>Services</td>
@@ -121,7 +163,9 @@
 						</td>
 						<td>
 							<table border="0" cellpadding="0" cellspacing="0">
-								$ {services:SERVICEGROUP_NAME,network}
+								<tr>
+									<td>Network</td>
+									<td>${service_status:SERVICEGROUP_NAME,network}</td>
 							</table>
 						</td>						
 					</tr>
