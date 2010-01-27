@@ -77,7 +77,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @author Marius Hein
 	 */
 	private function loadUserAttribute(NsmUser &$user) {
-		$this->setAttribute('userobj', &$user);
+		$this->setAttributeByRef('userobj', &$user);
 		return true;
 	}
 	
