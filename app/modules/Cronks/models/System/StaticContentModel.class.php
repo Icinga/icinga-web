@@ -9,6 +9,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 * API variables
 	 */
 	private $api = false;
+	private $globalFilter = array();
 	private $templateData = array();
 
 	/*
@@ -223,7 +224,12 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 				}
 			}
 
-			// set addiotnal search filter
+			// set additional search filter
+			foreach ($this->globalFilter as $filterData) {
+				$apiSearch->setSearchFilter(array($filterData));
+			}
+
+			// set additional search filter
 			foreach ($additionalFilter as $filterData) {
 				$apiSearch->setSearchFilter(array($filterData));
 			}
@@ -365,9 +371,19 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		for ($x = 0; $x < $numMatches; $x++) {
 			if (!empty($templateVariables[2][$x])) {
 				$currentFilter = trim($templateVariables[2][$x]);
+				if ($tplId != 'MAIN') {
+					
+				}
 			} else {
 				$currentFilter = false;
 			}
+
+			if ($tplId == 'MAIN') {
+				$this->globalFilter = array();
+			} elseif (!empty($filter)) {
+				$this->addToGlobalFilter($filter);
+			}
+
 			$this->createTemplateContent($templateVariables[1][$x], $currentFilter);
 			$content = $this->substituteTemplateVariablesByProcessedContent(
 				$templateVariables[0][$x],
@@ -377,6 +393,26 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		}
 
 		$this->content[$tplId]['content'] .= $content;
+	}
+
+	/**
+	 * adds filter data to global filter to provide inheritance of filters
+	 * @param	mixed			$filterRaw			filter to add to global filter as string or array
+	 * @return	void
+	 * @author	Christian Doebler <christian.doebler@netways.de>
+	 */
+	private function addToGlobalFilter ($filterRaw) {
+		if (!is_array($filterRaw)) {
+			$filterArr = explode(':', substr($filterRaw, 1));
+			foreach ($filterArr as $currentFilter) {
+				$filterTmp = explode(',', $currentFilter);
+				array_push($this->globalFilter, $filterTmp);
+			}
+		} else {
+			foreach ($filterArr as $currentFilter) {
+				array_push($this->globalFilter, $currentFilter);
+			}
+		}
 	}
 
 	/**

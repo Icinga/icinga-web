@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    
+    <!-- 
+    	Meta description of the templates, that anybody
+    	knows what the template is doing
+    -->
+    <meta>
+        <parameter name="name">Default template for Tactical Overview</parameter>
+        <parameter name="description">Displays a Tactical Overview</parameter>
+        <parameter name="author">icinga-web developers</parameter>
+    </meta>
+
+	<!--
+		data sources 
+	-->
+	<datasources>
+		<datasource id="LOCATIONS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOSTGROUP</target>
+			<columns>HOSTGROUP_ALIAS</columns>
+		</datasource>
+
+		<datasource id="HOST_STATUS_UP">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_STATE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="HOST_STATUS_DOWN">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_STATE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="HOST_STATUS_UNREACHABLE">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_STATE</column>
+					<value>2</value>
+				</columns>
+			</filter>
+		</datasource>
+
+	</datasources>
+
+    <!--
+    	html template
+    -->
+    <template_code>
+    	<host_status>
+    		<![CDATA[
+    			<table border="0" cellpadding="0" cellspacing="0">
+    				<tr><td>${HOST_STATUS_UP:COUNT_HOST_STATE} UP</td></tr>
+    				<tr><td>${HOST_STATUS_DOWN:COUNT_HOST_STATE} DOWN</td></tr>
+    				<tr><td>${HOST_STATUS_UNREACHABLE:COUNT_HOST_STATE} UNREACHABLE</td></tr>
+    			</table>
+    		]]>
+    	</host_status>
+
+    	<service_status>
+    		<![CDATA[
+    			<table border="0" cellpadding="0" cellspacing="0">
+    				<tr><td>OK</td></tr>
+    				<tr><td>WARNING</td></tr>
+    				<tr><td>CRITICAL</td></tr>
+    				<tr><td>UNKNOWN</td></tr>
+    			</table>
+    		]]>
+    	</service_status>
+
+    	<locations>
+    		<![CDATA[
+				<tr>
+					<td>${LOCATIONS:HOSTGROUP_ALIAS}</td>
+					<td>${host_status}</td>
+				</tr>
+			]]>
+    	</locations>
+
+    	<services>
+    		<![CDATA[
+				<tr>
+					<td>Service Check Execution Time:</td>
+					<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
+				</tr>
+			]]> 
+    	</services>
+
+    	<MAIN>
+	    	<![CDATA[
+				<table border="0" cellpadding="0" cellspacing="4">
+					<tr>
+						<td>Locations</td>
+						<td>Services</td>
+					</tr>
+					<tr>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								${locations:HOSTGROUP_NAME,company1}
+								${locations:HOSTGROUP_NAME,company2}
+							</table>
+						</td>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								$ {services:SERVICEGROUP_NAME,network}
+							</table>
+						</td>						
+					</tr>
+				</table>
+			]]>
+		</MAIN>
+    </template_code>
+</template>
