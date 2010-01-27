@@ -120,9 +120,9 @@
     	<host_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
-    				<tr><td>${HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
-    				<tr><td>${HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
-    				<tr><td>${HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
+    				<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
+    				<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
+    				<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
     			</table>
     		]]>
     	</host_status>
@@ -130,10 +130,10 @@
     	<service_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
-    				<tr><td>${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
-    				<tr><td>${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
-    				<tr><td>${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
-    				<tr><td>${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
+    				<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
+    				<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
+    				<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
+    				<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
     			</table>
     		]]>
     	</service_status>
@@ -151,8 +151,8 @@
 	    	<![CDATA[
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td>Locations</td>
-						<td>Services</td>
+						<td><b>Locations</b></td>
+						<td><b>Services</b></td>
 					</tr>
 					<tr>
 						<td>
