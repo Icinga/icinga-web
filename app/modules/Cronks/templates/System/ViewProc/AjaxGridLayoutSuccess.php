@@ -13,7 +13,7 @@
 		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
-		
+		MetaGrid.setParameters({storeDisableAutoload: true});
 		var grid = MetaGrid.createGrid();
 		
 		// Magick includes (Grid filters)
@@ -34,17 +34,19 @@
 				});
 			
 				if (bFilters == true) {
-				
-					IcingaGridFilterWindow.setGrid(grid);
-					IcingaGridFilterWindow.setFilterCfg( MetaGrid.getFilterCfg() );
+					
+					var fw = new IcingaGridFilterWindow();
+					
+					fw.setGrid(grid);
+					fw.setFilterCfg( MetaGrid.getFilterCfg() );
 				
 					// Distribute destroy events
 					grid.on('destroy', function() {
-						IcingaGridFilterWindow.destroyHandler();
+						fw.destroyHandler();
 					});
 					
 					grid.on('refresh', function() {
-						IcingaGridFilterWindow.destroyHandler();	
+						fw.destroyHandler();	
 					});
 					
 				
@@ -56,13 +58,13 @@
 								items: [{ 
 									text: '<?php echo $tm->_("Modify"); ?>', 
 									iconCls: 'silk-application-form',
-									handler: IcingaGridFilterWindow.startHandler,
+									handler: fw.startHandler,
 									scope: this
 								},{ 
 									text: '<?php echo $tm->_("Remove"); ?>', 
 									iconCls: 'silk-cancel',
 									handler: function(b, e) {
-										IcingaGridFilterWindow.removeFilters();
+										fw.removeFilters();
 									},
 									scope: this
 								}]
@@ -120,6 +122,14 @@
 		
 		//Insert the grid in the parent
 		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
+		
+		// Check if the store is loaded by whatever ...
+		// If no load with defautl params!
+		grid.on('render', function(g) {
+			if (this.storeIsLoaded() == false) {
+				this.initStore();
+			}
+		}, MetaGrid);
 		
 		// Add to parent component
 		cmp.insert(0, grid);
