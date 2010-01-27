@@ -60,6 +60,45 @@
 			</filter>
 		</datasource>
 
+		<datasource id="SERVICE_HOST_STATUS_UP">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>HOST_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CURRENT_STATE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="SERVICE_HOST_STATUS_DOWN">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>HOST_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CURRENT_STATE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="SERVICE_HOST_STATUS_UNREACHABLE">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>HOST_CURRENT_STATE</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CURRENT_STATE</column>
+					<value>2</value>
+				</columns>
+			</filter>
+		</datasource>
+
 		<datasource id="SERVICE_STATUS_OK">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
@@ -111,6 +150,98 @@
 				</columns>
 			</filter>
 		</datasource>
+
+		<datasource id="SERVICE_EXECUTION_TIME">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_EXECUTION_TIME_MIN,SERVICE_EXECUTION_TIME_MAX,SERVICE_EXECUTION_TIME_AVG</columns>
+			<function>
+				<name>round</name>
+				<param>3</param>
+			</function>
+		</datasource>
+
+		<datasource id="SERVICE_LATENCY">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_LATENCY_MIN,SERVICE_LATENCY_MAX,SERVICE_LATENCY_AVG</columns>
+			<function>
+				<name>round</name>
+				<param>3</param>
+			</function>
+		</datasource>
+
+		<datasource id="HOST_EXECUTION_TIME">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_EXECUTION_TIME_MIN,HOST_EXECUTION_TIME_MAX,HOST_EXECUTION_TIME_AVG</columns>
+			<function>
+				<name>round</name>
+				<param>3</param>
+			</function>
+		</datasource>
+
+		<datasource id="HOST_LATENCY">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_LATENCY_MIN,HOST_LATENCY_MAX,HOST_LATENCY_AVG</columns>
+			<function>
+				<name>round</name>
+				<param>3</param>
+			</function>
+		</datasource>
+
+		<datasource id="NUM_ACTIVE_HOST_CHECKS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CHECK_TYPE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="NUM_ACTIVE_SERVICE_CHECKS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CHECK_TYPE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="NUM_PASSIVE_HOST_CHECKS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CHECK_TYPE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+		</datasource>
+
+		<datasource id="NUM_PASSIVE_SERVICE_CHECKS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CHECK_TYPE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+		</datasource>
 	</datasources>
 
     <!--
@@ -120,21 +251,48 @@
     	<host_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
-    				<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
-    				<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
-    				<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
-    			</table>
+					<tr>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
+								<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
+								<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
+							</table>
+						</td>
+						<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
+								<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
+								<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
+								<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
+							</table>
+						</td>
+					</tr>
+				</table>
     		]]>
     	</host_status>
 
     	<service_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
-    				<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
-    				<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
-    				<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
-    				<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
-    			</table>
+    				<tr>
+    					<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr><td style="background-color:#00cc00;">${SERVICE_HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
+								<tr><td style="background-color:#cc0000;">${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
+								<tr><td style="background-color:#ff8000;">${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
+							</table>
+						</td>
+    					<td>
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
+								<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
+								<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
+								<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
+							</table>
+						</td>
+					</tr>
+				</table>
     		]]>
     	</service_status>
 
@@ -147,12 +305,44 @@
 			]]>
     	</locations>
 
+		<performance>
+			<![CDATA[
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>Service Check Execution Time:</td>
+						<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
+					</tr>
+					<tr>
+						<td>Service Check Latency:</td>
+						<td>${SERVICE_LATENCY:SERVICE_LATENCY_MIN} / ${SERVICE_LATENCY:SERVICE_LATENCY_MAX} / ${SERVICE_LATENCY:SERVICE_LATENCY_AVG} sec</td>
+					</tr>
+					<tr>
+						<td>Host Check Execution Time:</td>
+						<td>${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MIN} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MAX} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_AVG} sec</td>
+					</tr>
+					<tr>
+						<td>Host Check Latency:</td>
+						<td>${HOST_LATENCY:HOST_LATENCY_MIN} / ${HOST_LATENCY:HOST_LATENCY_MAX} / ${HOST_LATENCY:HOST_LATENCY_AVG} sec</td>
+					</tr>
+					<tr>
+						<td># Active Host / Service Checks:</td>
+						<td>${NUM_ACTIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_ACTIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
+					</tr>
+					<tr>
+						<td># Passive Host / Service Checks:</td>
+						<td>${NUM_PASSIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_PASSIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
+					</tr>
+				</table>
+			]]>
+		</performance>
+
     	<MAIN>
 	    	<![CDATA[
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td><b>Locations</b></td>
 						<td><b>Services</b></td>
+						<td><b>Monitoring Performance</b></td>
 					</tr>
 					<tr>
 						<td>
@@ -166,8 +356,12 @@
 								<tr>
 									<td>Network</td>
 									<td>${service_status:SERVICEGROUP_NAME,network}</td>
+								</tr>
 							</table>
-						</td>						
+						</td>
+						<td>
+							${performance}
+						</td>					
 					</tr>
 				</table>
 			]]>
