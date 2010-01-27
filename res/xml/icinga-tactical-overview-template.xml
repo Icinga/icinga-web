@@ -15,8 +15,7 @@
 		data sources 
 	-->
 	<datasources>
-		<datasource>
-			<id>SERVICE_EXECUTION_TIME</id>
+		<datasource id="SERVICE_EXECUTION_TIME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_EXECUTION_TIME_MIN,SERVICE_EXECUTION_TIME_MAX,SERVICE_EXECUTION_TIME_AVG</columns>
@@ -26,8 +25,7 @@
 			</function>
 		</datasource>
 
-		<datasource>
-			<id>SERVICE_LATENCY</id>
+		<datasource id="SERVICE_LATENCY">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_LATENCY_MIN,SERVICE_LATENCY_MAX,SERVICE_LATENCY_AVG</columns>
@@ -37,8 +35,7 @@
 			</function>
 		</datasource>
 
-		<datasource>
-			<id>HOST_EXECUTION_TIME</id>
+		<datasource id="HOST_EXECUTION_TIME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_EXECUTION_TIME_MIN,HOST_EXECUTION_TIME_MAX,HOST_EXECUTION_TIME_AVG</columns>
@@ -48,8 +45,7 @@
 			</function>
 		</datasource>
 
-		<datasource>
-			<id>HOST_LATENCY</id>
+		<datasource id="HOST_LATENCY">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_LATENCY_MIN,HOST_LATENCY_MAX,HOST_LATENCY_AVG</columns>
@@ -59,8 +55,7 @@
 			</function>
 		</datasource>
 
-		<datasource>
-			<id>NUM_ACTIVE_HOST_CHECKS</id>
+		<datasource id="NUM_ACTIVE_HOST_CHECKS">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -73,8 +68,7 @@
 			</filter>
 		</datasource>
 
-		<datasource>
-			<id>NUM_ACTIVE_SERVICE_CHECKS</id>
+		<datasource id="NUM_ACTIVE_SERVICE_CHECKS">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_OBJECT_ID</columns>
@@ -87,8 +81,7 @@
 			</filter>
 		</datasource>
 
-		<datasource>
-			<id>NUM_PASSIVE_HOST_CHECKS</id>
+		<datasource id="NUM_PASSIVE_HOST_CHECKS">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -101,8 +94,7 @@
 			</filter>
 		</datasource>
 
-		<datasource>
-			<id>NUM_PASSIVE_SERVICE_CHECKS</id>
+		<datasource id="NUM_PASSIVE_SERVICE_CHECKS">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
 			<columns>SERVICE_OBJECT_ID</columns>
@@ -115,8 +107,7 @@
 			</filter>
 		</datasource>
 
-		<datasource>
-			<id>HOST_NAMES</id>
+		<datasource id="HOST_NAMES">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_NAME,HOST_STATE</columns>
@@ -127,6 +118,14 @@
     	html template
     -->
     <template_code>
+    	<host_names>
+    		<![CDATA[
+				<br/>
+				${HOST_NAMES:HOST_NAME} | ${HOST_NAMES:HOST_STATE:IcingaTemplateDisplayMonitoring:hostStatus(__VALUE__,new AgaviParameterHolder(),new AgaviParameterHolder())}
+				<br/>
+			]]> 
+    	</host_names>
+
     	<MAIN>
 	    	<![CDATA[
 				<table border="0" cellpadding="0" cellspacing="4">
@@ -164,13 +163,8 @@
 						</td>
 					</tr>
 				</table>
-				<!--
-				${HOST_NAMES:repeat}
-					<br/>
-					${HOST_NAMES:HOST_NAME} | ${HOST_NAMES:HOST_STATE:IcingaTemplateDisplayMonitoring:hostStatus(__VALUE__,new AgaviParameterHolder(),new AgaviParameterHolder())}
-					<br/> 
-				${HOST_NAMES:repeat_end}
-				-->
+				${host_names:HOST_NAME,c1-db2}
+				${host_names:HOST_NAME,c1-db1}
 			]]>
 		</MAIN>
     </template_code>
