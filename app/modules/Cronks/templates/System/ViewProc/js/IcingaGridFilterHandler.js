@@ -257,7 +257,11 @@ var IcingaGridFilterWindow = function() {
 			Ext.apply(oGrid.getStore().baseParams, oOrgBaseParams);
 			Ext.apply(oGrid.getStore().baseParams, data);
 			
+//			console.log('APPLY');
+//			console.log(oGrid.getStore().baseParams);
+			
 			oGrid.getStore().reload();
+			oGrid.fireEvent('activate');
 			
 			oWindow().hide();
 		},

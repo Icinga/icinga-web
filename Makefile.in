@@ -19,6 +19,7 @@ WEB_GROUP=@web_group@
 SED=@SED@
 PHP=@PHP@
 PC=bin/phing -f etc/build.xml
+API_DIR=@icinga_api@
 INC_MAKE_FILES=./etc/make/files.mk
 
 none:
@@ -83,6 +84,7 @@ fix-priv:
 fix-libs:
 	rm -rf $(DESTDIR)$(prefix)/pub/js/ext3
 	ln -s $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
+	ln -s $(API_DIR) $(DESTDIR)$(prefix)/lib/icinga-api
 
 install: inc-install-files fix-priv fix-libs
 

@@ -95,6 +95,12 @@ AC_ARG_WITH([bin_group],
 	bin_group=bin
 )
 
+AC_ARG_WITH([icinga_api],
+	AS_HELP_STRING([--with-icinga-api=<string>], [Path to icinga-api]),
+	icinga_api=$withval,
+	icinga_api=/usr/local/icinga-api
+)
+
 AC_ARG_WITH([db_type],
 	AS_HELP_STRING([--with-db-type=<string>], [Type of dbms (default mysql)]),
 	db_type=$withval,
@@ -147,6 +153,8 @@ AC_SUBST(db_port)
 AC_SUBST(db_name)
 AC_SUBST(db_user)
 AC_SUBST(db_pass)
+
+AC_SUBST(icinga_api)
 
 AC_SUBST(CFLAGS)
 AC_SUBST(PHP)

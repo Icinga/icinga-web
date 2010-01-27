@@ -1,6 +1,7 @@
 
 
--- //DELETE FROM changelog WHERE change_number = 4 AND delta_set = 'Main';
+-- //
+DELETE FROM changelog WHERE change_number = 4 AND delta_set = 'Main';
 -- Fragment ends: 4 --
 
 

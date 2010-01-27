@@ -52,6 +52,7 @@
 				});
 				
 				var tabPanel = Ext.getCmp('cronk-tabs');
+				
 				if (tabPanel) {
 					tabPanel.add(panel);
 					tabPanel.setActiveTab(panel);
@@ -63,7 +64,7 @@
 	
 	// Our store to retrieve the cronks
 	var store = new Ext.data.JsonStore({
-	    url: '<?php echo $ro->gen('icinga.cronks.crlisting.json'); ?>',
+	    url: "<?php echo $ro->gen('icinga.cronks.crlisting.json'); ?>",
 	    root: 'cronks',
 	    fields: [
 	        'name', 'id', 'description', 'image', 'parameter'

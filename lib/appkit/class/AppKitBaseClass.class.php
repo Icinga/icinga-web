@@ -65,7 +65,7 @@ class AppKitException extends Exception {
 			parent::__construct( vsprintf($format, $args) );
 		}
 		else {
-			call_user_method_array('parent::__construct', &$this, $args);
+			call_user_method_array('parent::__construct', $this, $args);
 		}
 	}
 	

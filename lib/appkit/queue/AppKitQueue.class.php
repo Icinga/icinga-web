@@ -5,7 +5,7 @@ class AppKitQueue extends AppKitArrayContainer implements IteratorAggregate {
 	private $queue_objects = array ();
 	
 	public function __construct() {
-		$this->initArrayContainer(&$this->queue_objects);
+		$this->initArrayContainer($this->queue_objects);
 	}
 	
 	public function enqueue(AppKitQueueItem $item) {

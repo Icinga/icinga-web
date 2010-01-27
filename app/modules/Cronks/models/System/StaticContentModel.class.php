@@ -474,14 +474,6 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		return $content;
 	}
 
-	private function dumpToFile ($data, $file = '/tmp/debug.txt') {
-		file_put_contents(
-			$file,
-			(strftime('%y-%m-%d %H:%M:%S') . ' - ' . var_export($data, true) . "\n-------------------------------\n"),
-			FILE_APPEND
-		);
-	}
-
 }
 
 class Cronks_System_StaticContentModelException extends AppKitException {}
