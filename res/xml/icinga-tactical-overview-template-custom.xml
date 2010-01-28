@@ -253,14 +253,14 @@
     			<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>
-							<table border="0" cellpadding="0" cellspacing="0" style="filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
+							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
 								${if:${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP</td></tr>${/if}
 								${if:${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN</td></tr>${/if}
 								${if:${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE</td></tr>${/if}
 							</table>
 						</td>
 						<td>
-							<table border="0" cellpadding="0" cellspacing="0" style="filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
+							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
 								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK</td></tr>${/if}
 								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING</td></tr>${/if}
 								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL</td></tr>${/if}
@@ -277,14 +277,14 @@
     			<table border="0" cellpadding="0" cellspacing="0">
     				<tr>
     					<td>
-							<table border="0" cellpadding="0" cellspacing="0" style="filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
+							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
 								${if:${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP</td></tr>${/if}
 								${if:${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#cc0000;">${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN</td></tr>${/if}
 								${if:${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#ff8000;">${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE</td></tr>${/if}
 							</table>
 						</td>
     					<td>
-							<table border="0" cellpadding="0" cellspacing="0" style="filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
+							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
 								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK</td></tr>${/if}
 								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING</td></tr>${/if}
 								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL</td></tr>${/if}
