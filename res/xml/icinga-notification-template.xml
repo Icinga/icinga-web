@@ -158,7 +158,11 @@
             </display>
             
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
             
             <order>
@@ -184,7 +188,11 @@
             </display>
             
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
             
             <order>
@@ -216,7 +224,13 @@
             </display>
         	
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.servicestatus</parameter>
+                
+                <parameter name="no_operator">false</parameter>
             </filter>
             
             <order>

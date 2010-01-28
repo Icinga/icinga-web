@@ -82,10 +82,12 @@ var IcingaGridFilterWindow = function() {
 							})
 						}
 						
-						if (oGrid.filter_params) {
+						if (oGrid.filter_params && oCoPanel) {
 							Ext.iterate(oGrid.filter_params, function (key, val) {
+//								console.log(key + ": " + val);
 								key = key.replace(/^f\[|\]$/g, "");
 								var c = oCoPanel.findBy(function(ti) {
+									
 									if (ti.hiddenName == key || ti.name == key) {
 										return true;
 									}
@@ -269,7 +271,9 @@ var IcingaGridFilterWindow = function() {
 			oOrgBaseParams = oGrid.getStore().baseParams;
 			
 			oGrid.on('activate', function() {
-				oGrid.filter_params = getFormValues(false);
+				if (oCoPanel) {
+					oGrid.filter_params = getFormValues(false);
+				}
 				return true;
 			});
 			
