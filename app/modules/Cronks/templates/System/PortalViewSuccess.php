@@ -216,6 +216,7 @@
 				stateId: stateuid,
 				stateful: true,
 				
+				// @todo The collapse event does not work?
 				stateEvents: ['add', 'remove', 'titlechange', 'resize'],
 				
 				getState: function () {
@@ -234,7 +235,8 @@
 								
 								c.config.title = cronk.title;
 								c.config.height = cronk.getHeight();
-								
+								c.config.collapsed = cronk.collapsed;
+//								console.log("COL: " + cronk.collapsed);
 								d[cindex][cronk.getId()] = c;
 							}
 							
@@ -260,7 +262,7 @@
 								Ext.iterate(item, function (key, citem, o) {
 									var c = {}
 									Ext.apply(c, citem.config, citem.crconf);
-									
+//									console.log(c);
 									c.tools = tools;
 									
 									var cronk = AppKit.Ext.CronkMgr.create(c);
