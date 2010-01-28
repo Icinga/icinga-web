@@ -24,7 +24,7 @@
 		<datasource id="HOST_STATUS_UP">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_CURRENT_STATE</columns>
+			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -37,7 +37,7 @@
 		<datasource id="HOST_STATUS_DOWN">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_CURRENT_STATE</columns>
+			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -50,7 +50,7 @@
 		<datasource id="HOST_STATUS_UNREACHABLE">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_CURRENT_STATE</columns>
+			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -63,7 +63,7 @@
 		<datasource id="SERVICE_HOST_STATUS_UP">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>HOST_CURRENT_STATE</columns>
+			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -76,7 +76,7 @@
 		<datasource id="SERVICE_HOST_STATUS_DOWN">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>HOST_CURRENT_STATE</columns>
+			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -89,7 +89,7 @@
 		<datasource id="SERVICE_HOST_STATUS_UNREACHABLE">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>HOST_CURRENT_STATE</columns>
+			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -102,7 +102,7 @@
 		<datasource id="SERVICE_STATUS_OK">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_CURRENT_STATE</columns>
+			<columns>SERVICE_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -115,7 +115,7 @@
 		<datasource id="SERVICE_STATUS_WARNING">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_CURRENT_STATE</columns>
+			<columns>SERVICE_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -128,7 +128,7 @@
 		<datasource id="SERVICE_STATUS_CRITICAL">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_CURRENT_STATE</columns>
+			<columns>SERVICE_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -141,7 +141,7 @@
 		<datasource id="SERVICE_STATUS_UNKNOWN">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_CURRENT_STATE</columns>
+			<columns>SERVICE_OBJECT_ID</columns>
 			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
 			<filter>
 				<columns>
@@ -254,17 +254,17 @@
 					<tr>
 						<td>
 							<table border="0" cellpadding="0" cellspacing="0">
-								<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
-								<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
-								<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
+								<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP</td></tr>
+								<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN</td></tr>
+								<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE</td></tr>
 							</table>
 						</td>
 						<td>
 							<table border="0" cellpadding="0" cellspacing="0">
-								<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
-								<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
-								<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
-								<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
+								<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK</td></tr>
+								<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING</td></tr>
+								<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL</td></tr>
+								<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN</td></tr>
 							</table>
 						</td>
 					</tr>
@@ -278,17 +278,17 @@
     				<tr>
     					<td>
 							<table border="0" cellpadding="0" cellspacing="0">
-								<tr><td style="background-color:#00cc00;">${SERVICE_HOST_STATUS_UP:COUNT_HOST_CURRENT_STATE} UP</td></tr>
-								<tr><td style="background-color:#cc0000;">${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_CURRENT_STATE} DOWN</td></tr>
-								<tr><td style="background-color:#ff8000;">${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_CURRENT_STATE} UNREACHABLE</td></tr>
+								<tr><td style="background-color:#00cc00;">${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP</td></tr>
+								<tr><td style="background-color:#cc0000;">${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN</td></tr>
+								<tr><td style="background-color:#ff8000;">${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE</td></tr>
 							</table>
 						</td>
     					<td>
 							<table border="0" cellpadding="0" cellspacing="0">
-								<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_CURRENT_STATE} OK</td></tr>
-								<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_CURRENT_STATE} WARNING</td></tr>
-								<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_CURRENT_STATE} CRITICAL</td></tr>
-								<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_CURRENT_STATE} UNKNOWN</td></tr>
+								<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK</td></tr>
+								<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING</td></tr>
+								<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL</td></tr>
+								<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN</td></tr>
 							</table>
 						</td>
 					</tr>
@@ -349,13 +349,17 @@
 							<table border="0" cellpadding="0" cellspacing="0">
 								${locations:HOSTGROUP_NAME,company1}
 								${locations:HOSTGROUP_NAME,company2}
+								${locations:HOSTGROUP_NAME,web_servers}
+								${locations:HOSTGROUP_NAME,mail_servers}
 							</table>
 						</td>
 						<td>
 							<table border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td>Network</td>
-									<td>${service_status:SERVICEGROUP_NAME,network}</td>
+								<tr><td>Local</td><td>${service_status:SERVICEGROUP_NAME,local}</td></tr>
+								<tr><td>Network</td><td>${service_status:SERVICEGROUP_NAME,network}</td></tr>
+								<tr><td>Database</td><td>${service_status:SERVICEGROUP_NAME,database}</td></tr>
+								<tr><td>Web</td><td>${service_status:SERVICEGROUP_NAME,web}</td></tr>
+								<tr><td>Mail</td><td>${service_status:SERVICEGROUP_NAME,mail}</td></tr>
 								</tr>
 							</table>
 						</td>
