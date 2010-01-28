@@ -331,5 +331,8 @@ table.icinga-attribute-table td.val {
 	border: 1px #00cc00 solid;
 }
 
-
+/** Static content container **/
+div.static-content-container {
+	font-size: 10pt;	
+}
 /* EOF */
