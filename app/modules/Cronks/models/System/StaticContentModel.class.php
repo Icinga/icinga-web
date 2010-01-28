@@ -357,11 +357,14 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 		$content = $this->xmlData['template_code'][$tplId];
 
+		// process if-statements
+		$content = $this->processIfStatements($tplId, $content, $filter);
+
 		// fetch remaining variables from template and call substitution routine
 		// for variables
 		$variablePattern = '/\${([A-Z0-9_\-]+):([A-Z_]+)(:[^}]+)?}/s';
 		preg_match_all($variablePattern, $content, $templateVariables);
-		$content = $this->substituteTemplateVariables($tplId, $templateVariables, false, $filter);
+		$content = $this->substituteTemplateVariables($tplId, $templateVariables, $content, $filter);
 
 		// fetch remaining variables from template and call substitution routine
 		// for processed content
@@ -371,9 +374,6 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		for ($x = 0; $x < $numMatches; $x++) {
 			if (!empty($templateVariables[2][$x])) {
 				$currentFilter = trim($templateVariables[2][$x]);
-				if ($tplId != 'MAIN') {
-					
-				}
 			} else {
 				$currentFilter = false;
 			}
@@ -393,6 +393,56 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		}
 
 		$this->content[$tplId]['content'] .= $content;
+	}
+
+	/**
+	 * generates content from template and fetched data
+	 * @param	string			$tplId				id of content template
+	 * @param	string			$content			content to process
+	 * @param	string			$filter				additional filter data for query
+	 * @return	string								processed content
+	 * @author	Christian Doebler <christian.doebler@netways.de>
+	 */
+	private function processIfStatements ($tplId, $content, $filter = false) {
+		while (($start = strpos($content, '${if:')) !== false) {
+			if (($end = strpos($content, '${/if}', $start)) !== false) {
+				$length = $end - $start;
+				$workStr = substr($content, $start, $length);
+				$replaceStr = $workStr . substr($content, $end, 6);
+
+				// fetch definition of if-statement
+				$openBraces = 1;
+				$pos = 5;
+				$replaceLength = strlen($workStr);
+				while ($openBraces) {
+					$nextOpen = strpos($workStr, '${', $pos);
+					$nextClose = strpos($workStr, '}', $pos);
+					if ($nextOpen < $nextClose) {
+						$openBraces++;
+						$pos = $nextOpen + 1;
+					} else {
+						$openBraces--;
+						$pos = $nextClose + 1;
+					}
+				}
+				$ifStmtStr = substr($workStr, 5, $pos - 6);
+
+				// substitute data of statement
+				$variablePattern = '/\${([A-Z0-9_\-]+):([A-Z_]+)(:[^}]+)?}/s';
+				preg_match_all($variablePattern, $content, $templateVariables);
+				$ifStmtStr = $this->substituteTemplateVariables($tplId, $templateVariables, $ifStmtStr, $filter);
+
+				// determine statement value
+				$stmtValue = false;
+				eval("\$stmtValue = ($ifStmtStr);");
+
+				// create new content
+				$newStr = ($stmtValue) ? substr($workStr, $pos) : null;
+				$content = str_replace($replaceStr, $newStr, $content);
+			}
+		}
+
+		return $content;
 	}
 
 	/**
