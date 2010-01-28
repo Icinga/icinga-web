@@ -31,8 +31,11 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 			--with-web-group=www-data \
 			--with-db-user=my_icinga_user \
 			--with-db-pass=XXXXX 
+			--with-icinga-api=/usr/local/icinga-api
 		
 		If the command runs without errors you will have a ready configured icinga-web.
+		
+		Keep in mind that you configure the icinga-web database not the icinga!
 		
 	2.3) The make command and its targets
 	
@@ -81,7 +84,77 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 	Furthermore you should take a look to '/path/to/pub/.htaccess'. Apache's mod_rewrite needs a correct
 	definition of 'RewriteBase' to operate in subdirectories. Please change this to your webpath (NOT THE PHYSICAL ONE) .
 
-5) Running the interface and being glad
+5) Web configuration
+
+	Keep a look into app/config/icinga.xml for the IcingaApi factories: IcingaData and IcingaCommand:
+	
+		<!-- icinga-api data interface -->
+		<parameter name="IcingaData">
+			<parameter name="class">IcingaData</parameter>
+			<parameter name="file">%core.root_dir%/app/lib/icinga/factory/IcingaData.class.php</parameter>
+			
+			<parameter name="requiredClasses">
+				<!-- NONE -->
+			</parameter>
+			
+			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
+			
+			<!--
+				API connection type
+			-->
+			<parameter name="api_type">IcingaApi::CONNECTION_IDO</parameter>
+			
+			<parameter name="config_type">mysql</parameter>
+			<parameter name="config_host">127.0.0.1</parameter>
+
+			
+			<parameter name="config_port">3306</parameter>
+			<parameter name="config_database">icinga</parameter>
+			
+			<parameter name="config_user">icinga</parameter>
+			<parameter name="config_password">icinga</parameter>
+			
+			<parameter name="config_table_prefix">icinga_</parameter>
+		</parameter>
+		
+		<parameter name="IcingaCommand">
+			<parameter name="class">IcingaCommand</parameter>
+			<parameter name="file">%core.root_dir%/app/lib/icinga/factory/IcingaCommand.class.php</parameter>
+			
+			<parameter name="requiredClasses">
+				<!-- NONE -->
+			</parameter>
+			
+			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
+			
+			<parameter name="interfaces">
+			
+				<parameter name="pipe1">
+					<parameter name="enabled">true</parameter>
+					<parameter name="type">IcingaApi::COMMAND_PIPE</parameter>
+					
+					<parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
+				</parameter>
+			
+				<parameter name="ssh1">
+					<parameter name="enabled">false</parameter>
+					<parameter name="type">IcingaApi::COMMAND_SSH</parameter>
+					
+					<parameter name="ssh_bin">/usr/bin/ssh</parameter>
+					<parameter name="ssh_user">icinga</parameter>
+					<parameter name="ssh_host">127.0.0.15</parameter>
+					<parameter name="ssh_port">22</parameter>
+					<parameter name="ssh_timeout">20</parameter>
+					<parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
+				</parameter>
+			</parameter>
+			
+			
+		</parameter>
+		
+	After change the files in the config direcotry, clear the cache: 'rm -rf app/cache/config/*.php'
+
+6) Running the interface and being glad
 
 	After a restart of apache you will be able to visit the interface in your browser by using the
 	URL of the recently set up web interface like http://localhost/icinga-web.
