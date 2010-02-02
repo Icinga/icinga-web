@@ -103,7 +103,7 @@ class IcingaTemplateWorker {
 					
 					// Try to determine the fields
 					$row = $result->getRow();
-
+					
 					if ($row !== false) {
 						$fields = array_keys($row);
 						$field = array_shift($fields);
@@ -305,9 +305,6 @@ class IcingaTemplateWorker {
 			}
 			elseif ($params->getParameter('limit', null)) {
 				$search->setSearchLimit(0, $params->getParameter('limit'));
-			}
-			else {
-				$search->setSearchLimit(0, 1000);
 			}
 			
 			$this->api_search =& $search;

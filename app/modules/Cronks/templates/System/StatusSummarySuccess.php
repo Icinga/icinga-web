@@ -78,7 +78,7 @@ var dummyCronkDisplayStateSummary = function () {
 		init : function (outputType) {
 			this.outputType = outputType;
 			this.createPanel();
-			Ext.getCmp("view-container").doLayout();
+//			Ext.getCmp("view-container").doLayout();
 			Ext.TaskMgr.start({
 				run: this.refresh,
 				interval: 300 * 1000
@@ -115,17 +115,17 @@ var dummyCronkDisplayStateSummary = function () {
 							border: false,
 							cls: "no-background"
 						},
-						height: 60,
+						height: 80,
 						items: [
 							{
 								itemId: this.panelDefs.host.itemId,
-								title: ((this.panelDefs.host.title !== false) ? this.panelDefs.host.title : false),
-								style: {
-									marginRight: "10px"
-								}
+								title: ((this.panelDefs.host.title !== false) ? this.panelDefs.host.title : false)
 							},{
 								itemId: this.panelDefs.service.itemId,
-								title: ((this.panelDefs.service.title !== false) ? this.panelDefs.service.title : false)
+								title: ((this.panelDefs.service.title !== false) ? this.panelDefs.service.title : false),
+								style: {
+									marginLeft: "10px"
+								}
 							}
 						]
 					});
@@ -137,7 +137,7 @@ var dummyCronkDisplayStateSummary = function () {
 							border: false,
 							cls: "no-background"
 						},
-						height: 60,
+						height: 80,
 						items: [
 							{
 								itemId: this.panelDefs.chart.itemId,
@@ -244,6 +244,7 @@ var dummyCronkDisplayStateSummary = function () {
 							parentid: id,
 							title: record.data.type_name + " - " + record.data.state_name,
 							crname: "gridProc",
+							layout: 'fit',
 							closable: true,
 							params: params
 						};
@@ -294,7 +295,8 @@ var dummyCronkDisplayStateSummary = function () {
 			var currentItem = {
 				id: itemClassId,
 				cls: itemClassId,
-				style: "width:" + parseInt((graphElement.status_count / numObjects) * containerWidth) + "px;",
+				width: parseInt((graphElement.status_count / numObjects) * containerWidth),
+//				style: "width:" + parseInt((graphElement.status_count / numObjects) * containerWidth) + "px;",
 				plugins: [
 					new Ext.DomObserver({
 						mouseover: function (event, component) {
@@ -358,7 +360,7 @@ var dummyCronkDisplayStateSummary = function () {
 //				var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
 				// Fix width, because the component is not really there if we
 				// need a parent width . I think 100 pixels are large enough.
-				var containerWidth = 100;
+				var containerWidth = 140;
 				
 				var containerItems = [];
 
@@ -372,6 +374,9 @@ var dummyCronkDisplayStateSummary = function () {
 					cls: containerIdClass,
 					autoEl: "div", 
 					layout: "column",
+					style: {
+						marginLeft: "20px"
+					},
 					defaults: {
 						xtype: "container",
 						autoEl: "div",

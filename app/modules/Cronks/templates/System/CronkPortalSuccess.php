@@ -244,19 +244,19 @@ var container = new Ext.Panel({
 			xtype: 'panel'
 		},
 		
-		style: 'height: 60px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px',
+		style: 'height: 80px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px',
 		
 		layout: 'column',
 		
 		items: [{
 			id: cronk_search_id,
-			columnWidth: .20	
+			width: 260
 		}, {
-			columnWidth: .20,
-			id: cronk_status_summary_chart_id
+			id: cronk_status_summary_chart_id,
+			width: 380
 		}, {
-			columnWidth: .30,
-			id: cronk_status_summary_id	
+			id: cronk_status_summary_id,
+			width: 200
 		}]
 		
 	}, { // -- SOUTH

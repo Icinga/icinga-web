@@ -74,15 +74,24 @@ xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
 
 	var p = new Ext.Panel({
 		applyTo: 'menuTopTarget',
-		layout: 'column',
+		layout: 'fit',
 		border: false,
 		
 		defaults: {
 			border: false
 		}
 	});
+	
+	var c = p.add({
+		border: false,
+		layout: 'column',
+		monitorResize: true,
+		defaults: {
+			border: false
+		}
+	});
 
-	p.add({
+	c.add({
 		xtype: 'toolbar',
 		defaults: {
 			listeners: {
@@ -91,22 +100,22 @@ xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
 				}
 			}
 		},
-		columnWidth: .7,
+		columnWidth: 1,
 		cls: 'x-icinga-top-toolbar',
 		items: <?php echo $d?>
 	});
 
-	p.add({
+	c.add({
 		xtype: 'panel',
-		columnWidth: .2,
+		width: 160,
 		html: xh,
 		baseCls: 'x-icinga-top-right',
 		height: 31
 	});
 
-	p.add({
+	c.add({
 		xtype: 'panel',
-		columnWidth: .1,
+		width: 120,
 		height: 31,
 		baseCls: 'x-icinga-top-right-logo'
 	});
