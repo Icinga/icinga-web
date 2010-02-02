@@ -232,37 +232,38 @@ var container = new Ext.Panel({
 	layout: 'border',
 	border: false,
 	monitorResize: true,
-	height: 776,
-	
 	id: 'view-container', // OUT CENTER COMPONENT!!!!!
 	
 	items: [{	// -- NORTH
 		region: 'north',
 		id: 'north-frame',
-		layout: 'column',
 		border: false,
 		
 		defaults: {
-			layout: 'fit',
-			border: false
+			border: false,
+			xtype: 'panel'
 		},
-				
+		
+		style: 'height: 60px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px',
+		
+		layout: 'column',
+		
 		items: [{
-			columnWidth: .33,
-			id: cronk_search_id
-		}, {
-			columnWidth: .46,
-			id: cronk_status_summary_chart_id
+			id: cronk_search_id,
+			columnWidth: .20	
 		}, {
 			columnWidth: .20,
-			id: cronk_status_summary_id
+			id: cronk_status_summary_chart_id
+		}, {
+			columnWidth: .30,
+			id: cronk_status_summary_id	
 		}]
+		
 	}, { // -- SOUTH
 		region: 'south',
 		title: '<?php echo $tm->_("Log"); ?>',
 		collapsible: true,
 		id: 'south-frame',
-		layout: 'fit',
 		height: 150,
 		
 		stateful: true,
@@ -273,7 +274,6 @@ var container = new Ext.Panel({
 		}
 	}, { // -- CENTER
 		region: 'center',
-		// title: 'MyView',
         margins: '0 0 10 5',
         cls: 'cronk-center-content',
         id: 'center-frame',
@@ -301,15 +301,17 @@ var container = new Ext.Panel({
         defaults: {
 			border: false,
 			autoScroll: true
-        },
-        
-        items: [{
-            title: '<?php echo $tm->_("Settings"); ?>',
-            html: 'Some settings in here.'
-        }]
+        }
 
 	}]
 });
+
+container.on('afterrender', function() {
+	container.setHeight(Ext.lib.Dom.getViewHeight() - 65);
+}, container, { single: true });
+
+// Render the container
+container.render("<?php echo $parentid; ?>");
 
 // Resize the container on windowResize
 Ext.EventManager.onWindowResize(function(w,h) {
@@ -318,10 +320,9 @@ Ext.EventManager.onWindowResize(function(w,h) {
 }, container);
 
 // Set initial size
-container.setHeight(Ext.lib.Dom.getViewHeight()-65);
-
-// Render the container
-container.render("<?php echo $parentid; ?>");
+(function() {
+	container.doLayout();
+}).defer(3000);
 
 
 //// Adding the first cronk (say hello here)
@@ -345,23 +346,18 @@ if ((west = Ext.getCmp('west-frame'))) {
 	
 	west.add(cList);
 	west.doLayout();
-	
 	west.getLayout().setActiveItem(cList);
 }
 
-
 // Search component
-if ((search = Ext.getCmp(cronk_search_id))) {
-	
+if ((search = Ext.getCmp(cronk_search_id))) {	
 	var cSearch = AppKit.Ext.CronkMgr.create({
 		parentid: cronk_search_id,
-		crname: 'icingaSearch',
-		layout: 'fit',
-		height: 100
+		crname: 'icingaSearch'
 	});
-	
-	search.add(cSearch);
-	cSearch.doLayout();
+
+	search.add(cSearch);	
+	search.doLayout();
 }
 
 // Status-summary component
@@ -370,7 +366,6 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 	var cStatusSummary = AppKit.Ext.CronkMgr.create({
 		parentid: cronk_status_summary_id,
 		crname: 'icingaStatusSummary',
-		height: 100,
 		params: {otype: "text"}
 	});
 
@@ -379,17 +374,16 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 }
 
 if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
-
-	var cStatusSummary = AppKit.Ext.CronkMgr.create({
+	var cStatusSummaryChart = AppKit.Ext.CronkMgr.create({
 		parentid: cronk_status_summary_chart_id ,
 		crname: 'icingaStatusSummary',
-		height: 100,
 		params: {otype: "chart"}
 	});
-
-	status_summary_chart.add(cStatusSummary);
-	cStatusSummary.doLayout();
+	
+	status_summary_chart.add(cStatusSummaryChart);
+	status_summary_chart.doLayout();
 }
+
 
 // LOG bottom component
 if ((south = Ext.getCmp('south-frame'))) {
@@ -437,8 +431,6 @@ if ((south = Ext.getCmp('south-frame'))) {
 
 // Inform about layout changes
 container.doLayout();
-
-
 
 
 });

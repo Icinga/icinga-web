@@ -90,7 +90,6 @@ class IcingaTemplateWorker {
 	 * @return integer
 	 */
 	public function countResults() {
-		
 		$params = $this->getTemplate()->getSectionParams('datasource');
 		
 		if ($params->getParameter('countmode', null) !== 'simple') {
@@ -145,7 +144,6 @@ class IcingaTemplateWorker {
 	private function getDataAsArray() {
 		if ($this->api_search !== null) {
 			$data = array ();
-			
 			foreach ($this->api_search->fetch() as $result) {
 				
 				if ($this->result_count === null) {
@@ -157,7 +155,6 @@ class IcingaTemplateWorker {
 				/*
 				 * @todo add additional fields and content here
 				 */
-				
 				$data[] = $tmp;
 			}
 			
@@ -308,6 +305,9 @@ class IcingaTemplateWorker {
 			}
 			elseif ($params->getParameter('limit', null)) {
 				$search->setSearchLimit(0, $params->getParameter('limit'));
+			}
+			else {
+				$search->setSearchLimit(0, 1000);
 			}
 			
 			$this->api_search =& $search;

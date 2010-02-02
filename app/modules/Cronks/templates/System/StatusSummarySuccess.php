@@ -115,6 +115,7 @@ var dummyCronkDisplayStateSummary = function () {
 							border: false,
 							cls: "no-background"
 						},
+						height: 60,
 						items: [
 							{
 								itemId: this.panelDefs.host.itemId,
@@ -136,6 +137,7 @@ var dummyCronkDisplayStateSummary = function () {
 							border: false,
 							cls: "no-background"
 						},
+						height: 60,
 						items: [
 							{
 								itemId: this.panelDefs.chart.itemId,
@@ -145,6 +147,7 @@ var dummyCronkDisplayStateSummary = function () {
 					});
 					break;
 			}
+			
 			this.cmp.add(this.panel);
 		},
 	
@@ -352,7 +355,11 @@ var dummyCronkDisplayStateSummary = function () {
 			}
 
 			if (this.chartData[containerIdClass] == false) {
-				var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
+//				var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
+				// Fix width, because the component is not really there if we
+				// need a parent width . I think 100 pixels are large enough.
+				var containerWidth = 100;
+				
 				var containerItems = [];
 
 				for (var x = 0; x < numElements; x++) {

@@ -65,7 +65,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		
 		$worker->buildAll();
 
-		// var_dump($worker);
+		// var_dump($worker->fetchDataArray());
 		
 		$data['resultRows'] = $worker->fetchDataArray();
 		$data['resultCount'] = $worker->countResults();

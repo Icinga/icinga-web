@@ -3,7 +3,7 @@
 ?>
 <script type="text/javascript">
 
-(function() {
+//(function() {
 
 	var oid = '<?php echo $parentid; ?>';
 	var coParent = Ext.getCmp(oid);
@@ -390,23 +390,15 @@
 	oSearchHandler.oTextField = oTextField;
 	
 	var oSearch = new Ext.FormPanel({
-		labelWidth: 80,
 		frame: false,
-		labelWidth: 1,
+		labelWidth: 0,
 		border: false,
 		defaultType: 'textfield',
-		
-		style: {
-			padding: '2px 2px 2px 2px'
-		},
-		
+		height: 60,
 		items: [oTextField]
 	});
 	
 	coParent.add(oSearch);
-	
-	Ext.getCmp('north-frame').doLayout();
-
-})();
+//})();
 
 </script>
