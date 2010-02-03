@@ -78,7 +78,6 @@ var dummyCronkDisplayStateSummary = function () {
 		init : function (outputType) {
 			this.outputType = outputType;
 			this.createPanel();
-//			Ext.getCmp("view-container").doLayout();
 			Ext.TaskMgr.start({
 				run: this.refresh,
 				interval: 300 * 1000
@@ -104,6 +103,8 @@ var dummyCronkDisplayStateSummary = function () {
 					CronkDisplayStateSummary.showChart("service");
 					break;
 			}
+			
+			CronkDisplayStateSummary.cmp.doLayout();
 		},
 	
 		createPanel : function () {

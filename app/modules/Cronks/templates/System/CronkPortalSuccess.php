@@ -6,7 +6,7 @@
 </div>
 <script type="text/javascript">
 
-Ext.onReady(function(){
+Ext.onReady(function() {
 
 var TabContextMenu =  function() {
 	var ctxItem = null;
@@ -238,25 +238,22 @@ var container = new Ext.Panel({
 		region: 'north',
 		id: 'north-frame',
 		border: false,
-		
-		defaults: {
-			border: false,
-			xtype: 'panel'
-		},
-		
-		style: 'height: 80px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px',
-		
-		layout: 'column',
-		
+			
+		height: 80,
+        layout:'column',
+        autoScroll:true,
+        
 		items: [{
-			id: cronk_search_id,
-			width: 260
+			width: 260,
+			items: [{ id: cronk_search_id }]
 		}, {
-			id: cronk_status_summary_chart_id,
-			width: 380
+			width: 380,
+			bodyStyle: 'margin-left: 10px;',
+			items: [{ id: cronk_status_summary_chart_id }]
 		}, {
-			id: cronk_status_summary_id,
-			width: 200
+			width: 200,
+			bodyStyle: 'margin-left: 10px;',
+			items: [{ id: cronk_status_summary_id }]
 		}]
 		
 	}, { // -- SOUTH
@@ -431,7 +428,6 @@ if ((south = Ext.getCmp('south-frame'))) {
 
 // Inform about layout changes
 container.doLayout();
-
 
 });
 </script>
