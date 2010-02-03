@@ -136,6 +136,9 @@ class NsmUser extends BaseNsmUser implements AppKitUserPreferences
 		->execute();
 		
 		if ($res->count() == 1 && ($obj = $res->getFirst()) instanceof NsmUserPreference) {
+			
+//			var_dump($res->toArray(true));
+			
 			return $obj;
 		}
 		

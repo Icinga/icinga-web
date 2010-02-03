@@ -16,22 +16,28 @@ class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 	public function executeJavascript(AgaviRequestDataHolder $rd) {
 		
 		$data = array ();
+		$cdata = '';
 		
 		if ($this->getContext()->getUser()->isAuthenticated()) {
+			
+			$user = $this->getContext()->getUser();
+			
+			// To debug some session/cookie/user problems
+			$cdata .= sprintf('// User: %s (id=%d)', $user->getNsmUser()->user_name, $user->getNsmUser()->user_id). chr(10)
+			. sprintf('// Tstamp: %s', $this->getContext()->getTranslationManager()->_d(time())). chr(10)
+			. chr(10);
+			
 			$data = $this->getContext()->getUser()->getPrefVal(AppKitExtApplicationStateFilter::DATA_NAMESPACE, null, true);
 			
 			if ($data !== null) {
 				$data = unserialize(base64_decode($data));
 			}
-			else {
-				$data = array ();
-			}
 		}
 		
 		return sprintf(
-			'Ext.onReady(function() {'. "\n"
+			'%sExt.onReady(function() {'. "\n"
 			. "\t". 'AppKit.Ext.setAppState(%s);'. "\n"
-			. '});'. "\n", json_encode($data)
+			. '});'. "\n", $cdata, json_encode($data)
 		);
 		
 	}
