@@ -78,4 +78,33 @@
       * AC rewrites build.properties for phing
       * database.xml is now substituted by AC
       * Write some doc for the new install process
+     
+    * 2010-01-18
+      * Stateful framework is running
+      * Changed cookie encoding method to json
+      * Tabpanel is persistent
+      * Cookie write filter merges the data
+    
+    * 2010-01-21
+      * Static content (tactical overview)
+      * ExtJS persistent fixes
+      * Portal is persistent (column models)
+      * Portal columns determined when dragging over
+      
+    * 2010-01-22
+      * Tactical overview
+      * Portalcronks height persistent
+      * Async cronk creation (Render hidden, render, show)
+      
+    * 2010-01-28
+      * Tactical overview template engine (ready)
+      * Wrapped static content into a div
+      * Auto refresh grid panels (settings)
+      * Grid filters are persistent
+    
+    * 2010-02-03
+      * Default font style
+      * Head elements (still missing ???)
+      * Auth framework changed (Multiple, simultaneous)
+      * Checked persistent, user specific data
       
