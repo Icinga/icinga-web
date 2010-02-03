@@ -1,6 +1,6 @@
 <?php
 
-class AppKitAuthProviderLdap extends AppKitAuthProviderDatabase {
+class AppKitAuthProviderLdap extends AppKitAuthProvider {
 	
 	const TYPE_MSAD		= 1;
 	const TYPE_OPENLDAP	= 2;
@@ -24,18 +24,16 @@ class AppKitAuthProviderLdap extends AppKitAuthProviderDatabase {
 	 * (non-PHPdoc)
 	 * @see lib/appkit/class/AppKitFactory#initializeFactory()
 	 */
-	public function initializeFactory(array $parameters=array ()) {
-		parent::initializeFactory($parameters);
+	public function initializeAuthProvider(array $parameters=array ()) {
+		parent::initializeAuthProvider($parameters);
 		
 		// Morph the ldap_type into a constant value
 		$this->setParameter('ldap_type', AppKit::getConstant($this->getParameter('ldap_type')));
 		
 		// Try to setup some basics!
 		$this->initLdap();
-	}
-	
-	public function shutdownFactory() {
-		$this->ldap->doShutdown();
+		
+		return true;
 	}
 	
 	/**
@@ -88,6 +86,7 @@ class AppKitAuthProviderLdap extends AppKitAuthProviderDatabase {
 		$result = $ldap->doQuery($query);
 		
 		if ($ldap->resultCount($result) == 1 && ($ldap_user = $ldap->resultParse($result, $ldap_attributes))) {
+			
 			return $ldap_user;
 		}
 		
@@ -99,11 +98,9 @@ class AppKitAuthProviderLdap extends AppKitAuthProviderDatabase {
 	 * @see lib/appkit/auth/AppKitAuthProvider#isUserAvailable()
 	 */
 	public function isUserAvailable($username) {		
-		if ( ($ldap_user = $this->getLdapUser($username)) ) {
+		/* if ( ($ldap_user = $this->getLdapUser($username)) ) {
 			$ldap_username = $ldap_user[ $this->getUsernameAttribute() ];
-			// Load the user from database
-			return parent::isUserAvailable($ldap_username);
-		}
+		} */
 		
 		return null;
 	}
@@ -112,7 +109,9 @@ class AppKitAuthProviderLdap extends AppKitAuthProviderDatabase {
 	 * (non-PHPdoc)
 	 * @see lib/appkit/auth/AppKitAuthProvider#isAuthenticated()
 	 */
-	public function isAuthenticated($username, $password) {
+	public function isAuthenticated(NsmUser $user, $password) {
+		
+		$username = $user->user_name;
 		
 		if ( ($ldap_user = $this->getLdapUser($username)) ) {
 			

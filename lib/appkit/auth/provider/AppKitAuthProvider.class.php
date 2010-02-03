@@ -1,6 +1,14 @@
 <?php
 
-abstract class AppKitAuthProvider extends AppKitFactory {
+abstract class AppKitAuthProvider extends AgaviParameterHolder {
+	
+	public function __construct() {
+		
+	}
+	
+	public function initializeAuthProvider (array $parameters = array ()) {
+		$this->setParameters($parameters);
+	}
 	
 	/**
 	 * Returns a NsmUser record or null 
@@ -15,7 +23,7 @@ abstract class AppKitAuthProvider extends AppKitFactory {
 	 * @param string $passwd
 	 * @return null
 	 */
-	public abstract function isAuthenticated($user, $passwd);
+	public abstract function isAuthenticated(NsmUser $user, $password);
 	
 }
 

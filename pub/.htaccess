@@ -48,11 +48,4 @@ Allow from all
 	AcceptPathInfo On
 </IfDefine>
 
-#<IfModule mod_auth_basic.c>
-#	AuthType Basic
-#	AuthName "My http basic auth realm"
-#	AuthUserFile /path/to/my/htusers
-#	require valid-user
-#</IfModule>
-
 # [EOF]

@@ -228,10 +228,59 @@
 		</parameter>
 	
 		<!-- GLOBAL AUTH PROVIDER -->
-		<parameter name="AuthProvider">
+		<parameter name="AuthDispatcher">
+		
+			<parameter name="class">AppKitAuthDispatcher</parameter>
+			<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthDispatcher.class.php</parameter>
+			
+			<!-- 
+				Authentification chain
+				* You can use multiple provider, to authenticate the users
+			-->
+			<parameter name="provider">
+				
+				<!--  <parameter name="ldap-primary">
+					<parameter name="class">AppKitAuthProviderLdap</parameter>
+					
+					<parameter name="enabled">false</parameter>
+					
+					<parameter name="ldap_dsn">ldap://ldap1.icinga.org/</parameter>
+				 	<parameter name="ldap_basedn">DC=int,DC=icinga,DC=org</parameter>
+				 	<parameter name="ldap_domain">INT.ICINGA.ORG</parameter>
+				 	<parameter name="ldap_binddn">service@int.icinga.org</parameter>
+				 	<parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></parameter>
+				 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_MSAD</parameter>
+				 	<parameter name="ldap_filter_user"><![CDATA[(&(SAMAccountName=__USERNAME__))]]></parameter>
+				</parameter> -->
+				
+				<!-- <parameter name="openldap-primary">
+					<parameter name="class">AppKitAuthProviderLdap</parameter>
+					
+					<parameter name="enabled">false</parameter>
+					
+					<parameter name="ldap_dsn">ldap://secldap.icinga.org/</parameter>
+				 	<parameter name="ldap_basedn">DC=icinga,DC=org</parameter>
+				 	<parameter name="ldap_domain">icinga.org</parameter>
+				 	<parameter name="ldap_binddn">cn=serviceuser,dc=icinga,dc=org</parameter>
+				 	<parameter name="ldap_bindpw"><![CDATA[XXXXXXXX]]></parameter>
+				 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_OPENLDAP</parameter>
+				 	<parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></parameter>
+				</parameter> -->
+				
+				<!-- 
+					Default provider
+					* Checks passwords against the database
+				-->
+				<parameter name="internal">
+					<parameter name="class">AppKitAuthProviderDatabase</parameter>
+					<parameter name="enabled">true</parameter>
+				</parameter>
+				
+			</parameter>
+		
 		<!-- Authenticate with Doctrine -->
-			<parameter name="class">AppKitAuthProviderDatabase</parameter>
-			<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderDatabase.class.php</parameter>
+		<!-- <parameter name="class">AppKitAuthProviderDatabase</parameter>
+			<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderDatabase.class.php</parameter> -->
 		 
 		 <!-- Authentificate against ldap
 		 	<parameter name="class">AppKitAuthProviderLdap</parameter>
@@ -252,7 +301,8 @@
 		  -->
 		  
 			<parameter name="requiredClasses">
-				<parameter name="AppKitAuthProvider">%core.root_dir%/lib/appkit/auth/AppKitAuthProvider.class.php</parameter>
+				<parameter name="AppKitEventHandlerInterface">%core.root_dir%/lib/appkit/event/AppKitEventHandlerInterface.interface.php</parameter>
+				<parameter name="AppKitEventDispatcher">%core.root_dir%/lib/appkit/event/AppKitEventDispatcher.class.php</parameter>
 			</parameter>
 		</parameter>
 		

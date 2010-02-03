@@ -19,18 +19,6 @@ class AppKitAuthProviderDatabase extends AppKitAuthProvider {
 	 * @see lib/appkit/auth/AppKitAuthProvider#isUserAvailable()
 	 */
 	public function isUserAvailable($username) {
-		
-		if (!$username || !strlen($username)>0) return null;
-		
-		$res = Doctrine_Query::create()
-		->from('NsmUser')
-		->andWhere('user_disabled=? and user_name=?', array(false, $username))
-		->execute();
-		
-		if (($user = $res->getFirst()) instanceof NsmUser) {
-			return $user;
-		}
-		
 		return null;
 	}
 	
@@ -38,8 +26,8 @@ class AppKitAuthProviderDatabase extends AppKitAuthProvider {
 	 * (non-PHPdoc)
 	 * @see lib/appkit/auth/AppKitAuthProvider#isAuthenticated()
 	 */
-	public function isAuthenticated($username, $password) {
-		if (($user = $this->isUserAvailable($username)) !== null) {
+	public function isAuthenticated(NsmUser $user, $password) {
+		if ($user instanceof NsmUser && $user->user_id > 0) {
 			$test_hash = hash_hmac(NsmUser::HASH_ALGO, $password, $user->user_salt);
 			if ($test_hash === $user->user_password) {
 				return true;

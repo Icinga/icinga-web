@@ -1,6 +1,6 @@
 <?php
 
-class AppKitAuthProviderHttpBasic extends AppKitAuthProviderDatabase {
+class AppKitAuthProviderHttpBasic extends AppKitAuthProvider {
 	
 	/**
 	 * (non-PHPdoc)
@@ -35,7 +35,7 @@ class AppKitAuthProviderHttpBasic extends AppKitAuthProviderDatabase {
 	 * @see lib/appkit/auth/AppKitAuthProvider#isUserAvailable()
 	 */
 	public function isUserAvailable($username) {
-		return parent::isUserAvailable($this->getUsername());
+		return null;
 	}
 	
 	/**

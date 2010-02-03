@@ -16,13 +16,16 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	public function doLogin($username, $password, $isHashedPassword=false) {
 		
 		// Okay, try to get our provider
-		$provider = AppKitFactories::getInstance()->getFactory('AuthProvider');
+		$provider = AppKitFactories::getInstance()->getFactory('AuthDispatcher');
 		
 		// Check the provider for the user existing
 		if (($user = $provider->isUserAvailable($username)) !== null && $user instanceof NsmUser) {
 
 			// Ask our provider if the existing user is authenticated
 			if ($provider->isAuthenticated($username, $password) === true) {
+				
+				// Clear the provider
+				$provider->resetAll();
 				
 				// Start from scratch
 				$this->clearCredentials();
@@ -45,6 +48,8 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 			}
 		}
 
+		$provider->resetAll();
+		
 		// Throw some warning into 
 		$this->getContext()->getLoggerManager()
 		->logWarn('Userlogin by %s failed!', $username);
