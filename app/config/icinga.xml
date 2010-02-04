@@ -388,13 +388,31 @@
 	
 	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
 	
+	<!--  Cronk configuration -->
+	
+	<setting name="web.cronk.categories">
+		<parameter name="core">
+			<parameter name="title">Core components</parameter>
+			<parameter name="visible">false</parameter>
+		</parameter>
+		
+		<parameter name="data">
+			<parameter name="title">Data</parameter>
+			<parameter name="visible">true</parameter>
+		</parameter>
+		
+		<parameter name="misc">
+			<parameter name="title">Misc</parameter>
+			<parameter name="visible">true</parameter>
+		</parameter>
+	</setting>
+	
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
+	
 	<!--
 		XInclude
 		* Include other xml resources
 	-->
-	
-	<!-- Our cronks config goes here -->
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
 
 	<!-- Include settings for simple-data provider -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml"/>

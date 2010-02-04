@@ -8,21 +8,45 @@
 		
 		<validators>
 		
-		<validator class="string" name="cmpid" required="false">
-					<argument>cmpid</argument>
-					
-					<errors>
-						<error>Validation of htmlid failed!</error>
-					</errors>
-		</validator>
+			<validator class="string" name="cmpid" required="false">
+						<argument>cmpid</argument>
+						
+						<errors>
+							<error>Validation of htmlid failed!</error>
+						</errors>
+			</validator>
+			
+			<validator class="string" name="parentid" required="false">
+						<argument>parentid</argument>
+						
+						<errors>
+							<error>Validation of parentid failed!</error>
+						</errors>
+			</validator>
 		
-		<validator class="string" name="parentid" required="false">
-					<argument>parentid</argument>
+			<validator class="string" name="stateuid" required="false">
+					<argument>stateuid</argument>
 					
 					<errors>
-						<error>Validation of parentid failed!</error>
+						<error>Validation of stateuid failed!</error>
 					</errors>
-		</validator>
+			</validator>
+		
+			<validator class="string" name="type" required="false">
+						<argument>type</argument>
+						
+						<errors>
+							<error>Validation of type failed!</error>
+						</errors>
+			</validator>
+			
+			<validator class="string" name="cat" required="false">
+						<argument>cat</argument>
+						
+						<errors>
+							<error>Validation of type failed!</error>
+						</errors>
+			</validator>
 		
 		</validators>
 		

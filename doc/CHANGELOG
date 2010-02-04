@@ -108,3 +108,8 @@
       * Auth framework changed (Multiple, simultaneous)
       * Checked persistent, user specific data
       
+    * 2010-02-04
+      * Reducing mass persistent data of filter settings
+      * Implemented categories for the cronks
+      * Cronks for usergroups only (#262)
+      

@@ -262,7 +262,7 @@ var container = new Ext.Panel({
 		collapsible: true,
 		id: 'south-frame',
 		height: 150,
-		
+		layout: 'fit',
 		stateful: true,
 		stateId: 'south-frame',
 		
@@ -279,7 +279,7 @@ var container = new Ext.Panel({
 	}, { // -- WEST
 		region: 'west',
 		id: 'west-frame',
-		title: ' ',
+//		title: ' ',
         split: true,
         minSize: 200,
         maxSize: 400,
@@ -289,11 +289,8 @@ var container = new Ext.Panel({
         
         stateful: true,
         stateId: 'west-frame',
-        
-        layout: {
-        	type: 'accordion',
-            animate: true
-        },
+
+		layout: 'fit',
 
         defaults: {
 			border: false,
@@ -304,7 +301,7 @@ var container = new Ext.Panel({
 });
 
 container.on('afterrender', function() {
-	container.setHeight(Ext.lib.Dom.getViewHeight() - 65);
+	container.setHeight(Ext.lib.Dom.getViewHeight() - 68);
 }, container, { single: true });
 
 // Render the container
@@ -312,7 +309,7 @@ container.render("<?php echo $parentid; ?>");
 
 // Resize the container on windowResize
 Ext.EventManager.onWindowResize(function(w,h) {
-	this.setHeight(h-65);
+	this.setHeight(h-68);
 	this.doLayout();
 }, container);
 
@@ -334,16 +331,18 @@ Ext.EventManager.onWindowResize(function(w,h) {
 if ((west = Ext.getCmp('west-frame'))) {
 	
 	var cList = AppKit.Ext.CronkMgr.create({
-		parentid: cronk_list_id ,
-		title: '<?php echo $tm->_("Cronks"); ?>',
+		parentid: cronk_list_id,
 		crname: 'crlist',
 		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: 'fit'
+		layout: {
+        	type: 'accordion',
+            animate: true
+        }
 	});
 	
 	west.add(cList);
 	west.doLayout();
-	west.getLayout().setActiveItem(cList);
+	cList.getLayout().setActiveItem(0);
 }
 
 // Search component
@@ -387,7 +386,8 @@ if ((south = Ext.getCmp('south-frame'))) {
 	
 	var cLog = AppKit.Ext.CronkMgr.create({
 		parentid: AppKit.Ext.genRandomId('cronksouth'),
-		crname: 'gridLogView'
+		crname: 'gridLogView',
+		height: 150
 	});
 
 	// After the LOG component is added, start autorefresh
