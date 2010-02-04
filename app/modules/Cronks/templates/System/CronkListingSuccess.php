@@ -93,6 +93,7 @@
 				parentCmp.add({
 					title: title,
 					border: false,
+					defaults: { border: false },
 					items: [ CronkListing.getNewView(cat) ]
 				});
 				

@@ -222,11 +222,11 @@ var tabPanel = new Ext.TabPanel({
 	}
 });
 
-
 var cronk_list_id = AppKit.Ext.genRandomId('cronk');
 var cronk_search_id = AppKit.Ext.genRandomId('cronk');
 var cronk_status_summary_id = AppKit.Ext.genRandomId('cronk');
 var cronk_status_summary_chart_id = AppKit.Ext.genRandomId('cronk');
+var cronk_log_id = AppKit.Ext.genRandomId('cronk');
 
 var container = new Ext.Panel({
 	layout: 'border',
@@ -269,6 +269,7 @@ var container = new Ext.Panel({
 		defaults: {
 			border: false
 		}
+		
 	}, { // -- CENTER
 		region: 'center',
         margins: '0 0 10 5',
@@ -348,7 +349,7 @@ if ((west = Ext.getCmp('west-frame'))) {
 // Search component
 if ((search = Ext.getCmp(cronk_search_id))) {	
 	var cSearch = AppKit.Ext.CronkMgr.create({
-		parentid: cronk_search_id,
+		parentid: cronk_search_id + '-cmp',
 		crname: 'icingaSearch'
 	});
 
@@ -360,7 +361,7 @@ if ((search = Ext.getCmp(cronk_search_id))) {
 if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 
 	var cStatusSummary = AppKit.Ext.CronkMgr.create({
-		parentid: cronk_status_summary_id,
+		parentid: cronk_status_summary_id + '-cmp',
 		crname: 'icingaStatusSummary',
 		params: {otype: "text"}
 	});
@@ -371,7 +372,7 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 
 if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
 	var cStatusSummaryChart = AppKit.Ext.CronkMgr.create({
-		parentid: cronk_status_summary_chart_id ,
+		parentid: cronk_status_summary_chart_id + '-cmp' ,
 		crname: 'icingaStatusSummary',
 		params: {otype: "chart"}
 	});
@@ -385,8 +386,9 @@ if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
 if ((south = Ext.getCmp('south-frame'))) {
 	
 	var cLog = AppKit.Ext.CronkMgr.create({
-		parentid: AppKit.Ext.genRandomId('cronksouth'),
+		parentid: cronk_log_id,
 		crname: 'gridLogView',
+		layout: 'fit',
 		height: 150
 	});
 
