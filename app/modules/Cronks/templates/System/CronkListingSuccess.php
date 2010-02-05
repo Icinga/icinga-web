@@ -1,8 +1,6 @@
 <?php
 	$parentid = $rd->getParameter('parentid');
 ?>
-<!--<div class="cronk-data-view" id="<?php echo $parentid; ?>"></div>-->
-
 <script type="text/javascript">
 
 (function() {
@@ -165,9 +163,22 @@
 			var d = Ext.decode(r.responseText);	
 			
 			if (d.categories) {
+				var act = null;
+				var i = 0;
 				Ext.iterate(d.categories, function(k,v) {
+					
+					if (v.active && v.active == true) {
+						act = i;
+					}
+					
 					CronkListing.addListing(v.title || 'untitled', k);
+					
+					i++;
 				});
+				
+				if (act) {
+					CronkListing.getParentCmp().getLayout().setActiveItem(act);
+				}
 			}
 			
 		},

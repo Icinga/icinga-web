@@ -241,7 +241,6 @@ var container = new Ext.Panel({
 			
 		height: 80,
         layout:'column',
-        autoScroll:true,
         
 		items: [{
 			width: 260,
@@ -343,7 +342,7 @@ if ((west = Ext.getCmp('west-frame'))) {
 	
 	west.add(cList);
 	west.doLayout();
-	cList.getLayout().setActiveItem(0);
+	// cList.getLayout().setActiveItem(0);
 }
 
 // Search component
@@ -431,5 +430,6 @@ if ((south = Ext.getCmp('south-frame'))) {
 // Inform about layout changes
 container.doLayout();
 
+var ne = Ext.getCmp('north-frame');
 });
 </script>

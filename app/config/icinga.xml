@@ -399,6 +399,9 @@
 		<parameter name="data">
 			<parameter name="title">Data</parameter>
 			<parameter name="visible">true</parameter>
+			
+			<!-- Activate first! -->
+			<parameter name="active">true</parameter>
 		</parameter>
 		
 		<parameter name="misc">
