@@ -42,20 +42,24 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 		'host'			=> array (
 			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
 			'column'		=> 'HOST_STATE',
+			'security'		=> array ('IcingaHostgroup', 'IcingaHostCustomVariablePair', 'IcingaContactgroup')
 		),
 		'hostchart'		=> array (
 			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
 			'column'		=> 'HOST_STATE',
 			'title'			=> 'Hosts',
+			'security'		=> array ('IcingaHostgroup', 'IcingaHostCustomVariablePair', 'IcingaContactgroup')
 		),
 		'service'		=> array (
 			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
 			'column'		=> 'SERVICE_STATE',
+			'security'		=> array ('IcingaServicegroup', 'IcingaServiceCustomVariablePair', 'IcingaContactgroup')
 		),
 		'servicechart'	=> array (
 			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
 			'column'		=> 'SERVICE_STATE',
 			'title'			=> 'Services',
+			'security'		=> array ('IcingaServicegroup', 'IcingaServiceCustomVariablePair', 'IcingaContactgroup')
 		),
 	);
 
@@ -144,9 +148,15 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 
 	public function fetchData () {
 		if ($this->type !== false) {
-			$result = $this->api->API()->createSearch()
-				->setSearchTarget($this->dataSources[$this->type]['target'])
-				->fetch();
+			
+			$search = $this->api->API()->createSearch()
+				->setSearchTarget($this->dataSources[$this->type]['target']);
+
+			// Adding security principal targets to the query
+			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($this->dataSources[$this->type]['security'], $search);
+			
+			$result = $search->fetch();
+			
 			foreach ($result as $row) {
 				$this->addData($row->{$this->dataSources[$this->type]['column']}, $row->COUNT);
 			}
