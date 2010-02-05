@@ -369,7 +369,7 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 	});
 
 	status_summary.add(cStatusSummary);
-	cStatusSummary.doLayout();
+	status_summary.doLayout();
 }
 
 if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {

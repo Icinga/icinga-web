@@ -56,10 +56,13 @@ distclean: clean
 		Makefile \
 		config.log \
 		config.status \
-		etc/build.properties \
+		etc/build.properties
+		
+configclean:
+	rm -f \
 		app/config/databases.xml
 
-devclean: remove-temp-files distclean cacheclean install-files-list
+devclean: remove-temp-files distclean cacheclean install-files-list configclean
 
 create-tarball:
 	tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
