@@ -462,6 +462,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth/principal
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth/provider
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/class
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/database
@@ -1233,20 +1234,20 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/GPL $(DESTDIR)$(prefix)/doc/GPL
-	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/INSTALL $(DESTDIR)$(prefix)/doc/INSTALL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/LICENSE $(DESTDIR)$(prefix)/doc/LICENSE
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/TODO $(DESTDIR)$(prefix)/doc/TODO
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VENDOR $(DESTDIR)$(prefix)/doc/VENDOR
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VERSION $(DESTDIR)$(prefix)/doc/VERSION
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/install-fromscratch.txt $(DESTDIR)$(prefix)/doc/install-fromscratch.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/makefile-howto.txt $(DESTDIR)$(prefix)/doc/makefile-howto.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/INSTALL $(DESTDIR)$(prefix)/doc/INSTALL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/1-initial-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/1-initial-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/2-initial-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/2-initial-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/3-principal-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/3-principal-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/4-principal-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/4-principal-data.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/init.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/init.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-deploy.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-deploy.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/db-undo.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/db-undo.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deploy/mysql/init.sql $(DESTDIR)$(prefix)/etc/database/deploy/mysql/init.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model.mwb $(DESTDIR)$(prefix)/etc/database/model/model.mwb
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_schema.sql
@@ -3527,23 +3528,24 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/view/ViewTest.php $(DESTDIR)$(prefix)/lib/agavi/tests2/view/ViewTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/AppKit.class.php $(DESTDIR)$(prefix)/lib/appkit/AppKit.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/README $(DESTDIR)$(prefix)/lib/appkit/README
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProvider.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProvider.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProviderDatabase.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProviderDatabase.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProviderHttpBasic.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProviderHttpBasic.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthProviderLdap.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthProviderLdap.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitSecurityUser.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitSecurityUser.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitUserPreferences.interface.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitUserPreferences.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/principal/AppKitPrincipalTarget.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/principal/AppKitPrincipalTarget.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitSecurityUser.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitSecurityUser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProvider.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProvider.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProviderDatabase.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProviderDatabase.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProviderHttpBasic.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProviderHttpBasic.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProviderLdap.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProviderLdap.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthDispatcher.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthDispatcher.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/cache/AppKitFileCache.class.php $(DESTDIR)$(prefix)/lib/appkit/cache/AppKitFileCache.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/cache/AppKitCache.class.php $(DESTDIR)$(prefix)/lib/appkit/cache/AppKitCache.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitArrayContainer.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitArrayContainer.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitAutoloader.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitAutoloader.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitBaseClass.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitBaseClass.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitContextInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitContextInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitFactories.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitFactories.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitFactory.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitFactory.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitFactoryInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitFactoryInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitSingleton.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitSingleton.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitBaseClass.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitBaseClass.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/AppKitSQLConstants.class.php $(DESTDIR)$(prefix)/lib/appkit/database/AppKitSQLConstants.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmLog.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmLog.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/database/models/NsmPrincipal.php $(DESTDIR)$(prefix)/lib/appkit/database/models/NsmPrincipal.php
@@ -3597,7 +3599,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/Grapher.js $(DESTDIR)$(prefix)/lib/appkit/js/Grapher.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/SimpleDataProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/dump.js $(DESTDIR)$(prefix)/lib/appkit/js/dump.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FancyTextField.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FancyTextField.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FilterHandler.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
@@ -3605,10 +3606,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/ColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/GridPanel.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/GridPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js.orig $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js.orig
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/InterGridUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/InterGridUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/StructUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/StructUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/CronkMgr.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/CronkMgr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/SessionProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/SessionProvider.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/rmd160.js $(DESTDIR)$(prefix)/lib/appkit/js/rmd160.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/json/AppKitJsonResponse.class.php $(DESTDIR)$(prefix)/lib/appkit/json/AppKitJsonResponse.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/logging/AppKitDoctrineLoggerAppender.class.php $(DESTDIR)$(prefix)/lib/appkit/logging/AppKitDoctrineLoggerAppender.class.php
@@ -3620,8 +3623,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/menu/AppKitNavItem.class.php $(DESTDIR)$(prefix)/lib/appkit/menu/AppKitNavItem.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitMessageQueue.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitMessageQueue.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitMessageQueueItem.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitMessageQueueItem.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitQueue.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitQueue.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitQueueItem.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitQueueItem.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitQueue.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitQueue.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/storage/AppKitDoctrineSessionStorage.class.php $(DESTDIR)$(prefix)/lib/appkit/storage/AppKitDoctrineSessionStorage.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitClassUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitClassUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitColorUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitColorUtil.class.php
@@ -7276,14 +7279,14 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/on.png $(DESTDIR)$(prefix)/pub/images/status/on.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/passive.png $(DESTDIR)$(prefix)/pub/images/status/passive.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/index.php $(DESTDIR)$(prefix)/pub/index.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameDefault.css $(DESTDIR)$(prefix)/pub/styles/WireFrameDefault.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameStructural.css $(DESTDIR)$(prefix)/pub/styles/WireFrameStructural.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/extjs/ext-all.css $(DESTDIR)$(prefix)/pub/styles/extjs/ext-all.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/extjs/ux-all.css $(DESTDIR)$(prefix)/pub/styles/extjs/ux-all.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/.htaccess $(DESTDIR)$(prefix)/pub/.htaccess
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.mo $(DESTDIR)$(prefix)/res/i18n/mo/de.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.mo $(DESTDIR)$(prefix)/res/i18n/mo/en.mo
@@ -7294,9 +7297,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-notification-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-notification-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-custom.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-custom.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template.xml
 # INSTALL_FILES_END

@@ -253,6 +253,9 @@ var container = new Ext.Panel({
 			width: 200,
 			bodyStyle: 'margin-left: 10px;',
 			items: [{ id: cronk_status_summary_id }]
+		}, {
+			columnWidth: 1,
+			html: ''
 		}]
 		
 	}, { // -- SOUTH
