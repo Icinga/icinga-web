@@ -9,7 +9,7 @@
 		<?php echo $slots['additional_header_data']; ?>
 		
 	</head>
-	<body id="default" class="yui-skin-sam">
+	<body id="default">
 	
 		<div id="main-container">
 		
