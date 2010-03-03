@@ -1259,7 +1259,7 @@ Optional Packages:
 
 Some influential environment variables:
   PHP         Perl interpreter command
-  MYSQL       MySql client binary not found
+  MYSQL       MySql client binary
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -2070,7 +2070,7 @@ if test "${with_web_user+set}" = set; then :
 else
 
    web_user=www-data
-   for x in www www-data apache httpd nobody; do
+   for x in www wwwrun www-data apache httpd nobody; do
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking if user $x exists" >&5
 $as_echo_n "checking if user $x exists... " >&6; }
      if  $GREP -q "^$x:" /etc/passwd ; then :

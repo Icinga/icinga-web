@@ -23,7 +23,7 @@ if test "$PHP" = 'not found'; then
 fi
 
 # Check for mysql
-AC_ARG_VAR([MYSQL],[MySql client binary not found])
+AC_ARG_VAR([MYSQL],[MySql client binary])
 AC_PATH_PROG([MYSQL], [mysql], [not found])
 
 if test "$MYSQL" = 'not found'; then
