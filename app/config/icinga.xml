@@ -277,28 +277,6 @@
 				</parameter>
 				
 			</parameter>
-		
-		<!-- Authenticate with Doctrine -->
-		<!-- <parameter name="class">AppKitAuthProviderDatabase</parameter>
-			<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderDatabase.class.php</parameter> -->
-		 
-		 <!-- Authentificate against ldap
-		 	<parameter name="class">AppKitAuthProviderLdap</parameter>
-		 	<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderLdap.class.php</parameter>
-		 	<parameter name="ldap_dsn">ldap://int.icinga.de/</parameter>
-		 	<parameter name="ldap_basedn">DC=int,DC=icinga,DC=de</parameter>
-		 	<parameter name="ldap_domain">INT.ICINGA.DE</parameter>
-		 	<parameter name="ldap_binddn">USER@INT.ICINGA.DE</parameter>
-		 	<parameter name="ldap_bindpw">password</parameter>
-		 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_MSAD</parameter>
-		 	<parameter name="ldap_filter_user"><![CDATA[(&(SAMAccountName=__USERNAME__))]]></parameter>
-		 -->
-		 
-		 <!-- Authentificate with http basic auth
-		 	<parameter name="class">AppKitAuthProviderHttpBasic</parameter>
-		 	<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderHttpBasic.class.php</parameter>
-		 	<parameter name="field">REMOTE_USER</parameter>
-		  -->
 		  
 			<parameter name="requiredClasses">
 				<parameter name="AppKitEventHandlerInterface">%core.root_dir%/lib/appkit/event/AppKitEventHandlerInterface.interface.php</parameter>
@@ -360,7 +338,7 @@
 					
 					<parameter name="ssh_bin">/usr/bin/ssh</parameter>
 					<parameter name="ssh_user">icinga</parameter>
-					<parameter name="ssh_host">127.0.0.15</parameter>
+					<parameter name="ssh_host">127.0.0.1</parameter>
 					<parameter name="ssh_port">22</parameter>
 					<parameter name="ssh_timeout">20</parameter>
 					<parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
@@ -380,7 +358,7 @@
 	<setting name="appkit.version.major">0</setting>
 	<setting name="appkit.version.minor">9</setting>
 	<setting name="appkit.version.patch">1</setting>
-	<setting name="appkit.version.extension">alpha</setting>
+	<setting name="appkit.version.extension">beta</setting>
 	<setting name="appkit.version.name">icinga-web</setting>
 	
 	<!-- PLACEHOLDER -->

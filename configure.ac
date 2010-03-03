@@ -74,7 +74,7 @@ AC_DEFUN([ACICINGA_GROUP_GUESS],
 AC_ARG_WITH([web_user],
 	AS_HELP_STRING([--with-web-user=<user>], [username for web writable files (default www-data)]),
 	web_user=$withval,
-	ACICINGA_USER_GUESS([www www-data apache httpd nobody],[web_user],[www-data])
+	ACICINGA_USER_GUESS([www wwwrun www-data apache httpd nobody],[web_user],[www-data])
 )
 
 AC_ARG_WITH([web_group],

@@ -86,8 +86,8 @@ fix-priv:
 
 fix-libs:
 	rm -rf $(DESTDIR)$(prefix)/pub/js/ext3
-	ln -s $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
-	ln -s $(API_DIR) $(DESTDIR)$(prefix)/lib/icinga-api
+	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
+	ln -sf $(API_DIR) $(DESTDIR)$(prefix)/lib/icinga-api
 
 install: inc-install-files fix-priv fix-libs
 

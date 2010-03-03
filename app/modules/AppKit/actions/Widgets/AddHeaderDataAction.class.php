@@ -32,6 +32,7 @@ class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 		
 		// Adding squished javascript files
 		$squish_url = $this->getContext()->getRouting()->gen('appkit.squishloader', array('type' => AppKitBulkLoader::CODE_TYPE_JAVASCRIPT));
+		
 		$header->addJsFile($squish_url);
 		
 		// Adding some meta tags to the page header

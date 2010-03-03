@@ -27,8 +27,8 @@
 	</tr>
 	
 <?php foreach ($collection as $user) { ?>
-	<tr class="<?php echo AppKitHtmlHelper::Obj()->classAlternate('light', 'dark') ?>">
-		<td><?php echo AppKitHtmlHelper::Obj()->LinkImageToRoute('appkit.admin.users', 'Toggle activity', $user->user_disabled ? 'icons.cross' : 'icons.tick', array('id' => $user->user_id, 'toggleActivity' => true), array(), $rd) ?></td>
+	<tr class="<?php echo AppKitHtmlHelper::Obj()->classAlternate('light', 'dark'); ?>">
+		<td><?php echo AppKitHtmlHelper::Obj()->LinkImageToRoute('appkit.admin.users', 'Toggle activity', $user->user_disabled ? 'icons.cross' : 'icons.tick', array('id' => $user->user_id, 'toggleActivity' => true), array(), $rd); ?></td>
 		<td><?php echo $user->user_name; ?></td>
 		<td><?php echo $user->givenName(); ?></td>
 		<td><?php echo $user->user_email; ?></td>

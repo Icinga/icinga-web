@@ -67,8 +67,12 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		// Remove the fake path from the 
 		// uri
 		if ($_SERVER['QUERY_STRING']) {
-			$request_uri = preg_replace('@'. preg_quote($_SERVER['QUERY_STRING']). '$@', '', $request_uri);
+			$q = preg_replace('@&@', '?', $_SERVER['QUERY_STRING'], 1);
+			$request_uri = preg_replace('@'. preg_quote($q, '@'). '$@', '', $request_uri);
 		}
+		
+		// Removing the index.php
+		$request_uri = preg_replace('@index.php$@', '', $request_uri, 1);
 		
 		// Take care about the leading slash
 		if (!preg_match('@^\/@', $request_uri)) {

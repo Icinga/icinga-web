@@ -40,7 +40,7 @@ class AppKit_Admin_Users_IndexAction extends ICINGAAppKitBaseAction
 				}
 			}
 			catch (Exception $e) {
-				
+				throw $e;
 			}
 		}
 		

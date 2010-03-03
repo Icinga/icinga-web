@@ -31,10 +31,10 @@ class AppKitDoctrineUtil {
 	}
 	
 	public static function toggleRecordValue(Doctrine_Record &$record, $field=null) {
-		// Try to autodetect the fieldname
+		// Try to autodetect the fieldname		
 		if ($field === null) {
 			foreach ($record->getTable()->getColumns() as $name=>$info) {
-				if (preg_match('@_disabled$@', $name) && $info['type'] == 'boolean') {
+				if (preg_match('@_disabled$@', $name) && in_array($info['type'], array('boolean', 'integer')) == true) {
 					$field = $name;
 				}
 			}
