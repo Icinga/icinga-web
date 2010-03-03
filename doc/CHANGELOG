@@ -112,4 +112,12 @@
       * Reducing mass persistent data of filter settings
       * Implemented categories for the cronks
       * Cronks for usergroups only (#262)
+    
+    * 2010-03-03
+      * Fixed webpath errors with querystring and without rewrite
+      * Fixed #304 wwwrun user was missing (fixes #304)
+      * Group / users activation
+      * meta
+      
+
       
