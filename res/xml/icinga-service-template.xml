@@ -432,8 +432,8 @@
 	                		<parameter name="idPrefix">historyForService</parameter>
 	                		<parameter name="titlePrefix">Statehistory for</parameter>
 							<parameter name="targetTemplate">icinga-service-history-template</parameter>
-							<parameter name="sourceField">service_object_id</parameter>
-							<parameter name="targetField">service_object_id</parameter>
+							<parameter name="sourceField">service_name</parameter>
+							<parameter name="targetField">service_name</parameter>
 							<parameter name="labelField">service_name</parameter>
 	                	</parameter>
 	                </parameter>

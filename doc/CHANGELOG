@@ -119,5 +119,10 @@
       * Group / users activation
       * meta
       
-
-      
+ = 1.0.0-rc
+ 
+    * 2010-03-08
+      * Fixed initial layout (some cronks are missing)
+      * Fixed history relations for links (using the name as criteria)
+      * Cleanup the initial event firework a bit
+       

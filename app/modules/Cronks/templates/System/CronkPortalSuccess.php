@@ -313,22 +313,8 @@ container.render("<?php echo $parentid; ?>");
 // Resize the container on windowResize
 Ext.EventManager.onWindowResize(function(w,h) {
 	this.setHeight(h-68);
-	this.doLayout();
+	this.doLayout(false);
 }, container);
-
-// Set initial size
-(function() {
-	container.doLayout();
-}).defer(3000);
-
-
-//// Adding the first cronk (say hello here)
-//if (tabPanel && tabPanel.items.getCount() <= 0) {
-//	
-//	tabPanel.add(cHello);
-//	tabPanel.doLayout();	
-//	tabPanel.setActiveTab(cHello);
-//}
 
 // Adding the cronk list
 if ((west = Ext.getCmp('west-frame'))) {
@@ -344,8 +330,6 @@ if ((west = Ext.getCmp('west-frame'))) {
 	});
 	
 	west.add(cList);
-	west.doLayout();
-	// cList.getLayout().setActiveItem(0);
 }
 
 // Search component
@@ -356,7 +340,6 @@ if ((search = Ext.getCmp(cronk_search_id))) {
 	});
 
 	search.add(cSearch);	
-	search.doLayout();
 }
 
 // Status-summary component
@@ -369,7 +352,6 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 	});
 
 	status_summary.add(cStatusSummary);
-	status_summary.doLayout();
 }
 
 if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
@@ -380,7 +362,6 @@ if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
 	});
 	
 	status_summary_chart.add(cStatusSummaryChart);
-	status_summary_chart.doLayout();
 }
 
 
@@ -427,12 +408,14 @@ if ((south = Ext.getCmp('south-frame'))) {
 	});
 	
 	south.add(cLog);
-	south.doLayout();
 }
 
-// Inform about layout changes
-container.doLayout();
+container.doLayout(false, true);
 
-var ne = Ext.getCmp('north-frame');
+// Okay redraw all after a while (if all events are gone)
+(function() {
+	this.doLayout(false, true);
+}).defer(3000, container);
+
 });
 </script>
