@@ -97,7 +97,7 @@
         			<parameter name="icon_class">silk-bricks</parameter>
         		</parameter>
         		<parameter name="DISABLE_HOSTGROUP_SVC_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for all servuces in this hostgroup</parameter>
+        			<parameter name="title">Disable notifications for all services in this hostgroup</parameter>
         			<parameter name="icon_class">silk-bricks</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>

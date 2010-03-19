@@ -94,7 +94,7 @@
         			<parameter name="icon_class">silk-bricks</parameter>
         		</parameter>
         		<parameter name="DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for all servuces in this servicegroup</parameter>
+        			<parameter name="title">Disable notifications for all services in this servicegroup</parameter>
         			<parameter name="icon_class">silk-bricks</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>

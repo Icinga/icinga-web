@@ -126,3 +126,12 @@
       * Fixed history relations for links (using the name as criteria)
       * Cleanup the initial event firework a bit
        
+     * 2010-03-18
+      * Template filter for multiple fields (Intergrid links)
+      * Typo (fixes #335)
+      * Added js temp storage class (used for grid templates)
+      
+     * 2010-03-19
+      * Customvar filtering for host- / servicegrids
+     
+      

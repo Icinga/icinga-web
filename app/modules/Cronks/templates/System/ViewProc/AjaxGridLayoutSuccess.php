@@ -141,45 +141,44 @@
 	// First loading the meta info to configure the grid
 	var oContainer = function() {
 		
-		Ext.Ajax.request({
-			   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
-			   
-			   success: function(response, opts) {
-			   		
-					var meta = Ext.decode(response.responseText);
-					// Include needed javascript by the xml template
-					if (meta.template.option.dynamicscript) {
-						// Register the create grid event
-						var f = CreateGridProcessor.createCallback(meta);
-						
-						AppKit.Ext.ScriptDynaLoader.on('bulkfinish', function() {
-							f.call();
-							run = true;
-						}, this, { single : true });
-						
-						AppKit.Ext.ScriptDynaLoader.startBulkMode();
-						
-						Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
-							AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
-						});
-						
-					}
-					else {
-						CreateGridProcessor(meta);
-					}
-			   },
-			   
-			   failure: function(response, opts) {
-
-					AppKit.Ext.notifyMessage(
-						"Ext.Ajax.request: request failed!",
-						String.format("{0} ({1})", response.statusText, response.status)
-					);
-					
-			   },
-			   
-			   scope : oContainer
-		});
+		var store = AppKit.Ext.Storage.getStore('viewproc-templates');
+		var template = "<?php echo $rd->getParameter('template'); ?>";
+		var initGrid = function() {
+			var meta = store.get(template);
+			if (meta.template.option.dynamicscript) {
+				AppKit.Ext.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
+				AppKit.Ext.ScriptDynaLoader.startBulkMode();
+				Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
+					AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
+				});
+			}
+			else {
+				CreateGridProcessor(meta);
+			}
+		}
+		
+		if (store.containsKey(template)) {
+			initGrid();
+		}
+		else {
+		
+			Ext.Ajax.request({
+				   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
+				   
+				   success: function(response, opts) {
+				   		store.add(template, Ext.decode(response.responseText));
+				   		initGrid();
+				   },
+				   
+				   failure: function(response, opts) {
+						AppKit.Ext.notifyMessage(
+							"Ext.Ajax.request: request failed!",
+							String.format("{0} ({1})", response.statusText, response.status)
+						);
+				   },
+				   scope : oContainer
+			});
+		}
 	}
 	
 	oContainer.call(this);

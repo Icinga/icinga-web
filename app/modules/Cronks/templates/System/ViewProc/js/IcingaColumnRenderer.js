@@ -10,7 +10,6 @@ AppKit.Ext.grid.IcingaColumnRenderer = {
 			if (fieldName == cfg.field) {
 				
 				var record = grid.getStore().getAt(rowIndex);
-				var val = record.data[ cfg.sourceField ];
 				var id = (cfg.idPrefix || 'empty') + 'subGridComponent';
 				
 				var cronk = {
@@ -22,8 +21,17 @@ AppKit.Ext.grid.IcingaColumnRenderer = {
 				};
 				
 				var filter = {};
-				filter["f[" + cfg.targetField + "-value]"] = val;
-				filter["f[" + cfg.targetField + "-operator]"] = 50;
+				
+				if (cfg.filterMap) {
+					Ext.iterate(cfg.filterMap, function(k, v) {
+						filter["f[" + v + "-value]"] =  record.data[ k ];
+						filter["f[" + v + "-operator]"] = 50;
+					});
+				}
+				else {
+					filter["f[" + cfg.targetField + "-value]"] = record.data[ cfg.sourceField ];
+					filter["f[" + cfg.targetField + "-operator]"] = 50;
+				}
 				
 				AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
 			}
