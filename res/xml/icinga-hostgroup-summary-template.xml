@@ -16,6 +16,12 @@
     	want to display
     -->
     <option>
+    
+    	<!-- These are a dynamic js lib for using specific column renderes within this template -->
+        <parameter name="dynamicscript">
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        </parameter>
+    
     	<!-- 
     		Some layout modes:
     			- default: full featured view
@@ -241,6 +247,118 @@
                 <parameter name="default">false</parameter>
             </order>
         </field> 
+        
+        <field name="hostgroup_hosts_click">
+        	<datasource>
+        		<parameter name="field">HOSTGROUP_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="width">16</parameter>
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">fam.database</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here to display containing hosts</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+					<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">historyForHost</parameter>
+	                		<parameter name="titlePrefix">Hosts in</parameter>
+							<parameter name="targetTemplate">icinga-host-template</parameter>
+							<parameter name="filterMap">
+								<parameter name="hostgroup_name">hostgroup_name</parameter>
+							</parameter>
+							<parameter name="labelField">hostgroup_name</parameter>
+	                	</parameter>
+	                </parameter>
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="hostgroup_services_click">
+        	<datasource>
+        		<parameter name="field">HOSTGROUP_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="width">16</parameter>
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">fam.cog</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here to display containing services</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+					<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">historyForHost</parameter>
+	                		<parameter name="titlePrefix">Services in</parameter>
+							<parameter name="targetTemplate">icinga-service-template</parameter>
+							<parameter name="filterMap">
+								<parameter name="hostgroup_name">hostgroup_name</parameter>
+							</parameter>
+							<parameter name="labelField">hostgroup_name</parameter>
+	                	</parameter>
+	                </parameter>
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
         
 		<field name="host_status">
         	<datasource>

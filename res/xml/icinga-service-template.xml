@@ -159,6 +159,18 @@
         		<parameter name="subtype">appkit.ext.filter.text</parameter>
         		<parameter name="label">CV Val</parameter>
         	</paramter>
+        	<paramter name="hostgroup_name">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.text</parameter>
+        		<parameter name="label">Hostgroup</parameter>
+        	</paramter>
+        	<paramter name="servicegroup_name">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.text</parameter>
+        		<parameter name="label">Servicegroup</parameter>
+        	</paramter>
         </parameter>
         
         <!-- Working security model in this view -->
@@ -206,6 +218,8 @@
        		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
        		<parameter name="custom_variable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="custom_variable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
+       		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
+       		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
        	</parameter>
     </datasource>
     

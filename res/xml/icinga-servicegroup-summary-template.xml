@@ -24,6 +24,11 @@
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
         
+        <!-- These are a dynamic js lib for using specific column renderes within this template -->
+        <parameter name="dynamicscript">
+        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        </parameter>
+        
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <parameter name="Ext.grid.GridView">
         	<parameter name="headersDisabled">false</parameter>
@@ -238,6 +243,62 @@
                 <parameter name="default">false</parameter>
             </order>
         </field> 
+        
+        <field name="servicegroup_services_click">
+        	<datasource>
+        		<parameter name="field">SERVICEGROUP_ID</parameter>
+        	</datasource>
+        	
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="width">16</parameter>
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">fam.cog</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here to display containing services</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+					<parameter>
+	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">celldblclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">historyForHost</parameter>
+	                		<parameter name="titlePrefix">Services in</parameter>
+							<parameter name="targetTemplate">icinga-service-template</parameter>
+							<parameter name="filterMap">
+								<parameter name="servicegroup_name">servicegroup_name</parameter>
+							</parameter>
+							<parameter name="labelField">servicegroup_name</parameter>
+	                	</parameter>
+	                </parameter>
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
         
 		<field name="host_status">
         	<datasource>
