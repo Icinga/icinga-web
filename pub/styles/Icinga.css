@@ -88,6 +88,8 @@ div.icinga-status {
 	text-align: center;
 	margin-top: auto;
 	margin-bottom: auto;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 div.icinga-status span {

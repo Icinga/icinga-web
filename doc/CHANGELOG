@@ -133,5 +133,10 @@
       
      * 2010-03-19
       * Customvar filtering for host- / servicegrids
-     
+      * Jumplinks from host-/serviceview to hosts and services (fixes #334)
+      
+     * 2010-03-22
+      * Added columnRenderer to display status information
+      * Round corners for status info in grids
+      * Concept testing gettext js
       

@@ -269,7 +269,7 @@
 							<parameter name="image">fam.database</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here to display containing hosts</parameter>
+								<parameter name="qtip">Double click here to display containing hosts</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -281,7 +281,7 @@
 	                	<parameter name="type">celldblclick</parameter>
 	                	
 	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">historyForHost</parameter>
+	                		<parameter name="idPrefix">hostgroupHosts</parameter>
 	                		<parameter name="titlePrefix">Hosts in</parameter>
 							<parameter name="targetTemplate">icinga-host-template</parameter>
 							<parameter name="filterMap">
@@ -325,7 +325,7 @@
 							<parameter name="image">fam.cog</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here to display containing services</parameter>
+								<parameter name="qtip">Double click here to display containing services</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -337,7 +337,7 @@
 	                	<parameter name="type">celldblclick</parameter>
 	                	
 	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">historyForHost</parameter>
+	                		<parameter name="idPrefix">hostgroupServices</parameter>
 	                		<parameter name="titlePrefix">Services in</parameter>
 							<parameter name="targetTemplate">icinga-service-template</parameter>
 							<parameter name="filterMap">
@@ -375,9 +375,12 @@
                 	<parameter name="fixed">true</parameter>
                 </parameter>
                 
-				<parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
-                	<parameter name="method">hostStatus</parameter>
+				<parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                <parameter name="function">hostStatus</parameter>
+	                	
+	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
         	

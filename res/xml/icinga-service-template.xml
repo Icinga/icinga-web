@@ -388,7 +388,7 @@
 							<parameter name="image">fam.information</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for information</parameter>
+								<parameter name="qtip">Double click here for information</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -450,7 +450,7 @@
 							<parameter name="image">fam.book</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for history</parameter>
+								<parameter name="qtip">Double click here for history</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -507,9 +507,12 @@
                 	<parameter name="fixed">true</parameter>
                 </parameter>
                 
-				<parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
-                	<parameter name="method">serviceStatus</parameter>
+				<parameter name="jsFunc">
+                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                <parameter name="function">serviceStatus</parameter>
+	                	
+	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
         	
