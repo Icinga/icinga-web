@@ -134,6 +134,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app/config
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/tzdata
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/phing
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/routing
@@ -161,6 +162,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/lib/view
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/views
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/cache
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/models
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/actions/Widgets
@@ -176,6 +180,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/views
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/views/Widgets
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/cache
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/config
@@ -185,6 +191,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/lib/view
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/views
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/cache
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/models
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/actions/Product
@@ -201,10 +210,14 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/validate/Product
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/views
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/views/Product
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/templates
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/log
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/dev
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/pub
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/pub/css
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/pub/js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/config
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/tests
@@ -213,6 +226,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/tests/fragment/Products
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/tests/fragment/Products/Product
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/tests/unit
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/action
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/build
@@ -311,7 +325,12 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DB/MetaData
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Mediums
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Modes
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Modes/ExportDataSet
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/PhptTestCase
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/SeleniumTestCase
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Story
@@ -328,6 +347,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/MockObject/Matcher
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/MockObject/Stub
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/Process
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/TestSuite
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Runner
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Samples
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Samples/BankAccount
@@ -347,6 +367,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/783
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/684
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/578
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Runner
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Util
@@ -397,6 +420,11 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/views
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/models
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/log
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/cache
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/templates
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/pub
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit
@@ -408,6 +436,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/testing
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/translation
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/util
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/validator
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/fragment
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/flow
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/AllTests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/action
@@ -441,6 +472,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/config
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/views
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/config
@@ -449,16 +481,20 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/models/Foo/Bar
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/views
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/config
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/views
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/models
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/user
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/util
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/validator
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/validator/inc
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/view
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/test_report
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/auth/principal
@@ -487,6 +523,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/queue
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/storage
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/util
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit/translator
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/doctrine
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/doctrine/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/doctrine/lib/Doctrine
@@ -836,6 +873,22 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/types/fileset/a/aa
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/examples
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/examples/normal
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/examples/wrapper
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/lib
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Data
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Harness
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/bin
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/doc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/doc/html
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/doc/text
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/doc/pod
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/ajax
@@ -937,6 +990,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Error404Action.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Error404Action.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ext/ApplicationStateAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ext/ApplicationStateAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ext/DynamicJavascriptSourceAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ext/DynamicJavascriptSourceAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ext/initI18nAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ext/initI18nAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/IndexAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/LoginAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/LoginAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/LogoutAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/LogoutAction.class.php
@@ -945,12 +999,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/UnavailableAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/UnavailableAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/User/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/User/IndexAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/User/PreferencesAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/User/PreferencesAction.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/AddHeaderDataAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/AddHeaderDataAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/ShowErrorsAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/ShowErrorsAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/ShowFooterAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/ShowFooterAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/ShowImageAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/ShowImageAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/ShowNavigationAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/ShowNavigationAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/SquishLoaderAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/SquishLoaderAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Widgets/AddHeaderDataAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Widgets/AddHeaderDataAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/AddHeaderData.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/AddHeaderData.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/AdditionalHeaderData.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/AdditionalHeaderData.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Admin/Groups.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Admin/Groups.xml
@@ -971,6 +1025,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Error404.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Error404.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Ext/ApplicationState.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Ext/ApplicationState.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Ext/DynamicJavascriptSource.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Ext/DynamicJavascriptSource.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Ext/initI18n.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Ext/initI18n.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Login.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Login.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/cache/Logout.xml $(DESTDIR)$(prefix)/app/modules/AppKit/cache/Logout.xml
@@ -1023,6 +1078,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Error404Success.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Error404Success.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ext/ApplicationStateSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ext/ApplicationStateSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ext/DynamicJavascriptSourceSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ext/DynamicJavascriptSourceSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ext/initI18nSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ext/initI18nSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginError.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginInput.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginInput.php
@@ -1056,6 +1112,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Error404.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Error404.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ext/ApplicationState.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ext/ApplicationState.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ext/DynamicJavascriptSource.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ext/DynamicJavascriptSource.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ext/initI18n.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ext/initI18n.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Login.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Login.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Logout.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Logout.xml
@@ -1084,6 +1141,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Error404SuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Error404SuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ext/DynamicJavascriptSourceSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ext/DynamicJavascriptSourceSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ext/ApplicationStateSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ext/ApplicationStateSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ext/initI18nSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ext/initI18nSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/IndexSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LoginErrorView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LoginErrorView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LoginInputView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LoginInputView.class.php
@@ -1153,9 +1211,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/MetaInformationSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/MetaInformationSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/SendCommandSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/SendCommandSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProcSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProcSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/CronkTrigger.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/CronkTrigger.js
@@ -1164,9 +1222,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusSummarySuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusSummarySuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/CronkLoader.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/CronkLoader.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/CronkPortal.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/CronkPortal.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ObjectSearch.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ObjectSearch.xml
@@ -1633,6 +1691,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/schematron/iso_dsdl_include.xsl $(DESTDIR)$(prefix)/lib/agavi/src/config/schematron/iso_dsdl_include.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/schematron/iso_schematron_skeleton_for_xslt1.xsl $(DESTDIR)$(prefix)/lib/agavi/src/config/schematron/iso_schematron_skeleton_for_xslt1.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/schematron/iso_svrl.xsl $(DESTDIR)$(prefix)/lib/agavi/src/config/schematron/iso_svrl.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/schematron/readme.txt $(DESTDIR)$(prefix)/lib/agavi/src/config/schematron/readme.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/schematron/iso_svrl_for_xslt1.xsl $(DESTDIR)$(prefix)/lib/agavi/src/config/schematron/iso_svrl_for_xslt1.xsl
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/schematron/iso_schematron_message.xsl $(DESTDIR)$(prefix)/lib/agavi/src/config/schematron/iso_schematron_message.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/util/dom/AgaviXmlConfigDomAttr.class.php $(DESTDIR)$(prefix)/lib/agavi/src/config/util/dom/AgaviXmlConfigDomAttr.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/util/dom/AgaviXmlConfigDomCharacterData.class.php $(DESTDIR)$(prefix)/lib/agavi/src/config/util/dom/AgaviXmlConfigDomCharacterData.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/config/util/dom/AgaviXmlConfigDomComment.class.php $(DESTDIR)$(prefix)/lib/agavi/src/config/util/dom/AgaviXmlConfigDomComment.class.php
@@ -1848,6 +1909,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/testing/PHPUnit/Constraint/AgaviConstraintActionHandlesMethod.php $(DESTDIR)$(prefix)/lib/agavi/src/testing/PHPUnit/Constraint/AgaviConstraintActionHandlesMethod.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/testing/PHPUnit/Constraint/AgaviConstraintViewHandlesOutputType.php $(DESTDIR)$(prefix)/lib/agavi/src/testing/PHPUnit/Constraint/AgaviConstraintViewHandlesOutputType.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/testing/templates/AgaviBootstrap.tpl.php $(DESTDIR)$(prefix)/lib/agavi/src/testing/templates/AgaviBootstrap.tpl.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/testing/templates/TestCaseMethod.tpl $(DESTDIR)$(prefix)/lib/agavi/src/testing/templates/TestCaseMethod.tpl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/AgaviBasicTranslator.class.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/AgaviBasicTranslator.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/AgaviCurrencyFormatter.class.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/AgaviCurrencyFormatter.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/AgaviDateFormatter.class.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/AgaviDateFormatter.class.php
@@ -2694,6 +2756,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/Pacific_47_Wallis.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/Pacific_47_Wallis.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/WET.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/WET.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/zonelist.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/zonelist.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/America_47_Matamoros.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/America_47_Matamoros.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/America_47_Santa_Isabel.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/America_47_Santa_Isabel.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/America_47_Ojinaga.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/America_47_Ojinaga.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/data/timezones/Asia_47_Novokuznetsk.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/data/timezones/Asia_47_Novokuznetsk.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/translation/gettext/AgaviGettextMoReader.class.php $(DESTDIR)$(prefix)/lib/agavi/src/translation/gettext/AgaviGettextMoReader.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/user/AgaviISecurityUser.interface.php $(DESTDIR)$(prefix)/lib/agavi/src/user/AgaviISecurityUser.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/user/AgaviRbacSecurityUser.class.php $(DESTDIR)$(prefix)/lib/agavi/src/user/AgaviRbacSecurityUser.class.php
@@ -2774,6 +2840,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/FlatXml.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/FlatXml.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/Xml.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/Xml.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/Yaml.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/Yaml.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/Factory.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Persistors/Factory.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/QueryDataSet.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/QueryDataSet.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/QueryTable.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/QueryTable.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/ReplacementDataSet.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/ReplacementDataSet.php
@@ -2783,6 +2850,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/TableMetaDataFilter.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/TableMetaDataFilter.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/XmlDataSet.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/XmlDataSet.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/YamlDataSet.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/YamlDataSet.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Yaml.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Yaml.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Csv.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Csv.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/FlatXml.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/FlatXml.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/IFactory.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/IFactory.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/DbQuery.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/DbQuery.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/DbTable.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/DbTable.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Xml.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Xml.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Factory.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/Specs/Factory.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/ISpec.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DataSet/ISpec.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/DefaultTester.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/DefaultTester.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/ITester.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/ITester.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation/Composite.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation/Composite.php
@@ -2798,6 +2874,18 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation/Truncate.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation/Truncate.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation/Update.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/Operation/Update.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/TestCase.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/TestCase.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Context.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Context.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IMedium.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IMedium.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IModeFactory.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IModeFactory.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/ModeFactory.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/ModeFactory.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/InvalidModeException.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/InvalidModeException.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IMode.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IMode.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Command.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Command.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Mediums/Text.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Mediums/Text.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Modes/ExportDataSet/Arguments.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Modes/ExportDataSet/Arguments.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Modes/ExportDataSet.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/Modes/ExportDataSet.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IMediumPrinter.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/UI/IMediumPrinter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/Database/IDatabaseListConsumer.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/Database/IDatabaseListConsumer.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/GroupTestSuite.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/GroupTestSuite.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/OutputTestCase.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/OutputTestCase.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Extensions/PerformanceTestCase.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Extensions/PerformanceTestCase.php
@@ -2921,6 +3009,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Framework/TestResult.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/TestResult.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Framework/TestSuite.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/TestSuite.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Framework/Warning.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/Warning.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Framework/TestSuite/DataProvider.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/TestSuite/DataProvider.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Framework/Exception.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Framework/Exception.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Runner/BaseTestRunner.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Runner/BaseTestRunner.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Runner/IncludePathTestCollector.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Runner/IncludePathTestCollector.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Runner/StandardTestSuiteLoader.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Runner/StandardTestSuiteLoader.php
@@ -3008,6 +3098,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/interface.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/interface.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/wsdl_class.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/wsdl_class.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/wsdl_class_partial.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/wsdl_class_partial.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_implementing_interface_call_parent_constructor.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_implementing_interface_call_parent_constructor.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_call_parent_clone.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_call_parent_clone.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_interface.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_interface.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_implementing_interface_dont_call_parent_constructor.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_implementing_interface_dont_call_parent_constructor.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_partial.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_partial.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_dont_call_parent_clone.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_dont_call_parent_clone.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_dont_call_parent_constructor.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_dont_call_parent_constructor.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_call_parent_constructor.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObject/namespaced_class_call_parent_constructor.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObjectTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/MockObjectTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/SuiteTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/SuiteTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Framework/TestCaseTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Framework/TestCaseTest.php
@@ -3018,6 +3117,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/684.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/684.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/Issue578Test.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/Issue578Test.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/Issue684Test.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/Issue684Test.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/TwoTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/TwoTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/ParentSuite.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/ParentSuite.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/ChildSuite.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/ChildSuite.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/OneTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/783/OneTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/684/Issue684Test.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/684/Issue684Test.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/783.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/783.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Regression/578/Issue578Test.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Regression/578/Issue578Test.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Runner/AllTests.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Runner/AllTests.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Runner/BaseTestRunnerTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Runner/BaseTestRunnerTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/abstract-test-class.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/abstract-test-class.phpt
@@ -3082,6 +3188,14 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/testdox.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/testdox.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/verbose-isolation.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/verbose-isolation.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/verbose.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/verbose.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dataprovider-log-xml-isolation.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dataprovider-log-xml-isolation.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/empty-testcase.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/empty-testcase.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dependencies3-isolation.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dependencies3-isolation.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dataprovider-log-xml.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dataprovider-log-xml.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/coverage-clover-function.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/coverage-clover-function.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/empty-testcase-coverage.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/empty-testcase-coverage.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dataprovider-testdox.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dataprovider-testdox.phpt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dependencies3.phpt $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/TextUI/dependencies3.phpt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Util/AllTests.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Util/AllTests.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Util/ConfigurationTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Util/ConfigurationTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/Util/TestDox/AllTests.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/Util/TestDox/AllTests.php
@@ -3155,6 +3269,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/structureIsSameButDataIsNot.xml $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/structureIsSameButDataIsNot.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/structureWrongNumberOfAttributes.xml $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/structureWrongNumberOfAttributes.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/structureWrongNumberOfNodes.xml $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/structureWrongNumberOfNodes.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInSetUpTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInSetUpTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/CoverageFunctionTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/CoverageFunctionTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInAssertPreConditionsTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInAssertPreConditionsTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/CoveredFunction.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/CoveredFunction.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/DataProviderTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/DataProviderTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInTearDownTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInTearDownTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/EmptyTestCaseTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/EmptyTestCaseTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInAssertPostConditionsTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInAssertPostConditionsTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/ExceptionInTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/_files/MultiDependencyTest.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/_files/MultiDependencyTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Tests/phpunit.xml.dist $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Tests/phpunit.xml.dist
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/TextUI/Command.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/TextUI/Command.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/TextUI/ResultPrinter.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/TextUI/ResultPrinter.php
@@ -3203,6 +3327,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Log/PMD/Rule/Project/CRAP.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Log/PMD/Rule/Project/CRAP.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Log/TAP.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Log/TAP.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Log/XML.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Log/XML.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Log/JUnit.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Log/JUnit.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Metrics.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Metrics.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Metrics/Class.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Metrics/Class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/src/vendor/PHPUnit/Util/Metrics/File.php $(DESTDIR)$(prefix)/lib/agavi/src/vendor/PHPUnit/Util/Metrics/File.php
@@ -3359,6 +3484,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/context/AgaviContextTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/context/AgaviContextTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/date/AgaviDateFormatTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/date/AgaviDateFormatTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/date/AgaviTimezoneTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/date/AgaviTimezoneTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/date/AgaviGregorianCalendarTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/date/AgaviGregorianCalendarTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/request/AgaviWebRequestDataHolderCookieTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/request/AgaviWebRequestDataHolderCookieTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/request/AgaviWebRequestDataHolderHeaderTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/request/AgaviWebRequestDataHolderHeaderTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/request/AgaviWebRequestDataHolderParameterTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/request/AgaviWebRequestDataHolderParameterTest.php
@@ -3372,6 +3498,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/util/AgaviArrayPathDefinitionTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/util/AgaviArrayPathDefinitionTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/util/AgaviParameterHolderTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/util/AgaviParameterHolderTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/util/AgaviToolkitTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/util/AgaviToolkitTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/util/AgaviAttributeHolderTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/util/AgaviAttributeHolderTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/validator/AgaviNumberValidatorTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/validator/AgaviNumberValidatorTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/AgaviTestCase.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/AgaviTestCase.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/AllTests.php $(DESTDIR)$(prefix)/lib/agavi/tests2/AllTests.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/AllTests/ActionTests.php $(DESTDIR)$(prefix)/lib/agavi/tests2/AllTests/ActionTests.php
@@ -3596,7 +3724,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectSource.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectSource.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitSelectSourceInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitSelectSourceInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitTextboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitTextboxElement.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/AppKit.js $(DESTDIR)$(prefix)/lib/appkit/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/Grapher.js $(DESTDIR)$(prefix)/lib/appkit/js/Grapher.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/SimpleDataProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/dump.js $(DESTDIR)$(prefix)/lib/appkit/js/dump.js
@@ -3604,16 +3731,17 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/FilterHandler.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/FilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/ColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/GridPanel.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/GridPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js.orig $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js.orig
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/ColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/InterGridUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/InterGridUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/StructUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/StructUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/SessionProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/SessionProvider.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/CronkMgr.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/CronkMgr.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/rmd160.js $(DESTDIR)$(prefix)/lib/appkit/js/rmd160.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/AppKit.js $(DESTDIR)$(prefix)/lib/appkit/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/json/AppKitJsonResponse.class.php $(DESTDIR)$(prefix)/lib/appkit/json/AppKitJsonResponse.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/logging/AppKitDoctrineLoggerAppender.class.php $(DESTDIR)$(prefix)/lib/appkit/logging/AppKitDoctrineLoggerAppender.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/logging/AppKitLoggerManager.class.php $(DESTDIR)$(prefix)/lib/appkit/logging/AppKitLoggerManager.class.php
@@ -3634,8 +3762,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitInlineIncluderUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitInlineIncluderUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitLdapTool.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitRandomUtil.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitStringUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitStringUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitArrayUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitArrayUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/util/AppKitStringUtil.class.php $(DESTDIR)$(prefix)/lib/appkit/util/AppKitStringUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/translator/AppKitGettextTranslator.class.php $(DESTDIR)$(prefix)/lib/appkit/translator/AppKitGettextTranslator.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/CHANGELOG $(DESTDIR)$(prefix)/lib/doctrine/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/COPYRIGHT $(DESTDIR)$(prefix)/lib/doctrine/COPYRIGHT
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/LICENSE $(DESTDIR)$(prefix)/lib/doctrine/LICENSE
@@ -6022,6 +6151,68 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/phpunit2-noframes.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/str.replace.function.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/str.replace.function.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/run-tests.php $(DESTDIR)$(prefix)/lib/phing/test/run-tests.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/examples/normal/index.html $(DESTDIR)$(prefix)/lib/jsgettext/examples/normal/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/examples/wrapper/i18n.html $(DESTDIR)$(prefix)/lib/jsgettext/examples/wrapper/i18n.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/examples/wrapper/i18n.js $(DESTDIR)$(prefix)/lib/jsgettext/examples/wrapper/i18n.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/.#README.1.3 $(DESTDIR)$(prefix)/lib/jsgettext/.#README.1.3
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/lib/Gettext.js $(DESTDIR)$(prefix)/lib/jsgettext/lib/Gettext.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/META.yml $(DESTDIR)$(prefix)/lib/jsgettext/META.yml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/' $(DESTDIR)$(prefix)/lib/jsgettext/'
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/Changes $(DESTDIR)$(prefix)/lib/jsgettext/Changes
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/00gettext.t.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/00gettext.t.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dnpgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dnpgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/01domain_multi.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/01domain_multi.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/00gettext_init.t.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/00gettext_init.t.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/01gettext_json.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/01gettext_json.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dngettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dngettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/LC_MESSAGES/test.json $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES/test.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/LC_MESSAGES/domain_multi.json $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES/domain_multi.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/LC_MESSAGES/test.po $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES/test.po
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/LC_MESSAGES/01gettext_messages.po $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES/01gettext_messages.po
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/LC_MESSAGES/domain_inferred.po $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES/domain_inferred.po
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/LC_MESSAGES/01gettext_messages.json $(DESTDIR)$(prefix)/lib/jsgettext/tests/LC_MESSAGES/01gettext_messages.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/01domain_inferred.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/01domain_inferred.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dcnpgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dcnpgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Data/Dump.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Data/Dump.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Ajax.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Ajax.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/JSAN.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/JSAN.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Test/Builder.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Builder.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Test/Harness.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Harness.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Test/Harness/Director.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Harness/Director.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Test/Harness/Browser.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Harness/Browser.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Test/More.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/More.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/lib/Test/Simple.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Simple.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02pgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02pgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/03strargs.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/03strargs.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02ngettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02ngettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02ngettext2.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02ngettext2.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/01gettext_wrapper.t.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/01gettext_wrapper.t.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/01gettext_po.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/01gettext_po.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dpgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dpgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/index.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dcgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dcgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dcpgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dcpgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02gettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02gettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/01gettext.t.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/01gettext.t.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dcngettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dcngettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02npgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02npgettext.t.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/README $(DESTDIR)$(prefix)/lib/jsgettext/README
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/MANIFEST $(DESTDIR)$(prefix)/lib/jsgettext/MANIFEST
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/TODO $(DESTDIR)$(prefix)/lib/jsgettext/TODO
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/bin/po2json $(DESTDIR)$(prefix)/lib/jsgettext/bin/po2json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/COPYING.LESSER $(DESTDIR)$(prefix)/lib/jsgettext/COPYING.LESSER
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/Makefile $(DESTDIR)$(prefix)/lib/jsgettext/Makefile
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/html/Gettext.html $(DESTDIR)$(prefix)/lib/jsgettext/doc/html/Gettext.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/html/.#Gettext.html.1.4 $(DESTDIR)$(prefix)/lib/jsgettext/doc/html/.#Gettext.html.1.4
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/html/po2json.html $(DESTDIR)$(prefix)/lib/jsgettext/doc/html/po2json.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/text/po2json.text $(DESTDIR)$(prefix)/lib/jsgettext/doc/text/po2json.text
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/text/.#Gettext.text.1.3 $(DESTDIR)$(prefix)/lib/jsgettext/doc/text/.#Gettext.text.1.3
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/text/Gettext.text $(DESTDIR)$(prefix)/lib/jsgettext/doc/text/Gettext.text
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/pod/po2json.pod $(DESTDIR)$(prefix)/lib/jsgettext/doc/pod/po2json.pod
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/pod/.#Gettext.pod.1.3 $(DESTDIR)$(prefix)/lib/jsgettext/doc/pod/.#Gettext.pod.1.3
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/pod/Gettext.pod $(DESTDIR)$(prefix)/lib/jsgettext/doc/pod/Gettext.pod
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/Makefile $(DESTDIR)$(prefix)/lib/jsgettext/doc/Makefile
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/circle-ball.gif $(DESTDIR)$(prefix)/pub/images/ajax/circle-ball.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/loadingbar.gif $(DESTDIR)$(prefix)/pub/images/ajax/loadingbar.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/s.gif $(DESTDIR)$(prefix)/pub/images/ajax/s.gif
@@ -7291,17 +7482,18 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/.htaccess $(DESTDIR)$(prefix)/pub/.htaccess
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.mo $(DESTDIR)$(prefix)/res/i18n/mo/de.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.mo $(DESTDIR)$(prefix)/res/i18n/mo/en.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.json $(DESTDIR)$(prefix)/res/i18n/mo/en.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/de.po $(DESTDIR)$(prefix)/res/i18n/po/de.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/en.po $(DESTDIR)$(prefix)/res/i18n/po/en.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/updatepo.sh $(DESTDIR)$(prefix)/res/i18n/updatepo.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-custom.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-custom.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-notification-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-custom.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-custom.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
 # INSTALL_FILES_END
