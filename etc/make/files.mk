@@ -6154,10 +6154,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/examples/normal/index.html $(DESTDIR)$(prefix)/lib/jsgettext/examples/normal/index.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/examples/wrapper/i18n.html $(DESTDIR)$(prefix)/lib/jsgettext/examples/wrapper/i18n.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/examples/wrapper/i18n.js $(DESTDIR)$(prefix)/lib/jsgettext/examples/wrapper/i18n.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/.#README.1.3 $(DESTDIR)$(prefix)/lib/jsgettext/.#README.1.3
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/lib/Gettext.js $(DESTDIR)$(prefix)/lib/jsgettext/lib/Gettext.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/META.yml $(DESTDIR)$(prefix)/lib/jsgettext/META.yml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/' $(DESTDIR)$(prefix)/lib/jsgettext/'
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/Changes $(DESTDIR)$(prefix)/lib/jsgettext/Changes
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/00gettext.t.js $(DESTDIR)$(prefix)/lib/jsgettext/tests/00gettext.t.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/tests/02dnpgettext.t.html $(DESTDIR)$(prefix)/lib/jsgettext/tests/02dnpgettext.t.html
