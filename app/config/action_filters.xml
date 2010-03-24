@@ -14,14 +14,6 @@
 					<ae:parameter>html</ae:parameter>
 				</ae:parameter>
 			</filter>
-			
-			<!-- 
-				This receive ExtJS cookies and write the data into the user
-				preference table
-			-->
-			<filter name="AppKitExtApplicationStateFilter" class="AppKitExtApplicationStateFilter">
-				
-			</filter>
 
 		</filters>
 	</ae:configuration>

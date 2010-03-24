@@ -7,6 +7,31 @@
 	<ae:configuration>
 		
 		<validators>
+		
+		<validator class="string" name="cmd" required="true">
+				<arguments>
+					<argument>cmd</argument>
+				</arguments>
+				<errors>
+					<error>Command validation failed</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameters>
+		</validator>
+		
+		
+		<validator class="string" name="data">
+				<arguments>
+					<argument>data</argument>
+				</arguments>
+				<errors>
+					<error>Data validation failed</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameters>
+		</validator>
 		</validators>
 		
 	</ae:configuration>

@@ -80,20 +80,6 @@
 			<parameter name="event">appkit.menu</parameter>
 			<parameter name="class">AppKitMenuCreator</parameter>
 		</parameter>
-	
-		<!-- Providing ExtJS stateful information -->
-		<parameter name="AppKitExtApplicationStateData">
-			<parameter name="event">appkit.headerdata.publish</parameter>
-			<parameter name="class">AppKitExtStateProviderData</parameter>
-			
-			<!-- 
-				constructor argument:
-				we need the route name where the browser can load our data
-			-->
-			<parameter name="parameter">
-				<parameter name="route">appkit.ext.applicationState</parameter>
-			</parameter>
-		</parameter>
 	</setting>
 
 	<!-- 
@@ -157,7 +143,7 @@
 	
 			<!--AppKit JS -->
 			<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>

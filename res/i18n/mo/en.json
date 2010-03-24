@@ -5,11 +5,6 @@
 	},
 	'msgid': [null, 'msgstr'],
 	
-	'test_string': [null, 'Translation of test string']
-/* 	
-	'some string' : [null, 'translated message'],
-	'context\u0004some string' : [null, 'translated context message'],
-	'one banana' : ['%n bananas', 'translated 1 banana', 'translated plural bananas'],
-	'the fruit\u0004one banana' : ['%n bananas', '[w/ context] translated 1 banana', '[w/ context] translated plural bananas']
-*/
+	'test_string': [null, 'Translation of test string'],
+	'no more fields': [null, 'No more fields are required, just press "OK" to send.']
 }

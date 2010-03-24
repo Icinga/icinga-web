@@ -22,6 +22,31 @@ class AppKit_Ext_ApplicationStateAction extends ICINGAAppKitBaseAction
 	public function handleError(AgaviRequestDataHolder $rd) {
 		return $this->getDefaultViewName();
 	}
+	
+	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviParameterHolder $rd) {
+		
+		$cmd = $rd->getParameter('cmd', 'read');
+		$provider = $this->getContext()->getModel('Ext.ApplicationState', 'AppKit');
+		switch ($cmd) {
+			
+			case 'write':
+				if (($data = $rd->getParameter('data', null))) {
+					$provider->writeState($data);
+				}
+			break;
+			
+			case 'read':
+			default:
+			
+			break;
+		}
+		
+		return $this->getDefaultViewName();
+	}
 }
 
 ?>

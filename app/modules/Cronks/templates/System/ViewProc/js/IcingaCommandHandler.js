@@ -102,7 +102,7 @@ IcingaCommandHandler.prototype = {
 					forceSelection: true,
 					
 					
-					fieldLabel: 'Option',
+					fieldLabel: _('Option'),
 					
 					valueField: 'fStatus',
 					displayField: 'fLabel',
@@ -139,7 +139,7 @@ IcingaCommandHandler.prototype = {
 					forceSelection: true,
 					
 					
-					fieldLabel: 'Status',
+					fieldLabel: _("Status"),
 					
 					valueField: 'fStatus',
 					displayField: 'fLabel',
@@ -186,7 +186,7 @@ IcingaCommandHandler.prototype = {
 			break;
 			
 			default:
-				oDef.value = '(UNKNOWN FIELD TYPE ' + o.fieldType + ')';
+				oDef.value =  '(' + String.format(_('Unknown field type: {0}'), o.fieldType) + ')';
 				return new Ext.form.DisplayField(oDef);
 			
 			break;
@@ -218,7 +218,7 @@ IcingaCommandHandler.prototype = {
 	showCommandWindow : function(command, title) {
 		
 		if (this.validSelection() !== true) {
-			AppKit.Ext.notifyMessage('Command', 'Selection is missing');
+			AppKit.Ext.notifyMessage(_('Command'), _('Selection is missing'));
 			return;
 		}
 		
@@ -234,20 +234,20 @@ IcingaCommandHandler.prototype = {
 				var o = Ext.decode(response.responseText);
 				
 				var oWin = new Ext.Window({
-					title: String.format('{0} ({1} items)', title, this.grid.getSelectionModel().getCount()),
+					title: String.format(_('{0} ({1} items)'), title, this.grid.getSelectionModel().getCount()),
 					autoDestroy: true,
 					closable: true,
 					modal: true,
 					defaultType: 'field',
 					
 					bbar: [{
-						text: 'OK',
+						text: _('OK'),
 						iconCls: 'silk-accept',
 						handler: function(b, e) {
 							oForm.getForm().doAction(oFormAction);
 						}
 					}, {
-						text: 'Abort',
+						text: _('Abort'),
 						iconCls: 'silk-cross',
 						handler: function(b, e) { oWin.close(); }
 					}],
@@ -298,13 +298,13 @@ IcingaCommandHandler.prototype = {
 							var e = Ext.util.JSON.decode(a.response.responseText);
 							var error = e.errors['default'];
 							
-							AppKit.Ext.notifyMessage('Error sending command', error);
+							AppKit.Ext.notifyMessage(_('Error sending command'), error);
 						}
 					},
 					
 					success: function(f, a) {
 						oWin.close();
-						AppKit.Ext.notifyMessage('Command sent', '{0} command was sent successfully!', command);
+						AppKit.Ext.notifyMessage(_('Command sent'), String.format(_('{0} command was sent successfully!'), command));
 					}
 				});
 				
@@ -332,7 +332,7 @@ IcingaCommandHandler.prototype = {
 				if (bAdd === false) {
 					oForm.add({
 						xtype: 'label',
-						text: 'No more fields are required, just press "OK" to send.'
+						text: _('no more fields')
 					});
 				}
 				
