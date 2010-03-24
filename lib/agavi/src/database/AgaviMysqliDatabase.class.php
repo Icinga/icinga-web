@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2003-2007 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -42,7 +42,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviMysqliDatabase.class.php 3828 2009-02-11 11:12:41Z david $
+ * @version    $Id: AgaviMysqliDatabase.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviMysqliDatabase extends AgaviMysqlDatabase
 {

@@ -1,30 +1,30 @@
 
-A list of foreigh component and frameworks used by icinga-web:
+A list of foreign components and frameworks used by icinga-web:
 
 	* Agavi
 	  Pure MVC controller
+	  http://www.agavi.org/ (GPLv2)
 	  
 	* Doctrine
 	  PHP database relational mapper
+	  http://www.doctrine-project.org/ (LGPL)
 	  
 	* ExtJS
 	  Javascript widget and ajax library
+	  http://www.extjs.com/products/js/ (GPLv3)
 	
 	* Icinga-API ;-)
 	  Data abstraction layer between icinga-core and other software
-	
-	* JQuery
-	  An other javascript library (deprecated)
-	
-	* pChart
-	  PHP charting library
-	
+	  http://dev.icinga.org (GPLv2)
+
 	* PHING
 	  PHP build platform, a Java ANT clone for PHP
-	
-	* SWFObject
-	  Displays browser independent flash content
-	
-	* YUI
-	  A a javascript library again, should be deprecated within the next releases
-
+	  http://phing.info/trac/ (LGPL)
+	  
+	* JSGettext
+	  Pure javascript implementation of gettext with json base
+	  http://jsgettext.berlios.de/ (LGPL)
+	  
+	* JIT
+	  The JavaScript InfoVis Toolkit provides tools for creating Interactive Data Visualizations for the Web
+	  http://thejit.org/ (BSD License)

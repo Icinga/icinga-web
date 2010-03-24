@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: PhptTestCase.php 4527 2009-01-21 14:16:42Z sb $
+ * @version    SVN: $Id: PhptTestCase.php 5135 2009-08-27 08:37:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.4
  */
@@ -102,7 +102,7 @@ class PHPUnit_Extensions_PhptTestCase implements PHPUnit_Framework_Test, PHPUnit
         }
 
         if (!is_file($filename)) {
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               sprintf(
                 'File "%s" does not exist.',
                 $filename
@@ -134,7 +134,7 @@ class PHPUnit_Extensions_PhptTestCase implements PHPUnit_Framework_Test, PHPUnit
     public function run(PHPUnit_Framework_TestResult $result = NULL, array $options = array())
     {
         if (!class_exists('PEAR_RunTest', FALSE)) {
-            throw new RuntimeException('Class PEAR_RunTest not found.');
+            throw new PHPUnit_Framework_Exception('Class PEAR_RunTest not found.');
         }
 
         if (isset($GLOBALS['_PEAR_destructor_object_list']) &&

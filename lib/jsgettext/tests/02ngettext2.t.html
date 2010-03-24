@@ -1,0 +1,28 @@
+<head>
+    <link rel="gettext" type="application/x-po" href="LC_MESSAGES/test.po" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 44});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+var strings = ['Singular', 'Plural'];
+for (var i=0; i<=40; i++) {
+    var translation = gt.ngettext(strings[0], strings[1], i);
+    var plural = ((i == 1) ? 0 :
+                  (i % 10 == 2) ? 1 :
+                  (i % 10 == 3 || i % 10 == 4) ? 2 : 3);
+    is(translation, 'Numerus '+plural);
+}
+
+</script></pre>
+</body>

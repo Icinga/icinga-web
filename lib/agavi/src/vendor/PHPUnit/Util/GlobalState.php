@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: GlobalState.php 4703 2009-03-02 08:18:27Z sb $
+ * @version    SVN: $Id: GlobalState.php 5323 2009-11-13 08:57:15Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.4.0
  */
@@ -49,7 +49,7 @@ require_once 'PHPUnit/Util/Filter.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 /**
- * 
+ *
  *
  * @category   Testing
  * @package    PHPUnit
@@ -109,7 +109,9 @@ class PHPUnit_Util_GlobalState
         }
 
         foreach (array_keys($GLOBALS) as $key) {
-            if ($key != 'GLOBALS' && !in_array($key, $superGlobalArrays) && !in_array($key, $blacklist)) {
+            if ($key != 'GLOBALS' &&
+                !in_array($key, $superGlobalArrays) &&
+                !in_array($key, $blacklist)) {
                 self::$globals['GLOBALS'][$key] = serialize($GLOBALS[$key]);
             }
         }
@@ -132,9 +134,13 @@ class PHPUnit_Util_GlobalState
         }
 
         foreach (array_keys($GLOBALS) as $key) {
-            if ($key != 'GLOBALS' && !in_array($key, $superGlobalArrays) && !in_array($key, $blacklist)) {
+            if ($key != 'GLOBALS' &&
+                !in_array($key, $superGlobalArrays) &&
+                !in_array($key, $blacklist)) {
                 if (isset(self::$globals['GLOBALS'][$key])) {
-                    $GLOBALS[$key] = unserialize(self::$globals['GLOBALS'][$key]);
+                    $GLOBALS[$key] = unserialize(
+                      self::$globals['GLOBALS'][$key]
+                    );
                 } else {
                     unset($GLOBALS[$key]);
                 }
@@ -160,7 +166,9 @@ class PHPUnit_Util_GlobalState
         if (isset($GLOBALS[$superGlobalArray])) {
             foreach ($GLOBALS[$superGlobalArray] as $key => $value) {
                 if (isset(self::$globals[$superGlobalArray][$key])) {
-                    $GLOBALS[$superGlobalArray][$key] = unserialize(self::$globals[$superGlobalArray][$key]);
+                    $GLOBALS[$superGlobalArray][$key] = unserialize(
+                      self::$globals[$superGlobalArray][$key]
+                    );
                 } else {
                     unset($GLOBALS[$superGlobalArray][$key]);
                 }
@@ -168,6 +176,41 @@ class PHPUnit_Util_GlobalState
         }
 
         self::$globals[$superGlobalArray] = array();
+    }
+
+    public static function getIncludedFilesAsString()
+    {
+        $blacklist = PHPUnit_Util_Filter::getBlacklistedFiles();
+        $blacklist = array_flip($blacklist['PHPUNIT']);
+        $files     = get_included_files();
+        $result    = '';
+
+        for ($i = count($files) - 1; $i > 0; $i--) {
+            if (!isset($blacklist[$files[$i]]) && is_file($files[$i])) {
+                $result = 'require_once \'' . $files[$i] . "';\n" . $result;
+            }
+        }
+
+        return $result;
+    }
+
+    public static function getConstantsAsString()
+    {
+        $constants = get_defined_constants(TRUE);
+        $result    = '';
+
+        if (isset($constants['user'])) {
+            foreach ($constants['user'] as $name => $value) {
+                $result .= sprintf(
+                  'if (!defined(\'%s\')) define(\'%s\', %s);' . "\n",
+                  $name,
+                  $name,
+                  self::exportVariable($value)
+                );
+            }
+        }
+
+        return $result;
     }
 
     public static function getGlobalsAsString()
@@ -182,18 +225,22 @@ class PHPUnit_Util_GlobalState
                       '$GLOBALS[\'%s\'][\'%s\'] = %s;' . "\n",
                       $superGlobalArray,
                       $key,
-                      var_export($GLOBALS[$superGlobalArray][$key], TRUE)
+                      self::exportVariable($GLOBALS[$superGlobalArray][$key])
                     );
                 }
             }
         }
 
+        $blacklist   = $superGlobalArrays;
+        $blacklist[] = 'GLOBALS';
+        $blacklist[] = '_PEAR_Config_instance';
+
         foreach (array_keys($GLOBALS) as $key) {
-            if ($key != 'GLOBALS' && !in_array($key, $superGlobalArrays)) {
+            if (!in_array($key, $blacklist)) {
                 $result .= sprintf(
                   '$GLOBALS[\'%s\'] = %s;' . "\n",
                   $key,
-                  var_export($GLOBALS[$key], TRUE)
+                  self::exportVariable($GLOBALS[$key])
                 );
             }
         }
@@ -219,7 +266,8 @@ class PHPUnit_Util_GlobalState
         $declaredClassesNum     = count($declaredClasses);
 
         for ($i = $declaredClassesNum - 1; $i >= 0; $i--) {
-            if (strpos($declaredClasses[$i], 'PHPUnit') !== 0 && !$declaredClasses[$i] instanceof PHPUnit_Framework_Test) {
+            if (strpos($declaredClasses[$i], 'PHPUnit') !== 0 &&
+                !$declaredClasses[$i] instanceof PHPUnit_Framework_Test) {
                 $class = new ReflectionClass($declaredClasses[$i]);
 
                 if (!$class->isUserDefined()) {
@@ -232,7 +280,8 @@ class PHPUnit_Util_GlobalState
                     if ($attribute->isStatic()) {
                         $name = $attribute->getName();
 
-                        if (!isset($blacklist[$declaredClasses[$i]]) || !in_array($name, $blacklist[$declaredClasses[$i]])) {
+                        if (!isset($blacklist[$declaredClasses[$i]]) ||
+                           !in_array($name, $blacklist[$declaredClasses[$i]])) {
                             $attribute->setAccessible(TRUE);
                             $backup[$name] = serialize($attribute->getValue());
                         }
@@ -257,6 +306,37 @@ class PHPUnit_Util_GlobalState
         }
 
         self::$staticAttributes = array();
+    }
+
+    protected static function exportVariable($variable)
+    {
+        if (is_scalar($variable) || is_null($variable) ||
+           (is_array($variable) && self::arrayOnlyContainsScalars($variable))) {
+            return var_export($variable, TRUE);
+        }
+
+        return 'unserialize(\'' . serialize($variable) . '\')';
+    }
+
+    protected static function arrayOnlyContainsScalars(array $array)
+    {
+        $result = TRUE;
+
+        foreach ($array as $element) {
+            if (is_array($element)) {
+                $result = self::arrayOnlyContainsScalars($element);
+            }
+
+            else if (!is_scalar($element) && !is_null($element)) {
+                $result = FALSE;
+            }
+
+            if ($result === FALSE) {
+                break;
+            }
+        }
+
+        return $result;
     }
 }
 ?>

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Node.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Node.php 4938 2009-06-15 12:03:57Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -93,28 +93,27 @@ abstract class PHPUnit_Util_Report_Node
     }
 
     /**
-     * Returns the percentage of classes of which at least one method
-     * has been called at least once..
+     * Returns the percentage of classes that has been tested.
      *
      * @return integer
      */
-    public function getCalledClassesPercent()
+    public function getTestedClassesPercent()
     {
         return $this->calculatePercent(
-          $this->getNumCalledClasses(),
+          $this->getNumTestedClasses(),
           $this->getNumClasses()
         );
     }
 
     /**
-     * Returns the percentage of methods that has been called at least once.
+     * Returns the percentage of methods that has been tested.
      *
      * @return integer
      */
-    public function getCalledMethodsPercent()
+    public function getTestedMethodsPercent()
     {
         return $this->calculatePercent(
-          $this->getNumCalledMethods(),
+          $this->getNumTestedMethods(),
           $this->getNumMethods()
         );
     }
@@ -277,11 +276,11 @@ abstract class PHPUnit_Util_Report_Node
             'name'                 => $link != NULL ? $link : $item->getLink(FALSE),
             'itemClass'            => $itemClass,
             'numClasses'           => $item->getNumClasses(),
-            'numCalledClasses'     => $item->getNumCalledClasses(),
-            'calledClassesPercent' => $item->getCalledClassesPercent(),
+            'numTestedClasses'     => $item->getNumTestedClasses(),
+            'testedClassesPercent' => $item->getTestedClassesPercent(),
             'numMethods'           => $item->getNumMethods(),
-            'numCalledMethods'     => $item->getNumCalledMethods(),
-            'calledMethodsPercent' => $item->getCalledMethodsPercent(),
+            'numTestedMethods'     => $item->getNumTestedMethods(),
+            'testedMethodsPercent' => $item->getTestedMethodsPercent(),
             'numExecutableLines'   => $item->getNumExecutableLines(),
             'numExecutedLines'     => $item->getNumExecutedLines(),
             'executedLinesPercent' => $item->getLineExecutedPercent()
@@ -307,10 +306,10 @@ abstract class PHPUnit_Util_Report_Node
 
         if ($data['numClasses'] > 0) {
             list($classesColor, $classesLevel) = $this->getColorLevel(
-              $data['calledClassesPercent'], $lowUpperBound, $highLowerBound
+              $data['testedClassesPercent'], $lowUpperBound, $highLowerBound
             );
 
-            $classesNumber = $data['numCalledClasses'] . ' / ' . $data['numClasses'];
+            $classesNumber = $data['numTestedClasses'] . ' / ' . $data['numClasses'];
         } else {
             $classesColor  = 'snow';
             $classesLevel  = 'None';
@@ -319,10 +318,10 @@ abstract class PHPUnit_Util_Report_Node
 
         if ($data['numMethods'] > 0) {
             list($methodsColor, $methodsLevel) = $this->getColorLevel(
-              $data['calledMethodsPercent'], $lowUpperBound, $highLowerBound
+              $data['testedMethodsPercent'], $lowUpperBound, $highLowerBound
             );
 
-            $methodsNumber = $data['numCalledMethods'] . ' / ' . $data['numMethods'];
+            $methodsNumber = $data['numTestedMethods'] . ' / ' . $data['numMethods'];
         } else {
             $methodsColor  = 'snow';
             $methodsLevel  = 'None';
@@ -345,15 +344,15 @@ abstract class PHPUnit_Util_Report_Node
             'itemClass'                => isset($data['itemClass']) ? $data['itemClass'] : 'coverItem',
             'classes_color'            => $classesColor,
             'classes_level'            => $functions ? 'None' : $classesLevel,
-            'classes_called_width'     => floor($data['calledClassesPercent']),
-            'classes_called_percent'   => !$functions && $data['numClasses'] > 0 ? $data['calledClassesPercent'] . '%' : '&nbsp;',
-            'classes_not_called_width' => 100 - floor($data['calledClassesPercent']),
+            'classes_tested_width'     => floor($data['testedClassesPercent']),
+            'classes_tested_percent'   => !$functions && $data['numClasses'] > 0 ? $data['testedClassesPercent'] . '%' : '&nbsp;',
+            'classes_not_tested_width' => 100 - floor($data['testedClassesPercent']),
             'classes_number'           => $functions ? '&nbsp;' : $classesNumber,
             'methods_color'            => $methodsColor,
             'methods_level'            => $methodsLevel,
-            'methods_called_width'     => floor($data['calledMethodsPercent']),
-            'methods_called_percent'   => $data['numMethods'] > 0 ? $data['calledMethodsPercent'] . '%' : '&nbsp;',
-            'methods_not_called_width' => 100 - floor($data['calledMethodsPercent']),
+            'methods_tested_width'     => floor($data['testedMethodsPercent']),
+            'methods_tested_percent'   => $data['numMethods'] > 0 ? $data['testedMethodsPercent'] . '%' : '&nbsp;',
+            'methods_not_tested_width' => 100 - floor($data['testedMethodsPercent']),
             'methods_number'           => $methodsNumber,
             'lines_color'              => $linesColor,
             'lines_level'              => $linesLevel,
@@ -420,7 +419,8 @@ abstract class PHPUnit_Util_Report_Node
             'lines_executed_percent' => $this->getLineExecutedPercent(),
             'date'                   => $template->getDate(),
             'phpunit_version'        => PHPUnit_Runner_Version::id(),
-            'xdebug_version'         => phpversion('xdebug')
+            'xdebug_version'         => phpversion('xdebug'),
+            'php_version'            => PHP_VERSION
           )
         );
     }
@@ -454,12 +454,11 @@ abstract class PHPUnit_Util_Report_Node
     abstract public function getNumClasses();
 
     /**
-     * Returns the number of classes of which at least one method
-     * has been called at least once.
+     * Returns the number of tested classes.
      *
      * @return integer
      */
-    abstract public function getNumCalledClasses();
+    abstract public function getNumTestedClasses();
 
     /**
      * Returns the number of methods.
@@ -469,11 +468,11 @@ abstract class PHPUnit_Util_Report_Node
     abstract public function getNumMethods();
 
     /**
-     * Returns the number of methods that has been called at least once.
+     * Returns the number of tested methods.
      *
      * @return integer
      */
-    abstract public function getNumCalledMethods();
+    abstract public function getNumTestedMethods();
 
     /**
      * Renders this node.

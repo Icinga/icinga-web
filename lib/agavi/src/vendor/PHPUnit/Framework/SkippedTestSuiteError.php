@@ -39,17 +39,14 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: SkippedTestSuiteError.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: SkippedTestSuiteError.php 5156 2009-08-29 05:48:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
 
 require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/Util/Filter.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
-
-if (!class_exists('PHPUnit_Framework_SkippedTestSuiteError', FALSE)) {
 
 /**
  * Extension to PHPUnit_Framework_AssertionFailedError to mark the special
@@ -66,7 +63,5 @@ if (!class_exists('PHPUnit_Framework_SkippedTestSuiteError', FALSE)) {
  */
 class PHPUnit_Framework_SkippedTestSuiteError extends PHPUnit_Framework_AssertionFailedError implements PHPUnit_Framework_SkippedTest
 {
-}
-
 }
 ?>

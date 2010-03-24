@@ -1,0 +1,36 @@
+<head>
+    <link rel="gettext" type="application/json" href="LC_MESSAGES/domain_multi.json" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 15});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+
+is(gt.dcnpgettext('messages', 'context', 'test singular', 'test plural', 1, 'LC_MESSAGES'), 'XXtestXX context singular', "singular from plural");
+is(gt.dcnpgettext('messages', 'context', 'test singular', 'test plural', 2, 'LC_MESSAGES'), 'XXtestXX context plural', "plural from plural");
+is(gt.dcnpgettext('messages', 'context', 'test singular', 'test plural', 0, 'LC_MESSAGES'), 'XXtestXX context plural', "zero from plural");
+
+is(gt.dcnpgettext('messages2', 'context', 'test singular', 'test plural', 1, 'LC_MESSAGES'), '22test22 context singular', "singular from plural");
+is(gt.dcnpgettext('messages2', 'context', 'test singular', 'test plural', 2, 'LC_MESSAGES'), '22test22 context plural', "plural from plural");
+is(gt.dcnpgettext('messages2', 'context', 'test singular', 'test plural', 0, 'LC_MESSAGES'), '22test22 context plural', "zero from plural");
+
+is(gt.dcnpgettext('messages', 'context', 'Not translated', 'Not translated plural', 1, 'LC_MESSAGES'), 'Not translated', "untranslated strings pass through");
+is(gt.dcnpgettext('messages', 'context', 'Not translated', 'Not translated plural', 2, 'LC_MESSAGES'), 'Not translated plural', "untranslated strings pass through");
+is(gt.dcnpgettext('messages', 'context', 'Not translated', 'Not translated plural', 0, 'LC_MESSAGES'), 'Not translated plural', "untranslated strings pass through");
+
+is(gt.dcnpgettext('messages2', 'context', 'Not translated', 'Not translated plural', 1, 'LC_MESSAGES'), 'Not translated', "untranslated strings pass through");
+is(gt.dcnpgettext('messages2', 'context', 'Not translated', 'Not translated plural', 2, 'LC_MESSAGES'), 'Not translated plural', "untranslated strings pass through");
+is(gt.dcnpgettext('messages2', 'context', 'Not translated', 'Not translated plural', 0, 'LC_MESSAGES'), 'Not translated plural', "untranslated strings pass through");
+
+</script></pre>
+</body>

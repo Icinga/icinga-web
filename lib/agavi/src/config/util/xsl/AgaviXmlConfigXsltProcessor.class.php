@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -25,7 +25,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviXmlConfigXsltProcessor.class.php 3830 2009-02-11 11:56:38Z david $
+ * @version    $Id: AgaviXmlConfigXsltProcessor.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviXmlConfigXsltProcessor extends XSLTProcessor
 {
@@ -49,7 +49,7 @@ class AgaviXmlConfigXsltProcessor extends XSLTProcessor
 		if(libxml_get_last_error() !== false || count(libxml_get_errors())) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-				$errors[] = $error->message;
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
@@ -88,13 +88,13 @@ class AgaviXmlConfigXsltProcessor extends XSLTProcessor
 		if($result === false || libxml_get_last_error() !== false || count(libxml_get_errors())) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-				$errors[] = $error->message;
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
 			throw new Exception(
 				sprintf(
-					'Error%s occured while transforming the document using an XSL stylesheet: ' . "\n\n%s", 
+					'Error%s occurred while transforming the document using an XSL stylesheet: ' . "\n\n%s", 
 					count($errors) > 1 ? 's' : '', 
 					implode("\n", $errors)
 				)

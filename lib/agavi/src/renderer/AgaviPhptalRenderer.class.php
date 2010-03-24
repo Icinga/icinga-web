@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviPhptalRenderer.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviPhptalRenderer.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviPhptalRenderer extends AgaviRenderer
 {
@@ -67,6 +67,38 @@ class AgaviPhptalRenderer extends AgaviRenderer
 		unset($keys[array_search('phptal', $keys)]);
 		return $keys;
 	}
+	
+	/**
+	 * Create an instance of PHPTAL and initialize it correctly.
+	 *
+	 * @return     PHPTAL The PHPTAL instance.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      1.0.2
+	 */
+	protected function createEngineInstance()
+	{
+		$phptalPhpCodeDestination = AgaviConfig::get('core.cache_dir') . DIRECTORY_SEPARATOR . AgaviPhptalRenderer::COMPILE_DIR . DIRECTORY_SEPARATOR . AgaviPhptalRenderer::COMPILE_SUBDIR . DIRECTORY_SEPARATOR;
+		
+		// we keep this for < 1.2
+		if(!defined('PHPTAL_PHP_CODE_DESTINATION')) {
+			define('PHPTAL_PHP_CODE_DESTINATION', $phptalPhpCodeDestination);
+		}
+		
+		AgaviToolkit::mkdir($phptalPhpCodeDestination, fileperms(AgaviConfig::get('core.cache_dir')), true);
+		
+		if(!class_exists('PHPTAL')) {
+			require('PHPTAL.php');
+		}
+		
+		$phptal = new PHPTAL();
+		
+		if(version_compare(PHPTAL_VERSION, '1.2', 'ge')) {
+			$phptal->setPhpCodeDestination($phptalPhpCodeDestination);
+		}
+		
+		return $phptal;
+	}
 
 	/**
 	 * Retrieve the PHPTAL instance
@@ -79,18 +111,12 @@ class AgaviPhptalRenderer extends AgaviRenderer
 	 */
 	protected function getEngine()
 	{
-		if($this->phptal === null) {
-			if(!defined('PHPTAL_PHP_CODE_DESTINATION')) {
-				define('PHPTAL_PHP_CODE_DESTINATION', AgaviConfig::get('core.cache_dir') . DIRECTORY_SEPARATOR . AgaviPhptalRenderer::COMPILE_DIR . DIRECTORY_SEPARATOR . AgaviPhptalRenderer::COMPILE_SUBDIR . DIRECTORY_SEPARATOR);
-				AgaviToolkit::mkdir(PHPTAL_PHP_CODE_DESTINATION, fileperms(AgaviConfig::get('core.cache_dir')), true);
-			}
-			
-			if(!class_exists('PHPTAL')) {
-				require('PHPTAL.php');
-			}
-			
-			$this->phptal = new PHPTAL();
+		if($this->phptal) {
+			return $this->phptal;
 		}
+		
+		$this->phptal = $this->createEngineInstance();
+		
 		return $this->phptal;
 	}
 

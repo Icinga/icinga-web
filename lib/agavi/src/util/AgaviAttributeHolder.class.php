@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviAttributeHolder.class.php 4036 2009-04-18 22:30:30Z david $
+ * @version    $Id: AgaviAttributeHolder.class.php 4399 2010-01-11 16:41:20Z david $
  */
 abstract class AgaviAttributeHolder extends AgaviParameterHolder
 {
@@ -282,7 +282,7 @@ abstract class AgaviAttributeHolder extends AgaviParameterHolder
 				unset($this->attributes[$ns][$name]);
 			} else {
 				try {
-					$retval = AgaviArrayPathDefinition::unsetValue($name, $this->attributes[$ns]);
+					$retval =& AgaviArrayPathDefinition::unsetValue($name, $this->attributes[$ns]);
 				} catch(InvalidArgumentException $e) {
 				}
 			}
@@ -450,7 +450,9 @@ abstract class AgaviAttributeHolder extends AgaviParameterHolder
 			$this->attributes[$ns] = array();
 		}
 
-		$this->attributes[$ns] = array_merge($this->attributes[$ns], $attributes);
+		// array_merge would reindex numeric keys, so we use the + operator
+		// mind the operand order: keys that exist in the left one aren't overridden
+		$this->attributes[$ns] = $attributes + $this->attributes[$ns];
 	}
 
 	/**

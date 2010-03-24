@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -29,7 +29,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviWebRequest.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviWebRequest.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviWebRequest extends AgaviRequest
 {
@@ -443,8 +443,8 @@ class AgaviWebRequest extends AgaviRequest
 				}
 			} else {
 				// some other data via PUT. we need to populate $_FILES manually
-				$putFile = tempnam(AgaviConfig::get('core.cache_dir'), "PUTUpload_");
-				$size = stream_copy_to_stream(fopen("php://input", "rb"), $handle = fopen($putFile, "wb"));
+				$putFile = tempnam(AgaviConfig::get('core.cache_dir'), 'PUTUpload_');
+				$size = stream_copy_to_stream(fopen('php://input', 'rb'), $handle = fopen($putFile, 'wb'));
 				fclose($handle);
 
 				$_FILES = array(
@@ -460,8 +460,8 @@ class AgaviWebRequest extends AgaviRequest
 			}
 		} elseif($this->getMethod() == $methods['POST'] && (!isset($_SERVER['CONTENT_TYPE']) || (isset($_SERVER['CONTENT_TYPE']) && !preg_match('#^(application/x-www-form-urlencoded|multipart/form-data)(;[^;]+)*?$#', $_SERVER['CONTENT_TYPE'])))) {
 			// POST, but no regular urlencoded data or file upload. lets put the request payload into a file
-			$postFile = tempnam(AgaviConfig::get('core.cache_dir'), "POSTUpload_");
-			$size = stream_copy_to_stream(fopen("php://input", "rb"), $handle = fopen($postFile, "wb"));
+			$postFile = tempnam(AgaviConfig::get('core.cache_dir'), 'POSTUpload_');
+			$size = stream_copy_to_stream(fopen('php://input', 'rb'), $handle = fopen($postFile, 'wb'));
 			fclose($handle);
 
 			$_FILES = array(
@@ -507,7 +507,7 @@ class AgaviWebRequest extends AgaviRequest
 	{
 		parent::startup();
 		
-		if($this->getParameter("unset_input", true)) {
+		if($this->getParameter('unset_input', true)) {
 			$rla = ini_get('register_long_arrays');
 			
 			$_GET = $_POST = $_COOKIE = $_REQUEST = $_FILES = array();

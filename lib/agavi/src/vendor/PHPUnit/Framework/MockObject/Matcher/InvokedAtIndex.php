@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: InvokedAtIndex.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: InvokedAtIndex.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -64,7 +63,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -74,20 +72,36 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_MockObject_Matcher_InvokedAtIndex implements PHPUnit_Framework_MockObject_Matcher_Invocation
 {
+    /**
+     * @var integer
+     */
     protected $sequenceIndex;
 
+    /**
+     * @var integer
+     */
     protected $currentIndex = -1;
 
+    /**
+     * @param integer $sequenceIndex
+     */
     public function __construct($sequenceIndex)
     {
         $this->sequenceIndex = $sequenceIndex;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return 'invoked at sequence index ' . $this->sequenceIndex;
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @return boolean
+     */
     public function matches(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         $this->currentIndex++;
@@ -95,10 +109,19 @@ class PHPUnit_Framework_MockObject_Matcher_InvokedAtIndex implements PHPUnit_Fra
         return $this->currentIndex == $this->sequenceIndex;
     }
 
+    /**
+     * @param PHPUnit_Framework_MockObject_Invocation $invocation
+     */
     public function invoked(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
     }
 
+    /**
+     * Verifies that the current expectation is valid. If everything is OK the
+     * code should just return, if not it must throw an exception.
+     *
+     * @throws PHPUnit_Framework_ExpectationFailedException
+     */
     public function verify()
     {
         if ($this->currentIndex < $this->sequenceIndex) {

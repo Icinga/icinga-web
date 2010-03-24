@@ -33,7 +33,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-# $Id: MySQL.sql 4403 2008-12-31 09:26:51Z sb $
+# $Id: MySQL.sql 4838 2009-04-27 06:32:39Z sb $
 #
 
 CREATE TABLE IF NOT EXISTS run(
@@ -55,6 +55,8 @@ CREATE TABLE IF NOT EXISTS test(
   node_root           INTEGER UNSIGNED NOT NULL,
   node_left           INTEGER UNSIGNED NOT NULL,
   node_right          INTEGER UNSIGNED NOT NULL,
+  node_parent         INTEGER UNSIGNED NOT NULL,
+  node_depth          TINYINT UNSIGNED NOT NULL,
   node_is_leaf        BOOLEAN          NOT NULL DEFAULT 0,
 
   INDEX (run_id),
@@ -62,7 +64,8 @@ CREATE TABLE IF NOT EXISTS test(
   INDEX (code_method_id),
   INDEX (node_root),
   INDEX (node_left),
-  INDEX (node_right)
+  INDEX (node_right),
+  INDEX (node_parent)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS code_file(

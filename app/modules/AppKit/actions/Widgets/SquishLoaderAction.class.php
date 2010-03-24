@@ -31,6 +31,9 @@ class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
 		switch ($type) {
 			case AppKit_SquishFileContainerModel::TYPE_JAVASCRIPT:
 				$files = AgaviConfig::get('de.icinga.appkit.include_javascript', array());
+				if (array_key_exists('squished', $files)) {
+					$files = $files['squished'];
+				}
 			break;
 			
 			case AppKit_SquishFileContainerModel::TYPE_STYLESHEET:

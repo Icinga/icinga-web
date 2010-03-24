@@ -14,11 +14,11 @@ PHPUnit %s by Sebastian Bergmann.
 
 F
 
-Time: %i seconds
+Time: %i %s
 
 There was 1 failure:
 
-1) Warning(PHPUnit_Framework_Warning)
+1) Warning
 Cannot instantiate class "AbstractTest".
 %s/abstract-test-class.php:%i
 

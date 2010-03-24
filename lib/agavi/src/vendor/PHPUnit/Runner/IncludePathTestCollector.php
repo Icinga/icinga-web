@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IncludePathTestCollector.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: IncludePathTestCollector.php 4883 2009-05-12 06:52:06Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.1.0
  */
@@ -75,25 +75,31 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 class PHPUnit_Runner_IncludePathTestCollector implements PHPUnit_Runner_TestCollector
 {
     /**
-     * @var    string
+     * @var string
      */
     protected $filterIterator;
 
     /**
-     * @var    array
+     * @var array
      */
     protected $paths;
 
     /**
-     * @var    string
+     * @var mixed
      */
-    protected $suffix;
+    protected $suffixes;
 
     /**
-     * @param  array  $paths
-     * @param  string $suffix
+     * @var mixed
      */
-    public function __construct(array $paths = array(), $suffix = 'Test.php')
+    protected $prefixes;
+
+    /**
+     * @param array $paths
+     * @param mixed $suffixes
+     * @param mixed $prefixes
+     */
+    public function __construct(array $paths = array(), $suffixes = array('Test.php', '.phpt'), $prefixes = array())
     {
         if (!empty($paths)) {
             $this->paths = $paths;
@@ -101,7 +107,8 @@ class PHPUnit_Runner_IncludePathTestCollector implements PHPUnit_Runner_TestColl
             $this->paths = explode(PATH_SEPARATOR, get_include_path());
         }
 
-        $this->suffix = $suffix;
+        $this->suffixes = $suffixes;
+        $this->prefixes = $prefixes;
     }
 
     /**
@@ -121,7 +128,7 @@ class PHPUnit_Runner_IncludePathTestCollector implements PHPUnit_Runner_TestColl
         }
 
         $filterIterator = new PHPUnit_Util_FilterIterator(
-          $pathIterator, $this->suffix
+          $pathIterator, $this->suffixes, $this->prefixes
         );
 
         if ($this->filterIterator !== NULL) {

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -18,6 +18,10 @@
  * over time. The raw offset, rules, presence or absence of daylight savings 
  * time, and even the daylight savings amount can all vary.
  *
+ * Ported from ICU:
+ *  icu/trunk/source/i18n/olsontz.cpp         r19133
+ *  icu/trunk/source/i18n/olsontz.h           r18762
+ * 
  * @package    agavi
  * @subpackage date
  *
@@ -28,7 +32,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviOlsonTimeZone.class.php 3691 2009-01-29 09:03:22Z david $
+ * @version    $Id: AgaviOlsonTimeZone.class.php 4403 2010-01-13 14:03:13Z david $
  */
 class AgaviOlsonTimeZone extends AgaviTimeZone
 {
@@ -438,11 +442,11 @@ class AgaviOlsonTimeZone extends AgaviTimeZone
 		$limit = (int) AgaviCalendarGrego::fieldsToDay($year + 1, 0, 1) * AgaviDateDefinitions::SECONDS_PER_DAY;
 
 		// Return TRUE if DST is observed at any time during the current year.
-		foreach($this->transitions as $transition) {
-			if($transition['time'] >= $limit) {
+		for($i = 0, $transitionCount = count($this->transitions); $i < $transitionCount; ++$i) {
+			if($this->transitions[$i]['time'] >= $limit) {
 				break;
 			}
-			if($transition['time'] >= $start && $this->types[$transition['type']]['dstOffset'] != 0) {
+			if(($this->transitions[$i]['time'] >= $start && $this->types[$this->transitions[$i]['type']]['dstOffset'] != 0) || ($this->transitions[$i]['time'] > $start && $i > 0 && $this->types[$this->transitions[$i-1]['type']]['dstOffset'] != 0)) {
 				return true;
 			}
 		}

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -30,7 +30,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviDatabaseConfigHandler.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviDatabaseConfigHandler.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviDatabaseConfigHandler extends AgaviXmlConfigHandler
 {
@@ -96,6 +96,13 @@ class AgaviDatabaseConfigHandler extends AgaviXmlConfigHandler
 			}
 		}
 
+		if(!$databases) {
+			// we have no connections
+			$error = 'Configuration file "%s" does not contain any database connections.';
+			$error = sprintf($error, $document->documentURI);
+			throw new AgaviConfigurationException($error);
+		}
+
 		$data = array();
 
 		foreach($databases as $name => $db) {
@@ -111,7 +118,7 @@ class AgaviDatabaseConfigHandler extends AgaviXmlConfigHandler
 			throw new AgaviConfigurationException($error);
 		}
 
-		$data[] = sprintf("\$this->defaultDatabaseName = %s;", var_export($default, true));
+		$data[] = sprintf('$this->defaultDatabaseName = %s;', var_export($default, true));
 
 		return $this->generate($data, $document->documentURI);
 	}

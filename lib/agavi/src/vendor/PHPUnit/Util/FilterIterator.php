@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: FilterIterator.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: FilterIterator.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -64,18 +64,55 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 class PHPUnit_Util_FilterIterator extends FilterIterator
 {
     /**
-     * @var    string
+     * @var array
      */
-    protected $suffix;
+    protected $suffixes = array();
+
+    /**
+     * @var string
+     */
+    protected $prefixes = array();
 
     /**
      * @param  Iterator $iterator
-     * @param  string   $suffix
+     * @param  array    $suffixes
+     * @param  array    $prefixes
      */
-    public function __construct(Iterator $iterator, $suffix = 'Test.php')
+    public function __construct(Iterator $iterator, $suffixes = array(), $prefixes = array())
     {
+        if (is_string($suffixes)) {
+            if (!empty($suffixes)) {
+                $suffixes = array($suffixes);
+            } else {
+                $suffixes = array();
+            }
+        }
+
+        if (!is_array($suffixes)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(
+              2, 'array or string'
+            );
+        }
+
+        $this->suffixes = $suffixes;
+
+        if (is_string($prefixes)) {
+            if (!empty($prefixes)) {
+                $prefixes = array($prefixes);
+            } else {
+                $prefixes = array();
+            }
+        }
+
+        if (!is_array($prefixes)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(
+              3, 'array or string'
+            );
+        }
+
+        $this->prefixes = $prefixes;
+
         parent::__construct($iterator);
-        $this->suffix = $suffix;
     }
 
     /**
@@ -83,7 +120,46 @@ class PHPUnit_Util_FilterIterator extends FilterIterator
      */
     public function accept()
     {
-        return substr($this->getInnerIterator()->current(), -1 * strlen($this->suffix)) == $this->suffix;
+        $filename = $this->getInnerIterator()->current()->getFilename();
+
+        if (strpos($filename, '.') === 0 ||
+            preg_match(
+              '=/\.[^/]*/=',
+              $this->getInnerIterator()->current()->getPathname())) {
+            return FALSE;
+        }
+
+        if (!empty($this->prefixes)) {
+            $matched = FALSE;
+
+            foreach ($this->prefixes as $prefix) {
+                if (strpos($filename, $prefix) === 0) {
+                    $matched = TRUE;
+                    break;
+                }
+            }
+
+            if (!$matched) {
+                return FALSE;
+            }
+        }
+
+        if (!empty($this->suffixes)) {
+            $matched = FALSE;
+
+            foreach ($this->suffixes as $suffix) {
+                if (substr($filename, -1 * strlen($suffix)) == $suffix) {
+                    $matched = TRUE;
+                    break;
+                }
+            }
+
+            if (!$matched) {
+                return FALSE;
+            }
+        }
+
+        return TRUE;
     }
 }
 ?>

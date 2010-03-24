@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,6 @@
  *   'severity'   error severity in case of failure
  *   'error'      error message when validation fails
  *   'errors'     an array of errors with the reason as key
- *   'affects'    list of fields that are affected by an error
  *   'required'   if true the validator will fail when the input parameter is 
  *                not set
  *
@@ -40,7 +39,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviValidator.class.php 3984 2009-03-25 18:34:56Z david $
+ * @version    $Id: AgaviValidator.class.php 4399 2010-01-11 16:41:20Z david $
  */
 abstract class AgaviValidator extends AgaviParameterHolder
 {
@@ -341,21 +340,31 @@ abstract class AgaviValidator extends AgaviParameterHolder
 	}
 
 	/**
-	 * Returns the first argument which should be validated.
+	 * Returns the name of the argument which should be validated.
+	 * Returns the name of the first (and typically only) argument by default, or,
+	 * if a string is provided to the method, returns the name of the argument
+	 * as configured for that identifier.
 	 *
-	 * This method is to be used by validators which only expect 1 input
-	 * argument.
+	 * @param      string The optional argument identifier, as configured.
 	 *
-	 * @return     string The input argument name.
+	 * @return     string The resulting name of the argument in the request data.
 	 *
 	 * @author     Dominik del Bondio <ddb@bitxtender.com>
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * 
 	 * @since      0.11.0
 	 */
-	protected function getArgument()
+	protected function getArgument($name = null)
 	{
-		$argNames = $this->arguments;
-		reset($argNames);
-		return current($argNames);
+		if($name === null) {
+			$argNames = $this->arguments;
+			reset($argNames);
+			return current($argNames);
+		} else {
+			if(isset($this->arguments[$name])) {
+				return $this->arguments[$name];
+			}
+		}
 	}
 
 	/**

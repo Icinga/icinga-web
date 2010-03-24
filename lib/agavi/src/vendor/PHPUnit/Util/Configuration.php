@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Configuration.php 4663 2009-02-24 05:58:59Z sb $
+ * @version    SVN: $Id: Configuration.php 5288 2009-10-22 17:54:06Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -58,7 +58,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * <?xml version="1.0" encoding="utf-8" ?>
  *
  * <phpunit backupGlobals="true"
- *          backupStaticAttributes="true"
+ *          backupStaticAttributes="false"
  *          bootstrap="/path/to/bootstrap.php"
  *          colors="false"
  *          convertErrorsToExceptions="true"
@@ -66,7 +66,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *          convertWarningsToExceptions="true"
  *          processIsolation="false"
  *          stopOnFailure="false"
- *          syntaxCheck="true"
+ *          syntaxCheck="false"
  *          testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader">
  *   <testsuites>
  *     <testsuite name="My Test Suite">
@@ -132,7 +132,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *     <log type="plain" target="/tmp/logfile.txt"/>
  *     <log type="pmd-xml" target="/tmp/pmd.xml" cpdMinLines="5" cpdMinMatches="70"/>
  *     <log type="tap" target="/tmp/logfile.tap"/>
- *     <log type="test-xml" target="/tmp/logfile.xml" logIncompleteSkipped="false"/>
+ *     <log type="junit" target="/tmp/logfile.xml" logIncompleteSkipped="false"/>
  *     <log type="story-html" target="/tmp/story.html"/>
  *     <log type="story-text" target="/tmp/story.txt"/>
  *     <log type="testdox-html" target="/tmp/testdox.html"/>
@@ -227,7 +227,7 @@ class PHPUnit_Util_Configuration
         $realpath = realpath($filename);
 
         if ($realpath === FALSE) {
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               sprintf(
                 'Could not read "%s".',
                 $filename
@@ -238,7 +238,7 @@ class PHPUnit_Util_Configuration
         if (!isset(self::$instances[$realpath])) {
             self::$instances[$realpath] = new PHPUnit_Util_Configuration($realpath);
         }
- 
+
         return self::$instances[$realpath];
     }
 
@@ -420,7 +420,7 @@ class PHPUnit_Util_Configuration
                 }
             }
 
-            else if ($type == 'test-xml') {
+            else if ($type == 'junit' || $type == 'test-xml') {
                 if ($log->hasAttribute('logIncompleteSkipped')) {
                     $result['logIncompleteSkipped'] = $this->getBoolean(
                       (string)$log->getAttribute('logIncompleteSkipped'),
@@ -551,7 +551,7 @@ class PHPUnit_Util_Configuration
         if ($this->document->documentElement->hasAttribute('backupStaticAttributes')) {
             $result['backupStaticAttributes'] = $this->getBoolean(
               (string)$this->document->documentElement->getAttribute('backupStaticAttributes'),
-              TRUE
+              FALSE
             );
         }
 
@@ -597,7 +597,7 @@ class PHPUnit_Util_Configuration
         if ($this->document->documentElement->hasAttribute('syntaxCheck')) {
             $result['syntaxCheck'] = $this->getBoolean(
               (string)$this->document->documentElement->getAttribute('syntaxCheck'),
-              TRUE
+              FALSE
             );
         }
 
@@ -693,11 +693,19 @@ class PHPUnit_Util_Configuration
      * @return PHPUnit_Framework_TestSuite
      * @since  Method available since Release 3.2.1
      */
-    public function getTestSuiteConfiguration($syntaxCheck = TRUE)
+    public function getTestSuiteConfiguration($syntaxCheck = FALSE)
     {
         $testSuiteNodes = $this->xpath->query('testsuites/testsuite');
 
-        if ($testSuiteNodes->length > 0) {
+        if ($testSuiteNodes->length == 0) {
+            $testSuiteNodes = $this->xpath->query('testsuite');
+        }
+
+        if ($testSuiteNodes->length == 1) {
+            return $this->getTestSuite($testSuiteNodes->item(0), $syntaxCheck);
+        }
+
+        if ($testSuiteNodes->length > 1) {
             $suite = new PHPUnit_Framework_TestSuite;
 
             foreach ($testSuiteNodes as $testSuiteNode) {
@@ -727,6 +735,12 @@ class PHPUnit_Util_Configuration
         }
 
         foreach ($testSuiteNode->getElementsByTagName('directory') as $directoryNode) {
+            if ($directoryNode->hasAttribute('prefix')) {
+                $prefix = (string)$directoryNode->getAttribute('prefix');
+            } else {
+                $prefix = '';
+            }
+
             if ($directoryNode->hasAttribute('suffix')) {
                 $suffix = (string)$directoryNode->getAttribute('suffix');
             } else {
@@ -734,7 +748,7 @@ class PHPUnit_Util_Configuration
             }
 
             $testCollector = new PHPUnit_Runner_IncludePathTestCollector(
-              array((string)$directoryNode->nodeValue), $suffix
+              array((string)$directoryNode->nodeValue), $suffix, $prefix
             );
 
             $suite->addTestFiles($testCollector->collectTests(), $syntaxCheck);
@@ -776,15 +790,29 @@ class PHPUnit_Util_Configuration
         $directories = array();
 
         foreach ($this->xpath->query($query) as $directory) {
+            if ($directory->hasAttribute('prefix')) {
+                $prefix = (string)$directory->getAttribute('prefix');
+            } else {
+                $prefix = '';
+            }
+
             if ($directory->hasAttribute('suffix')) {
                 $suffix = (string)$directory->getAttribute('suffix');
             } else {
                 $suffix = '.php';
             }
 
+            if ($directory->hasAttribute('group')) {
+                $group = (string)$directory->getAttribute('group');
+            } else {
+                $group = 'DEFAULT';
+            }
+
             $directories[] = array(
               'path'   => (string)$directory->nodeValue,
-              'suffix' => $suffix
+              'prefix' => $prefix,
+              'suffix' => $suffix,
+              'group'  => $group
             );
         }
 

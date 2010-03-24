@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Driver.php 4726 2009-03-22 16:54:49Z sb $
+ * @version    SVN: $Id: Driver.php 5307 2009-11-06 08:15:44Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -105,7 +105,12 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
     /**
      * @var    integer
      */
-    protected $timeout = 30000;
+    protected $httpTimeout = 45;
+
+    /**
+     * @var    integer
+     */
+    protected $seleniumTimeout = 30;
 
     /**
      * @var    array
@@ -135,6 +140,11 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
     /**
      * @var array
      */
+    protected $commands = array();
+
+    /**
+     * @var array
+     */
     protected $verificationErrors = array();
 
     public function __construct()
@@ -150,7 +160,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
     public function start()
     {
         if ($this->browserUrl == NULL) {
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               'setBrowserUrl() needs to be called before start().'
             );
         }
@@ -161,7 +171,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
               array($this->browser, $this->browserUrl)
             );
 
-            $this->doCommand('setTimeout', array($this->timeout));
+            $this->doCommand('setTimeout', array($this->seleniumTimeout * 1000));
         }
 
         return $this->sessionId;
@@ -275,7 +285,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
     }
 
     /**
-     * @param  integer $timeout
+     * @param  integer $timeout for Selenium RC in seconds
      * @throws InvalidArgumentException
      */
     public function setTimeout($timeout)
@@ -284,7 +294,20 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'integer');
         }
 
-        $this->timeout = $timeout;
+        $this->seleniumTimeout = $timeout;
+    }
+
+    /**
+     * @param  integer $timeout for HTTP connection to Selenium RC in seconds
+     * @throws InvalidArgumentException
+     */
+    public function setHttpTimeout($timeout)
+    {
+        if (!is_int($timeout)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'integer');
+        }
+
+        $this->httpTimeout = $timeout;
     }
 
     /**
@@ -339,21 +362,33 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @param  array  $arguments
      * @return mixed
      * @method unknown  addLocationStrategy()
+     * @method unknown  addLocationStrategyAndWait()
+     * @method unknown  addScript()
+     * @method unknown  addScriptAndWait()
      * @method unknown  addSelection()
      * @method unknown  addSelectionAndWait()
      * @method unknown  allowNativeXpath()
+     * @method unknown  allowNativeXpathAndWait()
      * @method unknown  altKeyDown()
      * @method unknown  altKeyDownAndWait()
      * @method unknown  altKeyUp()
      * @method unknown  altKeyUpAndWait()
      * @method unknown  answerOnNextPrompt()
      * @method unknown  assignId()
+     * @method unknown  assignIdAndWait()
+     * @method unknown  attachFile()
      * @method unknown  break()
      * @method unknown  captureEntirePageScreenshot()
-     * @method unknown  captureScreenshot()
+     * @method unknown  captureEntirePageScreenshotAndWait()
+     * @method unknown  captureEntirePageScreenshotToStringAndWait()
+     * @method unknown  captureScreenshotAndWait()
+     * @method unknown  captureScreenshotToStringAndWait()
      * @method unknown  check()
+     * @method unknown  checkAndWait()
      * @method unknown  chooseCancelOnNextConfirmation()
+     * @method unknown  chooseCancelOnNextConfirmationAndWait()
      * @method unknown  chooseOkOnNextConfirmation()
+     * @method unknown  chooseOkOnNextConfirmationAndWait()
      * @method unknown  click()
      * @method unknown  clickAndWait()
      * @method unknown  clickAt()
@@ -373,6 +408,8 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method unknown  deleteAllVisibleCookiesAndWait()
      * @method unknown  deleteCookie()
      * @method unknown  deleteCookieAndWait()
+     * @method unknown  deselectPopUp()
+     * @method unknown  deselectPopUpAndWait()
      * @method unknown  doubleClick()
      * @method unknown  doubleClickAndWait()
      * @method unknown  doubleClickAt()
@@ -387,6 +424,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method unknown  fireEvent()
      * @method unknown  fireEventAndWait()
      * @method unknown  focus()
+     * @method unknown  focusAndWait()
      * @method string   getAlert()
      * @method array    getAllButtons()
      * @method array    getAllFields()
@@ -436,6 +474,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method unknown  highlight()
      * @method unknown  highlightAndWait()
      * @method unknown  ignoreAttributesWithoutValue()
+     * @method unknown  ignoreAttributesWithoutValueAndWait()
      * @method boolean  isAlertPresent()
      * @method boolean  isChecked()
      * @method boolean  isConfirmationPresent()
@@ -449,10 +488,16 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method boolean  isVisible()
      * @method unknown  keyDown()
      * @method unknown  keyDownAndWait()
+     * @method unknown  keyDownNative()
+     * @method unknown  keyDownNativeAndWait()
      * @method unknown  keyPress()
      * @method unknown  keyPressAndWait()
+     * @method unknown  keyPressNative()
+     * @method unknown  keyPressNativeAndWait()
      * @method unknown  keyUp()
      * @method unknown  keyUpAndWait()
+     * @method unknown  keyUpNative()
+     * @method unknown  keyUpNativeAndWait()
      * @method unknown  metaKeyDown()
      * @method unknown  metaKeyDownAndWait()
      * @method unknown  metaKeyUp()
@@ -485,14 +530,23 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method unknown  refreshAndWait()
      * @method unknown  removeAllSelections()
      * @method unknown  removeAllSelectionsAndWait()
+     * @method unknown  removeScript()
+     * @method unknown  removeScriptAndWait()
      * @method unknown  removeSelection()
      * @method unknown  removeSelectionAndWait()
+     * @method unknown  retrieveLastRemoteControlLogs()
+     * @method unknown  rollup()
+     * @method unknown  rollupAndWait()
      * @method unknown  runScript()
+     * @method unknown  runScriptAndWait()
      * @method unknown  select()
      * @method unknown  selectAndWait()
      * @method unknown  selectFrame()
+     * @method unknown  selectPopUp()
+     * @method unknown  selectPopUpAndWait()
      * @method unknown  selectWindow()
      * @method unknown  setBrowserLogLevel()
+     * @method unknown  setBrowserLogLevelAndWait()
      * @method unknown  setContext()
      * @method unknown  setCursorPosition()
      * @method unknown  setCursorPositionAndWait()
@@ -504,6 +558,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method unknown  shiftKeyDownAndWait()
      * @method unknown  shiftKeyUp()
      * @method unknown  shiftKeyUpAndWait()
+     * @method unknown  shutDownSeleniumServer()
      * @method unknown  store()
      * @method unknown  submit()
      * @method unknown  submitAndWait()
@@ -513,6 +568,8 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
      * @method unknown  typeKeysAndWait()
      * @method unknown  uncheck()
      * @method unknown  uncheckAndWait()
+     * @method unknown  useXpathLibrary()
+     * @method unknown  useXpathLibraryAndWait()
      * @method unknown  waitForCondition()
      * @method unknown  waitForPageToLoad()
      * @method unknown  waitForPopUp()
@@ -530,15 +587,19 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
 
         switch ($command) {
             case 'addLocationStrategy':
+            case 'addScript':
             case 'addSelection':
             case 'allowNativeXpath':
             case 'altKeyDown':
             case 'altKeyUp':
             case 'answerOnNextPrompt':
             case 'assignId':
+            case 'attachFile':
             case 'break':
             case 'captureEntirePageScreenshot':
+            case 'captureEntirePageScreenshotToString':
             case 'captureScreenshot':
+            case 'captureScreenshotToString':
             case 'check':
             case 'chooseCancelOnNextConfirmation':
             case 'chooseOkOnNextConfirmation':
@@ -552,6 +613,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             case 'createCookie':
             case 'deleteAllVisibleCookies':
             case 'deleteCookie':
+            case 'deselectPopUp':
             case 'doubleClick':
             case 'doubleClickAt':
             case 'dragAndDrop':
@@ -564,8 +626,11 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             case 'highlight':
             case 'ignoreAttributesWithoutValue':
             case 'keyDown':
+            case 'keyDownNative':
             case 'keyPress':
+            case 'keyPressNative':
             case 'keyUp':
+            case 'keyUpNative':
             case 'metaKeyDown':
             case 'metaKeyUp':
             case 'mouseDown':
@@ -583,10 +648,14 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             case 'pause':
             case 'refresh':
             case 'removeAllSelections':
+            case 'removeScript':
             case 'removeSelection':
+            case 'retrieveLastRemoteControlLogs':
+            case 'rollup':
             case 'runScript':
             case 'select':
             case 'selectFrame':
+            case 'selectPopUp':
             case 'selectWindow':
             case 'setBrowserLogLevel':
             case 'setContext':
@@ -595,11 +664,13 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             case 'setSpeed':
             case 'shiftKeyDown':
             case 'shiftKeyUp':
+            case 'shutDownSeleniumServer':
             case 'store':
             case 'submit':
             case 'type':
             case 'typeKeys':
             case 'uncheck':
+            case 'useXpathLibrary':
             case 'windowFocus':
             case 'windowMaximize':
             case isset(self::$autoGeneratedCommands[$command]): {
@@ -636,7 +707,9 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
                     case 'addLocationStrategy':
                     case 'allowNativeXpath':
                     case 'assignId':
-                    case 'captureScreenshot': {
+                    case 'captureEntirePageScreenshot':
+                    case 'captureScreenshot':
+                    case 'captureScreenshotToString': {
                         // intentionally empty
                     }
                     break;
@@ -644,7 +717,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
                     default: {
                         if ($wait) {
                             if ($this->useWaitForPageToLoad) {
-                                $this->waitForPageToLoad($this->timeout);
+                                $this->waitForPageToLoad($this->seleniumTimeout * 1000);
                             } else {
                                 sleep($this->wait);
                             }
@@ -689,7 +762,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
                 $result = $this->getNumber($command, $arguments);
 
                 if ($wait) {
-                    $this->waitForPageToLoad($this->timeout);
+                    $this->waitForPageToLoad($this->seleniumTimeout * 1000);
                 }
 
                 return $result;
@@ -719,7 +792,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
                 $result = $this->getString($command, $arguments);
 
                 if ($wait) {
-                    $this->waitForPageToLoad($this->timeout);
+                    $this->waitForPageToLoad($this->seleniumTimeout * 1000);
                 }
 
                 return $result;
@@ -741,7 +814,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
                 $result = $this->getStringArray($command, $arguments);
 
                 if ($wait) {
-                    $this->waitForPageToLoad($this->timeout);
+                    $this->waitForPageToLoad($this->seleniumTimeout * 1000);
                 }
 
                 return $result;
@@ -752,7 +825,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             case 'waitForFrameToLoad':
             case 'waitForPopUp': {
                 if (count($arguments) == 1) {
-                    $arguments[] = $this->timeout;
+                    $arguments[] = $this->seleniumTimeout * 1000;
                 }
 
                 $this->doCommand($command, $arguments);
@@ -762,7 +835,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
 
             case 'waitForPageToLoad': {
                 if (empty($arguments)) {
-                    $arguments[] = $this->timeout;
+                    $arguments[] = $this->seleniumTimeout * 1000;
                 }
 
                 $this->doCommand($command, $arguments);
@@ -792,7 +865,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
     protected function doCommand($command, array $arguments = array())
     {
         if (!ini_get('allow_url_fopen')) {
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               'Could not connect to the Selenium RC server because allow_url_fopen is disabled.'
             );
         }
@@ -815,10 +888,12 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             $url .= sprintf('&%s=%s', 'sessionId', $this->sessionId);
         }
 
+        $this->commands[] = sprintf('%s(%s)', $command, join(', ', $arguments));
+
         $context = stream_context_create(
           array(
             'http' => array(
-              'timeout' => ($this->timeout / 1000) + 5
+              'timeout' => $this->httpTimeout
             )
           )
         );
@@ -826,13 +901,13 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
         $handle = @fopen($url, 'r', FALSE, $context);
 
         if (!$handle) {
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               'Could not connect to the Selenium RC server.'
             );
         }
 
         stream_set_blocking($handle, 1);
-        stream_set_timeout($handle, 0, $this->timeout + 5000);
+        stream_set_timeout($handle, 0, $this->httpTimeout * 1000);
 
         $info     = stream_get_meta_data($handle);
         $response = '';
@@ -847,8 +922,12 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
         if (!preg_match('/^OK/', $response)) {
             $this->stop();
 
-            throw new RuntimeException(
-              'The response from the Selenium RC server is invalid: ' . $response
+            throw new PHPUnit_Framework_Exception(
+              sprintf(
+                "Response from Selenium RC server for %s.\n%s.\n",
+                $this->commands[count($this->commands)-1],
+                $response
+              )
             );
         }
 
@@ -877,7 +956,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
             default: {
                 $this->stop();
 
-                throw new RuntimeException(
+                throw new PHPUnit_Framework_Exception(
                   'Result is neither "true" nor "false": ' . PHPUnit_Util_Type::toString($result, TRUE)
                 );
             }
@@ -901,7 +980,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
         if (!is_numeric($result)) {
             $this->stop();
 
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               'Result is not numeric: ' . PHPUnit_Util_Type::toString($result, TRUE)
             );
         }
@@ -1053,7 +1132,7 @@ class PHPUnit_Extensions_SeleniumTestCase_Driver
     protected function waitForCommand($command, $arguments, $info)
     {
         for ($second = 0; ; $second++) {
-            if ($second > $this->timeout / 1000) {
+            if ($second > $this->httpTimeout) {
                 PHPUnit_Framework_Assert::fail('timeout');
             }
 

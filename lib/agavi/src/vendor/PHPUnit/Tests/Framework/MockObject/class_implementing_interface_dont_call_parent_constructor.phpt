@@ -1,5 +1,5 @@
 --TEST--
-PHPUnit_Framework_MockObject_Generator::generate('Foo', array(), 'MockFoo', FALSE, TRUE)
+PHPUnit_Framework_MockObject_Generator::generate('Foo', array(), 'MockFoo', TRUE)
 --FILE--
 <?php
 interface IFoo
@@ -14,30 +14,25 @@ class Foo implements IFoo
     }
 }
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/Framework/MockObject/Generator.php';
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/Framework.php';
 
 $mock = PHPUnit_Framework_MockObject_Generator::generate(
   'Foo',
   array(),
   'MockFoo',
-  FALSE,
   TRUE
 );
 
 print $mock['code'];
 ?>
 --EXPECTF--
-class MockFoo extends Foo
+class MockFoo extends Foo implements PHPUnit_Framework_MockObject_MockObject
 {
     protected $invocationMocker;
 
-    public function __construct($bar)
-    {
-    }
-
     public function __clone()
     {
-        $this->invocationMocker = clone $this->invocationMocker;
+        $this->invocationMocker = clone $this->__phpunit_getInvocationMocker();
     }
 
     public function expects(PHPUnit_Framework_MockObject_Matcher_Invocation $matcher)

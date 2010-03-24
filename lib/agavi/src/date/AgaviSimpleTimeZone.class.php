@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -14,7 +14,9 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * 
+ * Ported from ICU:
+ *  icu/trunk/source/i18n/simpletz.cpp        r21282
+ *  icu/trunk/source/i18n/unicode/simpletz.h  r18762
  *
  * @package    agavi
  * @subpackage date
@@ -26,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviSimpleTimeZone.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviSimpleTimeZone.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviSimpleTimeZone extends AgaviTimeZone
 {
@@ -86,9 +88,13 @@ class AgaviSimpleTimeZone extends AgaviTimeZone
 	{
 		$arguments = func_get_args();
 		if(count($arguments) == 1) {
-			parent::__construct($arguments[0]);
-			return;
+			$arguments[1] = 0;
+			$arguments[2] = '';
 		}
+		if(count($arguments) == 2) {
+			$arguments[2] = '';
+		}
+		
 		$fName = AgaviToolkit::overloadHelper(array(
 			array('name' => 'constructorOIS',
 						'parameters' => array('object', 'int', 'string')),
@@ -823,7 +829,7 @@ class AgaviSimpleTimeZone extends AgaviTimeZone
 	 */
 	public function getOffsetIIIIIII($era, $year, $month, $day, $dayOfWeek, $millis, $monthLength)
 	{
-		// Check the month before indexing into STATICMONTHLENGTH. This
+		// Check the month before calling Grego::monthLength(). This
 		// duplicates a test that occurs in the 9-argument getOffset(),
 		// however, this is unavoidable. We don't mind because this method, in
 		// fact, should not be called; internal code should always call the
@@ -835,6 +841,9 @@ class AgaviSimpleTimeZone extends AgaviTimeZone
 				return -1;
 		}
 
+		// We ignore monthLength because it can be derived from year and month.
+		// This is so that February in leap years is calculated correctly.
+		// We keep this argument in this function for backwards compatibility.
 		return $this->getOffsetIIIIIIII($era, $year, $month, $day, $dayOfWeek, $millis, AgaviCalendarGrego::monthLength($year, $month), AgaviCalendarGrego::previousMonthLength($year, $month));
 	}
 

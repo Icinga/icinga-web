@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>po2json - Convert a Uniforum format portable object file to javascript object notation.</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#options">OPTIONS</a></li>
+	<li><a href="#bugs">BUGS</a></li>
+	<li><a href="#requires">REQUIRES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>po2json - Convert a Uniforum format portable object file to javascript object notation.</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+ po2json /path/to/domain.po &gt; domain.json</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This takes a PO file, as is created from GNU Gettext's xgettext, and converts it into a JSON file.</p>
+<p>The output is an annonymous associative array. So, if you plan to load this via a &lt;script&gt; tag, more processing will be require (the output from this program must be assigned to a named javascript variable). For example:</p>
+<pre>
+    echo -n &quot;var json_locale_data = &quot; &gt; domain.json
+    po2json /path/to/domain.po &gt;&gt; domain.json
+    echo &quot;;&quot; &gt;&gt; domain.json</pre>
+<p>
+</p>
+<hr />
+<h1><a name="options">OPTIONS</a></h1>
+<pre>
+ -p : pretty-print the output. Makes the output more human-readable.</pre>
+<p>
+</p>
+<hr />
+<h1><a name="bugs">BUGS</a></h1>
+<p>Locale::PO has a potential bug (I don't know if this actually causes a problem or not). Given a .po file with an entry like:</p>
+<pre>
+    msgid &quot;&quot;
+    &quot;some string&quot;
+    msgstr &quot;&quot;</pre>
+<p>When $po-&gt;dump is run on that entry, it will output:</p>
+<pre>
+    msgid &quot;some string&quot;
+    msgstr &quot;&quot;</pre>
+<p>The above is removing the first linebreak. I don't know if that is significant. If so, we'll have to rewrite using a different parser (or include our own parser).</p>
+<p>
+</p>
+<hr />
+<h1><a name="requires">REQUIRES</a></h1>
+<pre>
+ Locale::PO
+ JSON</pre>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<pre>
+ Locale::PO
+ Gettext.js</pre>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Copyright (C) 2008, Joshua I. Miller &lt;<a href="mailto:unrtst@cpan.org">unrtst@cpan.org</a>&gt;, all rights reserved. See the source code for details.</p>
+
+</body>
+
+</html>

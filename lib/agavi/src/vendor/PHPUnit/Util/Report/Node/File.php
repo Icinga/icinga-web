@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: File.php 4446 2009-01-09 07:11:09Z sb $
+ * @version    SVN: $Id: File.php 5137 2009-08-27 08:52:44Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -114,7 +114,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
     /**
      * @var    integer
      */
-    protected $numCalledClasses = 0;
+    protected $numTestedClasses = 0;
 
     /**
      * @var    integer
@@ -124,7 +124,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
     /**
      * @var    integer
      */
-    protected $numCalledMethods = 0;
+    protected $numTestedMethods = 0;
 
     /**
      * @var    string
@@ -158,7 +158,9 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
         $path = $this->getPath();
 
         if (!file_exists($path)) {
-            throw new RuntimeException;
+            throw new PHPUnit_Framework_Exception(
+              sprintf('Path "%s" does not exist.', $path)
+            );
         }
 
         $this->executedLines = $executedLines;
@@ -210,14 +212,13 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
     }
 
     /**
-     * Returns the number of classes of which at least one method
-     * has been called at least once.
+     * Returns the number of tested classes.
      *
      * @return integer
      */
-    public function getNumCalledClasses()
+    public function getNumTestedClasses()
     {
-        return $this->numCalledClasses;
+        return $this->numTestedClasses;
     }
 
     /**
@@ -231,13 +232,13 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
     }
 
     /**
-     * Returns the number of methods that has been called at least once.
+     * Returns the number of tested methods.
      *
      * @return integer
      */
-    public function getNumCalledMethods()
+    public function getNumTestedMethods()
     {
-        return $this->numCalledMethods;
+        return $this->numTestedMethods;
     }
 
     /**
@@ -270,14 +271,14 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
         $ignore = FALSE;
 
         foreach ($this->codeLines as $line) {
-            if (strpos($line, '@codeCoverageIgnore') !== FALSE) {
-                if (strpos($line, '@codeCoverageIgnoreStart') !== FALSE) {
-                    $ignore = TRUE;
-                }
+            $trimmedLine = trim($line);
 
-                else if (strpos($line, '@codeCoverageIgnoreEnd') !== FALSE) {
-                    $ignore = FALSE;
-                }
+            if ($trimmedLine == '// @codeCoverageIgnoreStart') {
+                $ignore = TRUE;
+            }
+
+            else if ($trimmedLine == '// @codeCoverageIgnoreEnd') {
+                $ignore = FALSE;
             }
 
             $css = '';
@@ -410,15 +411,20 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
         $items = '';
 
         foreach ($this->classes as $className => $classData) {
-            $numCalledClasses     = $classData['executedLines'] > 0 ? 1   : 0;
-            $calledClassesPercent = $numCalledClasses == 1          ? 100 : 0;
+            if ($classData['executedLines'] == $classData['executableLines']) {
+                $numTestedClasses     = 1;
+                $testedClassesPercent = 100;
+            } else {
+                $numTestedClasses     = 0;
+                $testedClassesPercent = 0;
+            }
 
-            $numCalledMethods = 0;
+            $numTestedMethods = 0;
             $numMethods       = count($classData['methods']);
 
             foreach ($classData['methods'] as $method) {
-                if ($method['executedLines'] > 0) {
-                    $numCalledMethods++;
+                if ($method['executedLines'] == $method['executableLines']) {
+                    $numTestedMethods++;
                 }
             }
 
@@ -431,12 +437,12 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
                   $className
                 ),
                 'numClasses'           => 1,
-                'numCalledClasses'     => $numCalledClasses,
-                'calledClassesPercent' => sprintf('%01.2f', $calledClassesPercent),
+                'numTestedClasses'     => $numTestedClasses,
+                'testedClassesPercent' => sprintf('%01.2f', $testedClassesPercent),
                 'numMethods'           => $numMethods,
-                'numCalledMethods'     => $numCalledMethods,
-                'calledMethodsPercent' => $this->calculatePercent(
-                  $numCalledMethods, $numMethods
+                'numTestedMethods'     => $numTestedMethods,
+                'testedMethodsPercent' => $this->calculatePercent(
+                  $numTestedMethods, $numMethods
                 ),
                 'numExecutableLines'   => $classData['executableLines'],
                 'numExecutedLines'     => $classData['executedLines'],
@@ -449,8 +455,13 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
             );
 
             foreach ($classData['methods'] as $methodName => $methodData) {
-                $numCalledMethods     = $methodData['executedLines'] > 0 ?   1 : 0;
-                $calledMethodsPercent = $numCalledMethods == 1           ? 100 : 0;
+                if ($methodData['executedLines'] == $methodData['executableLines']) {
+                    $numTestedMethods     = 1;
+                    $testedMethodsPercent = 100;
+                } else {
+                    $numTestedMethods     = 0;
+                    $testedMethodsPercent = 0;
+                }
 
                 $items .= $this->doRenderItem(
                   array(
@@ -461,11 +472,11 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
                       $methodData['signature']
                     ),
                     'numClasses'           => '',
-                    'numCalledClasses'     => '',
-                    'calledClassesPercent' => '',
+                    'numTestedClasses'     => '',
+                    'testedClassesPercent' => '',
                     'numMethods'           => 1,
-                    'numCalledMethods'     => $numCalledMethods,
-                    'calledMethodsPercent' => sprintf('%01.2f', $calledMethodsPercent),
+                    'numTestedMethods'     => $numTestedMethods,
+                    'testedMethodsPercent' => sprintf('%01.2f', $testedMethodsPercent),
                     'numExecutableLines'   => $methodData['executableLines'],
                     'numExecutedLines'     => $methodData['executedLines'],
                     'executedLinesPercent' => $this->calculatePercent(
@@ -590,15 +601,17 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
             $lineNumber++;
         }
 
-        foreach ($this->classes as $class) {
+        foreach ($this->classes as $className => $class) {
             foreach ($class['methods'] as $method) {
-                if ($method['executedLines'] > 0) {
-                    $this->numCalledMethods++;
+                if ($method['executedLines'] == $method['executableLines']) {
+                    $this->numTestedMethods++;
                 }
             }
 
-            if ($class['executedLines'] > 0) {
-                $this->numCalledClasses++;
+            if ($className != '*') {
+                if ($class['executedLines'] == $class['executableLines']) {
+                    $this->numTestedClasses++;
+                }
             }
         }
     }

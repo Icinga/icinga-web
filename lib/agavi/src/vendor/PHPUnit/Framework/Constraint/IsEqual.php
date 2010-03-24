@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IsEqual.php 4660 2009-02-23 16:33:08Z sb $
+ * @version    SVN: $Id: IsEqual.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -54,8 +54,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 /**
  * Constraint that checks if one value is equal to another.
  *
- * Equality is checked with PHP's == operator, the operator is explained in detail
- * at {@url http://www.php.net/manual/en/types.comparisons.php}.
+ * Equality is checked with PHP's == operator, the operator is explained in
+ * detail at {@url http://www.php.net/manual/en/types.comparisons.php}.
  * Two values are equal if they have the same value disregarding type.
  *
  * The expected value is passed in the constructor.
@@ -72,17 +72,61 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
 {
+    /**
+     * @var mixed
+     */
     protected $value;
+
+    /**
+     * @var float
+     */
     protected $delta = 0;
+
+    /**
+     * @var integer
+     */
     protected $maxDepth = 10;
+
+    /**
+     * @var boolean
+     */
     protected $canonicalizeEol = FALSE;
 
-    public function __construct($value, $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE)
+    /**
+     * @var boolean
+     */
+    protected $ignoreCase = FALSE;
+
+    /**
+     * @param mixed   $value
+     * @param float   $delta
+     * @param integer $maxDepth
+     * @param boolean $canonicalizeEol
+     * @param boolean $ignoreCase
+     */
+    public function __construct($value, $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE, $ignoreCase = FALSE)
     {
+        if (!is_numeric($delta)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(2, 'numeric');
+        }
+
+        if (!is_int($maxDepth)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(3, 'integer');
+        }
+
+        if (!is_bool($canonicalizeEol)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(4, 'boolean');
+        }
+
+        if (!is_bool($ignoreCase)) {
+            throw PHPUnit_Util_InvalidArgumentHelper::factory(5, 'boolean');
+        }
+
         $this->value           = $value;
         $this->delta           = $delta;
         $this->maxDepth        = $maxDepth;
         $this->canonicalizeEol = $canonicalizeEol;
+        $this->ignoreCase      = $ignoreCase;
     }
 
     /**
@@ -261,18 +305,33 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
                 return $this->numericComparison($a, $b);
             }
 
-            if ($this->canonicalizeEol && PHP_EOL != "\n" &&
-                is_string($a) && is_string($b)) {
-                $a = str_replace(PHP_EOL, "\n", $a);
-                $b = str_replace(PHP_EOL, "\n", $b);
+            if (is_string($a) && is_string($b)) {
+                if ($this->canonicalizeEol && PHP_EOL != "\n") {
+                    $a = str_replace(PHP_EOL, "\n", $a);
+                    $b = str_replace(PHP_EOL, "\n", $b);
+                }
+
+                if ($this->ignoreCase) {
+                    $a = strtolower($a);
+                    $b = strtolower($b);
+                }
             }
 
             return ($a == $b);
         }
 
         if (is_object($a)) {
-            $a = (array)$a;
-            $b = (array)$b;
+            $isMock = $a instanceof PHPUnit_Framework_MockObject_MockObject;
+            $a      = (array)$a;
+            $b      = (array)$b;
+
+            if ($isMock) {
+                unset($a["\0*\0invocationMocker"]);
+
+                if (isset($b["\0*\0invocationMocker"])) {
+                    unset($b["\0*\0invocationMocker"]);
+                }
+            }
         }
 
         foreach ($a as $key => $v) {

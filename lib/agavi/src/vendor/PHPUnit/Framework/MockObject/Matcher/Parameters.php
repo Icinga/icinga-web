@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Parameters.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Parameters.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -61,7 +60,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -71,21 +69,35 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_MockObject_Matcher_Parameters extends PHPUnit_Framework_MockObject_Matcher_StatelessInvocation
 {
+    /**
+     * @var array
+     */
     protected $parameters = array();
 
+    /**
+     * @var PHPUnit_Framework_MockObject_Invocation
+     */
     protected $invocation;
 
-    public function __construct($parameters)
+    /**
+     * @param array $parameters
+     */
+    public function __construct(array $parameters)
     {
         foreach($parameters as $parameter) {
             if (!($parameter instanceof PHPUnit_Framework_Constraint)) {
-                $parameter = new PHPUnit_Framework_Constraint_IsEqual($parameter);
+                $parameter = new PHPUnit_Framework_Constraint_IsEqual(
+                  $parameter
+                );
             }
 
             $this->parameters[] = $parameter;
         }
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         $text = 'with parameter';
@@ -101,6 +113,10 @@ class PHPUnit_Framework_MockObject_Matcher_Parameters extends PHPUnit_Framework_
         return $text;
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @return boolean
+     */
     public function matches(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         $this->invocation = $invocation;
@@ -109,6 +125,17 @@ class PHPUnit_Framework_MockObject_Matcher_Parameters extends PHPUnit_Framework_
         return count($invocation->parameters) < count($this->parameters);
     }
 
+    /**
+     * Checks if the invocation $invocation matches the current rules. If it
+     * does the matcher will get the invoked() method called which should check 
+     * if an expectation is met.
+     *
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     *         Object containing information on a mocked or stubbed method which
+     *         was invoked.
+     * @return bool
+     * @throws PHPUnit_Framework_ExpectationFailedException
+     */
     public function verify()
     {
         if ($this->invocation === NULL) {
@@ -132,7 +159,8 @@ class PHPUnit_Framework_MockObject_Matcher_Parameters extends PHPUnit_Framework_
                 $parameter->fail(
                   $this->invocation->parameters[$i],
                   sprintf(
-                    'Parameter %s for invocation %s does not match expected value.',
+                    'Parameter %s for invocation %s does not match expected ' .
+                    'value.',
 
                     $i,
                     $this->invocation->toString()

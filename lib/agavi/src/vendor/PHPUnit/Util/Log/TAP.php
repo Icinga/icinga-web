@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TAP.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: TAP.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -118,7 +118,10 @@ class PHPUnit_Util_Log_TAP extends PHPUnit_Util_Printer implements PHPUnit_Frame
     {
         $this->writeNotOk($test, 'Failure');
 
-        $message    = explode("\n", PHPUnit_Framework_TestFailure::exceptionToString($e));
+        $message = explode(
+          "\n", PHPUnit_Framework_TestFailure::exceptionToString($e)
+        );
+
         $diagnostic = array(
           'message'  => $message[0],
           'severity' => 'fail'

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -35,7 +35,7 @@ class AgaviPackageTask extends Task
 		
 		set_time_limit(0);
 		
-		$this->log("Adding .keep files to empty directories", PROJECT_MSG_INFO);
+		$this->log('Adding .keep files to empty directories', PROJECT_MSG_INFO);
 		
 		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(realpath('samples')), RecursiveIteratorIterator::CHILD_FIRST) as $dir) {
 			if($dir->isDir()) {
@@ -48,7 +48,7 @@ class AgaviPackageTask extends Task
 			}
 		}
 		
-		$this->log("Building package contents in: {$this->dir}", PROJECT_MSG_INFO);
+		$this->log(sprintf('Building package contents in: %s', $this->dir), PROJECT_MSG_INFO);
 		
 		// Modify short description. Try to keep under 80 chars width
 $shortDesc = <<<EOD
@@ -102,8 +102,8 @@ EOD;
 		$p2->addMaintainer('developer', 'impl', 'Noah Fontes', 'nfontes@cynigram.com');
 		$p2->addMaintainer('developer', 'v-dogg', 'Veikko Mäkinen', 'mail@veikkomakinen.com');
 		$p2->setChannel('pear.agavi.org');
-		$p2->setReleaseVersion('1.0.1');
-		$p2->setAPIVersion('1.0.1');
+		$p2->setReleaseVersion('1.0.2');
+		$p2->setAPIVersion('1.0.2');
 		$p2->setReleaseStability('stable');
 		$p2->setAPIStability('stable');
 		$p2->setSummary($shortDesc);
@@ -154,7 +154,7 @@ EOD;
 		try {
 			$p2->writePackageFile();
 		} catch(PEAR_Exception $e) {
-			$this->log("Oops! Caught PEAR Exception: ".$e->getMessage());
+			$this->log(sprintf('Oops! Caught PEAR Exception: %s', $e->getMessage()));
 		}
 	}
 }

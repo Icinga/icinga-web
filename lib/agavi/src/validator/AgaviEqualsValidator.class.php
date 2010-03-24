@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -24,6 +24,7 @@
  * Parameters:
  *   'value'   value which the input should equals to
  *   'asparam' whether the 'value' should be treated as a parameter name 
+ *   'strict'  whether or no to perform strict equality check (default: false)
  *
  * @package    agavi
  * @subpackage validator
@@ -34,7 +35,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviEqualsValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviEqualsValidator.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviEqualsValidator extends AgaviValidator
 {
@@ -59,8 +60,11 @@ class AgaviEqualsValidator extends AgaviValidator
 			$value = $this->getData($this->getArgument());
 		}
 
+		$strict = $this->getParameter('strict', false);
+
 		foreach($this->getArguments() as $key => $argument) {
-			if($this->getData($argument) != $value) {
+			$input = $this->getData($argument);
+			if(($strict && $input !== $value) || (!$strict && $input != $value)) {
 				$this->throwError();
 				return false;
 			}

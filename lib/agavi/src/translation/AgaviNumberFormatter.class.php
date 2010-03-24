@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviNumberFormatter.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviNumberFormatter.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviNumberFormatter extends AgaviDecimalFormatter implements AgaviITranslator
 {
@@ -148,6 +148,8 @@ class AgaviNumberFormatter extends AgaviDecimalFormatter implements AgaviITransl
 		
 		if(is_array($this->customFormat)) {
 			$format = AgaviToolkit::getValueByKeyList($this->customFormat, AgaviLocale::getLookupPath($this->locale->getIdentifier()), $format);
+		} elseif($this->customFormat) {
+			$format = $this->customFormat;
 		}
 		
 		$this->setFormat($format);

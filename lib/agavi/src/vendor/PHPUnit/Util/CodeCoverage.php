@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: CodeCoverage.php 4631 2009-02-11 10:25:29Z sb $
+ * @version    SVN: $Id: CodeCoverage.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
@@ -63,7 +63,14 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 abstract class PHPUnit_Util_CodeCoverage
 {
+    /**
+     * @var array
+     */
     protected static $lineToTestMap = array();
+
+    /**
+     * @var array
+     */
     protected static $summary = array();
 
     /**
@@ -169,7 +176,9 @@ abstract class PHPUnit_Util_CodeCoverage
                     foreach ($lines as $_line => $flag) {
                         if ($flag > 0) {
                             if (!isset(self::$lineToTestMap[$_file][$_line])) {
-                                self::$lineToTestMap[$_file][$_line] = array($test['test']);
+                                self::$lineToTestMap[$_file][$_line] = array(
+                                  $test['test']
+                                );
                             } else {
                                 self::$lineToTestMap[$_file][$_line][] = $test['test'];
                             }
@@ -194,7 +203,7 @@ abstract class PHPUnit_Util_CodeCoverage
      * <code>
      * array(
      *   "/tested/code.php" => array(
-     *     linenumber => number of tests that executed the line
+     *     linenumber => array(tests that executed the line)
      *   )
      * )
      * </code>
@@ -213,7 +222,9 @@ abstract class PHPUnit_Util_CodeCoverage
                             if (isset(self::$summary[$file][$line][0])) {
                                 self::$summary[$file][$line][] = $test['test'];
                             } else {
-                                self::$summary[$file][$line] = array($test['test']);
+                                self::$summary[$file][$line] = array(
+                                  $test['test']
+                                );
                             }
                         }
 
@@ -226,7 +237,8 @@ abstract class PHPUnit_Util_CodeCoverage
                 if (isset($test['executable'])) {
                     foreach ($test['executable'] as $file => $lines) {
                         foreach ($lines as $line => $flag) {
-                            if ($flag == 1 && !isset(self::$summary[$file][$line][0])) {
+                            if ($flag == 1 &&
+                                !isset(self::$summary[$file][$line][0])) {
                                 self::$summary[$file][$line] = -1;
                             }
 
@@ -240,7 +252,8 @@ abstract class PHPUnit_Util_CodeCoverage
                 if (isset($test['dead'])) {
                     foreach ($test['dead'] as $file => $lines) {
                         foreach ($lines as $line => $flag) {
-                            if ($flag == -2 && !isset(self::$summary[$file][$line][0])) {
+                            if ($flag == -2 &&
+                                !isset(self::$summary[$file][$line][0])) {
                                 self::$summary[$file][$line] = -2;
                             }
                         }

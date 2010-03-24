@@ -39,16 +39,14 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Warning.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Warning.php 5158 2009-08-29 05:56:57Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
 
-require_once 'PHPUnit/Util/Filter.php';
+require_once 'PHPUnit/Framework.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
-
-if (!class_exists('PHPUnit_Framework_Error_Warning', FALSE)) {
 
 /**
  * Wrapper for PHP warnings.
@@ -70,7 +68,5 @@ if (!class_exists('PHPUnit_Framework_Error_Warning', FALSE)) {
 class PHPUnit_Framework_Error_Warning extends PHPUnit_Framework_Error
 {
     public static $enabled = TRUE;
-}
-
 }
 ?>

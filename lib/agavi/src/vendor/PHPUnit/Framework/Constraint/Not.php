@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Not.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Not.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -55,7 +54,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -66,8 +64,14 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 class PHPUnit_Framework_Constraint_Not extends PHPUnit_Framework_Constraint
 {
+    /**
+     * @var PHPUnit_Framework_Constraint
+     */
     protected $constraint;
 
+    /**
+     * @param PHPUnit_Framework_Constraint $constraint
+     */
     public function __construct($constraint)
     {
         if (!($constraint instanceof PHPUnit_Framework_Constraint)) {
@@ -99,7 +103,12 @@ class PHPUnit_Framework_Constraint_Not extends PHPUnit_Framework_Constraint
      */
     public function fail($other, $description, $not = FALSE)
     {
-        $this->constraint->fail($other, $description, TRUE);
+        if (count($this->constraint) == 1 ||
+            $this->constraint instanceof PHPUnit_Framework_Constraint_Attribute) {
+            $this->constraint->fail($other, $description, TRUE);
+        } else {
+            parent::fail($other, $description, !$not);
+        }
     }
 
     /**
@@ -123,6 +132,17 @@ class PHPUnit_Framework_Constraint_Not extends PHPUnit_Framework_Constraint
                 );
             }
         }
+    }
+
+    /**
+     * Counts the number of constraint elements.
+     *
+     * @return integer
+     * @since  Method available since Release 3.4.0
+     */
+    public function count()
+    {
+        return count($this->constraint) + 1;
     }
 }
 ?>

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: OutputTestCase.php 4701 2009-03-01 15:29:08Z sb $
+ * @version    SVN: $Id: OutputTestCase.php 5135 2009-08-27 08:37:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -79,6 +79,11 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
     protected $output = '';
 
     /**
+     * @var    boolean
+     */
+    protected $obActive = FALSE;
+
+    /**
      * @var    mixed
      */
     protected $outputCallback = FALSE;
@@ -111,7 +116,11 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
      */
     public function getActualOutput()
     {
-        return $this->output;
+        if (!$this->obActive) {
+            return $this->output;
+        } else {
+            return ob_get_contents();
+        }
     }
 
     /**
@@ -128,7 +137,7 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
     public function expectOutputRegex($expectedRegex)
     {
         if ($this->expectedString !== NULL) {
-            throw new RuntimeException;
+            throw new PHPUnit_Framework_Exception;
         }
 
         if (is_string($expectedRegex) || is_null($expectedRegex)) {
@@ -150,7 +159,7 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
     public function expectOutputString($expectedString)
     {
         if ($this->expectedRegex !== NULL) {
-            throw new RuntimeException;
+            throw new PHPUnit_Framework_Exception;
         }
 
         if (is_string($expectedString) || is_null($expectedString)) {
@@ -165,6 +174,7 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
     protected function runTest()
     {
         ob_start();
+        $this->obActive = TRUE;
 
         try {
             $testResult = parent::runTest();
@@ -172,6 +182,7 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
 
         catch (Exception $e) {
             ob_end_clean();
+            $this->obActive = FALSE;
             throw $e;
         }
 
@@ -182,6 +193,7 @@ abstract class PHPUnit_Extensions_OutputTestCase extends PHPUnit_Framework_TestC
         }
 
         ob_end_clean();
+        $this->obActive = FALSE;
 
         if ($this->expectedRegex !== NULL) {
             $this->assertRegExp($this->expectedRegex, $this->output);

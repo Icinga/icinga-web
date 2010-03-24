@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -28,7 +28,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviConfigCache.class.php 4038 2009-04-24 09:35:09Z david $
+ * @version    $Id: AgaviConfigCache.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviConfigCache
 {
@@ -522,23 +522,26 @@ class AgaviConfigCache
 		}
 
 		$tmpName = tempnam($cacheDir, basename($cache));
-		if(@file_put_contents($tmpName, $data) === false) {
-			// cannot write cache file
-			$error = 'Failed to write cache file "%s" generated from ' . 'configuration file "%s".';
-			$error .= "\n\n Please make sure the directory \"%s\" is writeable by the web server.";
-			$error = sprintf($error, $cache, $config, AgaviConfig::get('core.cache_dir'));
-
-			throw new AgaviCacheException($error);
-		} else {
-			// with php < 5.2.6 on win32 renaming to an already existing file doesn't work, but copy does
-			// so we simply assume that when rename() fails that we are on win32 and try to use copy()
-			if(!@rename($tmpName, $cache)) {
-				if(copy($tmpName, $cache)) {
-					unlink($tmpName);
-				}
+		if(@file_put_contents($tmpName, $data) !== false) {
+			// that worked, but that doesn't mean we're safe yet
+			// first, we cannot know if the destination directory really was writeable, as tempnam() falls back to the system temp dir
+			// second, with php < 5.2.6 on win32 renaming to an already existing file doesn't work, but copy does
+			// so we simply assume that when rename() fails that we are on win32 and try to use copy() followed by unlink()
+			// if that also fails, we know something's odd
+			if(@rename($tmpName, $cache) || (@copy($tmpName, $cache) && unlink($tmpName))) {
+				// alright, it did work after all. chmod() and bail out.
+				chmod($cache, $perms);
+				return;
 			}
-			chmod($cache, $perms);
 		}
+		
+		// still here?
+		// that means we could not write the cache file
+		$error = 'Failed to write cache file "%s" generated from ' . 'configuration file "%s".';
+		$error .= "\n\n";
+		$error .= 'Please make sure you have set correct write permissions for directory "%s".';
+		$error = sprintf($error, $cache, $config, AgaviConfig::get('core.cache_dir'));
+		throw new AgaviCacheException($error);
 	}
 
 	/**

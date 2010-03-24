@@ -102,6 +102,27 @@
 					<parameter name="Content-Type">text/javascript; charset=UTF-8</parameter>
 					<!-- <parameter name="Content-Type">text/plain; charset=UTF-8</parameter> -->
 				</parameter>
+				
+				<renderers default="php">
+					<renderer name="php" class="AgaviPhpRenderer">
+						<parameter name="assigns">
+							<parameter name="routing">ro</parameter>
+							<parameter name="request">rq</parameter>
+							<parameter name="controller">ct</parameter>
+							<parameter name="user">us</parameter>
+							<parameter name="translation_manager">tm</parameter>
+							<parameter name="request_data">rd</parameter>
+						</parameter>
+						<!-- this changes the name of the variable with all template attributes from the default $template to $t -->
+						<parameter name="var_name">t</parameter>
+					</renderer>
+				</renderers>
+				
+				<layouts default="simple">
+					<layout name="simple">
+						<layer name="content" />
+					</layout>
+				</layouts>
 			</output_type>
 			
 			<output_type name="ajax">

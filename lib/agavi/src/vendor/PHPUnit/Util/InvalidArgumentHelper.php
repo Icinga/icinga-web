@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: InvalidArgumentHelper.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: InvalidArgumentHelper.php 5315 2009-11-12 18:40:09Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.4.0
  */
@@ -49,7 +49,7 @@ require_once 'PHPUnit/Util/Filter.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 /**
- * 
+ * Factory for InvalidArgumentException objects.
  *
  * @category   Testing
  * @package    PHPUnit
@@ -62,14 +62,24 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Util_InvalidArgumentHelper
 {
-    public static function factory($argument, $type)
+    /**
+     * @param integer $argument
+     * @param string  $type
+     * @param mixed   $value
+     */ 
+    public static function factory($argument, $type, $value = NULL)
     {
-        $stack = debug_backtrace(FALSE);
+        if (version_compare(PHP_VERSION, '5.2.5', '>=')) {
+            $stack = debug_backtrace(FALSE);
+        } else {
+            $stack = debug_backtrace();
+        }
 
         return new InvalidArgumentException(
           sprintf(
-            'Argument #%d of %s:%s() is no %s',
+            'Argument #%d%sof %s:%s() is no %s',
             $argument,
+            $value !== NULL ? ' (' . $value . ')' : ' ',
             $stack[1]['class'],
             $stack[1]['function'],
             $type

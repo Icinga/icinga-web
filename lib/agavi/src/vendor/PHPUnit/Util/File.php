@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: File.php 4726 2009-03-22 16:54:49Z sb $
+ * @version    SVN: $Id: File.php 5373 2009-11-19 20:07:13Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.4.0
  */
@@ -66,7 +66,14 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Util_File
 {
+    /**
+     * @var array
+     */
     protected static $countCache = array();
+
+    /**
+     * @var array
+     */
     protected static $classesFunctionsCache = array();
 
     /**
@@ -143,21 +150,27 @@ class PHPUnit_Util_File
           'classes' => array(), 'functions' => array()
         );
 
-        $tokens                     = token_get_all(file_get_contents($filename));
+        $tokens                     = token_get_all(
+                                        file_get_contents($filename)
+                                      );
         $numTokens                  = count($tokens);
         $blocks                     = array();
         $line                       = 1;
-        $name                       = array();
         $currentBlock               = FALSE;
         $currentNamespace           = FALSE;
         $currentClass               = FALSE;
         $currentFunction            = FALSE;
         $currentFunctionStartLine   = FALSE;
+        $currentFunctionTokens      = array();
         $currentDocComment          = FALSE;
         $currentSignature           = FALSE;
         $currentSignatureStartToken = FALSE;
 
         for ($i = 0; $i < $numTokens; $i++) {
+            if ($currentFunction !== FALSE) {
+                $currentFunctionTokens[] = $tokens[$i];
+            }
+
             if (is_string($tokens[$i])) {
                 if ($tokens[$i] == '{') {
                     if ($currentBlock == T_CLASS) {
@@ -194,14 +207,7 @@ class PHPUnit_Util_File
                     $block = array_pop($blocks);
 
                     if ($block !== FALSE && $block !== NULL) {
-                        if ($block == $currentClass) {
-                            self::$classesFunctionsCache[$filename]['classes'][$currentClass]['endLine'] = $line;
-
-                            $currentClass          = FALSE;
-                            $currentClassStartLine = FALSE;
-                        }
-
-                        else if ($block == $currentFunction) {
+                        if ($block == $currentFunction) {
                             if ($currentDocComment !== FALSE) {
                                 $docComment        = $currentDocComment;
                                 $currentDocComment = FALSE;
@@ -213,7 +219,8 @@ class PHPUnit_Util_File
                               'docComment' => $docComment,
                               'signature'  => $currentSignature,
                               'startLine'  => $currentFunctionStartLine,
-                              'endLine'    => $line
+                              'endLine'    => $line,
+                              'tokens'     => $currentFunctionTokens
                             );
 
                             if ($currentClass === FALSE) {
@@ -224,7 +231,15 @@ class PHPUnit_Util_File
 
                             $currentFunction          = FALSE;
                             $currentFunctionStartLine = FALSE;
+                            $currentFunctionTokens    = array();
                             $currentSignature         = FALSE;
+                        }
+
+                        else if ($block == $currentClass) {
+                            self::$classesFunctionsCache[$filename]['classes'][$currentClass]['endLine'] = $line;
+
+                            $currentClass          = FALSE;
+                            $currentClassStartLine = FALSE;
                         }
                     }
                 }
@@ -235,6 +250,26 @@ class PHPUnit_Util_File
             switch ($tokens[$i][0]) {
                 case T_NAMESPACE: {
                     $currentNamespace = $tokens[$i+2][1];
+                    
+                    for ($j = $i+3; $j < $numTokens; $j += 2) {
+                        if ($tokens[$j][0] == T_NS_SEPARATOR) {
+                            $currentNamespace .= '\\' . $tokens[$j+1][1];
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                break;
+
+                case T_CURLY_OPEN: {
+                    $currentBlock = T_CURLY_OPEN;
+                    array_push($blocks, $currentBlock);
+                }
+                break;
+
+                case T_DOLLAR_OPEN_CURLY_BRACES: {
+                    $currentBlock = T_DOLLAR_OPEN_CURLY_BRACES;
+                    array_push($blocks, $currentBlock);
                 }
                 break;
 
@@ -244,7 +279,8 @@ class PHPUnit_Util_File
                     if ($currentNamespace === FALSE) {
                         $currentClass = $tokens[$i+2][1];
                     } else {
-                        $currentClass = $currentNamespace . '\\' . $tokens[$i+2][1];
+                        $currentClass = $currentNamespace . '\\' .
+                                        $tokens[$i+2][1];
                     }
 
                     if ($currentDocComment !== FALSE) {
@@ -301,7 +337,8 @@ class PHPUnit_Util_File
                     if ($currentNamespace === FALSE) {
                         $currentFunction = $functionName;
                     } else {
-                        $currentFunction = $currentNamespace . '\\' . $functionName;
+                        $currentFunction = $currentNamespace . '\\' .
+                                           $functionName;
                     }
                 }
                 break;

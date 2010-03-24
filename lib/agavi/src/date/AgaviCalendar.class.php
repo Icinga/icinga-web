@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -14,7 +14,9 @@
 // +---------------------------------------------------------------------------+
 
 /**
- *
+ * Ported from ICU:
+ *  icu/trunk/source/i18n/calendar.cpp        r22016
+ *  icu/trunk/source/i18n/unicode/calendar.h  r22265
  *
  * @package    agavi
  * @subpackage date
@@ -26,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviCalendar.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviCalendar.class.php 4399 2010-01-11 16:41:20Z david $
  */
 abstract class AgaviCalendar
 {
@@ -229,20 +231,12 @@ abstract class AgaviCalendar
 			$this->get(AgaviDateDefinitions::HOUR_OF_DAY), $this->get(AgaviDateDefinitions::MINUTE), $this->get(AgaviDateDefinitions::SECOND)
 		);
 		
-		$tzId = $this->getTimeZone()->getId();
-		if($tzId == AgaviTimeZone::CUSTOM) {
-			$offsetInMinutes = $this->getTimeZone()->getRawOffset() / 60000;
-			$sign = '+';
-			if($offsetInMinutes < 0) {
-				$sign = '-';
-			}
-			$offsetInMinutes = abs($offsetInMinutes);
-			$hours = (int) ($offsetInMinutes / 60);
-			$minutes = ($offsetInMinutes % 60);
-			$tzId = sprintf('%s%02d:%02d', $sign, $hours, $minutes);
-			return new DateTime($dateTimeString . $tzId);
+		$tz = $this->getTimeZone();
+		// check if this is a custom timezone (they have GMT+0000 as id and could potentially contain seconds as well, so we allow up to 6 digits)
+		if(preg_match('#GMT[+-]\d{4,6}#', $tz->getId())) {
+			return new DateTime($dateTimeString . $tz->formatOffset(false, '', ''));
 		} else {
-			return new DateTime($dateTimeString, new DateTimeZone($tzId));
+			return new DateTime($dateTimeString, new DateTimeZone($tz->getId()));
 		}
 		
 		return $date;
@@ -2917,7 +2911,7 @@ abstract class AgaviCalendar
 	/**
 	 * Return the extended year on the Gregorian calendar as computed by
 	 * <code>computeGregorianFields()</code>.
-	 * @see #computeGregorianFields
+	 * @see        AgaviCalendar::computeGregorianFields
 	 * @internal
 	 *
 	 * @return     int The gregorian year
@@ -2934,7 +2928,7 @@ abstract class AgaviCalendar
 	/**
 	 * Return the month (0-based) on the Gregorian calendar as computed by
 	 * <code>computeGregorianFields()</code>.
-	 * @see #computeGregorianFields
+	 * @see        AgaviCalendar::computeGregorianFields
 	 * @internal
 	 *
 	 * @return     int The gregorian month
@@ -3308,6 +3302,7 @@ abstract class AgaviCalendar
 	/**
 	 * @var        int The Gregorian year, as computed by computeGregorianFields()
 	 *                 and returned by getGregorianYear().
+	 * @see        AgaviCalendar::computeGregorianFields
 	 */
 	private $fGregorianYear;
 
@@ -3315,6 +3310,7 @@ abstract class AgaviCalendar
 	 * @var        int The Gregorian month, as computed by
 	 *                 computeGregorianFields() and returned by
 	 *                 getGregorianMonth().
+	 * @see        AgaviCalendar::computeGregorianFields
 	 */
 	private $fGregorianMonth;
 
@@ -3322,6 +3318,7 @@ abstract class AgaviCalendar
 	 * @var        int The Gregorian day of the year, as computed by
 	 *                 computeGregorianFields() and returned by
 	 *                 getGregorianDayOfYear().
+	 * @see        AgaviCalendar::computeGregorianFields
 	 */
 	private $fGregorianDayOfYear;
 
@@ -3329,6 +3326,7 @@ abstract class AgaviCalendar
 	 * @var        int The Gregorian day of the month, as computed by
 	 *                 computeGregorianFields() and returned by
 	 *                 getGregorianDayOfMonth().
+	 * @see        AgaviCalendar::computeGregorianFields
 	 */
 	private $fGregorianDayOfMonth;
 

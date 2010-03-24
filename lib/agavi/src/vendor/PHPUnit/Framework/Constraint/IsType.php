@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IsType.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: IsType.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -58,7 +57,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -78,34 +76,42 @@ class PHPUnit_Framework_Constraint_IsType extends PHPUnit_Framework_Constraint
     const TYPE_RESOURCE = 'resource';
     const TYPE_STRING   = 'string';
 
+    /**
+     * @var array
+     */
+    protected $types = array(
+      'array' => TRUE,
+      'boolean' => TRUE,
+      'bool' => TRUE,
+      'float' => TRUE,
+      'integer' => TRUE,
+      'int' => TRUE,
+      'null' => TRUE,
+      'numeric' => TRUE,
+      'object' => TRUE,
+      'resource' => TRUE,
+      'string' => TRUE
+    );
+
+    /**
+     * @var string
+     */
     protected $type;
 
+    /**
+     * @param  string $type
+     * @throws InvalidArgumentException
+     */
     public function __construct($type)
     {
-        switch ($type) {
-            case 'array':
-            case 'boolean':
-            case 'bool':
-            case 'float':
-            case 'integer':
-            case 'int':
-            case 'null':
-            case 'numeric':
-            case 'object':
-            case 'resource':
-            case 'string': {
-              break;
-            }
-
-            default: {
-              throw new InvalidArgumentException(
-                sprintf(
-                  'Type specified for PHPUnit_Framework_Constraint_IsType <%s> is not a valid type.',
-
-                  $type
-                )
-              );
-            }
+        if (!isset($this->types[$type])) {
+            throw new InvalidArgumentException(
+              sprintf(
+                'Type specified for PHPUnit_Framework_Constraint_IsType <%s> ' .
+                'is not a valid type.',
+                $type
+              )
+            );
         }
 
         $this->type = $type;
@@ -122,41 +128,41 @@ class PHPUnit_Framework_Constraint_IsType extends PHPUnit_Framework_Constraint
     {
         switch ($this->type) {
             case 'numeric': {
-              return is_numeric($other);
+                return is_numeric($other);
             }
 
             case 'integer':
             case 'int': {
-              return is_integer($other);
+                return is_integer($other);
             }
 
             case 'float': {
-              return is_float($other);
+                return is_float($other);
             }
 
             case 'string': {
-              return is_string($other);
+                return is_string($other);
             }
 
             case 'boolean':
             case 'bool': {
-              return is_bool($other);
+                return is_bool($other);
             }
 
             case 'null': {
-              return is_null($other);
+                return is_null($other);
             }
 
             case 'array': {
-              return is_array($other);
+                return is_array($other);
             }
 
             case 'object': {
-              return is_object($other);
+                return is_object($other);
             }
 
             case 'resource': {
-              return is_resource($other);
+                return is_resource($other);
             }
         }
     }

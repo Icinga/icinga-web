@@ -3,7 +3,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: agavi.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: agavi.php 4411 2010-01-25 08:37:14Z david $
  */
 
 define('BUILD_DIRECTORY', realpath(dirname(__FILE__) . '/../..'));
@@ -56,7 +56,6 @@ try {
 			exit(1);
 		}
 	} catch(Exception $e) {
-		$GLOBALS['ERROR']->write(sprintf('Error: Phing version could not be determined; Phing %s or later required', MIN_PHING_VERSION) . PHP_EOL);
 		$GLOBALS['ERROR']->write(sprintf('Error: Phing version could not be determined; Phing %s or later required', MIN_PHING_VERSION) . PHP_EOL);
 		exit(1);
 	}
@@ -95,7 +94,7 @@ function input_help(AgaviOptionParser $parser, $name, $arguments, $scriptArgumen
 
 function input_version(AgaviOptionParser $parser, $name, $arguments, $scriptArguments)
 {
-	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 3586 2009-01-18 15:26:12Z david $' . PHP_EOL);
+	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4411 2010-01-25 08:37:14Z david $' . PHP_EOL);
 	$GLOBALS['OUTPUT']->write(Phing::getPhingVersion() . PHP_EOL);
 	exit(0);
 }
@@ -184,6 +183,7 @@ try {
 	}
 	
 	$project->init();
+	ProjectConfigurator::configureProject($project, $GLOBALS['BUILD']);
 	
 	$project->addTaskDefinition('agavi.import', 'org.agavi.build.tasks.AgaviImportTask', 'phing');
 	$project->addTaskDefinition('agavi.locate-project', 'org.agavi.build.tasks.AgaviLocateprojectTask', 'phing');
@@ -212,8 +212,8 @@ try {
 			$task->setPath(new PhingFile($project->getProperty('project.directory')));
 			$task->init();
 			$task->perform();
-		} else {
-			/* The script might be a symlink. */
+		} elseif(is_link($_SERVER['argv'][0])) {
+			/* The script is a symlink. */
 			$task = $project->createTask('agavi.locate-project');
 			$task->setProperty('project.directory');
 			

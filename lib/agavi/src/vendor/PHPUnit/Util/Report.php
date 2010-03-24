@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Report.php 4490 2009-01-17 15:37:36Z sb $
+ * @version    SVN: $Id: Report.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -96,7 +96,9 @@ abstract class PHPUnit_Util_Report
         );
 
         $codeCoverageInformation = $result->getCodeCoverageInformation();
-        $files                   = PHPUnit_Util_CodeCoverage::getSummary($codeCoverageInformation);
+        $files                   = PHPUnit_Util_CodeCoverage::getSummary(
+                                     $codeCoverageInformation
+                                   );
         $commonPath              = PHPUnit_Util_Filesystem::reducePaths($files);
         $items                   = self::buildDirectoryStructure($files);
 

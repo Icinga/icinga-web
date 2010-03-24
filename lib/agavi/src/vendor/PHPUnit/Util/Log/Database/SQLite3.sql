@@ -33,7 +33,7 @@
 -- ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 -- POSSIBILITY OF SUCH DAMAGE.
 --
--- $Id: SQLite3.sql 4403 2008-12-31 09:26:51Z sb $
+-- $Id: SQLite3.sql 4838 2009-04-27 06:32:39Z sb $
 --
 
 CREATE TABLE IF NOT EXISTS run(
@@ -55,6 +55,8 @@ CREATE TABLE IF NOT EXISTS test(
   node_root           INTEGER,
   node_left           INTEGER,
   node_right          INTEGER,
+  node_parent         INTEGER,
+  node_depth          INTEGER,
   node_is_leaf        INTEGER DEFAULT 0
 );
 
@@ -64,6 +66,7 @@ CREATE INDEX IF NOT EXISTS test_code_method_id ON test (code_method_id);
 CREATE INDEX IF NOT EXISTS test_node_root      ON test (node_root);
 CREATE INDEX IF NOT EXISTS test_node_left      ON test (node_left);
 CREATE INDEX IF NOT EXISTS test_node_right     ON test (node_right);
+CREATE INDEX IF NOT EXISTS test_node_parent    ON test (node_parent);
 
 CREATE TABLE IF NOT EXISTS code_file(
   code_file_id        INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Trac.php 4726 2009-03-22 16:54:49Z sb $
+ * @version    SVN: $Id: Trac.php 5373 2009-11-19 20:07:13Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.4.0
  */
@@ -68,7 +68,7 @@ class PHPUnit_Extensions_TicketListener_Trac extends PHPUnit_Extensions_TicketLi
     protected $password;
     protected $hostpath;
     protected $scheme;
-    
+
     /**
      * Constructor
      *
@@ -84,7 +84,7 @@ class PHPUnit_Extensions_TicketListener_Trac extends PHPUnit_Extensions_TicketLi
         $this->hostpath = $hostpath;
         $this->scheme   = $scheme;
     }
-    
+
     protected function updateTicket($ticketId, $newStatus, $message, $resolution)
     {
         if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('XML/RPC2/Client.php')) {
@@ -103,7 +103,7 @@ class PHPUnit_Extensions_TicketListener_Trac extends PHPUnit_Extensions_TicketLi
             }
 
             catch (XML_RPC2_FaultException $e) {
-                throw new RuntimeException(
+                throw new PHPUnit_Framework_Exception(
                   sprintf(
                     "Trac fetch failure: %d: %s\n",
                     $e->getFaultCode(),
@@ -111,7 +111,7 @@ class PHPUnit_Extensions_TicketListener_Trac extends PHPUnit_Extensions_TicketLi
                   )
                 );
             }
-                
+
             try {
                 printf(
                   "Updating Trac ticket #%d, status: %s\n",
@@ -130,7 +130,7 @@ class PHPUnit_Extensions_TicketListener_Trac extends PHPUnit_Extensions_TicketLi
             }
 
             catch (XML_RPC2_FaultException $e) {
-                throw new RuntimeException(
+                throw new PHPUnit_Framework_Exception(
                   sprintf(
                     "Trac update failure: %d: %s\n",
                     $e->getFaultCode(),
@@ -143,7 +143,7 @@ class PHPUnit_Extensions_TicketListener_Trac extends PHPUnit_Extensions_TicketLi
                 PHPUnit_Util_Filter::addFileToFilter($blacklistedFile, 'PHPUNIT');
             }
         } else {
-            throw new RuntimeException('XML_RPC2 is not available.');
+            throw new PHPUnit_Framework_Exception('XML_RPC2 is not available.');
         }
     }
 }

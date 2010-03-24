@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Getopt.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Getopt.php 5230 2009-09-13 14:31:10Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -62,7 +62,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @since      Class available since Release 3.0.0
  * @abstract
  */
-class PHPUnit_Util_Getopt {
+class PHPUnit_Util_Getopt
+{
     public static function getopt(array $args, $short_options, $long_options = NULL)
     {
         if (empty($args)) {
@@ -88,17 +89,22 @@ class PHPUnit_Util_Getopt {
                 break;
             }
 
-            if ($arg{0} != '-' || (strlen($arg) > 1 && $arg{1} == '-' && !$long_options)) {
+            if ($arg{0} != '-' ||
+                (strlen($arg) > 1 && $arg{1} == '-' && !$long_options)) {
                 $non_opts = array_merge($non_opts, array_slice($args, $i));
                 break;
             }
 
             elseif (strlen($arg) > 1 && $arg{1} == '-') {
-                self::parseLongOption(substr($arg, 2), $long_options, $opts, $args);
+                self::parseLongOption(
+                  substr($arg, 2), $long_options, $opts, $args
+                );
             }
 
             else {
-                self::parseShortOption(substr($arg, 1), $short_options, $opts, $args);
+                self::parseShortOption(
+                  substr($arg, 1), $short_options, $opts, $args
+                );
             }
         }
 
@@ -110,11 +116,14 @@ class PHPUnit_Util_Getopt {
         $argLen = strlen($arg);
 
         for ($i = 0; $i < $argLen; $i++) {
-            $opt = $arg{$i};
+            $opt     = $arg{$i};
             $opt_arg = NULL;
 
-            if (($spec = strstr($short_options, $opt)) === FALSE || $arg{$i} == ':') {
-                throw new RuntimeException("unrecognized option -- $opt");
+            if (($spec = strstr($short_options, $opt)) === FALSE ||
+                $arg{$i} == ':') {
+                throw new PHPUnit_Framework_Exception(
+                  "unrecognized option -- $opt"
+                );
             }
 
             if (strlen($spec) > 1 && $spec{1} == ':') {
@@ -133,7 +142,9 @@ class PHPUnit_Util_Getopt {
                     }
 
                     else {
-                        throw new RuntimeException("option requires an argument -- $opt");
+                        throw new PHPUnit_Framework_Exception(
+                          "option requires an argument -- $opt"
+                        );
                     }
                 }
             }
@@ -145,39 +156,49 @@ class PHPUnit_Util_Getopt {
     protected static function parseLongOption($arg, $long_options, &$opts, &$args)
     {
         @list($opt, $opt_arg) = explode('=', $arg);
-        $opt_len = strlen($opt);
+        $opt_len              = strlen($opt);
+        $count_long_options   = count($long_options);
 
-        for ($i = 0; $i < count($long_options); $i++) {
+        for ($i = 0; $i < $count_long_options; $i++) {
             $long_opt  = $long_options[$i];
             $opt_start = substr($long_opt, 0, $opt_len);
 
-            if ($opt_start != $opt) continue;
+            if ($opt_start != $opt) {
+                continue;
+            }
 
             $opt_rest = substr($long_opt, $opt_len);
 
             if ($opt_rest != '' && $opt{0} != '=' &&
-                $i + 1 < count($long_options) &&
+                $i + 1 < $count_long_options &&
                 $opt == substr($long_options[$i+1], 0, $opt_len)) {
-                throw new RuntimeException("option --$opt is ambiguous");
+                throw new PHPUnit_Framework_Exception(
+                  "option --$opt is ambiguous"
+                );
             }
 
             if (substr($long_opt, -1) == '=') {
                 if (substr($long_opt, -2) != '==') {
-                    if (!strlen($opt_arg) && !(list(, $opt_arg) = each($args))) {
-                        throw new RuntimeException("option --$opt requires an argument");
+                    if (!strlen($opt_arg) &&
+                        !(list(, $opt_arg) = each($args))) {
+                        throw new PHPUnit_Framework_Exception(
+                          "option --$opt requires an argument"
+                        );
                     }
                 }
             }
 
             else if ($opt_arg) {
-                throw new RuntimeException("option --$opt doesn't allow an argument");
+                throw new PHPUnit_Framework_Exception(
+                  "option --$opt doesn't allow an argument"
+                );
             }
 
             $opts[] = array('--' . $opt, $opt_arg);
             return;
         }
 
-        throw new RuntimeException("unrecognized option --$opt");
+        throw new PHPUnit_Framework_Exception("unrecognized option --$opt");
     }
 }
 ?>

@@ -39,17 +39,14 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Warning.php 4701 2009-03-01 15:29:08Z sb $
+ * @version    SVN: $Id: Warning.php 5156 2009-08-29 05:48:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
 
 require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/Util/Filter.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
-
-if (!class_exists('PHPUnit_Framework_Warning', FALSE)) {
 
 /**
  * A warning.
@@ -95,7 +92,16 @@ class PHPUnit_Framework_Warning extends PHPUnit_Framework_TestCase
     {
         return $this->message;
     }
-}
 
+    /**
+     * Returns a string representation of the test case.
+     *
+     * @return string
+     * @since  Method available since Release 3.4.0
+     */
+    public function toString()
+    {
+        return 'Warning';
+    }
 }
 ?>

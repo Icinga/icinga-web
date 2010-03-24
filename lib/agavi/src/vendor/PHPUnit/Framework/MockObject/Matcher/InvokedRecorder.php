@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: InvokedRecorder.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: InvokedRecorder.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -52,14 +51,13 @@ require_once 'PHPUnit/Framework/MockObject/Invocation.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 /**
- * Records invocations and provides convenience methods for checking them later on.
- *
+ * Records invocations and provides convenience methods for checking them later
+ * on.
  * This abstract class can be implemented by matchers which needs to check the
  * number of times an invocation has occured.
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -70,28 +68,47 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 abstract class PHPUnit_Framework_MockObject_Matcher_InvokedRecorder implements PHPUnit_Framework_MockObject_Matcher_Invocation
 {
+    /**
+     * @var PHPUnit_Framework_MockObject_Invocation[]
+     */
     protected $invocations = array();
 
+    /**
+     * @return integer
+     */
     public function getInvocationCount()
     {
         return count($this->invocations);
     }
 
+    /**
+     * @return PHPUnit_Framework_MockObject_Invocation[]
+     */
     public function getInvocations()
     {
         return $this->invocations;
     }
 
+    /**
+     * @return boolean
+     */
     public function hasBeenInvoked()
     {
         return count($this->invocations) > 0;
     }
 
+    /**
+     * @param PHPUnit_Framework_MockObject_Invocation $invocation
+     */
     public function invoked(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         $this->invocations[] = $invocation;
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @return boolean
+     */
     public function matches(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         return TRUE;

@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Object.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Object.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -56,7 +55,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -80,11 +78,12 @@ class PHPUnit_Framework_ComparisonFailure_Object extends PHPUnit_Framework_Compa
         );
 
         if ($diff !== FALSE) {
-            return $diff;
+            return trim($diff);
         }
 
         // Fallback: Either diff is not available or the print_r() output for
-        // the expected and the actual object are equal (but the objects are not).
+        // the expected and the actual object are equal (but the objects are
+        // not).
 
         $expectedClass = get_class($this->expected);
         $actualClass   = get_class($this->actual);
@@ -108,11 +107,18 @@ class PHPUnit_Framework_ComparisonFailure_Object extends PHPUnit_Framework_Compa
             $i    = 0;
 
             foreach($expectedReflection->getProperties() as $expectedAttribute) {
-                if ($expectedAttribute->isPrivate() || $expectedAttribute->isProtected()) continue;
+                if ($expectedAttribute->isPrivate() ||
+                    $expectedAttribute->isProtected()) {
+                    continue;
+                }
 
-                $actualAttribute = $actualReflection->getProperty($expectedAttribute->getName());
-                $expectedValue  = $expectedAttribute->getValue($this->expected);
-                $actualValue    = $actualAttribute->getValue($this->actual);
+                $actualAttribute = $actualReflection->getProperty(
+                                     $expectedAttribute->getName()
+                                   );
+                $expectedValue   = $expectedAttribute->getValue(
+                                     $this->expected
+                                   );
+                $actualValue     = $actualAttribute->getValue($this->actual);
 
                 if ($expectedValue !== $actualValue) {
                     if ($i > 0) {
@@ -125,19 +131,41 @@ class PHPUnit_Framework_ComparisonFailure_Object extends PHPUnit_Framework_Compa
                     $actualType   = gettype($actualValue);
 
                     if ($expectedType !== $actualType) {
-                        $diffObject = new PHPUnit_Framework_ComparisonFailure_Type($expectedValue, $actualValue, $this->message . 'attribute <' . $expectedAttribute->getName() . '>: ');
+                        $diffObject = new PHPUnit_Framework_ComparisonFailure_Type(
+                          $expectedValue,
+                          $actualValue,
+                          $this->message . 'attribute <' .
+                          $expectedAttribute->getName() . '>: '
+                        );
+
                         $diff .= $diffObject->toString();
                     }
 
                     elseif (is_object($expectedValue)) {
                         if (get_class($expectedValue) !== get_class($actualValue)) {
-                            $diffObject = new PHPUnit_Framework_ComparisonFailure_Type($expectedValue, $actualValue, $this->message . 'attribute <' . $expectedAttribute->getName() . '>: ');
+                            $diffObject = new PHPUnit_Framework_ComparisonFailure_Type(
+                              $expectedValue,
+                              $actualValue,
+                              $this->message . 'attribute <' .
+                              $expectedAttribute->getName() . '>: '
+                            );
+
                             $diff .= $diffObject->toString();
                         } else {
-                            $diff .= 'attribute <' . $expectedAttribute->getName() . '> contains object <' . get_class($expectedValue) . '> with different attributes';
+                            $diff .= 'attribute <' .
+                                     $expectedAttribute->getName() .
+                                     '> contains object <' .
+                                     get_class($expectedValue) .
+                                     '> with different attributes';
                         }
                     } else {
-                        $diffObject = PHPUnit_Framework_ComparisonFailure::diffIdentical($expectedValue, $actualValue, $this->message . 'attribute <' . $expectedAttribute->getName() . '>: ');
+                        $diffObject = PHPUnit_Framework_ComparisonFailure::diffIdentical(
+                          $expectedValue,
+                          $actualValue,
+                          $this->message . 'attribute <' .
+                          $expectedAttribute->getName() . '>: '
+                        );
+
                         $diff .= $diffObject->toString();
                     }
                 }

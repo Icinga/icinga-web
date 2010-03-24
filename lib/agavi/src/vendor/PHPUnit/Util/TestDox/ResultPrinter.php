@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: ResultPrinter.php 4658 2009-02-21 06:25:47Z sb $
+ * @version    SVN: $Id: ResultPrinter.php 5251 2009-09-24 14:22:53Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.3.0
  */
@@ -230,12 +230,20 @@ abstract class PHPUnit_Util_TestDox_ResultPrinter extends PHPUnit_Util_Printer i
                 $this->tests     = array();
             }
 
-            $annotations = $test->getAnnotations();
+            $prettified = FALSE;
 
-            if (isset($annotations['method']['testdox'][0])) {
-                $this->currentTestMethodPrettified = $annotations['method']['testdox'][0];
-            } else {
-                $this->currentTestMethodPrettified = $this->prettifier->prettifyTestMethod($test->getName());
+            if ($test instanceof PHPUnit_Framework_TestCase &&
+               !$test instanceof PHPUnit_Framework_Warning) {
+                $annotations = $test->getAnnotations();
+
+                if (isset($annotations['method']['testdox'][0])) {
+                    $this->currentTestMethodPrettified = $annotations['method']['testdox'][0];
+                    $prettified = TRUE;
+                }
+            }
+
+            if (!$prettified) {
+                $this->currentTestMethodPrettified = $this->prettifier->prettifyTestMethod($test->getName(FALSE));
             }
 
             $this->testStatus = PHPUnit_Runner_BaseTestRunner::STATUS_PASSED;

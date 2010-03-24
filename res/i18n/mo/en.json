@@ -1,0 +1,15 @@
+// Default english translation
+{
+	'' : {
+    	'plural-forms'  : "nplurals=2; plural=(n != 1);"
+	},
+	'msgid': [null, 'msgstr'],
+	
+	'test_string': [null, 'Translation of test string']
+/* 	
+	'some string' : [null, 'translated message'],
+	'context\u0004some string' : [null, 'translated context message'],
+	'one banana' : ['%n bananas', 'translated 1 banana', 'translated plural bananas'],
+	'the fruit\u0004one banana' : ['%n bananas', '[w/ context] translated 1 banana', '[w/ context] translated plural bananas']
+*/
+}

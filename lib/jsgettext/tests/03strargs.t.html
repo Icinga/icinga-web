@@ -1,0 +1,71 @@
+<head>
+    <link rel="gettext" type="application/json" href="LC_MESSAGES/test.json" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 99});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+// test passing in multi-value array
+var strings = {
+    "blah" : "blah",
+    "" : "",
+    "%%" : "%",
+    "%%%" : "%%",
+    "%%%%" : "%%",
+    "%%%%%" : "%%%",
+    "tom%%dick" : "tom%dick",
+    "thing%1bob" : "thing[one]bob",
+    "thing%1%2bob" : "thing[one][two]bob",
+    "thing%1asdf%2asdf" : "thing[one]asdf[two]asdf",
+    "%1%2%3" : "[one][two]",
+    "tom%1%%2%aDick" : "tom[one]%2%aDick"
+    };
+var args = ["[one]", "[two]"];
+
+for (i in strings) {
+    // test using new Array
+    is(Gettext.strargs(i, new Array("[one]","[two]")), strings[i], 'Gettext.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+    is(gt.strargs(i, new Array("[one]","[two]")), strings[i], 'gt.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+    // test using anonymous array
+    is(Gettext.strargs(i, ["[one]","[two]"]), strings[i], 'Gettext.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+    is(gt.strargs(i, ["[one]","[two]"]), strings[i], 'gt.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+    // test using predefined array
+    is(Gettext.strargs(i, args), strings[i], 'Gettext.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+    is(gt.strargs(i, args), strings[i], 'gt.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+}
+
+
+// test using scalar rather than array
+var strings = {
+    "blah" : "blah",
+    "" : "",
+    "%%" : "%",
+    "%%%" : "%%",
+    "%%%%" : "%%",
+    "%%%%%" : "%%%",
+    "tom%%dick" : "tom%dick",
+    "thing%1bob" : "thing[one]bob",
+    "thing%1%2bob" : "thing[one]bob",
+    "thing%1asdf%2asdf" : "thing[one]asdfasdf",
+    "%1%2%3" : "[one]",
+    "tom%1%%2%aDick" : "tom[one]%2%aDick"
+    };
+var arg = "[one]";
+
+for (i in strings) {
+    is(Gettext.strargs(i, arg), strings[i], 'scalar Gettext.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+    is(gt.strargs(i, arg), strings[i], 'scalar gt.strargs() : "'+i+'" did not strargs to "'+strings[i]+'"');
+}
+
+</script></pre>
+</body>

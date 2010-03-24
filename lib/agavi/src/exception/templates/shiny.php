@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: shiny.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: shiny.php 4399 2010-01-11 16:41:20Z david $
  */
 
 if(!function_exists('buildParamList')) {
@@ -577,6 +577,18 @@ if(isset($fixedTrace[0]['file']) && !($fixedTrace[0]['file'] == $e->getFile() &&
 <?php
 $i = 0;
 $highlights = array();
+$filepaths = array();
+foreach(array(
+	'core.module_dir',
+	'core.template_dir',
+	'core.config_dir',
+	'core.cache_dir',
+	'core.lib_dir',
+	'core.app_dir',
+	'core.agavi_dir',
+) as $directive) {
+	$filepaths['#^' . preg_quote(AgaviConfig::get($directive)) . '(?<=.)#'] = sprintf('<abbr title="%s">%s</abbr>', htmlspecialchars(AgaviConfig::get($directive)), $directive);
+} 
 foreach($fixedTrace as $trace):
 	$i++;
 	if(isset($trace['file']) && !isset($highlights[$trace['file']])) {
@@ -586,26 +598,7 @@ foreach($fixedTrace as $trace):
 		$highlights[$trace['file']] = explode('<br />', $highlights[$trace['file']]);
 	}
 ?>
-			<li id="frame<?php echo $i; ?>"<?php if($i != 2): ?> class="hidecode"<?php endif; ?>>at <?php if($i > 1): ?><strong><?php if(isset($trace['class'])): ?><?php echo $trace['class'], htmlspecialchars($trace['type']); ?><?php endif; ?><?php echo $trace['function']; ?><?php if(isset($trace['args'])): ?>(<?php echo buildParamList($trace['args']); ?>)<?php endif; ?></strong><?php else: ?><em>exception origin</em><?php endif; ?><br />in <?php if(isset($trace['file'])): echo str_replace(
-			array(
-				'_' . AgaviConfig::get('core.module_dir', 'something totally random'),
-				'_' . AgaviConfig::get('core.template_dir', 'something totally random'),
-				'_' . AgaviConfig::get('core.config_dir', 'something totally random'),
-				'_' . AgaviConfig::get('core.cache_dir', 'something totally random'),
-				'_' . AgaviConfig::get('core.lib_dir', 'something totally random'),
-				'_' . AgaviConfig::get('core.app_dir', 'something totally random'),
-				'_' . AgaviConfig::get('core.agavi_dir', 'something totally random')
-			),
-			array(
-				'<abbr title="' . AgaviConfig::get('core.module_dir') . '">core.module_dir</abbr>',
-				'<abbr title="' . AgaviConfig::get('core.template_dir') . '">core.template_dir</abbr>',
-				'<abbr title="' . AgaviConfig::get('core.config_dir') . '">core.config_dir</abbr>',
-				'<abbr title="' . AgaviConfig::get('core.cache_dir') . '">core.cache_dir</abbr>',
-				'<abbr title="' . AgaviConfig::get('core.lib_dir') . '">core.lib_dir</abbr>',
-				'<abbr title="' . AgaviConfig::get('core.app_dir') . '">core.app_dir</abbr>',
-				'<abbr title="' . AgaviConfig::get('core.agavi_dir') . '">core.agavi_dir</abbr>',
-			),
-'_' . $trace['file']); ?> <a href="#frame<?php echo $i; ?>" class="toggle" title="Toggle source code snippet" onclick="this.parentNode.className = this.parentNode.className == 'hidecode' ? '' : 'hidecode'; return false;">line <?php echo $trace['line']; ?></a><ol start="<?php echo $start = $trace['line'] < 4 ? 1 : $trace['line'] - 3; ?>" style="padding-left:<?php echo strlen($start+6)*0.6+2; ?>em"><?php
+			<li id="frame<?php echo $i; ?>"<?php if($i != 2): ?> class="hidecode"<?php endif; ?>>at <?php if($i > 1): ?><strong><?php if(isset($trace['class'])): ?><?php echo $trace['class'], htmlspecialchars($trace['type']); ?><?php endif; ?><?php echo $trace['function']; ?><?php if(isset($trace['args'])): ?>(<?php echo buildParamList($trace['args']); ?>)<?php endif; ?></strong><?php else: ?><em>exception origin</em><?php endif; ?><br />in <?php if(isset($trace['file'])): echo preg_replace(array_keys($filepaths), $filepaths, $trace['file']); ?> <a href="#frame<?php echo $i; ?>" class="toggle" title="Toggle source code snippet" onclick="this.parentNode.className = this.parentNode.className == 'hidecode' ? '' : 'hidecode'; return false;">line <?php echo $trace['line']; ?></a><ol start="<?php echo $start = $trace['line'] < 4 ? 1 : $trace['line'] - 3; ?>" style="padding-left:<?php echo strlen($start+6)*0.6+2; ?>em"><?php
 $lines = array_slice($highlights[$trace['file']], $start - 1, 7, true);
 foreach($lines as $key => &$line) {
 	if($key + 1 == $trace['line']): ?><li class="highlight"><?php if($svg): ?><div style="float:left; width:1em; height:1em; margin-left:-1.35em; background-color:#FFF;"><svg:svg viewBox="2 1 45 43" preserveAspectRatio="xMaxYMax meet" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><svg:use xlink:href="#stopSign" /></svg:svg></div><?php endif; else: ?><li><?php endif; ?><code><?php

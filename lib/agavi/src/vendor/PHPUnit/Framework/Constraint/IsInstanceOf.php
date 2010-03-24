@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IsInstanceOf.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: IsInstanceOf.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -59,7 +58,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -69,8 +67,14 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_Constraint_IsInstanceOf extends PHPUnit_Framework_Constraint
 {
+    /**
+     * @var string
+     */
     protected $className;
 
+    /**
+     * @param string $className
+     */
     public function __construct($className)
     {
         $this->className = $className;
@@ -90,7 +94,8 @@ class PHPUnit_Framework_Constraint_IsInstanceOf extends PHPUnit_Framework_Constr
 
     /**
      * Creates the appropriate exception for the constraint which can be caught
-     * by the unit test system. This can be called if a call to evaluate() fails.
+     * by the unit test system. This can be called if a call to evaluate()
+     * fails.
      *
      * @param   mixed   $other The value passed to evaluate() which failed the
      *                         constraint check.

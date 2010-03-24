@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: ArrayHasKey.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: ArrayHasKey.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -54,14 +53,13 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 /**
  * Constraint that asserts that the array it is evaluated for has a given key.
  *
- * Uses array_key_exists() to check if the key is found in the input array, if not
- * found the evaluaton fails.
+ * Uses array_key_exists() to check if the key is found in the input array, if
+ * not found the evaluaton fails.
  *
  * The array key is passed in the constructor.
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -71,8 +69,14 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_Constraint_ArrayHasKey extends PHPUnit_Framework_Constraint
 {
+    /**
+     * @var integer|string
+     */
     protected $key;
 
+    /**
+     * @param integer|string $key
+     */
     public function __construct($key)
     {
         $this->key = $key;
@@ -100,6 +104,11 @@ class PHPUnit_Framework_Constraint_ArrayHasKey extends PHPUnit_Framework_Constra
         return 'has the key ' . PHPUnit_Util_Type::toString($this->key);
     }
 
+    /**
+     * @param mixed   $other
+     * @param string  $description
+     * @param boolean $not
+     */
     protected function customFailureDescription($other, $description, $not)
     {
         return sprintf(

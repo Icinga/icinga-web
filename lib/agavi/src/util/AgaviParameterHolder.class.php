@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -27,7 +27,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviParameterHolder.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviParameterHolder.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviParameterHolder
 {
@@ -165,10 +165,13 @@ class AgaviParameterHolder
 			unset($this->parameters[$name]);
 			return $retval;
 		}
+		
+		$retval = null;
 		try {
-			return AgaviArrayPathDefinition::unsetValue($name, $this->parameters);
+			$retval =& AgaviArrayPathDefinition::unsetValue($name, $this->parameters);
 		} catch(InvalidArgumentException $e) {
 		}
+		return $retval;
 	}
 
 	/**
@@ -258,7 +261,9 @@ class AgaviParameterHolder
 	 */
 	public function setParameters(array $parameters)
 	{
-		$this->parameters = array_merge($this->parameters, $parameters);
+		// array_merge would reindex numeric keys, so we use the + operator
+		// mind the operand order: keys that exist in the left one aren't overridden
+		$this->parameters = $parameters + $this->parameters;
 	}
 
 	/**

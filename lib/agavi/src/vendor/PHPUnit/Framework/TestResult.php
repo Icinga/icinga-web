@@ -39,23 +39,21 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestResult.php 4679 2009-02-25 11:33:48Z sb $
+ * @version    SVN: $Id: TestResult.php 5201 2009-09-07 09:07:18Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
 
 require_once 'PHPUnit/Framework.php';
+
 require_once 'PHPUnit/Util/CodeCoverage.php';
 require_once 'PHPUnit/Util/ErrorHandler.php';
-require_once 'PHPUnit/Util/Filter.php';
 require_once 'PHPUnit/Util/InvalidArgumentHelper.php';
 require_once 'PHPUnit/Util/Printer.php';
 require_once 'PHPUnit/Util/Test.php';
 require_once 'PHPUnit/Util/Timer.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
-
-if (!class_exists('PHPUnit_Framework_TestResult', FALSE)) {
 
 /**
  * A TestResult collects the results of executing a test case.
@@ -71,7 +69,14 @@ if (!class_exists('PHPUnit_Framework_TestResult', FALSE)) {
  */
 class PHPUnit_Framework_TestResult implements Countable
 {
+    /**
+     * @var boolean
+     */
     protected static $xdebugLoaded = NULL;
+
+    /**
+     * @var boolean
+     */
     protected static $useXdebug = NULL;
 
     /**
@@ -204,8 +209,11 @@ class PHPUnit_Framework_TestResult implements Countable
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
         if ($e instanceof PHPUnit_Framework_IncompleteTest) {
-            $this->notImplemented[] = new PHPUnit_Framework_TestFailure($test, $e);
-            $notifyMethod           = 'addIncompleteTest';
+            $this->notImplemented[] = new PHPUnit_Framework_TestFailure(
+              $test, $e
+            );
+
+            $notifyMethod = 'addIncompleteTest';
         }
 
         else if ($e instanceof PHPUnit_Framework_SkippedTest) {
@@ -241,8 +249,11 @@ class PHPUnit_Framework_TestResult implements Countable
     public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
     {
         if ($e instanceof PHPUnit_Framework_IncompleteTest) {
-            $this->notImplemented[] = new PHPUnit_Framework_TestFailure($test, $e);
-            $notifyMethod           = 'addIncompleteTest';
+            $this->notImplemented[] = new PHPUnit_Framework_TestFailure(
+              $test, $e
+            );
+
+            $notifyMethod = 'addIncompleteTest';
         }
 
         else if ($e instanceof PHPUnit_Framework_SkippedTest) {
@@ -528,8 +539,13 @@ class PHPUnit_Framework_TestResult implements Countable
             $newFilesToCollect = array_diff_key($data, PHPUnit_Util_Filter::getCoveredFiles());
 
             if (count($newFilesToCollect) > 0) {
-                $deadCode       = PHPUnit_Util_CodeCoverage::getDeadLines($newFilesToCollect);
-                $executableCode = PHPUnit_Util_CodeCoverage::getExecutableLines($newFilesToCollect);
+                $deadCode = PHPUnit_Util_CodeCoverage::getDeadLines(
+                  $newFilesToCollect
+                );
+
+                $executableCode = PHPUnit_Util_CodeCoverage::getExecutableLines(
+                  $newFilesToCollect
+                );
 
                 foreach (array_keys($newFilesToCollect) as $file) {
                     PHPUnit_Util_Filter::addCoveredFile($file);
@@ -547,7 +563,9 @@ class PHPUnit_Framework_TestResult implements Countable
                     $data = array_intersect_key($data, $linesToBeCovered);
 
                     foreach (array_keys($data) as $file) {
-                        $data[$file] = array_intersect_key($data[$file], array_flip($linesToBeCovered[$file]));
+                        $data[$file] = array_intersect_key(
+                          $data[$file], array_flip($linesToBeCovered[$file])
+                        );
                     }
                 }
             }
@@ -639,7 +657,8 @@ class PHPUnit_Framework_TestResult implements Countable
 
         if ($this->convertErrorsToExceptions) {
             $oldErrorHandler = set_error_handler(
-              array('PHPUnit_Util_ErrorHandler', 'handleError'), E_ALL | E_STRICT
+              array('PHPUnit_Util_ErrorHandler', 'handleError'),
+              E_ALL | E_STRICT
             );
 
             if ($oldErrorHandler === NULL) {
@@ -651,10 +670,12 @@ class PHPUnit_Framework_TestResult implements Countable
 
         if (self::$xdebugLoaded === NULL) {
             self::$xdebugLoaded = extension_loaded('xdebug');
-            self::$useXdebug = self::$xdebugLoaded;
+            self::$useXdebug    = self::$xdebugLoaded;
         }
 
-        $useXdebug = self::$useXdebug && $this->collectCodeCoverageInformation && !$test instanceof PHPUnit_Extensions_SeleniumTestCase;
+        $useXdebug = self::$useXdebug &&
+                     $this->collectCodeCoverageInformation &&
+                     !$test instanceof PHPUnit_Extensions_SeleniumTestCase;
 
         if ($useXdebug) {
             xdebug_start_code_coverage(XDEBUG_CC_UNUSED | XDEBUG_CC_DEAD_CODE);
@@ -680,9 +701,11 @@ class PHPUnit_Framework_TestResult implements Countable
             $codeCoverage = xdebug_get_code_coverage();
             xdebug_stop_code_coverage();
 
-            $this->appendCodeCoverageInformation(
-              $test, $codeCoverage
-            );
+            if (!$test instanceof PHPUnit_Framework_Warning) {
+                $this->appendCodeCoverageInformation(
+                  $test, $codeCoverage
+                );
+            }
         }
 
         if ($errorHandlerSet === TRUE) {
@@ -793,7 +816,5 @@ class PHPUnit_Framework_TestResult implements Countable
     {
         return empty($this->errors) && empty($this->failures);
     }
-}
-
 }
 ?>

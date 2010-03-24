@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -15,9 +15,10 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * AgaviExecutionTimeFilter tracks the length of time it takes for an entire
- * request to be served starting with the dispatch and ending when the last 
- * action request has been served.
+ * AgaviDispatchFilter is the last in the chain of global filters and executes
+ * the execution container, also re-setting the container's response to the
+ * return value of the execution, so responses from forwards are passed along
+ * properly.
  *
  * @package    agavi
  * @subpackage filter
@@ -28,7 +29,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviDispatchFilter.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviDispatchFilter.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviDispatchFilter extends AgaviFilter implements AgaviIGlobalFilter
 {

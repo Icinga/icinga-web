@@ -1,0 +1,27 @@
+<head>
+    <link rel="gettext" type="application/json" href="LC_MESSAGES/test.json" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 9});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+is(gt.npgettext('context', 'context plural %n', 'plural %n', 1), 'XXcpXX singular %n', "singular from plural");
+is(gt.npgettext('context', 'context plural %n', 'plural %n', 2), 'XXcpXX plural %n', "plural from plural");
+is(gt.npgettext('context', 'context plural %n', 'plural %n', 0), 'XXcpXX plural %n', "zero from plural");
+
+is(gt.npgettext('context', 'Not translated', 'Not translated plural', 1), 'Not translated', "untranslated strings pass through");
+is(gt.npgettext('context', 'Not translated', 'Not translated plural', 2), 'Not translated plural', "untranslated strings pass through");
+is(gt.npgettext('context', 'Not translated', 'Not translated plural', 0), 'Not translated plural', "untranslated strings pass through");
+
+</script></pre>
+</body>

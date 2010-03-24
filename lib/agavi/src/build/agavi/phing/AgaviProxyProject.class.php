@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -25,7 +25,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviProxyProject.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviProxyProject.class.php 4411 2010-01-25 08:37:14Z david $
  */
 class AgaviProxyProject extends Project
 {
@@ -55,6 +55,8 @@ class AgaviProxyProject extends Project
 		$this->proxied = $proxied;
 		
 		parent::__construct();
+		
+		ProjectConfigurator::configureProject($this, $GLOBALS['BUILD']);
 		
 		foreach($proxied->getBuildListeners() as $listener) {
 			parent::addBuildListener($listener);

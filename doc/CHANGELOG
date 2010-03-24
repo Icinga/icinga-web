@@ -127,16 +127,25 @@
       * Cleanup the initial event firework a bit
        
      * 2010-03-18
-      * Template filter for multiple fields (Intergrid links)
-      * Typo (fixes #335)
-      * Added js temp storage class (used for grid templates)
+       * Template filter for multiple fields (Intergrid links)
+       * Typo (fixes #335)
+       * Added js temp storage class (used for grid templates)
       
      * 2010-03-19
-      * Customvar filtering for host- / servicegrids
-      * Jumplinks from host-/serviceview to hosts and services (fixes #334)
+       * Customvar filtering for host- / servicegrids
+       * Jumplinks from host-/serviceview to hosts and services (fixes #334)
       
      * 2010-03-22
-      * Added columnRenderer to display status information
-      * Round corners for status info in grids
-      * Concept testing gettext js
-      
+       * Added columnRenderer to display status information
+       * Round corners for status info in grids
+       * Concept testing gettext js
+     
+     * 2010-03-23
+       * Agavi update (v1.0.2)
+       * New library jsgettext (see VENDOR for more information)
+       * Probe i18n with js
+     
+     * 2010-03-24
+       * I18n javascript implementation (refs #279)
+     
+     

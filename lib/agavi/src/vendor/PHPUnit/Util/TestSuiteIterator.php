@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestSuiteIterator.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: TestSuiteIterator.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
@@ -137,7 +137,9 @@ class PHPUnit_Util_TestSuiteIterator implements RecursiveIterator
      */
     public function getChildren()
     {
-        return new PHPUnit_Util_TestSuiteIterator($this->tests[$this->position]);
+        return new PHPUnit_Util_TestSuiteIterator(
+          $this->tests[$this->position]
+        );
     }
 
     /**

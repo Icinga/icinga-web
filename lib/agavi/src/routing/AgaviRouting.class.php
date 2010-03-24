@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -27,7 +27,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviRouting.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviRouting.class.php 4399 2010-01-11 16:41:20Z david $
  */
 abstract class AgaviRouting extends AgaviParameterHolder
 {
@@ -127,7 +127,7 @@ abstract class AgaviRouting extends AgaviParameterHolder
 	 */
 	protected function loadConfig()
 	{
-		$cfg = AgaviConfig::get("core.config_dir") . "/routing.xml";
+		$cfg = AgaviConfig::get('core.config_dir') . '/routing.xml';
 		// allow missing routing.xml when routing is not enabled
 		if($this->isEnabled() || is_readable($cfg)) {
 			$this->importRoutes(unserialize(file_get_contents(AgaviConfigCache::checkConfig($cfg, $this->context->getName()))));
@@ -582,8 +582,8 @@ abstract class AgaviRouting extends AgaviParameterHolder
 				if(!isset($r['callback_instances'])) {
 					foreach($r['opt']['callbacks'] as $key => $callback) {
 						$instance = new $callback['class']();
-						$instance->initialize($this->context, $r);
 						$instance->setParameters($callback['parameters']);
+						$instance->initialize($this->context, $r);
 						$r['callback_instances'][$key] = $instance;
 					}
 				}

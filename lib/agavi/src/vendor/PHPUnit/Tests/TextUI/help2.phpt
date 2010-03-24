@@ -14,18 +14,13 @@ PHPUnit %s by Sebastian Bergmann.
 Usage: phpunit [switches] UnitTest [UnitTest.php]
        phpunit [switches] <directory>
 
-  --log-json <file>        Log test execution in JSON format.
+  --log-junit <file>       Log test execution in JUnit XML format to file.
   --log-tap <file>         Log test execution in TAP format to file.
-  --log-xml <file>         Log test execution in XML format to file.
+  --log-json <file>        Log test execution in JSON format.
 
   --coverage-html <dir>    Generate code coverage report in HTML format.
   --coverage-clover <file> Write code coverage data in Clover XML format.
   --coverage-source <dir>  Write code coverage / source data in XML format.
-
-  --test-db-dsn <dsn>      DSN for the test database.
-  --test-db-log-rev <rev>  Revision information for database logging.
-  --test-db-prefix ...     Prefix that should be stripped from filenames.
-  --test-db-log-info ...   Additional information for database logging.
 
   --story-html <file>      Write Story/BDD results in HTML format to file.
   --story-text <file>      Write Story/BDD results in Text format to file.
@@ -39,14 +34,13 @@ Usage: phpunit [switches] UnitTest [UnitTest.php]
   --list-groups            List available test groups.
 
   --loader <loader>        TestSuiteLoader implementation to use.
-  --repeat <times>         Runs the test(s) repeatedly.
 
   --story                  Report test execution progress in Story/BDD format.
   --tap                    Report test execution progress in TAP format.
   --testdox                Report test execution progress in TestDox format.
 
   --colors                 Use colors in output.
-  --no-syntax-check        Disable syntax check of test source files.
+  --stderr                 Write to STDERR instead of STDOUT.
   --stop-on-failure        Stop execution upon first error or failure.
   --verbose                Output more verbose information.
   --wait                   Waits for a keystroke after each test.
@@ -55,8 +49,9 @@ Usage: phpunit [switches] UnitTest [UnitTest.php]
   --skeleton-test          Generate UnitTest class for Unit in Unit.php.
 
   --process-isolation      Run each test in a separate PHP process.
-  --no-globals-backup      Do not backup and restore $GLOBALS.
-  --no-static-backup       Do not backup and restore static attributes.
+  --no-globals-backup      Do not backup and restore $GLOBALS for each test.
+  --static-backup          Backup and restore static attributes for each test.
+  --syntax-check           Try to check source files for syntax errors.
 
   --bootstrap <file>       A "bootstrap" PHP file that is run before the tests.
   --configuration <file>   Read configuration from XML file.

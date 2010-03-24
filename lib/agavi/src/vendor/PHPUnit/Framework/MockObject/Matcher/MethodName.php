@@ -36,17 +36,17 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: MethodName.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: MethodName.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/Util/Filter.php';
+require_once 'PHPUnit/Util/InvalidArgumentHelper.php';
 require_once 'PHPUnit/Framework/MockObject/Matcher/StatelessInvocation.php';
 require_once 'PHPUnit/Framework/MockObject/Invocation.php';
 
@@ -61,7 +61,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -71,22 +70,42 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_MockObject_Matcher_MethodName extends PHPUnit_Framework_MockObject_Matcher_StatelessInvocation
 {
+    /**
+     * @var PHPUnit_Framework_Constraint
+     */
     protected $constraint;
 
+    /**
+     * @param  PHPUnit_Framework_Constraint|string
+     * @throws PHPUnit_Framework_Constraint
+     */
     public function __construct($constraint)
     {
-        if (!($constraint instanceof PHPUnit_Framework_Constraint)) {
-            $constraint = new PHPUnit_Framework_Constraint_IsEqual($constraint);
+        if (!$constraint instanceof PHPUnit_Framework_Constraint) {
+            if (!is_string($constraint)) {
+                throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'string');
+            }
+
+            $constraint = new PHPUnit_Framework_Constraint_IsEqual(
+              $constraint, 0, 10, FALSE, TRUE
+            );
         }
 
         $this->constraint = $constraint;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return 'method name ' . $this->constraint->toString();
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @return boolean
+     */
     public function matches(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         return $this->constraint->evaluate($invocation->methodName);

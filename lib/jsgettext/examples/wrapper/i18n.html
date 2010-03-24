@@ -1,0 +1,39 @@
+<html><head>
+<script language="javascript" src="../../lib/Gettext.js"></script>
+<script language="javascript" src="i18n.js"></script>
+<script language="javascript"><!--
+    var my_locale_data = {
+        'myDomain' : {
+            '' : {
+                'plural-forms'  : "nplurals=2; plural=(n != 1);"
+                },
+            'msgid' : [null, 'msgstr'],
+            'some string' : [null, 'translated message'],
+            'context\u0004some string' : [null, 'translated context message'],
+            'one banana' : ['%n bananas', 'translated 1 banana', 'translated plural bananas'],
+            'the fruit\u0004one banana' : ['%n bananas', '[w/ context] translated 1 banana', '[w/ context] translated plural bananas']
+        }
+    };
+    wrap.i18n.init(undefined, 'myDomain', my_locale_data);
+    var translations = [];
+    translations.push('translation of "some string": '+i18n("some string"));
+    translations.push('translation of "context"+"some string": '+i18n("context", "some string"));
+    translations.push('translation of 0 bananas: '+i18n(0, "one banana", "%n bananas"));
+    translations.push('translation of 1 bananas: '+i18n(1, "one banana", "%n bananas"));
+    translations.push('translation of 2 bananas: '+i18n(2, "one banana", "%n bananas"));
+
+    translations.push('translation of 0 bananas (with context): '+i18n(0, "the fruit", "one banana", "%n bananas"));
+    translations.push('translation of 1 bananas (with context): '+i18n(1, "the fruit", "one banana", "%n bananas"));
+    translations.push('translation of 2 bananas (with context): '+i18n(2, "the fruit", "one banana", "%n bananas"));
+
+    translations.push('strargs with gettext (0): '+Gettext.strargs( i18n(0, 'foo has one bar', 'foo has %1 bars'), 0));
+    translations.push('strargs with gettext (1): '+Gettext.strargs( i18n(1, 'foo has one bar', 'foo has %1 bars'), 1));
+    translations.push('strargs with gettext (2): '+Gettext.strargs( i18n(2, 'foo has one bar', 'foo has %1 bars'), 2));
+
+    alert("example translations:\n"+translations.join("\n"));
+// --></script>
+</head>
+<body>
+test
+</body>
+</html>

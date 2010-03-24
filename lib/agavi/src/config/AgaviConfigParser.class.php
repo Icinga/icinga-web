@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -29,7 +29,7 @@
  *
  * @deprecated Superseded by AgaviXmlConfigParser, will be removed in Agavi 1.1
  *
- * @version    $Id: AgaviConfigParser.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviConfigParser.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviConfigParser
 {
@@ -37,6 +37,11 @@ class AgaviConfigParser
 	 * @var        string The encoding of the DOMDocument
 	 */
 	protected $encoding = 'utf-8';
+	
+	/**
+	 * @var        string The filesystem path to the configuration file.
+	 */
+	protected $config = '';
 	
 	/**
 	 * @param      string An absolute filesystem path to a configuration file.
@@ -49,6 +54,9 @@ class AgaviConfigParser
 	 */
 	public function parse($config, $validationFile = null)
 	{
+		// copy path in case convertEncoding() needs to complain about a missing ICONV extension
+		$this->config = $config;
+		
 		$parser = new AgaviXmlConfigParser($config, AgaviConfig::get('core.environment'), null);
 		
 		$validation = array(
@@ -62,7 +70,8 @@ class AgaviConfigParser
 		}
 		$doc = $parser->execute(array(), $validation);
 		
-		$this->encoding = $doc->encoding;
+		// remember encoding for convertEncoding()
+		$this->encoding = strtolower($doc->encoding);
 		
 		$rootRes = new AgaviConfigValueHolder();
 		

@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Matcher.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Matcher.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -53,17 +52,16 @@ require_once 'PHPUnit/Framework/MockObject/Invocation.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 /**
- * Main matcher which defines a full expectation using method, parameter and invocation matchers.
- *
- * This matcher encapsulates all the other matchers and allows the builder to set
- * the specific matchers when the appropriate methods are called (once(), where()
- * etc.).
+ * Main matcher which defines a full expectation using method, parameter and 
+ * invocation matchers.
+ * This matcher encapsulates all the other matchers and allows the builder to
+ * set the specific matchers when the appropriate methods are called (once(),
+ * where() etc.).
  *
  * All properties are public so that they can easily be accessed by the builder.
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -73,23 +71,47 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_MockObject_Matcher implements PHPUnit_Framework_MockObject_Matcher_Invocation
 {
+    /**
+     * @var PHPUnit_Framework_MockObject_Matcher_Invocation
+     */
     public $invocationMatcher;
 
+    /**
+     * @var mixed
+     */
     public $afterMatchBuilderId = NULL;
 
+    /**
+     * @var boolean
+     */
     public $afterMatchBuilderIsInvoked = FALSE;
 
+    /**
+     * @var PHPUnit_Framework_MockObject_Matcher_MethodName
+     */
     public $methodNameMatcher = NULL;
 
+    /**
+     * @var PHPUnit_Framework_MockObject_Matcher_Parameters
+     */
     public $parametersMatcher = NULL;
 
+    /**
+     * @var PHPUnit_Framework_MockObject_Stub
+     */
     public $stub = NULL;
 
+    /**
+     * @param PHPUnit_Framework_MockObject_Matcher_Invocation $invocationMatcher
+     */
     public function __construct(PHPUnit_Framework_MockObject_Matcher_Invocation $invocationMatcher)
     {
         $this->invocationMatcher = $invocationMatcher;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         $list = array();
@@ -117,21 +139,29 @@ class PHPUnit_Framework_MockObject_Matcher implements PHPUnit_Framework_MockObje
         return join(' ', $list);
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @return mixed
+     */
     public function invoked(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         if ($this->invocationMatcher === NULL) {
-            throw new RuntimeException('No invocation matcher is set');
+            throw new PHPUnit_Framework_Exception(
+              'No invocation matcher is set'
+            );
         }
 
         if ($this->methodNameMatcher === NULL) {
-            throw new RuntimeException('No method matcher is set');
+            throw new PHPUnit_Framework_Exception('No method matcher is set');
         }
 
         if ($this->afterMatchBuilderId !== NULL) {
-            $builder = $invocation->object->__phpunit_getInvocationMocker()->lookupId($this->afterMatchBuilderId);
+            $builder = $invocation->object
+                                  ->__phpunit_getInvocationMocker()
+                                  ->lookupId($this->afterMatchBuilderId);
 
             if (!$builder) {
-                throw new RuntimeException(
+                throw new PHPUnit_Framework_Exception(
                   sprintf(
                     'No builder found for match builder identification <%s>',
 
@@ -176,13 +206,19 @@ class PHPUnit_Framework_MockObject_Matcher implements PHPUnit_Framework_MockObje
         return NULL;
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @return boolean
+     */
     public function matches(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         if ($this->afterMatchBuilderId !== NULL) {
-            $builder = $invocation->object->__phpunit_getInvocationMocker()->lookupId($this->afterMatchBuilderId);
+            $builder = $invocation->object
+                                  ->__phpunit_getInvocationMocker()
+                                  ->lookupId($this->afterMatchBuilderId);
 
             if (!$builder) {
-                throw new RuntimeException(
+                throw new PHPUnit_Framework_Exception(
                   sprintf(
                     'No builder found for match builder identification <%s>',
 
@@ -203,11 +239,13 @@ class PHPUnit_Framework_MockObject_Matcher implements PHPUnit_Framework_MockObje
         }
 
         if ($this->invocationMatcher === NULL) {
-            throw new RuntimeException('No invocation matcher is set');
+            throw new PHPUnit_Framework_Exception(
+              'No invocation matcher is set'
+            );
         }
 
         if ($this->methodNameMatcher === NULL) {
-            throw new RuntimeException('No method matcher is set');
+            throw new PHPUnit_Framework_Exception('No method matcher is set');
         }
 
         if (!$this->invocationMatcher->matches($invocation)) {
@@ -236,14 +274,20 @@ class PHPUnit_Framework_MockObject_Matcher implements PHPUnit_Framework_MockObje
         return TRUE;
     }
 
+    /**
+     * @throws PHPUnit_Framework_Exception
+     * @throws PHPUnit_Framework_ExpectationFailedException
+     */
     public function verify()
     {
         if ($this->invocationMatcher === NULL) {
-            throw new RuntimeException('No invocation matcher is set');
+            throw new PHPUnit_Framework_Exception(
+              'No invocation matcher is set'
+            );
         }
 
         if ($this->methodNameMatcher === NULL) {
-            throw new RuntimeException('No method matcher is set');
+            throw new PHPUnit_Framework_Exception('No method matcher is set');
         }
 
         try {

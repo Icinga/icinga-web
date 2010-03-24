@@ -134,43 +134,54 @@
 	-->
 	<setting name="appkit.include_javascript">
 
-		<!-- Firebug lite for debug purposes -->
-		<!-- <parameter>%core.root_dir%/lib/firebug/firebug-lite-compressed.js</parameter> -->
+		<parameter name="squished">
+			<!-- Firebug lite for debug purposes -->
+			<!-- <parameter>%core.root_dir%/lib/firebug/firebug-lite-compressed.js</parameter> -->
+			
+			<!-- ExtJS base files -->
+			<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
+			<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter> -->
+	
+			<!-- JIT - JavaScript InfoVis Toolkit -->
+			<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
+			<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
+	
+			<!--AppKit JS -->
+			<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
+			
+			<!-- MISC -->
+			<parameter>%core.root_dir%/lib/appkit/js/rmd160.js</parameter>
+			
+			<!-- jsgettext -->
+			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
+		</parameter>
 		
-		<!-- ExtJS base files -->
-		<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
-		<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
-		<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter> -->
-
-		<!-- JIT - JavaScript InfoVis Toolkit -->
-		<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
-		<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
-
-		<!--AppKit JS -->
-		<parameter>%core.root_dir%/lib/appkit/js/ext/SessionProvider.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
-		<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
-		
-		<!-- MISC -->
-		<parameter>%core.root_dir%/lib/appkit/js/rmd160.js</parameter>
+		<parameter name="inline">
+			<!-- I18N -->
+			<parameter>/appkit/ext/i18n</parameter>
+		</parameter>
 	</setting>
 
 	<!--

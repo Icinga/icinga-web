@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviLdmlConfigHandler.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviLdmlConfigHandler.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviLdmlConfigHandler extends AgaviConfigHandler
 {
@@ -615,6 +615,9 @@ array data format
 				}
 				if(isset($syms->plusSign)) {
 					$data['numbers']['symbols']['plusSign'] = $this->unescape($syms->plusSign->getValue());
+				}
+				if(isset($syms->minusSign)) {
+					$data['numbers']['symbols']['minusSign'] = $this->unescape($syms->minusSign->getValue());
 				}
 				if(isset($syms->exponential)) {
 					$data['numbers']['symbols']['exponential'] = $this->unescape($syms->exponential->getValue());

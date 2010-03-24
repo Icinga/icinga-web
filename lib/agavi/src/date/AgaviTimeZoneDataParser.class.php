@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviTimeZoneDataParser.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviTimeZoneDataParser.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviTimeZoneDataParser
 {
@@ -114,7 +114,17 @@ class AgaviTimeZoneDataParser
 	 */
 	protected function parseFile($file)
 	{
-		$zoneLines = explode("\n", file_get_contents($file));
+		$data = file_get_contents($file);
+		
+		// find version info
+		if(!preg_match('/^#\s*@\(#\)\s*(?P<filename>\S+)\s+(?P<version>\S+)\s*$/m', $data, $meta)) {
+			$meta = array(
+				'filename' => '(unknown)',
+				'version' => '(unknown)',
+			);
+		}
+		
+		$zoneLines = explode("\n", $data);
 		// filter comments
 		$zoneLines = array_filter($zoneLines, array(__CLASS__, 'commentFilter'));
 
@@ -141,6 +151,8 @@ class AgaviTimeZoneDataParser
 				}
 
 				$zone = $this->parseZone($colLines);
+				$zone['source'] = $meta['filename'];
+				$zone['version'] = $meta['version'];
 				$zones[] = $zone;
 			} elseif(preg_match('!^\s*Link\s+([^\s]+)\s+([^\s]+)!', $line, $match)) {
 				// to - from
@@ -155,7 +167,7 @@ class AgaviTimeZoneDataParser
 		$this->prepareRules($rules);
 		$zones = $this->generateDatatables($zones);
 
-		return array('zones' => $zones, 'links' => $links);
+		return array('zones' => $zones, 'links' => $links, 'meta' => $meta);
 	}
 
 	/**
@@ -528,7 +540,7 @@ class AgaviTimeZoneDataParser
 
 			usort($myFinalRules, array(__CLASS__, 'ruleCmp'));
 
-			$zoneTables[$zone['name']] = array('types' => $myFinalTypes, 'rules' => $myFinalRules, 'finalRule' => $finalRule);
+			$zoneTables[$zone['name']] = array('types' => $myFinalTypes, 'rules' => $myFinalRules, 'finalRule' => $finalRule, 'source' => $zone['source'], 'version' => $zone['version']);
 		}
 
 		return $zoneTables;
@@ -1026,6 +1038,8 @@ class AgaviTimeZoneDataParser
 			if($match[1] == '-') {
 				$seconds = -$seconds;
 			}
+		} elseif($time == '-') {
+			$seconds = 0;
 		} else {
 			throw new Exception('unknown time format "' . $time . '"');
 		}

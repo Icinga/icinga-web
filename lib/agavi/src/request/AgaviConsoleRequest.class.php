@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2003-2005 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -25,7 +25,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviConsoleRequest.class.php 3584 2009-01-18 14:45:54Z david $
+ * @version    $Id: AgaviConsoleRequest.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviConsoleRequest extends AgaviRequest
 {
@@ -83,10 +83,10 @@ class AgaviConsoleRequest extends AgaviRequest
 		
 		$_FILES = array();
 		if($this->getParameter('read_stdin', false)) {
-			$stdinFile = tempnam(AgaviConfig::get('core.cache_dir'), "stdin_");
+			$stdinFile = tempnam(AgaviConfig::get('core.cache_dir'), 'stdin_');
 			$stdin = fopen('php://stdin', 'rb');
 			stream_set_blocking($stdin, false);
-			$size = stream_copy_to_stream($stdin, $handle = fopen($stdinFile, "wb"));
+			$size = stream_copy_to_stream($stdin, $handle = fopen($stdinFile, 'wb'));
 			fclose($handle);
 			
 			$_FILES = array(
@@ -142,7 +142,7 @@ class AgaviConsoleRequest extends AgaviRequest
 	{
 		parent::startup();
 		
-		if($this->getParameter("unset_input", true)) {
+		if($this->getParameter('unset_input', true)) {
 			$_SERVER['argv'] = $_ENV['argv'] = $GLOBALS['argv'] = array();
 			$_SERVER['argc'] = $_ENV['argc'] = $GLOBALS['argc'] = 0;
 		}

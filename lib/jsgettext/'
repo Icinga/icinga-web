@@ -1,0 +1,29 @@
+<html><head>
+<script language="javascript">
+function strargs(str, args) {
+    // make sure args is an array
+    if ( null == args ||
+         'undefined' == typeof(args) ||
+         args.constructor != Array ) {
+        args = [];
+    }
+    // insert an arg at the begining because we're not zero-based
+    args.unshift('');
+
+    var re = new RegExp('(?<!%)%([0-9]+)');
+    var count = 0;
+    while (re.test(str)) {
+        count++;
+        if (count > 2) break;
+        str.replace(re, args[$1]);
+    }
+
+    return str;
+}
+
+var strings = ["blah", "", "%%", "tom%%dick", "thing%1bob", "thing%1%2bob", "thing%1asdf%2asdf", "%1%2%3"];
+for (var i in strings) {
+    alert("str["+i+"] = ["+strargs(i)+"]");
+}
+</script>
+</head><body></body></html>

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Class.php 4677 2009-02-25 11:27:58Z sb $
+ * @version    SVN: $Id: Class.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
@@ -134,11 +134,13 @@ class PHPUnit_Util_Class
             $classes = array($className);
         }
 
-        $done    = FALSE;
+        $done = FALSE;
 
         while (!$done) {
             if ($asReflectionObjects) {
-                $class = new ReflectionClass($classes[count($classes)-1]->getName());
+                $class = new ReflectionClass(
+                  $classes[count($classes)-1]->getName()
+                );
             } else {
                 $class = new ReflectionClass($classes[count($classes)-1]);
             }
@@ -170,8 +172,13 @@ class PHPUnit_Util_Class
     {
         $parameters = array();
 
-        foreach ($method->getParameters() as $parameter) {
-            $name     = '$' . $parameter->getName();
+        foreach ($method->getParameters() as $i => $parameter) {
+            $name = '$' . $parameter->getName();
+
+            if ($name === '$') {
+                $name .= 'arg' . $i;
+            }
+
             $typeHint = '';
 
             if ($parameter->isArray()) {
@@ -265,7 +272,7 @@ class PHPUnit_Util_Class
 
         if (strpos($className, '\\') !== FALSE) {
             $result['namespace'] = self::arrayToName(
-              explode('\\', $className), '\\'
+              explode('\\', $className)
             );
         }
 
@@ -279,7 +286,7 @@ class PHPUnit_Util_Class
         }
 
         if (preg_match('/@subpackage[\s]+([\.\w]+)/', $docComment, $matches)) {
-            $result['subpackage'] = $matches[1];
+            $result['subpackage']   = $matches[1];
             $result['fullPackage'] .= '.' . $matches[1];
         }
 
@@ -316,39 +323,19 @@ class PHPUnit_Util_Class
             throw PHPUnit_Util_InvalidArgumentHelper::factory(2, 'string');
         }
 
-        $class      = new ReflectionClass($className);
-        $attributes = $class->getStaticProperties();
+        $class = new ReflectionClass($className);
 
-        if (array_key_exists($attributeName, $attributes)) {
-            return $attributes[$attributeName];
-        }
+        while ($class) {
+            $attributes = $class->getStaticProperties();
 
-        if (version_compare(PHP_VERSION, '5.2', '<')) {
-            $protectedName = "\0*\0" . $attributeName;
-        } else {
-            $protectedName = '*' . $attributeName;
-        }
-
-        if (array_key_exists($protectedName, $attributes)) {
-            return $attributes[$protectedName];
-        }
-
-        $classes = self::getHierarchy($className);
-
-        foreach ($classes as $class) {
-            $privateName = sprintf(
-              "\0%s\0%s",
-
-              $class,
-              $attributeName
-            );
-
-            if (array_key_exists($privateName, $attributes)) {
-                return $attributes[$privateName];
+            if (array_key_exists($attributeName, $attributes)) {
+                return $attributes[$attributeName];
             }
+
+            $class = $class->getParentClass();
         }
 
-        throw new RuntimeException(
+        throw new PHPUnit_Framework_Exception(
           sprintf(
             'Attribute "%s" not found in class.',
 
@@ -377,7 +364,9 @@ class PHPUnit_Util_Class
             throw PHPUnit_Util_InvalidArgumentHelper::factory(2, 'string');
         }
 
-        PHPUnit_Framework_Assert::assertObjectHasAttribute($attributeName, $object);
+        PHPUnit_Framework_Assert::assertObjectHasAttribute(
+          $attributeName, $object
+        );
 
         try {
             $attribute = new ReflectionProperty($object, $attributeName);
@@ -436,7 +425,7 @@ class PHPUnit_Util_Class
             }
         }
 
-        throw new RuntimeException(
+        throw new PHPUnit_Framework_Exception(
           sprintf(
             'Attribute "%s" not found in object.',
 
@@ -446,14 +435,38 @@ class PHPUnit_Util_Class
     }
 
     /**
+     *
+     *
+     * @param  string $className
+     * @return array
+     * @since  Method available since Release 3.4.0
+     */
+    public static function parseFullyQualifiedClassName($className)
+    {
+        $result = array(
+          'namespace'               => '',
+          'className'               => $className,
+          'fullyQualifiedClassName' => $className
+        );
+
+        if (strpos($className, '\\') !== FALSE) {
+            $tmp                 = explode('\\', $className);
+            $result['className'] = $tmp[count($tmp)-1];
+            $result['namespace'] = self::arrayToName($tmp);
+        }
+
+        return $result;
+    }
+
+    /**
      * Returns the package information of a user-defined class.
      *
-     * @param  array $parts
+     * @param  array  $parts
      * @param  string $join
      * @return string
      * @since  Method available since Release 3.2.12
      */
-    protected static function arrayToName(array $parts, $join)
+    protected static function arrayToName(array $parts, $join = '\\')
     {
         $result = '';
 

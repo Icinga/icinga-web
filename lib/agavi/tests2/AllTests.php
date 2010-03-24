@@ -7,15 +7,19 @@ if(!defined('PHPUnit_MAIN_METHOD')) {
 	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }
 
-require_once 'PHPUnit/Framework/TestSuite.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
 
+$here = realpath(dirname(dirname(__FILE__)));
+
+// add our bundled PHPUnit to include path (until a new release is out :D)
+set_include_path($here . '/src/vendor' . PATH_SEPARATOR . get_include_path());
+
+require_once 'PHPUnit/TextUI/TestRunner.php';
 
 require_once('AgaviTestCase.class.php');
 
 $testDir = dirname(__FILE__);
 include($testDir . '/../src/agavi.php');
-AgaviConfig::set("tests.dir", $testDir); // where the main tests dir resides
+AgaviConfig::set('tests.dir', $testDir); // where the main tests dir resides
 AgaviConfig::set('core.app_dir', AgaviConfig::get('tests.dir') . "/sandbox2");
 
 AgaviConfig::set('core.default_context', 'test');
@@ -28,11 +32,10 @@ class AllTests
 	public static function main()
 	{
 		$reportDir = dirname(__FILE__) . '/test_report/';
-		if(version_compare(PHPUnit_Runner_Version::id(), '3.0.0', '<')) {
-			PHPUnit_TextUI_TestRunner::run(self::suite(), $reportDir . 'coverage.xml', $reportDir . 'coverage.html', $reportDir . 'coverage.txt', $reportDir . 'report.html', $reportDir . 'report.txt', $reportDir . 'report.xml');
-		} else {
-			PHPUnit_TextUI_TestRunner::run(self::suite(), array(), $reportDir);
-		}
+		PHPUnit_TextUI_TestRunner::run(self::suite(), array(
+			'backupGlobals' => false,
+			'backupStaticAttributes' => false,
+		), $reportDir);
 	}
 
 	public static function suite()

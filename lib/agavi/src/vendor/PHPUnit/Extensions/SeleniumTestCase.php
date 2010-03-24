@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: SeleniumTestCase.php 4701 2009-03-01 15:29:08Z sb $
+ * @version    SVN: $Id: SeleniumTestCase.php 5307 2009-11-06 08:15:44Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -203,7 +203,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
                         // Test method with @dataProvider.
                         if (is_array($data) || $data instanceof Iterator) {
-                            $dataSuite = new PHPUnit_Framework_TestSuite(
+                            $dataSuite = new PHPUnit_Framework_TestSuite_DataProvider(
                               $className . '::' . $name
                             );
 
@@ -240,7 +240,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
                     // Test method with @dataProvider.
                     if (is_array($data) || $data instanceof Iterator) {
-                        $dataSuite = new PHPUnit_Framework_TestSuite(
+                        $dataSuite = new PHPUnit_Framework_TestSuite_DataProvider(
                           $className . '::' . $name
                         );
 
@@ -350,11 +350,21 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['timeout'])) {
             if (!is_int($browser['timeout'])) {
                 throw new InvalidArgumentException(
-                  'Array element "timeout" is no string.'
+                  'Array element "timeout" is no integer.'
                 );
             }
         } else {
-            $browser['timeout'] = 30000;
+            $browser['timeout'] = 30;
+        }
+
+        if (isset($browser['httpTimeout'])) {
+            if (!is_int($browser['httpTimeout'])) {
+                throw new InvalidArgumentException(
+                  'Array element "httpTimeout" is no integer.'
+                );
+            }
+        } else {
+            $browser['httpTimeout'] = 45;
         }
 
         $driver = new PHPUnit_Extensions_SeleniumTestCase_Driver;
@@ -363,6 +373,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         $driver->setHost($browser['host']);
         $driver->setPort($browser['port']);
         $driver->setTimeout($browser['timeout']);
+        $driver->setHttpTimeout($browser['httpTimeout']);
         $driver->setTestCase($this);
         $driver->setTestId($this->testId);
 
@@ -378,58 +389,16 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         $this->start();
 
-        try {
-            if (!is_file($this->name)) {
-                parent::runTest();
-            } else {
-                $this->runSelenese($this->name);
-            }
-        }
-
-        catch (PHPUnit_Framework_ExpectationFailedException $e) {
-            $buffer  = 'Current URL: ' . $this->drivers[0]->getLocation() . "\n";
-            $message = $e->getCustomMessage();
-
-            if ($this->captureScreenshotOnFailure &&
-                !empty($this->screenshotPath) && !empty($this->screenshotUrl)) {
-                $this->drivers[0]->captureEntirePageScreenshot(
-                  $this->screenshotPath . DIRECTORY_SEPARATOR . $this->testId . '.png'
-                );
-
-                $buffer .= 'Screenshot: ' . $this->screenshotUrl . '/' . $this->testId . ".png\n";
-            }
-
-            if (!empty($message)) {
-                $buffer .= "\n" . $message;
-            }
-
-            $e->setCustomMessage($buffer);
-
-            throw $e;
-        }
-
-        if ($this->autoStop) {
-            try {
-                $this->stop();
-            }
-
-            catch (RuntimeException $e) {
-            }
+        if (!is_file($this->name)) {
+            parent::runTest();
+        } else {
+            $this->runSelenese($this->name);
         }
 
         if (!empty($this->verificationErrors)) {
             $this->fail(implode("\n", $this->verificationErrors));
         }
-    }
 
-    /**
-     * If you want to override tearDown() make sure to either call stop() or
-     * parent::tearDown(). Otherwise the Selenium RC session will not be
-     * closed upon test failure.
-     *
-     */
-    protected function tearDown()
-    {
         if ($this->autoStop) {
             try {
                 $this->stop();
@@ -480,18 +449,16 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         $xpath    = new DOMXPath($document);
         $rows     = $xpath->query('body/table/tbody/tr');
 
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row) {
             $action    = NULL;
             $arguments = array();
             $columns   = $xpath->query('td', $row);
 
-            foreach ($columns as $column)
-            {
+            foreach ($columns as $column) {
                 if ($action === NULL) {
-                    $action = $column->nodeValue;
+                    $action = PHPUnit_Util_XML::nodeToText($column);
                 } else {
-                    $arguments[] = $column->nodeValue;
+                    $arguments[] = PHPUnit_Util_XML::nodeToText($column);
                 }
             }
 
@@ -510,21 +477,33 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @param  array  $arguments
      * @return mixed
      * @method unknown  addLocationStrategy()
+     * @method unknown  addLocationStrategyAndWait()
+     * @method unknown  addScript()
+     * @method unknown  addScriptAndWait()
      * @method unknown  addSelection()
      * @method unknown  addSelectionAndWait()
      * @method unknown  allowNativeXpath()
+     * @method unknown  allowNativeXpathAndWait()
      * @method unknown  altKeyDown()
      * @method unknown  altKeyDownAndWait()
      * @method unknown  altKeyUp()
      * @method unknown  altKeyUpAndWait()
      * @method unknown  answerOnNextPrompt()
      * @method unknown  assignId()
+     * @method unknown  assignIdAndWait()
+     * @method unknown  attachFile()
      * @method unknown  break()
      * @method unknown  captureEntirePageScreenshot()
-     * @method unknown  captureScreenshot()
+     * @method unknown  captureEntirePageScreenshotAndWait()
+     * @method unknown  captureEntirePageScreenshotToStringAndWait()
+     * @method unknown  captureScreenshotAndWait()
+     * @method unknown  captureScreenshotToStringAndWait()
      * @method unknown  check()
+     * @method unknown  checkAndWait()
      * @method unknown  chooseCancelOnNextConfirmation()
+     * @method unknown  chooseCancelOnNextConfirmationAndWait()
      * @method unknown  chooseOkOnNextConfirmation()
+     * @method unknown  chooseOkOnNextConfirmationAndWait()
      * @method unknown  click()
      * @method unknown  clickAndWait()
      * @method unknown  clickAt()
@@ -544,6 +523,8 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method unknown  deleteAllVisibleCookiesAndWait()
      * @method unknown  deleteCookie()
      * @method unknown  deleteCookieAndWait()
+     * @method unknown  deselectPopUp()
+     * @method unknown  deselectPopUpAndWait()
      * @method unknown  doubleClick()
      * @method unknown  doubleClickAndWait()
      * @method unknown  doubleClickAt()
@@ -558,6 +539,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method unknown  fireEvent()
      * @method unknown  fireEventAndWait()
      * @method unknown  focus()
+     * @method unknown  focusAndWait()
      * @method string   getAlert()
      * @method array    getAllButtons()
      * @method array    getAllFields()
@@ -570,6 +552,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method string   getBodyText()
      * @method string   getConfirmation()
      * @method string   getCookie()
+     * @method string   getCookieByName()
      * @method integer  getCursorPosition()
      * @method integer  getElementHeight()
      * @method integer  getElementIndex()
@@ -606,9 +589,11 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method unknown  highlight()
      * @method unknown  highlightAndWait()
      * @method unknown  ignoreAttributesWithoutValue()
+     * @method unknown  ignoreAttributesWithoutValueAndWait()
      * @method boolean  isAlertPresent()
      * @method boolean  isChecked()
      * @method boolean  isConfirmationPresent()
+     * @method boolean  isCookiePresent()
      * @method boolean  isEditable()
      * @method boolean  isElementPresent()
      * @method boolean  isOrdered()
@@ -618,10 +603,16 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method boolean  isVisible()
      * @method unknown  keyDown()
      * @method unknown  keyDownAndWait()
+     * @method unknown  keyDownNative()
+     * @method unknown  keyDownNativeAndWait()
      * @method unknown  keyPress()
      * @method unknown  keyPressAndWait()
+     * @method unknown  keyPressNative()
+     * @method unknown  keyPressNativeAndWait()
      * @method unknown  keyUp()
      * @method unknown  keyUpAndWait()
+     * @method unknown  keyUpNative()
+     * @method unknown  keyUpNativeAndWait()
      * @method unknown  metaKeyDown()
      * @method unknown  metaKeyDownAndWait()
      * @method unknown  metaKeyUp()
@@ -654,14 +645,23 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method unknown  refreshAndWait()
      * @method unknown  removeAllSelections()
      * @method unknown  removeAllSelectionsAndWait()
+     * @method unknown  removeScript()
+     * @method unknown  removeScriptAndWait()
      * @method unknown  removeSelection()
      * @method unknown  removeSelectionAndWait()
+     * @method unknown  retrieveLastRemoteControlLogs()
+     * @method unknown  rollup()
+     * @method unknown  rollupAndWait()
      * @method unknown  runScript()
+     * @method unknown  runScriptAndWait()
      * @method unknown  select()
      * @method unknown  selectAndWait()
      * @method unknown  selectFrame()
+     * @method unknown  selectPopUp()
+     * @method unknown  selectPopUpAndWait()
      * @method unknown  selectWindow()
      * @method unknown  setBrowserLogLevel()
+     * @method unknown  setBrowserLogLevelAndWait()
      * @method unknown  setContext()
      * @method unknown  setCursorPosition()
      * @method unknown  setCursorPositionAndWait()
@@ -673,60 +673,8 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method unknown  shiftKeyDownAndWait()
      * @method unknown  shiftKeyUp()
      * @method unknown  shiftKeyUpAndWait()
+     * @method unknown  shutDownSeleniumServer()
      * @method unknown  store()
-     * @method unknown  storeAlert()
-     * @method unknown  storeAlertPresent()
-     * @method unknown  storeAllButtons()
-     * @method unknown  storeAllFields()
-     * @method unknown  storeAllLinks()
-     * @method unknown  storeAllWindowIds()
-     * @method unknown  storeAllWindowNames()
-     * @method unknown  storeAllWindowTitle()s
-     * @method unknown  storeAttribute()
-     * @method unknown  storeAttributeFromAllWindows()
-     * @method unknown  storeBodyText()
-     * @method unknown  storeChecked()
-     * @method unknown  storeConfirmation()
-     * @method unknown  storeConfirmationPresent()
-     * @method unknown  storeCookie()
-     * @method unknown  storeCookieByName()
-     * @method unknown  storeCookiePresent()
-     * @method unknown  storeCursorPosition()
-     * @method unknown  storeEditable()
-     * @method unknown  storeElementHeight()
-     * @method unknown  storeElementIndex()
-     * @method unknown  storeElementPositionLeft()
-     * @method unknown  storeElementPositionTop()
-     * @method unknown  storeElementPresent()
-     * @method unknown  storeElementWidth()
-     * @method unknown  storeEval()
-     * @method unknown  storeExpression()
-     * @method unknown  storeHtmlSource()
-     * @method unknown  storeLocation()
-     * @method unknown  storeMouseSpeed()
-     * @method unknown  storeOrdered()
-     * @method unknown  storePrompt()
-     * @method unknown  storePromptPresent()
-     * @method unknown  storeSelectOptions()
-     * @method unknown  storeSelectedId()
-     * @method unknown  storeSelectedIds()
-     * @method unknown  storeSelectedIndex()
-     * @method unknown  storeSelectedIndexes()
-     * @method unknown  storeSelectedLabel()
-     * @method unknown  storeSelectedLabels()
-     * @method unknown  storeSelectedValue()
-     * @method unknown  storeSelectedValues()
-     * @method unknown  storeSomethingSelected()
-     * @method unknown  storeSpeed()
-     * @method unknown  storeTable()
-     * @method unknown  storeText()
-     * @method unknown  storeTextPresent()
-     * @method unknown  storeTitle()
-     * @method unknown  storeValue()
-     * @method unknown  storeVisible()
-     * @method unknown  storeWhetherThisFrameMatchFrameExpression()
-     * @method unknown  storeWhetherThisWindowMatchWindowExpression()
-     * @method unknown  storeXpathCount()
      * @method unknown  submit()
      * @method unknown  submitAndWait()
      * @method unknown  type()
@@ -735,6 +683,8 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * @method unknown  typeKeysAndWait()
      * @method unknown  uncheck()
      * @method unknown  uncheckAndWait()
+     * @method unknown  useXpathLibrary()
+     * @method unknown  useXpathLibraryAndWait()
      * @method unknown  waitForCondition()
      * @method unknown  waitForPageToLoad()
      * @method unknown  waitForPopUp()
@@ -1072,6 +1022,52 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
             $this->defaultAssertions($action);
             $this->inDefaultAssertions = FALSE;
         }
+    }
+
+    /**
+     * This method is called when a test method did not execute successfully.
+     *
+     * @param Exception $e
+     * @since Method available since Release 3.4.0
+     */
+    protected function onNotSuccessfulTest(Exception $e)
+    {
+        if ($e instanceof PHPUnit_Framework_ExpectationFailedException) {
+            $buffer  = 'Current URL: ' . $this->drivers[0]->getLocation() .
+                       "\n";
+            $message = $e->getCustomMessage();
+
+            if ($this->captureScreenshotOnFailure &&
+                !empty($this->screenshotPath) &&
+                !empty($this->screenshotUrl)) {
+                $this->drivers[0]->captureEntirePageScreenshot(
+                  $this->screenshotPath . DIRECTORY_SEPARATOR . $this->testId .
+                  '.png'
+                );
+
+                $buffer .= 'Screenshot: ' . $this->screenshotUrl . '/' .
+                           $this->testId . ".png\n";
+            }
+        }
+
+        if ($this->autoStop) {
+            try {
+                $this->stop();
+            }
+
+            catch (RuntimeException $e) {
+            }
+        }
+
+        if ($e instanceof PHPUnit_Framework_ExpectationFailedException) {
+            if (!empty($message)) {
+                $buffer .= "\n" . $message;
+            }
+
+            $e->setCustomMessage($buffer);
+        }
+
+        throw $e;
     }
 }
 ?>

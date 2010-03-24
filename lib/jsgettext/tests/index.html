@@ -1,0 +1,35 @@
+<html>
+<head>
+  <script type="text/javascript" src="lib/JSAN.js"></script>
+  <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    new JSAN("lib").use("Test.Harness.Browser");
+    new Test.Harness.Browser('./lib/JSAN.js').runTests(
+        '00gettext.t.js',
+        '00gettext_init.t.js',
+        '01gettext.t.js',
+        '01gettext_json.t.html',
+        '01gettext_po.t.html',
+        '01gettext_wrapper.t.js',
+        '01domain_inferred.t.html',
+        '01domain_multi.t.html',
+        '02gettext.t.html',
+        '02dgettext.t.html',
+        '02dcgettext.t.html',
+        '02ngettext.t.html',
+        '02ngettext2.t.html',
+        '02dngettext.t.html',
+        '02dcngettext.t.html',
+        '02pgettext.t.html',
+        '02dpgettext.t.html',
+        '02dcpgettext.t.html',
+        '02npgettext.t.html',
+        '02dnpgettext.t.html',
+        '02dcnpgettext.t.html',
+        '03strargs.t.html'
+    );
+</script>
+</body>
+</html>

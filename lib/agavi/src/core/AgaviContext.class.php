@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -32,7 +32,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviContext.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviContext.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviContext
 {
@@ -379,7 +379,7 @@ class AgaviContext
 
 		if(!class_exists($class)) {
 			// it's not there. 
-			throw new AgaviAutoloadException("Couldn't find class for Model " . $origModelName);
+			throw new AgaviAutoloadException(sprintf("Couldn't find class for Model %s", $origModelName));
 		}
 		
 		// so if we're here, we found something, right? good.
@@ -411,7 +411,7 @@ class AgaviContext
 			}
 		}
 		
-		if(method_exists($model, 'initialize')) {
+		if(is_callable(array($model, 'initialize'))) {
 			// pass the constructor params again. dual use for the win
 			$model->initialize($this, (array) $parameters);
 		}

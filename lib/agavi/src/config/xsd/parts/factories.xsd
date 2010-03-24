@@ -6,7 +6,7 @@
 	xmlns="http://agavi.org/agavi/config/parts/factories/1.0"
 	targetNamespace="http://agavi.org/agavi/config/parts/factories/1.0"
 	elementFormDefault="qualified"
-	version="$Id: factories.xsd 3593 2009-01-19 08:16:46Z impl $">
+	version="$Id: factories.xsd 4227 2009-08-02 00:16:30Z david $">
 
 	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
 	           schemaLocation="../_types.xsd" />
@@ -17,7 +17,7 @@
 		<xs:sequence maxOccurs="unbounded">
 			<xs:group ref="envelope_1_0:parameters" />
 		</xs:sequence>
-		<xs:attribute name="class" type="types_1_0:identifier" use="required" />
+		<xs:attribute name="class" type="types_1_0:php_class" use="required" />
 	</xs:complexType>
 
 	<xs:group name="configuration">

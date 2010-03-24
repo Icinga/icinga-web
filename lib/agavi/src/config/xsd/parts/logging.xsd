@@ -6,7 +6,7 @@
 	xmlns="http://agavi.org/agavi/config/parts/logging/1.0"
 	targetNamespace="http://agavi.org/agavi/config/parts/logging/1.0"
 	elementFormDefault="qualified"
-	version="$Id: logging.xsd 3593 2009-01-19 08:16:46Z impl $">
+	version="$Id: logging.xsd 4227 2009-08-02 00:16:30Z david $">
 
 	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
 	           schemaLocation="../_types.xsd" />
@@ -40,7 +40,7 @@
 			<xs:group ref="logger_appenders" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
-		<xs:attribute name="class" type="types_1_0:identifier" />
+		<xs:attribute name="class" type="types_1_0:php_class" />
 		<xs:attribute name="level" type="xs:string" />
 	</xs:complexType>
 
@@ -68,7 +68,7 @@
 			<xs:group ref="envelope_1_0:parameters" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
-		<xs:attribute name="class" type="types_1_0:identifier" />
+		<xs:attribute name="class" type="types_1_0:php_class" />
 		<xs:attribute name="layout" type="xs:string" />
 	</xs:complexType>
 
@@ -95,7 +95,7 @@
 			<xs:group ref="envelope_1_0:parameters" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
-		<xs:attribute name="class" type="types_1_0:identifier" />
+		<xs:attribute name="class" type="types_1_0:php_class" />
 	</xs:complexType>
 
 	<xs:complexType name="layouts">

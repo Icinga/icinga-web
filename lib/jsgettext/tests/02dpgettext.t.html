@@ -1,0 +1,26 @@
+<head>
+    <link rel="gettext" type="application/json" href="LC_MESSAGES/domain_multi.json" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 7});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+
+is(gt.dpgettext('messages', 'context', 'test'), 'XXtestXX context', "dpgettext:messages,test is XXtestXX");
+is(gt.dpgettext('messages2', 'context', 'test'), '22test22 context', "dpgettext:messages2,test is 22test22");
+
+is(gt.dpgettext('messages', 'context', 'Not translated'), 'Not translated');
+is(gt.dpgettext('messages2', 'context', 'Not translated'), 'Not translated');
+
+</script></pre>
+</body>

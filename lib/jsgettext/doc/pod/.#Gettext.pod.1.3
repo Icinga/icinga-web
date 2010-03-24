@@ -1,0 +1,307 @@
+=head1 NAME
+
+Javascript Gettext - Javascript implemenation of GNU Gettext API.
+
+=head1 SYNOPSIS
+
+ // //////////////////////////////////////////////////////////
+ // Optimum caching way
+ <script language="javascript" src="/path/LC_MESSAGES/myDomain.json"></script>
+ <script language="javascript" src="/path/Gettext.js'></script>
+
+ // assuming myDomain.json defines variable json_locale_data
+ var params = {  "domain" : "myDomain",
+                 "locale_data" : json_locale_data
+              };
+ var gt = new Gettext(params);
+ // create a shortcut if you'd like
+ function _ (msgid) { return gt.gettext(msgid); }
+ alert(_("some string"));
+ // or use fully named method
+ alert(gt.gettext("some string"));
+ // change to use a different "domain"
+ gt.textdomain("anotherDomain");
+ alert(gt.gettext("some string"));
+
+
+ // //////////////////////////////////////////////////////////
+ // The other way to load the language lookup is a "link" tag
+ // Downside is that the data won't be cached
+ // Upside is that it's easy to specify multiple files
+ <link rel="gettext" uri="/path/LC_MESSAGES/myDomain.json" />
+ <script language="javascript" src="/path/Gettext.js'></script>
+
+ var gt = new Gettext({ "domain" : "myDomain" });
+ // rest is the same
+
+
+ // //////////////////////////////////////////////////////////
+ // The reson the shortcuts aren't exported by default is because they'd be
+ // glued to the single domain you created. So, if you're adding i18n support
+ // to some js library, you should use it as so:
+
+ if (typeof(MyNamespace) == 'undefined') MyNamespace = {};
+ MyNamespace.MyClass = function () {
+     var gtParms = { "domain" : 'MyNamespace_MyClass' };
+     this.gt = new Gettext(gtParams);
+     return this;
+ };
+ MyNamespace.MyClass.prototype._ = function (msgid) {
+     return this.gt.gettext(msgid);
+ };
+ MyNamespace.MyClass.prototype.something = function () {
+     var myString = this._("this will get translated");
+ };
+
+ // //////////////////////////////////////////////////////////
+ // Adding the shortcuts to a global scope is easier. If that's
+ // ok in your app, this is certainly easier.
+ var myGettext = new Gettext({ 'domain' : 'myDomain' });
+ function _ (msgid) {
+     return myGettext.gettext(msgid);
+ }
+ alert( _("text") );
+
+ // //////////////////////////////////////////////////////////
+ // Data structure of the json data
+ // NOTE: if you're loading via the <script> tag, you can only
+ // load one file, but it can contain multiple domains.
+ var json_locale_data = {
+     "MyDomain" : {
+         "" : {
+             "header_key" : "header value",
+             "header_key" : "header value",
+         "msgid" : [ "msgid_plural", "msgstr", "msgstr_plural", "msgstr_pluralN" ],
+         "msgctxt\004msgid" : [ "", "msgstr" ],
+         },
+     "AnotherDomain" : {
+         },
+     }
+
+=head1 DESCRIPTION
+
+This is a javascript implementation of GNU Gettext, providing internationalization support for javascript. It differs from existing javascript implementations in that it will support all current Gettext features (ex. plural and context support), and will also support loading language catalogs from .mo, .po, or preprocessed json files (converter included).
+
+The locale initialization differs from that of GNU Gettext / POSIX. Rather than setting the category, domain, and paths, and letting the libs find the right file, you must explicitly load the file at some point. The "domain" will still be honored. Future versions may be expanded to include support for set_locale like features.
+
+
+=head1 INSTALL
+
+To install this module, simply copy the file lib/Gettext.js to a web accessable location, and reference it from your application.
+
+
+=head1 CONFIGURATION
+
+Configure in one of two ways:
+
+=over
+
+=item 1. Optimal. Load language definition from statically defined json data.
+
+    <script language="javascript" src="/path/locale/domain.json"></script>
+
+    // in domain.json
+    json_locale_data = {
+        "mydomain" : {
+            // po header fields
+            "" : {
+                "plural-forms" : "...",
+                "lang" : "en",
+                },
+            // all the msgid strings and translations
+            "msgid" : [ "msgid_plural", "translation", "plural_translation" ],
+        },
+    };
+    // please see the included po2json script for the details on this format
+
+This method also allows you to use unsupported file formats, so long as you can parse them into the above format.
+
+=item 2. Use AJAX to load language file.
+
+Use XMLHttpRequest (actually, SJAX - syncronous) to load an external resource.
+
+Supported external formats are:
+
+=over
+
+=item * Javascript Object Notation (.json)
+
+(see po2json)
+
+    type=application/json
+
+=item * Machine Object (compiled .po) (.mo)
+
+(see GNU Gettext's msgfmt)
+
+    type=application/x-mo
+
+=item * Uniforum Portable Object (.po)
+
+(see GNU Gettext's xgettext)
+
+    type=application/x-po
+
+=back
+
+=back
+
+=head1 METHODS
+
+The following methods are implemented:
+
+    new Gettext(args)
+    textdomain
+    gettext
+    dgettext
+    dcgettext
+    ngettext
+    dngettext
+    dcngettext
+    pgettext
+    dpgettext
+    dcpgettext
+    npgettext
+    dnpgettext
+    dcnpgettext
+
+
+=head2 new Gettext (args)
+
+Several methods of loading locale data are included. You may specify a plugin or alternative method of loading data by passing the data in as the "locale_data" option. For example:
+
+    var get_locale_data = function () {
+        // plugin does whatever to populate locale_data
+        return locale_data;
+    };
+    var gt = new Gettext( 'domain' : 'messages',
+                          'locale_data' : get_locale_data() );
+
+The above can also be used if locale data is specified in a statically included <SCRIPT> tag. Just specify the variable name in the call to new. Ex:
+
+    var gt = new Gettext( 'domain' : 'messages',
+                          'locale_data' : json_locale_data_variable );
+
+Finally, you may load the locale data by referencing it in a <LINK> tag. Simply exclude the 'locale_data' option, and all <LINK rel="gettext" ...> items will be tried. The <LINK> should be specified as:
+
+    <link rel="gettext" type="application/json" url="/path/to/file.json">
+    <link rel="gettext" type="text/javascript"  url="/path/to/file.json">
+    <link rel="gettext" type="application/x-po" url="/path/to/file.po">
+    <link rel="gettext" type="application/x-mo" url="/path/to/file.mo">
+
+args:
+
+=over
+
+=item domain
+
+The Gettext domain, not www.whatev.com. It's usually your applications basename. If the .po file was "myapp.po", this would be "myapp".
+
+=item locale_data
+
+Raw locale data (in json structure). If specified, from_link data will be ignored.
+
+=back
+
+
+=cut
+
+=head2 textdomain( domain )
+
+Set domain for future gettext() calls
+
+A  message  domain  is  a  set of translatable msgid messages. Usually,
+every software package has its own message domain. The domain  name  is
+used to determine the message catalog where a translation is looked up;
+it must be a non-empty string.
+
+The current message domain is used by the gettext, ngettext, pgettext,
+npgettext functions, and by the dgettext, dcgettext, dngettext, dcngettext,
+dpgettext, dcpgettext, dnpgettext and dcnpgettext functions when called
+with a NULL domainname argument.
+
+If domainname is not NULL, the current message domain is set to domain‐
+name.
+
+If domainname is undefined, null, or empty string, the function returns
+the current message domain.
+
+If  successful,  the  textdomain  function  returns the current message
+domain, after possibly changing it. (ie. if you set a new domain, the 
+value returned will NOT be the previous domain).
+
+
+=cut
+
+=head1 NOTES
+
+These are some notes on the internals
+
+=over
+
+=item LOCALE CACHING
+
+Loaded locale data is currently cached class-wide. This means that if two scripts are both using Gettext.js, and both share the same gettext domain, that domain will only be loaded once. This will allow you to grab a new object many times from different places, utilize the same domain, and share a single translation file. The downside is that a domain won't be RE-loaded if a new object is instantiated on a domain that had already been instantiated.
+
+=back
+
+=head1 BUGS / TODO
+
+=over
+
+=item error handling
+
+Currently, there are several places that throw errors. In GNU Gettext, there are no fatal errors, which allows text to still be displayed regardless of how broken the environment becomes. We should evaluate and determine where we want to stand on that issue.
+
+=item syncronous only support (no ajax support)
+
+Currently, fetching language data is done purely syncronous, which means the page will halt while those files are fetched/loaded.
+
+This is often what you want, as then following translation requests will actually be translated. However, if all your calls are done dynamically (ie. error handling only or something), loading in the background may be more adventagous.
+
+It's still recommended to use the statically defined <script ...> method, which should have the same delay, but it will cache the result.
+
+=item domain support
+
+domain support. We need to figure out how we're going to handle that across the board.
+
+In CCMS, with the i18n calls, they currently do nothing to distinguish between domains. For that, saying "hey, it's all 'ccms'" may be ok (though zoneinfo would be nice to separate out).
+
+In javascript, we run into a problem, because the namespace is essentially global. If we create a new i18n object, and use that, then that'd be ok... but that means a different calling convention than everthing else. The problem really lies with making the shortcuts ( _("str") or i18n("str") ).
+
+Maybe we can force our apps to do:
+    this.i18n("str")
+
+In our i18n wrapper lib, we could do the API like this:
+
+    // in some other .js file that needs i18n
+    this.i18nObj = new i18n;
+    this.i18n = this.i18nObj.init('domain');
+
+This really goes back to the crazy setup stuff that happens in all of these, and I'm basically trying to reinvent the wheel so it fits in javascript.
+
+
+=item encoding
+
+May want to add encoding/reencoding stuff.
+
+=back
+
+
+=head1 REQUIRES
+
+po2json requires perl, and the perl modules Locale::PO and JSON.
+
+=head1 SEE ALSO
+
+Locale::gettext_pp(3pm), POSIX(3pm), gettext(1), gettext(3),
+examples/normal/index.html,
+examples/wrapper/i18n.html, examples/wrapper/i18n.js
+
+=head1 AUTHOR
+
+Copyright (C) 2008, Joshua I. Miller E<lt>unrtst@cpan.orgE<gt>, all rights reserved. See the source code for details.
+
+
+=cut
+

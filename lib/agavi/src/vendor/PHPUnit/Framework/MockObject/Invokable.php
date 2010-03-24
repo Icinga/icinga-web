@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Invokable.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Invokable.php 5162 2009-08-29 08:49:43Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -59,7 +58,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -73,18 +71,18 @@ interface PHPUnit_Framework_MockObject_Invokable extends PHPUnit_Framework_MockO
      * Invokes the invocation object $invocation so that it can be checked for
      * expectations or matched against stubs.
      *
-     * @return Object
-     * @param PHPUnit_Framework_MockObject_Invocation $invocation The invocation object passed from
-     *                                                              mock object.
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     *         The invocation object passed from mock object.
+     * @return object
      */
     public function invoke(PHPUnit_Framework_MockObject_Invocation $invocation);
 
     /**
      * Checks if the invocation matches.
      *
-     * @return bool
-     * @param PHPUnit_Framework_MockObject_Invocation $invocation The invocation object passed from
-     *                                                              mock object.
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     *         The invocation object passed from mock object.
+     * @return boolean
      */
     public function matches(PHPUnit_Framework_MockObject_Invocation $invocation);
 }

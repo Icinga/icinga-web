@@ -36,28 +36,23 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Constraint.php 4475 2009-01-15 07:45:55Z sb $
+ * @version    SVN: $Id: Constraint.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
 
 require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/Util/Filter.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
-
-if (!class_exists('PHPUnit_Framework_Constraint', FALSE)) {
 
 /**
  * Abstract base class for constraints. which are placed upon any value.
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -65,20 +60,23 @@ if (!class_exists('PHPUnit_Framework_Constraint', FALSE)) {
  * @link       http://www.phpunit.de/
  * @since      Interface available since Release 3.0.0
  */
-abstract class PHPUnit_Framework_Constraint implements PHPUnit_Framework_SelfDescribing
+abstract class PHPUnit_Framework_Constraint implements Countable, PHPUnit_Framework_SelfDescribing
 {
     /**
-     * Evaluates the constraint for parameter $other. Returns TRUE if the
-     * constraint is met, FALSE otherwise.
+     * Counts the number of constraint elements.
      *
-     * @param mixed $other Value or object to evaluate.
-     * @return bool
+     * @return integer
+     * @since  Method available since Release 3.4.0
      */
-    abstract public function evaluate($other);
+    public function count()
+    {
+        return 1;
+    }
 
     /**
      * Creates the appropriate exception for the constraint which can be caught
-     * by the unit test system. This can be called if a call to evaluate() fails.
+     * by the unit test system. This can be called if a call to evaluate()
+     * fails.
      *
      * @param   mixed   $other The value passed to evaluate() which failed the
      *                         constraint check.
@@ -95,6 +93,11 @@ abstract class PHPUnit_Framework_Constraint implements PHPUnit_Framework_SelfDes
         );
     }
 
+    /**
+     * @param mixed   $other
+     * @param string  $description
+     * @param boolean $not
+     */
     protected function failureDescription($other, $description, $not)
     {
         $failureDescription = $this->customFailureDescription(
@@ -121,10 +124,19 @@ abstract class PHPUnit_Framework_Constraint implements PHPUnit_Framework_SelfDes
         return $failureDescription;
     }
 
+    /**
+     * @param mixed   $other
+     * @param string  $description
+     * @param boolean $not
+     */
     protected function customFailureDescription($other, $description, $not)
     {
     }
 
+    /**
+     * @param  string $string
+     * @return string
+     */
     public static function negate($string)
     {
         return str_replace(
@@ -149,8 +161,15 @@ abstract class PHPUnit_Framework_Constraint implements PHPUnit_Framework_SelfDes
           $string
         );
     }
-}
 
+    /**
+     * Evaluates the constraint for parameter $other. Returns TRUE if the
+     * constraint is met, FALSE otherwise.
+     *
+     * @param mixed $other Value or object to evaluate.
+     * @return bool
+     */
+    abstract public function evaluate($other);
 }
 
 require_once 'PHPUnit/Framework/Constraint/And.php';

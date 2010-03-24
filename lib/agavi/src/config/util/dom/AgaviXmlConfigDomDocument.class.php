@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviXmlConfigDomDocument.class.php 3776 2009-02-04 19:52:55Z david $
+ * @version    $Id: AgaviXmlConfigDomDocument.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviXmlConfigDomDocument extends DOMDocument
 {
@@ -110,7 +110,7 @@ class AgaviXmlConfigDomDocument extends DOMDocument
 		if(libxml_get_last_error() !== false) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-$errors[] = sprintf("Line %d: %s", $error->line, $error->message);
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
@@ -156,7 +156,7 @@ $errors[] = sprintf("Line %d: %s", $error->line, $error->message);
 		if(libxml_get_last_error() !== false) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-$errors[] = sprintf("Line %d: %s", $error->line, $error->message);
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
@@ -205,14 +205,14 @@ $errors[] = sprintf("Line %d: %s", $error->line, $error->message);
 				if($error->level != LIBXML_ERR_WARNING) {
 					$throw = true;
 				}
-				$errors[] = sprintf("Line %d: %s", $error->line, $error->message);
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			if($throw) {
 				libxml_use_internal_errors($luie);
 				throw new DOMException(
 					sprintf(
-						'Error%s occured while resolving XInclude directives: ' . "\n\n%s", 
+						'Error%s occurred while resolving XInclude directives: ' . "\n\n%s", 
 						count($errors) > 1 ? 's' : '', 
 						implode("\n", $errors)
 					)
@@ -254,13 +254,13 @@ $errors[] = sprintf("Line %d: %s", $error->line, $error->message);
 		if(libxml_get_last_error() !== false) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-				$errors[] = $error->message;
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
 			throw new DOMException(
 				sprintf(
-					'Error%s occured while importing a new node "%s": ' . "\n\n%s",
+					'Error%s occurred while importing a new node "%s": ' . "\n\n%s",
 					count($errors) > 1 ? 's' : '', 
 					$node->nodeName,
 					implode("\n", $errors)
@@ -288,10 +288,11 @@ $errors[] = sprintf("Line %d: %s", $error->line, $error->message);
 		$luie = libxml_use_internal_errors(true);
 		libxml_clear_errors();
 		
-		if(!$result = parent::schemaValidate($filename)) {
+		// gotta do the @ to suppress PHP warnings when the schema cannot be loaded or is invalid
+		if(!$result = @parent::schemaValidate($filename)) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-				$errors[] = sprintf("Line %d: %s", $error->line, $error->message);
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
@@ -325,10 +326,11 @@ $errors[] = sprintf("Line %d: %s", $error->line, $error->message);
 		$luie = libxml_use_internal_errors(true);
 		libxml_clear_errors();
 		
-		if(!$result = parent::schemaValidateSource($source)) {
+		// gotta do the @ to suppress PHP warnings when the schema cannot be loaded or is invalid
+		if(!$result = @parent::schemaValidateSource($source)) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-				$errors[] = sprintf("Line %d: %s", $error->line, $error->message);
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
@@ -361,10 +363,11 @@ $errors[] = sprintf("Line %d: %s", $error->line, $error->message);
 		$luie = libxml_use_internal_errors(true);
 		libxml_clear_errors();
 		
-		if(!$result = parent::relaxNGValidate($filename)) {
+		// gotta do the @ to suppress PHP warnings when the schema cannot be loaded or is invalid
+		if(!$result = @parent::relaxNGValidate($filename)) {
 			$errors = array();
 			foreach(libxml_get_errors() as $error) {
-				$errors[] = sprintf("Line %d: %s", $error->line, $error->message);
+				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);

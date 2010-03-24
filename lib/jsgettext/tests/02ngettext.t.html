@@ -1,0 +1,27 @@
+<head>
+    <link rel="gettext" type="application/json" href="LC_MESSAGES/test.json" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 9});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+is(gt.ngettext('test plural %n', 'test plural %n', 1), 'XXtestXXs %n', "singular from plural");
+is(gt.ngettext('test plural %n', 'test plural %n', 2), 'XXtestXXp %n', "plural from plural");
+is(gt.ngettext('test plural %n', 'test plural %n', 0), 'XXtestXXp %n', "zero from plural");
+
+is(gt.ngettext('Not translated', 'Not translated plural', 1), 'Not translated', "untranslated strings pass through");
+is(gt.ngettext('Not translated', 'Not translated plural', 2), 'Not translated plural', "untranslated strings pass through");
+is(gt.ngettext('Not translated', 'Not translated plural', 0), 'Not translated plural', "untranslated strings pass through");
+
+</script></pre>
+</body>

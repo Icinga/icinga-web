@@ -39,7 +39,7 @@
  * @author     Trond Hansen <trond@xait.no>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Oci.php 4639 2009-02-14 10:25:30Z sb $
+ * @version    SVN: $Id: Oci.php 5294 2009-10-27 06:45:57Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.3
  */
@@ -64,6 +64,11 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Extensions_Database_DB_MetaData_Oci extends PHPUnit_Extensions_Database_DB_MetaData
 {
+    /**
+     * No character used to quote schema objects.
+     */
+    protected $schemaObjectQuoteChar = '';
+
     protected $columns = array();
     protected $keys = array();
 
@@ -129,10 +134,12 @@ class PHPUnit_Extensions_Database_DB_MetaData_Oci extends PHPUnit_Extensions_Dat
      */
     protected function loadColumnInfo($tableName)
     {
+        $ownerQuery    = '';
+        $conOwnerQuery = '';
+        $tableParts    = $this->splitTableName($tableName);
+
         $this->columns[$tableName] = array();
         $this->keys[$tableName]    = array();
-
-        $tableParts = $this->splitTableName($tableName);
 
         if (!empty($tableParts['schema']))
         {
@@ -153,7 +160,7 @@ class PHPUnit_Extensions_Database_DB_MetaData_Oci extends PHPUnit_Extensions_Dat
         }
 
         $keyQuery = "SELECT b.column_name
-                       FROM all_constraints a, all_cons_columns b
+                       FROM user_constraints a, user_cons_columns b
                       WHERE a.constraint_type='P'
                         AND a.constraint_name=b.constraint_name
                         $conOwnerQuery

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviExecutionContainer.class.php 3978 2009-03-25 16:36:04Z david $
+ * @version    $Id: AgaviExecutionContainer.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviExecutionContainer extends AgaviAttributeHolder
 {
@@ -455,12 +455,12 @@ class AgaviExecutionContainer extends AgaviAttributeHolder
 
 		$useGenericMethods = false;
 		$executeMethod = 'execute' . $method;
-		if(!method_exists($actionInstance, $executeMethod)) {
+		if(!is_callable(array($actionInstance, $executeMethod))) {
 			$executeMethod = 'execute';
 			$useGenericMethods = true;
 		}
 
-		if($actionInstance->isSimple() || ($useGenericMethods && !method_exists($actionInstance, $executeMethod))) {
+		if($actionInstance->isSimple() || ($useGenericMethods && !is_callable(array($actionInstance, $executeMethod)))) {
 			// this action will skip validation/execution for this method
 			// get the default view
 			$key = $request->toggleLock();
@@ -494,7 +494,7 @@ class AgaviExecutionContainer extends AgaviAttributeHolder
 			} else {
 				// validation failed
 				$handleErrorMethod = 'handle' . $method . 'Error';
-				if(!method_exists($actionInstance, $handleErrorMethod)) {
+				if(!is_callable(array($actionInstance, $handleErrorMethod))) {
 					$handleErrorMethod = 'handleError';
 				}
 				$key = $request->toggleLock();
@@ -561,7 +561,7 @@ class AgaviExecutionContainer extends AgaviAttributeHolder
 		$validated = $validationManager->execute($requestData);
 
 		$validateMethod = 'validate' . $method;
-		if(!method_exists($actionInstance, $validateMethod)) {
+		if(!is_callable(array($actionInstance, $validateMethod))) {
 			$validateMethod = 'validate';
 		}
 
@@ -607,7 +607,7 @@ class AgaviExecutionContainer extends AgaviAttributeHolder
 
 		// manually load validators
 		$registerValidatorsMethod = 'register' . $method . 'Validators';
-		if(!method_exists($actionInstance, $registerValidatorsMethod)) {
+		if(!is_callable(array($actionInstance, $registerValidatorsMethod))) {
 			$registerValidatorsMethod = 'registerValidators';
 		}
 		$actionInstance->$registerValidatorsMethod();

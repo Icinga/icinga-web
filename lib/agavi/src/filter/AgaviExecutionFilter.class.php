@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -28,7 +28,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviExecutionFilter.class.php 4006 2009-03-26 17:20:09Z david $
+ * @version    $Id: AgaviExecutionFilter.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviExecutionFilter extends AgaviFilter implements AgaviIActionFilter
 {
@@ -370,7 +370,7 @@ class AgaviExecutionFilter extends AgaviFilter implements AgaviIActionFilter
 
 		if($isCacheable) {
 			try {
-				$groups = $this->determineGroups($config["groups"], $container);
+				$groups = $this->determineGroups($config['groups'], $container);
 				$actionGroups = array_merge($groups, array(self::ACTION_CACHE_ID));
 			} catch(AgaviUncacheableException $e) {
 				// a group callback threw an exception. that means we're not allowed t cache
@@ -735,7 +735,7 @@ class AgaviExecutionFilter extends AgaviFilter implements AgaviIActionFilter
 		// $lm->log('View is not cached, executing...');
 		// view initialization completed successfully
 		$executeMethod = 'execute' . $outputType;
-		if(!method_exists($viewInstance, $executeMethod)) {
+		if(!is_callable(array($viewInstance, $executeMethod))) {
 			$executeMethod = 'execute';
 		}
 		$key = $request->toggleLock();

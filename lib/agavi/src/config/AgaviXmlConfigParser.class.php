@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -28,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviXmlConfigParser.class.php 3633 2009-01-22 14:22:35Z david $
+ * @version    $Id: AgaviXmlConfigParser.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviXmlConfigParser
 {
@@ -811,9 +811,8 @@ class AgaviXmlConfigParser
 				throw new AgaviUnreadableException(sprintf('XML Schema validation file "%s" for configuration file "%s" does not exist or is unreadable', $validationFile, $document->documentURI));
 			}
 			
-			// gotta do the @ to suppress warnings when the schema cannot be found
 			try {
-				@$document->schemaValidate($validationFile);
+				$document->schemaValidate($validationFile);
 			} catch(DOMException $dome) {
 				throw new AgaviParseException(sprintf('XML Schema validation of configuration file "%s" failed:' . "\n\n%s", $document->documentURI, $dome->getMessage()));
 			}
@@ -834,7 +833,7 @@ class AgaviXmlConfigParser
 	{
 		foreach($validationSources as $validationSource) {
 			try {
-				@$document->schemaValidateSource($validationSource);
+				$document->schemaValidateSource($validationSource);
 			} catch(DOMException $dome) {
 				throw new AgaviParseException(sprintf('XML Schema validation of configuration file "%s" failed:' . "\n\n%s", $document->documentURI, $dome->getMessage()));
 			}
@@ -858,9 +857,8 @@ class AgaviXmlConfigParser
 				throw new AgaviUnreadableException(sprintf('RELAX NG validation file "%s" for configuration file "%s" does not exist or is unreadable', $validationFile, $document->documentURI));
 			}
 			
-			// gotta do the @ to suppress warnings when the schema cannot be found
 			try {
-				@$document->relaxNGValidate($validationFile);
+				$document->relaxNGValidate($validationFile);
 			} catch(DOMException $dome) {
 				throw new AgaviParseException(sprintf('RELAX NG validation of configuration file "%s" failed:' . "\n\n%s", $document->documentURI, $dome->getMessage()));
 			}

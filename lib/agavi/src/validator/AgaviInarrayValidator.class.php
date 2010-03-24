@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -20,6 +20,7 @@
  *   'values'  list of values that form the array
  *   'sep'     separator of values in the list
  *   'case'    verifies case sensitive if true
+ *   'strict'  whether or not to do strict type comparisons with in_array()
  *
  * @package    agavi
  * @subpackage validator
@@ -31,7 +32,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviInarrayValidator.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviInarrayValidator.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviInarrayValidator extends AgaviValidator
 {
@@ -59,10 +60,10 @@ class AgaviInarrayValidator extends AgaviValidator
 		
 		if(!$this->getParameter('case')) {
 			$value = strtolower($value);
-			$list = array_map(create_function('$a', 'return strtolower($a);'), $list);
+			$list = array_map('strtolower', $list);
 		}
 		
-		if(!in_array($value, $list)) {
+		if(!in_array($value, $list, $this->getParameter('strict', false))) {
 			$this->throwError();
 			return false;
 		}

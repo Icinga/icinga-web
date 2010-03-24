@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: InvokedAtLeastOnce.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: InvokedAtLeastOnce.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -52,13 +51,13 @@ require_once 'PHPUnit/Framework/MockObject/Matcher/InvokedRecorder.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 /**
- * Invocation matcher which checks if a method has been invoked at least one time.
+ * Invocation matcher which checks if a method has been invoked at least one
+ * time.
  *
  * If the number of invocations is 0 it will throw an exception in verify.
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -68,11 +67,20 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_MockObject_Matcher_InvokedAtLeastOnce extends PHPUnit_Framework_MockObject_Matcher_InvokedRecorder
 {
+    /**
+     * @return string
+     */
     public function toString()
     {
         return 'invoked at least once';
     }
 
+    /**
+     * Verifies that the current expectation is valid. If everything is OK the
+     * code should just return, if not it must throw an exception.
+     *
+     * @throws PHPUnit_Framework_ExpectationFailedException
+     */
     public function verify()
     {
         $count = $this->getInvocationCount();

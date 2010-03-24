@@ -1,0 +1,36 @@
+<head>
+    <link rel="gettext" type="application/json" href="LC_MESSAGES/domain_multi.json" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 15});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'test' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+
+is(gt.dngettext('messages', 'test singular', 'test plural', 1), 'XXtestXX singular', "singular from plural");
+is(gt.dngettext('messages', 'test singular', 'test plural', 2), 'XXtestXX plural', "plural from plural");
+is(gt.dngettext('messages', 'test singular', 'test plural', 0), 'XXtestXX plural', "zero from plural");
+
+is(gt.dngettext('messages2', 'test singular', 'test plural', 1), '22test22 singular', "singular from plural");
+is(gt.dngettext('messages2', 'test singular', 'test plural', 2), '22test22 plural', "plural from plural");
+is(gt.dngettext('messages2', 'test singular', 'test plural', 0), '22test22 plural', "zero from plural");
+
+is(gt.dngettext('messages', 'Not translated', 'Not translated plural', 1), 'Not translated', "untranslated strings pass through");
+is(gt.dngettext('messages', 'Not translated', 'Not translated plural', 2), 'Not translated plural', "untranslated strings pass through");
+is(gt.dngettext('messages', 'Not translated', 'Not translated plural', 0), 'Not translated plural', "untranslated strings pass through");
+
+is(gt.dngettext('messages2', 'Not translated', 'Not translated plural', 1), 'Not translated', "untranslated strings pass through");
+is(gt.dngettext('messages2', 'Not translated', 'Not translated plural', 2), 'Not translated plural', "untranslated strings pass through");
+is(gt.dngettext('messages2', 'Not translated', 'Not translated plural', 0), 'Not translated plural', "untranslated strings pass through");
+
+</script></pre>
+</body>

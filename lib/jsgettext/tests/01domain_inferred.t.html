@@ -1,0 +1,33 @@
+<head>
+    <link rel="gettext" type="application/x-po" href="LC_MESSAGES/domain_inferred.po" />
+    <script type="text/javascript" src="./lib/Test/Builder.js"></script>
+    <script type="text/javascript" src="./lib/Test/More.js"></script>
+    <script type="text/javascript" src="../lib/Gettext.js"></script>
+</head>
+<body>
+<pre id="test"><script type="text/javascript">
+
+plan({tests: 9});
+
+ok(typeof(Gettext) != 'undefined');
+
+try { var gt = new Gettext({ 'domain' : 'domain_inferred' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt) != 'undefined', 'Gettext object created');
+
+is(gt.gettext('test'), 'XXtestXX', "test translation is XXtestXX");
+
+is(gt.gettext('Not translated'), 'Not translated', "untranslated strings pass through");
+
+
+// this should try all loaded domains since this isn't found.
+try { var gt2 = new Gettext({ 'domain' : 'doesnotexist' }); ok(1, 'initialize'); }
+catch (e) { ok(0, 'initialize:'+e); }
+ok(typeof(gt2) != 'undefined', 'Gettext object created');
+
+is(gt2.gettext('test'), 'XXtestXX', "test translation is XXtestXX");
+
+is(gt2.gettext('Not translated'), 'Not translated', "untranslated strings pass through");
+
+</script></pre>
+</body>

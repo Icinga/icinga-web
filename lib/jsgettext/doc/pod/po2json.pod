@@ -1,0 +1,53 @@
+=head1 NAME
+
+po2json - Convert a Uniforum format portable object file to javascript object notation.
+
+=head1 SYNOPSIS
+
+ po2json /path/to/domain.po > domain.json
+
+=head1 DESCRIPTION
+
+This takes a PO file, as is created from GNU Gettext's xgettext, and converts it into a JSON file.
+
+The output is an annonymous associative array. So, if you plan to load this via a <script> tag, more processing will be require (the output from this program must be assigned to a named javascript variable). For example:
+
+    echo -n "var json_locale_data = " > domain.json
+    po2json /path/to/domain.po >> domain.json
+    echo ";" >> domain.json
+
+=head1 OPTIONS
+
+ -p : pretty-print the output. Makes the output more human-readable.
+
+=head1 BUGS
+
+Locale::PO has a potential bug (I don't know if this actually causes a problem or not). Given a .po file with an entry like:
+
+    msgid ""
+    "some string"
+    msgstr ""
+
+When $po->dump is run on that entry, it will output:
+
+    msgid "some string"
+    msgstr ""
+
+The above is removing the first linebreak. I don't know if that is significant. If so, we'll have to rewrite using a different parser (or include our own parser).
+
+=head1 REQUIRES
+
+ Locale::PO
+ JSON
+
+=head1 SEE ALSO
+
+ Locale::PO
+ Gettext.js
+
+=head1 AUTHOR
+
+Copyright (C) 2008, Joshua I. Miller E<lt>unrtst@cpan.orgE<gt>, all rights reserved. See the source code for details.
+
+
+

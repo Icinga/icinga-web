@@ -1,0 +1,561 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Gettext - Javascript implemenation of GNU Gettext API.</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#install">INSTALL</a></li>
+	<li><a href="#configuration">CONFIGURATION</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#new_gettext__args_">new Gettext (args)</a></li>
+		<li><a href="#textdomain__domain__">textdomain( domain )</a></li>
+		<li><a href="#gettext__msgid__">gettext( MSGID )</a></li>
+		<li><a href="#dgettext__textdomain__msgid__">dgettext( TEXTDOMAIN, MSGID )</a></li>
+		<li><a href="#dcgettext__textdomain__msgid__category__">dcgettext( TEXTDOMAIN, MSGID, CATEGORY )</a></li>
+		<li><a href="#ngettext__msgid__msgid_plural__count__">ngettext( MSGID, MSGID_PLURAL, COUNT )</a></li>
+		<li><a href="#dngettext__textdomain__msgid__msgid_plural__count__">dngettext( TEXTDOMAIN, MSGID, MSGID_PLURAL, COUNT )</a></li>
+		<li><a href="#dcngettext__textdomain__msgid__msgid_plural__count__category__">dcngettext( TEXTDOMAIN, MSGID, MSGID_PLURAL, COUNT, CATEGORY )</a></li>
+		<li><a href="#pgettext__msgctxt__msgid__">pgettext( MSGCTXT, MSGID )</a></li>
+		<li><a href="#dpgettext__textdomain__msgctxt__msgid__">dpgettext( TEXTDOMAIN, MSGCTXT, MSGID )</a></li>
+		<li><a href="#dcpgettext__textdomain__msgctxt__msgid__category__">dcpgettext( TEXTDOMAIN, MSGCTXT, MSGID, CATEGORY )</a></li>
+		<li><a href="#npgettext__msgctxt__msgid__msgid_plural__count__">npgettext( MSGCTXT, MSGID, MSGID_PLURAL, COUNT )</a></li>
+		<li><a href="#dnpgettext__textdomain__msgctxt__msgid__msgid_plural__count__">dnpgettext( TEXTDOMAIN, MSGCTXT, MSGID, MSGID_PLURAL, COUNT )</a></li>
+		<li><a href="#dcnpgettext__textdomain__msgctxt__msgid__msgid_plural__count__category__">dcnpgettext( TEXTDOMAIN, MSGCTXT, MSGID, MSGID_PLURAL, COUNT, CATEGORY )</a></li>
+		<li><a href="#strargs__string__argument_array_">strargs (string, argument_array)</a></li>
+	</ul>
+
+	<li><a href="#notes">NOTES</a></li>
+	<li><a href="#bugs___todo">BUGS / TODO</a></li>
+	<li><a href="#compatability">COMPATABILITY</a></li>
+	<li><a href="#requires">REQUIRES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>Javascript Gettext - Javascript implemenation of GNU Gettext API.</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+ // //////////////////////////////////////////////////////////
+ // Optimum caching way
+ &lt;script language=&quot;javascript&quot; src=&quot;/path/LC_MESSAGES/myDomain.json&quot;&gt;&lt;/script&gt;
+ &lt;script language=&quot;javascript&quot; src=&quot;/path/Gettext.js'&gt;&lt;/script&gt;</pre>
+<pre>
+ // assuming myDomain.json defines variable json_locale_data
+ var params = {  &quot;domain&quot; : &quot;myDomain&quot;,
+                 &quot;locale_data&quot; : json_locale_data
+              };
+ var gt = new Gettext(params);
+ // create a shortcut if you'd like
+ function _ (msgid) { return gt.gettext(msgid); }
+ alert(_(&quot;some string&quot;));
+ // or use fully named method
+ alert(gt.gettext(&quot;some string&quot;));
+ // change to use a different &quot;domain&quot;
+ gt.textdomain(&quot;anotherDomain&quot;);
+ alert(gt.gettext(&quot;some string&quot;));</pre>
+<pre>
+ // //////////////////////////////////////////////////////////
+ // The other way to load the language lookup is a &quot;link&quot; tag
+ // Downside is that not all browsers cache XMLHttpRequests the
+ // same way, so caching of the language data isn't guarenteed
+ // across page loads.
+ // Upside is that it's easy to specify multiple files
+ &lt;link rel=&quot;gettext&quot; href=&quot;/path/LC_MESSAGES/myDomain.json&quot; /&gt;
+ &lt;script language=&quot;javascript&quot; src=&quot;/path/Gettext.js'&gt;&lt;/script&gt;</pre>
+<pre>
+ var gt = new Gettext({ &quot;domain&quot; : &quot;myDomain&quot; });
+ // rest is the same</pre>
+<pre>
+ // //////////////////////////////////////////////////////////
+ // The reson the shortcuts aren't exported by default is because they'd be
+ // glued to the single domain you created. So, if you're adding i18n support
+ // to some js library, you should use it as so:</pre>
+<pre>
+ if (typeof(MyNamespace) == 'undefined') MyNamespace = {};
+ MyNamespace.MyClass = function () {
+     var gtParms = { &quot;domain&quot; : 'MyNamespace_MyClass' };
+     this.gt = new Gettext(gtParams);
+     return this;
+ };
+ MyNamespace.MyClass.prototype._ = function (msgid) {
+     return this.gt.gettext(msgid);
+ };
+ MyNamespace.MyClass.prototype.something = function () {
+     var myString = this._(&quot;this will get translated&quot;);
+ };</pre>
+<pre>
+ // //////////////////////////////////////////////////////////
+ // Adding the shortcuts to a global scope is easier. If that's
+ // ok in your app, this is certainly easier.
+ var myGettext = new Gettext({ 'domain' : 'myDomain' });
+ function _ (msgid) {
+     return myGettext.gettext(msgid);
+ }
+ alert( _(&quot;text&quot;) );</pre>
+<pre>
+ // //////////////////////////////////////////////////////////
+ // Data structure of the json data
+ // NOTE: if you're loading via the &lt;script&gt; tag, you can only
+ // load one file, but it can contain multiple domains.
+ var json_locale_data = {
+     &quot;MyDomain&quot; : {
+         &quot;&quot; : {
+             &quot;header_key&quot; : &quot;header value&quot;,
+             &quot;header_key&quot; : &quot;header value&quot;,
+         &quot;msgid&quot; : [ &quot;msgid_plural&quot;, &quot;msgstr&quot;, &quot;msgstr_plural&quot;, &quot;msgstr_pluralN&quot; ],
+         &quot;msgctxt\004msgid&quot; : [ null, &quot;msgstr&quot; ],
+         },
+     &quot;AnotherDomain&quot; : {
+         },
+     }</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This is a javascript implementation of GNU Gettext, providing internationalization support for javascript. It differs from existing javascript implementations in that it will support all current Gettext features (ex. plural and context support), and will also support loading language catalogs from .mo, .po, or preprocessed json files (converter included).</p>
+<p>The locale initialization differs from that of GNU Gettext / POSIX. Rather than setting the category, domain, and paths, and letting the libs find the right file, you must explicitly load the file at some point. The ``domain'' will still be honored. Future versions may be expanded to include support for set_locale like features.</p>
+<p>
+</p>
+<hr />
+<h1><a name="install">INSTALL</a></h1>
+<p>To install this module, simply copy the file lib/Gettext.js to a web accessable location, and reference it from your application.</p>
+<p>
+</p>
+<hr />
+<h1><a name="configuration">CONFIGURATION</a></h1>
+<p>Configure in one of two ways:</p>
+<ol>
+<li><strong><a name="item_optimal_2e_load_language_definition_from_staticall">Optimal. Load language definition from statically defined json data.</a></strong>
+
+<pre>
+    &lt;script language=&quot;javascript&quot; src=&quot;/path/locale/domain.json&quot;&gt;&lt;/script&gt;</pre>
+<pre>
+    // in domain.json
+    json_locale_data = {
+        &quot;mydomain&quot; : {
+            // po header fields
+            &quot;&quot; : {
+                &quot;plural-forms&quot; : &quot;...&quot;,
+                &quot;lang&quot; : &quot;en&quot;,
+                },
+            // all the msgid strings and translations
+            &quot;msgid&quot; : [ &quot;msgid_plural&quot;, &quot;translation&quot;, &quot;plural_translation&quot; ],
+        },
+    };
+    // please see the included bin/po2json script for the details on this format</pre>
+<p>This method also allows you to use unsupported file formats, so long as you can parse them into the above format.</p>
+<li><strong><a name="item_use_ajax_to_load_language_file_2e">Use AJAX to load language file.</a></strong>
+
+<p>Use XMLHttpRequest (actually, SJAX - syncronous) to load an external resource.</p>
+<p>Supported external formats are:</p>
+<ul>
+<li><strong><a name="item_notation">Javascript Object Notation (.json)</a></strong>
+
+<p>(see bin/po2json)</p>
+<pre>
+    type=application/json</pre>
+</li>
+<li><strong><a name="item_object">Uniforum Portable Object (.po)</a></strong>
+
+<p>(see GNU Gettext's xgettext)</p>
+<pre>
+    type=application/x-po</pre>
+</li>
+<li><strong>Machine Object (compiled .po) (.mo)</strong>
+
+<p>NOTE: .mo format isn't actually supported just yet, but support is planned.</p>
+<p>(see GNU Gettext's msgfmt)</p>
+<pre>
+    type=application/x-mo</pre>
+</li>
+</ul>
+</ol>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>The following methods are implemented:</p>
+<pre>
+  new Gettext(args)
+  textdomain  (domain)
+  gettext     (msgid)
+  dgettext    (domainname, msgid)
+  dcgettext   (domainname, msgid, LC_MESSAGES)
+  ngettext    (msgid, msgid_plural, count)
+  dngettext   (domainname, msgid, msgid_plural, count)
+  dcngettext  (domainname, msgid, msgid_plural, count, LC_MESSAGES)
+  pgettext    (msgctxt, msgid)
+  dpgettext   (domainname, msgctxt, msgid)
+  dcpgettext  (domainname, msgctxt, msgid, LC_MESSAGES)
+  npgettext   (msgctxt, msgid, msgid_plural, count)
+  dnpgettext  (domainname, msgctxt, msgid, msgid_plural, count)
+  dcnpgettext (domainname, msgctxt, msgid, msgid_plural, count, LC_MESSAGES)
+  strargs     (string, args_array)</pre>
+<p>
+</p>
+<h2><a name="new_gettext__args_">new Gettext (args)</a></h2>
+<p>Several methods of loading locale data are included. You may specify a plugin or alternative method of loading data by passing the data in as the ``locale_data'' option. For example:</p>
+<pre>
+    var get_locale_data = function () {
+        // plugin does whatever to populate locale_data
+        return locale_data;
+    };
+    var gt = new Gettext( 'domain' : 'messages',
+                          'locale_data' : get_locale_data() );</pre>
+<p>The above can also be used if locale data is specified in a statically included &lt;SCRIPT&gt; tag. Just specify the variable name in the call to new. Ex:</p>
+<pre>
+    var gt = new Gettext( 'domain' : 'messages',
+                          'locale_data' : json_locale_data_variable );</pre>
+<p>Finally, you may load the locale data by referencing it in a &lt;LINK&gt; tag. Simply exclude the 'locale_data' option, and all &lt;LINK rel=``gettext'' ...&gt; items will be tried. The &lt;LINK&gt; should be specified as:</p>
+<pre>
+    &lt;link rel=&quot;gettext&quot; type=&quot;application/json&quot; href=&quot;/path/to/file.json&quot;&gt;
+    &lt;link rel=&quot;gettext&quot; type=&quot;text/javascript&quot;  href=&quot;/path/to/file.json&quot;&gt;
+    &lt;link rel=&quot;gettext&quot; type=&quot;application/x-po&quot; href=&quot;/path/to/file.po&quot;&gt;
+    &lt;link rel=&quot;gettext&quot; type=&quot;application/x-mo&quot; href=&quot;/path/to/file.mo&quot;&gt;</pre>
+<p>args:</p>
+<dl>
+<dt><strong><a name="item_domain">domain</a></strong>
+
+<dd>
+<p>The Gettext domain, not www.whatev.com. It's usually your applications basename. If the .po file was ``myapp.po'', this would be ``myapp''.</p>
+</dd>
+</li>
+<dt><strong><a name="item_locale_data">locale_data</a></strong>
+
+<dd>
+<p>Raw locale data (in json structure). If specified, from_link data will be ignored.</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<h2><a name="textdomain__domain__">textdomain( domain )</a></h2>
+<p>Set domain for future <code>gettext()</code> calls</p>
+<p>A  message  domain  is  a  set of translatable msgid messages. Usually,
+every software package has its own message domain. The domain  name  is
+used to determine the message catalog where a translation is looked up;
+it must be a non-empty string.</p>
+<p>The current message domain is used by the gettext, ngettext, pgettext,
+npgettext functions, and by the dgettext, dcgettext, dngettext, dcngettext,
+dpgettext, dcpgettext, dnpgettext and dcnpgettext functions when called
+with a NULL domainname argument.</p>
+<p>If domainname is not NULL, the current message domain is set to
+domainname.</p>
+<p>If domainname is undefined, null, or empty string, the function returns
+the current message domain.</p>
+<p>If  successful,  the  textdomain  function  returns the current message
+domain, after possibly changing it. (ie. if you set a new domain, the 
+value returned will NOT be the previous domain).</p>
+<p>
+</p>
+<h2><a name="gettext__msgid__">gettext( MSGID )</a></h2>
+<p>Returns the translation for <strong>MSGID</strong>.  Example:</p>
+<pre>
+    alert( gt.gettext(&quot;Hello World!\n&quot;) );</pre>
+<p>If no translation can be found, the unmodified <strong>MSGID</strong> is returned,
+i. e. the function can <em>never</em> fail, and will <em>never</em> mess up your
+original message.</p>
+<p>One common mistake is to interpolate a variable into the string like this:</p>
+<pre>
+  var translated = gt.gettext(&quot;Hello &quot; + full_name);</pre>
+<p>The interpolation will happen before it's passed to gettext, and it's 
+unlikely you'll have a translation for every ``Hello Tom'' and ``Hello Dick''
+and ``Hellow Harry'' that may arise.</p>
+<p>Use <code>strargs()</code> (see below) to solve this problem:</p>
+<pre>
+  var translated = Gettext.strargs( gt.gettext(&quot;Hello %1&quot;), [full_name] );</pre>
+<p>This is espeically useful when multiple replacements are needed, as they 
+may not appear in the same order within the translation. As an English to
+French example:</p>
+<pre>
+  Expected result: &quot;This is the red ball&quot;
+  English: &quot;This is the %1 %2&quot;
+  French:  &quot;C'est le %2 %1&quot;
+  Code: Gettext.strargs( gt.gettext(&quot;This is the %1 %2&quot;), [&quot;red&quot;, &quot;ball&quot;] );</pre>
+<p>(The example is stupid because neither color nor thing will get
+translated here ...).</p>
+<p>
+</p>
+<h2><a name="dgettext__textdomain__msgid__">dgettext( TEXTDOMAIN, MSGID )</a></h2>
+<p>Like gettext(), but retrieves the message for the specified 
+<strong>TEXTDOMAIN</strong> instead of the default domain.  In case you wonder what
+a textdomain is, see above section on the <code>textdomain()</code> call.</p>
+<p>
+</p>
+<h2><a name="dcgettext__textdomain__msgid__category__">dcgettext( TEXTDOMAIN, MSGID, CATEGORY )</a></h2>
+<p>Like <code>dgettext()</code> but retrieves the message from the specified <strong>CATEGORY</strong>
+instead of the default category <code>LC_MESSAGES</code>.</p>
+<p>NOTE: the categories are really useless in javascript context. This is
+here for GNU Gettext API compatability. In practice, you'll never need
+to use this. This applies to all the calls including the <strong>CATEGORY</strong>.</p>
+<p>
+</p>
+<h2><a name="ngettext__msgid__msgid_plural__count__">ngettext( MSGID, MSGID_PLURAL, COUNT )</a></h2>
+<p>Retrieves the correct translation for <strong>COUNT</strong> items.  In legacy software
+you will often find something like:</p>
+<pre>
+    alert( count + &quot; file(s) deleted.\n&quot; );</pre>
+<p>or</p>
+<pre>
+    printf(count + &quot; file%s deleted.\n&quot;, $count == 1 ? '' : 's');</pre>
+<p><em>NOTE: javascript lacks a builtin printf, so the above isn't a working example</em></p>
+<p>The first example looks awkward, the second will only work in English
+and languages with similar plural rules.  Before <code>ngettext()</code> was introduced,
+the best practice for internationalized programs was:</p>
+<pre>
+    if (count == 1) {
+        alert( gettext(&quot;One file deleted.\n&quot;) );
+    } else {
+        printf( gettext(&quot;%d files deleted.\n&quot;), count );
+    }</pre>
+<p>This is a nuisance for the programmer and often still not sufficient
+for an adequate translation.  Many languages have completely different
+ideas on numerals.  Some (French, Italian, ...) treat 0 and 1 alike,
+others make no distinction at all (Japanese, Korean, Chinese, ...),
+others have two or more plural forms (Russian, Latvian, Czech,
+Polish, ...).  The solution is:</p>
+<pre>
+    printf( ngettext(&quot;One file deleted.\n&quot;,
+                     &quot;%d files deleted.\n&quot;,
+                     count), // argument to ngettext!
+            count);          // argument to printf!</pre>
+<p>In English, or if no translation can be found, the first argument
+(<strong>MSGID</strong>) is picked if <code>count</code> is one, the second one otherwise.
+For other languages, the correct plural form (of 1, 2, 3, 4, ...)
+is automatically picked, too.  You don't have to know anything about
+the plural rules in the target language, <code>ngettext()</code> will take care
+of that.</p>
+<p>This is most of the time sufficient but you will have to prove your
+creativity in cases like</p>
+<pre>
+    &quot;%d file(s) deleted, and %d file(s) created.\n&quot;</pre>
+<p>That said, javascript lacks <code>printf()</code> support. Supplied with Gettext.js
+is the <code>strargs()</code> method, which can be used for these cases:</p>
+<pre>
+    Gettext.strargs( gt.ngettext( &quot;One file deleted.\n&quot;,
+                                  &quot;%d files deleted.\n&quot;,
+                                  count), // argument to ngettext!
+                     count); // argument to strargs!</pre>
+<p>NOTE: the variable replacement isn't done for you, so you must
+do it yourself as in the above.</p>
+<p>
+</p>
+<h2><a name="dngettext__textdomain__msgid__msgid_plural__count__">dngettext( TEXTDOMAIN, MSGID, MSGID_PLURAL, COUNT )</a></h2>
+<p>Like <code>ngettext()</code> but retrieves the translation from the specified
+textdomain instead of the default domain.</p>
+<p>
+</p>
+<h2><a name="dcngettext__textdomain__msgid__msgid_plural__count__category__">dcngettext( TEXTDOMAIN, MSGID, MSGID_PLURAL, COUNT, CATEGORY )</a></h2>
+<p>Like <code>dngettext()</code> but retrieves the translation from the specified
+category, instead of the default category <code>LC_MESSAGES</code>.</p>
+<p>
+</p>
+<h2><a name="pgettext__msgctxt__msgid__">pgettext( MSGCTXT, MSGID )</a></h2>
+<p>Returns the translation of MSGID, given the context of MSGCTXT.</p>
+<p>Both items are used as a unique key into the message catalog.</p>
+<p>This allows the translator to have two entries for words that may
+translate to different foreign words based on their context. For
+example, the word ``View'' may be a noun or a verb, which may be
+used in a menu as File-&gt;View or View-&gt;Source.</p>
+<pre>
+    alert( pgettext( &quot;Verb: To View&quot;, &quot;View&quot; ) );
+    alert( pgettext( &quot;Noun: A View&quot;, &quot;View&quot;  ) );</pre>
+<p>The above will both lookup different entries in the message catalog.</p>
+<p>In English, or if no translation can be found, the second argument
+(<strong>MSGID</strong>) is returned.</p>
+<p>
+</p>
+<h2><a name="dpgettext__textdomain__msgctxt__msgid__">dpgettext( TEXTDOMAIN, MSGCTXT, MSGID )</a></h2>
+<p>Like pgettext(), but retrieves the message for the specified 
+<strong>TEXTDOMAIN</strong> instead of the default domain.</p>
+<p>
+</p>
+<h2><a name="dcpgettext__textdomain__msgctxt__msgid__category__">dcpgettext( TEXTDOMAIN, MSGCTXT, MSGID, CATEGORY )</a></h2>
+<p>Like <code>dpgettext()</code> but retrieves the message from the specified <strong>CATEGORY</strong>
+instead of the default category <code>LC_MESSAGES</code>.</p>
+<p>
+</p>
+<h2><a name="npgettext__msgctxt__msgid__msgid_plural__count__">npgettext( MSGCTXT, MSGID, MSGID_PLURAL, COUNT )</a></h2>
+<p>Like <code>ngettext()</code> with the addition of context as in pgettext().</p>
+<p>In English, or if no translation can be found, the second argument
+(MSGID) is picked if <strong>COUNT</strong> is one, the third one otherwise.</p>
+<p>
+</p>
+<h2><a name="dnpgettext__textdomain__msgctxt__msgid__msgid_plural__count__">dnpgettext( TEXTDOMAIN, MSGCTXT, MSGID, MSGID_PLURAL, COUNT )</a></h2>
+<p>Like <code>npgettext()</code> but retrieves the translation from the specified
+textdomain instead of the default domain.</p>
+<p>
+</p>
+<h2><a name="dcnpgettext__textdomain__msgctxt__msgid__msgid_plural__count__category__">dcnpgettext( TEXTDOMAIN, MSGCTXT, MSGID, MSGID_PLURAL, COUNT, CATEGORY )</a></h2>
+<p>Like <code>dnpgettext()</code> but retrieves the translation from the specified
+category, instead of the default category <code>LC_MESSAGES</code>.</p>
+<p>
+</p>
+<h2><a name="strargs__string__argument_array_">strargs (string, argument_array)</a></h2>
+<pre>
+  string : a string that potentially contains formatting characters.
+  argument_array : an array of positional replacement values</pre>
+<p>This is a utility method to provide some way to support positional parameters within a string, as javascript lacks a <code>printf()</code> method.</p>
+<p>The format is similar to printf(), but greatly simplified (ie. fewer features).</p>
+<p>Any percent signs followed by numbers are replaced with the corrosponding item from the <strong>argument_array</strong>.</p>
+<p>Example:</p>
+<pre>
+    var string = &quot;%2 roses are red, %1 violets are blue&quot;;
+    var args   = new Array(&quot;10&quot;, &quot;15&quot;);
+    var result = Gettext.strargs(string, args);
+    // result is &quot;15 roses are red, 10 violets are blue&quot;</pre>
+<p>The format numbers are 1 based, so the first itme is %1.</p>
+<p>A lone percent sign may be escaped by preceeding it with another percent sign.</p>
+<p>A percent sign followed by anything other than a number or another percent sign will be passed through as is.</p>
+<p>Some more examples should clear up any abmiguity. The following were called with the orig string, and the array as Array(``[one]'', ``[two]'') :</p>
+<pre>
+  orig string &quot;blah&quot; becomes &quot;blah&quot;
+  orig string &quot;&quot; becomes &quot;&quot;
+  orig string &quot;%%&quot; becomes &quot;%&quot;
+  orig string &quot;%%%&quot; becomes &quot;%%&quot;
+  orig string &quot;%%%%&quot; becomes &quot;%%&quot;
+  orig string &quot;%%%%%&quot; becomes &quot;%%%&quot;
+  orig string &quot;tom%%dick&quot; becomes &quot;tom%dick&quot;
+  orig string &quot;thing%1bob&quot; becomes &quot;thing[one]bob&quot;
+  orig string &quot;thing%1%2bob&quot; becomes &quot;thing[one][two]bob&quot;
+  orig string &quot;thing%1asdf%2asdf&quot; becomes &quot;thing[one]asdf[two]asdf&quot;
+  orig string &quot;%1%2%3&quot; becomes &quot;[one][two]&quot;
+  orig string &quot;tom%1%%2%aDick&quot; becomes &quot;tom[one]%2%aDick&quot;</pre>
+<p>This is especially useful when using plurals, as the string will nearly always contain the number.</p>
+<p>It's also useful in translated strings where the translator may have needed to move the position of the parameters.</p>
+<p>For example:</p>
+<pre>
+  var count = 14;
+  Gettext.strargs( gt.ngettext('one banana', '%1 bananas', count), [count] );</pre>
+<p>NOTE: this may be called as an instance method, or as a class method.</p>
+<pre>
+  // instance method:
+  var gt = new Gettext(params);
+  gt.strargs(string, args);</pre>
+<pre>
+  // class method:
+  Gettext.strargs(string, args);</pre>
+<p>
+</p>
+<hr />
+<h1><a name="notes">NOTES</a></h1>
+<p>These are some notes on the internals</p>
+<dl>
+<dt><strong><a name="item_locale_caching">LOCALE CACHING</a></strong>
+
+<dd>
+<p>Loaded locale data is currently cached class-wide. This means that if two scripts are both using Gettext.js, and both share the same gettext domain, that domain will only be loaded once. This will allow you to grab a new object many times from different places, utilize the same domain, and share a single translation file. The downside is that a domain won't be RE-loaded if a new object is instantiated on a domain that had already been instantiated.</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="bugs___todo">BUGS / TODO</a></h1>
+<dl>
+<dt><strong><a name="item_error_handling">error handling</a></strong>
+
+<dd>
+<p>Currently, there are several places that throw errors. In GNU Gettext, there are no fatal errors, which allows text to still be displayed regardless of how broken the environment becomes. We should evaluate and determine where we want to stand on that issue.</p>
+</dd>
+</li>
+<dt><strong><a name="item_support">syncronous only support (no ajax support)</a></strong>
+
+<dd>
+<p>Currently, fetching language data is done purely syncronous, which means the page will halt while those files are fetched/loaded.</p>
+</dd>
+<dd>
+<p>This is often what you want, as then following translation requests will actually be translated. However, if all your calls are done dynamically (ie. error handling only or something), loading in the background may be more adventagous.</p>
+</dd>
+<dd>
+<p>It's still recommended to use the statically defined &lt;script ...&gt; method, which should have the same delay, but it will cache the result.</p>
+</dd>
+</li>
+<dt><strong><a name="item_domain_support">domain support</a></strong>
+
+<dd>
+<p>domain support while using shortcut methods like <code>_('string')</code> or <code>i18n('string')</code>.</p>
+</dd>
+<dd>
+<p>Under normal apps, the domain is usually set globally to the app, and a single language file is used. Under javascript, you may have multiple libraries or applications needing translation support, but the namespace is essentially global.</p>
+</dd>
+<dd>
+<p>It's recommended that your app initialize it's own shortcut with it's own domain.  (See examples/wrapper/i18n.js for an example.)</p>
+</dd>
+<dd>
+<p>Basically, you'll want to accomplish something like this:</p>
+</dd>
+<dd>
+<pre>
+    // in some other .js file that needs i18n
+    this.i18nObj = new i18n;
+    this.i18n = this.i18nObj.init('domain');
+    // do translation
+    alert( this.i18n(&quot;string&quot;) );</pre>
+</dd>
+<dd>
+<p>If you use this raw Gettext object, then this is all handled for you, as you have your own object then, and will be calling <code>myGettextObject.gettext('string')</code> and such.</p>
+</dd>
+</li>
+<dt><strong><a name="item_encoding">encoding</a></strong>
+
+<dd>
+<p>May want to add encoding/reencoding stuff. See GNU iconv, or the perl module Locale::Recode from libintl-perl.</p>
+</dd>
+</li>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="compatability">COMPATABILITY</a></h1>
+<p>This has been tested on the following browsers. It may work on others, but these are all those to which I have access.</p>
+<pre>
+    FF1.5, FF2, FF3, IE6, IE7, Opera9, Opera10, Safari3.1, Chrome</pre>
+<pre>
+    *FF = Firefox
+    *IE = Internet Explorer</pre>
+<p>
+</p>
+<hr />
+<h1><a name="requires">REQUIRES</a></h1>
+<p>bin/po2json requires perl, and the perl modules Locale::PO and JSON.</p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p>bin/po2json (included),
+examples/normal/index.html,
+examples/wrapper/i18n.html, examples/wrapper/i18n.js,
+Locale::gettext_pp(3pm), POSIX(3pm), gettext(1), <code>gettext(3)</code></p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Copyright (C) 2008, Joshua I. Miller &lt;<a href="mailto:unrtst@cpan.org">unrtst@cpan.org</a>&gt;, all rights reserved. See the source code for details.</p>
+
+</body>
+
+</html>

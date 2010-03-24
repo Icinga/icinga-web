@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -27,7 +27,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviToolkit.class.php 3973 2009-03-25 14:28:53Z david $
+ * @version    $Id: AgaviToolkit.class.php 4399 2010-01-11 16:41:20Z david $
  */
 final class AgaviToolkit
 {
@@ -272,17 +272,17 @@ final class AgaviToolkit
 	 */
 	public static function literalize($value)
 	{
-		if($value == null) {
-			// null value
-			return null;
-		}
-		
 		if(!is_string($value)) {
 			return $value;
 		}
 		
+		// trim!
+		$value = trim($value);
+		if($value == '') {
+			return null;
+		}
+		
 		// lowercase our value for comparison
-		$value  = trim($value);
 		$lvalue = strtolower($value);
 		
 		if($lvalue == 'on' || $lvalue == 'yes' || $lvalue == 'true') {
@@ -295,7 +295,7 @@ final class AgaviToolkit
 			return self::expandDirectives($value);
 		}
 		
-		// numeric value
+		// numeric value, remains a string on purpose (for BC)
 		return $value;
 	}
 	

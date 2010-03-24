@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Filesystem.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Filesystem.php 5135 2009-08-27 08:37:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -72,6 +72,24 @@ class PHPUnit_Util_Filesystem
      * @var array
      */
     protected static $hasBinary = array();
+
+    /**
+     * Maps class names to source file names:
+     *   - PEAR CS:   Foo_Bar_Baz -> Foo/Bar/Baz.php
+     *   - Namespace: Foo\Bar\Baz -> Foo/Bar/Baz.php
+     *
+     * @param  string $className
+     * @return string
+     * @since  Method available since Release 3.4.0
+     */
+    public static function classNameToFilename($className)
+    {
+        return str_replace(
+          array('_', '\\'),
+          DIRECTORY_SEPARATOR,
+          $className
+        ) . '.php';
+    }
 
     /**
      * Starts the collection of loaded files.
@@ -191,7 +209,7 @@ class PHPUnit_Util_Filesystem
         if (is_dir($directory) || mkdir($directory, 0777, TRUE)) {
             return $directory;
         } else {
-            throw new RuntimeException(
+            throw new PHPUnit_Framework_Exception(
               sprintf(
                 'Directory "%s" does not exist.',
                 $directory
@@ -222,11 +240,11 @@ class PHPUnit_Util_Filesystem
     public static function hasBinary($binary)
     {
         if (!isset(self::$hasBinary[$binary])) {
-            self::$hasBinary[$binary] = FALSE;
-
             if (substr(php_uname('s'), 0, 7) == 'Windows') {
                 $binary .= '.exe';
             }
+            
+            self::$hasBinary[$binary] = FALSE;
 
             $openBaseDir = ini_get('open_basedir');
 

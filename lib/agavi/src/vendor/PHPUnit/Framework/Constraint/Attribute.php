@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Attribute.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Attribute.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
@@ -64,9 +64,20 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 class PHPUnit_Framework_Constraint_Attribute extends PHPUnit_Framework_Constraint
 {
+    /**
+     * @var string
+     */
     protected $attributeName;
+
+    /**
+     * @var PHPUnit_Framework_Constraint
+     */
     protected $constraint;
 
+    /**
+     * @param PHPUnit_Framework_Constraint $constraint
+     * @param string                       $attributeName
+     */
     public function __construct(PHPUnit_Framework_Constraint $constraint, $attributeName)
     {
         $this->attributeName = $attributeName;
@@ -115,7 +126,31 @@ class PHPUnit_Framework_Constraint_Attribute extends PHPUnit_Framework_Constrain
      */
     public function toString()
     {
-        return $this->constraint->toString();
+        return 'attribute "' . $this->attributeName . '" ' .
+               $this->constraint->toString();
+    }
+
+    /**
+     * Counts the number of constraint elements.
+     *
+     * @return integer
+     * @since  Method available since Release 3.4.0
+     */
+    public function count()
+    {
+        return count($this->constraint) + 1;
+    }
+
+    /**
+     * @since Method available since Release 3.4.0
+     */
+    protected function customFailureDescription($other, $description, $not)
+    {
+        return sprintf(
+          'Failed asserting that %s.',
+
+           $this->toString()
+        );
     }
 }
 ?>

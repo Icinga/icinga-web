@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviSmartyRenderer.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviSmartyRenderer.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviSmartyRenderer extends AgaviRenderer implements AgaviIReusableRenderer
 {
@@ -73,6 +73,29 @@ class AgaviSmartyRenderer extends AgaviRenderer implements AgaviIReusableRendere
 		unset($keys[array_search('smarty', $keys)]);
 		return $keys;
 	}
+	
+	/**
+	 * Create an instance of Smarty and initialize it correctly.
+	 *
+	 * @return     Smarty The Smarty instance.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      1.0.2
+	 */
+	protected function createEngineInstance()
+	{
+		if(!class_exists('Smarty')) {
+			if(defined('SMARTY_DIR') ) {
+				// if SMARTY_DIR constant is defined, we'll use it
+				require(SMARTY_DIR . 'Smarty.class.php');
+			} else {
+				// otherwise we resort to include_path
+				require('Smarty.class.php');
+			}
+		}
+		
+		return new Smarty();
+	}
 
 	/**
 	 * Grab a cleaned up smarty instance.
@@ -91,17 +114,7 @@ class AgaviSmartyRenderer extends AgaviRenderer implements AgaviIReusableRendere
 			return $this->smarty;
 		}
 
-		if(!class_exists('Smarty')) {
-			if(defined('SMARTY_DIR') ) {
-				// if SMARTY_DIR constant is defined, we'll use it
-				require(SMARTY_DIR . 'Smarty.class.php');
-			} else {
-				// otherwise we resort to include_path
-				require('Smarty.class.php');
-			}
-		}
-
-		$this->smarty = new Smarty();
+		$this->smarty = $this->createEngineInstance();
 		$this->smarty->clear_all_assign();
 		$this->smarty->clear_config();
 		$this->smarty->config_dir = AgaviConfig::get('core.config_dir');

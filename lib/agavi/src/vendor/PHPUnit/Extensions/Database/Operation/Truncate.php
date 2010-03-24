@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Truncate.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: Truncate.php 5286 2009-10-22 16:20:06Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -75,7 +75,7 @@ class PHPUnit_Extensions_Database_Operation_Truncate implements PHPUnit_Extensio
 
     public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
-        foreach ($dataSet as $table) {
+        foreach ($dataSet->getReverseIterator() as $table) {
             /* @var $table PHPUnit_Extensions_Database_DataSet_ITable */
             $query = "
                 {$connection->getTruncateCommand()} {$connection->quoteSchemaObject($table->getTableMetaData()->getTableName())}

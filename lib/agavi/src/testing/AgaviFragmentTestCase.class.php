@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviFragmentTestCase.class.php 3978 2009-03-25 16:36:04Z david $
+ * @version    $Id: AgaviFragmentTestCase.class.php 4399 2010-01-11 16:41:20Z david $
  */
 abstract class AgaviFragmentTestCase extends AgaviPhpUnitTestCase implements AgaviIFragmentTestCase
 {

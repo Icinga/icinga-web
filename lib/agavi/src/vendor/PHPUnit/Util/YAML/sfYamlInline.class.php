@@ -14,14 +14,14 @@
  * @package    symfony
  * @subpackage util
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfYamlInline.class.php 13391 2008-11-27 08:56:22Z fabien $
+ * @version    SVN: $Id: sfYamlInline.class.php 17749 2009-04-29 11:54:22Z fabien $
  */
 class sfYamlInline
 {
   /**
    * Load YAML into a PHP array.
    *
-   * @param string YAML
+   * @param string $value YAML
    *
    * @return array PHP array
    */
@@ -48,7 +48,7 @@ class sfYamlInline
   /**
    * Dumps PHP array to YAML.
    *
-   * @param mixed   PHP
+   * @param mixed $value PHP
    *
    * @return string YAML
    */
@@ -74,7 +74,7 @@ class sfYamlInline
         return is_infinite($value) ? str_ireplace('INF', '.Inf', strval($value)) : (is_string($value) ? "'$value'" : $value);
       case false !== strpos($value, "\n"):
         return sprintf('"%s"', str_replace(array('"', "\n", "\r"), array('\\"', '\n', '\r'), $value));
-      case preg_match('/[ \s \' " \: \{ \} \[ \] , & \*]/x', $value):
+      case preg_match('/[ \s \' " \: \{ \} \[ \] , & \* \#]/x', $value):
         return sprintf("'%s'", str_replace('\'', '\'\'', $value));
       case '' == $value:
         return "''";
@@ -92,7 +92,7 @@ class sfYamlInline
   /**
    * Dumps PHP array to YAML
    *
-   * @param array   The array to dump
+   * @param array $value The array to dump
    *
    * @return string YAML
    */
@@ -129,7 +129,7 @@ class sfYamlInline
    *
    * @param scalar $scalar
    * @param string $delimiters
-   * @param array  String delimiter
+   * @param array  $stringDelimiter
    * @param integer $i
    * @param boolean $evaluate
    *
@@ -213,7 +213,7 @@ class sfYamlInline
     if ('"' == $delimiter)
     {
       // evaluate the string
-      $buffer = str_replace('\\n', "\n", $buffer);
+      $buffer = str_replace(array('\\n', '\\r'), array("\n", "\r"), $buffer);
     }
 
     return $buffer;

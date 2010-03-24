@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Abstract.php 4402 2008-12-31 09:25:57Z sb $
+ * @version    SVN: $Id: Yaml.php 5078 2009-08-10 07:58:18Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -102,7 +102,7 @@ class PHPUnit_Extensions_Database_DataSet_Persistors_Yaml implements PHPUnit_Ext
             }
         }
 
-        file_put_contents($this->filename, $yamlString);
+        file_put_contents($this->filename, sfYaml::dump($phpArr, 3));
     }
 }
 

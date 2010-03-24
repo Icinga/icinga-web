@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -16,6 +16,10 @@
 /**
  * Field definitions for the AgaviCalendar and day of week and months constants
  *
+ * Based on ICU:
+ *  icu/trunk/source/i18n/ucal.h              r19775
+ *  icu/trunk/source/i18n/unicode/calendar.h  r20375
+ * 
  * @package    agavi
  * @subpackage date
  *
@@ -26,7 +30,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviDateDefinitions.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviDateDefinitions.class.php 4399 2010-01-11 16:41:20Z david $
  */
 final class AgaviDateDefinitions
 {

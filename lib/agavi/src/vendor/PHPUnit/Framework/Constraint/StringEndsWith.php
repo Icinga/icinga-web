@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: StringEndsWith.php 4475 2009-01-15 07:45:55Z sb $
+ * @version    SVN: $Id: StringEndsWith.php 5164 2009-08-29 10:38:39Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.4.0
  */
@@ -64,8 +64,14 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_Constraint_StringEndsWith extends PHPUnit_Framework_Constraint
 {
+    /**
+     * @var string
+     */
     protected $suffix;
 
+    /**
+     * @param string $suffix
+     */
     public function __construct($suffix)
     {
         $this->suffix = $suffix;

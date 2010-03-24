@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -14,7 +14,9 @@
 // +---------------------------------------------------------------------------+
 
 /**
- * 
+ * Ported from ICU:
+ *  icu/trunk/source/i18n/gregocal.cpp        r22379
+ *  icu/trunk/source/i18n/unicode/gregocal.h  r19003
  *
  * @package    agavi
  * @subpackage date
@@ -26,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviGregorianCalendar.class.php 3915 2009-03-11 16:09:57Z saracen $
+ * @version    $Id: AgaviGregorianCalendar.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviGregorianCalendar extends AgaviCalendar
 {
@@ -561,9 +563,12 @@ class AgaviGregorianCalendar extends AgaviCalendar
 	 */
 	protected function handleGetMonthLength($extendedYear, $month)
 	{
-		if(!isset(self::$kLeapMonthLength[$month])) {
-			return null;
+		// If the month is out of range, adjust it into range, and
+		// modify the extended year value accordingly.
+		if($month < 0 || $month > 11) { 
+			$extendedYear += AgaviToolkit::floorDivide($month, 12, $month); 
 		}
+		
 		return $this->isLeapYear($extendedYear) ? self::$kLeapMonthLength[$month] : self::$kMonthLength[$month];
 	}
 
@@ -1180,7 +1185,7 @@ class AgaviGregorianCalendar extends AgaviCalendar
 		array(        1,        1,       28,       31 ), // DAY_OF_MONTH
 		array(        1,        1,      365,      366 ), // DAY_OF_YEAR
 		array(/*N/A*/-1,/*N/A*/-1,/*N/A*/-1,/*N/A*/-1 ), // DAY_OF_WEEK
-		array(       -1,       -1,        4,        6 ), // DAY_OF_WEEK_IN_MONTH
+		array(       -1,       -1,        4,        5 ), // DAY_OF_WEEK_IN_MONTH
 		array(/*N/A*/-1,/*N/A*/-1,/*N/A*/-1,/*N/A*/-1 ), // AM_PM
 		array(/*N/A*/-1,/*N/A*/-1,/*N/A*/-1,/*N/A*/-1 ), // HOUR
 		array(/*N/A*/-1,/*N/A*/-1,/*N/A*/-1,/*N/A*/-1 ), // HOUR_OF_DAY

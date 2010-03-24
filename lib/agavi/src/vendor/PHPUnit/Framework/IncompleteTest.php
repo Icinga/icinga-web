@@ -39,16 +39,14 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IncompleteTest.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: IncompleteTest.php 5156 2009-08-29 05:48:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
 
-require_once 'PHPUnit/Util/Filter.php';
+require_once 'PHPUnit/Framework.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
-
-if (!interface_exists('PHPUnit_Framework_IncompleteTest', FALSE)) {
 
 /**
  * A marker interface for marking any exception/error as result of an unit
@@ -65,7 +63,5 @@ if (!interface_exists('PHPUnit_Framework_IncompleteTest', FALSE)) {
  */
 interface PHPUnit_Framework_IncompleteTest
 {
-}
-
 }
 ?>

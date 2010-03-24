@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviEzctemplateRenderer.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviEzctemplateRenderer.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviEzctemplateRenderer extends AgaviRenderer implements AgaviIReusableRenderer
 {
@@ -73,6 +73,27 @@ class AgaviEzctemplateRenderer extends AgaviRenderer implements AgaviIReusableRe
 		unset($keys[array_search('ezctemplate', $keys)]);
 		return $keys;
 	}
+	
+	/**
+	 * Create an instance of ezcTemplate and initialize it correctly.
+	 * Returns an instance of AgaviEzctemplateTemplate by default.
+	 *
+	 * @return     ezcTemplate The ezcTemplate instance.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      1.0.2
+	 */
+	protected function createEngineInstance()
+	{
+		$cls = $this->getParameter('template_class', 'AgaviEzctemplateTemplate');
+		
+		$ezcTemplate = new $cls();
+		if($ezcTemplate instanceof AgaviIEzctemplateTemplate) {
+			$ezcTemplate->setContext($this->context);
+		}
+		
+		return $ezcTemplate;
+	}
 
 	/**
 	 * Grab a cleaned up ezctemplate instance.
@@ -90,12 +111,8 @@ class AgaviEzctemplateRenderer extends AgaviRenderer implements AgaviIReusableRe
 			return $this->ezcTemplate;
 		}
 
+		$this->ezcTemplate = $this->createEngineInstance();
 		// initialize ezcTemplate
-		$templateClass = $this->getParameter('template_class', 'AgaviEzctemplateTemplate');
-		$this->ezcTemplate = new $templateClass();
-		if($this->ezcTemplate instanceof AgaviIEzctemplateTemplate) {
-			$this->ezcTemplate->setContext($this->context);
-		}
 		
 		$parentMode = fileperms(AgaviConfig::get('core.cache_dir'));
 
@@ -114,8 +131,8 @@ class AgaviEzctemplateRenderer extends AgaviRenderer implements AgaviIReusableRe
 		}
 
 		// add some usefull Agavi Functions/Blocks as Extension
-		$config->addExtension("AgaviEzctemplateCustomBlocks");
-		$config->addExtension("AgaviEzctemplateCustomFunctions");
+		$config->addExtension('AgaviEzctemplateCustomBlocks');
+		$config->addExtension('AgaviEzctemplateCustomFunctions');
 		
 		foreach($this->getParameter('extensions', array()) as $extension) {
 			$config->addExtension($extension);

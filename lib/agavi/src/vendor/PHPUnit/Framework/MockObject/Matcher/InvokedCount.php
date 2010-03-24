@@ -36,11 +36,10 @@
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: InvokedCount.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: InvokedCount.php 5166 2009-08-29 15:10:36Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -53,14 +52,15 @@ require_once 'PHPUnit/Framework/MockObject/Invocation.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 /**
- * Invocation matcher which checks if a method has been invoked a certain amount of times.
- *
- * If the number of invocations exceeds the value it will immediately throw an exception,
- * If the number is less it will later be checked in verify() and also throw an exception.
+ * Invocation matcher which checks if a method has been invoked a certain amount
+ * of times.
+ * If the number of invocations exceeds the value it will immediately throw an
+ * exception,
+ * If the number is less it will later be checked in verify() and also throw an
+ * exception.
  *
  * @category   Testing
  * @package    PHPUnit
- * @author     Jan Borsodi <jb@ez.no>
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
@@ -70,18 +70,31 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  */
 class PHPUnit_Framework_MockObject_Matcher_InvokedCount extends PHPUnit_Framework_MockObject_Matcher_InvokedRecorder
 {
+    /**
+     * @var integer
+     */
     protected $expectedCount;
 
+    /**
+     * @param interger $expectedCount
+     */
     public function __construct($expectedCount)
     {
         $this->expectedCount = $expectedCount;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return 'invoked ' . $this->expectedCount . ' time(s)';
     }
 
+    /**
+     * @param  PHPUnit_Framework_MockObject_Invocation $invocation
+     * @throws PHPUnit_Framework_ExpectationFailedException
+     */
     public function invoked(PHPUnit_Framework_MockObject_Invocation $invocation)
     {
         parent::invoked($invocation);
@@ -89,22 +102,22 @@ class PHPUnit_Framework_MockObject_Matcher_InvokedCount extends PHPUnit_Framewor
         $count = $this->getInvocationCount();
 
         if ($count > $this->expectedCount) {
-            $message = $invocation->toString();
+            $message = $invocation->toString() . ' ';
 
             switch ($this->expectedCount) {
                 case 0: {
-                    $message .= ' was not expected to be called.';
+                    $message .= 'was not expected to be called.';
                 }
                 break;
 
                 case 1: {
-                    $message .= ' was not expected to be called more than once.';
+                    $message .= 'was not expected to be called more than once.';
                 }
                 break;
 
                 default: {
                     $message .= sprintf(
-                      ' was not expected to be called more than %d times.',
+                      'was not expected to be called more than %d times.',
 
                       $this->expectedCount
                     );
@@ -115,6 +128,12 @@ class PHPUnit_Framework_MockObject_Matcher_InvokedCount extends PHPUnit_Framewor
         }
     }
 
+    /**
+     * Verifies that the current expectation is valid. If everything is OK the
+     * code should just return, if not it must throw an exception.
+     *
+     * @throws PHPUnit_Framework_ExpectationFailedException
+     */
     public function verify()
     {
         $count = $this->getInvocationCount();
@@ -122,7 +141,8 @@ class PHPUnit_Framework_MockObject_Matcher_InvokedCount extends PHPUnit_Framewor
         if ($count !== $this->expectedCount) {
             throw new PHPUnit_Framework_ExpectationFailedException(
               sprintf(
-                'Method was expected to be called %d times, actually called %d times.',
+                'Method was expected to be called %d times, ' .
+                'actually called %d times.',
 
                 $this->expectedCount,
                 $count

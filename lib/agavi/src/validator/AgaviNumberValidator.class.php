@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -18,12 +18,12 @@
  * apply size constraints.
  * 
  * Parameters:
- *   'type'       number type (int, integer or float)
- *   'type_error' error message if number has wrong type
- *   'min'        number must be at least this
- *   'min_error'  error message if number less then 'min'
- *   'max'        number must not be greater then this
- *   'max_error'  error message if number greater then 'max' 
+ *   'no_locale' do not use localized number format parsing with translation on
+ *   'in_locale' locale to use for parsing rather than the current locale
+ *   'type'      number type (int/integer or double/float)
+ *   'cast_to'   type to cast to (int/integer or double/float)
+ *   'min'       minimum value for the input
+ *   'max'       maximum value for the input
  * 
  * @package    agavi
  * @subpackage validator
@@ -34,7 +34,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviNumberValidator.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviNumberValidator.class.php 4399 2010-01-11 16:41:20Z david $
  */
 class AgaviNumberValidator extends AgaviValidator
 {
@@ -65,7 +65,10 @@ class AgaviNumberValidator extends AgaviValidator
 				$locale = $this->getContext()->getTranslationManager()->getCurrentLocale();
 			}
 
-			$value = AgaviDecimalFormatter::parse($value, $locale, $hasExtraChars);
+			$parsedValue = AgaviDecimalFormatter::parse($value, $locale, $hasExtraChars);
+			if($parsedValue !== false && !$hasExtraChars) {
+				$value = $parsedValue;
+			}
 		} else {
 			if(is_numeric($value)) {
 				if(((int) $value) == $value) {
@@ -75,7 +78,6 @@ class AgaviNumberValidator extends AgaviValidator
 				}
 			}
 		}
-		
 
 		switch(strtolower($this->getParameter('type'))) {
 			case 'int':
@@ -88,6 +90,7 @@ class AgaviNumberValidator extends AgaviValidator
 				break;
 			
 			case 'float':
+			case 'double':
 				if((!is_float($value) && !is_int($value)) || $hasExtraChars) {
 					$this->throwError('type');
 					return false;

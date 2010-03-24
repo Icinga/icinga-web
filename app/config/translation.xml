@@ -55,7 +55,7 @@
 			<translator domain="icinga">
 			
 					<!-- Text -->
-					<message_translator class="AgaviGettextTranslator">
+					<message_translator class="AppKitGettextTranslator">
 						<ae:parameter name="text_domains">
 							<ae:parameter name="default">%core.root_dir%/res/i18n/mo</ae:parameter>
 						</ae:parameter>

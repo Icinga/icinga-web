@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: CsvDataSetTest.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: CsvDataSetTest.php 5078 2009-08-10 07:58:18Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -57,7 +57,7 @@ require_once 'PHPUnit/Extensions/Database/DataSet/CsvDataSet.php';
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: CsvDataSetTest.php 4403 2008-12-31 09:26:51Z sb $
+ * @version    SVN: $Id: CsvDataSetTest.php 5078 2009-08-10 07:58:18Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -123,11 +123,11 @@ asdflkjsadf asdfsadfhl "adsf, halsdf" sadfhlasdf'
         ));
 
         $expectedDataSet = new PHPUnit_Extensions_Database_DataSet_DefaultDataSet(array($table1, $table2));
-        
+
         $csvDataSet = new PHPUnit_Extensions_Database_DataSet_CsvDataSet();
         $csvDataSet->addTable('table1', dirname(__FILE__).'/../_files/CsvDataSets/table1.csv');
         $csvDataSet->addTable('table2', dirname(__FILE__).'/../_files/CsvDataSets/table2.csv');
-        
+
         PHPUnit_Extensions_Database_TestCase::assertDataSetsEqual($expectedDataSet, $csvDataSet);
     }
 }

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2009 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Clover.php 4622 2009-02-10 07:33:42Z sb $
+ * @version    SVN: $Id: Clover.php 5284 2009-10-20 00:56:45Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.3.0
  */
@@ -90,9 +90,11 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
         $project->setAttribute('timestamp', $time);
         $coverage->appendChild($project);
 
-        $codeCoverageInformation    = $result->getCodeCoverageInformation();
-        $files                      = PHPUnit_Util_CodeCoverage::getSummary($codeCoverageInformation);
-        $packages                   = array();
+        $codeCoverageInformation = $result->getCodeCoverageInformation();
+        $files                   = PHPUnit_Util_CodeCoverage::getSummary(
+                                     $codeCoverageInformation
+                                   );
+        $packages                = array();
 
         $projectStatistics = array(
           'files'               => 0,
@@ -108,6 +110,8 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
         );
 
         foreach ($files as $filename => $data) {
+            $namespace = 'global';
+
             if (file_exists($filename)) {
                 $fileStatistics = array(
                   'classes'             => 0,
@@ -122,9 +126,10 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
                 $file = $document->createElement('file');
                 $file->setAttribute('name', $filename);
 
-                $lines = array();
+                $classesInFile = PHPUnit_Util_File::getClassesInFile($filename);
+                $lines         = array();
 
-                foreach (PHPUnit_Util_File::getClassesInFile($filename) as $className => $_class) {
+                foreach ($classesInFile as $className => $_class) {
                     $classStatistics = array(
                       'methods'             => 0,
                       'coveredMethods'      => 0,
@@ -151,7 +156,6 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
                                 if (is_array($files[$filename][$i])) {
                                     $classStatistics['coveredStatements']++;
                                     $count = count($files[$filename][$i]);
-                                    $classStatistics['coveredMethods']++;
                                 }
 
                                 else if ($files[$filename][$i] == -2) {
@@ -171,9 +175,14 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
                             }
                         }
 
+                        if ($methodCount > 0) {
+                            $classStatistics['coveredMethods']++;
+                        }
+
                         $lines[$method['startLine']] = array(
                           'count' => $methodCount,
-                          'type'  => 'method'
+                          'type'  => 'method',
+                          'name'  => $methodName
                         );
                     }
 
@@ -183,8 +192,6 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
 
                     if (!empty($packageInformation['namespace'])) {
                         $namespace = $packageInformation['namespace'];
-                    } else {
-                        $namespace = 'global';
                     }
 
                     $class = $document->createElement('class');
@@ -192,19 +199,27 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
                     $class->setAttribute('namespace', $namespace);
 
                     if (!empty($packageInformation['fullPackage'])) {
-                        $class->setAttribute('fullPackage', $packageInformation['fullPackage']);
+                        $class->setAttribute(
+                          'fullPackage', $packageInformation['fullPackage']
+                        );
                     }
 
                     if (!empty($packageInformation['category'])) {
-                        $class->setAttribute('category', $packageInformation['category']);
+                        $class->setAttribute(
+                          'category', $packageInformation['category']
+                        );
                     }
 
                     if (!empty($packageInformation['package'])) {
-                        $class->setAttribute('package', $packageInformation['package']);
+                        $class->setAttribute(
+                          'package', $packageInformation['package']
+                        );
                     }
 
                     if (!empty($packageInformation['subpackage'])) {
-                        $class->setAttribute('subpackage', $packageInformation['subpackage']);
+                        $class->setAttribute(
+                          'subpackage', $packageInformation['subpackage']
+                        );
                     }
 
                     $file->appendChild($class);
@@ -229,12 +244,39 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
                     $fileStatistics['classes']++;
                 }
 
+                foreach ($data as $_line => $_data) {
+                    if (isset($lines[$_line])) {
+                        continue;
+                    }
+
+                    if ($_data != -2) {
+                        $fileStatistics['statements']++;
+
+                        if (is_array($_data)) {
+                            $count = count($_data);
+                            $fileStatistics['coveredStatements']++;
+                        } else {
+                            $count = 0;
+                        }
+
+                        $lines[$_line] = array(
+                          'count' => $count,
+                          'type' => 'stmt'
+                        );
+                    }
+                }
+
                 ksort($lines);
 
                 foreach ($lines as $_line => $_data) {
                     $line = $document->createElement('line');
                     $line->setAttribute('num', $_line);
                     $line->setAttribute('type', $_data['type']);
+
+                    if (isset($_data['name'])) {
+                        $line->setAttribute('name', $_data['name']);
+                    }
+
                     $line->setAttribute('count', $_data['count']);
 
                     $file->appendChild($line);
@@ -261,7 +303,10 @@ class PHPUnit_Util_Log_CodeCoverage_XML_Clover extends PHPUnit_Util_Printer
                     $project->appendChild($file);
                 } else {
                     if (!isset($packages[$namespace])) {
-                        $packages[$namespace] = $document->createElement('package');
+                        $packages[$namespace] = $document->createElement(
+                          'package'
+                        );
+
                         $packages[$namespace]->setAttribute('name', $namespace);
                         $project->appendChild($packages[$namespace]);
                     }

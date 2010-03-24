@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2009 the Agavi Project.                                |
+// | Copyright (c) 2005-2010 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -20,6 +20,10 @@
  * Note: Unlike AgaviGregorianCalendar, all computations performed by this
  * class occur in the pure proleptic GregorianCalendar.
  *
+ * Ported from ICU:
+ *  icu/trunk/source/i18n/gregoimp.cpp        r22167
+ *  icu/trunk/source/i18n/gregoimp.h          r22167
+ * 
  * @package    agavi
  * @subpackage date
  *
@@ -30,7 +34,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviCalendarGrego.class.php 3586 2009-01-18 15:26:12Z david $
+ * @version    $Id: AgaviCalendarGrego.class.php 4399 2010-01-11 16:41:20Z david $
  */
 final class AgaviCalendarGrego
 {
@@ -183,6 +187,76 @@ final class AgaviCalendarGrego
 		$month = (int) ((12 * ($doy + $correction) + 6) / 367); // zero-based month
 		$dom = $doy - self::$DAYS_BEFORE[$month + ($isLeap ? 12 : 0)] + 1; // one-based DOM
 		$doy++; // one-based doy
+	}
+	
+	
+	/** 
+	 * Convert a 1970-epoch milliseconds to proleptic Gregorian year,
+	 * month, day-of-month, and day-of-week, day of year and millis-in-day.
+	 * 
+	 * @param      float  1970-epoch milliseconds
+	 * @param      int    output parameter to receive year
+	 * @param      int    output parameter to receive month (0-based, 0==Jan)
+	 * @param      int    output parameter to receive day-of-month (1-based)
+	 * @param      int    output parameter to receive day-of-week (1-based, 1==Sun)
+	 * @param      int    output parameter to receive day-of-year (1-based)
+	 * @param      int    output parameter to recieve millis-in-day
+	 * 
+	 * @author     Dominik del Bondio <dominik.del.bondio@bitextender.com>
+	 * @author     The ICU Project
+	 * @since      1.0.1
+	 */ 
+	public static function timeToFields($time, &$year, &$month, &$dom, &$dow, &$doy, &$mid)
+	{
+		$millisInDay = null;
+		$day = AgaviToolkit::floorDivide($time, AgaviDateDefinitions::MILLIS_PER_DAY, $millisInDay); // 400-year cycle length
+		$mid = (int) $millisInDay;
+		self::dayToFields($day, $year, $month, $dom, $dow, $doy);
+	}
+
+	/**
+	 * Return the day of week on the 1970-epoch day
+	 * 
+	 * @param      float  day the 1970-epoch day (integral value)
+	 * 
+	 * @return     int    the day of week
+	 * 
+	 * @author     Dominik del Bondio <dominik.del.bondio@bitextender.com>
+	 * @author     The ICU Project
+	 * @since      1.0.1
+	 */
+	public static function dayOfWeek($day)
+	{
+		$dow = null;
+		AgaviToolkit::floorDivide($day + AgaviDateDefinitions::THURSDAY, 7, $dow);
+		return ($dow == 0) ? AgaviDateDefinitions::SATURDAY : $dow;
+	}
+
+	/**
+	 * Returns the ordinal number for the specified day of week within the month.
+	 * The valid return value is 1, 2, 3, 4 or -1.
+	 * 
+	 * @param      int  Gregorian year, with 0 == 1 BCE, -1 == 2 BCE, etc.
+	 * @param      int  0-based month, with 0==Jan
+	 * @param      int  1-based day of month
+	 * 
+	 * @return     int  The ordinal number for the specified day of week within the month
+	 * 
+	 * @author     Dominik del Bondio <dominik.del.bondio@bitextender.com>
+	 * @author     The ICU Project
+	 * @since      1.0.1
+	 */
+	public static function dayOfWeekInMonth($year, $month, $dom)
+	{
+		$weekInMonth = ($dom + 6)/7;
+		if($weekInMonth == 4) {
+			if($dom + 7 > self::monthLength($year, $month)) {
+				$weekInMonth = -1;
+			}
+		} elseif($weekInMonth == 5) {
+			$weekInMonth = -1;
+		}
+		return $weekInMonth;
 	}
 
 	/**

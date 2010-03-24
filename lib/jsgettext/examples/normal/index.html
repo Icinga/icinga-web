@@ -1,0 +1,42 @@
+<html><head>
+<script language="javascript" src="../../lib/Gettext.js"></script>
+<script language="javascript"><!--
+    var my_locale_data = {
+        'myDomain' : {
+            '' : {
+                'plural-forms'  : "nplurals=2; plural=(n != 1);"
+                },
+            'msgid' : [null, 'msgstr'],
+            'some string' : [null, 'translated message'],
+            'context\u0004some string' : [null, 'translated context message'],
+            'one banana' : ['%n bananas', 'translated 1 banana', 'translated plural bananas'],
+            'the fruit\u0004one banana' : ['%n bananas', '[w/ context] translated 1 banana', '[w/ context] translated plural bananas']
+        }
+    };
+
+    var gt = new Gettext({ domain : 'myDomain', locale_data : my_locale_data});
+
+    var translations = [];
+    translations.push('translation of "some string": '+gt.gettext("some string"));
+    translations.push('translation of "context"+"some string": '+gt.pgettext("context", "some string"));
+    translations.push('translation of 0 bananas: '+gt.ngettext("one banana", "%n bananas", 0));
+    translations.push('translation of 1 bananas: '+gt.ngettext("one banana", "%n bananas", 1));
+    translations.push('translation of 2 bananas: '+gt.ngettext("one banana", "%n bananas", 2));
+
+    translations.push('translation of 0 bananas (with context): '+gt.npgettext("the fruit", "one banana", "%n bananas", 0));
+    translations.push('translation of 1 bananas (with context): '+gt.npgettext("the fruit", "one banana", "%n bananas", 1));
+    translations.push('translation of 2 bananas (with context): '+gt.npgettext("the fruit", "one banana", "%n bananas", 2));
+
+    translations.push('strargs with gettext (0): '+Gettext.strargs( gt.ngettext('foo has one bar', 'foo has %1 bars', 0), 0));
+    translations.push('strargs with gettext (1): '+Gettext.strargs( gt.ngettext('foo has one bar', 'foo has %1 bars', 1), 1));
+    translations.push('strargs with gettext (2): '+Gettext.strargs( gt.ngettext('foo has one bar', 'foo has %1 bars', 2), 2));
+
+    alert("example translations:\n"+translations.join("\n"));
+// --></script>
+</head>
+<body>
+This page should popup an alert box with translated texts. They're completely non-functional and not an actual translation, just some string replacements. It shows how each call works.
+
+View source for details.
+</body>
+</html>
