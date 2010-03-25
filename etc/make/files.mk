@@ -6151,7 +6151,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/phpunit2-noframes.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/phpunit2-noframes.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/etc/xsl/str.replace.function.xsl $(DESTDIR)$(prefix)/lib/phing/test/etc/xsl/str.replace.function.xsl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/test/run-tests.php $(DESTDIR)$(prefix)/lib/phing/test/run-tests.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/Makefile $(DESTDIR)$(prefix)/lib/jsgettext/doc/Makefile
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/html/.#Gettext.html.1.4 $(DESTDIR)$(prefix)/lib/jsgettext/doc/html/.#Gettext.html.1.4
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/html/Gettext.html $(DESTDIR)$(prefix)/lib/jsgettext/doc/html/Gettext.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/doc/html/po2json.html $(DESTDIR)$(prefix)/lib/jsgettext/doc/html/po2json.html
