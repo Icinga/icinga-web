@@ -21,12 +21,26 @@ class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 		
 		$cmd = $rd->getParameter('cmd', 'read');
 		$provider = $this->getContext()->getModel('Ext.ApplicationState', 'AppKit');
+		
 		switch ($cmd) {
-			
+			case 'init':
+				$data = json_decode($provider->readState());
+				if (is_array($data)) {
+					foreach ($data as $i=>$v) {
+						$data[$i]->value = addslashes($v->value);
+					}
+				}
+				return 'Ext.onReady(function() { '
+				. 'var d = \''. json_encode($data). '\'; '
+				. ' AppKit.Ext.setAppState((d ? Ext.decode(d) : [])); '
+				. '});';
+			break;
 			case 'write':
 			case 'read':
 			default:
-				$out['data'] = (json_decode( $provider->readState() ));
+				if (!$provider->stateAvailable()) return null;
+				$data = json_decode($provider->readState());
+				$out['data'] = (array)$data;
 			break;
 		}
 		

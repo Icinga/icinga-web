@@ -147,5 +147,9 @@
      
      * 2010-03-24
        * I18n javascript implementation (refs #279)
+       * Proof of concept, http state persistence
+     
+     * 2010-03-25
+       * Buffering http state persistence provider implementation (fixes #184)
      
      

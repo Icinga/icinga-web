@@ -167,6 +167,7 @@
 		<parameter name="inline">
 			<!-- I18N -->
 			<parameter>/appkit/ext/i18n</parameter>
+			<parameter>/appkit/ext/applicationState?cmd=init</parameter>
 		</parameter>
 	</setting>
 
