@@ -58,7 +58,8 @@
 							notifyOver: function(dd, e, data) {
 								
 								if (data.dragData.id.indexOf('portalView') == 0) {
-									return false;
+//									return false;
+									return this.dropNotAllowed;
 								}
 								
 								if (!this.grid) {
@@ -71,12 +72,15 @@
 									
 									if (xy[0] >= item.x && xy[0] < item.x+item.w ) {
 										this.ac = index;
-										return false;
+//										return false;
+										return this.dropNotAllowed;
 									}
 									
-							}, this);
-		
-								return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
+								}, this);
+								// return this.superclass().notifyOver.call(this, dd, e, data);
+								// return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
+								
+								return this.dropAllowed;
 							},
 							
 							notifyDrop: function(dd, e, data) {
@@ -126,7 +130,6 @@
 								
 								// Bubble the render event
 								p.doLayout();
-								
 								// Redefine the updater to held default properties
 								/* portlet.getUpdater().setDefaultUrl({
 									url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,

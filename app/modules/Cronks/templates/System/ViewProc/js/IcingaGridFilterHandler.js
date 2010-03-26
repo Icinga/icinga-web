@@ -44,9 +44,7 @@ var IcingaGridFilterWindow = function() {
 			}
 		});
 		
-		oWindow().doLayout();
-		
-		oGrid.fireEvent('activate');
+		oWindow().doLayout(false, true);
 		
 		return true;
 	});
@@ -65,11 +63,11 @@ var IcingaGridFilterWindow = function() {
 				
 				listeners: {
 					add: function(co, oNew, index) {
-						co.doLayout();
+						co.doLayout(false, true);
 					},
 					
 					remove: function(oc, oremove) {
-						oc.doLayout();
+						oc.doLayout(false, true);
 					},
 					
 					render: function(oc) {
@@ -101,6 +99,11 @@ var IcingaGridFilterWindow = function() {
 							});
 						}
 					},
+					
+					afterrender: function() {
+						this.doLayout(false, true);
+					},
+					
 					hide: function(oc) {
 						oGrid.filter_params = getFormValues(false);
 						oGrid.fireEvent('activate');
@@ -220,7 +223,7 @@ var IcingaGridFilterWindow = function() {
 			oCoPanel.add( oFilterHandler.createComponent( oFilter[type]) );
 			
 			// Notify about changes
-			oCoPanel.doLayout();
+			oCoPanel.doLayout(false, true);
 		}
 			
 	}
@@ -268,7 +271,9 @@ var IcingaGridFilterWindow = function() {
 		 */
 		setGrid : function(g) {
 			oGrid = g;
-			oOrgBaseParams = oGrid.getStore().baseParams;
+			if ("originParams" in oGrid.getStore()) {
+				oOrgBaseParams = oGrid.getStore().originParams;
+			}
 			
 			oGrid.on('activate', function() {
 				if (oCoPanel) {
@@ -313,12 +318,12 @@ var IcingaGridFilterWindow = function() {
 			oGrid.getStore().baseParams = {};
 			Ext.apply(oGrid.getStore().baseParams, oOrgBaseParams);
 			Ext.apply(oGrid.getStore().baseParams, data);
-			
+//			console.log(data);
 //			console.log('APPLY');
 //			console.log(oGrid.getStore().baseParams);
 			
 			oGrid.getStore().reload();
-			oGrid.fireEvent('activate');
+			// oGrid.fireEvent('activate');
 			
 			oWindow().hide();
 		},

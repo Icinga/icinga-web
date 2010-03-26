@@ -152,4 +152,6 @@
      * 2010-03-25
        * Buffering http state persistence provider implementation (fixes #184)
      
+     * 2010-03-26
+       * Rewritten persistence handling of grids because of prefilters and userfilters
      
