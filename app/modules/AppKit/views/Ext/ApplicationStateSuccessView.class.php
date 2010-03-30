@@ -21,6 +21,7 @@ class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 		
 		$cmd = $rd->getParameter('cmd', 'read');
 		$provider = $this->getContext()->getModel('Ext.ApplicationState', 'AppKit');
+		$response = $this->getContainer()->getResponse();
 		
 		switch ($cmd) {
 			case 'init':
@@ -30,6 +31,9 @@ class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 						$data[$i]->value = addslashes($v->value);
 					}
 				}
+				
+				$response->setHttpHeader('Content-Type', 'text/javascript', true);
+				
 				return 'Ext.onReady(function() { '
 				. 'var d = \''. json_encode($data). '\'; '
 				. ' AppKit.Ext.setAppState((d ? Ext.decode(d) : [])); '
@@ -38,6 +42,9 @@ class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 			case 'write':
 			case 'read':
 			default:
+				
+				$response->setHttpHeader('Content-Type', 'text/x-json', true);
+				
 				if (!$provider->stateAvailable()) return null;
 				$data = json_decode($provider->readState());
 				$out['data'] = (array)$data;

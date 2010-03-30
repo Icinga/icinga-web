@@ -155,3 +155,5 @@
      * 2010-03-26
        * Rewritten persistence handling of grids because of prefilters and userfilters
      
+     * 2010-03-30
+       * Fixed content-type for application state
