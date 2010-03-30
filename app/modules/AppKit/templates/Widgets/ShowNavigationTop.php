@@ -10,7 +10,8 @@
 
 <script type="text/javascript" defer="defer">
 <!-- // <![CDATA[
-Ext.onReady(function() {
+(function() {
+var topmenu = function() {
 
 <?php
 
@@ -121,6 +122,10 @@ xh += '<?php echo $tm->_('User')?>:&#160;<?php echo $tm->_('Guest')?>'
 	});
 
 	p.doLayout();
-});
+};
+
+Ext.onReady(topmenu);
+
+})();
 // ]]> -->
 </script>

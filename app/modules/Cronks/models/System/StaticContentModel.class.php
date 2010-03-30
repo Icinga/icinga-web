@@ -160,6 +160,19 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		return $success;
 	}
 
+	private function filterColumnArray(array $columns, array $mapArray=array(), $debug=false) {
+
+		if (count($mapArray) && $columns[0]) {
+			$columns[0] = $this->filterColumn($columns[0], $mapArray);
+		}
+			
+		return $columns;
+	}
+	
+	private function filterColumn($columnName, array $mapArray=array(), $debug=false) {
+		return ((array_key_exists($columnName, $mapArray)) ? $mapArray[$columnName] : $columnName);
+	}
+	
 	/**
 	 * fetches data via IcingaApi
 	 * @param	string			$dataSourceId		source id to query settings
@@ -173,6 +186,11 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 		$dataSource = $this->xmlData['datasources'][$dataSourceId];
 
+		$columnMap = array();
+		if (array_key_exists('varmap', $dataSource)) {
+			$columnMap = $dataSource['varmap'];
+		}
+		
 		$apiSearch = $this->api->API()->createSearch()->setResultType(IcingaApi::RESULT_ARRAY);
 		if (!array_key_exists('target', $dataSource)) {
 
@@ -226,12 +244,12 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 			// set additional search filter
 			foreach ($this->globalFilter as $filterData) {
-				$apiSearch->setSearchFilter(array($filterData));
+				$apiSearch->setSearchFilter(array($this->filterColumnArray($filterData, $columnMap)));
 			}
 
 			// set additional search filter
 			foreach ($additionalFilter as $filterData) {
-				$apiSearch->setSearchFilter(array($filterData));
+				$apiSearch->setSearchFilter(array($this->filterColumnArray($filterData, $columnMap)));
 			}
 
 			// execute query and fetch result

@@ -130,6 +130,7 @@ var CronkTabHandler = function() {
 		itemRemoveActiveHandler : function (tabPanel) {
 			
 			if (tabPanel.items.getCount() <= 1) {
+				AppKit.Ext.notifyMessage(_('Sorry'), _('Could not remove the last tab!'));
 				return false;
 			}
 			else {
@@ -267,7 +268,6 @@ var container = new Ext.Panel({
 		layout: 'fit',
 		stateful: true,
 		stateId: 'south-frame',
-		
 		defaults: {
 			border: false
 		}
@@ -322,11 +322,11 @@ if ((west = Ext.getCmp('west-frame'))) {
 	var cList = AppKit.Ext.CronkMgr.create({
 		parentid: cronk_list_id,
 		crname: 'crlist',
-		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-		layout: {
-        	type: 'accordion',
-            animate: true
-        }
+		loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>"
+//		layout: {
+//        	type: 'accordion',
+//            animate: true
+//        }
 	});
 	
 	west.add(cList);

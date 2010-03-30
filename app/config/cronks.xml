@@ -159,16 +159,29 @@
 			</parameter>
 		</parameter>
 
-		<parameter name="icingaTacticalOverviewCustom">
+		<parameter name="icingaTacticalOverviewHG">
 			<parameter name="module">Cronks</parameter>
 			<parameter name="action">System.StaticContent</parameter>
 			<parameter name="hide">false</parameter>
 			<parameter name="description">Icinga Tactical Overview</parameter>
-			<parameter name="name">Tactical Overview Custom</parameter>
+			<parameter name="name">Tactical Overview Hostgroup</parameter>
 			<parameter name="categories">misc</parameter>
 			<parameter name="groupsonly">appkit_admin</parameter>
 			<parameter name="parameter">
-				<parameter name="template">icinga-tactical-overview-template-custom</parameter>
+				<parameter name="template">icinga-tactical-overview-template-hg</parameter>
+			</parameter>
+		</parameter>
+
+		<parameter name="icingaTacticalOverviewCV">
+			<parameter name="module">Cronks</parameter>
+			<parameter name="action">System.StaticContent</parameter>
+			<parameter name="hide">false</parameter>
+			<parameter name="description">Icinga Tactical Overview</parameter>
+			<parameter name="name">Tactical Overview CustomVariable</parameter>
+			<parameter name="categories">misc</parameter>
+			<parameter name="groupsonly">appkit_admin</parameter>
+			<parameter name="parameter">
+				<parameter name="template">icinga-tactical-overview-template-cv</parameter>
 			</parameter>
 		</parameter>
 

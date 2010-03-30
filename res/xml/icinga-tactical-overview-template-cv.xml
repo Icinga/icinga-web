@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    
+    <!-- 
+    	Meta description of the templates, that anybody
+    	knows what the template is doing
+    -->
+    <meta>
+        <parameter name="name">Default template for Tactical Overview</parameter>
+        <parameter name="description">Displays a Tactical Overview</parameter>
+        <parameter name="author">icinga-web developers</parameter>
+    </meta>
+
+	<!--
+		data sources 
+	-->
+	<datasources>
+		<datasource id="CVDATA">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+			<columns>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</columns>
+		</datasource>
+		
+		<datasource id="HOST_STATUS_UP">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CURRENT_STATE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+		
+		<datasource id="HOST_STATUS_DOWN">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CURRENT_STATE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+
+		<datasource id="HOST_STATUS_UNREACHABLE">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST</target>
+			<columns>HOST_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>HOST_CURRENT_STATE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+
+	</datasources>
+	
+	
+
+    <!--
+    	html template
+    -->
+    <template_code>
+    	
+    	<cvstatus_hosts>
+    		<![CDATA[
+   				<div class="icinga-status icinga-status-up"><span>UP: ${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID}</span></div>
+   				<div class="icinga-status icinga-status-down"><span>DOWN: ${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID}</span></div>
+   				<div class="icinga-status icinga-status-unreachable"><span>UNREACHABLE: ${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID}</span></div>
+    		]]>
+    	</cvstatus_hosts>
+    	
+    	<cvstatus>
+    		<![CDATA[
+    			<tr>
+    				<table>
+    				<tr>
+    					<td colspan="2"><b>${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE}</b></td>
+    				</tr>
+    				<tr>
+    					
+    					<td>2</td>
+    					<td>${cvstatus_hosts}</td>
+    				</tr>
+    				</table>
+    			</tr>
+    		]]>
+    	</cvstatus>
+
+
+    	<MAIN>
+	    	<![CDATA[
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td><b>Locations</b></td>
+					</tr>
+					<tr>
+						<td>
+							<table>
+								${cvstatus:CUSTOMVARIABLE_NAME,RACK:CUSTOMVARIABLE_VALUE,1}
+							</table>
+						</td>
+					</tr>
+
+				</table>
+			]]>
+		</MAIN>
+    </template_code>
+</template>

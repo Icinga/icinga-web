@@ -2,16 +2,91 @@
 	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
-
 (function() {
 
 	var CronkListing = function() {
 
 		var parentCmp = null;
 		var template  = null;
+		
+		var c = {
+			
+			layout: 'accordion',
+			
+			layoutConfig: {
+				animate: true,
+				renderHidden: false,
+				hideCollapseTool: true,
+				fill: true
+			},
+			
+			border: false,
+		};
+		
+		var stateuid = 'cronk-listing-panel';
+		
+		if (stateuid) {
+			Ext.apply(c, {
+			id: stateuid,
+			stateId: stateuid,
+			stateEvents: ['collapse'],
+			stateful: true,
+			bubbleEvents: [],
+			
+			defaults: {
+				listeners: {
+					collapse: function() {
+						addCmp.saveState();
+					}
+				}
+			},
+			
+			applyState: function(state) {
+				if (state && "active_tab" in state && state.active_tab >= 0) {
+					this.active_tab = state.active_tab;
+				}
+			},
+			
+			getState: function() {
+				var active = this.getLayout().activeItem, i;
+				this.items.each(function(item, index, l) {
+					if (item == active) {
+						i = index;
+					}
+				});
+				
+				if (typeof(i) !== "undefined" && i>=0) {
+					return { active_tab: i }
+				}
+			},
+			
+			listeners: {
+				beforecollapse: function() {
+					return false;
+				}
+			}
+				
+			});
+		}
+		
+		var addCmp = new Ext.Panel(c);
+		
 		var out = {};
 		
 		Ext.apply(out, {
+			
+			setActiveItem : function(id) {
+				addCmp.getLayout().setActiveItem(id);
+			},
+			
+			applyActiveItem : function() {
+				var c = this.getFrameCmp();
+				if (c.active_tab) {
+					this.setActiveItem(c.active_tab);
+					return true;
+				}
+				return false;
+			},
 			
 			getBaseUrl : function() {
 				return "<?php echo $ro->gen('icinga.cronks.crlisting.json'); ?>";
@@ -19,10 +94,15 @@
 			
 			setParentCmp : function(cmp) {
 				parentCmp = cmp;
+				parentCmp.add(addCmp);
 			},
 			
 			getParentCmp : function() {
 				return parentCmp;
+			},
+			
+			getFrameCmp : function() {
+				return addCmp;
 			},
 			
 			getStore : function () {
@@ -68,8 +148,9 @@
 				var v = new Ext.DataView({
 			        store: s,
 			        tpl: CronkListing.getTemplate(),
-			        autoHeight:true,
-			        multiSelect: true,
+//			        autoScroll: true,
+//			        autoHeight:true,
+//			        multiSelect: true,
 			        overClass:'x-view-over',
 			        itemSelector:'div.cronk-preview',
 			        emptyText: 'No data',
@@ -88,14 +169,14 @@
 			},
 			
 			addListing : function (title, cat) {
-				parentCmp.add({
+				addCmp.add({
 					title: title,
 					border: false,
 					defaults: { border: false },
 					items: [ CronkListing.getNewView(cat) ]
 				});
 				
-				parentCmp.doLayout();
+				addCmp.doLayout();
 			},
 			
 			initCronkDragZone : function (v) {
@@ -154,7 +235,6 @@
 	}();
 	
 	CronkListing.setParentCmp(Ext.getCmp("<?php echo $parentid; ?>"));
-	// CronkListing.initListing();
 	
 	Ext.Ajax.request({
 		url: CronkListing.getBaseUrl(),
@@ -176,7 +256,8 @@
 					i++;
 				});
 				
-				if (act) {
+				
+			if (!CronkListing.applyActiveItem() && act) {
 					CronkListing.getParentCmp().getLayout().setActiveItem(act);
 				}
 			}
