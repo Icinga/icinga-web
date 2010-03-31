@@ -151,7 +151,7 @@
 			<parameter name="action">System.StaticContent</parameter>
 			<parameter name="hide">true</parameter>
 			<parameter name="description">Icinga Tactical Overview</parameter>
-			<parameter name="name">Tactical Overview</parameter>
+			<parameter name="name">TO</parameter>
 			<parameter name="categories">misc</parameter>
 			<parameter name="groupsonly">appkit_admin</parameter>
 			<parameter name="parameter">
@@ -164,7 +164,7 @@
 			<parameter name="action">System.StaticContent</parameter>
 			<parameter name="hide">false</parameter>
 			<parameter name="description">Icinga Tactical Overview</parameter>
-			<parameter name="name">Tactical Overview Hostgroup</parameter>
+			<parameter name="name">TO Hostgroup</parameter>
 			<parameter name="categories">misc</parameter>
 			<parameter name="groupsonly">appkit_admin</parameter>
 			<parameter name="parameter">
@@ -177,7 +177,7 @@
 			<parameter name="action">System.StaticContent</parameter>
 			<parameter name="hide">false</parameter>
 			<parameter name="description">Icinga Tactical Overview</parameter>
-			<parameter name="name">Tactical Overview CustomVariable</parameter>
+			<parameter name="name">TO CustomVariable</parameter>
 			<parameter name="categories">misc</parameter>
 			<parameter name="groupsonly">appkit_admin</parameter>
 			<parameter name="parameter">
