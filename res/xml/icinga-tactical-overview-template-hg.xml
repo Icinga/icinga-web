@@ -15,10 +15,16 @@
 		data sources 
 	-->
 	<datasources>
-		<datasource id="LOCATIONS">
+		<datasource id="HG_NAME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOSTGROUP</target>
 			<columns>HOSTGROUP_ALIAS</columns>
+		</datasource>
+
+		<datasource id="SG_NAME">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICEGROUP</target>
+			<columns>SERVICEGROUP_ALIAS</columns>
 		</datasource>
 
 		<datasource id="HOST_STATUS_UP">
@@ -248,53 +254,128 @@
     	html template
     -->
     <template_code>
-    	<host_status>
-    		<![CDATA[
-    			<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
-								${if:${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP</td></tr>${/if}
-								${if:${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#cc0000;">${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN</td></tr>${/if}
-								${if:${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#ff8000;">${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE</td></tr>${/if}
-							</table>
-						</td>
-						<td>
-							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
-								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK</td></tr>${/if}
-								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING</td></tr>${/if}
-								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL</td></tr>${/if}
-								${if:${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN</td></tr>${/if}
-							</table>
-						</td>
-					</tr>
-				</table>
-    		]]>
-    	</host_status>
-
-    	<service_status>
+    	<hg_status>
     		<![CDATA[
     			<table border="0" cellpadding="0" cellspacing="0">
     				<tr>
     					<td>
-							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
-								${if:${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP</td></tr>${/if}
-								${if:${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#cc0000;">${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN</td></tr>${/if}
-								${if:${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}<tr><td style="background-color:#ff8000;">${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE</td></tr>${/if}
-							</table>
+							<div class="icinga-status-container">
+    							<div class="icinga-status-label"><b>${HG_NAME:HOSTGROUP_ALIAS} - Hosts</b></div>
+    							
+								${if:${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}
+									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-UP" class="icinga-status icinga-status-up icinga-link"><span>
+										${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP
+									</span></div>
+								${/if}
+								
+								${if:${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}
+									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>
+										${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN
+									</span></div>
+								${/if}
+								
+								${if:${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}
+									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>
+										${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE
+									</span></div>
+								${/if}
+							</div>
 						</td>
     					<td>
-							<table border="0" cellpadding="0" cellspacing="1" style="width:100px;filter:alpha(opacity=80);-moz-opacity:0.80;-khtml-opacity:0.80;opacity:0.80;">
-								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#00cc00;">${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK</td></tr>${/if}
-								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ffff00;">${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING</td></tr>${/if}
-								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ff0000;">${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL</td></tr>${/if}
-								${if:${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} > 0}<tr><td style="background-color:#ff8000;">${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN</td></tr>${/if}
-							</table>
+							<div class="icinga-status-container">
+    							<div class="icinga-status-label"><b>${HG_NAME:HOSTGROUP_ALIAS} - Services</b></div>
+    							
+								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-OK" class="icinga-status icinga-status-ok icinga-link"><span>
+										${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>
+										${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>
+										${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>
+										${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN
+									</span></div>
+								${/if}
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+    		]]>
+    	</hg_status>
+
+    	<sg_status>
+    		<![CDATA[
+    			<table border="0" cellpadding="0" cellspacing="0">
+    				<tr>
+    					<td>
+							<div class="icinga-status-container">
+    							<div class="icinga-status-label">${SG_NAME:SERVICEGROUP_ALIAS} - Hosts</div>
+    							
+								${if:${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}
+									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-UP" class="icinga-status icinga-status-up icinga-link"><span>
+										${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}
+									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>
+										${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}
+									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>
+										${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE
+									</span></div>
+								${/if}
+							</div>
+						</td>
+    					<td>
+							<div class="icinga-status-container">
+    							<div class="icinga-status-label">${SG_NAME:SERVICEGROUP_ALIAS} - Services</div>
+    							
+								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-OK" class="icinga-status icinga-status-ok icinga-link"><span>
+										${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>
+										${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>
+										${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL
+									</span></div>
+								${/if}
+								
+								${if:${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} > 0}
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>
+										${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN
+									</span></div>
+								${/if}
+							</div>
 						</td>
 					</tr>
 				</table>
     		]]>
-    	</service_status>
+    	</sg_status>
 
     	<locations>
     		<![CDATA[
@@ -346,22 +427,16 @@
 					</tr>
 					<tr>
 						<td>
-							<table border="0" cellpadding="0" cellspacing="0">
-								${locations:HOSTGROUP_NAME,company1}
-								${locations:HOSTGROUP_NAME,company2}
-								${locations:HOSTGROUP_NAME,web_servers}
-								${locations:HOSTGROUP_NAME,mail_servers}
-							</table>
+								${hg_status:HOSTGROUP_NAME,company1}
+								${hg_status:HOSTGROUP_NAME,company2}
+								${hg_status:HOSTGROUP_NAME,web_servers}
 						</td>
 						<td>
-							<table border="0" cellpadding="0" cellspacing="0">
-								<tr><td>Local</td><td>${service_status:SERVICEGROUP_NAME,local}</td></tr>
-								<tr><td>Network</td><td>${service_status:SERVICEGROUP_NAME,network}</td></tr>
-								<tr><td>Database</td><td>${service_status:SERVICEGROUP_NAME,database}</td></tr>
-								<tr><td>Web</td><td>${service_status:SERVICEGROUP_NAME,web}</td></tr>
-								<tr><td>Mail</td><td>${service_status:SERVICEGROUP_NAME,mail}</td></tr>
-								</tr>
-							</table>
+								${sg_status:SERVICEGROUP_NAME,local}
+								${sg_status:SERVICEGROUP_NAME,network}
+								${sg_status:SERVICEGROUP_NAME,database}
+								${sg_status:SERVICEGROUP_NAME,web}
+								${sg_status:SERVICEGROUP_NAME,mail}
 						</td>
 						<td>
 							${performance}

@@ -152,18 +152,18 @@
     	<cvstatus_hosts>
     		<![CDATA[
     			<div class="icinga-status-container">
-	    			<div class="icinga-status-label"><b>Hoststatus - ${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE}</b></div>
+	    			<div class="icinga-status-label"><b>${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE} - Hosts</b></div>
 	    			
 	   				${if:${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID} > 0}
-	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UP" class="icinga-status icinga-status-up icinga-link"><span>UP: ${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID}</span></div>
+	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UP" class="icinga-status icinga-status-up icinga-link"><span>${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID} UP</span></div>
 	   				${/if}
 	   				
 	   				${if:${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID} > 0}
-	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>DOWN: ${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID}</span></div>
+	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID} DOWN</span></div>
 	   				${/if}
 	   				
 	   				${if:${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID} > 0}
-	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>UNREACHABLE: ${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID}</span></div>
+	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID} UNREACHABLE</span></div>
 	   				${/if}
    				</div>
    				<script type="text/javascript">
@@ -186,22 +186,22 @@
 		<cvstatus_service>
 			<![CDATA[
 				<div class="icinga-status-container">
-    				<div class="icinga-status-label"><b>Servicestatus - ${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE}</b></div>
+    				<div class="icinga-status-label"><b>${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE} - Services</b></div>
     				
     				${if:${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-OK" class="icinga-status icinga-status-ok icinga-link"><span>OK: ${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-OK" class="icinga-status icinga-status-ok icinga-link"><span>${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID} OK</span></div>
     				${/if}
     				
     				${if:${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>WARNING: ${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID} WARNING</span></div>
     				${/if}
     				
    					${if:${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>CRITICAL: ${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID} CRITICAL</span></div>
    					${/if}
    					
    					${if:${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>UNKNOWN: ${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID} UNKNOWN</span></div>
    					${/if}
     			</div>
     			<script type="text/javascript">
