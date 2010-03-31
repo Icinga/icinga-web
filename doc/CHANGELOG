@@ -157,3 +157,10 @@
      
      * 2010-03-30
        * Fixed content-type for application state
+       
+     * 2010-03-30
+       * ExtJs update to 3.1.1
+       * Tactical Overview with CustomVariables
+     
+     * 2010-03-31
+       * Tactical Overview with CustomVariables

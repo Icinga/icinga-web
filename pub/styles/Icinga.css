@@ -83,6 +83,27 @@ div#ext-msg-stack {
 	
 
 /** THE STATUS **/
+
+div.icinga-link {
+	cursor: pointer;
+}
+
+div.icinga-status-container {
+	border: 1px #a0a0a0 solid;
+	width: 200px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+div.icinga-status-container div.icinga-status-label {
+	background-color: #c0c0c0;
+	padding: 6px 2px 6px 10px;
+}
+
+div.icinga-status-container div.icinga-status {
+	margin: 4px 4px 4px 4px;
+}
+
 div.icinga-status {
 	padding: 4px;
 	text-align: center;

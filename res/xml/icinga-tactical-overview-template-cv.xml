@@ -21,7 +21,7 @@
 			<columns>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</columns>
 		</datasource>
 		
-		<datasource id="HOST_STATUS_UP">
+		<datasource id="HOST_STATUS_UP_CV">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -38,7 +38,7 @@
 			</varmap>
 		</datasource>
 		
-		<datasource id="HOST_STATUS_DOWN">
+		<datasource id="HOST_STATUS_DOWN_CV">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -55,7 +55,7 @@
 			</varmap>
 		</datasource>
 
-		<datasource id="HOST_STATUS_UNREACHABLE">
+		<datasource id="HOST_STATUS_UNREACHABLE_CV">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
@@ -69,6 +69,74 @@
 			<varmap>
 				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
 				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+
+		<datasource id="SERVICE_STATUS_OK_CV">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>0</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+		
+		<datasource id="SERVICE_STATUS_WARNING_CV">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>1</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+
+		<datasource id="SERVICE_STATUS_CRITICAL_CV">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>2</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
+			</varmap>
+		</datasource>
+		
+		<datasource id="SERVICE_STATUS_UNKNOWN_CV">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE</target>
+			<columns>SERVICE_OBJECT_ID</columns>
+			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+			<filter>
+				<columns>
+					<column>SERVICE_CURRENT_STATE</column>
+					<value>3</value>
+				</columns>
+			</filter>
+			<varmap>
+				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
+				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
 			</varmap>
 		</datasource>
 
@@ -83,40 +151,113 @@
     	
     	<cvstatus_hosts>
     		<![CDATA[
-   				<div class="icinga-status icinga-status-up"><span>UP: ${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID}</span></div>
-   				<div class="icinga-status icinga-status-down"><span>DOWN: ${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID}</span></div>
-   				<div class="icinga-status icinga-status-unreachable"><span>UNREACHABLE: ${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID}</span></div>
+    			<div class="icinga-status-container">
+	    			<div class="icinga-status-label"><b>Hoststatus - ${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE}</b></div>
+	    			
+	   				${if:${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID} > 0}
+	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UP" class="icinga-status icinga-status-up icinga-link"><span>UP: ${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID}</span></div>
+	   				${/if}
+	   				
+	   				${if:${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID} > 0}
+	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>DOWN: ${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID}</span></div>
+	   				${/if}
+	   				
+	   				${if:${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID} > 0}
+	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>UNREACHABLE: ${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID}</span></div>
+	   				${/if}
+   				</div>
+   				<script type="text/javascript">
+	    			Ext.onReady(function() {
+	    				var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+	    				var i = 'toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-';
+	    				var s = { UP:0, DOWN:1, UNREACHABLE:2}
+	    				Ext.iterate(s, function(k, v) {
+		    				l(i+k, 'icinga-host-template', {
+		    					custom_variable_name: '${CVDATA:CUSTOMVARIABLE_NAME}',
+		    					custom_variable_value: '${CVDATA:CUSTOMVARIABLE_VALUE}',
+		    					host_status: v
+		    				}, '${CVDATA:CUSTOMVARIABLE_NAME}: ${CVDATA:CUSTOMVARIABLE_VALUE} ' + k);
+	    				});
+	    			});
+	    		</script>
     		]]>
     	</cvstatus_hosts>
-    	
-    	<cvstatus>
-    		<![CDATA[
-    			<tr>
-    				<table>
-    				<tr>
-    					<td colspan="2"><b>${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE}</b></td>
-    				</tr>
-    				<tr>
-    					
-    					<td>2</td>
-    					<td>${cvstatus_hosts}</td>
-    				</tr>
-    				</table>
-    			</tr>
-    		]]>
-    	</cvstatus>
 
+		<cvstatus_service>
+			<![CDATA[
+				<div class="icinga-status-container">
+    				<div class="icinga-status-label"><b>Servicestatus - ${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE}</b></div>
+    				
+    				${if:${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID} > 0}
+    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-OK" class="icinga-status icinga-status-ok icinga-link"><span>OK: ${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+    				${/if}
+    				
+    				${if:${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID} > 0}
+    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>WARNING: ${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+    				${/if}
+    				
+   					${if:${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID} > 0}
+   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>CRITICAL: ${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+   					${/if}
+   					
+   					${if:${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID} > 0}
+   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>UNKNOWN: ${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID}</span></div>
+   					${/if}
+    			</div>
+    			<script type="text/javascript">
+	    			Ext.onReady(function() {
+	    				var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+	    				var i = 'tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-';
+	    				var s = { OK:0, WARNING:1, CRITICAL:2, UNKNOWN:3 }
+	    				Ext.iterate(s, function(k, v) {
+		    				l(i+k, 'icinga-service-template', {
+		    					custom_variable_name: '${CVDATA:CUSTOMVARIABLE_NAME}',
+		    					custom_variable_value: '${CVDATA:CUSTOMVARIABLE_VALUE}',
+		    					service_status: v
+		    				}, '${CVDATA:CUSTOMVARIABLE_NAME}: ${CVDATA:CUSTOMVARIABLE_VALUE} ' + k);
+	    				});
+	    				
+	    			});
+	    		</script>
+			]]>
+		</cvstatus_service>
 
     	<MAIN>
 	    	<![CDATA[
 				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td><b>Locations</b></td>
+						<td colspan="2"><b>Locations</b></td>
 					</tr>
 					<tr>
 						<td>
 							<table>
-								${cvstatus:CUSTOMVARIABLE_NAME,RACK:CUSTOMVARIABLE_VALUE,1}
+								<tr>
+									<td>
+										${cvstatus_hosts:CUSTOMVARIABLE_NAME,RACK:CUSTOMVARIABLE_VALUE,1}
+									</td>
+									
+									<td>
+										${cvstatus_hosts:CUSTOMVARIABLE_NAME,RACK:CUSTOMVARIABLE_VALUE,2}
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										${cvstatus_hosts:CUSTOMVARIABLE_NAME,RZ:CUSTOMVARIABLE_VALUE,dc1}
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table>
+								<tr>
+									<td>
+										${cvstatus_service:CUSTOMVARIABLE_NAME,TYPE:CUSTOMVARIABLE_VALUE,network}
+									</td>
+									
+									<td>
+										${cvstatus_service:CUSTOMVARIABLE_NAME,TYPE:CUSTOMVARIABLE_VALUE,hardware}
+									</td>
+								</tr>
 							</table>
 						</td>
 					</tr>
