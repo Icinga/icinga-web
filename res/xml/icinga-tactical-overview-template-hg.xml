@@ -326,7 +326,6 @@
 							Ext.iterate(m[1], function(sn, si) {
 								var f = { 'hostgroup_name': '${HG_NAME:HOSTGROUP_NAME}' };
 								f[m[2]] = si;
-								log(f);
 								l(ip+sn, m[0], f, '${HG_NAME:HOSTGROUP_NAME} ' + sn);
 							});
 						});
@@ -399,7 +398,7 @@
 						var s = {OK:0,WARNING:1,CRITICAL:2,UNKNOWN:3};
 						var h = {UP:0,DOWN:1,UNREACHABLE:2};
 						var r = {
-							'tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-': ['icinga-service-template', s, 'service_status'],
+							'tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-': ['icinga-service-template', s, 'service_status']
 							// 'tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-': ['icinga-host-template', h, 'host_status']
 						};
 						
@@ -407,7 +406,6 @@
 							Ext.iterate(m[1], function(sn, si) {
 								var f = { 'servicegroup_name': '${SG_NAME:SERVICEGROUP_NAME}' };
 								f[m[2]] = si;
-								log(f);
 								l(ip+sn, m[0], f, '${SG_NAME:SERVICEGROUP_NAME} ' + sn);
 							});
 						});

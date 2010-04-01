@@ -15,6 +15,22 @@
 						<error>Validation of template failed!</error>
 					</errors>
 			</validator>
+			
+			<validator class="string" name="cmpid" required="false">
+				<argument>cmpid</argument>
+
+				<errors>
+					<error>Validation of htmlid failed!</error>
+				</errors>
+			</validator>
+
+			<validator class="string" name="parentid" required="false">
+				<argument>parentid</argument>
+
+				<errors>
+					<error>Validation of parentid failed!</error>
+				</errors>
+			</validator>
 
 		</validators>
 		

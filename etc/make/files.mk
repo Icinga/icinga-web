@@ -974,8 +974,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/lib/icinga/IcingaBaseException.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
@@ -3764,7 +3764,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/GridPanel.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/GridPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js.orig $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js.orig
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/ColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/StructUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/StructUtil.js
@@ -7824,12 +7823,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-notification-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-cv.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-hg.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-cv.xml
 # INSTALL_FILES_END

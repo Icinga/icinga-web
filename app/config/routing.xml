@@ -105,6 +105,8 @@
 					<route name=".statusMap.json" pattern="^/statusMap/json" output_type="json" action="System.StatusMap" />
 					<route name=".statusMap" pattern="^/statusMap" action="System.StatusMap" />
 
+					<route name=".staticContent.ajax" pattern="^/staticContent/(template:([\w\.\-\_\s]+))/ajax" output_type="ajax" action="System.StaticContent" />
+
 					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
 						<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">
 							<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation" />
