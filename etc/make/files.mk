@@ -674,6 +674,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/slider
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/spinner
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/state
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/tabs
@@ -717,6 +718,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/css
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/default
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/default/box
@@ -744,6 +747,14 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/toolbar
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/window
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/form
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/menu
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/progress
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/shared
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/slider
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tree
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/grid
@@ -752,6 +763,25 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/sizer
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/tabs
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/tree
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/dd
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/editor
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/progress
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/qtip
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/shared
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/slider
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/adapter
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core
@@ -774,6 +804,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/widgets/menu
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tips
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/welcome
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/welcome/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree
@@ -937,13 +969,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/validators.xml $(DESTDIR)$(prefix)/app/config/validators.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/lib/icinga/IcingaBaseException.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
@@ -1097,8 +1129,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/ShowNavigationLeft.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/ShowNavigationLeft.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/ShowNavigationSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/ShowNavigationSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/SquishLoaderSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/SquishLoaderSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/ShowNavigationTop.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/ShowNavigationTop.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/AddHeaderDataSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/AddHeaderDataSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/ShowNavigationTop.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/ShowNavigationTop.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Index.xml
@@ -1204,27 +1236,27 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ObjectSearchResultModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ObjectSearchResultModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusMapModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusMapModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ViewProcFilterParamsModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ViewProcFilterParamsModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusSummaryModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusSummaryModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkLoaderSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkLoaderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalHelloSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalHelloSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusMapSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusMapSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/MetaInformationSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/MetaInformationSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/SendCommandSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/SendCommandSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProcSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProcSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/CronkTrigger.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/CronkTrigger.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/JitStatusMap.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/JitStatusMap.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/IframeViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/IframeViewSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusSummarySuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusSummarySuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/CronkLoader.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/CronkLoader.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/CronkPortal.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/CronkPortal.xml
@@ -3733,10 +3765,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/GridPanel.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/GridPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js.orig $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js.orig
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/ColumnRenderer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/InterGridUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/InterGridUtil.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/StructUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/StructUtil.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/util/InterGridUtil.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/util/InterGridUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/CronkMgr.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/CronkMgr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/HttpStateProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/HttpStateProvider.js
@@ -4123,34 +4155,33 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/yui/ext-yui-adapter-debug.js $(DESTDIR)$(prefix)/lib/ext3/adapter/yui/ext-yui-adapter-debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/adapter/yui/ext-yui-adapter.js $(DESTDIR)$(prefix)/lib/ext3/adapter/yui/ext-yui-adapter.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/README.txt $(DESTDIR)$(prefix)/lib/ext3/examples/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.css $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.html $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.js $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/images/add.gif $(DESTDIR)$(prefix)/lib/ext3/examples/button/images/add.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/images/add16.gif $(DESTDIR)$(prefix)/lib/ext3/examples/button/images/add16.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/images/add24.gif $(DESTDIR)$(prefix)/lib/ext3/examples/button/images/add24.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.css $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/button/buttons.js $(DESTDIR)$(prefix)/lib/ext3/examples/button/buttons.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/bar.gif $(DESTDIR)$(prefix)/lib/ext3/examples/chart/bar.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/chart.gif $(DESTDIR)$(prefix)/lib/ext3/examples/chart/chart.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/charts.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/charts.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/charts.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/charts.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/pie-chart.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/pie-chart.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/pie-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/pie-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/reload-chart.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/reload-chart.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/reload-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/reload-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/stacked-bar-chart.html $(DESTDIR)$(prefix)/lib/ext3/examples/chart/stacked-bar-chart.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/charts.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/charts.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/pie-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/pie-chart.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/reload-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/reload-chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/chart/stacked-bar-chart.js $(DESTDIR)$(prefix)/lib/ext3/examples/chart/stacked-bar-chart.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/spotlight-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/core/spotlight-example.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/spotlight.html $(DESTDIR)$(prefix)/lib/ext3/examples/core/spotlight.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/templates.html $(DESTDIR)$(prefix)/lib/ext3/examples/core/templates.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/spotlight-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/core/spotlight-example.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/core/templates.js $(DESTDIR)$(prefix)/lib/ext3/examples/core/templates.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/data.js $(DESTDIR)$(prefix)/lib/ext3/examples/data.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_formpanel.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_formpanel.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_formpanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_formpanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dragdropzones.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dragdropzones.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dragdropzones.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dragdropzones.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/field-to-grid-dd.html $(DESTDIR)$(prefix)/lib/ext3/examples/dd/field-to-grid-dd.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_formpanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_formpanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dnd_grid_to_grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dnd_grid_to_grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/dragdropzones.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/dragdropzones.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/dd/field-to-grid-dd.js $(DESTDIR)$(prefix)/lib/ext3/examples/dd/field-to-grid-dd.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/debug-console.html $(DESTDIR)$(prefix)/lib/ext3/examples/debug/debug-console.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/debug/debug.png $(DESTDIR)$(prefix)/lib/ext3/examples/debug/debug.png
@@ -4209,7 +4240,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/js/Module.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/js/Module.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/js/StartMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/js/StartMenu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/js/TaskBar.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/js/TaskBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/sample.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/sample.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/blue.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/blue.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/desk.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/desk.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/desktop.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/desktop.jpg
@@ -4217,11 +4247,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/ext.gif $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/ext.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/shiny.gif $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/shiny.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/wallpapers/sky.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/wallpapers/sky.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/desktop/sample.js $(DESTDIR)$(prefix)/lib/ext3/examples/desktop/sample.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-form.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-form.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-tree.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-tree.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/api.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/api.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/classes/Profile.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/classes/Profile.php
@@ -4229,13 +4257,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/config.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/poll.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/poll.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/php/router.php $(DESTDIR)$(prefix)/lib/ext3/examples/direct/php/router.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedViewer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedWindow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/direct/direct.js $(DESTDIR)$(prefix)/lib/ext3/examples/direct/direct.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-proxy.php $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-proxy.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/article.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/article.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/bullet.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/bullet.gif
@@ -4274,103 +4299,113 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/warning.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/warning.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/images/win-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/images/win-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/view.html $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/view.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedViewer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/FeedWindow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/check-radio.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/check-radio.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/check-radio.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/check-radio.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.php $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forms.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/forms.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/states.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/states.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-errors.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-errors.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/check-radio.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/check-radio.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom-access.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom-access.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom-access.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom-access.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid-access.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid-access.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid-access.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid-access.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forms.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/forms.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/states.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/states.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/cmp-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/cmp-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/details.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/details.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.css $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.html $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.js $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/message.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/message.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/message_edit.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/message_edit.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/messages.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/messages.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/preview.png $(DESTDIR)$(prefix)/lib/ext3/examples/forum/preview.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.css $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/forum.js $(DESTDIR)$(prefix)/lib/ext3/examples/forum/forum.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-demo.sql $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-demo.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter-local.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter-local.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter-local.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter-local.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter.php $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid-filtering/grid-filter-local.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid-filtering/grid-filter-local.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/ColumnHeaderGroup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/ColumnHeaderGroup.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/column-header-group.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/column-header-group.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/details.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/details.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/plants.xml $(DESTDIR)$(prefix)/lib/ext3/examples/grid/plants.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor-data.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sheldon.xml $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sheldon.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/topic.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/topic.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/column-header-group.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/column-header-group.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/gen-names.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/gen-names.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-examples.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/plants.xml $(DESTDIR)$(prefix)/lib/ext3/examples/grid/plants.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor-data.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sheldon.xml $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sheldon.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/topic.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/topic.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/grouptabs.html $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/grouptabs.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/grouptabs.js $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/grouptabs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/group.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/group.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/subscriptions.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/subscriptions.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/templates.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/templates.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/tickets.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/tickets.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/grouptabs.js $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/grouptabs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/history/history.html $(DESTDIR)$(prefix)/lib/ext3/examples/history/history.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/history/history.js $(DESTDIR)$(prefix)/lib/ext3/examples/history/history.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/SWFUpload/Flash/swfupload.swf $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/SWFUpload/Flash/swfupload.swf
@@ -4397,7 +4432,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/thumbs/zack_hat.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/thumbs/zack_hat.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/thumbs/zack_sink.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/thumbs/zack_sink.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/images/thumbs/zacks_grill.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/images/thumbs/zacks_grill.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/img-org.css $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/img-org.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumTree.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumTree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumWin.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumWin.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/imgorg/AlbumsPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/imgorg/AlbumsPanel.js
@@ -4420,15 +4454,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/php/router.php $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/php/router.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/php/sql/setup.php $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/php/sql/setup.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/readme.txt $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/readme.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/index.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/init.js $(DESTDIR)$(prefix)/lib/ext3/examples/init.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedViewer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedWindow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/image-organizer/img-org.css $(DESTDIR)$(prefix)/lib/ext3/examples/image-organizer/img-org.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-proxy.php $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-proxy.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/article.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/article.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/bullet.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/bullet.gif
@@ -4466,6 +4493,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/wait.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/wait.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/warning.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/warning.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/images/win-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/images/win-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedViewer.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedViewer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/FeedWindow.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/FeedWindow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/MainPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-viewer-access.css $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-viewer-access.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/key-feed-viewer/view.html $(DESTDIR)$(prefix)/lib/ext3/examples/key-feed-viewer/view.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/disk.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/disk.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/email_go.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/email_go.png
@@ -4474,13 +4508,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/page_attach.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/page_attach.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/printer.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/printer.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/images/spellcheck.png $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/images/spellcheck.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.css $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layouts/basic.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts/basic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layouts/combination.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts/combination.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layouts/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layouts/custom.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/tree-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/tree-data.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.css $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout-browser/layout-browser.js $(DESTDIR)$(prefix)/lib/ext3/examples/layout-browser/layout-browser.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/accordion.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/accordion.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/anchor.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/anchor.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/column.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/column.html
@@ -4488,15 +4522,14 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/hbox.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/hbox.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/table.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/table.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/layout/vbox.html $(DESTDIR)$(prefix)/lib/ext3/examples/layout/vbox.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/dutch-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/dutch-form.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/multi-lang.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/multi-lang.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/ContactForm-nl.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/ContactForm-nl.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/ContactForm.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/ContactForm.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/dutch-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/dutch-form.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/dutch-provinces.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/dutch-provinces.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/languages.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/languages.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/multi-lang.html $(DESTDIR)$(prefix)/lib/ext3/examples/locale/multi-lang.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/locale/multi-lang.js $(DESTDIR)$(prefix)/lib/ext3/examples/locale/multi-lang.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/actions.html $(DESTDIR)$(prefix)/lib/ext3/examples/menu/actions.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/actions.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/actions.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/delete.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/delete.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/edit.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/edit.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/find.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/find.gif
@@ -4504,10 +4537,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/images/view.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/images/view.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/list-items.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/list-items.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menu-show.gif $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menu-show.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.css $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.html $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/preview.png $(DESTDIR)$(prefix)/lib/ext3/examples/menu/preview.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/actions.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/actions.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.css $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/menu/menus.js $(DESTDIR)$(prefix)/lib/ext3/examples/menu/menus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/comment-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/comment-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/comment.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/comment.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/images/download.gif $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/images/download.gif
@@ -4516,28 +4550,28 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/message-box/msg-box.js $(DESTDIR)$(prefix)/lib/ext3/examples/message-box/msg-box.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/multiselect/multiselect-demo.html $(DESTDIR)$(prefix)/lib/ext3/examples/multiselect/multiselect-demo.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/multiselect/multiselect-demo.js $(DESTDIR)$(prefix)/lib/ext3/examples/multiselect/multiselect-demo.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.css $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.html $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.css $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/organizer/organizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/organizer/organizer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/BubblePanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/BubblePanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/bubble-panel.html $(DESTDIR)$(prefix)/lib/ext3/examples/panel/bubble-panel.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/bubble-panel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/bubble-panel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/css/bubble.css $(DESTDIR)$(prefix)/lib/ext3/examples/panel/css/bubble.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/images/bubble-cs.gif $(DESTDIR)$(prefix)/lib/ext3/examples/panel/images/bubble-cs.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/images/bubble-lr.gif $(DESTDIR)$(prefix)/lib/ext3/examples/panel/images/bubble-lr.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/images/bubble-tb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/panel/images/bubble-tb.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/panels.html $(DESTDIR)$(prefix)/lib/ext3/examples/panel/panels.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/BubblePanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/BubblePanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/bubble-panel.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/bubble-panel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/panel/panels.js $(DESTDIR)$(prefix)/lib/ext3/examples/panel/panels.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/portal.html $(DESTDIR)$(prefix)/lib/ext3/examples/portal/portal.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/portal/portal.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/sample-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/portal/sample-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/portal/sample.css $(DESTDIR)$(prefix)/lib/ext3/examples/portal/sample.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.css $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.html $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.js $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/sara.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/sara.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/sara_and_zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/sara_and_zack.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/zack.jpg
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.css $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/resizable/basic.js $(DESTDIR)$(prefix)/lib/ext3/examples/resizable/basic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/app.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/app.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/app/controllers/users.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app/controllers/users.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/app/models/user.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/app/models/user.php
@@ -4548,14 +4582,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/lib/response.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/lib/response.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/remote/lib/session_db.php $(DESTDIR)$(prefix)/lib/ext3/examples/restful/remote/lib/session_db.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful-thumb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful-thumb.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.css $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.html $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.css $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/restful/restful.js $(DESTDIR)$(prefix)/lib/ext3/examples/restful/restful.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/samples.css $(DESTDIR)$(prefix)/lib/ext3/examples/samples.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/code-display.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/code-display.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/App.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/App.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/css/extjs.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/css/extjs.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/extjs2.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/extjs2.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/ft.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/ft.png
@@ -4593,8 +4622,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/side-box.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/side-box.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/top-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/top-bottom.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/images/topbar.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/images/topbar.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/site.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/site.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/topbar.png $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/topbar.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/App.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/App.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/extjs/site.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/extjs/site.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/arrow-down.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/arrow-down.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/arrow-up.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/arrow-up.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/icons/fam/SILK.txt $(DESTDIR)$(prefix)/lib/ext3/examples/shared/icons/fam/SILK.txt
@@ -4742,50 +4772,53 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/window-layout.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/window-layout.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/window.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/window.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/writer-thumb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/writer-thumb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-custom-access.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-custom-access.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/screens/form-grid-binding-access.gif $(DESTDIR)$(prefix)/lib/ext3/examples/shared/screens/form-grid-binding-access.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/code-display.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/code-display.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/shared/examples.js $(DESTDIR)$(prefix)/lib/ext3/examples/shared/examples.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/ajax-tip.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/ajax-tip.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/editor.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/editor.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/editor.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/images/custom-bar.gif $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/images/custom-bar.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/images/house.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/images/house.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.css $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/editor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.css $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/progress-bar.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/progress-bar.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.css $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.html $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/simple-widgets/qtips.js $(DESTDIR)$(prefix)/lib/ext3/examples/simple-widgets/qtips.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/images/slider-bg.png $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images/slider-bg.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/images/slider-thumb.png $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images/slider-thumb.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/images/ticks.gif $(DESTDIR)$(prefix)/lib/ext3/examples/slider/images/ticks.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.css $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.html $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.css $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.js $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.html $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/README.txt $(DESTDIR)$(prefix)/lib/ext3/examples/state/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/SessionProvider.js $(DESTDIR)$(prefix)/lib/ext3/examples/state/SessionProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/get-state.php $(DESTDIR)$(prefix)/lib/ext3/examples/state/get-state.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/save-state.php $(DESTDIR)$(prefix)/lib/ext3/examples/state/save-state.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/state/SessionProvider.js $(DESTDIR)$(prefix)/lib/ext3/examples/state/SessionProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/fake.php $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/fake.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-advanced.html $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-advanced.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-advanced.js $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-advanced.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-demo.html $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-demo.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-advanced.js $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-advanced.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/statusbar/statusbar-demo.js $(DESTDIR)$(prefix)/lib/ext3/examples/statusbar/statusbar-demo.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/ajax1.htm $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/ajax1.htm
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/ajax2.htm $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/ajax2.htm
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.css $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-adv.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-adv.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.css $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tab-scroller-menu.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tab-scroller-menu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-adv.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-adv.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-example.css $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-example.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs-example.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tabs/tabs.html $(DESTDIR)$(prefix)/lib/ext3/examples/tabs/tabs.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/classes.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/db/ext-air-db.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/db/ext-air-db.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/db/ext-db.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/db/ext-db.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/db/ext-gears-db.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/db/ext-gears-db.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/gears.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/gears.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/check.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/check.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/delete.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/delete.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/edit.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/edit.gif
@@ -4801,8 +4834,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/icon-show-all.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/icon-show-all.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/icon-show-complete.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/icon-show-complete.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/images/s.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/images/s.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.css $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.html $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/classes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/gears.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/gears.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.css $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tasks/tasks.js $(DESTDIR)$(prefix)/lib/ext3/examples/tasks/tasks.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/index.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/test-case-2b/index303.html $(DESTDIR)$(prefix)/lib/ext3/examples/test-case-2b/index303.html
@@ -4818,22 +4853,17 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/images/add16.gif $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/images/add16.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/images/add24.gif $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/images/add24.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/overflow.html $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/overflow.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.html $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/overflow.js $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/overflow.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.css $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.html $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/toolbar/toolbars.js $(DESTDIR)$(prefix)/lib/ext3/examples/toolbar/toolbars.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/ARIA.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/ARIA.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/album.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tree/album.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/aria-tree.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/aria-tree.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/aria-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/aria-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/center-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tree/center-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-nodes.json $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-nodes.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-tree.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-tree.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-data.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/get-nodes.php $(DESTDIR)$(prefix)/lib/ext3/examples/tree/get-nodes.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/cmp-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/cmp-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/dance_fever.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/dance_fever.jpg
@@ -4850,53 +4880,31 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/zack_sink.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/zack_sink.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/images/thumbs/zacks_grill.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/tree/images/thumbs/zacks_grill.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/reorder.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/reorder.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/reorder.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/reorder.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/save-dep.php $(DESTDIR)$(prefix)/lib/ext3/examples/tree/save-dep.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/two-trees.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/two-trees.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/two-trees.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/two-trees.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-data.xml $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-data.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.html $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/ARIA.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/ARIA.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/aria-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/aria-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/check-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/check-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/column-tree.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/column-tree.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/reorder.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/reorder.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/two-trees.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/two-trees.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.css $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/tree/xml-tree-loader.js $(DESTDIR)$(prefix)/lib/ext3/examples/tree/xml-tree-loader.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/tree-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/tree-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid-data.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/BufferView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/BufferView.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CenterLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CenterLayout.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CheckColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CheckColumn.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnHeaderGroup.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnHeaderGroup.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnNodeUI.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/DataView-more.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/DataView-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldLabeler.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldLabeler.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldReplicator.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldReplicator.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Focus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Focus.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/tree-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/tree-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GMapPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GMapPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupSummary.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupSummary.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTab.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTab.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTabPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTabPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ItemSelector.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ItemSelector.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/LockingGridView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/LockingGridView.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/MultiSelect.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/MultiSelect.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PagingMemoryProxy.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PagingMemoryProxy.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PanelResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PanelResizer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portal.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PortalColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PortalColumn.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portlet.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portlet.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ProgressBarPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ProgressBarPager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowEditor.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowEditor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowExpander.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowExpander.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowLayout.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SearchField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SearchField.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SelectBox.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SelectBox.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SliderTip.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SliderTip.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SlidingPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SlidingPager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spinner.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SpinnerField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SpinnerField.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spotlight.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spotlight.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabCloseMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabCloseMenu.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabScrollerMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabScrollerMenu.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TableGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TableGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/XmlTreeLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/XmlTreeLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/CenterLayout.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/CenterLayout.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ColumnHeaderGroup.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ColumnHeaderGroup.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ColumnNodeUI.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ColumnNodeUI.css
@@ -4909,9 +4917,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/RowEditor.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/RowEditor.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/Spinner.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/Spinner.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ux-all.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ux-all.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/fileuploadfield/FileUploadField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/fileuploadfield/FileUploadField.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/fileuploadfield/css/fileuploadfield.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/fileuploadfield/css/fileuploadfield.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/GridFilters.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/GridFilters.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/fileuploadfield/FileUploadField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/fileuploadfield/FileUploadField.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/css/GridFilters.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/css/GridFilters.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/css/RangeMenu.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/css/RangeMenu.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/filter/BooleanFilter.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/filter/BooleanFilter.js
@@ -4928,6 +4935,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/images/sort_filtered_desc.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/images/sort_filtered_desc.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/menu/ListMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/menu/ListMenu.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/menu/RangeMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/menu/RangeMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/gridfilters/GridFilters.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/gridfilters/GridFilters.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/bottom2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/bottom2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/down2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/down2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/elbow-minus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/elbow-minus-nl.gif
@@ -4944,14 +4952,14 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/top2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/top2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/up2.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/up2.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/images/x-grouptabs-corners.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/images/x-grouptabs-corners.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/StatusBar.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/StatusBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/ValidationStatus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/ValidationStatus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/css/statusbar.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/css/statusbar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/accept.png $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/accept.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/exclamation.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/exclamation.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/loading.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/loading.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/saved.png $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/saved.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/images/saving.gif $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/images/saving.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/StatusBar.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/StatusBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/statusbar/ValidationStatus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/statusbar/ValidationStatus.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGrid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridColumns.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridColumns.js
@@ -4959,15 +4967,37 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridSorter.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridSorter.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/treegrid.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/treegrid.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SearchField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SearchField.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SliderTip.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SliderTip.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SlidingPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SlidingPager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spinner.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SpinnerField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SpinnerField.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spotlight.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spotlight.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabCloseMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabCloseMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabScrollerMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabScrollerMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TableGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TableGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/XmlTreeLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/XmlTreeLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all-debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser-example.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/BufferView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/BufferView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CenterLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CenterLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CheckColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CheckColumn.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnHeaderGroup.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnHeaderGroup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnNodeUI.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/DataView-more.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/DataView-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldLabeler.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldLabeler.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldReplicator.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldReplicator.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Focus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Focus.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupSummary.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupSummary.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTabPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTabPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/LockingGridView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/LockingGridView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PagingMemoryProxy.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PagingMemoryProxy.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portal.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portlet.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portlet.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowEditor.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowEditor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowExpander.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowExpander.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/get-images.php $(DESTDIR)$(prefix)/lib/ext3/examples/view/get-images.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/selected.gif $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/selected.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/dance_fever.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/dance_fever.jpg
@@ -4983,17 +5013,20 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/zack_hat.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/zack_hat.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/zack_sink.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/zack_sink.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/zacks_grill.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/zacks_grill.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.html $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser-example.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser-example.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/chooser.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/chooser.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/data-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/data-view.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.css $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/list-view.js $(DESTDIR)$(prefix)/lib/ext3/examples/view/list-view.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/gmap.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/gmap.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/gmap.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/gmap.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/hello.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/hello.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/hello.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/hello.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/layout.html $(DESTDIR)$(prefix)/lib/ext3/examples/window/layout.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/gmap.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/gmap.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/hello.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/hello.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/window/layout.js $(DESTDIR)$(prefix)/lib/ext3/examples/window/layout.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/UserForm.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/UserForm.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/UserGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/UserGrid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/app.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/app.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/remote/app/controllers/users.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/app/controllers/users.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/remote/app/models/user.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/app/models/user.php
@@ -5004,12 +5037,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/remote/lib/response.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/lib/response.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/remote/lib/session_db.php $(DESTDIR)$(prefix)/lib/ext3/examples/writer/remote/lib/session_db.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer-thumb.gif $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer-thumb.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.css $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.html $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/UserForm.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/UserForm.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/UserGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/UserGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.css $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/writer/writer.js $(DESTDIR)$(prefix)/lib/ext3/examples/writer/writer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/ext-all-debug.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all.js $(DESTDIR)$(prefix)/lib/ext3/ext-all.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext.jsb2 $(DESTDIR)$(prefix)/lib/ext3/ext.jsb2
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/data.js $(DESTDIR)$(prefix)/lib/ext3/examples/data.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/index.html $(DESTDIR)$(prefix)/lib/ext3/examples/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/init.js $(DESTDIR)$(prefix)/lib/ext3/examples/init.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/samples.css $(DESTDIR)$(prefix)/lib/ext3/examples/samples.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/gpl-3.0.txt $(DESTDIR)$(prefix)/lib/ext3/gpl-3.0.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/license.txt $(DESTDIR)$(prefix)/lib/ext3/license.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/pkgs/cmp-foundation-debug.js $(DESTDIR)$(prefix)/lib/ext3/pkgs/cmp-foundation-debug.js
@@ -5064,10 +5100,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/pkgs/window.js $(DESTDIR)$(prefix)/lib/ext3/pkgs/window.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/charts.swf $(DESTDIR)$(prefix)/lib/ext3/resources/charts.swf
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/README.txt $(DESTDIR)$(prefix)/lib/ext3/resources/css/README.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/debug.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all-notheme.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all-notheme.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/reset-min.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/reset-min.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/borders.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/borders.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/box.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/box.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/button.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/button.css
@@ -5118,6 +5150,59 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/toolbar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/tree.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/window.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/debug.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all-notheme.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all-notheme.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/reset-min.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/reset-min.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/borders.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/borders.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/box.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/box.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/button.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/button.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/combo.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/combo.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/core.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/core.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/date-picker.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/date-picker.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/dd.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/dd.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/debug.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/dialog.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/dialog.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/editor.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/editor.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/form.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/form.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/grid.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/grid.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/layout.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/layout.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/list-view.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/list-view.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/menu.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/menu.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/panel.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/panel.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/progress.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/progress.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/qtips.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/qtips.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/resizable.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/resizable.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/slider.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/slider.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/tabs.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/tabs.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/toolbar.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/tree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-access/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-access/window.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/borders.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/borders.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/box.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/box.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/button.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/button.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/combo.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/combo.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/core.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/core.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/date-picker.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/date-picker.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/dd.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/dd.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/debug.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/dialog.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/dialog.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/editor.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/editor.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/form.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/form.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/grid.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/grid.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/layout.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/layout.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/list-view.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/list-view.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/menu.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/menu.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/panel.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/panel.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/progress.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/progress.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/qtips.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/qtips.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/resizable.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/resizable.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/slider.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/slider.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/tabs.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/tabs.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/toolbar.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/tree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/theme-gray/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/theme-gray/window.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-access.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-access.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-blue.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-blue.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/xtheme-gray.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/xtheme-gray.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/expressinstall.swf $(DESTDIR)$(prefix)/lib/ext3/resources/expressinstall.swf
@@ -5346,20 +5431,23 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/group-cs.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/group-cs.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/group-lr.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/group-lr.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/group-tb.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/group-tb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/s-arrow-bo.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/s-arrow-bo.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/button/s-arrow-o.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/button/s-arrow-o.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/gradient-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/gradient-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/corners-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/corners-sprite.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/left-right.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/left-right.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/light-hd.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/light-hd.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/tool-sprite-tpl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/tool-sprite-tpl.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/tool-sprites.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/tool-sprites.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/tools-sprites-trans.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/tools-sprites-trans.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/top-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/top-bottom.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/top-bottom.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/top-bottom.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/white-corners-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/white-corners-sprite.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/white-left-right.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/white-left-right.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/tools-sprites-trans.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/tools-sprites-trans.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/panel/white-top-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/panel/white-top-bottom.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/qtip/bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/qtip/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/qtip/close.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/qtip/close.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/qtip/tip-anchor-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/qtip/tip-anchor-sprite.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/qtip/tip-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/qtip/tip-sprite.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/s.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/s.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/scroll-left.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/scroll-left.gif
@@ -5367,13 +5455,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/scroller-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/scroller-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-inactive-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-inactive-left-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-inactive-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-inactive-right-bg.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-left-bg.gif
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-right-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-close.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-close.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-strip-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-strip-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-strip-bg.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-strip-bg.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-strip-btm-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-strip-btm-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tabs-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tabs-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-left-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-over-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-over-left-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-over-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-over-right-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tabs/tab-btm-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tabs/tab-btm-right-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/toolbar/bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/toolbar/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/toolbar/btn-arrow-light.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/toolbar/btn-arrow-light.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/toolbar/btn-arrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/toolbar/btn-arrow.gif
@@ -5391,6 +5481,53 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/window/left-right.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/window/left-right.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/window/right-corners.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/window/right-corners.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/window/top-bottom.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/window/top-bottom.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/form/clear-trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/form/clear-trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/form/date-trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/form/date-trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/form/search-trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/form/search-trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/form/trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/form/trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/col-move-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/col-move-bottom.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/col-move-top.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/col-move-top.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-hd-btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-hd-btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-hrow-over.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-hrow-over.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-hrow-over2.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-hrow-over2.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-hrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-hrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-hrow2.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-hrow2.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-special-col-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-special-col-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-special-col-bg2.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-special-col-bg2.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/grid3-special-col-sel-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/grid3-special-col-sel-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/group-collapse.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/group-collapse.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/group-expand-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/group-expand-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/group-expand.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/group-expand.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/page-first.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/page-first.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/page-last.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/page-last.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/page-next.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/page-next.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/page-prev.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/page-prev.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/refresh.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/refresh.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/row-expand-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/row-expand-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/sort_asc.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/sort_asc.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/grid/sort_desc.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/grid/sort_desc.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/menu/group-checked.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/menu/group-checked.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/menu/item-over-disabled.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/menu/item-over-disabled.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/menu/item-over.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/menu/item-over.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/menu/menu-parent.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/menu/menu-parent.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/progress/progress-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/progress/progress-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/shared/hd-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/shared/hd-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/shared/left-btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/shared/left-btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/shared/right-btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/shared/right-btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/e-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/e-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/ne-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/ne-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/nw-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/nw-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/s-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/s-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/se-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/se-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/square.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/square.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/sizer/sw-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/sizer/sw-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/slider/slider-thumb.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/slider/slider-thumb.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/slider/slider-v-thumb.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/slider/slider-v-thumb.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tree/arrows.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tree/arrows.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tree/elbow-end-minus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tree/elbow-end-minus-nl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tree/elbow-end-minus.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tree/elbow-end-minus.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tree/elbow-end-plus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tree/elbow-end-plus-nl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/gray/tree/elbow-end-plus.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/gray/tree/elbow-end-plus.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/bg-center.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/bg-center.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/bg-left.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/bg-left.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/bg-right.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/bg-right.gif
@@ -5439,6 +5576,186 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/tabs/tab-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/tabs/tab-sprite.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/toolbar/gray-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar/gray-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/toolbar/tb-btn-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar/tb-btn-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/corners-blue.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/corners-blue.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/corners.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/corners.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/l-blue.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/l-blue.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/l.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/l.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/r-blue.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/r-blue.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/r.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/r.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/tb-blue.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/tb-blue.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/box/tb.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/box/tb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/arrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/arrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/group-cs.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/group-cs.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/group-lr.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/group-lr.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/group-tb.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/group-tb.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/s-arrow-b-noline.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/s-arrow-b-noline.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/s-arrow-b.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/s-arrow-b.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/s-arrow-bo.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/s-arrow-bo.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/s-arrow-noline.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/s-arrow-noline.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/s-arrow-o.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/s-arrow-o.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/button/s-arrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/button/s-arrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/editor/tb-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/editor/tb-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/checkbox.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/checkbox.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/clear-trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/clear-trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/clear-trigger.psd $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/clear-trigger.psd
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/date-trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/date-trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/date-trigger.psd $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/date-trigger.psd
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/error-tip-corners.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/error-tip-corners.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/exclamation.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/exclamation.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/radio.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/radio.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/search-trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/search-trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/search-trigger.psd $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/search-trigger.psd
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/text-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/text-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/trigger-tpl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/trigger-tpl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/trigger.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/trigger.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/form/trigger.psd $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/form/trigger.psd
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/arrow-left-white.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/arrow-left-white.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/arrow-right-white.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/arrow-right-white.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/col-move-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/col-move-bottom.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/col-move-top.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/col-move-top.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/columns.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/columns.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/dirty.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/dirty.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/done.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/done.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/drop-no.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/drop-no.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/drop-yes.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/drop-yes.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/footer-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/footer-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid-blue-hd.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid-blue-hd.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid-blue-split.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid-blue-split.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid-hrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid-hrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid-loading.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid-loading.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid-split.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid-split.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid-vista-hd.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid-vista-hd.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid3-hd-btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid3-hd-btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid3-hrow-over.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid3-hrow-over.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid3-hrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid3-hrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid3-special-col-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid3-special-col-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/grid3-special-col-sel-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/grid3-special-col-sel-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/group-by.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/group-by.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/group-collapse.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/group-collapse.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/group-expand-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/group-expand-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/group-expand.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/group-expand.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hd-pop.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hd-pop.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hmenu-asc.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hmenu-asc.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hmenu-desc.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hmenu-desc.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hmenu-lock.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hmenu-lock.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hmenu-lock.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hmenu-lock.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hmenu-unlock.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hmenu-unlock.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/hmenu-unlock.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/hmenu-unlock.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/invalid_line.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/invalid_line.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/loading.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/loading.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/mso-hd.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/mso-hd.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/nowait.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/nowait.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-first-disabled.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-first-disabled.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-first.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-first.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-last-disabled.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-last-disabled.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-last.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-last.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-next-disabled.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-next-disabled.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-next.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-next.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-prev-disabled.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-prev-disabled.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/page-prev.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/page-prev.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/pick-button.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/pick-button.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/refresh.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/refresh.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/row-check-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/row-check-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/row-expand-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/row-expand-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/row-over.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/row-over.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/row-sel.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/row-sel.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/sort-hd.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/sort-hd.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/sort_asc.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/sort_asc.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/sort_desc.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/sort_desc.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/grid/wait.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/grid/wait.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/menu/checked.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu/checked.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/menu/group-checked.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu/group-checked.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/menu/item-over.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu/item-over.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/menu/menu-parent.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu/menu-parent.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/menu/menu.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu/menu.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/menu/unchecked.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/menu/unchecked.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/corners-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/corners-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/left-right.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/left-right.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/light-hd.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/light-hd.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/tool-sprite-tpl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/tool-sprite-tpl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/tool-sprites.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/tool-sprites.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/tools-sprites-trans.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/tools-sprites-trans.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/top-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/top-bottom.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/white-corners-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/white-corners-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/white-left-right.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/white-left-right.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/panel/white-top-bottom.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/panel/white-top-bottom.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/progress/progress-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/progress/progress-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/qtip/close.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/qtip/close.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/qtip/tip-anchor-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/qtip/tip-anchor-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/qtip/tip-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/qtip/tip-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/shared/glass-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/shared/glass-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/shared/hd-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/shared/hd-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/shared/left-btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/shared/left-btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/shared/right-btn.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/shared/right-btn.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/e-handle-dark.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/e-handle-dark.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/e-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/e-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/ne-handle-dark.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/ne-handle-dark.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/ne-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/ne-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/nw-handle-dark.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/nw-handle-dark.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/nw-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/nw-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/s-handle-dark.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/s-handle-dark.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/s-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/s-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/se-handle-dark.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/se-handle-dark.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/se-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/se-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/square.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/square.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/sw-handle-dark.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/sw-handle-dark.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/sizer/sw-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/sizer/sw-handle.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/slider/slider-bg.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/slider/slider-bg.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/slider/slider-thumb.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/slider/slider-thumb.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/slider/slider-v-bg.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/slider/slider-v-bg.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/slider/slider-v-thumb.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/slider/slider-v-thumb.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/scroll-left.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/scroll-left.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/scroll-right.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/scroll-right.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-btm-inactive-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-btm-inactive-left-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-btm-inactive-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-btm-inactive-right-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-btm-left-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-btm-left-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-btm-right-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-btm-right-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-close.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-close.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-strip-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-strip-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tab-strip-btm-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tab-strip-btm-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tabs/tabs-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tabs/tabs-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/btn-arrow-light.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/btn-arrow-light.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/btn-arrow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/btn-arrow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/btn-over-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/btn-over-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/gray-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/gray-bg.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/more.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/more.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/s-arrow-bo.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/s-arrow-bo.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/tb-btn-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/tb-btn-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/tb-xl-btn-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/tb-xl-btn-sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/toolbar/tb-xl-sep.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/toolbar/tb-xl-sep.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/arrows.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/arrows.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/drop-add.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/drop-add.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/drop-between.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/drop-between.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/drop-no.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/drop-no.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/drop-over.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/drop-over.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/drop-under.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/drop-under.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/drop-yes.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/drop-yes.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-end-minus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-end-minus-nl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-end-minus.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-end-minus.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-end-plus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-end-plus-nl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-end-plus.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-end-plus.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-end.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-end.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-line.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-line.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-minus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-minus-nl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-minus.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-minus.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-plus-nl.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-plus-nl.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow-plus.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow-plus.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/elbow.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/elbow.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/folder-open.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/folder-open.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/folder.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/folder.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/leaf.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/leaf.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/loading.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/loading.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/tree/s.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/tree/s.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/icon-error.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/icon-error.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/icon-info.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/icon-info.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/icon-question.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/icon-question.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/icon-warning.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/icon-warning.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/left-corners.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/left-corners.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/left-right.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/left-right.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/right-corners.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/right-corners.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/access/window/top-bottom.png $(DESTDIR)$(prefix)/lib/ext3/resources/images/access/window/top-bottom.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/resources.jsb $(DESTDIR)$(prefix)/lib/ext3/resources/resources.jsb
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-ajax.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-ajax.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-anim-extra.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-anim-extra.js
@@ -5453,6 +5770,20 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/jquery-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/jquery-bridge.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/prototype-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/prototype-bridge.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/yui-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/yui-bridge.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/CompositeElementLite.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/CompositeElementLite.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomHelper.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomHelper.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomQuery.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomQuery.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.fx.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.insertion.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.insertion.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.position.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.position.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.scroll.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.scroll.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.style.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.style.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.traversal.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.traversal.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/EventManager.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/EventManager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Ext.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Ext.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Fx.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Template.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Template.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/CompositeElement.js $(DESTDIR)$(prefix)/lib/ext3/src/core/CompositeElement.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/CompositeElementLite-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/CompositeElementLite-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/DomHelper-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/DomHelper-more.js
@@ -5471,20 +5802,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/EventManager-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/EventManager-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Ext-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Ext-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Template-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Template-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/CompositeElementLite.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/CompositeElementLite.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomHelper.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomHelper.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomQuery.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomQuery.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.fx.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.insertion.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.insertion.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.position.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.position.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.scroll.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.scroll.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.style.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.style.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.traversal.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.traversal.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/EventManager.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/EventManager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Ext.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Ext.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Fx.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Template.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Template.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/core/Connection.js $(DESTDIR)$(prefix)/lib/ext3/src/data/core/Connection.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/Api.js $(DESTDIR)$(prefix)/lib/ext3/src/data/Api.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/ArrayReader.js $(DESTDIR)$(prefix)/lib/ext3/src/data/ArrayReader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/ArrayStore.js $(DESTDIR)$(prefix)/lib/ext3/src/data/ArrayStore.js
@@ -5511,7 +5829,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/XmlReader.js $(DESTDIR)$(prefix)/lib/ext3/src/data/XmlReader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/XmlStore.js $(DESTDIR)$(prefix)/lib/ext3/src/data/XmlStore.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/XmlWriter.js $(DESTDIR)$(prefix)/lib/ext3/src/data/XmlWriter.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/core/Connection.js $(DESTDIR)$(prefix)/lib/ext3/src/data/core/Connection.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/DDCore.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/DDCore.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/DragSource.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/DragSource.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/DragTracker.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/DragTracker.js
@@ -5521,7 +5838,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/Registry.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/Registry.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/ScrollManager.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/ScrollManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/dd/StatusProxy.js $(DESTDIR)$(prefix)/lib/ext3/src/dd/StatusProxy.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/debug.js $(DESTDIR)$(prefix)/lib/ext3/src/debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/direct/Direct.js $(DESTDIR)$(prefix)/lib/ext3/src/direct/Direct.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/direct/Event.js $(DESTDIR)$(prefix)/lib/ext3/src/direct/Event.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/direct/JsonProvider.js $(DESTDIR)$(prefix)/lib/ext3/src/direct/JsonProvider.js
@@ -5577,6 +5893,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/CookieProvider.js $(DESTDIR)$(prefix)/lib/ext3/src/state/CookieProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/Provider.js $(DESTDIR)$(prefix)/lib/ext3/src/state/Provider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/StateManager.js $(DESTDIR)$(prefix)/lib/ext3/src/state/StateManager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/DelayedTask.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/DelayedTask.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/JSON.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/JSON.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/Observable.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/Observable.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/TaskMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/TaskMgr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/CSS.js $(DESTDIR)$(prefix)/lib/ext3/src/util/CSS.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/ClickRepeater.js $(DESTDIR)$(prefix)/lib/ext3/src/util/ClickRepeater.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/Cookies.js $(DESTDIR)$(prefix)/lib/ext3/src/util/Cookies.js
@@ -5590,39 +5910,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/TextMetrics.js $(DESTDIR)$(prefix)/lib/ext3/src/util/TextMetrics.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/UpdateManager.js $(DESTDIR)$(prefix)/lib/ext3/src/util/UpdateManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/XTemplate.js $(DESTDIR)$(prefix)/lib/ext3/src/util/XTemplate.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/DelayedTask.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/DelayedTask.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/JSON.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/JSON.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/Observable.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/Observable.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/util/core/TaskMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/util/core/TaskMgr.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Action.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Action.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/BoxComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/BoxComponent.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Button.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Button.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ButtonGroup.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ButtonGroup.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ColorPalette.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ColorPalette.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Component.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Component.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ComponentMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ComponentMgr.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Container.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Container.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/CycleButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/CycleButton.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DataView.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DataView.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DatePicker.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DatePicker.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Editor.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Editor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Layer.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Layer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/LoadMask.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/LoadMask.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/MessageBox.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/MessageBox.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PagingToolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PagingToolbar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Panel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Panel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PanelDD.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PanelDD.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ProgressBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ProgressBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Resizable.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Resizable.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Shadow.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Shadow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Slider.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Slider.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitButton.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/TabPanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/TabPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Toolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Toolbar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Viewport.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Viewport.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Window.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Window.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/WindowManager.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/WindowManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/chart/Chart.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/chart/Chart.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/chart/EventProxy.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/chart/EventProxy.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/chart/FlashComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/chart/FlashComponent.js
@@ -5667,6 +5954,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AbsoluteLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AbsoluteLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AccordionLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AccordionLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AnchorLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AnchorLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/AutoLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/AutoLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/BorderLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/BorderLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/BoxLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/BoxLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/CardLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/CardLayout.js
@@ -5674,7 +5962,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/ContainerLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/ContainerLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/FitLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/FitLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/FormLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/FormLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/MenuLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/MenuLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/TableLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/TableLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/layout/ToolbarLayout.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/layout/ToolbarLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/list/Column.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/list/Column.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/list/ColumnResizer.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/list/ColumnResizer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/list/ListView.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/list/ListView.js
@@ -5704,6 +5994,55 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreePanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreePanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreeSelectionModel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreeSelectionModel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreeSorter.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreeSorter.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Action.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Action.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/BoxComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/BoxComponent.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Button.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Button.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ButtonGroup.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ButtonGroup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ColorPalette.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ColorPalette.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Component.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Component.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ComponentMgr.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ComponentMgr.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Container.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Container.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/CycleButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/CycleButton.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DataView.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DataView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/DatePicker.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/DatePicker.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Editor.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Editor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Layer.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Layer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/LoadMask.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/LoadMask.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/MessageBox.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/MessageBox.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PagingToolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PagingToolbar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Panel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Panel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PanelDD.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PanelDD.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ProgressBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ProgressBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Resizable.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Resizable.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Shadow.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Shadow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Slider.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Slider.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitButton.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/TabPanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/TabPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Toolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Toolbar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Viewport.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Viewport.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Window.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Window.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/WindowManager.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/WindowManager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/debug.js $(DESTDIR)$(prefix)/lib/ext3/src/debug.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/ext-all-debug.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext-all.js $(DESTDIR)$(prefix)/lib/ext3/ext-all.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/ext.jsb2 $(DESTDIR)$(prefix)/lib/ext3/ext.jsb2
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/index.html $(DESTDIR)$(prefix)/lib/ext3/index.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/bg-x.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/bg-x.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/button_join_us.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/button_join_us.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/comm.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/comm.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/h_engage.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/h_engage.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/h_engage_ie6.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/h_engage_ie6.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/h_learn.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/h_learn.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/h_learn_ie6.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/h_learn_ie6.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/h_license.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/h_license.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/h_license_ie6.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/h_license_ie6.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/header.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/header.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/header_ie6.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/header_ie6.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/li.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/li.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/social_sprite.gif $(DESTDIR)$(prefix)/lib/ext3/welcome/images/social_sprite.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/social_sprite.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/social_sprite.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/whiteout.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/whiteout.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example1.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example2.html $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example2.html
@@ -7483,7 +7822,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/en.po $(DESTDIR)$(prefix)/res/i18n/po/en.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/updatepo.sh $(DESTDIR)$(prefix)/res/i18n/updatepo.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-custom.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-custom.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-template.xml
@@ -7492,4 +7830,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-servicegroup-summary-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-cv.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/res/xml/icinga-tactical-overview-template-hg.xml
 # INSTALL_FILES_END
