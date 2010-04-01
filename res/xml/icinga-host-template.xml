@@ -226,7 +226,6 @@
        		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
        		<parameter name="custom_variable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="custom_variable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
-       		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
        	</parameter>
     </datasource>
     

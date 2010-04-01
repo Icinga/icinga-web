@@ -18,13 +18,13 @@
 		<datasource id="HG_NAME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOSTGROUP</target>
-			<columns>HOSTGROUP_ALIAS</columns>
+			<columns>HOSTGROUP_ALIAS, HOSTGROUP_NAME</columns>
 		</datasource>
 
 		<datasource id="SG_NAME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICEGROUP</target>
-			<columns>SERVICEGROUP_ALIAS</columns>
+			<columns>SERVICEGROUP_ALIAS, SERVICEGROUP_NAME</columns>
 		</datasource>
 
 		<datasource id="HOST_STATUS_UP">
@@ -263,19 +263,19 @@
     							<div class="icinga-status-label"><b>${HG_NAME:HOSTGROUP_ALIAS} - Hosts</b></div>
     							
 								${if:${HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}
-									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-UP" class="icinga-status icinga-status-up icinga-link"><span>
+									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-UP" class="icinga-status icinga-status-up"><span>
 										${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP
 									</span></div>
 								${/if}
 								
 								${if:${HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}
-									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>
+									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-DOWN" class="icinga-status icinga-status-down"><span>
 										${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN
 									</span></div>
 								${/if}
 								
 								${if:${HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}
-									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>
+									<div id="tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-UNREACHABLE" class="icinga-status icinga-status-unreachable"><span>
 										${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE
 									</span></div>
 								${/if}
@@ -286,25 +286,25 @@
     							<div class="icinga-status-label"><b>${HG_NAME:HOSTGROUP_ALIAS} - Services</b></div>
     							
 								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-OK" class="icinga-status icinga-status-ok icinga-link"><span>
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-OK" class="icinga-status icinga-status-ok"><span>
 										${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-WARNING" class="icinga-status icinga-status-warning"><span>
 										${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-CRITICAL" class="icinga-status icinga-status-critical"><span>
 										${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>
+									<div id="tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-UNKNOWN" class="icinga-status icinga-status-unknown"><span>
 										${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN
 									</span></div>
 								${/if}
@@ -312,7 +312,26 @@
 						</td>
 					</tr>
 				</table>
-				
+				<script type="text/javascript">
+					Ext.onReady(function() {
+						var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+						var s = {OK:0,WARNING:1,CRITICAL:2,UNKNOWN:3};
+						var h = {UP:0,DOWN:1,UNREACHABLE:2};
+						var r = {
+							'tohg-services-${HG_NAME:HOSTGROUP_ALIAS}-': ['icinga-service-template', s, 'service_status'],
+							'tohg-hosts-${HG_NAME:HOSTGROUP_ALIAS}-': ['icinga-host-template', h, 'host_status']
+						};
+						
+						Ext.iterate(r, function (ip, m) {
+							Ext.iterate(m[1], function(sn, si) {
+								var f = { 'hostgroup_name': '${HG_NAME:HOSTGROUP_NAME}' };
+								f[m[2]] = si;
+								log(f);
+								l(ip+sn, m[0], f, '${HG_NAME:HOSTGROUP_NAME} ' + sn);
+							});
+						});
+					});
+				</script>
     		]]>
     	</hg_status>
 
@@ -325,19 +344,19 @@
     							<div class="icinga-status-label">${SG_NAME:SERVICEGROUP_ALIAS} - Hosts</div>
     							
 								${if:${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} > 0}
-									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-UP" class="icinga-status icinga-status-up icinga-link"><span>
+									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-UP" class="icinga-status icinga-status-up"><span>
 										${SERVICE_HOST_STATUS_UP:COUNT_HOST_OBJECT_ID} UP
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} > 0}
-									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-DOWN" class="icinga-status icinga-status-down icinga-link"><span>
+									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-DOWN" class="icinga-status icinga-status-down"><span>
 										${SERVICE_HOST_STATUS_DOWN:COUNT_HOST_OBJECT_ID} DOWN
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} > 0}
-									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-UNREACHABLE" class="icinga-status icinga-status-unreachable icinga-link"><span>
+									<div id="tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-UNREACHABLE" class="icinga-status icinga-status-unreachable"><span>
 										${SERVICE_HOST_STATUS_UNREACHABLE:COUNT_HOST_OBJECT_ID} UNREACHABLE
 									</span></div>
 								${/if}
@@ -348,25 +367,25 @@
     							<div class="icinga-status-label">${SG_NAME:SERVICEGROUP_ALIAS} - Services</div>
     							
 								${if:${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-OK" class="icinga-status icinga-status-ok icinga-link"><span>
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-OK" class="icinga-status icinga-status-ok"><span>
 										${SERVICE_STATUS_OK:COUNT_SERVICE_OBJECT_ID} OK
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-WARNING" class="icinga-status icinga-status-warning icinga-link"><span>
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-WARNING" class="icinga-status icinga-status-warning"><span>
 										${SERVICE_STATUS_WARNING:COUNT_SERVICE_OBJECT_ID} WARNING
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-CRITICAL" class="icinga-status icinga-status-critical icinga-link"><span>
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-CRITICAL" class="icinga-status icinga-status-critical"><span>
 										${SERVICE_STATUS_CRITICAL:COUNT_SERVICE_OBJECT_ID} CRITICAL
 									</span></div>
 								${/if}
 								
 								${if:${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} > 0}
-									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-UNKNOWN" class="icinga-status icinga-status-unknown icinga-link"><span>
+									<div id="tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-UNKNOWN" class="icinga-status icinga-status-unknown"><span>
 										${SERVICE_STATUS_UNKNOWN:COUNT_SERVICE_OBJECT_ID} UNKNOWN
 									</span></div>
 								${/if}
@@ -374,6 +393,26 @@
 						</td>
 					</tr>
 				</table>
+				<script type="text/javascript">
+					Ext.onReady(function() {
+						var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+						var s = {OK:0,WARNING:1,CRITICAL:2,UNKNOWN:3};
+						var h = {UP:0,DOWN:1,UNREACHABLE:2};
+						var r = {
+							'tosg-services-${SG_NAME:SERVICEGROUP_ALIAS}-': ['icinga-service-template', s, 'service_status'],
+							// 'tosg-hosts-${SG_NAME:SERVICEGROUP_ALIAS}-': ['icinga-host-template', h, 'host_status']
+						};
+						
+						Ext.iterate(r, function (ip, m) {
+							Ext.iterate(m[1], function(sn, si) {
+								var f = { 'servicegroup_name': '${SG_NAME:SERVICEGROUP_NAME}' };
+								f[m[2]] = si;
+								log(f);
+								l(ip+sn, m[0], f, '${SG_NAME:SERVICEGROUP_NAME} ' + sn);
+							});
+						});
+					});
+				</script>
     		]]>
     	</sg_status>
 

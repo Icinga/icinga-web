@@ -410,7 +410,7 @@ class IcingaTemplateWorker {
 		}
 		
 		if (!$new_field) {
-			throw new IcingaTemplateWorkerException('Could not determine the icinga api field');
+			throw new IcingaTemplateWorkerException('Could not determine the icinga api field for '. $field);
 		}
 		
 		// Add or replace some asterix within count
