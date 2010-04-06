@@ -212,9 +212,13 @@ class AppKit {
 	 */
 	private static function initAutoSettings() {
 		// Try to set the web path to correct urls within the frontend
-		if (AgaviConfig::get('de.icinga.appkit.web_path') == null) {
-			AgaviConfig::set('de.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
+		if(AgaviConfig::get('core.default_context') =='web') {
+			// Try to set the web path to correct urls within the frontend
+			if (AgaviConfig::get('de.icinga.appkit.web_path') == null) {
+				AgaviConfig::set('de.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
+			}
 		}
+		
 		
 		// Version
 		$version = sprintf(

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/factories/1.0">
 	
-	<ae:configuration>
+	<ae:configuration >
 		
 		<controller class="AgaviController" />
 		
@@ -58,6 +58,14 @@
 			-->
 		</validation_manager>
 		
+	</ae:configuration>
+	
+	<ae:configuration context="console">
+		<request class="AgaviConsoleRequest" />
+		<response class="AgaviConsoleResponse" />
+		<routing class="AgaviConsoleRouting" />
+		<user class="AppKitSecurityUser" />
+		<logger_manager class="AppKitLoggerManager" />
 	</ae:configuration>
 	
 </ae:configurations>
