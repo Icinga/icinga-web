@@ -22,7 +22,7 @@ function CronkTrigger (config) {
 		switch (thisConfig.objectType) {
 			case "host":
 				thisConfig.idPrefix = "servicesForHost";
-				thisConfig.titlePrefix = "Services for ";
+				thisConfig.titlePrefix = _("Services for ");
 				thisConfig.targetTemplate = "icinga-service-template";
 				thisConfig.targetField = "host_object_id";
 				break;

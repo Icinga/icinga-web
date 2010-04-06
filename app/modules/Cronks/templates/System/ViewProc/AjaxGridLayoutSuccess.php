@@ -52,16 +52,16 @@
 				
 					this.topToolbar.add([
 						'-', {
-							text: '<?php echo $tm->_("Filter"); ?>',
+							text: _("Filter"),
 							iconCls: 'silk-pencil',
 							menu: { 
 								items: [{ 
-									text: '<?php echo $tm->_("Modify"); ?>', 
+									text: _("Modify"), 
 									iconCls: 'silk-application-form',
 									handler: fw.startHandler,
 									scope: this
 								},{ 
-									text: '<?php echo $tm->_("Remove"); ?>', 
+									text: _("Remove"), 
 									iconCls: 'silk-cancel',
 									handler: function(b, e) {
 										fw.removeFilters();

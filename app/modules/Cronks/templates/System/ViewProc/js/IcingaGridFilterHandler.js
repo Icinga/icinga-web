@@ -52,7 +52,7 @@ var IcingaGridFilterWindow = function() {
 	function oWindow() {
 		if (!oWin) {
 			oWin = new Ext.Window({
-				title: '<?php echo $tm->_("Modify filter"); ?>',
+				title: _("Modify filter"),
 				closeAction: 'hide',
 				width: 500,
 				autoHeight: true,
@@ -115,19 +115,19 @@ var IcingaGridFilterWindow = function() {
 				
 				bbar: {
 					items: [{
-						text: '<?php echo $tm->_("Apply"); ?>',
+						text: _("Apply"),
 						iconCls: 'silk-accept',
 						handler: function(b, e) {
 							pub.applyFilters();
 						}
 					},{
-						text: '<?php echo $tm->_("Discard"); ?>',
+						text: _("Discard"),
 						iconCls: 'silk-cross',
 						handler: function(b, y) {
 							oWin.hide();
 						}
 					}, '-',{
-						text: '<?php echo $tm->_("Reset"); ?>',
+						text: _("Reset"),
 						iconCls: 'silk-delete',
 						handler: function(b, y) {
 							pub.resetFilterForm();
@@ -180,7 +180,7 @@ var IcingaGridFilterWindow = function() {
 				forceSelection: true,
 				
 				
-				fieldLabel: '<?php echo $tm->_("Add restriction"); ?>',
+				fieldLabel: _("Add restriction"),
 				
 				valueField: 'fType',
 				displayField: 'fLabel',

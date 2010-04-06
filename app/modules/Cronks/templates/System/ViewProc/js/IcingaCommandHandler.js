@@ -87,10 +87,10 @@ IcingaCommandHandler.prototype = {
 						idIndex: 0,
 						fields: ['fId', 'fStatus', 'fLabel'],
 						data: [
-							['1', '0', '(default) no option'],
-							['2', '1', 'Broadcast'],
-							['3', '2', 'Forced'],
-							['4', '4', 'Increment current notification']
+							['1', '0', _('(default) no option')],
+							['2', '1', _('Broadcast')],
+							['3', '2', _('Forced')],
+							['4', '4', _('Increment current notification')]
 						]
 					}),
 					
@@ -123,11 +123,11 @@ IcingaCommandHandler.prototype = {
 						idIndex: 0,
 						fields: ['fId', 'fStatus', 'fLabel'],
 						data: [
-							['1', '0', 'OK'],
-							['2', '1', 'Warning'],
-							['3', '2', 'Critical'],
-							['4', '3', 'Unknown'],
-							['5', '255', 'Return code out of bounds']
+							['1', '0', _('OK')],
+							['2', '1', _('Warning')],
+							['3', '2', _('Critical')],
+							['4', '3', _('Unknown')],
+							['5', '255', _('Return code out of bounds')]
 						]
 					}),
 					
@@ -167,8 +167,8 @@ IcingaCommandHandler.prototype = {
 					name: o.FieldName + '-group',
 					columns: 2,
 					items: [
-						{boxLabel: 'Yes', inputValue: 1, name: o.fieldName},
-						{boxLabel: 'No', inputValue: 0, name: o.fieldName, checked: true},
+						{boxLabel: _('Yes'), inputValue: 1, name: o.fieldName},
+						{boxLabel: _('No'), inputValue: 0, name: o.fieldName, checked: true},
 					]
 				});
 				
