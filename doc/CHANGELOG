@@ -171,4 +171,7 @@
      * 2010-04-06
        * Filter window height sync fix (finally)
        * SQL constants for 'not is' (API patch created, fixes #362)
+       * Merge with plugin architecture (rel #338)
+       * Search object status (fixes #339)
+       * Global icinga status js object
        

@@ -46,6 +46,7 @@
 	    			{name: 'object_name'},
 	    			{name: 'description'},
 	    			{name: 'object_name2'},
+	    			{name: 'object_status'},
 	    			
 	    			{name: 'data1'},
 	    			{name: 'data2'},
@@ -89,7 +90,8 @@
 					    '<tpl for=".">',
 					        '<div class="icinga-osearch-wrap" id="{object_name}">',
 					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
-					        '<div><span>{object_short_name}</span><br /><span>({data1})</span></div></div>',
+					        '<div><span>{object_short_name}</span><br /><span>({data1})</span><br />{object_status}</div>',
+					        '</div>',
 					    '</tpl>',
 					    '<div class="x-clear"></div>'
 					);
@@ -100,7 +102,8 @@
 					    '<tpl for=".">',
 					        '<div class="icinga-osearch-wrap" id="{object_name}" ext:qtip="{description}">',
 					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
-					        '<div><span>{object_short_name}</span><br /><span>({object_name2})</span></div></div>',
+					        '<div><span>{object_short_name}</span><br /><span>({object_name2})</span><br />{object_status}</div>', 
+					        '</div>',
 					    '</tpl>',
 					    '<div class="x-clear"></div>'
 					);
@@ -153,6 +156,10 @@
 						
 						if (type == 'host') {
 							data.description = String.format('{0}, {1}', data.description, data.data1);
+						}
+						
+						if (data.object_status) {
+							data.object_status = Icinga.StatusData.wrapText(type, data.object_status);
 						}
 						
 						return data;

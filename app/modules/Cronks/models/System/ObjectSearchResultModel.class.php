@@ -35,13 +35,13 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 				'object_name'	=> 'HOST_NAME',
 				'object_id'		=> 'HOST_OBJECT_ID',
 				'description'	=> 'HOST_ALIAS',
-	
-				'data1'			=> 'HOST_ADDRESS'
+				'data1'			=> 'HOST_ADDRESS',
+				'object_status'	=> 'HOST_CURRENT_STATE'
 			),
 			
 			'security'		=> array(
 				'IcingaHostgroup',
-				'IcingaCustomVariablePair',
+				'IcingaHostCustomVariablePair',
 				'IcingaContactgroup'
 			)
 		),
@@ -54,13 +54,15 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 				'object_name'	=> 'SERVICE_NAME',
 				'object_id'		=> 'SERVICE_OBJECT_ID',
 				'object_name2'	=> 'HOST_NAME',
-				'description'	=> 'SERVICE_DISPLAY_NAME'
+				'description'	=> 'SERVICE_DISPLAY_NAME',
+				'object_status'	=> 'SERVICE_CURRENT_STATE'
+		
 			),
 			
 			'security'		=> array(
 				'IcingaHostgroup',
 				'IcingaServicegroup',
-				'IcingaCustomVariablePair',
+				'IcingaServiceCustomVariablePair',
 				'IcingaContactgroup'
 			)
 		),

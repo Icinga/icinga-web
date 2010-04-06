@@ -16,6 +16,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/template
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/view
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/icinga/js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/model
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/view
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules
@@ -968,10 +969,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/validators.xml $(DESTDIR)$(prefix)/app/config/validators.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
@@ -1004,6 +1005,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderLink.class.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderLink.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/lib/icinga/IcingaBaseException.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/js/StatusData.js $(DESTDIR)$(prefix)/app/lib/icinga/js/StatusData.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/model/ICINGABaseModel.class.php $(DESTDIR)$(prefix)/app/lib/model/ICINGABaseModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/view/ICINGABaseView.class.php $(DESTDIR)$(prefix)/app/lib/view/ICINGABaseView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/EditAction.class.php
@@ -1231,11 +1233,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/view/ICINGACronksBaseView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/lib/view/ICINGACronksBaseView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CommandInfoModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CommandInfoModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CommandSenderModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CommandSenderModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ObjectSearchResultModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ObjectSearchResultModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusMapModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusMapModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusSummaryModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusSummaryModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ViewProcFilterParamsModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ViewProcFilterParamsModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ObjectSearchResultModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ObjectSearchResultModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js
@@ -1248,8 +1250,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusSummarySuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusSummarySuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProcSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProcSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkLoaderSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkLoaderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/IframeViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/IframeViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php

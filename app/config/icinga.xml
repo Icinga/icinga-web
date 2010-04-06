@@ -170,6 +170,9 @@
 			
 			<!-- jsgettext -->
 			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
+			
+			<!--  ICINGA JS -->
+			<parameter>%core.app_dir%/lib/icinga/js/StatusData.js</parameter>
 		</parameter>
 		
 		<parameter name="inline">

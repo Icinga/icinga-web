@@ -10,13 +10,21 @@ body * {
 div.icinga-osearch-frame div.icinga-osearch-wrap {
 	float: left;
 	margin: 4px;
-	margin-right: 0;
 	padding: 5px;
-
+	border: 1px #c0c0c0 solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	cursor: pointer;
 }
 
-div.icinga-osearch-frame div.icinga-osearch-wrap img {
-	text-align: center;	
+div.icinga-osearch-frame div.icinga-osearch-wrap div.thumb {
+	padding: 0px auto 0px auto;
+	text-align:center;
+}
+
+div.icinga-osearch-frame div.icinga-osearch-wrap div {
+	padding: 0px auto 0px auto;
+	text-align:center;
 }
 
 div.icinga-osearch-frame .x-view-over {
@@ -25,7 +33,7 @@ div.icinga-osearch-frame .x-view-over {
 }
 
 div.icinga-osearch-frame .x-view-selected {
-	background-color: #F5A9A9;
+	background-color: #ffcc00;
 	padding: 5px;
 }
 
@@ -34,6 +42,15 @@ div.cronk-data-view div.cronk-preview {
 	margin-right: 0;
 	margin: 5px;
 	padding: 5px;
+	border: 1px #c0c0c0 solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	cursor: pointer;
+}
+
+div.cronk-data-view div.cronk-preview div.thumb {
+	padding: 0px auto 0px auto;
+	text-align:center;
 }
 
 div.cronk-data-view div.cronk-preview span {
@@ -48,7 +65,7 @@ div.cronk-data-view .x-view-over{
 }
 
 div.cronk-data-view .x-view-selected{
-	background: #eff5fb  no-repeat right bottom;
+	background-color: #ffcc00;
 	padding: 4px;
 }
 
@@ -113,7 +130,7 @@ div.icinga-status {
 	-webkit-border-radius: 5px;
 }
 
-div.icinga-status span {
+div.icinga-status span, span.icinga-status {
 	font-size: 8pt;
 }
 
@@ -121,8 +138,16 @@ div.icinga-status-ok, div.servicechart-0 {
 	background-color: #00cc00;
 }
 
+span.icinga-status-ok {
+	color: #00cc00;
+}
+
 div.icinga-status-warning, div.servicechart-1 {
 	background-color: #ffff00;
+}
+
+span.icinga-status-warning {
+	color: #ffff00;
 }
 
 div.icinga-status-critical, div.servicechart-2 {
@@ -130,12 +155,24 @@ div.icinga-status-critical, div.servicechart-2 {
 	color: #fff;
 }
 
+span.icinga-status-critical {
+	color: #ff0000;
+}
+
 div.icinga-status-up, div.hostchart-0 {
 	background-color: #00cc00;
 }
 
+span.icinga-status-up {
+	color: #00cc00;
+}
+
 div.icinga-status-down, div.hostchart-1 {
 	background-color: #cc0000;
+}
+
+span.icinga-status-down {
+	color: #cc0000;
 }
 
 div.icinga-status-down span {
@@ -146,8 +183,16 @@ div.icinga-status-unreachable, div.hostchart-2 {
 	background-color: #ff8000;
 }
 
+span.icinga-status-unreachable {
+	color: #ff8000;
+}
+
 div.icinga-status-unknown, div.servicechart-3 {
 	background-color: #ff8000;
+}
+
+span.icinga-status-unknown {
+	color: #ff8000;
 }
 
 div.hostchart-0, div.hostchart-1, div.hostchart-2,
