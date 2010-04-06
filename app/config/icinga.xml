@@ -5,7 +5,6 @@
 -->
 
 <settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
-
 	<!--
 		Add more links under 'home'
 		* The home itself points to index_page route
@@ -67,6 +66,7 @@
 	-->
 	<setting name="appkit.menu_extender">
 		<parameter>IcingaMenuExtender</parameter>
+
 	</setting>
 
 	<!-- 
@@ -75,10 +75,28 @@
 	-->
 	<setting name="appkit.custom_events">
 	
-		<!-- This is our root menu (If all ready, the sub menues will be created -->
+		<!-- This is our root menu (If all ready, the sub menues will be created
+-->  
+
 		<parameter name="AppKitMenuEventDistributor">
+			<parameter name="context">web</parameter>
 			<parameter name="event">appkit.menu</parameter>
 			<parameter name="class">AppKitMenuCreator</parameter>
+		</parameter>
+	
+		<!-- Providing ExtJS stateful information -->
+		<parameter name="AppKitExtApplicationStateData">
+			<parameter name="context">web</parameter>
+			<parameter name="event">appkit.headerdata.publish</parameter>
+			<parameter name="class">AppKitExtStateProviderData</parameter>
+			
+			<!-- 
+				constructor argument:
+				we need the route name where the browser can load our data
+			-->
+			<parameter name="parameter">
+				<parameter name="route">appkit.ext.applicationState</parameter>
+			</parameter>
 		</parameter>
 	</setting>
 
@@ -114,6 +132,7 @@
 		<parameter name="robots">noindex</parameter>
 	</setting>
 	
+	
 	<!-- 
 		Javascript includes
 		* please provide absolute paths, we create one big file later.
@@ -127,12 +146,14 @@
 			<!-- ExtJS base files -->
 			<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
+
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
+
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
 			<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter> -->
@@ -143,18 +164,21 @@
 	
 			<!--AppKit JS -->
 			<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>
+
 			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
+
 			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
+
 			<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
 			
 			<!-- MISC -->
@@ -165,6 +189,7 @@
 		</parameter>
 		
 		<parameter name="inline">
+
 			<!-- I18N -->
 			<parameter>/appkit/ext/i18n</parameter>
 			<parameter>/appkit/ext/applicationState?cmd=init</parameter>
@@ -249,7 +274,8 @@
 				 	<parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></parameter>
 				 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_MSAD</parameter>
 				 	<parameter name="ldap_filter_user"><![CDATA[(&(SAMAccountName=__USERNAME__))]]></parameter>
-				</parameter> -->
+				</parameter>
+-->
 				
 				<!-- <parameter name="openldap-primary">
 					<parameter name="class">AppKitAuthProviderLdap</parameter>
@@ -263,7 +289,8 @@
 				 	<parameter name="ldap_bindpw"><![CDATA[XXXXXXXX]]></parameter>
 				 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_OPENLDAP</parameter>
 				 	<parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></parameter>
-				</parameter> -->
+				</parameter>
+-->
 				
 				<!-- 
 					Default provider
@@ -275,6 +302,29 @@
 				</parameter>
 				
 			</parameter>
+		
+		<!-- Authenticate with Doctrine -->
+		<!-- <parameter name="class">AppKitAuthProviderDatabase</parameter>
+			<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderDatabase.class.php</parameter>
+-->
+		 
+		 <!-- Authentificate against ldap
+		 	<parameter name="class">AppKitAuthProviderLdap</parameter>
+		 	<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderLdap.class.php</parameter>
+		 	<parameter name="ldap_dsn">ldap://int.icinga.de/</parameter>
+		 	<parameter name="ldap_basedn">DC=int,DC=icinga,DC=de</parameter>
+		 	<parameter name="ldap_domain">INT.ICINGA.DE</parameter>
+		 	<parameter name="ldap_binddn">USER@INT.ICINGA.DE</parameter>
+		 	<parameter name="ldap_bindpw">password</parameter>
+		 	<parameter name="ldap_type">CONST::AppKitAuthProviderLdap::TYPE_MSAD</parameter>
+		 	<parameter name="ldap_filter_user"><![CDATA[(&(SAMAccountName=__USERNAME__))]]></parameter>
+		 -->
+		 
+		 <!-- Authentificate with http basic auth
+		 	<parameter name="class">AppKitAuthProviderHttpBasic</parameter>
+		 	<parameter name="file">%core.root_dir%/lib/appkit/auth/AppKitAuthProviderHttpBasic.class.php</parameter>
+		 	<parameter name="field">REMOTE_USER</parameter>
+		  -->
 		  
 			<parameter name="requiredClasses">
 				<parameter name="AppKitEventHandlerInterface">%core.root_dir%/lib/appkit/event/AppKitEventHandlerInterface.interface.php</parameter>
@@ -303,10 +353,10 @@
 
 			
 			<parameter name="config_port">3306</parameter>
-			<parameter name="config_database">icinga</parameter>
+			<parameter name="config_database">icinga_web</parameter>
 			
-			<parameter name="config_user">icinga</parameter>
-			<parameter name="config_password">icinga</parameter>
+			<parameter name="config_user">icinga_web</parameter>
+			<parameter name="config_password">icinga_web</parameter>
 			
 			<parameter name="config_table_prefix">icinga_</parameter>
 		</parameter>
@@ -336,7 +386,7 @@
 					
 					<parameter name="ssh_bin">/usr/bin/ssh</parameter>
 					<parameter name="ssh_user">icinga</parameter>
-					<parameter name="ssh_host">127.0.0.1</parameter>
+					<parameter name="ssh_host">127.0.0.15</parameter>
 					<parameter name="ssh_port">22</parameter>
 					<parameter name="ssh_timeout">20</parameter>
 					<parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
@@ -356,7 +406,7 @@
 	<setting name="appkit.version.major">0</setting>
 	<setting name="appkit.version.minor">9</setting>
 	<setting name="appkit.version.patch">1</setting>
-	<setting name="appkit.version.extension">beta</setting>
+	<setting name="appkit.version.extension">alpha</setting>
 	<setting name="appkit.version.name">icinga-web</setting>
 	
 	<!-- PLACEHOLDER -->
@@ -386,14 +436,16 @@
 		</parameter>
 	</setting>
 	
+	
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
 	
 	<!--
 		XInclude
 		* Include other xml resources
 	-->
-
+	
 	<!-- Include settings for simple-data provider -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml"/>
+	
 	
 </settings>
