@@ -164,3 +164,11 @@
      
      * 2010-03-31
        * Tactical Overview with CustomVariables
+     
+     * 2010-04-01
+       * Extjs links for TO
+     
+     * 2010-04-06
+       * Filter window height sync fix (finally)
+       * SQL constants for 'not is' (API patch created, fixes #362)
+       

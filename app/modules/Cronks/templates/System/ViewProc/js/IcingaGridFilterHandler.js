@@ -55,6 +55,7 @@ var IcingaGridFilterWindow = function() {
 				title: '<?php echo $tm->_("Modify filter"); ?>',
 				closeAction: 'hide',
 				width: 500,
+				autoHeight: true,
 				// layout: 'fit',
 				
 				defaults: {
@@ -62,14 +63,6 @@ var IcingaGridFilterWindow = function() {
 				},
 				
 				listeners: {
-					add: function(co, oNew, index) {
-						co.doLayout(false, true);
-					},
-					
-					remove: function(oc, oremove) {
-						oc.doLayout(false, true);
-					},
-					
 					render: function(oc) {
 						if (oGrid.filter_types) {
 							var i = 0;
@@ -98,6 +91,16 @@ var IcingaGridFilterWindow = function() {
 								}
 							});
 						}
+						
+						// Handler to recalculate the window height if
+						// adding or removing components
+						var armh = function(c, item, index) {
+							this.syncSize();
+            				this.syncShadow();
+						}
+						
+						oc.on('add', armh, oc, {delay: 40});
+						oc.on('remove', armh, oc, {delay: 40});
 					},
 					
 					afterrender: function() {

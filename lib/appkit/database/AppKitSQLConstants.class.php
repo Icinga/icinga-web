@@ -22,11 +22,15 @@ class AppKitSQLConstants {
 		self::SQL_OP_NOTIS			=> '!=',
 		
 		self::SQL_OP_LESSTHAN		=> '<',
-		self::SQL_OP_GREATERTHAN	=> '>'
+		self::SQL_OP_LESSOREQUAL	=> '<=',
+		
+		self::SQL_OP_GREATERTHAN	=> '>',
+		self::SQL_OP_GREATEROREQUAL	=> '>='
 	);
 	
 	private static $ICINGA_OPERATORS = array (
 		self::SQL_OP_IS				=> IcingaApi::MATCH_EXACT,
+		self::SQL_OP_NOTIS			=> IcingaApi::MATCH_NOTIS,
 		self::SQL_OP_CONTAIN		=> IcingaApi::MATCH_LIKE,
 		self::SQL_OP_GREATERTHAN	=> IcingaApi::MATCH_GREATER_THAN,
 		self::SQL_OP_LESSTHAN		=> IcingaApi::MATCH_LESS_THAN,

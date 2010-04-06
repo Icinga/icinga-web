@@ -127,14 +127,22 @@ var CronkTabHandler = function() {
 			return true;
 		},
 		
-		itemRemoveActiveHandler : function (tabPanel) {
+		itemRemoveActiveHandler : function (tabPanel, ri) {
+			var s = AppKit.Ext.Storage.getStore(tabPanel.id);
 			
 			if (tabPanel.items.getCount() <= 1) {
 				AppKit.Ext.notifyMessage(_('Sorry'), _('Could not remove the last tab!'));
 				return false;
 			}
 			else {
-				tabPanel.setActiveTab( (tabPanel.items.getCount() - 1) );
+				
+				var last = s.get('last_tab');
+				if (last && ri.id !== last) {
+					tabPanel.setActiveTab( last );
+				}
+				else {
+					tabPanel.setActiveTab( (tabPanel.items.getCount() - 1) );
+				}
 			}
 			
 			return true;
@@ -143,6 +151,13 @@ var CronkTabHandler = function() {
 		itemModifier : function (co, item, index) {
 			item.enableBubble('titlechange');
 			return true;
+		},
+		
+		itemActivate : function (p, ntab, ctab) {
+			var s = AppKit.Ext.Storage.getStore(p.id);
+			if (ctab && "id" in ctab) {
+				s.add('last_tab', ctab.id);
+			}
 		}
 		
 	};
@@ -219,7 +234,8 @@ var tabPanel = new Ext.TabPanel({
 		contextmenu: TabContextMenu.handle,
 		staterestore: CronkTabHandler.itemObserver,
 		removed: CronkTabHandler.itemObserver,
-		beforeremove: CronkTabHandler.itemRemoveActiveHandler
+		beforeremove: CronkTabHandler.itemRemoveActiveHandler,
+		beforetabchange: CronkTabHandler.itemActivate
 	}
 });
 
