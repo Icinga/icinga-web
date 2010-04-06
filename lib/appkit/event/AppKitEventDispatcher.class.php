@@ -5,7 +5,11 @@ class AppKitEventDispatcher extends AppKitSingleton {
 	const ASTERISK		= '*';
 	
 	public static function registerEventClasses(array $events) {
+		$currentContext = AgaviContext::getInstance()->getName();
 		foreach ($events as $name=>$event) {
+			if($event['context'] != $currentContext) 
+				continue; 
+				
 			if ($event['event'] && $event['class']) {
 				
 				if (!array_key_exists('parameter', $events)) {
@@ -21,6 +25,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
 		
 		return true;
 	}
+	
 	
 	/**
 	 * 
