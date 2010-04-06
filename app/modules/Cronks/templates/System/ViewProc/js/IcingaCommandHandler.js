@@ -286,6 +286,8 @@ IcingaCommandHandler.prototype = {
 					a.options.params['auth'] = h_auth;
 					a.options.params['selection'] = selection;
 					
+					oWin.disable();
+					
 					return true;
 					
 				}, this);
