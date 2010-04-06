@@ -75,28 +75,12 @@
 	-->
 	<setting name="appkit.custom_events">
 	
-		<!-- This is our root menu (If all ready, the sub menues will be created
--->  
+		<!-- This is our root menu (If all ready, the sub menues will be created -->  
 
 		<parameter name="AppKitMenuEventDistributor">
 			<parameter name="context">web</parameter>
 			<parameter name="event">appkit.menu</parameter>
 			<parameter name="class">AppKitMenuCreator</parameter>
-		</parameter>
-	
-		<!-- Providing ExtJS stateful information -->
-		<parameter name="AppKitExtApplicationStateData">
-			<parameter name="context">web</parameter>
-			<parameter name="event">appkit.headerdata.publish</parameter>
-			<parameter name="class">AppKitExtStateProviderData</parameter>
-			
-			<!-- 
-				constructor argument:
-				we need the route name where the browser can load our data
-			-->
-			<parameter name="parameter">
-				<parameter name="route">appkit.ext.applicationState</parameter>
-			</parameter>
 		</parameter>
 	</setting>
 
@@ -353,10 +337,10 @@
 
 			
 			<parameter name="config_port">3306</parameter>
-			<parameter name="config_database">icinga_web</parameter>
+			<parameter name="config_database">icinga</parameter>
 			
-			<parameter name="config_user">icinga_web</parameter>
-			<parameter name="config_password">icinga_web</parameter>
+			<parameter name="config_user">icinga</parameter>
+			<parameter name="config_password">icinga</parameter>
 			
 			<parameter name="config_table_prefix">icinga_</parameter>
 		</parameter>
