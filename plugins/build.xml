@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ModuleInstaller" default="usage">
+
+
+	<!-- The plugin-install task -->
+	<target name="install"> 
+		
+		<!--  Show metadata and let the user confirm -->
+		<taskdef name="manifestMetaReader" classname="bin.manifestMetaReaderTask"/>
+		<manifestMetaReader file="manifest.xml" />
+		<echo>Install script for Icinga-web Plugins</echo>
+		<echo>-------------------------------------</echo>
+		<echo>Plugin Name	${PLUGIN_Name}</echo>
+		<echo>Version		${PLUGIN_Version}</echo>
+		<echo>${PLUGIN_Description}</echo>
+		<echo>Author		${PLUGIN_Author}</echo>
+		<echo>Company		${PLUGIN_Company}</echo>
+		<echo>-------------------------------------</echo>
+		
+		<!--  Confirmations -->
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to install this plugin?</input>
+		<if>
+			<equals arg1="${confirm}" arg2="n" />
+			<then>
+				<fail message="Installation aborted by user." />
+ 			</then>
+		</if>
+		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="/usr/local/icinga-web">Location of icinga-web</input>
+		
+		
+		<!--  Check dependencies -->
+		<taskdef name="manifestDependencyChecker" classname="bin.manifestDependencyCheckerTask"/>
+		<manifestDependencyChecker file="manifest.xml"/>
+		
+		<!-- Install module and additional -->		
+		<echo>Installing to ${PATH_Icinga}</echo>
+		<copy todir="${PATH_Icinga}">
+			<fileset dir="src">
+				<exclude name="snippets.dat"></exclude>
+				<exclude name="routes.xml"></exclude>
+				<include name="**" />
+			</fileset>
+		</copy>	
+
+		<!--  Doctrine models -->
+		<echo>Copying Doctrine-Models</echo>
+		<copy todir="${PATH_Icinga}/${PATH_AppKit}/database/models/">
+			<fileset dir="etc/doctrine">
+				<include name="**" />
+			</fileset>
+		</copy>
+		
+		<echo>Inserting snippets</echo>
+		<!-- Inject snippets -->
+		<taskdef name="snippetInjector" classname="bin.snippetInjectorTask" />
+		<snippetInjector file="src/snippets.dat" />
+
+		<echo>Setting up Agavi-Config</echo>		
+		<!-- Extend agavi Config -->
+		<taskdef name="manifestAgaviConfigurator" classname="bin.manifestAgaviConfiguratorTask" />
+		<manifestAgaviConfigurator file="manifest.xml" />
+
+		<!-- Set up Doctrine -->
+		<taskdef name="doctrineDBBuilder" classname="bin.doctrineDBBuilderTask" />
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validargs="y,n">Create tables</input>
+		<if>
+			<equals arg1="${confirm}" arg2="y" />
+			<then>
+				<doctrineDBBuilder models="etc/doctrine" action="create" ini="db.ini"/>
+ 			</then>
+		</if>
+
+		<!--  Run SQL -->
+		<taskdef name="sqlRunner" classname="bin.sqlRunnerTask" />
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validargs="y,n">Process sql queries?</input>
+		<if>
+			<equals arg1="${confirm}" arg2="y" />
+			<then>
+				<sqlRunner files="etc/sql" ini="db.ini"/>
+ 			</then>
+		</if>		
+	</target>
+
+
+	<!-- 
+			Remove Task
+	 -->
+
+	<target name="remove">
+		<!-- Plugin deletion wizard -->
+		<echo>Plugin Deletion Wizard</echo>
+		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="/usr/local/icinga-web">Location of icinga-web</input>
+		<input propertyname="PLUGIN_Name" promptChar="?">Plugin name</input>
+		
+		<!-- 
+				Check if module exists and let the user confirm the removal
+		 -->
+		<property name="module_exists" value="false"></property>
+		
+		<available file="${PATH_Icinga}/app/modules/${PLUGIN_Name}/manifest.xml" property="module_exists" value="true"/>
+		<if>
+			<equals arg1="${module_exists}" arg2="1"/>
+			<then>
+				<property name="manifest" value="${PATH_Icinga}/app/modules/${PLUGIN_Name}/manifest.xml"></property>
+	
+				<!--  Confirmations -->
+				<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to deinstall this plugin?</input>
+				<if>
+					<equals arg1="${confirm}" arg2="n" />
+					<then>
+						<fail message="Deinstallation aborted by user." />
+		 			</then>
+				</if>
+			</then>
+			<else>
+				<fail message="${module_exists} Plugin does not exist. No Manifest found at ${PATH_Icinga}/app/modules/${PLUGIN_Name}/manifest.xml" />
+			</else>
+		</if>
+		
+		<!-- 
+			
+			Remove the registered routes
+			
+		 -->
+		<echo>Removing Routes</echo>
+		<taskdef name="manifestXPathRemover" classname="bin.manifestXPathRemoverTask" />
+		<manifestXPathRemover target="routing.xml" file="${manifest}" ns="default" uri="http://agavi.org/agavi/1.0/config" cfgPath="//Config/Routes/Route" 
+								removePath="//default:configuration[@context='%context%']//default:route[@name='%name%']"/>
+
+		<echo>Removing Config-Entries</echo>
+		<taskdef name="manifestSettingsRemover" classname="bin.manifestSettingsRemoverTask" />
+		<manifestSettingsRemover file="${manifest}"/>
+		
+		<echo>Removing Translation-domains</echo>
+		<taskdef name="manifestXPathRemover" classname="bin.manifestXPathRemoverTask" />
+		<manifestXPathRemover target="translation.xml" file="${manifest}" ns="default" uri="http://agavi.org/agavi/config/parts/translation/1.0" cfgPath="//Config/Translator/Domain" 
+								removePath="//default:translator[@domain='%VALUE%']"/>
+	
+		<!-- 
+			Remove the tables if the user wishes so
+		 -->
+		<taskdef name="doctrineDBBuilder" classname="bin.doctrineDBBuilderTask" />
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validargs="y,n">Remove tables</input>
+		<if>
+			<equals arg1="${confirm}" arg2="y" />
+			<then>
+				<echo>Removing tables</echo>
+				<doctrineDBBuilder models="${PATH_Icinga}/app/modules/${PLUGIN_Name}/lib/.models.cfg" action="delete" ini="db.ini"/>
+ 			</then>
+		</if>
+		
+		<echo>Removing files</echo>
+		<delete dir="${PATH_Icinga}/app/modules/${PLUGIN_Name}" />	
+		<delete file="${PATH_Icinga}/app/config/plugins/${PLUGIN_Name}.xml" />	
+	
+		<echo>Plugin successfully deleted!</echo>
+	</target>
+		
+
+	
+	<!-- 
+			**	Create Plugin  **	
+	 -->
+	<target name="plugin-create">
+		<echo msg="Plugin creation tool for Icinga-web" />
+		
+		<input propertyname="coreDir">Plugin directory (containing manifest.xml) : </input>
+		<echo msg="Searching for manifest file at : ${coreDir}" />
+	
+		<taskdef name="manifestFileSelector" classname="bin.manifestFileSelectorTask"/>
+		<taskdef name="manifestSnippetExtractor" classname="bin.manifestSnippetExtractorTask"/>
+		<taskdef name="manifestRouteExtractor" classname="bin.manifestRouteExtractorTask"/>
+		<taskdef name="manifestTranslationExtractor" classname="bin.manifestTranslationExtractorTask"/>
+		
+		<property name="manifest" value="${coreDir}/manifest.xml"></property>
+		<manifestFileSelector file="${manifest}" source="Config" propertyName="config"/>  
+		<manifestFileSelector file="${manifest}" source="Plugin" propertyName="plugin"/>
+	 	<manifestFileSelector file="${manifest}" source="Doctrine" propertyName="models"/>
+		<manifestFileSelector file="${manifest}" source="SQL" propertyName="sqlRoutines"/>
+		
+		<phingcall target="structure-create" />	
+		
+		<!-- Copy agavi module and config to src -->
+		<echo>Saving config...</echo>
+		<copy todir="${PLUGIN_Name}/src">
+			<fileset refid="config" />
+		</copy>
+		<echo>Saving plugin Data...</echo>		
+		<copy todir="${PLUGIN_Name}/src">
+			<fileset refid="plugin" />
+			<mapper classname="bin.manifestMapper" from="${manifest}"/>
+		</copy>
+		
+		
+		<!-- Copy doctrine Models to etc/doctrine -->		
+		<echo>Saving doctrine Models...</echo>	
+		<copy todir="${PLUGIN_Name}/etc/doctrine">
+			<fileset refid="models" />
+			<mapper classname="bin.manifestMapper" from="${manifest}"/>
+		</copy>
+	
+		<!--  Copy sql-routines to etc/sql -->
+		<echo>Saving SQL-routines...</echo>	
+		<copy todir="${PLUGIN_Name}/etc/sql">
+			<fileset refid="sqlRoutines" />
+			<mapper classname="bin.manifestMapper" from="${manifest}"/>
+		</copy>
+		
+		<echo>Extracting snippets...</echo>
+		<!-- Extract Stylesheets -->
+		<manifestSnippetExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/snippets.dat"></manifestSnippetExtractor>
+
+		<echo>Extracting routes...</echo>		
+		<manifestRouteExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/routes.xml"></manifestRouteExtractor>
+	
+		<echo>Extracting translations...</echo>		
+		<manifestTranslationExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/translations.xml" />
+			
+		<!-- Creating Manifest -->
+		<copy file="${manifest}" tofile="${PLUGIN_Name}/manifest.xml"/>
+		
+		<!-- Deploying installer -->
+		<copy file="build.xml" tofile="${PLUGIN_Name}/build.xml"/>
+		<copy todir="${PLUGIN_Name}/bin">
+			<fileset dir="./bin">
+				<include name="**" />
+			</fileset>
+		</copy>
+		<copy file="etc/db.ini" todir="${PLUGIN_Name}/" />
+		
+		<!-- Packing -->
+		<tar basedir="${PLUGIN_Name}/." destfile="${PLUGIN_Name}_plugin.tar" compression="gzip" />
+		
+		<!-- <delete dir="${PLUGIN_Name}" />  -->
+	</target>
+	
+	<target name="structure-create">
+		<mkdir dir="${PLUGIN_Name}"/>
+		<mkdir dir="${PLUGIN_Name}/src"/>
+		<mkdir dir="${PLUGIN_Name}/doc"/>
+		<mkdir dir="${PLUGIN_Name}/etc"/>
+		<mkdir dir="${PLUGIN_Name}/etc/doctrine"/>
+		<mkdir dir="${PLUGIN_Name}/etc/sql"/>
+	</target>
+	
+	<target name="usage">
+		<echo msg="Plugin creation tool for Icinga-web" />
+		<echo msg="Targets are: install, build, delete, plugin-create" />
+	</target>
+</project>
