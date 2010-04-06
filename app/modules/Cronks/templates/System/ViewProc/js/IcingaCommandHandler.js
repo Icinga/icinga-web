@@ -236,6 +236,7 @@ IcingaCommandHandler.prototype = {
 				var oWin = new Ext.Window({
 					title: String.format(_('{0} ({1} items)'), title, this.grid.getSelectionModel().getCount()),
 					autoDestroy: true,
+					autoHeight: true,
 					closable: true,
 					modal: true,
 					defaultType: 'field',
@@ -252,6 +253,12 @@ IcingaCommandHandler.prototype = {
 						handler: function(b, e) { oWin.close(); }
 					}],
 				});
+				
+				// This fixes the webkit (safari, chrome) width issue ...
+				oWin.on('afterrender', function() {
+					this.syncSize();
+					this.syncShadow();
+				}, oWin, { delay: 40, single: true });
 				
 				var oForm = new Ext.form.FormPanel({
 					border: false,
