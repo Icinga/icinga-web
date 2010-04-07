@@ -1,10 +1,153 @@
-// Default english translation
 {
-	'' : {
-    	'plural-forms'  : "nplurals=2; plural=(n != 1);"
-	},
-	'msgid': [null, 'msgstr'],
-	
-	'test_string': [null, 'Translation of test string'],
-	'no more fields': [null, 'No more fields are required, just press "OK" to send.']
+   "en" : {
+      "" : {},
+      "HOST_NOTES_URL" : [
+         null,
+         "Notes url"
+      ],
+      "HOST_LATENCY" : [
+         null,
+         "Latency"
+      ],
+      "SERVICE_LAST_NOTIFICATION" : [
+         null,
+         "Last notification"
+      ],
+      "SERVICE_NOTES_URL" : [
+         null,
+         "Notes url"
+      ],
+      "HOST_LAST_NOTIFICATION" : [
+         null,
+         "Last notification"
+      ],
+      "HOST_LAST_HARD_STATE_CHANGE" : [
+         null,
+         "Hard state change"
+      ],
+      "HOST_CHECK_TYPE" : [
+         null,
+         "Check type"
+      ],
+      "HOST_ADDRESS" : [
+         null,
+         "Address"
+      ],
+      "HOST_PERFDATA" : [
+         null,
+         "Performance data"
+      ],
+      "HOST_CURRENT_STATE" : [
+         null,
+         "Current state"
+      ],
+      "HOST_LAST_CHECK" : [
+         null,
+         "Last check"
+      ],
+      "HOST_MAX_CHECK_ATTEMPTS" : [
+         null,
+         "Max check attempts"
+      ],
+      "SERVICE_LAST_CHECK" : [
+         null,
+         "Last check"
+      ],
+      "HOST_ALIAS" : [
+         null,
+         "Alias"
+      ],
+      "SERVICE_LATENCY" : [
+         null,
+         "Latency"
+      ],
+      "SERVICE_IS_FLAPPING" : [
+         null,
+         "Is flapping"
+      ],
+      "HOST_CURRENT_CHECK_ATTEMPT" : [
+         null,
+         "Current check attempt"
+      ],
+      "SERVICE_CURRENT_CHECK_ATTEMPT" : [
+         null,
+         "Check attempt"
+      ],
+      "HOST_EXECUTION_TIME" : [
+         null,
+         "Execution time"
+      ],
+      "SERVICE_MAX_CHECK_ATTEMPTS" : [
+         null,
+         "Max check attempts"
+      ],
+      "HOST_NEXT_CHECK" : [
+         null,
+         "Next check"
+      ],
+      "SERVICE_CURRENT_STATE" : [
+         null,
+         "Current state"
+      ],
+      "SERVICE_PERFDATA" : [
+         null,
+         "Performance data"
+      ],
+      "SERVICE_STATUS_UPDATE_TIME" : [
+         null,
+         "Status update time"
+      ],
+      "HOST_SCHEDULED_DOWNTIME_DEPTH" : [
+         null,
+         "Scheduled downtime depth"
+      ],
+      "SERVICE_DISPLAY_NAME" : [
+         null,
+         "Display name"
+      ],
+      "HOST_OUTPUT" : [
+         null,
+         "Output"
+      ],
+      "SERVICE_NEXT_CHECK" : [
+         null,
+         "Next check"
+      ],
+      "HOST_STATUS_UPDATE_TIME" : [
+         null,
+         "Status update time"
+      ],
+      "SERVICE_LAST_HARD_STATE_CHANGE" : [
+         null,
+         "Last hard state change"
+      ],
+      "SERVICE_OUTPUT" : [
+         null,
+         "Output"
+      ],
+      "HOST_DISPLAY_NAME" : [
+         null,
+         "Display name"
+      ],
+      "SERVICE_SCHEDULED_DOWNTIME_DEPTH" : [
+         null,
+         "Scheduled downtime depth"
+      ],
+      "HOST_NAME" : [
+         null,
+         "Name"
+      ],
+      "HOST_IS_FLAPPING" : [
+         null,
+         "Is flapping"
+      ],
+      "SERVICE_CHECK_TYPE" : [
+         null,
+         "Check type"
+      ],
+      "SERVICE_EXECUTION_TIME" : [
+         null,
+         "Execution time"
+      ]
+   }
 }

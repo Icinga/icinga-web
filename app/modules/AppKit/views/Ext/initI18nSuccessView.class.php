@@ -36,7 +36,7 @@ class AppKit_Ext_initI18nSuccessView extends ICINGAAppKitBaseView
 							$json = '{}';
 						}
 						
-						$files[$domain] = $json; 
+						$files[$domain] = array($prefix, $json); 
 						
 						continue;
 					}

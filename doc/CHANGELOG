@@ -175,4 +175,9 @@
        * Search object status (fixes #339)
        * Global icinga status js object
        * Command window width (webkit)
+     
+     * 2010-04-07
+       * Finished translation template (fixes #279)
+       * Added tools to handle translation (po, mo and json files)
+       
        

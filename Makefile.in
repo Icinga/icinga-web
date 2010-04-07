@@ -105,4 +105,13 @@ db-upgrade:
 
 db-purge-userprefs:
 	$(PC) db-purge-userprefs
-	
+
+loc-update-catalog:
+	./bin/loc-create-catalog.pl --base=./ --out=./res/i18n/po/default.po
+
+loc-create-mo:
+	./bin/loc-create-mo.sh res/i18n/po res/i18n/mo
+
+loc-create-json:
+	./bin/loc-create-json.sh res/i18n/po res/i18n/mo
+

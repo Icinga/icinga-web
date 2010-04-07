@@ -6,13 +6,17 @@
 Ext.onReady(function() {
 	var store = AppKit.Ext.Storage.getStore("i18n_data");
 	<?php foreach ($files as $domain=>$json): ?>
-	store.add('<?php echo $domain; ?>', <?php echo $json; ?>);
+	
+	store.add('<?php echo $domain; ?>', <?php echo $json[1]; ?>);
 	<?php endforeach; ?>
 	
 	var json_locale_data = {};
 	store.eachKey(function(k, v) {
 		var t = {};
-		t[k] = v;
+		var langKey = "";
+		// Finding the first matching language key to use
+		Ext.iterate(v, function(lk, lv) { langKey=lk; return false; });
+		t[k] = v[langKey];
 		Ext.apply(json_locale_data, t)
 	});
 	

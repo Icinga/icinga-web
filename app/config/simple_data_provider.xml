@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <setting name="simpledataprovider" xmlns="http://agavi.org/agavi/1.0/config">
-
+		<!-- 
+			Locale information:
+			
+			#loc: HOST_ADDRESS
+			#loc: HOST_ALIAS
+			#loc: HOST_DISPLAY_NAME
+			#loc: HOST_CURRENT_STATE
+			#loc: HOST_OUTPUT
+			#loc: HOST_PERFDATA
+			#loc: HOST_CURRENT_CHECK_ATTEMPT
+			#loc: HOST_MAX_CHECK_ATTEMPTS
+			#loc: HOST_LAST_CHECK
+			#loc: HOST_CHECK_TYPE
+			#loc: HOST_LATENCY
+			#loc: HOST_EXECUTION_TIME
+			#loc: HOST_NEXT_CHECK
+			#loc: HOST_LAST_HARD_STATE_CHANGE
+			#loc: HOST_LAST_NOTIFICATION
+			#loc: HOST_IS_FLAPPING
+			#loc: HOST_SCHEDULED_DOWNTIME_DEPTH
+			#loc: HOST_STATUS_UPDATE_TIME
+			#loc: HOST_NOTES_URL
+			
+		-->
 		<parameter name="hostinfo">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">IcingaApiSimpleDataProvider</parameter>
@@ -66,6 +89,27 @@
 			</parameter>
 		</parameter>
 
+		<!--
+			Locale information:
+			
+			#loc: SERVICE_DISPLAY_NAME
+			#loc: SERVICE_CURRENT_STATE
+			#loc: SERVICE_OUTPUT
+			#loc: SERVICE_PERFDATA
+			#loc: SERVICE_CURRENT_CHECK_ATTEMPT
+			#loc: SERVICE_MAX_CHECK_ATTEMPTS
+			#loc: SERVICE_LAST_CHECK
+			#loc: SERVICE_CHECK_TYPE
+			#loc: SERVICE_LATENCY
+			#loc: SERVICE_EXECUTION_TIME
+			#loc: SERVICE_NEXT_CHECK
+			#loc: SERVICE_LAST_HARD_STATE_CHANGE
+			#loc: SERVICE_LAST_NOTIFICATION
+			#loc: SERVICE_IS_FLAPPING
+			#loc: SERVICE_SCHEDULED_DOWNTIME_DEPTH
+			#loc: SERVICE_STATUS_UPDATE_TIME
+			#loc: SERVICE_NOTES_URL
+		-->
 		<parameter name="serviceinfo">
 			<parameter name="module">Web</parameter>
 			<parameter name="action">IcingaApiSimpleDataProvider</parameter>
