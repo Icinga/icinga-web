@@ -179,5 +179,8 @@
      * 2010-04-07
        * Finished translation template (fixes #279)
        * Added tools to handle translation (po, mo and json files)
+       * Makefile changes (targets, output)
+       * Doc files for translation
+       
        
        

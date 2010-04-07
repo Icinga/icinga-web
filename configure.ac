@@ -30,6 +30,13 @@ if test "$MYSQL" = 'not found'; then
         AC_MSG_ERROR([cannot use $PACKAGE_NAME without MySql client binary])
 fi
 
+AC_ARG_VAR([PRINTF],[Printf coreutil])
+AC_PATH_PROG([PRINTF], [printf], [not found])
+
+if test "$PRINTF" = 'not found'; then
+        AC_MSG_ERROR([cannot use $PACKAGE_NAME without printf core util])
+fi
+
 # Custom macros
 
 # ACRT_USER_EXISTS( users, variable, default )
@@ -159,6 +166,7 @@ AC_SUBST(icinga_api)
 AC_SUBST(CFLAGS)
 AC_SUBST(PHP)
 AC_SUBST(MYSQL)
+AC_SUBST(PRINTF)
 AC_SUBST(INSTALL_OPTS)
 
 AC_CONFIG_FILES([

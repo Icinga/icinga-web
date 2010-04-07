@@ -1,12 +1,13 @@
-1. Edit the Makefile.in and delete all lines behind "install:" target:
+1. The old behaviour is deprecated.
 
-install:
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles/extjs
-	...
-	...
+2. The file list for installation is created through a script
+   called create-makefile.sh
 
-2. Execute: ./bin/create-makefile.sh >> Makefile.in
+3. The files to install are included in Makefile.in. All changes does
+   not affect the existing Makefile.
 
-3. Test and check in changes
+4. The thing to refresh the list of installable made through make:
+   make install-files-list (Don't forget to call configure to create the makefile)
+
+5. To make the code ready to commit all these steps are combined within:
+   make devclean

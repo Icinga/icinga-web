@@ -18,28 +18,35 @@ WEB_USER=@web_user@
 WEB_GROUP=@web_group@
 SED=@SED@
 PHP=@PHP@
+PRINTF=@PRINTF@
 PC=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
 INC_MAKE_FILES=./etc/make/files.mk
 
 none:
-	@echo "Please supply a command line argument (i.e. 'make install')."
-	@echo ""
-	@echo "Generic targets: install, clean"
-	@echo ""
-	@echo "Other usefull targets:"
-	@echo "\ttestdeps - test the php dependencies"
-	@echo "\tcreate-tarball - creates a tarball for packaging"
-	@echo "\tdevclean - to a sourcecode ready for ci or packaging" 
-	@echo ""
-	@echo "Experimental targets:"
-	@echo "\tmake db-initialize			- create the db"
-	@echo "\tmake db-deinitialize		- reverse the path (removes all data and drop the relations)"
-	@echo "\tmake db-upgrade			- tries to upgrade from a available db revision"
-	@echo "\tmake db-drop				- create the entire db"
-	@echo "\tmake db-purge-userprefs	- purge existing user preferences"
-	@echo ""
+#	@$(PRINTF) "\t%15s - %s\n" "" ""
+	@$(PRINTF) "Please supply a command line argument (i.e. 'make install').\n\n"
+	@$(PRINTF) "Generic targets: install, clean\n\n"
+	@$(PRINTF) "Other usefull targets:\n"
+	@$(PRINTF) "\t%18s - %s\n" "testdeps" "test php dependencies"
+	@$(PRINTF) "\t%18s - %s\n" "create-tarball" "creates a tarball for packaging"
+	@$(PRINTF) "\t%18s - %s\n" "devclean" "make source ready for commit or packaging"
+	@$(PRINTF) "\t%18s - %s\n" "cacheclean" "purges the agavi xml cache"
+	
+	@$(PRINTF) "\nDatabase (web) targets:\n"
+	@$(PRINTF) "\t%18s - %s\n" "db-initialize" "create the db"
+	@$(PRINTF) "\t%18s - %s\n" "db-deinitialize" "reverse the path (removes all data and drop the relations)"
+	@$(PRINTF) "\t%18s - %s\n" "db-upgrade" "tries to upgrade from a available db revision"
+	@$(PRINTF) "\t%18s - %s\n" "db-drop" "drop the entire db"
+	@$(PRINTF) "\t%18s - %s\n" "db-purge-userprefs" "purge existing user preferences"
 
+	@$(PRINTF) "\nI18n targets:\n"
+	@$(PRINTF) "\t%18s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
+	@$(PRINTF) "\t%18s - %s\n" "loc-create-mo" "Compile all po files"
+	@$(PRINTF) "\t%18s - %s\n" "loc-create-json" "Create json gettext from po"
+
+	@$(PRINTF) "\n\n"
+	
 include $(INC_MAKE_FILES)
 
 install-files-list:

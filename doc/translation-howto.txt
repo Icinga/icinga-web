@@ -1,0 +1,45 @@
+Some abstract how icinga gettext translations works
+
+1. Architecture
+
+   Icinga's translation is made through a agavi gettext implementation which uses po and mo files. Modules can have
+   their own text domains. The default textfomain is 'default' (agavi: icinga.default).
+   
+   To keep js translation in sync we use jsgettext to provide the same way to translate things. Jsgettext uses json
+   files compiled from the orginial po files
+
+2. Build up
+
+   If you wrote some code including some new translations you have to rebuild the 'default' messages catalog:
+   
+   	make loc-update-catalog
+   
+   This command create a 'res/i18n/default.po' file, ready for translation.
+   
+3. Translate
+
+   Translate the default.po into your language or merge this with existing po files to keep translation in sync
+   
+4. Compile mo's
+
+   Gettext uses a compiled binary format of the po base files. To compile all existing files into machine readable
+   objects try: make loc-create-mo
+
+5. Compile json formats
+
+   To use javascript translation you have to compile the po's into json files. To convert all existing po's try:
+   make loc-create-json
+
+6. Change default interface behaviour
+
+   To change the default local you have to alter app/config/translation.xml.
+
+7. Layout
+
+   Default icinga translation files store in res/i18n with a two subdirs:
+   
+   po: There a the basic translation files for each language. The name is something like 'en.po' or 'en_GB.po'.
+   So you can define a country based of language based translation file
+   
+   mo: All compiled files e.g. 'en.po' or 'en.json'. Agavi uses the po files, javascript uses the json files with
+   the same country- or language-base.
