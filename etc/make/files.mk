@@ -966,7 +966,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/logging.xml $(DESTDIR)$(prefix)/app/config/logging.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/rbac_definitions.xml $(DESTDIR)$(prefix)/app/config/rbac_definitions.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/validators.xml $(DESTDIR)$(prefix)/app/config/validators.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
@@ -975,6 +974,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstants.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstants.class.php
@@ -1323,11 +1323,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/phing $(DESTDIR)$(prefix)/bin/phing
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/rabbit.sh $(DESTDIR)$(prefix)/bin/rabbit.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-catalog.pl $(DESTDIR)$(prefix)/bin/loc-create-catalog.pl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-mo.sh $(DESTDIR)$(prefix)/bin/loc-create-mo.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-json.sh $(DESTDIR)$(prefix)/bin/loc-create-json.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-mo.sh $(DESTDIR)$(prefix)/bin/loc-create-mo.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/GPL $(DESTDIR)$(prefix)/doc/GPL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/INSTALL $(DESTDIR)$(prefix)/doc/INSTALL
@@ -1336,8 +1336,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VENDOR $(DESTDIR)$(prefix)/doc/VENDOR
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VERSION $(DESTDIR)$(prefix)/doc/VERSION
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/install-fromscratch.txt $(DESTDIR)$(prefix)/doc/install-fromscratch.txt
-	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/makefile-howto.txt $(DESTDIR)$(prefix)/doc/makefile-howto.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
+	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/makefile-howto.txt $(DESTDIR)$(prefix)/doc/makefile-howto.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/translation-howto.txt $(DESTDIR)$(prefix)/doc/translation-howto.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/1-initial-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/1-initial-scheme.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/2-initial-data.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/2-initial-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/deltas/mysql/3-principal-scheme.sql $(DESTDIR)$(prefix)/etc/database/deltas/mysql/3-principal-scheme.sql
@@ -7820,16 +7821,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/.htaccess $(DESTDIR)$(prefix)/pub/.htaccess
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/index.php $(DESTDIR)$(prefix)/pub/index.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.mo $(DESTDIR)$(prefix)/res/i18n/mo/de.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.json $(DESTDIR)$(prefix)/res/i18n/mo/en.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.mo $(DESTDIR)$(prefix)/res/i18n/mo/en.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/default.mo $(DESTDIR)$(prefix)/res/i18n/mo/default.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/default.json $(DESTDIR)$(prefix)/res/i18n/mo/default.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.json $(DESTDIR)$(prefix)/res/i18n/mo/de.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/de.mo $(DESTDIR)$(prefix)/res/i18n/mo/de.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/default.json $(DESTDIR)$(prefix)/res/i18n/mo/default.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/default.mo $(DESTDIR)$(prefix)/res/i18n/mo/default.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/mo/en.json $(DESTDIR)$(prefix)/res/i18n/mo/en.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/en.po $(DESTDIR)$(prefix)/res/i18n/po/en.po
-	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/default.po $(DESTDIR)$(prefix)/res/i18n/po/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/de.mo $(DESTDIR)$(prefix)/res/i18n/po/de.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/de.po $(DESTDIR)$(prefix)/res/i18n/po/de.po
+	$(INSTALL) -m 644 $(INSTALL_OPTS) res/i18n/po/default.po $(DESTDIR)$(prefix)/res/i18n/po/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) res/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/res/xml/icinga-log-template.xml
