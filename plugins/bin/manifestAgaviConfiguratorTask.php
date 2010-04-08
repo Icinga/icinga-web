@@ -157,8 +157,10 @@ class ManifestAgaviConfiguratorTask extends Task {
 				$route = $child;
 				break;
 			}			
-			if($routingSearcher->query("//default:configuration[@context='".$context."']/default:routes/default:route[@name='".$routeName."']")->item(0))
-				throw new BuildException("Route ".$routeName." already exists - aborting");
+			if($routingSearcher->query("//default:configuration[@context='".$context."']/default:routes/default:route[@name='".$routeName."']")->item(0)) {
+				echo("Route ".$routeName." already exists - skipping\n");
+				continue;
+			}
 			$contextConfigs = $routingSearcher->query("//default:configuration[@context='".$context."']/default:routes");
 			$config = null;
 			if($contextConfigs->length < 1) {

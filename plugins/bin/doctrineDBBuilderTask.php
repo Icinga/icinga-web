@@ -34,6 +34,7 @@ class doctrineDBBuilderTask extends Task {
 		
 		require_once($doctrinePath."/Doctrine.php");
 		spl_autoload_register("Doctrine::autoload");
+//		spl_autoload_register(array('Doctrine_Core', 'modelsAutoload'));
 		
 		$iniData = parse_ini_file($this->ini);
 		if(empty($iniData))
@@ -55,7 +56,7 @@ class doctrineDBBuilderTask extends Task {
 	public function buildDBFromModels() {	
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$modelPath = $icinga."/app/modules/".$this->project->getUserProperty("PLUGIN_Name")."/lib/";
-		Doctrine::createTablesFromModels($this->models);
+		Doctrine::createTablesFromModels(array($this->models.'/generated',$this->models));
 		Doctrine::loadModels($this->models);
 		$tables = Doctrine::getLoadedModels();
 		$tableList = array();
