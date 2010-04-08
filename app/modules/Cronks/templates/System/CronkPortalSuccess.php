@@ -1,83 +1,151 @@
 <?php 
 	$parentid = $rd->getParameter('parentid');
 ?>
-<div id="<?php echo $parentid; ?>">
-
-</div>
+<div id="<?php echo $parentid; ?>"></div>
 <script type="text/javascript">
+<!-- // <![CDATA[
 
 Ext.onReady(function() {
 
-var TabContextMenu =  function() {
-	var ctxItem = null;
+var TabDragOrder = function() {
 	var tp = null;
 	
-	return {
-		handle : function (panel, tab, e) {
-			if (!this.contextmenu) {
-				this.contextmenu = new Ext.menu.Menu({
-					items: [{
-						text: '<?php echo $tm->_("Close"); ?>',
-						id: panel.id + '-close',
-						iconCls: 'silk-cross',
-						handler: function() { panel.remove(ctxItem); }
-					}, {
-						text: '<?php echo $tm->_("Close others"); ?>',
-						id: panel.id + '-close-others',
-						handler: function() {
-							tp.items.each(function(item){
-								if(item.closable && item != ctxItem){
-									tp.remove(item);
-								}
-							});
+	TabDragOrder.superclass.constructor.call(this);
+}
+
+TabDragOrder = (new (Ext.extend(TabDragOrder, Ext.util.Observable, {
+	init : function(p) {
+		tp = p;
+		
+		tp.on('render', this.initDD, this, { single: true });
+		
+		tp.on('add', function(panel, item, index) { this.addDraggable(item) }, this);
+	},
+	
+	initDD : function() {
+		this.dropTarget = (new (Ext.extend(Ext.dd.DropTarget, {
+			notifyDrop : function(source, e, data) {
+				var te = e.getTarget('li.x-tab-strip-closable');
+				var d = Ext.dd.Registry.getTarget(te);
+				if (d && "id" in d) {
+					var tab = Ext.getCmp(d.id);
+					if (tab && source.tab) {
+						
+						var index = tp.items.findIndex('id', tab.getId());
+						if (index > 0) {
+							(function() {
+								var re = tp.remove(source.tab, false);
+								var a = tp.getActiveTab();
+								tp.insert(index, re);
+								tp.setActiveTab(a);
+								
+							}).defer(40, this);
 						}
-					}, {
-						text: '<?php echo $tm->_("Rename"); ?>',
-						id: panel.id + '-rename',
-						iconCls: 'silk-table-edit',
-						handler: TabContextMenu.renameTab,
-						scope: this
-					}, {
-						text: '<?php echo $tm->_("Refresh"); ?>',
-						tooltip: '<?php echo $tm->_("Reload the cronk (not the content)"); ?>', 
-						iconCls: 'silk-arrow-refresh',
-						handler: function() { ctxItem.getUpdater().refresh(); }
-					}]
-				});
+						
+					}
+				}
 			}
+		}))(tp.el, { ddGroup: 'cronk-tab-panels' }));
+	},
+	
+	addDraggable : function(ele) {
+		var de = tp.getTabEl(ele);
+		if (de) {
 			
-			ctxItem = tab;
+			Ext.dd.Registry.register(de, { id: ele.getId() } );
 			
-			if (!tp) tp = panel;
+			ele.dd = (new (Ext.extend (Ext.dd.DragSource, {
+				init: function() {
+					Ext.dd.DD.prototype.init.apply(this, arguments);
+					this.setYConstraint(0,0);
+					this.tab = ele;
+				},
+				
+				onStartDrag : function(x, y) {
+					// tp.hideTabStripItem(ele);
+				},
+				
+				endDrag : function(e) {
+					// tp.unhideTabStripItem(ele);
+				},
+				
+				
+			}))(de, { ddGroup: 'cronk-tab-panels' }))
+		}
+	}
+})));
+
+var CronkTabPlugin = (new (function() {
+
+	var tp = null;
+	var ctxItem = null;
+	var contextmenu = null;
+	var keyMap = null
+
+	Ext.apply(this, {
+		
+		init: function(panel) {
+			tp = panel;
 			
-			this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
-			this.contextmenu.items.get(panel.id + '-close-others').setDisabled(!tab.closable);
-			this.contextmenu.items.get(panel.id + '-rename').setDisabled(!tab.closable);
+			// create  our drop target for the cronks
+			tp.on('afterrender', this.createDropTarget, this, { single: true });
 			
-			this.contextmenu.showAt(e.getPoint());
+			// Deny removing all tabs
+			tp.on('beforeremove', this.itemRemoveActiveHandler, this);
+			
+			// Enable title change bubble to safe the state 
+			// of the component
+			tp.on('add', this.itemModifier, this);
+			
+			// Saving the last tab for a history
+			tp.on('beforetabchange', this.itemActivate, this);
+			
+			// Adding the contextmenu
+			tp.on('contextmenu', this.contextMenu, this);
+			
+			// Check if we've no tabs and say hello if the frame is empty
+			tp.on('afterrender', this.sayHello, this, { single: true, delay: 5 });
+			
+			// Prevent refresh
+			this.applyGlobalKeyMap();
 		},
 		
-		renameTab : function() {
-			var msg = Ext.Msg.prompt('<?php echo $tm->_("Enter title"); ?>', '<?php echo $tm->_("Change title for this tab"); ?>', function(btn, text) {
-				
-				if (btn == 'ok' && text) {
-					ctxItem.setTitle(text);
-				}
-						
-			}, this, false, ctxItem.title);
-			
-			// Move the msgbox to our context menu
-			msg.getDialog().alignTo(this.contextmenu.el, 'tr-tr');
-		}
-	};
-	
-}();
-
-var CronkTabHandler = function() {
-	
-	var pub = {
+		createWelcomeCronk : function() {
+			return AppKit.Ext.CronkMgr.create({
+				title: _("Welcome"),
+				crname: 'portalHello',
+				loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
+				closable: true
+			});
+		},
 		
-		tabPanelDropTarget : function(t) {
+		sayHello : function() {
+			if (tp.items.getCount() < 1) {
+				tp.setActiveTab(tp.add(this.createWelcomeCronk()));
+			}
+		},
+		
+		applyGlobalKeyMap : function() {
+			keyMap = new Ext.KeyMap(Ext.getDoc(), {
+				key: Ext.EventObject.F5,
+				fn: function(keycode, e) {
+					
+					if (Ext.isIE) {
+						e.browserEvent.keyCode = Ext.EventObject.ESC
+					}
+					
+					var tab = tp.getActiveTab();
+					if (tab) {
+						e.stopEvent();
+						tab.getUpdater().refresh();
+					}
+				},
+				scope: this
+			});
+		},
+		
+		createDropTarget : function() {
+			var t = tp;
 			new Ext.dd.DropTarget(t.header, {
 							ddGroup: 'cronk',
 							
@@ -101,30 +169,6 @@ var CronkTabHandler = function() {
 								tabPanel.setActiveTab(panel);
 							}
 			});
-		},
-		
-		createWelcomeCronk : function() {
-			return AppKit.Ext.CronkMgr.create({
-				title: '<?php echo $tm->_("Welcome"); ?>',
-				crname: 'portalHello',
-				parentid: undefined,
-				layout: 'fit',
-				loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-				closable: false
-			});
-		},
-		
-		itemObserver : function(tabPanel) {
-			
-			(function() {
-				
-				if (tabPanel.items.getCount() <= 0) {
-					tabPanel.add(pub.createWelcomeCronk());
-				}
-				
-			}).defer(200);
-			
-			return true;
 		},
 		
 		itemRemoveActiveHandler : function (tabPanel, ri) {
@@ -158,19 +202,74 @@ var CronkTabHandler = function() {
 			if (ctab && "id" in ctab) {
 				s.add('last_tab', ctab.id);
 			}
+		},
+		
+		contextMenu : function (panel, tab, e) {
+			if (!this.contextmenu) {
+				this.contextmenu = new Ext.menu.Menu({
+					items: [{
+						text: _("Close"),
+						id: panel.id + '-close',
+						iconCls: 'silk-cross',
+						handler: function() { panel.remove(ctxItem); }
+					}, {
+						text: _("Close others"),
+						id: panel.id + '-close-others',
+						handler: function() {
+							tp.items.each(function(item){
+								if(item.closable && item != ctxItem){
+									tp.remove(item);
+								}
+							});
+						}
+					}, {
+						text: _("Rename"),
+						id: panel.id + '-rename',
+						iconCls: 'silk-table-edit',
+						handler: this.renameTab,
+						scope: this
+					}, {
+						text: _("Refresh"),
+						tooltip: _("Reload the cronk (not the content)"), 
+						iconCls: 'silk-arrow-refresh',
+						handler: function() { ctxItem.getUpdater().refresh(); }
+					}]
+				});
+			}
+			
+			ctxItem = tab;
+			
+			this.contextmenu.items.get(panel.id + '-close').setDisabled(!tab.closable);
+			this.contextmenu.items.get(panel.id + '-close-others').setDisabled(!tab.closable);
+			this.contextmenu.items.get(panel.id + '-rename').setDisabled(!tab.closable);
+			this.contextmenu.showAt(e.getPoint());
+		},
+		
+		renameTab : function() {
+			var msg = Ext.Msg.prompt(_("Enter title"), _("Change title for this tab"), function(btn, text) {
+				
+				if (btn == 'ok' && text) {
+					ctxItem.setTitle(text);
+				}
+						
+			}, this, false, ctxItem.title);
+			
+			// Move the msgbox to our context menu
+			msg.getDialog().alignTo(this.contextmenu.el, 'tr-tr');
 		}
 		
-	};
-	
-	return pub;
-	
-}();
+	});
+
+}));
 
 var tabPanel = new Ext.TabPanel({
 	id : 'cronk-tabs',
 	border : false,
 	enableTabScroll :true,
 	resizeTabs : false,
+	
+	// Plugin
+	plugins: [CronkTabPlugin, TabDragOrder],
 	
 	// This component is stateful!
 	stateful: true,
@@ -226,17 +325,6 @@ var tabPanel = new Ext.TabPanel({
 		
 		return true;
 	},
-	
-	// Here comes the drop zone
-	listeners: {
-		add: CronkTabHandler.itemModifier,
-		render: CronkTabHandler.tabPanelDropTarget,
-		contextmenu: TabContextMenu.handle,
-		staterestore: CronkTabHandler.itemObserver,
-		removed: CronkTabHandler.itemObserver,
-		beforeremove: CronkTabHandler.itemRemoveActiveHandler,
-		beforetabchange: CronkTabHandler.itemActivate
-	}
 });
 
 var cronk_list_id = AppKit.Ext.genRandomId('cronk');
@@ -434,4 +522,6 @@ container.doLayout(false, true);
 }).defer(3000, container);
 
 });
+
+// ]]> -->
 </script>

@@ -58,6 +58,10 @@ class AppKitAuthDispatcher extends AppKitFactory implements AppKitEventHandlerIn
 		return true;
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see lib/appkit/event/AppKitEventHandlerInterface#handleEvent($event)
+	 */
 	public function handleEvent(AppKitEvent &$event) {
 		return $this->initAuthProviders();
 	}

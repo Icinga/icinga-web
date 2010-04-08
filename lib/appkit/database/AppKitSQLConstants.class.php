@@ -30,7 +30,7 @@ class AppKitSQLConstants {
 	
 	private static $ICINGA_OPERATORS = array (
 		self::SQL_OP_IS				=> IcingaApi::MATCH_EXACT,
-		self::SQL_OP_NOTIS			=> IcingaApi::MATCH_NOTIS,
+		self::SQL_OP_NOTIS			=> IcingaApi::MATCH_NOT_EQUAL,
 		self::SQL_OP_CONTAIN		=> IcingaApi::MATCH_LIKE,
 		self::SQL_OP_GREATERTHAN	=> IcingaApi::MATCH_GREATER_THAN,
 		self::SQL_OP_LESSTHAN		=> IcingaApi::MATCH_LESS_THAN,

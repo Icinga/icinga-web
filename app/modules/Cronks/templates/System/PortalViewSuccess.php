@@ -78,9 +78,10 @@
 									
 								}, this);
 								// return this.superclass().notifyOver.call(this, dd, e, data);
-								// return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
 								
-								return this.dropAllowed;
+								return Ext.dd.DropTarget.prototype.notifyOver.call(this, dd, e, data);
+								
+								// return this.dropAllowed;
 							},
 							
 							notifyDrop: function(dd, e, data) {
@@ -107,12 +108,10 @@
 									
 									title: data.dragData.name,
 									closable: true,
-									layout: 'fit',
 									xtype: 'portlet',
-									
 									tools: tools,
-									
 									height: 200,
+									border: true,
 									
 									// Resizer properties
 									heightIncrement:16,
@@ -126,10 +125,10 @@
 								// Add them to the portal
 								p.items.get(this.ac || 0).add(portlet);
 								
-								this.ac = undefined;
+								// Bubbling render event
+								portlet.show();	// Needed for webkit
+								portal.doLayout();
 								
-								// Bubble the render event
-								p.doLayout();
 								// Redefine the updater to held default properties
 								/* portlet.getUpdater().setDefaultUrl({
 									url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
@@ -273,6 +272,7 @@
 									PortalHandler.createResizer(cronk);
 									
 									this.get(index).add(cronk);
+									cronk.show();
 									
 								}, this);
 								
