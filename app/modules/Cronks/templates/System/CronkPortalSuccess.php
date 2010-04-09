@@ -4,8 +4,6 @@
 <div id="<?php echo $parentid; ?>">
 </div>
 <script type="text/javascript">
-<!-- // <![CDATA[
-
 Ext.onReady(function() {
 
 AppKit.Ext.pageLoadingMask();
@@ -475,6 +473,4 @@ if ((south = Ext.getCmp('south-frame'))) {
 }
 
 });
-
-// ]]> -->
 </script>

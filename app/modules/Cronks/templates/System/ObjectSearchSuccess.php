@@ -3,7 +3,7 @@
 ?>
 <script type="text/javascript">
 
-//(function() {
+(function() {
 
 	var oid = '<?php echo $parentid; ?>';
 	var coParent = Ext.getCmp(oid);
@@ -406,6 +406,6 @@
 	});
 	
 	coParent.add(oSearch);
-//})();
+})();
 
 </script>

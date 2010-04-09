@@ -5,7 +5,6 @@
 ?>
 
 <script type="text/javascript">
-<!-- // <![CDATA[
 (function() {
 	
 	Ext.onReady(function() {
@@ -93,5 +92,4 @@
 	});
 	
 })();
-// ]]> -->
 </script>
