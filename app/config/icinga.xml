@@ -153,6 +153,7 @@
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
+			<parameter>%core.root_dir%/lib/appkit/js/ext/slidingtabs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
 

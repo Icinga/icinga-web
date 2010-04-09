@@ -7,73 +7,21 @@
 
 Ext.onReady(function() {
 
-var TabDragOrder = function() {
-	var tp = null;
+var SlidingTabs = (new(Ext.extend(Object, {
 	
-	TabDragOrder.superclass.constructor.call(this);
-}
-
-TabDragOrder = (new (Ext.extend(TabDragOrder, Ext.util.Observable, {
-	init : function(p) {
-		tp = p;
-		
-		tp.on('render', this.initDD, this, { single: true });
-		
-		tp.on('add', function(panel, item, index) { this.addDraggable(item) }, this);
+	init: function(tabpanel){
+		tabpanel.initTab = tabpanel.initTab.createSequence(this.initTab,tabpanel);
 	},
 	
-	initDD : function() {
-		this.dropTarget = (new (Ext.extend(Ext.dd.DropTarget, {
-			notifyDrop : function(source, e, data) {
-				var te = e.getTarget('li.x-tab-strip-closable');
-				var d = Ext.dd.Registry.getTarget(te);
-				if (d && "id" in d) {
-					var tab = Ext.getCmp(d.id);
-					if (tab && source.tab) {
-						
-						var index = tp.items.findIndex('id', tab.getId());
-						if (index > 0) {
-							(function() {
-								var re = tp.remove(source.tab, false);
-								var a = tp.getActiveTab();
-								tp.insert(index, re);
-								tp.setActiveTab(a);
-								
-							}).defer(40, this);
-						}
-						
-					}
-				}
-			}
-		}))(tp.el, { ddGroup: 'cronk-tab-panels' }));
-	},
-	
-	addDraggable : function(ele) {
-		var de = tp.getTabEl(ele);
-		if (de) {
-			
-			Ext.dd.Registry.register(de, { id: ele.getId() } );
-			
-			ele.dd = (new (Ext.extend (Ext.dd.DragSource, {
-				init: function() {
-					Ext.dd.DD.prototype.init.apply(this, arguments);
-					this.setYConstraint(0,0);
-					this.tab = ele;
-				},
-				
-				onStartDrag : function(x, y) {
-					// tp.hideTabStripItem(ele);
-				},
-				
-				endDrag : function(e) {
-					// tp.unhideTabStripItem(ele);
-				},
-				
-				
-			}))(de, { ddGroup: 'cronk-tab-panels' }))
-		}
+	initTab: function(item, index){
+		var p = this.getTemplateArgs(item);
+		if(!this.slidingTabsID) this.slidingTabsID = Ext.id(); // Create a unique ID for this tabpanel
+		new Ext.ux.DDSlidingTab(p, this.slidingTabsID, {
+			tabpanel:this // Pass a reference to the tabpanel for each dragObject
+		});
 	}
-})));
+	
+}))()); 
 
 var CronkTabPlugin = (new (function() {
 
@@ -269,7 +217,7 @@ var tabPanel = new Ext.TabPanel({
 	resizeTabs : false,
 	
 	// Plugin
-	plugins: [CronkTabPlugin, TabDragOrder],
+	plugins: [CronkTabPlugin, SlidingTabs],
 	
 	// This component is stateful!
 	stateful: true,
