@@ -1,11 +1,18 @@
 <?php 
 	$parentid = $rd->getParameter('parentid');
 ?>
-<div id="<?php echo $parentid; ?>"></div>
+<div id="<?php echo $parentid; ?>">
+</div>
 <script type="text/javascript">
 <!-- // <![CDATA[
 
 Ext.onReady(function() {
+
+AppKit.Ext.pageLoadingMask();
+
+setTimeout(function() {
+	AppKit.Ext.pageLoadingMask(true);
+}, 3000);
 
 var SlidingTabs = (new(Ext.extend(Object, {
 	
@@ -356,15 +363,18 @@ var container = new Ext.Panel({
 });
 
 container.on('afterrender', function() {
-	container.setHeight(Ext.lib.Dom.getViewHeight() - 68);
+	container.setHeight(Ext.lib.Dom.getViewHeight()-50);
 }, container, { single: true });
+
+// Fix lay problems later
+container.on('afterrender', function() { this.doLayout(false, true) }, container, { delay: 2000 });
 
 // Render the container
 container.render("<?php echo $parentid; ?>");
 
 // Resize the container on windowResize
 Ext.EventManager.onWindowResize(function(w,h) {
-	this.setHeight(h-68);
+	this.setHeight(h-50);
 	this.doLayout(false);
 }, container);
 
@@ -391,7 +401,7 @@ if ((search = Ext.getCmp(cronk_search_id))) {
 		crname: 'icingaSearch'
 	});
 
-	search.add(cSearch);	
+	search.add(cSearch);
 }
 
 // Status-summary component
@@ -404,6 +414,7 @@ if ((status_summary = Ext.getCmp(cronk_status_summary_id))) {
 	});
 
 	status_summary.add(cStatusSummary);
+	cStatusSummary.show();
 }
 
 if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
@@ -414,6 +425,7 @@ if ((status_summary_chart = Ext.getCmp(cronk_status_summary_chart_id))) {
 	});
 	
 	status_summary_chart.add(cStatusSummaryChart);
+	cStatusSummaryChart.show();
 }
 
 
@@ -461,13 +473,6 @@ if ((south = Ext.getCmp('south-frame'))) {
 	
 	south.add(cLog);
 }
-
-container.doLayout(false, true);
-
-// Okay redraw all after a while (if all events are gone)
-(function() {
-	this.doLayout(false, true);
-}).defer(3000, container);
 
 });
 

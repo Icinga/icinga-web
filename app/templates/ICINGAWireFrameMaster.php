@@ -32,15 +32,7 @@
 				
 				<?php echo $inner; ?>
 				</div>
-				
-				<div class="clear"></div>
 			</div>
-			
-			<?php if (isset($slots['footer'])) { ?>
-			<div id="frameBottom">
-				<?php echo $slots['footer']; ?>
-			</div>
-			<?php } ?>
 		
 		</div>
 	</body>
