@@ -10,7 +10,7 @@
 		* The home itself points to index_page route
 	-->
 	<setting name="appkit.home_links">
-		<parameter name="icinga.about">About</parameter>
+		<!--<parameter name="icinga.about">About</parameter> -->
 	</setting>
 
 	<!--
@@ -18,6 +18,7 @@
 		* If the path is empty, we try to detect the path
 	-->
 	<setting name="appkit.web_path"></setting>
+	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
 	
 	<!-- 
 		Overwrite php ini settings:
@@ -112,7 +113,7 @@
 		Metatags
 	-->
 	<setting name="appkit.meta_tags">
-		<parameter name="author">(c) 2009 Icinga developer team - www.icinga.org</parameter>
+		<parameter name="author">(c) 2009,2010 Icinga developer team - www.icinga.org</parameter>
 		<parameter name="robots">noindex</parameter>
 	</setting>
 	
@@ -394,7 +395,7 @@
 	<setting name="appkit.version.major">0</setting>
 	<setting name="appkit.version.minor">9</setting>
 	<setting name="appkit.version.patch">1</setting>
-	<setting name="appkit.version.extension">alpha</setting>
+	<setting name="appkit.version.extension">beta</setting>
 	<setting name="appkit.version.name">icinga-web</setting>
 	
 	<!-- PLACEHOLDER -->

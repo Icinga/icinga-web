@@ -81,7 +81,7 @@
 			
 				<!-- Icinga index route -->
 				<route name=".home" pattern="^$" action="Index" />
-				<route name=".about" pattern="^/about$" action="Index" />
+				<route name=".about" pattern="^/about$" action="Icinga.Help" output_type="simplecontent" />
 				
 				<!-- The main view -->
 				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />

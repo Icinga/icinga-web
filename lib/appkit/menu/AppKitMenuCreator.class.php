@@ -125,6 +125,16 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 				}
 				
 			}
+			
+			// Adding some help
+			$my = $nav->getContainer()->addItem(AppKitNavItem::create('help', null)
+				->setCaption('Help')
+			);
+			
+			$my->addSubItem(AppKitNavItem::create('about', null)
+				->setCaption('About')
+				->setJsHandler("AppKit.Ext.contentWindow.createDelegate(null, [{ url: '". AgaviContext::getInstance()->getRouting()->gen('icinga.about') ."' }])")
+			);
 		}
 
 	}

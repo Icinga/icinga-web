@@ -7,6 +7,7 @@ class AppKitNavItem extends AppKitBaseClass {
 	private $route		= null;
 	private $image		= null;
 	private $html		= null;
+	private $jshandler	= null;
 	private $args		= array ();
 	
 	/**
@@ -116,6 +117,24 @@ class AppKitNavItem extends AppKitBaseClass {
 	 */
 	public function getRoute() {
 		return $this->route;
+	}
+	
+	/**
+	 * Sets a javascript handler for the menu
+	 * @param string $handler_string
+	 * @return AppKitNavItem
+	 */
+	public function setJsHandler($handler_string) {
+		$this->jshandler = $handler_string;
+		return $this;
+	}
+	
+	/**
+	 * Returns the js handler if one
+	 * @return string
+	 */
+	public function getJsHandler() {
+		return $this->jshandler;
 	}
 	
 	/**

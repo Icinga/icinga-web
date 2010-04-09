@@ -60,7 +60,7 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 	 * 
 	 * @return string
 	 */
-	public function extractWebPath() {
+	public static function extractWebPath() {
 		// Starting with the complete string
 		$request_uri = $_SERVER['REQUEST_URI'];
 		
@@ -80,6 +80,16 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 		}
 		
 		return $request_uri;
+	}
+	
+	/**
+	 * Converts an absolute path to web resource into relative
+	 * @param string $path path or resource
+	 * @return string the converted path
+	 */
+	public static function absolute2Rel($path) {
+		$abw = AgaviConfig::get('de.icinga.appkit.web_absolute_path');
+		return AgaviConfig::get('de.icinga.appkit.web_path'). preg_replace('@^'. preg_quote($abw). '@', '', $path);
 	}
 	
 	/**

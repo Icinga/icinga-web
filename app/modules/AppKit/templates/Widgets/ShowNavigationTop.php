@@ -34,13 +34,14 @@ foreach ($iterator as $name=>$navItem) {
 	if (!preg_match('@(\{|\[)$@', $d)) $d .= ',';
 	
 	$d .= '{';
-	$d .= 'text: "'. $navItem->getCaption(). '",';
+	$d .= 'text: "'. $navItem->getCaption(). '"';
 	
 	if ($navItem->getRoute() !== null) {
-		$d .= 'href: "'. $ro->gen( $navItem->getRoute() ). '"';
+		$d .= ', href: "'. $ro->gen( $navItem->getRoute() ). '"';
 	
-	} else {
-		// UH?
+	} 
+	elseif ($navItem->getJsHandler() !== null) {
+		$d .= ', handler: '.	$navItem->getJsHandler(); 
 	}
 
 	if ($navItem->getContainer()->hasChildren()) {

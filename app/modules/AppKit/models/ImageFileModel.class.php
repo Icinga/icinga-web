@@ -42,6 +42,10 @@ implements AgaviISingletonModel
 		return $this->image_file;
 	}
 	
+	public function getImageFileRelative() {
+		return AppKitStringUtil::absolute2Rel($this->getImageFile());
+	}
+	
 	public function getImageContentType() {
 		return $this->image_header;
 	}
