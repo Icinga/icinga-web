@@ -958,6 +958,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/i18n/po
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/PLACEHOLDER $(DESTDIR)$(prefix)/app/cache/config/PLACEHOLDER
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/autoload.xml $(DESTDIR)$(prefix)/app/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
@@ -972,9 +973,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstants.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstants.class.php
@@ -1251,13 +1251,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProcSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProcSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkLoaderSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkLoaderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/IframeViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/IframeViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalHelloSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalHelloSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusMapSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusMapSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/AjaxGridLayout.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/AjaxGridLayout.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/CommandMetaInformation.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/CommandMetaInformation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/MetaInformation.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/MetaInformation.xml
@@ -3700,9 +3700,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProviderDatabase.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProviderDatabase.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProviderHttpBasic.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProviderHttpBasic.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/provider/AppKitAuthProviderLdap.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/provider/AppKitAuthProviderLdap.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthDispatcher.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthDispatcher.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitSecurityUser.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitSecurityUser.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitUserPreferences.interface.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitUserPreferences.interface.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/auth/AppKitAuthDispatcher.class.php $(DESTDIR)$(prefix)/lib/appkit/auth/AppKitAuthDispatcher.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/cache/AppKitCache.class.php $(DESTDIR)$(prefix)/lib/appkit/cache/AppKitCache.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/cache/AppKitFileCache.class.php $(DESTDIR)$(prefix)/lib/appkit/cache/AppKitFileCache.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/class/AppKitArrayContainer.class.php $(DESTDIR)$(prefix)/lib/appkit/class/AppKitArrayContainer.class.php
@@ -3773,6 +3773,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/HttpStateProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/HttpStateProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ScriptDynaLoader.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ScriptDynaLoader.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/ExtJs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/ExtJs.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/slidingtabs.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/slidingtabs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/AppKit.js $(DESTDIR)$(prefix)/lib/appkit/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/Grapher.js $(DESTDIR)$(prefix)/lib/appkit/js/Grapher.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/lib/appkit/js/SimpleDataProvider.js
