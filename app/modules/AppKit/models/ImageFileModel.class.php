@@ -16,9 +16,10 @@ implements AgaviISingletonModel
 	private $image_extension = null;
 	private $image_header = null;
 	
-	public function __construct($image_string) {
-		$this->setImageString($image_string);
-		$this->image_file = $this->findImage();
+	public function __construct($image_string=null) {
+		if ($image_string !== null) {
+			$this->setImageString($image_string);
+		}
 	}
 	
 	public function getImageResource() {
@@ -32,6 +33,7 @@ implements AgaviISingletonModel
 	
 	public function setImageString($image_string) {
 		$this->image_string = str_replace('.', '/', $image_string);
+		$this->image_file = $this->findImage();
 	}
 	
 	public function getImageString() {

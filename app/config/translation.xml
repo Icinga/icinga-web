@@ -64,7 +64,8 @@
 					<!-- Date/time (also important for the validators) -->
 					<date_formatter>
 						<ae:parameter name="type">date</ae:parameter>
-						<ae:parameter name="format">dd.MM.yyyy hh:mm:ss</ae:parameter>
+						<!-- dd.MM.yyyy hh:mm:ss -->
+						<ae:parameter name="format">medium</ae:parameter>
 					</date_formatter>
 					
 			</translator>

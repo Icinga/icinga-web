@@ -1,5 +1,35 @@
-<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+<?php 
+	$img_icinga = (string)AppKitHtmlHelper::getInstance()->Image('icinga.icinga-logo', 'icinga', array('style' => 'width: 200px'));
+	$img_idot = (string)AppKitHtmlHelper::getInstance()->Image('icinga.idot-small');
+?>
+<div style="width: 200px; margin: 0 auto;">
+	<a href="http://www.icinga.org/">
+		<?php echo $img_icinga; ?>
+	</a>
+</div>
 
-<p> It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+<h2 style="text-align: center;">
+	Version <?php echo AgaviConfig::get('de.icinga.appkit.version.release'); ?>
+</h2>
 
-<p> The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then </p>
+<h3 style="text-align: center;">
+	<?php echo $tm->_d(AgaviConfig::get('de.icinga.appkit.version.releasedate')); ?>
+</h3>
+
+<p style="text-align: center;" class="legal">
+	Copyright &copy; 2009,2010 Icinga Development Team.<br /><br />
+	Portions copyright by Nagios/Icinga community members - see the THANKS file for more information.
+</p>
+
+<p style="text-align: center;" class="legal">
+	Icinga is licensed under the GNU General Public License and is provided
+	AS IS 	with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN,
+	MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE.<br /><br />
+	All other trademarks are the property of their respective owners.
+</p>
+
+<p style="text-align: center; margin: 20px auto;">
+	<a title="<?php echo $tm->_('Icinga'); ?>" href="http://www.icinga.org/"><?php echo $img_idot; ?></a>
+	<a title="<?php echo $tm->_('Dev'); ?>" href="http://dev.icinga.org/"><?php echo $img_idot; ?></a>
+	<a title="<?php echo $tm->_('Docs'); ?>" href="http://docs.icinga.org/"><?php echo $img_idot; ?></a> 
+</p>

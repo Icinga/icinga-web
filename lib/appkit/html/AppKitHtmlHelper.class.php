@@ -26,7 +26,9 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
 	
 	public function imageUrl($image_name) {
 		// return $this->getAgaviRouter()->gen(self::ROUTE_NAME_IMAGE, array('image' => $image_name));
-		return AgaviContext::getInstance()->getModel('ImageFile', 'AppKit', array($image_name))->getImageFileRelative();
+		$mod = AgaviContext::getInstance()->getModel('ImageFile', 'AppKit');
+		$mod->setImageString($image_name);
+		return $mod->getImageFileRelative();
 	}
 	
 	public function Image($image_name, $alt=false, array $attributes = array ()) {

@@ -921,6 +921,10 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Data
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/tests/lib/Test/Harness
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icingaScheduler
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobParser
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icingaScheduler/cronDefinitions
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icingaScheduler/res
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/ajax
@@ -959,6 +963,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/PLACEHOLDER $(DESTDIR)$(prefix)/app/cache/config/PLACEHOLDER
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/autoload.xml $(DESTDIR)$(prefix)/app/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
@@ -969,11 +976,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/validators.xml $(DESTDIR)$(prefix)/app/config/validators.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/cronks.xml $(DESTDIR)$(prefix)/app/config/cronks.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
@@ -1087,7 +1091,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/AjaxAutoCompleteDataModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/AjaxAutoCompleteDataModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/FileSourceModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/FileSourceModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/HeaderDataModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/HeaderDataModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/ImageFileModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/ImageFileModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/LogAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/LogAdminModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/MessageQueueAggregatorModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/MessageQueueAggregatorModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/MyPreferencesModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/MyPreferencesModel.class.php
@@ -1096,6 +1099,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/RoleAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/RoleAdminModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/SquishFileContainerModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/SquishFileContainerModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/UserAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/UserAdminModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/ImageFileModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/ImageFileModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/EditSuccess.php
@@ -1249,15 +1253,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/CronkTrigger.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/CronkTrigger.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusSummarySuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusSummarySuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProcSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProcSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkLoaderSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkLoaderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/IframeViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/IframeViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalHelloSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalHelloSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusMapSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusMapSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkPortalSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkPortalSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/CronkListingSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/CronkListingSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/AjaxGridLayout.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/AjaxGridLayout.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/CommandMetaInformation.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/CommandMetaInformation.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/MetaInformation.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/MetaInformation.xml
@@ -1289,9 +1293,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StaticContentSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StaticContentSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/PortalViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/PortalViewAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/HelpAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/HelpAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/IcingaApiSimpleDataProviderAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/IcingaApiSimpleDataProviderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/IndexAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/cache/Icinga/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Web/cache/Icinga/PortalView.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/cache/Icinga/Help.xml $(DESTDIR)$(prefix)/app/modules/Web/cache/Icinga/Help.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/cache/IcingaApiSimpleDataProvider.xml $(DESTDIR)$(prefix)/app/modules/Web/cache/IcingaApiSimpleDataProvider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/cache/Index.xml $(DESTDIR)$(prefix)/app/modules/Web/cache/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/autoload.xml $(DESTDIR)$(prefix)/app/modules/Web/config/autoload.xml
@@ -1304,19 +1310,22 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/models/IcingaApiSimpleDataProviderModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/models/IcingaApiSimpleDataProviderModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/models/ViewExtenderModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/models/ViewExtenderModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/PortalViewSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/HelpSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/HelpSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/IcingaApiSimpleDataProviderSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/IcingaApiSimpleDataProviderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/PortalView.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/Help.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/Help.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/IcingaApiSimpleDataProvider.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/IcingaApiSimpleDataProvider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Index.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/PortalViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/PortalViewSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/HelpSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/HelpSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/IcingaApiSimpleDataProviderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/IcingaApiSimpleDataProviderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/IndexSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/_default.php $(DESTDIR)$(prefix)/app/templates/exceptions/_default.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/web-html.php $(DESTDIR)$(prefix)/app/templates/exceptions/web-html.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/web.php $(DESTDIR)$(prefix)/app/templates/exceptions/web.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/ICINGAWireFrameMaster.php $(DESTDIR)$(prefix)/app/templates/ICINGAWireFrameMaster.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/Master.php $(DESTDIR)$(prefix)/app/templates/Master.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/ICINGAWireFrameMaster.php $(DESTDIR)$(prefix)/app/templates/ICINGAWireFrameMaster.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config.php $(DESTDIR)$(prefix)/app/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
@@ -3759,8 +3768,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/form/AppKitTextboxElement.class.php $(DESTDIR)$(prefix)/lib/appkit/html/form/AppKitTextboxElement.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitBulkLoader.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitBulkLoader.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitHtmlEntitiesInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitHtmlEntitiesInterface.interface.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitHtmlHelper.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitHtmlHelper.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitXmlTag.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitXmlTag.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/html/AppKitHtmlHelper.class.php $(DESTDIR)$(prefix)/lib/appkit/html/AppKitHtmlHelper.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/form/JSONSubmit.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/form/JSONSubmit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/GridPanel.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/GridPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/js/ext/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/lib/appkit/js/ext/grid/MetaGridCreator.js
@@ -3783,9 +3792,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/logging/AppKitDoctrineLoggerAppender.class.php $(DESTDIR)$(prefix)/lib/appkit/logging/AppKitDoctrineLoggerAppender.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/logging/AppKitLoggerManager.class.php $(DESTDIR)$(prefix)/lib/appkit/logging/AppKitLoggerManager.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/logging/AppKitMessageQueueLoggerAppender.class.php $(DESTDIR)$(prefix)/lib/appkit/logging/AppKitMessageQueueLoggerAppender.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/menu/AppKitMenuCreator.class.php $(DESTDIR)$(prefix)/lib/appkit/menu/AppKitMenuCreator.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/menu/AppKitNavContainer.class.php $(DESTDIR)$(prefix)/lib/appkit/menu/AppKitNavContainer.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/menu/AppKitNavContainerInterface.interface.php $(DESTDIR)$(prefix)/lib/appkit/menu/AppKitNavContainerInterface.interface.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/menu/AppKitMenuCreator.class.php $(DESTDIR)$(prefix)/lib/appkit/menu/AppKitMenuCreator.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/menu/AppKitNavItem.class.php $(DESTDIR)$(prefix)/lib/appkit/menu/AppKitNavItem.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitMessageQueue.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitMessageQueue.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/appkit/queue/AppKitMessageQueueItem.class.php $(DESTDIR)$(prefix)/lib/appkit/queue/AppKitMessageQueueItem.class.php
@@ -4310,18 +4319,19 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/MainPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/MainPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/feed-viewer/feed-viewer.css $(DESTDIR)$(prefix)/lib/ext3/examples/feed-viewer/feed-viewer.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/anchoring.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/anchoring.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/check-radio.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/check-radio.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom-access.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom-access.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/file-upload.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/file-upload.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid-access.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid-access.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forms.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/forms.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/states.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/states.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.css $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom-access.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom-access.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid-access.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid-access.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/absform.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/absform.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.html
@@ -4337,12 +4347,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-errors.xml $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-errors.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/xml-form.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/xml-form.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom-access.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom-access.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/dynamic.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/dynamic.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/adv-vtypes.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/adv-vtypes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/combos.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/combos.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/custom.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/custom.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid-access.html $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid-access.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/form-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/form-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/forum-search.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/forum-search.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/vbox-form.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/vbox-form.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/form/states.js $(DESTDIR)$(prefix)/lib/ext3/examples/form/states.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/cmp-bg.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/cmp-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/forum/details.gif $(DESTDIR)$(prefix)/lib/ext3/examples/forum/details.gif
@@ -4370,13 +4379,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.json $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/gen-names.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/gen-names.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/details.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/details.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.html
@@ -4384,12 +4388,14 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/topic.gif $(DESTDIR)$(prefix)/lib/ext3/examples/grid/topic.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/gen-names.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/gen-names.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-examples.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-examples.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/locking-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/locking-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/row-editor.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/row-editor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals-hybrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals-hybrid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/ColumnHeaderGroup.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/ColumnHeaderGroup.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/array-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/array-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.html
@@ -4397,13 +4403,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/buffer.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/buffer.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.html $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.html
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding-with-classes.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding-with-classes.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/binding.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/binding.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/column-header-group.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/column-header-group.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grid-plugins.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grid-plugins.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/edit-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/edit-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/from-markup.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/from-markup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.css $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/grouping.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/grouping.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/progress-bar-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/progress-bar-pager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/paging.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/paging.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/property-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/property-grid.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/sliding-pager.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/sliding-pager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/xml-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/xml-grid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grid/totals.js $(DESTDIR)$(prefix)/lib/ext3/examples/grid/totals.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/group.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/group.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/subscriptions.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/subscriptions.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/grouptabs/images/templates.png $(DESTDIR)$(prefix)/lib/ext3/examples/grouptabs/images/templates.png
@@ -4900,14 +4909,18 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid-data.json $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid-data.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/treegrid.html $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/treegrid.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/treegrid/tree-grid.js $(DESTDIR)$(prefix)/lib/ext3/examples/treegrid/tree-grid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnHeaderGroup.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnHeaderGroup.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GMapPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GMapPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTabPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTabPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portal.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SlidingPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SlidingPager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldLabeler.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldLabeler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ItemSelector.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ItemSelector.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/LockingGridView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/LockingGridView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/MultiSelect.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/MultiSelect.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PagingMemoryProxy.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PagingMemoryProxy.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PanelResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PanelResizer.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portal.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portal.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PortalColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PortalColumn.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portlet.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portlet.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ProgressBarPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ProgressBarPager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowEditor.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowEditor.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SearchField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SearchField.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/CenterLayout.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/CenterLayout.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ColumnHeaderGroup.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ColumnHeaderGroup.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/css/ColumnNodeUI.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/css/ColumnNodeUI.css
@@ -4970,36 +4983,32 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/TreeGridSorter.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/TreeGridSorter.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/treegrid/treegrid.css $(DESTDIR)$(prefix)/lib/ext3/examples/ux/treegrid/treegrid.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SearchField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SearchField.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spinner.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spotlight.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spotlight.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TableGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TableGrid.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all-debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/BufferView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/BufferView.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CheckColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CheckColumn.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnHeaderGroup.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnHeaderGroup.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/DataView-more.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/DataView-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldLabeler.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldLabeler.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Focus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Focus.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GMapPanel.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GMapPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowExpander.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowExpander.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowLayout.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupSummary.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupSummary.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTab.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTab.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SelectBox.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SelectBox.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SliderTip.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SliderTip.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SlidingPager.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SlidingPager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spinner.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SpinnerField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SpinnerField.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Spotlight.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Spotlight.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabCloseMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabCloseMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabScrollerMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabScrollerMenu.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TableGrid.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TableGrid.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/XmlTreeLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/XmlTreeLoader.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CenterLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CenterLayout.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ColumnNodeUI.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ColumnNodeUI.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/FieldReplicator.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/FieldReplicator.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupTab.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupTab.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/MultiSelect.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/MultiSelect.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PanelResizer.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PanelResizer.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PortalColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PortalColumn.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowEditor.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowEditor.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowLayout.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowLayout.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SliderTip.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SliderTip.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SpinnerField.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SpinnerField.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabCloseMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabCloseMenu.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/TabScrollerMenu.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/TabScrollerMenu.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/ux-all-debug.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/ux-all-debug.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/CheckColumn.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/CheckColumn.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/DataView-more.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/DataView-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Focus.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Focus.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/LockingGridView.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/LockingGridView.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/Portlet.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/Portlet.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/RowExpander.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/RowExpander.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/XmlTreeLoader.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/XmlTreeLoader.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/GroupSummary.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/GroupSummary.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/PagingMemoryProxy.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/PagingMemoryProxy.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/ux/SelectBox.js $(DESTDIR)$(prefix)/lib/ext3/examples/ux/SelectBox.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/dance_fever.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/dance_fever.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/gangster_zack.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/gangster_zack.jpg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/view/images/thumbs/kids_hug.jpg $(DESTDIR)$(prefix)/lib/ext3/examples/view/images/thumbs/kids_hug.jpg
@@ -5127,6 +5136,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/toolbar.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/tree.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/structure/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/structure/window.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/menu.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/menu.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/panel.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/panel.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/progress.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/progress.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/qtips.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/qtips.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/resizable.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/resizable.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/slider.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/slider.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/tabs.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/tabs.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/toolbar.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/tree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/window.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/borders.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/borders.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/box.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/box.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/button.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/button.css
@@ -5141,16 +5160,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/grid.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/grid.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/layout.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/layout.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/list-view.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/list-view.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/menu.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/menu.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/panel.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/panel.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/progress.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/progress.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/qtips.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/qtips.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/resizable.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/resizable.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/slider.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/slider.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/tabs.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/tabs.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/toolbar.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/toolbar.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/tree.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/tree.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/visual/window.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/visual/window.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/README.txt $(DESTDIR)$(prefix)/lib/ext3/resources/css/README.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/debug.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/debug.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/css/ext-all-notheme.css $(DESTDIR)$(prefix)/lib/ext3/resources/css/ext-all-notheme.css
@@ -5760,8 +5769,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/charts.swf $(DESTDIR)$(prefix)/lib/ext3/resources/charts.swf
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/expressinstall.swf $(DESTDIR)$(prefix)/lib/ext3/resources/expressinstall.swf
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/resources.jsb $(DESTDIR)$(prefix)/lib/ext3/resources/resources.jsb
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-ajax.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-ajax.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-anim-extra.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-anim-extra.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-anim.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-anim.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-begin.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-begin.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-dom.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-dom.js
@@ -5769,17 +5776,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-event.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-event.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-point.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-point.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-region.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-region.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-ajax.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-ajax.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/core/ext-base-anim-extra.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/core/ext-base-anim-extra.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/ext-base-dom-more.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/ext-base-dom-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/jquery-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/jquery-bridge.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/prototype-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/prototype-bridge.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/adapter/yui-bridge.js $(DESTDIR)$(prefix)/lib/ext3/src/adapter/yui-bridge.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.scroll.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.scroll.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.style.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.style.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.traversal.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.traversal.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/EventManager.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/EventManager.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Ext.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Ext.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Fx.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Template.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Template.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/CompositeElementLite.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/CompositeElementLite.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomHelper.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomHelper.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/DomQuery.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/DomQuery.js
@@ -5787,6 +5789,21 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.insertion.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.insertion.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.position.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.position.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.scroll.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.scroll.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.style.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.style.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Element.traversal.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Element.traversal.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/EventManager.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/EventManager.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Ext.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Ext.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Fx.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Fx.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/core/Template.js $(DESTDIR)$(prefix)/lib/ext3/src/core/core/Template.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.position-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.position-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.scroll-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.scroll-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.style-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.style-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.traversal-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.traversal-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Error.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Error.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/EventManager-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/EventManager-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Ext-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Ext-more.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Template-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Template-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/CompositeElement.js $(DESTDIR)$(prefix)/lib/ext3/src/core/CompositeElement.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/CompositeElementLite-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/CompositeElementLite-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/DomHelper-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/DomHelper-more.js
@@ -5797,14 +5814,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.insertion-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.insertion-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.keys.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.keys.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.legacy.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.legacy.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.position-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.position-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.scroll-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.scroll-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.style-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.style-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Element.traversal-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Element.traversal-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Error.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Error.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/EventManager-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/EventManager-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Ext-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Ext-more.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/core/Template-more.js $(DESTDIR)$(prefix)/lib/ext3/src/core/Template-more.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/core/Connection.js $(DESTDIR)$(prefix)/lib/ext3/src/data/core/Connection.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/Api.js $(DESTDIR)$(prefix)/lib/ext3/src/data/Api.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/data/ArrayReader.js $(DESTDIR)$(prefix)/lib/ext3/src/data/ArrayReader.js
@@ -5848,6 +5857,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/direct/Provider.js $(DESTDIR)$(prefix)/lib/ext3/src/direct/Provider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/direct/RemotingProvider.js $(DESTDIR)$(prefix)/lib/ext3/src/direct/RemotingProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/direct/Transaction.js $(DESTDIR)$(prefix)/lib/ext3/src/direct/Transaction.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-de.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-de.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-el_GR.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-el_GR.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-en.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-en.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-en_GB.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-en_GB.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-es.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-es.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fa.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fa.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fi.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fi.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fr.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fr.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fr_CA.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fr_CA.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-gr.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-gr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-he.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-he.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-hr.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-hr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-hu.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-hu.js
@@ -5883,16 +5902,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-ca.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-ca.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-cs.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-cs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-da.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-da.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-de.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-de.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-el_GR.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-el_GR.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-en.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-en.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-en_GB.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-en_GB.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-es.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-es.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fa.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fa.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fi.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fi.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fr.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fr.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-fr_CA.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-fr_CA.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-gr.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-gr.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/CookieProvider.js $(DESTDIR)$(prefix)/lib/ext3/src/state/CookieProvider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/Provider.js $(DESTDIR)$(prefix)/lib/ext3/src/state/Provider.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/state/StateManager.js $(DESTDIR)$(prefix)/lib/ext3/src/state/StateManager.js
@@ -5997,16 +6006,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreePanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreePanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreeSelectionModel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreeSelectionModel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/tree/TreeSorter.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/tree/TreeSorter.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Resizable.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Resizable.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Shadow.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Shadow.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Slider.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Slider.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitBar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitButton.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/TabPanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/TabPanel.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Toolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Toolbar.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Viewport.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Viewport.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Window.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Window.js
-	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/WindowManager.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/WindowManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Action.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Action.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/BoxComponent.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/BoxComponent.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Button.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Button.js
@@ -6026,6 +6025,16 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Panel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Panel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/PanelDD.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/PanelDD.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/ProgressBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/ProgressBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Resizable.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Resizable.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Shadow.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Shadow.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Slider.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Slider.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitBar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitBar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/SplitButton.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/SplitButton.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/TabPanel.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/TabPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Toolbar.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Toolbar.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Viewport.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Viewport.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/Window.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/Window.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/widgets/WindowManager.js $(DESTDIR)$(prefix)/lib/ext3/src/widgets/WindowManager.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/debug.js $(DESTDIR)$(prefix)/lib/ext3/src/debug.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/CHANGES_ext-3.1.0.html $(DESTDIR)$(prefix)/lib/ext3/CHANGES_ext-3.1.0.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/INCLUDE_ORDER.txt $(DESTDIR)$(prefix)/lib/ext3/INCLUDE_ORDER.txt
@@ -6555,9 +6564,22 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/META.yml $(DESTDIR)$(prefix)/lib/jsgettext/META.yml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/README $(DESTDIR)$(prefix)/lib/jsgettext/README
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/TODO $(DESTDIR)$(prefix)/lib/jsgettext/TODO
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronAgaviAdapter.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronAgaviAdapter.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronJobDefinition.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobDefinition.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronJobMetaProvider.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobMetaProvider.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronJobParser.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobParser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronJobParser/CronAgaviParser.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobParser/CronAgaviParser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronJobParser/CronDBParser.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobParser/CronDBParser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronJobParser/CronXMLParser.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronJobParser/CronXMLParser.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/IcingaCronJob.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/IcingaCronJob.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/IcingaCronJobInterface.php $(DESTDIR)$(prefix)/lib/icingaScheduler/IcingaCronJobInterface.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/cronDefinitions/crons.xml $(DESTDIR)$(prefix)/lib/icingaScheduler/cronDefinitions/crons.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/icingaCron.php $(DESTDIR)$(prefix)/lib/icingaScheduler/icingaCron.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/res/storage.dat $(DESTDIR)$(prefix)/lib/icingaScheduler/res/storage.dat
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/circle-ball.gif $(DESTDIR)$(prefix)/pub/images/ajax/circle-ball.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/loadingbar.gif $(DESTDIR)$(prefix)/pub/images/ajax/loadingbar.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/s.gif $(DESTDIR)$(prefix)/pub/images/ajax/s.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/wait.gif $(DESTDIR)$(prefix)/pub/images/ajax/wait.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/background/icinga_logo_cronk_bg.png $(DESTDIR)$(prefix)/pub/images/background/icinga_logo_cronk_bg.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/background/icinga_logo_cronk_left_bg.png $(DESTDIR)$(prefix)/pub/images/background/icinga_logo_cronk_left_bg.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/background/navigation-top-bg.png $(DESTDIR)$(prefix)/pub/images/background/navigation-top-bg.png
@@ -7742,9 +7764,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/fam/user_go.png $(DESTDIR)$(prefix)/pub/images/fam/user_go.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/favicon.ico $(DESTDIR)$(prefix)/pub/images/icinga/favicon.ico
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/icinga-logo-small.png $(DESTDIR)$(prefix)/pub/images/icinga/icinga-logo-small.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/icinga-logo.png $(DESTDIR)$(prefix)/pub/images/icinga/icinga-logo.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/idot-small.png $(DESTDIR)$(prefix)/pub/images/icinga/idot-small.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/idot.png $(DESTDIR)$(prefix)/pub/images/icinga/idot.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/icinga-logo.png $(DESTDIR)$(prefix)/pub/images/icinga/icinga-logo.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/computer.png $(DESTDIR)$(prefix)/pub/images/icons/computer.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cross.png $(DESTDIR)$(prefix)/pub/images/icons/cross.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/delete.png $(DESTDIR)$(prefix)/pub/images/icons/delete.png
