@@ -124,9 +124,8 @@
 			
 		 -->
 		<echo>Removing Routes</echo>
-		<taskdef name="manifestXPathRemover" classname="bin.manifestXPathRemoverTask" />
-		<manifestXPathRemover target="routing.xml" file="${manifest}" ns="default" uri="http://agavi.org/agavi/1.0/config" cfgPath="//Config/Routes/Route" 
-								removePath="//default:configuration[@context='%context%']//default:route[@name='%name%']"/>
+		<taskdef name="manifestRouteRemover" classname="bin.manifestRouteRemoverTask" />
+		<manifestRouteRemover file="${manifest}" />
 
 		<echo>Removing Config-Entries</echo>
 		<taskdef name="manifestSettingsRemover" classname="bin.manifestSettingsRemoverTask" />

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Crons>
+	<Cron>
+		<!-- 
+			Call every full hour and one minute (1:02, 2:02,3:02) 
+			and additionaly at 12:00 o'clock and at 11:10			
+		 
+		<Name>Heatmap generation</Name>
+		<Days>0</Days>
+		<Hours>1</Hours>
+		<Minutes>2</Minutes>
+		<Times>
+			<Time>15:20</Time>
+			<Time>11:10</Time>
+		</Times>
+	
+		<From>16:01</From>
+		<To>15:30</To>
+		
+		<Weekdays>1234567</Weekdays>
+	
+		<Path>/usr/local/icinga-web/bin/</Path>
+		<Class>HeatmapCron</Class>
+		<Args>
+			<Arg name="scheduleId">24</Arg>
+		</Args>
+		<Fork>True</Fork>
+		<Suspended>False</Suspended>
+		-->
+	</Cron>
+</Crons>
