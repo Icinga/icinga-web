@@ -16,6 +16,10 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
+# AppKitMenuCreator.class.php, line 136 (166)
+msgid "About"
+msgstr ""
+
 # IcingaGridFilterHandler.js, line 183 (35)
 msgid "Add restriction"
 msgstr ""
@@ -24,7 +28,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-# StaticContentSuccess.php, line 50 (33)
+# StaticContentSuccess.php, line 49 (33)
 msgid "Auto refresh"
 msgstr ""
 
@@ -36,19 +40,20 @@ msgstr ""
 msgid "CRITICAL"
 msgstr ""
 
-# PortalViewSuccess.php, line 166 (119)
+# PortalViewSuccess.php, line 165 (119)
 msgid "Change title for this portlet"
 msgstr ""
 
-# CronkPortalSuccess.php, line 61 (114)
+# CronkPortalSuccess.php, line 202 (75)
 msgid "Change title for this tab"
 msgstr ""
 
-# CronkPortalSuccess.php, line 20 (38)
+# ExtJs.js, line 224 (20)
+# CronkPortalSuccess.php, line 164 (21)
 msgid "Close"
 msgstr ""
 
-# CronkPortalSuccess.php, line 25 (45)
+# CronkPortalSuccess.php, line 169 (28)
 msgid "Close others"
 msgstr ""
 
@@ -64,7 +69,7 @@ msgstr ""
 msgid "Commands"
 msgstr ""
 
-# CronkPortalSuccess.php, line 134 (75)
+# CronkPortalSuccess.php, line 131 (75)
 msgid "Could not remove the last tab!"
 msgstr ""
 
@@ -76,12 +81,20 @@ msgstr ""
 msgid "DOWN"
 msgstr ""
 
+# HelpSuccess.php, line 33 (34)
+msgid "Dev"
+msgstr ""
+
 # IcingaGridFilterHandler.js, line 124 (23)
 msgid "Discard"
 msgstr ""
 
-# PortalViewSuccess.php, line 166 (61)
-# CronkPortalSuccess.php, line 61 (60)
+# HelpSuccess.php, line 34 (35)
+msgid "Docs"
+msgstr ""
+
+# PortalViewSuccess.php, line 165 (61)
+# CronkPortalSuccess.php, line 202 (43)
 msgid "Enter title"
 msgstr ""
 
@@ -97,7 +110,7 @@ msgstr ""
 msgid "Forced"
 msgstr ""
 
-# ShowNavigationTop.php, line 73 (66)
+# ShowNavigationTop.php, line 74 (66)
 msgid "Guest"
 msgstr ""
 
@@ -177,11 +190,15 @@ msgstr ""
 msgid "HOST_STATUS_UPDATE_TIME"
 msgstr ""
 
+# HelpSuccess.php, line 32 (37)
+msgid "Icinga"
+msgstr ""
+
 # IcingaCommandHandler.js, line 93 (52)
 msgid "Increment current notification"
 msgstr ""
 
-# CronkPortalSuccess.php, line 280 (33)
+# CronkPortalSuccess.php, line 321 (33)
 msgid "Log"
 msgstr ""
 
@@ -222,16 +239,16 @@ msgstr ""
 msgid "Please verify your input and try again!"
 msgstr ""
 
-# StaticContentSuccess.php, line 39 (26)
-# CronkPortalSuccess.php, line 41 (40)
+# StaticContentSuccess.php, line 38 (26)
+# CronkPortalSuccess.php, line 185 (23)
 msgid "Refresh"
 msgstr ""
 
-# StaticContentSuccess.php, line 41 (50)
+# StaticContentSuccess.php, line 40 (50)
 msgid "Refresh the data in the grid"
 msgstr ""
 
-# CronkPortalSuccess.php, line 42 (70)
+# CronkPortalSuccess.php, line 186 (53)
 msgid "Reload the cronk (not the content)"
 msgstr ""
 
@@ -239,7 +256,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-# CronkPortalSuccess.php, line 35 (39)
+# CronkPortalSuccess.php, line 179 (22)
 msgid "Rename"
 msgstr ""
 
@@ -327,11 +344,11 @@ msgstr ""
 msgid "Services for "
 msgstr ""
 
-# StaticContentSuccess.php, line 44 (27)
+# StaticContentSuccess.php, line 43 (27)
 msgid "Settings"
 msgstr ""
 
-# CronkPortalSuccess.php, line 134 (38)
+# CronkPortalSuccess.php, line 131 (38)
 msgid "Sorry"
 msgstr ""
 
@@ -343,7 +360,7 @@ msgstr ""
 msgid "Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>."
 msgstr ""
 
-# StaticContentSuccess.php, line 46 (48)
+# StaticContentSuccess.php, line 45 (48)
 msgid "Tactical overview settings"
 msgstr ""
 
@@ -371,7 +388,7 @@ msgstr ""
 msgid "Unknown field type: {0}"
 msgstr ""
 
-# ShowNavigationTop.php, line 70 (31), line 73 (31)
+# ShowNavigationTop.php, line 74 (31), line 71 (31)
 # AjaxLoginSuccess.php, line 49 (41)
 msgid "User"
 msgstr ""
@@ -384,7 +401,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-# CronkPortalSuccess.php, line 108 (39)
+# CronkPortalSuccess.php, line 68 (22)
 msgid "Welcome"
 msgstr ""
 
