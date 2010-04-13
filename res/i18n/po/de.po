@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: icinga-web-translation 0.0\n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: 2010-04-07 13:39+0100\n"
 "Last-Translator: Marius Hein <marius.hein@netways.de>\n"
 "Language-Team: icinga developer team <translation@icinga.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: \n"
 
 # IcingaCommandHandler.js, line 90 (41)
 msgid "(default) no option"
@@ -15,6 +15,11 @@ msgstr "(standard)"
 
 # IcingaCommandHandler.js, line 251 (21)
 msgid "Abort"
+msgstr "Abbruch"
+
+# IcingaCommandHandler.js, line 251 (21)
+#, fuzzy
+msgid "About"
 msgstr "Abbruch"
 
 # IcingaGridFilterHandler.js, line 183 (35)
@@ -77,9 +82,17 @@ msgstr "Kritisch"
 msgid "DOWN"
 msgstr "Aus"
 
+# HelpSuccess.php, line 33 (34)
+msgid "Dev"
+msgstr ""
+
 # IcingaGridFilterHandler.js, line 124 (23)
 msgid "Discard"
 msgstr "Verwerfen"
+
+# HelpSuccess.php, line 34 (35)
+msgid "Docs"
+msgstr ""
 
 # PortalViewSuccess.php, line 166 (61)
 # CronkPortalSuccess.php, line 61 (60)
@@ -176,6 +189,10 @@ msgstr ""
 
 # simple_data_provider.xml, line 24 (32)
 msgid "HOST_STATUS_UPDATE_TIME"
+msgstr ""
+
+# HelpSuccess.php, line 32 (37)
+msgid "Icinga"
 msgstr ""
 
 # IcingaCommandHandler.js, line 93 (52)
@@ -341,7 +358,9 @@ msgid "Status"
 msgstr ""
 
 # AjaxLoginSuccess.php, line 127 (165)
-msgid "Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>."
+msgid ""
+"Successfully logged in. You should be redirected immediately. If not please "
+"<a href=\"%s\">click here to change location by hand</a>."
 msgstr ""
 
 # StaticContentSuccess.php, line 46 (48)
@@ -408,4 +427,3 @@ msgstr ""
 # IcingaCommandHandler.js, line 316 (102)
 msgid "{0} command was sent successfully!"
 msgstr ""
-

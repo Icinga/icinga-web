@@ -78,6 +78,10 @@
          null,
          ""
       ],
+      "Icinga" : [
+         null,
+         ""
+      ],
       "SERVICE_IS_FLAPPING" : [
          null,
          ""
@@ -161,6 +165,10 @@
       "Critical" : [
          null,
          "Kritisch"
+      ],
+      "Dev" : [
+         null,
+         ""
       ],
       "Selection is missing" : [
          null,
@@ -282,6 +290,10 @@
          null,
          ""
       ],
+      "Docs" : [
+         null,
+         ""
+      ],
       "Error sending command" : [
          null,
          "Fehler beim Versenden des Befehls"
@@ -290,13 +302,13 @@
          null,
          ""
       ],
-      "HOST_EXECUTION_TIME" : [
-         null,
-         ""
-      ],
       "Discard" : [
          null,
          "Verwerfen"
+      ],
+      "HOST_EXECUTION_TIME" : [
+         null,
+         ""
       ],
       "add" : [
          null,
@@ -405,6 +417,10 @@
       "DOWN" : [
          null,
          "Aus"
+      ],
+      "About" : [
+         null,
+         "Abbruch"
       ]
    }
 }

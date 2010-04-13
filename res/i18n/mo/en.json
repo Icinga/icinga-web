@@ -1,10 +1,16 @@
 {
    "en" : {
-      "" : {},
-      "HOST_NOTES_URL" : [
-         null,
-         "Notes url"
-      ],
+      "" : {
+         "MIME-Version" : " 1.0",
+         "POT-Creation-Date" : " ",
+         "Last-Translator" : " Christian Doebler",
+         "Content-Type" : " text/plain; charset=UTF-8",
+         "PO-Revision-Date" : " ",
+         "Language-Team" : " ",
+         "Content-Transfer-Encoding" : " 8bit",
+         "Project-Id-Version" : " Icinga-Web",
+         "Report-Msgid-Bugs-To" : " "
+      },
       "HOST_LATENCY" : [
          null,
          "Latency"
@@ -13,25 +19,49 @@
          null,
          "Last notification"
       ],
-      "SERVICE_NOTES_URL" : [
+      "Auto refresh" : [
          null,
-         "Notes url"
+         ""
+      ],
+      "Abort" : [
+         null,
+         ""
+      ],
+      "Could not remove the last tab!" : [
+         null,
+         ""
+      ],
+      "Password" : [
+         null,
+         ""
+      ],
+      "Modify" : [
+         null,
+         ""
       ],
       "HOST_LAST_NOTIFICATION" : [
          null,
          "Last notification"
       ],
+      "Tactical overview settings" : [
+         null,
+         ""
+      ],
       "HOST_LAST_HARD_STATE_CHANGE" : [
          null,
          "Hard state change"
       ],
-      "HOST_CHECK_TYPE" : [
+      "{0} ({1} items)" : [
          null,
-         "Check type"
+         ""
       ],
       "HOST_ADDRESS" : [
          null,
          "Address"
+      ],
+      "(default) no option" : [
+         null,
+         ""
       ],
       "HOST_PERFDATA" : [
          null,
@@ -41,17 +71,221 @@
          null,
          "Current state"
       ],
+      "Command" : [
+         null,
+         ""
+      ],
+      "Yes" : [
+         null,
+         ""
+      ],
+      "Icinga" : [
+         null,
+         ""
+      ],
+      "SERVICE_IS_FLAPPING" : [
+         null,
+         "Is flapping"
+      ],
+      "Please verify your input and try again!" : [
+         null,
+         ""
+      ],
+      "SERVICE_CURRENT_CHECK_ATTEMPT" : [
+         null,
+         "Check attempt"
+      ],
+      "HOST_CURRENT_CHECK_ATTEMPT" : [
+         null,
+         "Current check attempt"
+      ],
+      "WARNING" : [
+         null,
+         ""
+      ],
+      "HOST_NEXT_CHECK" : [
+         null,
+         "Next check"
+      ],
+      "User" : [
+         null,
+         ""
+      ],
+      "SERVICE_PERFDATA" : [
+         null,
+         "Performance data"
+      ],
+      "Broadcast" : [
+         null,
+         ""
+      ],
+      "SERVICE_STATUS_UPDATE_TIME" : [
+         null,
+         "Status update time"
+      ],
+      "SERVICE_DISPLAY_NAME" : [
+         null,
+         "Display name"
+      ],
+      "Filter" : [
+         null,
+         ""
+      ],
+      "HOST_OUTPUT" : [
+         null,
+         "Output"
+      ],
+      "No" : [
+         null,
+         ""
+      ],
+      "Enter title" : [
+         null,
+         ""
+      ],
+      "Welcome" : [
+         null,
+         ""
+      ],
+      "Try" : [
+         null,
+         ""
+      ],
+      "Settings" : [
+         null,
+         ""
+      ],
+      "HOST_DISPLAY_NAME" : [
+         null,
+         "Display name"
+      ],
+      "HOST_NAME" : [
+         null,
+         "Name"
+      ],
+      "SERVICE_SCHEDULED_DOWNTIME_DEPTH" : [
+         null,
+         "Scheduled downtime depth"
+      ],
+      "Critical" : [
+         null,
+         ""
+      ],
+      "Dev" : [
+         null,
+         ""
+      ],
+      "Selection is missing" : [
+         null,
+         ""
+      ],
+      "Increment current notification" : [
+         null,
+         ""
+      ],
+      "UNREACHABLE" : [
+         null,
+         ""
+      ],
+      "SERVICE_CHECK_TYPE" : [
+         null,
+         "Check type"
+      ],
+      "Refresh" : [
+         null,
+         ""
+      ],
+      "Option" : [
+         null,
+         ""
+      ],
+      "Reset" : [
+         null,
+         ""
+      ],
+      "no more fields" : [
+         null,
+         ""
+      ],
+      "HOST_NOTES_URL" : [
+         null,
+         "Notes url"
+      ],
+      "CRITICAL" : [
+         null,
+         ""
+      ],
+      "Modify filter" : [
+         null,
+         ""
+      ],
+      "Status" : [
+         null,
+         ""
+      ],
+      "OK" : [
+         null,
+         ""
+      ],
+      "Login" : [
+         null,
+         ""
+      ],
+      "Remove" : [
+         null,
+         ""
+      ],
+      "SERVICE_NOTES_URL" : [
+         null,
+         "Notes url"
+      ],
+      "HOST_CHECK_TYPE" : [
+         null,
+         "Check type"
+      ],
+      "Guest" : [
+         null,
+         ""
+      ],
+      "Commands" : [
+         null,
+         ""
+      ],
       "HOST_LAST_CHECK" : [
          null,
          "Last check"
+      ],
+      "Command sent" : [
+         null,
+         ""
+      ],
+      "Close others" : [
+         null,
+         ""
       ],
       "HOST_MAX_CHECK_ATTEMPTS" : [
          null,
          "Max check attempts"
       ],
+      "Rename" : [
+         null,
+         ""
+      ],
+      "Sorry" : [
+         null,
+         ""
+      ],
+      "Return code out of bounds" : [
+         null,
+         ""
+      ],
       "SERVICE_LAST_CHECK" : [
          null,
          "Last check"
+      ],
+      "Unknown" : [
+         null,
+         ""
       ],
       "HOST_ALIAS" : [
          null,
@@ -61,53 +295,65 @@
          null,
          "Latency"
       ],
-      "SERVICE_IS_FLAPPING" : [
+      "Docs" : [
          null,
-         "Is flapping"
+         ""
       ],
-      "HOST_CURRENT_CHECK_ATTEMPT" : [
+      "Error sending command" : [
          null,
-         "Current check attempt"
-      ],
-      "SERVICE_CURRENT_CHECK_ATTEMPT" : [
-         null,
-         "Check attempt"
-      ],
-      "HOST_EXECUTION_TIME" : [
-         null,
-         "Execution time"
+         ""
       ],
       "SERVICE_MAX_CHECK_ATTEMPTS" : [
          null,
          "Max check attempts"
       ],
-      "HOST_NEXT_CHECK" : [
+      "Discard" : [
          null,
-         "Next check"
+         ""
+      ],
+      "HOST_EXECUTION_TIME" : [
+         null,
+         "Execution time"
+      ],
+      "add" : [
+         null,
+         ""
+      ],
+      "Refresh the data in the grid" : [
+         null,
+         ""
       ],
       "SERVICE_CURRENT_STATE" : [
          null,
          "Current state"
       ],
-      "SERVICE_PERFDATA" : [
+      "Change title for this tab" : [
          null,
-         "Performance data"
-      ],
-      "SERVICE_STATUS_UPDATE_TIME" : [
-         null,
-         "Status update time"
+         ""
       ],
       "HOST_SCHEDULED_DOWNTIME_DEPTH" : [
          null,
          "Scheduled downtime depth"
       ],
-      "SERVICE_DISPLAY_NAME" : [
+      "Forced" : [
          null,
-         "Display name"
+         ""
       ],
-      "HOST_OUTPUT" : [
+      "Reload the cronk (not the content)" : [
          null,
-         "Output"
+         ""
+      ],
+      "UP" : [
+         null,
+         ""
+      ],
+      "Services for " : [
+         null,
+         ""
+      ],
+      "Login failed" : [
+         null,
+         ""
       ],
       "SERVICE_NEXT_CHECK" : [
          null,
@@ -117,6 +363,18 @@
          null,
          "Status update time"
       ],
+      "Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>." : [
+         null,
+         ""
+      ],
+      "Log" : [
+         null,
+         ""
+      ],
+      "Warning" : [
+         null,
+         ""
+      ],
       "SERVICE_LAST_HARD_STATE_CHANGE" : [
          null,
          "Last hard state change"
@@ -125,29 +383,49 @@
          null,
          "Output"
       ],
-      "HOST_DISPLAY_NAME" : [
+      "Apply" : [
          null,
-         "Display name"
+         ""
       ],
-      "SERVICE_SCHEDULED_DOWNTIME_DEPTH" : [
+      "Change title for this portlet" : [
          null,
-         "Scheduled downtime depth"
+         ""
       ],
-      "HOST_NAME" : [
+      "Unknown field type: {0}" : [
          null,
-         "Name"
+         ""
+      ],
+      "Add restriction" : [
+         null,
+         ""
+      ],
+      "{0} command was sent successfully!" : [
+         null,
+         ""
       ],
       "HOST_IS_FLAPPING" : [
          null,
          "Is flapping"
       ],
-      "SERVICE_CHECK_TYPE" : [
-         null,
-         "Check type"
-      ],
       "SERVICE_EXECUTION_TIME" : [
          null,
          "Execution time"
+      ],
+      "Close" : [
+         null,
+         ""
+      ],
+      "UNKNOWN" : [
+         null,
+         ""
+      ],
+      "DOWN" : [
+         null,
+         ""
+      ],
+      "About" : [
+         null,
+         ""
       ]
    }
 }

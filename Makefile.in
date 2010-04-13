@@ -114,7 +114,9 @@ db-purge-userprefs:
 	$(PC) db-purge-userprefs
 
 loc-update-catalog:
-	./bin/loc-create-catalog.pl --base=./ --out=./res/i18n/po/default.po
+	./bin/loc-create-catalog.pl --base=./ --out=./res/i18n/po/default.pot
+	$(bash for I in ./res/i18n/po/*.po; do msgmerge -U default.pot $I; done)
+	
 
 loc-create-mo:
 	./bin/loc-create-mo.sh res/i18n/po res/i18n/mo
