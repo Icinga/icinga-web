@@ -361,7 +361,7 @@ var container = new Ext.Panel({
 });
 
 container.on('afterrender', function() {
-	container.setHeight(Ext.lib.Dom.getViewHeight()-50);
+	container.setHeight(Ext.lib.Dom.getViewHeight()-60);
 }, container, { single: true });
 
 // Fix lay problems later
@@ -372,7 +372,7 @@ container.render("<?php echo $parentid; ?>");
 
 // Resize the container on windowResize
 Ext.EventManager.onWindowResize(function(w,h) {
-	this.setHeight(h-50);
+	this.setHeight(h-60);
 	this.doLayout(false);
 }, container);
 
