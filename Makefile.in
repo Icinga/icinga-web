@@ -21,7 +21,7 @@ PHP=@PHP@
 PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
-# INC_MAKE_FILES=./etc/make/files.mk
+INC_MAKE_FILES=./etc/make/files.mk
 
 none:
 #	@printf "\t%15s - %s\n" "" ""
@@ -64,6 +64,9 @@ distclean: clean
 configclean:
 	rm -f \
 		app/config/databases.xml
+
+remove-temp-files:
+	bin/rmtmp-files.sh
 
 devclean: remove-temp-files distclean cacheclean install-files-list configclean
 
@@ -123,6 +126,3 @@ loc-create-json:
 
 locclean:
 	rm -f app/data/mo/*
-
-remove-temp-files:
-	bin/rmtmp-files.sh
