@@ -1,12 +1,9 @@
-# Orginal translation
 msgid ""
 msgstr ""
-"Project-Id-Version: Icinga-Web\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Christian Doebler\n"
-"Language-Team: \n"
+"Project-Id-Version: icinga-web-translation 0.0\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -117,62 +114,81 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
+# simple_data_provider.xml, line 7 (21)
 msgid "HOST_ADDRESS"
-msgstr "Address"
+msgstr ""
 
+# simple_data_provider.xml, line 8 (19)
 msgid "HOST_ALIAS"
-msgstr "Alias"
+msgstr ""
 
+# simple_data_provider.xml, line 16 (24)
 msgid "HOST_CHECK_TYPE"
-msgstr "Check type"
+msgstr ""
 
+# simple_data_provider.xml, line 13 (35)
 msgid "HOST_CURRENT_CHECK_ATTEMPT"
-msgstr "Current check attempt"
+msgstr ""
 
+# simple_data_provider.xml, line 10 (27)
 msgid "HOST_CURRENT_STATE"
-msgstr "Current state"
+msgstr ""
 
+# simple_data_provider.xml, line 9 (26)
 msgid "HOST_DISPLAY_NAME"
-msgstr "Display name"
+msgstr ""
 
+# simple_data_provider.xml, line 18 (28)
 msgid "HOST_EXECUTION_TIME"
-msgstr "Execution time"
+msgstr ""
 
+# simple_data_provider.xml, line 22 (25)
 msgid "HOST_IS_FLAPPING"
-msgstr "Is flapping"
+msgstr ""
 
+# simple_data_provider.xml, line 15 (24)
 msgid "HOST_LAST_CHECK"
-msgstr "Last check"
+msgstr ""
 
+# simple_data_provider.xml, line 20 (36)
 msgid "HOST_LAST_HARD_STATE_CHANGE"
-msgstr "Hard state change"
+msgstr ""
 
+# simple_data_provider.xml, line 21 (31)
 msgid "HOST_LAST_NOTIFICATION"
-msgstr "Last notification"
+msgstr ""
 
+# simple_data_provider.xml, line 17 (21)
 msgid "HOST_LATENCY"
-msgstr "Latency"
+msgstr ""
 
+# simple_data_provider.xml, line 14 (32)
 msgid "HOST_MAX_CHECK_ATTEMPTS"
-msgstr "Max check attempts"
+msgstr ""
 
+# simple_data_provider.xml, line 19 (24)
 msgid "HOST_NEXT_CHECK"
-msgstr "Next check"
+msgstr ""
 
+# simple_data_provider.xml, line 25 (23)
 msgid "HOST_NOTES_URL"
-msgstr "Notes url"
+msgstr ""
 
+# simple_data_provider.xml, line 11 (20)
 msgid "HOST_OUTPUT"
-msgstr "Output"
+msgstr ""
 
+# simple_data_provider.xml, line 12 (22)
 msgid "HOST_PERFDATA"
-msgstr "Performance data"
+msgstr ""
 
+# simple_data_provider.xml, line 23 (38)
 msgid "HOST_SCHEDULED_DOWNTIME_DEPTH"
-msgstr "Scheduled downtime depth"
+msgstr ""
 
+# simple_data_provider.xml, line 24 (32)
 msgid "HOST_STATUS_UPDATE_TIME"
-msgstr "Status update time"
+msgstr ""
 
 # HelpSuccess.php, line 32 (37)
 msgid "Icinga"
@@ -252,57 +268,73 @@ msgstr ""
 msgid "Return code out of bounds"
 msgstr ""
 
+# simple_data_provider.xml, line 102 (27)
 msgid "SERVICE_CHECK_TYPE"
-msgstr "Check type"
+msgstr ""
 
+# simple_data_provider.xml, line 99 (38)
 msgid "SERVICE_CURRENT_CHECK_ATTEMPT"
-msgstr "Check attempt"
+msgstr ""
 
+# simple_data_provider.xml, line 96 (30)
 msgid "SERVICE_CURRENT_STATE"
-msgstr "Current state"
+msgstr ""
 
-# table output of service information
+# simple_data_provider.xml, line 95 (29)
 msgid "SERVICE_DISPLAY_NAME"
-msgstr "Display name"
+msgstr ""
 
+# simple_data_provider.xml, line 104 (31)
 msgid "SERVICE_EXECUTION_TIME"
-msgstr "Execution time"
+msgstr ""
 
+# simple_data_provider.xml, line 108 (28)
 msgid "SERVICE_IS_FLAPPING"
-msgstr "Is flapping"
+msgstr ""
 
+# simple_data_provider.xml, line 101 (27)
 msgid "SERVICE_LAST_CHECK"
-msgstr "Last check"
+msgstr ""
 
+# simple_data_provider.xml, line 106 (39)
 msgid "SERVICE_LAST_HARD_STATE_CHANGE"
-msgstr "Last hard state change"
+msgstr ""
 
+# simple_data_provider.xml, line 107 (34)
 msgid "SERVICE_LAST_NOTIFICATION"
-msgstr "Last notification"
+msgstr ""
 
+# simple_data_provider.xml, line 103 (24)
 msgid "SERVICE_LATENCY"
-msgstr "Latency"
+msgstr ""
 
+# simple_data_provider.xml, line 100 (35)
 msgid "SERVICE_MAX_CHECK_ATTEMPTS"
-msgstr "Max check attempts"
+msgstr ""
 
+# simple_data_provider.xml, line 105 (27)
 msgid "SERVICE_NEXT_CHECK"
-msgstr "Next check"
+msgstr ""
 
+# simple_data_provider.xml, line 111 (26)
 msgid "SERVICE_NOTES_URL"
-msgstr "Notes url"
+msgstr ""
 
+# simple_data_provider.xml, line 97 (23)
 msgid "SERVICE_OUTPUT"
-msgstr "Output"
+msgstr ""
 
+# simple_data_provider.xml, line 98 (25)
 msgid "SERVICE_PERFDATA"
-msgstr "Performance data"
+msgstr ""
 
+# simple_data_provider.xml, line 109 (41)
 msgid "SERVICE_SCHEDULED_DOWNTIME_DEPTH"
-msgstr "Scheduled downtime depth"
+msgstr ""
 
+# simple_data_provider.xml, line 110 (35)
 msgid "SERVICE_STATUS_UPDATE_TIME"
-msgstr "Status update time"
+msgstr ""
 
 # IcingaCommandHandler.js, line 221 (66)
 msgid "Selection is missing"
@@ -325,9 +357,7 @@ msgid "Status"
 msgstr ""
 
 # AjaxLoginSuccess.php, line 127 (165)
-msgid ""
-"Successfully logged in. You should be redirected immediately. If not please "
-"<a href=\"%s\">click here to change location by hand</a>."
+msgid "Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>."
 msgstr ""
 
 # StaticContentSuccess.php, line 45 (48)
@@ -394,7 +424,3 @@ msgstr ""
 # IcingaCommandHandler.js, line 316 (102)
 msgid "{0} command was sent successfully!"
 msgstr ""
-
-# table output of host information
-#~ msgid "HOST_NAME"
-#~ msgstr "Name"

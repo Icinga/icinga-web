@@ -12,7 +12,7 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends ICINGACronksBase
 	public function executeJson(AgaviRequestDataHolder $rd) {
 		$template_file = sprintf(
 			'%s/%s.xml', 
-			AgaviConfig::get('de.icinga.web.xml_template_folder'), 
+			AgaviConfig::get('modules.cronks.xml.path'), 
 			$rd->getParameter('template')
 		);
 		

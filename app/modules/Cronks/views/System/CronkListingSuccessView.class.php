@@ -17,7 +17,7 @@ class Cronks_System_CronkListingSuccessView extends ICINGACronksBaseView
 	public function executeJson(AgaviRequestDataHolder $rd) {
 		
 		$type = $rd->getParameter('type', 'cronks');
-		$catdata = AgaviConfig::get('de.icinga.web.cronk.categories');
+		$catdata = AgaviConfig::get('modules.cronks.categories');
 		$out = array ();
 		
 		switch ($type) {
@@ -35,7 +35,7 @@ class Cronks_System_CronkListingSuccessView extends ICINGACronksBaseView
 			case 'cronks':
 			default:
 
-				$source = AgaviConfig::get('de.icinga.web.cronks');
+				$source = AgaviConfig::get('modules.cronks.cronks');
 				$cat = $rd->getParameter('cat', null);
 				$user = $this->getContext()->getUser();
 				

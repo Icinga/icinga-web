@@ -7,7 +7,7 @@
 # modified for Icinga-Web 2009 by Christian Doebler <christian.doebler@netways.de>
 #
 
-TEXTDOMAIN=icinga
+TEXTDOMAIN=default
 INDIR=$1
 OUTDIR=$2
 BIN=$(which msgfmt)
@@ -22,10 +22,16 @@ if [ ! -d "$OUTDIR" ]; then
 	exit 1
 fi
 
-for IT in $INDIR/*.po; do
-	NEWFILE=$(basename $IT '.po').mo
-	echo -n "$IT -> $OUTDIR/$NEWFILE: "
-	$BIN $IT -v -o $OUTDIR/$NEWFILE
+for IT in $INDIR/*; do
+	LOC="$(basename $IT)"
+	POF="$IT/$TEXTDOMAIN.po"
+	if [ -e "$POF" ]; then
+		NEWFILE="$OUTDIR/$LOC.mo"
+		echo -n "Creating $NEWFILE from $POF: "
+		$BIN $POF -v -o $NEWFILE
+	fi
 done
 
 exit 0
+
+

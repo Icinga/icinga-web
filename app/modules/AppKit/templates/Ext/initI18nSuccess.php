@@ -4,25 +4,17 @@
 	if (!is_array($files) && !count($files)) return;
 ?>
 Ext.onReady(function() {
-	var store = AppKit.Ext.Storage.getStore("i18n_data");
+	var l = {};
 	<?php foreach ($files as $domain=>$json): ?>
-	
-	store.add('<?php echo $domain; ?>', <?php echo $json[1]; ?>);
+	if (typeof(l['<?php echo $domain; ?>']) == "undefined") {
+		l['<?php echo $domain; ?>'] = {};
+	}
+	Ext.apply(l['<?php echo $domain; ?>'], <?php echo $json[1]; ?>); 
 	<?php endforeach; ?>
-	
-	var json_locale_data = {};
-	store.eachKey(function(k, v) {
-		var t = {};
-		var langKey = "";
-		// Finding the first matching language key to use
-		Ext.iterate(v, function(lk, lv) { langKey=lk; return false; });
-		t[k] = v[langKey];
-		Ext.apply(json_locale_data, t)
-	});
 	
 	AppKit.Gettext = new Gettext({
 		domain: "<?php echo $default; ?>",
-		locale_data: json_locale_data
+		locale_data: l
 	});
 	
 	// Make this more global available

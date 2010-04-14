@@ -5,7 +5,7 @@
 AC_PREREQ(2.61)
 
 # Init project
-AC_INIT(icinga-web, [0.9.1-alpha], [dev.icinga.org])
+AC_INIT(icinga-web, [0.9.1-beta], [dev.icinga.org])
 
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
 
@@ -15,58 +15,16 @@ AC_PROG_GREP
 AC_PROG_SED
 
 # Check for php
-AC_ARG_VAR([PHP],[Perl interpreter command])
-AC_PATH_PROG([PHP], [php], [not found])
-
-if test "$PHP" = 'not found'; then
-        AC_MSG_ERROR([cannot use $PACKAGE_NAME without php])
-fi
+AC_ARG_VAR([PHP],[php cli binary])
+ACICINGA_CHECK_BIN([PHP], [php])
 
 # Check for mysql
-AC_ARG_VAR([MYSQL],[MySql client binary])
-AC_PATH_PROG([MYSQL], [mysql], [not found])
+AC_ARG_VAR([MYSQL],[mysql client binary])
+ACICINGA_CHECK_BIN([MYSQL], [mysql])
 
-if test "$MYSQL" = 'not found'; then
-        AC_MSG_ERROR([cannot use $PACKAGE_NAME without MySql client binary])
-fi
-
-AC_ARG_VAR([PRINTF],[Printf coreutil])
-AC_PATH_PROG([PRINTF], [printf], [not found])
-
-if test "$PRINTF" = 'not found'; then
-        AC_MSG_ERROR([cannot use $PACKAGE_NAME without printf core util])
-fi
-
-# Custom macros
-
-# ACRT_USER_EXISTS( users, variable, default )
-# - users is a list of users [www apache www-docs]
-#    from highest to lowest priority to high priority (i.e. first match)
-# - variable is what you set with the result
-#
-
-AC_DEFUN([ACICINGA_USER_GUESS],
- [
-   $2=$3
-   for x in $1; do
-    AC_MSG_CHECKING([if user $x exists])
-     AS_IF([ $GREP -q "^$x:" /etc/passwd ],
-           [ AC_MSG_RESULT([found]); $2=$x ; break],
-           [ AC_MSG_RESULT([not found]) ])
-   done
-  ])
-AC_DEFUN([ACICINGA_GROUP_GUESS],
- [
-   $2=$3
-   for x in $1; do
-    AC_MSG_CHECKING([if group $x exists])
-     AS_IF([ $GREP -q "^$x:" /etc/group ],
-           [ AC_MSG_RESULT([found]); $2=$x ; break],
-           [ AC_MSG_RESULT([not found]) ])
-   done
-  ])
-
-
+# Check for phing
+AC_ARG_VAR([PHING],[phing build tooö])
+ACICINGA_CHECK_BIN([MYSQL], [phing])
 
 # Checks for libraries.
 
@@ -166,7 +124,7 @@ AC_SUBST(icinga_api)
 AC_SUBST(CFLAGS)
 AC_SUBST(PHP)
 AC_SUBST(MYSQL)
-AC_SUBST(PRINTF)
+AC_SUBST(PHING)
 AC_SUBST(INSTALL_OPTS)
 
 AC_CONFIG_FILES([

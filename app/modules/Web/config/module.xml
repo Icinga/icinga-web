@@ -6,14 +6,12 @@
 			<settings>
 				<setting name="title">Web Module</setting>
 				<setting name="version">1.0</setting>
-<!--
-				<setting name="authors">
-					<ae:parameter name="joe.cool@peanuts.com">Snoopy</ae:parameter>
+
+				<setting name="simpledataprovider">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+					href="simple_data_provider.xml#xpointer(setting/node())" />
 				</setting>
-				<setting name="homepage">http://www.agavi.org</setting>
-				<setting name="update_url" />
-				<setting name="description">An example module</setting>
--->
+				
 			</settings>
 		</module>
 		

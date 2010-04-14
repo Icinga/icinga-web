@@ -4,7 +4,7 @@
 	ICINGA base configuration
 -->
 
-<settings prefix="de.icinga." xmlns="http://agavi.org/agavi/1.0/config">
+<settings prefix="de.icinga." xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config">
 	<!--
 		Add more links under 'home'
 		* The home itself points to index_page route
@@ -75,9 +75,7 @@
 		* Code-less, predefined events to register tasks
 	-->
 	<setting name="appkit.custom_events">
-	
 		<!-- This is our root menu (If all ready, the sub menues will be created -->  
-
 		<parameter name="AppKitMenuEventDistributor">
 			<parameter name="context">web</parameter>
 			<parameter name="event">appkit.menu</parameter>
@@ -178,7 +176,6 @@
 		</parameter>
 		
 		<parameter name="inline">
-
 			<!-- I18N -->
 			<parameter>/appkit/ext/i18n</parameter>
 			<parameter>/appkit/ext/applicationState?cmd=init</parameter>
@@ -191,10 +188,10 @@
 		* You have to predefine the libraries
 	-->
 	<setting name="appkit.include_dynamic_javascript">
-		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
-		<parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</parameter>
-		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
-		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
+		<ae:parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
+		<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
+		<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
+		<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
 	</setting>
 
 	<!--
@@ -402,41 +399,4 @@
 	
 	<!-- PLACEHOLDER -->
 	<setting name="appkit.version.release"></setting>
-	
-	<setting name="web.xml_template_folder">%core.root_dir%/res/xml</setting>
-	
-	<!--  Cronk configuration -->
-	
-	<setting name="web.cronk.categories">
-		<parameter name="core">
-			<parameter name="title">Core components</parameter>
-			<parameter name="visible">false</parameter>
-		</parameter>
-		
-		<parameter name="data">
-			<parameter name="title">Data</parameter>
-			<parameter name="visible">true</parameter>
-			
-			<!-- Activate first! -->
-			<parameter name="active">true</parameter>
-		</parameter>
-		
-		<parameter name="misc">
-			<parameter name="title">Misc</parameter>
-			<parameter name="visible">true</parameter>
-		</parameter>
-	</setting>
-	
-	
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml"/>
-	
-	<!--
-		XInclude
-		* Include other xml resources
-	-->
-	
-	<!-- Include settings for simple-data provider -->
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml"/>
-	
-	
 </settings>

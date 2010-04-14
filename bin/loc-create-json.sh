@@ -2,6 +2,7 @@
 
 INDIR=$1
 OUTDIR=$2
+TEXTDOMAIN=default
 BIN=$(dirname $0)/../lib/jsgettext/bin/po2json
 PERL=$(which perl)
 
@@ -20,9 +21,16 @@ if [ ! -d "$OUTDIR" ]; then
 	exit 1
 fi;
 
-for FILE in $INDIR/*.po; do
-	NEWFILE=$(basename $FILE '.po').json
-	echo "$PERL $BIN -p $FILE > $OUTDIR/$NEWFILE"
-	$PERL $BIN -p $FILE > $OUTDIR/$NEWFILE
-	echo "--> DONE"
+for FILE in $INDIR/*; do
+	LOC="$(basename $FILE)"
+	POF="$INDIR/$LOC/$TEXTDOMAIN.po"
+	if [ -e "$POF" ]; then
+		NEWFILE="$OUTDIR/$LOC.json"
+		TF="$INDIR/$LOC/$LOC.po"
+
+		cp $POF $TF
+		echo -n "create $NEWFILE from $TF"
+		$PERL $BIN $TF > $NEWFILE
+		rm -f $TF
+	fi
 done

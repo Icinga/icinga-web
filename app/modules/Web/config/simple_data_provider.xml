@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setting xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+		<!-- 
+			Locale information:
+			
+			#loc: HOST_ADDRESS
+			#loc: HOST_ALIAS
+			#loc: HOST_DISPLAY_NAME
+			#loc: HOST_CURRENT_STATE
+			#loc: HOST_OUTPUT
+			#loc: HOST_PERFDATA
+			#loc: HOST_CURRENT_CHECK_ATTEMPT
+			#loc: HOST_MAX_CHECK_ATTEMPTS
+			#loc: HOST_LAST_CHECK
+			#loc: HOST_CHECK_TYPE
+			#loc: HOST_LATENCY
+			#loc: HOST_EXECUTION_TIME
+			#loc: HOST_NEXT_CHECK
+			#loc: HOST_LAST_HARD_STATE_CHANGE
+			#loc: HOST_LAST_NOTIFICATION
+			#loc: HOST_IS_FLAPPING
+			#loc: HOST_SCHEDULED_DOWNTIME_DEPTH
+			#loc: HOST_STATUS_UPDATE_TIME
+			#loc: HOST_NOTES_URL
+			
+		-->
+		<ae:parameter name="hostinfo">
+			<ae:parameter name="module">Web</ae:parameter>
+			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+			<ae:parameter name="description">query for host information</ae:parameter>
+			<ae:parameter name="target">IcingaApi::TARGET_HOST</ae:parameter>
+			<ae:parameter name="result_columns">
+				<ae:parameter>HOST_ADDRESS</ae:parameter>
+				<ae:parameter>HOST_ALIAS</ae:parameter>
+				<ae:parameter>HOST_DISPLAY_NAME</ae:parameter>
+				<ae:parameter>HOST_CURRENT_STATE</ae:parameter>
+				<!-- 
+				Host Status: UP (for 5d 18h 24m 43s)
+				-->
+				<ae:parameter>HOST_OUTPUT</ae:parameter>
+				<ae:parameter>HOST_PERFDATA</ae:parameter>
+				<ae:parameter>HOST_CURRENT_CHECK_ATTEMPT</ae:parameter>
+				<ae:parameter>HOST_MAX_CHECK_ATTEMPTS</ae:parameter>
+				<ae:parameter>HOST_LAST_CHECK</ae:parameter>
+				<ae:parameter>HOST_CHECK_TYPE</ae:parameter>
+				<ae:parameter>HOST_LATENCY</ae:parameter>
+				<ae:parameter>HOST_EXECUTION_TIME</ae:parameter>
+				<ae:parameter>HOST_NEXT_CHECK</ae:parameter>
+				<ae:parameter>HOST_LAST_HARD_STATE_CHANGE</ae:parameter>
+				<ae:parameter>HOST_LAST_NOTIFICATION</ae:parameter>
+				<ae:parameter>HOST_IS_FLAPPING</ae:parameter>
+				<!-- 
+				Is This Host Flapping? NO (0.00% state change)
+				-->
+				<ae:parameter>HOST_SCHEDULED_DOWNTIME_DEPTH</ae:parameter>
+				<ae:parameter>HOST_STATUS_UPDATE_TIME</ae:parameter>
+				
+				<ae:parameter>HOST_NOTES_URL</ae:parameter>
+				<!-- 
+				Active Checks:	ENABLED  
+				Passive Checks:	ENABLED  
+				Obsessing:	ENABLED  
+				Notifications: ENABLED  
+				Event Handler:	ENABLED  
+				Flap Detection:	ENABLED
+				-->  
+			</ae:parameter>
+			<ae:parameter name="filter">
+				<ae:parameter>
+					<ae:parameter name="column">CONTACTGROUP_NAME</ae:parameter>
+					<ae:parameter name="value">%</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_LIKE</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="user_filters">
+				<ae:parameter name="host">
+					<ae:parameter name="column">HOST_NAME</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="order">
+				<ae:parameter name="column">HOST_NEXT_CHECK</ae:parameter>
+				<ae:parameter name="direction">desc</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="limit">
+				<ae:parameter name="start">1</ae:parameter>
+				<!-- <ae:parameter name="length">1</ae:parameter> -->
+			</ae:parameter>
+		</ae:parameter>
+
+		<!--
+			Locale information:
+			
+			#loc: SERVICE_DISPLAY_NAME
+			#loc: SERVICE_CURRENT_STATE
+			#loc: SERVICE_OUTPUT
+			#loc: SERVICE_PERFDATA
+			#loc: SERVICE_CURRENT_CHECK_ATTEMPT
+			#loc: SERVICE_MAX_CHECK_ATTEMPTS
+			#loc: SERVICE_LAST_CHECK
+			#loc: SERVICE_CHECK_TYPE
+			#loc: SERVICE_LATENCY
+			#loc: SERVICE_EXECUTION_TIME
+			#loc: SERVICE_NEXT_CHECK
+			#loc: SERVICE_LAST_HARD_STATE_CHANGE
+			#loc: SERVICE_LAST_NOTIFICATION
+			#loc: SERVICE_IS_FLAPPING
+			#loc: SERVICE_SCHEDULED_DOWNTIME_DEPTH
+			#loc: SERVICE_STATUS_UPDATE_TIME
+			#loc: SERVICE_NOTES_URL
+		-->
+		<ae:parameter name="serviceinfo">
+			<ae:parameter name="module">Web</ae:parameter>
+			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+			<ae:parameter name="description">query for service information</ae:parameter>
+			<ae:parameter name="target">IcingaApi::TARGET_SERVICE</ae:parameter>
+			<ae:parameter name="result_columns">
+				<ae:parameter>SERVICE_DISPLAY_NAME</ae:parameter>
+				<ae:parameter>SERVICE_CURRENT_STATE</ae:parameter>
+				<!-- 
+				Host Status: UP (for 5d 18h 24m 43s)
+				-->
+				<ae:parameter>SERVICE_OUTPUT</ae:parameter>
+				<ae:parameter>SERVICE_PERFDATA</ae:parameter>
+				<ae:parameter>SERVICE_CURRENT_CHECK_ATTEMPT</ae:parameter>
+				<ae:parameter>SERVICE_MAX_CHECK_ATTEMPTS</ae:parameter>
+				<ae:parameter>SERVICE_LAST_CHECK</ae:parameter>
+				<ae:parameter>SERVICE_CHECK_TYPE</ae:parameter>
+				<ae:parameter>SERVICE_LATENCY</ae:parameter>
+				<ae:parameter>SERVICE_EXECUTION_TIME</ae:parameter>
+				<ae:parameter>SERVICE_NEXT_CHECK</ae:parameter>
+				<ae:parameter>SERVICE_LAST_HARD_STATE_CHANGE</ae:parameter>
+				<ae:parameter>SERVICE_LAST_NOTIFICATION</ae:parameter>
+				<ae:parameter>SERVICE_IS_FLAPPING</ae:parameter>
+				<!-- 
+				Is This Host Flapping? NO (0.00% state change)
+				-->
+				<ae:parameter>SERVICE_SCHEDULED_DOWNTIME_DEPTH</ae:parameter>
+				<ae:parameter>SERVICE_STATUS_UPDATE_TIME</ae:parameter>
+				
+				<ae:parameter>SERVICE_NOTES_URL</ae:parameter>
+				<!-- 
+				Active Checks:	ENABLED  
+				Passive Checks:	ENABLED  
+				Obsessing:	ENABLED  
+				Notifications: ENABLED  
+				Event Handler:	ENABLED  
+				Flap Detection:	ENABLED
+				-->  
+			</ae:parameter>
+			<ae:parameter name="filter">
+				<ae:parameter>
+					<ae:parameter name="column">CONTACTGROUP_NAME</ae:parameter>
+					<ae:parameter name="value">%</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_LIKE</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="user_filters">
+				<ae:parameter name="host">
+					<ae:parameter name="column">HOST_NAME</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter name="service">
+					<ae:parameter name="column">SERVICE_NAME</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="order">
+				<ae:parameter name="column">SERVICE_NEXT_CHECK</ae:parameter>
+				<ae:parameter name="direction">desc</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="limit">
+				<ae:parameter name="start">1</ae:parameter>
+				<!-- <ae:parameter name="length">1</ae:parameter> -->
+			</ae:parameter>
+		</ae:parameter>
+		
+</setting>

@@ -2,12 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: icinga-web-translation 0.0\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2010-04-07 13:39+0100\n"
+"PO-Revision-Date: 2010-04-14 00:35+0100\n"
 "Last-Translator: Marius Hein <marius.hein@netways.de>\n"
 "Language-Team: icinga developer team <translation@icinga.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
 
 # IcingaCommandHandler.js, line 90 (41)
 msgid "(default) no option"
@@ -358,9 +359,7 @@ msgid "Status"
 msgstr ""
 
 # AjaxLoginSuccess.php, line 127 (165)
-msgid ""
-"Successfully logged in. You should be redirected immediately. If not please "
-"<a href=\"%s\">click here to change location by hand</a>."
+msgid "Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>."
 msgstr ""
 
 # StaticContentSuccess.php, line 46 (48)
@@ -427,3 +426,4 @@ msgstr ""
 # IcingaCommandHandler.js, line 316 (102)
 msgid "{0} command was sent successfully!"
 msgstr ""
+

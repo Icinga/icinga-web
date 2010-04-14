@@ -8,7 +8,7 @@ class Cronks_System_CronkLoaderSuccessView extends ICINGACronksBaseView
 		$this->setAttribute('title', 'Icinga.CronkLoader');
 		
 		try {
-			$cronks		= AgaviConfig::get('de.icinga.web.cronks');
+			$cronks		= AgaviConfig::get('modules.cronks.cronks');
 			$cronk		= $rd->getParameter('cronk'); 
 			
 			$parameters = new AgaviParameterHolder($rd->getParameter('p', array()));
@@ -17,17 +17,16 @@ class Cronks_System_CronkLoaderSuccessView extends ICINGACronksBaseView
 				$parameters->setParameter('cmpid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
 			}
 				
-			// Adding default parameters if they are not overwritten
-			$meta = AgaviConfig::get('de.icinga.web.cronks');
-			if (array_key_exists($cronk, $meta)) {
-				$meta = $meta[$cronk];
-				if (array_key_exists('parameter', $meta) && is_array($meta['parameter'])) {
-					foreach ($meta['parameter'] as $pKey=>$pVal) {
+			if (array_key_exists($cronk, $cronks)) {
+				$meta = $cronks[$cronk];
+				
+				if (array_key_exists('ae:parameter', $meta) && is_array($meta['ae:parameter'])) {
+					foreach ($meta['ae:parameter'] as $pKey=>$pVal) {
 						if ($parameters->getParameter($pKey, null) == null) {
 							$parameters->setParameter($pKey, $pVal);
 						}
 					}
-				} 
+				}
 			}
 			
 			if (array_key_exists($cronk, $cronks)) {

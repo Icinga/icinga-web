@@ -15,7 +15,7 @@ class Web_IcingaApiSimpleDataProviderModel extends ICINGAWebBaseModel
 	private $filterSet = false;
 
 	public function __construct () {
-		$this->configAll = AgaviConfig::get('de.icinga.simpledataprovider');
+		$this->configAll = AgaviConfig::get('modules.web.simpledataprovider');
 		$this->apiSearch = AppKitFactories::getInstance()->getFactory('IcingaData')->API()->createSearch();
 	}
 

@@ -147,7 +147,7 @@ class IcingaTemplateXmlParser {
 	 */
 	public function parseTemplate() {
 		if (!$this->dom instanceof DOMDocument) {
-			throw new IcingaTemplateXmlParserException('DOMDocument not ready!');
+			// throw new IcingaTemplateXmlParserException('DOMDocument not ready!');
 		}
 		
 		$storage = array ();

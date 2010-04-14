@@ -9,7 +9,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		
 		$template_file = sprintf(
 			'%s/%s.xml', 
-			AgaviConfig::get('de.icinga.web.xml_template_folder'), 
+			AgaviConfig::get('modules.cronks.xml.path'), 
 			$rd->getParameter('template')
 		);
 		
@@ -34,7 +34,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 	{
 		$template_file = sprintf(
 			'%s/%s.xml', 
-			AgaviConfig::get('de.icinga.web.xml_template_folder'), 
+			AgaviConfig::get('modules.cronks.xml.path'), 
 			$rd->getParameter('template')
 		);
 		
