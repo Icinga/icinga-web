@@ -44,6 +44,9 @@ none:
 	@printf "\t%-18s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
 	@printf "\t%-18s - %s\n" "loc-compile" "Compile language files into mo and json"
 
+	@printf "\nScheduler targets:\n"
+	@printf "\t%-18s - %s\n" "scheduler-install" "Install the icingaScheduler cronkjob"
+	@printf "\t%-18s - %s\n" "scheduler-remove" "remove the icingaScheduler cronkjob"
 	@printf "\n\n"
 	
 include $(INC_MAKE_FILES)
@@ -102,19 +105,19 @@ fix-libs:
 install: inc-install-files fix-priv fix-libs
 
 db-initialize:
-	$(PC) db-initialize
+	$(PHING_CALL) db-initialize
 
 db-deinitialize:
-	$(PC) db-initialize
+	$(PHING_CALL) db-initialize
 
 db-drop:
-	$(PC) db-drop
+	$(PHING_CALL) db-drop
 
 db-upgrade:
-	$(PC) db-upgrade
+	$(PHING_CALL) db-upgrade
 
 db-purge-userprefs:
-	$(PC) db-purge-userprefs
+	$(PHING_CALL) db-purge-userprefs
 
 loc-update-catalog:
 	./bin/loc-create-catalog.pl --base=./ --out=./app/data/po/templates/default.pot
@@ -130,3 +133,9 @@ loc-create-json:
 
 locclean:
 	rm -f app/data/mo/*
+
+scheduler-install:
+	$(PHING_CALL) scheduler-install -DPATH_Icinga=$(prefix)
+
+scheduler-remove:
+	$(PHING_CALL) scheduler-remove -DPATH_Icinga=$(prefix)

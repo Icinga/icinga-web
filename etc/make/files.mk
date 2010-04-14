@@ -116,15 +116,14 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/templates/exceptions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/de
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/en
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/es
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/pl
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/pt
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/ls
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po/templates
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/doc
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc
@@ -137,6 +136,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue/mysql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/bin
@@ -968,11 +968,9 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles/extjs
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/res/i18n
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/PLACEHOLDER $(DESTDIR)$(prefix)/app/cache/config/PLACEHOLDER
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/autoload.xml $(DESTDIR)$(prefix)/app/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
@@ -980,12 +978,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/global_filters.xml $(DESTDIR)$(prefix)/app/config/global_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/logging.xml $(DESTDIR)$(prefix)/app/config/logging.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/rbac_definitions.xml $(DESTDIR)$(prefix)/app/config/rbac_definitions.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/validators.xml $(DESTDIR)$(prefix)/app/config/validators.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstants.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstants.class.php
@@ -1010,9 +1008,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php $(DESTDIR)$(prefix)/app/lib/icinga/tdisplay/IcingaTemplateDisplayTest.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateAjaxGridLayout.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateLayout.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateLayout.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlParser.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlParser.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlReplace.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlReplace.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateWorker.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateWorker.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/template/IcingaTemplateXmlParser.class.php $(DESTDIR)$(prefix)/app/lib/icinga/template/IcingaTemplateXmlParser.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderConstInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/view/IcingaViewExtenderLink.class.php $(DESTDIR)$(prefix)/app/lib/icinga/view/IcingaViewExtenderLink.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/lib/icinga/IcingaBaseException.class.php
@@ -1237,9 +1235,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/ViewProc.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/ViewProc.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/autoload.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/config_handlers.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/config_handlers.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/module.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/validators.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/cronks.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/cronks.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/module.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/action/ICINGACronksBaseAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/lib/action/ICINGACronksBaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/model/ICINGACronksBaseModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/lib/model/ICINGACronksBaseModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/view/ICINGACronksBaseView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/lib/view/ICINGACronksBaseView.class.php
@@ -1287,9 +1285,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/StaticContent.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/StaticContent.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/AjaxGridLayoutSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/AjaxGridLayoutSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/CommandMetaInformationSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/CommandMetaInformationSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/MetaInformationSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/MetaInformationSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/SendCommandSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/SendCommandSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/MetaInformationSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/MetaInformationSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkPortalSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkPortalSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/IframeViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/IframeViewSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ObjectSearchSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ObjectSearchSuccessView.class.php
@@ -1297,20 +1294,21 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/PortalViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/PortalViewSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusMapSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusMapSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusSummarySuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusSummarySuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StaticContentSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StaticContentSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkListingSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkListingSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StaticContentSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StaticContentSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-log-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-notification-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-service-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-servicegroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template-cv.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template-hg.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-service-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/PortalViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/PortalViewAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/HelpAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/HelpAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/IcingaApiSimpleDataProviderAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/IcingaApiSimpleDataProviderAction.class.php
@@ -1321,8 +1319,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/cache/Index.xml $(DESTDIR)$(prefix)/app/modules/Web/cache/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/autoload.xml $(DESTDIR)$(prefix)/app/modules/Web/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/config_handlers.xml $(DESTDIR)$(prefix)/app/modules/Web/config/config_handlers.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Web/config/validators.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/modules/Web/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/action/ICINGAWebBaseAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/action/ICINGAWebBaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/model/ICINGAWebBaseModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/model/ICINGAWebBaseModel.class.php
@@ -1347,37 +1345,36 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/Master.php $(DESTDIR)$(prefix)/app/templates/Master.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/ICINGAWireFrameMaster.php $(DESTDIR)$(prefix)/app/templates/ICINGAWireFrameMaster.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config.php $(DESTDIR)$(prefix)/app/config.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/Test._old $(DESTDIR)$(prefix)/app/Test._old
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/de.json $(DESTDIR)$(prefix)/app/data/mo/de.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/de.mo $(DESTDIR)$(prefix)/app/data/mo/de.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/en.json $(DESTDIR)$(prefix)/app/data/mo/en.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/en.mo $(DESTDIR)$(prefix)/app/data/mo/en.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/es.json $(DESTDIR)$(prefix)/app/data/mo/es.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/es.mo $(DESTDIR)$(prefix)/app/data/mo/es.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/ls.json $(DESTDIR)$(prefix)/app/data/mo/ls.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/ls.mo $(DESTDIR)$(prefix)/app/data/mo/ls.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pl.json $(DESTDIR)$(prefix)/app/data/mo/pl.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pl.mo $(DESTDIR)$(prefix)/app/data/mo/pl.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pt.json $(DESTDIR)$(prefix)/app/data/mo/pt.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pt.mo $(DESTDIR)$(prefix)/app/data/mo/pt.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/de/default.po $(DESTDIR)$(prefix)/app/data/po/de/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/en/default.po $(DESTDIR)$(prefix)/app/data/po/en/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/es/default.po $(DESTDIR)$(prefix)/app/data/po/es/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/pl/default.po $(DESTDIR)$(prefix)/app/data/po/pl/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/pt/default.po $(DESTDIR)$(prefix)/app/data/po/pt/default.po
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/ls/default.po $(DESTDIR)$(prefix)/app/data/po/ls/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/po/templates/default.pot $(DESTDIR)$(prefix)/app/data/po/templates/default.pot
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/de.mo $(DESTDIR)$(prefix)/app/data/mo/de.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/en.mo $(DESTDIR)$(prefix)/app/data/mo/en.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/es.mo $(DESTDIR)$(prefix)/app/data/mo/es.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/ls.mo $(DESTDIR)$(prefix)/app/data/mo/ls.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pl.mo $(DESTDIR)$(prefix)/app/data/mo/pl.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pt.mo $(DESTDIR)$(prefix)/app/data/mo/pt.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/de.json $(DESTDIR)$(prefix)/app/data/mo/de.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/en.json $(DESTDIR)$(prefix)/app/data/mo/en.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/es.json $(DESTDIR)$(prefix)/app/data/mo/es.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/ls.json $(DESTDIR)$(prefix)/app/data/mo/ls.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pl.json $(DESTDIR)$(prefix)/app/data/mo/pl.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/mo/pt.json $(DESTDIR)$(prefix)/app/data/mo/pt.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/Test._old $(DESTDIR)$(prefix)/app/Test._old
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/phing $(DESTDIR)$(prefix)/bin/phing
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-catalog.pl $(DESTDIR)$(prefix)/bin/loc-create-catalog.pl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-json.sh $(DESTDIR)$(prefix)/bin/loc-create-json.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-mo.sh $(DESTDIR)$(prefix)/bin/loc-create-mo.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-merge-template.sh $(DESTDIR)$(prefix)/bin/loc-merge-template.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-json.sh $(DESTDIR)$(prefix)/bin/loc-create-json.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/rmtmp-files.sh $(DESTDIR)$(prefix)/bin/rmtmp-files.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/GPL $(DESTDIR)$(prefix)/doc/GPL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/INSTALL $(DESTDIR)$(prefix)/doc/INSTALL
@@ -1402,6 +1399,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/rescue_schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/rescue_schema.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi $(DESTDIR)$(prefix)/lib/agavi/bin/agavi
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi-dist $(DESTDIR)$(prefix)/lib/agavi/bin/agavi-dist
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi.bat-dist $(DESTDIR)$(prefix)/lib/agavi/bin/agavi.bat-dist

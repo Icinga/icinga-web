@@ -5,7 +5,7 @@
 
 DIR=$(dirname $0 )
 IGNORE="~|development__|\.in$"
-SRCDIR="app bin doc etc lib pub res"
+SRCDIR="app bin doc etc lib pub"
 cd $DIR/..
 
 echo "# INSTALL_FILES_BEGIN"

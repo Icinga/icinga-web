@@ -153,6 +153,22 @@
 			passthru="true" 
 			checkreturn="true" />
 	</target>
+	<target name="scheduler-install">
+		<input propertyname="USER_Icinga" promptChar="?" defaultValue="icinga">Name of icinga-user</input>
 
+		<copy file="etc/scheduler/icingaCron" tofile="/etc/cron.d/icingaCron">
+			<filterchain>
+				<replacetokens begintoken="%%" endtoken="%%">
+					<token key="USER" value="${USER_Icinga}" />
+					<token key="PATH" value="${PATH_Icinga}" />				
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<mkdir dir="/var/log/icingaCron" />
+		<chown file="/var/log/icingaCron" user="${USER_Icinga}" />
+	</target>
 	
+	<target name="scheduler-remove">
+		<delete file="/etc/cron.d/icingaCron"/>
+	</target>
 </project>
