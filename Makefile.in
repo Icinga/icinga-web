@@ -90,8 +90,8 @@ fix-priv:
 		$(DESTDIR)$(prefix)/bin/testdeps.php \
 		$(DESTDIR)$(prefix)/bin/loc-create-catalog.pl \
 		$(DESTDIR)$(prefix)/bin/loc-create-json.sh \
-		$(DESTDIR)$(prefix)/bin/loc-create-mo \
-		$(DESTDIR)$(prefix)/bin/loc-merge-template \
+		$(DESTDIR)$(prefix)/bin/loc-create-mo.sh \
+		$(DESTDIR)$(prefix)/bin/loc-merge-template.sh \
 		$(DESTDIR)$(prefix)/bin/rmtmp-files.sh
 
 fix-libs:
