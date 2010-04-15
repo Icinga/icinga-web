@@ -80,9 +80,17 @@
 				<sqlRunner files="etc/sql" ini="db.ini"/>
  			</then>
 		</if>		
+		<property name="buildAdditional" value="false" />
+		<available file="additional.xml" property="buildAdditional" value="true" />
+		<if>
+			<equals arg1="${buildAdditional}" arg2="1" />
+			<then>
+				<phing phingfile="additional.xml" inheritAll="true" />
+			</then>
+		</if>
 	</target>
 
-
+	
 	<!-- 
 			Remove Task
 	 -->
@@ -123,6 +131,7 @@
 			Remove the registered routes
 			
 		 -->
+		 
 		<echo>Removing Routes</echo>
 		<taskdef name="manifestRouteRemover" classname="bin.manifestRouteRemoverTask" />
 		<manifestRouteRemover file="${manifest}" />
@@ -171,7 +180,8 @@
 		<taskdef name="manifestSnippetExtractor" classname="bin.manifestSnippetExtractorTask"/>
 		<taskdef name="manifestRouteExtractor" classname="bin.manifestRouteExtractorTask"/>
 		<taskdef name="manifestTranslationExtractor" classname="bin.manifestTranslationExtractorTask"/>
-		
+		<taskdef name="manifestSettingsExtractor" classname="bin.manifestSettingsExtractorTask"/>
+	
 		<property name="manifest" value="${coreDir}/manifest.xml"></property>
 		<manifestFileSelector file="${manifest}" source="Config" propertyName="config"/>  
 		<manifestFileSelector file="${manifest}" source="Plugin" propertyName="plugin"/>
@@ -210,6 +220,9 @@
 		<!-- Extract Stylesheets -->
 		<manifestSnippetExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/snippets.dat"></manifestSnippetExtractor>
 
+		<echo>Extracting settings...</echo>		
+		<manifestSettingsExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/"></manifestSettingsExtractor>
+
 		<echo>Extracting routes...</echo>		
 		<manifestRouteExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/routes.xml"></manifestRouteExtractor>
 	
@@ -234,6 +247,83 @@
 		<!-- <delete dir="${PLUGIN_Name}" />  -->
 	</target>
 	
+	<target name="export-cronk">
+		<echo msg="Cronk export tool for Icinga-web" />
+		
+		<input propertyname="manifest" >Cronk-manifest (manifest.xml): </input>
+		<taskdef name="manifestFileSelector"  classname="bin.manifestFileSelectorTask"/>
+		<taskdef name="manifestSettingsExtractor" classname="bin.manifestSettingsExtractorTask"/>		
+
+		<manifestFileSelector file="${manifest}/manifest.xml" source="Plugin" propertyName="plugin"/>  		
+
+		<mkdir dir="${PLUGIN_Name}/src"/>
+		
+		<echo>Saving plugin Data...</echo>		
+		
+		<copy todir="${PLUGIN_Name}/src">
+			<fileset refid="plugin" />
+			<mapper classname="bin.manifestMapper" from="${manifest}/manifest.xml"/>
+		</copy>
+		
+		<echo>Extracting settings...</echo>		
+		<manifestSettingsExtractor file="${manifest}/manifest.xml" toFile="${PLUGIN_Name}/src/"></manifestSettingsExtractor>
+		
+		<!-- Creating Manifest -->
+		<copy file="${manifest}/manifest.xml" tofile="${PLUGIN_Name}/manifest.xml"/>
+		
+		<!-- Deploying installer -->
+		<copy file="build.xml" tofile="${PLUGIN_Name}/build.xml"/>
+		<copy todir="${PLUGIN_Name}/bin">
+			<fileset dir="./bin">
+				<include name="**" />
+			</fileset>
+		</copy>
+		
+		<!-- Packing -->
+		<tar basedir="${PLUGIN_Name}/." destfile="${PLUGIN_Name}_cronk.tar" compression="gzip" />
+	</target>
+	
+	<target name="import-cronk">
+		<taskdef name="manifestMetaReader" classname="bin.manifestMetaReaderTask"/>
+		<manifestMetaReader file="manifest.xml" />
+		<echo>Install script for Icinga-web cronks</echo>
+		<echo>-------------------------------------</echo>
+		<echo>Cronk Name	${PLUGIN_Name}</echo>
+		<echo>Version		${PLUGIN_Version}</echo>
+		<echo>${PLUGIN_Description}</echo>
+		<echo>Author		${PLUGIN_Author}</echo>
+		<echo>Company		${PLUGIN_Company}</echo>
+		<echo>-------------------------------------</echo>
+		<!--  Confirmations -->
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to import this cronk?</input>
+		<if>
+			<equals arg1="${confirm}" arg2="n" />
+			<then>
+				<fail message="Installation aborted by user." />
+ 			</then>
+		</if>
+		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="/usr/local/icinga-web">Location of icinga-web</input>
+		
+		
+		<!--  Check dependencies -->
+		<taskdef name="manifestDependencyChecker" classname="bin.manifestDependencyCheckerTask"/>
+		<manifestDependencyChecker file="manifest.xml"/>
+		
+		<!-- Install module and additional -->		
+		<echo>Installing to ${PATH_Icinga}</echo>
+		<copy todir="${PATH_Icinga}">
+			<fileset dir="src">
+				<include name="**" />
+			</fileset>
+		</copy>	
+		
+		<echo>Setting up Agavi-Config</echo>		
+		<!-- Extend agavi Config -->
+		<taskdef name="manifestAgaviConfigurator" classname="bin.manifestAgaviConfiguratorTask" />
+		<manifestAgaviConfigurator noInclude="true" file="manifest.xml" />
+	</target>
+
+	
 	<target name="structure-create">
 		<mkdir dir="${PLUGIN_Name}"/>
 		<mkdir dir="${PLUGIN_Name}/src"/>
@@ -245,6 +335,6 @@
 	
 	<target name="usage">
 		<echo msg="Plugin creation tool for Icinga-web" />
-		<echo msg="Targets are: install, build, delete, plugin-create" />
+		<echo msg="Targets are: install, build, remove, plugin-create, cronk-export" />
 	</target>
 </project>

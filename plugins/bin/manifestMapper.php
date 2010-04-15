@@ -26,7 +26,7 @@ class manifestMapper implements FileNameMapper {
 			$this->buildRules();
 		return self::$rules;	
 	}    
-    
+     
     public function main($sourceFilename) {
 
 		$rules = $this->getRules();
@@ -45,6 +45,8 @@ class manifestMapper implements FileNameMapper {
 		$xml = manifestStore::getManifest($this->from);
 		$additional = $xml->Files->Additional;
 		
+		if(!$additional)
+			return null;
 		foreach($additional->children() as $path) {
 			if(!$path["to"])
 				continue;

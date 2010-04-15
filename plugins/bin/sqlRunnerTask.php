@@ -13,7 +13,7 @@ class sqlRunnerTask extends Task {
 		$this->checkForDoctrine();
 		$this->processSQL();
 	}
-	
+	  
 	protected function checkForDoctrine() {
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$doctrinePath = $icinga."/".$this->project->getUserProperty("PATH_Doctrine");

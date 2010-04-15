@@ -44,7 +44,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 			case 'Plugin':
 				$files = $this->getFileList();
 				break;
-			case 'Doctrine':
+			case 'Doctrine': 
 				$files = $this->getDBModels();
 				break;
 			case 'SQL':

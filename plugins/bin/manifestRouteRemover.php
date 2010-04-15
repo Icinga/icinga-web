@@ -28,7 +28,7 @@ class ManifestRouteExtractorTask extends manifestBaseClass {
 		$configDOM->formatOutput = true;
 		$configDOM->save($configPath);
 		$this->reformat($configPath);
-	}
+	} 
 	
 	protected function reformat($configPath) {
 		// Reformat the xml (triple whitespaces to tab)

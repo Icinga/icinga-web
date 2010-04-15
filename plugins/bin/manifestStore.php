@@ -10,8 +10,9 @@ class manifestStore {
 	}
 	
 	protected static function parseFile($file,$project) {
-		libxml_use_internal_errors();
+	//	libxml_use_internal_errors();
 		$XML = simplexml_load_file(realpath($file));
+
 		if(!$XML) {
 			self::showErrors();
 			throw new BuildException("Invalid XML!");
@@ -31,7 +32,7 @@ class manifestStore {
 				if(!$project->getProperty("PATH_".(String) $pathName))
 					$project->setUserProperty("PATH_".(String) $pathName,(String) $path);
 			}
-		}
+		} 
 		$properties = $project->getUserProperties();
 		// Resolve reference in paths
 		foreach($properties as $property=>$value) {
@@ -49,7 +50,8 @@ class manifestStore {
 		
 	protected static function showErrors() {
 		printf("Invalid XML!\n The following errors occured:\n");
-		foreach(libxml_get_errors() as $error) {
+		$errors = libxml_get_errors();
+		foreach($errors as $error) {
 			printf("\n".$error->line." : ".$error->message." (Code ".$error->code().")");
 		}
 	}

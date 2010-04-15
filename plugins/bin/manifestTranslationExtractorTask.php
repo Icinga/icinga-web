@@ -25,10 +25,10 @@ class ManifestTranslationExtractorTask extends Task {
 	}
     public function getXMLObject() {
     	return $this->xmlObject;
-    }
+    } 
     
     public function init() {
-		
+		 
     }
 	
     public function main() {

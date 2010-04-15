@@ -28,7 +28,7 @@ class manifestDependencyCheckerTask extends manifestBaseClass {
 				echo "PHP Versions and extensions are correct\n";
 				break;
 		}
-	}
+	} 
 	
 	protected function checkIcingaWeb(SimpleXMLElement $dependency) {
 		$version = (String) $dependency->Version;

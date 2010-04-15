@@ -22,7 +22,7 @@ class ManifestSettingsRemoverTask extends Task {
     public function init() {
 		
     }
-	
+	 
     public function main() {
 	 	$file = $this->getFile();
     	$DOM = new DOMDocument("1.0","UTF-8");
@@ -59,7 +59,8 @@ class ManifestSettingsRemoverTask extends Task {
 			$nodeToRemove = null;
 			$attr = $config->getAttribute("name");
 			$type = $config->getAttribute("type");
-			$pname = $config->getAttribute("paramName");
+			$isXML = $config->getAttribute("asXML");
+			$pname = $config->getAttribute("pname");
 			// Check if it is a named parameter
 			if($pname) {
 				$query = "//default:setting[@name='".$attr."']//default:parameter[@name='".$pname."']";

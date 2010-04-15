@@ -28,7 +28,7 @@ class ManifestXPathRemoverTask extends manifestBaseClass {
 	}
 	public function setUri($uri) {
 		$this->uri = $uri;
-	}
+	} 
 	
 	public function removeRoutes() {
 		$manifest = $this->getXMLObject();
