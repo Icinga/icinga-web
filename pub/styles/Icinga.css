@@ -9,6 +9,8 @@ p.legal {
 	margin: 10px auto;	
 }
 
+p { margin: 15px auto; }
+
 /** MISC **/
 
 div#icinga-portal-loading-mask {
