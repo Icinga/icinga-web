@@ -22,9 +22,12 @@ PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
 INC_MAKE_FILES=./etc/make/files.mk
+LOC_PO=app/data/i18n/po
+LOC_MO=app/data/i18n/mo
+LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
 
 none:
-#	@printf "\t%15s - %s\n" "" ""
+#	@printf "\t%-18s - %s\n" "" ""
 	@printf "Please supply a command line argument (i.e. 'make install').\n\n"
 	@printf "Generic targets: install, clean\n\n"
 	@printf "Other usefull targets:\n"
@@ -126,13 +129,15 @@ loc-update-catalog:
 loc-compile: loc-create-mo loc-create-json
 
 loc-create-mo:
-	./bin/loc-create-mo.sh app/data/po app/data/mo
+	./bin/loc-create-mo.sh $(LOC_PO) $(LOC_MO)
 
 loc-create-json:
-	./bin/loc-create-json.sh app/data/po app/data/mo
+	./bin/loc-create-json.sh $(LOC_PO) $(LOC_MO)
 
 locclean:
-	rm -f app/data/mo/*
+	rm -f \
+		$(LOC_MO)/*.mo \
+		$(LOC_MO)/*.json
 
 scheduler-install:
 	$(PHING_CALL) scheduler-install -DPATH_Icinga=$(prefix)

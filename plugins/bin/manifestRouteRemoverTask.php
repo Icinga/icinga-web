@@ -29,7 +29,7 @@ class ManifestRouteRemoverTask extends manifestBaseClass {
 			$this->checkIfNodeIsEmpty($node);
 				
 			echo "Removing route ".$name."\n";
-		}
+		} 
 
 		$configDOM->formatOutput = true;
 		$configDOM->save($configPath);

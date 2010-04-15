@@ -23,7 +23,7 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 		return $this->toFile;
 	}
 	public function getExtractorMarks() {
-		return $this->extractorMarks;
+		return  $this->extractorMarks;
 	}
 
     public function main() {
@@ -36,6 +36,8 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 	protected function fetchExtractorMarks() {
 		$xml = $this->getXMLObject();
 		$marks = $xml->Files->Extractor;
+		if(!$marks)
+			return null;
 		foreach($marks->children() as $mark) {
 			$markName = $mark["mark"];
 			$file = $mark;
@@ -46,6 +48,8 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 	public function extractMarks() {
 		$str = "";
 		$marks = $this->getExtractorMarks();
+		if(!$marks)
+			return null;
 		foreach($marks as $mark) {
 			$name = $mark["name"];
 			$file = $mark["file"];

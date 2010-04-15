@@ -23,7 +23,7 @@ class doctrineDBBuilderTask extends Task {
 			default:
 				throw new BuildException("Unknown db action ".$action."!");
 		}	
-			
+			 
 	}
 	
 	protected function checkForDoctrine() {

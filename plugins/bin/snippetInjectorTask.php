@@ -11,9 +11,11 @@ class snippetInjectorTask extends Task {
 		if(!file_exists($this->file))
 			return false;
 		$snippets = unserialize(file_get_contents($this->file));
-		if(!$snippets)
-			throw new BuildException("Invalid snippet file");
-
+		if(!$snippets) {
+ 			echo ("Invalid snippet file");
+ 			return null;
+		}
+	 
 		foreach($snippets as $snippet) {
 			$file = str_replace("%PATH_Icinga%",$this->project->getUserProperty("PATH_Icinga"),$snippet["file"]);
 			$mark;

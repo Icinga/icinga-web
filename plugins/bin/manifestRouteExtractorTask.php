@@ -28,7 +28,7 @@ class ManifestRouteExtractorTask extends Task {
     }
     
     public function init() {
-		
+		 
     }
 	
     public function main() {

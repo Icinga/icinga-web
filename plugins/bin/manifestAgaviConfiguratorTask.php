@@ -5,6 +5,7 @@ require_once "manifestStore.php";
 class ManifestAgaviConfiguratorTask extends Task {
     private $file = null;
 	private $xmlObject = null;
+	private $noInclude = false;
 	
     public function setFile($str) {
         $this->file = $str;
@@ -13,12 +14,20 @@ class ManifestAgaviConfiguratorTask extends Task {
     public function setXMLObject(DOMDocument $xml) {
     	$this->xmlObject = $xml;
     }
-	public function getFile() {
+	
+    public function setNoInclude($bool) {
+    	$this->noInclude = $bool;
+    }
+    
+    public function getFile() {
 		return $this->file;
 	}
 
     public function getXMLObject() {
     	return $this->xmlObject;
+    }
+    public function getNoInclude() {
+    	return $this->noInclude;
     }
     
     public function init() {
@@ -39,12 +48,17 @@ class ManifestAgaviConfiguratorTask extends Task {
 			$file = $file->nodeName;
 			$this->setConfigVars($file);
 		}
-		
+		if(!$this->getNoInclude())
+			$this->addSettingsInclude();
+	
 		$this->registerRoutes();
     	$this->addTranslations();
     }
 	
 	protected function setConfigVars($file) {
+		if(!$file)
+			return null;
+		
 		$manifest = $this->getXMLObject();
 		$manifestSearcher = new DOMXPath($manifest);
 		
@@ -63,10 +77,16 @@ class ManifestAgaviConfiguratorTask extends Task {
 			if($config->nodeType != XML_ELEMENT_NODE)
 				continue;
 			// fetch node Values
+			if($config->getAttribute("fromConfig")) {
+				$this->injectSettingFromXML($config,$configDOM,$file);
+				continue;
+			}
+			
 			$attr = $config->getAttribute("name");
 			$type = $config->getAttribute("type");
 			$pname = $config->getAttribute("paramName");
 			$textnode = $config->getAttribute("textnode");
+			$isXML = $config->getAttribute("asXML");
 			$value = $config->nodeValue;
 			
 			$entries = $xpathSearcher->query("//default:setting[@name='".$attr."']");
@@ -76,9 +96,10 @@ class ManifestAgaviConfiguratorTask extends Task {
 				// check whether to create only  a text node or parameter node
 				if($textnode) {
 					$setting->nodeValue = $value;
+				} else if($isXML) {
+					$setting->appendChild($this->getXMLChild($configDOM,$config));
 				} else {
 					$setting->appendChild($this->createParameter($configDOM,$value,$pname));
-	
 				} 
 				echo "New config-node added: ".$attr." (".$value.")\n";				
 				$configDOM->lastChild->appendChild($setting);
@@ -92,10 +113,12 @@ class ManifestAgaviConfiguratorTask extends Task {
 			
 				// if its a parameter node, check if this parameter already exists
 				if(!$textnode) {
-					if(!$pname) {
+				 	if($isXML) {
+						$setting->appendChild($this->getXMLChild($configDOM,$config));
+					} else if(!$pname) {
 						$setting->appendChild($this->createParameter($configDOM,$value));
 					} else {
-						$params = $xpathSearcher->query("//default:parameter[@name=".$pname."]");
+						$params = $xpathSearcher->query("//default:parameter[@name='".$pname."']");
 						if($params->length<1)
 							$setting->appendChild($this->createParameter($configDOM,$value));
 						else if($type == "overwrite")
@@ -104,7 +127,92 @@ class ManifestAgaviConfiguratorTask extends Task {
 				}
 			}
 		}
-		// finally add am xi:include 
+		
+		$configDOM->formatOutput = true;
+		$configDOM->save($configPath);
+
+		$this->reformat($configPath);
+	}
+	
+	protected function injectSettingFromXML($config,DOMDocument $cfgDOM,$filename) { 
+		$name = $config->getAttribute("name");
+		$pname = $config->getAttribute("pname");
+		$type = $config->getAttribute("type");
+		$xml = new DOMDocument("1.0","UTF-8");
+		$xml->load("./src/".$filename.".xml");
+
+		$xpathSearcher = new DOMXPath($xml);
+		$xpathSearcher->registerNamespace("default","http://agavi.org/agavi/1.0/config");
+		
+		$manifestSearcher = new DOMXPath($cfgDOM);
+		$manifestSearcher->registerNamespace("default","http://agavi.org/agavi/1.0/config");
+		
+		// fetch extracted node from plugin folder		
+		if($pname)	{
+			$query = "//default:setting[@name='".$name."']//default:parameter[@name='".$pname."']";
+		} else {
+			$query = "//default:setting[@name='".$name."']/*";
+		}
+		
+		$nodeToInsert = $xpathSearcher->query($query)->item(0);
+		if(!$nodeToInsert) {
+			echo "Setting for ".$name." not found, skipping \n";
+			return null;
+		}
+		
+		// get position in agavi config file
+		if($pname && $type == "overwrite") { 
+			$query = "//default:setting[@name='".$name."']//default:parameter[@name='".$pname."']";
+			echo $query;
+			$node = $manifestSearcher->query($query)->item(0);
+			if($node) {
+				$parent = $node->parentNode;
+				$parent->removeChild($node);			
+			}
+		} 
+		
+		if($type == "overwrite" || $pname) {
+			$query = "//default:setting[@name='".$name."']";
+		} else {
+			$query = "/*";
+		}
+		
+		$node = $manifestSearcher->query($query)->item(0);
+		if(!$node && !$type == "overwrite") {
+			echo "Couldn't insert setting ".$name." skipping \n";
+			return null;
+		}
+		
+		if($type == "overwrite" && !$pname) {
+			if($node->hasChildNodes())  {
+				foreach($node->childNodes as $child)
+					$node->removeChild($child);
+			}			
+		}
+		$node->appendChild($cfgDOM->importNode($nodeToInsert,true));
+	}
+	
+	
+	protected function getXMLChild(DOMDocument $dom, DOMElement $node) {
+		foreach($node->childNodes as $childNode) {
+			if($childNode->nodeType == XML_COMMENT_NODE || $childNode->nodeType == XML_TEXT_NODE)
+				continue;
+			return $dom->importNode($childNode,true);
+		}		
+	}
+	
+	protected function addSettingsInclude() {
+			
+		$configPath = $this->project->getUserProperty("PATH_Icinga")."/app/config/icinga.xml";
+		$configDOM = new DOMDocument("1.0");
+		$configDOM->preserveWhiteSpace = false;
+		$configDOM->load($configPath);
+		
+		$xpathSearcher = new DOMXPath($configDOM);
+		$xpathSearcher->registerNamespace("default","http://agavi.org/agavi/1.0/config");
+		$xpathSearcher->registerNamespace("xi","http://www.w3.org/2001/XInclude");
+		
+			// finally add am xi:include 
 		$pluginName = $this->project->getUserProperty("PLUGIN_Name");
 		$includes = $xpathSearcher->query("//xi:include[@href='plugins/".$pluginName.".xml']")->item(0);
 		if(!$includes) {
@@ -131,6 +239,9 @@ class ManifestAgaviConfiguratorTask extends Task {
 	protected function registerRoutes() {
 		$routes = new DOMDocument("1.0");
 		$routes->preserveWhiteSpace = false;
+		if(!file_exists("src/routes.xml"))
+			return null;
+			
 		$routes->load("src/routes.xml");
 		
 		$configPath = $this->project->getUserProperty("PATH_Icinga")."/app/config/routing.xml";
@@ -156,7 +267,7 @@ class ManifestAgaviConfiguratorTask extends Task {
 					continue;
 				$route = $child;
 				break;
-			}			
+			}		
 			if($routingSearcher->query("//default:configuration[@context='".$context."']/default:routes/default:route[@name='".$routeName."']")->item(0)) {
 				echo("Route ".$routeName." already exists - skipping\n");
 				continue;
@@ -183,6 +294,9 @@ class ManifestAgaviConfiguratorTask extends Task {
 	protected function addTranslations() {
 		$translation = new DOMDocument("1.0");
 		$translation->preserveWhiteSpace = false;
+		if(!file_exists("src/translations.xml"))
+			return null;
+			
 		$translation->load("src/translations.xml");
 		
 		$configPath = $this->project->getUserProperty("PATH_Icinga")."/app/config/translation.xml";
