@@ -117,14 +117,77 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/templates/exceptions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/refs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/refs/heads
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/refs/tags
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/refs/remotes
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/refs/remotes/origin
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/info
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/branches
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/pack
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/info
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/1f
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/c0
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/20
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/d3
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/92
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/09
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/24
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/a2
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/ba
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/65
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/56
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/c6
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/dc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/ca
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/83
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/a9
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/a1
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/fe
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/6a
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/3c
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/bd
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/d1
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/16
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/cc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/89
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/6f
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/54
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/d6
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/logs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/refs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/refs/heads
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/refs/remotes
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/refs/remotes/origin
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs/heads
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs/tags
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs/remotes
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs/remotes/origin
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/info
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/branches
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/objects
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/objects/pack
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/objects/info
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/refs
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/refs/heads
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/refs/remotes
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/refs/remotes/origin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/de
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/en
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/es
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/pl
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/pt
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/po/templates
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/mo
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/po
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/doc
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc
@@ -973,11 +1036,10 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/plugins/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/plugins/etc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/cache/config/PLACEHOLDER $(DESTDIR)$(prefix)/app/cache/config/PLACEHOLDER
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/schedules.xml $(DESTDIR)$(prefix)/app/config/schedules.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/settings.xml $(DESTDIR)$(prefix)/app/config/settings.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/schedules.xml $(DESTDIR)$(prefix)/app/config/schedules.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/autoload.xml $(DESTDIR)$(prefix)/app/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
@@ -987,7 +1049,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/rbac_definitions.xml $(DESTDIR)$(prefix)/app/config/rbac_definitions.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/validators.xml $(DESTDIR)$(prefix)/app/config/validators.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/translation.xml $(DESTDIR)$(prefix)/app/config/translation.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/ICINGABaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/ICINGABaseAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/icinga/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/lib/icinga/constants/IcingaConstantResolver.class.php
@@ -1300,9 +1363,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusMapSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusMapSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusSummarySuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusSummarySuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkListingSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkListingSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StaticContentSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StaticContentSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProcSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProcSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-hostgroup-summary-template.xml
@@ -1351,33 +1414,106 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/ICINGAWireFrameMaster.php $(DESTDIR)$(prefix)/app/templates/ICINGAWireFrameMaster.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config.php $(DESTDIR)$(prefix)/app/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/Test._old $(DESTDIR)$(prefix)/app/Test._old
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/refs/heads/master $(DESTDIR)$(prefix)/app/data/i18n/.git/refs/heads/master
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/refs/remotes/origin/master $(DESTDIR)$(prefix)/app/data/i18n/.git/refs/remotes/origin/master
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/info/exclude $(DESTDIR)$(prefix)/app/data/i18n/.git/info/exclude
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/description $(DESTDIR)$(prefix)/app/data/i18n/.git/description
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/post-receive.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/post-receive.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/post-commit.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/post-commit.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/prepare-commit-msg.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/prepare-commit-msg.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/commit-msg.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/commit-msg.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/post-update.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/post-update.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/pre-commit.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/pre-commit.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/applypatch-msg.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/applypatch-msg.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/pre-rebase.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/pre-rebase.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/update.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/update.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/hooks/pre-applypatch.sample $(DESTDIR)$(prefix)/app/data/i18n/.git/hooks/pre-applypatch.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/HEAD $(DESTDIR)$(prefix)/app/data/i18n/.git/HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/config $(DESTDIR)$(prefix)/app/data/i18n/.git/config
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/1f/42b5c1548c16b1aff85a2724703a0bdfc18910 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/1f/42b5c1548c16b1aff85a2724703a0bdfc18910
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/c0/43030b805f3b3f3c35da015c8f9f2da8470cc4 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/c0/43030b805f3b3f3c35da015c8f9f2da8470cc4
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/20/35f240fa44417c080d03fff6b0640311f06056 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/20/35f240fa44417c080d03fff6b0640311f06056
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/d3/d41fef8520b4044ba0984f51069ac473d926a5 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/d3/d41fef8520b4044ba0984f51069ac473d926a5
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/92/bea232f2d43bcecad0a7e0f6ab6428bf762fa3 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/92/bea232f2d43bcecad0a7e0f6ab6428bf762fa3
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/09/1f1984e366663c19c6bb5b0c54fe6cac1ea399 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/09/1f1984e366663c19c6bb5b0c54fe6cac1ea399
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/24/a6980c4bba4ff9061d5c4d3a62a14f6aad94dd $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/24/a6980c4bba4ff9061d5c4d3a62a14f6aad94dd
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/a2/84247ba0d7be0e3701970c64175ef992f98132 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/a2/84247ba0d7be0e3701970c64175ef992f98132
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/ba/a1a04118437fc5dc1eb991a6add095a204ba26 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/ba/a1a04118437fc5dc1eb991a6add095a204ba26
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/65/9a0c7477ff758893fc9c35f224be481c8585a3 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/65/9a0c7477ff758893fc9c35f224be481c8585a3
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/56/b1399490244ae29af6a2ccbb304235c2d253c1 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/56/b1399490244ae29af6a2ccbb304235c2d253c1
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/c6/db720ad5b7ffcf75ded33c5fb90f6c870c3e75 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/c6/db720ad5b7ffcf75ded33c5fb90f6c870c3e75
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/dc/52376dad4a06b446f191bb9ba7106fb3f2b8ef $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/dc/52376dad4a06b446f191bb9ba7106fb3f2b8ef
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/ca/36296b22d2a704aa38d8caad3366206f81800f $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/ca/36296b22d2a704aa38d8caad3366206f81800f
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/83/c5b84fa60ca508b75006f9ca20fd43819f3cef $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/83/c5b84fa60ca508b75006f9ca20fd43819f3cef
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/a9/91a17f1dd257e0f2c16e759bbde4f90968236a $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/a9/91a17f1dd257e0f2c16e759bbde4f90968236a
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/a1/2fe6e0788c2cab11fc7d7a4969231749bc9313 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/a1/2fe6e0788c2cab11fc7d7a4969231749bc9313
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/fe/c4fed0219beff3890bb2c7fde12090b14b99ca $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/fe/c4fed0219beff3890bb2c7fde12090b14b99ca
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/6a/25c6133eaa8e9470315bbbdfcc97702ec781bd $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/6a/25c6133eaa8e9470315bbbdfcc97702ec781bd
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/3c/92093e4436daf8ae8dd17dd18d6d35b0c270a6 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/3c/92093e4436daf8ae8dd17dd18d6d35b0c270a6
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/bd/71419cbdebbbffe829cdf2f5a856ce008af0b7 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/bd/71419cbdebbbffe829cdf2f5a856ce008af0b7
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/d1/dbb2c308260bbf3fde8f1af534206e3af04983 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/d1/dbb2c308260bbf3fde8f1af534206e3af04983
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/16/3aa6e579b77b26afa9993c7dfb5e3601c2bc0d $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/16/3aa6e579b77b26afa9993c7dfb5e3601c2bc0d
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/cc/cf89a928c0f2f1afa1a0c954703b36a9400f77 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/cc/cf89a928c0f2f1afa1a0c954703b36a9400f77
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/89/d080dd2adb2c3622eb44c639dc872b1a2e7139 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/89/d080dd2adb2c3622eb44c639dc872b1a2e7139
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/6f/584ba3016655c63216c1e9998985e4a6b3c1e1 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/6f/584ba3016655c63216c1e9998985e4a6b3c1e1
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/54/8b9fce7ae3b3b6e7c80432a3d9d4985167f473 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/54/8b9fce7ae3b3b6e7c80432a3d9d4985167f473
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/objects/d6/cdf367dec35a11512afe3591b364a39a316ef1 $(DESTDIR)$(prefix)/app/data/i18n/.git/objects/d6/cdf367dec35a11512afe3591b364a39a316ef1
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/index $(DESTDIR)$(prefix)/app/data/i18n/.git/index
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/logs/refs/heads/master $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/refs/heads/master
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/logs/refs/remotes/origin/master $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/refs/remotes/origin/master
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/logs/HEAD $(DESTDIR)$(prefix)/app/data/i18n/.git/logs/HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/.git/COMMIT_EDITMSG $(DESTDIR)$(prefix)/app/data/i18n/.git/COMMIT_EDITMSG
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/de.json $(DESTDIR)$(prefix)/app/data/i18n/mo/de.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/de.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/de.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/en.json $(DESTDIR)$(prefix)/app/data/i18n/mo/en.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/en.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/en.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/es.json $(DESTDIR)$(prefix)/app/data/i18n/mo/es.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/es.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/es.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pl.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pl.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pl.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pl.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/refs/heads/master $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs/heads/master
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/refs/remotes/origin/HEAD $(DESTDIR)$(prefix)/app/data/i18n/po/.git/refs/remotes/origin/HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/info/exclude $(DESTDIR)$(prefix)/app/data/i18n/po/.git/info/exclude
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/description $(DESTDIR)$(prefix)/app/data/i18n/po/.git/description
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/post-receive.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/post-receive.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/post-commit.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/post-commit.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/prepare-commit-msg.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/prepare-commit-msg.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/commit-msg.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/commit-msg.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/post-update.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/post-update.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/pre-commit.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/pre-commit.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/applypatch-msg.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/applypatch-msg.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/pre-rebase.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/pre-rebase.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/update.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/update.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/hooks/pre-applypatch.sample $(DESTDIR)$(prefix)/app/data/i18n/po/.git/hooks/pre-applypatch.sample
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/HEAD $(DESTDIR)$(prefix)/app/data/i18n/po/.git/HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/config $(DESTDIR)$(prefix)/app/data/i18n/po/.git/config
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/objects/pack/pack-9974bf1d07166e83a612b96f3aec2cf909f95a84.pack $(DESTDIR)$(prefix)/app/data/i18n/po/.git/objects/pack/pack-9974bf1d07166e83a612b96f3aec2cf909f95a84.pack
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/objects/pack/pack-9974bf1d07166e83a612b96f3aec2cf909f95a84.idx $(DESTDIR)$(prefix)/app/data/i18n/po/.git/objects/pack/pack-9974bf1d07166e83a612b96f3aec2cf909f95a84.idx
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/packed-refs $(DESTDIR)$(prefix)/app/data/i18n/po/.git/packed-refs
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/logs/refs/heads/master $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/refs/heads/master
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/logs/refs/remotes/origin/HEAD $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/refs/remotes/origin/HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/logs/HEAD $(DESTDIR)$(prefix)/app/data/i18n/po/.git/logs/HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/FETCH_HEAD $(DESTDIR)$(prefix)/app/data/i18n/po/.git/FETCH_HEAD
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/.git/index $(DESTDIR)$(prefix)/app/data/i18n/po/.git/index
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/de/default.po $(DESTDIR)$(prefix)/app/data/i18n/po/de/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/en/default.po $(DESTDIR)$(prefix)/app/data/i18n/po/en/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/es/default.po $(DESTDIR)$(prefix)/app/data/i18n/po/es/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/pl/default.po $(DESTDIR)$(prefix)/app/data/i18n/po/pl/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/pt/default.po $(DESTDIR)$(prefix)/app/data/i18n/po/pt/default.po
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/po/templates/default.pot $(DESTDIR)$(prefix)/app/data/i18n/po/templates/default.pot
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/de.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/de.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/en.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/en.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/es.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/es.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pl.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pl.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.mo
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/de.json $(DESTDIR)$(prefix)/app/data/i18n/mo/de.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/en.json $(DESTDIR)$(prefix)/app/data/i18n/mo/en.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/es.json $(DESTDIR)$(prefix)/app/data/i18n/mo/es.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pl.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pl.json
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/phing $(DESTDIR)$(prefix)/bin/phing
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-catalog.pl $(DESTDIR)$(prefix)/bin/loc-create-catalog.pl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-json.sh $(DESTDIR)$(prefix)/bin/loc-create-json.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-mo.sh $(DESTDIR)$(prefix)/bin/loc-create-mo.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-merge-template.sh $(DESTDIR)$(prefix)/bin/loc-merge-template.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/rmtmp-files.sh $(DESTDIR)$(prefix)/bin/rmtmp-files.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/GPL $(DESTDIR)$(prefix)/doc/GPL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/INSTALL $(DESTDIR)$(prefix)/doc/INSTALL
@@ -7881,9 +8017,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameDefault.css $(DESTDIR)$(prefix)/pub/styles/WireFrameDefault.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameStructural.css $(DESTDIR)$(prefix)/pub/styles/WireFrameStructural.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/.htaccess $(DESTDIR)$(prefix)/pub/.htaccess
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/index.php $(DESTDIR)$(prefix)/pub/index.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) plugins/bin/db.ini $(DESTDIR)$(prefix)/plugins/bin/db.ini
