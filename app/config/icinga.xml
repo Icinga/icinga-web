@@ -150,6 +150,8 @@
 			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
 			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
 
+			<parameter>%core.module_dir%/Cronks/lib/js/Cronks.js</parameter>
+
 			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>

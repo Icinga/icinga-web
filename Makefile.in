@@ -134,6 +134,16 @@ loc-create-mo:
 loc-create-json:
 	./bin/loc-create-json.sh $(LOC_PO) $(LOC_MO)
 
+submodule-init:
+	git submodule init app/data/i18n/po
+
+submodule-update:
+	cd app/data/i18n/po
+	git checkout master
+	git pull origin master
+	cd -
+	git submodule update
+
 locclean:
 	rm -f \
 		$(LOC_MO)/*.mo \

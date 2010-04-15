@@ -16,16 +16,18 @@ Ext.onReady(function() {
 			items: [{
 				layout: 'fit',
 				region: 'north',
-				id: 'template-north',
+				id: 'viewport-north',
 				autoHeight: true,
 				html: 'NORTH'
 			}, {
 				layout: 'fit',
 				region: 'center',
-				id: 'template-center',
+				id: 'viewport-center',
 				contentEl: contentel
 			}]
 		});
+		
+		var center = viewport.get('viewport-center');
 		
 		Ext.apply(pub, {
 			
@@ -38,8 +40,17 @@ Ext.onReady(function() {
 			},
 			
 			getCenter: function() {
+				return center;
+			},
+			
+			addCenter: function(items, autol) {
+				autol = autol || false;
 				
-				return this.getViewport().get('template-center');
+				center.add(items);
+				
+				if (autol) {
+					this.doLayout();
+				}
 			},
 			
 			doLayout: function() {
