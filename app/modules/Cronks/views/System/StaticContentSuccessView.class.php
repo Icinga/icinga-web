@@ -16,7 +16,7 @@ class Cronks_System_StaticContentSuccessView extends ICINGACronksBaseView
 	 * @return	string						$content		generated content
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
-	public function executeAjax(AgaviRequestDataHolder $rd) {
+	public function executeSimple(AgaviRequestDataHolder $rd) {
 		$templateFile = sprintf(
 			'%s/%s.xml', 
 			AgaviConfig::get('modules.cronks.xml.path'), 

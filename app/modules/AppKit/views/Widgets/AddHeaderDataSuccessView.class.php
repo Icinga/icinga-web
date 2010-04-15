@@ -1,13 +1,9 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataSuccessView extends ICINGAAppKitBaseView
-{
-	public function executeHtml(AgaviRequestDataHolder $rd)
-	{
-		$this->setupHtml($rd);
+class AppKit_Widgets_AddHeaderDataSuccessView extends ICINGAAppKitBaseView {
+	public function executeHtml(AgaviRequestDataHolder $rd) {
 		
-		// not needed
-		// $this->setAttribute('title', 'Widgets.AddHeaderData');
+		$this->setupHtml($rd);
 		
 		AppKitEventDispatcher::getInstance()->triggerSimpleEvent(
 			'appkit.headerdata.publish',

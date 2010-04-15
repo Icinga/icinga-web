@@ -360,21 +360,21 @@ var container = new Ext.Panel({
 	}]
 });
 
-container.on('afterrender', function() {
-	container.setHeight(Ext.lib.Dom.getViewHeight()-60);
-}, container, { single: true });
-
-// Fix lay problems later
-container.on('afterrender', function() { this.doLayout(false, true) }, container, { delay: 2000 });
+//container.on('afterrender', function() {
+//	container.setHeight(Ext.lib.Dom.getViewHeight()-60c);
+//}, container, { single: true });
+//
+//// Fix lay problems later
+//container.on('afterrender', function() { this.doLayout(false, true) }, container, { delay: 2000 });
 
 // Render the container
-container.render("<?php echo $parentid; ?>");
-
-// Resize the container on windowResize
-Ext.EventManager.onWindowResize(function(w,h) {
-	this.setHeight(h-60);
-	this.doLayout(false);
-}, container);
+AppKit.Layout.getCenter().add(container);
+AppKit.Layout.doLayout();
+//// Resize the container on windowResize
+//Ext.EventManager.onWindowResize(function(w,h) {
+//	this.setHeight(h-60);
+//	this.doLayout(false);
+//}, container);
 
 // Adding the cronk list
 if ((west = Ext.getCmp('west-frame'))) {
@@ -471,6 +471,8 @@ if ((south = Ext.getCmp('south-frame'))) {
 	
 	south.add(cLog);
 }
+
+AppKit.Layout.doLayout();
 
 });
 </script>

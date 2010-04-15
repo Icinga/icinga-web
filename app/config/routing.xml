@@ -22,7 +22,7 @@
 				
 				<route name=".about" pattern="^/about" action="%actions.default_action%"/>
 				
-				<route name=".squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simplecontent" />
+				<route name=".squishloader" pattern="^/squishloader/(type:([\w\.\-\_\s]+))" action="Widgets.SquishLoader" output_type="simple" />
 				
 				<!-- AJAX handlers -->
 				<!-- 
@@ -30,13 +30,13 @@
 				-->
 				<route name=".ajax" pattern="^/ajax">
 					<route name=".autocomplete" pattern="^/autocomplete/(type:[\w\._]+)" action="Ajax.AutoComplete" output_type="json" />
-					<route name=".fs" pattern="^/fs/(type:[\w\._]+)" action="Ajax.FileSource" output_type="ajax" />
+					<route name=".fs" pattern="^/fs/(type:[\w\._]+)" action="Ajax.FileSource" output_type="simple" />
 					<route name=".test" pattern="^/test" action="Ajax.Test" />
 				</route>
 				
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
 				
-					<route name=".principaledit" pattern="^/principaleditor/(principal:(\d+))" action="Admin.PrincipalEditor" output_type="simplecontent" />
+					<route name=".principaledit" pattern="^/principaleditor/(principal:(\d+))" action="Admin.PrincipalEditor" output_type="simple" />
 				
 					<route name=".users" pattern="^/users" action="Admin.Users.Index">
 						<route pattern="^/(id:(\d+|new))">
@@ -81,7 +81,7 @@
 			
 				<!-- Icinga index route -->
 				<route name=".home" pattern="^$" action="Index" />
-				<route name=".about" pattern="^/about$" action="Icinga.Help" output_type="simplecontent" />
+				<route name=".about" pattern="^/about$" action="Icinga.Help" output_type="simple" />
 				
 				<!-- The main view -->
 				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
@@ -92,7 +92,7 @@
 						* json data sources
 						* special content
 				-->
-				<route pattern="^/cronks" name=".cronks" output_type="simplecontent" module="Cronks">
+				<route pattern="^/cronks" name=".cronks" output_type="simple" module="Cronks">
 					
 					<!-- The cronkloader -->
 					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="System.CronkLoader" />
@@ -105,7 +105,7 @@
 					<route name=".statusMap.json" pattern="^/statusMap/json" output_type="json" action="System.StatusMap" />
 					<route name=".statusMap" pattern="^/statusMap" action="System.StatusMap" />
 
-					<route name=".staticContent.ajax" pattern="^/staticContent/(template:([\w\.\-\_\s]+))/ajax" output_type="ajax" action="System.StaticContent" />
+					<route name=".staticContent.ajax" pattern="^/staticContent/(template:([\w\.\-\_\s]+))/ajax" output_type="simple" action="System.StaticContent" />
 
 					<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
 						<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">

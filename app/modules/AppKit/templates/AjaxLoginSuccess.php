@@ -2,16 +2,8 @@
 	$htmlid = AppKitRandomUtil::genSimpleId(10, 'login-box-');
 	$containerid = AppKitHtmlHelper::concatHtmlId($htmlid, 'container');
 ?>
-<div style="width:400px; margin: 150px auto 0px auto; padding: 20px;" id="<?php echo $containerid; ?>">
-    <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
-    <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
-        <h3 style="margin-bottom:5px;"><?php echo $tm->_('Login'); ?></h3>
-        <div id="<?php echo $htmlid; ?>"></div>
-    </div></div></div>
-    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
-</div>
 <script type="text/javascript" defer="defer">
-(function() {
+Ext.onReady(function() {
 
 	var bAuthenticated = false;
 	var sId = '<?php echo $htmlid ?>';
@@ -37,6 +29,9 @@
 		var oContainer = Ext.get(sContainerId);
 		
 		var oFormPanel = new Ext.form.FormPanel({
+			width: 400,
+			style: { margin: '120px auto' },
+			title: _('Login'),
 			labelWidth: 100,
 			defaultType: 'textfield',
 			bodyStyle: 'padding: 5px;',
@@ -100,7 +95,9 @@
 				    duration: 2
 				}); */
 				
-				if (oContainer) {
+				//if (oContainer) {
+					oContainer=oFormPanel.getEl();
+					oContainer = oFormPanel.getEl();
 					var ox = oContainer.getLeft();
 					oContainer.sequenceFx();
 					
@@ -112,7 +109,7 @@
 					}
 					
 					oContainer.shift({ x: ox, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
-				}
+				//}
 				
 				pub.resetForm();
 				
@@ -180,13 +177,16 @@
 				
 				oButton.disable();
 			}
-			
 		};
 		
 		return pub;
 	}();
 	
-	oLogin.getPanel().render(sId);
+	AppKit.Layout.getCenter().add({
+		items: oLogin.getPanel()
+	});
+	
+	AppKit.Layout.doLayout();
 
-})();
+});
 </script>

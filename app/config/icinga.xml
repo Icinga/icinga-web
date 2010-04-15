@@ -146,7 +146,9 @@
 			<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
 	
 			<!--AppKit JS -->
-			<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>
+			<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>-->
+			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
 
 			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>

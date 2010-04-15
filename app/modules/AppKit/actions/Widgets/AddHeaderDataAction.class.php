@@ -51,7 +51,6 @@ class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 		}
 		
 		return $this->getDefaultViewName();
-		
 	}
 }
 

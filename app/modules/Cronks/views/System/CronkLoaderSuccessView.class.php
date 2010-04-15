@@ -32,13 +32,7 @@ class Cronks_System_CronkLoaderSuccessView extends ICINGACronksBaseView
 			if (array_key_exists($cronk, $cronks)) {
 				$module = $cronks[$cronk]['module'];
 				$action = $cronks[$cronk]['action'];
-				
-				$c = $this->createForwardContainer($module, $action, $parameters->getParameters(), 'simplecontent', 'read')
-					->execute()
-					->getContent();
-				
-						
-				return $c;
+				return $this->createForwardContainer($module, $action, $parameters->getParameters(), 'simple', 'read');
 			}
 			else {
 				return 'Sorry, the cronk could not be loaded (not exist)';

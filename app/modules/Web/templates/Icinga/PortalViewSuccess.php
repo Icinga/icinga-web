@@ -2,11 +2,10 @@
 /**
  * This create the complete view (simply loading a cronk which is doing for us)
  */
-(function() {
 Ext.onReady(function() {
 	
 	var sPortalCronk = "crportal";
-	var sRenderElement = "contentArea";
+	var sRenderElement = "content";
 
 	if (Ext.get(sRenderElement)) {
 		
@@ -24,5 +23,4 @@ Ext.onReady(function() {
 		
 	}
 })
-})();
 </script>

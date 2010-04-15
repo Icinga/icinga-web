@@ -83,7 +83,8 @@ class ICINGABaseView extends AgaviView implements AppKitContextInterface
 	 * @param AgaviRequestDataHolder $rd
 	 * @return mixed
 	 */
-	public function executeSimplecontent(AgaviRequestDataHolder $rd) {
+	public function executeSimple(AgaviRequestDataHolder $rd) {
+		$rd->setParameter('is_slot', true);
 		return $this->executeHtml($rd);
 	}
 }
