@@ -1,6 +1,10 @@
 <?php
 require_once "phing/Task.php";
-
+/**
+ * Injects 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class snippetInjectorTask extends Task {
 	protected $file;
 		

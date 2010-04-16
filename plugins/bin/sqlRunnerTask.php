@@ -1,6 +1,11 @@
 <?php
 require_once "phing/Task.php";
 
+/**
+ * Processes sql files 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class sqlRunnerTask extends Task {
 	protected $files;
 	protected $ini;
@@ -14,6 +19,11 @@ class sqlRunnerTask extends Task {
 		$this->processSQL();
 	}
 	  
+	/**
+	 * Loads doctrine and registers the autoloader
+	 * 
+	 * @throws BuildException if Doctrine is not found
+	 */
 	protected function checkForDoctrine() {
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$doctrinePath = $icinga."/".$this->project->getUserProperty("PATH_Doctrine");
@@ -24,6 +34,11 @@ class sqlRunnerTask extends Task {
 		spl_autoload_register("Doctrine::autoload");
 	}
 	
+	/**
+	 * Executes all sql files via doctrine 
+	 * 
+	 * @throws BuildException if db.ini is not found
+	 */
 	protected function processSQL() {
 		$iniData = parse_ini_file($this->ini);
 		if(empty($iniData))
@@ -42,10 +57,18 @@ class sqlRunnerTask extends Task {
 		Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
 	}
 	
+	/**
+	 * The path where the .sql files are
+	 * @param String $files
+	 */
 	public function setFiles($files) {
 		$this->files = $files;
 	}
 	
+	/**
+	 * The db.ini describing the database connection
+	 * @param unknown_type $ini
+	 */
 	public function setIni($ini)	{
 		$this->ini = $ini;
 	}

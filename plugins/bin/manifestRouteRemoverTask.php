@@ -1,7 +1,12 @@
 <?php
 
 require_once "manifestBaseClass.php";
-
+/**
+ * Removes the routes that were added by a plugin
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class ManifestRouteRemoverTask extends manifestBaseClass {
 
 	public function main() {
@@ -21,10 +26,13 @@ class ManifestRouteRemoverTask extends manifestBaseClass {
 			$context = $route["context"];
 			$name = $route["name"];
 			$routeToRemove = $configSearcher->query("//default:configuration[@context='".$context."']//default:route[@name='".$name."']")->item(0);
-			if(!$routeToRemove)
-			throw new BuildException("Route ".$name." not found!");
+			if(!$routeToRemove) {
+				echo("Route ".$name." not found!");
+				continue;
+			}
 			$node = $routeToRemove->parentNode;
 			$routeToRemove->parentNode->removeChild($routeToRemove);
+			
 			// remove empty branches
 			$this->checkIfNodeIsEmpty($node);
 				
@@ -36,6 +44,12 @@ class ManifestRouteRemoverTask extends manifestBaseClass {
 		$this->reformat($configPath);
 	}
 
+	/**
+	 * Checks for empty branches (<routes></routes>) that would produce 
+	 * a DTD validation error
+	 * 
+	 * @param DOMNode $node the nod eto check
+	 */
 	protected function checkIfNodeIsEmpty(DOMNode $node) {
 		if($node->nodeName == "routes") {
 			foreach($node->childNodes as $child) {
@@ -48,7 +62,10 @@ class ManifestRouteRemoverTask extends manifestBaseClass {
 		return true;
 	}
 
-
+	/**
+	 * Reformat the xml file at $configPath 
+	 * @param String $configPath 
+	 */
 	protected function reformat($configPath) {
 		// Reformat the xml (triple whitespaces to tab)
 		$file = file_get_contents($configPath);

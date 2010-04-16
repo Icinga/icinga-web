@@ -2,6 +2,13 @@
 
 require_once "manifestBaseClass.php";
 
+/**
+ * Extracts "snippets", textual information that are marked for the export
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
+
 class ManifestSnippetExtractorTask extends manifestBaseClass {
 
     private $toFile = null;
@@ -11,8 +18,8 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
     public function setTofile($target) {
     	$this->toFile = $target;
     }
-  
-    public function addExtractorMark(SimpleXMLElement $name,SimpleXMLElement $file) {
+  	
+  	public function addExtractorMark(SimpleXMLElement $name,SimpleXMLElement $file) {
     	$this->extractorMarks[] = array("name" => (String) $name, "file" => (String) $file);
     }
     public function setXMLObject(SimpleXMLElement $xml) {
@@ -45,6 +52,11 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 		}
 	}
 	
+	/**
+	 * Searches for extractor marks and (PLUGIN[]) and extracts them
+	 * 
+	 * @throws Buildexception if the marked file doesn't exist
+	 */
 	public function extractMarks() {
 		$str = "";
 		$marks = $this->getExtractorMarks();

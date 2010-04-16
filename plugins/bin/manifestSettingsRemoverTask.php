@@ -1,5 +1,11 @@
 <?php
 	
+/**
+ * Removes the settings that we're created by the plugin 
+ *  
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class ManifestSettingsRemoverTask extends Task {
     private $file = null;
 	private $xmlObject = null;
@@ -39,7 +45,11 @@ class ManifestSettingsRemoverTask extends Task {
 		}
     }
 
-	
+	/**
+	 * Checks which type to delete, searches the config node and removes it
+	 * 
+	 * @param String $file The name of the config file
+	 */
 	public function removeConfigVars($file) {
 		$manifest = $this->getXMLObject();
 		$manifestSearcher = new DOMXPath($manifest);

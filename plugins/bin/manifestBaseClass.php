@@ -1,10 +1,24 @@
 <?php
 require_once "phing/Task.php";
 require_once "manifestStore.php";
-
+/**
+ * Base class for Tasks that read the manifest file and only use simple operations
+ * Loads the manifest.xml to a simple_xml class.
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 abstract class manifestBaseClass extends Task {
-	 private $file = null;
-	 private static $xmlObject = null;
+	/**
+	 * The manifest file path
+	 * @var String
+	 */ 
+	private $file = null;
+	/**
+	 * The manifest XML representation
+	 * @var unknown_type
+	 */
+	private static $xmlObject = null;
 
     public function setFile($str) {
         $this->file = $str;
@@ -23,6 +37,9 @@ abstract class manifestBaseClass extends Task {
     
     public function init() {}
     
+    /**
+     * Instantiates manifestStore
+     */
     public function main() {
     	$file = $this->getFile();
     	if(!$file)
