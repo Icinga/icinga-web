@@ -2,30 +2,76 @@
 require_once "phing/Task.php";
 require_once "manifestStore.php";
 
+/**
+ * Task that configurates the agavi config files via DOM
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class ManifestAgaviConfiguratorTask extends Task {
-    private $file = null;
+	/**
+	 * The manifest file to use
+	 * @var String
+	 */
+	private $file = null;
+	
+	/**
+	 * The manifest DOM representation
+	 * @var DOMDocument
+	 */
 	private $xmlObject = null;
+	
+	/**
+	 * Flag that determines if a "plugins/PLUGIN_NAME.xml" include should
+	 * be inserted to icinga.xml  
+	 * @var Boolean
+	 */
 	private $noInclude = false;
 	
+	/**
+	 * Sets the manifest filename
+	 * @param String $str
+	 */
     public function setFile($str) {
         $this->file = $str;
     }
 
+    /**
+     * Sets the Manifest DOM Representation
+     * @param $xml
+     */
     public function setXMLObject(DOMDocument $xml) {
     	$this->xmlObject = $xml;
     }
 	
+    /**
+     * Sets the setNoInclude flag
+     * @param $bool
+     */
     public function setNoInclude($bool) {
     	$this->noInclude = $bool;
     }
     
+    /**
+     * returns the manifest filename
+     * @return String Filename of manifest.xml
+     */
     public function getFile() {
 		return $this->file;
 	}
 
+	/**
+	 * Returns the manifest DOMDocument
+	 * @return DOMDocument The manifest.xml DOM
+	 */
     public function getXMLObject() {
     	return $this->xmlObject;
     }
+    
+    /**
+     * Returns the noInclude flag
+     * @return Boolean 
+     */
     public function getNoInclude() {
     	return $this->noInclude;
     }
@@ -33,7 +79,11 @@ class ManifestAgaviConfiguratorTask extends Task {
     public function init() {
 		
     }
-	
+
+    /**
+     * Loads the manifest and processes all config vars
+     * 
+     */
     public function main() {
     	$file = $this->getFile();
     	$DOM = new DOMDocument("1.0","UTF-8");
@@ -43,6 +93,9 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$manifest = $this->getXMLObject();
 		$manifest->preserveWhiteSpace = false;
 		$manifestSearcher = new DOMXPath($manifest);
+		/**
+		 * Process Config->Files section
+		 */
 		$cfgFiles = $manifestSearcher->query("//Config/Files/*");
 		foreach($cfgFiles as $file) {
 			$file = $file->nodeName;
@@ -51,10 +104,28 @@ class ManifestAgaviConfiguratorTask extends Task {
 		if(!$this->getNoInclude())
 			$this->addSettingsInclude();
 	
+		// set routes and translations
 		$this->registerRoutes();
     	$this->addTranslations();
     }
 	
+    /**
+     * Function that sets config parameters in %icinga/app/config/$file.xml
+     * 
+     * A XML Property description can have the following parameters:
+     * 		type : 		Either 'append', 'overwrite'.
+     * 					Determines wheter to overwrite the node if it already exists,
+     * 					append it.
+     * 		name :  	The name of the setting
+     * 		pname:  	The name of the parameter (optional)
+     * 					If no pname is given, a nameless parameter will be appended
+     * 		textnode: 	True if a setting should not contain a parameter, but only text
+     * 		asXML :		Just append the the content of this node. 
+     * 		fromConfig:	Export this property from the original config file and insert it 
+     *					on install
+     * 
+     * @param String $file The Config-Filename
+     */
 	protected function setConfigVars($file) {
 		if(!$file)
 			return null;
@@ -127,13 +198,23 @@ class ManifestAgaviConfiguratorTask extends Task {
 				}
 			}
 		}
-		
+		// Save and reformat
 		$configDOM->formatOutput = true;
 		$configDOM->save($configPath);
 
 		$this->reformat($configPath);
 	}
 	
+	
+	/**
+	 * Called when a node contains fromConfig. Injects an exported config setting $config 
+	 * from $filename into $cfgDOM
+	 * 
+	 * @param DOMElement $config The config node to process
+	 * @param DOMDocument $cfgDOM The agavi-config file DOM
+	 * @param String $filename the filename of the xml file containing exported settings
+	 *
+	 */
 	protected function injectSettingFromXML($config,DOMDocument $cfgDOM,$filename) { 
 		$name = $config->getAttribute("name");
 		$pname = $config->getAttribute("pname");
@@ -192,7 +273,11 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$node->appendChild($cfgDOM->importNode($nodeToInsert,true));
 	}
 	
-	
+	/**
+	 * Returns an xml childnode that is not a comment or textnode
+	 * @param DOMDocument $dom 
+	 * @param DOMElement $node
+	 */
 	protected function getXMLChild(DOMDocument $dom, DOMElement $node) {
 		foreach($node->childNodes as $childNode) {
 			if($childNode->nodeType == XML_COMMENT_NODE || $childNode->nodeType == XML_TEXT_NODE)
@@ -201,6 +286,10 @@ class ManifestAgaviConfiguratorTask extends Task {
 		}		
 	}
 	
+	/**
+	 * Adds a <xi:include> tag to the icinga.xml which points to the plugin include
+	 * 
+	 */
 	protected function addSettingsInclude() {
 			
 		$configPath = $this->project->getUserProperty("PATH_Icinga")."/app/config/icinga.xml";
@@ -228,6 +317,13 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$this->reformat($configPath);
 	}
 	
+	/**
+	 * Creates a parameter $name  with $value 
+	 *
+	 * @param DOMDocument $configDOM
+	 * @param String $value The value of the parameter
+	 * @param String $pname The name of the parameter (optional)
+	 */
 	protected function createParameter(DOMDocument $configDOM,$value,$pname = null) {
 		$parameter = $configDOM->createElement("parameter");
 		if($pname)
@@ -236,6 +332,11 @@ class ManifestAgaviConfiguratorTask extends Task {
 		return $parameter;
 	}
 	
+	/**
+	 * Registers the routes exported to src/routes.xml (if any) in the 
+	 * agavi routing.xml
+	 *
+	 */
 	protected function registerRoutes() {
 		$routes = new DOMDocument("1.0");
 		$routes->preserveWhiteSpace = false;
@@ -274,6 +375,7 @@ class ManifestAgaviConfiguratorTask extends Task {
 			}
 			$contextConfigs = $routingSearcher->query("//default:configuration[@context='".$context."']/default:routes");
 			$config = null;
+			// check if the context already exists
 			if($contextConfigs->length < 1) {
 				$config = $this->createContextConfig($configDOM,$context);
 
@@ -287,10 +389,12 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$configDOM->formatOutput = true;
 		$configDOM->save($configPath);
 		$this->reformat($configPath);
-
-		
 	}
-	
+
+	/**
+	 * Adds translation domains and locales to the agavi translations.xml
+	 * 
+	 */
 	protected function addTranslations() {
 		$translation = new DOMDocument("1.0");
 		$translation->preserveWhiteSpace = false;
@@ -306,10 +410,11 @@ class ManifestAgaviConfiguratorTask extends Task {
 		
 		$xpathSearcher = new DOMXPath($translation);
 		$xpathSearcher->registerNamespace("default","http://agavi.org/agavi/config/parts/translation/1.0");
-
+		$xpathSearcher->registerNamespace("ae","http://agavi.org/agavi/config/global/envelope/1.0");
 	
 		$translationSearcher = new DOMXPath($configDOM);
 		$translationSearcher->registerNamespace("default","http://agavi.org/agavi/config/parts/translation/1.0");
+
 		// import locales
 		$locales = $xpathSearcher->query("//default:available_locales/*");
 		$localeNode = $translationSearcher->query("//default:available_locales")->item(0);
@@ -325,11 +430,11 @@ class ManifestAgaviConfiguratorTask extends Task {
 		
 		//import domains
 		$translators = $xpathSearcher->query("//default:translators/*");
-		$translatorNode = $translationSearcher->query("//default:translators")->item(0);
+		$translatorNode = $translationSearcher->query("//default:translator[@domain='icinga']//ae:parameter[@name='text_domains']")->item(0);
 		foreach($translators as $translator) {
 			$id = $translator->getAttribute("domain");
 			//check if node already exists 
-			if($translationSearcher->query("//default:translator[@domain='".$id."']")->item(0)) {
+			if($translationSearcher->query("//default:translator[@domain='icinga']//ae:parameter[@name='".$id."']")->item(0)) {
 				echo "\nTranslation domain ".$id." already exists, skipping\n";
 				continue;
 			}
@@ -341,6 +446,11 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$this->reformat($configPath);
 	}
 	
+	/**
+	 * Reformats an xml, so it looks nice again
+	 * 
+	 * @param String $configPath The path to the xml file
+	 */
 	protected function reformat($configPath) {
 		// Reformat the xml (triple whitespaces to tab)
 		$file = file_get_contents($configPath);
@@ -349,6 +459,13 @@ class ManifestAgaviConfiguratorTask extends Task {
 		file_put_contents($configPath,$file);
 	}
 	
+	/**
+	 * Create a context config in the routes.xml
+	 * 
+	 * @param DOMDocument $dom
+	 * @param String $context the new context 
+	 * @return Returns the new DOM node
+	 */
 	protected function createContextConfig(DOMDocument $dom,$context) {
 		$elem = $dom->createElement("configuration");
 		$elem->setAttribute("context",$context);

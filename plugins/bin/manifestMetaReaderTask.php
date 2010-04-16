@@ -2,7 +2,12 @@
 
 
 require_once "manifestBaseClass.php";
-
+/**
+ * Reads the meta data the manifest.xml and stores it into UserProperties
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class ManifestMetaReaderTask extends manifestBaseClass {
 
 	public function main() {
