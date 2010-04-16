@@ -53,10 +53,6 @@ none:
 	@printf "\n\n"
 	
 include $(INC_MAKE_FILES)
-
-install-files-list:
-	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
-	./bin/create-makefile.sh >> $(INC_MAKE_FILES)
 	
 clean:
 
@@ -74,7 +70,7 @@ configclean:
 remove-temp-files:
 	bin/rmtmp-files.sh
 
-devclean: remove-temp-files distclean cacheclean install-files-list configclean
+devclean: remove-temp-files distclean cacheclean make-create-files configclean
 
 create-tarball:
 	tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
@@ -105,7 +101,10 @@ fix-libs:
 	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
 	ln -sf $(API_DIR) $(DESTDIR)$(prefix)/lib/icinga-api
 
-install: inc-install-files fix-priv fix-libs
+install:
+	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
+	$(MAKE) -s inc-install-files
+	$(MAKE) fix-priv fix-libs
 
 db-initialize:
 	$(PHING_CALL) db-initialize
@@ -121,6 +120,12 @@ db-upgrade:
 
 db-purge-userprefs:
 	$(PHING_CALL) db-purge-userprefs
+
+install-files-list: make-create-files
+
+make-create-files:
+	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
+	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
 
 loc-update-catalog:
 	./bin/loc-create-catalog.pl --base=./ --out=./app/data/po/templates/default.pot

@@ -3,42 +3,33 @@
 # Idea borrowed by pnp4nagios :-)  
 #
 
-DIR=$(dirname $0 )
-IGNORE="~|development__|\.in$"
+DIR="$1"
+IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in|data/i18n).*"
 SRCDIR="app bin doc etc lib pub plugins"
-cd $DIR/..
+
+declare -i DCOUNT=0
+declare -i FCOUNT=0
+
+cd $DIR
 
 echo "# INSTALL_FILES_BEGIN"
 
-for DIR in $SRCDIR; do
-	
-	if [[ "$DIR" != "" && -e "$DIR" ]]; then
-		echo -e "\t\$(INSTALL) -m 755 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$DIR"
+function pline {
+	if [[ -d $1 ]]; then
+		DCOUNT+=1
+		echo -e "\t\$(INSTALL) -m 755 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$1"
+	elif [[ -a $1 ]]; then
+		FCOUNT+=1
+		echo -e "\t\$(INSTALL) -m 644 \$(INSTALL_OPTS) $1 \$(DESTDIR)\$(prefix)/$1"
 	fi
-	
-	for TDIR in $(find $DIR -type d -printf "%P\n" | egrep -v "$IGNORE"); do
-		SOURCE="$DIR/$TDIR"
-		
-		if [[ "$SOURCE" != "" && -e "$SOURCE" ]]; then
-			echo -e "\t\$(INSTALL) -m 755 \$(INSTALL_OPTS) -d \$(DESTDIR)\$(prefix)/$SOURCE"
-		fi
-		
-	done
-	
+}
+
+for X in $(find $SRCDIR -noleaf  -regextype posix-awk -not -regex $IGNORE | sort); do
+		pline $X
 done
 
-for DIR in $SRCDIR; do
-	
-	for FILE in $(find $DIR -type f -printf "%P\n" | egrep -v "$IGNORE"); do
-		SOURCE="$DIR/$FILE"
-		
-		if [[ "$SOURCE" != "" && -e "$SOURCE" ]]; then
-			echo -e "\t\$(INSTALL) -m 644 \$(INSTALL_OPTS) $SOURCE \$(DESTDIR)\$(prefix)/$SOURCE"
-		fi
-		
-	done
-	
-done
+echo "INC_FILES=$FCOUNT"
+echo "INC_DIRS=$DCOUNT"
 
 echo "# INSTALL_FILES_END"
 
