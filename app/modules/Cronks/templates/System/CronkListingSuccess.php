@@ -10,7 +10,6 @@
 		var template  = null;
 		
 		var c = {
-			
 			layout: 'accordion',
 			
 			layoutConfig: {
@@ -20,51 +19,55 @@
 				fill: true
 			},
 			
+			autoScroll: true,
 			border: false,
+			
+			defaults: { border: false }
 		};
 		
 		var stateuid = 'cronk-listing-panel';
 		
 		if (stateuid) {
 			Ext.apply(c, {
-			id: stateuid,
-			stateId: stateuid,
-			stateEvents: ['collapse'],
-			stateful: true,
-			bubbleEvents: [],
-			
-			defaults: {
-				listeners: {
-					collapse: function() {
-						addCmp.saveState();
-					}
-				}
-			},
-			
-			applyState: function(state) {
-				if (state && "active_tab" in state && state.active_tab >= 0) {
-					this.active_tab = state.active_tab;
-				}
-			},
-			
-			getState: function() {
-				var active = this.getLayout().activeItem, i;
-				this.items.each(function(item, index, l) {
-					if (item == active) {
-						i = index;
-					}
-				});
 				
-				if (typeof(i) !== "undefined" && i>=0) {
-					return { active_tab: i }
+				id: stateuid,
+				stateId: stateuid,
+				stateEvents: ['collapse'],
+				stateful: true,
+				bubbleEvents: [],
+				
+				defaults: {
+					listeners: {
+						collapse: function() {
+							addCmp.saveState();
+						}
+					}
+				},
+				
+				applyState: function(state) {
+					if (state && "active_tab" in state && state.active_tab >= 0) {
+						this.active_tab = state.active_tab;
+					}
+				},
+				
+				getState: function() {
+					var active = this.getLayout().activeItem, i;
+					this.items.each(function(item, index, l) {
+						if (item == active) {
+							i = index;
+						}
+					});
+					
+					if (typeof(i) !== "undefined" && i>=0) {
+						return { active_tab: i }
+					}
+				},
+				
+				listeners: {
+					beforecollapse: function() {
+						return false;
+					}
 				}
-			},
-			
-			listeners: {
-				beforecollapse: function() {
-					return false;
-				}
-			}
 				
 			});
 		}
@@ -145,35 +148,28 @@
 				
 				s.reload();
 				
-				var v = new Ext.DataView({
+				return new Ext.DataView({
 			        store: s,
 			        tpl: CronkListing.getTemplate(),
-//			        autoScroll: true,
-//			        autoHeight:true,
-//			        multiSelect: true,
 			        overClass:'x-view-over',
 			        itemSelector:'div.cronk-preview',
 			        emptyText: 'No data',
 			       	cls: 'cronk-data-view',
+			        border: false,
 			        
 			        // Create the drag zone
 			        listeners: {
 			            render: CronkListing.initCronkDragZone,
 			            dblclick: CronkListing.dblClickHandler
-			        }
-			        
-			        
+			        } 
 			    });
-			    
-			    return v;
 			},
 			
 			addListing : function (title, cat) {
 				addCmp.add({
 					title: title,
-					border: false,
-					defaults: { border: false },
-					items: [ CronkListing.getNewView(cat) ]
+					items: CronkListing.getNewView(cat),
+					border: false
 				});
 				
 				addCmp.doLayout();

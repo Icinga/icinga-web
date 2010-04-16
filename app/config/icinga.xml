@@ -91,19 +91,20 @@
 	<setting name="appkit.include_styles">		
 	
 		<!-- ICINGAWireFrame css -->
-		<parameter>/styles/WireFrameDefault.css</parameter>
-		<parameter>/styles/WireFrameStructural.css</parameter>
+		<!--  <parameter>/styles/WireFrameDefault.css</parameter>
+		<parameter>/styles/WireFrameStructural.css</parameter> -->
 		
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
+		<parameter>/js/ext3/resources/css/xtheme-gray.css</parameter>
 
 		<!-- JIT - JavaScript InfoVis Toolkit -->
 		<parameter>/styles/statusmap.css</parameter>
 
 		<!-- ICINGA -->
+		<!-- <parameter>/styles/extjs/ext-all.css</parameter>
+		<parameter>/styles/extjs/ux-all.css</parameter> -->
 		<parameter>/styles/silk-icons.css</parameter>
-		<parameter>/styles/extjs/ext-all.css</parameter>
-		<parameter>/styles/extjs/ux-all.css</parameter>
 		<parameter>/styles/Icinga.css</parameter>
 	</setting>
 	
@@ -138,27 +139,27 @@
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
 
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
-			<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter> -->
 	
 			<!-- JIT - JavaScript InfoVis Toolkit -->
 			<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
 			<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
+	
+			<!-- Cronks -->
+			<parameter>%core.module_dir%/Cronks/lib/js/Cronks.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</parameter>
 	
 			<!--AppKit JS -->
 			<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>-->
 			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
 			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
 
-			<parameter>%core.module_dir%/Cronks/lib/js/Cronks.js</parameter>
-
 			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/slidingtabs.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
+			
 
 			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>

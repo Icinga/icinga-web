@@ -1,5 +1,4 @@
 (function() {
-
 	Ext.ns('AppKit');
 	
 	AppKit = (function() {
@@ -26,5 +25,40 @@
 		return pub;
 	
 	})();
+	
+	Ext.ns('AppKit.util');
+	
+	AppKit.util.EventDispatcher = new (Ext.extend(Ext.util.Observable, {
+		
+		constructor : function(config) {
+			
+			this.listeners = {};
+			this.events = {};
+			
+			this.superclass.constructor.call(this, config);
+		},
+	    
+		hasEvent : function(eventName) {
+			if (eventName in this.events && Ext.isDefined(this.events[eventName])) {
+				return true;
+			}
+			return false;
+		},
+		
+		addEvent : function(eventName, etrue) {
+			var e = {};
+			e[eventName] = (etrue) ? true : false;
+			this.addEvents(e);
+		},
+		
+		addListener : function(eventName, fn, scope, options) {
+			if (this.hasEvent(eventName) == false) {
+				this.addEvent(eventName);
+			}
+			
+			return this.superclass.addListener.call(eventName, fn, scope, options);
+		}
+		
+	}))();
 	
 })()

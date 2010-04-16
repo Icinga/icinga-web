@@ -1,4 +1,7 @@
 Ext.onReady(function() {
+	
+	Ext.ns('AppKit.Layout');
+	
 	AppKit.Layout = (function() {
 		
 		var pub = {};

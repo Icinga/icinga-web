@@ -2,14 +2,13 @@
 	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
-
 Ext.onReady(function() {
 
-//AppKit.Ext.pageLoadingMask();
-//
-//setTimeout(function() {
-//	AppKit.Ext.pageLoadingMask(true);
-//}, 3000);
+AppKit.Ext.pageLoadingMask();
+
+setTimeout(function() {
+	AppKit.Ext.pageLoadingMask(true);
+}, 3000);
 
 	var SlidingTabs = (new(Ext.extend(Object, {
 		
@@ -279,37 +278,123 @@ Ext.onReady(function() {
 		},
 	});
 
+	var tabPanel = new Ext.TabPanel({
+		id : 'cronk-tabs',
+		border : false,
+		enableTabScroll :true,
+		resizeTabs : false,
+		
+		// Plugin
+		plugins: [CronkTabPlugin, SlidingTabs],
+		
+		// This component is stateful!
+		stateful: true,
+		stateId: 'cronk-tab-panel',
+		
+		stateEvents: ['add', 'remove', 'tabchange', 'titlechange'],
+		
+		getState: function() {
+			
+			var cout = { };
+			
+			this.items.each(function(item, index, l) {
+				if (item.iscronk && AppKit.Ext.CronkMgr.cronkExist(item.cronkkey)) {
+					var c = AppKit.Ext.CronkMgr.getCronk(item.cronkkey);
+					var cronk = AppKit.Ext.CronkMgr.getCronkComponent(item.cronkkey);
 	
-	Cronks.container = new Ext.Panel({
+					c.config.title = cronk.title;
+	
+					cout[c.cmpid] = Ext.apply(c);
+				}
+			});
+			
+			return {
+				cronks: cout,
+				items: this.items.getCount(),
+				active: this.getActiveTab().id
+			}
+		},
+		
+		applyState: function(state) {
+			(function() {
+				
+				if (state.cronks) {
+	
+					// Adding all cronks
+					Ext.iterate(state.cronks, function(index, item, o) {
+						var config = {};
+						
+						Ext.apply(config, item.config, item.crconf);
+						
+						var cronk = AppKit.Ext.CronkMgr.create(config);
+		
+						this.add(cronk);
+						
+					}, this);
+	
+					// Sets tehe active tab
+					this.setActiveTab(state.active);
+				}
+				
+							
+			}).defer(5, this);
+			
+			return true;
+		},
+	});
+
+	var portal = Ext.create({
+		xtype: 'panel',
 		
 		layout: 'border',
 		border: false,
 		id: 'view-container',
 		
-		defaults: {
-			border: true
-		},
+		defaults: { border: false },
 		
 		items: [{
 			region: 'north',
 			id: 'north-frame',
-			height: 20
+			layout: 'column',
+			height: 80,
+			
+			items: [{
+				xtype: 'cronk',
+				crname: 'icingaSearch',
+				width: 250,
+			}, {
+				xtype: 'cronk',
+				crname: 'icingaStatusSummary',
+				width: 380,
+				params: { otype: 'chart' }
+			}, {
+				xtype: 'cronk',
+				crname: 'icingaStatusSummary',
+				columnWidth: .8,
+				params: { otype: 'text' }
+			}]
 		}, {
 			region: 'south',
 			id: 'south-frame',
 			layout: 'fit',
 			title: _('log'),
 			collapsible: true,
+			split: true,
+			minSize: 150,
 			height: 150,
 			stateful: true,
-			stateId: 'south-frame'
+			stateId: 'south-frame',
+			items: {
+				xtype: 'cronk',
+				crname: 'gridLogView'
+			}
 		}, {
 			region: 'center',
 			id: 'center-frame',
 			layout: 'fit',
-			margins: '0 0 10 5',
-	        cls: 'cronk-center-content'
-	        // items: tabPanel
+			items: tabPanel,
+			border: true,
+			margins: '0 5 0 0'
 		}, {
 			region: 'west',
 			id: 'west-frame',
@@ -319,18 +404,18 @@ Ext.onReady(function() {
 	        maxSize: 400,
 	        width: 200,
 	        collapsible: true,
-	        margins: '0 0 10 0',
 	        stateful: true,
-	        stateId: 'west-frame',
-	        items: {
-	        		
-	        }
+	        border: true,
+			stateId: 'west-frame',
+			margins: '0 0 0 5',
+			items: {
+				xtype: 'cronk',
+				crname: 'crlist'
+			}
 		}]
 		
 	});
 	
-	AppKit.Layout.addCenter(Cronks.container, true);
-	
-
+	Ext.getCmp('<?echo $parentid; ?>').add(portal);
 });
 </script>

@@ -401,7 +401,6 @@
 		labelWidth: 0,
 		border: false,
 		defaultType: 'textfield',
-		height: 60,
 		items: [oTextField]
 	});
 	

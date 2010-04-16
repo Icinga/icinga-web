@@ -7,7 +7,6 @@ Ext.onReady(function() {
 
 	var bAuthenticated = false;
 	var sId = '<?php echo $htmlid ?>';
-	var sContainerId = '<?php echo $containerid; ?>';
 	
 	<?php if ($us->isAuthenticated() == true) { ?>
 	bAuthenticated = true;
@@ -26,15 +25,10 @@ Ext.onReady(function() {
 			}
 		});
 		
-		var oContainer = Ext.get(sContainerId);
-		
 		var oFormPanel = new Ext.form.FormPanel({
-			width: 400,
-			style: { margin: '120px auto' },
-			title: _('Login'),
 			labelWidth: 100,
 			defaultType: 'textfield',
-			bodyStyle: 'padding: 5px;',
+			bodyStyle: { padding: '5px 5px', marginTop: '10px' },
 			
 			defaults: {
 				msgTarget: 'side'
@@ -71,6 +65,15 @@ Ext.onReady(function() {
 			buttons: [oButton]
 		});
 		
+		var oContainer = new Ext.Panel({
+			width: 400,
+			style: { margin: '120px auto', padding: '10px 0 0 0' },
+			baseCls: 'x-box',
+			frame: true,
+			defaults: { border: false },
+			items: [ { bodyCfg: { tag: 'h1', html: _('Login') } }, oFormPanel ]
+		});
+		
 		var oFormAction = new Ext.form.Action.Submit(oFormPanel.getForm(), {
 			clientValidation: true,
 			url: '<?php echo $ro->gen("appkit.login.provider"); ?>',
@@ -95,21 +98,20 @@ Ext.onReady(function() {
 				    duration: 2
 				}); */
 				
-				//if (oContainer) {
-					oContainer=oFormPanel.getEl();
-					oContainer = oFormPanel.getEl();
-					var ox = oContainer.getLeft();
-					oContainer.sequenceFx();
+				if (oContainer) {
+					var ox = oContainer.getEl();
+					var orgX = ox.getLeft();
+					ox.sequenceFx();
 					
 					for(var i=0; i<1; i++) {
-						oContainer.shift({x: oContainer.getLeft()-20, duration: .02, easing: 'bounceBoth'})
-						.shift({x: oContainer.getLeft()+40, duration: .02 , easing: 'bounceBoth'})
-						.shift({x: oContainer.getLeft()-20, duration: .02, easing: 'bounceBoth'})
+						ox.shift({x: ox.getLeft()-20, duration: .02, easing: 'bounceBoth'})
+						.shift({x: ox.getLeft()+40, duration: .02 , easing: 'bounceBoth'})
+						.shift({x: ox.getLeft()-20, duration: .02, easing: 'bounceBoth'})
 						.pause(.03);
 					}
 					
-					oContainer.shift({ x: ox, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
-				//}
+					ox.shift({ x: orgX, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
+				}
 				
 				pub.resetForm();
 				
@@ -137,11 +139,11 @@ Ext.onReady(function() {
 		pub = {
 			
 			getPanel : function() {
-				return oFormPanel;
+				return oContainer;
 			},
 			
 			getForm : function() {
-				return this.getPanel().getForm();
+				return oFormPanel.getForm();
 			},
 			
 			getAction : function() {
