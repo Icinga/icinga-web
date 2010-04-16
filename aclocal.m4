@@ -22,10 +22,14 @@ AC_DEFUN([ACICINGA_GROUP_GUESS],[
 AC_DEFUN([ACICINGA_CHECK_BIN], [
    AC_PATH_PROG([$1],[$2],[not found])
 
-   AS_IF([ test "$2"  == "not found" ],
-	 [ AC_MSG_ERROR([binary $3 not found in PATH]) ])
-
-   AS_IF([ test -x "$2" ],
-	 [ AC_MSG_ERROR([$3 not executable]) ])
+   AS_IF([ test "$2" == "not found" ],
+	 [ AC_MSG_WARN([binary $3 not found in PATH]) ])
+    
 ])
 
+AC_DEFUN([ACICINGA_CHECK_API], [
+	AC_MSG_CHECKING([for IcingaApi])
+	AS_IF([ test -e $1/IcingaApi.php && $GREP -q "class IcingaApi" $1/IcingaApi.php ],
+		[ AC_MSG_RESULT([found])    ],
+		[ AC_MSG_WARN([not found]) ])
+])

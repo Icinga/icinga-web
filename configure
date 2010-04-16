@@ -1262,7 +1262,7 @@ Optional Packages:
 Some influential environment variables:
   PHP         php cli binary
   MYSQL       mysql client binary
-  PHING       phing build tooö
+  PHING       phing build tool
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -1992,13 +1992,11 @@ fi
 
 
 
-   if  test "php"  == "not found" ; then :
-   as_fn_error "binary  not found in PATH" "$LINENO" 5
+   if  test "php" == "not found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
 fi
 
-   if  test -x "php" ; then :
-   as_fn_error " not executable" "$LINENO" 5
-fi
 
 
 # Check for mysql
@@ -2046,13 +2044,11 @@ fi
 
 
 
-   if  test "mysql"  == "not found" ; then :
-   as_fn_error "binary  not found in PATH" "$LINENO" 5
+   if  test "mysql" == "not found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
 fi
 
-   if  test -x "mysql" ; then :
-   as_fn_error " not executable" "$LINENO" 5
-fi
 
 
 # Check for phing
@@ -2062,12 +2058,12 @@ fi
 set dummy phing; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_path_MYSQL+set}" = set; then :
+if test "${ac_cv_path_PHING+set}" = set; then :
   $as_echo_n "(cached) " >&6
 else
-  case $MYSQL in
+  case $PHING in
   [\\/]* | ?:[\\/]*)
-  ac_cv_path_MYSQL="$MYSQL" # Let the user override the test with a path.
+  ac_cv_path_PHING="$PHING" # Let the user override the test with a path.
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
@@ -2077,7 +2073,7 @@ do
   test -z "$as_dir" && as_dir=.
     for ac_exec_ext in '' $ac_executable_extensions; do
   if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_path_MYSQL="$as_dir/$ac_word$ac_exec_ext"
+    ac_cv_path_PHING="$as_dir/$ac_word$ac_exec_ext"
     $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
     break 2
   fi
@@ -2085,14 +2081,14 @@ done
   done
 IFS=$as_save_IFS
 
-  test -z "$ac_cv_path_MYSQL" && ac_cv_path_MYSQL="not found"
+  test -z "$ac_cv_path_PHING" && ac_cv_path_PHING="not found"
   ;;
 esac
 fi
-MYSQL=$ac_cv_path_MYSQL
-if test -n "$MYSQL"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $MYSQL" >&5
-$as_echo "$MYSQL" >&6; }
+PHING=$ac_cv_path_PHING
+if test -n "$PHING"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PHING" >&5
+$as_echo "$PHING" >&6; }
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
@@ -2100,13 +2096,11 @@ fi
 
 
 
-   if  test "phing"  == "not found" ; then :
-   as_fn_error "binary  not found in PATH" "$LINENO" 5
+   if  test "phing" == "not found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
 fi
 
-   if  test -x "phing" ; then :
-   as_fn_error " not executable" "$LINENO" 5
-fi
 
 
 # Checks for libraries.
@@ -2119,6 +2113,7 @@ fi
 
 # Define install options
 
+# Users for webfiles
 
 # Check whether --with-web_user was given.
 if test "${with_web_user+set}" = set; then :
@@ -2185,6 +2180,7 @@ else
 fi
 
 
+# Api related
 
 # Check whether --with-icinga_api was given.
 if test "${with_icinga_api+set}" = set; then :
@@ -2195,6 +2191,19 @@ else
 fi
 
 
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for IcingaApi" >&5
+$as_echo_n "checking for IcingaApi... " >&6; }
+	if  test -e $icinga_api/IcingaApi.php && $GREP -q "class IcingaApi" $icinga_api/IcingaApi.php ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
+$as_echo "found" >&6; }
+else
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: not found" >&5
+$as_echo "$as_me: WARNING: not found" >&2;}
+fi
+
+
+# Web database switches
 
 # Check whether --with-db_type was given.
 if test "${with_db_type+set}" = set; then :
