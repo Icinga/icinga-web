@@ -19,33 +19,13 @@ class AppKit_Widgets_ShowNavigationAction extends ICINGAAppKitBaseAction
 		return 'Success';
 	}
 	
-	public function execute(AgaviRequestDataHolder $rd)
-	{
-
+	public function execute(AgaviRequestDataHolder $rd) {
 		// Hopefully believing that the nav model could be initialized! (menu.php)
 		if ($this->getContext()->getModel('NavigationContainer', 'AppKit')->getContainer()->Count() === 0) {
 			AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.menu', 'we need the menu here ...');
 		}
 		
-		// Return a suitable view
-		switch ($rd->getParameter('type')) {
-			case 'top':
-				return 'Top';
-			break;
-			
-			case 'left':
-				return 'Left';
-			break;
-			
-			case 'init':
-				var_dump("INIT");
-				return null;
-			break;
-			
-			default:
-				return 'Success';
-			break;
-		}
+		return $this->getDefaultViewName();
 	}
 }
 

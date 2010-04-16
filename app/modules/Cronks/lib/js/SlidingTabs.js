@@ -7,7 +7,9 @@
  * GPL v3
  * 
  */
- 
+
+Ext.ns('Ext.ux');
+
 Ext.ux.SlidingTabPanel = Ext.extend(Ext.TabPanel, {
 	
 	initTab: function(item, index){

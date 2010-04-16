@@ -29,7 +29,14 @@ class AppKit_Widgets_SquishLoaderSuccessView extends ICINGAAppKitBaseView
 			break;
 		}
 		
-		return $this->getAttribute('content');
+		$content = "";
+		
+		if ($this->getAttribute('errors', false)) {
+			return "throw '". join(", ", $this->getAttribute('errors')). "';";
+		}
+		else {
+			return $this->getAttribute('content');
+		}
 	}
 }
 

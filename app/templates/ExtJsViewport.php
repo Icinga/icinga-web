@@ -11,6 +11,14 @@
 		<meta charset="UTF-8">
 		
 		<?php echo $slots['head']; ?>
+		
+		<script type="text/javascript">
+			Ext.onReady(function() {
+				
+				console.log('<?php echo str_replace("\n","", $slots['nav']); ?>');
+				
+			});
+		</script>
 	</head>
 	<body>
 		<div id="content">

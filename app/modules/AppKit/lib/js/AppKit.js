@@ -46,9 +46,11 @@
 		},
 		
 		addEvent : function(eventName, etrue) {
-			var e = {};
-			e[eventName] = (etrue) ? true : false;
-			this.addEvents(e);
+			if (!this.hasEvent(eventName)) {
+				var e = {};
+				e[eventName] = (Ext.isDefined(etrue)) ? etrue : true;
+				this.addEvents(e);
+			}
 		},
 		
 		addListener : function(eventName, fn, scope, options) {
@@ -57,6 +59,12 @@
 			}
 			
 			return this.superclass.addListener.call(eventName, fn, scope, options);
+		},
+		
+		fireEvent : function(eventName) {
+			this.addEvent(eventName);
+			return this.superclass.fireEvent.apply(arguments);
+			
 		}
 		
 	}))();

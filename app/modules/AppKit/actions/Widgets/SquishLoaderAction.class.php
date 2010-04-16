@@ -42,10 +42,20 @@ class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
 		}
 		
 		// Adding preconfigured javascript files
+		$errors = array ();
+		
 		foreach ($files as $file) {
-			$loader->addFile($type, $file);
+			try {
+				$loader->addFile($type, $file);
+			}
+			catch (Exception $e) {
+				$errors[] = $e->getMessage();
+			}
 		}
 		
+		if (count($errors) > 0) {
+			$this->setAttribute('errors', $errors);
+		}
 		
 		$key = sprintf('%s_content', $type);
 		

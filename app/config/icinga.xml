@@ -149,6 +149,8 @@
 			<parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</parameter>
 	
 			<!--AppKit JS -->
 			<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>-->
@@ -160,14 +162,13 @@
 			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 			
-
 			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
-
+			
 			<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
 			
 			<!-- MISC -->

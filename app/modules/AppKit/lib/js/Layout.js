@@ -31,6 +31,7 @@ Ext.onReady(function() {
 		});
 		
 		var center = viewport.get('viewport-center');
+		var north = viewport.get('viewport-center');
 		
 		Ext.apply(pub, {
 			
