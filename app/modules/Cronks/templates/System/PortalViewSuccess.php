@@ -98,7 +98,7 @@
 									}
 								}
 								
-								var portlet  = AppKit.Ext.CronkMgr.create({
+								var portlet  = Cronk.factory({
 									parentid: id,
 									id: id,
 									
@@ -232,9 +232,11 @@
 						col.items.each(function (cr, crindex, l2) {
 							
 							if (cr.iscronk && cr.iscronk == true) {
-								var c = AppKit.Ext.CronkMgr.getCronk(cr.cronkkey);
-								var cronk = AppKit.Ext.CronkMgr.getCronkComponent(cr.cronkkey);
+								var c = Cronk.Registry.get(cr.cronkkey);
+								var cronk = Ext.getCmp(cr.cronkkey);
 								
+								console.log(c,cronk);
+
 								c.config.title = cronk.title;
 								c.config.height = cronk.getHeight();
 								c.config.collapsed = cronk.collapsed;
@@ -267,7 +269,7 @@
 //									console.log(c);
 									c.tools = tools;
 									
-									var cronk = AppKit.Ext.CronkMgr.create(c);
+									var cronk = Cronk.factory(c);
 									
 									PortalHandler.createResizer(cronk);
 									

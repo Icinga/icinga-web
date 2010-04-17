@@ -4,11 +4,11 @@
 <script type="text/javascript">
 Ext.onReady(function() {
 
-//	AppKit.Ext.pageLoadingMask();
+	AppKit.Ext.pageLoadingMask();
 	
-//	setTimeout(function() {
-//		AppKit.Ext.pageLoadingMask(true);
-//	}, 1000);
+	setTimeout(function() {
+		AppKit.Ext.pageLoadingMask(true);
+	}, 1000);
 
 	Cronk.items.Portal = Ext.create({
 		xtype: 'panel',
@@ -64,8 +64,14 @@ Ext.onReady(function() {
 			id: 'center-frame',
 			layout: 'fit',
 			items: {
-				xtype: 'cronk-tabpanel',
-				plugins: new Cronk.util.CronkTabHelper
+				xtype: 'cronk-control-tabs',
+				plugins: new Cronk.util.CronkTabHelper(),
+				id : 'cronk-tabs',
+				border : false,
+				enableTabScroll :true,
+				resizeTabs : false,
+				stateful: true,
+				stateId: 'cronk-tab-panel'
 			},
 			border: true,
 			margins: '0 0'

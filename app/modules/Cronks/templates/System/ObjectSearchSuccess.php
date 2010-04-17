@@ -368,7 +368,7 @@
 					params: params
 				};
 				
-				AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
+				Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
 				
 				oWindow().hide();
 				oTextField.setValue('');

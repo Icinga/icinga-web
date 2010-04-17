@@ -132,7 +132,7 @@ Ext.onReady(function() {
 				oFormPanel.add(p);
 				oFormPanel.doLayout();
 				
-				AppKit.Ext.changeLocation.defer(10, null, ['<?php echo $ro->gen("index_page"); ?>']);
+				AppKit.changeLocation.defer(10, null, ['<?php echo $ro->gen("index_page"); ?>']);
 			}
 		});
 		

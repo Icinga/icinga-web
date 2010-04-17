@@ -37,7 +37,9 @@ class AppKit_Widgets_SquishLoaderSuccessView extends ICINGAAppKitBaseView
 			return "throw '". join(", ", $this->getAttribute('errors')). "';";
 		}
 		else {
-			$content = $model->getContent();
+
+			$content = $model->getContent(). chr(10);
+			$content .= 'AppKit.c.path = "'. AgaviConfig::get('de.icinga.appkit.web_path'). '";'. chr(10);
 			$content .= $this->executeActions($model->getActions());
 			return $content;
 		}

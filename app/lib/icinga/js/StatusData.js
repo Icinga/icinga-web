@@ -85,4 +85,4 @@ Icinga.StatusData = (function() {
 	
 })();
 
-});
+}, window, { single: true });

@@ -64,7 +64,7 @@ Cronk.util.InterGridUtil = function(){
 			
 			if (!panel) {
 				
-				panel = AppKit.Ext.CronkMgr.create(config);					
+				panel = Cronk.factory(config);					
 				tabs.add(panel);
 				
 				panel.on('add', function(p, c, i) {

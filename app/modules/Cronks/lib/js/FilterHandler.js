@@ -2,12 +2,12 @@
 Ext.ns('AppKit.Ext');
 
 // Our class
-AppKit.Ext.FilterHandler = function() {
-	AppKit.Ext.FilterHandler.superclass.constructor.call(this);
+Cronk.FilterHandler = function() {
+	Cronk.FilterHandler.superclass.constructor.call(this);
 };
 
 // Extending
-AppKit.Ext.FilterHandler = Ext.extend(Ext.util.Observable, {
+Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 	
 	oFilterOp : {
 		'appkit.ext.filter.text': 'text',
@@ -61,7 +61,7 @@ AppKit.Ext.FilterHandler = Ext.extend(Ext.util.Observable, {
 			'metaload' : true
 		});
 		
-		AppKit.Ext.FilterHandler.superclass.constructor.call();
+		Cronk.FilterHandler.superclass.constructor.call();
 	},
 	
 	setMeta : function (meta) {
@@ -297,7 +297,7 @@ AppKit.Ext.FilterHandler = Ext.extend(Ext.util.Observable, {
 });
 
 // Adding the blank events
-Ext.apply(AppKit.Ext.FilterHandler, {
+Ext.apply(Cronk.FilterHandler, {
 	afterCompRemove : function(fh, p, meta) {
 		return true;
 	},

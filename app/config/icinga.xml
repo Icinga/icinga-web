@@ -157,15 +157,23 @@
 			<parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</parameter>
-			
+		
+			<parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</parameter>
+	
 			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 			
-			<!-- <parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
+			<!--
+			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter> -->
+			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
+			-->
+
+			<parameter>%core.root_dir%/app/lib/icinga/js/StatusData.js</parameter>
 
 			<!-- jsgettext -->
 			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
@@ -209,10 +217,10 @@
 		* You have to predefine the libraries
 	-->
 	<setting name="appkit.include_dynamic_javascript">
-		<ae:parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
-		<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
-		<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
-		<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
+		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
+		<parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</parameter>
+		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
+		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
 	</setting>
 
 	<!--
@@ -421,5 +429,5 @@
 	<!-- PLACEHOLDER -->
 	<setting name="appkit.version.release"></setting>
 
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/> 
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/>
 </settings>

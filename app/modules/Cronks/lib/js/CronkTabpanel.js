@@ -1,31 +1,21 @@
-
 Ext.ns('Cronk.util');
 
-Cronk.util.Tabpanel = Ext.extend(Ext.ux.SlidingTabPanel, {
-	
-	id : 'cronk-tabs',
-	border : false,
-	enableTabScroll :true,
-	resizeTabs : false,
-	
-	// This component is stateful!
-	stateful: true,
-	stateId: 'cronk-tab-panel',
-	
-	stateEvents: ['add', 'remove', 'tabchange', 'titlechange'],
-	
+Cronk.util.Tabpanel = function(config) {
+
+	this.stateEvents = ['add', 'remove', 'tabchange', 'titlechange'];
+
+	Cronk.util.Tabpanel.superclass.constructor.call(this, config);	
+}
+
+Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
+
 	getState: function() {
 		
-		var cout = { };
-		
+		var cout = {};
+	
 		this.items.each(function(item, index, l) {
-			if (item.iscronk && AppKit.Ext.CronkMgr.cronkExist(item.cronkkey)) {
-				var c = AppKit.Ext.CronkMgr.getCronk(item.cronkkey);
-				var cronk = AppKit.Ext.CronkMgr.getCronkComponent(item.cronkkey);
-
-				c.config.title = cronk.title;
-
-				cout[c.cmpid] = Ext.apply(c);
+			if (item.getXType() == 'cronk' && Cronk.Registry.get(item.getId())) {
+				cout[item.getId()] = Cronk.Registry.get(item.getId());
 			}
 		});
 		
@@ -40,16 +30,11 @@ Cronk.util.Tabpanel = Ext.extend(Ext.ux.SlidingTabPanel, {
 		(function() {
 			
 			if (state.cronks) {
-
 				// Adding all cronks
 				Ext.iterate(state.cronks, function(index, item, o) {
-					var config = {};
-					
-					Ext.apply(config, item.config, item.crconf);
-					
-					var cronk = AppKit.Ext.CronkMgr.create(config);
-	
-					this.add(cronk);
+					var c = Ext.apply({}, item);
+					delete(c.loaderUrl);
+					this.add(c);
 					
 				}, this);
 
@@ -64,4 +49,4 @@ Cronk.util.Tabpanel = Ext.extend(Ext.ux.SlidingTabPanel, {
 	}
 });
 
-Ext.reg('cronk-tabpanel', Cronk.util.Tabpanel);
+Ext.reg('cronk-control-tabs', Cronk.util.Tabpanel);

@@ -87,7 +87,7 @@
 		Cronk.Container.superclass.constructor.call(this, config);
 		
 		Cronk.Registry.add(this.initialCronkConfig());
-		
+
 		this.on('destroy', function(c) {
 			Cronk.Registry.removeKey(c.id);
 		}, this);
@@ -99,7 +99,10 @@
 		cronkParams : {},
 		
 		initialCronkConfig : function() {
-			return Ext.apply({}, this.initialConfig, this.cronkConfig);
+			var l = {};
+			Ext.apply(l, this.orgConfig, this.cronkConfig);
+			delete(l.ownerCt);
+			return l;
 		},
 		
 		onRender : function(ct, position) {
@@ -140,11 +143,19 @@
 				id = config.parentid;
 			}
 			else {
-				id = (config.id) ? config.id : this.getId();
+				id = (config.id) ? config.id : Ext.id(null, 'cronkitem-');
+			}
+
+			if (!config.parentid) config.parentid=id;
+			if (config.stateId) {
+				config.stateuid = config.stateId;
+			}
+			else {
+				config.stateuid = id;
 			}
 			
-			Ext.applyIf(config, ls);
-			
+			config = Ext.applyIf(config, ls);
+
 			this.cronkParams = Ext.applyIf(config.params || {}, {
 				parentid: config.parentid || id,
 				stateuid: config.stateuid || id
@@ -153,6 +164,8 @@
 			config.id = id;
 			
 			this.cronkConfig = Cronk.extractConfig(config);
+			this.orgConfig = {};
+			Ext.apply(this.orgConfig, config);			
 		},
 		
 		requestParams : function() {

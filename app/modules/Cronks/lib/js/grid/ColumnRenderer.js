@@ -7,9 +7,9 @@ Cronk.grid.ColumnRendererUtil = function() {
 	var pub = {
 		metaDataObject : function(o) {
 			var meta = {};
-			var attributes = AppKit.Ext.util.StructUtil.extractParts(o, ['attr', 'cellAttr']);
-			meta.attr = AppKit.Ext.util.StructUtil.attributeString(attributes.attr || {});
-			meta.cellAttr = AppKit.Ext.util.StructUtil.attributeString(attributes.cellAttr || {});
+			var attributes = Cronk.util.StructUtil.extractParts(o, ['attr', 'cellAttr']);
+			meta.attr = Cronk.util.StructUtil.attributeString(attributes.attr || {});
+			meta.cellAttr = Cronk.util.StructUtil.attributeString(attributes.cellAttr || {});
 			Ext.applyIf(meta, o);
 			
 			return meta;
@@ -83,7 +83,7 @@ Cronk.grid.ColumnRenderer = {
 				return '[no image defined (attr=image)]';
 			}
 			else {
-				return String.format('<img src="appkit/image/{0}"{1} />', my.image, (flat_attr && " " + flat_attr + " "));
+				return String.format('<img src="{0}/{1}"{1} />', AppKit.c.path, my.image, (flat_attr && " " + flat_attr + " "));
 			}
 		}
 	},

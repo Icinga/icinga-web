@@ -248,7 +248,7 @@ var dummyCronkDisplayStateSummary = function () {
 							params: params
 						};
 
-						AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
+						Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
 
 						return true;
 					}

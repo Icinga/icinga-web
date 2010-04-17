@@ -26,7 +26,7 @@
         
         <!-- These are a dynamic js lib for using specific column renderes within this template -->
         <parameter name="dynamicscript">
-        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter>
         
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
@@ -255,14 +255,14 @@
                 <parameter name="width">16</parameter>
                 <parameter name="jsFunc">
                 	<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                	<parameter name="function">columnImage</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">fam.cog</parameter>
+							<parameter name="image">images/fam/cog.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Double click here to display containing services</parameter>
@@ -270,7 +270,7 @@
 	                	</parameter>
 	                </parameter>
 					<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -316,7 +316,7 @@
                 </parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                <parameter name="function">serviceStatus</parameter>
 	                	
 	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->

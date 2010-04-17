@@ -8,7 +8,7 @@
 	
 	var CreateGridProcessor = function (meta) {	
 		
-		var MetaGrid = new Cronk.gridMetaGridCreator(meta);
+		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
 		MetaGrid.setStateUid("<?php echo $stateuid; ?>");
 		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
@@ -141,16 +141,16 @@
 	// First loading the meta info to configure the grid
 	var oContainer = function() {
 		
-		var store = AppKit.util.getStore('Cronk.items.viewProcTemplateStore');
+		var s = AppKit.util.getStore('viewproc_templates');
 		
 		var template = "<?php echo $rd->getParameter('template'); ?>";
 		var initGrid = function() {
-			var meta = store.get(template);
+		var meta = s.get(template);
 			if (meta.template.option.dynamicscript) {
-				AppKit.Ext.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
-				AppKit.Ext.ScriptDynaLoader.startBulkMode();
+				AppKit.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
+				AppKit.ScriptDynaLoader.startBulkMode();
 				Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
-					AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
+					AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
 				});
 			}
 			else {
@@ -158,9 +158,7 @@
 			}
 		}
 		
-		return;
-		
-		if (store.containsKey(template)) {
+		if (s.containsKey(template)) {
 			initGrid();
 		}
 		else {
@@ -169,7 +167,7 @@
 				   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 				   
 				   success: function(response, opts) {
-				   		store.add(template, Ext.decode(response.responseText));
+				   		s.add(template, Ext.decode(response.responseText));
 				   		initGrid();
 				   },
 				   

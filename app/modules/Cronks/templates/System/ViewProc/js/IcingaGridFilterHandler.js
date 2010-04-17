@@ -18,7 +18,7 @@ var IcingaGridFilterWindow = function() {
 	var oComboData = [];		// Data for the combo store
 	var oTemplateMeta = {};
 	
-	var oFilterHandler = new AppKit.Ext.FilterHandler();
+	var oFilterHandler = new Cronk.FilterHandler();
 
 	oFilterHandler.on('compremove', function(fh, panel, meta) {
 		var f = getRestrictionsList();
