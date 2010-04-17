@@ -15,7 +15,10 @@
 		Ext.apply(pub, {
 			
 			getLoaderUrl : function(crname, url) {
-				return (url || def.loaderUrl) + '/'+  crname; 
+				if (!Ext.isDefined(url)) {
+					url = Cronk.defaults.SETTINGS.loaderUrl
+				}
+				return String.format('{0}/{1}/{2}', AppKit.c.path, url, crname); 
 			},
 			
 			removeCci : function(config, items) {
@@ -43,12 +46,12 @@
 		return pub;
 	})();
 	
-	
-	
 	/*
 	 * Default cronk settings
 	 */
 	Ext.ns('Cronk.defaults');
+	
+	Cronk.Registry = new Ext.util.MixedCollection(false);
 	
 	Cronk.defaults.SETTINGS = {
 		loaderUrl:	'web/cronks/cloader',
@@ -82,12 +85,22 @@
 		this.applyCronkConfig(config);
 		
 		Cronk.Container.superclass.constructor.call(this, config);
-	}
+		
+		Cronk.Registry.add(this.initialCronkConfig());
+		
+		this.on('destroy', function(c) {
+			Cronk.Registry.removeKey(c.id);
+		}, this);
+	};
 	
 	Ext.extend(Cronk.Container, Ext.Panel, {
 		
 		cronkConfig : {},
 		cronkParams : {},
+		
+		initialCronkConfig : function() {
+			return Ext.apply({}, this.initialConfig, this.cronkConfig);
+		},
 		
 		onRender : function(ct, position) {
 			Cronk.Container.superclass.onRender.call(this, ct, position);

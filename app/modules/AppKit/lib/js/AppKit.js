@@ -1,72 +1,77 @@
+Ext.ns('AppKit', 'APPKIT.lib');
+
 (function() {
-	Ext.ns('AppKit');
-	
-	AppKit = (function() {
-	
-		var pub = {};
 		
-		Ext.apply(pub, {
+	AppKit = new (Ext.extend(
+		AppKit = function() {
+			var stateProvider = null;
+			var stateInitialData = null;
+			AppKit.superclass.constructor.call(this);
+		}, Ext.util.Observable, {
 			
+			ready : false,
+			
+			c : {
+				domain: document.location.host || document.domain,
+				path: document.location.pathname.replace(/\/$/, ''),
+				issecure: (document.location.protocol.indexOf('https') == 0) ? true : false
+			},
+			
+			constructor : function() {
+				
+				this.on('i18n-ready', function() {
+					alert("OK");
+				});
+				
+			},
+			
+			initEnvironment : function() {
+				Ext.BLANK_IMAGE_URL = this.c.path + '/images/ajax/s.gif';
+				
+				Ext.QuickTips.init();
+				
+				stateProvider = new Ext.ux.state.HttpProvider({
+					url: String.format(this.c.path + '/appkit/ext/applicationState'),
+					id: 1,
+					readBaseParams: { cmd: 'read' },
+					saveBaseParams: { cmd: 'write' }
+				});
+				
+				Ext.state.Manager.setProvider(stateProvider);
+				
+				if (stateInitialData) {
+					stateProvider.initState(this.stateInitialData);
+				}
+				
+				this.ready = true;
+				
+				this.fireEvent('appkit-ready');
+			},
+			
+			/**
+			 * Set the initial application state
+			 * before init!
+			 */
+			setInitialState : function(s) {
+				this.initialState = s;
+				this.fireEvent('appkit-statedata');
+			},
+			
+			/**
+			 * General log implementation
+			 */
 			log : function() {
 				if (typeof console !== "undefined" && console.log) {
 					console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
 				}
 			},
 			
+			/**
+			 * log calee arguments
+			 */
 			logargs : function(context) {
 				this.log(context,arguments.callee.caller.arguments);
-			}
-			
-		});
-		
-		window.log = pub.log;
-		window.logargs = pub.logargs;
-		
-		return pub;
-	
-	})();
-	
-	Ext.ns('AppKit.util');
-	
-	AppKit.util.EventDispatcher = new (Ext.extend(Ext.util.Observable, {
-		
-		constructor : function(config) {
-			
-			this.listeners = {};
-			this.events = {};
-			
-			this.superclass.constructor.call(this, config);
-		},
-	    
-		hasEvent : function(eventName) {
-			if (eventName in this.events && Ext.isDefined(this.events[eventName])) {
-				return true;
-			}
-			return false;
-		},
-		
-		addEvent : function(eventName, etrue) {
-			if (!this.hasEvent(eventName)) {
-				var e = {};
-				e[eventName] = (Ext.isDefined(etrue)) ? etrue : true;
-				this.addEvents(e);
-			}
-		},
-		
-		addListener : function(eventName, fn, scope, options) {
-			if (this.hasEvent(eventName) == false) {
-				this.addEvent(eventName);
-			}
-			
-			return this.superclass.addListener.call(eventName, fn, scope, options);
-		},
-		
-		fireEvent : function(eventName) {
-			this.addEvent(eventName);
-			return this.superclass.fireEvent.apply(arguments);
-			
-		}
-		
+			}	
 	}))();
 	
-})()
+})();

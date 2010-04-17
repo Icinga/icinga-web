@@ -52,7 +52,6 @@
 							
 							<layer name="decorator">
 								<slot name="head" module="AppKit" action="Widgets.AddHeaderData" />
-								<slot name="nav" module="AppKit" action="Widgets.ShowNavigation" />
 							<ae:parameter name="directory">%core.template_dir%</ae:parameter>
 							<ae:parameter name="template">ExtJsViewport</ae:parameter>
 							</layer>

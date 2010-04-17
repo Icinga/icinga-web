@@ -369,6 +369,10 @@ table.icinga-attribute-table td.val {
 	width: 220px;
 }
 
+.fancytextfield-box .x-box-mc {
+	padding: 0 4px;
+}
+
 .fancytextfield-container {
 	width: 200px;
 	height: 20px;

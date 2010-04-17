@@ -216,6 +216,10 @@ class AppKitNavItem extends AppKitBaseClass {
 			$this->sub_container = new AppKitNavContainer();
 		return $this->sub_container;
 	}
+	
+	public function hasChildren() {
+		return $this->getContainer()->hasChildren();
+	}
 
 }
 

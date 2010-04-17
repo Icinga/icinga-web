@@ -97,6 +97,7 @@
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
 		<parameter>/js/ext3/resources/css/xtheme-gray.css</parameter>
+		<parameter>/js/ext3/examples/ux/css/ux-all.css</parameter>
 
 		<!-- JIT - JavaScript InfoVis Toolkit -->
 		<parameter>/styles/statusmap.css</parameter>
@@ -130,50 +131,42 @@
 			<!-- ExtJS base files -->
 			<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
-
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
-
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
 	
 			<!-- JIT - JavaScript InfoVis Toolkit -->
 			<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
 			<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
 	
+			<!--AppKit JS -->
+			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/ScriptDynaLoader.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</parameter>
+	
 			<!-- Cronks -->
-			<parameter>%core.module_dir%/Cronks/lib/js/Cronks.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
+			
+			<parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</parameter>
-	
-			<!--AppKit JS -->
-			<!-- <parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>-->
-			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
-			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
-
-			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</parameter>
+			
 			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 			
-			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
+			<!-- <parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
-			
-			<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
-			
-			<!-- MISC -->
-			<parameter>%core.root_dir%/lib/appkit/js/rmd160.js</parameter>
-			
+			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter> -->
+
 			<!-- jsgettext -->
 			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
 			
@@ -181,10 +174,32 @@
 			<parameter>%core.app_dir%/lib/icinga/js/StatusData.js</parameter>
 		</parameter>
 		
+		<!-- Adding inline actions to append dynamic javascript -->
+		<parameter name="action">
+			<parameter>
+				<parameter name="module">AppKit</parameter>
+				<parameter name="action">Ext.initI18n</parameter>
+				<parameter name="output_type">javascript</parameter>
+			</parameter>
+			
+			<parameter>
+				<parameter name="module">AppKit</parameter>
+				<parameter name="action">Ext.HeaderNavigation</parameter>
+				<parameter name="output_type">javascript</parameter>
+			</parameter>
+			
+			<parameter>
+				<parameter name="module">AppKit</parameter>
+				<parameter name="action">Ext.ApplicationState</parameter>
+				<parameter name="output_type">javascript</parameter>
+				<parameter name="arguments">
+					<parameter name="cmd">init</parameter>
+				</parameter>
+			</parameter>
+		</parameter>
+		
+		<!-- Inline scripts to include url's -->
 		<parameter name="inline">
-			<!-- I18N -->
-			<parameter>/appkit/ext/i18n</parameter>
-			<parameter>/appkit/ext/applicationState?cmd=init</parameter>
 		</parameter>
 	</setting>
 

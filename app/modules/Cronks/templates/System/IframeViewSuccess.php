@@ -10,7 +10,7 @@
 	var cParent = Ext.getCmp('<?php echo $parentid; ?>');
 	var stateuid = '<?php echo $stateuid; ?>';
 	
-	var newid = AppKit.Ext.genRandomId('iframe'); 
+	var newid = Ext.id(null, 'iframe'); 
 	var domid = newid + '-dom';
 	
 	// Create a new panel with a modified body element

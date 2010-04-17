@@ -6,7 +6,11 @@ class AppKit_Widgets_SquishLoaderSuccessView extends ICINGAAppKitBaseView
 	{
 		// $this->setupHtml($rd);
 		
-		$type = $rd->getParameter('type');
+		$model =& $this->getAttribute('model');
+		
+		if ($model == null) {
+			return;
+		}
 		
 		// Get the magick
 		$response = $this->getContainer()->getResponse();
@@ -19,7 +23,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends ICINGAAppKitBaseView
 		$response->setHttpHeader('Age', 10, true);
 		$response->setHttpHeader('Pragma', '', true);
 		
-		switch ($type) {
+		switch ($model->getType()) {
 			case AppKit_SquishFileContainerModel::TYPE_JAVASCRIPT:
 				$response->setHttpHeader('Content-type', 'text/javascript', true);	
 			break;
@@ -29,14 +33,30 @@ class AppKit_Widgets_SquishLoaderSuccessView extends ICINGAAppKitBaseView
 			break;
 		}
 		
-		$content = "";
-		
 		if ($this->getAttribute('errors', false)) {
 			return "throw '". join(", ", $this->getAttribute('errors')). "';";
 		}
 		else {
-			return $this->getAttribute('content');
+			$content = $model->getContent();
+			$content .= $this->executeActions($model->getActions());
+			return $content;
 		}
+	}
+	
+	private function executeActions(array $actions = array()) {
+		$out = null;
+		foreach ($actions as $a) {
+			$p = array ();
+			if (is_array($a['arguments'])) $p = $a['arguments'];
+			$a['arguments']['is_slot'] = true;
+			$r = $this->createForwardContainer($a['module'], $a['action'], $p, $a['output_type'])
+			->execute();
+			
+			if ($r->hasContent()) {
+				$out .= $r->getContent(). "\n\n";
+			}
+		}
+		return $out;
 	}
 }
 

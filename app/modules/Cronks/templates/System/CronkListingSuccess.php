@@ -11,7 +11,6 @@
 		
 		var c = {
 			layout: 'accordion',
-			
 			layoutConfig: {
 				animate: true,
 				renderHidden: false,
@@ -206,20 +205,17 @@
 			dblClickHandler: function(oView, index, node, e) {
 				var record = oView.getStore().getAt(index);
 				
-				var panel = AppKit.Ext.CronkMgr.create({
-					parentid: AppKit.Ext.genRandomId('cronk-'),
-					title: record.data['name'],
-					crname: record.data.id,
-					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-					closable: true,
-					layout: 'fit',
-					params: record.data.parameter
-				});
-				
 				var tabPanel = Ext.getCmp('cronk-tabs');
 				
 				if (tabPanel) {
-					tabPanel.add(panel);
+					var panel = tabPanel.add({
+						xtype: 'cronk',
+						title: record.data['name'],
+						crname: record.data.id,
+						closable: true,
+						params: record.data.parameter
+					});
+					
 					tabPanel.setActiveTab(panel);
 				}
 			}
@@ -230,7 +226,8 @@
 		
 	}();
 	
-	CronkListing.setParentCmp(Ext.getCmp("<?php echo $parentid; ?>"));
+	var parentCmp = Ext.getCmp("<?php echo $parentid; ?>");
+	CronkListing.setParentCmp(parentCmp);
 	
 	Ext.Ajax.request({
 		url: CronkListing.getBaseUrl(),
@@ -248,7 +245,6 @@
 					}
 					
 					CronkListing.addListing(v.title || 'untitled', k);
-					
 					i++;
 				});
 				

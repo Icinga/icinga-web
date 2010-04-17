@@ -1,3 +1,6 @@
+Ext.ns('Ext.ux.form');
+
+
 /**
  * fancy-text field for extjs
  * Date: 2009-09-09

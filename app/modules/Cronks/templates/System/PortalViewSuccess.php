@@ -86,7 +86,7 @@
 							
 							notifyDrop: function(dd, e, data) {
 								
-								var id = AppKit.Ext.genRandomId('cronk-');
+								var id = Ext.id(null, 'cronk');
 								
 								var params = {
 									'p[parentid]': id

@@ -1,6 +1,6 @@
 Ext.ns('Icinga');
 
-AppKit.Ext.on('isready', function() {
+AppKit.on('appkit-ready', function() {
 	
 Icinga.StatusData = (function() {
 	
@@ -82,6 +82,7 @@ Icinga.StatusData = (function() {
 	});
 	
 	return pub;
-})();
 	
+})();
+
 });

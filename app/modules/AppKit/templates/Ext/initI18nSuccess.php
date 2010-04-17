@@ -12,13 +12,12 @@ Ext.onReady(function() {
 	Ext.apply(l['<?php echo $domain; ?>'], <?php echo $json[1]; ?>); 
 	<?php endforeach; ?>
 	
-	AppKit.Gettext = new Gettext({
+	APPKIT.lib.Gettext = new Gettext({
 		domain: "<?php echo $default; ?>",
 		locale_data: l
 	});
 	
 	// Make this more global available
-	window._ = AppKit.Gettext.gettext.createDelegate(AppKit.Gettext);
-	window._gt = AppKit.Gettext;
-	
+	window['_'] = APPKIT.lib.Gettext.gettext.createDelegate(APPKIT.lib.Gettext);
+	window['_gt'] = APPKIT.lib.Gettext;
 });

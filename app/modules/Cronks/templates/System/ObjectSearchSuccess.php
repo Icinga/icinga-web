@@ -385,7 +385,8 @@
 		xtype: 'fancytextfield',
 		name: 'q',
 		enableKeyEvents: true,
-		
+		resetButton: false,
+		width: 180,
 		listeners: {
 			keyup: {
 				fn: oSearchHandler.keyup,
@@ -405,6 +406,9 @@
 	});
 	
 	coParent.add(oSearch);
+	
+	coParent.add(oSearch);
+	
 })();
 
 </script>

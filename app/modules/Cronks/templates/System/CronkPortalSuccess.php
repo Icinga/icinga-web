@@ -4,13 +4,13 @@
 <script type="text/javascript">
 Ext.onReady(function() {
 
-	AppKit.Ext.pageLoadingMask();
+//	AppKit.Ext.pageLoadingMask();
 	
-	setTimeout(function() {
-		AppKit.Ext.pageLoadingMask(true);
-	}, 3000);
+//	setTimeout(function() {
+//		AppKit.Ext.pageLoadingMask(true);
+//	}, 1000);
 
-	var portal = Ext.create({
+	Cronk.items.Portal = Ext.create({
 		xtype: 'panel',
 		
 		layout: 'border',
@@ -23,21 +23,25 @@ Ext.onReady(function() {
 			region: 'north',
 			id: 'north-frame',
 			layout: 'column',
+			defaults: { border: false },
 			
 			items: [{
 				xtype: 'cronk',
 				crname: 'icingaSearch',
 				width: 250,
+				border: false
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaStatusSummary',
 				width: 380,
-				params: { otype: 'chart' }
+				params: { otype: 'chart' },
+				border: false
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaStatusSummary',
-				columnWidth: .8,
-				params: { otype: 'text' }
+				columnWidth: 1,
+				params: { otype: 'text' },
+				border: false
 			}]
 		}, {
 			region: 'south',
@@ -52,7 +56,8 @@ Ext.onReady(function() {
 			stateId: 'south-frame',
 			items: {
 				xtype: 'cronk',
-				crname: 'gridLogView'
+				crname: 'gridLogView',
+				border: false
 			}
 		}, {
 			region: 'center',
@@ -60,14 +65,15 @@ Ext.onReady(function() {
 			layout: 'fit',
 			items: {
 				xtype: 'cronk-tabpanel',
-				plugins: 'cronk-tabhelper'
+				plugins: new Cronk.util.CronkTabHelper
 			},
 			border: true,
-			margins: '0 5 0 0'
+			margins: '0 0'
 		}, {
 			region: 'west',
 			id: 'west-frame',
 			layout: 'fit',
+			autoScroll: true,
 	        split: true,
 	        minSize: 200,
 	        maxSize: 400,
@@ -79,12 +85,13 @@ Ext.onReady(function() {
 			margins: '0 0 0 5',
 			items: {
 				xtype: 'cronk',
-				crname: 'crlist'
+				crname: 'crlist',
+				border: false
 			}
 		}]
 		
 	});
 	
-	Ext.getCmp('<?echo $parentid; ?>').add(portal);
+	Ext.getCmp('<?echo $parentid; ?>').add(Cronk.items.Portal);
 });
 </script>

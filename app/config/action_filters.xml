@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/filters/1.0">
 
 	<!-- only for web contexts in development envs -->
-	<ae:configuration environment="development.*" context="web">
+	<ae:configuration environment="DISABLED.*" context="web">
 		<filters>
 
 			<filter name="ExecutionTimeFilter" class="AgaviExecutionTimeFilter">
@@ -11,7 +11,7 @@
 				
 				<!-- only run for "html" output type so it doesn't ruin JSON responses etc -->
 				<ae:parameter name="output_types">
-					<ae:parameter>html</ae:parameter>
+					<ae:parameter>*</ae:parameter>
 				</ae:parameter>
 			</filter>
 

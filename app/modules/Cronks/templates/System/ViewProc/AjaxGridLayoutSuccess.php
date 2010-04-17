@@ -8,7 +8,7 @@
 	
 	var CreateGridProcessor = function (meta) {	
 		
-		var MetaGrid = new AppKit.Ext.grid.MetaGridCreator(meta);
+		var MetaGrid = new Cronk.gridMetaGridCreator(meta);
 		MetaGrid.setStateUid("<?php echo $stateuid; ?>");
 		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
@@ -91,7 +91,7 @@
 					});
 					
 					// We need a new class
-					AppKit.Ext.ScriptDynaLoader.loadScript({
+					AppKit.ScriptDynaLoader.loadScript({
 						url: "<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CommandHandler')) ?>",
 						
 						callback: function() {
@@ -137,11 +137,12 @@
 		// Refresh
 		cmp.doLayout();
 	}
-
+	
 	// First loading the meta info to configure the grid
 	var oContainer = function() {
 		
-		var store = AppKit.Ext.Storage.getStore('viewproc-templates');
+		var store = AppKit.util.getStore('Cronk.items.viewProcTemplateStore');
+		
 		var template = "<?php echo $rd->getParameter('template'); ?>";
 		var initGrid = function() {
 			var meta = store.get(template);
@@ -156,6 +157,8 @@
 				CreateGridProcessor(meta);
 			}
 		}
+		
+		return;
 		
 		if (store.containsKey(template)) {
 			initGrid();

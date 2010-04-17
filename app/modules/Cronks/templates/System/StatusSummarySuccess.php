@@ -48,15 +48,15 @@ var dummyCronkDisplayStateSummary = function () {
 	
 		panelDefs : {
 			host : {
-				itemId : AppKit.Ext.genRandomId("cronk"),
+				itemId : Ext.id(null, "cronk"),
 				title : false
 			},
 			service : {
-				itemId : AppKit.Ext.genRandomId("cronk"),
+				itemId : Ext.id(null, "cronk"),
 				title : false
 			},
 			chart : {
-				itemId : AppKit.Ext.genRandomId("cronk"),
+				itemId : Ext.id(null, "cronk"),
 				title : false
 			}
 		},
@@ -116,7 +116,6 @@ var dummyCronkDisplayStateSummary = function () {
 							border: false,
 							cls: "no-background"
 						},
-						height: 80,
 						items: [
 							{
 								itemId: this.panelDefs.host.itemId,
@@ -125,7 +124,7 @@ var dummyCronkDisplayStateSummary = function () {
 								itemId: this.panelDefs.service.itemId,
 								title: ((this.panelDefs.service.title !== false) ? this.panelDefs.service.title : false),
 								style: {
-									marginLeft: "10px"
+									// marginLeft: "10px"
 								}
 							}
 						]
@@ -138,7 +137,6 @@ var dummyCronkDisplayStateSummary = function () {
 							border: false,
 							cls: "no-background"
 						},
-						height: 80,
 						items: [
 							{
 								itemId: this.panelDefs.chart.itemId,
@@ -183,7 +181,7 @@ var dummyCronkDisplayStateSummary = function () {
 	
 			// The dataview container
 			this.view = new Ext.DataView({
-				id: AppKit.Ext.genRandomId("cronk"),
+				id: Ext.id(null, "cronk"),
 				title: false,
 				store: this.store,
 				tpl: this.tpl,
@@ -297,7 +295,7 @@ var dummyCronkDisplayStateSummary = function () {
 				id: itemClassId,
 				cls: itemClassId,
 				width: parseInt((graphElement.status_count / numObjects) * containerWidth),
-//				style: "width:" + parseInt((graphElement.status_count / numObjects) * containerWidth) + "px;",
+				style: "width:" + parseInt((graphElement.status_count / numObjects) * containerWidth) + "px;",
 				plugins: [
 					new Ext.DomObserver({
 						mouseover: function (event, component) {
@@ -358,10 +356,10 @@ var dummyCronkDisplayStateSummary = function () {
 			}
 
 			if (this.chartData[containerIdClass] == false) {
-//				var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 60;
+				var containerWidth = (this.panel.getComponent(this.panelDefs.chart.itemId).getWidth() / 2) - 35;
 				// Fix width, because the component is not really there if we
 				// need a parent width . I think 100 pixels are large enough.
-				var containerWidth = 140;
+				// var containerWidth = 140;
 				
 				var containerItems = [];
 
@@ -376,7 +374,7 @@ var dummyCronkDisplayStateSummary = function () {
 					autoEl: "div", 
 					layout: "column",
 					style: {
-						marginLeft: "20px"
+						// marginLeft: "20px"
 					},
 					defaults: {
 						xtype: "container",

@@ -12,13 +12,7 @@
 		
 		<?php echo $slots['head']; ?>
 		
-		<script type="text/javascript">
-			Ext.onReady(function() {
-				
-				console.log('<?php echo str_replace("\n","", $slots['nav']); ?>');
-				
-			});
-		</script>
+		<?php echo $slots['nav']; ?>
 	</head>
 	<body>
 		<div id="content">

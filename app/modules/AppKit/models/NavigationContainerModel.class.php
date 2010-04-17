@@ -3,11 +3,29 @@
 class AppKit_NavigationContainerModel extends ICINGAAppKitBaseModel
 implements AgaviISingletonModel, AppKitNavContainerInterface
 {
-
+	/**
+	 * @var AppKitNavContainer
+	 */
 	private $navContainer = null;
+	
+	/**
+	 * @var AgaviTranslationManager
+	 */
+	private $tm = null;
+	
+	/**
+	 * @var AgaviWebRouting
+	 */
+	private $ro = null;
 	
 	public function __construct() {
 		$this->navContainer = new AppKitNavContainer();
+	}
+	
+	public function initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
+		$this->tm =& $this->getContext()->getTranslationManager();
+		$this->ro =& $this->getContext()->getRouting();	
 	}
 	
 	/**
@@ -41,6 +59,41 @@ implements AgaviISingletonModel, AppKitNavContainerInterface
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Returns the menu tree as json
+	 * @return string
+	 */
+	public function getJsonData() {
+		$d = array();		
+		$this->arrayProc($d, $this->navContainer);
+		return json_encode($d);
+	}
+	
+	private function arrayProc(&$array, AppKitNavContainer &$container) {
+		$array['items']=array();
+		$array = &$array['items'];
+		
+		foreach ($container as $item) {
+			
+			$tmp = array('text' => $this->tm->_($item->getCaption()));
+			
+			if ($item->getRoute()) {
+				$tmp['href'] = $this->ro->gen($item->getRoute());
+			}
+			
+			if ($item->getJsHandler()) {
+				$tmp['handler'] = $item->getJsHandler();
+			}
+			
+			if ($item->hasChildren()) {
+				$tmp['menu'] = array();
+				$this->arrayProc($tmp['menu'], $item->getContainer());
+			}
+			
+			array_push($array, $tmp);
+		}
 	}
 	
 }

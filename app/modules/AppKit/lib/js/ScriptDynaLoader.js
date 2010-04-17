@@ -1,28 +1,25 @@
 
-AppKit.Ext.ScriptDynaLoader = function() {
-	
-	var pub = {};
-	
-	pub = Ext.extend(Ext.util.Observable, {
+(function() {
+
+	AppKit.ScriptDynaLoader = new (Ext.extend(Ext.util.Observable, {
+		
 		constructor : function() {
-			
-			this.listeners = {};
-			this.addEvents({
-				loadscript : true,
-				bulkfinish : true
-			});
-			
-			this.scripts = {};
-			this.activeTransactions = {};
-			this.transCount = 0;
-			this.bulkMode = false;
-			this.mask = undefined;
 				
-			pub.superclass.constructor.call(this);
-		}
-	});
-	
-	Ext.override(pub, {
+				this.listeners = {};
+				
+				this.addEvents({
+					loadscript : true,
+					bulkfinish : true
+				});
+				
+				this.scripts = {};
+				this.activeTransactions = {};
+				this.transCount = 0;
+				this.bulkMode = false;
+				this.mask = undefined;
+					
+				this.superclass.constructor.call(this);
+			},
 		
 		loadScript : function(script) {
 			var o = {};
@@ -151,8 +148,7 @@ AppKit.Ext.ScriptDynaLoader = function() {
 				this.mask = null;
 			}
 		}
-		
-	});
-	
-	return (new pub);
-}();
+				
+	}))();
+
+})();
