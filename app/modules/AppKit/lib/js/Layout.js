@@ -99,18 +99,14 @@ Ext.onReady(function() {
 						columnWidth: 1,
 						border: false
 					}, {
-						html: 'TEST1',
+						html: 'User',
 						width: 100,
 						border: false
-					}, {
-						html: 'TEST2',
+					}, { 
 						width: 25,
 						height: 25,
 						border: false,
-						autoEl: {
-							tag: 'img',
-							src: '/icinga-web/images/icinga/idot-small.png'
-						}
+						autoEl: {tag: 'img', src: '/icinga-web/images/icinga/idot-small.png'}
 					}]
 				});
 				

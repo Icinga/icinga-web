@@ -83,8 +83,8 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 								title: data.dragData['name'],
 								crname: data.dragData.id,
 								closable: true,
-								layout: 'fit',
-								params: data.dragData.parameter
+								params: data.dragData.parameter,
+								xtype: 'cronk'
 							});
 							
 							// Set active

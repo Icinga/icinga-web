@@ -14,15 +14,17 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 		var cout = {};
 	
 		this.items.each(function(item, index, l) {
-			if (item.getXType() == 'cronk' && Cronk.Registry.get(item.getId())) {
+			if (Cronk.Registry.get(item.getId())) {
 				cout[item.getId()] = Cronk.Registry.get(item.getId());
 			}
 		});
 		
+		var t = this.getActiveTab();
+		
 		return {
 			cronks: cout,
 			items: this.items.getCount(),
-			active: this.getActiveTab().id
+			active: ( (t) ? t.getId() : null )
 		}
 	},
 	
@@ -32,14 +34,13 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 			if (state.cronks) {
 				// Adding all cronks
 				Ext.iterate(state.cronks, function(index, item, o) {
-					var c = Ext.apply({}, item);
-					delete(c.loaderUrl);
-					this.add(c);
-					
+					this.add(item);
 				}, this);
 
-				// Sets tehe active tab
-				this.setActiveTab(state.active);
+				// Sets the active tab
+				this.setActiveTab(state.active || 0);
+				
+				this.getActiveTab().doLayout();
 			}
 			
 						

@@ -99,11 +99,9 @@
 								}
 								
 								var portlet  = Cronk.factory({
-									parentid: id,
 									id: id,
 									
 									params: data.dragData.parameter,
-									loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 									crname: data.dragData.id,
 									
 									title: data.dragData.name,
@@ -223,32 +221,23 @@
 				
 				getState: function () {
 					
-					var d = new Array(this.items.getCount());
+					var d = new Array();
 					
 					this.items.each(function (col, cindex, l1) {
 						
-						d[cindex] = {};
+						crlist = {};
 						
 						col.items.each(function (cr, crindex, l2) {
-							
-							if (cr.iscronk && cr.iscronk == true) {
-								var c = Cronk.Registry.get(cr.cronkkey);
-								var cronk = Ext.getCmp(cr.cronkkey);
-								
-								console.log(c,cronk);
-
-								c.config.title = cronk.title;
-								c.config.height = cronk.getHeight();
-								c.config.collapsed = cronk.collapsed;
-//								console.log("COL: " + cronk.collapsed);
-								d[cindex][cronk.getId()] = c;
+							if (Cronk.Registry.get(cr.getId())) {
+								var c = Cronk.Registry.get(cr.getId());
+								c.height = cr.getHeight();
+								crlist[cr.getId()] = c;
 							}
-							
 						}, this);
 						
+						d[cindex] = crlist;
+						
 					}, this);
-					
-	//				console.log(d);
 					
 					return {
 						col: d,
@@ -264,13 +253,10 @@
 						if (state.col) {
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
-									var c = {}
-									Ext.apply(c, citem.config, citem.crconf);
-//									console.log(c);
+									var c = citem;
 									c.tools = tools;
 									
 									var cronk = Cronk.factory(c);
-									
 									PortalHandler.createResizer(cronk);
 									
 									this.get(index).add(cronk);

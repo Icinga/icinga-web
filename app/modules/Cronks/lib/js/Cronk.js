@@ -23,7 +23,7 @@
 			
 			removeCci : function(config, items) {
 				Ext.each(items, function(item, index, l) {
-					if (item in config) {
+					if (Ext.isDefined(config[item])) {
 						delete(config[item]);
 					}
 				})
@@ -37,8 +37,17 @@
 			},
 			
 			factory : function(config) {
-				config.xtype = 'cronk';
-				return Ext.create(config);
+				// Apply the needed config to our cronk
+				if (Ext.isDefined(config['xtype']) && config.xtype !== 'cronk') {
+					var p = Ext.ComponentMgr.types[ config.xtype ];
+					Ext.iterate(p.prototype, function(key, val) {
+						if (Ext.isPrimitive(val)) {
+							config[key] = val;
+						}
+					})
+				}
+				
+				return new Cronk.Container(config);
 			}
 			
 		});
@@ -51,7 +60,23 @@
 	 */
 	Ext.ns('Cronk.defaults');
 	
-	Cronk.Registry = new Ext.util.MixedCollection(false);
+	Cronk.RegistryClass = function() {
+		Cronk.RegistryClass.superclass.constructor.call(this, false);
+	}
+	
+	Ext.extend(Cronk.RegistryClass, Ext.util.MixedCollection, {
+		get : function(key) {
+			var i = Cronk.RegistryClass.superclass.get.call(this, key);
+			var cronk = Ext.getCmp(i.id);
+			if (cronk) {
+				Ext.apply(i, cronk.initialCronkConfig());
+				this.replace(key, i);
+			}
+			return i;
+		}
+	});
+	
+	Cronk.Registry = new Cronk.RegistryClass();
 	
 	Cronk.defaults.SETTINGS = {
 		loaderUrl:	'web/cronks/cloader',
@@ -65,6 +90,11 @@
 		'loaderUrl', 'params', 'crname',
 		'cmpid', 'parentid', 'stateuid',
 		'autoLayout', 'autoRefresh'
+	];
+	
+	Cronk.defaults.CONFIG_COPY = [
+		'title', 'id', 'xtype',
+		'closable', 'draggable', 'resizable'
 	];
 	
 	/*
@@ -86,7 +116,9 @@
 		
 		Cronk.Container.superclass.constructor.call(this, config);
 		
-		Cronk.Registry.add(this.initialCronkConfig());
+		Cronk.Registry.add(this.initialCronkConfig(Cronk.defaults.CONFIG_COPY));
+
+		this.iscronk = true;
 
 		this.on('destroy', function(c) {
 			Cronk.Registry.removeKey(c.id);
@@ -98,10 +130,17 @@
 		cronkConfig : {},
 		cronkParams : {},
 		
-		initialCronkConfig : function() {
-			var l = {};
-			Ext.apply(l, this.orgConfig, this.cronkConfig);
-			delete(l.ownerCt);
+		initialCronkConfig : function(items) {
+			var l = this.cronkConfig;
+			
+			items = (items || Cronk.defaults.CONFIG_COPY);
+			
+			if (Ext.isArray(items)) {
+				Ext.copyTo(l, this, items);
+			}
+			
+			delete(l.loaderUrl);
+			
 			return l;
 		},
 		
