@@ -21,6 +21,12 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 	 */
 	private $type = null;
 	
+	private $mapping_fields = array (
+		'object_name', 'object_name2', 
+		'object_id', 'description', 'data1',
+		'object_status'
+	);
+	
 	/**
 	 * The mapping array
 	 * @var array
@@ -104,6 +110,10 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 	
 	public function setQuery($query) {
 		
+		if (strpos($query, '*') !==false) {
+			$query = str_replace('*', '%', $query);
+		}
+		
 		// Append search suffix
 		if (strpos($query, '%') == false) {
 			$query .= '%';
@@ -122,8 +132,6 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 	
 	private function bulkQuery() {
 		
-		$data = array ();
-		
 		// We want only one specific type
 		if ($this->type && array_key_exists($this->type, $this->mapping)) {
 			$mappings = array($this->type);
@@ -132,6 +140,9 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 		else {
 			$mappings = array_keys($this->mapping);
 		}
+		
+		$data = array();
+		$count = array();
 		
 		foreach ($mappings as $mapping) {
 			$md = $this->mapping[$mapping];
@@ -149,31 +160,64 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 			
 			$result = $search->fetch();
 			
-			$data[ $mapping ] = array (
-				'resultSuccess'		=> true,
-				'resultCount'		=> $result->getResultCount(),
-				'resultRows'		=> $this->resultToArray($result, $fields)
-			);
+			$count[$mapping] = $result->getResultCount();
+			$data[$mapping] = $this->resultToArray($result, $fields, $mapping);
 		}
 		
-		return $data;
+		$new = $this->sortArray($data, $count);
+		$sum = array_sum($count);
+		
+		return array (
+			'resultCount'		=> array_sum($count),
+			'resultRows'		=> $new,
+			'resultSuccess'		=> ($sum>0) ? true : false
+		);
 	}
 	
-	private function resultToArray(IcingaApiResult &$res, array $fieldDef) {
+	private function addToArray(array $add, array &$out) {
+		foreach ($add as $suba) {
+			$out[] = $suba;
+		}
+	}
+	
+	private function sortArray(array $d, array $c) {
+		
 		$out = array ();
-		foreach ($res as $oRow) {
-			$row = $oRow->getRow();
-			$tmp = array ();
-			foreach ($fieldDef as $name=>$db) {
-				$db = strtoupper($db);
-				if (array_key_exists($db, $row)) {
-					$tmp[$name] = $row[$db];
-				}
+		$data = array ();
+		$out = array ();
+		
+		arsort($c);
+		
+		foreach ($c as $key=>$count) {
+			
+			$sort_oname = array ();
+			$sort_oname2 = array ();
+			foreach ($d[$key] as $rid=>$row) {
+				$sort_oname[$rid] = $row['object_name'];
+				$sort_oname2[$rid] = $row['object_name2'];
 			}
 			
-			$out[] = $tmp;
+			array_multisort($sort_oname, SORT_ASC, $sort_oname2, SORT_ASC, $d[$key]);
+			$this->addToArray($d[$key], &$out);
 		}
+		
 		return $out;
+	}
+	
+	private function resultToArray(IcingaApiResult &$res, array $fieldDef, $type) {
+		$array = array ();
+		foreach ($res as $oRow) {
+			$row = $oRow->getRow();
+			$tmp = array ('type' => $type);
+			foreach ($this->mapping_fields as $field) {
+				$tmp[$field] = null;
+				if (array_key_exists($field, $fieldDef) && array_key_exists($fieldDef[$field], $row)) {
+					$tmp[$field] = $row[$fieldDef[$field]];
+				}
+			}
+			$array[] = $tmp;
+		}
+		return $array;
 	}
 	
 }

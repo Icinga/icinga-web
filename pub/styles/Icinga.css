@@ -1,8 +1,7 @@
-* {
+html {
 	padding: 0;
 	margin: 0;
 }
-
 
 body {
 	font-family: Arial, Verdana, sans-serif;
@@ -20,6 +19,14 @@ h1 { font-size: 13pt; }
 h2 { font-size: 12pt; margin: 10px 0 15px 0; }
 
 h3 { font-size: 11pt; font-weight: normal; margin: 10px 0 15px 0; }
+
+strong {
+	font-weight: bolder;
+}
+
+em {
+	font-style: italic;
+}
 
 p.legal {
 	font-size: 0.8em;
@@ -148,9 +155,33 @@ div#growl-msg-stack {
     width: 300px;
     z-index: 20000;
 }
-	
 
-/** THE STATUS **/
+/** Icinga object icons **/
+.icinga-object-host {
+	background-image: url(../images/fam/server.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.icinga-object-service {
+	background-image: url(../images/fam/cog.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.icinga-object-hostgroup {
+	background-image: url(../images/fam/server_database.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.icinga-object-servicegroup {
+	background-image: url(../images/fam/database_gear.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/** Icinga status classes **/
 
 div.icinga-link {
 	cursor: pointer;

@@ -83,7 +83,8 @@
 			
 			<output_type name="json">
 				<ae:parameter name="http_headers">
-					<ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter>
+					<!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
+					<ae:parameter name="Content-Type">text/plain; charset=UTF-8</ae:parameter>
 				</ae:parameter>
 			</output_type>
 			

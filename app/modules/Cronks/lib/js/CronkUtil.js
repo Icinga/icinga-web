@@ -76,7 +76,7 @@ Cronk.util.InterGridUtil = function(){
 				tabs.add(panel);
 			}
 			else {
-				grids = panel.findByType('appkit-grid');
+				grids = panel.findByType('cronkgrid');
 				if (grids[0]) {
 					applyParametersToGrid(baseParams, grids[0]);
 				}

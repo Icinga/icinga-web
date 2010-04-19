@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
 (function() {
-
+	
 	var oid = '<?php echo $parentid; ?>';
 	var coParent = Ext.getCmp(oid);
 	
@@ -14,12 +14,10 @@
 		var ctWindow;
 		var proxy;
 		
-		var oStores = {};
+		var oTextField = null;
+		var oGrid = null;
+		var oStoreObj = null;
 		var oViews = {};
-		
-		var keytime;
-		
-		var noresult = false;
 		
 		var titles = {
 			'host': 		'Hosts ({0})',
@@ -27,6 +25,12 @@
 			'hostgroup':	'Hostgroups ({0})',
 			'servicegroup':	'Servicegroups ({0})'
 		};
+		
+		var templates = {
+			host:		new Ext.Template('{object_name}({data1})<br /><em>{description}</em>'),
+			service:	new Ext.Template('{object_name2}, {object_name}<br /><em>{description}</em>'),
+			def:		new Ext.Template('{object_name}<br /><em>{description}</em>'),
+		}
 		
 		var stores = ['host', 'service', 'hostgroup', 'servicegroup'];
 		
@@ -39,13 +43,15 @@
 			return proxy;
 		}
 		
-		function oStore(type) {
-			if (!oStores[type]) {
+		function oStore() {
+			
+			if (!oStoreObj) {
 				var record = new Ext.data.Record.create([
+					{name: 'type'},
 					{name: 'object_id'},
 	    			{name: 'object_name'},
-	    			{name: 'description'},
 	    			{name: 'object_name2'},
+	    			{name: 'description'},
 	    			{name: 'object_status'},
 	    			
 	    			{name: 'data1'},
@@ -54,138 +60,111 @@
 				]);
 				
 				var reader = new Ext.data.JsonReader({      
-				    root: type + '.resultRows',             
-				    totalProperty: type + '.resultCount',
+				    root: 'resultRows',             
+				    totalProperty: 'resultCount',
 				    idProperty: 'object_id' 
 				}, record);
 				
-				oStores[type] = new Ext.data.Store({
+				oStoreObj = new Ext.data.GroupingStore({
 					autoLoad: false,
 					proxy: oProxy(),
 					reader: reader,
-					baseParams: {
-						t: type
-					}
-				});
-				
-				// Write the sums to the title
-				oStores[type].on('load', function(store, record, o) {
-					Ext.getCmp('osearch-tab-' + type).setTitle(String.format(titles[type], store.getTotalCount()));
-					oSearchHandler.calcResultApproach();
-					oSearchHandler.checkNoResult();
-				})
-			}
-			
-			return oStores[type];
-		}
-		
-		function oTemplate(type) {
-			
-			var template;
-			
-			switch (type) {
-				
-				case 'host':
-					template = new Ext.XTemplate(
-					    '<tpl for=".">',
-					        '<div class="icinga-osearch-wrap" id="{object_name}">',
-					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
-					        '<div><span>{object_short_name}</span><br /><span>({data1})</span><br />{object_status}</div>',
-					        '</div>',
-					    '</tpl>',
-					    '<div class="x-clear"></div>'
-					);
-				break;
-				
-				case 'service':
-					template = new Ext.XTemplate(
-					    '<tpl for=".">',
-					        '<div class="icinga-osearch-wrap" id="{object_name}" ext:qtip="{description}">',
-					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
-					        '<div><span>{object_short_name}</span><br /><span>({object_name2})</span><br />{object_status}</div>', 
-					        '</div>',
-					    '</tpl>',
-					    '<div class="x-clear"></div>'
-					);
-				break;
-				
-				default:
-					template = new Ext.XTemplate(
-					    '<tpl for=".">',
-					        '<div class="icinga-osearch-wrap" id="{object_name}">',
-					        '<div class="thumb"><img ext:qtip="{description}" src="<?php echo AppKitHtmlHelper::Obj()->imageUrl('icinga.idot-small'); ?>"></div>',
-					        '<div><span>{object_short_name}</span></div></div>',
-					    '</tpl>',
-					    '<div class="x-clear"></div>'
-					);
-				break;
-			}
-			
-			return template;
-		}
-		
-		function oList(type) {
-			
-			if (!oViews[type]) {
-
-				var store = oStore(type);
-				// store.load({params: {q: 'f'}});
-				
-				var tpl = oTemplate(type);
-				
-				oViews[type] = new Ext.DataView({
-					store: store,
-					reserveScrollOffset: true,
-					
-					columns: [
-						{ header: 'Name', dataIndex: 'object_name' },
-						{ header: 'OID', dataIndex: 'object_id' },
-						{ header: 'Description', dataIndex: 'description' },
-						{ header: 'Image', dataIndex: 'image' }
-					],
-					
-					cls: 'icinga-osearch-frame',
-					itemSelector: 'div.icinga-osearch-wrap',
-					overClass:'x-view-over',
-					emptyText: 'no data',
-					trackOver: true,
-					singleSelect: true,
-					
-					prepareData: function(data) {
-						data.object_short_name = Ext.util.Format.ellipsis(data.object_name, 10);
-						
-						if (type == 'host') {
-							data.description = String.format('{0}, {1}', data.description, data.data1);
-						}
-						
-						if (data.object_status) {
-							data.object_status = Icinga.StatusData.wrapText(type, data.object_status);
-						}
-						
-						return data;
-					},
+					remoteGroup: true,
+					remoteSort: true,
+					groupField: 'type',
 					
 					listeners: {
-						dblclick: oSearchHandler.doubleClickProc
-					},
-					
-					tpl: tpl
+						load: oSearchHandler.calcResultApproach
+					}
 				});
-				
-				// Setting the type
-				oViews[type].object_type = type;
-			
 			}
 			
-			return oViews[type];
+			return oStoreObj;
 		}
 		
+		function rObjectName(value, metaData, record, rowIndex, colIndex, store) {
+			var d = record.data;
+			var type = d['type'];
+			
+			var template = templates[type] || templates['def'];
+			return template.apply(d);
+		}
 		
+		function rTypeName(value, metaData, record, rowIndex, colIndex, store) {
+			var cls = Icinga.DEFAULTS.OBJECT_TYPES[record.data.type].iconClass || 'silk-brick';
+			metaData.css = cls;
+			return '';
+		}
+		
+		function oGridResult() {
+			if (!oGrid) {
+				
+				var colModel = new Ext.grid.ColumnModel({
+					columns: [
+						{ header: _('id'),
+						  id: 'object_id',
+						  hidden:true,
+						  dataIndex: 'object_id' },
+						  
+						{ header: _('Type'),
+						  hidden: false,
+						  width: 12,
+						  dataIndex: 'type',
+						  renderer: { fn: rTypeName, scope: this } ,
+						  groupRenderer: String },
+						  
+						{ header: _('Name'),
+						  dataIndex: 'object_name',
+						  renderer: { fn: rObjectName, scope: this } },
+						  
+						{ header: _('Description'),
+						  width: 80,
+						  hidden:true,
+						  dataIndex: 'description' },
+						  
+						{ header: _('Status'),
+						  width: 30,
+						  dataIndex: 'object_status',
+						  renderer: { fn: Icinga.StatusData.renderSwitch, scope: this } }
+						  
+					],
+					
+					defaults: {
+						sortable: false,
+						menuDisabled: true,
+						groupable: false
+					}
+					
+				});
+				
+				oGrid = new Ext.grid.GridPanel({
+					
+					layout: 'fit',
+					
+					colModel: colModel,
+					
+					view: new Ext.grid.GroupingView({
+						autoFill: true,
+			            forceFit:true,
+			            startCollapsed: true,
+			            groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? _("Items") : _("Item")]})'
+			        }),
+					
+					listeners: {
+						celldblclick: oSearchHandler.doubleClickProc
+					},
+					
+					store: oStore()
+				});
+			}
+			
+			return oGrid;
+		}
 		
 		function oWindow() {
 			if (!ctWindow) {
 				ctWindow = new Ext.Window({
-					title: 'Search',
+					title: _('Search'),
 					width: 500,
 					height: 400,
 					closable: false,
@@ -193,7 +172,7 @@
 					layout: 'fit',
 					
 					buttons: [{
-						text: 'Close',
+						text: _('Close'),
 						handler: function(w) {
 							oTextField.setValue('');
 							oWindow().hide();
@@ -202,46 +181,11 @@
 					
 					listeners: {
 						show: function(w) {
-							oTextField.focus(false, 200);
+							oTextField.focus(false, 10);
 						}
 					},
 					
-					items: [{
-						xtype: 'grouptabpanel',
-						activeGroup: 0,
-						tabWidth: 130,
-						
-						items: [{
-							expanded: true,
-							
-							defaults: {
-								style: 'padding: 10px;',
-								autoScroll: true
-							},
-							
-							id: 'osearch-result-tabs',
-							
-							items: [{
-								title: 'Objects'
-							}, {
-								title: 'Hosts (0)',
-								items: oList('host'),
-								id: 'osearch-tab-host'
-							}, {
-								title: 'Services (0)',
-								items: oList('service'),
-								id: 'osearch-tab-service'
-							},{
-								title: 'Hostgroups (0)',
-								items: oList('hostgroup'),
-								id: 'osearch-tab-hostgroup'
-							},{
-								title: 'Servicegroups (0)',
-								items: oList('servicegroup'),
-								id: 'osearch-tab-servicegroup'
-							}]
-						}]
-					}]
+					items: oGridResult()
 				});
 			}
 			
@@ -256,7 +200,6 @@
 			keyup : function(field, e) {
 				val = field.getValue();
 				if (val && val.length >= 1) {
-					
 					if (!oWindow().isVisible()) {
 						var xy = field.getPosition();
 						xy[0] += field.getSize().width + 55;
@@ -267,10 +210,7 @@
 					
 					oWindow().setTitle('Search: ' + val);
 					
-					// Buffer the ajax load
-					keytime = new Date();
-					
-					oSearchHandler.reloadAllStores.defer(90);
+					oSearchHandler.reloadAllStores.defer(20, this, [val])
 					
 				}
 				else {
@@ -278,51 +218,20 @@
 				}
 			},
 			
-			reloadAllStores : function() {
-				var testdate = new Date();
-				if (keytime && (testdate.getTime() - keytime.getTime()) > 50) {
-					
-					Ext.each(stores, function(key, index, ary) {
-						oStore(key).reload({ params: { q: val } });	
-					})
-				}
+			reloadAllStores : function(val) {
+				oStore().reload({ params: { q: val } });
 			},
 			
 			calcResultApproach : function() {
-				var mStore = new Array(null,0);
-				
-				Ext.each(stores, function(key, index, ary) {
-						if (oStore(key).getTotalCount() > mStore[1]) {
-							mStore[0] = key;
-							mStore[1] = oStore(key).getTotalCount();
-						}	
-				});
-				
-				if (mStore[0]) {
-					Ext.getCmp('osearch-result-tabs').setActiveTab( 'osearch-tab-' + mStore[0] );
-				}
+				oGrid.getView().collapseAllGroups();
+				oGrid.getView().toggleRowIndex(0, true);
 			},
 			
-			checkNoResult : function() {
-				var test = 0;
+			// celldblclick: 
+			doubleClickProc : function(grid, rowIndex, columnIndex, e) {
+				var re = grid.getStore().getAt(rowIndex);
+				var type = re.data.type;
 				
-				Ext.each(stores, function(key, index, ary) {
-					test += oStore(key).getTotalCount();
-				});
-				
-				if (test > 0 && noresult == true) {
-					noresult = false;
-				}
-				
-				if (noresult == false && test == 0) {
-					noresult = true;
-					AppKit.notifyMessage('Search', 'No results!');
-				}
-			},
-			
-			doubleClickProc : function(view, index, node, e) {
-				var re = view.getStore().getAt(index);
-				var type = view.object_type;
 				var params = {};
 				var filter = {};
 				
@@ -374,13 +283,17 @@
 				oTextField.setValue('');
 				
 				return true;
+			},
+			
+			setTextField : function(f) {
+				oTextField = f;
 			}
 
 		};
 		
 	}();
 
-	var oTextField = new Ext.ux.form.FancyTextField({
+	var myTextField = new Ext.ux.form.FancyTextField({
 		title: 'Search',
 		xtype: 'fancytextfield',
 		name: 'q',
@@ -395,14 +308,14 @@
 		}
 	});
 	
-	oSearchHandler.oTextField = oTextField;
+	oSearchHandler.setTextField(myTextField);
 	
 	var oSearch = new Ext.FormPanel({
 		frame: false,
 		labelWidth: 0,
 		border: false,
 		defaultType: 'textfield',
-		items: [oTextField]
+		items: myTextField
 	});
 	
 	coParent.add(oSearch);

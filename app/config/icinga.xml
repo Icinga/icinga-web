@@ -148,6 +148,8 @@
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
 			
 			<parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</parameter>
@@ -161,8 +163,6 @@
 			<parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</parameter>
-	
-			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
 			
 			<!--
 			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
@@ -172,13 +172,12 @@
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
 			-->
-
-			<parameter>%core.root_dir%/app/lib/icinga/js/StatusData.js</parameter>
-
+			
 			<!-- jsgettext -->
 			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
 			
 			<!--  ICINGA JS -->
+			<parameter>%core.app_dir%/lib/icinga/js/SimpleDataProvider.js</parameter>
 			<parameter>%core.app_dir%/lib/icinga/js/StatusData.js</parameter>
 		</parameter>
 		

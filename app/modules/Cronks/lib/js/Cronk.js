@@ -37,20 +37,24 @@
 			},
 			
 			factory : function(config) {
+				var classDef = null;
+				
 				// Apply the needed config to our cronk
 				if (Ext.isDefined(config['xtype']) && config.xtype !== 'cronk') {
 					var p = Ext.ComponentMgr.types[ config.xtype ];
-					Ext.iterate(p.prototype, function(key, val) {
-						if (Ext.isPrimitive(val)) {
-							config[key] = val;
-						}
-					})
+					classDef = Ext.extend(p, Cronk.Container);
+//					Ext.iterate(p.prototype, function(key, val) {
+//						if (Ext.isPrimitive(val)) {
+//							config[key] = val;
+//						}
+//					});
 				}
 				else {
+					classDef = Cronk.Container;
 					config.xtype = 'cronk';
 				}
 				
-				return new Cronk.Container(config);
+				return new classDef(config);
 			}
 			
 		});
