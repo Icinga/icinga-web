@@ -15,7 +15,7 @@
 		<?php echo $slots['nav']; ?>
 	</head>
 	<body>
-		<div id="content">
+		<div id="content" class="x-hidden">
 			<?php  (isset($title)) ? '<h1>'. $title. '</h1>' : null ?>
 			<?php echo $inner; ?>
 		</div>

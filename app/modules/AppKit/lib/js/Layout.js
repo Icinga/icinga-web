@@ -13,7 +13,7 @@ Ext.onReady(function() {
 		var queue = [];
 		
 		var pub = {};
-		var contentel = Ext.get('content');
+		var contentel = 'content';
 		var viewport = null;
 		var center = null;
 		var north = null;
@@ -113,6 +113,8 @@ Ext.onReady(function() {
 						}
 					}]
 				});
+				
+				north.doLayout();
 			}
 			
 		});

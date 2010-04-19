@@ -4,11 +4,7 @@
 <script type="text/javascript">
 Ext.onReady(function() {
 
-	AppKit.pageLoadingMask();
-	
-	setTimeout(function() {
-		AppKit.pageLoadingMask(true);
-	}, 2500);
+	AppKit.pageLoadingMask(2500);
 
 	Cronk.items.Portal = Ext.create({
 		xtype: 'panel',

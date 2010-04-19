@@ -130,12 +130,12 @@ div.cronk-data-view .x-view-selected .thumb{
 
 /** JS Message stack **/
 
-div.ext-msg-message {
+div.growl-msg-message {
 	position: relative;
 	z-index: 999;	
 }
 
-div#ext-msg-stack {
+div#growl-msg-stack {
 	position:absolute;
     /* left: 35%;
     top: 10px; */
