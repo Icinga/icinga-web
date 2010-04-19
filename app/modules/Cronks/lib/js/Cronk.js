@@ -46,6 +46,9 @@
 						}
 					})
 				}
+				else {
+					config.xtype = 'cronk';
+				}
 				
 				return new Cronk.Container(config);
 			}
@@ -67,10 +70,12 @@
 	Ext.extend(Cronk.RegistryClass, Ext.util.MixedCollection, {
 		get : function(key) {
 			var i = Cronk.RegistryClass.superclass.get.call(this, key);
+			if (i) {
 			var cronk = Ext.getCmp(i.id);
 			if (cronk) {
 				Ext.apply(i, cronk.initialCronkConfig());
 				this.replace(key, i);
+			}
 			}
 			return i;
 		}

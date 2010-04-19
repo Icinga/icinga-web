@@ -36,7 +36,7 @@ Cronk.util.StructUtil = function(){
 Cronk.util.InterGridUtil = function(){
 	
 	var applyParametersToGrid = function(baseParams, c) {
-		if ((c.getXType() == 'grid' || c.getXType() == 'appkit-grid')) {
+		if ((c.getXType() == 'grid' || c.getXType() == 'cronkgrid')) {
 			
 			var store = c.getStore();
 			if (!"originParams" in store || typeof(store.originParams) == "undefined") {
@@ -58,18 +58,22 @@ Cronk.util.InterGridUtil = function(){
 			var tabs = Ext.getCmp('cronk-tabs');
 			var id = config.parentid || null;
 			var panel = Ext.getCmp(id);
-			
+//			console.log(config);
 			// disable grid autoload
 			config.params['storeDisableAutoload'] = 1;
 			
 			if (!panel) {
 				
 				panel = Cronk.factory(config);					
-				tabs.add(panel);
-				
+								
 				panel.on('add', function(p, c, i) {
+//					console.log('ADD', c.getXType());
 					applyParametersToGrid(baseParams, c)
 				});
+				
+//				console.log(baseParams);
+				
+				tabs.add(panel);
 			}
 			else {
 				grids = panel.findByType('appkit-grid');
