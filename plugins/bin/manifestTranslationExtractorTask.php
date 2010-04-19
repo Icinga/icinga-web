@@ -2,7 +2,11 @@
 
 require_once "phing/Task.php";
 require_once "manifestStore.php";
-
+/**
+ * Task that extracts translations 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class ManifestTranslationExtractorTask extends Task {
  private $file = null;
     private $toFile = null;
@@ -74,7 +78,7 @@ class ManifestTranslationExtractorTask extends Task {
 					break;
 				case 'Domain':
 					$name = $child->nodeValue;
-					$source = $xPathTrans->query("//default:translator[@domain='".$name."']")->item(0);
+					$source = $xPathTrans->query("//default:translator[@domain='icinga']//ae:parameter[@name='".$name."']")->item(0);
 					if(!$source)
 						throw new BuildException("Didn't find translation domain ".$name);
 					$node = $ResultDOM->importNode($source,true);

@@ -2,10 +2,30 @@
 
 require_once "phing/Task.php";
 require_once "manifestStore.php";
-
+/**
+ * Extracts routes from the agavi routing.xml and writes them 
+ * into a file
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class ManifestRouteExtractorTask extends Task {
-    private $file = null;
-    private $toFile = null;
+	/**
+	 * the path of the manifest.xml
+	 * @var String
+	 */
+	private $file = null;
+    
+    /**
+     * The target file to generate
+     * @var String
+     */
+	private $toFile = null;
+	
+	/**
+	 * The DOM representation of the manifest.xml
+	 * @var DOMDocument
+	 */
 	private $xmlObject = null;
 	
     public function setFile($str) {
@@ -39,7 +59,13 @@ class ManifestRouteExtractorTask extends Task {
 		$this->extractRoutes();
 	}
 	
+	/**
+	 * Extracts the routes from manifest.xml
+	 * 
+	 * @throws BuildException if a route cannot be found  
+	 */
 	public function extractRoutes() {
+		// Setup XML Files and XPath searcher
 		$routeXML = new DOMDocument("1.0","UTF-8");
 		$routeXML->load($this->project->getUserProperty("PATH_Icinga")."app/config/routing.xml");
 		
@@ -49,6 +75,8 @@ class ManifestRouteExtractorTask extends Task {
 		$ResultDOM = new DOMDocument("1.0","UTF-8");
 		$rootNode = $ResultDOM->createElementNS("http://agavi.org/agavi/1.0/config","configurations");
 		$contextNodes = array();
+		
+		// export each route
 		foreach($routes as $routeToSearch) {
 			$name = $routeToSearch->getAttribute("name");
 			$name = explode(".",$name);
@@ -61,6 +89,7 @@ class ManifestRouteExtractorTask extends Task {
 			if($context != "")
 				$xpath .= '[@context="'.$context.'"]';
 			$first = true;
+			// search nested routes
 			foreach($name as $currentNameElement) {
 				if(!$first)  // add the dot to the route
 					$currentNameElement = ".".$currentNameElement;

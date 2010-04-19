@@ -1,4 +1,11 @@
 <?php
+/**
+ * Singleton class that holds the manifest file DOM and extracts PATH Variables
+ * Prevents the manifest to be loaded x times as a simple_xml object 
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class manifestStore {
 	private static $xml = array();
 	

@@ -1,7 +1,12 @@
 <?php
 
 require_once "manifestBaseClass.php";
-
+/**
+ * Task that checks dependencies described in the manifest.xml
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class manifestDependencyCheckerTask extends manifestBaseClass {
 	
 	public function main() {
@@ -16,7 +21,10 @@ class manifestDependencyCheckerTask extends manifestBaseClass {
 			$this->checkFor($dependency);
 		}
 	}
-	
+	/**
+	 * Checks a dependency
+	 * @param SimpleXMLElement $dependency The dependency to check
+	 */
 	protected function checkFor(SimpleXMLElement $dependency) {
 		switch($dependency->getName()) {
 			case 'Icinga-Web':
@@ -30,6 +38,13 @@ class manifestDependencyCheckerTask extends manifestBaseClass {
 		}
 	} 
 	
+	/**
+	 * Checks version of icinga-web with $dependency
+	 * @param SimpleXMLElement $dependency The dependency to check
+	 * @return $bool true on success
+	 * 
+	 * @throws BuildException If check fails
+	 */
 	protected function checkIcingaWeb(SimpleXMLElement $dependency) {
 		$version = (String) $dependency->Version;
 		if($version) {
@@ -67,6 +82,14 @@ class manifestDependencyCheckerTask extends manifestBaseClass {
 		return true;
 	}
 
+	/**
+	 * Checks the php version and extensions
+	 * 
+	 * @param SimpleXMLElement $dependency
+	 * @return $bool true on success
+	 * 
+	 * @throws BuildException
+	 */
 	protected function checkPHP(SimpleXMLElement $dependency) {
 		$version = (String) $dependency->Version;
 		if($version) {
