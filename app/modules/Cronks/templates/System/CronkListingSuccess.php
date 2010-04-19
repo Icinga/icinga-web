@@ -256,7 +256,7 @@
 			
 		},
 		failure: function (r, o) {
-			AppKit.Ext.notifyMessage('Ajax Error', 'Could not load the categories (CronkList)');
+			AppKit.notifyMessage('Ajax Error', 'Could not load the categories (CronkList)');
 		}
 	});
 		

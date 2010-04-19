@@ -172,7 +172,7 @@
 				   },
 				   
 				   failure: function(response, opts) {
-						AppKit.Ext.notifyMessage(
+						AppKit.notifyMessage(
 							"Ext.Ajax.request: request failed!",
 							String.format("{0} ({1})", response.statusText, response.status)
 						);

@@ -135,12 +135,17 @@ div.growl-msg-message {
 	z-index: 999;	
 }
 
+div.growl-msg-message .head {
+	font-size: 10pt;
+	font-weight: bolder;
+}
+
 div#growl-msg-stack {
 	position:absolute;
     /* left: 35%;
     top: 10px; */
     top: 35%;
-    width: 250px;
+    width: 300px;
     z-index: 20000;
 }
 	

@@ -96,7 +96,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 	itemRemoveActiveHandler : function (tabPanel, ri) {
 		
 		if (tabPanel.items.getCount() <= 1) {
-			AppKit.Ext.notifyMessage(_('Sorry'), _('Could not remove the last tab!'));
+			AppKit.notifyMessage(_('Sorry'), _('Could not remove the last tab!'));
 			return false;
 		}
 		else {

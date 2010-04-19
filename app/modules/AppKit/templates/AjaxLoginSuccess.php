@@ -89,7 +89,7 @@ Ext.onReady(function() {
 						waitTime: 5
 					};
 					
-					AppKit.Ext.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
+					AppKit.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
 				}
 				
 				/* oContainer.highlight("cc0000", {

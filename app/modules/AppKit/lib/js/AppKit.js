@@ -11,7 +11,7 @@ Ext.ns('AppKit', 'APPKIT.lib');
 		var growlStackElement = null;
 		var growlTemplate = new Ext.Template([
 			'<div class="growl-msg-message">',
-				'<div>{header}</div>',
+				'<div class="head">{header}</div>',
 				'<div>{message}</div>',
 			'</div>'
 		]);
@@ -148,19 +148,18 @@ Ext.ns('AppKit', 'APPKIT.lib');
 	        	var title = la.shift();
 	        	
 	        	var c = {
-	        		time: 2
+	        		waitTime: 2
 	        	};
 	        	
 	        	if (Ext.isObject(la[ la.length -1 ])) {
 	        		Ext.apply(c, la.pop());
-	        		console.log(c);
 	        	}
 	        	
 	        	var nm = String.format.apply(this, la);
 	        	
 	        	var ele = this.growlPopupBox(nm, title);
 	        	
-	        	ele.slideIn('r').pause(c.time).ghost('r', {remove:true});
+	        	ele.slideIn('r').pause(c.waitTime).ghost('r', {remove:true});
 	        }
 			
 		});

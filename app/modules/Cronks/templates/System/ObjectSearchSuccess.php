@@ -316,7 +316,7 @@
 				
 				if (noresult == false && test == 0) {
 					noresult = true;
-					AppKit.Ext.notifyMessage('Search', 'No results!');
+					AppKit.notifyMessage('Search', 'No results!');
 				}
 			},
 			

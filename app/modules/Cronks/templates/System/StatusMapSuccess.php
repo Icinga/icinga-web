@@ -5,9 +5,9 @@
 	$parentId = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
-AppKit.Ext.ScriptDynaLoader.startBulkMode();
+AppKit.ScriptDynaLoader.startBulkMode();
 
-AppKit.Ext.ScriptDynaLoader.on(
+AppKit.ScriptDynaLoader.on(
 	'bulkfinish', function () {
 		var statusMap = new JitStatusMap({
 			url: "<?php echo $ro->gen('icinga.cronks.statusMap.json'); ?>",
@@ -23,6 +23,6 @@ AppKit.Ext.ScriptDynaLoader.on(
 //}
 
 //AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitLib')) ?>");
-AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CronkTrigger')) ?>");
-AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitStatusMap')) ?>");
+AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CronkTrigger')) ?>");
+AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.JitStatusMap')) ?>");
 </script>
