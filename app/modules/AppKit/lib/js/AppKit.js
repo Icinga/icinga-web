@@ -83,7 +83,22 @@ Ext.ns('AppKit', 'APPKIT.lib');
                         }
 
                         return true;
-                }	
+                },
+
+		pageLoadingMask : function(remove) {
+                        remove = (remove || false);
+                        var ids = ['icinga-portal-loading-mask', 'icinga-portal-loading']
+                        if (remove) {
+                                Ext.iterate(ids, function(v) {
+                                        Ext.get(v).fadeOut({remove: true});
+                                });
+                        }
+                        else {
+                                Ext.iterate(ids, function(v) {
+                                        Ext.DomHelper.append(Ext.getBody(), {tag: 'div', id: v});
+                                });
+                        }
+                }
 	}))();
 	
 })();
