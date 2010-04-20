@@ -55,6 +55,10 @@ Ext.onReady(function() {
 				return center;
 			},
 			
+			getNorth: function() {
+				return north;
+			},
+			
 			addCenter: function(items, autol) {
 				autol = autol || false;
 				
@@ -89,24 +93,24 @@ Ext.onReady(function() {
 				
 				menu = north.add({
 					layout: 'column',
-					border: false,
-					
+					id: 'menu',
+					border:false,
 					items: [{
-						tbar: {
-							style: 'border: none',
+						tbar: new Ext.Toolbar({
+							id: 'menu-bar',
 							items: json['items'] || {}
-						},
+						}),
 						columnWidth: 1,
 						border: false
 					}, {
-						html: 'User',
-						width: 100,
+						id: 'menu-user',
+						width: 150,
 						border: false
-					}, { 
+					}, {
+						id: 'menu-logo',
 						width: 25,
-						height: 25,
-						border: false,
-						autoEl: {tag: 'img', src: '/icinga-web/images/icinga/idot-small.png'}
+						border: false
+						
 					}]
 				});
 				
@@ -125,9 +129,9 @@ Ext.onReady(function() {
 			items: [{
 				layout: 'fit',
 				region: 'north',
-				border: false,
 				id: 'viewport-north',
-				autoHeight: true,
+				border: false,
+				height: 25,
 				listeners: {
 					afterrender: function(p) {
 						north = p;
@@ -138,6 +142,7 @@ Ext.onReady(function() {
 				layout: 'fit',
 				region: 'center',
 				id: 'viewport-center',
+				border: false,
 				contentEl: contentel,
 				listeners: {
 					afterrender: function(p) {

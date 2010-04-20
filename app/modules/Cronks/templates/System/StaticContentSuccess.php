@@ -51,7 +51,7 @@
 											enableToggle: true,
 											handler: function(oBtn, e) {
 												if (oBtn.pressed == true) {
-													this.trefresh = AppKit.Ext.getTr().start({
+													this.trefresh = AppKit.getTr().start({
 														run: function() {
 															this.getUpdater().refresh();
 														},
@@ -60,7 +60,7 @@
 													});
 												}
 												else {
-													AppKit.Ext.getTr().stop(this.trefresh);
+													AppKit.getTr().stop(this.trefresh);
 													delete this.trefresh;
 												}
 											}

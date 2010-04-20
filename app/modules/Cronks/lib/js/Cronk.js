@@ -37,24 +37,18 @@
 			},
 			
 			factory : function(config) {
-				var classDef = null;
-				
 				// Apply the needed config to our cronk
 				if (Ext.isDefined(config['xtype']) && config.xtype !== 'cronk') {
 					var p = Ext.ComponentMgr.types[ config.xtype ];
-					classDef = Ext.extend(p, Cronk.Container);
-//					Ext.iterate(p.prototype, function(key, val) {
-//						if (Ext.isPrimitive(val)) {
-//							config[key] = val;
-//						}
-//					});
+					Ext.iterate(p.prototype, function(k, v) {
+						if (!Ext.isFunction(v)) {
+							config[k] = v;
+						}
+					});
 				}
-				else {
-					classDef = Cronk.Container;
-					config.xtype = 'cronk';
-				}
-				
-				return new classDef(config);
+				config.xtype = 'cronk';
+				console.log(config);
+				return new Cronk.Container(config);
 			}
 			
 		});
@@ -65,28 +59,31 @@
 	/*
 	 * Default cronk settings
 	 */
-	Ext.ns('Cronk.defaults');
+	Ext.ns('Cronk.defaults', 'Cronk.lib');
 	
-	Cronk.RegistryClass = function() {
-		Cronk.RegistryClass.superclass.constructor.call(this, false);
+	Cronk.lib.Registry = function() {
+		Cronk.lib.Registry.superclass.constructor.call(this, false);
 	}
 	
-	Ext.extend(Cronk.RegistryClass, Ext.util.MixedCollection, {
+	Ext.extend(Cronk.lib.Registry, Ext.util.MixedCollection, {
 		get : function(key) {
-			var i = Cronk.RegistryClass.superclass.get.call(this, key);
+			var i = Cronk.lib.Registry.superclass.get.call(this, key);
 			if (i) {
-			var cronk = Ext.getCmp(i.id);
-			if (cronk) {
-				Ext.apply(i, cronk.initialCronkConfig());
-				this.replace(key, i);
-			}
+				var cronk = Ext.getCmp(i.id);
+				if (cronk) {
+					Ext.apply(i, cronk.initialCronkConfig());
+					this.replace(key, i);
+				}
 			}
 			return i;
 		}
 	});
 	
-	Cronk.Registry = new Cronk.RegistryClass();
+	Cronk.Registry = new Cronk.lib.Registry();
 	
+	/**
+	 * Cronk defaults
+	 */
 	Cronk.defaults.SETTINGS = {
 		loaderUrl:	'web/cronks/cloader',
 		layout:		'fit',
@@ -98,15 +95,24 @@
 	Cronk.defaults.CONFIG_ITEMS = [
 		'loaderUrl', 'params', 'crname',
 		'cmpid', 'parentid', 'stateuid',
-		'autoLayout', 'autoRefresh'
+		'autoLayout', 'autoRefresh',
+		'cronkEnv'
 	];
 	
 	Cronk.defaults.CONFIG_COPY = [
 		'title', 'id', 'xtype',
-		'closable', 'draggable', 'resizable'
+		'closable', 'draggable', 'resizable',
+		'cls', 'frame', 'duration', 'pinned',
+		'border'
 	];
 	
-	/*
+	Ext.Ajax.on('beforerequest', function(conn, o) {
+//		console.log(conn);
+//		console.log(o);
+//		console.log('-----------------------------');
+	});
+	
+	/**
 	 * Cronk implementation as extjs element
 	 */
 	
@@ -119,7 +125,7 @@
 		});
 		
 		this.rparams = null;
-		this.uref = null
+		this.uref = null;
 		
 		this.applyCronkConfig(config);
 		
@@ -155,6 +161,7 @@
 		
 		onRender : function(ct, position) {
 			Cronk.Container.superclass.onRender.call(this, ct, position);
+			
 			this.getUpdater();
 			
 			if (this.cronkConfig.autoRefresh == true) {
@@ -170,7 +177,6 @@
 		getUpdater : function() {
 			if (!this.uref) {
 				this.uref = Cronk.Container.superclass.getUpdater.call(this);
-				
 				this.uref.setDefaultUrl({
 					url : this.loaderUrl(),
 					scripts: true,
@@ -180,12 +186,12 @@
 				this.uref.on('update', this.onRefresh, this, { delay: 2 });
 			}
 			
-			return this.uref;;
+			return this.uref;
 		},
 		
 		applyCronkConfig : function(config) {
 			var id = null;
-			var ls = Cronk.defaults.SETTINGS;
+			var ls = Ext.apply({}, Cronk.defaults.SETTINGS);
 			
 			if (config.parentid) {
 				id = config.parentid;
@@ -195,6 +201,7 @@
 			}
 
 			if (!config.parentid) config.parentid=id;
+			
 			if (config.stateId) {
 				config.stateuid = config.stateId;
 			}
@@ -212,8 +219,6 @@
 			config.id = id;
 			
 			this.cronkConfig = Cronk.extractConfig(config);
-			this.orgConfig = {};
-			Ext.apply(this.orgConfig, config);			
 		},
 		
 		requestParams : function() {
@@ -228,6 +233,10 @@
 		
 		loaderUrl : function() {
 			return Cronk.getLoaderUrl(this.cronkConfig.crname, this.cronkConfig.loaderUrl);
+		},
+		
+		cronkEnvStore : function() {
+			return AppKit.util.getStore('cronk-environment');
 		},
 		
 		doRefresh : function() {

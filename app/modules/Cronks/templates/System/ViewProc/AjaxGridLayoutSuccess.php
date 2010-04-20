@@ -145,13 +145,16 @@
 		
 		var template = "<?php echo $rd->getParameter('template'); ?>";
 		var initGrid = function() {
-		var meta = s.get(template);
+			var meta = s.get(template);
 			if (meta.template.option.dynamicscript) {
+				
 				AppKit.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
 				AppKit.ScriptDynaLoader.startBulkMode();
+				
 				Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
 					AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
 				});
+				
 			}
 			else {
 				CreateGridProcessor(meta);

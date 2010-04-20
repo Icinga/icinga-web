@@ -14,6 +14,7 @@ Ext.onReady(function() {
 		id: 'view-container',
 		
 		defaults: { border: false },
+		style: { padding: '0px 5px 0px 5px' },
 		
 		items: [{
 			region: 'north',
@@ -84,7 +85,6 @@ Ext.onReady(function() {
 	        stateful: true,
 	        border: true,
 			stateId: 'west-frame',
-			margins: '0 0 0 5',
 			items: {
 				xtype: 'cronk',
 				crname: 'crlist',

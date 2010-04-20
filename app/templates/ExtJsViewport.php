@@ -12,7 +12,10 @@
 		
 		<?php echo $slots['head']; ?>
 		
-		<?php echo $slots['nav']; ?>
+		<?php echo $slots['head_navigation']; ?>
+		
+		<?php echo $slots['head_start']; ?>
+		
 	</head>
 	<body>
 		<div id="content" class="x-hidden">

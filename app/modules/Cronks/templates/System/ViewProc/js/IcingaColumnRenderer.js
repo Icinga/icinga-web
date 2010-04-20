@@ -8,7 +8,7 @@ Cronk.grid.IcingaColumnRenderer = {
 		return function(grid, rowIndex, colIndex, e) {
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
 			if (fieldName == cfg.field) {
-				
+				alert("OK");
 				var record = grid.getStore().getAt(rowIndex);
 				var id = (cfg.idPrefix || 'empty') + 'subGridComponent';
 				

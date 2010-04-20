@@ -35,6 +35,10 @@ p.legal {
 
 p { margin: 15px auto; }
 
+#content {
+	padding: 5px 5px;
+}
+
 /** MISC **/
 
 div#icinga-portal-loading-mask {

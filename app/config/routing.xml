@@ -69,6 +69,9 @@
 				<!-- The main view -->
 				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
 				
+				<!-- Simpleprovider for popups -->
+				<route name=".simpleDataProvider.json" pattern="^/simpleDataProvider/json" output_type="json" action="IcingaApiSimpleDataProvider" />
+				
 				<!--
 					Cronks:
 						* loader
@@ -79,9 +82,6 @@
 					
 					<!-- The cronkloader -->
 					<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="System.CronkLoader" />
-
-					<!-- Simpleprovider for popups -->
-					<route name=".simpleDataProvider.json" pattern="^/simpleDataProvider/json" output_type="json" action="IcingaApiSimpleDataProvider" />
 
 					<!-- Datasources for the cronks -->
 					<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="System.CronkListing" />

@@ -16,6 +16,8 @@ Ext.ns('AppKit', 'APPKIT.lib');
 			'</div>'
 		]);
 		
+		var taskRunner = null;
+		
 		Ext.extend(pub, Ext.util.Observable, {
 			
 			constructor: function() {
@@ -159,7 +161,14 @@ Ext.ns('AppKit', 'APPKIT.lib');
 	        	
 	        	var ele = this.growlPopupBox(nm, title);
 	        	
-	        	ele.slideIn('r').pause(c.waitTime).ghost('r', {remove:true});
+	        	ele.slideIn('t').pause(c.waitTime).ghost('t', {remove:true});
+	        },
+	        
+	        getTr : function() {
+	        	if (!taskRunner) {
+	        		taskRunner = new Ext.util.TaskRunner();
+	        	}
+	        	return taskRunner;
 	        }
 			
 		});

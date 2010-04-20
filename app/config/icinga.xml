@@ -191,18 +191,13 @@
 			
 			<parameter>
 				<parameter name="module">AppKit</parameter>
-				<parameter name="action">Ext.HeaderNavigation</parameter>
-				<parameter name="output_type">javascript</parameter>
-			</parameter>
-			
-			<parameter>
-				<parameter name="module">AppKit</parameter>
 				<parameter name="action">Ext.ApplicationState</parameter>
 				<parameter name="output_type">javascript</parameter>
 				<parameter name="arguments">
 					<parameter name="cmd">init</parameter>
 				</parameter>
 			</parameter>
+
 		</parameter>
 		
 		<!-- Inline scripts to include url's -->
@@ -216,12 +211,11 @@
 		* You have to predefine the libraries
 	-->
 	<setting name="appkit.include_dynamic_javascript">
-		<parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
+		<parameter name="Cronk.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
 		<parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</parameter>
 		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
 		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
 	</setting>
-
 	<!--
 		Doctrine pager configuration
 		* deprecated, test to remove
