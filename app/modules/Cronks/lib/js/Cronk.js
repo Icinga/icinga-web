@@ -53,7 +53,7 @@ Cronk.defaults.SETTINGS = {
 Cronk.defaults.CONFIG_ITEMS = [
 	'loaderUrl', 'params', 'crname',
 	'autoRefresh', 'cdata', 'cenv',
-	'autoLayout'
+	'autoLayout', 'cmpid', 'stateuid'
 ];
 
 Cronk.defaults.CONFIG_COPY = [
@@ -142,13 +142,13 @@ Cronk.defaults.CONFIG_COPY = [
 		
 		onComponentRender : function(c) {
 			this.getUpd();
-			this.onComponentRefresh();
+			if (this.cmpConfig.autoRefresh == true) {
+				this.onComponentRefresh();
+			}
 		},
 		
 		onComponentRefresh : function(cronk, me) {
-			if (this.cmpConfig.autoRefresh == true) {
-				this.getUpd().update(this.getUpdaterConfig());
-			}
+			this.getUpd().update(this.getUpdaterConfig());
 		},
 		
 		onComponentDestroy : function(c) {
@@ -166,20 +166,27 @@ Cronk.defaults.CONFIG_COPY = [
 			
 			// console.log(lcmp.getId() + ' rendered: ' + lcmp.rendered);
 			
-			lcmp.on('render', this.onComponentRender, this);
-			lcmp.on('destroy', this.onComponentDestroy, this);
-			lcmp.on('added', this.onComponentAdded, this);
-			
 			if (lcmp.rendered == true) {
 				this.onComponentRefresh();
 			}
+			else {
+				lcmp.on('afterrender', this.onComponentRender, this, { single: true });
+				lcmp.on('added', this.onComponentAdded, this);
+			}
 			
+			lcmp.on('destroy', this.onComponentDestroy, this);
 		},
 		
 		applyCronkConfig: function() {
 			// Apply the base
 			this.cmp.cronkConfig = {};
+			
 			Ext.applyIf(this.cmp, this.configDefaults);
+			
+			Ext.applyIf(this.cmp, {
+				stateuid: Ext.id(null, 'cronk-sid'),
+				cmpid: Ext.id(null, 'cronk-cid')
+			});
 			
 			Ext.copyTo(this.cmp.cronkConfig, this.cmp, this.configItems);
 			
@@ -191,6 +198,7 @@ Cronk.defaults.CONFIG_COPY = [
 			}, this);
 			
 			this.cmp.cronkConfig.id = this.cmp.getId();
+			
 			
 			// Create a reference for us
 			this.cmpConfig = this.cmp.cronkConfig;
@@ -221,8 +229,13 @@ Cronk.defaults.CONFIG_COPY = [
 				
 				this.cmpRequestParams = {
 					parentid: id,
-					stateuid: this.cmp.stateId || id
+					stateuid: this.cmpConfig.stateuid,
+					cmpid: this.cmpConfig.cmpid
 				};
+				
+				if (this.cmp.stateful) {
+					this.cmpRequestParams.stateuid = this.cmp.stateId;
+				}
 				
 				Ext.iterate(this.cmpConfig.params, function(k, v) {
 					this.cmpRequestParams['p[' + k +  ']'] = v;
@@ -251,7 +264,7 @@ Cronk.defaults.CONFIG_COPY = [
 		var task = new Ext.util.DelayedTask(function() {
 			this.layoutQueue.shift();
 			if (this.layoutQueue.length == 0) {
-				AppKit.util.Layout.doLayout(null, 10);
+				AppKit.util.Layout.doLayout(null, 300);
 			}
 			
 		}, _CRUTIL);

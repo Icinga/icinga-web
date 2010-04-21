@@ -144,6 +144,7 @@ Cronk.grid.MetaGridCreator.prototype = {
 			animCollapse:		true,
 			border:				false,
 			emptyText:			"No data was found ...",
+			layout:				'fit',
 						
 			// Custom properties for our custom
 			// object

@@ -472,6 +472,8 @@ table.icinga-attribute-table td.val {
 	background: none;
 }
 
+.icinga-icon-dot { background-image: url(../images/icinga/idot-icon.png) !important; background-repeat: no-repeat; }
+
 /** ExtJS grid classes **/
 .x-icinga-grid-link {
 	color: #0000ff;

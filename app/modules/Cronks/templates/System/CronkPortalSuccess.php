@@ -8,7 +8,7 @@ Ext.onReady(function() {
 
 	var parentcmp = Ext.getCmp('<?php echo $parentid; ?>');
 
-	var portal = parentcmp.add({
+	var portal = AppKit.util.Layout.addTo({
 		xtype: 'panel',
 		
 		layout: 'border',
@@ -38,7 +38,7 @@ Ext.onReady(function() {
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaStatusSummary',
-				columnWidth: 1,
+				width: 380,
 				params: { otype: 'text' },
 				border: false
 			}]
@@ -96,7 +96,8 @@ Ext.onReady(function() {
 		
 	});
 	
-	parentcmp.doLayout();
+	AppKit.util.Layout.doLayout(null, null, true);	
+	AppKit.util.Layout.doLayout(null, 2000, true);
 	
 });
 </script>

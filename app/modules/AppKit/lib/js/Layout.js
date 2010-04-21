@@ -16,7 +16,7 @@ Ext.onReady(function() {
 				layout: 'border',
 				defaults: { border: false },
 				items: [
-					{ layout: 'fit', region: 'north', id: 'viewport-north', border: false, height: 25 }, 
+					{ layout: 'fit', region: 'north', id: 'viewport-north', border: false, height: 30 }, 
 					{ layout: 'fit',region: 'center', id: 'viewport-center', border: false, contentEl: 'content' }
 				]
 			});
@@ -38,14 +38,37 @@ Ext.onReady(function() {
 				Ext.onReady(this.getViewport, _LAYOUT);
 			},
 			
-			doLayout : function(n, buffer) {
-				n = (n||'center');
+//			on : function() {
+//				var v = this.getViewport();
+//				return v.on.apply(v, arguments);
+//			},
+			
+			doLayout : function(n, buffer, hard) {
+				n = (n||'__VIEWPORT');
 				buffer = (buffer?new Number(buffer):0);
+				hard = (hard||false);
 				
-				var fn=function() { this.byName(n).doLayout() };
+				
+				
+				var cmp=null, fn, args=[];
+				
+				cmp=((n=='__VIEWPORT') ? this.getViewport() : this.byName(n).doLayout());
+				
+				if (!cmp) return;
+				
+				if (hard !==false) {
+					args = [false, true];
+				}
+				
+				fn=(function() {
+					this.doLayout.apply(this, arguments);
+				}).createDelegate(cmp, args);
+				
+				// cmp.doLayout.createDelegate(cmp, args);
 				
 				if (buffer>0) {
-					
+					var task = new Ext.util.DelayedTask(fn, this);
+					task.delay(buffer);
 				}
 				else {
 					fn.call(this);
@@ -54,11 +77,11 @@ Ext.onReady(function() {
 			
 			addTo : function(item, dlayout, rname) {
 				rname = (rname||'center');
-				dlayout = (dlayout?new Number(dlayout):8);
+				dlayout = (dlayout?new Number(dlayout):0);
 				var rv = this.byName(rname).add(item);
 				
 				if (dlayout>0) {
-					var task = new Ext.util.DelayedTask(this.doLayout, this, [rname]);
+					var task = new Ext.util.DelayedTask(this.doLayout, this);
 					task.delay(dlayout);
 				}
 				

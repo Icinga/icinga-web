@@ -148,4 +148,7 @@
 		}
 				
 	}))();
+	
+	AppKit.ScriptDynaLoader = AppKit.util.ScriptDynaLoader;
+	
 })();

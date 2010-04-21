@@ -18,6 +18,16 @@ implements AgaviISingletonModel, AppKitNavContainerInterface
 	 */
 	private $ro = null;
 	
+	/**
+	 * 
+	 * @return unknown_type
+	 */
+	private static $extjs_attribute_map = array (
+		'extjs-handler'	=> 'handler',
+		'extjs-href'	=> 'href',
+		'extjs-iconcls'	=> 'iconCls'
+	);
+	
 	public function __construct() {
 		$this->navContainer = new AppKitNavContainer();
 	}
@@ -83,8 +93,11 @@ implements AgaviISingletonModel, AppKitNavContainerInterface
 				$tmp['href'] = $this->ro->gen($item->getRoute());
 			}
 			
-			if ($item->getJsHandler()) {
-				$tmp['handler'] = $item->getJsHandler();
+			// Mapping custom attribute agains the extjs library
+			foreach (self::$extjs_attribute_map as $name=>$jsname) {
+				if ($item->hasAttribute($name)) {
+					$tmp[$jsname] = $item->getAttribute($name);
+				}
 			}
 			
 			if ($item->hasChildren()) {

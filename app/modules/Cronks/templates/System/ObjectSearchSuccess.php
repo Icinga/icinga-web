@@ -319,8 +319,7 @@
 	});
 	
 	coParent.add(oSearch);
-	
-	coParent.add(oSearch);
+	coParent.doLayout();
 	
 })();
 
