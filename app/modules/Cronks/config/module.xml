@@ -34,6 +34,8 @@
 					href="cronks.xml#xpointer(setting/node())" />
 				</setting>
 				
+				<!--
+				
 				<setting name="dynamicscripts">
 					<ae:parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
 					<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
@@ -41,6 +43,8 @@
 					<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
 				</setting>
 				
+				-->
+			
 			</settings>
 		</module>
 		

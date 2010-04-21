@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <setting xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
+		<!--
+
+		<ae:parameter name=" <Unique identifier of of the cronk> ">
+			<ae:parameter name="module"> <Agavi module name> </ae:parameter>
+			<ae:parameter name="action"> <Name of the AgaviAction> </ae:parameter>
+			<ae:parameter name="hide"> <Hidden flag true|false for list views> </ae:parameter>
+			<ae:parameter name="description"> <Short descript for quick tips> </ae:parameter>
+			<ae:parameter name="name"> <Name of the cronk, simply a short label> </ae:parameter>
+			<ae:parameter name="categories"> <comma seperated list of category names> </ae:parameter>
+			<ae:parameter name="groupsonly"> <Comma seperated string of agavi group names> </ae:parameter>
+			
+			* Specific cronk parameters which will predefine the action
+			
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="template">icinga-tactical-overview-template</ae:parameter>
+			</ae:parameter>
+			
+			<ae:parameter name="disabled"> <true|false completely disable the cronk for execution> </ae:parameter>
+		</ae:parameter>
+		
+		-->
+
 		<!-- 
 			Default grid proc, do not change anything
 		-->

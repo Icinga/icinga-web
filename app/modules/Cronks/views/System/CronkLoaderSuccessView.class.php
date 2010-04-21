@@ -7,39 +7,31 @@ class Cronks_System_CronkLoaderSuccessView extends ICINGACronksBaseView
 		
 		$this->setAttribute('title', 'Icinga.CronkLoader');
 		
+		$tm = $this->getContext()->getTranslationManager();
+		
 		try {
-			$cronks		= AgaviConfig::get('modules.cronks.cronks');
-			$cronk		= $rd->getParameter('cronk'); 
 			
-			$parameters = new AgaviParameterHolder($rd->getParameter('p', array()));
+			$model = $this->getContext()->getModel('System.CronkData', 'Cronks', array('filter' => 'exec'));
 			
-			if ($parameters->getParameter('cmpid', null) == null) {
-				$parameters->setParameter('cmpid', 'cronk-'. AppKitRandomUtil::genSimpleId(10));
-			}
+			$crname = $rd->getParameter('cronk'); 
+			
+			$parameters = array() + (array)$rd->getParameter('p', array());
+			
+			if ($model->hasCronk($crname)) {
+				$cronk = $model->getCronk($crname);
 				
-			if (array_key_exists($cronk, $cronks)) {
-				$meta = $cronks[$cronk];
-				
-				if (array_key_exists('ae:parameter', $meta) && is_array($meta['ae:parameter'])) {
-					foreach ($meta['ae:parameter'] as $pKey=>$pVal) {
-						if ($parameters->getParameter($pKey, null) == null) {
-							$parameters->setParameter($pKey, $pVal);
-						}
-					}
+				if (array_key_exists('ae:parameter', $cronk)) {
+					$parameters = (array)$cronk['ae:parameter'] + $parameters;
 				}
-			}
-			
-			if (array_key_exists($cronk, $cronks)) {
-				$module = $cronks[$cronk]['module'];
-				$action = $cronks[$cronk]['action'];
-				return $this->createForwardContainer($module, $action, $parameters->getParameters(), 'simple', 'read');
+				
+				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple', 'read');
 			}
 			else {
-				return 'Sorry, the cronk could not be loaded (not exist)';
+				return $tm->_('Sorry, cronk "%s" not found', null, null, array($crname));
 			}
 		}
 		catch (Exception $e) {
-			return $e->getMessage();
+			return $tm->_('Exception thrown: %s', null, null, array($e->getMessage()));
 		}
 		
 		return 'Some strange error occured';
