@@ -1,4 +1,3 @@
-Ext.ns('Cronk.util', 'Cronk.items');
 
 Cronk.util.StructUtil = function(){
 	

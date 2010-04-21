@@ -1,10 +1,8 @@
-Ext.ns('AppKit.util');
-
 AppKit.util = (function() {
 	var pub = {};
 	var pstores = new Ext.util.MixedCollection(true);
 	
-	Ext.apply(pub, {
+	return Ext.apply(pub, {
 		contentWindow : function(uconf, wconf) {
 	
 			Ext.applyIf(wconf, {
@@ -51,8 +49,6 @@ AppKit.util = (function() {
 		}
 		
 	});
-	
-	return pub;
 })();
 	
 	

@@ -184,11 +184,9 @@ Ext.onReady(function() {
 		return pub;
 	}();
 	
-	AppKit.Layout.getCenter().add({
+	AppKit.util.Layout.addTo({
 		items: oLogin.getPanel()
 	});
-	
-	AppKit.Layout.doLayout();
 
 });
 </script>

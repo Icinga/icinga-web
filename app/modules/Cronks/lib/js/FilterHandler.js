@@ -1,6 +1,3 @@
-// Namespace
-Ext.ns('AppKit.Ext');
-
 // Our class
 Cronk.FilterHandler = function() {
 	Cronk.FilterHandler.superclass.constructor.call(this);

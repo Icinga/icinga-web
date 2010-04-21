@@ -12,8 +12,6 @@
 		
 		<?php echo $slots['head']; ?>
 		
-		<?php echo $slots['head_navigation']; ?>
-		
 		<?php echo $slots['head_start']; ?>
 		
 	</head>

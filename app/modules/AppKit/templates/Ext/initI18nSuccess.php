@@ -3,7 +3,7 @@
 	$default = $t['default'];
 	if (!is_array($files) && !count($files)) return;
 ?>
-Ext.onReady(function() {
+AppKit.onReady(function() {
 	var l = {};
 	<?php foreach ($files as $domain=>$json): ?>
 
@@ -15,12 +15,12 @@ Ext.onReady(function() {
 
 	<?php endforeach; ?>
 	
-	APPKIT.lib.Gettext = new Gettext({
+	AppKit.util.Gettext = new Gettext({
 		domain: "<?php echo $default; ?>",
 		locale_data: l
 	});
 	
 	// Make this more global available
-	window['_'] = APPKIT.lib.Gettext.gettext.createDelegate(APPKIT.lib.Gettext);
-	window['_gt'] = APPKIT.lib.Gettext;
-});
+	window._ = AppKit.util.Gettext.gettext.createDelegate(AppKit.util.Gettext);
+	window._gt = AppKit.util.Gettext;
+}, window);

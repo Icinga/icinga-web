@@ -1,7 +1,5 @@
-
 (function() {
-
-	AppKit.ScriptDynaLoader = new (Ext.extend(Ext.util.Observable, {
+	AppKit.util.ScriptDynaLoader = new (Ext.extend(Ext.util.Observable, {
 		
 		constructor : function() {
 				
@@ -150,5 +148,4 @@
 		}
 				
 	}))();
-
 })();

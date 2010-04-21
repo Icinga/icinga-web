@@ -1,161 +1,147 @@
 Ext.onReady(function() {
+	 
+	var _LAYOUT,
+	_UTIL = AppKit.util,
+	_A = AppKit,
+	_FE = AppKit.fireEvent;
 	
-	Ext.ns('AppKit.Layout');
-
-	/**
-	 * AppKit.Layout
-	 * 
-	 * Singleton class of the site implementation
-	 * 
-	 */	
-	AppKit.Layout = (function() {
+	_UTIL.Layout = new (_LAYOUT=Ext.extend(Object, function() {
 		
-		var queue = [];
+		// - Private
+		var viewport = null,
 		
-		var pub = {};
-		var contentel = 'content';
-		var viewport = null;
-		var center = null;
-		var north = null;
-		var menu = null;
+		createNew = function() {
+			return new Ext.Viewport({
+				id: 'appkit-viewport',
+				layout: 'border',
+				defaults: { border: false },
+				items: [
+					{ layout: 'fit', region: 'north', id: 'viewport-north', border: false, height: 25 }, 
+					{ layout: 'fit',region: 'center', id: 'viewport-center', border: false, contentEl: 'content' }
+				]
+			});
+		};
 		
-		var decodeHandler = function(obj) {
-			var f = function (o) {
-				for (var t in o) {
-					if (typeof(o[t])=='object') f(o[t]);
-					else if (t == 'handler') o[t] = Ext.decode(o[t]);
+		// - Public
+		return {
+			cidmap : {
+				main	: 'appkit-viewport',
+				center	: 'viewport-center',
+			 	north	: 'viewport-north',
+			 	menu	: 'viewport-menu',
+			 	coel	: 'content', 
+			},
+			
+			constructor : function() {
+				_LAYOUT.superclass.constructor.call(this);
+				
+				Ext.onReady(this.getViewport, _LAYOUT);
+			},
+			
+			doLayout : function(n, buffer) {
+				n = (n||'center');
+				buffer = (buffer?new Number(buffer):0);
+				
+				var fn=function() { this.byName(n).doLayout() };
+				
+				if (buffer>0) {
+					
 				}
-			}
+				else {
+					fn.call(this);
+				}
+			},
 			
-			if (typeof(window['_']) == 'undefined') {
-				window['_'] = function(v) { return v; }
-			}
+			addTo : function(item, dlayout, rname) {
+				rname = (rname||'center');
+				dlayout = (dlayout?new Number(dlayout):8);
+				var rv = this.byName(rname).add(item);
+				
+				if (dlayout>0) {
+					var task = new Ext.util.DelayedTask(this.doLayout, this, [rname]);
+					task.delay(dlayout);
+				}
+				
+				return rv;
+			},
 			
-			f(obj);
+			byName : function(n) {
+				if (Ext.isDefined(this.cidmap[n])) {
+					return this.getViewport().items.get( this.cidmap[n] );
+				}
+				return null
+			},
 			
-			delete(window['_']);
+			getNorth : function() {
+				return this.byName('north');
+			},
 			
-			return obj;
-		}
-		
-		/**
-		 * public
-		 */
-		Ext.apply(pub, {
+			getCenter : function() {
+				return this.byName('center');
+			},
 			
-			getViewport: function() {
+			getViewport : function() {
+				if (!viewport) {
+					viewport = createNew();
+				}
 				return viewport;
 			},
 			
-			getContentEl: function() {
-				return contentel;
-			},
-			
-			getCenter: function() {
-				return center;
-			},
-			
-			getNorth: function() {
-				return north;
-			},
-			
-			addCenter: function(items, autol) {
-				autol = autol || false;
+			_decodeMenuData : function (obj) {
 				
-				if (center) {
-					center.add(items);
+					var f = function (o) {
+						for (var t in o) {
+							if (typeof(o[t])=='object') f(o[t]);
+							else if (t == 'handler') o[t] = Ext.decode(o[t]);
+						}
+					}
 					
-					if (autol) {
-						this.doLayout();
-					}
-				}
-				else {
-					alert("ohoh");
-					queue.push(items);
-				}
-			},
-			
-			doLayout: function() {
-				this.getViewport().doLayout();
-			},
-			
-			getMenu : function() {
-				return menu;
-			},
-			
-			setMenu: function(json) {
-				
-				if (menu) {
-					throw("Menu already exists");
-				}
-				
-				json = decodeHandler(json || {});
-				
-				menu = north.add({
-					layout: 'column',
-					id: 'menu',
-					border:false,
-					items: [{
-						tbar: new Ext.Toolbar({
-							id: 'menu-bar',
-							items: json['items'] || {}
-						}),
-						columnWidth: 1,
-						border: false
-					}, {
-						id: 'menu-user',
-						width: 150,
-						border: false
-					}, {
-						id: 'menu-logo',
-						width: 25,
-						border: false
-						
-					}]
-				});
-				
-				north.doLayout();
+					// if (typeof(window['_']) == 'undefined') {
+					// 	window['_'] = function(v) { return v; }
+					// }
+					
+					f(obj);
+					
+					// delete(window['_']);
+					
+					return obj;
 			}
-			
-		});
+		}
 		
-		viewport = new Ext.Viewport({
-			layout: 'border',
-			
-			defaults: {
-				border: false
-			},
-			
-			items: [{
-				layout: 'fit',
-				region: 'north',
-				id: 'viewport-north',
-				border: false,
-				height: 25,
-				listeners: {
-					afterrender: function(p) {
-						north = p;
-						AppKit.fireEvent('north-ready', north, pub);
-					}
-				}
-			}, {
-				layout: 'fit',
-				region: 'center',
-				id: 'viewport-center',
-				border: false,
-				contentEl: contentel,
-				listeners: {
-					afterrender: function(p) {
-						center = p;
-						AppKit.fireEvent('center-ready', north, pub);
-					}
-				}
-			}]
-		});
-		
-		center = viewport.get('viewport-center');
-		north = viewport.get('viewport-center');
-		
-		return pub;
-	})();
+	}()));
+	
+	_A.Layout = _UTIL.Layout;
+
+//		
+//		setMenu: function(json) {
+//			var north = this.getNorth();
+//			json = this._decodeMenuData((json || {}));
+//			var menu = north.add({
+//				layout: 'column',
+//				autoHeight: true,
+//				id: this.fuid_menu,
+//				border:false,
+//				items: [{
+//					tbar: new Ext.Toolbar({
+//						id: 'menu-bar',
+//						items: json['items'] || {}
+//					}),
+//					columnWidth: 1,
+//					border: false
+//				}, {
+//					id: 'menu-user',
+//					width: 150,
+//					border: false
+//				}, {
+//					id: 'menu-logo',
+//					width: 25,
+//					border: false
+//					
+//				}]
+//			});
+//		}
+//	 	
+//	 });
+
+
 });

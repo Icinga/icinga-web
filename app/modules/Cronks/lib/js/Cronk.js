@@ -1,250 +1,281 @@
-(function() {
+Ext.ns('Cronk');
 
-	Ext.ns('Cronk', 'Cronk.items');
-
-	/**
-	 * Cronks singleton
-	 * 
-	 * @this{Cronks}
-	 */	
-	Cronk = (function() {
+/**
+ * Cronks singleton
+ * 
+ * @this{Cronks}
+ */	
+Cronk = (function(){
+	
+	return {
+		getLoaderUrl : function(crname, url) {
+			if (!Ext.isDefined(url)) {
+				url = Cronk.defaults.SETTINGS.loaderUrl
+			}
+			return String.format('{0}/{1}/{2}', AppKit.c.path, url, crname); 
+		},
 		
-		var pub = {};
-		var ci = 0;
+		copyObjectConfig : function(dest, cmp) {
+			dest = Ext.copyTo(dest || {}, cmp, Cronk.defaults.CONFIG_COPY);
+			Ext.apply(dest, cmp.cronkConfig);
+			return dest;
+		},
 		
-		Ext.apply(pub, {
-			
-			getLoaderUrl : function(crname, url) {
-				if (!Ext.isDefined(url)) {
-					url = Cronk.defaults.SETTINGS.loaderUrl
-				}
-				return String.format('{0}/{1}/{2}', AppKit.c.path, url, crname); 
-			},
-			
-			removeCci : function(config, items) {
-				Ext.each(items, function(item, index, l) {
-					if (Ext.isDefined(config[item])) {
-						delete(config[item]);
-					}
-				})
-				return config;
-			},
-			
-			extractConfig : function (config) {
-				var o = Ext.copyTo({}, config, Cronk.defaults.CONFIG_ITEMS);
-				this.removeCci(config, Cronk.defaults.CONFIG_ITEMS);
-				return o;
-			},
-			
-			factory : function(config) {
-				// Apply the needed config to our cronk
-				if (Ext.isDefined(config['xtype']) && config.xtype !== 'cronk') {
-					var p = Ext.ComponentMgr.types[ config.xtype ];
-					Ext.iterate(p.prototype, function(k, v) {
-						if (!Ext.isFunction(v)) {
-							config[k] = v;
-						}
-					});
-				}
-				config.xtype = 'cronk';
-				console.log(config);
-				return new Cronk.Container(config);
+		factory : function(config) {
+			// Apply the needed config to our cronk
+			if (Ext.isDefined(config['xtype']) && config.xtype !== 'cronk') {
+				config.ptype = 'cronk-plugin'
 			}
 			
-		});
-		
-		return pub;
-	})();
-	
-	/*
-	 * Default cronk settings
-	 */
-	Ext.ns('Cronk.defaults', 'Cronk.lib');
-	
-	Cronk.lib.Registry = function() {
-		Cronk.lib.Registry.superclass.constructor.call(this, false);
+			return Ext.create(config, 'cronk');
+		}
 	}
 	
-	Ext.extend(Cronk.lib.Registry, Ext.util.MixedCollection, {
+})();
+
+Ext.ns('Cronk.defaults', 'Cronk.lib', 'Cronk.util');
+
+/**
+ * Cronk defaults
+ */
+Cronk.defaults.SETTINGS = {
+	loaderUrl:		'web/cronks/cloader',
+	autoLayout:		false,
+	autoRefresh:	true,
+	params:			{},
+	cdata:			{},
+	cenv:			{},
+	
+	// Some default panel configs
+	layout: 		'fit'
+}
+
+Cronk.defaults.CONFIG_ITEMS = [
+	'loaderUrl', 'params', 'crname',
+	'autoRefresh', 'cdata', 'cenv',
+	'autoLayout'
+];
+
+Cronk.defaults.CONFIG_COPY = [
+	'title', 'id', 'xtype',
+	'closable', 'draggable', 'resizable',
+	'cls', 'frame', 'duration', 'pinned',
+	'border', 'layout'
+];
+
+/**
+ * Cronk Registry
+ */
+(function() {
+	
+	var _REGISTRY;
+	
+	Cronk.Registry = new (_REGISTRY=Ext.extend(Ext.util.MixedCollection, {
+		constructor: function() {
+			_REGISTRY.superclass.constructor.call(this, false);
+		},
+		
 		get : function(key) {
-			var i = Cronk.lib.Registry.superclass.get.call(this, key);
+			var i = _REGISTRY.superclass.get.call(this, key);
 			if (i) {
 				var cronk = Ext.getCmp(i.id);
 				if (cronk) {
-					Ext.apply(i, cronk.initialCronkConfig());
+					Cronk.copyObjectConfig(i, cronk);
 					this.replace(key, i);
 				}
 			}
 			return i;
 		}
-	});
-	
-	Cronk.Registry = new Cronk.lib.Registry();
-	
-	/**
-	 * Cronk defaults
-	 */
-	Cronk.defaults.SETTINGS = {
-		loaderUrl:	'web/cronks/cloader',
-		layout:		'fit',
-		xtype:		'panel',
-		autoLayout: false,
-		autoRefresh: true
-	}
-	
-	Cronk.defaults.CONFIG_ITEMS = [
-		'loaderUrl', 'params', 'crname',
-		'cmpid', 'parentid', 'stateuid',
-		'autoLayout', 'autoRefresh',
-		'cronkEnv'
-	];
-	
-	Cronk.defaults.CONFIG_COPY = [
-		'title', 'id', 'xtype',
-		'closable', 'draggable', 'resizable',
-		'cls', 'frame', 'duration', 'pinned',
-		'border'
-	];
-	
-	Ext.Ajax.on('beforerequest', function(conn, o) {
-//		console.log(conn);
-//		console.log(o);
-//		console.log('-----------------------------');
-	});
-	
-	/**
-	 * Cronk implementation as extjs element
-	 */
-	
-	Cronk.Container = function(config) { 
-		
-		this.listeners = config.listeners;
-		
-		this.addEvents({
-			'refresh': true
-		});
-		
-		this.rparams = null;
-		this.uref = null;
-		
-		this.applyCronkConfig(config);
-		
-		Cronk.Container.superclass.constructor.call(this, config);
-		
-		Cronk.Registry.add(this.initialCronkConfig(Cronk.defaults.CONFIG_COPY));
+	}))();
 
-		this.iscronk = true;
+})();
 
-		this.on('destroy', function(c) {
-			Cronk.Registry.removeKey(c.id);
-		}, this);
-	};
+/**
+ * Cronk implementation as plugin
+ */
+(function() {
 	
-	Ext.extend(Cronk.Container, Ext.Panel, {
+	var _CRPLUG, _CRUTIL = Cronk.util;
+	
+	_CRPLUG = Ext.extend(Object, {
 		
-		cronkConfig : {},
-		cronkParams : {},
+		initialConfig	: {},
+		cmp				: null,
+		cmpConfig		: null,
+		cmpUpdater		: null,
+		forceId			: false,
+		idprefix		: false,
 		
-		initialCronkConfig : function(items) {
-			var l = this.cronkConfig;
+		constructor: function(config) {
 			
-			items = (items || Cronk.defaults.CONFIG_COPY);
+			_CRPLUG.superclass.constructor.call(this);
+			
+			Ext.apply(this, {
+				configCopy: Cronk.defaults.CONFIG_COPY,
+				configItems: Cronk.defaults.CONFIG_ITEMS,
+				configDefaults: Cronk.defaults.SETTINGS,
+				forceId: false,
+				idprefix: 'cronk'
+			});
+			
+			this.initialConfig = config || {};
+			Ext.apply(this, this.initialConfig);
+			
+			if (Ext.isDefined(config.cmp)) {
+				this.init(config.cmp);
+			}
+			
+			return this;
+		},
+		
+		init: function(c) {;
+			if (!this.cmp) {
+				this.cmp = c;
+			}
+			
+			this.applyCronkConfig();
+			
+			this.applyCronkEvents();
+			
+			Cronk.Registry.add(this.getCronkInitialConfig(this.configCopy));
+		},
+		
+		onComponentRender : function(c) {
+			this.getUpd();
+			this.onComponentRefresh();
+		},
+		
+		onComponentRefresh : function(cronk, me) {
+			if (this.cmpConfig.autoRefresh == true) {
+				this.getUpd().update(this.getUpdaterConfig());
+			}
+		},
+		
+		onComponentDestroy : function(c) {
+			Cronk.Registry.removeKey(this.cmp.getId());
+		},
+		
+		onComponentAdded : function(c, container, index) {
+			if (this.cmpConfig.autoLayout == true) {
+				_CRUTIL.layoutHandler(c);
+			}
+		},
+		
+		applyCronkEvents : function() {		
+			var lcmp = this.cmp;
+			
+			// console.log(lcmp.getId() + ' rendered: ' + lcmp.rendered);
+			
+			lcmp.on('render', this.onComponentRender, this);
+			lcmp.on('destroy', this.onComponentDestroy, this);
+			lcmp.on('added', this.onComponentAdded, this);
+			
+			if (lcmp.rendered == true) {
+				this.onComponentRefresh();
+			}
+			
+		},
+		
+		applyCronkConfig: function() {
+			// Apply the base
+			this.cmp.cronkConfig = {};
+			Ext.applyIf(this.cmp, this.configDefaults);
+			
+			Ext.copyTo(this.cmp.cronkConfig, this.cmp, this.configItems);
+			
+			// Rempove the old stuff
+			Ext.iterate(this.configItems, function(k,i) {
+				if (Ext.isDefined(this.cmp[k])) {
+					delete this.cmp[k];
+				}
+			}, this);
+			
+			this.cmp.cronkConfig.id = this.cmp.getId();
+			
+			// Create a reference for us
+			this.cmpConfig = this.cmp.cronkConfig;
+		},
+		
+		getUpd : function() {
+			if (!this.cmpUpdater) {
+				this.cmpUpdater = this.cmp.getUpdater();
+			}
+			
+			return this.cmpUpdater;
+		},
+		
+		getUpdaterConfig: function() {
+			var c = this.cmpConfig;
+			return {
+				url: Cronk.getLoaderUrl(c.crname, c.loaderUrl),
+				params: this.getRequestParams(),
+				scripts: true,
+				scope: this
+			};
+		},
+		
+		getRequestParams: function() {
+			if (!this.cmpRequestParams) {
+				
+				var id=this.cmp.getId();
+				
+				this.cmpRequestParams = {
+					parentid: id,
+					stateuid: this.cmp.stateId || id
+				};
+				
+				Ext.iterate(this.cmpConfig.params, function(k, v) {
+					this.cmpRequestParams['p[' + k +  ']'] = v;
+				}, this);
+			}
+			return this.cmpRequestParams;
+		},
+		
+		getCronkInitialConfig : function(items) {
+			var l = this.cmpConfig;
 			
 			if (Ext.isArray(items)) {
-				Ext.copyTo(l, this, items);
+				Ext.copyTo(l, this.cmp, items);
 			}
 			
 			delete(l.loaderUrl);
 			
 			return l;
 		},
-		
-		onRender : function(ct, position) {
-			Cronk.Container.superclass.onRender.call(this, ct, position);
-			
-			this.getUpdater();
-			
-			if (this.cronkConfig.autoRefresh == true) {
-				this.getUpdater().refresh();
-			}
-		},
-		
-		onRefresh : function(el, res) {
-			this.doLayout();
-			this.fireEvent('refresh', this);
-		},
-		
-		getUpdater : function() {
-			if (!this.uref) {
-				this.uref = Cronk.Container.superclass.getUpdater.call(this);
-				this.uref.setDefaultUrl({
-					url : this.loaderUrl(),
-					scripts: true,
-					params: this.requestParams(),
-				});
-				
-				this.uref.on('update', this.onRefresh, this, { delay: 2 });
-			}
-			
-			return this.uref;
-		},
-		
-		applyCronkConfig : function(config) {
-			var id = null;
-			var ls = Ext.apply({}, Cronk.defaults.SETTINGS);
-			
-			if (config.parentid) {
-				id = config.parentid;
-			}
-			else {
-				id = (config.id) ? config.id : Ext.id(null, 'cronkitem-');
-			}
-
-			if (!config.parentid) config.parentid=id;
-			
-			if (config.stateId) {
-				config.stateuid = config.stateId;
-			}
-			else {
-				config.stateuid = id;
-			}
-			
-			config = Ext.applyIf(config, ls);
-
-			this.cronkParams = Ext.applyIf(config.params || {}, {
-				parentid: config.parentid || id,
-				stateuid: config.stateuid || id
-			});
-			
-			config.id = id;
-			
-			this.cronkConfig = Cronk.extractConfig(config);
-		},
-		
-		requestParams : function() {
-			if (!this.rparams) {
-				this.rparams = {};
-				for (var i in this.cronkParams) {
-					this.rparams['p[' +  i + ']'] = this.cronkParams[i]; 
-				}
-			}
-			return this.rparams;
-		},
-		
-		loaderUrl : function() {
-			return Cronk.getLoaderUrl(this.cronkConfig.crname, this.cronkConfig.loaderUrl);
-		},
-		
-		cronkEnvStore : function() {
-			return AppKit.util.getStore('cronk-environment');
-		},
-		
-		doRefresh : function() {
-			this.getUpdater().refresh();
-		}
-		
 	});
 	
-	Ext.reg('cronk', Cronk.Container);
+	_CRUTIL.layoutQueue = [];
+	_CRUTIL.layoutHandler = function(cmp) {
+		_CRUTIL.layoutQueue.push(cmp.getId());
+		
+		var task = new Ext.util.DelayedTask(function() {
+			this.layoutQueue.shift();
+			if (this.layoutQueue.length == 0) {
+				AppKit.util.Layout.doLayout(null, 10);
+			}
+			
+		}, _CRUTIL);
+		
+		task.delay(100);
+	}
+	
+	_CRUTIL.CPlugin = _CRPLUG;
+	Cronk.CPlugin = _CRPLUG;
+	
+	Ext.preg('cronk-plugin', _CRPLUG);
 	
 })();
+
+/**
+* Cronk implementation as extjs element
+ */
+
+Cronk.Container = Ext.extend(Ext.Panel, {
+	initComponent: function() {
+		Cronk.Container.superclass.initComponent.call(this);
+		
+		this.CronkPlugin = new Cronk.util.CPlugin({ cmp: this });
+	}
+});
+
+Ext.reg('cronk', Cronk.Container);

@@ -9,22 +9,36 @@
 <script type="text/javascript">
 Ext.onReady(function() {
 	var umenu = Ext.getCmp('menu-user');
-            
-            var UserMenu = (function() {
-                var pub = {};
-                var auth = '<?php echo ($auth) ? 'true' : 'false'; ?>';
-                var umenu = Ext.getCmp('menu-user');
-                var logo = Ext.getCmp('menu-logo');
-                var amenu = null;
-                
-                
-                
-                umenu.add({
-                	border: false,
-                    tbar: new Ext.Toolbar({
-                        id: 'menu-user-sub',
-                        items: [{
-                        	
+	var UserMenu = (function() {
+	    var pub = {};
+	    var auth = '<?php echo ($auth) ? 'true' : 'false'; ?>';
+		var json = null;
+		
+		try {
+			json=AppKit.util.Layout._decodeMenuData((<?php echo $t['json_menu_data']; ?>));
+		}
+		catch(e) {}
+
+		AppKit.util.Layout.addTo({
+			layout: 'column',
+			autoHeight: true,
+			id: this.fuid_menu,
+			border:false,
+			items: [{
+				tbar: new Ext.Toolbar({
+					id: 'menu-bar',
+					items: json['items'] || {}
+				}),
+				columnWidth: 1,
+				border: false
+			}, {
+				id: 'menu-user',
+				width: 150,
+				border: false,
+				items: {
+			        tbar: new Ext.Toolbar({
+			            id: 'menu-user-sub',
+			            items: [{
 			                <?php if ($auth === true): ?>
 			                
 			                menu: {
@@ -50,32 +64,39 @@ Ext.onReady(function() {
 			                    }
 			                },
 			                iconCls: 'silk-user',
-			                
 			                <?php else: ?>
-			                
 			                iconCls: 'silk-user-delete',
-			                
 			                <?php endif; ?>
 			                text: '<?php echo $username; ?>'
-                        }]
-                    })
-                });
-                
-                logo.add({
-                    border: false,
-                    width: 25,
-                    height: 25,
-                    autoEl: {
-                        tag: 'img',
-                        src: AppKit.c.path + '/images/icinga/idot-small.png'
-                    }
-                });
-                
-                logo.el.on('click', function() {
-                    AppKit.changeLocation('http://www.icinga.org');
-                });
-                
-                AppKit.Layout.getNorth().doLayout();
-            })();
+			            }]
+			        })
+				}
+			}, {
+				id: 'menu-logo',
+				width: 25,
+				border: false,
+				items: {
+			        border: false,
+			        width: 25,
+			        height: 25,
+			        autoEl: {
+			            tag: 'img',
+			            src: AppKit.c.path + '/images/icinga/idot-small.png'
+			        },
+			        listeners: {
+			        	click: function() {
+			        		AppKit.notifyMessage('Picture', ' ... successfully clicked');
+			        	}
+			        }
+	    		}
+			}]
+		}, null, 'north');
+		
+//	    Ext.getCmp('menu-logo').getEl().on('click', function() {
+//	        AppKit.changeLocation('http://www.icinga.org');
+//	    });
+	
+	})();
+	
 });
 </script>

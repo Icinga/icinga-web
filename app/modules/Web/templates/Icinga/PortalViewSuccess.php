@@ -4,10 +4,14 @@
  */
 Ext.onReady(function() {
 	
-	var t = Cronk.factory({
-		crname: 'crportal',
-	});
+	var _LL = AppKit.util.Layout;
 	
-	AppKit.Layout.addCenter(t, true);
-})
+	_LL.addTo({
+		layout: 'fit',
+		crname: 'crportal',
+		id: 'icinga-portal-loader',
+		xtype: 'cronk'
+	});
+});
+
 </script>

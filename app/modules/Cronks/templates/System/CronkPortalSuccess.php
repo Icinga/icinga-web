@@ -6,14 +6,16 @@ Ext.onReady(function() {
 
 	AppKit.pageLoadingMask(2500);
 
-	Cronk.items.Portal = Ext.create({
+	var parentcmp = Ext.getCmp('<?php echo $parentid; ?>');
+
+	var portal = parentcmp.add({
 		xtype: 'panel',
 		
 		layout: 'border',
 		border: false,
 		id: 'view-container',
 		
-		defaults: { border: false },
+		defaults: { border: false, layout: 'fit' },
 		style: { padding: '0px 5px 0px 5px' },
 		
 		items: [{
@@ -94,6 +96,7 @@ Ext.onReady(function() {
 		
 	});
 	
-	Ext.getCmp('<?echo $parentid; ?>').add(Cronk.items.Portal);
+	parentcmp.doLayout();
+	
 });
 </script>
