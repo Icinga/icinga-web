@@ -160,8 +160,7 @@
 		
 		<echo>Removing files</echo>
 		<delete dir="${PATH_Icinga}/app/modules/${PLUGIN_Name}" />	
-		<delete file="${PATH_Icinga}/app/config/plugins/${PLUGIN_Name}.xml" />	
-	
+
 		<echo>Plugin successfully deleted!</echo>
 	</target>
 		
@@ -183,7 +182,6 @@
 		<taskdef name="manifestSettingsExtractor" classname="bin.manifestSettingsExtractorTask"/>
 	
 		<property name="manifest" value="${coreDir}/manifest.xml"></property>
-		<manifestFileSelector file="${manifest}" source="Config" propertyName="config"/>  
 		<manifestFileSelector file="${manifest}" source="Plugin" propertyName="plugin"/>
 	 	<manifestFileSelector file="${manifest}" source="Doctrine" propertyName="models"/>
 		<manifestFileSelector file="${manifest}" source="SQL" propertyName="sqlRoutines"/>
@@ -191,10 +189,7 @@
 		<phingcall target="structure-create" />	
 		
 		<!-- Copy agavi module and config to src -->
-		<echo>Saving config...</echo>
-		<copy todir="${PLUGIN_Name}/src">
-			<fileset refid="config" />
-		</copy>
+	
 		<echo>Saving plugin Data...</echo>		
 		<copy todir="${PLUGIN_Name}/src">
 			<fileset refid="plugin" />

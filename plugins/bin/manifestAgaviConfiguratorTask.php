@@ -22,13 +22,6 @@ class ManifestAgaviConfiguratorTask extends Task {
 	private $xmlObject = null;
 	
 	/**
-	 * Flag that determines if a "plugins/PLUGIN_NAME.xml" include should
-	 * be inserted to icinga.xml  
-	 * @var Boolean
-	 */
-	private $noInclude = false;
-	
-	/**
 	 * Sets the manifest filename
 	 * @param String $str
 	 */
@@ -43,15 +36,7 @@ class ManifestAgaviConfiguratorTask extends Task {
     public function setXMLObject(DOMDocument $xml) {
     	$this->xmlObject = $xml;
     }
-	
-    /**
-     * Sets the setNoInclude flag
-     * @param $bool
-     */
-    public function setNoInclude($bool) {
-    	$this->noInclude = $bool;
-    }
-    
+
     /**
      * returns the manifest filename
      * @return String Filename of manifest.xml
@@ -66,14 +51,6 @@ class ManifestAgaviConfiguratorTask extends Task {
 	 */
     public function getXMLObject() {
     	return $this->xmlObject;
-    }
-    
-    /**
-     * Returns the noInclude flag
-     * @return Boolean 
-     */
-    public function getNoInclude() {
-    	return $this->noInclude;
     }
     
     public function init() {
@@ -101,8 +78,6 @@ class ManifestAgaviConfiguratorTask extends Task {
 			$file = $file->nodeName;
 			$this->setConfigVars($file);
 		}
-		if(!$this->getNoInclude())
-			$this->addSettingsInclude();
 	
 		// set routes and translations
 		$this->registerRoutes();
