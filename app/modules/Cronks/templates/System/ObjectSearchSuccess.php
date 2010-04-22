@@ -2,7 +2,7 @@
 	$parentid = $rd->getParameter('parentid');
 ?>
 <script type="text/javascript">
-
+<!--
 (function() {
 	
 	var oid = '<?php echo $parentid; ?>';
@@ -318,9 +318,12 @@
 		items: myTextField
 	});
 	
-	coParent.add(oSearch);
-	coParent.doLayout();
+	Ext.onReady(function() {
+		coParent.add(oSearch);
+		coParent.doLayout();
+	});
+
 	
 })();
-
+-->
 </script>

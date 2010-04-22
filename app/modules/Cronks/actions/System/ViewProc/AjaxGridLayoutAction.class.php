@@ -23,6 +23,10 @@ class Cronks_System_ViewProc_AjaxGridLayoutAction extends ICINGACronksBaseAction
 		return $this->getDefaultViewName();
 	}
 	
+	public function executeWrite(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
 	public function isSecure() {
 		return true;
 	}

@@ -13,14 +13,15 @@ class Cronks_System_CronkDataModel extends ICINGACronksBaseModel {
 	const F_SECURITY		= 8;
 	const F_VISIBLE			= 16;
 	const F_IMAGE			= 32;
+	const F_CATEGORY		= 64;
 	
 	/**
 	 * Predefined filter names for cronks
 	 * @var array
 	 */
 	private static $F_LIST	= array (
-		'list'	=> 47,
-		'exec'	=> 6
+		'list'	=> 111,
+		'exec'	=> 70
 	);
 	
 	/**
@@ -143,6 +144,18 @@ class Cronks_System_CronkDataModel extends ICINGACronksBaseModel {
 					$i['image'] = AppKitHtmlHelper::Obj()->imageUrl($i['image']);
 				} 
 				
+				if ($f & self::F_CATEGORY) {
+					
+					if (!array_key_exists('parameter', $i)) {
+						$i['parameter'] = array();
+					}
+					
+					if (array_key_exists('ae:parameter', $i)) {
+						$i['parameter'] += (array)$i['ae:parameter'];
+						unset($i['ae:parameter']);
+					}
+				}
+				
 				$out[$key] = $i;
 			}
 		}
@@ -188,12 +201,18 @@ class Cronks_System_CronkDataModel extends ICINGACronksBaseModel {
 		return $this->cronks;
 	}
 	
-	public function getCronksByCategory($category_key) {
+	public function getCronksByCategory($category_key, $asarray=false, $keyname='id') {
 		if (!is_array($category_key)) $category_key = array ($category_key);
 		$out=array();
 		foreach ($this->cronks as $key=>$i) {
 			if (array_key_exists('categories', $i) && $this->testArrayIntersects($i['categories'], $category_key)) {
-				$out[$key] = $i;
+				if ($asarray==true) {
+					$i[$keyname] = $key;
+					$out[] = $i;
+				}
+				else {
+					$out[$key] = $i;
+				}
 			}
 		}
 		

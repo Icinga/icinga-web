@@ -2,11 +2,9 @@
 
 class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 {
-	public function executeHtml(AgaviRequestDataHolder $rd)
-	{
+	public function executeHtml(AgaviRequestDataHolder $rd) {
 		$this->setupHtml($rd);
 
-		
 		$template_file = sprintf(
 			'%s/%s.xml', 
 			AgaviConfig::get('modules.cronks.xml.path'), 
@@ -30,8 +28,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		return $layout->getLayoutContent();
 	}
 	
-	public function executeJson(AgaviRequestDataHolder $rd)
-	{
+	public function executeJson(AgaviRequestDataHolder $rd) {
 		$template_file = sprintf(
 			'%s/%s.xml', 
 			AgaviConfig::get('modules.cronks.xml.path'), 
@@ -73,7 +70,6 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		// OK hopefully all done
 		$data['resultSuccess'] = true; 
 
-		
 		return json_encode($data);
 	}
 }

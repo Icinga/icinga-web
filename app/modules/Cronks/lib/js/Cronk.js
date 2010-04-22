@@ -6,8 +6,17 @@ Ext.ns('Cronk');
  * @this{Cronks}
  */	
 Cronk = (function(){
+	var lodate = new Date();
+	var idstart = parseInt(lodate.getTime() / 1000);
 	
 	return {
+		
+		AUTO_CID : idstart,
+		
+		getId: function(prefix) {
+			return prefix + (++Cronk.AUTO_CID); 
+		},
+		
 		getLoaderUrl : function(crname, url) {
 			if (!Ext.isDefined(url)) {
 				url = Cronk.defaults.SETTINGS.loaderUrl
@@ -57,10 +66,10 @@ Cronk.defaults.CONFIG_ITEMS = [
 ];
 
 Cronk.defaults.CONFIG_COPY = [
-	'title', 'id', 'xtype',
-	'closable', 'draggable', 'resizable',
-	'cls', 'frame', 'duration', 'pinned',
-	'border', 'layout'
+	'title', 'xtype', 'closable', 
+	'draggable', 'resizable', 'cls',
+	'frame', 'duration', 'pinned',
+	'border', 'id'
 ];
 
 /**
@@ -181,11 +190,14 @@ Cronk.defaults.CONFIG_COPY = [
 			// Apply the base
 			this.cmp.cronkConfig = {};
 			
+			delete this.cmp.parentid;
+			
 			Ext.applyIf(this.cmp, this.configDefaults);
 			
 			Ext.applyIf(this.cmp, {
-				stateuid: Ext.id(null, 'cronk-sid'),
-				cmpid: Ext.id(null, 'cronk-cid')
+				stateuid: Cronk.getId('cronk-sid'),
+				cmpid: Cronk.getId('cronk-cid'),
+				parentid: this.cmp.getId()
 			});
 			
 			Ext.copyTo(this.cmp.cronkConfig, this.cmp, this.configItems);
@@ -197,8 +209,8 @@ Cronk.defaults.CONFIG_COPY = [
 				}
 			}, this);
 			
-			this.cmp.cronkConfig.id = this.cmp.getId();
-			
+			// this.cmp.cronkConfig.id = this.cmp.getId();
+			this.cmp.cronkConfig.parentid = this.cmp.getId();
 			
 			// Create a reference for us
 			this.cmpConfig = this.cmp.cronkConfig;
@@ -240,6 +252,8 @@ Cronk.defaults.CONFIG_COPY = [
 				Ext.iterate(this.cmpConfig.params, function(k, v) {
 					this.cmpRequestParams['p[' + k +  ']'] = v;
 				}, this);
+				
+//				console.log("REQUEST", this.cmpRequestParams);
 			}
 			return this.cmpRequestParams;
 		},
@@ -288,6 +302,14 @@ Cronk.Container = Ext.extend(Ext.Panel, {
 		Cronk.Container.superclass.initComponent.call(this);
 		
 		this.CronkPlugin = new Cronk.util.CPlugin({ cmp: this });
+	},
+	
+	getId : function() {
+		if (this.id) {
+			return this.id;
+		}
+		
+		return this.id = Cronk.getId('cr-panel-');
 	}
 });
 

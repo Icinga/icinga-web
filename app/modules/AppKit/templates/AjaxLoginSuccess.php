@@ -1,12 +1,7 @@
-<?php 
-	$htmlid = AppKitRandomUtil::genSimpleId(10, 'login-box-');
-	$containerid = AppKitHtmlHelper::concatHtmlId($htmlid, 'container');
-?>
-<script type="text/javascript" defer="defer">
+<script type="text/javascript">
 Ext.onReady(function() {
 
 	var bAuthenticated = false;
-	var sId = '<?php echo $htmlid ?>';
 	
 	<?php if ($us->isAuthenticated() == true) { ?>
 	bAuthenticated = true;
@@ -187,6 +182,7 @@ Ext.onReady(function() {
 	AppKit.util.Layout.addTo({
 		items: oLogin.getPanel()
 	});
-
+	
+	AppKit.util.Layout.doLayout();
 });
 </script>

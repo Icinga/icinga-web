@@ -3,7 +3,6 @@
 	$cid = $rd->getParameter('cmpid');
 	$template = $rd->getParameter('template');
 ?>
-
 <script type="text/javascript">
 (function() {
 	

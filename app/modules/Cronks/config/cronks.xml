@@ -177,6 +177,7 @@
 			<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="template">icinga-tactical-overview-template</ae:parameter>
+				<ae:parameter name="interface">true</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
 
@@ -190,6 +191,7 @@
 			<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
+				<ae:parameter name="interface">true</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
 
@@ -203,6 +205,7 @@
 			<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>
+				<ae:parameter name="interface">true</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
 

@@ -26,7 +26,8 @@ class Cronks_System_CronkListingSuccessView extends ICINGACronksBaseView
 		$out = array (
 			'cat'		=> array (
 				'resultCount'	=> count($categories),
-				'resultRow'		=> $categories
+				'resultRow'		=> $categories,
+				'resultSuccess'	=> true
 			),
 			
 			'cronks'	=> array ()
@@ -39,7 +40,7 @@ class Cronks_System_CronkListingSuccessView extends ICINGACronksBaseView
 		
 		
 		foreach ($categories as $catkey=>$catmeta) {
-			$cronks = $model->getCronksByCategory($catkey);
+			$cronks = $model->getCronksByCategory($catkey, true, 'id');
 			$out['cronks'][$catkey] = array (
 				'resultCount'	=> count($cronks),
 				'resultRow'		=> $cronks,

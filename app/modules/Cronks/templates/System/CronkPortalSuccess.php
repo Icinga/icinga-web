@@ -96,8 +96,7 @@ Ext.onReady(function() {
 		
 	});
 	
-	AppKit.util.Layout.doLayout(null, null, true);	
-	AppKit.util.Layout.doLayout(null, 2000, true);
+	AppKit.util.Layout.doLayout();
 	
 });
 </script>

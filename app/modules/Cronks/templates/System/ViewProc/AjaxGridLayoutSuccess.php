@@ -120,22 +120,23 @@
 			}
 		});
 		
-		//Insert the grid in the parent
-		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
-		
-		// Check if the store is loaded by whatever ...
-		// If no load with defautl params!
-		grid.on('render', function(g) {
-			if (this.storeIsLoaded() == false) {
-				this.initStore();
-			}
-		}, MetaGrid);
-		
-		// Add to parent component
-		cmp.insert(0, grid);
-		
-		// Refresh
-		cmp.doLayout();
+		Ext.onReady(function() {
+			//Insert the grid in the parent
+			var cparentObj = Ext.getCmp("<?php echo $parentid; ?>");
+			
+			// Check if the store is loaded by whatever ...
+			// If no load with defautl params!
+			grid.on('render', function(g) {
+				if (this.storeIsLoaded() == false) {
+					this.initStore();
+				}
+			}, MetaGrid);
+			
+			// Add to parent component
+			cparentObj.add(grid);
+			
+			AppKit.util.Layout.doLayout();
+		});
 	}
 	
 	// First loading the meta info to configure the grid

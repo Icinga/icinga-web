@@ -36,7 +36,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 				Ext.iterate(state.cronks, function(index, item, o) {
 					this.add(item);
 				}, this);
-
+				
 				// Sets the active tab
 				this.setActiveTab(state.active || 0);
 				

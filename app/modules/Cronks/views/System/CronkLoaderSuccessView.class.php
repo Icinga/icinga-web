@@ -20,11 +20,11 @@ class Cronks_System_CronkLoaderSuccessView extends ICINGACronksBaseView
 			if ($model->hasCronk($crname)) {
 				$cronk = $model->getCronk($crname);
 				
-				if (array_key_exists('ae:parameter', $cronk)) {
-					$parameters = (array)$cronk['ae:parameter'] + $parameters;
+				if (array_key_exists('parameter', $cronk)) {
+					$parameters = (array)$cronk['parameter'] + $parameters;
 				}
 				
-				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple', 'read');
+				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple');
 			}
 			else {
 				return $tm->_('Sorry, cronk "%s" not found', null, null, array($crname));
