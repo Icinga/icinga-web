@@ -38,9 +38,6 @@ class manifestFileSelectorTask extends manifestBaseClass {
 	protected function fetchFileList() {
 		$files;
 		switch($this->getSource())	{
-			case 'Config':
-				$files = $this->getConfigList();
-				break;
 			case 'Plugin':
 				$files = $this->getFileList();
 				break;
@@ -93,15 +90,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 		$icingaPath = $this->project->getUserProperty("PATH_Icinga");
 		return str_replace($icingaPath,"",$path);
 	}
-	
-	protected function getConfigList() {
-		$config = new FileSet();
-		$config->setDir($this->project->getUserProperty("PATH_Icinga"));
-		$name = $this->project->getUserProperty("PLUGIN_Name");
-		$config->setIncludes("app/config/plugins/".$name.".xml");
-		return $config;	
-	}
-	
+
 	protected function getDBModels() {
 		$xml = $this->getXMLObject();
 		$db = $xml->Database;

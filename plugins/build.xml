@@ -160,8 +160,7 @@
 		
 		<echo>Removing files</echo>
 		<delete dir="${PATH_Icinga}/app/modules/${PLUGIN_Name}" />	
-		<delete file="${PATH_Icinga}/app/config/plugins/${PLUGIN_Name}.xml" />	
-	
+
 		<echo>Plugin successfully deleted!</echo>
 	</target>
 		
@@ -183,7 +182,6 @@
 		<taskdef name="manifestSettingsExtractor" classname="bin.manifestSettingsExtractorTask"/>
 	
 		<property name="manifest" value="${coreDir}/manifest.xml"></property>
-		<manifestFileSelector file="${manifest}" source="Config" propertyName="config"/>  
 		<manifestFileSelector file="${manifest}" source="Plugin" propertyName="plugin"/>
 	 	<manifestFileSelector file="${manifest}" source="Doctrine" propertyName="models"/>
 		<manifestFileSelector file="${manifest}" source="SQL" propertyName="sqlRoutines"/>
@@ -191,10 +189,7 @@
 		<phingcall target="structure-create" />	
 		
 		<!-- Copy agavi module and config to src -->
-		<echo>Saving config...</echo>
-		<copy todir="${PLUGIN_Name}/src">
-			<fileset refid="config" />
-		</copy>
+	
 		<echo>Saving plugin Data...</echo>		
 		<copy todir="${PLUGIN_Name}/src">
 			<fileset refid="plugin" />
@@ -248,81 +243,69 @@
 	</target>
 	
 	<target name="export-cronk">
-		<echo msg="Cronk export tool for Icinga-web" />
-		
-		<input propertyname="manifest" >Cronk-manifest (manifest.xml): </input>
-		<taskdef name="manifestFileSelector"  classname="bin.manifestFileSelectorTask"/>
-		<taskdef name="manifestSettingsExtractor" classname="bin.manifestSettingsExtractorTask"/>		
+		<taskdef name="settingsExtractor" classname="bin.settingsExtractorTask"/>
+		<taskdef name="cronkMetaExtractor" classname="bin.cronkMetaExtractorTask"/>
 
-		<manifestFileSelector file="${manifest}/manifest.xml" source="Plugin" propertyName="plugin"/>  		
-
-		<mkdir dir="${PLUGIN_Name}/src"/>
+		<echo>Cronk-export wizard</echo>
+		<input propertyname="cronkName" promptChar="?">Name of the cronk</input>
 		
-		<echo>Saving plugin Data...</echo>		
+		<phingcall target="cronk-structure-create" />
 		
-		<copy todir="${PLUGIN_Name}/src">
-			<fileset refid="plugin" />
-			<mapper classname="bin.manifestMapper" from="${manifest}/manifest.xml"/>
+		<settingsExtractor file="app/modules/Cronks/config/cronks.xml" useAbsolute="true" setting="" parameter="${cronkName}" toFile="${cronkName}/src/cronks"></settingsExtractor>
+		<cronkMetaExtractor file="${cronkName}/src/cronks.xml"></cronkMetaExtractor>		
+		
+		<echo>Saving Action</echo>	
+		<copy todir="${cronkName}/src/">
+			<fileset refid="cronkAction" />
 		</copy>
 		
-		<echo>Extracting settings...</echo>		
-		<manifestSettingsExtractor file="${manifest}/manifest.xml" toFile="${PLUGIN_Name}/src/"></manifestSettingsExtractor>
+		<echo>Saving templates</echo>	
+		<copy todir="${cronkName}/xml/">
+			<fileset refid="cronkTemplates" />
+		</copy>
 		
-		<!-- Creating Manifest -->
-		<copy file="${manifest}/manifest.xml" tofile="${PLUGIN_Name}/manifest.xml"/>
-		
-		<!-- Deploying installer -->
-		<copy file="build.xml" tofile="${PLUGIN_Name}/build.xml"/>
-		<copy todir="${PLUGIN_Name}/bin">
+		<copy file="build.xml" tofile="${cronkName}/build.xml">
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="CRONKNAME" value="${cronkName}" />		
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy todir="${cronkName}/bin">
 			<fileset dir="./bin">
-				<include name="**" />
+				<include name="cronkMetaExtractorTask.php" />
+				<include name="settingsInjectorTask.php" />
 			</fileset>
 		</copy>
-		
-		<!-- Packing -->
-		<tar basedir="${PLUGIN_Name}/." destfile="${PLUGIN_Name}_cronk.tar" compression="gzip" />
 	</target>
 	
 	<target name="import-cronk">
-		<taskdef name="manifestMetaReader" classname="bin.manifestMetaReaderTask"/>
-		<manifestMetaReader file="manifest.xml" />
-		<echo>Install script for Icinga-web cronks</echo>
-		<echo>-------------------------------------</echo>
-		<echo>Cronk Name	${PLUGIN_Name}</echo>
-		<echo>Version		${PLUGIN_Version}</echo>
-		<echo>${PLUGIN_Description}</echo>
-		<echo>Author		${PLUGIN_Author}</echo>
-		<echo>Company		${PLUGIN_Company}</echo>
-		<echo>-------------------------------------</echo>
-		<!--  Confirmations -->
-		<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to import this cronk?</input>
-		<if>
-			<equals arg1="${confirm}" arg2="n" />
-			<then>
-				<fail message="Installation aborted by user." />
- 			</then>
-		</if>
+		<taskdef name="settingsInjector" classname="bin.settingsInjectorTask"/>
+		<taskdef name="cronkMetaExtractor" classname="bin.cronkMetaExtractorTask"/>
+
+		<echo>Cronk-import wizard</echo>
 		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="/usr/local/icinga-web">Location of icinga-web</input>
 		
-		
-		<!--  Check dependencies -->
-		<taskdef name="manifestDependencyChecker" classname="bin.manifestDependencyCheckerTask"/>
-		<manifestDependencyChecker file="manifest.xml"/>
-		
-		<!-- Install module and additional -->		
-		<echo>Installing to ${PATH_Icinga}</echo>
-		<copy todir="${PATH_Icinga}">
-			<fileset dir="src">
-				<include name="**" />
+		<settingsInjector source="src/cronks.xml" cfg="${PATH_Icinga}/app/modules/Cronks/config/cronks.xml" settingsToImport="/##CRONKNAME##"/>		
+		<copy todir="${PATH_Icinga}/app/modules/Cronks/">
+			<fileset dir="./src">
+				<include name="**"/>
+				<exclude name="cronks.xml" />
 			</fileset>
-		</copy>	
-		
-		<echo>Setting up Agavi-Config</echo>		
-		<!-- Extend agavi Config -->
-		<taskdef name="manifestAgaviConfigurator" classname="bin.manifestAgaviConfiguratorTask" />
-		<manifestAgaviConfigurator noInclude="true" file="manifest.xml" />
+		</copy>
+		<copy todir="${PATH_Icinga}/app/data/xml/">
+			<fileset dir="./xml">
+				<include name="*.xml"></include>
+			</fileset>
+		</copy>
 	</target>
-
+	
+	
+	<target name="cronk-structure-create" >
+		<mkdir dir="${cronkName}"/>
+		<mkdir dir="${cronkName}/src"/>	
+		<mkdir dir="${cronkName}/xml"/>	
+	</target>
 	
 	<target name="structure-create">
 		<mkdir dir="${PLUGIN_Name}"/>
