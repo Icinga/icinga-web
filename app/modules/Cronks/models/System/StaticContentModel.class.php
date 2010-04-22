@@ -34,7 +34,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 */
 	public function __construct () {
 		$this->api = AppKitFactories::getInstance()->getFactory('IcingaData');
-	}	
+	}
 
 	/**
 	 * main function to generate content
@@ -138,7 +138,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	/**
 	 * converts XML into an associative array
 	 * @param	DOMElement		$element			XML node to convert into associative array
-	 * @return	array								converted XML data								
+	 * @return	array								converted XML data
 	 * @author	Christian Doebler <christian.doebler@netways.de>
 	 */
 	private function convertDom (DOMElement &$element) {
@@ -205,19 +205,59 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		return $success;
 	}
 
-	private function filterColumnArray(array $columns, array $mapArray=array(), $debug=false) {
-
-		if (count($mapArray) && $columns[0]) {
-			$columns[0] = $this->filterColumn($columns[0], $mapArray);
-		}
+	/**
+	 * Test for column modification in datasource elements and
+	 * converts into IcingaApi searchfilter arrays
+	 * @param array $columns
+	 * @param array $dataSource
+	 * @return array
+	 */
+	private function buildApiSearchfilter(array $columns, array $dataSource=array()) {
+		list($column, $value) = $columns;
+		
+		// Default match if something fails
+		$match = IcingaApi::MATCH_EXACT;
+		foreach ( array('varmap', 'match_type') as $opType) {
 			
-		return $columns;
+			// Don't reassing values in every operation 
+			if (array_key_exists($opType, $dataSource) && is_array($dataSource[$opType])) {
+				$opArray = $dataSource[$opType];
+				$opData = false;
+				
+				// Reassing value to work in operation
+				if (array_key_exists($column, $opArray) && $opArray[$column]) {
+					$opData = $opArray[$column];
+				}
+				else {
+					continue;
+				}
+				
+				// Just a list of short modificatons
+				switch ($opType) {
+					
+					/*
+					 * Remap the column
+					 */
+					case 'varmap':
+						$column = $opData;
+						
+					break;
+					
+					/*
+					 * Implicit matchtype
+					 */
+					case 'match_type':
+						$match = (@constant($opData)) ? constant($opData) : $opData;  
+					break;
+					
+				}
+			}
+		}
+		// Safe return value
+		return array($column, $value, $match);
 	}
-	
-	private function filterColumn($columnName, array $mapArray=array(), $debug=false) {
-		return ((array_key_exists($columnName, $mapArray)) ? $mapArray[$columnName] : $columnName);
-	}
-	
+
+
 	/**
 	 * fetches data via IcingaApi
 	 * @param	string			$dataSourceId		source id to query settings
@@ -230,11 +270,6 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		$success = true;
 
 		$dataSource = $this->xmlData['datasources'][$dataSourceId];
-
-		$columnMap = array();
-		if (array_key_exists('varmap', $dataSource)) {
-			$columnMap = $dataSource['varmap'];
-		}
 		
 		$apiSearch = $this->api->API()->createSearch()->setResultType(IcingaApi::RESULT_ARRAY);
 		if (!array_key_exists('target', $dataSource)) {
@@ -243,7 +278,7 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			$success = false;
 
 		} else {
-		
+
 			// set search target
 			$apiSearch->setSearchTarget(constant($dataSource['target']));
 
@@ -275,27 +310,27 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 					if ($success) {
 						$filterData = array(
-							trim($filter['column']),
-							trim($filter['value'])
+						trim($filter['column']),
+						trim($filter['value'])
 						);
 
 						if (array_key_exists('match_type', $filter)) {
 							array_push($filterData, trim($filter['match_type']));
 						}
-
+						
 						$apiSearch->setSearchFilter(array($filterData));
 					}
 				}
 			}
-
+				
 			// set additional search filter
 			foreach ($this->globalFilter as $filterData) {
-				$apiSearch->setSearchFilter(array($this->filterColumnArray($filterData, $columnMap)));
+				$apiSearch->setSearchFilter(array($this->buildApiSearchfilter($filterData, $dataSource)));
 			}
 
 			// set additional search filter
 			foreach ($additionalFilter as $filterData) {
-				$apiSearch->setSearchFilter(array($this->filterColumnArray($filterData, $columnMap)));
+				$apiSearch->setSearchFilter(array($this->buildApiSearchfilter($filterData, $dataSource)));
 			}
 
 			// execute query and fetch result
@@ -306,39 +341,39 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 					'IcingaServicegroup',
 					'IcingaHostCustomVariablePair',
 					'IcingaServiceCustomVariablePair'
-				);
-				IcingaPrincipalTargetTool::applyApiSecurityPrincipals(
+					);
+					IcingaPrincipalTargetTool::applyApiSecurityPrincipals(
 					$secureSearchModels,
 					$apiSearch
-				);
+					);
 
-				// fetch data
-				$apiRes = $apiSearch->fetch()->getAll();
+					// fetch data
+					$apiRes = $apiSearch->fetch()->getAll();
 
-				// set function
-				if (array_key_exists('function', $dataSource)) {
-					$function = $dataSource['function'];
-				} else {
-					$function = false;
-				}
+					// set function
+					if (array_key_exists('function', $dataSource)) {
+						$function = $dataSource['function'];
+					} else {
+						$function = false;
+					}
 
-				// set result data
-				$numResults = count($apiRes);
-				$offset = ($numResults > 0) ? 0 : -1;
+					// set result data
+					$numResults = count($apiRes);
+					$offset = ($numResults > 0) ? 0 : -1;
 
-				$resultData = array(
+					$resultData = array(
 					'data'			=> $apiRes,
 					'function'		=> $function,
-				);
+					);
 
-				if ($templateId !== false) {
-					if (!array_key_exists($templateId, $this->content)) {
-						$this->content[$templateId] = array('data' => array());
-					} elseif (!array_key_exists('data', $this->content[$templateId])) {
-						$this->content[$templateId]['data'] = array();
+					if ($templateId !== false) {
+						if (!array_key_exists($templateId, $this->content)) {
+							$this->content[$templateId] = array('data' => array());
+						} elseif (!array_key_exists('data', $this->content[$templateId])) {
+							$this->content[$templateId]['data'] = array();
+						}
+						$this->content[$templateId]['data'][$dataSourceId] = $resultData;
 					}
-					$this->content[$templateId]['data'][$dataSourceId] = $resultData;
-				}
 			}
 
 		}
@@ -450,9 +485,9 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 			$this->createTemplateContent($templateVariables[1][$x], $currentFilter);
 			$content = $this->substituteTemplateVariablesByProcessedContent(
-				$templateVariables[0][$x],
-				$templateVariables[1][$x],
-				$content
+			$templateVariables[0][$x],
+			$templateVariables[1][$x],
+			$content
 			);
 		}
 
@@ -494,11 +529,12 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 				// substitute data of statement
 				$variablePattern = '/\${([A-Z0-9_\-]+):([A-Z_]+)(:[^}]+)?}/s';
 				preg_match_all($variablePattern, $content, $templateVariables);
+				
 				$ifStmtStr = $this->substituteTemplateVariables($tplId, $templateVariables, $ifStmtStr, $filter);
-
+				
 				// determine statement value
 				$stmtValue = false;
-				eval("\$stmtValue = ($ifStmtStr);");
+				@eval("\$stmtValue = ($ifStmtStr);");
 
 				// create new content
 				$newStr = ($stmtValue) ? substr($workStr, $pos) : null;
@@ -543,9 +579,9 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		}
 
 		$content = str_replace(
-			$tplVar,
-			$this->content[$tplId]['content'],
-			$content
+		$tplVar,
+		$this->content[$tplId]['content'],
+		$content
 		);
 
 		return $content;
@@ -599,8 +635,8 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 				// apply function
 				if ($templateData['function'] !== false) {
 					$substitution = $this->applyFunction(
-						$substitution,
-						$templateData['function']
+					$substitution,
+					$templateData['function']
 					);
 				}
 			}
@@ -615,9 +651,9 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			}
 
 			$content = str_replace(
-				$templateVariables[0][$x],
-				$substitution,
-				$content
+			$templateVariables[0][$x],
+			$substitution,
+			$content
 			);
 		}
 
