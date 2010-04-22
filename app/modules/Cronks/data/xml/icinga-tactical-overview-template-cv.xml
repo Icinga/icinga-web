@@ -32,10 +32,24 @@
 					<value>0</value>
 				</columns>
 			</filter>
+			
+			<!-- 
+				* Maps variables against real columns
+				This is needed to query subvalues from other columns names
+			-->
 			<varmap>
 				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
 				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
 			</varmap>
+			
+			<!-- 
+				* Set match types for colums implicit
+				For template query values where you can't set this through the 
+				filter			
+			-->
+			<!-- <match_type>
+				<type name="SERVICE_CUSTOMVARIABLE_VALUE">IcingaApi::MATCH_LIKE</type>
+			</match_type> -->
 		</datasource>
 		
 		<datasource id="HOST_STATUS_DOWN_CV">
