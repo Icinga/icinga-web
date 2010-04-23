@@ -32,7 +32,7 @@ class NsmTarget extends BaseNsmTarget
 			return $this->target_object;
 			
 		}
-		
+
 		throw new AppKitDoctrineException('Class %s for target not found!', $this->target_class);
 	}
 	

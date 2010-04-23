@@ -5,7 +5,9 @@
  */
 class NsmRole extends BaseNsmRole
 {
-
+	private $principals_list = null;
+	private $principals = null;
+	
 	public function setUp () {
 
 		parent::setUp();
@@ -23,4 +25,86 @@ class NsmRole extends BaseNsmRole
 
 	}
 
+	public function hasParent() {
+
+		if($this->get('role_parent'))
+			return true;
+		return false;
+	}
+	
+	public function getParent() {
+		if($this->hasParent())
+			return $this->NsmRole;
+		return null;
+	}
+	
+/**
+	 * Returns a list of all belonging principals
+	 * @return array
+	 */
+	public function getPrincipalsList() {
+	
+		if ($this->principals_list === null) {
+			
+			$this->principals_list = array_keys( $this->getPrincipals()->toArray() );
+				
+		}
+
+		return $this->principals_list;
+	}
+	
+	
+	/**
+	 * Return all principals belonging to this
+	 * role
+	 * @return Doctrine_Collection
+	 */
+	public function getPrincipals() {
+
+		if ($this->principals === null) {
+		
+			$this->principals = Doctrine_Query::create()
+			->select('p.*')
+			->from('NsmPrincipal p INDEXBY p.principal_id')
+			->andWhere('p.principal_type = ? AND p.principal_role_id = ?',array('role',$this->get("role_id")))
+			
+			->execute();
+
+		}
+		
+		return $this->principals;
+		
+	}
+	
+	/**
+	 * Returns a DQL providing the user targets
+	 * @param string $type
+	 * @return Doctrine_Query
+	 */
+	protected function getTargetsQuery($type=null) {
+	
+		$q = Doctrine_Query::create()
+		->select('t.*')
+		->distinct(true)
+		->from('NsmTarget t INDEXBY t.target_id')
+		->innerJoin('t.NsmPrincipalTarget pt')
+		->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+		
+		if ($type !== null) {
+			$q->andWhere('t.target_type=?', array($type));
+		}
+
+		return $q;
+		
+	}
+	
+	/**
+	 * Return all targets belonging to thsi user
+	 * @param string $type
+	 * @return Doctrine_Collection
+	 */
+	public function getTargets($type=null) {
+		return $this->getTargetsQuery($type)->execute();
+	}
+	
 }

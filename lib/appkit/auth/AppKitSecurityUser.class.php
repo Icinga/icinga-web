@@ -2,6 +2,8 @@
 
 class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	
+	const SOURCE = "DB"; // change this to xml to read from rbac_definitions.xml
+	
 	const USEROBJ_ATTRIBUTE = 'userobj';
 	
 	/**
@@ -93,11 +95,40 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @author Marius Hein
 	 */
 	private function applyDoctrineUserRoles(NsmUser &$user) {
-		foreach ($user->NsmRole as $role) {
-			$this->grantRole($role->role_name);
+		if(self::SOURCE == "XML") {
+			foreach ($user->NsmRole as $role) {
+				$this->grantRole($role->role_name);
+			}
+		} else {
+			$this->getCredentialsFromDB($user); 			
 		}
 		
 		return true;
+	}
+	
+	private function getCredentialsFromDB(NsmUser &$user) {
+		foreach($user->NsmRole as $role) {
+			$this->roles[] = $role;
+			$next = $role;
+			$this->addCredentialsFromRole($role);
+			while($next->hasParent()) {
+				$next = $next->getParent();
+				$this->addCredentialsFromRole($next);
+				$this->roles[] = $next;
+			}
+		}
+		foreach($user->getTargets("credential") as $credential) {
+		}
+	
+	}
+	
+	private function addCredentialsFromRole(NsmRole &$role) {
+		$log = array("Test\n");
+		foreach($role->getTargets("credential") as $credential) {
+			$this->addCredential($credential->get("target_name"));
+			$log[] = $credential->get("target_name");
+		}	
+		file_put_contents("/var/www/log.txt",$log,FILE_APPEND);
 	}
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
@@ -152,6 +183,12 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 */
 	public function delPref($key) {
 		return $this->getNsmUser()->delPref($ley);
+	}
+	
+	protected function loadDefinitions() {
+		if(self::SOURCE == 'XML')
+			parent::loadDefinitions();
+		
 	}
 }
 

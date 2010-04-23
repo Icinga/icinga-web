@@ -68,17 +68,27 @@ abstract class BaseNsmRole extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
+		$this->hasColumn('role_parent', 'integer', 4, array(
+        	 'type' => 'integer',
+             'length' => 4,
+             'unsigned' => 0,
+
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('NsmPrincipal', array(
-             'local' => 'role_id',
-             'foreign' => 'principal_role_id'));
-
-        $this->hasMany('NsmUserRole', array(
-             'local' => 'role_id',
-             'foreign' => 'usro_role_id'));
+	    $this->hasOne('NsmPrincipal', array(
+	             'local' => 'role_id',
+	             'foreign' => 'principal_role_id'));
+	
+	    $this->hasMany('NsmUserRole', array(
+	             'local' => 'role_id',
+	             'foreign' => 'usro_role_id'));
+	    
+	    $this->hasOne('NsmRole', array(
+	             'local' => 'role_parent',
+	             'foreign' => 'role_id'));
     }
 }
