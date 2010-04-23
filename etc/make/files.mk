@@ -5934,7 +5934,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/social_sprite.gif $(DESTDIR)$(prefix)/lib/ext3/welcome/images/social_sprite.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/social_sprite.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/social_sprite.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/welcome/images/whiteout.png $(DESTDIR)$(prefix)/lib/ext3/welcome/images/whiteout.png
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icinga-api
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icingaScheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/CronAgaviAdapter.class.php $(DESTDIR)$(prefix)/lib/icingaScheduler/CronAgaviAdapter.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/icingaScheduler/cronDefinitions
@@ -7897,5 +7896,5 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameStructural.css $(DESTDIR)$(prefix)/pub/styles/WireFrameStructural.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
 INC_FILES=6929
-INC_DIRS=966
+INC_DIRS=965
 # INSTALL_FILES_END
