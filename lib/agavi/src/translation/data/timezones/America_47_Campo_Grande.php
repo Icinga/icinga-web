@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "America/Campo_Grande".
- * Compiled from olson file "southamerica", version 8.40.
+ * Compiled from olson file "southamerica", version 8.43.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: America_47_Campo_Grande.php 4343 2009-11-06 13:59:00Z david $
+ * @version    $Id: America_47_Campo_Grande.php 4453 2010-03-21 17:11:28Z david $
  */
 
 return array (
@@ -704,7 +704,7 @@ return array (
     'startYear' => 2038,
   ),
   'source' => 'southamerica',
-  'version' => '8.40',
+  'version' => '8.43',
   'name' => 'America/Campo_Grande',
 );
 

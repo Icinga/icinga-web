@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_CronkDataModel extends ICINGACronksBaseModel {
+class Cronks_System_CronkDataModel extends CronksBaseModel {
 
 	const CONFIG_CATEGORIES	= 'modules.cronks.categories';
 	const CONFIG_CRONKS		= 'modules.cronks.cronks';

@@ -1,7 +1,17 @@
 <?php
 
-class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
-{
+class Cronks_System_ViewProcSuccessView extends CronksBaseView {
+	
+	/**
+	 * @var Web_Icinga_ApiContainerModel
+	 */
+	private $api = null;
+	
+	public function initialize($c) {
+		parent::initialize($c);
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+	}
+	
 	public function executeHtml(AgaviRequestDataHolder $rd) {
 		$this->setupHtml($rd);
 
@@ -16,7 +26,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		
 		$worker = new IcingaTemplateWorker();
 		$worker->setTemplate($template);
-		$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
+		$worker->setApi($this->api->getConnection());
 		
 		$layout_class = $template->getSectionParams('option')->getParameter('layout');
 		$layout = AppKitClassUtil::createInstance($layout_class);
@@ -42,7 +52,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 
 		$worker = new IcingaTemplateWorker();
 		$worker->setTemplate($template);
-		$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
+		$worker->setApi($this->api->getConnection());
 		$worker->setUser($this->getContext()->getUser()->getNsmUser());
 		
 		if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {

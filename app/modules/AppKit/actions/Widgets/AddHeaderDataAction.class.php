@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
+class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

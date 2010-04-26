@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
+class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction
 {
 	
 	/**
@@ -20,27 +20,22 @@ class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		$type = $rd->getParameter('type');
 		
 		$files = array ();
 		$actions = array ();
 		
-		$loader = $this->getContext()->getModel('SquishFileContainer', 'AppKit', array('type' => $type));
+		$loader = $this->getContext()->getModel('SquishFileContainer', 'AppKit', array('type' => 'javascript'));
 		
 		try {
 		
-			switch ($type) {
-				case AppKit_SquishFileContainerModel::TYPE_JAVASCRIPT:
-					$files = AgaviConfig::get('de.icinga.appkit.include_javascript', array());
-					
-					if (array_key_exists('squished', $files)) {
-						$loader->addFiles($files['squished']);
-					}
-					
-					if (array_key_exists('action', $files)) {
-						$loader->setActions($files['action']);
-					}
-				break;
+			$files = AgaviConfig::get('de.icinga.appkit.include_javascript', array());
+			
+			if (array_key_exists('squished', $files)) {
+				$loader->addFiles($files['squished']);
+			}
+			
+			if (array_key_exists('action', $files)) {
+				$loader->setActions($files['action']);
 			}
 			
 			$loader->squishContents();

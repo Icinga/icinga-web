@@ -37,7 +37,7 @@
 		function oProxy() {
 			if (!proxy) {
 				proxy = new Ext.data.HttpProxy({
-					url: "<?php echo $ro->gen('icinga.cronks.objectsearch.json')?>"
+					url: "<?php echo $ro->gen('cronks.objectsearch.json')?>"
 				});
 			}
 			return proxy;

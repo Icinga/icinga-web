@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_SquishFileContainerModel extends ICINGAAppKitBaseModel
+class AppKit_SquishFileContainerModel extends AppKitBaseModel
 {
 	const TYPE_JAVASCRIPT	= 'js';
 	const TYPE_STYLESHEET	= 'css';

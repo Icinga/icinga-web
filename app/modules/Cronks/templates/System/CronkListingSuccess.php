@@ -89,7 +89,7 @@
 			},
 			
 			getBaseUrl : function() {
-				return "<?php echo $ro->gen('icinga.cronks.crlisting.json'); ?>";
+				return "<?php echo $ro->gen('cronks.crlisting.json'); ?>";
 			},
 			
 			setParentCmp : function(cmp) {

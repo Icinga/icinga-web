@@ -4,7 +4,7 @@
  * @author mhein
  *
  */
-class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
+class AppKit_Ext_ApplicationStateSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

@@ -18,18 +18,21 @@ require('../app/config.php');
 // +---------------------------------------------------------------------------+
 Agavi::bootstrap('development');
 
+AgaviController::initializeModule('Web');
+
 // Setting the running context to web ...
 AgaviConfig::set('core.default_context', 'web');
 
 // Initialize the appkit framework
 AppKit::bootstrap();
 
+AgaviContext::getInstance()->getModel('Icinga.ApiContainer', 'Web');
+
 // +---------------------------------------------------------------------------+
 // | Call the controller's dispatch method on the default context              |
 // +---------------------------------------------------------------------------+
 
 // AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.dispatch', 'Agavi is starting its container');
-
 AgaviContext::getInstance('web')->getController()->dispatch();
 
 // AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.afterdispatch', 'Agavi stoped, response is served');

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurations xmlns="http://agavi.org/agavi/1.0/config">
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/logging/1.0">
 
-	<configuration>
+	<ae:configuration>
 
-		<loggers default="appkit_default">
+		<loggers default="debug">
 
-			<!-- logs only INFO messages -->
-			<logger name="appkit_default" class="AgaviLogger" level="AgaviLogger::ALL">
+			<!-- logs warning and error messages -->
+			<logger name="appkit" class="AgaviLogger" level="AgaviLogger::ALL ^ AgaviLogger::DEBUG ^ AgaviLogger::INFO">
 				<appenders>
 					<appender>AppKitLogAppender</appender>
-					<!-- Appender removed from notify stack -->
-					<!-- <appender>AppKitQueueAppender</appender> -->
+				</appenders>
+			</logger>
+			
+			<logger name="debug" class="AgaviLogger" level="AgaviLogger::ALL">
+				<appenders>
+					<appender>DebugLogAppender</appender>
 				</appenders>
 			</logger>
 
@@ -19,8 +23,18 @@
 		<appenders>
 			<appender name="AppKitLogAppender" class="AppKitDoctrineLoggerAppender" layout="PassThru" />
 			
-			<!-- All logs go to the page -->
-			<!-- <appender name="AppKitQueueAppender" class="AppKitMessageQueueLoggerAppender" layout="DateTimeLayout" /> -->
+			<!--
+				Debug logs are rotated in a 7 day (AgaviRotatingFileLoggerAppender default) cycle
+				Use 'cycle' parameter to alter the cycle.
+			-->
+			<appender name="DebugLogAppender" class="AgaviRotatingFileLoggerAppender" layout="DateTimeLayout">
+				<ae:parameters>
+					<ae:parameter name="dir">%core.app_dir%/data/log/</ae:parameter>
+					<ae:parameter name="prefix">debug-</ae:parameter>
+				</ae:parameters>
+			</appender>
+			
+			<appender name="StdErrorAppender" class="AgaviStderrLoggerAppender" layout="DateTimeLayout" />
 		</appenders>
 		
 		<layouts>
@@ -28,6 +42,5 @@
 			<layout name="PassThru" class="AgaviPassthruLoggerLayout" />
 		</layouts>
 
-	</configuration>
-
-</configurations>
+	</ae:configuration>
+</ae:configurations>

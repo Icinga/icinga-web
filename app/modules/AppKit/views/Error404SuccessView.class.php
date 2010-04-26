@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Error404SuccessView extends ICINGAAppKitBaseView
+class AppKit_Error404SuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

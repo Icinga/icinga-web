@@ -6,7 +6,7 @@
 	xmlns="http://agavi.org/agavi/config/parts/output_types/1.0"
 	targetNamespace="http://agavi.org/agavi/config/parts/output_types/1.0"
 	elementFormDefault="qualified"
-	version="$Id: output_types.xsd 4227 2009-08-02 00:16:30Z david $">
+	version="$Id: output_types.xsd 4456 2010-03-21 19:11:45Z david $">
 
 	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
 	           schemaLocation="../_types.xsd" />

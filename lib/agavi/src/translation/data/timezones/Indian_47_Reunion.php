@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Indian/Reunion".
- * Compiled from olson file "africa", version 8.23.
+ * Compiled from olson file "africa", version 8.24.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Indian_47_Reunion.php 4343 2009-11-06 13:59:00Z david $
+ * @version    $Id: Indian_47_Reunion.php 4471 2010-04-08 01:01:16Z david $
  */
 
 return array (
@@ -41,7 +41,7 @@ return array (
     'startYear' => 1912,
   ),
   'source' => 'africa',
-  'version' => '8.23',
+  'version' => '8.24',
   'name' => 'Indian/Reunion',
 );
 

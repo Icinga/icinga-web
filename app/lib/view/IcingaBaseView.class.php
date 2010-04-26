@@ -3,7 +3,7 @@
 /**
  * The base view from which all project views inherit.
  */
-class ICINGABaseView extends AgaviView implements AppKitContextInterface
+class IcingaBaseView extends AgaviView
 {
 	const SLOT_LAYOUT_NAME = 'slot';
 	
@@ -59,33 +59,6 @@ class ICINGABaseView extends AgaviView implements AppKitContextInterface
 				$this->getResponse()->setRedirect($this->getContext()->getRouting()->gen($this->getAttribute('redirect'), $params));
 		}
 		
-	}
-	
-	public function getFactory($name) {
-		return AppKitFactories::getInstance()->getFactory($name);
-	}
-	
-
-	public function getMessageQueue() {
-		return $this->getFactory(self::FACTORY_MESSAGEQUEUE);
-	}
-	
-
-	public function getAuthProvider() {
-		return $this->getFactory(self::FACTORY_AUTHPROVIDER);
-	}
-	
-	/**
-	 * Execute html within a slot layout only without 
-	 * implementing a new layout method in the corresponding
-	 * views
-	 * 
-	 * @param AgaviRequestDataHolder $rd
-	 * @return mixed
-	 */
-	public function executeSimple(AgaviRequestDataHolder $rd) {
-		$rd->setParameter('is_slot', true);
-		return $this->executeHtml($rd);
 	}
 }
 

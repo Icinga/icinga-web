@@ -6,7 +6,7 @@ class AppKitDoctrineLoggerAppender extends AgaviLoggerAppender {
 		parent::initialize($context, $parameters);
 	}
 	
-	public function write($message) {
+	public function write(AgaviLoggerMessage $message) {
 		
 		if(($layout = $this->getLayout()) === null) {
 			throw new AgaviLoggingException('No Layout set');

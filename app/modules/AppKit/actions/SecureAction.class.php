@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_SecureAction extends ICINGAAppKitBaseAction
+class AppKit_SecureAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -23,12 +23,15 @@ class AppKit_SecureAction extends ICINGAAppKitBaseAction
 		$this->setAttributes($this->getContainer()->getAttributes('org.agavi.controller.forwards.secure'));
 		
 		// Okay log this abuse!
-		$this->getContext()->getLoggerManager()->logWarn('Access with sufficient privileges to %s (%s) by %s (%s)', 
+		$msg = new AgaviLoggerMessage(sprintf(
+			'Access with sufficient privileges to %s (%s) by %s (%s)', 
 			$this->getAttribute('requested_action'),
 			$this->getAttribute('requested_module'),
 			$this->getContext()->getUser()->getAttribute('userobj')->user_name,
 			$this->getContext()->getUser()->getAttribute('userobj')->givenName()
-		);
+		), AgaviLogger::WARN);
+		
+		$this->getContext()->getLoggerManager()->log($msg);
 		
 		// Return an unauthorized http response
 		$this->getContainer()->getResponse()->setHttpStatusCode(401);

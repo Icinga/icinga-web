@@ -82,7 +82,9 @@ testdeps:
 	 $(PHP) bin/testdeps.php
 
 fix-priv:
-	chown -R $(WEB_USER).$(WEB_GROUP) $(DESTDIR)$(prefix)/app/cache
+	chown -R $(WEB_USER).$(WEB_GROUP) \
+		$(DESTDIR)$(prefix)/app/cache \
+		$(DESTDIR)$(prefix)/app/data/log
 	chmod -R 775 $(DESTDIR)$(prefix)/app/cache
 	chmod +x \
 		$(DESTDIR)$(prefix)/bin/agavi \
@@ -128,8 +130,8 @@ make-create-files:
 	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
 
 loc-update-catalog:
-	./bin/loc-create-catalog.pl --base=./ --out=./app/data/po/templates/default.pot
-	./bin/loc-merge-template.sh app/data/po/templates/default.pot app/data/po/
+	./bin/loc-create-catalog.pl --base=./ --out=$(LOC_PO)/templates/default.pot
+	./bin/loc-merge-template.sh $(LOC_PO)/templates/default.pot $(LOC_PO)
 
 loc-compile: loc-create-mo loc-create-json
 

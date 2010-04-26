@@ -3,7 +3,7 @@
 /**
  * The base view from which all Web module views inherit.
  */
-class ICINGAWebBaseView extends ICINGABaseView
+class IcingaWebBaseView extends IcingaBaseView
 {
 
 }

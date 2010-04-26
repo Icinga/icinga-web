@@ -3,7 +3,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StaticContentSuccessView extends ICINGACronksBaseView
+class Cronks_System_StaticContentSuccessView extends CronksBaseView
 {
 
 	public function executeHtml(AgaviRequestDataHolder $rd) {
@@ -31,7 +31,7 @@ class Cronks_System_StaticContentSuccessView extends ICINGACronksBaseView
 		$model = $this->getContext()->getModel('System.StaticContent', 'Cronks');
 		$content = $model->getContent($templateFile);
 
-		return $content;
+		return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
 	}
 }
 

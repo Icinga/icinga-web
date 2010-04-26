@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_RoleAdminModel extends ICINGAAppKitBaseModel
+class AppKit_RoleAdminModel extends AppKitBaseModel
 {
 
 	private static $editableAttributes = array (

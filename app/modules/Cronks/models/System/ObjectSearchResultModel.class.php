@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
+class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 {
 
 	/**
@@ -104,8 +104,9 @@ class Cronks_System_ObjectSearchResultModel extends ICINGACronksBaseModel
 		),
 	);
 	
-	public function __construct() {
-		$this->api = $this->api = AppKitFactories::getInstance()->getFactory('IcingaData')->API();
+	public function initialize (AgaviContext $c, array $p=array()) {
+		parent::initialize($c, $p);
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->getConnection();
 	}
 	
 	public function setQuery($query) {

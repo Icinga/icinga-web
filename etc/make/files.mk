@@ -177,9 +177,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/config/validators.xml $(DESTDIR)$(prefix)/app/modules/AppKit/config/validators.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/action
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/action/ICINGAAppKitBaseAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/action/ICINGAAppKitBaseAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/action/AppKitBaseAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/action/AppKitBaseAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/model
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/model/ICINGAAppKitBaseModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/model/ICINGAAppKitBaseModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/model/AppKitBaseModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/model/AppKitBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/view/ICINGAAppKitBaseView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/view/ICINGAAppKitBaseView.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/models

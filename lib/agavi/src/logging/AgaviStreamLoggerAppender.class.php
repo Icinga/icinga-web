@@ -26,7 +26,7 @@
  *
  * @since      0.11.2
  *
- * @version    $Id: AgaviStreamLoggerAppender.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviStreamLoggerAppender.class.php 4441 2010-03-09 21:10:21Z david $
  */
 class AgaviStreamLoggerAppender extends AgaviLoggerAppender
 {
@@ -92,9 +92,9 @@ class AgaviStreamLoggerAppender extends AgaviLoggerAppender
 	}
 
 	/**
-	 * Write a Message to the stream.
+	 * Write log data to this appender.
 	 *
-	 * @param      mixed Message
+	 * @param      AgaviLoggerMessage Log data to be written.
 	 *
 	 * @throws     <b>AgaviLoggingException</b> if no Layout is set or the stream
 	 *                                          cannot be written.
@@ -103,7 +103,7 @@ class AgaviStreamLoggerAppender extends AgaviLoggerAppender
 	 * @author     Bob Zoller <bob@agavi.org>
 	 * @since      0.10.0
 	 */
-	public function write($message)
+	public function write(AgaviLoggerMessage $message)
 	{
 		if(($layout = $this->getLayout()) === null) {
 			throw new AgaviLoggingException('No Layout set');

@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_ModuleDisabledAction extends ICINGAAppKitBaseAction
+class AppKit_ModuleDisabledAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

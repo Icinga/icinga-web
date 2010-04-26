@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ext_DynamicJavascriptSourceSuccessView extends ICINGAAppKitBaseView
+class AppKit_Ext_DynamicJavascriptSourceSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

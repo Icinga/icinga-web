@@ -129,7 +129,7 @@
 								
 								// Redefine the updater to held default properties
 								/* portlet.getUpdater().setDefaultUrl({
-									url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
+									url: "<?php echo $ro->gen('cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 									params: params,
 									scripts: true
 								});

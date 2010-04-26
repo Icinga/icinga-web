@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ext_ApplicationStateModel extends ICINGAAppKitBaseModel implements AgaviISingletonModel
+class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviISingletonModel
 {
 
 	const PREFNS = 'de.icinga.ext.appstate';

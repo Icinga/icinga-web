@@ -12,7 +12,7 @@
 			var pub = {};
 			var panel = null;
 			var pc = null;
-			var url = "<?php echo $ro->gen('icinga.cronks.staticContent.ajax', array('template' => $template)); ?>" 
+			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template)); ?>" 
 			
 			Ext.apply(pub, {
 				

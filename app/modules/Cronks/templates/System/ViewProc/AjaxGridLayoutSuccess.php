@@ -11,7 +11,7 @@
 		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
 		MetaGrid.setStateUid("<?php echo $stateuid; ?>");
 		
-		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
 		MetaGrid.setParameters({storeDisableAutoload: true});
 		var grid = MetaGrid.createGrid();
@@ -106,8 +106,8 @@
 							cHandler.setGrid(grid);
 							
 							// Where we can get some info
-							cHandler.setInfoUrl('<?php echo urldecode($ro->gen("icinga.cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
-							cHandler.setSendUrl('<?php echo urldecode($ro->gen("icinga.cronks.commandProc.send", array("command" => "{0}"))); ?>');
+							cHandler.setInfoUrl('<?php echo urldecode($ro->gen("cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
+							cHandler.setSendUrl('<?php echo urldecode($ro->gen("cronks.commandProc.send", array("command" => "{0}"))); ?>');
 							
 							// We need something to click on :D
 							cHandler.enhanceToolbar();
@@ -168,7 +168,7 @@
 		else {
 		
 			Ext.Ajax.request({
-				   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
+				   url: "<?php echo $ro->gen('cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 				   
 				   success: function(response, opts) {
 				   		s.add(template, Ext.decode(response.responseText));

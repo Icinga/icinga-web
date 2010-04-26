@@ -42,7 +42,7 @@ var dummyCronkDisplayStateSummary = function () {
 	var CronkDisplayStateSummary = {
 	
 		cmp : Ext.getCmp("<?php echo $parentid; ?>"),
-		url : "<?php echo $ro->gen('icinga.cronks.statusSummary.json'); ?>?dtype=",
+		url : "<?php echo $ro->gen('cronks.statusSummary.json'); ?>?dtype=",
 
 		objectType : false,
 	

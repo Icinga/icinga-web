@@ -234,7 +234,11 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 	 * @return IcingaApiConnectionIdo
 	 */
 	private function getIcingaApi() {
-		return AppKitFactories::getInstance()->getFactory('IcingaData')->API();
+		static $api = null;
+		if ($api === null) {
+			$api = AgaviContext::getInstance()->getModel('Icinga.ApiContainer', 'Web')->getConnection();
+		}
+		return $api;
 	}
 	
 }

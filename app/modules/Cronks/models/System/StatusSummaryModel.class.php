@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
+class Cronks_System_StatusSummaryModel extends CronksBaseModel
 {
 
 	private $api = false;
@@ -76,8 +76,9 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 	private $countNotOk = 0;
 	private $countAll = 0;
 
-	public function __construct () {
-		$this->api = AppKitFactories::getInstance()->getFactory('IcingaData');
+	public function initialize (AgaviContext $c, array $p=array()) {
+		parent::initialize($c, $p);
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 	}
 
 	public function init ($type) {
@@ -149,7 +150,7 @@ class Cronks_System_StatusSummaryModel extends ICINGACronksBaseModel
 	public function fetchData () {
 		if ($this->type !== false) {
 			
-			$search = $this->api->API()->createSearch()
+			$search = $this->api->getConnection()->createSearch()
 				->setSearchTarget($this->dataSources[$this->type]['target']);
 
 			// Adding security principal targets to the query

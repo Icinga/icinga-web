@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_PrincipalAdminModel extends ICINGAAppKitBaseModel
+class AppKit_PrincipalAdminModel extends AppKitBaseModel
 {
 	
 	public function __construct() {

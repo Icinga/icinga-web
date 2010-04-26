@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
+class Cronks_System_StaticContentModel extends CronksBaseModel
 {
 
 	/*
@@ -22,15 +22,13 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	 */
 	private $dom = false;
 	private $xmlData = array();
+	
+	private static $arrayNodes		= array('filter');
+	private static $indexAttributes	= array('id', 'name');
 
-	/**
-	 * class constructor
-	 * @param	void
-	 * @return	Cronks_System_StaticContentModel
-	 * @author	Christian Doebler <christian.doebler@netways.de>
-	 */
-	public function __construct () {
-		$this->api = AppKitFactories::getInstance()->getFactory('IcingaData');
+	public function initialize (AgaviContext $c, array $p=array()) {
+		parent::initialize($c, $p);
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 	}
 
 	/**
@@ -84,6 +82,53 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 		return $hasChildren;
 	}
+	
+	/**
+	 * Tests if the node contains array to provide an
+	 * array like index
+	 * @param DOMElement $element
+	 * @return boolean
+	 * @author mhein
+	 */
+	private function arrayNode(DOMElement &$element) {
+		return in_array($element->parentNode->nodeName, self::$arrayNodes);
+	}
+	
+	/**
+	 * Returns an index of the dom element
+	 * @param DOMElement $element
+	 * @return mixed
+	 * @author mhein
+	 */
+	private function namedIndex(DOMElement &$element) {
+		foreach (self::$indexAttributes as $attr) {
+			if ($element->hasAttribute($attr)) {
+				return $element->getAttribute($attr);
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns index value from the dom element
+	 * @param DOMElement $element
+	 * @param integer $fake Fake array counter for loop sequence
+	 * @return mixed
+	 * @author mhein
+	 */
+	private function getDomIndex(DOMElement &$element, &$fake=0) {
+		static $c = 0;
+		
+		$index = $this->namedIndex($element);
+		
+		if (!$index && $this->arrayNode($element)) {
+			$index = $fake++;
+		}
+		elseif (!$index) {
+			$index = $element->nodeName;
+		}	
+		return $index;
+	}
 
 	/**
 	 * converts XML into an associative array
@@ -95,17 +140,12 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 		$data = array();
 
 		if ($element->hasChildNodes()) {
+			$count = 0;
 			foreach ($element->childNodes as $child) {
 				if ($child->nodeType == XML_ELEMENT_NODE) {
-					$index = '__BAD_INDEX__';
-					if ($child->hasAttribute('name')) {
-						$index = $child->getAttribute('name');
-					} elseif ($child->nodeName == 'datasource') {
-						$index = $child->getAttribute('id');
-					} else {
-						$index = $child->nodeName;
-					}
-
+					
+					$index = $this->getDomIndex($child, $count);
+					
 					if ($this->hasChildren($child)) {
 						$data[$index] = $this->convertDom($child);
 					} else {
@@ -226,7 +266,10 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 		$dataSource = $this->xmlData['datasources'][$dataSourceId];
 		
-		$apiSearch = $this->api->API()->createSearch()->setResultType(IcingaApi::RESULT_ARRAY);
+		$apiSearch = $this->api->getConnection()
+		->createSearch()
+		->setResultType(IcingaApi::RESULT_ARRAY);
+		
 		if (!array_key_exists('target', $dataSource)) {
 
 			throw new Cronks_System_StaticContentModelException('fetchTemplateValues(): no target in datasource!');
@@ -249,10 +292,11 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 			if (array_key_exists('search_type', $dataSource)) {
 				$apiSearch->setSearchType(constant($dataSource['search_type']));
 			}
-
+			
 			// set search filter
-			if (array_key_exists('filter', $dataSource) && array_key_exists('columns', $dataSource['filter'])) {
+			if (array_key_exists('filter', $dataSource) && is_array($dataSource['filter'])) {
 				foreach ($dataSource['filter'] as $filter) {
+					
 					if (!array_key_exists('column', $filter)) {
 						throw new Cronks_System_StaticContentModelException('fetchTemplateValues(): no column defined in filter definition!');
 						$success = false;

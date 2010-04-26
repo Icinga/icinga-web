@@ -79,6 +79,9 @@
 				<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:output_types/ot:output_type/*)" />
 				<ae:parameter name="http_headers">
 					<ae:parameter name="Content-Type">text/html; charset=UTF-8</ae:parameter>
+					<ae:parameter name="Cache-Control">public</ae:parameter>
+					<ae:parameter name="Age">10</ae:parameter>
+					<ae:parameter name="Pragma"></ae:parameter>
 				</ae:parameter>
 			</output_type>
 			

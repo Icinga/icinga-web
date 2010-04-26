@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_NavigationContainerModel extends ICINGAAppKitBaseModel
+class AppKit_NavigationContainerModel extends AppKitBaseModel
 implements AgaviISingletonModel, AppKitNavContainerInterface
 {
 	/**

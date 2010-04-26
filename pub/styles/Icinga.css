@@ -35,6 +35,16 @@ p.legal {
 
 p { margin: 15px auto; }
 
+table td, table th {
+	vertical-align: top;
+	margin: 0 0;
+	padding: 0 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
 #content {
 	padding: 5px 5px;
 }
@@ -498,8 +508,12 @@ table.icinga-attribute-table td.val {
 
 /** Static content container **/
 .static-content-container {
-	font-size: 11pt;
 	background-color: #ffffff;
+}
+
+.static-content-container table td {
+	margin: 4px 4px;
+	padding: 4px 4px;
 }
 
 /* EOF */

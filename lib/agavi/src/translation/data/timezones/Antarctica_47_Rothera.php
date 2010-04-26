@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Antarctica/Rothera".
- * Compiled from olson file "antarctica", version 8.7.
+ * Compiled from olson file "antarctica", version 8.8.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Antarctica_47_Rothera.php 4357 2009-11-28 20:20:35Z david $
+ * @version    $Id: Antarctica_47_Rothera.php 4458 2010-03-22 20:13:59Z david $
  */
 
 return array (
@@ -41,7 +41,7 @@ return array (
     'startYear' => 1977,
   ),
   'source' => 'antarctica',
-  'version' => '8.7',
+  'version' => '8.8',
   'name' => 'Antarctica/Rothera',
 );
 

@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataSuccessView extends ICINGAAppKitBaseView {
+class AppKit_Widgets_AddHeaderDataSuccessView extends AppKitBaseView {
 	public function executeHtml(AgaviRequestDataHolder $rd) {
 		
 		$this->setupHtml($rd);

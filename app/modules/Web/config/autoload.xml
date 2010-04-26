@@ -2,9 +2,36 @@
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 	<ae:configuration>
 		
-		<autoload name="ICINGAWebBaseAction">%core.module_dir%/Web/lib/action/ICINGAWebBaseAction.class.php</autoload>
-		<autoload name="ICINGAWebBaseModel">%core.module_dir%/Web/lib/model/ICINGAWebBaseModel.class.php</autoload>
-		<autoload name="ICINGAWebBaseView">%core.module_dir%/Web/lib/view/ICINGAWebBaseView.class.php</autoload>
+		<autoload name="IcingaWebBaseAction">%core.module_dir%/Web/lib/action/IcingaWebBaseAction.class.php</autoload>
+		<autoload name="IcingaWebBaseModel">%core.module_dir%/Web/lib/model/IcingaWebBaseModel.class.php</autoload>
+		<autoload name="IcingaWebBaseView">%core.module_dir%/Web/lib/view/IcingaWebBaseView.class.php</autoload>
 		
+		<autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
+		<autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>
+		<autoload name="IcingaCommand">%core.module_dir%/Web/lib/factory/IcingaCommand.class.php</autoload>
+		<autoload name="IcingaData">%core.module_dir%/Web/lib/factory/IcingaData.class.php</autoload>
+		<autoload name="IcingaMenuExtender">%core.module_dir%/Web/lib/menu/IcingaMenuExtender.class.php</autoload>
+		<autoload name="IcingaDataCommandRoPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRoPrincipalTarget.class.php</autoload>
+		<autoload name="IcingaDataContactgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataContactgroupPrincipalTarget.class.php</autoload>
+		<autoload name="IcingaDataHostCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostCustomVariablePrincipalTarget.class.php</autoload>
+		<autoload name="IcingaDataHostgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataHostgroupPrincipalTarget.class.php</autoload>
+		<autoload name="IcingaDataPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataPrincipalTarget.class.php</autoload>
+		<autoload name="IcingaDataServiceCustomVariablePrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServiceCustomVariablePrincipalTarget.class.php</autoload>
+		<autoload name="IcingaDataServicegroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataServicegroupPrincipalTarget.class.php</autoload>
+		<autoload name="IcingaPrincipalTargetTool">%core.module_dir%/Web/lib/principal/IcingaPrincipalTargetTool.class.php</autoload>
+		<autoload name="IcingaHostStateInfo">%core.module_dir%/Web/lib/state/IcingaHostStateInfo.class.php</autoload>
+		<autoload name="IcingaServiceStateInfo">%core.module_dir%/Web/lib/state/IcingaServiceStateInfo.class.php</autoload>
+		<autoload name="IcingaStateInfo">%core.module_dir%/Web/lib/state/IcingaStateInfo.class.php</autoload>
+		<autoload name="IcingaTemplateDisplay">%core.module_dir%/Web/lib/tdisplay/IcingaTemplateDisplay.class.php</autoload>
+		<autoload name="IcingaTemplateDisplayFormat">%core.module_dir%/Web/lib/tdisplay/IcingaTemplateDisplayFormat.class.php</autoload>
+		<autoload name="IcingaTemplateDisplayMonitoring">%core.module_dir%/Web/lib/tdisplay/IcingaTemplateDisplayMonitoring.class.php</autoload>
+		<autoload name="IcingaTemplateDisplayServiceIcons">%core.module_dir%/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php</autoload>
+		<autoload name="IcingaTemplateDisplayTest">%core.module_dir%/Web/lib/tdisplay/IcingaTemplateDisplayTest.class.php</autoload>
+		<autoload name="IcingaTemplateAjaxGridLayout">%core.module_dir%/Web/lib/template/IcingaTemplateAjaxGridLayout.class.php</autoload>
+		<autoload name="IcingaTemplateLayout">%core.module_dir%/Web/lib/template/IcingaTemplateLayout.class.php</autoload>
+		<autoload name="IcingaTemplateXmlReplace">%core.module_dir%/Web/lib/template/IcingaTemplateXmlReplace.class.php</autoload>
+		<autoload name="IcingaTemplateXmlParser">%core.module_dir%/Web/lib/template/IcingaTemplateXmlParser.class.php</autoload>
+		<autoload name="IcingaTemplateWorker">%core.module_dir%/Web/lib/template/IcingaTemplateWorker.class.php</autoload>
+		<autoload name="IcingaBaseException">%core.module_dir%/Web/lib/IcingaBaseException.class.php</autoload>
 	</ae:configuration>
 </ae:configurations>

@@ -1,6 +1,6 @@
 <?php
 
-class Web_Icinga_PortalViewSuccessView extends ICINGAWebBaseView
+class Web_Icinga_PortalViewSuccessView extends IcingaWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
