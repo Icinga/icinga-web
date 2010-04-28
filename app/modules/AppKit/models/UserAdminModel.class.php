@@ -125,6 +125,37 @@ class AppKit_UserAdminModel extends ICINGAAppKitBaseModel
 		$user->save();
 		return true;
 	}
+	
+	public function removeUser(NsmUser &$user) {
+		$this->updateUserroles($user,array());
+		$targets = $user->getTargets();
+		foreach($targets as $target) {
+			$vals = $user->getTargetValues($target->get("target_name"));
+			foreach($vals as $value) {
+				$value->delete();
+			}
+		}
+		$principal = $user->getPrincipals();
+		if(!$principals instanceof NsmPrincipal) {
+			foreach($principals as $pr) {
+				if($pr->NsmPrincipalTarget) {
+					foreach($pr->NsmPrincipalTarget as $pr_t) {
+						$pr_t->delete();
+					}
+				}
+
+				$pr->delete();
+			}
+		} else {
+			if($principals->NsmPrincipalTarget) {
+				foreach($principals->NsmPrincipalTarget as $pr_t) {
+					$pr_t->delete();
+				}
+			}
+			$principals->delete();
+		}	
+		return true;
+	}
 }
 
 ?>

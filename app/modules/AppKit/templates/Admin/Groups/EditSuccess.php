@@ -1,127 +1,266 @@
-<?php 
+<script type='text/javascript'>
+Ext.ns("AppKit.groupEditor");
 
-$role = $t['role'];
-
+<?
+	$users = $t["users"];
+	echo $t['principal_editor'];
 ?>
-<?php if ($role instanceof NsmRole) { ?>
 
-	<div>
-		<div id="group_data">
-		
-			<h4>Basic data</h4>
-		
-			<form action="<?php echo $ro->gen(null); ?>" method="post">
-		
-			<table class="editTable">
-			
-				<tr>
-					<td class="key">Name:</td>
-					<td class="val"><?php echo AppKitFormElement::create('text', 'role_name', $role->role_name); ?></td>
-				</tr>
-			
-				<tr>
-					<td class="key">Description:</td>
-					<td class="val"><?php echo AppKitTextboxElement::create('role_description', $role->role_description); ?></td>
-				</tr>
-			
-				<tr>
-					<td class="key">&#160;</td>
-					<td class="val"><?php echo AppKitCheckboxElement::create('role_disabled', 1, $role->role_disabled, 'Role is disabled'); ?></td>
-				</tr>
-			
-				<tr>
-					<td class="space" colspan="2">&#160;</td>
-				</tr>
-			
-				<tr>
-					<td class="key">Created:</td>
-					<td class="val"><?php echo $role->role_created; ?></td>
-				</tr>
-			
-				<tr>
-					<td class="key">Updated:</td>
-					<td class="val"><?php echo $role->role_modified; ?></td>
-				</tr>
-			
-			</table>
-		
-			<div id="group_members" style="margin-top: 10px">
-			
-			<h4>Memberships</h4>
-			<div>
-			<?php if ($role->NsmUser->count() > 0) { ?>
-				<table class="dataTable">
-					<tr>
-						<th>Username</th>
-						<th>Given name</th>
-						<th>&#160;</th>
-					</tr>
-				<?php foreach ($role->NsmUser as $user) { ?>
-					<tr>
-						<td><?php echo $user->user_name; ?></td>
-						<td><?php echo $user->givenName(); ?></td>
-						<td><?php echo AppKitHtmlHelper::Obj()->LinkImageToRoute('appkit.admin.users.edit', 'Goto the user', $user->user_disabled == true ? 'icons.user_delete' : 'icons.user_go', array('id' => $user->user_id)); ?></td>
-					</tr>
-				<?php } ?>
-				</table>
-			<?php } else { ?>
-				<i>Sorry, this role contains no members!</i>
-			<?php } ?>
-			</div>
-			
-			<?php if ($role->NsmPrincipal->principal_id) { ?>
-			<div id="group_members" style="margin-top: 10px">
-			<h4>Principal</h4>
-			<div>
-			<table class="editTable">
-				<tr>
-					<td colspan="2" class="key">Principal</td> 
-				</tr>
-			
-				<tr>
-					<td colspan="2" class="val">
-					
-						<!-- Edit frame -->
-						<div id="principal_edit_frame"></div>
-						
-						<!-- Load the principal editor the corresponding principal -->
-						<script type="text/javascript">
-						<!-- // <![CDATA[
-			
-						Ext.onReady(function() {
-							var ele = Ext.get('principal_edit_frame');
-							if (ele) {
-								ele.getUpdater().setDefaultUrl({
-									url: '<?php echo $ro->gen("appkit.admin.principaledit", array("principal" => $role->NsmPrincipal->principal_id)); ?>',
-									scripts: true
-								});
-			
-								ele.getUpdater().refresh();
-							}
-						});
-			            
-						// ]]> -->
-						</script>
-					
-					</td>
-				</tr>
-				
-			</table>
-			</div>
-			</div>
-			<?php } ?>
-			
-			</div>
-			
-			<div class="submit">
-				<?php echo AppKitFormElement::create('submit', 'submit', 'Update')?>
-			</div>
-			
-			</form>
-		</div>
+AppKit.groupEditor.STD_CONTAINER= "contentArea";
+Ext.onReady(function(){
+	var container = "<?php echo $t['container'] ?>";
+	if(!container)
+		container = AppKit.groupEditor.STD_CONTAINER;
 	
+	var initEditorWidget = function() {
+		AppKit.groupEditor.formFields = [
+			{
+				xtype: 'hidden',
+				name: 'role_id',
+				id: 'role_id',
+			},{
+				xtype:'fieldset',
+				title: _('General information'),
+				defaults: {
+					allowBlank: false
+				},
+				items: [{
+					xtype:'textfield',
+					fieldLabel: _('Group name'),
+					name: 'role_name',
+					id: 'role_name',
+					anchor: '95%',
+					minLength: 3,
+					maxLength: 18
+				},{
+					xtype:'textfield',
+					fieldLabel: _('Description'),	
+					name: 'role_description',
+					id: 'role_description',
+					anchor: '95%'
+					
+				}, {
+					xtype: 'checkbox',
+					name: 'role_disabled',
+					id: 'role_disabled',
+					fieldLabel: _('Disabled')
+				}]
+			},{
+				xtype:'spacer',
+				height:25
+			},{
+				xtype: 'fieldset',
+				title: _('Meta information'),
+				items: [{
+					xtype:'displayfield',
+					fieldLabel: _('Created'),
+					name: 'role_created',
+					id: 'role_created',
+					preventMark: true,
+					allowBlank: true,
+					anchor: '95%'				
+				},{
+					xtype:'displayfield',
+					fieldLabel: _('Modified'),
+					name: 'role_modified',
+					id: 'role_modified',
+					preventMark: true,
+					allowBlank: true,
+					anchor: '95%'
+				}]
+			},{
+				xtype:'fieldset',
+				title: _('Permissions'),
+				items: [{
+					xtype:'panel',
+					layout:'auto',
+					autoHeight:true,
+					collapsible: true,
+					collapsed: false,
+					title: _('Users'),
+					anchor: '95%',
+					labelWidth:400,
+					qtip: _("Click to edit user"),
+					id: 'groupUsers',
+					items: []
+				}, {
+					xtype:'panel',
+					layout: 'fit',
+					title: _('Principals'),		
+					anchor: '95%',
+					collapsible:true,
+					collapsed:true,
+					id:'principalsPanel',
+					
+					items: AppKit.principalEditor.instance
+				}]
+			}
+		]
 		
-	</div>
+	
+	
+		AppKit.groupEditor.editorWidget = Ext.extend(Ext.form.FormPanel,{
+			constructor: function(cfg) {
+				if(!cfg)
+					cfg = {}
+				cfg.items =  AppKit.groupEditor.formFields
+				Ext.apply(this.cfg);
+				AppKit.groupEditor.editorWidget.superclass.constructor.call(this,cfg);
+				this.addButton({text: _('Save')},this.saveHandler,this);
+				
+			},
+			
+			saveHandler: function(b,e) {
+				if(this.getForm().isValid()) {
+				 	values = this.getForm().getValues();
+				 	this.addPrincipalsToForm(values);
+				 	var roleId = values["role_id"];
+				 	values["id"] = values["role_id"]
+				 	values["password"] = values["role_password"];
+				 	values["password_validate"] = values["role_password_confirmed"];
+				 	values["role_disabled"] = (values["role_disabled"] == "on" ? 1 : 0)
+				 	Ext.Ajax.request({
+						url: '<? echo $ro->gen("appkit.admin.groups.alter")?>'+roleId,
+						params: values,
+						success: function() {
+							if(Ext.getCmp('<? echo $t["container"] ?>'))
+								Ext.getCmp('<? echo $t["container"] ?>').hide();
+						},
+						scope:this
+				 	});
+				 	
+				 	return true;
+				}
+			 	Ext.Msg.alert(_("Error"),_("One or more fields are invalid"));					
+			},
+			
+			// Default style setting
+			layout:'form',
+			padding:5,
+			autoScroll:true,
+			defaults: {
+				padding:3,
+				xtype:'textfield',
+				anchor: '95%'
+			},
+			
+			
+			fillRoleValues: function(roleVals) {
+				var form = this.getForm();
+				var blank = {};
+				var elemVals = form.getFieldValues();
+				for(var i in elemVals) {
+					blank[i] = '';
+				}
+				form.setValues(blank);
+				form.setValues(roleVals);
+			},
+			
+			addPrincipalsToForm: function(values) {
+				if(Ext.isFunction( AppKit.principalEditor.instance.getPrincipals)) {
+					principalData =  AppKit.principalEditor.instance.getPrincipals();
 
+				 	this.objToForm(principalData.principal_values,values,"principal_value");
+					this.objToForm(principalData.principal_target,values,"principal_target");
+					AppKit.log(values);
+				}		
+			},
+			
+			objToForm: function(obj,values,prefix) {
+				this.getKeyValPairs(obj,values,prefix || "");
+			},
 
-<?php } ?>
+			getKeyValPairs: function(obj,arr,prefix) {
+				if(!prefix)
+					prefix = "";
+				
+				for(var i in obj) {
+					if(Ext.isFunction(obj[i]))
+						continue;
+					var newPrefix = prefix;
+					if(!(Ext.isArray(obj) && obj.length == 1))
+						newPrefix = newPrefix+"["+i+"]";
+					else 
+						newPrefix = newPrefix+"[]";
+					var val = obj[i];
+					if(Ext.isArray(val) || Ext.isObject(val)) {
+						this.getKeyValPairs(val,arr,newPrefix);
+					} else
+						arr[newPrefix] = val;
+				}
+
+			},
+			
+			showGroupUsers: function(data) {
+				if(!data["users"])
+					return true;
+				var cmp = Ext.getCmp('groupUsers');
+				Ext.each(data["users"],function(user) {
+					var item = new Ext.BoxComponent({
+						html: "<div class='role_user_icon silk-user'></div>"+user.user_name,
+						cls: 'role_user_wrap',					
+						listeners: {
+							render: function(e) {
+								e.getEl().on("dblclick",function() {
+									window.location.href= '<? echo $ro->gen("appkit.admin.users.edit")?>'+this.data.user_id;
+								},e)
+							},
+							scope: this
+						}
+					})	
+					item.data = user;
+					cmp.add(item);
+				});
+				cmp.doLayout();
+			},
+					
+			insertPresets: function(id)	{
+				Ext.getCmp('groupUsers').removeAll();
+				AppKit.principalEditor.instance.clearPrincipals();
+				if(id == 'new')  {
+					this.fillRoleValues({
+						'role_id' : 'new',
+						'role_users' : []
+					});
+					return true;
+				}
+				Ext.Ajax.request({
+					url: '<? echo $ro->gen("appkit.admin.data.groups")?>/'+id,
+					success: function(resp,options) {
+						var data = Ext.decode(resp.responseText);
+						this.fillRoleValues(data);
+						this.showGroupUsers(data);
+						AppKit.principalEditor.instance.loadPrincipalsForRole(data.role_id);
+					},
+					scope:this
+					
+				})			
+			}
+		});
+		
+		AppKit.groupEditor.editorWidget.instance = new AppKit.groupEditor.editorWidget();
+		var container = '<? echo $t["container"] ?>';
+		/**
+		 * Refill the form with the role values
+		 */
+		 var editor = AppKit.groupEditor.editorWidget.instance;
+		
+	
+		if(Ext.getCmp(container)) {
+			Ext.getCmp(container).add(editor);
+		} else {
+			editor.on("afterrender",function(){
+				this.doLayout()
+			},editor);
+			editor.render(container);
+		}
+	}
+	/*
+	 * Build the form if not done yet
+	 */
+	if(!AppKit.groupEditor.editorWidget)
+		initEditorWidget();
+	
+
+})
+</script>

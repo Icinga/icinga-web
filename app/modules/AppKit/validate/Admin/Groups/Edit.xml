@@ -11,6 +11,9 @@
 						<argument>id</argument>
 						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
 			</validator>
+			<validator class="string" name="container" required="false">
+				<argument>container</argument>
+			</validator>
 		</validators>
 		
 		<validators method="write">
@@ -38,7 +41,9 @@
 					<error>Principal validation failed!</error>
 				</errors>
 			</validator>
-			
+			<validator class="number" name="role_parent" required="false">
+				<argument>role_parent</argument>
+			</validator>
 			<validator class="string" name="role_name" required="true">
 					<argument>role_name</argument>
 					<ae:parameter name="min">1</ae:parameter>

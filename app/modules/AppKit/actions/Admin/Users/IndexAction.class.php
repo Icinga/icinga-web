@@ -28,7 +28,6 @@ class AppKit_Admin_Users_IndexAction extends ICINGAAppKitBaseAction
 	}
 	
 	public function execute(AgaviRequestDataHolder $rd) {
-		// We need the execute method to work with parameter od the request!
 		
 		if ($rd->getParameter('id')) {
 			try {

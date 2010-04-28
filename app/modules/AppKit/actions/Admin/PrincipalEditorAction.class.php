@@ -23,6 +23,10 @@ class AppKit_Admin_PrincipalEditorAction extends ICINGAAppKitBaseAction
 		return true;
 	}
 	
+	public function execute() {
+		return $this->getDefaultViewName();
+	}
+	
 	public function getCredentials() {
 		return array('appkit.admin');
 	}

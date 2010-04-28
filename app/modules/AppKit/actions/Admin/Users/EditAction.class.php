@@ -29,14 +29,13 @@ class AppKit_Admin_Users_EditAction extends ICINGAAppKitBaseAction
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
 		// We need the execute method to work with parameter od the request!
+
 		return 'Success';
 	}
 	
 	public function executeWrite(AgaviRequestDataHolder $rd) {
 		// We need the execute method to work with parameter od the request!
-		
 		try {
-			
 			Doctrine_Manager::connection()->beginTransaction();
 			
 			// Our user model
@@ -70,27 +69,22 @@ class AppKit_Admin_Users_EditAction extends ICINGAAppKitBaseAction
 			);
 			
 			// Give notice!
-			$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Info('Userdata updated.'));
 			
 			Doctrine_Manager::connection()->commit();
-			
-			if ($rd->getParameter('id') == 'new') {
-					$this->setAttribute('redirect', 'appkit.admin.users.edit');
-					$this->setAttribute('redirect_params', array('id' => $user->user_id));
-			}
 		}
 		catch (Exception $e) {
 			try {
 				Doctrine_Manager::connection()->rollback();
 			}
 			catch (Doctrine_Transaction_Exception $e) {}
-			$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
+				$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
 		}
 		
 		return 'Success';
 	}
 	
 	public function handleError(AgaviRequestDataHolder $rd) {
+
 		// Let the form populate filter display the errors!
 		return 'Success';
 	}

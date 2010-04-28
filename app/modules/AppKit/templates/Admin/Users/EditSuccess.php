@@ -4,160 +4,321 @@ $user = $t['user'];
 $roles = $t['roles'];
 
 ?>
-<?php if ($user instanceof NsmUser) { ?>
 
-<form action="<?php echo $ro->gen(null); ?>" method="post">
+<script type='text/javascript'>
+Ext.ns("AppKit.userEditor");
+if(!Ext.isFunction(window._))
+	_ = function(t) {return t}
+<?
+	echo $t['principal_editor'];
+?>
 
-<table class="structural">
-<tr><td>
-
-<table class="editTable">
-
-	<tr>
-		<td class="key">Username:</td>
-		<td class="val"><?php echo AppKitFormElement::create('text', 'user_name', $user->user_name); ?></td>
-	</tr>
+AppKit.userEditor.STD_CONTAINER= "contentArea";
+Ext.onReady(function(){
+	var container = "<?php echo $t['container'] ?>";
+	if(!container)
+		container = AppKit.userEditor.STD_CONTAINER;
 	
-	<tr>
-		<td class="key">Lastname:</td>
-		<td class="val"><?php echo AppKitFormElement::create('text', 'user_lastname', $user->user_lastname); ?></td>
-	</tr>
-	
-	<tr>
-		<td class="key">Firstname:</td>
-		<td class="val"><?php echo AppKitFormElement::create('text', 'user_firstname', $user->user_firstname); ?></td>
-	</tr>
-	
-	<tr>
-		<td class="key">Email:</td>
-		<td class="val"><?php echo AppKitFormElement::create('text', 'user_email', $user->user_email); ?></td>
-	</tr>
-	
-	<tr>
-		<td class="key">Disabled:</td>
-		<td class="val"><?php echo AppKitCheckboxElement::create('user_disabled', 1, $user->user_disabled ? true : false, 'User is disabled'); ?></td>
-	</tr>
-	
-	<tr>
-		<td class="space" colspan="2">&#160;</td>
-	</tr>
-
-	<tr>
-		<td class="key">Password:</td>
-		<td class="val"><?php echo AppKitFormElement::create('password', 'password', null); ?></td>
-	</tr>
-	
-	<tr>
-		<td class="key">Password (Validation):</td>
-		<td class="val"><?php echo AppKitFormElement::create('password', 'password_validate', null); ?></td>
-	</tr>
-
-	<tr>
-		<td class="space" colspan="2">&#160;</td>
-	</tr>
-	
-	<tr>
-		<td class="key">Created:</td>
-		<td class="val"><?php echo $user->user_created; ?></td>
-	</tr>
-	
-	<tr>
-		<td class="key">Updated:</td>
-		<td class="val"><?php echo $user->user_modified; ?></td>
-	</tr>
-
-</table>
-
-<div class="submit">
-	<?php echo AppKitFormElement::create('submit', 'submit', 'Update')?>
-</div>
-
-</td>
-<td>
-
-<table class="editTable">
-	<tr>
-		<td class="key">Group membership:</td>
-	</tr>
-	<tr>
-		<td class="val">
+	var initEditorWidget = function() {
+		AppKit.userEditor.formFields = [
+			{
+				xtype: 'hidden',
+				name: 'user_id',
+				id: 'user_id',
+			},{
+				xtype:'fieldset',
+				title: _('General information'),
+				defaults: {
+					allowBlank: false
+				},
+				items: [{
+					xtype:'textfield',
+					fieldLabel: _('User name'),
+					name: 'user_name',
+					id: 'user_name',
+					anchor: '95%',
+					minLength: 3,
+					maxLength: 18
+				},{
+					xtype:'container',
+					layout: 'column',
+					anchor: '100%',
+					items: [{
+						xtype:'container',
+						layout:'form',
+						
+						items: {
+							fieldLabel: _('Name'),
+							name: 'user_firstname',			
+							id: 'user_firstname',
+							xtype:'textfield',
+							anchor: '95%',
+							allowBlank: false,
+							minLength: 3,
+							maxLength: 40
+						},
+						columnWidth:0.5
+					},{
+						xtype:'container',
+						layout: 'form',
+						labelWidth:65,
+						items: {
+							xtype:'textfield',
+							name: 'user_lastname',	
+							id: 'user_lastname',
+							fieldLabel: _('Surname'),
+							anchor: '90%',
+							allowBlank: false,
+							minLength: 3,
+							maxLength: 40
+						},
+						columnWidth:0.5
+					}]
+				},{
+					xtype:'textfield',
+					fieldLabel: _('Email'),	
+					name: 'user_email',
+					id: 'user_email',
+					anchor: '75%',
+					regex: /\w+@\w+\.\w+/
+				}, {
+					xtype: 'checkbox',
+					name: 'user_disabled',
+					id: 'user_disabled',
+					fieldLabel: _('Disabled')
+				}]
+			},{
+				xtype:'spacer',
+				height:25
+			},{
+				xtype: 'fieldset',
+				title: _('Change Password'),
+				items: [{
+					xtype:'textfield',
+					fieldLabel: _('Password'),
+					id: 'user_password',
+					name: 'user_password',
+					validator: function(value) {
+						if(Ext.getCmp('user_id').getValue() == 'new' && !value) 
+							return _("Please provide a password for this user");
+						return true;
+					},
+					inputType:'password',
+					minLength: 6,
+					maxLength: 20,
+					width: '200'
+				},{
+					xtype:'textfield',
+					fieldLabel: _('Confirm password'),
+					name: 'user_password_confirmed',
+					inputType:'password',
+					validator: function(value)  {
+						var cmp_value = Ext.getCmp('user_password').getValue();
+						if(value != cmp_value && cmp_value != "") 
+							return _("The confirmed password doesn't match");
+						return true;		
+					},
+					width: '200'
+				}]
+			},{
+				xtype: 'fieldset',
+				title: _('Meta information'),
+				items: [{
+					xtype:'displayfield',
+					fieldLabel: _('Created'),
+					name: 'user_created',
+					id: 'user_created',
+					preventMark: true,
+					allowBlank: true,
+					anchor: '95%'				
+				},{
+					xtype:'displayfield',
+					fieldLabel: _('Modified'),
+					name: 'user_modified',
+					id: 'user_modified',
+					preventMark: true,
+					allowBlank: true,
+					anchor: '95%'
+				}]
+			},{
+				xtype:'fieldset',
+				title: _('Permissions'),
+				items: [{
+					xtype:'panel',
+					layout:'form',
+					autoHeight:true,
+					collapsible: true,
+					collapsed: false,
+					title: _('Groups'),
+					anchor: '95%',
+					labelWidth:400,
+					items: [
+			<? foreach($roles as $role) :?>
+{
+						xtype:'checkbox',
+						name: 'userroles[<? echo $role->get("role_id")?>]',
+						id: 'userroles_<? echo $role->get("role_id") ?>',
+						inputValue: '<? echo $role->get("role_id") ?>',
+						fieldLabel: '<? echo $role->get("role_name")." (".$role->get("role_description").") "; ?>'
+					},
+			<? endforeach; ?>
+					]
+				}, {
+					xtype:'panel',
+					layout: 'fit',
+					title: _('Principals'),		
+					anchor: '95%',
+					collapsible:true,
+					collapsed:true,
+					id:'principalsPanel',
+					items: AppKit.principalEditor.instance
+				}]
+			}
+		]
 		
-			<div class="frameLeft borderRight">
-			<?php
-				$source = new AppKitSelectDoctrineSource(
-					$roles,
-					$user->NsmRole,
-					'role_id',
-					'role_name'
-				);
+	
+	
+		AppKit.userEditor.editorWidget = Ext.extend(Ext.form.FormPanel,{
+			constructor: function(cfg) {
+				if(!cfg)
+					cfg = {}
+				cfg.items =  AppKit.userEditor.formFields;
+				cfg.width = 600;
+				Ext.apply(this.cfg);
+				AppKit.userEditor.editorWidget.superclass.constructor.call(this,cfg);
+				this.addButton({text: _('Save')},this.saveHandler,this);
 				
-				echo AppKitSelectCheckboxElement::create('userroles[]', 'Edit the userroles', $source)->setMultiple();
-			?>
-			</div>
-		
-			<div class="frameLeft">
-			<?php if ($user->NsmRole->count()) { ?>
-			<?php foreach ($user->NsmRole as $role) { ?>
-			<div class="middlevalign">
-				<?php echo AppKitHtmlHelper::Obj()->Image($role->role_disabled ? 'icons.group_delete' : 'icons.group', 'Assigned to role: '. $role->role_name); ?>
-				<span><?php echo AppKitHtmlHelper::Obj()->LinkToRoute('appkit.admin.groups.edit', sprintf('%s (%s)', $role->role_name, $role->role_description), array('id' => $role->role_id)); ?></span>
-			</div>
-				
-			<?php } ?>
-			<?php } else { ?>
-				<i>No roles were assigned to this user</i>
-			<?php } ?>
-			</div>
-		</td>
-	</tr>
-	
-</table>
-
-<?php if ($user->NsmPrincipal->principal_id) { ?>
-<table class="editTable">
-	<tr>
-		<td colspan="2" class="key">Principal</td> 
-	</tr>
-
-	<tr>
-		<td colspan="2" class="val">
-		
-			<!-- Edit frame -->
-			<div id="principal_edit_frame"></div>
+			},
 			
-			<!-- Load the principal editor the corresponding principal -->
-			<script type="text/javascript">
-			<!-- // <![CDATA[
-
-			Ext.onReady(function() {
-				var ele = Ext.get('principal_edit_frame');
-				if (ele) {
-					ele.getUpdater().setDefaultUrl({
-						url: '<?php echo $ro->gen("appkit.admin.principaledit", array("principal" => $user->NsmPrincipal->principal_id)); ?>',
-						scripts: true
-					});
-
-					ele.getUpdater().refresh();
+			saveHandler: function(b,e) {
+				if(this.getForm().isValid()) {
+				 	values = this.getForm().getValues();
+				 	this.addPrincipalsToForm(values);
+				 	var userId = values["user_id"];
+				 	values["id"] = values["user_id"]
+				 	values["password"] = values["user_password"];
+				 	values["password_validate"] = values["user_password_confirmed"];
+				 	values["user_disabled"] = (values["user_disabled"] == "on" ? 1 : 0)
+				 	Ext.Ajax.request({
+						url: '<? echo $ro->gen("appkit.admin.users.alter")?>'+userId,
+						params: values,
+						success: function() {
+							if(Ext.getCmp('<? echo $t["container"] ?>'))
+								Ext.getCmp('<? echo $t["container"] ?>').hide();
+						},
+						scope:this
+				 	});
+				 	
+				 	return true;
 				}
-			});
-            
-			// ]]> -->
-			</script>
+			 	Ext.Msg.alert(_("Error"),_("One or more fields are invalid"));					
+			},
+			
+			// Default style setting
+			layout:'form',
+			padding:5,
+			autoScroll:true,
+			defaults: {
+				padding:3,
+				xtype:'textfield',
+				anchor: '95%'
+			},
+			
+			
+			fillUserValues: function(userVals) {
+				var form = this.getForm();
+				var blank = {};
+				var elemVals = form.getFieldValues();
+				for(var i in elemVals) {
+					blank[i] = '';
+				}
+				form.setValues(blank);
+				form.setValues(userVals);
+			},
+			
+			addPrincipalsToForm: function(values) {
+				if(Ext.isFunction( AppKit.principalEditor.instance.getPrincipals)) {
+					principalData =  AppKit.principalEditor.instance.getPrincipals();
+
+				 	this.objToForm(principalData.principal_values,values,"principal_value");
+					this.objToForm(principalData.principal_target,values,"principal_target");
+					AppKit.log(values);
+				}		
+			},
+			
+			objToForm: function(obj,values,prefix) {
+				this.getKeyValPairs(obj,values,prefix || "");
+			},
+
+			getKeyValPairs: function(obj,arr,prefix) {
+				if(!prefix)
+					prefix = "";
+				
+				for(var i in obj) {
+					if(Ext.isFunction(obj[i]))
+						continue;
+					var newPrefix = prefix;
+					if(!(Ext.isArray(obj) && obj.length == 1))
+						newPrefix = newPrefix+"["+i+"]";
+					else 
+						newPrefix = newPrefix+"[]";
+					var val = obj[i];
+					if(Ext.isArray(val) || Ext.isObject(val)) {
+						this.getKeyValPairs(val,arr,newPrefix);
+					} else
+						arr[newPrefix] = val;
+				}
+
+			},
+			insertPresets: function(id)	{
+				AppKit.principalEditor.instance.clearPrincipals();
+				if(id == 'new')  {
+					this.fillUserValues({
+						'user_id' : 'new',
+						'user_roles' : []
+					});
+					return true;
+				}
+				Ext.Ajax.request({
+					url: '<? echo $ro->gen("appkit.admin.data.users")?>/'+id,
+					success: function(resp,options) {
+						var data = Ext.decode(resp.responseText);
+						this.fillUserValues(data);
+						AppKit.principalEditor.instance.loadPrincipalsForUser(data.user_id);
+					},
+					scope:this
+					
+				})			
+			}
+		});
 		
-		</td>
-	</tr>
+		AppKit.userEditor.editorWidget.instance = new AppKit.userEditor.editorWidget({maxWidth:600});
+		var container = '<? echo $t["container"] ?>';
+		if(!container)
+			container = AppKit.userEditor.STD_CONTAINER;
+		/**
+		 * Refill the form with the user values
+		 */
+		 var editor = AppKit.userEditor.editorWidget.instance;
+		
 	
-</table>
-<?php } ?>
+		if(Ext.getCmp(container)) {
+			Ext.getCmp(container).add(editor);
+		} else {
+			editor.on("afterrender",function(){
+				this.doLayout()
+			},editor);
+			editor.render(container);
+		}
+	}
+	/*
+	 * Build the form if not done yet
+	 */
+	if(!AppKit.userEditor.editorWidget)
+		initEditorWidget();
+	<? if(!$t["container"]) { ?>
+			AppKit.userEditor.editorWidget.instance.insertPresets(<? echo $user->get("user_id") ?>);				
+ 	<? }?>
 
-</td></tr>
-</table>
-
-
-<?php echo AppKitHiddenElement::create('id', $user->user_id ? $user->user_id : 'new')?>
-
-
-</form>
-
-
-<?php } ?>
+})
+</script>

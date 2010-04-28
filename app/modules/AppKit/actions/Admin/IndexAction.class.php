@@ -16,6 +16,7 @@ class AppKit_Admin_IndexAction extends ICINGAAppKitBaseAction
 	 */
 	public function getDefaultViewName()
 	{
+		
 		return 'Success';
 	}
 	

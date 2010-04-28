@@ -6,7 +6,6 @@ class AppKit_Admin_IndexSuccessView extends ICINGAAppKitBaseView
 	{
 		$this->setupHtml($rd);
 
-		$this->setAttribute('title', 'Admin.Index');
 	}
 }
 

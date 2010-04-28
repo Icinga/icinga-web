@@ -6,7 +6,6 @@ class AppKit_Admin_Users_IndexSuccessView extends ICINGAAppKitBaseView
 	{
 		$this->setupHtml($rd);
 
-		$this->setAttribute('title', 'Users');
 		
 		$useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
 		

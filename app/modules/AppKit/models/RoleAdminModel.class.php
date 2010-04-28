@@ -4,7 +4,7 @@ class AppKit_RoleAdminModel extends ICINGAAppKitBaseModel
 {
 
 	private static $editableAttributes = array (
-		'role_name', 'role_description', 'role_disabled'
+		'role_name', 'role_description', 'role_disabled', 'role_parent'
 	);
 	
 	/**
@@ -82,6 +82,53 @@ class AppKit_RoleAdminModel extends ICINGAAppKitBaseModel
 		return true;
 	}
 	
+	/**
+	 * @todo: this is not really nice
+	 * 
+	 * @param NsmRole $role
+	 */
+	public function removeRole(NsmRole &$role) {
+		
+		$targets = $role->getTargets();
+		foreach($targets as $target) {
+			$vals = $role->getTargetValues($target->get("target_name"));
+			foreach($vals as $value) {
+
+				$value->delete();
+			}
+		}
+
+		$principals = $role->NsmPrincipal;
+		if(!$principals instanceof NsmPrincipal) {
+			foreach($principals as $pr) {
+				if($pr->NsmPrincipalTarget) {
+					foreach($pr->NsmPrincipalTarget as $pr_t) {
+						$pr_t->delete();
+					}
+				}
+
+				$pr->delete();
+			}
+		} else {
+			if($principals->NsmPrincipalTarget) {
+				foreach($principals->NsmPrincipalTarget as $pr_t) {
+					$pr_t->delete();
+				}
+			}
+			$principals->delete();
+		}
+		$this->rechainChildren($role);
+		$role->delete();
+	}
+	
+	public function rechainChildren(NsmRole &$role) {
+		$parent = $role->hasParent() ? $role->getParent() : null;
+		$children = $role->getChildren();
+		foreach($children as $child) {
+			$child->set("role_parent",$parent);
+			$child->save();
+		}
+	}
 }
 
 ?>

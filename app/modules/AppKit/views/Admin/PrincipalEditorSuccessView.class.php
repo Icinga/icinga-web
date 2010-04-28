@@ -7,9 +7,10 @@ class AppKit_Admin_PrincipalEditorSuccessView extends ICINGAAppKitBaseView
 		$this->setupHtml($rd);
 
 		$this->setAttribute('_title', 'Admin.PrincipalEditor');
-		
+		$this->setAttribute('container',$rd->getParameter('container'));
 		$pa = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
 		$this->setAttributeByRef('pa', $pa);
+	
 		
 	}
 }
