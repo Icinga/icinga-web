@@ -6,14 +6,15 @@ Ext.onReady(function() {
 		storeId: 'userListStore',
 		idProperty: 'user_id',
 		autoLoad:true,
-		url: '<? echo $ro->gen("appkit.admin.data.users")?>',
+		url: '<? echo $ro->gen("appkit.data.users")?>',
 		fields: [
 			{name: 'user_id', type:'int'},
 			'user_name',
 			'user_lastname',
 			'user_firstname',
 			'user_email',
-			{name: 'user_disabled',type:'boolean',convert: function(v) {
+			{name: 'user_disabled',type:'boolean'},
+			{name: 'user_disabled_icon',mapping:'user_disabled',convert: function(v) {
 				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'silk-cancel' : 'silk-accept')+'"></div>';
 			}},
 			{name: 'user_created'},
@@ -142,7 +143,7 @@ Ext.onReady(function() {
 				{header: _('lastname'), dataIndex: 'user_lastname'},
 				{header: _('firstname'), dataIndex: 'user_firstname'},
 				{header: _('email'),dataIndex: 'user_email'},
-				{header: _('inactive'), dataIndex: 'user_disabled',width:75}
+				{header: _('inactive'), dataIndex: 'user_disabled_icon',width:75}
 			]
 		}),
 		autoScroll:true,

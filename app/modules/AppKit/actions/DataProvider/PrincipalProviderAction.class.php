@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Groups_IndexAction extends ICINGAAppKitBaseAction
+class AppKit_DataProvider_PrincipalProviderAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -14,35 +14,27 @@ class AppKit_Admin_Groups_IndexAction extends ICINGAAppKitBaseAction
 	 *                     executed.</li>
 	 *                   </ul>
 	 */
-	public function getDefaultViewName()
-	{
-		return 'Success';
-	}
 	
 	public function isSecure() {
 		return true;
 	}
 	
 	public function getCredentials() {
-		return array ('appkit.admin', 'appkit.admin.groups');
+		return array ('appkit.admin');
 	}
 	
-	public function execute(AgaviRequestDataHolder $rd) {
+	public function executeRead(AgaviRequestDataHolder $rd) {
 		// We need the execute method to work with parameter od the request!
-		if ($rd->getParameter('id')) {
-			try {
-				$roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
-				$role = $roleadmin->getRoleById($rd->getParameter('id'));
-				
-				if ($rd->getParameter('toggleActivity', false) == true) {
-					$roleadmin->toggleActivity($role);
-				}
-			}
-			catch (Exception $e) {
-				
-			}
-		}
-		
+		return 'Success';
+	}
+	
+	public function handleError(AgaviRequestDataHolder $rd) {
+		// Let the form populate filter display the errors!
+		return 'Success';
+	}
+	
+	public function getDefaultViewName()
+	{
 		return 'Success';
 	}
 }

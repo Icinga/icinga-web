@@ -21,7 +21,10 @@
 						<argument>id</argument>
 						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
 			</validator>
+			<validator class="isset" name="ignorePrincipals" required="false">
+				<argument>ignorePrincipals</argument>
 			
+			</validator>
 			<validator class="string" name="principal_value" required="false">
 				<arguments base="principal_value[][][]">
 					<argument />

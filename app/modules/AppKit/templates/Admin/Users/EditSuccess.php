@@ -280,7 +280,7 @@ Ext.onReady(function(){
 					return true;
 				}
 				Ext.Ajax.request({
-					url: '<? echo $ro->gen("appkit.admin.data.users")?>/'+id,
+					url: '<? echo $ro->gen("appkit.data.users")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
 						this.fillUserValues(data);

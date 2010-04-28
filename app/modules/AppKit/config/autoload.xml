@@ -6,6 +6,5 @@
 		<autoload name="ICINGAAppKitBaseAction">%core.module_dir%/AppKit/lib/action/ICINGAAppKitBaseAction.class.php</autoload>
 		<autoload name="ICINGAAppKitBaseModel">%core.module_dir%/AppKit/lib/model/ICINGAAppKitBaseModel.class.php</autoload>
 		<autoload name="ICINGAAppKitBaseView">%core.module_dir%/AppKit/lib/view/ICINGAAppKitBaseView.class.php</autoload>
-		<autoload name="JsonDecodeValidator">%core.module_dir%/AppKit/lib/validator/JsonDecodeValidator.class.php</autoload>
 	</ae:configuration>
 </ae:configurations>

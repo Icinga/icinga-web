@@ -225,7 +225,7 @@ Ext.onReady(function(){
 					return true;
 				}
 				Ext.Ajax.request({
-					url: '<? echo $ro->gen("appkit.admin.data.groups")?>/'+id,
+					url: '<? echo $ro->gen("appkit.data.groups")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
 						this.fillRoleValues(data);

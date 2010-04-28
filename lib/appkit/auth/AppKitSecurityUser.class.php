@@ -40,11 +40,12 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 				
 				// Grant related roles
 				$this->applyDoctrineUserRoles($user);
-				
+
 				// Give notice
 				$this->getContext()->getLoggerManager()
 				->logInfo('User %s (%s) logged in!', $username, $user->givenName());
 				
+
 				// Return true
 				return true;
 			}
@@ -88,6 +89,9 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		return true;
 	}
 	
+
+	
+	
 	/**
 	 * Applying the roles the the agavi rbac struct
 	 * @param NsmUser $user
@@ -118,17 +122,15 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 			}
 		}
 		foreach($user->getTargets("credential") as $credential) {
+			$this->addCredential($credential->get("target_name"));
 		}
 	
 	}
 	
 	private function addCredentialsFromRole(NsmRole &$role) {
-		$log = array("Test\n");
 		foreach($role->getTargets("credential") as $credential) {
 			$this->addCredential($credential->get("target_name"));
-			$log[] = $credential->get("target_name");
 		}	
-		file_put_contents("/var/www/log.txt",$log,FILE_APPEND);
 	}
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {

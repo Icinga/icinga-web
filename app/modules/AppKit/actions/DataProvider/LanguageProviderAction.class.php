@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Privileges_IndexAction extends ICINGAAppKitBaseAction
+class AppKit_DataProvider_LanguageProviderAction extends ICINGAAppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -17,15 +17,6 @@ class AppKit_Privileges_IndexAction extends ICINGAAppKitBaseAction
 	public function getDefaultViewName()
 	{
 		return 'Success';
-	}
-	
-	
-	public function isSecure() {
-		return true;
-	}
-	
-	public function getCredentials() {
-		return array('appkit.admin');
 	}
 }
 

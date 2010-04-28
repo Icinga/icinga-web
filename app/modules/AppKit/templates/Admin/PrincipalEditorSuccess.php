@@ -7,7 +7,7 @@ AppKit.principalEditor.principalStore = new Ext.data.JsonStore({
 	autoLoad:true,
 	storeId: 'principalStore',
 	idProperty: 'id',
-	url: '<? echo $ro->gen("appkit.admin.data.principals");?>',
+	url: '<? echo $ro->gen("appkit.data.principals");?>',
 	fields: ['id','name','description','type','fields']
 });
 
@@ -82,7 +82,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 					scope:this
 				},{
 					iconCls:'silk-delete',
-					handler: function() {
+					handler: function(_ev,toolEl,panel,tc) {
 						this.removeSelectedNodes();
 					},
 					scope:this
@@ -170,7 +170,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	loadPrincipalsForUser : function(userid) {
 
 		Ext.Ajax.request({
-			url: '<? echo $ro->gen("appkit.admin.data.principals.user")?>'+userid,
+			url: '<? echo $ro->gen("appkit.data.principals.user")?>'+userid,
 			success: function(resp) {
 				var data = Ext.decode(resp.responseText);
 				this.setPrincipals(data);
@@ -182,7 +182,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	loadPrincipalsForRole : function(role) {
 
 		Ext.Ajax.request({
-			url: '<? echo $ro->gen("appkit.admin.data.principals.group")?>'+role,
+			url: '<? echo $ro->gen("appkit.data.principals.group")?>'+role,
 			success: function(resp) {
 				var data = Ext.decode(resp.responseText);
 				this.setPrincipals(data);
@@ -287,21 +287,22 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 			if(node.type == "principal") {
 				selectionNr++;
 				var parent = node.parentNode;
-				node.destroy();
-				if(!parent.hasChildNodes())
-					parent.destroy();
-					
+				node.remove();
+				if(!parent.hasChildNodes()) {
+					this.categoryNodes[parent.txt] = null;
+					parent.remove();
+				}
 			} else if(node.type == "category") {
 				Ext.Msg.confirm(_("Removing a category"),_("Do you really want to delete all ")+node.text+_(" principals?"),
 					function(btn) {
 						if(btn == "yes") {
-							node.destroy();
+							node.remove();
 							selectionNr++;
 						}
 					}
 				);
 			}
-		})
+		},this)
 		if(!selectionNr)
 			Ext.Msg.alert(_("Nothing selected"),_("No node was removed"));
 	}

@@ -124,7 +124,7 @@ class AppKit_RoleAdminModel extends ICINGAAppKitBaseModel
 	public function rechainChildren(NsmRole &$role) {
 		$parent = $role->hasParent() ? $role->getParent() : null;
 		$children = $role->getChildren();
-		foreach($children as $child) {
+		foreach($children as $child) {			
 			$child->set("role_parent",$parent);
 			$child->save();
 		}

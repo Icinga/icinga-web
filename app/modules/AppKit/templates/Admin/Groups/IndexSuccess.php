@@ -54,17 +54,21 @@ Ext.onReady(function() {
 			movenode: function(tree,node,oldParent,newParent,index) {
 				if(!node.record)
 					return false;
-				var parentId = newParent.record ? newParent.record.get("role_id") : null;
+				var parentId = newParent.record ? newParent.record.get("role_id") : -1;
 				node.record.set("role_parent",parentId);
 				var groupId = node.record.get("role_id");
-				
+				var params = {};
+				Ext.apply(params,node.record.data);
+				params["ignorePrincipals"] = true;
 				Ext.Ajax.request({
 					url: '<? echo $ro->gen("appkit.admin.groups.alter")?>'+groupId,
-					params: node.record.data,
+					params: params,
 					success: function() {
+						AppKit.groups.groupList.reload();
 					},
 					scope:this
 			 	});
+			 	
 			},
 			scope:this
 		}
@@ -75,12 +79,13 @@ Ext.onReady(function() {
 		storeId: 'groupListStore',
 		idProperty: 'role_id',
 		autoLoad:true,
-		url: '<? echo $ro->gen("appkit.admin.data.groups")?>',
+		url: '<? echo $ro->gen("appkit.data.groups")?>',
 		fields: [
 			{name: 'role_id', type:'int'},
 			'role_name',
 			'role_description',
-			{name: 'role_disabled',type:'boolean', convert: function(v) {
+			{name: 'role_disabled', type:'boolean'},
+			{name: 'role_disabled_icon',type:'boolean' , mapping:'role_disabled', convert: function(v) {
 				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'silk-cancel' : 'silk-accept')+'"></div>';
 			}},
 			{name: 'role_created'},
@@ -195,7 +200,7 @@ Ext.onReady(function() {
 				{id:'group_id', header: 'ID', width:75,  dataIndex: 'role_id'},
 				{header: _('groupname'), dataIndex: 'role_name'},
 				{header: _('description'), dataIndex: 'role_description'},
-				{header: _('isActive'), dataIndex: 'role_disabled',width:75}
+				{header: _('isActive'), dataIndex: 'role_disabled_icon',width:75}
 			]
 		}),
 		autoScroll:true,

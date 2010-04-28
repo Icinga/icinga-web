@@ -18,6 +18,37 @@ class AppKit_User_PreferencesAction extends ICINGAAppKitBaseAction
 	{
 		return 'Success';
 	}
+	
+	public function executeRead(AgaviRequestDataHolder $rd) {
+		return "Success";
+	}
+	
+	public function executeWrite(AgaviRequestDataHolder $rd) {
+		$user = $this->getContext()->getUser();
+		if(!$user)
+			throw new AppKitException("User doesn't exist!");
+
+		$key = $rd->getParameter("upref_key", false);
+		$batch = $rd->getParameter('params',false);
+		if($key) {
+			$val = $rd->getParameter("upref_val");
+			$isLong = $rd->getParameter("isLong",false);
+			if($val) {
+				$this->setPreference($user,$key,$val,$isLong);
+			}
+		} else if($batch) {
+			foreach($batch as $preference) {
+				$this->setPreference($user,	$preference["upref_key"],
+									$preference["upref_val"],$preference["isLong"]);
+			}
+		}	
+
+		return "Success";
+	}
+	public function setPreference($user, $key,$val,$isLong) {
+		$user->getNsmUser()->setPref($key,$val,true,false);	
+		$this->getContext()->getLoggerManager()->logInfo("User %s changed %s to %s",$user->getNsmUser()->get("user_name"), $key,$val);
+	}
 }
 
 ?>
