@@ -1,7 +1,7 @@
 <?php
 	
 /**
- * Removes the settings that we're created by the plugin 
+ * Removes the settings that we're created by the module 
  *  
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
@@ -91,9 +91,9 @@ class ManifestSettingsRemoverTask extends Task {
 			}
 			$nodeToRemove->parentNode->removeChild($nodeToRemove);
 		}
-		$pluginName = $this->project->getUserProperty("PLUGIN_Name");
+		$moduleName = $this->project->getUserProperty("MODULE_Name");
 		// remove reference
-		$includes = $xpathSearcher->query("//xi:include[@href='plugins/".$pluginName.".xml']")->item(0);
+		$includes = $xpathSearcher->query("//xi:include[@href='modules/".$moduleName.".xml']")->item(0);
 		if($includes) 
 			$includes->parentNode->removeChild($includes);
 			

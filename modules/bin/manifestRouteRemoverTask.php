@@ -2,7 +2,7 @@
 
 require_once "manifestBaseClass.php";
 /**
- * Removes the routes that were added by a plugin
+ * Removes the routes that were added by a module
  * 
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *

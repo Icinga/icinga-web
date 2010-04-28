@@ -203,7 +203,7 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$manifestSearcher = new DOMXPath($cfgDOM);
 		$manifestSearcher->registerNamespace("default","http://agavi.org/agavi/1.0/config");
 		
-		// fetch extracted node from plugin folder		
+		// fetch extracted node from module folder		
 		if($pname)	{
 			$query = "//default:setting[@name='".$name."']//default:parameter[@name='".$pname."']";
 		} else {
@@ -262,7 +262,7 @@ class ManifestAgaviConfiguratorTask extends Task {
 	}
 	
 	/**
-	 * Adds a <xi:include> tag to the icinga.xml which points to the plugin include
+	 * Adds a <xi:include> tag to the icinga.xml which points to the module include
 	 * 
 	 */
 	protected function addSettingsInclude() {
@@ -277,11 +277,11 @@ class ManifestAgaviConfiguratorTask extends Task {
 		$xpathSearcher->registerNamespace("xi","http://www.w3.org/2001/XInclude");
 		
 			// finally add am xi:include 
-		$pluginName = $this->project->getUserProperty("PLUGIN_Name");
-		$includes = $xpathSearcher->query("//xi:include[@href='plugins/".$pluginName.".xml']")->item(0);
+		$moduleName = $this->project->getUserProperty("MODULE_Name");
+		$includes = $xpathSearcher->query("//xi:include[@href='modules/".$moduleName.".xml']")->item(0);
 		if(!$includes) {
 			$include = $configDOM->createElementNS("http://www.w3.org/2001/XInclude","xi:include");
-			$include->setAttribute("href","plugins/".$pluginName.".xml");
+			$include->setAttribute("href","modules/".$moduleName.".xml");
 			$configDOM->lastChild->appendChild($include);
 		}
 	

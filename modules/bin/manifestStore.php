@@ -31,7 +31,7 @@ class manifestStore {
 	
 	protected static function resolveManifestVars($xml,$file,$project) {
 		
-		$project->setUserProperty("PLUGIN_Name",(String) $xml->Meta->Name);
+		$project->setUserProperty("MODULE_Name",(String) $xml->Meta->Name);
 		$xmlString = file_get_contents($file);
 		// Read paths
 		if(isset($xml->Files->Paths))	{

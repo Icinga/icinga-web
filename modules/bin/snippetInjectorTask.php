@@ -29,23 +29,23 @@ class snippetInjectorTask extends Task {
 				case 'txt':
 				case 'ini':	
 				case 'pl':
-					$mark = "#PLUGIN[".$name."]";
+					$mark = "#MODULE[".$name."]";
 					break;
 				case 'xml':
 				case 'html:':
-					$mark = "<!-- PLUGIN[".$name."] -->";
+					$mark = "<!-- MODULE[".$name."] -->";
 					break;
 				case 'css':
 				case 'php':
 				case 'js':
-					$mark = "/*PLUGIN[".$name."]*/";
+					$mark = "/*MODULE[".$name."]*/";
 					break;
 				default:
 					throw new BuildException("Unknown filetype ".$ext);
 			}
 			$snippetFileContent = file_get_contents($file);
 			// remove previous snippets
-			$snippetFileContent = preg_replace("/.*PLUGIN\[".$name."\].*[\r\n]+([\w\W\r\n]+)[\r\n]+.*?PLUGIN\[".$name."\].*?[\r\n]+/","",$snippetFileContent);
+			$snippetFileContent = preg_replace("/.*MODULE\[".$name."\].*[\r\n]+([\w\W\r\n]+)[\r\n]+.*?MODULE\[".$name."\].*?[\r\n]+/","",$snippetFileContent);
 			
 			// append this snippet
 			$snippetText = "\n".$mark."\n".$snippet["content"]."\n".$mark."\n";

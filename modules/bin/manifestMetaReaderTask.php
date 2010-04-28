@@ -18,10 +18,10 @@ class ManifestMetaReaderTask extends manifestBaseClass {
 	protected function readMeta() {
 		$xml = $this->getXMLObject();
 		$meta = $xml->Meta;
-		$this->project->setUserProperty("PLUGIN_Name",(String) $meta->Name);	
-		$this->project->setUserProperty("PLUGIN_Version",(String) $meta->Version);
-		$this->project->setUserProperty("PLUGIN_Description",(String) $meta->Description);
-		$this->project->setUserProperty("PLUGIN_Author",(String) $meta->Author);
-		$this->project->setUserProperty("PLUGIN_Company",(String) $meta->Company);
+		$this->project->setUserProperty("MODULE_Name",(String) $meta->Name);	
+		$this->project->setUserProperty("MODULE_Version",(String) $meta->Version);
+		$this->project->setUserProperty("MODULE_Description",(String) $meta->Description);
+		$this->project->setUserProperty("MODULE_Author",(String) $meta->Author);
+		$this->project->setUserProperty("MODULE_Company",(String) $meta->Company);
 	}
 }

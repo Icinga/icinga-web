@@ -3,23 +3,23 @@
 <project name="ModuleInstaller" default="usage">
 
 
-	<!-- The plugin-install task -->
+	<!-- The module-install task -->
 	<target name="install"> 
 		
 		<!--  Show metadata and let the user confirm -->
 		<taskdef name="manifestMetaReader" classname="bin.manifestMetaReaderTask"/>
 		<manifestMetaReader file="manifest.xml" />
-		<echo>Install script for Icinga-web Plugins</echo>
+		<echo>Install script for Icinga-web Modules</echo>
 		<echo>-------------------------------------</echo>
-		<echo>Plugin Name	${PLUGIN_Name}</echo>
-		<echo>Version		${PLUGIN_Version}</echo>
-		<echo>${PLUGIN_Description}</echo>
-		<echo>Author		${PLUGIN_Author}</echo>
-		<echo>Company		${PLUGIN_Company}</echo>
+		<echo>Module Name	${MODULE_Name}</echo>
+		<echo>Version		${MODULE_Version}</echo>
+		<echo>${MODULE_Description}</echo>
+		<echo>Author		${MODULE_Author}</echo>
+		<echo>Company		${MODULE_Company}</echo>
 		<echo>-------------------------------------</echo>
 		
 		<!--  Confirmations -->
-		<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to install this plugin?</input>
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to install this module?</input>
 		<if>
 			<equals arg1="${confirm}" arg2="n" />
 			<then>
@@ -96,24 +96,24 @@
 	 -->
 
 	<target name="remove">
-		<!-- Plugin deletion wizard -->
-		<echo>Plugin Deletion Wizard</echo>
+		<!-- Module deletion wizard -->
+		<echo>Module Deletion Wizard</echo>
 		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="/usr/local/icinga-web">Location of icinga-web</input>
-		<input propertyname="PLUGIN_Name" promptChar="?">Plugin name</input>
+		<input propertyname="MODULE_Name" promptChar="?">Module name</input>
 		
 		<!-- 
 				Check if module exists and let the user confirm the removal
 		 -->
 		<property name="module_exists" value="false"></property>
 		
-		<available file="${PATH_Icinga}/app/modules/${PLUGIN_Name}/manifest.xml" property="module_exists" value="true"/>
+		<available file="${PATH_Icinga}/app/modules/${MODULE_Name}/manifest.xml" property="module_exists" value="true"/>
 		<if>
 			<equals arg1="${module_exists}" arg2="1"/>
 			<then>
-				<property name="manifest" value="${PATH_Icinga}/app/modules/${PLUGIN_Name}/manifest.xml"></property>
+				<property name="manifest" value="${PATH_Icinga}/app/modules/${MODULE_Name}/manifest.xml"></property>
 	
 				<!--  Confirmations -->
-				<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to deinstall this plugin?</input>
+				<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to deinstall this module?</input>
 				<if>
 					<equals arg1="${confirm}" arg2="n" />
 					<then>
@@ -122,7 +122,7 @@
 				</if>
 			</then>
 			<else>
-				<fail message="${module_exists} Plugin does not exist. No Manifest found at ${PATH_Icinga}/app/modules/${PLUGIN_Name}/manifest.xml" />
+				<fail message="${module_exists} Module does not exist. No Manifest found at ${PATH_Icinga}/app/modules/${MODULE_Name}/manifest.xml" />
 			</else>
 		</if>
 		
@@ -154,25 +154,25 @@
 			<equals arg1="${confirm}" arg2="y" />
 			<then>
 				<echo>Removing tables</echo>
-				<doctrineDBBuilder models="${PATH_Icinga}/app/modules/${PLUGIN_Name}/lib/.models.cfg" action="delete" ini="db.ini"/>
+				<doctrineDBBuilder models="${PATH_Icinga}/app/modules/${MODULE_Name}/lib/.models.cfg" action="delete" ini="db.ini"/>
  			</then>
 		</if>
 		
 		<echo>Removing files</echo>
-		<delete dir="${PATH_Icinga}/app/modules/${PLUGIN_Name}" />	
+		<delete dir="${PATH_Icinga}/app/modules/${MODULE_Name}" />	
 
-		<echo>Plugin successfully deleted!</echo>
+		<echo>Module successfully deleted!</echo>
 	</target>
 		
 
 	
 	<!-- 
-			**	Create Plugin  **	
+			**	Create Module  **	
 	 -->
-	<target name="plugin-create">
-		<echo msg="Plugin creation tool for Icinga-web" />
+	<target name="module-create">
+		<echo msg="Module creation tool for Icinga-web" />
 		
-		<input propertyname="coreDir">Plugin directory (containing manifest.xml) : </input>
+		<input propertyname="coreDir">Module directory (containing manifest.xml) : </input>
 		<echo msg="Searching for manifest file at : ${coreDir}" />
 	
 		<taskdef name="manifestFileSelector" classname="bin.manifestFileSelectorTask"/>
@@ -182,7 +182,7 @@
 		<taskdef name="manifestSettingsExtractor" classname="bin.manifestSettingsExtractorTask"/>
 	
 		<property name="manifest" value="${coreDir}/manifest.xml"></property>
-		<manifestFileSelector file="${manifest}" source="Plugin" propertyName="plugin"/>
+		<manifestFileSelector file="${manifest}" source="Module" propertyName="module"/>
 	 	<manifestFileSelector file="${manifest}" source="Doctrine" propertyName="models"/>
 		<manifestFileSelector file="${manifest}" source="SQL" propertyName="sqlRoutines"/>
 		
@@ -190,56 +190,56 @@
 		
 		<!-- Copy agavi module and config to src -->
 	
-		<echo>Saving plugin Data...</echo>		
-		<copy todir="${PLUGIN_Name}/src">
-			<fileset refid="plugin" />
+		<echo>Saving module Data...</echo>		
+		<copy todir="${MODULE_Name}/src">
+			<fileset refid="module" />
 			<mapper classname="bin.manifestMapper" from="${manifest}"/>
 		</copy>
 		
 		
 		<!-- Copy doctrine Models to etc/doctrine -->		
 		<echo>Saving doctrine Models...</echo>	
-		<copy todir="${PLUGIN_Name}/etc/doctrine">
+		<copy todir="${MODULE_Name}/etc/doctrine">
 			<fileset refid="models" />
 			<mapper classname="bin.manifestMapper" from="${manifest}"/>
 		</copy>
 	
 		<!--  Copy sql-routines to etc/sql -->
 		<echo>Saving SQL-routines...</echo>	
-		<copy todir="${PLUGIN_Name}/etc/sql">
+		<copy todir="${MODULE_Name}/etc/sql">
 			<fileset refid="sqlRoutines" />
 			<mapper classname="bin.manifestMapper" from="${manifest}"/>
 		</copy>
 		
 		<echo>Extracting snippets...</echo>
 		<!-- Extract Stylesheets -->
-		<manifestSnippetExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/snippets.dat"></manifestSnippetExtractor>
+		<manifestSnippetExtractor file="${manifest}" toFile="${MODULE_Name}/src/snippets.dat"></manifestSnippetExtractor>
 
 		<echo>Extracting settings...</echo>		
-		<manifestSettingsExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/"></manifestSettingsExtractor>
+		<manifestSettingsExtractor file="${manifest}" toFile="${MODULE_Name}/src/"></manifestSettingsExtractor>
 
 		<echo>Extracting routes...</echo>		
-		<manifestRouteExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/routes.xml"></manifestRouteExtractor>
+		<manifestRouteExtractor file="${manifest}" toFile="${MODULE_Name}/src/routes.xml"></manifestRouteExtractor>
 	
 		<echo>Extracting translations...</echo>		
-		<manifestTranslationExtractor file="${manifest}" toFile="${PLUGIN_Name}/src/translations.xml" />
+		<manifestTranslationExtractor file="${manifest}" toFile="${MODULE_Name}/src/translations.xml" />
 			
 		<!-- Creating Manifest -->
-		<copy file="${manifest}" tofile="${PLUGIN_Name}/manifest.xml"/>
+		<copy file="${manifest}" tofile="${MODULE_Name}/manifest.xml"/>
 		
 		<!-- Deploying installer -->
-		<copy file="build.xml" tofile="${PLUGIN_Name}/build.xml"/>
-		<copy todir="${PLUGIN_Name}/bin">
+		<copy file="build.xml" tofile="${MODULE_Name}/build.xml"/>
+		<copy todir="${MODULE_Name}/bin">
 			<fileset dir="./bin">
 				<include name="**" />
 			</fileset>
 		</copy>
-		<copy file="etc/db.ini" todir="${PLUGIN_Name}/" />
+		<copy file="etc/db.ini" todir="${MODULE_Name}/" />
 		
 		<!-- Packing -->
-		<tar basedir="${PLUGIN_Name}/." destfile="${PLUGIN_Name}_plugin.tar" compression="gzip" />
+		<tar basedir="${MODULE_Name}/." destfile="${MODULE_Name}_module.tar" compression="gzip" />
 		
-		<!-- <delete dir="${PLUGIN_Name}" />  -->
+		<!-- <delete dir="${MODULE_Name}" />  -->
 	</target>
 	
 	<target name="export-cronk">
@@ -308,16 +308,16 @@
 	</target>
 	
 	<target name="structure-create">
-		<mkdir dir="${PLUGIN_Name}"/>
-		<mkdir dir="${PLUGIN_Name}/src"/>
-		<mkdir dir="${PLUGIN_Name}/doc"/>
-		<mkdir dir="${PLUGIN_Name}/etc"/>
-		<mkdir dir="${PLUGIN_Name}/etc/doctrine"/>
-		<mkdir dir="${PLUGIN_Name}/etc/sql"/>
+		<mkdir dir="${MODULE_Name}"/>
+		<mkdir dir="${MODULE_Name}/src"/>
+		<mkdir dir="${MODULE_Name}/doc"/>
+		<mkdir dir="${MODULE_Name}/etc"/>
+		<mkdir dir="${MODULE_Name}/etc/doctrine"/>
+		<mkdir dir="${MODULE_Name}/etc/sql"/>
 	</target>
 	
 	<target name="usage">
-		<echo msg="Plugin creation tool for Icinga-web" />
-		<echo msg="Targets are: install, build, remove, plugin-create, cronk-export" />
+		<echo msg="Modules/cron creation and installation tool for Icinga-web" />
+		<echo msg="Targets are: install, build, remove, mdoule-create, cronk-export" />
 	</target>
 </project>

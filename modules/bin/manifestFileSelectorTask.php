@@ -38,7 +38,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 	protected function fetchFileList() {
 		$files;
 		switch($this->getSource())	{
-			case 'Plugin':
+			case 'Module':
 				$files = $this->getFileList();
 				break;
 			case 'Doctrine': 

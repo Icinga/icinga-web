@@ -53,7 +53,7 @@ abstract class manifestBaseClass extends Task {
 	protected function resolveManifestVars(array $exclude = array()) {
 		$xml = $this->getXMLObject();
 		$project=  $this->project;
-		$project->setUserProperty("PLUGIN_Name",(String) $xml->Meta->Name);
+		$project->setUserProperty("MODULE_Name",(String) $xml->Meta->Name);
 		if(isset($xml->Files->Paths))	{
 			foreach($xml->Files->Paths->children() as $pathName=>$path)	{
 				if(in_array("PATH_".(String) $pathName,$exclude))

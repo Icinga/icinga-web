@@ -53,7 +53,7 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 	}
 	
 	/**
-	 * Searches for extractor marks and (PLUGIN[]) and extracts them
+	 * Searches for extractor marks and (MODULE[]) and extracts them
 	 * 
 	 * @throws Buildexception if the marked file doesn't exist
 	 */
@@ -69,7 +69,7 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 				throw new BuildException("Extractor error: Marked file ".$file." doesn't exist!");
 			$content = file_get_contents($file);
 			$matches = array();
-			preg_match("/.*PLUGIN\[".$name."\].*[\r\n]+([\w\W\r\n]+)[\r\n]+.*?PLUGIN\[".$name."\].*?[\r\n]+/",$content,$matches);
+			preg_match("/.*MODULE\[".$name."\].*[\r\n]+([\w\W\r\n]+)[\r\n]+.*?MODULE\[".$name."\].*?[\r\n]+/",$content,$matches);
 			if(count($matches) < 2) 	
 				echo "\Warning: Couldn't find a match for mark ".$name." in file ".$file;
 				

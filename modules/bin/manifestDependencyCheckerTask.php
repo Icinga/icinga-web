@@ -94,7 +94,7 @@ class manifestDependencyCheckerTask extends manifestBaseClass {
 		$version = (String) $dependency->Version;
 		if($version) {
 			if(version_compare(PHP_VERSION,$version)<0)
-				throw new BuildException("You need at least PHP Version ".$version." to install this plugin");	
+				throw new BuildException("You need at least PHP Version ".$version." to install this module");	
 		}
 		foreach($dependency->Extensions->children() as $extension) {
 			if(!extension_loaded((String)$extension))
