@@ -38,7 +38,9 @@ class AppKit_User_PreferencesAction extends ICINGAAppKitBaseAction
 
 		$key = $rd->getParameter("upref_key", false);
 		$batch = $rd->getParameter('params',false);
+			
 		if($key) {
+		
 			$val = $rd->getParameter("upref_val");
 			$isLong = $rd->getParameter("isLong",false);
 			if($val && !$rd->getParameter("remove",false)) {

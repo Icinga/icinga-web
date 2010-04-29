@@ -296,7 +296,7 @@ class AppKit {
 	private static function setLanguageDomain() {
 		try {
 			$context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
-			$appKitUser = $context->getUser()->getNsmUser();
+			$user = $context->getUser()->getNsmUser();
 			if(!$user)
 				return true;
 			$translationMgr = $context->getTranslationManager();		
