@@ -16,7 +16,9 @@
 			<validator name="isLong" class="string" depends="upref_key">
 				<argument>isLong</argument>
 			</validator>
-			
+			<validator name="remove" class="string">
+				<argument>remove</argument>
+			</validator>			
 			<validator name="params" class="string" required="false">
 				<arguments base="params[][]" />
 			</validator>

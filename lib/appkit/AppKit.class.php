@@ -39,7 +39,6 @@ class AppKit {
 	 * @author Marius Hein
 	 */
 	public static function bootstrap() {
-		file_put_contents("/var/www/time.log","Bootstrap\n",FILE_APPEND);
 		
 		// Our directory we live on!
 		self::$class_dir = dirname(__FILE__);
@@ -67,7 +66,7 @@ class AppKit {
 		self::initEventHandling();
 	
 		// Init the event handler system
-		self::setLanguageDomain($user);
+		self::setLanguageDomain();
 			
 		// Say hello to our components
 		AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.bootstrap', 'AppKit bootstrap finished');
@@ -295,17 +294,21 @@ class AppKit {
 	 * 
 	 */
 	private static function setLanguageDomain() {
-		$context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
-		$user = $context->getUser()->getNsmUser();
-		if(!$user)
-			return true;
-		$translationMgr = $context->getTranslationManager();		
-		$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier());
 		try {
-			$translationMgr->setLocale($locale);
+			$context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
+			$appKitUser = $context->getUser()->getNsmUser();
+			if(!$user)
+				return true;
+			$translationMgr = $context->getTranslationManager();		
+			$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier());
+			try {
+				$translationMgr->setLocale($locale);
+			} catch(Exception $e) {
+				$context->getLoggerManager()->logError("Invalid locale %s for user %s - switching to default",$locale,$user->get("user_name"));
+				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
+			}
 		} catch(Exception $e) {
-			$context->getLoggerManager()->logError("Invalid locale %s for user %s - switching to default",$locale,$user->get("user_name"));
-			$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
+			return true;
 		}
 	}
 }

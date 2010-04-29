@@ -72,6 +72,7 @@
 			<route name="my" pattern="^/my" module="AppKit">
 			  <route pattern="^$" action="User.Index"/>
 			  <route name=".preferences" pattern="^/preferences">
+				  <route name=".remove" pattern="^/({remove:remove})$" action="User.Preferences"/>
 				 <route pattern="^$" action="User.Preferences"/>
 			  </route>
 			</route>

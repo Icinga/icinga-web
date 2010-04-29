@@ -60,12 +60,9 @@ Ext.onReady(function() {
 			},{
 				title: _('Advanced'),
 				type:'fieldset',
-				collapsible:true,
-				striperows: true,
-				disableSelection:false,
-				clicksToEdit: 2,
+				collapsible:true,	
 				collapsed:true,
-				selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
+				autoHeight: true,		
 				borders:true,
 				width:500,
 				tools: [{
@@ -77,16 +74,45 @@ Ext.onReady(function() {
 					scope: this
 				}],
 				items: new Ext.grid.PropertyGrid({
-						autoHeight: true,
-						width:500,
-						source: <? echo json_encode($user->getPreferences()) ?>,
-						id: 'pedit_preferences',
-						listeners: {
-							beforeedit: function(event)  {
+					clicksToEdit: 2,
+
+					autoHeight: true,					
+					selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
+					striperows:true,
+					width:500,
+					source: <? echo json_encode($user->getPreferences()) ?>,
+					id: 'pedit_preferences',
+					listeners: {
+						beforeedit: function(event)  {
 							if(event.value == 'BLOB') {
 								AppKit.Ext.infoField("This item is read only!",2);
 								return false;
 							}
+						},
+						rowcontextmenu: function(grid,rowIndex,e) {
+							e.preventDefault();
+							var record = grid.getStore().getAt(rowIndex);
+							new Ext.menu.Menu({
+								items: [{
+									text: _('Remove this preference'),
+									iconCls: 'silk-cancel',
+									handler: function() {
+										var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+										mask.show();
+										var params = record.data;
+										params["upref_key"] = params["name"];
+										params["remove"] = true;
+										record.store.remove(record);
+										Ext.Ajax.request({
+											url: '<? echo $ro->gen("my.preferences") ?>',
+											params: params,
+											callback: function() {
+												mask.hide();
+											}
+										});
+									}
+								}]
+							}).showAt(e.getXY());
 						}
 					}
 				}),

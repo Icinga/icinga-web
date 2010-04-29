@@ -19,6 +19,14 @@ class AppKit_User_PreferencesAction extends ICINGAAppKitBaseAction
 		return 'Success';
 	}
 	
+	public function isSecure() {
+		return true;	
+	}
+	
+	public function getCredentials() {
+		return array('icinga.user');
+	}
+	
 	public function executeRead(AgaviRequestDataHolder $rd) {
 		return "Success";
 	}
@@ -33,8 +41,10 @@ class AppKit_User_PreferencesAction extends ICINGAAppKitBaseAction
 		if($key) {
 			$val = $rd->getParameter("upref_val");
 			$isLong = $rd->getParameter("isLong",false);
-			if($val) {
+			if($val && !$rd->getParameter("remove",false)) {
 				$this->setPreference($user,$key,$val,$isLong);
+			} else if($rd->getParameter("remove")) {
+				$user->getNsmUser()->delPref($key);
 			}
 		} else if($batch) {
 			foreach($batch as $preference) {
