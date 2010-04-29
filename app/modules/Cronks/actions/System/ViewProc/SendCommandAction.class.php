@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ViewProc_SendCommandAction extends ICINGACronksBaseAction
+class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -29,7 +29,7 @@ class Cronks_System_ViewProc_SendCommandAction extends ICINGACronksBaseAction
 		$command = $rd->getParameter('command');
 		$auth = $rd->getParameter('auth');
 		
-		$IcingaApiCommand = AppKitFactories::getInstance()->getFactory('IcingaCommand');
+		$IcingaApiCommand = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 		
 		// The model
 		$sender = $this->getContext()->getModel('System.CommandSender', 'Cronks');

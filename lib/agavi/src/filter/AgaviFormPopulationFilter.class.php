@@ -38,7 +38,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviFormPopulationFilter.class.php 4409 2010-01-19 13:35:27Z david $
+ * @version    $Id: AgaviFormPopulationFilter.class.php 4472 2010-04-08 09:51:41Z david $
  */
 class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilter, AgaviIActionFilter
 {
@@ -482,8 +482,9 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 				}
 
 				if($element->nodeName == 'input') {
+					$inputType = $element->getAttribute('type');
 
-					if($element->getAttribute('type') == 'checkbox' || $element->getAttribute('type') == 'radio') {
+					if($inputType == 'checkbox' || $inputType == 'radio') {
 
 						// checkboxes and radios
 						$element->removeAttribute('checked');
@@ -502,17 +503,17 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 							$element->setAttribute('checked', 'checked');
 						}
 
-					} else {
+					} elseif($inputType != 'button' && $inputType != 'submit') {
 						
 						// everything else
 						
 						// unless "include_hidden_inputs" is false and it's a hidden input...
-						if($cfg['include_hidden_inputs'] || $element->getAttribute('type') != 'hidden') {
+						if($cfg['include_hidden_inputs'] || $inputType != 'hidden') {
 							// remove original value
 							$element->removeAttribute('value');
 							
 							// and set a new one if it's there and unless it's a password field (or we actually want to refill those)
-							if($p->hasParameter($pname) && ($cfg['include_password_inputs'] || $element->getAttribute('type') != 'password')) {
+							if($p->hasParameter($pname) && ($cfg['include_password_inputs'] || $inputType != 'password')) {
 								$element->setAttribute('value', $value);
 							}
 						}
@@ -599,7 +600,7 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 					$this->doc->documentElement->setAttributeNode($attribute);
 				}
 			}
-			$out = $this->doc->saveXML();
+			$out = $this->doc->saveXML(null, $cfg['savexml_options']);
 			if((!$cfg['parse_xhtml_as_xml'] || !$properXhtml) && $cfg['cdata_fix']) {
 				// these are ugly fixes so inline style and script blocks still work. better don't use them with XHTML to avoid trouble
 				// http://www.456bereastreet.com/archive/200501/the_perils_of_using_xhtml_properly/
@@ -951,6 +952,7 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 			'dom_validate_on_parse'      => false,
 			'dom_preserve_white_space'   => true,
 			'dom_format_output'          => false,
+			'savexml_options'            => array(),
 
 			'error_class'                => 'error',
 			'error_class_map'            => array(),
@@ -979,6 +981,16 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 		if($ot = $this->getParameter('output_types')) {
 			$this->setParameter('output_types', (array) $ot);
 		}
+		
+		$savexmlOptions = 0;
+		foreach((array)$this->getParameter('savexml_options', array()) as $option) {
+			if(is_numeric($option)) {
+				$savexmlOptions |= (int)$option;
+			} elseif(defined($option)) {
+				$savexmlOptions |= constant($option);
+			}
+		}
+		$this->setParameter('savexml_options', $savexmlOptions);
 
 		// and now copy all that to the request namespace so it can all be modified at runtime, not just overwritten
 		$this->context->getRequest()->setAttributes($this->getParameters(), 'org.agavi.filter.FormPopulationFilter');

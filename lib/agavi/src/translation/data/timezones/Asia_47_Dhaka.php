@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Asia/Dhaka".
- * Compiled from olson file "asia", version 8.51.
+ * Compiled from olson file "asia", version 8.59.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Asia_47_Dhaka.php 4410 2010-01-19 13:54:10Z david $
+ * @version    $Id: Asia_47_Dhaka.php 4471 2010-04-08 01:01:16Z david $
  */
 
 return array (
@@ -99,46 +99,18 @@ return array (
     ),
     8 => 
     array (
-      'time' => 1262278800,
-      'type' => 4,
-    ),
-    9 => 
-    array (
-      'time' => 1270054800,
-      'type' => 5,
-    ),
-    10 => 
-    array (
-      'time' => 1288544400,
+      'time' => 1262278740,
       'type' => 4,
     ),
   ),
   'finalRule' => 
   array (
-    'type' => 'dynamic',
+    'type' => 'none',
     'offset' => 21600,
-    'name' => 'BD%sT',
-    'save' => 3600,
-    'start' => 
-    array (
-      'month' => 2,
-      'date' => '31',
-      'day_of_week' => 0,
-      'time' => 82800000,
-      'type' => 0,
-    ),
-    'end' => 
-    array (
-      'month' => 10,
-      'date' => '1',
-      'day_of_week' => 0,
-      'time' => 0,
-      'type' => 0,
-    ),
     'startYear' => 2010,
   ),
   'source' => 'asia',
-  'version' => '8.51',
+  'version' => '8.59',
   'name' => 'Asia/Dhaka',
 );
 

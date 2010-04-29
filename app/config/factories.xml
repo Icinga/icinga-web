@@ -15,7 +15,7 @@
 		
 		<filter_chain class="AgaviFilterChain" />
 		
-		<logger_manager class="AppKitLoggerManager" />
+		<logger_manager class="AgaviLoggerManager" />
 		
 		<request class="AgaviWebRequest" />
 		

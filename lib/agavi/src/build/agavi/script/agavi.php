@@ -26,12 +26,12 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: agavi.php 4411 2010-01-25 08:37:14Z david $
+ * @version    $Id: agavi.php 4426 2010-02-17 22:42:35Z felix $
  */
 
 define('BUILD_DIRECTORY', realpath(dirname(__FILE__) . '/../..'));
 define('START_DIRECTORY', getcwd());
-define('MIN_PHING_VERSION', '2.3.1');
+define('MIN_PHING_VERSION', '2.4.0');
 
 require('phing/Phing.php');
 
@@ -94,7 +94,7 @@ function input_help(AgaviOptionParser $parser, $name, $arguments, $scriptArgumen
 
 function input_version(AgaviOptionParser $parser, $name, $arguments, $scriptArguments)
 {
-	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4411 2010-01-25 08:37:14Z david $' . PHP_EOL);
+	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4426 2010-02-17 22:42:35Z felix $' . PHP_EOL);
 	$GLOBALS['OUTPUT']->write(Phing::getPhingVersion() . PHP_EOL);
 	exit(0);
 }
@@ -183,21 +183,13 @@ try {
 	}
 	
 	$project->init();
-	ProjectConfigurator::configureProject($project, $GLOBALS['BUILD']);
+	ProjectConfigurator::configureProject($project, new PhingFile(BUILD_DIRECTORY . '/build.xml'));
 	
-	$project->addTaskDefinition('agavi.import', 'org.agavi.build.tasks.AgaviImportTask', 'phing');
-	$project->addTaskDefinition('agavi.locate-project', 'org.agavi.build.tasks.AgaviLocateprojectTask', 'phing');
-	$project->addTaskDefinition('agavi.check-project', 'org.agavi.build.tasks.AgaviCheckprojectTask', 'phing');
 	
 	Phing::setCurrentProject($project);
 	
 	try {
 		$project->fireBuildStarted();
-		
-		$task = $project->createTask('agavi.import');
-		$task->setFile(new PhingFile($GLOBALS['BUILD']->getAbsolutePath()));
-		$task->init();
-		$task->perform();
 		
 		$task = $project->createTask('agavi.locate-project');
 		$task->setProperty('project.directory');
@@ -272,7 +264,7 @@ try {
 	
 	$GLOBALS['LOGGER'] = Phing::import($GLOBALS['LOGGER']);
 	
-	$logger = new AgaviProxyBuildLogger(new $GLOBALS['LOGGER']());
+	$logger = new $GLOBALS['LOGGER']();
 	$logger->setMessageOutputLevel($GLOBALS['VERBOSE'] ? Project::MSG_VERBOSE : Project::MSG_INFO);
 	$logger->setOutputStream($GLOBALS['OUTPUT']);
 	$logger->setErrorStream($GLOBALS['ERROR']);
@@ -292,7 +284,7 @@ try {
 	
 	$project->init();
 	ProjectConfigurator::configureProject($project, $GLOBALS['BUILD']);
-	
+
 	Phing::setCurrentProject($project);
 	
 	if($GLOBALS['SHOW_LIST'] === true) {

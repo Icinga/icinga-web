@@ -23,8 +23,8 @@ AC_ARG_VAR([MYSQL],[mysql client binary])
 ACICINGA_CHECK_BIN([MYSQL], [mysql])
 
 # Check for phing
-AC_ARG_VAR([PHING],[phing build tooö])
-ACICINGA_CHECK_BIN([MYSQL], [phing])
+AC_ARG_VAR([PHING],[phing build tool])
+ACICINGA_CHECK_BIN([PHING], [phing])
 
 # Checks for libraries.
 
@@ -36,6 +36,7 @@ ACICINGA_CHECK_BIN([MYSQL], [phing])
 
 # Define install options
 
+# Users for webfiles
 AC_ARG_WITH([web_user],
 	AS_HELP_STRING([--with-web-user=<user>], [username for web writable files (default www-data)]),
 	web_user=$withval,
@@ -60,12 +61,16 @@ AC_ARG_WITH([bin_group],
 	bin_group=bin
 )
 
+# Api related
 AC_ARG_WITH([icinga_api],
 	AS_HELP_STRING([--with-icinga-api=<string>], [Path to icinga-api]),
 	icinga_api=$withval,
 	icinga_api=/usr/local/icinga-api
 )
 
+ACICINGA_CHECK_API([$icinga_api])
+
+# Web database switches
 AC_ARG_WITH([db_type],
 	AS_HELP_STRING([--with-db-type=<string>], [Type of dbms (default mysql)]),
 	db_type=$withval,

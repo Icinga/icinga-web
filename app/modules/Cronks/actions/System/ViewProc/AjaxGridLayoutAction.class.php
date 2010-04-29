@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ViewProc_AjaxGridLayoutAction extends ICINGACronksBaseAction
+class Cronks_System_ViewProc_AjaxGridLayoutAction extends CronksBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -20,6 +20,10 @@ class Cronks_System_ViewProc_AjaxGridLayoutAction extends ICINGACronksBaseAction
 	}
 	
 	public function executeRead(AgaviParameterHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviParameterHolder $rd) {
 		return $this->getDefaultViewName();
 	}
 	

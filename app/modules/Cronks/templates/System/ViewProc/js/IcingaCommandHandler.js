@@ -218,7 +218,7 @@ IcingaCommandHandler.prototype = {
 	showCommandWindow : function(command, title) {
 		
 		if (this.validSelection() !== true) {
-			AppKit.Ext.notifyMessage(_('Command'), _('Selection is missing'));
+			AppKit.notifyMessage(_('Command'), _('Selection is missing'));
 			return;
 		}
 		
@@ -307,13 +307,13 @@ IcingaCommandHandler.prototype = {
 							var e = Ext.util.JSON.decode(a.response.responseText);
 							var error = e.errors['default'];
 							
-							AppKit.Ext.notifyMessage(_('Error sending command'), error);
+							AppKit.notifyMessage(_('Error sending command'), error);
 						}
 					},
 					
 					success: function(f, a) {
 						oWin.close();
-						AppKit.Ext.notifyMessage(_('Command sent'), String.format(_('{0} command was sent successfully!'), command));
+						AppKit.notifyMessage(_('Command sent'), String.format(_('{0} command was sent successfully!'), command));
 					}
 				});
 				

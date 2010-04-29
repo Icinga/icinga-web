@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Groups_IndexAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_Groups_IndexAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

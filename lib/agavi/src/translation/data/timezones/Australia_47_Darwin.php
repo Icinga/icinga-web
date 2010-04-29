@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Australia/Darwin".
- * Compiled from olson file "australasia", version 8.15.
+ * Compiled from olson file "australasia", version 8.17.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Australia_47_Darwin.php 4357 2009-11-28 20:20:35Z david $
+ * @version    $Id: Australia_47_Darwin.php 4458 2010-03-22 20:13:59Z david $
  */
 
 return array (
@@ -97,7 +97,7 @@ return array (
     'startYear' => 1945,
   ),
   'source' => 'australasia',
-  'version' => '8.15',
+  'version' => '8.17',
   'name' => 'Australia/Darwin',
 );
 

@@ -181,7 +181,7 @@
                 <parameter name="label">Service</parameter>
                 <parameter name="jsFunc">
                 	<parameter>
-                		<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                		<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 		<parameter name="function">nullDisplay</parameter>
                 	</parameter>
                 </parameter>
@@ -218,7 +218,7 @@
                 </parameter>
                 
 				<parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                <parameter name="function">switchStatus</parameter>
 	                	
 	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -284,7 +284,7 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
                 	<parameter name="arguments">
 						<parameter name="length">40</parameter>

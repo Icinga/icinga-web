@@ -46,7 +46,7 @@ function CronkTrigger (config) {
 			filter["f[" + thisConfig.targetField + "-value]"] = thisConfig.objectId;
 			filter["f[" + thisConfig.targetField + "-operator]"] = 50;
 
-			AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
+			Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
 		}
 	};
 

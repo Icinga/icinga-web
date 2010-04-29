@@ -1,9 +1,9 @@
 <?php
 
-class AppKit_Ext_ApplicationStateModel extends ICINGAAppKitBaseModel implements AgaviISingletonModel
+class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviISingletonModel
 {
 
-	const NAMESPACE = 'de.icinga.ext.appstate';
+	const PREFNS = 'de.icinga.ext.appstate';
 	
 	public function stateAvailable() {
 		if ($this->getContext()->getUser()->isAuthenticated()) {
@@ -16,7 +16,7 @@ class AppKit_Ext_ApplicationStateModel extends ICINGAAppKitBaseModel implements 
 		$data = null;
 		
 		if ($this->stateAvailable()) {
-			$data = $this->getContext()->getUser()->getPrefVal(self::NAMESPACE, null, true);
+			$data = $this->getContext()->getUser()->getPrefVal(self::PREFNS, null, true);
 		}
 		
 		return $data;
@@ -26,7 +26,7 @@ class AppKit_Ext_ApplicationStateModel extends ICINGAAppKitBaseModel implements 
 		if ($this->stateAvailable()) {
 			$existing = json_decode($this->readState());
 			$data = array_merge((is_array($existing)) ? $existing : array (), json_decode(($data)));
-			$this->getContext()->getUser()->setPref(self::NAMESPACE, json_encode($data), true, true);
+			$this->getContext()->getUser()->setPref(self::PREFNS, json_encode($data), true, true);
 		}
 	}
 	

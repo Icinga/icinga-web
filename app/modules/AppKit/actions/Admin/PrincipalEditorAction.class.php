@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_PrincipalEditorAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

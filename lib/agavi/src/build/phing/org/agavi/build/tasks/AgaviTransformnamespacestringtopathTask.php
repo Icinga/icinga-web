@@ -27,7 +27,7 @@ require_once(dirname(__FILE__) . '/AgaviTask.php');
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviTransformnamespacestringtopathTask.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviTransformnamespacestringtopathTask.php 4456 2010-03-21 19:11:45Z david $
  */
 class AgaviTransformnamespacestringtopathTask extends AgaviTask
 {

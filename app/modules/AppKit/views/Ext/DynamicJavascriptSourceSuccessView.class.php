@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ext_DynamicJavascriptSourceSuccessView extends ICINGAAppKitBaseView
+class AppKit_Ext_DynamicJavascriptSourceSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
@@ -13,9 +13,8 @@ class AppKit_Ext_DynamicJavascriptSourceSuccessView extends ICINGAAppKitBaseView
 		$scripts = AgaviConfig::get('de.icinga.appkit.include_dynamic_javascript');
 		
 		$script = $rd->getParameter('script');
-		
 		if (array_key_exists($script, $scripts) && file_exists($scripts[$script])) {
-			return AppKitInlineIncluderUtil::getFileContent($scripts[$script]);
+			return file_get_contents($scripts[$script]);
 		}
 		
 		return "";

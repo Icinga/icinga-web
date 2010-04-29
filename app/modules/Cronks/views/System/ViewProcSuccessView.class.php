@@ -1,12 +1,20 @@
 <?php
 
-class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
-{
-	public function executeHtml(AgaviRequestDataHolder $rd)
-	{
+class Cronks_System_ViewProcSuccessView extends CronksBaseView {
+	
+	/**
+	 * @var Web_Icinga_ApiContainerModel
+	 */
+	private $api = null;
+	
+	public function initialize($c) {
+		parent::initialize($c);
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+	}
+	
+	public function executeHtml(AgaviRequestDataHolder $rd) {
 		$this->setupHtml($rd);
 
-		
 		$template_file = sprintf(
 			'%s/%s.xml', 
 			AgaviConfig::get('modules.cronks.xml.path'), 
@@ -18,7 +26,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		
 		$worker = new IcingaTemplateWorker();
 		$worker->setTemplate($template);
-		$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
+		$worker->setApi($this->api->getConnection());
 		
 		$layout_class = $template->getSectionParams('option')->getParameter('layout');
 		$layout = AppKitClassUtil::createInstance($layout_class);
@@ -30,8 +38,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		return $layout->getLayoutContent();
 	}
 	
-	public function executeJson(AgaviRequestDataHolder $rd)
-	{
+	public function executeJson(AgaviRequestDataHolder $rd) {
 		$template_file = sprintf(
 			'%s/%s.xml', 
 			AgaviConfig::get('modules.cronks.xml.path'), 
@@ -45,7 +52,7 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 
 		$worker = new IcingaTemplateWorker();
 		$worker->setTemplate($template);
-		$worker->setApi(AppKitFactories::getInstance()->getFactory('IcingaData')->API());
+		$worker->setApi($this->api->getConnection());
 		$worker->setUser($this->getContext()->getUser()->getNsmUser());
 		
 		if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
@@ -73,7 +80,6 @@ class Cronks_System_ViewProcSuccessView extends ICINGACronksBaseView
 		// OK hopefully all done
 		$data['resultSuccess'] = true; 
 
-		
 		return json_encode($data);
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_User_PreferencesAction extends ICINGAAppKitBaseAction
+class AppKit_User_PreferencesAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

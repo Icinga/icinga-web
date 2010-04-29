@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_ImageFileModel extends ICINGAAppKitBaseModel
+class AppKit_ImageFileModel extends AppKitBaseModel
 implements AgaviISingletonModel
 {
 	

@@ -43,7 +43,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
 				// Give notice
 				$this->getContext()->getLoggerManager()
-				->logInfo('User %s (%s) logged in!', $username, $user->givenName());
+				->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
 				
 
 				// Return true
@@ -54,8 +54,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		$provider->resetAll();
 		
 		// Throw some warning into 
-		$this->getContext()->getLoggerManager()
-		->logWarn('Userlogin by %s failed!', $username);
+		$this->getContext()->getLoggerManager()->log(sprintf('Userlogin by %s failed!', $username), AgaviLogger::ERROR);
 		
 		// And notify the caling component (if they want ...)
 		throw new AppKitSecurityUserException("User '$username' is not known with this credentials");
@@ -73,7 +72,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		
 		// Give notice
 		$this->getContext()->getLoggerManager()
-		->logInfo('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName());
+		->log(sprintf('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName()), AgaviLogger::INFO);
 		
 		return true;
 	}

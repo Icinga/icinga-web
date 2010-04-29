@@ -31,22 +31,29 @@
 			* icinga.default
 			
 		-->
-	 <translators default_domain="icinga.default">
-		<translator domain="icinga">
-		  <!-- Text -->
-		  <message_translator class="AppKitGettextTranslator">
-			 <ae:parameter name="text_domains">
-				<ae:parameter name="default">%core.root_dir%/app/data/mo</ae:parameter>
-				<ae:parameter name="module_heatmap">%core.root_dir%/app/modules/Heatmap/data/mo</ae:parameter>
-			 </ae:parameter>
-		  </message_translator>
-		  <!-- Date/time (also important for the validators) -->
-		  <date_formatter>
-			 <ae:parameter name="type">date</ae:parameter>
-			 <!-- dd.MM.yyyy hh:mm:ss -->
-			 <ae:parameter name="format">medium</ae:parameter>
-		  </date_formatter>
-		</translator>
-	 </translators>
-  </ae:configuration>
+
+		<translators default_domain="icinga.default">
+		
+			<translator domain="icinga">
+			
+					<!-- Text -->
+					<message_translator class="AppKitGettextTranslator">
+						<ae:parameter name="text_domains">
+							<ae:parameter name="default">%core.root_dir%/app/data/i18n/mo</ae:parameter>
+						</ae:parameter>
+					</message_translator>
+					
+					<!-- Date/time (also important for the validators) -->
+					<date_formatter>
+						<ae:parameter name="type">date</ae:parameter>
+						<!-- dd.MM.yyyy hh:mm:ss -->
+						<ae:parameter name="format">medium</ae:parameter>
+					</date_formatter>
+					
+			</translator>
+			
+		</translators>
+		
+	</ae:configuration>
+
 </ae:configurations>

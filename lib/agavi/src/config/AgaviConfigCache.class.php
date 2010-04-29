@@ -28,7 +28,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviConfigCache.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviConfigCache.class.php 4443 2010-03-11 21:41:33Z david $
  */
 class AgaviConfigCache
 {
@@ -84,6 +84,13 @@ class AgaviConfigCache
 			$handlerInfo = self::getHandlerInfo($name);
 		}
 
+		if($handlerInfo === null) {
+			// we do not have a registered handler for this file
+			$error = 'Configuration file "%s" does not have a registered handler';
+			$error = sprintf($error, $name);
+			throw new AgaviConfigurationException($error);
+		}
+		
 		$data = self::executeHandler($config, $context, $handlerInfo);
 		self::writeCacheFile($config, $cache, $data, false);
 	}
@@ -166,15 +173,8 @@ class AgaviConfigCache
 	 * @author       Felix Gilcher <felix.gilcher@bitextender.com>
 	 * @since        1.0.0
 	 */
-	protected static function executeHandler($config, $context, $handlerInfo)
+	protected static function executeHandler($config, $context, array $handlerInfo)
 	{
-		if($handlerInfo === null) {
-			// we do not have a registered handler for this file
-			$error = 'Configuration file "%s" does not have a registered handler';
-			$error = sprintf($error, $config);
-			throw new AgaviConfigurationException($error);
-		}
-		
 		// call the handler and retrieve the cache data
 		$handler = new $handlerInfo['class'];
 		if($handler instanceof AgaviIXmlConfigHandler) {

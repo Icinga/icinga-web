@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Groups_EditSuccessView extends ICINGAAppKitBaseView
+class AppKit_Admin_Groups_EditSuccessView extends AppKitBaseView
 {
 	public function executeSimplecontent(AgaviRequestDataHolder $rd) {
 		if($this->getContext()->getRequest()->getMethod() == "write")

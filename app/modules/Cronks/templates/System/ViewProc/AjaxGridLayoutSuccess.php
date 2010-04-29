@@ -8,10 +8,10 @@
 	
 	var CreateGridProcessor = function (meta) {	
 		
-		var MetaGrid = new AppKit.Ext.grid.MetaGridCreator(meta);
+		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
 		MetaGrid.setStateUid("<?php echo $stateuid; ?>");
 		
-		MetaGrid.setStoreUrl("<?php echo $ro->gen('icinga.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
 		MetaGrid.setParameters({storeDisableAutoload: true});
 		var grid = MetaGrid.createGrid();
@@ -91,7 +91,7 @@
 					});
 					
 					// We need a new class
-					AppKit.Ext.ScriptDynaLoader.loadScript({
+					AppKit.ScriptDynaLoader.loadScript({
 						url: "<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CommandHandler')) ?>",
 						
 						callback: function() {
@@ -106,8 +106,8 @@
 							cHandler.setGrid(grid);
 							
 							// Where we can get some info
-							cHandler.setInfoUrl('<?php echo urldecode($ro->gen("icinga.cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
-							cHandler.setSendUrl('<?php echo urldecode($ro->gen("icinga.cronks.commandProc.send", array("command" => "{0}"))); ?>');
+							cHandler.setInfoUrl('<?php echo urldecode($ro->gen("cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
+							cHandler.setSendUrl('<?php echo urldecode($ro->gen("cronks.commandProc.send", array("command" => "{0}"))); ?>');
 							
 							// We need something to click on :D
 							cHandler.enhanceToolbar();
@@ -120,58 +120,63 @@
 			}
 		});
 		
-		//Insert the grid in the parent
-		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
-		
-		// Check if the store is loaded by whatever ...
-		// If no load with defautl params!
-		grid.on('render', function(g) {
-			if (this.storeIsLoaded() == false) {
-				this.initStore();
-			}
-		}, MetaGrid);
-		
-		// Add to parent component
-		cmp.insert(0, grid);
-		
-		// Refresh
-		cmp.doLayout();
+		Ext.onReady(function() {
+			//Insert the grid in the parent
+			var cparentObj = Ext.getCmp("<?php echo $parentid; ?>");
+			
+			// Check if the store is loaded by whatever ...
+			// If no load with defautl params!
+			grid.on('render', function(g) {
+				if (this.storeIsLoaded() == false) {
+					this.initStore();
+				}
+			}, MetaGrid);
+			
+			// Add to parent component
+			cparentObj.add(grid);
+			
+			AppKit.util.Layout.doLayout();
+		});
 	}
-
+	
 	// First loading the meta info to configure the grid
 	var oContainer = function() {
 		
-		var store = AppKit.Ext.Storage.getStore('viewproc-templates');
+		var s = AppKit.util.getStore('viewproc_templates');
+		
 		var template = "<?php echo $rd->getParameter('template'); ?>";
 		var initGrid = function() {
-			var meta = store.get(template);
+			var meta = s.get(template);
 			if (meta.template.option.dynamicscript) {
-				AppKit.Ext.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
-				AppKit.Ext.ScriptDynaLoader.startBulkMode();
+				
+				AppKit.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
+				AppKit.ScriptDynaLoader.startBulkMode();
+				
 				Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
-					AppKit.Ext.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
+					AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
 				});
+				
 			}
 			else {
 				CreateGridProcessor(meta);
 			}
 		}
 		
-		if (store.containsKey(template)) {
+		if (s.containsKey(template)) {
 			initGrid();
 		}
 		else {
 		
 			Ext.Ajax.request({
-				   url: "<?php echo $ro->gen('icinga.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
+				   url: "<?php echo $ro->gen('cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 				   
 				   success: function(response, opts) {
-				   		store.add(template, Ext.decode(response.responseText));
+				   		s.add(template, Ext.decode(response.responseText));
 				   		initGrid();
 				   },
 				   
 				   failure: function(response, opts) {
-						AppKit.Ext.notifyMessage(
+						AppKit.notifyMessage(
 							"Ext.Ajax.request: request failed!",
 							String.format("{0} ({1})", response.statusText, response.status)
 						);

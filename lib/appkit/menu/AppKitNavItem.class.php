@@ -9,6 +9,7 @@ class AppKitNavItem extends AppKitBaseClass {
 	private $html		= null;
 	private $jshandler	= null;
 	private $args		= array ();
+	private $attributes	= array ();
 	
 	/**
 	 * @var AppKitNavContainer
@@ -125,7 +126,7 @@ class AppKitNavItem extends AppKitBaseClass {
 	 * @return AppKitNavItem
 	 */
 	public function setJsHandler($handler_string) {
-		$this->jshandler = $handler_string;
+		$this->addAttributes('extjs-handler', $handler_string);
 		return $this;
 	}
 	
@@ -134,7 +135,62 @@ class AppKitNavItem extends AppKitBaseClass {
 	 * @return string
 	 */
 	public function getJsHandler() {
-		return $this->jshandler;
+		return $this->getAttribute('extjs-handler');
+	}
+	
+	/**
+	 * Adding custom attributes to the navigation item
+	 * @param string|array $key
+	 * @param mixed $val
+	 * @param boolean $append
+	 * @return AppKitNavItem
+	 */
+	public function addAttributes($key, $val=null, $append=false) {
+		if (func_num_args()>=2) {
+			if ($append==true && $this->hasAttribute($key)) {
+				$this->attributes[$key] += $val;
+			}
+			else {
+				$this->attributes[$key] = $val;
+			}
+		}
+		else {
+			if (is_array($key) && count($key)) {
+				$this->attributes = (array)$this->attributes + (array)$key;
+			}
+		}
+		return $this;
+	}
+	
+	/**
+	 * Return all attributes as an array
+	 * @return array
+	 */
+	public function getAttributes() {
+		return $this->attributes;
+	}
+	
+	/**
+	 * Return an attribute
+	 * @param string $key
+	 * @param mixed $default
+	 * @return mixed
+	 */
+	public function getAttribute($key, $default=null) {
+		if ($this->hasAttribute($key)) {
+			return $this->attributes[$key];
+		}
+		
+		return $default;
+	}
+	
+	/**
+	 * Returns true if an attribute exist
+	 * @param string $key
+	 * @return boolean
+	 */
+	public function hasAttribute($key) {
+		return array_key_exists($key, $this->attributes);
 	}
 	
 	/**
@@ -215,6 +271,10 @@ class AppKitNavItem extends AppKitBaseClass {
 		if (!$this->sub_container instanceof AppKitNavContainer)
 			$this->sub_container = new AppKitNavContainer();
 		return $this->sub_container;
+	}
+	
+	public function hasChildren() {
+		return $this->getContainer()->hasChildren();
 	}
 
 }

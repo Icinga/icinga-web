@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_MessageQueueAggregatorModel extends ICINGAAppKitBaseModel 
+class AppKit_MessageQueueAggregatorModel extends AppKitBaseModel 
 implements AgaviISingletonModel
 {
 	

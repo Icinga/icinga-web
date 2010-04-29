@@ -5,7 +5,7 @@
 	xmlns="http://agavi.org/agavi/config/parts/rbac_definitions/1.0"
 	targetNamespace="http://agavi.org/agavi/config/parts/rbac_definitions/1.0"
 	elementFormDefault="qualified"
-	version="$Id: rbac_definitions.xsd 3639 2009-01-22 17:23:36Z impl $">
+	version="$Id: rbac_definitions.xsd 4456 2010-03-21 19:11:45Z david $">
 
 	<xs:simpleType name="permission">
 		<xs:restriction base="xs:string" />

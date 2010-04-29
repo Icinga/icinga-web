@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_HeaderDataModel extends ICINGAAppKitBaseModel
+class AppKit_HeaderDataModel extends AppKitBaseModel
 implements AgaviISingletonModel
 {
 	const TYPE_CSS_RAW		= 'css_raw';

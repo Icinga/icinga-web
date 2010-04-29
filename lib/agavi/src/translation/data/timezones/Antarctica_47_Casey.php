@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Antarctica/Casey".
- * Compiled from olson file "antarctica", version 8.7.
+ * Compiled from olson file "antarctica", version 8.8.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Antarctica_47_Casey.php 4357 2009-11-28 20:20:35Z david $
+ * @version    $Id: Antarctica_47_Casey.php 4458 2010-03-22 20:13:59Z david $
  */
 
 return array (
@@ -43,16 +43,21 @@ return array (
       'time' => 1255802400,
       'type' => 1,
     ),
+    2 => 
+    array (
+      'time' => 1267714800,
+      'type' => 0,
+    ),
   ),
   'finalRule' => 
   array (
     'type' => 'static',
-    'name' => 'CAST',
-    'offset' => 39600,
-    'startYear' => 2010,
+    'name' => 'WST',
+    'offset' => 28800,
+    'startYear' => 2011,
   ),
   'source' => 'antarctica',
-  'version' => '8.7',
+  'version' => '8.8',
   'name' => 'Antarctica/Casey',
 );
 
