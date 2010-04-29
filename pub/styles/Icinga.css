@@ -437,3 +437,21 @@ table.icinga-attribute-table td.val {
 	background-color: #ffffff;
 }
 /* EOF */
+
+
+div.role_user_wrap {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid grey;
+    margin:2px;
+    float:left;
+    padding:5px;
+    background:#efefef;
+    cursor:pointer;
+}
+div.role_user_icon {
+	width:25px;
+	height:25px;
+	float:left;
+}
+
