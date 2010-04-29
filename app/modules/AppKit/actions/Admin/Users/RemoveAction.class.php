@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Users_RemoveAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_Users_RemoveAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -38,7 +38,7 @@ class AppKit_Admin_Users_RemoveAction extends ICINGAAppKitBaseAction
 				Doctrine_Manager::connection()->rollback();
 			}
 			catch (Doctrine_Transaction_Exception $e) {}
-				$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
+				echo $e;
 			echo $e;
 		}
 		return 'Success';

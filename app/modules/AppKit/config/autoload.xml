@@ -4,9 +4,9 @@
 		
 		<!-- MVC classes -->
 
-		<autoload name="ICINGAAppKitBaseAction">%core.module_dir%/AppKit/lib/action/ICINGAAppKitBaseAction.class.php</autoload>
-		<autoload name="ICINGAAppKitBaseModel">%core.module_dir%/AppKit/lib/model/ICINGAAppKitBaseModel.class.php</autoload>
-		<autoload name="ICINGAAppKitBaseView">%core.module_dir%/AppKit/lib/view/ICINGAAppKitBaseView.class.php</autoload>
+		<autoload name="AppKitBaseAction">%core.module_dir%/AppKit/lib/action/AppKitBaseAction.class.php</autoload>
+		<autoload name="AppKitBaseModel">%core.module_dir%/AppKit/lib/model/AppKitBaseModel.class.php</autoload>
+		<autoload name="AppKitBaseView">%core.module_dir%/AppKit/lib/view/AppKitBaseView.class.php</autoload>
 
 	</ae:configuration>
 </ae:configurations>

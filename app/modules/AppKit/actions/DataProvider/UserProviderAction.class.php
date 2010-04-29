@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_DataProvider_UserProviderAction extends ICINGAAppKitBaseAction
+class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

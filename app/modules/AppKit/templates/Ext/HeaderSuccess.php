@@ -47,11 +47,17 @@ Ext.onReady(function() {
                     items: [{
                         tooltip: _('Preferences'),
                         iconCls: 'silk-user-edit',
-                        text: _('Preferences')
+                        text: _('Preferences'),
+                        handler: function() {
+							AppKit.changeLocation('<?echo $ro->gen("my.preferences"); ?>');
+                        }
                     }, {
                         tooltip: _('Logout'),
                         iconCls: 'silk-user-go',
-                        width: 'auto'
+                        width: 'auto',
+                        handler: function() {
+							AppKit.changeLocation('<?echo $ro->gen("appkit.logout"); ?>');
+                        }
                     }]
                 }
             },

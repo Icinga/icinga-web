@@ -1,10 +1,10 @@
 <?php
-class AppKit_Admin_Users_RemoveSuccessView extends ICINGAAppKitBaseView {
+class AppKit_Admin_Users_RemoveSuccessView extends AppKitBaseView {
 
 	public function executeJson() {
 		return null;
 	}
-	public function executeSimplecontent() {
+	public function executeSimple() {
 		return null;
 	}
 }

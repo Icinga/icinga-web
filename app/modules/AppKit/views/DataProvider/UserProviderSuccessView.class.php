@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_DataProvider_UserProviderSuccessView extends ICINGAAppKitBaseView
+class AppKit_DataProvider_UserProviderSuccessView extends AppKitBaseView
 {
 	
 	public function executeJson(AgaviRequestDataHolder $rd) {

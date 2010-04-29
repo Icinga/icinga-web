@@ -192,22 +192,10 @@ Ext.onReady(function() {
 			})
 		}).render(document.body);
 	}
+	
 	var container = AppKit.UserPrefs.container;
-	container.on('afterrender', function() {
-		container.setHeight(Ext.lib.Dom.getViewHeight() - 68);
-		
-	}, container, { single: true });
-		
-	container.render("contentArea");
-	container.doLayout();
-	
-	Ext.EventManager.onWindowResize(function(w,h) {
-		this.setHeight(Ext.lib.Dom.getViewHeight() - 68);
-			
-		
-		this.doLayout();
-	}, container);
-	
+	AppKit.util.Layout.getCenter().add(container)
+	AppKit.util.Layout.doLayout();
 });
 
 </script>

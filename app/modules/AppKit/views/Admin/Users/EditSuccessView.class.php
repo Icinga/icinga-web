@@ -2,7 +2,7 @@
 
 class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView
 {
-	public function executeSimplecontent(AgaviRequestDataHolder $rd) {
+	public function executeSimple(AgaviRequestDataHolder $rd) {
 		if($this->getContainer()->getRequestMethod() == "write")
 			return null;
 		$this->setupHtml($rd);
@@ -23,7 +23,7 @@ class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView
 	
 		$this->setAttribute('roles', $roleadmin->getRoleCollection());
 		$this->setAttribute('container', $rd->getParameter('container',null));
-		$exec = $this->getContext()->getController()->createExecutionContainer("AppKit","Admin.PrincipalEditor",null,'simplecontent');
+		$exec = $this->getContext()->getController()->createExecutionContainer("AppKit","Admin.PrincipalEditor",null,'simple');
 		$resp = $exec->execute()->getContent();
 		$this->setAttribute("principal_editor",$resp);
 	}
@@ -49,7 +49,7 @@ class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView
 			
 			$this->setAttribute('user', $user);
 			$this->setAttribute('roles', $roleadmin->getRoleCollection());
-			$exec = $this->getContext()->getController()->createExecutionContainer("AppKit","Admin.PrincipalEditor",null,'simplecontent');
+			$exec = $this->getContext()->getController()->createExecutionContainer("AppKit","Admin.PrincipalEditor",null,'simple');
 			$resp = $exec->execute()->getContent();
 			$this->setAttribute("principal_editor",$resp);
 		}

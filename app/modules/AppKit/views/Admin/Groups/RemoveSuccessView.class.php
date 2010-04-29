@@ -1,8 +1,8 @@
 <?php
 
-class AppKit_Admin_Groups_RemoveSuccessView extends ICINGAAppKitBaseView
+class AppKit_Admin_Groups_RemoveSuccessView extends AppKitBaseView
 {
-	public function executeSimplecontent(AgaviRequestDataHolder $rd) {
+	public function executeSimple(AgaviRequestDataHolder $rd) {
 		return null;
 	}
 	

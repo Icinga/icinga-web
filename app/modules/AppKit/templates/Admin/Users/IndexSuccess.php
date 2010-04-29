@@ -9,6 +9,9 @@ Ext.onReady(function() {
 		idProperty: 'user_id',
 		url: '<? echo $ro->gen("appkit.data.users")?>',
 		remoteSort: true,
+		baseParams: {
+			hideDisabled: false
+		},
 		fields: [
 			{name: 'user_id', type:'int'},
 			'user_name',
@@ -70,7 +73,7 @@ Ext.onReady(function() {
 		}
 	}))();
 	
-	wnd_userEditPanel.render("contentArea");
+	wnd_userEditPanel.render(document.body);
 	var grid =   new Ext.grid.GridPanel({
 		title: _('Available users'),
 		height:500,
@@ -84,32 +87,34 @@ Ext.onReady(function() {
 			id: 'minus',
 			qtip: _('Remove selected users'),
 			handler:  function(ev,toolEl,panel,tc) {
-				Ext.Msg.confirm(_("Delete user"),_("Do you really want to delete these users?"),function(btn) {
-					if(btn != "yes")
-						return false;
-					var selModel = this.getSelectionModel();
-					var selected = selModel.getSelections();
-					var ids = {};
-					Ext.each(selected,function(record) {
-						var currentId = record.get("user_id");
-						var currentName = "user_id["+currentId+"]";
-						ids[currentName] = currentId;
-					},this);
-					
-					Ext.Ajax.request({
-						url: '<?echo $ro->gen("appkit.admin.users.remove") ?>',
-						success: function() {
-							this.getStore().reload();
-						},
-						scope:this,
-						params: ids
-						
-					});
-				},panel)
+				panel.deleteSelected.call(panel);
 			},
 			scope:this
 		}],		 
-		
+		deleteSelected: function() {
+			Ext.Msg.confirm(_("Delete user"),_("Do you really want to delete these users?"),function(btn) {
+				if(btn != "yes")
+					return false;
+				var selModel = this.getSelectionModel();
+				var selected = selModel.getSelections();
+				var ids = {};
+				Ext.each(selected,function(record) {
+					var currentId = record.get("user_id");
+					var currentName = "user_id["+currentId+"]";
+					ids[currentName] = currentId;
+				},this);
+				
+				Ext.Ajax.request({
+					url: '<?echo $ro->gen("appkit.admin.users.remove") ?>',
+					success: function() {
+						this.getStore().reload();
+					},
+					scope:this,
+					params: ids
+					
+				});
+			},this)
+		},
 		viewConfig : {
 			scrollOffset:30,
 
@@ -122,8 +127,11 @@ Ext.onReady(function() {
 			displayMsg: _('Displaying users')+' {0} - {1} '+_('of')+' {2}',
 			emptyMsg: _('No users to display'),
 			items: [{
+				xtype: 'tbseparator',
+				width: 15
+			},{
 				xtype: 'displayfield',
-				value: _('Hide disabled')
+				value: _('Hide disabled ')
 				
 			},{
 				xtype:'checkbox',
@@ -132,6 +140,26 @@ Ext.onReady(function() {
 				handler: function(btn, checked){
 					grid.getStore().setBaseParam('hideDisabled',checked);
 				}
+			},{
+				xtype: 'tbseparator',
+				width: 15
+			},{
+				xtype: 'button',
+				iconCls: 'silk-cancel',
+				text: _('Remove selected'),
+				handler: function(ev,btn) {
+					grid.deleteSelected();
+				},
+				scope: this
+			},{
+				xtype: 'tbseparator',
+				width: 15
+			},{
+				xtype: 'button',
+				iconCls: 'silk-add',
+				text: _('Add new user'),
+				handler: function() {wnd_userEditPanel.createUser();}
+				
 			}]
 			
 		}), 
@@ -140,6 +168,7 @@ Ext.onReady(function() {
 		
 		listeners: {
 			rowdblclick: function(grid,index,_e) {
+				AppKit.log(index, grid.getStore().getAt(index).get("user_id"));
 				var id = grid.getStore().getAt(index).get("user_id");
 				wnd_userEditPanel.editUser(id);											
 			},
@@ -157,7 +186,7 @@ Ext.onReady(function() {
 				autoDestroy:true,
 				items: [{
 					text:'Edit this user',
-					handler: wnd_userEditPanel.editUser.createCallback(id),
+					handler: wnd_userEditPanel.editUser.createDelegate(wnd_userEditPanel,[id]),
 					iconCls: 'silk-pencil'
 				}]			
 			}).showAt(pos);
@@ -201,21 +230,9 @@ Ext.onReady(function() {
 			}]	
 		})
 	});
-	container.on('afterrender', function() {
-		container.setHeight(Ext.lib.Dom.getViewHeight() - 68);
-		
-	}, container, { single: true });
-		
-	container.render("contentArea");
-	container.doLayout();
-	AppKit.users.userList.load({params: {start:0, limit:25}});
-	Ext.EventManager.onWindowResize(function(w,h) {
-		this.setHeight(Ext.lib.Dom.getViewHeight() - 68);
-			
-		
-		this.doLayout();
-	}, container);
-	
+	AppKit.util.Layout.getCenter().add(container);
+	AppKit.util.Layout.doLayout();
+	AppKit.users.userList.load({params: {start:0,limit:25}})
 })
 	
 </script>

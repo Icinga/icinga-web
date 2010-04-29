@@ -26,7 +26,7 @@ Ext.onReady(function() {
 		title: _('Group inheritance'),
 		insertRoles: function() {
 			this.inserted = {};
-			this.setRootNode(new Ext.tree.TreeNode({hidden:false,editable:false,text:'Root',	expanded:true}));
+			this.getRootNode().removeAll();
 			var noInsert = false;
 			while(!noInsert) {
 				noInsert = true;
@@ -144,7 +144,7 @@ Ext.onReady(function() {
 		}
 	}))();
 	
-	wnd_groupEditPanel.render("contentArea");
+	wnd_groupEditPanel.render(document.body);
 	
 	AppKit.groups.grid =   new Ext.grid.GridPanel({
 		autoHeight: true,
@@ -248,19 +248,8 @@ Ext.onReady(function() {
 			}]	
 		})
 	});
-	container.on('afterrender', function() {
-		container.setHeight(Ext.lib.Dom.getViewHeight() - 68);
-		
-	}, container, { single: true });
-		
-	container.render("contentArea");
-	container.doLayout();
-	
-	Ext.EventManager.onWindowResize(function(w,h) {
-		this.setHeight(Ext.lib.Dom.getViewHeight() - 68);
-		this.doLayout();
-	}, container);
-	
+	AppKit.util.Layout.getCenter().add(container);
+	AppKit.util.Layout.doLayout();
 })
 	
 </script>

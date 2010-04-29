@@ -56,7 +56,6 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction
 						
 			if ($rd->getParameter('password_validate', false) !== false) {
 				$useradmin->updateUserPassword($user, $rd->getParameter('password_validate'));
-				$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Info('The new password was set.'));
 			}
 			
 			// Updating the roles
@@ -77,7 +76,8 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction
 				Doctrine_Manager::connection()->rollback();
 			}
 			catch (Doctrine_Transaction_Exception $e) {}
-				$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
+				echo $e->getMessage();
+			
 		}
 		
 		return 'Success';

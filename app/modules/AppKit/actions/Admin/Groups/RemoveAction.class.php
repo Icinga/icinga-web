@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Groups_RemoveAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_Groups_RemoveAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

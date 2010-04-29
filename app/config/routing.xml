@@ -24,20 +24,20 @@
 					action="Widgets.SquishLoader" output_type="javascript" />
 
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
-					 <route name=".principaledit" pattern="^/principaleditor" action="Admin.PrincipalEditor" output_type="simplecontent"/>
+					 <route name=".principaledit" pattern="^/principaleditor" action="Admin.PrincipalEditor" output_type="simple"/>
 					 <route name=".users" pattern="^/users" action="Admin.Users.Index">
 						<route name=".edit" pattern="^/edit/(id:(\d+|new))" action="Admin.Users.Edit">
-						  <route name=".simple" pattern="^/(container:\w+)$" output_type="simplecontent"/>
+						  <route name=".simple" pattern="^/(container:\w+)$" output_type="simple"/>
 						</route>
-						<route name=".alter" pattern="^/alter/(id:(\d+|new))$" output_type="simplecontent" action="Admin.Users.Edit"/>
-						<route name=".remove" pattern="^/remove$" output_type="simplecontent" action="Admin.Users.Remove"/>
+						<route name=".alter" pattern="^/alter/(id:(\d+|new))$" output_type="simple" action="Admin.Users.Edit"/>
+						<route name=".remove" pattern="^/remove$" output_type="simple" action="Admin.Users.Remove"/>
 					 </route>
 					 <route name=".groups" pattern="^/groups" action="Admin.Groups.Index">
 						<route name=".edit" pattern="^/edit/(id:(\d+|new))" action="Admin.Groups.Edit">
-						  <route name=".simple" pattern="^/(container:\w+)$" output_type="simplecontent"/>
+						  <route name=".simple" pattern="^/(container:\w+)$" output_type="simple"/>
 						</route>
-						<route name=".alter" pattern="^/alter/(id:(\d+|new))$" output_type="simplecontent" action="Admin.Groups.Edit"/>
-						<route name=".remove" pattern="^/remove$" output_type="simplecontent" action="Admin.Groups.Remove"/>
+						<route name=".alter" pattern="^/alter/(id:(\d+|new))$" output_type="simple" action="Admin.Groups.Edit"/>
+						<route name=".remove" pattern="^/remove$" output_type="simple" action="Admin.Groups.Remove"/>
 					 </route>
 					 <route name=".logs" pattern="^/logs" action="Admin.ViewLogs"/>
 				  </route>
@@ -52,7 +52,7 @@
 					</route>
 					<route name=".principals" pattern="^/principals" action="DataProvider.PrincipalProvider">
 					  <route name=".user" pattern="^/user/(userId:\d+)" action="DataProvider.PrincipalProvider"/>
-					  <route name=".group" pattern="^/group/(groupId:\d+)" action="Admin.DataProvider.PrincipalProvider"/>
+					  <route name=".group" pattern="^/group/(groupId:\d+)" action="DataProvider.PrincipalProvider"/>
 					</route>
 					<route name=".languages" pattern="^/languages" action="DataProvider.LanguageProvider" />
 				 </route>

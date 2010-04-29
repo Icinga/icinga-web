@@ -172,8 +172,9 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 				$value->delete();
 			}
 		}
-		$principal = $user->getPrincipals();
+		$principals = $user->getPrincipals();
 		if(!$principals instanceof NsmPrincipal) {
+
 			foreach($principals as $pr) {
 				if($pr->NsmPrincipalTarget) {
 					foreach($pr->NsmPrincipalTarget as $pr_t) {
@@ -191,6 +192,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 			}
 			$principals->delete();
 		}	
+		$user->delete();
 		return true;
 	}
 }

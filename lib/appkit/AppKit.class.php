@@ -304,7 +304,6 @@ class AppKit {
 			try {
 				$translationMgr->setLocale($locale);
 			} catch(Exception $e) {
-				$context->getLoggerManager()->logError("Invalid locale %s for user %s - switching to default",$locale,$user->get("user_name"));
 				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
 			}
 		} catch(Exception $e) {

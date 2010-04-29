@@ -2,6 +2,10 @@
 
 class AppKit_Admin_PrincipalEditorSuccessView extends AppKitBaseView
 {
+	public function executeSimple(AgaviRequestDataHolder $rd) {
+		$this->executeHtml($rd);
+	}
+	
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);

@@ -205,6 +205,9 @@ Ext.onReady(function(){
 						success: function() {
 							if(Ext.getCmp('<? echo $t["container"] ?>'))
 								Ext.getCmp('<? echo $t["container"] ?>').hide();
+							else {
+								AppKit.changeLocation('<? echo $ro->gen("appkit.admin.users") ?>');
+							}
 						},
 						scope:this
 				 	});
@@ -283,8 +286,8 @@ Ext.onReady(function(){
 					url: '<? echo $ro->gen("appkit.data.users")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
-						this.fillUserValues(data);
-						AppKit.principalEditor.instance.loadPrincipalsForUser(data.user_id);
+						this.fillUserValues(data.users);
+						AppKit.principalEditor.instance.loadPrincipalsForUser(data.users.user_id);
 					},
 					scope:this
 					
@@ -294,8 +297,7 @@ Ext.onReady(function(){
 		
 		AppKit.userEditor.editorWidget.instance = new AppKit.userEditor.editorWidget({maxWidth:600});
 		var container = '<? echo $t["container"] ?>';
-		if(!container)
-			container = AppKit.userEditor.STD_CONTAINER;
+
 		/**
 		 * Refill the form with the user values
 		 */
@@ -305,10 +307,8 @@ Ext.onReady(function(){
 		if(Ext.getCmp(container)) {
 			Ext.getCmp(container).add(editor);
 		} else {
-			editor.on("afterrender",function(){
-				this.doLayout()
-			},editor);
-			editor.render(container);
+			AppKit.util.Layout.getCenter().add(AppKit.userEditor.editorWidget.instance)
+			AppKit.util.Layout.doLayout();
 		}
 	}
 	/*
