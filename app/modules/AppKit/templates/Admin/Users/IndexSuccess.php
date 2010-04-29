@@ -4,9 +4,11 @@ Ext.onReady(function() {
 	AppKit.users.userList = new Ext.data.JsonStore({
 		autoDestroy: true,
 		storeId: 'userListStore',
+		totalProperty: 'totalCount',
+		root: 'users',
 		idProperty: 'user_id',
-		autoLoad:true,
 		url: '<? echo $ro->gen("appkit.data.users")?>',
+		remoteSort: true,
 		fields: [
 			{name: 'user_id', type:'int'},
 			'user_name',
@@ -70,7 +72,10 @@ Ext.onReady(function() {
 	
 	wnd_userEditPanel.render("contentArea");
 	var grid =   new Ext.grid.GridPanel({
-		autoHeight: true,
+		title: _('Available users'),
+		height:500,
+		sm: new Ext.grid.RowSelectionModel(),
+		iconCls: 'silk-user',
 		tools: [{
 			id: 'plus',
 			qtip: _('Add new user'),
@@ -104,6 +109,32 @@ Ext.onReady(function() {
 			},
 			scope:this
 		}],		 
+		
+		viewConfig : {
+			scrollOffset:30,
+
+		},
+		
+		tbar: new Ext.PagingToolbar({
+			pageSize: 25,
+			store: AppKit.users.userList,
+			displayInfo: true,
+			displayMsg: _('Displaying users')+' {0} - {1} '+_('of')+' {2}',
+			emptyMsg: _('No users to display'),
+			items: [{
+				xtype: 'displayfield',
+				value: _('Hide disabled')
+				
+			},{
+				xtype:'checkbox',
+				id:'hide_disabled',
+				name: 'disabled',
+				handler: function(btn, checked){
+					grid.getStore().setBaseParam('hideDisabled',checked);
+				}
+			}]
+			
+		}), 
 		
 		store : AppKit.users.userList,
 		
@@ -146,12 +177,7 @@ Ext.onReady(function() {
 				{header: _('inactive'), dataIndex: 'user_disabled_icon',width:75}
 			]
 		}),
-		autoScroll:true,
-		title: _('Available users'),
-
-		width:800,
-		sm: new Ext.grid.RowSelectionModel(),
-		iconCls: 'silk-user'
+		
 	});
 	
 	/**
@@ -159,14 +185,12 @@ Ext.onReady(function() {
 	 */
 	var container = new Ext.Container({
 		layout: 'fit',
-		width:800,
 		items: new Ext.Panel({
 			layout: 'border',
 			border:false,
 			defaults: {
 				margins: {top: 10, left: 10, right: 10, bottom: 0},
 			},
-			autoScroll:true,
 			items: [{
 				region:'center',
 				xtype:'panel',
@@ -184,7 +208,7 @@ Ext.onReady(function() {
 		
 	container.render("contentArea");
 	container.doLayout();
-	
+	AppKit.users.userList.load({params: {start:0, limit:25}});
 	Ext.EventManager.onWindowResize(function(w,h) {
 		this.setHeight(Ext.lib.Dom.getViewHeight() - 68);
 			

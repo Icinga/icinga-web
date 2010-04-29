@@ -13,6 +13,24 @@
 					<error>Validation of 'userId' failed</error>
 				</errors>
 			</validator>
+			<validator class="string" name="hideDisabled" required="false">
+				<argument>hideDisabled</argument>
+			</validator>
+			
+			
+			<!--  Paging properties -->
+			<validator class="number" name="start" required="false">
+				<argument>start</argument>
+			</validator>
+			<validator class="number" name="limit" required="false">
+				<argument>limit</argument>
+			</validator>
+			<validator class="string" name="sort" required="false">
+				<argument>sort</argument>
+			</validator>
+			<validator class="string" name="dir" required="false">
+				<argument>dir</argument>
+			</validator>
 		</validators>
 		
 	</ae:configuration>

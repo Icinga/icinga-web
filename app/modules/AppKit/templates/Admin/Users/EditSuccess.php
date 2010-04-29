@@ -268,8 +268,8 @@ Ext.onReady(function(){
 					} else
 						arr[newPrefix] = val;
 				}
-
 			},
+			
 			insertPresets: function(id)	{
 				AppKit.principalEditor.instance.clearPrincipals();
 				if(id == 'new')  {
