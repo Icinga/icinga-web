@@ -1,24 +1,99 @@
 <?php
-
+/**
+ * 
+ * Definition of a job to perform 
+ * Checks if a job should be performed and calls the execute() method of the jobs class
+ * This should ne the result of all CronJobParsers 
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class CronJobDefinition {
+	/**
+	 * The name of the cronJob
+	 * @var String
+	 */
 	protected $name = "";
+	
+	/**
+	 * The interval of the cronjon 
+	 * @var Array
+	 */
 	protected $interval = array(
 		"days"		=> 0,
 		"hours" 	=> 0,
 		"minutes"	=> 0,
 		"times"		=> null
 	);
+	
+	/**
+	 * The starttime of the jobs timerange
+	 * @var String
+	 */
 	protected $startTime = "00:00";
+	
+	/**
+	 * The endtime of the jobs timerange
+	 * @var String
+	 */
 	protected $endTime = "24:00";
+	
+	/**
+	 * The weekdays on which the job should be performed 
+	 * @var array
+	 */
 	protected $weekDays = array();
+	
+	/**
+	 * The path where the jobs class lies
+	 * @var String
+	 */
 	protected $path = "";
+	
+	/**
+	 * The classname of the job
+	 * @var String
+	 */
 	protected $class = "";
+	
+	/**
+	 * Arguments to call for the job
+	 * @var String 
+	 */
 	protected $arguments = array();
+	
+	/**
+	 * The last execution time of the job
+	 * @var String
+	 */
 	protected $lastExecution = "";
+	
+	/**
+	 * Is the job forkable? 
+	 * Is currently ignored, Doctrine get's confused on forks
+	 * 
+	 * @var Bool
+	 */
 	protected $forkable = false;
+	
+	/**
+	 * Is the job suspended? 
+	 * Suspended jobs are not executed
+	 * @var Bool
+	 */
 	protected $suspended = false;
+	
+	/**
+	 * The timestamp of the last execution
+	 * @var unknown_type
+	 */
 	protected $lastExec = 0;
 	
+	/**
+	 * The parser that called this job. 
+	 * Some parsers have a onExecute callback function
+	 * @var CronJobParser
+	 */
 	protected $parser = null;
 	
 	public function getName() {
@@ -110,6 +185,12 @@ class CronJobDefinition {
 	
 	public function __construct() {}
 
+	/**
+	 * Starts time validation and executes the job if it's meant to be
+	 * executed
+	 * 
+	 * @throws RuntimeException if the class is not found
+	 */
 	public function execute() {
 
 		if($this->isSuspended())
@@ -119,7 +200,7 @@ class CronJobDefinition {
 		if(!include_once($this->getPath().$this->getClass().".class.php"))
 			throw new RuntimeException("Class ".$this->getClass()." not found");
 	
-		// The job is currently not in the interval
+		// The job is currently not in the interval -> stop
 		if(!$this->checkSchedule())
 			return true;	
 			
@@ -136,6 +217,11 @@ class CronJobDefinition {
 			$this->callJob();
 	}
 	
+	/**
+	 * Calls the job in a seperate process.
+	 * The parent will return immediately, the child process will be terminated after execution
+	 * 
+	 */
 	protected function executeAsProcess() {
 		CronJobMetaProvider::getInstance()->processStarted();
 		$pid = pcntl_fork();
@@ -146,6 +232,11 @@ class CronJobDefinition {
 		CronJobMetaProvider::getInstance()->processFinished();
 	}
 	
+	/**
+	 * Checks whether the process should be executed or not
+	 * 
+	 * @return Boolean True if the process should be executed, false if not
+	 */
 	protected function checkSchedule() {
 		$name = $this->getName();
 		$lastExec = $this->getLastExec();
@@ -162,6 +253,11 @@ class CronJobDefinition {
 		return($this->isInInterval($lastExec) || $this->isInFixedTime($lastExec));
 	}
 	
+	/**
+	 * Checks the timerange and the weekdays to execute the job
+	 * 
+	 * @return Boolean Whether the job is in range or not
+	 */
 	protected function isInRange() {
 		$today = time();
 		$y = date("Y",$today);
@@ -189,7 +285,13 @@ class CronJobDefinition {
 
 		return false;
 	}
-	
+
+	/**
+	 * Checks if the Job is in the defined interval (d,h,m)
+	 * 
+	 * @param Numeric $lastExec The timestamp of the last execution
+	 * @return Boolean 
+	 */
 	protected function isInInterval($lastExec = 0) {
 		$interval = $this->getTimeIntervalAsNumber(); 
 		$now = time();
@@ -198,6 +300,12 @@ class CronJobDefinition {
 		return ($timeGap>=$interval);
 	}
 	
+	/**
+	 * Checks if the job is in the fixed time definitions 
+	 * 
+	 * @param Numeric $lastExec the timestamp of the last execution
+	 * @return Boolean
+	 */
 	protected function isInFixedTime($lastExec) {
 		$interval = $this->getInterval();
 		$times = $interval["times"];
@@ -220,7 +328,11 @@ class CronJobDefinition {
  		return false;
 	}
  	
-	
+	/**
+	 * Returns interval definitions in seconds
+	 * 
+	 * @return Numeric
+	 */
 	protected function getTimeIntervalAsNumber() {
 		$interval = $this->getInterval();
 		$hours = $interval["hours"];
@@ -232,6 +344,9 @@ class CronJobDefinition {
 		return $time;
 	}
 	
+	/**
+	 * Constructs the class defined in this job and calls it's execute method
+	 */
 	protected function callJob() {
 		$class = $this->getClass();
 		$arguments = $this->getArguments();
@@ -239,6 +354,11 @@ class CronJobDefinition {
 		$result = $execProgram->execute();	
 	}
 	
+	/**
+	 * Thells the CronMetaJobProvider that the job is executed and to save it's time
+	 * 
+	 * @param String $result Did the job succeed?
+	 */
 	protected function saveLastExec($result) {
 		$storage = CronJobMetaProvider::getInstance()->getStorage();
 		$name = $this->getName();
@@ -250,6 +370,15 @@ class CronJobDefinition {
 		CronJobMetaProvider::getInstance()->saveStorage();
 	}
 	
+	/**
+	 * Creates a CronJobDefinition from a SimpleXMLElement description $xml
+	 * provided by the parser $parser 
+	 * 
+	 * @param SimpleXMLElement $xml
+	 * @param CronJobParser $parser
+	 * 
+	 * @return CronJobDefinition
+	 */
 	static public function fromXML(SimpleXMLElement $xml,CronJobParser $parser) {
 		$interval = array();
 		$interval["days"] = (String) $xml->Days;
@@ -282,6 +411,15 @@ class CronJobDefinition {
 		return $obj;
 	}
 	
+	/**
+	 * Creates a CronJobDefinition from a Array $job
+	 * provided by the parser $parser 
+	 * 
+	 * @param Array $xml
+	 * @param CronJobParser $parser
+	 * 
+	 * @return CronJobDefinition
+	 */
 	static public function fromArray(array $job,CronJobParser $parser) {
 		// create and return object
 		$obj = new self();
