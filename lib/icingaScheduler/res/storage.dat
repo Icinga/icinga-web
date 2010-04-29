@@ -1,0 +1,4 @@
+<<<<<<< jmosshammer/principal:lib/icingaScheduler/res/storage.dat
+=======
+a:8:{s:7:"Heatmap";a:2:{s:8:"lastExec";i:1272537662;s:6:"result";b:1;}s:10:"testtest_0";a:2:{s:8:"lastExec";i:1271420282;s:6:"result";b:1;}s:10:"testtest_1";a:2:{s:8:"lastExec";i:1271420285;s:6:"result";b:1;}s:9:"default_0";a:2:{s:8:"lastExec";i:1272537662;s:6:"result";b:1;}s:9:"Default_1";a:2:{s:8:"lastExec";i:1272537664;s:6:"result";b:1;}s:10:"testtest_2";a:2:{s:8:"lastExec";i:1272383467;s:6:"result";b:1;}s:14:"gdssdgsdgsdg_3";a:2:{s:8:"lastExec";i:1272383471;s:6:"result";b:1;}s:9:"default_4";a:2:{s:8:"lastExec";i:1272383474;s:6:"result";b:1;}}
+>>>>>>> local:lib/icingaScheduler/res/storage.dat
