@@ -60,15 +60,21 @@ class CronJobParser_CronDBParser extends CronJobParser {
 	
 	public function onExecute(CronJobDefinition $job) {
 		$index = explode("_",$job->getName());
-		$jobEntry = $this->getDbResult($index[count($index)-1]);
+
+		$jobEntry = $this->getDbResult();
+		$jobEntry = $jobEntry[$index[1]];
 		$modelName = $this->getModel();
-		$model = new $modelName();
-		foreach($jobEntry[0] as $field=>$value) {
+		$model;
+		if(!$model = Doctrine::getTable('HmSchedulerEntries')->find($jobEntry["entry_id"]))
+			$model = new $modelName();
+		
+		foreach($jobEntry as $field=>$value) {
 			$model->set($field,$value);
 		}
-	
+		
 		$model->set("lastrun",time());
-		$model->replace();
+		
+		$model->save();
 	}
 	
 	protected function reformatJobArray(array $job,$index) {
@@ -76,11 +82,12 @@ class CronJobParser_CronDBParser extends CronJobParser {
 		$interval = $job["interval_s"];
 		$weekdays = $job["days"];
 		$job["interval"] = array();
-		$job["interval"]["days"] = Math.floor($interval/(24*3600));
+		$job["interval"]["days"] = floor($interval/(24*3600));
 		$interval %= 24*3600;
-		$job["interval"]["hours"] =  Math.floor($interval/3600);
+		$job["interval"]["hours"] =  floor($interval/3600);
 		$interval %= 3600;
-		$job["interval"]["minutes"] =  Math.floor($interval/60);
+		$job["interval"]["minutes"] =  floor($interval/60);
+
 		$job["weekdays"] = array();
 		// extract days from binary representation
 		for($i=0;$i<7;$i++) {

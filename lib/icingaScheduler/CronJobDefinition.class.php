@@ -193,8 +193,8 @@ class CronJobDefinition {
 	protected function isInInterval($lastExec = 0) {
 		$interval = $this->getTimeIntervalAsNumber(); 
 		$now = time();
+
 		$timeGap = $now-$lastExec;
-					
 		return ($timeGap>=$interval);
 	}
 	
@@ -296,7 +296,9 @@ class CronJobDefinition {
 		$obj->setArguments($job["args"]);
 		$obj->setWeekDays($job["weekdays"]);
 		$obj->setSuspended((Boolean) $job["suspended"]);
-		$obj->setLastExec($job["lastrun"]);
+		if(isset($job["lastrun"]))
+			$obj->setLastExec($job["lastrun"]);
+		else $obj->setLastExec(0);
 		return $obj;
 	}
 }

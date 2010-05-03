@@ -5,7 +5,7 @@ define("PATH_TO_CONFIG",dirname(__FILE__)."/../../app/config.php");
 class CronAgaviAdapter {
 	protected $agaviPath = PATH_TO_AGAVI;
 	protected $configPath = PATH_TO_CONFIG;
-	private $__isLoaded = false;
+	protected $__isLoaded = false;
 	
 	public static function getInstance() {
 		if(!self::$instance) {
@@ -15,7 +15,7 @@ class CronAgaviAdapter {
 	}
 	
 	protected function __construct() {	
-		if(!$__isLoaded)
+		if(!$this->__isLoaded)
 			$this->bootstrap();
 	}
 	

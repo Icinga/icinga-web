@@ -42,7 +42,7 @@ class CronJobMetaProvider {
 	}
 	
 	public static function getInstance() {
-		if(self::$instance == 0)
+		if(self::$instance == null)
 			self::$instance = new self();
 		return self::$instance;
 	}
