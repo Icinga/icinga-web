@@ -8,7 +8,6 @@
 ?>
 <script type="text/javascript">
 Ext.onReady(function() {
-	
 	var UserMenu = (function() {
 	    var pub = {};
 	    var _LA = AppKit.util.Layout;

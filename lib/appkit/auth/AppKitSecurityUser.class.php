@@ -142,13 +142,13 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @throws AppKitDoctrineException
 	 * @author Marius Hein
 	 */
-	public function getNsmUser() {
+	public function getNsmUser($noThrow = false) {
 		$user =& $this->getAttribute(self::USEROBJ_ATTRIBUTE);
 		if ($user instanceof NsmUser) {
 			return $user;
 		}
-		
-		throw new AppKitDoctrineException('User attribute is no a NsmUser!');
+		if(!$noThrow)
+			throw new AppKitDoctrineException('User attribute is no a NsmUser!');
 	}
 	
 	/**

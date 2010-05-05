@@ -30,6 +30,8 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 		$out = null;
 		foreach ($actions as $a) {
 			$p = array ();
+			if(!isset($a['arguments']))
+				$a['arguments'] = false;
 			if (is_array($a['arguments'])) $p = $a['arguments'];
 			$a['arguments']['is_slot'] = true;
 			$r = $this->createForwardContainer($a['module'], $a['action'], $p, $a['output_type'])
