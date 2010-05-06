@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ext_DynamicJavascriptSourceAction extends ICINGAAppKitBaseAction
+class AppKit_Ext_DynamicJavascriptSourceAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

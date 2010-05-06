@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Atlantic/Stanley".
- * Compiled from olson file "southamerica", version 8.40.
+ * Compiled from olson file "southamerica", version 8.43.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Atlantic_47_Stanley.php 4343 2009-11-06 13:59:00Z david $
+ * @version    $Id: Atlantic_47_Stanley.php 4453 2010-03-21 17:11:28Z david $
  */
 
 return array (
@@ -342,7 +342,7 @@ return array (
     'startYear' => 2001,
   ),
   'source' => 'southamerica',
-  'version' => '8.40',
+  'version' => '8.43',
   'name' => 'Atlantic/Stanley',
 );
 

@@ -40,11 +40,12 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 				
 				// Grant related roles
 				$this->applyDoctrineUserRoles($user);
-				
+
 				// Give notice
 				$this->getContext()->getLoggerManager()
-				->logInfo('User %s (%s) logged in!', $username, $user->givenName());
+				->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
 				
+
 				// Return true
 				return true;
 			}
@@ -53,8 +54,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		$provider->resetAll();
 		
 		// Throw some warning into 
-		$this->getContext()->getLoggerManager()
-		->logWarn('Userlogin by %s failed!', $username);
+		$this->getContext()->getLoggerManager()->log(sprintf('Userlogin by %s failed!', $username), AgaviLogger::ERROR);
 		
 		// And notify the caling component (if they want ...)
 		throw new AppKitSecurityUserException("User '$username' is not known with this credentials");
@@ -72,7 +72,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		
 		// Give notice
 		$this->getContext()->getLoggerManager()
-		->logInfo('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName());
+		->log(sprintf('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName()), AgaviLogger::INFO);
 		
 		return true;
 	}
@@ -87,6 +87,9 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		$this->setAttributeByRef('userobj', &$user);
 		return true;
 	}
+	
+
+	
 	
 	/**
 	 * Applying the roles the the agavi rbac struct
@@ -118,17 +121,15 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 			}
 		}
 		foreach($user->getTargets("credential") as $credential) {
+			$this->addCredential($credential->get("target_name"));
 		}
 	
 	}
 	
 	private function addCredentialsFromRole(NsmRole &$role) {
-		$log = array("Test\n");
 		foreach($role->getTargets("credential") as $credential) {
 			$this->addCredential($credential->get("target_name"));
-			$log[] = $credential->get("target_name");
 		}	
-		file_put_contents("/var/www/log.txt",$log,FILE_APPEND);
 	}
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
@@ -141,13 +142,13 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @throws AppKitDoctrineException
 	 * @author Marius Hein
 	 */
-	public function getNsmUser() {
+	public function getNsmUser($noThrow = false) {
 		$user =& $this->getAttribute(self::USEROBJ_ATTRIBUTE);
 		if ($user instanceof NsmUser) {
 			return $user;
 		}
-		
-		throw new AppKitDoctrineException('User attribute is no a NsmUser!');
+		if(!$noThrow)
+			throw new AppKitDoctrineException('User attribute is no a NsmUser!');
 	}
 	
 	/**

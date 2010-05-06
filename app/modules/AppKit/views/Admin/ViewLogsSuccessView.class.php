@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_ViewLogsSuccessView extends ICINGAAppKitBaseView
+class AppKit_Admin_ViewLogsSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

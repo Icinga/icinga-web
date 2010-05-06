@@ -7,13 +7,14 @@ class NsmRole extends BaseNsmRole
 {
 	private $principals_list = null;
 	private $principals = null;
+	private $children = null;
 	
 	public function setUp () {
 
 		parent::setUp();
 
 		$this->hasMany('NsmUser', array (	'local'		=> 'usro_role_id',
-											'foreign'	=> 'usro_user_id',
+											'foreign'	=> 'usro_role_id',
 											'refClass'	=> 'NsmUserRole'));
 
         $options = array (
@@ -38,6 +39,16 @@ class NsmRole extends BaseNsmRole
 		return null;
 	}
 	
+	public function getChildren() {
+		if($this->children === null) {
+			$this->children = Doctrine_Query::create()
+			->select('r.*') 
+			->from("NsmRole r INDEXBY r.role_id")
+			->where("r.role_parent = ?",$this->get("role_id"))
+			->execute();
+		}
+		return $this->children;
+	}
 /**
 	 * Returns a list of all belonging principals
 	 * @return array
@@ -77,7 +88,7 @@ class NsmRole extends BaseNsmRole
 	}
 	
 	/**
-	 * Returns a DQL providing the user targets
+	 * Returns a DQL providing the role targets
 	 * @param string $type
 	 * @return Doctrine_Query
 	 */
@@ -98,7 +109,7 @@ class NsmRole extends BaseNsmRole
 		
 	}
 	
-	/**
+	/*
 	 * Return all targets belonging to thsi user
 	 * @param string $type
 	 * @return Doctrine_Collection
@@ -107,4 +118,105 @@ class NsmRole extends BaseNsmRole
 		return $this->getTargetsQuery($type)->execute();
 	}
 	
+
+	/**
+	 * Returns true if a target exists
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function hasTarget($name) {
+		$q = $this->getTargetsQuery();
+		$q->andWhere('t.target_name=?', array($name));
+		
+		if ($q->execute()->count() > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param string $name
+	 * @return NsmTarget
+	 */
+	public function getTarget($name) {
+		$col = Doctrine::getTable('NsmTarget')->findByDql('target_name=?', array($name));
+		if ($col->count() == 1 && $this->hasTarget($name)) {
+			return $col->getFirst();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Returns a query with all values to a target
+	 * @param string $name
+	 * @return Doctrine_Query
+	 */
+	protected function getTargetValuesQuery($target_name) {
+		$q = Doctrine_Query::create()
+		->select('tv.*')
+		->from('NsmTargetValue tv')
+		->innerJoin('tv.NsmPrincipalTarget pt')
+		->innerJoin('pt.NsmTarget t with t.target_name=?', $target_name)
+		->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+		return $q;
+	}
+	
+	/**
+	 * Return all target values as Doctrine_Collection
+	 * @param string $target_name
+	 * @return Doctrine_Collection
+	 */
+	public function getTargetValues($target_name) {
+		return $this->getTargetValuesQuery($target_name)->execute();
+	}
+	
+	public function getTargetValue($target_name, $value_name) {
+		$q = $this->getTargetValuesQuery($target_name);
+		$q->select('tv.tv_val');
+		$q->andWhere('tv.tv_key=?', array($value_name));
+		$res = $q->execute();
+		
+		$out = array();
+		foreach ($res as $r) {
+			$out[] = $r->tv_val;
+		}
+		return $out;
+	}
+	
+	public function getTargetValuesArray() {
+		$tc = Doctrine_Query::create()
+		->select('t.target_name, t.target_id')
+		->from('NsmTarget t')
+		->innerJoin('t.NsmPrincipalTarget pt')
+		->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+		->execute();
+		
+		$out = array();
+		
+		foreach ($tc as $t) {
+			$out[ $t->target_name ] = array ();
+			
+			$ptc = Doctrine_Query::create()
+			->from('NsmPrincipalTarget pt')
+			->innerJoin('pt.NsmTargetValue tv')
+			->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+			->andWhere('pt.pt_target_id=?', array($t->target_id))
+			->execute();
+			
+			foreach ($ptc as $pt) {
+				$tmp = array ();
+				foreach ($pt->NsmTargetValue as $tv) {
+					$tmp[ $tv->tv_key ] = $tv->tv_val;
+				}
+				
+				$out[ $t->target_name ][] = $tmp;
+			}
+		}
+		
+		return $out;
+	}
 }

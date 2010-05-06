@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_Users_IndexAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_Users_IndexAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -28,7 +28,6 @@ class AppKit_Admin_Users_IndexAction extends ICINGAAppKitBaseAction
 	}
 	
 	public function execute(AgaviRequestDataHolder $rd) {
-		// We need the execute method to work with parameter od the request!
 		
 		if ($rd->getParameter('id')) {
 			try {

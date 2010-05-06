@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ObjectSearchSuccessView extends ICINGACronksBaseView
+class Cronks_System_ObjectSearchSuccessView extends CronksBaseView
 {
 	
 	/**

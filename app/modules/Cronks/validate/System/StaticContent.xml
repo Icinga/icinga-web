@@ -16,6 +16,14 @@
 					</errors>
 			</validator>
 			
+			<validator class="string" name="interface" required="false">
+					<argument>interface</argument>
+					
+					<errors>
+						<error>Validation of interface failed!</error>
+					</errors>
+			</validator>
+			
 			<validator class="string" name="cmpid" required="false">
 				<argument>cmpid</argument>
 

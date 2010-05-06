@@ -1,21 +1,7 @@
-<?php 
-	$htmlid = AppKitRandomUtil::genSimpleId(10, 'login-box-');
-	$containerid = AppKitHtmlHelper::concatHtmlId($htmlid, 'container');
-?>
-<div style="width:400px; margin: 150px auto 0px auto; padding: 20px;" id="<?php echo $containerid; ?>">
-    <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
-    <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
-        <h3 style="margin-bottom:5px;"><?php echo $tm->_('Login'); ?></h3>
-        <div id="<?php echo $htmlid; ?>"></div>
-    </div></div></div>
-    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
-</div>
-<script type="text/javascript" defer="defer">
-(function() {
+<script type="text/javascript">
+Ext.onReady(function() {
 
 	var bAuthenticated = false;
-	var sId = '<?php echo $htmlid ?>';
-	var sContainerId = '<?php echo $containerid; ?>';
 	
 	<?php if ($us->isAuthenticated() == true) { ?>
 	bAuthenticated = true;
@@ -34,12 +20,10 @@
 			}
 		});
 		
-		var oContainer = Ext.get(sContainerId);
-		
 		var oFormPanel = new Ext.form.FormPanel({
 			labelWidth: 100,
 			defaultType: 'textfield',
-			bodyStyle: 'padding: 5px;',
+			bodyStyle: { padding: '5px 5px', marginTop: '10px' },
 			
 			defaults: {
 				msgTarget: 'side'
@@ -76,6 +60,15 @@
 			buttons: [oButton]
 		});
 		
+		var oContainer = new Ext.Panel({
+			width: 400,
+			style: { margin: '120px auto', padding: '10px 0 0 0' },
+			baseCls: 'x-box',
+			frame: true,
+			defaults: { border: false },
+			items: [ { bodyCfg: { tag: 'h1', html: _('Login') } }, oFormPanel ]
+		});
+		
 		var oFormAction = new Ext.form.Action.Submit(oFormPanel.getForm(), {
 			clientValidation: true,
 			url: '<?php echo $ro->gen("appkit.login.provider"); ?>',
@@ -91,7 +84,7 @@
 						waitTime: 5
 					};
 					
-					AppKit.Ext.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
+					AppKit.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
 				}
 				
 				/* oContainer.highlight("cc0000", {
@@ -101,17 +94,18 @@
 				}); */
 				
 				if (oContainer) {
-					var ox = oContainer.getLeft();
-					oContainer.sequenceFx();
+					var ox = oContainer.getEl();
+					var orgX = ox.getLeft();
+					ox.sequenceFx();
 					
 					for(var i=0; i<1; i++) {
-						oContainer.shift({x: oContainer.getLeft()-20, duration: .02, easing: 'bounceBoth'})
-						.shift({x: oContainer.getLeft()+40, duration: .02 , easing: 'bounceBoth'})
-						.shift({x: oContainer.getLeft()-20, duration: .02, easing: 'bounceBoth'})
+						ox.shift({x: ox.getLeft()-20, duration: .02, easing: 'bounceBoth'})
+						.shift({x: ox.getLeft()+40, duration: .02 , easing: 'bounceBoth'})
+						.shift({x: ox.getLeft()-20, duration: .02, easing: 'bounceBoth'})
 						.pause(.03);
 					}
 					
-					oContainer.shift({ x: ox, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
+					ox.shift({ x: orgX, duration: .02, easing: 'bounceBoth', callback: pub.enableForm, scope: pub });
 				}
 				
 				pub.resetForm();
@@ -133,18 +127,18 @@
 				oFormPanel.add(p);
 				oFormPanel.doLayout();
 				
-				AppKit.Ext.changeLocation.defer(10, null, ['<?php echo $ro->gen("index_page"); ?>']);
+				AppKit.changeLocation.defer(10, null, ['<?php echo $ro->gen("index_page"); ?>']);
 			}
 		});
 		
 		pub = {
 			
 			getPanel : function() {
-				return oFormPanel;
+				return oContainer;
 			},
 			
 			getForm : function() {
-				return this.getPanel().getForm();
+				return oFormPanel.getForm();
 			},
 			
 			getAction : function() {
@@ -180,13 +174,15 @@
 				
 				oButton.disable();
 			}
-			
 		};
 		
 		return pub;
 	}();
 	
-	oLogin.getPanel().render(sId);
-
-})();
+	AppKit.util.Layout.addTo({
+		items: oLogin.getPanel()
+	});
+	
+	AppKit.util.Layout.doLayout();
+});
 </script>

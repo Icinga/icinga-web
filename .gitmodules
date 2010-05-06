@@ -1,0 +1,3 @@
+[submodule "app/data/i18n/po"]
+	path = app/data/i18n/po
+	url = git://git.icinga.org/icinga-web-translation.git

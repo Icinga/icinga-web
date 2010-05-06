@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
+class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -36,7 +36,7 @@ class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 		
 		// Adding inline files
 		$files = AgaviConfig::get('de.icinga.appkit.include_javascript');
-		if (is_array($files) && array_key_exists('inline', $files)) {
+		if (is_array($files) && array_key_exists('inline', $files) && is_array($files['inline'])) {
 			foreach ($files['inline'] as $js_file) {
 				$header->addJsFile($js_file);
 			}
@@ -51,7 +51,6 @@ class AppKit_Widgets_AddHeaderDataAction extends ICINGAAppKitBaseAction
 		}
 		
 		return $this->getDefaultViewName();
-		
 	}
 }
 

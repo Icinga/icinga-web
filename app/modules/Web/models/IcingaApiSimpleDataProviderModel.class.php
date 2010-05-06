@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Web_IcingaApiSimpleDataProviderModel extends ICINGAWebBaseModel
+class Web_IcingaApiSimpleDataProviderModel extends IcingaWebBaseModel
 {
 
 	private $configAll = false;
@@ -13,10 +13,11 @@ class Web_IcingaApiSimpleDataProviderModel extends ICINGAWebBaseModel
 	private $filter = false;
 
 	private $filterSet = false;
-
-	public function __construct () {
+	
+	public function initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
 		$this->configAll = AgaviConfig::get('modules.web.simpledataprovider');
-		$this->apiSearch = AppKitFactories::getInstance()->getFactory('IcingaData')->API()->createSearch();
+		$this->apiSearch = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->createSearch();
 	}
 
 	public function setSourceId ($srcId = false) {

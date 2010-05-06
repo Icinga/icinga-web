@@ -32,10 +32,24 @@
 					<value>0</value>
 				</columns>
 			</filter>
+			
+			<!-- 
+				* Maps variables against real columns
+				This is needed to query subvalues from other columns names
+			-->
 			<varmap>
 				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
 				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
 			</varmap>
+			
+			<!-- 
+				* Set match types for colums implicit
+				For template query values where you can't set this through the 
+				filter			
+			-->
+			<!-- <match_type>
+				<type name="SERVICE_CUSTOMVARIABLE_VALUE">IcingaApi::MATCH_LIKE</type>
+			</match_type> -->
 		</datasource>
 		
 		<datasource id="HOST_STATUS_DOWN_CV">
@@ -168,7 +182,7 @@
    				</div>
    				<script type="text/javascript">
 	    			Ext.onReady(function() {
-	    				var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+	    				var l = Cronk.util.InterGridUtil.clickGridLink;
 	    				var i = 'toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-';
 	    				var s = { UP:0, DOWN:1, UNREACHABLE:2}
 	    				Ext.iterate(s, function(k, v) {
@@ -206,7 +220,7 @@
     			</div>
     			<script type="text/javascript">
 	    			Ext.onReady(function() {
-	    				var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+	    				var l = Cronk.util.InterGridUtil.clickGridLink;
 	    				var i = 'tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-';
 	    				var s = { OK:0, WARNING:1, CRITICAL:2, UNKNOWN:3 }
 	    				Ext.iterate(s, function(k, v) {

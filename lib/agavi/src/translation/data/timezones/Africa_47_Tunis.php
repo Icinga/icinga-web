@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Africa/Tunis".
- * Compiled from olson file "africa", version 8.23.
+ * Compiled from olson file "africa", version 8.24.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Africa_47_Tunis.php 4343 2009-11-06 13:59:00Z david $
+ * @version    $Id: Africa_47_Tunis.php 4471 2010-04-08 01:01:16Z david $
  */
 
 return array (
@@ -209,43 +209,15 @@ return array (
       'time' => 1224982800,
       'type' => 1,
     ),
-    34 => 
-    array (
-      'time' => 1269738000,
-      'type' => 2,
-    ),
-    35 => 
-    array (
-      'time' => 1288486800,
-      'type' => 1,
-    ),
   ),
   'finalRule' => 
   array (
-    'type' => 'dynamic',
+    'type' => 'none',
     'offset' => 3600,
-    'name' => 'CE%sT',
-    'save' => 3600,
-    'start' => 
-    array (
-      'month' => 2,
-      'date' => -1,
-      'day_of_week' => 1,
-      'time' => 7200000,
-      'type' => 1,
-    ),
-    'end' => 
-    array (
-      'month' => 9,
-      'date' => -1,
-      'day_of_week' => 1,
-      'time' => 7200000,
-      'type' => 1,
-    ),
     'startYear' => 2009,
   ),
   'source' => 'africa',
-  'version' => '8.23',
+  'version' => '8.24',
   'name' => 'Africa/Tunis',
 );
 

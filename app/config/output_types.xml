@@ -1,197 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurations xmlns="http://agavi.org/agavi/1.0/config">
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/output_types/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
 	
-	<configuration>
+	<ae:sandbox>
+		<!-- our common layers that all layouts use. only the content layer in here, and empty, but who knows! -->
+		<layers>
+			<layer name="content" />
+		</layers>
 		
+		<renderers>
+			<renderer name="php" class="AgaviPhpRenderer">
+				<ae:parameter name="assigns">
+					<ae:parameter name="routing">ro</ae:parameter>
+					<ae:parameter name="request">rq</ae:parameter>
+					<ae:parameter name="controller">ct</ae:parameter>
+					<ae:parameter name="user">us</ae:parameter>
+					<ae:parameter name="translation_manager">tm</ae:parameter>
+					<ae:parameter name="request_data">rd</ae:parameter>
+				</ae:parameter>
+				<!-- change the default template variables array name from $template to the more convenient $t -->
+				<ae:parameter name="var_name">t</ae:parameter>
+			</renderer>
+		</renderers>
+		
+		<output_types>
+			<output_type name="simple">
+				<renderers default="php">
+					<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:renderers/*)" />
+				</renderers>
+				
+				<layouts default="simple">
+					<layout name="simple">
+							<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:layers/*)" />
+					</layout>
+				</layouts>
+			</output_type>
+		</output_types>
+	</ae:sandbox>
+	
+	<ae:configuration context="web">
+	
 		<output_types default="html">
 			
 			<output_type name="html">
-				
-				<renderers default="php">
-					<renderer name="php" class="AgaviPhpRenderer">
-						<parameter name="assigns">
-							<parameter name="routing">ro</parameter>
-							<parameter name="request">rq</parameter>
-							<parameter name="controller">ct</parameter>
-							<parameter name="user">us</parameter>
-							<parameter name="translation_manager">tm</parameter>
-							<parameter name="request_data">rd</parameter>
-						</parameter>
-						<!-- this changes the name of the variable with all template attributes from the default $template to $t -->
-						<parameter name="var_name">t</parameter>
-					</renderer>
-				</renderers>
-				
-				<layouts default="ICINGAWireFrame">
-				
-					<!-- standard layout with a content and a decorator layer -->
-					<layout name="ICINGAWireFrame">
-						<!-- content layer without further params. this means the standard template is used, i.e. the one with the same name as the current view -->
-						<layer name="content" />
-						<!-- decorator layer with the HTML skeleton, navigation etc; set to a specific template here -->
-						<layer name="decorator">
+					<renderers default="php">
+						<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:renderers/*)" />
+					</renderers>
+					
+					<layouts default="extjs">
+						<layout name="extjs">
+							<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:layers/*)" />
+							
+							<layer name="decorator">
+							<slot name="head" module="AppKit" action="Widgets.AddHeaderData" />
+							<slot name="head_start" module="AppKit" action="Ext.Header" />
+							<ae:parameter name="directory">%core.template_dir%</ae:parameter>
+							<ae:parameter name="template">ExtJsViewport</ae:parameter>
+							</layer>
+						</layout>
 						
-							<parameter name="directory">%core.template_dir%</parameter>
-							<parameter name="template">ICINGAWireFrameMaster</parameter>
-							
-							<!-- Headerdata -->
-							<slot name="additional_header_data" module="AppKit" action="Widgets.AddHeaderData" />
-							
-							<!-- Navigation -->
-							<slot name="navigation_top" module="AppKit" action="Widgets.ShowNavigation">
-								<parameter name="type">top</parameter>
-							</slot>
-							
-							<!--
-							<slot name="navigation_left" module="AppKit" action="Widgets.ShowNavigation">
-								<parameter name="type">left</parameter>
-							</slot>
-							-->
-							
-							<!-- Errors -->
-							<slot name="error_frame" module="AppKit" action="Widgets.ShowErrors">
-								<parameter name="type">15</parameter>
-							</slot>
-							
-							<!-- Footer -->
-							<slot name="footer" module="AppKit" action="Widgets.ShowFooter">
-							</slot>
-						</layer>
-					</layout>
+						<layout name="slot">
+							<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:layers/*)" />
+						</layout>
+					</layouts>
 					
-					<!-- special layout for slots that only has a content layer to prevent the obvious infinite loop that would otherwise occur if the decorator layer has slots assigned in the layout; this is loaded automatically by ProjectBaseView::setupHtml() in case the current container is run as a slot -->
-					<layout name="simple">
-						<layer name="content" />
-					</layout>
-					
-					<!-- Slot layout -->
-					<layout name="slot">
-						<layer name="content" />
-					</layout>
-				</layouts>
-				
-				<parameter name="http_headers">
-					<parameter name="Content-Type">text/html; charset=UTF-8</parameter>
-				</parameter>
-				
-			</output_type>
-			
-			<output_type name="image">
-				<parameter name="http_headers">
-					<!-- Remove some unwanted http headers -->
-					<parameter name="Pragma"></parameter>
-					<parameter name="Set-Cookie"></parameter>
-				</parameter>
-			</output_type>
-			
-			<output_type name="xml">
-				<parameter name="http_headers">
-					<parameter name="Content-Type">text/xml; charset=UTF-8</parameter>
-				</parameter>
-			</output_type>
-			
-			<output_type name="json">
-				<parameter name="http_headers">
-					<!-- <parameter name="Content-Type">text/x-json; charset=UTF-8</parameter> -->
-					<parameter name="Content-Type">text/plain; charset=UTF-8</parameter>
-				</parameter>
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/html; charset=UTF-8</ae:parameter>
+				</ae:parameter>
 			</output_type>
 			
 			<output_type name="javascript">
-				<parameter name="http_headers">
-					<parameter name="Content-Type">text/javascript; charset=UTF-8</parameter>
-					<!-- <parameter name="Content-Type">text/plain; charset=UTF-8</parameter> -->
-				</parameter>
-				
-				<renderers default="php">
-					<renderer name="php" class="AgaviPhpRenderer">
-						<parameter name="assigns">
-							<parameter name="routing">ro</parameter>
-							<parameter name="request">rq</parameter>
-							<parameter name="controller">ct</parameter>
-							<parameter name="user">us</parameter>
-							<parameter name="translation_manager">tm</parameter>
-							<parameter name="request_data">rd</parameter>
-						</parameter>
-						<!-- this changes the name of the variable with all template attributes from the default $template to $t -->
-						<parameter name="var_name">t</parameter>
-					</renderer>
-				</renderers>
-			
-				<layouts default="simple">
-					<layout name="simple">
-						<layer name="content" />
-					</layout>
-				</layouts>
-				
+				<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:output_types/ot:output_type/*)" />
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/javascript; charset=UTF-8</ae:parameter>
+				</ae:parameter>
 			</output_type>
 			
-			<output_type name="ajax">
-				<renderers default="php">
-					<renderer name="php" class="AgaviPhpRenderer">
-						<parameter name="assigns">
-							<parameter name="routing">ro</parameter>
-							<parameter name="request">rq</parameter>
-							<parameter name="controller">ct</parameter>
-							<parameter name="user">us</parameter>
-							<parameter name="translation_manager">tm</parameter>
-							<parameter name="request_data">rd</parameter>
-						</parameter>
-						<!-- this changes the name of the variable with all template attributes from the default $template to $t -->
-						<parameter name="var_name">t</parameter>
-					</renderer>
-				</renderers>
-			
-				<layouts default="simple">
-					<layout name="simple">
-						<layer name="content" />
-					</layout>
-				</layouts>
+			<output_type name="simple">
+				<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:output_types/ot:output_type/*)" />
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/html; charset=UTF-8</ae:parameter>
+					<ae:parameter name="Cache-Control">public</ae:parameter>
+					<ae:parameter name="Age">10</ae:parameter>
+					<ae:parameter name="Pragma"></ae:parameter>
+				</ae:parameter>
 			</output_type>
 			
-			<output_type name="simplecontent">
-				<renderers default="php">
-					<renderer name="php" class="AgaviPhpRenderer">
-						<parameter name="assigns">
-							<parameter name="routing">ro</parameter>
-							<parameter name="request">rq</parameter>
-							<parameter name="controller">ct</parameter>
-							<parameter name="user">us</parameter>
-							<parameter name="translation_manager">tm</parameter>
-							<parameter name="request_data">rd</parameter>
-						</parameter>
-						<!-- this changes the name of the variable with all template attributes from the default $template to $t -->
-						<parameter name="var_name">t</parameter>
-					</renderer>
-				</renderers>
-			
-				<layouts default="simple">
-					<layout name="simple">
-						<layer name="content" />
-					</layout>
-				</layouts>
+			<output_type name="json">
+				<ae:parameter name="http_headers">
+					<!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
+					<ae:parameter name="Content-Type">text/plain; charset=UTF-8</ae:parameter>
+				</ae:parameter>
 			</output_type>
 			
 		</output_types>
-		
-	</configuration>
 	
-	<configuration environment="production.*">
-		
-		<output_types default="html">
-			
-			<!-- use a different exception template in production envs -->
-			<!-- others are defined in settings.xml -->
-			<output_type name="html" exception_template="%core.template_dir%/exceptions/web-html.php" />
-			
-		</output_types>
-		
-	</configuration>
+	</ae:configuration>
 	
-	<configuration context="console">
+	<ae:configuration context="console">
 		<output_types default="console">
 			<output_type name="console" />
 		</output_types>
-	</configuration>
+	</ae:configuration>
 	
-</configurations>
+</ae:configurations>

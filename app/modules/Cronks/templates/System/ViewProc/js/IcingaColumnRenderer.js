@@ -1,8 +1,8 @@
-Ext.ns('AppKit.Ext.grid');
+Ext.ns('Cronk.grid');
 
 // These are the javascript methods available within
 // the namespace
-AppKit.Ext.grid.IcingaColumnRenderer = {
+Cronk.grid.IcingaColumnRenderer = {
 	
 	subGrid : function(cfg) {
 		return function(grid, rowIndex, colIndex, e) {
@@ -33,7 +33,7 @@ AppKit.Ext.grid.IcingaColumnRenderer = {
 					filter["f[" + cfg.targetField + "-operator]"] = 50;
 				}
 				
-				AppKit.Ext.util.InterGridUtil.gridFilterLink(cronk, filter);
+				Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
 			}
 		}
 	},

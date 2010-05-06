@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
+class Cronks_System_StatusMapModel extends CronksBaseModel
 {
 
 	private $api = false;
@@ -20,15 +20,6 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 	private $tableTemplate = '<table>%s</table>';
 
 	/**
-	 * class constructor
-	 * @return	Cronks_System_StatusMapModel			class object
-	 * @author	Christian Doebler <christian.doebler@netways.de>
-	 */
-	public function __construct () {
-		$this->api = AppKitFactories::getInstance()->getFactory('IcingaData');
-	}
-
-	/**
 	 * (non-PHPdoc)
 	 * @see lib/agavi/src/model/AgaviModel#initialize($context, $parameters)
 	 * @author	Christian Doebler <christian.doebler@netways.de>
@@ -37,6 +28,8 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 	{
 		parent::initialize($context, $parameters);
 		$this->tm = $this->getContext()->getTranslationManager();
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+		
 	}
 
 	/**
@@ -51,7 +44,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 
 		$idPrefix = sha1(microtime()) . '-';
 
-		$apiResHosts = $this->api->API()
+		$apiResHosts = $this->api->getConnection()
 			->createSearch()
 			->setResultType(IcingaApi::RESULT_ARRAY)
 			->setSearchTarget(IcingaApi::TARGET_HOST)
@@ -59,7 +52,7 @@ class Cronks_System_StatusMapModel extends ICINGACronksBaseModel
 			->fetch()
 			->getAll();
 
-		$apiResHostParents = $this->api->API()
+		$apiResHostParents = $this->api->getConnection()
 			->createSearch()
 			->setSearchTarget(IcingaApi::TARGET_HOST_PARENTS)
 			->fetch();

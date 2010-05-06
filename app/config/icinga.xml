@@ -39,13 +39,13 @@
 	-->
 	<setting name="appkit.autoloader.paths">
 		<parameter>%core.root_dir%/lib/appkit</parameter>
-		<parameter>%core.app_dir%/lib/icinga</parameter>
+		<!--<parameter>%core.module_dir%/Web/lib</parameter>-->
 	</setting>
 	
 	<!-- The class prefixes -->
 	<setting name="appkit.autoloader.prefixes">
 		<parameter>AppKit</parameter>
-		<parameter>Icinga</parameter>
+		<!-- <parameter>Icinga</parameter>  -->
 	</setting>
 	
 	<!--
@@ -91,19 +91,21 @@
 	<setting name="appkit.include_styles">		
 	
 		<!-- ICINGAWireFrame css -->
-		<parameter>/styles/WireFrameDefault.css</parameter>
-		<parameter>/styles/WireFrameStructural.css</parameter>
+		<!--  <parameter>/styles/WireFrameDefault.css</parameter>
+		<parameter>/styles/WireFrameStructural.css</parameter> -->
 		
 		<!-- ExtJS -->
 		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
+		<parameter>/js/ext3/resources/css/xtheme-gray.css</parameter>
+		<parameter>/js/ext3/examples/ux/css/ux-all.css</parameter>
 
 		<!-- JIT - JavaScript InfoVis Toolkit -->
 		<parameter>/styles/statusmap.css</parameter>
 
 		<!-- ICINGA -->
+		<!-- <parameter>/styles/extjs/ext-all.css</parameter>
+		<parameter>/styles/extjs/ux-all.css</parameter> -->
 		<parameter>/styles/silk-icons.css</parameter>
-		<parameter>/styles/extjs/ext-all.css</parameter>
-		<parameter>/styles/extjs/ux-all.css</parameter>
 		<parameter>/styles/Icinga.css</parameter>
 	</setting>
 	
@@ -128,57 +130,78 @@
 			
 			<!-- ExtJS base files -->
 			<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
-
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/DataView-more.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
-
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/SelectBox.js</parameter>
-			<!-- <parameter>%core.root_dir%/lib/ext3/examples/ux/SlidingPager.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/SliderTip.js</parameter> -->
+			<parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</parameter>
 	
 			<!-- JIT - JavaScript InfoVis Toolkit -->
 			<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
 			<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
 	
 			<!--AppKit JS -->
-			<parameter>%core.root_dir%/lib/appkit/js/AppKit.js</parameter>
-
-			<parameter>%core.root_dir%/lib/appkit/js/ext/HttpStateProvider.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/ExtJs.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/ScriptDynaLoader.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/FancyTextField.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/slidingtabs.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/SimpleDataProvider.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/FilterHandler.js</parameter>
-
+			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/ScriptDynaLoader.js</parameter>
+			<parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</parameter>
+	
+			<!-- Cronks -->
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
+			
+			<parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</parameter>
+		
+			<parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</parameter>
+			
+			<!--
 			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
-
-			<parameter>%core.root_dir%/lib/appkit/js/ext/form/JSONSubmit.js</parameter>
-			
-			<!-- MISC -->
-			<parameter>%core.root_dir%/lib/appkit/js/rmd160.js</parameter>
+			-->
 			
 			<!-- jsgettext -->
 			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
 			
 			<!--  ICINGA JS -->
-			<parameter>%core.app_dir%/lib/icinga/js/StatusData.js</parameter>
+			<parameter>%core.module_dir%/Web/lib/js/SimpleDataProvider.js</parameter>
+			<parameter>%core.module_dir%/Web/lib/js/StatusData.js</parameter>
 		</parameter>
 		
+		<!-- Adding inline actions to append dynamic javascript -->
+		<parameter name="action">
+			<parameter>
+				<parameter name="module">AppKit</parameter>
+				<parameter name="action">Ext.initI18n</parameter>
+				<parameter name="output_type">javascript</parameter>
+			</parameter>
+			
+			<parameter>
+				<parameter name="module">AppKit</parameter>
+				<parameter name="action">Ext.ApplicationState</parameter>
+				<parameter name="output_type">javascript</parameter>
+				<parameter name="arguments">
+					<parameter name="cmd">init</parameter>
+				</parameter>
+			</parameter>
+
+		</parameter>
+		
+		<!-- Inline scripts to include url's -->
 		<parameter name="inline">
-			<!-- I18N -->
-			<parameter>/appkit/ext/i18n</parameter>
-			<parameter>/appkit/ext/applicationState?cmd=init</parameter>
 		</parameter>
 	</setting>
 
@@ -188,12 +211,11 @@
 		* You have to predefine the libraries
 	-->
 	<setting name="appkit.include_dynamic_javascript">
-		<ae:parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
-		<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
-		<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
-		<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
+		<parameter name="Cronk.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</parameter>
+		<parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</parameter>
+		<parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</parameter>
+		<parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</parameter>
 	</setting>
-
 	<!--
 		Doctrine pager configuration
 		* deprecated, test to remove
@@ -204,6 +226,7 @@
 		AppKitFactories
 	-->
 	<setting name="appkit.factories">
+	
 		<!-- Cache provider -->
 		<parameter name="CacheProvider">
 			<parameter name="class">AppKitFileCache</parameter>
@@ -224,7 +247,7 @@
 			
 			<parameter name="fileDataDir"><![CDATA[/tmp/icinga_web]]></parameter>
 		</parameter>
-		
+	
 		<!-- GLOBAL MESSAGE QUEUE -->
 		<parameter name="MessageQueue">
 			<parameter name="class">AppKitMessageQueue</parameter>
@@ -317,70 +340,6 @@
 				<parameter name="AppKitEventDispatcher">%core.root_dir%/lib/appkit/event/AppKitEventDispatcher.class.php</parameter>
 			</parameter>
 		</parameter>
-		
-		<!-- icinga-api data interface -->
-		<parameter name="IcingaData">
-			<parameter name="class">IcingaData</parameter>
-			<parameter name="file">%core.root_dir%/app/lib/icinga/factory/IcingaData.class.php</parameter>
-			
-			<parameter name="requiredClasses">
-				<!-- NONE -->
-			</parameter>
-			
-			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
-			
-			<!--
-				API connection type
-			-->
-			<parameter name="api_type">IcingaApi::CONNECTION_IDO</parameter>
-			
-			<parameter name="config_type">mysql</parameter>
-			<parameter name="config_host">127.0.0.1</parameter>
-
-			
-			<parameter name="config_port">3306</parameter>
-			<parameter name="config_database">icinga</parameter>
-			
-			<parameter name="config_user">icinga</parameter>
-			<parameter name="config_password">icinga</parameter>
-			
-			<parameter name="config_table_prefix">icinga_</parameter>
-		</parameter>
-		
-		<parameter name="IcingaCommand">
-			<parameter name="class">IcingaCommand</parameter>
-			<parameter name="file">%core.root_dir%/app/lib/icinga/factory/IcingaCommand.class.php</parameter>
-			
-			<parameter name="requiredClasses">
-				<!-- NONE -->
-			</parameter>
-			
-			<parameter name="api_file">%core.root_dir%/lib/icinga-api/IcingaApi.php</parameter>
-			
-			<parameter name="interfaces">
-			
-				<parameter name="pipe1">
-					<parameter name="enabled">true</parameter>
-					<parameter name="type">IcingaApi::COMMAND_PIPE</parameter>
-					
-					<parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
-				</parameter>
-			
-				<parameter name="ssh1">
-					<parameter name="enabled">false</parameter>
-					<parameter name="type">IcingaApi::COMMAND_SSH</parameter>
-					
-					<parameter name="ssh_bin">/usr/bin/ssh</parameter>
-					<parameter name="ssh_user">icinga</parameter>
-					<parameter name="ssh_host">127.0.0.15</parameter>
-					<parameter name="ssh_port">22</parameter>
-					<parameter name="ssh_timeout">20</parameter>
-					<parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</parameter>
-				</parameter>
-			</parameter>
-			
-			
-		</parameter>
 	</setting>
 	
 	<!-- 
@@ -400,5 +359,5 @@
 	<!-- PLACEHOLDER -->
 	<setting name="appkit.version.release"></setting>
 
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/> 
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/>
 </settings>

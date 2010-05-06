@@ -6,7 +6,22 @@
 >
 	<ae:configuration>
 		
-		<validators>
+		<validators method="write">
+			<validator name="upref_key" class="string" required="false">
+				<argument>upref_key</argument>
+			</validator>
+			<validator name="upref_val" class="string" required="false">
+				<argument>upref_val</argument>
+			</validator>
+			<validator name="isLong" class="string" required="false">
+				<argument>isLong</argument>
+			</validator>
+			<validator name="remove" class="string" required="false">
+				<argument>remove</argument>
+			</validator>			
+			<validator name="params" class="string" required="false">
+				<arguments base="params[][]" />
+			</validator>
 		</validators>
 		
 	</ae:configuration>

@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Widgets_ShowErrorsSuccessView extends ICINGAAppKitBaseView
+class AppKit_Widgets_ShowErrorsSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

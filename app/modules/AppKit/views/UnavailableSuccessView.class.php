@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_UnavailableSuccessView extends ICINGAAppKitBaseView
+class AppKit_UnavailableSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

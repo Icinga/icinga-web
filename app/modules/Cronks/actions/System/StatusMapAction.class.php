@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StatusMapAction extends ICINGACronksBaseAction
+class Cronks_System_StatusMapAction extends CronksBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

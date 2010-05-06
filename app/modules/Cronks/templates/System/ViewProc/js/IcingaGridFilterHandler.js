@@ -18,7 +18,7 @@ var IcingaGridFilterWindow = function() {
 	var oComboData = [];		// Data for the combo store
 	var oTemplateMeta = {};
 	
-	var oFilterHandler = new AppKit.Ext.FilterHandler();
+	var oFilterHandler = new Cronk.FilterHandler();
 
 	oFilterHandler.on('compremove', function(fh, panel, meta) {
 		var f = getRestrictionsList();
@@ -64,6 +64,7 @@ var IcingaGridFilterWindow = function() {
 				
 				listeners: {
 					render: function(oc) {
+						console.log(oGrid);
 						if (oGrid.filter_types) {
 							var i = 0;
 							Ext.iterate(oGrid.filter_types, function(key, item) {
@@ -214,7 +215,7 @@ var IcingaGridFilterWindow = function() {
 		
 		var tmp = oGrid.filter_types || {};
 		tmp[ record.data['fType'] ] = record.data;
-		oGrid.filter_tyes = tmp;
+		oGrid.filter_types = tmp;
 	}
 	
 	function addResctriction(type) {

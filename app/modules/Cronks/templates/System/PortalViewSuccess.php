@@ -86,7 +86,7 @@
 							
 							notifyDrop: function(dd, e, data) {
 								
-								var id = AppKit.Ext.genRandomId('cronk-');
+								var id = Ext.id(null, 'cronk');
 								
 								var params = {
 									'p[parentid]': id
@@ -98,12 +98,10 @@
 									}
 								}
 								
-								var portlet  = AppKit.Ext.CronkMgr.create({
-									parentid: id,
+								var portlet  = Cronk.factory({
 									id: id,
 									
 									params: data.dragData.parameter,
-									loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 									crname: data.dragData.id,
 									
 									title: data.dragData.name,
@@ -131,7 +129,7 @@
 								
 								// Redefine the updater to held default properties
 								/* portlet.getUpdater().setDefaultUrl({
-									url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
+									url: "<?php echo $ro->gen('cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 									params: params,
 									scripts: true
 								});
@@ -223,30 +221,23 @@
 				
 				getState: function () {
 					
-					var d = new Array(this.items.getCount());
+					var d = new Array();
 					
 					this.items.each(function (col, cindex, l1) {
 						
-						d[cindex] = {};
+						crlist = {};
 						
 						col.items.each(function (cr, crindex, l2) {
-							
-							if (cr.iscronk && cr.iscronk == true) {
-								var c = AppKit.Ext.CronkMgr.getCronk(cr.cronkkey);
-								var cronk = AppKit.Ext.CronkMgr.getCronkComponent(cr.cronkkey);
-								
-								c.config.title = cronk.title;
-								c.config.height = cronk.getHeight();
-								c.config.collapsed = cronk.collapsed;
-//								console.log("COL: " + cronk.collapsed);
-								d[cindex][cronk.getId()] = c;
+							if (Cronk.Registry.get(cr.getId())) {
+								var c = Cronk.Registry.get(cr.getId());
+								c.height = cr.getHeight();
+								crlist[cr.getId()] = c;
 							}
-							
 						}, this);
 						
+						d[cindex] = crlist;
+						
 					}, this);
-					
-	//				console.log(d);
 					
 					return {
 						col: d,
@@ -262,13 +253,10 @@
 						if (state.col) {
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
-									var c = {}
-									Ext.apply(c, citem.config, citem.crconf);
-//									console.log(c);
+									var c = citem;
 									c.tools = tools;
 									
-									var cronk = AppKit.Ext.CronkMgr.create(c);
-									
+									var cronk = Cronk.factory(c);
 									PortalHandler.createResizer(cronk);
 									
 									this.get(index).add(cronk);

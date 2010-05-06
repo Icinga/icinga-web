@@ -1,9 +1,7 @@
 <?php
 
-class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
+class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction
 {
-	
-	const CACHE_REGION = 'appkit.cache.htmlsquishloader';
 	
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -17,62 +15,39 @@ class AppKit_Widgets_SquishLoaderAction extends ICINGAAppKitBaseAction
 	 *                     executed.</li>
 	 *                   </ul>
 	 */
-	public function getDefaultViewName()
-	{
+	public function getDefaultViewName() {
 		return 'Success';
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		$type = $rd->getParameter('type');
+		
 		$files = array ();
-		$loader = $this->getContext()->getModel('SquishFileContainer', 'AppKit');
-		$loader->setType($type);
+		$actions = array ();
 		
-		switch ($type) {
-			case AppKit_SquishFileContainerModel::TYPE_JAVASCRIPT:
-				$files = AgaviConfig::get('de.icinga.appkit.include_javascript', array());
-				if (array_key_exists('squished', $files)) {
-					$files = $files['squished'];
-				}
-			break;
+		$loader = $this->getContext()->getModel('SquishFileContainer', 'AppKit', array('type' => 'javascript'));
+		
+		try {
+		
+			$files = AgaviConfig::get('de.icinga.appkit.include_javascript', array());
 			
-			case AppKit_SquishFileContainerModel::TYPE_STYLESHEET:
-				$files = AgaviConfig::get('de.icinga.appkit.include_styles', array());
-			break;
+			if (array_key_exists('squished', $files)) {
+				$loader->addFiles($files['squished']);
+			}
+			
+			if (array_key_exists('action', $files)) {
+				$loader->setActions($files['action']);
+			}
+			
+			$loader->squishContents();
+			
+			$this->setAttributeByRef('model', $loader);
+		
 		}
-		
-		// Adding preconfigured javascript files
-		foreach ($files as $file) {
-			$loader->addFile($type, $file);
+		catch(AppKitModelException $e) {
+			$this->setAttribute('errors', $e->getMessage());
 		}
-		
-		
-		$key = sprintf('%s_content', $type);
-		
-		if (($content = $this->getCache()->getValue($key, null, self::CACHE_REGION)) == null) {
-			$content = $loader->squishContents();
-		}
-		
-		$this->setAttribute('content', $content);
-
-		$this->getCache()->setValue($key, $content, self::CACHE_REGION);
 		
 		return $this->getDefaultViewName();
-	}
-	
-	/**
-	 * 
-	 * @return AppKitCache
-	 */
-	private function getCache() {
-		static $cache = null;
-		
-		if ($cache === null) {
-			$cache =& AppKitFactories::getInstance()->getFactory('CacheProvider');
-			$cache->addRegion(self::CACHE_REGION);
-		}
-		
-		return $cache;
 	}
 }
 

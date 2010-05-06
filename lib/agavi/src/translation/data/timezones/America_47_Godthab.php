@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "America/Godthab".
- * Compiled from olson file "europe", version 8.25.
+ * Compiled from olson file "europe", version 8.26.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: America_47_Godthab.php 4392 2010-01-11 14:16:07Z david $
+ * @version    $Id: America_47_Godthab.php 4471 2010-04-08 01:01:16Z david $
  */
 
 return array (
@@ -240,7 +240,7 @@ return array (
     'startYear' => 1996,
   ),
   'source' => 'europe',
-  'version' => '8.25',
+  'version' => '8.26',
   'name' => 'America/Godthab',
 );
 

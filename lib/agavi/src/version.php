@@ -24,14 +24,14 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: version.php 4415 2010-01-27 21:42:07Z david $
+ * @version    $Id: version.php 4483 2010-04-16 11:27:51Z david $
  */
 
 AgaviConfig::set('agavi.name', 'Agavi');
 
 AgaviConfig::set('agavi.major_version', '1');
 AgaviConfig::set('agavi.minor_version', '0');
-AgaviConfig::set('agavi.micro_version', '2');
+AgaviConfig::set('agavi.micro_version', '3');
 // AgaviConfig::set('agavi.status', '');
 AgaviConfig::set('agavi.branch', '1.0');
 

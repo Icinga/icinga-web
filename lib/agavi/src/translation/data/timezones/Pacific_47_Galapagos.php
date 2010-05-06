@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Pacific/Galapagos".
- * Compiled from olson file "southamerica", version 8.40.
+ * Compiled from olson file "southamerica", version 8.43.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Pacific_47_Galapagos.php 4343 2009-11-06 13:59:00Z david $
+ * @version    $Id: Pacific_47_Galapagos.php 4453 2010-03-21 17:11:28Z david $
  */
 
 return array (
@@ -52,7 +52,7 @@ return array (
     'startYear' => 1987,
   ),
   'source' => 'southamerica',
-  'version' => '8.40',
+  'version' => '8.43',
   'name' => 'Pacific/Galapagos',
 );
 

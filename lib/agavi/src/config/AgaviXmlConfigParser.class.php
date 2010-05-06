@@ -28,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviXmlConfigParser.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviXmlConfigParser.class.php 4444 2010-03-13 02:26:07Z david $
  */
 class AgaviXmlConfigParser
 {
@@ -51,6 +51,8 @@ class AgaviXmlConfigParser
 	const NAMESPACE_SCHEMATRON_ISO = 'http://purl.oclc.org/dsdl/schematron';
 	
 	const NAMESPACE_SVRL_ISO = 'http://purl.oclc.org/dsdl/svrl';
+	
+	const NAMESPACE_XMLNS_2000 = 'http://www.w3.org/2000/xmlns/';
 	
 	const NAMESPACE_XSL_1999 = 'http://www.w3.org/1999/XSL/Transform';
 	
@@ -275,7 +277,7 @@ class AgaviXmlConfigParser
 					$namespaces = $doc->getXPath()->query('namespace::*');
 					foreach($namespaces as $namespace) {
 						if($namespace->localName !== 'xml' && $namespace->localName != 'xmlns') {
-							$retval->documentElement->setAttribute('xmlns:' . $namespace->localName, $namespace->namespaceURI);
+							$retval->documentElement->setAttributeNS(self::NAMESPACE_XMLNS_2000, 'xmlns:' . $namespace->localName, $namespace->namespaceURI);
 						}
 					}
 					foreach($doc->documentElement->attributes as $attribute) {
@@ -309,13 +311,6 @@ class AgaviXmlConfigParser
 					}
 				}
 			}
-			
-			// reload the doc
-			// this must be done because further up, we create attributes with names like xmlns:foo on the document element, copied from parent <configurations> blocks
-			// those will, internally, be normal attributes, not namespace nodes, and thus cannot be accessed through the namespace:: axis in XML stylesheets
-			// a reload fixes that, because they are then parsed as normal xml namespace declaration nodes
-			// thank you, ext/dom, for not exposing your internal DOMNameSpaceNode shit
-			$retval->loadXML($retval->saveXML());
 			
 			// run the compilation stage parser
 			$retval = self::executeCompilation($retval, $environment, $context, $transformationInfo[self::STAGE_COMPILATION], $validationInfo[self::STAGE_COMPILATION]);

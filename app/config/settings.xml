@@ -53,10 +53,10 @@
 		<exception_templates>
 			<!-- this is the exception template that's used by default unless one for a specific context has been defined, or for the current output type -->
 			<!-- note that exceptions that occur before a context is even fully initialized, or an exception that happens before the output types are loaded and determined, will use a template defined here -->
-			<exception_template>%core.agavi_dir%/exception/templates/shiny.php</exception_template>
+			<!-- <exception_template>%core.agavi_dir%/exception/templates/shiny.php</exception_template> -->
 			<!-- an example for per-context exception templates -->
 			<!-- per-output-type templates can be set in output_types.xml -->
-			<exception_template context="console">%core.agavi_dir%/exception/templates/plaintext.php</exception_template>
+			<exception_template>%core.agavi_dir%/exception/templates/plaintext.php</exception_template>
 		</exception_templates>
 
 	</ae:configuration>

@@ -11,12 +11,17 @@
 						<argument>id</argument>
 						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
 			</validator>
+			<validator class="string" name="container" required="false">
+				<argument>container</argument>
+				<errors>
+					<error>Validation of parameter 'container' failed!</error>
+				</errors>
+			</validator>
 		</validators>
 		
 
 		<validators method="write">
-		
-			<validator class="regex" name="user_id" required="false">
+			<validator class="regex" name="user_id"  required="false">
 						<argument>id</argument>
 						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
 			</validator>
@@ -69,7 +74,7 @@
 					</errors>
 			</validator>
 			
-			<validator class="string" name="user_lastname" required="true">
+			<validator class="string" name="user_lastname"  required="true">
 					<argument>user_lastname</argument>
 					<ae:parameter name="min">3</ae:parameter>
 					<ae:parameter name="max">40</ae:parameter>

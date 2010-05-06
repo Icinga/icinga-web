@@ -20,7 +20,7 @@
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
         
         <!-- <parameter name="dynamicscript">
-        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter> -->
         
         <parameter name="security">
@@ -184,7 +184,7 @@
                 </parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                <parameter name="function">hostStatus</parameter>
 	                	
 	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -298,7 +298,7 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
                 	<parameter name="arguments">
 						<parameter name="length">40</parameter>

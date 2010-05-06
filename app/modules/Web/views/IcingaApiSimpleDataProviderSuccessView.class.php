@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Web_IcingaApiSimpleDataProviderSuccessView extends ICINGAWebBaseView
+class Web_IcingaApiSimpleDataProviderSuccessView extends IcingaWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

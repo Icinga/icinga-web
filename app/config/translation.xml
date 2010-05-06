@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
-	<ae:configuration>
-		
-		<available_locales default_locale="en" default_timezone="GMT">
-			<!-- German, Germany -->
-			<available_locale identifier="de_DE">
-				<ae:parameter name="description">Deutsch</ae:parameter>
-			</available_locale>
-			
-			<!-- English -->
-			<available_locale identifier="en">
-				<ae:parameter name="description">English</ae:parameter>
-			</available_locale>
-			
-			<!-- Spanish -->
-			<available_locale identifier="es">
-				<ae:parameter name="description">Español</ae:parameter>
-			</available_locale>
-			
-			<!-- Polish -->
-			<available_locale identifier="pl">
-				<ae:parameter name="description">Polski</ae:parameter>
-			</available_locale>
-			
-			<!-- Portugese -->
-			<available_locale identifier="pt">
-				<ae:parameter name="description">Português</ae:parameter>
-			</available_locale>
-		</available_locales>
-		
-		
-		<!--
+  <ae:configuration>
+	 <available_locales default_locale="en" default_timezone="GMT">
+		<!-- German, Germany -->
+		<available_locale identifier="de_DE">
+		  <ae:parameter name="description">Deutsch</ae:parameter>
+		</available_locale>
+		<!-- English -->
+		<available_locale identifier="en">
+		  <ae:parameter name="description">English</ae:parameter>
+		</available_locale>
+		<!-- Spanish -->
+		<available_locale identifier="es">
+		  <ae:parameter name="description">Español</ae:parameter>
+		</available_locale>
+		<!-- Polish -->
+		<available_locale identifier="pl">
+		  <ae:parameter name="description">Polski</ae:parameter>
+		</available_locale>
+		<!-- Portugese -->
+		<available_locale identifier="pt">
+		  <ae:parameter name="description">Português</ae:parameter>
+		</available_locale>
+	 </available_locales>
+	 <!--
 		
 			This is quite important. If you're using an gettext translator, the domain
 			have to assembled of translator and text_domain:
@@ -38,6 +31,7 @@
 			* icinga.default
 			
 		-->
+
 		<translators default_domain="icinga.default">
 		
 			<translator domain="icinga">
@@ -45,7 +39,7 @@
 					<!-- Text -->
 					<message_translator class="AppKitGettextTranslator">
 						<ae:parameter name="text_domains">
-							<ae:parameter name="default">%core.root_dir%/app/data/mo</ae:parameter>
+							<ae:parameter name="default">%core.root_dir%/app/data/i18n/mo</ae:parameter>
 						</ae:parameter>
 					</message_translator>
 					
@@ -61,5 +55,5 @@
 		</translators>
 		
 	</ae:configuration>
-	
+
 </ae:configurations>

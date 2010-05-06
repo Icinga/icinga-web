@@ -24,6 +24,7 @@
  * @version     $Id$
  *
  */
+
 class AppKit {
 	
 	/**
@@ -44,25 +45,29 @@ class AppKit {
 		
 		// Require all needed base classes
 		self::initBaseClasses();
-		
 		// Some auto generated config settings
-		self::initAutoSettings();
 		
+		self::initAutoSettings();
 		// Init our factories (Cache, MessageQueue, Auth, IcingaData, ...)
+		
 		AppKitFactories::loadFactoriesFromConfig('de.icinga.appkit.factories');
 		
 		// Configure and enable the autoloader
 		self::initClassAutoloading();
-		
+
 		// Start doctrine
 		self::initDoctrineOrm();
-		
+			
 		// Apply some php ini settings
 		self::initPhpConfiguration();
 		
+		// Apply some php ini settings
 		// Init the event handler system
 		self::initEventHandling();
-		
+	
+		// Init the event handler system
+		self::setLanguageDomain();
+			
 		// Say hello to our components
 		AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.bootstrap', 'AppKit bootstrap finished');
 		
@@ -252,6 +257,7 @@ class AppKit {
 		return true;
 	}
 	
+	
 	/**
 	 * Helper method
 	 * Overwrite php init settings e.g. for sessions, paths, ...
@@ -282,6 +288,34 @@ class AppKit {
 		}
 		
 		return true;
+	}
+
+	/**
+	 * 
+	 */
+	private static function setLanguageDomain() {
+		try {
+			$context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
+			$user = $context->getUser();	
+			if($user) {		
+				$user = $user->getNsmUser(true);
+			}
+		
+			if(!$user)
+				return true;
+		
+			$translationMgr = $context->getTranslationManager();		
+			$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier());
+			try {
+				$translationMgr->setLocale($locale);
+			} catch(Exception $e) {
+				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
+			}
+			return true;
+		
+		} catch(AppKitDoctrineException $e) {
+			return true;	
+		}
 	}
 }
 

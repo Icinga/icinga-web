@@ -19,13 +19,9 @@ class CronAgaviAdapter {
 	 * @var String
 	 */
 	protected $configPath = PATH_TO_CONFIG;
-	/**
-	 * Checkes if the bootstrap is already loaded
-	 * 
-	 * @TODO: Not needed anymore, was used for lazyloading agavi
-	 * @var $__isLoaded
-	 */
-	private $__isLoaded = false;
+
+	protected $__isLoaded = false;
+
 	
 	/**
 	 * Returns the current instance of CronAgaviAdapter
@@ -42,7 +38,7 @@ class CronAgaviAdapter {
 	 * Creates a new adapter and starts the bootstrap
 	 */
 	protected function __construct() {	
-		if(!$__isLoaded)
+		if(!$this->__isLoaded)
 			$this->bootstrap();
 	}
 	

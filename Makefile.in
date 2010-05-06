@@ -22,9 +22,12 @@ PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
 INC_MAKE_FILES=./etc/make/files.mk
+LOC_PO=app/data/i18n/po
+LOC_MO=app/data/i18n/mo
+LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
 
 none:
-#	@printf "\t%15s - %s\n" "" ""
+#	@printf "\t%-18s - %s\n" "" ""
 	@printf "Please supply a command line argument (i.e. 'make install').\n\n"
 	@printf "Generic targets: install, clean\n\n"
 	@printf "Other usefull targets:\n"
@@ -50,10 +53,6 @@ none:
 	@printf "\n\n"
 	
 include $(INC_MAKE_FILES)
-
-install-files-list:
-	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
-	./bin/create-makefile.sh >> $(INC_MAKE_FILES)
 	
 clean:
 
@@ -71,7 +70,7 @@ configclean:
 remove-temp-files:
 	bin/rmtmp-files.sh
 
-devclean: remove-temp-files distclean cacheclean install-files-list configclean
+devclean: remove-temp-files distclean cacheclean make-create-files configclean
 
 create-tarball:
 	tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
@@ -83,7 +82,9 @@ testdeps:
 	 $(PHP) bin/testdeps.php
 
 fix-priv:
-	chown -R $(WEB_USER).$(WEB_GROUP) $(DESTDIR)$(prefix)/app/cache
+	chown -R $(WEB_USER).$(WEB_GROUP) \
+		$(DESTDIR)$(prefix)/app/cache \
+		$(DESTDIR)$(prefix)/app/data/log
 	chmod -R 775 $(DESTDIR)$(prefix)/app/cache
 	chmod +x \
 		$(DESTDIR)$(prefix)/bin/agavi \
@@ -102,7 +103,10 @@ fix-libs:
 	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
 	ln -sf $(API_DIR) $(DESTDIR)$(prefix)/lib/icinga-api
 
-install: inc-install-files fix-priv fix-libs
+install:
+	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
+	$(MAKE) -s inc-install-files
+	$(MAKE) fix-priv fix-libs
 
 db-initialize:
 	$(PHING_CALL) db-initialize
@@ -119,20 +123,38 @@ db-upgrade:
 db-purge-userprefs:
 	$(PHING_CALL) db-purge-userprefs
 
+install-files-list: make-create-files
+
+make-create-files:
+	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
+	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
+
 loc-update-catalog:
-	./bin/loc-create-catalog.pl --base=./ --out=./app/data/po/templates/default.pot
-	./bin/loc-merge-template.sh app/data/po/templates/default.pot app/data/po/
+	./bin/loc-create-catalog.pl --base=./ --out=$(LOC_PO)/templates/default.pot
+	./bin/loc-merge-template.sh $(LOC_PO)/templates/default.pot $(LOC_PO)
 
 loc-compile: loc-create-mo loc-create-json
 
 loc-create-mo:
-	./bin/loc-create-mo.sh app/data/po app/data/mo
+	./bin/loc-create-mo.sh $(LOC_PO) $(LOC_MO)
 
 loc-create-json:
-	./bin/loc-create-json.sh app/data/po app/data/mo
+	./bin/loc-create-json.sh $(LOC_PO) $(LOC_MO)
+
+submodule-init:
+	git submodule init app/data/i18n/po
+
+submodule-update:
+	cd app/data/i18n/po
+	git checkout master
+	git pull origin master
+	cd -
+	git submodule update
 
 locclean:
-	rm -f app/data/mo/*
+	rm -f \
+		$(LOC_MO)/*.mo \
+		$(LOC_MO)/*.json
 
 scheduler-install:
 	$(PHING_CALL) scheduler-install -DPATH_Icinga=$(prefix)

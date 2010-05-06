@@ -1,6 +1,6 @@
 <?php
 
-class Web_IndexAction extends ICINGAWebBaseAction
+class Web_IndexAction extends IcingaWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

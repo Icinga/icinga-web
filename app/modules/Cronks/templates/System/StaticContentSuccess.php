@@ -3,7 +3,6 @@
 	$cid = $rd->getParameter('cmpid');
 	$template = $rd->getParameter('template');
 ?>
-
 <script type="text/javascript">
 (function() {
 	
@@ -13,7 +12,7 @@
 			var pub = {};
 			var panel = null;
 			var pc = null;
-			var url = "<?php echo $ro->gen('icinga.cronks.staticContent.ajax', array('template' => $template)); ?>" 
+			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template)); ?>" 
 			
 			Ext.apply(pub, {
 				
@@ -51,7 +50,7 @@
 											enableToggle: true,
 											handler: function(oBtn, e) {
 												if (oBtn.pressed == true) {
-													this.trefresh = AppKit.Ext.getTr().start({
+													this.trefresh = AppKit.getTr().start({
 														run: function() {
 															this.getUpdater().refresh();
 														},
@@ -60,7 +59,7 @@
 													});
 												}
 												else {
-													AppKit.Ext.getTr().stop(this.trefresh);
+													AppKit.getTr().stop(this.trefresh);
 													delete this.trefresh;
 												}
 											}

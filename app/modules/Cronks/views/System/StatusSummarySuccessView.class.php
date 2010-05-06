@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StatusSummarySuccessView extends ICINGACronksBaseView
+class Cronks_System_StatusSummarySuccessView extends CronksBaseView
 {
 
 	public function executeHtml(AgaviRequestDataHolder $rd)
