@@ -1,6 +1,5 @@
 <?php
 require_once "phing/mappers/FileNameMapper.php";
-require_once "manifestStore.php";
 
 class manifestMapper implements FileNameMapper {
 	
@@ -18,6 +17,10 @@ class manifestMapper implements FileNameMapper {
 		self::$rules[$from] = $to;
 	}
     
+	public function getManifest() {
+		return icingaManifest::s_getManifestAsSimpleXML();
+	}
+	
 	public function getXMLObject() {
     	return self::$xmlObject;
     }
@@ -42,7 +45,7 @@ class manifestMapper implements FileNameMapper {
 	}
 	
 	protected function buildRules() {
-		$xml = manifestStore::getManifest($this->from);
+		$xml = $this->getManifest();
 		$additional = $xml->Files->Additional;
 		
 		if(!$additional)
