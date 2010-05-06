@@ -25,7 +25,7 @@
 				-->
 				<ae:parameter name="manager_attributes">
 					<!-- This allows lazy loading of the models -->
-					<ae:parameter name="MODEL_LOADING">CONSERVATIVE</ae:parameter>
+					<ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
 				</ae:parameter>
 				
 				<!-- The path to our models -->
