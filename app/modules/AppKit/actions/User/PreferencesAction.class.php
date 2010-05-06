@@ -36,6 +36,12 @@ class AppKit_User_PreferencesAction extends AppKitBaseAction
 		if(!$user)
 			throw new AppKitException("User doesn't exist!");
 
+		if($pass = $rd->getParameter("newPass",false)) {	
+			$nsm = $user->getNsmUser();
+			$nsm->updatePassword($pass);
+			$nsm->save();
+		} 
+		
 		$key = $rd->getParameter("upref_key", false);
 		$batch = $rd->getParameter('params',false);
 			

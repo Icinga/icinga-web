@@ -305,8 +305,8 @@ class AppKit {
 				return true;
 		
 			$translationMgr = $context->getTranslationManager();		
-			$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier());
 			try {
+				$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
 				$translationMgr->setLocale($locale);
 			} catch(Exception $e) {
 				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());

@@ -56,7 +56,6 @@ class AppKitException extends Exception {
 	 * @param $mixed
 	 */
 	public function __construct($mixed) {
-		
 		$args = func_get_args();
 		
 		if (AppKitStringUtil::detectFormatSyntax($mixed)) {
@@ -65,7 +64,7 @@ class AppKitException extends Exception {
 			parent::__construct( vsprintf($format, $args) );
 		}
 		else {
-			call_user_method_array('parent::__construct', $this, $args);
+			call_user_func_array(array($this,'Exception::__construct'),array($mixed,$this->getCode(),$this->getPrevious()));
 		}
 	}
 	

@@ -58,6 +58,56 @@ Ext.onReady(function() {
 					}
 				}],
 			},{
+				title:_('Change Password'),
+				xtype: 'fieldset',
+				width: 500,
+				padding:5,
+				layout:'form',
+				items: [{
+					xtype:'textfield',
+					inputType:'password',
+					fieldLabel: _('New password'),
+					id: 'passwd_new',
+					minLength: 6,
+					allowBlank:false
+				},{
+					xtype:'textfield',
+					inputType:'password',
+					fieldLabel: _('Confirm password'),
+					id: 'passwd_confirm',
+					validator: function(val) {
+						var passwd = Ext.getCmp('passwd_new');
+						if(passwd.isValid()) {
+							if(passwd.getValue() != val)
+								return _("The passwords don't match!");					
+						}	
+						return true;					
+					}
+				}],
+				buttons: [{
+					text: _('Save password'),
+					handler: function(b,e) {
+						var passwd = Ext.getCmp('passwd_new');
+						var confirm = Ext.getCmp('passwd_confirm');
+						if(passwd.isValid() && confirm.isValid()) {
+							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+							mask.show();
+							Ext.Ajax.request({
+								url: '<? echo $ro->gen("my.preferences") ?>',
+								params: {newPass: passwd.getValue()},
+								callback: function() {
+									mask.hide();
+								},
+								success: function() {
+									mask.hide();
+									Ext.Msg.alert(_("Password changed"),_("The password was successfully changed"));
+								}
+							});
+						}
+					}	
+					
+				}]
+			},{
 				title: _('Advanced'),
 				type:'fieldset',
 				collapsible:true,	

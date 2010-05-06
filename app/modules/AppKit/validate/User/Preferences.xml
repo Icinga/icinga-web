@@ -22,6 +22,16 @@
 			<validator name="params" class="string" required="false">
 				<arguments base="params[][]" />
 			</validator>
+			<validator name="newPass" class="string" required="false">
+				<argument>newPass</argument>
+				<ae:parameter name="min">6</ae:parameter>
+				<ae:parameter name="max">20</ae:parameter>
+				<errors>
+					<error for="min">The password you supplied is fewer than 6 characters long.</error>
+					<error for="max">Your password is too long</error>
+					<error>You have to supply a password!</error>
+				</errors>
+			</validator>
 		</validators>
 		
 	</ae:configuration>
