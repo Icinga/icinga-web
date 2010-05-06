@@ -1,22 +1,28 @@
 <?php
 
-require_once "manifestBaseClass.php";
 /**
  * Task that checks dependencies described in the manifest.xml
  * 
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
-class manifestDependencyCheckerTask extends manifestBaseClass {
+class dependencyCheckerTask extends Task {
+	protected $ref;
+	
+	public function setRefid($ref){
+		$this->ref = $ref;
+	}
+	
+	public function getManifest() {
+		return $this->ref->getReferencedObject($this->getProject());
+	}
 	
 	public function main() {
-		parent::main();
-		$this->resolveManifestVars(array('PATH_Icinga'));
 		$this->checkDependencies();
 	}
 
 	protected function checkDependencies() {	
-		$xml = $this->getXMLObject();
+		$xml = $this->getManifest()->getManifestAsSimpleXML();
 		foreach($xml->Dependencies->children() as $dependency) {
 			$this->checkFor($dependency);
 		}

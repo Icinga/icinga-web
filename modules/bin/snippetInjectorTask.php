@@ -49,6 +49,10 @@ class snippetInjectorTask extends Task {
 			
 			// append this snippet
 			$snippetText = "\n".$mark."\n".$snippet["content"]."\n".$mark."\n";
+			
+			// save original file
+			$actionQueue = actionQueueTask::getInstance();
+			$actionQueue->registerFile($file);
 			file_put_contents($file,$snippetFileContent.$snippetText);
 		}
 	}

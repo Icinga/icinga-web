@@ -1,9 +1,17 @@
 <?php
 
-require_once "manifestBaseClass.php";
 
-class manifestFileSelectorTask extends manifestBaseClass {
 
+class fileSelectorTask extends Task {
+	protected $ref;
+	
+	public function setRefid($ref){
+		$this->ref = $ref;
+	}
+	
+	public function getManifest() {
+		return $this->ref->getReferencedObject($this->getProject());
+	}
     private $source = null;
     /**
      * The setter for the attribute "message"
@@ -31,7 +39,6 @@ class manifestFileSelectorTask extends manifestBaseClass {
      * The main entry point method.
      */
     public function main() {
-    	parent::main();
 		$this->fetchFileList();
 	}
 	
@@ -52,13 +59,12 @@ class manifestFileSelectorTask extends manifestBaseClass {
 	}
 	
 	protected function getFileList() {
-		$xml = $this->getXMLObject();
+		$xml = $this->getManifest()->getManifestAsSimpleXML();
 		$files = $xml->Files;
 		$fileset = new FileSet();
 		$icingaPath = $this->project->getUserProperty("PATH_Icinga");
 		$coreDir = $this->project->getUserProperty("coreDir");
 		$fileset->setDir($icingaPath);
-		
 		$includes = $this->getPath($coreDir)."/**";
 		$excludes = "";
 		foreach($files->Excludes->children() as $type=>$address) {
@@ -81,6 +87,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 					break;		
 			}
 		}
+
 		$fileset->setIncludes($includes);
 		$fileset->setExcludes($excludes);
 		return $fileset;
@@ -92,7 +99,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 	}
 
 	protected function getDBModels() {
-		$xml = $this->getXMLObject();
+		$xml = $this->getManifest()->getManifestAsSimpleXML();
 		$db = $xml->Database;
 		$modelList =  new FileSet();
 		$icingaPath = $this->project->getUserProperty("PATH_Icinga");
@@ -130,7 +137,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 	}
 
 	protected function getSQLDescriptors() {
-		$xml = $this->getXMLObject();
+		$xml = $this->getManifest()->getManifestAsSimpleXML();
 		$db = $xml->Database;
 		$sqlList =  new FileSet();
 		$sqlList->setDir($this->project->getUserProperty("PATH_Icinga"));
@@ -160,7 +167,7 @@ class manifestFileSelectorTask extends manifestBaseClass {
 	}
 	
 	protected function loadModelsWithPrefix(&$includes,$prefix) {
-		$xml = $this->getXMLObject();
+		$xml = $this->getManifest()->getManifestAsSimpleXML();
 		$db = $xml->Database;
 		if($includes != "")
 			$includes .= ",";

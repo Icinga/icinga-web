@@ -1,6 +1,5 @@
 <?php
 
-require_once "manifestBaseClass.php";
 
 /**
  * Extracts "snippets", textual information that are marked for the export
@@ -9,11 +8,20 @@ require_once "manifestBaseClass.php";
  *
  */
 
-class ManifestSnippetExtractorTask extends manifestBaseClass {
+class snippetExtractorTask extends Task {
 
     private $toFile = null;
 	private $extractorMarks = array();	
 	private $extracted = array();
+	protected $ref;
+	
+	public function setRefid($ref){
+		$this->ref = $ref;
+	}
+	
+	public function getManifest() {
+		return $this->ref->getReferencedObject($this->getProject());
+	}
 	
     public function setTofile($target) {
     	$this->toFile = $target;
@@ -22,9 +30,7 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
   	public function addExtractorMark(SimpleXMLElement $name,SimpleXMLElement $file) {
     	$this->extractorMarks[] = array("name" => (String) $name, "file" => (String) $file);
     }
-    public function setXMLObject(SimpleXMLElement $xml) {
-    	$this->xmlObject = $xml;
-    }
+
     
 	public function getTofile() {
 		return $this->toFile;
@@ -34,14 +40,13 @@ class ManifestSnippetExtractorTask extends manifestBaseClass {
 	}
 
     public function main() {
-    	parent::main();
 		$this->fetchExtractorMarks();
 		$this->extractMarks();
 		$this->writeToFile();
 	}
 	
 	protected function fetchExtractorMarks() {
-		$xml = $this->getXMLObject();
+		$xml = $this->getManifest()->getManifestAsSimpleXML();
 		$marks = $xml->Files->Extractor;
 		if(!$marks)
 			return null;
