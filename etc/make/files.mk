@@ -43,6 +43,10 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/action
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/model
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/view
+<<<<<<< jmosshammer/default2
+=======
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/view/AppKitBaseView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/view/AppKitBaseView.class.php
+>>>>>>> local
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/models/Ext
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates
