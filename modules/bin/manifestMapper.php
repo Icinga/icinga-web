@@ -1,6 +1,11 @@
 <?php
 require_once "phing/mappers/FileNameMapper.php";
-
+/**
+ * @FIXME: Remove it?
+ * @deprecated This class is deprecated and not longer needed
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+**/
 class manifestMapper implements FileNameMapper {
 	
 	protected $from;

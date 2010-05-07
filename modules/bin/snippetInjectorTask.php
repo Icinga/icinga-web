@@ -1,7 +1,7 @@
 <?php
 require_once "phing/Task.php";
 /**
- * Injects 
+ * Injects snippets to it's target file
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
@@ -10,7 +10,10 @@ class snippetInjectorTask extends Task {
 		
 	public function init()	{
 	} 
-	
+	/**
+	 * (non-PHPdoc)
+	 * @see lib/phing/classes/phing/Task#main()
+	 */
 	public function main() {
 		if(!file_exists($this->file))
 			return false;
@@ -19,12 +22,12 @@ class snippetInjectorTask extends Task {
  			echo ("Invalid snippet file");
  			return null;
 		}
-	 
+	 	
 		foreach($snippets as $snippet) {
 			$file = str_replace("%PATH_Icinga%",$this->project->getUserProperty("PATH_Icinga"),$snippet["file"]);
 			$mark;
 			$name = $snippet["mark"];
-			$ext = preg_replace("/.*\.(\w{1,5})$/","$1",$file);
+			$ext = preg_replace("/.*\.(\w{1,5})$/","$1",$file); // check the comment type
 			switch($ext) {
 				case 'txt':
 				case 'ini':	

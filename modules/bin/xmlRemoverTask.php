@@ -1,6 +1,13 @@
 <?
 require_once("xmlHelperTask.php");
 
+/**
+ * Cretes the difference between two xml files. Does not remove altered entries
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
+
 class xmlRemoverTask extends xmlHelperTask{
 	protected $ref;
 	protected $path;
@@ -39,7 +46,10 @@ class xmlRemoverTask extends xmlHelperTask{
 			$this->xmlDiff($nodename);		
 		}
 	}
-	
+	/**
+	 * Removes the contents of $xmlName from it's target (determined by it's name)
+	 * @param string $xmlName The xml file that should be removed (%PATH_Icinga%_folder1_folder2_name.xml)
+	 */
 	public function xmlDiff($xmlName) {
 		$icingaPath = $this->getProject()->getUserProperty("PATH_Icinga");
 		$this->currentDOM = new DOMDocument("1.0","UTF-8");

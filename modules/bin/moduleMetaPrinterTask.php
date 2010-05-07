@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * Prints the meta data of a module to screen
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class moduleMetaPrinterTask extends Task {
 	protected $ref;
 	
