@@ -1,7 +1,7 @@
 <?php
 require_once("xmlMergerTask.php");
 /**
- * Task for calling multiple xmlMerges for a complete xml folder
+ * Task for calling multiple xmlMerges 
  * 
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *

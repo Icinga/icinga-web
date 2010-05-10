@@ -1,41 +1,11 @@
 <?php
-/**
- * Helper class for xml index creation and various little, useful functions
- * @author jmosshammer <jannis.mosshammer@netways.de>
- *
- */
+
+
+
 abstract class xmlHelperTask extends Task {
-	/**
-	 * Registered namespaces [prefix]=>[uri]
-	 * @var array
-	 */
-	protected $registeredNS = array();
+
 	
-	/**
-	 * Creates a index for a DOMTree where the nodes are identified by their (simplified) Xpath representation.
-	 * Basically, this is a DOMDocument => XPath (simplified :) ) converter.
-	 * @example
-	 * The following XML:
-	 * 		<Shelf>
-	 * 			<Categories catName="computer science">
-	 * 				<ae:Book bauthor="John Doe" publisher="noPress">PHP programming guide</ae:Book>
-	 * 				<ae:Book>PHP - The definite guide</ae:Book>
-	 * 			</Categories>
-	 * 			<Categories catName="fantasy">
-	 * 				<ae:Book author="noPress">Mastering XML with PHP</ae:Book>
-	 * 			</Categories> 
-	 * 		</Shelf>
-	 * would be indexed as:
-	 * 	Array(
-	 * 		"/default:Shelf" => array('elem'=>DOMNode, 'real'=>false),
-	 * 		"/default:Shelf/default:Categories[@catName='computer science']" => array('elem'=>DOMNode, 'real'=>false),
-	 * 		"/[...]/ae:Book[@bauthor='John Doe' and @publisher='noPress']" => array('value' => 'PHP programming guide'), 'elem' => DOMNode, 'real'=>true,
-	 * 		...
-	 * );
-	 * 
-	 * @param DOMXPath $dom
-	 * @return array The index tree
-	 */
+	protected $registeredNS = array();
 	protected function buildXPathIndex(DOMXPath $dom,$wValue = false) {
 		$tree = array();
 		$root = $dom->query(".")->item(0);
@@ -75,10 +45,7 @@ abstract class xmlHelperTask extends Task {
 			}
 		}
 	}
-	/**
-	 * Converts a DOMNodes attribute to xpath
-	 * @param $node
-	 */
+	
 	protected function getAttributesPath(DOMNode $node) {
 		if(!$node->hasAttributes())
 			return "";
@@ -115,7 +82,6 @@ abstract class xmlHelperTask extends Task {
 	/**
 	 * Checks whether str as a namespace and adds default: to it if not
 	 * @param String $str
-	 * @return string String with ns prefix
 	 */
 	protected function addNamespace($str) {
 		if(strpos($str,":") === false) {
@@ -123,11 +89,7 @@ abstract class xmlHelperTask extends Task {
 		}
 		return $str;
 	}
-	/**
-	 * Reformats an xml   
-	 * @param string $configPath The path to the xml
-	 *
-	 */
+	
 	protected function reformat($configPath) {
 		// Reformat the xml (triple whitespaces to tab)
 		$file = file_get_contents($configPath);
@@ -136,12 +98,6 @@ abstract class xmlHelperTask extends Task {
 		file_put_contents($configPath,$file);
 	}
 	
-	/**
-	 * Rgisters the namespaces in $file to the corresponding xpath searcher $path
-	 * @param string $file The file to extract the namespaces from
-	 * @param DOMXPath $path The xpath searcher
-	 *
-	 */
 	protected function registerXPathNamespaces($file,DOMXPath &$path) {
 		// DOMDocument doesn't seem to support namespace extraction, so SimpleXML is used
 		$xml = simplexml_load_file($file);

@@ -9,7 +9,7 @@ class doctrineDBBuilderTask extends Task {
 	protected $models;
 	protected $action;
 	protected $ini;
-	
+	static protected $AppKitPath;
 	public function init() {
 		
 	}
@@ -71,14 +71,20 @@ class doctrineDBBuilderTask extends Task {
 	public function buildDBFromModels() {	
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$modelPath = $icinga."/app/modules/".$this->project->getUserProperty("MODULE_Name")."/lib/";
-		Doctrine::createTablesFromModels(array($this->models.'/generated',$this->models));
+		self::$AppKitPath = $icinga."/lib/appkit/";
+		require_once(self::$AppKitPath."/auth/AppKitUserPreferences.interface.php");
+		
 		Doctrine::loadModels($this->models);
 		$tables = Doctrine::getLoadedModels();
 		$tableList = array();
 		foreach($tables as $table) {
 			$tableList[] = Doctrine::getTable($table)->getTableName();	
 		}
-
+	
+		Doctrine::loadModels($icinga."/lib/appkit/database/models/generated");
+		Doctrine::loadModels($icinga."/lib/appkit/database/models");
+		Doctrine::createTablesFromModels(array($this->models.'/generated',$this->models));
+	
 		file_put_contents($modelPath."/.models.cfg",implode(",",$tableList));
 	}
 	
@@ -107,6 +113,8 @@ class doctrineDBBuilderTask extends Task {
 	public function setIni($ini)	{
 		$this->ini = $ini;
 	}
+	
+
 }
 
 ?>

@@ -1,11 +1,6 @@
 <?php
 require_once "phing/Task.php";
-/**
- * Extracts settings from a agavi config (needed for cronk export)
- * @FIXME: Use the  xmlExtractorTask for this
- * @author jmosshammer <jannis.mosshammer@netways.de>
- *
- */
+
 class settingsExtractorTask extends Task {
     protected $file = null;
     protected $toFile = null;

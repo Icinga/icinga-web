@@ -1,46 +1,13 @@
 <?php
 require_once "phing/types/DataType.php";
-/**
- * Datatype representing a manifest.xml
- * Must be passed by reference to various installer classes
- * @author jmosshammer <jannis.mosshammer@netways.de>
- *
- */
 class icingaManifest extends DataType {
-	/**
-	 * The manifest.xml in SimpleXML representation
-	 * @var SimpleXMLElement
-	 */
 	private static $xml = array();
-	/**
-	 * The path to manifest.xml
-	 * @var string
-	 */
+
 	protected $file = null;
-	/**
-	 * The name of the module
-	 * @var string
-	 */
 	protected $moduleName;
-	/**
-	 * The author of the module
-	 * @var string
-	 */
 	protected $moduleAuthor;
-	/**
-	 * The description of the module
-	 * @var string
-	 */
 	protected $moduleDescription;
-	/**
-	 * The module version
-	 * @var string
-	 */
 	protected $moduleVersion;
-	/**
-	 * The company
-	 * @var string
-	 */
 	protected $moduleCompany;
 
 	public function setModuleName($name) {
@@ -58,9 +25,7 @@ class icingaManifest extends DataType {
 	public function setModuleCompany($company) {
 		$this->moduleCompany = $company;
 	}
-	/**
-	 * Loads an xml if not done yet
-	 */
+
 	public function lazyLoad() {
 		if(empty($this->xml))
 			$this->main();
@@ -96,38 +61,27 @@ class icingaManifest extends DataType {
 	}
 	/**
 	 * TODO: Is there a possibility to check if we are in a static context?
-	 * Returns the xml from a static context
-	 * @return SimpleXMLElement
 	 */
 	static public function s_getManifestAsSimpleXML() {
 		return self::$xml;
 	}
-	/**
-	 * Returns a manifest as SimpleXML
-	 * @return SimpleXMLElement
-	 */
+	
 	public function getManifestAsSimpleXML() {
 		$this->lazyLoad();
 		return $this->xml;
 	}
 	
-	/**
-	 * Parses the file and extracts the meta data
-	 */
+
 	public function main() {
 		$this->xml = $this->parseFile();
+
 		$this->extractMetaData();
 	}
 
 	public function getManifest($name) {
 		return $this->xml;
 	}
-	
-	/**
-	 * Loads the file as an SimpleXML, resolves the paths and returns a
-	 * SimpleXMLElement
-	 * @return SimpleXMLElement
-	 */
+
 	protected function parseFile() {
 		$file = $this->getFile();
 		//	libxml_use_internal_errors();
@@ -142,14 +96,7 @@ class icingaManifest extends DataType {
 		return $XML;
 	}
 
-	/**
-	 * Resolves all %TOKEN% with their corresponding values, exports them as properties and
-	 * returns a fully resolved SimpleXML file
-	 * 
-	 * @param SimpleXMLElement $xml The unresolved SimpleXML (for data extraction)
-	 * @param string $file The .xml file path
-	 * @return SimpleXMLElement
-	 */
+
 	protected function resolveManifestVars($xml,$file) {
 		$project = $this->getProject();
 		$project->setUserProperty("MODULE_Name",(String) $xml->Meta->Name);

@@ -1,11 +1,6 @@
 <?php
 require_once "phing/Task.php";
-/**
- * Injects settings to an agaviconfig
- * @FIXME: use xmlMergerTask for this
- * @author jmosshammer <jannis.mosshammer@netways.de>
- *
- */
+
 class settingsInjectorTask extends Task {
 	protected $source = null;
 	protected $cfgTarget = null;

@@ -1,15 +1,7 @@
 <?php
 require_once "phing/Task.php";
-/**
- * Exports the meta data of a cronk (i.e. actions, templates, validation, etc.)
- * @author jmosshammer <jannis.mosshammer@netways.de>
- *
- */
+
 class cronkMetaExtractorTask extends Task {
-	/**
-	 * the path to cronk.xml
-	 * @var string
-	 */
 	protected $file;
 	
 	public function getFile() {
@@ -18,13 +10,8 @@ class cronkMetaExtractorTask extends Task {
 	public function setFile($file) {
 		$this->file = $file;
 	}
-	
 	public function init() {
 	}
-	/**
-	 * Reads the corresponding actions and templates of the cronk (if any) from cronk.xml
-	 * and creates two references "cronkTemplate" and "cronkAction" which can be used to access these files
-	 */
 	public function main() {
 		$templates = array();
 		$actionPath = "";
@@ -45,7 +32,7 @@ class cronkMetaExtractorTask extends Task {
 				$templates[] = $template->nodeValue;		
 			}
 		}
-		// fetch action and module
+		
 		$action = $DOMSearcher->query("//ae:parameter[@name='".$cronkName."']//ae:parameter[@name='action']")->item(0);
 		$module = $DOMSearcher->query("//ae:parameter[@name='".$cronkName."']//ae:parameter[@name='module']")->item(0);
 		$actionName = str_replace(".","/",$action->nodeValue);
@@ -68,7 +55,7 @@ class cronkMetaExtractorTask extends Task {
 		foreach($templates as $template) {
 			$includes .= ($first ? '' : ',').$template.".xml";
 		}
-		// export to phing
+		echo $includes;
 		$templateFs->setIncludes($includes);
 		$this->project->addReference("cronkTemplates",$templateFs);
 		$this->project->addReference("cronkAction",$cronkFS);
