@@ -2,14 +2,31 @@
 /**
  * Task that merges two XML files via (simplified) XPath comparisons
  * 
+ * For the index format, see @see xmlHelperTask.php
  * 
  */
 require_once("actionQueueTask.php");
 require_once("xmlHelperTask.php");
 class xmlMergerTask extends xmlHelperTask {
-	protected $target = array();
-	protected $source = array();
+	/**
+	 * The xml target file to merge to
+	 * @var string
+	 */
+	protected $target = null;
+	/**
+	 * The source xml file to merge with
+	 * @var string
+	 */
+	protected $source = null;
+	/**
+	 * Flag that determines whether to overwrite existing nodes
+ 	 * @var boolean
+	 */
 	protected $overwrite = false;
+	/**
+	 * Are duplicated nodes allowed
+	 * @var boolean
+	 */
 	protected $allowDuplicates = false;
 	protected $manifestRef = false;
 	protected $actionQueue = null;
@@ -96,7 +113,10 @@ class xmlMergerTask extends xmlHelperTask {
 		$this->getTargetDOM()->save($this->getTarget());
 		$this->reformat($this->getTarget());
 	}
-	
+	/**
+	 * Prepares the document, registers the Namespaces and sets up the DOMXPath searcher
+	 * 
+	 */
 	private function setupDOM() {
 		$target_file = $this->getTarget();
 		$source_file = $this->getSource();
@@ -125,8 +145,9 @@ class xmlMergerTask extends xmlHelperTask {
 		$this->setSourceXPath($path_source);
 	}
 	
-	
-	
+	/**
+	 * Creates the indizes for the source and target
+	 */
 	private function prepareMerge() {
 		$index_target = $this->buildXPathIndex($this->getTargetXPath());
 		$index_source = $this->buildXPathIndex($this->getSourceXPath());
@@ -134,6 +155,11 @@ class xmlMergerTask extends xmlHelperTask {
 		$this->__sourceIndex = $index_source;
 	}
 	
+	/**
+	 * Merges via index key comparisons. If the index exists in the target,
+	 * the new node will be inserted there, otherwise the nearest parent is searched and the 
+	 * fragement will be appended to it
+	 */
 	private function doMerge() {
 		$src_index = $this->__sourceIndex;
 		$tgt_index = $this->__targetIndex;
@@ -145,6 +171,11 @@ class xmlMergerTask extends xmlHelperTask {
 		}
 	}
 	
+	/**
+	 * Insert the nodes in $nodes at the index $index
+	 * @param string $index The current position in the target and source tree
+	 * @param array $nodes The nodes to add
+	 */
 	private function mergeMatching($index,array &$nodes) {
 		$src = $this->__sourceIndex;
 		$tgtDOM = $this->getTargetDOM();
@@ -172,6 +203,12 @@ class xmlMergerTask extends xmlHelperTask {
 		}
 	}
 	
+	/**
+	 * Climbs down the index tree until a matching parent is found and reconstructs the xml
+	 * fragement in the targetDOM
+	 * @param string $index The index of the source xml
+	 * @param array $nodes The nodes to append
+	 */
 	private function mergeParents($index, array &$nodes) {
 		$path_splitted = explode("/",$index);
 		$target = $this->__targetIndex;
@@ -191,10 +228,11 @@ class xmlMergerTask extends xmlHelperTask {
 
 			if($node["elem"]->parentNode) {
 				$newNode = $node["elem"]->parentNode->removeChild($node["elem"]);
+				// get the prefix
 				$prefix = preg_split("/:/",$newNode->nodeName);
 				$prefix = (count($prefix) == 2 ? $prefix[0] : null);
-	
 				$im_node = $this->getTargetDOM()->importNode($newNode,true);
+				// PHP removes the namespace prefix of our node, reappend it
 				if($prefix != null) 
 					$im_node = $this->fixPrefix($im_node,$prefix,$newNode);
 				$target[$pathToAdd][0]["elem"]->appendChild($im_node);
@@ -205,6 +243,12 @@ class xmlMergerTask extends xmlHelperTask {
 		}
 	}
 	
+	/**
+	 * Add prefix $prefix to $node
+	 * @param DOMNode $node 
+	 * @param string $prefix
+	 * @param DOMNode $newNode
+	 */
 	protected function fixPrefix(DOMNode $node, $prefix,DOMNode $newNode = null) {
 		$result = $this->getTargetDOM()->createElement($prefix.":".$node->nodeName);
 		// Copy attributes

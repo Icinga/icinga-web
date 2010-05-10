@@ -22,9 +22,27 @@ class mixed {
 }
 
 require_once("xmlHelperTask.php");
+/**
+ * Extracts parts of a xml document to a new one. Uses the icingaManifest to determine which
+ * files to export, and how they should be exported.
+ * Uses (simplified) xpath for extraction
+ *  
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class xmlExtractorTask extends xmlHelperTask {
+	/**
+	 * Reference to @see icingaManifest.php
+	 * @var Reference
+	 */
 	protected $ref;
+	/*
+	 * Path, where the xml lies
+	 * @var String
+	 */
 	protected $path;
+
+	// internal files
 	private $currentFile;
 	private $currentDOM;
 	private $currentBase;
@@ -54,6 +72,9 @@ class xmlExtractorTask extends xmlHelperTask {
 		return $this->ref->getReferencedObject($this->getProject());
 	}
 	
+	/**
+	 * Extracts the xml as described in manifest.xml
+	 */
 	public function main() {
 		$manifest = $this->getManifest()->getManifestAsSimpleXML();
 		$configNode = $manifest->Config;
@@ -61,7 +82,10 @@ class xmlExtractorTask extends xmlHelperTask {
 			$this->processEntry($entryNode);
 		}
 	}
-	
+	/**
+	 * Processes a <entry> node of an icingaManifest
+	 * @param SimpleXMLElement $elem
+	 */
 	public function processEntry(SimpleXMLElement $elem) {
 		$this->currentFile = $elem['file'];
 		echo "\t Extracting XML from ".$this->currentFile."\n";
@@ -78,13 +102,18 @@ class xmlExtractorTask extends xmlHelperTask {
 		$this->currentTargetDOM->save($this->getPath()."/".str_replace("/","_",$fname));
 	}
 	
+	/**
+	 * Processes a <nodes> node of an icingaManifest and determines whether to extract the 
+	 * data from an existing xml or to write a new one
+	 * @param SimpleXMLElement $nodes
+	 */
 	public function processNodeList(SimpleXMLElement $nodes) {
 		// check type
-		if($nodes["fromConfig"] == true) {
+		if($nodes["fromConfig"] == true) { // from Config
 			$this->registerNamespacesFromFile();
 			$root = $this->addBaseDom($nodes);
 			$this->extractNodesFromXML($nodes,$root);
-		} else if($nodes["base"]) {
+		} else if($nodes["base"]) {   //from manifest.xml
 			$this->currentBase = $nodes["base"];
 			$root = $this->addBaseDom($nodes,true);
 			foreach($nodes->children() as $node) {
@@ -92,7 +121,12 @@ class xmlExtractorTask extends xmlHelperTask {
 			}
 		}	
 	}
-	
+	/**
+	 * Builds the base structure to append the final xml data to.
+	 * Adds <PLACEHOLDER> Tags for skipped nodes ( node1//node2 => node1/PLACEHOLDER/node2)
+	 * @param SimpleXMLElement $nodes the nodes Element
+	 * @param boolean $noPlaceHolder if true, no placeholders will be created
+	 */
 	public function addBaseDom(SimpleXMLElement $nodes,$noPlaceHolder = false) {
 		$base = $nodes["base"];
 		$str = preg_split("/\//",$base);
@@ -114,23 +148,34 @@ class xmlExtractorTask extends xmlHelperTask {
 		return $node;
 	}
 	
+	/**
+	 * Adds a node described by an xpath
+	 * @param mixed $elem The xpath
+	 * @param DOMNode $parent The parent of the node or null if the root should be used
+	 * @param DOMNode $value  The value of the node
+	 * @param string $base the xpath to the parent
+	 * @return SimpleXMLElement the added node
+	 */
 	public function addNodeFromXPath(mixed $elem,DOMNode $parent = null,DOMNode $value = null,$base='') {
 		$doc = $this->currentTargetDOM;
 		$docSearcher = new DOMXPath($doc);
 		foreach($this->currentNs as $prefix=>$uri) {
 			$docSearcher->registerNamespace($prefix,$uri);
 		}
-		
+		// extract attributes
 		$attrs = preg_split("/\[@(.*)\]/",$elem,-1,PREG_SPLIT_DELIM_CAPTURE);
+		// extract namespaces
 		$ns = preg_split("/:/",$elem,-1,PREG_SPLIT_DELIM_CAPTURE);
+		//add default namespace when none is set
 		if(count($ns) == 1) {
 			array_push($ns,$ns[0]);
 			$ns[0] = "default";
 		}
 		if(!isset($this->currentNs[$ns[0]]))
 			throw new BuildException("Unregistered namespace ".$ns[0]);
-		$node = $doc->createElementNS($this->currentNs[$ns[0]],$attrs[0]);
 
+		// Create the node and it's attributes
+		$node = $doc->createElementNS($this->currentNs[$ns[0]],$attrs[0]);
 		for($i=1;$i<count($attrs);$i++) {
 			$attribute = preg_split("/=/",$attrs[$i],-1);
 			$attribute[1] = substr($attribute[1],1,-1);
@@ -139,7 +184,8 @@ class xmlExtractorTask extends xmlHelperTask {
 				$attDOM->value = $attribute[1];
 				$node->appendChild($attDOM);		
 			}
-		}
+		} 
+		// If there's a value, add it
 		if($value) {
 			$node->appendChild($value);
 		}	
@@ -159,7 +205,7 @@ class xmlExtractorTask extends xmlHelperTask {
 				}
 			}
 		}
-		
+		// append and return
 		if($parent)
 			$parent->appendChild($node);
 		else 
@@ -168,7 +214,11 @@ class xmlExtractorTask extends xmlHelperTask {
 	}
 	
 
-	
+	/**
+	 * Provesses the <node> node and creates a node
+	 * @param SimpleXMLElement $node
+	 * @param DOMNode $root
+	 */
 	public function processNode(SimpleXMLElement $node,DOMNode $root) {
 		$doc = $this->currentTargetDOM;
 		$nodeToAdd = null;
@@ -180,8 +230,14 @@ class xmlExtractorTask extends xmlHelperTask {
 		$this->addNodeFromXPath(new mixed((String) $node["path"]),$root,$nodeToAdd);
 	}
 	
-	
-	
+	/**
+	 * Extracts nodes from an existing xml file
+	 * 
+	 * @param SimpleXMLElement $nodes
+	 * @param DOMNode $root
+	 * 
+	 * @return the new node
+	 */
 	public function extractNodesFromXML(SimpleXMLElement $nodes,DOMNode $root) {
 		$this->currentDOM = new DOMDocument("1.0","UTF-8");
 		$this->currentDOM->load($this->currentFile);
@@ -216,6 +272,7 @@ class xmlExtractorTask extends xmlHelperTask {
 				$attrNode->nodeValue = (String) $attr->value;
 				$root->appendChild($attrNode);
 			}
+			// insert the node (the root already exists, so only the children are needed)
  			foreach($result->childNodes as $child) {
 				$node = $this->currentTargetDOM->importNode($child,true);
 				$root->appendChild($node);
@@ -300,6 +357,9 @@ class xmlExtractorTask extends xmlHelperTask {
 		$targetDOM->appendChild($nodeToAppend);
 	}
 	
+	/**
+	 * Registers all the namespaces of a xml
+	 */
 	private function registerNamespacesFromFile() {
 		$this->currentNs = array();
 		// DOMDocument doesn't seem to support namespace extraction, so SimpleXML is used
