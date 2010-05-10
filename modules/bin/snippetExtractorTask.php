@@ -74,7 +74,7 @@ class snippetExtractorTask extends Task {
 				throw new BuildException("Extractor error: Marked file ".$file." doesn't exist!");
 			$content = file_get_contents($file);
 			$matches = array();
-			preg_match("/.*MODULE\[".$name."\].*[\r\n]+([\w\W\r\n]+)[\r\n]+.*?MODULE\[".$name."\].*?[\r\n]+/",$content,$matches);
+			preg_match("/.*MODULE\[".$name."\].*[\r\n]+([\w\W\r\n]+)[\r\n]+.*?MODULE\[".$name."\].*?[\r\n]*?/",$content,$matches);
 			if(count($matches) < 2) 	
 				echo "\Warning: Couldn't find a match for mark ".$name." in file ".$file;
 				
