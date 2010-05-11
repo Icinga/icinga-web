@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Relation.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
+ *  $Id: Relation.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,9 +26,9 @@
  * @package     Doctrine
  * @subpackage  Relation
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 5876 $
+ * @version     $Revision: 7490 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 abstract class Doctrine_Relation implements ArrayAccess
@@ -70,7 +70,11 @@ abstract class Doctrine_Relation implements ArrayAccess
                                   'cascade'     => array(), // application-level cascades
                                   'owningSide'  => false, // whether this is the owning side
                                   'refClassRelationAlias' => null,
+                                  'foreignKeyName' => null,
+                                  'orderBy' => null
                                   );
+
+    protected $_isRefClass = null;
 
     /**
      * constructor
@@ -99,6 +103,8 @@ abstract class Doctrine_Relation implements ArrayAccess
      *          type                    the relation type, either Doctrine_Relation::ONE or Doctrine_Relation::MANY
      *
      *          constraint              boolean value, true if the relation has an explicit referential integrity constraint
+     *
+     *          foreignKeyName          the name of the dbms foreign key to create. Optional, if left blank Doctrine will generate one for you
      *
      * The onDelete and onUpdate keys accept the following values:
      *
@@ -147,6 +153,7 @@ abstract class Doctrine_Relation implements ArrayAccess
                 ($this->definition['onUpdate']) ||
                 ($this->definition['onDelete']));
     }
+
     public function isDeferred()
     {
         return $this->definition['deferred'];
@@ -156,6 +163,7 @@ abstract class Doctrine_Relation implements ArrayAccess
     {
         return $this->definition['deferrable'];
     }
+
     public function isEqual()
     {
         return $this->definition['equal'];
@@ -341,7 +349,8 @@ abstract class Doctrine_Relation implements ArrayAccess
 
         $dql  = 'FROM ' . $component
               . ' WHERE ' . $component . '.' . $this->definition['foreign']
-              . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')';
+              . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')'
+              . $this->getOrderBy($component);
 
         return $dql;
     }
@@ -363,7 +372,68 @@ abstract class Doctrine_Relation implements ArrayAccess
      */
     public function getForeignKeyName()
     {
+        if (isset($this->definition['foreignKeyName'])) {
+            return $this->definition['foreignKeyName'];
+        }
         return $this['localTable']->getConnection()->generateUniqueRelationForeignKeyName($this);
+    }
+
+    /**
+     * Get the relationship orderby SQL/DQL
+     *
+     * @param string $alias        The alias to use
+     * @param boolean $columnNames Whether or not to use column names instead of field names
+     * @return string $orderBy
+     */
+    public function getOrderBy($alias = null, $columnNames = false)
+    {
+        if ( ! $alias) {
+           $alias = $this->getTable()->getComponentName();
+        }
+
+        if ($orderBy = $this->getOrderByStatement($alias, $columnNames)) {
+            return ' ORDER BY ' . $orderBy;
+        }
+    }
+
+    /**
+     * Get the relationship orderby statement
+     *
+     * @param string $alias        The alias to use
+     * @param boolean $columnNames Whether or not to use column names instead of field names
+     * @return string $orderByStatement
+     */
+    public function getOrderByStatement($alias = null, $columnNames = false)
+    {
+        $table = $this->getTable();
+
+        if ( ! $alias) {
+           $alias = $table->getComponentName();
+        }
+
+        if (isset($this->definition['orderBy'])) {
+            return $table->processOrderBy($alias, $this->definition['orderBy'], $columnNames);
+        } else {
+            return $table->getOrderByStatement($alias, $columnNames);
+        }
+    }
+
+    public function isRefClass()
+    {
+        if ($this->_isRefClass === null) {
+            $this->_isRefClass = false;
+            $table = $this->getTable();
+            foreach ($table->getRelations() as $name => $relation) {
+                foreach ($relation['table']->getRelations() as $relation) {
+                    if (isset($relation['refTable']) && $relation['refTable'] === $table) {
+                        $this->_isRefClass = true;
+                        break(2);
+                    }
+                }
+            }
+        }
+
+        return $this->_isRefClass;
     }
 
     /**

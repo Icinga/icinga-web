@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -25,13 +25,20 @@
  * @package     Doctrine
  * @subpackage  Migration
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.1
  * @version     $Revision: 1080 $
  * @author      Jonathan H. Wage <jonwage@gmail.com>
  */
 abstract class Doctrine_Migration_Base
 {
+    /**
+     * The default options for tables created using Doctrine_Migration_Base::createTable()
+     * 
+     * @var array
+     */
+    private static $defaultTableOptions = array();
+
     protected $_changes = array();
 
     protected static $_opposites = array('created_table'       => 'dropped_table',
@@ -82,6 +89,26 @@ abstract class Doctrine_Migration_Base
     }
 
     /**
+     * Sets the default options for tables created using Doctrine_Migration_Base::createTable()
+     * 
+     * @param array $options
+     */
+    public static function setDefaultTableOptions(array $options)
+    {
+        self::$defaultTableOptions = $options;
+    }
+
+    /**
+     * Returns the default options for tables created using Doctrine_Migration_Base::createTable()
+     * 
+     * @return array
+     */
+    public static function getDefaultTableOptions()
+    {
+        return self::$defaultTableOptions;
+    }
+
+    /**
      * Add a create or drop table change.
      *
      * @param string $upDown     Whether to add the up(create) or down(drop) table change.
@@ -107,7 +134,7 @@ abstract class Doctrine_Migration_Base
      */
     public function createTable($tableName, array $fields = array(), array $options = array())
     {
-        $this->table('up', $tableName, $fields, $options);
+        $this->table('up', $tableName, $fields, array_merge(self::getDefaultTableOptions(), $options));
     }
 
     /**
@@ -177,6 +204,124 @@ abstract class Doctrine_Migration_Base
     }
 
     /**
+     * Convenience method for creating or dropping primary keys.
+     *
+     * @param string $direction 
+     * @param string $tableName     Name of the table
+     * @param string $columnNames   Array of column names and column definitions
+     * @return void
+     */
+    public function primaryKey($direction, $tableName, $columnNames)
+    {
+        if ($direction == 'up') {
+            $this->createPrimaryKey($tableName, $columnNames);
+        } else {
+            $this->dropPrimaryKey($tableName, $columnNames);
+        }
+    }
+
+    /**
+     * Convenience method for creating primary keys
+     *
+     *     [php]
+     *     $columns = array(
+     *         'id' => array(
+     *             'type' => 'integer
+     *             'autoincrement' => true
+     *          )
+     *     );
+     *     $this->createPrimaryKey('my_table', $columns);
+     *
+     * Equivalent to doing:
+     *
+     *  * Add new columns (addColumn())
+     *  * Create primary constraint on columns (createConstraint())
+     *  * Change autoincrement = true field to be autoincrement
+     * 
+     * @param string $tableName     Name of the table
+     * @param string $columnNames   Array of column names and column definitions
+     * @return void
+     */
+    public function createPrimaryKey($tableName, $columnNames)
+    {
+        $autoincrement = false;
+        $fields = array();
+
+        // Add the columns
+        foreach ($columnNames as $columnName => $def) {
+            $type = $def['type'];
+            $length = isset($def['length']) ? $def['length'] : null;
+            $options = isset($def['options']) ? $def['options'] : array();
+
+            $this->addColumn($tableName, $columnName, $type, $length, $options);
+
+            $fields[$columnName] = array();
+
+            if (isset($def['autoincrement'])) {
+                $autoincrement = true;
+                $autoincrementColumn = $columnName;
+                $autoincrementType = $type;
+                $autoincrementLength = $length;
+                $autoincrementOptions = $options;
+                $autoincrementOptions['autoincrement'] = true;
+            }
+        }
+
+        // Create the primary constraint for the columns
+        $this->createConstraint($tableName, null, array(
+            'primary' => true,
+            'fields' => $fields
+        ));
+
+        // If auto increment change the column to be so
+        if ($autoincrement) {
+            $this->changeColumn($tableName, $autoincrementColumn, $autoincrementType, $autoincrementLength, $autoincrementOptions);
+        }
+    }
+
+    /**
+     * Convenience method for dropping primary keys.
+     *
+     *     [php]
+     *     $columns = array(
+     *         'id' => array(
+     *             'type' => 'integer
+     *             'autoincrement' => true
+     *          )
+     *     );
+     *     $this->dropPrimaryKey('my_table', $columns);
+     *
+     * Equivalent to doing:
+     *
+     *  * Change autoincrement column so it's not (changeColumn())
+     *  * Remove primary constraint (dropConstraint())
+     *  * Removing columns (removeColumn())
+     *
+     * @param string $tableName     Name of the table
+     * @param string $columnNames   Array of column names and column definitions
+     * @return void
+     */
+    public function dropPrimaryKey($tableName, $columnNames)
+    {
+        // un-autoincrement
+        foreach ((array) $columnNames as $columnName => $def) {
+            if (isset($def['autoincrement'])) {
+                $changeDef = $def;
+                unset($changeDef['autoincrement']);
+                $this->changeColumn($tableName, $columnName, $changeDef['type'], $changeDef['length'], $changeDef);
+            }
+        }
+
+        // Remove primary constraint
+        $this->dropConstraint($tableName, null, true);
+
+        // Remove columns
+        foreach (array_keys((array) $columnNames) as $columnName) {
+            $this->removeColumn($tableName, $columnName);
+        }
+    }
+
+    /**
      * Add a create or drop foreign key change.
      *
      * @param string $upDown        Whether to add the up(create) or down(drop) foreign key change.
@@ -232,7 +377,9 @@ abstract class Doctrine_Migration_Base
     public function column($upDown, $tableName, $columnName, $type = null, $length = null, array $options = array())
     {
         $options = get_defined_vars();
-        $options['options']['length'] = $length;
+        if ( ! isset($options['options']['length'])) {
+            $options['options']['length'] = $length;
+        }
         $options = array_merge($options, $options['options']);
         unset($options['options']);
 
@@ -287,10 +434,11 @@ abstract class Doctrine_Migration_Base
      * @param string $tableName     Name of the table to change the column on
      * @param string $columnName    Name of the column to change
      * @param string $type          New type of column
+     * @param string $length        The length of the column
      * @param array  $options       New options for the column
      * @return void
      */
-    public function changeColumn($tableName, $columnName, $length = null, $type = null, array $options = array())
+    public function changeColumn($tableName, $columnName, $type = null, $length = null, array $options = array())
     {
         $options = get_defined_vars();
         $options['options']['length'] = $length;

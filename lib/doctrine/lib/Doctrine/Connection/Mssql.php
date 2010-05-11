@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mssql.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
+ *  $Id: Mssql.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -27,8 +27,8 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 5876 $
- * @link        www.phpdoctrine.org
+ * @version     $Revision: 7490 $
+ * @link        www.doctrine-project.org
  * @since       1.0
  */
 class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
@@ -81,7 +81,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      */
     public function quoteIdentifier($identifier, $checkOption = false)
     {
-        if ($checkOption && ! $this->getAttribute(Doctrine::ATTR_QUOTE_IDENTIFIER)) {
+        if ($checkOption && ! $this->getAttribute(Doctrine_Core::ATTR_QUOTE_IDENTIFIER)) {
             return $identifier;
         }
         
@@ -138,7 +138,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * @link http://lists.bestpractical.com/pipermail/rt-devel/2005-June/007339.html
      * @return string
      */
-    public function modifyLimitQuery($query, $limit = false, $offset = false, $isManip = false)
+    public function modifyLimitQuery($query, $limit = false, $offset = false, $isManip = false, $isSubQuery = false)
     {
         if ($limit > 0) {
             $count = intval($limit);
@@ -157,7 +157,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
                 $orders = explode(',', $order);
 
                 for ($i = 0; $i < count($orders); $i++) {
-                    $sorts[$i] = (stripos($orders[$i], ' desc') !== false) ? 'desc' : 'asc';
+                    $sorts[$i] = (stripos($orders[$i], ' desc') !== false) ? 'DESC' : 'ASC';
                     $orders[$i] = trim(preg_replace('/\s+(ASC|DESC)$/i', '', $orders[$i]));
 
                     // find alias in query string
@@ -169,6 +169,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
                     $field_array = explode(',', $fields_string);
                     $field_array = array_shift($field_array);
                     $aux2 = spliti(' as ', $field_array);
+                    $aux2 = explode('.', end($aux2));
 
                     $aliases[$i] = trim(end($aux2));
                 }
@@ -183,8 +184,20 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
                 $selectReplace .= 'DISTINCT ';
             }
 
+            $fields_string = substr($query, strlen($selectReplace), strpos($query, ' FROM ') - strlen($selectReplace));
+            $field_array = explode(',', $fields_string);
+            $field_array = array_shift($field_array);
+            $aux2 = spliti(' as ', $field_array);
+            $aux2 = explode('.', end($aux2));
+            $key_field = trim(end($aux2));
+
             $query = preg_replace('/^'.$selectRegExp.'/i', $selectReplace . 'TOP ' . ($count + $offset) . ' ', $query);
-            $query = 'SELECT * FROM (SELECT TOP ' . $count . ' * FROM (' . $query . ') AS ' . $this->quoteIdentifier('inner_tbl');
+
+            if ($isSubQuery === true) {
+                $query = 'SELECT TOP ' . $count . ' ' . $this->quoteIdentifier('inner_tbl') . '.' . $key_field . ' FROM (' . $query . ') AS ' . $this->quoteIdentifier('inner_tbl');
+            } else {
+                $query = 'SELECT * FROM (SELECT TOP ' . $count . ' * FROM (' . $query . ') AS ' . $this->quoteIdentifier('inner_tbl');
+            }
 
             if ($orderby !== false) {
                 $query .= ' ORDER BY '; 
@@ -199,22 +212,35 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
                 }
             }
 
-            $query .= ') AS ' . $this->quoteIdentifier('outer_tbl');
+            if ($isSubQuery !== true) {
+                $query .= ') AS ' . $this->quoteIdentifier('outer_tbl');
 
-            if ($orderby !== false) {
-                $query .= ' ORDER BY '; 
+                if ($orderby !== false) {
+                    $query .= ' ORDER BY ';
 
-                for ($i = 0, $l = count($orders); $i < $l; $i++) { 
-                    if ($i > 0) { // not first order clause 
-                        $query .= ', '; 
-                    } 
+                    for ($i = 0, $l = count($orders); $i < $l; $i++) {
+                        if ($i > 0) { // not first order clause
+                            $query .= ', ';
+                        }
 
-                    $query .= $this->quoteIdentifier('outer_tbl') . '.' . $aliases[$i] . ' ' . $sorts[$i];
+                        $query .= $this->quoteIdentifier('outer_tbl') . '.' . $aliases[$i] . ' ' . $sorts[$i];
+                    }
                 }
             }
         }
 
         return $query;
+    }
+
+    /**
+     * Creates dbms specific LIMIT/OFFSET SQL for the subqueries that are used in the
+     * context of the limit-subquery algorithm.
+     *
+     * @return string
+     */
+    public function modifyLimitSubquery(Doctrine_Table $rootTable, $query, $limit = false, $offset = false, $isManip = false)
+    {
+        return $this->modifyLimitQuery($query, $limit, $offset, $isManip, true);
     }
     
     /**
@@ -267,12 +293,113 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
         try {
             $this->exec($query);
         } catch(Doctrine_Connection_Exception $e) {
-            if ($e->getPortableCode() == Doctrine::ERR_NOSUCHTABLE) {
+            if ($e->getPortableCode() == Doctrine_Core::ERR_NOSUCHTABLE) {
                 return false;
             }
 
             throw $e;
         }
         return true;
+    }
+
+    /**
+     * execute
+     * @param string $query     sql query
+     * @param array $params     query parameters
+     *
+     * @return PDOStatement|Doctrine_Adapter_Statement
+     */
+    public function execute($query, array $params = array())
+    {
+        if(! empty($params)) {
+            $query = $this->replaceBoundParamsWithInlineValuesInQuery($query, $params);
+        }
+
+        return parent::execute($query, array());
+    }
+
+    /**
+     * execute
+     * @param string $query     sql query
+     * @param array $params     query parameters
+     *
+     * @return PDOStatement|Doctrine_Adapter_Statement
+     */
+    public function exec($query, array $params = array())
+    {
+        if(! empty($params)) {
+            $query = $this->replaceBoundParamsWithInlineValuesInQuery($query, $params);
+        }
+
+        return parent::exec($query, array());
+    }
+
+    /**
+     * Replaces bound parameters and their placeholders with explicit values.
+     *
+     * Workaround for http://bugs.php.net/36561
+     *
+     * @param string $query
+     * @param array $params
+     */
+    protected function replaceBoundParamsWithInlineValuesInQuery($query, array $params) {
+
+        foreach($params as $key => $value) {
+            if(is_null($value)) {
+                $value = 'NULL';
+            }
+            else {
+                $value = $this->quote($value);
+            }
+
+            $re = '/([=,\(][^\\\']*)(\?)/iuU';
+
+            $query = preg_replace($re, "\\1 {$value}", $query, 1);
+
+        }
+
+        return $query;
+
+    }
+
+    /**
+     * Inserts a table row with specified data.
+     *
+     * @param Doctrine_Table $table     The table to insert data into.
+     * @param array $values             An associative array containing column-value pairs.
+     *                                  Values can be strings or Doctrine_Expression instances.
+     * @return integer                  the number of affected rows. Boolean false if empty value array was given,
+     */
+    public function insert(Doctrine_Table $table, array $fields)
+    {
+        $identifiers = $table->getIdentifierColumnNames();
+
+        $settingNullIdentifier = false;
+        $fields = array_change_key_case($fields);
+        foreach($identifiers as $identifier) {
+            $lcIdentifier = strtolower($identifier);
+
+            if(array_key_exists($lcIdentifier, $fields)) {
+                if(is_null($fields[$lcIdentifier])) {
+                    $settingNullIdentifier = true;
+                    unset($fields[$lcIdentifier]);
+                }
+            }
+        }
+
+        // MSSQL won't allow the setting of identifier columns to null, so insert a default record and then update it
+        if ($settingNullIdentifier) {
+            $count = $this->exec('INSERT INTO ' . $this->quoteIdentifier($table->getTableName()) . ' DEFAULT VALUES');
+
+            if(! $count) {
+                return $count;
+            }
+
+            $id = $this->lastInsertId($table->getTableName());
+
+            return $this->update($table, $fields, array($id));
+        }
+
+        return parent::insert($table, $fields);
     }
 }

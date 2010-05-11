@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -27,7 +27,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @version     $Revision: 1397 $
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @todo Composite key support?
  */
@@ -137,7 +137,7 @@ class Doctrine_Relation_Parser
         }
 
         if ($this->hasRelation($alias)) {
-            unset($this->relations[$alias]);
+            unset($this->_relations[$alias]);
             unset($this->_pending[$alias]);
         }
 
@@ -206,7 +206,7 @@ class Doctrine_Relation_Parser
                 // simple foreign key relation
                 $def = $this->completeDefinition($def);
 
-                if (isset($def['localKey'])) {
+                if (isset($def['localKey']) && $def['localKey']) {
                     $rel = new Doctrine_Relation_LocalKey($def);
 
                     // Automatically index for foreign keys
@@ -439,7 +439,7 @@ class Doctrine_Relation_Parser
                     } else if (($def['local'] !== $localIdColumnName && $def['type'] == Doctrine_Relation::ONE)) {
                         $def['localKey'] = true;
                     }
-                } else if ($localIdentifierCount > 1) {
+                } else if ($localIdentifierCount > 1 && ! isset($def['localKey'])) {
                     // It's a composite key and since 'foreign' can not point to a composite
                     // key currently, we know that 'local' must be the foreign key.
                     $def['localKey'] = true;

@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -27,7 +27,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Jonathan H. Wage <jwage@mac.com>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 2939 $
  */
@@ -271,9 +271,9 @@ END;
     {
         $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'tmp_doctrine_models';
 
-        Doctrine::generateModelsFromDb($directory);
+        Doctrine_Core::generateModelsFromDb($directory);
 
-        $result = $this->generateMigrationsFromModels($directory, Doctrine::MODEL_LOADING_CONSERVATIVE);
+        $result = $this->generateMigrationsFromModels($directory, Doctrine_Core::MODEL_LOADING_CONSERVATIVE);
 
         Doctrine_Lib::removeDirectories($directory);
 
@@ -290,17 +290,17 @@ END;
     public function generateMigrationsFromModels($modelsPath = null, $modelLoading = null)
     {
         if ($modelsPath !== null) {
-            $models = Doctrine::filterInvalidModels(Doctrine::loadModels($modelsPath, $modelLoading));
+            $models = Doctrine_Core::filterInvalidModels(Doctrine_Core::loadModels($modelsPath, $modelLoading));
         } else {
-            $models = Doctrine::getLoadedModels();
+            $models = Doctrine_Core::getLoadedModels();
         }
 
-        $models = Doctrine::initializeModels($models);
+        $models = Doctrine_Core::initializeModels($models);
 
         $foreignKeys = array();
 
         foreach ($models as $model) {
-            $table = Doctrine::getTable($model);
+            $table = Doctrine_Core::getTable($model);
             if ($table->getTableName() !== $this->migration->getTableName()) {
                 $export = $table->getExportableFormat();
 
@@ -348,7 +348,7 @@ END;
      */
     public function buildCreateForeignKey($tableName, $definition)
     {
-        return "\t\t\$this->createForeignKey('" . $tableName . "', '" . $definition['name'] . "', " . $this->varExport($definition, true) . ");";
+        return "        \$this->createForeignKey('" . $tableName . "', '" . $definition['name'] . "', " . $this->varExport($definition, true) . ");";
     }
 
     /**
@@ -360,7 +360,7 @@ END;
      */
     public function buildDropForeignKey($tableName, $definition)
     {
-        return "\t\t\$this->dropForeignKey('" . $tableName . "', '" . $definition['name'] . "');";
+        return "        \$this->dropForeignKey('" . $tableName . "', '" . $definition['name'] . "');";
     }
 
     /**
@@ -371,7 +371,7 @@ END;
      */
     public function buildCreateTable($tableData)
     {
-        $code  = "\t\t\$this->createTable('" . $tableData['tableName'] . "', ";
+        $code  = "        \$this->createTable('" . $tableData['tableName'] . "', ";
 
         $code .= $this->varExport($tableData['columns'], true) . ", ";
 
@@ -399,7 +399,7 @@ END;
      */
     public function buildDropTable($tableData)
     {
-        return "\t\t\$this->dropTable('" . $tableData['tableName'] . "');";
+        return "        \$this->dropTable('" . $tableData['tableName'] . "');";
     }
 
     /**
@@ -415,7 +415,7 @@ END;
         $length = $column['length'];
         $type = $column['type'];
         unset($column['length'], $column['type']);
-        return "\t\t\$this->addColumn('" . $tableName . "', '" . $columnName. "', '" . $type . "', '" . $length . "', " . $this->varExport($column) . ");";
+        return "        \$this->addColumn('" . $tableName . "', '" . $columnName. "', '" . $type . "', '" . $length . "', " . $this->varExport($column) . ");";
     }
 
     /**
@@ -428,7 +428,7 @@ END;
      */
     public function buildRemoveColumn($tableName, $columnName, $column)
     {
-        return "\t\t\$this->removeColumn('" . $tableName . "', '" . $columnName. "');";
+        return "        \$this->removeColumn('" . $tableName . "', '" . $columnName. "');";
     }
 
     /**
@@ -444,7 +444,7 @@ END;
         $length = $column['length'];
         $type = $column['type'];
         unset($column['length'], $column['type']);
-        return "\t\t\$this->changeColumn('" . $tableName . "', '" . $columnName. "', '" . $length . "', '" . $type . "', " . $this->varExport($column) . ");";
+        return "        \$this->changeColumn('" . $tableName . "', '" . $columnName. "', '" . $type . "', '" . $length . "', " . $this->varExport($column) . ");";
     }
 
     /**
@@ -457,7 +457,7 @@ END;
      */
     public function buildAddIndex($tableName, $indexName, $index)
     {
-        return "\t\t\$this->addIndex('$tableName', '$indexName', " . $this->varExport($index) . ");";
+        return "        \$this->addIndex('$tableName', '$indexName', " . $this->varExport($index) . ");";
     }
 
     /**
@@ -470,7 +470,7 @@ END;
      */
     public function buildRemoveIndex($tableName, $indexName, $index)
     {
-        return "\t\t\$this->removeIndex('$tableName', '$indexName', " . $this->varExport($index) . ");";
+        return "        \$this->removeIndex('$tableName', '$indexName', " . $this->varExport($index) . ");";
     }
 
     /**

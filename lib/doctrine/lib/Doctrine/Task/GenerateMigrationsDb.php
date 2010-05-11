@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -25,7 +25,7 @@
  * @package     Doctrine
  * @subpackage  Task
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision: 2761 $
  * @author      Jonathan H. Wage <jwage@mac.com>
@@ -44,13 +44,13 @@ class Doctrine_Task_GenerateMigrationsDb extends Doctrine_Task
             $migration = new Doctrine_Migration($migrationsPath);
             $result1 = false;
             if ( ! count($migration->getMigrationClasses())) {
-                $result1 = Doctrine::generateMigrationsFromDb($migrationsPath);
+                $result1 = Doctrine_Core::generateMigrationsFromDb($migrationsPath);
             }
             $connections = array();
             foreach (Doctrine_Manager::getInstance() as $connection) {
                 $connections[] = $connection->getName();
             }
-            $changes = Doctrine::generateMigrationsFromDiff($migrationsPath, $connections, $yamlSchemaPath);
+            $changes = Doctrine_Core::generateMigrationsFromDiff($migrationsPath, $connections, $yamlSchemaPath);
             $numChanges = count($changes, true) - count($changes);
             $result = ($result1 || $numChanges) ? true:false;
         } catch (Exception $e) {

@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -25,7 +25,7 @@
  * @package     Doctrine
  * @subpackage  AuditLog
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
@@ -49,7 +49,10 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
                                 'pluginTable'       => false,
                                 'children'          => array(),
                                 'auditLog'          => true,
-                                'deleteVersions'    => true);
+                                'deleteVersions'    => true,
+                                'cascadeDelete'     => true,
+                                'excludeFields'     => array(),
+                                'appLevelDelete'    => false);
 
     /**
      * Accepts array of options to configure the AuditLog
@@ -60,6 +63,12 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
     public function __construct(array $options = array())
     {
         $this->_options = Doctrine_Lib::arrayDeepMerge($this->_options, $options);
+    }
+
+    public function buildRelation()
+    {
+        $this->buildForeignRelation('Version');
+        $this->buildLocalRelation();
     }
 
     /**
@@ -76,6 +85,9 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
 
         // remove all sequence, autoincrement and unique constraint definitions and add to the behavior model
         foreach ($columns as $column => $definition) {
+            if (in_array($column, $this->_options['excludeFields'])) {
+                continue;
+            }
             unset($definition['autoincrement']);
             unset($definition['sequence']);
             unset($definition['unique']);
@@ -92,9 +104,9 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
 
         // the version column should be part of the primary key definition
         $this->hasColumn(
-	        $this->_options['version']['name'], 
-            $this->_options['version']['type'], 
-            $this->_options['version']['length'], 
+	        $this->_options['version']['name'],
+            $this->_options['version']['type'],
+            $this->_options['version']['length'],
             $this->_options['version']['options']);
     }
 
@@ -107,12 +119,13 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
      * @param	boolean			$asCollection
      * @return  array           An array or Doctrine_Collection or a Doctrine_Record
      */
-    public function getVersion(Doctrine_Record $record, $version, $hydrationMode = Doctrine::HYDRATE_ARRAY, $asCollection = true)
+    public function getVersion(Doctrine_Record $record, $version, $hydrationMode = Doctrine_Core::HYDRATE_ARRAY, $asCollection = true)
     {
         $className = $this->_options['className'];
-        $method    = ($asCollection) ? 'execute' : 'fetchOne'; 
+        $method    = ($asCollection) ? 'execute' : 'fetchOne';
 
-        $q = new Doctrine_Query();
+        $q = Doctrine_Core::getTable($className)
+            ->createQuery();
 
         $values = array();
         foreach ((array) $this->_options['table']->getIdentifier() as $id) {
@@ -124,7 +137,7 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
 
         $values[] = $version;
 
-        $q->from($className)->where($where);
+        $q->where($where);
 
         return $q->$method($values, $hydrationMode);
     }
@@ -145,12 +158,12 @@ class Doctrine_AuditLog extends Doctrine_Record_Generator
             $values[] = $record->get($id);
         }
 
-        $q = Doctrine_Query::create()
-                ->select($select)
-                ->from($className)
-                ->where(implode(' AND ',$conditions));
+        $q = Doctrine_Core::getTable($className)
+            ->createQuery()
+            ->select($select)
+            ->where(implode(' AND ',$conditions));
 
-        $result = $q->execute($values, Doctrine::HYDRATE_ARRAY);
+        $result = $q->execute($values, Doctrine_Core::HYDRATE_ARRAY);
 
         return isset($result[0]['max_version']) ? $result[0]['max_version']:0;
     }
