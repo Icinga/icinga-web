@@ -9,7 +9,7 @@ class doctrineDBBuilderTask extends Task {
 	protected $models;
 	protected $action;
 	protected $ini;
-	
+	static protected $AppKitPath = null;
 	public function init() {
 		
 	}

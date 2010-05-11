@@ -49,8 +49,8 @@ class sqlRunnerTask extends Task {
 		$doctrine = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
 		$files = scandir($this->files);
 		foreach($files as $filename) {
-			if(substr($fileName,-3,3) == 'sql') {
-				$sql = file_get_contents($filename);
+			if(substr($filename,-3) == 'sql') {
+				$sql = file_get_contents($this->files."/".$filename);
 				$doctrine->query($sql);
 			}
 		}

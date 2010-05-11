@@ -250,11 +250,12 @@ Available targets:
 			Finally remove files
 		 -->
 		<echo>Removing files</echo>
-		<delete dir="${PATH_Icinga}/app/modules/${MODULE_Name}" />	
+		<delete dir="${PATH_Icinga}/app/modules/${MODULE_Name}" />
+	
 		<fileSelector refid="manifest" source="Module" propertyName="module"/>
 		<delete>
-			<fileset refid="module" />
-		</delete>
+			<fileset refid="module"/>
+		</delete>		
 		
 		<echo>Clearing cache</echo>
 		<delete dir="${PATH_Icinga}/app/cache/config" />

@@ -90,7 +90,9 @@ class fileSelectorTask extends Task {
 		$icingaPath = $this->project->getUserProperty("PATH_Icinga");
 		$coreDir = $this->project->getUserProperty("coreDir");
 		$fileset->setDir($icingaPath);
-		$includes = $this->getPath($coreDir)."/**";
+		$includes ="";
+		if($this->getPath($coreDir))
+			$includes = $this->getPath($coreDir)."/**";
 		$excludes = "";
 		foreach($files->Excludes->children() as $type=>$address) {
 			if($excludes != "")
