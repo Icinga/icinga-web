@@ -189,7 +189,7 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 	}
 	
 	private function testArrayIntersects($totest, array $against=array()) {
-		if (!is_array($totest) && is_string($totest)) $totest = split(',', $totest);
+		if (!is_array($totest) && is_string($totest)) $totest = explode(',', $totest);
 		$t = array_intersect($totest, $against);
 		if (is_array($t) && count($t)>0) {
 			return true;

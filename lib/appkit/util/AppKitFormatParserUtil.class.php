@@ -111,7 +111,7 @@ class AppKitFormatParserUtil {
 		
 		if (preg_match_all('@\$\{([^\}]+)\}@', $format, $m, PREG_SET_ORDER)) {
 			foreach ($m as $match) {
-				$parts = split('\.', $match[1]);
+				$parts = explode('.', $match[1]);
 				$namespace = array_shift($parts);
 				
 				$args = $this->extractArgs($match[1]);
