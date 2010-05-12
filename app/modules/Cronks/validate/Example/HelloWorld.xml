@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Cronks/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+		
+		<!-- This parameters are set through the cronkloader -->
+		
+		<!--
+			If you need an unique id to initialize your component,
+			take this parameter.
+			
+			If you using the Cronk.util.initEnvironment tool,
+			this parameter can be ignored
+		-->
+		<validator class="string" name="cmpid" required="false">
+					<argument>cmpid</argument>
+					
+					<errors>
+						<error>Validation of htmlid failed!</error>
+					</errors>
+		</validator>
+		
+		
+		<!-- 
+			The ExtJS if of your parent container. This ID is needed
+			to initialize the Cronk.util.initEnvironment or to add
+			your component to the parent container manually.
+		-->
+		<validator class="string" name="parentid" required="false">
+					<argument>parentid</argument>
+					
+					<errors>
+						<error>Validation of parentid failed!</error>
+					</errors>
+		</validator>
+		
+		<!-- 
+			The Cronk registry holds information about dynamic stateuid information
+			for extjs (i.e. if you create the same Cronk twice). If you want to 
+			implement ExtJS stateful components, this stateid must used in order
+			to work within the environment 
+		-->
+		<validator class="string" name="stateuid" required="false">
+					<argument>stateuid</argument>
+					
+					<errors>
+						<error>Validation of stateuid failed!</error>
+					</errors>
+		</validator>
+		
+		
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

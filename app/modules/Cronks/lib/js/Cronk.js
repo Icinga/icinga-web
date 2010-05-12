@@ -112,6 +112,7 @@ Cronk.defaults.CONFIG_COPY = [
 		cmp				: null,
 		cmpConfig		: null,
 		cmpUpdater		: null,
+		cmpDefaultUrl	: null,
 		forceId			: false,
 		idprefix		: false,
 		
@@ -157,7 +158,8 @@ Cronk.defaults.CONFIG_COPY = [
 		},
 		
 		onComponentRefresh : function(cronk, me) {
-			this.getUpd().update(this.getUpdaterConfig());
+			// this.getUpd().update(this.getUpdaterConfig());
+			this.getUpd().refresh();
 		},
 		
 		onComponentDestroy : function(c) {
@@ -172,8 +174,6 @@ Cronk.defaults.CONFIG_COPY = [
 		
 		applyCronkEvents : function() {		
 			var lcmp = this.cmp;
-			
-			// console.log(lcmp.getId() + ' rendered: ' + lcmp.rendered);
 			
 			if (lcmp.rendered == true) {
 				this.onComponentRefresh();
@@ -218,20 +218,29 @@ Cronk.defaults.CONFIG_COPY = [
 		
 		getUpd : function() {
 			if (!this.cmpUpdater) {
-				this.cmpUpdater = this.cmp.getUpdater();
+				var _urlObj = this.getUpdaterConfig();
+				var _luObj = this.cmp.getUpdater();
+				_luObj.setDefaultUrl(_urlObj);
+				this.cmpUpdater = _luObj;
 			}
-			
 			return this.cmpUpdater;
 		},
 		
 		getUpdaterConfig: function() {
 			var c = this.cmpConfig;
-			return {
-				url: Cronk.getLoaderUrl(c.crname, c.loaderUrl),
-				params: this.getRequestParams(),
-				scripts: true,
-				scope: this
-			};
+			
+			if (!this.cmpDefaultUrl) {
+				this.cmpDefaultUrl = {
+					url: Cronk.getLoaderUrl(c.crname, c.loaderUrl),
+					params: this.getRequestParams(),
+					scripts: true,
+					discardUrl: false,
+					nocache: true,
+					scope: this
+				}
+			}
+			
+			return this.cmpDefaultUrl;
 		},
 		
 		getRequestParams: function() {
@@ -252,8 +261,6 @@ Cronk.defaults.CONFIG_COPY = [
 				Ext.iterate(this.cmpConfig.params, function(k, v) {
 					this.cmpRequestParams['p[' + k +  ']'] = v;
 				}, this);
-				
-//				console.log("REQUEST", this.cmpRequestParams);
 			}
 			return this.cmpRequestParams;
 		},

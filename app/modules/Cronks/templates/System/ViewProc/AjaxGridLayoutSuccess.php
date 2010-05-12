@@ -1,15 +1,12 @@
-<?php 
-	$parentid = $rd->getParameter('parentid');
-	$stateuid = $rd->getParameter('stateuid');
-?>
 <script type="text/javascript">
+Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
 
-(function() {
-	
+	var CE = this;
+
 	var CreateGridProcessor = function (meta) {	
 		
 		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
-		MetaGrid.setStateUid("<?php echo $stateuid; ?>");
+		MetaGrid.setStateUid(CE.stateuid);
 		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
@@ -121,9 +118,6 @@
 		});
 		
 		Ext.onReady(function() {
-			//Insert the grid in the parent
-			var cparentObj = Ext.getCmp("<?php echo $parentid; ?>");
-			
 			// Check if the store is loaded by whatever ...
 			// If no load with defautl params!
 			grid.on('render', function(g) {
@@ -133,9 +127,9 @@
 			}, MetaGrid);
 			
 			// Add to parent component
-			cparentObj.add(grid);
+			CE.add(grid);
+			CE.doLayout();
 			
-			AppKit.util.Layout.doLayout();
 		});
 	}
 	
@@ -188,6 +182,5 @@
 	
 	oContainer.call(this);
     
-})();
-
+});
 </script>

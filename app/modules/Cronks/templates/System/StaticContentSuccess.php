@@ -1,13 +1,8 @@
-<?php 
-	$pid = $rd->getParameter('parentid');
-	$cid = $rd->getParameter('cmpid');
-	$template = $rd->getParameter('template');
-?>
+<?php $template = $rd->getParameter('template'); ?>
 <script type="text/javascript">
-(function() {
-	
-	Ext.onReady(function() {
-	
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
+		var CE = this;
+		
 		var p = (function() {
 			var pub = {};
 			var panel = null;
@@ -22,6 +17,7 @@
 						panel = new Ext.Panel({
 							border: false,
 							autoScroll: true,
+							id: CE.cmpid,
 							
 							// Options for the updater
 							autoLoad: {
@@ -69,11 +65,8 @@
 							}
 						});
 						
-						pc = Ext.getCmp('<?php echo $pid; ?>');
-						if (pc) {
-							pc.add(panel);
-							pc.doLayout();
-						}
+						CE.add(panel);
+						CE.doLayout();
 						
 						return true;						
 					}
@@ -87,8 +80,5 @@
 		})();
 	
 		p.init();
-	
-	});
-	
-})();
+});
 </script>

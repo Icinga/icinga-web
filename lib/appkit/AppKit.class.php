@@ -294,6 +294,7 @@ class AppKit {
 	 * 
 	 */
 	private static function setLanguageDomain() {
+		return true;
 		try {
 			$context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
 			$user = $context->getUser();	
@@ -304,13 +305,15 @@ class AppKit {
 			if(!$user)
 				return true;
 		
-			$translationMgr = $context->getTranslationManager();		
+			$translationMgr = $context->getTranslationManager();
+					
 			try {
 				$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
 				$translationMgr->setLocale($locale);
 			} catch(Exception $e) {
 				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
 			}
+			
 			return true;
 		
 		} catch(AppKitDoctrineException $e) {

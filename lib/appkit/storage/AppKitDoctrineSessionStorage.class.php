@@ -48,7 +48,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 		
 		if ($result > 0) {
 			$this->getContext()->getLoggerManager()
-			->logInfo('Session garbage collector, deleted %d old sessions.', $result);
+			->log(sprintf('Session garbage collector, deleted %d old sessions.', $result), AgaviLogger::INFO);
 		}
 		
 		if ($result > 0) return true;

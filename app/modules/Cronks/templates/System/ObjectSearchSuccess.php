@@ -1,12 +1,5 @@
-<?php 
-	$parentid = $rd->getParameter('parentid');
-?>
 <script type="text/javascript">
-<!--
-(function() {
-	
-	var oid = '<?php echo $parentid; ?>';
-	var coParent = Ext.getCmp(oid);
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
 	
 	var oSearchHandler =  function() {
 		
@@ -318,12 +311,9 @@
 		items: myTextField
 	});
 	
-	Ext.onReady(function() {
-		coParent.add(oSearch);
-		coParent.doLayout();
-	});
-
 	
-})();
+	this.add(oSearch);
+	this.doLayout();
+});
 -->
 </script>
