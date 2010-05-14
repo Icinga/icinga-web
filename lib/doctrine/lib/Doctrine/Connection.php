@@ -1236,7 +1236,13 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     public function clear()
     {
         foreach ($this->tables as $k => $table) {
-            $table->getRepository()->evictAll();
+       /**
+        * MODIFIED AFTER PROPOSAL : 
+        * http://www.doctrine-project.org/jira/browse/DC-355
+        */ 	
+        	if ($repository = $table->getRepository()) { 
+        		$repository->evictAll(); 
+        	}
             $table->clear();
         }
     }

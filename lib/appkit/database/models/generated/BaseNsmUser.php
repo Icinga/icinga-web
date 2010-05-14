@@ -44,6 +44,8 @@ abstract class BaseNsmUser extends Doctrine_Record
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
+        	 'default' => 0
+       
              ));
         $this->hasColumn('user_name', 'string', 18, array(
              'type' => 'string',
@@ -76,6 +78,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
+        	 'default' => 'login'
              ));
         $this->hasColumn('user_salt', 'string', 64, array(
              'type' => 'string',
@@ -84,6 +87,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
+    		 'default' => mt_rand(0,100)
              ));
         $this->hasColumn('user_email', 'string', 40, array(
              'type' => 'string',

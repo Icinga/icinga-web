@@ -82,4 +82,11 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
              'local' => 'upref_user_id',
              'foreign' => 'user_id'));
     }
+    
+	public function get($val) {
+		$val = parent::get($val);
+		if(is_resource($val))
+			return stream_get_contents($val);
+		return $val;
+	}
 }

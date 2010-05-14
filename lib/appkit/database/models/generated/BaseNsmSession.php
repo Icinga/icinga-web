@@ -22,6 +22,7 @@ abstract class BaseNsmSession extends Doctrine_Record
 {
     public function setTableDefinition()
     {
+
         $this->setTableName('nsm_session');
         $this->hasColumn('session_entry_id', 'integer', 4, array(
              'type' => 'integer',
@@ -60,18 +61,23 @@ abstract class BaseNsmSession extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('session_created', 'timestamp', null, array(
+        $this->hasColumn('session_created', 'timestamp', time(), array(
              'type' => 'timestamp',
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('session_modified', 'timestamp', null, array(
+        $this->hasColumn('session_modified', 'timestamp', time(), array(
              'type' => 'timestamp',
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
     }
-
+	public function get($val) {
+		$val = parent::get($val);
+		if(is_resource($val))
+			return stream_get_contents($val);
+		return $val;
+	}
 }
