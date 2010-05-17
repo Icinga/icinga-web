@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings prefix="modules.appkit.auth." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+
+	<setting name="defaults">
+		<!--
+			* auth_create
+			Try to import the user profile on initial creation
+		-->
+		<ae:parameter name="auth_create">false</ae:parameter>
+		
+		<!--
+			* auth_update
+			Update changes in the userprofile
+		-->
+		<ae:parameter name="auth_update">false</ae:parameter>
+		
+		<!--
+			* auth_resume
+			Do not stop if a provider has knows the user, but cat not authorize
+		-->
+		<ae:parameter name="auth_resume">true</ae:parameter>
+		
+		<!--
+			* auth_groups
+			Comma seperated list of icinga group name a new user will be
+			added to
+		-->
+		<ae:parameter name="auth_groups">icinga_user</ae:parameter>
+		
+		<!--
+			* auth_enable
+			If the provider is enabled or not
+		-->
+		<ae:parameter name="auth_enable">false</ae:parameter>
+		
+		<!-- 
+			* auth_authoritative
+			Use this provider to authenticate users
+		-->
+		<ae:parameter name="auth_authoritative">false</ae:parameter>
+	</setting>
+
+	<!--
+		* provider
+		
+		List of providers used for this installation.
+	-->
+	<setting name="provider">
+		<ae:parameter name="internal">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.Database</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+		</ae:parameter>
+	</setting>
+
+</settings>

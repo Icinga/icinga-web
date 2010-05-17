@@ -19,6 +19,7 @@ require('../app/config.php');
 Agavi::bootstrap('development');
 
 AgaviController::initializeModule('Web');
+AgaviController::initializeModule('AppKit');
 
 // Setting the running context to web ...
 AgaviConfig::set('core.default_context', 'web');

@@ -53,6 +53,13 @@
 					</errors>
 		</validator>
 		
+		<validator class="string" name="say_what" required="true">
+					<argument>stateuid</argument>
+					
+					<errors>
+						<error>Validation of say_what failed!</error>
+					</errors>
+		</validator>
 		
 		</validators>
 		

@@ -8,5 +8,8 @@
 		<autoload name="AppKitBaseModel">%core.module_dir%/AppKit/lib/model/AppKitBaseModel.class.php</autoload>
 		<autoload name="AppKitBaseView">%core.module_dir%/AppKit/lib/view/AppKitBaseView.class.php</autoload>
 
+		<!-- Auth and auth providers -->
+		<autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
+
 	</ae:configuration>
 </ae:configurations>

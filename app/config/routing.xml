@@ -95,6 +95,9 @@
 				<!-- The main view -->
 				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
 
+				<!-- TestPage -->
+				<route name=".testPage" pattern="^/testpage$" action="Icinga.TestPage" />
+
 				<!-- Simpleprovider for popups -->
 				<route name=".simpleDataProvider" pattern="^/simpleDataProvider"
 					output_type="json">

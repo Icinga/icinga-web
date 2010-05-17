@@ -6,8 +6,6 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 	// Listing object
 	var CronkListing = function() {
-
-		var parentCmp = CE.getParent();
 		var template  = null;
 		
 		var c = {
@@ -73,7 +71,8 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		}
 		
 		var addCmp = new Ext.Panel(c);
-		parentCmp.add(addCmp);
+		
+		CE.add(addCmp);
 		
 		return {
 			
@@ -95,7 +94,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			},
 			
 			getParentCmp : function() {
-				return parentCmp;
+				return CE.getParent();
 			},
 			
 			getFrameCmp : function() {
@@ -210,11 +209,10 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				}
 			},
 			
-			go : function(parentcmp) {
+			go : function() {
 				Ext.Ajax.request({
 					url: this.getBaseUrl(),
 					success: function (r, o) {
-//						CronkListing.setParentCmp(parentcmp);
 
 						var d = Ext.decode(r.responseText);	
 						if (Ext.isDefined(d.cat) && d.cat.resultSuccess == true) {
