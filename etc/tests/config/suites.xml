@@ -6,6 +6,7 @@
 				<testfiles>
 					<testfile>database/icingaDatabaseAccessibleTest.php</testfile>
 					<testfile>database/icingaUserOperations.php</testfile>
+					<testfile>database/icingaRoleOperations.php</testfile>
 				</testfiles>
 			</suite>
 		</suites>

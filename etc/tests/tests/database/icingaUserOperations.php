@@ -36,14 +36,19 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 		"user_lastname" => "TESTCASE_ALTERED",
 		"user_firstname" => "TESTCASE_ALTERED",
 		"user_email" => "altered@testcase.local",
-		"user_disabled" => 1
+		"user_disabled" => 1,
+		"userroles" => array("3" => "3")
 	);
 	
+	
+	
 	/**
-	 * @dataProvider addUserParameter
+	 * @depends icingaDatabaseAccessibleTest::testInsert
+	 * 
 	 */
 	public function testUserAdd() {
 		try {
+			info("Testing actions for user modification\n");
 			info("\tTesting admin 'Add user' action\n");
 			$context = AgaviContext::getInstance();
 			$arguments = new AgaviRequestDataHolder();
@@ -62,8 +67,8 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			// Check if user is really added
 			$result = Doctrine_Core::getTable("NsmUser")->findBy("user_name",$user["user_name"])->getFirst();		
 			$this->assertType("NsmUser",$result,"No user found, something seemed to go wrong");
-			return $result->get("user_id");
 			success("\tCreated user exists!\n");
+			return $result->get("user_id");
 		} catch(Exception $e) {
 			$this->fail("Adding a new user failed : ".$e->getMessage());
 		}
@@ -142,9 +147,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for editing users not found");				
 
 			// check result
-			$result = Doctrine_Core::getTable("NsmUser")->findBy("user_id",$id)->getFirst();
-			$this->assertNotNull($result,"User could not be found. This really shouldn't happen at this point..");
-			$result = $result->toArray();
+			$user = Doctrine_Core::getTable("NsmUser")->findBy("user_id",$id)->getFirst();
+			$this->assertNotNull($user,"User could not be found. This really shouldn't happen at this point..");
+			$result = $user->toArray();
 			foreach($this->alterParams as $name=>$param) {
 				if(!isset($result[$name]))
 					continue;
@@ -152,6 +157,8 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 				$this->assertEquals($result[$name],$param,"Edited value has not been accepted ");
 			}
 			success("\tAlter user succeeded!\n");
+			// Set created user as current user
+			$context->getUser()->setAttributeByRef(AppKitSecurityUser::USEROBJ_ATTRIBUTE,$user);
 			return $id;
 		} catch(Exception $e) {
 			$this->fail("Altering users failed: ".$e->getMessage());
@@ -168,22 +175,23 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			$context = AgaviContext::getInstance();
 			
 			$preferenceData = new AgaviRequestDataHolder();
-				$preferenceData->setParameter("params[0][isLong]",false);
-				$preferenceData->setParameter("params[0][upref_key]","TEST");
-				$preferenceData->setParameter("params[0][upref_val]","TESTCASE");
-			
+			$preferenceData->setParameter("params",array("0"=>array("isLong"=>"false","upref_key"=>"TEST","upref_val"=>"TESTCASE")));
+	
 			$modifyAction = $context->getController()->createExecutionContainer("AppKit","User.Preferences",$preferenceData,"simple","write");
 			$this->assertType("AgaviExecutionContainer",$modifyAction,"Couldn't create add-preference action");
 			
 			$result = $modifyAction->execute();		
-			echo $result->getContent();		$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for editing users not found");				
+			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for editing users not found");				
 		
 			// Check if the entry has been written
-			$result = Doctrine_Core::getTable("NsmUserPreference")->findAll();
-			foreach($result as $res) {
-				print_r($result->toArray());
-			}
-		
+			$result = Doctrine_Query::create()
+									->select("pr.*, n.user_id")
+									->from("NsmUserPreference pr")
+									->innerJoin("pr.NsmUser n")
+									->where("n.user_id = ?",$userid)
+									->execute();			
+			$this->assertNotNull($result->getFirst(),"Preference could not be set!");
+			success("\tSetting preferences suceeded!\n");
 			return $userid;
 		} catch(Exception $e) {
 			$this->fail("Setting an user preference failed!".$e->getMessage());
@@ -194,36 +202,105 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	 * 
 	 * @depends testUserPreferenceAdd
 	 */
-	public function testUserPreferenceRemove($userid) {
-		info("Testing preferences");
-		
-		return $userid;
+	public function testUserPreferenceRemove($userid) {	
+		try {
+			info("\tTesting icinga-web action: Remove user preference\n");
+			$context = AgaviContext::getInstance();
+
+			$preferenceData = new AgaviRequestDataHolder();
+			$preferenceData->setParameters(array("remove"=>"true","isLong"=>"false","upref_key"=>"TEST","upref_val"=>"TESTCASE"));
+	
+			$modifyAction = $context->getController()->createExecutionContainer("AppKit","User.Preferences",$preferenceData,"simple","write");
+			$this->assertType("AgaviExecutionContainer",$modifyAction,"Couldn't create add-preference action");
+			
+			$result = $modifyAction->execute();		
+	
+			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for eediting user preferences not found");				
+			
+			success("\tDeleting preferences suceeded!\n");
+			return $userid;
+		} catch(Exception $e) {
+			$this->fail("Removing an user preference failed!".$e->getMessage());
+		}
 	}
 	
 	
-	/*public function testUserDelete($user) {
-		
-	}*/
+	/** 
+	 * @depends testUserAlter
+	 */
+	public function testPrincipalAdd($userid) {
+		try {
+			info("\tTesting icinga-web action: Add principal\n");
+			$context = AgaviContext::getInstance();
 
+			$params = array("2" => array("name" => array("IcingaServicegroup"),"set"=>array("1")));
+			$alterParams = new AgaviRequestDataHolder();
+			foreach($this->alterParams as $field=>$value) {
+				$alterParams->setParameter($field,$value);
+			}
+
+			$alterParams->setParameter("id",$userid);
+			$alterParams->setParameter("user_id",$userid);
+			$alterParams->setParameter("principal_target",$params);
+		
+			$modifyAction = $context->getController()->createExecutionContainer("AppKit","Admin.Users.Edit",$alterParams,"simple","write");
+			$result = $modifyAction->execute();			
+			
+			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for editing users not found");				
+			$user = Doctrine_Core::getTable("NsmUser")->findBy("user_id",$userid)->getFirst();	
+		
+			$this->assertArrayHasKey("2",$user->getTargets()->toArray(),"Setting Principal failed");
+			success("\tAdding principals suceeded!\n");
+			return $userid;
+		} catch(Exception $e) {
+			$this->fail("Adding a principal failed!".$e->getMessage());
+		}
+	}
+	
+	/** 
+	 * @depends testPrincipalAdd
+	 */
+	public function testPrincipalRead($userid) {
+		try {
+			info("\tTesting icinga-web action: Reading principals\n");
+			$context = AgaviContext::getInstance();
+			$readParams = new AgaviRequestDataHolder();
+			$readParams->setParameter("userId",$userid);
+			$modifyAction = $context->getController()->createExecutionContainer("AppKit","DataProvider.PrincipalProvider",$readParams,"json","read");
+			$result = $modifyAction->execute();			
+			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for reading principals not found");				
+			$this->assertArrayHasKey("IcingaServicegroup",json_decode($result->getContent(),true),"Read didn't return previously added principal!");
+			success("\tReading principals suceeded!\n");
+		} catch(Exception $e) {
+			$this->fail("Adding a principal failed!".$e->getMessage());
+		}
+	}
+	
 	/**
+	 * @depends testUserAdd
+	 */
+	public function testUserDelete($user) {
+		$this->markTestSkipped("User delete test doesn't work with transactions yet.");
+		try {
+			info("\tTesting icinga-web action: Remove user\n");
+			$context = AgaviContext::getInstance();
 
-	public function testPrincipalRead($id) {
-		info("Testing principalList");
+			$params = new AgaviRequestDataHolder();
+			$params->setParameter("user_id",array($user => $user));
+			$userRemoveAction = $context->getController()->createExecutionContainer("AppKit","Admin.Users.Remove",$params,null,"write");
+			$result = $userRemoveAction->execute();
+			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for deleting user not found");				
+			
+			// Check if group is really deleted
+			$result = Doctrine_Core::getTable("NsmUser")->findBy("user_id",$user)->getFirst();		
+			$this->assertNotType("NsmUser",$result,"User found despite deleting it, something seemed to go wrong");
+			success("\tReading user suceeded!\n");
+		} catch(Exception $e) {
+			$this->fail("Removing a user failed!".$e->getMessage());
+		}		
 	}
-	public function testPrincipalAdd() {}
-	public function testPrincipalAlter() {}
-	public function testPrincipalRemove() {}
 	
-	public function testRoleSelect() {}
-	public function testRoleAdd() {}
-	public function testRoleRemove() {}
-	
-	public function testRoleAssign() {}
-	public function testRoleDeassign() {}
-	
-	public function testPrincipalAddToUser() {} 
-	public function testPrincipalRemoveFromUser() {}
-*/	
+
 	public static function tearDownAfterClass() {
 		Doctrine_Manager::connection()->rollback();
 	}
