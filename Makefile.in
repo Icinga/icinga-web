@@ -89,6 +89,7 @@ fix-priv:
 	chmod +x \
 		$(DESTDIR)$(prefix)/bin/agavi \
 		$(DESTDIR)$(prefix)/bin/create-makefile.sh \
+		$(DESTDIR)$(prefix)/bin/create-rescuescheme.sh \
 		$(DESTDIR)$(prefix)/bin/doctrinemodels.php \
 		$(DESTDIR)$(prefix)/bin/phing \
 		$(DESTDIR)$(prefix)/bin/testdeps.php \
