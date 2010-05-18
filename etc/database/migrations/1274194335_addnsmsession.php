@@ -11,7 +11,8 @@ class Addnsmsession extends Doctrine_Migration_Base
              array(
               'type' => 'integer',
               'length' => 4,
-              'unsigned' => 0,
+              'fixed' => false,
+              'unsigned' => false,
               'primary' => true,
               'autoincrement' => true,
              ),
@@ -20,6 +21,7 @@ class Addnsmsession extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 255,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -29,6 +31,7 @@ class Addnsmsession extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 255,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -36,6 +39,8 @@ class Addnsmsession extends Doctrine_Migration_Base
              'session_data' => 
              array(
               'type' => 'blob',
+              'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -46,6 +51,7 @@ class Addnsmsession extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 255,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,

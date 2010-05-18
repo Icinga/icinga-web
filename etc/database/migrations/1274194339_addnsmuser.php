@@ -11,7 +11,8 @@ class Addnsmuser extends Doctrine_Migration_Base
              array(
               'type' => 'integer',
               'length' => 4,
-              'unsigned' => 0,
+              'fixed' => false,
+              'unsigned' => false,
               'primary' => true,
               'autoincrement' => true,
              ),
@@ -19,7 +20,8 @@ class Addnsmuser extends Doctrine_Migration_Base
              array(
               'type' => 'integer',
               'length' => 4,
-              'unsigned' => 0,
+              'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -29,6 +31,7 @@ class Addnsmuser extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 18,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -38,6 +41,7 @@ class Addnsmuser extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 40,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -47,6 +51,7 @@ class Addnsmuser extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 40,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -56,6 +61,7 @@ class Addnsmuser extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 64,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -65,8 +71,39 @@ class Addnsmuser extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 64,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
+              'autoincrement' => false,
+             ),
+             'user_authsrc' => 
+             array(
+              'type' => 'string',
+              'length' => 45,
+              'fixed' => false,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => true,
+              'autoincrement' => false,
+             ),
+             'user_authid' => 
+             array(
+              'type' => 'string',
+              'length' => 127,
+              'fixed' => false,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => false,
+              'autoincrement' => false,
+             ),
+             'user_authkey' => 
+             array(
+              'type' => 'string',
+              'length' => 64,
+              'fixed' => false,
+              'unsigned' => false,
+              'primary' => false,
+              'notnull' => false,
               'autoincrement' => false,
              ),
              'user_email' => 
@@ -74,6 +111,7 @@ class Addnsmuser extends Doctrine_Migration_Base
               'type' => 'string',
               'length' => 40,
               'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'notnull' => true,
               'autoincrement' => false,
@@ -82,7 +120,8 @@ class Addnsmuser extends Doctrine_Migration_Base
              array(
               'type' => 'integer',
               'length' => 1,
-              'unsigned' => 0,
+              'fixed' => false,
+              'unsigned' => false,
               'primary' => false,
               'default' => '1',
               'notnull' => true,
@@ -103,6 +142,39 @@ class Addnsmuser extends Doctrine_Migration_Base
              ), array(
              'indexes' => 
              array(
+              'user_unique' => 
+              array(
+              'fields' => 
+              array(
+               'user_name' => 
+               array(
+               'sorting' => 'ASC',
+               ),
+              ),
+              'type' => 'unique',
+              ),
+              'user_search' => 
+              array(
+              'fields' => 
+              array(
+               'user_name' => 
+               array(
+               'sorting' => 'ASC',
+               ),
+               'user_authsrc' => 
+               array(
+               'sorting' => 'ASC',
+               ),
+               'user_authid' => 
+               array(
+               'sorting' => 'ASC',
+               ),
+               'user_disabled' => 
+               array(
+               'sorting' => 'ASC',
+               ),
+              ),
+              ),
              ),
              'primary' => 
              array(

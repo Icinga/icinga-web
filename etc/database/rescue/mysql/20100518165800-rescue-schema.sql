@@ -45,10 +45,10 @@ CREATE TABLE `nsm_principal` (
   `principal_type` varchar(4) NOT NULL,
   `principal_disabled` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`principal_id`),
-  KEY `nsm_principal_principal_role_id_nsm_role_role_id` (`principal_role_id`),
   KEY `nsm_principal_principal_user_id_nsm_user_user_id` (`principal_user_id`),
-  CONSTRAINT `nsm_principal_principal_user_id_nsm_user_user_id` FOREIGN KEY (`principal_user_id`) REFERENCES `nsm_user` (`user_id`),
-  CONSTRAINT `nsm_principal_principal_role_id_nsm_role_role_id` FOREIGN KEY (`principal_role_id`) REFERENCES `nsm_role` (`role_id`)
+  KEY `nsm_principal_principal_role_id_nsm_role_role_id` (`principal_role_id`),
+  CONSTRAINT `nsm_principal_principal_role_id_nsm_role_role_id` FOREIGN KEY (`principal_role_id`) REFERENCES `nsm_role` (`role_id`),
+  CONSTRAINT `nsm_principal_principal_user_id_nsm_user_user_id` FOREIGN KEY (`principal_user_id`) REFERENCES `nsm_user` (`user_id`)
 ) TYPE=InnoDB AUTO_INCREMENT=6;
 
 --
@@ -61,10 +61,10 @@ CREATE TABLE `nsm_principal_target` (
   `pt_principal_id` int(11) NOT NULL,
   `pt_target_id` int(11) NOT NULL,
   PRIMARY KEY (`pt_id`),
-  KEY `nsm_principal_target_pt_principal_id_nsm_principal_principal_id` (`pt_principal_id`),
   KEY `nsm_principal_target_pt_target_id_nsm_target_target_id` (`pt_target_id`),
-  CONSTRAINT `nsm_principal_target_pt_target_id_nsm_target_target_id` FOREIGN KEY (`pt_target_id`) REFERENCES `nsm_target` (`target_id`),
-  CONSTRAINT `nsm_principal_target_pt_principal_id_nsm_principal_principal_id` FOREIGN KEY (`pt_principal_id`) REFERENCES `nsm_principal` (`principal_id`)
+  KEY `nsm_principal_target_pt_principal_id_nsm_principal_principal_id` (`pt_principal_id`),
+  CONSTRAINT `nsm_principal_target_pt_principal_id_nsm_principal_principal_id` FOREIGN KEY (`pt_principal_id`) REFERENCES `nsm_principal` (`principal_id`),
+  CONSTRAINT `nsm_principal_target_pt_target_id_nsm_target_target_id` FOREIGN KEY (`pt_target_id`) REFERENCES `nsm_target` (`target_id`)
 ) TYPE=InnoDB AUTO_INCREMENT=7;
 
 --
@@ -80,9 +80,7 @@ CREATE TABLE `nsm_role` (
   `role_created` datetime NOT NULL,
   `role_modified` datetime NOT NULL,
   `role_parent` int(11) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  KEY `nsm_role_role_parent_nsm_role_role_id` (`role_parent`),
-  CONSTRAINT `nsm_role_role_parent_nsm_role_role_id` FOREIGN KEY (`role_parent`) REFERENCES `nsm_role` (`role_id`)
+  PRIMARY KEY (`role_id`)
 ) TYPE=InnoDB AUTO_INCREMENT=5;
 
 --
@@ -99,7 +97,7 @@ CREATE TABLE `nsm_session` (
   `session_created` datetime NOT NULL,
   `session_modified` datetime NOT NULL,
   PRIMARY KEY (`session_entry_id`)
-) TYPE=InnoDB;
+) TYPE=InnoDB AUTO_INCREMENT=2;
 
 --
 -- Table structure for table `nsm_target`
@@ -141,11 +139,16 @@ CREATE TABLE `nsm_user` (
   `user_firstname` varchar(40) NOT NULL,
   `user_password` varchar(64) NOT NULL,
   `user_salt` varchar(64) NOT NULL,
+  `user_authsrc` varchar(45) NOT NULL,
+  `user_authid` varchar(127) DEFAULT NULL,
+  `user_authkey` varchar(64) DEFAULT NULL,
   `user_email` varchar(40) NOT NULL,
   `user_disabled` tinyint(4) NOT NULL DEFAULT '1',
   `user_created` datetime NOT NULL,
   `user_modified` datetime NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_unique_idx` (`user_name`),
+  KEY `user_search_idx` (`user_name`,`user_authsrc`,`user_authid`,`user_disabled`)
 ) TYPE=InnoDB AUTO_INCREMENT=2;
 
 --
@@ -162,6 +165,7 @@ CREATE TABLE `nsm_user_preference` (
   `upref_created` datetime NOT NULL,
   `upref_modified` datetime NOT NULL,
   PRIMARY KEY (`upref_id`),
+  KEY `upref_search_key_idx` (`upref_key`),
   KEY `nsm_user_preference_upref_user_id_nsm_user_user_id` (`upref_user_id`),
   CONSTRAINT `nsm_user_preference_upref_user_id_nsm_user_user_id` FOREIGN KEY (`upref_user_id`) REFERENCES `nsm_user` (`user_id`)
 ) TYPE=InnoDB AUTO_INCREMENT=2;
@@ -176,8 +180,8 @@ CREATE TABLE `nsm_user_role` (
   `usro_role_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`usro_user_id`,`usro_role_id`),
   KEY `nsm_user_role_usro_role_id_nsm_role_role_id` (`usro_role_id`),
-  CONSTRAINT `nsm_user_role_usro_user_id_nsm_user_user_id` FOREIGN KEY (`usro_user_id`) REFERENCES `nsm_user` (`user_id`),
-  CONSTRAINT `nsm_user_role_usro_role_id_nsm_role_role_id` FOREIGN KEY (`usro_role_id`) REFERENCES `nsm_role` (`role_id`)
+  CONSTRAINT `nsm_user_role_usro_role_id_nsm_role_role_id` FOREIGN KEY (`usro_role_id`) REFERENCES `nsm_role` (`role_id`),
+  CONSTRAINT `nsm_user_role_usro_user_id_nsm_user_user_id` FOREIGN KEY (`usro_user_id`) REFERENCES `nsm_user` (`user_id`)
 ) TYPE=InnoDB;
 
 --
@@ -194,4 +198,4 @@ CREATE TABLE `nsm_user_role` (
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-05-18 11:59:27
+-- Dump completed on 2010-05-18 16:58:00

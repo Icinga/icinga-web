@@ -20,6 +20,33 @@ class NsmUser extends BaseNsmUser
 	 */
 	private $principals_list	= null;
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see lib/appkit/database/models/generated/BaseNsmUser#setTableDefinition()
+	 */
+	public function setTableDefinition() {
+		
+		parent::setTableDefinition();
+		
+		$this->index('user_unique', array (
+			'fields' => array (
+				'user_name' => array (
+					'sorting' => 'ASC'
+				)
+			),
+			'type' => 'unique'
+		));
+		
+		$this->index('user_search', array (
+			'fields' => array (
+				'user_name' => array ('sorting' => 'ASC'),
+				'user_authsrc' => array ('sorting' => 'ASC'),
+				'user_authid' => array ('sorting' => 'ASC'),
+				'user_disabled' => array ('sorting' => 'ASC')
+			)
+		));
+	}
+	
 	public function setUp () {
 
 		parent::setUp();

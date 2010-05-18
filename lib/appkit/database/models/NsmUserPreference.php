@@ -12,12 +12,23 @@
  */
 class NsmUserPreference extends BaseNsmUserPreference
 {
-
 	public function get($val) {
 		$val = parent::get($val);
 		if(is_resource($val))
 			return stream_get_contents($val);
 		return $val;
+	}
+
+	public function setTableDefinition() {
+		
+		parent::setTableDefinition();
+		
+		$this->index('upref_search_key', array (
+			'fields' => array (
+				'upref_key' => array ('sorting' => 'ASC')
+			)
+		));
+		
 	}
 	
 	public function setUp() {

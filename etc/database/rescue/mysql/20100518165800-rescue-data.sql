@@ -55,7 +55,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `nsm_role` WRITE;
 /*!40000 ALTER TABLE `nsm_role` DISABLE KEYS */;
-INSERT INTO `nsm_role` VALUES (1,'icinga_user','The default representation of a ICINGA user',0,'2009-04-20 15:56:52','2010-05-11 13:09:20',NULL),(2,'appkit_user','Appkit user test',0,'2009-02-19 09:17:37','2010-05-11 13:09:13',1),(3,'appkit_admin','AppKit admin',0,'2009-02-17 10:17:10','2010-05-11 13:08:55',2),(4,'guest','Unauthorized Guest',0,'2009-02-17 10:17:10','2010-05-11 13:09:26',NULL);
+INSERT INTO `nsm_role` VALUES (1,'icinga_user','The default representation of a ICINGA user',0,'2009-04-20 15:56:52','2010-05-11 13:09:20',NULL),(2,'appkit_user','Appkit user test',0,'2009-02-19 09:17:37','2010-05-11 13:09:13',NULL),(3,'appkit_admin','AppKit admin',0,'2009-02-17 10:17:10','2010-05-11 13:08:55',NULL),(4,'guest','Unauthorized Guest',0,'2009-02-17 10:17:10','2010-05-11 13:09:26',NULL);
 /*!40000 ALTER TABLE `nsm_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,6 +65,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `nsm_session` WRITE;
 /*!40000 ALTER TABLE `nsm_session` DISABLE KEYS */;
+INSERT INTO `nsm_session` VALUES (1,'c0lqjsulm91r3dg4539jb0khj2','ICINGAAppKit','org.agavi.user.RbacSecurityUser.roles|a:0:{}org.agavi.user.BasicSecurityUser.authenticated|b:0;org.agavi.user.BasicSecurityUser.credentials|a:0:{}org.agavi.user.User|a:0:{}','a2a23282960871a80d7aa00f39a69bb0','2010-05-18 14:55:14','2010-05-18 14:55:14');
 /*!40000 ALTER TABLE `nsm_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +94,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `nsm_user` WRITE;
 /*!40000 ALTER TABLE `nsm_user` DISABLE KEYS */;
-INSERT INTO `nsm_user` VALUES (1,0,'root','Root','Enoch','18242a1cc143f34faf45e0f08a962bd892ce58fb3aa8af3392da9149838c73d9','5136137213e7403acdbc564a3203c721cea1ea9d4c28b3722da104955861976f','root@localhost.local',0,'2009-02-18 10:12:59','2010-05-11 13:10:16');
+INSERT INTO `nsm_user` VALUES (1,0,'root','Root','Enoch','18242a1cc143f34faf45e0f08a962bd892ce58fb3aa8af3392da9149838c73d9','5136137213e7403acdbc564a3203c721cea1ea9d4c28b3722da104955861976f','internal','',NULL,'root@localhost.local',0,'2009-02-18 10:12:59','2010-05-11 13:10:16');
 /*!40000 ALTER TABLE `nsm_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,4 +132,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-05-18 11:59:27
+-- Dump completed on 2010-05-18 16:58:00

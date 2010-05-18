@@ -108,7 +108,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('user_authkey', 'string', 64, array(
