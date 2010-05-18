@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmSession
  * 
@@ -16,18 +15,18 @@
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmSession extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-
         $this->setTableName('nsm_session');
         $this->hasColumn('session_entry_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
@@ -35,6 +34,7 @@ abstract class BaseNsmSession extends Doctrine_Record
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -43,12 +43,15 @@ abstract class BaseNsmSession extends Doctrine_Record
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('session_data', 'blob', null, array(
              'type' => 'blob',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -57,27 +60,32 @@ abstract class BaseNsmSession extends Doctrine_Record
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('session_created', 'timestamp', time(), array(
+        $this->hasColumn('session_created', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('session_modified', 'timestamp', time(), array(
+        $this->hasColumn('session_modified', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
     }
-	public function get($val) {
-		$val = parent::get($val);
-		if(is_resource($val))
-			return stream_get_contents($val);
-		return $val;
-	}
+
+    public function setUp()
+    {
+        parent::setUp();
+        
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmPrincipal
  * 
@@ -8,16 +7,16 @@
  * @property integer $principal_id
  * @property integer $principal_user_id
  * @property integer $principal_role_id
- * @property enum $principal_type
+ * @property string $principal_type
  * @property integer $principal_disabled
- * @property NsmRole $NsmRole
  * @property NsmUser $NsmUser
+ * @property NsmRole $NsmRole
  * @property Doctrine_Collection $NsmPrincipalTarget
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmPrincipal extends Doctrine_Record
 {
@@ -27,14 +26,16 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
         $this->hasColumn('principal_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
         $this->hasColumn('principal_user_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
@@ -42,20 +43,17 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
         $this->hasColumn('principal_role_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('principal_type', 'enum', 4, array(
-             'type' => 'enum',
+        $this->hasColumn('principal_type', 'string', 4, array(
+             'type' => 'string',
              'length' => 4,
              'fixed' => false,
-             'values' => 
-             array(
-              0 => 'role',
-              1 => 'user',
-             ),
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -63,7 +61,8 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
         $this->hasColumn('principal_disabled', 'integer', 1, array(
              'type' => 'integer',
              'length' => 1,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'default' => '0',
              'notnull' => false,
@@ -74,13 +73,13 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('NsmRole', array(
-             'local' => 'principal_role_id',
-             'foreign' => 'role_id'));
-
         $this->hasOne('NsmUser', array(
              'local' => 'principal_user_id',
              'foreign' => 'user_id'));
+
+        $this->hasOne('NsmRole', array(
+             'local' => 'principal_role_id',
+             'foreign' => 'role_id'));
 
         $this->hasMany('NsmPrincipalTarget', array(
              'local' => 'principal_id',

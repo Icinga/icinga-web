@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmRole
  * 
@@ -11,13 +10,15 @@
  * @property integer $role_disabled
  * @property timestamp $role_created
  * @property timestamp $role_modified
+ * @property integer $role_parent
+ * @property Doctrine_Collection $NsmRole
  * @property Doctrine_Collection $NsmPrincipal
  * @property Doctrine_Collection $NsmUserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmRole extends Doctrine_Record
 {
@@ -27,7 +28,8 @@ abstract class BaseNsmRole extends Doctrine_Record
         $this->hasColumn('role_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
@@ -35,6 +37,7 @@ abstract class BaseNsmRole extends Doctrine_Record
              'type' => 'string',
              'length' => 40,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -43,6 +46,7 @@ abstract class BaseNsmRole extends Doctrine_Record
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
@@ -50,7 +54,8 @@ abstract class BaseNsmRole extends Doctrine_Record
         $this->hasColumn('role_disabled', 'integer', 1, array(
              'type' => 'integer',
              'length' => 1,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'default' => '0',
              'notnull' => true,
@@ -58,37 +63,44 @@ abstract class BaseNsmRole extends Doctrine_Record
              ));
         $this->hasColumn('role_created', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('role_modified', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
-		$this->hasColumn('role_parent', 'integer', 4, array(
-        	 'type' => 'integer',
+        $this->hasColumn('role_parent', 'integer', 4, array(
+             'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
-
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
              ));
     }
 
     public function setUp()
     {
         parent::setUp();
-	    $this->hasOne('NsmPrincipal', array(
-	             'local' => 'role_id',
-	             'foreign' => 'principal_role_id'));
-	
-	    $this->hasMany('NsmUserRole', array(
-	             'local' => 'role_id',
-	             'foreign' => 'usro_role_id'));
-	    
-	    $this->hasOne('NsmRole', array(
-	             'local' => 'role_parent',
-	             'foreign' => 'role_id'));
+        $this->hasMany('NsmRole', array(
+             'local' => 'role_id',
+             'foreign' => 'role_parent'));
+
+        $this->hasMany('NsmPrincipal', array(
+             'local' => 'role_id',
+             'foreign' => 'principal_role_id'));
+
+        $this->hasMany('NsmUserRole', array(
+             'local' => 'role_id',
+             'foreign' => 'usro_role_id'));
     }
 }

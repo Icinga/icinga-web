@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmLog
  * 
@@ -14,7 +13,7 @@
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmLog extends Doctrine_Record
 {
@@ -24,38 +23,49 @@ abstract class BaseNsmLog extends Doctrine_Record
         $this->hasColumn('log_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
         $this->hasColumn('log_level', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('log_message', 'string', 4000, array(
+        $this->hasColumn('log_message', 'string', null, array(
              'type' => 'string',
-             'length' => 4000,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('log_created', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('log_modified', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
     }
 
+    public function setUp()
+    {
+        parent::setUp();
+        
+    }
 }

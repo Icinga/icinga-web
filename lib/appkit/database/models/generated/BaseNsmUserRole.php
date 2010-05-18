@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmUserRole
  * 
@@ -7,13 +6,13 @@
  * 
  * @property integer $usro_user_id
  * @property integer $usro_role_id
- * @property NsmRole $NsmRole
  * @property NsmUser $NsmUser
+ * @property NsmRole $NsmRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmUserRole extends Doctrine_Record
 {
@@ -23,14 +22,16 @@ abstract class BaseNsmUserRole extends Doctrine_Record
         $this->hasColumn('usro_user_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('usro_role_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => false,
              ));
@@ -39,12 +40,12 @@ abstract class BaseNsmUserRole extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('NsmRole', array(
-             'local' => 'usro_role_id',
-             'foreign' => 'role_id'));
-
         $this->hasOne('NsmUser', array(
              'local' => 'usro_user_id',
              'foreign' => 'user_id'));
+
+        $this->hasOne('NsmRole', array(
+             'local' => 'usro_role_id',
+             'foreign' => 'role_id'));
     }
 }

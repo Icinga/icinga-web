@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmUser
  * 
@@ -12,6 +11,8 @@
  * @property string $user_firstname
  * @property string $user_password
  * @property string $user_salt
+ * @property string $user_provider
+ * @property string $user_apikey
  * @property string $user_email
  * @property integer $user_disabled
  * @property timestamp $user_created
@@ -23,7 +24,7 @@
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmUser extends Doctrine_Record
 {
@@ -33,24 +34,25 @@ abstract class BaseNsmUser extends Doctrine_Record
         $this->hasColumn('user_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
         $this->hasColumn('user_account', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
-        	 'default' => 0
-       
              ));
         $this->hasColumn('user_name', 'string', 18, array(
              'type' => 'string',
              'length' => 18,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -59,6 +61,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'type' => 'string',
              'length' => 40,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -67,6 +70,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'type' => 'string',
              'length' => 40,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -75,24 +79,43 @@ abstract class BaseNsmUser extends Doctrine_Record
              'type' => 'string',
              'length' => 64,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
-        	 'default' => 'login'
              ));
         $this->hasColumn('user_salt', 'string', 64, array(
              'type' => 'string',
              'length' => 64,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
-    		 'default' => mt_rand(0,100)
+             ));
+        $this->hasColumn('user_provider', 'string', 45, array(
+             'type' => 'string',
+             'length' => 45,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('user_apikey', 'string', 64, array(
+             'type' => 'string',
+             'length' => 64,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
              ));
         $this->hasColumn('user_email', 'string', 40, array(
              'type' => 'string',
              'length' => 40,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -100,7 +123,8 @@ abstract class BaseNsmUser extends Doctrine_Record
         $this->hasColumn('user_disabled', 'integer', 1, array(
              'type' => 'integer',
              'length' => 1,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'default' => '1',
              'notnull' => true,
@@ -108,12 +132,16 @@ abstract class BaseNsmUser extends Doctrine_Record
              ));
         $this->hasColumn('user_created', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('user_modified', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -123,7 +151,7 @@ abstract class BaseNsmUser extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('NsmPrincipal', array(
+        $this->hasMany('NsmPrincipal', array(
              'local' => 'user_id',
              'foreign' => 'principal_user_id'));
 

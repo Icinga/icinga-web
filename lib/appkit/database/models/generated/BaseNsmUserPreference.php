@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmUserPreference
  * 
@@ -17,7 +16,7 @@
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmUserPreference extends Doctrine_Record
 {
@@ -27,14 +26,16 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
         $this->hasColumn('upref_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
         $this->hasColumn('upref_user_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -43,12 +44,15 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
              'type' => 'string',
              'length' => 100,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('upref_longval', 'blob', null, array(
              'type' => 'blob',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
@@ -57,18 +61,23 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
              'type' => 'string',
              'length' => 50,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('upref_created', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('upref_modified', 'timestamp', null, array(
              'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -78,15 +87,8 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('NsmUser', array(
+        $this->hasOne('NsmUser', array(
              'local' => 'upref_user_id',
              'foreign' => 'user_id'));
     }
-    
-	public function get($val) {
-		$val = parent::get($val);
-		if(is_resource($val))
-			return stream_get_contents($val);
-		return $val;
-	}
 }

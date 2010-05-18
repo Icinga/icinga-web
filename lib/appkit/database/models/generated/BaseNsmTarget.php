@@ -1,5 +1,4 @@
 <?php
-
 /**
  * BaseNsmTarget
  * 
@@ -9,12 +8,13 @@
  * @property string $target_name
  * @property string $target_description
  * @property string $target_class
+ * @property string $target_type
  * @property Doctrine_Collection $NsmPrincipalTarget
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
  * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6401 2009-09-24 16:12:04Z guilhermeblanco $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseNsmTarget extends Doctrine_Record
 {
@@ -24,7 +24,8 @@ abstract class BaseNsmTarget extends Doctrine_Record
         $this->hasColumn('target_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
-             'unsigned' => 0,
+             'fixed' => false,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
@@ -32,6 +33,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'type' => 'string',
              'length' => 45,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -40,6 +42,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'type' => 'string',
              'length' => 100,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
@@ -48,6 +51,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'type' => 'string',
              'length' => 80,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -56,6 +60,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'type' => 'string',
              'length' => 45,
              'fixed' => false,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
@@ -65,7 +70,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-    $this->hasMany('NsmPrincipalTarget', array(
+        $this->hasMany('NsmPrincipalTarget', array(
              'local' => 'target_id',
              'foreign' => 'pt_target_id'));
     }
