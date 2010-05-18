@@ -10,18 +10,26 @@ class doctrineDeployTool {
 	private $dbuser = null;
 	private $dbpass = null;
 	private $dbhost = "localhost";
+	private $dbport = 3306;
 	private $dbname = null; 
 	
+	private $ignoreErrors = false;
 	private $createDB = false;
 	private $target = null;
 	private $cliActions = null;
 	private $cli = false;
 	private $stdIn = null;
 	private $connected = false;
-	private $MigrationPath = null;
+	private $migrationPath = null;
+	private $modelsLoaded = false;
+	private $noDump = false;
+	private $migrationStore = null;
 	
-	public static $POSSIBLE_ACTIONS = array("dropDB"=>true,"importDB"=>true,"exportDB"=>true,"dumpData"=>true,"migrate"=>true,"importData"=>true,"createMigrationClasses"=>true);
-	public static $OPTS = array("createDB","dropDB","exportDB","importDB","models:","target:","migrationPath:","dumpData","migrate","importData","createMigrationClasses","dbtype:","dbuser:","dbhost:","dbname:","dbpass:");
+	public static $POSSIBLE_ACTIONS = array("update"=>true,"undo"=>true,"dropDB"=>true,"importDB"=>true,"exportDB"=>true,"dumpData"=>true,"migrate"=>true,"importData"=>true,"createMigrationClasses"=>true);
+	public static $OPTS = array("createDB","ignoreErrors","dropDB","noDump","exportDB","importDB","models:",
+								"target:","migrationPath:","dumpData","migrate","importData","migrationStore:",
+								"createMigrationClasses","dbtype:","dbuser:","dbhost:","dbport:","dbname:",
+								"dbpass:","undo","update");
 
 	public function setModelPath($path) {
 		$this->modelPath = $path;
@@ -41,6 +49,9 @@ class doctrineDeployTool {
 	public function setDbName($name) {
 		$this->dbname = $name;
 	}  
+	public function setDbPort($port) {
+		$this->dbport = $port;
+	}
 	public function setCreateDB($bool) {
 		$this->createDB = (boolean) $bool;
 	}
@@ -58,6 +69,9 @@ class doctrineDeployTool {
 	}
 	public function setMigrationPath($path) {
 		$this->migrationPath = $path;
+	}
+	public function setMigrationStore($target) {
+		$this->migrationStore = $target;
 	}
 	
 	public function getModelPath() {
@@ -78,6 +92,9 @@ class doctrineDeployTool {
 	public function getDbName() {
 		return $this->dbname;
 	}
+	public function getDbPort() {
+		return $this->dbport;
+	}
 	public function getCreateDB() {
 		return $this->createDB;
 	}	
@@ -95,6 +112,9 @@ class doctrineDeployTool {
 	}
 	public function getMigrationPath() {
 		return $this->migrationPath;
+	}
+	public function getMigrationStore() {
+		return $this->migrationStore;	
 	}
 	
 	private function bootstrap() {
@@ -120,12 +140,18 @@ class doctrineDeployTool {
 			$this->setModelPath($vars["models"]);
 		if(isset($vars["migrationPath"]))
 			$this->setMigrationPath($vars["migrationPath"]);
+		if(isset($vars["migrationStore"]))
+			$this->setMigrationStore($vars["migrationStore"]);
 		if(isset($vars["target"]))
 			$this->setTarget($vars["target"]);
 		if(isset($vars["createDB"]))
 			$this->setCreateDB(true);
-			
-		$dbSettings = array("dbtype","dbuser","dbhost","dbname","dbpass");
+		if(isset($vars["ignoreErrors"]))
+			$this->ignoreErrors = true;
+		if(isset($vars["noDump"]))
+			$this->noDump = true;
+				
+		$dbSettings = array("dbtype","dbuser","dbhost","dbname","dbpass","dbport");
 		foreach($dbSettings as $setting) {
 			if(isset($vars[$setting]))
 				$this->{$setting} = $vars[$setting];	
@@ -137,8 +163,11 @@ class doctrineDeployTool {
 		if(isset($argv)) {
 			$this->initFromCli($argv);
 		} 
+		
+		$this->debug();
 		if($this->isCli()) 
 			$this->performCliActions();
+	
 	}
 	
 	protected function performCliActions() {
@@ -167,6 +196,12 @@ class doctrineDeployTool {
 	
 		if(isset($actions["dropDB"]))
 			$this->dropDatabase();
+			
+		if(isset($actions["undo"]))
+			$this->undo();
+
+		if(isset($actions["update"]))
+			$this->update();
 	}
 	
 	public function performMigrate($create = false) {
@@ -183,13 +218,38 @@ class doctrineDeployTool {
 		$migration = new Doctrine_Migration($this->getMigrationPath());
 		try {
 			$migration->migrate();
+			if($this->migrationStore)
+				$this->copyDir($this->getMigrationPath(),$this->getMigrationStore());
 		} catch(Exception $e) {
-			$this->stdOut("The following error occured during migration ".$e->getMessage());
-			$prompt = false;
-			$this->stdIn($prompt,"Proceed (y/n)?","n");
-			if($prompt != "y")
-				exit(1);
+			if(!$this->ignoreErrors) {
+				$this->stdOut("The following error occured during migration ".$e->getMessage());
+				$prompt = false;
+				$this->stdIn($prompt,"Proceed (y/n)?","n");
+				if($prompt != "y")
+					exit(1);
+			}
 		}
+	}
+	
+	public function undo() {
+		if(!$this->getMigrationStore())
+			$this->error("No migramtionStore defined via --migrationStore!");
+		if($this->isCli())
+			$this->askForDB();
+		$conn = $this->connect();
+		$migration = new Doctrine_Migration($this->getMigrationStore());
+		$curVersion = $migration->getCurrentVersion();
+		$migration->migrate($curVersion-1);
+	}
+	
+	public function update() {
+		if(!$this->getMigrationStore())
+			$this->error("No migrationStore defined via --migrationStore!");
+		if($this->isCli())
+			$this->askForDB();
+		$conn = $this->connect();
+		$migration = new Doctrine_Migration($this->getMigrationStore());
+		$migration->migrate();		
 	}
 	
 	public function dumpData() {
@@ -203,12 +263,10 @@ class doctrineDeployTool {
 		if(!$this->getModelPath()) 
 			$this->error("No path to models defined via --models!");
 
-		
+		$this->loadModels();
 		if(!file_exists($this->getTarget()))
 			mkdir($this->getTarget());
-			
-		Doctrine_Core::loadModels($this->getModelPath()."/generated");
-		Doctrine_Core::loadModels($this->getModelPath());
+
 		Doctrine_Core::dumpData($this->getTarget(),true);
 	}
 	
@@ -226,12 +284,19 @@ class doctrineDeployTool {
 		// $target is dump file
 		if(!$this->getTarget())
 			$this->error("No dump target defined via --target!");
+		$this->loadModels();
+		Doctrine_Core::loadData($this->getTarget());
+	}
+	
+	protected function loadModels() {
 		if(!$this->getModelPath())
 			$this->error("No model path defined via --models!");
-
-		Doctrine_Core::loadModels($this->getModelPath()."/generated");
-		Doctrine_Core::loadModels($this->getModelPath());
-		Doctrine_Core::loadData($this->getTarget());
+		
+		if(!$this->modelsLoaded) {
+			$this->modelsLoaded = true;
+			Doctrine_Core::loadModels($this->getModelPath()."/generated");
+			Doctrine_Core::loadModels($this->getModelPath());
+		}
 	}
 	
 	public function createMigration() {
@@ -247,9 +312,21 @@ class doctrineDeployTool {
 		$conn = $this->connect();
 		if(!file_exists($this->getMigrationPath()))
 			mkdir($this->getMigrationPath());
+			
+		
 		Doctrine_Core::generateMigrationsFromModels($this->getMigrationPath(),$this->getModelPath());
 	}
 	
+	public function createSchemes() {
+		$this->loadModels();
+		Doctrine::generateYamlFromModels($this->getTarget()."/scheme.yml",$this->getModelPath());
+	}
+	
+	
+	/**
+	 * Creates migration classes and exports the complete data to a tar.gz
+	 * package
+	 */
 	protected function exportDB() {
 		if(!$this->getTarget())
 			$this->error("No export target defined via --target!");
@@ -260,58 +337,93 @@ class doctrineDeployTool {
 			$this->error("Target already exists!");	
 		mkdir($this->getTarget());
 		$origTarget = $this->getTarget(); 
+		
 		mkdir($this->getTarget()."/migration");
 		mkdir($this->getTarget()."/dump");
-
+		
 		$this->setMigrationPath($this->getTarget()."/migration");
 		$this->createMigration();
+		$this->createSchemes();
 		
-		$this->setTarget($this->getTarget()."/dump");
-		$this->dumpData();
-		$this->setTarget($origTarget);				
+		if(!$this->noDump) {
+			$this->setTarget($this->getTarget()."/dump");
+			$this->dumpData();
+			$this->setTarget($origTarget);				
+		}
 	
 		system("tar -czf ".$this->getTarget().".tar.gz ".$this->getTarget());
 		system("rm -r ".$this->getTarget());
 	}
+	
 	
 	protected function importDB() {
 		if(!$this->getTarget())
 			$this->error("No export target defined via --target!");
 		if(!$this->getModelPath())
 			$this->error("No model path defined via --models!");
-		
+
 		if(!file_exists($this->getTarget()) || substr($this->getTarget(),-7) != '.tar.gz')
 			$this->error("Wrong dbDump!");
 		// Create temporary directory with content of the export file
-		$tmpDir = "dbDump_tmp".str_shuffle("ab3325ewg");
+
+		flush();
+		$tmpDir = "/tmp/dbDump_tmp".str_shuffle("ab3325ewg");
+		// do the import
+		$path = substr(basename($this->getTarget()),0,-7) ;
+		
 		mkdir($tmpDir);
+		flush();
 		system("tar -zxf ".$this->getTarget()." -C ".$tmpDir);
-		// to the import
-		$path = substr($this->getTarget(),0,-7) ;
-		$this->setMigrationPath($tmpDir."/".$path."/migration");
-		$this->setTarget($tmpDir."/".$path."/dump");
-		$this->performMigrate(true);
-		$this->importData();
+		$tmp = $tmpDir."/".$path;
+		$migrationPath = $tmp."/migration";
+
+		$this->setMigrationPath($migrationPath);
+		$this->performMigrate($this->getCreateDB());
+
+		// Import data only if there are data dumps
+		if(!$this->checkIfEmptyDir($tmpDir."/".$path."/dump")) {
+			$this->stdOut("Importing data dump");
+			$this->setTarget($tmpDir."/".$path."/dump");
+			$this->importData();
+		}		
+
 		// remove directory
 		system("rm -r ".$tmpDir);
+	}
+	protected function copyDir($dir,$target) {
+		if(!file_exists($target)) {
+			if(!mkdir($target))
+				$this->error("Could not create ".$target);
+		}
+		$files = scandir($dir);
+		foreach($files as $file) {
+			if($file == '.' || $file == '..')
+				continue;
+			copy($dir."/".$file,$target."/".$file);
+		}
+		
+	}
+	protected function checkIfEmptyDir($dir) {
+		return(count(scandir($dir)) <=2);		
 	}
 	
 	protected function connect() {
 		if($this->isConnected())
 			return $this->__conn;	
-		$dsn = $this->getDbType()."://".$this->getDbUser().":".$this->getDbPass()."@".$this->getDbHost()."/".$this->getDbName();
+		$dsn = $this->getDbType()."://".$this->getDbUser().":".$this->getDbPass()."@".$this->getDbHost().":".$this->getDbPort()."/".$this->getDbName();
 		$this->__conn = Doctrine_Manager::connection($dsn);
 		return $this->__conn;
 	}
 	
 	protected function askForDB($force = false) {
-		if($this->dbtype && $this->dbuser && $this->dbpass && $this->dbhost && $this->dbname && !$force)
+		if($this->dbtype && $this->dbuser && $this->dbpass && $this->dbhost && $this->dbname && $this->dbport && !$force)
 			return true;
 			
 		$this->stdIn($this->dbtype,"DB Type (mysql): ", "mysql");
 		$this->stdIn($this->dbuser,"DB User: ");
 		$this->stdIn($this->dbpass,"DB Pass: ");
 		$this->stdIn($this->dbhost,"DB Host (localhost): ","localhost");
+		$this->stdIn($this->dbport,"DB Port (3306): ",3306);		
 		$this->stdIn($this->dbname,"DB Name: ");
 	}
 	
@@ -336,6 +448,11 @@ class doctrineDeployTool {
 		if(!$this->isCli() && $this->stdIn)
 			fclose($this->stdIn);	
 	}
+	public function debug() {
+		if($this->isCli())
+			$this->askForDB();
+		$conn = $this->connect();
+	}
 	
 	public function printCliUsage() {
 		$this->stdOut("\nDoctrine deployment tool");
@@ -357,7 +474,7 @@ class doctrineDeployTool {
 		$this->stdOut("\n******************MACRO FUNCTIONS****************************");
 		$this->stdOut("\nexportDB --target [Export folder] --models");
 		$this->stdOut("\t\tCreates both a structure and a datadump for the given models");
-		$this->stdOut("\nimportDB --target [Export file] --models");
+		$this->stdOut("\nimportDB --target [Export file] --models  (--createDB)");
 		$this->stdOut("\t\tImports a database export");
 		$this->stdOut("\n");
 		$this->stdOut("Import and export functions are mutually exclusive");

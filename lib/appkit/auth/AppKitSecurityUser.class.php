@@ -16,7 +16,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @author Marius Hein
 	 */
 	public function doLogin($username, $password, $isHashedPassword=false) {
-		
+
 		// Okay, try to get our provider
 		$provider = AppKitFactories::getInstance()->getFactory('AuthDispatcher');
 		
@@ -40,7 +40,6 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 				
 				// Grant related roles
 				$this->applyDoctrineUserRoles($user);
-
 				// Give notice
 				$this->getContext()->getLoggerManager()
 				->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);

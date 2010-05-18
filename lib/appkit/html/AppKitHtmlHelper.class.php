@@ -9,7 +9,13 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
 	public static function getInstance() {
 		return parent::getInstance('AppKitHtmlHelper');
 	}
-	
+	public static function pageFinished() {
+		echo "<script type='text/javascript'>
+				Ext.onReady(function() {
+					AppKit.util.Layout.doLayout()
+				})
+			</script>";
+	}
 	/**
 	 * Constructor method (short form) for
 	 * @return AppKitHtmlHelper

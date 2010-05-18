@@ -25,5 +25,6 @@ class NsmSession extends BaseNsmSession
 		$this->actAs('Timestampable', $options);
 
 	}
+
 	
 }

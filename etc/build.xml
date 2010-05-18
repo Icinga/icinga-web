@@ -5,45 +5,44 @@
 	<!-- Default tstamp properties -->
 	<tstamp />
 	
-	<!-- Load our default property file -->
-	<property name="properties" value="etc/build.properties" override="false" />
-	<property file="${properties}" />
-	
 	<property environment="env"/>
 	<property name="package" value="${phing.project.name}" override="true" />
 	<property name="srcdir" value="${project.basedir}" override="true" />
 	<property name="builddir" value="${srcdir}/.build" override="false" />
 	
+	<!-- Load our default property file -->
+	<property name="properties" value="etc/build.properties" override="false" />
+	<property file="${properties}" />
+	
 	<target name="hello">
 		<echo msg="Welcome to the icinga-web build system" />
 		<echo msg="Project: ${package}" />
 		<echo msg="Srcdir: ${srcdir}" />
+		<echo msg="${builddir}"/>
 	</target>
 	
 	<target name="prepare">
+
 		<mkdir dir="${builddir}" />
 	</target>
 	
 	<target name="db-prepare" depends="prepare">
+		
 		<property name="db.base" value="${srcdir}/etc/database" />
-		<property name="db.deltas" value="${db.base}/deltas/${db.type}" />
-		<property name="db.deploy" value="${db.base}/deploy/${db.type}" />
-		
-		<property name="db.deploy.deploy_file" value="${db.deploy}/db-deploy.sql" />
-		<property name="db.deploy.undo_file" value="${db.deploy}/db-undo.sql" />
+		<property name="dbUpdateFiles" value="${db.base}/migrations/"/>
+		<property name="dbInitFile" value="${db.base}/dbInit.tar.gz"/>
+		<property name="dbMigrations" value="${db.base}/migrations/"/>
 	</target>
-	
-	<target name="db-create" depends="db-prepare">
-		
-		<property name="db.sql.create" value="CREATE DATABASE ${db.name};" />
-		
+
+	<target name="db-create" depends="db-prepare" >
 		<exec
-			command="${db.mysql.call_global} -e '${db.sql.create}'"
+			command="${db.deployer.call_global} --migrationStore ${dbMigrations} --importDB --createDB --target ${dbInitFile}"
 			dir="${builddir}"
 			passthru="true"
-			checkreturn="false" />
+			checkreturn="false" 
+			/>
 	</target>
-	
+
 	<target name="db-purge-userprefs" depends="db-prepare">
 		
 		<property name="db.sql.truncateprefs" value="truncate table ${db.name}.nsm_user_preference" />
@@ -56,9 +55,7 @@
 		
 	</target>
 	
-	<target name="db-drop" depends="db-prepare">
-		
-		<property name="db.sql.drop" value="DROP DATABASE ${db.name};" />
+	<target name="db-drop" >
 		
 		<input propertyname="db.sql.dropchoice" promptChar="?" validArgs="no,DROPMYDATA">Really drop the database</input>
 
@@ -66,10 +63,11 @@
 			<equals arg1="${db.sql.dropchoice}" arg2="DROPMYDATA" />
 			<then>
 				<exec
-					command="${db.mysql.call_global} -e '${db.sql.drop}'"
+					command="${db.deployer.call_global} --dropDB"
 					dir="${builddir}"
 					passthru="true"
 					checkreturn="false" />
+				
 			</then>
 			
 			<else>
@@ -78,71 +76,28 @@
 		</if>
 	</target>
 	
-	<target name="db-init" depends="db-prepare">
-		<property name="db.init_file" value="${db.base}/deploy/${db.type}/init.sql" />
-		
-		<exec
-			command="${db.mysql.call} &lt; ${db.init_file}"
-			dir="${builddir}"
-			checkreturn="true" />
-	</target>
-	
-	<target name="db-createdeploy" depends="db-prepare">
-		
-		<!-- deploy tasks -->
-		<taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
-		
-		<dbdeploy  
-			url="${db.dsn}"  
-			userid="${db.user}"  
-			password="${db.pass}"  
-			dir="${db.deltas}" 
-			outputfile="${db.deploy.deploy_file}"  
-			undooutputfile="${db.deploy.undo_file}" />
-		
-	</target>
-	
-	<target name="db-deploycurrent" depends="db-prepare">
-	
-		<exec
-			command="${db.mysql.call} &lt; ${db.deploy.deploy_file}"
-			dir="${builddir}"
-			checkreturn="true" />
-		
-	</target>
-	
-	<target name="db-undeploycurrent" depends="db-prepare">
-		
-		<exec
-			command="${db.mysql.call} &lt; ${db.deploy.undo_file}"
-			dir="${builddir}"
-			checkreturn="true" />
-			
-	</target>
-	
 	<target name="db-upgrade" depends="db-prepare">
-		
-		<phingcall target="db-init" />
-		<phingcall target="db-createdeploy" />
-		<phingcall target="db-deploycurrent" />
-		
+		<exec
+		command="${db.deployer.call_global} --migrationStore ${dbMigrations} --update --ignoreErrors"
+		dir="${builddir}"
+		passthru="true"
+		checkreturn="false" />
+	</target>
+
+	<target name="db-downgrade" depends="db-prepare" >
+		<exec
+			command="${db.deployer.call_global} --migrationStore ${dbMigrations} --undo"
+			dir="${builddir}"
+			passthru="true"
+			checkreturn="false" />
 	</target>
 	
-	<target name="db-initialize" depends="db-prepare">
-		
+	<target name="db-initialize">
 		<phingcall target="db-create" />
-		<phingcall target="db-init" />
-		<phingcall target="db-createdeploy" />
-		<phingcall target="db-deploycurrent" />
-		
 	</target>
 	
-	<target name="db-deinitialize" depends="db-prepare">
-			
-		<phingcall target="db-createdeploy" />
-		<phingcall target="db-undeploycurrent" />
-		<phingcall target="db-drop" />
-			
+	<target name="db-deinitialize">
+		<phingcall target="db-drop" />	
 	</target>
 	
 	<target name="testdeps" depends="prepare">
@@ -153,6 +108,7 @@
 			passthru="true" 
 			checkreturn="true" />
 	</target>
+	
 	<target name="scheduler-install">
 		<input propertyname="USER_Icinga" promptChar="?" defaultValue="icinga">Name of icinga-user</input>
 
