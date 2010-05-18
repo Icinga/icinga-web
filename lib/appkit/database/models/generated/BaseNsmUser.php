@@ -93,7 +93,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('user_provider', 'string', 45, array(
+        $this->hasColumn('user_authsrc', 'string', 45, array(
              'type' => 'string',
              'length' => 45,
              'fixed' => false,
@@ -102,7 +102,16 @@ abstract class BaseNsmUser extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('user_apikey', 'string', 64, array(
+        $this->hasColumn('user_authid', 'string', 127, array(
+             'type' => 'string',
+             'length' => 127,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('user_authkey', 'string', 64, array(
              'type' => 'string',
              'length' => 64,
              'fixed' => false,
@@ -151,7 +160,7 @@ abstract class BaseNsmUser extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('NsmPrincipal', array(
+        $this->hasOne('NsmPrincipal', array(
              'local' => 'user_id',
              'foreign' => 'principal_user_id'));
 

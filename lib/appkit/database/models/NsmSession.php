@@ -13,6 +13,13 @@
 class NsmSession extends BaseNsmSession
 {
 
+	public function get($val) {
+		$val = parent::get($val);
+		if(is_resource($val))
+			return stream_get_contents($val);
+		return $val;
+	}
+	
 	public function setUp () {
 
 		parent::setUp();

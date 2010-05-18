@@ -91,11 +91,11 @@ abstract class BaseNsmRole extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('NsmRole', array(
+        $this->hasOne('NsmRole', array(
              'local' => 'role_id',
              'foreign' => 'role_parent'));
 
-        $this->hasMany('NsmPrincipal', array(
+        $this->hasOne('NsmPrincipal', array(
              'local' => 'role_id',
              'foreign' => 'principal_role_id'));
 
