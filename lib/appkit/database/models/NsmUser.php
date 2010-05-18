@@ -183,10 +183,23 @@ class NsmUser extends BaseNsmUser
 	 * @author Marius Hein
 	 */
 	public function delPref($key) {
+		/*
+		 * WORKAROUND: 
+		 * Postgresql doesn't support limit, so we must first select a row, then delete it
+		 */
+		$idToDelete = Doctrine_Query::create()
+			->select("upref_id")
+			->from("NsmUserPreference p")
+			->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
+			->execute()->getFirst();
+		if(is_null($idToDelete))
+			return false;
+			
+		$upref_id = $idToDelete->get('upref_id');
 		$test = Doctrine_Query::create()
 		->delete('NsmUserPreference p')
-		->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
-		->limit(1)
+		->where('p.upref_id=? and p.upref_user_id=? and p.upref_key=?', array($upref_id,$this->user_id, $key))
+		//->limit(1)  -> not supported by postgresql
 		->execute();
 		
 		if ($test) return true;

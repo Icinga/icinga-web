@@ -90,7 +90,7 @@ class AppKitAuthDispatcher extends AppKitFactory implements AppKitEventHandlerIn
 		// Try to load from DB
 		$res = Doctrine_Query::create()
 		->from('NsmUser')
-		->andWhere('user_disabled=? and user_name=?', array(false, $username))
+		->andWhere('user_disabled=? and user_name=?', array(0, $username))
 		->execute();
 		
 		if ($res->count() == 1 && ($user = $res->getFirst()) instanceof NsmUser) {

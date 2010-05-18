@@ -42,9 +42,9 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 	}
 	
 	public function sessionGC($lifetime) {
-	
+		$maxlifetime = time()-$lifetime;
 		$result = Doctrine_Query::create()
-		->andWhere('TIME_TO_SEC(TIMEDIFF(now(), session_created)) > ?', array($lifetime))
+		->andWhere('session_created < ?', array(date("c",$maxlifetime)))
 		->delete('NsmSession')
 		->execute();
 		

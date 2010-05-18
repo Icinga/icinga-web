@@ -3,7 +3,10 @@
 	
 	<ae:configuration>
 		<databases default="icinga_web">
-			
+			<!-- Make icinga web doctrine default -->
+			<database name="default" class="AgaviDoctrineDatabase">
+				<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(db=http://agavi.org/agavi/config/parts/databases/1.0) xpointer(//ae:configurations/ae:configuration/db:databases/db:database[@name='icinga_web']/*)" />
+			</database>
 			<database name="icinga_web" class="AgaviDoctrineDatabase">
 
 				<!--
