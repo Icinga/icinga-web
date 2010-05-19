@@ -89,9 +89,9 @@
 		<validators method="write">
 			<validator name="filters" class="string">
 				<arguments base="filters[]">
-					<argument>field</argument>
-					<argument>method</argument>
-					<argument>filter</argument>
+					<argument>column</argument>
+					<argument>relation</argument>
+					<argument>value</argument>
 				</arguments>
 				<errors>
 					<error>Validation of adv_filter failed</error>
@@ -100,10 +100,10 @@
 			
 			<validator class="inarray" name="validate_method" required="false">
 				<arguments base="filters[]">
-					<argument>method</argument>
+					<argument>relation</argument>
 				</arguments>
 				<errors>
-					<error>Only '&gt;','&lt;','&gt;=','&lt;=','!=','=' and 'like' are allowed as methods</error>
+					<error>Only '&gt;','&lt;','&gt;=','&lt;=','!=','=' and 'like' are allowed as relations</error>
 				</errors>
 				<ae:parameters>
 					<ae:parameter name="type">string</ae:parameter>
@@ -154,6 +154,20 @@
 					<error>Validation of columns failed</error>
 				</errors>
 			</validator>
+			
+			<validator name="limit_start" class="number" required="false">
+				<argument>limit_start</argument>
+				<ae:parameter>
+					<ae:parameter name="min">0</ae:parameter>
+				</ae:parameter>
+			</validator>
+			
+			<validator name="limit" class="number" required="false">
+				<argument>limit</argument>
+				<ae:parameter>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameter>
+			</validator>			
 		</validators>
 		
 	</ae:configuration>

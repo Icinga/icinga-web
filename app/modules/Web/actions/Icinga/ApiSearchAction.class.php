@@ -88,8 +88,8 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 		$advFilter = $rd->getParameter("filters",array());
 				
 		foreach($advFilter as $fl) {
-			$fl["filter"] = str_replace("*","%",$fl["filter"]);
-			$search->setSearchFilter($fl["field"],$fl["filter"],$fl["method"]);	
+			$fl["value"] = str_replace("*","%",$fl["value"]);
+			$search->setSearchFilter($fl["column"],$fl["value"],$fl["relation"]);	
 		}
 	}
 	
