@@ -194,6 +194,17 @@ class NsmUser extends BaseNsmUser
 		}
 	}
 	
+	/**
+	 * Returns the authid to identify the user against the provider
+	 * @return string
+	 */
+	public function getAuthId() {
+		if ($this->user_authid) {
+			return $this->user_authid;
+		}
+		return $this->user_name;
+	}
+	
 	public function getPrefComponent($key, $component_name) {
 		$val = $this->getPrefVal($key);
 		if ($val) {

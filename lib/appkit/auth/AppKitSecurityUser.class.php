@@ -16,18 +16,14 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @author Marius Hein
 	 */
 	public function doLogin($username, $password, $isHashedPassword=false) {
-
-		// Okay, try to get our provider
-		$provider = AppKitFactories::getInstance()->getFactory('AuthDispatcher');
 		
-		// Check the provider for the user existing
-		if (($user = $provider->isUserAvailable($username)) !== null && $user instanceof NsmUser) {
-
-			// Ask our provider if the existing user is authenticated
-			if ($provider->isAuthenticated($username, $password) === true) {
-				
-				// Clear the provider
-				$provider->resetAll();
+		$provider = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
+		
+		try {
+			
+			$user = $provider->doAuthenticate($username, $password);
+			
+			if ($user instanceof NsmUser && $user->user_id>0) {
 				
 				// Start from scratch
 				$this->clearCredentials();
@@ -44,19 +40,19 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 				$this->getContext()->getLoggerManager()
 				->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
 				
-
-				// Return true
 				return true;
+				
 			}
+			
+		}
+		catch (AgaviSecurityException $e) {
+			// Log authentification failure
+			$this->getContext()->getLoggerManager()->log(sprintf('Userlogin by %s failed!', $username), AgaviLogger::ERROR);
+			
+			// Rethrow
+			throw $e;
 		}
 
-		$provider->resetAll();
-		
-		// Throw some warning into 
-		$this->getContext()->getLoggerManager()->log(sprintf('Userlogin by %s failed!', $username), AgaviLogger::ERROR);
-		
-		// And notify the caling component (if they want ...)
-		throw new AppKitSecurityUserException("User '$username' is not known with this credentials");
 	}
 	
 	/**

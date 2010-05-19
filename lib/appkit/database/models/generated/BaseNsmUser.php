@@ -11,8 +11,9 @@
  * @property string $user_firstname
  * @property string $user_password
  * @property string $user_salt
- * @property string $user_provider
- * @property string $user_apikey
+ * @property string $user_authsrc
+ * @property string $user_authid
+ * @property string $user_authkey
  * @property string $user_email
  * @property integer $user_disabled
  * @property timestamp $user_created

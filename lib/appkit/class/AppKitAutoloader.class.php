@@ -3,8 +3,6 @@
 class AppKitAutoloader extends AppKitSingleton {
 	
 	const MAX_TRIES				= 2;
-	const CACHE_FACTORY_NAME	= 'CacheProvider';
-	const CACHE_REGION_NAME		= 'appkit.cache.autoloader';
 	
 	private static $pattern_file = array (
 		'@([\w\d\_\-\.]+)\.(class|interface)\.php@'
@@ -42,14 +40,6 @@ class AppKitAutoloader extends AppKitSingleton {
 		
 		throw new AppKitAutoloaderException("Path '$path' does not exist!");
 		
-	}
-	
-	public function __construct() {
-		parent::__construct();
-		
-		if (is_array($classes = $this->getCache()->getValue('classes', null, self::CACHE_REGION_NAME))) {
-			$this->classes_collected = $classes;
-		}
 	}
 	
 	public function registerAutoloadRequests() {
@@ -108,9 +98,6 @@ class AppKitAutoloader extends AppKitSingleton {
 			}
 		}
 		
-		// Add collected classes to the cache
-		$this->getCache()->setValue('classes', $this->classes_collected, self::CACHE_REGION_NAME);
-		
 		return $this->findClassfile($className, false, $nesting+1);
 	}
 	
@@ -130,20 +117,6 @@ class AppKitAutoloader extends AppKitSingleton {
 		self::$pattern_array[] = $prefix;
 	}
 	
-	/**
-	 * This is our cache object to speedup class loading
-	 * @return AppKitCache
-	 */
-	private function getCache() {
-		static $cache = null;
-		
-		if ($cache === null) {
-			$cache =& AppKitFactories::getInstance()->getFactory(self::CACHE_FACTORY_NAME);
-			$cache->addRegion(self::CACHE_REGION_NAME);
-		}
-		
-		return $cache;
-	}
 }
 
 class AppKitAutoloaderException extends AppKitException { }

@@ -32,9 +32,10 @@ interface AppKitIAuthProvider {
 	 * 
 	 * Enter description here ...
 	 * @param mixed $uid
+	 * @param boolean $authid
 	 * @return array
 	 */
-	public function getUserdata($uid);
+	public function getUserdata($uid, $authid=false);
 }
 
 ?>

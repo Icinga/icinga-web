@@ -10,6 +10,7 @@
 
 		<!-- Auth and auth providers -->
 		<autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
+		<autoload name="AppKitAuthProviderBaseModel">%core.module_dir%/AppKit/lib/auth/AppKitAuthProviderBaseModel.class.php</autoload>
 
 	</ae:configuration>
 </ae:configurations>

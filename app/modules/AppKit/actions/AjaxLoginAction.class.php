@@ -39,7 +39,7 @@ class AppKit_AjaxLoginAction extends AppKitBaseAction
 				$user->doLogin($username, $password);
 				$this->setAttribute('authenticated', true);
 			}
-			catch (AppKitSecurityUserException $e) {
+			catch (AgaviSecurityException $e) {
 				$this->setAttribute('authenticated', false);
 			}
 		

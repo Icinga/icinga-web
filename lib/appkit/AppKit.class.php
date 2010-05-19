@@ -48,9 +48,6 @@ class AppKit {
 		// Some auto generated config settings
 		
 		self::initAutoSettings();
-		// Init our factories (Cache, MessageQueue, Auth, IcingaData, ...)
-		
-		AppKitFactories::loadFactoriesFromConfig('de.icinga.appkit.factories');
 		
 		// Configure and enable the autoloader
 		self::initClassAutoloading();

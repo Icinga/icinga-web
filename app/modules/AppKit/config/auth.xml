@@ -52,6 +52,34 @@
 			<ae:parameter name="auth_enable">true</ae:parameter>
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
 		</ae:parameter>
+		
+		<!-- 
+			* LDAP
+			Just an example
+		-->
+		<!--
+		<ae:parameter name="msad-ldap1">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+			<ae:parameter name="auth_create">true</ae:parameter>
+			<ae:parameter name="auth_update">true</ae:parameter>
+			
+			<ae:parameter name="auth_map">
+				<ae:parameter name="user_firstname">givenName</ae:parameter>
+				<ae:parameter name="user_lastname">sn</ae:parameter>
+				<ae:parameter name="user_email">mail</ae:parameter> 
+			</ae:parameter>
+			
+			<ae:parameter name="ldap_dsn">ldap://ad.icinga.org</ae:parameter>
+			<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=org</ae:parameter>
+			<ae:parameter name="ldap_binddn">ldap@AD.ICINGA.ORG</ae:parameter>
+			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
+			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
+		</ae:parameter>
+		-->
+		
 	</setting>
 
 </settings>
