@@ -1,11 +1,15 @@
 <?php
 
 class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
-	
+	protected $securityDefinition = array();
 	protected $api_mapping_fields = array ();
-	
+
 	public function getApiMappingFields() {
 		return $this->api_mapping_fields;
+	}
+	
+	public function getSecurityDefinition() {
+		return $this->securityDefinition;
 	}
 	
 	protected function setApiMappingFields(array $a) {

@@ -43,12 +43,6 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 				'description'	=> 'HOST_ALIAS',
 				'data1'			=> 'HOST_ADDRESS',
 				'object_status'	=> 'HOST_CURRENT_STATE'
-			),
-			
-			'security'		=> array(
-				'IcingaHostgroup',
-				'IcingaHostCustomVariablePair',
-				'IcingaContactgroup'
 			)
 		),
 		
@@ -63,13 +57,6 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 				'description'	=> 'SERVICE_DISPLAY_NAME',
 				'object_status'	=> 'SERVICE_CURRENT_STATE'
 		
-			),
-			
-			'security'		=> array(
-				'IcingaHostgroup',
-				'IcingaServicegroup',
-				'IcingaServiceCustomVariablePair',
-				'IcingaContactgroup'
 			)
 		),
 		
@@ -81,10 +68,6 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 				'object_name'	=> 'HOSTGROUP_NAME',
 				'object_id'		=> 'HOSTGROUP_OBJECT_ID',
 				'description'	=> 'HOSTGROUP_ALIAS'
-			),
-			
-			'security'		=> array(
-				'IcingaHostgroup'
 			)
 		),
 		
@@ -96,10 +79,6 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 				'object_name'	=> 'SERVICEGROUP_NAME',
 				'object_id'		=> 'SERVICEGROUP_OBJECT_ID',
 				'description'	=> 'SERVICEGROUP_ALIAS'
-			),
-			
-			'security'		=> array(
-				'IcingaServicegroup'
 			)
 		),
 	);
@@ -148,7 +127,6 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 		foreach ($mappings as $mapping) {
 			$md = $this->mapping[$mapping];
 			$fields = $md['fields'];
-			$security = (isset($md['security']) && is_array($md['security'])) ? $md['security'] : array();
 			
 			$search = $this->api->createSearch()
 			->setSearchTarget($md['target'])
@@ -157,7 +135,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 			->setResultType(IcingaApi::RESULT_ARRAY);
 			
 			// Limiting results for security
-			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($security, $search);
+			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 			
 			$result = $search->fetch();
 			

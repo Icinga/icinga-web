@@ -42,24 +42,20 @@ class Cronks_System_StatusSummaryModel extends CronksBaseModel
 		'host'			=> array (
 			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
 			'column'		=> 'HOST_STATE',
-			'security'		=> array ('IcingaHostgroup', 'IcingaHostCustomVariablePair', 'IcingaContactgroup')
 		),
 		'hostchart'		=> array (
 			'target'		=> IcingaApi::TARGET_HOST_STATUS_SUMMARY,
 			'column'		=> 'HOST_STATE',
 			'title'			=> 'Hosts',
-			'security'		=> array ('IcingaHostgroup', 'IcingaHostCustomVariablePair', 'IcingaContactgroup')
 		),
 		'service'		=> array (
 			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
 			'column'		=> 'SERVICE_STATE',
-			'security'		=> array ('IcingaServicegroup', 'IcingaServiceCustomVariablePair', 'IcingaContactgroup')
 		),
 		'servicechart'	=> array (
 			'target'		=> IcingaApi::TARGET_SERVICE_STATUS_SUMMARY,
 			'column'		=> 'SERVICE_STATE',
 			'title'			=> 'Services',
-			'security'		=> array ('IcingaServicegroup', 'IcingaServiceCustomVariablePair', 'IcingaContactgroup')
 		),
 	);
 
@@ -154,7 +150,7 @@ class Cronks_System_StatusSummaryModel extends CronksBaseModel
 				->setSearchTarget($this->dataSources[$this->type]['target']);
 
 			// Adding security principal targets to the query
-			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($this->dataSources[$this->type]['security'], $search);
+			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 			
 			$result = $search->fetch();
 			

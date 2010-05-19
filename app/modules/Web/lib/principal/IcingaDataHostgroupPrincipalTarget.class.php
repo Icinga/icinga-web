@@ -1,6 +1,7 @@
 <?php
 
 class IcingaDataHostgroupPrincipalTarget extends IcingaDataPrincipalTarget {
+
 	
 	public function __construct() {
 		
