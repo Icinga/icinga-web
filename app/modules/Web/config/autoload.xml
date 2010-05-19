@@ -33,5 +33,6 @@
 		<autoload name="IcingaTemplateXmlParser">%core.module_dir%/Web/lib/template/IcingaTemplateXmlParser.class.php</autoload>
 		<autoload name="IcingaTemplateWorker">%core.module_dir%/Web/lib/template/IcingaTemplateWorker.class.php</autoload>
 		<autoload name="IcingaBaseException">%core.module_dir%/Web/lib/IcingaBaseException.class.php</autoload>
+
 	</ae:configuration>
 </ae:configurations>
