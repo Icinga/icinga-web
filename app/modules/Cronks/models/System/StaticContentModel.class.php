@@ -26,6 +26,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel
 	private static $arrayNodes		= array('filter');
 	private static $indexAttributes	= array('id', 'name');
 
+
 	public function initialize (AgaviContext $c, array $p=array()) {
 		parent::initialize($c, $p);
 		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
@@ -334,35 +335,55 @@ class Cronks_System_StaticContentModel extends CronksBaseModel
 			// execute query and fetch result
 			if ($success) {
 				// add access control to query
+<<<<<<< HEAD
 				IcingaPrincipalTargetTool::applyApiSecurityPrincipals($apiSearch);
+=======
+				$secureSearchModels = array(
+					'IcingaHostgroup',
+					'IcingaServicegroup',
+					'IcingaHostCustomVariablePair',
+					'IcingaServiceCustomVariablePair'
+					);
+					IcingaPrincipalTargetTool::applyApiSecurityPrincipals(
+					$secureSearchModels,
+					$apiSearch
+					);
+>>>>>>> 3ba76bd7f4c2508d2e25c5635d03a5b47818fe3f
 
-				// fetch data
-				$apiRes = $apiSearch->fetch()->getAll();
+					// fetch data
+					$apiRes = $apiSearch->fetch()->getAll();
 
-				// set function
-				if (array_key_exists('function', $dataSource)) {
-					$function = $dataSource['function'];
-				} else {
-					$function = false;
-				}
+					// set function
+					if (array_key_exists('function', $dataSource)) {
+						$function = $dataSource['function'];
+					} else {
+						$function = false;
+					}
 
-				// set result data
-				$numResults = count($apiRes);
-				$offset = ($numResults > 0) ? 0 : -1;
+					// set result data
+					$numResults = count($apiRes);
+					$offset = ($numResults > 0) ? 0 : -1;
 
+<<<<<<< HEAD
 				$resultData = array(
 				'data'			=> $apiRes,
 				'function'		=> $function,
 				);
+=======
+					$resultData = array(
+					'data'			=> $apiRes,
+					'function'		=> $function,
+					);
+>>>>>>> 3ba76bd7f4c2508d2e25c5635d03a5b47818fe3f
 
-				if ($templateId !== false) {
-					if (!array_key_exists($templateId, $this->content)) {
-						$this->content[$templateId] = array('data' => array());
-					} elseif (!array_key_exists('data', $this->content[$templateId])) {
-						$this->content[$templateId]['data'] = array();
+					if ($templateId !== false) {
+						if (!array_key_exists($templateId, $this->content)) {
+							$this->content[$templateId] = array('data' => array());
+						} elseif (!array_key_exists('data', $this->content[$templateId])) {
+							$this->content[$templateId]['data'] = array();
+						}
+						$this->content[$templateId]['data'][$dataSourceId] = $resultData;
 					}
-					$this->content[$templateId]['data'][$dataSourceId] = $resultData;
-				}
 			}
 
 		}
