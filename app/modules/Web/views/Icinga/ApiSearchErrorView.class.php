@@ -20,6 +20,7 @@ class Web_Icinga_ApiSearchErrorView extends IcingaWebBaseView
 
 	public function executeXml(AgaviRequestDataHolder $rd) 
 	{
+		
 		echo "<?xml version='1.0' encoding='utf-8'><error><message>Invalid arguments!</message></error>";
 	}
 

@@ -9,9 +9,37 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 	
 	public function executeJson(AgaviRequestDataHolder $rd) 
 	{
-		return json_encode($rd->getParameter("searchResult",null));
+		// just return the entities
+		if(!$rd->getParameter("withMeta",false))
+			return json_encode($rd->getParameter("searchResult",null));
+		
+		// provide meta data for ExtJs stores
+		$searchResult = $rd->getParameter("searchResult");
+		$meta = $this->getMetaDataArray($rd); 
+		
+		$result = array("metaData" => $meta,"result"=>$searchResult);
+		return json_encode($result);
 	}
 
+	protected function getMetaDataArray(AgaviRequestDataHolder $rd) {
+		$idField = $rd->getParameter("idField",false);
+		$columns = $rd->getParameter("columns");
+		if($idField)
+			$metaData["idProperty"] = $idField;
+		else if (count($columns) == 1)
+			$metaData["idProperty"] = $idField = $columns[0];
+		
+		if($idField) {
+			foreach($columns as &$column) {
+				if($column = $idField)
+					$columns[] = array("name"=>"idField","mapping"=>$column);
+			}
+		}
+		$metaData["root"] = "result";
+		$metaData["fields"] =$columns;
+		return $metaData;
+	}
+	
 	public function executeXml(AgaviRequestDataHolder $rd) 
 	{
 		$results = $rd->getParameter("searchResult",null);

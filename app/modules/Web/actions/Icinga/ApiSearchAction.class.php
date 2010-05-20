@@ -115,7 +115,9 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 	}
 	
 	public function setColumns(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
-		$columns = $rd->getParameter("columns",self::$defaultColumns[$search->getSearchTarget()]);
+		if(!$rd->getParameter("columns"))
+			$rd->setParameter("columns",self::$defaultColumns[$search->getSearchTarget()]);
+		$columns = $rd->getParameter("columns");		
 		if(!empty($columns))	
 			$search->setResultColumns($columns);
 	}

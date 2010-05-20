@@ -60,17 +60,7 @@
 				</ae:parameters>
 			</validator>
 			
-			<validator name="columns" class="AppKitSplitValidator" required="false">
-				<argument>columns</argument>
-				<errors>
-					<error>Validation of columns failed</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="split">|</ae:parameter>
-					<ae:parameter name="export">columns</ae:parameter>
-				</ae:parameters>
-			</validator>
-			
+	
 			<validator name="limit_start" class="number" required="false">
 				<argument>limit_start</argument>
 				<ae:parameter>
@@ -85,9 +75,21 @@
 				</ae:parameter>
 			</validator>			
 		</validators>
-		
+		<validators method="read">
+			<validator name="columns" class="AppKitSplitValidator" required="false">
+				<argument>columns</argument>
+				<errors>
+					<error>Validation of columns failed</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">columns</ae:parameter>
+				</ae:parameters>
+			</validator>
+			
+		</validators>
 		<validators method="write">
-			<validator name="filters" class="string">
+			<validator name="filters" class="string" required="false">
 				<arguments base="filters[]">
 					<argument>column</argument>
 					<argument>relation</argument>
@@ -124,50 +126,23 @@
 				<arguments base="groups[]" />
 			</validator>
 			
-			<validator name="order" class="string" required="false">
-				<arguments base="order[]">
-					<argument>column</argument>
-					<argument>dir</argument>
-				</arguments>
-			</validator>
 			
-			<validator name="order_dir" class="inarray" required="false">
-				<arguments base="order[]">
-					<argument>dir</argument>
-				</arguments>
-				<errors>
-					<error>Dir must be either 'desc' or 'asc'</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="type">string</ae:parameter>
-					<ae:parameter name="case">true</ae:parameter>
-					<ae:parameter name="values">
-						<ae:parameter>desc</ae:parameter>
-						<ae:parameter>asc</ae:parameter>
-					</ae:parameter>
-				</ae:parameters>
-			</validator>
-			
-			<validator name="columns" class="string" required="false">
+			<validator name="columns_post" class="string" required="false">
 				<arguments base="columns[]" />
 				<errors>
 					<error>Validation of columns failed</error>
 				</errors>
 			</validator>
-			
-			<validator name="limit_start" class="number" required="false">
-				<argument>limit_start</argument>
-				<ae:parameter>
-					<ae:parameter name="min">0</ae:parameter>
-				</ae:parameter>
+	
+			<!-- Ext JS Meta data parameter -->
+			<validator name="idProperty" class="string" required="false">
+				<arguments base="idProperty" />
 			</validator>
 			
-			<validator name="limit" class="number" required="false">
-				<argument>limit</argument>
-				<ae:parameter>
-					<ae:parameter name="min">1</ae:parameter>
-				</ae:parameter>
-			</validator>			
+			<validator name="withMeta" class="set" required="false">
+				<argument>withMeta</argument>
+
+			</validator>	
 		</validators>
 		
 	</ae:configuration>

@@ -164,36 +164,44 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 	}
 	
 	public function removeUser(NsmUser &$user) {
-		$this->updateUserroles($user,array());
-		$targets = $user->getTargets();
-		foreach($targets as $target) {
-			$vals = $user->getTargetValues($target->get("target_name"));
-			foreach($vals as $value) {
-				$value->delete();
+		try {
+			Doctrine_Manager::connection()->beginTransaction();
+			$this->updateUserroles($user,array());
+			$targets = $user->getTargets();
+			foreach($targets as $target) {
+				$vals = $user->getTargetValues($target->get("target_name"));
+				foreach($vals as $value) {
+					$value->delete();
+				}
 			}
-		}
-		$principals = $user->getPrincipals();
-		if(!$principals instanceof NsmPrincipal) {
-
-			foreach($principals as $pr) {
-				if($pr->NsmPrincipalTarget) {
-					foreach($pr->NsmPrincipalTarget as $pr_t) {
+			$principals = $user->getPrincipals();
+			if(!$principals instanceof NsmPrincipal) {
+				foreach($principals as $pr) {
+					if($pr->NsmPrincipalTarget) {
+						foreach($pr->NsmPrincipalTarget as $pr_t) {
+							$pr_t->delete();
+						}
+					}
+					$pr->delete();
+				}
+			} else {
+				if($principals->NsmPrincipalTarget) {
+					foreach($principals->NsmPrincipalTarget as $pr_t) {
 						$pr_t->delete();
 					}
 				}
-
-				$pr->delete();
-			}
-		} else {
-			if($principals->NsmPrincipalTarget) {
-				foreach($principals->NsmPrincipalTarget as $pr_t) {
-					$pr_t->delete();
-				}
-			}
-			$principals->delete();
-		}	
-		$user->delete();
-		return true;
+	
+				$principals->delete();
+			}	
+			$user->delete();
+			Doctrine_Manager::connection()->commit();
+			
+			return true;
+		} catch(Exception $e) {
+			Doctrine_Manager::connection()->rollback();
+			$this->getContext()->getLoggerManager()->log($e->getMessage());
+			throw($e);
+		}
 	}
 }
 

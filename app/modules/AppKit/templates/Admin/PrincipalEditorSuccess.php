@@ -39,31 +39,50 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	},
 	
 	
+	editorStore : new Ext.data.JsonStore({
+		autoDestroy: false,
+		url: '<? echo $ro->gen("icinga.api")?>'+'/json',
+		autoLoad:false,
+		root: 'result',
+		forceSelection: false,
+		storeId: 'editorStore',
+
+	}),
+	
 	setupEditor: function() {
-		var editor = new Ext.tree.TreeEditor(this);
-		editor.getNode = function() {
+		this.editor = new Ext.tree.TreeEditor(this, new Ext.form.ComboBox({
+				typeAhead:true,
+				triggerAction:'all',
+				store: this.editorStore,
+				valueField: 'idField',
+				forceSelection: false,
+				displayField: 'idField'
+			})
+		);
+		this.editor.getNode = function() {
 			var selModel = this.tree.getSelectionModel();
 			var selected = selModel.getSelectedNodes()[0];
 			return selected;
 		};
 		
-		editor.on("startedit",function(el,val) {
-			var selected = this.getNode();
+		this.editor.on("startedit",function(el,val) {
+			var selected = this.editor.getNode();
+			this.editor.__node = selected;
 			if(!selected || !selected.field)
-				editor.cancelEdit();
+				this.editor.cancelEdit();
 			var prefix = selected.field["name"];
 			
-			this.setValue(val.replace(/\w*?: +/,""));
-		},editor);
+			this.editor.setValue(val.replace(/\w*?: +/,""));
+		},this);
 
-		editor.on("beforecomplete",function(editor,val,startval) {
-			var selected = editor.getNode();
-			if(!selected || !selected.field)
-				editor.cancelEdit();
-			if(val == "")
-				val = startval;
+		this.editor.on("beforecomplete",function(editor,val,startval) {
+
+			var selected = this.editor.getNode();
+			if(!editor.editNode)
+				editor.editNode = selected;
 			selected.field["value"] = val;
 			editor.setValue(selected.field["name"]+": "+val);
+
 		},this);
 	},
 	
@@ -99,12 +118,22 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 		Ext.apply(cfg,defaultObj);
 	},
 
-
+	prepareEditValue: function(node) {
+		// @fixme: yep, looks stupid.
+		AppKit.log(node);
+		var field = node.field.field_description.field;
+		var target = node.field.field_description.target;
+		this.editorStore.removeAll();
+		this.editorStore.setBaseParam("columns[0]",field);
+		this.editorStore.setBaseParam("target",target);
+		this.editorStore.setBaseParam("withMeta",true);
+		return true;
+	},
+	
 	addPrincipal: function(record) {
 		var cat = record.get("type");
 
 		if(!this.categoryNodes[cat]) {
-			AppKit.log("New cat required");
 			var catNode = new Ext.tree.TreeNode({editable:false,text:cat,selectable:true})
 			this.categoryNodes[cat] = this.getRootNode().appendChild(catNode);
 		}
@@ -139,14 +168,13 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 			subNode.field = field;
 			subNode.type = "value";
 
-			subNode.on("beforeclick", function(el) {
-					el.getOwnerTree().getSelectionModel().clearSelections();
-					el.select();
-					return true;	
-			});
+			subNode.on("click", function(el) {
+				this.prepareEditValue(el);
+				return true;
+			}, this);
 			node.appendChild(subNode);
 
-		});
+		},this);
 		return node;
 	},
 	
@@ -166,6 +194,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 		}))
 
 	},
+
 	
 	loadPrincipalsForUser : function(userid) {
 
@@ -234,7 +263,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	},
 	
 	/**
-	 * Reads all principals from the tree am returns the data structures
+	 * Reads all principals from the tree and returns the data structure
 	 * principal = {
 	 * 		principal_target[target_id]{set: [1,1,..] , name :[name1, name2, ...]} 
 	 * 		principal_value[target_id][fieldname][val1,val2,val3..]

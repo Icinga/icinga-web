@@ -13,12 +13,12 @@ class AppKit_RoleAdminModel extends AppKitBaseModel
 	 * @return Doctrine_Query
 	 * @author Marius Hein
 	 */
-	public function getRoleQuery($disabled = false) {
+	public function getRoleQuery($disabled = 0) {
 		$roles = Doctrine_Query::create()
 		->from('NsmRole')
 		->orderBy('role_name ASC');
 		
-		if ($disabled === false) {
+		if ($disabled === 0) {
 			$roles->andWhere('role_disabled = ?', array($disabled));
 		}
 		

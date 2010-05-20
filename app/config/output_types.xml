@@ -37,6 +37,29 @@
 		</output_types>
 	</ae:sandbox>
 	
+	<ae:configuration context="testing">
+
+		<output_types default="simple">
+			<output_type name="simple">
+				<renderers default="php">
+					<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:renderers/*)" />
+				</renderers>
+			<!-- our common layers that all layouts use. only the content layer in here, and empty, but who knows! -->				
+				<layouts default="simple">
+					<layout name="simple">
+							<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:layers/*)" />
+					</layout>
+				</layouts>
+			</output_type>
+			<output_type name="json">
+				<ae:parameter name="http_headers">
+					<!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
+					<ae:parameter name="Content-Type">text/plain; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+		</output_types>
+	</ae:configuration>
+
 	<ae:configuration context="web">
 	
 		<output_types default="html">
@@ -51,8 +74,8 @@
 							<xi:include xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0) xpointer(/ae:configurations/ae:sandbox/ot:layers/*)" />
 							
 							<layer name="decorator">
-							<slot name="head" module="AppKit" action="Widgets.AddHeaderData" />
-							<slot name="head_start" module="AppKit" action="Ext.Header" />
+					 	    <slot name="head" module="AppKit" action="Widgets.AddHeaderData" />
+					 		<slot name="head_start" module="AppKit" action="Ext.Header" />	
 							<ae:parameter name="directory">%core.template_dir%</ae:parameter>
 							<ae:parameter name="template">ExtJsViewport</ae:parameter>
 							</layer>
@@ -92,6 +115,19 @@
 				</ae:parameter>
 			</output_type>
 			
+			<output_type name="xml">
+				<ae:parameter name="http_headers">
+					<!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
+					<ae:parameter name="Content-Type">application/xml; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+			
+			<output_type name="image">
+				<ae:parameter name="http_headers">
+					<!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
+					<ae:parameter name="Content-Type">image/png; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
 		</output_types>
 	
 	</ae:configuration>

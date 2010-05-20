@@ -22,8 +22,14 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel
 			);
 			if($r->target_type == 'icinga') {
 				foreach ($r->getTargetObject()->getFields() as $fname=>$fdesc) {
-					$out[$r->target_name]['fields'][$fname] = $fdesc;
+					$out[$r->target_name]['fields'][$fname] = 
+									array("description"=> $fdesc,
+										  "field"=>$r->getTargetObject()->getApiMappingField($fname),
+										  "target" => $r->getTargetObject()->getDefaultTarget()
+									);
+
 				}
+		
 			}
 			
 		}
@@ -92,7 +98,6 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel
 								
 							}
 						}
-						
 						$principal_target->save();
 					}
 				}
