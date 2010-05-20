@@ -16,7 +16,6 @@
 -->
 
 				<setting name="doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
-				<setting name="doctrine_model_path">%core.module_dir%/AppKit/lib/database/models</setting>
 				
 				<setting name="php_settings">
 					<ae:parameter name="session.gc_probability">3</ae:parameter>

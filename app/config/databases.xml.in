@@ -28,7 +28,7 @@
 				</ae:parameter>
 				
 				<!-- The path to our models -->
-				<ae:parameter name="load_models">%modules.appkit.doctrine_model_path%</ae:parameter>
+				<ae:parameter name="load_models">%core.module_dir%/AppKit/lib/database/models</ae:parameter>
 				
 			</database>
 
