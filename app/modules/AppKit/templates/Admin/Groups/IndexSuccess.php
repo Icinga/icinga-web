@@ -1,51 +1,255 @@
-<?php 
-	/**
-	 * @var Doctrine_Collection
-	 */
-	$collection = $t['group_collection'];
+<script type='text/javascript'>
+Ext.ns("AppKit.groups")
+Ext.onReady(function() {
+	AppKit.groups.structureView = new (Ext.extend(Ext.tree.TreePanel,{
+		constructor: function(cfg) {
+			if(!cfg) 
+				cfg = {}
+			cfg.root = new Ext.tree.TreeNode({
+				hidden:false,
+				editable:false,
+				text:'Root',
+				expanded:true
+			});
+
+			Ext.tree.TreePanel.superclass.constructor.call(this,cfg)
+			this.getSelectionModel().on("selectionchange", function(model,node){
+				if(!node)
+					return true;
+				record = [node.record];
+				AppKit.groups.grid.getSelectionModel().selectRecords(record);
+			})
+		},
+		enableDD: true,
+		autoHeight: true,
+		inserted : {},
+		title: _('Group inheritance'),
+		insertRoles: function() {
+			this.inserted = {};
+			this.getRootNode().removeAll();
+			var noInsert = false;
+			while(!noInsert) {
+				noInsert = true;
+				AppKit.groups.groupList.each(function(record) {
+					var name = record.get("role_name");
+					var id =  record.get("role_id");
+					var parent = record.get("role_parent")
+					if(!this.inserted[id] && (!parent || (parent && this.inserted[parent]))) {
+						var node = new Ext.tree.TreeNode({text: name, iconCls: 'silk-group'});
+						this.inserted[id] = node;
+						node.record = record;
+						node.recordId = id;
+						noInsert = false;
+						if(!parent)
+							this.getRootNode().appendChild(node);
+						else 
+							this.inserted[parent].appendChild(node);
+					}				
+				},this)
+			}
+			this.doLayout();
+			return true;
+		},
+		listeners: {
+			movenode: function(tree,node,oldParent,newParent,index) {
+				if(!node.record)
+					return false;
+				var parentId = newParent.record ? newParent.record.get("role_id") : -1;
+				node.record.set("role_parent",parentId);
+				var groupId = node.record.get("role_id");
+				var params = {};
+				Ext.apply(params,node.record.data);
+				params["ignorePrincipals"] = true;
+				Ext.Ajax.request({
+					url: '<? echo $ro->gen("appkit.admin.groups.alter")?>'+groupId,
+					params: params,
+					success: function() {
+						AppKit.groups.groupList.reload();
+					},
+					scope:this
+			 	});
+			 	
+			},
+			scope:this
+		}
+	}))();
+	
+	AppKit.groups.groupList = new Ext.data.JsonStore({
+		autoDestroy: true,
+		storeId: 'groupListStore',
+		idProperty: 'role_id',
+		autoLoad:true,
+		url: '<? echo $ro->gen("appkit.data.groups")?>',
+		fields: [
+			{name: 'role_id', type:'int'},
+			'role_name',
+			'role_description',
+			{name: 'role_disabled', type:'boolean'},
+			{name: 'role_disabled_icon',type:'boolean' , mapping:'role_disabled', convert: function(v) {
+				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'silk-cancel' : 'silk-accept')+'"></div>';
+			}},
+			{name: 'role_created'},
+			{name: 'role_modified'},
+			{name: 'role_parent'}
+		],
+		listeners: {
+			load: AppKit.groups.structureView.insertRoles.createDelegate(AppKit.groups.structureView),
+			scope: this
+		}
+	})
+	
+	var wnd_groupEditPanel = new (Ext.extend(Ext.Window,{
+		width:600,
+		height: 600,
+		layout:'fit',
+		title: _('Edit group'),
+		closeAction: 'hide',
+		stateful:false,
+		y:0,
+		modal:true,
+		id: 'wnd_groupEditPanel',
+		listeners: {
+			close: AppKit.groups.groupList.reload.createDelegate(AppKit.groups.groupList),
+			hide: AppKit.groups.groupList.reload.createDelegate(AppKit.groups.groupList)
+		},
+		editGroup: function(id,_new) {
+			if(!_new) {
+				this.setTitle(_('Edit group'));
+			}
+			if(!this.uiFormLoaded) {
+				if(!Ext.isDefined(id))  {
+					Ext.Msg.alert(_("Error"),_("Unknown id"));
+					return false;
+				}
+				if(!AppKit.groupEditor) {
+					this.getUpdater().update({
+						url : String.format('<? echo $ro->gen("appkit.admin.groups.edit")?>{0}/{1}',id,'wnd_groupEditPanel'),
+						scripts: true,
+						callback: function(el,success,response,options) {
+							AppKit.groupEditor.editorWidget.instance.insertPresets(id);
+							this.show(document.body);		
+						},
+						scope: this
+					})
+				} else {
+					AppKit.groupEditor.editorWidget.instance.insertPresets(id);
+					this.show(document.body);		
+				}	
+				return true;
+			}
+		},
+		createGroup: function() {
+			this.setTitle(_('Create a new group'));
+			this.editGroup('new',true);
+		}
+	}))();
+	
+	wnd_groupEditPanel.render(document.body);
+	
+	AppKit.groups.grid =   new Ext.grid.GridPanel({
+		autoHeight: true,
+		tools: [{
+			id: 'plus',
+			qtip: _('Add new group'),
+			handler: function() {wnd_groupEditPanel.createGroup();}
+		},{
+			id: 'minus',
+			qtip: _('Remove selected groups'),
+			handler: function(ev,toolEl,panel,tc) {
+				Ext.Msg.confirm(_("Delete groups"),_("Do you really want to delete these groups?"),function(btn) {
+					if(btn != "yes")
+						return false;
+					var selModel = this.getSelectionModel();
+					var selected = selModel.getSelections();
+					var ids = {};
+					Ext.each(selected,function(record) {
+						var currentId = record.get("role_id");
+						var currentName = "group_id["+currentId+"]";
+						ids[currentName] = currentId;
+					},this);
+					
+					Ext.Ajax.request({
+						url: '<?echo $ro->gen("appkit.admin.groups.remove") ?>',
+						success: function() {
+							this.getStore().reload();
+						},
+						scope:this,
+						params: ids
+						
+					});
+				},panel)
+			},
+			scope:this
+		}],		 
+		
+		
+		store : AppKit.groups.groupList,
+		listeners: {
+			rowdblclick: function(grid,index,_e) {
+				var id = AppKit.groups.groupList.getAt(index).get("role_id");
+				wnd_groupEditPanel.editGroup(id);							
+			},
+			scope: this
+		},
+		colModel: new Ext.grid.ColumnModel({
+			defaults: {
+				width:120,
+				sortable:true
+			},
+			columns: [
+				{id:'group_id', header: 'ID', width:75,  dataIndex: 'role_id'},
+				{header: _('groupname'), dataIndex: 'role_name'},
+				{header: _('description'), dataIndex: 'role_description'},
+				{header: _('isActive'), dataIndex: 'role_disabled_icon',width:75}
+			]
+		}),
+		autoScroll:true,
+		title: _('Available groups'),
+
+		width:800,
+		sm: new Ext.grid.RowSelectionModel({
+			listeners: {
+				rowselect: function(model,row,record) {
+					var id = record.get("role_id");
+					AppKit.groups.structureView.inserted[id].ensureVisible();
+					AppKit.groups.structureView.inserted[id].select();
+				}
+			}
+		}),
+		iconCls: 'silk-group'
+	});
+	
+	
 	
 	/**
-	 * @var AppKitDoctrinePager
+	 * Main Layout holding the group-grid
 	 */
-	$pager = $t['group_pager'];
-?>
-
-<p>
-<strong>List of available groups</strong><br />
-<span>(<?php echo AppKitHtmlHelper::Obj()->LinkToRoute('appkit.admin.groups.edit', 'Create a new group', array('id' => 'new'))?>)</span>
-</p>
-
-<div class="round_box" style="max-width: 600px;">
-<div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div>
-<div class="content">
-	Please keep in mind to define privileges for newly created groups because there are just useless.<br />
-	Take a look at <code><?php echo AgaviConfig::get('core.config_dir'); ?>/rbac_definitions.xml</code>
-</div>
-<div class="c4"></div><div class="c3"></div><div class="c2"></div><div class="c1"></div>
-</div>
-
-<?php if ($collection && $collection->count() > 0) { ?>
-<table class="dataTable">
-<tr>
-	<th>&nbsp;</th>
-	<th>Name</th>
-	<th>Description</th>
-	<th>Created</th>
-	<th>&#160;</th>
-</tr>
-
-<?php foreach ($collection as $group) { ?>
-<tr class="<?php echo AppKitHtmlHelper::Obj()->classAlternate('light', 'dark') ?>">
-		<td><?php echo AppKitHtmlHelper::Obj()->LinkImageToRoute('appkit.admin.groups', 'Toggle activity', $group->role_disabled ? 'icons.cross' : 'icons.tick', array('id' => $group->role_id, 'toggleActivity' => true), array(), $rd) ?></td>
-		<td><?php echo $group->role_name; ?></td>
-		<td><?php echo $group->role_description; ?></td>
-		<td><?php echo $group->role_created; ?></td>
-		<td><?php echo AppKitHtmlHelper::Obj()->LinkImageToRoute('appkit.admin.groups.edit', 'Edit group', 'icons.group_edit', array('id' => $group->role_id)); ?></td>
-</tr>
-<?php } ?>
-
-</table>
-
-<?php $pager instanceof AppKitDoctrinePager ? $pager->displayLayout() : null; ?>
-
-<?php } ?>
+	var container = new Ext.Container({
+		layout: 'fit',
+		items: new Ext.Panel({
+			layout: 'border',
+			border:false,
+			defaults: {
+				margins: {top: 10, left: 10, right: 10, bottom: 0},
+			},
+			autoScroll:true,
+			items: [{
+				region:'center',
+				xtype:'panel',
+				layout:'fit',
+				id:'groupListPanel',
+				items: AppKit.groups.grid,
+				autoScroll:true
+			}, {
+				region: 'east',
+				width: 300,
+				layout: 'fit',
+				items: AppKit.groups.structureView
+			}]	
+		})
+	});
+	AppKit.util.Layout.getCenter().add(container);
+	AppKit.util.Layout.doLayout();
+})
+	
+</script>

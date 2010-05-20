@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<setting name="heatmap.config" xmlns="http://agavi.org/agavi/1.0/config">
+	<parameter name="configPath">%core.root_dir%/app/modules/Heatmap/lib/configs/</parameter>
+	<parameter name="entityListName">entityList.xml</parameter>
+
+	<parameter name="js_roomBaseView">%core.root_dir%/app/modules/Heatmap/lib/js/roomEditorBaseView.js</parameter>
+	<parameter name="baseListingJS">%core.root_dir%/app/modules/Heatmap/lib/js/listingBase.js</parameter>
+	<parameter name="imageBaseDir">%core.root_dir%/app/modules/Heatmap/lib/renderer/output/</parameter>
+	<parameter name="imageBaseFont">%core.root_dir%/app/modules/Heatmap/lib/renderer/output/FreeMono.ttf</parameter>
+	<parameter name="imageHeatFont">%core.root_dir%/app/modules/Heatmap/lib/renderer/output/ariblk.ttf</parameter>
+
+	<parameter name="SchedulePath">%core.root_dir%/app/modules/Heatmap/lib/renderer/</parameter>
+	<parameter name="ScheduleClass">RenderJob</parameter>
+</setting>

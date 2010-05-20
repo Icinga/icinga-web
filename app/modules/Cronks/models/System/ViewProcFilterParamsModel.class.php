@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ViewProcFilterParamsModel extends ICINGACronksBaseModel
+class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel
 {
 	
 	/**

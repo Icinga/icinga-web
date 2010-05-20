@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_PrincipalEditorAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -21,6 +21,10 @@ class AppKit_Admin_PrincipalEditorAction extends ICINGAAppKitBaseAction
 	
 	public function isSecure() {
 		return true;
+	}
+	
+	public function execute() {
+		return $this->getDefaultViewName();
 	}
 	
 	public function getCredentials() {

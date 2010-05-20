@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Error404Action extends ICINGAAppKitBaseAction
+class AppKit_Error404Action extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

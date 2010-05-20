@@ -11,7 +11,9 @@
 		<validator class="number" name="principal" required="true">
 				<argument>principal</argument>
 		</validator>
-		
+		<validator class="string" name="container" required="false">
+				<argument>container</argument>
+		</validator>
 		</validators>
 		
 	</ae:configuration>

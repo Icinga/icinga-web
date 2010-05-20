@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_UserAdminModel extends ICINGAAppKitBaseModel
+class AppKit_UserAdminModel extends AppKitBaseModel
 {
 
 	private static $editableAttributes = array (
@@ -17,6 +17,43 @@ class AppKit_UserAdminModel extends ICINGAAppKitBaseModel
 	public function getUsersCollection($disabled=false) {
 		return $this->getUsersQuery($disabled)->execute();
 	}	
+	
+	/**
+	 * Creates a collection NsmUser objects within the range $start and $limit and optionally
+	 * sorts it by param $sort
+	 * @param boolean $disabled
+	 * @param numeric $start
+	 * @param numeric $limit
+	 * @param string $sort
+	 * @param boolean $asc
+	 * 
+	 * @return Doctrine_Collection
+	 * @author Jannis Mosshammer
+	 */
+	public function getUsersCollectionInRange($disabled=false,$start = 0,$limit=25,$sort= null,$asc = true) {
+		$query = Doctrine_Query::create()
+		->from("NsmUser")
+		->limit($limit)
+		->offset($start);
+		if($sort)
+			$query->orderBy($sort." ".($asc ? 'ASC' : 'DESC'));
+		
+		if ($disabled === false) {
+			$query->andWhere('user_disabled=?', array(0));
+		}
+		return $query->execute();
+	}	
+	
+	public function getUserCount($disabled=false) {
+		$query = Doctrine_Query::create()
+			->select("COUNT(u.user_id) count")
+			->from("NsmUser u");
+		if ($disabled === false) {
+			$query->andWhere('user_disabled=?', array(0));
+		}
+		return $query->execute()->getFirst()->get("count");
+		
+	}
 	
 	/**
 	 * Returns a unexecuted query for users
@@ -123,6 +160,39 @@ class AppKit_UserAdminModel extends ICINGAAppKitBaseModel
 	public function toggleActivity(NsmUser &$user) {
 		AppKitDoctrineUtil::toggleRecordValue($user);
 		$user->save();
+		return true;
+	}
+	
+	public function removeUser(NsmUser &$user) {
+		$this->updateUserroles($user,array());
+		$targets = $user->getTargets();
+		foreach($targets as $target) {
+			$vals = $user->getTargetValues($target->get("target_name"));
+			foreach($vals as $value) {
+				$value->delete();
+			}
+		}
+		$principals = $user->getPrincipals();
+		if(!$principals instanceof NsmPrincipal) {
+
+			foreach($principals as $pr) {
+				if($pr->NsmPrincipalTarget) {
+					foreach($pr->NsmPrincipalTarget as $pr_t) {
+						$pr_t->delete();
+					}
+				}
+
+				$pr->delete();
+			}
+		} else {
+			if($principals->NsmPrincipalTarget) {
+				foreach($principals->NsmPrincipalTarget as $pr_t) {
+					$pr_t->delete();
+				}
+			}
+			$principals->delete();
+		}	
+		$user->delete();
 		return true;
 	}
 }

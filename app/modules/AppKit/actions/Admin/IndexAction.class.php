@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_IndexAction extends ICINGAAppKitBaseAction
+class AppKit_Admin_IndexAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -16,6 +16,7 @@ class AppKit_Admin_IndexAction extends ICINGAAppKitBaseAction
 	 */
 	public function getDefaultViewName()
 	{
+		
 		return 'Success';
 	}
 	

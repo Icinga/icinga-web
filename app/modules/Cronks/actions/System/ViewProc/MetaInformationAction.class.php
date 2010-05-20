@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ViewProc_MetaInformationAction extends ICINGACronksBaseAction
+class Cronks_System_ViewProc_MetaInformationAction extends CronksBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

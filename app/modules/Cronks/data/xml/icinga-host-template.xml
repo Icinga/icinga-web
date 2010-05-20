@@ -21,7 +21,7 @@
         
         <!-- These are a dynamic js lib for using specific column renderes within this template -->
         <parameter name="dynamicscript">
-        	<parameter>AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+        	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter>
         
         <!-- 
@@ -288,7 +288,7 @@
                 <parameter name="jsFunc">
                 
                 	<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                	<parameter name="function">columnElement</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -305,7 +305,7 @@
 	                </parameter>
                 
 	                <parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -362,14 +362,14 @@
 
                 <parameter name="jsFunc">
                 	<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                	<parameter name="function">columnImage</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">fam.information</parameter>
+							<parameter name="image">images/fam/information.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Double click here for information</parameter>
@@ -378,7 +378,7 @@
 	                </parameter>
 
 					<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
 	                	<parameter name="function">ajaxClick</parameter>
 
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -423,14 +423,14 @@
                 <parameter name="jsFunc">
                 
                 	<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                	<parameter name="function">columnImage</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">fam.book</parameter>
+							<parameter name="image">images/fam/book.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Double click here for history</parameter>
@@ -439,7 +439,7 @@
 	                </parameter>
 	                
 					<parameter>
-	                	<parameter name="namespace">AppKit.Ext.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -485,7 +485,7 @@
                 </parameter>
                 
 				<parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
 	                <parameter name="function">hostStatus</parameter>
 	                	
 	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -613,7 +613,7 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">AppKit.Ext.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
                 	<parameter name="arguments">
 						<parameter name="length">40</parameter>

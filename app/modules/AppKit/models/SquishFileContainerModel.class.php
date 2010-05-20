@@ -1,42 +1,95 @@
 <?php
 
-class AppKit_SquishFileContainerModel extends ICINGAAppKitBaseModel
-implements AgaviISingletonModel
+class AppKit_SquishFileContainerModel extends AppKitBaseModel
 {
 	const TYPE_JAVASCRIPT	= 'js';
 	const TYPE_STYLESHEET	= 'css';
 	
 	private $files			= array();
+	private $actions		= array();
 	private $type			= null;
+	private $content		= null;
 	
-	public function addFile($type, $file) {
+	/**
+	 * (non-PHPdoc)
+	 * @see lib/agavi/src/model/AgaviModel#initialize($context, $parameters)
+	 */
+	public function initialize(AgaviContext $context, $parameters) {
+		
+		if (array_key_exists('type', $parameters)) {
+			$this->setType($parameters['type']);
+		}
+		
+		parent::initialize($context, $parameters);
+	}
+	
+	/**
+	 * Adding a single file
+	 * @param $file
+	 * @param $type
+	 * @return unknown_type
+	 */
+	public function addFile($file) {
 		if (file_exists($file)) {
-			$this->files[$type][] = $file;
+			$this->files[] = $file;
 			return true;
 		}
 		
 		throw new AppKitModelException('File not found: '. $file);
 	}
 	
-	public function setType($type) {
+	/**
+	 * Adding an array of files
+	 * @param array $files
+	 * @param $type
+	 * @return unknown_type
+	 */
+	public function addFiles(array $files) {
+		$this->files = $files + $this->files; 
+		return true;
+	}
+	
+	/**
+	 * Sets agavi actions
+	 * @param array $actions
+	 * @return unknown_type
+	 */
+	public function setActions(array $actions) {
+		$this->actions = ($actions) + $this->actions;
+		return true;
+	}
+	
+	private function setType($type) {
 		$this->type = $type;
 		return true;
 	}
 	
+	public function getType() {
+		return $this->type;
+	}
+	
 	public function squishContents() {
 		
-		if (is_array($this->files[$this->type])) {
+		$this->content = null;
+		
+		if (is_array($this->files)) {
 			$loader = new AppKitBulkLoader();
 			$loader->setCompress(false);
 			
-			array_walk($this->files[$this->type], array(&$loader, 'setFile'));
+			array_walk($this->files, array(&$loader, 'setFile'));
 			
-			return $loader->getContent();
+			$this->content .= $loader->getContent();
 		}
 		
 		return null;
-		
-		
+	}
+	
+	public function getContent() {
+		return $this->content;
+	}
+	
+	public function getActions() {
+		return $this->actions;
 	}
 }
 

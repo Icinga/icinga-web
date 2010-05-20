@@ -1,12 +1,11 @@
 <?php
 
-class AppKit_Admin_Users_IndexSuccessView extends ICINGAAppKitBaseView
+class AppKit_Admin_Users_IndexSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);
 
-		$this->setAttribute('title', 'Users');
 		
 		$useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
 		

@@ -53,5 +53,4 @@ AgaviConfig::set('core.root_dir', dirname(dirname(__FILE__)));
 // |  - core.module_dir   (defaults to "<core.app_dir>/modules")               |
 // |  - core.template_dir (defaults to "<core.app_dir>/templates")             |
 // +---------------------------------------------------------------------------+
-
 ?>

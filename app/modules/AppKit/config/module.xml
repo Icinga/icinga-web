@@ -14,7 +14,42 @@
 				<setting name="update_url" />
 				<setting name="description">An example module</setting>
 -->
+
+				<setting name="doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
+				
+				<setting name="php_settings">
+					<ae:parameter name="session.gc_probability">3</ae:parameter>
+					<ae:parameter name="session.gc_divisor">100</ae:parameter>
+					<ae:parameter name="session.gc_maxlifetime">86400</ae:parameter>
+					
+					<!-- Set the default timezone, this is missing on some systems -->
+					<ae:parameter name="date.timezone">GMT</ae:parameter>
+				</setting>
+				
+				<!-- 
+					Menu extender
+					* Register classes to change the navigation
+				-->
+				<setting name="menu_extender">
+					<ae:parameter>IcingaMenuExtender</ae:parameter>
+				</setting>
+			
+				<!-- 
+					Eventhandling
+					* Code-less, predefined events to register tasks
+				-->
+				<setting name="custom_events">
+					<!-- This is our root menu (If all ready, the sub menues will be created -->  
+					<ae:parameter name="AppKitMenuEventDistributor">
+						<ae:parameter name="context">web</ae:parameter>
+						<ae:parameter name="event">appkit.menu</ae:parameter>
+						<ae:parameter name="class">AppKitMenuCreator</ae:parameter>
+					</ae:parameter>
+				</setting>
+				
 			</settings>
+			
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
 		</module>
 		
 	</ae:configuration>

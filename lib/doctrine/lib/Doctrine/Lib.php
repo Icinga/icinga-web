@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Lib.php 5798 2009-06-02 15:10:46Z piccoloprincipe $
+ *  $Id: Lib.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -25,9 +25,9 @@
  * @package     Doctrine
  * @subpackage  Lib
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 5798 $
+ * @version     $Revision: 7490 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Lib
@@ -76,11 +76,11 @@ class Doctrine_Lib
     {
         $r[] = '<pre>';
         $r[] = 'Component  : ' . $record->getTable()->getComponentName();
-        $r[] = 'ID         : ' . Doctrine::dump($record->identifier());
+        $r[] = 'ID         : ' . Doctrine_Core::dump($record->identifier());
         $r[] = 'References : ' . count($record->getReferences());
         $r[] = 'State      : ' . Doctrine_Lib::getRecordStateAsString($record->state());
         $r[] = 'OID        : ' . $record->getOID();
-        $r[] = 'data       : ' . Doctrine::dump($record->getData(), false);
+        $r[] = 'data       : ' . Doctrine_Core::dump($record->getData(), false);
         $r[] = '</pre>';
 
         return implode("\n",$r)."<br />";
@@ -126,7 +126,7 @@ class Doctrine_Lib
         $r[] = 'State               : ' . Doctrine_Lib::getConnectionStateAsString($connection->transaction->getState());
         $r[] = 'Open Transactions   : ' . $connection->transaction->getTransactionLevel();
         $r[] = 'Table in memory     : ' . $connection->count();
-        $r[] = 'Driver name         : ' . $connection->getAttribute(Doctrine::ATTR_DRIVER_NAME);
+        $r[] = 'Driver name         : ' . $connection->getAttribute(Doctrine_Core::ATTR_DRIVER_NAME);
         $r[] = "</pre>";
         
         return implode("\n",$r)."<br>";
@@ -195,8 +195,8 @@ class Doctrine_Lib
     {
         $r[] = "<pre>";
         $r[] = get_class($collection);
-        $r[] = 'data : ' . Doctrine::dump($collection->getData(), false);
-        //$r[] = 'snapshot : ' . Doctrine::dump($collection->getSnapshot());
+        $r[] = 'data : ' . Doctrine_Core::dump($collection->getData(), false);
+        //$r[] = 'snapshot : ' . Doctrine_Core::dump($collection->getSnapshot());
         $r[] = "</pre>";
         
         return implode("\n",$r);

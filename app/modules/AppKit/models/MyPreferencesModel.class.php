@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_MyPreferencesModel extends ICINGAAppKitBaseModel implements AgaviISingletonModel
+class AppKit_MyPreferencesModel extends AppKitBaseModel implements AgaviISingletonModel
 {
 
 	private $editablePreferences	= array();

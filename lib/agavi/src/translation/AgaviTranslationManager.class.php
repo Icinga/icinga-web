@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviTranslationManager.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviTranslationManager.class.php 4423 2010-02-17 12:19:44Z dominik $
  */
 class AgaviTranslationManager
 {
@@ -251,7 +251,7 @@ class AgaviTranslationManager
 	 */
 	public function getDefaultLocale()
 	{
-		$this->getLocale($this->defaultLocale);
+		$this->getLocale($this->defaultLocaleIdentifier);
 	}
 
 	/**

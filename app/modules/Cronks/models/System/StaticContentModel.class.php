@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
+class Cronks_System_StaticContentModel extends CronksBaseModel
 {
 
 	/*
@@ -26,14 +26,9 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 	private static $arrayNodes		= array('filter');
 	private static $indexAttributes	= array('id', 'name');
 
-	/**
-	 * class constructor
-	 * @param	void
-	 * @return	Cronks_System_StaticContentModel
-	 * @author	Christian Doebler <christian.doebler@netways.de>
-	 */
-	public function __construct () {
-		$this->api = AppKitFactories::getInstance()->getFactory('IcingaData');
+	public function initialize (AgaviContext $c, array $p=array()) {
+		parent::initialize($c, $p);
+		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 	}
 
 	/**
@@ -271,7 +266,10 @@ class Cronks_System_StaticContentModel extends ICINGACronksBaseModel
 
 		$dataSource = $this->xmlData['datasources'][$dataSourceId];
 		
-		$apiSearch = $this->api->API()->createSearch()->setResultType(IcingaApi::RESULT_ARRAY);
+		$apiSearch = $this->api->getConnection()
+		->createSearch()
+		->setResultType(IcingaApi::RESULT_ARRAY);
+		
 		if (!array_key_exists('target', $dataSource)) {
 
 			throw new Cronks_System_StaticContentModelException('fetchTemplateValues(): no target in datasource!');

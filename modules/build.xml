@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ModuleInstaller" default="usage">
+	<target name="usage">
+		<echo>
+*************************  Icinga Module Toolkit   ************************ 
+Available targets: 
+	- install-module:	Installs the current module
+	- deploy-module: 	Deploys a module for distribution
+	- remove-module:	Removes a module from this system
+	- rollback:		Restores files that we're altered by install-module
+	
+	- export-cronk:		Exports a cronk for distribution
+	- import-cronk:		Imports a cronk
+***************************************************************************
+		</echo>
+	</target>
+	<target name="install-module">
+		<!-- define tasks -->
+		
+		<taskdef name="actionQueue" classname="bin.actionQueueTask" />
+		<typedef name="icingaManifest" classname="bin.icingaManifest" />
+		<taskdef name="moduleMetaPrinter" classname="bin.moduleMetaPrinterTask"/>	
+		<taskdef name="dependencyChecker" classname="bin.dependencyCheckerTask" />
+		<taskdef name="manifestDependencyChecker" classname="bin.dependencyCheckerTask"/>
+		<taskdef name="xmlMergerChain" classname="bin.xmlMergerChainTask" />
+		
+		<actionQueue path="./"/>
+		<!--  load defaults -->
+		<property file="build.properties" />
+
+		<echo msg="Module installation wizard for Icinga-web" />
+		<icingaManifest id="manifest" file="manifest.xml" />
+		<moduleMetaPrinter refid="manifest" />
+		<!--  Confirmations -->
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to install this module?</input>
+		<if>
+			<equals arg1="${confirm}" arg2="n" />
+			<then>
+				<fail message="Installation aborted by user." />
+ 			</then>
+		</if>
+		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="${icinga.path}">Location of icinga-web</input>
+
+		<!--  Check dependencies -->		
+		<echo msg="Checking dependencies..." />
+		<manifestDependencyChecker refid="manifest"/>
+		
+		<!-- Install module and additional -->		
+		<echo>Installing to ${PATH_Icinga}</echo>
+		<copy todir="${PATH_Icinga}">
+			<filterchain>
+				<filterreader classname="bin.saveCopyFilter"/>
+			</filterchain>
+			<fileset dir="src">
+				<exclude name="snippets.dat"></exclude>
+				<exclude name="routes.xml"></exclude>
+				<include name="**" />
+			</fileset>
+		</copy>	
+		
+		<!-- install meta info for xml-removal -->
+		<copy todir="${PATH_Icinga}/app/modules/${MODULE_Name}/.meta/xml">
+			<fileset dir="etc/xml">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		<echo>Configuring XML files</echo>
+		<xmlMergerChain  folder="etc/xml/"/>
+		
+		<!--  Doctrine models -->
+		<echo>Copying Doctrine-Models</echo>
+		<copy todir="${PATH_Icinga}/${PATH_AppKit}/database/models/">
+			<fileset dir="etc/doctrine">
+				<include name="**" />
+			</fileset>
+		</copy>
+		
+		<echo>Inserting snippets</echo>
+		<!-- Inject snippets -->
+		<taskdef name="snippetInjector" classname="bin.snippetInjectorTask" />
+		<snippetInjector file="src/snippets.dat" />
+		
+		<!-- Set up Doctrine -->
+		<taskdef name="doctrineDBBuilder" classname="bin.doctrineDBBuilderTask" />
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validargs="y,n">Create tables</input>
+		<if>
+			<equals arg1="${confirm}" arg2="y" />
+			<then>
+				<doctrineDBBuilder models="etc/doctrine" action="create" ini="db.ini"/>
+ 			</then>
+		</if>
+		
+		<!--  Run SQL -->
+		<taskdef name="sqlRunner" classname="bin.sqlRunnerTask" />
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validargs="y,n">Process sql queries?</input>
+		<if>
+			<equals arg1="${confirm}" arg2="y" />
+			<then>
+				<sqlRunner files="etc/sql" ini="db.ini"/>
+ 			</then>
+		</if>		
+		
+		<property name="buildAdditional" value="false" />
+		<available file="additional.xml" property="buildAdditional" value="true" />
+		<if>
+			<equals arg1="${buildAdditional}" arg2="1" />
+			<then>
+				<phing phingfile="additional.xml" inheritAll="true" />
+			</then>
+		</if>
+		
+		<echo>Clearing cache</echo>
+		<delete dir="${PATH_Icinga}/app/cache/config" />	
+		
+		<property name="buildAdditional" value="false" />
+		<available file="additional.xml" property="buildAdditional" value="true" />
+		<if>
+			<equals arg1="${buildAdditional}" arg2="1" />
+			<then>
+				<phing phingfile="additional.xml" inheritAll="true" />
+			</then>
+		</if>
+	</target>
+
+	
+	<!-- 
+		Target for deploying modules
+	 -->
+	<target name="deploy-module">
+		<!-- define tasks -->
+		<typedef name="icingaManifest" classname="bin.icingaManifest" />
+		<taskdef name="fileSelector" classname="bin.fileSelectorTask"/>	
+		<taskdef name="snippetExtractor" classname="bin.snippetExtractorTask" />
+		<taskdef name="xmlExtractor" classname="bin.xmlExtractorTask" />
+		<!--  load defaults -->
+		<property file="build.properties" />
+		
+		<!--  fetch manifest -->	
+		<input propertyname="coreDir" >Module directory (containing manifest.xml) : </input>
+		<echo msg="Searching for manifest file at : ${coreDir}" />
+		<icingaManifest id="manifest" file="${coreDir}/manifest.xml" />
+		
+		<!-- fetch files -->
+		<fileSelector refid="manifest" source="Module" propertyName="module"/>
+	 	<fileSelector refid="manifest" source="Doctrine" propertyName="models"/>
+		<fileSelector refid="manifest" source="SQL" propertyName="sqlRoutines"/>
+
+		<!-- Copy agavi module and config to src -->
+		<phingcall target="structure-create" />
+		
+		<echo>Saving module Data...</echo>		
+		<copy todir="${MODULE_Name}/src">
+			<fileset refid="module" />
+			<mapper classname="bin.manifestMapper" from="manifest"/>
+		</copy>
+		
+		<echo>Saving doctrine Models...</echo>	
+		<copy todir="${MODULE_Name}/etc/doctrine">
+			<fileset refid="models" />
+			<mapper classname="bin.manifestMapper" from="manifest"/>
+		</copy>
+		
+		<echo>Saving SQL-routines...</echo>	
+		<copy todir="${MODULE_Name}/etc/sql">
+			<fileset refid="sqlRoutines" />
+			<mapper classname="bin.manifestMapper" from="manifest"/>
+		</copy>
+		
+		<echo>Extracting snippets...</echo>
+		<snippetExtractor refid="manifest" toFile="${MODULE_Name}/src/snippets.dat" />
+		
+		<!--  Extract XML entries -->
+		<xmlExtractor refid="manifest" path="${MODULE_Name}/etc/xml" />
+		
+		<!-- Creating Manifest -->
+		<copy file="${coreDir}/manifest.xml" tofile="${MODULE_Name}/manifest.xml"/>
+		
+		<!-- Deploying installer -->
+		<copy file="build.xml" tofile="${MODULE_Name}/build.xml"/>
+		<copy todir="${MODULE_Name}/bin">
+			<fileset dir="./bin">
+				<include name="**" />
+			</fileset>
+		</copy>
+		<copy file="etc/db.ini" todir="${MODULE_Name}/" />
+		<copy file="build.properties" todir="${MODULE_Name}/" />
+		<!-- Packing -->
+		<tar basedir="${MODULE_Name}/." destfile="${MODULE_Name}_module.tar" compression="gzip" />
+		
+	</target>
+	
+	<!-- 
+		Module deletion wizard 
+	
+	-->
+	<target name="remove-module">
+		<typedef name="icingaManifest" classname="bin.icingaManifest" />
+		<taskdef name="xmlRemover" classname="bin.xmlRemoverTask" />
+		<taskdef name="fileSelector" classname="bin.fileSelectorTask"/>
+		<taskdef name="moduleMetaPrinter" classname="bin.moduleMetaPrinterTask"/>		
+		<property file="build.properties" />
+		
+		<echo>Module Deletion Wizard</echo>
+		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="${icinga.path}">Location of icinga-web</input>
+		<input propertyname="MODULE_Name" promptChar="?">Module name</input>
+
+		<!--
+				Check if module exists and let the user confirm the removal
+		 -->
+		<property name="module_exists" value="false"></property>
+		<available file="${PATH_Icinga}/app/modules/${MODULE_Name}/manifest.xml" property="module_exists" value="true"/>
+		<if>
+			<equals arg1="${module_exists}" arg2="1"/>
+			<then>
+				<icingaManifest id="manifest" file="${PATH_Icinga}/app/modules/${MODULE_Name}/manifest.xml" />
+				<moduleMetaPrinter refid="manifest" />
+				<!--  Confirmations -->
+				<input propertyname="confirm" promptChar="?" defaultValue="y" validArgs="y,n">Do you want to deinstall this module?</input>
+				<if>
+					<equals arg1="${confirm}" arg2="n" />
+					<then>
+						<fail message="Deinstallation aborted by user." />
+		 			</then>
+				</if>
+			</then>
+			<else>
+				<fail message="${module_exists} Module does not exist. No Manifest found at ${PATH_Icinga}/app/modules/${MODULE_Name}/manifest.xml" />
+			</else>
+		</if>
+
+		<!-- 
+			remove XML entries
+		 -->
+		<xmlRemover refid="manifest" path="${PATH_Icinga}/app/modules/${MODULE_Name}/.meta/xml"></xmlRemover>
+
+		<!-- 
+			Remove Database entries			
+		 -->
+		<taskdef name="doctrineDBBuilder" classname="bin.doctrineDBBuilderTask" />
+		<input propertyname="confirm" promptChar="?" defaultValue="y" validargs="y,n">Remove tables</input>
+		<if>
+			<equals arg1="${confirm}" arg2="y" />
+			<then>
+				<echo>Removing tables</echo>
+				<doctrineDBBuilder models="${PATH_Icinga}/app/modules/${MODULE_Name}/lib/.models.cfg" action="delete" ini="db.ini"/>
+ 			</then>
+		</if>
+		
+		<!-- 
+			Finally remove files
+		 -->
+		<echo>Removing files</echo>
+		<delete dir="${PATH_Icinga}/app/modules/${MODULE_Name}" />
+	
+		<fileSelector refid="manifest" source="Module" propertyName="module"/>
+		<delete>
+			<fileset refid="module"/>
+		</delete>		
+		
+		<echo>Clearing cache</echo>
+		<delete dir="${PATH_Icinga}/app/cache/config" />
+	</target>
+
+	<target name="export-cronk">
+		<taskdef name="settingsExtractor" classname="bin.settingsExtractorTask"/>
+		<taskdef name="cronkMetaExtractor" classname="bin.cronkMetaExtractorTask"/>
+
+		<echo>Cronk-export wizard</echo>
+		<input propertyname="cronkName" promptChar="?">Name of the cronk</input>
+		
+		<phingcall target="cronk-structure-create" />
+		
+		<settingsExtractor file="app/modules/Cronks/config/cronks.xml" useAbsolute="true" setting="" parameter="${cronkName}" toFile="${cronkName}/src/cronks"></settingsExtractor>
+		<cronkMetaExtractor file="${cronkName}/src/cronks.xml"></cronkMetaExtractor>		
+		
+		<echo>Saving Action</echo>	
+		<copy todir="${cronkName}/src/">
+			<fileset refid="cronkAction" />
+		</copy>
+		
+		<echo>Saving templates</echo>	
+		<copy todir="${cronkName}/xml/">
+			<fileset refid="cronkTemplates" />
+		</copy>
+		
+		<copy file="build.xml" tofile="${cronkName}/build.xml">
+			<filterchain>
+				<replacetokens begintoken="##" endtoken="##">
+					<token key="CRONKNAME" value="${cronkName}" />		
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy todir="${cronkName}/bin">
+			<fileset dir="./bin">
+				<include name="cronkMetaExtractorTask.php" />
+				<include name="settingsInjectorTask.php" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="import-cronk">
+		<taskdef name="settingsInjector" classname="bin.settingsInjectorTask"/>
+		<taskdef name="cronkMetaExtractor" classname="bin.cronkMetaExtractorTask"/>
+
+		<echo>Cronk-import wizard</echo>
+		<input propertyname="PATH_Icinga" promptChar="?" defaultValue="/usr/local/icinga-web">Location of icinga-web</input>
+		
+		<settingsInjector source="src/cronks.xml" cfg="${PATH_Icinga}/app/modules/Cronks/config/cronks.xml" settingsToImport="/##CRONKNAME##"/>		
+		<copy todir="${PATH_Icinga}/app/modules/Cronks/">
+			<fileset dir="./src">
+				<include name="**"/>
+				<exclude name="cronks.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${PATH_Icinga}/app/data/xml/">
+			<fileset dir="./xml">
+				<include name="*.xml"></include>
+			</fileset>
+		</copy>
+	</target>
+	
+	
+	<target name="cronk-structure-create" >
+		<mkdir dir="${cronkName}"/>
+		<mkdir dir="${cronkName}/src"/>	
+		<mkdir dir="${cronkName}/xml"/>	
+	</target>
+	
+	<target name="structure-create">
+		<mkdir dir="${MODULE_Name}"/>
+		<mkdir dir="${MODULE_Name}/src"/>
+		<mkdir dir="${MODULE_Name}/doc"/>
+		<mkdir dir="${MODULE_Name}/etc/"/>
+		<mkdir dir="${MODULE_Name}/etc/doctrine"/>
+		<mkdir dir="${MODULE_Name}/etc/sql"/>
+		<mkdir dir="${MODULE_Name}/etc/xml"/>
+	</target>
+		
+	<target name="rollback">
+		<taskdef name="actionQueue" classname="bin.actionQueueTask" />
+		<actionQueue path="./" restore="true"/>
+	</target>
+</project>

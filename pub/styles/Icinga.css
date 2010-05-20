@@ -1,8 +1,32 @@
+html {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 7pt;	
+}
+
+img { border: 0px }
+
+a {
+	color: #666666;
+}
+
 h1 { font-size: 13pt; }
 
 h2 { font-size: 12pt; margin: 10px 0 15px 0; }
 
 h3 { font-size: 11pt; font-weight: normal; margin: 10px 0 15px 0; }
+
+strong {
+	font-weight: bolder;
+}
+
+em {
+	font-style: italic;
+}
 
 p.legal {
 	font-size: 0.8em;
@@ -10,6 +34,20 @@ p.legal {
 }
 
 p { margin: 15px auto; }
+
+table td, table th {
+	vertical-align: top;
+	margin: 0 0;
+	padding: 0 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+#content {
+	padding: 5px 5px;
+}
 
 /** MISC **/
 
@@ -113,22 +151,51 @@ div.cronk-data-view .x-view-selected .thumb{
 
 /** JS Message stack **/
 
-div.ext-msg-message {
+div.growl-msg-message {
 	position: relative;
 	z-index: 999;	
 }
 
-div#ext-msg-stack {
+div.growl-msg-message .head {
+	font-size: 10pt;
+	font-weight: bolder;
+}
+
+div#growl-msg-stack {
 	position:absolute;
     /* left: 35%;
     top: 10px; */
     top: 35%;
-    width: 250px;
+    width: 300px;
     z-index: 20000;
 }
-	
 
-/** THE STATUS **/
+/** Icinga object icons **/
+.icinga-object-host {
+	background-image: url(../images/fam/server.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.icinga-object-service {
+	background-image: url(../images/fam/cog.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.icinga-object-hostgroup {
+	background-image: url(../images/fam/server_database.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.icinga-object-servicegroup {
+	background-image: url(../images/fam/database_gear.png) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/** Icinga status classes **/
 
 div.icinga-link {
 	cursor: pointer;
@@ -352,6 +419,10 @@ table.icinga-attribute-table td.val {
 	width: 220px;
 }
 
+.fancytextfield-box .x-box-mc {
+	padding: 0 4px;
+}
+
 .fancytextfield-container {
 	width: 200px;
 	height: 20px;
@@ -411,6 +482,8 @@ table.icinga-attribute-table td.val {
 	background: none;
 }
 
+.icinga-icon-dot { background-image: url(../images/icinga/idot-icon.png) !important; background-repeat: no-repeat; }
+
 /** ExtJS grid classes **/
 .x-icinga-grid-link {
 	color: #0000ff;
@@ -435,7 +508,30 @@ table.icinga-attribute-table td.val {
 
 /** Static content container **/
 .static-content-container {
-	font-size: 11pt;
 	background-color: #ffffff;
 }
+
+.static-content-container table td {
+	margin: 4px 4px;
+	padding: 4px 4px;
+}
+
 /* EOF */
+
+
+div.role_user_wrap {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid grey;
+    margin:2px;
+    float:left;
+    padding:5px;
+    background:#efefef;
+    cursor:pointer;
+}
+div.role_user_icon {
+	width:25px;
+	height:25px;
+	float:left;
+}
+

@@ -314,7 +314,7 @@
 				</table>
 				<script type="text/javascript">
 					Ext.onReady(function() {
-						var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+						var l = Cronk.util.InterGridUtil.clickGridLink;
 						var s = {OK:0,WARNING:1,CRITICAL:2,UNKNOWN:3};
 						var h = {UP:0,DOWN:1,UNREACHABLE:2};
 						var r = {
@@ -394,7 +394,7 @@
 				</table>
 				<script type="text/javascript">
 					Ext.onReady(function() {
-						var l = AppKit.Ext.util.InterGridUtil.clickGridLink;
+						var l = Cronk.util.InterGridUtil.clickGridLink;
 						var s = {OK:0,WARNING:1,CRITICAL:2,UNKNOWN:3};
 						var h = {UP:0,DOWN:1,UNREACHABLE:2};
 						var r = {

@@ -38,7 +38,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviBaseFileValidator.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviBaseFileValidator.class.php 4427 2010-02-23 17:22:29Z david $
  */
 abstract class AgaviBaseFileValidator extends AgaviValidator
 {
@@ -91,12 +91,21 @@ abstract class AgaviBaseFileValidator extends AgaviValidator
 			}
 			
 			if($this->hasParameter('extension')) {
-				$fileinfo = pathinfo($file->getName());
-				$ext = isset($fileinfo['extension']) ? $fileinfo['extension'] : '';
-				if(!in_array($ext, explode(' ', $this->getParameter('extension')))) {
-					$this->throwError('extension');
-					return false;
+				$fileinfo = pathinfo($file->getName()) + array('extension' => '');
+				
+				$extensions = $this->getParameter('extension', array());
+				if(!is_array($extensions)) {
+					$extensions = explode(' ', $this->getParameter('extension'));
 				}
+				
+				foreach($extensions as $extension) {
+					if(strtolower($extension) == strtolower($fileinfo['extension'])) {
+						return true;
+					}
+				}
+				
+				$this->throwError('extension');
+				return false;
 			}
 		}
 		

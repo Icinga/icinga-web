@@ -21,15 +21,15 @@ Agavi::bootstrap('development');
 // Setting the running context to web ...
 AgaviConfig::set('core.default_context', 'web');
 
-// Initialize the appkit framework
-AppKit::bootstrap();
+AgaviController::initializeModule('Web');
+AgaviController::initializeModule('AppKit');
+AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
 
 // +---------------------------------------------------------------------------+
 // | Call the controller's dispatch method on the default context              |
 // +---------------------------------------------------------------------------+
 
 // AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.dispatch', 'Agavi is starting its container');
-
 AgaviContext::getInstance('web')->getController()->dispatch();
 
 // AppKitEventDispatcher::getInstance()->triggerSimpleEvent('agavi.afterdispatch', 'Agavi stoped, response is served');

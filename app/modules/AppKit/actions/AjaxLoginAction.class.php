@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_AjaxLoginAction extends ICINGAAppKitBaseAction
+class AppKit_AjaxLoginAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -39,7 +39,7 @@ class AppKit_AjaxLoginAction extends ICINGAAppKitBaseAction
 				$user->doLogin($username, $password);
 				$this->setAttribute('authenticated', true);
 			}
-			catch (AppKitSecurityUserException $e) {
+			catch (AgaviSecurityException $e) {
 				$this->setAttribute('authenticated', false);
 			}
 		

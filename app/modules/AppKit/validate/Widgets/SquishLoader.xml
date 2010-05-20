@@ -8,18 +8,6 @@
 		
 		<validators>
 		
-			<validator class="string" name="type">
-				<arguments>
-					<argument>type</argument>
-				</arguments>
-				<errors>
-					<error>The type is too long</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="max">255</ae:parameter>
-				</ae:parameters>
-			</validator>
-		
 		</validators>
 		
 	</ae:configuration>

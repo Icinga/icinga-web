@@ -2,6 +2,13 @@
 
 define("STORAGE_FILE",dirname(__FILE__)."/res/storage.dat");
 
+/**
+ * Singleton that provides and updates meta data about the cronjobs 
+ * (last execution and result)
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class CronJobMetaProvider {
 	private $storage = null;
 	private static $semaphore = 0;
@@ -42,7 +49,7 @@ class CronJobMetaProvider {
 	}
 	
 	public static function getInstance() {
-		if(self::$instance == 0)
+		if(self::$instance == null)
 			self::$instance = new self();
 		return self::$instance;
 	}

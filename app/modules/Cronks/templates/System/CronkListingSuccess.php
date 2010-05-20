@@ -1,18 +1,15 @@
-<?php
-	$parentid = $rd->getParameter('parentid');
-?>
 <script type="text/javascript">
-(function() {
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
 
+	// Local copy of this
+	var CE = this;
+
+	// Listing object
 	var CronkListing = function() {
-
-		var parentCmp = null;
 		var template  = null;
 		
 		var c = {
-			
 			layout: 'accordion',
-			
 			layoutConfig: {
 				animate: true,
 				renderHidden: false,
@@ -20,60 +17,64 @@
 				fill: true
 			},
 			
+			autoScroll: true,
 			border: false,
+			
+			defaults: { border: false }
 		};
 		
 		var stateuid = 'cronk-listing-panel';
 		
 		if (stateuid) {
 			Ext.apply(c, {
-			id: stateuid,
-			stateId: stateuid,
-			stateEvents: ['collapse'],
-			stateful: true,
-			bubbleEvents: [],
-			
-			defaults: {
-				listeners: {
-					collapse: function() {
-						addCmp.saveState();
-					}
-				}
-			},
-			
-			applyState: function(state) {
-				if (state && "active_tab" in state && state.active_tab >= 0) {
-					this.active_tab = state.active_tab;
-				}
-			},
-			
-			getState: function() {
-				var active = this.getLayout().activeItem, i;
-				this.items.each(function(item, index, l) {
-					if (item == active) {
-						i = index;
-					}
-				});
 				
-				if (typeof(i) !== "undefined" && i>=0) {
-					return { active_tab: i }
+				id: stateuid,
+				stateId: stateuid,
+				stateEvents: ['collapse'],
+				stateful: true,
+				bubbleEvents: [],
+				
+				defaults: {
+					listeners: {
+						collapse: function() {
+							addCmp.saveState();
+						}
+					}
+				},
+				
+				applyState: function(state) {
+					if (state && "active_tab" in state && state.active_tab >= 0) {
+						this.active_tab = state.active_tab;
+					}
+				},
+				
+				getState: function() {
+					var active = this.getLayout().activeItem, i;
+					this.items.each(function(item, index, l) {
+						if (item == active) {
+							i = index;
+						}
+					});
+					
+					if (typeof(i) !== "undefined" && i>=0) {
+						return { active_tab: i }
+					}
+				},
+				
+				listeners: {
+					beforecollapse: function() {
+						return false;
+					}
 				}
-			},
-			
-			listeners: {
-				beforecollapse: function() {
-					return false;
-				}
-			}
 				
 			});
 		}
 		
 		var addCmp = new Ext.Panel(c);
 		
-		var out = {};
+		CE.add(addCmp);
 		
-		Ext.apply(out, {
+		return {
 			
 			setActiveItem : function(id) {
 				addCmp.getLayout().setActiveItem(id);
@@ -89,27 +90,24 @@
 			},
 			
 			getBaseUrl : function() {
-				return "<?php echo $ro->gen('icinga.cronks.crlisting.json'); ?>";
-			},
-			
-			setParentCmp : function(cmp) {
-				parentCmp = cmp;
-				parentCmp.add(addCmp);
+				return "<?php echo $ro->gen('cronks.crlisting.json'); ?>";
 			},
 			
 			getParentCmp : function() {
-				return parentCmp;
+				return CE.getParent();
 			},
 			
 			getFrameCmp : function() {
 				return addCmp;
 			},
 			
-			getStore : function () {
+			getStore : function (json) {
 				return new Ext.data.JsonStore({
 					autoDestroy: true,
-				    url: CronkListing.getBaseUrl(),
-				    root: 'cronks',
+					autoLoad: true,
+				    totalProperty: 'resultCount',
+				    root: 'resultRow',
+				    data: json,
 				    fields: [
 				        'name', 'id', 'description', 'image', 'parameter'
 				    ]
@@ -134,46 +132,32 @@
 				
 			},
 			
-			getNewView : function(cat) {
+			getNewView : function(json) {
 				
-				var s = CronkListing.getStore();
-				
-				s.baseParams = {
-					type: 'cronks',
-					cat: cat
-				};
-				
-				s.reload();
-				
-				var v = new Ext.DataView({
+				var s = CronkListing.getStore(json);
+
+				return new Ext.DataView({
 			        store: s,
 			        tpl: CronkListing.getTemplate(),
-//			        autoScroll: true,
-//			        autoHeight:true,
-//			        multiSelect: true,
 			        overClass:'x-view-over',
 			        itemSelector:'div.cronk-preview',
 			        emptyText: 'No data',
 			       	cls: 'cronk-data-view',
+			        border: false,
 			        
 			        // Create the drag zone
 			        listeners: {
 			            render: CronkListing.initCronkDragZone,
 			            dblclick: CronkListing.dblClickHandler
-			        }
-			        
-			        
+			        } 
 			    });
-			    
-			    return v;
 			},
 			
-			addListing : function (title, cat) {
+			addListing : function (title, json) {
 				addCmp.add({
 					title: title,
-					border: false,
-					defaults: { border: false },
-					items: [ CronkListing.getNewView(cat) ]
+					items: CronkListing.getNewView(json),
+					border: false
 				});
 				
 				addCmp.doLayout();
@@ -210,65 +194,108 @@
 			dblClickHandler: function(oView, index, node, e) {
 				var record = oView.getStore().getAt(index);
 				
-				var panel = AppKit.Ext.CronkMgr.create({
-					parentid: AppKit.Ext.genRandomId('cronk-'),
-					title: record.data['name'],
-					crname: record.data.id,
-					loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
-					closable: true,
-					layout: 'fit',
-					params: record.data.parameter
-				});
-				
 				var tabPanel = Ext.getCmp('cronk-tabs');
 				
 				if (tabPanel) {
-					tabPanel.add(panel);
+					var panel = tabPanel.add({
+						xtype: 'cronk',
+						title: record.data['name'],
+						crname: record.data.id,
+						closable: true,
+						params: record.data.parameter
+					});
+					
 					tabPanel.setActiveTab(panel);
 				}
-			}
+			},
 			
-		});
-		
-		return out;
-		
-	}();
-	
-	CronkListing.setParentCmp(Ext.getCmp("<?php echo $parentid; ?>"));
-	
-	Ext.Ajax.request({
-		url: CronkListing.getBaseUrl(),
-		params: { type: 'cat' },
-		success: function (r, o) {
-			var d = Ext.decode(r.responseText);	
-			
-			if (d.categories) {
-				var act = null;
-				var i = 0;
-				Ext.iterate(d.categories, function(k,v) {
-					
-					if (v.active && v.active == true) {
-						act = i;
+			go : function() {
+				Ext.Ajax.request({
+					url: this.getBaseUrl(),
+					success: function (r, o) {
+
+						var d = Ext.decode(r.responseText);	
+						if (Ext.isDefined(d.cat) && d.cat.resultSuccess == true) {
+							try {
+								var i = 0,
+								act = -1;
+								Ext.iterate(d.cat.resultRow, function(k, v) {
+										CronkListing.addListing(v.title || 'untitled', d.cronks[k]);
+										if (Ext.isDefined(v.active) && v.active == true) act=i;
+										i++;
+								});
+								
+								if (!CronkListing.applyActiveItem() && act) {
+										CE.getParent().getLayout().setActiveItem(act);
+								}
+							}
+							catch (e) {
+								// DO NOTHING
+							}
+							
+							CE.doLayout();
+						}
+					},
+					failure: function (r, o) {
+						var str = String.format(
+							_('Could not load the cronk listing, following error occured: {0} ({1})'),
+							r.status,
+							r.statusText
+						);
+						
+						parentcmp.add({
+							layout: 'fit',
+							html: str
+						});
+						parentcmp.doLayout();
+						
+						AppKit.notifyMessage('Ajax Error', str, { waitTime: 20 });
 					}
 					
-					CronkListing.addListing(v.title || 'untitled', k);
-					
-					i++;
 				});
 				
-				
-			if (!CronkListing.applyActiveItem() && act) {
-					CronkListing.getParentCmp().getLayout().setActiveItem(act);
-				}
 			}
 			
-		},
-		failure: function (r, o) {
-			AppKit.Ext.notifyMessage('Ajax Error', 'Could not load the categories (CronkList)');
-		}
-	});
+		};
+	}();
+
+	CronkListing.go();
+	
+//	var parentCmp = Ext.getCmp("<?php echo $parentid; ?>");
+//	CronkListing.setParentCmp(parentCmp);
+//	
+//	Ext.Ajax.request({
+//		url: CronkListing.getBaseUrl(),
+//		params: { type: 'cat' },
+//		success: function (r, o) {
+//			var d = Ext.decode(r.responseText);	
+//			
+//			if (d.categories) {
+//				var act = null;
+//				var i = 0;
+//				Ext.iterate(d.categories, function(k,v) {
+//					
+//					if (v.active && v.active == true) {
+//						act = i;
+//					}
+//					
+//					CronkListing.addListing(v.title || 'untitled', k);
+//					i++;
+//				});
+//				
+//				
+//			if (!CronkListing.applyActiveItem() && act) {
+//					CronkListing.getParentCmp().getLayout().setActiveItem(act);
+//				}
+//			}
+//			
+//		},
+//		failure: function (r, o) {
+//			AppKit.notifyMessage('Ajax Error', 'Could not load the categories (CronkList)');
+//		}
+//	});
 		
-})();
+});
 
 
 </script>

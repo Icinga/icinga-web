@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Parser for the agavi schedules.xml file
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class CronJobParser_CronAgaviParser extends CronJobParser {
 	protected $agavi = null;
 	protected $resource = null;	
@@ -20,13 +27,22 @@ class CronJobParser_CronAgaviParser extends CronJobParser {
 		$this->setAgavi(CronAgaviAdapter::getInstance());
 
 		parent::__construct($model,$verbose,$logFile);
-	}	
+	}
+
+	/**
+	 * reads the schedule.xml from the CronAgaviParser
+	 */
 	public function parse() {
 		$agavi = $this->getAgavi();
 		$cfg = $agavi->getConfigVar("de.icinga.schedules");
 		$this->setResource($cfg);
 	}
 	public function onExecute(CronJobDefinition $job) {}
+	
+	/**
+	 * Creates CronJobDefinition classes from registered schedules
+	 * 
+	 */
 	public function extractCronJobs() {
 		$resources = $this->getResource();
 		if(empty($resources))

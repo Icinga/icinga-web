@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_CommandInfoModel extends ICINGACronksBaseModel
+class Cronks_System_CommandInfoModel extends CronksBaseModel
 implements AgaviISingletonModel
 {
 

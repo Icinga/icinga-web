@@ -3,12 +3,9 @@
 	<ae:configuration>
 		
 		<!-- MVC base classes -->
-		<autoload name="ICINGABaseAction">%core.lib_dir%/action/ICINGABaseAction.class.php</autoload>
-		<autoload name="ICINGABaseModel">%core.lib_dir%/model/ICINGABaseModel.class.php</autoload>
-		<autoload name="ICINGABaseView">%core.lib_dir%/view/ICINGABaseView.class.php</autoload>
-		
-		<!-- AppKit needed classes -->
-		<autoload name="AppKit">%core.root_dir%/lib/appkit/AppKit.class.php</autoload>
+		<autoload name="IcingaBaseAction">%core.lib_dir%/action/IcingaBaseAction.class.php</autoload>
+		<autoload name="IcingaBaseModel">%core.lib_dir%/model/IcingaBaseModel.class.php</autoload>
+		<autoload name="IcingaBaseView">%core.lib_dir%/view/IcingaBaseView.class.php</autoload>
 		
 	</ae:configuration>
 </ae:configurations>

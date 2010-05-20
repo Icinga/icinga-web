@@ -1,6 +1,6 @@
 <?php
 
-class Web_IndexSuccessView extends ICINGAWebBaseView
+class Web_IndexSuccessView extends IcingaWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

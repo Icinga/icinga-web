@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_AjaxLoginSuccessView extends ICINGAAppKitBaseView
+class AppKit_AjaxLoginSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

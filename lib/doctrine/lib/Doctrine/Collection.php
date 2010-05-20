@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Collection.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
+ *  $Id: Collection.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -26,9 +26,9 @@
  * @package     Doctrine
  * @subpackage  Collection
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 5876 $
+ * @version     $Revision: 7490 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
 class Doctrine_Collection extends Doctrine_Access implements Countable, IteratorAggregate, Serializable
@@ -81,7 +81,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     public function __construct($table, $keyColumn = null)
     {
         if ( ! ($table instanceof Doctrine_Table)) {
-            $table = Doctrine::getTable($table);
+            $table = Doctrine_Core::getTable($table);
         }
 
         $this->_table = $table;
@@ -91,7 +91,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
         }
 
         if ($keyColumn === null) {
-        	$keyColumn = $table->getAttribute(Doctrine::ATTR_COLL_KEY);
+        	$keyColumn = $table->getAttribute(Doctrine_Core::ATTR_COLL_KEY);
         }
 
         if ($keyColumn !== null) {
@@ -107,6 +107,18 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     public static function initNullObject(Doctrine_Null $null)
     {
         self::$null = $null;
+    }
+
+    public static function create($table, $keyColumn = null, $class = null)
+    {
+        if (is_null($class)) {
+            if ( ! $table instanceof Doctrine_Table) {
+                $table = Doctrine_Core::getTable($table);
+            }
+            $class = $table->getAttribute(Doctrine_Core::ATTR_COLLECTION_CLASS);
+        }
+
+        return new $class($table, $keyColumn);
     }
 
     /**
@@ -516,7 +528,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     public function loadRelated($name = null)
     {
         $list = array();
-        $query   = new Doctrine_Query($this->_table->getConnection());
+        $query = $this->_table->createQuery();
 
         if ( ! isset($name)) {
             foreach ($this->data as $record) {
@@ -525,8 +537,10 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
                     $list[] = $value;
                 }
             }
-            $query->from($this->_table->getComponentName());
             $query->where($this->_table->getComponentName() . '.id IN (' . substr(str_repeat("?, ", count($list)),0,-2) . ')');
+            if ( ! $list) {
+                $query->where($this->_table->getComponentName() . '.id IN (' . substr(str_repeat("?, ", count($list)),0,-2) . ')', $list);
+            }
 
             return $query;
         }
@@ -544,6 +558,10 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
                     $list[] = $value;
                 }
             }
+        }
+
+        if ( ! $list) {
+            return;
         }
 
         $dql     = $rel->getRelationDql(count($list), 'collection');
@@ -580,7 +598,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
                 if ( ! $record->exists()) {
                     continue;
                 }
-                $sub = new Doctrine_Collection($table);
+                $sub = Doctrine_Collection::create($table);
 
                 foreach ($coll as $k => $related) {
                     if ($related[$foreign] == $record[$local]) {
@@ -600,7 +618,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
                 if ( ! $record->exists()) {
                     continue;
                 }
-                $sub = new Doctrine_Collection($table);
+                $sub = Doctrine_Collection::create($table);
                 foreach ($coll as $k => $related) {
                     if ($related->get($local) == $record[$identifier]) {
                         $sub->add($related->get($name));
@@ -672,11 +690,11 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     }
 
     /**
-     * Mimics the result of a $query->execute(array(), Doctrine::HYDRATE_ARRAY);
+     * Mimics the result of a $query->execute(array(), Doctrine_Core::HYDRATE_ARRAY);
      *
      * @param boolean $deep
      */
-    public function toArray($deep = false, $prefixKey = false)
+    public function toArray($deep = true, $prefixKey = false)
     {
         $data = array();
         foreach ($this as $key => $record) {
@@ -703,6 +721,54 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
             $result[$record->$key] = $record->$value;
         }
         return $result;
+    }
+
+    public function toHierarchy()
+    {
+        $collection = $this;
+        $table = $collection->getTable();
+
+        if ( ! $table->hasTemplate('NestedSet')) {
+            throw new Doctrine_Exception('Cannot hydrate model that does not have the NestedSet behavior enabled');
+        }
+
+        // Trees mapped
+        $trees = new Doctrine_Collection($table);
+        $l = 0;
+
+        if (count($collection) > 0) {
+            // Node Stack. Used to help building the hierarchy
+            $stack = new Doctrine_Collection($table);
+
+            foreach ($collection as $child) {
+                $item = $child;
+
+                $item->mapValue('__children', new Doctrine_Collection($table));
+
+                // Number of stack items
+                $l = count($stack);
+
+                // Check if we're dealing with different levels
+                while($l > 0 && $stack[$l - 1]['level'] >= $item['level']) {
+                    array_pop($stack->data);
+                    $l--;
+                }
+
+                // Stack is empty (we are inspecting the root)
+                if ($l == 0) {
+                    // Assigning the root child
+                    $i = count($trees);
+                    $trees[$i] = $item;
+                    $stack[] = $trees[$i];
+                } else {
+                    // Add child to parent
+                    $i = count($stack[$l - 1]['__children']);
+                    $stack[$l - 1]['__children'][$i] = $item;
+                    $stack[] = $stack[$l - 1]['__children'][$i];
+                }
+            }
+        }
+        return $trees;
     }
 
     /**
@@ -744,6 +810,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
             $this[$rowKey]->fromArray($row);
         }
     }
+
     public function synchronizeFromArray(array $array)
     {
         return $this->synchronizeWithArray($array);
@@ -756,7 +823,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
      * @param string $deep 
      * @return void
      */
-    public function exportTo($type, $deep = false)
+    public function exportTo($type, $deep = true)
     {
         if ($type == 'array') {
             return $this->toArray($deep);
@@ -946,5 +1013,23 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     public function getRelation()
     {
         return $this->relation;
+    }
+
+    /** 
+     * checks if one of the containing records is modified 
+     * returns true if modified, false otherwise 
+     *  
+     * @return boolean  
+     */ 
+    final public function isModified() { 
+        $dirty = (count($this->getInsertDiff()) > 0 || count($this->getDeleteDiff()) > 0); 
+        if ( ! $dirty) {  
+            foreach($this as $record) { 
+                if ($dirty = $record->isModified()) {
+                    break;
+                } 
+            } 
+        } 
+        return $dirty; 
     }
 }

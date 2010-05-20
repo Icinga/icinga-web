@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_IframeViewSuccessView extends ICINGACronksBaseView
+class Cronks_System_IframeViewSuccessView extends CronksBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

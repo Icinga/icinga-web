@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Ext_initI18nSuccessView extends ICINGAAppKitBaseView
+class AppKit_Ext_initI18nSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
@@ -18,7 +18,7 @@ class AppKit_Ext_initI18nSuccessView extends ICINGAAppKitBaseView
 		$files = array ();
 		
 		$default = $tm->getDefaultDomain();
-		$defaults = split('\.', $default);
+		$defaults = explode('.', $default);
 		
 		$translator = $tm->getDomainTranslator($default, AgaviTranslationManager::MESSAGE);
 		

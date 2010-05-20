@@ -12,6 +12,46 @@
 					href="simple_data_provider.xml#xpointer(setting/node())" />
 				</setting>
 				
+				<setting name="api.file">%core.root_dir%/lib/icinga-api/IcingaApi.php</setting>
+				
+				<setting name="api.class">IcingaApi</setting>
+				
+				<setting name="api.interfaces.data">
+					<ae:parameter name="api_type">IcingaApi::CONNECTION_IDO</ae:parameter>
+					
+					<ae:parameter name="config_type">mysql</ae:parameter>
+					<ae:parameter name="config_host">127.0.0.1</ae:parameter>
+		
+					
+					<ae:parameter name="config_port">3306</ae:parameter>
+					<ae:parameter name="config_database">icinga</ae:parameter>
+					
+					<ae:parameter name="config_user">icinga</ae:parameter>
+					<ae:parameter name="config_password">icinga</ae:parameter>
+					
+					<ae:parameter name="config_table_prefix">icinga_</ae:parameter>
+				</setting>
+				
+				<setting name="api.interfaces.command">
+					<ae:parameter name="pipe1">
+						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+						<ae:parameter name="enabled">true</ae:parameter>
+						
+						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+					</ae:parameter>
+				
+					<ae:parameter name="ssh1">
+						<ae:parameter name="type">IcingaApi::COMMAND_SSH</ae:parameter>
+						<ae:parameter name="enabled">false</ae:parameter>
+						
+						<ae:parameter name="ssh_bin">/usr/bin/ssh</ae:parameter>
+						<ae:parameter name="ssh_user">icinga</ae:parameter>
+						<ae:parameter name="ssh_host">127.0.0.15</ae:parameter>
+						<ae:parameter name="ssh_port">22</ae:parameter>
+						<ae:parameter name="ssh_timeout">20</ae:parameter>
+						<ae:parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+					</ae:parameter>
+				</setting>
 			</settings>
 		</module>
 		

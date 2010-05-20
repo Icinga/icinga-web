@@ -4,13 +4,12 @@
  * @author mhein
  *
  */
-class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
+class AppKit_Ext_ApplicationStateSuccessView extends AppKitBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);
-
-		$this->setAttribute('_title', 'Icinga.Ext.ApplicationState');
+		return $this->executeJavascript($rd);
 	}
 	
 	public function executeJavascript(AgaviRequestDataHolder $rd) {
@@ -34,9 +33,9 @@ class AppKit_Ext_ApplicationStateSuccessView extends ICINGAAppKitBaseView
 				
 				$response->setHttpHeader('Content-Type', 'text/javascript', true);
 				
-				return 'Ext.onReady(function() { '
-				. 'var d = \''. json_encode($data). '\'; '
-				. ' AppKit.Ext.setAppState((d ? Ext.decode(d) : [])); '
+				return 'Ext.onReady(function() { '. chr(10)
+				. 'var d = \''. json_encode($data). '\'; '. chr(10)
+				. ' AppKit.setInitialState((d ? Ext.decode(d) : [])); '. chr(10)
 				. '});';
 			break;
 			case 'write':

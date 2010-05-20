@@ -25,7 +25,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviProxyProject.class.php 4411 2010-01-25 08:37:14Z david $
+ * @version    $Id: AgaviProxyProject.class.php 4425 2010-02-17 22:23:52Z felix $
  */
 class AgaviProxyProject extends Project
 {
@@ -55,8 +55,6 @@ class AgaviProxyProject extends Project
 		$this->proxied = $proxied;
 		
 		parent::__construct();
-		
-		ProjectConfigurator::configureProject($this, $GLOBALS['BUILD']);
 		
 		foreach($proxied->getBuildListeners() as $listener) {
 			parent::addBuildListener($listener);

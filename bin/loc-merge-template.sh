@@ -11,7 +11,7 @@ for I in $TARGETS/*; do
 			msgmerge -v -U "$POF" "$TEMPLATE"
 		else
 			echo -n "INIT $POF ($LOC) "
-			msginit -v -i "$TEMPLATE" -o "$POF" -l "LOC" --no-translator --no-wrap
+			msginit -i "$TEMPLATE" -o "$POF" -l "LOC" --no-translator --no-wrap
 		fi
 	fi
 done

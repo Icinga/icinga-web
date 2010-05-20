@@ -3,6 +3,29 @@
 define("CRON_DEFAULT_LOG_FILE","/var/log/icingaCron/cron.log");
 include "IcingaCronJobInterface.php";
 
+/**
+ * Scheduler that parses, checks and executes cronjobs defined in various sources. 
+ * It also can be used as a job, so icingaCron can execute other icingaCrons.
+ * 
+ * This is also the way this class should be used. In cron.d/icingaCron, a single
+ * icingaCron will be called and executes plugin specific schedulers defined in schedules.xml.
+ *
+ *                        (root)
+ * 						icingaCron (cron.d) -> every minute
+ * 					     /      \ 
+ *                      /        \  
+ *                     /          \
+ *              icingaCron       icingaCron
+ *				(Plugin A)       (Plugin B) 
+ *             /    |     \      /    |    \
+ *           Job1  Job2   Job3  Job1  Job2   Job3
+ *           (A)    (A)    (A)   (B)  (B)     (B)                
+ * 
+ * 
+ * 
+ * @author jmosshammer <jannis.mosshammer@netways.de>
+ *
+ */
 class icingaCron implements IcingaCronJobInterface {
 	protected $action = "";
 	protected $verbose = false;
@@ -45,7 +68,7 @@ class icingaCron implements IcingaCronJobInterface {
 		echo "\nUSAGE: ".$argv[0]." [OPTIONS]\n".
 			  "\t--verbose\t\tUse verbose logging\n".
 			  "\t--exec \t\t\tExecute schedule\n".
-			  "\t--print \t\tPrint schedule\n".
+			  "\t--print \t\tPrint schedule (not implemented yet)\n".
 		      "\t--useXML [FILE]\t\tParse and execute jobs in [FILE]\n".
 			  "\t--useDB [Modelname]\t\tParse information from table [TABLE]\n". 
 			  "\t--useAgavi \t\tParse information from schedules.xml\n".
@@ -53,6 +76,15 @@ class icingaCron implements IcingaCronJobInterface {
 			  "\n\t--useAgavi, --useXML and --useDB are mutually exclusive\n";
 	}
 	
+	/**
+	 * Creates a new icingaCron
+	 * 
+	 * @param array $params Parameters to use. This can be
+	 * 						 action: "exec" - execute the tasks
+	 * 						 type : The source from which to parse
+	 * @param boolean $verbose use verbose logging
+	 * 
+	 */
 	public function __construct(array $params = array(),$verbose = false) {	
 		$this->setVerbose($verbose);
 		$this->setAction($params["action"]);
@@ -75,6 +107,13 @@ class icingaCron implements IcingaCronJobInterface {
 		}
 	}
 	
+	/**
+	 * Interface for console calls
+	 * Reads command line arguments and provides help if arguments are invalid
+	 * 
+	 * @param array $argv
+	 */
+	 
 	static public function consoleInterface($argv) { 
 		$pos;
 		$action = "";
@@ -101,15 +140,10 @@ class icingaCron implements IcingaCronJobInterface {
 		return new self($params,$verbose);
 	}
 	
-	static public function parseXML($xml) {
-		new self($false,$xml);
-	}
-	
-	static public function parseTable($table) {
-		new self($false,null,$table);
-	}
-	
-	
+		
+	/**
+	 * Executes the scheduler
+	 */
 	public function execute() {
 		CronJobMetaProvider::getInstance()->processStarted();
 		$parser = $this->getParser();

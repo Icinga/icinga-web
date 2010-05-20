@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_System_ViewProc_MetaInformationSuccessView extends ICINGACronksBaseView
+class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{

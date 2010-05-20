@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Interface.php 5876 2009-06-10 18:43:12Z piccoloprincipe $
+ *  $Id: Interface.php 7490 2010-03-29 19:53:27Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information, see
- * <http://www.phpdoctrine.org>.
+ * <http://www.doctrine-project.org>.
  */
 
 /**
@@ -25,9 +25,9 @@
  * @package     Doctrine
  * @subpackage  Tree
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        www.phpdoctrine.org
+ * @link        www.doctrine-project.org
  * @since       1.0
- * @version     $Revision: 5876 $
+ * @version     $Revision: 7490 $
  * @author      Joe Simms <joe.simms@websites4.com>
  */
 interface Doctrine_Tree_Interface {
@@ -44,13 +44,13 @@ interface Doctrine_Tree_Interface {
      *
      * @return Doctrine_Record
      */
-    public function findRoot($root_id = 1);
+    public function fetchRoot($root_id = 1);
 
     /**
      * optimised method to returns iterator for traversal of the entire tree from root
      *
      * @param array $options                    options
-     * @param integer $fetchmode  One of the Doctrine::HYDRATE_* constants.
+     * @param integer $fetchmode  One of the Doctrine_Core::HYDRATE_* constants.
      * @return Iterator                 instance of Doctrine_Node_<Implementation>_PreOrderIterator
      */
     public function fetchTree($options = array(), $hydrationMode = null);
@@ -60,7 +60,7 @@ interface Doctrine_Tree_Interface {
      *
      * @param mixed $pk                         primary key as used by table::find() to locate node to traverse tree from
      * @param array $options                    options
-     * @param integer $fetchmode                One of the Doctrine::HYDRATE_* constants.
+     * @param integer $fetchmode                One of the Doctrine_Core::HYDRATE_* constants.
      * @return iterator                         instance of Doctrine_Node_<Implementation>_PreOrderIterator
      */
     public function fetchBranch($pk, $options = array(), $hydrationMode = null);

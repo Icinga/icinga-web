@@ -1,16 +1,15 @@
 <?php 
 	$parentid	= $rd->getParameter('parentid');
-	$stateuid	= $rd->getParameter('stateuid');	
-	$columns	= $rd->getParameter('columns');  
-	
-	$width		= floor(100 / $columns) / 100;
+	$stateuid	= $rd->getParameter('stateuid');	  
 ?>
 <script type="text/javascript">
-
-	(function() {
-				
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
+		
+		var CE = this;
+		
 		var PortalHandler = function() {
 			
+			var id = CE.cmpid;
 			var pub = {};
 			
 			Ext.apply(pub, {
@@ -85,9 +84,6 @@
 							},
 							
 							notifyDrop: function(dd, e, data) {
-								
-								var id = AppKit.Ext.genRandomId('cronk-');
-								
 								var params = {
 									'p[parentid]': id
 								};
@@ -98,12 +94,10 @@
 									}
 								}
 								
-								var portlet  = AppKit.Ext.CronkMgr.create({
-									parentid: id,
+								var portlet  = Cronk.factory({
 									id: id,
 									
 									params: data.dragData.parameter,
-									loaderUrl: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>",
 									crname: data.dragData.id,
 									
 									title: data.dragData.name,
@@ -131,7 +125,7 @@
 								
 								// Redefine the updater to held default properties
 								/* portlet.getUpdater().setDefaultUrl({
-									url: "<?php echo $ro->gen('icinga.cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
+									url: "<?php echo $ro->gen('cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
 									params: params,
 									scripts: true
 								});
@@ -155,8 +149,8 @@
 			
 		}();
 		
-		var p_columns = "<?php echo $columns; ?>";
-		var p_width   = "<?php echo $width; ?>";
+		var p_columns = CE.getParameter('columns', 1);
+		var p_width   = Math.floor(100 / p_columns) / 100;
 		
 		// Toolbar of the portlet panels
 		var tools = [{
@@ -211,11 +205,10 @@
 		
 		// We need a state id from the cronkmanager, the parent id
 		// is a good choice
-		var stateuid = "<?php echo $stateuid; ?>";
-		if (stateuid) {
+		if (CE.stateuid) {
 			Ext.apply(portal_config, {
-				id: id,
-				stateId: stateuid,
+				id: CE.cmpid,
+				stateId: CE.cmpid,
 				stateful: true,
 				
 				// @todo The collapse event does not work?
@@ -223,30 +216,23 @@
 				
 				getState: function () {
 					
-					var d = new Array(this.items.getCount());
+					var d = new Array();
 					
 					this.items.each(function (col, cindex, l1) {
 						
-						d[cindex] = {};
+						crlist = {};
 						
 						col.items.each(function (cr, crindex, l2) {
-							
-							if (cr.iscronk && cr.iscronk == true) {
-								var c = AppKit.Ext.CronkMgr.getCronk(cr.cronkkey);
-								var cronk = AppKit.Ext.CronkMgr.getCronkComponent(cr.cronkkey);
-								
-								c.config.title = cronk.title;
-								c.config.height = cronk.getHeight();
-								c.config.collapsed = cronk.collapsed;
-//								console.log("COL: " + cronk.collapsed);
-								d[cindex][cronk.getId()] = c;
+							if (Cronk.Registry.get(cr.getId())) {
+								var c = Cronk.Registry.get(cr.getId());
+								c.height = cr.getHeight();
+								crlist[cr.getId()] = c;
 							}
-							
 						}, this);
 						
+						d[cindex] = crlist;
+						
 					}, this);
-					
-	//				console.log(d);
 					
 					return {
 						col: d,
@@ -262,13 +248,10 @@
 						if (state.col) {
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
-									var c = {}
-									Ext.apply(c, citem.config, citem.crconf);
-//									console.log(c);
+									var c = citem;
 									c.tools = tools;
 									
-									var cronk = AppKit.Ext.CronkMgr.create(c);
-									
+									var cronk = Cronk.factory(c);
 									PortalHandler.createResizer(cronk);
 									
 									this.get(index).add(cronk);
@@ -289,11 +272,7 @@
 		
 		var portal = new Ext.ux.Portal(portal_config);
 		
-		cmp.insert(0, portal);
-		
-		cmp.doLayout();
-		
-	})();
-	
-	
+		CE.insert(0, portal);
+		CE.doLayout();
+	});	
 </script>
