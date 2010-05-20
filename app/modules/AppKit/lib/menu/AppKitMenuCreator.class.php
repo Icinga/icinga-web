@@ -34,7 +34,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 	
 	private function registerMenuExtender() {
 		// Register the following handler
-		if (is_array(($handler = AgaviConfig::get('de.icinga.appkit.menu_extender')))) {
+		if (is_array(($handler = AgaviConfig::get('modules.appkit.menu_extender')))) {
 			foreach ($handler as $class) {
 				$ref = new ReflectionClass($class);
 				if ($ref->isInstantiable()) {
@@ -85,7 +85,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 			}
 
 			// Display only if we do not trust apache
-			if (!AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
+			// if (!AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
 				if ($user->isAuthenticated()) {
 					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.logout', 'appkit.logout')
 					->setCaption('Logout')
@@ -98,18 +98,9 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 					->addAttributes('extjs-iconcls', 'silk-lock')
 					);
 				}
-			}
+			// }
 
 			if ($user->isAuthenticated()) {
-
-				// Navigation for "My"
-//				$my = $nav->getContainer()->addItem(AppKitNavItem::create('my', 'my')
-//				->setCaption('My')
-//				);
-//				
-//				$my->addSubItem(AppKitNavItem::create('my.preferences', 'my.preferences')
-//				->setCaption('Preferences')
-//				);
 				
 				// MENU FOR ADMIN
 				if ($user->hasCredential('appkit.admin')) {

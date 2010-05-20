@@ -20,68 +20,10 @@
 	<setting name="appkit.web_path"></setting>
 	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
 	
-	<!-- 
-		Overwrite php ini settings:
-		* Enable the garbage collector for sessions
-	-->
-	<setting name="appkit.php_settings">
-		<parameter name="session.gc_probability">3</parameter>
-		<parameter name="session.gc_divisor">100</parameter>
-		<parameter name="session.gc_maxlifetime">86400</parameter>
-		
-		<!-- Set the default timezone, this is missing on some systems -->
-		<parameter name="date.timezone">GMT</parameter>
-	</setting>
-	
-	<!-- 
-		AutoLoader
-		* Add additional directory to the loader.
-	-->
-	<setting name="appkit.autoloader.paths">
-		<parameter>%core.root_dir%/lib/appkit</parameter>
-		<!--<parameter>%core.module_dir%/Web/lib</parameter>-->
-	</setting>
-	
-	<!-- The class prefixes -->
-	<setting name="appkit.autoloader.prefixes">
-		<parameter>AppKit</parameter>
-		<!-- <parameter>Icinga</parameter>  -->
-	</setting>
-	
-	<!--
-		Doctrine setup
-		* Path to lib and to the models
-		* Relative to AppKit::bootstrap, otherwise throws errors!
-	-->
-	<setting name="appkit.doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
-	<setting name="appkit.doctrine_model_path">%core.root_dir%/lib/appkit/database/models</setting>
-	
 	<!--
 		AppKit image dispatcher
 	-->
 	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
-
-	<!-- 
-		Menu extender
-		* Register classes to change the navigation
-	-->
-	<setting name="appkit.menu_extender">
-		<parameter>IcingaMenuExtender</parameter>
-
-	</setting>
-
-	<!-- 
-		Eventhandling
-		* Code-less, predefined events to register tasks
-	-->
-	<setting name="appkit.custom_events">
-		<!-- This is our root menu (If all ready, the sub menues will be created -->  
-		<parameter name="AppKitMenuEventDistributor">
-			<parameter name="context">web</parameter>
-			<parameter name="event">appkit.menu</parameter>
-			<parameter name="class">AppKitMenuCreator</parameter>
-		</parameter>
-	</setting>
 
 	<!-- 
 		Stylesheet includes

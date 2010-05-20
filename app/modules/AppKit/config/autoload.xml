@@ -11,6 +11,72 @@
 		<!-- Auth and auth providers -->
 		<autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
 		<autoload name="AppKitAuthProviderBaseModel">%core.module_dir%/AppKit/lib/auth/AppKitAuthProviderBaseModel.class.php</autoload>
+		<autoload name="AppKitPrincipalTarget">%core.module_dir%/AppKit/lib/auth/principal/AppKitPrincipalTarget.class.php</autoload>
+		<autoload name="AppKitUserPreferences">%core.module_dir%/AppKit/lib/auth/AppKitUserPreferences.interface.php</autoload>
+		<autoload name="AppKitSecurityUser">%core.module_dir%/AppKit/lib/auth/AppKitSecurityUser.class.php</autoload>
+		
+		<!-- AgaviContext -->
+		<autoload name="AppKitAgaviContext">%core.module_dir%/AppKit/lib/context/AppKitAgaviContext.class.php</autoload>
+		
+		<!-- AppKit itself -->
+		<autoload name="AppKit">%core.module_dir%/AppKit/lib/AppKit.class.php</autoload>
+		
+		<!-- Unsorted -->
+		<autoload name="AppKitArrayContainer">%core.module_dir%/AppKit/lib/class/AppKitArrayContainer.class.php</autoload>
+		<autoload name="AppKitAutoloader">%core.module_dir%/AppKit/lib/class/AppKitAutoloader.class.php</autoload>
+		<autoload name="AppKitContextInterface">%core.module_dir%/AppKit/lib/class/AppKitContextInterface.interface.php</autoload>
+		<autoload name="AppKitFactories">%core.module_dir%/AppKit/lib/class/AppKitFactories.class.php</autoload>
+		<autoload name="AppKitFactory">%core.module_dir%/AppKit/lib/class/AppKitFactory.class.php</autoload>
+		<autoload name="AppKitFactoryInterface">%core.module_dir%/AppKit/lib/class/AppKitFactoryInterface.interface.php</autoload>
+		<autoload name="AppKitSingleton">%core.module_dir%/AppKit/lib/class/AppKitSingleton.class.php</autoload>
+		
+		<!-- The same -->
+		<autoload name="AppKitBaseClass">%core.module_dir%/AppKit/lib/class/AppKitBaseClass.class.php</autoload>
+		<autoload name="AppKitException">%core.module_dir%/AppKit/lib/class/AppKitBaseClass.class.php</autoload>
+		
+		<autoload name="AppKitSQLConstants">%core.module_dir%/AppKit/lib/database/AppKitSQLConstants.class.php</autoload>
+		<autoload name="AppKitDateTime">%core.module_dir%/AppKit/lib/date/AppKitDateTime.class.php</autoload>
+		<autoload name="AppKitDoctrineException">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineException.class.php</autoload>
+		<autoload name="AppKitDoctrinePager">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrinePager.class.php</autoload>
+		<autoload name="AppKitDoctrinePagerLayout">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrinePagerLayout.class.php</autoload>
+		<autoload name="AppKitDoctrineRecord">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineRecord.class.php</autoload>
+		<autoload name="AppKitDoctrineUtil">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineUtil.class.php</autoload>
+		<autoload name="AppKitEvent">%core.module_dir%/AppKit/lib/event/AppKitEvent.class.php</autoload>
+		<autoload name="AppKitEventHandler">%core.module_dir%/AppKit/lib/event/AppKitEventHandler.class.php</autoload>
+		<autoload name="AppKitEventHandlerInterface">%core.module_dir%/AppKit/lib/event/AppKitEventHandlerInterface.interface.php</autoload>
+		<autoload name="AppKitEventDispatcher">%core.module_dir%/AppKit/lib/event/AppKitEventDispatcher.class.php</autoload>
+		<autoload name="AppKitModelException">%core.module_dir%/AppKit/lib/exception/AppKitModelException.class.php</autoload>
+		<autoload name="AppKitCheckboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitCheckboxElement.class.php</autoload>
+		<autoload name="AppKitFormElement">%core.module_dir%/AppKit/lib/html/form/AppKitFormElement.class.php</autoload>
+		<autoload name="AppKitHiddenElement">%core.module_dir%/AppKit/lib/html/form/AppKitHiddenElement.class.php</autoload>
+		<autoload name="AppKitSelectArraySource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectArraySource.class.php</autoload>
+		<autoload name="AppKitSelectCheckboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitSelectCheckboxElement.class.php</autoload>
+		<autoload name="AppKitSelectDoctrineSource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectDoctrineSource.class.php</autoload>
+		<autoload name="AppKitSelectElement">%core.module_dir%/AppKit/lib/html/form/AppKitSelectElement.class.php</autoload>
+		<autoload name="AppKitSelectSource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSource.class.php</autoload>
+		<autoload name="AppKitSelectSourceInterface">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSourceInterface.interface.php</autoload>
+		<autoload name="AppKitTextboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitTextboxElement.class.php</autoload>
+		<autoload name="AppKitBulkLoader">%core.module_dir%/AppKit/lib/html/AppKitBulkLoader.class.php</autoload>
+		<autoload name="AppKitHtmlEntitiesInterface">%core.module_dir%/AppKit/lib/html/AppKitHtmlEntitiesInterface.interface.php</autoload>
+		<autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
+		<autoload name="AppKitHtmlHelper">%core.module_dir%/AppKit/lib/html/AppKitHtmlHelper.class.php</autoload>
+		<autoload name="AppKitJsonResponse">%core.module_dir%/AppKit/lib/json/AppKitJsonResponse.class.php</autoload>
+		<autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
+		<autoload name="AppKitNavContainer">%core.module_dir%/AppKit/lib/menu/AppKitNavContainer.class.php</autoload>
+		<autoload name="AppKitNavContainerInterface">%core.module_dir%/AppKit/lib/menu/AppKitNavContainerInterface.interface.php</autoload>
+		<autoload name="AppKitMenuCreator">%core.module_dir%/AppKit/lib/menu/AppKitMenuCreator.class.php</autoload>
+		<autoload name="AppKitNavItem">%core.module_dir%/AppKit/lib/menu/AppKitNavItem.class.php</autoload>
+		<autoload name="AppKitDoctrineSessionStorage">%core.module_dir%/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php</autoload>
+		<autoload name="AppKitGettextTranslator">%core.module_dir%/AppKit/lib/translator/AppKitGettextTranslator.class.php</autoload>
+		<autoload name="AppKitArrayUtil">%core.module_dir%/AppKit/lib/util/AppKitArrayUtil.class.php</autoload>
+		<autoload name="AppKitClassUtil">%core.module_dir%/AppKit/lib/util/AppKitClassUtil.class.php</autoload>
+		<autoload name="AppKitColorUtil">%core.module_dir%/AppKit/lib/util/AppKitColorUtil.class.php</autoload>
+		<autoload name="AppKitDateUtil">%core.module_dir%/AppKit/lib/util/AppKitDateUtil.class.php</autoload>
+		<autoload name="AppKitLdapTool">%core.module_dir%/AppKit/lib/util/AppKitLdapTool.class.php</autoload>
+		<autoload name="AppKitRandomUtil">%core.module_dir%/AppKit/lib/util/AppKitRandomUtil.class.php</autoload>
+		<autoload name="AppKitStringUtil">%core.module_dir%/AppKit/lib/util/AppKitStringUtil.class.php</autoload>
+		<autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
+		<autoload name="AppKitInlineIncluderUtil">%core.module_dir%/AppKit/lib/util/AppKitInlineIncluderUtil.class.php</autoload>
 
 	</ae:configuration>
 </ae:configurations>

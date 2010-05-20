@@ -6,6 +6,7 @@
 		<autoload name="IcingaWebBaseModel">%core.module_dir%/Web/lib/model/IcingaWebBaseModel.class.php</autoload>
 		<autoload name="IcingaWebBaseView">%core.module_dir%/Web/lib/view/IcingaWebBaseView.class.php</autoload>
 		
+		<!-- Icinga related class files -->
 		<autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
 		<autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>
 		<autoload name="IcingaCommand">%core.module_dir%/Web/lib/factory/IcingaCommand.class.php</autoload>
@@ -33,5 +34,9 @@
 		<autoload name="IcingaTemplateXmlParser">%core.module_dir%/Web/lib/template/IcingaTemplateXmlParser.class.php</autoload>
 		<autoload name="IcingaTemplateWorker">%core.module_dir%/Web/lib/template/IcingaTemplateWorker.class.php</autoload>
 		<autoload name="IcingaBaseException">%core.module_dir%/Web/lib/IcingaBaseException.class.php</autoload>
+		
+		<!-- IcingaApi -->
+		<autoload name="IcingaApi">%core.root_dir%/lib/icinga-api/IcingaApi.php</autoload>
+		
 	</ae:configuration>
 </ae:configurations>
