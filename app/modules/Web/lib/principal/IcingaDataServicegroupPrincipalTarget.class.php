@@ -7,6 +7,8 @@ class IcingaDataServicegroupPrincipalTarget extends IcingaDataPrincipalTarget {
 		
 		parent::__construct();
 		
+		$this->setDefaultTarget('servicegroup');
+			
 		$this->setFields(array(
 			'servicegroup'	=> 'The sql part of a servicegroup name'
 		));
