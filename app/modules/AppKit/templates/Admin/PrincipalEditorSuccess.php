@@ -48,7 +48,13 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 		storeId: 'editorStore',
 
 	}),
-	
+	noStore: mew Ext.data.ArrayStore({
+		autoDestroy:false,
+		storeId: 'noStore',
+		idIndex: 0,
+		fields: [],
+		data: []
+	}),
 	setupEditor: function() {
 		this.editor = new Ext.tree.TreeEditor(this, new Ext.form.ComboBox({
 				typeAhead:true,
@@ -120,7 +126,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 
 	prepareEditValue: function(node) {
 		// @fixme: yep, looks stupid.
-		AppKit.log(node);
+.
 		var field = node.field.field_description.field;
 		var target = node.field.field_description.target;
 		this.editorStore.removeAll();
@@ -167,7 +173,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 						  });
 			subNode.field = field;
 			subNode.type = "value";
-
+			subNode.isAPIPrincipal = record.get('type') == 'icinga';
 			subNode.on("click", function(el) {
 				this.prepareEditValue(el);
 				return true;
@@ -245,6 +251,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 				}
 			}
 			desc_Record.set("fields",fields);
+
 			this.addPrincipal(desc_Record);
 			if(desc_Record.store)
 				desc_Record.store.remove(desc_Record);
