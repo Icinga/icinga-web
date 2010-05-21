@@ -71,8 +71,6 @@ class doctrineDBBuilderTask extends Task {
 	public function buildDBFromModels() {	
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$modelPath = $icinga."/app/modules/".$this->project->getUserProperty("MODULE_Name")."/lib/";
-		self::$AppKitPath = $icinga."/lib/appkit/";
-		require_once(self::$AppKitPath."/auth/AppKitUserPreferences.interface.php");
 		
 		Doctrine::loadModels($this->models);
 		$tables = Doctrine::getLoadedModels();
@@ -80,9 +78,10 @@ class doctrineDBBuilderTask extends Task {
 		foreach($tables as $table) {
 			$tableList[] = Doctrine::getTable($table)->getTableName();	
 		}
-	
-		Doctrine::loadModels($icinga."/lib/appkit/database/models/generated");
-		Doctrine::loadModels($icinga."/lib/appkit/database/models");
+
+		$appKitPath = $this->project->getUserProperty("PATH_AppKit");
+		Doctrine::loadModels($icinga.$appKitPath."database/models/generated");
+		Doctrine::loadModels($icinga.$appKitPath."database/models");
 		Doctrine::createTablesFromModels(array($this->models.'/generated',$this->models));
 	
 		file_put_contents($modelPath."/.models.cfg",implode(",",$tableList));
