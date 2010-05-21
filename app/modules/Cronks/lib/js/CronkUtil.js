@@ -32,6 +32,87 @@ Cronk.util.StructUtil = function(){
 	
 }();
 
+Cronk.util.scriptInterface = Ext.extend(Object, function () {
+	
+	var r = null;
+	var parentCmp = null;
+	var parentCall = function(method) {
+		if (method in parentCmp && Ext.isFunction(parentCmp[method])) {
+			return parentCmp[method].createDelegate(parentCmp, [], true);
+		}
+	}
+	
+	return {
+		constructor : function(parentid) {
+			r = Cronk.Registry.get(parentid);
+			
+			if (r) {
+				parentCmp = Ext.getCmp(parentid);
+				this.parentd = parentid;
+				Ext.apply(this, r);
+				
+				Ext.apply(this, {
+					insert: parentCall('insert'),
+					add: parentCall('add'),
+					doLayout: parentCall('doLayout')					
+				});
+				
+			}
+			
+		},
+		
+		getRegistryEntry : function() {
+			return r;
+		},
+		
+		getParent : function() {
+			return parentCmp;
+		},
+		
+		getParameter : function(pname, vdefault) {
+			if (pname in this.params) {
+				return this.params[pname];
+			}
+			return vdefault;
+		}
+	}
+	
+}());
+
+Cronk.util.initEnvironment = function(parentid, method, o) {
+	var
+	run=false,
+	extready=false;
+	
+	o = (o || {});
+	
+	// Some options you can set withn a object as third parameter
+	if (!Ext.isEmpty(o.parentid)) parentid = o.parentid;
+	if (!Ext.isEmpty(o.run)) run = true;
+	if (!Ext.isEmpty(o.extready)) extready = true;
+	
+	var rc = function() {
+		if (parentid) {
+			if (Ext.isFunction(method)) {
+				var lscope = new Cronk.util.scriptInterface(parentid);
+				if (run==true || (lscope.getParent() && lscope.getRegistryEntry())) {
+					method.call(lscope);
+					return true;
+				}
+			}
+		}
+	}
+	
+	if (extready==true) {
+		Ext.onReady(rc, this);
+	}
+	else {
+		rc.call(this);
+	}
+	
+	return true;
+};
+
 Cronk.util.InterGridUtil = function(){
 	
 	var applyParametersToGrid = function(baseParams, c) {

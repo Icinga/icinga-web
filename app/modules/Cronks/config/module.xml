@@ -9,6 +9,8 @@
 				
 				<setting name="xml.path">%core.module_dir%/Cronks/data/xml</setting>
 				
+				<setting name="portal.loadmasktimeout">2300</setting>
+				
 				<setting name="categories">
 					<ae:parameter name="core">
 						<ae:parameter name="title">Core components</ae:parameter>

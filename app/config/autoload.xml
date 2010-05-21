@@ -7,8 +7,5 @@
 		<autoload name="IcingaBaseModel">%core.lib_dir%/model/IcingaBaseModel.class.php</autoload>
 		<autoload name="IcingaBaseView">%core.lib_dir%/view/IcingaBaseView.class.php</autoload>
 		
-		<!-- AppKit needed classes -->
-		<autoload name="AppKit">%core.root_dir%/lib/appkit/AppKit.class.php</autoload>
-		
 	</ae:configuration>
 </ae:configurations>

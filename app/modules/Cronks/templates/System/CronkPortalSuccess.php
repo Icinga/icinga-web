@@ -1,12 +1,7 @@
-<?php 
-	$parentid = $rd->getParameter('parentid');
-?>
 <script type="text/javascript">
-Ext.onReady(function() {
+Cronk.util.initEnvironment('viewport-center', function() {
 
-	AppKit.pageLoadingMask(2500);
-
-	var parentcmp = Ext.getCmp('<?php echo $parentid; ?>');
+	AppKit.pageLoadingMask(<?php echo (int)AgaviConfig::get('modules.cronks.portal.loadmasktimeout', '2500') ?>);
 
 	var portal = AppKit.util.Layout.addTo({
 		xtype: 'panel',
@@ -98,5 +93,5 @@ Ext.onReady(function() {
 	
 	AppKit.util.Layout.doLayout();
 	
-});
+}, { run: true, extready: true });
 </script>

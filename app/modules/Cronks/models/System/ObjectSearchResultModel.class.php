@@ -177,7 +177,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 			}
 			
 			array_multisort($sort_oname, SORT_ASC, $sort_oname2, SORT_ASC, $d[$key]);
-			$this->addToArray($d[$key], &$out);
+			$this->addToArray($d[$key], $out);
 		}
 		
 		return $out;

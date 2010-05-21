@@ -18,7 +18,7 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView
 		$files = array ();
 		
 		$default = $tm->getDefaultDomain();
-		$defaults = split('\.', $default);
+		$defaults = explode('.', $default);
 		
 		$translator = $tm->getDomainTranslator($default, AgaviTranslationManager::MESSAGE);
 		

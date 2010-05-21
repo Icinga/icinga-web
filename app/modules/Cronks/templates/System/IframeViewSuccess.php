@@ -1,17 +1,10 @@
-<?php 
-	$url = $t['url'];
-	$parentid = $rd->getParameter('parentid');
-	$stateuid = $rd->getParameter('stateuid');
-?>
+<?php $url = $t['url']; ?>
 <?php if ($url) { ?>
 <script type="text/javascript">
-(function() { 
-	
-	var cParent = Ext.getCmp('<?php echo $parentid; ?>');
-	var stateuid = '<?php echo $stateuid; ?>';
-	
-	var newid = Ext.id(null, 'iframe'); 
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
+	var newid = this.cmpid; 
 	var domid = newid + '-dom';
+	var stateuid = this.stateuid;
 	
 	// Create a new panel with a modified body element
 	var config = {
@@ -62,11 +55,11 @@
 	
 	
 	// Insert he element (no add, because reload results in multiple items)
-	cParent.insert(0, new Ext.Panel(config));
+	this.insert(0, new Ext.Panel(config));
 	
 	// Notify about changes
-	cParent.doLayout();
+	this.doLayout();
 	
-})();
+});
 </script>
 <?php } ?>

@@ -1,16 +1,15 @@
 <?php 
 	$parentid	= $rd->getParameter('parentid');
-	$stateuid	= $rd->getParameter('stateuid');	
-	$columns	= $rd->getParameter('columns');  
-	
-	$width		= floor(100 / $columns) / 100;
+	$stateuid	= $rd->getParameter('stateuid');	  
 ?>
 <script type="text/javascript">
-
-	(function() {
-				
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
+		
+		var CE = this;
+		
 		var PortalHandler = function() {
 			
+			var id = CE.cmpid;
 			var pub = {};
 			
 			Ext.apply(pub, {
@@ -85,9 +84,6 @@
 							},
 							
 							notifyDrop: function(dd, e, data) {
-								
-								var id = Ext.id(null, 'cronk');
-								
 								var params = {
 									'p[parentid]': id
 								};
@@ -153,8 +149,8 @@
 			
 		}();
 		
-		var p_columns = "<?php echo $columns; ?>";
-		var p_width   = "<?php echo $width; ?>";
+		var p_columns = CE.getParameter('columns', 1);
+		var p_width   = Math.floor(100 / p_columns) / 100;
 		
 		// Toolbar of the portlet panels
 		var tools = [{
@@ -209,11 +205,10 @@
 		
 		// We need a state id from the cronkmanager, the parent id
 		// is a good choice
-		var stateuid = "<?php echo $stateuid; ?>";
-		if (stateuid) {
+		if (CE.stateuid) {
 			Ext.apply(portal_config, {
-				id: id,
-				stateId: stateuid,
+				id: CE.cmpid,
+				stateId: CE.cmpid,
 				stateful: true,
 				
 				// @todo The collapse event does not work?
@@ -277,11 +272,7 @@
 		
 		var portal = new Ext.ux.Portal(portal_config);
 		
-		cmp.insert(0, portal);
-		
-		cmp.doLayout();
-		
-	})();
-	
-	
+		CE.insert(0, portal);
+		CE.doLayout();
+	});	
 </script>

@@ -24,7 +24,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 					$parameters = (array)$cronk['parameter'] + $parameters;
 				}
 				
-				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple');
+				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple', 'write');
 			}
 			else {
 				return $tm->_('Sorry, cronk "%s" not found', null, null, array($crname));

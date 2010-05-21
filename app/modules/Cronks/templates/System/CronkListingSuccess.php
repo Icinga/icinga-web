@@ -1,12 +1,11 @@
-<?php
-	$parentid = $rd->getParameter('parentid');
-?>
 <script type="text/javascript">
-(function() {
+Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
 
+	// Local copy of this
+	var CE = this;
+
+	// Listing object
 	var CronkListing = function() {
-
-		var parentCmp = null;
 		var template  = null;
 		
 		var c = {
@@ -73,6 +72,8 @@
 		
 		var addCmp = new Ext.Panel(c);
 		
+		CE.add(addCmp);
+		
 		return {
 			
 			setActiveItem : function(id) {
@@ -92,13 +93,8 @@
 				return "<?php echo $ro->gen('cronks.crlisting.json'); ?>";
 			},
 			
-			setParentCmp : function(cmp) {
-				parentCmp = cmp;
-				parentCmp.add(addCmp);
-			},
-			
 			getParentCmp : function() {
-				return parentCmp;
+				return CE.getParent();
 			},
 			
 			getFrameCmp : function() {
@@ -213,11 +209,11 @@
 				}
 			},
 			
-			go : function(parentcmp) {
+			go : function() {
 				Ext.Ajax.request({
 					url: this.getBaseUrl(),
 					success: function (r, o) {
-						CronkListing.setParentCmp(parentcmp);
+
 						var d = Ext.decode(r.responseText);	
 						if (Ext.isDefined(d.cat) && d.cat.resultSuccess == true) {
 							try {
@@ -230,14 +226,14 @@
 								});
 								
 								if (!CronkListing.applyActiveItem() && act) {
-										CronkListing.getParentCmp().getLayout().setActiveItem(act);
+										CE.getParent().getLayout().setActiveItem(act);
 								}
 							}
 							catch (e) {
 								// DO NOTHING
 							}
 							
-							parentcmp.doLayout();
+							CE.doLayout();
 						}
 					},
 					failure: function (r, o) {
@@ -262,10 +258,8 @@
 			
 		};
 	}();
-	
-	Ext.onReady(function() {
-		CronkListing.go(Ext.getCmp("<?php echo $parentid; ?>"));
-	});
+
+	CronkListing.go();
 	
 //	var parentCmp = Ext.getCmp("<?php echo $parentid; ?>");
 //	CronkListing.setParentCmp(parentCmp);
@@ -301,7 +295,7 @@
 //		}
 //	});
 		
-})();
+});
 
 
 </script>

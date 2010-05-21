@@ -188,7 +188,9 @@
 			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
 			<ae:parameter name="name">TO Hostgroup</ae:parameter>
 			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
+			
+			<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+			
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
 				<ae:parameter name="interface">true</ae:parameter>
@@ -202,7 +204,9 @@
 			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
 			<ae:parameter name="name">TO CustomVariable</ae:parameter>
 			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
+			
+			<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+			
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>
 				<ae:parameter name="interface">true</ae:parameter>
@@ -297,6 +301,18 @@
 			<ae:parameter name="categories">core</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="type">text</ae:parameter>
+			</ae:parameter>
+		</ae:parameter>
+		
+		<ae:parameter name="icingaExampleCronkHelloWorld">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">Example.HelloWorld</ae:parameter>
+			<ae:parameter name="hide">false</ae:parameter>
+			<ae:parameter name="description">Just say hello to the world</ae:parameter>
+			<ae:parameter name="name">HelloWorld</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="say_what">Hello icinga-web!</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
 		
