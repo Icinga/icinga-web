@@ -68,6 +68,7 @@
 		<autoload name="AppKitNavItem">%core.module_dir%/AppKit/lib/menu/AppKitNavItem.class.php</autoload>
 		<autoload name="AppKitDoctrineSessionStorage">%core.module_dir%/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php</autoload>
 		<autoload name="AppKitGettextTranslator">%core.module_dir%/AppKit/lib/translator/AppKitGettextTranslator.class.php</autoload>
+		<autoload name="AppKitTranslationManager">%core.module_dir%/AppKit/lib/translator/AppKitTranslationManager.class.php</autoload>
 		<autoload name="AppKitArrayUtil">%core.module_dir%/AppKit/lib/util/AppKitArrayUtil.class.php</autoload>
 		<autoload name="AppKitClassUtil">%core.module_dir%/AppKit/lib/util/AppKitClassUtil.class.php</autoload>
 		<autoload name="AppKitColorUtil">%core.module_dir%/AppKit/lib/util/AppKitColorUtil.class.php</autoload>

@@ -32,7 +32,7 @@
 			<ae:parameter name="gzip_level">6</ae:parameter>
 		</storage>
 		
-		<translation_manager class="AgaviTranslationManager" />
+		<translation_manager class="AppKitTranslationManager" />
 		
 		<user class="AppKitSecurityUser" />
 		

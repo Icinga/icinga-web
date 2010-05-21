@@ -16,8 +16,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/logging.xml $(DESTDIR)$(prefix)/app/config/logging.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/output_types.xml $(DESTDIR)$(prefix)/app/config/output_types.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config.php $(DESTDIR)$(prefix)/app/config.php
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/config/plugins
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/plugins/Heatmap.xml $(DESTDIR)$(prefix)/app/config/plugins/Heatmap.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/rbac_definitions.xml $(DESTDIR)$(prefix)/app/config/rbac_definitions.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/routing.xml $(DESTDIR)$(prefix)/app/config/routing.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/schedules.xml $(DESTDIR)$(prefix)/app/config/schedules.xml
@@ -202,6 +200,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/translator
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/translator/AppKitGettextTranslator.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/translator/AppKitGettextTranslator.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/translator/AppKitTranslationManager.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/translator/AppKitTranslationManager.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitArrayUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitArrayUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitClassUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitClassUtil.class.php
@@ -7640,5 +7639,5 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameStructural.css $(DESTDIR)$(prefix)/pub/styles/WireFrameStructural.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
 INC_FILES=6718
-INC_DIRS=920
+INC_DIRS=919
 # INSTALL_FILES_END
