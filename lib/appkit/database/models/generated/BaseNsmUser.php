@@ -119,11 +119,11 @@ abstract class BaseNsmUser extends Doctrine_Record
              'autoincrement' => false,
              ));
     }
-
+    
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('NsmPrincipal', array(
+   		$this->hasOne('NsmPrincipal', array(
              'local' => 'user_id',
              'foreign' => 'principal_user_id'));
 
