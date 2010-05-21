@@ -95,8 +95,8 @@
 				<route name=".simpleDataProvider" pattern="^/simpleDataProvider" output_type="json">
 					<route name=".json" pattern="^/json" action="IcingaApiSimpleDataProvider"/>
 				</route>
-				<route name=".api" pattern="^/api" >
-					<route name=".target" stop="true" action="Icinga.ApiSearch"  
+				<route name=".api" pattern="^/api" action="Icinga.ApiSearch">
+					<route name=".target" stop="true"   
 						pattern="^/(target:host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|status)/">	
 						<route name=".filter" stop="false" pattern="filter[(field:\w*)|(method:like|=|!=|&gt;|&lt;|&gt;=|&lt;=)|(filter:[^\.]\w*\*?)]"/>
 						<route name=".group" stop="false" pattern="group[(groups:.*?)]"/>
@@ -105,11 +105,11 @@
 						<route name=".limit" stop="false" pattern="limit[({limit_start:\d*};)?(limit:\d*)]"/>												
 
 						<!--  Define the ouput type -->
-						<route name=".output" stop="true" pattern="(output:json|xml)$" output_type="${output}">
-							<ignores>
-								<ignore>output</ignore>
-							</ignores>
-						</route>
+					</route>
+					<route name=".output" stop="true" pattern="(output:json|xml)$" output_type="${output}">
+						<ignores>
+							<ignore>output</ignore>
+						</ignores>
 					</route>
 				</route>
 			</route>

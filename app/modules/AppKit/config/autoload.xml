@@ -77,7 +77,7 @@
 		<autoload name="AppKitStringUtil">%core.module_dir%/AppKit/lib/util/AppKitStringUtil.class.php</autoload>
 		<autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
 		<autoload name="AppKitInlineIncluderUtil">%core.module_dir%/AppKit/lib/util/AppKitInlineIncluderUtil.class.php</autoload>
-
+		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
 		<!-- Doctrine models -->
 		
 		<autoload name="BaseNsmLog">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmLog.php</autoload>

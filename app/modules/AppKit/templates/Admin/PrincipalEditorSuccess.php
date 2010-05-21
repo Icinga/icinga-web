@@ -45,16 +45,9 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 		autoLoad:false,
 		root: 'result',
 		forceSelection: false,
-		storeId: 'editorStore',
+		storeId: 'editorStore'
+	}),
 
-	}),
-	noStore: mew Ext.data.ArrayStore({
-		autoDestroy:false,
-		storeId: 'noStore',
-		idIndex: 0,
-		fields: [],
-		data: []
-	}),
 	setupEditor: function() {
 		this.editor = new Ext.tree.TreeEditor(this, new Ext.form.ComboBox({
 				typeAhead:true,
@@ -126,7 +119,6 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 
 	prepareEditValue: function(node) {
 		// @fixme: yep, looks stupid.
-.
 		var field = node.field.field_description.field;
 		var target = node.field.field_description.target;
 		this.editorStore.removeAll();
