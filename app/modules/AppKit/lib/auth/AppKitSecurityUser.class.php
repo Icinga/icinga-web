@@ -186,6 +186,8 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 			parent::loadDefinitions();
 		
 	}
+
+	
 }
 
 class AppKitSecurityUserException extends AppKitException {}

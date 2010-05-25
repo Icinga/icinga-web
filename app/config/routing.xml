@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
 	<ae:configuration context="web">
 		<routes>
 		
 			<!-- INDEX -->
-			<route name="index_page" pattern="^/$" module="Web"
-				action="Icinga.PortalView" />
+			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
 
 			<!--
 				* AppKit routes
 			-->
 			<route name="appkit" pattern="^/appkit" module="%actions.default_module%">
 
-
 				<route name=".login" pattern="^/login" action="AjaxLogin">
-					<route name=".provider" pattern="^/json" output_type="json" />
+					<route name=".provider" pattern="^/json" output_type="json"/>
 				</route>
 
-				<route name=".logout" pattern="^/logout" action="Logout" />
+				<route name=".logout" pattern="^/logout" action="Logout"/>
 
-				<route name=".squishloader" pattern="^/squishloader/javascript"
-					action="Widgets.SquishLoader" output_type="javascript" />
+				<route name=".squishloader" pattern="^/squishloader/javascript" action="Widgets.SquishLoader" output_type="javascript"/>
 
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
 					 <route name=".principaledit" pattern="^/principaleditor" action="Admin.PrincipalEditor" output_type="simple"/>
@@ -42,7 +38,7 @@
 					 <route name=".logs" pattern="^/logs" action="Admin.ViewLogs"/>
 				  </route>
 				
-				   <!-- Data Provider -->
+					<!-- Data Provider -->
 				 <route name=".data" pattern="^/provider" output_type="json">
 					<route name=".users" pattern="^/user" action="DataProvider.UserProvider">
 					  <route pattern="^/(userId:\d+)" action="DataProvider.UserProvider"/>
@@ -54,7 +50,7 @@
 					  <route name=".user" pattern="^/user/(userId:\d+)" action="DataProvider.PrincipalProvider"/>
 					  <route name=".group" pattern="^/group/(groupId:\d+)" action="DataProvider.PrincipalProvider"/>
 					</route>
-					<route name=".languages" pattern="^/languages" action="DataProvider.LanguageProvider" />
+					<route name=".languages" pattern="^/languages" action="DataProvider.LanguageProvider"/>
 				 </route>
 
 
@@ -63,10 +59,8 @@
 					Loading occasional used javascript on the fly
 				-->
 				<route pattern="^/ext" name=".ext">
-					<route pattern="^/applicationState$" name=".applicationState"
-						output_type="javascript" action="Ext.ApplicationState" />
-					<route pattern="^/dynascript/(script:([\w-_\.]+))$" name=".dynamicScriptSource"
-						output_type="javascript" action="Ext.DynamicJavascriptSource" />
+					<route pattern="^/applicationState$" name=".applicationState" output_type="javascript" action="Ext.ApplicationState"/>
+					<route pattern="^/dynascript/(script:([\w-_\.]+))$" name=".dynamicScriptSource" output_type="javascript" action="Ext.DynamicJavascriptSource"/>
 				</route>
 
 			</route>
@@ -74,10 +68,10 @@
 
 			<!-- My routes (AppKit preferences) -->
 			<route name="my" pattern="^/my" module="AppKit">
-				<route pattern="^$" action="User.Index" />
+				<route pattern="^$" action="User.Index"/>
 
 				<route name=".preferences" pattern="^/preferences">
-					<route pattern="^$" action="User.Preferences" />
+					<route pattern="^$" action="User.Preferences"/>
 				</route>
 			</route>
 			<!-- END: My -->
@@ -88,20 +82,35 @@
 			<route name="icinga" pattern="^/web" module="Web">
 
 				<!-- Icinga index route -->
-				<route name=".home" pattern="^$" action="Index" />
-				<route name=".about" pattern="^/about$" action="Icinga.Help"
-					output_type="html" />
+				<route name=".home" pattern="^$" action="Index"/>
+				<route name=".about" pattern="^/about$" action="Icinga.Help" output_type="html"/>
 
 				<!-- The main view -->
-				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
+				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView"/>
 
 				<!-- TestPage -->
 				<route name=".testPage" pattern="^/testpage$" action="Icinga.TestPage" />
 
 				<!-- Simpleprovider for popups -->
-				<route name=".simpleDataProvider" pattern="^/simpleDataProvider"
-					output_type="json">
-					<route name=".json" pattern="^/json" action="IcingaApiSimpleDataProvider" />
+				<route name=".simpleDataProvider" pattern="^/simpleDataProvider" output_type="json">
+					<route name=".json" pattern="^/json" action="IcingaApiSimpleDataProvider"/>
+				</route>
+				<route name=".api" pattern="^/api" action="Icinga.ApiSearch">
+					<route name=".target" stop="true"   
+						pattern="^/(target:host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|status)/">	
+						<route name=".filter" stop="false" pattern="filter[(field:\w*)|(method:like|=|!=|&gt;|&lt;|&gt;=|&lt;=)|(filter:[^\.]\w*\*?)]"/>
+						<route name=".group" stop="false" pattern="group[(groups:.*?)]"/>
+						<route name=".column" stop="false" pattern="columns[(columns:(.*?))]"/>
+						<route name=".order" stop="false" pattern="order[(order_col:\w*);(order_dir:\w*)]"/>
+						<route name=".limit" stop="false" pattern="limit[({limit_start:\d*};)?(limit:\d*)]"/>												
+
+						<!--  Define the ouput type -->
+					</route>
+					<route name=".output" stop="true" pattern="(output:json|xml)$" output_type="${output}">
+						<ignores>
+							<ignore>output</ignore>
+						</ignores>
+					</route>
 				</route>
 			</route>
 			<!-- END: Icinga (Web) -->
@@ -110,54 +119,43 @@
 			<!-- 
 				* Cronk module routes
 			-->
-			<route pattern="^/cronks" name="cronks" output_type="simple"
-				module="Cronks">
+			<route pattern="^/cronks" name="cronks" output_type="simple" module="Cronks">
 
 				<!-- Cronk loader -->
-				<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))"
-					action="System.CronkLoader" />
+				<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))" action="System.CronkLoader"/>
 
 				<!-- Cronk listing -->
-				<route name=".crlisting.json" pattern="^/clisting/json"
-					output_type="json" action="System.CronkListing" />
+				<route name=".crlisting.json" pattern="^/clisting/json" output_type="json" action="System.CronkListing"/>
 
 				<!-- Searchbox datasource -->
-				<route name=".objectsearch.json" pattern="^/objectSearch/json"
-					output_type="json" action="System.ObjectSearch" />
+				<route name=".objectsearch.json" pattern="^/objectSearch/json" output_type="json" action="System.ObjectSearch"/>
 
 				<!-- Statussummary -->
-				<route name=".statusSummary.json" pattern="^/statusSummary/json"
-					output_type="json" action="System.StatusSummary" />
+				<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="System.StatusSummary"/>
 
 				<!-- JIT Status map -->
-				<route name=".statusMap.json" pattern="^/statusMap/json"
-					output_type="json" action="System.StatusMap" />
+				<route name=".statusMap.json" pattern="^/statusMap/json" output_type="json" action="System.StatusMap"/>
 
 				<!-- Content of the tactical overviews -->
-				<route name=".staticContent.content"
-					pattern="^/staticContent/(template:([\w\.\-\_\s]+))/content"
-					output_type="simple" action="System.StaticContent" />
+				<route name=".staticContent.content" pattern="^/staticContent/(template:([\w\.\-\_\s]+))/content" output_type="simple" action="System.StaticContent"/>
 
 				<!-- Source of the grid processor -->
 				<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
-					<route name=".json" pattern="^/json" output_type="json"
-						action="System.ViewProc">
-						<route name=".metaInfo" pattern="^/inf"
-							action="System.ViewProc.MetaInformation" />
+					<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">
+						<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.MetaInformation"/>
 					</route>
 				</route>
 
 				<!-- Commanddispatcher json interface -->
-				<route name=".commandProc" pattern="^/commandproc/(command:([\w_]+))/json"
-					output_type="json">
-					<route name=".metaInfo" pattern="^/inf"
-						action="System.ViewProc.CommandMetaInformation" />
-					<route name=".send" pattern="^/send" action="System.ViewProc.SendCommand" />
+				<route name=".commandProc" pattern="^/commandproc/(command:([\w_]+))/json" output_type="json">
+					<route name=".metaInfo" pattern="^/inf" action="System.ViewProc.CommandMetaInformation"/>
+					<route name=".send" pattern="^/send" action="System.ViewProc.SendCommand"/>
 				</route>
 
 			</route>
 			<!-- END: Cronk -->
 
-		</routes>
+			  
+			 </routes>
 	</ae:configuration>
 </ae:configurations>

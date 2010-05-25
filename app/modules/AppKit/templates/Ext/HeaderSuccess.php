@@ -6,6 +6,9 @@
         $auth = true;
     }
 ?>
+<?
+	
+?>
 <script type="text/javascript">
 Ext.onReady(function() {
 	var UserMenu = (function() {
