@@ -192,7 +192,10 @@ class Cronks_System_StaticContentModel extends CronksBaseModel
 		}
 
 		if (array_key_exists($dataSourceId, $this->content[$templateId]['data'])) {
-			$success = $this->content[$templateId]['data'][$dataSourceId]['data'][0][$column];
+			if(isset($this->content[$templateId]['data'][$dataSourceId]['data'][0]))
+				$success = $this->content[$templateId]['data'][$dataSourceId]['data'][0][$column];
+			else 
+				$success = false;
 		} else {
 			$success = false;
 		}
