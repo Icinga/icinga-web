@@ -22,12 +22,6 @@
         <!-- <parameter name="dynamicscript">
         	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter> -->
-        
-        <parameter name="security">
-        	<parameter>IcingaHostgroup</parameter>
-        	<parameter>IcingaHostCustomVariablePair</parameter>
-        	<parameter>IcingaContactgroup</parameter>
-        </parameter>
     </option>
     
     <!-- 

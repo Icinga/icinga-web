@@ -119,11 +119,6 @@
         	
         </parameter>
         
-        <!-- Working security model in this view -->
-        <parameter name="security">
-        	<parameter>IcingaHostgroup</parameter>
-        </parameter>
-        
     </option>
     
     <!-- 

@@ -159,13 +159,6 @@
         	
         </parameter>
         
-        <!-- Working security model in this view -->
-        <parameter name="security">
-        	<parameter>IcingaHostgroup</parameter>
-        	<parameter>IcingaHostCustomVariablePair</parameter>
-        	<parameter>IcingaContactgroup</parameter>
-        </parameter>
-        
         <!-- 
         	Additional filter
         	* Keep in mind to map the names in datasource.additional_filter_fields

@@ -173,15 +173,6 @@
         	</paramter>
         </parameter>
         
-        <!-- Working security model in this view -->
-        <parameter name="security">
-        	<parameter>IcingaServicegroup</parameter>
-        	<parameter>IcingaHostgroup</parameter>
-        	<parameter>IcingaHostCustomVariablePair</parameter>
-        	<parameter>IcingaServiceCustomVariablePair</parameter>
-        	<parameter>IcingaContactgroup</parameter>
-        </parameter>
-        
     </option>
     
     <!-- 
