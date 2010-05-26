@@ -633,6 +633,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-rescuescheme.sh $(DESTDIR)$(prefix)/bin/create-rescuescheme.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrineDeployTool.php $(DESTDIR)$(prefix)/bin/doctrineDeployTool.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/getopts.php $(DESTDIR)$(prefix)/bin/getopts.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-catalog.pl $(DESTDIR)$(prefix)/bin/loc-create-catalog.pl
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-json.sh $(DESTDIR)$(prefix)/bin/loc-create-json.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-mo.sh $(DESTDIR)$(prefix)/bin/loc-create-mo.sh
@@ -7659,6 +7660,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6712
+INC_FILES=6713
 INC_DIRS=946
 # INSTALL_FILES_END
