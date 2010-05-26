@@ -9,6 +9,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/autoload.xml $(DESTDIR)$(prefix)/app/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/config_handlers.xml $(DESTDIR)$(prefix)/app/config/config_handlers.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/global_filters.xml $(DESTDIR)$(prefix)/app/config/global_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
@@ -7660,6 +7661,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6713
+INC_FILES=6714
 INC_DIRS=946
 # INSTALL_FILES_END

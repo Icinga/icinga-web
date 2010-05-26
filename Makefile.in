@@ -70,7 +70,7 @@ configclean:
 remove-temp-files:
 	bin/rmtmp-files.sh
 
-devclean: remove-temp-files cleanall make-create-files
+devclean: remove-temp-files distclean cacheclean logclean make-create-files configclean
 
 cleanall: distclean cacheclean configclean logclean 
 
