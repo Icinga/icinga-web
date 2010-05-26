@@ -9,7 +9,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/autoload.xml $(DESTDIR)$(prefix)/app/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/compile.xml $(DESTDIR)$(prefix)/app/config/compile.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/config_handlers.xml $(DESTDIR)$(prefix)/app/config/config_handlers.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/databases.xml $(DESTDIR)$(prefix)/app/config/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/factories.xml $(DESTDIR)$(prefix)/app/config/factories.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/global_filters.xml $(DESTDIR)$(prefix)/app/config/global_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/icinga.xml $(DESTDIR)$(prefix)/app/config/icinga.xml
@@ -36,10 +35,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/log
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/log/debug-2010-05-21.log $(DESTDIR)$(prefix)/app/data/log/debug-2010-05-21.log
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/log/PLACEHOLDER $(DESTDIR)$(prefix)/app/data/log/PLACEHOLDER
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/data/xml/icinga-host-history-template.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/action
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/IcingaBaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/IcingaBaseAction.class.php
@@ -724,6 +720,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/etc/olson/agavi/app/config/config_handlers.xml $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app/config/config_handlers.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/etc/olson/agavi/app/config/factories.xml $(DESTDIR)$(prefix)/lib/agavi/etc/olson/agavi/app/config/factories.xml
@@ -770,6 +767,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/RELEASE_NOTES-0.9 $(DESTDIR)$(prefix)/lib/agavi/RELEASE_NOTES-0.9
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/config/action_filters.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/config/autoload.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/config/autoload.xml
@@ -809,6 +807,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/lib/validator/AgaviSampleAppProductValidator.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/lib/validator/AgaviSampleAppProductValidator.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/lib/view/AgaviSampleAppBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/lib/view/AgaviSampleAppBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/log
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/models
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/models/ProductFinderModel.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/models/ProductFinderModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/models/ProductModel.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/models/ProductModel.class.php
@@ -817,6 +816,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/actions
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/actions/SecretAction.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/actions/SecretAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/actions/TopSecretAction.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/actions/TopSecretAction.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/config/autoload.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/config/module.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/config/module.xml
@@ -828,9 +828,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/lib/model/AgaviSampleAppConfidentialBaseModel.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/lib/model/AgaviSampleAppConfidentialBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/lib/view/AgaviSampleAppConfidentialBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/lib/view/AgaviSampleAppConfidentialBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/templates/SecretSuccess.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/templates/SecretSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/templates/TopSecretSuccess.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/templates/TopSecretSuccess.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/views
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/views/SecretSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/views/SecretSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Confidential/views/TopSecretSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Confidential/views/TopSecretSuccessView.class.php
@@ -848,6 +850,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/actions/Widgets/FooterAction.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/actions/Widgets/FooterAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/actions/Widgets/HeaderAction.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/actions/Widgets/HeaderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/actions/Widgets/MenuAction.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/actions/Widgets/MenuAction.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/config/autoload.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/config/module.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/config/module.xml
@@ -859,6 +862,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/lib/model/AgaviSampleAppDefaultBaseModel.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/lib/model/AgaviSampleAppDefaultBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/lib/view/AgaviSampleAppDefaultBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/lib/view/AgaviSampleAppDefaultBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/templates/de
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Default/templates/de/IndexSuccess.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Default/templates/de/IndexSuccess.php
@@ -897,6 +901,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/actions
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/actions/IndexAction.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/actions/IndexAction.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/config/autoload.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/config/module.xml $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/config/module.xml
@@ -908,8 +913,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/lib/model/AgaviSampleAppDisabledBaseModel.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/lib/model/AgaviSampleAppDisabledBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/lib/view/AgaviSampleAppDisabledBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/lib/view/AgaviSampleAppDisabledBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/templates/IndexSuccess.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/templates/IndexSuccess.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/views
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Disabled/views/IndexSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Disabled/views/IndexSuccessView.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products
@@ -931,6 +938,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Products/lib/model/AgaviSampleAppProductsBaseModel.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/lib/model/AgaviSampleAppProductsBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Products/lib/view/AgaviSampleAppProductsBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/lib/view/AgaviSampleAppProductsBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/app/modules/Products/templates/IndexSuccess.php $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/templates/IndexSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/app/modules/Products/templates/Product
@@ -961,6 +969,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/pub/css/style.css $(DESTDIR)$(prefix)/lib/agavi/samples/pub/css/style.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/pub/_.htaccess $(DESTDIR)$(prefix)/lib/agavi/samples/pub/_.htaccess
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/pub/index.php $(DESTDIR)$(prefix)/lib/agavi/samples/pub/index.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/pub/js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/pub/soap.php $(DESTDIR)$(prefix)/lib/agavi/samples/pub/soap.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/pub/soap-test.php $(DESTDIR)$(prefix)/lib/agavi/samples/pub/soap-test.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/pub/wsdl.php $(DESTDIR)$(prefix)/lib/agavi/samples/pub/wsdl.php
@@ -970,6 +979,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/test/config.php $(DESTDIR)$(prefix)/lib/agavi/samples/test/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/test/config/suites.xml $(DESTDIR)$(prefix)/lib/agavi/samples/test/config/suites.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/lib
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/samples/test/run-tests.php $(DESTDIR)$(prefix)/lib/agavi/samples/test/run-tests.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/samples/test/tests/flow
@@ -3124,6 +3134,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/routing/WebRoutingTest.php $(DESTDIR)$(prefix)/lib/agavi/tests2/routing/WebRoutingTest.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/AutoloadHandlerTestClass.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/AutoloadHandlerTestClass.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/config/autoload.xml $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/config/compile.xml $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/config/compile.xml
@@ -3182,6 +3193,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/ErrorModule/actions/SomeAction.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/actions/SomeAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/ErrorModule/config/module.xml $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/config/module.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/ErrorModule/templates/404.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/templates/404.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/ErrorModule/templates/disabled.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/ErrorModule/templates/disabled.php
@@ -3207,6 +3219,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/Test/templates/success.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/templates/success.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/Test/templates/viewtest.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/templates/viewtest.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/views
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/Test/views/TestErrorView.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/views/TestErrorView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/Test/views/TestSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/Test/views/TestSuccessView.class.php
@@ -3215,10 +3228,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/UnavailableModule/actions/IndexAction.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/actions/IndexAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/UnavailableModule/config/module.xml $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/config/module.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/UnavailableModule/templates/index_success.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/templates/index_success.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/views
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/sandbox2/modules/UnavailableModule/views/IndexSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/tests2/sandbox2/modules/UnavailableModule/views/IndexSuccessView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/test_report
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/tests2/user
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/user/RbacSecurityUserTest.php $(DESTDIR)$(prefix)/lib/agavi/tests2/user/RbacSecurityUserTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/user/SecurityUserTest.php $(DESTDIR)$(prefix)/lib/agavi/tests2/user/SecurityUserTest.php
@@ -3250,6 +3265,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/tests2/view/ViewTest.php $(DESTDIR)$(prefix)/lib/agavi/tests2/view/ViewTest.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/config/action_filters.xml $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/config/action_filters.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/config/autoload.xml $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/config/autoload.xml
@@ -3271,6 +3287,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/lib/model/SandboxBaseModel.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/lib/model/SandboxBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/lib/view/SandboxBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/lib/view/SandboxBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/log
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/actions
@@ -3300,6 +3318,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/lib/model/SandboxDefaultBaseModel.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/lib/model/SandboxDefaultBaseModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/lib/view/SandboxDefaultBaseView.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/lib/view/SandboxDefaultBaseView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/templates/Error404Success.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/templates/Error404Success.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/templates/IndexSuccess.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/templates/IndexSuccess.php
@@ -3325,6 +3344,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/views/SecureSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/views/SecureSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/views/UnavailableSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/views/UnavailableSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/app/modules/Default/views/WelcomeSuccessView.class.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/modules/Default/views/WelcomeSuccessView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/app/templates
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/build.properties $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/build.properties
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/build.xml $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/build.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/pub
@@ -3333,6 +3353,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/pub/index.php $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/pub/index.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/sandbox/pub/plant.png $(DESTDIR)$(prefix)/lib/agavi/test/sandbox/pub/plant.png
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/flow
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/fragment
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/config/AgaviConfigCacheTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/config/AgaviConfigCacheTest.php
@@ -3366,7 +3388,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/test/tests/unit/validator/AgaviNumberValidatorTest.php $(DESTDIR)$(prefix)/lib/agavi/test/tests/unit/validator/AgaviNumberValidatorTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/TODO $(DESTDIR)$(prefix)/lib/agavi/TODO
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/UPGRADING $(DESTDIR)$(prefix)/lib/agavi/UPGRADING
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/appkit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/doctrine
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/CHANGELOG $(DESTDIR)$(prefix)/lib/doctrine/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/doctrine/COPYRIGHT $(DESTDIR)$(prefix)/lib/doctrine/COPYRIGHT
@@ -4509,6 +4530,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.html $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.js $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/spinner
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.html $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/state
@@ -5535,6 +5557,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/se-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/se-handle.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/s-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/s-handle.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/w-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/w-handle.gif
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/dd
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/gradient-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/gradient-bg.gif
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/grid
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/grid/grid-split.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/grid/grid-split.gif
@@ -5577,6 +5600,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/toolbar/gray-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar/gray-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/toolbar/tb-btn-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar/tb-btn-sprite.gif
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/tree
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/resources.jsb $(DESTDIR)$(prefix)/lib/ext3/resources/resources.jsb
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/adapter
@@ -7635,9 +7659,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameDefault.css $(DESTDIR)$(prefix)/pub/styles/WireFrameDefault.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameStructural.css $(DESTDIR)$(prefix)/pub/styles/WireFrameStructural.css
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/WireFrameYUI.css $(DESTDIR)$(prefix)/pub/styles/WireFrameYUI.css
-INC_FILES=6718
-INC_DIRS=919
+INC_FILES=6712
+INC_DIRS=946
 # INSTALL_FILES_END
