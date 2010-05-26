@@ -65,7 +65,6 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction
 			}
 				Doctrine_Manager::connection()->commit();
 			
-			$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Info('Role successfully updated!'));
 			
 			if ($rd->getParameter('id') == 'new') {
 				$this->setAttribute('redirect', 'appkit.admin.groups.edit');
@@ -78,7 +77,7 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction
 			}
 			catch (Doctrine_Transaction_Exception $e) {}
 			
-			$this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
+			
 		}
 		
 		return 'Success';

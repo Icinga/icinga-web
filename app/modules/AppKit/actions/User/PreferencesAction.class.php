@@ -65,7 +65,7 @@ class AppKit_User_PreferencesAction extends AppKitBaseAction
 	}
 	public function setPreference($user, $key,$val,$isLong) {
 		$user->getNsmUser()->setPref($key,$val,true,false);	
-		$this->getContext()->getLoggerManager()->logInfo("User %s changed %s to %s",$user->getNsmUser()->get("user_name"), $key,$val);
+		//$this->getContext()->getLoggerManager()->("User %s changed %s to %s",$user->getNsmUser()->get("user_name"), $key,$val);
 	}
 }
 

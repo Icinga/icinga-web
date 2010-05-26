@@ -1,8 +1,10 @@
+#! /usr/bin/php
 <?php
 
 require('../../lib/agavi/src/testing.php');
-require('../../lib/appkit/AppKit.class.php');
+require('../../lib/doctrine/lib/Doctrine.php');
 
+spl_autoload_register("Doctrine::autoload");
 require('config.php');
 
 $arguments = AgaviTesting::processCommandlineOptions(); 
@@ -28,10 +30,12 @@ if(isset($arguments['environment'])) {
 AgaviTesting::bootstrap($env);
 AgaviConfig::set('core.default_context', $env);
 // Initialize the appkit framework
-AppKit::bootstrap();
-
 PHPUnit_Util_Filter::addDirectoryToFilter(AgaviConfig::get('core.cache_dir'));
-
+AgaviController::initializeModule('Web');
+AgaviController::initializeModule('AppKit');
+AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
+$ctx = AgaviContext::getInstance();
+$ctx->getDatabaseManager()->getDatabase()->connect();
 AgaviTesting::dispatch($arguments);
 
 ?>
