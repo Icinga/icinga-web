@@ -21,8 +21,9 @@ require(dirname(__FILE__) . '/../app/config.php');
 
 AgaviConfig::set('core.default_context', 'console');
 Agavi::bootstrap('development');
-AppKit::bootstrap();
-
+AgaviController::initializeModule('Web');
+AgaviController::initializeModule('AppKit');
+AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
 
 
 // +---------------------------------------------------------------------------+

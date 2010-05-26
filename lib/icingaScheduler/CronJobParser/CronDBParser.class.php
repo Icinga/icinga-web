@@ -27,7 +27,7 @@ class CronJobParser_CronDBParser extends CronJobParser {
 	protected $agavi = null;
 	protected $dbResult = array();
 	protected $fields = array('*');
-	
+	protected static $connected = false;
 	/**
 	 * Returns the doctrine database modelname 
 	 * @return String 
@@ -99,7 +99,10 @@ class CronJobParser_CronDBParser extends CronJobParser {
 		if($model) 
 			$this->setModel($model);			
 		$this->setAgavi(CronAgaviAdapter::getInstance());
-
+		if(!self::$connected)  {
+			AgaviContext::getInstance()->getDatabaseManager()->getDatabase()->connect();
+			self::$connected = true;
+		}
 		parent::__construct($model,$verbose,$logFile);
 	}	
 		
@@ -109,7 +112,8 @@ class CronJobParser_CronDBParser extends CronJobParser {
 	 */
 	protected function parse() {
 		$agavi = $this->getAgavi();
-		$query = Doctrine_Query::create()
+
+		$query = Doctrine_Query::create(null,'Doctrine_Query')
 			->select(implode(",",$this->getFields()))
 			->from($this->getModel());
 		$result = $query->fetchArray();

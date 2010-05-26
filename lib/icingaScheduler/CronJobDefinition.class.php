@@ -308,7 +308,7 @@ class CronJobDefinition {
 	 */
 	protected function isInFixedTime($lastExec) {
 		$interval = $this->getInterval();
-		$times = $interval["times"];
+		$times = @$interval["times"];
 		if(!$times) 
 			return false;
 			

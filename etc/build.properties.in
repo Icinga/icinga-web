@@ -16,8 +16,8 @@ db.dsn=mysql:host=${db.host};dbname=${db.name};port=${db.port}
 # Database binaries and calls
 
 db.deployer.bin=${srcdir}/bin/doctrineDeployTool.php
-db.deployer.call_global=${php.bin} ${db.deployer.bin}  --models=${db.deployer.models} --dbtype=${db.type}  --dbhost=${db.host} --dbport=${db.port} --dbuser=${db.user} --dbname=${db.name} --dbpass=${db.pass}
-db.deployer.models = ${srcdir}/lib/appkit/database/models/
+db.deployer.call_global=${php.bin} ${db.deployer.bin}  --models ${db.deployer.models} --dbtype ${db.type}  --dbhost ${db.host} --dbport ${db.port} --dbuser ${db.user} --dbname ${db.name} --dbpass ${db.pass}
+db.deployer.models = ${srcdir}/app/modules/AppKit/lib/database/models/
 
 db.mysql.bin=@MYSQL@
 db.mysql.call_global=${db.mysql.bin} --host=${db.host} --port=${db.port} --user=${db.user} --password=${db.pass}

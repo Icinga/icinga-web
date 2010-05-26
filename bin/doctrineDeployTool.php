@@ -1,5 +1,6 @@
 <?
 require_once(dirname(dirname(__FILE__)). '/lib/doctrine/lib/Doctrine.php');
+require_once(dirname(__FILE__). '/getopts.php');
 
 spl_autoload_register(array('Doctrine', 'autoload'));
 
@@ -26,10 +27,29 @@ class doctrineDeployTool {
 	private $migrationStore = null;
 	
 	public static $POSSIBLE_ACTIONS = array("update"=>true,"undo"=>true,"dropDB"=>true,"importDB"=>true,"exportDB"=>true,"dumpData"=>true,"migrate"=>true,"importData"=>true,"createMigrationClasses"=>true);
-	public static $OPTS = array("createDB","ignoreErrors","dropDB","noDump","exportDB","importDB","models:",
-								"target:","migrationPath:","dumpData","migrate","importData","migrationStore:",
-								"createMigrationClasses","dbtype:","dbuser:","dbhost:","dbport:","dbname:",
-								"dbpass:","undo","update");
+	public static $OPTS = array(
+		"createDB" =>array('switch'=>'createDB','type'=>GETOPT_SWITCH),
+		"ignoreErrors" =>array('switch'=>'ignoreErrors','type'=>GETOPT_SWITCH),
+		"dropDB" =>array('switch'=>'dropDB','type'=>GETOPT_SWITCH),
+		"noDump" =>array('switch'=>'noDump','type'=>GETOPT_SWITCH),
+		"exportDB" =>array('switch'=>'exportDB','type'=>GETOPT_SWITCH),
+		"importDB" =>array('switch'=>'importDB','type'=>GETOPT_SWITCH),
+		"models" =>array('switch'=>'models','type'=>GETOPT_VAL),
+		"target" =>array('switch'=>'target','type'=>GETOPT_VAL),
+		"migrationPath" =>array('switch'=>'migrationPath','type'=>GETOPT_VAL),
+		"dumpData" =>array('switch'=>'dumpData','type'=>GETOPT_SWITCH),
+		"migrate" =>array('switch'=>'migrate','type'=>GETOPT_SWITCH),
+		"importData" =>array('switch'=>'importData','type'=>GETOPT_SWITCH),
+		"migrationStore" =>array('switch'=>'migrationStore','type'=>GETOPT_VAL),
+		"createMigrationClasses" =>array('switch'=>'createMigrationClasses','type'=>GETOPT_SWITCH),
+		"dbtype" =>array('switch'=>'dbtype','type'=>GETOPT_VAL),
+		"dbuser" =>array('switch'=>'dbuser','type'=>GETOPT_VAL),
+		"dbhost" =>array('switch'=>'dbhost','type'=>GETOPT_VAL),
+		"dbport" =>array('switch'=>'dbport','type'=>GETOPT_VAL),
+		"dbname" =>array('switch'=>'dbname','type'=>GETOPT_VAL),
+		"dbpass" =>array('switch'=>'dbpass','type'=>GETOPT_VAL),
+		"undo" =>array('switch'=>'undo','type'=>GETOPT_SWITCH),
+		"update" =>array('switch'=>'update','type'=>GETOPT_SWITCH));
 
 	public function setModelPath($path) {
 		$this->modelPath = $path;
@@ -129,31 +149,36 @@ class doctrineDeployTool {
 
 		// read options
 		
-		$vars = getopt("",self::$OPTS);
-		if((isset($vars["dumpData"]) || isset($vars["createMigrationClasses"])) && (isset($vars["import"]) || isset($vars["migrate"]))) {
+		$vars = getopts(self::$OPTS,$_SERVER["argv"]);
+		if(($vars["dumpData"] || $vars["createMigrationClasses"]) && ($vars["import"] || $vars["migrate"])) {
 			$this->stdOut("Can't perform an import and an export operation at the same time");
 			exit(1);
 		}
-		$this->setCliActions(array_intersect_key(self::$POSSIBLE_ACTIONS,$vars));
+		$cliActions = array();
+		foreach(self::$POSSIBLE_ACTIONS as $action=>$isActive) {
+			if($vars[$action] == '1')
+				$cliActions[$action] = '1';
+		}
+		$this->setCliActions($cliActions);
 		
-		if(isset($vars["models"]))
+		if($vars["models"])
 			$this->setModelPath($vars["models"]);
-		if(isset($vars["migrationPath"]))
+		if($vars["migrationPath"])
 			$this->setMigrationPath($vars["migrationPath"]);
-		if(isset($vars["migrationStore"]))
+		if($vars["migrationStore"])
 			$this->setMigrationStore($vars["migrationStore"]);
-		if(isset($vars["target"]))
+		if($vars["target"])
 			$this->setTarget($vars["target"]);
-		if(isset($vars["createDB"]))
+		if($vars["createDB"])
 			$this->setCreateDB(true);
-		if(isset($vars["ignoreErrors"]))
+		if($vars["ignoreErrors"])
 			$this->ignoreErrors = true;
-		if(isset($vars["noDump"]))
+		if($vars["noDump"])
 			$this->noDump = true;
 				
 		$dbSettings = array("dbtype","dbuser","dbhost","dbname","dbpass","dbport");
 		foreach($dbSettings as $setting) {
-			if(isset($vars[$setting]))
+			if($vars[$setting])
 				$this->{$setting} = $vars[$setting];	
 		}
 	}
@@ -285,6 +310,7 @@ class doctrineDeployTool {
 		if(!$this->getTarget())
 			$this->error("No dump target defined via --target!");
 		$this->loadModels();
+
 		Doctrine_Core::loadData($this->getTarget());
 	}
 	

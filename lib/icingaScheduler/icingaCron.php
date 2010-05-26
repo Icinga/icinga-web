@@ -87,7 +87,7 @@ class icingaCron implements IcingaCronJobInterface {
 	 */
 	public function __construct(array $params = array(),$verbose = false) {	
 		$this->setVerbose($verbose);
-		$this->setAction($params["action"]);
+		$this->setAction(@$params["action"]);
 		try {
 			switch($params["type"]) {
 				case 'XML':

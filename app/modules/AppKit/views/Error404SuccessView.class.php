@@ -10,6 +10,14 @@ class AppKit_Error404SuccessView extends AppKitBaseView
 
 		$this->getResponse()->setHttpStatusCode('404');
 	}
+	
+	public function executeConsole(AgaviRequestDataHolder $rd) {
+		$val = $this->getContainer()->getValidationManager();
+		foreach($val->getErrors() as $error=>$msg) {
+			printf("Error: ".$error." ".$msg."\n");
+		}
+		
+	}
 }
 
 ?>

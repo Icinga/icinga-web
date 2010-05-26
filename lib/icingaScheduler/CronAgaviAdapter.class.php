@@ -1,6 +1,8 @@
 <?php
 define("PATH_TO_AGAVI",dirname(__FILE__)."/../agavi/src/agavi.php");
 define("PATH_TO_CONFIG",dirname(__FILE__)."/../../app/config.php");
+define("PATH_TO_DOCTRINE",dirname(__FILE__)."/../../lib/doctrine/lib/Doctrine.php");
+define("PATH_TO_DOCTRINE_MODELS",dirname(__FILE__)."/../../app/modules/AppKit/lib/database/models");
 /**
  * Singleton class that will is used as a communication interface with agavi
  * Loads the bootstrap 
@@ -70,9 +72,16 @@ class CronAgaviAdapter {
 	private function bootstrap() {
 		require_once($this->agaviPath);
 		require_once($this->configPath);
+		
+		require_once(PATH_TO_DOCTRINE);
+		spl_autoload_register(array('Doctrine', 'autoload'));
+		Doctrine::loadModels(PATH_TO_DOCTRINE_MODELS."/generated");
+		Doctrine::loadModels(PATH_TO_DOCTRINE_MODELS);
+		
 		Agavi::bootstrap('development');
+		AgaviController::initializeModule('Web');
+		AgaviController::initializeModule('AppKit');
 		AgaviConfig::set('core.default_context', 'console');
-		AppKit::bootstrap();
 		
 	}
 	
