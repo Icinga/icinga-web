@@ -174,16 +174,6 @@ class IcingaWebDependencyTester {
 		),
 		
 		array (
-			'name'			=> 'ini_magic_quotes_gpc',
-			'description'	=> 'Test ini magic_quotes_gpc=on',
-			'method'		=> 'tIniSettings',
-			'args'			=> array('magic_quotes_gpc', '1'),
-			'required'		=> true,
-		
-			'header'		=> 'PHP ini settings'
-		),
-		
-		array (
 			'name'			=> 'ini_memory_limit',
 			'description'	=> 'Test php.ini memory_limit',
 			'method'		=> 'tIniSettings',
