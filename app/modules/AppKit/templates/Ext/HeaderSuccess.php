@@ -58,7 +58,7 @@ Ext.onReady(function() {
                         iconCls: 'silk-user-go',
                         width: 'auto',
                         handler: function() {
-							AppKit.changeLocation('<?echo $ro->gen("appkit.logout"); ?>');
+							AppKit.util.doLogout('<?echo $ro->gen("appkit.logout", array('logout' => 1)); ?>');
                         }
                     }]
                 }

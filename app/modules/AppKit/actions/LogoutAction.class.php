@@ -19,7 +19,7 @@ class AppKit_LogoutAction extends AppKitBaseAction
 		return 'Input';
 	}
 	
-	public function executeWrite(AgaviRequestDataHolder $rd)
+	public function execute(AgaviRequestDataHolder $rd)
 	{
 		
 		if ($rd->getParameter('logout', false) == 1) {
