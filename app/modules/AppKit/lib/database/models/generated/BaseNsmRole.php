@@ -22,7 +22,8 @@
  */
 abstract class BaseNsmRole extends Doctrine_Record
 {
-    public function setTableDefinition()
+
+	public function setTableDefinition()
     {
         $this->setTableName('nsm_role');
         $this->hasColumn('role_id', 'integer', 4, array(
@@ -102,5 +103,14 @@ abstract class BaseNsmRole extends Doctrine_Record
         $this->hasMany('NsmUserRole', array(
              'local' => 'role_id',
              'foreign' => 'usro_role_id'));
+    }
+
+    public function getInitialData() {
+		return array(
+			array('role_id'=>'1','role_name'=>'icinga_user','role_description'=>'The default representation of a ICINGA user','role_disabled'=>'0','role_parent'=>''),
+			array('role_id'=>'2','role_name'=>'appkit_user','role_description'=>'Appkit user test','role_disabled'=>'0','role_parent'=>''),
+			array('role_id'=>'3','role_name'=>'appkit_admin','role_description'=>'AppKit admin','role_disabled'=>'0','role_parent'=>'2'),
+			array('role_id'=>'4','role_name'=>'guest','role_description'=>'Unauthorized Guest','role_disabled'=>'0','role_parent'=>'')
+		);
     }
 }

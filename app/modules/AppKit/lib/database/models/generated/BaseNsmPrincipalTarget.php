@@ -18,7 +18,8 @@
  */
 abstract class BaseNsmPrincipalTarget extends Doctrine_Record
 {
-    public function setTableDefinition()
+    
+	public function setTableDefinition()
     {
         $this->setTableName('nsm_principal_target');
         $this->hasColumn('pt_id', 'integer', 4, array(
@@ -47,6 +48,9 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
+             
+        $this->index('nsm_principal_target_pt_target_id_nsm_target_target_id',array('fields'=>array('pt_target_id')));
+        $this->index('nsm_principal_target_pt_principal_id_nsm_principal_principal_id',array('fields'=>array('pt_principal_id')));
     }
 
     public function setUp()
@@ -54,14 +58,30 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
         parent::setUp();
         $this->hasOne('NsmTarget', array(
              'local' => 'pt_target_id',
-             'foreign' => 'target_id'));
+             'foreign' => 'target_id',
+           	 'onDelete' => 'CASCADE',
+        	 'onUpdate' => 'CASCADE'
+        ));
 
         $this->hasOne('NsmPrincipal', array(
              'local' => 'pt_principal_id',
-             'foreign' => 'principal_id'));
+             'foreign' => 'principal_id',
+           	 'onDelete' => 'CASCADE',
+        	 'onUpdate' => 'CASCADE'));
 
         $this->hasMany('NsmTargetValue', array(
              'local' => 'pt_id',
              'foreign' => 'tv_pt_id'));
+    }
+    
+    public function getInitialData() {
+		return array(
+			array('pt_id'=>'1','pt_principal_id'=>'2','pt_target_id'=>'8'),
+			array('pt_id'=>'2','pt_principal_id'=>'3','pt_target_id'=>'9'),
+			array('pt_id'=>'3','pt_principal_id'=>'3','pt_target_id'=>'10'),
+			array('pt_id'=>'4','pt_principal_id'=>'3','pt_target_id'=>'11'),
+			array('pt_id'=>'5','pt_principal_id'=>'4','pt_target_id'=>'8'),
+			array('pt_id'=>'6','pt_principal_id'=>'5','pt_target_id'=>'7')
+		);
     }
 }
