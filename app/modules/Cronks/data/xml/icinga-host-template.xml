@@ -302,7 +302,7 @@
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 	                	
 	                	<parameter name="arguments">
 	                		<parameter name="idPrefix">servicesForHost</parameter>
@@ -375,7 +375,7 @@
 	                	<parameter name="function">ajaxClick</parameter>
 
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 
 	                	<parameter name="arguments">
 	                		<parameter name="src_id">hostinfo</parameter>
@@ -436,7 +436,7 @@
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 	                	
 	                	<parameter name="arguments">
 	                		<parameter name="idPrefix">historyForHost</parameter>
