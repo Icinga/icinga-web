@@ -7,6 +7,13 @@
  */
 require_once("actionQueueTask.php");
 require_once("xmlHelperTask.php");
+
+$vers = phpversion();
+if($vers[1] < 3) 
+	define("USE_XML_NSPREFIX_WORKAROUND",true);
+else 
+	define("USE_XML_NSPREFIX_WORKAROUND",false);
+	
 class xmlMergerTask extends xmlHelperTask {
 	/**
 	 * The xml target file to merge to
@@ -233,7 +240,7 @@ class xmlMergerTask extends xmlHelperTask {
 				$prefix = (count($prefix) == 2 ? $prefix[0] : null);
 				$im_node = $this->getTargetDOM()->importNode($newNode,true);
 				// PHP removes the namespace prefix of our node, reappend it
-				if($prefix != null) 
+				if($prefix != null && USE_XML_NSPREFIX_WORKAROUND) 
 					$im_node = $this->fixPrefix($im_node,$prefix,$newNode);
 				$target[$pathToAdd][0]["elem"]->appendChild($im_node);
 				
