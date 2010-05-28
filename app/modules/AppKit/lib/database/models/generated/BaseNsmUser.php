@@ -29,7 +29,8 @@
  */
 abstract class BaseNsmUser extends Doctrine_Record
 {
-    public function setTableDefinition()
+	
+	public function setTableDefinition()
     {
         $this->setTableName('nsm_user');
         $this->hasColumn('user_id', 'integer', 4, array(
@@ -156,7 +157,11 @@ abstract class BaseNsmUser extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
+    	
+		$this->index('user_unique_idx',array('fields'=>array('user_name')));
+		$this->index('user_search_idx',array('fields'=>	array('user_name','user_authsrc','user_authid','user_disabled')));
     }
+    
     
     public function setUp()
     {
@@ -164,7 +169,8 @@ abstract class BaseNsmUser extends Doctrine_Record
 
         $this->hasOne('NsmPrincipal', array(
             'local' => 'user_id',
-             'foreign' => 'principal_user_id'));
+             'foreign' => 'principal_user_id'
+        ));
 
         $this->hasMany('NsmUserPreference', array(
              'local' => 'user_id',
@@ -173,5 +179,22 @@ abstract class BaseNsmUser extends Doctrine_Record
         $this->hasMany('NsmUserRole', array(
              'local' => 'user_id',
              'foreign' => 'usro_user_id'));
+    }
+    public static function getInitialData() {
+		return  array(
+			array(
+				"user_id"=>1,
+				"user_account"=>0,
+				"user_name" => 'root',
+				"user_firstname" => 'Enoch',
+				"user_lastname" => 'Root',
+				"user_password" => '42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1',
+				"user_salt" => '0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd',
+				"user_authsrc" => 'internal',
+				"user_authid" => '',
+				"user_email" => 'root@localhost.local',
+				"user_disabled" => 0
+			)	
+		);
     }
 }

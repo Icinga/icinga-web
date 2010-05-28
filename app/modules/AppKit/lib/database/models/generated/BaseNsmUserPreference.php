@@ -82,6 +82,9 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
+             
+        $this->index('upref_search_key_idx', array('fields' => array('upref_key')));
+        $this->index('principal_role_id_ix', array('fields' => array('upref_user_id')));
     }
 
     public function setUp()
@@ -89,7 +92,10 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
         parent::setUp();
         $this->hasOne('NsmUser', array(
              'local' => 'upref_user_id',
-             'foreign' => 'user_id'));
+             'foreign' => 'user_id',
+           	 'onDelete' => 'RESTRICT',
+        	 'onUpdate' => 'RESTRICT'
+        ));
     }
    
    public function set($name,$value,$load = true) {
@@ -114,4 +120,5 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
 
 		return $val;
 	}
+	
 }

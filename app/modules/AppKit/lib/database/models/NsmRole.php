@@ -27,15 +27,15 @@ class NsmRole extends BaseNsmRole
 	}
 
 	public function hasParent() {
-
-		if($this->get('role_parent'))
+		if($this->get('role_parent')) 
 			return true;
 		return false;
 	}
 	
 	public function getParent() {
-		if($this->hasParent())
-			return $this->NsmRole;
+		if($this->hasParent()) {
+			return $this->parent;
+		}
 		return null;
 	}
 	

@@ -22,74 +22,73 @@
 	</target>
 	
 	<target name="prepare">
-
 		<mkdir dir="${builddir}" />
 	</target>
-	
-	<target name="db-prepare" depends="prepare">
 		
-		<property name="db.base" value="${srcdir}/etc/database" />
-		<property name="dbUpdateFiles" value="${db.base}/migrations/"/>
-		<property name="dbInitFile" value="${db.base}/dbInit.tar.gz"/>
-		<property name="dbMigrations" value="${db.base}/migrations/"/>
+	<target name="db-prepare" depends="prepare">
+		<taskdef name="agaviDBExtractor" classname="etc.lib.agaviDBExtractorTask"/>	
+		<taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>	
+			
+		<input propertyname="db.useAgavi" promptChar="?" validArgs="n,y">Use the db-user specified in icinga-webs database.xml (Needs create Database/create Table rights)?</input>
+		<if>
+			<equals arg1="${db.useAgavi}" arg2="y"/>
+			<then>
+				<agaviDBExtractor src="${db.agaviXML}" toRef="db.dsn"/>
+			</then>
+			<else>
+				<input propertyname="db.user">Name of the db-user (needs Create Database/Tables permission)</input> 
+				<confidentialInput propertyname="db.pass">Root pass:</confidentialInput>		
+
+				<agaviDBExtractor src="${db.agaviXML}" user="${db.user}" pass="${db.pass}" toRef="db.dsn"/>
+			</else>
+		</if>
+	
 	</target>
 
 	<target name="db-create" depends="db-prepare" >
-		<exec
-			command="${db.deployer.call_global} --migrationStore ${dbMigrations} --importDB --createDB --target ${dbInitFile}"
-			dir="${builddir}"
-			passthru="true"
-			checkreturn="false" 
-			/>
+		<taskdef name="dbInitialize" classname="etc.lib.dbInitializeTask"/>
+		<dbInitialize icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
 	</target>
 
 	<target name="db-purge-userprefs" depends="db-prepare">
-		
-		<property name="db.sql.truncateprefs" value="truncate table ${db.name}.nsm_user_preference" />
-		
-		<exec
-			command="${db.mysql.call_global} -e '${db.sql.truncateprefs}'"
-			dir="${builddir}"
-			passthru="true"
-			checkreturn="false" />
+		<taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
+		<doctrine action="truncateTable" targettable="nsm_user_preference" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+
 		
 	</target>
 	
-	<target name="db-drop" >
+	<target name="db-upgrade" depends="db-prepare">
+		<taskdef name="dbUpdate" classname="etc.lib.dbUpdateTask"/>
+		<dbUpdate icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+	</target>
+	
+	<target name="db-drop" depends="db-prepare">
 		
 		<input propertyname="db.sql.dropchoice" promptChar="?" validArgs="no,DROPMYDATA">Really drop the database</input>
 
 		<if>
 			<equals arg1="${db.sql.dropchoice}" arg2="DROPMYDATA" />
 			<then>
-				<exec
-					command="${db.deployer.call_global} --dropDB"
-					dir="${builddir}"
-					passthru="true"
-					checkreturn="false" />
-				
+				<taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
+				<doctrine action="dropDB" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
 			</then>
-			
 			<else>
 				<echo>Yes, a really educated decision to keep the data ;-)</echo>
 			</else>
 		</if>
 	</target>
 	
-	<target name="db-upgrade" depends="db-prepare">
-		<exec
-		command="${db.deployer.call_global} --migrationStore ${dbMigrations} --update --ignoreErrors"
-		dir="${builddir}"
-		passthru="true"
-		checkreturn="false" />
-	</target>
-
-	<target name="db-downgrade" depends="db-prepare" >
-		<exec
-			command="${db.deployer.call_global} --migrationStore ${dbMigrations} --undo"
-			dir="${builddir}"
-			passthru="true"
-			checkreturn="false" />
+	<target name="doc2sql" depends="db-prepare">
+		<taskdef name="doctrineToSql" classname="etc.lib.doctrineToSqlTask"/>
+		<input propertyname="db.sql.path" defaultValue="${src}etc/schema/" >Save .sql at:</input>
+		<input propertyname="db.rdbm" defaultValue="mysql" validArgs="mysql,sqlite,oci,pgsql">RDBM driver to use</input>
+		<doctrineToSql 
+			icingapath="${src}" 
+			modelPath="${db.doctrine.models}" 
+			dsn="${db.dsn}"
+			rdbm="${db.rdbm}"
+			file="${db.sql.path}"
+		/>
 	</target>
 	
 	<target name="db-initialize">

@@ -30,19 +30,17 @@ class NsmUser extends BaseNsmUser
 		
 		$this->index('user_unique', array (
 			'fields' => array (
-				'user_name' => array (
-					'sorting' => 'ASC'
-				)
+				'user_name'
 			),
 			'type' => 'unique'
 		));
 		
 		$this->index('user_search', array (
 			'fields' => array (
-				'user_name' => array ('sorting' => 'ASC'),
-				'user_authsrc' => array ('sorting' => 'ASC'),
-				'user_authid' => array ('sorting' => 'ASC'),
-				'user_disabled' => array ('sorting' => 'ASC')
+				'user_name',
+				'user_authsrc',
+				'user_authid',
+				'user_disabled'
 			)
 		));
 	}
@@ -324,6 +322,7 @@ class NsmUser extends BaseNsmUser
 	 * @return Doctrine_Collection
 	 */
 	public function getTargets($type=null) {
+
 		return $this->getTargetsQuery($type)->execute();
 	}
 	
@@ -343,7 +342,7 @@ class NsmUser extends BaseNsmUser
 		if ($type !== null) {
 			$q->andWhere('t.target_type=?', array($type));
 		}
-		
+
 		return $q;
 	}
 

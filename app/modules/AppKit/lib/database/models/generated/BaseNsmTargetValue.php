@@ -16,8 +16,10 @@
  */
 abstract class BaseNsmTargetValue extends Doctrine_Record
 {
-    public function setTableDefinition()
+
+	public function setTableDefinition()
     {
+
         $this->setTableName('nsm_target_value');
         $this->hasColumn('tv_pt_id', 'integer', 4, array(
              'type' => 'integer',
@@ -51,6 +53,9 @@ abstract class BaseNsmTargetValue extends Doctrine_Record
         parent::setUp();
         $this->hasOne('NsmPrincipalTarget', array(
              'local' => 'tv_pt_id',
-             'foreign' => 'pt_id'));
+             'foreign' => 'pt_id',
+           	 'onDelete' => 'CASCADE',
+        	 'onUpdate' => 'CASCADE'));
     }
+
 }
