@@ -49,8 +49,8 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
              'autoincrement' => false,
              ));
              
-        $this->index('nsm_principal_target_pt_target_id_nsm_target_target_id',array('fields'=>array('pt_target_id')));
-        $this->index('nsm_principal_target_pt_principal_id_nsm_principal_principal_id',array('fields'=>array('pt_principal_id')));
+        $this->index('pt_target_id_ix',array('fields'=>array('pt_target_id')));
+        $this->index('pt_principal_id_ix',array('fields'=>array('pt_principal_id')));
     }
 
     public function setUp()
@@ -74,7 +74,7 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
              'foreign' => 'tv_pt_id'));
     }
     
-    public function getInitialData() {
+    public static function getInitialData() {
 		return array(
 			array('pt_id'=>'1','pt_principal_id'=>'2','pt_target_id'=>'8'),
 			array('pt_id'=>'2','pt_principal_id'=>'3','pt_target_id'=>'9'),

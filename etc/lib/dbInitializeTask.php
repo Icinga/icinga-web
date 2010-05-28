@@ -5,38 +5,28 @@
  *
  */
 
-class dbInitializeTask extends Task {
-	private $icingaPath = "/usr/local/icinga-web/";
-	private $modelPath = "app/modules/AppKit/lib/database/models/";
-	private $dsn;
-
-	
-	
-	public function setIcingapath($path) {
-		$this->icingaPath = $path;
-	}
-	public function setModelpath($path) {
-		$this->modelPath = $path;
-	}
-	public function setDsn($conn) {
-		$this->dsn = $conn;
-	}
-	
-	public function init() {
-		// include doctrine
-		require_once($this->icingaPath."lib/doctrine/lib/Doctrine.php");
-		spl_autoload_register("Doctrine::autoload");
-	}
+require_once(dirname(__FILE__)."/doctrineTask.php");
+class dbInitializeTask extends doctrineTask {
+	public $insertedData = array();
 	
 	public function main() {
-		Doctrine_Manager::connection($this->dsn);
+		parent::main();
+		$this->createDB();
+		$this->createTables();
+		$this->insertInitData();
+		
+		
+	}
+	
+	protected function createDB() {
 		try {
 			Doctrine::createDatabases();
 		} catch(Exception $e) {
 			//..ignore, the db already exists
 		} 
-		Doctrine::setModelsDirectory($this->modelPath."generated/");
-		Doctrine::setModelsDirectory($this->modelPath."/");
+	}
+	
+	protected function createTables() {
 		try {
 			Doctrine::createTablesFromModels(array(
 				$this->modelPath."generated/",
@@ -46,12 +36,16 @@ class dbInitializeTask extends Task {
 		} catch(Doctrine_Exception $e) {
 			throw new BuildException("Couldn't create schema - are you sure the table doesn't already exist? If so, use the update command.");
 		}
+	}
+	
+	protected function insertInitData() {
 		/**
-		 * hehe, it's bruteforce inserting - try inserting the records 10 times or 
-		 * until everything is inserted. 
+		 * yay, it's bruteforce inserting - try inserting the records $maxTries times or 
+		 * until everything is inserted. If there are missing relations, just try it next time
 		 **/ 
-		$insertedData = array();
 		$tries = 0;
+		$maxTries = 15;
+		$order = 0;
 		do {	
 			$allsaved = true;
 	        foreach(Doctrine::getLoadedModels() as $model) {
@@ -60,11 +54,15 @@ class dbInitializeTask extends Task {
 					continue;
 					
 				foreach($model::getInitialData() as $initData) {
-					if(in_array($initData,$insertedData))
+					$initData["_model_"] = $model;
+					if(in_array(serialize($initData),$this->insertedData)) {
 						continue;
+					}
 					$record = new $model();
 					
 					foreach($initData as $field=>$value) {
+						if($field == '_model_')
+							continue;
 						$record->set($field,$value);
 					}
 					$result = false;
@@ -73,12 +71,15 @@ class dbInitializeTask extends Task {
 					} catch(Exception $e) {/*..ignore..*/}
 					
 					if($result)
-						$insertedData[] &= $initData;	
+						$this->insertedData[$order++] = serialize($initData);	
 					$allsaved = $allsaved && $result;
 				}
 			}		
 			$tries++;
-		} while($tries < 10 && !$allsaved);
+		} while($tries < $maxTries && !$allsaved);
+		if($tries >= $maxTries) {
+			echo "\nWARNING: Initial data import may have failed due too many references.\n";
+		}
 	}
 }
 

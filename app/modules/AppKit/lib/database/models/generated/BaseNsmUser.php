@@ -180,16 +180,18 @@ abstract class BaseNsmUser extends Doctrine_Record
              'local' => 'user_id',
              'foreign' => 'usro_user_id'));
     }
-
-    public function getInitialData() {
+    public static function getInitialData() {
 		return  array(
 			array(
 				"user_id"=>1,
 				"user_account"=>0,
 				"user_name" => 'root',
-				"user_firstname" => 'root',
-				"user_lastname" => 'root',
-				"user_password" => 'password',
+				"user_firstname" => 'Enoch',
+				"user_lastname" => 'Root',
+				"user_password" => '42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1',
+				"user_salt" => '0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd',
+				"user_authsrc" => 'internal',
+				"user_authid" => '',
 				"user_email" => 'root@localhost.local',
 				"user_disabled" => 0
 			)	

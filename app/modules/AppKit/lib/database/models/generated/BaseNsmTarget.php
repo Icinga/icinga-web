@@ -77,7 +77,7 @@ abstract class BaseNsmTarget extends Doctrine_Record
              'foreign' => 'pt_target_id'));
     }
     
-    public function getInitialData() {
+    public static function getInitialData() {
 		return array(
 			array('target_id'=>1,'target_name'=>"IcingaHostgroup",'target_description'=>"Limit data access to specific hostgroups",'target_class'=>"IcingaDataHostgroupPrincipalTarget",'target_type'=>"icinga"),
 			array('target_id'=>2,'target_name'=>"IcingaServicegroup",'target_description'=>"Limit data access to specific servicegroups",'target_class'=>"IcingaDataServicegroupPrincipalTarget",'target_type'=>"icinga"),

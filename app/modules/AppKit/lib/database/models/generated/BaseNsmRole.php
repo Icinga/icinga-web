@@ -105,7 +105,7 @@ abstract class BaseNsmRole extends Doctrine_Record
              'foreign' => 'usro_role_id'));
     }
 
-    public function getInitialData() {
+    public static function getInitialData() {
 		return array(
 			array('role_id'=>'1','role_name'=>'icinga_user','role_description'=>'The default representation of a ICINGA user','role_disabled'=>'0','role_parent'=>''),
 			array('role_id'=>'2','role_name'=>'appkit_user','role_description'=>'Appkit user test','role_disabled'=>'0','role_parent'=>''),

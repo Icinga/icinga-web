@@ -70,8 +70,8 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
              'autoincrement' => false,
              ));
              
-       $this->index('nsm_principal_principal_user_id_nsm_user_user_id', array('fields'=>array('principal_user_id')));
-       $this->index('nsm_principal_principal_role_id_nsm_role_role_id', array('fields'=>array('principal_role_id')));
+       $this->index('principal_user_id_ix', array('fields'=>array('principal_user_id')));
+       $this->index('principal_role_id_ix', array('fields'=>array('principal_role_id')));
     }
 
     public function setUp()
@@ -94,7 +94,7 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
              'foreign' => 'pt_principal_id'));
     }
     
-    public function getInitialData() {
+    public static function getInitialData() {
 		return array(
 			array('principal_id'=>'1','principal_user_id'=>'1','principal_type'=>'user','principal_disabled'=>'0'),
 			array('principal_id'=>'2','principal_role_id'=>'2','principal_type'=>'role','principal_disabled'=>'0'),

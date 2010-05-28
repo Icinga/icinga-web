@@ -35,7 +35,7 @@ abstract class BaseNsmUserRole extends Doctrine_Record
              'primary' => true,
              'autoincrement' => false,
              ));
-		$this->index('nsm_user_role_usro_role_id_nsm_role_role_id', array('fields'=>array('usro_role_id')));
+		$this->index('nsm_user_role_ix', array('fields'=>array('usro_role_id')));
     }
 
     public function setUp()
@@ -58,7 +58,7 @@ abstract class BaseNsmUserRole extends Doctrine_Record
         );
     }
 	
-    public function getInitialData() {
+    public static function getInitialData() {
 		return array(
 			array('usro_user_id'=>'1','usro_role_id'=>'1'),
 			array('usro_user_id'=>'1','usro_role_id'=>'2'),
