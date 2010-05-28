@@ -62,6 +62,11 @@
 		
 	</target>
 	
+	<target name="db-upgrade" depends="db-prepare">
+		<taskdef name="dbUpdate" classname="etc.lib.dbUpdateTask"/>
+		<dbUpdate icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+	</target>
+	
 	<target name="db-drop" depends="db-prepare">
 		
 		<input propertyname="db.sql.dropchoice" promptChar="?" validArgs="no,DROPMYDATA">Really drop the database</input>
@@ -77,6 +82,7 @@
 			</else>
 		</if>
 	</target>
+	
 	<target name="doc2sql" depends="db-prepare">
 		<taskdef name="doctrineToSql" classname="etc.lib.doctrineToSqlTask"/>
 		<input propertyname="db.sql.path" defaultValue="${src}etc/schema/" >Save .sql at:</input>
@@ -89,15 +95,6 @@
 			file="${db.sql.path}"
 		/>
 	</target>
-
-	<target name="db-upgrade" depends="db-prepare">
-		<exec
-		command="${db.deployer.call_global} --migrationStore ${dbMigrations} --update --ignoreErrors"
-		dir="${builddir}"
-		passthru="true"
-		checkreturn="false" />
-	</target>
-
 	
 	<target name="db-initialize">
 		<phingcall target="db-create" />

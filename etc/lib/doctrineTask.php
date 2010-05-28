@@ -33,7 +33,7 @@ class doctrineTask extends Task {
 	public function main() {
 		Doctrine_Manager::connection($this->dsn,"mainConnection");
 	
-		Doctrine::setModelsDirectory($this->modelPath."generated/");
+		Doctrine::loadModels($this->modelPath."generated/");
 		Doctrine::setModelsDirectory($this->modelPath."/");
 		if($this->action == 'dropDB')
 			$this->dropDB();
