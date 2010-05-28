@@ -114,6 +114,7 @@ fix-libs:
 install:
 	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
 	$(MAKE) -s inc-install-files
+	$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(MAKE) fix-priv fix-libs
 
 db-initialize:
