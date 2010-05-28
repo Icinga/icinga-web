@@ -78,8 +78,8 @@ AppKit.util = (function() {
 					closable: true,
 					resizable: true,
 					id: 'user_prefs_target',
-					width: 200,
-					height: 250,
+					width: 450,
+					height: 530,
 					autoScroll: true,
 					closeAction: 'hide',
 					

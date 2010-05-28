@@ -17,7 +17,7 @@ Ext.onReady(function() {
 		layout:'fit',
 		border:false,
 		monitorResize: true,
-		height: 500,
+		height: 450,
 		items: new Ext.form.FormPanel({
 			padding:5,
 			border:false,
