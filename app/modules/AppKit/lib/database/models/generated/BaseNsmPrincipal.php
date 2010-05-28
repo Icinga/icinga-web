@@ -70,8 +70,8 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
              'autoincrement' => false,
              ));
              
-       $this->index('principal_user_id_ix', array('fields'=>array('principal_user_id')));
-       $this->index('principal_role_id_ix', array('fields'=>array('principal_role_id')));
+    //   $this->index('principal_user_id_ix', array('fields'=>array('principal_user_id')));
+    //   $this->index('principal_role_id_ix', array('fields'=>array('principal_role_id')));
     }
 
     public function setUp()

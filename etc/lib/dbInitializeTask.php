@@ -29,12 +29,12 @@ class dbInitializeTask extends doctrineTask {
 	protected function createTables() {
 		try {
 			Doctrine::createTablesFromModels(array(
-				$this->modelPath."generated/",
-				$this->modelPath."/"
+				$this->modelPath
+
 				)
 			);
 		} catch(Doctrine_Exception $e) {
-			throw new BuildException("Couldn't create schema - are you sure the table doesn't already exist? If so, use the update command.");
+			echo("Error during schema creation - are you sure the table doesn't already exist? If so, use the update command.\n\n".$e->getMessage());
 		}
 	}
 	
@@ -44,7 +44,7 @@ class dbInitializeTask extends doctrineTask {
 		 * until everything is inserted. If there are missing relations, just try it next time
 		 **/ 
 		$tries = 0;
-		$maxTries = 15;
+		$maxTries = 30;
 		$order = 0;
 		do {	
 			$allsaved = true;
@@ -68,7 +68,9 @@ class dbInitializeTask extends doctrineTask {
 					$result = false;
 					try { 
 						$result = $record->trySave();
-					} catch(Exception $e) {/*..ignore..*/}
+					} catch(Exception $e) {/*..ignore..*/
+					}
+					
 					
 					if($result)
 						$this->insertedData[$order++] = serialize($initData);	
