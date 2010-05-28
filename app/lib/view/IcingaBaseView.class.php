@@ -3,8 +3,7 @@
 /**
  * The base view from which all project views inherit.
  */
-class IcingaBaseView extends AgaviView
-{
+class IcingaBaseView extends AgaviView {
 	const SLOT_LAYOUT_NAME = 'slot';
 	
 	/**
@@ -16,8 +15,7 @@ class IcingaBaseView extends AgaviView
 	 *
 	 * @throws     AgaviViewException if the output type is not handled.
 	 */
-	public final function execute(AgaviRequestDataHolder $rd)
-	{
+	public final function execute(AgaviRequestDataHolder $rd) {
 		throw new AgaviViewException(sprintf(
 			'The view "%1$s" does not implement an "execute%3$s()" method to serve '.
 			'the output type "%2$s", and the base view "%4$s" does not implement an '.
@@ -36,8 +34,7 @@ class IcingaBaseView extends AgaviView
 	 *                                    this execution.
 	 * @param      string The layout to load.
 	 */
-	public function setupHtml(AgaviRequestDataHolder $rd, $layoutName = null)
-	{
+	public function setupHtml(AgaviRequestDataHolder $rd, $layoutName = null) {
 		if($layoutName === null && $this->getContainer()->getParameter('is_slot', false)) {
 			// it is a slot, so we do not load the default layout, but a different one
 			// otherwise, we could end up with an infinite loop
@@ -50,8 +47,7 @@ class IcingaBaseView extends AgaviView
 		$this->loadLayout($layoutName);
 	}
 	
-	public function initialize(AgaviExecutionContainer $container)
-	{
+	public function initialize(AgaviExecutionContainer $container) {
 		parent::initialize($container);
 		
 		if ($this->getAttribute('redirect', false) !== false) {
@@ -59,6 +55,19 @@ class IcingaBaseView extends AgaviView
 				$this->getResponse()->setRedirect($this->getContext()->getRouting()->gen($this->getAttribute('redirect'), $params));
 		}
 		
+	}
+	
+	/**
+	 * Execute html within a slot layout only without 
+	 * implementing a new layout method in the corresponding
+	 * views
+	 * 
+	 * @param AgaviRequestDataHolder $rd
+	 * @return mixed
+	 */
+	public function executeSimple(AgaviRequestDataHolder $rd) {
+		$rd->setParameter('is_slot', true);
+		return $this->executeHtml($rd);
 	}
 }
 

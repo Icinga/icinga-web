@@ -1,23 +1,23 @@
-<?
-$user = $t["user"];
-
+<?php
+	$user =& $t["user"];
 ?>
-
 <script type='text/javascript'>
-Ext.ns("AppKit.UserPrefs")
+Ext.ns("AppKit.UserPrefs");
 Ext.onReady(function() {
+	
 	AppKit.UserPrefs.languageStore = new Ext.data.JsonStore({
-		url: '<? echo $ro->gen("appkit.data.languages") ?>',
+		url: '<?php echo $ro->gen("appkit.data.languages") ?>',
 		storeId: 'availableLocales',
 		root: 'locales',
 		idProperty: 'id',
-		fields: ['id','description','isCurrent'],
-	
+		fields: ['id','description','isCurrent']
 	});
 	
 	AppKit.UserPrefs.container = new Ext.Container({
 		layout:'fit',
 		border:false,
+		monitorResize: true,
+		height: 500,
 		items: new Ext.form.FormPanel({
 			padding:5,
 			border:false,
@@ -35,7 +35,7 @@ Ext.onReady(function() {
 					xtype: 'combo',
 					store: AppKit.UserPrefs.languageStore,
 					mode: 'remote',
-					value: '<? echo $tm->getCurrentLocaleIdentifier(); ?>',
+					value: '<?php echo $tm->getCurrentLocaleIdentifier(); ?>',
 					valueField: 'id',
 					displayField: 'description',
 					id:'cmb_language',
@@ -45,14 +45,14 @@ Ext.onReady(function() {
 					text: _('Change language'),
 					handler: function(b,e) {
 						Ext.Ajax.request({
-							url: '<? echo $ro->gen("my.preferences") ?>',
+							url: '<?php echo $ro->gen("my.preferences") ?>',
 							params: {
 								upref_key: 'de.icinga.appkit.locale',
 								upref_val: Ext.getCmp('cmb_language').getValue(),
 								isLong: false
 							},
 							success: function() {
-								window.location.href = '<? echo $ro->gen("my.preferences") ?>';
+								AppKit.notifyMessage(_('Language changed'), _('Your default language hast changed!'));
 							}
 						});
 					}
@@ -93,7 +93,7 @@ Ext.onReady(function() {
 							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
 							mask.show();
 							Ext.Ajax.request({
-								url: '<? echo $ro->gen("my.preferences") ?>',
+								url: '<?php echo $ro->gen("my.preferences") ?>',
 								params: {newPass: passwd.getValue()},
 								callback: function() {
 									mask.hide();
@@ -118,8 +118,9 @@ Ext.onReady(function() {
 				tools: [{
 					id: 'plus',
 					handler: function(event,tool,panel,tc) {
-						var id = Ext.id();
-						AppKit.UserPrefs.addProperty();
+						// var id = Ext.id();
+						var win = AppKit.UserPrefs.addProperty();
+						win.show();
 					},
 					scope: this
 				}],
@@ -130,7 +131,7 @@ Ext.onReady(function() {
 					selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
 					striperows:true,
 					width:500,
-					source: <? echo json_encode($user->getPreferences()) ?>,
+					source: <?php echo json_encode($user->getPreferences()) ?>,
 					id: 'pedit_preferences',
 					listeners: {
 						beforeedit: function(event)  {
@@ -154,7 +155,7 @@ Ext.onReady(function() {
 										params["remove"] = true;
 										record.store.remove(record);
 										Ext.Ajax.request({
-											url: '<? echo $ro->gen("my.preferences") ?>',
+											url: '<?php echo $ro->gen("my.preferences") ?>',
 											params: params,
 											callback: function() {
 												mask.hide();
@@ -185,7 +186,7 @@ Ext.onReady(function() {
 								params["params["+(i++)+"][isLong]"] = false
 							})
 							Ext.Ajax.request({
-								url: '<? echo $ro->gen("my.preferences") ?>',
+								url: '<?php echo $ro->gen("my.preferences") ?>',
 								params: params,
 								callback: function() {
 									mask.hide();
@@ -201,51 +202,62 @@ Ext.onReady(function() {
 			}]
 		})
 	});
+	
 	AppKit.UserPrefs.addProperty = function() {
-		new Ext.Window({
-			layout:'fit',
-			width:330,
-			title: _('New Preference'),
-			autoDestroy:true,
-			hidden:false,
-			id: 'win_'+id,
-			height:150,
-			items: new Ext.form.FormPanel({
-				layout: 'form',				
-				width:300,
-				padding:5,
-				id: id,
-				items: [{
-					fieldLabel:'Key',
-					xtype: 'textfield',
-					allowBlank:false,
-					id: 'key_'+id
-				}, {
-					fieldLabel:'Value',
-					xtype: 'textfield',
-					id: 'value_'+id
-				}],
-				buttons: [{
-					text: _('Add'),
-					handler: function (btn,e) {
-						if(!Ext.getCmp(id).getForm().isValid())
-							return false;
-						var record = Ext.data.Record.create(['name','value']);
-						var store = Ext.getCmp('pedit_preferences').getStore();
-						store.add(new record({
-										name: Ext.getCmp("key_"+id).getValue(),
-										value: Ext.getCmp("value_"+id).getValue()
-								  }));
-						Ext.getCmp('win_'+id).close();
-					},
-				}]
-			})
-		}).render(document.body);
+		var wid = 'userpref_customproperty_target';
+		
+		if (!Ext.getCmp(wid)) {
+			new Ext.Window({
+				layout:'fit',
+				width:330,
+				title: _('New Preference'),
+				closeMethod: 'hide',
+				hidden:false,
+				id: wid,
+				height:150,
+				items: new Ext.form.FormPanel({
+					layout: 'form',				
+					width:300,
+					padding:5,
+					id: id,
+					items: [{
+						fieldLabel:'Key',
+						xtype: 'textfield',
+						allowBlank:false,
+						id: 'key_'+id
+					}, {
+						fieldLabel:'Value',
+						xtype: 'textfield',
+						id: 'value_'+id
+					}],
+					buttons: [{
+						text: _('Add'),
+						handler: function (btn,e) {
+							if(!Ext.getCmp(id).getForm().isValid())
+								return false;
+							var record = Ext.data.Record.create(['name','value']);
+							var store = Ext.getCmp('pedit_preferences').getStore();
+							store.add(new record({
+											name: Ext.getCmp("key_"+id).getValue(),
+											value: Ext.getCmp("value_"+id).getValue()
+									  }));
+							Ext.getCmp('win_'+id).close();
+						},
+					}]
+				})
+			});
+		}
+		
+		return Ext.getCmp(wid);
 	}
 	
-	var container = AppKit.UserPrefs.container;
-	AppKit.util.Layout.getCenter().add(container)
-	AppKit.util.Layout.doLayout();
+	if (Ext.getCmp('user_prefs_target')) {
+		Ext.getCmp('user_prefs_target').add(AppKit.UserPrefs.container);
+		AppKit.UserPrefs.container.doLayout();
+		Ext.getCmp('user_prefs_target').doLayout();
+	}
+	
+	
 });
 
 </script>

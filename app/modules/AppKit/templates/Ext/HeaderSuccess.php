@@ -51,7 +51,8 @@ Ext.onReady(function() {
                         iconCls: 'silk-user-edit',
                         text: _('Preferences'),
                         handler: function() {
-							AppKit.changeLocation('<?echo $ro->gen("my.preferences"); ?>');
+                        	// View nicely in window :-P
+							AppKit.util.doPreferences('<?echo $ro->gen("my.preferences"); ?>');
                         }
                     }, {
                         tooltip: _('Logout'),

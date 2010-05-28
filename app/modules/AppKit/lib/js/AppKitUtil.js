@@ -64,6 +64,49 @@ AppKit.util = (function() {
 					}
 				}
 			});
+		},
+		
+		/**
+		 * Handling the preferences editor
+		 * within a window
+		 * @param string target
+		 */
+		doPreferences : function(target) {
+			if (!Ext.getCmp('user_prefs_target')) {
+				var pwin = new Ext.Window({
+					title: _('User preferences'),
+					closable: true,
+					resizable: true,
+					id: 'user_prefs_target',
+					width: 200,
+					height: 250,
+					autoScroll: true,
+					closeAction: 'hide',
+					
+					bbar: {
+						items: [{
+							text: _('Close and refresh'),
+							iconCls: 'silk-accept',
+							handler: function() {
+								AppKit.changeLocation(AppKit.c.path);
+							}
+						}, {
+							text: _('Only close'),
+							iconCls: 'silk-cancel',
+							handler: function() {
+								pwin.close();
+							}
+						}]
+					},
+					
+					autoLoad: {
+						url: target,
+						scripts: true
+					}
+				});
+			}
+			
+			Ext.getCmp('user_prefs_target').show();
 		}
 		
 	});

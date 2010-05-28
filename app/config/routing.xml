@@ -71,7 +71,7 @@
 				<route pattern="^$" action="User.Index"/>
 
 				<route name=".preferences" pattern="^/preferences">
-					<route pattern="^$" action="User.Preferences"/>
+					<route pattern="^$" action="User.Preferences" output_type="simple" />
 				</route>
 			</route>
 			<!-- END: My -->
