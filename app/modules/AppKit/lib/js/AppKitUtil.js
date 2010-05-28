@@ -46,6 +46,24 @@ AppKit.util = (function() {
 			else {
 				return pstores.add(store_name, (new Ext.util.MixedCollection));
 			}
+		},
+		
+		/**
+		 * Handling logout the agavi way
+		 * @param string target
+		 */
+		doLogout : function(target) {
+			Ext.Msg.show({
+				title: _('To be on the verge to logout ...'),
+				msg: _('Are you sure to to this?'),
+				buttons: Ext.MessageBox.YESNO,
+				icon: Ext.MessageBox.QUESTION,
+				fn: function(b) {
+					if (b=="yes") {
+						AppKit.changeLocation(target);
+					}
+				}
+			});
 		}
 		
 	});

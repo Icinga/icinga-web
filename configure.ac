@@ -49,6 +49,12 @@ AC_ARG_WITH([web_group],
 	ACICINGA_GROUP_GUESS([www www-data apache httpd nogroup nobody],[web_group], [www-data])
 )
 
+AC_ARG_WITH([web_path],
+	AS_HELP_STRING([--with-web-path=<path>], [web sub path (default /icinga-web)]),
+	web_path=$withval,
+	web_path=/icinga-web
+)
+
 AC_ARG_WITH([bin_user],
 	AS_HELP_STRING([--with-bin-user=<user>], [user for all other files (default root)]),
 	bin_user=$withval,
@@ -114,6 +120,7 @@ CFLAGS=""
 # Substitutions
 AC_SUBST(web_user)
 AC_SUBST(web_group)
+AC_SUBST(web_path)
 AC_SUBST(bin_user)
 AC_SUBST(bin_group)
 
@@ -136,6 +143,7 @@ AC_CONFIG_FILES([
 	Makefile
 	etc/build.properties
 	app/config/databases.xml
+	pub/.htaccess
 ])
 
 AC_OUTPUT

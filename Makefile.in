@@ -16,6 +16,7 @@ BIN_USER=@bin_user@
 BIN_GROUP=@bin_group@
 WEB_USER=@web_user@
 WEB_GROUP=@web_group@
+WEB_PATH=@web_path@
 SED=@SED@
 PHP=@PHP@
 PHING=@PHING@
@@ -65,18 +66,24 @@ distclean: clean
 		
 configclean:
 	rm -f \
-		app/config/databases.xml
+		app/config/databases.xml \
+		pub/.htaccess
 
 remove-temp-files:
 	bin/rmtmp-files.sh
 
-devclean: remove-temp-files distclean cacheclean make-create-files configclean
+devclean: remove-temp-files distclean cacheclean logclean make-create-files configclean
+
+cleanall: distclean cacheclean configclean logclean 
 
 create-tarball:
 	tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
 
 cacheclean:
 	rm -rf app/cache/config/*.php
+
+logclean:
+	rm -rf app/data/log/*.log
 
 testdeps:
 	 $(PHP) bin/testdeps.php

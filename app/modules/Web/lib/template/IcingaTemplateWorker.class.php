@@ -252,10 +252,7 @@ class IcingaTemplateWorker {
 	}
 	
 	private function setPrivileges(IcingaApiSearchInterface &$search) {
-		$s = $this->getTemplate()->getSection('option');
-		
-		IcingaPrincipalTargetTool::applyApiSecurityPrincipals( $search);			
-
+		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);			
 	}
 	
 	private function buildDataSource() {

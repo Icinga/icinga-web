@@ -159,13 +159,6 @@
         	
         </parameter>
         
-        <!-- Working security model in this view -->
-        <parameter name="security">
-        	<parameter>IcingaHostgroup</parameter>
-        	<parameter>IcingaHostCustomVariablePair</parameter>
-        	<parameter>IcingaContactgroup</parameter>
-        </parameter>
-        
         <!-- 
         	Additional filter
         	* Keep in mind to map the names in datasource.additional_filter_fields
@@ -309,7 +302,7 @@
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 	                	
 	                	<parameter name="arguments">
 	                		<parameter name="idPrefix">servicesForHost</parameter>
@@ -382,7 +375,7 @@
 	                	<parameter name="function">ajaxClick</parameter>
 
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 
 	                	<parameter name="arguments">
 	                		<parameter name="src_id">hostinfo</parameter>
@@ -443,7 +436,7 @@
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 	                	
 	                	<parameter name="arguments">
 	                		<parameter name="idPrefix">historyForHost</parameter>

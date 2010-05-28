@@ -80,7 +80,6 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 	}
 	
 	public function &doAuthenticate($username, $password) {
-		
 		/**
 		 * 1. Find the user
 		 * 2. If not found, try to import
@@ -91,7 +90,6 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		
 		if ($user === null) {
 			$user = $this->importUser($username);
-			return false;
 		}
 		
 		if ($user instanceof NsmUser && $user->user_id>0) {

@@ -115,11 +115,6 @@
         	
         </parameter>
         
-		<!-- Working security model in this view -->
-        <parameter name="security">
-        	<parameter>IcingaServicegroup</parameter>
-        </parameter>
-        
     </option>
     
     <!-- 
@@ -274,7 +269,7 @@
 	                	<parameter name="function">subGrid</parameter>
 	                	
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">celldblclick</parameter>
+	                	<parameter name="type">cellclick</parameter>
 	                	
 	                	<parameter name="arguments">
 	                		<parameter name="idPrefix">servicegroupServices</parameter>

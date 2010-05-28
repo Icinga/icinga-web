@@ -204,7 +204,13 @@ implements AgaviISingletonModel {
 	 */
 	public function createSearch() {
 		$a = func_get_args();
-		return call_user_method_array('createSearch', $this->getConnection(), $a);
+		$ref = new ReflectionObject($this->getConnection());
+		if ($ref->hasMethod('createSearch')) {
+			$m = $ref->getMethod('createSearch');
+			return $m->invokeArgs($this->getConnection(), $a);
+		}
+		
+		throw new IcingaApiException("Could not create search (method not found)");
 	}
 	
 	/**
