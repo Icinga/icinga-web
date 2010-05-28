@@ -25,7 +25,7 @@ class NsmUserPreference extends BaseNsmUserPreference
 		
 		$this->index('upref_search_key', array (
 			'fields' => array (
-				'upref_key' => array ('sorting' => 'ASC')
+				'upref_key'
 			)
 		));
 		

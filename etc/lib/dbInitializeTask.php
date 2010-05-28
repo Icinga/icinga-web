@@ -52,8 +52,8 @@ class dbInitializeTask extends doctrineTask {
 				$refCl = new ReflectionClass($model);
 				if(!$refCl->hasMethod("getInitialData")) 
 					continue;
-					
-				foreach($model::getInitialData() as $initData) {
+				$cl = new $model();
+				foreach($cl->getInitialData() as $initData) {
 					$initData["_model_"] = $model;
 					if(in_array(serialize($initData),$this->insertedData)) {
 						continue;
