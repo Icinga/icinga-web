@@ -51,14 +51,9 @@
 	</target>
 
 	<target name="db-purge-userprefs" depends="db-prepare">
-		
-		<property name="db.sql.truncateprefs" value="truncate table ${db.name}.nsm_user_preference" />
-		
-		<exec
-			command="${db.mysql.call_global} -e '${db.sql.truncateprefs}'"
-			dir="${builddir}"
-			passthru="true"
-			checkreturn="false" />
+		<taskdef name="doctrine" classname="etc.lib.doctrineTask"/>
+		<doctrine action="truncateTable" targettable="nsm_user_preference" icingapath="${src}" modelPath="${db.doctrine.models}" dsn="${db.dsn}"/>
+
 		
 	</target>
 	

@@ -9,6 +9,7 @@ class doctrineTask extends Task {
 	protected $modelPath = "app/modules/AppKit/lib/database/models/";
 	protected $dsn;
 	protected $action;
+	protected $targetTable;
 	
 	public function setAction($action) {
 		$this->action = $action;
@@ -20,6 +21,10 @@ class doctrineTask extends Task {
 	public function setModelpath($path) {
 		$this->modelPath = $path;
 	}
+	public function setTargettable($table) {
+		$this->targetTable = $table;
+	}
+	
 	public function setDsn($conn) {
 		$this->dsn = $conn;
 	}
@@ -33,10 +38,15 @@ class doctrineTask extends Task {
 	public function main() {
 		Doctrine_Manager::connection($this->dsn,"mainConnection");
 	
-		Doctrine::loadModels($this->modelPath."generated/");
+		Doctrine::loadModels($this->modelPath."/generated/");
 		Doctrine::setModelsDirectory($this->modelPath."/");
-		if($this->action == 'dropDB')
+		if($this->action == 'dropDB') {
 			$this->dropDB();
+		} else if($this->action="truncateTable" && $this->targetTable) {
+			Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh()->query(
+				"truncate table ".$this->targetTable.";"
+			);
+		} 
 	}
 	
 	public function dropDB() {

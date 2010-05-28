@@ -9,7 +9,8 @@ class dbUpdateTask extends doctrineTask {
 		parent::main();
 		$this->checkIfDBExists();
 		$this->checkVersion();
-		$this->updateStructure();
+		$altered = $this->updateStructure();
+		$this->updateVersion();
 	}
 	
 	public function checkVersion() {
@@ -37,10 +38,43 @@ class dbUpdateTask extends doctrineTask {
 	}
 	
 	public function updateStructure() {
-		echo "\nUpdating DB Structure";
-		$models = Doctrine::getLoadedModels();
-		print_r($models);
+		echo "\nUpdating DB Structure\n";
+		$models = Doctrine::loadModels($this->modelPath,Doctrine_Core::MODEL_LOADING_AGGRESSIVE,"Nsm");
+		$allAltered = array();
+		foreach(Doctrine::getLoadedModels() as $model) {
+			$class = new $model;
+			$altered = array();
+			//test
+			$cols = $class->getTable()->getColumns();
+			$tn = $class->getTable()->getTableName();
 		
+			$conn = Doctrine_Manager::connection();
+			foreach($cols as $name=>$columns) {
+				try {
+					$conn->export->alterTable($tn,array(
+						add=>array($name=>$columns)
+					));
+					$altered[] = $name;
+					echo "Added column ".$name." to ".$model."\n";
+				} catch(Exception $e) {
+				}
+			}
+
+			$allAltered[$model] = $altered;
+		}	
+		return $allAltered;
 	}
-	
+
+	protected function updateVersion() {
+		$thisVersion = NsmDbVersion::getInitialData();
+		$newVersion = $thisVersion[0]["version"];
+		
+		$vers = Doctrine_Core::getTable("NsmDbVersion")->findBy("vers_id",1)->getFirst();
+		if(!$vers instanceof NsmDbVersion) { 
+			$vers = new NsmDbVersion();
+			$vers->set("vers_id",1);
+		}
+		$vers->set("version",$newVersion);
+		$vers->save();
+	}
 }
