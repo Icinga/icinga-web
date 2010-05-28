@@ -91,6 +91,7 @@
 		<autoload name="BaseNsmUser">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmUser.php</autoload>
 		<autoload name="BaseNsmUserPreference">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmUserPreference.php</autoload>
 		<autoload name="BaseNsmUserRole">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmUserRole.php</autoload>
+		<autoload name="BaseNsmDbVersion">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmDbVersion.php</autoload>
 		
 		<autoload name="NsmLog">%core.module_dir%/AppKit/lib/database/models/NsmLog.php</autoload>
 		<autoload name="NsmPrincipal">%core.module_dir%/AppKit/lib/database/models/NsmPrincipal.php</autoload>
@@ -102,7 +103,7 @@
 		<autoload name="NsmTarget">%core.module_dir%/AppKit/lib/database/models/NsmTarget.php</autoload>
 		<autoload name="NsmSession">%core.module_dir%/AppKit/lib/database/models/NsmSession.php</autoload>
 		<autoload name="NsmUser">%core.module_dir%/AppKit/lib/database/models/NsmUser.php</autoload>
-				
+		<autoload name="NsmDbVersion">%core.module_dir%/AppKit/lib/database/models/NsmDbVersion.php</autoload>		
 		
 	</ae:configuration>
 </ae:configurations>

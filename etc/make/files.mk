@@ -25,16 +25,60 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/i18n/mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/bg.json $(DESTDIR)$(prefix)/app/data/i18n/mo/bg.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/bg.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/bg.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ca.json $(DESTDIR)$(prefix)/app/data/i18n/mo/ca.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ca.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/ca.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/cs.json $(DESTDIR)$(prefix)/app/data/i18n/mo/cs.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/cs.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/cs.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/da.json $(DESTDIR)$(prefix)/app/data/i18n/mo/da.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/da.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/da.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/de.json $(DESTDIR)$(prefix)/app/data/i18n/mo/de.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/de.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/de.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/el.json $(DESTDIR)$(prefix)/app/data/i18n/mo/el.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/el.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/el.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/en.json $(DESTDIR)$(prefix)/app/data/i18n/mo/en.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/en.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/en.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/es.json $(DESTDIR)$(prefix)/app/data/i18n/mo/es.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/es.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/es.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/fi.json $(DESTDIR)$(prefix)/app/data/i18n/mo/fi.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/fi.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/fi.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/fr.json $(DESTDIR)$(prefix)/app/data/i18n/mo/fr.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/fr.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/fr.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/he.json $(DESTDIR)$(prefix)/app/data/i18n/mo/he.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/he.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/he.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/hr.json $(DESTDIR)$(prefix)/app/data/i18n/mo/hr.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/hr.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/hr.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/hu.json $(DESTDIR)$(prefix)/app/data/i18n/mo/hu.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/hu.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/hu.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/it.json $(DESTDIR)$(prefix)/app/data/i18n/mo/it.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/it.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/it.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ja.json $(DESTDIR)$(prefix)/app/data/i18n/mo/ja.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ja.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/ja.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/lb.json $(DESTDIR)$(prefix)/app/data/i18n/mo/lb.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/lb.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/lb.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/nb.json $(DESTDIR)$(prefix)/app/data/i18n/mo/nb.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/nb.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/nb.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/nl.json $(DESTDIR)$(prefix)/app/data/i18n/mo/nl.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/nl.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/nl.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/nn.json $(DESTDIR)$(prefix)/app/data/i18n/mo/nn.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/nn.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/nn.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pl.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pl.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pl.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pl.mo
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.json $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/pt.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/pt.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ro.json $(DESTDIR)$(prefix)/app/data/i18n/mo/ro.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ro.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/ro.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ru.json $(DESTDIR)$(prefix)/app/data/i18n/mo/ru.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/ru.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/ru.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/sk.json $(DESTDIR)$(prefix)/app/data/i18n/mo/sk.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/sk.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/sk.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/sv.json $(DESTDIR)$(prefix)/app/data/i18n/mo/sv.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/sv.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/sv.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/tr.json $(DESTDIR)$(prefix)/app/data/i18n/mo/tr.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/tr.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/tr.mo
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/zh_CN.json $(DESTDIR)$(prefix)/app/data/i18n/mo/zh_CN.json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/zh_CN.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/zh_CN.mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/log
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/log/PLACEHOLDER $(DESTDIR)$(prefix)/app/data/log/PLACEHOLDER
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib
@@ -123,6 +167,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/AppKitSQLConstants.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/AppKitSQLConstants.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmDbVersion.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmDbVersion.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmLog.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmLog.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmPrincipal.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmPrincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmPrincipalTarget.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmPrincipalTarget.php
@@ -133,6 +178,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmUser.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmUser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmUserPreference.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmUserPreference.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/generated/BaseNsmUserRole.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/generated/BaseNsmUserRole.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/NsmDbVersion.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/NsmDbVersion.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/NsmLog.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/NsmLog.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/NsmPrincipal.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/NsmPrincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/database/models/NsmPrincipalTarget.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/database/models/NsmPrincipalTarget.php
@@ -632,7 +678,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-rescuescheme.sh $(DESTDIR)$(prefix)/bin/create-rescuescheme.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrineDeployTool.php $(DESTDIR)$(prefix)/bin/doctrineDeployTool.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/getopts.php $(DESTDIR)$(prefix)/bin/getopts.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-catalog.pl $(DESTDIR)$(prefix)/bin/loc-create-catalog.pl
@@ -677,6 +722,13 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue/mysql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-schema.sql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/lib
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/agaviDBExtractorTask.php $(DESTDIR)$(prefix)/etc/lib/agaviDBExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/confidentialInputTask.php $(DESTDIR)$(prefix)/etc/lib/confidentialInputTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbInitializeTask.php $(DESTDIR)$(prefix)/etc/lib/dbInitializeTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbUpdateTask.php $(DESTDIR)$(prefix)/etc/lib/dbUpdateTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineToSqlTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineToSqlTask.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
@@ -7661,6 +7713,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6714
-INC_DIRS=946
+INC_FILES=6765
+INC_DIRS=947
 # INSTALL_FILES_END

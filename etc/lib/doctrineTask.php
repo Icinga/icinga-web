@@ -5,7 +5,7 @@
  */
 
 class doctrineTask extends Task {
-	protected $icingaPath = "/usr/local/icinga-web/";
+	protected $icingaPath = "";
 	protected $modelPath = "app/modules/AppKit/lib/database/models/";
 	protected $dsn;
 	protected $action;
