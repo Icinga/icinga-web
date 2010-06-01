@@ -1,0 +1,11 @@
+#
+# Properties for the test suite
+#
+
+www-user =  @web_user@
+www-group = @web_group@
+www-port = 80
+www-port-ssl = 443
+web-path = @web_path@
+testLogin-name = root
+testLogin-pass = password

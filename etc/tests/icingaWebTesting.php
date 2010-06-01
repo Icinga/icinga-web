@@ -1,8 +1,8 @@
 #! /usr/bin/php
 <?php
 
-require('../../lib/agavi/src/testing.php');
-require('../../lib/doctrine/lib/Doctrine.php');
+require(dirname(__FILE__).'/../../lib/agavi/src/testing.php');
+require(dirname(__FILE__).'/../../lib/doctrine/lib/Doctrine.php');
 
 spl_autoload_register("Doctrine::autoload");
 require('config.php');
@@ -20,6 +20,27 @@ function success($str) {
 function error($str) {
 	print("\x1b[2;31m".$str."\x1b[m");
 }
+
+function stdin($prompt = "", $args = array(),$default=null) {
+	$inp = fopen("php://stdin","r");
+	$result;
+	$argsString = (!empty($args) ? '['.implode("/",$args).']' : '');
+	$defString = ($default ? "($default)" : '');
+	$error = false;
+	do {
+		$error = false;
+		// get input
+		echo $prompt." ".$argsString." ".$defString;
+		$result = fscanf($inp,"%s\n");	
+		
+		if(!empty($args) && !in_array($result[0],$args,true))
+			$error = true;
+	} while($error);
+	
+	return $result[0];
+}
+
+
 if(isset($arguments['environment'])) {
 	$env = $arguments['environment'];
 	unset($arguments['environment']);
