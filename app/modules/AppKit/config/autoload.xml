@@ -79,30 +79,6 @@
 		<autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
 		<autoload name="AppKitInlineIncluderUtil">%core.module_dir%/AppKit/lib/util/AppKitInlineIncluderUtil.class.php</autoload>
 		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
-		<!-- Doctrine models -->
-		
-		<autoload name="BaseNsmLog">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmLog.php</autoload>
-		<autoload name="BaseNsmPrincipal">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmPrincipal.php</autoload>
-		<autoload name="BaseNsmPrincipalTarget">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmPrincipalTarget.php</autoload>
-		<autoload name="BaseNsmRole">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmRole.php</autoload>
-		<autoload name="BaseNsmSession">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmSession.php</autoload>
-		<autoload name="BaseNsmTarget">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmTarget.php</autoload>
-		<autoload name="BaseNsmTargetValue">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmTargetValue.php</autoload>
-		<autoload name="BaseNsmUser">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmUser.php</autoload>
-		<autoload name="BaseNsmUserPreference">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmUserPreference.php</autoload>
-		<autoload name="BaseNsmUserRole">%core.module_dir%/AppKit/lib/database/models/generated/BaseNsmUserRole.php</autoload>
-		
-		<autoload name="NsmLog">%core.module_dir%/AppKit/lib/database/models/NsmLog.php</autoload>
-		<autoload name="NsmPrincipal">%core.module_dir%/AppKit/lib/database/models/NsmPrincipal.php</autoload>
-		<autoload name="NsmPrincipalTarget">%core.module_dir%/AppKit/lib/database/models/NsmPrincipalTarget.php</autoload>
-		<autoload name="NsmTargetValue">%core.module_dir%/AppKit/lib/database/models/NsmTargetValue.php</autoload>
-		<autoload name="NsmUserPreference">%core.module_dir%/AppKit/lib/database/models/NsmUserPreference.php</autoload>
-		<autoload name="NsmUserRole">%core.module_dir%/AppKit/lib/database/models/NsmUserRole.php</autoload>
-		<autoload name="NsmRole">%core.module_dir%/AppKit/lib/database/models/NsmRole.php</autoload>
-		<autoload name="NsmTarget">%core.module_dir%/AppKit/lib/database/models/NsmTarget.php</autoload>
-		<autoload name="NsmSession">%core.module_dir%/AppKit/lib/database/models/NsmSession.php</autoload>
-		<autoload name="NsmUser">%core.module_dir%/AppKit/lib/database/models/NsmUser.php</autoload>
-				
-		
+	
 	</ae:configuration>
 </ae:configurations>
