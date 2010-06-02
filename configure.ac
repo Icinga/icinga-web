@@ -142,6 +142,7 @@ AC_SUBST(INSTALL_OPTS)
 AC_CONFIG_FILES([
 	Makefile
 	etc/build.properties
+	etc/tests/test.properties
 	app/config/databases.xml
 	pub/.htaccess
 ])

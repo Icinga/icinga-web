@@ -76,12 +76,12 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
     
     public static function getInitialData() {
 		return array(
-			array('pt_id'=>'1','pt_principal_id'=>'2','pt_target_id'=>'8'),
-			array('pt_id'=>'2','pt_principal_id'=>'3','pt_target_id'=>'9'),
-			array('pt_id'=>'3','pt_principal_id'=>'3','pt_target_id'=>'10'),
-			array('pt_id'=>'4','pt_principal_id'=>'3','pt_target_id'=>'11'),
-			array('pt_id'=>'5','pt_principal_id'=>'4','pt_target_id'=>'8'),
-			array('pt_id'=>'6','pt_principal_id'=>'5','pt_target_id'=>'7')
+			array(/*'pt_id'=>'1',*/'pt_principal_id'=>'2','pt_target_id'=>'8'),
+			array(/*'pt_id'=>'2',*/'pt_principal_id'=>'3','pt_target_id'=>'9'),
+			array(/*'pt_id'=>'3',*/'pt_principal_id'=>'3','pt_target_id'=>'10'),
+			array(/*'pt_id'=>'4',*/'pt_principal_id'=>'3','pt_target_id'=>'11'),
+			array(/*'pt_id'=>'5',*/'pt_principal_id'=>'4','pt_target_id'=>'8'),
+			array(/*'pt_id'=>'6',*/'pt_principal_id'=>'5','pt_target_id'=>'7')
 		);
     }
 }

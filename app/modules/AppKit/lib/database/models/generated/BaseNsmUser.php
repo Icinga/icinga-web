@@ -47,6 +47,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
+        	 'default' => 0,
              'notnull' => true,
              'autoincrement' => false,
              ));
@@ -101,6 +102,7 @@ abstract class BaseNsmUser extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
+           	 'default' => 'internal',
              'notnull' => true,
              'autoincrement' => false,
              ));
@@ -183,7 +185,7 @@ abstract class BaseNsmUser extends Doctrine_Record
     public static function getInitialData() {
 		return  array(
 			array(
-				"user_id"=>1,
+//				"user_id"=>1,
 				"user_account"=>0,
 				"user_name" => 'root',
 				"user_firstname" => 'Enoch',

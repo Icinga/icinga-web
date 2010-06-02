@@ -68,7 +68,8 @@ class dbInitializeTask extends doctrineTask {
 					$result = false;
 					try { 
 						$result = $record->trySave();
-					} catch(Exception $e) {/*..ignore..*/
+					} catch(Exception $e) {
+						/*..ignore..*/
 					}
 					
 					

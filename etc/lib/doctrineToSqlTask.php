@@ -17,6 +17,7 @@ class doctrineToSqlTask extends doctrineTask {
 	}
 	
 	public function main() {
+		
 		$order = $this->getInitImportOrder();
 		parent::main();
 		$conn = Doctrine_Manager::connection($this->rdbms."://fake@fake/127.0.0.1:9876/fake");
@@ -26,6 +27,7 @@ class doctrineToSqlTask extends doctrineTask {
 	  	$sql .= "\n\n/*          Initial data import              */\n ";
 	  	$sql .= $this->getInitImportData($order);
 		file_put_contents($this->file."/".$this->rdbms.".sql",$sql);	
+	
 	}
 	
 	public function printSQLHead() {
@@ -59,20 +61,28 @@ class doctrineToSqlTask extends doctrineTask {
 	
 	public function getInitImportOrder() {
 		// initialize a test db and extract the insert order
+
+		
 		$dsn = $this->dsn;
 		$testDB = "dbexport_temp";
 		$dsntest = preg_replace("/^(.*)\/\w*?$/","$1/".$testDB,$dsn);
-		
 		$dbInitTask = new dbInitializeTask();	
+	
 		$dbInitTask->setDsn($dsntest);
 		$dbInitTask->setIcingapath($this->icingaPath);
 		$dbInitTask->setModelpath($this->modelPath);
-	
+		$dbInitTask->dropOnFinish(true);
 		$dbInitTask->setProject($this->getProject());
 		$dbInitTask->setLocation($this->getLocation());
 		$dbInitTask->perform();
-		
-		$dbInitTask->dropDB();
+		try {
+			$dbInitTask->dropDB();
+		} catch(Exception $e) {
+			echo "\nDeletion of temporary db dbexport_temp failed. Please remove it manually. \n ".
+				 "This is a known bug for postgresql\n";
+		}
+
 		return $dbInitTask->insertedData;	
 	}
+	
 }

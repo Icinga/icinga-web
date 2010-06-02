@@ -10,7 +10,7 @@ class doctrineTask extends Task {
 	protected $dsn;
 	protected $action;
 	protected $targetTable;
-	
+	protected $dropOnFinish = false;
 	public function setAction($action) {
 		$this->action = $action;
 	}
@@ -34,10 +34,11 @@ class doctrineTask extends Task {
 		require_once($this->icingaPath."lib/doctrine/lib/Doctrine.php");
 		spl_autoload_register("Doctrine::autoload");
 	}
-	
+	public function dropOnFinish($bool = false) {
+		$this->dropOnFinish = true;
+	}
 	public function main() {
 		Doctrine_Manager::connection($this->dsn,"mainConnection");
-	
 		Doctrine::loadModels($this->modelPath."/generated/");
 		Doctrine::setModelsDirectory($this->modelPath."/");
 		if($this->action == 'dropDB') {
@@ -47,9 +48,11 @@ class doctrineTask extends Task {
 				"truncate table ".$this->targetTable.";"
 			);
 		} 
+		
 	}
 	
 	public function dropDB() {
 		Doctrine::dropDatabases("mainConnection");
 	}
+	
 }

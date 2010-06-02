@@ -26,16 +26,19 @@ class icingaDatabaseAccessibleTest extends AgaviPhpUnitTestCase {
 				"user_account" => 0,
 				"user_disabled" => 0,
 				"user_firstname" => "TestCase",
-				"user_lastname"=> "TestCase",
-				"user_email" => "test@testuser@local",
+				"user_lastname"=> "TesvtCase",
+				"user_password" => "test123",
+				"user_salt" => "dsgdgd",
+				"user_authsrc" => "internal",
+				"user_email" => "test@testuser.local"
 			),
 			"toProp" => "lastUser"
 		),
 		array("model"=>"NsmTarget",
 			"fields"=>array(
 				"target_name" => "TestCase",
-				"target_description" => "TestCase Target",
-				"target_class" => "TestCase",
+				"target_description" => "TestCase-Target",
+				"target_class" => "TestCaseClass",
 				"target_type" => "credential"
 			),
 			"toProp" => "lastTarget"

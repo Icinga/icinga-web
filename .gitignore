@@ -9,6 +9,7 @@ Makefile
 config.log
 config.status
 etc/build.properties
+etc/tests/test.properties
 app/config/databases.xml
 pub/.htaccess
 *~
