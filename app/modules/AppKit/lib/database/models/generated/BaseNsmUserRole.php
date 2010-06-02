@@ -44,8 +44,8 @@ abstract class BaseNsmUserRole extends Doctrine_Record
         $this->hasOne('NsmUser', array(
              'local' => 'usro_user_id',
              'foreign' => 'user_id',
-        	 'onDelete' => 'RESTRICT',
-        	 'onUpdate' => 'RESTRICT'
+        	 'onDelete' => 'CASCADE',
+        	 'onUpdate' => 'CASCADE'
 	        )
         	
         );
@@ -53,8 +53,8 @@ abstract class BaseNsmUserRole extends Doctrine_Record
         $this->hasOne('NsmRole', array(
              'local' => 'usro_role_id',
              'foreign' => 'role_id',
-           	 'onDelete' => 'RESTRICT',
-        	 'onUpdate' => 'RESTRICT')
+           	 'onDelete' => 'CASCADE',
+        	 'onUpdate' => 'CASCADE')
         );
     }
 	

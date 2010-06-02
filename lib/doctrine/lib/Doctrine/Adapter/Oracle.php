@@ -33,6 +33,17 @@
  * @version     $Revision$
  */
 
+/**
+ * Oracle date fix from 
+ * http://groups.google.com/group/doctrine-user/browse_thread/thread/78d1d33576ab905f
+ *
+ */
+class DoctrineOracleDateFormatSetter extends Doctrine_EventListener{
+    public function postConnect(Doctrine_Event $event) {
+        $event->getInvoker()->setDateFormat("YYYY-MM-DD HH24:MI:SS");
+    }
+} 
+
 class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
 {
     /**
@@ -87,6 +98,7 @@ class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
      */
     public function __construct($config = array(), $username = null, $password = null)
     {
+    	Doctrine_Manager::connection()->addListener(new DoctrineOracleDateFormatSetter());
         if (is_string($config))
         {
             $config = str_replace("oracle:","",$config);
@@ -121,7 +133,7 @@ class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
             }
         }
 
-
+		
         if ($this->config['persistent'] == 'true'){ 
             $this->connection = @oci_pconnect($this->config['username'], $this->config['password'], 
                 $this->config['dbname'], $this->config['charset']); 
@@ -143,8 +155,8 @@ class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
      */
     public function prepare($query)
     {
+ 		
         $stmt = new Doctrine_Adapter_Statement_Oracle($this, $query, $this->executeMode);
-
         return $stmt;
     }
 
@@ -275,7 +287,7 @@ class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
      * @return resource OCI connection handler
      */
     public function getConnection()
-    {
+    {	
         return $this->connection;
     }
     

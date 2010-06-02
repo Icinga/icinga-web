@@ -48,8 +48,8 @@ abstract class BaseNsmSession extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('session_data', 'blob', null, array(
-             'type' => 'blob',
+        $this->hasColumn('session_data', 'clob', null, array(
+             'type' => 'clob',
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,

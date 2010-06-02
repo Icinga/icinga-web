@@ -49,8 +49,8 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('upref_longval', 'blob', null, array(
-             'type' => 'blob',
+        $this->hasColumn('upref_longval', 'clob', null, array(
+             'type' => 'clob',
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
@@ -93,8 +93,8 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
         $this->hasOne('NsmUser', array(
              'local' => 'upref_user_id',
              'foreign' => 'user_id',
-           	 'onDelete' => 'RESTRICT',
-        	 'onUpdate' => 'RESTRICT'
+           	 'onDelete' => 'CASCADE',
+        	 'onUpdate' => 'CASCADE'
         ));
     }
    
