@@ -7,6 +7,10 @@ class AppKitAgaviContext extends AgaviContext {
 	 * @see lib/agavi/src/core/AgaviContext#initialize()
 	 */
 	public function initialize() {
+		/*
+		 * Make our settings ready
+		 * before run agavi
+		 */
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
 		$this->initializeAutosettings();

@@ -3,9 +3,8 @@
  * This create the complete view (simply loading a cronk which is doing for us)
  */
 Ext.onReady(function() {
-	
 	var _LL = AppKit.util.Layout;
-	
+
 	_LL.addTo({
 		layout: 'fit',
 		crname: 'crportal',
@@ -13,5 +12,4 @@ Ext.onReady(function() {
 		xtype: 'cronk'
 	});
 });
-
 </script>

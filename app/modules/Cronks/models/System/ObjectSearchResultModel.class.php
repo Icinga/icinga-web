@@ -1,7 +1,6 @@
 <?php
 
-class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
-{
+class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 
 	/**
 	 * 
@@ -39,9 +38,9 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOST_NAME',
-				'object_id'		=> 'HOST_OBJECT_ID',
+				'object_id'	=> 'HOST_OBJECT_ID',
 				'description'	=> 'HOST_ALIAS',
-				'data1'			=> 'HOST_ADDRESS',
+				'data1'		=> 'HOST_ADDRESS',
 				'object_status'	=> 'HOST_CURRENT_STATE'
 			)
 		),
@@ -52,7 +51,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICE_NAME',
-				'object_id'		=> 'SERVICE_OBJECT_ID',
+				'object_id'	=> 'SERVICE_OBJECT_ID',
 				'object_name2'	=> 'HOST_NAME',
 				'description'	=> 'SERVICE_DISPLAY_NAME',
 				'object_status'	=> 'SERVICE_CURRENT_STATE'
@@ -66,7 +65,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOSTGROUP_NAME',
-				'object_id'		=> 'HOSTGROUP_OBJECT_ID',
+				'object_id'	=> 'HOSTGROUP_OBJECT_ID',
 				'description'	=> 'HOSTGROUP_ALIAS'
 			)
 		),
@@ -77,7 +76,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICEGROUP_NAME',
-				'object_id'		=> 'SERVICEGROUP_OBJECT_ID',
+				'object_id'	=> 'SERVICEGROUP_OBJECT_ID',
 				'description'	=> 'SERVICEGROUP_ALIAS'
 			)
 		),
@@ -87,19 +86,27 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 		parent::initialize($c, $p);
 		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->getConnection();
 	}
-	
+
+	/**
+	 * Injects the search query from
+	 * input source
+	 * @param string $query
+	 * @return boolean always true
+	 */
 	public function setQuery($query) {
 		
 		if (strpos($query, '*') !==false) {
 			$query = str_replace('*', '%', $query);
 		}
 		
-		// Append search suffix
+		// Makes it easier for the user
 		if (strpos($query, '%') == false) {
 			$query .= '%';
 		}
 		
 		$this->query = $query;
+
+		return true;
 	}
 	
 	public function setSearchType($type) {
@@ -152,7 +159,13 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel
 			'resultSuccess'		=> ($sum>0) ? true : false
 		);
 	}
-	
+
+	/**
+	 * Well do not know what christian
+	 * was doing here ;-)
+	 * @param array $add
+	 * @param array $out
+	 */
 	private function addToArray(array $add, array &$out) {
 		foreach ($add as $suba) {
 			$out[] = $suba;

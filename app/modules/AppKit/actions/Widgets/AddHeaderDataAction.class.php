@@ -1,7 +1,6 @@
 <?php
 
-class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction
-{
+class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction {
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.
@@ -31,7 +30,7 @@ class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction
 		}
 		
 		// Adding squished javascript files
-		$squish_url = $this->getContext()->getRouting()->gen('appkit.squishloader', array('type' => AppKitBulkLoader::CODE_TYPE_JAVASCRIPT));
+		$squish_url = $this->getContext()->getRouting()->gen('appkit.squishloader');
 		$header->addJsFile($squish_url);
 		
 		// Adding inline files
