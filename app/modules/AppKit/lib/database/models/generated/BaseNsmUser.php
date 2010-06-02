@@ -160,8 +160,8 @@ abstract class BaseNsmUser extends Doctrine_Record
              'autoincrement' => false,
              ));
     	
-		$this->index('user_unique_idx',array('fields'=>array('user_name')));
-		$this->index('user_search_idx',array('fields'=>	array('user_name','user_authsrc','user_authid','user_disabled')));
+	//	$this->index('user_unique_idx',array('fields'=>array('user_name')));
+		$this->index('user_search_idx',array('fields'=>	array('user_authsrc','user_authid','user_disabled')));
     }
     
     
@@ -193,7 +193,7 @@ abstract class BaseNsmUser extends Doctrine_Record
 				"user_password" => '42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1',
 				"user_salt" => '0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd',
 				"user_authsrc" => 'internal',
-				"user_authid" => '',
+//				"user_authid" => '',
 				"user_email" => 'root@localhost.local',
 				"user_disabled" => 0
 			)	

@@ -12,6 +12,9 @@ class persistenceView extends AgaviPhpUnitTestCase {
 		$context->getUser()->setAuthenticated(true);
 	}
 	
+	/**
+	 * @depends icingaDatabaseAccessibleTest::testInsert
+	 */
 	public function testReadState() {
 		info("Testing Persistence functions \n");
 		info("\tTesting state-read\n");

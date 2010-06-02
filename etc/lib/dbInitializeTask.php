@@ -66,12 +66,12 @@ class dbInitializeTask extends doctrineTask {
 						$record->set($field,$value);
 					}
 					$result = false;
+					
 					try { 
 						$result = $record->trySave();
 					} catch(Exception $e) {
 						/*..ignore..*/
 					}
-					
 					
 					if($result)
 						$this->insertedData[$order++] = serialize($initData);	

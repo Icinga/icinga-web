@@ -10,7 +10,7 @@ class agaviDBExtractorTask extends Task {
 	protected $port;
 	protected $toRef;
 	
-	protected static $__SUPPORTED_DRIVERS = array("mysql","pgsql","oci","sqlite");
+	protected static $__SUPPORTED_DRIVERS = array("mysql","pgsql","oracle");
 	protected static $__EXPERIMENTAL_DRIVERS = array("pgsql","oci","sqlite");
 	public function setToref($refname) {
 		$this->toRef = $refname;

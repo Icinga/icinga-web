@@ -151,6 +151,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      */
     public function bindParam($column, &$variable, $type = null, $length = null, $driverOptions = array())
     {
+
         if ($driverOptions || $length ) {
             throw new Doctrine_Adapter_Exception('Unsupported parameters:$length, $driverOptions');
         }
@@ -159,7 +160,6 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
             $oci_length = -1;
         }
         $oci_type = SQLT_CHR;
-
         switch ($type) {
             case Doctrine_Core::PARAM_STR:
                 $oci_type = SQLT_CHR;
@@ -172,7 +172,8 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
             $variable_name = $column;
         }
         //print "Binding $variable to $variable_name".PHP_EOL;
-        $status = @oci_bind_by_name($this->statement, $variable_name, $variable, $oci_length, $oci_type);
+        
+        $status = oci_bind_by_name($this->statement, $variable_name, $variable, $oci_length, $oci_type);
         if ($status === false) {
            $this->handleError();
         }
@@ -259,9 +260,11 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      */
     public function execute($params = null)
     {
+    
         if (is_array($params)) {
-            foreach ($params as $var => $value) {
-                $this->bindValue($var+1, $value);
+        	foreach ($params as $var => $value) {
+				
+        		$this->bindValue($var+1, $value);
             }
         }
 

@@ -23,11 +23,6 @@ class NsmUserPreference extends BaseNsmUserPreference
 		
 		parent::setTableDefinition();
 		
-		$this->index('upref_search_key', array (
-			'fields' => array (
-				'upref_key'
-			)
-		));
 		
 	}
 	
