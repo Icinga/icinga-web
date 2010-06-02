@@ -87,7 +87,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 			if (md5($data) == $this->NsmSession->session_checksum) {
 				return $data;
 			}
-			
+			$this->NsmSession->delete();
 			throw new AppKitDoctrineSessionStorageException('Sessiondata integrity error, should be: '. $this->NsmSession->session_checksum);
 		}
 	
