@@ -83,6 +83,7 @@ class NsmUser extends BaseNsmUser
 	
 	private function __updatePassword($password) {
 		$this->user_salt = $this->__createSalt($this->user_name);
+		hash_hmac(self::HASH_ALGO, $password, $this->user_salt);
 		$this->user_password = hash_hmac(self::HASH_ALGO, $password, $this->user_salt);
 	}
 	
@@ -159,7 +160,7 @@ class NsmUser extends BaseNsmUser
 		->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
 		->limit(1)
 		->execute();
-		
+
 		if ($res->count() == 1 && ($obj = $res->getFirst()) instanceof NsmUserPreference) {
 			
 			//var_dump($res->toArray(true));

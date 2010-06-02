@@ -61,6 +61,7 @@ class persistenceView extends AgaviPhpUnitTestCase {
 		} catch(Exception $e) {
 			$this->fail("An exception was thrown during state write: ".$e->getMessage());
 		}
+		
 		// Check for success state
 		if(@!$data["success"])
 			$this->fail("Could not write view state! Your cronk settings may not be saved in icinga-web.");			

@@ -29,7 +29,7 @@ abstract class BaseNsmDbVersion extends Doctrine_Record
     
     public static function getInitialData() {
 		return array(
-			array('vers_id'=>'1','version'=>'1'),
+			array('vers_id'=>'1','version'=>'2'),
 		);
     }
     

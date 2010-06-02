@@ -3,6 +3,12 @@
 class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	public static function setUpBeforeClass() {
 		Doctrine_Manager::connection()->beginTransaction();
+		$context = AgaviContext::getInstance();
+		$context->getUser()->addCredential("appkit.admin");
+		$context->getUser()->addCredential("appkit.admin.users");
+		$context->getUser()->addCredential("appkit.admin.groups");
+		$context->getUser()->addCredential("icinga.user");
+		$context->getUser()->setAuthenticated(true);
 	}
 	protected $roleParams = array(
 		"id" => "new",

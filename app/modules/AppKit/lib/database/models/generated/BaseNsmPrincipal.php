@@ -96,11 +96,11 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
     
     public static function getInitialData() {
 		return array(
-			array('principal_id'=>'1','principal_user_id'=>'1','principal_type'=>'user','principal_disabled'=>'0'),
-			array('principal_id'=>'2','principal_role_id'=>'2','principal_type'=>'role','principal_disabled'=>'0'),
-			array('principal_id'=>'3','principal_role_id'=>'3','principal_type'=>'role','principal_disabled'=>'0'),
-			array('principal_id'=>'4','principal_role_id'=>'1','principal_type'=>'role','principal_disabled'=>'0'),
-			array('principal_id'=>'5','principal_role_id'=>'4','principal_type'=>'role','principal_disabled'=>'0')				
+			array(/*'principal_id'=>'1',*/'principal_user_id'=>'1','principal_type'=>'user','principal_disabled'=>'0'),
+			array(/*'principal_id'=>'2',*/'principal_role_id'=>'2','principal_type'=>'role','principal_disabled'=>'0'),
+			array(/*'principal_id'=>'3',*/'principal_role_id'=>'3','principal_type'=>'role','principal_disabled'=>'0'),
+			array(/*'principal_id'=>'4',*/'principal_role_id'=>'1','principal_type'=>'role','principal_disabled'=>'0'),
+			array(/*'principal_id'=>'5',*/'principal_role_id'=>'4','principal_type'=>'role','principal_disabled'=>'0')				
 		);
     }
 }
