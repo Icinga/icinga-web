@@ -250,7 +250,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 								Ext.iterate(item, function (key, citem, o) {
 									var c = citem;
 									c.tools = tools;
-									
+									AppKit.log(c);
 									var cronk = Cronk.factory(c);
 									PortalHandler.createResizer(cronk);
 									

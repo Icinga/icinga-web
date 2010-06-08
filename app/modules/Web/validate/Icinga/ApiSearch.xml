@@ -20,16 +20,23 @@
 					<error>Validation of target field!</error>
 				</errors>
 			</validator>
+			
 			<validator name="method" class="string" required="false">
 				<argument>method</argument>
 				<errors>
 					<error>Validation of method failed!</error>
 				</errors>
 			</validator>
-			<validator name="filter" class="string" required="false">
+			
+			<validator name="filter" class="AppKitURLFilterValidator" required="false">
 				<argument>filter</argument>
+				<ae:parameters>
+					<ae:parameter name="export">filter</ae:parameter>
+				</ae:parameters>
 				<errors>
 					<error>Validation of filter failed!</error>
+					<error for="error_braces">Syntax error - not all braces are properly closed!</error>
+					<error for="general_syntax">Syntax error</error>
 				</errors>
 			</validator>
 		
@@ -75,6 +82,7 @@
 				</ae:parameter>
 			</validator>			
 		</validators>
+		
 		<validators method="read">
 			<validator name="columns" class="AppKitSplitValidator" required="false">
 				<argument>columns</argument>
@@ -88,6 +96,7 @@
 			</validator>
 			
 		</validators>
+		
 		<validators method="write">
 			<validator name="filters" class="string" required="false">
 				<arguments base="filters[]">

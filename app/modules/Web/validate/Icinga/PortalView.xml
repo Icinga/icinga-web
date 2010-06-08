@@ -7,6 +7,55 @@
 	<ae:configuration>
 		
 		<validators>
+			<validator class="string" name="cr_base" required="false">
+				<argument>cr_base</argument>
+				<errors>
+					<error>Validation of 'cr_base' failed</error>
+				</errors>
+			</validator>
+			
+			<validator name="groupDir" class="inarray" required="false">	
+				<argument>groupDir</argument>
+				<errors>
+					<error>Dir must be either 'DESC' or 'ASC'</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="type">string</ae:parameter>
+					<ae:parameter name="case">true</ae:parameter>
+					<ae:parameter name="values">
+						<ae:parameter>DESC</ae:parameter>
+						<ae:parameter>ASC</ae:parameter>
+					</ae:parameter>
+				</ae:parameters>
+			</validator>
+			
+			<validator class="string" name="groupField" required="false">
+				<argument>groupField</argument>
+				<errors>
+					<error>Validation of 'groupField' failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="template" required="false">
+				<argument>template</argument>
+				<errors>
+					<error>Validation of 'template' failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="crname" required="false">
+				<argument>crname</argument>
+				<errors>
+					<error>Validation of 'crname' failed</error>
+				</errors>
+			</validator>		
+
+			<validator class="string" name="title" required="false">
+				<argument>title</argument>
+				<errors>
+					<error>Validation of 'title' failed</error>
+				</errors>
+			</validator>				
 		</validators>
 		
 	</ae:configuration>

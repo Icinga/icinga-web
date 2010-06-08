@@ -30,7 +30,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 	
 	applyState: function(state) {
 		(function() {
-			
+
 			if (state.cronks) {
 				// Adding all cronks
 				Ext.iterate(state.cronks, function(index, item, o) {

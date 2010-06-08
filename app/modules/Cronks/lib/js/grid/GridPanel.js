@@ -48,6 +48,47 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 							
 						},
 						scope: this
+					},{
+						text: _('Get this view as URL'),
+						iconCls: 'silk-anchor',
+						handler: function(oBtn,e) {
+							var store = this.parentCmp.grid.store;
+							var cronk = this.ownerCt.CronkPlugin.cmpConfig;
+							var urlParams = "cr_base=";
+
+							var counter = 0;						
+							for(var i in store.baseParams) {
+								var name = i.replace(/(.*?)\[(.*?)\]/g,"$1\|$2_"+counter);	
+								urlParams += name+"["+store.baseParams[i]+"];";
+								counter++;
+							}
+							
+							urlParams += 
+								"/groupDir="+store.groupDir+"/"+
+								"groupField="+store.groupField+"/"+
+								"template="+this.parentCmp.params.template+"/"+
+								"crname="+cronk.crname+"/"+
+								"title="+cronk.title;
+							
+						
+							new Ext.Window({
+								renderTo:Ext.getBody(),
+								modal:true,
+								initHidden:false,
+								width:500,
+								autoHeight:true,
+								closeable:true,
+								layout:'form',
+								title:_('Link to this view'),
+								items: {
+									xtype:'textfield',
+									fieldLabel: _('Link'),
+									width:250,
+									value: this.parentCmp.meta.baseURL+"/customPortal/"+urlParams
+								}
+							});
+						},
+						scope:this
 					}]
 				}
 			}]

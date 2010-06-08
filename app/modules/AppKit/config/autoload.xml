@@ -78,7 +78,10 @@
 		<autoload name="AppKitStringUtil">%core.module_dir%/AppKit/lib/util/AppKitStringUtil.class.php</autoload>
 		<autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
 		<autoload name="AppKitInlineIncluderUtil">%core.module_dir%/AppKit/lib/util/AppKitInlineIncluderUtil.class.php</autoload>
+	
+		<!-- Custom validators -->
 		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
+		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
 	
 	</ae:configuration>
 </ae:configurations>
