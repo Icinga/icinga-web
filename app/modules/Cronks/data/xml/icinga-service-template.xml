@@ -409,7 +409,7 @@
 							<parameter name="image">images/fam/information.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Double click here for information</parameter>
+								<parameter name="qtip">Click here for information</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -471,7 +471,7 @@
 							<parameter name="image">images/fam/book.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Double click here for history</parameter>
+								<parameter name="qtip">Click here for history</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>

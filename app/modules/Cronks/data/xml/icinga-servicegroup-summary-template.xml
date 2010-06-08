@@ -260,7 +260,7 @@
 							<parameter name="image">images/fam/cog.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Double click here to display containing services</parameter>
+								<parameter name="qtip">Click here to display containing services</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
