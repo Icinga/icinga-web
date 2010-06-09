@@ -75,6 +75,7 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 			}
 			return vdefault;
 		}
+		
 	}
 	
 }());

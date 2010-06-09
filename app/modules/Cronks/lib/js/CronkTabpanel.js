@@ -3,12 +3,18 @@ Ext.ns('Cronk.util');
 Cronk.util.Tabpanel = function(config) {
 
 	this.stateEvents = ['add', 'remove', 'tabchange', 'titlechange'];
-
+	
 	Cronk.util.Tabpanel.superclass.constructor.call(this, config);	
 }
 
 Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
-
+	URLTabData : false,
+	
+	setURLTab : function(params) {
+		this.URLTabData = params;
+		
+	},
+	
 	getState: function() {
 		
 		var cout = {};
@@ -30,7 +36,6 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 	
 	applyState: function(state) {
 		(function() {
-
 			if (state.cronks) {
 				// Adding all cronks
 				Ext.iterate(state.cronks, function(index, item, o) {
@@ -39,13 +44,16 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 				
 				// Sets the active tab
 				this.setActiveTab(state.active || 0);
-				
+				if(this.URLTabData) {
+
+					this.setActiveTab(this.add(this.plugins.createURLCronk(this.URLTabData)));		
+				}				
 				this.getActiveTab().doLayout();
 			}
-			
+				
 						
 		}).defer(5, this);
-		
+				
 		return true;
 	}
 });

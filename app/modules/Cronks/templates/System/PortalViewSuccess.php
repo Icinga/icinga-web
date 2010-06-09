@@ -244,7 +244,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 	
 					// Defered execution
 					(function() {
-	
+					
 						if (state.col) {
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
@@ -271,7 +271,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		}
 		
 		var portal = new Ext.ux.Portal(portal_config);
-		
+
 		CE.insert(0, portal);
 		CE.doLayout();
 	});	

@@ -175,5 +175,31 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		
 		// Move the msgbox to our context menu
 		msg.getDialog().alignTo(this.contextmenu.el, 'tr-tr');
+	},
+	
+	createURLCronk: function(data) {
+
+		var urlCronk =  Cronk.factory({
+			title: data.title,
+			crname: data.crname,
+			closable: true
+		});
+		urlCronk.on("add",function(p, c, i) {
+			if(!c.store)
+				return null; 
+
+			Ext.apply(c.store.baseParams,data.cr_base);
+			c.store.groupDir = data.groupDir;
+			c.store.groupField = data.groupField;
+			c.store.sortInfo['direction'] = data.groupDir;
+			c.store.sortInfo['field'] = data.groupField;
+			
+			c.parentCmp.sort_array[0]['direction'] = data.groupDir;
+			c.parentCmp.sort_array[0]['field'] = data.groupField;
+			c.store.load();
+
+		})
+		return urlCronk;
 	}
+	
 });

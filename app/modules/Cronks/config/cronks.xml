@@ -304,17 +304,6 @@
 			</ae:parameter>
 		</ae:parameter>
 		
-		<ae:parameter name="icingaCustomView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.CustomCronk</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Custom URL-accessible Cronk</ae:parameter>
-			<ae:parameter name="name">Servicelink Cronk</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-
-			</ae:parameter>
-		</ae:parameter>
 		
 		<ae:parameter name="icingaExampleCronkHelloWorld">
 			<ae:parameter name="module">Cronks</ae:parameter>
