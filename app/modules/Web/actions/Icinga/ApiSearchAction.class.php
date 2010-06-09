@@ -16,6 +16,7 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 	 */
 	
 	static public $defaultColumns = array(
+		"instance" => array("INSTANCE_ID",'INSTANCE_NAME','INSTANCE_DESCRIPTION'), 
 		"host" => array("HOST_ID",'HOST_OBJECT_ID','HOST_INSTANCE_ID',"HOST_NAME","HOST_ALIAS","HOST_DISPLAY_NAME","HOST_ADDRESS","HOST_IS_ACTIVE"), 
 		"service" => array("SERVICE_ID","SERVICE_OBJECT_ID","SERVICE_IS_ACTIVE","SERVICE_INSTANCE_ID","SERVICE_NAME","SERVICE_DISPLAY_NAME","SERVICE_OUTPUT","SERVICE_PERFDATA"), 
 		"hostgroup" => array("HOSTGROUP_ID","HOSTGROUP_OBJECT_ID","HOSTGROUP_INSTANCE_ID","HOSTGROUP_NAME","HOSTGROUP_ALIAS"), 
@@ -69,8 +70,9 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 		// Adding security principal targets to the query
 		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
-		$search = $search->fetch()->getAll();
-		$rd->setParameter("searchResult",$search);
+		$res = $search->fetch()->getAll();
+
+		$rd->setParameter("searchResult", $res);
 		return $this->getDefaultViewName();
 	}
 	

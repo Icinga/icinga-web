@@ -64,7 +64,6 @@ var IcingaGridFilterWindow = function() {
 				
 				listeners: {
 					render: function(oc) {
-						console.log(oGrid);
 						if (oGrid.filter_types) {
 							var i = 0;
 							Ext.iterate(oGrid.filter_types, function(key, item) {

@@ -1,3 +1,69 @@
+
+Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
+	constructor : function(cfg, meta) {
+
+		var kf = meta.api_keyfield;		// ValueField
+		var vf = meta.api_valuefield;	// KeyField
+
+		var fields = [];
+		var cols = [];
+
+		var cfields = {};
+		cfields[kf] = true;
+		cfields[vf] = true;
+
+		if (meta.api_id) {
+			cfields[meta.api_id] = true;
+		}
+
+		// If we need more fields to work with
+		if (meta.api_additional) {
+			var i = meta.api_additional.split(',');
+			for (var k in i) {
+				if (Ext.isString(i[k])) {
+					cfields[i[k]] = true;
+				}
+			}
+		}
+
+		for (var f in cfields) {
+			cols.push(f);
+			fields.push({
+				name: f
+			});
+		}
+
+		var apiStore = new Ext.data.JsonStore({
+			autoDestroy : true,
+			url : AppKit.c.path + '/web/api/json',
+
+			baseParams : {
+				target : meta.api_target,
+				order_col: (meta.api_order_col || meta.api_keyfield),
+				order_dir: (meta.api_order_dir || 'desc'),
+				columns: cols
+			},
+
+			idProperty : (meta.api_id || meta.api_keyfield),
+
+			fields : fields
+		});
+
+		cfg = Ext.apply(cfg || {}, {
+			store : apiStore,
+			displayField: vf,
+			valueField : vf,
+			keyField : kf
+		});
+
+		if (meta.api_exttpl) {
+			cfg.tpl = '<tpl for="."><div class="x-combo-list-item">' + meta.api_exttpl + '</div></tpl>';
+		}
+
+		Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
+	}
+});
+
 // Our class
 Cronk.FilterHandler = function() {
 	Cronk.FilterHandler.superclass.constructor.call(this);
@@ -124,7 +190,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 		
 		// Disable the operator
 		if (meta.no_operator && meta.no_operator == true) {
-			return new Ext.Panel({ border: false });
+			return new Ext.Panel({border: false});
 		} 
 		
 		if (meta.operator_type) {
@@ -214,6 +280,18 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 		return new Ext.form.ComboBox(def);
 		
 	},
+
+	getApiCombo : function(meta) {
+		return new Cronk.IcingaApiComboBox({
+			typeAhead: true,
+			triggerAction: 'all',
+			forceSelection: true,
+			'name': meta.name + '-field',
+			'id': meta.name + '-field',
+			hiddenName: meta.name + '-value',
+			hiddenId: meta.name + '-value'
+		}, meta);
+	},
 	
 	getFilterComponent : function(meta) {
 		var oDef = {
@@ -239,7 +317,11 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 					['3', '2', 'Unreachable']
 				], meta);
 			break;
-			
+
+			case 'appkit.ext.filter.api':
+				return this.getApiCombo(meta);
+			break;
+
 			default:
 				return new Ext.form.TextField(oDef);	
 			break;
@@ -276,9 +358,9 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			
 			// Adding the label
 			panel.add([
-				{items: this.getLabelComponent(meta), columnWidth: .19 },
+				{items: this.getLabelComponent(meta), columnWidth: .19},
 				{items: this.getOperatorComponent(meta), columnWidth: .3},
-				{items: this.getFilterComponent(meta), columnWidth: .4 },
+				{items: this.getFilterComponent(meta), columnWidth: .4},
 				{items: this.getRemoveComponent(meta), columnWidth: .1}
 			]);
 			
