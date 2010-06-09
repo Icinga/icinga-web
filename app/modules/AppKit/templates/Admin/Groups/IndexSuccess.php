@@ -79,6 +79,7 @@ Ext.onReady(function() {
 		storeId: 'groupListStore',
 		idProperty: 'role_id',
 		autoLoad:true,
+		remoteSort: true,
 		url: '<? echo $ro->gen("appkit.data.groups")?>',
 		fields: [
 			{name: 'role_id', type:'int'},
@@ -146,7 +147,7 @@ Ext.onReady(function() {
 	
 	wnd_groupEditPanel.render(document.body);
 	
-	AppKit.groups.grid =   new Ext.grid.GridPanel({
+	AppKit.groups.grid =  new Ext.grid.GridPanel({
 		autoHeight: true,
 		tools: [{
 			id: 'plus',
@@ -156,32 +157,79 @@ Ext.onReady(function() {
 			id: 'minus',
 			qtip: _('Remove selected groups'),
 			handler: function(ev,toolEl,panel,tc) {
-				Ext.Msg.confirm(_("Delete groups"),_("Do you really want to delete these groups?"),function(btn) {
-					if(btn != "yes")
-						return false;
-					var selModel = this.getSelectionModel();
-					var selected = selModel.getSelections();
-					var ids = {};
-					Ext.each(selected,function(record) {
-						var currentId = record.get("role_id");
-						var currentName = "group_id["+currentId+"]";
-						ids[currentName] = currentId;
-					},this);
-					
-					Ext.Ajax.request({
-						url: '<?echo $ro->gen("appkit.admin.groups.remove") ?>',
-						success: function() {
-							this.getStore().reload();
-						},
-						scope:this,
-						params: ids
-						
-					});
-				},panel)
+				panel.deleteSelected.call(panel);
 			},
 			scope:this
 		}],		 
 		
+		deleteSelected: function() {
+			Ext.Msg.confirm(_("Delete groups"),_("Do you really want to delete these groups?"),function(btn) {
+				if(btn != "yes")
+					return false;
+				var selModel = this.getSelectionModel();
+				var selected = selModel.getSelections();
+				var ids = {};
+				Ext.each(selected,function(record) {
+					var currentId = record.get("role_id");
+					var currentName = "group_id["+currentId+"]";
+					ids[currentName] = currentId;
+				},this);
+				
+				Ext.Ajax.request({
+					url: '<?echo $ro->gen("appkit.admin.groups.remove") ?>',
+					success: function() {
+						this.getStore().reload();
+					},
+					scope:this,
+					params: ids
+					
+				});
+			},this);
+		},
+		
+		tbar: new Ext.PagingToolbar({
+			pageSize: 25,
+			store: AppKit.groups.groupList,
+			displayInfo: true,
+			displayMsg: _('Displaying groups')+' {0} - {1} '+_('of')+' {2}',
+			emptyMsg: _('No groups to display'),
+			items: [{
+				xtype: 'tbseparator',
+				width: 15
+			},{
+				xtype: 'displayfield',
+				value: _('Hide disabled ')
+				
+			},{
+				xtype:'checkbox',
+				id:'hide_disabled',
+				name: 'disabled',
+				handler: function(btn, checked){
+					AppKit.groups.grid.getStore().setBaseParam('hideDisabled',checked);
+				}
+			},{
+				xtype: 'tbseparator',
+				width: 15
+			},{
+				xtype: 'button',
+				iconCls: 'silk-cancel',
+				text: _('Remove selected'),
+				handler: function(ev,btn) {
+					AppKit.groups.grid.deleteSelected();
+				},
+				scope: this
+			},{
+				xtype: 'tbseparator',
+				width: 15
+			},{
+				xtype: 'button',
+				iconCls: 'silk-add',
+				text: _('Add new group'),
+				handler: function() {wnd_groupEditPanel.createGroup();}
+				
+			}]
+			
+		}), 
 		
 		store : AppKit.groups.groupList,
 		listeners: {
@@ -189,8 +237,26 @@ Ext.onReady(function() {
 				var id = AppKit.groups.groupList.getAt(index).get("role_id");
 				wnd_groupEditPanel.editGroup(id);							
 			},
+			rowcontextmenu: function(grid,index,_e) {
+				_e.preventDefault();
+				var record =  grid.getStore().getAt(index);
+				var id =record.get("role_id");
+				grid.ctxmenu(id,record,_e.getXY());
+			},
 			scope: this
 		},
+		
+		ctxmenu: function(id,record,pos) {
+			new Ext.menu.Menu({
+				autoDestroy:true,
+				items: [{
+					text:'Edit this group',
+					handler: wnd_groupEditPanel.editGroup.createDelegate(wnd_groupEditPanel,[id]),
+					iconCls: 'silk-pencil'
+				}]			
+			}).showAt(pos);
+		},
+		
 		colModel: new Ext.grid.ColumnModel({
 			defaults: {
 				width:120,
