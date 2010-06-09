@@ -45,11 +45,36 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 		return 'Success';
 	}
 
-	public function isSecure() {
-		return true;
+	public function checkAuth(AgaviRequestDataHolder $rd) {
+		$user = $this->getContext()->getUser();
+		$authKey = $rd->getParameter("authkey");
+		$validation = $this->getContainer()->getValidationManager();
+				
+		if(!$user->isAuthenticated() && $authKey) {
+			try {
+				$user->doAuthKeyLogin($authKey);
+			} catch(Exception $e) {
+				$validation->setError("Login error","Invalid Auth key!");
+				return false;							
+			}
+		}
+		
+		if(!$user->isAuthenticated()) {			
+			$validation->setError("Login error","Not logged in!");
+			return false;			
+		}
+		
+		if($user->hasCredential("appkit.api.access"))
+			return true;
+		
+		$validation->setError("Error","Invalid credentials for api access!");			
+		return false;
 	}
-
+	
 	public function executeRead(AgaviRequestDataHolder $rd) {
+		if(!$this->checkAuth($rd))
+			return "Error";
+		
 		$context = $this->getContext();
 		$API = $context->getModel("Icinga.ApiContainer","Web");
 		$target = $rd->getParameter("target");

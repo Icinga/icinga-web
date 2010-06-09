@@ -90,7 +90,8 @@ abstract class BaseNsmTarget extends Doctrine_Record
 			array(/*'target_id'=>9,*/'target_name'=>"appkit.admin.groups",'target_description'=>"Access to group editor",'target_class'=>"",'target_type'=>"credential"),
 			array(/*'target_id'=>10,*/'target_name'=>"appkit.admin.users",'target_description'=>"Access to user editor",'target_class'=>"",'target_type'=>"credential"),
 			array(/*'target_id'=>11,*/'target_name'=>"appkit.admin",'target_description'=>"Access to admin panel ",'target_class'=>"",'target_type'=>"credential"),
-			array(/*'target_id'=>12,*/'target_name'=>"appkit.user.dummy",'target_description'=>"Basic right for users",'target_class'=>"",'target_type'=>"credential")
+			array(/*'target_id'=>12,*/'target_name'=>"appkit.user.dummy",'target_description'=>"Basic right for users",'target_class'=>"",'target_type'=>"credential"),
+			array(/*'target_id'=>13,*/'target_name'=>"appkit.api.access",'target_description'=>"Access to web-based api adapter",'target_class'=>"",'target_type'=>"credential")
 		);
     }
 }

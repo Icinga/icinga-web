@@ -28,6 +28,13 @@
 				</errors>
 			</validator>
 			
+			<validator name="authkey" class="string" required="false">
+				<argument>authkey</argument>
+				<errors>
+					<error>Validation of authkey failed!</error>
+				</errors>
+			</validator>
+			
 			<validator name="filter" class="AppKitURLFilterValidator" required="false">
 				<argument>filter</argument>
 				<ae:parameters>

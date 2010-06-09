@@ -53,11 +53,18 @@
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
 		</ae:parameter>
 		
+		<ae:parameter name="auth_key">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.AuthKey</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+		</ae:parameter>
+		
 		<!-- 
 			* LDAP
 			Just an example
 		-->
-		<!--
+		<!-- 
 		<ae:parameter name="msad-ldap1">
 			<ae:parameter name="auth_module">AppKit</ae:parameter>
 			<ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
@@ -78,8 +85,8 @@
 			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
 			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
 		</ae:parameter>
-		-->
 		
+		 -->
 	</setting>
 
 </settings>

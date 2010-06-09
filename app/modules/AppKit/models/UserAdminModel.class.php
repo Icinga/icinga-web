@@ -5,7 +5,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 
 	private static $editableAttributes = array (
 		'user_name', 'user_lastname', 'user_firstname',
-		'user_email', 'user_disabled'
+		'user_email', 'user_disabled', 'user_authsrc','user_authkey'
 	);
 	
 	/**
@@ -97,6 +97,10 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 	 */
 	public function updateUserData(NsmUser &$user, AgaviRequestDataHolder &$rd) {
 		AppKitDoctrineUtil::updateRecordsetFromArray($user, $rd->getParameters(), self::$editableAttributes);
+		if(!$user->get("user_password")) {
+			$user->set("user_password",AppKitRandomUtil::initRand());
+			$user->set("user_salt",AppKitRandomUtil::initRand());
+		}
 		$user->save();
 		
 		return true;
@@ -112,7 +116,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 	 */
 	public function updateUserPassword(NsmUser &$user, $user_password) {
 		AppKitRandomUtil::initRand(); 
-		
+
 		$user->updatePassword($user_password);
 		$user->save();
 		
