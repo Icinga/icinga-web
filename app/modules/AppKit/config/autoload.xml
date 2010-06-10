@@ -82,6 +82,7 @@
 		<!-- Custom validators -->
 		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
 		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
-	
+		<autoload name="AppKitSoapFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitSoapFilterValidator.class.php</autoload>
+		
 	</ae:configuration>
 </ae:configurations>

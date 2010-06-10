@@ -87,7 +87,16 @@
 				<ae:parameter>
 					<ae:parameter name="min">1</ae:parameter>
 				</ae:parameter>
-			</validator>			
+			</validator>	
+			
+			<validator name="soapFilter" class="AppKitSoapFilterValidator" required="false">
+				<argument>soapFilter</argument>
+				<errors>
+					<error></error>
+				</errors>
+				<ae:parameter name="export">filters</ae:parameter>
+			</validator>	
+				
 		</validators>
 		
 		<validators method="read">
@@ -105,6 +114,7 @@
 		</validators>
 		
 		<validators method="write">
+			
 			<validator name="filters" class="string" required="false">
 				<arguments base="filters[]">
 					<argument>column</argument>
@@ -137,7 +147,6 @@
 					</ae:parameter>
 				</ae:parameters>
 			</validator>
-			
 			<validator name="group" class="string" required="false">
 				<arguments base="groups[]" />
 			</validator>

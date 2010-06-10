@@ -155,9 +155,9 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 
 	public function setLimit(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
 		$start = $rd->getParameter("limit_start",0);
-		$limit = $rd->getParameter("limit",false);
+		$limit = $rd->getParameter("limit",null);
 
-		if($limit)
+		if($limit > 0)
 			$search->setSearchLimit($start,$limit);
 	}
 

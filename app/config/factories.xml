@@ -65,7 +65,18 @@
 		<response class="AgaviConsoleResponse" />
 		<routing class="AgaviConsoleRouting" />
 		<user class="AppKitSecurityUser" />
-		<logger_manager class="AppKitLoggerManager" />
+		<logger_manager class="AgaviLoggerManager" />
+	</ae:configuration>
+	
+	<ae:configuration context="soap">
+		<controller class="AgaviSoapController">
+			<ae:parameter name="wsdl">%core.root_dir%/pub/soap/icinga.wsdl</ae:parameter>
+		</controller>
+		<request class="AgaviSoapRequest"/>
+		<response class="AgaviSoapResponse" />
+		<routing class="AgaviSoapRouting"/>
+		<user class="AppKitSecurityUser" />
+		<logger_manager class="AgaviLoggerManager" />
 	</ae:configuration>
 	
 </ae:configurations>
