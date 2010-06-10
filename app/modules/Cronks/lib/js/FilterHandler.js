@@ -1,5 +1,14 @@
 
+/**
+ * IcingaApiComboBox
+ * Extended to let meta data from xml template
+ * configure the store to fetch data from the IcingaAPI
+ */
 Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
+
+	def_webpath : '/web/api/json',
+	def_sortorder : 'asc',
+
 	constructor : function(cfg, meta) {
 
 		var kf = meta.api_keyfield;		// ValueField
@@ -35,12 +44,12 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 
 		var apiStore = new Ext.data.JsonStore({
 			autoDestroy : true,
-			url : AppKit.c.path + '/web/api/json',
+			url : AppKit.c.path + this.def_webpath,
 
 			baseParams : {
 				target : meta.api_target,
 				order_col: (meta.api_order_col || meta.api_keyfield),
-				order_dir: (meta.api_order_dir || 'desc'),
+				order_dir: (meta.api_order_dir || this.def_sortorder),
 				columns: cols
 			},
 
@@ -56,10 +65,12 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 			keyField : kf
 		});
 
+		// To display complex multi column layouts
 		if (meta.api_exttpl) {
 			cfg.tpl = '<tpl for="."><div class="x-combo-list-item">' + meta.api_exttpl + '</div></tpl>';
 		}
 
+		// Notify the parent class
 		Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
 	}
 });

@@ -159,7 +159,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.text</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_NAME</parameter>
+				<parameter name="api_valuefield">HOST_NAME</parameter>
             </filter>
             
             <order>
@@ -189,7 +193,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.text</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">service</parameter>
+				<parameter name="api_keyfield">SERVICE_NAME</parameter>
+				<parameter name="api_valuefield">SERVICE_NAME</parameter>
             </filter>
             
             <order>
