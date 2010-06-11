@@ -53,7 +53,7 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction
 			
 			// Update the simple data!
 			$useradmin->updateUserData($user, $rd);
-						
+		
 			if ($rd->getParameter('password_validate', false) !== false) {
 				$useradmin->updateUserPassword($user, $rd->getParameter('password_validate'));
 			}

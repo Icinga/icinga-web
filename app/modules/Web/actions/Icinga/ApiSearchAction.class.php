@@ -47,26 +47,51 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 	{
 		return 'Success';
 	}
-	
-	public function isSecure() {
-		return true;
+
+	public function checkAuth(AgaviRequestDataHolder $rd) {
+		$user = $this->getContext()->getUser();
+		$authKey = $rd->getParameter("authkey");
+		$validation = $this->getContainer()->getValidationManager();
+				
+		if(!$user->isAuthenticated() && $authKey) {
+			try {
+				$user->doAuthKeyLogin($authKey);
+			} catch(Exception $e) {
+				$validation->setError("Login error","Invalid Auth key!");
+				return false;							
+			}
+		}
+		
+		if(!$user->isAuthenticated()) {			
+			$validation->setError("Login error","Not logged in!");
+			return false;			
+		}
+		
+		if($user->hasCredential("appkit.api.access"))
+			return true;
+		
+		$validation->setError("Error","Invalid credentials for api access!");			
+		return false;
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
+		if(!$this->checkAuth($rd))
+			return "Error";
+		
 		$context = $this->getContext();
 		$API = $context->getModel("Icinga.ApiContainer","Web");
 		$target = $rd->getParameter("target");
 
 		$search = @$API->createSearch()->setSearchTarget($target);
 		$this->addFilters($search,$rd);
-		
+
 		$this->setColumns($search,$rd);
 		$this->setGrouping($search,$rd);
-		$this->setOrder($search,$rd);		
+		$this->setOrder($search,$rd);
 		$this->setLimit($search,$rd);
-		
+
 		$search->setResultType(IcingaApiSearch::RESULT_ARRAY);
-	
+
 		// Adding security principal targets to the query
 		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
@@ -75,26 +100,33 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 		$rd->setParameter("searchResult", $res);
 		return $this->getDefaultViewName();
 	}
-	
+
 	protected function addFilters(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
 		// URL filter definitions
-		$field = $rd->getParameter("field",null);
-		$method = $rd->getParameter("method",null);
-		$filter = str_replace("*","%",$rd->getParameter("filter",null));
-		
-		if($field)
-			$search->setSearchFilter($field,$filter,$method);
-		
+		$field = $rd->getParameter("filter",null);
+		if(!empty($field))
+			$this->buildFiltersFromArray($search,$field);
 			
 		// POST filter definitions
 		$advFilter = $rd->getParameter("filters",array());
-				
+
 		foreach($advFilter as $fl) {
 			$fl["value"] = str_replace("*","%",$fl["value"]);
-			$search->setSearchFilter($fl["column"],$fl["value"],$fl["relation"]);	
+			$search->setSearchFilter($fl["column"],$fl["value"],$fl["relation"]);
 		}
 	}
-	
+
+	public function buildFiltersFromArray(IcingaApiSearchIdo $search, array $filterdef) {
+		$searchField = $filterdef;
+		if(isset($filterdef["type"]))
+			$searchField = $filterdef["field"];
+		foreach($searchField as $element) {
+			if($element["type"] == "atom")
+				$search->setSearchFilter($element["field"][0],$element["value"][0],$element["method"][0]);
+		}
+
+	}
+
 	public function setGrouping(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
 		$groups = $rd->getParameter("groups",array());
 		if(!is_array($groups))
@@ -108,30 +140,31 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 		$order_dir = $rd->getParameter("order_dir",'asc');
 		if($order_col)
 			$search->setSearchOrder($order_col,$order_dir);
-		
+
 		$order = $rd->getParameter("order",array());
 		if(!is_array($order))
 			$order = array($order);
 		if(!empty($order))
 			$search->setSearchOrder($order["column"],$order["dir"]);
 	}
-	
+
 	public function setColumns(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
-		if(!$rd->getParameter("columns"))
-			$rd->setParameter("columns",self::$defaultColumns[$search->getSearchTarget()]);
-		$columns = $rd->getParameter("columns");		
-		if(!empty($columns))	
+		$columns = $rd->getParameter("columns",null);
+		if(!is_null($columns))
 			$search->setResultColumns($columns);
+		else{
+			$search->setResultColumns(self::$defaultColumns[$rd->getParameter("target")]);
+		}
 	}
-	
+
 	public function setLimit(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
 		$start = $rd->getParameter("limit_start",0);
-		$limit = $rd->getParameter("limit",false);
+		$limit = $rd->getParameter("limit",null);
 
-		if($limit)
+		if($limit > 0)
 			$search->setSearchLimit($start,$limit);
 	}
-	
+
 	public function executeWrite(AgaviRequestDataHolder $rd) {
 		return $this->executeRead($rd);
 	}

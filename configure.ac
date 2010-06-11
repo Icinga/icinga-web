@@ -145,6 +145,7 @@ AC_CONFIG_FILES([
 	etc/tests/test.properties
 	app/config/databases.xml
 	pub/.htaccess
+	pub/soap/.htaccess
 ])
 
 AC_OUTPUT

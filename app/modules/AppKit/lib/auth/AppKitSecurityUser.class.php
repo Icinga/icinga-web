@@ -6,6 +6,11 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	
 	const USEROBJ_ATTRIBUTE = 'userobj';
 	
+	
+	public function doAuthKeyLogin($key) {
+		$this->doLogin($key,$key);
+	}
+	
 	/**
 	 * Login method, uses the AppKitAuthProvider to determine if this is correct
 	 * @param string $username
@@ -14,9 +19,9 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	 * @return boolean if the login was successfull
 	 * @throws AppKitSecurityUserException
 	 * @author Marius Hein
-	 */
+	 */	
 	public function doLogin($username, $password, $isHashedPassword=false) {
-		
+
 		$provider = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
 		
 		try {
@@ -24,21 +29,20 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 			$user = $provider->doAuthenticate($username, $password);
 			
 			if ($user instanceof NsmUser && $user->user_id>0) {
-				
-				// Start from scratch
+				// Start from scratch		
 				$this->clearCredentials();
-				
+			
 				// Set authenticated
 				$this->setAuthenticated(true);
-				
+
 				// Load the corresponding db (Nsm-) user into the session
 				$this->loadUserAttribute($user);
-				
+
 				// Grant related roles
 				$this->applyDoctrineUserRoles($user);
-				// Give notice
+				// Give notice	
 				$this->getContext()->getLoggerManager()
-				->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);
+				->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);			
 				
 				return true;
 				
@@ -96,6 +100,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 		if(self::SOURCE == "XML") {
 			foreach ($user->NsmRole as $role) {
 				$this->grantRole($role->role_name);
+						
 			}
 		} else {
 			$this->getCredentialsFromDB($user); 			
@@ -113,10 +118,13 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 				$next = $next->getParent();
 				$this->addCredentialsFromRole($next);
 				$this->roles[] = $next;
+
 			}
+		
 		}
 		foreach($user->getTargets("credential") as $credential) {
 			$this->addCredential($credential->get("target_name"));
+		
 		}
 	
 	}
@@ -143,7 +151,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 			return $user;
 		}
 		if(!$noThrow)
-			throw new AppKitDoctrineException('User attribute is no a NsmUser!');
+			throw new AppKitDoctrineException('User attribute is not a NsmUser!');
 	}
 	
 	/**

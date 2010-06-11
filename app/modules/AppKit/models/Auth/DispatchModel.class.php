@@ -79,6 +79,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		$this->loadProviderConfig();
 	}
 	
+	
 	public function &doAuthenticate($username, $password) {
 		/**
 		 * 1. Find the user
@@ -87,20 +88,20 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		 */
 		
 		$user = $this->findUser($username);
-		
+
 		if ($user === null) {
 			$user = $this->importUser($username);
 		}
 		
 		if ($user instanceof NsmUser && $user->user_id>0) {
 			$provider = $this->getProvider($user->user_authsrc);
-			
+				
 			// We've got a provider
 			if (is_object($provider) && $provider instanceof AppKitIAuthProvider) {
-				
+
 				// The id we authenticate against
 				$authid = $user->getAuthId();
-				
+			
 				// Check if the user still available
 				if ($provider->isAvailable($authid)) {
 					
@@ -108,7 +109,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 					if ($provider->canUpdateProfile()) {
 						$this->updateProfile($user, $provider);
 					}
-					
+	
 					// Check password
 					if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password)) {
 						return $user;
@@ -122,9 +123,10 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 						return $user;
 					}
 				}
+				
 			}
 		}
-		
+
 		throw new AgaviSecurityException("Authentification of $username failed!");
 	}
 	
@@ -172,6 +174,12 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		if ($user->count() == 1) {
 			return $user->getFirst();
 		}
+		// check if the name is an auth_key
+		$user = Doctrine::getTable('NsmUser')->findBySql('user_authkey=?', array($username));
+		if ($user->count() == 1) {
+			return $user->getFirst();
+		}
+		
 		return null;
 	}
 	

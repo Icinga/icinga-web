@@ -149,7 +149,8 @@ Cronk.grid.MetaGridCreator.prototype = {
 			// Custom properties for our custom
 			// object
 			meta:				this.meta,
-			filter:				this.filter_array
+			filter:				this.filter_array,
+			parentCmp:			this
 		};
 		
 		// Stateful handling

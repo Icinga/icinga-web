@@ -1,0 +1,51 @@
+# htaccess config for the icinga-web project
+
+DirectoryIndex index.php
+
+Options -MultiViews -Indexes +FollowSymLinks
+Order allow,deny
+Allow from all
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # This depends on your path
+    # on independent hosts the base is '/'
+    RewriteBase @web_path@/soap
+	
+	# If the requested URL does not exist (it's likely an agavi route),
+	# pass it as path info to index.php, the Agavi dispatch script.
+	RewriteRule ^$ index.php?/ [QSA,L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule (.*) index.php?/$1 [QSA,L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+	# Insert filter
+	SetOutputFilter DEFLATE
+	
+	# Netscape 4.x has some problems...
+	BrowserMatch ^Mozilla/4 gzip-only-text/html
+	
+	# Netscape 4.06-4.08 have some more problems
+	BrowserMatch ^Mozilla/4\.0[678] no-gzip
+	
+	# MSIE masquerades as Netscape, but it is fine
+	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+	# Don't compress images
+	SetEnvIfNoCase Request_URI \
+	\.(?:gif|jpe?g|png)$ no-gzip dont-vary
+	
+	# Make sure proxies don't deliver the wrong content
+	<IfModule mod_headers.c>
+		Header append Vary User-Agent env=!dont-vary
+	</IfModule>
+	
+</IfModule>
+
+<IfDefine APACHE2>
+	AcceptPathInfo On
+</IfDefine>
+
+# [EOF]

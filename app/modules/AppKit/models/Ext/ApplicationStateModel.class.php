@@ -18,7 +18,6 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
 		if ($this->stateAvailable()) {
 			$data = $this->getContext()->getUser()->getPrefVal(self::PREFNS, null, true);
 		}
-		
 		return $data;
 	}
 	
@@ -29,7 +28,6 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
 			$this->getContext()->getUser()->setPref(self::PREFNS, json_encode($data), true, true);
 		}
 	}
-	
 }
 
 ?>

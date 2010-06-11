@@ -172,6 +172,7 @@ Ext.onReady(function() {
 				var id = grid.getStore().getAt(index).get("user_id");
 				wnd_userEditPanel.editUser(id);											
 			},
+			
 			rowcontextmenu: function(grid,index,_e) {
 				_e.preventDefault();
 				var record =  grid.getStore().getAt(index);
@@ -203,7 +204,7 @@ Ext.onReady(function() {
 				{header: _('lastname'), dataIndex: 'user_lastname'},
 				{header: _('firstname'), dataIndex: 'user_firstname'},
 				{header: _('email'),dataIndex: 'user_email'},
-				{header: _('inactive'), dataIndex: 'user_disabled_icon',width:75}
+				{header: _('active'), dataIndex: 'user_disabled_icon',width:75}
 			]
 		}),
 		

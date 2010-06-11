@@ -19,13 +19,20 @@ class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView
 			
 			$this->setAttribute('title', 'Edit '. $user->givenName());
 		}
+		$authTypes = $this->getAuthTypes();
+		
 		$this->setAttribute('user', $user);
-	
 		$this->setAttribute('roles', $roleadmin->getRoleCollection());
 		$this->setAttribute('container', $rd->getParameter('container',null));
+		$this->setAttribute('authTypes',"[['".implode("'],['",$authTypes)."']]");
 		$exec = $this->getContext()->getController()->createExecutionContainer("AppKit","Admin.PrincipalEditor",null,'simple');
 		$resp = $exec->execute()->getContent();
 		$this->setAttribute("principal_editor",$resp);
+	}
+	
+	public function getAuthTypes() {
+		return array_keys(AgaviConfig::get("modules.appkit.auth.provider"));
+		
 	}
 	
 	public function executeHtml(AgaviRequestDataHolder $rd)

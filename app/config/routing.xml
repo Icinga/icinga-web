@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
 	<ae:configuration context="web">
 		<routes>
-		
+
 			<!-- INDEX -->
 			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
 
@@ -76,34 +76,48 @@
 			</route>
 			<!-- END: My -->
 
+		
 			<!--
 				* Icinga routes (Web module)
 			-->
-			<route name="icinga" pattern="^/web" module="Web">
+			<route name="icinga" pattern="^/web" module="Web" stop="true">
 
 				<!-- Icinga index route -->
 				<route name=".home" pattern="^$" action="Index"/>
 				<route name=".about" pattern="^/about$" action="Icinga.Help" output_type="html"/>
 
 				<!-- The main view -->
-				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView"/>
-
+				<route name=".portalView" pattern="^/portal$" action="Icinga.PortalView" />
+				<route name=".customPortal" pattern="^/customPortal" action="Icinga.PortalView" stop="true">
+					<route name=".crbase"  pattern="/cr_base=(cr_base:[^/]*)" stop="false"/>
+					<route name=".groupDir" pattern="/groupDir=(groupDir:(ASC|DESC))" stop="false"/>
+					<route name=".groupField" pattern="/groupField=(groupField:[^/]*)" stop="false"/>
+					<route name=".template" pattern="/template=(template:[^/]*)" stop="false"/>
+					<route name=".crname" pattern="/crname=(crname:[^/]*)" stop="false"/>
+					<route name=".title" pattern="/title=(title:[^/]*)" stop="false" />
+				
+				</route>
 				<!-- TestPage -->
-				<route name=".testPage" pattern="^/testpage$" action="Icinga.TestPage" />
+				<route name=".testPage" pattern="^/testpage$" action="Icinga.TestPage"/>
 
 				<!-- Simpleprovider for popups -->
 				<route name=".simpleDataProvider" pattern="^/simpleDataProvider" output_type="json">
 					<route name=".json" pattern="^/json" action="IcingaApiSimpleDataProvider"/>
 				</route>
 				<route name=".api" pattern="^/api" action="Icinga.ApiSearch">
-					<route name=".target" stop="true"   
-						pattern="^/(target:instance|host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|status)/">
-						<route name=".filter" stop="false" pattern="filter[(field:\w*)|(method:like|=|!=|&gt;|&lt;|&gt;=|&lt;=)|(filter:[^\.]\w*\*?)]"/>
+					<route name=".target" stop="false" pattern="^/(target:instance|host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|status)/">	
+						<!-- Filter will be split by AppKitUrlFilterValidator -->
+						<route name=".authkey" stop="false" pattern="authkey=(authkey:[^/]*)"/>
+						<route name=".filter" stop="false" pattern="filter[(filter:.*)]"/>
 						<route name=".group" stop="false" pattern="group[(groups:.*?)]"/>
 						<route name=".column" stop="false" pattern="columns[(columns:(.*?))]"/>
 						<route name=".order" stop="false" pattern="order[(order_col:\w*);(order_dir:\w*)]"/>
 						<route name=".limit" stop="false" pattern="limit[({limit_start:\d*};)?(limit:\d*)]"/>												
-
+						<route name=".output" stop="true" pattern="(output:json|xml|soap)$" output_type="${output}">
+						<ignores>
+							<ignore>output</ignore>
+						</ignores>
+					</route>
 						<!--  Define the ouput type -->
 					</route>
 					<route name=".output" stop="true" pattern="(output:json|xml)$" output_type="${output}">
@@ -114,8 +128,7 @@
 				</route>
 			</route>
 			<!-- END: Icinga (Web) -->
-
-
+		
 			<!-- 
 				* Cronk module routes
 			-->
@@ -155,7 +168,12 @@
 			</route>
 			<!-- END: Cronk -->
 
-			  
-			 </routes>
+		 </routes>
 	</ae:configuration>
+	
+	<ae:configuration context="soap">
+		<route name="serviceMain" pattern="getIcingaAPI" action="Icinga.ApiSearch" module="Web"/>
+		
+	</ae:configuration>
+		
 </ae:configurations>

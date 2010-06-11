@@ -35,6 +35,43 @@ class AppKit_RoleAdminModel extends AppKitBaseModel
 		return $this->getRoleQuery($disabled)->execute();
 	}
 	
+	
+	/**
+	 * Creates a collection of NsmRole objects within the range $start and $limit and optionally
+	 * sorts it by param $sort
+	 * @param boolean $disabled
+	 * @param numeric $start
+	 * @param numeric $limit
+	 * @param string $sort
+	 * @param boolean $asc
+	 * 
+	 * @return Doctrine_Collection
+	 * @author Jannis Mosshammer
+	 */
+	public function getRoleCollectionInRange($disabled=false,$start = 0,$limit=25,$sort= null,$asc = true) {
+		$query = Doctrine_Query::create()
+		->from("NsmRole")
+		->limit($limit)
+		->offset($start);
+		if($sort)
+			$query->orderBy($sort." ".($asc ? 'ASC' : 'DESC'));
+		
+		if ($disabled === false) {
+			$query->andWhere('role_disabled=?', array(0));
+		}
+		return $query->execute();
+	}	
+	
+	public function getRoleCount($disabled=false) {
+		$query = Doctrine_Query::create()
+			->select("COUNT(u.role_id) count")
+			->from("NsmRole u");
+		if ($disabled === false) {
+			$query->andWhere('role_disabled=?', array(0));
+		}
+		return $query->execute()->getFirst()->get("count");
+		
+	}
 	/**
 	 * Load a role record by id
 	 * @param integer $role_id

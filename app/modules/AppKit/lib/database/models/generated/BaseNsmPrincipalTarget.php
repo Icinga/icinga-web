@@ -77,6 +77,7 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
     public static function getInitialData() {
 		return array(
 			array(/*'pt_id'=>'1',*/'pt_principal_id'=>'2','pt_target_id'=>'8'),
+			array(/*'pt_id'=>'4',*/'pt_principal_id'=>'2','pt_target_id'=>'13'),
 			array(/*'pt_id'=>'2',*/'pt_principal_id'=>'3','pt_target_id'=>'9'),
 			array(/*'pt_id'=>'3',*/'pt_principal_id'=>'3','pt_target_id'=>'10'),
 			array(/*'pt_id'=>'4',*/'pt_principal_id'=>'3','pt_target_id'=>'11'),

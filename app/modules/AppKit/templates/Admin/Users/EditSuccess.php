@@ -2,7 +2,7 @@
 
 $user = $t['user'];
 $roles = $t['roles'];
-
+$authTypes = $t['authTypes'];
 ?>
 
 <script type='text/javascript'>
@@ -20,6 +20,10 @@ Ext.onReady(function(){
 		container = AppKit.userEditor.STD_CONTAINER;
 	
 	var initEditorWidget = function() {
+		/**
+		 * Forms definition
+		 *
+		 **/
 		AppKit.userEditor.formFields = [
 			{
 				xtype: 'hidden',
@@ -86,6 +90,21 @@ Ext.onReady(function(){
 					name: 'user_disabled',
 					id: 'user_disabled',
 					fieldLabel: _('Disabled')
+				}, {
+					xtype: 'combo',
+					fieldLabel: _('Auth via'),
+					typeAhead: true,
+					name: 'user_authsrc',
+					id: 'user_authsrc',
+					triggerAction: 'all',
+					mode:'local',
+					store: new Ext.data.ArrayStore({
+						id:0,
+						fields: ['user_authkey'],
+						data:<? echo $authTypes ?>
+					}),
+					valueField: 'user_authkey',
+					displayField: 'user_authkey'
 				}]
 			},{
 				xtype:'spacer',
@@ -119,6 +138,15 @@ Ext.onReady(function(){
 						return true;		
 					},
 					width: '200'
+				}, {
+					xtype: 'textfield',
+					fieldLabel: _('Authkey for Api (optional)'),
+					id: 'user_authkey',
+					name: 'user_authkey',
+					minLength: 8,
+					maxLength: 40,
+					width: '200',
+					regex: /[A-Za-z0-9]*/
 				}]
 			},{
 				xtype: 'fieldset',
@@ -154,7 +182,7 @@ Ext.onReady(function(){
 					labelWidth:400,
 					items: [
 			<? foreach($roles as $role) :?>
-{
+					{
 						xtype:'checkbox',
 						name: 'userroles[<? echo $role->get("role_id")?>]',
 						id: 'userroles_<? echo $role->get("role_id") ?>',
@@ -176,6 +204,9 @@ Ext.onReady(function(){
 			}
 		]
 		
+		/**
+		 * Forms end
+		 */
 	
 	
 		AppKit.userEditor.editorWidget = Ext.extend(Ext.form.FormPanel,{

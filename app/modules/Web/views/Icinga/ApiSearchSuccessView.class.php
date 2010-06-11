@@ -4,6 +4,7 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 {
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
+
 		$this->setAttribute('_title', 'Icinga.ApiSearch');
 	}
 	
