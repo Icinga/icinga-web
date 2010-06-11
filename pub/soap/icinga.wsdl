@@ -36,7 +36,7 @@
     <wsdl:part element="xsd:string" name="target"/>
     <wsdl:part element="nsl:map" name="soapFilter"/>
     <wsdl:part element="xsd:string" name="group"/>
-    <wsdl:part element="xsd:string" name="column"/>
+    <wsdl:part element="nsl:map" name="soapColumns"/>
     <wsdl:part element="xsd:string" name="order"/>
     <wsdl:part element="xsd:int" name="limit"/>
     <wsdl:part element="xsd:string" name="authkey"/>  
@@ -62,7 +62,7 @@
         <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'  encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
       </wsdl:input>
       <wsdl:output>
-        <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+        <soap:body use='internal' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
