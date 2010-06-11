@@ -1,8 +1,6 @@
 <?php
-/**
- * @author Christian Doebler <christian.doebler@netways.de>
- */
-class Cronks_System_StatusSummaryAction extends CronksBaseAction
+
+class Cronks_System_StatusOverallAction extends CronksBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -23,23 +21,22 @@ class Cronks_System_StatusSummaryAction extends CronksBaseAction
 	public function executeRead(AgaviParameterHolder $rd) {
 		return $this->getDefaultViewName();
 	}
-	
+
 	public function executeWrite(AgaviParameterHolder $rd) {
 		return $this->getDefaultViewName();
 	}
-	
+
 	public function isSecure() {
 		return true;
 	}
-	
+
 	public function getCredentials() {
 		return array ('icinga.user');
 	}
-	
+
 	public function handleError(AgaviParameterHolder $rd) {
 		return $this->getDefaultViewName();
 	}
-
 }
 
 ?>

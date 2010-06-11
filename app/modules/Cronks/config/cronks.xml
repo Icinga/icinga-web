@@ -292,7 +292,7 @@
 			</ae:parameter>
 		</ae:parameter>
 
-		<ae:parameter name="icingaStatusSummary">
+<!--		<ae:parameter name="icingaStatusSummary">
 			<ae:parameter name="module">Cronks</ae:parameter>
 			<ae:parameter name="action">System.StatusSummary</ae:parameter>
 			<ae:parameter name="hide">true</ae:parameter>
@@ -302,8 +302,18 @@
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="type">text</ae:parameter>
 			</ae:parameter>
+		</ae:parameter>-->
+
+		<ae:parameter name="icingaOverallStatus">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.StatusOverall</ae:parameter>
+			<ae:parameter name="hide">true</ae:parameter>
+			<ae:parameter name="description">Overall Status</ae:parameter>
+			<ae:parameter name="name">Displays the overall status</ae:parameter>
+			<ae:parameter name="categories">core</ae:parameter>
+			<ae:parameter name="ae:parameter">
+			</ae:parameter>
 		</ae:parameter>
-		
 		
 		<ae:parameter name="icingaExampleCronkHelloWorld">
 			<ae:parameter name="module">Cronks</ae:parameter>

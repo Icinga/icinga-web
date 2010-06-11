@@ -26,15 +26,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 				border: false
 			}, {
 				xtype: 'cronk',
-				crname: 'icingaStatusSummary',
-				width: 380,
-				params: { otype: 'chart' },
-				border: false
-			}, {
-				xtype: 'cronk',
-				crname: 'icingaStatusSummary',
-				width: 380,
-				params: { otype: 'text' },
+				crname: 'icingaOverallStatus',
 				border: false
 			}]
 		}, {
