@@ -44,9 +44,12 @@ Cronk.grid.ColumnRenderer = {
 	
 	truncateText : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
+			// skip truncate if html is located at the ouput
+			if(value.match(/<.*?>(.*?)<\/.*?>/g))
+				return value;
 			var out = Ext.util.Format.ellipsis(value, (cfg.length || 50));
 			if (out.indexOf('...', (out.length-3)) != -1) {
-				metaData.attr = 'ext:qtip="' + value + '"';
+				metaData.attr = 'ext:qtip="' + encodeURI(value) + '"';
 			}
 			
 			return out;
