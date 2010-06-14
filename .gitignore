@@ -1,7 +1,6 @@
 autom4te.cache/
 app/cache/config/*.php
 app/data/log/
-app/cache
 lib/icinga-api
 icinga-web.session
 icinga-web.webprj
