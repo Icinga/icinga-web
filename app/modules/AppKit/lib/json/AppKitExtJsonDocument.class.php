@@ -39,7 +39,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
 	public function setSortinfo($field, $direction='asc') {
 		$this->setMeta(self::PROPERTY_SORTINFO, array(
-			'direction'	=> strtoupper($direction),
+			'direction'	=> strtolower($direction),
 			'field'		=> $field
 		));
 	}
@@ -51,6 +51,11 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 		}
 
 		$options['name'] = $name;
+
+		if (!array_key_exists('sortType', $options)) {
+			$options['sortType'] = 'asText';
+		}
+
 		$this->fields[$name] = $options;
 		return true;
 	}
@@ -66,11 +71,32 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 		}
 
 		$diff = array_diff_key($value, $this->fields);
+
 		if (is_array($diff) && count($diff)>0) {
 			throw new AppKitExtJsonDocumentException('$value keys does not match field data set!');
 		}
 
+		// Store needs id maybe
+		$this->addIDField($value);
+
 		parent::offsetSet(null, $value);
+	}
+
+	private function addIDField(array &$value) {
+		$idf = $this->meta[self::PROPERTY_ID];
+		if (!array_key_exists($idf, $this->fields)) {
+			$this->hasField($idf);
+		}
+
+		if (!array_key_exists($idf, $value)) {
+			$value[$idf] = (count($this->rows) +1);
+		}
+	}
+
+	public function setData(array $data) {
+		foreach ($data as $row) {
+			$this->offsetSet(null, $row);
+		}
 	}
 
 	public function resetDoc() {
@@ -105,7 +131,11 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 			$meta[$k] = $v;
 		}
 
-		$meta[self::PROPERTY_FIELDS] = $this->fields;
+		$meta[self::PROPERTY_FIELDS] = array_values($this->fields);
+
+		if ($this->defaults[self::PROPERTY_TOTAL] == 0) {
+			$this->setDefault(self::PROPERTY_TOTAL, count($this->rows));
+		}
 
 		foreach ($this->defaults as $k=>$v) {
 			if (isset($this->meta[$k])) {
@@ -124,7 +154,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 		$this->setMeta(self::PROPERTY_ROOT, 'rows');
 		$this->setMeta(self::PROPERTY_SUCCESS, 'success');
 		$this->setMeta(self::PROPERTY_TOTAL, 'results');
-		$this->setMeta(self::PROPERTY_SORTINFO, new stdClass());
+		// $this->setMeta(self::PROPERTY_SORTINFO, new stdClass());
 		$this->setSuccess(false);
 		$this->setDefault(self::PROPERTY_TOTAL, 0);
 	}

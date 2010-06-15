@@ -20,7 +20,7 @@ class IcingaHostStateInfo extends IcingaStateInfo {
 	 * @param mixed $type
 	 * @return IcingaHostStateInfo
 	 */
-	public function Create($type) {
+	public function Create($type=99) {
 		$class = __CLASS__;
 		return new $class($type);
 	}
