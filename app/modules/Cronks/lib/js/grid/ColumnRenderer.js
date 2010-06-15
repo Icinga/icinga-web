@@ -113,5 +113,4 @@ Cronk.grid.ColumnRenderer = {
 			return Icinga.StatusData.wrapElement(type, value);
 		}
 	}
-	
 };

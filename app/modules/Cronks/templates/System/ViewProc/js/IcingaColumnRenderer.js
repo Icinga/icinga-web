@@ -17,7 +17,7 @@ Cronk.grid.IcingaColumnRenderer = {
 					title: (cfg.titlePrefix || '') + " " + record.data[ cfg.labelField ],
 					crname: 'gridProc',
 					closable: true,
-					params: { template: cfg.targetTemplate }
+					params: {template: cfg.targetTemplate}
 				};
 				
 				var filter = {};
@@ -65,5 +65,30 @@ Cronk.grid.IcingaColumnRenderer = {
 			}
 		}
 
+	},
+
+	hyperLink : function(cfg) {
+
+		if (!'url' in cfg) {
+			throw('url XTemplate configuration needed! (parameter name="url")');
+		}
+
+		return function(grid, rowIndex, colIndex, e) {
+			
+			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
+
+			if (fieldName == cfg.field) {
+				var data = grid.getStore().getAt(rowIndex).data;
+				var tpl = new Ext.XTemplate(cfg.url);
+				var url = tpl.apply(data);
+				var windowName = fieldName;
+
+				if (Ext.isEmpty(cfg.newWindow) || cfg.newWindow == false) {
+					windowName = '_self';
+				}
+
+				window.open(url, windowName);
+			}
+		}
 	}
 };

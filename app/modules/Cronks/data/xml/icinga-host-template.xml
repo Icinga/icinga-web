@@ -668,7 +668,75 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
+		<!--
+
+		External link example:
+			* Url is an Ext.XTemplate (http://www.sencha.com/deploy/dev/docs/?class=Ext.XTemplate)
+			* Fields are encapsulated by {my_field_name}
+			* Fields are declared by <field> or datasource->additional_fields
+				* Here e.g. host_name, host_id, external_link_example, ...
+
+		<field name="external_link_example">
+			<datasource>
+        		<parameter name="field">HOST_ID</parameter>
+        	</datasource>
+
+			<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+				<parameter name="width">22</parameter>
+
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+
+                	<parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+
+	                	<parameter name="type">renderer</parameter>
+
+	                	<parameter name="arguments">
+							<parameter name="image">images/fam/book.png</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here for history</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+
+					<parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">hyperLink</parameter>
+
+	                	<parameter name="type">cellclick</parameter>
+
+	                	<parameter name="arguments">
+							<parameter name="url">/mywiki/index.php?hostname={host_name}</parameter>
+							<parameter name="newWindow">false</parameter>
+	                	</parameter>
+	                </parameter>
+
+                </parameter>
+
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+		</field>
+		-->
+
         <field name="plugin_output">
         	<datasource>
         		<parameter name="field">HOST_OUTPUT</parameter>
@@ -684,15 +752,6 @@
                 	<parameter name="arguments">
 						<parameter name="length">40</parameter>
                 	</parameter>
-                </parameter>
-
-				
-                <parameter name="jsFunc">
-                	<parameter name="class">AppKit.Ext.ColumnRenderer.Icinga</parameter>
-                	<parameter name="method">ajaxPopup</parameter>
-                	
-                	<parameter name="filterField">host_object_id</parameter>
-                	<parameter name="type">HostStatus</parameter>
                 </parameter>
                 
             </display>
