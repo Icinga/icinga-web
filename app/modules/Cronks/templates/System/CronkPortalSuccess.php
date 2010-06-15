@@ -17,8 +17,9 @@ Cronk.util.initEnvironment('viewport-center', function() {
 			region: 'north',
 			id: 'north-frame',
 			layout: 'column',
+			style: 'height: 50px;',
 			defaults: { border: false },
-			height: 200,
+			autoHeight: true,
 
 			items: [{
 				xtype: 'cronk',

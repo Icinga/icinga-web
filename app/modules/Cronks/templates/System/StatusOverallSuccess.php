@@ -11,25 +11,24 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 	ds.load();
 
 	var p = new Ext.Panel({
-		title: 'LAOLA',
 		layout: 'fit',
 		width: 400,
-		height: 200,
+		height: 50,
 		items: [{
 			xtype: 'dataview',
 			store: ds,
 			autoHeight: true,
 			tpl: new Ext.XTemplate(
 				'<tpl for=".">',
-					'<tpl if="id==4">',
+					'<tpl if="id==5">',
 					'<div class="x-clear"></div>',
 					'</tpl>',
-
 					'<div class="icinga-overall-status-item" id="overall-status-{id}">',
 					'<span>({id})</span>',
 					'<span>{state}: </span>',
 					'<span>{count}</span></div>',
-				'</tpl>'
+				'</tpl>',
+				'<div class="x-clear"></div>'
 			)
 		}]
 	});
