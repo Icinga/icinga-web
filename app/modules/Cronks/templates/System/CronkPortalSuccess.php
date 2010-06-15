@@ -18,7 +18,8 @@ Cronk.util.initEnvironment('viewport-center', function() {
 			id: 'north-frame',
 			layout: 'column',
 			defaults: { border: false },
-			
+			height: 200,
+
 			items: [{
 				xtype: 'cronk',
 				crname: 'icingaSearch',

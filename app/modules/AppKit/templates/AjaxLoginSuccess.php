@@ -114,20 +114,7 @@ Ext.onReady(function() {
 			
 			success: function(f, a) {
 				pub.disableForm(true);
-				
-				var p = new Ext.Panel({
-					style: 'margin-top: 20px;',
-					bodyCssClass: 'x-icinga-simplebox-green',
-					html: '<?php echo $tm->_("Successfully logged in. You should be redirected immediately. If not please <a href=\"%s\">click here to change location by hand</a>.", null, null, array($ro->gen("index_page"))); ?>',
-					unstyled: true,
-					layout: 'fit',
-					forceLayout: true
-				});
-				
-				oFormPanel.add(p);
-				oFormPanel.doLayout();
-				
-				AppKit.changeLocation.defer(10, null, ['<?php echo $ro->gen("index_page"); ?>']);
+				AppKit.changeLocation.defer(1, null, ['<?php echo $ro->gen("index_page"); ?>']);
 			}
 		});
 		

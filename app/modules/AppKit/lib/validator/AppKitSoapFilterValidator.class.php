@@ -5,8 +5,15 @@ class AppKitSoapFilterValidator extends AgaviValidator {
 		$context = $this->getContext();
 		$argument = $this->getArgument();
 		$data = $this->getData($argument);		
-		$result = array();
+	
+		$result = $this->processData($data);
 		ob_start();	
+		print_r($result);
+		
+		file_put_contents("/usr/local/icinga-web/tmp/test.txt",ob_get_contents(),FILE_APPEND);
+		ob_end_clean();	
+		
+/*		
 		print_r($data);
 		
 		foreach($data->Map as $items) {
@@ -22,9 +29,17 @@ class AppKitSoapFilterValidator extends AgaviValidator {
 		}
 	
 		print_r($result);
-		file_put_contents("/usr/local/icinga-web/tmp/test.txt",ob_get_contents());
-		ob_end_clean();	
+	*/
 		$this->export($result);
 		return true;
+	}
+
+	public function processData($data) {
+		if(is_array($data))
+			return $data;
+		while(!is_array($data) && $data->item)  {
+			$data = $data->item;
+		}
+		return $data->item;
 	}
 } 
