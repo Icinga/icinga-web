@@ -72,7 +72,7 @@
 			
 			<!-- ExtJS base files -->
 			<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</parameter>
+			<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
 	
 			<!-- JIT - JavaScript InfoVis Toolkit -->
 			<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
