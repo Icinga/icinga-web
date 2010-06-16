@@ -66,7 +66,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 				$this->fail("Cache permission check failed");
 			foreach($nonWriteable as $folder) {
 				chgrp($folder,$wwwGroup);
-				chmod($folder,"764");
+				chmod($folder,"775");
 			}	
 		}
 		success("\tCache is writeable for web user\n");
@@ -85,7 +85,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 		
 		exec("su ".$wwwUser." -c 'touch ".$logDir."/testfile.txt'");
 		if(!file_exists($logDir."/testfile.txt")) {
-			error("Web user ".$wwwUser." couldn't create logfile in ".$logdir.
+			error("Web user ".$wwwUser." couldn't create logfile in ".$logDir.
 				  "Please check that the either the user ".$wwwUser." or the group ".$wwwGroup." has ".
 				  "write access to this folder - otherwise icinga-web won't work\n");
 			$fix = stdin("Try to fix thís error ?",array("y","n"),"y");			
@@ -95,8 +95,8 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 			$wwwUser = $this->sharedFixture['www-user'];
 			$wwwGroup = $this->sharedFixture['www-group'];
 
-			chgrp($logdir,$wwwGroup);
-			chmod($logdir,"760");
+			chgrp($logDir,$wwwGroup);
+			chmod($logDir,"775");
 						
 		} else {
 			success("\tLog-directory is writeable for wwwGroup!\n");
