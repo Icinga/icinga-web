@@ -81,7 +81,7 @@
 	<target name="doc2sql" depends="db-prepare">
 		<taskdef name="doctrineToSql" classname="etc.lib.doctrineToSqlTask"/>
 		<input propertyname="db.sql.path" defaultValue="${src}etc/schema/" >Save .sql at:</input>
-		<input propertyname="db.rdbm" defaultValue="mysql" validArgs="mysql,sqlite,oci,pgsql">RDBM driver to use</input>
+		<input propertyname="db.rdbm" defaultValue="mysql" validArgs="mysql,sqlite,oracle,pgsql">RDBM driver to use</input>
 		<doctrineToSql 
 			icingapath="${src}" 
 			modelPath="${db.doctrine.models}" 
