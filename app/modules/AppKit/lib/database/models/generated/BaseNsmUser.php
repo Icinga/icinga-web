@@ -199,4 +199,7 @@ abstract class BaseNsmUser extends Doctrine_Record
 			)	
 		);
     }
+    public static function getPgsqlSequenceOffsets() {
+    	return array("nsm_user_user_id_seq" => 2);
+    }
 }

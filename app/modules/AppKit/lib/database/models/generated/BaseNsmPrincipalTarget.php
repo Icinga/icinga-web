@@ -85,4 +85,8 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
 			array('pt_id'=>'7','pt_principal_id'=>'5','pt_target_id'=>'7')
 		);
     }
+    
+    public static function getPgsqlSequenceOffsets() {
+    	return array("nsm_principal_target_pt_id_seq" => 8);
+    }
 }

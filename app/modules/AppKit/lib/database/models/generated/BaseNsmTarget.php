@@ -94,4 +94,8 @@ abstract class BaseNsmTarget extends Doctrine_Record
 			array('target_id'=>13,'target_name'=>"appkit.api.access",'target_description'=>"Access to web-based api adapter",'target_class'=>"",'target_type'=>"credential")
 		);
     }
+    
+    public static function getPgsqlSequenceOffsets() {
+    	return array("nsm_target_target_id_seq" => 14);
+    }
 }

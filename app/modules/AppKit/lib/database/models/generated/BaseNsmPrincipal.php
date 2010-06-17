@@ -103,4 +103,8 @@ abstract class BaseNsmPrincipal extends Doctrine_Record
 			array('principal_id'=>'5','principal_role_id'=>'4','principal_type'=>'role','principal_disabled'=>'0')				
 		);
     }
+    
+    public static function getPgsqlSequenceOffsets() {
+    	return array("nsm_principal_principal_id_seq" => 6);
+    }
 }

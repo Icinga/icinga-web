@@ -113,4 +113,8 @@ abstract class BaseNsmRole extends Doctrine_Record
 			array('role_id'=>'4','role_name'=>'guest','role_description'=>'Unauthorized Guest','role_disabled'=>'0')
 		);
     }
+    
+    public static function getPgsqlSequenceOffsets() {
+    	return array("nsm_role_role_id_seq" => 5);
+    }
 }
