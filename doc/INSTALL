@@ -1,9 +1,24 @@
 THIS INSTALLATION DOCUMENT IS STILL EXPERIMENTAL,
+
 please report bugs and typos to dev.icinga.org
+
+0) Introduction
+
+More information about the overall architecture can be found on our website:
+
+http://www.icinga.org/architecture/
+
+If you want know more about Icinga web development and the module architecture,
+please check out the development wiki of Icinga Web:
+
+https://dev.icinga.org/projects/icinga-web/wiki
+
 
 1) Prerequisites
 
-You need a running mysql and php (with PEAR and CLI) environment w/ icinga and ido (ido2db).
+You need a running dbms and php (with PEAR and CLI) environment w/ icinga and ido (ido2db).
+The Icinga API is mandatory being installed too.
+
 If there's something missing on your system, please refer to docs.icinga.org.
 
 2) The beautiful GNU-install conglomerate
@@ -29,13 +44,18 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 			--prefix=/usr/local/icinga-web \
 			--with-web-user=www-data \
 			--with-web-group=www-data \
-			--with-db-user=my_icinga_user \
-			--with-db-pass=XXXXX 
-			--with-icinga-api=/usr/local/icinga-api
+			--with-db-type=mysql \
+			--with-db-host=localhost \
+			--with-db-port=3306
+			--with-db-name=icinga_web
+			--with-db-user=icinga_web \
+			--with-db-pass=icinga_web \
+			--with-icinga-api=/usr/local/icinga/share/icinga-api
 		
 		If the command runs without errors you will have a ready configured icinga-web.
 		
-		Keep in mind that you configure the icinga-web database not the icinga!
+		Keep in mind that you configure the icinga-web database not the icinga idoutils database!
+
 		
 	2.3) The make command and its targets
 	
@@ -48,16 +68,21 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 		
 		Install also overwrites your existing directory and any old configuration in there. To avoid 
 		data loss make backups or write down your configure command to match you needs.
+
+		'make testdeps' checks if you meet all the required (php) dependencies for icinga-web
 		
 		'make' can also install and upgrade new or existing databases by using the following targets:
 		
 		make db-initialize	- creates a spick-and-span database
 		make db-drop 		- drops your database with a security query to avoid casualties
 		make db-upgrade		- upgrades old tables to a newer version (Just the same as db-initialize
-							  with a better name ;-))
+					  with a better name ;-))
+		make db-doc2sql		- if you require plain SQL scripts, use this option to generate SQL from
+					  Doctrine. This can be useful for packaging or manual db install
 							  
 		To use the database creation commands you have to grant privileges to the user who will execute
-		the commands on your dbms. If the user defined via configure is a low-privileged one, you can alter
+		the commands on your dbms. If the user defined via configure is a low-privileged one, 'make' asks
+		about a more privileged one e.g. a root user. If this does not work for you, alter
 		'etc/build.properties' to match the requirements of a root user.
 		
 		You can also read install-fromscratch.txt to get deeper involved in how to use the phing-build
@@ -65,7 +90,15 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 
 3) Database
 
-	Section 2.3 or the install-fromscratch.txt file should give you enough information to set up your database.
+	Create a db user for your likings. The user must have default data privileges like SELECT, UPDATE, INSERT, DELETE.
+
+		SQL> GRANT USAGE ON *.* TO 'icinga_web'@'localhost' IDENTIFIED BY 'icinga_web';
+		SQL> GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, INDEX ON icinga_web.* TO 'icinga_web'@'localhost';
+		SQL> FLUSH PRIVILEGES;
+
+	After configure, use make db-initialize for creating the database and applying the schema with prefilled data.
+
+	Section 2.3, http://docs.icinga.org the install-fromscratch.txt file should give you more detailed information how it works.
 
 4) Webserver configuration
 
@@ -86,7 +119,10 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 
 5) Web configuration
 
-	Keep a look into app/config/icinga.xml for the IcingaApi factories: IcingaData and IcingaCommand:
+	Keep a look into app/modules/Web/config/module.xml for the IcingaApi factories: IcingaData and IcingaCommand.
+	In IcingaData you can set the credentials for the Icinga API e.g. using the Icinga IDOUtils database.
+	In IcingaCommand you can specify the credentials for sending commands via Icinga Core command pipe - local or
+	remote via SSH.
 	
 		<!-- icinga-api data interface -->
 		<parameter name="IcingaData">
@@ -152,7 +188,7 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 			
 		</parameter>
 		
-	After change the files in the config direcotry, clear the cache: 'rm -rf app/cache/config/*.php'
+	After change the files in the config directory, clear the cache: 'rm -rf app/cache/config/*.php'
 
 6) Running the interface and being glad
 
