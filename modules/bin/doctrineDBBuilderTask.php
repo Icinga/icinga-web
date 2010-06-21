@@ -57,9 +57,8 @@ class doctrineDBBuilderTask extends Task {
 	protected function removeTablesForModels() {
 		$tablesToDelete = file_get_contents($this->models);
 		Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh()->query(
-			"SET FOREIGN_KEY_CHECKS=0;
-			 DROP TABLE ".$tablesToDelete.";
-			 SET FOREIGN_KEY_CHECKS=1;
+		//	"SET FOREIGN_KEY_CHECKS=0;
+			 "DROP TABLE ".$tablesToDelete.";
 			 ");
 		echo "\n Dropping tables $tablesToDelete \n";
 	}
@@ -72,17 +71,17 @@ class doctrineDBBuilderTask extends Task {
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$modelPath = $icinga."/app/modules/".$this->project->getUserProperty("MODULE_Name")."/lib/";
 		
-		Doctrine::loadModels($this->models);
+		$appKitPath = $this->project->getUserProperty("PATH_AppKit");
+
+		Doctrine::loadModels($icinga."/".$appKitPath."database/models/generated");
+		Doctrine::loadModels($icinga."/".$appKitPath."database/models");
+
 		$tables = Doctrine::getLoadedModels();
 		$tableList = array();
 		foreach($tables as $table) {
 			$tableList[] = Doctrine::getTable($table)->getTableName();	
 		}
 
-		$appKitPath = $this->project->getUserProperty("PATH_AppKit");
-
-		Doctrine::loadModels($icinga."/".$appKitPath."database/models/generated");
-		Doctrine::loadModels($icinga."/".$appKitPath."database/models");
 		Doctrine::createTablesFromModels(array($this->models.'/generated',$this->models));
 	
 		file_put_contents($modelPath."/.models.cfg",implode(",",$tableList));

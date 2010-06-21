@@ -80,8 +80,28 @@ class dbInitializeTask extends doctrineTask {
 			}		
 			$tries++;
 		} while($tries < $maxTries && !$allsaved);
+		$this->dbSpecificFixes();
 		if($tries >= $maxTries) {
 			echo "\nWARNING: Initial data import may have failed due too many references.\n";
+		}
+	}
+	
+	protected function dbSpecificFixes() {
+		$this->updatePgsqlSequences();
+	}
+	
+	protected function updatePgsqlSequences() {
+		if(substr($this->dsn,0,5) != 'pgsql')
+			return true;
+		$sqlExec = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
+		foreach(Doctrine::getLoadedModels() as $model) {
+			$refCl = new ReflectionClass($model);
+				if(!$refCl->hasMethod("getPgsqlSequenceOffsets")) 
+					continue;
+				$cl = new $model();
+				foreach($cl->getPgsqlSequenceOffsets() as $seq=>$offset) {
+					$sqlExec->query("SELECT setval('".$seq."',".$offset.")");
+				}
 		}
 	}
 }
