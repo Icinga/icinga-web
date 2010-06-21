@@ -69,7 +69,7 @@ div#icinga-portal-loading {
     z-index:90001;
     height:32px;
     width: 32px;
-    background: transparent url("../images/ajax/wait.gif") center center;
+    background: transparent url("../images/ajax/icinga-throbber.gif") center center;
 }
 
 /** CRONKS **/
@@ -289,6 +289,10 @@ div.icinga-status-unknown, div.servicechart-3 {
 
 span.icinga-status-unknown {
 	color: #ff8000;
+}
+
+div.icinga-status-all {
+	background-color: #a0a0a0;
 }
 
 div.hostchart-0, div.hostchart-1, div.hostchart-2,
@@ -536,7 +540,21 @@ div.role_user_icon {
 /* OverallStatus */
 
 div.icinga-overall-status-item {
+	cursor: pointer;
+}
+
+div.icinga-overall-status-item, div.icinga-overall-status-icon {
 	float: left;
+	margin: 0px 0px 0px 5px;
+}
+
+div.icinga-overall-status-spacer {
+	height: 2px;
+}
+
+div.icinga-overall-status-icon {
+	width: 16px;
+	height: 16px;
 }
 
 /* EOF */
