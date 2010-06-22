@@ -101,7 +101,7 @@ Ext.onReady(function(){
 					store: new Ext.data.ArrayStore({
 						id:0,
 						fields: ['user_authkey'],
-						data:<? echo $authTypes ?>
+						data:<?php echo $authTypes ?>
 					}),
 					valueField: 'user_authkey',
 					displayField: 'user_authkey'
@@ -181,15 +181,15 @@ Ext.onReady(function(){
 					anchor: '95%',
 					labelWidth:400,
 					items: [
-			<? foreach($roles as $role) :?>
+			<?php foreach($roles as $role) :?>
 					{
 						xtype:'checkbox',
-						name: 'userroles[<? echo $role->get("role_id")?>]',
-						id: 'userroles_<? echo $role->get("role_id") ?>',
-						inputValue: '<? echo $role->get("role_id") ?>',
-						fieldLabel: '<? echo $role->get("role_name")." (".$role->get("role_description").") "; ?>'
+						name: 'userroles[<?php echo $role->get("role_id")?>]',
+						id: 'userroles_<?php echo $role->get("role_id") ?>',
+						inputValue: '<?php echo $role->get("role_id") ?>',
+						fieldLabel: '<?php echo $role->get("role_name")." (".$role->get("role_description").") "; ?>'
 					},
-			<? endforeach; ?>
+			<?php endforeach; ?>
 					]
 				}, {
 					xtype:'panel',
@@ -231,13 +231,13 @@ Ext.onReady(function(){
 				 	values["password_validate"] = values["user_password_confirmed"];
 				 	values["user_disabled"] = (values["user_disabled"] == "on" ? 1 : 0)
 				 	Ext.Ajax.request({
-						url: '<? echo $ro->gen("appkit.admin.users.alter")?>'+userId,
+						url: '<?php echo $ro->gen("appkit.admin.users.alter")?>'+userId,
 						params: values,
 						success: function() {
-							if(Ext.getCmp('<? echo $t["container"] ?>'))
-								Ext.getCmp('<? echo $t["container"] ?>').hide();
+							if(Ext.getCmp('<?php echo $t["container"] ?>'))
+								Ext.getCmp('<?php echo $t["container"] ?>').hide();
 							else {
-								AppKit.changeLocation('<? echo $ro->gen("appkit.admin.users") ?>');
+								AppKit.changeLocation('<?php echo $ro->gen("appkit.admin.users") ?>');
 							}
 						},
 						scope:this
@@ -314,7 +314,7 @@ Ext.onReady(function(){
 					return true;
 				}
 				Ext.Ajax.request({
-					url: '<? echo $ro->gen("appkit.data.users")?>/'+id,
+					url: '<?php echo $ro->gen("appkit.data.users")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
 						this.fillUserValues(data.users);
@@ -327,7 +327,7 @@ Ext.onReady(function(){
 		});
 		
 		AppKit.userEditor.editorWidget.instance = new AppKit.userEditor.editorWidget({maxWidth:600});
-		var container = '<? echo $t["container"] ?>';
+		var container = '<?php echo $t["container"] ?>';
 
 		/**
 		 * Refill the form with the user values
@@ -347,9 +347,9 @@ Ext.onReady(function(){
 	 */
 	if(!AppKit.userEditor.editorWidget)
 		initEditorWidget();
-	<? if(!$t["container"]) { ?>
-			AppKit.userEditor.editorWidget.instance.insertPresets(<? echo $user->get("user_id") ?>);				
- 	<? }?>
+	<?php if(!$t["container"]) { ?>
+			AppKit.userEditor.editorWidget.instance.insertPresets(<?php echo $user->get("user_id") ?>);				
+ 	<?php }?>
 
 })
 </script>
