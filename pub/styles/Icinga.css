@@ -69,7 +69,7 @@ div#icinga-portal-loading {
     z-index:90001;
     height:32px;
     width: 32px;
-    background: transparent url("../images/ajax/icinga-throbber.gif") center center;
+    background: transparent url("../images/ajax/wait.gif") center center;
 }
 
 /** CRONKS **/
