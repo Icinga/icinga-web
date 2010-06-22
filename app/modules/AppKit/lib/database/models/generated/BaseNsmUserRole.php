@@ -65,4 +65,6 @@ abstract class BaseNsmUserRole extends Doctrine_Record
 			array('usro_user_id'=>'1','usro_role_id'=>'3')
 		);
     }
+    
+
 }
