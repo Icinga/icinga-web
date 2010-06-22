@@ -228,6 +228,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/JSONSubmit.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/JSONSubmit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/Layout.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/Layout.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/json
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/json/AppKitExtJsonDocument.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/json/AppKitExtJsonDocument.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/json/AppKitJsonResponse.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/json/AppKitJsonResponse.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/ScriptDynaLoader.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/ScriptDynaLoader.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging
@@ -428,7 +429,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/PortalViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/PortalViewAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/StaticContentAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/StaticContentAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/StatusMapAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/StatusMapAction.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/StatusSummaryAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/StatusSummaryAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/StatusOverallAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/StatusOverallAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/ViewProc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/ViewProcAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/ViewProcAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/ViewProc/AjaxGridLayoutAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/ViewProc/AjaxGridLayoutAction.class.php
@@ -448,7 +449,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/PortalView.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/StaticContent.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/StaticContent.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/StatusMap.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/StatusMap.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/StatusSummary.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/StatusSummary.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/StatusOverall.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/StatusOverall.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/ViewProc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/ViewProc/AjaxGridLayout.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/ViewProc/AjaxGridLayout.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/cache/System/ViewProc/CommandMetaInformation.xml $(DESTDIR)$(prefix)/app/modules/Cronks/cache/System/ViewProc/CommandMetaInformation.xml
@@ -503,7 +504,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ObjectSearchResultModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ObjectSearchResultModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusMapModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusMapModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusSummaryModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusSummaryModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusOverallModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusOverallModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ViewProcFilterParamsModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ViewProcFilterParamsModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/templates/Example
@@ -521,7 +522,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StaticContentSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StaticContentSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusMapSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusMapSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusSummarySuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusSummarySuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/StatusOverallSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/StatusOverallSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/AjaxGridLayoutSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ViewProc/CommandMetaInformationSuccess.php
@@ -545,7 +546,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/PortalView.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/StaticContent.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/StaticContent.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/StatusMap.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/StatusMap.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/StatusSummary.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/StatusSummary.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/StatusOverall.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/StatusOverall.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/AjaxGridLayout.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/AjaxGridLayout.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ViewProc/CommandMetaInformation.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ViewProc/CommandMetaInformation.xml
@@ -565,7 +566,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/PortalViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/PortalViewSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StaticContentSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StaticContentSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusMapSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusMapSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusSummarySuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusSummarySuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/StatusOverallSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/StatusOverallSuccessView.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/AjaxGridLayoutSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/AjaxGridLayoutSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ViewProc/CommandMetaInformationSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ViewProc/CommandMetaInformationSuccessView.class.php
@@ -6961,6 +6962,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/ajax
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/circle-ball.gif $(DESTDIR)$(prefix)/pub/images/ajax/circle-ball.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/icinga-throbber.gif $(DESTDIR)$(prefix)/pub/images/ajax/icinga-throbber.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/loadingbar.gif $(DESTDIR)$(prefix)/pub/images/ajax/loadingbar.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/s.gif $(DESTDIR)$(prefix)/pub/images/ajax/s.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/ajax/wait.gif $(DESTDIR)$(prefix)/pub/images/ajax/wait.gif
@@ -8079,6 +8081,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7092
+INC_FILES=7094
 INC_DIRS=986
 # INSTALL_FILES_END
