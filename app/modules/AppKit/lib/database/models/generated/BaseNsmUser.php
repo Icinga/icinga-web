@@ -185,7 +185,7 @@ abstract class BaseNsmUser extends Doctrine_Record
     public static function getInitialData() {
 		return  array(
 			array(
-//				"user_id"=>1,
+				"user_id"=>1,
 				"user_account"=>0,
 				"user_name" => 'root',
 				"user_firstname" => 'Enoch',
@@ -198,5 +198,8 @@ abstract class BaseNsmUser extends Doctrine_Record
 				"user_disabled" => 0
 			)	
 		);
+    }
+    public static function getPgsqlSequenceOffsets() {
+    	return array("nsm_user_user_id_seq" => 2);
     }
 }

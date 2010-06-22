@@ -146,6 +146,9 @@
 				<!-- Statussummary -->
 				<route name=".statusSummary.json" pattern="^/statusSummary/json" output_type="json" action="System.StatusSummary"/>
 
+				<!-- Status overall json provider -->
+				<route name=".statusOverall.json" pattern="^/statusOverall/json" output_type="json" action="System.StatusOverall"/>
+
 				<!-- JIT Status map -->
 				<route name=".statusMap.json" pattern="^/statusMap/json" output_type="json" action="System.StatusMap"/>
 

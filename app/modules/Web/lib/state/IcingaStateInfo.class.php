@@ -94,6 +94,10 @@ abstract class IcingaStateInfo {
 		}
 		return self::UNKNOWN_TEXT;
 	}
+
+	public function getStateList() {
+		return $this->state_list;
+	}
 	
 }
 

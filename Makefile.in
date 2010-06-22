@@ -123,6 +123,9 @@ db-initialize:
 db-deinitialize:
 	$(PHING_CALL) db-initialize
 
+db-doc2sql:
+	${PHING_CALL} doc2sql
+
 db-drop:
 	$(PHING_CALL) db-drop
 

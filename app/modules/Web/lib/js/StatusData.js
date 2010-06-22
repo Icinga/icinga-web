@@ -37,13 +37,15 @@ Icinga.DEFAULTS.STATUS_DATA = {
 	hoststatusText : {
 		0: _('UP'),
 		1: _('DOWN'),
-		2: _('UNREACHABLE')
+		2: _('UNREACHABLE'),
+		100: _('IN TOTAL')
 	},
 	
 	hoststatusClass : {
 		0: 'icinga-status-up',
 		1: 'icinga-status-down',
-		2: 'icinga-status-unreachable'
+		2: 'icinga-status-unreachable',
+		100: 'icinga-status-all'
 	},
 	
 	SERVICE_OK : 0,
@@ -55,14 +57,16 @@ Icinga.DEFAULTS.STATUS_DATA = {
 		0: _('OK'),
 		1: _('WARNING'),
 		2: _('CRITICAL'),
-		3: _('UNKNOWN')
+		3: _('UNKNOWN'),
+		100: _('IN TOTAL')
 	},
 	
 	servicestatusClass : {
 		0: 'icinga-status-ok',
 		1: 'icinga-status-warning',
 		2: 'icinga-status-critical',
-		3: 'icinga-status-unknown'
+		3: 'icinga-status-unknown',
+		100: 'icinga-status-all'
 	}
 };
 
@@ -73,7 +77,9 @@ Icinga.StatusData = (function() {
 	var elementTemplate = new Ext.Template('<div class="icinga-status {cls}"><span>{text}</span></div>');
 	elementTemplate.compile();
 	
-	var elementWrapper = function(type, statusid) {
+	var elementWrapper = function(type, statusid, format) {
+		format = (format || '{0}');
+		
 		var c = '';
 		if (type == 'host') {
 			c = pub.hoststatusClass[statusid];
@@ -90,7 +96,7 @@ Icinga.StatusData = (function() {
 			t = pub.servicestatusText[statusid];
 		}
 		
-		return { cls: c, text: t };
+		return { cls: c, text: String.format.call(String, format, t) };
 	};
 	
 	var textTemplate = new Ext.Template('<span class="icinga-status-text {cls}">{text}</span>');
@@ -98,14 +104,18 @@ Icinga.StatusData = (function() {
 	
 	Ext.apply(pub, {
 		
-		wrapElement : function(type, statusid) {
-			return elementTemplate.apply(elementWrapper(type, statusid));
+		wrapElement : function(type, statusid, format) {
+			return elementTemplate.apply(elementWrapper(type, statusid, format));
 		},
 		
-		wrapText : function(type, statusid) {
-			return textTemplate.apply(elementWrapper(type, statusid));
+		wrapText : function(type, statusid, format) {
+			return textTemplate.apply(elementWrapper(type, statusid, format));
 		},
-		
+
+		simpleText : function(type, statusid, format) {
+			return elementWrapper(type, statusid, format).text;
+		},
+
 		renderServiceStatus : function(value, metaData, record, rowIndex, colIndex, store) {
 			return Icinga.StatusData.wrapElement('service', value);
 		},

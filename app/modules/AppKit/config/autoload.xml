@@ -60,7 +60,11 @@
 		<autoload name="AppKitHtmlEntitiesInterface">%core.module_dir%/AppKit/lib/html/AppKitHtmlEntitiesInterface.interface.php</autoload>
 		<autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
 		<autoload name="AppKitHtmlHelper">%core.module_dir%/AppKit/lib/html/AppKitHtmlHelper.class.php</autoload>
+		
+		<!-- JSON things -->
 		<autoload name="AppKitJsonResponse">%core.module_dir%/AppKit/lib/json/AppKitJsonResponse.class.php</autoload>
+		<autoload name="AppKitExtJsonDocument">%core.module_dir%/AppKit/lib/json/AppKitExtJsonDocument.class.php</autoload>
+
 		<autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
 		<autoload name="AppKitNavContainer">%core.module_dir%/AppKit/lib/menu/AppKitNavContainer.class.php</autoload>
 		<autoload name="AppKitNavContainerInterface">%core.module_dir%/AppKit/lib/menu/AppKitNavContainerInterface.interface.php</autoload>
