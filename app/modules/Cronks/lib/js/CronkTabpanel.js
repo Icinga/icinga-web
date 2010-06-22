@@ -24,7 +24,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 				cout[item.getId()] = Cronk.Registry.get(item.getId());
 			}
 		});
-		
+		// AppKit.log("STATE", cout);
 		var t = this.getActiveTab();
 		
 		return {

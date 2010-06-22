@@ -39,11 +39,32 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			listeners: {
 				click: function(dview, index, node, e) {
 					var d = dview.getStore().getAt(index).data;
-					var template = 'icinga-' + d.type + '-template';
-					var id = 'status-overall-' + d.type + d.state_org;
-					var c = {
-						
+
+					var params = {
+						template: 'icinga-' + d.type + '-template'
+					};
+
+					var filter = {};
+
+					// 100 is the summary of all (== no filter)
+					if (d.state_org < 100) {
+						filter['f[' + d.type + '_status-value]'] = d.state_org;
+						filter['f[' + d.type + '_status-operator]'] = 50;
 					}
+
+					var id = 'status-overall-grid' + d.type + '-' + d.state_org;
+
+					var cronk = {
+						parentid: id,
+						id: id + '-frame',
+						stateuid: id + '-persistent',
+						title: String.format('{0}s {1}', d.type, Icinga.StatusData.simpleText(d.type, d.state_org).toLowerCase()),
+						crname: 'gridProc',
+						closable: true,
+						params: params
+					};
+
+					Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
 				}
 			},
 

@@ -146,7 +146,7 @@ Cronk.defaults.CONFIG_COPY = [
 			this.applyCronkConfig();
 			
 			this.applyCronkEvents();
-			
+			// AppKit.log("CREATE", this.getCronkInitialConfig(this.configCopy));
 			Cronk.Registry.add(this.getCronkInitialConfig(this.configCopy));
 		},
 		

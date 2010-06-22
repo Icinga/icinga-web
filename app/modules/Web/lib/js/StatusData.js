@@ -111,7 +111,11 @@ Icinga.StatusData = (function() {
 		wrapText : function(type, statusid, format) {
 			return textTemplate.apply(elementWrapper(type, statusid, format));
 		},
-		
+
+		simpleText : function(type, statusid, format) {
+			return elementWrapper(type, statusid, format).text;
+		},
+
 		renderServiceStatus : function(value, metaData, record, rowIndex, colIndex, store) {
 			return Icinga.StatusData.wrapElement('service', value);
 		},
