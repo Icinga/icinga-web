@@ -7,7 +7,7 @@ AppKit.principalEditor.principalStore = new Ext.data.JsonStore({
 	autoLoad:true,
 	storeId: 'principalStore',
 	idProperty: 'id',
-	url: '<? echo $ro->gen("appkit.data.principals");?>',
+	url: '<?php echo $ro->gen("appkit.data.principals");?>',
 	fields: ['id','name','description','type','fields']
 });
 
@@ -41,7 +41,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	
 	editorStore : new Ext.data.JsonStore({
 		autoDestroy: false,
-		url: '<? echo $ro->gen("icinga.api")?>'+'/json',
+		url: '<?php echo $ro->gen("icinga.api")?>'+'/json',
 		autoLoad:false,
 		root: 'result',
 		forceSelection: false,
@@ -197,7 +197,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	loadPrincipalsForUser : function(userid) {
 
 		Ext.Ajax.request({
-			url: '<? echo $ro->gen("appkit.data.principals.user")?>'+userid,
+			url: '<?php echo $ro->gen("appkit.data.principals.user")?>'+userid,
 			success: function(resp) {
 				var data = Ext.decode(resp.responseText);
 				this.setPrincipals(data);
@@ -209,7 +209,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	loadPrincipalsForRole : function(role) {
 
 		Ext.Ajax.request({
-			url: '<? echo $ro->gen("appkit.data.principals.group")?>'+role,
+			url: '<?php echo $ro->gen("appkit.data.principals.group")?>'+role,
 			success: function(resp) {
 				var data = Ext.decode(resp.responseText);
 				this.setPrincipals(data);

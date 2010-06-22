@@ -120,11 +120,11 @@ Ext.onReady(function(){
 				 	values["password_validate"] = values["role_password_confirmed"];
 				 	values["role_disabled"] = (values["role_disabled"] == "on" ? 1 : 0)
 				 	Ext.Ajax.request({
-						url: '<? echo $ro->gen("appkit.admin.groups.alter")?>'+roleId,
+						url: '<?php echo $ro->gen("appkit.admin.groups.alter")?>'+roleId,
 						params: values,
 						success: function() {
-							if(Ext.getCmp('<? echo $t["container"] ?>'))
-								Ext.getCmp('<? echo $t["container"] ?>').hide();
+							if(Ext.getCmp('<?php echo $t["container"] ?>'))
+								Ext.getCmp('<?php echo $t["container"] ?>').hide();
 						},
 						scope:this
 				 	});
@@ -202,7 +202,7 @@ Ext.onReady(function(){
 						listeners: {
 							render: function(e) {
 								e.getEl().on("dblclick",function() {
-									window.location.href= '<? echo $ro->gen("appkit.admin.users.edit")?>'+this.data.user_id;
+									window.location.href= '<?php echo $ro->gen("appkit.admin.users.edit")?>'+this.data.user_id;
 								},e)
 							},
 							scope: this
@@ -225,7 +225,7 @@ Ext.onReady(function(){
 					return true;
 				}
 				Ext.Ajax.request({
-					url: '<? echo $ro->gen("appkit.data.groups")?>/'+id,
+					url: '<?php echo $ro->gen("appkit.data.groups")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
 						this.fillRoleValues(data);
@@ -239,7 +239,7 @@ Ext.onReady(function(){
 		});
 		
 		AppKit.groupEditor.editorWidget.instance = new AppKit.groupEditor.editorWidget();
-		var container = '<? echo $t["container"] ?>';
+		var container = '<?php echo $t["container"] ?>';
 		/**
 		 * Refill the form with the role values
 		 */

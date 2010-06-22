@@ -84,7 +84,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 		}]
 		
 	});
-	if(<? echo $rd->getParameter("isURLView") ? 1 : 0 ?>)
+	if(<?php echo $rd->getParameter("isURLView") ? 1 : 0 ?>)
 		Ext.getCmp('cronk-tabs').setURLTab(<?php echo $rd->getParameter('URLData');?>);
 	
 	AppKit.util.Layout.doLayout();
