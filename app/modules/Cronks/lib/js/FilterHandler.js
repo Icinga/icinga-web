@@ -296,7 +296,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 		return new Cronk.IcingaApiComboBox({
 			typeAhead: true,
 			triggerAction: 'all',
-			forceSelection: true,
+			forceSelection: false,
 			'name': meta.name + '-field',
 			'id': meta.name + '-field',
 			hiddenName: meta.name + '-value',

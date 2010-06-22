@@ -112,7 +112,15 @@ var IcingaGridFilterWindow = function() {
 						oGrid.fireEvent('activate');
 					}
 				},
-				
+
+				keys: {
+					key: 13,
+					fn: function() {
+						this.applyFilters();
+					},
+					scope: pub
+				},
+
 				bbar: {
 					items: [{
 						text: _("Apply"),
