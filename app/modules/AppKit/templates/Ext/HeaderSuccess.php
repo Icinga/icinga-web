@@ -52,14 +52,14 @@ Ext.onReady(function() {
                         text: _('Preferences'),
                         handler: function() {
                         	// View nicely in window :-P
-							AppKit.util.doPreferences('<?echo $ro->gen("my.preferences"); ?>');
+							AppKit.util.doPreferences('<?php echo $ro->gen("my.preferences"); ?>');
                         }
                     }, {
                         tooltip: _('Logout'),
                         iconCls: 'silk-user-go',
                         width: 'auto',
                         handler: function() {
-							AppKit.util.doLogout('<?echo $ro->gen("appkit.logout", array('logout' => 1)); ?>');
+							AppKit.util.doLogout('<?php echo $ro->gen("appkit.logout", array('logout' => 1)); ?>');
                         }
                     }]
                 }

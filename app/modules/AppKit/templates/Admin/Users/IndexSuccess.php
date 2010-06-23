@@ -105,7 +105,7 @@ Ext.onReady(function() {
 				},this);
 				
 				Ext.Ajax.request({
-					url: '<?echo $ro->gen("appkit.admin.users.remove") ?>',
+					url: '<?php echo $ro->gen("appkit.admin.users.remove") ?>',
 					success: function() {
 						this.getStore().reload();
 					},

@@ -176,7 +176,7 @@ Ext.onReady(function() {
 				},this);
 				
 				Ext.Ajax.request({
-					url: '<?echo $ro->gen("appkit.admin.groups.remove") ?>',
+					url: '<?php echo $ro->gen("appkit.admin.groups.remove") ?>',
 					success: function() {
 						this.getStore().reload();
 					},
