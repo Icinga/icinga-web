@@ -91,7 +91,7 @@ AppKit.util = (function() {
 								AppKit.changeLocation(AppKit.c.path);
 							}
 						}, {
-							text: _('Only close'),
+							text: _('Close'),
 							iconCls: 'silk-cancel',
 							handler: function() {
 								pwin.close();
