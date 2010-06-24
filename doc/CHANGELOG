@@ -1,186 +1,3518 @@
- = 0.9.0
-   * 2009-10-28
-     * This is the initial release, prototyping, testing, think about features
-   
- = 0.9.1-alpha
-   * 2009-10-29
-     * Updated install-fromscratch.txt: apache settings ...
-     
-   * 2009-10-30
-     * Removed the yui top menu and implemented top nav with ExtJS
-     * Removed yui
-   
-   * 2009-11-03
-     * Removed unused libraries (gc-prettify, jquery, firebug-lite)
-     * Cherrypicked hendricks makefile changes
-     * Changed installer toolkit to make basic installs
-   
-   * 2009-11-04
-     * Installer fixes: paths and permissions
-     * Added explicit bin owner for webfiles
-     * Added rabbit dropping script to clear temp and bak files
-     
-   * 2009-11-12
-     * Added deflate to htaccess
-     * Fixed guest users for the menuextender (adding items before admin submenu)
-     
-   * 2009-11-30
-     * Commands should work (Templates, Ajax proc, command factory, auth, ...)
-     * Changing API result keys to uppercase
-     * Opera array type fixes (notification baloon)
-     * Added AC macro to detect the web user
-     * Global xml replacements within the templates (view proc)
-     * Updating ExtJS to 3.0.3
-     * Removed php notice warnings (isset, undef vars)
-     
-   * 2009-12-02
-   	 * Fixed make error (#206)
-   	 
- = 0.9.1-beta
-   * 2009-12-17
-     * Added some icinga specific principal target classes
-     * Finished editing of principal targets for users and groups
-     * Added editing models for principals
-     * Finished principal target filtering in xml temlates
-     * Added default icinga filter targets
-     
-   * 2009-12-18
-     * Moved icinga lib to a new place
-     * Added principal target toolkit for api search queries
-     * Finished principal target framework
-     
-   * 2009-12-28
-     * Added full command specification
-   
-   * 2010-01-11
-     * Fixed filter window bug (#232)
-     * Added host- / service status filterund
-     
-   * 2010-01-12
-     * Host- / serviceinfo info icons
-     * ExtJs update to version 3.1
-     
-   * 2010-01-13
-      * DB field for class length 80 (principal target)
-      * CVs different for host and service (schema changes)
-      * make fix for files (make)
-      * removed temp files
-      * changes status icon files (from icinga theme, smaller)
-      * added some more state (flapping, downtime)
-      * makefile bin permission (#245)
-      * drop decision for phing
-      * adapted the phing db targets to gnu make
-      * some makefile fixes, help text, targets
-      
-    * 2010-01-14
-      * Updated phing to stable version 2.3.3
-      * Added AC options for db installing
-      * AC rewrites build.properties for phing
-      * database.xml is now substituted by AC
-      * Write some doc for the new install process
-     
-    * 2010-01-18
-      * Stateful framework is running
-      * Changed cookie encoding method to json
-      * Tabpanel is persistent
-      * Cookie write filter merges the data
-    
-    * 2010-01-21
-      * Static content (tactical overview)
-      * ExtJS persistent fixes
-      * Portal is persistent (column models)
-      * Portal columns determined when dragging over
-      
-    * 2010-01-22
-      * Tactical overview
-      * Portalcronks height persistent
-      * Async cronk creation (Render hidden, render, show)
-      
-    * 2010-01-28
-      * Tactical overview template engine (ready)
-      * Wrapped static content into a div
-      * Auto refresh grid panels (settings)
-      * Grid filters are persistent
-    
-    * 2010-02-03
-      * Default font style
-      * Head elements (still missing ???)
-      * Auth framework changed (Multiple, simultaneous)
-      * Checked persistent, user specific data
-      
-    * 2010-02-04
-      * Reducing mass persistent data of filter settings
-      * Implemented categories for the cronks
-      * Cronks for usergroups only (#262)
-    
-    * 2010-03-03
-      * Fixed webpath errors with querystring and without rewrite
-      * Fixed #304 wwwrun user was missing (fixes #304)
-      * Group / users activation
-      * meta
-      
- = 1.0.0-rc
- 
-    * 2010-03-08
-      * Fixed initial layout (some cronks are missing)
-      * Fixed history relations for links (using the name as criteria)
-      * Cleanup the initial event firework a bit
-       
-     * 2010-03-18
-       * Template filter for multiple fields (Intergrid links)
-       * Typo (fixes #335)
-       * Added js temp storage class (used for grid templates)
-      
-     * 2010-03-19
-       * Customvar filtering for host- / servicegrids
-       * Jumplinks from host-/serviceview to hosts and services (fixes #334)
-      
-     * 2010-03-22
-       * Added columnRenderer to display status information
-       * Round corners for status info in grids
-       * Concept testing gettext js
-     
-     * 2010-03-23
-       * Agavi update (v1.0.2)
-       * New library jsgettext (see VENDOR for more information)
-       * Probe i18n with js
-     
-     * 2010-03-24
-       * I18n javascript implementation (refs #279)
-       * Proof of concept, http state persistence
-     
-     * 2010-03-25
-       * Buffering http state persistence provider implementation (fixes #184)
-     
-     * 2010-03-26
-       * Rewritten persistence handling of grids because of prefilters and userfilters
-     
-     * 2010-03-30
-       * Fixed content-type for application state
-       
-     * 2010-03-30
-       * ExtJs update to 3.1.1
-       * Tactical Overview with CustomVariables
-     
-     * 2010-03-31
-       * Tactical Overview with CustomVariables
-     
-     * 2010-04-01
-       * Extjs links for TO
-     
-     * 2010-04-06
-       * Filter window height sync fix (finally)
-       * SQL constants for 'not is' (API patch created, fixes #362)
-       * Merge with plugin architecture (rel #338)
-       * Search object status (fixes #339)
-       * Global icinga status js object
-       * Command window width (webkit)
-     
-     * 2010-04-07
-       * Finished translation template (fixes #279)
-       * Added tools to handle translation (po, mo and json files)
-       * Makefile changes (targets, output)
-       * Doc files for translation
-       
-       
-       
+2010-06-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9362d378bc04e8ae36a8621befb180e40b69b100
+
+* Removed useless doc file ;-)
+
+
+2010-06-23 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 9c4058315d88a22ee329ff705b857947f67bb0e5
+
+* docs update (in sync with the official docs)this is synced with updates for 
+  docs.icinga.organd those provided with the core package.
+
+
+* refs #513
+
+
+
+
+2010-06-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ac221b9122f3574a749e6d378b842b77ee65e4a0
+
+* Fixed typo (fixes #528)
+
+
+2010-06-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f3854209e45d65b1632ee7a81233f0e01d15a485
+
+* Removing php short tags part II (ref #487)
+
+
+2010-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d690017875d712d45cdc5153b76962ca6906efbd
+
+* Fix installed files
+
+
+2010-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8ab09eb26e4de020a09662d64268f02eb4f0d8b2
+
+* Restored old portal throbber
+
+
+2010-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f724a24c55a108b17a9dafe9c87d0ef71f3e11ca
+
+* Allow text filter in combos
+* Added key handler for filter forms
+
+
+2010-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1bd2c1fc36937df640ab4c913fe4d4004f0591bf
+
+* Removed old status summary structures (honour christian for the old one, merci)
+
+
+2010-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 222942ea4938932ac68c20e823f49224480c10cf
+
+* New overall status cronk ready
+* Single click for search results
+* Simple text 
+  status through the JS API (Icinga.StatusData)
+
+
+2010-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9cd74b5b8364964ce7f10b3e1f40531bc161ef57
+
+* Removed short php opening tags
+
+
+2010-06-21 Marius Hein <mhein(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 451261825904ddd5ceeec430b6451a8826c746fb
+
+* New status throbber
+
+
+2010-06-17 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 0c9f52cf7cbb7ca830504f571b373d0c7cff1bb9
+
+* Added PostgreSQL specific updateSequence function that updates the sequence counter 
+  on installation
+
+
+2010-06-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 09ea56c585320f19ebe344d7b2255948cc1b82c1
+
+* Updated test cas
+
+
+2010-06-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: d1e815769b0feda283dc633066f1c1e07b21c902
+
+* Changed wrong id
+
+
+2010-06-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2b90d691cfe2b97283167f1580909f4530d956b4
+
+* eadded doc2sql
+
+
+2010-06-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 3d6f64a2b5ab7069b7b22e787f90a6ac4580c059
+
+* Re-added Ids of initial data, although Postgre won't auto update its seqeunce
+
+
+2010-06-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f0fb3a2d0fb7a3c69cbde283f31adc0f362f358a
+
+* 
+* OverallStatus Cronk renew 3
+
+
+2010-06-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f1a5592b8ea8cf9a4d07b80f49205c9dcb770b3d
+
+* Added external link example for xml templates (icinga-host-template)
+
+
+2010-06-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 19d75d482d3e2d9c59efcb160d46bc1ef21dbc4b
+
+* Added external link example for xml templates (icinga-host-template)
+
+
+2010-06-15 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 45bc95e5cda72aeaf2cfc565566f4cb2f2f94c99
+
+* Bugfix in DBBuilder
+
+
+2010-06-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7449c542a68aae9ac29cfb94d2cebf71230083d9
+
+* OverallStatus Cronk renew 2
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 65d7a8cb33fc1d8331b7d3b4e631fc65feedf4d7
+
+* Fixed make files
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5a57ced5a11ebc53dceba81d7cdb7cb44d2f33d1
+
+* Fixes extjs upgrade problem
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f9167a9c0d25d7ea48b7d106356890352ff98f44
+
+* Changed extjs debug version to generic
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 054dbba25a367a8532d679083e43cad4d5c06cb6
+
+* Upgraded Ext to version 3.2.1
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fa6385be9a480ea8c0a7e42476770db454be2cae
+
+* Well, added again!
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0930a9f80a1ecfb902388226619063eec95a3543
+
+* Compiled language files
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6692523f09140e8f8994e841a20db7982849623a
+
+* Removed green success splash (fixes #494)
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d369ef1f01fc3cf1fc9f52bffa5a258f6ca98c13
+
+* Pff readded cache folder
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 751e250a387d8a2e39edf952a884b68efff170d4
+
+* Reset changes before
+
+
+2010-06-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2fee88c36a6c0bef986a2bd343469ba47ccae598
+
+* Removed overall cache from gitignore
+* Readded appcache
+
+
+2010-06-14 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c5b32e56cacd506b86d2f469a255503685e7a808
+
+* Cronk view doesn't truncate html anymore
+
+
+2010-06-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 632da4d63b756362cffcd547fa00856e94d1a9d6
+
+* removed unused
+
+
+2010-06-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 75d5ec52643c86669c05b84015dfd9317c885d5f
+
+* Prepared new OverallStatus cronk
+
+
+2010-06-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8737a077360e29d5d04d307ea6a6deddee4d5d58
+
+* SOAP fixes
+
+
+2010-06-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bc4946fccf8c64f335f7b3d7199595f5ed6c851b
+
+* regenerated configure
+
+
+2010-06-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6b106e23f587e9aee460c7b722d2217e3598fff1
+
+* Changed icinga-web binding style to rpc/encoded
+
+
+2010-06-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 991238ff5d8bc0dbbd8938df220e5ec56eab165a
+
+* Complete ajax filtering within grid cronks
+
+
+2010-06-10 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 1a57a3b0ae4ff28d0f291d7e391cd33bd1a67ed1
+
+* Added premilinary soap interface for icinga-api adapter
+
+
+2010-06-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a9655f689dd87af9d2f9af110d5afd550b284038
+
+* Added ajax-driven filter implementation
+* Added ajax filters to host template
+
+
+2010-06-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 94f8df23552cffd3f1b4b05af9f7253026c63c18
+
+* Added AuthKey Auth provider, Authprovider selection in user backend and key-based 
+  api access
+
+
+2010-06-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 86594176388b6b88a21a6ca96ea904eeb7092cc5
+
+* Role editpanel is now like User edit Panel (Pagination, buttons, ctx)
+
+
+2010-06-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a33dc51da330aa7d7f954272e51506185ffcbc00
+
+* Added "Get URL for Cronk" function
+
+
+2010-06-08 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9bfdf05f9876db1e5370aeb8444328c9cb96ef6e
+
+* REST Interface changes. Not finished yet
+
+
+2010-06-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1160c320c8f1ae050ea856da07df9e656c79a02b
+
+* Fixed wrong click lables (fixes #485)
+
+
+2010-06-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7a32441214d5d271996e138eea8c5fe780b50dca
+
+* Adding instance filters (fixes #288)
+
+
+2010-06-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 5864b7ca3b546900068f64beb41944a3c26bf100
+
+* Invalid session are now closed automatically and cause a login screen after refresh 
+  instead of showing the Exception endlessly
+
+
+2010-06-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f338b9a88f95af84ea43c70eb5d0bb3ca7f47f87
+
+* Added support for oci8 (Oracle) db driver
+
+
+2010-06-02 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c2e4207107b6dcb7cc849a5e77fda9c0329fb066
+
+* Cache headers for squishloader
+* Some netbeans test
+* Added nb project dir
+
+
+2010-06-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 736f2096d135a494186295303aace62a329b3db8
+
+* Postgre Test and Model fixes
+
+
+2010-06-01 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f928e6b9e56c3f5844f6a690680f2833a1d4c1a7
+
+* Added several post-installation testcases tha
+
+
+2010-06-01 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8e5df928223127f7ccf6edfba7d58add6351f1df
+
+* Removed getPrevious from AppKitException -> didn't exist in prior PHP Versions
+
+
+2010-06-01 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 5f35317187071fe1789222b759a0546aea5d565f
+
+* Added generated models to databases.xml and removed doctrine autoload definitions
+
+
+2010-05-28 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 90f7a1e2b73caa43b8c77f7edc608bdb8153e0f5
+
+* fix creating app/cache during make installrefs #464
+
+
+
+2010-05-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 44b751ed99581d12197687890a58183e938bb924
+
+* Removed static class path of icinga
+* Make files update
+* Added new base classes to 
+  autoloader xml
+
+
+2010-05-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d3103c616fcc98d24fcfd2906f2d6845685413a8
+
+* Dimensions for preference editor
+
+
+2010-05-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d370018a76296604a48ede712828961b4c4f8018
+
+* b-update and db-purge-userpreferences added
+
+
+2010-05-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 1907dbd419cdd98cd43a75d1edc868447e956924
+
+* Base Models are now loaded first
+
+
+2010-05-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: de248ff3a29399fbaf2359fb03b5b6a0faf39e44
+
+* PHP 5.2 compatibility fix, fixed wrong reference in NsmRole
+
+
+2010-05-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 333f5e245f2ff95cf86144ffcfb3891182156f57
+
+* Implemented window mode for the preference editor
+
+
+2010-05-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ea322bf89660db5bfc0049932915744dafcca9f9
+
+* Updated build.properties.in
+
+
+2010-05-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9f60e03de366e303d87ed8ce23fd64b716fbcdd7
+
+* Postgre support and more graceful db-setup process
+
+
+2010-05-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 948ada4f7d6b5772bd679863bb704d031e28d513
+
+* Added make doc2sql and updated models
+
+
+2010-05-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aee8b390732db8afa24b493a17021595dc4b8a6c
+
+* Fixed login reference problem on dispatch model
+
+
+2010-05-27 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c32e759373b3477cfd062565b3a7cced01b04418
+
+* Removed doctrineDeployTool - models will now define structure. Added new 
+  db-initialize task
+
+
+2010-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3826417ad3a7a9e4aa745a2ac03fdf487cc07efb
+
+* Real ajax logout feature (a simple dialog)
+
+
+2010-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ba2f5f43981c99c71c9644ea1e8d3f84736c4461
+
+* Removed magic quote test (#icinga-devel 16:37 <VK7HSE>)
+
+
+2010-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 58e40a29dca0b423775cd58baa483bce7af74832
+
+* Added new and updated translations
+
+
+2010-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 980548dfd5ed5cd51467a744efbbcfb4ad5787d3
+
+* Removed the doubleclick (THE DOUBLECLICK, save the doubleclick)
+* Fixed deprecated 
+  issue on the api container model
+
+
+2010-05-27 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 44a7db82d046f3b747a6f12b899ba05f7cb97661
+
+* Updated DB models (added index and foreign key constraints)
+
+
+2010-05-27 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6c191240a121fdb2a073504c9f5937c8cfe577d1
+
+* PHP 5.3 NS fix and updated doctrineDBBuilder
+
+
+2010-05-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fbf99564e0825ef8f56b89bf343d98c123e4cec7
+
+* Added .htaccess to gitignore
+
+
+2010-05-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aa3cbb6fd8125010b5038fb92a29498e0f52f202
+
+* Added --with-web-path to Makefile
+
+
+2010-05-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3b85a8f0d6d61eb64b0bb5060a4234a1f097dd9b
+
+* Makefile fixes II
+
+
+2010-05-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cd2f0c0cdd9bd4fed6dfaa97e63d40dd7b6cfb62
+
+* Fixed make file list
+
+
+2010-05-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 201d9c03f9664ce0fccfaea415ce82a7d8e2c655
+
+* Added clean fix for make file to remove all useless files
+* Removed logfiles on 
+  devclean
+
+
+2010-05-26 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 952b43ab6eee4cc577e3338118381ed89cd54a28
+
+* Updated icingaScheduler to work without AppKit bootstrap
+
+
+2010-05-26 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 4d97b35b5ed79d1eeb913e97e02fe6031f6517ef
+
+* Added several bugfixes fixing incompatibilites occured after AppKit restructuring
+
+
+2010-05-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 97668e54446e5472ce3555abcb2956c0b5f6a78c
+
+* Removed unused files
+* Changed principal security handling in xml template worker
+* 
+  Removed useless security parameters in xml templates
+
+
+2010-05-25 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: b6d1126b1880e962fd6e6289c9a1ab072677f411
+
+* Privilege bugfix and Static content model bugfix (invalid offset...)
+
+
+2010-05-21 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f1e727b5f9e3e7b5db77cc377bc1f459c5ed15b1
+
+* Modified AppKit paths
+
+
+2010-05-21 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 5e820b02684ba840ada253eef20a83e8f447822a
+
+* Added language switch support on TranslationManager level
+
+
+2010-05-21 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 0584aa136719b983ae7065e05f44442ad73df8d8
+
+* Removed old plugin folder
+
+
+2010-05-21 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2aa220103a85f3c1b0b8323cfb3a029bf794ec89
+
+* Fixed installation issues, routing and Admin panel
+
+
+2010-05-21 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d30b99d75be4cd7589d6e928ceb9b7a740ace2ca
+
+* Added base64 encoding to BLOB fields (PostgreSQL workaround)
+
+
+2010-05-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a820639486f67e215ec63baa59ccf2590b27d8c3
+
+* Removed old stylesheets
+
+
+2010-05-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aec2db918edb119e0ecf7a0af820bed1c11f22b3
+
+* Fixed doctrine model loading
+* prepared install routine
+* prepared to merge with 
+  master
+
+
+2010-05-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5d76ada6516a98f0b036f8d3bdbc61711e889c56
+
+* Moved the appkit libs into the module
+* reduced icinga.xml -> 
+  app/modules/appkit/config/module.xml
+
+
+2010-05-20 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c5c2975cbef4cfdfecc75c9721fba91a3274b43b
+
+* Added "defaultTarget" property for principals
+
+
+2010-05-20 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 169aadeed95b10ec7af6a64fd0dba01d8bda8d08
+
+* Added ajax driven principalentry proposal for PrincipalEditor (fixes #438)
+
+
+2010-05-20 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a493817046965038030af0daa2e75ebf7ea29f8a
+
+* Added output type: image, update icinga search API for ExtJS DataProvider support
+
+
+2010-05-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 317086cd0a5f95aad6e5a34c546d17ef577fe8bf
+
+* Removed dangling factories
+* Added new auth provider concept
+* Added AuthLDAP 
+  concept with import
+
+
+2010-05-19 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 7532e360bfedc52a0394f21dad9a644971adb688
+
+* Added routes and changed parameter names
+
+
+2010-05-19 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8b84d8200e65dbd7b49594a461a19fd3ff19af39
+
+* Changed paramete
+
+
+2010-05-19 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f62674cf5a3d9af7647e6ca99e7c9d9ae541ac67
+
+* Added URL-driven Icinga-API requests (resolves #305)
+* API Requests can now be done 
+  via GET or POST requests
+
+
+2010-05-19 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: bd1c977a340a5fd7c5cc60acaf3cd0abc7b1d341
+
+* Updated principaltool to check for target columns that need to be restricted itself
+
+
+2010-05-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6b75697a8612eb9cc19092e27059d6d725ce042e
+
+* Creeate new rescue schemas
+* Changed the models to doctrine base creation
+* Added 
+  base modifications to models
+* Added fields for auth provider
+* Updated the WB 
+  model
+* Created new doctrine migration init package
+
+
+2010-05-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aed5c70d574ea2da050ebd68f0f0eaa09638e6e5
+
+* Restored old model relations
+* Added base implementation for models
+
+
+2010-05-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1c72148ad9737bb33d0b050aebd451968b587b1a
+
+* Added new models
+
+
+2010-05-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9ce80fcf7ec55a202ca9d62047141e48664c660a
+
+* Added scheme file to makefile exec target
+
+
+2010-05-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f1887ae340486b575174bc4aac09078ceddf687c
+
+* Cleanup database changes
+
+
+2010-05-18 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: fd1cb3fd1d4d358b45b1c83d5060f37e37b93e7b
+
+* Updated build.properties.in
+
+
+2010-05-18 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f14672e73ab3e911d43011096c4da46243c41dfc
+
+* Minor compatibility fixes
+
+
+2010-05-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a1eddc526e7ebb474101b8dde27b2a3ac1e523eb
+
+* Added new auth privder stub
+
+
+2010-05-17 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0b40e569a2122f832e3f1a010a81df7d8623e157
+
+* Added basic database check via unit test
+
+
+2010-05-14 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 453adf234dffcbd80689626d930d9977c9420be5
+
+* Doctrine based DB Deployment, PostgreSQL support, Doctrine core patches
+* Started 
+  implementing Database manipulation testcases based on PHPUnit
+
+
+2010-05-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 10d5d411084b4ecbb883166176e0366e44ea0252
+
+* Cronk environment implementation (init methods)
+* Rewritten existing cronks
+* 
+  Example cronk implementation
+* php5.3 issues
+
+
+2010-05-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fbc901cb33e41c4c2c6b61b2712be5ffc25de4ac
+
+* Added log directory to gitignore
+
+
+2010-05-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5b605c32b4484a1bc8adb866ded4d0eeccd0ed3b
+
+* php5.3 issues
+
+
+2010-05-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9f993f45e43952a8a0e816afcf29d0c7a273a0f2
+
+* Added doctrine deployment toolkit (not yet implemented in the build process)
+
+
+2010-05-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3bf7f1372a340a67d7afe0e93127b9086bc18b8c
+
+* Removed critical bug in remove-module script
+
+
+2010-05-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: bcd456059417a75b655c36c0f6d9363e334ce2a0
+
+* Doctrine update 1.1 => 1.2
+
+
+2010-05-10 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2af5ffdd79be66549e3b7612dff0ffdfe7de0398
+
+* Doctrine dependency fix, snippet RegExp fix
+
+
+2010-05-10 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 082d4d050a6c0caca45fcd6c920674d750f00140
+
+* Revert "*Documentation of module installer, DBBuilder dependency fix"This reverts 
+  commit 5e5fe216d6e1b8e330006bb97b80c325657ce777.
+
+
+
+2010-05-10 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 5e5fe216d6e1b8e330006bb97b80c325657ce777
+
+* ocumentation of module installer, DBBuilder dependency fix
+
+
+2010-05-07 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e8e2ca1ff3b9646e5b8a218ba1ccab2f712a43f2
+
+* Code Documentation update
+
+
+2010-05-06 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 59e695e7eb483adaa79e17a3f3d8cd84b553ef9c
+
+* Updated doctrine to 1.2.2
+
+
+2010-05-06 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 83122b2e6f125432302a898a7c281736e032e24e
+
+* Compatibility fixes, added "Change password" to preferences
+
+
+2010-05-06 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 1fe4e1d9a3370acda3812dc6fe1ce0001983f1cd
+
+* files.ml
+
+
+2010-05-06 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 26f05cd903476144e0b41aa23d8802be56808a1f
+
+* Module installer cleanup
+
+
+2010-05-06 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3d6c3c1df93470386e4420d18861ebe5b52d48c8
+
+* updated module installer, now uses unique merge/diff actions for xml
+* rollback 
+  support added
+
+
+2010-05-05 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 94496c00678625408e8676782f09bc4a856b784b
+
+* Fixed compatibility issues with PHP 5.3.2
+
+
+2010-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ad463bd63dd4cd66fa861cacf7c69c064b4705ed
+
+* Scheduler time fix
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 30f383bf44bd8a6d6c509d97716be18efdd41285
+
+* Support for new icinga-structure/cleanup
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 88226769bc814259424b84b3e60f32dcc0d43a04
+
+* Stylesheet update
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0726f556b6c382e598e9ba931618b9ad4d714aa0
+
+* resolving merge
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 485d7ca27528a9e0a08221f9b4d16c000debd5f3
+
+* resolving merge
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: cf3228c03ffd070d3d006af7c1a9e316ac25d992
+
+* Scheduler documentation
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 03474da12f6761515526930c311c12a690751cfa
+
+* Added Pagination for Admin.Users
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a1c46cd0d25b7bcd8ff22e6d8f53b1b8a19a4bfc
+
+* Fixed change Language and validation bug
+
+
+2010-04-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e2de3f85264e862f68bff4ac35d2eda07ff0955a
+
+* Simple Preference editor added
+
+
+2010-04-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 4f14dbf02eec800db987dd8b7dfc9cac502549c0
+
+* Finished Principal, User and Group editor; Added Preference Editor and Language 
+  selection
+
+
+2010-04-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f86c34b23e33395e33ad2d6c47f7229bad4f9ae2
+
+* New Principal Editor
+
+
+2010-04-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: cbbaa822cf31d2b3f48f6e6ecc108188bb6a50e8
+
+* Plugins are now modules
+
+
+2010-04-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3ba76bd7f4c2508d2e25c5635d03a5b47818fe3f
+
+* Implicit match_types for Static content cronk (match_type in datasource xml)
+
+
+2010-04-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 24eba9ebf2e113b3b7fdafb8de0d5f252176ad54
+
+* Changed the default log interfaces* Finalize class renaming* Removed some view 
+  implementations
+
+* Fixes language file creation
+
+* Updated Agavi to version 1.0.3
+
+* Prepared renaming of classes
+
+* Sed renaming of base classes
+
+* Renaming files
+
+* Rewritten routes.xml to match module guidelines
+
+* Rewritten sub namespaces in templates
+
+* Added multiple filter columns for static content templates
+
+* Rewritten the dom parser for node index creation
+
+* Moved icinga libs to module
+
+* Removed IcingaApi factory (New interface provided through model)
+
+* Changed the APi handling within the consuming cronks
+
+* Removed Icinga from Autoloader Spec (becomes deprecated)
+
+* Prepared to remove all AppKit factories
+
+* Changed the exception template to plaintext for ajax debugging
+
+* Removed deprecated viewextender stubs
+
+* Added temp early module initialization (web) for autoloads
+
+
+
+
+2010-04-23 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2711645817b06927dfc877ca4aa402e9fd825b93
+
+* moved rbac_definitions to db
+
+
+2010-04-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9a97c52ab5b195c9d00fa771c47093a31512effa
+
+* Removed icinga-api from installable files
+
+
+2010-04-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5859e3a1c40146bfcce3cca755976e1fbf1bc1b8
+
+* Make files fix for install
+
+
+2010-04-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b2b76714e2130dd2eb3f9f56cf3c7a93ff423ed5
+
+* Added multiple filter columns for static content templates* Rewritten the dom 
+  parser for node index creation
+
+
+
+2010-04-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2f70567aba866becb19f267bc3cb6dab88dd2521
+
+* Implicit match_types for Static content cronk (match_type in datasource xml)
+
+
+2010-04-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 955c61162aa24cc577a328b4d2013862a61696e0
+
+* StaticContent output type problems
+* Cronk id persistence problem
+* Cronk request 
+  type problem fix
+* Reduced requests for the listing cronk
+
+
+2010-04-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2e4842df57b0fdd084b72a4c6489b086e32f9444
+
+* Cronk loading
+* Layout handling
+
+
+2010-04-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aadcdefe598be174513d44c90dca779c69903c05
+
+* Cronk handler
+* Layout handling
+
+
+2010-04-21 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 45242a1bd82765e8df477b723fde65386031ab5f
+
+* Removed "config/plugins/", modules must specify configs in module.xml now
+
+
+2010-04-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 675cf558519167e7e8f6c6dd701f30701c1e6af5
+
+* New layout, extjs viewport
+* Seperated layout and cronk implementation
+
+
+2010-04-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 066afb0653eea735d948c27189cc1ff74d7d3b60
+
+* Moved and cleaned up libs and namespaces 7
+
+
+2010-04-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 17c8d78f2f449fe9beafeaf251a0013343b3c428
+
+* Moved and cleaned up libs and namespaces 6
+
+
+2010-04-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a3b121064382d826095d850c0d37506946325b8d
+
+* Moved and cleaned up libs and namespaces 6
+
+
+2010-04-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a73fe975d93fd5e2e97b422d884502e84bc7c6fa
+
+* Moved and cleaned up libs and namespaces 5
+
+
+2010-04-19 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a8de5917da848d12a19168f3214b7888d2a5625f
+
+* Changed import-cronk and export-cronk to fit to the new cronk structure
+
+
+2010-04-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5c8aed1a087df8ed249156167d1a1c2fb0329112
+
+* ved and cleaned up libs and namespaces 4
+
+
+2010-04-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 250f57b57286fbf75b2b7707d31b79c87c9ce29d
+
+* Moved and cleaned up libs and namespaces 3
+
+
+2010-04-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bbe3f47bdf19aafd6f8319203aa477a8a9127615
+
+* Installer fix, which installs all *.in* filles now
+
+
+2010-04-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2317b4ac151f29581b8e9bb54d8684485f81f669
+
+* Moved and cleaned up libs and namespaces 2
+
+
+2010-04-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f56a80322c2fe15a4faa7a58e99e0cbb97394247
+
+* Rewritten templates, seperated modules
+
+
+2010-04-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0a312dfafc8d6184a006fa0f8a18679ea56c738c
+
+* Moved and cleaned up libs and namespaces
+
+
+2010-04-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 26eb9bf47199a70250f513af7efc254dfb9b124d
+
+* Reduced cronk inline script code
+* Reduced manual object instances
+* Prepared ExtJs 
+  menu rendering
+
+
+2010-04-16 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 84cbfab10d4b23c721253a988fb8c05c8e6694db
+
+* Plugin translation fix and documentation
+
+
+2010-04-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5bec9d119bad6d345afcd1b7ea488a45691c6e5b
+
+* Checking for the api on configure
+
+
+2010-04-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 75a8f7237d6f07795fe679283d91259b0fbc92d3
+
+* Fixed install routine to match git submodules
+
+
+2010-04-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 13439212a83495e30fc3412587cb5a5efd611de8
+
+* Reduce libs to the modules
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9023fc3585cf3a7cdc0662a372f10739afc9cdd0
+
+* Started cronk xtype implementation
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 47ec8ccae00fbfa803f33c12980166c5dd398424
+
+* Added language files
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d5a202b56f7548a33e0508514a06d7776efadfbe
+
+* Added new translations
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: be1a9d48b0bfef66b314067596bff3f7edf85450
+
+* Added translation submodule
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8d1b42f1f0643d9baaf068c594c21a6a1222a6c9
+
+* Removed the po files
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 836c16330dd34bcdd99056662257d17b00f07e9c
+
+* Seperated git for the i18n files
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b4844ba5087d75501802c78105f00972e7f5781a
+
+* Welcome cronk show the real base version now
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3b3745e5d82da29a1268e5fc61486c0b3c9b3f34
+
+* Fixed reserved word issue (fixes #370)
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: be773af8e68ee5d26184cc69c82739349589e5cc
+
+* Added files for install
+
+
+2010-04-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5aa85f877a5397a4aafa600ae307dda28fa4148b
+
+* Create new layout to support viewports
+
+
+2010-04-15 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 7cc6a573451d8332ddd5b02f2be685f4c0221b8e
+
+* Added schedules.xml
+
+
+2010-04-15 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 15142ffab308441c24ba75ec9eedb6a71f612a90
+
+* Added changes of jmosshammer/default (plugins and icinga.xml)
+
+
+2010-04-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 54766df17f8400909fe9b584594f46a3e86e1ee7
+
+* make scheduler install (jm)
+* make install files
+* removed res from source files
+
+
+2010-04-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 845bdb3ef3a2fe3a898923aae5fff0ef5225e3c7
+
+* WTF?
+
+
+2010-04-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 28cf8e662bdc0cf1e8d19b83bbc5b6c7d0a331a1
+
+* Make fixes II
+
+
+2010-04-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d6306294581e03ec8be79244a05850457a72ac39
+
+* Make fixes
+
+
+2010-04-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ad90a327566663c5e1cdc246e4a89b1b83ab7a20
+
+* List of install files
+
+
+2010-04-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 29cea7c71b260606d997c528d4801d56c53b43e3
+
+* Release sub modules from global scope  
+* Moved configs  
+* Changed config ns
+* 
+  I18n structure rewritte for pootle
+* I18n parsers for structure
+* Make targets
+
+
+2010-04-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7af70f5710e6f78acd2b6a9b14df235518c401f4
+
+* style fixes
+
+
+2010-04-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 70e90b37c104ce9ea3ce4d0b4dd45ea79ecd61b6
+
+* gettext fixes
+
+
+2010-04-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 53c065ed4031fc9baacdc9b4f361732db05e50de
+
+* Updated languate catalog
+
+
+2010-04-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0a9c9710da59659b1664578503bf6d8abc408c9f
+
+* center height fix
+
+
+2010-04-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8500628d3acb29e9ddfe8f5922b605ebb24b25e3
+
+* About menu (fixes #372)i
+* Template cleanung
+
+
+2010-04-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9b0dfea30ebc7f6ab7acff3b4a5480e459e4b29f
+
+* About window
+* Some actions for about
+
+
+2010-04-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f90647ea86869218f9b58c87f5d51bc32dec341f
+
+* Added IcingaScheduler
+
+
+2010-04-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dc1cd1841f3a3433ec0169ba0311a4c81246936f
+
+* Removed IE7 confusing cdata sections
+
+
+2010-04-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e31b64675bc8b7477932d9097448bef3a26c2b6e
+
+* Adding a loading mask to reduce eye pain ....
+
+
+2010-04-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3caad1a72556354352b290a37c0f00e0ee8f6dee
+
+* Fixed missing files for make
+
+
+2010-04-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 088be685b26abcae0624ca21ec8b797c96b1ebd7
+
+* Sliding tabs to reorder cronks by drag'n drop
+
+
+2010-04-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 28faeacb7f3ea20b8fff04a2c9ffb8972f31620d
+
+* Api sync fixes (match constants mapper)
+* Drag and drop tabs
+
+
+2010-04-08 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 11845cfded7275154a1080ea09ec0ecc54e9c73b
+
+* Removing the last route of a context doesn't screw up the routing anymore
+
+
+2010-04-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7586cb49ea67d9eb4188adf5a56347c96ac0a820
+
+* column renderer fix
+
+
+2010-04-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9ce0d428ffe78bd6ea9d7fb24269aa43b3262996
+
+* Fixed files
+
+
+2010-04-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fb2a6573855beda5fb02f4a9af121b7ff12cce12
+
+* Makefile changes (targets, output)
+* Doc files for translation
+
+
+2010-04-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: df396f38a8c40aab9e6c8629cf7c5ad40f660e95
+
+* Added missing files
+
+
+2010-04-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6ee9ca1e34ccbca44d0d8718a9c3f5c0b717b867
+
+* Finished translation template (fixes #279)
+* Added tools to handle translation (po, 
+  mo and json files)
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 13370f4ae351fdb43d3183fd16c945c45fb36de1
+
+* Disable cmd window on sending to prevent doubles
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c482172c77d933d88f6e30d8890c6a4470fc7a2c
+
+* Command window width (webkit)
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ff132b2eb79d0a6dc8a8b97ea26a9ce0b7bf6e2c
+
+* Merge with plugin architecture (rel #338)
+* Search object status (fixes #339)
+* 
+  Global icinga status js object
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 226d01e41688a013bfa36b0f1e1474cfff806c18
+
+* Merge fixes
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 43f7c08a332165c34c90122bdd7f944b37d64d51
+
+* Removed old session provider
+
+
+2010-04-06 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f24278c8b4d88b997794493439f7f24d4d6c188d
+
+* Changes for console-context compatibility
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: df4f3cb556ea4e4138963044cad90c17e97b61b1
+
+* Database model, newer version
+
+
+2010-04-06 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: ea0f4de93e69f7f2252fb04dd74c3276cfb6763b
+
+* Icinga.xml Eventhandler now distinguish between context
+
+
+2010-04-06 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 66b07b30f41ee865dfbac087ef8dbfc97b4294dd
+
+* Icinga.xml Event-Handler now distinguishes between contexts
+
+
+2010-04-06 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 8f5986c816ce38b5d01820765f2323a0ed9e1120
+
+* Plugin folder created
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0c479308a5ed9a58e5e7aef9d5afc0ba8933baa2
+
+* i18n
+* user preferences
+
+
+2010-04-06 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 13f9eecf5fb633ee0a775f47ca8e7e66924332bb
+
+* Plugin-wizard added, minor changes in AppKit for console context
+
+
+2010-04-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c5ede02d7a24eec47a42443bc9dfab3c32dc1a7a
+
+* Filter window height sync fix (finally)
+* SQL constants for 'not is' (API patch 
+  created, fixes #362)
+
+
+2010-04-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5f5520dee88e984c937a06c33082b7150e14c667
+
+* TO data in a seperate container
+
+
+2010-04-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0bd5a18f251e71b486704fb975ef820f47558a03
+
+* Removed link classes on to
+
+
+2010-04-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1e11ca76441d0c7d6de57ad9d8b076c27a3ff9d3
+
+* Tactical overview link fix
+
+
+2010-04-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ab50a6186b2ba5205f811ac7a4cc7f62a88c002f
+
+* Installfiles fix
+
+
+2010-03-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 73aff0e782a7b080280941e7f85df5ba74c8d500
+
+* TO changed layout for hostgroup tactical overview (todo: links still missing)
+
+
+2010-03-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bac9137b26f6187b4103a7010310f4038efa7239
+
+* Tactical overview cronk rename
+
+
+2010-03-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 494df893df7f38a66e39b6043f0e484559f4d4b3
+
+* Tactical Overview with CustomVariables
+* Changelog
+
+
+2010-03-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f4e0814dfcf373699bdbda81ba02d9299e14c0ef
+
+* ExtJs update to 3.1.1
+* Tactical Overview with CustomVariables
+
+
+2010-03-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5be9d7d23983ac81f06fee594d4233a28c92b881
+
+* Fixed content-type for application state
+
+
+2010-03-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 784e0756433701eddbe8745b8bc6bcc06f5fbb97
+
+* Rewritten persistence handling of grids because of prefilters and userfilters
+
+
+2010-03-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ecda9ce2e54c4ad3527e998e96bb6d0af5368aa8
+
+* Fixed files 3rd
+
+
+2010-03-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7b38dfaf4c525d845c48f86bc0bf01de0dea8070
+
+* Fix files 2nd time
+
+
+2010-03-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cb4d65d2032f141e7fe2cf35254302d72307bbb3
+
+* Added missing files for make
+
+
+2010-03-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4377b08f69e0cab8b70794f7c941dace129eed24
+
+* Proof of concept, http state persistence
+* Buffering http state persistence 
+  provider implementation (fixes #184)
+
+
+2010-03-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5ba7688bae8afb7d0e5e820b128ace37e3190c47
+
+* state provider case study
+
+
+2010-03-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 424905719f36b61bd4adb3cedf6b297402968630
+
+* Removed ugly files from jsgettext
+
+
+2010-03-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f8080c186f2451bc21325dcbc17c22dc684851c9
+
+* Added new files to the installer
+
+
+2010-03-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7a631fc5dfd9057f0c47b602f8f0a6ea12ec01d1
+
+* Agavi update (v1.0.2)
+* New library jsgettext (see VENDOR for more information)
+* 
+  Probe i18n with js
+* I18n javascript implementation (refs #279)
+
+
+2010-03-22 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: adead8fdd273a3e5d5bfbf2e6c9d8763c929ef79
+
+* Added columnRenderer to display status information
+* Round corners for status info 
+  in grids
+* Concept testing gettext js
+
+
+2010-03-19 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 08e8ec7c27a1c96e7bf2de04a0d2af890f8ec225
+
+* Jumplinks from host-/serviceview to hosts and services (fixes #334)
+
+
+2010-03-19 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 99c7a0c2baf312ecacabc0a8237961783b028161
+
+* Template filter for multiple fields (Intergrid links)
+* Typo (fixes #335)
+* Added 
+  js temp storage class (used for grid templates)
+* Customvar filtering for host- / 
+  servicegrids (fixes #336)
+
+
+2010-03-08 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: a216139199b4907d9e28aa9da3130cec3cc15477
+
+* Fixed initial layout (some cronks are missing)
+* Fixed history relations for links 
+  (using the name as criteria)
+* Cleanup the initial event firework a bit
+
+
+2010-03-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: da47cd26796890286d00844607be269724b284b8
+
+* Typo
+
+
+2010-03-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 0839fe93f98adc5be8c79ad1f3f7e3a062adeed8
+
+* meta
+
+
+2010-03-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 331c4f933f506398dd011a37c0c95846f1337f7b
+
+* Fixed webpath errors with querystring and without rewrite
+* Fixed #304 wwwrun user 
+  was missing (fixes #304)
+* Group / users activation
+* Version
+
+
+2010-02-15 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 9c702535cb9218571cf95dbb0d52618c9b5d24ad
+
+* Removed old YUI body class
+
+
+2010-02-05 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 93cf81f81d23d684fdbe8ce2d6e60499fc22b79d
+
+* Fileslist
+
+
+2010-02-05 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: c2c200b15ce5f6962f25cf469eddaef72937f9ed
+
+* Filelistcreation fix
+* layout tests
+
+
+2010-02-05 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 5c861cedff653c27dc874f3de37c6a2dc6e2f378
+
+* Install files made clean
+* Seperator for the top items
+
+
+2010-02-05 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 5271c1119c244360f0ab76889a3994828bdc185f
+
+* Cronk category default activate flag
+
+
+2010-02-05 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 2a7cfd387b2ce4139739b71098351ca341f8b059
+
+* Adding security principals to status summary
+
+
+2010-02-04 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 038c4bdfdf5e7e70718bd374475d231b5e441c94
+
+* ExtJs components
+
+
+2010-02-04 root <root(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 99216cdf14d1ba951a0807a88000a85c375e636b
+
+* Reducing mass persistent data of filter settings
+* Implemented categories for the 
+  cronks
+* Cronks for usergroups only (fixes #262)
+
+
+2010-02-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: e537dd472a44afd0c31b928d341dc2e14af7423c
+
+* Component testing
+
+
+2010-02-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: ed5bbf6f74e474bcaf406d01261b6adb31e8d28c
+
+* Meta data (CHANGELOG)
+
+
+2010-02-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 881544a394b0e0f8e7d19b5133b2f3655a36b657
+
+* Debug information for persistent data
+
+
+2010-02-03 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: d2e87b47ecd0dd8f6a195e8768e408c9ded67e01
+
+* Changed the auth framework (multiple providers possible)
+
+
+2010-02-02 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: b157d9a9f264f8be585416c73dd756ec949aef4b
+
+* Changed menu (monitoringResize)
+* Default style
+* Head items stuff
+
+
+2010-02-02 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 3a69638885f84cdb3e325e09720838c5e6ab8c51
+
+* Rewritten component handling, top components still missing ...
+
+
+2010-01-28 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 929b9a2984d4a8ff1ef287d4804c068944566ff6
+
+* Modified INSTALL text file
+
+
+2010-01-28 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: de75d227e976ed7674b46bfde3b019a9c16f7670
+
+* Wrapped the static content view into a div
+
+
+2010-01-28 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 1340175d0eb9d3398c9aa9e9c509621c04ee1faf
+
+* Settings for grid panels
+* Auto refresh for grid panels
+
+
+2010-01-28 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 66b3f4e88306ac91e7a4818bf3e99d95ba4b03b3
+
+* static content - additional template: modified styles of status tables
+
+
+2010-01-28 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: a3ffb0e821ef3b8e432f7299f0881955a2021838
+
+* static content - additional template: modified styles of status tables
+
+
+2010-01-28 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 63c01c392aa56b0781d16cdf8acd12cca0c0c046
+
+* static content: implemented if-statements for templates
+* static content: added 
+  conditional display of rows to additional template
+
+
+2010-01-28 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 8c5dbeb32aa22213417e6248194fa99be8fc1353
+
+* Fixed cookie writing failures
+* Fixed bug restoring the filter elements
+
+
+2010-01-28 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 1048056e9b8cf4c6923fe37b1a136f45c75a9ac3
+
+* fixed queries and variables in additional template for static content
+
+
+2010-01-27 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: a32d8d7609ddfc9b8b1e748d251cbd7e0c883fae
+
+* Grid filter are persistent now
+
+
+2010-01-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: d8485fa992007b59cee176e264ebbbb36f612a52
+
+* added system performance to additional template for static content
+
+
+2010-01-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 8d4ca690b63573def19998ab99d72de5c720bbca
+
+* added styles to additional template for static content
+
+
+2010-01-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: eddada8827e63b33c50b118e271ffcc83ff410db
+
+* static content: added example for service groups to additional template for 
+  tactical overview
+
+
+2010-01-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 51c5dbc5bdb8939e78d13afe55f3d6632ba41fbf
+
+* static content: added inheritance of filters
+* static content: added another 
+  template for tactical views
+
+
+2010-01-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 1d25578a6eb00dcc5038b593a37f9d4fe1dc7568
+
+* static content: removed debugging output
+
+
+2010-01-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 99a606e690f27f17a61168ac52a2ffe6a8400cc6
+
+* extended static content by sub templates
+
+
+2010-01-27 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: e780ff3289df6b94196a96048d552f35fed59395
+
+* fixes some generic php bugs (fixes #256), thanks to Ixan.
+
+
+2010-01-27 mhein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 46cef5af7404182892e6337eea5e7d89957ab8e2
+
+* fixes some generic php bugs (fixes #256), thanks to Ixan.
+
+
+2010-01-27 mhein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 867547f1803b6438d6f81d8d8114e62a74247725
+
+* fixes some generic php bugs (fixes #256), thanks to Ixan.
+
+
+2010-01-26 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: fe7752e8cfb0ec9459f3f29af7f2143f15d49357
+
+* Made filter persistent
+
+
+2010-01-26 mhein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 88c2610748be2b731ff8f66d545df2282bba1fef
+
+* Added ContactGroup principal
+* Added CommandRo principal
+* Added with-icinga-api to 
+  configure
+
+
+2010-01-22 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: b7501ea350553a681cc9c67e651530275bef1d90
+
+* Readded selection model for the service commands
+
+
+2010-01-22 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 9450342aec8ac3646829d3336f1cbfe77860a622
+
+* Weekend save
+
+
+2010-01-22 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: f35bc915b532d2cc0b447980de93688a01c791a0
+
+* prepared static content for handling of sub-templates
+
+
+2010-01-22 Marius Hein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 3de453e4b619d5570cc7f3883b27528176033f2d
+
+* Cleanup
+
+
+2010-01-22 mhein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: c59e1fb6c8a7c584ced1dbd129c8a38c58ff1529
+
+* ExtJs stateful persistence, finished the tab and the portal
+
+
+2010-01-22 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: d407f0902ea87938fd1a0f5df5d9848cc265ef83
+
+* static content: added access control to queries
+
+
+2010-01-22 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 28f61e161d560aea03f4b81b761fbb416234a95d
+
+* static content: added use of singleton methods for post processing
+
+
+2010-01-22 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 2132d3ca8314b4d689c9b8c3cc516e166c38ea2d
+
+* static content: fixed repeating templates
+
+
+2010-01-21 mhein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 050d1d3717bf4e6174a74c9d45a3aa36edfaf86f
+
+* IframeCronk is now height persistent
+* Rewritten all of the cronk async update 
+  handler
+* Starting cronks hidden, after render displaying is faster
+
+
+2010-01-21 mhein <mhein(AT)sasquatch(DOT)local(DOT)itsocks(DOT)de>
+           Commit: 5413e6d3805c0b43b69f3a43607de111db805e71
+
+* Defered creation of persistent cronks
+* Added a make target to purge the db user 
+  preferences
+
+
+2010-01-21 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: e38bf36ba3ad62a756aaf52c7b82e26384b58cab
+
+* added base for repeating sub templates to static content
+
+
+2010-01-21 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 35bc0f5571a3e99cbceccfb02e794af3f9921ec6
+
+* prepared generator for static content for repeating template definitions
+
+
+2010-01-21 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: e59435fbe51e02b1146986d8336f4e1005b4ad27
+
+* added base for tactical overview via static content
+
+
+2010-01-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 2ebdfacbd457677d7dfeb39484883a01e552ea63
+
+* added base base methods for static views
+* modified template for tactical overview
+
+
+2010-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4c40955b816e6318994b19532b5c7bb70109fe92
+
+* ExtJS stateful persistence (ref #184)
+* Portal may be persistent
+* Started 
+  persistence definition of template views
+* Some extjs render bugs occures
+
+
+2010-01-19 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 0514db8a267acffedc0f9bdf021c52105b538d80
+
+* added base for static content
+
+
+2010-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cc247176928dddd51e8ccd17bbb0536667b85226
+
+* Added stub for a tactical overview cronk
+
+
+2010-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0280679d910cc08094727756be5b08deef1c2337
+
+* PortalColumns determind its column when dragging over
+
+
+2010-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6be488d5967b8da1e7844fe0420581fd5a1f5aac
+
+* Ext stateful components ready (ref #184)
+* StateProvider encoding handling through 
+  json
+* Tabpanel is persistent now
+* Cookie write filter merges the data now
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a438d4d0a72d90273797c2389393cdf44bc001a9
+
+* Fixed some IfModule issue caused a 500
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 17574541f8fb425b88b85b9c818a9f554b1059e4
+
+* Some doc for new install process
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8a0791b0df50fbf4fbe67469e320cbb125bca914
+
+* Added a install file for the configure installation
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6dc493ac2088f95daa319e100575ecd3b6ef0b8b
+
+* Added filter to ignore *.in files to copy
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 62cc2ce8b79c965108c7ddb3333e37f57f08e33f
+
+* Some files to gitignore (files from AC)
+* database.xml is now rewritten by AC
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6b9e0fcab1585474187f748fa2f3cd57921feef4
+
+* Fixed up the mysql rescue schema
+* Autoconf configure installer options for db
+* AC 
+  is rewriting the phing properties now
+
+
+2010-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 138f2fa8ab8f72f150b6975a374409cdb9eb06b1
+
+* Added some persistence ids
+* Updated phing to stable version 2.3.3
+
+
+2010-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dbb11b99099dbc556e11b38515dc935ab05c3789
+
+* Makefile fixes: help, targets
+* Install permissions (fixes #245)
+* Drop decision 
+  query for phing
+* Adapted phing db targets to gnu make
+* file catalog update
+
+
+2010-01-13 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 2e76fddd9370842d977e3c37140760fab10c0425
+
+* updated copyright string
+
+
+2010-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6d5ce1271912f4a8eb2655cafb8a3320005d5f93
+
+* Changelog
+* More states to status icons
+* Status icon files (from org icinga theme)
+
+
+2010-01-13 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: ae85fe1424272035a32990cdcfe33eff9c4a17e1
+
+* removed minor js bugs from status summary
+
+
+2010-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 74f8c84b6c5d05924e4caf81b2314996cfb25eeb
+
+* Fixed install files catalog
+
+
+2010-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 73a3dbe1e966e100e2c8ca09f63edb09d2fd9432
+
+* Added logic for status icons
+* Removed some antiquated files
+* Fixed a bug for zero 
+  replacements in format parser
+
+
+2010-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8da57b609bdf1b9b785eaa518811a4cbeb3beed7
+
+* DB field for class length 80 (principal target)
+* CVs different for host and 
+  service (schema changes)
+* make fix for files
+* removed temp files
+
+
+2010-01-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8195b669382218e1390f954cef2b05d58a73bff8
+
+* Added status icons support
+* upgraded extjs to version 3.1
+
+
+2010-01-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4cb971eb941e0d454769354e4f2c6766368633a5
+
+* Metadata
+
+
+2010-01-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7dd68916f03a0870f90c61da105cca1baa7243d6
+
+* Added host and service status filter
+
+
+2010-01-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 80e8e89f2e5e827a2a3f57ade8bead4206e0b323
+
+* Fixed filter window size bug (fixes #232)
+
+
+2009-12-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 5d4862938c089617fb5654d511c686f766c94e4b
+
+* modified rewrite base in .htaccess
+
+
+2009-12-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a0c38968f629d0075b98b99ab775b89b60dc99d5
+
+* Authority objects for object search
+
+
+2009-12-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2aec9b1ba485cfac8b2c31f603180ace5ad3413f
+
+* Added seperators for command entries
+* Added full nagios conform command entries 
+  (closes #183)
+
+
+2009-12-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ff7467da2ab00c72def3665cc2012122d609051b
+
+* fixed make construct
+
+
+2009-12-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bba7fb57d30b5224ef2572859192dc7d47b0d096
+
+* Finished principal authority models
+* Moved icinga libs to a new home (more 
+  generic)
+* Refined xml templates to match the new security models
+
+
+2009-12-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7cd99d7c97c298c67603b2960a3fa8836507d13d
+
+* finished principal filtering (ref #185)
+* sql scheme
+* xml worker filter for 
+  principal targets
+
+
+2009-12-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8b97e85cb0dd64a2ef97a848abc86767ba8ee334
+
+* Finished principal editing of users and groups.
+
+
+2009-12-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d795d3b33a465af2726f0a3e93ba2060ff8b232f
+
+* Principle editor
+* Fixed undefined on notifyMessage with three arguments
+
+
+2009-12-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cbaf2ebd243a44ce24a554ec5566e62b57009650
+
+* Fixed exturl (fixes #186)
+* New api needed
+
+
+2009-12-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c21c98607de55c12697317231eec96128d9b8d71
+
+* Fixed missing notes url (fixes #186)
+* New API is needed
+
+
+2009-12-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fface55281bcdd6c86ad76aa76889a1d9e858e9a
+
+* Fixed files.mk
+
+
+2009-12-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 112ea2e5dbd69c1c3ed3f5c59398800b76b366af
+
+* Peinciple editor (ref #185)
+
+
+2009-12-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 80358dd49689bfbdcaa6b0d7d1a4a837e9a2b192
+
+* Principal editor, ref #185
+
+
+2009-12-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 51db049b38ed6dfcd8d31243e19ac33b506ed8cc
+
+* Fixed symbolic link creation
+
+
+2009-12-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a74a16488571cc135d62334b528051c3937689ad
+
+* Implemented some principal and target shortcut methods
+* ref #185
+
+
+2009-12-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0cfec261b8d7d23a2276f4be0c7cacfe9d5fc93e
+
+* Added some make targets (devclean, create-tarball)
+* Release ready, I think.
+
+
+2009-12-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 01ebf1d494786b6400df646d2bba45d73e2e99c4
+
+* Prepared working with principals
+* ref #185
+
+
+2009-12-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 402c761ff9d38d95d33a28f67607c06439c6dd61
+
+* Added principal creation
+* Fixed er model and php models
+* Fixed schema
+
+
+2009-12-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f16934cc771ed3b3c20474133459c5641822e570
+
+* Adding some target fields (ref #185)
+
+
+2009-12-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 33e3588c4f2061b97d57841384848a87e5b664be
+
+* Fixed dynaloader errors
+
+
+2009-12-04 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 649dd5afa45cef02fa88e8bd88101e646e6146aa
+
+* typo in i18n keys
+
+
+2009-12-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0b0cb1f31410d76d53834f1ba76a44306d98f2ef
+
+* New rescueue scheme
+* Added new doctrine models (ref #185)
+* Some notice fixes 
+  within the html helper construct
+
+
+2009-12-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dcc2b00dd6171c3563687cb1100aacc6d7435bc8
+
+* Added the real files
+
+
+2009-12-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ff43b7854ccf8713cd414d1af97d4d29a5e492ec
+
+* Added install files into a seperated make file
+
+
+2009-12-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 08177d51b4941491539a8129569e3e2311dbe563
+
+* Database fixes
+* Prepared multiple scheme support (oracle, pgsql)
+* Added 
+  principals for later privileges
+
+
+2009-12-02 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2e5f1d88725fecb8301046faa021b835a645de92
+
+* Make files (can not stat missing files), fixes #206
+
+
+2009-12-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 8690838fec20812df53cde9543aab47257bda323
+
+* adapted notification template to new columns
+* added conditional row check to 
+  template worker
+
+
+2009-12-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 04fa070c6564ae0cfa20e5450e531fb290c8d12a
+
+* further changes to status map because of new api columns
+
+
+2009-12-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 058338ef13651c98d6fff8c46ef711bf0983779c
+
+* further changes to status summary because of new API columns
+
+
+2009-11-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 43bec3cd9ecf2ae29cbf61c3a7cf71866f68c224
+
+* changelog
+
+
+2009-11-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 92e505805f154e629c1180c09b4d6765fd45bcda
+
+* Fixed opera array type problem
+* AC auto detect web user and group (fixes: #205)
+
+
+2009-11-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cfac0c1530d618cc82baddadd3cb3e30324db012
+
+* Opera array concat fix
+* Commands
+
+
+2009-11-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 56dfb52ebbc7f3bfe55fae23fb3685484f2a4d43
+
+* updated status summary for new columns
+
+
+2009-11-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: beff212bc08323b163e256516f45614135f2e154
+
+* updated status map for new api columns
+
+
+2009-11-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 0fec1d664b5d58bf66601a7eb5a23428c6a9d7bb
+
+* updated i18n files
+* modified status popup for new columns
+
+
+2009-11-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: b3deabeb6891e932983fc8ffcb102606e2b88953
+
+* modified template worker to use new api columns
+
+
+2009-11-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 4c728153c20914639106c20f081db22ea57e7afd
+
+* udapted for changes on api
+
+
+2009-11-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: f8f7ad44a4a6f40c3ca5c0bc2e03bea8635035d8
+
+* typo
+
+
+2009-11-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d01afe96037495e3397f12c440bc14f8b6e8943a
+
+* Command sending
+
+
+2009-11-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 704b9a0e7f42a6f60f0e1640d7688630b937c829
+
+* Command interface forms
+* Command sending and invoking the api
+* Time, selection 
+  and command based auth testing
+* Added ripemd-160 hash algo to js
+* Better xml 
+  replacements (constants, fields and a fixed set of methods e.g. author, instance, 
+  ...)
+* Json form submitter for ExtJS
+
+
+2009-11-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2a862f5e8092dde7daa9480c4100121b0640f5ee
+
+* Updated ExtJS to version 3.0.3
+
+
+2009-11-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3e8c64e7b3edc62247e0e05d3812fc25d16eeee8
+
+* PHP notice errors (fixes #182)
+
+
+2009-11-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 62906ca4f677101d5c4659b8cb00f9bca8005950
+
+* Dev metadata
+
+
+2009-11-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3c379dc2079dc55bb0b5bb19b2aa9ad74dce5f52
+
+* Fixed no admin users menu extender
+* added deflate to htaccess
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 229dba577f75b9b44c647859d129417a1d655fca
+
+* Make adding fix-libs to add js symlinks
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dbd8dc6d3e7a90400972943721898b08a805cce0
+
+* Makefile
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 78ea8e33297474091ec2bcbc0bd4844adb578946
+
+* Installer libs fixes
+* Added ExtJS example ux files
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 669d1827c12e0aef73c49f7bc60489d5651fc057
+
+* adding cleaner script
+* changelog
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b6924fc230bde57184222fa1a822ab47966c335f
+
+* Changed create script
+* Recreated makefile
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cd1b15b9571e4bbc3678d06ad43f11664e00a8ab
+
+* Removed temp files
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 92bc23066822ff6381a221fceb47055bdb28dede
+
+* Changed makefile sources
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a872371c3970463c5397a25d96e8cc1518a1a26b
+
+* Added makefile howto in doc
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 10a327449c14f449e054c19aaddf5c853b66ac81
+
+* Changelog
+
+
+2009-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5600e1097b1a40edc18f24c8639e44e26b02526d
+
+* Fixed installer
+* Added bin owner and group
+
+
+2009-11-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2168aa8c626a3b07780378377f32edc448e18c59
+
+* Removed make garbage
+
+
+2009-11-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 276036467deaa2e2c5e80bcf50b6eb954071248d
+
+* changelog
+
+
+2009-11-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: eefb0c211f289d722da018677016102f63ce0abc
+
+* changed make toolkit
+
+
+2009-11-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ffbf227d952e3fd7d12ed825d186579646941e1f
+
+* renamed helper file
+
+
+2009-11-03 Hendrik Baecker <andurin(AT)process-zero(DOT)de>
+           Commit: 9ddded8bac8efb047da4fa9af834843902df0678
+
+* Added first steps to configure / make install for icinga-webHints:The default 
+  prefix is /usr/local/icinga-web/ (not /usr/local/icinga/)
+
+* to not disturb a runnung icinga installation.
+
+
+* make install will only create possible needed directories but not
+
+* copy any files to the destinations.
+
+
+* cherry picked the configure and install files
+
+
+
+
+2009-11-03 Hendrik Baecker <andurin(AT)process-zero(DOT)de>
+           Commit: 84c54865ed9d36f0cb12405387b5349d5ee56b79
+
+* added configure cache dir to gitignore
+
+
+2009-11-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c6a68ee063a27c02d3f28c9649cc2ba05d701261
+
+* updated helper + Makefile.in
+* removed deprecated libsConflicts:
+
+* 	Makefile.in
+
+* 	helper-scripts/icinga-web-helper.sh
+
+
+
+
+2009-10-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5bd2e9dc5b3a0b928291f68bdeaa325886e801e0
+
+* top nav style fixes
+
+
+2009-10-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bfbc559913b7ddc771a10b40411875fa249da51a
+
+* Make the topmenu ie safe
+
+
+2009-10-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 95622256a9a47f7236771a89d1574357eab755eb
+
+* Really removed yui
+
+
+2009-10-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0f926eb0686965ff105602bb276a771a0c14a8ab
+
+* Removed YUI
+* Changed the header menu
+
+
+2009-10-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3fbddd6701cfe2d1037208e2a32556db0b5cb3cc
+
+* doc changes
+* cronk config error removed
+
+
+2009-10-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8cc8e94194189257f429e9dd38cf3b3986f1cca2
+
+* Changed version
+* Testdeps displays required tests
+
+
+2009-10-27 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: af77c6ca1d911b5bac132bd615b01807e6b474e6
+
+* added automatic updates to status-summary bar
+
+
+2009-10-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f4f8e342087c86767c34db2ae2ef817b1ab87a23
+
+* South frame
+* Login redirect
+* Padding hello
+
+
+2009-10-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 576f5ce01671c4efabaf6cda46a2776768e223e3
+
+* Change prerelease number
+
+
+2009-10-23 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 4fe4079931355a2aa52b1228e5edfb5090938e17
+
+* modified welcome message
+
+
+2009-10-23 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 348265d6211814ba0b0a1f7667fc018cdabde30b
+
+* added colored nodes corresponding to host status to status map
+
+
+2009-10-23 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 2d33735ba13554561f3fcd61e5147c778dbe258b
+
+* added favicon
+* changed app name (page title)
+
+
+2009-10-23 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: e093ec1bf737cc7204d086a28be2a82b4eda7590
+
+* fixed nodes and edges of status map for internet explorer
+
+
+2009-10-22 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: b83a8a0109c7b5c119583faabf7cfee866d8c2d3
+
+* cleaned js of status map
+* added test style for nodes in status map
+* added js 
+  cronkTrigger to generate cronks by using anchors or other tags
+* added link to host 
+  cronk to status map
+
+
+2009-10-22 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: ac430309487055ff9c8356b1a1f9cd23aa5b3c08
+
+* fixed status-summary charts for Internet Explorer
+
+
+2009-10-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0d2d1358766819624ccf570d8840d258727f4d97
+
+* Service summary view
+
+
+2009-10-21 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 7241bcbe113b6dfac040cf221b042336d97b34c9
+
+* changed positions of status-summary popups
+
+
+2009-10-21 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: f2a52b2e81b9713353dc54b739fa906ae1ba1617
+
+* disabled unselectable and static cronks
+* sorted cronk list
+
+
+2009-10-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cabde37227d584c55bb31013087868eeaca64b4f
+
+* Hostgroupsummary template
+
+
+2009-10-21 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 423bc86ddfbba16526be6decd14c55b49b577211
+
+* added popups to status-summary charts
+
+
+2009-10-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b36ec68316d84fba2319929c27b137d5278cc09d
+
+* Hostgroup summary view
+* Changes on the template worker
+* Added the view to cronks
+
+
+2009-10-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 6320242ef44721119ca0ebc7a9e260672a639435
+
+* fixed left margin of west frame if log viewer is open
+
+
+2009-10-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: e0fff159ad3a4471fe55530e8f84559da8af05e1
+
+* typo in cronk list
+
+
+2009-10-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: b3dcaf16faf6fee712485d01da9471627e512ff0
+
+* changed icinga at footer to lower case
+
+
+2009-10-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 690f14a0764c8e69e688874e0d8eb37a9765d09d
+
+* prepared upper bar for link modifications
+
+
+2009-10-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: d9286512d2389a00f08344ebb2d9aae08c76ec17
+
+* fixed Javascript in status summary for IE
+* fixed base of status map to work with IE
+
+
+2009-10-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 40f8495abeac62254cd6bc6b3cb62d8d8e3809c4
+
+* Added additional filter fields for the xml template
+* Altered the xml templates for 
+  hostgroup and servicegroup fields
+* Searchtargets for host- and servicegroups
+
+
+2009-10-20 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: ea6866239f41dd40a218834d0ef1b27bb1ae4493
+
+* fixed Javascript for Internet Explorer
+
+
+2009-10-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ec70d93682e894552fcfd5045330a5380235e64c
+
+* CSS changes for the body
+* Better site title
+* Login links and user logged in 
+  notice
+* Typo for portal cronks
+
+
+2009-10-19 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 38d266bb8205ee83c94edab432d7c023c231cad0
+
+* fixed ajax login for IE
+
+
+2009-10-19 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 3ea38ce99083a72e902d956f6f8c4ab61ae7137a
+
+* modified some Javascript files to make code work in Internet Explorer
+
+
+2009-10-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8c44c428c71a2b1d5a97a6850e2b85af7ef80aa0
+
+* Added phing build tasks for db's and dependencies
+* DB update path testing
+
+
+2009-10-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4067cccef901ca613a26ba82cb9ddce127d62203
+
+* Added notifications template
+
+
+2009-10-08 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 3f362df57d2c5d9ab2f39038bd6cae4345d4e22c
+
+* recoded status-summary charts to use html elements
+
+
+2009-10-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ef752672fb9c941362bf431b91f7e5c81b95f630
+
+* Finished AJAX login
+* Application starts with login (all actions are secured)
+
+
+2009-10-08 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 38ea5b24684740767f78313482285265e1646d84
+
+* changed styles of status-summary rows
+
+
+2009-10-08 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: f90a0ef5a2ecc0bb121638e7b24143db16b67f2b
+
+* added cronk links to status summary rows
+
+
+2009-10-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: db130508214e4aa83eee8cea5f86baf16391887a
+
+* Added ajax login action
+* Securing the web (all actions needs a login)
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: d2c399916aa808617f65c5e986bde28ce832be08
+
+* status map: increased depth of clickable objects
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 06c29bdc4bf3303c14bb99ab657b567b2af93587
+
+* fixed refresh handling of status map
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: ec274236e72e943fb1b4570bacdb48d807ec5876
+
+* updated status map for use of dyna loader
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 90d032d19abdf45c0f94f946cb7659b6da9efa53
+
+* updated status map for support of multiple views
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 21b9cb4cedfc47801f7e547f5b7fdbc0d2bd33de
+
+* added display of host- and service-status strings to status map and info boxes
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: b09df1d8bd293f6ec49744cf089e97241c23fdf8
+
+* added loading mask to status map
+* added mask to cronk selector and activated it
+
+
+2009-10-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 319987661981ae88689100b22688ec202137803c
+
+* added validators to status map
+* wrapped up status map in dynamic containers
+
+
+2009-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5f506382a2ea82f41eebcbcce26efaefc5dcf1ec
+
+* Remove old plain icinga actions
+* Prepared ajax login action
+
+
+2009-10-06 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 6ebf2604286cae79677f5bcf426b1018cf8fc86c
+
+* added additional host info to status map
+* restructured status-map js
+
+
+2009-10-06 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: fdc115cdec1d7c0e4af215741c7b4a7b2c5189ad
+
+* integrated static status maps
+* added styles for status maps
+* updated english 
+  language files
+
+
+2009-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ef51e1bba21bf2912f8482cdeac9cb3cc49ce945
+
+* Fixed dynamic web path things
+* Make project htaccess ready (no vhost needed 
+  anymore)
+
+
+2009-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cbe8180348457ac657f460d070fdba42b8e9a34d
+
+* Added doctrine 1.1.4
+* Removed unused js references from icinga.xml
+
+
+2009-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6b74ccb9ee39fb74353b90b2a5666174c027c9c9
+
+* Removed obsolete js frameworks
+* Removed useless menu entries
+* Removed old config 
+  from the xml settings
+
+
+2009-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0d8f65f8f09e9aca57005491e3ab9536f4366822
+
+* Clean up the config xml's
+* Rearranged AppKit bootstrap methods
+* Removed some old 
+  parts, never needed
+
+
+2009-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 98a15a88381fb24e9dd5eba667d113a8662bb5f8
+
+* Agavi 1.0.1
+* Cache (file and added to somw loaders)
+* Meta text files
+* Version 
+  handling
+* removed some unused files
+
+
+2009-10-05 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 3c9f3f3e0b39cfb33afe73a737c480f6e730ee01
+
+* added jit library for status map
+* added base for status-map cronk
+
+
+2009-10-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 61493256328ec1ab01af0ed3ca071ef223733d75
+
+* running the web within a subdir
+
+
+2009-10-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b748152d611113ed285f8b97b45cff6c0002e41c
+
+* prepared cache interface
+* simple file cache
+
+
+2009-10-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: f172b4de696525f895fc77f3f386f321340c267e
+
+* added service information to data grid
+
+
+2009-10-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: f990ff5e58cb2e09b66e76e4421a0ac1d58d32b4
+
+* updated some strings
+
+
+2009-10-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 6c466e98f1d9736038e93d77b959251798dc92fd
+
+* added base for i18n
+* modified host popup to display tables
+
+
+2009-09-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 78723d46233055d45c3eea2410591b05f45d97ab
+
+* extended simple-data provider
+
+
+2009-09-30 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: c91f6c16df2625e823b245aa27a99833803e6312
+
+* changed styles
+
+
+2009-09-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2f85e90b6fc2225b2b746be1e8fe3a464ee3438a
+
+* Prepared global cache interface
+* ObjectSearch landing cronks
+* Better base 
+  exception class to use formatted strings
+
+
+2009-09-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a3a7c3289a16d1f5cd69137d8bc062f0eee31cf5
+
+* Merge commit 'origin'; branch 'mhein/default'
+
+
+2009-09-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ed012acb163a5fdd8eb303dff3c64000bc79d6c9
+
+* last commit is valid, some files forgotten
+
+
+2009-09-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2cf84eb9bd94df1b740a9561c8dfbe68916dafac
+
+* grid xml templates
+* js util for structures
+* intergrid links
+* disable autoloading 
+  of grid stores
+* column renderer util for parsing column metaData
+* generic column 
+  render namespace
+
+
+2009-09-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 97b98ee7cdef253a31d2a3b8e7c264a1f7702990
+
+* XML templates
+* grid sublinks
+* rewritten cronk container
+* rewritte the grid meta 
+  creator
+* namespaces and typo
+
+
+2009-09-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 63e72aa7b01f4430ff6f65be913f37dfecfcad81
+
+* new template: host history
+* xml template renderers and click events
+
+
+2009-09-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d6ad6eb896d48e248e69e423b507ac8830ae3c49
+
+* JS dynaloader to load libs for specific components
+* Fixed sql operater handling 
+  for filters
+* added a column renderer model to implement renderers or custom events 
+  to grids through xml template
+
+
+2009-09-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a589843bcb148b46d8826a1b764ba80afd21174b
+
+* js object structures (scope handling rewritte)
+* AppKit.Ext ist now event driven
+* 
+  Added appkit bootstrap event register through config
+* Moved some static includes to 
+  events
+* fixed loose app state data (namespace)
+* renaming and typo
+
+
+2009-09-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 06c10d829150daedbc1465c98fcf69df3f1555f8
+
+* fixes hybrid application state provier
+* cookie filter deletes ext js cookies
+* 
+  created the real portal view (better name for the action)
+* prepared a new login 
+  action
+
+
+2009-09-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 53ae1592b510f354fcfb850d45af2e2edfd9f836
+
+* Quick fix before merging
+
+
+2009-09-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 07853a82cb1438315077967b32bd1ab95df7f668
+
+* JS scope layout
+* MetaGridCreate fixes
+
+
+2009-09-17 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 3ceb15a06bd81511c7f59214c2f5360e28e4d011
+
+* simple data provider: added js object, added basic query definition, extended model
+
+
+2009-09-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b7410f2361b70e6a93a54402835e9d6f16c3e0c3
+
+* Filter objects
+* Layout fixes
+* Window handlers (singleton)
+* Search operator combos
+
+
+2009-09-16 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: af5085f5d436a27dd233d7e57002588a9e672da3
+
+* added base for simple data provider
+
+
+2009-09-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 895db5a0a353a431c10b5ae314c3fbe4dd5b7577
+
+* Grid toolbar handlers
+* Grid filter handlers
+* Dynamic filter windows
+* 
+  TemplateWorker filtering
+* Generic SQL constants interface to work with api
+
+
+2009-09-15 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: ca2d72307dc43e4c84cb8408a6829f05558eb2d7
+
+* renamed dummy var for status summary
+
+
+2009-09-15 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: edc6c7b4f91213da378693b9a0b91f8965960d52
+
+* extended status-summary cronks
+* replaced middle-north content by status-summary 
+  charts
+
+
+2009-09-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a69022e14d3c66ec70073cd0e6d8b8c1e43b61ab
+
+* Added basic filter panels
+* some typo
+* mysql rescue scheme
+
+
+2009-09-14 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 941d0eaa9b3857156245e07481d68fa39661fcb8
+
+* changed style of status summary
+
+
+2009-09-14 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 36eeaded90ff609d45757c5aebacdd5ca3a57a64
+
+* extended state summary
+* embedded state summary in upper right corner of portal view
+
+
+2009-09-14 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: e56444769016fa971072b6f05306b00209824132
+
+* status summary: added base for charts
+
+
+2009-09-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2eb43c592b4fa29fe5924f2dbbaedb16371a7d9e
+
+* - layout fixes - added ext option in xml grids - redesigned cronk directory layout 
+  - single cronks.xml configuration file
+
+
+2009-09-11 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 085777336688a021f989d0152d1967db5b317ca3
+
+* restructured view and model for status-summary cronk
+
+
+2009-09-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e43b300de974fae259fc57e9dcf43fa1c377c1b2
+
+* - rewritten ajax grid handling - added fam fam icons views and icon classes
+
+
+2009-09-10 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: d12dc0a2f91673738544930d7a79cf2781f496ca
+
+* updated status summary view
+
+
+2009-09-10 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 88bcec0a54e67169b5618669ac870d1b2ed4721e
+
+* added model for status-summary cronk
+
+
+2009-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dc8f62463e2d3367aded5192ee699e4be50c2492
+
+* - Extjs persistence layer - layout fixes for child container and cronks - Extjs 
+  rewritten SessionProvider - Long blobs for user preferences
+
+
+2009-09-09 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 5b11f77f96adf051f53990f9887a242df922789f
+
+* added base for state-summary view
+
+
+2009-09-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 40932967ed85b06d87ce393c736e381ed52abc45
+
+* - added persistence provider stub - added limit statement to the xml templates - 
+  limit log template to 25 items (performance)
+
+
+2009-09-08 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 4791377a1a4c208f02041258ed3041a8a4f39611
+
+* moved extjs file for fancy-text field
+* updated config
+
+
+2009-09-08 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 9e5a5c785b9a15866903da85ca82fdaa1cd72c45
+
+* added reset to fancy search
+
+
+2009-09-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fef3bb50cdb7c9c93600908ea13b04534ca9ebcb
+
+* - commit local changes before merge - moved ext js appkit helper to new dir - added 
+  http state provider for persistent component handling
+
+
+2009-09-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bbd21c116e6f7bcf77e5a120914f482b7cba0c54
+
+* - Fixed layout issues (using fit within borders) - resize portlets listener - 
+  cleaned testing ext2 framework
+
+
+2009-09-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ef2c28bb24e80163e566d7f275974d0ded0e5134
+
+* - icinga log xml template - default params for the cronk loader - dynamic ajax grid 
+  height - south component for logentries
+
+
+2009-09-07 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: ca1dd99ea4386d74121ce484ac39aa9ad6adf50e
+
+* added fancy search (no reset, yet)
+
+
+2009-09-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 21c2a05cd5e92396cbbdda48d0ced510a3f99beb
+
+* Implemented dynamic object search
+
+
+2009-09-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e19eccd2b1221dbbd7aabfd4c1586cc9969393ac
+
+* different store for the object type for global search
+
+
+2009-09-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3787f39a053b09936e7ae13b8163d77b1299979b
+
+* Added global search
+
+
+2009-09-03 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 3228166455fd6bfb5c487e7715539ea69012cc1e
+
+* removed unused css classes from west- and center-frame
+
+
+2009-09-03 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 56f9f52e2eaba0b91120b2210680e648bcf8ad29
+
+* removed margins and borders around north frame
+
+
+2009-09-03 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 2b919d2ec1ae8ef1bde9c87013557d0af0c1a986
+
+* removed extjs2
+
+
+2009-09-03 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 7a7e1151e1184e29e0e7be3121fa98eddbbfabb2
+
+* removed top-view bar
+
+
+2009-09-02 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 24637f580bdb5ccb994f953513cd35f0d1ab3f81
+
+* Added js message stack (growl like) and search cronk
+
+
+2009-09-02 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 87d6dc7d31ddfd12e4aa56cf7aac93678624f54d
+
+* prepared layout and style for top-view area
+
+
+2009-09-02 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 27265a9a94f4884d64659d17262b8b865c8ef008
+
+* added space for links and rss icon to top bar
+
+
+2009-09-02 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 38bc939c3c113de8112aa447ea71c883a9104c68
+
+* changed colours of main content
+
+
+2009-09-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 0679f2e0e351f95884b19a6ca2e1689f233bd6e0
+
+* fixed style of main view
+
+
+2009-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 64912ab5e4f23458c9be157a88f66658ba8a6193
+
+* Default accordeon panel
+
+
+2009-09-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: d305bb0b356ee4dfb53c1b665f1956c2784cfdcf
+
+* updated styles and logos
+
+
+2009-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 86c4edd10a6586bc4dae77804e61815c1d886a1b
+
+* Ext startup and container refreshes.
+
+
+2009-09-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 27f1659a169bda31cb08dd3682918507ef9bdaf0
+
+* added background images to left navigation and main content
+
+
+2009-09-01 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 584cb9f52df53263d136aa328ccc5139acf50cd2
+
+* fixed cronk js
+
+
+2009-08-31 Christian Doebler <christian(DOT)doebler(AT)netways(DOT)de>
+           Commit: 1d270f8b11ffdcee57f5f3560627f6160c830122
+
+* added styles and images for extjs
+
+
+2009-08-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 33a162660ed6973fecb810044fe6cdf7d2400d89
+
+* Fix the welcome screen!
+
+
+2009-08-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a7558533fcae68c3fa72e038e7f134451d42c69a
+
+* Layoutfixes
+
+
+2009-08-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 36ea967b6d7236a4bdf2a1c77092282470de480e
+
+* Friday CI!
+
+
+2009-08-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dbe60f0f82280765831b8a1200c006a8198d73e6
+
+* SQL
+
+
+2009-08-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4570e714b2ff1107819fab04673145aa593c5e39
+
+* quickfix sql data
+
+
+2009-08-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a5eb9d2c01894e13457aa884fbcd65133c843eb9
+
+* temp commit
+
+
+2009-08-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 150fba7bd36a175358961946ad0e1c7f047a87fa
+
+* First running and preconfigured portal versionImplemented host view (xml) added 
+  some  helper classes
+
+
+
+2009-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8c72766c5b14623a961ff3f0f5b4f07387901f84
+
+* added helper cronk, structs to preconfigure cronks and the real portal with portlets
+
+
+2009-08-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4789159a32b37c950ace6f3a7c6e8b1eedb92e48
+
+* Changed application main layout, added cronk listing
+
+
+2009-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 009f5cdef411508e84e9494d43a64620b9402f0c
+
+* Tested ext versions and fixed safari issues
+
+
+2009-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 730e7019a6fe8d48418f35c785f21568f3ab1acd
+
+* JS bulk loader (agavi made for safari)
+
+
+2009-08-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9fccee91d965820e4b1e4004508621d363f07bcb
+
+* Implemented portal structure and testcase
+
+
+2009-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 81efa8bf3af8fc0f96abb2890a73f5a06d3c3ae5
+
+* Added a ext component autoload scenario into some tabs!
+
+
+2009-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 172eb58053ecdff747704f3199a8747bddf690e9
+
+* Changed path structure, introduce the name cronk (widget), added cronkhandler and 
+  testscript
+
+
+2009-08-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 145e92ff098193800147481b92b8bfaabd19be9c
+
+* XML configure for grid view, grouping, sorting
+
+
+2009-08-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b36184ca808ef98767dc32b7276b49e0f0ac18d8
+
+* Ajax grid changes layout on meta information
+
+
+2009-07-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dae18f0572610c2df542d2cf3c31e38323953614
+
+* Added files
+
+
+2009-07-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c5a3ae15f398859b710090c4b2f2dcc594de77c6
+
+* AjaxGridLayout
+
+
+2009-07-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3a7f63a06ffcbd7ec0463185382e147b743d2523
+
+* Added AjaxGrid and basic template parsing features
+
+
+2009-07-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 233a16100175c063c6bf764f7d45323f31688bb3
+
+* Added missing files
+
+
+2009-07-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d43571a1187be85d3c7cae576359556fb089def7
+
+* Template driven views, first steps
+
+
+2009-07-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 873019d39fb4aaa35b31c56507b6929c43aae97f
+
+* Implemented a better host list and detail view
+
+
+2009-07-02 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 89980c5ee512eed5745ffc8740e8627b34f809ed
+
+* Added agavi translation manager, date formattings, date tools and generic tables 
+  (tested on host detail)
+
+
+2009-07-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 338ae1fa6582eee9843750b9474cc61d2794f409
+
+* Adding state base classes
+
+
+2009-07-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ad4faa67e790ff988acc78cf4410d391afb9895b
+
+* Added changes from mhein to master, added missing factory
+
+
+2009-07-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 21e9b01ce8db1422c47fec15aa8bd47c7c2c2575
+
+* Added icinga-api and icinga-api-config and displayed some information
+
+
+2009-06-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1140640d168cf9c8f906dc5fad76d87901b3eff3
+
+* added second stage changes (register view links)
+
+
+2009-06-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fcfdc60b30247b6e92554053e3fc2305a926eafa
+
+* Added api to register custom links into views (also corresponding objects)
+
+
+2009-04-28 Michael Luebben <michael(AT)luebben-home(DOT)de>
+           Commit: 31d2a612b7748dada89c09a0bec9c30ea0fbb843
+
+* Add new lib pchart
+
+
+2009-04-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 369a0b12d7736f5f7358fc190b70b4c7e4f9aef7
+
+* Merged back into the master
+
+
+2009-04-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4bd58db2352e2faba8313377cef16be2913e8755
+
+* Fixed navitem overwriting
+
+
+2009-04-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 22c086e8f4b132e08a111577e19e84ebf998563e
+
+* Added insertBefore for the NavContainer
+
+
+2009-04-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3f0950cb5fc792797c00986027c25922394bc674
+
+* Added a web dummy module!
+
+
+2009-04-24 MiCkEy2002 <mickey2002(AT)devel(DOT)(none)>
+           Commit: aa90947f1c088c1713ea158de0d32fb17a0fb1dc
+
+* Correct copyrights
+
+
+2009-04-24 MiCkEy2002 <mickey2002(AT)devel(DOT)(none)>
+           Commit: 4d04882641af47341f580350554e551d616fb0b7
+
+* Delete backup files from Quanta Plus
+
+
+2009-04-24 MiCkEy2002 <mickey2002(AT)devel(DOT)(none)>
+           Commit: bed557dc6c1d9fb0ad531094005ac961ce5864b9
+
+* Add new meni itims
+
+
+2009-04-23 Hendrik Baecker <andurin(AT)process-zero(DOT)de>
+           Commit: d722c5b3e4dfba20600f8f7c796aa114efe71bf5
+
+* Re-add app/cache/config/
+
+
+2009-04-23 Hendrik Baecker <andurin(AT)process-zero(DOT)de>
+           Commit: f56e36e98e5dd739b6e7038f4dcd1e022c3b5a72
+
+* Added .gitignore
+
+
+2009-04-23 Hendrik Baecker <andurin(AT)process-zero(DOT)de>
+           Commit: 265cf9ed407c106975e47853689c835b6eb6a3b6
+
+* Delete cachefiles from git
+
+
+2009-04-23 MiCkEy2002 <mickey2002(AT)devel(DOT)(none)>
+           Commit: 7208273c9881acc2637129fed54a2c8857ab4523
+
+* Rename Netways to Icinga
+
+
+2009-04-23 Hendrik Baecker <andurin(AT)process-zero(DOT)de>
+           Commit: 5c4f10a97d02104e1f79d8a8d4e29b7f258c1247
+
+* Deleted previously renamed files
+
+
+2009-04-23 MiCkEy2002 <mickey2002(AT)devel(DOT)(none)>
+           Commit: 3a56d775b72adbfc48d2951c3043d1b50dbf0cf4
+
+* Rename files and code from NETWAYS to ICINGA
+
+
+2009-04-23 MiCkEy2002 <mickey2002(AT)devel(DOT)(none)>
+           Commit: 2108235a48f7d192d8c322a964606f45ecfed1ea
+
+* Rename files and code from NETWAYS to ICINGA
+
+
