@@ -682,6 +682,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-changelog.py $(DESTDIR)$(prefix)/bin/create-changelog.py
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-rescuescheme.sh $(DESTDIR)$(prefix)/bin/create-rescuescheme.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
@@ -696,7 +697,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/doc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
-	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/cronk-example-howto.txt $(DESTDIR)$(prefix)/doc/cronk-example-howto.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG.old $(DESTDIR)$(prefix)/doc/CHANGELOG.old
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/GPL $(DESTDIR)$(prefix)/doc/GPL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/INSTALL $(DESTDIR)$(prefix)/doc/INSTALL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/install-fromscratch.txt $(DESTDIR)$(prefix)/doc/install-fromscratch.txt
@@ -8081,6 +8082,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7094
+INC_FILES=7095
 INC_DIRS=986
 # INSTALL_FILES_END
