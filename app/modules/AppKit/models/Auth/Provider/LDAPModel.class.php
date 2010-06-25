@@ -25,7 +25,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 	public function isAvailable($uid) {
 		$record = $this->getLdaprecord('(objectClass=*)', $uid);
 		if (is_array($record)) {
-			if ($record['distinguishedName'] === $uid) {
+			if ($record['dn'] === $uid) {
 				return true;
 			}
 		}
@@ -44,7 +44,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 			if (is_array($data)) {
 				$re = (array)$this->mapUserdata($data);
 				$re['user_authid'] = $data['dn'];
-				$re['user_name'] = $data['sAMAccountName'];
+				$re['user_name'] = $data[$this->getParameter('ldap_userattr', 'uid')];
 				$re['user_disabled'] = 0;
 			}
 		}
@@ -84,7 +84,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 	private function getSearchFilter($uid) {
 		$filter = $this->getParameter('ldap_filter_user');
 		if ($filter) {
-			return str_replace('__USERNAME__', quotemeta($uid), $filter);
+			return str_replace('__USERNAME__', $uid, $filter);
 		}
 	}
 	

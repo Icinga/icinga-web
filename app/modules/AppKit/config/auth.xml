@@ -83,6 +83,7 @@
 			<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=org</ae:parameter>
 			<ae:parameter name="ldap_binddn">ldap@AD.ICINGA.ORG</ae:parameter>
 			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
+			<ae:parameter name="ldap_userattr">uid</ae:parameter>
 			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
 		</ae:parameter>
 		
