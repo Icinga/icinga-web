@@ -51,9 +51,9 @@ abstract class BaseNsmUser extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('user_name', 'string', 18, array(
+        $this->hasColumn('user_name', 'string', 127, array(
              'type' => 'string',
-             'length' => 18,
+             'length' => 127,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
