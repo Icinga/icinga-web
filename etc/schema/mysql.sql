@@ -1,38 +1,30 @@
 /*****************************************************/
-/* Auto generated pgsql SQL Schema file for icinga-web*/
-/* Creation date: 2010-06-30T09:12:20+02:00          */
+/* Auto generated mysql SQL Schema file for icinga-web*/
+/* Creation date: 2010-06-30T09:12:05+02:00          */
 /****************************************************/
 
 
 /*           SQL schema defintiion        */
-CREATE TABLE nsm_db_version (vers_id INT, version INT, PRIMARY KEY(vers_id));
-CREATE TABLE nsm_log (log_id SERIAL, log_level INT NOT NULL, log_message TEXT NOT NULL, log_created TIMESTAMP NOT NULL, log_modified TIMESTAMP NOT NULL, PRIMARY KEY(log_id));
-CREATE TABLE nsm_principal (principal_id SERIAL, principal_user_id INT, principal_role_id INT, principal_type VARCHAR(4) NOT NULL, principal_disabled SMALLINT DEFAULT 0, PRIMARY KEY(principal_id));
-CREATE TABLE nsm_principal_target (pt_id SERIAL, pt_principal_id INT NOT NULL, pt_target_id INT NOT NULL, PRIMARY KEY(pt_id));
-CREATE TABLE nsm_role (role_id SERIAL, role_name VARCHAR(40) NOT NULL, role_description VARCHAR(255), role_disabled SMALLINT DEFAULT 0 NOT NULL, role_created TIMESTAMP NOT NULL, role_modified TIMESTAMP NOT NULL, role_parent INT, PRIMARY KEY(role_id));
-CREATE TABLE nsm_session (session_entry_id SERIAL, session_id VARCHAR(255) NOT NULL, session_name VARCHAR(255) NOT NULL, session_data TEXT NOT NULL, session_checksum VARCHAR(255) NOT NULL, session_created TIMESTAMP NOT NULL, session_modified TIMESTAMP NOT NULL, PRIMARY KEY(session_entry_id));
-CREATE TABLE nsm_target (target_id SERIAL, target_name VARCHAR(45) NOT NULL, target_description VARCHAR(100), target_class VARCHAR(80), target_type VARCHAR(45) NOT NULL, PRIMARY KEY(target_id));
-CREATE TABLE nsm_target_value (tv_pt_id INT, tv_key VARCHAR(45), tv_val VARCHAR(45) NOT NULL, PRIMARY KEY(tv_pt_id, tv_key));
-CREATE TABLE nsm_user (user_id SERIAL, user_account INT DEFAULT 0 NOT NULL, user_name VARCHAR(127) NOT NULL, user_lastname VARCHAR(40) NOT NULL, user_firstname VARCHAR(40) NOT NULL, user_password VARCHAR(64) NOT NULL, user_salt VARCHAR(64) NOT NULL, user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR(127), user_authkey VARCHAR(64), user_email VARCHAR(40) NOT NULL, user_disabled SMALLINT DEFAULT 1 NOT NULL, user_created TIMESTAMP NOT NULL, user_modified TIMESTAMP NOT NULL, PRIMARY KEY(user_id));
-CREATE TABLE nsm_user_preference (upref_id SERIAL, upref_user_id INT NOT NULL, upref_val VARCHAR(100), upref_longval TEXT, upref_key VARCHAR(50) NOT NULL, upref_created TIMESTAMP NOT NULL, upref_modified TIMESTAMP NOT NULL, PRIMARY KEY(upref_id));
-CREATE TABLE nsm_user_role (usro_user_id INT, usro_role_id INT, PRIMARY KEY(usro_user_id, usro_role_id));
-CREATE INDEX pt_target_id_ix ON nsm_principal_target (pt_target_id);
-CREATE INDEX pt_principal_id_ix ON nsm_principal_target (pt_principal_id);
-CREATE UNIQUE INDEX user_unique ON nsm_user (user_name);
-CREATE INDEX user_search_idx ON nsm_user (user_authsrc, user_authid, user_disabled);
-CREATE INDEX user_search ON nsm_user (user_name, user_authsrc, user_authid, user_disabled);
-CREATE INDEX upref_search_key_idx ON nsm_user_preference (upref_key);
-CREATE INDEX principal_role_id_ix ON nsm_user_preference (upref_user_id);
-CREATE INDEX nsm_user_role_ix ON nsm_user_role (usro_role_id);
-ALTER TABLE nsm_principal ADD CONSTRAINT nsm_principal_principal_user_id_nsm_user_user_id FOREIGN KEY (principal_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_principal ADD CONSTRAINT nsm_principal_principal_role_id_nsm_role_role_id FOREIGN KEY (principal_role_id) REFERENCES nsm_role(role_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_principal_target ADD CONSTRAINT nsm_principal_target_pt_target_id_nsm_target_target_id FOREIGN KEY (pt_target_id) REFERENCES nsm_target(target_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_principal_target ADD CONSTRAINT nsm_principal_target_pt_principal_id_nsm_principal_principal_id FOREIGN KEY (pt_principal_id) REFERENCES nsm_principal(principal_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_role ADD CONSTRAINT nsm_role_role_parent_nsm_role_role_id FOREIGN KEY (role_parent) REFERENCES nsm_role(role_id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_target_value ADD CONSTRAINT nsm_target_value_tv_pt_id_nsm_principal_target_pt_id FOREIGN KEY (tv_pt_id) REFERENCES nsm_principal_target(pt_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_user_preference ADD CONSTRAINT nsm_user_preference_upref_user_id_nsm_user_user_id FOREIGN KEY (upref_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_user_id_nsm_user_user_id FOREIGN KEY (usro_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_role_id_nsm_role_role_id FOREIGN KEY (usro_role_id) REFERENCES nsm_role(role_id) ON UPDATE CASCADE ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+CREATE TABLE nsm_db_version (vers_id INT, version INT, PRIMARY KEY(vers_id)) ENGINE = INNODB;
+CREATE TABLE nsm_log (log_id INT AUTO_INCREMENT, log_level INT NOT NULL, log_message TEXT NOT NULL, log_created DATETIME NOT NULL, log_modified DATETIME NOT NULL, PRIMARY KEY(log_id)) ENGINE = INNODB;
+CREATE TABLE nsm_principal (principal_id INT AUTO_INCREMENT, principal_user_id INT, principal_role_id INT, principal_type VARCHAR(4) NOT NULL, principal_disabled TINYINT DEFAULT '0', INDEX principal_user_id_idx (principal_user_id), INDEX principal_role_id_idx (principal_role_id), PRIMARY KEY(principal_id)) ENGINE = INNODB;
+CREATE TABLE nsm_principal_target (pt_id INT AUTO_INCREMENT, pt_principal_id INT NOT NULL, pt_target_id INT NOT NULL, INDEX pt_target_id_ix_idx (pt_target_id), INDEX pt_principal_id_ix_idx (pt_principal_id), PRIMARY KEY(pt_id)) ENGINE = INNODB;
+CREATE TABLE nsm_role (role_id INT AUTO_INCREMENT, role_name VARCHAR(40) NOT NULL, role_description VARCHAR(255), role_disabled TINYINT DEFAULT '0' NOT NULL, role_created DATETIME NOT NULL, role_modified DATETIME NOT NULL, role_parent INT, INDEX role_parent_idx (role_parent), PRIMARY KEY(role_id)) ENGINE = INNODB;
+CREATE TABLE nsm_session (session_entry_id INT AUTO_INCREMENT, session_id VARCHAR(255) NOT NULL, session_name VARCHAR(255) NOT NULL, session_data LONGTEXT NOT NULL, session_checksum VARCHAR(255) NOT NULL, session_created DATETIME NOT NULL, session_modified DATETIME NOT NULL, PRIMARY KEY(session_entry_id)) ENGINE = INNODB;
+CREATE TABLE nsm_target (target_id INT AUTO_INCREMENT, target_name VARCHAR(45) NOT NULL, target_description VARCHAR(100), target_class VARCHAR(80), target_type VARCHAR(45) NOT NULL, PRIMARY KEY(target_id)) ENGINE = INNODB;
+CREATE TABLE nsm_target_value (tv_pt_id INT, tv_key VARCHAR(45), tv_val VARCHAR(45) NOT NULL, PRIMARY KEY(tv_pt_id, tv_key)) ENGINE = INNODB;
+CREATE TABLE nsm_user (user_id INT AUTO_INCREMENT, user_account INT DEFAULT 0 NOT NULL, user_name VARCHAR(127) NOT NULL, user_lastname VARCHAR(40) NOT NULL, user_firstname VARCHAR(40) NOT NULL, user_password VARCHAR(64) NOT NULL, user_salt VARCHAR(64) NOT NULL, user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR(127), user_authkey VARCHAR(64), user_email VARCHAR(40) NOT NULL, user_disabled TINYINT DEFAULT '1' NOT NULL, user_created DATETIME NOT NULL, user_modified DATETIME NOT NULL, INDEX user_search_idx_idx (user_authsrc, user_authid, user_disabled), UNIQUE INDEX user_unique_idx (user_name), INDEX user_search_idx (user_name, user_authsrc, user_authid, user_disabled), PRIMARY KEY(user_id)) ENGINE = INNODB;
+CREATE TABLE nsm_user_preference (upref_id INT AUTO_INCREMENT, upref_user_id INT NOT NULL, upref_val VARCHAR(100), upref_longval LONGTEXT, upref_key VARCHAR(50) NOT NULL, upref_created DATETIME NOT NULL, upref_modified DATETIME NOT NULL, INDEX upref_search_key_idx_idx (upref_key), INDEX principal_role_id_ix_idx (upref_user_id), PRIMARY KEY(upref_id)) ENGINE = INNODB;
+CREATE TABLE nsm_user_role (usro_user_id INT, usro_role_id INT, INDEX nsm_user_role_ix_idx (usro_role_id), PRIMARY KEY(usro_user_id, usro_role_id)) ENGINE = INNODB;
+ALTER TABLE nsm_principal ADD CONSTRAINT nsm_principal_principal_user_id_nsm_user_user_id FOREIGN KEY (principal_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_principal ADD CONSTRAINT nsm_principal_principal_role_id_nsm_role_role_id FOREIGN KEY (principal_role_id) REFERENCES nsm_role(role_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_principal_target ADD CONSTRAINT nsm_principal_target_pt_target_id_nsm_target_target_id FOREIGN KEY (pt_target_id) REFERENCES nsm_target(target_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_principal_target ADD CONSTRAINT nsm_principal_target_pt_principal_id_nsm_principal_principal_id FOREIGN KEY (pt_principal_id) REFERENCES nsm_principal(principal_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_role ADD CONSTRAINT nsm_role_role_parent_nsm_role_role_id FOREIGN KEY (role_parent) REFERENCES nsm_role(role_id);
+ALTER TABLE nsm_target_value ADD CONSTRAINT nsm_target_value_tv_pt_id_nsm_principal_target_pt_id FOREIGN KEY (tv_pt_id) REFERENCES nsm_principal_target(pt_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_user_preference ADD CONSTRAINT nsm_user_preference_upref_user_id_nsm_user_user_id FOREIGN KEY (upref_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_user_id_nsm_user_user_id FOREIGN KEY (usro_user_id) REFERENCES nsm_user(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_role_id_nsm_role_role_id FOREIGN KEY (usro_role_id) REFERENCES nsm_role(role_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 /*          Initial data import              */
