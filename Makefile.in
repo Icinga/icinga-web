@@ -34,6 +34,7 @@ none:
 	@printf "Other usefull targets:\n"
 	@printf "\t%-18s - %s\n" "testdeps" "test php dependencies"
 	@printf "\t%-18s - %s\n" "create-tarball" "creates a tarball for packaging"
+	@printf "\t%-18s - %s\n" "create-tarball-nightly" "creates a tarball from HEAD for nightly builds"
 	@printf "\t%-18s - %s\n" "devclean" "make source ready for commit or packaging"
 	@printf "\t%-18s - %s\n" "cacheclean" "purges the agavi xml cache"
 	
@@ -43,6 +44,7 @@ none:
 	@printf "\t%-18s - %s\n" "db-upgrade" "tries to upgrade from a available db revision"
 	@printf "\t%-18s - %s\n" "db-drop" "drop the entire db"
 	@printf "\t%-18s - %s\n" "db-purge-userprefs" "purge existing user preferences"
+	@printf "\t%-18s - %s\n" "db-doc2sql" "export doctrine db schema"
 
 	@printf "\nI18n targets:\n"
 	@printf "\t%-18s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
@@ -77,7 +79,12 @@ devclean: remove-temp-files distclean cacheclean logclean make-create-files conf
 cleanall: distclean cacheclean configclean logclean 
 
 create-tarball:
-	tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
+	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
+	./make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
+
+create-tarball-nightly:
+	#${MAKE} submodule-update
+	./make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-`date +%Y%m%d`-`git rev-parse --short HEAD`/
 
 cacheclean:
 	rm -rf app/cache/config/*.php
