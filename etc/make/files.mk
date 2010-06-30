@@ -92,9 +92,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/AAdmin
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/AAdmin/Groups
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/AAdmin/Groups/RemoveAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/AAdmin/Groups/RemoveAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/EditAction.class.php
@@ -286,18 +283,13 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/EditSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/_EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/_EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/IndexSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/_IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/_IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/RemoveSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/RemoveSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/PrincipalEditorSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/PrincipalEditorSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/_PrincipalEditorSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/_PrincipalEditorSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/EditSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/_EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/_EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/IndexSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/_IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/_IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/ViewLogsSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/ViewLogsSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/AjaxLoginSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/AjaxLoginSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/DataProvider
@@ -330,9 +322,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/ShowErrorsSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/ShowErrorsSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Widgets/SquishLoaderSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Widgets/SquishLoaderSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/AAdmin
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/AAdmin/Groups
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/AAdmin/Groups/Remove.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/AAdmin/Groups/Remove.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Edit.xml
@@ -741,6 +730,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/mysql.sql $(DESTDIR)$(prefix)/etc/schema/mysql.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/oracle.sql $(DESTDIR)$(prefix)/etc/schema/oracle.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/pgsql.sql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/config
@@ -8082,6 +8073,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7095
-INC_DIRS=986
+INC_FILES=7090
+INC_DIRS=982
 # INSTALL_FILES_END

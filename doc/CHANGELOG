@@ -1,3 +1,84 @@
+2010-06-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8fc89019ef6abce06a01bf0017b5a0e28842d9c7
+
+* Added just simple words for preference window buttons (fixes #530)
+
+
+2010-06-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 904926503c87e18ff7bdb906eb42f11d02f48303
+
+* Added netbeans again. I can't see any files without
+
+
+2010-06-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 95db31da67359b14192986e6a7cb14c2e15152a3
+
+* Changed version (fixes #544)
+* Added detailed iso date format (global)
+* Removed 
+  html encoding from truncated text in grids
+* Fixed toggle button for auto refresh in 
+  grids
+* Added real title for title-less pages in template
+
+
+2010-06-30 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 04eb2818a500889773bbfb66501d670cacb45101
+
+* Added icinga-web.spec
+
+
+2010-06-30 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 51dfd9702b26b321ac23fda01bb9894151e329da
+
+* Added sql schema to etc and ignored netbeans folder
+
+
+2010-06-29 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: a980ff128ee7e7ba072b80064f25393f57d35fcf
+
+* Changed user_name character limit (critical /w ldap) and cleaned up a bit
+
+
+2010-06-28 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 4816ec28fe528aa6280d7dd6aade6584ac14a378
+
+* Added possibility to disable squishloader cache
+
+
+2010-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7fc8d511b61abcf36022f5a00e4c975754b68dd6
+
+* Ldap AuthProvider fixes (thanks to birger)
+* Configurable user uid attribute
+
+
+2010-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 244061e11a1836e8ca4d5fa89febe3c5eaf119a5
+
+* Changed session name
+
+
+2010-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 73a57d4d7013e64f96e049be20dd878baae2e231
+
+* License of changelog creator
+* Honour the original from Marcus D. Hanwell
+
+
+2010-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8c1745dc72fc66ad18e65beb03dbbd782bbe7906
+
+* Fixed make file list (fixes #539)
+
+
+2010-06-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a13f0076ff42f84e43d3d5c6cea2159ceb76bb71
+
+* Changelog creator
+* New changelog
+
+
 2010-06-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: 9362d378bc04e8ae36a8621befb180e40b69b100
 
