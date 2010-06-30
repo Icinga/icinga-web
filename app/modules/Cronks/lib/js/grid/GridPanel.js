@@ -26,13 +26,11 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				toolTip: _('Grid settings'),
 				menu: {
 					items: [{
-						// xtype: 'button',
 						text: _('Auto refresh'),
-						iconCls: 'silk-database-refresh',
-						enableToggle: true,
-						handler: function(oBtn, e) {
-							
-							if (oBtn.pressed == true) {
+						checked: false,
+
+						checkHandler: function(checkItem, checked) {
+							if (checked == true) {
 								this.trefresh = AppKit.getTr().start({
 									run: function() {
 										this.getStore().reload();
@@ -44,8 +42,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 							else {
 								AppKit.getTr().stop(this.trefresh);
 								delete this.trefresh;
-							}
-							
+							}	
 						},
 						scope: this
 					},{

@@ -6,6 +6,9 @@
 				echo htmlspecialchars($t['title']). ' - '
 				. AgaviConfig::get('core.app_name');
 			}
+			else {
+				echo AgaviConfig::get('core.app_name');
+			}
 		?></title>
 		
 		<meta charset="UTF-8">

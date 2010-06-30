@@ -47,9 +47,11 @@ Cronk.grid.ColumnRenderer = {
 			// skip truncate if html is located at the ouput
 			if(value.match(/<.*?>(.*?)<\/.*?>/g))
 				return value;
+
 			var out = Ext.util.Format.ellipsis(value, (cfg.length || 50));
 			if (out.indexOf('...', (out.length-3)) != -1) {
-				metaData.attr = 'ext:qtip="' + encodeURI(value) + '"';
+				// @todo Check if html encoding brings some trouble
+				metaData.attr = 'ext:qtip="' + value + '"';
 			}
 			
 			return out;
