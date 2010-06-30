@@ -55,7 +55,7 @@
 			<validator class="string" name="user_name" required="true">
 					<argument>user_name</argument>
 					<ae:parameter name="min">3</ae:parameter>
-					<ae:parameter name="max">18</ae:parameter>
+					<ae:parameter name="max">127</ae:parameter>
 					<errors>
 						<error for="min">The username you supplied is fewer than 3 characters long.</error>
 						<error for="max">Your username is too long</error>

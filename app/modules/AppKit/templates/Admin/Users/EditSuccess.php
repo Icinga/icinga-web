@@ -42,7 +42,7 @@ Ext.onReady(function(){
 					id: 'user_name',
 					anchor: '95%',
 					minLength: 3,
-					maxLength: 18
+					maxLength: 127
 				},{
 					xtype:'container',
 					layout: 'column',

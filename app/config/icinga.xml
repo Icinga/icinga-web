@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 	ICINGA base configuration
 -->
-
-<settings prefix="de.icinga." xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config">
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config" prefix="de.icinga.">
 	<!--
 		Add more links under 'home'
 		* The home itself points to index_page route
@@ -17,7 +15,7 @@
 		The webpath, with a leading slash and no trailing
 		* If the path is empty, we try to detect the path
 	-->
-	<setting name="appkit.web_path"></setting>
+	<setting name="appkit.web_path"/>
 	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
 	
 	<!--
@@ -65,6 +63,11 @@
 		* please provide absolute paths, we create one big file later.
 	-->
 	<setting name="appkit.include_javascript">
+		<!-- 
+			Állow caching of the squishloader js.
+			Set to false if you've got problems with persistence
+		 -->
+		<parameter name="allowcache">true</parameter>
 
 		<parameter name="squished">
 			<!-- Firebug lite for debug purposes -->
@@ -105,7 +108,7 @@
 			<parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</parameter>
 			<parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</parameter>
-			
+			<parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</parameter>			
 			<!--
 			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
 			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
@@ -180,7 +183,7 @@
 	<setting name="appkit.version.name">icinga-web</setting>
 	
 	<!-- PLACEHOLDER -->
-	<setting name="appkit.version.release"></setting>
+	<setting name="appkit.version.release"/>
 
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/>
 </settings>
