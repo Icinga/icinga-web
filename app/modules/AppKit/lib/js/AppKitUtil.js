@@ -78,20 +78,20 @@ AppKit.util = (function() {
 					closable: true,
 					resizable: true,
 					id: 'user_prefs_target',
-					width: 450,
+					width: 530,
 					height: 530,
 					autoScroll: true,
 					closeAction: 'hide',
 					
 					bbar: {
 						items: [{
-							text: _('Close and refresh'),
+							text: _('OK'),
 							iconCls: 'silk-accept',
 							handler: function() {
 								AppKit.changeLocation(AppKit.c.path);
 							}
 						}, {
-							text: _('Close'),
+							text: _('Cancel'),
 							iconCls: 'silk-cancel',
 							handler: function() {
 								pwin.close();
