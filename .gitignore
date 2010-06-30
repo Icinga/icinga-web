@@ -12,5 +12,4 @@ etc/tests/test.properties
 app/config/databases.xml
 pub/.htaccess
 pub/soap/.htaccess
-nbproject
 *~
