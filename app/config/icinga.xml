@@ -67,7 +67,7 @@
 			Állow caching of the squishloader js.
 			Set to false if you've got problems with persistence
 		 -->
-		<parameter name="allowcache">true</parameter>
+		<parameter name="allowcache">false</parameter>
 
 		<parameter name="squished">
 			<!-- Firebug lite for debug purposes -->
