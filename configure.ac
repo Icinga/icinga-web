@@ -5,7 +5,7 @@
 AC_PREREQ(2.61)
 
 # Init project
-AC_INIT(icinga-web, [0.9.1-beta], [dev.icinga.org])
+AC_INIT(icinga-web, [1.0.1], [dev.icinga.org])
 
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
 
