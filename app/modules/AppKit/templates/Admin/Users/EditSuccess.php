@@ -84,7 +84,7 @@ Ext.onReady(function(){
 					name: 'user_email',
 					id: 'user_email',
 					anchor: '75%',
-					regex: /\w+@\w+\.\w+/
+					regex: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 				}, {
 					xtype: 'checkbox',
 					name: 'user_disabled',
