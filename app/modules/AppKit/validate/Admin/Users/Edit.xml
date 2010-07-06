@@ -85,6 +85,27 @@
 					</errors>
 			</validator>
 			
+			<validator class="string" name="user_authsrc"  required="false">
+					<argument>user_authsrc</argument>
+					<ae:parameter name="min">3</ae:parameter>
+					<ae:parameter name="max">40</ae:parameter>
+					<errors>
+						<error for="min">The lastname you supplied is fewer than 3 characters long.</error>
+						<error for="max">Your lastname is too long</error>
+						<error>You have to supply a lastname!</error>
+					</errors>
+			</validator>
+			
+			<validator class="string" name="user_authkey"  required="false">
+					<argument>user_authkey</argument>
+					<ae:parameter name="min">3</ae:parameter>
+					<ae:parameter name="max">40</ae:parameter>
+					<errors>
+						<error for="min">The lastname you supplied is fewer than 3 characters long.</error>
+						<error for="max">Your lastname is too long</error>
+						<error>You have to supply a lastname!</error>
+					</errors>
+			</validator>
 			<validator class="email" name="user_email" required="true">
 					<argument>user_email</argument>
 					<errors>
