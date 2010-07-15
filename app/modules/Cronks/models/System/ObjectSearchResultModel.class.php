@@ -145,7 +145,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 			
 			$result = $search->fetch();
-			
+
 			$count[$mapping] = $result->getResultCount();
 			$data[$mapping] = $this->resultToArray($result, $fields, $mapping);
 		}
@@ -198,6 +198,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 	
 	private function resultToArray(IcingaApiResult &$res, array $fieldDef, $type) {
 		$array = array ();
+
 		foreach ($res as $oRow) {
 			$row = $oRow->getRow();
 			$tmp = array ('type' => $type);

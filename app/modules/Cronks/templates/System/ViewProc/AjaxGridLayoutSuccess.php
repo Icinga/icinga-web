@@ -9,10 +9,10 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		meta.baseURL = '<? echo $_SERVER['SERVER_NAME'].$ro->gen("icinga.home") ?>';
 		
 		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
-		MetaGrid.setStateUid(CE.stateuid);
-		
+		MetaGrid.setStateUid(CE.stateuid);	
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
+
 		MetaGrid.setParameters({storeDisableAutoload: true});
 		var grid = MetaGrid.createGrid();
 		

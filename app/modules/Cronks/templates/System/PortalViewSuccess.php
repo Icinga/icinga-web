@@ -36,13 +36,52 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 				        this.resizer.on('resize', function(oResizable, iWidth, iHeight, e) {
 				        	this.setHeight(iHeight);
-				        }, this);
+				        	
+				        }, this,{buffer:true});
 
 				        Ext.Element.prototype.createProxy=createProxyProtoType;
 
 					});
+					portlet.on('resize',function() {
+						Ext.each(portlet.findByType('container'),function(item) {
+			        		var bottomMargin = 15;
+			        		item.setHeight(portlet.getInnerHeight()-bottomMargin);
+			        	})	
+						
+					},this)
+				
+					
 				},
+				initPortlet : function(portlet) {
+					Cronk.Registry.add(portlet.initialConfig);
+					portlet.on('afterlayout',function(ct) {
+						AppKit.log(ct);
+				
+						var params = ct.initialConfig.params;
+						params["stateuid"] = ct.stateuid;
+						params["p[stateuid]"] = ct.stateuid,
+						params["p[parentid]"] = ct.id;
+						
+						portlet.getUpdater().setDefaultUrl({
+							url: "<?php echo $ro->gen('cronks.crloader', array('cronk' => null)); ?>"+ct.crname,
+							params: params,
+							scripts: true							
+						});
+						
+						portlet.getUpdater().refresh();
+					},this,{single:true})
+					portlet.on("add",function(el,resp) {
+						Ext.each(portlet.findByType('container'),function(item) {
+        					var bottomMargin = 8;
+        					item.setHeight(portlet.getInnerHeight()-bottomMargin);
+        					item.staef
+        				})	
+					})
 
+				
+					PortalHandler.createResizer(portlet);
+				},
+				
 				createPortletDragZone : function (p) {
 						var cdz = new Ext.dd.DropTarget(p.getEl(), {
 							ddGroup: 'cronk',
@@ -85,53 +124,50 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 							notifyDrop: function(dd, e, data) {
 								var params = {
-									'p[parentid]': id
+									'p[parentid]': id,
 								};
-
+								
 								if (data.dragData.parameter) {
 									for (var k in data.dragData.parameter) {
 										params['p[' + k + ']'] = data.dragData.parameter[k];
 									}
 								}
-
+								
 								var portlet  = Cronk.factory({
-									id: id,
+									id: Ext.id(),
 
-									params: data.dragData.parameter,
+									params: params,
 									crname: data.dragData.id,
-
+									stateuid: Ext.id('cronk-sid'),
 									title: data.dragData.name,
 									closable: true,
+									stateful:true,
 									xtype: 'portlet',
 									tools: tools,
 									height: 200,
 									border: true,
-
 									// Resizer properties
 									heightIncrement:16,
 								    pinned:true,
 								    duration: .6,
 								    transparent:false
+								   
 								});
-
-								PortalHandler.createResizer(portlet);
+								
+								PortalHandler.initPortlet(portlet);
 
 								// Add them to the portal
+							
 								p.items.get(this.ac || 0).add(portlet);
-
+							
 								// Bubbling render event
+
 								portlet.show();	// Needed for webkit
 								portal.doLayout();
-
-								// Redefine the updater to held default properties
-								/* portlet.getUpdater().setDefaultUrl({
-									url: "<?php echo $ro->gen('cronks.crloader', array('cronk' => null)); ?>" + data.dragData.id,
-									params: params,
-									scripts: true
-								});
-
+							
+								
 								// initial refresh
-								portlet.getUpdater().refresh(); */
+//								portlet.getUpdater().refresh();
 							}
 						});
 				},
@@ -207,7 +243,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		// is a good choice
 		if (CE.stateuid) {
 			Ext.apply(portal_config, {
-				id: CE.cmpid,
+				id: Ext.id(),
 				stateId: CE.cmpid,
 				stateful: true,
 
@@ -215,7 +251,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				stateEvents: ['add', 'remove', 'titlechange', 'resize'],
 
 				getState: function () {
-
+					
 					var d = new Array();
 
 					this.items.each(function (col, cindex, l1) {
@@ -225,6 +261,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 						col.items.each(function (cr, crindex, l2) {
 							if (Cronk.Registry.get(cr.getId())) {
 								var c = Cronk.Registry.get(cr.getId());
+							
 								c.height = cr.getHeight();
 								crlist[cr.getId()] = c;
 							}
@@ -233,7 +270,6 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 						d[cindex] = crlist;
 
 					}, this);
-
 					return {
 						col: d,
 						title: this.title
@@ -241,18 +277,18 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				},
 
 				applyState: function (state) {
-
+				
 					// Defered execution
 					(function() {
-					
 						if (state.col) {
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
 									var c = citem;
 									c.tools = tools;
-
+									c.id = Ext.id(); // create new id, otherwise it might get ugly
 									var cronk = Cronk.factory(c);
-									PortalHandler.createResizer(cronk);
+						
+									PortalHandler.initPortlet(cronk);
 									
 									this.get(index).add(cronk);
 									cronk.show();
@@ -274,5 +310,6 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 		CE.insert(0, portal);
 		CE.doLayout();
+
 	});	
 </script>
