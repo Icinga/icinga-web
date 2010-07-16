@@ -103,11 +103,11 @@
             <filter>
                 <parameter name="enabled">true</parameter>
 
-				 Filter configuration 
+<!--				 Filter configuration -->
                 <parameter name="type">extjs</parameter>
 				<parameter name="subtype">appkit.ext.filter.api</parameter>
 
-				 Operator type is needed because we don't know which type returned
+<!--				 Operator type is needed because we don't know which type returned-->
 				<parameter name="operator_type">text</parameter>
 
 				<parameter name="api_target">instance</parameter>

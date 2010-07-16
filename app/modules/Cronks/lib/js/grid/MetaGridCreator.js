@@ -145,14 +145,14 @@ Cronk.grid.MetaGridCreator.prototype = {
 			border:				false,
 			emptyText:			"No data was found ...",
 			layout:				'fit',
-						
+
 			// Custom properties for our custom
 			// object
 			meta:				this.meta,
 			filter:				this.filter_array,
 			parentCmp:			this
 		};
-		
+
 		// Stateful handling
 		if (this.stateuid) {
 			var lmg = this;
@@ -174,7 +174,6 @@ Cronk.grid.MetaGridCreator.prototype = {
 					for (var i in o.filter_params) { e=false; break; }
 					for (var i in o.filter_types) { e=false; break; }
 					for (var i in o.store_origin_params) { e=false; break; }
-					
 					if (e == false) {
 						return o;
 					}
@@ -200,11 +199,11 @@ Cronk.grid.MetaGridCreator.prototype = {
 					
 					(reload == true) && (store.reload());
 					
-//					log(store.originParams);
-					
+//					log(store.originParams);			
 					return true;
 				}
 			});
+
 		}
 		
 		// Add the selection model:
