@@ -1,0 +1,12 @@
+Where are my templates?
+
+We splitted the xml templates depending on their structures into two folders:
+
+ * to: TacticalOverview templates
+ * grid: Data grids
+
+The directories can be configured in ../conf/module.xml
+
+Kind regards,
+ the icinga development team
+

@@ -17,7 +17,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
 		$template_file = sprintf(
 			'%s/%s.xml', 
-			AgaviConfig::get('modules.cronks.xml.path'), 
+			AgaviConfig::get('modules.cronks.xml.path.grid'), 
 			$rd->getParameter('template')
 		);
 		
@@ -41,7 +41,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 	public function executeJson(AgaviRequestDataHolder $rd) {
 		$template_file = sprintf(
 			'%s/%s.xml', 
-			AgaviConfig::get('modules.cronks.xml.path'), 
+			AgaviConfig::get('modules.cronks.xml.path.grid'), 
 			$rd->getParameter('template')
 		);
 		
