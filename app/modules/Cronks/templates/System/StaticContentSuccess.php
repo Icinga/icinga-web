@@ -40,12 +40,10 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 									toolTip: _('Tactical overview settings'),
 									menu: {
 										items: [{
-											xtype: 'button',
 											text: _('Auto refresh'),
-											iconCls: 'silk-database-refresh',
-											enableToggle: true,
-											handler: function(oBtn, e) {
-												if (oBtn.pressed == true) {
+											checked: false,
+											checkHandler: function(checkItem, checked) {
+												if (checked == true) {
 													this.trefresh = AppKit.getTr().start({
 														run: function() {
 															this.getUpdater().refresh();

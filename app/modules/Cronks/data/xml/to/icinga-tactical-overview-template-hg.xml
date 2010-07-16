@@ -440,15 +440,25 @@
 					</tr>
 					<tr>
 						<td>Host Check Latency:</td>
-						<td>${HOST_LATENCY:HOST_LATENCY_MIN} / ${HOST_LATENCY:HOST_LATENCY_MAX} / ${HOST_LATENCY:HOST_LATENCY_AVG} sec</td>
+						<td>
+							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MIN'); ?> /
+							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MAX'); ?> /
+							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_AVG'); ?>
+						</td>
 					</tr>
 					<tr>
 						<td># Active Host / Service Checks:</td>
-						<td>${NUM_ACTIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_ACTIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
+						<td>
+							<?php echo $t->dsCachedField('NUM_ACTIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
+							<?php echo $t->dsCachedField('NUM_ACTIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
+						</td>
 					</tr>
 					<tr>
 						<td># Passive Host / Service Checks:</td>
-						<td>${NUM_PASSIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_PASSIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
+						<td>
+							<?php echo $t->dsCachedField('NUM_PASSIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
+							<?php echo $t->dsCachedField('NUM_PASSIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
+						</td>
 					</tr>
 				</table>
 			]]>
@@ -476,7 +486,7 @@
 								${sg_status:SERVICEGROUP_NAME,mail}
 						</td>
 						<td>
-							${performance}
+							<?php echo $t->render('performance'); ?>
 						</td>					
 					</tr>
 				</table>

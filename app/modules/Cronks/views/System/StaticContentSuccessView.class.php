@@ -28,10 +28,16 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView
 			$rd->getParameter('template')
 		);
 
-		$model = $this->getContext()->getModel('System.StaticContent', 'Cronks');
-		$content = $model->getContent($templateFile);
+		try {
+			$model = $this->getContext()->getModel('System.StaticContent', 'Cronks');
+			$model->setTemplateFile($templateFile);
+			$content = $model->parseTemplate('MAIN');
+			return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
+		}
+		catch (Exception $e) {
+			return $e->getMessage();
+		}
 
-		return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
 	}
 }
 
