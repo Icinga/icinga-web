@@ -6,11 +6,26 @@
 			<settings>
 				<setting name="title">Cronks Module</setting>
 				<setting name="version">1.0</setting>
-				
-				<setting name="xml.path">%core.module_dir%/Cronks/data/xml</setting>
-				
+
+				<!--
+					* Path to our grid templates
+				-->
+				<setting name="xml.path.grid">%core.module_dir%/Cronks/data/xml/grid</setting>
+
+				<!--
+					* Path to our tactical overview templates
+				-->
+				<setting name="xml.path.to">%core.module_dir%/Cronks/data/xml/to</setting>
+
+				<!--
+					* How log we preload the portal (showing the funny throbber, idling arround)
+				-->
 				<setting name="portal.loadmasktimeout">2300</setting>
-				
+
+				<!--
+					* Categories for the cronks
+					The content depends on cronks.xml
+				-->
 				<setting name="categories">
 					<ae:parameter name="core">
 						<ae:parameter name="title">Core components</ae:parameter>
@@ -30,23 +45,16 @@
 						<ae:parameter name="visible">true</ae:parameter>
 					</ae:parameter>
 				</setting>
-				
+
+				<!--
+					* Include a seperated cronks.xml
+					Keep this configuration small
+				-->
 				<setting name="cronks">
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 					href="cronks.xml#xpointer(setting/node())" />
 				</setting>
 				
-				<!--
-				
-				<setting name="dynamicscripts">
-					<ae:parameter name="AppKit.Ext.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
-					<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
-					<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
-					<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
-				</setting>
-				
-				-->
-			
 			</settings>
 		</module>
 		

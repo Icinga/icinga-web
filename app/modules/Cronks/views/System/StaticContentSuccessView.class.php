@@ -24,7 +24,7 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView
 		
 		$templateFile = sprintf(
 			'%s/%s.xml', 
-			AgaviConfig::get('modules.cronks.xml.path'), 
+			AgaviConfig::get('modules.cronks.xml.path.to'), 
 			$rd->getParameter('template')
 		);
 
