@@ -315,5 +315,5 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 	this.add(oSearch);
 	this.doLayout();
 });
--->
+//-->
 </script>

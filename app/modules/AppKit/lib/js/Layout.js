@@ -29,7 +29,7 @@ Ext.onReady(function() {
 				center	: 'viewport-center',
 			 	north	: 'viewport-north',
 			 	menu	: 'viewport-menu',
-			 	coel	: 'content', 
+			 	coel	: 'content'
 			},
 			
 			constructor : function() {
