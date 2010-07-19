@@ -36,7 +36,7 @@
 		<!-- JS included files -->
 	<?php foreach ($t['js_files'] as $js_file) { ?>
 		<script type="text/javascript" src="<?php echo $js_file; ?>">
-		<!-- // <![CDATA[
+		//<!-- // <![CDATA[
 		// NO INLINE SCRIPT
 		// ]]> -->
 		</script>
@@ -46,7 +46,7 @@
 <?php if (is_array($t['js_raw']) && count($t['js_raw'])) { ?>
 		<!-- RAW js code -->
 		<script type="text/javascript">
-		<!-- // <![CDATA[
+		//<!-- // <![CDATA[
 <?php foreach ($t['js_raw'] as $js_name => $js_raw) { ?>
 
 			// start JS data: <?php echo $js_name; ?>

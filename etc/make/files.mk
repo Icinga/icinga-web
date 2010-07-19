@@ -733,6 +733,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineToSqlTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineToSqlTask.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk.orig $(DESTDIR)$(prefix)/etc/make/files.mk.orig
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema
@@ -8079,6 +8080,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7094
+INC_FILES=7095
 INC_DIRS=984
 # INSTALL_FILES_END

@@ -56,7 +56,7 @@ Ext.onReady(function() {
 							}
 						});
 					}
-				}],
+				}]
 			},{
 				title:_('Change Password'),
 				xtype: 'fieldset',
@@ -242,7 +242,7 @@ Ext.onReady(function() {
 											value: Ext.getCmp("value_"+id).getValue()
 									  }));
 							Ext.getCmp('win_'+id).close();
-						},
+						}
 					}]
 				})
 			});
