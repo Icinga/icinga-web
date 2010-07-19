@@ -20,7 +20,16 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 	}
 
 	public function setTemplateFile($templateFile) {
-		$this->templateFile = $templateFile;
+		if (!file_exists($templateFile)) {
+				$this->templateFile = sprintf(
+				'%s/%s.xml',
+				AgaviConfig::get('modules.cronks.xml.path.to'),
+				$templateFile
+			);
+		}
+		else {
+			$this->templateFile = $templateFile;
+		}
 
 		$this->dom = new DOMDocument('1.0', 'utf-8');
 		$this->dom->preserveWhiteSpace = false;
@@ -129,7 +138,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 		return $this->xmlData['template_code'];
 	}
 
-	public function parseTemplate($tplName) {
+	public function parseTemplate($tplName, array $args=array()) {
 
 		$template = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array (
 			'tid'			=> basename($this->templateFile),
@@ -138,7 +147,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 			'datasources'	=> $this->getDatasources()
 		));
 
-		return $template->render($tplName);
+		return $template->renderTemplate($tplName, $args);
 	}
 
 }

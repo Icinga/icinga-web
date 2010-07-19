@@ -6,8 +6,8 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">Default template for Tactical Overview</parameter>
-        <parameter name="description">Displays a Tactical Overview</parameter>
+        <parameter name="name">Predefined presets</parameter>
+        <parameter name="description">Default elements for the tactical overview</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
@@ -15,6 +15,7 @@
 		data sources 
 	-->
 	<datasources>
+
 		<datasource id="SERVICE_EXECUTION_TIME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_SERVICE</target>
@@ -106,65 +107,69 @@
 				</columns>
 			</filter>
 		</datasource>
-
-		<datasource id="HOST_NAMES">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_NAME,HOST_STATE</columns>
-		</datasource>
 	</datasources>
 
     <!--
     	html template
     -->
     <template_code>
-    	<host_names>
-    		<![CDATA[
-				<br/>
-				${HOST_NAMES:HOST_NAME} | ${HOST_NAMES:HOST_STATE:IcingaTemplateDisplayMonitoring:hostStatus(__VALUE__,new AgaviParameterHolder(),new AgaviParameterHolder())}
-				<br/>
-			]]> 
-    	</host_names>
-
-    	<MAIN>
-	    	<![CDATA[
-				<table border="0" cellpadding="0" cellspacing="4">
+		
+		<performance>
+			<![CDATA[
+				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td>Monitoring Performance</td>
+						<td>Service Check Execution Time:</td>
+						<td>
+							<?php echo $t->dsCachedField('SERVICE_EXECUTION_TIME', 'SERVICE_EXECUTION_TIME_MIN'); ?> /
+							<?php echo $t->dsCachedField('SERVICE_EXECUTION_TIME', 'SERVICE_EXECUTION_TIME_MAX'); ?> /
+							<?php echo $t->dsCachedField('SERVICE_EXECUTION_TIME', 'SERVICE_EXECUTION_TIME_AVG'); ?> sec
+						</td>
 					</tr>
 					<tr>
+						<td>Service Check Latency:</td>
 						<td>
-							<table border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td>Service Check Execution Time:</td>
-									<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
-								</tr>
-								<tr>
-									<td>Service Check Latency:</td>
-									<td>${SERVICE_LATENCY:SERVICE_LATENCY_MIN} / ${SERVICE_LATENCY:SERVICE_LATENCY_MAX} / ${SERVICE_LATENCY:SERVICE_LATENCY_AVG} sec</td>
-								</tr>
-								<tr>
-									<td>Host Check Execution Time:</td>
-									<td>${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MIN} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MAX} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_AVG} sec</td>
-								</tr>
-								<tr>
-									<td>Host Check Latency:</td>
-									<td>${HOST_LATENCY:HOST_LATENCY_MIN} / ${HOST_LATENCY:HOST_LATENCY_MAX} / ${HOST_LATENCY:HOST_LATENCY_AVG} sec</td>
-								</tr>
-								<tr>
-									<td># Active Host / Service Checks:</td>
-									<td>${NUM_ACTIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_ACTIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
-								</tr>
-								<tr>
-									<td># Passive Host / Service Checks:</td>
-									<td>${NUM_PASSIVE_HOST_CHECKS:COUNT_HOST_OBJECT_ID} / ${NUM_PASSIVE_SERVICE_CHECKS:COUNT_SERVICE_OBJECT_ID}</td>
-								</tr>
-							</table>
+							<?php echo $t->dsCachedField('SERVICE_LATENCY', 'SERVICE_LATENCY_MIN'); ?> /
+							<?php echo $t->dsCachedField('SERVICE_LATENCY', 'SERVICE_LATENCY_MAX'); ?> /
+							<?php echo $t->dsCachedField('SERVICE_LATENCY', 'SERVICE_LATENCY_AVG'); ?> sec
+						</td>
+					</tr>
+					<tr>
+						<td>Host Check Execution Time:</td>
+						<td>
+							<?php echo $t->dsCachedField('HOST_EXECUTION_TIME', 'HOST_EXECUTION_TIME_MIN'); ?> /
+							<?php echo $t->dsCachedField('HOST_EXECUTION_TIME', 'HOST_EXECUTION_TIME_MAX'); ?> /
+							<?php echo $t->dsCachedField('HOST_EXECUTION_TIME', 'HOST_EXECUTION_TIME_AVG'); ?> sec
+						</td>
+					</tr>
+					<tr>
+						<td>Host Check Latency:</td>
+						<td>
+							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MIN'); ?> /
+							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MAX'); ?> /
+							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_AVG'); ?> sec
+						</td>
+					</tr>
+					<tr>
+						<td># Active Host / Service Checks:</td>
+						<td>
+							<?php echo $t->dsCachedField('NUM_ACTIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
+							<?php echo $t->dsCachedField('NUM_ACTIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
+						</td>
+					</tr>
+					<tr>
+						<td># Passive Host / Service Checks:</td>
+						<td>
+							<?php echo $t->dsCachedField('NUM_PASSIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
+							<?php echo $t->dsCachedField('NUM_PASSIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
 						</td>
 					</tr>
 				</table>
-				${host_names:HOST_NAME,c1-db2}
-				${host_names:HOST_NAME,c1-db1}
+			]]>
+		</performance>
+
+    	<MAIN>
+	    	<![CDATA[
+				Global template for predefined presets
 			]]>
 		</MAIN>
     </template_code>

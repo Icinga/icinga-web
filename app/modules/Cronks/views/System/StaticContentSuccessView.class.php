@@ -21,20 +21,15 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView
 		if ($rd->getParameter('interface', false) == true) {
 			return $this->executeHtml($rd);
 		}
-		
-		$templateFile = sprintf(
-			'%s/%s.xml', 
-			AgaviConfig::get('modules.cronks.xml.path.to'), 
-			$rd->getParameter('template')
-		);
 
 		try {
 			$model = $this->getContext()->getModel('System.StaticContent', 'Cronks');
-			$model->setTemplateFile($templateFile);
+			$model->setTemplateFile($rd->getParameter('template'));
 			$content = $model->parseTemplate('MAIN');
 			return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
 		}
 		catch (Exception $e) {
+			throw $e;
 			return $e->getMessage();
 		}
 

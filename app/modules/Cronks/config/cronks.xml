@@ -308,21 +308,6 @@
 			Tactical overviews - [START]
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		-->
-		<ae:parameter name="icingaTacticalOverview">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StaticContent</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-			<ae:parameter name="name">TO</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-
-			<!-- <ae:parameter name="groupsonly">appkit_admin</ae:parameter> -->
-
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-tactical-overview-template</ae:parameter>
-				<ae:parameter name="interface">true</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
 
 		<ae:parameter name="icingaTacticalOverviewHG">
 			<ae:parameter name="module">Cronks</ae:parameter>

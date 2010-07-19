@@ -126,6 +126,7 @@ class AppKitFormatParserUtil {
 					
 					case self::TYPE_ARRAY:
 						if (count($parts) == 1) {
+							
 							if (isset($data[$parts[0]])) {
 								$replace = $data[$parts[0]];
 							}

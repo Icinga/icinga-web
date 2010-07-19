@@ -56,16 +56,21 @@ abstract class IcingaStateInfo {
 	 * Returns the current state as textual message
 	 * @return string
 	 */
-	public function getCurrentStateAsText() {
-		return $this->getWrappedText($this->getStateText($this->getCurrentState()));
+	public function getCurrentStateAsText($wrap=null) {
+		if ($wrap!==null) {
+			return sprintf($wrap, $this->getStateText($this->getCurrentState()));
+		}
+		else {
+			return $this->getWrappedText($this->getStateText($this->getCurrentState()));
+		}
 	}
 	
 	/**
 	 * Creates a generic html format and returns an stringable xml node
 	 * @return AppKitXmlTag
 	 */
-	public function getCurrentStateAsHtml() {
-		$span = AppKitXmlTag::create('span', $this->getCurrentStateAsText());
+	public function getCurrentStateAsHtml($wrap=null) {
+		$span = AppKitXmlTag::create('span', $this->getCurrentStateAsText($wrap));
 		$div = AppKitXmlTag::create('div', $span)->addAttribute(
 			'class', sprintf('icinga-status icinga-status-%s', strtolower($this->getStateText($this->getCurrentState())))
 		);

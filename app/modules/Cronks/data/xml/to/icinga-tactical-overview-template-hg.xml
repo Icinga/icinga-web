@@ -15,6 +15,31 @@
 		data sources 
 	-->
 	<datasources>
+
+		<datasource id="HOSTGROUPS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOSTGROUP</target>
+			<columns>HOSTGROUP_ALIAS, HOSTGROUP_NAME</columns>
+		</datasource>
+
+		<datasource id="SERVICEGROUPS">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICEGROUP</target>
+			<columns>SERVICEGROUP_ALIAS, SERVICEGROUP_NAME</columns>
+		</datasource>
+
+		<datasource id="HOST_STATUS_SUMMARY">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_HOST_STATUS_SUMMARY</target>
+			<columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
+		</datasource>
+
+		<datasource id="SERVICE_STATUS_SUMMARY">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_SERVICE_STATUS_SUMMARY</target>
+			<columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
+		</datasource>
+
 		<datasource id="HG_NAME">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_HOSTGROUP</target>
@@ -157,97 +182,6 @@
 			</filter>
 		</datasource>
 
-		<datasource id="SERVICE_EXECUTION_TIME">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_EXECUTION_TIME_MIN,SERVICE_EXECUTION_TIME_MAX,SERVICE_EXECUTION_TIME_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
-
-		<datasource id="SERVICE_LATENCY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_LATENCY_MIN,SERVICE_LATENCY_MAX,SERVICE_LATENCY_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
-
-		<datasource id="HOST_EXECUTION_TIME">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_EXECUTION_TIME_MIN,HOST_EXECUTION_TIME_MAX,HOST_EXECUTION_TIME_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
-
-		<datasource id="HOST_LATENCY">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_LATENCY_MIN,HOST_LATENCY_MAX,HOST_LATENCY_AVG</columns>
-			<function>
-				<name>round</name>
-				<param>3</param>
-			</function>
-		</datasource>
-
-		<datasource id="NUM_ACTIVE_HOST_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CHECK_TYPE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="NUM_ACTIVE_SERVICE_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CHECK_TYPE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="NUM_PASSIVE_HOST_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CHECK_TYPE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="NUM_PASSIVE_SERVICE_CHECKS">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CHECK_TYPE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-		</datasource>
 	</datasources>
 
     <!--
@@ -414,6 +348,74 @@
     		]]>
     	</sg_status>
 
+		<status_summary>
+			<![CDATA[
+				<?php
+					$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', array($filter), false, 'HOST_CURRENT_STATE');
+					$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', array($filter), false, 'SERVICE_CURRENT_STATE');
+
+					if (!$hosts || !$services) {
+						return;
+					}
+
+					$host_states = new IcingaHostStateInfo(null);
+					$service_states = new IcingaServiceStateInfo(null);
+				?>
+
+				<h4><?php echo $title ?></h4>
+
+				<table border="0" cellpadding="0" cellspacing="0">
+    				<tr>
+    					<td>
+							<div class="icinga-status-container">
+								<?php
+									foreach ($host_states->getStateList() as $sid=>	$sname) {
+										if (isset($hosts[$sid])) {
+											$host_states->setStateById($sid);
+											echo $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_STATE_COUNT']. ' %s');
+										}
+									}
+								?>
+							</div>
+						</td>
+
+						<td>
+							<div class="icinga-status-container">
+								<?php
+									foreach ($service_states->getStateList() as $sid=>	$sname) {
+										if (isset($services[$sid])) {
+											$service_states->setStateById($sid);
+											echo $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_STATE_COUNT']. ' %s');
+										}
+									}
+								?>
+							</div>
+						</td>
+					</tr>
+				</table>
+			]]>
+		</status_summary>
+
+		<hostgroups>
+			<![CDATA[
+				<?php echo $t->ds2template('HOSTGROUPS', 'status_summary', 'count', array(
+					'filter'	=> array('HOSTGROUP_NAME', '${arg.HOSTGROUP_NAME}'),
+					'title'		=> '${arg.HOSTGROUP_NAME}'
+
+				)); ?>
+
+			]]>
+		</hostgroups>
+
+		<servicegroups>
+			<![CDATA[
+				<?php echo $t->ds2template('SERVICEGROUPS', 'status_summary', 'count', array(
+					'filter'	=> array('SERVICEGROUP_NAME', '${arg.SERVICEGROUP_NAME}'),
+					'title'		=> '${arg.SERVICEGROUP_NAME}'
+				)); ?>
+			]]>
+		</servicegroups>
+
     	<locations>
     		<![CDATA[
 				<tr>
@@ -422,47 +424,6 @@
 				</tr>
 			]]>
     	</locations>
-
-		<performance>
-			<![CDATA[
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>Service Check Execution Time:</td>
-						<td>${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MIN} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_MAX} / ${SERVICE_EXECUTION_TIME:SERVICE_EXECUTION_TIME_AVG} sec</td>
-					</tr>
-					<tr>
-						<td>Service Check Latency:</td>
-						<td>${SERVICE_LATENCY:SERVICE_LATENCY_MIN} / ${SERVICE_LATENCY:SERVICE_LATENCY_MAX} / ${SERVICE_LATENCY:SERVICE_LATENCY_AVG} sec</td>
-					</tr>
-					<tr>
-						<td>Host Check Execution Time:</td>
-						<td>${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MIN} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_MAX} / ${HOST_EXECUTION_TIME:HOST_EXECUTION_TIME_AVG} sec</td>
-					</tr>
-					<tr>
-						<td>Host Check Latency:</td>
-						<td>
-							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MIN'); ?> /
-							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MAX'); ?> /
-							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_AVG'); ?>
-						</td>
-					</tr>
-					<tr>
-						<td># Active Host / Service Checks:</td>
-						<td>
-							<?php echo $t->dsCachedField('NUM_ACTIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
-							<?php echo $t->dsCachedField('NUM_ACTIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
-						</td>
-					</tr>
-					<tr>
-						<td># Passive Host / Service Checks:</td>
-						<td>
-							<?php echo $t->dsCachedField('NUM_PASSIVE_HOST_CHECKS', 'COUNT_HOST_OBJECT_ID'); ?> /
-							<?php echo $t->dsCachedField('NUM_PASSIVE_SERVICE_CHECKS', 'COUNT_SERVICE_OBJECT_ID'); ?>
-						</td>
-					</tr>
-				</table>
-			]]>
-		</performance>
 
     	<MAIN>
 	    	<![CDATA[
@@ -474,19 +435,13 @@
 					</tr>
 					<tr>
 						<td>
-								${hg_status:HOSTGROUP_NAME,company1}
-								${hg_status:HOSTGROUP_NAME,company2}
-								${hg_status:HOSTGROUP_NAME,web_servers}
+								<?php echo $t->renderTemplate('hostgroups'); ?>
 						</td>
 						<td>
-								${sg_status:SERVICEGROUP_NAME,local}
-								${sg_status:SERVICEGROUP_NAME,network}
-								${sg_status:SERVICEGROUP_NAME,database}
-								${sg_status:SERVICEGROUP_NAME,web}
-								${sg_status:SERVICEGROUP_NAME,mail}
+								<?php echo $t->renderTemplate('servicegroups'); ?>
 						</td>
 						<td>
-							<?php echo $t->render('performance'); ?>
+							<?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
 						</td>					
 					</tr>
 				</table>

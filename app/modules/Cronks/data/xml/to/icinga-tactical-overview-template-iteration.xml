@@ -41,7 +41,7 @@
 
 		<MAIN>
 		<![CDATA[
-			<?php echo $t->render(
+			<?php echo $t->renderTemplate(
 				'iteration_template',
 				array('ds_name' => 'hosts')
 			); ?>
