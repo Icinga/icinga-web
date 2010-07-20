@@ -454,6 +454,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/validators.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to	
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-template.xml
