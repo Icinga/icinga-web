@@ -85,12 +85,8 @@ Ext.onReady(function() {
 				height: 30,
 				border: false,
 				cls: 'icinga-link',
-				items: {
-			        autoEl: {
-			            tag: 'img',
-			            style: 'width: 25px; height: 25px; margin: 2px auto; display: block;',
-			            src: AppKit.c.path + '/images/icinga/idot-small.png'
-			        },
+				items: {		  
+		            style: 'background-image: url('+AppKit.c.path + '/images/icinga/idot-small.png);background-repeat:no-repeat;width: 27px;text-align:center; height: 30px; margin-left: 15px;margin-top:0px; display: block;',
 			        listeners: {
 			        	click: function() {
 			        		AppKit.notifyMessage('Picture', ' ... successfully clicked');

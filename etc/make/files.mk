@@ -454,17 +454,19 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/validators.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-hostgroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-history-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-host-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-log-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-log-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-notification-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-notification-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-servicegroup-summary-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-service-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-service-history-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-service-template.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template-cv.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template-hg.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/icinga-tactical-overview-template.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to	
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-log-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-log-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-notification-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-notification-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/lib/action
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/action/CronksBaseAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/lib/action/CronksBaseAction.class.php

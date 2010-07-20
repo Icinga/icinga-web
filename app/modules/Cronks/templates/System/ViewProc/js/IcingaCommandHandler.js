@@ -251,7 +251,7 @@ IcingaCommandHandler.prototype = {
 						text: _('Abort'),
 						iconCls: 'silk-cross',
 						handler: function(b, e) { oWin.close(); }
-					}],
+					}]
 				});
 				
 				// This fixes the webkit (safari, chrome) width issue ...

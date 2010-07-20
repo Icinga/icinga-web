@@ -124,7 +124,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 							notifyDrop: function(dd, e, data) {
 								var params = {
-									'p[parentid]': id,
+									'p[parentid]': id
 								};
 								
 								if (data.dragData.parameter) {
