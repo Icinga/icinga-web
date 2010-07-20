@@ -453,9 +453,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config.php $(DESTDIR)$(prefix)/app/modules/Cronks/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/validators.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/README $(DESTDIR)$(prefix)/app/modules/Cronks/data/README
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to	
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-template.xml
@@ -464,6 +464,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-template.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template.xml
@@ -8075,6 +8076,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7090
-INC_DIRS=982
+INC_FILES=7091
+INC_DIRS=984
 # INSTALL_FILES_END
