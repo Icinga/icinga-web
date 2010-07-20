@@ -15,145 +15,17 @@
 		data sources 
 	-->
 	<datasources>
-		<datasource id="CVDATA">
+		<datasource id="cv_name">
 			<source_type>IcingaApi</source_type>
 			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
-			<columns>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</columns>
-		</datasource>
-		
-		<datasource id="HOST_STATUS_UP_CV">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-			
-			<!-- 
-				* Maps variables against real columns
-				This is needed to query subvalues from other columns names
-			-->
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
-			
-			<!-- 
-				* Set match types for colums implicit
-				For template query values where you can't set this through the 
-				filter			
-			-->
-			<!-- <match_type>
-				<type name="SERVICE_CUSTOMVARIABLE_VALUE">IcingaApi::MATCH_LIKE</type>
-			</match_type> -->
-		</datasource>
-		
-		<datasource id="HOST_STATUS_DOWN_CV">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
+			<columns>CUSTOMVARIABLE_NAME</columns>
 		</datasource>
 
-		<datasource id="HOST_STATUS_UNREACHABLE_CV">
+		<datasource id="cv_val">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">HOST_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
+			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+			<columns>CUSTOMVARIABLE_VALUE</columns>
 		</datasource>
-
-		<datasource id="SERVICE_STATUS_OK_CV">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
-		</datasource>
-		
-		<datasource id="SERVICE_STATUS_WARNING_CV">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
-		</datasource>
-
-		<datasource id="SERVICE_STATUS_CRITICAL_CV">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>2</value>
-				</columns>
-			</filter>
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
-		</datasource>
-		
-		<datasource id="SERVICE_STATUS_UNKNOWN_CV">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>3</value>
-				</columns>
-			</filter>
-			<varmap>
-				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>
-				<map name="CUSTOMVARIABLE_VALUE">SERVICE_CUSTOMVARIABLE_VALUE</map>
-			</varmap>
-		</datasource>
-
 	</datasources>
 	
 	
@@ -162,121 +34,28 @@
     	html template
     -->
     <template_code>
-    	
-    	<cvstatus_hosts>
-    		<![CDATA[
-    			<div class="icinga-status-container">
-	    			<div class="icinga-status-label"><b>${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE} - Hosts</b></div>
-	    			
-	   				${if:${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID} > 0}
-	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UP" class="icinga-status icinga-status-up"><span>${HOST_STATUS_UP_CV:COUNT_HOST_OBJECT_ID} UP</span></div>
-	   				${/if}
-	   				
-	   				${if:${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID} > 0}
-	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-DOWN" class="icinga-status icinga-status-down"><span>${HOST_STATUS_DOWN_CV:COUNT_HOST_OBJECT_ID} DOWN</span></div>
-	   				${/if}
-	   				
-	   				${if:${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID} > 0}
-	   					<div id="toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNREACHABLE" class="icinga-status icinga-status-unreachable"><span>${HOST_STATUS_UNREACHABLE_CV:COUNT_HOST_OBJECT_ID} UNREACHABLE</span></div>
-	   				${/if}
-   				</div>
-   				<script type="text/javascript">
-	    			Ext.onReady(function() {
-	    				var l = Cronk.util.InterGridUtil.clickGridLink;
-	    				var i = 'toh-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-';
-	    				var s = { UP:0, DOWN:1, UNREACHABLE:2}
-	    				Ext.iterate(s, function(k, v) {
-		    				l(i+k, 'icinga-host-template', {
-		    					custom_variable_name: '${CVDATA:CUSTOMVARIABLE_NAME}',
-		    					custom_variable_value: '${CVDATA:CUSTOMVARIABLE_VALUE}',
-		    					host_status: v
-		    				}, '${CVDATA:CUSTOMVARIABLE_NAME}: ${CVDATA:CUSTOMVARIABLE_VALUE} ' + k);
-	    				});
-	    			});
-	    		</script>
-    		]]>
-    	</cvstatus_hosts>
-
-		<cvstatus_service>
+		<cv_aggregate>
 			<![CDATA[
-				<div class="icinga-status-container">
-    				<div class="icinga-status-label"><b>${CVDATA:CUSTOMVARIABLE_NAME} ${CVDATA:CUSTOMVARIABLE_VALUE} - Services</b></div>
-    				
-    				${if:${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-OK" class="icinga-status icinga-status-ok"><span>${SERVICE_STATUS_OK_CV:COUNT_SERVICE_OBJECT_ID} OK</span></div>
-    				${/if}
-    				
-    				${if:${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-    					<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-WARNING" class="icinga-status icinga-status-warning"><span>${SERVICE_STATUS_WARNING_CV:COUNT_SERVICE_OBJECT_ID} WARNING</span></div>
-    				${/if}
-    				
-   					${if:${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-CRITICAL" class="icinga-status icinga-status-critical"><span>${SERVICE_STATUS_CRITICAL_CV:COUNT_SERVICE_OBJECT_ID} CRITICAL</span></div>
-   					${/if}
-   					
-   					${if:${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID} > 0}
-   						<div id="tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-UNKNOWN" class="icinga-status icinga-status-unknown"><span>${SERVICE_STATUS_UNKNOWN_CV:COUNT_SERVICE_OBJECT_ID} UNKNOWN</span></div>
-   					${/if}
-    			</div>
-    			<script type="text/javascript">
-	    			Ext.onReady(function() {
-	    				var l = Cronk.util.InterGridUtil.clickGridLink;
-	    				var i = 'tos-${CVDATA:CUSTOMVARIABLE_NAME}-${CVDATA:CUSTOMVARIABLE_VALUE}-';
-	    				var s = { OK:0, WARNING:1, CRITICAL:2, UNKNOWN:3 }
-	    				Ext.iterate(s, function(k, v) {
-		    				l(i+k, 'icinga-service-template', {
-		    					custom_variable_name: '${CVDATA:CUSTOMVARIABLE_NAME}',
-		    					custom_variable_value: '${CVDATA:CUSTOMVARIABLE_VALUE}',
-		    					service_status: v
-		    				}, '${CVDATA:CUSTOMVARIABLE_NAME}: ${CVDATA:CUSTOMVARIABLE_VALUE} ' + k);
-	    				});
-	    				
-	    			});
-	    		</script>
+				<?php
+					$data = $t->ds2Array('cv_val', array(array(
+						'CUSTOMVARIABLE_NAME', $CUSTOMVARIABLE_NAME
+					)));
+
+					foreach ($data as $row) {
+						echo $t->renderSub('icinga-tactical-overview-groupstat', 'customvariable', array(
+							'CUSTOMVARIABLE_NAME' => $CUSTOMVARIABLE_NAME,
+							'CUSTOMVARIABLE_VALUE' => $row['CUSTOMVARIABLE_VALUE']
+						));
+					}
+				?>
 			]]>
-		</cvstatus_service>
+		</cv_aggregate>
 
     	<MAIN>
 	    	<![CDATA[
-				<table width="100%" border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td colspan="2"><b>Locations</b></td>
-					</tr>
-					<tr>
-						<td>
-							<table>
-								<tr>
-									<td>
-										${cvstatus_hosts:CUSTOMVARIABLE_NAME,RACK:CUSTOMVARIABLE_VALUE,1}
-									</td>
-									
-									<td>
-										${cvstatus_hosts:CUSTOMVARIABLE_NAME,RACK:CUSTOMVARIABLE_VALUE,2}
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										${cvstatus_hosts:CUSTOMVARIABLE_NAME,RZ:CUSTOMVARIABLE_VALUE,dc1}
-									</td>
-								</tr>
-							</table>
-						</td>
-						<td>
-							<table>
-								<tr>
-									<td>
-										${cvstatus_service:CUSTOMVARIABLE_NAME,TYPE:CUSTOMVARIABLE_VALUE,network}
-									</td>
-									
-									<td>
-										${cvstatus_service:CUSTOMVARIABLE_NAME,TYPE:CUSTOMVARIABLE_VALUE,hardware}
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-
-				</table>
+				<div style="padding: 5px 5px;">
+				<?php echo $t->ds2Template('cv_name', 'cv_aggregate', '__xcount')?>
+				</div>
 			]]>
 		</MAIN>
     </template_code>

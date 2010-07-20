@@ -29,11 +29,7 @@
 		<![CDATA[
 			<div>
 				<?php echo $count; ?>) <?php echo $HOST_NAME; ?><br />
-				<?php
-					$c = $t->link2Grid('test', 'icinga-host-template');
-
-					echo $c
-				?>
+				<?php echo $t->link2Grid('New grid('. $HOST_NAME. ')', 'icinga-host-template', 'Newgrid'); ?>
 			</div>
 		]]>
 		</iteration_part>
@@ -42,7 +38,7 @@
 		<![CDATA[
 			<h1>Iterate through datasource (<?php echo $ds_name; ?>)</h1>
 
-			<?php echo $t->ds2template($ds_name, 'iteration_part', 'count'); ?>
+			<?php echo $t->ds2Template($ds_name, 'iteration_part', 'count'); ?>
 		]]>
 		</iteration_template>
 

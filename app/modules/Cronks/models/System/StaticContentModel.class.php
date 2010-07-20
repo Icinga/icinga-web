@@ -14,6 +14,11 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
 	private $xmlData = array ();
 	private $templateFile = null;
+	
+	/**
+	 * @var Cronks_System_StaticContentTemplateModel
+	 */
+	private $templateObject = null;
 
 	public function  initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
@@ -138,16 +143,38 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 		return $this->xmlData['template_code'];
 	}
 
+	/**
+	 *
+	 * @param string $tplName
+	 * @param array $args
+	 * @return Cronks_System_StaticContentTemplateModel
+	 */
+	public function &getTemplateObj() {
+
+		if ($this->templateObject === null) {
+			$this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array (
+				'tid'			=> basename($this->templateFile),
+				'templates'		=> $this->getTemplates(),
+				'datasources'	=> $this->getDatasources()
+			));
+		}
+
+		return $this->templateObject;
+	}
+
+	public function renderTemplate($tplName, array $args=array()) {
+		return $this->getTemplateObj()->renderTemplate($tplName, $args);
+	}
+
+	public function getTemplateJavascript() {
+		return $this->getTemplateObj()->jsGetCode(false);
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public function parseTemplate($tplName, array $args=array()) {
-
-		$template = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array (
-			'tid'			=> basename($this->templateFile),
-			'template'		=> $tplName,
-			'templates'		=> $this->getTemplates(),
-			'datasources'	=> $this->getDatasources()
-		));
-
-		return $template->renderTemplate($tplName, $args);
+		return $this->renderTemplate($tplName, $args);
 	}
 
 }

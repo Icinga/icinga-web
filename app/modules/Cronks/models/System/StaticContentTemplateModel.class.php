@@ -9,7 +9,6 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 	private $tid					= null;
 	private $ts						= array ();
 	private $ds						= array ();
-	private $template				= null;
 	private $args					= array ();
 	private $js_code				= array ();
 
@@ -22,7 +21,6 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
 		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 
-		$this->template = $this->getParameter('template');
 		$this->ds = $this->getParameter('datasources', array ());
 		$this->ts = $this->getParameter('templates', array ());
 
@@ -47,7 +45,8 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 	}
 
 	private function getUid($prefix='touid-') {
-		return $prefix. sprintf('%03d', (++self::$idc));
+		$id = str_replace('.', '-', $this->tid. '-'. microtime(true). '-');
+		return $id. $prefix. sprintf('%03d', (++self::$idc));
 	}
 
 	private function evalPhp($code, array &$args=null) {
@@ -138,12 +137,22 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $array;
 	}
 
+	private function processDsFiltermap(array $dataSource, array $filter) {
+		if (isset($dataSource['filter_mapping']) && is_array($dataSource['filter_mapping'])) {
+			$map =& $dataSource['filter_mapping'];
+			if (array_key_exists($filter[0], $map)) {
+				$filter[0] = $map[ $filter[0] ];
+			}
+		}
+		
+		return $filter;
+	}
+
 	private function getDsArray($name, array $filters=array(), $index=false) {
 
 		if (array_key_exists($name, $this->ds)) {
 
 			$dataSource = $this->ds[$name];
-
 			if (!array_key_exists('target', $dataSource)) {
 				throw new Cronks_System_StaticContentTemplateException('Datasource \'%s\' needs attribute target!', $name);
 			}
@@ -173,6 +182,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 				if (count($filters)) {
 					foreach ($filters as $f) {
 						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+						$f = $this->processDsFiltermap($dataSource, $f);
 						$apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
 					}
 				}
@@ -184,13 +194,8 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 				IcingaPrincipalTargetTool::applyApiSecurityPrincipals($apiSearch);
 
 				$res = $apiSearch->fetch();
-
-				if ($name=='SERVICE_STATUS_SUMMARY') {
-//					var_dump($apiSearch);
-				}
-
+				
 				$d = $res->getAll();
-
 
 				if (is_array($d)) {
 					if ($res->getResultCount() > 0) {
@@ -245,8 +250,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		}
 
 		$args = $new_args + $args;
-		
-		return $tmpl->parseTemplate($name, $args);
+
+		$content = $tmpl->renderTemplate($name, $args);
+		$this->jsAddCode($tmpl->getTemplateJavascript());
+		return $content;
 	}
 
 	public function renderTemplate($name, array $args=array()) {
@@ -301,8 +308,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 			'template'	=> $template,
 			'gridTitle'		=> $title,
 			'filterObj'	=> $fc
-		), false);
-
+		));
 
 		$this->jsAddCode($code);
 
@@ -352,7 +358,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $data;
 	}
 
-	public function ds2template($name, $template, $count_name='count', array $args = array(), array $filter=array()) {
+	public function ds2Template($name, $template, $count_name='count', array $args = array(), array $filter=array()) {
 		$data = $this->getDsArray($name, $filter);
 		$content = '';
 

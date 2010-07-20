@@ -249,6 +249,7 @@
        	<parameter name="additional_filter_fields">
        		<parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
        		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
+			<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
        		<parameter name="custom_variable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="custom_variable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
        	</parameter>
