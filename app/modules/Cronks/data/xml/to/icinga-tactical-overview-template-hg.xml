@@ -40,148 +40,6 @@
 			<columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
 		</datasource>
 
-		<datasource id="HG_NAME">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOSTGROUP</target>
-			<columns>HOSTGROUP_ALIAS, HOSTGROUP_NAME</columns>
-		</datasource>
-
-		<datasource id="SG_NAME">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICEGROUP</target>
-			<columns>SERVICEGROUP_ALIAS, SERVICEGROUP_NAME</columns>
-		</datasource>
-
-		<datasource id="HOST_STATUS_UP">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="HOST_STATUS_DOWN">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="HOST_STATUS_UNREACHABLE">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>2</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_HOST_STATUS_UP">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_HOST_STATUS_DOWN">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_HOST_STATUS_UNREACHABLE">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>HOST_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CURRENT_STATE</column>
-					<value>2</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_STATUS_OK">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>0</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_STATUS_WARNING">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>1</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_STATUS_CRITICAL">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>2</value>
-				</columns>
-			</filter>
-		</datasource>
-
-		<datasource id="SERVICE_STATUS_UNKNOWN">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE</target>
-			<columns>SERVICE_OBJECT_ID</columns>
-			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CURRENT_STATE</column>
-					<value>3</value>
-				</columns>
-			</filter>
-		</datasource>
-
 	</datasources>
 
     <!--
@@ -351,8 +209,8 @@
 		<status_summary>
 			<![CDATA[
 				<?php
-					$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', array($filter), false, 'HOST_CURRENT_STATE');
-					$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', array($filter), false, 'SERVICE_CURRENT_STATE');
+					$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', array($apiFilter), false, 'HOST_CURRENT_STATE');
+					$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', array($apiFilter), false, 'SERVICE_CURRENT_STATE');
 
 					if (!$hosts || !$services) {
 						return;
@@ -372,7 +230,12 @@
 									foreach ($host_states->getStateList() as $sid=>	$sname) {
 										if (isset($hosts[$sid])) {
 											$host_states->setStateById($sid);
-											echo $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_STATE_COUNT']. ' %s');
+											$element = $host_states->getCurrentStateAsHtml($hosts[$sid]['HOST_STATE_COUNT']. ' %s');
+
+
+											$hf = $jsFilter;
+											$hf['host_status']=$sid;
+											echo $t->link2Grid($element, 'icinga-host-template', '${arg.title} - '. $sname, $hf);
 										}
 									}
 								?>
@@ -385,7 +248,11 @@
 									foreach ($service_states->getStateList() as $sid=>	$sname) {
 										if (isset($services[$sid])) {
 											$service_states->setStateById($sid);
-											echo $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_STATE_COUNT']. ' %s');
+											$element = $service_states->getCurrentStateAsHtml($services[$sid]['SERVICE_STATE_COUNT']. ' %s');
+
+											$sf = $jsFilter;
+											$sf['service_status']=$sid;
+											echo $t->link2Grid($element, 'icinga-service-template', '${arg.title} - '. $sname, $sf);
 										}
 									}
 								?>
@@ -399,7 +266,8 @@
 		<hostgroups>
 			<![CDATA[
 				<?php echo $t->ds2template('HOSTGROUPS', 'status_summary', 'count', array(
-					'filter'	=> array('HOSTGROUP_NAME', '${arg.HOSTGROUP_NAME}'),
+					'apiFilter'	=> array('HOSTGROUP_NAME', '${arg.HOSTGROUP_NAME}'),
+					'jsFilter'	=> array('hostgroup_name' => '${arg.HOSTGROUP_NAME}'),
 					'title'		=> '${arg.HOSTGROUP_NAME}'
 
 				)); ?>

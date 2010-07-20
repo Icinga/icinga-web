@@ -2,14 +2,20 @@
 
 class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
-	private $tid = null;
-	private $ts	= array ();
-	private $ds = array ();
-	private $template = null;
-	private $args = array ();
+	const TEMPLATE_MAIN				= 'MAIN';
+	const TEMPLATE_PRESET			= 'icinga-tactical-overview-presets';
+	const CSS_CLASS_LINK			= 'x-icinga-grid-link';
+
+	private $tid					= null;
+	private $ts						= array ();
+	private $ds						= array ();
+	private $template				= null;
+	private $args					= array ();
+	private $js_code				= array ();
 
 	private static $tcache			= array ();
 	private static $protected_vars	= array ('t', 'a');
+	private static $idc				= 0;
 
 	public function initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
@@ -40,12 +46,21 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		}
 	}
 
-	private function evalPhp($code) {
+	private function getUid($prefix='touid-') {
+		return $prefix. sprintf('%03d', (++self::$idc));
+	}
+
+	private function evalPhp($code, array &$args=null) {
+		
+		if ($args==null) {
+			$args =& $this->args;
+		}
+
 		$t =& $this;
-		$a =& $this->args;
+		$a =& $args;
 
 		// Expand the arguments
-		foreach ($this->args as $k=>$v) {
+		foreach ($args as $k=>$v) {
 			${$k} = $v;
 		}
 
@@ -64,8 +79,12 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return true;
 	}
 
-	private function substituteArguments(array &$args) {
+	private function substituteArguments(array &$args, array &$target=null) {
 		static $tp = null;
+
+		if ($target == null) {
+			$target =& $this->args;
+		}
 
 		if ($tp===null) {
 			$tp = new AppKitFormatParserUtil();
@@ -77,7 +96,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
 		foreach ($args as $key=>$val) {
 			if (is_array($val)) {
-				$this->substituteArguments($args[$key]);
+				$this->substituteArguments($args[$key], $target);
+			}
+			elseif (is_object($val)) {
+				continue;
 			}
 			else {
 				 $args[$key] = $tp->parseData($val);
@@ -207,23 +229,103 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		throw new Cronks_System_StaticContentTemplateException('Template %s does not exist', $name);
 	}
 
-	public function renderTemplate($name, array $args=array()) {
-		$this->appendArguments($args);
-		$this->substituteArguments($this->args);
-		ob_start();
-		$re = $this->evalPhp($this->templateCode($name));
-		$content = ob_get_contents();
-		ob_end_clean();
-		return $content;
-	}
-
 	public function renderSub($file, $name='MAIN', array $args=array()) {
 		if (!($tmpl = $this->getCache($file, 'template'))) {
 			$tmpl = $this->getContext()->getModel('System.StaticContent', 'Cronks');
 			$tmpl->setTemplateFile($file);
 			$this->setCache($file, $tmpl, 'template');
 		}
+
+		$new_args = $this->args;
+
+		foreach ($args as $k=>$v) {
+			if (array_key_exists($k, $new_args)) {
+				unset($new_args[$k]);
+			}
+		}
+
+		$args = $new_args + $args;
+		
 		return $tmpl->parseTemplate($name, $args);
+	}
+
+	public function renderTemplate($name, array $args=array()) {
+
+		$this->appendArguments($args);
+		$this->substituteArguments($this->args);
+		
+		ob_start();
+		$re = $this->evalPhp($this->templateCode($name));
+		$content = ob_get_contents();
+		ob_end_clean();
+
+		if ($name === self::TEMPLATE_MAIN) {
+			$content .= $this->jsGetCode();
+		}
+		return $content;
+	}
+
+	public function linkWrap($content, $uid) {
+		return (string)  AppKitXmlTag::create('div', $content)
+		->addAttribute('id', $uid);
+	}
+
+	public function linkFunctionWrapper($js_code, $uid) {
+		$code = $this->renderSub(self::TEMPLATE_PRESET, 'js_clickwrap', array (
+			'uid'		=> $uid,
+			'js_code'	=> $js_code
+		));
+
+		$this->jsAddCode($code);
+
+		return $code;
+	}
+
+	public function link2Grid($content, $template, $title, array $filter=array()) {
+		$uid = $this->getUid();
+
+		if (count($filter)==2 && isset($filter[0]) && isset($filter[1])) {
+			$filter = array (
+				$filter[0] => $filter[1]
+			);
+		}
+
+		$fc = new stdClass();
+
+		foreach ($filter as $k=>$v) {
+			$fc->{ $k } = $v;
+		}
+
+		$code = $this->renderSub(self::TEMPLATE_PRESET, 'js_link2grid', array (
+			'uid'		=> $uid,
+			'template'	=> $template,
+			'gridTitle'		=> $title,
+			'filterObj'	=> $fc
+		), false);
+
+
+		$this->jsAddCode($code);
+
+		return $this->linkWrap($content, $uid);
+	}
+
+	public function jsAddCode($code) {
+		$id = count($this->js_code);
+		$this->js_code[] = $code;
+		return $id;
+	}
+
+	public function jsGetCode($with_tags = true) {
+		if (count($this->js_code)) {
+			$content = "\n". implode("\n\n", $this->js_code). "\n";
+
+			if ($with_tags == true) {
+				$content = "\n". (string)AppKitXmlTag::create('script', $content)
+				->addAttribute('type', 'text/javascript'). "\n";
+			}
+
+			return $content;
+		}
 	}
 
 	public function dsCachedField($name, $field) {

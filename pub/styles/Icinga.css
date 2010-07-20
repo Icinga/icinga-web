@@ -197,7 +197,7 @@ div#growl-msg-stack {
 
 /** Icinga status classes **/
 
-div.icinga-link {
+.icinga-link {
 	cursor: pointer;
 }
 

@@ -113,6 +113,25 @@
     	html template
     -->
     <template_code>
+
+		<js_link2grid>
+			<![CDATA[
+				Cronk.util.InterGridUtil.clickGridLink(
+					'<?php echo $uid; ?>',
+					'<?php echo $template; ?>',
+					<?php echo json_encode($filterObj); ?>,
+					'<?php echo $gridTitle; ?>'
+				);
+			]]>
+		</js_link2grid>
+
+		<js_clickwrap>
+			<![CDATA[
+				Ext.get('<?php echo $uid; ?>').on('click', function() {
+					<?php echo $js_code; ?>
+				});
+			]]>
+		</js_clickwrap>
 		
 		<performance>
 			<![CDATA[

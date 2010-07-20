@@ -27,7 +27,14 @@
 
 		<iteration_part>
 		<![CDATA[
-			<div><?php echo $count; ?>) <?php echo $HOST_NAME; ?></div>
+			<div>
+				<?php echo $count; ?>) <?php echo $HOST_NAME; ?><br />
+				<?php
+					$c = $t->link2Grid('test', 'icinga-host-template');
+
+					echo $c
+				?>
+			</div>
 		]]>
 		</iteration_part>
 
