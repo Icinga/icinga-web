@@ -153,7 +153,6 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
 		if ($this->templateObject === null) {
 			$this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array (
-				'tid'			=> basename($this->templateFile),
 				'templates'		=> $this->getTemplates(),
 				'datasources'	=> $this->getDatasources()
 			));

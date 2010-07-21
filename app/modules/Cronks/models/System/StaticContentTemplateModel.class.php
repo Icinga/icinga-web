@@ -2,6 +2,7 @@
 
 class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
+	const CACHE_DEFAULT				= 'data';
 	const TEMPLATE_MAIN				= 'MAIN';
 	const TEMPLATE_PRESET			= 'icinga-tactical-overview-presets';
 	const CSS_CLASS_LINK			= 'x-icinga-grid-link';
@@ -24,10 +25,14 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		$this->ds = $this->getParameter('datasources', array ());
 		$this->ts = $this->getParameter('templates', array ());
 
-		$this->tid = $this->getParameter('tid', microtime(true));
+		$this->tid = $this->getOid();
 	}
 
-	private function setCache($name, &$value, $type='data') {
+	private function hasCacheEntry($name, $type=self::CACHE_DEFAULT) {
+		return isset(self::$tcache[$this->tid][$type][$name]);
+	}
+
+	private function setCache($name, &$value, $type=self::CACHE_DEFAULT) {
 		if (!isset(self::$tcache[$this->tid])) {
 			self::$tcache[$this->tid] = array ();
 			self::$tcache[$this->tid][$type] = array ();
@@ -38,7 +43,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $value;
 	}
 
-	private function getCache($name, $type='data') {
+	private function getCache($name, $type=self::CACHE_DEFAULT) {
 		if (isset(self::$tcache[$this->tid][$type][$name])) {
 			return self::$tcache[$this->tid][$type][$name];
 		}
@@ -222,6 +227,14 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 	// INTERFACE METHODS
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+	public function getOid() {
+		static $oid=null;
+		if ($oid===null) {
+			$oid = spl_object_hash($this);
+		}
+		return $oid;
+	}
+
 	public function templateExists($name) {
 		return array_key_exists($name, $this->ts);
 	}
@@ -251,8 +264,11 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
 		$args = $new_args + $args;
 
-		$content = $tmpl->renderTemplate($name, $args);
-		$this->jsAddCode($tmpl->getTemplateJavascript());
+		$to = $tmpl->getTemplateObj();
+
+		$content = $to->renderTemplate($name, $args);
+
+		$this->jsAddCode($to->jsGetCode(false, true));
 		return $content;
 	}
 
@@ -288,6 +304,27 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $code;
 	}
 
+	public function link2To($content, $template, $title, array $filter=array()) {
+		$uid = $this->getUid();
+
+		$fc = new stdClass();
+
+		foreach ($filter as $k=>$v) {
+			$fc->{ $k } = $v;
+		}
+
+		$code = $this->renderSub(self::TEMPLATE_PRESET, 'js_link2to', array (
+			'uid'		=> $uid,
+			'template'	=> $template,
+			'toTitle'	=> $title,
+			'filterObj'	=> $fc
+		));
+
+		$this->jsAddCode($code);
+
+		return $this->linkWrap($content, $uid);
+	}
+
 	public function link2Grid($content, $template, $title, array $filter=array()) {
 		$uid = $this->getUid();
 
@@ -321,7 +358,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $id;
 	}
 
-	public function jsGetCode($with_tags = true) {
+	public function jsGetCode($with_tags = true, $flush=false) {
 		if (count($this->js_code)) {
 			$content = "\n". implode("\n\n", $this->js_code). "\n";
 
@@ -330,8 +367,16 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 				->addAttribute('type', 'text/javascript'). "\n";
 			}
 
+			if ($flush) {
+				$this->jsFlushData();
+			}
+
 			return $content;
 		}
+	}
+
+	public function jsFlushData() {
+		$this->js_code = array ();
 	}
 
 	public function dsCachedField($name, $field) {

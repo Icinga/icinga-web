@@ -39,6 +39,10 @@
 						</td>
 						<td>
 							<?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
+							<br /><br />
+							<?php
+								echo $t->link2to('Please click here to open a customvariable based view', 'icinga-tactical-overview-template-cv', 'TO Customvariable');
+							?>
 						</td>					
 					</tr>
 				</table>

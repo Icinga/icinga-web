@@ -114,6 +114,17 @@
     -->
     <template_code>
 
+		<js_link2to>
+			<![CDATA[
+				Cronk.util.InterGridUtil.clickTOLink(
+					'<?php echo $uid; ?>',
+					'<?php echo $template; ?>',
+					<?php echo json_encode($filterObj); ?>,
+					'<?php echo $toTitle; ?>'
+				);
+			]]>
+		</js_link2to>
+
 		<js_link2grid>
 			<![CDATA[
 				Cronk.util.InterGridUtil.clickGridLink(

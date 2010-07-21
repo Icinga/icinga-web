@@ -262,6 +262,18 @@
 			</ae:parameter>
 		</ae:parameter>
 
+		<ae:parameter name="icingaToProc">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.StaticContent</ae:parameter>
+			<ae:parameter name="hide">false</ae:parameter>
+			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+			<ae:parameter name="name">Generic TO processor</ae:parameter>
+			<ae:parameter name="categories">core</ae:parameter>
+
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="interface">true</ae:parameter>
+			</ae:parameter>
+		</ae:parameter>
 
 		<ae:parameter name="gridProc">
 			<ae:parameter name="module">Cronks</ae:parameter>

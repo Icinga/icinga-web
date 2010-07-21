@@ -167,7 +167,7 @@ Cronk.util.InterGridUtil = function(){
 			tabs.setActiveTab(panel);
 			
 			tabs.doLayout();
-			Ext.getCmp('view-container').doLayout();
+			return panel;
 		},
 		
 		clickGridLink : function(id, template, f, t) {
@@ -177,7 +177,7 @@ Cronk.util.InterGridUtil = function(){
 				el.on('click', (function() {
 					var cronk = {
 						parentid: 'click-grid-link-' + id, 
-						title: (t || 'SUBGRID'),
+						title: (t || _('untitled')),
 						crname: "gridProc",
 						closable: true,
 						params: {template: template}
@@ -193,6 +193,56 @@ Cronk.util.InterGridUtil = function(){
 					
 				}).createDelegate(this));
 			}
+		},
+
+		clickTOLink : function(id, template, f, t) {
+			var el = Ext.get(id);
+			if (el && id) {
+
+				el.addClass('icinga-link');
+				el.on('click', (function() {
+
+					var p = {
+						template: template
+					};
+
+					f = Ext.apply({}, f);
+
+					Ext.iterate(f, function(k,v) {
+						p['f[' + k + '-value]'] = v;
+						p['f[' + k + '-operator]'] = 50;
+					});
+					
+					var cronk = {
+						parentid: 'click-to-link-' + id,
+						title: (t || _('untitled')),
+						crname: 'icingaToProc',
+						closable: true,
+						params: p
+					};
+
+					Cronk.util.InterGridUtil.tabCronkElement(cronk);
+
+				}).createDelegate(this));
+
+			}
+			
+		},
+
+		tabCronkElement : function(config) {
+			var tabs = Ext.getCmp('cronk-tabs');
+			var id = config.parentid || null;
+			var panel = Ext.getCmp(id);
+
+			if (!panel) {
+				panel = Cronk.factory(config);
+				tabs.add(panel);
+			}
+
+			panel.setTitle(config.title);
+			tabs.setActiveTab(panel);
+			tabs.doLayout();
+			return panel;
 		}
 	};	
 	

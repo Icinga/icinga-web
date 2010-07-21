@@ -465,6 +465,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-template.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml
@@ -733,7 +734,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineToSqlTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineToSqlTask.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk.orig $(DESTDIR)$(prefix)/etc/make/files.mk.orig
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema

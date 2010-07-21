@@ -199,6 +199,7 @@ div#growl-msg-stack {
 
 .icinga-link {
 	cursor: pointer;
+/*	text-decoration: underline;*/
 }
 
 div.icinga-status-container {
