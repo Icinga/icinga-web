@@ -162,7 +162,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 	}
 
 	public function renderTemplate($tplName, array $args=array()) {
-		return $this->getTemplateObj()->renderTemplate($tplName, $args);
+		return $this->getTemplateObj()->renderTemplate($tplName, $args, false, true);
 	}
 
 	public function getTemplateJavascript() {

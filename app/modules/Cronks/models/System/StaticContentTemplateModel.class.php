@@ -67,7 +67,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		foreach ($args as $k=>$v) {
 			${$k} = $v;
 		}
-
+		
 		return eval('?> ' . $code . ' <?');
 	}
 
@@ -272,19 +272,30 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $content;
 	}
 
-	public function renderTemplate($name, array $args=array()) {
+	public function renderTemplate($name, array $args=array(), $only_local_args=false, $is_root=false) {
 
-		$this->appendArguments($args);
-		$this->substituteArguments($this->args);
+		if ($only_local_args == false) {
+			$this->appendArguments($args);
+			$this->substituteArguments($this->args);
+			$args = $this->args;
+		}
+		elseif (is_array($only_local_args)) {
+			$args = (array)array_intersect_assoc($this->args, array_flip($only_local_args)) + $args;
+		}
+
+		if ($only_local_args !== false) {
+			$this->substituteArguments($args, $args);
+		}
 		
 		ob_start();
-		$re = $this->evalPhp($this->templateCode($name));
+		$re = $this->evalPhp($this->templateCode($name), $args);
 		$content = ob_get_contents();
 		ob_end_clean();
 
-		if ($name === self::TEMPLATE_MAIN) {
+		if ($name === self::TEMPLATE_MAIN || $is_root==true) {
 			$content .= $this->jsGetCode();
 		}
+		
 		return $content;
 	}
 
@@ -302,6 +313,22 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		$this->jsAddCode($code);
 
 		return $code;
+	}
+
+	public function jsChart(array $data, $type, array $config) {
+		$uid = $this->getUid();
+
+		$code = $this->renderSub(self::TEMPLATE_PRESET, 'js_simplechart', array (
+			'data'		=> $data,
+			'uid'		=> $uid,
+			'config'	=> $config,
+			'type'		=> $type
+		));
+
+		$this->jsAddCode($code);
+
+		return (string)AppKitXmlTag::create('div')
+		->addAttribute('id', $uid);
 	}
 
 	public function link2To($content, $template, $title, array $filter=array()) {
@@ -403,14 +430,14 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $data;
 	}
 
-	public function ds2Template($name, $template, $count_name='count', array $args = array(), array $filter=array()) {
+	public function ds2Template($name, $template, $count_name='count', array $args = array(), array $filter=array(), $only_local_args=false) {
 		$data = $this->getDsArray($name, $filter);
 		$content = '';
 
 		foreach ($data as $c=>$row) {
 			$args = $row + $args;
 			$args[$count_name] = ($c+1);
-			$content .= $this->renderTemplate($template, $args);
+			$content .= $this->renderTemplate($template, $args, $only_local_args);
 		}
 
 		return $content;

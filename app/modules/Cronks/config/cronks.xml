@@ -337,6 +337,23 @@
 			</ae:parameter>
 		</ae:parameter>
 
+		<ae:parameter name="icingaTacticalOverviewChartSumAll">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.StaticContent</ae:parameter>
+			<ae:parameter name="hide">false</ae:parameter>
+			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+			<ae:parameter name="name">TO Charts</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
+
+			<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="template">icinga-tactical-overview-template-charts</ae:parameter>
+				<ae:parameter name="render">sum_all</ae:parameter>
+				<ae:parameter name="interface">true</ae:parameter>
+			</ae:parameter>
+		</ae:parameter>
+
 		<ae:parameter name="icingaTacticalOverviewTestIter">
 			<ae:parameter name="module">Cronks</ae:parameter>
 			<ae:parameter name="action">System.StaticContent</ae:parameter>

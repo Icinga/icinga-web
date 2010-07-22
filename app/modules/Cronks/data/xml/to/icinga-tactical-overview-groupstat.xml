@@ -85,7 +85,7 @@
 
 											$hf = $jsFilter;
 											$hf['host_status']=$sid;
-											echo $t->link2Grid($element, 'icinga-host-template', '${arg.title} - '. $sname, $hf);
+											echo $t->link2Grid($element, 'icinga-host-template', $title. ' - '. $sname, $hf);
 										}
 									}
 								?>
@@ -105,7 +105,7 @@
 
 											$sf = $jsFilter;
 											$sf['service_status']=$sid;
-											echo $t->link2Grid($element, 'icinga-service-template', '${arg.title} - '. $sname, $sf);
+											echo $t->link2Grid($element, 'icinga-service-template', $title. ' - '. $sname, $sf);
 										}
 									}
 								?>
@@ -124,8 +124,7 @@
 					'apiFilter'	=> array(array('HOSTGROUP_NAME', '${arg.HOSTGROUP_NAME}')),
 					'jsFilter'	=> array('hostgroup_name' => '${arg.HOSTGROUP_NAME}'),
 					'title'		=> '${arg.HOSTGROUP_NAME}'
-
-				)); ?>
+				), array(), false); ?>
 			]]>
 		</hostgroups>
 
@@ -135,7 +134,7 @@
 					'apiFilter'	=> array(array('SERVICEGROUP_NAME', '${arg.SERVICEGROUP_NAME}')),
 					'jsFilter'	=> array('servicegroup_name' => '${arg.SERVICEGROUP_NAME}'),
 					'title'		=> '${arg.SERVICEGROUP_NAME}'
-				)); ?>
+				), array(), false); ?>
 			]]>
 		</servicegroups>
 
@@ -147,9 +146,14 @@
 							array('CUSTOMVARIABLE_NAME', $CUSTOMVARIABLE_NAME),
 							array('CUSTOMVARIABLE_VALUE', $CUSTOMVARIABLE_VALUE)
 						),
-						'jsFilter'	=> array('customvariable_name' => $CUSTOMVARIABLE_NAME),
+
+						'jsFilter'	=> array(
+							'customvariable_name' => $CUSTOMVARIABLE_NAME,
+							'customvariable_value' => $CUSTOMVARIABLE_VALUE
+						),
+
 						'title'		=> $CUSTOMVARIABLE_NAME. ': '.   $CUSTOMVARIABLE_VALUE
-					));
+					), true);
 				?>
 			]]>
 		</customvariable>

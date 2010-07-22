@@ -26,6 +26,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			var me = AppKit;
 			
 			Ext.BLANK_IMAGE_URL = me.c.path + '/images/ajax/s.gif';
+			Ext.chart.Chart.CHART_URL = me.c.path + '/js/ext3/resources/charts.swf';
 			
 			Ext.QuickTips.init();			
 			growlStack();

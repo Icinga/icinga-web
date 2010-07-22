@@ -23,7 +23,15 @@
 						<error>Validation of interface failed!</error>
 					</errors>
 			</validator>
-			
+
+			<validator class="string" name="render" required="false">
+					<argument>render</argument>
+					
+					<errors>
+						<error>Validation of render failed!</error>
+					</errors>
+			</validator>
+
 			<validator class="string" name="cmpid" required="false">
 				<argument>cmpid</argument>
 

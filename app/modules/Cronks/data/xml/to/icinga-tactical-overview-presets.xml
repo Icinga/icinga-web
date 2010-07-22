@@ -114,6 +114,44 @@
     -->
     <template_code>
 
+		<js_simplechart>
+			<![CDATA[
+				Ext.onReady(function() {
+					var store = new Ext.data.JsonStore({
+						fields: <?php echo json_encode(array_keys($data[0])); ?>,
+						data: <?php echo json_encode($data); ?>
+
+					});
+
+					var cc = {
+						width: <?php echo $config['width']; ?>,
+						height: <?php echo $config['height']; ?>,
+						renderTo: '<?php echo $uid; ?>',
+						items: {
+							xtype: '<?php echo $type; ?>',
+							store: store,
+							extraStyle: {
+								legend:
+								{
+									display: 'bottom',
+									padding: 5,
+									font:
+									{
+										family: 'Tahoma',
+										size: 11
+									}
+								}
+							}
+						}
+					};
+
+					Ext.apply(cc.items, <?php echo json_encode($config); ?>);
+
+					new Ext.Panel(cc);
+				});
+			]]>
+		</js_simplechart>
+
 		<js_link2to>
 			<![CDATA[
 				Cronk.util.InterGridUtil.clickTOLink(

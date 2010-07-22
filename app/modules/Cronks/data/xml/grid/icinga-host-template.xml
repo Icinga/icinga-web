@@ -252,6 +252,10 @@
 			<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
        		<parameter name="custom_variable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="custom_variable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
+
+			<!-- Some mapping for stupid filters -->
+			<parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
+			<parameter name="customvariable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
        	</parameter>
     </datasource>
     

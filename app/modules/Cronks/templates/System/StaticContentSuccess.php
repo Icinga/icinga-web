@@ -1,4 +1,7 @@
-<?php $template = $rd->getParameter('template'); ?>
+<?php
+	$template = $rd->getParameter('template');
+	$render = $rd->getParameter('render', 'MAIN');
+?>
 <script type="text/javascript">
 Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
 		var CE = this;
@@ -7,7 +10,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			var pub = {};
 			var panel = null;
 			var pc = null;
-			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template)); ?>" 
+			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template, 'render' => $render)); ?>"
 			
 			Ext.apply(pub, {
 				
