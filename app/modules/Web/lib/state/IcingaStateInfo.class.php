@@ -22,6 +22,14 @@ abstract class IcingaStateInfo {
 	protected $state_list = array (
 	
 	);
+
+	/**
+	 * Colors for states
+	 * @var array
+	 */
+	protected $colors = array (
+		
+	);
 	
 	/**
 	 * Generic constructor to create this object
@@ -92,7 +100,7 @@ abstract class IcingaStateInfo {
 	 * @param integer $state
 	 * @return string
 	 */
-	protected function getStateText($state) {
+	public function getStateText($state) {
 		if (array_key_exists($state, $this->state_list)) {
 			
 			return $this->state_list[$state];
@@ -102,6 +110,20 @@ abstract class IcingaStateInfo {
 
 	public function getStateList() {
 		return $this->state_list;
+	}
+
+	public function getStateColors() {
+		return $this->colors;
+	}
+
+	public function getColorByState($state, $with_hash=true) {
+		if (array_key_exists($state, $this->colors)) {
+			$out = $this->colors[$state];
+			if ($with_hash==true) {
+				$out = '#'. $out;
+			}
+			return $out;
+		}
 	}
 	
 }

@@ -14,6 +14,13 @@ class IcingaServiceStateInfo extends IcingaStateInfo {
 		IcingaConstants::STATE_CRITICAL	=> 'CRITICAL',
 		IcingaConstants::STATE_UNKNOWN	=> 'UNKNOWN',
 	);
+
+	protected $colors = array (
+		IcingaConstants::STATE_OK		=> '00cc00',
+		IcingaConstants::STATE_WARNING	=> 'ffff00',
+		IcingaConstants::STATE_CRITICAL	=> 'ff0000',
+		IcingaConstants::STATE_UNKNOWN	=> 'ff8000',
+	);
 	
 	/**
 	 * Shortcut to create an object instance on the fly
