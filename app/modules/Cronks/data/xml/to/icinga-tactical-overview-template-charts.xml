@@ -49,12 +49,20 @@
 					$hosts = $t->ds2Array('HOST_STATUS_SUMMARY');
 					$services = $t->ds2Array('SERVICE_STATUS_SUMMARY');
 
+					$host_color = array();
+					$service_color = array();
+
+					$hs = IcingaHostStateInfo::Create();
+					$ss = IcingaServiceStateInfo::Create();
+
 					foreach ($hosts as $rid=>$r) {
-						$hosts[$rid]['HOST_CURRENT_STATE'] = IcingaHostStateInfo::Create($r['HOST_CURRENT_STATE'])->getCurrentStateAsText();
+						$hosts[$rid]['HOST_CURRENT_STATE'] = $hs->getStateText($r['HOST_CURRENT_STATE']);
+						$host_color[] = $hs->getColorByState($r['HOST_CURRENT_STATE'], true);
 					}
 
 					foreach ($services as $rid=>$r) {
-						$services[$rid]['SERVICE_CURRENT_STATE'] = IcingaServiceStateInfo::Create($r['SERVICE_CURRENT_STATE'])->getCurrentStateAsText();
+						$services[$rid]['SERVICE_CURRENT_STATE'] = $ss->getStateText($r['SERVICE_CURRENT_STATE']);
+						$service_color[] = $ss->getColorByState($r['SERVICE_CURRENT_STATE'], true);
 					}
 
 				?>
@@ -74,9 +82,7 @@
 									'width' =>  250,
 									'height' =>  250,
 
-									'seriesStyles' => array('colors' => array (
-										'#00cc00', '#cc0000', '#ff8000'
-									)),
+									'seriesStyles' => array('colors' => $host_color),
 
 									'extraStyle' => array ('legend' => array (
 										'display' => 'none',
@@ -102,9 +108,7 @@
 									'width' =>  250,
 									'height' =>  250,
 
-									'seriesStyles' => array('colors' => array (
-										'#00cc00', '#ffff00', '#ff0000', '#ff8000'
-									)),
+									'seriesStyles' => array('colors' => $service_color),
 
 									'extraStyle' => array ('legend' => array (
 										'display' => 'none',

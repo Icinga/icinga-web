@@ -13,7 +13,15 @@ class IcingaHostStateInfo extends IcingaStateInfo {
 		IcingaConstants::HOST_DOWN			=> 'DOWN',
 		IcingaConstants::HOST_UNREACHABLE	=> 'UNREACHABLE'
 	);
-	
+
+	protected $colors = array (
+		IcingaConstants::HOST_UP			=> '00cc00',
+		IcingaConstants::HOST_DOWN			=> 'cc0000',
+		IcingaConstants::HOST_UNREACHABLE	=> 'ff8000'
+	);
+
+
+
 	/**
 	 * Shortcut to create an object instance on the fly
 	 * 
