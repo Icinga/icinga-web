@@ -62,14 +62,14 @@ div#icinga-portal-loading-mask {
 }
 
 div#icinga-portal-loading {
-    position:absolute;
-    left:45%;
-    top:40%;
-    padding:2px;
-    z-index:90001;
-    height:32px;
-    width: 32px;
-    background: transparent url("../images/ajax/wait.gif") center center;
+    position: absolute;
+    left: 45%;
+    top: 40%;
+    padding: 2px;
+    z-index: 90001;
+    height: 31px;
+    width: 31px;
+    background: transparent url("../images/ajax/icinga-throbber.gif") center center;
 }
 
 /** CRONKS **/
