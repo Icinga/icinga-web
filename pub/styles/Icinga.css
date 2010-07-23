@@ -202,6 +202,12 @@ div#growl-msg-stack {
 /*	text-decoration: underline;*/
 }
 
+div.icinga-box-container {
+	border: 1px #a0a0a0 solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
 div.icinga-status-container {
 	border: 1px #a0a0a0 solid;
 	width: 180px;

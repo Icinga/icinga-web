@@ -131,12 +131,10 @@
 							xtype: '<?php echo $type; ?>',
 							store: store,
 							extraStyle: {
-								legend:
-								{
+								legend: {
 									display: 'bottom',
 									padding: 5,
-									font:
-									{
+									font: {
 										family: 'Tahoma',
 										size: 11
 									}
@@ -146,8 +144,9 @@
 					};
 
 					Ext.apply(cc.items, <?php echo json_encode($config); ?>);
-
+					
 					new Ext.Panel(cc);
+
 				});
 			]]>
 		</js_simplechart>
@@ -184,6 +183,8 @@
 		
 		<performance>
 			<![CDATA[
+				<h4>Performance</h4>
+				<div class="icinga-box-container">
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>Service Check Execution Time:</td>
@@ -232,6 +233,7 @@
 						</td>
 					</tr>
 				</table>
+				</div>
 			]]>
 		</performance>
 

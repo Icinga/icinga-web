@@ -26,9 +26,9 @@
 	    	<![CDATA[
 				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td><b>Hostgroups</b></td>
-						<td><b>Servicegroups</b></td>
-						<td><b>Monitoring Performance</b></td>
+						<td><strong>Hostgroups</strong></td>
+						<td><strong>Servicegroups</strong></td>
+						<td><strong>Misc</strong></td>
 					</tr>
 					<tr>
 						<td>
@@ -46,7 +46,7 @@
 
 							<br />
 							<?php
-								echo $t->link2to('Please click here to open some charts', 'icinga-tactical-overview-template-charts', 'TO Customvariable');
+								echo $t->link2to('Please click here to open some charts', 'icinga-tactical-overview-template-charts', 'TO Charts');
 							?>
 						</td>					
 					</tr>

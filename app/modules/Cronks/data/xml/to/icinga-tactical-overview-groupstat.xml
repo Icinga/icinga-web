@@ -57,24 +57,41 @@
 		<status_summary>
 			<![CDATA[
 				<?php
-					$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', $apiFilter, false, 'HOST_CURRENT_STATE');
-					$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', $apiFilter, false, 'SERVICE_CURRENT_STATE');
+					if (!isset($type)) $type=3;
+
+					if ($type & 1) {
+						$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', $apiFilter, false, 'HOST_CURRENT_STATE');
+						$host_states = new IcingaHostStateInfo(null);
+					}
+					else {
+						$hosts = false;
+					}
+
+					if ($type & 2) {
+						$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', $apiFilter, false, 'SERVICE_CURRENT_STATE');
+						$service_states = new IcingaServiceStateInfo(null);
+					}
+					else {
+						$services = false;
+					}
 
 					if (!$hosts && !$services) {
 						return;
 					}
-
-					$host_states = new IcingaHostStateInfo(null);
-					$service_states = new IcingaServiceStateInfo(null);
 				?>
 
+				<?php if (isset($noheader) == false || (isset($noheader) && $noheader==false)) { ?>
 				<h4><?php echo $title ?></h4>
+				<?php } ?>
 
 				<table border="0" cellpadding="0" cellspacing="0">
     				<tr>
 						<?php if ($hosts) { ?>
     					<td>
+							<?php if ($type !== 1) { ?>
 							Hosts
+							<?php } ?>
+							
 							<div class="icinga-status-container">
 								<?php
 									foreach ($host_states->getStateList() as $sid=>$sname) {
@@ -95,7 +112,10 @@
 
 						<?php if ($services) { ?>
 						<td>
+							<?php if ($type !== 2) { ?>
 							Services
+							<?php } ?>
+							
 							<div class="icinga-status-container">
 								<?php
 									foreach ($service_states->getStateList() as $sid=>$sname) {
@@ -117,6 +137,20 @@
 				</table>
 			]]>
 		</status_summary>
+
+		<sum_all>
+			<![CDATA[
+				<?php
+					echo $t->renderTemplate('status_summary', array (
+						'apiFilter'	=> array(),
+						'jsFilter'	=> array(),
+
+						'title'		=> 'Overall Status'
+
+					), array('noheader', 'type'));
+				?>
+			]]>
+		</sum_all>
 
 		<hostgroups>
 			<![CDATA[

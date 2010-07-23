@@ -39,8 +39,13 @@
 						<!-- Activate first! -->
 						<ae:parameter name="active">true</ae:parameter>
 					</ae:parameter>
+
+					<ae:parameter name="to">
+						<ae:parameter name="title">Tactical Overview</ae:parameter>
+						<ae:parameter name="visible">true</ae:parameter>
+					</ae:parameter>
 					
-					<ae:parameter name="misc">
+					<ae:parameter name="ZZ-misc">
 						<ae:parameter name="title">Misc</ae:parameter>
 						<ae:parameter name="visible">true</ae:parameter>
 					</ae:parameter>

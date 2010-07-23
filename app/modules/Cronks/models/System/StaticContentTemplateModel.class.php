@@ -280,7 +280,11 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 			$args = $this->args;
 		}
 		elseif (is_array($only_local_args)) {
-			$args = (array)array_intersect_assoc($this->args, array_flip($only_local_args)) + $args;
+			foreach ($only_local_args as $k=>$v) {
+				if (array_key_exists($v, $this->args) && !array_key_exists($v, $args)) {
+					$args[$v] = $this->args[$v];
+				}
+			}
 		}
 
 		if ($only_local_args !== false) {
@@ -324,7 +328,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 			'config'	=> $config,
 			'type'		=> $type
 		));
-
+		
 		$this->jsAddCode($code);
 
 		return (string)AppKitXmlTag::create('div')

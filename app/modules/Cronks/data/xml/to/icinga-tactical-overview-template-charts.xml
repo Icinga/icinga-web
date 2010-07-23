@@ -59,29 +59,99 @@
 
 				?>
 
-				<table border="0">
+				<table border="0" style="margin: 0 auto 0 auto;" cellpadding="0" cellspacing="0">
 				<tr>
+					<td>
+
+						<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+
+							<td>
+								<strong>Hosts</strong>
+								<?php echo $t->jsChart($hosts, 'piechart', array (
+									'dataField' => 'HOST_STATE_COUNT',
+									'categoryField' => 'HOST_CURRENT_STATE',
+									'width' =>  250,
+									'height' =>  250,
+
+									'seriesStyles' => array('colors' => array (
+										'#00cc00', '#cc0000', '#ff8000'
+									)),
+
+									'extraStyle' => array ('legend' => array (
+										'display' => 'none',
+										'padding' =>  2,
+										'font' => array (
+											'family' =>  'Arial',
+											'size' => 8
+										),
+										'border' => array (
+											'color' => '#b0b0b0',
+											'size' => 1
+										)
+									))
+								)); ?>
+
+							</td>
+
+							<td>
+								<strong>Services</strong>
+								<?php echo $t->jsChart($services, 'piechart', array (
+									'dataField' => 'SERVICE_STATE_COUNT',
+									'categoryField' => 'SERVICE_CURRENT_STATE',
+									'width' =>  250,
+									'height' =>  250,
+
+									'seriesStyles' => array('colors' => array (
+										'#00cc00', '#ffff00', '#ff0000', '#ff8000'
+									)),
+
+									'extraStyle' => array ('legend' => array (
+										'display' => 'none',
+										'padding' =>  2,
+										'font' => array (
+											'family' =>  'Arial',
+											'size' => 8
+										),
+										'border' => array (
+											'color' => '#b0b0b0',
+											'size' => 1
+										)
+									))
+								)); ?>
+							</td>
+
+
+
+						</tr>
+						<tr>
+							<td>
+								<div style="margin: 0 auto 0 auto; width: 180px;">
+								<?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'sum_all', array (
+									'noheader' => true,
+									'type' => 1
+								)); ?>
+								</div>
+							</td>
+
+							<td>
+								<div style="margin: 0 auto 0 auto; width: 180px;">
+								<?php echo $t->renderSub('icinga-tactical-overview-groupstat', 'sum_all', array (
+									'noheader' => true,
+									'type' => 2
+								)); ?>
+								</div>
+							</td>
+						</tr>
+
+						</td>
+					</tr>
+					</table>
 
 					<td>
-						<strong>Hosts</strong>
-						<?php echo $t->jsChart($hosts, 'piechart', array (
-							'dataField' => 'HOST_STATE_COUNT',
-							'categoryField' => 'HOST_CURRENT_STATE',
-							'width' =>  400,
-							'height' =>  400
-						)); ?>
-
-					</td>
-
-					<td>
-						<strong>Services</strong>
-						<?php echo $t->jsChart($services, 'piechart', array (
-							'dataField' => 'SERVICE_STATE_COUNT',
-							'categoryField' => 'SERVICE_CURRENT_STATE',
-							'width' =>  400,
-							'height' =>  400
-						)); ?>
-
+						<div style="padding: 4px 0 0 0;">
+						<?php echo $t->renderSub('icinga-tactical-overview-presets', 'performance'); ?>
+						</div>
 					</td>
 				</tr>
 				</table>
