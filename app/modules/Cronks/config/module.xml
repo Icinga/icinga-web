@@ -30,12 +30,13 @@
 					<ae:parameter name="core">
 						<ae:parameter name="title">Core components</ae:parameter>
 						<ae:parameter name="visible">false</ae:parameter>
+
 					</ae:parameter>
 					
 					<ae:parameter name="data">
 						<ae:parameter name="title">Data</ae:parameter>
 						<ae:parameter name="visible">true</ae:parameter>
-						
+						<ae:parameter name="position">1</ae:parameter>						
 						<!-- Activate first! -->
 						<ae:parameter name="active">true</ae:parameter>
 					</ae:parameter>
@@ -48,7 +49,9 @@
 					<ae:parameter name="ZZ-misc">
 						<ae:parameter name="title">Misc</ae:parameter>
 						<ae:parameter name="visible">true</ae:parameter>
+						<ae:parameter name="position">2</ae:parameter>
 					</ae:parameter>
+			
 				</setting>
 
 				<!--
@@ -60,6 +63,7 @@
 					href="cronks.xml#xpointer(setting/node())" />
 				</setting>
 				
+		
 			</settings>
 		</module>
 		

@@ -84,7 +84,7 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 		$this->cronks = $this->filterData(AgaviConfig::get(self::CONFIG_CRONKS));
 		
 		if ($this->sort == true) {
-			$this->sortBySubcol($this->categories, array('title' => SORT_ASC));
+			$this->sortBySubcol($this->categories, array('position' => SORT_ASC));
 			$this->sortBySubcol($this->cronks, array('name' => SORT_ASC));
 		}
 	}
