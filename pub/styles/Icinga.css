@@ -520,6 +520,7 @@ table.icinga-attribute-table td.val {
 /** Static content container **/
 .static-content-container {
 	background-color: #ffffff;
+	padding: 2px 5px 2px 5px;
 }
 
 .static-content-container table td {

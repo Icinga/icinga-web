@@ -165,7 +165,7 @@
 			<ae:parameter name="description">Portalgrid 1 column</ae:parameter>
 			<ae:parameter name="name">Portal 1column</ae:parameter>
 			<ae:parameter name="image">cronks.portal</ae:parameter>
-			<ae:parameter name="categories">ZZ-misc</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="columns">1</ae:parameter>
 			</ae:parameter>
@@ -178,7 +178,7 @@
 			<ae:parameter name="description">Portalgrid 2 column</ae:parameter>
 			<ae:parameter name="name">Portal 2columns</ae:parameter>
 			<ae:parameter name="image">cronks.portal</ae:parameter>
-			<ae:parameter name="categories">ZZ-misc</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="columns">2</ae:parameter>
 			</ae:parameter>
@@ -191,7 +191,7 @@
 			<ae:parameter name="description">Portalgrid 3 column</ae:parameter>
 			<ae:parameter name="name">Portal 3columns</ae:parameter>
 			<ae:parameter name="image">cronks.portal</ae:parameter>
-			<ae:parameter name="categories">ZZ-misc</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="columns">3</ae:parameter>
 			</ae:parameter>
@@ -220,7 +220,7 @@
 			<ae:parameter name="description">View something within an iframe</ae:parameter>
 			<ae:parameter name="name">Google</ae:parameter>
 			<ae:parameter name="image">cronks.world</ae:parameter>
-			<ae:parameter name="categories">ZZ-misc</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="url"><![CDATA[http://www.google.de/]]></ae:parameter>
 			</ae:parameter>
@@ -233,7 +233,7 @@
 			<ae:parameter name="description">View something within an iframe</ae:parameter>
 			<ae:parameter name="name">Icinga</ae:parameter>
 			<ae:parameter name="image">cronks.world</ae:parameter>
-			<ae:parameter name="categories">ZZ-misc</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="url"><![CDATA[http://demo.icinga.org/icinga/]]></ae:parameter>
 				<ae:parameter name="user">guest</ae:parameter>
@@ -349,7 +349,6 @@
 
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="template">icinga-tactical-overview-template-charts</ae:parameter>
-				<ae:parameter name="render">sum_all</ae:parameter>
 				<ae:parameter name="interface">true</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
@@ -378,7 +377,7 @@
 			<ae:parameter name="hide">true</ae:parameter>
 			<ae:parameter name="description">Just say hello to the world</ae:parameter>
 			<ae:parameter name="name">HelloWorld</ae:parameter>
-			<ae:parameter name="categories">ZZ-misc</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
 			<ae:parameter name="ae:parameter">
 				<ae:parameter name="say_what">Hello icinga-web!</ae:parameter>
 			</ae:parameter>

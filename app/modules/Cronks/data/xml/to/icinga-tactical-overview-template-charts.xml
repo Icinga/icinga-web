@@ -160,6 +160,7 @@
 
     	<MAIN>
 	    	<![CDATA[
+				<h3>TO: Overall status with charts</h3>
 				<?php echo $t->renderTemplate('sum_all'); ?>
 			]]>
 		</MAIN>

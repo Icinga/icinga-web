@@ -36,7 +36,7 @@
 					<ae:parameter name="data">
 						<ae:parameter name="title">Data</ae:parameter>
 						<ae:parameter name="visible">true</ae:parameter>
-						<ae:parameter name="position">1</ae:parameter>						
+						<ae:parameter name="position">10</ae:parameter>
 						<!-- Activate first! -->
 						<ae:parameter name="active">true</ae:parameter>
 					</ae:parameter>
@@ -44,12 +44,13 @@
 					<ae:parameter name="to">
 						<ae:parameter name="title">Tactical Overview</ae:parameter>
 						<ae:parameter name="visible">true</ae:parameter>
+						<ae:parameter name="position">20</ae:parameter>
 					</ae:parameter>
 					
-					<ae:parameter name="ZZ-misc">
+					<ae:parameter name="misc">
 						<ae:parameter name="title">Misc</ae:parameter>
 						<ae:parameter name="visible">true</ae:parameter>
-						<ae:parameter name="position">2</ae:parameter>
+						<ae:parameter name="position">99</ae:parameter>
 					</ae:parameter>
 			
 				</setting>
