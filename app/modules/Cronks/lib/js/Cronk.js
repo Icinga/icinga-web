@@ -35,6 +35,10 @@ Cronk = (function(){
 			if (Ext.isDefined(config['xtype']) && config.xtype !== 'cronk') {
 				config.ptype = 'cronk-plugin'
 			}
+
+			if (!Ext.isDefined(config['xtype'])) {
+				config['xtype'] = 'cronk';
+			}
 			
 			return Ext.create(config, 'cronk');
 		}
