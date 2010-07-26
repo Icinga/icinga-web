@@ -57,7 +57,7 @@ none:
 	
 include $(INC_MAKE_FILES)
 	
-clean:
+clean: distclean
 
 distclean: clean
 	rm -f \
