@@ -252,7 +252,14 @@ class NsmUser extends BaseNsmUser
 		
 		$out = array();
 		foreach ($res as $key=>$d) $out[$key] = $d['upref_longval'] ? 'BLOB' : $d['upref_val'];
-		
+
+		// Adding defaults
+		foreach (AgaviConfig::get('modules.appkit.user_preferences_default', array ()) as $k=>$v) {
+			if (!array_key_exists($k, $out)) {
+				$out[$k] = $v;
+			}
+		}
+
 		return $out;
 	}
 	

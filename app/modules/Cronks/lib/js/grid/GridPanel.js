@@ -13,6 +13,13 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 
 	// Top toolbar of the grid
 	buildTopToolbar : function() {
+		
+		var autoRefresh = 300;
+
+		if (!Ext.isEmpty(this.meta.template.option.autoRefreshTime)) {
+			autoRefresh = this.meta.template.option.autoRefreshTime;
+		}
+
 		return new Ext.Toolbar({
 			items: [{
 				text: _('Refresh'),
@@ -26,7 +33,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				toolTip: _('Grid settings'),
 				menu: {
 					items: [{
-						text: _('Auto refresh'),
+						text: String.format(_('Auto refresh ({0} seconds)'), autoRefresh),
 						checked: false,
 
 						checkHandler: function(checkItem, checked) {
@@ -35,7 +42,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 									run: function() {
 										this.getStore().reload();
 									},
-									interval: 120000,
+									interval: (autoRefresh*1000),
 									scope: this
 								});
 							}

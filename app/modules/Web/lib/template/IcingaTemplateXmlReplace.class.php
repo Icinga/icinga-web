@@ -6,8 +6,13 @@ class IcingaTemplateXmlReplace {
 	 * @var AppKitFormatParserUtil
 	 */
 	private $parser = null;
+
+	private $context = null;
 	
 	public function __construct() {
+
+		$this->context = AgaviContext::getInstance();
+
 		$this->parser = new AppKitFormatParserUtil();
 		
 		$p =& $this->parser;
@@ -19,7 +24,8 @@ class IcingaTemplateXmlReplace {
 		// Register some methods
 		$p->registerMethod('xmlfn', 'author', array(&$this, $ref->getMethod('valueAuthor')));
 		$p->registerMethod('xmlfn', 'instance', array(&$this, $ref->getMethod('valueDefaultInstance')));
-
+		$p->registerMethod('xmlfn', 'pagerMaxItems', array(&$this, $ref->getMethod('pagerMaxItems')));
+		$p->registerMethod('xmlfn', 'autoRefreshTime', array(&$this, $ref->getMethod('autoRefreshTime')));
 	}
 	
 	public function replaceValue($content) {
@@ -61,14 +67,26 @@ class IcingaTemplateXmlReplace {
 		return $content;
 		
 	}
-	
+
+	public function pagerMaxItems() {
+		$user = $this->context->getUser();
+		return $user->getPrefVal('de.icinga.grid.pagerMaxItems', AgaviConfig::get('modules.cronks.grid.pagerMaxItems', 25));
+	}
+
+	public function autoRefreshTime() {
+		$user = $this->context->getUser();
+		return $user->getPrefVal('de.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 300));
+	}
+
 	public function valueAuthor() {
-		return AgaviContext::getInstance()->getUser()->getNsmUser()->user_name;
+		return $this->context->getUser()->getNsmUser()->user_name;
 	}
 	
 	public function valueDefaultInstance() {
 		return 1;
 	}
+
+
 	
 }
 

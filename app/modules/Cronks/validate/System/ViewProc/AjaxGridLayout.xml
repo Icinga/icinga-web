@@ -46,6 +46,14 @@
 						<error>Validation of storeDisableAutoload failed!</error>
 					</errors>
 				</validator>
+				
+				<validator class="string" name="autoRefresh" required="false">
+					<argument>autoRefresh</argument>
+
+					<errors>
+						<error>Validation of autoRefresh failed!</error>
+					</errors>
+				</validator>
 		</validators>
 		
 	</ae:configuration>

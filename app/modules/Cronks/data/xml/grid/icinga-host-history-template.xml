@@ -18,7 +18,9 @@
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
-        
+
+		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
+
         <!-- <parameter name="dynamicscript">
         	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter> -->
@@ -59,7 +61,7 @@
     -->
     <pager>
     	<parameter name="enabled">true</parameter>
-    	<parameter name="size">25</parameter>
+    	<parameter name="size">${xmlfn.pagerMaxItems}</parameter>
     	<parameter name="start">0</parameter>
     </pager>
     

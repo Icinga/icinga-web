@@ -18,9 +18,11 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 
 	ds.load();
 
+	var interval = <?php echo $us->getPrefVal('de.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>;
+	
 	var statusOverallRefreshTask = {
 		run: function() { ds.reload(); },
-		interval: (1000*180)
+		interval: (1000*interval)
 	}
 
 	AppKit.getTr().start(statusOverallRefreshTask);
