@@ -92,7 +92,7 @@
 			<!-- Cronks -->
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portlet.js</parameter>
+			<parameter>%core.module_dir%/Cronks/lib/js/Portlet.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
 			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
 			
