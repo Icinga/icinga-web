@@ -467,6 +467,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-charts.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-charts.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-hg.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-iteration.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/to/icinga-tactical-overview-template-iteration.xml
@@ -496,7 +497,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CommandSenderModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CommandSenderModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CronkDataModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CronkDataModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ObjectSearchResultModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ObjectSearchResultModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/__OLD__StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/__OLD__StaticContentModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentTemplateModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentTemplateModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StatusMapModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StatusMapModel.class.php
