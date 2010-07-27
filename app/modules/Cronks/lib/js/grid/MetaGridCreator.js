@@ -174,6 +174,7 @@ Cronk.grid.MetaGridCreator.prototype = {
 					for (var i in o.filter_params) { e=false; break; }
 					for (var i in o.filter_types) { e=false; break; }
 					for (var i in o.store_origin_params) { e=false; break; }
+
 					if (e == false) {
 						return o;
 					}
@@ -252,8 +253,8 @@ Cronk.grid.MetaGridCreator.prototype = {
 				pageSize:		this.pager_array.size,
 				store:			this.getMetaStore(),
 				displayInfo:	true,
-				displayMsg:		'Displaying topics {0} - {1} of {2}',
-				emptyMsg:		'No topics to display'
+				displayMsg:		_('Displaying topics {0} - {1} of {2}'),
+				emptyMsg:		_('No topics to display')
 			});
 		}
 		

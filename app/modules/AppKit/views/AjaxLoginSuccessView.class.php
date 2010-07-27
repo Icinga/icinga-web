@@ -5,7 +5,10 @@ class AppKit_AjaxLoginSuccessView extends AppKitBaseView
 	public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);
-		// $this->setAttribute('title', 'Login');
+		
+		if ($this->getContext()->getUser()->isAuthenticated() !== true) {
+			$this->getResponse()->setHttpStatusCode('401');
+		}
 	}
 	
 	public function executeJson(AgaviRequestDataHolder $rd) {
@@ -19,6 +22,7 @@ class AppKit_AjaxLoginSuccessView extends AppKitBaseView
 		}
 		else {
 			$errors['username'] = 'Login failed!';
+			$this->getResponse()->setHttpStatusCode('401');
 		}
 		
 		return json_encode(array(
