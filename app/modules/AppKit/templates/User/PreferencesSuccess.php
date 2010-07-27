@@ -123,6 +123,37 @@ Ext.onReady(function() {
 						win.show();
 					},
 					scope: this
+				}, {
+					id: 'save',
+					handler: function(b,e) {
+						var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+						mask.show();
+						try {
+							var preferences = Ext.getCmp('pedit_preferences');
+							var params = {};
+							var i = 0;
+							var store = preferences.getStore();
+							store.each(function(record) {
+								if(record.get("value") == 'BLOB')
+									return null;
+
+								params["params["+(i)+"][upref_key]"] = record.get("name");
+								params["params["+(i)+"][upref_val]"] = record.get("value");
+								params["params["+(i++)+"][isLong]"] = false
+							})
+							Ext.Ajax.request({
+								url: '<?php echo $ro->gen("my.preferences") ?>',
+								params: params,
+								callback: function() {
+									mask.hide();
+								}
+							});
+						} catch(e) {
+							mask.hide();
+							AppKit.log(e);
+						}
+					}
+
 				}],
 				items: new Ext.grid.PropertyGrid({
 					clicksToEdit: 2,
@@ -131,6 +162,7 @@ Ext.onReady(function() {
 					selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
 					striperows:true,
 					width:500,
+					height: 220,
 					source: <?php echo json_encode($user->getPreferences()) ?>,
 					id: 'pedit_preferences',
 					listeners: {
@@ -166,39 +198,7 @@ Ext.onReady(function() {
 							}).showAt(e.getXY());
 						}
 					}
-				}),
-				buttons: [{
-					text: _('Save changes'),
-					handler: function(b,e) {
-						var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
-						mask.show();
-						try {
-							var preferences = Ext.getCmp('pedit_preferences');
-							var params = {};
-							var i = 0;
-							var store = preferences.getStore();
-							store.each(function(record) {
-								if(record.get("value") == 'BLOB')
-									return null;
-									
-								params["params["+(i)+"][upref_key]"] = record.get("name");
-								params["params["+(i)+"][upref_val]"] = record.get("value");
-								params["params["+(i++)+"][isLong]"] = false
-							})
-							Ext.Ajax.request({
-								url: '<?php echo $ro->gen("my.preferences") ?>',
-								params: params,
-								callback: function() {
-									mask.hide();
-								}
-							});
-						} catch(e) {
-							mask.hide();
-							AppKit.log(e);
-						}
-					}
-				}]
-			
+				})
 			}]
 		})
 	});

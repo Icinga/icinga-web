@@ -100,14 +100,13 @@ class IcingaTemplateWorker {
 					$this->api_count->setResultColumns($fields);
 					$this->api_count->setResultType(IcingaApi::RESULT_ARRAY);
 					$result  = $this->api_count->fetch();
-					
+
 					// Try to determine the fields
 					$row = $result->getRow();
 					
 					if ($row !== false) {
 						$fields = array_keys($row);
 						$field = array_shift($fields);
-					
 						$this->result_count = (int)$row[ $field ];
 					}
 				}
@@ -282,15 +281,15 @@ class IcingaTemplateWorker {
 			}
 			
 			$this->setPrivileges($search);
-			
+
+			// Clone our count query
+			$this->api_count = clone $search;
+
 			// Groupby fields
 			$gbf = $this->getGroupByFields();
 			if (is_array($gbf) && count($gbf)>0) {
 				$search->setSearchGroup($gbf);
 			}
-			
-			// Clone our count query
-			$this->api_count = clone $search;
 			
 			// the result columns
 			$search->setResultColumns($this->collectColumns());

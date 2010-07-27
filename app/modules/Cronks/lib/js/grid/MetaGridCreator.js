@@ -174,6 +174,7 @@ Cronk.grid.MetaGridCreator.prototype = {
 					for (var i in o.filter_params) { e=false; break; }
 					for (var i in o.filter_types) { e=false; break; }
 					for (var i in o.store_origin_params) { e=false; break; }
+
 					if (e == false) {
 						return o;
 					}
@@ -252,8 +253,8 @@ Cronk.grid.MetaGridCreator.prototype = {
 				pageSize:		this.pager_array.size,
 				store:			this.getMetaStore(),
 				displayInfo:	true,
-				displayMsg:		'Displaying topics {0} - {1} of {2}',
-				emptyMsg:		'No topics to display'
+				displayMsg:		_('Displaying topics {0} - {1} of {2}'),
+				emptyMsg:		_('No topics to display')
 			});
 		}
 		
@@ -261,14 +262,28 @@ Cronk.grid.MetaGridCreator.prototype = {
 		if (!("storeDisableAutoload" in this.params) && !this.params["storeDisableAutoload"]) {
 			this.getMetaStore().load();
 		}
-		
+
 		// Apply special config from xml to grid
 		if (this.meta.template.option['Ext.grid.GridPanel']) {
 			Ext.apply(grid_config, this.meta.template.option['Ext.grid.GridPanel']);
 		}
 		
 		this.grid =  new Cronk.grid.GridPanel(grid_config);
-		
+
+		// Start autoloading
+		if (!Ext.isEmpty(this.params.autoRefresh)) {
+			var i = this.params.autoRefresh*1000;
+			var gridRefreshTask = {
+				run: function() {
+					this.getStore().reload();
+				},
+				interval: i,
+				scope: this.grid
+			}
+
+			AppKit.getTr().start(gridRefreshTask);
+		}
+
 		// Weired manual bubbling to gather needed information from the store
 		var bubbleEvent = (function() { try { this.grid.fireEvent('activate'); } catch (e) {} }).createDelegate(this);
 		this.grid.on('render', function() {
@@ -371,7 +386,7 @@ Cronk.grid.MetaGridCreator.prototype = {
 			this.storeloaded = true;
 			return true;
 		}, this, { single: true });
-		
+
 		return this.meta_store;
 	},
 	

@@ -21,7 +21,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 			$rd->getParameter('template')
 		);
 		
-		$template = new IcingaTemplateXmlParser($template_file);
+		$template = new IcingaTemplateXmlParser($template_file, $this->getContext());
 		$template->parseTemplate();
 		
 		$worker = new IcingaTemplateWorker();
@@ -45,7 +45,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 			$rd->getParameter('template')
 		);
 		
-		$template = new IcingaTemplateXmlParser($template_file);
+		$template = new IcingaTemplateXmlParser($template_file, $this->getContext());
 		$template->parseTemplate();
 		
 		$data = array ();

@@ -43,7 +43,9 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			if (stateInitialData) {
 				stateProvider.initState(stateInitialData);
 			}
-			
+
+			AppKit.util.loginWatchdog();
+
 			me.ready = true;
 			me.fireEvent('appkit-ready');
 			

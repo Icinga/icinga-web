@@ -22,6 +22,10 @@
 				-->
 				<setting name="portal.loadmasktimeout">2300</setting>
 
+				<setting name="grid.pagerMaxItems">30</setting>
+
+				<setting name="grid.refreshTime">300</setting>
+
 				<!--
 					* Categories for the cronks
 					The content depends on cronks.xml

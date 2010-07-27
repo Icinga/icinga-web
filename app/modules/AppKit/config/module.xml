@@ -46,6 +46,11 @@
 						<ae:parameter name="class">AppKitMenuCreator</ae:parameter>
 					</ae:parameter>
 				</setting>
+
+				<setting name="user_preferences_default">
+					<ae:parameter name="de.icinga.grid.pagerMaxItems">25</ae:parameter>
+					<ae:parameter name="de.icinga.grid.refreshTime">300</ae:parameter>
+				</setting>
 				
 			</settings>
 			

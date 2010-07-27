@@ -65,6 +65,30 @@ AppKit.util = (function() {
 				}
 			});
 		},
+
+		loginWatchdog : function(start) {
+			var t={}
+			Ext.Ajax.on('requestexception', function(conn, response, options) {
+				if (!options.url.match(/\/login/)) {
+					if (response.status == '401') {
+						if (Ext.isEmpty(this.wflag)) {
+							this.wflag=true;
+
+							Ext.Msg.show({
+								title: _('Session expired'),
+								msg: _('Your login session has gone away, press ok to login again!'),
+								icon: Ext.MessageBox.INFO,
+								buttons: Ext.MessageBox.OK,
+								fn: function() {
+									AppKit.changeLocation(AppKit.c.path);
+								}
+							});
+
+						}
+					}
+				}
+			}, t);
+		},
 		
 		/**
 		 * Handling the preferences editor
@@ -79,7 +103,7 @@ AppKit.util = (function() {
 					resizable: true,
 					id: 'user_prefs_target',
 					width: 530,
-					height: 530,
+					autoHeight: true,
 					autoScroll: true,
 					closeAction: 'hide',
 					

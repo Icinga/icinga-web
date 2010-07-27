@@ -23,7 +23,9 @@
     	-->
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
-        
+
+		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
+
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <!-- <parameter name="Ext.grid.GridView">
         	<parameter name="headersDisabled">true</parameter>
