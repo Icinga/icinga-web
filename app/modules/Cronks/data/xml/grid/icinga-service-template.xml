@@ -48,13 +48,11 @@
         	<parameter name="source">
         		<parameter name="IcingaApi::COMMAND_HOST">host_name</parameter>
         		<parameter name="IcingaApi::COMMAND_SERVICE">service_name</parameter>
+				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
         	</parameter>
         	
         	<parameter name="predefined">
         		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
-        		
-        		<!-- Providing the default instance -->
-        		<parameter name="IcingaApi::COMMAND_INSTANCE">${xmlfn.instance}</parameter>
         	</parameter>
         	
         	<!-- 

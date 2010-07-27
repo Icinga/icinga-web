@@ -11,6 +11,8 @@
 class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
 implements AgaviISingletonModel {
 
+	const BROADCAST_KEY = '__ALL__';
+
 	/**
 	 * Used namespaces to gather config from
 	 * @var array
@@ -57,6 +59,10 @@ implements AgaviISingletonModel {
 	 * @var array
 	 */
 	private $apiDispatcher	= array ();
+
+	private $instanceDispatcher = array ();
+
+	private $errors = array ();
 	
 	/**
 	 * (non-PHPdoc)
@@ -84,6 +90,9 @@ implements AgaviISingletonModel {
 	 */
 	private function initDispatcher() {
 		if (isset($this->configCmd) && is_array($this->configCmd)) {
+			
+			$this->instanceDispatcher[self::BROADCAST_KEY] = array ();
+
 			foreach ($this->configCmd as $key=>$interface) {
 				if (array_key_exists('enabled', $interface) && $interface['enabled'] === true) {
 					
@@ -95,12 +104,27 @@ implements AgaviISingletonModel {
 					
 					$this->apiDispatcher[$key] = IcingaApi::getCommandDispatcher();
 					$this->apiDispatcher[$key]->setInterface($type, $config);
-					
+
+
+					$ikey = null;
+
+					if (isset($config['broadcast']) && $config['broadcast']==true) {
+						$ikey = self::BROADCAST_KEY;
+					}
+					elseif (isset($config['instance'])) {
+						$ikey = $config['instance'];
+					}
+
+					if (!isset($this->instanceDispatcher[$ikey])) {
+						$this->instanceDispatcher[$ikey] = array();
+					}
+
+					$this->instanceDispatcher[$ikey][$key] =& $this->apiDispatcher[$key];
 				}
 			}
 		}
-		
-		if (count($this->apiDispatcher)) {
+
+		if (count($this->apiDispatcher) && count($this->instanceDispatcher)) {
 			return true;
 		}
 		
@@ -231,7 +255,20 @@ implements AgaviISingletonModel {
 	public function dispatchCommand(IcingaApiCommand &$cmd) {
 		return $this->dispatchCommandArray(array($cmd));
 	}
-	
+
+	private function getDispatcherByInstance($instance_name) {
+		$out = array();
+		if (array_key_exists($instance_name, $this->instanceDispatcher)) {
+			$out = $this->instanceDispatcher[$instance_name];
+		}
+
+		if ($instance_name !== self::BROADCAST_KEY) {
+			$out = (array)$this->instanceDispatcher[self::BROADCAST_KEY] + $out;
+		}
+
+		return $out;
+	}
+
 	/**
 	 * Same as ::dispatchCommand(). Sends an array
 	 * of command definitions
@@ -242,31 +279,75 @@ implements AgaviISingletonModel {
 	 */
 	public function dispatchCommandArray(array $arry) {
 		$error = false;
-		
-		foreach ($this->apiDispatcher as $d) {
-			
-			try {
-				$d->setCommand($arry);
-				$d->send();
-			}
-			catch (IcingaApiCommandSendException $e) {
-				$this->errors[] = $e;
+
+		foreach ($arry as $command) {
+
+			$instance_name = $command->getCommandInstance();
+
+			$ds = $this->getDispatcherByInstance($command->getCommandInstance());
+
+			if (!count($ds)) {
+
+				$lerror = sprintf('No dispatcher for instance \'%s\'. Could not send command!', $instance_name);
+
+				$this->errors[] = new IcingaApiCommandException($lerror);
 				$error = true;
-				
+
 				AgaviContext::getInstance()->getLoggerManager()
-				->logError('Command dispatch failed: '.  str_replace("\n", " ", print_r($d->getCallStack(), true)) );
+				->log($lerror, AgaviLogger::ERROR);
 			}
-			
-			// Reset into ready-state
-			$d->clearCommands();
+			else {
+
+				foreach ($ds as $dk=>$d) {
+
+					try {
+						$d->setCommand($arry);
+						$d->send();
+					}
+					catch (IcingaApiCommandException $e) {
+						$this->errors[] = $e;
+						$error = true;
+
+						AgaviContext::getInstance()->getLoggerManager()
+						->log('Command dispatch failed on '. $dk. ': '.  str_replace("\n", " ", print_r($d->getCallStack(), true)), AgaviLogger::ERROR);
+					}
+
+					$d->clearCommands();
+				}
+
+			}
 		}
+
+//		foreach ($this->apiDispatcher as $d) {
+//
+//			try {
+//				$d->setCommand($arry);
+//				$d->send();
+//			}
+//			catch (IcingaApiCommandSendException $e) {
+//				$this->errors[] = $e;
+//				$error = true;
+//
+//				AgaviContext::getInstance()->getLoggerManager()
+//				->logError('Command dispatch failed: '.  str_replace("\n", " ", print_r($d->getCallStack(), true)) );
+//			}
+//
+//			// Reset into ready-state
+//			$d->clearCommands();
+//		}
 		
 		if ($error === true) {
-			throw new IcingaCommandException('Errors occured try getLastError to fetch a exception stack!');
+			throw new IcingaApiCommandException('Errors occured try getLastError to fetch a exception stack!');
 		}
 		
 		return true;
 		
+	}
+
+	public function getLastErrors($flush = true) {
+		$err = $this->errors;
+		if ($flush) $this->errors = array ();
+		return $err;
 	}
 	
 }
