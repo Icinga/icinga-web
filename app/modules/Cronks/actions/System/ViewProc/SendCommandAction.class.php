@@ -55,7 +55,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 			try {
 				$IcingaApiCommand->dispatchCommandArray($coa);
 			}
-			catch (IcingaCommandException $e) {
+			catch (IcingaApiCommandException $e) {
 				$errors = $IcingaApiCommand->getLastErrors();
 				$error = array();
 				foreach ($errors as $err) {

@@ -38,8 +38,39 @@
 						<ae:parameter name="enabled">true</ae:parameter>
 						
 						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+
+						<ae:parameter name="instance">default</ae:parameter>
+						<ae:parameter name="broadcast">false</ae:parameter>
 					</ae:parameter>
-				
+
+					<!--
+
+						* This examples show how to send commands to specific instances
+						* Use 'instance' to send commands to this instance only
+						* Use 'brodcast' to send all commands to this instances!
+
+					<ae:parameter name="pipe1-instance-test">
+						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+						<ae:parameter name="enabled">true</ae:parameter>
+						
+						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+
+						<ae:parameter name="instance">test</ae:parameter>
+						<ae:parameter name="broadcast">false</ae:parameter>
+					</ae:parameter>
+					
+					<ae:parameter name="pipe1-broadcast">
+						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+						<ae:parameter name="enabled">false</ae:parameter>
+						
+						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+
+						<ae:parameter name="instance"></ae:parameter>
+						<ae:parameter name="broadcast">true</ae:parameter>
+					</ae:parameter>
+
+					-->
+
 					<ae:parameter name="ssh1">
 						<ae:parameter name="type">IcingaApi::COMMAND_SSH</ae:parameter>
 						<ae:parameter name="enabled">false</ae:parameter>
@@ -50,6 +81,9 @@
 						<ae:parameter name="ssh_port">22</ae:parameter>
 						<ae:parameter name="ssh_timeout">20</ae:parameter>
 						<ae:parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+
+						<ae:parameter name="instance">default</ae:parameter>
+						<ae:parameter name="broadcast">false</ae:parameter>
 					</ae:parameter>
 				</setting>
 			</settings>

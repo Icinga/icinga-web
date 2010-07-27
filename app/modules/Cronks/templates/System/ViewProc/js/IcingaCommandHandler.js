@@ -306,8 +306,17 @@ IcingaCommandHandler.prototype = {
 						if (a.failureType != Ext.form.Action.CLIENT_INVALID) {
 							var e = Ext.util.JSON.decode(a.response.responseText);
 							var error = e.errors['default'];
-							
-							AppKit.notifyMessage(_('Error sending command'), error);
+
+							oWin.close();
+
+							AppKit.notifyMessage(_('Error sending command'), _('Could not send the command, please examine the logs!'));
+
+							Ext.Msg.show({
+							   title:_('Error sending command'),
+							   msg: error,
+							   buttons: Ext.MessageBox.OK,
+							   icon: Ext.MessageBox.ERROR
+							});
 						}
 					},
 					
