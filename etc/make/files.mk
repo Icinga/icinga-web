@@ -484,6 +484,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/ColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/GridPanel.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/GridPanel.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/MetaGridCreator.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/Portlet.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/Portlet.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/rmd160.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/rmd160.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/SlidingTabs.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/SlidingTabs.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/Tabhelper.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/Tabhelper.js
@@ -8080,6 +8081,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/Icinga.css $(DESTDIR)$(prefix)/pub/styles/Icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/silk-icons.css $(DESTDIR)$(prefix)/pub/styles/silk-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7095
+INC_FILES=7096
 INC_DIRS=984
 # INSTALL_FILES_END

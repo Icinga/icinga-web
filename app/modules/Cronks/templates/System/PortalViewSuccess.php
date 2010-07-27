@@ -14,49 +14,10 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 			Ext.apply(pub, {
 
-				createResizer : function (portlet) {
-					// Adding an resizer
-					portlet.on('render', function(ct,position) {
-
-						var createProxyProtoType=Ext.Element.prototype.createProxy;
-				        Ext.Element.prototype.createProxy=function(config){
-					        return Ext.DomHelper.append(ct.getEl(), config, true);
-					    };
-
-						this.resizer = new Ext.Resizable(this.el, {
-				            animate: true,
-				            duration: this.duration,
-				            easing: this.easing,
-				            handles: 's',
-				            transparent:this.transparent,
-				            heightIncrement:this.heightIncrement,
-				            minHeight: this.minHeight || 100,
-				            pinned: this.pinned
-				        });
-
-				        this.resizer.on('resize', function(oResizable, iWidth, iHeight, e) {
-				        	this.setHeight(iHeight);
-				        	
-				        }, this,{buffer:true});
-
-				        Ext.Element.prototype.createProxy=createProxyProtoType;
-
-					});
-					portlet.on('resize',function() {
-						Ext.each(portlet.findByType('container'),function(item) {
-			        		var bottomMargin = 15;
-			        		item.setHeight(portlet.getInnerHeight()-bottomMargin);
-			        	})	
-						
-					},this)
-				
-					
-				},
 				initPortlet : function(portlet) {
 					Cronk.Registry.add(portlet.initialConfig);
 					portlet.on('afterlayout',function(ct) {
-						AppKit.log(ct);
-				
+						
 						var params = ct.initialConfig.params;
 						params["stateuid"] = ct.stateuid;
 						params["p[stateuid]"] = ct.stateuid,
@@ -69,17 +30,20 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 						});
 						
 						portlet.getUpdater().refresh();
-					},this,{single:true})
+					},this,{single:true});
+
 					portlet.on("add",function(el,resp) {
 						Ext.each(portlet.findByType('container'),function(item) {
-        					var bottomMargin = 8;
-        					item.setHeight(portlet.getInnerHeight()-bottomMargin);
-        					item.staef
+        					item.setHeight(portlet.getInnerHeight());
         				})	
-					})
+					});
 
-				
-					PortalHandler.createResizer(portlet);
+					portlet.on('resize',function() {
+						Ext.each(portlet.findByType('container'),function(item) {
+			        		item.setHeight(portlet.getInnerHeight());
+			        	})
+
+					},this);
 				},
 				
 				createPortletDragZone : function (p) {
@@ -145,13 +109,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 									xtype: 'portlet',
 									tools: tools,
 									height: 200,
-									border: true,
-									// Resizer properties
-									heightIncrement:16,
-								    pinned:true,
-								    duration: .6,
-								    transparent:false
-								   
+									border: true
 								});
 								
 								PortalHandler.initPortlet(portlet);
