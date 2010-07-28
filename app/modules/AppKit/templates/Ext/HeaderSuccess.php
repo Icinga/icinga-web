@@ -1,11 +1,17 @@
 <?php
     $username = $tm->_('Guest');
     $auth = false;
+
     if ($us->isAuthenticated()) {
         $username = $us->getNsmUser()->givenName();
         $auth = true;
-		$pref = json_encode($us->getPreferences());
+		$pref = $us->getPreferences();
     }
+	else {
+		$pref = new stdClass();
+	}
+
+
 ?>
 <?
 	
@@ -13,10 +19,12 @@
 <script type="text/javascript">
 Ext.onReady(function() {
 
+	<?php if ($auth === true) { ?>
 	AppKit.onReady(function() {
-		AppKit.setPreferences(<?php echo $pref; ?>);
+		AppKit.setPreferences(<?php echo json_encode($pref); ?>);
 	});
-
+	<?php } ?>
+	
 	var UserMenu = (function() {
 	    var pub = {};
 	    var _LA = AppKit.util.Layout;
