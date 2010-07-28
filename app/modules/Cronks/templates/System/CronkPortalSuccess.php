@@ -41,7 +41,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 			split: true,
 			minSize: 150,
 			height: 150,
-			stateful: false,
+			stateful: true,
 			stateId: 'south-frame',
 			items: {
 				xtype: 'cronk',
