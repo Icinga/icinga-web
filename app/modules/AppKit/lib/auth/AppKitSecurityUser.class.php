@@ -178,6 +178,10 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	public function getPrefVal($key, $default=null, $blob = false) {
 		return $this->getNsmUser()->getPrefVal($key, $default, $blob);
 	}
+
+	public function getPreferences() {
+		return $this->getNsmUser()->getPreferences();
+	}
 	
 	/**
 	 * reduced call for delPref within NsmUser

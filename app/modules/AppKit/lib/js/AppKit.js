@@ -21,6 +21,8 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 				'<div>{message}</div>',
 			'</div>'
 		]),
+
+		userPreferences = {},
 		
 		initEnvironment = function() {
 			var me = AppKit;
@@ -66,6 +68,31 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 		
 		// - Public
 		return {
+
+			setPreferences : function(o) {
+				if (!Ext.isEmpty(o)) {
+					userPreferences = Ext.apply({}, o);
+					return true;
+				}
+
+				return null;
+			},
+
+			getPreferences : function() {
+				return userPreferences;
+			},
+
+			getPrefVal : function(key, def) {
+				if (key in userPreferences) {
+					return userPreferences[key];
+				}
+
+				if (!Ext.isEmpty(def)) {
+					return def;
+				}
+
+				return null;
+			},
 
 			constructor : function() {
 				this.events = {};

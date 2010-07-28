@@ -35,13 +35,13 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 					portlet.on("add",function(el,resp) {
 						Ext.each(portlet.findByType('container'),function(item) {
         					item.setHeight(portlet.getInnerHeight());
-        				})	
+        				});
 					});
 
 					portlet.on('resize',function() {
 						Ext.each(portlet.findByType('container'),function(item) {
 			        		item.setHeight(portlet.getInnerHeight());
-			        	})
+			        	});
 
 					},this);
 				},
@@ -148,7 +148,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 		// Toolbar of the portlet panels
 		var tools = [{
-			id: 'edit', // x-tools-edit (with a slik icon in silk-icons.css)
+			id: 'gear',
 			handler: function(e, target, panel) {
 				var msg = Ext.Msg.prompt('<?php echo $tm->_("Enter title"); ?>', '<?php echo $tm->_("Change title for this portlet"); ?>', function(btn, text) {
 					if (btn == 'ok' && text) {
@@ -159,9 +159,35 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				msg.getDialog().alignTo(panel.getEl(), 'tr-tr');
 		    }
 		},{
-			id:'refresh',
+			id:'minus',
 			handler: function(e, target, panel) {
-				panel.getUpdater().refresh();
+				Ext.each(panel.findByType('container'),function(item) {
+
+					if (!Ext.isEmpty(item.bbar)) {
+						if (!item.getBottomToolbar().hidden) {
+							item.getBottomToolbar().hide();
+							panel.barsHidden = true;
+						}
+						else {
+							item.getBottomToolbar().show();
+							panel.barsHidden = false;
+						}
+					}
+
+					if (!Ext.isEmpty(item.tbar)) {
+						if (!item.getTopToolbar().hidden) {
+							item.getTopToolbar().hide();
+							panel.barsHidden = true;
+						}
+						else {
+							item.getTopToolbar().show();
+							panel.barsHidden = false;
+						}
+					}
+						
+					item.syncSize();
+
+				});
 			}
 		},{
 		    id:'close',
@@ -221,6 +247,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 								var c = Cronk.Registry.get(cr.getId());
 							
 								c.height = cr.getHeight();
+								c.barsHidden = cr.barsHidden;
 								crlist[cr.getId()] = c;
 							}
 						}, this);
@@ -244,11 +271,13 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 									var c = citem;
 									c.tools = tools;
 									c.id = Ext.id(); // create new id, otherwise it might get ugly
+
 									var cronk = Cronk.factory(c);
 						
 									PortalHandler.initPortlet(cronk);
-									
+
 									this.get(index).add(cronk);
+
 									cronk.show();
 
 								}, this);
