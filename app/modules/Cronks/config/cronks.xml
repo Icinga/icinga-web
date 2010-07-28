@@ -196,15 +196,6 @@
 				<ae:parameter name="columns">3</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
-		
-		<ae:parameter name="portalHello">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.PortalHello</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Say hello to the world</ae:parameter>
-			<ae:parameter name="name">HelloWorld</ae:parameter>
-			<ae:parameter name="categories">demo</ae:parameter>
-		</ae:parameter>
 		<!-- Misc -[STOP] -->
 
 
@@ -313,6 +304,14 @@
 			</ae:parameter>
 		</ae:parameter>
 
+		<ae:parameter name="portalHello">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.PortalHello</ae:parameter>
+			<ae:parameter name="hide">true</ae:parameter>
+			<ae:parameter name="description">Say hello to the world</ae:parameter>
+			<ae:parameter name="name">HelloWorld</ae:parameter>
+			<ae:parameter name="categories">demo</ae:parameter>
+		</ae:parameter>
 		<!-- System cronks - [STOP] -->
 
 		<!--

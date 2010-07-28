@@ -14,138 +14,232 @@ Ext.onReady(function() {
 	});
 	
 	AppKit.UserPrefs.container = new Ext.Container({
-		layout:'fit',
+
+		layout: 'border',
 		border:false,
 		monitorResize: true,
 		height: 450,
-		items: new Ext.form.FormPanel({
-			padding:5,
-			border:false,
-			items: [{
-				xtype:'fieldset',
-				width:500,
-				title: _('Language settings'),
+
+		defaults: {
+			border: false
+		},
+
+		items: [{
+			layout:'fit',
+			region: 'center',
+			items: new Ext.form.FormPanel({
 				padding:5,
-				layout:'form',
-				defaults: {
-					labelWidth: 250	
-				},
+				border:false,
 				items: [{
-					fieldLabel: _('Language'),
-					xtype: 'combo',
-					store: AppKit.UserPrefs.languageStore,
-					mode: 'remote',
-					value: '<?php echo $tm->getCurrentLocaleIdentifier(); ?>',
-					valueField: 'id',
-					displayField: 'description',
-					id:'cmb_language',
-					triggerAction: 'all'
-				}],
-				buttons: [{
-					text: _('Change language'),
-					handler: function(b,e) {
-						Ext.Ajax.request({
-							url: '<?php echo $ro->gen("my.preferences") ?>',
-							params: {
-								upref_key: 'de.icinga.appkit.locale',
-								upref_val: Ext.getCmp('cmb_language').getValue(),
-								isLong: false
-							},
-							success: function() {
-								AppKit.notifyMessage(_('Language changed'), _('Your default language hast changed!'));
-							}
-						});
-					}
-				}]
-			},{
-				title:_('Change Password'),
-				xtype: 'fieldset',
-				width: 500,
-				padding:5,
-				layout:'form',
-				items: [{
-					xtype:'textfield',
-					inputType:'password',
-					fieldLabel: _('New password'),
-					id: 'passwd_new',
-					minLength: 6,
-					allowBlank:false
-				},{
-					xtype:'textfield',
-					inputType:'password',
-					fieldLabel: _('Confirm password'),
-					id: 'passwd_confirm',
-					validator: function(val) {
-						var passwd = Ext.getCmp('passwd_new');
-						if(passwd.isValid()) {
-							if(passwd.getValue() != val)
-								return _("The passwords don't match!");					
-						}	
-						return true;					
-					}
-				}],
-				buttons: [{
-					text: _('Save password'),
-					handler: function(b,e) {
-						var passwd = Ext.getCmp('passwd_new');
-						var confirm = Ext.getCmp('passwd_confirm');
-						if(passwd.isValid() && confirm.isValid()) {
-							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
-							mask.show();
+					xtype:'fieldset',
+					title: _('Language settings'),
+					padding:5,
+					layout:'form',
+					defaults: {
+						labelWidth: 250
+					},
+					items: [{
+						fieldLabel: _('Language'),
+						xtype: 'combo',
+						store: AppKit.UserPrefs.languageStore,
+						mode: 'remote',
+						value: '<?php echo $tm->getCurrentLocaleIdentifier(); ?>',
+						valueField: 'id',
+						displayField: 'description',
+						id:'cmb_language',
+						triggerAction: 'all'
+					}],
+					buttons: [{
+						text: _('Change language'),
+						handler: function(b,e) {
 							Ext.Ajax.request({
 								url: '<?php echo $ro->gen("my.preferences") ?>',
-								params: {newPass: passwd.getValue()},
+								params: {
+									upref_key: 'de.icinga.appkit.locale',
+									upref_val: Ext.getCmp('cmb_language').getValue(),
+									isLong: false
+								},
+								success: function() {
+									AppKit.notifyMessage(_('Language changed'), _('Your default language hast changed!'));
+								}
+							});
+						}
+					}]
+				},{
+					title:_('Change Password'),
+					xtype: 'fieldset',
+					padding:5,
+					layout:'form',
+					items: [{
+						xtype:'textfield',
+						inputType:'password',
+						fieldLabel: _('New password'),
+						id: 'passwd_new',
+						minLength: 6,
+						allowBlank:false
+					},{
+						xtype:'textfield',
+						inputType:'password',
+						fieldLabel: _('Confirm password'),
+						id: 'passwd_confirm',
+						validator: function(val) {
+							var passwd = Ext.getCmp('passwd_new');
+							if(passwd.isValid()) {
+								if(passwd.getValue() != val)
+									return _("The passwords don't match!");
+							}
+							return true;
+						}
+					}],
+					buttons: [{
+						text: _('Save password'),
+						handler: function(b,e) {
+							var passwd = Ext.getCmp('passwd_new');
+							var confirm = Ext.getCmp('passwd_confirm');
+							if(passwd.isValid() && confirm.isValid()) {
+								var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+								mask.show();
+								Ext.Ajax.request({
+									url: '<?php echo $ro->gen("my.preferences") ?>',
+									params: {newPass: passwd.getValue()},
+									callback: function() {
+										mask.hide();
+									},
+									success: function() {
+										mask.hide();
+										Ext.Msg.alert(_("Password changed"),_("The password was successfully changed"));
+									}
+								});
+							}
+						}
+					}]
+				},{
+					title: _('Advanced'),
+					type:'fieldset',
+					collapsible:true,
+					collapsed:true,
+					autoHeight: true,
+					borders:true,
+					tools: [{
+						id: 'plus',
+						handler: function(event,tool,panel,tc) {
+							// var id = Ext.id();
+							var win = AppKit.UserPrefs.addProperty();
+							win.show();
+						},
+						scope: this
+					}, {
+						id: 'save',
+						handler: function(b,e) {
+							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+							mask.show();
+							try {
+								var preferences = Ext.getCmp('pedit_preferences');
+								var params = {};
+								var i = 0;
+								var store = preferences.getStore();
+								store.each(function(record) {
+									if(record.get("value") == 'BLOB')
+										return null;
+
+									params["params["+(i)+"][upref_key]"] = record.get("name");
+									params["params["+(i)+"][upref_val]"] = record.get("value");
+									params["params["+(i++)+"][isLong]"] = false
+								})
+								Ext.Ajax.request({
+									url: '<?php echo $ro->gen("my.preferences") ?>',
+									params: params,
+									callback: function() {
+										mask.hide();
+									}
+								});
+							} catch(e) {
+								mask.hide();
+								AppKit.log(e);
+							}
+						}
+
+					}],
+					items: new Ext.grid.PropertyGrid({
+						clicksToEdit: 2,
+
+						autoHeight: true,
+						selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
+						striperows:true,
+						height: 220,
+						source: <?php echo json_encode($user->getPreferences()) ?>,
+						id: 'pedit_preferences',
+						listeners: {
+							beforeedit: function(event)  {
+								if(event.value == 'BLOB') {
+									AppKit.Ext.infoField("This item is read only!",2);
+									return false;
+								}
+							},
+							rowcontextmenu: function(grid,rowIndex,e) {
+								e.preventDefault();
+								var record = grid.getStore().getAt(rowIndex);
+								new Ext.menu.Menu({
+									items: [{
+										text: _('Remove this preference'),
+										iconCls: 'silk-cancel',
+										handler: function() {
+											var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+											mask.show();
+											var params = record.data;
+											params["upref_key"] = params["name"];
+											params["remove"] = true;
+											record.store.remove(record);
+											Ext.Ajax.request({
+												url: '<?php echo $ro->gen("my.preferences") ?>',
+												params: params,
+												callback: function() {
+													mask.hide();
+												}
+											});
+										}
+									}]
+								}).showAt(e.getXY());
+							}
+						}
+					})
+				}]
+			})
+		}, {
+			region: 'east',
+			padding: 5,
+			width: 220,
+
+			items: [{
+				title: _('Reset application state'),
+				xtype: 'fieldset',
+				labelWidth: 150,
+				layoutConfig: {
+					padding: 5
+				},
+				items: [{
+					xtype: 'label',
+					text: _('To start with a new application profile, click the following button.')
+				},{
+					xtype: 'button',
+					text: 'Reset',
+					style: 'margin: 10px 0 10px 20px',
+					iconCls: 'silk-user-delete',
+					handler: function() {
+						var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+						mask.show();
+						try {
+							Ext.Ajax.request({
+								url: '<?php echo $ro->gen("my.preferences") ?>',
+								params: {
+									upref_key: 'de.icinga.ext.appstate',
+									remove: true
+								},
 								callback: function() {
 									mask.hide();
 								},
 								success: function() {
-									mask.hide();
-									Ext.Msg.alert(_("Password changed"),_("The password was successfully changed"));
-								}
-							});
-						}
-					}	
-					
-				}]
-			},{
-				title: _('Advanced'),
-				type:'fieldset',
-				collapsible:true,	
-				collapsed:true,
-				autoHeight: true,		
-				borders:true,
-				width:500,
-				tools: [{
-					id: 'plus',
-					handler: function(event,tool,panel,tc) {
-						// var id = Ext.id();
-						var win = AppKit.UserPrefs.addProperty();
-						win.show();
-					},
-					scope: this
-				}, {
-					id: 'save',
-					handler: function(b,e) {
-						var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
-						mask.show();
-						try {
-							var preferences = Ext.getCmp('pedit_preferences');
-							var params = {};
-							var i = 0;
-							var store = preferences.getStore();
-							store.each(function(record) {
-								if(record.get("value") == 'BLOB')
-									return null;
-
-								params["params["+(i)+"][upref_key]"] = record.get("name");
-								params["params["+(i)+"][upref_val]"] = record.get("value");
-								params["params["+(i++)+"][isLong]"] = false
-							})
-							Ext.Ajax.request({
-								url: '<?php echo $ro->gen("my.preferences") ?>',
-								params: params,
-								callback: function() {
-									mask.hide();
+									AppKit.notifyMessage(_('App reset'), _('Your application profile has been deleted!'));
 								}
 							});
 						} catch(e) {
@@ -153,54 +247,10 @@ Ext.onReady(function() {
 							AppKit.log(e);
 						}
 					}
-
-				}],
-				items: new Ext.grid.PropertyGrid({
-					clicksToEdit: 2,
-
-					autoHeight: true,					
-					selModel: new Ext.grid.RowSelectionModel({singleSelect: true}),
-					striperows:true,
-					width:500,
-					height: 220,
-					source: <?php echo json_encode($user->getPreferences()) ?>,
-					id: 'pedit_preferences',
-					listeners: {
-						beforeedit: function(event)  {
-							if(event.value == 'BLOB') {
-								AppKit.Ext.infoField("This item is read only!",2);
-								return false;
-							}
-						},
-						rowcontextmenu: function(grid,rowIndex,e) {
-							e.preventDefault();
-							var record = grid.getStore().getAt(rowIndex);
-							new Ext.menu.Menu({
-								items: [{
-									text: _('Remove this preference'),
-									iconCls: 'silk-cancel',
-									handler: function() {
-										var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
-										mask.show();
-										var params = record.data;
-										params["upref_key"] = params["name"];
-										params["remove"] = true;
-										record.store.remove(record);
-										Ext.Ajax.request({
-											url: '<?php echo $ro->gen("my.preferences") ?>',
-											params: params,
-											callback: function() {
-												mask.hide();
-											}
-										});
-									}
-								}]
-							}).showAt(e.getXY());
-						}
-					}
-				})
+				}]
 			}]
-		})
+		}]
+
 	});
 	
 	AppKit.UserPrefs.addProperty = function() {

@@ -4,6 +4,7 @@
     if ($us->isAuthenticated()) {
         $username = $us->getNsmUser()->givenName();
         $auth = true;
+		$pref = json_encode($us->getPreferences());
     }
 ?>
 <?
@@ -11,6 +12,11 @@
 ?>
 <script type="text/javascript">
 Ext.onReady(function() {
+
+	AppKit.onReady(function() {
+		AppKit.setPreferences(<?php echo $pref; ?>);
+	});
+
 	var UserMenu = (function() {
 	    var pub = {};
 	    var _LA = AppKit.util.Layout;
@@ -85,13 +91,12 @@ Ext.onReady(function() {
 				height: 30,
 				border: false,
 				cls: 'icinga-link',
-				items: {		  
-		            style: 'background-image: url('+AppKit.c.path + '/images/icinga/idot-small.png);background-repeat:no-repeat;width: 27px;text-align:center; height: 30px; margin-left: 15px;margin-top:0px; display: block;',
-			        listeners: {
-			        	click: function() {
-			        		AppKit.notifyMessage('Picture', ' ... successfully clicked');
-			        	}
-			        }
+				items: {
+					width: 61,
+					border: false,
+					autoEl: 'div',
+					frame: false,
+		            style: 'background-image: url('+AppKit.c.path + '/images/icinga/idot-small.png);background-repeat:no-repeat;width: 27px;text-align:center; height: 30px; margin-left: 15px;margin-top:0px; display: block;'
 	    		}
 			}]
 		}, null, 'north');
