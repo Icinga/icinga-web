@@ -24,10 +24,10 @@
 		
 					
 					<ae:parameter name="config_port">3306</ae:parameter>
-					<ae:parameter name="config_database">icinga</ae:parameter>
+					<ae:parameter name="config_database">testcase</ae:parameter>
 					
-					<ae:parameter name="config_user">icinga</ae:parameter>
-					<ae:parameter name="config_password">icinga</ae:parameter>
+					<ae:parameter name="config_user">testcase</ae:parameter>
+					<ae:parameter name="config_password">testcase</ae:parameter>
 					
 					<ae:parameter name="config_table_prefix">icinga_</ae:parameter>
 				</setting>

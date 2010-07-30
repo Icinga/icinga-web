@@ -1,7 +1,7 @@
 <script type='text/javascript'>
 Ext.ns("AppKit.groupEditor");
 
-<?
+<?php
 	$users = $t["users"];
 	echo $t['principal_editor'];
 ?>
@@ -17,7 +17,7 @@ Ext.onReady(function(){
 			{
 				xtype: 'hidden',
 				name: 'role_id',
-				id: 'role_id',
+				id: 'role_id'
 			},{
 				xtype:'fieldset',
 				title: _('General information'),

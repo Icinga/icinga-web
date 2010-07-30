@@ -279,7 +279,7 @@ Cronk.defaults.CONFIG_COPY = [
 			delete(l.loaderUrl);
 			
 			return l;
-		},
+		}
 	});
 	
 	_CRUTIL.layoutQueue = [];

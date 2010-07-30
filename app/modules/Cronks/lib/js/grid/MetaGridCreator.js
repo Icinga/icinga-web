@@ -231,7 +231,7 @@ Cronk.grid.MetaGridCreator.prototype = {
     	
     	// Apply special config from xml to vier
     	if (this.meta.template.option['Ext.grid.GridView']) {
-    		Ext.apply(view_config, this.meta.template.option['Ext.grid.GridView'])
+    		Ext.apply(view_config, this.meta.template.option['Ext.grid.GridView']);
     	}
     	
     	if (this.meta.template.grouping.enabled == true) {
@@ -279,7 +279,7 @@ Cronk.grid.MetaGridCreator.prototype = {
 				},
 				interval: i,
 				scope: this.grid
-			}
+			};
 
 			AppKit.getTr().start(gridRefreshTask);
 		}
@@ -417,13 +417,13 @@ Cronk.grid.MetaGridCreator.prototype = {
 						this.column_array[colIndex].renderer = {
 							fn: f,
 							scope: ns
-						}
+						};
 					}
 					else if (item['type'] == 'grouprenderer') {
 						this.column_array[i].groupRenderer = {
 							fn: f,
 							scope: ns
-						}
+						};
 					}
 					else {
 						this.addGridEvent(item['type'], f, ns);

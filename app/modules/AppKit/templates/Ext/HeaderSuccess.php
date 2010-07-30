@@ -92,7 +92,7 @@ Ext.onReady(function() {
 			defaults: { style: { borderLeft: '1px #d0d0d0 solid' }, border: false, height: 30 },
 			items: [{
 				tbar: AppKitNavBar,
-				columnWidth: 1,
+				columnWidth: 1
 			}, {
 				id: 'menu-logo',
 				width: 60,

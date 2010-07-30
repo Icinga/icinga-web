@@ -296,7 +296,7 @@ Ext.onReady(function() {
 			layout: 'border',
 			border:false,
 			defaults: {
-				margins: {top: 10, left: 10, right: 10, bottom: 0},
+				margins: {top: 10, left: 10, right: 10, bottom: 0}
 			},
 			autoScroll:true,
 			items: [{

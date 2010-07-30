@@ -184,7 +184,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 				}
 			}
 			
-			this.fireEvent('aftercompremove', this, p, meta)
+			this.fireEvent('aftercompremove', this, p, meta);
 
 			return true;
 	},
@@ -378,7 +378,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 		}
 		
 		// All panels there
-		this.fireEvent('aftercompcreate', this, panel, meta)
+		this.fireEvent('aftercompcreate', this, panel, meta);
 		
 		return panel;
 		

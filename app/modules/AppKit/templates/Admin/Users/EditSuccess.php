@@ -9,7 +9,7 @@ $authTypes = $t['authTypes'];
 Ext.ns("AppKit.userEditor");
 if(!Ext.isFunction(window._))
 	_ = function(t) {return t}
-<?
+<?php
 	echo $t['principal_editor'];
 ?>
 
@@ -28,7 +28,7 @@ Ext.onReady(function(){
 			{
 				xtype: 'hidden',
 				name: 'user_id',
-				id: 'user_id',
+				id: 'user_id'
 			},{
 				xtype:'fieldset',
 				title: _('General information'),
