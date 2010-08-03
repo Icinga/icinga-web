@@ -170,31 +170,6 @@ div#growl-msg-stack {
     z-index: 20000;
 }
 
-/** Icinga object icons **/
-.icinga-object-host {
-	background-image: url(../images/fam/server.png) !important;
-	background-repeat: no-repeat;
-	background-position: center center;
-}
-
-.icinga-object-service {
-	background-image: url(../images/fam/cog.png) !important;
-	background-repeat: no-repeat;
-	background-position: center center;
-}
-
-.icinga-object-hostgroup {
-	background-image: url(../images/fam/server_database.png) !important;
-	background-repeat: no-repeat;
-	background-position: center center;
-}
-
-.icinga-object-servicegroup {
-	background-image: url(../images/fam/database_gear.png) !important;
-	background-repeat: no-repeat;
-	background-position: center center;
-}
-
 /** Icinga status classes **/
 
 .icinga-link {
