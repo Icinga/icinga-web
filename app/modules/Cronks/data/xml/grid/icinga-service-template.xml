@@ -433,7 +433,7 @@
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">images/fam/information.png</parameter>
+							<parameter name="image">images/icons/information.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Click here for information</parameter>
@@ -495,7 +495,7 @@
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">images/fam/book.png</parameter>
+							<parameter name="image">images/icons/book.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Click here for history</parameter>

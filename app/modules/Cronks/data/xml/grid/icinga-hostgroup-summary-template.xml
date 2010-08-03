@@ -297,7 +297,7 @@
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">images/fam/database.png</parameter>
+							<parameter name="image">images/icons/database.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Click here to display containing hosts</parameter>
@@ -353,7 +353,7 @@
 	                	<parameter name="type">renderer</parameter>
 	                	
 	                	<parameter name="arguments">
-							<parameter name="image">images/fam/cog.png</parameter>
+							<parameter name="image">images/icons/cog.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
 								<parameter name="qtip">Click here to display containing services</parameter>

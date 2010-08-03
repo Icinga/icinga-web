@@ -192,3 +192,8 @@
 .icinga-icon-help { background-image: url(../images/icons/help.png) !important; background-repeat: no-repeat; }
 .icinga-icon-world { background-image: url(../images/icons/world.png) !important; background-repeat: no-repeat; }
 .icinga-icon-information { background-image: url(../images/icons/information.png) !important; background-repeat: no-repeat; }
+
+.icinga-icon-host { background-image: url(../images/fam/server.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-service { background-image: url(../images/fam/cog.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-hostgroup { background-image: url(../images/fam/server_database.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-servicegroup { background-image: url(../images/fam/database_gear.png) !important; background-repeat: no-repeat; background-position: center center; }

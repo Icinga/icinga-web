@@ -7,22 +7,22 @@ Icinga.DEFAULTS = {};
 Icinga.DEFAULTS.OBJECT_TYPES = {
 	host: {
 		oid: 1,
-		iconClass: 'icinga-object-host'
+		iconClass: 'icinga-icon-host'
 	},
 	
 	service: {
 		oid: 2,
-		iconClass: 'icinga-object-service'
+		iconClass: 'icinga-icon-service'
 	},
 	
 	hostgroup: {
 		oid: 3,
-		iconClass: 'icinga-object-hostgroup'
+		iconClass: 'icinga-icon-hostgroup'
 	},
 	
 	servicegroup: {
 		oid: 4,
-		iconClass: 'icinga-object-servicegroup'
+		iconClass: 'icinga-icon-servicegroup'
 	}
 };
 
