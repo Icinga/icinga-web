@@ -47,7 +47,7 @@ IcingaCommandHandler.prototype = {
 		Ext.iterate(this.command_options.items, function(k,v) {
 			var b = this.toolbaritem.menu.add({
 				text: v.title,
-				iconCls: v.icon_class || 'silk-bricks'
+				iconCls: v.icon_class || 'icinga-icon-bricks'
 			});
 			
 			if (v.seperator && v.seperator === true) {
@@ -243,13 +243,13 @@ IcingaCommandHandler.prototype = {
 					
 					bbar: [{
 						text: _('OK'),
-						iconCls: 'silk-accept',
+						iconCls: 'icinga-icon-accept',
 						handler: function(b, e) {
 							oForm.getForm().doAction(oFormAction);
 						}
 					}, {
 						text: _('Abort'),
-						iconCls: 'silk-cross',
+						iconCls: 'icinga-icon-cross',
 						handler: function(b, e) { oWin.close(); }
 					}]
 				});

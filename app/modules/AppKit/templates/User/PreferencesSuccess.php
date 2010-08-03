@@ -182,7 +182,7 @@ Ext.onReady(function() {
 								new Ext.menu.Menu({
 									items: [{
 										text: _('Remove this preference'),
-										iconCls: 'silk-cancel',
+										iconCls: 'icinga-icon-cancel',
 										handler: function() {
 											var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
 											mask.show();
@@ -224,7 +224,7 @@ Ext.onReady(function() {
 					xtype: 'button',
 					text: 'Reset',
 					style: 'margin: 10px 0 10px 20px',
-					iconCls: 'silk-user-delete',
+					iconCls: 'icinga-icon-user-delete',
 					handler: function() {
 						var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
 						mask.show();

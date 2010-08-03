@@ -129,7 +129,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 				items: [{
 					text: _("Close"),
 					id: tp.id + '-close',
-					iconCls: 'silk-cross',
+					iconCls: 'icinga-icon-cross',
 					handler: function() { tp.remove(ctxItem); }
 				}, {
 					text: _("Close others"),
@@ -144,13 +144,13 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 				}, {
 					text: _("Rename"),
 					id: tp.id + '-rename',
-					iconCls: 'silk-table-edit',
+					iconCls: 'icinga-icon-table-edit',
 					handler: this.renameTab,
 					scope: this
 				}, {
 					text: _("Refresh"),
 					tooltip: _("Reload the cronk (not the content)"), 
-					iconCls: 'silk-arrow-refresh',
+					iconCls: 'icinga-icon-arrow-refresh',
 					handler: function() { ctxItem.getUpdater().refresh(); }
 				}]
 			});

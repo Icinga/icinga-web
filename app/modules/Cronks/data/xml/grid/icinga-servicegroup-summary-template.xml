@@ -78,38 +78,38 @@
         	<parameter name="items">
         		<parameter name="SCHEDULE_SERVICEGROUP_HOST_DOWNTIME">
         			<parameter name="title">Schedule downtime for all hosts in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         		</parameter>
         		<parameter name="SCHEDULE_SERVICEGROUP_SVC_DOWNTIME">
         			<parameter name="title">Schedule downtime for all services in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
 				<parameter name="ENABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
         			<parameter name="title">Enable notifications for all hosts in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         		</parameter>
         		<parameter name="DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
         			<parameter name="title">Disable notifications for all hosts in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
 				<parameter name="ENABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
         			<parameter name="title">Enable notifications for all services in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         		</parameter>
         		<parameter name="DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
         			<parameter name="title">Disable notifications for all services in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
 				<parameter name="ENABLE_SERVICEGROUP_SVC_CHECKS">
         			<parameter name="title">Enable active checks of all services in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         		</parameter>
         		<parameter name="DISABLE_SERVICEGROUP_SVC_CHECKS">
         			<parameter name="title">Disable active checks of all services in this servicegroup</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-bricks</parameter>
         		</parameter>
         	</parameter>
         	

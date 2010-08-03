@@ -21,7 +21,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 				text: _('Press me'),
 				width: '100%',
 				height: 50,
-				iconCls: 'silk-bell',
+				iconCls: 'icinga-icon-bell',
 				handler: function(btn, e) {
 					Ext.MessageBox.alert(_('Say what?'), CE.getParameter('say_what'));
 				}

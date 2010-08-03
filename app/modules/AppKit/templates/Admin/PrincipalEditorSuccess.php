@@ -95,11 +95,11 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 			enableDD: false,
 			tbar: new Ext.Toolbar({
 				items: [{
-					iconCls:'silk-add',
+					iconCls:'icinga-icon-add',
 					handler: function() {AppKit.principalEditor.principalList.show(this)},
 					scope:this
 				},{
-					iconCls:'silk-delete',
+					iconCls:'icinga-icon-delete',
 					handler: function(_ev,toolEl,panel,tc) {
 						this.removeSelectedNodes();
 					},
@@ -146,7 +146,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	createPrincipalNode: function(record) {
 		var node = new Ext.tree.TreeNode({
 						editable:false,
-						iconCls: 'silk-key',
+						iconCls: 'icinga-icon-key',
 						text:record.get("name")
 					});
 		node.targetId = record.get("id");

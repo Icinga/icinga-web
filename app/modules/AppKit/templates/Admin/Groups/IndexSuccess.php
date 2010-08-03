@@ -35,7 +35,7 @@ Ext.onReady(function() {
 					var id =  record.get("role_id");
 					var parent = record.get("role_parent")
 					if(!this.inserted[id] && (!parent || (parent && this.inserted[parent]))) {
-						var node = new Ext.tree.TreeNode({text: name, iconCls: 'silk-group'});
+						var node = new Ext.tree.TreeNode({text: name, iconCls: 'icinga-icon-group'});
 						this.inserted[id] = node;
 						node.record = record;
 						node.recordId = id;
@@ -87,7 +87,7 @@ Ext.onReady(function() {
 			'role_description',
 			{name: 'role_disabled', type:'boolean'},
 			{name: 'role_disabled_icon',type:'boolean' , mapping:'role_disabled', convert: function(v) {
-				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'silk-cancel' : 'silk-accept')+'"></div>';
+				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
 			}},
 			{name: 'role_created'},
 			{name: 'role_modified'},
@@ -212,7 +212,7 @@ Ext.onReady(function() {
 				width: 15
 			},{
 				xtype: 'button',
-				iconCls: 'silk-cancel',
+				iconCls: 'icinga-icon-cancel',
 				text: _('Remove selected'),
 				handler: function(ev,btn) {
 					AppKit.groups.grid.deleteSelected();
@@ -223,7 +223,7 @@ Ext.onReady(function() {
 				width: 15
 			},{
 				xtype: 'button',
-				iconCls: 'silk-add',
+				iconCls: 'icinga-icon-add',
 				text: _('Add new group'),
 				handler: function() {wnd_groupEditPanel.createGroup();}
 				
@@ -252,7 +252,7 @@ Ext.onReady(function() {
 				items: [{
 					text:'Edit this group',
 					handler: wnd_groupEditPanel.editGroup.createDelegate(wnd_groupEditPanel,[id]),
-					iconCls: 'silk-pencil'
+					iconCls: 'icinga-icon-pencil'
 				}]			
 			}).showAt(pos);
 		},
@@ -282,7 +282,7 @@ Ext.onReady(function() {
 				}
 			}
 		}),
-		iconCls: 'silk-group'
+		iconCls: 'icinga-icon-group'
 	});
 	
 	

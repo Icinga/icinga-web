@@ -1,0 +1,194 @@
+/* 
+    Document   : icinga-icon
+    Created on : 03.08.2010, 15:42:55
+    Author     : mhein
+    Description:
+        Icons for icinga-web
+
+
+	Idea was borrowed from famfamfam from the silk-icon package
+	- THANKS FOR THAT
+
+	Also we're using the silk-icons as working set for this application
+
+	-- famfamfam silk-icons README --
+
+	The icons in this folder are direct gif conversions of the fam fam fam silk icons.
+
+	Please see http://www.famfamfam.com/lab/icons/silk/ for more details.
+
+	-- famfamfam silk-icons README --
+
+*/
+
+.icon-32 { height:32px; width:32px}
+.icon-24 { height:24px; width:24px}
+
+.icinga-icon-accept { background-image: url(../images/icons/accept.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cancel { background-image: url(../images/icons/cancel.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-add { background-image: url(../images/icons/application_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-cascade { background-image: url(../images/icons/application_cascade.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-delete { background-image:  url(../images/icons/application_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-double { background-image: url(../images/icons/application_double.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-edit { background-image: url(../images/icons/application_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-error { background-image: url(../images/icons/application_error.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-form { background-image: url(../images/icons/application_form.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-lightning { background-image: url(../images/icons/application_lightning.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-side-boxes { background-image: url(../images/icons/application_side_boxes.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-split { background-image: url(../images/icons/application_split.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view_columns { background-image: url(../images/icons/application_view_columns.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-gallery { background-image: url(../images/icons/application_view_gallery.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-list { background-image: url(../images/icons/application_view_list.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-tile { background-image: url(../images/icons/application_view_tile.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
+.icinga-icon-lock { background-image: url(../images/icons/lock.png) !important; background-repeat: no-repeat; }
+.icinga-icon-lock-open { background-image: url(../images/icons/lock_open.png) !important; background-repeat: no-repeat; }
+.icinga-icon-wrench { background-image: url(../images/icons/wrench.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-add { background-image: url(../images/icons/user_add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-user-comment { background-image: url(../images/icons/user_comment.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-delete { background-image: url(../images/icons/user_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-edit { background-image: url(../images/icons/user_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-go { background-image: url(../images/icons/user_go.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group { background-image: url(../images/icons/group.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-add { background-image: url(../images/icons/group_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-delete { background-image: url(../images/icons/group_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-key { background-image: url(../images/icons/group_key.png) !important; background-repeat: no-repeat; }
+.icinga-icon-note { background-image: url(../images/icons/note.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-add { background-image: url(../images/icons/user_add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-user-comment { background-image: url(../images/icons/user_comment.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-delete { background-image: url(../images/icons/user_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-edit { background-image: url(../images/icons/user_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-go { background-image: url(../images/icons/user_go.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group { background-image: url(../images/icons/group.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-add { background-image: url(../images/icons/group_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-delete { background-image: url(../images/icons/group_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-key { background-image: url(../images/icons/group_key.png) !important; background-repeat: no-repeat; }
+.icinga-icon-accept { background-image: url(../images/icons/accept.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cancel { background-image: url(../images/icons/cancel.png) !important; background-repeat: no-repeat; }
+.icinga-icon-add { background-image: url(../images/icons/add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-pencil { background-image: url(../images/icons/pencil.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group { background-image: url(../images/icons/group.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-add { background-image: url(../images/icons/group_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-delete { background-image: url(../images/icons/group_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-group-key { background-image: url(../images/icons/group_key.png) !important; background-repeat: no-repeat; }
+.icinga-icon-accept { background-image: url(../images/icons/accept.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-add { background-image: url(../images/icons/user_add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-user-comment { background-image: url(../images/icons/user_comment.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-delete { background-image: url(../images/icons/user_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-edit { background-image: url(../images/icons/user_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-go { background-image: url(../images/icons/user_go.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cancel { background-image: url(../images/icons/cancel.png) !important; background-repeat: no-repeat; }
+.icinga-icon-add { background-image: url(../images/icons/add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-pencil { background-image: url(../images/icons/pencil.png) !important; background-repeat: no-repeat; }
+.icinga-icon-add { background-image: url(../images/icons/add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-delete { background-image: url(../images/icons/delete.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-key { background-image: url(../images/icons/key.png) !important; background-repeat: no-repeat; }
+.icinga-icon-key-add { background-image: url(../images/icons/key_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-key-delete { background-image: url(../images/icons/key_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-add { background-image: url(../images/icons/user_add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-user-comment { background-image: url(../images/icons/user_comment.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-delete { background-image: url(../images/icons/user_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-edit { background-image: url(../images/icons/user_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-go { background-image: url(../images/icons/user_go.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cancel { background-image: url(../images/icons/cancel.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-add { background-image: url(../images/icons/user_add.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-user-comment { background-image: url(../images/icons/user_comment.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-delete { background-image: url(../images/icons/user_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-edit { background-image: url(../images/icons/user_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-go { background-image: url(../images/icons/user_go.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-join { background-image: url(../images/icons/arrow_join.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right { background-image: url(../images/icons/arrow_right.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-redo { background-image: url(../images/icons/arrow_redo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right-medium { background-image: url(../images/icons/other/iconRightMedium.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-down { background-image: url(../images/icons/arrow_down.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-redo { background-image: url(../images/icons/arrow_redo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-refresh { background-image: url(../images/icons/arrow_refresh.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-undo { background-image: url(../images/icons/arrow_undo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-up { background-image: url(../images/icons/arrow_up.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cog { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cog { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; }
+.icinga-icon-anchor { background-image: url(../images/icons/anchor.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cross { background-image: url(../images/icons/cross.png) !important; background-repeat: no-repeat; }
+.icinga-icon-table { background-image: url(../images/icons/table.png) !important; background-repeat: no-repeat; }
+.x-tool-edit, .icinga-icon-table-edit { background-image: url(../images/icons/table_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-table-multiple { background-image: url(../images/icons/table_multiple.png) !important; background-repeat: no-repeat; }
+.icinga-icon-table-refresh { background-image: url(../images/icons/table_refresh.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-join { background-image: url(../images/icons/arrow_join.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right { background-image: url(../images/icons/arrow_right.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-redo { background-image: url(../images/icons/arrow_redo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right-medium { background-image: url(../images/icons/other/iconRightMedium.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-down { background-image: url(../images/icons/arrow_down.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-redo { background-image: url(../images/icons/arrow_redo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-refresh { background-image: url(../images/icons/arrow_refresh.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-undo { background-image: url(../images/icons/arrow_undo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-up { background-image: url(../images/icons/arrow_up.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bell { background-image: url(../images/icons/bell.png) !important; background-repeat: no-repeat; }
+.icinga-icon-accept { background-image: url(../images/icons/accept.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cross { background-image: url(../images/icons/cross.png) !important; background-repeat: no-repeat; }
+.icinga-icon-delete { background-image: url(../images/icons/delete.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-bricks { background-image: url(../images/icons/bricks.png) !important; background-repeat: no-repeat; }
+.icinga-icon-accept { background-image: url(../images/icons/accept.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cross { background-image: url(../images/icons/cross.png) !important; background-repeat: no-repeat; }
+.icinga-icon-pencil { background-image: url(../images/icons/pencil.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-add { background-image: url(../images/icons/application_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-cascade { background-image: url(../images/icons/application_cascade.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-delete { background-image:  url(../images/icons/application_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-double { background-image: url(../images/icons/application_double.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-edit { background-image: url(../images/icons/application_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-error { background-image: url(../images/icons/application_error.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-form { background-image: url(../images/icons/application_form.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-lightning { background-image: url(../images/icons/application_lightning.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-side-boxes { background-image: url(../images/icons/application_side_boxes.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-split { background-image: url(../images/icons/application_split.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view_columns { background-image: url(../images/icons/application_view_columns.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-gallery { background-image: url(../images/icons/application_view_gallery.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-list { background-image: url(../images/icons/application_view_list.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-tile { background-image: url(../images/icons/application_view_tile.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cancel { background-image: url(../images/icons/cancel.png) !important; background-repeat: no-repeat; }
+.icinga-icon-server-lightning { background-image: url(../images/icons/server_lightning.png) !important; background-repeat: no-repeat; }
+.icinga-icon-database { background-image: url(../images/icons/database.png) !important; background-repeat: no-repeat; }
+.icinga-icon-database-go { background-image: url(../images/icons/database_go.png) !important; background-repeat: no-repeat; }
+.icinga-icon-database-refresh { background-image: url(../images/icons/database_refresh.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cog { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cog { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bricks { background-image: url(../images/icons/bricks.png) !important; background-repeat: no-repeat; }
+.icinga-icon-brick { background-image: url(../images/icons/brick.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-join { background-image: url(../images/icons/arrow_join.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right { background-image: url(../images/icons/arrow_right.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-redo { background-image: url(../images/icons/arrow_redo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right-medium { background-image: url(../images/icons/other/iconRightMedium.gif) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-down { background-image: url(../images/icons/arrow_down.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-redo { background-image: url(../images/icons/arrow_redo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-refresh { background-image: url(../images/icons/arrow_refresh.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-undo { background-image: url(../images/icons/arrow_undo.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-up { background-image: url(../images/icons/arrow_up.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cog { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; }
+.icinga-icon-cog { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bricks { background-image: url(../images/icons/bricks.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-add { background-image: url(../images/icons/application_add.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-cascade { background-image: url(../images/icons/application_cascade.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-delete { background-image:  url(../images/icons/application_delete.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-double { background-image: url(../images/icons/application_double.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-edit { background-image: url(../images/icons/application_edit.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-error { background-image: url(../images/icons/application_error.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-form { background-image: url(../images/icons/application_form.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-lightning { background-image: url(../images/icons/application_lightning.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-side-boxes { background-image: url(../images/icons/application_side_boxes.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-split { background-image: url(../images/icons/application_split.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view_columns { background-image: url(../images/icons/application_view_columns.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-gallery { background-image: url(../images/icons/application_view_gallery.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-list { background-image: url(../images/icons/application_view_list.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-view-tile { background-image: url(../images/icons/application_view_tile.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
+.icinga-icon-help { background-image: url(../images/icons/help.png) !important; background-repeat: no-repeat; }
+.icinga-icon-world { background-image: url(../images/icons/world.png) !important; background-repeat: no-repeat; }
+.icinga-icon-information { background-image: url(../images/icons/information.png) !important; background-repeat: no-repeat; }

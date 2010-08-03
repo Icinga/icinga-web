@@ -43,10 +43,8 @@
 		<parameter>/styles/statusmap.css</parameter>
 
 		<!-- ICINGA -->
-		<!-- <parameter>/styles/extjs/ext-all.css</parameter>
-		<parameter>/styles/extjs/ux-all.css</parameter> -->
-		<parameter>/styles/silk-icons.css</parameter>
-		<parameter>/styles/Icinga.css</parameter>
+		<parameter>/styles/icinga.css</parameter>
+		<parameter>/styles/icinga-icons.css</parameter>
 	</setting>
 	
 	<!-- 

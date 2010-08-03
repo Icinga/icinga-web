@@ -53,16 +53,16 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					this.topToolbar.add([
 						'-', {
 							text: _("Filter"),
-							iconCls: 'silk-pencil',
+							iconCls: 'icinga-icon-pencil',
 							menu: { 
 								items: [{ 
 									text: _("Modify"), 
-									iconCls: 'silk-application-form',
+									iconCls: 'icinga-icon-application-form',
 									handler: fw.startHandler,
 									scope: this
 								},{ 
 									text: _("Remove"), 
-									iconCls: 'silk-cancel',
+									iconCls: 'icinga-icon-cancel',
 									handler: function(b, e) {
 										fw.removeFilters();
 									},
@@ -84,7 +84,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					
 					var tbEntry = this.topToolbar.add({
 						text: '<?php echo $tm->_("Commands"); ?>',
-						iconCls: 'silk-server-lightning',
+						iconCls: 'icinga-icon-server-lightning',
 						menu: {
 							items: []
 						}

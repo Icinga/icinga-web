@@ -149,7 +149,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 	getRemoveComponent : function(meta) {
 		var button = new Ext.Button({
 			xtype: 'button',
-			iconCls: 'silk-cross',
+			iconCls: 'icinga-icon-cross',
 			handler: function(b, e) {
 				this.removeComponent(meta);
 			},

@@ -84,7 +84,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		}
 		
 		function rTypeName(value, metaData, record, rowIndex, colIndex, store) {
-			var cls = Icinga.DEFAULTS.OBJECT_TYPES[record.data.type].iconClass || 'silk-brick';
+			var cls = Icinga.DEFAULTS.OBJECT_TYPES[record.data.type].iconClass || 'icinga-icon-brick';
 			metaData.css = cls;
 			return '';
 		}
