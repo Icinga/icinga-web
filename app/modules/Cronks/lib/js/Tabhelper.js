@@ -41,7 +41,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 	createWelcomeCronk : function() {
 		return Cronk.factory({
 			title: _("Welcome"),
-			crname: ( AppKit.getPrefVal('de.icinga.cronk.default') || 'portalHello' ),
+			crname: ( AppKit.getPrefVal('org.icinga.cronk.default') || 'portalHello' ),
 			closable: true
 		});
 	},

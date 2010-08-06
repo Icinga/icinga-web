@@ -48,9 +48,9 @@
 				</setting>
 
 				<setting name="user_preferences_default">
-					<ae:parameter name="de.icinga.grid.pagerMaxItems">25</ae:parameter>
-					<ae:parameter name="de.icinga.grid.refreshTime">300</ae:parameter>
-					<ae:parameter name="de.icinga.cronk.default">portalHello</ae:parameter>
+					<ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
+					<ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
+					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
 				</setting>
 				
 			</settings>

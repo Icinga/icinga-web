@@ -24,7 +24,7 @@ class AppKitDoctrinePager extends Doctrine_Pager {
 	public static function createNew(Doctrine_query &$query, $page_offset, $route_name, $page_items=null) {
 		
 		if ($page_items === null || is_numeric($page_items) === false) {
-			$page_items = AgaviConfig::get('de.icinga.appkit.pager.default_items');
+			$page_items = AgaviConfig::get('org.icinga.appkit.pager.default_items');
 		}
 		
 		return new AppKitDoctrinePager($query, $page_offset, $route_name, $page_items);

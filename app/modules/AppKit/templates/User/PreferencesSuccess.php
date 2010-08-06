@@ -55,7 +55,7 @@ Ext.onReady(function() {
 							Ext.Ajax.request({
 								url: '<?php echo $ro->gen("my.preferences") ?>',
 								params: {
-									upref_key: 'de.icinga.appkit.locale',
+									upref_key: 'org.icinga.appkit.locale',
 									upref_val: Ext.getCmp('cmb_language').getValue(),
 									isLong: false
 								},
@@ -232,7 +232,7 @@ Ext.onReady(function() {
 							Ext.Ajax.request({
 								url: '<?php echo $ro->gen("my.preferences") ?>',
 								params: {
-									upref_key: 'de.icinga.ext.appstate',
+									upref_key: 'org.icinga.ext.appstate',
 									remove: true
 								},
 								callback: function() {

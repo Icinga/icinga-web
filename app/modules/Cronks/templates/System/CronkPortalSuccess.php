@@ -48,7 +48,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 				crname: 'gridLogView',
 				border: false,
 				params: {
-					autoRefresh: <?php echo $us->getPrefVal('de.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>
+					autoRefresh: <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>
 				}
 			}
 		}, {

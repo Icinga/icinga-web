@@ -2,7 +2,7 @@
 <!--
 	ICINGA base configuration
 -->
-<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config" prefix="de.icinga.">
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config" prefix="org.icinga.">
 	<!--
 		Add more links under 'home'
 		* The home itself points to index_page route

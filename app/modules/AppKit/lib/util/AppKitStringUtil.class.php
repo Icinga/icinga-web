@@ -88,8 +88,8 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 	 * @return string the converted path
 	 */
 	public static function absolute2Rel($path) {
-		$abw = AgaviConfig::get('de.icinga.appkit.web_absolute_path');
-		return AgaviConfig::get('de.icinga.appkit.web_path'). preg_replace('@^'. preg_quote($abw). '@', '', $path);
+		$abw = AgaviConfig::get('org.icinga.appkit.web_absolute_path');
+		return AgaviConfig::get('org.icinga.appkit.web_path'). preg_replace('@^'. preg_quote($abw). '@', '', $path);
 	}
 	
 	/**

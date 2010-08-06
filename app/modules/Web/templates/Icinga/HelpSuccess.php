@@ -9,11 +9,11 @@
 </div>
 
 <h2 style="text-align: center;">
-	Version <?php echo AgaviConfig::get('de.icinga.appkit.version.release'); ?>
+	Version <?php echo AgaviConfig::get('org.icinga.appkit.version.release'); ?>
 </h2>
 
 <h3 style="text-align: center;">
-	<?php echo $tm->_d(AgaviConfig::get('de.icinga.appkit.version.releasedate')); ?>
+	<?php echo $tm->_d(AgaviConfig::get('org.icinga.appkit.version.releasedate')); ?>
 </h3>
 
 <p style="text-align: center;" class="legal">

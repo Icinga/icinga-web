@@ -12,7 +12,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 		
 		// Get the magick
 		$response = $this->getContainer()->getResponse();
-		if(AgaviConfig::get('de.icinga.appkit.include_javascript.allowcache')) {
+		if(AgaviConfig::get('org.icinga.appkit.include_javascript.allowcache')) {
 			$response->clearHttpHeaders();
 			$response->setHttpHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + (3600*24)), true);
 			$response->setHttpHeader('Cache-Control', 'public', true);
@@ -24,7 +24,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 		}
 		else {
 			$content = $model->getContent(). chr(10);
-			$content .= 'AppKit.c.path = "'. AgaviConfig::get('de.icinga.appkit.web_path'). '";'. chr(10);
+			$content .= 'AppKit.c.path = "'. AgaviConfig::get('org.icinga.appkit.web_path'). '";'. chr(10);
 			$content .= $this->executeActions($model->getActions());
 			return $content;
 		}

@@ -39,21 +39,21 @@ class AppKitAgaviContext extends AgaviContext {
 		// Try to set the web path to correct urls within the frontend
 		if(AgaviConfig::get('core.default_context') =='web') {
 			// Try to set the web path to correct urls within the frontend
-			if (AgaviConfig::get('de.icinga.appkit.web_path') == null) {
-				AgaviConfig::set('de.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
+			if (AgaviConfig::get('org.icinga.appkit.web_path') == null) {
+				AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
 			}
 		}
 		
 		// Version
 		$version = sprintf(
 			'%s/v%d.%d.%d-%s',
-			AgaviConfig::get('de.icinga.appkit.version.name'),
-			AgaviConfig::get('de.icinga.appkit.version.major'),
-			AgaviConfig::get('de.icinga.appkit.version.minor'),
-			AgaviConfig::get('de.icinga.appkit.version.patch'),
-			AgaviConfig::get('de.icinga.appkit.version.extension')
+			AgaviConfig::get('org.icinga.appkit.version.name'),
+			AgaviConfig::get('org.icinga.appkit.version.major'),
+			AgaviConfig::get('org.icinga.appkit.version.minor'),
+			AgaviConfig::get('org.icinga.appkit.version.patch'),
+			AgaviConfig::get('org.icinga.appkit.version.extension')
 		);
-		AgaviConfig::set('de.icinga.appkit.version.release', $version, true, true);
+		AgaviConfig::set('org.icinga.appkit.version.release', $version, true, true);
 	}
 	
 	private function initializePhpSettings() {
@@ -91,7 +91,7 @@ class AppKitAgaviContext extends AgaviContext {
 			$translationMgr = $context->getTranslationManager();
 					
 			try {
-				$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
+				$locale = $user->getPrefVal("org.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
 				$translationMgr->setLocale($locale);
 			} catch(Exception $e) {
 				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());

@@ -28,7 +28,7 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction
 		
 		try {
 		
-			$files = AgaviConfig::get('de.icinga.appkit.include_javascript', array());
+			$files = AgaviConfig::get('org.icinga.appkit.include_javascript', array());
 			
 			if (array_key_exists('squished', $files)) {
 				$loader->addFiles($files['squished']);

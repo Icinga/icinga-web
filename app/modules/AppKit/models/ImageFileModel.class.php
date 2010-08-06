@@ -77,7 +77,7 @@ implements AgaviISingletonModel
 	}
 	
 	public function getImagePath() {
-		return AgaviConfig::get('de.icinga.appkit.image_path');
+		return AgaviConfig::get('org.icinga.appkit.image_path');
 	}
 	
 }	

@@ -23,7 +23,7 @@ class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction {
 		$header = $this->getContext()->getModel('HeaderData', 'AppKit');
 		
 		// Adding preconfigured style files
-		if (is_array( ($css_files = AgaviConfig::get('de.icinga.appkit.include_styles')) )) {
+		if (is_array( ($css_files = AgaviConfig::get('org.icinga.appkit.include_styles')) )) {
 			foreach ($css_files as $css_file) {
 				$header->addCssFile($css_file);
 			}
@@ -34,7 +34,7 @@ class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction {
 		$header->addJsFile($squish_url);
 		
 		// Adding inline files
-		$files = AgaviConfig::get('de.icinga.appkit.include_javascript');
+		$files = AgaviConfig::get('org.icinga.appkit.include_javascript');
 		if (is_array($files) && array_key_exists('inline', $files) && is_array($files['inline'])) {
 			foreach ($files['inline'] as $js_file) {
 				$header->addJsFile($js_file);
@@ -43,7 +43,7 @@ class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction {
 		
 		
 		// Adding some meta tags to the page header
-		if (is_array( ($tags = AgaviConfig::get('de.icinga.appkit.meta_tags')) )) {
+		if (is_array( ($tags = AgaviConfig::get('org.icinga.appkit.meta_tags')) )) {
 			foreach ($tags as $tag_name => $tag_val) {
 				$header->addMetaTag($tag_name, $tag_val);
 			}

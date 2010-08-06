@@ -70,12 +70,12 @@ class IcingaTemplateXmlReplace {
 
 	public function pagerMaxItems() {
 		$user = $this->context->getUser();
-		return $user->getPrefVal('de.icinga.grid.pagerMaxItems', AgaviConfig::get('modules.cronks.grid.pagerMaxItems', 25));
+		return $user->getPrefVal('org.icinga.grid.pagerMaxItems', AgaviConfig::get('modules.cronks.grid.pagerMaxItems', 25));
 	}
 
 	public function autoRefreshTime() {
 		$user = $this->context->getUser();
-		return $user->getPrefVal('de.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 300));
+		return $user->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 300));
 	}
 
 	public function valueAuthor() {

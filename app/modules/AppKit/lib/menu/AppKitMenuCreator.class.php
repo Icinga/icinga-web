@@ -76,7 +76,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 			);
 
 			//Add more homelinks
-			if (is_array($home_links = AgaviConfig::get('de.icinga.appkit.home_links'))) {
+			if (is_array($home_links = AgaviConfig::get('org.icinga.appkit.home_links'))) {
 				foreach ($home_links as $link_route=>$link_caption) {
 					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create($link_route, $link_route)
 						->setCaption($link_caption)
