@@ -21,14 +21,14 @@ Agavi::bootstrap('development');
 // Setting the running context to web ...
 AgaviConfig::set('core.default_context', 'web');
 
-// Dependent modules, important for
-// autoloader configs
-AgaviController::initializeModule('Web');
+// Main module
 AgaviController::initializeModule('AppKit');
 
 // Some kind of agavi like bootstrap
 // hook in
 AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
+
+
 
 // +---------------------------------------------------------------------------+
 // | Call the controller's dispatch method on the default context              |

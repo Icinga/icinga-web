@@ -33,6 +33,27 @@ class AppKitArrayUtil {
 		}
 		return $out;
 	}
+
+	/**
+	 * Flatten an recursive tree structure
+	 *
+	 * @param array $data
+	 * @param string $key_prefix
+	 * @param array $dump
+	 * @return array
+	 */
+	public static function flattenArray(array &$data, $key_prefix='', array &$dump = array ()) {
+		foreach ($data as $k=>$v) {
+			if (is_array($v)) {
+				self::flattenArray($v, $key_prefix. '.'. $k, $dump);
+			}
+			else {
+				$dump[$key_prefix. '.'. $k] = $v;
+			}
+		}
+
+		return $dump;
+	}
 	
 }
 

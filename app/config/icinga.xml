@@ -23,39 +23,16 @@
 	-->
 	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
 
-	<!-- 
-		Stylesheet includes
-		* Relative to your web
-		* The real web oath will be prepended
-	-->
-	<setting name="appkit.include_styles">		
-	
-		<!-- ICINGAWireFrame css -->
-		<!--  <parameter>/styles/WireFrameDefault.css</parameter>
-		<parameter>/styles/WireFrameStructural.css</parameter> -->
-		
-		<!-- ExtJS -->
-		<parameter>/js/ext3/resources/css/ext-all-notheme.css</parameter>
-		<parameter>/js/ext3/resources/css/xtheme-gray.css</parameter>
-		<parameter>/js/ext3/examples/ux/css/ux-all.css</parameter>
-
-		<!-- JIT - JavaScript InfoVis Toolkit -->
-		<parameter>/styles/statusmap.css</parameter>
-
-		<!-- ICINGA -->
-		<parameter>/styles/icinga.css</parameter>
-		<parameter>/styles/icinga-icons.css</parameter>
-	</setting>
+	<!-- @DEPRECATED -->
+	<setting name="appkit.include_styles"></setting>
 	
 	<!-- 
 		Metatags
 	-->
 	<setting name="appkit.meta_tags">
-		<parameter name="author">(c) 2009,2010 Icinga developer team - www.icinga.org</parameter>
-		<parameter name="robots">noindex</parameter>
 	</setting>
-	
-	
+
+	<!-- @DEPRECATED -->
 	<!-- 
 		Javascript includes
 		* please provide absolute paths, we create one big file later.
@@ -67,82 +44,15 @@
 		 -->
 		<parameter name="allowcache">false</parameter>
 
-		<parameter name="squished">
-			<!-- Firebug lite for debug purposes -->
-			<!-- <parameter>%core.root_dir%/lib/firebug/firebug-lite-compressed.js</parameter> -->
-			
-			<!-- ExtJS base files -->
-			<parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/ext-all.js</parameter>
-	
-			<!-- JIT - JavaScript InfoVis Toolkit -->
-			<parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</parameter>
-			<parameter>%core.root_dir%/lib/jit/jit-yc.js</parameter>
-	
-			<!--AppKit JS -->
-			<parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</parameter>
-			<parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</parameter>
-			<parameter>%core.module_dir%/AppKit/lib/js/Layout.js</parameter>
-			<parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</parameter>
-			<parameter>%core.module_dir%/AppKit/lib/js/ScriptDynaLoader.js</parameter>
-			<parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</parameter>
-	
-			<!-- Cronks -->
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/Portlet.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</parameter>
-			
-			<parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</parameter>
-		
-			<parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</parameter>
-			<parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</parameter>
-			<parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</parameter>			
-			<!--
-			<parameter>%core.root_dir%/lib/appkit/js/ext/CronkMgr.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/ColumnRenderer.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/GridPanel.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/grid/MetaGridCreator.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/util/InterGridUtil.js</parameter>
-			<parameter>%core.root_dir%/lib/appkit/js/ext/util/StructUtil.js</parameter>
-			-->
-			
-			<!-- jsgettext -->
-			<parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</parameter>
-			
-			<!--  ICINGA JS -->
-			<parameter>%core.module_dir%/Web/lib/js/SimpleDataProvider.js</parameter>
-			<parameter>%core.module_dir%/Web/lib/js/StatusData.js</parameter>
-		</parameter>
-		
+		<!-- @DEPRECATED -->
+		<parameter name="squished"></parameter>
+
+		<!-- @DEPRECATED -->
 		<!-- Adding inline actions to append dynamic javascript -->
 		<parameter name="action">
-			<parameter>
-				<parameter name="module">AppKit</parameter>
-				<parameter name="action">Ext.initI18n</parameter>
-				<parameter name="output_type">javascript</parameter>
-			</parameter>
-			
-			<parameter>
-				<parameter name="module">AppKit</parameter>
-				<parameter name="action">Ext.ApplicationState</parameter>
-				<parameter name="output_type">javascript</parameter>
-				<parameter name="arguments">
-					<parameter name="cmd">init</parameter>
-				</parameter>
-			</parameter>
-
 		</parameter>
-		
+
+		<!-- @DEPRECATED -->
 		<!-- Inline scripts to include url's -->
 		<parameter name="inline">
 		</parameter>
@@ -182,6 +92,12 @@
 	
 	<!-- PLACEHOLDER -->
 	<setting name="appkit.version.release"/>
+
+	<!-- init modules -->
+	<setting name="appkit.init_modules">
+		<parameter>Cronks</parameter>
+		<parameter>Web</parameter>
+	</setting>
 
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/>
 </settings>

@@ -20,26 +20,28 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		
+
 		$files = array ();
 		$actions = array ();
+
+		// We need the data in the action,
+		// it's too late in the view
+		AppKitModuleUtil::getInstance()->applyToRequestAttributes($this->getContainer());
 		
 		$loader = $this->getContext()->getModel('SquishFileContainer', 'AppKit', array('type' => 'javascript'));
-		
+
 		try {
-		
-			$files = AgaviConfig::get('org.icinga.appkit.include_javascript', array());
 			
-			if (array_key_exists('squished', $files)) {
-				$loader->addFiles($files['squished']);
-			}
-			
-			if (array_key_exists('action', $files)) {
-				$loader->setActions($files['action']);
-			}
+			$loader->addFiles(
+				$this->getContext()->getRequest()->getAttribute('app.javascript_files', AppKitModuleUtil::DEFAULT_NAMESPACE, array())
+			);
 			
 			$loader->squishContents();
-			
+
+			$actions = $this->getContext()->getRequest()->getAttribute('app.javascript_actions', AppKitModuleUtil::DEFAULT_NAMESPACE, array());
+
+			$this->setAttribute('javascript_actions', $actions);
+
 			$this->setAttributeByRef('model', $loader);
 		
 		}

@@ -1,3 +1,3 @@
-<?php 
-	// Just a placeholder
+<?php
+AppKitModuleUtil::getInstance()->registerModule('Cronks');
 ?>

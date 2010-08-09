@@ -7,6 +7,39 @@
 				<setting name="title">Cronks Module</setting>
 				<setting name="version">1.0</setting>
 
+				<!-- Module configuration -->
+
+				<!-- Adding styles -->
+				<setting name="appkit_module.app.css_files">
+					<!-- JIT - JavaScript InfoVis Toolkit -->
+					<ae:parameter>/styles/statusmap.css</ae:parameter>
+				</setting>
+
+				<setting name="appkit_module.app.javascript_files">
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/Portlet.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</ae:parameter>
+
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</ae:parameter>
+
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</ae:parameter>
+
+					<ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
+				</setting>
+
 				<!--
 					* Path to our grid templates
 				-->

@@ -1,6 +1,6 @@
-Ext.ns('Icinga', 'Icinga.DEFAULTS');
+Ext.ns('Icinga');
 
-AppKit.on('appkit-ready', function() {
+Ext.onReady(function() {
 
 Icinga.DEFAULTS = {};
 
@@ -96,7 +96,7 @@ Icinga.StatusData = (function() {
 			t = pub.servicestatusText[statusid];
 		}
 		
-		return { cls: c, text: String.format.call(String, format, t) };
+		return {cls: c, text: String.format.call(String, format, t)};
 	};
 	
 	var textTemplate = new Ext.Template('<span class="icinga-status-text {cls}">{text}</span>');
@@ -139,4 +139,4 @@ Icinga.ObjectData = (function() {
 	
 });
 
-}, window, { single: true });
+}, window, {single: true});

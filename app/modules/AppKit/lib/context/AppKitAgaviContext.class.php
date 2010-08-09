@@ -1,7 +1,7 @@
 <?php
 
 class AppKitAgaviContext extends AgaviContext {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see lib/agavi/src/core/AgaviContext#initialize()
@@ -14,10 +14,28 @@ class AppKitAgaviContext extends AgaviContext {
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
 		$this->initializeAutosettings();
+		$this->initializeModules();
 		$this->initializeEventHandling();
 		$this->setLanguageDomain();
 		
 		parent::initialize();
+	}
+
+	/**
+	 * Load all needed modules
+	 */
+	private function initializeModules() {
+		(array)$list = AgaviConfig::get('org.icinga.appkit.init_modules', array());
+
+		if (array_search('AppKit', $list) == false) {
+			AgaviController::initializeModule('AppKit');
+		}
+		
+		foreach ($list as $mod_name) {
+			AgaviController::initializeModule($mod_name);
+		}
+
+
 	}
 	
 	/**
