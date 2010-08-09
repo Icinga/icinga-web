@@ -69,7 +69,11 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 		parent::initialize($context, $parameters);
 		
 		$this->user = $this->getContext()->getUser();
-		$this->roles = $this->user->getRoles();
+		
+		$tmp_role = $this->user->getRoles();
+		foreach ($tmp_role as $role) {
+			$this->roles[] = $role->role_name;
+		}
 
 		if (array_key_exists('filter', $parameters)) {
 			$this->applyFilter($parameters['filter']);
@@ -191,6 +195,7 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 	private function testArrayIntersects($totest, array $against=array()) {
 		if (!is_array($totest) && is_string($totest)) $totest = explode(',', $totest);
 		$t = array_intersect($totest, $against);
+
 		if (is_array($t) && count($t)>0) {
 			return true;
 		}
