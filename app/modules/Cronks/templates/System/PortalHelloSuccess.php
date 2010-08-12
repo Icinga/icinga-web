@@ -1,11 +1,11 @@
 <?php
 	function _GV($item) {
-		return AgaviConfig::get('org.icinga.appkit.version.'. $item);
+		return AgaviConfig::get('org.icinga.version.'. $item);
 	}
 	
 	$version_string = vsprintf('%d.%d.%d-%s', array_map("_GV", array('major', 'minor', 'patch', 'extension')));
-	$version_date = AgaviConfig::get('org.icinga.appkit.version.releasedate');
-	$copy =  AgaviConfig::get('org.icinga.appkit.version.copyright');
+	$version_date = AgaviConfig::get('org.icinga.version.releasedate');
+	$copy =  AgaviConfig::get('org.icinga.version.copyright');
 ?>
 <div style="margin: 10px auto; padding: 10px 10px;">
 

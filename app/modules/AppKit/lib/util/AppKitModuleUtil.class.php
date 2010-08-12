@@ -8,11 +8,16 @@ class AppKitModuleUtil extends AppKitSingleton {
 
 	const DEFAULT_NAMESPACE	= 'org.icinga.global';
 
+	const DATA_FLAT			= 'flat';
+	const DATA_DEFAULT		= 'default';
+	const DATA_UNIQUE		= 'unique';
+
 	protected static $default_config_keys = array (
-		'app.javascript_files'		=> 'flat',
-		'app.javascript_actions'	=> false,
-		'app.css_files'				=> 'flat',
-		'app.meta_tags'				=> false
+		'app.javascript_files'		=> self::DATA_FLAT,
+		'app.javascript_actions'	=> self::DATA_DEFAULT,
+		'app.javascript_dynamic'	=> self::DATA_UNIQUE,
+		'app.css_files'				=> self::DATA_FLAT,
+		'app.meta_tags'				=> self::DATA_DEFAULT
 	);
 
 	private $modules = null;
@@ -89,7 +94,7 @@ class AppKitModuleUtil extends AppKitSingleton {
 		return $this->s_configns;
 	}
 
-	public function getSubConfig($subkey, $flat=true) {
+	public function getSubConfig($subkey, $type=self::DATA_FLAT) {
 		$out = array ();
 		foreach ($this->getValidConfigNamespaces() as $ns) {
 			$test = $ns. '.'. $subkey;
@@ -98,11 +103,21 @@ class AppKitModuleUtil extends AppKitSingleton {
 				$out[$subkey][isset($this->s_modnames[$ns]) ? $this->s_modnames[$ns] : $ns] = $data;
 			}
 		}
-		
-		if ($flat==true)
-			$out = AppKitArrayUtil::flattenArray($out, 'sub');
 
-		return $out;
+		switch ($type) {
+			case self::DATA_FLAT:
+				return AppKitArrayUtil::flattenArray($out, 'sub');
+			break;
+
+			case self::DATA_UNIQUE:
+				return AppKitArrayUtil::uniqueKeysArray($out, true);
+			break;
+
+			case self::DATA_DEFAULT:
+			default:
+				return $out;
+			break;
+		}
 	}
 
 	public function getWholeConfig() {
@@ -120,10 +135,16 @@ class AppKitModuleUtil extends AppKitSingleton {
 		$rq = $container->getContext()->getRequest();
 
 		foreach (self::$default_config_keys as $subkey=>$subtype) {
-			$data = $this->getSubConfig($subkey, ($subtype=='flat' ? true : false));
+			$data = $this->getSubConfig($subkey, $subtype);
+			
 			if (isset($data)) {
-				foreach ($data as $value) {
-					$rq->appendAttribute($subkey, $value, $ns);
+				if ($subtype == self::DATA_UNIQUE) {
+					$rq->setAttribute($subkey, $data, $ns);
+				}
+				else {
+					foreach ($data as $value) {
+						$rq->appendAttribute($subkey, $value, $ns);
+					}
 				}
 			}
 		}

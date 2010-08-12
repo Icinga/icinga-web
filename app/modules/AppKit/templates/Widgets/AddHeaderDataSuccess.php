@@ -48,7 +48,7 @@
 	<script type="text/javascript" src="<?php echo $js_file; ?>"></script>
 	<?php } ?>
 <?php endif; ?>
-<?php if (is_array($t['js_raw']) && count($t['js_raw'])) { ?>
+<?php if (isset($t['js_raw']) && is_array($t['js_raw']) && count($t['js_raw'])) { ?>
 		<!-- RAW js code -->
 		<script type="text/javascript">
 		//<!-- // <![CDATA[

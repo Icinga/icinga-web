@@ -40,6 +40,13 @@
 					<ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
 				</setting>
 
+				<setting name="appkit_module.app.javascript_dynamic">
+					<ae:parameter name="Cronk.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
+					<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
+					<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
+					<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
+				</setting>
+
 				<!--
 					* Path to our grid templates
 				-->

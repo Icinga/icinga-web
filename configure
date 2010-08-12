@@ -577,6 +577,11 @@ web_user
 PHING
 MYSQL
 PHP
+RELEASE_DATE
+VERSION_EXTEN
+VERSION_PATCH
+VERSION_MINOR
+VERSION_MAJOR
 SED
 GREP
 INSTALL_DATA
@@ -1701,6 +1706,8 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
+RELEASE_DATE="2010-06-30"
+
 
 
 # Checks for programs.
@@ -1951,6 +1958,20 @@ fi
 $as_echo "$ac_cv_path_SED" >&6; }
  SED="$ac_cv_path_SED"
   rm -f conftest.sed
+
+
+# Extract version parts
+
+	VERSION_MAJOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\1/g'`
+	VERSION_MINOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\2/g'`
+	VERSION_PATCH=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\3/g'`
+	VERSION_EXTEN=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\5/g'`
+
+
+
+
+
+
 
 
 # Check for php
@@ -2306,7 +2327,7 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile etc/build.properties etc/tests/test.properties app/config/databases.xml pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml etc/build.properties etc/tests/test.properties pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3009,9 +3030,10 @@ for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
+    "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "etc/tests/test.properties") CONFIG_FILES="$CONFIG_FILES etc/tests/test.properties" ;;
-    "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;
     "pub/soap/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/soap/.htaccess" ;;
 

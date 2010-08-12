@@ -105,7 +105,7 @@ class AppKit {
 	 * @return string
 	 */
 	public static function getVersion() {
-		return AgaviConfig::get('org.icinga.appkit.version.release');
+		return AgaviConfig::get('org.icinga.version.release');
 	}
 }
 

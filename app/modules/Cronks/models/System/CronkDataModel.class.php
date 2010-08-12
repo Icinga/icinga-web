@@ -69,11 +69,7 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 		parent::initialize($context, $parameters);
 		
 		$this->user = $this->getContext()->getUser();
-		
-		$tmp_role = $this->user->getRoles();
-		foreach ($tmp_role as $role) {
-			$this->roles[] = $role->role_name;
-		}
+		$this->roles = $this->user->getRoles();
 
 		if (array_key_exists('filter', $parameters)) {
 			$this->applyFilter($parameters['filter']);

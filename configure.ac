@@ -7,12 +7,23 @@ AC_PREREQ(2.61)
 # Init project
 AC_INIT(icinga-web, [1.0.1], [dev.icinga.org])
 
+RELEASE_DATE="2010-06-30"
+
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
 
 # Checks for programs.
 AC_PROG_INSTALL
 AC_PROG_GREP
 AC_PROG_SED
+
+# Extract version parts
+ACICINGA_EXTRACT_VERSION([VERSION_MAJOR],[VERSION_MINOR],[VERSION_PATCH],[VERSION_EXTEN])
+
+AC_SUBST(VERSION_MAJOR)
+AC_SUBST(VERSION_MINOR)
+AC_SUBST(VERSION_PATCH)
+AC_SUBST(VERSION_EXTEN)
+AC_SUBST(RELEASE_DATE)
 
 # Check for php
 AC_ARG_VAR([PHP],[php cli binary])
@@ -141,9 +152,10 @@ AC_SUBST(INSTALL_OPTS)
 
 AC_CONFIG_FILES([
 	Makefile
+	app/config/databases.xml
+	app/config/icinga.xml
 	etc/build.properties
 	etc/tests/test.properties
-	app/config/databases.xml
 	pub/.htaccess
 	pub/soap/.htaccess
 ])

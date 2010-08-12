@@ -33,3 +33,10 @@ AC_DEFUN([ACICINGA_CHECK_API], [
 		[ AC_MSG_RESULT([found])    ],
 		[ AC_MSG_WARN([not found]) ])
 ])
+
+AC_DEFUN([ACICINGA_EXTRACT_VERSION], [
+	$1=`echo "$PACKAGE_VERSION" | $SED 's/^\([[0-9]]\+\)\.\([[0-9]]\+\)\.\([[0-9]]\+\)\(\-\(.\+\)\)\?$/\1/g'`
+	$2=`echo "$PACKAGE_VERSION" | $SED 's/^\([[0-9]]\+\)\.\([[0-9]]\+\)\.\([[0-9]]\+\)\(\-\(.\+\)\)\?$/\2/g'`
+	$3=`echo "$PACKAGE_VERSION" | $SED 's/^\([[0-9]]\+\)\.\([[0-9]]\+\)\.\([[0-9]]\+\)\(\-\(.\+\)\)\?$/\3/g'`
+	$4=`echo "$PACKAGE_VERSION" | $SED 's/^\([[0-9]]\+\)\.\([[0-9]]\+\)\.\([[0-9]]\+\)\(\-\(.\+\)\)\?$/\5/g'`
+]);

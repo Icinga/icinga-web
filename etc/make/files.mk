@@ -251,6 +251,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitInlineIncluderUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitInlineIncluderUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitLdapTool.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitModuleUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitModuleUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitRandomUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitStringUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitStringUtil.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/validator
@@ -8038,6 +8039,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/database.png $(DESTDIR)$(prefix)/pub/images/icons/database.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/database_refresh.png $(DESTDIR)$(prefix)/pub/images/icons/database_refresh.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/delete.gif $(DESTDIR)$(prefix)/pub/images/icons/delete.gif
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/fancytextfield-icon.png $(DESTDIR)$(prefix)/pub/images/icons/fancytextfield-icon.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/fancytextfield-reset.png $(DESTDIR)$(prefix)/pub/images/icons/fancytextfield-reset.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group_add.png $(DESTDIR)$(prefix)/pub/images/icons/group_add.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group_delete.png $(DESTDIR)$(prefix)/pub/images/icons/group_delete.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group_key.png $(DESTDIR)$(prefix)/pub/images/icons/group_key.png
@@ -8087,6 +8090,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7102
+INC_FILES=7105
 INC_DIRS=984
 # INSTALL_FILES_END

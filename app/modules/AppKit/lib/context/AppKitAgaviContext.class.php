@@ -61,17 +61,17 @@ class AppKitAgaviContext extends AgaviContext {
 				AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
 			}
 		}
-		
-		// Version
-		$version = sprintf(
+
+		// Build the global version
+		AgaviConfig::set('org.icinga.version.release', sprintf(
 			'%s/v%d.%d.%d-%s',
-			AgaviConfig::get('org.icinga.appkit.version.name'),
-			AgaviConfig::get('org.icinga.appkit.version.major'),
-			AgaviConfig::get('org.icinga.appkit.version.minor'),
-			AgaviConfig::get('org.icinga.appkit.version.patch'),
-			AgaviConfig::get('org.icinga.appkit.version.extension')
-		);
-		AgaviConfig::set('org.icinga.appkit.version.release', $version, true, true);
+			AgaviConfig::get('org.icinga.version.name'),
+			AgaviConfig::get('org.icinga.version.major'),
+			AgaviConfig::get('org.icinga.version.minor'),
+			AgaviConfig::get('org.icinga.version.patch'),
+			AgaviConfig::get('org.icinga.version.extension')
+		), true, true);
+		
 	}
 	
 	private function initializePhpSettings() {

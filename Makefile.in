@@ -2,6 +2,11 @@ SHELL=/bin/sh
 PACKAGE_TARNAME=@PACKAGE_TARNAME@
 PACKAGE_NAME=@PACKAGE_NAME@
 PACKAGE_VERSION=@PACKAGE_VERSION@
+VERSION_MAJOR=@VERSION_MAJOR@
+VERSION_MINOR=@VERSION_MINOR@
+VERSION_PATCH=@VERSION_PATCH@
+VERSION_EXTEN=@VERSION_EXTEN@
+RELEASE_DATE=@RELEASE_DATE@
 TAR_DIR_NAME=$(shell basename `pwd`)
 prefix=@prefix@
 exec_prefix=@exec_prefix@
@@ -59,7 +64,7 @@ include $(INC_MAKE_FILES)
 	
 clean: distclean
 
-distclean: clean
+distclean:
 	rm -f \
 		Makefile \
 		config.log \

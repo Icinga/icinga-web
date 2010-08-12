@@ -54,7 +54,32 @@ class AppKitArrayUtil {
 
 		return $dump;
 	}
+
+	/**
+	 * Combines an array tree to flat one. The new keys will bis the
+	 * keys at the end of the leaf structure
+	 * 
+	 * @param array $array
+	 * @param boolean $check_keys
+	 * @return array
+	 */
+	public static function uniqueKeysArray(array $array, $check_keys=false) {
+		$out = array ();
+		$it = new RecursiveIteratorIterator( new RecursiveArrayIterator($array) );
+		foreach ($it as $key=>$item) {
+
+			if ($check_keys == true && array_key_exists($key, $out)) {
+				throw new AppKitArrayUtilException('Key %s already defined', $key);
+			}
+			
+			$out[$key] = $item;
+		}
+		
+		return $out;
+	}
 	
 }
+
+class AppKitArrayUtilException extends AppKitException {}
 
 ?>

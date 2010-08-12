@@ -98,6 +98,8 @@
 					</ae:parameter>
 				</setting>
 
+<!--				<setting name="appkit_module.app.javascript_dynamic"></setting>-->
+
 				<setting name="appkit_module.app.meta_tags">
 					<ae:parameter name="author">(c) 2009,2010 Icinga developer team - www.icinga.org</ae:parameter>
 					<ae:parameter name="robots">noindex</ae:parameter>
