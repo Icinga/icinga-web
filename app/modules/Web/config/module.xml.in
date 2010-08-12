@@ -21,21 +21,24 @@
 				<setting name="api.file">%core.root_dir%/lib/icinga-api/IcingaApi.php</setting>
 				
 				<setting name="api.class">IcingaApi</setting>
-				
+
+				<!--
+					See doc/icinga-api-types.txt for options
+				-->
 				<setting name="api.interfaces.data">
-					<ae:parameter name="api_type">IcingaApi::CONNECTION_IDO</ae:parameter>
+					<ae:parameter name="api_type">IcingaApi::@api_type@</ae:parameter>
 					
-					<ae:parameter name="config_type">mysql</ae:parameter>
-					<ae:parameter name="config_host">127.0.0.1</ae:parameter>
+					<ae:parameter name="config_type">@api_db_type@</ae:parameter>
+					<ae:parameter name="config_host">@api_db_host@</ae:parameter>
 		
 					
-					<ae:parameter name="config_port">3306</ae:parameter>
-					<ae:parameter name="config_database">icinga</ae:parameter>
+					<ae:parameter name="config_port">@api_db_port@</ae:parameter>
+					<ae:parameter name="config_database">@api_db_name@</ae:parameter>
 					
-					<ae:parameter name="config_user">icinga</ae:parameter>
-					<ae:parameter name="config_password">icinga</ae:parameter>
+					<ae:parameter name="config_user">@api_db_user@</ae:parameter>
+					<ae:parameter name="config_password">@api_db_passwd@</ae:parameter>
 					
-					<ae:parameter name="config_table_prefix">icinga_</ae:parameter>
+					<ae:parameter name="config_table_prefix">@api_db_prefix@</ae:parameter>
 				</setting>
 				
 				<setting name="api.interfaces.command">

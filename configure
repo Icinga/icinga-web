@@ -563,6 +563,14 @@ LIBOBJS
 INSTALL_OPTS
 CFLAGS
 icinga_api
+api_db_prefix
+api_db_name
+api_db_passwd
+api_db_user
+api_db_port
+api_db_host
+api_db_type
+api_type
 db_pass
 db_user
 db_name
@@ -640,6 +648,14 @@ with_db_port
 with_db_name
 with_db_user
 with_db_pass
+with_api_type
+with_api_db_type
+with_api_db_host
+with_api_db_port
+with_api_db_user
+with_api_db_passwd
+with_api_db_name
+with_api_db_prefix
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1256,19 +1272,30 @@ if test -n "$ac_init_help"; then
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-web-user=<user>  username for web writable files (default www-data)
-  --with-web-group=<grp>  group for web writable files (default www-data)
-  --with-web-path=<path>  web sub path (default /icinga-web)
-  --with-bin-user=<user>  user for all other files (default root)
-  --with-bin-group=<grp>  group for all other files (default bin)
-  --with-icinga-api=<string>
-                          Path to icinga-api
-  --with-db-type=<string> Type of dbms (default mysql)
-  --with-db-host=<string> Host of dbms (default 127.0.0.1)
-  --with-db-port=<int>    Port of the dbms (default 3306)
-  --with-db-name=<string> DB name for icinga (default icinga_web)
-  --with-db-user=<string> DB user for icinga (default icinga_web)
-  --with-db-pass=<string> DB pass for icinga (default icinga_web)
+  --with-web-user=USER    username for web writable files (default www-data)
+  --with-web-group=GROUP  group for web writable files (default www-data)
+  --with-web-path=PATH    web sub path (default /icinga-web)
+  --with-bin-user=USER    user for all other files (default root)
+  --with-bin-group=GROUP  group for all other files (default bin)
+  --with-icinga-api=PATH  Path to icinga-api
+  --with-db-type=DBTYPE   Type of dbms (default mysql)
+  --with-db-host=HOST     Host of dbms (default 127.0.0.1)
+  --with-db-port=PORT     Port of the dbms (default 3306)
+  --with-db-name=DBNAME   DB name for icinga (default icinga_web)
+  --with-db-user=USER     DB user for icinga (default icinga_web)
+  --with-db-pass=PASSWD   DB pass for icinga (default icinga_web)
+  --with-api-type=APICON  API type (default CONNECTION_IDO)
+  --with-api-db-type=DBTYPE
+                          DB driver (default mysql)
+  --with-api-db-host=HOST DB host (default localhost)
+  --with-api-db-port=PORT DB port (default 3306)
+  --with-api-db-user=USER DB username (default icinga)
+  --with-api-db-password=PASSWD
+                          DB password (default icinga)
+  --with-api-db-name=DBNAME
+                          DB name (default icinga)
+  --with-api-db-prefix=PREFIX
+                          DB table prefiy (default icinga_)
 
 Some influential environment variables:
   PHP         php cli binary
@@ -2301,6 +2328,88 @@ else
 fi
 
 
+# Configure the icinga-api
+
+
+# Check whether --with-api_type was given.
+if test "${with_api_type+set}" = set; then :
+  withval=$with_api_type; api_type=$withval
+else
+  api_type=CONNECTION_IDO
+
+fi
+
+
+
+# Check whether --with-api_db_type was given.
+if test "${with_api_db_type+set}" = set; then :
+  withval=$with_api_db_type; api_db_type=$withval
+else
+  api_db_type=mysql
+
+fi
+
+
+
+# Check whether --with-api_db_host was given.
+if test "${with_api_db_host+set}" = set; then :
+  withval=$with_api_db_host; api_db_host=$withval
+else
+  api_db_host=localhost
+
+fi
+
+
+
+# Check whether --with-api_db_port was given.
+if test "${with_api_db_port+set}" = set; then :
+  withval=$with_api_db_port; api_db_port=$withval
+else
+  api_db_port=3306
+
+fi
+
+
+
+# Check whether --with-api_db_user was given.
+if test "${with_api_db_user+set}" = set; then :
+  withval=$with_api_db_user; api_db_user=$withval
+else
+  api_db_user=mysql
+
+fi
+
+
+
+# Check whether --with-api_db_passwd was given.
+if test "${with_api_db_passwd+set}" = set; then :
+  withval=$with_api_db_passwd; api_db_passwd=$withval
+else
+  api_db_passwd=icinga
+
+fi
+
+
+
+# Check whether --with-api_db_name was given.
+if test "${with_api_db_name+set}" = set; then :
+  withval=$with_api_db_name; api_db_name=$withval
+else
+  api_db_name=icinga
+
+fi
+
+
+
+# Check whether --with-api_db_prefix was given.
+if test "${with_api_db_prefix+set}" = set; then :
+  withval=$with_api_db_prefix; api_db_prefix=$withval
+else
+  api_db_prefix=icinga_
+
+fi
+
+
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 CFLAGS=""
@@ -2327,7 +2436,16 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml etc/build.properties etc/tests/test.properties pub/.htaccess pub/soap/.htaccess"
+
+
+
+
+
+
+
+
+
+ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/module.xml etc/build.properties etc/tests/test.properties pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3032,6 +3150,7 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
+    "app/modules/Web/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/module.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "etc/tests/test.properties") CONFIG_FILES="$CONFIG_FILES etc/tests/test.properties" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;

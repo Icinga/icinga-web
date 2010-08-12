@@ -49,38 +49,38 @@ ACICINGA_CHECK_BIN([PHING], [phing])
 
 # Users for webfiles
 AC_ARG_WITH([web_user],
-	AS_HELP_STRING([--with-web-user=<user>], [username for web writable files (default www-data)]),
+	AS_HELP_STRING([--with-web-user=USER], [username for web writable files (default www-data)]),
 	web_user=$withval,
 	ACICINGA_USER_GUESS([www wwwrun www-data apache httpd nobody],[web_user],[www-data])
 )
 
 AC_ARG_WITH([web_group],
-	AS_HELP_STRING([--with-web-group=<grp>], [group for web writable files (default www-data)]),
+	AS_HELP_STRING([--with-web-group=GROUP], [group for web writable files (default www-data)]),
 	web_group=$withval,
 	ACICINGA_GROUP_GUESS([www www-data apache httpd nogroup nobody],[web_group], [www-data])
 )
 
 AC_ARG_WITH([web_path],
-	AS_HELP_STRING([--with-web-path=<path>], [web sub path (default /icinga-web)]),
+	AS_HELP_STRING([--with-web-path=PATH], [web sub path (default /icinga-web)]),
 	web_path=$withval,
 	web_path=/icinga-web
 )
 
 AC_ARG_WITH([bin_user],
-	AS_HELP_STRING([--with-bin-user=<user>], [user for all other files (default root)]),
+	AS_HELP_STRING([--with-bin-user=USER], [user for all other files (default root)]),
 	bin_user=$withval,
 	bin_user=root
 )
 
 AC_ARG_WITH([bin_group],
-	AS_HELP_STRING([--with-bin-group=<grp>], [group for all other files (default bin)]),
+	AS_HELP_STRING([--with-bin-group=GROUP], [group for all other files (default bin)]),
 	bin_group=$withval,
 	bin_group=bin
 )
 
 # Api related
 AC_ARG_WITH([icinga_api],
-	AS_HELP_STRING([--with-icinga-api=<string>], [Path to icinga-api]),
+	AS_HELP_STRING([--with-icinga-api=PATH], [Path to icinga-api]),
 	icinga_api=$withval,
 	icinga_api=/usr/local/icinga-api
 )
@@ -89,39 +89,89 @@ ACICINGA_CHECK_API([$icinga_api])
 
 # Web database switches
 AC_ARG_WITH([db_type],
-	AS_HELP_STRING([--with-db-type=<string>], [Type of dbms (default mysql)]),
+	AS_HELP_STRING([--with-db-type=DBTYPE], [Type of dbms (default mysql)]),
 	db_type=$withval,
 	db_type=mysql
 )
 
 AC_ARG_WITH([db_host],
-	AS_HELP_STRING([--with-db-host=<string>], [Host of dbms (default 127.0.0.1)]),
+	AS_HELP_STRING([--with-db-host=HOST], [Host of dbms (default 127.0.0.1)]),
 	db_host=$withval,
 	db_host=127.0.0.1
 )
 
 AC_ARG_WITH([db_port],
-	AS_HELP_STRING([--with-db-port=<int>], [Port of the dbms (default 3306)]),
+	AS_HELP_STRING([--with-db-port=PORT], [Port of the dbms (default 3306)]),
 	db_port=$withval,
 	db_port=3306
 )
 
 AC_ARG_WITH([db_name],
-	AS_HELP_STRING([--with-db-name=<string>], [DB name for icinga (default icinga_web)]),
+	AS_HELP_STRING([--with-db-name=DBNAME], [DB name for icinga (default icinga_web)]),
 	db_name=$withval,
 	db_name=icinga_web
 )
 
 AC_ARG_WITH([db_user],
-	AS_HELP_STRING([--with-db-user=<string>], [DB user for icinga (default icinga_web)]),
+	AS_HELP_STRING([--with-db-user=USER], [DB user for icinga (default icinga_web)]),
 	db_user=$withval,
 	db_user=icinga_web
 )
 
 AC_ARG_WITH([db_pass],
-	AS_HELP_STRING([--with-db-pass=<string>], [DB pass for icinga (default icinga_web)]),
+	AS_HELP_STRING([--with-db-pass=PASSWD], [DB pass for icinga (default icinga_web)]),
 	db_pass=$withval,
 	db_pass=icinga_web
+)
+
+# Configure the icinga-api
+
+AC_ARG_WITH([api_type],
+	AS_HELP_STRING([--with-api-type=APICON], [API type (default CONNECTION_IDO)]),
+	api_type=$withval,
+	api_type=CONNECTION_IDO
+)
+
+AC_ARG_WITH([api_db_type],
+	AS_HELP_STRING([--with-api-db-type=DBTYPE], [DB driver (default mysql)]),
+	api_db_type=$withval,
+	api_db_type=mysql
+)
+
+AC_ARG_WITH([api_db_host],
+	AS_HELP_STRING([--with-api-db-host=HOST], [DB host (default localhost)]),
+	api_db_host=$withval,
+	api_db_host=localhost
+)
+
+AC_ARG_WITH([api_db_port],
+	AS_HELP_STRING([--with-api-db-port=PORT], [DB port (default 3306)]),
+	api_db_port=$withval,
+	api_db_port=3306
+)
+
+AC_ARG_WITH([api_db_user],
+	AS_HELP_STRING([--with-api-db-user=USER], [DB username (default icinga)]),
+	api_db_user=$withval,
+	api_db_user=mysql
+)
+
+AC_ARG_WITH([api_db_passwd],
+	AS_HELP_STRING([--with-api-db-password=PASSWD], [DB password (default icinga)]),
+	api_db_passwd=$withval,
+	api_db_passwd=icinga
+)
+
+AC_ARG_WITH([api_db_name],
+	AS_HELP_STRING([--with-api-db-name=DBNAME], [DB name (default icinga)]),
+	api_db_name=$withval,
+	api_db_name=icinga
+)
+
+AC_ARG_WITH([api_db_prefix],
+	AS_HELP_STRING([--with-api-db-prefix=PREFIX], [DB table prefiy (default icinga_)]),
+	api_db_prefix=$withval,
+	api_db_prefix=icinga_
 )
 
 # Custom vars
@@ -142,6 +192,15 @@ AC_SUBST(db_name)
 AC_SUBST(db_user)
 AC_SUBST(db_pass)
 
+AC_SUBST(api_type)
+AC_SUBST(api_db_type)
+AC_SUBST(api_db_host)
+AC_SUBST(api_db_port)
+AC_SUBST(api_db_user)
+AC_SUBST(api_db_passwd)
+AC_SUBST(api_db_name)
+AC_SUBST(api_db_prefix)
+
 AC_SUBST(icinga_api)
 
 AC_SUBST(CFLAGS)
@@ -154,6 +213,7 @@ AC_CONFIG_FILES([
 	Makefile
 	app/config/databases.xml
 	app/config/icinga.xml
+	app/modules/Web/config/module.xml
 	etc/build.properties
 	etc/tests/test.properties
 	pub/.htaccess
