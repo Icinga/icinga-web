@@ -1283,7 +1283,8 @@ Optional Packages:
                           Include folder apache2 (default /etc/apache2/conf.d
   --with-bin-user=USER    user for all other files (default root)
   --with-bin-group=GROUP  group for all other files (default bin)
-  --with-icinga-api=PATH  Path to icinga-api
+  --with-icinga-api=PATH  Path to icinga-api (default
+                          /usr/local/icinga/share/icinga-api)
   --with-db-type=DBTYPE   Type of dbms (default mysql)
   --with-db-host=HOST     Host of dbms (default 127.0.0.1)
   --with-db-port=PORT     Port of the dbms (default 3306)
@@ -2266,7 +2267,7 @@ fi
 if test "${with_icinga_api+set}" = set; then :
   withval=$with_icinga_api; icinga_api=$withval
 else
-  icinga_api=/usr/local/icinga-api
+  icinga_api=/usr/local/icinga/share/icinga-api
 
 fi
 
@@ -3638,3 +3639,4 @@ $as_echo "$as_me: Create api config in $FILE" >&6;}
 	$SED -i -e "/###BEGIN_$T###/,/###END_$T###/d" $FILE
 
 	done
+

@@ -86,9 +86,9 @@ AC_ARG_WITH([bin_group],
 
 # Api related
 AC_ARG_WITH([icinga_api],
-	AS_HELP_STRING([--with-icinga-api=PATH], [Path to icinga-api]),
+	AS_HELP_STRING([--with-icinga-api=PATH], [Path to icinga-api (default /usr/local/icinga/share/icinga-api)]),
 	icinga_api=$withval,
-	icinga_api=/usr/local/icinga-api
+	icinga_api=/usr/local/icinga/share/icinga-api
 )
 
 ACICINGA_CHECK_API([$icinga_api])
