@@ -701,6 +701,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/install-fromscratch.txt $(DESTDIR)$(prefix)/doc/install-fromscratch.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/LICENSE $(DESTDIR)$(prefix)/doc/LICENSE
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/makefile-howto.txt $(DESTDIR)$(prefix)/doc/makefile-howto.txt
+	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/RELEASEDATE $(DESTDIR)$(prefix)/doc/RELEASEDATE
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/TODO $(DESTDIR)$(prefix)/doc/TODO
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/translation-howto.txt $(DESTDIR)$(prefix)/doc/translation-howto.txt
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VENDOR $(DESTDIR)$(prefix)/doc/VENDOR
@@ -761,6 +762,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/interface/availabilityTest.php $(DESTDIR)$(prefix)/etc/tests/tests/interface/availabilityTest.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/unit
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/unit/icingaDatabaseTest.php $(DESTDIR)$(prefix)/etc/tests/tests/unit/icingaDatabaseTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/version.m4 $(DESTDIR)$(prefix)/etc/version.m4
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/API_CHANGELOG $(DESTDIR)$(prefix)/lib/agavi/API_CHANGELOG
@@ -8090,6 +8092,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7104
+INC_FILES=7106
 INC_DIRS=985
 # INSTALL_FILES_END

@@ -565,7 +565,7 @@ CFLAGS
 icinga_api
 api_db_prefix
 api_db_name
-api_db_passwd
+api_db_pass
 api_db_user
 api_socket
 api_port
@@ -657,7 +657,7 @@ with_api_host
 with_api_port
 with_api_socket
 with_api_db_user
-with_api_db_passwd
+with_api_db_pass
 with_api_db_name
 with_api_db_prefix
 '
@@ -1286,19 +1286,18 @@ Optional Packages:
   --with-icinga-api=PATH  Path to icinga-api (default
                           /usr/local/icinga/share/icinga-api)
   --with-db-type=DBTYPE   Type of dbms (default mysql)
-  --with-db-host=HOST     Host of dbms (default 127.0.0.1)
+  --with-db-host=HOST     Host of dbms (default localhost)
   --with-db-port=PORT     Port of the dbms (default 3306)
   --with-db-name=DBNAME   DB name for icinga (default icinga_web)
   --with-db-user=USER     DB user for icinga (default icinga_web)
-  --with-db-pass=PASSWD   DB pass for icinga (default icinga_web)
+  --with-db-pass=PASS     DB pass for icinga (default icinga_web)
   --with-api-type=APICON  API type (default CONNECTION_IDO)
   --with-api-subtype=TYPE DB driver or network connection
   --with-api-host=HOST    Host to connect (DB or other) (default localhost)
   --with-api-port=PORT    Port for connection (default 3306)
   --with-api-socket=PATH  Path to socket (default none)
   --with-api-db-user=USER DB username (default icinga)
-  --with-api-db-passwd=PASSWD
-                          DB password (default icinga)
+  --with-api-db-pass=PASS DB password (default icinga)
   --with-api-db-name=DBNAME
                           DB name (default icinga)
   --with-api-db-prefix=PREFIX
@@ -2301,7 +2300,7 @@ fi
 if test "${with_db_host+set}" = set; then :
   withval=$with_db_host; db_host=$withval
 else
-  db_host=127.0.0.1
+  db_host=localhost
 
 fi
 
@@ -2409,11 +2408,11 @@ fi
 
 
 
-# Check whether --with-api_db_passwd was given.
-if test "${with_api_db_passwd+set}" = set; then :
-  withval=$with_api_db_passwd; api_db_passwd=$withval
+# Check whether --with-api_db_pass was given.
+if test "${with_api_db_pass+set}" = set; then :
+  withval=$with_api_db_pass; api_db_pass=$withval
 else
-  api_db_passwd=icinga
+  api_db_pass=icinga
 
 fi
 
