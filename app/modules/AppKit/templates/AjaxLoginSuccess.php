@@ -12,7 +12,7 @@ Ext.onReady(function() {
 		var pub;
 		
 		var oButton = new Ext.Button({
-			text: '<?php echo $tm->_("Try"); ?>',
+			text: '<?php echo $tm->_("Login"); ?>',
 			id: 'login_button',
 			handler: function(b, e) {
 				pub.disableForm();
