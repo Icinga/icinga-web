@@ -3,13 +3,13 @@
 		return AgaviConfig::get('org.icinga.version.'. $item);
 	}
 	
-	$version_string = vsprintf('%d.%d.%d-%s', array_map("_GV", array('major', 'minor', 'patch', 'extension')));
+	$version_string = AgaviConfig::get('org.icinga.version.release');;
 	$version_date = AgaviConfig::get('org.icinga.version.releasedate');
 	$copy =  AgaviConfig::get('org.icinga.version.copyright');
 ?>
 <div style="margin: 10px auto; padding: 10px 10px;">
 
-	<h1>Welcome to Icinga <?php echo $version_string; ?></h1>
+	<h1>Welcome to Icinga (<?php echo $version_string; ?>)</h1>
 	
 	<p>Feel free to poke around and don't forget to visit the project homepage 	to post bug advisories or feature requests.</p>
 	

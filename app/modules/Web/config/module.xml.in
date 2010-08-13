@@ -26,19 +26,26 @@
 					See doc/icinga-api-types.txt for options
 				-->
 				<setting name="api.interfaces.data">
+					<!-- IcingaApi connection interface -->
 					<ae:parameter name="api_type">IcingaApi::@api_type@</ae:parameter>
-					
-					<ae:parameter name="config_type">@api_db_type@</ae:parameter>
-					<ae:parameter name="config_host">@api_db_host@</ae:parameter>
-		
-					
-					<ae:parameter name="config_port">@api_db_port@</ae:parameter>
+
+					<!-- Suits for all interfaes -->
+					<ae:parameter name="config_type">@api_subtype@</ae:parameter>
+					<ae:parameter name="config_host">@api_host@</ae:parameter>
+					<ae:parameter name="config_port">@api_port@</ae:parameter>
+
+					<!-- ###BEGIN_CONNECTION_IDO### -->
+					<!-- Database specific (IcingaApi::CONNECTION_IDO) -->
 					<ae:parameter name="config_database">@api_db_name@</ae:parameter>
-					
 					<ae:parameter name="config_user">@api_db_user@</ae:parameter>
 					<ae:parameter name="config_password">@api_db_passwd@</ae:parameter>
-					
 					<ae:parameter name="config_table_prefix">@api_db_prefix@</ae:parameter>
+					<!-- ###END_CONNECTION_IDO### -->
+
+					<!-- ###BEGIN_CONNECTION_LIFESTATUS### -->
+					<!-- MK Lifestatus options (IcingaApi::CONNECTION_LIFESTATUS) -->
+					<ae:parameter name="config_database">@api_path@</ae:parameter>
+					<!-- ###END_CONNECTION_LIFESTATUS### -->
 				</setting>
 				
 				<setting name="api.interfaces.command">

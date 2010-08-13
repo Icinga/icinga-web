@@ -706,6 +706,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VENDOR $(DESTDIR)$(prefix)/doc/VENDOR
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VERSION $(DESTDIR)$(prefix)/doc/VERSION
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/apache2
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/dbInit.tar.gz $(DESTDIR)$(prefix)/etc/database/dbInit.tar.gz
@@ -747,7 +748,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config.php $(DESTDIR)$(prefix)/etc/tests/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config/suites.xml $(DESTDIR)$(prefix)/etc/tests/config/suites.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/icingaWebTesting.php $(DESTDIR)$(prefix)/etc/tests/icingaWebTesting.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/test.properties $(DESTDIR)$(prefix)/etc/tests/test.properties
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/database
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaDatabaseAccessibleTest.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaDatabaseAccessibleTest.php
@@ -8090,6 +8090,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7105
-INC_DIRS=984
+INC_FILES=7104
+INC_DIRS=985
 # INSTALL_FILES_END

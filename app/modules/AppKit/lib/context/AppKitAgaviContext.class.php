@@ -11,6 +11,7 @@ class AppKitAgaviContext extends AgaviContext {
 		 * Make our settings ready
 		 * before run agavi
 		 */
+		$this->buildVersionString();
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
 		$this->initializeAutosettings();
@@ -60,18 +61,25 @@ class AppKitAgaviContext extends AgaviContext {
 			if (AgaviConfig::get('org.icinga.appkit.web_path') == null) {
 				AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
 			}
+		}		
+	}
+
+	private function buildVersionString() {
+		if (AgaviConfig::get('org.icinga.version.extension', false) == false) {
+			$version_format = "%s/v%d.%d.%d";
+		}
+		else {
+			$version_format = "%s/v%d.%d.%d-%s";
 		}
 
-		// Build the global version
 		AgaviConfig::set('org.icinga.version.release', sprintf(
-			'%s/v%d.%d.%d-%s',
+			$version_format,
 			AgaviConfig::get('org.icinga.version.name'),
 			AgaviConfig::get('org.icinga.version.major'),
 			AgaviConfig::get('org.icinga.version.minor'),
 			AgaviConfig::get('org.icinga.version.patch'),
 			AgaviConfig::get('org.icinga.version.extension')
 		), true, true);
-		
 	}
 	
 	private function initializePhpSettings() {

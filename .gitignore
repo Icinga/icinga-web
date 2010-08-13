@@ -12,6 +12,7 @@ config.log
 config.status
 etc/build.properties
 etc/tests/test.properties
+etc/apache2/icinga-web.conf
 pub/.htaccess
 pub/soap/.htaccess
 *~

@@ -1,0 +1,14 @@
+#
+# icinga-web apache configuration
+# - Only enable all options .htaccess
+#
+
+Alias /iw-install @prefix@/pub
+
+<Directory @prefix@/pub>
+	DirectoryIndex index.php
+	Options FollowSymLinks
+	AllowOverride all
+	Order allow,deny
+	Allow from all
+</Directory>

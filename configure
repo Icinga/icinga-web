@@ -567,9 +567,10 @@ api_db_prefix
 api_db_name
 api_db_passwd
 api_db_user
-api_db_port
-api_db_host
-api_db_type
+api_socket
+api_port
+api_host
+api_subtype
 api_type
 db_pass
 db_user
@@ -579,6 +580,7 @@ db_host
 db_type
 bin_group
 bin_user
+web_apache_path
 web_path
 web_group
 web_user
@@ -639,6 +641,7 @@ enable_option_checking
 with_web_user
 with_web_group
 with_web_path
+with_web_apache_path
 with_bin_user
 with_bin_group
 with_icinga_api
@@ -649,9 +652,10 @@ with_db_name
 with_db_user
 with_db_pass
 with_api_type
-with_api_db_type
-with_api_db_host
-with_api_db_port
+with_api_subtype
+with_api_host
+with_api_port
+with_api_socket
 with_api_db_user
 with_api_db_passwd
 with_api_db_name
@@ -1275,6 +1279,8 @@ Optional Packages:
   --with-web-user=USER    username for web writable files (default www-data)
   --with-web-group=GROUP  group for web writable files (default www-data)
   --with-web-path=PATH    web sub path (default /icinga-web)
+  --with-web-apache-path=PATH
+                          Include folder apache2 (default /etc/apache2/conf.d
   --with-bin-user=USER    user for all other files (default root)
   --with-bin-group=GROUP  group for all other files (default bin)
   --with-icinga-api=PATH  Path to icinga-api
@@ -1285,12 +1291,12 @@ Optional Packages:
   --with-db-user=USER     DB user for icinga (default icinga_web)
   --with-db-pass=PASSWD   DB pass for icinga (default icinga_web)
   --with-api-type=APICON  API type (default CONNECTION_IDO)
-  --with-api-db-type=DBTYPE
-                          DB driver (default mysql)
-  --with-api-db-host=HOST DB host (default localhost)
-  --with-api-db-port=PORT DB port (default 3306)
+  --with-api-subtype=TYPE DB driver or network connection
+  --with-api-host=HOST    Host to connect (DB or other) (default localhost)
+  --with-api-port=PORT    Port for connection (default 3306)
+  --with-api-socket=PATH  Path to socket (default none)
   --with-api-db-user=USER DB username (default icinga)
-  --with-api-db-password=PASSWD
+  --with-api-db-passwd=PASSWD
                           DB password (default icinga)
   --with-api-db-name=DBNAME
                           DB name (default icinga)
@@ -2225,6 +2231,16 @@ fi
 
 
 
+# Check whether --with-web_apache_path was given.
+if test "${with_web_apache_path+set}" = set; then :
+  withval=$with_web_apache_path; web_apache_path=$withval
+else
+  web_apache_path=/etc/apache2/conf.d
+
+fi
+
+
+
 # Check whether --with-bin_user was given.
 if test "${with_bin_user+set}" = set; then :
   withval=$with_bin_user; bin_user=$withval
@@ -2341,31 +2357,41 @@ fi
 
 
 
-# Check whether --with-api_db_type was given.
-if test "${with_api_db_type+set}" = set; then :
-  withval=$with_api_db_type; api_db_type=$withval
+# Check whether --with-api_subtype was given.
+if test "${with_api_subtype+set}" = set; then :
+  withval=$with_api_subtype; api_subtype=$withval
 else
-  api_db_type=mysql
+  api_subtype=mysql
 
 fi
 
 
 
-# Check whether --with-api_db_host was given.
-if test "${with_api_db_host+set}" = set; then :
-  withval=$with_api_db_host; api_db_host=$withval
+# Check whether --with-api_host was given.
+if test "${with_api_host+set}" = set; then :
+  withval=$with_api_host; api_host=$withval
 else
-  api_db_host=localhost
+  api_host=localhost
 
 fi
 
 
 
-# Check whether --with-api_db_port was given.
-if test "${with_api_db_port+set}" = set; then :
-  withval=$with_api_db_port; api_db_port=$withval
+# Check whether --with-api_port was given.
+if test "${with_api_port+set}" = set; then :
+  withval=$with_api_port; api_port=$withval
 else
-  api_db_port=3306
+  api_port=3306
+
+fi
+
+
+
+# Check whether --with-api_socket was given.
+if test "${with_api_socket+set}" = set; then :
+  withval=$with_api_socket; api_socket=$withval
+else
+  api_socket=
 
 fi
 
@@ -2375,7 +2401,7 @@ fi
 if test "${with_api_db_user+set}" = set; then :
   withval=$with_api_db_user; api_db_user=$withval
 else
-  api_db_user=mysql
+  api_db_user=icinga
 
 fi
 
@@ -2445,7 +2471,9 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/module.xml etc/build.properties etc/tests/test.properties pub/.htaccess pub/soap/.htaccess"
+
+
+ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/module.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3153,6 +3181,7 @@ do
     "app/modules/Web/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/module.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "etc/tests/test.properties") CONFIG_FILES="$CONFIG_FILES etc/tests/test.properties" ;;
+    "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;
     "pub/soap/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/soap/.htaccess" ;;
 
@@ -3598,3 +3627,14 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
 $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
 
+
+
+	FILE="app/modules/Web/config/module.xml"
+	BLOCKS=`echo "CONNECTION_IDO CONNECTION_LIFESTATUS CONNECTION_FILE" | $SED "s/\s*$api_type//g"`
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: Create api config in $FILE" >&5
+$as_echo "$as_me: Create api config in $FILE" >&6;}
+	for T in $BLOCKS; do
+
+	$SED -i -e "/###BEGIN_$T###/,/###END_$T###/d" $FILE
+
+	done

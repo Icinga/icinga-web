@@ -66,6 +66,12 @@ AC_ARG_WITH([web_path],
 	web_path=/icinga-web
 )
 
+AC_ARG_WITH([web_apache_path],
+	AS_HELP_STRING([--with-web-apache-path=PATH], [Include folder apache2 (default /etc/apache2/conf.d]),
+	web_apache_path=$withval,
+	web_apache_path=/etc/apache2/conf.d
+)
+
 AC_ARG_WITH([bin_user],
 	AS_HELP_STRING([--with-bin-user=USER], [user for all other files (default root)]),
 	bin_user=$withval,
@@ -132,32 +138,38 @@ AC_ARG_WITH([api_type],
 	api_type=CONNECTION_IDO
 )
 
-AC_ARG_WITH([api_db_type],
-	AS_HELP_STRING([--with-api-db-type=DBTYPE], [DB driver (default mysql)]),
-	api_db_type=$withval,
-	api_db_type=mysql
+AC_ARG_WITH([api_subtype],
+	AS_HELP_STRING([--with-api-subtype=TYPE], [DB driver or network connection]),
+	api_subtype=$withval,
+	api_subtype=mysql
 )
 
-AC_ARG_WITH([api_db_host],
-	AS_HELP_STRING([--with-api-db-host=HOST], [DB host (default localhost)]),
-	api_db_host=$withval,
-	api_db_host=localhost
+AC_ARG_WITH([api_host],
+	AS_HELP_STRING([--with-api-host=HOST], [Host to connect (DB or other) (default localhost)]),
+	api_host=$withval,
+	api_host=localhost
 )
 
-AC_ARG_WITH([api_db_port],
-	AS_HELP_STRING([--with-api-db-port=PORT], [DB port (default 3306)]),
-	api_db_port=$withval,
-	api_db_port=3306
+AC_ARG_WITH([api_port],
+	AS_HELP_STRING([--with-api-port=PORT], [Port for connection (default 3306)]),
+	api_port=$withval,
+	api_port=3306
+)
+
+AC_ARG_WITH([api_socket],
+	AS_HELP_STRING([--with-api-socket=PATH], [Path to socket (default none)]),
+	api_socket=$withval,
+	api_socket=
 )
 
 AC_ARG_WITH([api_db_user],
 	AS_HELP_STRING([--with-api-db-user=USER], [DB username (default icinga)]),
 	api_db_user=$withval,
-	api_db_user=mysql
+	api_db_user=icinga
 )
 
 AC_ARG_WITH([api_db_passwd],
-	AS_HELP_STRING([--with-api-db-password=PASSWD], [DB password (default icinga)]),
+	AS_HELP_STRING([--with-api-db-passwd=PASSWD], [DB password (default icinga)]),
 	api_db_passwd=$withval,
 	api_db_passwd=icinga
 )
@@ -182,6 +194,7 @@ CFLAGS=""
 AC_SUBST(web_user)
 AC_SUBST(web_group)
 AC_SUBST(web_path)
+AC_SUBST(web_apache_path)
 AC_SUBST(bin_user)
 AC_SUBST(bin_group)
 
@@ -193,9 +206,10 @@ AC_SUBST(db_user)
 AC_SUBST(db_pass)
 
 AC_SUBST(api_type)
-AC_SUBST(api_db_type)
-AC_SUBST(api_db_host)
-AC_SUBST(api_db_port)
+AC_SUBST(api_subtype)
+AC_SUBST(api_host)
+AC_SUBST(api_port)
+AC_SUBST(api_socket)
 AC_SUBST(api_db_user)
 AC_SUBST(api_db_passwd)
 AC_SUBST(api_db_name)
@@ -216,8 +230,11 @@ AC_CONFIG_FILES([
 	app/modules/Web/config/module.xml
 	etc/build.properties
 	etc/tests/test.properties
+	etc/apache2/icinga-web.conf
 	pub/.htaccess
 	pub/soap/.htaccess
 ])
 
 AC_OUTPUT
+
+ACICINGA_CLEANUP_APICONFIG([$api_type])
