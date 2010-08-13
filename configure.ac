@@ -1,13 +1,17 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
+# include some meta
+m4_include([etc/version.m4])
+
 # Which version of AC
 AC_PREREQ(2.61)
 
 # Init project
-AC_INIT(icinga-web, [1.0.1], [dev.icinga.org])
+AC_INIT(icinga-web, [ICINGA_VERSION], [dev.icinga.org])
 
-RELEASE_DATE="2010-06-30"
+# Release date
+RELEASE_DATE=ICINGA_RELEASE_DATE
 
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
 
