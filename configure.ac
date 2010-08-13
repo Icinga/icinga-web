@@ -105,9 +105,9 @@ AC_ARG_WITH([db_type],
 )
 
 AC_ARG_WITH([db_host],
-	AS_HELP_STRING([--with-db-host=HOST], [Host of dbms (default 127.0.0.1)]),
+	AS_HELP_STRING([--with-db-host=HOST], [Host of dbms (default localhost)]),
 	db_host=$withval,
-	db_host=127.0.0.1
+	db_host=localhost
 )
 
 AC_ARG_WITH([db_port],
@@ -129,7 +129,7 @@ AC_ARG_WITH([db_user],
 )
 
 AC_ARG_WITH([db_pass],
-	AS_HELP_STRING([--with-db-pass=PASSWD], [DB pass for icinga (default icinga_web)]),
+	AS_HELP_STRING([--with-db-pass=PASS], [DB pass for icinga (default icinga_web)]),
 	db_pass=$withval,
 	db_pass=icinga_web
 )
@@ -172,10 +172,10 @@ AC_ARG_WITH([api_db_user],
 	api_db_user=icinga
 )
 
-AC_ARG_WITH([api_db_passwd],
-	AS_HELP_STRING([--with-api-db-passwd=PASSWD], [DB password (default icinga)]),
-	api_db_passwd=$withval,
-	api_db_passwd=icinga
+AC_ARG_WITH([api_db_pass],
+	AS_HELP_STRING([--with-api-db-pass=PASS], [DB password (default icinga)]),
+	api_db_pass=$withval,
+	api_db_pass=icinga
 )
 
 AC_ARG_WITH([api_db_name],
@@ -215,7 +215,7 @@ AC_SUBST(api_host)
 AC_SUBST(api_port)
 AC_SUBST(api_socket)
 AC_SUBST(api_db_user)
-AC_SUBST(api_db_passwd)
+AC_SUBST(api_db_pass)
 AC_SUBST(api_db_name)
 AC_SUBST(api_db_prefix)
 

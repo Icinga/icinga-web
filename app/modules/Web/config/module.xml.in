@@ -38,7 +38,7 @@
 					<!-- Database specific (IcingaApi::CONNECTION_IDO) -->
 					<ae:parameter name="config_database">@api_db_name@</ae:parameter>
 					<ae:parameter name="config_user">@api_db_user@</ae:parameter>
-					<ae:parameter name="config_password">@api_db_passwd@</ae:parameter>
+					<ae:parameter name="config_password">@api_db_pass@</ae:parameter>
 					<ae:parameter name="config_table_prefix">@api_db_prefix@</ae:parameter>
 					<!-- ###END_CONNECTION_IDO### -->
 
