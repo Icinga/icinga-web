@@ -592,7 +592,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/autoload.xml $(DESTDIR)$(prefix)/app/modules/Web/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/config_handlers.xml $(DESTDIR)$(prefix)/app/modules/Web/config/config_handlers.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml.in.BAK $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml.in.BAK
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config.php $(DESTDIR)$(prefix)/app/modules/Web/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/modules/Web/config/simple_data_provider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/validators.xml $(DESTDIR)$(prefix)/app/modules/Web/config/validators.xml
@@ -8093,6 +8092,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7107
+INC_FILES=7106
 INC_DIRS=985
 # INSTALL_FILES_END
