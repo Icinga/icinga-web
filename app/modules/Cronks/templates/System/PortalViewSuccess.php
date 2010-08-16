@@ -35,15 +35,30 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 					portlet.on("add",function(el,resp) {
 						Ext.each(portlet.findByType('container'),function(item) {
         					item.setHeight(portlet.getInnerHeight());
+
         				});
 					});
 
 					portlet.on('resize',function() {
-						Ext.each(portlet.findByType('container'),function(item) {
-			        		item.setHeight(portlet.getInnerHeight());
+						Ext.each(portlet.findByType('container'),function(item) {	
+							item.setHeight(portlet.getInnerHeight());						        	
 			        	});
-
 					},this);
+				
+					/**
+					 * Fix width
+					 * This must be done via one-shot eventdispatcher to avoid
+					 * endless recursion (resize->change width->width changed->resize->...)
+					 */
+					var resizeFunc = function(el) {
+						Ext.each(portlet.findByType('container'),function(item) {	
+							item.setWidth(portlet.getInnerWidth());		        
+		        		});		
+		        		// Attach the listener again after resize
+						portlet.on('resize',resizeFunc,this,{single:true})
+
+					}	
+					portlet.on('resize',resizeFunc,this,{single:true}); 
 				},
 				
 				createPortletDragZone : function (p) {
@@ -294,7 +309,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		}
 
 		var portal = new Ext.ux.Portal(portal_config);
-
+	
 		CE.insert(0, portal);
 		CE.doLayout();
 
