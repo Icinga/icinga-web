@@ -228,6 +228,7 @@ Ext.onReady(function(){
 					url: '<?php echo $ro->gen("appkit.data.groups")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
+						data = data.roles;
 						this.fillRoleValues(data);
 						this.showGroupUsers(data);
 						AppKit.principalEditor.instance.loadPrincipalsForRole(data.role_id);
