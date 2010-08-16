@@ -4,7 +4,7 @@
 #
 
 DIR="$1"
-IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in$|data/i18n/po|.*icinga-api).*"
+IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in$|data/i18n/po|cache/|app\/data|bin\/|agavi/samples).*"
 SRCDIR="app bin doc etc lib pub"
 
 declare -i DCOUNT=0
@@ -24,7 +24,7 @@ function pline {
 	fi
 }
 
-for X in $(find $SRCDIR -noleaf  -regextype posix-awk -not -regex $IGNORE | sort); do
+for X in $(find $SRCDIR -noleaf  -regextype posix-awk -not -regex $IGNORE | sort -d); do
 		pline $X
 done
 

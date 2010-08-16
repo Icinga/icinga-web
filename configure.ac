@@ -192,6 +192,9 @@ AC_ARG_WITH([api_db_prefix],
 
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
+INSTALL_OPTS_WEB="-o $web_user -g $web_group"
+INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
+
 CFLAGS=""
 
 # Substitutions
@@ -226,6 +229,8 @@ AC_SUBST(PHP)
 AC_SUBST(MYSQL)
 AC_SUBST(PHING)
 AC_SUBST(INSTALL_OPTS)
+AC_SUBST(INSTALL_OPTS_WEB)
+AC_SUBST(INSTALL_OPTS_CACHE)
 
 AC_CONFIG_FILES([
 	Makefile

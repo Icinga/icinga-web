@@ -17,9 +17,15 @@
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 					href="simple_data_provider.xml#xpointer(setting/node())" />
 				</setting>
-				
-				<setting name="api.file">%core.root_dir%/lib/icinga-api/IcingaApi.php</setting>
-				
+
+				<!--
+					Path to icinga api
+				-->
+				<setting name="api.file">@icinga_api@/IcingaApi.php</setting>
+
+				<!--
+					IcingaApi classname
+				-->
 				<setting name="api.class">IcingaApi</setting>
 
 				<!--

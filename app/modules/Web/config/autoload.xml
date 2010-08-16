@@ -34,7 +34,5 @@
 		<autoload name="IcingaTemplateXmlParser">%core.module_dir%/Web/lib/template/IcingaTemplateXmlParser.class.php</autoload>
 		<autoload name="IcingaTemplateWorker">%core.module_dir%/Web/lib/template/IcingaTemplateWorker.class.php</autoload>
 		<autoload name="IcingaBaseException">%core.module_dir%/Web/lib/IcingaBaseException.class.php</autoload>
-		<!-- IcingaApi -->
-		<autoload name="IcingaApi">%core.root_dir%/lib/icinga-api/IcingaApi.php</autoload>
 	</ae:configuration>
 </ae:configurations>

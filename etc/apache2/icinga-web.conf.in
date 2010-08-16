@@ -1,9 +1,10 @@
 #
 # icinga-web apache configuration
-# - Only enable all options .htaccess
-#
+# - Enable all options .htaccess
+# - Add extjs library to alias
 
-Alias /iw-install @prefix@/pub
+Alias @web_path@/js/ext3 @prefix@/lib/ext3
+Alias @web_path@ @prefix@/pub
 
 <Directory @prefix@/pub>
 	DirectoryIndex index.php

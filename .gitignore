@@ -5,7 +5,6 @@ app/data/log/
 app/config/icinga.xml
 app/config/databases.xml
 app/modules/Web/config/module.xml
-lib/icinga-api
 icinga-web.session
 icinga-web.webprj
 Makefile
