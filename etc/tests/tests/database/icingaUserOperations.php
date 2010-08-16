@@ -88,6 +88,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			
 			$sortOrder = new AgaviRequestDataHolder();
 			$sortOrder->setParameter("sort","user_id");
+			$sortOrder->setParameter("hideDisabled","false");
 			$icingaListing_all = $context->getController()->createExecutionContainer("AppKit","DataProvider.UserProvider",$sortOrder,"json");
 			$result = $icingaListing_all->execute();
 

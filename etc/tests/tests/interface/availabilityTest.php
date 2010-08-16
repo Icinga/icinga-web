@@ -13,7 +13,7 @@ class availabilityTest extends AgaviPhpUnitTestCase {
 		$container = $ctx->getController()->createExecutionContainer("AppKit","AjaxLogin",null,"html");
 		try {
 			$result = $container->execute();
-			if($result->getHttpStatusCode() != '200')
+			if($result->getHttpStatusCode() != '200' && $result->getHttpStatusCode() != '401' )
 				$this->fail("Login mask call failed with status code ".$result->getHttpStatusCode());
 		} catch(Exception $e) {
 			$this->fail("Login mask threw an exception ".$e->getMessage());	

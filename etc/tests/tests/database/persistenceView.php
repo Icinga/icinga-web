@@ -4,7 +4,7 @@ class persistenceView extends AgaviPhpUnitTestCase {
 	public static function setUpBeforeClass() {
 		Doctrine_Manager::connection()->beginTransaction();
 		$context = AgaviContext::getInstance();
-		$context->getUser()->getNsmUser()->user_id = 1;
+		$context->getUser()->getNsmUser(true)->user_id = 1;
 		$context->getUser()->addCredential("appkit.admin");
 		$context->getUser()->addCredential("appkit.admin.users");
 		$context->getUser()->addCredential("appkit.admin.groups");

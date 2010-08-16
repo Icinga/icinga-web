@@ -49,6 +49,12 @@ if(isset($arguments['environment'])) {
 }
 
 AgaviTesting::bootstrap($env);
+
+require(dirname(__FILE__).'/../../app/modules/AppKit/lib/AppKit.class.php');
+require(dirname(__FILE__).'/../../app/modules/AppKit/lib/class/AppKitBaseClass.class.php');
+require(dirname(__FILE__).'/../../app/modules/AppKit/lib/class/AppKitSingleton.class.php');
+require(dirname(__FILE__).'/../../app/modules/AppKit/lib/util/AppKitModuleUtil.class.php');
+
 AgaviConfig::set('core.default_context', $env);
 // Initialize the appkit framework
 PHPUnit_Util_Filter::addDirectoryToFilter(AgaviConfig::get('core.cache_dir'));

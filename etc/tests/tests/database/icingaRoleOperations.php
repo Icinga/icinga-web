@@ -65,18 +65,19 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 			info("\tTesting icinga-web action: Reading roles\n");
 		
 			$context = AgaviContext::getInstance();
-			$directDBList_all = Doctrine_Query::create()->select("r.*,pr.*,r.*")->from("NsmRole r")->leftJoin("r.NsmPrincipal pr")->leftJoin("r.NsmUserRole ro")->execute()->toArray(true);
+			$directDBList_all = Doctrine_Query::create()->select("r.*")->from("NsmRole r")->leftJoin("r.NsmPrincipal pr")->leftJoin("r.NsmUserRole ro")->execute()->toArray(true);
 			$this->assertGreaterThan(0,count($directDBList_all),"A really strange error occured - suddenly couldn't fetch any users");
 			
 			$sortOrder = new AgaviRequestDataHolder();
 			$sortOrder->setParameter("sort","role_id");
+			$sortOrder->setParameter("hideDisabled","false");
 			$icingaListing_all = $context->getController()->createExecutionContainer("AppKit","DataProvider.GroupProvider",$sortOrder,"json");
 			$result = $icingaListing_all->execute();
 
 			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for reading groups not found");				
 			
 			$json = json_decode($result->getContent(),true);
-
+			$json = $json["roles"];
 			$this->assertNotNull($json,"Couldn't fetch group list via the icinga action");
 			$this->assertEquals(count($directDBList_all),count($json),"Groupcount fetched by icinga doesn't match db-count");
 			foreach($directDBList_all as $nr=>$entry) {

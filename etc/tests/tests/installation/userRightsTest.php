@@ -15,7 +15,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 		info("Running post installation checks \n");
 		info("\tChecking if cache folders exist\n");
 		$root = AgaviConfig::get("core.root_dir");
-		$cacheFolders = array($root."/app/cache",$root."/app/modules/AppKit/cache",$root."/app/modules/Web/cache");
+		$cacheFolders = array($root."/app/cache");
 		$missingFolders = array();
 		foreach($cacheFolders as $folder) {
 			if(!file_exists($folder))
@@ -41,7 +41,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 	public function testCacheDirsAreWriteable() {
 		info("\tTesting if web user can write to cache\n");
 		$root = AgaviConfig::get("core.root_dir");
-		$cacheFolders = array($root."app/cache",$root."/app/modules/AppKit/cache",$root."/app/modules/Web/cache");
+		$cacheFolders = array($root."app/cache");
 
 		$wwwUser = $this->sharedFixture['www-user'];
 		$wwwGroup = $this->sharedFixture['www-group'];
