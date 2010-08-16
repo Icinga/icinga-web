@@ -52,6 +52,9 @@ none:
 	@printf "\t%-18s - %s\n" "db-purge-userprefs" "purge existing user preferences"
 	@printf "\t%-18s - %s\n" "db-doc2sql" "export doctrine db schema"
 
+	@printf "\nIcinga web targets:\n"
+	@printf "\t%-18s - %s\n" "icinga-reset-password" "Reset password for any account on icinga-web"
+
 	@printf "\nI18n targets:\n"
 	@printf "\t%-18s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
 	@printf "\t%-18s - %s\n" "loc-compile" "Compile language files into mo and json"
@@ -62,8 +65,21 @@ none:
 	@printf "\n\n"
 	
 include $(INC_MAKE_FILES)
-	
-clean: distclean
+
+realclean: clean distclean cacheclean logclean
+
+cleanall: realclean
+
+cacheclean:
+	rm -rf app/cache/config/*.php
+
+logclean:
+	rm -rf app/data/log/*.log
+
+locclean:
+	rm -f \
+		$(LOC_MO)/*.mo \
+		$(LOC_MO)/*.json
 
 distclean:
 	rm -f \
@@ -74,7 +90,7 @@ distclean:
 		etc/tests/test.properties \
 		etc/apache2/icinga-web.conf
 		
-configclean:
+clean:
 	rm -f \
 		app/config/databases.xml \
 		app/config/icinga.xml \
@@ -82,12 +98,12 @@ configclean:
 		pub/.htaccess \
 		pub/soap/.htaccess
 
+devclean: dev-commit-prepare
+
+dev-commit-prepare: remove-temp-files distclean cacheclean logclean make-create-files clean
+
 remove-temp-files:
 	bin/rmtmp-files.sh
-
-devclean: remove-temp-files distclean cacheclean logclean make-create-files configclean
-
-cleanall: distclean cacheclean logclean 
 
 create-tarball:
 	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
@@ -96,12 +112,6 @@ create-tarball:
 create-tarball-nightly:
 	#${MAKE} submodule-update
 	./make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-`date +%Y%m%d`-`git rev-parse --short HEAD`/
-
-cacheclean:
-	rm -rf app/cache/config/*.php
-
-logclean:
-	rm -rf app/data/log/*.log
 
 testdeps:
 	 $(PHP) bin/testdeps.php
@@ -169,8 +179,6 @@ db-upgrade:
 db-purge-userprefs:
 	$(PHING_CALL) db-purge-userprefs
 
-install-files-list: make-create-files
-
 make-create-files:
 	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
 	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
@@ -197,13 +205,11 @@ submodule-update:
 	cd -
 	git submodule update
 
-locclean:
-	rm -f \
-		$(LOC_MO)/*.mo \
-		$(LOC_MO)/*.json
-
 scheduler-install:
 	$(PHING_CALL) scheduler-install -DPATH_Icinga=$(prefix)
 
 scheduler-remove:
 	$(PHING_CALL) scheduler-remove -DPATH_Icinga=$(prefix)
+
+icinga-reset-password:
+	$(PHING_CALL) icinga-reset-password

@@ -10,6 +10,10 @@ class confidentialInputTask extends InputTask {
 		system("stty -echo");
 		parent::main();
 		system("stty echo");
+
+		// Adding an \n to have a line line breaks
+		// for multiple inputs
+		echo chr(10);
 	}
 	
 	public function __destruct() {
