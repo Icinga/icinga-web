@@ -134,8 +134,9 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			 * General log implementation
 			 */
 			log : function() {
-				if (typeof console !== "undefined" && console.log) {
-					console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
+				if (console) {
+					if(typeof(console.log) === 'function')
+						console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
 				}
 			},
 			

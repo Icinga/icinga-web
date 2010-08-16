@@ -56,13 +56,14 @@ Ext.onReady(function() {
 						scripts: true,
 						callback: function(el,success,response,options) {
 							AppKit.userEditor.editorWidget.instance.insertPresets(id);
-							this.show(document.body);		
+							this.show(AppKit.util.fastMode ?  null : document.body);		
+							
 						},
 						scope: this
 					})
 				} else {
 					AppKit.userEditor.editorWidget.instance.insertPresets(id);
-					this.show(document.body);		
+					this.show(AppKit.util.fastMode ?  null : document.body);		
 				}	
 				return true;
 			}
