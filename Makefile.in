@@ -72,6 +72,7 @@ cleanall: realclean
 
 cacheclean:
 	rm -rf app/cache/config/*.php
+	rm -rf app/cache/content
 
 logclean:
 	rm -rf app/data/log/*.log

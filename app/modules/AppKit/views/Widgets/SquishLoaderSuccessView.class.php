@@ -2,13 +2,7 @@
 
 class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 {
-	public function executeJavascript(AgaviRequestDataHolder $rd)
-	{
-		$model =& $this->getAttribute('model');
-		
-		if ($model == null) {
-			return;
-		}
+	public function executeJavascript(AgaviRequestDataHolder $rd) {
 		
 		// Get the magick
 		$response = $this->getContainer()->getResponse();
@@ -19,11 +13,12 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 			$response->setHttpHeader('Age', 10, true);
 			$response->setHttpHeader('Pragma', null, true);
 		}
+
 		if ($this->getAttribute('errors', false)) {
 			return "throw '". join(", ", $this->getAttribute('errors')). "';";
 		}
 		else {
-			$content = $model->getContent(). chr(10);
+			$content = $this->getAttribute('javascript_content');
 			$content .= 'AppKit.c.path = "'. AgaviConfig::get('org.icinga.appkit.web_path'). '";'. chr(10);
 			
 			$content .= $this->executeActions(

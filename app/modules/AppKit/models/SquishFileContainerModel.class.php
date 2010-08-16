@@ -81,7 +81,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel
 			$this->content .= $loader->getContent();
 		}
 		
-		$this->content = JSMin::minify($this->content);
+		// $this->content = JSMin::minify($this->content);
 
 		return null;
 	}
