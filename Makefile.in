@@ -62,8 +62,16 @@ none:
 	@printf "\n\n"
 	
 include $(INC_MAKE_FILES)
-	
-clean: distclean
+
+realclean: clean distclean cacheclean logclean
+
+cleanall: realclean
+
+cacheclean:
+	rm -rf app/cache/config/*.php
+
+logclean:
+	rm -rf app/data/log/*.log
 
 distclean:
 	rm -f \
@@ -74,7 +82,7 @@ distclean:
 		etc/tests/test.properties \
 		etc/apache2/icinga-web.conf
 		
-configclean:
+clean:
 	rm -f \
 		app/config/databases.xml \
 		app/config/icinga.xml \
@@ -82,12 +90,12 @@ configclean:
 		pub/.htaccess \
 		pub/soap/.htaccess
 
+devclean: dev-commit-prepare
+
+dev-commit-prepare: remove-temp-files distclean cacheclean logclean make-create-files clean
+
 remove-temp-files:
 	bin/rmtmp-files.sh
-
-devclean: remove-temp-files distclean cacheclean logclean make-create-files configclean
-
-cleanall: distclean cacheclean logclean 
 
 create-tarball:
 	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
@@ -96,12 +104,6 @@ create-tarball:
 create-tarball-nightly:
 	#${MAKE} submodule-update
 	./make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-`date +%Y%m%d`-`git rev-parse --short HEAD`/
-
-cacheclean:
-	rm -rf app/cache/config/*.php
-
-logclean:
-	rm -rf app/data/log/*.log
 
 testdeps:
 	 $(PHP) bin/testdeps.php
