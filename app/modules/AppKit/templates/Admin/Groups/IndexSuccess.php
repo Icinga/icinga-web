@@ -128,13 +128,13 @@ Ext.onReady(function() {
 						scripts: true,
 						callback: function(el,success,response,options) {
 							AppKit.groupEditor.editorWidget.instance.insertPresets(id);
-							this.show(document.body);		
+							this.show(AppKit.util.fastMode ?  null : document.body);		
 						},
 						scope: this
 					})
 				} else {
 					AppKit.groupEditor.editorWidget.instance.insertPresets(id);
-					this.show(document.body);		
+					this.show(AppKit.util.fastMode ?  null : document.body);		
 				}	
 				return true;
 			}
@@ -296,7 +296,7 @@ Ext.onReady(function() {
 			layout: 'border',
 			border:false,
 			defaults: {
-				margins: {top: 10, left: 10, right: 10, bottom: 0},
+				margins: {top: 10, left: 10, right: 10, bottom: 0}
 			},
 			autoScroll:true,
 			items: [{

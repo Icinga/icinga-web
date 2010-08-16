@@ -14,9 +14,9 @@ Ext.ux.form.FancyTextField = Ext.extend(Ext.form.TextField, {
 
     // private
     onRender : function(ct, position){
-
+		
         Ext.ux.form.FancyTextField.superclass.onRender.call(this, ct, position);
-
+		
         if(!this.el){
             this.defaultAutoCreate = {
                 tag: "input",
@@ -56,6 +56,8 @@ Ext.ux.form.FancyTextField = Ext.extend(Ext.form.TextField, {
 			var wrapBox = wrap.boxWrap();
 			wrapBox.addClass("fancytextfield-box");
 		}
+		
+		
 
     }
 

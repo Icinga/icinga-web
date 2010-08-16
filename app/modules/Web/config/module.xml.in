@@ -46,6 +46,7 @@
 					<!-- MK Lifestatus options (IcingaApi::CONNECTION_LIFESTATUS) -->
 					<ae:parameter name="config_database">@api_path@</ae:parameter>
 					<!-- ###END_CONNECTION_LIFESTATUS### -->
+
 				</setting>
 				
 				<setting name="api.interfaces.command">

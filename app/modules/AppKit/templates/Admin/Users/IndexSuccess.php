@@ -56,13 +56,14 @@ Ext.onReady(function() {
 						scripts: true,
 						callback: function(el,success,response,options) {
 							AppKit.userEditor.editorWidget.instance.insertPresets(id);
-							this.show(document.body);		
+							this.show(AppKit.util.fastMode ?  null : document.body);		
+							
 						},
 						scope: this
 					})
 				} else {
 					AppKit.userEditor.editorWidget.instance.insertPresets(id);
-					this.show(document.body);		
+					this.show(AppKit.util.fastMode ?  null : document.body);		
 				}	
 				return true;
 			}
@@ -116,7 +117,7 @@ Ext.onReady(function() {
 			},this)
 		},
 		viewConfig : {
-			scrollOffset:30,
+			scrollOffset:30
 
 		},
 		
@@ -206,7 +207,7 @@ Ext.onReady(function() {
 				{header: _('email'),dataIndex: 'user_email'},
 				{header: _('active'), dataIndex: 'user_disabled_icon',width:75}
 			]
-		}),
+		})
 		
 	});
 	
@@ -219,7 +220,7 @@ Ext.onReady(function() {
 			layout: 'border',
 			border:false,
 			defaults: {
-				margins: {top: 10, left: 10, right: 10, bottom: 0},
+				margins: {top: 10, left: 10, right: 10, bottom: 0}
 			},
 			items: [{
 				region:'center',

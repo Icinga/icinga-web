@@ -92,7 +92,7 @@ Ext.onReady(function() {
 				if (Ext.isDefined(this.cidmap[n])) {
 					return this.getViewport().items.get( this.cidmap[n] );
 				}
-				return null
+				return null;
 			},
 			
 			getNorth : function() {

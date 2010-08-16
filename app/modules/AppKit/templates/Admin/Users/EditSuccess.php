@@ -1,15 +1,13 @@
 <?php 
-
 $user = $t['user'];
 $roles = $t['roles'];
 $authTypes = $t['authTypes'];
 ?>
-
 <script type='text/javascript'>
 Ext.ns("AppKit.userEditor");
 if(!Ext.isFunction(window._))
 	_ = function(t) {return t}
-<?
+<?php
 	echo $t['principal_editor'];
 ?>
 
@@ -28,7 +26,7 @@ Ext.onReady(function(){
 			{
 				xtype: 'hidden',
 				name: 'user_id',
-				id: 'user_id',
+				id: 'user_id'
 			},{
 				xtype:'fieldset',
 				title: _('General information'),
@@ -181,14 +179,14 @@ Ext.onReady(function(){
 					anchor: '95%',
 					labelWidth:400,
 					items: [
-			<?php foreach($roles as $role) :?>
+			<?php $ctr=0;foreach($roles as $role) :?>
 					{
 						xtype:'checkbox',
 						name: 'userroles[<?php echo $role->get("role_id")?>]',
 						id: 'userroles_<?php echo $role->get("role_id") ?>',
 						inputValue: '<?php echo $role->get("role_id") ?>',
 						fieldLabel: '<?php echo $role->get("role_name")." (".$role->get("role_description").") "; ?>'
-					},
+					} <?php if(++$ctr < count($roles)) echo ',';?>
 			<?php endforeach; ?>
 					]
 				}, {
@@ -203,7 +201,7 @@ Ext.onReady(function(){
 				}]
 			}
 		]
-		
+
 		/**
 		 * Forms end
 		 */
@@ -214,11 +212,12 @@ Ext.onReady(function(){
 				if(!cfg)
 					cfg = {}
 				cfg.items =  AppKit.userEditor.formFields;
+	
 				cfg.width = 600;
-				Ext.apply(this.cfg);
-				AppKit.userEditor.editorWidget.superclass.constructor.call(this,cfg);
-				this.addButton({text: _('Save')},this.saveHandler,this);
+				Ext.apply(this,cfg);
 				
+				Ext.form.FormPanel.prototype.constructor.call(this,cfg);
+				this.addButton({text: _('Save')},this.saveHandler,this);			
 			},
 			
 			saveHandler: function(b,e) {
@@ -325,7 +324,7 @@ Ext.onReady(function(){
 				})			
 			}
 		});
-		
+
 		AppKit.userEditor.editorWidget.instance = new AppKit.userEditor.editorWidget({maxWidth:600});
 		var container = '<?php echo $t["container"] ?>';
 
@@ -333,8 +332,7 @@ Ext.onReady(function(){
 		 * Refill the form with the user values
 		 */
 		 var editor = AppKit.userEditor.editorWidget.instance;
-		
-	
+
 		if(Ext.getCmp(container)) {
 			Ext.getCmp(container).add(editor);
 		} else {
@@ -347,6 +345,7 @@ Ext.onReady(function(){
 	 */
 	if(!AppKit.userEditor.editorWidget)
 		initEditorWidget();
+
 	<?php if(!$t["container"]) { ?>
 			AppKit.userEditor.editorWidget.instance.insertPresets(<?php echo $user->get("user_id") ?>);				
  	<?php }?>

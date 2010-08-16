@@ -80,6 +80,8 @@
 		<autoload name="AppKitLdapTool">%core.module_dir%/AppKit/lib/util/AppKitLdapTool.class.php</autoload>
 		<autoload name="AppKitRandomUtil">%core.module_dir%/AppKit/lib/util/AppKitRandomUtil.class.php</autoload>
 		<autoload name="AppKitStringUtil">%core.module_dir%/AppKit/lib/util/AppKitStringUtil.class.php</autoload>
+		<autoload name="JavaScriptPacker">%core.module_dir%/AppKit/lib/util/JavaScriptPacker.class.php</autoload>
+		<autoload name="JSMin">%core.module_dir%/AppKit/lib/util/JSMin.class.php</autoload>
 		<autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
 		<autoload name="AppKitInlineIncluderUtil">%core.module_dir%/AppKit/lib/util/AppKitInlineIncluderUtil.class.php</autoload>
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/util/AppKitModuleUtil.class.php</autoload>

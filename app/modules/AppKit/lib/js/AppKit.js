@@ -96,7 +96,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 
 			constructor : function() {
 				this.events = {};
-				this.listeners = {}
+				this.listeners = {};
 				
 				this.addListener('appkit-statedata', this.onStateData, this, { single: true });
 				
@@ -134,8 +134,9 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			 * General log implementation
 			 */
 			log : function() {
-				if (typeof console !== "undefined" && console.log) {
-					console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
+				if (console) {
+					if(typeof(console.log) === 'function')
+						console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
 				}
 			},
 			
@@ -160,7 +161,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 	                remove = (remove || false);
 	                time = (time || 2000);
 	                
-	                var ids = ['icinga-portal-loading-mask', 'icinga-portal-loading']
+	                var ids = ['icinga-portal-loading-mask', 'icinga-portal-loading'];
 	                
 	                if (remove) {
 	                        Ext.iterate(ids, function(v) {
@@ -198,7 +199,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 	        	
 	        	if (Ext.isObject(la[ la.length -1 ])) {
 	        		Ext.apply(c, la.pop());
-	        	}
+	        	};
 	        	
 	        	var nm = String.format.apply(this, la);
 	        	
@@ -210,7 +211,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 	        getTr : function() {
 	        	if (!taskRunner) {
 	        		taskRunner = new Ext.util.TaskRunner();
-	        	}
+	        	};
 	        	return taskRunner;
 	        },
 	        

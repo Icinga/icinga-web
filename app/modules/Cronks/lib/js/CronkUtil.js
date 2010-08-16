@@ -149,7 +149,7 @@ Cronk.util.InterGridUtil = function(){
 								
 				panel.on('add', function(p, c, i) {
 //					console.log('ADD', c.getXType());
-					applyParametersToGrid(baseParams, c)
+					applyParametersToGrid(baseParams, c);
 				});
 				
 //				console.log(baseParams);
@@ -171,7 +171,7 @@ Cronk.util.InterGridUtil = function(){
 		},
 		
 		clickGridLink : function(id, template, f, t) {
-			var el = Ext.get(id)
+			var el = Ext.get(id);
 			if (id && el) {
 				el.addClass('icinga-link');
 				el.on('click', (function() {

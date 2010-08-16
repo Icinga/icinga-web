@@ -58,7 +58,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 			fn: function(keycode, e) {
 				
 				if (Ext.isIE) {
-					e.browserEvent.keyCode = Ext.EventObject.ESC
+					e.browserEvent.keyCode = Ext.EventObject.ESC;
 				}
 				
 				var tab = tp.getActiveTab();
@@ -198,7 +198,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 			c.parentCmp.sort_array[0]['field'] = data.groupField;
 			c.store.load();
 
-		})
+		});
 		return urlCronk;
 	}
 	

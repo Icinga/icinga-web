@@ -3,6 +3,10 @@ AppKit.util = (function() {
 	var pstores = new Ext.util.MixedCollection(true);
 	
 	return Ext.apply(pub, {
+		fastMode: function() {
+			return Ext.isIE6 || Ext.isIE7 || Ext.isIE8;
+		},
+		
 		contentWindow : function(uconf, wconf) {
 	
 			Ext.applyIf(wconf, {
@@ -67,7 +71,7 @@ AppKit.util = (function() {
 		},
 
 		loginWatchdog : function(start) {
-			var t={}
+			var t={};
 			Ext.Ajax.on('requestexception', function(conn, response, options) {
 				if (!options.url.match(/\/login/)) {
 					if (response.status == '401') {

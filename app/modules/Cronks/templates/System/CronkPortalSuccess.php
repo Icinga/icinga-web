@@ -25,6 +25,8 @@ Cronk.util.initEnvironment('viewport-center', function() {
 				xtype: 'cronk',
 				crname: 'icingaSearch',
 				width: 250,
+				margin:0,
+				height: 100,
 				border: false
 			}, {
 				xtype: 'cronk',

@@ -22,7 +22,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		var templates = {
 			host:		new Ext.Template('{object_name}({data1})<br /><em>{description}</em>'),
 			service:	new Ext.Template('{object_name2}, {object_name}<br /><em>{description}</em>'),
-			def:		new Ext.Template('{object_name}<br /><em>{description}</em>'),
+			def:		new Ext.Template('{object_name}<br /><em>{description}</em>')
 		}
 		
 		var stores = ['host', 'service', 'hostgroup', 'servicegroup'];

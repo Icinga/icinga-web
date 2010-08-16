@@ -104,7 +104,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 						this.removeSelectedNodes();
 					},
 					scope:this
-				}],
+				}]
 			}),
 			root: new Ext.tree.TreeNode({
 				hidden:false,
