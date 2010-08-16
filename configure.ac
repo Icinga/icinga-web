@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 # include some meta
-m4_include([etc/version.m4])
+m4_include([etc/make/version.m4])
 
 # Which version of AC
 AC_PREREQ(2.61)

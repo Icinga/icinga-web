@@ -52,6 +52,9 @@ none:
 	@printf "\t%-18s - %s\n" "db-purge-userprefs" "purge existing user preferences"
 	@printf "\t%-18s - %s\n" "db-doc2sql" "export doctrine db schema"
 
+	@printf "\nIcinga web targets:\n"
+	@printf "\t%-18s - %s\n" "icinga-reset-password" "Reset password for any account on icinga-web"
+
 	@printf "\nI18n targets:\n"
 	@printf "\t%-18s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
 	@printf "\t%-18s - %s\n" "loc-compile" "Compile language files into mo and json"
@@ -72,6 +75,11 @@ cacheclean:
 
 logclean:
 	rm -rf app/data/log/*.log
+
+locclean:
+	rm -f \
+		$(LOC_MO)/*.mo \
+		$(LOC_MO)/*.json
 
 distclean:
 	rm -f \
@@ -171,8 +179,6 @@ db-upgrade:
 db-purge-userprefs:
 	$(PHING_CALL) db-purge-userprefs
 
-install-files-list: make-create-files
-
 make-create-files:
 	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
 	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
@@ -199,13 +205,11 @@ submodule-update:
 	cd -
 	git submodule update
 
-locclean:
-	rm -f \
-		$(LOC_MO)/*.mo \
-		$(LOC_MO)/*.json
-
 scheduler-install:
 	$(PHING_CALL) scheduler-install -DPATH_Icinga=$(prefix)
 
 scheduler-remove:
 	$(PHING_CALL) scheduler-remove -DPATH_Icinga=$(prefix)
+
+icinga-reset-password:
+	$(PHING_CALL) icinga-reset-password

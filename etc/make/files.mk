@@ -736,6 +736,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbUpdateTask.php $(DESTDIR)$(prefix)/etc/lib/dbUpdateTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineToSqlTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineToSqlTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/resetPasswordTask.php $(DESTDIR)$(prefix)/etc/lib/resetPasswordTask.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
@@ -8092,6 +8093,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7106
+INC_FILES=7107
 INC_DIRS=985
 # INSTALL_FILES_END

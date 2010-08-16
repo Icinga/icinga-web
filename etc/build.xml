@@ -24,10 +24,30 @@
 	<target name="prepare">
 		<mkdir dir="${builddir}" />
 	</target>
+
+	<target name="icinga-reset-password">
+		<taskdef name="resetPassword" classname="etc.lib.resetPasswordTask"/>
+		<taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>
+
+		<input propertyname="t.username">User to reset password for:</input>
+		<confidentialInput propertyname="t.password">New password:</confidentialInput>
+		<confidentialInput propertyname="t.password_verify">New password (Verification):</confidentialInput>
+
+		<if>
+			<equals arg1="${t.password}" arg2="${t.password_verify}"/>
+			<then>
+				<resetPassword user="${t.username}" password="${t.password}" />
+				<echo msg="Password for user ${t.username} has been updated successfully!" />
+			</then>
+			<else>
+				<echo msg="New password does not match, abort!" level="error" />
+			</else>
+		</if>
 		
+	</target>
+
 	<target name="db-prepare" depends="prepare">
 		<taskdef name="agaviDBExtractor" classname="etc.lib.agaviDBExtractorTask"/>	
-		<taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>	
 			
 		<input propertyname="db.useAgavi" promptChar="?" validArgs="n,y">Use the db-user specified in icinga-webs database.xml (Needs create Database/create Table rights)?</input>
 		<if>

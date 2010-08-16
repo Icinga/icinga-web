@@ -79,8 +79,6 @@ class CronAgaviAdapter {
 		Doctrine::loadModels(PATH_TO_DOCTRINE_MODELS);
 		
 		Agavi::bootstrap('development');
-		AgaviController::initializeModule('Web');
-		AgaviController::initializeModule('AppKit');
 		AgaviConfig::set('core.default_context', 'console');
 		
 	}
