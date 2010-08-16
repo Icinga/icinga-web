@@ -72,11 +72,11 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 
 			$nav->getContainer()->addItem(AppKitNavItem::create('appkit', 'index_page')
 			->setCaption('Home')
-			->addAttributes('extjs-iconcls', 'silk-application')
+			->addAttributes('extjs-iconcls', 'icinga-icon-application')
 			);
 
 			//Add more homelinks
-			if (is_array($home_links = AgaviConfig::get('de.icinga.appkit.home_links'))) {
+			if (is_array($home_links = AgaviConfig::get('org.icinga.appkit.home_links'))) {
 				foreach ($home_links as $link_route=>$link_caption) {
 					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create($link_route, $link_route)
 						->setCaption($link_caption)
@@ -89,13 +89,13 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 				if ($user->isAuthenticated()) {
 					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.logout', 'appkit.logout')
 					->setCaption('Logout')
-					->addAttributes('extjs-iconcls', 'silk-lock-open')
+					->addAttributes('extjs-iconcls', 'icinga-icon-lock-open')
 					);
 				}
 				else {
 					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.login', 'appkit.login')
 					->setCaption('Login')
-					->addAttributes('extjs-iconcls', 'silk-lock')
+					->addAttributes('extjs-iconcls', 'icinga-icon-lock')
 					);
 				}
 			// }
@@ -106,19 +106,19 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 				if ($user->hasCredential('appkit.admin')) {
 					$admin = $nav->getContainer()->addItem(AppKitNavItem::create('appkit.admin', 'appkit.admin')
 					->setCaption('Admin')
-					->addAttributes('extjs-iconcls', 'silk-wrench')
+					->addAttributes('extjs-iconcls', 'icinga-icon-wrench')
 					);
 					$admin->addSubItem(AppKitNavItem::create('appkit.admin.users', 'appkit.admin.users')
 					->setCaption('Users')
-					->addAttributes('extjs-iconcls', 'silk-user')
+					->addAttributes('extjs-iconcls', 'icinga-icon-user')
 					);
 					$admin->addSubItem(AppKitNavItem::create('appkit.admin.groups', 'appkit.admin.groups')
 					->setCaption('Groups')
-					->addAttributes('extjs-iconcls', 'silk-group')
+					->addAttributes('extjs-iconcls', 'icinga-icon-group')
 					);
 					$admin->addSubItem(AppKitNavItem::create('appkit.admin.logs', 'appkit.admin.logs')
 					->setCaption('Logs')
-					->addAttributes('extjs-iconcls', 'silk-note')
+					->addAttributes('extjs-iconcls', 'icinga-icon-note')
 					);
 				}
 				

@@ -23,13 +23,13 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		return new Ext.Toolbar({
 			items: [{
 				text: _('Refresh'),
-				iconCls: 'silk-arrow-refresh',
+				iconCls: 'icinga-icon-arrow-refresh',
 				tooltip: _('Refresh the data in the grid'),
 				handler: function(oBtn, e) { this.store.reload(); },
 				scope: this
 			}, {
 				text: _('Settings'),
-				iconCls: 'silk-cog',
+				iconCls: 'icinga-icon-cog',
 				toolTip: _('Grid settings'),
 				menu: {
 					items: [{
@@ -54,7 +54,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						scope: this
 					},{
 						text: _('Get this view as URL'),
-						iconCls: 'silk-anchor',
+						iconCls: 'icinga-icon-anchor',
 						handler: function(oBtn,e) {
 							var urlParams = this.extractGridParams();
 							new Ext.Window({

@@ -12,7 +12,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 		
 		// Get the magick
 		$response = $this->getContainer()->getResponse();
-		if(AgaviConfig::get('de.icinga.appkit.include_javascript.allowcache')) {
+		if(AgaviConfig::get('org.icinga.appkit.include_javascript.allowcache')) {
 			$response->clearHttpHeaders();
 			$response->setHttpHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + (3600*24)), true);
 			$response->setHttpHeader('Cache-Control', 'public', true);
@@ -24,26 +24,38 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 		}
 		else {
 			$content = $model->getContent(). chr(10);
-			$content .= 'AppKit.c.path = "'. AgaviConfig::get('de.icinga.appkit.web_path'). '";'. chr(10);
-			$content .= $this->executeActions($model->getActions());
+			$content .= 'AppKit.c.path = "'. AgaviConfig::get('org.icinga.appkit.web_path'). '";'. chr(10);
+			
+			$content .= $this->executeActions(
+				$this->getAttribute('javascript_actions')
+			);
 			return $content;
 		}
 	}
 	
 	private function executeActions(array $actions = array()) {
 		$out = null;
-		foreach ($actions as $a) {
-			$p = array ();
-			if(!isset($a['arguments']))
-				$a['arguments'] = false;
-			if (is_array($a['arguments'])) $p = $a['arguments'];
-			$a['arguments']['is_slot'] = true;
-			$r = $this->createForwardContainer($a['module'], $a['action'], $p, $a['output_type'])
-			->execute();
-			
-			if ($r->hasContent()) {
-				$out .= $r->getContent(). "\n\n";
+
+		if (count($actions)==1 && isset($actions[0])) {
+
+			foreach ($actions[0] as $modules) {
+
+				foreach ($modules as $a) {
+					$p = array ();
+					if(!isset($a['arguments']))
+						$a['arguments'] = false;
+					if (is_array($a['arguments'])) $p = $a['arguments'];
+					$a['arguments']['is_slot'] = true;
+					$r = $this->createForwardContainer($a['module'], $a['action'], $p, $a['output_type'])
+					->execute();
+
+					if ($r->hasContent()) {
+						$out .= $r->getContent(). "\n\n";
+					}
+				}
+
 			}
+
 		}
 		return $out;
 	}

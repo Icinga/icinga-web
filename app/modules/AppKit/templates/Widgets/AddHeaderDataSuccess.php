@@ -1,21 +1,31 @@
-<!-- Additional header data -->
-<?php if (is_array($t['meta_tags']) && count($t['meta_tags'])) { ?>
-		<!--  META tags -->
-<?php foreach ($t['meta_tags'] as $tag_name=>$tag_val) { ?>
-		<meta name="<?php echo $tag_name; ?>" content="<?php echo $tag_val; ?>" />
-<?php } } ?>
+<?php
+	$webpath = $t['web_path'];
+	$ns = AppKitModuleUtil::DEFAULT_NAMESPACE;
+?>
+<?php // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ?>
+<?php if ($rq->hasAttribute('app.meta_tags', $ns)): ?>
+<?php
+	$meta_tags = $rq->getAttribute('app.meta_tags', $ns);
+	if (count($meta_tags) == 1 && isset($meta_tags[0])):
+	$meta_tags = $meta_tags[0];
+?>
+<?php foreach ($meta_tags as $module): ?>
+<?php foreach ($module as $mname=>$mvalue): ?>
+	<meta name="<?php echo $mname; ?>" content="<?php echo $mvalue; ?>" />
+<?php endforeach; ?>
+<?php endforeach; ?>
+<?php endif; ?>
+<?php endif; ?>
 
-<?php if (is_array($t['css_files']) && count($t['css_files'])) { ?>
-		<!-- CSS file imports -->
+
+<?php // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ?>
+<?php if ($rq->hasAttribute('app.css_files', $ns)): ?>
 		<style type="text/css">
-		<!-- /* <![CDATA[ */
-<?php foreach ($t['css_files'] as $css_file) { ?>
-			@import url("<?php echo $css_file; ?>");
-<?php } ?>
-		/* ]]> */ -->
+<?php foreach ($rq->getAttribute('app.css_files', $ns) as $file): ?>
+			@import url("<?php echo $webpath. $file; ?>");
+<?php endforeach; ?>
 		</style>
-<?php } ?>
-
+<?php endif; ?>
 <?php if (is_array($t['css_raw']) && count($t['css_raw'])) { ?>
 		<!-- RAW css script -->
 		<style type="text/css">
@@ -32,18 +42,13 @@
 <?php } ?>
 
 
-<?php if (is_array($t['js_files']) && count($t['js_files'])) { ?>
-		<!-- JS included files -->
-	<?php foreach ($t['js_files'] as $js_file) { ?>
-		<script type="text/javascript" src="<?php echo $js_file; ?>">
-		//<!-- // <![CDATA[
-		// NO INLINE SCRIPT
-		// ]]> -->
-		</script>
+<?php // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ?>
+<?php if (isset($t['js_files_includes']) && is_array($t['js_files_includes'])): ?>
+	<?php foreach ($t['js_files_includes'] as $js_file) { ?>
+	<script type="text/javascript" src="<?php echo $js_file; ?>"></script>
 	<?php } ?>
-<?php } ?>
-
-<?php if (is_array($t['js_raw']) && count($t['js_raw'])) { ?>
+<?php endif; ?>
+<?php if (isset($t['js_raw']) && is_array($t['js_raw']) && count($t['js_raw'])) { ?>
 		<!-- RAW js code -->
 		<script type="text/javascript">
 		//<!-- // <![CDATA[
@@ -59,3 +64,6 @@
 		// ]]> -->
 		</script>
 <?php } ?>
+
+
+<?php // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ?>

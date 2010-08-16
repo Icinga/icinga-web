@@ -62,7 +62,7 @@ Ext.onReady(function() {
                     },
                     items: [{
                         tooltip: _('Preferences'),
-                        iconCls: 'silk-user-edit',
+                        iconCls: 'icinga-icon-user-edit',
                         text: _('Preferences'),
                         handler: function() {
                         	// View nicely in window :-P
@@ -70,7 +70,7 @@ Ext.onReady(function() {
                         }
                     }, {
                         tooltip: _('Logout'),
-                        iconCls: 'silk-user-go',
+                        iconCls: 'icinga-icon-user-go',
                         width: 'auto',
                         handler: function() {
 							AppKit.util.doLogout('<?php echo $ro->gen("appkit.logout", array('logout' => 1)); ?>');
@@ -78,9 +78,9 @@ Ext.onReady(function() {
                     }]
                 }
             },
-            iconCls: 'silk-user',
+            iconCls: 'icinga-icon-user',
             <?php else: ?>
-            iconCls: 'silk-user-delete',
+            iconCls: 'icinga-icon-user-delete',
             <?php endif; ?>
             text: '<?php echo $username; ?>'
         }]);

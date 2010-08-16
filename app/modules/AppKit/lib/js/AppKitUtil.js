@@ -114,13 +114,13 @@ AppKit.util = (function() {
 					bbar: {
 						items: [{
 							text: _('OK'),
-							iconCls: 'silk-accept',
+							iconCls: 'icinga-icon-accept',
 							handler: function() {
 								AppKit.changeLocation(AppKit.c.path);
 							}
 						}, {
 							text: _('Cancel'),
-							iconCls: 'silk-cancel',
+							iconCls: 'icinga-icon-cancel',
 							handler: function() {
 								pwin.close();
 							}

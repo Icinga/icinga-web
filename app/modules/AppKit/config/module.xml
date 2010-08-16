@@ -6,14 +6,13 @@
 			<settings>
 				<setting name="title">AppKit Module</setting>
 				<setting name="version">1.0</setting>
-<!--
+
 				<setting name="authors">
-					<ae:parameter name="joe.cool@peanuts.com">Snoopy</ae:parameter>
+					<ae:parameter name="info@icinga.org">icinga developer team</ae:parameter>
 				</setting>
-				<setting name="homepage">http://www.agavi.org</setting>
+				<setting name="homepage">http://www.icinga.org</setting>
 				<setting name="update_url" />
-				<setting name="description">An example module</setting>
--->
+				<setting name="description">Appkit main application kit</setting>
 
 				<setting name="doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
 				
@@ -48,11 +47,64 @@
 				</setting>
 
 				<setting name="user_preferences_default">
-					<ae:parameter name="de.icinga.grid.pagerMaxItems">25</ae:parameter>
-					<ae:parameter name="de.icinga.grid.refreshTime">300</ae:parameter>
-					<ae:parameter name="de.icinga.cronk.default">portalHello</ae:parameter>
+					<ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
+					<ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
+					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
 				</setting>
-				
+
+				<!-- Adding styles -->
+				<setting name="appkit_module.app.css_files">
+					<!-- extjs stylesheets -->
+					<ae:parameter>/js/ext3/resources/css/ext-all-notheme.css</ae:parameter>
+					<ae:parameter>/js/ext3/resources/css/xtheme-gray.css</ae:parameter>
+					<ae:parameter>/js/ext3/examples/ux/css/ux-all.css</ae:parameter>
+					
+					<!-- layout styles -->
+					<ae:parameter>/styles/icinga.css</ae:parameter>
+					<ae:parameter>/styles/icinga-icons.css</ae:parameter>
+				</setting>
+
+				<setting name="appkit_module.app.javascript_files">
+					<!-- ExtJS base files -->
+					<ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/ext-all.js</ae:parameter>
+
+					<!--AppKit JS -->
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/Layout.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/ScriptDynaLoader.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</ae:parameter>
+
+					<!-- jsgettext -->
+					<ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
+				</setting>
+
+				<setting name="appkit_module.app.javascript_actions">
+					<ae:parameter>
+						<ae:parameter name="module">AppKit</ae:parameter>
+						<ae:parameter name="action">Ext.initI18n</ae:parameter>
+						<ae:parameter name="output_type">javascript</ae:parameter>
+					</ae:parameter>
+
+					<ae:parameter>
+						<ae:parameter name="module">AppKit</ae:parameter>
+						<ae:parameter name="action">Ext.ApplicationState</ae:parameter>
+						<ae:parameter name="output_type">javascript</ae:parameter>
+						<ae:parameter name="arguments">
+							<ae:parameter name="cmd">init</ae:parameter>
+						</ae:parameter>
+					</ae:parameter>
+				</setting>
+
+<!--				<setting name="appkit_module.app.javascript_dynamic"></setting>-->
+
+				<setting name="appkit_module.app.meta_tags">
+					<ae:parameter name="author">(c) 2009,2010 Icinga developer team - www.icinga.org</ae:parameter>
+					<ae:parameter name="robots">noindex</ae:parameter>
+				</setting>
+
 			</settings>
 			
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>

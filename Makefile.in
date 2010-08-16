@@ -2,6 +2,11 @@ SHELL=/bin/sh
 PACKAGE_TARNAME=@PACKAGE_TARNAME@
 PACKAGE_NAME=@PACKAGE_NAME@
 PACKAGE_VERSION=@PACKAGE_VERSION@
+VERSION_MAJOR=@VERSION_MAJOR@
+VERSION_MINOR=@VERSION_MINOR@
+VERSION_PATCH=@VERSION_PATCH@
+VERSION_EXTEN=@VERSION_EXTEN@
+RELEASE_DATE=@RELEASE_DATE@
 TAR_DIR_NAME=$(shell basename `pwd`)
 prefix=@prefix@
 exec_prefix=@exec_prefix@
@@ -17,6 +22,7 @@ BIN_GROUP=@bin_group@
 WEB_USER=@web_user@
 WEB_GROUP=@web_group@
 WEB_PATH=@web_path@
+WEB_APACHE_PATH=@web_apache_path@
 SED=@SED@
 PHP=@PHP@
 PHING=@PHING@
@@ -59,24 +65,29 @@ include $(INC_MAKE_FILES)
 	
 clean: distclean
 
-distclean: clean
+distclean:
 	rm -f \
 		Makefile \
 		config.log \
 		config.status \
-		etc/build.properties
+		etc/build.properties \
+		etc/tests/test.properties \
+		etc/apache2/icinga-web.conf
 		
 configclean:
 	rm -f \
 		app/config/databases.xml \
-		pub/.htaccess
+		app/config/icinga.xml \
+		app/modules/Web/config/module.xml \
+		pub/.htaccess \
+		pub/soap/.htaccess
 
 remove-temp-files:
 	bin/rmtmp-files.sh
 
 devclean: remove-temp-files distclean cacheclean logclean make-create-files configclean
 
-cleanall: distclean cacheclean configclean logclean 
+cleanall: distclean cacheclean logclean 
 
 create-tarball:
 	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
@@ -96,22 +107,31 @@ testdeps:
 	 $(PHP) bin/testdeps.php
 
 fix-priv:
-	chown -R $(WEB_USER).$(WEB_GROUP) \
+	chown $(WEB_USER).$(WEB_GROUP) \
 		$(DESTDIR)$(prefix)/app/cache \
+		$(DESTDIR)$(prefix)/app/cache/config \
 		$(DESTDIR)$(prefix)/app/data/log
-	chmod -R 775 $(DESTDIR)$(prefix)/app/cache
+
+	chmod 775 \
+		$(DESTDIR)$(prefix)/app/cache \
+		$(DESTDIR)$(prefix)/app/cache/config \
+		$(DESTDIR)$(prefix)/app/data/log \
+
 	chmod +x \
 		$(DESTDIR)$(prefix)/bin/agavi \
+		$(DESTDIR)$(prefix)/bin/console.php \
 		$(DESTDIR)$(prefix)/bin/create-makefile.sh \
 		$(DESTDIR)$(prefix)/bin/create-rescuescheme.sh \
 		$(DESTDIR)$(prefix)/bin/doctrinemodels.php \
-		$(DESTDIR)$(prefix)/bin/phing \
-		$(DESTDIR)$(prefix)/bin/testdeps.php \
+		$(DESTDIR)$(prefix)/bin/getopts.php \
 		$(DESTDIR)$(prefix)/bin/loc-create-catalog.pl \
 		$(DESTDIR)$(prefix)/bin/loc-create-json.sh \
 		$(DESTDIR)$(prefix)/bin/loc-create-mo.sh \
 		$(DESTDIR)$(prefix)/bin/loc-merge-template.sh \
-		$(DESTDIR)$(prefix)/bin/rmtmp-files.sh
+		$(DESTDIR)$(prefix)/bin/phing \
+		$(DESTDIR)$(prefix)/bin/rmtmp-files.sh \
+		$(DESTDIR)$(prefix)/bin/testdeps.php \
+		$(DESTDIR)$(prefix)/bin/create-changelog.py \
 
 fix-libs:
 	rm -rf $(DESTDIR)$(prefix)/pub/js/ext3
@@ -123,6 +143,13 @@ install:
 	$(MAKE) -s inc-install-files
 	$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(MAKE) fix-priv fix-libs
+
+install-apache-config:
+	cp -f etc/apache2/icinga-web.conf $(WEB_APACHE_PATH)
+	@printf "\nInstalled configuration in '%s'.\n" "$(WEB_APACHE_PATH)"
+	@printf "Please make sure that the directory is included or \n"
+	@printf "include %s/icinga-web.conf manually.\n" "$(WEB_APACHE_PATH)"
+	@printf "\nPlease restart your apache in order to complete this step.\n\n"
 
 db-initialize:
 	$(PHING_CALL) db-initialize

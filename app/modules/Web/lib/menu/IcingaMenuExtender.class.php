@@ -33,21 +33,21 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 				
 				$icinga->addSubItem(AppKitNavItem::create('icinga.portalView', 'icinga.portalView')
 					->setCaption('Portal')
-					->addAttributes('extjs-iconcls', 'silk-application-cascade')
+					->addAttributes('extjs-iconcls', 'icinga-icon-application-cascade')
 				);
 		}
 		
 		// Adding some help
 		$my = $nav->getContainer()->addItem(AppKitNavItem::create('help', null)
 			->setCaption('Help')
-			->addAttributes('extjs-iconcls', 'silk-help')
+			->addAttributes('extjs-iconcls', 'icinga-icon-help')
 		)->addSubItem(AppKitNavItem::create('icinga-home')
 			->setCaption('Icinga home')
-			->addAttributes('extjs-iconcls', 'silk-world')
+			->addAttributes('extjs-iconcls', 'icinga-icon-world')
 			->addAttributes('extjs-href', 'http://www.icinga.org')
 		)->addSubItem(AppKitNavItem::create('icinga-about')
 			->setCaption('About')
-			->addAttributes('extjs-iconcls', 'silk-information')
+			->addAttributes('extjs-iconcls', 'icinga-icon-information')
 			->setJsHandler("AppKit.util.contentWindow.createDelegate(null, [{ url: '". AgaviContext::getInstance()->getRouting()->gen('icinga.about') ."' }, { title: _('About') }])")
 		);
 		

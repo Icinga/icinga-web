@@ -34,12 +34,12 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 							tbar: {
 								items: [{
 									text: _('Refresh'),
-									iconCls: 'silk-arrow-refresh',
+									iconCls: 'icinga-icon-arrow-refresh',
 									tooltip: _('Refresh the data in the grid'),
 									handler: function(oBtn, e) { panel.getUpdater().refresh(); }
 								}, {
 									text: _('Settings'),
-									iconCls: 'silk-cog',
+									iconCls: 'icinga-icon-cog',
 									toolTip: _('Tactical overview settings'),
 									menu: {
 										items: [{

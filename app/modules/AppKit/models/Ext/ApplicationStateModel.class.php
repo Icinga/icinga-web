@@ -3,7 +3,7 @@
 class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviISingletonModel
 {
 
-	const PREFNS = 'de.icinga.ext.appstate';
+	const PREFNS = 'org.icinga.ext.appstate';
 	
 	public function stateAvailable() {
 		if ($this->getContext()->getUser()->isAuthenticated()) {

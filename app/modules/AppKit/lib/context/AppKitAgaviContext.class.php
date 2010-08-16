@@ -1,7 +1,7 @@
 <?php
 
 class AppKitAgaviContext extends AgaviContext {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see lib/agavi/src/core/AgaviContext#initialize()
@@ -11,13 +11,32 @@ class AppKitAgaviContext extends AgaviContext {
 		 * Make our settings ready
 		 * before run agavi
 		 */
+		$this->buildVersionString();
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
 		$this->initializeAutosettings();
+		$this->initializeModules();
 		$this->initializeEventHandling();
 		$this->setLanguageDomain();
 		
 		parent::initialize();
+	}
+
+	/**
+	 * Load all needed modules
+	 */
+	private function initializeModules() {
+		(array)$list = AgaviConfig::get('org.icinga.appkit.init_modules', array());
+
+		if (array_search('AppKit', $list) == false) {
+			AgaviController::initializeModule('AppKit');
+		}
+		
+		foreach ($list as $mod_name) {
+			AgaviController::initializeModule($mod_name);
+		}
+
+
 	}
 	
 	/**
@@ -39,21 +58,28 @@ class AppKitAgaviContext extends AgaviContext {
 		// Try to set the web path to correct urls within the frontend
 		if(AgaviConfig::get('core.default_context') =='web') {
 			// Try to set the web path to correct urls within the frontend
-			if (AgaviConfig::get('de.icinga.appkit.web_path') == null) {
-				AgaviConfig::set('de.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
+			if (AgaviConfig::get('org.icinga.appkit.web_path') == null) {
+				AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
 			}
+		}		
+	}
+
+	private function buildVersionString() {
+		if (AgaviConfig::get('org.icinga.version.extension', false) == false) {
+			$version_format = "%s/v%d.%d.%d";
 		}
-		
-		// Version
-		$version = sprintf(
-			'%s/v%d.%d.%d-%s',
-			AgaviConfig::get('de.icinga.appkit.version.name'),
-			AgaviConfig::get('de.icinga.appkit.version.major'),
-			AgaviConfig::get('de.icinga.appkit.version.minor'),
-			AgaviConfig::get('de.icinga.appkit.version.patch'),
-			AgaviConfig::get('de.icinga.appkit.version.extension')
-		);
-		AgaviConfig::set('de.icinga.appkit.version.release', $version, true, true);
+		else {
+			$version_format = "%s/v%d.%d.%d-%s";
+		}
+
+		AgaviConfig::set('org.icinga.version.release', sprintf(
+			$version_format,
+			AgaviConfig::get('org.icinga.version.name'),
+			AgaviConfig::get('org.icinga.version.major'),
+			AgaviConfig::get('org.icinga.version.minor'),
+			AgaviConfig::get('org.icinga.version.patch'),
+			AgaviConfig::get('org.icinga.version.extension')
+		), true, true);
 	}
 	
 	private function initializePhpSettings() {
@@ -91,7 +117,7 @@ class AppKitAgaviContext extends AgaviContext {
 			$translationMgr = $context->getTranslationManager();
 					
 			try {
-				$locale = $user->getPrefVal("de.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
+				$locale = $user->getPrefVal("org.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
 				$translationMgr->setLocale($locale);
 			} catch(Exception $e) {
 				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());

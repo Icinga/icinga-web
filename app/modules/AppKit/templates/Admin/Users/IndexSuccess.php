@@ -20,7 +20,7 @@ Ext.onReady(function() {
 			'user_email',
 			{name: 'user_disabled',type:'boolean'},
 			{name: 'user_disabled_icon',mapping:'user_disabled',convert: function(v) {
-				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'silk-cancel' : 'silk-accept')+'"></div>';
+				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
 			}},
 			{name: 'user_created'},
 			{name: 'user_modified'}
@@ -78,7 +78,7 @@ Ext.onReady(function() {
 		title: _('Available users'),
 		height:500,
 		sm: new Ext.grid.RowSelectionModel(),
-		iconCls: 'silk-user',
+		iconCls: 'icinga-icon-user',
 		tools: [{
 			id: 'plus',
 			qtip: _('Add new user'),
@@ -145,7 +145,7 @@ Ext.onReady(function() {
 				width: 15
 			},{
 				xtype: 'button',
-				iconCls: 'silk-cancel',
+				iconCls: 'icinga-icon-cancel',
 				text: _('Remove selected'),
 				handler: function(ev,btn) {
 					grid.deleteSelected();
@@ -156,7 +156,7 @@ Ext.onReady(function() {
 				width: 15
 			},{
 				xtype: 'button',
-				iconCls: 'silk-add',
+				iconCls: 'icinga-icon-add',
 				text: _('Add new user'),
 				handler: function() {wnd_userEditPanel.createUser();}
 				
@@ -188,7 +188,7 @@ Ext.onReady(function() {
 				items: [{
 					text:'Edit this user',
 					handler: wnd_userEditPanel.editUser.createDelegate(wnd_userEditPanel,[id]),
-					iconCls: 'silk-pencil'
+					iconCls: 'icinga-icon-pencil'
 				}]			
 			}).showAt(pos);
 		},

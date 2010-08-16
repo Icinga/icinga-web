@@ -150,13 +150,8 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			 * Sets the window location
 			 */
 	        changeLocation : function(sUrl) {
-	                if (window.location.replace) {
-	                        window.location.replace(sUrl);
-	                }
-	                else {
-	                        window.location.href = sUrl;
-	                }
-	
+					// Just simple ;-)
+	                window.location.href = sUrl;
 	                return true;
 	        },
 	

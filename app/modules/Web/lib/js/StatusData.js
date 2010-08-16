@@ -1,28 +1,28 @@
-Ext.ns('Icinga', 'Icinga.DEFAULTS');
+Ext.ns('Icinga');
 
-AppKit.on('appkit-ready', function() {
+Ext.onReady(function() {
 
 Icinga.DEFAULTS = {};
 
 Icinga.DEFAULTS.OBJECT_TYPES = {
 	host: {
 		oid: 1,
-		iconClass: 'icinga-object-host'
+		iconClass: 'icinga-icon-host'
 	},
 	
 	service: {
 		oid: 2,
-		iconClass: 'icinga-object-service'
+		iconClass: 'icinga-icon-service'
 	},
 	
 	hostgroup: {
 		oid: 3,
-		iconClass: 'icinga-object-hostgroup'
+		iconClass: 'icinga-icon-hostgroup'
 	},
 	
 	servicegroup: {
 		oid: 4,
-		iconClass: 'icinga-object-servicegroup'
+		iconClass: 'icinga-icon-servicegroup'
 	}
 };
 
@@ -96,7 +96,7 @@ Icinga.StatusData = (function() {
 			t = pub.servicestatusText[statusid];
 		}
 		
-		return { cls: c, text: String.format.call(String, format, t) };
+		return {cls: c, text: String.format.call(String, format, t)};
 	};
 	
 	var textTemplate = new Ext.Template('<span class="icinga-status-text {cls}">{text}</span>');
@@ -139,4 +139,4 @@ Icinga.ObjectData = (function() {
 	
 });
 
-}, window, { single: true });
+}, window, {single: true});

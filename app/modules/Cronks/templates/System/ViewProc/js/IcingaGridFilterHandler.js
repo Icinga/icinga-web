@@ -124,19 +124,19 @@ var IcingaGridFilterWindow = function() {
 				bbar: {
 					items: [{
 						text: _("Apply"),
-						iconCls: 'silk-accept',
+						iconCls: 'icinga-icon-accept',
 						handler: function(b, e) {
 							pub.applyFilters();
 						}
 					},{
 						text: _("Discard"),
-						iconCls: 'silk-cross',
+						iconCls: 'icinga-icon-cross',
 						handler: function(b, y) {
 							oWin.hide();
 						}
 					}, '-',{
 						text: _("Reset"),
-						iconCls: 'silk-delete',
+						iconCls: 'icinga-icon-delete',
 						handler: function(b, y) {
 							pub.resetFilterForm();
 						}

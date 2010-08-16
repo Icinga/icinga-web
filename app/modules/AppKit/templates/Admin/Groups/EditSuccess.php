@@ -197,7 +197,7 @@ Ext.onReady(function(){
 				var cmp = Ext.getCmp('groupUsers');
 				Ext.each(data["users"],function(user) {
 					var item = new Ext.BoxComponent({
-						html: "<div class='role_user_icon silk-user'></div>"+user.user_name,
+						html: "<div class='role_user_icon icinga-icon-user'></div>"+user.user_name,
 						cls: 'role_user_wrap',					
 						listeners: {
 							render: function(e) {

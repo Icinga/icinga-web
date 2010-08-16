@@ -53,6 +53,14 @@ implements ArrayAccess, Countable
 	public function count() {
 		return count($this->arrayContainer);
 	}
+
+	public function getKeys() {
+		return array_keys($this->arrayContainer);
+	}
+
+	public function getValues() {
+		return array_values($this->arrayContainer);
+	}
 }
 
 ?>

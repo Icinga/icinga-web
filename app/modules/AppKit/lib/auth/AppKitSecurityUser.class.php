@@ -6,9 +6,26 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 	
 	const USEROBJ_ATTRIBUTE = 'userobj';
 	
-	
+	protected $role_names = array ();
+
 	public function doAuthKeyLogin($key) {
 		$this->doLogin($key,$key);
+	}
+
+	public function  getRoles() {
+		if (count($this->role_names) <= 0) {
+			$roles = Doctrine_Query::create()
+			->select('r.role_id, r.role_name')
+			->from('NsmRole r')
+			->innerJoin('r.NsmUser u with u.user_id=?', $this->getNsmUser()->user_id)
+			->setHydrationMode(Doctrine::HYDRATE_ARRAY)
+			->execute();
+			
+			foreach ($roles as $role) {
+				$this->role_names[ $role['role_id'] ] = $role['role_name'];
+			}
+		}
+		return $this->role_names;
 	}
 	
 	/**

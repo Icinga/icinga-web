@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	ICINGA base configuration
+-->
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config" prefix="org.icinga.">
+	<!--
+		Add more links under 'home'
+		* The home itself points to index_page route
+	-->
+	<setting name="appkit.home_links">
+		<!--<parameter name="icinga.about">About</parameter> -->
+	</setting>
+
+	<!--
+		The webpath, with a leading slash and no trailing
+		* If the path is empty, we try to detect the path
+	-->
+	<setting name="appkit.web_path"/>
+	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
+	
+	<!--
+		AppKit image dispatcher
+	-->
+	<setting name="appkit.image_path">%core.root_dir%/pub/images</setting>
+
+	<!-- @DEPRECATED -->
+	<setting name="appkit.include_styles"></setting>
+	
+	<!-- 
+		Metatags
+	-->
+	<setting name="appkit.meta_tags">
+	</setting>
+
+	<!-- @DEPRECATED -->
+	<!-- 
+		Javascript includes
+		* please provide absolute paths, we create one big file later.
+	-->
+	<setting name="appkit.include_javascript"></setting>
+
+	<!--
+		ScriptDynaLoader
+		* This scripts are included dynamically by modules if needed (js code)
+		* You have to predefine the libraries
+	-->
+	<setting name="appkit.include_dynamic_javascript"></setting>
+	
+	<!--
+		Doctrine pager configuration
+		* deprecated, test to remove
+	-->
+	<setting name="appkit.pager.default_items">20</setting>
+	
+	<!-- 
+		Version information
+		* names, and revisions
+		* This results into org.icinga.version.release
+		
+		<setting name="version.release"/>
+	-->
+	<setting name="version.copyright"><![CDATA[&#169; 2009-2010 Icinga Developer Team]]></setting>
+	<setting name="version.homeref"><![CDATA[<a href="http://www.icinga.org/">www.icinga.org</a>]]></setting>
+	<setting name="version.major">@VERSION_MAJOR@</setting>
+	<setting name="version.minor">@VERSION_MINOR@</setting>
+	<setting name="version.patch">@VERSION_PATCH@</setting>
+	<setting name="version.extension">@VERSION_EXTEN@</setting>
+	<setting name="version.releasedate"><![CDATA[@RELEASE_DATE@]]></setting>
+	<setting name="version.name">icinga-web</setting>
+
+	<!--
+		Early initialize modules
+		* This controls which agavi modules are initialized at start
+		* needed for classes, javascript, ...
+	-->
+	<setting name="appkit.init_modules">
+		<parameter>Cronks</parameter>
+		<parameter>Web</parameter>
+	</setting>
+
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/>
+</settings>

@@ -1,0 +1,78 @@
+Connection parameters for the icinga-api
+
+1) Where to use
+
+Parameters for icinga-api can be used with the configure tool to setup
+your initial connection to icnga. To display a brief help description run
+
+	sh configure --help
+
+in the root of the src directory. You can also edit this parameters by hand.
+The connection to icinga is located in
+
+	app/modules/Web/config/module.xml
+
+Search for the 'api.interfaces.data' setting and alter the configuration to
+suite your environment
+
+2) Connection constants
+
+The connstants used to select the main interface, e.g. for databases or
+something other, like mklifestatus.
+
+	CONNECTION_IDO					database abstraction layer
+	CONNECTION_IDO_ABSTRACTION		not implemented
+	CONNECTION_FILE					native file interface
+	CONNECTION_LIVESTATUS			mk_lifestatus connector
+
+Please note that the both file connections are experimental. The data
+is not compatible to icinga-web
+
+3) Connection specific settings
+
+Every connection requires different configuration. The icinga-web module.xml
+parameters are completely free. To define an api option, simply prefix the
+option key with 'config_'. If you need to define 'host', add 'config_host' to
+your xml parameters.
+
+3.1) CONNECTION_IDO
+
+	type		: Database type. You'll need an appropriate PHP PDO driver on
+				  your system.
+
+				  Supported types: mysql, oci, oci8, pgsql
+
+				  There are two oracle drivers. The oci8 using the original
+				  oracle client libraries which is more robust
+
+	host		: Target of the database system
+	port		: Over the network you'll need a port
+	database	: Name of the database (depends on your ido2db setup)
+	user		: Username to connect to
+	password	: Password to authenticate
+
+
+
+
+3.2) CONNECTION_LIFESTATUS
+
+	type		: Tcp or unix are possible
+	path		: If you're using sockets, you need a path to connect to
+	host		: Target instruction for tcp
+	port		: Nummeric port value for tcp connections
+
+	NOTICE: This interface is not ready to work with productive software
+
+3.3) CONNECTION_FILE (DEPRECATED)
+
+	This implementation is deprecated and is not active developed. If you have
+	something dev related, please provide patches.
+
+	status.dat		: Location to your icinga status.dat file
+	objects.cache	: Path to objects cache file
+	retention.dat	: Path to retention.dat
+
+	All the files have to exit and must be readable by the user running
+	Apache or CLI or whatever.
+
+	NOTICE: This interface is not ready to work with productive software

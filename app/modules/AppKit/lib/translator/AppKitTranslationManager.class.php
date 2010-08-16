@@ -17,7 +17,7 @@ class AppKitTranslationManager extends AgaviTranslationManager {
 
 				$translation = $this->getContext()->getTranslationManager();
 				if($dbUser instanceof NsmUser) {
-					$langDomain = $dbUser->getPrefVal("de.icinga.appkit.locale");
+					$langDomain = $dbUser->getPrefVal("org.icinga.appkit.locale");
 					if($langDomain)
 						$translation->setLocale($langDomain);
 				}

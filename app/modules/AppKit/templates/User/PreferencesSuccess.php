@@ -55,7 +55,7 @@ Ext.onReady(function() {
 							Ext.Ajax.request({
 								url: '<?php echo $ro->gen("my.preferences") ?>',
 								params: {
-									upref_key: 'de.icinga.appkit.locale',
+									upref_key: 'org.icinga.appkit.locale',
 									upref_val: Ext.getCmp('cmb_language').getValue(),
 									isLong: false
 								},
@@ -182,7 +182,7 @@ Ext.onReady(function() {
 								new Ext.menu.Menu({
 									items: [{
 										text: _('Remove this preference'),
-										iconCls: 'silk-cancel',
+										iconCls: 'icinga-icon-cancel',
 										handler: function() {
 											var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
 											mask.show();
@@ -224,7 +224,7 @@ Ext.onReady(function() {
 					xtype: 'button',
 					text: 'Reset',
 					style: 'margin: 10px 0 10px 20px',
-					iconCls: 'silk-user-delete',
+					iconCls: 'icinga-icon-user-delete',
 					handler: function() {
 						var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
 						mask.show();
@@ -232,7 +232,7 @@ Ext.onReady(function() {
 							Ext.Ajax.request({
 								url: '<?php echo $ro->gen("my.preferences") ?>',
 								params: {
-									upref_key: 'de.icinga.ext.appstate',
+									upref_key: 'org.icinga.ext.appstate',
 									remove: true
 								},
 								callback: function() {
