@@ -43,7 +43,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 			
 			// Prepare the data structures
 			$coa = $sender->buildCommandObjects();
-			
+
 			if ($IcingaApiCommand->checkDispatcher() !== true) {
 				$this->setAttribute('ok', false);
 				$this->setAttribute('error', 'No command dispatchers configured!');
@@ -75,7 +75,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 			$this->setAttribute('ok', false);
 			$this->setAttribute('error', 'Authentification failed');
 			$this->getContext()->getLoggerManager()
-			->logError('Command auth failed!');
+			->log('Command auth failed!', AgaviLogger::ERROR);
 		}
 		
 		return $this->getDefaultViewName();
