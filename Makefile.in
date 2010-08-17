@@ -17,6 +17,8 @@ CGIDIR=@sbindir@
 HTMLDIR=@datarootdir@
 INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
+INSTALL_OPTS_WEB=@INSTALL_OPTS_WEB@
+INSTALL_OPTS_CACHE=@INSTALL_OPTS_CACHE@
 BIN_USER=@bin_user@
 BIN_GROUP=@bin_group@
 WEB_USER=@web_user@
@@ -28,40 +30,41 @@ PHP=@PHP@
 PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
-INC_MAKE_FILES=./etc/make/files.mk
+INC_MAKE_FILES=etc/make/files.mk etc/make/special.mk
 LOC_PO=app/data/i18n/po
 LOC_MO=app/data/i18n/mo
 LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
 
 none:
-#	@printf "\t%-18s - %s\n" "" ""
+#	@printf "\t%-22s - %s\n" "" ""
 	@printf "Please supply a command line argument (i.e. 'make install').\n\n"
 	@printf "Generic targets: install, clean\n\n"
 	@printf "Other usefull targets:\n"
-	@printf "\t%-18s - %s\n" "testdeps" "test php dependencies"
-	@printf "\t%-18s - %s\n" "create-tarball" "creates a tarball for packaging"
-	@printf "\t%-18s - %s\n" "create-tarball-nightly" "creates a tarball from HEAD for nightly builds"
-	@printf "\t%-18s - %s\n" "devclean" "make source ready for commit or packaging"
-	@printf "\t%-18s - %s\n" "cacheclean" "purges the agavi xml cache"
+	@printf "\t%-22s - %s\n" "testdeps" "test php dependencies"
+	@printf "\t%-22s - %s\n" "create-tarball" "creates a tarball for packaging"
+	@printf "\t%-22s - %s\n" "create-tarball-nightly" "creates a tarball from HEAD for nightly builds"
+	@printf "\t%-22s - %s\n" "devclean" "make source ready for commit or packaging"
+	@printf "\t%-22s - %s\n" "cacheclean" "purges the agavi xml cache"
 	
 	@printf "\nDatabase (web) targets:\n"
-	@printf "\t%-18s - %s\n" "db-initialize" "create the db"
-	@printf "\t%-18s - %s\n" "db-deinitialize" "reverse the path (removes all data and drop the relations)"
-	@printf "\t%-18s - %s\n" "db-upgrade" "tries to upgrade from a available db revision"
-	@printf "\t%-18s - %s\n" "db-drop" "drop the entire db"
-	@printf "\t%-18s - %s\n" "db-purge-userprefs" "purge existing user preferences"
-	@printf "\t%-18s - %s\n" "db-doc2sql" "export doctrine db schema"
+	@printf "\t%-22s - %s\n" "db-initialize" "create the db"
+	@printf "\t%-22s - %s\n" "db-deinitialize" "reverse the path (removes all data and drop the relations)"
+	@printf "\t%-22s - %s\n" "db-upgrade" "tries to upgrade from a available db revision"
+	@printf "\t%-22s - %s\n" "db-drop" "drop the entire db"
+	@printf "\t%-22s - %s\n" "db-purge-userprefs" "purge existing user preferences"
+	@printf "\t%-22s - %s\n" "db-doc2sql" "export doctrine db schema"
 
 	@printf "\nIcinga web targets:\n"
-	@printf "\t%-18s - %s\n" "icinga-reset-password" "Reset password for any account on icinga-web"
+	@printf "\t%-22s - %s\n" "icinga-reset-password" "Reset password for any account on icinga-web"
+	@printf "\t%-22s - %s\n" "install-apache-config" "Install the apache config to configured path"
 
 	@printf "\nI18n targets:\n"
-	@printf "\t%-18s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
-	@printf "\t%-18s - %s\n" "loc-compile" "Compile language files into mo and json"
+	@printf "\t%-22s - %s\n" "loc-update-catalog" "Create a initial locale from source (default.po)"
+	@printf "\t%-22s - %s\n" "loc-compile" "Compile language files into mo and json"
 
 	@printf "\nScheduler targets:\n"
-	@printf "\t%-18s - %s\n" "scheduler-install" "Install the icingaScheduler cronkjob"
-	@printf "\t%-18s - %s\n" "scheduler-remove" "remove the icingaScheduler cronkjob"
+	@printf "\t%-22s - %s\n" "scheduler-install" "Install the icingaScheduler cronkjob"
+	@printf "\t%-22s - %s\n" "scheduler-remove" "remove the icingaScheduler cronkjob"
 	@printf "\n\n"
 	
 include $(INC_MAKE_FILES)
@@ -72,6 +75,7 @@ cleanall: realclean
 
 cacheclean:
 	rm -rf app/cache/config/*.php
+	rm -rf app/cache/content
 
 logclean:
 	rm -rf app/data/log/*.log
@@ -107,11 +111,11 @@ remove-temp-files:
 
 create-tarball:
 	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
-	./make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
+	./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
 
 create-tarball-nightly:
 	#${MAKE} submodule-update
-	./make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-`date +%Y%m%d`-`git rev-parse --short HEAD`/
+	./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-`date +%Y%m%d`-`git rev-parse --short HEAD`/
 
 testdeps:
 	 $(PHP) bin/testdeps.php
@@ -143,16 +147,29 @@ fix-priv:
 		$(DESTDIR)$(prefix)/bin/testdeps.php \
 		$(DESTDIR)$(prefix)/bin/create-changelog.py \
 
-fix-libs:
-	rm -rf $(DESTDIR)$(prefix)/pub/js/ext3
-	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js
-	ln -sf $(API_DIR) $(DESTDIR)$(prefix)/lib/icinga-api
+install-done:
+	@printf "\n\n"
+	@printf "Installation if icinga-web succeeded.\n"
+	@printf "\n"
+	@printf	"Please check the new Apache2 configuration (etc/apache2/icinga-web.conf).\n"
+	@printf "\n"
+	@printf "You can install it simply by invoking 'make install-apache-config'.\n"
+	@printf "\n"
+	@printf "If you don't want this you can restore its old behavior by\n"
+	@printf "typing 'make install-javascript'. This will install the old symlinks\n"
+	@printf "\n"
+	@printf "Have fun!\n\n"
+
+
+install-javascript:
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js
+	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js/ext3
 
 install:
 	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
 	$(MAKE) -s inc-install-files
-	$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
-	$(MAKE) fix-priv fix-libs
+	$(MAKE) inc-install-special
+	$(MAKE) install-done
 
 install-apache-config:
 	cp -f etc/apache2/icinga-web.conf $(WEB_APACHE_PATH)

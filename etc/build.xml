@@ -48,7 +48,8 @@
 
 	<target name="db-prepare" depends="prepare">
 		<taskdef name="agaviDBExtractor" classname="etc.lib.agaviDBExtractorTask"/>	
-			
+		<taskdef name="confidentialInput" classname="etc.lib.confidentialInputTask"/>
+
 		<input propertyname="db.useAgavi" promptChar="?" validArgs="n,y">Use the db-user specified in icinga-webs database.xml (Needs create Database/create Table rights)?</input>
 		<if>
 			<equals arg1="${db.useAgavi}" arg2="y"/>

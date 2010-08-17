@@ -560,6 +560,8 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+INSTALL_OPTS_CACHE
+INSTALL_OPTS_WEB
 INSTALL_OPTS
 CFLAGS
 icinga_api
@@ -2439,9 +2441,14 @@ fi
 
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
+INSTALL_OPTS_WEB="-o $web_user -g $web_group"
+INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
+
 CFLAGS=""
 
 # Substitutions
+
+
 
 
 

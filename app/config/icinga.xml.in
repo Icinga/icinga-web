@@ -15,7 +15,7 @@
 		The webpath, with a leading slash and no trailing
 		* If the path is empty, we try to detect the path
 	-->
-	<setting name="appkit.web_path"/>
+	<setting name="appkit.web_path">@web_path@</setting>
 	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
 	
 	<!--
