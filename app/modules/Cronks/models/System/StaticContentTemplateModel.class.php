@@ -68,7 +68,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 			${$k} = $v;
 		}
 		
-		return eval('?> ' . $code . ' <?');
+		return eval('?> ' . $code . ' <?php');
 	}
 
 	private function appendArguments(array $args) {
