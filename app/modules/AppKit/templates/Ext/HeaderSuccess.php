@@ -13,9 +13,7 @@
 
 
 ?>
-<?php
-	
-?>
+
 <script type="text/javascript">
 Ext.onReady(function() {
 
