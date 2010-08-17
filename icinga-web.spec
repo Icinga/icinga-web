@@ -13,16 +13,16 @@
 %define apacheuser apache
 %endif
 
-Summary: Open Source host, service and network monitoring Web UI 
+Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.0.1
+Version: 1.0.3
 #Release: 1%{?dist}
 Release: 1
 License: GPL
 Group: Applications/System
 URL: http://www.icinga.org/
 
-Source0: icinga-web-1.0.1.tar.gz
+Source0: icinga-web-1.0.3.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -55,23 +55,14 @@ Icinga Web for Icinga Core, requires Icinga API.
 %build
 ##############################
 
-# before we start, make sure that $(MAKE) fix-priv fix-libs will be kicked out
-# we'll apply that ourselves in %post
-# instead this is in make install - patch in the copying of etc/build.properties :D
-%{__perl} -pi -e '
-	s|\$\(MAKE\)\sfix-priv\sfix-libs|\$\(INSTALL\) -m 664 \$\(INSTALL_OPTS\) etc\/build\.properties \$\(DESTDIR\)\$\(prefix\)\/etc\/build\.properties|;
-	' Makefile.in
-
-
 %configure \
     --prefix="%{_datadir}/icinga-web" \
     --datadir="%{_datadir}/icinga-web" \
     --datarootdir="%{_datadir}/icinga-web" \
     --with-web-user='%{apacheuser}' \
     --with-web-group='%{apacheuser}' \
-    --with-icinga-api='%{_datadir}/icinga-api' \
-
-# --with-db-type, --with-db-host, --with-db-port, --with-db-name, --with-db-user, --with-db-pass
+    --with-icinga-api='%{_datadir}/icinga/share/icinga-api' \
+    --with-web-apache-path=%{apacheconfdir}
 
 # resolve possible wrong files for makefile
 #%{__make} devclean
@@ -81,7 +72,9 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 
 %{__rm} -rf %{buildroot}
+%{__mkdir} -p %{buildroot}/%{apacheconfdir}
 %{__make} install \
+    install-apache-config \
     DESTDIR="%{buildroot}" \
     INSTALL_OPTS="" \
     COMMAND_OPTS="" \
@@ -98,91 +91,62 @@ Icinga Web for Icinga Core, requires Icinga API.
 %preun
 ##############################
 
-#uncomment if having problems with cache dir
-#%{__rm} -rf %{buildroot}%{_datadir}/icinga-web/app/cache
-
 ##############################
 %post
 ##############################
 
-### apply fixes after install
-#mkdir %{_datadir}/icinga-web/app/cache
+# clean config cache
+#%{__rm} -rf %{_datadir}/icinga-web/app/cache/config/*.php
 
-### fix-privs taken from Makefile.in
-chown -R %{apacheuser}.%{apacheuser} \
-	%{_datadir}/icinga-web/app/cache \
-	%{_datadir}/icinga-web/app/data/log	
-chmod -R 775 %{_datadir}/icinga-web/app/cache
-chmod +x \
-	%{_datadir}/icinga-web/bin/agavi \
-	%{_datadir}/icinga-web/bin/create-makefile.sh \
-	%{_datadir}/icinga-web/bin/create-rescuescheme.sh \
-	%{_datadir}/icinga-web/bin/doctrinemodels.php \
-	%{_datadir}/icinga-web/bin/phing \
-	%{_datadir}/icinga-web/bin/testdeps.php \
-	%{_datadir}/icinga-web/bin/loc-create-catalog.pl \
-	%{_datadir}/icinga-web/bin/loc-create-json.sh \
-	%{_datadir}/icinga-web/bin/loc-create-mo.sh \
-	%{_datadir}/icinga-web/bin/loc-merge-template.sh \
-	%{_datadir}/icinga-web/bin/rmtmp-files.sh
+##############################
+%clean
+##############################
 
-### fix-libs taken from Makefile.in
-rm -rf %{_datadir}/icinga-web/pub/js/ext3
-ln -fs %{_datadir}/icinga-web/lib/ext3 %{_datadir}/icinga-web/pub/js
-ln -fs %{_datadir}/icinga-api %{_datadir}/icinga-web/lib/
-
+%{__rm} -rf %{buildroot}
 
 ##############################
 %files
 ##############################
 
-%dir %{_datadir}/icinga-web/app/cache/config
-%{_datadir}/icinga-web/app/cache/config/.PLACEHOLDER
-
-%dir %{_datadir}/icinga-web/app/config
-%config(noreplace) %{_datadir}/icinga-web/app/config/action_filters.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/autoload.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/compile.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/config_handlers.xml
+%config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
 %config(noreplace) %{_datadir}/icinga-web/app/config/databases.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/factories.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/global_filters.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/icinga.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/logging.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/output_types.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/rbac_definitions.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/routing.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/schedules.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/settings.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/translation.xml
-%config(noreplace) %{_datadir}/icinga-web/app/config/validators.xml
+%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml
+
+%{_datadir}/icinga-web/app/cache/config
+
+%{_datadir}/icinga-web/app/config
 
 %{_datadir}/icinga-web/app/data
 
 %{_datadir}/icinga-web/app/lib
+
 %{_datadir}/icinga-web/app/modules
+
 %{_datadir}/icinga-web/app/templates
 
 %{_datadir}/icinga-web/app/config.php
 
 %{_datadir}/icinga-web/bin
 
-%{_datadir}/icinga-web/etc
-#%{_datadir}/icinga-web/etc/build.properties
-#%{_datadir}/icinga-web/etc/build.xml
-
 %{_datadir}/icinga-web/doc
+
+%{_datadir}/icinga-web/etc
+
 %{_datadir}/icinga-web/lib
+
 %{_datadir}/icinga-web/pub
 
 
 ##############################
 %changelog
 ##############################
+* Tue Aug 17 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.0.3-1
+- updated for 1.0.3, removed fix-priv fix-libs as this is now in make install
+
 * Tue Jun 29 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.0.1-1
 - updated for 1.0.1
 
 * Fri Apr 16 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 0.9.1-1
-- initial creation 
+- initial creation
 
 

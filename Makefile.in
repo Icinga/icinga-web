@@ -172,7 +172,7 @@ install:
 	$(MAKE) install-done
 
 install-apache-config:
-	cp -f etc/apache2/icinga-web.conf $(WEB_APACHE_PATH)
+	${INSTALL} -b -m 664 $(INSTALL_OPTS) etc/apache2/icinga-web.conf $(DESTDIR)$(WEB_APACHE_PATH)/icinga-web.conf
 	@printf "\nInstalled configuration in '%s'.\n" "$(WEB_APACHE_PATH)"
 	@printf "Please make sure that the directory is included or \n"
 	@printf "include %s/icinga-web.conf manually.\n" "$(WEB_APACHE_PATH)"
