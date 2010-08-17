@@ -3,9 +3,9 @@
 		return AgaviConfig::get('org.icinga.version.'. $item);
 	}
 	
-	$version_string = AgaviConfig::get('org.icinga.version.release');;
-	$version_date = AgaviConfig::get('org.icinga.version.releasedate');
-	$copy =  AgaviConfig::get('org.icinga.version.copyright');
+	$version_string	= AgaviConfig::get('org.icinga.version.release');;
+	$version_date	= AgaviConfig::get('org.icinga.version.releasedate');
+	$copyright		= AgaviConfig::get('org.icinga.version.copyright');
 ?>
 <div style="margin: 10px auto; padding: 10px 10px;">
 
@@ -17,6 +17,6 @@
 	
 	<p>Have fun!</p>
 	
-	<p><?php echo $tm->_d($version_date); ?> - <a href="http://www.icinga.org/"><?php echo $copy; ?></a></p>
+	<p><?php echo $tm->_d($version_date, 'date-medium'); ?> - <a href="http://www.icinga.org/"><?php echo $copyright; ?></a></p>
 	
 </div>
