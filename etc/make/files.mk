@@ -576,9 +576,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/constants
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/constants/IcingaConstantResolver.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/constants/IcingaConstantResolver.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/constants/IcingaConstants.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/constants/IcingaConstants.class.php
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/factory
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/factory/IcingaCommand.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/factory/IcingaCommand.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/factory/IcingaData.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/factory/IcingaData.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/IcingaBaseException.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/IcingaBaseException.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/js/SimpleDataProvider.js $(DESTDIR)$(prefix)/app/modules/Web/lib/js/SimpleDataProvider.js
@@ -612,6 +609,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/template/IcingaTemplateWorker.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/template/IcingaTemplateWorker.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/template/IcingaTemplateXmlParser.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/template/IcingaTemplateXmlParser.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/template/IcingaTemplateXmlReplace.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/template/IcingaTemplateXmlReplace.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/util
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/util/IcingaApiClassUtil.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/util/IcingaApiClassUtil.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/lib/view
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/lib/view/IcingaWebBaseView.class.php $(DESTDIR)$(prefix)/app/modules/Web/lib/view/IcingaWebBaseView.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/models
@@ -7841,6 +7840,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6936
+INC_FILES=6935
 INC_DIRS=904
 # INSTALL_FILES_END
