@@ -184,21 +184,7 @@ implements AgaviISingletonModel {
 	 * @author mhein
 	 */
 	private function checkClass() {
-		if (class_exists($this->apiClass)) {
-			return true;
-		}
-		
-		if (file_exists($this->apiFile)) {
-			require_once($this->apiFile);
-			return true;
-		}
-		
-		throw new AppKitModelException(
-			'ApiContainer failed to include class %s in \'%s\'',
-			$this->apiClass,
-			$this->apiFile
-		);
-		
+		IcingaApiClassUtil::initialize();
 	}
 	
 	/**
@@ -258,6 +244,7 @@ implements AgaviISingletonModel {
 
 	private function getDispatcherByInstance($instance_name) {
 		$out = array();
+		
 		if (array_key_exists($instance_name, $this->instanceDispatcher)) {
 			$out = $this->instanceDispatcher[$instance_name];
 		}
@@ -279,7 +266,7 @@ implements AgaviISingletonModel {
 	 */
 	public function dispatchCommandArray(array $arry) {
 		$error = false;
-
+		
 		foreach ($arry as $command) {
 
 			$instance_name = $command->getCommandInstance();

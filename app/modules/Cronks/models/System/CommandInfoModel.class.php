@@ -8,9 +8,9 @@ implements AgaviISingletonModel
 	 * @var IcingaApiCommandCollection
 	 */
 	private $command_collection = null;
-	
-	public function __construct() {
-		// Garbage to fix missing classes
+
+	public function  initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
 		$this->command_collection = IcingaApi::getCommandCollection();
 	}
 	
