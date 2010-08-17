@@ -421,7 +421,7 @@
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+                <parameter name="label"><![CDATA[<img style='margin-right:2px' src='images/icons/information.png'/>]]></parameter>
 
                 <parameter name="width">22</parameter>
 
@@ -481,7 +481,7 @@
             
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+                 <parameter name="label"><![CDATA[<img style='margin-right:2px' src='images/icons/book.png'/>]]></parameter>
 
                 <parameter name="width">22</parameter>
                 

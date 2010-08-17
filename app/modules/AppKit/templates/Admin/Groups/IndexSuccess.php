@@ -78,6 +78,11 @@ Ext.onReady(function() {
 		autoDestroy: true,
 		storeId: 'groupListStore',
 		idProperty: 'role_id',
+		baseParams: {
+			hideDisabled: false
+		},
+		totalProperty: 'totalCount',
+		root: 'roles',
 		autoLoad:true,
 		remoteSort: true,
 		url: '<?php echo $ro->gen("appkit.data.groups")?>',
