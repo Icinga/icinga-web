@@ -67,7 +67,7 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 			return false;			
 		}
 		
-		if($user->hasCredential("appkit.api.access"))
+		if($user->hasCredential("appkit.api.access") || $user->hasCredential("appkit.admin"))
 			return true;
 		
 		$validation->setError("Error","Invalid credentials for api access!");			
