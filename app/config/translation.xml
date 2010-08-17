@@ -46,12 +46,36 @@
 					<!-- Date/time (also important for the validators) -->
 					<date_formatter>
 						<ae:parameter name="type">date</ae:parameter>
-						<!-- dd.MM.yyyy hh:mm:ss -->
-						<ae:parameter name="format">yyyy-MM-dd HH:mm:ss</ae:parameter>
+						<ae:parameter name="format">full</ae:parameter>
 					</date_formatter>
 					
 			</translator>
-			
+
+			<!--
+				Date domains
+				* To handle specific formats
+			-->
+			<translator domain="date-short">
+				<date_formatter>
+					<ae:parameter name="type">date</ae:parameter>
+					<ae:parameter name="format">short</ae:parameter>
+				</date_formatter>
+			</translator>
+
+			<translator domain="date-medium">
+				<date_formatter>
+					<ae:parameter name="type">date</ae:parameter>
+					<ae:parameter name="format">medium</ae:parameter>
+				</date_formatter>
+			</translator>
+
+			<translator domain="date-tstamp">
+				<date_formatter>
+					<ae:parameter name="type">date</ae:parameter>
+					<ae:parameter name="format">yyyy-MM-dd HH:mm:ss</ae:parameter>
+				</date_formatter>
+			</translator>
+
 		</translators>
 		
 	</ae:configuration>

@@ -1,7 +1,6 @@
 <?php
 
-class Cronks_System_CommandSenderModel extends CronksBaseModel
-{
+class Cronks_System_CommandSenderModel extends CronksBaseModel {
 	
 	const TIME_KEY				= 'V2Pxq9J2GVt1dk6OO0x3'; // Please change this if you need more security!
 	const TIME_ALGO				= 'ripemd160';	// Please never change this!!!
@@ -10,11 +9,9 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel
 	private $selection			= array ();
 	private $data				= array ();
 	private $command			= null;
-	
-	public function __construct($command = null) {
-		if ($command !== null) {
-			$this->setCommandName($command);
-		}
+
+	public function  initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
 	}
 	
 	public function setCommandName($command) {
