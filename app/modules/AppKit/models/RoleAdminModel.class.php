@@ -18,8 +18,8 @@ class AppKit_RoleAdminModel extends AppKitBaseModel
 		->from('NsmRole')
 		->orderBy('role_name ASC');
 		
-		if ($disabled === 0) {
-			$roles->andWhere('role_disabled = ?', array($disabled));
+		if ($disabled == 0) {
+			$roles->andWhere('role_disabled = 0');
 		}
 		
 		return $roles;

@@ -250,7 +250,7 @@ Cronk.grid.MetaGridCreator.prototype = {
 		// Adding a pager bar if wanted
 		if (this.pager_array.enabled == true) {
 			grid_config.bbar = new Ext.PagingToolbar({
-				pageSize:		this.pager_array.size,
+				pageSize:		parseInt(this.pager_array.size,10),
 				store:			this.getMetaStore(),
 				displayInfo:	true,
 				displayMsg:		_('Displaying topics {0} - {1} of {2}'),
@@ -356,8 +356,8 @@ Cronk.grid.MetaGridCreator.prototype = {
 			
 			if (this.pager_array.enabled == true) {
 				store_config.baseParams = {
-					page_start: this.pager_array.start,
-					page_limit: this.pager_array.size
+					page_start: parseInt(this.pager_array.start,10),
+					page_limit: parseInt(this.pager_array.size,10)
 				}
 			}
 

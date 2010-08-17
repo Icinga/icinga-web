@@ -6,6 +6,11 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView
 	public function executeJson(AgaviRequestDataHolder $rd) {
 		$roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
 		$groupId = $rd->getParameter('groupId',false);
+		$disabled = $rd->getParameter('hideDisabled',false) == "false";
+		$start = $rd->getParameter('start',false);
+		$limit = $rd->getParameter('limit',false);
+		$sort = $rd->getParameter('sort',false);
+		$asc = ($rd->getParameter('dir','ASC') == 'ASC');
 		$result;
 		// return a single user when an id is provided
 		if($groupId) {
@@ -23,10 +28,15 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView
 			$result = $group->toArray();
 			$result["users"] = $role_users;
 		} else {	//return list of all users if no id is provided
-			$groups = $roleadmin->getRoleCollection(true)->toArray();
+
+			if($start === false || $limit === false)
+				$groups = $roleadmin->getRoleCollection($disabled)->toArray();
+			else 
+				$groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc)->toArray();
+			$result = array();	
 			$result = $groups;
 		}
-		return json_encode($result);
+		return json_encode(array("roles" => $result, "totalCount" => $roleadmin->getRoleCount($disabled)));
 	}
 	
 	public function executeHtml(AgaviRequestDataHolder $rd)

@@ -414,8 +414,7 @@
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-
+                <parameter name="label"><![CDATA[<img style='margin-right:2px' src='images/icons/information.png'/>]]></parameter>
                 <parameter name="width">22</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
@@ -475,7 +474,7 @@
             
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+                <parameter name="label"><![CDATA[<img style='margin-right:2px' src='images/icons/book.png'/>]]></parameter>
 
                 <parameter name="width">22</parameter>
                 
