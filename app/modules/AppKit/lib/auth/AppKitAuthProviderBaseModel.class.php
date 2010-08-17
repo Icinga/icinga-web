@@ -1,7 +1,20 @@
 <?php
 
 class AppKitAuthProviderBaseModel extends IcingaBaseModel {
-	
+
+	public function  initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
+
+		$this->getContext()->getLoggerManager()->log(
+			sprintf('Auth provider %s initialized', $this->getName()),
+			AgaviLogger::DEBUG
+		);
+	}
+
+	public function getName() {
+		return $this->getParameter('name');
+	}
+
 	/**
 	 * If a provider is authoritative for
 	 * authentification
@@ -51,6 +64,13 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 		$re['user_authsrc'] = $this->getProviderName();
 		return $re;
 	}
+	
+	public function determineUsername() {
+		return null;
+	}
+	
 }
+
+class AppKitAuthProviderException extends AppKitException {}
 
 ?>

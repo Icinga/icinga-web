@@ -30,7 +30,7 @@
 
 			<system_action name="login">
 				<module>AppKit</module>
-				<action>AjaxLogin</action>
+				<action>Login.SilentAuth</action>
 			</system_action>
 
 		</system_actions>

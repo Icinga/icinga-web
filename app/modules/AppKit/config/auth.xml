@@ -88,6 +88,18 @@
 		</ae:parameter>
 		
 		 -->
+
+		 <ae:parameter name="http-basic-authentication">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.HTTPBasicAuthentication</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+
+			<ae:parameter name="http_uservar">REMOTE_USER,PHP_AUTH_USER</ae:parameter>
+			<ae:parameter name="http_typevar">AUTH_TYPE</ae:parameter>
+			<ae:parameter name="http_source">_SERVER</ae:parameter>
+			
+		</ae:parameter>
 	</setting>
 
 </settings>

@@ -77,6 +77,16 @@ class AppKitArrayUtil {
 		
 		return $out;
 	}
+
+	/**
+	 * Splits a string into parts and respects spaces
+	 * @param string $string
+	 * @param string $split_char
+	 * @return array
+	 */
+	public static function trimSplit($string, $split_char=',') {
+		return preg_split('/\s*'. preg_quote($split_char). '\s*/', $string);
+	}
 	
 }
 

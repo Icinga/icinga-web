@@ -78,7 +78,16 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		parent::initialize($context, $parameters);
 		$this->loadProviderConfig();
 	}
-	
+
+	public function guessUsername() {
+		foreach ($this->provider_keys as $pid) {
+			$provider = $this->getProvider($pid);
+			if ( ( $name = $provider->determineUsername() ) !== null ) {
+				return $name;
+			}
+		}
+		return false;
+	}
 	
 	public function &doAuthenticate($username, $password) {
 		/**

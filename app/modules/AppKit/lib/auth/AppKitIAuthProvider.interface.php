@@ -36,6 +36,18 @@ interface AppKitIAuthProvider {
 	 * @return array
 	 */
 	public function getUserdata($uid, $authid=false);
+
+	/**
+	 * determineUsername
+	 *
+	 * If the provider has a change to 'guess'
+	 * the username before login (SSO, HTTP basic auth)
+	 * the provider get a change to tell that to
+	 * the dispatcher
+	 *
+	 * @return string
+	 */
+	public function determineUsername();
 }
 
 ?>
