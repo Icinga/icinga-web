@@ -196,6 +196,12 @@ div#growl-msg-stack {
 /*	text-decoration: underline;*/
 }
 
+.icinga-link-default {
+	cursor: pointer;
+	text-decoration: underline;
+	color: #0000ff;
+}
+
 div.icinga-box-container {
 	border: 1px #a0a0a0 solid;
 	-moz-border-radius: 5px;

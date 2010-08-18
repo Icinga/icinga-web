@@ -1,3 +1,6 @@
+<?php
+	$message = $t['message'];
+?>
 <script type="text/javascript">
 Ext.onReady(function() {
 
@@ -59,16 +62,56 @@ Ext.onReady(function() {
 			
 			buttons: [oButton]
 		});
-		
-		var oContainer = new Ext.Panel({
-			width: 400,
-			style: { margin: '120px auto', padding: '10px 0 0 0' },
+
+		var oBox = new Ext.Panel({
+			id: 'login-dialog',
 			baseCls: 'x-box',
 			frame: true,
 			defaults: { border: false },
 			items: [ { bodyCfg: { tag: 'h1', html: _('Login') } }, oFormPanel ]
 		});
-		
+
+		var oContainer = new Ext.Panel({
+			width: 400,
+			style: { margin: '120px auto', padding: '10px 0 0 0' },
+			items: oBox,
+			border: false,
+			id: 'login-container'
+		});
+
+		var messageTip = null;
+
+		<?php if ($message==true): ?>
+
+		messageTip = new Ext.ToolTip({
+			id: 'login-message-tooltip',
+			target: 'login-dialog',
+			anchor: 'left',
+			title: '<?php echo (isset($t['message_title'])) ? $t['message_title'] : null; ?>',
+			autoHide: false,
+			closable: true,
+			contentEl: 'login-message-container',
+			showDelay: 500,
+			autoShow: true
+		});
+
+		oFormPanel.addButton({
+			iconCls: 'icinga-icon-help',
+			tooltip: _('Click here to view instructions'),
+			handler: function(button, event) {
+				var m = oLogin.getMessage();
+				if (m.isVisible()) {
+					m.hide();
+				}
+				else {
+					m.show();
+				}
+			}
+		});
+
+		<?php endif; ?>
+
+
 		var oFormAction = new Ext.form.Action.Submit(oFormPanel.getForm(), {
 			clientValidation: true,
 			url: '<?php echo $ro->gen("appkit.login.provider"); ?>',
@@ -87,14 +130,14 @@ Ext.onReady(function() {
 					AppKit.notifyMessage('<?php echo $tm->_("Login failed"); ?>', '<?php echo $tm->_("Please verify your input and try again!"); ?>', null, c);
 				}
 				
-				/* oContainer.highlight("cc0000", {
+				/* oBox.highlight("cc0000", {
 				    attr: 'background-color',
 				    easing: 'easeOutStrong',
 				    duration: 2
 				}); */
 				
-				if (oContainer) {
-					var ox = oContainer.getEl();
+				if (oBox) {
+					var ox = oBox.getEl();
 					var orgX = ox.getLeft();
 					ox.sequenceFx();
 					
@@ -119,7 +162,18 @@ Ext.onReady(function() {
 		});
 		
 		pub = {
-			
+
+			getMessage : function() {
+				return messageTip;
+			},
+
+			hasMessage : function() {
+				if (!Ext.isEmpty(messageTip) && Ext.isObject(messageTip)) {
+					return true;
+				}
+				return false;
+			},
+
 			getPanel : function() {
 				return oContainer;
 			},
@@ -165,11 +219,22 @@ Ext.onReady(function() {
 		
 		return pub;
 	}();
-	
+
 	AppKit.util.Layout.addTo({
 		items: oLogin.getPanel()
 	});
-	
+
 	AppKit.util.Layout.doLayout();
+
+	<?php if (isset($t['message_expand_first']) && $t['message_expand_first'] == true): ?>
+	if (oLogin.hasMessage()) {
+		oLogin.getMessage().show();
+	}
+	<?php endif; ?>
 });
 </script>
+<?php if ($message==true): ?>
+<div class="x-hidden" id="login-message-container">
+<?php echo $t['message_text']; ?>
+</div>
+<?php endif; ?>
