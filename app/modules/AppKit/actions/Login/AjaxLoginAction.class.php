@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_AjaxLoginAction extends AppKitBaseAction
+class AppKit_Login_AjaxLoginAction extends AppKitBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings prefix="modules.appkit.auth." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
+	<!-- Allow silent providers (like HTTPBasicAuthentication) -->
+	<setting name="behaviour.enable_silent">true</setting>
+
+	<!--
+		Allow dialog based authentication
+		* Are both settings enabled, the dialog will be displayed as fallback
+	-->
+	<setting name="behaviour.enable_dialog">true</setting>
+
+	<!-- Provider default settings -->
 	<setting name="defaults">
 		<!--
 			* auth_create
@@ -86,8 +96,31 @@
 			<ae:parameter name="ldap_userattr">uid</ae:parameter>
 			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
 		</ae:parameter>
-		
 		 -->
+
+		 <ae:parameter name="http-basic-authentication">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.HTTPBasicAuthentication</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">false</ae:parameter>
+
+			<!--
+				This provider can create dummy users
+				* Not really a good idea, let other providers to for you
+				* Or create the user manually
+			-->
+			<!-- <ae:parameter name="auth_create">true</ae:parameter> -->
+
+			<!-- Fields to search for the username -->
+			<ae:parameter name="http_uservar">REMOTE_USER,PHP_AUTH_USER</ae:parameter>
+
+			<!-- Field to search for the authtype -->
+			<ae:parameter name="http_typevar">AUTH_TYPE</ae:parameter>
+
+			<!-- Source for the data (_SERVER == $_SERVER == 'only one') -->
+			<ae:parameter name="http_source">_SERVER</ae:parameter>
+		</ae:parameter>
+		
 	</setting>
 
 </settings>

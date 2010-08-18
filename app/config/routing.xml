@@ -11,8 +11,8 @@
 			-->
 			<route name="appkit" pattern="^/appkit" module="%actions.default_module%">
 
-				<route name=".login" pattern="^/login" action="AjaxLogin">
-					<route name=".provider" pattern="^/json" output_type="json"/>
+				<route name=".login" pattern="^/login" action="%actions.login_action%">
+					<route name=".provider" pattern="^/json" module="%actions.default_module%" action="Login.AjaxLogin" output_type="json"/>
 				</route>
 
 				<route name=".logout" pattern="^/logout" action="Logout"/>
