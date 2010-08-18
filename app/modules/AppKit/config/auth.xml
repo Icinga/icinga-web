@@ -124,7 +124,7 @@
 	</setting>
 
 	<setting name="message">
-		<ae:parameter name="show">true</ae:parameter>
+		<ae:parameter name="show">false</ae:parameter>
 		<ae:parameter name="title"><![CDATA[Some note:]]></ae:parameter>
 		<ae:parameter name="text"><![CDATA[Some notice about how to login]]></ae:parameter>
 		<ae:parameter name="include_file"><![CDATA[]]></ae:parameter>
