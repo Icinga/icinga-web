@@ -1,33 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/logging/1.0">
-
 	<ae:configuration>
 
-		<loggers default="debug">
-
-			<!-- logs warning and error messages -->
-			<logger name="appkit" class="AgaviLogger" level="AgaviLogger::ALL ^ AgaviLogger::DEBUG ^ AgaviLogger::INFO">
+		<loggers default="icinga-web">
+		
+			<!--
+				Write a complete history to filesystem
+			-->
+			<logger name="icinga-web" class="AgaviLogger" level="AgaviLogger::ALL ^ AgaviLogger::DEBUG ^ AgaviLogger::INFO">
 				<appenders>
-					<appender>AppKitLogAppender</appender>
+					<appender>UniversalLogfileAppender</appender>
 				</appenders>
 			</logger>
 			
-			<logger name="debug" class="AgaviLogger" level="AgaviLogger::ALL">
+			<!-- 
+				Auth specific logging
+			-->	
+			<logger name="icinga-debug" class="AgaviLogger" level="AgaviLogger::ALL ">
 				<appenders>
-					<appender>DebugLogAppender</appender>
+					<appender>DebugLogfileAppender</appender>
+				</appenders>
+			</logger>
+			
+			<!--
+				Database log
+			-->
+			<logger name="appkit-database" class="AgaviLogger" level="AgaviLogger::ALL ^ AgaviLogger::DEBUG ^ AgaviLogger::INFO">
+				<appenders>
+					<appender>AppKitDoctrineLogAppender</appender>
 				</appenders>
 			</logger>
 
 		</loggers>
 		
 		<appenders>
-			<appender name="AppKitLogAppender" class="AppKitDoctrineLoggerAppender" layout="PassThru" />
+			<!--
+				AppKit database log appender. 
+				* Using doctrine to write away entries
+			-->
+			<appender name="AppKitDoctrineLogAppender" class="AppKitDoctrineLoggerAppender" layout="PassThru" />
 			
 			<!--
-				Debug logs are rotated in a 7 day (AgaviRotatingFileLoggerAppender default) cycle
-				Use 'cycle' parameter to alter the cycle.
+				Agavi appender to dump into filesystem
+				* Log files are rotated in a 7 day (AgaviRotatingFileLoggerAppender default) cycle
+				* Use 'cycle' parameter to alter the cycle.
 			-->
-			<appender name="DebugLogAppender" class="AgaviRotatingFileLoggerAppender" layout="DateTimeLayout">
+			<appender name="UniversalLogfileAppender" class="AgaviRotatingFileLoggerAppender" layout="ApacheStyle">
+				<ae:parameters>
+					<ae:parameter name="dir">%core.app_dir%/data/log/</ae:parameter>
+					<ae:parameter name="prefix">icinga-web-</ae:parameter>
+				</ae:parameters>
+			</appender>
+			
+			<appender name="DebugLogfileAppender" class="AgaviRotatingFileLoggerAppender" layout="ApacheStyle">
 				<ae:parameters>
 					<ae:parameter name="dir">%core.app_dir%/data/log/</ae:parameter>
 					<ae:parameter name="prefix">debug-</ae:parameter>
@@ -38,8 +63,14 @@
 		</appenders>
 		
 		<layouts>
+			<!-- Agavi's log format -->
 			<layout name="DateTimeLayout" class="AgaviTimestampLoggerLayout" />
+
+			<!-- Plain text without any formattings -->
 			<layout name="PassThru" class="AgaviPassthruLoggerLayout" />
+
+			<!-- AppKit Apache style, with timestamps and named loglevel -->
+			<layout name="ApacheStyle" class="AppKitApacheLoggerFormat" />
 		</layouts>
 
 	</ae:configuration>

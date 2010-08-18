@@ -64,7 +64,7 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 
 	/**
 	 * Returns the name of a provider
-	 * @return boolean
+	 * @return string
 	 */
 	public function getProviderName() {
 		return $this->getParameter('name');

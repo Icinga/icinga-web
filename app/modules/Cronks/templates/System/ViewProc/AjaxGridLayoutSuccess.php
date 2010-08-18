@@ -32,7 +32,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			
 				if (bFilters == true) {
 					
-					var fw = new IcingaGridFilterWindow();
+					var fw = new Cronk.util.GridFilterWindow();
 					
 					fw.setGrid(grid);
 					fw.setFilterCfg( MetaGrid.getFilterCfg() );
@@ -141,19 +141,29 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		var template = "<?php echo $rd->getParameter('template'); ?>";
 		var initGrid = function() {
 			var meta = s.get(template);
-			if (meta.template.option.dynamicscript) {
-				
+
+			if (Ext.isEmpty(Cronk.util.GridFilterWindow) || !Ext.isEmpty(meta.template.option.dynamicscript)) {
+
 				AppKit.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
 				AppKit.ScriptDynaLoader.startBulkMode();
-				
-				Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
-					AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
-				});
-				
+							
+				if (!Ext.isEmpty(meta.template.option.dynamicscript)) {
+					
+					Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
+						AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
+					});
+					
+				}
+
+				if (Ext.isEmpty(Cronk.util.GridFilterWindow)) {
+					AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronk.grid.IcingaGridFilterHandler')) ?>");
+				}
+
 			}
 			else {
 				CreateGridProcessor(meta);
 			}
+			
 		}
 		
 		if (s.containsKey(template)) {

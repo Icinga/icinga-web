@@ -1,11 +1,13 @@
 <?php 
-
-$collection	= $t['log_collection'];
-$pager		= $t['log_pager'];
-$map		= $t['log_levelmap'];
-
+	$collection	= $t['log_collection'];
+	$pager		= $t['log_pager'];
+	$map		= $t['log_levelmap'];
 ?>
-
+<script type="text/javascript">
+	Ext.onReady(function() {
+		AppKit.util.Layout.doLayout();
+	});
+</script>
 <?php if ($collection->count() > 0) { ?>
 <table class="dataTable">
 <tr>
