@@ -3,7 +3,7 @@
 class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProviderBaseModel implements AppKitIAuthProvider {
 
 	protected $parameters_default = array (
-		self::AUTH_MODE => self::MODE_BOTH
+		self::AUTH_MODE => self::MODE_SILENT
 	);
 
 	const DATASOURCE_NAME	= '_SERVER';

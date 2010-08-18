@@ -49,6 +49,25 @@ table {
 	padding: 5px 5px;
 }
 
+.simple-content-container {
+	margin: 20px 50px 20px 50px;
+	font-size: 12px;
+}
+
+.simple-content-container li {
+	list-style-type: disc;
+	list-style-position: inside;
+	margin-left: 10px;
+}
+
+.simple-content-message {
+	padding: 10px;
+	width: 400px;
+	border: 1px #c0c0c0 solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
 /** MISC **/
 
 div#icinga-portal-loading-mask {

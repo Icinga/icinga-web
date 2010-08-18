@@ -59,7 +59,7 @@ AppKit.util = (function() {
 		doLogout : function(target) {
 			Ext.Msg.show({
 				title: _('To be on the verge to logout ...'),
-				msg: _('Are you sure to to this?'),
+				msg: _('Are you sure to do this?'),
 				buttons: Ext.MessageBox.YESNO,
 				icon: Ext.MessageBox.QUESTION,
 				fn: function(b) {

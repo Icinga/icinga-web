@@ -102,7 +102,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/IndexAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/RemoveAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/RemoveAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/ViewLogsAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/ViewLogsAction.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/AjaxLoginAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/AjaxLoginAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/DataProvider
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/DataProvider/GroupProviderAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/DataProvider/GroupProviderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/DataProvider/LanguageProviderAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/DataProvider/LanguageProviderAction.class.php
@@ -115,7 +114,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ext/HeaderAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ext/HeaderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Ext/initI18nAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Ext/initI18nAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/IndexAction.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Login
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/LoginAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/LoginAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Login/AjaxLoginAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Login/AjaxLoginAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Login/SilentAuthAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Login/SilentAuthAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/LogoutAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/LogoutAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/ModuleDisabledAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/ModuleDisabledAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Privileges
@@ -266,8 +268,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Auth/DispatchModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/DispatchModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/Provider
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Auth/Provider/AuthKeyModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/Provider/AuthKeyModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Auth/Provider/CSVModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/Provider/CSVModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Auth/Provider/DatabaseModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/Provider/DatabaseModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Auth/Provider/HTTPBasicAuthenticationModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/Provider/HTTPBasicAuthenticationModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Auth/Provider/LDAPModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Auth/Provider/LDAPModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/models/Ext
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Ext/ApplicationStateModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Ext/ApplicationStateModel.class.php
@@ -293,7 +295,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/ViewLogsSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/ViewLogsSuccess.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/AjaxLoginSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/AjaxLoginSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/DataProvider
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/DataProvider/GroupProviderSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/DataProvider/GroupProviderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/DataProvider/LanguageProviderSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/DataProvider/LanguageProviderSuccess.php
@@ -306,8 +307,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ext/HeaderSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ext/HeaderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Ext/initI18nSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Ext/initI18nSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/IndexSuccess.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/AjaxLoginSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/AjaxLoginSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginError.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginInput.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginInput.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/SilentAuthConfigError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/SilentAuthConfigError.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/SilentAuthError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/SilentAuthError.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/SilentAuthSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/SilentAuthSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LogoutInput.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LogoutInput.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LogoutSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LogoutSuccess.php
@@ -336,7 +342,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Remove.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Remove.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/ViewLogs.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/ViewLogs.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/AjaxLogin.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/AjaxLogin.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/DataProvider
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/DataProvider/GroupProvider.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/DataProvider/GroupProvider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/DataProvider/LanguageProvider.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/DataProvider/LanguageProvider.xml
@@ -349,6 +354,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ext/Header.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ext/Header.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Ext/initI18n.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Ext/initI18n.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Index.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Login
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Login/AjaxLogin.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Login/AjaxLogin.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Login/SilentAuth.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Login/SilentAuth.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Login.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Login.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Logout.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Logout.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/ModuleDisabled.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/ModuleDisabled.xml
@@ -376,7 +384,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Users/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users/IndexSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Users/RemoveSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users/RemoveSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/ViewLogsSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/ViewLogsSuccessView.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/AjaxLoginSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/AjaxLoginSuccessView.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/views/DataProvider
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/DataProvider/GroupProviderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/DataProvider/GroupProviderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/DataProvider/LanguageProviderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/DataProvider/LanguageProviderSuccessView.class.php
@@ -389,8 +396,13 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ext/HeaderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ext/HeaderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Ext/initI18nSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Ext/initI18nSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/IndexSuccessView.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/views/Login
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Login/AjaxLoginSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Login/AjaxLoginSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LoginErrorView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LoginErrorView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LoginInputView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LoginInputView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Login/SilentAuthConfigErrorView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Login/SilentAuthConfigErrorView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Login/SilentAuthErrorView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Login/SilentAuthErrorView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Login/SilentAuthSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Login/SilentAuthSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LoginSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LoginSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LogoutInputView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LogoutInputView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/LogoutSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/LogoutSuccessView.class.php
@@ -7840,6 +7852,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6935
-INC_DIRS=904
+INC_FILES=6943
+INC_DIRS=908
 # INSTALL_FILES_END
