@@ -88,21 +88,43 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		}
 		return false;
 	}
+
+	public function hasSilentProvider() {
+		return $this->hasProviderWithMode(AppKitIAuthProvider::MODE_SILENT);
+	}
+
+	private function hasProviderWithMode($mode) {
+		foreach ($this->provider_keys as $pid) {
+			$provider = $this->getProvider($pid);
+			if ($provider->testBinary(AppKitIAuthProvider::AUTH_MODE, $mode)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public function &doAuthenticate($username, $password) {
+		$l = $this->getContext()->getLoggerManager();
+
 		/**
 		 * 1. Find the user
 		 * 2. If not found, try to import
 		 * 3. If the user is there, try to auth
 		 */
-		
+
+		$this->log('Auth.Dispatch: Starting authenticate (username=%s)', $username, AgaviLogger::DEBUG);
+
 		$user = $this->findUser($username);
 
 		if ($user === null) {
+			$this->log('Auth.Dispatch: User %s not found, try to import', $username, AgaviLogger::DEBUG);
 			$user = $this->importUser($username);
 		}
 		
 		if ($user instanceof NsmUser && $user->user_id>0) {
+
+			$this->log('Auth.Dispatch: User available (uid=%d)', $user->user_id, AgaviLogger::DEBUG);
+
 			$provider = $this->getProvider($user->user_authsrc);
 				
 			// We've got a provider
@@ -148,9 +170,14 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 	}
 	
 	private function importUser($username) {
+		$l = $this->getContext()->getLoggerManager();
+		
 		foreach ($this->provider_keys as $pid) {
 			$provider = $this->getProvider($pid);
 			if ($provider->canCreateProfile()) {
+
+				$l->log(sprintf('Auth.Dispatch/import: %s will map the userdata', $provider->getProviderName()), AgaviLogger::DEBUG);
+
 				 $data = $provider->getUserdata($username, false);
 				 if (is_array($data)) {
 				 	

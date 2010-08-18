@@ -96,6 +96,20 @@ class AppKitBaseModel extends AgaviModel {
 	protected function setParameters(array $parameters) {
 		$this->parameters = $parameters + $this->parameters;
 	}
+
+	protected function log($arg1) {
+		$argv = func_get_args();
+
+		if (func_num_args() == 1) {
+			$format = $arg1;
+			$severity = AgaviLogger::ALL;
+		}
+
+		$severity = array_pop($argv);
+		$format = array_shift($argv);
+
+		return $this->getContext()->getLoggerManager()->log(@vsprintf($format, $argv), $severity);
+	}
 }
 
 ?>

@@ -2,17 +2,27 @@
 
 class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 
+	protected $parameters_default = array (
+		AppKitIAuthProvider::AUTH_MODE => AppKitIAuthProvider::MODE_DEFAULT
+	);
+
 	public function  initialize(AgaviContext $context, array $parameters = array()) {
+		$parameters = $parameters + $this->parameters_default;
+
 		parent::initialize($context, $parameters);
 
-		$this->getContext()->getLoggerManager()->log(
-			sprintf('Auth provider %s initialized', $this->getName()),
-			AgaviLogger::DEBUG
-		);
+		$this->initializeProvider();
+
+		$this->log('Auth.Provider: Object (name=%s) initialized', $this->getProviderName(), AgaviLogger::DEBUG);
 	}
 
-	public function getName() {
-		return $this->getParameter('name');
+	protected function initializeProvider() {}
+
+	protected function loadUserByDQL($value, $dql='user_name=?') {
+		$users = Doctrine::getTable('NsmUser')->findByDql($dql, array($value));
+		if ($users->count() == 1) {
+			return $users->getFirst();
+		}
 	}
 
 	/**
@@ -21,7 +31,7 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 	 * @return boolean
 	 */
 	public function isAuthoritative() {
-		return $this->getParameter('auth_authoritative', false);
+		return $this->testBoolean(AppKitIAuthProvider::AUTH_AUTHORITATIVE);
 	}
 	
 	/**
@@ -29,16 +39,29 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 	 * @return boolean
 	 */
 	public function resumeAuthentification() {
-		return $this->getParameter('auth_resume', false);
+		return $this->testBoolean(AppKitIAuthProvider::AUTH_RESUME);
 	}
 	
 	public function canUpdateProfile() {
-		return $this->getParameter('auth_update', false);
+		return $this->testBoolean(AppKitIAuthProvider::AUTH_UPDATE);
 	}
 	
 	public function canCreateProfile() {
-		return $this->getParameter('auth_create', false);
+		return $this->testBoolean(AppKitIAuthProvider::AUTH_CREATE);
 	}
+
+	public function testBoolean($setting_name) {
+		return ($this->getParameter($setting_name, false) !== false) ? true : false;
+	}
+
+	public function testBinary($setting_name, $flag) {
+		$test = $this->getParameter($setting_name);
+		if ($test && ($test & $flag)>0) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Returns the name of a provider
 	 * @return boolean

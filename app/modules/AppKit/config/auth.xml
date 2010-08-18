@@ -95,10 +95,20 @@
 			<ae:parameter name="auth_enable">true</ae:parameter>
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
 
+			<!-- This provider can create dummy users -->
+			<ae:parameter name="auth_create">true</ae:parameter>
+
+
+			<!-- Fields to search for the username -->
 			<ae:parameter name="http_uservar">REMOTE_USER,PHP_AUTH_USER</ae:parameter>
+
+			<!-- Field to search for the authtype -->
 			<ae:parameter name="http_typevar">AUTH_TYPE</ae:parameter>
+
+			<!-- Source for the data (_SERVER == $_SERBER == 'only one') -->
 			<ae:parameter name="http_source">_SERVER</ae:parameter>
-			
+
+
 		</ae:parameter>
 	</setting>
 

@@ -19,26 +19,23 @@ class AppKit_Login_SilentAuthAction extends AppKitBaseAction
 	}
 
 	public function execute(AgaviRequestDataHolder $rd) {
+		$this->setAttribute('authenticated', false);
+		
 		$dispatch = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
 
-		$username = $rd->getParameter('username', false);
-		
-		if ($username == false) {
+		if ($dispatch->hasSilentProvider()) {
 			$username = $dispatch->guessUsername();
-		}
+			if ($username !== false) {
+				$user = $this->getContext()->getUser();
 
-		if ($username !== false) {
+				try {
+					$user->doLogin($username, null, false);
+					$this->setAttribute('authenticated', true);
+				}
+				catch (AgaviSecurityException $e) {
 
-			$user = $this->getContext()->getUser();
-
-			try {
-				$user->doLogin($username, null, false);
-				$this->setAttribute('authenticated', true);
+				}
 			}
-			catch (AgaviSecurityException $e) {
-				$this->setAttribute('authenticated', false);
-			}
-
 		}
 
 		return $this->getDefaultViewName();

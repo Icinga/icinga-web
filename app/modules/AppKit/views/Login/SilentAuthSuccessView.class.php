@@ -3,8 +3,14 @@
 class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
 
 	public function executeHtml(AgaviRequestDataHolder $rd) {
-		//$this->setupHtml($rd);
-		//$this->setAttribute('_title', 'Login.SilentAuth'););
+
+		if ($this->getAttribute('authenticated') == true) {
+			
+		}
+		else {
+			// return $this->createForwardContainer('AppKit', 'Login.AjaxLogin', null, null, 'read');
+		}
+		
 	}
 	
 }

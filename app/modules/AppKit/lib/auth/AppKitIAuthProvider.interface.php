@@ -1,7 +1,19 @@
 <?php
 
 interface AppKitIAuthProvider {
-	
+
+	const AUTH_CREATE			= 'auth_create';
+	const AUTH_UPDATE			= 'auth_update';
+	const AUTH_RESUME			= 'auth_resume';
+	const AUTH_GROUPS			= 'auth_groups';
+	const AUTH_ENABLE			= 'auth_enable';
+	const AUTH_AUTHORITATIVE	= 'auth_authoritative';
+	const AUTH_MODE				= 'auth_mode';
+
+	const MODE_DEFAULT			= 1;
+	const MODE_SILENT			= 2;
+	const MODE_BOTH				= 3;
+
 	/**
 	 * doAuthenticate
 	 * 

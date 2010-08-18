@@ -2,6 +2,10 @@
 
 class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProviderBaseModel implements AppKitIAuthProvider {
 
+	protected $parameters_default = array (
+		self::AUTH_MODE => self::MODE_BOTH
+	);
+
 	const DATASOURCE_NAME	= '_SERVER';
 
 	private static $sources_list = array (
@@ -21,20 +25,28 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 	private $auth_name = null;
 	private $auth_type = null;
 
-	public function doAuthenticate(NsmUser &$user, $password) {
 
+	public function doAuthenticate(NsmUser &$user, $password) {
+		$tuser = $this->loadUserByDQL($user->user_name);
+		if ($tuser && $tuser instanceof NsmUser && $user->user_name == $this->getAuthName()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public function isAvailable($uid) {
-
+		return true;
 	}
 
 	public function getUserdata($uid, $authid=false) {
-
-	}
-
-	public function getUsername() {
-		return $this->getContext()->getRequest()->getRequestData();
+		return array(
+			'user_firstname'	=> $uid,
+			'user_lastname'		=> $uid,
+			'user_name'			=> $uid,
+			'user_authsrc'		=> $this->getProviderName(),
+			'user_disabled'		=> 0
+		);
 	}
 
 	/**
@@ -69,10 +81,7 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 			$this->auth_type = strtolower($this->auth_type);
 		}
 
-		$this->getContext()->getLoggerManager()->log(
-			sprintf('%s: auth_name=%s, auth_type=%s', $this->getName(), $this->getAuthName(), $this->getAuthType()),
-			AgaviLogger::INFO
-		);
+		$this->log('Auth.Provider.HTTPBasicAuthentification: Got data (auth_name=%s, auth_type=%s)', $this->auth_name, $this->auth_type, AgaviLogger::DEBUG);
 
 		return $this->auth_name;
 	}
