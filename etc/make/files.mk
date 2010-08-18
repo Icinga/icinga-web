@@ -250,7 +250,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitColorUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitColorUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitDateUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitDateUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitInlineIncluderUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitInlineIncluderUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitLdapTool.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitModuleUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitModuleUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitRandomUtil.class.php

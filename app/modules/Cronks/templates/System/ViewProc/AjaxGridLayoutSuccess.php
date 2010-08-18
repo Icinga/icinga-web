@@ -16,9 +16,6 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		MetaGrid.setParameters({storeDisableAutoload: true});
 		var grid = MetaGrid.createGrid();
 		
-		// Magick includes (Grid filters)
-		// <?php include(AppKitInlineIncluderUtil::getJsFile('js/IcingaGridFilterHandler.js')); ?>
-		
 		// Add the window to a toolbar button
 		grid.on('render', function(g) {
 			
