@@ -101,7 +101,18 @@
 		 <ae:parameter name="http-basic-authentication">
 			<ae:parameter name="auth_module">AppKit</ae:parameter>
 			<ae:parameter name="auth_provider">Auth.Provider.HTTPBasicAuthentication</ae:parameter>
-			<ae:parameter name="auth_enable">true</ae:parameter>
+			
+			
+			<!--
+			
+				HTTPBasicAuth allows authentication requests made by
+				the webserver. To enable the provider please:
+				
+				 * Activate the whole thing by setting auth_enable to true
+				 * Allow authenticate requests, set auth_authoritative true
+			-->
+			
+			<ae:parameter name="auth_enable">false</ae:parameter>
 			<ae:parameter name="auth_authoritative">false</ae:parameter>
 
 			<!--

@@ -18,6 +18,12 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 
 	protected function initializeProvider() {}
 
+	/**
+	 * Shortcut to load an user
+	 * @param $value
+	 * @param $dql
+	 * @return NsmUser
+	 */
 	protected function loadUserByDQL($value, $dql='user_name=?') {
 		$users = Doctrine::getTable('NsmUser')->findByDql($dql, array($value));
 		if ($users->count() == 1) {
