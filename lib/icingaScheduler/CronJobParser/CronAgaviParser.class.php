@@ -34,7 +34,7 @@ class CronJobParser_CronAgaviParser extends CronJobParser {
 	 */
 	public function parse() {
 		$agavi = $this->getAgavi();
-		$cfg = $agavi->getConfigVar("de.icinga.schedules");
+		$cfg = $agavi->getConfigVar("org.icinga.schedules");
 		$this->setResource($cfg);
 	}
 	public function onExecute(CronJobDefinition $job) {}
