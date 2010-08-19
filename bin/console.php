@@ -18,11 +18,11 @@ require(dirname(__FILE__) . '/../app/config.php');
 // | In debug mode among other things the cache is cleaned on every request.   |
 // +---------------------------------------------------------------------------+
 // Setting the running context to web ...
-
-AgaviConfig::set('core.default_context', 'console');
 Agavi::bootstrap('development');
-AgaviController::initializeModule('Web');
+AgaviConfig::set('core.default_context', 'console');
+
 AgaviController::initializeModule('AppKit');
+
 AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
 
 
