@@ -79,6 +79,7 @@ Ext.onReady(function(){
 					collapsed: false,
 					title: _('Users'),
 					anchor: '95%',
+					padding:4,
 					labelWidth:400,
 					qtip: _("Click to edit user"),
 					id: 'groupUsers',
@@ -119,6 +120,10 @@ Ext.onReady(function(){
 				 	values["password"] = values["role_password"];
 				 	values["password_validate"] = values["role_password_confirmed"];
 				 	values["role_disabled"] = (values["role_disabled"] == "on" ? 1 : 0)
+					values["role_users"] = ""
+					Ext.each(Ext.getCmp('role_users').getValue(),function(chkbox) {
+					   values["role_users"]+=chkbox.id+";";
+					});
 				 	Ext.Ajax.request({
 						url: '<?php echo $ro->gen("appkit.admin.groups.alter")?>'+roleId,
 						params: values,
@@ -131,7 +136,7 @@ Ext.onReady(function(){
 				 	
 				 	return true;
 				}
-			 	Ext.Msg.alert(_("Error"),_("One or more fields are invalid"));					
+			 	Ext.Msg.alert(_("Error"),_("One or more fields are invalid"));			
 			},
 			
 			// Default style setting
@@ -162,7 +167,7 @@ Ext.onReady(function(){
 
 				 	this.objToForm(principalData.principal_values,values,"principal_value");
 					this.objToForm(principalData.principal_target,values,"principal_target");
-					AppKit.log(values);
+					
 				}		
 			},
 			
@@ -192,25 +197,22 @@ Ext.onReady(function(){
 			},
 			
 			showGroupUsers: function(data) {
-				if(!data["users"])
-					return true;
+
 				var cmp = Ext.getCmp('groupUsers');
-				Ext.each(data["users"],function(user) {
-					var item = new Ext.BoxComponent({
-						html: "<div class='role_user_icon icinga-icon-user'></div>"+user.user_name,
-						cls: 'role_user_wrap',					
-						listeners: {
-							render: function(e) {
-								e.getEl().on("dblclick",function() {
-									window.location.href= '<?php echo $ro->gen("appkit.admin.users.edit")?>'+this.data.user_id;
-								},e)
-							},
-							scope: this
-						}
-					})	
-					item.data = user;
-					cmp.add(item);
+                var items = [];
+				var allUsers = <?php echo json_encode($users);?>;
+				var usernames = {};
+				Ext.each(data["users"],function(u) {usernames[u.user_name] = true});
+				Ext.each(allUsers,function(user) {
+					items.push({
+                        boxLabel: user.user_name,
+						name: user.user_name,
+						id: user.user_id,
+                        checked: Ext.isDefined(usernames[user.user_name])
+                      })
 				});
+                var group = new Ext.form.CheckboxGroup({name:'role_users',id:'role_users',items:items,columns:2});
+				cmp.add(group);
 				cmp.doLayout();
 			},
 					
@@ -222,6 +224,7 @@ Ext.onReady(function(){
 						'role_id' : 'new',
 						'role_users' : []
 					});
+					this.showGroupUsers({users : []});
 					return true;
 				}
 				Ext.Ajax.request({
