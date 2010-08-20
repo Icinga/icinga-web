@@ -47,6 +47,12 @@
 			<setting name="use_translation">true</setting>
 		</settings>
 
+		<settings>
+			<setting name="data_dir">%core.app_dir%/data</setting>
+			<setting name="log_dir">%core.data_dir%/log</setting>
+			<setting name="share_dir">%core.data_dir%/share</setting>
+		</settings>
+		
 		<!-- Include our icinga settings -->
 		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.xml"/>
 

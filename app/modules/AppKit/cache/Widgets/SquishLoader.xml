@@ -3,16 +3,7 @@
 	<ae:configuration>
 
 		<cachings>
-			<caching method="read" lifetime="2 hours" enabled="true">
-
-				<group>javascript_content</group>
-
-				<view>Success</view>
-
-				<output_type name="javascript">
-						<layer name="content" />
-				</output_type>
-				
+			<caching method="read" lifetime="2 hours" enabled="false">
 			</caching>
 		</cachings>
 

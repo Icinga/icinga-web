@@ -35,7 +35,7 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 		return false;
 	}
 
-	public function isAvailable($uid) {
+	public function isAvailable($uid, $authid=null) {
 		return true;
 	}
 

@@ -34,7 +34,7 @@ interface AppKitIAuthProvider {
 	 * 
 	 * @param mixed $uid
 	 */
-	public function isAvailable($uid);
+	public function isAvailable($uid, $authid=null);
 	
 	/**
 	 * getUserdata
