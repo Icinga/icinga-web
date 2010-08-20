@@ -8,6 +8,7 @@ Ext.ns("AppKit.groupEditor");
 
 AppKit.groupEditor.STD_CONTAINER= "contentArea";
 Ext.onReady(function(){
+	container.call(); // Im an error
 	var container = "<?php echo $t['container'] ?>";
 	if(!container)
 		container = AppKit.groupEditor.STD_CONTAINER;
