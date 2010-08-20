@@ -134,9 +134,13 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			 * General log implementation
 			 */
 			log : function() {
-				if (!Ext.isIE && console) {
-					if(typeof(console.log) === 'function')
-						console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
+				try {
+					if (!Ext.isIE && console) {
+						if(typeof(console.log) === 'function')
+							console.log[console.firebug ? 'apply' : 'call'](console,Array.prototype.slice.call(arguments));
+					}
+				} catch(e) {
+					/*.No logging.*/
 				}
 			},
 			
