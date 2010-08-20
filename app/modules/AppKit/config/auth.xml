@@ -101,7 +101,18 @@
 		 <ae:parameter name="http-basic-authentication">
 			<ae:parameter name="auth_module">AppKit</ae:parameter>
 			<ae:parameter name="auth_provider">Auth.Provider.HTTPBasicAuthentication</ae:parameter>
-			<ae:parameter name="auth_enable">true</ae:parameter>
+			
+			
+			<!--
+			
+				HTTPBasicAuth allows authentication requests made by
+				the webserver. To enable the provider please:
+				
+				 * Activate the whole thing by setting auth_enable to true
+				 * Allow authenticate requests, set auth_authoritative true
+			-->
+			
+			<ae:parameter name="auth_enable">false</ae:parameter>
 			<ae:parameter name="auth_authoritative">false</ae:parameter>
 
 			<!--
@@ -124,11 +135,11 @@
 	</setting>
 
 	<setting name="message">
-		<ae:parameter name="show">false</ae:parameter>
-		<ae:parameter name="title"><![CDATA[Some note:]]></ae:parameter>
-		<ae:parameter name="text"><![CDATA[Some notice about how to login]]></ae:parameter>
-		<ae:parameter name="include_file"><![CDATA[]]></ae:parameter>
-		<ae:parameter name="expand_first">true</ae:parameter>
+		<ae:parameter name="show">true</ae:parameter>
+		<ae:parameter name="title">Welcome</ae:parameter>
+		<ae:parameter name="text"><![CDATA[]]></ae:parameter>
+		<ae:parameter name="include_file"><![CDATA[%core.share_dir%/login_message.html]]></ae:parameter>
+		<ae:parameter name="expand_first">false</ae:parameter>
 	</setting>
 
 </settings>

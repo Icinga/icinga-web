@@ -80,6 +80,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/i18n/mo/zh_CN.mo $(DESTDIR)$(prefix)/app/data/i18n/mo/zh_CN.mo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/log
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/log/PLACEHOLDER $(DESTDIR)$(prefix)/app/data/log/PLACEHOLDER
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/data/share
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/data/share/login_message.html $(DESTDIR)$(prefix)/app/data/share/login_message.html
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/lib/action
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/lib/action/IcingaBaseAction.class.php $(DESTDIR)$(prefix)/app/lib/action/IcingaBaseAction.class.php
@@ -230,6 +232,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/json/AppKitJsonResponse.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/json/AppKitJsonResponse.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/ScriptDynaLoader.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/ScriptDynaLoader.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/menu
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/menu/AppKitMenuCreator.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/menu/AppKitMenuCreator.class.php
@@ -245,12 +248,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/translator/AppKitGettextTranslator.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/translator/AppKitGettextTranslator.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/translator/AppKitTranslationManager.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/translator/AppKitTranslationManager.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitAgaviUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitAgaviUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitArrayUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitArrayUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitClassUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitClassUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitColorUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitColorUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitDateUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitDateUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitInlineIncluderUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitInlineIncluderUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitLdapTool.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitModuleUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitModuleUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitRandomUtil.class.php
@@ -4359,7 +4362,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.html $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/slider/slider.js $(DESTDIR)$(prefix)/lib/ext3/examples/slider/slider.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/spinner
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.html $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/examples/spinner/spinner.js $(DESTDIR)$(prefix)/lib/ext3/examples/spinner/spinner.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/examples/state
@@ -5419,7 +5421,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/se-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/se-handle.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/s-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/s-handle.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/basic-dialog/w-handle.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/basic-dialog/w-handle.gif
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/dd
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/gradient-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/gradient-bg.gif
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/grid
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/grid/grid-split.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/grid/grid-split.gif
@@ -5462,7 +5463,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/toolbar/gray-bg.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar/gray-bg.gif
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/vista/toolbar/tb-btn-sprite.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/toolbar/tb-btn-sprite.gif
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/vista/tree
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/yourtheme
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/resources/images/yourtheme/box
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/resources/images/yourtheme/box/corners-blue.gif $(DESTDIR)$(prefix)/lib/ext3/resources/images/yourtheme/box/corners-blue.gif
@@ -5781,23 +5781,15 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/carousel
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/examples/carousel/carousel.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/carousel/carousel.js
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/carousel/images
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/carousel/slides
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/combo
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/jsonp
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/jsonp/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/examples/jsonp/jsonp.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/jsonp/jsonp.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/lightbox
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/lightbox/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/examples/lightbox/lightbox.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/lightbox/lightbox.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/menu
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/menu/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/examples/menu/menu.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/menu/menu.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/rating
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/rating/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/examples/rating/rating.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/rating/rating.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/tabs
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/tabs/images
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/examples/tabs/tabs.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/examples/tabs/tabs.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/src/adapter
@@ -5838,16 +5830,10 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/logger
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/logger/assets
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/logger/assets/skins
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/logger/assets/skins/sam
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/logger/logger-min.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/logger/logger-min.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yahoo-dom-event
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yahoo-dom-event/yahoo-dom-event.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yahoo-dom-event/yahoo-dom-event.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yuitest
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yuitest/assets
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yuitest/assets/skins
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yuitest/assets/skins/sam
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yuitest/yuitest-min.js $(DESTDIR)$(prefix)/lib/ext3/src/ext-core/test/yui_2.6.0/yui/build/yuitest/yuitest-min.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/ext3/src/locale
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/ext3/src/locale/ext-lang-af.js $(DESTDIR)$(prefix)/lib/ext3/src/locale/ext-lang-af.js
@@ -7852,6 +7838,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6943
-INC_DIRS=908
+INC_FILES=6945
+INC_DIRS=892
 # INSTALL_FILES_END

@@ -7,6 +7,10 @@ class AppKitAgaviContext extends AgaviContext {
 	 * @see lib/agavi/src/core/AgaviContext#initialize()
 	 */
 	public function initialize() {
+
+		// Fill in the context
+		AppKitAgaviUtil::initContext($this);
+
 		/*
 		 * Make our settings ready
 		 * before run agavi
@@ -58,10 +62,10 @@ class AppKitAgaviContext extends AgaviContext {
 		// Try to set the web path to correct urls within the frontend
 		if(AgaviConfig::get('core.default_context') =='web') {
 			// Try to set the web path to correct urls within the frontend
-			if (AgaviConfig::get('org.icinga.appkit.web_path') == null) {
+			if (AgaviConfig::get('org.icinga.appkit.web_path', null) == null) {
 				AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
 			}
-		}		
+		}
 	}
 
 	private function buildVersionString() {

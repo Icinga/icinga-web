@@ -104,7 +104,6 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 	}
 	
 	public function &doAuthenticate($username, $password) {
-		$l = $this->getContext()->getLoggerManager();
 
 		/**
 		 * 1. Find the user
@@ -117,13 +116,12 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		$user = $this->findUser($username);
 
 		if ($user === null) {
-			$this->log('Auth.Dispatch: User %s not found, try to import', $username, AgaviLogger::DEBUG);
 			$user = $this->importUser($username);
 		}
 		
 		if ($user instanceof NsmUser && $user->user_id>0) {
 
-			$this->log('Auth.Dispatch: User available (uid=%d)', $user->user_id, AgaviLogger::DEBUG);
+			$this->log('Auth.Dispatch: Userdata found in db (uid=%d)', $user->user_id, AgaviLogger::DEBUG);
 
 			$provider = $this->getProvider($user->user_authsrc);
 				
@@ -134,7 +132,9 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 				$authid = $user->getAuthId();
 			
 				// Check if the user still available
-				if ($provider->isAvailable($authid)) {
+				if ($provider->isAvailable($username, $authid)) {
+
+					$this->log('Auth.Dispatch: Authoritative provider found (provider=%s, authid=%s)', $provider->getProviderName(), $authid, AgaviLogger::DEBUG);
 					
 					// Update the userprofile
 					if ($provider->canUpdateProfile()) {
@@ -143,6 +143,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 	
 					// Check password
 					if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password)) {
+						$this->log('Auth.Dispatch: Successfull authentication (provder=%s)', $provider->getProviderName(), AgaviLogger::DEBUG);
 						return $user;
 					}
 					
@@ -158,6 +159,8 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 			}
 		}
 
+		$this->log('Auth.Dispatch: User cound not authorized (username=%s)', $username, AgaviLogger::DEBUG);
+
 		throw new AgaviSecurityException("Authentification of $username failed!");
 	}
 	
@@ -170,15 +173,17 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 	}
 	
 	private function importUser($username) {
-		$l = $this->getContext()->getLoggerManager();
+
+		$this->log('Auth.Dispatch: User %s not found, try to import', $username, AgaviLogger::DEBUG);
 		
 		foreach ($this->provider_keys as $pid) {
 			$provider = $this->getProvider($pid);
 			if ($provider->canCreateProfile()) {
 
-				$l->log(sprintf('Auth.Dispatch/import: %s will map the userdata', $provider->getProviderName()), AgaviLogger::DEBUG);
+				$this->log('Auth.Dispatch/import: %s will map the userdata', $provider->getProviderName(), AgaviLogger::DEBUG);
 
 				 $data = $provider->getUserdata($username, false);
+				 
 				 if (is_array($data)) {
 				 	
 				 	$user = new NsmUser();
@@ -194,6 +199,14 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 				 	
 				 	$user->save();
 				 	
+					$this->log(
+						'Auth.Dispatch/import: user %s successfully imported (user_id=%d, provider=%s)',
+						$username,
+						$user->user_id,
+						$provider->getProviderName(),
+						AgaviLogger::DEBUG
+					);
+
 				 	return $user;
 				 }
 			}

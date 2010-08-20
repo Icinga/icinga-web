@@ -16,13 +16,18 @@ class AppKit_Login_AjaxLoginSuccessView extends AppKitBaseView
 			if (isset($message['show']) && $message['show']==true) {
 				
 				if (isset($message['include_file']) && file_exists($message['include_file'])) {
-					$this->setAttribute('message_text', file_get_contents($message['include_file']));
+					$text = file_get_contents($message['include_file']);
 				}
 				else {
-					$this->setAttribute('message_text', isset($message['text']) ? $message['text'] : null);
+					$text = isset($message['text']) ? $message['text'] : null;
+				}
+
+				if ($text) {
+					$text = AppKitAgaviUtil::replaceConfigVars($text);
 				}
 
 				$this->setAttribute('message', true);
+				$this->setAttribute('message_text', $text);
 				$this->setAttribute('message_title', $message['title']);
 				$this->setAttribute('message_expand_first', isset($message['expand_first']) ? (bool)$message['expand_first'] : false);
 			}

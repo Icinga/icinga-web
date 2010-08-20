@@ -22,10 +22,10 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 	 * (non-PHPdoc)
 	 * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#isAvailable()
 	 */
-	public function isAvailable($uid) {
+	public function isAvailable($uid, $authid=null) {
 		$record = $this->getLdaprecord('(objectClass=*)', $uid);
 		if (is_array($record)) {
-			if ($record['dn'] === $uid) {
+			if ($record['dn'] === $authid) {
 				return true;
 			}
 		}
