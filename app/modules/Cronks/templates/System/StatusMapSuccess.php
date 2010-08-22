@@ -6,10 +6,23 @@ AppKit.ScriptDynaLoader.startBulkMode();
 
 AppKit.ScriptDynaLoader.on(
 	'bulkfinish', function () {
-		var statusMap = new JitStatusMap({
-			url: "<?php echo $ro->gen('cronks.statusMap.json'); ?>",
-			parentId: CE.parentid
-		});
+		var tryToDrawStatusMap = function() {
+			try {
+				if(Ext.isDefined(JitStatusMap)) 
+					drawMap();	
+				else
+					tryToDrawStatusMap.defer(200);
+			} catch(e) {
+				tryToDrawStatusMap.defer(200);
+			}
+		}
+		var drawMap = function() {
+			var statusMap = new JitStatusMap({
+				url: "<?php echo $ro->gen('cronks.statusMap.json'); ?>",
+				parentId: CE.parentid
+			});
+		}
+		tryToDrawStatusMap();
 	},
 	this,
 	{ single : true }

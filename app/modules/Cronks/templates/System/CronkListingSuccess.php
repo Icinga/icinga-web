@@ -156,6 +156,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			addListing : function (title, json) {
 				addCmp.add({
 					title: title,
+					autoScroll:true,
 					items: CronkListing.getNewView(json),
 					border: false
 				});
