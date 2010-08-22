@@ -39,7 +39,6 @@ Cronk.grid.IcingaColumnRenderer = {
 	},
 	
 	ajaxClick : function(cfg) {
-
 		return function(grid, rowIndex, colIndex, e) {
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
 			if (fieldName == cfg.field) {
@@ -53,9 +52,10 @@ Cronk.grid.IcingaColumnRenderer = {
 					},
 					cfg.processedFilterData
 				);
-
-				var sdp = new SimpleDataProvider({
-					targetXY: [e.getPageX(), e.getPageY() - 50],
+				
+				Icinga.util.SimpleDataProvider.createToolTip({
+					title: cfg.title,
+					target: e.getTarget(),
 					srcId: cfg.src_id,
 					width: 400,
 					delay: 15000,

@@ -1,4 +1,4 @@
-Ext.ns('Icinga');
+Ext.ns('Icinga', 'Icinga.util');
 
 Ext.onReady(function() {
 

@@ -456,6 +456,7 @@
 	                	<parameter name="type">cellclick</parameter>
 
 	                	<parameter name="arguments">
+	                		<parameter name="title">Detailed hostinfo</parameter>
 	                		<parameter name="src_id">hostinfo</parameter>
 	                		<parameter name="filter">
 	                			<parameter name="host">host_name</parameter>

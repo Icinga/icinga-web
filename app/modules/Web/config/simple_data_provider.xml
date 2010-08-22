@@ -30,40 +30,73 @@
 			<ae:parameter name="description">query for host information</ae:parameter>
 			<ae:parameter name="target">IcingaApi::TARGET_HOST</ae:parameter>
 			<ae:parameter name="result_columns">
-				<ae:parameter>HOST_ADDRESS</ae:parameter>
-				<ae:parameter>HOST_ALIAS</ae:parameter>
-				<ae:parameter>HOST_DISPLAY_NAME</ae:parameter>
-				<ae:parameter>HOST_CURRENT_STATE</ae:parameter>
-				<!-- 
-				Host Status: UP (for 5d 18h 24m 43s)
-				-->
-				<ae:parameter>HOST_OUTPUT</ae:parameter>
-				<ae:parameter>HOST_PERFDATA</ae:parameter>
-				<ae:parameter>HOST_CURRENT_CHECK_ATTEMPT</ae:parameter>
-				<ae:parameter>HOST_MAX_CHECK_ATTEMPTS</ae:parameter>
-				<ae:parameter>HOST_LAST_CHECK</ae:parameter>
-				<ae:parameter>HOST_CHECK_TYPE</ae:parameter>
-				<ae:parameter>HOST_LATENCY</ae:parameter>
-				<ae:parameter>HOST_EXECUTION_TIME</ae:parameter>
-				<ae:parameter>HOST_NEXT_CHECK</ae:parameter>
-				<ae:parameter>HOST_LAST_HARD_STATE_CHANGE</ae:parameter>
-				<ae:parameter>HOST_LAST_NOTIFICATION</ae:parameter>
-				<ae:parameter>HOST_IS_FLAPPING</ae:parameter>
-				<!-- 
-				Is This Host Flapping? NO (0.00% state change)
-				-->
-				<ae:parameter>HOST_SCHEDULED_DOWNTIME_DEPTH</ae:parameter>
-				<ae:parameter>HOST_STATUS_UPDATE_TIME</ae:parameter>
-				
-				<ae:parameter>HOST_NOTES_URL</ae:parameter>
-				<!-- 
-				Active Checks:	ENABLED  
-				Passive Checks:	ENABLED  
-				Obsessing:	ENABLED  
-				Notifications: ENABLED  
-				Event Handler:	ENABLED  
-				Flap Detection:	ENABLED
-				-->  
+				<ae:parameter>
+					<ae:parameter name="field">HOST_ADDRESS</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_ALIAS</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_DISPLAY_NAME</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_CURRENT_STATE</ae:parameter>
+					<ae:parameter name="type">hoststate</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_OUTPUT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_PERFDATA</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_CURRENT_CHECK_ATTEMPT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_MAX_CHECK_ATTEMPTS</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_LAST_CHECK</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_CHECK_TYPE</ae:parameter>
+					<ae:parameter name="type">checktype</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_LATENCY</ae:parameter>
+					<ae:parameter name="type">float</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_EXECUTION_TIME</ae:parameter>
+					<ae:parameter name="type">float</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_NEXT_CHECK</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_LAST_HARD_STATE_CHANGE</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_LAST_NOTIFICATION</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_IS_FLAPPING</ae:parameter>
+					<ae:parameter name="type">boolean</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_SCHEDULED_DOWNTIME_DEPTH</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_STATUS_UPDATE_TIME</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="filter">HOST_NOTES_URL</ae:parameter>
+					<ae:parameter name="type">url</ae:parameter>
+				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="filter">
 				<ae:parameter>
@@ -115,38 +148,68 @@
 			<ae:parameter name="description">query for service information</ae:parameter>
 			<ae:parameter name="target">IcingaApi::TARGET_SERVICE</ae:parameter>
 			<ae:parameter name="result_columns">
-				<ae:parameter>SERVICE_DISPLAY_NAME</ae:parameter>
-				<ae:parameter>SERVICE_CURRENT_STATE</ae:parameter>
-				<!-- 
-				Host Status: UP (for 5d 18h 24m 43s)
-				-->
-				<ae:parameter>SERVICE_OUTPUT</ae:parameter>
-				<ae:parameter>SERVICE_PERFDATA</ae:parameter>
-				<ae:parameter>SERVICE_CURRENT_CHECK_ATTEMPT</ae:parameter>
-				<ae:parameter>SERVICE_MAX_CHECK_ATTEMPTS</ae:parameter>
-				<ae:parameter>SERVICE_LAST_CHECK</ae:parameter>
-				<ae:parameter>SERVICE_CHECK_TYPE</ae:parameter>
-				<ae:parameter>SERVICE_LATENCY</ae:parameter>
-				<ae:parameter>SERVICE_EXECUTION_TIME</ae:parameter>
-				<ae:parameter>SERVICE_NEXT_CHECK</ae:parameter>
-				<ae:parameter>SERVICE_LAST_HARD_STATE_CHANGE</ae:parameter>
-				<ae:parameter>SERVICE_LAST_NOTIFICATION</ae:parameter>
-				<ae:parameter>SERVICE_IS_FLAPPING</ae:parameter>
-				<!-- 
-				Is This Host Flapping? NO (0.00% state change)
-				-->
-				<ae:parameter>SERVICE_SCHEDULED_DOWNTIME_DEPTH</ae:parameter>
-				<ae:parameter>SERVICE_STATUS_UPDATE_TIME</ae:parameter>
-				
-				<ae:parameter>SERVICE_NOTES_URL</ae:parameter>
-				<!-- 
-				Active Checks:	ENABLED  
-				Passive Checks:	ENABLED  
-				Obsessing:	ENABLED  
-				Notifications: ENABLED  
-				Event Handler:	ENABLED  
-				Flap Detection:	ENABLED
-				-->  
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_DISPLAY_NAME</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_CURRENT_STATE</ae:parameter>
+					<ae:parameter name="type">servicestate</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_OUTPUT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_PERFDATA</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_MAX_CHECK_ATTEMPTS</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_LAST_CHECK</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_CHECK_TYPE</ae:parameter>
+					<ae:parameter name="type">checktype</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_LATENCY</ae:parameter>
+					<ae:parameter name="type">float</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_EXECUTION_TIME</ae:parameter>
+					<ae:parameter name="type">float</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_NEXT_CHECK</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_LAST_HARD_STATE_CHANGE</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_LAST_NOTIFICATION</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_IS_FLAPPING</ae:parameter>
+					<ae:parameter name="type">boolean</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_SCHEDULED_DOWNTIME_DEPTH</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_STATUS_UPDATE_TIME</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_NOTES_URL</ae:parameter>
+					<ae:parameter name="type">url</ae:parameter>
+				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="filter">
 				<ae:parameter>
