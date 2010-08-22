@@ -565,4 +565,29 @@ div.icinga-overall-status-icon {
 	height: 16px;
 }
 
+
+div.icinga-bugBox {
+   -webkit-box-shadow:3px 3px 2px #dedede; 
+   -moz-box-shadow:3px 3px 2px #dedede;
+    padding: 2px;
+    margin: 2px;
+	cursor:help;
+}
+
+div.icinga-bugBox.xover {
+   background-color: #efefef;
+}
+
+div.icinga-codeBox {
+	background-color: #ffffff;
+	border:#acacac;
+	font-family:monospace;
+	font-size:10px;
+	white-space:pre;
+}
+
+div.icinga-icon-bug-32 {
+	 background-image: url(../images/icinga/bug_big.png) !important; background-repeat: no-repeat; }
+
+}
 /* EOF */

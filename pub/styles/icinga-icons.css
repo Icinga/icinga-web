@@ -152,6 +152,8 @@
 .icinga-icon-application-view-list { background-image: url(../images/icons/application_view_list.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-view-tile { background-image: url(../images/icons/application_view_tile.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bug { background-image: url(../images/icons/bug.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bug-32 { background-image: url(../images/icinga/bug_big.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cancel.png) !important; background-repeat: no-repeat; }
 .icinga-icon-server-lightning { background-image: url(../images/icons/server_lightning.png) !important; background-repeat: no-repeat; }
 .icinga-icon-database { background-image: url(../images/icons/database.png) !important; background-repeat: no-repeat; }
