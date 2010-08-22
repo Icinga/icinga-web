@@ -40,9 +40,11 @@ Ext.ns("AppKit.errorHandler");
 			this.send = function() {}
 			this.show = function() {
 				this.update();
+				var id = Ext.id('errorProtocol');
 				(new Ext.Window({
 					title: _('Error report'),
 					autoHeight:true,
+					id: id,
 					width:800,
 					constrain:true,
 					items: [{
@@ -51,11 +53,11 @@ Ext.ns("AppKit.errorHandler");
 						html: "<div style='width:100%;height:100%;font-size:12px;padding:5px;text-align:center'>If this bug is not already reported, feel free to report it at our <a href='https://dev.icinga.org/projects/icinga-web'>Bugtracker</a> (Don't forget to attach this report).</div>"
 					}],
 					buttons: [{
-						text: _('Download'),
-						iconCls: 'icinga-icon-disk'
-					}, {
 						text: _('Close'),
-						iconCls: 'icinga-icon-close'
+						iconCls: 'icinga-icon-close',
+						handler: function() {
+							Ext.getCmp(id).close();
+						}
 					}]
 				})).show(document.body);
 			}
@@ -195,6 +197,7 @@ Ext.ns("AppKit.errorHandler");
 					itemSelector:'div.icinga-bugBox',
 
 				});
+				var boxId = Ext.id('box_bug');
 				var box = new Ext.Window({
 					modal:true,
 					height: 350,
@@ -202,6 +205,7 @@ Ext.ns("AppKit.errorHandler");
 					width:700,
 					title: _('Bug report'),
 					layout:'auto',
+					id: boxId,
 					items: [{
 						padding:5,
 						html:'<div class="icinga-icon-bug-32" style="padding-left:35px;padding-top:2px;height:32px;overflow:visible"><h2>'+_('Icinga bug report')+'</h2></div>'+
@@ -215,12 +219,12 @@ Ext.ns("AppKit.errorHandler");
 						padding:5,
 						items:dview
 					}],
-					buttons: [{
+					buttons: [/*{
 						text: _('Send report to admin'),
 						iconCls: 'icinga-icon-application-form',
 						handler: function() {new errorReport().send();},
 						scope:this
-					},{
+					},*/{
 						text: _('Create report for dev.icinga.org'),
 						iconCls: 'icinga-icon-information',
 						handler: function() {new errorReport().show();},
@@ -228,11 +232,17 @@ Ext.ns("AppKit.errorHandler");
 					},{
 						text: _('Clear errors'),
 						iconCls: 'icinga-icon-delete',
-						handler: AppKit.errorHandler.clearErrors,
+						handler: function() {
+							AppKit.errorHandler.clearErrors()
+							Ext.getCmp(boxId).close();
+						},
 						scope:this
 					},{
 						text: _('Close'),
-						iconCls: 'icinga-icon-cancel'
+						iconCls: 'icinga-icon-cancel',
+						handler: function() {
+							Ext.getCmp(boxId).close();
+						}
 					}]
 				}).show(document.body);
 			}
