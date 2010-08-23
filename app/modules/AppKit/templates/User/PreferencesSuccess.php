@@ -1,5 +1,6 @@
 <?php
 	$user =& $t["user"];
+	
 ?>
 <script type='text/javascript'>
 Ext.ns("AppKit.UserPrefs");
@@ -10,7 +11,9 @@ Ext.onReady(function() {
 		storeId: 'availableLocales',
 		root: 'locales',
 		idProperty: 'id',
-		fields: ['id','description','isCurrent']
+		fields: ['id','description','isCurrent'],
+		successProperty: 'success'
+		
 	});
 	
 	AppKit.UserPrefs.container = new Ext.Container({
@@ -36,7 +39,7 @@ Ext.onReady(function() {
 					padding:5,
 					layout:'form',
 					defaults: {
-						labelWidth: 250
+						labelWidth: 150
 					},
 					items: [{
 						fieldLabel: _('Language'),
@@ -65,7 +68,9 @@ Ext.onReady(function() {
 							});
 						}
 					}]
-				},{
+				}
+<?php if(!$t["isDemoSystem"])  { ?>
+				,{
 					title:_('Change Password'),
 					xtype: 'fieldset',
 					padding:5,
@@ -113,7 +118,9 @@ Ext.onReady(function() {
 							}
 						}
 					}]
-				},{
+				}
+<?php } ?>
+				,{
 					title: _('Advanced'),
 					type:'fieldset',
 					collapsible:true,

@@ -735,6 +735,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/version.m4 $(DESTDIR)$(prefix)/etc/make/version.m4
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/mysql.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/oracle.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/mysql.sql $(DESTDIR)$(prefix)/etc/schema/mysql.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/oracle.sql $(DESTDIR)$(prefix)/etc/schema/oracle.sql
