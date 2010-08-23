@@ -179,7 +179,7 @@ Ext.onReady(function() {
 						listeners: {
 							beforeedit: function(event)  {
 								if(event.value == 'BLOB') {
-									AppKit.Ext.infoField("This item is read only!",2);
+									AppKit.notifyMessage(_("Can't modify"),_("This item is read only!"));
 									return false;
 								}
 							},
@@ -248,6 +248,7 @@ Ext.onReady(function() {
 								success: function() {
 									AppKit.notifyMessage(_('App reset'), _('Your application profile has been deleted!'));
 								}
+
 							});
 						} catch(e) {
 							mask.hide();

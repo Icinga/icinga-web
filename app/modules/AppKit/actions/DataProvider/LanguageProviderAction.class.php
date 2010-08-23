@@ -18,6 +18,11 @@ class AppKit_DataProvider_LanguageProviderAction extends AppKitBaseAction
 	{
 		return 'Success';
 	}
+
+	public function isSecure() {
+		return true;
+	}
+
 }
 
 ?>

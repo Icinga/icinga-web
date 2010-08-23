@@ -22,9 +22,7 @@ Ext.ns("AppKit.errorHandler");
 			} catch(e) {}
 		};
 
-		var errorReport = function() {
-
-			
+		var errorReport = function() {	
 			this.getHeader = function() {
 				return  ";---------------------------------------------------\n"+
 					";Icinga Interface Error Report	\n"+
@@ -92,7 +90,6 @@ Ext.ns("AppKit.errorHandler");
 		var suspended = false;
 		var showErrors = true;
 		var handleError = function(msg,file,line) {
-			AppKit.log("!");
 			var curError = new errorMsg(msg,file,line);
 			occuredErrors.push(curError);
 
@@ -136,7 +133,7 @@ Ext.ns("AppKit.errorHandler");
 				return occuredErrors;
 			},
 			setError: function(msg,file,line) {
-				this.handleError(msg,file,line);
+				handleError(msg,file,line);
 			},
 
 			suspend: function() {
@@ -251,6 +248,73 @@ Ext.ns("AppKit.errorHandler");
 		}
 
 	}
+	AppKit.AjaxErrorHandler = new function() {
+		var notifyBoxEnabled = true;
+		var bugTrackerReportEnabled = true;
 
+		var trackError = function(msg,src,line,isBug) {
+			src = src || 'Unknown';
+			line  = line || 'Unknown';
+			if(notifyBoxEnabled)
+				AppKit.notifyMessage(_('An error occured'),msg);
+			if(isBug && bugTrackerReportEnabled)
+				AppKit.errorHandler.setError(msg,src,line);
+		}
 
+		// Set up error handling for all automatic requests
+		Ext.data.DataProxy.on('exception',function(proxy,type,action, options,response, arg) {
+			handleError(response,proxy);
+		});
+
+		// Setup error handling for Ext.Ajax
+		Ext.Ajax.on("requestException",function(conn,response,opts) {
+			handleError(response,opts);
+		})
+		var handleError = function(response,proxy) {
+			switch(response.status) {
+				case 404:
+					AppKit.AjaxErrorHandler.error_404(proxy.url);
+					break;
+				case 401:
+					AppKit.AjaxErrorHandler.error_401(proxy.url);
+					break;
+				case 500:
+					AppKit.AjaxErrorHandler.error_500(proxy.url,response);
+					break;
+				default:
+					AppKit.AjaxErrorHandler.error_unkown(proxy.url,response.responseText);
+					break;
+			}
+		}
+		return {
+			enableErrorNotifyBox : function() {
+				notifyBoxEnabled = true;
+			},
+			disableErrorNotifyBox : function() {
+				notifyBoxEnabled = false;
+			},
+			enableBugTrackerReport: function() {
+				bugTrackerReportEnabled = true;
+			},
+			disableBugTrackerReport: function() {
+				bugTrackerReporEnabled = false;
+			},
+			error_404 : function(target) {
+				trackError(_("Ressource "+target+" could not be loaded - is the url correct?"))
+			},
+			error_500 : function(target,response) {
+				var json = Ext.decode(response.responseText)
+				var msg = (json ? json.errorMessage  : response.responseText);
+				trackError(_("The server encountered an error:<br/>")+msg,target,'XHR Request',(json ? json.isBug || false : false));
+			},
+			error_401 : function(target) {
+				trackError(_("You seem not to have the rights for ")+target);
+			},
+			error_unknown : function(target,error) {
+				trackError(_("A target occured when requesting ")+target+" : "+error);
+			}
+		}
+
+		
+	};
 })();
