@@ -303,8 +303,14 @@ Ext.ns("AppKit.errorHandler");
 				trackError(_("Ressource "+target+" could not be loaded - is the url correct?"))
 			},
 			error_500 : function(target,response) {
-				var json = Ext.decode(response.responseText)
-				var msg = (json ? json.errorMessage  : response.responseText);
+				var msg = 'Internal Exception, check your logs!';
+				var json = {}
+				try {
+					json = Ext.decode(response.responseText)
+					msg = (json ? json.errorMessage  : response.responseText.length <400 ? response.responseText : 'Internal exception, check your logs.');
+				} catch(e) {
+					msg = 'Internal Exception, check your logs!';
+				}
 				trackError(_("The server encountered an error:<br/>")+msg,target,'XHR Request',(json ? json.isBug || false : false));
 			},
 			error_401 : function(target) {
