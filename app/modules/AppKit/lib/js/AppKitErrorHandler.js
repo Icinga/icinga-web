@@ -195,7 +195,7 @@ Ext.ns("AppKit.errorHandler");
 						scope:this
 					},
 					overClass:'xover',
-					itemSelector:'div.icinga-bugBox',
+					itemSelector:'div.icinga-bugBox'
 
 				});
 				var boxId = Ext.id('box_bug');
