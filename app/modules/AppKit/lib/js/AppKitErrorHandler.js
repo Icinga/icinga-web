@@ -79,9 +79,9 @@ Ext.ns("AppKit.errorHandler");
 						"Time = '"+error.time+"'\n"+
 						"Comment = '"+error.comment+"'\n\n";
 					this.text += textMsg;
-					this.text += ";EOF";
+					
 				},this);
-			
+				this.text += ";EOF";
 			}
 			
 			this.buildText();
@@ -201,7 +201,7 @@ Ext.ns("AppKit.errorHandler");
 				var boxId = Ext.id('box_bug');
 				var box = new Ext.Window({
 					modal:true,
-					height: 350,
+					height: 400,
 					constrain:true,
 					width:700,
 					title: _('Bug report'),
@@ -215,7 +215,7 @@ Ext.ns("AppKit.errorHandler");
 						layout:'auto',
 						xtype:'panel',
 						collapsible:true,
-						height:300,
+						height:250,
 						autoScroll:true,
 						padding:5,
 						items:dview
