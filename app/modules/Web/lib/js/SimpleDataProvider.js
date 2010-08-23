@@ -3,34 +3,51 @@
  * Date: 2009-09-17
  * Author: Christian Doebler <christian.doebler@netways.de>
  */
-function SimpleDataProvider (config) {
 
-		this.config = {
+Ext.ns('Icinga.util');
+
+Icinga.util.SimpleDataProvider = (function () {
+
+		var toolTip = null;
+	
+		var pub = {};
+	
+		var config = {
 			url:			false,
 			srcId:			false,
 			width:			false,
 			filter:			false,
-			targetXY:		false,
+			anchor:			false,
+			closable:		false,
+			target:			false,
 			delay:			false,
-			autoDisplay:	true
+			autoDisplay:	true,
+			title:			false
 		};
 
-		this.reset = function () {
-			this.config.url = AppKit.c.path + "/web/simpleDataProvider/json?src_id=";
-			this.config.srcId = "";
-			this.config.width = 200;
-			this.config.filter = {};
-			this.config.targetXY = [0, 0];
-			this.config.delay = 15000;
-			this.config.autoDisplay = true;
-			return this;
+		pub.reset = function () {
+			config.url = AppKit.c.path + "/web/simpleDataProvider/json?src_id=";
+			config.srcId = "";
+			config.width = 200;
+			config.filter = {};
+			config.delay = 15000;
+			config.autoDisplay = true;
+			
+			config.target = false;
+			config.closable = true;
+			config.anchor = 'left';
+			config.title = '';
+			
+			return config;
 		};
 
-		this.getFilter = function () {
+		pub.getFilter = function () {
 			var filter = "";
-			if (this.config.filter !== false) {
-				var filterDef = this.config.filter;
+			if (config.filter !== false) {
+				var filterDef = config.filter;
 				var filterCount = filterDef.length;
+
+				
 				for (var x = 0; x < filterCount; x++) {
 					filter += "&filter[" + filterDef[x].key + "]=" + filterDef[x].value;
 				}
@@ -38,67 +55,99 @@ function SimpleDataProvider (config) {
 			return filter;
 		};
 
-		this.getUrl = function () {
-			var url = this.config.url + this.config.srcId + this.getFilter();
+		pub.getUrl = function () {
+			var url = config.url + config.srcId + pub.getFilter();
 			return url;
 		};
 
-		this.checkData = function () {
+		pub.checkData = function () {
 			var dataOk = false;
-			if (this.config.url !== false && this.config.srcId !== false && this.config.target !== false) {
+			if (config.url !== false && config.srcId !== false && config.target !== false) {
 				dataOk = true;
 			}
 			return dataOk;
 		};
 
-		this.setConfig = function (config) {
-			for (key in config) {
-				if (this.config[key] != undefined) {
-					this.config[key] = config[key];
+		pub.setConfig = function (c) {
+			for (var key in c) {
+				if (c[key] != undefined) {
+					config[key] = c[key];
 				}
 			}
 		};
 
-		this.display = function () {
-			if (this.checkData()) {
-
-				var toolTip = new Ext.ToolTip({
-					width: this.config.width,
-					dismissDelay: this.config.delay
+		pub.display = function () {
+			
+			if (pub.checkData()) {
+				
+				if (!Ext.isEmpty(toolTip)) {
+					toolTip.destroy();
+				}
+				
+				toolTip = new Ext.ToolTip({
+					width: config.width,
+					dismissDelay: config.delay,
+					closable: config.closable,
+					anchor: config.anchor,
+					target: config.target,
+					autoHide: false,
+					draggable: true,
+					title: (!Ext.isEmpty(config.title)) ? _(config.title) : '' 
 				});
-
+				
 				toolTip.render(Ext.getBody());
-				toolTip.targetXY = this.config.targetXY;
-
+				
 				toolTip.getUpdater().update({
-					url: this.getUrl(),
-					callback: this.outputTable
+					url: pub.getUrl(),
+					callback: pub.outputTable,
+					scope: Icinga.util.SimpleDataProvider 
 				});
-
+				
+				toolTip.on('hide', function(tt) {
+					tt.destroy();
+				});
+				
+//				toolTip.getEl().on('click', function() {
+//					toolTip.hide();
+//				})
+				
 				toolTip.show();
-
+				
 			}
 		};
 
-		this.outputTable = function (el, success, response, options) {
+		pub.outputTable = function (el, success, response, options) {
 			var responseObj = Ext.util.JSON.decode(response.responseText);
+			
 			var tpl = new Ext.XTemplate(
-				'<table cellpadding="0" cellspacing="0" border="0">',
 				'<tpl for="data">',
+				'<div class="icinga-detailed-info-container">',
+				'<table cellpadding="0" cellspacing="0" border="0" class="icinga-detailed-info">',
+				'<tpl for=".">',
 					'<tr>',
-						'<td>{key}</td>',
-						'<td>{value}</td>',
+						'<td class="key">{key}</td>',
+						'<td class="val">{val}</td>',
 					'</tr>',
 				'</tpl>',
-				'</table>'
+				'</table>',
+				'</div>',
+				'</tpl>'
 			);
+			
+			console.log(responseObj.result);
+			
 			tpl.overwrite(el, responseObj.result);
 		};
+		
+		pub.createToolTip = function(c) {
+			
+			pub.reset();
+			pub.setConfig(c);
+			
+			if (config.autoDisplay) {
+				pub.display();
+			}
+		}
 
-		this.reset();
-		this.setConfig(config);
-		if (this.config.autoDisplay) {
-			this.display();
-		};
-
-}
+		return pub;
+})();

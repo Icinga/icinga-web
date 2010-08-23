@@ -114,9 +114,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		$this->log('Auth.Dispatch: Starting authenticate (username=%s)', $username, AgaviLogger::DEBUG);
 
 		$user = $this->findUser($username);
+		$import = false;
 
 		if ($user === null) {
 			$user = $this->importUser($username);
+			$import = true;
 		}
 		
 		if ($user instanceof NsmUser && $user->user_id>0) {
@@ -137,10 +139,10 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 					$this->log('Auth.Dispatch: Authoritative provider found (provider=%s, authid=%s)', $provider->getProviderName(), $authid, AgaviLogger::DEBUG);
 					
 					// Update the userprofile
-					if ($provider->canUpdateProfile()) {
+					if ($provider->canUpdateProfile() && $import == false) {
 						$this->updateProfile($user, $provider);
 					}
-	
+					
 					// Check password
 					if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password)) {
 						$this->log('Auth.Dispatch: Successfull authentication (provder=%s)', $provider->getProviderName(), AgaviLogger::DEBUG);
@@ -151,7 +153,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 				
 				// Let others try authentification
 				if ($provider->resumeAuthentification()) {
-					if ($this->authentificateOthers($user, $provider->getProviderName()) == true) {
+					if ($this->authentificateOthers($user, $provider->getProviderName(), $password) == true) {
 						return $user;
 					}
 				}
@@ -164,12 +166,75 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		throw new AgaviSecurityException("Authentification of $username failed!");
 	}
 	
-	private function authentificateOthers(NsmUser &$user, $not=null) {
+	private function authentificateOthers(NsmUser &$user, $ignore_provider=null, $password=null) {
 		
+		$username = $user->user_name;
+		$authid = $user->getAuthId();
+		
+		$this->log('Auth.Dispatch: Delegate authentication (not_authoritative=%s,user=%s)', $ignore_provider, $username, AgaviLogger::INFO);
+		
+		foreach ($this->provider_keys as $pid) {
+			
+			if ($pid == $ignore_provider) continue;
+			
+			$provider = $this->getProvider($pid);
+			
+			if ($provider->isAvailable($username, $authid)) {
+				
+				$this->log('Auth.Dispatch: Delegate authentication, try %s (not_authoritative=%s,user=%s)', $pid, $ignore_provider, $username, AgaviLogger::DEBUG);
+				
+				if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password)) {
+					$this->log('Auth.Dispatch: Delegate authentication, %s successfully authenticate %s', $pid, $username, AgaviLogger::INFO);
+					 
+					return true;
+				}
+			}
+		}
+		
+		$this->log('Auth.Dispatch: Delegate authentication, no providers found for %s (not_authoritative=%s)', $username, $ignore_provider, AgaviLogger::ERROR);
+		
+		return false;
+	}
+	
+	private function secureUpdateValues(array $user_data) {
+		static $roFields = array ('user_id', 'user_name', 'user_authsrc', 'user_authid', 'user_created', 'user_modified');
+		foreach ($roFields as $field) {
+			if (isset($user_data[$field])) {
+				unset($user_data[$field]);
+			}
+		}
+		return $user_data;
 	}
 	
 	private function updateProfile(NsmUser &$user, AppKitIAuthProvider &$provider) {
 		
+		$username = $user->user_name;
+		$provider_name = $user->user_authsrc;
+		
+		$this->log('Auth.Dispatch: Updating profile (user=%s,provider=%s)', $username, $provider_name, AgaviLogger::DEBUG);
+		try {
+			$provider = $this->getProvider($provider_name);
+		}
+		catch (AgaviSecurityException $e) {
+			$this->log('Auth.Dispatch: Provider not found for user %s (provider=%s)', $username, $provider_name, AgaviLogger::DEBUG);
+			return false;
+		}
+		
+		$user_data = $provider->getUserdata($username, $user->getAuthId());
+		
+		if (is_array($user_data) && count($user_data)) {
+			$user_data = $this->secureUpdateValues($user_data);
+			
+			$this->log('Auth.Dispatch: Profile data (user=%s,provider=%s) %s', $username, $provider_name, print_r($user_data, true), AgaviLogger::DEBUG);
+			
+			$user->synchronizeWithArray($user_data, false);
+			
+			if ($user->isModified(false)) {
+				$user->save();
+			}
+			
+			return true;
+		}
 	}
 	
 	private function importUser($username) {
@@ -180,35 +245,42 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 			$provider = $this->getProvider($pid);
 			if ($provider->canCreateProfile()) {
 
-				$this->log('Auth.Dispatch/import: %s will map the userdata', $provider->getProviderName(), AgaviLogger::DEBUG);
-
-				 $data = $provider->getUserdata($username, false);
+				$this->log('Auth.Dispatch/import: %s will provide the user profile', $provider->getProviderName(), AgaviLogger::DEBUG);
+				
+				try {
+				
+					 $data = $provider->getUserdata($username, false);
+					 	
+					 if (is_array($data)) {
+	
+					 	$user = new NsmUser();
+					 	$user->fromArray($data, false);
+	
+					 	$groups = $provider->getDefaultGroups();
+					 	if (is_array($groups)) {
+					 		foreach ($groups as $group_name) {
+					 			$group = Doctrine::getTable('NsmRole')->findOneBy('role_name', $group_name);
+					 			$user->NsmRole[] = $group;
+					 		}
+					 	}
+	
+					 	$user->save();
+	
+					 	$this->log(
+							'Auth.Dispatch/import: user %s successfully imported (user_id=%d, provider=%s)',
+							$username,
+							$user->user_id,
+							$provider->getProviderName(),
+							AgaviLogger::DEBUG
+							);
+	
+					 	return $user;
+					 }
 				 
-				 if (is_array($data)) {
-				 	
-				 	$user = new NsmUser();
-				 	$user->fromArray($data, false);
-				 	
-				 	$groups = $provider->getDefaultGroups();
-				 	if (is_array($groups)) {
-				 		foreach ($groups as $group_name) {
-				 			$group = Doctrine::getTable('NsmRole')->findOneBy('role_name', $group_name);
-				 			$user->NsmRole[] = $group;
-				 		}
-				 	}
-				 	
-				 	$user->save();
-				 	
-					$this->log(
-						'Auth.Dispatch/import: user %s successfully imported (user_id=%d, provider=%s)',
-						$username,
-						$user->user_id,
-						$provider->getProviderName(),
-						AgaviLogger::DEBUG
-					);
-
-				 	return $user;
-				 }
+				}
+				catch (AgaviSecurityException $e) {
+					$this->log('Auth.Dispatch/import: Import failed (provider=%s,msg=%s)', $provider->getProviderName(), $e->getMessage(), AgaviLogger::ERROR);
+				}
 			}
 		}
 	}

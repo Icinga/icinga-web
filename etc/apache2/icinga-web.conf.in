@@ -2,9 +2,15 @@
 # icinga-web apache configuration
 # - Enable all options .htaccess
 # - Add extjs library to alias
+#
 
 Alias @web_path@/js/ext3 @prefix@/lib/ext3
 Alias @web_path@ @prefix@/pub
+
+<Directory @prefix@/lib/ext3>
+	Order allow,deny
+	Allow from all
+</Directory>
 
 <Directory @prefix@/pub>
 	DirectoryIndex index.php
@@ -13,3 +19,4 @@ Alias @web_path@ @prefix@/pub
 	Order allow,deny
 	Allow from all
 </Directory>
+

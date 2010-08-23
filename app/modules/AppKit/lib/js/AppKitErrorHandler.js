@@ -23,6 +23,7 @@ Ext.ns("AppKit.errorHandler");
 		};
 
 		var errorReport = function() {
+
 			
 			this.getHeader = function() {
 				return  ";---------------------------------------------------\n"+
@@ -219,6 +220,7 @@ Ext.ns("AppKit.errorHandler");
 						padding:5,
 						items:dview
 					}],
+
 					buttons: [/*{
 						text: _('Send report to admin'),
 						iconCls: 'icinga-icon-application-form',

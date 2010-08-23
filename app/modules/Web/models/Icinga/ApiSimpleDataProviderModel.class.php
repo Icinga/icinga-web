@@ -2,29 +2,46 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Web_IcingaApiSimpleDataProviderModel extends IcingaWebBaseModel
-{
+class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
-	private $configAll = false;
-	private $config = false;
+	private $configAll		= array ();
+	private $config			= array ();
+	private $resultColumns	= array ();
+	
+	/**
+	 * @var AgaviTranslationManager
+	 */
+	private $tm				= null;
 
-	private $apiSearch = false;
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var IcingaApiSearch
+	 */
+	private $apiSearch		= false;
 
-	private $filter = false;
+	private $filter			= false;
 
-	private $filterSet = false;
+	private $filterSet		= false;
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
 		$this->configAll = AgaviConfig::get('modules.web.simpledataprovider');
 		$this->apiSearch = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->createSearch();
+		$this->tm = $this->getContext()->getTranslationManager();
 	}
 
 	public function setSourceId ($srcId = false) {
 		if (array_key_exists($srcId, $this->configAll)) {
 			$this->config = $this->configAll[$srcId];
 			$this->setSearchTarget($this->config['target']);
-			$this->setResultColumns($this->config['result_columns']);
+			
+			foreach ($this->config['result_columns'] as $coldef) {
+				if (isset($coldef['field'])) {
+					$this->resultColumns[$coldef['field']]=$coldef;
+				}
+			}
+			$this->setResultColumns(array_keys($this->resultColumns));
 		}
 		return $this;
 	}
@@ -92,6 +109,59 @@ class Web_IcingaApiSimpleDataProviderModel extends IcingaWebBaseModel
 		return $this;
 	}
 
+	private function rewriteColumn($key, &$val) {
+		
+		if (isset($this->resultColumns[$key]['type'])) {
+			switch (strtolower($this->resultColumns[$key]['type'])) {
+				case 'url':
+					if (isset($val) && strlen($val)) {
+						$val = AppKitXmlTag::create('a', $val)
+						->addAttribute('href', $val)
+						->addAttribute('target', '_blank')
+						->toString();
+					}
+				break;
+				case 'boolean':
+				case 'bool':
+					$val = ((bool)$val==true) ? $this->tm->_('True') : $this->tm->_('False');
+				break;
+				case 'timestamp':
+				case 'datetime':
+					$val = $this->tm->_d($val, 'date-tstamp');
+				break;
+				case 'hoststate':
+					$val = (string)IcingaHostStateInfo::Create((int)$val)->getCurrentStateAsHtml();
+				break;
+				case 'servicestate':
+					$val = (string)IcingaServiceStateInfo::Create((int)$val)->getCurrentStateAsHtml();
+				break;
+				case 'checktype':
+					$val = $this->tm->_( IcingaConstantResolver::activeCheckType($val) );
+					
+				break;
+				case 'float':
+					$val = sprintf('%.2f', $val);
+				break;
+			}
+		}
+		return $val;
+	}
+	
+	private function prepareOutput(IcingaApiResult &$result) {
+		$out = array ();
+		foreach ($result as $row) {
+			$tmp = array ();
+			foreach ($row->getRow() as $key=>$val) {
+				$tmp[] = array (
+					'key' => $this->tm->_($key),
+					'val' => $this->rewriteColumn($key, $val)
+				);
+			}
+			$out[] = $tmp;
+		}
+		return $out;
+	}
+	
 	public function fetch () {
 		$result = false;
 		if ($this->filterSet === false) {
@@ -99,7 +169,8 @@ class Web_IcingaApiSimpleDataProviderModel extends IcingaWebBaseModel
 		}
 		$this->setOrder();
 		$this->setLimit();
-		$result = $this->apiSearch->fetch();
+		$result = $this->prepareOutput($this->apiSearch->fetch());
+		
 		return $result;
 	}
 

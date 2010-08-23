@@ -360,30 +360,29 @@ table.icinga-attribute-table td.val {
 	padding: 2px 2px 2px 2px;
 }
 
+div.icinga-detailed-info-container {
+	padding: 5px 0px 5px 0px;
+}
+
+/** Detailed object status table **/
+table.icinga-detailed-info {
+	border-collapse: collapse;
+}
+
+table.icinga-detailed-info td {
+	border-collapse: collapse;
+	padding: 2px 10px 2px 2px;
+}
+
+table.icinga-detailed-info td.key {
+	
+}
 /** TOP BAR **/
 #topBar {
 	width: 100%;
 	/* border: 1px solid #ff0000; */
 	height: 21px;
 	background: white url(../images/background/navigation-top-bg.png) repeat top right;
-}
-
-.yui-skin-sam .yuimenubar {
-	border: none;
-}
-
-.yui-skin-sam .yuimenubaritemlabel {
-	border-top: none;
-	border-bottom: none;
-}
-
-.yui-skin-sam .yuimenubaritemlabel-selected {
-	border-left: solid 1px #ccc;
-}
-
-#yahooTopMenu {
-	width: 50%;
-	float: left;
 }
 
 .x-icinga-top-right {

@@ -2,7 +2,7 @@
 /**
  * @author Christian Doebler <christian.doebler@netways.de>
  */
-class Web_IcingaApiSimpleDataProviderAction extends IcingaWebBaseAction
+class Web_Icinga_ApiSimpleDataProviderAction extends IcingaWebBaseAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -16,8 +16,7 @@ class Web_IcingaApiSimpleDataProviderAction extends IcingaWebBaseAction
 	 *                     executed.</li>
 	 *                   </ul>
 	 */
-	public function getDefaultViewName()
-	{
+	public function getDefaultViewName() {
 		return 'Success';
 	}
 

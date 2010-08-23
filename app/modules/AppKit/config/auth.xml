@@ -2,17 +2,18 @@
 <settings prefix="modules.appkit.auth." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
 	<!--
-	     	
+	
 		**********************************************************************
-				
+		
 		
 		auth.xml - authentication and authorisation for icinga-web
-				
+		
 		* After changes please clear the cache (rm -rf app/cache/config/*.php)
-				* All provider writes massive output to debug log (app/data/log/debug-*)
-						
+		* All provider writes massive output to debug log (app/data/log/debug-*)
+		
 		**********************************************************************
-			
+	
+
 	-->
 
 	<!-- Allow silent providers (like HTTPBasicAuthentication) -->
@@ -39,14 +40,15 @@
 		<ae:parameter name="auth_update">false</ae:parameter>
 				
 		<!--
-		     			* auth_resume
-		     						Do not stop if a provider has knows the user, but cat not authorize
-		     									
+			* auth_resume
+			Do not stop if a provider has knows the user, but cat not authorize
+			
 			If auth_authoritative is disabled and auth_import / auth_update is enabled the
-						provider can create the user profile and delegates the authentication to other
-									providers (Cool thing for HTTPBasicAuth with Apache2/Kerberos and LDAP to 
-												import users).
-															
+			provider can create the user profile and delegates the authentication to other
+			providers (Cool thing for HTTPBasicAuth with Apache2/Kerberos and LDAP to 
+			import users).
+			
+
 		-->
 
 		<ae:parameter name="auth_resume">true</ae:parameter>
@@ -78,36 +80,37 @@
 		List of providers used for this installation.
 			-->
 	<setting name="provider">
-			<!--
-			     			* internal database authentication
-			     						Better to change nothing here
-			     								-->
+		<!--
+			* internal database authentication
+			Better to change nothing here
+		-->
+
 		<ae:parameter name="internal">
 					<ae:parameter name="auth_module">AppKit</ae:parameter>
 								<ae:parameter name="auth_provider">Auth.Provider.Database</ae:parameter>
 
 			<ae:parameter name="auth_enable">true</ae:parameter>
-						<ae:parameter name="auth_authoritative">true</ae:parameter>
-								</ae:parameter>
-										
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+		</ae:parameter>
+		
 		<!--
-		     			* api key
-		     						Providing user defined api key in the url to authenticate as fast as possible
-		     									Also please change anything ;-)
-		     											-->
+			* api key
+			Providing user defined api key in the url to authenticate as fast as possible
+			Also please change anything ;-)
+		-->
 		<ae:parameter name="auth_key">
-					<ae:parameter name="auth_module">AppKit</ae:parameter>
-								<ae:parameter name="auth_provider">Auth.Provider.AuthKey</ae:parameter>
-
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.AuthKey</ae:parameter>
 			<ae:parameter name="auth_enable">false</ae:parameter>
-						<ae:parameter name="auth_authoritative">true</ae:parameter>
-								</ae:parameter>
-										
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+		</ae:parameter>
+		
 		<!-- 
-		     			* LDAP
-		     						Just an example for MSAD
-		     									!! ldap_userattr is case sensitive
-		     											-->
+			* LDAP
+			Just an example for MSAD
+			!! ldap_userattr is case sensitive
+		-->
+
 		<!-- 
 		     		<ae:parameter name="msad-ldap1">
 		     					<ae:parameter name="auth_module">AppKit</ae:parameter>
@@ -124,55 +127,55 @@
 																		</ae:parameter>
 																					
 			<ae:parameter name="ldap_dsn">ldap://ad.icinga.org</ae:parameter>
-						<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=org</ae:parameter>
-									<ae:parameter name="ldap_binddn">ldap@AD.ICINGA.ORG</ae:parameter>
-												<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
-															<ae:parameter name="ldap_userattr">sAmAccountName</ae:parameter>
-																		<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
-																				</ae:parameter>
-																						 -->
+			<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=org</ae:parameter>
+			<ae:parameter name="ldap_binddn">ldap@AD.ICINGA.ORG</ae:parameter>
+			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
+			<ae:parameter name="ldap_userattr">sAmAccountName</ae:parameter>
+			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
+		</ae:parameter>
+		 -->
 		 
 		<!--
-		     		 	* LDAP (Again)
-		     		 				Authenticate against OpenLdap
-		     		 							!! ldap_userattr is case sensitive
-		     		 									-->
+		 	* LDAP (Again)
+			Authenticate against OpenLdap
+			!! ldap_userattr is case sensitive
+		-->
 		<!-- 
-		     		<ae:parameter name="openldap-ldap1">
-		     					<ae:parameter name="auth_module">AppKit</ae:parameter>
-		     								<ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
-		     											<ae:parameter name="auth_enable">true</ae:parameter>
-		     														<ae:parameter name="auth_authoritative">false</ae:parameter>
-		     																	<ae:parameter name="auth_create">true</ae:parameter>
-		     																				<ae:parameter name="auth_update">true</ae:parameter>
-		     																							
+		<ae:parameter name="openldap-ldap1">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">false</ae:parameter>
+			<ae:parameter name="auth_create">true</ae:parameter>
+			<ae:parameter name="auth_update">true</ae:parameter>
+			
 			<ae:parameter name="auth_map">
-							<ae:parameter name="user_firstname">givenName</ae:parameter>
-											<ae:parameter name="user_lastname">sn</ae:parameter>
-															<ae:parameter name="user_email">mail</ae:parameter> 
-																		</ae:parameter>
-																					
+				<ae:parameter name="user_firstname">givenName</ae:parameter>
+				<ae:parameter name="user_lastname">sn</ae:parameter>
+				<ae:parameter name="user_email">mail</ae:parameter> 
+			</ae:parameter>
+			
 			<ae:parameter name="ldap_dsn">ldap://ldap.myopenldap.foo/</ae:parameter>
-						<ae:parameter name="ldap_basedn">dc=myopenldap,dc=foo</ae:parameter>
-									<ae:parameter name="ldap_binddn">cn=user,ou=authusers,dc=myopenldap,dc=foo</ae:parameter>
-												<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
-															<ae:parameter name="ldap_userattr">uid</ae:parameter>
-																		<ae:parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></ae:parameter>
-																				</ae:parameter>
-																						-->
+			<ae:parameter name="ldap_basedn">dc=myopenldap,dc=foo</ae:parameter>
+			<ae:parameter name="ldap_binddn">cn=user,ou=authusers,dc=myopenldap,dc=foo</ae:parameter>
+			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
+			<ae:parameter name="ldap_userattr">uid</ae:parameter>
+			<ae:parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></ae:parameter>
+		</ae:parameter>
+		-->
 		
 		<!--
-		     			* HTTP basic authentication
-		     						Passes through any server environment variables to authenticate based on usernames only
-		     									
+			* HTTP basic authentication
+			Passes through any server environment variables to authenticate based on usernames only
+			
 			!! Keep in mind that this provider says always yes if suitable user found!
-						
+			
 		-->
-
 		<ae:parameter name="http-basic-authentication">
-					<ae:parameter name="auth_module">AppKit</ae:parameter>
-								<ae:parameter name="auth_provider">Auth.Provider.HTTPBasicAuthentication</ae:parameter>
-											
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.HTTPBasicAuthentication</ae:parameter>
+			
+
 			<!--
 			     			
 				HTTPBasicAuth allows authentication requests made by
@@ -183,7 +186,8 @@
 				 				 			-->
 			
 			<ae:parameter name="auth_enable">true</ae:parameter>
-						<ae:parameter name="auth_authoritative">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">true</ae:parameter>
+
 
 			<!--
 			     				This provider can create dummy users

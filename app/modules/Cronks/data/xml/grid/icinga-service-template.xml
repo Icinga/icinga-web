@@ -448,6 +448,7 @@
 	                	<parameter name="type">cellclick</parameter>
 
 	                	<parameter name="arguments">
+	                		<parameter name="title">Detailed serviceinfo</parameter>
 	                		<parameter name="src_id">serviceinfo</parameter>
 	                		<parameter name="filter">
 	                			<parameter name="host">host_name</parameter>
