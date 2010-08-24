@@ -166,7 +166,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
 	 * @return AppKitEvent
 	 * @author Marius Hein
 	 */
-	public function triggerSimpleEvent($name, $info = null, &$object=null, array &$data = null) {
+	public function triggerSimpleEvent($name, $info = null, $object=null, array &$data = null) {
 		
 		$event = new AppKitEvent($name);
 		

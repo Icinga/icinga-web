@@ -62,7 +62,7 @@ class AppKitSQLConstants {
 	 * @param integer $key
 	 * @return mixed
 	 */
-	private function getArrayContent(&$array, $key) {
+	private static function getArrayContent(&$array, $key) {
 		if (array_key_exists($key, $array)) {
 			return $array[ $key ];
 		}

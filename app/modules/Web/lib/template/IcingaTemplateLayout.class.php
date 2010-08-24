@@ -17,7 +17,7 @@ class IcingaTemplateLayout {
 	 */
 	private $params = null;
 	
-	public function __construct(AgaviExecutionContainer  &$agaviContainer = null) {
+	public function __construct(AgaviExecutionContainer  $agaviContainer = null) {
 		if ($agaviContainer !== null) {
 			$this->setContainer($agaviContainer);
 		}
@@ -25,7 +25,7 @@ class IcingaTemplateLayout {
 		$this->initClass();
 	}
 
-	public function setContainer(AgaviExecutionContainer &$container) {
+	public function setContainer(AgaviExecutionContainer $container) {
 		$this->container =& $container;
 	}
 	
@@ -37,7 +37,7 @@ class IcingaTemplateLayout {
 		return $this->container;
 	}
 	
-	public function setWorker(IcingaTemplateWorker &$worker) {
+	public function setWorker(IcingaTemplateWorker $worker) {
 		$this->worker =& $worker;
 	}
 	
@@ -49,7 +49,7 @@ class IcingaTemplateLayout {
 		return $this->worker;
 	}
 	
-	public function setParameters(AgaviParameterHolder &$rd) {
+	public function setParameters(AgaviParameterHolder $rd) {
 		$this->params =& $rd;
 	}
 	

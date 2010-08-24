@@ -64,7 +64,7 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 	 * (non-PHPdoc)
 	 * @see lib/agavi/src/model/AgaviModel#initialize($context, $parameters)
 	 */
-	public function initialize($context, $parameters) {
+	public function initialize(AgaviContext $context, array $parameters = array()) {
 				
 		parent::initialize($context, $parameters);
 		

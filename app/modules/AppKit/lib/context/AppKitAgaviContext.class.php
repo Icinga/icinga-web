@@ -23,9 +23,9 @@ class AppKitAgaviContext extends AgaviContext {
 		$this->initializeEventHandling();
 		$this->setLanguageDomain();
 		
-		$this->initializeExceptionHandling();
-		
 		parent::initialize();
+		
+		$this->initializeExceptionHandling();
 	}
 
 	private function initializeExceptionHandling() {
