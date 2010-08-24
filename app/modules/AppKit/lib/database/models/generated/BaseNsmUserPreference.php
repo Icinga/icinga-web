@@ -107,8 +107,8 @@ abstract class BaseNsmUserPreference extends Doctrine_Record
 		parent::set($name,$value,$load);
     }
  
-	public function get($column) {
-		$val = parent::get($column);
+	public function get($column, $load=true) {
+		$val = parent::get($column, $load);
 		
 		if(is_resource($val))
 			$val = stream_get_contents($val);

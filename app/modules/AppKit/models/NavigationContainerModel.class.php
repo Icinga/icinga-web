@@ -34,8 +34,8 @@ implements AgaviISingletonModel, AppKitNavContainerInterface
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
-		$this->tm =& $this->getContext()->getTranslationManager();
-		$this->ro =& $this->getContext()->getRouting();	
+		$this->tm = $this->getContext()->getTranslationManager();
+		$this->ro = $this->getContext()->getRouting();	
 	}
 	
 	/**
@@ -81,7 +81,7 @@ implements AgaviISingletonModel, AppKitNavContainerInterface
 		return json_encode($d);
 	}
 	
-	private function arrayProc(&$array, AppKitNavContainer &$container) {
+	private function arrayProc(&$array, AppKitNavContainer $container) {
 		$array['items']=array();
 		$array = &$array['items'];
 		

@@ -120,7 +120,7 @@ class AppKitFormatParserUtil {
 				}
 				
 				$replace = null;
-				$data =& $this->getData($namespace);
+				$data = $this->getData($namespace);
 				
 				switch ($this->getNamespaceType($namespace)) {
 					

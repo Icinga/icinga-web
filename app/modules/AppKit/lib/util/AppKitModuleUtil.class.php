@@ -128,7 +128,7 @@ class AppKitModuleUtil extends AppKitSingleton {
 		return $out;
 	}
 
-	public function applyToRequestAttributes(AgaviExecutionContainer &$container, array $which_subkeys=null, $ns=self::DEFAULT_NAMESPACE) {
+	public function applyToRequestAttributes(AgaviExecutionContainer $container, array $which_subkeys=null, $ns=self::DEFAULT_NAMESPACE) {
 		if ($which_subkeys===null)
 			$which_subkeys = self::$default_config_keys;
 

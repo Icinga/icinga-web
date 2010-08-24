@@ -58,8 +58,8 @@ class IcingaTemplateWorker {
 		$this->template =& $template;
 	}
 	
-	public function setApi(IcingaApi &$api) {
-		$this->api =& $api;
+	public function setApi(IcingaApi $api) {
+		$this->api = $api;
 	}
 	
 	/**
@@ -433,7 +433,7 @@ class IcingaTemplateWorker {
 		return $id;
 	}
 	
-	public function setUser(NsmUser &$u) {
+	public function setUser(NsmUser $u) {
 		$this->user =& $u;
 	}
 	

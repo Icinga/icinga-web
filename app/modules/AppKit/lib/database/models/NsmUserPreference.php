@@ -12,8 +12,8 @@
  */
 class NsmUserPreference extends BaseNsmUserPreference
 {
-	public function get($val) {
-		$val = parent::get($val);
+	public function get($val, $load=true) {
+		$val = parent::get($val, $load);
 		if(is_resource($val))
 			return stream_get_contents($val);
 		return $val;

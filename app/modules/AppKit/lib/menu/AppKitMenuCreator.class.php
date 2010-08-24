@@ -64,11 +64,11 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 	
 	private static function initModel() {
 
-		$nav =& self::getContainer();
+		$nav = self::getContainer();
 
 		if ($nav->getContainer()->Count() == 0) {
 
-			$user =& self::getUser();
+			$user = self::getUser();
 
 			$nav->getContainer()->addItem(AppKitNavItem::create('appkit', 'index_page')
 			->setCaption('Home')
