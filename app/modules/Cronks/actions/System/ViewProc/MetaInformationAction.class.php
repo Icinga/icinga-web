@@ -31,7 +31,7 @@ class Cronks_System_ViewProc_MetaInformationAction extends CronksBaseAction
 		return array ('icinga.user');
 	}
 	
-	public function handleError(AgaviParameterHolder $rd) {
+	public function handleError(AgaviRequestDataHolder $rd) {
 		return $this->getDefaultViewName();
 	}
 }

@@ -67,6 +67,7 @@
 
 		<autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
 		<autoload name="AppKitApacheLoggerFormat">%core.module_dir%/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php</autoload>
+		<autoload name="AppKitExceptionHandler">%core.module_dir%/AppKit/lib/logging/AppKitExceptionHandler.class.php</autoload>
 
 		<autoload name="AppKitNavContainer">%core.module_dir%/AppKit/lib/menu/AppKitNavContainer.class.php</autoload>
 		<autoload name="AppKitNavContainerInterface">%core.module_dir%/AppKit/lib/menu/AppKitNavContainerInterface.interface.php</autoload>

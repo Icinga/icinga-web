@@ -35,8 +35,8 @@ class Cronks_System_CronkPortalAction extends CronksBaseAction
 		return array ('icinga.user');
 	}
 	
-	public function handleError(AgaviParameterHolder $rd) {
-		return $this->getDefaultViewName();
+	public function handleError(AgaviRequestDataHolder $rd) {
+		return $this->getDefaultViewName();		
 	}
 }
 

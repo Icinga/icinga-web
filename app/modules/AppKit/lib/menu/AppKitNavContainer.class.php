@@ -13,12 +13,12 @@ implements RecursiveIterator
 		$this->initArrayContainer($this->items);
 	}
 	
-	public function addItem(AppKitNavItem &$item) {
+	public function addItem(AppKitNavItem $item) {
 		$this->offsetSet($item->getName(), $item);
 		return $item;
 	}
 	
-	public function addItemBefore($name, AppKitNavItem &$item) {
+	public function addItemBefore($name, AppKitNavItem $item) {
 		if (array_key_exists($name, $this->items)) {
 			$replace = array($item->getName() => &$item);
 			$this->items = AppKitArrayUtil::arrayKeyInsertBefore($this->items, $name, $replace);
@@ -37,7 +37,7 @@ implements RecursiveIterator
 	 * @param AppKitNavItem $item
 	 * @return AppKitNavItem
 	 */
-	public function addSubItem($parent_name, AppKitNavItem &$item) {
+	public function addSubItem($parent_name, AppKitNavItem $item) {
 		if ($this->offsetExists($parent_name)) {
 			$container = $this->offsetGet($parent_name)->getContainer();
 			return $container->addItem($item);

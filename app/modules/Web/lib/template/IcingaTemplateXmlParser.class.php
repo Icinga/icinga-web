@@ -210,7 +210,7 @@ class IcingaTemplateXmlParser {
 		return $name;
 	}
 	
-	private function parseDom(DOMElement &$element, array &$storage) {
+	private function parseDom(DOMElement $element, array &$storage) {
 		if ($element->hasChildNodes()) {
 			foreach ($element->childNodes as $child) {
 				if ($child->nodeType == XML_ELEMENT_NODE) {

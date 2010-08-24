@@ -100,11 +100,11 @@ class AppKitEvent extends AppKitBaseClass {
 	 * @throws AppKitEventException
 	 * @author Marius Hein
 	 */
-	public function setObject(&$object) {
+	public function setObject($object) {
 		if (!is_object($object))
 			throw new AppKitEventException('$object have to be an object!');
 			
-		$this->object =& $object;
+		$this->object = $object;
 	}
 	
 	/**
