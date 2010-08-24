@@ -5,7 +5,7 @@
 
 Ext.ns("AppKit.errorHandler");
 (function() {
-	AppKit.errorHandler = new function() {
+	AppKit.BugTracker = new function() {
 		var errorMsg = function(msg,file,line) {
 			this.msg = 'No message available';
 			this.file = 'No file available';
@@ -88,11 +88,11 @@ Ext.ns("AppKit.errorHandler");
 
 		var occuredErrors = [];
 		var suspended = false;
-		var showErrors = true;
+		var showErrors = false;
 		var handleError = function(msg,file,line) {
 			var curError = new errorMsg(msg,file,line);
 			occuredErrors.push(curError);
-
+			AppKit.log(showErrors);
 			if(showErrors) {
 				updateErrorDisplay();
 			}
@@ -115,7 +115,7 @@ Ext.ns("AppKit.errorHandler");
 			bugReportField = new Ext.Button({
 				text: occuredErrors.length,
 				iconCls: 'icinga-icon-bug',
-				handler: AppKit.errorHandler.showErrorMessageInfoBox
+				handler: AppKit.BugTracker.showErrorMessageInfoBox
 			})
 			elem.addItem(bugReportField);
 			elem.doLayout();
@@ -148,6 +148,10 @@ Ext.ns("AppKit.errorHandler");
 
 			isSuspended: function() {
 				return suspended
+			},
+
+			setShowErrors: function(bool) {
+				showErrors = bool;
 			},
 
 			showErrorMessageInfoBox: function() {
@@ -249,8 +253,11 @@ Ext.ns("AppKit.errorHandler");
 
 	}
 	AppKit.AjaxErrorHandler = new function() {
-		var notifyBoxEnabled = true;
-		var bugTrackerReportEnabled = true;
+		
+		var notifyBoxEnabled = false;
+		var bugTrackerReportEnabled = false;
+		// set user settings on startup
+		
 
 		var trackError = function(msg,src,line,isBug) {
 			src = src || 'Unknown';
@@ -258,7 +265,7 @@ Ext.ns("AppKit.errorHandler");
 			if(notifyBoxEnabled)
 				AppKit.notifyMessage(_('Request failed'),msg);
 			if(isBug && bugTrackerReportEnabled)
-				AppKit.errorHandler.setError(msg,src,line);
+				AppKit.BugTracker.setError(msg,src,line);
 		}
 
 		// Set up error handling for all automatic requests
@@ -323,4 +330,32 @@ Ext.ns("AppKit.errorHandler");
 
 		
 	};
+
+	var setupErrorHandler = function() {
+		var setHandlerFunc = function() {
+			if(AppKit.getPreferences()["org.icinga.errorNotificationsEnabled"] == 'true') {
+				AppKit.AjaxErrorHandler.enableErrorNotifyBox();
+			} else {
+				AppKit.AjaxErrorHandler.disableErrorNotifyBox();
+			}
+			if(AppKit.getPreferences()["org.icinga.bugTrackerEnabled"]  == 'true') {
+				AppKit.BugTracker.setShowErrors(true);
+				AppKit.AjaxErrorHandler.enableBugTrackerReport();
+			} else {
+				AppKit.BugTracker.setShowErrors(false);
+				AppKit.AjaxErrorHandler.disableBugTrackerReport();
+			}
+
+		}
+		if( AppKit.getPreferences()["org.icinga.errorNotificationsEnabled"] &&
+				AppKit.getPreferences()["org.icinga.bugTrackerEnabled"]) {
+			setHandlerFunc();
+		} else {
+			setupErrorHandler.defer(300);
+		}
+	}
+	setupErrorHandler();
+
+
+
 })();
