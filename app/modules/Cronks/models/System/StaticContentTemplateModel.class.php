@@ -414,7 +414,8 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		$data = $this->getCache($name);
 		
 		if (!$data) {
-			$data = $this->setCache($name, $this->getDsArray($name, array(), 0));
+			$dsArray =  $this->getDsArray($name, array(), 0);
+			$data = $this->setCache($name,$dsArray);
 		}
 
 		if (array_key_exists($field, $data)) {

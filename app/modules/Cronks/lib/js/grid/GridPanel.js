@@ -89,6 +89,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var cronk = this.ownerCt.CronkPlugin.cmpConfig;
 		var urlParams = "cr_base=";
 
+		
 		var counter = 0;						
 		for(var i in store.baseParams) {
 			var name = i.replace(/(.*?)\[(.*?)\]/g,"$1\|$2_"+counter);	
@@ -96,9 +97,16 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			counter++;
 		}
 		
-		urlParams += 
-			"/groupDir="+store.sortInfo['direction']+"/"+
-			"groupField="+store.sortInfo['field']+"/"+
+		if(store.sortInfo) {
+			urlParams +=
+				"/groupDir="+store.sortInfo['direction']+"/"+
+				"groupField="+store.sortInfo['field']+"/";
+		} else {
+			urlParams +=
+				"/groupDir=ASC/"+
+				"groupField=instance/";
+		}
+		urlParams +=
 			"template="+this.parentCmp.params.template+"/"+
 			"crname="+cronk.crname+"/"+
 			"title="+cronk.title;

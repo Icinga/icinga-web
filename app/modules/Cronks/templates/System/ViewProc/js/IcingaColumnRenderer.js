@@ -90,5 +90,32 @@ Cronk.grid.IcingaColumnRenderer = {
 				window.open(url, windowName);
 			}
 		}
+	},
+
+	iFrameCronk: function(cfg) {
+		
+		if (!'url' in cfg) {
+			throw('url XTemplate configuration needed! (parameter name="url")');
+		}
+		return function(grid, rowIndex, colIndex, e) {
+			var data = grid.getStore().getAt(rowIndex).data;
+			var urlTpl = new Ext.XTemplate(cfg.url);
+			var url = urlTpl.apply(data);
+			var titleTpl = new Ext.XTemplate(cfg.title);
+			var title = titleTpl.apply(data);
+			var tabPanel = Ext.getCmp("cronk-tabs");
+			AppKit.log(url);
+			tabPanel.add({
+				'xtype': 'cronk',
+				'title': title,
+				'crname': 'genericIFrame',
+				'params': {
+					url:  url
+				},
+				'closable':true
+			});
+			tabPanel.doLayout();
+			
+		}
 	}
 };
