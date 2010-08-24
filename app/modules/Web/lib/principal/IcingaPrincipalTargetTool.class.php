@@ -12,13 +12,14 @@ class IcingaPrincipalTargetTool {
 			if($model->target_type != 'icinga')
 				continue;
 			$targetname = $model->get('target_name');
+
 			if(!isset($sarr[$targetname]))
 				continue;
 
 			$to = $model->getTargetObject($targetname);
-			if(!self::checkIfTargetAffectsSearch($to,$search,$sarr[$targetname]))
+			if(!self::checkIfTargetAffectsSearch($to,$search,$sarr[$targetname])) 
 				continue;
-			
+
 			if(count($sarr[$targetname]) > 0) {
 				foreach ($sarr[$targetname] as $vdata) {
 					$parts[] = $to->getMapArray($vdata);
@@ -26,6 +27,9 @@ class IcingaPrincipalTargetTool {
 			}
 			else {
 				$map = $to->getCustomMap();
+				if($map) {
+					$search->setSearchFilterAppendix($map, IcingaApi::SEARCH_AND);
+				}
 			}		
 		}
 		
@@ -42,18 +46,21 @@ class IcingaPrincipalTargetTool {
 	
 	static protected function checkIfTargetAffectsSearch(IcingaDataPrincipalTarget $target,IcingaApiSearchIdo $search,$apiMapping) {
 		// check the mapping
-		if(empty($apiMapping))
-			$apiMapping = $target->getCustomMap();
-		
+		if(empty($apiMapping)) {
+			return $target->getCustomMap();
+		}
 		if($apiMapping === false)
 			return false;
 
 		$apiFields = array();
+		
 		foreach($apiMapping as $ap) {
 			$apiFields[] = $target->getApiMappingField(key($ap));
-		} 
+		}
+
 		$columns = $search->getAffectedColumns();
 		$isect = array_intersect(array_values($apiFields), $columns);
+		
 		return !empty($isect);
 	}
 }

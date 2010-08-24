@@ -44,18 +44,21 @@ class Cronks_System_StatusMapModel extends CronksBaseModel
 
 		$idPrefix = sha1(microtime()) . '-';
 
-		$apiResHosts = $this->api->getConnection()
-			->createSearch()
-			->setResultType(IcingaApi::RESULT_ARRAY)
+		$apiResHosts = $this->api->getConnection()->createSearch();
+		$apiResHosts->setResultType(IcingaApi::RESULT_ARRAY)
 			->setSearchTarget(IcingaApi::TARGET_HOST)
-			->setResultColumns($this->hostResultColumns)
+			->setResultColumns($this->hostResultColumns);
+			
+		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($apiResHosts);
+		$apiResHosts = $apiResHosts
 			->fetch()
 			->getAll();
 
-		$apiResHostParents = $this->api->getConnection()
-			->createSearch()
-			->setSearchTarget(IcingaApi::TARGET_HOST_PARENTS)
-			->fetch();
+		$apiResHostParents = $this->api->getConnection()->createSearch();
+		$apiResHostParents->setSearchTarget(IcingaApi::TARGET_HOST_PARENTS);
+
+		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($apiResHostParents);
+		$apiResHostParents = $apiResHostParents->fetch();
 
 		foreach ($apiResHosts as $row) {
 			$objectId = $idPrefix . $row['HOST_OBJECT_ID'];

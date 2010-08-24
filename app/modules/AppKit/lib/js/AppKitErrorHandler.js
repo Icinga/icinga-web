@@ -256,7 +256,7 @@ Ext.ns("AppKit.errorHandler");
 			src = src || 'Unknown';
 			line  = line || 'Unknown';
 			if(notifyBoxEnabled)
-				AppKit.notifyMessage(_('An error occured'),msg);
+				AppKit.notifyMessage(_('Request failed'),msg);
 			if(isBug && bugTrackerReportEnabled)
 				AppKit.errorHandler.setError(msg,src,line);
 		}
@@ -282,7 +282,7 @@ Ext.ns("AppKit.errorHandler");
 					AppKit.AjaxErrorHandler.error_500(proxy.url,response);
 					break;
 				default:
-					AppKit.AjaxErrorHandler.error_unkown(proxy.url,response.responseText);
+					AppKit.AjaxErrorHandler.error_unknown(proxy.url,response.responseText);
 					break;
 			}
 		}
@@ -307,17 +307,17 @@ Ext.ns("AppKit.errorHandler");
 				var json = {}
 				try {
 					json = Ext.decode(response.responseText)
-					msg = (json ? json.errorMessage  : response.responseText.length <400 ? response.responseText : 'Internal exception, check your logs.');
+					msg = (json ? json.errorMessage  : response.responseText.length <400 ? response.responseText : response.responseText.substr(0,200)+"...");
 				} catch(e) {
 					msg = 'Internal Exception, check your logs!';
 				}
 				trackError(_("The server encountered an error:<br/>")+msg,target,'XHR Request',(json ? json.isBug || false : false));
 			},
 			error_401 : function(target) {
-				trackError(_("You seem not to have the rights for ")+target);
+				trackError(_("Access denied"));
 			},
 			error_unknown : function(target,error) {
-				trackError(_("A target occured when requesting ")+target+" : "+error);
+				trackError(_("A error occured when requesting ")+target+" : "+error.length <200 ? error: error.substr(0,200)+"...");
 			}
 		}
 

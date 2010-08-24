@@ -33,13 +33,15 @@ Ext.onReady(function() {
 			items: new Ext.form.FormPanel({
 				padding:5,
 				border:false,
+				width: 250,
 				items: [{
 					xtype:'fieldset',
 					title: _('Language settings'),
 					padding:5,
+
 					layout:'form',
 					defaults: {
-						labelWidth: 150
+						labelWidth: 100
 					},
 					items: [{
 						fieldLabel: _('Language'),

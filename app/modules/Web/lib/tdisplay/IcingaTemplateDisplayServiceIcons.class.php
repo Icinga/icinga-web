@@ -142,7 +142,6 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 	public function hostIcons($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
 		
 		$id = $this->getObjectId($method_params->getParameter('field', null), $row);
-		
 		$dh = $this->getIcingaApi()->createSearch()
 		->setSearchTarget(IcingaApi::TARGET_HOST)
 		->setResultColumns(self::$host_fields)
