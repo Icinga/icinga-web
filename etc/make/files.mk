@@ -222,6 +222,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/html/form/AppKitSelectSourceInterface.interface.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/html/form/AppKitSelectSourceInterface.interface.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/html/form/AppKitTextboxElement.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/html/form/AppKitTextboxElement.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/AppKitErrorHandler.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/AppKitErrorHandler.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/AppKit.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/AppKit.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/AppKitUtil.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/AppKitUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/HttpStateProvider.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/HttpStateProvider.js
@@ -231,9 +232,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/json/AppKitExtJsonDocument.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/json/AppKitExtJsonDocument.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/json/AppKitJsonResponse.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/json/AppKitJsonResponse.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/ScriptDynaLoader.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/ScriptDynaLoader.js
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/utils
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/js/utils/stacktrace.js $(DESTDIR)$(prefix)/app/modules/AppKit/lib/js/utils/stacktrace.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/lib/menu
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/menu/AppKitMenuCreator.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/menu/AppKitMenuCreator.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/menu/AppKitNavContainer.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/menu/AppKitNavContainer.class.php
@@ -572,6 +576,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/ApiSearchAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/ApiSearchAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/ApiSimpleDataProviderAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/ApiSimpleDataProviderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/HelpAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/HelpAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/PortalViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/PortalViewAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/TestPageAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/TestPageAction.class.php
@@ -630,10 +635,11 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/models
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/models/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/models/Icinga/ApiContainerModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/models/Icinga/ApiContainerModel.class.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/models/IcingaApiSimpleDataProviderModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php $(DESTDIR)$(prefix)/app/modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/ApiSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/ApiSearchSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/ApiSimpleDataProviderSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/ApiSimpleDataProviderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/HelpSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/HelpSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/PortalViewSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/TestPageSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/TestPageSuccess.php
@@ -644,6 +650,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/ApiSearch.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/ApiSearch.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/ApiSimpleDataProvider.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/ApiSimpleDataProvider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/Help.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/Help.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/PortalView.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/TestPage.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/TestPage.xml
@@ -652,6 +659,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiSearchErrorView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiSearchErrorView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiSearchSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiSearchSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiSimpleDataProviderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiSimpleDataProviderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/HelpSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/HelpSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/PortalViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/PortalViewSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/TestPageSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/TestPageSuccessView.class.php
@@ -7741,6 +7749,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/famfamfam/zoom_out.png $(DESTDIR)$(prefix)/pub/images/famfamfam/zoom_out.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/famfamfam/zoom.png $(DESTDIR)$(prefix)/pub/images/famfamfam/zoom.png
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/icinga
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/bug_big.png $(DESTDIR)$(prefix)/pub/images/icinga/bug_big.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/favicon.ico $(DESTDIR)$(prefix)/pub/images/icinga/favicon.ico
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/icinga-logo.png $(DESTDIR)$(prefix)/pub/images/icinga/icinga-logo.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icinga/icinga-logo-small.png $(DESTDIR)$(prefix)/pub/images/icinga/icinga-logo-small.png
@@ -7778,6 +7787,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/book.png $(DESTDIR)$(prefix)/pub/images/icons/book.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/brick.png $(DESTDIR)$(prefix)/pub/images/icons/brick.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/bricks.png $(DESTDIR)$(prefix)/pub/images/icons/bricks.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/bug.png $(DESTDIR)$(prefix)/pub/images/icons/bug.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cancel.png $(DESTDIR)$(prefix)/pub/images/icons/cancel.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cog.png $(DESTDIR)$(prefix)/pub/images/icons/cog.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cross.png $(DESTDIR)$(prefix)/pub/images/icons/cross.png
@@ -7834,6 +7844,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6945
-INC_DIRS=892
+INC_FILES=6950
+INC_DIRS=893
 # INSTALL_FILES_END
