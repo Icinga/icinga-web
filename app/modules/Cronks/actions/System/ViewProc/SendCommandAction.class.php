@@ -89,7 +89,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 		return array ('icinga.user');
 	}
 	
-	public function handleError(AgaviParameterHolder $rd) {
+	public function handleError(AgaviRequestDataHolder $rd) {
 		$this->setAttribute('ok', false);
 		$this->setAttribute('error', 'Validation failed');
 		return $this->getDefaultViewName();

@@ -14,7 +14,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel
 	 * (non-PHPdoc)
 	 * @see lib/agavi/src/model/AgaviModel#initialize($context, $parameters)
 	 */
-	public function initialize(AgaviContext $context, $parameters) {
+	public function initialize(AgaviContext $context, array $parameters = array()) {
 		
 		if (array_key_exists('type', $parameters)) {
 			$this->setType($parameters['type']);

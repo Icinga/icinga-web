@@ -10,11 +10,10 @@
  * @author     ##NAME## <##EMAIL##>
  * @version    SVN: $Id: Builder.php 5318 2008-12-19 20:44:54Z jwage $
  */
-class NsmSession extends BaseNsmSession
-{
+class NsmSession extends BaseNsmSession {
 
-	public function get($val) {
-		$val = parent::get($val);
+	public function get($val, $load=true) {
+		$val = parent::get($val, $load);
 		if(is_resource($val))
 			return stream_get_contents($val);
 		return $val;
@@ -32,6 +31,4 @@ class NsmSession extends BaseNsmSession
 		$this->actAs('Timestampable', $options);
 
 	}
-
-	
 }

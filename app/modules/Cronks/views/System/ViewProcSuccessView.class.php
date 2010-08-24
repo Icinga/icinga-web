@@ -7,8 +7,8 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 	 */
 	private $api = null;
 	
-	public function initialize($c) {
-		parent::initialize($c);
+	public function initialize(AgaviExecutionContainer $container) {
+		parent::initialize($container);
 		$this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 	}
 	

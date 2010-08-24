@@ -148,7 +148,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 		return $val;
 	}
 	
-	private function prepareOutput(IcingaApiResult &$result) {
+	private function prepareOutput(IcingaApiResult $result) {
 		$out = array ();
 		foreach ($result as $row) {
 			$tmp = array ();
