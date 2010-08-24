@@ -20,23 +20,23 @@
 	<setting name="behaviour.enable_silent">true</setting>
 
 	<!--
-	     		Allow dialog based authentication
-	     				* Are both settings enabled, the dialog will be displayed as fallback
-	     					-->
+		Allow dialog based authentication
+	    * Are both settings enabled, the dialog will be displayed as fallback
+	-->
 	<setting name="behaviour.enable_dialog">true</setting>
 
 	<!-- Provider default settings -->
 	<setting name="defaults">
-			<!--
-			     			* auth_create
-			     						Try to import the user profile on initial creation
-			     								-->
+		<!--
+			* auth_create
+			Try to import the user profile on initial creation
+		-->
 		<ae:parameter name="auth_create">false</ae:parameter>
 				
 		<!--
-		     			* auth_update
-		     						Update changes in the userprofile
-		     								-->
+			* auth_update
+		    Update changes in the userprofile
+		-->
 		<ae:parameter name="auth_update">false</ae:parameter>
 				
 		<!--
@@ -54,31 +54,30 @@
 		<ae:parameter name="auth_resume">true</ae:parameter>
 				
 		<!--
-		     			* auth_groups
-		     						Comma seperated list of icinga group name a new user will be
-		     									added to
-		     											-->
+			* auth_groups
+		    Comma seperated list of icinga group name a new user will be
+		    added to
+		-->
 		<ae:parameter name="auth_groups">icinga_user</ae:parameter>
 				
 		<!--
-		     			* auth_enable
-		     						If the provider is enabled or not
-		     								-->
+			* auth_enable
+		    If the provider is enabled or not
+		-->
 		<ae:parameter name="auth_enable">false</ae:parameter>
 				
 		<!-- 
-		     			* auth_authoritative
-		     						Use this provider to authenticate users
-		     								-->
+			* auth_authoritative
+		    Use this provider to authenticate users
+		-->
 		<ae:parameter name="auth_authoritative">false</ae:parameter>
 
 	</setting>
 
 	<!--
-	     		* provider
-	     				
+		* provider     				
 		List of providers used for this installation.
-			-->
+	-->
 	<setting name="provider">
 		<!--
 			* internal database authentication
@@ -86,8 +85,8 @@
 		-->
 
 		<ae:parameter name="internal">
-					<ae:parameter name="auth_module">AppKit</ae:parameter>
-								<ae:parameter name="auth_provider">Auth.Provider.Database</ae:parameter>
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.Database</ae:parameter>
 
 			<ae:parameter name="auth_enable">true</ae:parameter>
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
@@ -112,19 +111,19 @@
 		-->
 
 		<!-- 
-		     		<ae:parameter name="msad-ldap1">
-		     					<ae:parameter name="auth_module">AppKit</ae:parameter>
-		     								<ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
-		     											<ae:parameter name="auth_enable">true</ae:parameter>
-		     														<ae:parameter name="auth_authoritative">true</ae:parameter>
-		     																	<ae:parameter name="auth_create">true</ae:parameter>
-		     																				<ae:parameter name="auth_update">true</ae:parameter>
+			<ae:parameter name="msad-ldap1">
+		    <ae:parameter name="auth_module">AppKit</ae:parameter>
+		    <ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
+		    <ae:parameter name="auth_enable">true</ae:parameter>
+		    <ae:parameter name="auth_authoritative">true</ae:parameter>
+		    <ae:parameter name="auth_create">true</ae:parameter>
+		    <ae:parameter name="auth_update">true</ae:parameter>
 		     																							
 			<ae:parameter name="auth_map">
-							<ae:parameter name="user_firstname">givenName</ae:parameter>
-											<ae:parameter name="user_lastname">sn</ae:parameter>
-															<ae:parameter name="user_email">mail</ae:parameter> 
-																		</ae:parameter>
+				<ae:parameter name="user_firstname">givenName</ae:parameter>
+				<ae:parameter name="user_lastname">sn</ae:parameter>
+				<ae:parameter name="user_email">mail</ae:parameter> 
+			</ae:parameter>
 																					
 			<ae:parameter name="ldap_dsn">ldap://ad.icinga.org</ae:parameter>
 			<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=org</ae:parameter>
@@ -204,17 +203,17 @@
 
 			<!-- Source for the data (_SERVER == $_SERVER == 'only one') -->
 			<ae:parameter name="http_source">_SERVER</ae:parameter>
-					</ae:parameter>
+		</ae:parameter>
 							
 	</setting>
 
 	<setting name="message">
-			<ae:parameter name="show">true</ae:parameter>
-					<ae:parameter name="title">Welcome</ae:parameter>
+		<ae:parameter name="show">true</ae:parameter>
+		<ae:parameter name="title">Welcome</ae:parameter>
 
 		<ae:parameter name="text"><![CDATA[]]></ae:parameter>
-				<ae:parameter name="include_file"><![CDATA[%core.share_dir%/login_message.html]]></ae:parameter>
-						<ae:parameter name="expand_first">false</ae:parameter>
-							</setting>
+		<ae:parameter name="include_file"><![CDATA[%core.share_dir%/login_message.html]]></ae:parameter>
+		<ae:parameter name="expand_first">false</ae:parameter>
+	</setting>
 
 </settings>
