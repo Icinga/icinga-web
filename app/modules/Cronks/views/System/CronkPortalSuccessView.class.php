@@ -18,6 +18,7 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView
 		foreach($customViewFields as $name=>&$val) {
 			$val = $rd->getParameter($name,null);
 			if($val == null) {
+
 				$rd->setParameter("isURLView",false);
 				break;
 			}
@@ -55,6 +56,7 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView
 					$result[$parts[1]."[".$parts[2]."]"] = $parts[3];
 				} else {
 					$str = explode("=",$currentField);
+								
 					$result[$str[0]] = $str[1];
 				}
 			}

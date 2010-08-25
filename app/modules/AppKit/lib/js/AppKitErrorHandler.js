@@ -5,7 +5,7 @@
 
 Ext.ns("AppKit.errorHandler");
 (function() {
-	AppKit.errorHandler = new function() {
+	AppKit.BugTracker = new function() {
 		var errorMsg = function(msg,file,line) {
 			this.msg = 'No message available';
 			this.file = 'No file available';
@@ -22,9 +22,7 @@ Ext.ns("AppKit.errorHandler");
 			} catch(e) {}
 		};
 
-		var errorReport = function() {
-
-			
+		var errorReport = function() {	
 			this.getHeader = function() {
 				return  ";---------------------------------------------------\n"+
 					";Icinga Interface Error Report	\n"+
@@ -90,12 +88,11 @@ Ext.ns("AppKit.errorHandler");
 
 		var occuredErrors = [];
 		var suspended = false;
-		var showErrors = true;
+		var showErrors = false;
 		var handleError = function(msg,file,line) {
-			AppKit.log("!");
 			var curError = new errorMsg(msg,file,line);
 			occuredErrors.push(curError);
-
+			AppKit.log(showErrors);
 			if(showErrors) {
 				updateErrorDisplay();
 			}
@@ -118,7 +115,7 @@ Ext.ns("AppKit.errorHandler");
 			bugReportField = new Ext.Button({
 				text: occuredErrors.length,
 				iconCls: 'icinga-icon-bug',
-				handler: AppKit.errorHandler.showErrorMessageInfoBox
+				handler: AppKit.BugTracker.showErrorMessageInfoBox
 			})
 			elem.addItem(bugReportField);
 			elem.doLayout();
@@ -136,7 +133,7 @@ Ext.ns("AppKit.errorHandler");
 				return occuredErrors;
 			},
 			setError: function(msg,file,line) {
-				this.handleError(msg,file,line);
+				handleError(msg,file,line);
 			},
 
 			suspend: function() {
@@ -151,6 +148,10 @@ Ext.ns("AppKit.errorHandler");
 
 			isSuspended: function() {
 				return suspended
+			},
+
+			setShowErrors: function(bool) {
+				showErrors = bool;
 			},
 
 			showErrorMessageInfoBox: function() {
@@ -251,6 +252,110 @@ Ext.ns("AppKit.errorHandler");
 		}
 
 	}
+	AppKit.AjaxErrorHandler = new function() {
+		
+		var notifyBoxEnabled = false;
+		var bugTrackerReportEnabled = false;
+		// set user settings on startup
+		
+
+		var trackError = function(msg,src,line,isBug) {
+			src = src || 'Unknown';
+			line  = line || 'Unknown';
+			if(notifyBoxEnabled)
+				AppKit.notifyMessage(_('Request failed'),msg);
+			if(isBug && bugTrackerReportEnabled)
+				AppKit.BugTracker.setError(msg,src,line);
+		}
+
+		// Set up error handling for all automatic requests
+		Ext.data.DataProxy.on('exception',function(proxy,type,action, options,response, arg) {
+			handleError(response,proxy);
+		});
+
+		// Setup error handling for Ext.Ajax
+		Ext.Ajax.on("requestException",function(conn,response,opts) {
+			handleError(response,opts);
+		})
+		var handleError = function(response,proxy) {
+			switch(response.status) {
+				case 404:
+					AppKit.AjaxErrorHandler.error_404(proxy.url);
+					break;
+				case 401:
+					AppKit.AjaxErrorHandler.error_401(proxy.url);
+					break;
+				case 500:
+					AppKit.AjaxErrorHandler.error_500(proxy.url,response);
+					break;
+				default:
+					AppKit.AjaxErrorHandler.error_unknown(proxy.url,response.responseText);
+					break;
+			}
+		}
+		return {
+			enableErrorNotifyBox : function() {
+				notifyBoxEnabled = true;
+			},
+			disableErrorNotifyBox : function() {
+				notifyBoxEnabled = false;
+			},
+			enableBugTrackerReport: function() {
+				bugTrackerReportEnabled = true;
+			},
+			disableBugTrackerReport: function() {
+				bugTrackerReporEnabled = false;
+			},
+			error_404 : function(target) {
+				trackError(_("Ressource "+target+" could not be loaded - is the url correct?"))
+			},
+			error_500 : function(target,response) {
+				var msg = 'Internal Exception, check your logs!';
+				var json = {}
+				try {
+					json = Ext.decode(response.responseText)
+					msg = (json ? json.errorMessage  : response.responseText.length <400 ? response.responseText : response.responseText.substr(0,200)+"...");
+				} catch(e) {
+					msg = 'Internal Exception, check your logs!';
+				}
+				trackError(_("The server encountered an error:<br/>")+msg,target,'XHR Request',(json ? json.isBug || false : false));
+			},
+			error_401 : function(target) {
+				trackError(_("Access denied"));
+			},
+			error_unknown : function(target,error) {
+				trackError(_("A error occured when requesting ")+target+" : "+error.length <200 ? error: error.substr(0,200)+"...");
+			}
+		}
+
+		
+	};
+
+	var setupErrorHandler = function() {
+		var setHandlerFunc = function() {
+			if(AppKit.getPreferences()["org.icinga.errorNotificationsEnabled"] == 'true') {
+				AppKit.AjaxErrorHandler.enableErrorNotifyBox();
+			} else {
+				AppKit.AjaxErrorHandler.disableErrorNotifyBox();
+			}
+			if(AppKit.getPreferences()["org.icinga.bugTrackerEnabled"]  == 'true') {
+				AppKit.BugTracker.setShowErrors(true);
+				AppKit.AjaxErrorHandler.enableBugTrackerReport();
+			} else {
+				AppKit.BugTracker.setShowErrors(false);
+				AppKit.AjaxErrorHandler.disableBugTrackerReport();
+			}
+
+		}
+		if( AppKit.getPreferences()["org.icinga.errorNotificationsEnabled"] &&
+				AppKit.getPreferences()["org.icinga.bugTrackerEnabled"]) {
+			setHandlerFunc();
+		} else {
+			setupErrorHandler.defer(300);
+		}
+	}
+	setupErrorHandler();
+
 
 
 })();

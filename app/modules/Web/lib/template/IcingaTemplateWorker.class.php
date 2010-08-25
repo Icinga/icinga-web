@@ -100,7 +100,6 @@ class IcingaTemplateWorker {
 					$this->api_count->setResultColumns($fields);
 					$this->api_count->setResultType(IcingaApi::RESULT_ARRAY);
 					$result  = $this->api_count->fetch();
-
 					// Try to determine the fields
 					$row = $result->getRow();
 					
@@ -143,8 +142,9 @@ class IcingaTemplateWorker {
 	private function getDataAsArray() {
 		if ($this->api_search !== null) {
 			$data = array ();
-			foreach ($this->api_search->fetch() as $result) {
-				
+			$dataSet = $this->api_search->fetch();
+								
+			foreach ($dataSet as $result) {
 				if ($this->result_count === null) {
 					$this->result_count = $result->getResultCount();
 				}
@@ -303,6 +303,7 @@ class IcingaTemplateWorker {
 			}
 			
 			$this->api_search =& $search;
+			
 		}
 
 		return true;

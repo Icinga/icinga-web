@@ -1,5 +1,6 @@
 <?php
 	$user =& $t["user"];
+	
 ?>
 <script type='text/javascript'>
 Ext.ns("AppKit.UserPrefs");
@@ -10,7 +11,9 @@ Ext.onReady(function() {
 		storeId: 'availableLocales',
 		root: 'locales',
 		idProperty: 'id',
-		fields: ['id','description','isCurrent']
+		fields: ['id','description','isCurrent'],
+		successProperty: 'success'
+		
 	});
 	
 	AppKit.UserPrefs.container = new Ext.Container({
@@ -30,13 +33,15 @@ Ext.onReady(function() {
 			items: new Ext.form.FormPanel({
 				padding:5,
 				border:false,
+				width: 250,
 				items: [{
 					xtype:'fieldset',
 					title: _('Language settings'),
 					padding:5,
+
 					layout:'form',
 					defaults: {
-						labelWidth: 250
+						labelWidth: 100
 					},
 					items: [{
 						fieldLabel: _('Language'),
@@ -65,7 +70,9 @@ Ext.onReady(function() {
 							});
 						}
 					}]
-				},{
+				}
+<?php if(!$t["isDemoSystem"])  { ?>
+				,{
 					title:_('Change Password'),
 					xtype: 'fieldset',
 					padding:5,
@@ -113,7 +120,9 @@ Ext.onReady(function() {
 							}
 						}
 					}]
-				},{
+				}
+<?php } ?>
+				,{
 					title: _('Advanced'),
 					type:'fieldset',
 					collapsible:true,
@@ -172,7 +181,7 @@ Ext.onReady(function() {
 						listeners: {
 							beforeedit: function(event)  {
 								if(event.value == 'BLOB') {
-									AppKit.Ext.infoField("This item is read only!",2);
+									AppKit.notifyMessage(_("Can't modify"),_("This item is read only!"));
 									return false;
 								}
 							},
@@ -241,6 +250,7 @@ Ext.onReady(function() {
 								success: function() {
 									AppKit.notifyMessage(_('App reset'), _('Your application profile has been deleted!'));
 								}
+
 							});
 						} catch(e) {
 							mask.hide();

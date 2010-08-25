@@ -414,6 +414,65 @@
             </order>
         </field>  
 
+
+<!--	Example for adding a iframe cronk that creates an url depending on db-variables
+		<field name="eventDB_link">
+            <datasource>
+            	<parameter name="field">HOST_NAME</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">22</parameter>
+
+               
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+
+	                	 renderer/gridevent[cellclick|celldblclick|...] 
+	                	<parameter name="type">renderer</parameter>
+
+	                	<parameter name="arguments">
+							<parameter name="image">images/icons/table.png</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Go to Event DB</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+
+					<parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">iFrameCronk</parameter>
+
+	                	 renderer/gridevent[cellclick|celldblclick|...] 
+	                	<parameter name="type">cellclick</parameter>
+
+	                	<parameter name="arguments">
+	                		<parameter name="title">EventDB for {host_name}</parameter>
+	                		<parameter name="url">http://localhost/{host_name}/{host_object_id}</parameter>
+	                	</parameter>
+	                </parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>-->
         <field name="host_info">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>

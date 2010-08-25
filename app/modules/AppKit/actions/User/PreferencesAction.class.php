@@ -33,7 +33,6 @@ class AppKit_User_PreferencesAction extends AppKitBaseAction
 	
 	public function executeWrite(AgaviRequestDataHolder $rd) {
 		$user = $this->getContext()->getUser();
-
 		if(!$user)
 			throw new AppKitException("User doesn't exist!");
 

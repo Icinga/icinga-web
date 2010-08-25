@@ -50,6 +50,8 @@
 					<ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
 					<ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
 					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
+					<ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
+					<ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
 				</setting>
 
 				<!-- Adding styles -->

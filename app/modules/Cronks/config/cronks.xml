@@ -231,6 +231,16 @@
 				<ae:parameter name="password">guest</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
+
+		<ae:parameter name="genericIFrame">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.IframeView</ae:parameter>
+			<ae:parameter name="hide">true</ae:parameter>
+			<ae:parameter name="description">View something within an iframe</ae:parameter>
+			<ae:parameter name="name">Icinga</ae:parameter>
+			<ae:parameter name="image">cronks.world</ae:parameter>
+			<ae:parameter name="categories">misc</ae:parameter>
+		</ae:parameter>
 		<!-- Iframes - [STOP] -->
 
 		<!--
