@@ -7848,7 +7848,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6950
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/exception.css $(DESTDIR)$(prefix)/pub/styles/exception.css
+INC_FILES=6950
 INC_DIRS=893
 # INSTALL_FILES_END
