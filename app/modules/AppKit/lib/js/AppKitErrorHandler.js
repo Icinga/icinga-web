@@ -88,11 +88,10 @@ Ext.ns("AppKit.errorHandler");
 
 		var occuredErrors = [];
 		var suspended = false;
-		var showErrors = false;
+		var showErrors = true;
 		var handleError = function(msg,file,line) {
 			var curError = new errorMsg(msg,file,line);
 			occuredErrors.push(curError);
-			AppKit.log(showErrors);
 			if(showErrors) {
 				updateErrorDisplay();
 			}
@@ -254,8 +253,8 @@ Ext.ns("AppKit.errorHandler");
 	}
 	AppKit.AjaxErrorHandler = new function() {
 		
-		var notifyBoxEnabled = false;
-		var bugTrackerReportEnabled = false;
+		var notifyBoxEnabled = true;
+		var bugTrackerReportEnabled = true;
 		// set user settings on startup
 		
 

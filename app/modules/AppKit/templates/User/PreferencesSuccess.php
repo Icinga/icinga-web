@@ -30,6 +30,7 @@ Ext.onReady(function() {
 		items: [{
 			layout:'fit',
 			region: 'center',
+
 			items: new Ext.form.FormPanel({
 				padding:5,
 				border:false,
@@ -270,6 +271,7 @@ Ext.onReady(function() {
 			new Ext.Window({
 				layout:'fit',
 				width:330,
+
 				title: _('New Preference'),
 				closeMethod: 'hide',
 				hidden:false,
