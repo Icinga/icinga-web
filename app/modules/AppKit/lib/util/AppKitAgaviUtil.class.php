@@ -38,7 +38,7 @@ class AppKitAgaviUtil {
 			$severity = array_pop($argv);
 			$format = array_shift($argv);
 		}
-
+		
 		return self::getContext()->getLoggerManager()->log(@vsprintf($format, $argv), $severity);
 	}
 
