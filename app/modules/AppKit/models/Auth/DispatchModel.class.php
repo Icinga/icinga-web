@@ -103,7 +103,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 		return false;
 	}
 	
-	public function &doAuthenticate($username, $password) {
+	public function doAuthenticate($username, $password) {
 
 		/**
 		 * 1. Find the user

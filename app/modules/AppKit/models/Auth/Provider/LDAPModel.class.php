@@ -8,7 +8,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 	 * (non-PHPdoc)
 	 * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#doAuthenticate()
 	 */
-	public function doAuthenticate(NsmUser &$user, $password) {
+	public function doAuthenticate(NsmUser $user, $password) {
 		$authid = $user->getAuthId();
 		$username = $user->user_name;
 		
@@ -139,7 +139,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 		
 		$linkid = (int)$bind;
 		
-		if (($res =& $this->ldapLink($linkid)) !== null) {
+		if (($res = $this->ldapLink($linkid)) !== null) {
 			$this->log('Auth.Provider.LDAP Using existing link (linkid=%d,res=%s)', $linkid, $res, AgaviLogger::ERROR);
 			return $res;
 		}
