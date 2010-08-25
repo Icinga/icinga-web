@@ -3,6 +3,52 @@
 		<!-- 
 			Locale information:
 			
+			#loc: COMMENT_AUTHOR_NAME
+			#loc: COMMENT_TIME
+			#loc: COMMENT_DATA
+		-->
+		<ae:parameter name="comments">
+			<ae:parameter name="module">Web</ae:parameter>
+			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+			<ae:parameter name="description">query for host information</ae:parameter>
+			<ae:parameter name="target">IcingaApi::TARGET_COMMENT</ae:parameter>
+			<ae:parameter name="result_columns">
+				<ae:parameter>
+					<ae:parameter name="field">COMMENT_AUTHOR_NAME</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">COMMENT_TIME</ae:parameter>
+					<ae:parameter name="type">timestamp</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">COMMENT_DATA</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="filter">
+			</ae:parameter>
+			<ae:parameter name="user_filters">
+				<ae:parameter name="object_id">
+					<ae:parameter name="column">COMMENT_OBJECT_ID</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter name="instance_id">
+					<ae:parameter name="column">COMMENT_INSTANCE_ID</ae:parameter>
+					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="order">
+				<ae:parameter name="column">COMMENT_TIME</ae:parameter>
+				<ae:parameter name="direction">ASC</ae:parameter>
+			</ae:parameter>
+			<ae:parameter name="limit">
+				<!-- <ae:parameter name="start">1</ae:parameter> -->
+				<!-- <ae:parameter name="length">1</ae:parameter> -->
+			</ae:parameter>
+		</ae:parameter>
+
+		<!-- 
+			Locale information:
+			
 			#loc: HOST_ADDRESS
 			#loc: HOST_ALIAS
 			#loc: HOST_DISPLAY_NAME

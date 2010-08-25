@@ -221,6 +221,7 @@
         -->
        	<parameter name="additional_fields">
        		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
+       		<parameter name="instance_id">SERVICE_INSTANCE_ID</parameter>
        	</parameter>
        	
        	<parameter name="additional_filter_fields">
@@ -406,6 +407,42 @@
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
         </field>
+        
+		<field name="service_comments">
+			<datasource>
+            	<parameter name="field">SERVICE_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">26</parameter>
+
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+				<parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="method">icingaComments</parameter>
+                	<parameter name="arguments">
+                		<parameter name="object_id_field">service_comments</parameter>
+                		<parameter name="instance_id_field">instance_id</parameter>
+                	</parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+		</field>
         
         <field name="service_info">
             <datasource>

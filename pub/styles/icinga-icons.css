@@ -199,3 +199,6 @@
 .icinga-icon-service { background-image: url(../images/icons/cog.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-hostgroup { background-image: url(../images/icons/server_database.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-servicegroup { background-image: url(../images/icons/database_gear.png) !important; background-repeat: no-repeat; background-position: center center; }
+
+.icinga-icon-comment { background-image: url(../images/icons/comment.png) !important; background-repeat: no-repeat; background-position: center center; }
+

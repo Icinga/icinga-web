@@ -134,8 +134,6 @@ Icinga.util.SimpleDataProvider = (function () {
 				'</tpl>'
 			);
 			
-			console.log(responseObj.result);
-			
 			tpl.overwrite(el, responseObj.result);
 		};
 		
@@ -151,3 +149,14 @@ Icinga.util.SimpleDataProvider = (function () {
 
 		return pub;
 })();
+
+Icinga.util.showComments = function(oid, instanceid, target) {
+	Icinga.util.SimpleDataProvider.createToolTip({
+		srcId: 'comments',
+		filter: [
+			{key: 'object_id', value: oid},
+			{key: 'instance_id', value: instanceid}
+		],
+		target: target
+	});
+}

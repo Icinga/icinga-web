@@ -56,7 +56,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 	}
 
 	private function applyFilter () {
-		if (array_key_exists('filter', $this->config) && $this->config['filter'] !== false) {			
+		if (array_key_exists('filter', $this->config) && $this->config['filter'] !== false && is_array($this->config['filter'])) {			
 			$filterDefs = (array_key_exists('column', $this->config['filter'])) ? array($this->config['filter']) : $this->config['filter'];
 			foreach ($filterDefs as $filter) {
 				$apiFilter = array($filter['column'], $filter['value']);
@@ -99,7 +99,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 	}
 
 	public function setLimit () {
-		if (array_key_exists('limit', $this->config) && $this->config['limit'] !== false) {
+		if (array_key_exists('limit', $this->config) && $this->config['limit'] !== false && is_array($this->config['limit'])) {
 			$limitDefs = $this->config['limit'];
 			if (array_key_exists('length', $limitDefs)) {
 				$this->setSearchLimit($limitDefs['start'], $limitDefs['length']);
