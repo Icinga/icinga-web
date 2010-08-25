@@ -1,0 +1,64 @@
+html {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 7pt;
+	background-color:#efefef;
+}
+
+.icinga_exceptionBox {
+	margin:5%;
+	padding:1%;
+	border:1px solid #9a9a9a;
+	background-color:white;
+	-moz-box-shadow:-5px 5px 5px #bababa;
+	-webkit-box-shadow:-5px 5px 5px #bababa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+
+.icinga_exceptionBox .exception_header {
+	margin:5px;
+	padding-left:75px;
+	font-weight:bold;
+	font-size:20px;
+	padding-top:45px;
+	background-image: url(../images/icinga/idot.png) !important; background-repeat: no-repeat;
+	margin-bottom:45px;
+}
+
+.icinga_exceptionBox .exception_message {
+	margin:3px;
+	border:1px solid #afafaf;
+	padding:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+
+.icinga_exceptionBox .exception_title {
+	font-weight:bold;
+	margin-top:10px;
+	margin-bottom:2px;
+	font-size:10px;
+
+}
+
+.icinga_exceptionBox .exception_text {
+	width:80%;
+	padding:5px;
+	border:1px solid #dedede;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	background-color: #dedede;
+}
+
+.icinga_exceptionBox .exception_stacktrace {
+	margin-top:10px;
+	border:1px solid #dedede;
+	padding:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
