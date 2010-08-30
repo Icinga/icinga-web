@@ -96,7 +96,17 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
 		$res = $search->fetch()->getAll();
-
+		//Setup count
+		if($rd->getParameter("countColumn")) {
+			$search = @$API->createSearch()->setSearchTarget($target);
+			$search->setSearchType(IcingaApiSearch::SEARCH_TYPE_COUNT);
+			$this->addFilters($search,$rd);
+			$this->setColumns($search,$rd);
+			$search->setResultType(IcingaApiSearch::RESULT_ARRAY);
+			
+			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
+			$rd->setParameter("searchCount",$search->fetch()->getAll());
+		}
 		$rd->setParameter("searchResult", $res);
 		return $this->getDefaultViewName();
 	}
@@ -104,9 +114,13 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 	protected function addFilters(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
 		// URL filter definitions
 		$field = $rd->getParameter("filter",null);
-		if(!empty($field))
-			$this->buildFiltersFromArray($search,$field);
-			
+	
+		if(empty($field)) {
+			$field = json_decode($rd->getParameter("filters_json"),true);
+		}
+		if(!empty($field)) {
+			$search->setSearchFilter($this->buildFiltersFromArray($search,$field));
+		}
 		// POST filter definitions
 		$advFilter = $rd->getParameter("filters",array());
 
@@ -118,14 +132,20 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 
 	public function buildFiltersFromArray(IcingaApiSearchIdo $search, array $filterdef) {
 		$searchField = $filterdef;
+
 		if(isset($filterdef["type"]))
 			$searchField = $filterdef["field"];
+		$filterGroup = $search->createFilterGroup($filterdef["type"]);
 		foreach($searchField as $element) {
 			if($element["type"] == "atom")
-				$search->setSearchFilter($element["field"][0],$element["value"][0],$element["method"][0]);
+				$filterGroup->addFilter($search->createFilter($element["field"][0],$element["value"][0],$element["method"][0]));
+			else
+				$filterGroup->addFilter($this->buildFiltersFromArray($search,$element));
 		}
 
+		return $filterGroup;
 	}
+
 
 	public function setGrouping(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
 		$groups = $rd->getParameter("groups",array());
@@ -149,6 +169,10 @@ class Web_Icinga_ApiSearchAction extends IcingaWebBaseAction
 	}
 
 	public function setColumns(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+		if($search->getSearchType() == IcingaApiSearch::SEARCH_TYPE_COUNT) {
+			$search->setResultColumns($rd->getParameter("countColumn"));
+			return true;
+		}
 		$columns = $rd->getParameter("columns",null);
 		if(!is_null($columns))
 			$search->setResultColumns($columns);
