@@ -22,6 +22,90 @@
 		<available_locale identifier="pt">
 		  <ae:parameter name="description">Português</ae:parameter>
 		</available_locale>
+		<!-- Bulgarian -->
+		<available_locale identifier="bg">
+		  <ae:parameter name="description">Bulgarian</ae:parameter>
+		</available_locale>
+		<!-- Catalan -->
+		<available_locale identifier="ca">
+		  <ae:parameter name="description">Catalan</ae:parameter>
+		</available_locale>
+		<!-- Danish -->
+		<available_locale identifier="da">
+		  <ae:parameter name="description">Danish</ae:parameter>
+		</available_locale>
+		<!-- Greek -->
+		<available_locale identifier="el">
+		  <ae:parameter name="description">Greek</ae:parameter>
+		</available_locale>
+		<!-- Finnish -->
+		<available_locale identifier="fi">
+		  <ae:parameter name="description">Finnish</ae:parameter>
+		</available_locale>
+		<!-- French -->
+		<available_locale identifier="fr">
+		  <ae:parameter name="description">French</ae:parameter>
+		</available_locale>
+		<!-- Hebrew -->
+		<available_locale identifier="he">
+		  <ae:parameter name="description">Hebrew</ae:parameter>
+		</available_locale>
+		<!-- Croatian -->
+		<available_locale identifier="hr">
+		  <ae:parameter name="description">Croatian</ae:parameter>
+		</available_locale>
+		<!-- Hungarian -->
+		<available_locale identifier="hu">
+		  <ae:parameter name="description">Hungarian</ae:parameter>
+		</available_locale>
+		<!-- Italian -->
+		<available_locale identifier="it">
+		  <ae:parameter name="description">Italian</ae:parameter>
+		</available_locale>
+		<!-- Japanese -->
+		<available_locale identifier="ja">
+		  <ae:parameter name="description">Japanese</ae:parameter>
+		</available_locale>
+		<!-- Luxembourgish -->
+		<available_locale identifier="lb">
+		  <ae:parameter name="description">Luxembourgish</ae:parameter>
+		</available_locale>
+		<!-- Bokmål -->
+		<available_locale identifier="nb">
+		  <ae:parameter name="description">Bokmål</ae:parameter>
+		</available_locale>
+		<!-- Dutch -->
+		<available_locale identifier="nl">
+		  <ae:parameter name="description">Dutch</ae:parameter>
+		</available_locale>
+		<!-- Norwegian -->
+		<available_locale identifier="nn">
+		  <ae:parameter name="description">Norwegian</ae:parameter>
+		</available_locale>
+		<!-- Romanian -->
+		<available_locale identifier="ro">
+		  <ae:parameter name="description">Romanian</ae:parameter>
+		</available_locale>
+		<!-- Russian -->
+		<available_locale identifier="ru">
+		  <ae:parameter name="description">Russian</ae:parameter>
+		</available_locale>
+		<!-- Slovak -->
+		<available_locale identifier="sk">
+		  <ae:parameter name="description">Slovak</ae:parameter>
+		</available_locale>
+		<!-- Swedish -->
+		<available_locale identifier="sv">
+		  <ae:parameter name="description">Swedish</ae:parameter>
+		</available_locale>
+		<!-- Turkish -->
+		<available_locale identifier="tr">
+		  <ae:parameter name="description">Turkish</ae:parameter>
+		</available_locale>
+		<!-- Chinese -->
+		<available_locale identifier="zh_CN">
+		  <ae:parameter name="description">Chinese</ae:parameter>
+		</available_locale>
 	 </available_locales>
 	 <!--
 		
