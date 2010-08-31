@@ -15,17 +15,21 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.0.3
-#Release: 1%{?dist}
-Release: 1
+Version: 1.0.2
+Release: 2%{?dist}
 License: GPL
 Group: Applications/System
 URL: http://www.icinga.org/
+BuildArch: noarch
 
-Source0: icinga-web-1.0.3.tar.gz
+Source0: icinga-web-%{version}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
+BuildRequires: php >= 5.2.3
+BuildRequires: icinga-api
+BuildRequires: httpd
+Requires: perl(Locale::PO)
 Requires: php >= 5.2.3
 Requires: php-pear
 Requires: php-gd
@@ -36,41 +40,26 @@ Requires: php-dom
 Requires: php-common
 Requires: php-spl
 Requires: pcre >= 7.6
-
 Requires: icinga-api
 
-##############################
 %description
-##############################
-
 Icinga Web for Icinga Core, requires Icinga API.
 
-##############################
 %prep
-##############################
-
 %setup -n %{name}-%{version}
 
-##############################
 %build
-##############################
-
 %configure \
     --prefix="%{_datadir}/icinga-web" \
     --datadir="%{_datadir}/icinga-web" \
     --datarootdir="%{_datadir}/icinga-web" \
     --with-web-user='%{apacheuser}' \
     --with-web-group='%{apacheuser}' \
-    --with-icinga-api='%{_datadir}/icinga/share/icinga-api' \
+    --with-icinga-api='%{_datadir}/icinga/icinga-api' \
     --with-web-apache-path=%{apacheconfdir}
 
-# resolve possible wrong files for makefile
-#%{__make} devclean
 
-##############################
 %install
-##############################
-
 %{__rm} -rf %{buildroot}
 %{__mkdir} -p %{buildroot}/%{apacheconfdir}
 %{__make} install \
@@ -104,42 +93,36 @@ Icinga Web for Icinga Core, requires Icinga API.
 
 %{__rm} -rf %{buildroot}
 
-##############################
 %files
-##############################
-
+%defattr(-,root,root)
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
 %config(noreplace) %{_datadir}/icinga-web/app/config/databases.xml
 %config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml
-
-%{_datadir}/icinga-web/app/cache/config
-
+%attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache
+%attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache/config
 %{_datadir}/icinga-web/app/config
-
 %{_datadir}/icinga-web/app/data
-
+%attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/data/log
 %{_datadir}/icinga-web/app/lib
-
 %{_datadir}/icinga-web/app/modules
-
 %{_datadir}/icinga-web/app/templates
-
 %{_datadir}/icinga-web/app/config.php
-
 %{_datadir}/icinga-web/bin
-
 %{_datadir}/icinga-web/doc
-
 %{_datadir}/icinga-web/etc
-
 %{_datadir}/icinga-web/lib
-
 %{_datadir}/icinga-web/pub
 
 
 ##############################
 %changelog
 ##############################
+* Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
+- add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise
+- change icinga-api path to value used in icinga-api-rpm
+- set defattr
+- set ownership to apache for log-dirs
+
 * Tue Aug 17 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.0.3-1
 - updated for 1.0.3, removed fix-priv fix-libs as this is now in make install
 
