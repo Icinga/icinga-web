@@ -506,7 +506,7 @@
 							<parameter name="image">images/icons/image.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Go to Event DB</parameter>
+								<parameter name="qtip">Display performance graph</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>

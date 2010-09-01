@@ -7864,6 +7864,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/bricks.png $(DESTDIR)$(prefix)/pub/images/icons/bricks.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/bug.png $(DESTDIR)$(prefix)/pub/images/icons/bug.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cancel.png $(DESTDIR)$(prefix)/pub/images/icons/cancel.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/chart_bar.png $(DESTDIR)$(prefix)/pub/images/icons/chart_bar.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cog.png $(DESTDIR)$(prefix)/pub/images/icons/cog.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cross.png $(DESTDIR)$(prefix)/pub/images/icons/cross.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/database_go.png $(DESTDIR)$(prefix)/pub/images/icons/database_go.png
@@ -7877,6 +7878,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group_key.png $(DESTDIR)$(prefix)/pub/images/icons/group_key.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group.png $(DESTDIR)$(prefix)/pub/images/icons/group.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/help.png $(DESTDIR)$(prefix)/pub/images/icons/help.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/image.png $(DESTDIR)$(prefix)/pub/images/icons/image.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/information.png $(DESTDIR)$(prefix)/pub/images/icons/information.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/key_add.png $(DESTDIR)$(prefix)/pub/images/icons/key_add.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/key_delete.png $(DESTDIR)$(prefix)/pub/images/icons/key_delete.png
@@ -7920,6 +7922,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7006
+INC_FILES=7008
 INC_DIRS=913
 # INSTALL_FILES_END
