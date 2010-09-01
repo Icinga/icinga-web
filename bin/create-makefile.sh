@@ -4,8 +4,8 @@
 #
 
 DIR="$1"
-IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in$|data/i18n/po|cache/|app\/data|bin\/|agavi/samples).*"
-SRCDIR="app bin doc etc lib pub"
+IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in$|data/i18n/po|cache/|app\/data|agavi/samples).*"
+SRCDIR="app bin doc etc lib pub etc"
 
 declare -i DCOUNT=0
 declare -i FCOUNT=0
