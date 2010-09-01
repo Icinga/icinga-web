@@ -109,7 +109,19 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				    root: 'resultRow',
 				    data: json,
 				    fields: [
-				        'name', 'id', 'description', 'image', 'parameter'
+				        'name', 'id', 'description', 'image', 
+						{
+							name:'parameter',
+							convert:function(v,record) {
+								if(!Ext.isObject(v))
+									return v;
+								for(var i in v) {
+									if(Ext.isObject(v[i]))
+										v[i] = Ext.encode(v[i]);
+								}
+								return v;
+							}
+						}
 				    ]
 				});
 			},

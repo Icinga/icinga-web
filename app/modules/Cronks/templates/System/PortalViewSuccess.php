@@ -35,24 +35,20 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 					portlet.on("add",function(el,resp) {
 						Ext.each(portlet.findByType('container'),function(item) {
         					item.setHeight(portlet.getInnerHeight());
-
         				});
 					});
 
-					portlet.on('resize',function() {
-						Ext.each(portlet.findByType('container'),function(item) {	
-							item.setHeight(portlet.getInnerHeight());						        	
-			        	});
-					},this);
-				
+
+					
 					/**
-					 * Fix width
+					 * Fix width and height
 					 * This must be done via one-shot eventdispatcher to avoid
 					 * endless recursion (resize->change width->width changed->resize->...)
 					 */
 					var resizeFunc = function(el) {
 						Ext.each(portlet.findByType('container'),function(item) {	
-							item.setWidth(portlet.getInnerWidth());		        
+							item.setWidth(portlet.getInnerWidth());
+							item.setHeight(portlet.getInnerHeight());
 		        		});		
 		        		// Attach the listener again after resize
 						portlet.on('resize',resizeFunc,this,{single:true})
