@@ -105,7 +105,7 @@ Cronk.grid.IcingaColumnRenderer = {
 			var title = titleTpl.apply(data);
 			var tabPanel = Ext.getCmp("cronk-tabs");
 			AppKit.log(url);
-			tabPanel.add({
+			var cmp = tabPanel.add({
 				'xtype': 'cronk',
 				'title': title,
 				'crname': 'genericIFrame',
@@ -115,7 +115,11 @@ Cronk.grid.IcingaColumnRenderer = {
 				'closable':true
 			});
 			tabPanel.doLayout();
-			
+		
+			if (!Ext.isEmpty(cfg.activateOnClick) && cfg.activateOnClick) {
+				tabPanel.setActiveTab(cmp);
+			}
+				
 		}
 	}
 };
