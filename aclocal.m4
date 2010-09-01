@@ -34,7 +34,7 @@ AC_DEFUN([ACICINGA_CHECK_API], [
 	AC_MSG_CHECKING([for IcingaApi])
 	AS_IF([ test -e $1/IcingaApi.php && $GREP -q "class IcingaApi" $1/IcingaApi.php ],
 		[ AC_MSG_RESULT([found])    ],
-		[ AC_MSG_WARN([not found]) ])
+		[ AC_MSG_ERROR([not found]) ])
 ])
 
 AC_DEFUN([ACICINGA_EXTRACT_VERSION], [

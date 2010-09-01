@@ -24,3 +24,6 @@ inc-install-special:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/phing $(DESTDIR)$(prefix)/bin/phing
 	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/rmtmp-files.sh $(DESTDIR)$(prefix)/bin/rmtmp-files.sh
 	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
+
+	# PHING BUILD Properties
+	$(INSTALL) -m 600 $(INSTALL_OPTS) etc/build.properties $(DESTDIR)$(prefix)/etc/build.properties
