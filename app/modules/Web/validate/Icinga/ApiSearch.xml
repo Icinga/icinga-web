@@ -77,7 +77,7 @@
 				</errors>
 				<ae:parameters>
 					<ae:parameter name="type">string</ae:parameter>
-					<ae:parameter name="case">true</ae:parameter>
+					<ae:parameter name="case">false</ae:parameter>
 					<ae:parameter name="values">
 						<ae:parameter>desc</ae:parameter>
 						<ae:parameter>asc</ae:parameter>
