@@ -13,6 +13,12 @@ Cronk.grid.ColumnRendererUtil = function() {
 			Ext.applyIf(meta, o);
 			
 			return meta;
+		},
+		
+		applyXTemplate : function(grid, index, string) {
+			var data = grid.getStore().getAt(index).data;
+			var tpl = new Ext.XTemplate(string);
+			return tpl.apply(data);
 		}
 	}
 	

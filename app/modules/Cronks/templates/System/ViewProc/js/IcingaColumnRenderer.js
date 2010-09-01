@@ -75,12 +75,12 @@ Cronk.grid.IcingaColumnRenderer = {
 
 		return function(grid, rowIndex, colIndex, e) {
 			
+			var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
+			
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
 
 			if (fieldName == cfg.field) {
-				var data = grid.getStore().getAt(rowIndex).data;
-				var tpl = new Ext.XTemplate(cfg.url);
-				var url = tpl.apply(data);
+				var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url)
 				var windowName = fieldName;
 
 				if (Ext.isEmpty(cfg.newWindow) || cfg.newWindow == false) {
@@ -92,32 +92,78 @@ Cronk.grid.IcingaColumnRenderer = {
 		}
 	},
 
+	imagePopup : function(cfg) {
+		if (!'url' in cfg) {
+			throw('url XTemplate configuration needed! (parameter name="url")');
+		}
+		return function(grid, rowIndex, colIndex, e) {
+			var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
+			var title = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.title);
+			
+			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
+			if (fieldName == cfg.field) {
+				
+				var dhelper_spec = {
+						tag: 'img',
+						src: url
+				};
+				
+				var qtip_spec = {
+						target: e.getTarget(),
+						bodyCfg: dhelper_spec,
+						title: title,
+						anchor: 'left'
+				};
+				
+				Ext.iterate(['width', 'height'], function(item, index, allItems) {
+					if (!Ext.isEmpty(cfg[item])) {
+						qtip_spec[item] = cfg[item] 
+					}
+				});
+				
+				var toolTip = new Ext.ToolTip(qtip_spec);
+				
+				toolTip.render(Ext.getBody());
+				
+				toolTip.on('hide', function(tt) {
+					tt.destroy();
+				});
+				
+				toolTip.show();
+			}
+		}
+	},
+	
 	iFrameCronk: function(cfg) {
 		
 		if (!'url' in cfg) {
 			throw('url XTemplate configuration needed! (parameter name="url")');
 		}
 		return function(grid, rowIndex, colIndex, e) {
-			var data = grid.getStore().getAt(rowIndex).data;
-			var urlTpl = new Ext.XTemplate(cfg.url);
-			var url = urlTpl.apply(data);
-			var titleTpl = new Ext.XTemplate(cfg.title);
-			var title = titleTpl.apply(data);
-			var tabPanel = Ext.getCmp("cronk-tabs");
-			AppKit.log(url);
-			var cmp = tabPanel.add({
-				'xtype': 'cronk',
-				'title': title,
-				'crname': 'genericIFrame',
-				'params': {
-					url:  url
-				},
-				'closable':true
-			});
-			tabPanel.doLayout();
-		
-			if (!Ext.isEmpty(cfg.activateOnClick) && cfg.activateOnClick) {
-				tabPanel.setActiveTab(cmp);
+			
+			var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
+			var title = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.title);
+			
+			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
+			if (fieldName == cfg.field) {
+				
+				var tabPanel = Ext.getCmp("cronk-tabs");
+				AppKit.log(url);
+				var cmp = tabPanel.add({
+					'xtype': 'cronk',
+					'title': title,
+					'crname': 'genericIFrame',
+					'params': {
+						url:  url
+					},
+					'closable':true
+				});
+				tabPanel.doLayout();
+			
+				if (!Ext.isEmpty(cfg.activateOnClick) && cfg.activateOnClick) {
+					tabPanel.setActiveTab(cmp);
+				}
+			
 			}
 				
 		}
