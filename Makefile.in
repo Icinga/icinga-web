@@ -117,7 +117,7 @@ create-tarball:
 
 create-tarball-nightly:
 	#${MAKE} submodule-update
-	./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-`date +%Y%m%d`-`git rev-parse --short HEAD`/
+	./bin/make-tarball --prefix $(PACKAGE_TARNAME)_$(PACKAGE_VERSION)_`date +%Y%m%d`-`git rev-parse --short HEAD`/
 
 testdeps:
 	 $(PHP) bin/testdeps.php
