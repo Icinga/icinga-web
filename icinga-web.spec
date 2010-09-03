@@ -15,7 +15,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.0.2
+Version: 1.0.3_20100903_614627c
 Release: 2%{?dist}
 License: GPL
 Group: Applications/System
@@ -67,7 +67,9 @@ Icinga Web for Icinga Core, requires Icinga API.
     DESTDIR="%{buildroot}" \
     INSTALL_OPTS="" \
     COMMAND_OPTS="" \
-    INIT_OPTS=""
+    INIT_OPTS="" \
+    INSTALL_OPTS_WEB="" \
+    INSTALL_OPTS_CACHE="" 
 
 ##############################
 %pre
