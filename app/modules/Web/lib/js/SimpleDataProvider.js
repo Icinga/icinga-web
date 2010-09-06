@@ -119,20 +119,29 @@ Icinga.util.SimpleDataProvider = (function () {
 		pub.outputTable = function (el, success, response, options) {
 			var responseObj = Ext.util.JSON.decode(response.responseText);
 			
-			var tpl = new Ext.XTemplate(
-				'<tpl for="data">',
-				'<div class="icinga-detailed-info-container">',
-				'<table cellpadding="0" cellspacing="0" border="0" class="icinga-detailed-info">',
-				'<tpl for=".">',
-					'<tr>',
-						'<td class="key">{key}</td>',
-						'<td class="val">{val}</td>',
-					'</tr>',
-				'</tpl>',
-				'</table>',
-				'</div>',
-				'</tpl>'
-			);
+			var tpl = null;
+			
+			if (!Ext.isEmpty(responseObj.result.template)) {
+				tpl = new Ext.XTemplate(responseObj.result.template);
+			}
+			else {
+				tpl = new Ext.XTemplate(
+					'<tpl for="data">',
+					'<div class="icinga-detailed-info-container">',
+					'<table cellpadding="0" cellspacing="0" border="0" class="icinga-detailed-info">',
+					'<tpl for=".">',
+						'<tr>',
+							'<td class="key">{key}</td>',
+							'<td class="val">{val}</td>',
+						'</tr>',
+					'</tpl>',
+					'</table>',
+					'</div>',
+					'</tpl>'
+				);
+			}
+			
+			AppKit.log(tpl, responseObj);
 			
 			tpl.overwrite(el, responseObj.result);
 		};

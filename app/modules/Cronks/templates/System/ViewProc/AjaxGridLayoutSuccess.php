@@ -31,44 +31,50 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 				});
 			
 				if (bFilters == true) {
-					
-					var fw = new Cronk.util.GridFilterWindow();
-					
-					fw.setGrid(grid);
-					fw.setFilterCfg( MetaGrid.getFilterCfg() );
-				
-					// Distribute destroy events
-					grid.on('destroy', function() {
-						fw.destroyHandler();
-					});
-					
-					grid.on('refresh', function() {
-						fw.destroyHandler();	
-					});
-					
-				
-					this.topToolbar.add([
-						'-', {
-							text: _("Filter"),
-							iconCls: 'icinga-icon-pencil',
-							menu: { 
-								items: [{ 
-									text: _("Modify"), 
-									iconCls: 'icinga-icon-application-form',
-									handler: fw.startHandler,
-									scope: this
-								},{ 
-									text: _("Remove"), 
-									iconCls: 'icinga-icon-cancel',
-									handler: function(b, e) {
-										fw.removeFilters();
-									},
-									scope: this
-								}]
-							}
+					function initGrid() {
+						// wait till ready
+						if(!Cronk.util.GridFilterWindow) {
+							initGrid.defer(200,this);
+							return false;
 						}
-					]);
-				
+						var fw = new Cronk.util.GridFilterWindow();
+
+						fw.setGrid(grid);
+						fw.setFilterCfg( MetaGrid.getFilterCfg() );
+
+						// Distribute destroy events
+						grid.on('destroy', function() {
+							fw.destroyHandler();
+						});
+
+						grid.on('refresh', function() {
+							fw.destroyHandler();
+						});
+
+
+						this.topToolbar.add([
+							'-', {
+								text: _("Filter"),
+								iconCls: 'icinga-icon-pencil',
+								menu: {
+									items: [{
+										text: _("Modify"),
+										iconCls: 'icinga-icon-application-form',
+										handler: fw.startHandler,
+										scope: this
+									},{
+										text: _("Remove"),
+										iconCls: 'icinga-icon-cancel',
+										handler: function(b, e) {
+											fw.removeFilters();
+										},
+										scope: this
+									}]
+								}
+							}
+						]);
+					}
+					initGrid.call(this);
 				}
 				
 				// If the templates uses commands

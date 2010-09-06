@@ -207,11 +207,13 @@ Cronk.util.InterGridUtil = function(){
 					};
 
 					f = Ext.apply({}, f);
-
-					Ext.iterate(f, function(k,v) {
-						p['f[' + k + '-value]'] = v;
-						p['f[' + k + '-operator]'] = 50;
-					});
+					if(!el.paramSetup) {
+						Ext.iterate(f, function(k,v) {
+							p['f[' + k + '-value]'] = v;
+							p['f[' + k + '-operator]'] = 50;
+						});
+						el.paramSetup = true;
+					}
 					
 					var cronk = {
 						parentid: 'click-to-link-' + id,

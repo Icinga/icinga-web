@@ -25,11 +25,14 @@ class AppKitExceptionHandler extends AppKitBaseClass {
 		// don't die in case of supressed errors (like the ob_clean in the agaviException has)
 
 		if(error_reporting()) {
+			$context = AgaviContext::getInstance();
 			if($context !== null && AgaviConfig::get('exception.templates.' . $context->getName()) !== null) 
 				include(AgaviConfig::get('exception.templates.' . $context->getName()));
 			else
 				include(AgaviConfig::get('exception.default_template'));
 			die();
+		} else {
+			return true;
 		}
 	}
 	

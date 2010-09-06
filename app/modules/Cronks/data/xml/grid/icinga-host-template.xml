@@ -34,7 +34,8 @@
         		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
         		<parameter name="arguments">
         			<parameter name="column_name">comments</parameter>
-        			<parameter name="type">host</parameter>
+               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
+               		<parameter name="title">Comments for {host_name}</parameter>
         		</parameter>
         	</parameter>
         	
@@ -474,7 +475,8 @@
 
 	                	<parameter name="arguments">
 	                		<parameter name="title">EventDB for {host_name}</parameter>
-	                		<parameter name="url">http://localhost/{host_name}/{host_object_id}</parameter>
+	                		<parameter name="url"><![CDATA[http://localhost/{host_name}/{host_object_id}]]></parameter>
+					<parameter name="activateOnClick">true</parameter>
 	                	</parameter>
 	                </parameter>
                 </parameter>
@@ -487,9 +489,72 @@
             <order>
                 <parameter name="enabled">false</parameter>
             </order>
-        </field>-->
+	</field>
+	END EXAMPLE -->
+	
+	<!--  Example to include images on the fly
+	<field name="image_hover">
+            <datasource>
+            	<parameter name="field">HOST_NAME</parameter>
+            </datasource>
 
-		<field name="comments">
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">22</parameter>
+
+               
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+
+	                	 renderer/gridevent[cellclick|celldblclick|...] 
+	                	<parameter name="type">renderer</parameter>
+
+	                	<parameter name="arguments">
+							<parameter name="image">images/icons/image.png</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Display performance graph</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+
+					<parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">imagePopup</parameter>
+
+	                	 renderer/gridevent[cellclick|celldblclick|...] 
+	                	<parameter name="type">cellclick</parameter>
+
+	                	<parameter name="arguments">
+	                		<parameter name="title">Image for {host_name}</parameter>
+	                		<parameter name="url"><![CDATA[http://localhost/pnp4nagios/image?host={host_name}&srv=_HOST_&view=0]]></parameter>
+							<parameter name="width">200</parameter>
+							<parameter name="height">200</parameter>
+	                	</parameter>
+	                </parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+	</field>
+	END EXAMPLE -->
+
+	<field name="comments">
 			<datasource>
             	<parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>
@@ -512,8 +577,6 @@
                 	<parameter name="arguments">
                 		<parameter name="object_id_field">comments</parameter>
                 		<parameter name="instance_id_field">instance_id</parameter>
-                		<!-- <parameter name="class"></parameter> -->
-                		<parameter name="title">Comments for {host_name}</parameter>
                 	</parameter>
                 </parameter>
             </display>

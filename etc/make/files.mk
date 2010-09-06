@@ -702,73 +702,140 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VENDOR $(DESTDIR)$(prefix)/doc/VENDOR
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/VERSION $(DESTDIR)$(prefix)/doc/VERSION
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/apache2
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/apache2
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/dbInit.tar.gz $(DESTDIR)$(prefix)/etc/database/dbInit.tar.gz
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/dbInit.tar.gz $(DESTDIR)$(prefix)/etc/database/dbInit.tar.gz
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/migrations
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/migrations
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194331_addnsmlog.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194331_addnsmlog.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194331_addnsmlog.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194331_addnsmlog.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194332_addnsmprincipal.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194332_addnsmprincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194332_addnsmprincipal.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194332_addnsmprincipal.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194333_addnsmprincipaltarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194333_addnsmprincipaltarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194333_addnsmprincipaltarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194333_addnsmprincipaltarget.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194334_addnsmrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194334_addnsmrole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194334_addnsmrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194334_addnsmrole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194335_addnsmsession.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194335_addnsmsession.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194335_addnsmsession.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194335_addnsmsession.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194336_addnsmtarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194336_addnsmtarget.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194336_addnsmtarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194336_addnsmtarget.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194337_addnsmtargetvalue.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194337_addnsmtargetvalue.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194337_addnsmtargetvalue.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194337_addnsmtargetvalue.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194339_addnsmuser.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194339_addnsmuser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194339_addnsmuser.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194339_addnsmuser.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194340_addnsmuserpreference.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194340_addnsmuserpreference.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194340_addnsmuserpreference.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194340_addnsmuserpreference.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194341_addnsmuserrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194341_addnsmuserrole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194341_addnsmuserrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194341_addnsmuserrole.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194342_addfks.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194342_addfks.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194342_addfks.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194342_addfks.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/model
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/model
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model-current.mwb $(DESTDIR)$(prefix)/etc/database/model/model-current.mwb
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model-current.mwb $(DESTDIR)$(prefix)/etc/database/model/model-current.mwb
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue/mysql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue/mysql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-data.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-schema.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-schema.sql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/lib
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/agaviConsoleTask.php $(DESTDIR)$(prefix)/etc/lib/agaviConsoleTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/agaviConsoleTask.php $(DESTDIR)$(prefix)/etc/lib/agaviConsoleTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/agaviDBExtractorTask.php $(DESTDIR)$(prefix)/etc/lib/agaviDBExtractorTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/agaviDBExtractorTask.php $(DESTDIR)$(prefix)/etc/lib/agaviDBExtractorTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/confidentialInputTask.php $(DESTDIR)$(prefix)/etc/lib/confidentialInputTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/confidentialInputTask.php $(DESTDIR)$(prefix)/etc/lib/confidentialInputTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbInitializeTask.php $(DESTDIR)$(prefix)/etc/lib/dbInitializeTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbInitializeTask.php $(DESTDIR)$(prefix)/etc/lib/dbInitializeTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbUpdateTask.php $(DESTDIR)$(prefix)/etc/lib/dbUpdateTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/dbUpdateTask.php $(DESTDIR)$(prefix)/etc/lib/dbUpdateTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineToSqlTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineToSqlTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/doctrineToSqlTask.php $(DESTDIR)$(prefix)/etc/lib/doctrineToSqlTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/resetPasswordTask.php $(DESTDIR)$(prefix)/etc/lib/resetPasswordTask.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/resetPasswordTask.php $(DESTDIR)$(prefix)/etc/lib/resetPasswordTask.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/special.mk $(DESTDIR)$(prefix)/etc/make/special.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/special.mk $(DESTDIR)$(prefix)/etc/make/special.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/version.m4 $(DESTDIR)$(prefix)/etc/make/version.m4
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/version.m4 $(DESTDIR)$(prefix)/etc/make/version.m4
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/mysql.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/oracle.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/mysql.sql $(DESTDIR)$(prefix)/etc/schema/mysql.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/mysql.sql $(DESTDIR)$(prefix)/etc/schema/mysql.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/oracle.sql $(DESTDIR)$(prefix)/etc/schema/oracle.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/oracle.sql $(DESTDIR)$(prefix)/etc/schema/oracle.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/pgsql.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/pgsql.sql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/config
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/config
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config.php $(DESTDIR)$(prefix)/etc/tests/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config.php $(DESTDIR)$(prefix)/etc/tests/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config/suites.xml $(DESTDIR)$(prefix)/etc/tests/config/suites.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config/suites.xml $(DESTDIR)$(prefix)/etc/tests/config/suites.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/icingaWebTesting.php $(DESTDIR)$(prefix)/etc/tests/icingaWebTesting.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/icingaWebTesting.php $(DESTDIR)$(prefix)/etc/tests/icingaWebTesting.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/database
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/database
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaDatabaseAccessibleTest.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaDatabaseAccessibleTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaDatabaseAccessibleTest.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaDatabaseAccessibleTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaRoleOperations.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaRoleOperations.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaRoleOperations.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaRoleOperations.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaUserOperations.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaUserOperations.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/icingaUserOperations.php $(DESTDIR)$(prefix)/etc/tests/tests/database/icingaUserOperations.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/persistenceView.php $(DESTDIR)$(prefix)/etc/tests/tests/database/persistenceView.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/database/persistenceView.php $(DESTDIR)$(prefix)/etc/tests/tests/database/persistenceView.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/installation
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/installation
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/installation/configSettingsTest.php $(DESTDIR)$(prefix)/etc/tests/tests/installation/configSettingsTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/installation/configSettingsTest.php $(DESTDIR)$(prefix)/etc/tests/tests/installation/configSettingsTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/installation/userRightsTest.php $(DESTDIR)$(prefix)/etc/tests/tests/installation/userRightsTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/installation/userRightsTest.php $(DESTDIR)$(prefix)/etc/tests/tests/installation/userRightsTest.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/interface
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/interface
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/interface/availabilityTest.php $(DESTDIR)$(prefix)/etc/tests/tests/interface/availabilityTest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/interface/availabilityTest.php $(DESTDIR)$(prefix)/etc/tests/tests/interface/availabilityTest.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/unit
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/unit
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/unit/icingaDatabaseTest.php $(DESTDIR)$(prefix)/etc/tests/tests/unit/icingaDatabaseTest.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/tests/unit/icingaDatabaseTest.php $(DESTDIR)$(prefix)/etc/tests/tests/unit/icingaDatabaseTest.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/API_CHANGELOG $(DESTDIR)$(prefix)/lib/agavi/API_CHANGELOG
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/agavi/bin
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi $(DESTDIR)$(prefix)/lib/agavi/bin/agavi
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi.bat-dist $(DESTDIR)$(prefix)/lib/agavi/bin/agavi.bat-dist
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/bin/agavi-dist $(DESTDIR)$(prefix)/lib/agavi/bin/agavi-dist
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/build.xml $(DESTDIR)$(prefix)/lib/agavi/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/CHANGELOG $(DESTDIR)$(prefix)/lib/agavi/CHANGELOG
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/agavi/CHANGELOG-0.10 $(DESTDIR)$(prefix)/lib/agavi/CHANGELOG-0.10
@@ -6156,6 +6223,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/jit-yc.js $(DESTDIR)$(prefix)/lib/jit/jit-yc.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/bin
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/bin/po2json $(DESTDIR)$(prefix)/lib/jsgettext/bin/po2json
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/Changes $(DESTDIR)$(prefix)/lib/jsgettext/Changes
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/COPYING.LESSER $(DESTDIR)$(prefix)/lib/jsgettext/COPYING.LESSER
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/doc
@@ -6226,6 +6294,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jsgettext/TODO $(DESTDIR)$(prefix)/lib/jsgettext/TODO
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/bin
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/phing $(DESTDIR)$(prefix)/lib/phing/bin/phing
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/phing.bat $(DESTDIR)$(prefix)/lib/phing/bin/phing.bat
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/bin/phing.php $(DESTDIR)$(prefix)/lib/phing/bin/phing.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phing/classes/phing
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/phing/classes/phing/BuildEvent.php $(DESTDIR)$(prefix)/lib/phing/classes/phing/BuildEvent.php
@@ -7793,6 +7864,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/bricks.png $(DESTDIR)$(prefix)/pub/images/icons/bricks.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/bug.png $(DESTDIR)$(prefix)/pub/images/icons/bug.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cancel.png $(DESTDIR)$(prefix)/pub/images/icons/cancel.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/chart_bar.png $(DESTDIR)$(prefix)/pub/images/icons/chart_bar.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cog.png $(DESTDIR)$(prefix)/pub/images/icons/cog.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cross.png $(DESTDIR)$(prefix)/pub/images/icons/cross.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/database_go.png $(DESTDIR)$(prefix)/pub/images/icons/database_go.png
@@ -7806,6 +7878,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group_key.png $(DESTDIR)$(prefix)/pub/images/icons/group_key.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/group.png $(DESTDIR)$(prefix)/pub/images/icons/group.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/help.png $(DESTDIR)$(prefix)/pub/images/icons/help.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/image.png $(DESTDIR)$(prefix)/pub/images/icons/image.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/information.png $(DESTDIR)$(prefix)/pub/images/icons/information.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/key_add.png $(DESTDIR)$(prefix)/pub/images/icons/key_add.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/key_delete.png $(DESTDIR)$(prefix)/pub/images/icons/key_delete.png
@@ -7845,9 +7918,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/soap/index.php $(DESTDIR)$(prefix)/pub/soap/index.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/soapRequestTest.php $(DESTDIR)$(prefix)/pub/soapRequestTest.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/styles
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/exception.css $(DESTDIR)$(prefix)/pub/styles/exception.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=6950
-INC_DIRS=893
+INC_FILES=7008
+INC_DIRS=913
 # INSTALL_FILES_END

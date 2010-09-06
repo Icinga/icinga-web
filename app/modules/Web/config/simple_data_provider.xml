@@ -12,6 +12,8 @@
 			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
 			<ae:parameter name="description">query for host information</ae:parameter>
 			<ae:parameter name="target">IcingaApi::TARGET_COMMENT</ae:parameter>
+			<!--  default mode is arrayKeyValue [ { key: 'KEY', value: 'VAL' } ] -->
+			<ae:parameter name="result_type">namedKeys</ae:parameter>
 			<ae:parameter name="result_columns">
 				<ae:parameter>
 					<ae:parameter name="field">COMMENT_AUTHOR_NAME</ae:parameter>
@@ -24,6 +26,17 @@
 					<ae:parameter name="field">COMMENT_DATA</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
+			<ae:parameter name="xtemplate_code"><![CDATA[
+				<tpl for="data">
+					<tpl for=".">
+					<div>
+						<div>{COMMENT_TIME}, {COMMENT_AUTHOR_NAME}:</div>
+						<div>{COMMENT_DATA}</div>
+					</div>
+					<hr />
+					</tpl>
+				</tpl>
+			]]></ae:parameter>
 			<ae:parameter name="filter">
 			</ae:parameter>
 			<ae:parameter name="user_filters">
@@ -41,8 +54,8 @@
 				<ae:parameter name="direction">ASC</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="limit">
-				<!-- <ae:parameter name="start">1</ae:parameter> -->
-				<!-- <ae:parameter name="length">1</ae:parameter> -->
+			<!-- <ae:parameter name="start">1</ae:parameter> -->
+			<!-- <ae:parameter name="length">1</ae:parameter> -->
 			</ae:parameter>
 		</ae:parameter>
 

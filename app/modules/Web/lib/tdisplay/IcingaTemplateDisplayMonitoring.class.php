@@ -45,7 +45,7 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 			$row = $res->getRow();
 			
 			if ($row['COUNT_COMMENT_ID']>0) {
-				$id = sprintf('%s-%d', 'comment-object-id-', $object_id);
+				$id = sprintf('%s-%d', 'comment-object-id', $object_id);
 				return (string)AppKitXmlTag::create('div', $object_id)
 				->addAttribute('id', $id)
 				->addAttribute('class', $method_params->getParameter('class', 'icinga-icon-comment icon-24 icinga-link icinga-notext'))

@@ -117,7 +117,7 @@ AppKit.util = (function() {
 					resizable: true,
 					id: 'user_prefs_target',
 					width: 530,
-					autoHeight: true,
+					height: Ext.getBody().getHeight()>600 ? 600 : Ext.getBody().getHeight(),
 					autoScroll: true,
 					closeAction: 'hide',
 					

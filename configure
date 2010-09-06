@@ -2281,8 +2281,7 @@ $as_echo_n "checking for IcingaApi... " >&6; }
    { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
 $as_echo "found" >&6; }
 else
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: not found" >&5
-$as_echo "$as_me: WARNING: not found" >&2;}
+   as_fn_error "not found" "$LINENO" 5
 fi
 
 

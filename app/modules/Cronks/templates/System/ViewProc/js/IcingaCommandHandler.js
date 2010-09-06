@@ -168,7 +168,7 @@ IcingaCommandHandler.prototype = {
 					columns: 2,
 					items: [
 						{boxLabel: _('Yes'), inputValue: 1, name: o.fieldName},
-						{boxLabel: _('No'), inputValue: 0, name: o.fieldName, checked: true},
+						{boxLabel: _('No'), inputValue: 0, name: o.fieldName, checked: true}
 					]
 				});
 				
