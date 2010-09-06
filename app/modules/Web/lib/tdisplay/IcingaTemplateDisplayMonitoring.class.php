@@ -28,14 +28,11 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 	}
 	
 	public function icingaComments($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
-		
-		static $id_count = 0;
-		$id_count++;
+
 		$instance_id = $row->getParameter($method_params->getParameter('instance_id_field', 'instance_id'), 0);
 		$object_id = $row->getParameter($method_params->getParameter('object_id_field', 'object_id'), 0);
 		
 		if ($instance_id && $object_id) {
-		
 			$res = $this->getApi()->createSearch()
 			->setResultType(IcingaApi::RESULT_ARRAY)
 			->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApi::MATCH_EXACT)
@@ -48,8 +45,11 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 			$row = $res->getRow();
 			
 			if ($row['COUNT_COMMENT_ID']>0) {
-				return 
-					'<div onclick="Icinga.util.showComments('. $object_id. ', '. $instance_id. ', \'comments-'. $id_count. '\');" id="comments-'. $id_count. '" class="icinga-icon-comment icon-24 icinga-link"></div>';
+				$id = sprintf('%s-%d', 'comment-object-id-', $object_id);
+				return (string)AppKitXmlTag::create('div', $object_id)
+				->addAttribute('id', $id)
+				->addAttribute('class', $method_params->getParameter('class', 'icinga-icon-comment icon-24 icinga-link icinga-notext'))
+				->addAttribute('title', 'Comments');
 			}
 		}
 		

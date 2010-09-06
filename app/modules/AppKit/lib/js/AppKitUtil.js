@@ -3,8 +3,18 @@ AppKit.util = (function() {
 	var pstores = new Ext.util.MixedCollection(true);
 	
 	return Ext.apply(pub, {
+		
 		fastMode: function() {
 			return Ext.isIE6 || Ext.isIE7 || Ext.isIE8;
+		},
+		
+		parseDOMfromString : function(string, contentType) {
+			if (!Ext.isEmpty(window.DOMParser)) {
+				return (new DOMParser()).parseFromString(string, contentType || 'text/xml').firstChild;
+				
+			}
+			
+			throw('parseDOMfromString: could not create a new DOMParser instance!');
 		},
 		
 		contentWindow : function(uconf, wconf) {

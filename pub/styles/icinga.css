@@ -191,6 +191,10 @@ div#growl-msg-stack {
 
 /** Icinga status classes **/
 
+.icinga-notext {
+	text-indent: -100px;
+}
+
 .icinga-link {
 	cursor: pointer;
 /*	text-decoration: underline;*/

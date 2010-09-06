@@ -26,6 +26,20 @@
         	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter>
         
+        <parameter name="gridEvents">
+        	
+        	<!-- Initialize comments -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">comments</parameter>
+        			<parameter name="type">host</parameter>
+        		</parameter>
+        	</parameter>
+        	
+        </parameter>
+        
         <!-- 
         	Selection model of rows (checkbox/row). This is needed for
         	commands and maybe other user things ...
@@ -475,7 +489,7 @@
             </order>
         </field>-->
 
-		<field name="host_comments">
+		<field name="comments">
 			<datasource>
             	<parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>
@@ -496,8 +510,10 @@
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">icingaComments</parameter>
                 	<parameter name="arguments">
-                		<parameter name="object_id_field">service_comments</parameter>
+                		<parameter name="object_id_field">comments</parameter>
                 		<parameter name="instance_id_field">instance_id</parameter>
+                		<!-- <parameter name="class"></parameter> -->
+                		<parameter name="title">Comments for {host_name}</parameter>
                 	</parameter>
                 </parameter>
             </display>
@@ -510,8 +526,6 @@
                 <parameter name="enabled">false</parameter>
             </order>
 		</field>
-
-
 
         <field name="host_info">
             <datasource>

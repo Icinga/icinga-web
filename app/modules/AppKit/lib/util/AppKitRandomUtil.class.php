@@ -2,6 +2,8 @@
 
 class AppKitRandomUtil {
 	
+	protected static $htmlid_counter = 0;
+	
 	/**
 	 * Inits the random number generator
 	 * @return boolean
@@ -46,6 +48,10 @@ class AppKitRandomUtil {
 		}
 		
 		return $prefix. $o;
+	}
+	
+	public static function htmlId($prefix='appkit-htmlid') {
+		return sprintf('%s-%04d', $prefix, (++self::$htmlid_counter));
 	}
 	
 }
