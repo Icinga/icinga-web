@@ -49,7 +49,9 @@
 					<route name=".principals" pattern="^/principals" action="DataProvider.PrincipalProvider">
 					  <route name=".user" pattern="^/user/(userId:\d+)" action="DataProvider.PrincipalProvider"/>
 					  <route name=".group" pattern="^/group/(groupId:\d+)" action="DataProvider.PrincipalProvider"/>
+					  
 					</route>
+					<route name=".log" pattern="^/log" action="DataProvider.LogProvider"/>
 					<route name=".languages" pattern="^/languages" action="DataProvider.LanguageProvider"/>
 				 </route>
 

@@ -1,31 +1,109 @@
-<?php 
-	$collection	= $t['log_collection'];
-	$pager		= $t['log_pager'];
-	$map		= $t['log_levelmap'];
-?>
-<script type="text/javascript">
-	Ext.onReady(function() {
-		AppKit.util.Layout.doLayout();
+<script type='text/javascript'>
+
+Cronk.util.initEnvironment('viewport-center', function() {
+	var availableLogdataRaw = <?php echo $t["availableLogs"] ?>;
+	var availableLogdata = [];
+	for(var i in availableLogdataRaw)
+		availableLogdata.push([i]);
+
+
+	var logListingDataView = new Ext.DataView({
+		store: new Ext.data.ArrayStore({
+			data: availableLogdata,
+			autoDestroy: true,
+			storeId: 'AvailableLogsStore',
+			idIndex: 0,
+			fields: ['Name']
+		}),
+
+		tpl: new Ext.XTemplate(
+			'<tpl for=".">',
+				'<div class="logEntry" id="{Name}">',
+					'{Name}',
+				'</div>',
+			'</tpl>'
+		),
+		overClass: 'x-view-over',
+		autoLoad:true,
+		multiSelect: false,
+		itemSelector: 'div.logEntry',
+		emptyText: _('Seems like you have no logs'),
+		listeners: {
+			click: function(_dview,idx,node,e) {
+				var elem = _dview.getNode(idx);
+				if(!elem)
+					return false;
+				var logName = _dview.getRecord(elem).get('Name');
+				logGrid.getStore().setBaseParam("logFile",logName);
+				logGrid.getStore().load()
+			}
+		}
 	});
-</script>
-<?php if ($collection->count() > 0) { ?>
-<table class="dataTable">
-<tr>
-	<th>Severity</th>
-	<th>Message</th>
-	<th>Timestamp</th>
+
+	var logStore = new Ext.data.JsonStore({
+		url: '<?php echo $ro->gen("appkit.data.log") ?>',
+		fields: ['Time','Message','Severity'],
+		autoLoad:false,
+		autoDestroy: true,
+		root: 'result'
+		
+	});
+	var logGrid = new Ext.grid.GridPanel({
+		store: logStore,
+		
+		tbar: new Ext.PagingToolbar({
+			store: logStore,
+			pageSize:100,
+			displayInfo:true,
+			totalProperty: 'total'
+		}),
+		autoScroll:true,
+		colModel: new Ext.grid.ColumnModel({
+			defaults: {
+				width: 120,
+				sortable: true
+			},
+			columns: [
+				{id: 'Time',header:_('Time'),width:100,sortable:true,dataIndex:'Time'},
+				{id: 'Message',header:_('Message'),width:400,sortable:true,dataIndex:'Message'},
+				{id: 'Severity',header:_('Severity'),width:100,sortable:true,dataIndex:'Severity'}
+			]
+		}),
+		frame: true
+
+	});
+
+
+	var logPortal = AppKit.util.Layout.addTo({
+		xtype: 'panel',
+		
+		layout: 'border',
+		border: false,
+		id: 'log-container',
+		defaults: {
+			padding:5,
+			margins: '5 5 5 5'
+		},
+		items: [{
+			region:'center',
+			xtype:'panel',
+			title: 'Log',
+			padding:0,
+			layout:'fit',
+			items: logGrid
+		},{
+			region: 'east',
+			collapsible: true,
+			layout:'fit',
+			width: 200,
+			title: _('Available logs'),
+			autoScroll: true,
+			items: logListingDataView
+		}]
 	
-</tr>
-<?php foreach ($collection as $logEntry) { ?>
-<?php 
-	$loglevel = $map[ $logEntry->log_level ];
-?>
-<tr class="<?php echo AppKitHtmlHelper::Obj()->classAlternate('light', 'dark') ?>">
-	<td class="loglevel-<?php echo $loglevel; ?>"><div class="loglevel-desc"><?php echo strtoupper($loglevel); ?></div></td>
-	<td><div class="preformatted"><?php echo AppKitStringUtil::htmlPseudoPreformat( $logEntry->log_message ); ?></div></td>
-	<td class="nowrap"><?php echo $logEntry->log_created; ?></td>
-</tr>
-<?php } ?>
-</table>
-<?php $pager instanceof AppKitDoctrinePager ? $pager->displayLayout() : null; ?>
-<?php } ?>
+	},'center')
+
+	AppKit.util.Layout.doLayout();
+
+}, { run: true, extready: true });
+</script>
