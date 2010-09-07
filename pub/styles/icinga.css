@@ -590,7 +590,31 @@ div.icinga-codeBox {
 }
 
 div.icinga-icon-bug-32 {
-	 background-image: url(../images/icinga/bug_big.png) !important; background-repeat: no-repeat; }
-
+	background-image: url(../images/icinga/bug_big.png) !important; background-repeat: no-repeat;
 }
+
+/** Comments **/
+
+div.icinga-comment-frame {
+	padding: 8px 5px 3px 5px;
+}
+
+div.icinga-comment {
+	border: 1px solid #666666;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin: 2px 0px 2px 0px;
+}
+
+div.icinga-comment .icinga-comment-author {
+	padding: 2px 5px 2px 5px;
+	background-color: #666666;
+	color: #ffffff;
+}
+
+div.icinga-comment .icinga-comment-data {
+	padding: 5px 2px 2px 5px;
+}
+
 /* EOF */

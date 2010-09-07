@@ -489,11 +489,11 @@
             <order>
                 <parameter name="enabled">false</parameter>
             </order>
-	</field>
-	END EXAMPLE -->
+		</field>
+		END EXAMPLE -->
 	
-	<!--  Example to include images on the fly
-	<field name="image_hover">
+		<!--  Example to include images on the fly
+		<field name="image_hover">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>
             </datasource>
@@ -551,10 +551,10 @@
             <order>
                 <parameter name="enabled">false</parameter>
             </order>
-	</field>
-	END EXAMPLE -->
+		</field>
+		END EXAMPLE -->
 
-	<field name="comments">
+		<field name="comments">
 			<datasource>
             	<parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>

@@ -48,8 +48,7 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 				$id = sprintf('%s-%d', 'comment-object-id', $object_id);
 				return (string)AppKitXmlTag::create('div', $object_id)
 				->addAttribute('id', $id)
-				->addAttribute('class', $method_params->getParameter('class', 'icinga-icon-comment icon-24 icinga-link icinga-notext'))
-				->addAttribute('title', 'Comments');
+				->addAttribute('class', $method_params->getParameter('class', 'icinga-icon-comment icon-24 icinga-link icinga-notext'));
 			}
 		}
 		

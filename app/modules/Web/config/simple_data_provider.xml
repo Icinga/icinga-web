@@ -28,13 +28,14 @@
 			</ae:parameter>
 			<ae:parameter name="xtemplate_code"><![CDATA[
 				<tpl for="data">
-					<tpl for=".">
-					<div>
-						<div>{COMMENT_TIME}, {COMMENT_AUTHOR_NAME}:</div>
-						<div>{COMMENT_DATA}</div>
+					<div class="icinga-comment-frame">
+						<tpl for=".">
+							<div class="icinga-comment">
+								<div class="icinga-comment-author">{COMMENT_TIME}, {COMMENT_AUTHOR_NAME}:</div>
+								<div class="icinga-comment-data">{COMMENT_DATA}</div>
+							</div>
+						</tpl>
 					</div>
-					<hr />
-					</tpl>
 				</tpl>
 			]]></ae:parameter>
 			<ae:parameter name="filter">

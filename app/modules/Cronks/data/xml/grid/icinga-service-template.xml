@@ -26,6 +26,21 @@
         	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter>
         
+        <parameter name="gridEvents">
+        	
+        	<!-- Initialize comments -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">comments</parameter>
+               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
+               		<parameter name="title">Comments for {service_name}</parameter>
+        		</parameter>
+        	</parameter>
+        	
+        </parameter>
+        
         <!-- 
         	Selection model of rows (checkbox/row). This is needed for
         	commands and maybe other user things ...
@@ -408,9 +423,9 @@
             </order>
         </field>
         
-		<field name="service_comments">
+		<field name="comments">
 			<datasource>
-            	<parameter name="field">SERVICE_OBJECT_ID</parameter>
+            	<parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>
             
             <display>
@@ -429,7 +444,7 @@
                 	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">icingaComments</parameter>
                 	<parameter name="arguments">
-                		<parameter name="object_id_field">service_comments</parameter>
+                		<parameter name="object_id_field">comments</parameter>
                 		<parameter name="instance_id_field">instance_id</parameter>
                 	</parameter>
                 </parameter>

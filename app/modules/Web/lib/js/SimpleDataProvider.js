@@ -90,8 +90,10 @@ Icinga.util.SimpleDataProvider = (function () {
 					closable: config.closable,
 					anchor: config.anchor,
 					target: config.target,
-					autoHide: false,
+					dismissDelay: 5000,
+					hideDelay: 1000,
 					draggable: true,
+					autoHide: true,
 					title: (!Ext.isEmpty(config.title)) ? _(config.title) : '' 
 				});
 				
@@ -140,8 +142,6 @@ Icinga.util.SimpleDataProvider = (function () {
 					'</tpl>'
 				);
 			}
-			
-			AppKit.log(tpl, responseObj);
 			
 			tpl.overwrite(el, responseObj.result);
 		};

@@ -485,6 +485,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/ColumnRenderer.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/ColumnRenderer.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/GridPanel.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/GridPanel.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/GridUtil.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/GridUtil.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/grid/MetaGridCreator.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/grid/MetaGridCreator.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/Portlet.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/Portlet.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/lib/js/rmd160.js $(DESTDIR)$(prefix)/app/modules/Cronks/lib/js/rmd160.js
@@ -7866,6 +7867,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cancel.png $(DESTDIR)$(prefix)/pub/images/icons/cancel.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/chart_bar.png $(DESTDIR)$(prefix)/pub/images/icons/chart_bar.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cog.png $(DESTDIR)$(prefix)/pub/images/icons/cog.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/comment.png $(DESTDIR)$(prefix)/pub/images/icons/comment.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/cross.png $(DESTDIR)$(prefix)/pub/images/icons/cross.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/database_go.png $(DESTDIR)$(prefix)/pub/images/icons/database_go.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/database.png $(DESTDIR)$(prefix)/pub/images/icons/database.png
@@ -7922,6 +7924,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7008
+INC_FILES=7010
 INC_DIRS=913
 # INSTALL_FILES_END

@@ -19,7 +19,7 @@ Cronk.grid.GridUtil = (function() {
 					var node = AppKit.util.parseDOMfromString(record.get(c.column_name));
 					Icinga.util.SimpleDataProvider.createToolTip({
 						target: node.getAttribute('id'),
-						title: Cronk.grid.ColumnRendererUtil.applyXTemplate(lGrid, rowIndex, node.getAttribute('title')),
+						title: Cronk.grid.ColumnRendererUtil.applyXTemplate(lGrid, rowIndex, c.title),
 						width: c.width || 400,
 						filter: [{key: 'object_id', value: node.firstChild.data}],
 						srcId: c.sourceId || 'comments'
