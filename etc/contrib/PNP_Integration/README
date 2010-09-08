@@ -1,0 +1,22 @@
+
+*********************************
+* Important information
+*********************************
+
+This is only an adapter to integrate pnp graphs to your icinga-web interface, you must install pnp4nagios separately. 
+After successful installation you should see a new icon in your host and services overview which display the pnp graphs for the host/service 
+when being clicked upon.
+
+And now let's answer the questions:
+
+1) How can I change the position of the icon?
+	1. go to %icinga-web%/app/modules/Cronks/data/xml/grid/
+   2. In icinga-host-template.xml AND in icinga-service-template.xml there is a section called fields which represent the columns in your overview
+   3. Search for the field called "image_hover" and cut&paste it to the position you like
+   4. Clear the cache (rm -r %icinga_web%/app/cache/config
+
+2) My pnp4nagios is not installed under http://my.host.com/pnp4nagios 
+	1. Follow steps 1 and 2 from 1). 
+   2. Below "image_hover" there is a section called arguments (below parameters), which holds an url field. 
+   3. Change this url
+   4. Clear the cache (rm -r %icinga_web%/app/cache/config

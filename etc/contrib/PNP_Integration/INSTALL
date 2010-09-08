@@ -1,0 +1,11 @@
+************************
+* INSTALLATION
+************************
+
+To install this addon, simply enter
+
+	./install.sh
+
+with a user that has write-access to your icinga-web folder.
+
+For additional information, read the README file. 
