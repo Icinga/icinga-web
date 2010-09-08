@@ -26,6 +26,34 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 		
 		return $val;
 	}
+	
+	public function icingaComments($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+
+		$instance_id = $row->getParameter($method_params->getParameter('instance_id_field', 'instance_id'), 0);
+		$object_id = $row->getParameter($method_params->getParameter('object_id_field', 'object_id'), 0);
+		
+		if ($instance_id && $object_id) {
+			$res = $this->getApi()->createSearch()
+			->setResultType(IcingaApi::RESULT_ARRAY)
+			->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApi::MATCH_EXACT)
+			->setSearchFilter('COMMENT_INSTANCE_ID', $instance_id, IcingaApi::MATCH_EXACT)
+			->setResultColumns(array('COMMENT_ID'))
+			->setSearchTarget(IcingaApi::TARGET_COMMENT)
+			->setSearchType(IcingaApi::SEARCH_TYPE_COUNT)
+			->fetch();
+			
+			$row = $res->getRow();
+			
+			if ($row['COUNT_COMMENT_ID']>0) {
+				$id = sprintf('%s-%d', 'comment-object-id', $object_id);
+				return (string)AppKitXmlTag::create('div', $object_id)
+				->addAttribute('id', $id)
+				->addAttribute('class', $method_params->getParameter('class', 'icinga-icon-comment icon-24 icinga-link icinga-notext'));
+			}
+		}
+		
+		return null;
+	}
 }
 
 ?>

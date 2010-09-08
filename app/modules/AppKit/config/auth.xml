@@ -178,21 +178,20 @@
 			<!--
 			     			
 				HTTPBasicAuth allows authentication requests made by
-								the webserver. To enable the provider please:
+				the webserver. To enable the provider please:
 												
-				 * Activate the whole thing by setting auth_enable to true
-				 				 * Allow authenticate requests, set auth_authoritative true
-				 				 			-->
+				* Activate the whole thing by setting auth_enable to true
+				* Allow authenticate requests, set auth_authoritative true
+			-->
 			
-			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_enable">false</ae:parameter>
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
 
-
 			<!--
-			     				This provider can create dummy users
-			     								* Not really a good idea, let other providers to for you
-			     												* Or create the user manually
-			     															-->
+				This provider can create dummy users
+			    * Not really a good idea, let other providers to for you
+			    * Or create the user manually
+			-->
 			<!-- <ae:parameter name="auth_create">true</ae:parameter> -->
 
 			<!-- Fields to search for the username -->

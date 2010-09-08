@@ -1,3 +1,4 @@
+.settings/org.eclipse.php.core.prefs
 autom4te.cache/
 app/cache/config/*.php
 app/cache/content

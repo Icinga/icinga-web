@@ -213,6 +213,7 @@ class IcingaTemplateWorker {
 			if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
 				if ($param['class'] && $param['method']) {
 					if (!array_key_exists('arguments', $param) && !isset($param['arguments'])) $param['arguments'] = array();
+					if (!is_array($param['arguments'])) $param['arguments'] = array();
 					$out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments'], (array)$raw);
 				}
 			}

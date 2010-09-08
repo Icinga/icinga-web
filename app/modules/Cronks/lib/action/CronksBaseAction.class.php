@@ -3,7 +3,7 @@
 /**
  * The base action from which all Cronks module actions inherit.
  */
-class CronksBaseAction extends IcingaBaseAction
+class CronksBaseAction extends AppKitBaseAction
 {
 
 }

@@ -24,10 +24,13 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 	}
 	
 	public function executeWrite(AgaviParameterHolder $rd) {
+		
 		$data = json_decode( $rd->getParameter('data') );
 		$selection = json_decode( $rd->getParameter('selection') );
 		$command = $rd->getParameter('command');
 		$auth = $rd->getParameter('auth');
+		
+		$this->log('SendCommandAction: Prepare to send command (command=%s)', $command, AgaviLogger::INFO);
 		
 		$IcingaApiCommand = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
 		
@@ -35,6 +38,8 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 		$sender = $this->getContext()->getModel('System.CommandSender', 'Cronks');
 		
 		if ($sender->checkAuth($rd->getParameter('command'), $rd->getParameter('selection'), $rd->getParameter('data'), $auth) === true) {
+			
+			$this->log('SendCommandAction: Successfull authentication (hmac=%s)', $auth, AgaviLogger::DEBUG);
 			
 			// Prepare the data
 			$sender->setCommandName($command);
@@ -45,6 +50,9 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 			$coa = $sender->buildCommandObjects();
 
 			if ($IcingaApiCommand->checkDispatcher() !== true) {
+				
+				$this->log('SendCommandAction: IcingaApi dispatcher is not ready!', AgaviLogger::ERROR);
+				
 				$this->setAttribute('ok', false);
 				$this->setAttribute('error', 'No command dispatchers configured!');
 				
@@ -54,16 +62,20 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 			// Send the bundle
 			try {
 				$IcingaApiCommand->dispatchCommandArray($coa);
+				$this->log('SendCommandAction: Commands sent', AgaviLogger::INFO);
 			}
 			catch (IcingaApiCommandException $e) {
 				$errors = $IcingaApiCommand->getLastErrors();
 				$error = array();
+				
 				foreach ($errors as $err) {
 					$error[] = sprintf('%s: %s', get_class($err), $err->getMessage());
 				}
 				
 				$this->setAttribute('ok', false);
 				$this->setAttribute('error', join(', ', $error));
+				
+				$this->log('SendCommandAction: Command distribution failed! (error=%s)', join(', ', $error), AgaviLogger::FATAL);
 				
 				return $this->getDefaultViewName();
 			}
@@ -74,8 +86,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 		else {
 			$this->setAttribute('ok', false);
 			$this->setAttribute('error', 'Authentification failed');
-			$this->getContext()->getLoggerManager()
-			->log('Command auth failed!', AgaviLogger::ERROR);
+			$this->log('SendCommandAction: Authentification failed! (hmac=%s)', $auth, AgaviLogger::DEBUG);
 		}
 		
 		return $this->getDefaultViewName();
@@ -92,6 +103,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction
 	public function handleError(AgaviRequestDataHolder $rd) {
 		$this->setAttribute('ok', false);
 		$this->setAttribute('error', 'Validation failed');
+		$this->log('SendCommandAction: Validation failed, wrong parameters!', AgaviLogger::ERROR);
 		return $this->getDefaultViewName();
 	}
 }

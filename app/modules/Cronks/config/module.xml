@@ -34,6 +34,7 @@
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridUtil.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</ae:parameter>
 
 					<ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>

@@ -4,9 +4,14 @@
  */
 class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
+	const MODE_NAMED_KEYS	= 'namedKeys';
+	const MODE_ARRAY_KEYVAL	= 'arrayKeyValue';
+	
 	private $configAll		= array ();
 	private $config			= array ();
 	private $resultColumns	= array ();
+	private $template		= null;
+	private $mode			= array ();
 	
 	/**
 	 * @var AgaviTranslationManager
@@ -26,15 +31,30 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
+		
 		$this->configAll = AgaviConfig::get('modules.web.simpledataprovider');
 		$this->apiSearch = $this->getContext()->getModel('Icinga.ApiContainer', 'Web')->createSearch();
+		
 		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($this->apiSearch);
+		
 		$this->tm = $this->getContext()->getTranslationManager();
 	}
 
 	public function setSourceId ($srcId = false) {
 		if (array_key_exists($srcId, $this->configAll)) {
 			$this->config = $this->configAll[$srcId];
+			
+			if (isset($this->config['xtemplate_code'])) {
+				$this->template = $this->config['xtemplate_code'];
+			}
+			
+			if (isset($this->config['result_type'])) {
+				$this->mode = $this->config['result_type'];
+			}
+			else {
+				$this->mode = self::MODE_ARRAY_KEYVAL;
+			}
+			
 			$this->setSearchTarget($this->config['target']);
 			
 			foreach ($this->config['result_columns'] as $coldef) {
@@ -56,7 +76,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 	}
 
 	private function applyFilter () {
-		if (array_key_exists('filter', $this->config) && $this->config['filter'] !== false) {			
+		if (array_key_exists('filter', $this->config) && $this->config['filter'] !== false && is_array($this->config['filter'])) {			
 			$filterDefs = (array_key_exists('column', $this->config['filter'])) ? array($this->config['filter']) : $this->config['filter'];
 			foreach ($filterDefs as $filter) {
 				$apiFilter = array($filter['column'], $filter['value']);
@@ -99,7 +119,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 	}
 
 	public function setLimit () {
-		if (array_key_exists('limit', $this->config) && $this->config['limit'] !== false) {
+		if (array_key_exists('limit', $this->config) && $this->config['limit'] !== false && is_array($this->config['limit'])) {
 			$limitDefs = $this->config['limit'];
 			if (array_key_exists('length', $limitDefs)) {
 				$this->setSearchLimit($limitDefs['start'], $limitDefs['length']);
@@ -153,13 +173,19 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 		foreach ($result as $row) {
 			$tmp = array ();
 			foreach ($row->getRow() as $key=>$val) {
-				$tmp[] = array (
-					'key' => $this->tm->_($key),
-					'val' => $this->rewriteColumn($key, $val)
-				);
+				if ($this->mode == self::MODE_ARRAY_KEYVAL) {
+					$tmp[] = array (
+						'key' => $this->tm->_($key),
+						'val' => $this->rewriteColumn($key, $val)
+					);
+				}
+				else {
+					$tmp[$key] = $this->rewriteColumn($key, $val);
+				}
 			}
 			$out[] = $tmp;
 		}
+		
 		return $out;
 	}
 	
@@ -173,6 +199,13 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 		$result = $this->prepareOutput($this->apiSearch->fetch());
 		
 		return $result;
+	}
+	
+	public function getTemplateCode() {
+		if ($this->template !== null && strlen($this->template)) {
+			return $this->template;
+		}
+		return false;
 	}
 
 	/*

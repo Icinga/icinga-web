@@ -152,13 +152,11 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 
 				AppKit.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
 				AppKit.ScriptDynaLoader.startBulkMode();
-							
+				
 				if (!Ext.isEmpty(meta.template.option.dynamicscript)) {
-					
 					Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
 						AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
 					});
-					
 				}
 
 				if (Ext.isEmpty(Cronk.util.GridFilterWindow)) {

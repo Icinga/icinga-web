@@ -26,6 +26,21 @@
         	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
         </parameter>
         
+        <parameter name="gridEvents">
+        	
+        	<!-- Initialize comments -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">comments</parameter>
+               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
+               		<parameter name="title">Comments for {host_name}</parameter>
+        		</parameter>
+        	</parameter>
+        	
+        </parameter>
+        
         <!-- 
         	Selection model of rows (checkbox/row). This is needed for
         	commands and maybe other user things ...
@@ -244,6 +259,7 @@
         -->
        	<parameter name="additional_fields">
        		<parameter name="max_attempt">HOST_MAX_CHECK_ATTEMPTS</parameter>
+       		<parameter name="instance_id">HOST_INSTANCE_ID</parameter>
        	</parameter>
        	
        	<parameter name="additional_filter_fields">
@@ -416,7 +432,7 @@
 
 
 <!--	Example for adding a iframe cronk that creates an url depending on db-variables
-	<field name="eventDB_link">
+		<field name="eventDB_link">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>
             </datasource>
@@ -473,11 +489,11 @@
             <order>
                 <parameter name="enabled">false</parameter>
             </order>
-	</field>
-	END EXAMPLE -->
+		</field>
+		END EXAMPLE -->
 	
-	<!--  Example to include images on the fly
-	<field name="image_hover">
+		<!--  Example to include images on the fly
+		<field name="image_hover">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>
             </datasource>
@@ -535,9 +551,45 @@
             <order>
                 <parameter name="enabled">false</parameter>
             </order>
-	</field>
-	END EXAMPLE -->
-	
+		</field>
+		END EXAMPLE -->
+
+		<field name="comments">
+			<datasource>
+            	<parameter name="field">HOST_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">26</parameter>
+
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+				<parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="method">icingaComments</parameter>
+                	<parameter name="arguments">
+                		<parameter name="object_id_field">comments</parameter>
+                		<parameter name="instance_id_field">instance_id</parameter>
+                	</parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+		</field>
+
         <field name="host_info">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>

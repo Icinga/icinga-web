@@ -79,8 +79,6 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 		$data = $command. '-'. $json_selection. '-'. $json_data;
 		$test = hash_hmac(self::TIME_ALGO, $data, $this->genTimeKey());
 		
-		// var_dump(array($test, $key));
-		
 		if ($key === $test) {
 			return true;
 		}

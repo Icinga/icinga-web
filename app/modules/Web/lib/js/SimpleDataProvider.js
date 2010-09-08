@@ -90,8 +90,10 @@ Icinga.util.SimpleDataProvider = (function () {
 					closable: config.closable,
 					anchor: config.anchor,
 					target: config.target,
-					autoHide: false,
+					dismissDelay: 5000,
+					hideDelay: 1000,
 					draggable: true,
+					autoHide: true,
 					title: (!Ext.isEmpty(config.title)) ? _(config.title) : '' 
 				});
 				
@@ -119,22 +121,27 @@ Icinga.util.SimpleDataProvider = (function () {
 		pub.outputTable = function (el, success, response, options) {
 			var responseObj = Ext.util.JSON.decode(response.responseText);
 			
-			var tpl = new Ext.XTemplate(
-				'<tpl for="data">',
-				'<div class="icinga-detailed-info-container">',
-				'<table cellpadding="0" cellspacing="0" border="0" class="icinga-detailed-info">',
-				'<tpl for=".">',
-					'<tr>',
-						'<td class="key">{key}</td>',
-						'<td class="val">{val}</td>',
-					'</tr>',
-				'</tpl>',
-				'</table>',
-				'</div>',
-				'</tpl>'
-			);
+			var tpl = null;
 			
-			console.log(responseObj.result);
+			if (!Ext.isEmpty(responseObj.result.template)) {
+				tpl = new Ext.XTemplate(responseObj.result.template);
+			}
+			else {
+				tpl = new Ext.XTemplate(
+					'<tpl for="data">',
+					'<div class="icinga-detailed-info-container">',
+					'<table cellpadding="0" cellspacing="0" border="0" class="icinga-detailed-info">',
+					'<tpl for=".">',
+						'<tr>',
+							'<td class="key">{key}</td>',
+							'<td class="val">{val}</td>',
+						'</tr>',
+					'</tpl>',
+					'</table>',
+					'</div>',
+					'</tpl>'
+				);
+			}
 			
 			tpl.overwrite(el, responseObj.result);
 		};
@@ -151,3 +158,14 @@ Icinga.util.SimpleDataProvider = (function () {
 
 		return pub;
 })();
+
+Icinga.util.showComments = function(oid, instanceid, target) {
+	Icinga.util.SimpleDataProvider.createToolTip({
+		srcId: 'comments',
+		filter: [
+			{key: 'object_id', value: oid},
+			{key: 'instance_id', value: instanceid}
+		],
+		target: target
+	});
+}

@@ -284,19 +284,17 @@ implements AgaviISingletonModel {
 				->log($lerror, AgaviLogger::ERROR);
 			}
 			else {
-
+				
 				foreach ($ds as $dk=>$d) {
-
 					try {
-						$d->setCommand($arry);
+						$d->setCommands($arry);
 						$d->send();
 					}
 					catch (IcingaApiCommandException $e) {
 						$this->errors[] = $e;
 						$error = true;
 
-						AgaviContext::getInstance()->getLoggerManager()
-						->log('Command dispatch failed on '. $dk. ': '.  str_replace("\n", " ", print_r($d->getCallStack(), true)), AgaviLogger::ERROR);
+						$this->log('Command dispatch failed on '. $dk. ': '.  str_replace("\n", " ", print_r($d->getCallStack(), true)), AgaviLogger::ERROR);
 					}
 
 					$d->clearCommands();
@@ -304,24 +302,6 @@ implements AgaviISingletonModel {
 
 			}
 		}
-
-//		foreach ($this->apiDispatcher as $d) {
-//
-//			try {
-//				$d->setCommand($arry);
-//				$d->send();
-//			}
-//			catch (IcingaApiCommandSendException $e) {
-//				$this->errors[] = $e;
-//				$error = true;
-//
-//				AgaviContext::getInstance()->getLoggerManager()
-//				->logError('Command dispatch failed: '.  str_replace("\n", " ", print_r($d->getCallStack(), true)) );
-//			}
-//
-//			// Reset into ready-state
-//			$d->clearCommands();
-//		}
 		
 		if ($error === true) {
 			throw new IcingaApiCommandException('Errors occured try getLastError to fetch a exception stack!');
