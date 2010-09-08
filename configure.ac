@@ -134,6 +134,12 @@ AC_ARG_WITH([db_pass],
 	db_pass=icinga_web
 )
 
+AC_ARG_WITH([db_socket],
+	AS_HELP_STRING([--with-db-socket=SOCKET], [DB path to unix socket (default /tmp/mysql.sock)]),
+	db_socket=$withval,
+	db_socket=/tmp/mysql.sock
+)
+
 # Configure the icinga-api
 
 AC_ARG_WITH([api_type],
@@ -211,6 +217,7 @@ AC_SUBST(db_port)
 AC_SUBST(db_name)
 AC_SUBST(db_user)
 AC_SUBST(db_pass)
+AC_SUBST(db_socket)
 
 AC_SUBST(api_type)
 AC_SUBST(api_subtype)

@@ -574,6 +574,7 @@ api_port
 api_host
 api_subtype
 api_type
+db_socket
 db_pass
 db_user
 db_name
@@ -653,6 +654,7 @@ with_db_port
 with_db_name
 with_db_user
 with_db_pass
+with_db_socket
 with_api_type
 with_api_subtype
 with_api_host
@@ -1293,6 +1295,7 @@ Optional Packages:
   --with-db-name=DBNAME   DB name for icinga (default icinga_web)
   --with-db-user=USER     DB user for icinga (default icinga_web)
   --with-db-pass=PASS     DB pass for icinga (default icinga_web)
+  --with-db-socket=SOCKET DB path to unix socket (default /tmp/mysql.sock)
   --with-api-type=APICON  API type (default CONNECTION_IDO)
   --with-api-subtype=TYPE DB driver or network connection
   --with-api-host=HOST    Host to connect (DB or other) (default localhost)
@@ -2346,6 +2349,16 @@ else
 fi
 
 
+
+# Check whether --with-db_socket was given.
+if test "${with_db_socket+set}" = set; then :
+  withval=$with_db_socket; db_socket=$withval
+else
+  db_socket=/tmp/mysql.sock
+
+fi
+
+
 # Configure the icinga-api
 
 
@@ -2446,6 +2459,7 @@ INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
 CFLAGS=""
 
 # Substitutions
+
 
 
 

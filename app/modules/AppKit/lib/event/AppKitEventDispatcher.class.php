@@ -53,7 +53,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
 	 * @return boolean
 	 * @author Marius Hein
 	 */
-	public function addListener($name, AppKitEventHandlerInterface &$handler) {
+	public function addListener($name, AppKitEventHandlerInterface $handler) {
 		
 		if (!array_key_exists($name, $this->listeners)) {
 			$this->listeners[$name] = array ();

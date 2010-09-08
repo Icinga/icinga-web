@@ -39,11 +39,11 @@ class AppKitAgaviContext extends AgaviContext {
 		(array)$list = AgaviConfig::get('org.icinga.appkit.init_modules', array());
 
 		if (array_search('AppKit', $list) == false) {
-			AgaviController::initializeModule('AppKit');
+			AppKitAgaviUtil::initializeModule('AppKit');
 		}
 		
 		foreach ($list as $mod_name) {
-			AgaviController::initializeModule($mod_name);
+			AppKitAgaviUtil::initializeModule($mod_name);
 		}
 
 
