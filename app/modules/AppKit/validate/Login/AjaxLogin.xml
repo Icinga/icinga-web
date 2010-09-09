@@ -22,7 +22,7 @@
 					</ae:parameters>
 			</validator>
 			
-			<validator class="string" name="password_length" required="true">
+			<validator class="string" name="password_length" required="false">
 					<arguments>
 						<argument>password</argument>
 					</arguments>
@@ -32,7 +32,7 @@
 					</errors>
 					<ae:parameters>
 						<ae:parameter name="max">80</ae:parameter>
-						<ae:parameter name="min">3</ae:parameter>
+						<ae:parameter name="min">0</ae:parameter>
 					</ae:parameters>
 			</validator>
 			

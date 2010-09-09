@@ -84,7 +84,7 @@ AppKit.util = (function() {
 			var t={};
 			Ext.Ajax.on('requestexception', function(conn, response, options) {
 				if (!options.url.match(/\/login/)) {
-					if (response.status == '401') {
+					if (response.status == '403') {
 						if (Ext.isEmpty(this.wflag)) {
 							this.wflag=true;
 

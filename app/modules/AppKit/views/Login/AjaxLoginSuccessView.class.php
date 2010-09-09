@@ -7,7 +7,7 @@ class AppKit_Login_AjaxLoginSuccessView extends AppKitBaseView
 		$this->setupHtml($rd);
 		
 		if ($this->getContext()->getUser()->isAuthenticated() !== true) {
-			$this->getResponse()->setHttpStatusCode('401');
+			$this->getResponse()->setHttpStatusCode('403');
 		}
 
 		$this->setAttribute('message', false);
@@ -45,7 +45,7 @@ class AppKit_Login_AjaxLoginSuccessView extends AppKitBaseView
 		}
 		else {
 			$errors['username'] = 'Login failed!';
-			$this->getResponse()->setHttpStatusCode('401');
+			$this->getResponse()->setHttpStatusCode('403');
 		}
 		
 		return json_encode(array(
