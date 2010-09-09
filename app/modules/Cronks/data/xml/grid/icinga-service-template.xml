@@ -425,7 +425,7 @@
         
 		<field name="comments">
 			<datasource>
-            	<parameter name="field">HOST_OBJECT_ID</parameter>
+            	<parameter name="field">SERVICE_OBJECT_ID</parameter>
             </datasource>
             
             <display>
