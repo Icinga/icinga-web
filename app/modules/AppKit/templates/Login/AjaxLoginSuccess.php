@@ -42,7 +42,7 @@ Ext.onReady(function() {
 				inputType: 'password',
 				name: 'password',
 				id: 'password',
-				allowBlank: false
+				allowBlank: true
 			}],
 			
 			listeners: {

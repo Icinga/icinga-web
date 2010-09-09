@@ -13,6 +13,7 @@
 
 				<route name=".login" pattern="^/login" action="%actions.login_action%">
 					<route name=".provider" pattern="^/json" module="%actions.default_module%" action="Login.AjaxLogin" output_type="json"/>
+					<route name=".check" pattern="^/check" module="%actions.default_module%" action="Login.LoginCheck" output_type="simple"/>
 				</route>
 
 				<route name=".logout" pattern="^/logout" action="Logout"/>

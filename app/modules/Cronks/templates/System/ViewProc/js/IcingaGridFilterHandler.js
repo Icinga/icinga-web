@@ -183,7 +183,7 @@ Cronk.util.GridFilterWindow = function() {
 					mode: 'local',
 					typeAhead: true,
 					triggerAction: 'all',
-					forceSelection: true,
+					forceSelection: false,
 					
 					
 					fieldLabel: _("Add restriction"),
