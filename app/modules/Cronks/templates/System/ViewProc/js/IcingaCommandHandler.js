@@ -150,7 +150,9 @@ IcingaCommandHandler.prototype = {
 				return new Ext.form.ComboBox(oDef);
 			
 			break;
-			
+			case  'hidden':
+				return new Ext.form.Hidden(oDef);
+			break;
 			case 'date':
 				oDef.format = 'Y-m-d H:i:s';
 				oDef.value = new Date();
