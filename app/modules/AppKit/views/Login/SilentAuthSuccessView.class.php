@@ -1,8 +1,12 @@
 <?php
 
 class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
+		public function executeJson(AgaviRequestDataHolder $rd) {
+			return $this->executeHtml($rd);
+			
+		}
 
-	public function executeHtml(AgaviRequestDataHolder $rd) {
+		public function executeHtml(AgaviRequestDataHolder $rd) {
 
 		if ($this->getAttribute('authenticated', false) == true) {
 

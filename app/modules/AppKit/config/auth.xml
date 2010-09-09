@@ -184,7 +184,7 @@
 				* Allow authenticate requests, set auth_authoritative true
 			-->
 			
-			<ae:parameter name="auth_enable">false</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
 
 			<!--

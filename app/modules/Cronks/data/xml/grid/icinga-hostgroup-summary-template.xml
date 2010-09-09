@@ -118,7 +118,37 @@
         	</parameter>
         	
         </parameter>
-        
+<!--
+		<parameter name="filter">
+        	<paramter name="hostgroup_alias">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.api</parameter>
+        		<parameter name="label">Alias</parameter>
+
+				 Operator type is needed because we don't know which type returned
+				<parameter name="operator_type">text</parameter>
+
+				<parameter name="api_target">hostgroup</parameter>
+				<parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
+				<parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
+
+        	</paramter>
+			<paramter name="hostgroup_alias">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.api</parameter>
+        		<parameter name="label">Alias</parameter>
+
+				 Operator type is needed because we don't know which type returned
+				<parameter name="operator_type">text</parameter>
+
+				<parameter name="api_target">hostgroup</parameter>
+				<parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
+				<parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
+
+        	</paramter>
+		</parameter>-->
     </option>
     
     <!-- 
@@ -269,9 +299,23 @@
                 <parameter name="label">Alias</parameter>
             </display>
             
+           
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+
+				<!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+
+				<!-- Operator type is needed because we don't know which type returned-->
+				<parameter name="operator_type">text</parameter>
+
+				<parameter name="api_target">hostgroup</parameter>
+				<parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
+				<parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
             </filter>
+
             
             <order>
                 <parameter name="enabled">true</parameter>
@@ -415,8 +459,15 @@
                 </parameter>
             </display>
         	
+          
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
+
+                <parameter name="no_operator">false</parameter>
             </filter>
             
             <order>
@@ -435,9 +486,12 @@
                 <parameter name="label">Count</parameter>
             </display>
             
-            <filter>
-                <parameter name="enabled">false</parameter>    
+           <filter>
+                <parameter name="enabled">false</parameter>
+
+				
             </filter>
+
             
             <order>
                 <parameter name="enabled">false</parameter>

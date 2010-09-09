@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+	<fields>
+		<field name="image_hover">
+					<datasource>
+						<parameter name="field">SERVICE_NAME</parameter>
+					</datasource>
+
+					<display>
+						 <parameter name="visible">true</parameter>
+						 <parameter name="label"></parameter>
+
+						 <parameter name="width">22</parameter>
+
+					
+						 <parameter name="Ext.grid.Column">
+							 <parameter name="menuDisabled">true</parameter>
+							 <parameter name="fixed">true</parameter>
+						 </parameter>
+
+						 <parameter name="jsFunc">
+							 <parameter>
+								 <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+								 <parameter name="function">columnImage</parameter>
+
+								  renderer/gridevent[cellclick|celldblclick|...] 
+								 <parameter name="type">renderer</parameter>
+
+								 <parameter name="arguments">
+								<parameter name="image">images/icons/image.png</parameter>
+								<parameter name="css">x-icinga-grid-link</parameter>
+								<parameter name="attr">
+									<parameter name="qtip">Display performance graph</parameter>
+								</parameter>
+								 </parameter>
+							 </parameter>
+
+						<parameter>
+								 <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+								 <parameter name="function">imagePopup</parameter>
+
+								  renderer/gridevent[cellclick|celldblclick|...] 
+								 <parameter name="type">cellclick</parameter>
+
+								 <parameter name="arguments">
+									 <parameter name="title">Image for {host_name}</parameter>
+									 <parameter name="url"><![CDATA[http://localhost/pnp4nagios/image?service={service_name}&srv=_SERVICE_&view=0]]></parameter>
+								<parameter name="width">200</parameter>
+								<parameter name="height">200</parameter>
+								 </parameter>
+							 </parameter>
+						 </parameter>
+					</display>
+
+					<filter>
+						 <parameter name="enabled">false</parameter>
+					</filter>
+
+					<order>
+						 <parameter name="enabled">false</parameter>
+					</order>
+		</field>
+	</fields>
+</template>
+

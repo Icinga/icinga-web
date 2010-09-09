@@ -267,7 +267,18 @@
             </display>
             
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+
+				<!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+
+				<!-- Operator type is needed because we don't know which type returned-->
+				<parameter name="operator_type">text</parameter>
+
+				<parameter name="api_target">servicegroup</parameter>
+				<parameter name="api_keyfield">SERVICEGROUP_ALIAS</parameter>
+				<parameter name="api_valuefield">SERVICEGROUP_ALIAS</parameter>
             </filter>
             
             <order>
@@ -358,7 +369,13 @@
             </display>
         	
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.servicestatus</parameter>
+
+                <parameter name="no_operator">false</parameter>
             </filter>
             
             <order>

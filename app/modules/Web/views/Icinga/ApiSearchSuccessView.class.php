@@ -17,8 +17,12 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 		// provide meta data for ExtJs stores
 		$searchResult = $rd->getParameter("searchResult");
 		$meta = $this->getMetaDataArray($rd); 
-		
-		$result = array("metaData" => $meta,"result"=>$searchResult);
+		$count = $rd->getParameter("searchCount");
+		$result = array("metaData" => $meta,"result"=>$searchResult,"success"=>"true");
+		if($count) {
+			$count = array_values($count[0]);
+			$result["total"] = $count[0];
+		}
 		return json_encode($result);
 	}
 
@@ -36,6 +40,11 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 					$columns[] = array("name"=>"idField","mapping"=>$column);
 			}
 		}
+		$metaData["paramNames"] = array(
+			'start' => 'limit_start',
+			'limit' => 'limit'
+		);
+		$metaData["totalProperty"] = "total";
 		$metaData["root"] = "result";
 		$metaData["fields"] =$columns;
 		return $metaData;

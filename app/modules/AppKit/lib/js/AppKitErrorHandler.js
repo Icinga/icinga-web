@@ -288,7 +288,7 @@ Ext.ns("AppKit.errorHandler");
 					AppKit.AjaxErrorHandler.error_500(proxy.url,response);
 					break;
 				default:
-					AppKit.AjaxErrorHandler.error_unknown(proxy.url,response.responseText);
+					AppKit.AjaxErrorHandler.error_unknown(proxy.url,response);
 					break;
 			}
 		}
@@ -323,7 +323,13 @@ Ext.ns("AppKit.errorHandler");
 				trackError(_("Access denied"));
 			},
 			error_unknown : function(target,error) {
-				trackError(_("A error occured when requesting ")+target+" : "+error.length <200 ? error: error.substr(0,200)+"...");
+				if(!(error.status)) {
+					Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server!"));
+					window.location.reload();
+				}
+				if(!error)
+					error = "Unkown error";
+				trackError(_("A error occured when requesting ")+target);//+" : "+error.length <200 ? error: error.substr(0,200)+"...");
 			}
 		}
 

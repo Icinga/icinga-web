@@ -132,7 +132,7 @@ IcingaCommandHandler.prototype = {
 					}),
 					
 					'name': '__return_value_combo',
-					
+					width:300,
 					mode: 'local',
 					typeAhead: true,
 					triggerAction: 'all',
@@ -150,7 +150,9 @@ IcingaCommandHandler.prototype = {
 				return new Ext.form.ComboBox(oDef);
 			
 			break;
-			
+			case  'hidden':
+				return new Ext.form.Hidden(oDef);
+			break;
 			case 'date':
 				oDef.format = 'Y-m-d H:i:s';
 				oDef.value = new Date();
@@ -350,7 +352,7 @@ IcingaCommandHandler.prototype = {
 				if (bAdd === false) {
 					oForm.add({
 						xtype: 'label',
-						text: _('no more fields')
+						text: _('This command will be send to all selected items')
 					});
 				}
 				
