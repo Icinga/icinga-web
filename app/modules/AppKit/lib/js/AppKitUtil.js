@@ -1,4 +1,5 @@
 AppKit.util = (function() {
+	
 	var pub = {};
 	var pstores = new Ext.util.MixedCollection(true);
 	
@@ -8,22 +9,17 @@ AppKit.util = (function() {
 			return Ext.isIE6 || Ext.isIE7 || Ext.isIE8;
 		},
 		
-		parseDOMfromString : function(string, contentType) {
-			if (!Ext.isEmpty(window.DOMParser)) {
-				return (new DOMParser()).parseFromString(string, contentType || 'text/xml').firstChild;
-				
-			}
-			
-			throw('parseDOMfromString: could not create a new DOMParser instance!');
-		},
-		
 		contentWindow : function(uconf, wconf) {
 	
 			Ext.applyIf(wconf, {
 				bodyStyle: 'padding: 30px 30px',
 				bodyCssClass: 'static-content-container'
 			});
-	
+			
+			if (Ext.isEmpty(uconf.scripts, true)) {
+				uconf.scripts = true;
+			} 
+			
 			Ext.apply(wconf, {
 				renderTo: Ext.getBody(),
 				footer: true,
@@ -149,5 +145,88 @@ AppKit.util = (function() {
 		
 	});
 })();
+
+AppKit.util.Config = (function() {
+	return (new (Ext.extend(Ext.util.MixedCollection, {
+		
+		constructor : function() {
+			this.items = {};
+			Ext.util.MixedCollection.prototype.constructor.call(this);
+			
+			this.addAll({
+				domain: document.location.host || document.domain,
+				path: document.location.pathname.replace(/\/$/, ''),
+				issecure: (document.location.protocol.indexOf('https') == 0) ? true : false
+			});
+		},
+		
+		getMap : function() {
+			return this.map;
+		}
+		
+	}))());
+})();
+
+// Reset the config object
+AppKit.c = AppKit.util.Config.getMap();
+
+// Domhelper
+AppKit.util.Dom = (function () {
 	
+	var pub = {};
+	
+	var lDef = {
+		imageSuffix:			'png',
+		imagePathSeperator:		'/',
+		imageSeperator:			'.'
+	};
+	
+	var lDH = Ext.DomHelper; 
+	
+	Ext.apply(pub, {
+	
+		DEFAULTS : lDef,
+		
+		imageUrl: function(def, suffix) {
+			try {
+				return AppKit.util.Config.get('image_path') + '/'
+				+ String.prototype.replace.call(def, lDef.imageSeperator, lDef.imagePathSeperator)
+				+ '.' + (Ext.isEmpty(suffix) ? lDef.imageSuffix : suffix);
+			}
+			catch(e) {
+				throw('imageUrl: Rethrow ' + e.toString());
+			}
+		},
+		
+		makeImage : function(el, def, spec, suffix) {
+			try {
+				spec = Ext.apply(spec || {}, {
+					id: (el.id || Ext.id()) + '-makeImage',
+					tag: 'img',
+					src: this.imageUrl(def, suffix)
+				});
+				
+				return lDH.append(Ext.get(el), spec); 
+				
+			}
+			catch (e) {
+				throw('makeImage: Rethrow ' + e.toString());
+			}
+		},
+		
+		parseDOMfromString : function(string, contentType) {
+			if (!Ext.isEmpty(window.DOMParser)) {
+				return (new DOMParser()).parseFromString(string, contentType || 'text/xml').firstChild;
+				
+			}
+			
+			throw('parseDOMfromString: could not create a new DOMParser instance!');
+		}
+		
+	});
+	
+	return pub;
+})();
+
+
 	

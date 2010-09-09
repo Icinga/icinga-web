@@ -141,7 +141,7 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 						$i['image'] = self::IMAGE_DEFAULT;
 					}
 					
-					$i['image'] = AppKitHtmlHelper::Obj()->imageUrl($i['image']);
+					$i['image'] = AppKitHtmlUtil::imageUrl($i['image']);
 				} 
 				
 				if ($f & self::F_CATEGORY) {

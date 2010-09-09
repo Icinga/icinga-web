@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 Ext.onReady(function() {
-
+	 
 	<?php if ($auth === true) { ?>
 	AppKit.onReady(function() {
 		AppKit.setPreferences(<?php echo json_encode($pref); ?>);

@@ -106,8 +106,13 @@
 					Keep this configuration small
 				-->
 				<setting name="cronks">
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-					href="cronks.xml#xpointer(setting/node())" />
+					<!-- include default cronks.xml -->
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml#xpointer(setting/node())" />
+					
+					<!-- include optional cronks.site.xml -->
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml#xpointer(setting/node())">
+						<xi:fallback></xi:fallback>
+					</xi:include>
 				</setting>
 				
 		

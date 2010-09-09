@@ -258,6 +258,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitColorUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitColorUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitDateUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitDateUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitHtmlUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitHtmlUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitLdapTool.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitModuleUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitModuleUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitRandomUtil.class.php
@@ -708,6 +709,12 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/apache2
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/configtemplate
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/configtemplate
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/cronks.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/cronks.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/cronks.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/cronks.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/databases.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/databases.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/databases.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/databases.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/dbInit.tar.gz $(DESTDIR)$(prefix)/etc/database/dbInit.tar.gz
@@ -7924,6 +7931,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=7010
-INC_DIRS=913
+INC_FILES=7015
+INC_DIRS=915
 # INSTALL_FILES_END

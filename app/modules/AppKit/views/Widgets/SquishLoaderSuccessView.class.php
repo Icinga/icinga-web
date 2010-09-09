@@ -19,7 +19,8 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 		}
 		else {
 			$content = $this->getAttribute('javascript_content');
-			$content .= 'AppKit.c.path = "'. AgaviConfig::get('org.icinga.appkit.web_path'). '";'. chr(10);
+			$content .= 'AppKit.util.Config.add(\'path\', \''. AgaviConfig::get('org.icinga.appkit.web_path'). '\');'. chr(10);
+			$content .= 'AppKit.util.Config.add(\'image_path\', \''. AgaviConfig::get('org.icinga.appkit.image_path'). '\');'. chr(10);
 			
 			$content .= $this->executeActions(
 				$this->getAttribute('javascript_actions')
