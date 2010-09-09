@@ -132,7 +132,7 @@ IcingaCommandHandler.prototype = {
 					}),
 					
 					'name': '__return_value_combo',
-					
+					width:300,
 					mode: 'local',
 					typeAhead: true,
 					triggerAction: 'all',
@@ -350,7 +350,7 @@ IcingaCommandHandler.prototype = {
 				if (bAdd === false) {
 					oForm.add({
 						xtype: 'label',
-						text: _('no more fields')
+						text: _('This command will be send to all selected items')
 					});
 				}
 				

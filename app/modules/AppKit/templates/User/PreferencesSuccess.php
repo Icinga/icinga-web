@@ -22,7 +22,7 @@ Ext.onReady(function() {
 		border:false,
 		monitorResize: true,
 		height: 450,
-
+		
 		defaults: {
 			border: false
 		},
@@ -314,7 +314,9 @@ Ext.onReady(function() {
 	}
 	
 	if (Ext.getCmp('user_prefs_target')) {
+		Ext.getCmp('user_prefs_target').setWidth(Ext.getBody().getWidth*0.70);
 		Ext.getCmp('user_prefs_target').add(AppKit.UserPrefs.container);
+
 		AppKit.UserPrefs.container.doLayout();
 		Ext.getCmp('user_prefs_target').doLayout();
 	}
