@@ -35,7 +35,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 					return false;
 				var logName = _dview.getRecord(elem).get('Name');
 				logGrid.getStore().setBaseParam("logFile",logName);
-				logGrid.getStore().load()
+				logGrid.getStore().load({params: {limit: 100}});
 			}
 		}
 	});
