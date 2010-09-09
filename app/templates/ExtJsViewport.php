@@ -19,6 +19,12 @@
 		
 	</head>
 	<body>
+		<noscript>
+			<div style="margin:auto;margin-top:10%;width:500px;text-align:center;padding:5px;-webkit-border-radius:5px;-moz-border-radius:5px;border:1px solid black;background-color:#dedede">
+				<h1>Oops...JavaScript support is disabled!</h1>
+				You have to activate JavaScript in order to use Icinga-web.
+			</div>
+		</noscript>
 		<div id="content" class="x-hidden">
 			<?php  (isset($title)) ? '<h1>'. $title. '</h1>' : null ?>
 			<?php echo $inner; ?>
