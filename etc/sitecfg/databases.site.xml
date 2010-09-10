@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databases xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
-	<!-- 
-		+++ EXAMPLE +++
-		+++ Include other connection than the default
-	<database name="icinga_web" class="AgaviDoctrineDatabase" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
+<!--
+	+++ Site configuration file +++
+	
+	This file won't be overwritten
+	
+-->
+
+<!-- 
+	+++ EXAMPLE +++
+	+++ Include other connection than the default
+	<database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga_web" class="AgaviDoctrineDatabase">
 		<ae:parameter name="dsn">mysql://something:other@somehost:3306/icinga_web_test</ae:parameter>
 		<ae:parameter name="charset">utf8</ae:parameter>
 		<ae:parameter name="manager_attributes">
@@ -14,8 +21,6 @@
 		<ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>				
 	</database>
 	
-	-->
-	
+-->
+
 </databases>
-
-

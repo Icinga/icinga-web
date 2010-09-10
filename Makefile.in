@@ -30,7 +30,7 @@ PHP=@PHP@
 PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
-INC_MAKE_FILES=etc/make/files.mk etc/make/special.mk
+INC_MAKE_FILES=etc/make/files.mk etc/make/special.mk etc/make/siteconfig.mk
 LOC_PO=app/data/i18n/po
 LOC_MO=app/data/i18n/mo
 LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
@@ -98,7 +98,7 @@ clean:
 	rm -f \
 		app/config/databases.xml \
 		app/config/icinga.xml \
-		app/modules/Web/config/module.xml \
+		app/modules/Web/config/icinga-io.xml \
 		pub/.htaccess \
 		pub/soap/.htaccess
 
@@ -169,6 +169,7 @@ install:
 	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
 	$(MAKE) -s inc-install-files
 	$(MAKE) inc-install-special
+	$(MAKE) inc-install-siteconfig
 	$(MAKE) install-done
 
 install-apache-config:

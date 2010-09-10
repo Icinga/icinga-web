@@ -72,6 +72,14 @@
 		-->
 		<ae:parameter name="auth_authoritative">false</ae:parameter>
 
+
+		<!-- Just including your configuration -->
+		<xi:include 
+			xmlns:xi="http://www.w3.org/2001/XInclude" 
+			href="auth.site.xml" 
+			xpointer="xpointer(//settings/setting[@name='defaults']/node())">
+			<xi:fallback></xi:fallback>
+		</xi:include>
 	</setting>
 
 	<!--
@@ -203,7 +211,14 @@
 			<!-- Source for the data (_SERVER == $_SERVER == 'only one') -->
 			<ae:parameter name="http_source">_SERVER</ae:parameter>
 		</ae:parameter>
-							
+		
+		<!-- Just including your configuration -->
+		<xi:include 
+			xmlns:xi="http://www.w3.org/2001/XInclude" 
+			href="auth.site.xml" 
+			xpointer="xpointer(//settings/setting[@name='provider']/node())">
+			<xi:fallback></xi:fallback>
+		</xi:include>
 	</setting>
 
 	<setting name="message">
@@ -213,6 +228,14 @@
 		<ae:parameter name="text"><![CDATA[]]></ae:parameter>
 		<ae:parameter name="include_file"><![CDATA[%core.share_dir%/login_message.html]]></ae:parameter>
 		<ae:parameter name="expand_first">false</ae:parameter>
+		
+		<!-- Just including your configuration -->
+		<xi:include 
+			xmlns:xi="http://www.w3.org/2001/XInclude" 
+			href="auth.site.xml" 
+			xpointer="xpointer(//settings/setting[@name='message']/node())">
+			<xi:fallback></xi:fallback>
+		</xi:include>
 	</setting>
 
 </settings>

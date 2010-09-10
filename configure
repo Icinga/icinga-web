@@ -2494,7 +2494,7 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/module.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/icinga-io.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3199,7 +3199,7 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
-    "app/modules/Web/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/module.xml" ;;
+    "app/modules/Web/config/icinga-io.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/icinga-io.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "etc/tests/test.properties") CONFIG_FILES="$CONFIG_FILES etc/tests/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;
@@ -3650,7 +3650,7 @@ fi
 
 
 
-	FILE="app/modules/Web/config/module.xml"
+	FILE="app/modules/Web/config/icinga-io.xml"
 	BLOCKS=`echo "CONNECTION_IDO CONNECTION_LIFESTATUS CONNECTION_FILE" | $SED "s/\s*$api_type//g"`
 	{ $as_echo "$as_me:${as_lineno-$LINENO}: Create api config in $FILE" >&5
 $as_echo "$as_me: Create api config in $FILE" >&6;}
@@ -3660,3 +3660,5 @@ $as_echo "$as_me: Create api config in $FILE" >&6;}
 
 	done
 
+
+# [EOF]

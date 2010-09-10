@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+
+<!--
+	+++ Site configuration file +++
+	
+	This file won't be overwritten
+	
+-->
+
+	<setting name="cronks">
+	<!--	
+		<ae:parameter name="iframeViewIcingaBlog">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.IframeView</ae:parameter>
+			<ae:parameter name="hide">false</ae:parameter>
+			<ae:parameter name="description">View icinga latest news</ae:parameter>
+			<ae:parameter name="name">Icinga Blog</ae:parameter>
+			<ae:parameter name="image">cronks.world</ae:parameter>
+			<ae:parameter name="categories">my_cat</ae:parameter>
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="url"><![CDATA[http://www.icinga.org/]]></ae:parameter>
+				<ae:parameter name="user"></ae:parameter>
+				<ae:parameter name="password"></ae:parameter>
+			</ae:parameter>
+		</ae:parameter>
+	-->
+	</setting>
+
+	<setting name="categories">
+	<!--
+		<ae:parameter name="my_cat">
+			<ae:parameter name="title">Customized cronks</ae:parameter>
+			<ae:parameter name="visible">true</ae:parameter>
+		</ae:parameter>
+	-->
+	</setting>
+
+</settings>

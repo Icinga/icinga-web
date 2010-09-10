@@ -67,55 +67,20 @@
 				<setting name="grid.pagerMaxItems">30</setting>
 
 				<setting name="grid.refreshTime">300</setting>
-
-				<!--
-					* Categories for the cronks
-					The content depends on cronks.xml
-				-->
+				
 				<setting name="categories">
-					<ae:parameter name="core">
-						<ae:parameter name="title">Core components</ae:parameter>
-						<ae:parameter name="visible">false</ae:parameter>
-
-					</ae:parameter>
-					
-					<ae:parameter name="data">
-						<ae:parameter name="title">Data</ae:parameter>
-						<ae:parameter name="visible">true</ae:parameter>
-						<ae:parameter name="position">10</ae:parameter>
-						<!-- Activate first! -->
-						<ae:parameter name="active">true</ae:parameter>
-					</ae:parameter>
-
-					<ae:parameter name="to">
-						<ae:parameter name="title">Tactical Overview</ae:parameter>
-						<ae:parameter name="visible">true</ae:parameter>
-						<ae:parameter name="position">20</ae:parameter>
-					</ae:parameter>
-					
-					<ae:parameter name="misc">
-						<ae:parameter name="title">Misc</ae:parameter>
-						<ae:parameter name="visible">true</ae:parameter>
-						<ae:parameter name="position">99</ae:parameter>
-					</ae:parameter>
-			
-				</setting>
-
-				<!--
-					* Include a seperated cronks.xml
-					Keep this configuration small
-				-->
-				<setting name="cronks">
-					<!-- include default cronks.xml -->
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml#xpointer(setting/node())" />
-					
-					<!-- include optional cronks.site.xml -->
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml#xpointer(setting/node())">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())" />
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())">
 						<xi:fallback></xi:fallback>
 					</xi:include>
 				</setting>
 				
-		
+				<setting name="cronks">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())" />
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+				</setting>
 			</settings>
 		</module>
 		

@@ -49,7 +49,7 @@ AC_DEFUN([ACICINGA_REMOVE_BLOCK], [
 ])
 
 AC_DEFUN([ACICINGA_CLEANUP_APICONFIG], [
-	FILE="app/modules/Web/config/module.xml"
+	FILE="$2"
 	BLOCKS=`echo "CONNECTION_IDO CONNECTION_LIFESTATUS CONNECTION_FILE" | $SED "s/\s*$1//g"`
 	AC_MSG_NOTICE([Create api config in $FILE])
 	for T in $BLOCKS; do

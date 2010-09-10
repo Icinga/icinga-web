@@ -593,6 +593,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/autoload.xml $(DESTDIR)$(prefix)/app/modules/Web/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/config_handlers.xml $(DESTDIR)$(prefix)/app/modules/Web/config/config_handlers.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/icinga-io.xml $(DESTDIR)$(prefix)/app/modules/Web/config/icinga-io.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config.php $(DESTDIR)$(prefix)/app/modules/Web/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/modules/Web/config/simple_data_provider.xml
@@ -715,12 +716,6 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/apache2
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/build.xml $(DESTDIR)$(prefix)/etc/build.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/configtemplate
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/configtemplate
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/cronks.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/cronks.site.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/cronks.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/cronks.site.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/databases.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/databases.site.xml
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/configtemplate/databases.site.xml $(DESTDIR)$(prefix)/etc/configtemplate/databases.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
@@ -2323,8 +2318,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk.orig $(DESTDIR)$(prefix)/etc/make/files.mk.orig
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk.orig $(DESTDIR)$(prefix)/etc/make/files.mk.orig
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/siteconfig.mk $(DESTDIR)$(prefix)/etc/make/siteconfig.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/siteconfig.mk $(DESTDIR)$(prefix)/etc/make/siteconfig.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/special.mk $(DESTDIR)$(prefix)/etc/make/special.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/special.mk $(DESTDIR)$(prefix)/etc/make/special.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/version.m4 $(DESTDIR)$(prefix)/etc/make/version.m4
@@ -2401,6 +2396,18 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/sitecfg
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/sitecfg
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/auth.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/auth.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/auth.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/auth.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/cronks.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/cronks.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/cronks.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/cronks.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/databases.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/databases.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/databases.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/databases.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga-io.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga-io.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga-io.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga-io.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/config
@@ -9531,6 +9538,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=8441
+INC_FILES=8448
 INC_DIRS=1089
 # INSTALL_FILES_END

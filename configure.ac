@@ -243,7 +243,7 @@ AC_CONFIG_FILES([
 	Makefile
 	app/config/databases.xml
 	app/config/icinga.xml
-	app/modules/Web/config/module.xml
+	app/modules/Web/config/icinga-io.xml
 	etc/build.properties
 	etc/tests/test.properties
 	etc/apache2/icinga-web.conf
@@ -253,4 +253,6 @@ AC_CONFIG_FILES([
 
 AC_OUTPUT
 
-ACICINGA_CLEANUP_APICONFIG([$api_type])
+ACICINGA_CLEANUP_APICONFIG([$api_type], [app/modules/Web/config/icinga-io.xml])
+
+# [EOF]
