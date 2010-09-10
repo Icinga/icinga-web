@@ -258,6 +258,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitClassUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitClassUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitColorUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitColorUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitDateUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitDateUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFileUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFileUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitHtmlUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitHtmlUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitLdapTool.class.php
@@ -2390,12 +2391,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/pgsql.sql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/sitecfg
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/sitecfg
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/auth.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/auth.site.xml
@@ -9538,6 +9539,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=8448
+INC_FILES=8449
 INC_DIRS=1089
 # INSTALL_FILES_END
