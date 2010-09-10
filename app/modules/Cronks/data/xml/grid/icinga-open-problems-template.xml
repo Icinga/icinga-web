@@ -6,8 +6,8 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">Default icinga host status template</parameter>
-        <parameter name="description">Displays object status information</parameter>
+        <parameter name="name">Open problems status template</parameter>
+        <parameter name="description">Displays information about occured problems</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
     
@@ -18,10 +18,27 @@
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
-        
+
+		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
+
         <!-- These are a dynamic js lib for using specific column renderes within this template -->
         <parameter name="dynamicscript">
         	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
+        </parameter>
+        
+        <parameter name="gridEvents">
+        	
+        	<!-- Initialize comments -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">comments</parameter>
+               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
+               		<parameter name="title">Comments for {host_name}</parameter>
+        		</parameter>
+        	</parameter>
+        	
         </parameter>
         
         <!-- 
@@ -37,7 +54,7 @@
         	<!-- 
         		Generally enabled od disabled
         	-->
-        	<parameter name="enabled">true</parameter>
+        	<parameter name="enabled">false</parameter>
         
         	<!--
         		Sourcefieldmapping
@@ -45,117 +62,18 @@
         	-->
         	<parameter name="source">
         		<parameter name="IcingaApi::COMMAND_HOST">host_name</parameter>
+				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
         	</parameter>
         	
         	<parameter name="predefined">
         		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
-        		
-        		<!-- Providing the default instance -->
-        		<parameter name="IcingaApi::COMMAND_INSTANCE">${xmlfn.instance}</parameter>
         	</parameter>
         	
         	<!-- 
         		Which commands are available in this template and can charged
         		with template data
         	-->
-        	<parameter name="items">
-        		<parameter name="PROCESS_HOST_CHECK_RESULT">
-        			<parameter name="title">Process host check result</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="ACKNOWLEDGE_HOST_PROBLEM">
-        			<parameter name="title">Acknowledge host problem</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="SCHEDULE_HOST_DOWNTIME">
-        			<parameter name="title">Schedule a host downtime</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="ADD_HOST_COMMENT">
-        			<parameter name="title">Add a host comment</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="SCHEDULE_FORCED_HOST_SVC_CHECKS">
-        			<parameter name="title">Schedule a check of all services on this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="SEND_CUSTOM_HOST_NOTIFICATION">
-        			<parameter name="title">Send custom host notification</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_HOST_CHECK">
-        			<parameter name="title">Enable active checks of this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOST_CHECK">
-        			<parameter name="title">Disable active checks of this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_PASSIVE_HOST_CHECKS">
-        			<parameter name="title">Start accepting passive checks for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_PASSIVE_HOST_CHECKS">
-        			<parameter name="title">Stop accepting passive checks for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="START_OBSESSING_OVER_HOST">
-        			<parameter name="title">Start obsessing over host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="STOP_OBSESSING_OVER_HOST">
-        			<parameter name="title">Stop obsessing over host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_HOST_NOTIFICATIONS">
-        			<parameter name="title">Enable notifications for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOST_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_HOST_SVC_NOTIFICATIONS">
-        			<parameter name="title">Enable notifications for all services on this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOST_SVC_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for all services on this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_HOST_SVC_CHECKS">
-        			<parameter name="title">Enable checks of all services on this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOST_SVC_CHECKS">
-        			<parameter name="title">Disable checks of all services on this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_HOST_EVENT_HANDLER">
-        			<parameter name="title">Enable event handler for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOST_EVENT_HANDLER">
-        			<parameter name="title">Disable event handler for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_HOST_FLAP_DETECTION">
-        			<parameter name="title">Enable flap detection for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOST_FLAP_DETECTION">
-        			<parameter name="title">Disable flap detection for this host</parameter>
-        			<parameter name="icon_class">silk-bricks</parameter>
-        		</parameter>
-        	</parameter>
+        
         	
         </parameter>
         
@@ -221,9 +139,9 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_HOST</parameter>
+        <parameter name="target">IcingaApi::TARGET_HOST_SERVICE</parameter>
         
-        <parameter name="id">service_object_id</parameter>
+        <parameter name="id">object_id</parameter>
         
         <!--
         	If the countmode is 'simple' countfields will be ignored always! To use with a pager
@@ -235,7 +153,7 @@
 			If the counting differs from data result you can specify a field to count
 		-->
         <parameter name="countfields">
-        	<parameter>HOST_ID</parameter>
+        	<parameter>PROBLEMS_OBJECT_ID</parameter>
         </parameter>
         
         <!-- 
@@ -243,7 +161,10 @@
         	without working the default structures, e.g. for user classes)
         -->
        	<parameter name="additional_fields">
-       		<parameter name="max_attempt">HOST_MAX_CHECK_ATTEMPTS</parameter>
+       		<parameter name="max_attempt_host">HOST_MAX_CHECK_ATTEMPTS</parameter>
+			<parameter name="max_attempt_service">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
+       		<parameter name="instance_id">HOST_INSTANCE_ID</parameter>
+
        	</parameter>
        	
        	<parameter name="additional_filter_fields">
@@ -257,6 +178,21 @@
 			<parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
 			<parameter name="customvariable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
        	</parameter>
+
+		<parameter name="filterPresets">
+			<parameter name="OR">
+				<parameter>
+					<parameter name="field">SERVICE_CURRENT_STATE</parameter>
+					<parameter name="val">0</parameter>
+					<parameter name="op">!=</parameter>
+				</parameter>
+				<parameter>
+					<parameter name="field">HOST_CURRENT_STATE</parameter>
+					<parameter name="val">0</parameter>
+					<parameter name="op">!=</parameter>
+				</parameter>
+			</parameter>
+		</parameter>
     </datasource>
     
     <!-- 
@@ -264,7 +200,7 @@
     -->
     <pager>
     	<parameter name="enabled">true</parameter>
-    	<parameter name="size">25</parameter>
+    	<parameter name="size">${xmlfn.pagerMaxItems}</parameter>
     	<parameter name="start">0</parameter>
     </pager>
     
@@ -278,7 +214,7 @@
     -->
     <fields>
 
-	<field name="instance_name">
+		<field name="instance_name">
         	<datasource>
         		<parameter name="field">INSTANCE_NAME</parameter>
         	</datasource>
@@ -315,9 +251,9 @@
             </order>
         </field>
 
-        <field name="host_object_id">
+        <field name="object_id">
         	<datasource>
-        		<parameter name="field">HOST_OBJECT_ID</parameter>
+        		<parameter name="field">PROBLEMS_OBJECT_ID</parameter>
         	</datasource>
         	
         	<display>
@@ -334,7 +270,7 @@
                 
                 <parameter name="no_operator">false</parameter>
                	                
-				<parameter name="field">HOST_OBJECT_ID</parameter>
+				<parameter name="field">PROBLEMS_OBJECT_ID</parameter>
             </filter>
             
             <order>
@@ -413,40 +349,17 @@
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
         </field>  
-
-        <field name="host_info">
+		<field name="service_name">
             <datasource>
-            	<parameter name="field">HOST_NAME</parameter>
+            	<parameter name="field">SERVICE_NAME</parameter>
             </datasource>
 
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-
-                <parameter name="width">22</parameter>
-
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
-                </parameter>
+                <parameter name="label">Service</parameter>
 
                 <parameter name="jsFunc">
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/fam/information.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="qtip">Click here for information</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
+                	
 
 					<parameter>
 	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
@@ -456,9 +369,11 @@
 	                	<parameter name="type">cellclick</parameter>
 
 	                	<parameter name="arguments">
-	                		<parameter name="src_id">hostinfo</parameter>
+	                		<parameter name="title">Detailed serviceinfo</parameter>
+	                		<parameter name="src_id">serviceinfo</parameter>
 	                		<parameter name="filter">
 	                			<parameter name="host">host_name</parameter>
+	                			<parameter name="service">service_name</parameter>
 	                		</parameter>
 	                	</parameter>
 	                </parameter>
@@ -466,80 +381,26 @@
             </display>
 
             <filter>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">service</parameter>
+				<parameter name="api_keyfield">SERVICE_NAME</parameter>
+				<parameter name="api_valuefield">SERVICE_NAME</parameter>
             </filter>
 
             <order>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+                <parameter name="direction">ASC</parameter>
+
+                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
         </field>
 
-        <field name="host_history_link">
-            <datasource>
-            	<parameter name="field">HOST_NAME</parameter>
-            </datasource>
-            
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-
-                <parameter name="width">22</parameter>
-                
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-                
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/fam/book.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="qtip">Click here for history</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-	                
-					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">subGrid</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">cellclick</parameter>
-	                	
-	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">historyForHost</parameter>
-	                		<parameter name="titlePrefix">Statehistory for</parameter>
-							<parameter name="targetTemplate">icinga-host-history-template</parameter>
-							<parameter name="filterMap">
-								<parameter name="host_name">host_name</parameter>
-							</parameter>
-							<parameter name="labelField">host_name</parameter>
-	                	</parameter>
-	                </parameter>
-                
-                </parameter>
-                
-            </display>
-            
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-            
-            <order>
-                <parameter name="enabled">false</parameter>
-            </order>
-        </field>
-        
         <field name="host_status">
         	<datasource>
         		<parameter name="field">HOST_CURRENT_STATE</parameter>
@@ -547,7 +408,7 @@
         	
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Status</parameter>
+                <parameter name="label">Host status</parameter>
                 <parameter name="width">100</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
@@ -579,7 +440,46 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+      
+		<field name="service_status">
+        	<datasource>
+        		<parameter name="field">SERVICE_CURRENT_STATE</parameter>
+        	</datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Service status</parameter>
+                <parameter name="width">100</parameter>
+
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+				<parameter name="jsFunc">
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+	                <parameter name="function">serviceStatus</parameter>
+
+	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                <parameter name="type">renderer</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
+
+                <parameter name="no_operator">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
         <field name="host_last_check">
         	<datasource>
         		<parameter name="field">HOST_LAST_CHECK</parameter>
@@ -587,7 +487,7 @@
         	
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Last check</parameter>
+                <parameter name="label">Last check (host)</parameter>
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
@@ -606,60 +506,47 @@
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
-        
-        <field name="host_info_icons">
-        	
+      <field name="service_last_check">
         	<datasource>
-        		<parameter name="field">HOST_OBJECT_ID</parameter>
+        		<parameter name="field">SERVICE_LAST_CHECK</parameter>
         	</datasource>
-        	
-        	<display>
+
+            <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Info</parameter>
-                
-                <parameter name="width">50</parameter>
-                
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                </parameter>
-                
+                <parameter name="label">Last check (service)</parameter>
+
+                <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayServiceIcons</parameter>
-                	<parameter name="method">hostIcons</parameter>
-                	<parameter name="arguments">
-                	
-                		<!-- Column for the service object id -->
-                		<parameter name="field">host_info_icons</parameter>
-                	</parameter>
+               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
-            
-			<filter>
+
+            <filter>
                 <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
-                <parameter name="enabled">false</parameter>
-                <parameter name="default">false</parameter>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+                <parameter name="order">DESC</parameter>
             </order>
-        	
         </field>
         
-        <field name="check_attempt">
+        <field name="check_attempt_host">
         	<datasource>
         		<parameter name="field">HOST_CURRENT_CHECK_ATTEMPT</parameter>
         	</datasource>
         	
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Attempt</parameter>
+                <parameter name="label">Attempt (Host)</parameter>
                 
 				<parameter name="userFunc">
                 	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.check_attempt} / ${field.max_attempt}]]></parameter>
+						<parameter name="format"><![CDATA[${field.check_attempt_host} / ${field.max_attempt_host}]]></parameter>
 					</parameter>
                 </parameter>
             </display>
@@ -674,61 +561,36 @@
             </order>
         </field>
 
-		<!--
-
-		External link example:
-			* Url is an Ext.XTemplate (http://www.sencha.com/deploy/dev/docs/?class=Ext.XTemplate)
-			* Fields are encapsulated by {my_field_name}
-			* Fields are declared by <field> or datasource->additional_fields
-				* Here e.g. host_name, host_id, external_link_example, ...
-
-		<field name="external_link_example">
-			<datasource>
-        		<parameter name="field">HOST_ID</parameter>
+        <field name="check_attempt_service">
+        	<datasource>
+        		<parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
         	</datasource>
 
-			<display>
+            <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-
-				<parameter name="width">22</parameter>
-
-                <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-
-	                	<parameter name="type">renderer</parameter>
-
-	                	<parameter name="arguments">
-							<parameter name="image">images/fam/book.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="qtip">Click here for history</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-
+                <parameter name="label">Attempt (Service)</parameter>
+				<parameter name="jsFunc">
 					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">hyperLink</parameter>
+						<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+						<parameter name="function">regExpReplace</parameter>
 
-	                	<parameter name="type">cellclick</parameter>
+						<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+						<parameter name="type">renderer</parameter>
 
-	                	<parameter name="arguments">
-							<parameter name="url">/mywiki/index.php?hostname={host_name}</parameter>
-							<parameter name="newWindow">false</parameter>
-	                	</parameter>
-	                </parameter>
+						<parameter name="arguments">
 
+							<parameter name="expression"><![CDATA[^[^0-9]*?[^ ][^\/][^ ][^0-9]*?$]]></parameter>
+							<parameter name="replacement">N/A</parameter>
+						</parameter>
+					</parameter>
+				</parameter>
+				<parameter name="userFunc">
+                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="method">formatTemplate</parameter>
+					<parameter name="arguments">
+						<parameter name="format"><![CDATA[${field.check_attempt_service} / ${field.max_attempt_service}]]></parameter>
+					</parameter>
                 </parameter>
-
             </display>
 
             <filter>
@@ -736,11 +598,10 @@
             </filter>
 
             <order>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
-		</field>
-		-->
+        </field>
 
         <field name="plugin_output">
         	<datasource>
@@ -749,7 +610,7 @@
         	
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Output</parameter>
+                <parameter name="label">Hostcheck output</parameter>
                 
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
@@ -770,7 +631,35 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+
+        <field name="plugin_output_service">
+        	<datasource>
+        		<parameter name="field">SERVICE_OUTPUT</parameter>
+        	</datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Servicecheck output</parameter>
+
+                <parameter name="jsFunc">
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
+                </parameter>
+
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
     </fields>
     
 </template>

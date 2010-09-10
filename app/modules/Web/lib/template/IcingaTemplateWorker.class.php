@@ -265,6 +265,16 @@ class IcingaTemplateWorker {
 			// our query target
 			$search->setSearchTarget( AppKit::getConstant($params->getParameter('target')) );
 			
+			if($params->getParameter('filterPresets')) {
+				foreach($params->getParameter('filterPresets') as $type=>$preset) {
+					$searchGroup = $search->createFilterGroup($type);
+					foreach($preset as $filterElem) {
+						$searchFilter = $search->createFilter($filterElem["field"],$filterElem["val"],$filterElem["op"]);
+						$searchGroup->addFilter($searchFilter);
+					}
+					$this->conditions[] = $searchGroup;
+				}
+			}
 			// setting the orders
 			
 			// Order by
@@ -277,7 +287,10 @@ class IcingaTemplateWorker {
 			// Restrictions
 			if (is_array($this->conditions) && count($this->conditions) > 0) {
 				foreach ($this->conditions as $condition) {
-					$search->setSearchFilter($condition['field'], $condition['val'], $condition['op']);
+					if($condition instanceof IcingaApiSearchFilter)
+						$search->setSearchFilter($condition['field'], $condition['val'], $condition['op']);
+					else
+						$search->setSearchFilter($condition);
 				}
 			}
 			

@@ -114,7 +114,21 @@
 				<ae:parameter name="template">icinga-service-history-template</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
-		
+
+
+		<ae:parameter name="gridOpenProblemsView">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.ViewProc</ae:parameter>
+			<ae:parameter name="hide">false</ae:parameter>
+			<ae:parameter name="description">Show summary of open problem</ae:parameter>
+			<ae:parameter name="name">Open problems</ae:parameter>
+			<ae:parameter name="categories">data</ae:parameter>
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="template">icinga-open-problems-template</ae:parameter>
+			</ae:parameter>
+		</ae:parameter>
+
+
 		<ae:parameter name="gridLogView">
 			<ae:parameter name="module">Cronks</ae:parameter>
 			<ae:parameter name="action">System.ViewProc</ae:parameter>

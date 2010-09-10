@@ -50,6 +50,8 @@ Cronk.grid.ColumnRenderer = {
 	
 	truncateText : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
+			if(!value) 
+				return "";
 			// skip truncate if html is located at the ouput
 			if(value.match(/<.*?>(.*?)<\/.*?>/g))
 				return value;
@@ -98,9 +100,19 @@ Cronk.grid.ColumnRenderer = {
 			}
 		}
 	},
+
+	regExpReplace: function(cfg) {
+		return function(value, metaData, record, rowIndex, colIndex, store) {
+			var exp = new RegExp(cfg.expression);
+			return value.replace(exp,cfg.replacement);
+
+		}
+	},
 	
 	serviceStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
+			if(!value)
+				return "";
 			return Icinga.StatusData.wrapElement('service', value);
 		}
 	},

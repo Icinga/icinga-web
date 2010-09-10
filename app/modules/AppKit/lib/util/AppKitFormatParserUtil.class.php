@@ -108,7 +108,7 @@ class AppKitFormatParserUtil {
 	
 	public function parseData($format) {
 		$m = array();
-		
+		$begin = $format;
 		if (preg_match_all('@\$\{([^\}]+)\}@', $format, $m, PREG_SET_ORDER)) {
 			foreach ($m as $match) {
 				$parts = explode('.', $match[1]);
@@ -158,8 +158,9 @@ class AppKitFormatParserUtil {
 				
 			}
 		}
-		
+
 		return $format;
+
 	}
 	
 	private function getNamespaceType($namespace) {
