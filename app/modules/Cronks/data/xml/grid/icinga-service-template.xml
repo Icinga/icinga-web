@@ -237,7 +237,8 @@
        	<parameter name="additional_fields">
        		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
        		<parameter name="instance_id">SERVICE_INSTANCE_ID</parameter>
-       	</parameter>
+			<parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
+		</parameter>
        	
        	<parameter name="additional_filter_fields">
        		<parameter name="servicegroup_object_id">SERVICEGROUP_OBJECT_ID</parameter>

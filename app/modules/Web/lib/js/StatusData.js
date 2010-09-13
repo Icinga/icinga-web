@@ -33,11 +33,13 @@ Icinga.DEFAULTS.STATUS_DATA = {
 	HOST_UP : 0,
 	HOST_DOWN: 1,
 	HOST_UNREACHABLE: 2,
-	
+	HOST_PENDING: 99,
+
 	hoststatusText : {
 		0: _('UP'),
 		1: _('DOWN'),
 		2: _('UNREACHABLE'),
+		99: _('PENDING'),
 		100: _('IN TOTAL')
 	},
 	
@@ -45,6 +47,7 @@ Icinga.DEFAULTS.STATUS_DATA = {
 		0: 'icinga-status-up',
 		1: 'icinga-status-down',
 		2: 'icinga-status-unreachable',
+		99:'icinga-status-pending',
 		100: 'icinga-status-all'
 	},
 	
@@ -52,12 +55,14 @@ Icinga.DEFAULTS.STATUS_DATA = {
 	SERVICE_WARNING : 1,
 	SERVICE_CRITICAL : 2,
 	SERVICE_UNKNOWN : 3,
+	SERVICE_PENDING: 99,
 	
 	servicestatusText : {
 		0: _('OK'),
 		1: _('WARNING'),
 		2: _('CRITICAL'),
 		3: _('UNKNOWN'),
+		99: _('PENDING'),
 		100: _('IN TOTAL')
 	},
 	
@@ -66,6 +71,7 @@ Icinga.DEFAULTS.STATUS_DATA = {
 		1: 'icinga-status-warning',
 		2: 'icinga-status-critical',
 		3: 'icinga-status-unknown',
+		99:'icinga-status-pending',
 		100: 'icinga-status-all'
 	}
 };

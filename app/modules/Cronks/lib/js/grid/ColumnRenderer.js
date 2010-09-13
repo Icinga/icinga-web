@@ -111,6 +111,9 @@ Cronk.grid.ColumnRenderer = {
 	
 	serviceStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
+			if(Ext.isDefined(record.json.service_is_pending))
+				if(record.json.servce_is_pending == 1)
+					value=99;
 			if(!value)
 				return "";
 			return Icinga.StatusData.wrapElement('service', value);
@@ -119,6 +122,11 @@ Cronk.grid.ColumnRenderer = {
 	
 	hostStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
+			if(Ext.isDefined(record.json.host_is_pending))
+				if(record.json.host_is_pending == 1)
+					value=99;
+			if(!value)
+				return "";
 			return Icinga.StatusData.wrapElement('host', value);
 		}
 	},

@@ -329,6 +329,15 @@ span.icinga-status-unknown {
 	color: #ff8000;
 }
 
+span.icinga-status-pending {
+	color: #aa3377;
+}
+
+div.icinga-status-pending {
+	background-color: #aa2277;
+}
+
+
 div.icinga-status-all {
 	background-color: #a0a0a0;
 }

@@ -260,6 +260,7 @@
        	<parameter name="additional_fields">
        		<parameter name="max_attempt">HOST_MAX_CHECK_ATTEMPTS</parameter>
        		<parameter name="instance_id">HOST_INSTANCE_ID</parameter>
+			<parameter name="host_is_pending">HOST_IS_PENDING</parameter>
        	</parameter>
        	
        	<parameter name="additional_filter_fields">
