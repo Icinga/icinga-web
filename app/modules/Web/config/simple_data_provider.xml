@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<setting xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+<settings xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<setting name="simpledataprovider">
 		<!-- 
 			Locale information:
 			
@@ -297,5 +298,5 @@
 				<!-- <ae:parameter name="length">1</ae:parameter> -->
 			</ae:parameter>
 		</ae:parameter>
-		
-</setting>
+	</setting>
+</settings>

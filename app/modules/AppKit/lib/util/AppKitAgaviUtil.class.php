@@ -53,6 +53,29 @@ class AppKitAgaviUtil {
 		}
 		return $text;
 	}
+	
+	/**
+	 * Shortcut to initialize modules without strict warnings
+	 * @param AgaviController
+	 */
+	public static function initializeModule($moduleName) {
+		return self::getAgaviControllerInstance()->initializeModule($moduleName);
+	}
+	
+	/**
+	 * Returns a single instance of the Agavi controller to work
+	 * with non-static methods
+	 * @return AgaviController
+	 */
+	public static function getAgaviControllerInstance() {
+		static $agaviController = null;
+		
+		if ($agaviController === null) {
+			$agaviController = new AgaviController();
+		}
+		
+		return $agaviController;
+	}
 
 }
 

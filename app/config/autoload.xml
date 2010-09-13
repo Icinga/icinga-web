@@ -7,5 +7,7 @@
 		<autoload name="IcingaBaseModel">%core.lib_dir%/model/IcingaBaseModel.class.php</autoload>
 		<autoload name="IcingaBaseView">%core.lib_dir%/view/IcingaBaseView.class.php</autoload>
 		
+		<!-- Agavi util -->
+		<autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
 	</ae:configuration>
 </ae:configurations>

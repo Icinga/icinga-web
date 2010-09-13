@@ -59,12 +59,6 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 		$data = strftime('%Y-%d-%H-').  (date('i') - (date('i') % self::TIME_VALID));
 		$data .= '-'. $this->getContext()->getUser()->getNsmUser()->user_id;
 		$data .= '-'. session_id();
-		
-		// OK, pid is too hard ;-)
-		// $data .= '-'. getmypid();
-		
-		// var_dump($data);
-		
 		return hash_hmac(self::TIME_ALGO, $data, self::TIME_KEY);
 	}
 	

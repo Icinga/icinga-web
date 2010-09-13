@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<module enabled="true">
+			<settings>
+				<setting name="title">Web Module</setting>
+				<setting name="version">1.0</setting>
+
+				<setting name="appkit_module.app.javascript_files">
+						<!--  ICINGA JS -->
+						<ae:parameter>%core.module_dir%/Web/lib/js/StatusData.js</ae:parameter>
+						<ae:parameter>%core.module_dir%/Web/lib/js/SimpleDataProvider.js</ae:parameter>
+				</setting>
+
+			</settings>
+
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml" />
+			
+			<!-- include icnga connection settings -->
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga-io.xml" />
+			
+			<!-- include optional override settings file -->
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga-io.site.xml">
+				<xi:fallback></xi:fallback>
+			</xi:include>
+			
+		</module>
+		
+	</ae:configuration>
+</ae:configurations>

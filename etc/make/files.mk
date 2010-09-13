@@ -258,7 +258,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitClassUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitClassUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitColorUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitColorUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitDateUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitDateUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFileUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFileUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitFormatParserUtil.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitHtmlUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitHtmlUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitLdapTool.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitLdapTool.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitModuleUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitModuleUtil.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/lib/util/AppKitRandomUtil.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/lib/util/AppKitRandomUtil.class.php
@@ -321,6 +323,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/AjaxLoginSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/AjaxLoginSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginError.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/LoginInput.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/LoginInput.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/LoginCheckSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/LoginCheckSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/SilentAuthConfigError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/SilentAuthConfigError.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/SilentAuthError.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/SilentAuthError.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Login/SilentAuthSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Login/SilentAuthSuccess.php
@@ -591,6 +594,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/autoload.xml $(DESTDIR)$(prefix)/app/modules/Web/config/autoload.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/config_handlers.xml $(DESTDIR)$(prefix)/app/modules/Web/config/config_handlers.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/icinga-io.xml $(DESTDIR)$(prefix)/app/modules/Web/config/icinga-io.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/module.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config.php $(DESTDIR)$(prefix)/app/modules/Web/config.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/config/simple_data_provider.xml $(DESTDIR)$(prefix)/app/modules/Web/config/simple_data_provider.xml
@@ -717,6 +721,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin/actionQueueTask.php
@@ -2291,46 +2297,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/phing/util/SourceFileScanner.php $(DESTDIR)$(prefix)/etc/contrib/Skeleton/phing/util/SourceFileScanner.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/phing/util/StringHelper.php $(DESTDIR)$(prefix)/etc/contrib/Skeleton/phing/util/StringHelper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/phing/util/StringHelper.php $(DESTDIR)$(prefix)/etc/contrib/Skeleton/phing/util/StringHelper.php
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/dbInit.tar.gz $(DESTDIR)$(prefix)/etc/database/dbInit.tar.gz
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/dbInit.tar.gz $(DESTDIR)$(prefix)/etc/database/dbInit.tar.gz
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/migrations
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/migrations
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194331_addnsmlog.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194331_addnsmlog.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194331_addnsmlog.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194331_addnsmlog.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194332_addnsmprincipal.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194332_addnsmprincipal.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194332_addnsmprincipal.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194332_addnsmprincipal.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194333_addnsmprincipaltarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194333_addnsmprincipaltarget.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194333_addnsmprincipaltarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194333_addnsmprincipaltarget.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194334_addnsmrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194334_addnsmrole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194334_addnsmrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194334_addnsmrole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194335_addnsmsession.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194335_addnsmsession.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194335_addnsmsession.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194335_addnsmsession.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194336_addnsmtarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194336_addnsmtarget.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194336_addnsmtarget.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194336_addnsmtarget.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194337_addnsmtargetvalue.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194337_addnsmtargetvalue.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194337_addnsmtargetvalue.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194337_addnsmtargetvalue.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194339_addnsmuser.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194339_addnsmuser.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194339_addnsmuser.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194339_addnsmuser.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194340_addnsmuserpreference.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194340_addnsmuserpreference.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194340_addnsmuserpreference.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194340_addnsmuserpreference.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194341_addnsmuserrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194341_addnsmuserrole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194341_addnsmuserrole.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194341_addnsmuserrole.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194342_addfks.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194342_addfks.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/migrations/1274194342_addfks.php $(DESTDIR)$(prefix)/etc/database/migrations/1274194342_addfks.php
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/model
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/model
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model-current.mwb $(DESTDIR)$(prefix)/etc/database/model/model-current.mwb
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/model/model-current.mwb $(DESTDIR)$(prefix)/etc/database/model/model-current.mwb
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue/mysql
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/database/rescue/mysql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-data.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-data.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-data.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-schema.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/database/rescue/mysql/20100518165800-rescue-schema.sql $(DESTDIR)$(prefix)/etc/database/rescue/mysql/20100518165800-rescue-schema.sql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/lib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/lib
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/lib/agaviConsoleTask.php $(DESTDIR)$(prefix)/etc/lib/agaviConsoleTask.php
@@ -2353,10 +2319,64 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/make
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/files.mk $(DESTDIR)$(prefix)/etc/make/files.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/siteconfig.mk $(DESTDIR)$(prefix)/etc/make/siteconfig.mk
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/siteconfig.mk $(DESTDIR)$(prefix)/etc/make/siteconfig.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/special.mk $(DESTDIR)$(prefix)/etc/make/special.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/special.mk $(DESTDIR)$(prefix)/etc/make/special.mk
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/version.m4 $(DESTDIR)$(prefix)/etc/make/version.m4
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/make/version.m4 $(DESTDIR)$(prefix)/etc/make/version.m4
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/modules
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/modules
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/modules/bin
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/modules/bin
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/modules/bin/actionQueueTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/modules/bin/actionQueueTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/cronkMetaExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/cronkMetaExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/cronkMetaExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/cronkMetaExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/db.ini $(DESTDIR)$(prefix)/etc/modules/bin/db.ini
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/db.ini $(DESTDIR)$(prefix)/etc/modules/bin/db.ini
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/dependencyCheckerTask.php $(DESTDIR)$(prefix)/etc/modules/bin/dependencyCheckerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/dependencyCheckerTask.php $(DESTDIR)$(prefix)/etc/modules/bin/dependencyCheckerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/doctrineDBBuilderTask.php $(DESTDIR)$(prefix)/etc/modules/bin/doctrineDBBuilderTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/doctrineDBBuilderTask.php $(DESTDIR)$(prefix)/etc/modules/bin/doctrineDBBuilderTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/fileSelectorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/fileSelectorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/fileSelectorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/fileSelectorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/icingaManifest.php $(DESTDIR)$(prefix)/etc/modules/bin/icingaManifest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/icingaManifest.php $(DESTDIR)$(prefix)/etc/modules/bin/icingaManifest.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/manifestMapper.php $(DESTDIR)$(prefix)/etc/modules/bin/manifestMapper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/manifestMapper.php $(DESTDIR)$(prefix)/etc/modules/bin/manifestMapper.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/moduleMetaPrinterTask.php $(DESTDIR)$(prefix)/etc/modules/bin/moduleMetaPrinterTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/moduleMetaPrinterTask.php $(DESTDIR)$(prefix)/etc/modules/bin/moduleMetaPrinterTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/saveCopyFilter.php $(DESTDIR)$(prefix)/etc/modules/bin/saveCopyFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/saveCopyFilter.php $(DESTDIR)$(prefix)/etc/modules/bin/saveCopyFilter.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/settingsExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/settingsExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/settingsExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/settingsExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/settingsInjectorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/settingsInjectorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/settingsInjectorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/settingsInjectorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/snippetExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/snippetExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/snippetExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/snippetExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/snippetInjectorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/snippetInjectorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/snippetInjectorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/snippetInjectorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/sqlRunnerTask.php $(DESTDIR)$(prefix)/etc/modules/bin/sqlRunnerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/sqlRunnerTask.php $(DESTDIR)$(prefix)/etc/modules/bin/sqlRunnerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlExtractorTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlExtractorTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlHelperTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlHelperTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlHelperTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlHelperTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlMergerChainTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlMergerChainTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlMergerChainTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlMergerChainTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlMergerTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlMergerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlMergerTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlMergerTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlRemoverTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlRemoverTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/bin/xmlRemoverTask.php $(DESTDIR)$(prefix)/etc/modules/bin/xmlRemoverTask.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/build.properties $(DESTDIR)$(prefix)/etc/modules/build.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/build.properties $(DESTDIR)$(prefix)/etc/modules/build.properties
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/build.xml $(DESTDIR)$(prefix)/etc/modules/build.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/build.xml $(DESTDIR)$(prefix)/etc/modules/build.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/modules/etc
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/modules/etc
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/etc/db.ini $(DESTDIR)$(prefix)/etc/modules/etc/db.ini
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/modules/etc/db.ini $(DESTDIR)$(prefix)/etc/modules/etc/db.ini
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/scheduler
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/scheduler/icingaCron $(DESTDIR)$(prefix)/etc/scheduler/icingaCron
@@ -2371,12 +2391,24 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/pgsql.sql $(DESTDIR)$(prefix)/etc/schema/pgsql.sql
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema/updates
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-0-4.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/mysql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/mysql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/oracle_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/oracle_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql $(DESTDIR)$(prefix)/etc/schema/updates/pgsql_v1-0-3_to_v1-2.sql
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/sitecfg
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/sitecfg
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/auth.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/auth.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/auth.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/auth.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/cronks.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/cronks.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/cronks.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/cronks.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/databases.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/databases.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/databases.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/databases.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga-io.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga-io.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga-io.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga-io.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga.site.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/sitecfg/icinga.site.xml $(DESTDIR)$(prefix)/etc/sitecfg/icinga.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/config
@@ -2387,7 +2419,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/config/suites.xml $(DESTDIR)$(prefix)/etc/tests/config/suites.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/icingaWebTesting.php $(DESTDIR)$(prefix)/etc/tests/icingaWebTesting.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/icingaWebTesting.php $(DESTDIR)$(prefix)/etc/tests/icingaWebTesting.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/tests/test.properties $(DESTDIR)$(prefix)/etc/tests/test.properties
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/tests/tests/database
@@ -9508,6 +9539,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=8424
-INC_DIRS=1091
+INC_FILES=8449
+INC_DIRS=1089
 # INSTALL_FILES_END

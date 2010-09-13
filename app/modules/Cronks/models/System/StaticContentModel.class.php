@@ -35,7 +35,9 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 		else {
 			$this->templateFile = $templateFile;
 		}
-
+		
+		AppKitFileUtil::fileExists($this->templateFile);
+		
 		$this->dom = new DOMDocument('1.0', 'utf-8');
 		$this->dom->preserveWhiteSpace = false;
 		$this->dom->load($this->templateFile);

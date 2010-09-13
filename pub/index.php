@@ -22,7 +22,7 @@ Agavi::bootstrap('development');
 AgaviConfig::set('core.default_context', 'web');
 
 // Main module
-AgaviController::initializeModule('AppKit');
+AppKitAgaviUtil::initializeModule('AppKit');
 
 // Some kind of agavi like bootstrap
 // hook in

@@ -107,9 +107,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 				
 				_APPKIT.superclass.constructor.call(this);
 				
-				this.c = {	domain: document.location.host || document.domain,
-							path: document.location.pathname.replace(/\/$/, ''),
-							issecure: (document.location.protocol.indexOf('https') == 0) ? true : false };
+				this.c = {};
 				
 				this.ready = false;
 				

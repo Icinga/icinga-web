@@ -1,410 +1,441 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<setting xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
-		<!--
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			DOC
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	<setting name="categories">
+		<ae:parameter name="core">
+			<ae:parameter name="title">Core components</ae:parameter>
+			<ae:parameter name="visible">false</ae:parameter>
+		</ae:parameter>
+		
+		<ae:parameter name="data">
+			<ae:parameter name="title">Data</ae:parameter>
+			<ae:parameter name="visible">true</ae:parameter>
+			<ae:parameter name="position">10</ae:parameter>
+			<!-- Activate first! -->
+			<ae:parameter name="active">true</ae:parameter>
+		</ae:parameter>
 
-			What is possible, what is not!
+		<ae:parameter name="to">
+			<ae:parameter name="title">Tactical Overview</ae:parameter>
+			<ae:parameter name="visible">true</ae:parameter>
+			<ae:parameter name="position">20</ae:parameter>
+		</ae:parameter>
+		
+		<ae:parameter name="misc">
+			<ae:parameter name="title">Misc</ae:parameter>
+			<ae:parameter name="visible">true</ae:parameter>
+			<ae:parameter name="position">99</ae:parameter>
+		</ae:parameter>
 
-			<ae:parameter name=" <Unique identifier of of the cronk> ">
+	</setting>
 
-				<ae:parameter name="module"> <Agavi module name> </ae:parameter>
-
-				<ae:parameter name="action"> <Name of the AgaviAction> </ae:parameter>
-
-				<ae:parameter name="hide"> <Hidden flag true|false for list views> </ae:parameter>
-
-				<ae:parameter name="description"> <Short descript for quick tips> </ae:parameter>
-
-				<ae:parameter name="name"> <Name of the cronk, simply a short label> </ae:parameter>
-
-				<ae:parameter name="categories"> <comma seperated list of category names> </ae:parameter>
-
-				<ae:parameter name="groupsonly"> <Comma seperated string of agavi group names> </ae:parameter>
-
-				* Specific cronk parameters which will predefine the action
-
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-tactical-overview-template</ae:parameter>
+	<setting name="cronks">
+	
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				DOC
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+				What is possible, what is not!
+	
+				<ae:parameter name=" <Unique identifier of of the cronk> ">
+	
+					<ae:parameter name="module"> <Agavi module name> </ae:parameter>
+	
+					<ae:parameter name="action"> <Name of the AgaviAction> </ae:parameter>
+	
+					<ae:parameter name="hide"> <Hidden flag true|false for list views> </ae:parameter>
+	
+					<ae:parameter name="description"> <Short descript for quick tips> </ae:parameter>
+	
+					<ae:parameter name="name"> <Name of the cronk, simply a short label> </ae:parameter>
+	
+					<ae:parameter name="categories"> <comma seperated list of category names> </ae:parameter>
+	
+					<ae:parameter name="groupsonly"> <Comma seperated string of agavi group names> </ae:parameter>
+	
+					* Specific cronk parameters which will predefine the action
+	
+					<ae:parameter name="ae:parameter">
+						<ae:parameter name="template">icinga-tactical-overview-template</ae:parameter>
+					</ae:parameter>
+	
+					<ae:parameter name="disabled"> <true|false completely disable the cronk for execution> </ae:parameter>
+	
 				</ae:parameter>
-
-				<ae:parameter name="disabled"> <true|false completely disable the cronk for execution> </ae:parameter>
-
-			</ae:parameter>
-		
-		-->
-
-		<!--
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			Datagrids - [START]
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-			Just some column portlets and statusmap
-		-->
-		<ae:parameter name="gridHostgroupSummary">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Display hostgroup summary</ae:parameter>
-			<ae:parameter name="name">Hostgroups</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="gridServicegroupSummary">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Display service summary</ae:parameter>
-			<ae:parameter name="name">Servicegroups</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="gridHostView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Viewing host status in a grid</ae:parameter>
-			<ae:parameter name="name">HostStatus</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-host-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="gridHostHistoryView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Host status history information</ae:parameter>
-			<ae:parameter name="name">HostHistory</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-host-history-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="gridServiceView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Viewing service status in a grid</ae:parameter>
-			<ae:parameter name="name">ServiceStatus</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-service-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		
-		<ae:parameter name="gridServiceHistoryView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Statushistory for services</ae:parameter>
-			<ae:parameter name="name">ServiceHistory</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-service-history-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-
-		<ae:parameter name="gridOpenProblemsView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Show summary of open problem</ae:parameter>
-			<ae:parameter name="name">Open problems</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-open-problems-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-
-		<ae:parameter name="gridLogView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Display icinga process log</ae:parameter>
-			<ae:parameter name="name">LogView</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-log-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		
-		<ae:parameter name="gridNotificationView">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Display icinga notifications</ae:parameter>
-			<ae:parameter name="name">Notifications</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-notification-template</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		<!-- Datagrids - [STOP] -->
-
-
-		<!--
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			Misc - [START]
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-			Just some column portlets and statusmap
-		-->
-		<ae:parameter name="icingaStatusMap">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StatusMap</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Status Map</ae:parameter>
-			<ae:parameter name="name">Status Map</ae:parameter>
-			<ae:parameter name="categories">data</ae:parameter>
-			<ae:parameter name="ae:parameter"></ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="portalView1Col">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.PortalView</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Portalgrid 1 column</ae:parameter>
-			<ae:parameter name="name">Portal 1column</ae:parameter>
-			<ae:parameter name="image">cronks.portal</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="columns">1</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		
-		<ae:parameter name="portalView2Col">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.PortalView</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Portalgrid 2 column</ae:parameter>
-			<ae:parameter name="name">Portal 2columns</ae:parameter>
-			<ae:parameter name="image">cronks.portal</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="columns">2</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		
-		<ae:parameter name="portalView3Col">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.PortalView</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Portalgrid 3 column</ae:parameter>
-			<ae:parameter name="name">Portal 3columns</ae:parameter>
-			<ae:parameter name="image">cronks.portal</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="columns">3</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		<!-- Misc -[STOP] -->
-
-
-		<!--
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			Iframes - [START]
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		-->
-		<ae:parameter name="iframeViewGoogle">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.IframeView</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">View something within an iframe</ae:parameter>
-			<ae:parameter name="name">Google</ae:parameter>
-			<ae:parameter name="image">cronks.world</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="url"><![CDATA[http://www.google.de/]]></ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		
-		<ae:parameter name="iframeViewIcinga">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.IframeView</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">View something within an iframe</ae:parameter>
-			<ae:parameter name="name">Icinga</ae:parameter>
-			<ae:parameter name="image">cronks.world</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="url"><![CDATA[http://demo.icinga.org/icinga/]]></ae:parameter>
-				<ae:parameter name="user">guest</ae:parameter>
-				<ae:parameter name="password">guest</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="genericIFrame">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.IframeView</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">View something within an iframe</ae:parameter>
-			<ae:parameter name="name">Icinga</ae:parameter>
-			<ae:parameter name="image">cronks.world</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-		</ae:parameter>
-		<!-- Iframes - [STOP] -->
-
-		<!--
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			System cronks - [START]
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-			To build the portal structures
-			* DO NOT CHANGE ANYTHING *
-		-->
-
-		<ae:parameter name="icingaOverallStatus">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StatusOverall</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Overall Status</ae:parameter>
-			<ae:parameter name="name">Displays the overall status</ae:parameter>
-			<ae:parameter name="categories">core</ae:parameter>
-			<ae:parameter name="ae:parameter">
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="icingaToProc">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StaticContent</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-			<ae:parameter name="name">Generic TO processor</ae:parameter>
-			<ae:parameter name="categories">core</ae:parameter>
-
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="interface">true</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="gridProc">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ViewProc</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">A generic ajax grid xml processor to display icinga information</ae:parameter>
-			<ae:parameter name="categories">core</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="crportal">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.CronkPortal</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">The cronkportal itself (icinga application)</ae:parameter>
-			<ae:parameter name="name">Cronk portal</ae:parameter>
-			<ae:parameter name="categories">core</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="crlist">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.CronkListing</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Lists available cronks</ae:parameter>
-			<ae:parameter name="name">Cronk dataview provider</ae:parameter>
-			<ae:parameter name="categories">core</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="icingaSearch">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.ObjectSearch</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Search something</ae:parameter>
-			<ae:parameter name="name">Search</ae:parameter>
-			<ae:parameter name="categories">core</ae:parameter>
-			<ae:parameter name="ae:parameter">
-
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="portalHello">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.PortalHello</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Say hello to the world</ae:parameter>
-			<ae:parameter name="name">HelloWorld</ae:parameter>
-			<ae:parameter name="categories">demo</ae:parameter>
-		</ae:parameter>
-		<!-- System cronks - [STOP] -->
-
-		<!--
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			Tactical overviews - [START]
-			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		-->
-
-		<ae:parameter name="icingaTacticalOverviewHG">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StaticContent</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-			<ae:parameter name="name">TO Hostgroup</ae:parameter>
-			<ae:parameter name="categories">to</ae:parameter>
 			
-			<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-			
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
-				<ae:parameter name="interface">true</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="icingaTacticalOverviewChartSumAll">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StaticContent</ae:parameter>
-			<ae:parameter name="hide">false</ae:parameter>
-			<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-			<ae:parameter name="name">TO Charts</ae:parameter>
-			<ae:parameter name="categories">to</ae:parameter>
-
-			<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="template">icinga-tactical-overview-template-charts</ae:parameter>
-				<ae:parameter name="interface">true</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-
-		<ae:parameter name="icingaTacticalOverviewCV">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">System.StaticContent</ae:parameter>
-                <ae:parameter name="hide">false</ae:parameter>
-                <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
-                <ae:parameter name="name">TO CustomVariable</ae:parameter>
-				<ae:parameter name="categories">to</ae:parameter>
-
-				<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-
+			-->
+	
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				Datagrids - [START]
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+				Just some column portlets and statusmap
+			-->
+			<ae:parameter name="gridHostgroupSummary">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Display hostgroup summary</ae:parameter>
+				<ae:parameter name="name">Hostgroups</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
 				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>
-					<ae:parameter name="interface">true</ae:parameter>
+					<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
+				</ae:parameter>
 			</ae:parameter>
-		</ae:parameter>
-		<!-- Tactical overviews - [STOP] -->
+	
+			<ae:parameter name="gridServicegroupSummary">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Display service summary</ae:parameter>
+				<ae:parameter name="name">Servicegroups</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="gridHostView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Viewing host status in a grid</ae:parameter>
+				<ae:parameter name="name">HostStatus</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-host-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="gridHostHistoryView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Host status history information</ae:parameter>
+				<ae:parameter name="name">HostHistory</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-host-history-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="gridServiceView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Viewing service status in a grid</ae:parameter>
+				<ae:parameter name="name">ServiceStatus</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-service-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			
+			<ae:parameter name="gridServiceHistoryView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Statushistory for services</ae:parameter>
+				<ae:parameter name="name">ServiceHistory</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-service-history-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			
+			<ae:parameter name="gridLogView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Display icinga process log</ae:parameter>
+				<ae:parameter name="name">LogView</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-log-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
 		
-		<!-- Demo cronk - [START] -->
-		<ae:parameter name="icingaExampleCronkHelloWorld">
-			<ae:parameter name="module">Cronks</ae:parameter>
-			<ae:parameter name="action">Example.HelloWorld</ae:parameter>
-			<ae:parameter name="hide">true</ae:parameter>
-			<ae:parameter name="description">Just say hello to the world</ae:parameter>
-			<ae:parameter name="name">HelloWorld</ae:parameter>
-			<ae:parameter name="categories">misc</ae:parameter>
-			<ae:parameter name="ae:parameter">
-				<ae:parameter name="say_what">Hello icinga-web!</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		<!-- Demo cronk - [STOP] -->
 
-</setting>
+			<ae:parameter name="gridOpenProblemsView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Show summary of open problem</ae:parameter>
+				<ae:parameter name="name">Open problems</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-open-problems-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="gridNotificationView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Display icinga notifications</ae:parameter>
+				<ae:parameter name="name">Notifications</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-notification-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<!-- Datagrids - [STOP] -->
+	
+	
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				Misc - [START]
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+				Just some column portlets and statusmap
+			-->
+			<ae:parameter name="icingaStatusMap">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StatusMap</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Status Map</ae:parameter>
+				<ae:parameter name="name">Status Map</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="ae:parameter"></ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="portalView1Col">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.PortalView</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Portalgrid 1 column</ae:parameter>
+				<ae:parameter name="name">Portal 1column</ae:parameter>
+				<ae:parameter name="image">cronks.portal</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="columns">1</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			
+			<ae:parameter name="portalView2Col">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.PortalView</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Portalgrid 2 column</ae:parameter>
+				<ae:parameter name="name">Portal 2columns</ae:parameter>
+				<ae:parameter name="image">cronks.portal</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="columns">2</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			
+			<ae:parameter name="portalView3Col">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.PortalView</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Portalgrid 3 column</ae:parameter>
+				<ae:parameter name="name">Portal 3columns</ae:parameter>
+				<ae:parameter name="image">cronks.portal</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="columns">3</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<!-- Misc -[STOP] -->
+	
+	
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				Iframes - [START]
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			-->
+			<ae:parameter name="iframeViewGoogle">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.IframeView</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">View something within an iframe</ae:parameter>
+				<ae:parameter name="name">Google</ae:parameter>
+				<ae:parameter name="image">cronks.world</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="url"><![CDATA[http://www.google.de/]]></ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			
+			<ae:parameter name="iframeViewIcinga">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.IframeView</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">View something within an iframe</ae:parameter>
+				<ae:parameter name="name">Icinga</ae:parameter>
+				<ae:parameter name="image">cronks.world</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="url"><![CDATA[http://demo.icinga.org/icinga/]]></ae:parameter>
+					<ae:parameter name="user">guest</ae:parameter>
+					<ae:parameter name="password">guest</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="genericIFrame">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.IframeView</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">View something within an iframe</ae:parameter>
+				<ae:parameter name="name">Icinga</ae:parameter>
+				<ae:parameter name="image">cronks.world</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+			</ae:parameter>
+			<!-- Iframes - [STOP] -->
+	
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				System cronks - [START]
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+				To build the portal structures
+				* DO NOT CHANGE ANYTHING *
+			-->
+	
+			<ae:parameter name="icingaOverallStatus">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StatusOverall</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Overall Status</ae:parameter>
+				<ae:parameter name="name">Displays the overall status</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+				<ae:parameter name="ae:parameter">
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="icingaToProc">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StaticContent</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+				<ae:parameter name="name">Generic TO processor</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+	
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="interface">true</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="gridProc">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">A generic ajax grid xml processor to display icinga information</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="crportal">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.CronkPortal</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">The cronkportal itself (icinga application)</ae:parameter>
+				<ae:parameter name="name">Cronk portal</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="crlist">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.CronkListing</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Lists available cronks</ae:parameter>
+				<ae:parameter name="name">Cronk dataview provider</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="icingaSearch">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ObjectSearch</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Search something</ae:parameter>
+				<ae:parameter name="name">Search</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+				<ae:parameter name="ae:parameter">
+	
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="portalHello">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.PortalHello</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Say hello to the world</ae:parameter>
+				<ae:parameter name="name">HelloWorld</ae:parameter>
+				<ae:parameter name="categories">demo</ae:parameter>
+			</ae:parameter>
+			<!-- System cronks - [STOP] -->
+	
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				Tactical overviews - [START]
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			-->
+	
+			<ae:parameter name="icingaTacticalOverviewHG">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StaticContent</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+				<ae:parameter name="name">TO Hostgroup</ae:parameter>
+				<ae:parameter name="categories">to</ae:parameter>
+				
+				<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+				
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
+					<ae:parameter name="interface">true</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="icingaTacticalOverviewChartSumAll">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StaticContent</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+				<ae:parameter name="name">TO Charts</ae:parameter>
+				<ae:parameter name="categories">to</ae:parameter>
+	
+				<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+	
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-tactical-overview-template-charts</ae:parameter>
+					<ae:parameter name="interface">true</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+	
+			<ae:parameter name="icingaTacticalOverviewCV">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StaticContent</ae:parameter>
+	                <ae:parameter name="hide">false</ae:parameter>
+	                <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+	                <ae:parameter name="name">TO CustomVariable</ae:parameter>
+					<ae:parameter name="categories">to</ae:parameter>
+	
+					<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+	
+					<ae:parameter name="ae:parameter">
+						<ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>
+						<ae:parameter name="interface">true</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<!-- Tactical overviews - [STOP] -->
+			
+			<!-- Demo cronk - [START] -->
+			<ae:parameter name="icingaExampleCronkHelloWorld">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">Example.HelloWorld</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Just say hello to the world</ae:parameter>
+				<ae:parameter name="name">HelloWorld</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="say_what">Hello icinga-web!</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<!-- Demo cronk - [STOP] -->
+	
+	</setting>
+	
+</settings>

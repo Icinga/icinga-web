@@ -134,6 +134,12 @@ AC_ARG_WITH([db_pass],
 	db_pass=icinga_web
 )
 
+AC_ARG_WITH([db_socket],
+	AS_HELP_STRING([--with-db-socket=SOCKET], [DB path to unix socket (default /tmp/mysql.sock)]),
+	db_socket=$withval,
+	db_socket=/tmp/mysql.sock
+)
+
 # Configure the icinga-api
 
 AC_ARG_WITH([api_type],
@@ -211,6 +217,7 @@ AC_SUBST(db_port)
 AC_SUBST(db_name)
 AC_SUBST(db_user)
 AC_SUBST(db_pass)
+AC_SUBST(db_socket)
 
 AC_SUBST(api_type)
 AC_SUBST(api_subtype)
@@ -236,7 +243,7 @@ AC_CONFIG_FILES([
 	Makefile
 	app/config/databases.xml
 	app/config/icinga.xml
-	app/modules/Web/config/module.xml
+	app/modules/Web/config/icinga-io.xml
 	etc/build.properties
 	etc/tests/test.properties
 	etc/apache2/icinga-web.conf
@@ -246,4 +253,6 @@ AC_CONFIG_FILES([
 
 AC_OUTPUT
 
-ACICINGA_CLEANUP_APICONFIG([$api_type])
+ACICINGA_CLEANUP_APICONFIG([$api_type], [app/modules/Web/config/icinga-io.xml])
+
+# [EOF]

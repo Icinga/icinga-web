@@ -30,7 +30,7 @@ PHP=@PHP@
 PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
 API_DIR=@icinga_api@
-INC_MAKE_FILES=etc/make/files.mk etc/make/special.mk
+INC_MAKE_FILES=etc/make/files.mk etc/make/special.mk etc/make/siteconfig.mk
 LOC_PO=app/data/i18n/po
 LOC_MO=app/data/i18n/mo
 LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
@@ -39,6 +39,7 @@ none:
 #	@printf "\t%-22s - %s\n" "" ""
 	@printf "Please supply a command line argument (i.e. 'make install').\n\n"
 	@printf "Generic targets: install, clean\n\n"
+	@printf "For updates please use 'upgrade' to avoid overwriting your siteconfig!\n\n"
 	@printf "Other usefull targets:\n"
 	@printf "\t%-22s - %s\n" "testdeps" "test php dependencies"
 	@printf "\t%-22s - %s\n" "create-tarball" "creates a tarball for packaging"
@@ -98,7 +99,7 @@ clean:
 	rm -f \
 		app/config/databases.xml \
 		app/config/icinga.xml \
-		app/modules/Web/config/module.xml \
+		app/modules/Web/config/icinga-io.xml \
 		pub/.htaccess \
 		pub/soap/.htaccess
 
@@ -165,18 +166,32 @@ install-javascript:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js
 	ln -sf $(DESTDIR)$(prefix)/lib/ext3 $(DESTDIR)$(prefix)/pub/js/ext3
 
-install:
-	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
-	$(MAKE) -s inc-install-files
-	$(MAKE) inc-install-special
-	$(MAKE) install-done
-
 install-apache-config:
 	${INSTALL} -b -m 664 $(INSTALL_OPTS) etc/apache2/icinga-web.conf $(DESTDIR)$(WEB_APACHE_PATH)/icinga-web.conf
 	@printf "\nInstalled configuration in '%s'.\n" "$(WEB_APACHE_PATH)"
 	@printf "Please make sure that the directory is included or \n"
 	@printf "include %s/icinga-web.conf manually.\n" "$(WEB_APACHE_PATH)"
 	@printf "\nPlease restart your apache in order to complete this step.\n\n"
+
+install-default:
+	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
+	$(MAKE) -s inc-install-files
+	$(MAKE) inc-install-special
+
+install: install-default inc-install-siteconfig install-done
+
+upgrade-done:
+	@printf "\n\n"
+	@printf "Upgrade if icinga-web succeeded.\n"
+	@printf "\n"
+	@printf "Please check your site config files if something have to be changed.\n"
+	@printf "\n"
+	@printf "For database upgrades look into etc/schema/updates and import the\n"
+	@printf "appropriate changes into your database\n"
+	@printf "\n"
+	@printf "Have fun!\n\n"
+
+upgrade: install-default upgrade-done
 
 db-initialize:
 	$(PHING_CALL) db-initialize

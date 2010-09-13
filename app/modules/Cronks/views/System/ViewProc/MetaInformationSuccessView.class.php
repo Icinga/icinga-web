@@ -10,21 +10,23 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView
 	}
 	
 	public function executeJson(AgaviRequestDataHolder $rd) {
-		$template_file = sprintf(
-			'%s/%s.xml', 
-			AgaviConfig::get('modules.cronks.xml.path.grid'), 
-			$rd->getParameter('template')
-		);
-		
-		$template = new IcingaTemplateXmlParser($template_file);
-		$template->parseTemplate();
-		
-		return json_encode(array(
-			'template'	=> $template->getTemplateData(),
-			'fields'	=> $template->getFields(),
-			'keys'		=> $template->getFieldKeys(),
-			'params'	=> $rd->getParameters()
-		));
+		try {
+			$file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.grid'), $rd->getParameter('template'), '.xml');
+			$template = new IcingaTemplateXmlParser($file);
+			$template->parseTemplate();
+			
+			return json_encode(array(
+				'template'	=> $template->getTemplateData(),
+				'fields'	=> $template->getFields(),
+				'keys'		=> $template->getFieldKeys(),
+				'params'	=> $rd->getParameters()
+			));
+		}
+		catch (AppKitFileUtilException $e) {
+			$msg = 'Could not find template for '. $rd->getParameter('template');
+			AppKitAgaviUtil::log('Could not find template for '. $rd->getParameter('template'), AgaviLogger::ERROR);
+			return $msg;
+		}
 	}
 }
 

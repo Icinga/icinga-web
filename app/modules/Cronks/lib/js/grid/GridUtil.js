@@ -16,7 +16,7 @@ Cronk.grid.GridUtil = (function() {
 				var column_name = lGrid.getColumnModel().getDataIndex(columnIndex);
 				if (column_name == c.column_name) {
 					var record = grid.getStore().getAt(rowIndex); 
-					var node = AppKit.util.parseDOMfromString(record.get(c.column_name));
+					var node = AppKit.util.Dom.parseDOMfromString(record.get(c.column_name));
 					Icinga.util.SimpleDataProvider.createToolTip({
 						target: node.getAttribute('id'),
 						title: Cronk.grid.ColumnRendererUtil.applyXTemplate(lGrid, rowIndex, c.title),
