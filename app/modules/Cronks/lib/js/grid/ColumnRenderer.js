@@ -111,8 +111,9 @@ Cronk.grid.ColumnRenderer = {
 	
 	serviceStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
+		
 			if(Ext.isDefined(record.json.service_is_pending))
-				if(record.json.servce_is_pending == 1)
+				if(record.json.service_is_pending == 1)
 					value=99;
 			if(!value)
 				return "";
