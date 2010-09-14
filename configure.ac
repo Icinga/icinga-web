@@ -247,6 +247,7 @@ AC_CONFIG_FILES([
 	etc/build.properties
 	etc/tests/test.properties
 	etc/apache2/icinga-web.conf
+	bin/clearcache.sh
 	pub/.htaccess
 	pub/soap/.htaccess
 ])

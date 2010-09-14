@@ -682,6 +682,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/ExtJsViewport.php $(DESTDIR)$(prefix)/app/templates/ExtJsViewport.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
+	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/clearcache.sh $(DESTDIR)$(prefix)/bin/clearcache.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-changelog.py $(DESTDIR)$(prefix)/bin/create-changelog.py
 	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
@@ -9539,6 +9540,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=8449
+INC_FILES=8450
 INC_DIRS=1089
 # INSTALL_FILES_END

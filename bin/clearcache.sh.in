@@ -1,0 +1,2 @@
+rm -rf @prefix@/app/cache/config/*.php
+rm -rf @prefix@/app/cache/content
