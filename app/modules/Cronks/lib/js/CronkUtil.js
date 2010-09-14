@@ -184,9 +184,13 @@ Cronk.util.InterGridUtil = function(){
 					};
 					
 					Ext.iterate(f, function(k, v) {
-						delete(f[k]);
+						delete(f[k]);				
+						if(k.match(/f\[(.*?)\-operator\]/))
+							return true;
+						k = k.replace(/f\[(.*?)\-value]/,'$1');
 						f['f[' + k + '-value]'] = v;
 						f['f[' + k + '-operator]'] = 50;
+						
 					});
 					
 					Cronk.util.InterGridUtil.gridFilterLink(cronk, f);
@@ -207,13 +211,18 @@ Cronk.util.InterGridUtil = function(){
 					};
 
 					f = Ext.apply({}, f);
-					if(!el.paramSetup) {
-						Ext.iterate(f, function(k,v) {
-							p['f[' + k + '-value]'] = v;
-							p['f[' + k + '-operator]'] = 50;
-						});
-						el.paramSetup = true;
-					}
+					
+					Ext.iterate(f, function(k,v) {
+						if(k.match(/f\[(.*?)\-operator\]/))
+							return true;
+						k = k.replace(/f\[(.*?)\-value]/,'$1');
+
+						p['f[' + k + '-value]'] = v;
+						p['f[' + k + '-operator]'] = 50;
+							
+					});
+					
+					
 					
 					var cronk = {
 						parentid: 'click-to-link-' + id,
