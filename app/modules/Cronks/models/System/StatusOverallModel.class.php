@@ -30,7 +30,7 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
 		foreach ($sources as $stype=>$tarray) {
 			$type = explode("_",strtoupper($stype));
 			$search = $this->api->createSearch()->setSearchTarget($stype);
-			$search->setSearchFilter($type[0]."_IS_PENDING","0","=");
+			$search->setSearchFilter($type[0]."_IS_PENDING","1","!=");
 			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 			$this->buildDataArray($search, $tarray[0], $tarray[1], $target);
 		}
