@@ -18,9 +18,10 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 		
 		if ($user->hasCredential('icinga.user')) {
 			
-				$icinga_base = AppKitNavItem::create('icinga', 'icinga')
+				$icinga_base = AppKitNavItem::create('icinga.portalView', 'icinga.portalView')
 				->setCaption('Monitoring')
-				->addAttributes('extjs-iconcls', 'icinga-icon-dot');
+				->addAttributes('extjs-iconcls', 'icinga-icon-dot')
+				->setJsHandler("AppKit.changeLocation.createDelegate(null,['". AgaviContext::getInstance()->getRouting()->gen('icinga.portalView') ."'])");
 			
 				// Throws exception if the admin is not there ...
 				if ($nav->getNavItemByName('appkit.admin')) {
@@ -31,10 +32,6 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 					$icinga = $nav->getContainer()->addItem($icinga_base);
 				}
 				
-				$icinga->addSubItem(AppKitNavItem::create('icinga.portalView', 'icinga.portalView')
-					->setCaption('Portal')
-					->addAttributes('extjs-iconcls', 'icinga-icon-application-cascade')
-				);
 		}
 		
 		// Adding some help
