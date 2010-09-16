@@ -101,7 +101,8 @@ clean:
 		app/config/icinga.xml \
 		app/modules/Web/config/icinga-io.xml \
 		pub/.htaccess \
-		pub/soap/.htaccess
+		pub/soap/.htaccess \
+		bin/clearcache.sh
 
 devclean: dev-commit-prepare
 
@@ -120,34 +121,7 @@ create-tarball-nightly:
 
 testdeps:
 	 $(PHP) bin/testdeps.php
-
-fix-priv:
-	chown $(WEB_USER).$(WEB_GROUP) \
-		$(DESTDIR)$(prefix)/app/cache \
-		$(DESTDIR)$(prefix)/app/cache/config \
-		$(DESTDIR)$(prefix)/app/data/log
-
-	chmod 775 \
-		$(DESTDIR)$(prefix)/app/cache \
-		$(DESTDIR)$(prefix)/app/cache/config \
-		$(DESTDIR)$(prefix)/app/data/log \
-
-	chmod +x \
-		$(DESTDIR)$(prefix)/bin/agavi \
-		$(DESTDIR)$(prefix)/bin/console.php \
-		$(DESTDIR)$(prefix)/bin/create-makefile.sh \
-		$(DESTDIR)$(prefix)/bin/create-rescuescheme.sh \
-		$(DESTDIR)$(prefix)/bin/doctrinemodels.php \
-		$(DESTDIR)$(prefix)/bin/getopts.php \
-		$(DESTDIR)$(prefix)/bin/loc-create-catalog.pl \
-		$(DESTDIR)$(prefix)/bin/loc-create-json.sh \
-		$(DESTDIR)$(prefix)/bin/loc-create-mo.sh \
-		$(DESTDIR)$(prefix)/bin/loc-merge-template.sh \
-		$(DESTDIR)$(prefix)/bin/phing \
-		$(DESTDIR)$(prefix)/bin/rmtmp-files.sh \
-		$(DESTDIR)$(prefix)/bin/testdeps.php \
-		$(DESTDIR)$(prefix)/bin/create-changelog.py \
-
+	 
 install-done:
 	@printf "\n\n"
 	@printf "Installation if icinga-web succeeded.\n"

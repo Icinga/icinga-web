@@ -471,6 +471,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-host-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-host-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-log-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-log-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-notification-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-notification-template.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-open-problems-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-open-problems-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-history-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/data/xml/grid/icinga-service-template.xml $(DESTDIR)$(prefix)/app/modules/Cronks/data/xml/grid/icinga-service-template.xml
@@ -680,23 +681,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/web-html.php $(DESTDIR)$(prefix)/app/templates/exceptions/web-html.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/exceptions/web.php $(DESTDIR)$(prefix)/app/templates/exceptions/web.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/templates/ExtJsViewport.php $(DESTDIR)$(prefix)/app/templates/ExtJsViewport.php
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
-	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/clearcache.sh $(DESTDIR)$(prefix)/bin/clearcache.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-changelog.py $(DESTDIR)$(prefix)/bin/create-changelog.py
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-makefile.sh $(DESTDIR)$(prefix)/bin/create-makefile.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/create-rescuescheme.sh $(DESTDIR)$(prefix)/bin/create-rescuescheme.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/doctrinemodels.php $(DESTDIR)$(prefix)/bin/doctrinemodels.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/getopts.php $(DESTDIR)$(prefix)/bin/getopts.php
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-catalog.pl $(DESTDIR)$(prefix)/bin/loc-create-catalog.pl
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-json.sh $(DESTDIR)$(prefix)/bin/loc-create-json.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-create-mo.sh $(DESTDIR)$(prefix)/bin/loc-create-mo.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/loc-merge-template.sh $(DESTDIR)$(prefix)/bin/loc-merge-template.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/make-tarball $(DESTDIR)$(prefix)/bin/make-tarball
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/phing $(DESTDIR)$(prefix)/bin/phing
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/rmtmp-files.sh $(DESTDIR)$(prefix)/bin/rmtmp-files.sh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) bin/testdeps.php $(DESTDIR)$(prefix)/bin/testdeps.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/doc
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/AUTHORS $(DESTDIR)$(prefix)/doc/AUTHORS
 	$(INSTALL) -m 644 $(INSTALL_OPTS) doc/CHANGELOG $(DESTDIR)$(prefix)/doc/CHANGELOG
@@ -9540,6 +9524,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=8450
-INC_DIRS=1089
+INC_FILES=8435
+INC_DIRS=1088
 # INSTALL_FILES_END
