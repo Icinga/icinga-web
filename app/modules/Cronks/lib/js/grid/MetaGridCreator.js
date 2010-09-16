@@ -20,14 +20,24 @@ Cronk.grid.MetaGridCreator = function(meta) {
 	grid_events = {},
 		
 	addGridMethods = function(config, colIndex, colItem) {
-		Ext.each(config, function(item, fIndex, allItem) {
-			
-			var cb = createGridCallback(item, colItem);	
-			
+
+		Ext.each(config,function(item, fIndex, allItem) {
+			addConfigGridMethod(item, fIndex, allItem,colItem,colIndex);
+		}, this);
+	
+	},
+
+	addConfigGridMethod  = function(item, fIndex, allItem, colItem,colIndex) {
+		/**
+		 * Fixes timing issues - when the callback function is not yet initialized the function
+		 * will be called later on
+		 */
+		var cb = createGridCallback(item, colItem);
+		if(cb) {
 			if (Ext.isEmpty(item.type)) {
 				item.type = 'renderer';
 			}
-			
+
 			if (item.type == 'renderer') {
 				pub.column_array[colIndex].renderer = cb;
 			}
@@ -37,59 +47,72 @@ Cronk.grid.MetaGridCreator = function(meta) {
 			else {
 				addGridEvent(item, cb);
 			}
+		} else {
+			addConfigGridMethod.defer(100,this,[item, fIndex, allItem, colItem,colIndex])
+		}
 
-		}, this);
 	},
-		
+
 	createGridCallback = function(struct, columnName) {
 		
 		// AppKit.log(struct);
-		
-		if (Ext.isEmpty(struct.type)) {
-			struct.type = 'renderer';
-		}
-		
-		if (!Ext.isEmpty(struct['function'])) {
-			
-			var ns = null;
-			var f = null;
-			
-			if (!Ext.isEmpty(struct.namespace)) {
-				ns = struct.namespace;
-				f = Ext.decode(struct.namespace + '.' + struct['function']);
-			}
-			else {
-				f = Ext.decode(struct['function']);
-			}
-			
-			if (!Ext.isEmpty(columnName)) {
-				var c = Ext.apply({field: columnName}, struct['arguments'] || {});
-				var tmp = f.call(this, c);
-				f = tmp;
-			}
-			else {
-				
-				var c = {
-					oGrid: pub.getGrid(),
-					oStore: pub.getStore(),
-					oMeta : pub.getMeta(),
-					oCreator: pub
-				};
-				
-				Ext.apply(c, struct['arguments'] || {});
-				var tmp = f.createDelegate(ns || f, [c], true);
-				
-				f = tmp;
+		try {
+			if (Ext.isEmpty(struct.type)) {
+				struct.type = 'renderer';
 			}
 
-			if (Ext.isFunction(f)) {
-				return {
-					fn: f,
-					scope: (ns || f)
-				};
+			if (!Ext.isEmpty(struct['function'])) {
+
+				var ns = null;
+				var f = null;
+
+				if (!Ext.isEmpty(struct.namespace)) {
+					ns = struct.namespace;
+					f = Ext.decode(struct.namespace + '.' + struct['function']);
+				}
+				else {
+					f = Ext.decode(struct['function']);
+
+				}
+
+				if (!Ext.isEmpty(columnName)) {
+					var c = Ext.apply({field: columnName}, struct['arguments'] || {});
+					var tmp = f.call(this, c);
+					f = tmp;
+				}
+				else {
+
+					var c = {
+						oGrid: pub.getGrid(),
+						oStore: pub.getStore(),
+						oMeta : pub.getMeta(),
+						oCreator: pub
+					};
+
+					Ext.apply(c, struct['arguments'] || {});
+					var tmp = f.createDelegate(ns || f, [c], true);
+
+					f = tmp;
+				}
+
+				if (Ext.isFunction(f)) {
+					return {
+						fn: f,
+						scope: (ns || f)
+					};
+				}
+
+				throw("createGridCallback: no function comes back!");
 			}
-			
-			throw("createGridCallback: no function comes back!");
+		} catch(e) {
+			switch(e) {
+				//check and rethrow
+				case "createGridCallback: no function comes back!":
+					throw("createGridCallback: no function comes back!");
+					break;
+				default:
+					return false;
+			}
 		}
 	},
 		
