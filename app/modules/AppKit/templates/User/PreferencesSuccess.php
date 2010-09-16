@@ -20,11 +20,11 @@ Ext.onReady(function() {
 
 		layout: 'border',
 		border:false,
-		monitorResize: true,
-		height: 450,
-		
+
+		style: 'height:500px',
+		autoScroll:true,
 		defaults: {
-			border: false
+			border: false,
 		},
 
 		items: [{
@@ -33,13 +33,14 @@ Ext.onReady(function() {
 
 			items: new Ext.form.FormPanel({
 				padding:5,
+				autoScroll:true,
 				border:false,
 				width: 250,
 				items: [{
 					xtype:'fieldset',
 					title: _('Language settings'),
 					padding:5,
-
+					width:Ext.getBody().getWidth()*0.50,
 					layout:'form',
 					defaults: {
 						labelWidth: 100
@@ -77,6 +78,7 @@ Ext.onReady(function() {
 					title:_('Change Password'),
 					xtype: 'fieldset',
 					padding:5,
+					width:Ext.getBody().getWidth()*0.50,
 					layout:'form',
 					items: [{
 						xtype:'textfield',
@@ -130,6 +132,7 @@ Ext.onReady(function() {
 					collapsed:true,
 					autoHeight: true,
 					borders:true,
+					width:Ext.getBody().getWidth()*0.50,
 					tools: [{
 						id: 'plus',
 						handler: function(event,tool,panel,tc) {
@@ -138,37 +141,6 @@ Ext.onReady(function() {
 							win.show();
 						},
 						scope: this
-					}, {
-						id: 'save',
-						handler: function(b,e) {
-							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
-							mask.show();
-							try {
-								var preferences = Ext.getCmp('pedit_preferences');
-								var params = {};
-								var i = 0;
-								var store = preferences.getStore();
-								store.each(function(record) {
-									if(record.get("value") == 'BLOB')
-										return null;
-
-									params["params["+(i)+"][upref_key]"] = record.get("name");
-									params["params["+(i)+"][upref_val]"] = record.get("value");
-									params["params["+(i++)+"][isLong]"] = false
-								})
-								Ext.Ajax.request({
-									url: '<?php echo $ro->gen("my.preferences") ?>',
-									params: params,
-									callback: function() {
-										mask.hide();
-									}
-								});
-							} catch(e) {
-								mask.hide();
-								AppKit.log(e);
-							}
-						}
-
 					}],
 					items: new Ext.grid.PropertyGrid({
 						clicksToEdit: 2,
@@ -212,7 +184,39 @@ Ext.onReady(function() {
 								}).showAt(e.getXY());
 							}
 						}
-					})
+					}),
+					buttons: [{
+						text: 'Save these preferences',
+						handler: function(b,e) {
+							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
+							mask.show();
+							try {
+								var preferences = Ext.getCmp('pedit_preferences');
+								var params = {};
+								var i = 0;
+								var store = preferences.getStore();
+								store.each(function(record) {
+									if(record.get("value") == 'BLOB')
+										return null;
+
+									params["params["+(i)+"][upref_key]"] = record.get("name");
+									params["params["+(i)+"][upref_val]"] = record.get("value");
+									params["params["+(i++)+"][isLong]"] = false
+								})
+								Ext.Ajax.request({
+									url: '<?php echo $ro->gen("my.preferences") ?>',
+									params: params,
+									callback: function() {
+										mask.hide();
+									}
+								});
+							} catch(e) {
+								mask.hide();
+								AppKit.log(e);
+							}
+						}
+
+					}]
 				}]
 			})
 		}, {
@@ -314,7 +318,8 @@ Ext.onReady(function() {
 	}
 	
 	if (Ext.getCmp('user_prefs_target')) {
-		Ext.getCmp('user_prefs_target').setWidth(Ext.getBody().getWidth*0.70);
+		Ext.getCmp('user_prefs_target').setWidth(Ext.getBody().getWidth()*0.70);
+
 		Ext.getCmp('user_prefs_target').add(AppKit.UserPrefs.container);
 
 		AppKit.UserPrefs.container.doLayout();
