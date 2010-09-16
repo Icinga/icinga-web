@@ -3,6 +3,12 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 	
 	var oSearchHandler =  function() {
 		
+		/**
+		 * Start search if minimum x chars entered
+		 * @type Integer
+		 */	
+		var minCharacters = 4;
+		
 		var val;
 		var ctWindow;
 		var proxy;
@@ -192,7 +198,13 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			 */
 			keyup : function(field, e) {
 				val = field.getValue();
-				if (val && val.length >= 1) {
+				
+				// 27 == ESC
+				if (e.getCharCode() == 27) {
+					field.setValue('');
+					oWindow().hide();
+				}
+				else if (!Ext.isEmpty(val) && val.length >= minCharacters) {
 					if (!oWindow().isVisible()) {
 						var xy = field.getPosition();
 						xy[0] += field.getSize().width + 55;
