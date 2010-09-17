@@ -55,6 +55,12 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 		}).defer(5, this);
 				
 		return true;
+	},
+	listeners: {
+		tabchange: function(tab) {
+			var aTab = tab.getActiveTab();
+			document.title = "Icinga - "+aTab.title;
+		}
 	}
 });
 
