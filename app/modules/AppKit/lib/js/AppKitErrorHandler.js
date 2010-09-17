@@ -278,6 +278,8 @@ Ext.ns("AppKit.errorHandler");
 		})
 		var handleError = function(response,proxy) {
 			switch(response.status) {
+				case 200:
+					break;
 				case 404:
 					AppKit.AjaxErrorHandler.error_404(proxy.url);
 					break;
