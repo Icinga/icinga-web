@@ -27,7 +27,7 @@
 								 <parameter name="type">renderer</parameter>
 
 								 <parameter name="arguments">
-								<parameter name="image">images/icons/image.png</parameter>
+								<parameter name="image">images/famfamfam/image.png</parameter>
 								<parameter name="css">x-icinga-grid-link</parameter>
 								<parameter name="attr">
 									<parameter name="qtip">Display performance graph</parameter>
@@ -44,7 +44,7 @@
 
 								 <parameter name="arguments">
 									 <parameter name="title">Image for {host_name}</parameter>
-									 <parameter name="url"><![CDATA[http://localhost/pnp4nagios/image?service={service_name}&srv=_SERVICE_&view=0]]></parameter>
+									 <parameter name="url"><![CDATA[/pnp4nagios/image?service={service_name}&srv=_SERVICE_&view=0]]></parameter>
 								<parameter name="width">200</parameter>
 								<parameter name="height">200</parameter>
 								 </parameter>
@@ -84,7 +84,7 @@
                                 <parameter name="type">renderer</parameter>
 
                                 <parameter name="arguments">
-                                                        <parameter name="image">images/icons/application_view_gallery.png</parameter>
+                                                        <parameter name="image">images/famfamfam/application_view_gallery.png</parameter>
                                                         <parameter name="css">x-icinga-grid-link</parameter>
                                                         <parameter name="attr">
                                                                 <parameter name="qtip">Show host perfdata for this service</parameter>
