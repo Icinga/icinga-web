@@ -1,7 +1,13 @@
 <?php
 
 class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
-
+	
+	/**
+	 * Limit search result to x rows
+	 * @var string
+	 */
+	const RESULT_LIMIT = 200;
+	
 	/**
 	 * 
 	 * @var IcingaApiConnectionIdo
@@ -38,9 +44,9 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOST_NAME',
-				'object_id'	=> 'HOST_OBJECT_ID',
+				'object_id'		=> 'HOST_OBJECT_ID',
 				'description'	=> 'HOST_ALIAS',
-				'data1'		=> 'HOST_ADDRESS',
+				'data1'			=> 'HOST_ADDRESS',
 				'object_status'	=> 'HOST_CURRENT_STATE'
 			)
 		),
@@ -51,7 +57,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICE_NAME',
-				'object_id'	=> 'SERVICE_OBJECT_ID',
+				'object_id'		=> 'SERVICE_OBJECT_ID',
 				'object_name2'	=> 'HOST_NAME',
 				'description'	=> 'SERVICE_DISPLAY_NAME',
 				'object_status'	=> 'SERVICE_CURRENT_STATE'
@@ -65,7 +71,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOSTGROUP_NAME',
-				'object_id'	=> 'HOSTGROUP_OBJECT_ID',
+				'object_id'		=> 'HOSTGROUP_OBJECT_ID',
 				'description'	=> 'HOSTGROUP_ALIAS'
 			)
 		),
@@ -76,7 +82,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICEGROUP_NAME',
-				'object_id'	=> 'SERVICEGROUP_OBJECT_ID',
+				'object_id'		=> 'SERVICEGROUP_OBJECT_ID',
 				'description'	=> 'SERVICEGROUP_ALIAS'
 			)
 		),
@@ -139,7 +145,8 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 			->setSearchTarget($md['target'])
 			->setResultColumns(array_values($md['fields']))
 			->setSearchFilter($md['search'], $this->query, IcingaApi::MATCH_LIKE)
-			->setResultType(IcingaApi::RESULT_ARRAY);
+			->setResultType(IcingaApi::RESULT_ARRAY)
+			->setSearchLimit(0, self::RESULT_LIMIT);
 			
 			// Limiting results for security
 			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);

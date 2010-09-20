@@ -6,6 +6,7 @@ app/data/log/
 app/config/icinga.xml
 app/config/databases.xml
 app/modules/Web/config/icinga-io.xml
+bin/clearcache.sh
 icinga-web.session
 icinga-web.webprj
 Makefile
