@@ -70,10 +70,10 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 
 			$user = self::getUser();
 
-			$nav->getContainer()->addItem(AppKitNavItem::create('appkit', 'index_page')
-			->setCaption('Home')
-			->addAttributes('extjs-iconcls', 'icinga-icon-application')
-			);
+//			$nav->getContainer()->addItem(AppKitNavItem::create('appkit', 'index_page')
+//			->setCaption('Home')
+//			->addAttributes('extjs-iconcls', 'icinga-icon-application')
+//			);
 
 			//Add more homelinks
 			if (is_array($home_links = AgaviConfig::get('org.icinga.appkit.home_links'))) {
@@ -83,22 +83,22 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 					);
 				}
 			}
-
-			// Display only if we do not trust apache
-			// if (!AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
-				if ($user->isAuthenticated()) {
-					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.logout', 'appkit.logout')
-					->setCaption('Logout')
-					->addAttributes('extjs-iconcls', 'icinga-icon-lock-open')
-					);
-				}
-				else {
-					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.login', 'appkit.login')
-					->setCaption('Login')
-					->addAttributes('extjs-iconcls', 'icinga-icon-lock')
-					);
-				}
-			// }
+//
+//			// Display only if we do not trust apache
+//			// if (!AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
+//				if ($user->isAuthenticated()) {
+//					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.logout', 'appkit.logout')
+//					->setCaption('Logout')
+//					->addAttributes('extjs-iconcls', 'icinga-icon-lock-open')
+//					);
+//				}
+//				else {
+//					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.login', 'appkit.login')
+//					->setCaption('Login')
+//					->addAttributes('extjs-iconcls', 'icinga-icon-lock')
+//					);
+//				}
+//			// }
 
 			if ($user->isAuthenticated()) {
 				
