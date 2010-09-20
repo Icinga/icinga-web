@@ -81,6 +81,11 @@ function JitStatusMap (config) {
 					}
 				}
 			},
+			Navigation: {
+				enable: true,
+				panning: 'avoid nodes',
+				zooming: 20
+			},
 			onBeforeCompute: function(node){
 				JitLog.write(elementIds.jitLog, "centering " + node.name + "...");
 				document.getElementById(elementIds.jitDetails).innerHTML = node.data.relation;
