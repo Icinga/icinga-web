@@ -12490,13 +12490,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/zone-select.png $(DESTDIR)$(prefix)/pub/images/icons/zone-select.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/zones.png $(DESTDIR)$(prefix)/pub/images/icons/zones.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/zones-stack.png $(DESTDIR)$(prefix)/pub/images/icons/zones-stack.png
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/LConf
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/LConf/bypass.png $(DESTDIR)$(prefix)/pub/images/LConf/bypass.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/LConf/LConf_Logo.jpg $(DESTDIR)$(prefix)/pub/images/LConf/LConf_Logo.jpg
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/LConf/LConf_Logo.pnh $(DESTDIR)$(prefix)/pub/images/LConf/LConf_Logo.pnh
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/LConf/tree.png $(DESTDIR)$(prefix)/pub/images/LConf/tree.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/LConf/tree_small.png $(DESTDIR)$(prefix)/pub/images/LConf/tree_small.png
-	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/LConf/world.png $(DESTDIR)$(prefix)/pub/images/LConf/world.png
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/status
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/acknowledged.png $(DESTDIR)$(prefix)/pub/images/status/acknowledged.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/disabled.png $(DESTDIR)$(prefix)/pub/images/status/disabled.png
