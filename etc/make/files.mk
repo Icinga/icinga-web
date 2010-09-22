@@ -2,7 +2,6 @@
 inc-install-files:
 # INSTALL_FILES_BEGIN
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/config
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/config/action_filters.xml $(DESTDIR)$(prefix)/app/config/action_filters.xml
@@ -707,7 +706,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin/actionQueueTask.php
@@ -774,7 +774,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/etc/xml/%PATH_Icinga%app_modules_Cronks_data_xml_grid_icinga-service-template.xml $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/etc/xml/%PATH_Icinga%app_modules_Cronks_data_xml_grid_icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/INSTALL $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/INSTALL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/INSTALL $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/INSTALL
-	$(INSTALL) -m 755 $(INSTALL_OPTS) etc/contrib/PNP_Integration/install.sh $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/install.sh
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/install.sh $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/install.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/install.sh $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/install.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/manifest.xml $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/manifest.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/manifest.xml $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/manifest.xml
@@ -1498,8 +1498,12 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/phing/util/StringHelper.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/phing/util/StringHelper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/Skeleton/.backup.dat
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/Skeleton/.backup.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/Skeleton/bin/actionQueueTask.php
@@ -7769,16 +7773,37 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/icingaScheduler/res/storage.dat $(DESTDIR)$(prefix)/lib/icingaScheduler/res/storage.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/AreaChart
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/AreaChart/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/AreaChart/example1.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/AreaChart/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/AreaChart/example1.js
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/BarChart
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/BarChart/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/BarChart/example1.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/BarChart/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/BarChart/example1.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/BarChart/example2.html $(DESTDIR)$(prefix)/lib/jit/Examples/BarChart/example2.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/BarChart/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/BarChart/example2.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/AreaChart.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/AreaChart.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/BarChart.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/BarChart.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/base.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/base.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/col1.png $(DESTDIR)$(prefix)/lib/jit/Examples/css/col1.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/col2.png $(DESTDIR)$(prefix)/lib/jit/Examples/css/col2.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/ForceDirected.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/ForceDirected.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/gradient.png $(DESTDIR)$(prefix)/lib/jit/Examples/css/gradient.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/HeatMap.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/HeatMap.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/Hypertree.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/Hypertree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/Icicle.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/Icicle.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/Other.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/Other.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/PieChart.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/PieChart.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/RGraph.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/RGraph.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/Spacetree.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/Spacetree.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/Sunburst.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/Sunburst.css
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/TimeGraph.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/TimeGraph.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/css/Treemap.css $(DESTDIR)$(prefix)/lib/jit/Examples/css/Treemap.css
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/ForceDirected
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/ForceDirected/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/ForceDirected/example1.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/ForceDirected/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/ForceDirected/example1.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/ForceDirected/example2.html $(DESTDIR)$(prefix)/lib/jit/Examples/ForceDirected/example2.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/ForceDirected/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/ForceDirected/example2.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example1.js
@@ -7786,6 +7811,11 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example2.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example3.html $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example3.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Hypertree/example3.js $(DESTDIR)$(prefix)/lib/jit/Examples/Hypertree/example3.js
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Icicle
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Icicle/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Icicle/example1.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Icicle/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Icicle/example1.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Icicle/example2.html $(DESTDIR)$(prefix)/lib/jit/Examples/Icicle/example2.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Icicle/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/Icicle/example2.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Other
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Other/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Other/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Other/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Other/example1.js
@@ -7793,6 +7823,9 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Other/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/Other/example2.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Other/example3.html $(DESTDIR)$(prefix)/lib/jit/Examples/Other/example3.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Other/example3.js $(DESTDIR)$(prefix)/lib/jit/Examples/Other/example3.js
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/PieChart
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/PieChart/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/PieChart/example1.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/PieChart/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/PieChart/example1.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example1.js
@@ -7800,6 +7833,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example2.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example3.html $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example3.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example3.js $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example3.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example4.html $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example4.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/RGraph/example4.js $(DESTDIR)$(prefix)/lib/jit/Examples/RGraph/example4.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example1.js
@@ -7807,6 +7842,15 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example2.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example3.html $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example3.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example3.js $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example3.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example4.html $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example4.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example4.js $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example4.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example5.html $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example5.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Spacetree/example5.js $(DESTDIR)$(prefix)/lib/jit/Examples/Spacetree/example5.js
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Sunburst
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Sunburst/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Sunburst/example1.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Sunburst/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Sunburst/example1.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Sunburst/example2.html $(DESTDIR)$(prefix)/lib/jit/Examples/Sunburst/example2.html
+	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Sunburst/example2.js $(DESTDIR)$(prefix)/lib/jit/Examples/Sunburst/example2.js
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Examples/Treemap
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Treemap/example1.html $(DESTDIR)$(prefix)/lib/jit/Examples/Treemap/example1.html
 	$(INSTALL) -m 644 $(INSTALL_OPTS) lib/jit/Examples/Treemap/example1.js $(DESTDIR)$(prefix)/lib/jit/Examples/Treemap/example1.js
@@ -12486,13 +12530,21 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/zones.png $(DESTDIR)$(prefix)/pub/images/icons/zones.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/icons/zones-stack.png $(DESTDIR)$(prefix)/pub/images/icons/zones-stack.png
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/images/status
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/acknowledged_old.png $(DESTDIR)$(prefix)/pub/images/status/acknowledged_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/acknowledged.png $(DESTDIR)$(prefix)/pub/images/status/acknowledged.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/disabled_old.png $(DESTDIR)$(prefix)/pub/images/status/disabled_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/disabled.png $(DESTDIR)$(prefix)/pub/images/status/disabled.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/downtime_old.png $(DESTDIR)$(prefix)/pub/images/status/downtime_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/downtime.png $(DESTDIR)$(prefix)/pub/images/status/downtime.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/flapping_old.png $(DESTDIR)$(prefix)/pub/images/status/flapping_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/flapping.png $(DESTDIR)$(prefix)/pub/images/status/flapping.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/ndisabled_old.png $(DESTDIR)$(prefix)/pub/images/status/ndisabled_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/ndisabled.png $(DESTDIR)$(prefix)/pub/images/status/ndisabled.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/off_old.png $(DESTDIR)$(prefix)/pub/images/status/off_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/off.png $(DESTDIR)$(prefix)/pub/images/status/off.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/on_old.png $(DESTDIR)$(prefix)/pub/images/status/on_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/on.png $(DESTDIR)$(prefix)/pub/images/status/on.png
+	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/passive_old.png $(DESTDIR)$(prefix)/pub/images/status/passive_old.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/images/status/passive.png $(DESTDIR)$(prefix)/pub/images/status/passive.png
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/index.php $(DESTDIR)$(prefix)/pub/index.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/soap
@@ -12505,6 +12557,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=8435
-INC_DIRS=1088
+INC_FILES=11462
+INC_DIRS=1094
 # INSTALL_FILES_END
