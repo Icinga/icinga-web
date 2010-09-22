@@ -707,8 +707,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin/actionQueueTask.php
@@ -775,7 +774,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/etc/xml/%PATH_Icinga%app_modules_Cronks_data_xml_grid_icinga-service-template.xml $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/etc/xml/%PATH_Icinga%app_modules_Cronks_data_xml_grid_icinga-service-template.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/INSTALL $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/INSTALL
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/INSTALL $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/INSTALL
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/install.sh $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/install.sh
+	$(INSTALL) -m 755 $(INSTALL_OPTS) etc/contrib/PNP_Integration/install.sh $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/install.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/install.sh $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/install.sh
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/manifest.xml $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/manifest.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/manifest.xml $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/manifest.xml
@@ -1499,12 +1498,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/phing/util/StringHelper.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/phing/util/StringHelper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/Skeleton/.backup.dat
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/Skeleton/.backup.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/Skeleton/bin/actionQueueTask.php
