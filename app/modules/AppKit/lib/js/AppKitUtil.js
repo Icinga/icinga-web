@@ -112,23 +112,21 @@ AppKit.util = (function() {
 					closable: true,
 					resizable: true,
 					id: 'user_prefs_target',
-					width: 530,
+					width: 630,
+					layout: 'fit',
 					height: Ext.getBody().getHeight()>600 ? 600 : Ext.getBody().getHeight(),
-					autoScroll: true,
-					closeAction: 'hide',
 					
+					closeAction: 'hide',
+					defaults: {
+						autoScroll: true,
+						style: 'overflow:scroll'
+					},
 					bbar: {
 						items: [{
-							text: _('OK'),
+							text: _('Close'),
 							iconCls: 'icinga-icon-accept',
 							handler: function() {
 								AppKit.changeLocation(AppKit.c.path);
-							}
-						}, {
-							text: _('Cancel'),
-							iconCls: 'icinga-icon-cancel',
-							handler: function() {
-								pwin.close();
 							}
 						}]
 					},

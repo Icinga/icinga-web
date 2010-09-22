@@ -76,45 +76,45 @@
         	<parameter name="items">
         		<parameter name="PROCESS_HOST_CHECK_RESULT">
         			<parameter name="title">Process host check result</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
         		<parameter name="ACKNOWLEDGE_HOST_PROBLEM">
         			<parameter name="title">Acknowledge host problem</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-exclamation-white</parameter>
         		</parameter>
         		<parameter name="SCHEDULE_HOST_DOWNTIME">
         			<parameter name="title">Schedule a host downtime</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-downtime</parameter>
         		</parameter>
         		<parameter name="ADD_HOST_COMMENT">
         			<parameter name="title">Add a host comment</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-comment</parameter>
         		</parameter>
         		<parameter name="SCHEDULE_FORCED_HOST_SVC_CHECKS">
         			<parameter name="title">Schedule a check of all services on this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
         		<parameter name="SEND_CUSTOM_HOST_NOTIFICATION">
         			<parameter name="title">Send custom host notification</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-notify</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_HOST_CHECK">
         			<parameter name="title">Enable active checks of this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-arrow-out</parameter>
         		</parameter>
         		<parameter name="DISABLE_HOST_CHECK">
         			<parameter name="title">Disable active checks of this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cross</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_PASSIVE_HOST_CHECKS">
         			<parameter name="title">Start accepting passive checks for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-arrow-in</parameter>
         		</parameter>
         		<parameter name="DISABLE_PASSIVE_HOST_CHECKS">
         			<parameter name="title">Stop accepting passive checks for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cross</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="START_OBSESSING_OVER_HOST">
@@ -123,34 +123,34 @@
         		</parameter>
         		<parameter name="STOP_OBSESSING_OVER_HOST">
         			<parameter name="title">Stop obsessing over host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cross</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_HOST_NOTIFICATIONS">
         			<parameter name="title">Enable notifications for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-notify</parameter>
         		</parameter>
         		<parameter name="DISABLE_HOST_NOTIFICATIONS">
         			<parameter name="title">Disable notifications for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-notify-disabled</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_HOST_SVC_NOTIFICATIONS">
         			<parameter name="title">Enable notifications for all services on this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-notify</parameter>
         		</parameter>
         		<parameter name="DISABLE_HOST_SVC_NOTIFICATIONS">
         			<parameter name="title">Disable notifications for all services on this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-notify-disabled</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_HOST_SVC_CHECKS">
         			<parameter name="title">Enable checks of all services on this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-service</parameter>
         		</parameter>
         		<parameter name="DISABLE_HOST_SVC_CHECKS">
         			<parameter name="title">Disable checks of all services on this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cross</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_HOST_EVENT_HANDLER">
@@ -159,16 +159,16 @@
         		</parameter>
         		<parameter name="DISABLE_HOST_EVENT_HANDLER">
         			<parameter name="title">Disable event handler for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cross</parameter>
         			<parameter name="seperator">true</parameter>
         		</parameter>
         		<parameter name="ENABLE_HOST_FLAP_DETECTION">
         			<parameter name="title">Enable flap detection for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-flapping</parameter>
         		</parameter>
         		<parameter name="DISABLE_HOST_FLAP_DETECTION">
         			<parameter name="title">Disable flap detection for this host</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
+        			<parameter name="icon_class">icinga-icon-cross</parameter>
         		</parameter>
         	</parameter>
         	

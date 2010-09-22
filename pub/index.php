@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Allow XHR access from other domains (response for cors preflight requests)
+ */
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods:POST GET UPDATE");
+header("Access-Control-Allow-Headers: x-requested-with");
+header("Access-Control-Max-Age: 720000");
+
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to the agavi/agavi.php script.                |
 // +---------------------------------------------------------------------------+

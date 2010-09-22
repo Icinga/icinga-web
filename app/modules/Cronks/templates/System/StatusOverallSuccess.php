@@ -73,11 +73,11 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			tpl: new Ext.XTemplate(
 				'<tpl for=".">',
 					'<tpl if="id==1">',
-					'<div class="icinga-overall-status-icon icinga-icon-database" title="' + _('Hosts') + '"></div>',
+					'<div class="icinga-overall-status-icon icinga-icon-host" title="' + _('Hosts') + '"></div>',
 					'</tpl>',
 					'<tpl if="id==5">',
 					'<div class="x-clear icinga-overall-status-spacer"></div>',
-					'<div class="icinga-overall-status-icon icinga-icon-cog" title="' + _('Services') + '"></div>',
+					'<div class="icinga-overall-status-icon icinga-icon-service" title="' + _('Services') + '"></div>',
 					'</tpl>',
 					'<div class="icinga-overall-status-item" id="overall-status-{id}">',
 					'<span>{state}</span>',

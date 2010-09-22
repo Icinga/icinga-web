@@ -11,6 +11,7 @@ var JitLog = {
 	write: function(elementId, text) {
 		if (!this.elem) {
 			this.elem = document.getElementById(elementId);
+			
 		}
 		this.elem.innerHTML = text;
 		this.elem.style.left = (500 - this.elem.offsetWidth / 2) + "px";
@@ -50,12 +51,20 @@ function JitStatusMap (config) {
 	function jitInit (json, elementIds) {
 		var infovis = document.getElementById(elementIds.jitMap);
 		var w = infovis.offsetWidth, h = infovis.offsetHeight;
-		var canvas = new Canvas(elementIds.jitCanvas, {
+
+		var rgraph = new $jit.RGraph({
+			Node: {
+				overridable: true,
+				color: "#ccddee"
+			},
+			Edge: {
+				color: "#56a5ec"
+			},
 			"injectInto": elementIds.jitMap,
 			"width": w,
 			"height": h,
-			"backgroundCanvas": {
-				"styles": {
+			"background": {
+				"CanvasStyles": {
 					"strokeStyle": "#e0e0e0"
 				},
 				"impl": {
@@ -71,15 +80,11 @@ function JitStatusMap (config) {
 						}
 					}
 				}
-			}
-		});
-		var rgraph = new RGraph(canvas, {
-			Node: {
-				overridable: true,
-				color: "#ccddee"
 			},
-			Edge: {
-				color: "#56a5ec"
+			Navigation: {
+				enable: true,
+				panning: 'avoid nodes',
+				zooming: 20
 			},
 			onBeforeCompute: function(node){
 				JitLog.write(elementIds.jitLog, "centering " + node.name + "...");
@@ -148,6 +153,7 @@ function JitStatusMap (config) {
 		}
 		if (this.config.parentId != false) {
 			this.cmp = Ext.getCmp(this.config.parentId);
+			
 		}
 	}
 
@@ -177,6 +183,7 @@ function JitStatusMap (config) {
 			items : [{
 				id: this.elementIds.jitContainerCenter,
 				cls: "jitContainerCenter",
+		
 				items: {
 					id: this.elementIds.jitMap,
 					cls: "jitMap"
