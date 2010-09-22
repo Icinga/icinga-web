@@ -43,7 +43,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				},
 				
 				applyState: function(state) {
-					if (state && "active_tab" in state && state.active_tab >= 0) {
+					if (!Ext.isEmpty(state.active_tab) && state.active_tab >= 0) {
 						this.active_tab = state.active_tab;
 					}
 				},
@@ -82,8 +82,8 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			
 			applyActiveItem : function() {
 				var c = this.getFrameCmp();
-				if (c.active_tab) {
-					this.setActiveItem(c.active_tab);
+				if (!Ext.isEmpty(c.active_tab)) {
+					c.getLayout().setActiveItem(c.active_tab);
 					return true;
 				}
 				return false;
@@ -238,13 +238,17 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 										i++;
 								});
 								
-								if (!CronkListing.applyActiveItem() && act) {
-										CE.getParent().getLayout().setActiveItem(act);
-								}
+								
 							}
 							catch (e) {
 								// DO NOTHING
 							}
+							
+							addCmp.on('afterrender', function() {
+								if (!CronkListing.applyActiveItem() && act) {
+									CE.getParent().getLayout().setActiveItem(act);
+								}
+							});
 							
 							CE.doLayout();
 						}
@@ -273,40 +277,6 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 	}();
 
 	CronkListing.go();
-	
-//	var parentCmp = Ext.getCmp("<?php echo $parentid; ?>");
-//	CronkListing.setParentCmp(parentCmp);
-//	
-//	Ext.Ajax.request({
-//		url: CronkListing.getBaseUrl(),
-//		params: { type: 'cat' },
-//		success: function (r, o) {
-//			var d = Ext.decode(r.responseText);	
-//			
-//			if (d.categories) {
-//				var act = null;
-//				var i = 0;
-//				Ext.iterate(d.categories, function(k,v) {
-//					
-//					if (v.active && v.active == true) {
-//						act = i;
-//					}
-//					
-//					CronkListing.addListing(v.title || 'untitled', k);
-//					i++;
-//				});
-//				
-//				
-//			if (!CronkListing.applyActiveItem() && act) {
-//					CronkListing.getParentCmp().getLayout().setActiveItem(act);
-//				}
-//			}
-//			
-//		},
-//		failure: function (r, o) {
-//			AppKit.notifyMessage('Ajax Error', 'Could not load the categories (CronkList)');
-//		}
-//	});
 		
 });
 
