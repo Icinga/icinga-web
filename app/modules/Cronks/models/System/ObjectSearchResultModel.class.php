@@ -4,7 +4,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 	
 	/**
 	 * Limit search result to x rows
-	 * @var string
+	 * @var integer
 	 */
 	const RESULT_LIMIT = 200;
 	
