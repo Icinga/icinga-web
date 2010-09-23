@@ -10,8 +10,9 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 	
 	public function executeJson(AgaviRequestDataHolder $rd) 
 	{
+		$count = $rd->getParameter("searchCount");
 		// just return the entities
-		if(!$rd->getParameter("withMeta",false))
+		if(!$rd->getParameter("withMeta",false) && !$count)
 			return json_encode($rd->getParameter("searchResult",null));
 		
 		// provide meta data for ExtJs stores
@@ -53,6 +54,7 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 	public function executeXml(AgaviRequestDataHolder $rd) 
 	{
 		$results = $rd->getParameter("searchResult",null);
+		$count = $rd->getParameter("searchCount");
 		$DOM = new DOMDocument("1.0","UTF-8");
 		$root = $DOM->createElement("results");
 		$DOM->appendChild($root);
@@ -68,6 +70,12 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 				$node->appendChild($name);
 				$resultNode->appendChild($node);
 			}				
+		}
+		if($count) {
+			$count = array_values($count[0]);
+			$node = $DOM->createElement("total");
+			$node->nodeValue = $count[0];
+			$root->appendChild($node);
 		}
 		return $DOM->saveXML();
 	}
