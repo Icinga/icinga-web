@@ -442,6 +442,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/CronkLoaderAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/CronkLoaderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/CronkPortalAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/CronkPortalAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/IframeViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/IframeViewAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/MonitorPerformanceAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/MonitorPerformanceAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/ObjectSearchAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/ObjectSearchAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/PortalHelloAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/PortalHelloAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/actions/System/PortalViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/actions/System/PortalViewAction.class.php
@@ -509,6 +510,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CommandInfoModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CommandInfoModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CommandSenderModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CommandSenderModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/CronkDataModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/CronkDataModel.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/MonitorPerformanceDataModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/MonitorPerformanceDataModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/ObjectSearchResultModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/ObjectSearchResultModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/models/System/StaticContentTemplateModel.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/models/System/StaticContentTemplateModel.class.php
@@ -526,6 +528,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/CronkTrigger.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/CronkTrigger.js
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/js/JitStatusMap.js $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/js/JitStatusMap.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/MonitorPerformanceSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/MonitorPerformanceSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/ObjectSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/ObjectSearchSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalHelloSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalHelloSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/templates/System/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Cronks/templates/System/PortalViewSuccess.php
@@ -550,6 +553,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/CronkLoader.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/CronkLoader.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/CronkPortal.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/CronkPortal.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/IframeView.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/IframeView.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/MonitorPerformance.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/MonitorPerformance.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/ObjectSearch.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/ObjectSearch.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/PortalHello.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/PortalHello.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/validate/System/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Cronks/validate/System/PortalView.xml
@@ -570,6 +574,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/CronkPortalSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/CronkPortalSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/IframeViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/IframeViewSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/MonitorPerformanceSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/MonitorPerformanceSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/ObjectSearchSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/ObjectSearchSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/PortalHelloSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/PortalHelloSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Cronks/views/System/PortalViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Cronks/views/System/PortalViewSuccessView.class.php
@@ -12557,6 +12562,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=11462
+INC_FILES=11467
 INC_DIRS=1094
 # INSTALL_FILES_END
