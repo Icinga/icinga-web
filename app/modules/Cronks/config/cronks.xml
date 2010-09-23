@@ -305,6 +305,17 @@
 				<ae:parameter name="ae:parameter">
 				</ae:parameter>
 			</ae:parameter>
+
+			<ae:parameter name="icingaMonitorPerformance">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.MonitorPerformance</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Monitor performance data</ae:parameter>
+				<ae:parameter name="name">Display monitor performance data</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+				<ae:parameter name="ae:parameter">
+				</ae:parameter>
+			</ae:parameter>
 	
 			<ae:parameter name="icingaToProc">
 				<ae:parameter name="module">Cronks</ae:parameter>

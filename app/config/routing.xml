@@ -160,6 +160,9 @@
 				<!-- Content of the tactical overviews -->
 				<route name=".staticContent.content" pattern="^/staticContent/(template:([\w\.\-\_\s]+))/content" output_type="simple" action="System.StaticContent"/>
 
+				<!-- Monitoring performance data -->
+				<route name=".monitorPerformance.json" pattern="^/monitorPerformance/json" output_type="json" action="System.MonitorPerformance"/>
+
 				<!-- Source of the grid processor -->
 				<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
 					<route name=".json" pattern="^/json" output_type="json" action="System.ViewProc">
