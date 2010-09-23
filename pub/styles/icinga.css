@@ -604,6 +604,11 @@ div.icinga-overall-status-icon {
 	height: 16px;
 }
 
+div.icinga-overall-status-container {
+	
+}
+
+/** Bug display **/
 
 div.icinga-bugBox {
    -webkit-box-shadow:3px 3px 2px #dedede; 
@@ -653,71 +658,46 @@ div.icinga-comment .icinga-comment-data {
 	padding: 5px 2px 2px 5px;
 }
 
+/** Monitor Performance **/
+
+div.icinga-monitor-performance {
+	background-color: #f1f1f1;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+	padding: 1px 5px 0px 5px;
+}
+
+div.icinga-monitor-performance-container {
+	padding: 0px 0px 1px 0px;
+}
+
+div.icinga-monitor-performance-container .key {
+	width: 20px;
+	height: 16px;
+	float: left;
+}
+
+div.icinga-monitor-performance-container .value {
+	line-height: 16px;
+}
+
+div.icinga-monitor-performance-container-50 {
+	width: 50%;
+	float: left;
+}
+
+/** Floating tools **/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.float-container {
+	overflow: hidden;	
+}
+
 /* EOF */
-
-
-/*MODULE[CRONK_BP]*/
-div.bp_cfgPanel {
-    width:75px;
-    height:75px;
-    border:1px solid #ababab;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-box-shadow:2px 2px 5px #888;
-    -webkit-box-shadow:2px 2px 5px #888;
-    text-align:center;
-    float:left;
-    margin:5px;
-    cursor:pointer;
-}
-
-div.bp_cfgPanel * {
-    cursor:pointer;    cursor:pointer;
-}
-
-div.bp_link_infoBox {
-	width:80%;
-	height:100px;
-	border:1px solid #cecece;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	text-align:center;
-	margin:auto;
-	margin-top:5px;
-	padding:10px;
-	padding-top:20px;
-	background-color:#dedede;
-
-}
-
-div.bp_thumb {
-    width:32px;
-    height:32px;
-    margin:auto;
-    margin-top:5px;
-    margin-bottom:5px;
-    background-image:url('../images/cronks/default.png');
-    background-repeat:no-repeat;
-}
-
-div.bp_cfgPanel {
-    width:100px;
-    border:1px solid #dedede;
-    text-align:center;
-    margin:auto;
-    margin-top:5px;
-    padding:5px;
-}
-
-div.bp_cfgPanel.x-over {
-    background-color:#dedede;
-}
-
-tr.bp_serviceRow {
-    background-color:#dedede;
-}
-
-.icinga-icon-chart-organisation { background-image: url(../images/famfamfam/chart_organisation.png) !important; background-repeat: no-repeat; }
-.icinga-icon-sitemap { background-image: url(../images/famfamfam/sitemap.png) !important; background-repeat: no-repeat; }
-
-/*MODULE[CRONK_BP]*/

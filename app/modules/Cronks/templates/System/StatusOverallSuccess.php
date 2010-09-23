@@ -78,6 +78,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			},
 
 			tpl: new Ext.XTemplate(
+				'<div class="icinga-overall-status-container clearfix">',
 				'<tpl for=".">',
 					'<tpl if="id==1">',
 					'<div class="icinga-overall-status-icon icinga-icon-host" title="' + _('Hosts') + '"></div>',
@@ -90,7 +91,9 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					'<span>{state}</span>',
 					'</div>',
 				'</tpl>',
-				'<div class="x-clear"></div>'
+				'</div>'
+				// ,
+				// '<div class="x-clear"></div>'
 			)
 		}]
 	});

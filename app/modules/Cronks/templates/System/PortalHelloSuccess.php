@@ -1,8 +1,4 @@
 <?php
-	function _GV($item) {
-		return AgaviConfig::get('org.icinga.version.'. $item);
-	}
-	
 	$version_string	= AgaviConfig::get('org.icinga.version.release');;
 	$version_date	= AgaviConfig::get('org.icinga.version.releasedate');
 	$copyright		= AgaviConfig::get('org.icinga.version.copyright');
