@@ -4,7 +4,14 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 	var statusOverallRenderer = {
 		prepareData: function(data, recordIndex, record) {
 			data.state_org = data.state;
-			data.state = Icinga.StatusData.wrapElement(data.type, data.state, data.count + ' {0}' );
+			
+			if (data.count == 0) {
+				data.state = Icinga.StatusData.wrapElement(data.type, data.state, data.count + ' {0}', Icinga.DEFAULTS.STATUS_DATA.servicestatusClass[100]);
+			}
+			else {
+				data.state = Icinga.StatusData.wrapElement(data.type, data.state, data.count + ' {0}');
+			}
+			
 			return data;
 		}
 	};

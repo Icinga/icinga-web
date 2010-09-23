@@ -83,7 +83,7 @@ Icinga.StatusData = (function() {
 	var elementTemplate = new Ext.Template('<div class="icinga-status {cls}"><span>{text}</span></div>');
 	elementTemplate.compile();
 	
-	var elementWrapper = function(type, statusid, format) {
+	var elementWrapper = function(type, statusid, format, cls) {
 		format = (format || '{0}');
 		
 		var c = '';
@@ -92,6 +92,10 @@ Icinga.StatusData = (function() {
 		}
 		else if (type == 'service') {
 			c = pub.servicestatusClass[statusid];
+		}
+		
+		if (!Ext.isEmpty(cls)) {
+			c = cls;
 		}
 		
 		var t = '';
@@ -110,8 +114,8 @@ Icinga.StatusData = (function() {
 	
 	Ext.apply(pub, {
 		
-		wrapElement : function(type, statusid, format) {
-			return elementTemplate.apply(elementWrapper(type, statusid, format));
+		wrapElement : function(type, statusid, format, cls) {
+			return elementTemplate.apply(elementWrapper(type, statusid, format, cls));
 		},
 		
 		wrapText : function(type, statusid, format) {
