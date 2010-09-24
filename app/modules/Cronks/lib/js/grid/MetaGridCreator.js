@@ -270,14 +270,15 @@ Cronk.grid.MetaGridCreator = function(meta) {
 				
 				getState: function() {
 					var store = this.getStore();
+				
 					var o = {
-						filter_params: pub.filter_params || {},
-						filter_types: pub.filter_types || {},
+						filter_params: this.filter_params || {},
+						filter_types: this.filter_types || {},
 						store_origin_params: ("originParams" in store) ? store.originParams : {}
 					};
 					
 					var e = true;
-					
+
 					for (var i in o.filter_params) { e=false; break; }
 					for (var i in o.filter_types) { e=false; break; }
 					for (var i in o.store_origin_params) { e=false; break; }
@@ -292,7 +293,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 					var store = this.getStore();
 					
 					if (state.filter_types) {
-						pub.filter_types = state.filter_types;
+						this.filter_types =  pub.filter_types = state.filter_types;
 					}
 					
 					if (state.store_origin_params) {
@@ -301,8 +302,9 @@ Cronk.grid.MetaGridCreator = function(meta) {
 					}
 					
 					if (state.filter_params) {
-						pub.filter_params = state.filter_params;
-						pub.applyParamsToStore(pub.filter_params, store) && (!reload && (reload=true));
+						this.filter_params = pub.filter_params = state.filter_params;
+						
+						pub.applyParamsToStore(this.filter_params, store) && (!reload && (reload=true));
 					}
 					
 					(reload == true) && (store.reload());

@@ -62,10 +62,13 @@ Cronk.util.GridFilterWindow = function() {
 					
 					listeners: {
 						render: function(oc) {
+							AppKit.log(oGrid);
 							if (oGrid.filter_types) {
 								var i = 0;
+
 								Ext.iterate(oGrid.filter_types, function(key, item) {
 									var r = new Ext.data.Record(item);
+									
 									selectRestrictionHandler(oCombo, r, i);
 									i++;
 								})
@@ -238,8 +241,13 @@ Cronk.util.GridFilterWindow = function() {
 		}
 		
 		function getFormValues(raw) {
-			var data = oCoPanel.getForm().getValues();
-			
+			AppKit.log( oCoPanel.getForm());
+			var data = {}
+			try {
+				data = oCoPanel.getForm().getValues();
+			} catch(e) {
+				data = {}
+			}
 			var o = {};
 			
 			for (var k in data) {
@@ -285,6 +293,7 @@ Cronk.util.GridFilterWindow = function() {
 				}
 				
 				oGrid.on('activate', function() {
+	
 					if (oCoPanel) {
 						oGrid.filter_params = getFormValues(false);
 					}
