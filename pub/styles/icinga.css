@@ -700,4 +700,11 @@ div.icinga-monitor-performance-container-50 {
 	overflow: hidden;	
 }
 
+.activeFilter {
+	background-color:#ffacac;
+    -moz-box-shadow:1px -1px 50px red;
+    -webkit-box-shadow:1px -1px 50px red;
+	-o-box-shadow:1px -1px 50px red;
+}
+
 /* EOF */

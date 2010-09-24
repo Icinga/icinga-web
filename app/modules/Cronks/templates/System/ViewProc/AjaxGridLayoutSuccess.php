@@ -51,15 +51,17 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 							fw.destroyHandler();
 						});
 
-
+						AppKit.log(this);
 						this.topToolbar.add([
 							'-', {
 								text: _("Filter"),
 								iconCls: 'icinga-icon-pencil',
+							//	cls: this.filter_params.length ? 'activeFilter' : null,
+								id: grid.id+"_filterBtn",
 								menu: {
 									items: [{
 										text: _("Modify"),
-										iconCls: 'icinga-icon-application-form',
+										iconCls: 'icinga-icon-application-form',										
 										handler: fw.startHandler,
 										scope: this
 									},{

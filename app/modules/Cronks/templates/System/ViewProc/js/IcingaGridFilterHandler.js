@@ -62,17 +62,17 @@ Cronk.util.GridFilterWindow = function() {
 					
 					listeners: {
 						render: function(oc) {
-							AppKit.log(oGrid);
+							
 							if (oGrid.filter_types) {
 								var i = 0;
-
+								
 								Ext.iterate(oGrid.filter_types, function(key, item) {
 									var r = new Ext.data.Record(item);
 									
 									selectRestrictionHandler(oCombo, r, i);
 									i++;
 								})
-							}
+							} 
 							
 							if (oGrid.filter_params && oCoPanel) {
 								Ext.iterate(oGrid.filter_params, function (key, val) {
@@ -325,14 +325,30 @@ Cronk.util.GridFilterWindow = function() {
 				oOrgBaseParams = {}
 				oFilter = {}; 
 			},
-			
+
+			markActiveFilters : function(data) {
+				AppKit.log(data);
+				var btn = Ext.getCmp(oGrid.id+"_filterBtn");
+				if(!btn) {
+					this.markActiveFilters.defer(200,this,[data]);
+					return true;
+				}
+				var i = 0;
+				for(var elem in data)
+					i++;
+				if(i)
+					btn.addClass("activeFilter");
+				else
+					btn.removeClass("activeFilter");
+			},
+
 			/**
 			 * If a restriction was made, this method applies the restrictins
 			 * to the store
 			 */
 			applyFilters : function(owd) {
 				var data = owd || getFormValues();
-	
+				this.markActiveFilters(data);
 				oGrid.getStore().baseParams = {};
 				Ext.apply(oGrid.getStore().baseParams, oOrgBaseParams);
 				Ext.apply(oGrid.getStore().baseParams, data);
@@ -352,7 +368,12 @@ Cronk.util.GridFilterWindow = function() {
 			 */
 			removeFilters : function() {
 				oGrid.getStore().baseParams = oOrgBaseParams;
+				oGrid.filter_params = null;
+				oGrid.filter_types = null;
 				oGrid.getStore().reload();
+				var btn = Ext.getCmp(oGrid.id+"_filterBtn");
+				if(btn)
+					btn.removeClass("activeFilter");
 				oGrid.fireEvent('activate');
 			},
 			
