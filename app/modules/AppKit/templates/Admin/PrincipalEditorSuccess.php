@@ -53,6 +53,7 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 				typeAhead:true,
 				triggerAction:'all',
 				store: this.editorStore,
+				editDelay: -10,
 				valueField: 'idField',
 				forceSelection: false,
 				displayField: 'idField'
@@ -168,6 +169,9 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 			subNode.isAPIPrincipal = record.get('type') == 'icinga';
 			subNode.on("click", function(el) {
 				this.prepareEditValue(el);
+				
+				this.editor.triggerEdit(subNode);
+				
 				return true;
 			}, this);
 			node.appendChild(subNode);
