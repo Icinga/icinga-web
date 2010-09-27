@@ -182,15 +182,29 @@
 
 		<parameter name="filterPresets">
 			<parameter name="OR">
-				<parameter>
-					<parameter name="field">SERVICE_CURRENT_STATE</parameter>
-					<parameter name="val">0</parameter>
-					<parameter name="op">!=</parameter>
+				<parameter name="AND">
+					<parameter>
+						<parameter name="field">SERVICE_CURRENT_STATE</parameter>
+						<parameter name="val">0</parameter>
+						<parameter name="op">!=</parameter>
+					</parameter>
+					<parameter>
+						<parameter name="field">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+						<parameter name="val">1</parameter>
+						<parameter name="op">!=</parameter>
+					</parameter>
 				</parameter>
-				<parameter>
-					<parameter name="field">HOST_CURRENT_STATE</parameter>
-					<parameter name="val">0</parameter>
-					<parameter name="op">!=</parameter>
+				<parameter name="AND">
+					<parameter>
+						<parameter name="field">HOST_CURRENT_STATE</parameter>
+						<parameter name="val">0</parameter>
+						<parameter name="op">!=</parameter>
+					</parameter>
+					<parameter>
+						<parameter name="field">HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+						<parameter name="val">1</parameter>
+						<parameter name="op">!=</parameter>
+					</parameter>
 				</parameter>
 			</parameter>
 		</parameter>

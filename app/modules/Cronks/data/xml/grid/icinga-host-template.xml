@@ -298,7 +298,54 @@
     	Field decleration: What to display and how
     -->
     <fields>
+		<field name="host_icon">
+        	<datasource>
+        		<parameter name="field">HOST_ICON_IMAGE</parameter>
+        	</datasource>
+			
+        	<display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+				<parameter name="width">25</parameter>
+				<parameter name="Ext.grid.Column">
+		          	<parameter name="menuDisabled">true</parameter>
+		          	<parameter name="fixed">true</parameter>
+			    </parameter>
+                <parameter name="jsFunc">
+                	<parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
 
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+
+	                	<parameter name="arguments">
+							<parameter name="image">
+								<![CDATA[
+									<tpl if="host_icon == ''" />
+										images/icons/server.png
+									</tpl>
+									<tpl if="host_icon != ''" />
+										{host_icon}
+									</tpl>
+
+								]]>
+							</parameter>	
+	                	</parameter>
+	                </parameter>
+				</parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+
+        </field>
 		<field name="instance_name">
         	<datasource>
         		<parameter name="field">INSTANCE_NAME</parameter>
@@ -363,7 +410,8 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-    
+	
+
         <field name="host_name">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>

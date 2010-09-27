@@ -253,7 +253,23 @@ class IcingaTemplateWorker {
 	private function setPrivileges(IcingaApiSearchInterface &$search) {
 		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);			
 	}
-	
+
+
+	private function createFilter($preset,$searchGroup,$search) {
+		
+		foreach($preset as $type=>$filterElem) {
+			if(isset($filterElem["field"])) {
+				$searchFilter = $search->createFilter($filterElem["field"],$filterElem["val"],$filterElem["op"]);
+				$searchGroup->addFilter($searchFilter);
+			} else {
+				$newGroup =  $search->createFilterGroup($type);
+				$this->createFilter($filterElem,$newGroup,$search);
+				$searchGroup->addFilter($newGroup);
+			}
+		}
+		
+	}
+
 	private function buildDataSource() {
 		if ($this->api_search === null) {
 			$params = $this->getTemplate()->getSectionParams('datasource');
@@ -267,10 +283,7 @@ class IcingaTemplateWorker {
 			if($params->getParameter('filterPresets')) {
 				foreach($params->getParameter('filterPresets') as $type=>$preset) {
 					$searchGroup = $search->createFilterGroup($type);
-					foreach($preset as $filterElem) {
-						$searchFilter = $search->createFilter($filterElem["field"],$filterElem["val"],$filterElem["op"]);
-						$searchGroup->addFilter($searchFilter);
-					}
+					$this->createFilter($preset,$searchGroup,$search);
 					$this->conditions[] = $searchGroup;
 				}
 			}
