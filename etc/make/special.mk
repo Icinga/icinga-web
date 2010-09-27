@@ -1,6 +1,8 @@
 # Install special structures with other rights
 inc-install-special:
 	# Cache directories"
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
+
 	$(INSTALL) -m 775 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 775 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache/config
 	$(INSTALL) -m 775 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache/content
@@ -9,6 +11,8 @@ inc-install-special:
 	$(INSTALL) -m 775 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(prefix)/app/data/log
 	
 	# Binaries
+	$(INSTALL) -m 755 $(INSTALL_OPTS) bin
+	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/agavi
 	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/agavi $(DESTDIR)$(prefix)/bin/agavi
 	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/console.php $(DESTDIR)$(prefix)/bin/console.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) bin/create-changelog.py $(DESTDIR)$(prefix)/bin/create-changelog.py
