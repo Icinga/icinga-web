@@ -45,8 +45,8 @@
 .icinga-icon-user-add { background-image: url(../images/icons/user--plus.gif) !important; background-repeat: no-repeat; }
 .icinga-icon-user-comment { background-image: url(../images/icons/user-pencil.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-delete { background-image: url(../images/icons/user--minus.png) !important; background-repeat: no-repeat; }
-.icinga-icon-user-edit { background-image: url(../images/icons/user-pencil.png) !important; background-repeat: no-repeat; }
-.icinga-icon-user-go { background-image: url(../images/icons/control-double.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-edit { background-image: url(../images/icons/user--pencil.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-go { background-image: url(../images/icons/door-open-out.png) !important; background-repeat: no-repeat; }
 .icinga-icon-group { background-image: url(../images/icons/users.png) !important; background-repeat: no-repeat; }
 .icinga-icon-group-add { background-image: url(../images/icons/plus-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-group-delete { background-image: url(../images/icons/minus-circle-frame.png) !important; background-repeat: no-repeat; }
@@ -102,3 +102,7 @@
 .icinga-icon-arrow-in { background-image: url(../images/icons/arrow-in.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-arrow-out { background-image: url(../images/icons/arrow-out.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-flapping { background-image: url(../images/icons/arrow-switch.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-structure { background-image: url(../images/icons/sitemap-image.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-book { background-image: url(../images/icons/book.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-disk { background-image: url(../images/icons/disk.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-zoom { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
