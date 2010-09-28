@@ -10,7 +10,7 @@ class availabilityTest extends AgaviPhpUnitTestCase {
 			
 	public function testShowLoginMask() {
 		$ctx = AgaviContext::getInstance('web');
-		$container = $ctx->getController()->createExecutionContainer("AppKit","AjaxLogin",null,"html");
+		$container = $ctx->getController()->createExecutionContainer("AppKit","Login.AjaxLogin",null,"html");
 		try {
 			$result = $container->execute();
 			if($result->getHttpStatusCode() != '200' && $result->getHttpStatusCode() != '401' )
@@ -33,7 +33,7 @@ class availabilityTest extends AgaviPhpUnitTestCase {
 		));
 		$json = null;
 		$ctx = AgaviContext::getInstance('web');
-		$container = $ctx->getController()->createExecutionContainer("AppKit","AjaxLogin",$params,"json","write");
+		$container = $ctx->getController()->createExecutionContainer("AppKit","Login.AjaxLogin",$params,"json","write");
 		try {
 			$result = $container->execute();
 			$json = json_decode($result->getContent(),true);
@@ -64,7 +64,7 @@ class availabilityTest extends AgaviPhpUnitTestCase {
 		));
 		
 		$ctx = AgaviContext::getInstance('web');
-		$container = $ctx->getController()->createExecutionContainer("AppKit","AjaxLogin",$params,"json","write");
+		$container = $ctx->getController()->createExecutionContainer("AppKit","Login.AjaxLogin",$params,"json","write");
 		$json = null;
 		try {
 			$result = $container->execute();

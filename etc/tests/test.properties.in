@@ -1,6 +1,6 @@
-#
-# Properties for the test suite
-#
+'
+' Properties for the test suite
+'
 
 www-user =  @web_user@
 www-group = @web_group@

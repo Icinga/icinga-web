@@ -41,7 +41,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 	public function testCacheDirsAreWriteable() {
 		info("\tTesting if web user can write to cache\n");
 		$root = AgaviConfig::get("core.root_dir");
-		$cacheFolders = array($root."app/cache");
+		$cacheFolders = array($root."/app/cache");
 
 		$wwwUser = $this->sharedFixture['www-user'];
 		$wwwGroup = $this->sharedFixture['www-group'];
@@ -50,6 +50,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 		if(!$wwwUser)
 			$this->markTestSkipped("No www-user specified in test.properties!");
 		foreach($cacheFolders as $folder) {
+			 
 			exec("su ".$wwwUser." -c 'touch ".$folder."/testfile.txt'");
 			if(!file_exists($folder."/testfile.txt")) {
 				error("Web user ".$wwwUser." couldn't write to cache ".$folder.
