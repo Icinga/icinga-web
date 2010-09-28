@@ -14,12 +14,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	// Top toolbar of the grid
 	buildTopToolbar : function() {
 		
-		var autoRefresh = 300;
-
-		if (!Ext.isEmpty(this.meta.template.option.autoRefreshTime)) {
-			autoRefresh = this.meta.template.option.autoRefreshTime;
-		}
-
+		var autoRefresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
+		var autoRefreshDefault = AppKit.getPrefVal('org.icinga.autoRefresh') && AppKit.getPrefVal('org.icinga.autoRefresh') != 'false' 
 		return new Ext.Toolbar({
 			items: [{
 				text: _('Refresh'),
@@ -34,8 +30,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				menu: {
 					items: [{
 						text: String.format(_('Auto refresh ({0} seconds)'), autoRefresh),
-						checked: false,
-
+						checked: autoRefreshDefault,
 						checkHandler: function(checkItem, checked) {
 							if (checked == true) {
 								this.trefresh = AppKit.getTr().start({
@@ -79,7 +74,22 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						scope:this
 					}]
 				}
-			}]
+			}],
+			listeners: {
+				render: function(cmp) {
+					if(autoRefreshDefault) {
+						this.trefresh = AppKit.getTr().start({
+							run: function() {
+								AppKit.log("!");
+								this.getStore().reload();
+							},
+							interval: (autoRefresh*1000),
+							scope: this
+						});
+					}
+				},
+				scope: this			
+			}
 		});
 	},
 	

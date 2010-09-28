@@ -18,3 +18,4 @@ etc/apache2/icinga-web.conf
 pub/.htaccess
 pub/soap/.htaccess
 *~
+*.swp

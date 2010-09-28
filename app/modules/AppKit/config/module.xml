@@ -52,6 +52,7 @@
 					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
 					<ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
 					<ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
+					<ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
 				</setting>
 
 				<!-- Adding styles -->
