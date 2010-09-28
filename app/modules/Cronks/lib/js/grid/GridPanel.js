@@ -80,7 +80,6 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if(autoRefreshDefault) {
 						this.trefresh = AppKit.getTr().start({
 							run: function() {
-								AppKit.log("!");
 								this.getStore().reload();
 							},
 							interval: (autoRefresh*1000),
