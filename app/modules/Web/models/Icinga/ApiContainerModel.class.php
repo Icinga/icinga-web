@@ -284,10 +284,10 @@ implements AgaviISingletonModel {
 				->log($lerror, AgaviLogger::ERROR);
 			}
 			else {
-				
+			
 				foreach ($ds as $dk=>$d) {
 					try {
-						$d->setCommands($arry);
+						$d->setCommands(array($command));
 						$d->send();
 					}
 					catch (IcingaApiCommandException $e) {
