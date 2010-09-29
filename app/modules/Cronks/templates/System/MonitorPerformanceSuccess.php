@@ -28,17 +28,17 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			'<div class="icinga-monitor-performance-container-50">',
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Hosts') + '" class="key icinga-icon-host"></div>',
+					'<div title="' + _('Hosts (active/passive)') + '" class="key icinga-icon-host"></div>',
 					'<div class="value">{NUM_ACTIVE_HOST_CHECKS} / {NUM_PASSIVE_HOST_CHECKS}</div>',
 				'</div>',
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Host execution time') + '" class="key icinga-icon-execution-time"></div>',
+					'<div title="' + _('Host execution time (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
 					'<div class="value">{HOST_EXECUTION_TIME_MIN} / {HOST_EXECUTION_TIME_AVG} / {HOST_EXECUTION_TIME_MAX}</div>',
 				'</div>',
 				
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Host latency') + '" class="key icinga-icon-latency"></div>',
+					'<div title="' + _('Host latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
 					'<div class="value">{HOST_LATENCY_MIN} / {HOST_LATENCY_AVG} / {HOST_LATENCY_MAX}</div>',
 				'</div>',
 			
@@ -47,17 +47,17 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			'<div class="icinga-monitor-performance-container-50">',
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Services') + '" class="key icinga-icon-service"></div>',
+					'<div title="' + _('Services (active/passive)') + '" class="key icinga-icon-service"></div>',
 					'<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS}</div>',
 				'</div>',
 				
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Service execution') + '" class="key icinga-icon-execution-time"></div>',
+					'<div title="' + _('Service execution (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
 					'<div class="value">{SERVICE_EXECUTION_TIME_MIN} / {SERVICE_EXECUTION_TIME_AVG} / {SERVICE_EXECUTION_TIME_MAX}</div>',
 				'</div>',
 				
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Service latency') + '" class="key icinga-icon-latency"></div>',
+					'<div title="' + _('Service latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
 					'<div class="value">{SERVICE_LATENCY_MIN} / {SERVICE_LATENCY_AVG} / {SERVICE_LATENCY_MAX}</div>',
 				'</div>',
 				
