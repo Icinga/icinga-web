@@ -275,7 +275,7 @@ Ext.onReady(function(){
 
 				 	this.objToForm(principalData.principal_values,values,"principal_value");
 					this.objToForm(principalData.principal_target,values,"principal_target");
-					AppKit.log(values);
+
 				}		
 			},
 			
