@@ -1,3 +1,746 @@
+2010-09-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d0ca13805ec303c21f7f9d3a329f0bccb41012fe
+
+* MonitorPerformance typo
+
+
+2010-09-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0ee49b4c12d2eb6d7e72742ca74f7f15f4455aa5
+
+* removed debug message;
+
+
+2010-09-28 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ac3ebd6e0345fb75eb5cef6eea31146940925e08
+
+* Added autoRefresh by default (#resolves 820)
+
+
+2010-09-28 root <root(AT)localhost(DOT)localdomain>
+           Commit: 5c8037055515c697bb38f26a371bf619383fe5cc
+
+* Updated tests
+
+
+2010-09-28 mojadev <mojadev(AT)localhost(DOT)localdomain>
+           Commit: 14ad6d86dfa2e2353ffcf2d1ddf49900e3224e90
+
+* Fixed commands being send x times per item when x items are selected (#fixes 823)
+
+
+2010-09-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fb924124bef2c92e3ff8e49a6f1e54f0b9078e56
+
+* Install make special file fix
+
+
+2010-09-27 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: fab4fc898c5fe8ad1a6602be97c51e9f5cdc9428
+
+* Open problems now doesn't show acknowledged, add object icons (#fixes 817)
+
+
+2010-09-27 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2b3ed001422dbe25c2336228959ed1a8dc803fa6
+
+* Added some icons
+
+
+2010-09-27 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f4f17cf4e3e98995c241778e688fe272695cd750
+
+* Added bin folder to special.mk
+
+
+2010-09-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 3fc069a15c6b568d3869d91131f8e99577e7a960
+
+* Principals are now one-click editable (#fixes wq816)
+
+
+2010-09-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2fdb543dd53d68e32f6c9d9d944889342322e769
+
+* Added mark for active filters (#fixes 810)
+
+
+2010-09-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: c98c685e7b713b075bc5f785c7a3eb605d1fca59
+
+* Fixed filters not being saved (did anyone notice? :) )
+
+
+2010-09-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: da4b8121dcbca04794cdd6277885330f3780043a
+
+* Added missing command schedule downtime for host and all services (resolves #818), 
+  removed console.log
+
+
+2010-09-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 21d4f67c1cd5b77680d738fb134811b2aecab1d5
+
+* Makefile fix
+
+
+2010-09-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7a857adbd2cb350d2dafa85b7f53eeb6f4aedde8
+
+* Monitoring performance cronk (ref #796)
+
+
+2010-09-23 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: eab9210876154c9305e5e0823201a1e093587ea7
+
+* Total view is now also available as XML
+
+
+2010-09-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 06a7b2e018f02915c162eef6a58beab504bcdf83
+
+* Overall status only coloured if objects available
+
+
+2010-09-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 34e39a63ad39f46c0fbf9ec0633aaea43fdf096a
+
+* Accordeon cronk list is persistent again
+
+
+2010-09-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 887535cd959cc2b528b43b7fc6d0ab86d595025a
+
+* Tagged new release branch
+
+
+2010-09-22 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 335c80daab77e53d50b7c1cd32d2f27af42f2a06
+
+* Fixed PNP_Integration in files.mk and cleaned up unnecessary files
+
+
+2010-09-21 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: b5c082d52ebe34073e867322022d498475931dde
+
+* Fixed files.mk again, removed wrong icons
+
+
+2010-09-21 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 86eadda533b70a33a92dc619670ed9de038f5809
+
+* Updated files.mk
+
+
+2010-09-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 74c3dd2eba4ea5ec3281ba8b603cef56d040c105
+
+* Added new api options for GET Request, enabled CORS Requests
+
+
+2010-09-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 625cca21e41d87f76cea1445879f0e183801e01b
+
+* Removed host from pnp4nagios
+
+
+2010-09-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 98137a5a92e20a95911c19ecd633bf762b99fe3a
+
+* Status map is now move and zoomable
+
+
+2010-09-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 97fce677d387fad62afee7e735b6a11ee8b2e1a0
+
+* New icons, stylesheet cleanup, iconRenderer can now be used with parameters
+
+
+2010-09-17 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 6684ad58080dd6bcc2bd38c83e7f1579f33e858d
+
+* Error handler doesn't complain about 200 status anymore
+
+
+2010-09-17 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 171e095881aaf3b2f1f6ecc38c4f9ae54bc7be4f
+
+* Updated jit library and portal tabs now change title (#resolves 795 #resolves 798)
+
+
+2010-09-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: df7da1d951ff3e458e95da065f5722c7d38a4b5e
+
+* Wrong datatype in comment
+
+
+2010-09-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 28f9f9c8e502557e795f9e3029e37ec8e387be0d
+
+* Added uniform handling of user preferences and a scroll and sizing mechanism 
+  (#fixes 797)
+
+
+2010-09-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e128947954273bf344d0f9f5e826c41197bd388f
+
+* Max search results 200 rows starting with minimum 4 chars (fixes #791)
+* Adding 
+  bin/clearcache.sh to gitignore
+
+
+2010-09-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: cc93e17ddd31d4126920a367b38b923b68a010fb
+
+* Removed home, Portal in Menu (#fixes 793)
+
+
+2010-09-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 84beda62a4ab28a5db3000d61a4c7949935836f5
+
+* Prepared for intermediate release 1.0.3-1
+
+
+2010-09-16 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: ae7da0abc6e4acb6b3f19574a62b0413ea94935a
+
+* Fixed grids not showing when js load delay was to big
+
+
+2010-09-14 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 8a97eeb36c956f27f5d8ba6b10f6589509229235
+
+* Added script to clear cache from console (#refs 784)
+
+
+2010-09-14 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 0dee1e728f54ccf34ff53422901455192983e243
+
+* Fixed TO -> Cronk bug
+
+
+2010-09-14 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 39a347eeae5efdf900f32af6d9bbdc2fab0a490f
+
+* Had to change status condition in order to let StatusSummary work with api changes
+
+
+2010-09-13 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 032db15c642a2bfaa20ebc37eee2ff74344a6e19
+
+* Fixed typo in servie status display routine
+
+
+2010-09-13 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: ac15553ff70f5ba6d95d27f5d048328972f07a9f
+
+* Added pending states (#ref 371)
+
+
+2010-09-13 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: e5de7a11f4ba8b807a3fc405e0e5980f9d5fad8e
+
+* Added new icinga-api target to routing.xml
+
+
+2010-09-13 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f0a63537a9a2bcdb30adfbb672908be3ccb4bece
+
+* Updated PNP Integration (iframe view added)
+
+
+2010-09-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6fbca3107b1b521d45256e2122215c4498c1caee
+
+* Adding alternate cronk template file system (ref #621)
+
+
+2010-09-10 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 44ce8b3e7b4e462610a3a9c93d1e2f97b04904d2
+
+* Readded original host-template.xml
+
+
+2010-09-10 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: a46fd610ed6d9628fc475d141a60ddefabfcc150
+
+* Removed accidently added db models
+
+
+2010-09-10 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: bc6fc28562af552ac2912be1dee27bc59e49730d
+
+* Added basic open problems view
+
+
+2010-09-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 703d42ada29d59b0596a4b8228c774ad4f487598
+
+* Renamed schema files to match the upcomming version
+
+
+2010-09-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b7a5806513ed4518e628c4f55dd83330bd51b71c
+
+* Added upgrade steps to Makefile.in (ref #621)
+
+
+2010-09-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 16538ff184292911fdd5f42d96bf264169a4e71a
+
+* Prepare for custom config (ref #621)
+* Added new site configuration files to be 
+  installed
+* Fix for method signature
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: d4dbd5b89177495772cb16ca309d0847b22733d8
+
+* Added NoScript tag (#resolves 774)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: d523c7eda0d5cf851c854a984f47c9cf8c090741
+
+* Added additional filter fileds to hostgroup and servicegroup (#resolves 748)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: a6b70b3234b87c95a1f866d61fc67c98bd07d79d
+
+* Service comments now don't show host comments, added hidden field with defaultValue 
+  (#fixes 554)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: cfff78c7e73b05374e5914a71b39eafa906211a8
+
+* Stylesheet change in cronklisting (funky CSS3 transitions)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 5c40e9c67b377b595dd81249e0712c00d1e07423
+
+* Added default limit to Logview
+
+
+2010-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 76c480a5640bc20e5ec9c56628e8d739b43f0808
+
+* Removed deprecated classes
+* Prepared for user configuration (ref #621)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: dae3fd29fc863a95c1f5fa6b17a8b33335c6006f
+
+* 'contains not' filter now works (notice the new icinga-api version)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 8247c834e1440161c2025d47ebe3d623ba170020
+
+* Changed command message when no options are available, added minwidth for ack 
+  window (#fixes 727)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 535a34c26b22781da68df46e4cd527594821a28a
+
+* Server sends now 403 (Forbidden) instead of 401 (Authorisation required) if not 
+  logged in (#fixes w#740)
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: d20c968767a96907b953e52714f5b49b6b2c5c6d
+
+* Added the cache directory again
+
+
+2010-09-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 003a73544634b401f88a94674f6fce07e7b2fe48
+
+* Updated files.mk, moved modules folder
+
+
+2010-09-08 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: a57cc1bfb64ed1534f5d48d34cbe153d31fa60d0
+
+* Error handler now notices if the web server is down (#fixes 775)
+
+
+2010-09-08 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: c66264c60a9ed12ac0130397cfb6ffe379e06fc3
+
+* Added contrib folder with pnp4nagios integration package (resolves #769)
+
+
+2010-09-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e4c054184966a9175539c62bc003a61794c74263
+
+* Added socket option in configure (unused)
+* Fixed some E_STRICT problems
+
+
+2010-09-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5abf7f3a0b5f98dfc3a488256cac0fed1678ce6e
+
+* Added better design for comments display
+* Finish implementation for comments 
+  (fixes #697)
+* Make files fix
+
+
+2010-09-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 71d2964317162ca6c8f1a3eddcb45dc45973ef45
+
+* Added logging to the command sending process
+
+
+2010-09-07 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: e40daa540a99642a475aad7534f9e6e017792406
+
+* Added new log view
+
+
+2010-09-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 09d32ddebae5f78147ed317ce0ab64fdc0b72040
+
+* Commit before merge
+
+
+2010-09-01 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 53e84d30d83c9e3f9d8865b73ed95c2d73e6d814
+
+* Api desc validator is now case insensitive
+
+
+2010-09-01 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: ef2957eff935475ca66c994a589361134e40dba9
+
+* Nested oarameters in cronks are now json encoded
+
+
+2010-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 98de60347ff7f6d545c5069ad63d20bdda6d6f84
+
+* Typo, added missing images
+
+
+2010-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 50ddfb77ac7e2620e60ccf4fa373190fbe14080d
+
+* Added image include methods
+* Some more images to include
+
+
+2010-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5ae17ac7a42d08f6bfe1dfb414b99fcb23f57abf
+
+* Fixed installation for installing phing and the build properties
+
+
+2010-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: db9af45b2df20c9e0819e6efa7230154280f82e8
+
+* Added fix to open a new iframe cronk and activate on click
+
+
+2010-08-31 Christoph Maser <cmr(AT)financial(DOT)com>
+           Commit: 28f090019bea61032530a6596b0c4e6ec7188f2b
+
+* - add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise - 
+  change icinga-api path to value used in icinga-api-rpm - set defattr - set ownership 
+  to apache for log-dirs
+
+
+2010-08-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b2289e0622220077bda445e43a2aa53fe53aa7ee
+
+* Added all available translations from pootle
+* THANKS A MILLION TO ALL THE 
+  TRANSLATORS AROUND THE WORLD
+
+
+2010-08-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aa499627be1f956c2b7386cae4b50e39e349f0c5
+
+* Adding new translations
+
+
+2010-08-30 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: dfe7f47e35c8fc49714f6a42b8a02042965f355d
+
+* Added possibility to give filtergroups via filters_json, allowing or/and groups
+
+
+2010-08-30 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: e7990ae6c080679ee89ccb6d8af93981982027a1
+
+* Fixed Exceptionhandler
+
+
+2010-08-25 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 659de6c05f655f3141dba14d850324cfc62ac45e
+
+* Fixed GridFilter not appearing sometimes, fixed TO Grid Link ( fixes #726) 
+  Preferences window now scrolls on overflow
+
+
+2010-08-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6354ff9b558527853902222f32771d53bb2edd09
+
+* Added comment data to the grids (ref #697)
+
+
+2010-08-25 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 70049dfdb934454ce2a836f55502507f319d7d58
+
+* Fixed database and IE Error in Acknowledgement Window
+
+
+2010-08-25 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 168fc9a00c5039688722899cca4f6fadece5623b
+
+* Fixed fixed files.mk
+
+
+2010-08-25 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: d8f0bd94b8fcba6275a1772970497be40a82b4f4
+
+* Fixed files.mk
+
+
+2010-08-25 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f3625af20163ed90c5a3d7ee027519e46f026f3a
+
+* Custom error templates
+
+
+2010-08-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 1246bc61aea885ac6116520aed4e3547e08182a8
+
+* Exception now only logs @, added dynamic iFrame, fixed CronkURL Export
+
+
+2010-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 47d5e0665586ec076aaa105bee163009b735eb40
+
+* Fixed formatting II
+* Disabled the basic auth provider
+
+
+2010-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1d8aeb0e97a37751404b98ffb2499665ab2daef0
+
+* Fixed formatting
+
+
+2010-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 81ddcaf4b18f9ad0f3b005dc8732506007858c78
+
+* Fixed method declaration
+
+
+2010-08-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 69f3f533a33b34aac47094662b39e128d0116620
+
+* Added possibility to enable and disable bugTracker and errorHandler via preferences
+
+
+2010-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: df91955c16ee26abbf6b49715c3610c7d4f5b46b
+
+* Make files fix
+
+
+2010-08-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 6c3e915d5c6c5b1c6d6691c9a8a6eaeb5729cf33
+
+* Fixed Make (fixes #744)
+
+
+2010-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ed883b9f39979837362d278c741e44fab0c64e7f
+
+* Fixed method declaration errors
+* Added own exception and error handler
+
+
+2010-08-24 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: cff6da2d34ae019913d167310c922ed86af514b6
+
+* Fixed Principals (Fixed #729)
+
+
+2010-08-23 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 02d1994fa10026e2f3ccfb6818b92af226c01036
+
+* Changed exception template to use HTTP Code 500, so every php exception will be 
+  noticed by the client
+
+
+2010-08-23 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: a81d529dd9b24e1cf6df06c49725606d39a659e1
+
+* Error handling setup for Ext.Ajax and Ext.data.DataProxy (all XHR Exceptions that 
+  return status != 200 trigger a sensitive message now)
+
+
+2010-08-23 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 3fb0933fe4ba654f247967fb28b7ceb12b9a458e
+
+* Added icinga.demoMode principal and added sql update schemes
+
+
+2010-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 38499a7fa4fe4836651c8f9a1ba8807dc36913c9
+
+* Exception handling
+
+
+2010-08-23 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 211c540742ae0ef18ba2a807c270d4d1fba07918
+
+* Fix in error report
+
+
+2010-08-23 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 98c532623feaf1058f7c21590c2520c691d02a6e
+
+* Removed IE hating comma
+
+
+2010-08-22 mojadev <mojadev(AT)localhost(DOT)localdomain>
+           Commit: 86d0ac89470fb7b8b2ca88572ab5a94b54606d36
+
+* Added scrollable cronk list, fixed latency bug in StatusMap that prevented it from 
+  being drawn if the cronk request is too slow
+
+
+2010-08-22 mojadev <mojadev(AT)localhost(DOT)localdomain>
+           Commit: 8f2d7270f8b5b34ebfb8b0aadc11c9b723e67b53
+
+* Removed unavaiable services
+
+
+2010-08-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a63e4b3af53d906c728bec6d3ceae536c1ccd5dd
+
+* Changing detailed status handling and formatting (Thanks cdoebler)
+
+
+2010-08-22 mojadev <mojadev(AT)localhost(DOT)localdomain>
+           Commit: 516259f33ef320f62f784d6faaef2fc57d7b44c8
+
+* Started client side error handler
+
+
+2010-08-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ff10263512cb9454e31f1bedb7753ead25fb3c05
+
+* Fixed apache config, allowing js directory
+
+
+2010-08-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 4c5e1875fea39b71f5e492b1624390af8a97f55f
+
+* Started Icinga Error handler
+
+
+2010-08-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: d4b9cfdc97c7f10b4786b367860cc4424d1e64ce
+
+* Updated authkey provider
+
+
+2010-08-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 91674a2bed3a9a47bd0a9513c59317011b9019e9
+
+* Auth.Dispatch logs work to debug log (ref #738)
+* Auth.LDAP can update profiles
+* 
+  Auth.Dispatch can delegate authentication to other provider
+
+
+2010-08-20 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 8f1d5083420b125bcbf0a39bfad98fe8baba2453
+
+* Catch console.log to absolutely prevent any crashes due to logging
+
+
+2010-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 13b529098e0d60dc265872ab62d3e9ad43e53d59
+
+* Removed caching (again). Fixing persistence app state.
+
+
+2010-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3a19a8305749cc7fd8f797cc09c18994a3721acf
+
+* Disabled HTTPBasicAuth to avoid unwanted side effects (ref #738)
+
+
+2010-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ee10a9fe5b7df5e57218ae675e446da15794202a
+
+* Garbage content removed from sed operations (ref #735)
+
+
+2010-08-19 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: fc60cdad2cc9ff223d68ca273d93ef25279e7844
+
+* Added possibility to manage usergroups in group panel (Fixes #725)
+
+
+2010-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4ad16d35a91be67ee86b52b599798e16019026a1
+
+* Make file list fix
+
+
+2010-08-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 33b7cd15434d961c5799ad1a6e436088d5ce4171
+
+* Cronk filter window object is now dynamic
+* Adding log handling (methods, files, 
+  declaration)
+* Switched back to dev environment for exceptions
+* Logoutput for 
+  BasicAuth provider
+* Generic welcome at login
+
+
+2010-08-19 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 3db17e1c3d1b025eab8aa615fe8ec19cc68966c3
+
+* scheduler and console context updates
+
+
+2010-08-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5d68a1a49a0e57ea915456f0ad0591dbf3daf458
+
+* Removed unused class
+
+
+2010-08-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 59df6651e263ece55bde86f67ac48f5942c96116
+
+* Disabled default login message
+
+
+2010-08-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a9fcd07b995e4dcca8987fd70df10d007b060428
+
+* Adding ballon for login notifications
+
+
+2010-08-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d7ed7d85600b612b2a02099afab0486b6a683ecf
+
+* Create new version of changelog
+
+
 2010-08-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: c963821663dea6148e0dcf1e072701ed46f92fcd
 
