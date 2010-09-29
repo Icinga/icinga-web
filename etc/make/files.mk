@@ -591,6 +591,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/actions
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/ApiSearchAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/ApiSearchAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/ApiCommandAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/ApiCommandAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/ApiSimpleDataProviderAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/ApiSimpleDataProviderAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/HelpAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/HelpAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/actions/Icinga/PortalViewAction.class.php $(DESTDIR)$(prefix)/app/modules/Web/actions/Icinga/PortalViewAction.class.php
@@ -655,6 +656,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/ApiSearchSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/ApiSearchSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/ApiCommandSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/ApiCommandSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/ApiSimpleDataProviderSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/ApiSimpleDataProviderSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/HelpSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/HelpSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/templates/Icinga/PortalViewSuccess.php $(DESTDIR)$(prefix)/app/modules/Web/templates/Icinga/PortalViewSuccess.php
@@ -666,6 +668,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/validate
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/ApiSearch.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/ApiSearch.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/ApiCommand.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/ApiCommand.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/ApiSimpleDataProvider.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/ApiSimpleDataProvider.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/Help.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/Help.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/validate/Icinga/PortalView.xml $(DESTDIR)$(prefix)/app/modules/Web/validate/Icinga/PortalView.xml
@@ -675,6 +678,8 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiSearchErrorView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiSearchErrorView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiSearchSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiSearchSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiCommandErrorView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiCommandErrorView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiCommandSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiCommandSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/ApiSimpleDataProviderSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/ApiSimpleDataProviderSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/HelpSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/HelpSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/Web/views/Icinga/PortalViewSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/Web/views/Icinga/PortalViewSuccessView.class.php
@@ -711,8 +716,7 @@ inc-install-files:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin/actionQueueTask.php
