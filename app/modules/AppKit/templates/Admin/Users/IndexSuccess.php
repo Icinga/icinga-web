@@ -169,7 +169,6 @@ Ext.onReady(function() {
 		
 		listeners: {
 			rowdblclick: function(grid,index,_e) {
-				AppKit.log(index, grid.getStore().getAt(index).get("user_id"));
 				var id = grid.getStore().getAt(index).get("user_id");
 				wnd_userEditPanel.editUser(id);											
 			},

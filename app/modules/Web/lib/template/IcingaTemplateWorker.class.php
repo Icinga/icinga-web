@@ -262,7 +262,8 @@ class IcingaTemplateWorker {
 				$searchFilter = $search->createFilter($filterElem["field"],$filterElem["val"],$filterElem["op"]);
 				$searchGroup->addFilter($searchFilter);
 			} else {
-				$newGroup =  $search->createFilterGroup($type);
+				$type= explode("_",$type);
+				$newGroup =  $search->createFilterGroup($type[0]);
 				$this->createFilter($filterElem,$newGroup,$search);
 				$searchGroup->addFilter($newGroup);
 			}

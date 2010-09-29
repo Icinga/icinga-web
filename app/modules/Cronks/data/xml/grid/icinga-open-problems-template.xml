@@ -182,7 +182,7 @@
 
 		<parameter name="filterPresets">
 			<parameter name="OR">
-				<parameter name="AND">
+				<parameter name="AND_1">
 					<parameter>
 						<parameter name="field">SERVICE_CURRENT_STATE</parameter>
 						<parameter name="val">0</parameter>
@@ -194,7 +194,7 @@
 						<parameter name="op">!=</parameter>
 					</parameter>
 				</parameter>
-				<parameter name="AND">
+				<parameter name="AND_2">
 					<parameter>
 						<parameter name="field">HOST_CURRENT_STATE</parameter>
 						<parameter name="val">0</parameter>
