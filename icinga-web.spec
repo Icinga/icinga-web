@@ -1,7 +1,8 @@
 # $Id$
-# Authority: michael.friedrich(at)univie.ac.at
+# Authority: Icinga Development Team
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # Needs icinga-api
+# Check http://docs.icinga.org/latest/en/
 # ExcludeDist: el4 el3
 
 %if "%{_vendor}" == "suse"
@@ -15,8 +16,8 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.0.3_20100903_614627c
-Release: 2%{?dist}
+Version: 1.2.0
+Release: 1%{?dist}
 License: GPL
 Group: Applications/System
 URL: http://www.icinga.org/
@@ -69,7 +70,7 @@ Icinga Web for Icinga Core, requires Icinga API.
     COMMAND_OPTS="" \
     INIT_OPTS="" \
     INSTALL_OPTS_WEB="" \
-    INSTALL_OPTS_CACHE="" 
+    INSTALL_OPTS_CACHE=""
 
 ##############################
 %pre
@@ -99,7 +100,8 @@ Icinga Web for Icinga Core, requires Icinga API.
 %defattr(-,root,root)
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
 %config(noreplace) %{_datadir}/icinga-web/app/config/databases.xml
-%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml
+#%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml # 1.2 replaces that, allow to overwrite once FIXME for 1.3
+%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/icinga-io.xml
 %attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache
 %attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache/config
 %{_datadir}/icinga-web/app/config
@@ -119,6 +121,9 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 %changelog
 ##############################
+* Fri Oct 01 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.2.0-1
+- updated for 1.2.0, added icinga-io.xml to configs, allow overwrite of module.xml once
+
 * Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
 - add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise
 - change icinga-api path to value used in icinga-api-rpm
