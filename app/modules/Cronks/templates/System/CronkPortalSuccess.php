@@ -30,12 +30,12 @@ Cronk.util.initEnvironment('viewport-center', function() {
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaOverallStatus',
-				width: 400,
+				width: 480,
 				border: false
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaMonitorPerformance',
-				width: 210,
+				width: 280,
 				border: false
 			}]
 		}, {
