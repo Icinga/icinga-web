@@ -51,7 +51,6 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 							fw.destroyHandler();
 						});
 
-						AppKit.log(this);
 						this.topToolbar.add([
 							'-', {
 								text: _("Filter"),
