@@ -241,7 +241,6 @@ Cronk.util.GridFilterWindow = function() {
 		}
 		
 		function getFormValues(raw) {
-			AppKit.log( oCoPanel.getForm());
 			var data = {}
 			try {
 				data = oCoPanel.getForm().getValues();
@@ -327,7 +326,6 @@ Cronk.util.GridFilterWindow = function() {
 			},
 
 			markActiveFilters : function(data) {
-				AppKit.log(data);
 				var btn = Ext.getCmp(oGrid.id+"_filterBtn");
 				if(!btn) {
 					this.markActiveFilters.defer(200,this,[data]);

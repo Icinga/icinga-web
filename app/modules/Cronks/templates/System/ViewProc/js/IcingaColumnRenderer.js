@@ -148,7 +148,6 @@ Cronk.grid.IcingaColumnRenderer = {
 			if (fieldName == cfg.field) {
 				
 				var tabPanel = Ext.getCmp("cronk-tabs");
-				AppKit.log(url);
 				var cmp = tabPanel.add({
 					'xtype': 'cronk',
 					'title': title,
