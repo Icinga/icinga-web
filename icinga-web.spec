@@ -15,8 +15,8 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.0.2
-Release: 2%{?dist}
+Version: 1.2.0
+Release: 1%{?dist}
 License: GPL
 Group: Applications/System
 URL: http://www.icinga.org/
@@ -117,6 +117,9 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 %changelog
 ##############################
+* Mon Oct 04 2010 Christoph Maser <cmaser@gmx.de> - 1.2.0-1
+- update for release 1.2.0
+
 * Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
 - add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise
 - change icinga-api path to value used in icinga-api-rpm
