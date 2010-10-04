@@ -67,7 +67,10 @@ Icinga Web for Icinga Core, requires Icinga API.
     DESTDIR="%{buildroot}" \
     INSTALL_OPTS="" \
     COMMAND_OPTS="" \
-    INIT_OPTS=""
+    INIT_OPTS="" \
+    INSTALL_OPTS_CACHE="" \
+    INSTALL_OPTS_WEB=""
+
 
 ##############################
 %pre
