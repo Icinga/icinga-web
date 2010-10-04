@@ -50,7 +50,6 @@ none:
 	@printf "\nDatabase (web) targets:\n"
 	@printf "\t%-22s - %s\n" "db-initialize" "create the db"
 	@printf "\t%-22s - %s\n" "db-deinitialize" "reverse the path (removes all data and drop the relations)"
-	@printf "\t%-22s - %s\n" "db-upgrade" "tries to upgrade from a available db revision"
 	@printf "\t%-22s - %s\n" "db-drop" "drop the entire db"
 	@printf "\t%-22s - %s\n" "db-purge-userprefs" "purge existing user preferences"
 	@printf "\t%-22s - %s\n" "db-doc2sql" "export doctrine db schema"
@@ -178,9 +177,6 @@ db-doc2sql:
 
 db-drop:
 	$(PHING_CALL) db-drop
-
-db-upgrade:
-	$(PHING_CALL) db-upgrade
 
 db-purge-userprefs:
 	$(PHING_CALL) db-purge-userprefs
