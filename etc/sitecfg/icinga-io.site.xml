@@ -21,6 +21,18 @@
 	</setting>
 -->
 
+<!--
+        <setting name="api.interfaces.command">
+                <ae:parameter name="pipe1">
+                        <ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+                        <ae:parameter name="enabled">true</ae:parameter>
+                        <ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+			<ae:parameter name="instance">default</ae:parameter>
+			<ae:parameter name="broadcast">false</ae:parameter>
+                </ae:parameter>
+        </setting>
+-->
+
 	<setting name="bogus.include">true</setting>
 
 </settings>

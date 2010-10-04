@@ -1,7 +1,8 @@
 # $Id$
-# Authority: michael.friedrich(at)univie.ac.at
+# Authority: Icinga Development Team
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # Needs icinga-api
+# Check http://docs.icinga.org/latest/en/
 # ExcludeDist: el4 el3
 
 %if "%{_vendor}" == "suse"
@@ -100,7 +101,8 @@ Icinga Web for Icinga Core, requires Icinga API.
 %defattr(-,root,root)
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
 %config(noreplace) %{_datadir}/icinga-web/app/config/databases.xml
-%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml
+#%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml # 1.2 replaces that, allow to overwrite once FIXME for 1.3
+%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/icinga-io.xml
 %attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache
 %attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache/config
 %{_datadir}/icinga-web/app/config
@@ -122,6 +124,9 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 * Mon Oct 04 2010 Christoph Maser <cmaser@gmx.de> - 1.2.0-1
 - update for release 1.2.0
+
+* Fri Oct 01 2010 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.2.0-0
+- added icinga-io.xml to configs, allow overwrite of module.xml once
 
 * Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
 - add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise
