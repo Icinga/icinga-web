@@ -64,10 +64,22 @@
 				-->
 				<setting name="portal.loadmasktimeout">2300</setting>
 
+				<!--
+					* Grid settings
+				-->
 				<setting name="grid.pagerMaxItems">30</setting>
 
 				<setting name="grid.refreshTime">300</setting>
 				
+				<!--
+					* Search box
+				-->
+				<setting name="search.numberMinimumLetters">2</setting>
+				<setting name="search.maximumResults">200</setting>
+				
+				<!-- 
+					* Include cubconfig
+				-->
 				<setting name="categories">
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())" />
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())">

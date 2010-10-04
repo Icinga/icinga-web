@@ -87,7 +87,7 @@
         			<parameter name="icon_class">icinga-icon-downtime</parameter>
         		</parameter>
         		<parameter name="SCHEDULE_HOST_SVC_DOWNTIME">
-        			<parameter name="title">Schedule a downtime for this host and it's services</parameter>
+        			<parameter name="title">Schedule a downtime for this host and its services</parameter>
         			<parameter name="icon_class">icinga-icon-downtime</parameter>
         		</parameter>
 				<parameter name="ADD_HOST_COMMENT">
