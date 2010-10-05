@@ -1,3 +1,84 @@
+2010-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 86dc291378ba388e727ab6fc50d9b75d348da4ef
+
+* contrib install fixes
+
+
+2010-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cb4935f0a846baf31a636776872a3cca0aac7994
+
+* Added business process cronk
+* Removed etc/contrib from install files
+
+
+2010-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9b13b02fe07a0171a161b3b470eef5bbb777caa0
+
+* Provided new translations
+
+
+2010-10-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c7541887524b000e97de8f41e778acc45b40ad74
+
+* Removed js log statements
+
+
+2010-10-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3570f49e0486e2d217845787f85fc547e04f5df4
+
+* Make space for top cronks (fixes #851)
+
+
+2010-10-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a71eea12f9b8e207a79653118e92cc4a1b336e31
+
+* Tarball md5 testing
+* Remove db-upgrade target (fixes #845)
+
+
+2010-10-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b45042ec55cb823ee055405377e1752956d77073
+
+* Config search char trigger (fixes #846)
+* Typo in commands (fixes #847)
+
+
+2010-09-30 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 57d5e758987ba49d927622e200a038f079f3ab28
+
+* A debug message made it's way to the commit
+
+
+2010-09-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: a8f73b6d615b167a9528fb5ec4df740345aad2a1
+
+* Fixed "open problems" problems
+
+
+2010-09-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 56b1103090af5ab3dc16630e1562e9ec6842d7ea
+
+* Doc update
+
+
+2010-09-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 7c7b45574d3127a039129ec0dc8e9b625d0d1a2d
+
+* Added PNP_Integration src folder
+
+
+2010-09-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 940ed20cceab821489bd9696ecc178b572f63cf0
+
+* Added command if and removed a lot of debug messages
+
+
+2010-09-29 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 0c086625026bbfce34c2fe2751f3ca252c8ed0c8
+
+* Fixed auth problem (don't know where this came from)
+
+
 2010-09-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: d0ca13805ec303c21f7f9d3a329f0bccb41012fe
 
