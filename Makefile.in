@@ -186,7 +186,7 @@ make-create-files:
 	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
 
 loc-update-catalog:
-	./bin/loc-create-catalog.pl --base=./ --out=$(LOC_PO)/templates/default.pot
+	./bin/loc-create-catalog.pl --base=./app/ --out=$(LOC_PO)/templates/default.pot
 	./bin/loc-merge-template.sh $(LOC_PO)/templates/default.pot $(LOC_PO)
 
 loc-compile: loc-create-mo loc-create-json
