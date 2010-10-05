@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<module enabled="true">
+			<settings>
+				<setting name="appkit_module.app.javascript_files">
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGrid.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridColumns.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridLoader.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridSorter.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/bp/infoPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/bp/filterManager.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/bp/eventGrid.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/bp/processVizPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/bp/bpLoader.js</ae:parameter>
+				</setting>
+
+				<setting name="categories">
+					<ae:parameter name="bp_addon">
+						<ae:parameter name="title">Business Process</ae:parameter>
+						<ae:parameter name="visible">true</ae:parameter>
+						<ae:parameter name="position">70</ae:parameter>
+					</ae:parameter>
+				</setting>
+				<setting name="bp">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="bp.xml#xpointer(setting/node())"/>
+				</setting>
+			</settings>
+		</module>
+		
+	</ae:configuration>
+</ae:configurations>

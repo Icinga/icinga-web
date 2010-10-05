@@ -4,7 +4,7 @@
 #
 
 DIR="$1"
-IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in$|data/i18n/po|etc\/sitecfg|cache/|app\/data|agavi/samples).*"
+IGNORE=".*/(.*xml_.*\.php|\.(git|#)|.*\.in$|data/i18n/po|etc\/sitecfg|cache/|app\/data|agavi/samples|etc\/contrib).*"
 SRCDIR="app doc etc lib pub etc"
 
 declare -i DCOUNT=0
