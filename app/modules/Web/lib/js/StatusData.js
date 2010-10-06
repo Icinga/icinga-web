@@ -106,6 +106,10 @@ Icinga.StatusData = (function() {
 			t = pub.servicestatusText[statusid];
 		}
 		
+		if (Ext.isEmpty(t)) {
+			t = '';
+		}
+		
 		return {cls: c, text: String.format.call(String, format, t)};
 	};
 	
