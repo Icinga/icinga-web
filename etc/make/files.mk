@@ -1621,8 +1621,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/businessprocess-icinga-cronk/src/snippets.dat $(DESTDIR)$(prefix)/etc/contrib/businessprocess-icinga-cronk/src/snippets.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.backup.dat
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/bin/actionQueueTask.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/bin/actionQueueTask.php
@@ -2415,6 +2413,10 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/src/PLACEHOLDER $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src/PLACEHOLDER
+	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/src/PLACEHOLDER $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src/PLACEHOLDER
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/Skeleton
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/Skeleton/.backup.dat $(DESTDIR)$(prefix)/etc/contrib/Skeleton/.backup.dat
@@ -13473,5 +13475,5 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
 INC_FILES=12239
-INC_DIRS=1232
+INC_DIRS=1234
 # INSTALL_FILES_END
