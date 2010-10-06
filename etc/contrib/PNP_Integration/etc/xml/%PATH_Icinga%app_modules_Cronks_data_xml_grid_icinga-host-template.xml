@@ -28,7 +28,7 @@
 								 <parameter name="type">renderer</parameter>
 
 								 <parameter name="arguments">
-								<parameter name="image">images/famfamfam/image.png</parameter>
+								<parameter name="image">images/icons/chart.png</parameter>
 								<parameter name="css">x-icinga-grid-link</parameter>
 								<parameter name="attr">
 									<parameter name="qtip">Display performance graph</parameter>
@@ -46,8 +46,8 @@
 								 <parameter name="arguments">
 									 <parameter name="title">Image for {host_name}</parameter>
 									 <parameter name="url"><![CDATA[/pnp4nagios/image?host={host_name}&srv=_HOST_&view=0]]></parameter>
-								<parameter name="width">200</parameter>
-								<parameter name="height">200</parameter>
+								<parameter name="width">400</parameter>
+								<parameter name="height">400</parameter>
 								 </parameter>
 							 </parameter>
 						 </parameter>
@@ -86,7 +86,7 @@
                                 <parameter name="type">renderer</parameter>
 
                                 <parameter name="arguments">
-                                                        <parameter name="image">images/famfamfam/application_view_gallery.png</parameter>
+                                                        <parameter name="image">images/icons/chart--arrow.png</parameter>
                                                         <parameter name="css">x-icinga-grid-link</parameter>
                                                         <parameter name="attr">
                                                                 <parameter name="qtip">Show host perfdata for this host</parameter>
@@ -101,7 +101,7 @@
                                 <parameter name="type">cellclick</parameter>
                                 <parameter name="arguments">
                                         <parameter name="title">Service perfdata for {service_name} on {host_name}</parameter>
-                                        <parameter name="url"><![CDATA[/pnp4nagios/index.php/graph?host={host_name}&srv=_HOST]]></parameter>
+                                        <parameter name="url"><![CDATA[/pnp4nagios/index.php/graph?host={host_name}&srv=_HOST_]]></parameter>
                                         <parameter name="activateOnClick">true</parameter>
                                 </parameter>
                         </parameter>
