@@ -45,7 +45,7 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 		)->addSubItem(AppKitNavItem::create('icinga-about')
 			->setCaption('About')
 			->addAttributes('extjs-iconcls', 'icinga-icon-information')
-			->setJsHandler("AppKit.util.contentWindow.createDelegate(null, [{ url: '". AgaviContext::getInstance()->getRouting()->gen('icinga.about') ."' }, { title: _('About') }])")
+			->setJsHandler("AppKit.util.contentWindow.createDelegate(null, [{ url: '". AgaviContext::getInstance()->getRouting()->gen('icinga.about') ."' }, { title: _('About'), id: 'icinga-window-about' }])")
 		);
 		
 		return true;

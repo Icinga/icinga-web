@@ -83,22 +83,6 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 					);
 				}
 			}
-//
-//			// Display only if we do not trust apache
-//			// if (!AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
-//				if ($user->isAuthenticated()) {
-//					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.logout', 'appkit.logout')
-//					->setCaption('Logout')
-//					->addAttributes('extjs-iconcls', 'icinga-icon-lock-open')
-//					);
-//				}
-//				else {
-//					$nav->getContainer()->addSubItem('appkit', AppKitNavItem::create('appkit.login', 'appkit.login')
-//					->setCaption('Login')
-//					->addAttributes('extjs-iconcls', 'icinga-icon-lock')
-//					);
-//				}
-//			// }
 
 			if ($user->isAuthenticated()) {
 				
@@ -119,6 +103,11 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 					$admin->addSubItem(AppKitNavItem::create('appkit.admin.logs', 'appkit.admin.logs')
 					->setCaption('Logs')
 					->addAttributes('extjs-iconcls', 'icinga-icon-note')
+					);
+					$admin->addSubItem(AppKitNavItem::create('icinga-tasks')
+					->setCaption('Tasks')
+					->addAttributes('extjs-iconcls', 'icinga-icon-application-task')
+					->setJsHandler("AppKit.util.doTasks.createDelegate(null, ['". AgaviContext::getInstance()->getRouting()->gen('appkit.admin.tasks') ."'])")
 					);
 				}
 				
