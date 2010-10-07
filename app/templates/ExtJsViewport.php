@@ -13,6 +13,8 @@
 		
 		<meta charset="UTF-8">
 		
+		<link rel="icon" href="<?php echo AgaviConfig::get('org.icinga.appkit.image_path'); ?>/icinga/favicon.ico" type="image/x-icon">
+		
 		<?php echo $slots['head']; ?>
 		
 		<?php echo $slots['head_start']; ?>
