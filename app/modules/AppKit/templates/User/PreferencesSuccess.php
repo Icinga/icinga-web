@@ -54,6 +54,7 @@ Ext.onReady(function() {
 						valueField: 'id',
 						displayField: 'description',
 						id:'cmb_language',
+						editable: false,
 						triggerAction: 'all'
 					}],
 					buttons: [{
