@@ -7,7 +7,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		 * Start search if minimum x chars entered
 		 * @type Integer
 		 */	
-		var minCharacters = 4;
+		var minCharacters = <?php echo AgaviConfig::get('modules.cronks.search.numberMinimumLetters', 2); ?>;
 		
 		var val;
 		var ctWindow;

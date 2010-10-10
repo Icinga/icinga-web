@@ -6,6 +6,14 @@ You need a running dbms and php (with PEAR and CLI) environment w/ icinga and id
 The Icinga API is mandatory being installed too. Please check doc/INSTALL for
 a general install guide.
 
+1.1) Configuration Files
+
+Create a proper configuration using
+
+sh configure --with-icinga-api=<path to api>
+
+This is important to create all needed configuration files
+
 If there's something missing on your system, please refer to docs.icinga.org.
 
 2) The place and dependencies

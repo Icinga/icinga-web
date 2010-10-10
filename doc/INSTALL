@@ -17,7 +17,8 @@ https://dev.icinga.org/projects/icinga-web/wiki
 1) Prerequisites
 
 You need a running dbms and php (with PEAR and CLI) environment w/ icinga and ido (ido2db).
-The Icinga API is mandatory being installed too.
+The Icinga API is mandatory being installed too. (It's important to have the newest version
+of the api to use the newest icinga-web)
 
 If there's something missing on your system, please refer to docs.icinga.org.
 
@@ -103,23 +104,17 @@ with autoconf. On Debian/Ubuntu systems you'll need some packages like 'make' an
 4) Webserver configuration
 
 	Three things have to be available on the system: you have to set up apache, with mod_rewrite and php5.
-	
-	After that you should include the pub (htdocs) directory of icinga-web with an alias directive in global scope
-	(like apache.conf or where your icinga configuration lives):
-	
-		Alias /icinga-web /path/to/pub
-		<directory /path/to/pub>
-			AllowOverride All
-		</directory>
-		
-	The 'AllowOverride All' setting allows to use a .htaccess configuration in the pub directory.
-	
+
+	Copy etc/apache2/icinga-web.conf to your webserver include dir e.g. /etc/apache2/conf.d. If you have
+	a properly configured icinga-web (--with-web-apache-path=PATH) you can simply run
+	'make install-apache-config'.
+
 	Furthermore you should take a look to '/path/to/pub/.htaccess'. Apache's mod_rewrite needs a correct
 	definition of 'RewriteBase' to operate in subdirectories. Please change this to your webpath (NOT THE PHYSICAL ONE) .
 
 5) Web configuration
 
-	Keep a look into app/modules/Web/config/module.xml for the IcingaApi factories: IcingaData and IcingaCommand.
+	Keep a look into app/modules/Web/config/icinga-io.site.xml for the IcingaApi factories: IcingaData and IcingaCommand.
 	In IcingaData you can set the credentials for the Icinga API e.g. using the Icinga IDOUtils database.
 	In IcingaCommand you can specify the credentials for sending commands via Icinga Core command pipe - local or
 	remote via SSH.

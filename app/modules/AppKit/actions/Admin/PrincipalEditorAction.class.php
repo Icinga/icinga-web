@@ -1,7 +1,6 @@
 <?php
 
-class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction
-{
+class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction {
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.
@@ -14,8 +13,7 @@ class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction
 	 *                     executed.</li>
 	 *                   </ul>
 	 */
-	public function getDefaultViewName()
-	{
+	public function getDefaultViewName() {
 		return 'Success';
 	}
 	

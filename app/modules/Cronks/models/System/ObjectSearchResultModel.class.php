@@ -3,12 +3,6 @@
 class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 	
 	/**
-	 * Limit search result to x rows
-	 * @var integer
-	 */
-	const RESULT_LIMIT = 200;
-	
-	/**
 	 * 
 	 * @var IcingaApiConnectionIdo
 	 */
@@ -146,7 +140,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 			->setResultColumns(array_values($md['fields']))
 			->setSearchFilter($md['search'], $this->query, IcingaApi::MATCH_LIKE)
 			->setResultType(IcingaApi::RESULT_ARRAY)
-			->setSearchLimit(0, self::RESULT_LIMIT);
+			->setSearchLimit(0, AgaviConfig::get('modules.cronks.search.maximumResults', 200));
 			
 			// Limiting results for security
 			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
