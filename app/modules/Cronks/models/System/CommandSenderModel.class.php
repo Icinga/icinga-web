@@ -10,7 +10,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 	private $data				= array ();
 	private $command			= null;
 
-	private $timeFields			= array("checktime","endtime","checktime");
+	private $timeFields			= array("checktime","endtime","starttime");
 
 	public function  initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
