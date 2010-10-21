@@ -5,6 +5,7 @@
 
 
 /*           SQL schema defintiion        */
+
 CREATE TABLE nsm_db_version (vers_id INT, version INT, PRIMARY KEY(vers_id));
 CREATE TABLE nsm_log (log_id SERIAL, log_level INT NOT NULL, log_message TEXT NOT NULL, log_created TIMESTAMP NOT NULL, log_modified TIMESTAMP NOT NULL, PRIMARY KEY(log_id));
 CREATE TABLE nsm_principal (principal_id SERIAL, principal_user_id INT, principal_role_id INT, principal_type VARCHAR(4) NOT NULL, principal_disabled SMALLINT DEFAULT 0, PRIMARY KEY(principal_id));
@@ -71,3 +72,10 @@ INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('4
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('5','3','11');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('6','4','8');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('7','5','7');
+
+/* Update sequences */
+SELECT setval('nsm_principal_principal_id_seq',7);
+SELECT setval('nsm_principal_target_pt_id_seq',8);
+SELECT setval('nsm_role_role_id_seq',5);
+SELECT setval('nsm_target_target_id_seq',14);
+SELECT setval('nsm_user_user_id_seq',2);
