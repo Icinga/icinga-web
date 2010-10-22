@@ -1,14 +1,7 @@
-<p>You do not have sufficient credentials to access this page
-(<?php echo $t['requested_action']; ?>, <?php echo $t['requested_module']; ?>).</p>
+<div style="text-align:center;width:480px;background-color:#dedede;;height:75px;border:1px solid #cecece;-moz-border-radius:5px;-webkit-border-radius:5px;margin-top:15%;margin:auto;padding:2em;-moz-box-shadow:2px 2px 2px #989898;-webkit-box-shadow:2px 2px 2px #989898">
+<h1>You do not have sufficient credentials to access this page</h1>
+<p>
+	Click <a href="<?php echo $ro->gen('appkit.logout',array('logout' => 1));?>">here</a> to log out
+</p>
 
-<form name="logout" action="<?php echo $ro->gen('appkit.logout') ?>" method="post">
-<p>You are currently logged in as
-<strong><?php echo $us->getAttribute('userobj')->givenName(); ?></strong>,
-press the button to logout!</p>
-
-<div class="submit">
-<?php echo AppKitFormElement::create('submit', null, 'logout'); ?>
 </div>
-
-<?php echo AppKitHiddenElement::create('logout', true); ?>
-</form>
