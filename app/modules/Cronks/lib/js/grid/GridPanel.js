@@ -35,7 +35,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 							if (checked == true) {
 								this.trefresh = AppKit.getTr().start({
 									run: function() {
-										this.getStore().reload();
+										if(this.getStore())
+											this.getStore().reload();
 									},
 									interval: (autoRefresh*1000),
 									scope: this
@@ -66,7 +67,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 									xtype:'textfield',
 									fieldLabel: _('Link'),
 									width:350,
-									value: this.parentCmp.meta.baseURL+"/customPortal/"+urlParams
+									value: this.initialConfig.meta.baseURL+"/customPortal/"+urlParams
 								}
 						
 							});
@@ -80,7 +81,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if(autoRefreshDefault) {
 						this.trefresh = AppKit.getTr().start({
 							run: function() {
-								this.getStore().reload();
+								if(this.getStore())
+									this.getStore().reload();
 							},
 							interval: (autoRefresh*1000),
 							scope: this
@@ -93,8 +95,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	
 	extractGridParams: function() {
-		var grid = this.parentCmp.grid;
-		var store = grid.store;
+		AppKit.log(this);
+		var store = this.store;
 		var cronk = this.ownerCt.CronkPlugin.cmpConfig;
 		var urlParams = "cr_base=";
 
@@ -116,7 +118,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				"groupField=instance/";
 		}
 		urlParams +=
-			"template="+this.parentCmp.params.template+"/"+
+			"template="+this.initialConfig.meta.params.template+"/"+
 			"crname="+cronk.crname+"/"+
 			"title="+cronk.title;
 

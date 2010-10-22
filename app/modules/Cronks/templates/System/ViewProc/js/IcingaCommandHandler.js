@@ -273,7 +273,8 @@ IcingaCommandHandler.prototype = {
 				});
 				
 				oForm.getForm().on('beforeaction', function(f, a) {
-					
+					if(!f.isValid())
+						return false;
 					var selection = Ext.util.JSON.encode( this.getSelection() );
 					
 					// Auth for the command, key is the timekey given
@@ -289,7 +290,7 @@ IcingaCommandHandler.prototype = {
 					a.options.params['selection'] = selection;
 					
 					oWin.disable();
-					
+
 					return true;
 					
 				}, this);

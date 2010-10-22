@@ -1,4 +1,64 @@
-#!/bin/sh
+#!/bin/bash
 
-rm -rf @prefix@/app/cache/config/*.php
-rm -rf @prefix@/app/cache/content
+PREFIX='@prefix@'
+EXIT=0
+NOTHING=true
+
+function msg_start {
+	echo -n "$1 ... "
+}
+
+function msg_result {
+	EXIT=$?
+
+	if [[ $EXIT -gt 0 ]]; then
+		echo "fail"
+	else
+		echo "ok"
+	fi
+
+	NOTHING=false
+}
+
+if [[ $UID -gt 0 ]]; then
+	echo "You should run this as root"
+	exit 1
+fi
+
+if [[ ! -e $PREFIX ]]; then
+	echo "Basedir '$PREFIX' does not exist!"
+	exit 1
+fi
+
+echo "Basedir: $PREFIX"
+
+CCDIR="$PREFIX/app/cache/config"
+CC_FILES=$(ls $CCDIR/*.php 2>/dev/null | wc -l)
+
+if [[ $CC_FILES -gt 0 ]]; then
+
+	msg_start "Deleting config cache ($CC_FILES files)"
+	
+	rm $CCDIR/*php > /dev/null 2>&1
+	
+	msg_result
+	
+fi
+
+COCDIR="$PREFIX/app/cache/content"
+
+if [[ -e $CODIR ]]; then
+
+	msg_start "Deleting content cache dir"
+	
+	rm -r $CODIR > /dev/null 2>&1
+	
+	msg_result
+	
+fi
+
+if [[ $NOTHING == true ]]; then
+	echo "Cache already purged!"
+fi
+
+exit $EXIT
