@@ -81,6 +81,7 @@
 .icinga-icon-database { background-image: url(../images/icons/database.png) !important; background-repeat: no-repeat; }
 .icinga-icon-database-go { background-image: url(../images/icons/database--arrow.png) !important; background-repeat: no-repeat; }
 .icinga-icon-database-refresh { background-image: url(../images/icons/database-import.png) !important; background-repeat: no-repeat; }
+.icinga-icon-database-delete { background-image: url(../images/icons/database-delete.png) !important; background-repeat: no-repeat; }
 .icinga-icon-brick { background-image: url(../images/icons/ice.png) !important; background-repeat: no-repeat; }
 .icinga-icon-help { background-image: url(../images/icons/question-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-world { background-image: url(../images/icons/globe.png) !important; background-repeat: no-repeat; }
@@ -106,3 +107,5 @@
 .icinga-icon-book { background-image: url(../images/icons/book.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-disk { background-image: url(../images/icons/disk.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-zoom { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-application-task { background-image: url(../images/icons/application-task.png) !important; background-repeat: no-repeat; }
+.icinga-icon-close { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }

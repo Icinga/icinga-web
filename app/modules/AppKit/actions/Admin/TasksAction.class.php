@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction {
+class AppKit_Admin_TasksAction extends AppKitBaseAction {
 	/**
 	 * Returns the default view if the action does not serve the request
 	 * method used.
@@ -34,6 +34,22 @@ class AppKit_Admin_PrincipalEditorAction extends AppKitBaseAction {
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
+		return $this->getDefaultViewName();
+	}
+	
+	public function executeWrite(AgaviRequestDataHolder $rd) {
+		
+		$task = $rd->getParameter('task');
+		if ($task) {
+			$this->getContext()->getLoggerManager()->log(sprintf('Prepare running admin task: %s', $task), AgaviLogger::INFO);
+			switch ($task) {
+				case 'purgeCache':
+					$model = $this->getContext()->getModel('Tasks.ClearCache', 'AppKit');
+					$model->clearCache();
+				break;
+			}
+		}
+		
 		return $this->getDefaultViewName();
 	}
 }

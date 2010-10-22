@@ -1,8 +1,7 @@
 <?php
 	$user =& $t["user"];
-	
 ?>
-<script type='text/javascript'>
+<script type="text/javascript">
 Ext.ns("AppKit.UserPrefs");
 Ext.onReady(function() {
 	
@@ -54,6 +53,7 @@ Ext.onReady(function() {
 						valueField: 'id',
 						displayField: 'description',
 						id:'cmb_language',
+						editable: false,
 						triggerAction: 'all'
 					}],
 					buttons: [{
@@ -319,14 +319,11 @@ Ext.onReady(function() {
 	
 	if (Ext.getCmp('user_prefs_target')) {
 		Ext.getCmp('user_prefs_target').setWidth(Ext.getBody().getWidth()*0.70);
-
 		Ext.getCmp('user_prefs_target').add(AppKit.UserPrefs.container);
-
 		AppKit.UserPrefs.container.doLayout();
 		Ext.getCmp('user_prefs_target').doLayout();
 	}
 	
 	
 });
-
 </script>

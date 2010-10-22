@@ -10,6 +10,8 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 	private $data				= array ();
 	private $command			= null;
 
+	private $timeFields			= array("checktime","endtime","starttime");
+
 	public function  initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
 	}
@@ -45,6 +47,10 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 		$cmd->setCommand($command_name);
 		
 		foreach ($data as $name=>$value) {
+			// parse date
+			if(in_array($name, $this->timeFields)) {
+				$value = strtotime($value);
+			}
 			$cmd->setTarget($name, $value);
 		}
 		

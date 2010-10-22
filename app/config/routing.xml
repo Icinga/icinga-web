@@ -37,6 +37,7 @@
 						<route name=".remove" pattern="^/remove$" output_type="simple" action="Admin.Groups.Remove"/>
 					 </route>
 					 <route name=".logs" pattern="^/logs" action="Admin.ViewLogs"/>
+					 <route name=".tasks" pattern="^/tasks" action="Admin.Tasks" output_type="simple"/>
 				  </route>
 				
 					<!-- Data Provider -->

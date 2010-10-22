@@ -99,6 +99,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Groups/RemoveAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Groups/RemoveAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/IndexAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/PrincipalEditorAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/PrincipalEditorAction.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/TasksAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/TasksAction.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/EditAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/EditAction.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/actions/Admin/Users/IndexAction.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/actions/Admin/Users/IndexAction.class.php
@@ -293,6 +294,8 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/PrincipalAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/PrincipalAdminModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/RoleAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/RoleAdminModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/SquishFileContainerModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/SquishFileContainerModel.class.php
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/models/Tasks
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/Tasks/ClearCacheModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/Tasks/ClearCacheModel.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/models/UserAdminModel.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/models/UserAdminModel.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin
@@ -302,6 +305,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Groups/RemoveSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Groups/RemoveSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/IndexSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/PrincipalEditorSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/PrincipalEditorSuccess.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/TasksSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/TasksSuccess.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/EditSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/EditSuccess.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/templates/Admin/Users/IndexSuccess.php $(DESTDIR)$(prefix)/app/modules/AppKit/templates/Admin/Users/IndexSuccess.php
@@ -350,6 +354,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Groups/Remove.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Groups/Remove.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Index.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/PrincipalEditor.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/PrincipalEditor.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Tasks.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Tasks.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Edit.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Edit.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/validate/Admin/Users/Index.xml $(DESTDIR)$(prefix)/app/modules/AppKit/validate/Admin/Users/Index.xml
@@ -393,6 +398,7 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Groups/RemoveSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Groups/RemoveSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/IndexSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/PrincipalEditorSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/PrincipalEditorSuccessView.class.php
+	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/TasksSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/TasksSuccessView.class.php
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Users/EditSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users/EditSuccessView.class.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) app/modules/AppKit/views/Admin/Users/IndexSuccessView.class.php $(DESTDIR)$(prefix)/app/modules/AppKit/views/Admin/Users/IndexSuccessView.class.php
@@ -13474,6 +13480,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=12239
-INC_DIRS=1234
+INC_FILES=12244
+INC_DIRS=1235
 # INSTALL_FILES_END

@@ -11,36 +11,52 @@ AppKit.util = (function() {
 		
 		contentWindow : function(uconf, wconf) {
 	
-			Ext.applyIf(wconf, {
-				bodyStyle: 'padding: 30px 30px',
-				bodyCssClass: 'static-content-container'
-			});
-			
-			if (Ext.isEmpty(uconf.scripts, true)) {
-				uconf.scripts = true;
-			} 
-			
-			Ext.apply(wconf, {
-				renderTo: Ext.getBody(),
-				footer: true,
-				closable: false,
+			if (Ext.isEmpty(wconf.id)) {
+				throw("wconf.id is mandatory");
+			}
+	
+			var wid = wconf.id;
+	
+			if (!Ext.getCmp(wid)) {
+		
+				Ext.applyIf(wconf, {
+					closeAction: 'hide'
+				});
 				
-				buttons: [{
-					text: _('Close'),
-					handler: function() {
-						win.close();
-					}
-				}],
+				if (Ext.isEmpty(wconf.disableContent)) {
+					wconf.bodyStyle = 'padding: 30px 30px';
+					wconf.bodyCssClass = 'static-content-container';
+				}
 				
-				autoLoad: uconf
-			});
+				if (Ext.isEmpty(uconf.scripts, true)) {
+					uconf.scripts = true;
+				} 
+				
+				Ext.apply(wconf, {
+					renderTo: Ext.getBody(),
+					footer: true,
+					closable: false,
+					
+					buttons: [{
+						text: _('Close'),
+						iconCls: 'icinga-icon-close',
+						handler: function() {
+							win.close();
+						}
+					}],
+					
+					autoLoad: uconf
+				});
+				
+				var win = new Ext.Window(wconf);
+				
+				win.setSize(Math.round(Ext.lib.Dom.getViewWidth() * 60 / 100), Math.round(Ext.lib.Dom.getViewHeight() * 80 / 100));
+			}
 			
-			var win = new Ext.Window(wconf);
+			Ext.getCmp(wid).show();
+			Ext.getCmp(wid).center();
 			
-			win.setSize(Math.round(Ext.lib.Dom.getViewWidth() * 60 / 100), Math.round(Ext.lib.Dom.getViewHeight() * 80 / 100));
-			win.center();
-			
-			win.show();
+			return Ext.getCmp(wid);
 		},
 		
 		getStore : function(store_name) {
@@ -98,6 +114,17 @@ AppKit.util = (function() {
 					}
 				}
 			}, t);
+		},
+		
+		doTasks : function(target) {
+			AppKit.util.contentWindow({
+				url: target
+			}, {
+				id: 'admin_tasks_window',
+				disableContent: true,
+				title: _('Admin tasks'),
+				bodyStyle: 'background-color: #fff;'
+			});
 		},
 		
 		/**
