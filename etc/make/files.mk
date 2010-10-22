@@ -2417,8 +2417,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/phing/util/StringHelper.php $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/phing/util/StringHelper.php
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/README $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/README
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
-	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/.README.swp $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/.README.swp
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src
 	$(INSTALL) -m 644 $(INSTALL_OPTS) etc/contrib/PNP_Integration/src/PLACEHOLDER $(DESTDIR)$(prefix)/etc/contrib/PNP_Integration/src/PLACEHOLDER
@@ -13480,6 +13478,6 @@ inc-install-files:
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga.css $(DESTDIR)$(prefix)/pub/styles/icinga.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/icinga-icons.css $(DESTDIR)$(prefix)/pub/styles/icinga-icons.css
 	$(INSTALL) -m 644 $(INSTALL_OPTS) pub/styles/statusmap.css $(DESTDIR)$(prefix)/pub/styles/statusmap.css
-INC_FILES=12244
+INC_FILES=12242
 INC_DIRS=1235
 # INSTALL_FILES_END
