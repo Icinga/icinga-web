@@ -51,7 +51,7 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 		return $metaData;
 	}
 	
-	public function executeXml(AgaviRequestDataHolder $rd) 
+	protected function createDOM(AgaviRequestDataHolder $rd) 
 	{
 		$results = $rd->getParameter("searchResult",null);
 		$count = $rd->getParameter("searchCount");
@@ -77,7 +77,24 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 			$node->nodeValue = $count[0];
 			$root->appendChild($node);
 		}
+		return $DOM;
+	}
+
+	public function executeXml(AgaviRequestDataHolder $rd) 
+	{
+		$DOM = $this->createDOM($rd);
 		return $DOM->saveXML();
+	}
+
+	public function executeRest(AgaviRequestDataHolder $rd) 
+	{
+		$xml = $this->createDOM($rd);
+		$xsltproc = new XSLTProcessor();
+		$xsl = new DOMDocument();
+		$xsl->load(AgaviConfig::get('core.module_dir').'/Web/data/results.xslt');
+		$xsltproc->importStylesheet($xsl);
+		$result = $xsltproc->transformToXML($xml);
+		return $result;
 	}
 
 	public function executeSimple(AgaviRequestDataHolder $rd) 

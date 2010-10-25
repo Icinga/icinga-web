@@ -125,7 +125,7 @@
 						<route name=".limit" stop="false" pattern="limit[({limit_start:\d*};)?(limit:\d*)]"/>												
 						<route name=".countcolumn" stop="false" pattern="countColumn=(countColumn:\w*)"/>
 						<route name=".withMeta" stop="false" pattern="withMeta=(withMeta:\d)"/>
-						<route name=".output" stop="true" pattern="(output:json|xml|soap)$" output_type="${output}">
+						<route name=".output" stop="true" pattern="(output:json|xml|soap|rest)$" output_type="${output}">
 						<ignores>
 							<ignore>output</ignore>
 						</ignores>
