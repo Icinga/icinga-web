@@ -172,7 +172,27 @@ class IcingaWebDependencyTester {
 			'args'			=> array('gd'),
 			'required'		=> false
 		),
-		
+		array (
+			'name'			=> 'ext_ctype',
+			'description'	=> 'Test php5-ctype',
+			'method'		=> 'tExtension',
+			'args'			=> array('ctype'),
+			'required'		=> false
+		),
+		array (
+			'name'			=> 'ext_json',
+			'description'	=> 'Test php5-json',
+			'method'		=> 'tExtension',
+			'args'			=> array('json'),
+			'required'		=> false
+		),
+		array (
+			'name'			=> 'ext_hash',
+			'description'	=> 'Test php5-hash',
+			'method'		=> 'tExtension',
+			'args'			=> array('hash'),
+			'required'		=> false
+		),
 		array (
 			'name'			=> 'ini_memory_limit',
 			'description'	=> 'Test php.ini memory_limit',
