@@ -78,7 +78,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 	 */
 	public function checkAuth($command, $json_selection, $json_data, $key) {
 		$data = $command. '-'. $json_selection. '-'. $json_data;
-		$data = preg_replace("/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿȩŗźíóṕáşḑģḩķĺýçńḿẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/", "", $data);
+		$data = preg_replace("/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿèàẁùìòàỳǜǹȩŗźíóṕáşḑģḩķĺýçńḿÈẀÙÌÒÀỲǛǸẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/", "", $data);
 
 		$test = hash_hmac(self::TIME_ALGO, $data, $this->genTimeKey());
 

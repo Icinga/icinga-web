@@ -283,7 +283,7 @@ IcingaCommandHandler.prototype = {
 					var h_data = command + '-' + selection;
 					h_data += '-' + Ext.util.JSON.encode( f.getValues(false) );
 					// simplify string
-					h_data = h_data.replace(/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿȩŗźíóṕáşḑģḩķĺýçńḿẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/g,"");
+					h_data = h_data.replace(/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿèàẁùìòàỳǜǹȩŗźíóṕáşḑģḩķĺýçńḿÈẀÙÌÒÀỲǛǸẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/g,"");
 
 					var h_key = o.tk;
 					var h_auth = hex_hmac_rmd160(h_key, h_data);
