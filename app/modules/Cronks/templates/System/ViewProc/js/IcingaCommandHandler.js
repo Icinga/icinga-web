@@ -269,7 +269,7 @@ IcingaCommandHandler.prototype = {
 					defaults: {
 						border: false,
 						msgTarget: 'side'
-					}	
+					}
 				});
 				
 				oForm.getForm().on('beforeaction', function(f, a) {
@@ -282,7 +282,9 @@ IcingaCommandHandler.prototype = {
 					// The complete key is valid for the command and the selection
 					var h_data = command + '-' + selection;
 					h_data += '-' + Ext.util.JSON.encode( f.getValues(false) );
-					
+					// simplify string
+					h_data = h_data.replace(/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿȩŗźíóṕáşḑģḩķĺýçńḿẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/g,"");
+
 					var h_key = o.tk;
 					var h_auth = hex_hmac_rmd160(h_key, h_data);
 					

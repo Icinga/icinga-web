@@ -65,6 +65,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 		$data = strftime('%Y-%d-%H-').  (date('i') - (date('i') % self::TIME_VALID));
 		$data .= '-'. $this->getContext()->getUser()->getNsmUser()->user_id;
 		$data .= '-'. session_id();
+		
 		return hash_hmac(self::TIME_ALGO, $data, self::TIME_KEY);
 	}
 	
@@ -77,8 +78,10 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 	 */
 	public function checkAuth($command, $json_selection, $json_data, $key) {
 		$data = $command. '-'. $json_selection. '-'. $json_data;
+		$data = preg_replace("/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿȩŗźíóṕáşḑģḩķĺýçńḿẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/", "", $data);
+
 		$test = hash_hmac(self::TIME_ALGO, $data, $this->genTimeKey());
-		
+
 		if ($key === $test) {
 			return true;
 		}
