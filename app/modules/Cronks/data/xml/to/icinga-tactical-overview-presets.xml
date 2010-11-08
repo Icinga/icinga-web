@@ -118,7 +118,7 @@
 			<![CDATA[
 				Ext.onReady(function() {
 					var store = new Ext.data.JsonStore({
-						fields: <?php echo json_encode(array_keys($data[0])); ?>,
+						fields: <?php echo isset($data[0]) ? json_encode(array_keys($data[0])) : '[]'; ?>,
 						data: <?php echo json_encode($data); ?>
 
 					});

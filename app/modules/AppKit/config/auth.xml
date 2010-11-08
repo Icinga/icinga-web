@@ -108,7 +108,7 @@
 		<ae:parameter name="auth_key">
 			<ae:parameter name="auth_module">AppKit</ae:parameter>
 			<ae:parameter name="auth_provider">Auth.Provider.AuthKey</ae:parameter>
-			<ae:parameter name="auth_enable">false</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
 			<ae:parameter name="auth_authoritative">true</ae:parameter>
 		</ae:parameter>
 		

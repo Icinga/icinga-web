@@ -293,7 +293,35 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-    
+		
+		<field name="host_object_id">
+        	<datasource>
+        		<parameter name="field">HOST_OBJECT_ID</parameter>
+        	</datasource>
+
+        	<display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Id</parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
+
+                <parameter name="no_operator">false</parameter>
+
+				<parameter name="field">HOST_OBJECT_ID</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+
         <field name="host_name">
             <datasource>
             	<parameter name="field">HOST_NAME</parameter>

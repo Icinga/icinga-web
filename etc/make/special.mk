@@ -31,3 +31,5 @@ inc-install-special:
 
 	# PHING BUILD Properties
 	$(INSTALL) -m 600 $(INSTALL_OPTS) etc/build.properties $(DESTDIR)$(prefix)/etc/build.properties
+	# PHING TEST Properties
+	$(INSTALL) -m 600 $(INSTALL_OPTS) etc/tests/test.properties $(DESTDIR)$(prefix)/etc/tests/test.properties
