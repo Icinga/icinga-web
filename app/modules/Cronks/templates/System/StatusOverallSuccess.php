@@ -44,7 +44,9 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			autoHeight: true,
 			prepareData: statusOverallRenderer.prepareData,
 			itemSelector:'div.icinga-overall-status-item',
-
+			openCronkFn: new Ext.util.DelayedTask(function(cronk,filter) {
+			    Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
+			}),
 			listeners: {
 				click: function(dview, index, node, e) {
 					var d = dview.getStore().getAt(index).data;
@@ -73,7 +75,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 						params: params
 					};
 
-					Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
+					dview.openCronkFn.delay(300,null,null,[cronk, filter]);
 				}
 			},
 
