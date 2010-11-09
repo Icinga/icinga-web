@@ -8,8 +8,8 @@
 require_once("actionQueueTask.php");
 require_once("xmlHelperTask.php");
 
-$vers = phpversion();
-if($vers[1] < 3) 
+
+if(PHP_MAJOR_VERSION < 5 || PHP_MINOR_VERSION < 3)
 	define("USE_XML_NSPREFIX_WORKAROUND",true);
 else 
 	define("USE_XML_NSPREFIX_WORKAROUND",false);
