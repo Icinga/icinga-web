@@ -587,10 +587,82 @@ abstract class BaseIcingaServices extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+
 	$this->hasOne("IcingaHosts as ServiceHost",array(
 	    'local' => 'host_object_id',
 	    'foreign' => 'host_object_id'
 	));
-        
+	$this->hasOne("IcingaInstances as ServiceInstance", array(
+	    'local' => 'instance_id',
+	    'foreign' => 'instance_id'
+	));
+	$this->hasMany("IcingaComments as ServiceComments", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+        $this->hasMany("IcingaCommenthistory as ServiceCommenthistory", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasOne("IcingaServicestatus as ServiceStatus", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'service_object_id'
+	));
+	$this->hasMany("IcingaServicechecks as ServiceChecks", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'service_object_id'
+	));
+	$this->hasMany("IcingaContacts as Contacts", array(
+	    'local' => 'service_id',
+	    'foreign' => 'contact_object_id',
+	    'refclass' => 'IcingaServiceContacts'
+	));
+	$this->hasMany("IcingaContactgroups as Contacts", array(
+	    'local' => 'service_id',
+	    'foreign' => 'contactgroup_object_id',
+	    'refclass' => 'IcingaServiceContactgroups'
+	));
+	$this->hasMany("IcingaStatehistory as ServiceHistory", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaServiceEscalations as ServiceEscalations", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'service_object_id'
+	));
+	$this->hasMany("IcingaTimedevents as ServiceEvents", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaScheduleddowntime as ServicesScheduledDowntimes", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaDowntimehistory as ServicesDowntimeHistory", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaCustomVariables as ServiceCustomVariables", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaService as ServiceDependencies", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'dependent_service_object_id',
+	    'refClass' => 'IcingaServicedependencies'
+	));
+	$this->hasMany("IcingaServicegroups as ServiceGroups", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'servicegroup_object_id',
+	    'refClass' => 'IcingaServicegroupMembers'
+	));
+	$this->hasMany("IcingaNotifications as ServiceNotification", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaAcknowledgements as ServiceAcknowledgements", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'object_id'
+	));
     }
 }
