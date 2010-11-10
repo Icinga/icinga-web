@@ -650,15 +650,81 @@ abstract class BaseIcingaHosts extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany("IcingaServices as HostServices",array(
+        $this->hasMany("IcingaServices as services",array(
 	    'local' => 'host_object_id',
-	    'foreign' => 'host_object_id',
-	    'owningSide' => 'true'
+	    'foreign' => 'host_object_id'
 	));
-
-	$this->hasOne("IcingaInstances as HostInstance", array(
+	$this->hasOne("IcingaInstances as instance", array(
 	    'local' => 'instance_id',
 	    'foreign' => 'instance_id'
+	));
+	$this->hasMany("IcingaComments as comments", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+        $this->hasMany("IcingaCommenthistory as commenthistory", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasOne("IcingaHoststatus as status", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'host_object_id'
+	));
+	$this->hasMany("IcingaHostchecks as cecks", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'host_object_id'
+	));
+	$this->hasMany("IcingaContacts as contacts", array(
+	    'local' => 'host_id',
+	    'foreign' => 'contact_object_id',
+	    'refclass' => 'IcingaHostContacts'
+	));
+	$this->hasMany("IcingaContactgroups as contactgroups", array(
+	    'local' => 'host_id',
+	    'foreign' => 'contactgroup_object_id',
+	    'refclass' => 'IcingaHostContactgroups'
+	));
+	$this->hasMany("IcingaStatehistory as history", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaServiceEscalations as escalations", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'host_object_id'
+	));
+	$this->hasMany("IcingaTimedevents as timedevents", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaScheduleddowntime as scheduledDowntimes", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaDowntimehistory as downtimeHistory", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaCustomVariables as customVariables", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaService as dependencies", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'dependent_service_object_id',
+	    'refClass' => 'IcingaHostdependencies'
+	));
+	$this->hasMany("IcingaServicegroups as groups", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'hostgroup_object_id',
+	    'refClass' => 'IcingaHostgroupMembers'
+	));
+	$this->hasMany("IcingaNotifications as notification", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasMany("IcingaAcknowledgements as acknowledgements", array(
+	    'local' => 'host_object_id',
+	    'foreign' => 'object_id'
 	));
     }
 }
