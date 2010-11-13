@@ -6,7 +6,7 @@ var _parent = "<?php echo $rd->getParameter('parentid'); ?>";
 
 // This is the init method called when the cronk environment is ready
 Cronk.util.initEnvironment(_parent, function() {
-	Ext.Msg.minWidth = 250;
+	Ext.Msg.minWidth = 350;
 	this.stateful = true;
 	this.stateId = "state_"+this.id;
 	Ext.ns("Cronk.bp");
@@ -74,15 +74,23 @@ Cronk.util.initEnvironment(_parent, function() {
 	    		this.ownerCt.setHeight(this.ownerCt.ownerCt.ownerCt.getInnerHeight());
 	    	},
 	    	contextmenu: function(node,event) {
-	  			event.preventDefault();
-	  			
-  				var hideEdit;
-  				if(node.attributes)
-  					hideEdit = node.attributes.isAlias;
+			event.preventDefault();
+
+			var hideEdit;
+			if(node.attributes)
+				hideEdit = node.attributes.isAlias;
   					
 	    		var ctx = new Ext.menu.Menu({
 	    			items: [{
-	    				text: _('Add business process'),
+	    				text: _('Create new business process at this level'),
+	    				iconCls: 'icinga-icon-chart-organisation',
+	    				hidden: node.attributes.isAlias || node.attributes.serviceInfo,
+	    				handler:function(btn) {
+	    					if(node.attributes)
+	    						Cronk.bp.processController.addBusinessProcess(node,node,event);
+	    				}
+	    			},{
+	    				text: _('Add existing process to this level'),
 	    				iconCls: 'icinga-icon-chart-organisation',
 	    				hidden: node.attributes.isAlias || node.attributes.serviceInfo,
 	    				handler:function(btn) {
@@ -102,10 +110,11 @@ Cronk.util.initEnvironment(_parent, function() {
 	    				iconCls: 'icinga-icon-page-edit',
 	    				hidden: !node.parentNode || hideEdit,
 	    				handler: function(btn) {
-	    					if(node.attributes.bpType == 'service')
-								Cronk.bp.processController.addService(node,node,event,node.attributes);
-							if(node.attributes.bpType == 'bp' && node.parentNode)
-	    						Cronk.bp.processController.addBusinessProcess(node,node,event,node.attributes);
+					    AppKit.log(node,node,event,node.attributes);
+					    if(node.attributes.bpType == 'service')
+					        Cronk.bp.processController.addService(node,node,event,node.attributes);
+					    if(node.attributes.bpType == 'bp' && node.parentNode)
+						Cronk.bp.processController.addBusinessProcess(node,node,event,node.attributes);
 	    				},
 	    				scope: this
 	    			},{
@@ -169,11 +178,9 @@ Cronk.util.initEnvironment(_parent, function() {
 	    			case 'service':
 	    				Cronk.bp.processController.addService(dropNode,event.target,event.rawEvent);
 	    				return false;
-	    				break;
 	    			case 'bp':
-	    				Cronk.bp.processController.addBusinessProcess(dropNode,event.target,event.rawEvent);
+					Cronk.bp.processController.displayAddMenu(dropNode,event);
 	    				return false;
-	    				break;
 	    			default:
 	    				return false;
 	    		}
@@ -250,7 +257,25 @@ Cronk.util.initEnvironment(_parent, function() {
 			})
 			return foundNode;
 		},
-		
+		displayAddMenu: function(dropNode,event) {
+	    		(new Ext.menu.Menu({
+	    			items: [{
+				    text: _('Add new node'),
+				    iconCls: 'icinga-icon-chart-organisation',
+				    handler: function() {
+					Cronk.bp.processController.addBusinessProcess(dropNode,event.target,event.rawEvent);
+				    }
+				},{
+				    text: _('Add existing node'),
+				    iconCls: 'icinga-icon-chart-organisation',
+				    handler: function() {
+					Cronk.bp.processController.addExistingBusinessProcess(dropNode,event.target,event.rawEvent);
+				    }
+				}]
+			})).showAt(event.rawEvent.getXY());
+
+		},
+
 		addBusinessProcess: function(node,target,event,presets) {;
 			var curId = Ext.id("","bpAdder");
 			
@@ -267,236 +292,248 @@ Cronk.util.initEnvironment(_parent, function() {
 					height:350,
 					autoScroll:true,
 					items: [{
-						xtype: 'radio',
-						radioGroup: 'bp_type',
-						name: 'bp_type',
-						fieldLabel: _('Create new'),
-						checked:true,
-						disabled: presets,
-						listeners: {
-							check: function(field,checked) {
-								if(!checked) {									
-									Ext.getCmp(curId+"_newBP_fs").hide();
-									Ext.getCmp(curId+"_newBP_fs").setDisabled(true);
-								} else { 
-									Ext.getCmp(curId+"_newBP_fs").show();
-									Ext.getCmp(curId+"_newBP_fs").setDisabled(false);
-								}
-							}
-						}
-					},
-					/**
-					 * CREATE NEW BP - Panel
-					 */
-					{
-						xtype:'fieldset',
-						id: curId+"_newBP_fs",
-						items: [{
-							xtype:'textfield',
-							name:'newBP_name',		
-							allowBlank:false,					
-							width:130,
-							value: presets ? presets.bpName : null,
-							regex: /[A-Za-z_]*/,
-							regexText: _('Your process name contains invalid characters'),
-							fieldLabel: _('Business Process name'),
-							validator: (function(val) {
-								if(!val)
-									return _("A name is required");
-									
-								if(this.getProcessByName(val,tree,presets))
-									return _("A business process with this name already exists!")
-							}).createDelegate(this)
-						},{
-							xtype:'textfield',
-							name:'newBP_longName',		
-							allowBlank:false,					
-							width:130,
-							value: presets ? presets.bpLongName : null,
-							fieldLabel: _('Displayname'),
-							validator: (function(val) {
-								if(!val)
-									return _("A display name is required");
-							
-							}).createDelegate(this)
-						},{
-							xtype:'textfield',
-							name:'newBP_status',		
-							allowBlank:true,					
-							width:130,
-							value: presets ? presets.bpStatus : null,
-							fieldLabel: _('Status (optional)')
-							
-						},{
-							xtype:'textfield',
-							name:'newBP_template',		
-							allowBlank:true,					
-							width:130,
-							value: presets ? presets.bpTemplate : null,
-							fieldLabel: _('Template (optional)')
-							
-						},{
-							xtype:'combo',
-							name:'newBP_type',
-							forceSelection:true,
-							store: new Ext.data.ArrayStore({
-								fields: ['type'],
-								idIndex:0,
-								autoDestroy:true,
-								data:[['AND'],['OR'],['MIN']]
-							}),
-							mode:'local',
-							allowBlank:false,
-							width:130,
-							displayField:'type',
-							valueField:'type',
-							triggerAction:'all',
-							value:presets ? presets.type : null,
-							fieldLabel: _('Type'),
-							listeners: {
-								select: function(cmb,record) {
-									if(record.get('type') == 'MIN')
-										Ext.getCmp(curId+"_newBP_minField").setDisabled(false);
-									else 
-										Ext.getCmp(curId+"_newBP_minField").setDisabled(true);
-								}
-							}
-						},{
-							xtype:'numberfield',
-							width:30,
-							name:'newBP_min',
-							value: presets ? presets.min : null,
-							id:curId+"_newBP_minField",
-							fieldLabel: _('Min'),
-							validator: function(val) {
-								if(val < 1 && !Ext.getCmp(curId+"_newBP_minField").disabled)
-									return _("Please submit a valid number")
-							},
-							disabled:true
-						},{
-							xtype:'numberfield',
-							width:30,
-							allowBlank:false,
-							value: presets ? presets.prio : '0',
-							name:'newBP_prio',					
-							fieldLabel: _('Priority')
-						}]											
-					},{
-						xtype: 'radio',
-						radioGroup: 'bp_type',
-						name: 'bp_type',
-						disabled: presets || target.attributes.type == 'root',
-						fieldLabel: _('Add existing'),
-						listeners: {
-							check: function(field,checked) {
-								if(!checked) {
-									Ext.getCmp(curId+"_existingBP_fs").hide();
-									Ext.getCmp(curId+"_existingBP_name").hide();
-									
-									Ext.getCmp(curId+"_existingBP_fs").setDisabled(true);
-								} else { 
-									Ext.getCmp(curId+"_existingBP_fs").show();
-									Ext.getCmp(curId+"_existingBP_name").show();
-									
-									Ext.getCmp(curId+"_existingBP_fs").setDisabled(false);
-								}
-							}
-						}
-					},
-					/**
-					 * USE EXISTING BP - Panel
-					 */
-					{
-						xtype:'fieldset',
-						id: curId+"_existingBP_fs",
-						
-						forceLayout:true,
-						items: [{
-							xtype:'combo',
+					    xtype:'fieldset',
+					    id: curId+"_newBP_fs",
+					    items: [{
+						    xtype:'textfield',
+						    name:'newBP_name',
+						    allowBlank:false,
+						    width:130,
+						    value: presets ? presets.bpName : null,
+						    regex: /[A-Za-z_]*/,
+						    regexText: _('Your process name contains invalid characters'),
+						    fieldLabel: _('Business Process name'),
+						    validator: (function(val) {
+							    if(!(new RegExp("[A-Za-z_]*?")).test(val))
+								return _("Invalid name!");
+							    if(!val)
+								return _("A name is required");
 
-							id: curId+"_existingBP_name",
-							name:'existingBP_name',
-							store: new Ext.data.JsonStore({
-								fields: ['bp_name','bp_node'],
-								idIndex:0,
-								autoDestroy:true,
-								data:this.getBusinessProcessList(target)
-							}),
-							mode:'local',
-							width:130,
-							allowBlank:false,
-							forceSelection:true,
-							displayField:'bp_name',
-							hideParent:true,
-							forceLayout:true,
-							valueField:'bp_name',
-							triggerAction:'all',
-							fieldLabel: _('Process')
-						}],
-						listeners: {
-							show: function() {
-								Ext.getCmp(curId+"_existingBP_name").show();
-								this.doLayout();
-							}
-						},
-						scope:this
-					}],
-					buttons:[{
-						text:(presets ? 'Edit' : 'Add')+' Process',
-						iconCls:'icinga-icon-add',
-						id: curId+'_btn',
-						handler:function(btn) {
-							var cmp = Ext.getCmp(curId);
-							var values = cmp.getForm().getFieldValues();
-							var success = false;
-							//
-							if(presets) {
-								success = this.editBusinessProcessNode(target,values);
-							
-							} else if(values.bp_type[0]) {
-							
-								var field = Ext.getCmp(curId+"_newBP_fs");
-								var valid = true;
-								field.cascade(function() {
-									if(!valid)
-										return false;
-										
-									if(this.validate)
-										valid = this.validate();
-								})
+							    if(this.getProcessByName(val,tree,presets))
+								    return _("A business process with this name already exists!")
+						    }).createDelegate(this)
+					    },{
+						    xtype:'textfield',
+						    name:'newBP_longName',
+						    allowBlank:false,
+						    width:130,
+						    value: presets ? presets.bpLongName : null,
+						    fieldLabel: _('Displayname'),
+						    validator: (function(val) {
+							    if(!val)
+								    return _("A display name is required");
+
+						    }).createDelegate(this)
+					    },{
+						    xtype:'textfield',
+						    name:'newBP_status',
+						    allowBlank:true,
+						    width:130,
+						    value: presets ? presets.bpStatus : null,
+						    fieldLabel: _('Status (optional)')
+
+					    },{
+						    xtype:'textfield',
+						    name:'newBP_template',
+						    allowBlank:true,
+						    width:130,
+						    value: presets ? presets.bpTemplate : null,
+						    fieldLabel: _('Template (optional)')
+
+					    },{
+						    xtype:'combo',
+						    name:'newBP_type',
+						    forceSelection:true,
+						    store: new Ext.data.ArrayStore({
+							    fields: ['type'],
+							    idIndex:0,
+							    autoDestroy:true,
+							    data:[['AND'],['OR'],['MIN']]
+						    }),
+						    mode:'local',
+						    allowBlank:false,
+						    width:130,
+						    displayField:'type',
+						    valueField:'type',
+						    triggerAction:'all',
+						    value:presets ? presets.type : null,
+						    fieldLabel: _('Type'),
+						    listeners: {
+							    select: function(cmb,record) {
+								    if(record.get('type') == 'MIN')
+									    Ext.getCmp(curId+"_newBP_minField").setDisabled(false);
+								    else
+									    Ext.getCmp(curId+"_newBP_minField").setDisabled(true);
+							    }
+						    }
+					    },{
+						    xtype:'numberfield',
+						    width:30,
+						    name:'newBP_min',
+						    value: presets ? presets.min : null,
+						    id:curId+"_newBP_minField",
+						    fieldLabel: _('Min'),
+						    validator: function(val) {
+							    if(val < 1 && !Ext.getCmp(curId+"_newBP_minField").disabled)
+								    return _("Please submit a valid number")
+						    },
+						    disabled: presets ? presets.type != "MIN" : true
+					    },{
+						    xtype:'numberfield',
+						    width:30,
+						    allowBlank:false,
+						    value: presets ? presets.prio : '0',
+						    name:'newBP_prio',
+						    fieldLabel: _('Priority')
+					    }]
+				    }],
+				    buttons:[{
+					text: _('Close'),
+					iconCls: 'icinga-icon-close',
+					handler: function(btn) {
+
+					    btn.ownerCt.ownerCt.ownerCt.container.remove();
+					},
+					scope: this
+				    },{
+					    text:(presets ? 'Edit' : 'Add')+' Process',
+					    iconCls:'icinga-icon-add',
+					    id: curId+'_btn',
+					    handler:function(btn) {
+						    var cmp = Ext.getCmp(curId);
+						    var values = cmp.getForm().getFieldValues();
+						    var success = false;
+						    //
+						    if(presets) {
+							success = this.editBusinessProcessNode(target,values);
+
+						    } else {
+
+							var field = Ext.getCmp(curId+"_newBP_fs");
+							var valid = true;
+							field.cascade(function() {
 								if(!valid)
 									return false;
-								success = this.createNewProcessNode(target,tree,values);
-							
-							
-							} else {	// Create node alias
-							
-								var cmp = Ext.getCmp(curId+"_existingBP_name");
-								if(!cmp.validate())
-									return false;
-								success = this.createBusinessNodeAlias(target,tree,cmp.getValue());
-							}
-							if(success) {
-								// hangle up the DOM tree until the layer is reached and remove it
-								var owner = btn.ownerCt;
-								while(owner.ownerCt)
-									owner = owner.ownerCt;
-								owner.container.remove();
-							}
-						},
-						scope:this
-					}]
+
+								if(this.validate)
+									valid = this.validate();
+							})
+							if(!valid)
+								return false;
+							success = this.createNewProcessNode(target,tree,values);
+
+
+						    }
+						    if(success) {
+							    // hangle up the DOM tree until the layer is reached and remove it
+							    var owner = btn.ownerCt;
+							    while(owner.ownerCt)
+								    owner = owner.ownerCt;
+							    owner.container.remove();
+						    }
+					    },
+					    scope:this
+				    }]
 				})]
 			}
 			var item =  this.createFunkyInputLayer(event.getPageX(),event.getPageY(),330,400,bpCfg)
 			item.show();
 		},
-		
+		addExistingBusinessProcess: function(node,target,event,presets) {
+		    var curId = Ext.id("","bpAdder");
+
+		    var tree = target.getOwnerTree();
+		    var bpCfg = {
+			items: [{
+			    xtype: 'container',
+			    layout: 'fit',
+			    html:'<h1 style="margin:2px;font-size:12px;">'+(presets ? 'Edit' : 'Add')+' Business Process</h1>'
+			},
+			new Ext.form.FormPanel({
+			    id:curId,
+			    padding:5,
+			    height:350,
+			    autoScroll:true,
+			    items: [{
+				xtype:'fieldset',
+				id: curId+"_existingBP_fs",
+
+				forceLayout:true,
+				items: [{
+				    xtype:'combo',
+				    id: curId+"_existingBP_name",
+				    name:'existingBP_name',
+				    store: new Ext.data.JsonStore({
+					    fields: ['bp_name','bp_node'],
+					    idIndex:0,
+					    autoDestroy:true,
+					    data:this.getBusinessProcessList(target)
+				    }),
+				    mode:'local',
+				    width:130,
+				    allowBlank:false,
+				    forceSelection:true,
+				    displayField:'bp_name',
+				    hideParent:true,
+				    forceLayout:true,
+				    valueField:'bp_name',
+				    triggerAction:'all',
+				    fieldLabel: _('Process')
+				}],
+				listeners: {
+				    show: function() {
+					Ext.getCmp(curId+"_existingBP_name").show();
+					this.doLayout();
+				    }
+				},
+				scope:this
+			    }],
+			    buttons:[{
+				text: _('Close'),
+				iconCls: 'icinga-icon-close',
+				handler: function(btn) {
+
+				    btn.ownerCt.ownerCt.ownerCt.container.remove();
+				},
+				scope: this
+			    },{
+				text:(presets ? 'Edit' : 'Add')+' Process',
+				iconCls:'icinga-icon-add',
+				id: curId+'_btn',
+				handler:function(btn) {
+					var cmp = Ext.getCmp(curId);
+					var values = cmp.getForm().getFieldValues();
+					var success = false;
+					//
+					if(presets) {
+					    success = this.editBusinessProcessNode(target,values);
+
+					} else {
+					    var cmp = Ext.getCmp(curId+"_existingBP_name");
+					    if(!cmp.validate())
+						    return false;
+					    success = this.createBusinessNodeAlias(target,tree,cmp.getValue());
+					}
+					if(success) {
+					    // hangle up the DOM tree until the layer is reached and remove it
+					    var owner = btn.ownerCt;
+					    while(owner.ownerCt)
+						    owner = owner.ownerCt;
+					    owner.container.remove();
+					}
+				},
+				scope:this
+			    }]
+			})]
+		    }
+		    var item =  this.createFunkyInputLayer(event.getPageX(),event.getPageY(),330,400,bpCfg)
+		    item.show();
+		},
 		editBusinessProcessNode: function(node,values) {
 			var tree = node.getOwnerTree();
 			var oldname =  node.attributes.bpName;
 			var pn = node.parentNode;
-			
+			AppKit.log(values);
 			var alteredNodeAttributes = {
 				nodeText : values.newBP_name || values.bpName,
 				bpName: values.newBP_name || values.bpName,
@@ -766,7 +803,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				layout:'form'
 			},cfg));
 
-			Ext.EventManager.on(document,"mousedown",function(e,t) {
+			/*Ext.EventManager.on(document,"mousedown",function(e,t) {
 				
 				if(!e.within(funkyInputLayer)) {
 					if(Ext.DomQuery.is(t,"div.x-combo-list-item") || Ext.DomQuery.is(t,"div.x-combo-list-inner"))				
@@ -774,7 +811,7 @@ Cronk.util.initEnvironment(_parent, function() {
 
 					funkyInputLayer.remove();
 				}
-			})
+			})*/
 			return funkyInputLayer;
 		},
 		
@@ -875,6 +912,7 @@ Cronk.util.initEnvironment(_parent, function() {
 	}))();
 	
 	Cronk.bp.configFileListing = new (Ext.extend(Ext.DataView,{
+		autoScroll: true,
 		store: new Ext.data.JsonStore({
 		    autoLoad:true,
 		    url: '<?php echo $ro->gen("cronks.bpAddon.configParser") ?>',
@@ -908,6 +946,7 @@ Cronk.util.initEnvironment(_parent, function() {
 						text: _('Edit this config'),
 						handler: function() {
 							Cronk.bp.processController.getConfigJson(clicked.get('filename'));
+							Cronk.bp.processController.curConfigName = clicked.get('filename');
 						}
 					},{
 						iconCls: 'icinga-icon-delete',
@@ -1048,19 +1087,30 @@ Cronk.util.initEnvironment(_parent, function() {
 				},
 				scope:this
 			},{
-				text: _('Save Config'),
+				text: _('Save'),
+				iconCls: 'icinga-icon-disk',
+				handler: function(btn) {
+				    if(Cronk.bp.processController.curConfigName) {
+					Cronk.bp.processController.createConfigForTree(text);
+				    } else {
+					Ext.Msg.alert(_("No name given"),_("New config, please choose 'save as'"));
+				    }
+				},
+				scope:this
+			},{
+				text: _('Save as'),
 				iconCls: 'icinga-icon-disk',
 				handler: function(btn) {
 					Ext.Msg.prompt(_('Filename'), _('Please enter a name for the file:'), function(btn, text){
 					    if (btn == 'ok'){
 					    	if(!text.match(/^[A-Za-z0-9_-]{3,25}$/)) {
-								Ext.Msg.alert(_("Error"),_("Please provide a valid file name (min 3, max 25 chars, alphanumeric)"));					    		
-								return false;
+						    Ext.Msg.alert(_("Error"),_("Please provide a valid file name (min 3, max 25 chars, alphanumeric)"));
+						    return false;
 					    	}
-							Cronk.bp.processController.createConfigForTree(text);
+						Cronk.bp.processController.createConfigForTree(text);
 					    }
 					});
-				
+
 				},
 				scope:this
 			}]
@@ -1072,6 +1122,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			width:200,
 			height:parentCmp.getInnerHeight(),
 			title: _('Available configs'),
+			autoScroll:true,
 			items: Cronk.bp.configFileListing
 		}]
 	});
