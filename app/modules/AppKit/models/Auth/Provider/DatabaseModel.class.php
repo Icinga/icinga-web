@@ -6,9 +6,13 @@ class AppKit_Auth_Provider_DatabaseModel extends AppKitAuthProviderBaseModel imp
 	 * (non-PHPdoc)
 	 * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#doAuthenticate()
 	 */
-	public function doAuthenticate(NsmUser $user, $password) {
+	public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
 		if ($user instanceof NsmUser && $user->user_id > 0) {
+			
 			$test_hash = hash_hmac(NsmUser::HASH_ALGO, $password, $user->user_salt);
+			
+			$this->log('Auth.Provider.Database: HASH(%s)', $test_hash, AgaviLogger::DEBUG);
+			
 			if ($test_hash === $user->user_password) {
 				return true;
 			}

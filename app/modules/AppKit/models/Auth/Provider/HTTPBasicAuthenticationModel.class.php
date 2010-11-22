@@ -26,7 +26,7 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 	private $auth_type = null;
 
 
-	public function doAuthenticate(NsmUser $user, $password) {
+	public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
 		$tuser = $this->loadUserByDQL($user->user_name);
 
 		if ($tuser && $tuser instanceof NsmUser && $user->user_name == $this->getAuthName()) {

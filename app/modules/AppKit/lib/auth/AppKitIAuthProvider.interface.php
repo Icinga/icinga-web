@@ -25,7 +25,7 @@ interface AppKitIAuthProvider {
 	 * @param string $password
 	 * @return boolean
 	 */
-	public function doAuthenticate(NsmUser $user, $password);
+	public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null);
 	
 	/**
 	 * isAvailable

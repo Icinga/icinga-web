@@ -8,7 +8,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 	 * (non-PHPdoc)
 	 * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#doAuthenticate()
 	 */
-	public function doAuthenticate(NsmUser $user, $password) {
+	public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
 		$authid = $user->getAuthId();
 		$username = $user->user_name;
 		
