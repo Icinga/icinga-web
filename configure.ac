@@ -101,7 +101,17 @@ AC_ARG_WITH([icinga_api],
 	icinga_api=/usr/local/icinga/share/icinga-api
 )
 
-ACICINGA_CHECK_API([$icinga_api])
+AC_ARG_WITH([api_check],
+	AS_HELP_STRING([--without-api-check], [Disable check for an existing icinga api]),
+	api_check=$withval,
+	api_check=yes
+)
+
+
+AS_IF([test "x$api_check" = xyes],
+       ACICINGA_CHECK_API([$icinga_api]),
+       AC_MSG_RESULT([*** Disable API check ***]))
+       
 
 # Web database switches
 AC_ARG_WITH([db_type],

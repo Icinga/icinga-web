@@ -650,6 +650,7 @@ with_web_apache_path
 with_bin_user
 with_bin_group
 with_icinga_api
+with_api_check
 with_db_type
 with_db_host
 with_db_port
@@ -1294,6 +1295,7 @@ Optional Packages:
   --with-bin-group=GROUP  group for all other files (default bin)
   --with-icinga-api=PATH  Path to icinga-api (default
                           /usr/local/icinga/share/icinga-api)
+  --without-api-check     Disable check for an existing icinga api
   --with-db-type=DBTYPE   Type of dbms (default mysql)
   --with-db-host=HOST     Host of dbms (default localhost)
   --with-db-port=PORT     Port of the dbms (default 3306)
@@ -2300,6 +2302,18 @@ fi
 
 
 
+# Check whether --with-api_check was given.
+if test "${with_api_check+set}" = set; then :
+  withval=$with_api_check; api_check=$withval
+else
+  api_check=yes
+
+fi
+
+
+
+if test "x$api_check" = xyes; then :
+
 	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for IcingaApi" >&5
 $as_echo_n "checking for IcingaApi... " >&6; }
 	if  test -e $icinga_api/IcingaApi.php && $GREP -q "class IcingaApi" $icinga_api/IcingaApi.php ; then :
@@ -2307,6 +2321,11 @@ $as_echo_n "checking for IcingaApi... " >&6; }
 $as_echo "found" >&6; }
 else
    as_fn_error $? "not found" "$LINENO" 5
+fi
+
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: *** Disable API check ***" >&5
+$as_echo "*** Disable API check ***" >&6; }
 fi
 
 
