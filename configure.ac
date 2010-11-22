@@ -70,6 +70,12 @@ AC_ARG_WITH([web_path],
 	web_path=/icinga-web
 )
 
+AC_ARG_WITH([web_absolute_path],
+	AS_HELP_STRING([--with-web-absolute-path=PATH], [absolute path to pub (default %core.root_dir%/pub)]),
+	web_absolute_path=$withval,
+	web_absolute_path=%core.root_dir%/pub
+)
+
 AC_ARG_WITH([web_apache_path],
 	AS_HELP_STRING([--with-web-apache-path=PATH], [Include folder apache2 (default /etc/apache2/conf.d]),
 	web_apache_path=$withval,
@@ -207,6 +213,7 @@ CFLAGS=""
 AC_SUBST(web_user)
 AC_SUBST(web_group)
 AC_SUBST(web_path)
+AC_SUBST(web_absolute_path)
 AC_SUBST(web_apache_path)
 AC_SUBST(bin_user)
 AC_SUBST(bin_group)

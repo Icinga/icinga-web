@@ -16,7 +16,7 @@
 		* If the path is empty, we try to detect the path
 	-->
 	<setting name="appkit.web_path">@web_path@</setting>
-	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
+	<setting name="appkit.web_absolute_path">@web_absolute_path@</setting>
 	<setting name="appkit.image_path">@web_path@/images</setting>
 
 	<!-- @DEPRECATED -->
