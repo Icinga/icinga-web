@@ -1,4 +1,6 @@
 .settings/org.eclipse.php.core.prefs
+.settings/org.eclipse.php.server.core.phpServersPrefs.prefs
+.settings/org.eclipse.php.debug.core.Debug_Process_Preferences.prefs
 autom4te.cache/
 app/cache/config/*.php
 app/cache/content

@@ -1,13 +1,17 @@
 SHELL=/bin/sh
+
 PACKAGE_TARNAME=@PACKAGE_TARNAME@
 PACKAGE_NAME=@PACKAGE_NAME@
 PACKAGE_VERSION=@PACKAGE_VERSION@
+
 VERSION_MAJOR=@VERSION_MAJOR@
 VERSION_MINOR=@VERSION_MINOR@
 VERSION_PATCH=@VERSION_PATCH@
 VERSION_EXTEN=@VERSION_EXTEN@
+
 RELEASE_DATE=@RELEASE_DATE@
 TAR_DIR_NAME=$(shell basename `pwd`)
+
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 LOGDIR=@localstatedir@
@@ -15,25 +19,37 @@ CFGDIR=@sysconfdir@
 BINDIR=@bindir@
 CGIDIR=@sbindir@
 HTMLDIR=@datarootdir@
+
 INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 INSTALL_OPTS_WEB=@INSTALL_OPTS_WEB@
 INSTALL_OPTS_CACHE=@INSTALL_OPTS_CACHE@
+
 BIN_USER=@bin_user@
 BIN_GROUP=@bin_group@
 WEB_USER=@web_user@
 WEB_GROUP=@web_group@
 WEB_PATH=@web_path@
 WEB_APACHE_PATH=@web_apache_path@
+
 SED=@SED@
 PHP=@PHP@
 PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
+
 API_DIR=@icinga_api@
-INC_MAKE_FILES=etc/make/files.mk etc/make/special.mk etc/make/siteconfig.mk
+
 LOC_PO=app/data/i18n/po
 LOC_MO=app/data/i18n/mo
 LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
+
+SRC_LIB=@srcdir@/lib
+SRC_PUB=@srcdir@/pub
+SRC_ETC=@srcdir@/etc
+SRC_BIN=@srcdir@/bin
+SRC_DOC=@srcdir@/doc
+SRC_APP=@srcdir@/app
+SRC_SITE=@srcdir@/etc/sitecfg
 
 none:
 #	@printf "\t%-22s - %s\n" "" ""
@@ -67,16 +83,6 @@ none:
 	@printf "\t%-22s - %s\n" "scheduler-remove" "remove the icingaScheduler cronkjob"
 	@printf "\n\n"
 	
-include $(INC_MAKE_FILES)
-
-realclean: clean distclean cacheclean logclean
-
-cleanall: realclean
-
-cacheclean:
-	rm -rf app/cache/config/*.php
-	rm -rf app/cache/content
-
 logclean:
 	rm -rf app/data/log/*.log
 
@@ -86,22 +92,28 @@ locclean:
 		$(LOC_MO)/*.json
 
 distclean:
+	rm -rf \
+	autom4te.cache/ \
+	.build/ \
+	
 	rm -f \
-		Makefile \
-		config.log \
-		config.status \
-		etc/build.properties \
-		etc/tests/test.properties \
-		etc/apache2/icinga-web.conf
-		
-clean:
-	rm -f \
-		app/config/databases.xml \
-		app/config/icinga.xml \
-		app/modules/Web/config/icinga-io.xml \
-		pub/.htaccess \
-		pub/soap/.htaccess \
-		bin/clearcache.sh
+	Makefile \
+	lib/Makefile \
+	pub/Makefile \
+	etc/Makefile \
+	bin/Makefile \
+	doc/Makefile \
+	app/Makefile \
+	etc/sitecfg/Makefile \
+	app/config/databases.xml \
+	app/config/icinga.xml \
+	app/modules/Web/config/icinga-io.xml \
+	etc/build.properties \
+	etc/tests/test.properties \
+	etc/apache2/icinga-web.conf \
+	bin/clearcache.sh \
+	pub/.htaccess \
+	pub/soap/.htaccess \
 
 devclean: dev-commit-prepare
 
@@ -120,19 +132,6 @@ create-tarball-nightly:
 
 testdeps:
 	 $(PHP) bin/testdeps.php
-	 
-install-done:
-	@printf "\n\n"
-	@printf "Installation if icinga-web succeeded.\n"
-	@printf "\n"
-	@printf	"Please check the new Apache2 configuration (etc/apache2/icinga-web.conf).\n"
-	@printf "\n"
-	@printf "You can install it simply by invoking 'make install-apache-config'.\n"
-	@printf "\n"
-	@printf "If you don't want this you can restore its old behavior by\n"
-	@printf "typing 'make install-javascript'. This will install the old symlinks\n"
-	@printf "\n"
-	@printf "Have fun!\n\n"
 
 
 install-javascript:
@@ -146,12 +145,45 @@ install-apache-config:
 	@printf "include %s/icinga-web.conf manually.\n" "$(WEB_APACHE_PATH)"
 	@printf "\nPlease restart your apache in order to complete this step.\n\n"
 
-install-default:
-	@printf "Install %d dirs with %d files (quiet)\n" "$(INC_DIRS)" "$(INC_FILES)"
-	$(MAKE) -s inc-install-files
-	$(MAKE) inc-install-special
+install-lib:
+	cd $(SRC_LIB) && $(MAKE)
 
-install: install-default inc-install-siteconfig install-done
+install-pub:
+	cd $(SRC_PUB) && $(MAKE)
+
+install-etc:
+	cd $(SRC_ETC) && $(MAKE)
+
+install-bin:
+	cd $(SRC_BIN) && $(MAKE)
+
+install-doc:
+	cd $(SRC_DOC) && $(MAKE)
+
+install-app:
+	cd $(SRC_APP) && $(MAKE)
+
+install-siteconfig:
+	cd $(SRC_SITE) && $(MAKE)
+
+install-all: install-lib install-pub install-etc install-bin install-doc install-app install-siteconfig
+
+install: install-all install-done
+
+install-done:
+	@printf "\n\n"
+	@printf "Installation if icinga-web succeeded.\n"
+	@printf "\n"
+	@printf	"Please check the new Apache2 configuration (etc/apache2/icinga-web.conf).\n"
+	@printf "\n"
+	@printf "You can install it simply by invoking 'make install-apache-config'.\n"
+	@printf "\n"
+	@printf "If you don't want this you can restore its old behavior by\n"
+	@printf "typing 'make install-javascript'. This will install the old symlinks\n"
+	@printf "\n"
+	@printf "Have fun!\n\n"
+
+upgrade: install-all upgrade-done
 
 upgrade-done:
 	@printf "\n\n"
@@ -163,8 +195,6 @@ upgrade-done:
 	@printf "appropriate changes into your database\n"
 	@printf "\n"
 	@printf "Have fun!\n\n"
-
-upgrade: install-default upgrade-done
 
 db-initialize:
 	$(PHING_CALL) db-initialize

@@ -2536,7 +2536,7 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/icinga-io.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/icinga-io.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3246,6 +3246,13 @@ for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "lib/Makefile") CONFIG_FILES="$CONFIG_FILES lib/Makefile" ;;
+    "pub/Makefile") CONFIG_FILES="$CONFIG_FILES pub/Makefile" ;;
+    "etc/Makefile") CONFIG_FILES="$CONFIG_FILES etc/Makefile" ;;
+    "bin/Makefile") CONFIG_FILES="$CONFIG_FILES bin/Makefile" ;;
+    "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+    "app/Makefile") CONFIG_FILES="$CONFIG_FILES app/Makefile" ;;
+    "etc/sitecfg/Makefile") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/Makefile" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "app/modules/Web/config/icinga-io.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/icinga-io.xml" ;;

@@ -1,0 +1,18 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+LOGDIR=@localstatedir@
+CFGDIR=@sysconfdir@
+BINDIR=@bindir@
+CGIDIR=@sbindir@
+HTMLDIR=@datarootdir@
+
+INSTALL=@INSTALL@
+INSTALL_OPTS=@INSTALL_OPTS@
+
+install: installdirs
+	find . -mindepth 1 -type f -not -name "*.in" -and -not -name "Makefile" -exec $(INSTALL) -m 775 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/bin/{} \;
+
+installdirs:
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
+	find . -mindepth 1 -type d -exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin/{} \;
+	

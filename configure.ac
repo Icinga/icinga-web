@@ -258,6 +258,13 @@ AC_SUBST(INSTALL_OPTS_CACHE)
 
 AC_CONFIG_FILES([
 	Makefile
+	lib/Makefile
+	pub/Makefile
+	etc/Makefile
+	bin/Makefile
+	doc/Makefile
+	app/Makefile
+	etc/sitecfg/Makefile
 	app/config/databases.xml
 	app/config/icinga.xml
 	app/modules/Web/config/icinga-io.xml
