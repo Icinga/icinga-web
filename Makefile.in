@@ -43,6 +43,7 @@ LOC_PO=app/data/i18n/po
 LOC_MO=app/data/i18n/mo
 LOC_TEMPLATE=$(LOC_PO)/templates/default.pot
 
+SRC_DIR=@srcdir@
 SRC_LIB=@srcdir@/lib
 SRC_PUB=@srcdir@/pub
 SRC_ETC=@srcdir@/etc
@@ -60,7 +61,6 @@ none:
 	@printf "\t%-22s - %s\n" "testdeps" "test php dependencies"
 	@printf "\t%-22s - %s\n" "create-tarball" "creates a tarball for packaging"
 	@printf "\t%-22s - %s\n" "create-tarball-nightly" "creates a tarball from HEAD for nightly builds"
-	@printf "\t%-22s - %s\n" "devclean" "make source ready for commit or packaging"
 	@printf "\t%-22s - %s\n" "cacheclean" "purges the agavi xml cache"
 	
 	@printf "\nDatabase (web) targets:\n"
@@ -81,6 +81,10 @@ none:
 	@printf "\nScheduler targets:\n"
 	@printf "\t%-22s - %s\n" "scheduler-install" "Install the icingaScheduler cronkjob"
 	@printf "\t%-22s - %s\n" "scheduler-remove" "remove the icingaScheduler cronkjob"
+	
+	@printf "\nDevelopment targets:\n"
+	@printf "\t%-22s - %s\n" "devel-inplace-config" "Prepare src tree for running inplace"
+	@printf "\t%-22s - %s\n" "devel-test" "Running devel tests"
 	@printf "\n\n"
 	
 logclean:
@@ -90,6 +94,10 @@ locclean:
 	rm -f \
 		$(LOC_MO)/*.mo \
 		$(LOC_MO)/*.json
+
+cacheclean:
+	rm -rf app/cache/config/*.php
+	rm -rf app/cache/content
 
 distclean:
 	rm -rf \
@@ -114,11 +122,7 @@ distclean:
 	bin/clearcache.sh \
 	pub/.htaccess \
 	pub/soap/.htaccess \
-
-devclean: dev-commit-prepare
-
-dev-commit-prepare: remove-temp-files distclean cacheclean logclean make-create-files clean
-
+	
 remove-temp-files:
 	bin/rmtmp-files.sh
 
@@ -133,6 +137,14 @@ create-tarball-nightly:
 testdeps:
 	 $(PHP) bin/testdeps.php
 
+devel-test:
+	$(PHP) $(SRC_DIR)/etc/tests/icingaWebTesting.php
+
+devel-inplace-config:
+	chown $(WEB_USER).$(WEB_GROUP) \
+		$(SRC_DIR)/app/cache \
+		$(SRC_DIR)/app/cache/config \
+		$(SRC_DIR)/app/data/log
 
 install-javascript:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js
