@@ -178,9 +178,9 @@ install-app:
 install-siteconfig:
 	cd $(SRC_SITE) && $(MAKE)
 
-install-all: install-lib install-pub install-etc install-bin install-doc install-app install-siteconfig
+install-all: install-lib install-pub install-etc install-bin install-doc install-app
 
-install: install-all install-done
+install: install-all install-siteconfig install-done
 
 install-done:
 	@printf "\n\n"
@@ -199,7 +199,7 @@ upgrade: install-all upgrade-done
 
 upgrade-done:
 	@printf "\n\n"
-	@printf "Upgrade if icinga-web succeeded.\n"
+	@printf "Upgrade of icinga-web succeeded.\n"
 	@printf "\n"
 	@printf "Please check your site config files if something have to be changed.\n"
 	@printf "\n"
