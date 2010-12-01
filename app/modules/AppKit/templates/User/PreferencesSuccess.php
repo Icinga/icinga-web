@@ -23,7 +23,7 @@ Ext.onReady(function() {
 		style: 'height:500px',
 		autoScroll:true,
 		defaults: {
-			border: false,
+			border: false
 		},
 
 		items: [{
