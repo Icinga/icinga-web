@@ -62,7 +62,7 @@
 				<!--
 					* How log we preload the portal (showing the funny throbber, idling arround)
 				-->
-				<setting name="portal.loadmasktimeout">2300</setting>
+				<setting name="portal.loadmasktimeout">1800</setting>
 
 				<!--
 					* Grid settings

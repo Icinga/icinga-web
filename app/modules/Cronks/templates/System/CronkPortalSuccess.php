@@ -1,7 +1,7 @@
 <script type="text/javascript">
 Cronk.util.initEnvironment('viewport-center', function() {
 
-	AppKit.pageLoadingMask(<?php echo (int)AgaviConfig::get('modules.cronks.portal.loadmasktimeout', '2500') ?>);
+	AppKit.pageLoadingMask(<?php echo (int)AgaviConfig::get('modules.cronks.portal.loadmasktimeout', '1500') ?>);
 
 	var portal = AppKit.util.Layout.addTo({
 		xtype: 'panel',

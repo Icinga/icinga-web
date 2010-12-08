@@ -93,15 +93,6 @@
 						<ae:parameter name="action">Ext.initI18n</ae:parameter>
 						<ae:parameter name="output_type">javascript</ae:parameter>
 					</ae:parameter>
-
-					<ae:parameter>
-						<ae:parameter name="module">AppKit</ae:parameter>
-						<ae:parameter name="action">Ext.ApplicationState</ae:parameter>
-						<ae:parameter name="output_type">javascript</ae:parameter>
-						<ae:parameter name="arguments">
-							<ae:parameter name="cmd">init</ae:parameter>
-						</ae:parameter>
-					</ae:parameter>
 				</setting>
 
 <!--				<setting name="appkit_module.app.javascript_dynamic"></setting>-->

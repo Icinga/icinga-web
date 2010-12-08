@@ -24,7 +24,8 @@ class AppKit_Widgets_AddHeaderDataAction extends AppKitBaseAction {
 		
 		// Adding javascript squishloader
 		$this->setAttribute('js_files_includes', array(
-			$this->getContext()->getRouting()->gen('appkit.squishloader')
+			$this->getContext()->getRouting()->gen('appkit.squishloader'),
+			$this->getContext()->getRouting()->gen('appkit.ext.applicationState', array('cmd' => 'init'))
 		));
 		
 		return $this->getDefaultViewName();

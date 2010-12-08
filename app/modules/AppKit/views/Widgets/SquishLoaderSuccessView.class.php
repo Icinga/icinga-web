@@ -4,16 +4,6 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 {
 	public function executeJavascript(AgaviRequestDataHolder $rd) {
 		
-		// Get the magick
-		$response = $this->getContainer()->getResponse();
-		if(AgaviConfig::get('org.icinga.appkit.include_javascript.allowcache')) {
-			$response->clearHttpHeaders();
-			$response->setHttpHeader('Expires', gmdate('D, d M Y H:i:s \G\M\T', time() + (3600*24)), true);
-			$response->setHttpHeader('Cache-Control', 'public', true);
-			$response->setHttpHeader('Age', 10, true);
-			$response->setHttpHeader('Pragma', null, true);
-		}
-
 		if ($this->getAttribute('errors', false)) {
 			return "throw '". join(", ", $this->getAttribute('errors')). "';";
 		}
@@ -25,6 +15,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView
 			$content .= $this->executeActions(
 				$this->getAttribute('javascript_actions')
 			);
+			
 			return $content;
 		}
 	}
