@@ -8,10 +8,25 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
 		this.tbar = this.buildTopToolbar();
 		
+		_G = this;
+		
+		if (this.store) {
+			// Add nodata background
+			this.store.on('datachanged', function(store) {
+				if (store.getCount() == 0) {
+					_G.getGridEl().child('div').addClass('x-icinga-nodata');
+				}
+				else {
+					_G.getGridEl().child('div').removeClass('x-icinga-nodata');
+				}
+			});
+		}		
 		Cronk.grid.GridPanel.superclass.initComponent.call(this);
 	},
 
-	// Top toolbar of the grid
+	/*
+	 * Top toolbar of the grid
+	 */
 	buildTopToolbar : function() {
 		
 		var autoRefresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;

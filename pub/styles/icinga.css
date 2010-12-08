@@ -556,6 +556,10 @@ table.icinga-detailed-info td.key {
 	border: 1px #00cc00 solid;
 }
 
+.x-icinga-nodata {
+	background: transparent url("../images/background/nodata.png") center center no-repeat;
+}
+
 /** Static content container **/
 .static-content-container {
 	background-color: #ffffff;
