@@ -560,6 +560,7 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+flag_caching
 INSTALL_OPTS_CACHE
 INSTALL_OPTS_WEB
 INSTALL_OPTS
@@ -667,6 +668,7 @@ with_api_db_user
 with_api_db_pass
 with_api_db_name
 with_api_db_prefix
+with_devel_mode
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1314,6 +1316,7 @@ Optional Packages:
                           DB name (default icinga)
   --with-api-db-prefix=PREFIX
                           DB table prefiy (default icinga_)
+  --with-devel-mode       Web devel mode (disable caching)
 
 Some influential environment variables:
   PHP         php cli binary
@@ -2492,12 +2495,37 @@ else
 fi
 
 
+
+# Check whether --with-devel_mode was given.
+if test "${with_devel_mode+set}" = set; then :
+  withval=$with_devel_mode; devel_mode=$withval
+else
+  devel_mode=no
+
+fi
+
+
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
 INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
-
+flag_caching=true
 CFLAGS=""
+
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for devel-mode" >&5
+$as_echo_n "checking for devel-mode... " >&6; }
+	if  test "$devel_mode" == "yes" ; then :
+
+		flag_caching="false"
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES (!!)" >&5
+$as_echo "YES (!!)" >&6; }
+
+else
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no (good)" >&5
+$as_echo "no (good)" >&6; }
+fi
+
 
 # Substitutions
 
@@ -2536,7 +2564,9 @@ CFLAGS=""
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/icinga-io.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+
+
+ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/icinga-io.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3256,6 +3286,7 @@ do
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "app/modules/Web/config/icinga-io.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/icinga-io.xml" ;;
+    "app/modules/AppKit/cache/Widgets/SquishLoader.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/cache/Widgets/SquishLoader.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "etc/tests/test.properties") CONFIG_FILES="$CONFIG_FILES etc/tests/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;

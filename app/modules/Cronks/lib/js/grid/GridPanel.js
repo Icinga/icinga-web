@@ -30,7 +30,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	buildTopToolbar : function() {
 		
 		var autoRefresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
-		var autoRefreshDefault = AppKit.getPrefVal('org.icinga.autoRefresh') && AppKit.getPrefVal('org.icinga.autoRefresh') != 'false' 
+		var autoRefreshDefault = AppKit.getPrefVal('org.icinga.autoRefresh') && AppKit.getPrefVal('org.icinga.autoRefresh') != 'false';
+		
 		return new Ext.Toolbar({
 			items: [{
 				text: _('Refresh'),

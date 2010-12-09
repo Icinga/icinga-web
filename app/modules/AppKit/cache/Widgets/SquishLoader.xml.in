@@ -3,7 +3,7 @@
 	<ae:configuration>
 
 		<cachings>
-			<caching method="read" lifetime="4 hours" enabled="true">
+			<caching method="read" lifetime="4 hours" enabled="@flag_caching@">
 
 				<group>javascript_content</group>
 

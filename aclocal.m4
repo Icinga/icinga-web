@@ -56,3 +56,11 @@ AC_DEFUN([ACICINGA_CLEANUP_APICONFIG], [
 		ACICINGA_REMOVE_BLOCK([$FILE],[$T])
 	done
 ])
+
+AC_DEFUN([ACICINGA_DEVEL_MODE], [
+	AC_MSG_CHECKING([for devel-mode])
+	AS_IF([ test "$devel_mode" == "yes" ], [
+		flag_caching="false"
+		AC_MSG_RESULT([YES (!!)]) 
+	], [ AC_MSG_RESULT([no (good)]) ])
+])

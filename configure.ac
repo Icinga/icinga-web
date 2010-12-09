@@ -212,12 +212,20 @@ AC_ARG_WITH([api_db_prefix],
 	api_db_prefix=icinga_
 )
 
+AC_ARG_WITH([devel_mode],
+	AS_HELP_STRING([--with-devel-mode], [Web devel mode (disable caching)]),
+	devel_mode=$withval,
+	devel_mode=no
+)
+
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
 INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
-
+flag_caching=true
 CFLAGS=""
+
+ACICINGA_DEVEL_MODE()
 
 # Substitutions
 AC_SUBST(web_user)
@@ -255,6 +263,8 @@ AC_SUBST(PHING)
 AC_SUBST(INSTALL_OPTS)
 AC_SUBST(INSTALL_OPTS_WEB)
 AC_SUBST(INSTALL_OPTS_CACHE)
+AC_SUBST(flag_caching)
+
 
 AC_CONFIG_FILES([
 	Makefile
@@ -268,6 +278,7 @@ AC_CONFIG_FILES([
 	app/config/databases.xml
 	app/config/icinga.xml
 	app/modules/Web/config/icinga-io.xml
+	app/modules/AppKit/cache/Widgets/SquishLoader.xml
 	etc/build.properties
 	etc/tests/test.properties
 	etc/apache2/icinga-web.conf
