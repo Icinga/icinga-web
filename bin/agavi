@@ -1,4 +1,4 @@
 #! /bin/sh
-DIR=$(dirname $(dirname $0))
+DIR=$(dirname $(dirname $(readlink -f $0)))
 AGAVI=$DIR/lib/agavi/bin
 cd $AGAVI && /bin/sh agavi $@

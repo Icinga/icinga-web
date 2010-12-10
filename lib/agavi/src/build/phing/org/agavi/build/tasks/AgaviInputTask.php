@@ -145,6 +145,8 @@ class AgaviInputTask extends AgaviTask
 			}
 		}
 		
+		require_once('phing/input/InputRequest.php');
+	
 		$request = new InputRequest($this->message);
 		$request->setPromptChar($this->promptCharacter);
 		

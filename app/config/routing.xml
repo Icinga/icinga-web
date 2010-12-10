@@ -55,6 +55,7 @@
 					</route>
 					<route name=".log" pattern="^/log" action="DataProvider.LogProvider"/>
 					<route name=".languages" pattern="^/languages" action="DataProvider.LanguageProvider"/>
+					<route name=".icons" pattern="^/icons" action="DataProvider.IconProvider"/>
 				 </route>
 
 

@@ -18,6 +18,7 @@
 	<setting name="appkit.web_path">@web_path@</setting>
 	<setting name="appkit.web_absolute_path">@web_absolute_path@</setting>
 	<setting name="appkit.image_path">@web_path@/images</setting>
+	<setting name="appkit.image_absolute_path">@web_absolute_path@/images</setting>
 
 	<!-- @DEPRECATED -->
 	<setting name="appkit.include_styles"></setting>

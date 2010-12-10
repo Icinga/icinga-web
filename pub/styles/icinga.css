@@ -111,6 +111,14 @@ div.logEntry.x-view-over {
 }
 /** CRONKS **/
 
+div.x-icinga-icon-search-item {
+	height: 40px;
+	background-position: 2px center;
+	background-repeat: no-repeat;
+	padding: 0px 0px 0px 42px;
+	line-height: 40px;
+}
+
 div.icinga-osearch-frame div.icinga-osearch-wrap {
 	float: left;
 	margin: 4px;
@@ -150,6 +158,7 @@ div.cronk-data-view div.cronk-preview {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	cursor: pointer;
+	width: 70px;
 }
 
 div.cronk-data-view div.cronk-preview:hover {
