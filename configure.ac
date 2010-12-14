@@ -222,7 +222,10 @@ AC_ARG_WITH([devel_mode],
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
 INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
+
 flag_caching=true
+flag_debug=false
+
 CFLAGS=""
 
 ACICINGA_DEVEL_MODE()
@@ -264,6 +267,7 @@ AC_SUBST(INSTALL_OPTS)
 AC_SUBST(INSTALL_OPTS_WEB)
 AC_SUBST(INSTALL_OPTS_CACHE)
 AC_SUBST(flag_caching)
+AC_SUBST(flag_debug)
 
 
 AC_CONFIG_FILES([
@@ -277,6 +281,7 @@ AC_CONFIG_FILES([
 	etc/sitecfg/Makefile
 	app/config/databases.xml
 	app/config/icinga.xml
+	app/config/settings.xml
 	app/modules/Web/config/icinga-io.xml
 	app/modules/AppKit/cache/Widgets/SquishLoader.xml
 	etc/build.properties

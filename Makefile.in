@@ -115,6 +115,7 @@ distclean:
 	etc/sitecfg/Makefile \
 	app/config/databases.xml \
 	app/config/icinga.xml \
+	app/config/settings.xml \
 	app/modules/Web/config/icinga-io.xml \
 	app/modules/AppKit/cache/Widgets/SquishLoader.xml \
 	etc/build.properties \

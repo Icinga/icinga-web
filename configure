@@ -560,6 +560,7 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+flag_debug
 flag_caching
 INSTALL_OPTS_CACHE
 INSTALL_OPTS_WEB
@@ -2509,7 +2510,10 @@ fi
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
 INSTALL_OPTS_CACHE="-o $web_user -g $web_group"
+
 flag_caching=true
+flag_debug=false
+
 CFLAGS=""
 
 
@@ -2518,8 +2522,9 @@ $as_echo_n "checking for devel-mode... " >&6; }
 	if  test "$devel_mode" == "yes" ; then :
 
 		flag_caching="false"
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES (!!)" >&5
-$as_echo "YES (!!)" >&6; }
+		flag_debug="true"
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=true, caching=false (!!)" >&5
+$as_echo "YES ... debug=true, caching=false (!!)" >&6; }
 
 else
    { $as_echo "$as_me:${as_lineno-$LINENO}: result: no (good)" >&5
@@ -2566,7 +2571,8 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/modules/Web/config/icinga-io.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+
+ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/settings.xml app/modules/Web/config/icinga-io.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties etc/tests/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3285,6 +3291,7 @@ do
     "etc/sitecfg/Makefile") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/Makefile" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
+    "app/config/settings.xml") CONFIG_FILES="$CONFIG_FILES app/config/settings.xml" ;;
     "app/modules/Web/config/icinga-io.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/icinga-io.xml" ;;
     "app/modules/AppKit/cache/Widgets/SquishLoader.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/cache/Widgets/SquishLoader.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;

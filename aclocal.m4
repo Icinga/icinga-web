@@ -61,6 +61,7 @@ AC_DEFUN([ACICINGA_DEVEL_MODE], [
 	AC_MSG_CHECKING([for devel-mode])
 	AS_IF([ test "$devel_mode" == "yes" ], [
 		flag_caching="false"
-		AC_MSG_RESULT([YES (!!)]) 
+		flag_debug="true"
+		AC_MSG_RESULT([YES ... debug=true, caching=false (!!)]) 
 	], [ AC_MSG_RESULT([no (good)]) ])
 ])
