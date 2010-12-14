@@ -33,7 +33,7 @@ class AppKit_Auth_Provider_AuthKeyModel extends AppKitAuthProviderBaseModel  imp
 
 		$res = $res->execute(null, Doctrine::HYDRATE_ARRAY);
 		
-		if (isset($res[0]['cnt']) && $res[0]['cnt'] === 1) {
+		if (isset($res[0]['cnt']) && $res[0]['cnt'] == 1) {
 			return true;
 		}
 		
