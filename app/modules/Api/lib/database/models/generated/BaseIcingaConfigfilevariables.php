@@ -1,6 +1,5 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaConfigfilevariables', 'default');
 
 /**
  * BaseIcingaConfigfilevariables
@@ -22,7 +21,8 @@ abstract class BaseIcingaConfigfilevariables extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_configfilevariables');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaConfigfiles")->getPrefix();
+        $this->setTableName($prefix.'configfilevariables');
         $this->hasColumn('configfilevariable_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

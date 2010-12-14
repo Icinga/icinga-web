@@ -1,6 +1,6 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostgroups', 'default');
+
 
 /**
  * BaseIcingaHostgroups
@@ -22,7 +22,8 @@ abstract class BaseIcingaHostgroups extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hostgroups');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostgroups")->getPrefix();
+        $this->setTableName($prefix.'hostgroups');
         $this->hasColumn('hostgroup_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -75,6 +76,12 @@ abstract class BaseIcingaHostgroups extends Doctrine_Record
 
     public function setUp()
     {
+    	
+    	$this->hasMany("IcingaHosts as hosts", array(
+		    'local' => 'hostgroup_id',
+		    'foreign' => 'host_object_id',
+		    'refClass' => 'IcingaHostgroupMembers'
+		));
         parent::setUp();
         
     }

@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaProcessevents', 'default');
-
 /**
  * BaseIcingaProcessevents
  * 
@@ -26,7 +23,8 @@ abstract class BaseIcingaProcessevents extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_processevents');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaProcessevents")->getPrefix();
+        $this->setTableName($prefix.'processevents');
         $this->hasColumn('processevent_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

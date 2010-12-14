@@ -1,7 +1,5 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHoststatus', 'default');
-
 /**
  * BaseIcingaHoststatus
  * 
@@ -64,7 +62,8 @@ abstract class BaseIcingaHoststatus extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hoststatus');
+    	$prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHoststatus")->getPrefix();
+        $this->setTableName($prefix.'hoststatus');
         $this->hasColumn('hoststatus_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

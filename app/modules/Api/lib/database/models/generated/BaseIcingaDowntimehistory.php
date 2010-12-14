@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaDowntimehistory', 'default');
 
 /**
  * BaseIcingaDowntimehistory
@@ -36,7 +34,8 @@ abstract class BaseIcingaDowntimehistory extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_downtimehistory');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaDowntimehistory")->getPrefix();
+        $this->setTableName($prefix.'downtimehistory');
         $this->hasColumn('downtimehistory_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

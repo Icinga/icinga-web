@@ -1,7 +1,5 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaConninfo', 'default');
-
 /**
  * BaseIcingaConninfo
  * 
@@ -32,7 +30,8 @@ abstract class BaseIcingaConninfo extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_conninfo');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaConfiginfo")->getPrefix();
+        $this->setTableName($prefix.'conninfo');
         $this->hasColumn('conninfo_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

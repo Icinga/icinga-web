@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaServicechecks', 'default');
-
 /**
  * BaseIcingaServicechecks
  * 
@@ -40,7 +37,8 @@ abstract class BaseIcingaServicechecks extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_servicechecks');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicechecks")->getPrefix();
+        $this->setTableName($prefix.'servicechecks');
         $this->hasColumn('servicecheck_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

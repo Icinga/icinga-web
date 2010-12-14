@@ -1,7 +1,5 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaCustomvariables', 'default');
-
+	
 /**
  * BaseIcingaCustomvariables
  * 
@@ -24,7 +22,8 @@ abstract class BaseIcingaCustomvariables extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_customvariables');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCustomvariables")->getPrefix();
+        $this->setTableName($prefix.'customvariables');
         $this->hasColumn('customvariable_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

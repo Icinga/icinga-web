@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaStatehistory', 'default');
-
 /**
  * BaseIcingaStatehistory
  * 
@@ -31,7 +28,8 @@ abstract class BaseIcingaStatehistory extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_statehistory');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicestatus")->getPrefix();
+        $this->setTableName($prefix.'statehistory');
         $this->hasColumn('statehistory_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

@@ -1,6 +1,5 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaContactNotificationcommands', 'default');
+
 
 /**
  * BaseIcingaContactNotificationcommands
@@ -23,7 +22,8 @@ abstract class BaseIcingaContactNotificationcommands extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_contact_notificationcommands');
+       $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaContactNotificationcommands")->getPrefix();
+        $this->setTableName($prefix.'contact_notificationcommands');
         $this->hasColumn('contact_notificationcommand_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

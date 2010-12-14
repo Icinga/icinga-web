@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaServicedependencies', 'default');
-
 /**
  * BaseIcingaServicedependencies
  * 
@@ -29,7 +26,8 @@ abstract class BaseIcingaServicedependencies extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_servicedependencies');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicedependencies")->getPrefix();
+        $this->setTableName($prefix.'servicedependencies');
         $this->hasColumn('servicedependency_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

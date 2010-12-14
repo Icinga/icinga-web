@@ -20,7 +20,7 @@ class Api_ApiDataRequestModel extends IcingaApiBaseModel implements IcingaApiDat
     }
 
     public static function createRequestDescriptor($table) {
-	
+
     }
 
     // often used functions are predefined

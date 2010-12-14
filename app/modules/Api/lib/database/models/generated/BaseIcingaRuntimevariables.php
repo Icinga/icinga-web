@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaRuntimevariables', 'default');
-
 /**
  * BaseIcingaRuntimevariables
  * 
@@ -21,7 +18,8 @@ abstract class BaseIcingaRuntimevariables extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_runtimevariables');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaRuntimevariables")->getPrefix();
+        $this->setTableName($prefix.'runtimevariables');
         $this->hasColumn('runtimevariable_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

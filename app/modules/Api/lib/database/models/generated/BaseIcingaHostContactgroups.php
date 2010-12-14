@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostContactgroups', 'default');
-
 /**
  * BaseIcingaHostContactgroups
  * 
@@ -21,7 +18,8 @@ abstract class BaseIcingaHostContactgroups extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_host_contactgroups');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostContactgroups")->getPrefix();
+        $this->setTableName($prefix.'host_contactgroups');
         $this->hasColumn('host_contactgroup_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

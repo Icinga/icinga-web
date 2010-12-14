@@ -106,7 +106,7 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 		// that way, you can just start using classes in your code
 		try {
 			$dsn = $this->getParameter('dsn');
-			
+	
 			if($dsn === null) {
 				// missing required dsn parameter
 				$error = 'Database configuration specifies method "dsn", but is missing dsn parameter';
@@ -119,12 +119,14 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 			
 			// set the context instance as a connection parameter
 			$this->connection->setParam('context', $databaseManager->getContext(), 'org.agavi');
-			
+
+			$this->connection->setPrefix($this->getParameter('prefix',""));
 			// charset
 			if($this->hasParameter('charset')) {
 				// TODO: this will force a connection, could be done using doctrine events
 				$this->connection->setCharset($this->getParameter('charset'));
 			}
+			
 			
 			// date format
 			if($this->hasParameter('date_format')) {
@@ -181,6 +183,7 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 			if($is12 && ($this->hasParameter('load_models') || $this->hasParameter('models_directory'))) {
 				if(!in_array(array('Doctrine', 'modelsAutoload'), $splAutoloadFunctions) && !in_array(array('Doctrine_Core', 'modelsAutoload'), $splAutoloadFunctions)) {
 					spl_autoload_register(array('Doctrine_Core', 'modelsAutoload'));
+					
 				}
 				
 				if($this->hasParameter('models_directory')) {

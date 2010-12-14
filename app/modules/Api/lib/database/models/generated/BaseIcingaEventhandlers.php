@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaEventhandlers', 'default');
 
 /**
  * BaseIcingaEventhandlers
@@ -36,7 +34,8 @@ abstract class BaseIcingaEventhandlers extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_eventhandlers');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaEventhandlers")->getPrefix();
+        $this->setTableName($prefix.'eventhandlers');
         $this->hasColumn('eventhandler_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

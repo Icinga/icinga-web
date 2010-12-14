@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaObjects', 'default');
-
 /**
  * BaseIcingaObjects
  * 
@@ -23,7 +20,8 @@ abstract class BaseIcingaObjects extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_objects');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaObjects")->getPrefix();
+        $this->setTableName($prefix.'objects');
         $this->hasColumn('object_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

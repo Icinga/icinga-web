@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaServicestatus', 'default');
-
 /**
  * BaseIcingaServicestatus
  * 
@@ -65,7 +62,8 @@ abstract class BaseIcingaServicestatus extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_servicestatus');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicestatus")->getPrefix();
+        $this->setTableName($prefix.'servicestatus');
         $this->hasColumn('servicestatus_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -528,6 +526,15 @@ abstract class BaseIcingaServicestatus extends Doctrine_Record
 
     public function setUp()
     {
+	$this->hasOne("IcingaServices as service", array(
+	    'local' => 'service_object_id',
+	    'foreign' => 'service_object_id'
+	));
+	$this->hasOne("IcingaTimePeriods as timeperiod",array(
+	    'local' => 'check_timeperiod_object_id',
+	    'foreign' => 'timeperiod_object_id'
+	));
+	
         parent::setUp();
        
     }

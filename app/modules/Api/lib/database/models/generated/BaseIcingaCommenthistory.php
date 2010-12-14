@@ -1,6 +1,5 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaCommenthistory', 'default');
 
 /**
  * BaseIcingaCommenthistory
@@ -34,7 +33,8 @@ abstract class BaseIcingaCommenthistory extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_commenthistory');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCommenthistory")->getPrefix();
+        $this->setTableName($prefix.'commenthistory');
         $this->hasColumn('commenthistory_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

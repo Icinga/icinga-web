@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaDbversion', 'default');
 
 /**
  * BaseIcingaDbversion
@@ -19,7 +17,8 @@ abstract class BaseIcingaDbversion extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_dbversion');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaDbversion")->getPrefix();
+        $this->setTableName($prefix.'dbversion');
         $this->hasColumn('name', 'string', 10, array(
              'type' => 'string',
              'length' => 10,

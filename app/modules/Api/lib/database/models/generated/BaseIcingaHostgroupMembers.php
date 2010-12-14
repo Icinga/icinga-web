@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostgroupMembers', 'default');
-
 /**
  * BaseIcingaHostgroupMembers
  * 
@@ -21,7 +18,8 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hostgroup_members');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostgroupMembers")->getPrefix();
+        $this->setTableName($prefix.'hostgroup_members');
         $this->hasColumn('hostgroup_member_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -35,7 +33,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'length' => 2,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -45,7 +43,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -55,7 +53,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -65,6 +63,14 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        
+       	$this->hasOne("IcingaHosts host", array(
+       		"local" => "host_object_id",
+       		"foreign" => "host_object_id"
+       	));
+       	
+      	$this->hasOne("IcingaHostgroups group", array(
+       		"local" => "hostgroup_id",
+       		"foreign" => "hostgroup_id"
+       	));
     }
 }

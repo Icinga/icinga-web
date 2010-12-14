@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaExternalcommands', 'default');
 
 /**
  * BaseIcingaExternalcommands
@@ -23,7 +21,8 @@ abstract class BaseIcingaExternalcommands extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_externalcommands');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaExternalcommands")->getPrefix();
+        $this->setTableName($prefix.'externalcommands');
         $this->hasColumn('externalcommand_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

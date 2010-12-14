@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostdependencies', 'default');
 
 /**
  * BaseIcingaHostdependencies
@@ -28,7 +26,8 @@ abstract class BaseIcingaHostdependencies extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hostdependencies');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostdependencies")->getPrefix();
+        $this->setTableName($prefix.'hostdependencies');
         $this->hasColumn('hostdependency_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

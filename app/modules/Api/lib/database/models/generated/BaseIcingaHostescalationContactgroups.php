@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostescalationContactgroups', 'default');
 
 /**
  * BaseIcingaHostescalationContactgroups
@@ -21,7 +19,8 @@ abstract class BaseIcingaHostescalationContactgroups extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hostescalation_contactgroups');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostescalationContactgroups")->getPrefix();
+        $this->setTableName($prefix.'hostescalation_contactgroups');
         $this->hasColumn('hostescalation_contactgroup_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaSystemcommands', 'default');
 
 /**
  * BaseIcingaSystemcommands
@@ -30,7 +28,8 @@ abstract class BaseIcingaSystemcommands extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_systemcommands');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicestatus")->getPrefix();
+        $this->setTableName($prefix.'systemcommands');
         $this->hasColumn('systemcommand_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

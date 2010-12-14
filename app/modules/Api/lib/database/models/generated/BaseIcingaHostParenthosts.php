@@ -21,7 +21,8 @@ abstract class BaseIcingaHostParenthosts extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_host_parenthosts');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostParenthosts")->getPrefix();
+        $this->setTableName($prefix.'host_parenthosts');
         $this->hasColumn('host_parenthost_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

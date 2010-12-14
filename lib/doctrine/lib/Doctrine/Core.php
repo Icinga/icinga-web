@@ -600,7 +600,10 @@ class Doctrine_Core
      */
     public static function setModelsDirectory($directory)
     {
-        self::$_modelsDirectory = $directory;
+    	if(is_array(self::$_modelsDirectory))
+	        self::$_modelsDirectory[] = $directory;
+	    else 
+	        self::$_modelsDirectory = array($directory); 
     }
 
     /**
@@ -1145,12 +1148,16 @@ class Doctrine_Core
                 return true;
             }
         } else {
-            $class = self::$_modelsDirectory . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+            if(!is_array(self::$_modelsDirectory))
+            	self::$_modelsDirectory = array(self::$_modelsDirectory);
+            foreach(self::$_modelsDirectory as $directory) {
+        		$class = $directory . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-            if (file_exists($class)) {
-                require $class;
-
-                return true;
+	            if (file_exists($class)) {
+	                require $class;
+	
+	                return true;
+	            }
             }
         }
 

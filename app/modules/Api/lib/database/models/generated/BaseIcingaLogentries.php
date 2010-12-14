@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaLogentries', 'default');
-
 /**
  * BaseIcingaLogentries
  * 
@@ -26,7 +23,8 @@ abstract class BaseIcingaLogentries extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_logentries');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaLogentries")->getPrefix();
+        $this->setTableName($prefix.'logentry_id');
         $this->hasColumn('logentry_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

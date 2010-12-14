@@ -65,7 +65,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *                                          keys representing Doctrine_Table component names and values as Doctrine_Table objects
      */
     protected $tables           = array();
-
+	protected $prefix			= "";
     /**
      * $_name
      *
@@ -243,6 +243,10 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
       return $this->options;
     }
 
+    public function getPrefix() {
+    	return $this->prefix;
+    }
+    
     /**
      * getOption
      *
@@ -271,6 +275,10 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
       return $this->options[$option] = $value;
     }
 
+    public function setPrefix($prefix) {
+    	$this->prefix = $prefix;
+    }
+    
     /**
      * getAttribute
      * retrieves a database connection attribute

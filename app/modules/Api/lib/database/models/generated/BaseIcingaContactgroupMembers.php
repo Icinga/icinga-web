@@ -1,6 +1,5 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaContactgroupMembers', 'default');
 
 /**
  * BaseIcingaContactgroupMembers
@@ -21,7 +20,8 @@ abstract class BaseIcingaContactgroupMembers extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_contactgroup_members');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaContactgroupMembers")->getPrefix();
+        $this->setTableName($prefix.'contactgroup_members');
         $this->hasColumn('contactgroup_member_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

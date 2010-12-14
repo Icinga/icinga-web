@@ -22,7 +22,8 @@ abstract class BaseIcingaCommands extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_commands');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCommands")->getPrefix();
+        $this->setTableName($prefix.'commands');
         $this->hasColumn('command_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

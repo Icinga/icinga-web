@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaCustomvariablestatus', 'default');
 
 /**
  * BaseIcingaCustomvariablestatus
@@ -24,7 +22,8 @@ abstract class BaseIcingaCustomvariablestatus extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_customvariablestatus');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCustomvariables")->getPrefix();
+        $this->setTableName($prefix.'customvariablestatus');
         $this->hasColumn('customvariablestatus_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

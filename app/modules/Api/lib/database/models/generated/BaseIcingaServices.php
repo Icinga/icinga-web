@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaServices', 'default');
 
 /**
  * BaseIcingaServices
@@ -69,7 +67,8 @@ abstract class BaseIcingaServices extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_services');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServices")->getPrefix();
+        $this->setTableName($prefix.'services');
         $this->hasColumn('service_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -600,7 +599,7 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
 	));
-        $this->hasMany("IcingaCommenthistory as commenthistory", array(
+    $this->hasMany("IcingaCommenthistory as commenthistory", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
 	));
@@ -626,7 +625,7 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
 	));
-	$this->hasMany("IcingaServiceEscalations as escalations", array(
+	$this->hasMany("IcingaServiceescalations as escalations", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'service_object_id'
 	));
@@ -642,11 +641,11 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
 	));
-	$this->hasMany("IcingaCustomVariables as customVariables", array(
+	$this->hasMany("IcingaCustomvariables as customvariables", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
 	));
-	$this->hasMany("IcingaService as dependencies", array(
+	$this->hasMany("IcingaServices as dependencies", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'dependent_service_object_id',
 	    'refClass' => 'IcingaServicedependencies'

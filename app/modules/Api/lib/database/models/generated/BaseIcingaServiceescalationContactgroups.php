@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaServiceescalationContactgroups', 'default');
-
 /**
  * BaseIcingaServiceescalationContactgroups
  * 
@@ -21,7 +18,8 @@ abstract class BaseIcingaServiceescalationContactgroups extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_serviceescalation_contactgroups');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServiceescalationContactgroups")->getPrefix();
+        $this->setTableName($prefix.'serviceescalation_contactgroups');
         $this->hasColumn('serviceescalation_contactgroup_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

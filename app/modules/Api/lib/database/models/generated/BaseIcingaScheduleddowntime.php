@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaScheduleddowntime', 'default');
-
 /**
  * BaseIcingaScheduleddowntime
  * 
@@ -33,7 +30,8 @@ abstract class BaseIcingaScheduleddowntime extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_scheduleddowntime');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaScheduleddowntime")->getPrefix();
+        $this->setTableName($prefix.'scheduleddowntime');
         $this->hasColumn('scheduleddowntime_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

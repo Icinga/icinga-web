@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaContactstatus', 'default');
-
 /**
  * BaseIcingaContactstatus
  * 
@@ -28,7 +25,8 @@ abstract class BaseIcingaContactstatus extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_contactstatus');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaContactstatus")->getPrefix();
+        $this->setTableName($prefix.'contactstatus');
         $this->hasColumn('contactstatus_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaFlappinghistory', 'default');
-
 /**
  * BaseIcingaFlappinghistory
  * 
@@ -30,7 +27,8 @@ abstract class BaseIcingaFlappinghistory extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_flappinghistory');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaFlappinghistory")->getPrefix();
+        $this->setTableName($prefix.'flappinghistory');
         $this->hasColumn('flappinghistory_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

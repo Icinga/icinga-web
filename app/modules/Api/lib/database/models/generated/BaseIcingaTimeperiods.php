@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaTimeperiods', 'default');
-
 /**
  * BaseIcingaTimeperiods
  * 
@@ -22,7 +19,8 @@ abstract class BaseIcingaTimeperiods extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_timeperiods');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaTimeperiods")->getPrefix();
+        $this->setTableName($prefix.'timeperiods');
         $this->hasColumn('timeperiod_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

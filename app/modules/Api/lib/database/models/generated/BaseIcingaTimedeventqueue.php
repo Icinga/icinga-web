@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaTimedeventqueue', 'default');
-
 /**
  * BaseIcingaTimedeventqueue
  * 
@@ -25,7 +22,8 @@ abstract class BaseIcingaTimedeventqueue extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_timedeventqueue');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaTimedeventqueue")->getPrefix();
+        $this->setTableName($prefix.'timedeventqueue');
         $this->hasColumn('timedeventqueue_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

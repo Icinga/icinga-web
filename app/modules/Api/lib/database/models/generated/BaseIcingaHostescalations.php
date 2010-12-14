@@ -1,6 +1,5 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostescalations', 'default');
+
 
 /**
  * BaseIcingaHostescalations
@@ -28,7 +27,8 @@ abstract class BaseIcingaHostescalations extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hostescalations');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostescalations")->getPrefix();
+        $this->setTableName($prefix.'hostescalations');
         $this->hasColumn('hostescalation_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

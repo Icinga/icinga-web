@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaConfigfiles', 'default');
 
 /**
  * BaseIcingaConfigfiles
@@ -21,7 +19,8 @@ abstract class BaseIcingaConfigfiles extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_configfiles');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaConfigfiles")->getPrefix();
+        $this->setTableName($prefix.'configfiles');
         $this->hasColumn('configfile_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

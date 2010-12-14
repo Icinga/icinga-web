@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaServiceescalations', 'default');
 
 /**
  * BaseIcingaServiceescalations
@@ -29,7 +27,8 @@ abstract class BaseIcingaServiceescalations extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_serviceescalations');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServiceescalations")->getPrefix();
+        $this->setTableName($prefix.'serviceescalations');
         $this->hasColumn('serviceescalation_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

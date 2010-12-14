@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaProgramstatus', 'default');
-
 /**
  * BaseIcingaProgramstatus
  * 
@@ -42,7 +39,8 @@ abstract class BaseIcingaProgramstatus extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_programstatus');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaProgramstatus")->getPrefix();
+        $this->setTableName($prefix.'programstatus');
         $this->hasColumn('programstatus_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

@@ -1,6 +1,6 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaAcknowledgements', 'default');
+
 
 /**
  * BaseIcingaAcknowledgements
@@ -29,7 +29,8 @@ abstract class BaseIcingaAcknowledgements extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_acknowledgements');
+    	$prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaAcknowledgements")->getPrefix();
+        $this->setTableName($prefix.'acknowledgements');
         $this->hasColumn('acknowledgement_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,

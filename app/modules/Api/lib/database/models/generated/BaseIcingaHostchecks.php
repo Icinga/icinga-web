@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostchecks', 'default');
-
 /**
  * BaseIcingaHostchecks
  * 
@@ -41,7 +38,8 @@ abstract class BaseIcingaHostchecks extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('icinga_hostchecks');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostchecks")->getPrefix();
+        $this->setTableName($prefix.'hostchecks');
         $this->hasColumn('hostcheck_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
