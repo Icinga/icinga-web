@@ -2522,9 +2522,9 @@ $as_echo_n "checking for devel-mode... " >&6; }
 	if  test "$devel_mode" == "yes" ; then :
 
 		flag_caching="false"
-		flag_debug="true"
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=true, caching=false (!!)" >&5
-$as_echo "YES ... debug=true, caching=false (!!)" >&6; }
+		flag_debug="false"
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=false, jscache=false (!!)" >&5
+$as_echo "YES ... debug=false, jscache=false (!!)" >&6; }
 
 else
    { $as_echo "$as_me:${as_lineno-$LINENO}: result: no (good)" >&5

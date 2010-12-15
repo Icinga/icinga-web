@@ -6,9 +6,9 @@ Cronk.util.CronkBuilder = function(config) {
 Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	title: _('Save custom Cronk'),
 	modal: true,
-	width: 650,
 	height: 400,
 	closeAction: 'hide',
+	width: 740,
 	
 	initComponent : function() {
 		
@@ -80,14 +80,43 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			viewConfig : {
             	forceFit: true,
             	scrollOffset: 2
-        	}
+        	},
+        	bbar: [{
+        		iconCls: 'icinga-icon-add',
+        		text: _('Add'),
+        		handler: function(b, e) {
+        			Ext.MessageBox.prompt(_('Add'), _('Add new parameter to properties'), function(btn, text) {
+        				if (!Ext.isEmpty(text)) {
+							var rec = new Ext.grid.PropertyRecord({
+							    name: text,
+							    value: null
+							});
+							this.paramGrid.store.addSorted(rec);
+						}
+        			}, this);
+        		},
+        		scope: this
+        	}, {
+				iconCls: 'icinga-icon-delete',
+				text: _('Remove'),
+				handler: function(b, e) {
+					var sel = this.paramGrid.getSelectionModel().selection;
+					try {
+						this.paramGrid.removeProperty(sel.record.id);
+					} catch (e) {
+						AppKit.notifyMessage(_('Error'), _('No selection was made!'));
+					}
+				},
+				scope: this
+			}]
 		});
 	},
 	
 	_buildForm: function() {
 		return new Ext.form.FormPanel({
 			layout: 'border',
-			height: 200,
+			height: 400,
+			padding: '5px 0 5px 0',
 			
 			defaults: {
 				border: false
@@ -97,30 +126,49 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 				padding: '5px',
 		        layout: 'form',
 		        region: 'center',
-		        items: [{
-		        	xtype: 'textfield',
-		        	name: 'name',
-		        	fieldLabel: _('Name'),
-		        	value: 'LLL'
-		        }, {
-		        	xtype: 'textfield',
-		        	name: 'description',
-		        	fieldLabel: _('Description')
-		        }, {
-		        	xtype: 'textfield',
-		        	name: 'cid',
-		        	fieldLabel: _('Cronk Id')
-		        }]
+		        height: 400,
+		        items: {
+		        	xtype: 'fieldset',
+		        	title: _('Meta'),
+		        	
+	 				defaults: {
+			        	width: 220,
+			        },
+			        
+			        items: [{
+			        	xtype: 'textfield',
+			        	name: 'name',
+			        	fieldLabel: _('Name'),
+			        	value: 'LLL'
+			        }, {
+			        	xtype: 'textfield',
+			        	name: 'description',
+			        	fieldLabel: _('Description')
+			        }, {
+			        	xtype: 'textfield',
+			        	name: 'cid',
+			        	fieldLabel: _('Cronk Id'),
+			        	readOnly: true
+			        }]
+		        }
 		    }, {
 		    	region: 'east',
 		    	width: 350,
 		    	padding: '5px',
 		    	layout: 'form',
 		    	
-		    	items: [
-		    		this._iconCombo(),
-		    		this.paramGrid
-		    	]
+		    	items: [{
+		    		xtype: 'fieldset',
+		    		title: _('Image'),
+		    		items: this._iconCombo()
+		    	}, {
+		    		xtype: 'fieldset',
+		    		title: _('Parameters'),
+					defaults: { border: false },
+		    		items: [{
+		    			items: this.paramGrid
+		    		}]
+		    	}]
 		    }]
 		});
 	},
@@ -138,7 +186,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			var form = this.formPanel.getForm();
 			
 			form.findField('name').setValue(this.cronkCmp.title);
-			form.findField('cid').setValue(this.cronk.cmpid + '-' + this.cronk.crname);
+			form.findField('cid').setValue(Ext.id(null, 'CUSTOM-' + this.cronk.crname));
 		}
 	}
 });
