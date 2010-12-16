@@ -1,7 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('Cronk', 'default');
-
 /**
  * BaseCronk
  * 
@@ -33,7 +30,7 @@ abstract class BaseCronk extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => true,
-             'autoincrement' => false,
+             'autoincrement' => true,
              ));
         $this->hasColumn('cronk_uid', 'string', 45, array(
              'type' => 'string',

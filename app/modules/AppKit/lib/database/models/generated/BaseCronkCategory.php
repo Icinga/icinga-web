@@ -28,7 +28,7 @@ abstract class BaseCronkCategory extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => true,
-             'autoincrement' => false,
+             'autoincrement' => true,
              ));
         $this->hasColumn('cc_name', 'string', 45, array(
              'type' => 'string',

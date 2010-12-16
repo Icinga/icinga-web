@@ -282,7 +282,7 @@ class NsmUser extends BaseNsmUser
 	 * @return boolean
 	 */
 	public function principalIsValid() {
-		return ($this->NsmPrincipal->principal_id > 0) ? true : false;
+		return ($this->NsmPrincipal->principal_id > 0 && $this->NsmPrincipal->principal_type == 'user') ? true : false;
 	}
 	
 	/**
@@ -321,7 +321,16 @@ class NsmUser extends BaseNsmUser
 		}
 		
 		return $this->principals;
-		
+	}
+	
+	public function getPrincipalsArray() {
+		static $out = array();
+		if (count($out) == 0) {
+			foreach ($this->getPrincipals() as $p) {
+				$out[] = $p->principal_id;
+			}
+		}
+		return $out;
 	}
 	
 	/**

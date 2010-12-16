@@ -3,7 +3,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 CREATE  TABLE IF NOT EXISTS `cronk_category_cronk` (
-  `ccc_cc_id` INT(11) NOT NULL ,
+  `ccc_cc_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `ccc_cronk_id` INT(11) NOT NULL ,
   PRIMARY KEY (`ccc_cc_id`, `ccc_cronk_id`) ,
   INDEX `fk_cronk_category_has_cronk_cronk1` (`ccc_cronk_id` ASC) ,
@@ -20,7 +20,7 @@ CREATE  TABLE IF NOT EXISTS `cronk_category_cronk` (
 ENGINE = InnoDB;
 
 CREATE  TABLE IF NOT EXISTS `cronk_category` (
-  `cc_id` INT(11) NOT NULL ,
+  `cc_id` INT(11) NOT NULL AUTO_INCREMENT,
   `cc_name` VARCHAR(45) NULL DEFAULT NULL ,
   `cc_visible` TINYINT(4) NULL DEFAULT 0 ,
   `cc_position` INT(11) NULL DEFAULT 0 ,

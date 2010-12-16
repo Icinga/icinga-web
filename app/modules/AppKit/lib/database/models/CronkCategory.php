@@ -12,7 +12,7 @@
  */
 class CronkCategory extends BaseCronkCategory {
 
-	public function public function setUp() {
+	public function setUp() {
 		parent::setUp();
 		
 		$this->hasMany('Cronk', array (
