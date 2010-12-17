@@ -24,7 +24,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction
 	}
 	
 	public function getCredentials() {
-		return array ('appkit.admin', 'appkit.admin.groups');
+		return array ('appkit.admin', 'appkit.admin.groups', 'icinga_user');
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {

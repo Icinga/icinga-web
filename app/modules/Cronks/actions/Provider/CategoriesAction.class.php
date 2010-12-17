@@ -38,7 +38,9 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 	
 	public function executeRead(AgaviParameterHolder $rd) {
 		
-		$categories = $this->cronks->getCategories();
+		$all = (bool)$rd->getParameter('all', false);
+		
+		$categories = $this->cronks->getCategories($all);
 		
 		$this->setAttributeByRef('categories', $categories);
 		
@@ -46,7 +48,32 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 	}
 	
 	public function executeWrite(AgaviParameterHolder $rd) {
-		return $this->getDefaultViewName();
+		
+		if ($rd->getParameter('xaction', false) == 'create') {
+			
+			$rows = json_decode($rd->getParameter('rows', array()));
+			
+			if (!is_array($rows)) {
+				$rows = array($rows);
+			}
+			
+			$c = array ();
+			
+			foreach ($rows as $category) {
+				try {
+					$this->cronks->createCategory((array)$category);
+					$c[] = (array)$category;
+				}
+				catch (Doctrine_Exception $e) {}
+			}
+			
+			$this->setAttributeByRef('categories', $c);
+			
+			return $this->getDefaultViewName();
+			
+		}
+		
+		return $this->executeRead($rd);
 	}
 	
 	public function isSecure() {

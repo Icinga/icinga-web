@@ -133,7 +133,14 @@ class AppKitArrayUtil {
 				}
 			}
 		}
-	} 
+	}
+	
+	public static function swapKeys(array &$array, array $map) {
+		foreach ($map as $src=>$target) {
+			$array[$target] = $array[$src];
+			unset($array[$src]);
+		}
+	}
 }
 
 class AppKitArrayUtilException extends AppKitException {}

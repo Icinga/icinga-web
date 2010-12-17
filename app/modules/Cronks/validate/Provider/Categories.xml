@@ -7,6 +7,30 @@
 	<ae:configuration>
 		
 		<validators>
+			
+			<validator class="number" name="all" required="false">
+				<argument>all</argument>
+				<ae:parameter name="min">0</ae:parameter>
+				<ae:parameter name="max">1</ae:parameter>
+				<errors>
+					<error>Argument all validation failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="xaction" required="false">
+				<argument>xaction</argument>
+				<errors>
+					<error>Argument xaction validation failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="rows" required="false">
+				<argument>rows</argument>
+				<errors>
+					<error>Argument rows validation failed!</error>
+				</errors>
+			</validator>
+			
 		</validators>
 		
 	</ae:configuration>

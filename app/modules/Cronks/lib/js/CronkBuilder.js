@@ -86,7 +86,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
         		text: _('Add'),
         		handler: function(b, e) {
         			Ext.MessageBox.prompt(_('Add'), _('Add new parameter to properties'), function(btn, text) {
-        				if (!Ext.isEmpty(text)) {
+	    				if (!Ext.isEmpty(text)) {
 							var rec = new Ext.grid.PropertyRecord({
 							    name: text,
 							    value: null
@@ -113,6 +113,29 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	},
 	
 	_buildForm: function() {
+		
+		this.categories = new Ext.data.JsonStore({
+			autoDestroy: true,
+			url: AppKit.c.path + '/cronks/provider/categories',
+			baseParams: { all : 1 },
+			writer: new Ext.data.JsonWriter({
+			    encode: true,
+			    writeAllFields: false
+			})
+		});
+		
+		this.categories.load();
+		
+		this.groups = new Ext.data.JsonStore({
+			autoDestroy: true,
+			url: AppKit.c.path + '/appkit/provider/groups',
+			baseParams: { all : 1 },
+			writer: new Ext.data.JsonWriter({
+			    encode: true,
+			    writeAllFields: false
+			})
+		});
+		
 		return new Ext.form.FormPanel({
 			layout: 'border',
 			height: 400,
@@ -127,7 +150,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        layout: 'form',
 		        region: 'center',
 		        height: 400,
-		        items: {
+		        items: [{
 		        	xtype: 'fieldset',
 		        	title: _('Meta'),
 		        	
@@ -149,8 +172,46 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			        	name: 'cid',
 			        	fieldLabel: _('Cronk Id'),
 			        	readOnly: true
+			        }, {
+			        	xtype: 'checkbox',
+			        	name: 'hide',
+			        	fieldLabel: _('Hidden')
 			        }]
-		        }
+		        }, {
+		        	xtype: 'fieldset',
+		        	title: _('Categories'),
+		        	height: 180,
+		        	items: [{
+		        		xtype: 'multiselect',
+		        		name: 'categories',
+		        		fieldLabel: _('Available'),
+		        		width: 200,
+		        		store: this.categories,
+		        		valueField: 'title',
+		        		displayField: 'title',
+		        		tbar: [{
+		        			text: _('Add'),
+		        			iconCls: 'icinga-icon-add',
+		        			handler: function(b, e) {
+		        				var c = this.categories;
+		        				
+		        				Ext.MessageBox.prompt(_('Add'), _('Add new category'), function(btn, text) {
+				    				if (!Ext.isEmpty(text)) {
+										var r = new c.recordType({
+											title: text,
+											visible: true,
+											position: 0,
+											active: false
+										});
+										
+										c.add(r);
+									}
+			        			}, this);
+		        			},
+		        			scope: this
+		        		}]
+		        	}]
+		        }]
 		    }, {
 		    	region: 'east',
 		    	width: 350,

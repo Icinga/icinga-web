@@ -21,6 +21,7 @@
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/Portlet.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/MultiSelect.js</ae:parameter>
 
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</ae:parameter>

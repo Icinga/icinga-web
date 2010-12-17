@@ -2,6 +2,12 @@
 
 class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
+	private static $cat_map = array (
+		'title'		=> 'cc_name',
+		'visible'	=> 'cc_visible',
+		'position'	=> 'cc_position'
+	); 
+	
 	/**
 	 * @var array
 	 */
@@ -60,18 +66,26 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $out;
 	}
 	
-	private function getDbCategories() {
+	private function getDbCategories($get_all=false) {
 		$collection = Doctrine_Query::create()
 		->select('cat.*')
-		->from('CronkCategory cat')
-		->innerJoin('cat.Cronk c')
-		->innerJoin('c.NsmPrincipal p')
-		->andWhereIn('p.principal_id', $this->principals)
-		->execute();
+		->from('CronkCategory cat');
+		
+		if ($get_all !== true) {
+			
+			$p = $this->principals;
+			$p[] = $this->user->user_id;
+			
+			$collection->innerJoin('cat.Cronk c')
+			->innerJoin('c.NsmPrincipal p')
+			->andWhereIn('p.principal_id', $u);
+		}
+		
+		$res = $collection->execute();
 		
 		$out = array ();
 		
-		foreach ($collection as $category) {
+		foreach ($res as $category) {
 			$out[$category->cc_name] = array (
 				'title'		=> $category->cc_name,
 				'visible'	=> (bool)$category->cc_visible,
@@ -83,9 +97,10 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $out;
 	}
 	
-	public function getCategories() {
+	public function getCategories($get_all=false) {
+		
 		$categories = $this->getXMLCategories();
-		$categories = (array)$this->getDbCategories() + $categories;
+		$categories = (array)$this->getDbCategories($get_all) + $categories;
 		
 		AppKitArrayUtil::subSort($categories, 'title');
 		AppKitArrayUtil::subSort($categories, 'position');		
@@ -97,6 +112,16 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		}
 		
 		return $categories;
+	}
+	
+	public function createCategory(array $cat) {
+		AppKitArrayUtil::swapKeys($cat, self::$cat_map);
+
+		$category = new CronkCategory();
+		$category->fromArray($cat);
+		$category->save();
+		
+		return $category;
 	}
 	
 	private function checkGroups($listofnames) {
