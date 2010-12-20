@@ -11,7 +11,8 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 	const PROPERTY_SORTINFO			= 'sortInfo';
 	const PROPERTY_START			= 'start';
 	const PROPERTY_LIMIT			= 'limit';
-
+	const PROPERTY_NOMETA			= 'no-metadata';
+	
 	protected $meta		= array ();
 	protected $rows		= array ();
 	protected $fields	= array ();
@@ -58,6 +59,28 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
 		$this->fields[$name] = $options;
 		return true;
+	}
+	
+	public function applyFieldsFromDoctrineRelation(Doctrine_Table $table) {
+		
+		foreach ($table->getColumns() as $column=>$meta) {
+			$options = array (
+				'sortType' => AppKitExtDataInterface::doctrineColumn2ExtSortType($meta['type'])
+			);
+
+			if (isset($meta['primary']) && $meta['primary'] == true) {
+				$this->setMeta(self::PROPERTY_ID, $column);
+			}
+			
+			$this->hasField($column, $options);
+		}
+		
+	}
+	
+	public function addDataCollection(Doctrine_Collection $collection) {
+		foreach ($collection as $record) {
+			$this->offsetSet(null, $record->toArray());
+		}
 	}
 
 	public function offsetSet($offset, $value) {
@@ -123,6 +146,12 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
 	protected function buildDoc() {
 		$doc =& $this->doc;
+		
+		if (isset($this->meta[self::PROPERTY_NOMETA]) && $this->meta[self::PROPERTY_NOMETA] == true) {
+			
+		}
+		else {
+		
 		$doc[self::PROPERTY_META] = array ();
 
 		$meta =& $doc[self::PROPERTY_META];
@@ -144,6 +173,8 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 			else {
 				$doc[$k] = $v;
 			}
+		}
+		
 		}
 
 		$doc[$this->meta[self::PROPERTY_ROOT]] = $this->rows;

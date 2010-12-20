@@ -17,9 +17,7 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView
 		$user = $this->getContext()->getUser();
 		
 		if ($user->hasCredential('appkit.admin') == false && $user->hasCredential('appkit.admin.groups') == false) {
-			$result = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc, true)->toArray();
-			
-			var_dump($result);
+			$result = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc, true);
 		}
 		else {
 			// return a single user when an id is provided
@@ -37,18 +35,35 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView
 				
 				$result = $group->toArray();
 				$result["users"] = $role_users;
+				
+				return json_encode(array("roles" => $result, "totalCount" => count($result), 'success' => true));
+				
 			} else {	//return list of all users if no id is provided
 	
 				if($start === false || $limit === false)
-					$groups = $roleadmin->getRoleCollection($disabled)->toArray();
+					$groups = $roleadmin->getRoleCollection($disabled);
 				else 
-					$groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc)->toArray();
+					$groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc);
 				$result = array();	
 				$result = $groups;
 			}
 		}
 		
-		return json_encode(array("roles" => $result, "totalCount" => count($result), 'success' => true));
+		$doc = new AppKitExtJsonDocument();
+		
+		// Disable metadata
+		$doc->setMeta(AppKitExtJsonDocument::PROPERTY_NOMETA, true);
+		
+		$doc->setMeta(AppKitExtJsonDocument::PROPERTY_ROOT, 'roles');
+		$doc->setMeta(AppKitExtJsonDocument::PROPERTY_TOTAL, 'totalCount');
+		
+		$doc->applyFieldsFromDoctrineRelation(Doctrine::getTable('NsmRole'));
+		
+		$doc->addDataCollection($result);
+		
+		$doc->setSuccess(true);
+		
+		return $doc->getJson();
 	}
 	
 	public function executeHtml(AgaviRequestDataHolder $rd)

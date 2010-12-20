@@ -136,6 +136,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			})
 		});
 		
+		this.groups.load();
+		
 		return new Ext.form.FormPanel({
 			layout: 'border',
 			height: 400,
@@ -184,7 +186,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        	items: [{
 		        		xtype: 'multiselect',
 		        		name: 'categories',
-		        		fieldLabel: _('Available'),
+		        		fieldLabel: _('All categories available'),
 		        		width: 200,
 		        		store: this.categories,
 		        		valueField: 'title',
@@ -210,6 +212,19 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        			},
 		        			scope: this
 		        		}]
+		        	}]
+		        }, {
+		        	xtype: 'fieldset',
+		        	title: _('Share your Cronk'),
+		        	items: [{
+		        		xtype: 'checkbox',
+		        		name: 'share',
+		        		fieldLabel: 'Make your cronk available for others'
+		        	}, {
+		        		xtype: 'multiselect',
+		        		name: 'principal',
+		        		fieldLabel: _('Principals'),
+		        		
 		        	}]
 		        }]
 		    }, {
