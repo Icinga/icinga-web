@@ -78,7 +78,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			
 			$collection->innerJoin('cat.Cronk c')
 			->innerJoin('c.NsmPrincipal p')
-			->andWhereIn('p.principal_id', $u);
+			->andWhereIn('p.principal_id', $this->user->NsmPrincipal->principal_id);
 		}
 		
 		$res = $collection->execute();

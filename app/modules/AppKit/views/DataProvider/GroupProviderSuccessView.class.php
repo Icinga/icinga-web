@@ -52,7 +52,9 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView
 		$doc = new AppKitExtJsonDocument();
 		
 		// Disable metadata
-		$doc->setMeta(AppKitExtJsonDocument::PROPERTY_NOMETA, true);
+		if (!$rd->getParameter('addMeta', false) == true) {
+			$doc->setMeta(AppKitExtJsonDocument::PROPERTY_NOMETA, true);
+		}
 		
 		$doc->setMeta(AppKitExtJsonDocument::PROPERTY_ROOT, 'roles');
 		$doc->setMeta(AppKitExtJsonDocument::PROPERTY_TOTAL, 'totalCount');

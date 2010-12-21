@@ -162,7 +162,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 							this.cronkBuilder.doLayout();
 						}
 						
-						this.cronkBuilder.setCurrentCronkId(tab.getId());
+						this.cronkBuilder.setCurrentCronkId(ctxItem.getId());
 						
 						this.cronkBuilder.show(this.getEl());
 					}

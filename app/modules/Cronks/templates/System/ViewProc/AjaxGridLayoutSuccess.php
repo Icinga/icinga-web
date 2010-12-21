@@ -2,11 +2,11 @@
 Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
 
 	var CE = this;
-
+	
 	var CreateGridProcessor = function (meta) {	
-
+		
 		// Add base url, so static js files can build routes, too
-		meta.baseURL = '<?php echo $_SERVER['SERVER_NAME'].$ro->gen("icinga.home") ?>';
+		meta.baseURL = AppKit.c.path;
 		
 		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
 		MetaGrid.setStateUid(CE.stateuid);	

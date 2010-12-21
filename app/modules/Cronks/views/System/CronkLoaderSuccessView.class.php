@@ -30,8 +30,9 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 						
 					}
 
-					$parameters = (array)$cronk['parameter'] + $parameters;
-
+					$parameters = (array)$cronk['parameter']
+					+ $parameters
+					+ array('module' => $cronk['module'], 'action' => $cronk['action']);
 				}
 				
 				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple', 'write');

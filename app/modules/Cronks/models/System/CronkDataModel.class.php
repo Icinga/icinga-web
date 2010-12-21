@@ -131,10 +131,10 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 				elseif ($f & self::F_HIDDEN &&	array_key_exists('hide', $i) && $i['hide'] == true) continue;
 				elseif ($f & self::F_GROUP && array_key_exists('groupsonly', $i) && $this->checkGroup($i['groupsonly']) !== true) continue;
 				
-				if ($f & self::F_SECURITY) {
-					unset($i['module']);
-					unset($i['action']);
-				}
+//				if ($f & self::F_SECURITY) {
+//					unset($i['module']);
+//					unset($i['action']);
+//				}
 				
 				if ($f & self::F_IMAGE) {
 					if (!array_key_exists('image', $i)) {
@@ -151,7 +151,8 @@ class Cronks_System_CronkDataModel extends CronksBaseModel {
 					}
 					
 					if (array_key_exists('ae:parameter', $i)) {
-						$i['parameter'] += (array)$i['ae:parameter'];
+						$i['parameter'] += (array)$i['ae:parameter']
+						+ array('module' => $i['module'], 'action' => $i['action']);
 						unset($i['ae:parameter']);
 					}
 				}
