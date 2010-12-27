@@ -190,6 +190,7 @@
 				<route name=".provider" pattern="^/provider" output_type="json">
 					<route name=".cronks" pattern="^/cronks" action="Provider.Cronks" />
 					<route name=".categories" pattern="^/categories" action="Provider.Categories" />
+					<route name=".combined" pattern="^/combined" action="Provider.Combined" />
 				</route>
 
 			</route>

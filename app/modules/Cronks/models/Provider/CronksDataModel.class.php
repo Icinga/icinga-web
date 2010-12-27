@@ -8,6 +8,22 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		'position'	=> 'cc_position'
 	); 
 	
+	private static $cronk_xml_fields = array (
+		'module', 'action', 'hide', 'description', 'name',
+		'categories', 'image', 'disabled', 'groupsonly', 'state',
+		'ae:parameter', 'disabled'
+	);
+
+	private static $cronk_xml_default = array (
+		'hide'		=> false,
+		'disabled'	=> false
+	);
+	
+	private static $cronk_xml_map = array (
+		'p'			=> 'ae:parameter',
+		'roles'		=> 'groupsonly',
+	);
+	
 	/**
 	 * @var array
 	 */
@@ -78,7 +94,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			
 			$collection->innerJoin('cat.Cronk c')
 			->innerJoin('c.NsmPrincipal p')
-			->andWhereIn('p.principal_id', $this->user->NsmPrincipal->principal_id);
+			->andWhereIn('p.principal_id', $this->principals);
 		}
 		
 		$res = $collection->execute();
@@ -173,6 +189,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				'image'			=> isset($cronk['image']) ? $cronk['image'] : null,
 				'disabled'		=> isset($cronk['disabled']) ? (bool)$cronk['disabled'] : false,
 				'groupsonly'	=> isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
+				'state'			=> isset($cronk['state']) ? $cronk['state'] : null,
 			);
 		}
 		
@@ -206,6 +223,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 					'image'			=> isset($cd['image']) ? $cd['image'] : null,
 					'disabled'		=> isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
 					'groupsonly'	=> isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
+					'state'			=> isset($cd['state']) ? $cd['state'] : null,
 			);
 		}
 		return $out;
@@ -214,7 +232,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	private function getDbCronks() {
 		
 		$p = $this->principals;
-		$p[] = $this->user->user_id;
 		
 		$cronks = Doctrine_Query::create()
 		->from('Cronk c')
@@ -241,6 +258,211 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		AppKitArrayUtil::subSort($cronks, 'name');
 		
 		return $cronks;
+	}
+	
+	/**
+	 * @param array $data
+	 * @return DOMDocument
+	 */
+	private function createCronkDom(array $data) {
+		$dom = new DOMDocument('1.0', 'UTF-8');
+		$dom->formatOutput = true;
+		$root = $dom->createElement('cronk');
+		
+		// Agavi config namespace
+		$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:ae', 'http://agavi.org/agavi/config/global/envelope/1.0');
+		
+		$dom->appendChild($root);
+		
+		$cronk = $dom->createElement('ae:parameter');
+		$cronk->setAttribute('name', $data['cid']);
+		
+		$root->appendChild($cronk);
+		
+		foreach ($data as $name => $value) {
+			
+			if (isset(self::$cronk_xml_map[$name])) {
+				$name = self::$cronk_xml_map[$name];
+			}
+			
+			if (in_array($name, self::$cronk_xml_fields)) {
+				
+				$ele = $dom->createElement('ae:parameter');
+				
+				if (is_array($value)) {
+					
+					foreach ($value as $sn=>$sv) {
+						$se = $dom->createElement('ae:parameter', $sv);
+						$se->setAttribute('name', $sn);
+						$ele->appendChild($se); 
+					}
+				}
+				else {
+					switch ($name) {
+						case 'state':
+							$cdata = $dom->createCDATASection($value);
+							$ele->appendChild($cdata);
+							unset($value);
+						break;
+						
+						case 'groupsonly':
+							
+							$roles = AppKitArrayUtil::trimSplit($value, ',');
+							
+							$arry = Doctrine_Query::create()
+							->select('r.role_name')
+							->from('NsmRole r INDEXBY r.role_name')
+							->andWhereIn('r.role_id', $roles)
+							->execute(null, Doctrine::HYDRATE_ARRAY);
+							
+							if (isset($arry) && is_array($arry)) {
+								$value = implode(',', array_keys($arry));
+							}
+						break;
+
+						case 'hide':
+							if ($value && $value == 'on') {
+								$value = 'true';
+							}
+							else {
+								$value = 'false';
+							}
+						break;
+						
+						case 'disabled':
+							$value = 'false';
+						break;
+						
+						case 'image':
+							$value = 'cronks.'. $value;
+						break;
+					}
+					
+					if (isset($value)) {
+						$text = $dom->createTextNode($value);
+						$ele->appendChild($text);
+					}
+				}
+				
+				if (isset($ele)) {
+					$ele->setAttribute('name', $name);
+					$cronk->appendChild($ele);
+				}
+			}
+			
+		}
+		
+		
+		return $dom;
+	}
+	
+	private function cronkBuildCategoriesFromString(Cronk $cronk, $categories) {
+		$carr = AppKitArrayUtil::trimSplit($categories, ',');
+		
+		$cronk->CronkCategoryCronk->delete();
+		
+		$ccollection = Doctrine_Query::create()
+		->from('CronkCategory cc')
+		->andWhereIn('cc.cc_name', $carr)
+		->execute();
+		
+		foreach ($ccollection as $category) {
+			$cronk->CronkCategory[] = $category;
+		}
+		
+		return $cronk;
+	}
+	
+	private function cronkBuildRoleDepencies(Cronk $cronk, $roles) {
+		
+		$parr = array($this->user->NsmPrincipal->principal_id);
+		
+		$rarr = AppKitArrayUtil::trimSplit($roles, ',');
+		
+		$cronk->CronkPrincipalCronk->delete();
+		
+		if (is_array($rarr)) {
+			$principals = Doctrine_Query::create()
+			->select('p.principal_id')
+			->from('NsmPrincipal p')
+			->innerJoin('p.NsmRole r')
+			->andWhereIn('r.role_id', $rarr)
+			->execute();
+			
+			foreach ($principals as $principal) {
+				$parr[] = $principal->principal_id;
+			}
+		}
+		
+		$principals = Doctrine_Query::create()
+		->select('p.principal_id')
+		->from('NsmPrincipal p')
+		->andWhereIn('p.principal_id', $parr)
+		->execute();
+		
+		foreach ($principals as $principal) {
+			$cronk->NsmPrincipal[] = $principal;
+		}
+		
+		return $cronk;
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param array $data
+	 * @param boolean $load
+	 * @throws AppKitModelException
+	 * @return Cronk
+	 */
+	public function createCronkRecord(array $data, $load = true) {
+		
+		if (!isset($data['cid'])) {
+			throw new AppKitModelException('cid is needed for record creation/loading (Cronk UID)');
+		}
+		
+		$data = self::$cronk_xml_default + $data;
+		
+		$dom = $this->createCronkDom($data);
+		
+		$record = null;
+		
+		if ($load == true) {
+			$record = Doctrine::getTable('Cronk')->findBy('cronk_uid', $data['cid'])->getFirst();
+		}
+		
+		if (!$record instanceof Cronk) {
+			$record = new Cronk();
+			$record->cronk_uid = $data['cid'];
+			$record->NsmUser = $this->user;
+		}
+		
+		$record->cronk_description = $data['description'];
+		$record->cronk_name = $data['name'];
+		$record->cronk_xml = $dom->saveXML(null);
+		
+		$this->cronkBuildCategoriesFromString($record, $data['categories']);
+		
+		$this->cronkBuildRoleDepencies($record, isset($data['roles']) ? $data['roles'] : null);
+		
+		return $record;
+	}
+	
+	public function combinedData() {
+		$categories = array ();
+		
+		$cronks = array ();
+		
+		foreach ($this->getCategories() as $category) {
+			$categories[] = $category;
+		}
+		
+		$data = array (
+			'categories'	=> $categories,
+			'cronks'		=> $cronks
+		);
+		
+		return $data;
 	}
 }
 

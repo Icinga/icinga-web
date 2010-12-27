@@ -11,6 +11,8 @@
  * @property string $cronk_xml
  * @property timestamp $cronk_created
  * @property string $cronk_modified
+ * @property integer $cronk_user_id
+ * @property Doctrine_Collection $NsmUser
  * @property Doctrine_Collection $CronkCategoryCronk
  * @property Doctrine_Collection $CronkPrincipalCronk
  * 
@@ -67,6 +69,14 @@ abstract class BaseCronk extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
+        $this->hasColumn('cronk_user_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => true,
+             'autoincrement' => false,
+             ));
         $this->hasColumn('cronk_created', 'timestamp', null, array(
              'type' => 'datetime',
              'fixed' => false,
@@ -96,5 +106,9 @@ abstract class BaseCronk extends Doctrine_Record
         $this->hasMany('CronkPrincipalCronk', array(
              'local' => 'cronk_id',
              'foreign' => 'cpc_cronk_id'));
+        
+        $this->hasOne('NsmUser', array(
+             'local' => 'cronk_user_id',
+             'foreign' => 'user_id'));
     }
 }

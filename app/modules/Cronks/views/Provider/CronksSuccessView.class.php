@@ -20,11 +20,12 @@ class Cronks_Provider_CronksSuccessView extends CronksBaseView {
 			$json->hasField('image');
 			$json->hasField('disabled');
 			$json->hasField('groupsonly');
+			$json->hasField('state');
 			$json->setData($this->getAttribute('cronks'));
 			return $json->getJson();
 		}
 		
-		return "LALAL";
+		return "ERROR";
 	}
 }
 

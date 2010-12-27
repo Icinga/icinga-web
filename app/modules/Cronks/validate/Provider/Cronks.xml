@@ -7,6 +7,104 @@
 	<ae:configuration>
 		
 		<validators>
+		
+			<validator class="string" name="xaction" required="false">
+				<argument>xaction</argument>
+				<errors>
+					<error>Validation of action failed</error>
+				</errors>
+			</validator>
+		
+		</validators>
+		
+		<validators method="write">
+		
+			<validator class="string" name="p" required="false">
+				<arguments base="p[]">
+					<argument />
+				</arguments>
+				<errors>
+					<error>Validation of parameters failed</error>
+				</errors>
+			</validator>
+		
+			<validator class="string" name="name" required="true">
+				<argument>name</argument>
+				<errors>
+					<error>Validation of name failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="description" required="true">
+				<argument>description</argument>
+				<errors>
+					<error>Validation of description failed</error>
+				</errors>
+			</validator>
+		
+			<validator class="string" name="cid" required="true">
+				<argument>cid</argument>
+				<errors>
+					<error>Validation of CronUID (cid) failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="categories" required="true">
+				<argument>categories</argument>
+				<errors>
+					<error>Validation of categories failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="roles" required="false">
+				<argument>roles</argument>
+				<errors>
+					<error>Validation of roles failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="share" required="false">
+				<argument>share</argument>
+				<errors>
+					<error>Validation of share argument failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="image" required="true">
+				<argument>image</argument>
+				<errors>
+					<error>Validation of image failed</error>
+				</errors>
+			</validator>
+		
+			<validator class="string" name="module" required="true">
+				<argument>module</argument>
+				<errors>
+					<error>Validation of module failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="action" required="true">
+				<argument>action</argument>
+				<errors>
+					<error>Validation of action failed</error>
+				</errors>
+			</validator>
+
+			<validator class="string" name="state" required="false">
+				<argument>state</argument>
+				<errors>
+					<error>Validation of json state argument failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="hide" required="false">
+				<argument>hide</argument>
+				<errors>
+					<error>Validation of hide argument failed</error>
+				</errors>
+			</validator>
+		
 		</validators>
 		
 	</ae:configuration>

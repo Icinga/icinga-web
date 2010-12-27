@@ -1,6 +1,6 @@
 <?php
 
-class Cronks_Provider_CronksAction extends CronksBaseAction {
+class Cronks_Provider_CombinedAction extends CronksBaseAction {
 	
 	/**
 	 * @var Cronks_Provider_CronksDataModel
@@ -36,38 +36,9 @@ class Cronks_Provider_CronksAction extends CronksBaseAction {
 		return 'Success';
 	}
 	
-	public function executeRead(AgaviParameterHolder $rd) {
-		$cronks = $this->cronks->getCronks();
-		
-		$this->setAttributeByRef('cronks', $cronks);
-		
+	public function executeRead(AgaviRequestDataHolder $rd) {
+		$this->setAttribute('data', $this->cronks->combinedData());
 		return $this->getDefaultViewName();
-	}
-	
-	public function executeWrite(AgaviParameterHolder $rd) {
-		
-		if ($rd->getParameter('xaction') == 'write') {
-			
-			$cronk_record = $this->cronks->createCronkRecord($rd->getParameters());
-			
-			$cronk_record->save();
-			
-		}
-		else {
-			$cronks = $this->cronks->getCronks();
-		
-			$this->setAttributeByRef('cronks', $cronks);
-		}
-		
-		return $this->getDefaultViewName();
-	}
-	
-	public function isSecure() {
-		return true;
-	}
-	
-	public function getCredentials() {
-		return array ('icinga.user');
 	}
 	
 	public function handleError(AgaviRequestDataHolder $rd) {

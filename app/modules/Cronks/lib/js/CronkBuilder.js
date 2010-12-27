@@ -53,7 +53,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.action = new Cronk.util.form.action.CronkBuilderCustom(this.formPanel.getForm(), {
 			params: { xaction: 'write' },
-			url: AppKit.c.path + '/cronks/provider/categories'
+			url: AppKit.c.path + '/cronks/provider/cronks'
 		}, this.paramGrid);
 		
 		// Lazy
@@ -273,7 +273,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        		fieldLabel: 'Make your cronk available for others',
 		        		msgTarget: 'side',
 		        		handler: function(c, checked) {
-		        			var field = this.formPanel.getForm().findField('role');
+		        			var field = this.formPanel.getForm().findField('roles');
 		        			
 		        			if (checked == true) {
 		        				field.enable();
@@ -285,7 +285,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        		scope: this
 		        	}, {
 		        		xtype: 'multiselect',
-		        		name: 'role',
+		        		name: 'roles',
 		        		width: 200,
 		        		fieldLabel: _('Principals'),
 		        		store: this.groups,
@@ -320,22 +320,27 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		    		xtype: 'fieldset',
 		    		title: _('Agavi setting'),
 		    		defaults: {
-			        	width: 220,
+			        	width: 250,
 			        	msgTarget: 'side'
 			        },
 		    		items: [{
-		    			xtype:'textfield',
+		    			xtype: 'textfield',
 		    			fieldLabel: _('Module'),
 		    			name: 'module',
 		    			value: 'Cronks',
 		    			allowBlank: false
 		    		}, {
-		    			xtype:'textfield',
+		    			xtype: 'textfield',
 		    			fieldLabel: _('Action'),
 		    			name: 'action',
 		    			allowBlank: false
+		    		}, {
+		    			xtype: 'textarea',
+		    			name: 'state',
+		    			fieldLabel: _('State information'),
+		    			allowBlank: true,
+		    			height: 100
 		    		}]
-		    		
 		    	}]
 		    }]
 		});
@@ -364,6 +369,13 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			form.findField('cid').setValue(Ext.id(null, 'CUSTOM-' + this.cronk.crname));
 			form.findField('module').setValue(this.cronk.params.module);
 			form.findField('action').setValue(this.cronk.params.action);
+			
+			var cronkFrame = this.cronkCmp.get(0);
+			
+			if (cronkFrame && cronkFrame.stateful && cronkFrame.getState()) {
+				form.findField('state').setValue(Ext.encode(cronkFrame.getState()));
+			}
+			
 		}
 	}
 });

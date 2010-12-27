@@ -36,10 +36,13 @@ CREATE  TABLE IF NOT EXISTS `cronk` (
   `cronk_name` VARCHAR(45) NULL DEFAULT NULL ,
   `cronk_description` VARCHAR(100) NULL DEFAULT NULL ,
   `cronk_xml` TEXT NULL DEFAULT NULL ,
+  `cronk_user_id` INT(11) NOT NULL,
   `cronk_created` DATETIME NULL DEFAULT NULL  AFTER `cronk_xml` , 
   `cronk_modified` VARCHAR(45) NULL DEFAULT NULL  AFTER `cronk_created`,
   PRIMARY KEY (`cronk_id`) ,
-  UNIQUE INDEX `cronk_uid_UNIQUE` (`cronk_uid` ASC) )
+  UNIQUE INDEX `cronk_uid_UNIQUE` (`cronk_uid` ASC),
+  KEY `fk_cronk_nsm_user1` (`cronk_user_id`),
+  CONSTRAINT `fk_cronk_nsm_user1` FOREIGN KEY (`cronk_user_id`) REFERENCES `nsm_user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION  )
 ENGINE = InnoDB;
 
 CREATE  TABLE IF NOT EXISTS `cronk_principal_cronk` (
