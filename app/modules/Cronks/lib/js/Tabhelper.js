@@ -81,7 +81,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 							// add them to the tabs
 							var a = tp.add({
 								title: data.dragData['name'],
-								crname: data.dragData.id,
+								crname: data.dragData.cronkid,
 								closable: true,
 								params: data.dragData.parameter,
 								xtype: 'cronk'

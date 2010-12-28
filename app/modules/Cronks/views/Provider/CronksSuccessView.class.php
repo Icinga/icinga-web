@@ -11,6 +11,7 @@ class Cronks_Provider_CronksSuccessView extends CronksBaseView {
 		
 		if ($this->hasAttribute('cronks')) {
 			$json = new AppKitExtJsonDocument();
+			$json->hasField('cronkid');
 			$json->hasField('module');
 			$json->hasField('action');
 			$json->hasField('hide');

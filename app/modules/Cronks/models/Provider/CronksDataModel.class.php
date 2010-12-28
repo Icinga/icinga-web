@@ -24,6 +24,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		'roles'		=> 'groupsonly',
 	);
 	
+	private $cronks = array();
+	
 	/**
 	 * @var array
 	 */
@@ -52,6 +54,16 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		if ($this->hasParameter('categories')) {
 			$this->setCategories($this->getParameter('categores'));
 		}
+		
+		$this->cronks = $this->getCronks(true);
+	}
+	
+	public function hasCronk($cronkid) {
+		return array_key_exists($cronkid, $this->cronks);
+	}
+	
+	public function getCronk($cronkid) {
+		return $this->cronks[$cronkid];
 	}
 	
 	public function setCategories($list) {
@@ -71,8 +83,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	private function getXMLCategories() {
 		$categories = AgaviConfig::get('modules.cronks.categories');
 		$out = array ();
-		foreach ($categories as $category) {
-			$out[ $category['title'] ] = array (
+		foreach ($categories as $cid=>$category) {
+			$out[ $cid ] = array (
+				'catid'		=> $cid,
 				'title'		=> $category['title'],
 				'visible'	=> isset($category['visible']) ? $category['visible'] : true,
 				'active'	=> isset($category['active']) ? $category['active'] : false,
@@ -103,6 +116,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		
 		foreach ($res as $category) {
 			$out[$category->cc_name] = array (
+				'catid'		=> $category->cc_name,
 				'title'		=> $category->cc_name,
 				'visible'	=> (bool)$category->cc_visible,
 				'active'	=> true,
@@ -157,7 +171,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return false;
 	}
 	
-	private function getXmlCronks() {
+	private function getXmlCronks($all=false) {
 		$cronks = AgaviConfig::get('modules.cronks.cronks');
 		
 		$out = array ();
@@ -170,7 +184,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			elseif (isset($cronk['disabled']) && $cronk['disabled'] == true) {
 				continue;
 			}
-			elseif (isset($cronk['hide']) && $cronk['hide'] == true) {
+			elseif ($all == false && isset($cronk['hide']) && $cronk['hide'] == true) {
 				continue;
 			}
 			elseif (!isset($cronk['action']) || !isset($cronk['module'])) {
@@ -180,6 +194,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			
 			
 			$out[$uid] = array (
+				'cronkid'		=> $uid,
 				'module'		=> $cronk['module'],
 				'action'		=> $cronk['action'],
 				'hide'			=> isset($cronk['hide']) ? (bool)$cronk['hide'] : false,
@@ -190,6 +205,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				'disabled'		=> isset($cronk['disabled']) ? (bool)$cronk['disabled'] : false,
 				'groupsonly'	=> isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
 				'state'			=> isset($cronk['state']) ? $cronk['state'] : null,
+				'ae:parameter'	=> isset($cronk['ae:parameter']) ? $cronk['ae:parameter'] : null,
 			);
 		}
 		
@@ -214,6 +230,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		$out = array ();
 		foreach ($c as $cuid=>$cd) {
 			$out[$cronk->cronk_uid] = array (
+					'cronkid'		=> $cronk->cronk_uid,
 					'module'		=> $cd['module'],
 					'action'		=> $cd['action'],
 					'hide'			=> isset($cd['hide']) ? (bool)$cd['hide'] : false,
@@ -224,6 +241,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 					'disabled'		=> isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
 					'groupsonly'	=> isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
 					'state'			=> isset($cd['state']) ? $cd['state'] : null,
+					'ae:parameter'	=> isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
 			);
 		}
 		return $out;
@@ -251,8 +269,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $out;
 	}
 	
-	public function getCronks() {
-		$cronks = $this->getXmlCronks();
+	public function getCronks($all=false) {
+		$cronks = $this->getXmlCronks($all);
 		$cronks = (array)$this->getDbCronks() + $cronks;
 		
 		AppKitArrayUtil::subSort($cronks, 'name');
@@ -449,17 +467,37 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	}
 	
 	public function combinedData() {
-		$categories = array ();
+		$cat_out = array ();
 		
-		$cronks = array ();
+		$cronks_out = array ();
 		
-		foreach ($this->getCategories() as $category) {
-			$categories[] = $category;
+		$categories = $this->getCategories();
+		
+		$cronks = $this->getCronks();
+		
+		foreach ($categories as $category_name=>$category) {
+			$tmp = array ();
+			
+			foreach ($cronks as $cronk) {
+				if (strpos($cronk['categories'], $category_name) !== false) {
+					$tmp[] = $cronk;
+				}
+				
+			}
+			
+			if (count($tmp)) {
+				$cronks_out[$category_name] = array (
+					'rows'		=> $tmp,
+					'success'	=> true,
+					'total'		=> count($tmp)
+				);
+				$cat_out[] = $category;
+			}
 		}
 		
 		$data = array (
-			'categories'	=> $categories,
-			'cronks'		=> $cronks
+			'categories'	=> $cat_out,
+			'cronks'		=> $cronks_out
 		);
 		
 		return $data;

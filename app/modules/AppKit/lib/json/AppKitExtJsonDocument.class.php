@@ -184,7 +184,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 		$this->setMeta(self::PROPERTY_ID, 'id');
 		$this->setMeta(self::PROPERTY_ROOT, 'rows');
 		$this->setMeta(self::PROPERTY_SUCCESS, 'success');
-		$this->setMeta(self::PROPERTY_TOTAL, 'results');
+		$this->setMeta(self::PROPERTY_TOTAL, 'total');
 		// $this->setMeta(self::PROPERTY_SORTINFO, new stdClass());
 		$this->setSuccess(false);
 		$this->setDefault(self::PROPERTY_TOTAL, 0);
