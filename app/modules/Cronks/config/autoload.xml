@@ -6,5 +6,7 @@
 		<autoload name="CronksBaseModel">%core.module_dir%/Cronks/lib/model/CronksBaseModel.class.php</autoload>
 		<autoload name="CronksBaseView">%core.module_dir%/Cronks/lib/view/CronksBaseView.class.php</autoload>
 		
+		<autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
+		
 	</ae:configuration>
 </ae:configurations>

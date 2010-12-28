@@ -61,6 +61,27 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 			
 		},
 		
+		applyParams : function(o) {
+			if (Ext.isObject(o)) {
+				Ext.each(Cronk.defaults.CONFIG_ITEMS, function(item, index, all) {
+					if (Ext.isDefined(o[item])) {
+						delete(o[item]);
+					}
+				});
+				
+				Ext.apply(this.params, o);
+			}
+		},
+		
+		applyToRegistry : function(o) {
+			if (Ext.isObject(o)) {
+				Ext.apply(r, o);
+				
+				// Keep data in sync
+				Ext.apply(this, r);
+			}
+		},
+		
 		getRegistryEntry : function() {
 			return r;
 		},
@@ -70,32 +91,54 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 		},
 		
 		getParameter : function(pname, vdefault) {
-			if (pname in this.params) {
+			if (this.hasParameter(pname)) {
 				return this.params[pname];
 			}
 			return vdefault;
-		}
+		},
 		
+		hasParameter : function(pname) {
+			return Ext.isDefined(this.params[pname]); 
+		}
+	
 	}
 	
 }());
 
 Cronk.util.initEnvironment = function(parentid, method, o) {
 	var
-	run=false,
-	extready=false;
+		run=false,
+		extready=false;
 	
 	o = (o || {});
+	
+	if (Ext.isObject(parentid)) {
+		Ext.apply(o, parentid);
+	}
 	
 	// Some options you can set withn a object as third parameter
 	if (!Ext.isEmpty(o.parentid)) parentid = o.parentid;
 	if (!Ext.isEmpty(o.run)) run = true;
 	if (!Ext.isEmpty(o.extready)) extready = true;
 	
+	if (!Ext.isEmpty(o.state) && Ext.isString(o.state)) {
+		var state = Ext.decode(o.state);
+		if (Ext.isObject(state)) {
+			delete(o.state);
+			o.state = state;
+		}
+		else {
+			o.state = undefined;
+		}
+	}
+	
 	var rc = function() {
 		if (parentid) {
 			if (Ext.isFunction(method)) {
 				var lscope = new Cronk.util.scriptInterface(parentid);
+				
+				lscope.applyToRegistry(o);
+				
 				if (run==true || (lscope.getParent() && lscope.getRegistryEntry())) {
 					method.call(lscope);
 					return true;

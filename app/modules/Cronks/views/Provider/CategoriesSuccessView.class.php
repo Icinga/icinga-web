@@ -12,11 +12,7 @@ class Cronks_Provider_CategoriesSuccessView extends CronksBaseView {
 			$categories = $this->getAttribute('categories', array());
 
 			$json = new AppKitExtJsonDocument();
-			$json->hasField('catid');
-			$json->hasField('title');
-			$json->hasField('visible');
-			$json->hasField('active');
-			$json->hasField('position');
+			$json->setAttribute(AppKitExtJsonDocument::ATTR_AUTODISCOVER);
 			$json->setData($categories);
 			$json->setSuccess(true);
 			

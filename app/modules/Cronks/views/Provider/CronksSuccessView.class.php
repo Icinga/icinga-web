@@ -11,18 +11,25 @@ class Cronks_Provider_CronksSuccessView extends CronksBaseView {
 		
 		if ($this->hasAttribute('cronks')) {
 			$json = new AppKitExtJsonDocument();
-			$json->hasField('cronkid');
-			$json->hasField('module');
-			$json->hasField('action');
-			$json->hasField('hide');
-			$json->hasField('description');
-			$json->hasField('name');
-			$json->hasField('categories');
-			$json->hasField('image');
-			$json->hasField('disabled');
-			$json->hasField('groupsonly');
-			$json->hasField('state');
+			
+			$json->setAttribute(AppKitExtJsonDocument::ATTR_AUTODISCOVER);
+			
+//			$json->hasField('cronkid');
+//			$json->hasField('module');
+//			$json->hasField('action');
+//			$json->hasField('hide');
+//			$json->hasField('description');
+//			$json->hasField('name');
+//			$json->hasField('categories');
+//			$json->hasField('image');
+//			$json->hasField('disabled');
+//			$json->hasField('groupsonly');
+//			$json->hasField('state');
+//			$json->hasField('ae:parameter');
+//			$json->hasField('system');
+			
 			$json->setData($this->getAttribute('cronks'));
+			
 			return $json->getJson();
 		}
 		

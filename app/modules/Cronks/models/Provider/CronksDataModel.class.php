@@ -89,7 +89,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				'title'		=> $category['title'],
 				'visible'	=> isset($category['visible']) ? $category['visible'] : true,
 				'active'	=> isset($category['active']) ? $category['active'] : false,
-				'position'	=> isset($category['position']) ? $category['position'] : 0
+				'position'	=> isset($category['position']) ? $category['position'] : 0,
+				'system'	=> true
 			);
 		}
 		return $out;
@@ -120,7 +121,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				'title'		=> $category->cc_name,
 				'visible'	=> (bool)$category->cc_visible,
 				'active'	=> true,
-				'position'	=> (int)$category->cc_position
+				'position'	=> (int)$category->cc_position,
+				'system'	=> false
 			);
 		}
 		
@@ -206,6 +208,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				'groupsonly'	=> isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
 				'state'			=> isset($cronk['state']) ? $cronk['state'] : null,
 				'ae:parameter'	=> isset($cronk['ae:parameter']) ? $cronk['ae:parameter'] : null,
+				'system'		=> true
 			);
 		}
 		
@@ -242,6 +245,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 					'groupsonly'	=> isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
 					'state'			=> isset($cd['state']) ? $cd['state'] : null,
 					'ae:parameter'	=> isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
+					'system'		=> false
 			);
 		}
 		return $out;

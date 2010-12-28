@@ -16,7 +16,7 @@ Cronk.util.CronkListingPanel = function(c) {
 	
 	this.template = new Ext.XTemplate(
 	    '<tpl for=".">',
-	    	'<div class="cronk-preview" id="{name}">',
+	    	'<div class="{statusclass}" id="{name}">',
         	'<div class="thumb"><img ext:qtip="{description}" src="{image}"></div>',
         	'<span class="x-editable">{name}</span>',
         	'</div>',
@@ -100,7 +100,7 @@ Cronk.util.CronkListingPanel = function(c) {
 			    fields: [
 			        'name', 'cronkid', 'description',
 					{
-						name:'parameter',
+						name:'ae:parameter',
 						convert:function(v,record) {
 							if(!Ext.isObject(v))
 								return v;
@@ -116,21 +116,28 @@ Cronk.util.CronkListingPanel = function(c) {
 						convert: function(v, record){
 							return AppKit.util.Dom.imageUrl(v);
 						}
+					},
+					{
+						name: 'statusclass',
+						convert: function(v, record) {
+							return 'cronk-preview';
+						}
 					}
 			    ]
 			});
 		}
 		
 		var store = CLP.stores[storeid];
-		
 		store.loadData(data);
 		
 	}
 	
 	var createView = function(storeid, title) {
 		
+		var store = CLP.getStore(storeid);
+		
 		CLP.add({
-			title: title,
+			title: String.format('{0} ({1})', title, store.getCount()),
 			autoScroll:true,
 			
 			/*
@@ -144,7 +151,7 @@ Cronk.util.CronkListingPanel = function(c) {
 			},
 			
 			items: new Ext.DataView({
-		        store: CLP.getStore(storeid),
+		        store: store,
 		        tpl: CLP.template,
 		        overClass:'x-view-over',
 		        itemSelector:'div.cronk-preview',
@@ -169,7 +176,6 @@ Cronk.util.CronkListingPanel = function(c) {
 	
 	CLP.on('afterrender', function() {
 		if (!CLP.applyActiveItem() && this.default_act >= 0) {
-			console.log(this.default_act);
 			CLP.setActiveItem(this.default_act);
 		}
 	});
@@ -246,7 +252,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 				title: record.data['name'],
 				crname: record.data.cronkid,
 				closable: true,
-				params: record.data.parameter
+				params: record.data['ae:parameter']
 			});
 			
 			tabPanel.setActiveTab(panel);
@@ -295,8 +301,6 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 	},
 	
 	reloadAll : function() {
-		
-		
 		this.removeAll();
 		
 		Ext.iterate(this.stores, function(storeid, store) {

@@ -264,8 +264,10 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		// Stateful handling
 		if (pub.stateuid) {
 			Ext.apply(grid_config, {
-				stateful: true,
+				stateful: Ext.isDefined(pub.initialstate) ? false : true,
+				
 				stateId: pub.stateuid,
+				
 				stateEvents: ['activate'],
 				
 				getState: function() {
@@ -313,7 +315,6 @@ Cronk.grid.MetaGridCreator = function(meta) {
 					return true;
 				}
 			});
-
 		}
 		
 		// Add the selection model:
@@ -395,6 +396,10 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		
 		applyEventsToGrid(pub.grid);
 		
+		if (Ext.isDefined(pub.initialstate)) {
+			pub.grid.applyState(pub.initialstate);
+		}
+		
 		return pub.grid;
 	};
 
@@ -430,6 +435,8 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		selection_model : undefined,
 		// Stateuid
 		stateuid : undefined,
+		// Initial state from cronk configuration
+		initialstate : undefined,
 		// Store is loaded
 		storeloaded : false,
 		// The grid object
@@ -454,6 +461,10 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		
 		setStateUid : function(stateuid) {
 			this.stateuid = stateuid;
+		},
+		
+		setInitialState : function(state) {
+			this.initialstate = state;
 		},
 		
 		setStoreUrl : function(url) {

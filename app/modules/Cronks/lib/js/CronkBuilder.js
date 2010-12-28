@@ -353,7 +353,6 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			this.cronkId = id;
 			this.cronk = cronk;
 			this.cronkCmp = Ext.getCmp(id);
-			
 			var params = Ext.apply({}, cronk.params);
 			
 			delete(params['action']);

@@ -21,6 +21,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 				$cronk = $model->getCronk($crname);
 				
 				if (array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
+					
 					foreach($cronk['ae:parameter'] as $key=>$param) {
 						if(is_array($param) || is_object($param)) {
 							$param = json_encode($param);
@@ -33,6 +34,10 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 					$parameters = (array)$cronk['ae:parameter']
 					+ $parameters
 					+ array('module' => $cronk['module'], 'action' => $cronk['action']);
+				}
+				
+				if (array_key_exists('state', $cronk) && isset($cronk['state'])) {
+					$parameters['state'] = $cronk['state'];
 				}
 				
 				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple', 'write');

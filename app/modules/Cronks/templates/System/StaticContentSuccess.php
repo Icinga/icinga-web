@@ -10,7 +10,8 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			var pub = {};
 			var panel = null;
 			var pc = null;
-			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template, 'render' => $render)); ?>"
+			var template_name = '<?php echo $template; ?>';
+			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template, 'render' => $render)); ?>";
 			
 			Ext.apply(pub, {
 				
@@ -18,6 +19,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 					if (!panel) {
 						
 						panel = new Ext.Panel({
+							
 							border: false,
 							autoScroll: true,
 							id: CE.cmpid,
@@ -27,7 +29,13 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 								url: url,
 								scripts: true,
 								method: 'get',
-								scope: this
+								
+								text: String.format(_('Loading TO "{0}" ...'), template_name),
+								
+								/*
+								 * @todo: make timeout configurable
+								 */
+								timeout: 600 // Very long for too much data
 							},
 							
 							// Building the toolbar
@@ -67,6 +75,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 						});
 						
 						CE.add(panel);
+						
 						CE.doLayout();
 						
 						return true;						
