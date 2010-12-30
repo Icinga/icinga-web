@@ -68,7 +68,9 @@ Cronk.util.CronkListingPanel = function(c) {
 							i++;
 							
 						}
-					}, this)
+					}, this);
+					
+					AppKit.util.Layout.doLayout(null, 200);
 				}
 			},
 			failure: function (r, o) {
@@ -413,8 +415,6 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		}, this);
 		
 		this.loadData(this.combinedProviderUrl);
-		
-		AppKit.util.Layout.doLayout(null, 200);
 	}
 });
  
