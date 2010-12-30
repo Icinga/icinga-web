@@ -161,6 +161,18 @@ div.cronk-data-view div.cronk-preview {
 	width: 70px;
 }
 
+div.cronk-data-view div.cronk-item-owner div.cronk-status-icon {
+	background: transparent url("../images/icons/user.png") top right no-repeat;
+}
+
+div.cronk-data-view div.cronk-item-system div.cronk-status-icon {
+	background: transparent url("../images/icons/shield.png") top right no-repeat;
+}
+
+div.cronk-data-view div.cronk-item-shared div.cronk-status-icon {
+	background: transparent url("../images/icons/application-share.png") top right no-repeat;
+}
+
 div.cronk-data-view div.cronk-preview:hover {
 	-o-transform: scale(1.1);
 	-moz-transform: scale(1.1);

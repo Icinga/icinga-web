@@ -66,7 +66,7 @@ Cronk.defaults.SETTINGS = {
 Cronk.defaults.CONFIG_ITEMS = [
 	'loaderUrl', 'params', 'crname',
 	'autoRefresh', 'cdata', 'cenv',
-	'autoLayout', 'cmpid', 'stateuid',
+	'autoLayout', 'cmpid', 'stateuid'
 ];
 
 Cronk.defaults.CONFIG_COPY = [

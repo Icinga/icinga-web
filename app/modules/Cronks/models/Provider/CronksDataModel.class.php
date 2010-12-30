@@ -208,7 +208,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				'groupsonly'	=> isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
 				'state'			=> isset($cronk['state']) ? $cronk['state'] : null,
 				'ae:parameter'	=> isset($cronk['ae:parameter']) ? $cronk['ae:parameter'] : null,
-				'system'		=> true
+				'system'		=> true,
+				'owner'			=> false
 			);
 		}
 		
@@ -245,7 +246,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 					'groupsonly'	=> isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
 					'state'			=> isset($cd['state']) ? $cd['state'] : null,
 					'ae:parameter'	=> isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
-					'system'		=> false
+					'system'		=> false,
+					'owner'			=> ($this->user->user_id == $cronk->cronk_user_id) ? true : false
 			);
 		}
 		return $out;
@@ -276,7 +278,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	public function getCronks($all=false) {
 		$cronks = $this->getXmlCronks($all);
 		$cronks = (array)$this->getDbCronks() + $cronks;
-		
+
 		AppKitArrayUtil::subSort($cronks, 'name');
 		
 		return $cronks;
@@ -483,7 +485,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			$tmp = array ();
 			
 			foreach ($cronks as $cronk) {
-				if (strpos($cronk['categories'], $category_name) !== false) {
+				if (strpos(strtolower($cronk['categories']), strtolower($category_name)) !== false) {
 					$tmp[] = $cronk;
 				}
 				

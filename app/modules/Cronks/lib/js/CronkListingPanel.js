@@ -17,8 +17,10 @@ Cronk.util.CronkListingPanel = function(c) {
 	this.template = new Ext.XTemplate(
 	    '<tpl for=".">',
 	    	'<div class="{statusclass}" id="{name}">',
+	    	'<div class="cronk-status-icon">',
         	'<div class="thumb"><img ext:qtip="{description}" src="{image}"></div>',
         	'<span class="x-editable">{name}</span>',
+        	'</div>',
         	'</div>',
 	    '</tpl>',
 	    '<div class="x-clear"></div>'
@@ -98,8 +100,15 @@ Cronk.util.CronkListingPanel = function(c) {
 			    root: 'rows',
 			    idProperty: 'cronkid',
 			    fields: [
-			        'name', 'cronkid', 'description',
-					{
+			        'name', 'cronkid', 'description', 
+			        'module', 'action', 'system', 'owner',
+			        'categories', 'groupsonly', 'state',
+			        {
+						name: 'image_id',
+						convert: function(v,record) {
+							return record.image;
+						}
+					}, {
 						name:'ae:parameter',
 						convert:function(v,record) {
 							if(!Ext.isObject(v))
@@ -110,17 +119,29 @@ Cronk.util.CronkListingPanel = function(c) {
 							}
 							return v;
 						}
-					},
-					{
+					}, {
 						name: 'image',
 						convert: function(v, record){
 							return AppKit.util.Dom.imageUrl(v);
 						}
-					},
-					{
+					}, {
 						name: 'statusclass',
 						convert: function(v, record) {
-							return 'cronk-preview';
+							var cls = 'cronk-preview';
+							
+							if (record.owner == true) {
+								cls += ' cronk-item-owner';
+							}
+							
+							if (record.system == true) {
+								cls += ' cronk-item-system';
+							}
+							
+							if (!record.system && !record.owner) {
+								cls += ' cronk-item-shared';
+							}
+							
+							return cls;
 						}
 					}
 			    ]
@@ -128,8 +149,8 @@ Cronk.util.CronkListingPanel = function(c) {
 		}
 		
 		var store = CLP.stores[storeid];
-		store.loadData(data);
 		
+		store.loadData(data);
 	}
 	
 	var createView = function(storeid, title) {
@@ -161,8 +182,9 @@ Cronk.util.CronkListingPanel = function(c) {
 		        
 		        // Create the drag zone
 		        listeners: {
-		        	render: CLP.initCronkDragZone,
-		        	dblclick: CLP.dblClickHandler
+		        	render: CLP.initCronkDragZone.createDelegate(CLP),
+		        	dblclick: CLP.dblClickHandler.createDelegate(CLP),
+		        	contextmenu: CLP.handleContextmenu.createDelegate(CLP)
 		        } 
 		    }),
 			border: false
@@ -178,6 +200,12 @@ Cronk.util.CronkListingPanel = function(c) {
 		if (!CLP.applyActiveItem() && this.default_act >= 0) {
 			CLP.setActiveItem(this.default_act);
 		}
+	});
+	
+	var cb = Cronk.util.CronkBuilder.getInstance();
+	
+	cb.addListener('writeSuccess', function() {
+		CLP.reloadAll();
 	});
 }
 
@@ -195,8 +223,6 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 	
 	defaults: { border: false },
 	
-	id: 'cronk-listing-panel',
-	stateId: 'cronk-listing-panel',
 	stateful: true,
 	
 	stateEvents: ['collapse'],
@@ -209,7 +235,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		handler: function(b, e) {
 			var p = Ext.getCmp('cronk-listing-panel');
 			p.reloadAll();
-		},
+		}
 	}],
 	
 	applyState: function(state) {
@@ -231,10 +257,6 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		}
 	},
 	
-	constructor: function(c) {
-		Cronk.util.CronkListingPanel.superclass.constructor.call(this, c);
-	},
-	
 	getStore : function(storeid) {
 		if (Ext.isDefined(this.stores[storeid])) {
 			return this.stores[storeid];
@@ -252,7 +274,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 				title: record.data['name'],
 				crname: record.data.cronkid,
 				closable: true,
-				params: record.data['ae:parameter']
+				params: Ext.apply({}, record.data['ae:parameter'], { module: record.data.module, action: record.data.action })
 			});
 			
 			tabPanel.setActiveTab(panel);
@@ -298,6 +320,88 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 			return true;
 		}
 		return false;
+	},
+	
+	getContextmenu : function() {
+		
+		var idPrefix = this.id + '-context-menu';
+		
+		if (!Ext.isDefined(this.contextmenu)) {
+			var ctxMenu = new Ext.menu.Menu({
+				
+				setItemData : function(view, index, node) {
+					this.ctxView = view;
+					this.ctxIndex = index;
+					this.ctxNode = node;
+				},
+				
+				getItemRecord : function() {
+					return this.ctxView.getStore().getAt(this.ctxIndex);
+				},
+				
+				getItemData : function() {
+					var r = this.getItemRecord();
+					if (Ext.isDefined(r.data)) {
+						return r.data;
+					}
+				},
+				
+				id: idPrefix,
+				
+				items: [{
+					id: idPrefix + '-button-edit',
+					text: _('Edit'),
+					iconCls: 'icinga-icon-pencil',
+					handler: function(b, e) {
+						var cb = Cronk.util.CronkBuilder.getInstance();
+						
+						if (Ext.isObject(cb)) {
+							cb.show(b.getEl());
+							cb.setCronkData(ctxMenu.getItemData());
+						}
+						else {
+							AppKit.notifyMessage(_('Error'), _('CronkBuilder has gone away!'));
+						}
+					}
+				}, {
+					id: idPrefix + '-button-delete',
+					text: _('Delete'),
+					iconCls: 'icinga-icon-bin',
+					handler: function(b, e) {
+						
+					}
+				}],
+				
+				listeners: {
+					show: function(ctxm) {
+						if (this.getItemData().system == true || this.getItemData().owner == false) {
+							this.items.get(idPrefix + '-button-edit').setDisabled(true);
+							this.items.get(idPrefix + '-button-delete').setDisabled(true);
+						}
+						else {
+							this.items.get(idPrefix + '-button-edit').setDisabled(false);
+							this.items.get(idPrefix + '-button-delete').setDisabled(false);
+						}
+						
+						this.items.get(idPrefix + '-button-delete').setDisabled(true);
+					}
+				}
+			});
+			
+			this.contextmenu = ctxMenu;
+		}
+		
+		return this.contextmenu;
+	},
+	
+	handleContextmenu : function(view, index, node, e) {
+		e.stopEvent();
+		
+		var ctxMenu = this.getContextmenu();
+		
+		ctxMenu.setItemData(view, index, node);
+		
+		ctxMenu.showAt(e.getXY());
 	},
 	
 	reloadAll : function() {

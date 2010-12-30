@@ -1,10 +1,6 @@
 
 Ext.ns('Cronk.util.form.action');
 
-Cronk.util.CronkBuilder = function(config) {
-	Cronk.util.CronkBuilder.superclass.constructor.call(this, config);
-}
-
 Cronk.util.form.action.CronkBuilderCustom = Ext.extend(Ext.form.Action.Submit, {
 	
 	constructor : function(form, options, propertyGrid) {
@@ -34,12 +30,23 @@ Cronk.util.form.action.CronkBuilderCustom = Ext.extend(Ext.form.Action.Submit, {
 	}
 });
 
+Cronk.util.CronkBuilder = function(config) {
+	Cronk.util.CronkBuilder.superclass.constructor.call(this, config);
+}
+
 Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	title: _('Save custom Cronk'),
 	modal: true,
-	height: 650,
 	closeAction: 'hide',
-	width: 800,
+	width: 880,
+	
+	constructor : function(config) {
+		this.addEvents({
+			writeSuccess : true
+		});
+		
+		Cronk.util.CronkBuilder.superclass.constructor.call(this, config);
+	},
 	
 	initComponent : function() {
 		
@@ -53,13 +60,28 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.action = new Cronk.util.form.action.CronkBuilderCustom(this.formPanel.getForm(), {
 			params: { xaction: 'write' },
-			url: AppKit.c.path + '/cronks/provider/cronks'
+			url: AppKit.c.path + '/cronks/provider/cronks',
+			success: function() {
+				this.hide();
+				this.fireEvent('writeSuccess');
+				AppKit.notifyMessage(_('CronkBuilder'), String.format(_('Cronk "{0}" successfully written to database!'), this.formPanel.getForm().findField('name').getValue()))
+			},
+			scope: this
 		}, this.paramGrid);
+
+	this.add(this.formPanel);
 		
-		// Lazy
-		this.addListener('beforerender', function(c) {
-			this.add(this.formPanel);
-		}, this, { single: true });
+		// Hide the fieldsets after rendering for
+		// calculating sizes right
+		this.addListener('beforeshow', function(c) {
+			var checkItem = Ext.getCmp('cb-checkitem-expert-mode');
+			if (checkItem.checked == true) {
+				this.showExpertMode(true);
+			}
+			else {
+				this.showExpertMode(false);
+			}
+		}, this);
 		
 	},
 	
@@ -80,6 +102,27 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			handler: function(b, e) {
 				CB.hide();
 			}
+		}];
+		
+		this.tbar = [{
+			text: _('Settings'),
+			iconCls: 'icinga-icon-wrench-screwdriver',
+			menu: new Ext.menu.Menu({
+				items: [{
+					id: 'cb-checkitem-expert-mode',
+					text: _('Expert mode'),
+					checked: false,
+					checkHandler: function(checkItem, checked) {
+						if (checked == true) {
+							this.showExpertMode(true);
+						}
+						else {
+							this.showExpertMode(false);
+						}
+					},
+					scope: CB
+				}]
+			})
 		}];
 	},
 	
@@ -122,39 +165,42 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	_paramGrid : function() {
 		return new Ext.grid.PropertyGrid({
 			id: 'cronkbuilder-param-properties',
-			height: 250,
+			height: 280,
 			viewConfig : {
             	forceFit: true,
             	scrollOffset: 2
         	},
-        	bbar: [{
-        		iconCls: 'icinga-icon-add',
-        		text: _('Add'),
-        		handler: function(b, e) {
-        			Ext.MessageBox.prompt(_('Add'), _('Add new parameter to properties'), function(btn, text) {
-	    				if (!Ext.isEmpty(text)) {
-							var rec = new Ext.grid.PropertyRecord({
-							    name: text,
-							    value: null
-							}, text);
-							this.paramGrid.store.addSorted(rec);
+        	bbar: {
+        		width: 200,
+        		items: [{
+	        		iconCls: 'icinga-icon-add',
+	        		text: _('Add'),
+	        		handler: function(b, e) {
+	        			Ext.MessageBox.prompt(_('Add'), _('Add new parameter to properties'), function(btn, text) {
+		    				if (!Ext.isEmpty(text)) {
+								var rec = new Ext.grid.PropertyRecord({
+								    name: text,
+								    value: null
+								}, text);
+								this.paramGrid.store.addSorted(rec);
+							}
+	        			}, this);
+	        		},
+	        		scope: this
+	        	}, {
+					iconCls: 'icinga-icon-delete',
+					text: _('Remove'),
+					handler: function(b, e) {
+						var sel = this.paramGrid.getSelectionModel().selection;
+						try {
+							this.paramGrid.removeProperty(sel.record.id);
+						} catch (e) {
+							AppKit.notifyMessage(_('Error'), _('No selection was made!'));
 						}
-        			}, this);
-        		},
-        		scope: this
-        	}, {
-				iconCls: 'icinga-icon-delete',
-				text: _('Remove'),
-				handler: function(b, e) {
-					var sel = this.paramGrid.getSelectionModel().selection;
-					try {
-						this.paramGrid.removeProperty(sel.record.id);
-					} catch (e) {
-						AppKit.notifyMessage(_('Error'), _('No selection was made!'));
-					}
-				},
-				scope: this
-			}]
+					},
+					scope: this
+				}]
+        	}
 		});
 	},
 	
@@ -222,12 +268,15 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			        	name: 'cid',
 			        	fieldLabel: _('Cronk Id'),
 			        	readOnly: true,
-			        	allowBlank: false,
-			        }, {
+			        	allowBlank: false
+			        }
+			        /*, {
 			        	xtype: 'checkbox',
 			        	name: 'hide',
 			        	fieldLabel: _('Hidden')
-			        }]
+			        }
+			        */
+			        ]
 		        }, {
 		        	xtype: 'fieldset',
 		        	title: _('Categories'),
@@ -235,9 +284,11 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        	items: [{
 		        		xtype: 'multiselect',
 		        		name: 'categories',
+		        		style: { overflow: 'hidden' },
 		        		fieldLabel: _('All categories available'),
 		        		allowBlank: false,
 		        		width: 200,
+		        		height: 100,
 		        		store: this.categories,
 		        		valueField: 'title',
 		        		displayField: 'title',
@@ -267,6 +318,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        }, {
 		        	xtype: 'fieldset',
 		        	title: _('Share your Cronk'),
+		        	labelWidth: 100,
+		        	height: 200,
 		        	items: [{
 		        		xtype: 'checkbox',
 		        		name: 'share',
@@ -286,7 +339,9 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        	}, {
 		        		xtype: 'multiselect',
 		        		name: 'roles',
+		        		style: { overflow: 'hidden' },
 		        		width: 200,
+		        		height: 100,
 		        		fieldLabel: _('Principals'),
 		        		store: this.groups,
 		        		valueField: 'role_id',
@@ -297,7 +352,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        }]
 		    }, {
 		    	region: 'east',
-		    	width: 390,
+		    	width: 420,
 		    	padding: '5px',
 		    	layout: 'form',
 		    	
@@ -309,6 +364,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		    	}, {
 		    		xtype: 'fieldset',
 		    		title: _('Parameters'),
+		    		hidden: false,
+		    		id: this.id + '-fieldset-parameters',
 					defaults: { 
 						border: false,
 						msgTarget: 'side'
@@ -319,6 +376,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		    	}, {
 		    		xtype: 'fieldset',
 		    		title: _('Agavi setting'),
+		    		hidden: false,
+		    		id: this.id + '-fieldset-agavi-settings',
 		    		defaults: {
 			        	width: 250,
 			        	msgTarget: 'side'
@@ -346,7 +405,27 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		});
 	},
 	
+	showExpertMode : function(show) {
+		
+		show = (show==undefined) ? true : show;
+		
+		var fParameters = Ext.getCmp(this.id + '-fieldset-parameters');
+		var fAgaviSettings = Ext.getCmp(this.id + '-fieldset-agavi-settings');
+		
+		if (show == true) {
+			fParameters.show();
+			fAgaviSettings.show();
+		}
+		else {
+			fParameters.hide();
+			fAgaviSettings.hide();
+		}
+	},
+	
 	setCurrentCronkId : function(id) {
+		
+		this.resetForm();
+		
 		cronk = Cronk.Registry.get(id);
 		
 		if (cronk) {
@@ -376,7 +455,48 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			}
 			
 		}
+	},
+	
+	setCronkData : function(o) {
+		
+		this.resetForm();
+		
+		var f = this.formPanel.getForm();
+		
+		f.findField('name').setValue(o['name']);
+		f.findField('description').setValue(o['description']);
+		f.findField('cid').setValue(o['cronkid']);
+		
+		f.findField('module').setValue(o['module']);
+		f.findField('action').setValue(o['action']);
+		f.findField('state').setValue(o['state']);
+		
+		f.findField('categories').setValue(o['categories']);
+		f.findField('image').setValue(o['image_id']);
+		
+		this.paramGrid.setSource(Ext.isObject(o['ae:parameter']) ? o['ae:parameter'] : {});
+		
+	},
+	
+	resetForm : function() {
+		var form = this.formPanel.getForm();
+		form.items.each(function(item, index, a) {
+			try {
+				item.setValue('');
+			}
+			catch (e) {}
+		});
+		this.paramGrid.setSource({});
 	}
+	
 });
+
+// For global singleton usage
+Cronk.util.CronkBuilder.getInstance = function() {
+	if (!Ext.isDefined(Cronk.util.CronkBuilder.INSTANCE)) {
+		Cronk.util.CronkBuilder.INSTANCE = new Cronk.util.CronkBuilder();
+	}
+	return Cronk.util.CronkBuilder.INSTANCE;
+}
 
 // ...

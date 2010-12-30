@@ -41,6 +41,7 @@
 .icinga-icon-lock { background-image: url(../images/icons/lock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock-open { background-image: url(../images/icons/lock_unlock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-wrench { background-image: url(../images/icons/wrench.png) !important; background-repeat: no-repeat; }
+.icinga-icon-wrench-screwdriver { background-image: url(../images/icons/wrench-screwdriver.png) !important; background-repeat: no-repeat; } 
 .icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-add { background-image: url(../images/icons/user--plus.gif) !important; background-repeat: no-repeat; }
 .icinga-icon-user-comment { background-image: url(../images/icons/user-pencil.png) !important; background-repeat: no-repeat; }
@@ -110,3 +111,4 @@
 .icinga-icon-zoom { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-application-task { background-image: url(../images/icons/application-task.png) !important; background-repeat: no-repeat; }
 .icinga-icon-close { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bin { background-image: url(../images/icons/bin.png) !important; background-repeat: no-repeat; }
