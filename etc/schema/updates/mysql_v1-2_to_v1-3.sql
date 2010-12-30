@@ -1,68 +1,44 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE  TABLE IF NOT EXISTS `cronk_category_cronk` (
-  `ccc_cc_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `ccc_cronk_id` INT(11) NOT NULL ,
-  PRIMARY KEY (`ccc_cc_id`, `ccc_cronk_id`) ,
-  INDEX `fk_cronk_category_has_cronk_cronk1` (`ccc_cronk_id` ASC) ,
-  CONSTRAINT `fk_cronk_category_has_cronk_cronk_category1`
-    FOREIGN KEY (`ccc_cc_id` )
-    REFERENCES `cronk_category` (`cc_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cronk_category_has_cronk_cronk1`
-    FOREIGN KEY (`ccc_cronk_id` )
-    REFERENCES `cronk` (`cronk_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `cronk` (
+  `cronk_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cronk_uid` varchar(45) DEFAULT NULL,
+  `cronk_name` varchar(45) DEFAULT NULL,
+  `cronk_description` varchar(100) DEFAULT NULL,
+  `cronk_xml` text,
+  `cronk_user_id` int(11) DEFAULT NULL,
+  `cronk_created` datetime NOT NULL,
+  `cronk_modified` datetime NOT NULL,
+  PRIMARY KEY (`cronk_id`),
+  UNIQUE KEY `cronk_uid_UNIQUE_idx` (`cronk_uid`),
+  KEY `cronk_user_id_idx` (`cronk_user_id`),
+  CONSTRAINT `cronk_cronk_user_id_nsm_user_user_id` FOREIGN KEY (`cronk_user_id`) REFERENCES `nsm_user` (`user_id`)
+) ENGINE=InnoDB;
 
-CREATE  TABLE IF NOT EXISTS `cronk_category` (
-  `cc_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `cc_name` VARCHAR(45) NULL DEFAULT NULL ,
-  `cc_visible` TINYINT(4) NULL DEFAULT 0 ,
-  `cc_position` INT(11) NULL DEFAULT 0 ,
-  `cc_created` DATETIME NULL DEFAULT NULL ,
-  `cc_modified` DATETIME NULL DEFAULT NULL ,
-  PRIMARY KEY (`cc_id`) ,
-  UNIQUE INDEX `cc_name_UNIQUE` (`cc_name` ASC) )
-ENGINE = InnoDB;
+CREATE TABLE `cronk_category` (
+  `cc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cc_name` varchar(45) DEFAULT NULL,
+  `cc_visible` tinyint(4) DEFAULT '0',
+  `cc_position` int(11) DEFAULT '0',
+  `cc_created` datetime NOT NULL,
+  `cc_modified` datetime NOT NULL,
+  PRIMARY KEY (`cc_id`)
+) ENGINE=InnoDB;
 
-CREATE  TABLE IF NOT EXISTS `cronk` (
-  `cronk_id` INT(11) NOT NULL ,
-  `cronk_uid` VARCHAR(45) NULL DEFAULT NULL ,
-  `cronk_name` VARCHAR(45) NULL DEFAULT NULL ,
-  `cronk_description` VARCHAR(100) NULL DEFAULT NULL ,
-  `cronk_xml` TEXT NULL DEFAULT NULL ,
-  `cronk_user_id` INT(11) NOT NULL,
-  `cronk_created` DATETIME NULL DEFAULT NULL  AFTER `cronk_xml` , 
-  `cronk_modified` VARCHAR(45) NULL DEFAULT NULL  AFTER `cronk_created`,
-  PRIMARY KEY (`cronk_id`) ,
-  UNIQUE INDEX `cronk_uid_UNIQUE` (`cronk_uid` ASC),
-  KEY `fk_cronk_nsm_user1` (`cronk_user_id`),
-  CONSTRAINT `fk_cronk_nsm_user1` FOREIGN KEY (`cronk_user_id`) REFERENCES `nsm_user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION  )
-ENGINE = InnoDB;
+CREATE TABLE `cronk_category_cronk` (
+  `ccc_cc_id` int(11) NOT NULL DEFAULT '0',
+  `ccc_cronk_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ccc_cc_id`,`ccc_cronk_id`),
+  KEY `cronk_category_cronk_ccc_cronk_id_cronk_cronk_id` (`ccc_cronk_id`),
+  CONSTRAINT `cronk_category_cronk_ccc_cc_id_cronk_category_cc_id` FOREIGN KEY (`ccc_cc_id`) REFERENCES `cronk_category` (`cc_id`),
+  CONSTRAINT `cronk_category_cronk_ccc_cronk_id_cronk_cronk_id` FOREIGN KEY (`ccc_cronk_id`) REFERENCES `cronk` (`cronk_id`)
+) ENGINE=InnoDB;
 
-CREATE  TABLE IF NOT EXISTS `cronk_principal_cronk` (
-  `cpc_principal_id` INT(11) NOT NULL ,
-  `cpc_cronk_id` INT(11) NOT NULL ,
-  PRIMARY KEY (`cpc_principal_id`, `cpc_cronk_id`) ,
-  INDEX `fk_nsm_principal_has_cronk_cronk1` (`cpc_cronk_id` ASC) ,
-  CONSTRAINT `fk_nsm_principal_has_cronk_nsm_principal1`
-    FOREIGN KEY (`cpc_principal_id` )
-    REFERENCES `nsm_principal` (`principal_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_nsm_principal_has_cronk_cronk1`
-    FOREIGN KEY (`cpc_cronk_id` )
-    REFERENCES `cronk` (`cronk_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+CREATE TABLE `cronk_principal_cronk` (
+  `cpc_principal_id` int(11) NOT NULL DEFAULT '0',
+  `cpc_cronk_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cpc_principal_id`,`cpc_cronk_id`),
+  KEY `cronk_principal_cronk_cpc_cronk_id_cronk_cronk_id` (`cpc_cronk_id`),
+  CONSTRAINT `ccnp` FOREIGN KEY (`cpc_principal_id`) REFERENCES `nsm_principal` (`principal_id`),
+  CONSTRAINT `cronk_principal_cronk_cpc_cronk_id_cronk_cronk_id` FOREIGN KEY (`cpc_cronk_id`) REFERENCES `cronk` (`cronk_id`)
+) ENGINE=InnoDB;
 

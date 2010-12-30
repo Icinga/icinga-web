@@ -14,6 +14,7 @@
 class Cronk extends BaseCronk {
 
 	public function setTableDefinition() {
+		
 		parent::setTableDefinition();
 		
 		$this->index('cronk_uid_UNIQUE', array (
@@ -22,7 +23,6 @@ class Cronk extends BaseCronk {
 			),
 			'type' => 'unique'
 		));
-		
 	}
 	
 	public function setUp() {

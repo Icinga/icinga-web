@@ -26,6 +26,7 @@ abstract class BaseCronk extends Doctrine_Record
     public function setTableDefinition()
     {
         $this->setTableName('cronk');
+        
         $this->hasColumn('cronk_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -74,7 +75,6 @@ abstract class BaseCronk extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('cronk_created', 'timestamp', null, array(
@@ -98,15 +98,14 @@ abstract class BaseCronk extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+        parent::setUp();        
         $this->hasMany('CronkCategoryCronk', array(
              'local' => 'cronk_id',
              'foreign' => 'ccc_cronk_id'));
 
         $this->hasMany('CronkPrincipalCronk', array(
              'local' => 'cronk_id',
-             'foreign' => 'cpc_cronk_id'));
-        
+             'foreign' => 'cpc_cronk_id'));        
         $this->hasOne('NsmUser', array(
              'local' => 'cronk_user_id',
              'foreign' => 'user_id'));
