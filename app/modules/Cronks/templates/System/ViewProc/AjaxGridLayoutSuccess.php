@@ -1,15 +1,21 @@
 <script type="text/javascript">
-Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
+Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 
 	var CE = this;
-
+	
 	var CreateGridProcessor = function (meta) {	
-
+		
 		// Add base url, so static js files can build routes, too
-		meta.baseURL = '<?php echo $_SERVER['SERVER_NAME'].$ro->gen("icinga.home") ?>';
+		meta.baseURL = AppKit.c.path;
 		
 		var MetaGrid = new Cronk.grid.MetaGridCreator(meta);
-		MetaGrid.setStateUid(CE.stateuid);	
+		
+		MetaGrid.setStateUid(CE.stateuid);
+		
+		if (Ext.isDefined(CE.state)) {
+			MetaGrid.setInitialState(CE.state);
+		}
+		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
 

@@ -88,6 +88,59 @@ class AppKitArrayUtil {
 		return preg_split('/\s*'. preg_quote($split_char). '\s*/', $string);
 	}
 	
+	public static function subSort(array &$arry, $field, $op='<') {
+		$cfn = create_function('$a, $b', 'return ($a[\''. $field. '\'] '. $op. '$b[\''. $field. '\']) ? -1 : 1;');
+		return uasort($arry, $cfn);
+	}
+	
+	private static function hasChildren (DOMElement &$element) {
+		$hasChildren = false;
+		if ($element->hasChildNodes()) {
+			foreach ($element->childNodes as $node) {
+				if ($node->nodeType == XML_ELEMENT_NODE) {
+					$hasChildren = true;
+					break;
+				}
+			}
+		}
+
+		return $hasChildren;
+	}
+	
+	public static function xml2Array(DOMNodeList $l, &$a) {
+		foreach ($l as $n) {
+			
+			
+			if ($n->nodeType == XML_ELEMENT_NODE) {
+				
+				$name = null;
+				if ($n->hasAttribute('name')) {
+					$name = $n->getAttribute('name');
+				}
+				elseif ($n->hasAttribute('id')) {
+					$name = $n->getAttribute('id');
+				}
+				else {
+					$name = $n->nodeName;
+				}
+				
+				if (self::hasChildren($n)) {
+					$a[$name] = array ();
+					self::xml2Array($n->childNodes, $a[$name]);
+				}
+				else {
+					$a[$name] = $n->textContent;
+				}
+			}
+		}
+	}
+	
+	public static function swapKeys(array &$array, array $map) {
+		foreach ($map as $src=>$target) {
+			$array[$target] = $array[$src];
+			unset($array[$src]);
+		}
+	}
 }
 
 class AppKitArrayUtilException extends AppKitException {}

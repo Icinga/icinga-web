@@ -39,7 +39,8 @@
 			<setting name="app_name">icinga</setting>
 
 			<setting name="available">true</setting>
-			<setting name="debug">false</setting>
+			
+			<setting name="debug">@flag_debug@</setting>
 
 			<setting name="use_database">true</setting>
 			<setting name="use_logging">true</setting>
@@ -75,9 +76,6 @@
 	</ae:configuration>
 
 	<ae:configuration environment="development.*">
-		<settings>
-			<setting name="debug">false</setting>
-		</settings>
 	</ae:configuration>
 
 	<ae:configuration environment="production.*">

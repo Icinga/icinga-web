@@ -81,7 +81,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 							// add them to the tabs
 							var a = tp.add({
 								title: data.dragData['name'],
-								crname: data.dragData.id,
+								crname: data.dragData.cronkid,
 								closable: true,
 								params: data.dragData.parameter,
 								xtype: 'cronk'
@@ -151,20 +151,17 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 					text: _("Refresh"),
 					tooltip: _("Reload the cronk (not the content)"), 
 					iconCls: 'icinga-icon-arrow-refresh',
-					handler: function() { ctxItem.getUpdater().refresh(); }
+					handler: function() {
+						ctxItem.getUpdater().refresh();
+					}
 				}, {
 					text: _("Save Cronk"),
 					tooltip: _("Save this view as new cronk"),
 					iconCls: 'icinga-icon-star-plus',
 					handler: function() {
-						if (Ext.isEmpty(this.cronkBuilder)) {
-							this.cronkBuilder = new Cronk.util.CronkBuilder();
-							this.cronkBuilder.doLayout();
-						}
-						
-						this.cronkBuilder.setCurrentCronkId(tab.getId());
-						
-						this.cronkBuilder.show(this.getEl());
+						var cb = Cronk.util.CronkBuilder.getInstance();
+						cb.show(this.getEl());
+						cb.setCurrentCronkId(ctxItem.getId());
 					}
 				}]
 			});

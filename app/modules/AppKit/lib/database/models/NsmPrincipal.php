@@ -14,4 +14,14 @@ class NsmPrincipal extends BaseNsmPrincipal
 {
 	const TYPE_ROLE = 'role';
 	const TYPE_USER = 'user';
+	
+	public function setUp() {
+		parent::setUp();
+		
+		$this->hasMany('Cronk', array (
+			'local'		=> 'cpc_principal_id',
+			'foreign'	=> 'cpc_cronk_id',
+			'refClass'	=> 'CronkPrincipalCronk'
+		));
+	}
 }

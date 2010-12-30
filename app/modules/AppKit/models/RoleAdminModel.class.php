@@ -44,21 +44,28 @@ class AppKit_RoleAdminModel extends AppKitBaseModel
 	 * @param numeric $limit
 	 * @param string $sort
 	 * @param boolean $asc
+	 * @param boolean $own
 	 * 
 	 * @return Doctrine_Collection
 	 * @author Jannis Mosshammer
 	 */
-	public function getRoleCollectionInRange($disabled=false,$start = 0,$limit=25,$sort= null,$asc = true) {
+	public function getRoleCollectionInRange($disabled=false,$start = 0,$limit=25,$sort= null,$asc = true,$own=false) {
 		$query = Doctrine_Query::create()
-		->from("NsmRole")
+		->select('r.*')
+		->from("NsmRole r")
 		->limit($limit)
 		->offset($start);
 		if($sort)
-			$query->orderBy($sort." ".($asc ? 'ASC' : 'DESC'));
+			$query->orderBy('r.' . $sort." ".($asc ? 'ASC' : 'DESC'));
 		
 		if ($disabled === false) {
-			$query->andWhere('role_disabled=?', array(0));
+			$query->andWhere('r.role_disabled=?', array(0));
 		}
+		
+		if ($own == true) {
+			$query->innerJoin('r.NsmUser u WITH user_id=?', $this->getContext()->getUser()->getNsmUser()->user_id);
+		}
+		
 		return $query->execute();
 	}	
 	

@@ -61,6 +61,9 @@ AC_DEFUN([ACICINGA_DEVEL_MODE], [
 	AC_MSG_CHECKING([for devel-mode])
 	AS_IF([ test "$devel_mode" == "yes" ], [
 		flag_caching="false"
-		AC_MSG_RESULT([YES (!!)]) 
+dnl		Setting this to true cause errors
+dnl		for parrallel requests
+		flag_debug="false"
+		AC_MSG_RESULT([YES ... debug=false, jscache=false (!!)]) 
 	], [ AC_MSG_RESULT([no (good)]) ])
 ])

@@ -26,6 +26,12 @@
 			<ae:parameter name="visible">true</ae:parameter>
 			<ae:parameter name="position">99</ae:parameter>
 		</ae:parameter>
+		
+		<ae:parameter name="my">
+			<ae:parameter name="title">My</ae:parameter>
+			<ae:parameter name="visible">true</ae:parameter>
+			<ae:parameter name="position">999</ae:parameter>
+		</ae:parameter>
 
 	</setting>
 
@@ -81,6 +87,7 @@
 				<ae:parameter name="name">Hostgroups</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>
 				<ae:parameter name="image">cronks.Dots</ae:parameter>
+				<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
 				</ae:parameter>

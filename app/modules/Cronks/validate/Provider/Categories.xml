@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Cronks/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+			
+			<validator class="number" name="all" required="false">
+				<argument>all</argument>
+				<ae:parameter name="min">0</ae:parameter>
+				<ae:parameter name="max">1</ae:parameter>
+				<errors>
+					<error>Argument all validation failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="xaction" required="false">
+				<argument>xaction</argument>
+				<errors>
+					<error>Argument xaction validation failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="rows" required="false">
+				<argument>rows</argument>
+				<errors>
+					<error>Argument rows validation failed!</error>
+				</errors>
+			</validator>
+			
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

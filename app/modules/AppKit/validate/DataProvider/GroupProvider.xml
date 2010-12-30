@@ -13,10 +13,14 @@
 					<error>Validation of 'userId' failed</error>
 				</errors>
 			</validator>
+			
 			<validator class="string" name="hideDisabled" required="false">
 				<argument>hideDisabled</argument>
 			</validator>
 			
+			<validator class="number" name="addMeta" required="false">
+				<argument>addMeta</argument>
+			</validator>
 			
 			<!--  Paging properties -->
 			<validator class="number" name="start" required="false">

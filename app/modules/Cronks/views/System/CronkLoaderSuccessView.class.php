@@ -11,7 +11,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 		
 		try {
 			
-			$model = $this->getContext()->getModel('System.CronkData', 'Cronks', array('filter' => 'exec'));
+			$model = $this->getContext()->getModel('Provider.CronksData', 'Cronks');
 			
 			$crname = $rd->getParameter('cronk'); 
 			
@@ -20,18 +20,24 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 			if ($model->hasCronk($crname)) {
 				$cronk = $model->getCronk($crname);
 				
-				if (array_key_exists('parameter', $cronk)) {
-					foreach($cronk['parameter'] as $key=>$param) {
+				if (array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
+					
+					foreach($cronk['ae:parameter'] as $key=>$param) {
 						if(is_array($param) || is_object($param)) {
 							$param = json_encode($param);
-							$cronk['parameter'][$key] = $param;
+							$cronk['ae:parameter'][$key] = $param;
 							$parameters[$key] = $param;
 						}
 						
 					}
 
-					$parameters = (array)$cronk['parameter'] + $parameters;
-
+					$parameters = (array)$cronk['ae:parameter']
+					+ $parameters
+					+ array('module' => $cronk['module'], 'action' => $cronk['action']);
+				}
+				
+				if (array_key_exists('state', $cronk) && isset($cronk['state'])) {
+					$parameters['state'] = $cronk['state'];
 				}
 				
 				return $this->createForwardContainer($cronk['module'], $cronk['action'], $parameters, 'simple', 'write');

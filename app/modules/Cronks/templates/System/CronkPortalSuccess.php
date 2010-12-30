@@ -86,6 +86,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 	        stateful: true,
 	        border: true,
 			stateId: 'west-frame',
+			
 			items: {
 				xtype: 'cronk',
 				crname: 'crlist',

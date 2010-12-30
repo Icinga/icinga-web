@@ -7,6 +7,7 @@ app/cache/content
 app/data/log/
 app/config/icinga.xml
 app/config/databases.xml
+app/config/settings.xml
 app/modules/Web/config/icinga-io.xml
 app/modules/AppKit/cache/Widgets/SquishLoader.xml
 bin/clearcache.sh
@@ -20,5 +21,6 @@ etc/tests/test.properties
 etc/apache2/icinga-web.conf
 pub/.htaccess
 pub/soap/.htaccess
+icinga-web.mwb.bak
 *~
 *.swp

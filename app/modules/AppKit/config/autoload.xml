@@ -64,6 +64,7 @@
 		<!-- JSON things -->
 		<autoload name="AppKitJsonResponse">%core.module_dir%/AppKit/lib/json/AppKitJsonResponse.class.php</autoload>
 		<autoload name="AppKitExtJsonDocument">%core.module_dir%/AppKit/lib/json/AppKitExtJsonDocument.class.php</autoload>
+		<autoload name="AppKitExtDataInterface">%core.module_dir%/AppKit/lib/json/AppKitExtDataInterface.class.php</autoload>
 
 		<autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
 		<autoload name="AppKitApacheLoggerFormat">%core.module_dir%/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php</autoload>
