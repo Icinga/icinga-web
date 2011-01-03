@@ -12,6 +12,8 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		
 	last_tab: null,
 	
+	sliding_tab: null,
+	
 	init: function(c) {
 		tp = c;
 		
@@ -155,14 +157,53 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 						ctxItem.getUpdater().refresh();
 					}
 				}, {
-					text: _("Save Cronk"),
-					tooltip: _("Save this view as new cronk"),
-					iconCls: 'icinga-icon-star-plus',
-					handler: function() {
-						var cb = Cronk.util.CronkBuilder.getInstance();
-						cb.show(this.getEl());
-						cb.setCurrentCronkId(ctxItem.getId());
-					}
+					text: _("Settings"),
+					menu: [{
+						text: _("Save Cronk"),
+						tooltip: _("Save this view as new cronk"),
+						iconCls: 'icinga-icon-star-plus',
+						handler: function() {
+							var cb = Cronk.util.CronkBuilder.getInstance();
+							cb.show(this.getEl());
+							cb.setCurrentCronkId(ctxItem.getId());
+						}
+					}, {
+						text: _("Tab slider"),
+						checked: false,
+						checkHandler: function(checkItem, checked) {
+							
+							var refresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
+							
+							if (checked == true) {
+								
+								if (Ext.isDefined(this.sliderTask)) {
+									AppKit.getTr().stop(this.sliderTask);
+								}
+								
+								this.sliding_tab = this.getTabIndex(ctxItem);
+								
+								this.sliderTask = {
+									run: function() {
+										this.sliding_tab++;		
+										if (this.sliding_tab >= tp.items.getCount()) {
+											this.sliding_tab = 0;
+										}
+										
+										tp.setActiveTab(this.sliding_tab);
+									},
+									interval: (refresh * 1000),
+									scope: this
+								}
+								
+								AppKit.getTr().start(this.sliderTask);
+							}
+							else {
+								AppKit.getTr().stop(this.sliderTask);
+							}
+							
+						},
+						scope: this
+					}]
 				}]
 			});
 		}
@@ -175,7 +216,18 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		this.contextmenu.showAt(e.getPoint());
 	},
 	
-	renameTab : function() {
+	getTabIndex: function(tab) {
+		var i = -1;
+		tp.items.each(function(item, index, a) {
+			i++;
+			if (item == tab) {
+				return false;
+			}
+		});
+		return i;
+	},
+	
+	enameTab : function() {
 		var msg = Ext.Msg.prompt(_("Enter title"), _("Change title for this tab"), function(btn, text) {
 			
 			if (btn == 'ok' && text) {
