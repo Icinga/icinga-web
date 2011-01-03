@@ -486,12 +486,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		
 		if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
 			Doctrine_Manager::getInstance()->getCurrentConnection()->beginTransaction();
-			
-			$cronk->CronkPrincipalCronk->delete();
 			$cronk->CronkCategoryCronk->delete();
-			$cronk->delete();
-			
+			$cronk->CronkPrincipalCronk->delete();
+			$cronk->save();
 			Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
+			
+			$cronk->delete();
 			
 			return true;
 		}
