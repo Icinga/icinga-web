@@ -99,6 +99,16 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 		
 		hasParameter : function(pname) {
 			return Ext.isDefined(this.params[pname]); 
+		},
+		
+		setStatefulObject : function(obj) {
+			this.getRegistryEntry().statefulObject = obj;
+		},
+		
+		getStatefulObject : function() {
+			if (Ext.isDefined(this.getRegistryEntry().statefulObject)) {
+				return this.getRegistryEntry().statefulObject;
+			}
 		}
 	
 	}
