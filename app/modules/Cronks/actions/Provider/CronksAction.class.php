@@ -53,6 +53,14 @@ class Cronks_Provider_CronksAction extends CronksBaseAction {
 			$cronk_record->save();
 			
 		}
+		elseif($rd->getParameter('xaction') == 'delete') {
+			try {
+				$this->cronks->deleteCronkRecord($rd->getParameter('cid'), $rd->getParameter('name'));
+			}
+			catch (Exception $e) {
+				$this->appendAttribute('errors', $e->getMessage());
+			}
+		}
 		else {
 			$cronks = $this->cronks->getCronks();
 		

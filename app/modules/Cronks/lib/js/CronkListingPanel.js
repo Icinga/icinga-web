@@ -348,6 +348,10 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 					}
 				},
 				
+				getListing : function() {
+					return this.listing
+				},
+				
 				id: idPrefix,
 				
 				items: [{
@@ -370,7 +374,35 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 					text: _('Delete'),
 					iconCls: 'icinga-icon-bin',
 					handler: function(b, e) {
-						
+						var item = ctxMenu.getItemData();
+						Ext.Msg.confirm(_('elete cronk'), String.format(_('Are you sure to delete {0}'), item['name']), function(btn) {
+							if (btn == 'yes') {
+								Ext.Ajax.request({
+									url: AppKit.c.path + '/cronks/provider/cronks',
+									params: {
+										xaction: 'delete',
+										cid: item.cronkid,
+										name: item.name,
+										categories: item.categories,
+										description: item.description,
+										image: item.image,
+										module: item.module,
+										action: item.action
+									},
+									success: function(response, options) {
+										AppKit.notifyMessage(_('Cronk deleted'), String.format(_('We have deleted your cronk "{0}"'), item['name']));
+										
+										ctxMenu.getListing().reloadAll();
+									},
+									failure: function(response, options) {
+										var o = Ext.decode(response.responseText);
+										if (Ext.isObject(o) && Ext.isDefined(o.errors)) {
+											AppKit.notifyMessage(_('Error'), String.format(_('Some error: {0}'), o.errors[0]));
+										}
+									}
+								});
+							}
+						});
 					}
 				}],
 				
@@ -384,8 +416,6 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 							this.items.get(idPrefix + '-button-edit').setDisabled(false);
 							this.items.get(idPrefix + '-button-delete').setDisabled(false);
 						}
-						
-						this.items.get(idPrefix + '-button-delete').setDisabled(true);
 					}
 				}
 			});
@@ -402,6 +432,8 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		var ctxMenu = this.getContextmenu();
 		
 		ctxMenu.setItemData(view, index, node);
+		
+		ctxMenu.listing = this;
 		
 		ctxMenu.showAt(e.getXY());
 	},

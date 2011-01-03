@@ -472,6 +472,34 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $record;
 	}
 	
+	public function deleteCronkRecord($cronkid, $cronkname, $own=true) {
+		$q = Doctrine_Query::create()
+		->select('c.*')
+		->from('Cronk c')
+		->where('c.cronk_uid=? and c.cronk_name=?', array($cronkid, $cronkname));
+		
+		if ($own==true) {
+			$q->andWhere('c.cronk_user_id=?', array($this->user->user_id));
+		}
+		
+		$cronk = $q->execute()->getFirst();
+		
+		if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
+			Doctrine_Manager::getInstance()->getCurrentConnection()->beginTransaction();
+			
+			$cronk->CronkPrincipalCronk->delete();
+			$cronk->CronkCategoryCronk->delete();
+			$cronk->delete();
+			
+			Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
+			
+			return true;
+		}
+		else {
+			throw new AppKitModelException('Cronk not found: '. $cronkid);
+		}
+	}
+	
 	public function combinedData() {
 		$cat_out = array ();
 		
