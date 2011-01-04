@@ -56,6 +56,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.paramGrid = this._paramGrid();
 		
+		this.iconCombo = this._iconCombo();
+		
 		this.formPanel = this._buildForm();
 		
 		this.action = new Cronk.util.form.action.CronkBuilderCustom(this.formPanel.getForm(), {
@@ -65,6 +67,11 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 				this.hide();
 				this.fireEvent('writeSuccess');
 				AppKit.notifyMessage(_('CronkBuilder'), String.format(_('Cronk "{0}" successfully written to database!'), this.formPanel.getForm().findField('name').getValue()))
+			},
+			failure: function(form, action) {
+				if (action.failureType == Ext.form.Action.CLIENT_INVALID) {
+					AppKit.notifyMessage(_('Error'), _('Please fill out required fields (marked with an exclamation mark)'));
+				}
 			},
 			scope: this
 		}, this.paramGrid);
@@ -143,7 +150,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	        '</div></tpl>'
 	    );
 	    
-	    return new Ext.form.ComboBox({
+	    var combo = new Ext.form.ComboBox({
     		xtype: 'combo',
     		store: iconStore,
     		displayField: 'name',
@@ -160,6 +167,12 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
     		name: 'image',
     		fieldLabel: _('Image')
     	});
+    	
+    	combo.on('select', function() {
+    		this.refreshIconPreview();
+    	}, this);
+    	
+    	return combo;
 	},
 	
 	_paramGrid : function() {
@@ -268,7 +281,10 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			        	name: 'cid',
 			        	fieldLabel: _('Cronk Id'),
 			        	readOnly: true,
-			        	allowBlank: false
+			        	allowBlank: false,
+			        	style: {
+			        		background: '#CF6'
+			        	}
 			        }
 			        /*, {
 			        	xtype: 'checkbox',
@@ -292,29 +308,30 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        		store: this.categories,
 		        		valueField: 'title',
 		        		displayField: 'title',
-		        		msgTarget: 'side',
-		        		tbar: [{
-		        			text: _('Add'),
-		        			iconCls: 'icinga-icon-add',
-		        			handler: function(b, e) {
-		        				var c = this.categories;
-		        				
-		        				Ext.MessageBox.prompt(_('Add'), _('Add new category'), function(btn, text) {
-				    				if (!Ext.isEmpty(text)) {
-										var r = new c.recordType({
-											title: text,
-											visible: true,
-											position: 0,
-											active: false
-										});
-										
-										c.add(r);
-									}
-			        			}, this);
-		        			},
-		        			scope: this
+		        		msgTarget: 'side'
+		        	}, {
+		        		xtype: 'button',
+	        			text: _('Add'),
+	        			iconCls: 'icinga-icon-add',
+	        			fieldLabel: _('New category'),
+	        			handler: function(b, e) {
+	        				var c = this.categories;
+	        				
+	        				Ext.MessageBox.prompt(_('Add'), _('Add new category'), function(btn, text) {
+			    				if (!Ext.isEmpty(text)) {
+									var r = new c.recordType({
+										title: text,
+										visible: true,
+										position: 0,
+										active: false
+									});
+									
+									c.add(r);
+								}
+		        			}, this);
+	        			},
+	        			scope: this
 		        		}]
-		        	}]
 		        }, {
 		        	xtype: 'fieldset',
 		        	title: _('Share your Cronk'),
@@ -360,7 +377,11 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		    		xtype: 'fieldset',
 		    		title: _('Image'),
 		    		defaults: { msgTarget: 'side' },
-		    		items: this._iconCombo()
+		    		items: [this.iconCombo, {
+		    			xtype: 'panel',
+		    			border: false,
+		    			id: this.id + '-panel-icon-preview'
+		    		}]
 		    	}, {
 		    		xtype: 'fieldset',
 		    		title: _('Parameters'),
@@ -411,14 +432,17 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		var fParameters = Ext.getCmp(this.id + '-fieldset-parameters');
 		var fAgaviSettings = Ext.getCmp(this.id + '-fieldset-agavi-settings');
+		var fCronkId = this.formPanel.getForm().findField('cid');
 		
 		if (show == true) {
 			fParameters.show();
 			fAgaviSettings.show();
+			fCronkId.show();
 		}
 		else {
 			fParameters.hide();
 			fAgaviSettings.hide();
+			fCronkId.hide();
 		}
 	},
 	
@@ -456,6 +480,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			if (cronkFrame && cronkFrame.stateful && cronkFrame.getState()) {
 				form.findField('state').setValue(Ext.encode(cronkFrame.getState()));
 			}
+			
+			this.refreshIconPreview();
 		}
 	},
 	
@@ -478,6 +504,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.paramGrid.setSource(Ext.isObject(o['ae:parameter']) ? o['ae:parameter'] : {});
 		
+		this.refreshIconPreview();
 	},
 	
 	resetForm : function() {
@@ -489,6 +516,26 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			catch (e) {}
 		});
 		this.paramGrid.setSource({});
+	},
+	
+	refreshIconPreview : function() {
+		
+		var panel = Ext.getCmp(this.id + '-panel-icon-preview');
+		
+		if (panel.getEl().last()) {
+			panel.getEl().last().remove();
+		}
+		
+		var index = this.iconCombo.getStore().findExact('short', this.iconCombo.getValue());
+		
+		if (index>=0) {
+			var record = this.iconCombo.getStore().getAt(index);
+			
+			panel.getEl().insertFirst({
+				tag: 'img',
+				src: record.data.web_path
+			});
+		}
 	}
 	
 });

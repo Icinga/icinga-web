@@ -158,6 +158,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 					}
 				}, {
 					text: _("Settings"),
+					iconCls: 'icinga-icon-cog',
 					menu: [{
 						text: _("Save Cronk"),
 						tooltip: _("Save this view as new cronk"),
