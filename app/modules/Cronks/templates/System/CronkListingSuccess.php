@@ -6,6 +6,10 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 		stateId: 'cronk-listing-panel'
 	});
 	
+	<?php if ($us->hasCredential('icinga.cronk.category.admin')) { ?>
+		panel.setCategoryAdmin(true);
+	<?php } ?>
+	
 	this.add(panel);
 	
 	this.doLayout.defer(500);

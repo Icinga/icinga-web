@@ -36,15 +36,20 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	 */
 	private $user = null;
 	
+	/**
+	 * @var AppKitSecurityUser
+	 */
+	private $agaviUser = null;
+	
 	private $categories = array();
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
 		parent::initialize($context, $parameters);
 		
-		$user = $this->getContext()->getUser();
+		$this->agaviUser = $this->getContext()->getUser();
 		
-		if ($user->isAuthenticated()===true) {
-			$this->user = $user->getNsmUser();
+		if ($this->agaviUser->isAuthenticated()===true) {
+			$this->user = $this->agaviUser->getNsmUser();
 			$this->setPrincipals($this->user->getPrincipalsArray());
 		}
 		else {
@@ -131,6 +136,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	
 	public function getCategories($get_all=false) {
 		
+		$show_invisible = false;
+		if ($get_all==true && $this->agaviUser->hasCredential('icinga.cronk.category.admin')) {
+			$show_invisible = true;
+		}
+		
 		$categories = $this->getXMLCategories();
 		$categories = (array)$this->getDbCategories($get_all) + $categories;
 		
@@ -138,7 +148,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		AppKitArrayUtil::subSort($categories, 'position');		
 		
 		foreach ($categories as $cid=>$category) {
-			if (!$category['visible']) {
+			if (!$category['visible'] && !$show_invisible) {
 				unset($categories[$cid]);
 			}
 		}
@@ -146,10 +156,22 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $categories;
 	}
 	
-	public function createCategory(array $cat) {
-		AppKitArrayUtil::swapKeys($cat, self::$cat_map);
-
-		$category = new CronkCategory();
+	public function createCategory(array $cat, $update=false) {
+		AppKitArrayUtil::swapKeys($cat, self::$cat_map, true);
+		
+		$category = null;
+		
+		if ($update==true && $this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_name'])) {
+			$category = Doctrine_Query::create()
+			->from('CronkCategory cc')
+			->andWhere('cc.cc_name=?', $cat['cc_name'])
+			->execute()->getFirst();
+		}
+		
+		if (!$category instanceof CronkCategory || !$category->cc_id > 0) {
+			$category = new CronkCategory();
+		}
+		
 		$category->fromArray($cat);
 		$category->save();
 		

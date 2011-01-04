@@ -49,7 +49,7 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 	
 	public function executeWrite(AgaviParameterHolder $rd) {
 		
-		if ($rd->getParameter('xaction', false) == 'create') {
+		if ($rd->getParameter('xaction', false) == 'create' || $rd->getParameter('xaction', false) == 'update') {
 			
 			$rows = json_decode($rd->getParameter('rows', array()));
 			
@@ -61,7 +61,7 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 			
 			foreach ($rows as $category) {
 				try {
-					$this->cronks->createCategory((array)$category);
+					$this->cronks->createCategory((array)$category, ($rd->getParameter('xaction', false) == 'update') ? true : false);
 					$c[] = (array)$category;
 				}
 				catch (Doctrine_Exception $e) {}

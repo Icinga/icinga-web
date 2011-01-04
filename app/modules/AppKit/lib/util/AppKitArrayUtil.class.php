@@ -135,10 +135,20 @@ class AppKitArrayUtil {
 		}
 	}
 	
-	public static function swapKeys(array &$array, array $map) {
+	public static function swapKeys(array &$array, array $map, $remove_unused=false) {
 		foreach ($map as $src=>$target) {
-			$array[$target] = $array[$src];
+			if (isset($array[$src])) {
+				$array[$target] = $array[$src];
+			}
+			else {
+				$array[$target] = null;
+			}
 			unset($array[$src]);
+		}
+		
+		if ($remove_unused) {
+			$sect = array_intersect_key($array, array_flip($map));
+			$array = $sect;
 		}
 	}
 }

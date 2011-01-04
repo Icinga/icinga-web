@@ -1,4 +1,189 @@
+Ext.ns('Cronks.util');
 
+Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
+	title: _('Category editor'),
+	
+	closeAction: 'hide',
+	height: 400,
+	resizable: false,
+	layout: 'fit',
+	
+	constructor : function(cfg) {
+		Cronks.util.CategoryEditor.superclass.constructor.call(this, cfg);
+	},
+	
+	initComponent : function() {
+		
+		Cronks.util.CategoryEditor.superclass.initComponent.call(this);
+		
+		this.grid = this.buildGrid();
+		
+		this.add(this.grid);
+		
+		this.on('beforeshow', function(w) {
+			w.grid.getStore().reload();
+		}, this);
+	},
+	
+	buildGrid : function() {
+		
+		var systemRenderer = function(value, o, record, rowIndex, colIndex, store) {
+			if (value == true) {
+				o.css = 'icinga-icon-shield';
+			}
+			else {
+				o.css = 'icinga-icon-user';
+			}
+			return '';
+		};
+		
+		var writer = new Ext.data.JsonWriter({
+			encode: true,
+			writeAllFields: true
+		});
+		
+		var editor = new Ext.form.TextField();
+		
+		var booleanEditor = new Ext.form.ComboBox({
+			typeAhead: true,
+			triggerAction: 'all',
+			lazyRender:true,
+			mode: 'local',
+			store: new Ext.data.ArrayStore({
+			    id: 0,
+			    fields: [
+			        'value',
+			        'label'
+			    ],
+			    data: [[false, _('No')], [true, _('Yes')]]
+			}),
+			valueField: 'value',
+			displayField: 'label'
+		});
+		
+		var grid = new Ext.grid.EditorGridPanel({
+			width: 500,
+			height: 400,
+			
+			selModel: new Ext.grid.RowSelectionModel({
+				singleSelect: true
+			}),
+			
+			store: new Ext.data.JsonStore({
+				url: AppKit.c.path + '/cronks/provider/categories',
+				writer: writer,
+				autoLoad: true,
+				autoSave: false,
+				paramsAsHash: true,
+				baseParams: {
+					all: 1
+				}
+			}),
+			
+			colModel: new Ext.grid.ColumnModel({
+				defaults: {
+					width: 120,
+					sortable: false
+				},
+				
+				columns: [{
+					id: 'id',
+					header: 'Id',
+					dataIndex: 'id'
+				}, {
+					header: _('CatId'),
+					dataIndex: 'catid'
+				}, {
+					header: _('Title'),
+					dataIndex: 'title',
+					editor: editor
+				}, {
+					header: _('Is system'),
+					dataIndex: 'system',
+					fixed: true,
+					width: 16,
+					renderer: systemRenderer
+				}, {
+					header: _('Visible'),
+					dataIndex: 'visible',
+					editor: booleanEditor
+					
+				}, {
+					header: _('Position'),
+					dataIndex: 'position',
+					editor: editor
+				}]
+			}),
+			
+			viewConfig: {
+				forceFit: true
+			},
+			
+			bbar: [{
+				iconCls: 'icinga-icon-cross',
+				handler: function(b, e) {
+					this.hide();
+				},
+				scope: this
+			}, '-', {
+				text: _('Reload'),
+				iconCls: 'icinga-icon-database-refresh',
+				handler: function(b, e) {
+					this.grid.getStore().reload();
+				},
+				scope: this
+			}, '-', {
+				text: _('Add'),
+				iconCls: 'icinga-icon-add',
+				handler: function(b, e) {
+					
+					Ext.Msg.prompt('New category', 'Please enter category title:', function(btn, text){
+						if (btn == 'ok'){
+							var record = new this.grid.store.recordType({
+								id: this.grid.store.getCount()+1,
+								catid: String(text),
+								title: String(text),
+								system: false,
+								position: 0
+							});
+							
+							this.grid.store.addSorted(record);
+						}
+					}, this);
+
+				},
+				scope: this
+			}, {
+				text: _('Delete'),
+				iconCls: 'icinga-icon-delete',
+				handler: function(b, e) {
+					var record = this.grid.getSelectionModel().getSelected();
+			        if (!record) {
+			            return false;
+			        }
+			        this.grid.store.remove(record);
+				},
+				scope: this
+			}, '-', {
+				text: _('Save'),
+				iconCls: 'icinga-icon-accept',
+				handler: function(b, e) {
+					this.grid.store.save();
+				},
+				scope: this
+			}]
+		});
+		
+		grid.on('beforeedit', function(e) {
+			if (e.record.data.system == true) {
+				AppKit.notifyMessage(_('Error'), _('System categories are not editable!'));
+				return false;
+			}
+		}, this);
+		
+		return grid;
+	}
+});
 
 Cronk.util.CronkListingPanel = function(c) {
 	
@@ -257,6 +442,47 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		if (typeof(i) !== "undefined" && i>=0) {
 			return { active_tab: i }
 		}
+	},
+	
+	setCategoryAdmin: function(grant) {
+		
+		if (grant == true) {
+			this.isCategoryAdmin = true;
+		}
+		else {
+			this.isCategoryAdmin = false;
+		}
+		
+		if (this.isCategoryAdmin == true) {
+			this.getTopToolbar().add({
+				text: _('Categories'),
+				iconCls: 'icinga-icon-category',
+				handler: function(b, e) {
+					this.showCategoryEditor(b.getEl());
+				},
+				scope: this
+			})
+		}
+	},
+	
+	showCategoryEditor: function(where) {
+		if (this.isCategoryAdmin !== true) {
+			return false;
+		}
+		
+		if (!Ext.isDefined(this.categoryEditor)) {
+			this.categoryEditor = new Cronks.util.CategoryEditor({
+				id: this.id + '-category-editor'
+			});
+		}
+		
+		if (this.categoryEditor.isVisible()) {
+			this.categoryEditor.hide(where);
+		}
+		else {
+			this.categoryEditor.show(where);
+		}
+		
 	},
 	
 	getStore : function(storeid) {
