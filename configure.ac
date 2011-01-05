@@ -296,4 +296,15 @@ AC_OUTPUT
 
 ACICINGA_CLEANUP_APICONFIG([$api_type], [app/modules/Web/config/icinga-io.xml])
 
+echo ""
+echo "icinga-web successfully configured!"
+echo ""
+echo "Please proceed with make to install your icinga-web instance:"
+echo ""
+echo " * make               Some general hints about make targets"
+echo " * make install       Install a new instance of icinga-web"
+echo " * make upgrade       Upgrades an existing installation:"
+echo "                      keep site config files untouched!"
+echo ""
+
 # [EOF]
