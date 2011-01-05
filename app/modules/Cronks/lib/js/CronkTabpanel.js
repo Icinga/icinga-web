@@ -18,6 +18,21 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 		
 	},
 	
+	getTabIndex: function(tab) {
+		var i = -1;
+		this.items.each(function(item, index, a) {
+			i++;
+			if (item == tab) {
+				return false;
+			}
+		});
+		return i;
+	},
+	
+	getActiveTabIndex: function() {
+		return this.getTabIndex(this.getActiveTab());
+	},
+	
 	getState: function() {
 		
 		var cout = {};
@@ -62,6 +77,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 				
 		return true;
 	},
+	
 	listeners: {
 		tabchange: function(tab) {
 			var aTab = tab.getActiveTab();

@@ -209,7 +209,7 @@ div.cronk-data-view .x-view-selected .thumb{
 
 /* div.x-portlet div.x-panel-body { */
 #west-frame .x-panel-body-noborder {
-	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom right;
+	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom left;
 }
 
 #center-frame .x-panel-body-noborder {

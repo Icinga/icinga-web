@@ -44,7 +44,8 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		return Cronk.factory({
 			title: _("Welcome"),
 			crname: ( AppKit.getPrefVal('org.icinga.cronk.default') || 'portalHello' ),
-			closable: true
+			closable: true,
+			iconCls: 'icinga-cronk-icon-start'
 		});
 	},
 	
@@ -168,42 +169,6 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 							cb.show(this.getEl());
 							cb.setCurrentCronkId(ctxItem.getId());
 						}
-					}, {
-						text: _("Tab slider"),
-						checked: false,
-						checkHandler: function(checkItem, checked) {
-							
-							var refresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
-							
-							if (checked == true) {
-								
-								if (Ext.isDefined(this.sliderTask)) {
-									AppKit.getTr().stop(this.sliderTask);
-								}
-								
-								this.sliding_tab = this.getTabIndex(ctxItem);
-								
-								this.sliderTask = {
-									run: function() {
-										this.sliding_tab++;		
-										if (this.sliding_tab >= tp.items.getCount()) {
-											this.sliding_tab = 0;
-										}
-										
-										tp.setActiveTab(this.sliding_tab);
-									},
-									interval: (refresh * 1000),
-									scope: this
-								}
-								
-								AppKit.getTr().start(this.sliderTask);
-							}
-							else {
-								AppKit.getTr().stop(this.sliderTask);
-							}
-							
-						},
-						scope: this
 					}]
 				}]
 			});
@@ -215,17 +180,6 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		this.contextmenu.items.get(myp.id + '-close-others').setDisabled(!tab.closable);
 		this.contextmenu.items.get(myp.id + '-rename').setDisabled(!tab.closable);
 		this.contextmenu.showAt(e.getPoint());
-	},
-	
-	getTabIndex: function(tab) {
-		var i = -1;
-		tp.items.each(function(item, index, a) {
-			i++;
-			if (item == tab) {
-				return false;
-			}
-		});
-		return i;
 	},
 	
 	enameTab : function() {

@@ -81,7 +81,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 	        split: true,
 	        minSize: 200,
 	        maxSize: 400,
-	        width: 200,
+	        width: 280,
 	        collapsible: true,
 	        stateful: true,
 	        border: true,

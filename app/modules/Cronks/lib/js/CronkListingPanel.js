@@ -439,6 +439,47 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 			var p = Ext.getCmp('cronk-listing-panel');
 			p.reloadAll();
 		}
+	}, {
+		text: _('Settings'),
+		iconCls: 'icinga-icon-cog',
+		menu: [{
+			text: _("Tab slider"),
+			checked: false,
+			checkHandler: function(checkItem, checked) {
+				
+				var refresh = AppKit.getPrefVal('org.icinga.tabslider.changeTime') || 60;
+				
+				var tp = Ext.getCmp('cronk-tabs');
+				
+				if (checked == true) {
+					if (Ext.isDefined(this.sliderTask)) {
+						AppKit.getTr().stop(this.sliderTask);
+					}
+					
+					this.sliding_tab = tp.getActiveTabIndex();
+					
+					this.sliderTask = {
+						run: function() {
+							this.sliding_tab++;		
+							if (this.sliding_tab >= tp.items.getCount()) {
+								this.sliding_tab = 0;
+							}
+							
+							tp.setActiveTab(this.sliding_tab);
+						},
+						interval: (refresh * 1000),
+						scope: this
+					}
+					
+					AppKit.getTr().start(this.sliderTask);
+				}
+				else {
+					AppKit.getTr().stop(this.sliderTask);
+				}
+				
+			},
+			scope: this
+		}]	
 	}],
 	
 	applyState: function(state) {
@@ -470,7 +511,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		}
 		
 		if (this.isCategoryAdmin == true) {
-			this.getTopToolbar().add({
+			this.getTopToolbar().insert(1, {
 				text: _('Categories'),
 				iconCls: 'icinga-icon-category',
 				handler: function(b, e) {
