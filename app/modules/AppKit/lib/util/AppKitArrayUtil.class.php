@@ -129,7 +129,12 @@ class AppKitArrayUtil {
 					self::xml2Array($n->childNodes, $a[$name]);
 				}
 				else {
-					$a[$name] = $n->textContent;
+					$c = $n->textContent;
+					
+					if ($c=='false') $c=false;
+					elseif ($c=='true') $c=true;
+					
+					$a[$name] = $c;
 				}
 			}
 		}

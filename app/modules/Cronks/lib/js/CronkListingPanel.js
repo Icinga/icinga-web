@@ -39,6 +39,7 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 		
 		var writer = new Ext.data.JsonWriter({
 			encode: true,
+			encodeDelete: true,
 			writeAllFields: true
 		});
 		
@@ -55,14 +56,14 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 			        'value',
 			        'label'
 			    ],
-			    data: [[false, _('No')], [true, _('Yes')]]
+			    data: [[false, 'false'], [true, 'true']]
 			}),
 			valueField: 'value',
 			displayField: 'label'
 		});
 		
-		var grid = new Ext.grid.EditorGridPanel({
-			width: 500,
+		var grid = new (Ext.extend(Ext.grid.EditorGridPanel, {
+			width: 540,
 			height: 400,
 			
 			selModel: new Ext.grid.RowSelectionModel({
@@ -73,45 +74,57 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				url: AppKit.c.path + '/cronks/provider/categories',
 				writer: writer,
 				autoLoad: true,
-				autoSave: false,
+				autoSave: true,
 				paramsAsHash: true,
 				baseParams: {
-					all: 1
+					all: 1,
+					invisible: 1
+				},
+				listeners: {
+					write: function(store, action, result, transaction, record) {
+						store.reload();
+					}
 				}
 			}),
 			
 			colModel: new Ext.grid.ColumnModel({
 				defaults: {
-					width: 120,
 					sortable: false
 				},
 				
 				columns: [{
-					id: 'id',
-					header: 'Id',
-					dataIndex: 'id'
-				}, {
 					header: _('CatId'),
-					dataIndex: 'catid'
+					dataIndex: 'catid',
+					width: 100,
+					fixed: true
 				}, {
 					header: _('Title'),
 					dataIndex: 'title',
 					editor: editor
 				}, {
-					header: _('Is system'),
+					header: "",
 					dataIndex: 'system',
-					fixed: true,
 					width: 16,
-					renderer: systemRenderer
+					renderer: systemRenderer,
+					fixed: true
 				}, {
 					header: _('Visible'),
 					dataIndex: 'visible',
-					editor: booleanEditor
+					editor: booleanEditor,
+					width: 80,
+					fixed: true
 					
 				}, {
 					header: _('Position'),
 					dataIndex: 'position',
-					editor: editor
+					editor: editor,
+					width: 80,
+					fixed: true
+				}, {
+					header: _('Cronks'),
+					dataIndex: 'count_cronks',
+					width: 60,
+					fixed: true
 				}]
 			}),
 			
@@ -120,12 +133,6 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 			},
 			
 			bbar: [{
-				iconCls: 'icinga-icon-cross',
-				handler: function(b, e) {
-					this.hide();
-				},
-				scope: this
-			}, '-', {
 				text: _('Reload'),
 				iconCls: 'icinga-icon-database-refresh',
 				handler: function(b, e) {
@@ -137,14 +144,15 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				iconCls: 'icinga-icon-add',
 				handler: function(b, e) {
 					
-					Ext.Msg.prompt('New category', 'Please enter category title:', function(btn, text){
+					Ext.Msg.prompt('New category', 'Please enter CatId:', function(btn, text){
 						if (btn == 'ok'){
 							var record = new this.grid.store.recordType({
 								id: this.grid.store.getCount()+1,
-								catid: String(text),
+								catid: String(text).toLowerCase(),
 								title: String(text),
 								system: false,
-								position: 0
+								position: 0,
+								visible: true
 							});
 							
 							this.grid.store.addSorted(record);
@@ -158,21 +166,29 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				iconCls: 'icinga-icon-delete',
 				handler: function(b, e) {
 					var record = this.grid.getSelectionModel().getSelected();
+					
 			        if (!record) {
 			            return false;
 			        }
+			        
+			        if (record.data.system == true) {
+			        	AppKit.notifyMessage(_('Error'), _('You can not delete system categories'));
+			        	return false;
+			        }
+			        
 			        this.grid.store.remove(record);
 				},
 				scope: this
 			}, '-', {
-				text: _('Save'),
+				text: _('OK'),
 				iconCls: 'icinga-icon-accept',
 				handler: function(b, e) {
 					this.grid.store.save();
+					this.hide();
 				},
 				scope: this
 			}]
-		});
+		}));
 		
 		grid.on('beforeedit', function(e) {
 			if (e.record.data.system == true) {

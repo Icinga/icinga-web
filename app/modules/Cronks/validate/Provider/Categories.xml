@@ -16,6 +16,15 @@
 					<error>Argument all validation failed!</error>
 				</errors>
 			</validator>
+
+			<validator class="number" name="invisible" required="false">
+				<argument>invisible</argument>
+				<ae:parameter name="min">0</ae:parameter>
+				<ae:parameter name="max">1</ae:parameter>
+				<errors>
+					<error>Argument invisible validation failed!</error>
+				</errors>
+			</validator>
 			
 			<validator class="string" name="xaction" required="false">
 				<argument>xaction</argument>

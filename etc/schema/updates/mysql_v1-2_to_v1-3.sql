@@ -1,4 +1,3 @@
-
 CREATE TABLE `cronk` (
   `cronk_id` int(11) NOT NULL AUTO_INCREMENT,
   `cronk_uid` varchar(45) DEFAULT NULL,
@@ -16,12 +15,14 @@ CREATE TABLE `cronk` (
 
 CREATE TABLE `cronk_category` (
   `cc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cc_uid` varchar(45) NOT NULL,
   `cc_name` varchar(45) DEFAULT NULL,
   `cc_visible` tinyint(4) DEFAULT '0',
   `cc_position` int(11) DEFAULT '0',
   `cc_created` datetime NOT NULL,
   `cc_modified` datetime NOT NULL,
-  PRIMARY KEY (`cc_id`)
+  PRIMARY KEY (`cc_id`),
+  UNIQUE KEY `cc_uid_UNIQUE_idx` (`cc_uid`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `cronk_category_cronk` (
@@ -44,6 +45,6 @@ CREATE TABLE `cronk_principal_cronk` (
 
 -- Adding new credential and add them to appkit_admin
 
-INSERT INTO nsm_target (`target_id`, `target_name`, `target_description`, `target_type`) VALUES ('15', 'icinga.cronk.category.admin', 'Enables category admin features', 'credential');
+INSERT INTO nsm_target (`target_id`, `target_name`, `target_description`, `target_type`) VALUES ('15', 'icinga.cronk.category.admin', 'Enables category admin feature', 'credential');
 
 INSERT INTO nsm_principal_target (`pt_id`, `pt_principal_id`, `pt_target_id`) VALUES ('8', '3', '15');

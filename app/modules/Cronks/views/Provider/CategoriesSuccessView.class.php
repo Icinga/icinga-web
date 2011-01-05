@@ -13,6 +13,7 @@ class Cronks_Provider_CategoriesSuccessView extends CronksBaseView {
 
 			$json = new AppKitExtJsonDocument();
 			$json->setAttribute(AppKitExtJsonDocument::ATTR_AUTODISCOVER);
+			$json->setMeta(AppKitExtJsonDocument::PROPERTY_ID, 'catid');
 			$json->setData($categories);
 			$json->setSuccess(true);
 			

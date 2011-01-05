@@ -12,6 +12,18 @@
  */
 class CronkCategory extends BaseCronkCategory {
 
+	public function setTableDefinition() {
+		
+		parent::setTableDefinition();
+		
+		$this->index('cc_uid_UNIQUE', array (
+			'fields' => array (
+				'cc_uid'
+			),
+			'type' => 'unique'
+		));
+	}
+	
 	public function setUp() {
 		parent::setUp();
 		

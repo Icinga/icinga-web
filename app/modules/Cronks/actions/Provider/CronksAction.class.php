@@ -50,8 +50,7 @@ class Cronks_Provider_CronksAction extends CronksBaseAction {
 			
 			$cronk_record = $this->cronks->createCronkRecord($rd->getParameters());
 			
-			$cronk_record->save();
-			
+			$cronk_record->save();			
 		}
 		elseif($rd->getParameter('xaction') == 'delete') {
 			try {

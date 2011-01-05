@@ -76,7 +76,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			scope: this
 		}, this.paramGrid);
 
-	this.add(this.formPanel);
+		this.add(this.formPanel);
 		
 		// Hide the fieldsets after rendering for
 		// calculating sizes right
@@ -89,6 +89,10 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 				this.showExpertMode(false);
 			}
 		}, this);
+		
+//		this.addListener('beforehide', function(c) {
+//			
+//		}, this);
 		
 	},
 	
@@ -306,7 +310,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        		width: 200,
 		        		height: 100,
 		        		store: this.categories,
-		        		valueField: 'title',
+		        		valueField: 'catid',
 		        		displayField: 'title',
 		        		msgTarget: 'side'
 		        	}, {
@@ -321,6 +325,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			    				if (!Ext.isEmpty(text)) {
 									var r = new c.recordType({
 										title: text,
+										catid: text,
 										visible: true,
 										position: 0,
 										active: false
@@ -482,6 +487,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			}
 			
 			this.refreshIconPreview();
+			
+			this.categories.reload();
 		}
 	},
 	
@@ -489,22 +496,27 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.resetForm();
 		
-		var f = this.formPanel.getForm();
+		// Event driven because of hidden categories after edit
+		this.categories.on('load', function() {
+			var f = this.formPanel.getForm();
+			
+			f.findField('name').setValue(o['name']);
+			f.findField('description').setValue(o['description']);
+			f.findField('cid').setValue(o['cronkid']);
+			
+			f.findField('module').setValue(o['module']);
+			f.findField('action').setValue(o['action']);
+			f.findField('state').setValue(o['state']);
+			
+			f.findField('categories').setValue(o['categories']);
+			f.findField('image').setValue(o['image_id']);
+			
+			this.paramGrid.setSource(Ext.isObject(o['ae:parameter']) ? o['ae:parameter'] : {});
+			
+			this.refreshIconPreview();
+		}, this, { single: true });
 		
-		f.findField('name').setValue(o['name']);
-		f.findField('description').setValue(o['description']);
-		f.findField('cid').setValue(o['cronkid']);
-		
-		f.findField('module').setValue(o['module']);
-		f.findField('action').setValue(o['action']);
-		f.findField('state').setValue(o['state']);
-		
-		f.findField('categories').setValue(o['categories']);
-		f.findField('image').setValue(o['image_id']);
-		
-		this.paramGrid.setSource(Ext.isObject(o['ae:parameter']) ? o['ae:parameter'] : {});
-		
-		this.refreshIconPreview();
+		this.categories.reload();
 	},
 	
 	resetForm : function() {
@@ -515,6 +527,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			}
 			catch (e) {}
 		});
+		
 		this.paramGrid.setSource({});
 	},
 	

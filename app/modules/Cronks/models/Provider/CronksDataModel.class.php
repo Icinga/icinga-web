@@ -3,6 +3,7 @@
 class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
 	private static $cat_map = array (
+		'catid'		=> 'cc_uid',
 		'title'		=> 'cc_name',
 		'visible'	=> 'cc_visible',
 		'position'	=> 'cc_position'
@@ -121,8 +122,8 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		$out = array ();
 		
 		foreach ($res as $category) {
-			$out[$category->cc_name] = array (
-				'catid'		=> $category->cc_name,
+			$out[$category->cc_uid] = array (
+				'catid'		=> $category->cc_uid,
 				'title'		=> $category->cc_name,
 				'visible'	=> (bool)$category->cc_visible,
 				'active'	=> true,
@@ -134,13 +135,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $out;
 	}
 	
-	public function getCategories($get_all=false) {
+	public function getCategories($get_all=false, $show_invisible=false) {
 		
-		$show_invisible = false;
-		if ($get_all==true && $this->agaviUser->hasCredential('icinga.cronk.category.admin')) {
-			$show_invisible = true;
+		if ($show_invisible == true && !$this->agaviUser->hasCredential('icinga.cronk.category.admin')) {
+			$show_invisible = false;
 		}
 		
+		$cronks = $this->getCronks(true);
 		$categories = $this->getXMLCategories();
 		$categories = (array)$this->getDbCategories($get_all) + $categories;
 		
@@ -148,6 +149,14 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		AppKitArrayUtil::subSort($categories, 'position');		
 		
 		foreach ($categories as $cid=>$category) {
+			$count = 0;
+			foreach ($cronks as $cronk) {
+				if (isset($cronk['categories']) && $cid && strpos(strtolower($cronk['categories']), strtolower($cid)) !== false) {
+					$count++;
+				}
+			}
+			$categories[$cid]['count_cronks'] = $count;
+			
 			if (!$category['visible'] && !$show_invisible) {
 				unset($categories[$cid]);
 			}
@@ -156,15 +165,31 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return $categories;
 	}
 	
-	public function createCategory(array $cat, $update=false) {
+	public function deleteCategoryRecord($cc_uid) {
+		if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cc_uid)) {
+			$res = Doctrine_Query::create()
+			->delete('CronkCategory cc')
+			->andWhere('cc.cc_uid=?', array($cc_uid))
+			->limit(1)
+			->execute();
+			
+			if ($res == 1) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public function createCategory(array $cat) {
 		AppKitArrayUtil::swapKeys($cat, self::$cat_map, true);
 		
 		$category = null;
 		
-		if ($update==true && $this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_name'])) {
+		if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_uid'])) {
 			$category = Doctrine_Query::create()
 			->from('CronkCategory cc')
-			->andWhere('cc.cc_name=?', $cat['cc_name'])
+			->andWhere('cc.cc_uid=?', $cat['cc_uid'])
 			->execute()->getFirst();
 		}
 		
@@ -243,7 +268,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		$dom->loadXML($xml);
 		$root = $dom->documentElement;
 		
-				
 		$out = array ();
 		
 		AppKitArrayUtil::xml2Array($root->childNodes, $out);
@@ -272,6 +296,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 					'owner'			=> ($this->user->user_id == $cronk->cronk_user_id) ? true : false
 			);
 		}
+		
 		return $out;
 	}
 	
@@ -300,7 +325,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 	public function getCronks($all=false) {
 		$cronks = $this->getXmlCronks($all);
 		$cronks = (array)$this->getDbCronks() + $cronks;
-
+		
 		AppKitArrayUtil::subSort($cronks, 'name');
 		
 		return $cronks;
@@ -409,7 +434,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		
 		$ccollection = Doctrine_Query::create()
 		->from('CronkCategory cc')
-		->andWhereIn('cc.cc_name', $carr)
+		->andWhereIn('cc.cc_uid', $carr)
 		->execute();
 		
 		foreach ($ccollection as $category) {
