@@ -515,6 +515,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		if (tabPanel) {
 			var panel = tabPanel.add({
 				xtype: 'cronk',
+				iconCls: Cronk.getIconClass(record.data['image_id']),
 				title: record.data['name'],
 				crname: record.data.cronkid,
 				closable: true,

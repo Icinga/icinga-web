@@ -65,6 +65,7 @@
 					<!-- layout styles -->
 					<ae:parameter>/styles/icinga.css</ae:parameter>
 					<ae:parameter>/styles/icinga-icons.css</ae:parameter>
+					<ae:parameter>/styles/icinga-cronk-icons.css</ae:parameter>
 				</setting>
 
 				<setting name="appkit_module.app.javascript_files">

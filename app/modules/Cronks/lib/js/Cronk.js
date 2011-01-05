@@ -324,4 +324,12 @@ Cronk.Container = Ext.extend(Ext.Panel, {
 	}
 });
 
+Cronk.getIconClass = function(image_id) {
+	var prefix = 'icinga-cronk-icon-';
+	var suffixArray = String(image_id).toLowerCase().split('.');
+	if (suffixArray.length == 2) {
+		return prefix + String(suffixArray[1]).replace(/ /g, '-');
+	}
+}
+
 Ext.reg('cronk', Cronk.Container);

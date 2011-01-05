@@ -10,6 +10,9 @@ Cronk.util.Tabpanel = function(config) {
 Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 	URLTabData : false,
 	
+	minTabWidth: 115,
+    tabWidth:135,
+	
 	setURLTab : function(params) {
 		this.URLTabData = params;
 		
@@ -22,11 +25,14 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 		this.items.each(function(item, index, l) {
 			if (Cronk.Registry.get(item.getId())) {
 				cout[item.getId()] = Cronk.Registry.get(item.getId());
+				
+				if (Ext.isDefined(item.iconCls)) {
+					cout[item.getId()].iconCls = item.iconCls;
+				}
 			}
 		});
 		// AppKit.log("STATE", cout);
 		var t = this.getActiveTab();
-		
 		return {
 			cronks: cout,
 			items: this.items.getCount(),

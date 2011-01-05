@@ -79,9 +79,9 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 						ddGroup: 'cronk',
 						
 						notifyDrop: function(dd, e, data){
-							
 							// add them to the tabs
 							var a = tp.add({
+								iconCls: Cronk.getIconClass(data.dragData['image_id']),
 								title: data.dragData['name'],
 								crname: data.dragData.cronkid,
 								closable: true,

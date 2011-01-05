@@ -19,6 +19,7 @@
 
 .icon-32 { height:32px; width:32px}
 .icon-24 { height:24px; width:24px}
+.icon-16 { height:16px; width:16px}
 
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
