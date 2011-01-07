@@ -155,7 +155,12 @@ IcingaCommandHandler.prototype = {
 			break;
 			case 'date':
 				oDef.format = 'Y-m-d H:i:s';
-				oDef.value = new Date();
+
+				if (oDef.value == '') {
+					oDef.value = new Date();
+				} else if (oDef.value.match(/^now[\+-]\d+$/)) {
+					oDef.value = new Date(new Date().getTime() + 1000 * Number(oDef.value.substr(3)));
+				}
 				return new Ext.form.DateField(oDef);
 			break;
 			

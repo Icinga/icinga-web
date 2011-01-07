@@ -68,6 +68,7 @@
         	
         	<parameter name="predefined">
         		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+			<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
         	</parameter>
         	
         	<!-- 
