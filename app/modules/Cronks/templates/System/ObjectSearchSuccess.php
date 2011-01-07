@@ -215,7 +215,10 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 					
 					oWindow().setTitle('Search: ' + val);
 					
-					oSearchHandler.reloadAllStores.defer(20, this, [val])
+					(function(val) {
+						oSearchHandler.reloadAllStores(val);
+						oTextField.focus(false, 10);
+					}.defer(20, this, [val]));
 					
 				}
 				else {
