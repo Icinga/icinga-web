@@ -97,7 +97,7 @@ Cronk.grid.ColumnRenderer = {
 			}
 			else {
 				var imgName = new Ext.XTemplate(my.image).apply(record.data);
-				return String.format('<img src="{0}/{1}"{1} />', AppKit.c.path, imgName, (flat_attr && " " + flat_attr + " "));
+				return String.format('<img src="{0}/{1}"{2} />', AppKit.c.path, imgName, (flat_attr && " " + flat_attr + " "));
 			}
 		}
 	},
