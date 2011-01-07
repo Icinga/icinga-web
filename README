@@ -4,8 +4,8 @@
 Icinga-Web
 
 This is a new, versatile, web frontend to use with Icinga.
-It is official part of the Icinga project and aims to
-replace the regular cgi's.
+It is an official part of the Icinga project and aims to
+replace the regular CGIs.
 
 For detailed information about installation, legal and all
 other, please take a look into ./doc
