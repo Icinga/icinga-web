@@ -27,7 +27,7 @@ abstract class BaseIcingaContactgroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => true,
+             'primary' => false,
              'autoincrement' => true,
              ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -45,7 +45,7 @@ abstract class BaseIcingaContactgroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -55,7 +55,7 @@ abstract class BaseIcingaContactgroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -64,6 +64,11 @@ abstract class BaseIcingaContactgroupMembers extends Doctrine_Record
 
     public function setUp()
     {
+	$this->hasOne('IcingaInstance as instance', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'			
+	));
+	
         parent::setUp();
         
     }

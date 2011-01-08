@@ -140,7 +140,23 @@ abstract class BaseIcingaHostescalations extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+        
+        $this->hasOne('IcingaInstance as instance', array(
+			'local' => 'instance_id',
+			'foreign' => 'instance_id'			
+		));
+		
+		$this->hasOne('IcingaHosts as host', array(
+			'local' => 'host_id',
+			'foreign' => 'host_id'			
+		));
+	
+		$this->hasOne('IcingaTimeperiods as timeperiod', array(
+			'local' => 'timeperiod_object_id',
+			'foreign' => 'timeperiod_id'			
+		));
+
+		parent::setUp();
         
     }
 }

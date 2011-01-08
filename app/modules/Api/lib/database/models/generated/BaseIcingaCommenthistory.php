@@ -203,6 +203,11 @@ abstract class BaseIcingaCommenthistory extends Doctrine_Record
 
     public function setUp()
     {
+	$this->hasOne('IcingaInstance as instance', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'			
+	));
+	
         parent::setUp();
         
     }

@@ -106,7 +106,20 @@ abstract class BaseIcingaContactnotifications extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+ 	$this->hasOne('IcingaContacts as contact' array(
+		'local' => 'contact_object_id',
+		'foreign' => 'contact_id'
+	));
+	$this->hasOne('IcingaInstance as instance', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'			
+	));
+	$this->hasOne('IcingaNotifications as notification', array(
+		'local' => 'notification_id',
+		'foreign' => 'notification_id'			
+	));
+	
+	parent::setUp();
         
     }
 }

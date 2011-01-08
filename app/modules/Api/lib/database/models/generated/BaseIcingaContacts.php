@@ -272,7 +272,20 @@ abstract class BaseIcingaContacts extends Doctrine_Record
 
     public function setUp()
     {
-         parent::setUp();
+        $this->hasOne('IcingaInstance as instance', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'			
+	));
+	$this->hasOne('IcingaTimeperiods as service_timeperiod', array(
+		'local' => 'service_timeperiod_object_id',
+		'foreign' => 'timeperiod_id'			
+	));
+	$this->hasOne('IcingaTimeperiods as host_timeperiod', array(
+		'local' => 'host_timeperiod_object_id',
+		'foreign' => 'timeperiod_id'			
+	)); 
+
+	parent::setUp();
         
     }
 }

@@ -52,7 +52,24 @@ abstract class BaseIcingaInstances extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+	$this->hasMany('IcingaHosts as hosts', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'
+	));
+	$this->hasMany('IcingaServices as services', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'
+	));
+	$this->hasMany('IcingaHostgroups as hostgroups', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'
+	));
+ 	$this->hasMany('IcingaServicegroups as servicegroups', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'
+	));      
+	
+	parent::setUp();
         
     }
 }

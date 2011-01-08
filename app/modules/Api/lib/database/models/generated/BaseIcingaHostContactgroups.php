@@ -62,7 +62,22 @@ abstract class BaseIcingaHostContactgroups extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+		$this->hasOne('IcingaInstance as instance', array(
+			'local' => 'instance_id',
+			'foreign' => 'instance_id'			
+		));
+		
+		$this->hasOne('IcingaHosts as host', array(
+			'local' => 'host_id',
+			'foreign' => 'host_id'			
+		));
+
+		$this->hasOne('IcingaContactgroups as host', array(
+			'local' => 'contactgroup_object_id',
+			'foreign' => 'contactgroup_object_id'			
+		));
+		
+		parent::setUp();
         
     }
 }

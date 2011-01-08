@@ -517,7 +517,23 @@ abstract class BaseIcingaHoststatus extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+		$this->hasOne('IcingaInstance as instance', array(
+			'local' => 'instance_id',
+			'foreign' => 'instance_id'			
+		));
+		
+		$this->hasOne('IcingaHosts as host', array(
+			'local' => 'host_object_id',
+			'foreign' => 'host_id'
+		));
+
+		$this->hasOne('IcingaTimeperiods as checkTimeperiod', array(
+			'local' => 'check_timeperiod_obecct_id',
+			'foreign' => 'timeperiod_id'			
+		));
+	
+
+		parent::setUp();
         
     }
 }

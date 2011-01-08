@@ -65,7 +65,23 @@ abstract class BaseIcingaHostParenthosts extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+ 		$this->hasOne('IcingaInstance as instance', array(
+			'local' => 'instance_id',
+			'foreign' => 'instance_id'			
+		));
+		
+		$this->hasOne('IcingaHosts as hosts', array(
+			'local' => 'host_id',
+			'foreign' => 'host_id'			
+		));
+		
+		$this->hasOne('IcingaHosts as parent', array(
+			'local' => 'parent_host_object_id', 
+			'foreign' => 'host_id'			
+		));
+	
+
+		parent::setUp();
         
     }
 }

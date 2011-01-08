@@ -136,6 +136,17 @@ abstract class BaseIcingaContactstatus extends Doctrine_Record
 
     public function setUp()
     {
+	
+	$this->hasOne('IcingaContacts as contact', array(
+		'local' => 'contact_object_id',
+		'foreign' => 'contact_object_id'			
+	));
+
+	$this->hasOne('IcingaInstance as instance', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'			
+	));
+	
         parent::setUp();
         
     }
