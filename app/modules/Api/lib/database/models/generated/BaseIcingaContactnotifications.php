@@ -110,7 +110,7 @@ abstract class BaseIcingaContactnotifications extends Doctrine_Record
 		'local' => 'contact_object_id',
 		'foreign' => 'contact_id'
 	));
-	$this->hasOne('IcingaInstance as instance', array(
+	$this->hasOne('IcingaInstances as instance', array(
 		'local' => 'instance_id',
 		'foreign' => 'instance_id'			
 	));

@@ -168,6 +168,10 @@ abstract class BaseIcingaNotifications extends Doctrine_Record
 
     public function setUp()
     {
+	$this->hasOne('IcingaInstances as instance', array(
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'
+	));
         parent::setUp();
         
     }

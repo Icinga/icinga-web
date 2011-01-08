@@ -115,7 +115,7 @@ abstract class BaseIcingaLogentries extends Doctrine_Record
 
     public function setUp()
     {
-		$this->hasMany('IcingaInstances as instances', array(
+		$this->hasOne('IcingaInstances as instances', array(
 			'local' => 'instance_id',
 			'foreign' => 'instance_id'
 		));

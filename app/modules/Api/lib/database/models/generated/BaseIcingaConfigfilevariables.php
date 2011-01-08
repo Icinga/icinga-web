@@ -75,7 +75,7 @@ abstract class BaseIcingaConfigfilevariables extends Doctrine_Record
 
     public function setUp()
     {
- 	$this->hasOne('IcingaInstance as instance', array(
+ 	$this->hasOne('IcingaInstances as instance', array(
 		'local' => 'instance_id',
 		'foreign' => 'instance_id'			
 	));
