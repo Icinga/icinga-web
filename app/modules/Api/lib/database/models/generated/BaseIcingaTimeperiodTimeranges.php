@@ -84,6 +84,18 @@ abstract class BaseIcingaTimeperiodTimeranges extends Doctrine_Record
 
     public function setUp()
     {
+
+        $this->hasOne('IcingaInstance as instance', array(
+	    'local' => 'instance_id',
+	    'foreign' => 'instance_id'
+	));	
+
+        $this->hasOne('IcingaTimeperiods as timeperiods', array(
+	    'local' => 'timeperiod_id',
+	    'foreign' => 'timeperiod_id'
+	));	
+
+
         parent::setUp();
         
     }

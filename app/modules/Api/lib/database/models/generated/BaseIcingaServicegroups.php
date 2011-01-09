@@ -73,7 +73,19 @@ abstract class BaseIcingaServicegroups extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+        $this->hasOne('IcingaInstances as instance', array(
+	    'local' => 'instance_id',
+	    'foreign' => 'instance_id'
+	));	
+
+        $this->hasOne('IcingaServicegroups as servicegroup', array(
+	    'local' => 'servicegroup_object_id',
+	    'foreign' => 'servicegroup_object_id'
+	));	
+
+
+
+	parent::setUp();
         
     }
 }

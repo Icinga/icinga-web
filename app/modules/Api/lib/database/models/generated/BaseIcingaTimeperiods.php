@@ -73,7 +73,12 @@ abstract class BaseIcingaTimeperiods extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+	$this->hasOne('IcingaInstances as instance', array(
+	    'local' => 'instance_id',
+	    'foreign' => 'instance_id'
+	));	
+
+	parent::setUp();
         
     }
 }

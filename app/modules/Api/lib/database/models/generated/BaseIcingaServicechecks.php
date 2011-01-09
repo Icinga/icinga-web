@@ -266,16 +266,16 @@ abstract class BaseIcingaServicechecks extends Doctrine_Record
         $this->hasOne('IcingaInstances as instance', array(
 	    	'local' => 'instance_id',
 	    	'foreign' => 'instance_id'
-		));
-		$this->hasOne('IcingaServices as service', array(
-			'local' => 'service_object_id',
-			'foreign' => 'service_id'
-		));
-		$this->hasOne('IcingaCommands as command', array(
-	    	'local' => 'command_object_id',
-	    	'foreign' => 'command_object_id'
-		));
-		parent::setUp();
+	));
+	$this->hasOne('IcingaServices as service', array(
+		'local' => 'service_object_id',
+		'foreign' => 'service_id'
+	));
+	$this->hasOne('IcingaCommands as command', array(
+    		'local' => 'command_object_id',
+    		'foreign' => 'command_object_id'
+	));
+	parent::setUp();
         
     }
 }

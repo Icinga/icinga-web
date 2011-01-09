@@ -62,7 +62,22 @@ abstract class BaseIcingaServiceescalationContacts extends Doctrine_Record
 
     public function setUp()
     {
-        parent::setUp();
+        $this->hasOne('IcingaInstances as instance', array(
+	   'local' => 'instance_id',
+	   'foreign' => 'instance_id'
+	));
+	
+	$this->hasOne('IcingaServiceescalations as escalation', array(
+	   'local' => 'serviceescalation_id',
+	   'foreign' => 'serviceescalation_id'
+	));
+
+        $this->hasOne('IcingaContacts as contact', array(
+	   'local' => 'contact_object_id',
+	   'foreign' => 'contact_object_id'
+	));
+
+	parent::setUp();
         
     }
 }
