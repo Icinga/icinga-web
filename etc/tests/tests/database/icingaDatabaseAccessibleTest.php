@@ -7,7 +7,10 @@
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
-class icingaDatabaseAccessibleTest extends AgaviPhpUnitTestCase {
+/**
+* @depends testBootstrap 
+*/	
+class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 	private $properties = array();
 	private $insertFailed = false;
 	

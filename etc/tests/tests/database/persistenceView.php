@@ -1,15 +1,21 @@
 <?php
-
-class persistenceView extends AgaviPhpUnitTestCase {
+/**
+* @depends testBootstrap 
+*/	
+class persistenceView extends PHPUnit_Framework_TestCase {
 	public static function setUpBeforeClass() {
-		Doctrine_Manager::connection()->beginTransaction();
-		$context = AgaviContext::getInstance();
-		$context->getUser()->getNsmUser(true)->user_id = 1;
-		$context->getUser()->addCredential("appkit.admin");
-		$context->getUser()->addCredential("appkit.admin.users");
-		$context->getUser()->addCredential("appkit.admin.groups");
-		$context->getUser()->addCredential("icinga.user");
-		$context->getUser()->setAuthenticated(true);
+		try {
+			Doctrine_Manager::connection()->beginTransaction();
+			$context = AgaviContext::getInstance();
+			$context->getUser()->getNsmUser(true)->user_id = 1;
+			$context->getUser()->addCredential("appkit.admin");
+			$context->getUser()->addCredential("appkit.admin.users");
+			$context->getUser()->addCredential("appkit.admin.groups");
+			$context->getUser()->addCredential("icinga.user");
+			$context->getUser()->setAuthenticated(true);
+		} catch(Exception $e) {
+			error("Couldn't retrieve connection :".$e->getMessage()."\n");
+		}
 	}
 	
 	/**
@@ -82,6 +88,10 @@ class persistenceView extends AgaviPhpUnitTestCase {
 	}
 	
 	public static function tearDownAfterClass() {
-		Doctrine_Manager::connection()->rollback();
+		try {
+			Doctrine_Manager::connection()->rollback();
+		} catch(Exception $e) {
+			info("Rollback failed, check for previous errors\n");
+		}	
 	}
 }

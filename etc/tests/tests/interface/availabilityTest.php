@@ -6,7 +6,10 @@
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
-class availabilityTest extends AgaviPhpUnitTestCase {
+/**
+* @depends testBootstrap 
+*/	
+class availabilityTest extends PHPUnit_Framework_TestCase {
 			
 	public function testShowLoginMask() {
 		$ctx = AgaviContext::getInstance('web');

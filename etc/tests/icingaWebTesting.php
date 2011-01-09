@@ -1,15 +1,8 @@
-#! /usr/bin/php
 <?php
-
-require(dirname(__FILE__).'/../../lib/agavi/src/testing.php');
-require(dirname(__FILE__).'/../../lib/doctrine/lib/Doctrine.php');
+require_once 'PHPUnit/Framework.php';
+require_once dirname(__FILE__).'/../../lib/doctrine/lib/Doctrine.php';
 
 spl_autoload_register("Doctrine::autoload");
-require('config.php');
-
-$arguments = AgaviTesting::processCommandlineOptions(); 
-if(!$argv)
-	throw new Exception("Please run this tests from the commandline");
 
 function info($str) {
 	print("\x1b[2;34m".$str."\x1b[m");
@@ -39,30 +32,5 @@ function stdin($prompt = "", $args = array(),$default=null) {
 	
 	return $result[0];
 }
-
-
-if(isset($arguments['environment'])) {
-	$env = $arguments['environment'];
-	unset($arguments['environment']);
-} else {
-	$env = 'testing';
-}
-
-AgaviTesting::bootstrap($env);
-
-require(dirname(__FILE__).'/../../app/modules/AppKit/lib/AppKit.class.php');
-require(dirname(__FILE__).'/../../app/modules/AppKit/lib/class/AppKitBaseClass.class.php');
-require(dirname(__FILE__).'/../../app/modules/AppKit/lib/class/AppKitSingleton.class.php');
-require(dirname(__FILE__).'/../../app/modules/AppKit/lib/util/AppKitModuleUtil.class.php');
-
-AgaviConfig::set('core.default_context', $env);
-// Initialize the appkit framework
-PHPUnit_Util_Filter::addDirectoryToFilter(AgaviConfig::get('core.cache_dir'));
-AgaviController::initializeModule('Web');
-AgaviController::initializeModule('AppKit');
-AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
-$ctx = AgaviContext::getInstance();
-$ctx->getDatabaseManager()->getDatabase()->connect();
-AgaviTesting::dispatch($arguments);
 
 ?>

@@ -1,19 +1,23 @@
 <?php
 /**
- * Test case that tests database user operations that normally are performed via the Admin 
- * actions
- * 
- */
-
+* @depends testBootstrap 
+*/	
 class icingaUserOperations extends PHPUnit_Framework_TestCase {
+	/**
+	* @depends testBootstrap 
+	*/	
 	public static function setUpBeforeClass() {
-		Doctrine_Manager::connection()->beginTransaction();
-		$context = AgaviContext::getInstance();
-		$context->getUser()->addCredential("appkit.admin");
-		$context->getUser()->addCredential("appkit.admin.users");
-		$context->getUser()->addCredential("appkit.admin.groups");
-		$context->getUser()->addCredential("icinga.user");
-		$context->getUser()->setAuthenticated(true);
+		try {
+			Doctrine_Manager::connection()->beginTransaction();
+			$context = AgaviContext::getInstance();
+			$context->getUser()->addCredential("appkit.admin");
+			$context->getUser()->addCredential("appkit.admin.users");
+			$context->getUser()->addCredential("appkit.admin.groups");
+			$context->getUser()->addCredential("icinga.user");
+			$context->getUser()->setAuthenticated(true);
+		} catch(Exception $e) {
+			error("Exception on connection retrieval: ".$e->getMessage()."\n");
+		}
 	}
 	
 	protected $params = array(
@@ -303,7 +307,12 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 
 	public static function tearDownAfterClass() {
-		Doctrine_Manager::connection()->rollback();
+		try {	
+			Doctrine_Manager::connection()->rollback();
+		} catch(Exception $e) {
+			info("Rollback failed, check for previous errors \n");
+
+		}
 	}
 	
 }

@@ -1,7 +1,9 @@
 <?php
 
-
-class configSettingsTest extends AgaviPhpUnitTestCase {
+/**
+* @depends testBootstrap 
+*/	
+class configSettingsTest extends PHPUnit_Framework_TestCase {
 
 	public function testAPIConnection() {
 		$root = AgaviConfig::get("core.root_dir");

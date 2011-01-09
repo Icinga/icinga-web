@@ -3,14 +3,19 @@
  * Tests if the cache folders are accessible for the web user
  * 
  */
-
-class userRightsTest extends AgaviPhpUnitTestCase {
+/**
+* @depends testBootstrap 
+*/	
+class userRightsTest extends PHPUnit_Framework_TestCase {
+	
 	protected function setUp() {
 		$core = AgaviConfig::get("core.root_dir");
 		$this->sharedFixture = parse_ini_file($core."/etc/tests/test.properties");
 	}
 	
-	
+	/**
+	* @depends testBootstrap 
+	*/	
 	public function testCacheDirsExist() {
 		info("Running post installation checks \n");
 		info("\tChecking if cache folders exist\n");
@@ -23,13 +28,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 		}
 
 		if(!empty($missingFolders)) {
-			error("The following cache-folders are missing: ".implode($missingFolders)."\n");
-			$fix = stdin(count($missingFolders)." error(s) were reported. Try to fix them?",array("y","n"),"y");			
-			if($fix != 'y')
-				$this->fail("Check if cache folders exist failed");
-			foreach($missingFolders as $folder) {
-				mkdir($folder);
-			}						
+			$this->fail("Check if cache folders exist failed");
 		} else 
 			success("\tCache folders exist\n");
 	}
@@ -62,13 +61,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 			}
 		}		
 		if(!empty($nonWriteable)) {
-			$fix = stdin(count($nonWriteable)." error(s) were reported. Try to fix them?",array("y","n"),"y");			
-			if($fix != 'y')
-				$this->fail("Cache permission check failed");
-			foreach($nonWriteable as $folder) {
-				chgrp($folder,$wwwGroup);
-				chmod($folder,"775");
-			}	
+			$this->fail("Cache permission check failed");
 		}
 		success("\tCache is writeable for web user\n");
 	}
@@ -89,15 +82,7 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 			error("Web user ".$wwwUser." couldn't create logfile in ".$logDir.
 				  "Please check that the either the user ".$wwwUser." or the group ".$wwwGroup." has ".
 				  "write access to this folder - otherwise icinga-web won't work\n");
-			$fix = stdin("Try to fix thís error ?",array("y","n"),"y");			
-			if($fix != 'y')
-				$this->fail("Couldn't write log files");
-
-			$wwwUser = $this->sharedFixture['www-user'];
-			$wwwGroup = $this->sharedFixture['www-group'];
-
-			chgrp($logDir,$wwwGroup);
-			chmod($logDir,"775");
+			$this->fail("Couldn't write log files");
 						
 		} else {
 			success("\tLog-directory is writeable for wwwGroup!\n");
