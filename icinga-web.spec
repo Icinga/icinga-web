@@ -1,5 +1,5 @@
 # $Id$
-# Authority: michael.friedrich(at)univie.ac.at
+# Authority: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # Needs icinga-api
 # ExcludeDist: el4 el3
@@ -15,8 +15,8 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.0.2
-Release: 2%{?dist}
+Version: 1.3.0
+Release: 1%{?dist}
 License: GPL
 Group: Applications/System
 URL: http://www.icinga.org/
@@ -117,6 +117,9 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 %changelog
 ##############################
+* Mon Jan 10 2010 Michael Friedrich - 1.3.0-1
+- update for upcoming release
+
 * Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
 - add icinga-api as build dependency, --with-icinga-api wil be ignored otherwise
 - change icinga-api path to value used in icinga-api-rpm
