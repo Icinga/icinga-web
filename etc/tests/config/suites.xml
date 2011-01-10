@@ -4,10 +4,11 @@
 		<testsuite name="Bootstrap" stopOnFailure="true">
 			<file>tests/bootstrap/agaviBootstrapTest.php</file>
 		</testsuite>
-		<testsuite name="Installation">
+<!--		<testsuite name="Installation">
 			<file>tests/installation/userRightsTest.php</file>
 			<file>tests/installation/configSettingsTest.php</file>
 		</testsuite>
+-->
 		<testsuite name="Database">
 			<file>tests/database/icingaDatabaseAccessibleTest.php</file>
 			<file>tests/database/icingaUserOperations.php</file>

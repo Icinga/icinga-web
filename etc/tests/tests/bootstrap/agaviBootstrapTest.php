@@ -19,7 +19,7 @@ class agaviBootstrapTest extends PHPUnit_Framework_TestCase {
 			if($success === false)
 				error("Could not include ".$this->includes[$i]);
 		}
-		info("Checking if icinga-web files are accessible\n");
+		//info("Checking if icinga-web files are accessible\n");
 		$this->assertTrue($success);
 	}
 	
@@ -53,7 +53,7 @@ class agaviBootstrapTest extends PHPUnit_Framework_TestCase {
 			error("Icinga bootstrap failed with message : ".$e->getMessage()."\n");
 			$success = false;
 		}
-		
+		ob_end_flush();		
 		$this->assertTrue($success);
 	}
 	

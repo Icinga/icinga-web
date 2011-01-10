@@ -1,6 +1,6 @@
 <?php
 /**
-* @depends testBootstrap 
+* @depends agaviBootstrapTest::testBootstrap 
 */	
 class persistenceView extends PHPUnit_Framework_TestCase {
 	public static function setUpBeforeClass() {

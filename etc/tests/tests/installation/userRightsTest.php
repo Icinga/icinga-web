@@ -4,7 +4,7 @@
  * 
  */
 /**
-* @depends testBootstrap 
+* @depends agaviBootstrapTest::testBootstrap 
 */	
 class userRightsTest extends PHPUnit_Framework_TestCase {
 	
@@ -14,7 +14,7 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	* @depends testBootstrap 
+	* @depends agaviBootstrapTest::testBootstrap 
 	*/	
 	public function testCacheDirsExist() {
 		info("Running post installation checks \n");

@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @depends testBootstrap 
+* @depends agaviBootstrapTest::testBootstrap 
 */	
 class configSettingsTest extends PHPUnit_Framework_TestCase {
 
