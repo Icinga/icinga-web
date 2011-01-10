@@ -72,7 +72,7 @@ abstract class BaseIcingaServiceContactgroups extends Doctrine_Record
 		'foreign' => 'service_id'
 	));
 	$this->hasOne('IcingaContactgroups as contactgroups', array(
-		'local' => 'contactgroup_object_id'
+		'local' => 'contactgroup_object_id',
 		'foreign' => 'contactgroup_object_id'
 	));
 	
