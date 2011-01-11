@@ -15,7 +15,7 @@ install: installdirs
 	find . -mindepth 1 -type f \
 	-not -name "*.in" \
 	-and -not -name "Makefile" \
-	-and -not -path "*/cache/*" \
+	-and -not -path "./cache/*" \
 	-and -not -path "*/data/log*" \
 	-exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/app/{} \;
 
@@ -23,7 +23,7 @@ installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
 	
 	find . -mindepth 1 -type d \
-	-not -path "*/cache/*" \
+	-not -path "./cache/*" \
 	-and -not -path "*/data/log*" \
 	-exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/{} \;
 	
