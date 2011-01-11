@@ -1,6 +1,6 @@
 <?php
 
-class Api_ApiDataRequestModel extends IcingaApiBaseModel implements IcingaApiDataAccessor
+class Api_ApiDataRequestModel extends IcingaApiBaseModel 
 {
 
 
@@ -28,7 +28,14 @@ class Api_ApiDataRequestModel extends IcingaApiBaseModel implements IcingaApiDat
     public function getService($serviceName) {}
 
     public function getHosts($filter = null,&$count = false,$offset=0,$limit=0,array $groupFields = array()) {}
-    public function getHost($hostName) {}
+    public function getHost($db,$hostname) {
+	$DBALMetaManager = $this->getContext()->getModel("DBALMetaManager","Api");
+	$DBALMetaManager->switchIcingaDatabase($db);
+		
+	$dql = Doctrine_Query::create()->select("*")->from("IcingaHosts h")->leftJoin("h.hostgroups a")->where("a.alias = 'Company 1'");
+	$record = $dql->execute(null,Doctrine_Core::HYDRATE_RECORD);
+	return $record;
+    }
 
     public function getComments($filter = null,&$count = false,$offset=0,$limit=0,array $groupFields = array()) {}
     public function getCommentById($id) {}
