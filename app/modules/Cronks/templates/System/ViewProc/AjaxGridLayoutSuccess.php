@@ -21,7 +21,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 
 		MetaGrid.setParameters({storeDisableAutoload: true});
 		var grid = MetaGrid.createGrid();
-		
+		CE.setStatefulObject(grid);
 		// Add the window to a toolbar button
 		grid.on('render', function(g) {
 			
