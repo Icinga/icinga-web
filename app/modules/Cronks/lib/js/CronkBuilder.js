@@ -479,8 +479,11 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			
 			var cronkFrame = this.cronkCmp.get(0);
 			
-			if (Ext.isDefined(cronk.statefulObject)) {
-				form.findField('state').setValue(Ext.encode(cronk.statefulObject.getState()));
+			if (Ext.isDefined(cronk.statefulObjectId)) {
+				var o = Ext.getCmp(cronk.statefulObjectId);
+				if (o) {
+					form.findField('state').setValue(Ext.encode(o.getState()));	
+				}
 			}
 			if (cronkFrame && cronkFrame.stateful && cronkFrame.getState()) {
 				form.findField('state').setValue(Ext.encode(cronkFrame.getState()));
