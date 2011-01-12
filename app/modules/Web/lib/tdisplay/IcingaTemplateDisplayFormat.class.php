@@ -1,6 +1,14 @@
 <?php
 class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
 
+	private static $duration_map = array (
+		'w'	=> 604800,
+		'd' => 86400,
+		'h'	=> 3600,
+		'm' => 60,
+		's' => 1
+	);
+	
 	public static function getInstance() {
 		return parent::getInstance(__CLASS__);
 	}
@@ -47,7 +55,28 @@ class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
 	}
 	
 	public function durationString($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
-		return "LLL";
+		if (($date = strtotime($val)) > 0) {
+			$diff = time()-$date;
+			if ($diff > 0) {
+				$out = array ();
+				foreach (self::$duration_map as $k=>$v) {
+			        $m = $diff%$v;
+			        
+			        if ($diff==$m) {
+			                continue;
+			        }
+			        else {
+			                $out[] = ceil($diff/$v).$k;
+			                $diff = $m;
+			        }
+			
+			        if ($m==0) break;
+					
+				}
+				return implode(' ', $out);
+			}
+		}
+		return '';
 	}
 }
 ?>
