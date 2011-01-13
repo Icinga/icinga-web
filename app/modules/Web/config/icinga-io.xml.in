@@ -44,7 +44,7 @@
 						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
 						<ae:parameter name="enabled">true</ae:parameter>
 						
-						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+						<ae:parameter name="pipe">@api_cmd_file@</ae:parameter>
 
 						<ae:parameter name="instance">default</ae:parameter>
 						<ae:parameter name="broadcast">false</ae:parameter>
@@ -60,7 +60,7 @@
 						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
 						<ae:parameter name="enabled">true</ae:parameter>
 						
-						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+						<ae:parameter name="pipe">@api_cmd_file@</ae:parameter>
 
 						<ae:parameter name="instance">test</ae:parameter>
 						<ae:parameter name="broadcast">false</ae:parameter>
@@ -70,7 +70,7 @@
 						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
 						<ae:parameter name="enabled">false</ae:parameter>
 						
-						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+						<ae:parameter name="pipe">@api_cmd_file@</ae:parameter>
 
 						<ae:parameter name="instance"></ae:parameter>
 						<ae:parameter name="broadcast">true</ae:parameter>
@@ -87,7 +87,7 @@
 						<ae:parameter name="ssh_host">127.0.0.15</ae:parameter>
 						<ae:parameter name="ssh_port">22</ae:parameter>
 						<ae:parameter name="ssh_timeout">20</ae:parameter>
-						<ae:parameter name="ssh_pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+						<ae:parameter name="ssh_pipe">@api_cmd_file@</ae:parameter>
 
 						<ae:parameter name="instance">default</ae:parameter>
 						<ae:parameter name="broadcast">false</ae:parameter>

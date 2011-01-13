@@ -567,6 +567,7 @@ INSTALL_OPTS_WEB
 INSTALL_OPTS
 CFLAGS
 icinga_api
+api_cmd_file
 api_db_prefix
 api_db_name
 api_db_pass
@@ -669,6 +670,7 @@ with_api_db_user
 with_api_db_pass
 with_api_db_name
 with_api_db_prefix
+with_api_cmd_file
 with_devel_mode
 '
       ac_precious_vars='build_alias
@@ -1317,6 +1319,9 @@ Optional Packages:
                           DB name (default icinga)
   --with-api-db-prefix=PREFIX
                           DB table prefiy (default icinga_)
+  --with-api-cmd-file=PATH
+                          Icinga command file (default
+                          /usr/local/icinga/var/rw/icinga.cmd)
   --with-devel-mode       Web devel mode (disable caching)
 
 Some influential environment variables:
@@ -2497,6 +2502,16 @@ fi
 
 
 
+# Check whether --with-api_cmd_file was given.
+if test "${with_api_cmd_file+set}" = set; then :
+  withval=$with_api_cmd_file; api_cmd_file=$withval
+else
+  api_cmd_file=/usr/local/icinga/var/rw/icinga.cmd
+
+fi
+
+
+
 # Check whether --with-devel_mode was given.
 if test "${with_devel_mode+set}" = set; then :
   withval=$with_devel_mode; devel_mode=$withval
@@ -2533,6 +2548,7 @@ fi
 
 
 # Substitutions
+
 
 
 
