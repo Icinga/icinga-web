@@ -669,6 +669,14 @@ abstract class BaseIcingaHosts extends Doctrine_Record
 	    'local' => 'host_object_id',
 	    'foreign' => 'host_object_id'
 	));
+	$this->hasOne("IcingaCommands as checkCommand", array(
+	    'local' => 'check_command_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasOne("IcingaCommands as eventHandlerCommand", array(
+	    'local' => 'eventhandler_command_object_id',
+	    'foreign' => 'object_id'
+	));
 	$this->hasMany("IcingaHostchecks as checks", array(
 	    'local' => 'host_object_id',
 	    'foreign' => 'host_object_id'
@@ -683,11 +691,11 @@ abstract class BaseIcingaHosts extends Doctrine_Record
 	    'foreign' => 'contactgroup_object_id',
 	    'refclass' => 'IcingaHostContactgroups'
 	));
-	$this->hasMany("IcingaStatehistory as history", array(
+	$this->hasMany("IcingaStatehistory as stateHistory", array(
 	    'local' => 'host_object_id',
 	    'foreign' => 'object_id'
 	));
-	$this->hasMany("IcingaServiceescalations as escalations", array(
+	$this->hasMany("IcingaHostescalations as escalations", array(
 	    'local' => 'host_object_id',
 	    'foreign' => 'host_object_id'
 	));
@@ -725,5 +733,15 @@ abstract class BaseIcingaHosts extends Doctrine_Record
 	    'local' => 'host_object_id',
 	    'foreign' => 'object_id'
 	));
+
+	$this->hasOne("IcingaTimeperiods as notificationTimeperiod", array(
+    	    'local' => 'notification_timeperiod_object_id',
+    	    'foreign' => 'timeperiod_object_id',
+	));	
+	$this->hasOne("IcingaTimeperiods as checkTimeperiod", array(
+    	    'local' => 'check_timeperiod_object_id',
+    	    'foreign' => 'timeperiod_object_id',
+	));
+
     }
 }

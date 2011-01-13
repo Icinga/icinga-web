@@ -524,12 +524,12 @@ abstract class BaseIcingaHoststatus extends Doctrine_Record
 		
 		$this->hasOne('IcingaHosts as host', array(
 			'local' => 'host_object_id',
-			'foreign' => 'host_id'
+			'foreign' => 'host_object_id'
 		));
 
 		$this->hasOne('IcingaTimeperiods as checkTimeperiod', array(
-			'local' => 'check_timeperiod_obecct_id',
-			'foreign' => 'timeperiod_id'			
+			'local' => 'check_timeperiod_object_id',
+			'foreign' => 'timeperiod_object_id'			
 		));
 	
 
