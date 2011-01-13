@@ -7,10 +7,12 @@
 %if "%{_vendor}" == "suse"
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
 %define apacheuser wwwrun
+%define apachegroup www
 %endif
 %if "%{_vendor}" == "redhat"
 %define apacheconfdir  %{_sysconfdir}/httpd/conf.d
 %define apacheuser apache
+%define apachegroup apache
 %endif
 
 Summary: Open Source host, service and network monitoring Web UI
@@ -21,6 +23,9 @@ License: GPL
 Group: Applications/System
 URL: http://www.icinga.org/
 BuildArch: noarch
+%if "%{_vendor}" == "suse"
+AutoReqProv: Off
+%endif
 
 Source0: icinga-web-%{version}.tar.gz
 
@@ -37,7 +42,13 @@ Requires: php-xml
 Requires: php-ldap
 Requires: php-pdo
 Requires: php-dom
+%if "%{_vendor}" == "redhat"
 Requires: php-common
+%endif
+%if "%{_vendor}" == "suse"
+Requires: php-xsl
+Requires: apache2-mod_php5
+%endif
 Requires: php-spl
 Requires: pcre >= 7.6
 Requires: icinga-api
@@ -54,7 +65,7 @@ Icinga Web for Icinga Core, requires Icinga API.
     --datadir="%{_datadir}/icinga-web" \
     --datarootdir="%{_datadir}/icinga-web" \
     --with-web-user='%{apacheuser}' \
-    --with-web-group='%{apacheuser}' \
+    --with-web-group='%{apachegroup}' \
     --with-icinga-api='%{_datadir}/icinga/icinga-api' \
     --with-web-apache-path=%{apacheconfdir}
 
@@ -98,11 +109,11 @@ Icinga Web for Icinga Core, requires Icinga API.
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
 %config(noreplace) %{_datadir}/icinga-web/app/config/databases.xml
 %config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml
-%attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache
-%attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/cache/config
+%attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/cache
+%attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/cache/config
 %{_datadir}/icinga-web/app/config
 %{_datadir}/icinga-web/app/data
-%attr(-,%{apacheuser},%{apacheuser}) %{_datadir}/icinga-web/app/data/log
+%attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/data/log
 %{_datadir}/icinga-web/app/lib
 %{_datadir}/icinga-web/app/modules
 %{_datadir}/icinga-web/app/templates
