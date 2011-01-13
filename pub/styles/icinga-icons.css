@@ -117,4 +117,7 @@
 .icinga-icon-category { background-image: url(../images/icons/category.png) !important; background-repeat: no-repeat; }
 .icinga-icon-shield { background-image: url(../images/icons/shield.png) !important; background-repeat: no-repeat; }
 
+.icinga-icon-status { background-image: url(../images/icons/status.png) !important; background-repeat: no-repeat; }
+.icinga-icon-status-busy { background-image: url(../images/icons/status-busy.png) !important; background-repeat: no-repeat; }
+
 /* EOF */

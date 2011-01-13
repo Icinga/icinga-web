@@ -197,6 +197,19 @@
 					<ae:parameter name="template">icinga-notification-template</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
+			
+			<ae:parameter name="gridDowntimeView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Display icinga downtimes</ae:parameter>
+				<ae:parameter name="name">Downtimes</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="image">cronks.Sleep</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-downtime-template</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
 			<!-- Datagrids - [STOP] -->
 	
 	
