@@ -87,28 +87,34 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 		'appkit.ext.filter.text': 'text',
 		'appkit.ext.filter.number': 'number',
 		'appkit.ext.filter.servicestatus': 'number',
-		'appkit.ext.filter.hoststatus': 'number'
+		'appkit.ext.filter.hoststatus': 'number',
+		'appkit.ext.filter.bool': 'bool'
 	},
 	
 	oOpList : {
 		text: [
-			[60, 'contain'],
-			[61, 'does not contain'],
-			[50, 'is'],
-			[51, 'is not']
+			[60, _('contain')],
+			[61, _('does not contain')],
+			[50, _('is')],
+			[51, _('is not')]
 		]	,
 		
 		number: [
-			[50, 'is'],
-			[51, 'is not'],
-			[70, 'less than'],
-			[71, 'greater than']
+			[50, _('is')],
+			[51, _('is not')],
+			[70, _('less than')],
+			[71, _('greater than')]
+		],
+		
+		bool: [
+			[50, _('is')]
 		]
 	},
 	
 	oOpDefault : {
 		number: 50,
-		text: 60
+		text: 60,
+		bool: 50
 	},
 	
 	meta : {},
@@ -241,11 +247,6 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			width : 110
 		});
 		
-		// Select tester
-		// oCombo.on('select', function(c, record, index) {
-		// 
-		// }, this);
-		
 		// Set the default value after rendering
 		oCombo.on('render', function(c) {
 			c.setValue(this.oOpDefault[type]);
@@ -318,6 +319,13 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 					['2', '1', 'Warning'],
 					['3', '2', 'Critical'],
 					['4', '3', 'Unknown']
+				], meta);
+			break;
+			
+			case 'appkit.ext.filter.bool':
+				return this.getComboComponent([
+					['1', '1', _('Yes')],
+					['2', '0', _('No')]
 				], meta);
 			break;
 			

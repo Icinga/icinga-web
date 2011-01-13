@@ -56,7 +56,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		),
 		
 		'${field.SERVICE_SCHEDULED_DOWNTIME_DEPTH}' => array (
-			true	=> array ('downtime.png', 'Service is flapping')
+			true	=> array ('downtime.png', 'In downtime')
 		)
 	);
 	
@@ -101,7 +101,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 		),
 		
 		'${field.HOST_SCHEDULED_DOWNTIME_DEPTH}' => array (
-			true	=> array ('downtime.png', 'Service is flapping')
+			true	=> array ('downtime.png', 'In downtime')
 		)
 	);
 	

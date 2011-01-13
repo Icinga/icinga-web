@@ -206,6 +206,24 @@
 				<parameter name="api_keyfield">SERVICEGROUP_NAME</parameter>
 				<parameter name="api_valuefield">SERVICEGROUP_NAME</parameter>
         	</paramter>
+        	<paramter name="notifications_enabled">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Notifications enabled</parameter>
+        	</paramter>
+        	<paramter name="problem_acknowledged">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Acknowledged</parameter>
+        	</paramter>
+        	<paramter name="scheduled_downtime_depth">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">In Downtime</parameter>
+        	</paramter>
         </parameter>
         
     </option>
@@ -248,6 +266,9 @@
        		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
 			<parameter name="custom_variable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="custom_variable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
+       		<parameter name="notifications_enabled">SERVICE_NOTIFICATIONS_ENABLED</parameter>
+			<parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+			<parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
 
 			<!-- Stupid filter mapping -->
 			<parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
