@@ -3,7 +3,7 @@
 class InvalidApiQueryException extends Exception {};
 
 interface IcingaApiRequestModifier {
-	public function apply(Api_ApiDataRequestModel $request); 
+	public function apply(Doctrine_Query $q,Api_ApiDataRequestDescriptorModel $request); 
 }
 
 interface I_IcingaApiFilter {
@@ -57,19 +57,20 @@ class IcingaApiFilter implements IcingaApiRequestModifier implements I_IcingaApi
 		$this->setTable($table);
 	}
 	
-	public function apply(Api_ApiDataRequestModel $request) {
+	
+	public function apply(Doctrine_Query $q,Api_ApiDataRequestDescriptorModel $request); 
 		throw InvalidApiQueryException("IcingaApiFilter must be encapsulated in a IcingaApiFilterGroup");
 	} 
 	
 	public function getFilterString() {
-		return ($this->table ? $this->table : "").$this->field." ".$this->method." ".$this->value;
+		return ($this->table ? "_".$this->table : "origin").$this->field." ".$this->method." ".$this->value;
 	} 
 }
 
-class IcingaApiFilterGroup extends  IcingaApiFilter {
+class IcingaApiFilterGroup implements I_IcingaApiFilter {
 	protected $logicOperator;
 
-	public function apply(Api_ApiDataRequestModel $request) {
+	public function apply(Doctrine_Query $q,Api_ApiDataRequestDescriptorModel $request); 
 		$request->setFilterString($this->getFilterString);		
 	}
 
@@ -99,7 +100,7 @@ class IcingaApiLimit implements ApiRequestModifier {
 		$this->offset = $offset;
 	}
 	
-	public function apply(Api_ApiDataRequestModel $request) {
+	public function apply(Doctrine_Query $q,Api_ApiDataRequestDescriptorModel $request); 
 		$request->setLimit($this->limit);
 		$request->setOffset($this->offset);
 	}

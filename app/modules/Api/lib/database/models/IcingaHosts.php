@@ -12,5 +12,16 @@
  */
 class IcingaHosts extends BaseIcingaHosts
 {
-
+	public function __get($method)  {
+		switch($method) {
+			case  'contacts':
+				echo $method;
+				die();
+				break;
+			case 'contactgroups':
+				break;
+		}
+		return parent::__get($method);
+	} 	
+	
 }

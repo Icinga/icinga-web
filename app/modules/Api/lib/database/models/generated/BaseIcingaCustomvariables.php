@@ -97,10 +97,33 @@ abstract class BaseIcingaCustomvariables extends Doctrine_Record
     public function setUp()
     {
         $this->hasOne('IcingaInstances as instance', array(
-			'local' => 'instance_id',
-			'foreign' => 'instance_id'			
-		));
-	
+		'local' => 'instance_id',
+		'foreign' => 'instance_id'			
+	));
+	$this->hasMany('IcingaHosts as hosts', array(
+		'local' => 'object_id',
+		'foreign' => 'host_object_id'
+	));	
+	$this->hasMany('IcingaHostgroups as hostgroups', array(
+		'local' => 'object_id',
+		'foreign' => 'hostgroup_object_id'
+	));	
+	$this->hasMany('IcingaServices as services', array(
+		'local' => 'object_id',
+		'foreign' => 'service_object_id'
+	));	
+	$this->hasMany('IcingaServicegroups as servicegroups', array(
+		'local' => 'object_id',
+		'foreign' => 'servicegroup_object_id'
+	));	
+	$this->hasMany('IcingaContactgroups as contactgroups', array(
+		'local' => 'object_id',
+		'foreign' => 'contactgroup_object_id'
+	));	
+	$this->hasMany('IcingaContacts as contact', array(
+		'local' => 'object_id',
+		'foreign' => 'contact_object_id'
+	));	
 	parent::setUp();
         
     }

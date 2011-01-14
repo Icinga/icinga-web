@@ -17,7 +17,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse(is_null($host),"Host request returned null");
 		$this->assertEquals($host->count(),1,"Number of hosts is wrong, should be 1, is ".$host->count());
 		
-		info("Getting host succeeded \n");
+		success("Getting host succeeded \n");
 	}
 	
 	/**
@@ -30,7 +30,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($host->status->host_object_id,$host->host_object_id, 'Host id in status object is not the one of the original host');
 		
 		$this->assertEquals($host->status->host,$host, 'Host object returned by status->host is not the original host');
-		info("Getting host status succeeded \n");
+		success("Getting host status succeeded \n");
 	}
 	
 	/**
@@ -39,7 +39,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetId() {
 		$host = $this->hostProvider();
 		$this->assertEquals($host->host_id,181,"Id of returned host is wrong, should be 181 in the dbFixture");
-		info("Getting host id succeeded \n");
+		success("Getting host id succeeded \n");
 	}
 	
 	/**
@@ -47,9 +47,9 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetInstance() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->instance));
-		$this->assertEquals($host->instance->instance_name,"default");
-		info("Getting host instance succeeded \n");
+		$this->assertFalse(is_null($host->instance),"Instance could not be retrieved, returned null");
+		$this->assertEquals($host->instance->instance_name,"default","Instance is not 'default'");
+		success("Getting host instance succeeded \n");
 	}
 	
 	/**
@@ -57,8 +57,8 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetAlias() {
 		$host = $this->hostProvider();
-		$this->assertEquals($host->alias,"company1-datenbank1");
-		info("Getting host alias succeeded\n");
+		$this->assertEquals($host->alias,"company1-datenbank1","Host alias doesn't match");
+		success("Getting host alias succeeded\n");
 	}
 
 	/**
@@ -66,8 +66,8 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetDisplayname() {
 		$host = $this->hostProvider();
-		$this->assertEquals($host->display_name,"c1-db1");
-		info("Getting host display_name succeeded\n");
+		$this->assertEquals($host->display_name,"c1-db1","Host name doesn't match");
+		success("Getting host display_name succeeded\n");
 	}
 
 	/**
@@ -75,8 +75,8 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetAddress() {
 		$host = $this->hostProvider();
-		$this->assertEquals($host->address,"10.10.100.31");
-		info("Getting host address succeeded\n");
+		$this->assertEquals($host->address,"10.10.100.31","Host address doesn't match");
+		success("Getting host address succeeded\n");
 	}
 	
 
@@ -85,8 +85,8 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetEventhandlerCommand() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->eventHandlerCommand));
-		info("********** DB Fixture upgrade needed - no eventhandler commands available \n");
+		$this->assertFalse(is_null($host->eventHandlerCommand),"Host eventhandlerCommand could not be retrieved, returned null");
+		success("********** DB Fixture upgrade needed - no eventhandler commands available \n");
 		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
 
@@ -95,9 +95,9 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetNotificationTimeperiod() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->notificationTimeperiod));
-		$this->assertEquals($host->notificationTimeperiod->alias,'"Normal" Working Hours');	
-		info("Getting notification timeperiod succeeded\n");		
+		$this->assertFalse(is_null($host->notificationTimeperiod),"Notificationtimeperiod could not be retrieved, returned null");
+		$this->assertEquals($host->notificationTimeperiod->alias,'"Normal" Working Hours',"Timeperiod alias doesn't match");	
+		success("Getting notification timeperiod succeeded\n");		
 	}
 
 	/**
@@ -105,9 +105,9 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetStateHistory() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->stateHistory));
-		$this->assertEquals($host->stateHistory->count(),4);
-		info("Getting host history succeeded\n");
+		$this->assertFalse(is_null($host->stateHistory),"Statehistory could not be retrieved, returned null");
+		$this->assertEquals($host->stateHistory->count(),4,"Statehistory result count doesn't match expected value");
+		success("Getting host history succeeded\n");
 	}
 	
 	/**
@@ -115,7 +115,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetEscalations() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->escalations));
+		$this->assertFalse(is_null($host->escalations),"Escalations could not be retrieved, returned null");
 		info("********** DB Fixture upgrade needed - no hostescalations available \n");
 		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
@@ -125,33 +125,102 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetDowntimeHistory() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->downtimeHistory));
+		$this->assertFalse(is_null($host->downtimeHistory),"Downtime history could not be retrieved, returned null");
 
 		info("********** DB Fixture upgrade needed - no downtimehistory available \n");
 		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
 	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetDependencies() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->dependencies),"Dependencies could not be retrieved, returned null");
+		
+		info("********** DB Fixture upgrade needed - no host dependencies available \n");
+		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
+
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetHostgroups() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->hostgroups),"Hostgroups could not be retrieved, returned null");
+		$this->assertEquals($host->hostgroups->count(),1, "Hostgroupcount doesn't match expected value");
+		$found = false;
+		foreach($host->hostgroups->getFirst()->members as $hgMember) {
+			if($hgMember == $host) {
+				$found = true;
+				break;
+			}
+		}
+		$this->assertTrue($found,"Host not found in hostgroup member list");
+		success("Retrieving hostgroups succeeded\n");
+		
 	}
+	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetScheduledDowntimes() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->scheduledDowntimes),"Scheduled downtimes for host could not be retrieved, returned null");
+
+		info("********** DB Fixture upgrade needed - no scheduled downtimes available \n");
+		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
+	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetCustomvars() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->customvariables),"Customvars for host could not be retrieved, returned null");
+		$this->assertEquals($host->customvariables->count(),2,"Customvariable count doesn't match");
+		$found = false;
+		foreach($host->customvariables->hosts as $cvhost) {
+			if($cvhost = $host) {
+				$found = true;
+				break;
+			}
+		}
+		$this->assertTrue($found,"Host not found in customvariable definition");
+		success("Retrieving customvariables for host succeeded\n"); 	
 	}
+	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetTimedEvents() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->timedevents),"Timed events for host could not be retrieved, returned null");
+
+		info("********** DB Fixture upgrade needed - no timed events for host available \n");
+		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
+	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetContacts() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->contacts->toArray()));
+
+		info("********** DB Fixture upgrade needed - no host contacts available \n");
+		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
 	}
+	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetContactgroups() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		print_r($host->contactgroups->toArray());
+		die();
 	}
+	
 	public function testGetHostChecks() {
 		$host = $this->hostProvider();
 		$host->checks->toArray();
@@ -159,6 +228,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 		info("********** DB Fixture upgrade needed - no hostchecks available \n");
 		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object");
 	}	
+	
 	public function testGetServices() {
 		$this->fail("Not implemented");
 	}

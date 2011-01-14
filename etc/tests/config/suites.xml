@@ -9,22 +9,22 @@
 			<file>tests/installation/configSettingsTest.php</file>
 		</testsuite>
 -->
-		<testsuite name="Database">
+<!--		<testsuite name="Database">
 			<file>tests/database/icingaDatabaseAccessibleTest.php</file>
 			<file>tests/database/icingaUserOperations.php</file>
 			<file>tests/database/icingaRoleOperations.php</file>
 			<file>tests/database/persistenceView.php</file>
 		</testsuite>
-		<testsuite name="API">
+-->		<testsuite name="API">
 			<file>tests/api/icingaConnectivityTests.php</file>
 			<directory>tests/api/hosts</directory>
-			<directory>tests/api/services</directory>	
+<!--			<directory>tests/api/services</directory>	
 			<directory>tests/api/hostgroups</directory>	
 			<directory>tests/api/servicegroups</directory>
-			<directory>tests/api/misc</directory>	
+			<directory>tests/api/misc</directory>	-->
 		</testsuite>
-		<testsuite name="Interface">
+<!--		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
-		</testsuite>
+		</testsuite>-->
 	</testsuites>
 </phpunit>

@@ -25,7 +25,7 @@ abstract class BaseIcingaHostContactgroups extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => true,
+             'primary' => false,
              'autoincrement' => true,
              ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -43,7 +43,7 @@ abstract class BaseIcingaHostContactgroups extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -53,7 +53,7 @@ abstract class BaseIcingaHostContactgroups extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -72,7 +72,7 @@ abstract class BaseIcingaHostContactgroups extends Doctrine_Record
 			'foreign' => 'host_id'			
 		));
 
-		$this->hasOne('IcingaContactgroups as host', array(
+		$this->hasOne('IcingaContactgroups as contactgroup', array(
 			'local' => 'contactgroup_object_id',
 			'foreign' => 'contactgroup_object_id'			
 		));

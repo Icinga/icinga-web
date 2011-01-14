@@ -22,7 +22,7 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record
     public function setTableDefinition()
     {
         $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaContactgroups")->getPrefix();
-        $this->setTableName($prefix.'_contactgroups');
+        $this->setTableName($prefix.'contactgroups');
         $this->hasColumn('contactgroup_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -79,7 +79,11 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record
 		'local' => 'instance_id',
 		'foreign' => 'instance_id'			
 	));
-	
+	$this->hasMany('IcingaHosts as hosts', array(
+		'local' => 'contactgroup_object_id',
+		'foreign' => 'host_id',
+		'refclass' => 'IcingaHostContactgroups'
+	));	
 	$this->hasMany('IcingaContacts as members', array(
 		'local' => 'contactgroup_object_id',
 		'foreign' => 'contact_object_id',

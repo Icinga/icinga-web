@@ -25,7 +25,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => true,
+             'primary' => false,
              'autoincrement' => true,
              ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -38,7 +38,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('hostgroup_id', 'integer', 4, array(
+	$this->hasColumn('host_object_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
@@ -48,7 +48,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('host_object_id', 'integer', 4, array(
+	$this->hasColumn('hostgroup_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
@@ -58,6 +58,7 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
+
     }
 
     public function setUp()
@@ -68,14 +69,14 @@ abstract class BaseIcingaHostgroupMembers extends Doctrine_Record
 		'foreign' => 'instance_id'			
 	));
 	
+      	$this->hasOne("IcingaHostgroups as hostgroup", array(
+       		"local" => "hostgroup_id",
+       		"foreign" => "hostgroup_id"
+       	));	
 	$this->hasOne("IcingaHosts as host", array(
        		"local" => "host_object_id",
        		"foreign" => "host_object_id"
        	));
        	
-      	$this->hasOne("IcingaHostgroups as group", array(
-       		"local" => "hostgroup_id",
-       		"foreign" => "hostgroup_id"
-       	));
     }
 }
