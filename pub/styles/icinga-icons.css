@@ -38,6 +38,8 @@
 .icinga-icon-application-view-gallery { background-image: url(../images/icons/application-image.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-view-list { background-image: url(../images/icons/application-list.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-view-tile { background-image: url(../images/icons/application-split.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-minus { background-image: url(../images/icons/application--minus.png) !important; background-repeat: no-repeat; }
+
 .icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock { background-image: url(../images/icons/lock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock-open { background-image: url(../images/icons/lock_unlock.png) !important; background-repeat: no-repeat; }
@@ -80,6 +82,7 @@
 .icinga-icon-bug { background-image: url(../images/icons/bug.png) !important; background-repeat: no-repeat; }
 .icinga-icon-bug-32 { background-image: url(../images/icinga/bug.png) !important; background-repeat: no-repeat; }
 .icinga-icon-server-lightning { background-image: url(../images/icons/server--exclamation.png) !important; background-repeat: no-repeat; }
+.icinga-icon-server-minus { background-image: url(../images/icons/server--minus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-database { background-image: url(../images/icons/database.png) !important; background-repeat: no-repeat; }
 .icinga-icon-database-go { background-image: url(../images/icons/database--arrow.png) !important; background-repeat: no-repeat; }
 .icinga-icon-database-refresh { background-image: url(../images/icons/database-import.png) !important; background-repeat: no-repeat; }
