@@ -76,6 +76,8 @@ IcingaCommandHandler.prototype = {
 			allowBlank: (o.fieldRequired == true) ? false : true
 		}
 		
+		var form = o.form;
+		
 		switch (o.fieldType) {
 			
 			case 'notification_options':
@@ -171,7 +173,7 @@ IcingaCommandHandler.prototype = {
 			
 			case 'checkbox':
 				Ext.apply(oDef, {
-					name: o.FieldName + '-group',
+					name: o.fieldName + '-group',
 					columns: 2,
 					items: [
 						{boxLabel: _('Yes'), inputValue: 1, name: o.fieldName},
@@ -180,7 +182,58 @@ IcingaCommandHandler.prototype = {
 				});
 				
 				return new Ext.form.RadioGroup(oDef);
-				
+			break;
+			
+			case 'duration':
+			
+				var dlistener = function(field, newValue, oldValue) {
+					var m = form.getForm().findField('duration-minute').getValue();
+					var h = form.getForm().findField('duration-hour').getValue();
+					form.getForm().findField('duration').setValue((m*60)+(h*3600));
+				}
+			
+				return new Ext.Container({
+					fieldLabel: o.fieldLabel,
+					defaults: {
+						style: { padding: '0 5px 0 5px' }
+					},
+					items: [{
+						xtype: 'numberfield',
+						name: o.fieldName + '-hour',
+						width: 30,
+						value: 2,
+						submitValue: false,
+						listeners: {
+							change: dlistener
+						}
+					}, {
+						xtype: 'label',
+						text: ':'
+					}, {
+						xtype: 'numberfield',
+						name: o.fieldName + '-minute',
+						width: 30,
+						value: 0,
+						submitValue: false,
+						listeners: {
+							change: dlistener
+						}
+					}, {
+						xtype: 'label',
+						text: _('(hh:ii)')
+					}, {
+						xtype: 'numberfield',
+						name: o.fieldName,
+						value: (3600*2),
+						minValue: 1,
+						width: 50,
+						readOnly: true,
+						style: { background: '#00cc00' }
+					}, {
+						xtype: 'label',
+						text: _('seconds')	
+					}]
+				})
 			break;
 			
 			case 'textarea':
@@ -221,6 +274,33 @@ IcingaCommandHandler.prototype = {
 		
 		return r;
 	},
+
+// ** MAYBE LATER **	
+//	modifyForm : function(command, form) {
+//		var p = form.getForm();
+//		
+//		if (command.match(/SCHEDULE.+DOWNTIME/)) {
+//			
+//			var f = p.findField('fixed-group');
+//			
+//			var d = p.findField('duration');
+//			
+//			if (f && d) {
+//			
+//				f.on('change', function(group, radio) {
+//					if (radio.name=='fixed' && radio.inputValue==0) {
+//						d.allowBlank = false;
+//					}
+//					else if (radio.name=='fixed' && radio.inputValue==1) {
+//						d.allowBlank = true;
+//					}
+//					p.clearInvalid();
+//				});
+//			
+//			}
+//			
+//		}
+//	},
 	
 	showCommandWindow : function(command, title) {
 		
@@ -347,7 +427,8 @@ IcingaCommandHandler.prototype = {
 						fieldName: item,
 						fieldType: o.types[item].type,
 						fieldValue: this.command_options.predefined[item] || '',
-						fieldRequired: o.types[item].required || false
+						fieldRequired: o.types[item].required || false,
+						form: oForm
 					});
 					
 					if (f) {
@@ -364,15 +445,17 @@ IcingaCommandHandler.prototype = {
 					});
 				}
 				
+				// this.modifyForm(command, oForm);
+				
 				oWin.add(oForm);
 				
 				oWin.render(Ext.getBody());
+				
 				oWin.show();
 				
-				
-				oWin.doLayout();
 				oWin.setWidth( oWin.getWidth() + 50 );
 				oWin.setHeight( oWin.getHeight() + 5 );
+				
 				oWin.doLayout();
 			}
 		});

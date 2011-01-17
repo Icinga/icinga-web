@@ -67,7 +67,7 @@
         	
         	<parameter name="predefined">
         		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
-			<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
+				<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
         	</parameter>
         	
         	<!-- 
@@ -234,6 +234,24 @@
 				<parameter name="api_valuefield">HOSTGROUP_NAME</parameter>
 
         	</paramter>
+        	<paramter name="notifications_enabled">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Notifications enabled</parameter>
+        	</paramter>
+        	<paramter name="problem_acknowledged">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Acknowledged</parameter>
+        	</paramter>
+        	<paramter name="scheduled_downtime_depth">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">In Downtime</parameter>
+        	</paramter>
         </parameter>
     </option>
     
@@ -274,7 +292,10 @@
 			<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
        		<parameter name="custom_variable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="custom_variable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
-
+			<parameter name="notifications_enabled">HOST_NOTIFICATIONS_ENABLED</parameter>
+			<parameter name="problem_acknowledged">HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+			<parameter name="scheduled_downtime_depth">HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
+			
 			<!-- Some mapping for stupid filters -->
 			<parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
 			<parameter name="customvariable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
@@ -530,7 +551,7 @@
 	                	<parameter name="arguments">
 	                		<parameter name="title">EventDB for {host_name}</parameter>
 	                		<parameter name="url"><![CDATA[http://localhost/{host_name}/{host_object_id}]]></parameter>
-					<parameter name="activateOnClick">true</parameter>
+							<parameter name="activateOnClick">true</parameter>
 	                	</parameter>
 	                </parameter>
                 </parameter>
@@ -834,6 +855,33 @@
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">true</parameter>
+                <parameter name="order">DESC</parameter>
+            </order>
+        </field>
+        
+        <field name="host_duration">
+        	<datasource>
+        		<parameter name="field">HOST_LAST_STATE_CHANGE</parameter>
+        	</datasource>
+        	
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Duration</parameter>
+                
+                <!-- Let the agavi translation manager transform the date -->
+                <parameter name="userFunc">
+               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="method">durationString</parameter>
+                </parameter>
+            </display>
+        	
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
                 <parameter name="order">DESC</parameter>
             </order>
         </field>

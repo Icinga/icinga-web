@@ -54,6 +54,24 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 		
 		return null;
 	}
+	
+	public function icingaDowntimeType($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+		static $classes = array (
+			1	=> 'icinga-icon-service',
+			2	=> 'icinga-icon-host'
+		);
+		
+		return sprintf('<div class="icon-16 %s"></div>', $classes[$val]);
+	}
+	
+	public function icingaDowntimeRunning($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+		static $classes = array (
+			1	=> 'icinga-icon-status',
+			0	=> 'icinga-icon-status-busy'
+		);
+		
+		return sprintf('<div class="icon-16 %s"></div>', $classes[$val]);
+	}
 }
 
 ?>
