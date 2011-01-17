@@ -99,6 +99,13 @@ Icinga.util.SimpleDataProvider = (function () {
 				
 				toolTip.render(Ext.getBody());
 				
+				toolTip.getEl().on('mouseover', function(e) {
+					// set the tooltip as the new target and clear
+					// the autoHide timer.
+					toolTip.initTarget(toolTip.getEl());
+					toolTip.showAt([]); 
+				});
+				
 				toolTip.getUpdater().update({
 					url: pub.getUrl(),
 					callback: pub.outputTable,

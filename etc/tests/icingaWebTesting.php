@@ -56,7 +56,30 @@ require(dirname(__FILE__).'/../../app/modules/AppKit/lib/class/AppKitSingleton.c
 require(dirname(__FILE__).'/../../app/modules/AppKit/lib/util/AppKitModuleUtil.class.php');
 
 AgaviConfig::set('core.default_context', $env);
-// Initialize the appkit framework
+
+// Set uid/gid to www-user/www-group settings from the test.properties config
+$test_config = parse_ini_file(AgaviConfig::get("core.root_dir")."/etc/tests/test.properties");
+if (function_exists('posix_seteuid') && posix_getuid() == 0) {
+	$group = posix_getgrnam($test_config['www-group']);
+
+	if ($group !== false) {
+		if (!posix_setegid($group['gid'])) {
+		    echo "posix_setegid() failed.\n";
+		    return;
+		}
+	}
+
+	$user = posix_getpwnam($test_config['www-user']);
+
+	if ($user !== false) {
+		if (!posix_seteuid($user['uid'])) {
+		    echo "posix_seteuid() failed.\n";
+		    return;
+		}
+	}
+}
+
+		    // Initialize the appkit framework
 PHPUnit_Util_Filter::addDirectoryToFilter(AgaviConfig::get('core.cache_dir'));
 AgaviController::initializeModule('Web');
 AgaviController::initializeModule('AppKit');

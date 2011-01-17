@@ -7,7 +7,8 @@
    not affect the existing Makefile.
 
 4. The thing to refresh the list of installable made through make:
-   make install-files-list (Don't forget to call configure to create the makefile)
+   make install-files-list (Don't forget to call configure to create the
+   makefile)
 
 5. To make the code ready to commit all these steps are combined within:
    make devclean
