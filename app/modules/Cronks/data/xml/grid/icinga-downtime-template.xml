@@ -97,7 +97,7 @@
 			If the counting differs from data result you can specify a field to count
 		-->
         <parameter name="countfields">
-        	<parameter>DOWNTIMEHISTORY_ID</parameter>
+        	<parameter>DOWNTIME_ID</parameter>
         </parameter>
          
     </datasource>
@@ -164,7 +164,7 @@
     
         <field name="downtime_id">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_ID</parameter>
+        		<parameter name="field">DOWNTIME_ID</parameter>
         	</datasource>
         	
         	<display>
@@ -184,7 +184,7 @@
         
         <field name="downtime_internal_id">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_INTERNAL_DOWNTIME_ID</parameter>
+        		<parameter name="field">DOWNTIME_INTERNAL_DOWNTIME_ID</parameter>
         	</datasource>
         	
         	<display>
@@ -204,7 +204,7 @@
         
 		<field name="downtime_type">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_DOWNTIME_TYPE</parameter>
+        		<parameter name="field">DOWNTIME_DOWNTIME_TYPE</parameter>
         	</datasource>
         	
 			<display>
@@ -436,7 +436,7 @@
         
         <field name="downtime_scheduled_start">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_SCHEDULED_START_TIME</parameter>
+        		<parameter name="field">DOWNTIME_SCHEDULED_START_TIME</parameter>
         	</datasource>
         	
         	<display>
@@ -470,7 +470,7 @@
         
         <field name="downtime_scheduled_end">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_SCHEDULED_END_TIME</parameter>
+        		<parameter name="field">DOWNTIME_SCHEDULED_END_TIME</parameter>
         	</datasource>
         	
         	<display>
@@ -503,7 +503,7 @@
         
         <field name="downtime_author">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_AUTHOR_NAME</parameter>
+        		<parameter name="field">DOWNTIME_AUTHOR_NAME</parameter>
         	</datasource>
         	
         	<display>
@@ -530,7 +530,7 @@
         
         <field name="downtime_comment">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_COMMENT_DATA</parameter>
+        		<parameter name="field">DOWNTIME_COMMENT_DATA</parameter>
         	</datasource>
         	
         	<display>
@@ -565,7 +565,7 @@
         
 		<field name="downtime_was_started">
         	<datasource>
-        		<parameter name="field">DOWNTIMEHISTORY_WAS_STARTED</parameter>
+        		<parameter name="field">DOWNTIME_WAS_STARTED</parameter>
         	</datasource>
         	
 			<display>

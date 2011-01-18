@@ -49,9 +49,16 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 
 		if(!$wwwUser)
 			$this->markTestSkipped("No www-user specified in test.properties!");
+
 		foreach($cacheFolders as $folder) {
+			$command = "touch ".$folder."/testfile.txt";
+
+			if (!function_exists('posix_getuid') || posix_getuid() == 0) {
+				$command = "su ".$wwwUser." -c '".$command."'";
+			}
 			 
-			exec("su ".$wwwUser." -c 'touch ".$folder."/testfile.txt'");
+			exec($command);
+
 			if(!file_exists($folder."/testfile.txt")) {
 				error("Web user ".$wwwUser." couldn't write to cache ".$folder.
 					  "Please check that the either the user ".$wwwUser." or the group ".$wwwGroup." has ".
@@ -83,8 +90,15 @@ class userRightsTest extends AgaviPhpUnitTestCase {
 		
 		$wwwUser = $this->sharedFixture['www-user'];
 		$wwwGroup = $this->sharedFixture['www-group'];
+
+		$command = "touch ".$logDir."/testfile.txt";
+
+		if (!function_exists('posix_getuid') || posix_getuid() == 0) {
+			$command = "su ".$wwwUser." -c '".$command."'";
+		}
 		
-		exec("su ".$wwwUser." -c 'touch ".$logDir."/testfile.txt'");
+		exec($command);
+
 		if(!file_exists($logDir."/testfile.txt")) {
 			error("Web user ".$wwwUser." couldn't create logfile in ".$logDir.
 				  "Please check that the either the user ".$wwwUser." or the group ".$wwwGroup." has ".
