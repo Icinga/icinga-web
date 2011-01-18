@@ -272,7 +272,11 @@ abstract class BaseIcingaContacts extends Doctrine_Record
 
     public function setUp()
     {
-        $this->hasOne('IcingaInstances as instance', array(
+        $this->hasMany('IcingaHostContacts as hosts',array(
+		'local' => 'contact_object_id',
+		'foreign' => 'contact_object_id'
+	));
+	$this->hasOne('IcingaInstances as instance', array(
 		'local' => 'instance_id',
 		'foreign' => 'instance_id'			
 	));

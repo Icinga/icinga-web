@@ -79,10 +79,9 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record
 		'local' => 'instance_id',
 		'foreign' => 'instance_id'			
 	));
-	$this->hasMany('IcingaHosts as hosts', array(
+	$this->hasMany('IcingaHostContactgroups as hosts', array(
 		'local' => 'contactgroup_object_id',
-		'foreign' => 'host_id',
-		'refclass' => 'IcingaHostContactgroups'
+		'foreign' => 'contactgroup_object_id',	
 	));	
 	$this->hasMany('IcingaContacts as members', array(
 		'local' => 'contactgroup_object_id',

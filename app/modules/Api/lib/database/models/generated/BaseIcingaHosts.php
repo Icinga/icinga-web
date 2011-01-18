@@ -681,23 +681,17 @@ abstract class BaseIcingaHosts extends Doctrine_Record
 	    'local' => 'host_object_id',
 	    'foreign' => 'host_object_id'
 	));
-/**	
-*	IDOUtils messes around with ids (Why the heck is it host_id here? 
-*	All other fields have host_object_id) and Doctrine doesn't like that,
-*	so this will be added in the main class
-*/
-/**
-	$this->hasMany("IcingaContacts as contacts", array(
+// Retrieved by custom finders
+
+	$this->hasMany("IcingaHostContacts as contacts", array(
 	    'local' => 'host_id',
-	    'foreign' => 'contact_object_id',
-	    'refclass' => 'IcingaHostContacts'
+	    'foreign' => 'host_id',
 	));
-	$this->hasMany("IcingaContactgroups as contactgroups", array(
+	$this->hasMany("IcingaHostContactgroups as contactgroups", array(
 	    'local' => 'host_id',
-	    'foreign' => 'contactgroup_object_id',
-	    'refclass' => 'IcingaHostContactgroups'
+	    'foreign' => 'host_id', 
 	));
-*/
+
 	$this->hasMany("IcingaStatehistory as stateHistory", array(
 	    'local' => 'host_object_id',
 	    'foreign' => 'object_id'

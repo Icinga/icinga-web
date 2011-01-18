@@ -12,5 +12,26 @@
  */
 class IcingaContacts extends BaseIcingaContacts
 {
+	public function __get($field) {
+		switch($field) {
+			case 'hosts':
+				$hosts = $this->getHosts();
+				$this->set("hosts",$hosts);
+				return $hosts;
+				break;	
+		}
+		return parent::__get($field);
+	}
+
+	public function getHosts() {
+		return Doctrine_Query::create()
+				->select("h.*")
+				->from("IcingaHosts h")
+				->innerJoin("h.contacts cg ON cg.contact_object_id = "
+					.$this->contact_object_id." AND cg.insance_id = ".$this->instance_id.
+					" AND cg.host_id = h.host_id")
+				->execute(null,Doctrine_Core::HYDRATE_RECORD);
+	}
+
 
 }

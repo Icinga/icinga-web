@@ -206,7 +206,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetContacts() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->contacts->toArray()));
+		$this->assertFalse(is_null($host->contacts),"Contacts for host couldn't be retrieved, returned null");
 
 		info("********** DB Fixture upgrade needed - no host contacts available \n");
 		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object\n");
@@ -217,20 +217,40 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetContactgroups() {
 		$host = $this->hostProvider();
-		print_r($host->contactgroups->toArray());
-		die();
+		$this->assertFalse(is_null($host->contactgroups), "Contactgroups for host couldn't be retrieved, returned null");
+		$this->assertEquals($host->contactgroups->count(),1,"Expected 1 contactgroup to be returned");
+		$this->assertFalse(is_null($host->contactgroups->getFirst()->hosts),1,"Couldn't retrieve hosts for contactgroups" );
+		$found = false;
+		foreach($host->contactgroups->getFirst()->hosts as $_host) {
+			if($host == $_host) {
+				$found = true;
+				break;
+			}
+		}
+		$this->assertTrue($found, "Couldn't find host in host list of contactgroup");
+		success("Retrieving contactgroups succeeded\n");	
 	}
 	
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetHostChecks() {
 		$host = $this->hostProvider();
-		$host->checks->toArray();
 		$this->assertFalse(is_null($host->checks));
 		info("********** DB Fixture upgrade needed - no hostchecks available \n");
 		$this->markTestIncomplete("DB fixture doesn't allow proper testing of this object");
 	}	
 	
+		
+	/**
+	*   @depends HostDetailTest::testGetHost
+	**/
 	public function testGetServices() {
-		$this->fail("Not implemented");
+		$host = $this->hostProvider();
+		$this->assertFalse(is_null($host->services));
+		$this->assertEquals($host->services->count(),2);
+		$this->assertTrue($host->services->getFirst()->host == $host,"Returned service doesn't belong to host");	
+		success("Retrieving Services from host succeeded\n");
 	}
 
 }
