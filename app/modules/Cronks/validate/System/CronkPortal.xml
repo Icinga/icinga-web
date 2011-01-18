@@ -53,6 +53,13 @@
 			</errors>
 		</validator>
 		
+		<validator class="string" name="iconCls" required="false">
+			<argument>iconCls</argument>
+			<errors>
+				<error>Validation of 'iconCls' failed</error>
+			</errors>
+		</validator>
+		
 		<validator class="string" name="template" required="false">
 			<argument>template</argument>
 			<errors>

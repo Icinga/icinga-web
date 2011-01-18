@@ -196,11 +196,12 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 	},
 	
 	createURLCronk: function(data) {
-		console.log(data);
+		
 		var urlCronk =  Cronk.factory({
 			title: data.title,
 			crname: data.crname,
 			closable: true,
+			iconCls: data.iconCls || 'icinga-cronk-icon-go-out',
 			
 			params: {
 				'template': data.template
@@ -216,7 +217,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 			c.store.groupField = data.groupField;
 			
 			c.store.sort(data.groupField,data.groupDir);
-			AppKit.log(c);
+			
 			if(c.parentCmp.sort_array)  {
 				c.parentCmp.sort_array[0]['direction'] = data.groupDir;
 				c.parentCmp.sort_array[0]['field'] = data.groupField;

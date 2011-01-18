@@ -142,10 +142,15 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				"groupField=instance/";
 		}
 		
+		if (Ext.isDefined(cronk.iconCls)) {
+			urlParams +=
+				"iconCls=" + cronk.iconCls + "/";
+		}
+		
 		urlParams +=
 			"template="+this.initialConfig.meta.params.template+"/"+
 			"crname="+cronk.crname+"/"+
-			"title="+cronk.title;
+			"title="+cronk.title+"/";
 
 		return urlParams;		
 	},

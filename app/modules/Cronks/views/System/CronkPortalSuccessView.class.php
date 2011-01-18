@@ -13,12 +13,11 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView
 			"crname"=>false,
 			"title"=>false
 		);
-
+		
 		$rd->setParameter("isURLView",true);
 		foreach($customViewFields as $name=>&$val) {
 			$val = $rd->getParameter($name,null);
 			if($val == null) {
-
 				$rd->setParameter("isURLView",false);
 				break;
 			}
@@ -28,7 +27,7 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView
 			$this->formatFields($customViewFields);
 			$rd->setParameter("URLData",json_encode($customViewFields));
 		}
-
+		
 		$this->setupHtml($rd);		
 		$this->setAttribute('_title', 'Icinga.Cronks.CronkPortal');
 	}
