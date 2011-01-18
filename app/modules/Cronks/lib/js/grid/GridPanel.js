@@ -69,7 +69,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						iconCls: 'icinga-icon-anchor',
 						handler: function(oBtn,e) {
 							var urlParams = this.extractGridParams();
-							new Ext.Window({
+							
+							var win = new Ext.Window({
 								renderTo:Ext.getBody(),
 								modal:true,
 								initHidden:false,
@@ -83,8 +84,15 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 									xtype:'textfield',
 									fieldLabel: _('Link'),
 									width:350,
-									value: this.initialConfig.meta.baseURL+"/customPortal/"+urlParams
-								}
+									value: AppKit.c.path + "/web/customPortal/"+urlParams
+								},
+								bbar: [{
+									text: _('Close'),
+									iconCls: 'icinga-icon-close',
+									handler: function(b, e) {
+										win.close();
+									}
+								}]
 						
 							});
 						},
@@ -111,7 +119,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	
 	extractGridParams: function() {
-		AppKit.log(this);
+		
 		var store = this.store;
 		var cronk = this.ownerCt.CronkPlugin.cmpConfig;
 		var urlParams = "cr_base=";
@@ -133,6 +141,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				"/groupDir=ASC/"+
 				"groupField=instance/";
 		}
+		
 		urlParams +=
 			"template="+this.initialConfig.meta.params.template+"/"+
 			"crname="+cronk.crname+"/"+

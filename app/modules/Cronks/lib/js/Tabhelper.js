@@ -196,12 +196,17 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 	},
 	
 	createURLCronk: function(data) {
-
+		console.log(data);
 		var urlCronk =  Cronk.factory({
 			title: data.title,
 			crname: data.crname,
-			closable: true
+			closable: true,
+			
+			params: {
+				'template': data.template
+			}
 		});
+		
 		urlCronk.on("add",function(p, c, i) {
 			if(!c.store)
 				return null; 
