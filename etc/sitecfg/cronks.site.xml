@@ -9,6 +9,35 @@
 -->
 
 	<setting name="cronks">
+
+	<!--
+		<ae:parameter name="iframeViewIcingaBlog">
+			<ae:parameter name="module">Cronks</ae:parameter>
+			<ae:parameter name="action">System.IframeView</ae:parameter>
+			<ae:parameter name="hide">false</ae:parameter>
+			<ae:parameter name="description">View icinga latest news</ae:parameter>
+			<ae:parameter name="name">Icinga Blog</ae:parameter>
+			<ae:parameter name="image">cronks.world</ae:parameter>
+			<ae:parameter name="categories">my</ae:parameter>
+			<ae:parameter name="ae:parameter">
+				<ae:parameter name="url"><![CDATA[http://foo.bar/tests/phpinfo.php]]></ae:parameter>
+				
+				* Adding username and password to iframe
+				<ae:parameter name="user"></ae:parameter>
+				<ae:parameter name="password"></ae:parameter>
+
+				* Adding parameters to URL
+				<ae:parameter name="parameterMap">
+					* Arguments from request (in IframeView.xml validators)
+					<ae:parameter name="referer">_HEADERS[REFERER]</ae:parameter>
+					
+					* Simple parameters
+					<ae:parameter name="simpleargument">simplevalue</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+		</ae:parameter>
+	-->
+	
 	<!--	
 		<ae:parameter name="iframeViewIcingaBlog">
 			<ae:parameter name="module">Cronks</ae:parameter>

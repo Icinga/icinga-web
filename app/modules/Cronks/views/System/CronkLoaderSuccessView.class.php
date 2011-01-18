@@ -22,14 +22,13 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView
 				
 				if (array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
 					
-					foreach($cronk['ae:parameter'] as $key=>$param) {
-						if(is_array($param) || is_object($param)) {
-							$param = json_encode($param);
-							$cronk['ae:parameter'][$key] = $param;
-							$parameters[$key] = $param;
-						}
-						
-					}
+//					foreach($cronk['ae:parameter'] as $key=>$param) {
+//						if(is_array($param) || is_object($param)) {
+//							$param = json_encode($param);
+//							$cronk['ae:parameter'][$key] = $param;
+//							$parameters[$key] = $param;
+//						}
+//					}
 
 					$parameters = (array)$cronk['ae:parameter']
 					+ $parameters
