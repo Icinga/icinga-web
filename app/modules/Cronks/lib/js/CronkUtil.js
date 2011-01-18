@@ -199,6 +199,10 @@ Cronk.util.InterGridUtil = function(){
 			// disable grid autoload
 			config.params['storeDisableAutoload'] = 1;
 			
+			if (!Ext.isDefined(config.iconCls)) {
+				config.iconCls = 'icinga-cronk-icon-cube';
+			}
+			
 			if (!panel) {
 				
 				panel = Cronk.factory(config);					
