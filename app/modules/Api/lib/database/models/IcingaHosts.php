@@ -12,6 +12,10 @@
  */
 class IcingaHosts extends BaseIcingaHosts
 {
+	public static $STATE_UP = 0;
+	public static $STATE_DOWN = 1;
+	public static $STATE_UNREACHABLE = 2;
+	
 	public function __get($method)  {
 		switch($method) {
 			case  'contacts':
