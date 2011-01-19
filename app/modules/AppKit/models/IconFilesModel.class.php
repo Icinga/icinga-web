@@ -42,20 +42,21 @@ class AppKit_IconFilesModel extends AppKitBaseModel implements Countable {
 			. '*'
 			. $s;
 		
-		$iterator = new GlobIterator($q, FilesystemIterator::KEY_AS_FILENAME);
+		$files = glob($q, GLOB_NOSORT);
 		
-		foreach ($iterator as $fileInfo) {
-			$name = $fileInfo->getBasename($s);
+		foreach ($files as $file) {
+			$name = basename($file, $s);
+			
 			$this->files[] = array (
-				'web_path' => $this->web_path. DIRECTORY_SEPARATOR. rawurlencode($fileInfo->getBasename()),
+				'web_path' => $this->web_path. DIRECTORY_SEPARATOR. rawurlencode(basename($file)),
 				'name' => $name,
 				'short' => $this->part . '.'. $name 
 			);
 		}
 		
-		$this->count = $iterator->count();
+		$this->count = count($files);
 		
-		return true;;
+		return true;
 	}
 	
 	public function Count() {

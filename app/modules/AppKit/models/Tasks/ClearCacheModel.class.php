@@ -11,11 +11,11 @@ class AppKit_Tasks_ClearCacheModel extends AppKitBaseModel {
 			$this->getContext()->getLoggerManager()->log(sprintf('ClearCache: Deleted %d cache (content) objects', $config_count), AgaviLogger::INFO);
 		}
 		
-		$iterator = new GlobIterator($cache_dir. '/config/*.php', FilesystemIterator::KEY_AS_FILENAME);
-		$config_count = count($iterator);
+		$config_files = glob($cache_dir. '/config/*.php', GLOB_NOSORT);
+		$config_count = count($config_files);
 		if ($config_count > 0) {
-			foreach ($iterator as $fi) {
-				unlink($fi->getRealPath());
+			foreach ($config_files as $config_file) {
+				unlink($config_file);
 			}
 			$this->getContext()->getLoggerManager()->log(sprintf('ClearCache: Deleted %d cache (config) files', $config_count), AgaviLogger::INFO);
 		}
