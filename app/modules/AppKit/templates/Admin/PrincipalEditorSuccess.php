@@ -223,39 +223,42 @@ AppKit.principalEditor.principalSelector = Ext.extend(Ext.tree.TreePanel,{
 	},
 	
 	setPrincipals: function(selected) {
-		for(var name in selected) {
-			var desc_Record = this.getPrincipalDescriptor(name);
-			if(!desc_Record)
-				continue;
-	
-			var fields = AppKit.principalEditor.fieldConverter(desc_Record.get("fields"));
-			var ctr = 0;
-			if(fields.length > 0) {
-				for(var fieldNr in selected[name]) {
-					if(!fields[ctr] || Ext.isFunction(selected[name][fieldNr]))
-						continue;
-
-					fields[ctr]["id"] = fieldNr;
-					for(var fieldName in selected[name][fieldNr]) {
-						if(Ext.isFunction(selected[name][fieldNr][fieldName]))
-							continue;
-						if(!Ext.isDefined(fields[ctr]))
-							break;
-						fields[ctr]["name"] = fieldName;
-						fields[ctr++]["value"] = selected[name][fieldNr][fieldName];
-					}
-				}
-			}
-			desc_Record.set("fields",fields);
-
-			this.addPrincipal(desc_Record);
-			if(desc_Record.store)
-				desc_Record.store.remove(desc_Record);
-		}
+		
+		Ext.iterate(selected, function(target_name) {
+			
+			var fields = selected[target_name];
+			
+			Ext.iterate(fields, function(target_id, o) {
+			
+				var desc_record = this.getPrincipalDescriptor(target_name);
+				
+				var fields_list = AppKit.principalEditor.fieldConverter(desc_record.get("fields"));
+				
+				var i=0;
+				
+				Ext.iterate(o, function(fieldName, fieldValue) {
+					
+					fields_list[i].name = fieldName;
+					fields_list[i].value = fieldValue;
+					
+				}, this)
+				
+				desc_record.set('fields', fields_list);
+				
+				AppKit.log(desc_record);
+				
+				this.addPrincipal(desc_record);
+				
+				if(desc_record.store) desc_record.store.remove(desc_record);
+				
+			}, this);
+			
+		}, this);
 	},
 	
 	getPrincipalDescriptor: function(pr_name) {
 		store = AppKit.principalEditor.principalStore;
+		
 		var found = null;
 		store.each(function(record) {
 			if(record.get("name") == pr_name) {

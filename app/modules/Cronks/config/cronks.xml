@@ -87,7 +87,7 @@
 				<ae:parameter name="name">Hostgroups</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>
 				<ae:parameter name="image">cronks.Dots</ae:parameter>
-				<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
+				<!-- <ae:parameter name="groupsonly">appkit_admin</ae:parameter> -->
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
 				</ae:parameter>
