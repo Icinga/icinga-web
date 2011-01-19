@@ -182,7 +182,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		this.contextmenu.showAt(e.getPoint());
 	},
 	
-	enameTab : function() {
+	renameTab : function() {
 		var msg = Ext.Msg.prompt(_("Enter title"), _("Change title for this tab"), function(btn, text) {
 			
 			if (btn == 'ok' && text) {
