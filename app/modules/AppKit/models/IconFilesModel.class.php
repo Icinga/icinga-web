@@ -42,7 +42,7 @@ class AppKit_IconFilesModel extends AppKitBaseModel implements Countable {
 			. '*'
 			. $s;
 		
-		$files = glob($q, GLOB_NOSORT);
+		$files = glob($q);
 		
 		foreach ($files as $file) {
 			$name = basename($file, $s);
