@@ -101,17 +101,50 @@ class HostOverviewTest extends PHPUnit_Framework_TestCase {
 	
 		$hosts = $hostModel->getHostsById(array("181"));
 		$this->assertEquals($hosts->count(),1,"Valid host id returned wrong nr of hosts");
-		$newHost = $hostModel->getHostsByObjectId(array($hosts->host_object_id));
-		$this->assertTrue($newHost == $hosts,"Filter by Object id didn't return proper host");
+		$newHost = $hostModel->getHostsByObjectId(array($hosts->getFirst()->host_object_id));
+		$this->assertTrue($newHost->getFirst() == $hosts->getFirst(),"Filter by Object id didn't return proper host");
 		
-		success("Id Filter check succeeded");
+		success("Id Filter check succeeded\n");
 	}
 	
 
-	public function testCustomVarFilters() {
-		$this->fail("Not implemented");
+	public function testCustomVarFilters() {	
+		$hostModel = AgaviContext::getInstance()->getModel("ApiHostRequest","Api");	
+		
+		$hosts = $hostModel->getHostsByCustomVars(array("RACK"=>"%"));		
+		$this->assertFalse(is_null($hosts),"Retrieving hosts with cv RACK failed, returned null");
+		$this->assertEquals($hosts->count(),10,"Host count with cv RACK didn'T match expected value");
+		
+		$hosts = $hostModel->getHostsByCustomVars(array("RACK"=>"1"));
+		$this->assertFalse(is_null($hosts),"Retrieving hosts with cv RACK 1 failed, returned null");
+		$this->assertEquals($hosts->count(),7,"Host count with cv RACK 1 didn't match expected value");
+
+		success("Filter by custom vars succeeded\n");
 	}
+
+
 	public function testHostgroupFilters() {
-		$this->fail("Not implemented");
+		$hostModel = AgaviContext::getInstance()->getModel("ApiHostRequest","Api");
+		
+		$hosts = $hostModel->getHostsByHostgroupIds(array(64,66));
+		$this->assertFalse(is_null($hosts),"Retrieving hosts by hostgroup returned null");
+		foreach($hosts as $host) {
+			$inHostgroup = false;
+			foreach($host->hostgroups as $hostgroup) {
+				if($hostgroup->hostgroup_id == '64' || 
+						$hostgroup->hostgroup_id == '66') {
+					$inHostgroup = true;
+					break;
+				}
+			}
+			$this->assertTrue($inHostgroup,"Wrong host returned\n");
+		}
+
+		$n_hosts = $hostModel->getHostsByHostgroupNames(array('gmx','Mail Servers'));
+		$this->assertFalse(is_null($n_hosts),"Retrieving hosts by hostgroup name returned null");
+		$this->assertTrue($hosts == $n_hosts,"Returning hosts by hostgroupname instead of id returned different set");
+	
+		success("Filter by hostgroups succeeded\n");
 	}
+
 }
