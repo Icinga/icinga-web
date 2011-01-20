@@ -16,8 +16,8 @@ class IcingaConstantResolver {
 	);
 	
 	static private $active_check_type = array (
-		0	=> 'PASSIVE',
-		1	=> 'ACTIVE'
+		0	=> 'ACTIVE',
+		1	=> 'PASSIVE'
 	);
 	
 	static private $boolean_states = array (
