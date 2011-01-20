@@ -69,9 +69,8 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 						    },
 
 							notifyOver: function(dd, e, data) {
-
-								if (data.dragData.id.indexOf('portalView') == 0) {
-//									return false;
+								
+								if (data.dragData.cronkid.indexOf('portalView') == 0) {
 									return this.dropNotAllowed;
 								}
 
@@ -85,7 +84,6 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 									if (xy[0] >= item.x && xy[0] < item.x+item.w ) {
 										this.ac = index;
-//										return false;
 										return this.dropNotAllowed;
 									}
 
@@ -112,7 +110,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 									id: Ext.id(),
 
 									params: params,
-									crname: data.dragData.id,
+									crname: data.dragData.cronkid,
 									stateuid: Ext.id('cronk-sid'),
 									title: data.dragData.name,
 									closable: true,
@@ -121,6 +119,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 									tools: tools,
 									height: 200,
 									border: true
+									
 								});
 								
 								PortalHandler.initPortlet(portlet);
