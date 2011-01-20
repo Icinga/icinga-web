@@ -163,7 +163,94 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	
 	setFilter : function(f) {
 		this.filter = f;
-	}
+	},
+	
+	stateEvents: ['activate', 'columnmove ', 'columnresize', 'groupchange', 'sortchange'],
+	
+	getPersistentColumnModel : function() {
+		
+		o = {};
+		Ext.iterate(this.colModel.config, function(col, colId) {
+			o[colId] = {};
+			Ext.copyTo(o[colId], col, [
+				'hidden',
+				'width',
+				'dataIndex',
+				'id',
+				'sortable'
+			]);
+		}, this);
+		
+		return o;
+	},
+	
+	applyPersistentColumnModel : function(data) {
+		var cm = this.colModel;
+		
+		Ext.iterate(data, function(colId, col) {
+			
+			if (Ext.isDefined(col.dataIndex)){
+				var org = cm.getColumnById(colId);
+				
+				// Column was not moved arropund
+				if (org.dataIndex == col.dataIndex) {
+					cm.setHidden(colId, col.hidden);
+					cm.setColumnWidth(colId, col.width);
+				}
+			}
+			
+		}, this);
+	},
+	
+	getState: function() {
+		var store = this.getStore();
+	
+		var o = {
+			filter_params: this.filter_params || {},
+			filter_types: this.filter_types || {},
+			store_origin_params: ("originParams" in store) ? store.originParams : {},
+			colModel: this.getPersistentColumnModel()
+		};
+		
+		return o;
+	},
+	
+	applyState: function(state) {
+		var reload = false;
+		var store = this.getStore();
+		
+		if (Ext.isObject(state.colModel)) {
+			this.applyPersistentColumnModel(state.colModel);
+		}
+		
+		if (state.filter_types) {
+			this.filter_types = state.filter_types;
+		}
+		
+		if (state.store_origin_params) {
+			store.originParams = state.store_origin_params;
+			this.applyParamsToStore(store.originParams, store);
+			reload = true;
+		}
+		
+		if (state.filter_params) {
+			this.filter_params = state.filter_params;
+			this.applyParamsToStore(this.filter_params, store);
+			reload = true;
+		}
+		
+		if (reload == true) {
+			store.reload();
+		}
+					
+		return true;
+	},
+	
+	applyParamsToStore : function(params) {
+		for (var i in params) {
+			this.store.setBaseParam(i, params[i]);
+		}
+	},
 	
 });
 

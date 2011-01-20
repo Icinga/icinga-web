@@ -265,55 +265,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		if (pub.stateuid) {
 			Ext.apply(grid_config, {
 				stateful: Ext.isDefined(pub.initialstate) ? false : true,
-				
-				stateId: pub.stateuid,
-				
-				stateEvents: ['activate'],
-				
-				getState: function() {
-					var store = this.getStore();
-				
-					var o = {
-						filter_params: this.filter_params || {},
-						filter_types: this.filter_types || {},
-						store_origin_params: ("originParams" in store) ? store.originParams : {}
-					};
-					
-					var e = true;
-
-					for (var i in o.filter_params) { e=false; break; }
-					for (var i in o.filter_types) { e=false; break; }
-					for (var i in o.store_origin_params) { e=false; break; }
-
-					if (e == false) {
-						return o;
-					}
-				},
-				
-				applyState: function(state) {
-					var reload = false;
-					var store = this.getStore();
-					
-					if (state.filter_types) {
-						this.filter_types =  pub.filter_types = state.filter_types;
-					}
-					
-					if (state.store_origin_params) {
-						store.originParams = state.store_origin_params;
-						pub.applyParamsToStore(store.originParams, store) && (!reload && (reload=true));
-					}
-					
-					if (state.filter_params) {
-						this.filter_params = pub.filter_params = state.filter_params;
-						
-						pub.applyParamsToStore(this.filter_params, store) && (!reload && (reload=true));
-					}
-					
-					(reload == true) && (store.reload());
-					
-//					log(store.originParams);			
-					return true;
-				}
+				stateId: pub.stateuid
 			});
 		}
 		
@@ -469,15 +421,6 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		
 		setStoreUrl : function(url) {
 			this.store_url = url;
-		},
-		
-		applyParamsToStore : function(params, store) {
-			var retval = false;
-			for (var i in params) {
-				store.setBaseParam(i, params[i]);
-				(!retval) && (retval = true);
-			}
-			return retval;
 		},
 		
 		getMetaMapping : function() {
