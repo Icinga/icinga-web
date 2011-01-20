@@ -151,7 +151,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		foreach ($categories as $cid=>$category) {
 			$count = 0;
 			foreach ($cronks as $cronk) {
-				if (isset($cronk['categories']) && $cid && strpos(strtolower($cronk['categories']), strtolower($cid)) !== false) {
+				if (isset($cronk['categories']) && $this->matchCategoryString($cronk['categories'], $cid)) {
 					$count++;
 				}
 			}
@@ -560,7 +560,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			$tmp = array ();
 			
 			foreach ($cronks as $cronk) {
-				if (strpos(strtolower($cronk['categories']), strtolower($category_name)) !== false) {
+				if ($this->matchCategoryString($cronk['categories'], $category_name)) {
 					$tmp[] = $cronk;
 				}
 				
@@ -582,6 +582,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		);
 		
 		return $data;
+	}
+	
+	private function matchCategoryString($categories, $match) {
+		$match=preg_quote($match);
+		return preg_match('/(^|,)'. $match. '(,|$)/i', $categories);
 	}
 }
 
