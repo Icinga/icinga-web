@@ -195,7 +195,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		msg.getDialog().alignTo(this.contextmenu.el, 'tr-tr');
 	},
 	
-	createURLCronk: function(data) {
+	createURLCronk: function(data) {		
 		
 		var urlCronk =  Cronk.factory({
 			title: data.title,
@@ -211,8 +211,12 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 		urlCronk.on("add",function(p, c, i) {
 			if(!c.store)
 				return null; 
-
+			
 			Ext.apply(c.store.baseParams,data.cr_base);
+			
+			c.store.originParams= {};
+			Ext.apply(c.store.originParams,data.cr_base);
+			
 			c.store.groupDir = data.groupDir;
 			c.store.groupField = data.groupField;
 			
@@ -222,9 +226,12 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 				c.parentCmp.sort_array[0]['direction'] = data.groupDir;
 				c.parentCmp.sort_array[0]['field'] = data.groupField;
 			}
+			
 			c.store.load();
-
+			
+			AppKit.log(c.getState());
 		});
+		
 		return urlCronk;
 	}
 	

@@ -15,7 +15,6 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 	
 	setURLTab : function(params) {
 		this.URLTabData = params;
-		
 	},
 	
 	getTabIndex: function(tab) {
@@ -63,12 +62,14 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
 					this.add(item);
 				}, this);
 				
-				// Sets the active tab
-				this.setActiveTab(state.active || 0);
 				if(this.URLTabData) {
-
-					this.setActiveTab(this.add(this.plugins.createURLCronk(this.URLTabData)));		
+					var index = this.add(this.plugins.createURLCronk(this.URLTabData));
+					this.setActiveTab(index);	
 				}				
+				else {
+					this.setActiveTab(state.active || 0);
+				}
+				
 				this.getActiveTab().doLayout();
 			}
 				

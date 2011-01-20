@@ -187,6 +187,13 @@ AppKit.util.Config = (function() {
 		
 		getMap : function() {
 			return this.map;
+		},
+		
+		getBaseUrl : function() {
+			return (this.get('issecure')==true) ? 'https://' : 'http://'
+				+ this.get('domain')
+				+ this.get('path');
+			
 		}
 		
 	}))());

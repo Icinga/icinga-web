@@ -41,8 +41,13 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView
 		foreach($formatFields as $fieldName) {
 			$field = $fields[$fieldName];
 			$result = array();
-			// split at ; 
-			$fieldParts = explode(";",$field);
+			
+			// Because of empty arrays in javascript
+			$field = preg_replace('/;$/', '', $field);
+			
+			// split at ;
+			$fieldParts = explode(';',$field);
+			
 			foreach($fieldParts as $currentField) {
 				if(!$currentField)
 					continue;
@@ -50,8 +55,11 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView
 				//rebuild field
 				$parts = array();
 				if(preg_match("/(\w*?)\|(.*?)_\d+=(.*)/",$currentField,$parts)) {
-					if(!isset($result[$parts[1]]))
-						$result[$parts[1]] = array();
+					
+					// @todo: Works better without, quickfix!
+					//if(!isset($result[$parts[1]]))
+					//	$result[$parts[1]] = array();
+						
 					$result[$parts[1]."[".$parts[2]."]"] = $parts[3];
 				} else {
 					$str = explode("=",$currentField);
