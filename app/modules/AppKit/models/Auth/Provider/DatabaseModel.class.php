@@ -32,7 +32,7 @@ class AppKit_Auth_Provider_DatabaseModel extends AppKitAuthProviderBaseModel imp
 		->where('u.user_name=? and user_disabled=?', array($uid, 0))
 		->execute(null, Doctrine::HYDRATE_ARRAY);
 		
-		if ($res[0]['cnt'] !== 0) {
+		if (isset($res[0]['cnt']) && $res[0]['cnt'] != "0" && (int)$res[0]['cnt'] === 1) {
 			return true;
 		}
 		
