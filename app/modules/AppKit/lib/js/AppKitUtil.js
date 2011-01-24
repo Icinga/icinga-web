@@ -249,7 +249,12 @@ AppKit.util.Dom = (function () {
 		parseDOMfromString : function(string, contentType) {
 			if (!Ext.isEmpty(window.DOMParser)) {
 				return (new DOMParser()).parseFromString(string, contentType || 'text/xml').firstChild;
-				
+			}
+			else {
+				xmlDoc=new ActiveXObject('Microsoft.XMLDOM');
+				xmlDoc.async='false';
+				xmlDoc.loadXML(string);
+				return xmlDoc.firstChild
 			}
 			
 			throw('parseDOMfromString: could not create a new DOMParser instance!');
