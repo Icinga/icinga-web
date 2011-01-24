@@ -140,7 +140,11 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 					handler: function() {
 						tp.items.each(function(item){
 							if(item.closable && item != ctxItem){
-								tp.remove(item);
+								// IE stops there because Ext.fly
+								try {
+									tp.remove(item, true);
+								}
+								catch(e) {}
 							}
 						});
 					}
