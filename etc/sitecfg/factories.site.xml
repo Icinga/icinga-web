@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/factories/1.0">
+	
+	<ae:configuration >
+		<!--
+		* Example customize sessions 
+		<storage class="AppKitDoctrineSessionStorage">
+			<ae:parameter name="session_cookie_lifetime">3600</ae:parameter>
+			<ae:parameter name="session_name">icinga-web-CUSTOMISED</ae:parameter>
+			<ae:parameter name="gzip_level">6</ae:parameter>
+		</storage>
+		-->
+	</ae:configuration>
+	
+</ae:configurations>

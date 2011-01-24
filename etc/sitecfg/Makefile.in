@@ -15,3 +15,6 @@ install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) cronks.site.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/cronks.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) databases.site.xml $(DESTDIR)$(prefix)/app/config/databases.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) icinga.site.xml $(DESTDIR)$(prefix)/app/config/icinga.site.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) settings.site.xml $(DESTDIR)$(prefix)/app/config/settings.site.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) translation.site.xml $(DESTDIR)$(prefix)/app/config/translation.site.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) factories.site.xml $(DESTDIR)$(prefix)/app/config/factories.site.xml
