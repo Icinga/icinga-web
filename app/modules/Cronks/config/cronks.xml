@@ -161,7 +161,7 @@
 			<ae:parameter name="gridLogView">
 				<ae:parameter name="module">Cronks</ae:parameter>
 				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
 				<ae:parameter name="description">Display icinga process log</ae:parameter>
 				<ae:parameter name="name">LogView</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>

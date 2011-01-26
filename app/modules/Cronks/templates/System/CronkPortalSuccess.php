@@ -42,26 +42,29 @@ Cronk.util.initEnvironment('viewport-center', function() {
 				width: 280
 			}]
 			
-		}, {
-			region: 'south',
-			id: 'south-frame',
-			layout: 'fit',
-			title: _('log'),
-			collapsible: true,
-			split: true,
-			minSize: 150,
-			height: 150,
-			stateful: true,
-			stateId: 'south-frame',
-			items: {
-				xtype: 'cronk',
-				crname: 'gridLogView',
-				border: false,
-				params: {
-					autoRefresh: <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>
-				}
-			}
-		}, {
+		},
+//			{
+//				region: 'south',
+//				id: 'south-frame',
+//				layout: 'fit',
+//				title: _('log'),
+//				collapsible: true,
+//				split: true,
+//				minSize: 150,
+//				height: 150,
+//				stateful: true,
+//				stateId: 'south-frame',
+//				items: {
+//					xtype: 'cronk',
+//					crname: 'gridLogView',
+//					border: false,
+//					params: {
+//						autoRefresh: <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>
+//					}
+//				}
+//			}, 
+		
+		{
 			region: 'center',
 			id: 'center-frame',
 			layout: 'fit',
