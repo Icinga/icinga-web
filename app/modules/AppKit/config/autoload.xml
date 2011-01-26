@@ -37,8 +37,6 @@
 		<autoload name="AppKitSQLConstants">%core.module_dir%/AppKit/lib/database/AppKitSQLConstants.class.php</autoload>
 		<autoload name="AppKitDateTime">%core.module_dir%/AppKit/lib/date/AppKitDateTime.class.php</autoload>
 		<autoload name="AppKitDoctrineException">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineException.class.php</autoload>
-		<autoload name="AppKitDoctrinePager">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrinePager.class.php</autoload>
-		<autoload name="AppKitDoctrinePagerLayout">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrinePagerLayout.class.php</autoload>
 		<autoload name="AppKitDoctrineRecord">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineRecord.class.php</autoload>
 		<autoload name="AppKitDoctrineUtil">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineUtil.class.php</autoload>
 		<autoload name="AppKitEvent">%core.module_dir%/AppKit/lib/event/AppKitEvent.class.php</autoload>
