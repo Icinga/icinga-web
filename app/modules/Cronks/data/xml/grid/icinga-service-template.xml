@@ -640,8 +640,8 @@
 							<parameter name="targetField">service_name</parameter>-->
 							
 							<parameter name="filterMap">
-								<parameter name="service_name">service_name</parameter>
-								<parameter name="host_name">host_name</parameter>
+								<parameter name="service_object_id">service_object_id</parameter>
+								<parameter name="host_object_id">host_object_id</parameter>
 							</parameter>
 							
 							<parameter name="labelField">service_name</parameter>
@@ -660,6 +660,77 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
+        
+        <field name="service_to_host_link">
+            <datasource>
+            	<parameter name="field">SERVICE_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+
+                <parameter name="width">22</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                	<parameter name="menuDisabled">true</parameter>
+                	<parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                
+                	<parameter>
+	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+	                	<parameter name="function">columnImage</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">renderer</parameter>
+	                	
+	                	<parameter name="arguments">
+							<parameter name="image">images/icons/server.png</parameter>
+							<parameter name="css">x-icinga-grid-link</parameter>
+							<parameter name="attr">
+								<parameter name="qtip">Click here for the host</parameter>
+							</parameter>
+	                	</parameter>
+	                </parameter>
+	                
+					<parameter>
+	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+	                	<parameter name="function">subGrid</parameter>
+	                	
+	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+	                	<parameter name="type">cellclick</parameter>
+	                	
+	                	<parameter name="arguments">
+	                		<parameter name="idPrefix">serviceToHost</parameter>
+	                		<parameter name="titlePrefix">Host for service </parameter>
+							<parameter name="targetTemplate">icinga-host-template</parameter>
+							<!--<parameter name="sourceField">service_name</parameter>
+							<parameter name="targetField">service_name</parameter>-->
+							
+							<parameter name="filterMap">
+								<parameter name="host_object_id">host_object_id</parameter>
+							</parameter>
+							
+							<parameter name="labelField">service_name</parameter>
+	                	</parameter>
+	                </parameter>
+                
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
 <!--
 		Preliminary example for adding grapher icon integration
 		<field name="service_graph_link">
