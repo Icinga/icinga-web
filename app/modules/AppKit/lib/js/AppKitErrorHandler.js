@@ -109,15 +109,16 @@ Ext.ns("AppKit.errorHandler");
 		}
 
 		var setupErrorDisplay = function() {
-
-			var elem = Ext.getCmp('menu-navigation');
-			bugReportField = new Ext.Button({
-				text: occuredErrors.length,
-				iconCls: 'icinga-icon-bug',
-				handler: AppKit.BugTracker.showErrorMessageInfoBox
-			})
-			elem.addItem(bugReportField);
-			elem.doLayout();
+			if (Ext.getCmp('menu-navigation')) {
+				var elem = Ext.getCmp('menu-navigation');
+				bugReportField = new Ext.Button({
+					text: occuredErrors.length,
+					iconCls: 'icinga-icon-bug',
+					handler: AppKit.BugTracker.showErrorMessageInfoBox
+				})
+				elem.addItem(bugReportField);
+				elem.doLayout();
+			}
 			
 		}
 

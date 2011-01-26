@@ -476,65 +476,12 @@ table.icinga-detailed-info td.key {
 	
 }
 
-/** NORTH FRAME **/
-#north-frame {
-	height: 80px;
+div#menu {
+	border-bottom: 1px #999 solid;
 }
 
 #north-frame div {
 	border: none;
-}
-
-/** FANCY TEXT FIELDS **/
-.fancytextfield-box {
-	width: 220px;
-}
-
-.fancytextfield-box .x-box-mc {
-	padding: 0 4px;
-}
-
-.fancytextfield-container {
-	width: 200px;
-	height: 20px;
-	position: relative;
-	padding: 0px 0px 0px 0px;
-	margin: 0px 0px 0px 0px;
-}
-
-.fancytextfield-icon {
-	position: absolute;
-	top: 5px;
-	left: 0px;
-	width: 11px;
-	height: 11px;
-	background: url(../images/icons/fancytextfield-icon.png) no-repeat center left;
-}
-
-.fancytextfield-input {
-	position: absolute;
-	top: 2px;
-	left: 16px;
-	background: none;
-	border: none;
-	font:normal 10px tahoma, arial, helvetica, sans-serif;
-}
-
-.fancytextfield-reset-button {
-	position: absolute;
-	top: -1px;
-	right: 0px;
-	width: 11px;
-	height: 11px;
-	background: url(../images/icons/fancytextfield-reset.png) no-repeat center right;
-	border: none;
-}
-
-.fancytextfield-reset-button table, .fancytextfield-reset-button tr, .fancytextfield-reset-button td {
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-	border: none;
-	background: none;
 }
 
 /** STATUS-SUMMARY VIEW **/

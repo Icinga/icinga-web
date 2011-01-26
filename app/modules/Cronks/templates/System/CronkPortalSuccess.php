@@ -16,28 +16,32 @@ Cronk.util.initEnvironment('viewport-center', function() {
 		items: [{
 			region: 'north',
 			id: 'north-frame',
-			layout: 'column',
-			style: 'height: 50px; padding: 5px; background-color: #ffffff',
-			defaults: { border: false },
-			autoHeight: true,
-
+			
+			layout: 'hbox',
+			layoutConfig: {
+			    align : 'stretch',
+			    pack  : 'start'
+			},
+			
+			padding: 5,
+			height: 65,
+			
+			defaults: { border: false },			
+			
 			items: [{
 				xtype: 'cronk',
 				crname: 'icingaSearch',
-				width: 250,
-				margin:0,
-				border: false
+				width: 240
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaOverallStatus',
-				width: 480,
-				border: false
+				width: 480
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaMonitorPerformance',
-				width: 280,
-				border: false
+				width: 280
 			}]
+			
 		}, {
 			region: 'south',
 			id: 'south-frame',
