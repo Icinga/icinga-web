@@ -6,14 +6,17 @@
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
-class availabilityTest extends AgaviPhpUnitTestCase {
+/**
+* @depends agaviBootstrapTest::testBootstrap 
+*/	
+class availabilityTest extends PHPUnit_Framework_TestCase {
 			
 	public function testShowLoginMask() {
 		$ctx = AgaviContext::getInstance('web');
 		$container = $ctx->getController()->createExecutionContainer("AppKit","Login.AjaxLogin",null,"html");
 		try {
 			$result = $container->execute();
-			if($result->getHttpStatusCode() != '200' && $result->getHttpStatusCode() != '401' )
+			if($result->getHttpStatusCode() != '200' && $result->getHttpStatusCode() != '403' )
 				$this->fail("Login mask call failed with status code ".$result->getHttpStatusCode());
 		} catch(Exception $e) {
 			$this->fail("Login mask threw an exception ".$e->getMessage());	
@@ -29,7 +32,7 @@ class availabilityTest extends AgaviPhpUnitTestCase {
 		$params->setParameters(array(
 			"dologin" => 1,
 			"password" => "gdsg352sg",
-			"username" => "gdsgsgdsggdsgd"
+			"username" => "root"
 		));
 		$json = null;
 		$ctx = AgaviContext::getInstance('web');

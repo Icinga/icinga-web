@@ -1,14 +1,21 @@
 <?php
-
+/**
+* @depends agaviBootstrapTest::testBootstrap 
+*/	
 class icingaRoleOperations extends PHPUnit_Framework_TestCase {
+	public static $idFixture;
 	public static function setUpBeforeClass() {
-		Doctrine_Manager::connection()->beginTransaction();
-		$context = AgaviContext::getInstance();
-		$context->getUser()->addCredential("appkit.admin");
-		$context->getUser()->addCredential("appkit.admin.users");
-		$context->getUser()->addCredential("appkit.admin.groups");
-		$context->getUser()->addCredential("icinga.user");
-		$context->getUser()->setAuthenticated(true);
+		try {	
+			Doctrine_Manager::connection()->beginTransaction();
+			$context = AgaviContext::getInstance();
+			$context->getUser()->addCredential("appkit.admin");
+			$context->getUser()->addCredential("appkit.admin.users");
+			$context->getUser()->addCredential("appkit.admin.groups");
+			$context->getUser()->addCredential("icinga.user");
+			$context->getUser()->setAuthenticated(true);
+		} catch(Exception $e) {
+			error("Couldn't retrieve connection ".$e->getMessage()."\n");
+		}	
 	}
 	protected $roleParams = array(
 		"id" => "new",
@@ -50,8 +57,8 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 			$this->assertType("NsmRole",$result,"No group found, something seemed to go wrong");
 			
 			success("\tCreating roles suceeded!\n");
-
-			return $result->get("role_id");
+			self::$idFixture = $result["role_id"];
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Adding a role failed!".$e->getMessage());
 		}
@@ -60,8 +67,9 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	/**
 	 * @depends testRoleAdd
 	 */
-	public function testRoleSelect($roleId) {
+	public function testRoleSelect() {
 		try {
+			$roleId = self::$idFixture;				
 			info("\tTesting icinga-web action: Reading roles\n");
 		
 			$context = AgaviContext::getInstance();
@@ -97,7 +105,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 				}
 			}
 			success("\tReading roles suceeded!\n");
-			return $roleId;
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Selecting roles failed!".$e->getMessage());
 		}
@@ -106,8 +114,9 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	/** 
 	 * @depends testRoleSelect
 	 */
-	public function testPrincipalAdd($roleid) {
+	public function testPrincipalAdd() {
 		try {
+			$roleid = self::$idFixture;				
 			info("\tTesting icinga-web action: Add principal to role\n");
 			$context = AgaviContext::getInstance();
 
@@ -116,7 +125,6 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 			foreach($this->roleAlterParams as $field=>$value) {
 				$alterParams->setParameter($field,$value);
 			}
-
 			$alterParams->setParameter("id",$roleid);
 			$alterParams->setParameter("role_id",$roleid);
 			$alterParams->setParameter("principal_target",$params);
@@ -129,7 +137,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 		
 			$this->assertArrayHasKey("7",$role->getTargets()->toArray(),"Setting Principal failed");
 			success("\tAdding principals to role suceeded!\n");
-			return $roleid;
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Adding a principals to role failed!".$e->getMessage());
 		}
@@ -138,8 +146,9 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	/** 
 	 * @depends testPrincipalAdd
 	 */
-	public function testPrincipalRead($roleid) {
+	public function testPrincipalRead() {
 		try {
+			$roleid = self::$idFixture;				
 			info("\tTesting icinga-web action: Reading principals\n");
 			$context = AgaviContext::getInstance();
 			$readParams = new AgaviRequestDataHolder();
@@ -157,7 +166,8 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	/**
 	 * @depends testRoleAdd
 	 */
-	public function testRoleRemove($id) {
+	public function testRoleRemove() {
+		$id = self::$idFixture;				
 		$this->markTestSkipped("Role delete test doesn't work with transactions yet.");
 		try {
 			info("\tTesting icinga-web action: Removing roles\n");
@@ -178,6 +188,10 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 		}
 	}	
 	public static function tearDownAfterClass() {
-		Doctrine_Manager::connection()->rollback();
+		try {	
+			Doctrine_Manager::connection()->rollback();
+		} catch(Exception $e) {
+			info("Rollback failed, check for previous errors\n");
+		}
 	}
 }

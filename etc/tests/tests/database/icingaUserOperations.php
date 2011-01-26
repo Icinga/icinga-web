@@ -1,21 +1,27 @@
 <?php
 /**
- * Test case that tests database user operations that normally are performed via the Admin 
- * actions
- * 
- */
-
+* @depends agaviBootstrapTest::testBootstrap 
+*/	
 class icingaUserOperations extends PHPUnit_Framework_TestCase {
+	/**
+	* @depends agaviBootstrapTest::testBootstrap 
+	*/	
 	public static function setUpBeforeClass() {
-		Doctrine_Manager::connection()->beginTransaction();
-		$context = AgaviContext::getInstance();
-		$context->getUser()->addCredential("appkit.admin");
-		$context->getUser()->addCredential("appkit.admin.users");
-		$context->getUser()->addCredential("appkit.admin.groups");
-		$context->getUser()->addCredential("icinga.user");
-		$context->getUser()->setAuthenticated(true);
+		try {
+			Doctrine_Manager::connection()->beginTransaction();
+			$context = AgaviContext::getInstance();
+			$context->getUser()->addCredential("appkit.admin");
+			$context->getUser()->addCredential("appkit.admin.users");
+			$context->getUser()->addCredential("appkit.admin.groups");
+			$context->getUser()->addCredential("icinga.user");
+			$context->getUser()->setAuthenticated(true);
+		} catch(Exception $e) {
+			error("Exception on connection retrieval: ".$e->getMessage()."\n");
+		}
 	}
-	
+
+	public static $idFixture;
+		
 	protected $params = array(
 		"id"=>"new",
 		"user_id" => "new",
@@ -68,7 +74,8 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			$result = Doctrine_Core::getTable("NsmUser")->findBy("user_name",$user["user_name"])->getFirst();		
 			$this->assertType("NsmUser",$result,"No user found, something seemed to go wrong");
 			success("\tCreated user exists!\n");
-			return $result->get("user_id");
+			self::$idFixture = $result->get("user_id");
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Adding a new user failed : ".$e->getMessage());
 		}
@@ -79,8 +86,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/**
 	 * @depends testUserAdd
 	 */
-	public function testUserSelect($id) {
+	public function testUserSelect() {
 		try {
+			$id = self::$idFixture;
 			info("\tTesting icinga-web action : List users\n");
 			$context = AgaviContext::getInstance();
 			$directDBList_all = Doctrine_Query::create()->select("n.*,pr.*,r.*")->from("NsmUser n")->leftJoin("n.NsmPrincipal pr")->leftJoin("n.NsmUserRole r")->execute()->toArray(true);
@@ -119,7 +127,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 				}
 			}
 			success("\tSuccess - result matches!\n");
-			return $id; // pass user id
+			return true; // pass user id
 		} catch(Exception $e) {
 			$this->fail("Selecting user failed: ".$e->getMessage());
 		}
@@ -129,8 +137,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/**
 	 * @depends testUserSelect
 	 */
-	public function testUserAlter($id) {
+	public function testUserAlter() {
 		try {
+			$id = self::$idFixture;
 			info("\tTesting icinga-web action : Edit user\n");
 			$context = AgaviContext::getInstance();
 			
@@ -160,7 +169,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			success("\tAlter user succeeded!\n");
 			// Set created user as current user
 			$context->getUser()->setAttributeByRef(AppKitSecurityUser::USEROBJ_ATTRIBUTE,$user);
-			return $id;
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Altering users failed: ".$e->getMessage());
 		}
@@ -170,8 +179,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	 * 
 	 * @depends testUserAlter
 	 */
-	public function testUserPreferenceAdd($userid) {
+	public function testUserPreferenceAdd() {
 		try {
+			$userid = self::$idFixture;
 			info("\tTesting icinga-web action: Set user preference\n");
 			$context = AgaviContext::getInstance();
 			
@@ -193,7 +203,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 									->execute();			
 			$this->assertNotNull($result->getFirst(),"Preference could not be set!");
 			success("\tSetting preferences suceeded!\n");
-			return $userid;
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Setting an user preference failed!".$e->getMessage());
 		}
@@ -203,8 +213,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	 * 
 	 * @depends testUserPreferenceAdd
 	 */
-	public function testUserPreferenceRemove($userid) {	
+	public function testUserPreferenceRemove() {	
 		try {
+			$userid = self::$idFixture;
 			info("\tTesting icinga-web action: Remove user preference\n");
 			$context = AgaviContext::getInstance();
 
@@ -219,7 +230,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for eediting user preferences not found");				
 			
 			success("\tDeleting preferences suceeded!\n");
-			return $userid;
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Removing an user preference failed!".$e->getMessage());
 		}
@@ -229,8 +240,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/** 
 	 * @depends testUserAlter
 	 */
-	public function testPrincipalAdd($userid) {
+	public function testPrincipalAdd() {
 		try {
+			$userid = self::$idFixture;
 			info("\tTesting icinga-web action: Add principal\n");
 			$context = AgaviContext::getInstance();
 
@@ -252,7 +264,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 		
 			$this->assertArrayHasKey("2",$user->getTargets()->toArray(),"Setting Principal failed");
 			success("\tAdding principals suceeded!\n");
-			return $userid;
+			return true;
 		} catch(Exception $e) {
 			$this->fail("Adding a principal failed!".$e->getMessage());
 		}
@@ -261,8 +273,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/** 
 	 * @depends testPrincipalAdd
 	 */
-	public function testPrincipalRead($userid) {
+	public function testPrincipalRead() {
 		try {
+			$userid = self::$idFixture;
 			info("\tTesting icinga-web action: Reading principals\n");
 			$context = AgaviContext::getInstance();
 			$readParams = new AgaviRequestDataHolder();
@@ -280,7 +293,8 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/**
 	 * @depends testUserAdd
 	 */
-	public function testUserDelete($user) {
+	public function testUserDelete() {
+		$user = self::$idFixture;	
 		$this->markTestSkipped("User delete test doesn't work with transactions yet.");
 		try {
 			info("\tTesting icinga-web action: Remove user\n");
@@ -303,7 +317,12 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 
 	public static function tearDownAfterClass() {
-		Doctrine_Manager::connection()->rollback();
+		try {	
+			Doctrine_Manager::connection()->rollback();
+		} catch(Exception $e) {
+			info("Rollback failed, check for previous errors \n");
+
+		}
 	}
 	
 }

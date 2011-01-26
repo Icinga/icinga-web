@@ -7,11 +7,14 @@
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
-class icingaDatabaseAccessibleTest extends AgaviPhpUnitTestCase {
+/**
+* @depends agaviBootstrapTest::testBootstrap 
+*/	
+class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 	private $properties = array();
 	private $insertFailed = false;
 	
-	private $dbTestEntries =array(
+	private static $dbTestEntries =array(
 		array("model"=>"NsmRole",
 			"fields"=>array(
 				"role_name"=>"TestCaseRole",
@@ -99,12 +102,13 @@ class icingaDatabaseAccessibleTest extends AgaviPhpUnitTestCase {
 	public function testInsert() {
 		
 		info("Insert tests\n");
-		foreach($this->dbTestEntries as &$entry) {
+		foreach(self::$dbTestEntries as &$entry) {
 			$model = $entry["model"];
 			$fields = $entry["fields"];
 			try {
 				info("\tInserting data in ".$model." \n");
-				$this->assertTrue(class_exists($model),"Couldn't find class ".$model);
+				if(!class_exists($model))
+					$this->fail("Couldn't find class ".$model);
 				$dbRecord = new $model();
 				foreach($fields as $name=>&$field) {
 					$dbRecord->set($name,$field);
@@ -117,14 +121,15 @@ class icingaDatabaseAccessibleTest extends AgaviPhpUnitTestCase {
 				$this->fail($e->getMessage());
 			}
 		}
-		return $this->dbTestEntries;
+		return true;
 	}
 
 	/**
 	 * @depends testInsert
 	 */
-	public function testDataEquality($entries) {
+	public function testDataEquality() {
 		info("Checking inserted data\n");
+		$entries = self::$dbTestEntries;
 		foreach($entries as $entry) {
 			$model = $entry["model"];
 			$fields = $entry["fields"];
@@ -134,15 +139,16 @@ class icingaDatabaseAccessibleTest extends AgaviPhpUnitTestCase {
 				$this->assertEquals($dbmodel->get($field),$value,"The value for field ".$field." in ".$model." differs from the initial value!");
 			}
 		}
-		return $entries;
+		return true;
 	}
 	
 	/**
 	 * @depends testDataEquality
 	 * @depends testInsert
 	 */
-	public function testRemove($entries) {
+	public function testRemove() {
 		info("Test delete operation\n");
+		$entries = self::$dbTestEntries;
 		foreach($entries as $entry) {
 			$model = $entry["model"];
 			$fields = $entry["fields"];

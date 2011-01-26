@@ -126,13 +126,12 @@ abstract class Doctrine_Parser
 
             file_put_contents($path, $contents);
         }
-		$contents = file_get_contents($path);
-        /*
-        include($path);
 
+        include($path);
+        
         // Fix #1569. Need to check if it's still all valid
         $contents = ob_get_clean(); //iconv("UTF-8", "UTF-8", ob_get_clean());
-*/
+
         return $contents;
     }
 

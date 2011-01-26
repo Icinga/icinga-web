@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/testing/suites/1.0">
-	<ae:configuration>
-		<suites>
-			<suite name="Installation">
-				<testfiles>
-					<testfile>installation/userRightsTest.php</testfile>
-					<testfile>installation/configSettingsTest.php</testfile>
-				</testfiles>
-			</suite>
-			<suite name="Database">
-				<testfiles>
-					<testfile>database/icingaDatabaseAccessibleTest.php</testfile>
-					<testfile>database/icingaUserOperations.php</testfile>
-					<testfile>database/icingaRoleOperations.php</testfile>
-					<testfile>database/persistenceView.php</testfile>
-				</testfiles>
-			</suite>
-			<suite name="Interface">
-				<testfile>interface/availabilityTest.php</testfile>
-			</suite>
-		</suites>
-	</ae:configuration>
-</ae:configurations>
+<phpunit  bootstrap="icingaWebTesting.php">
+	<logging>
+		 <log type="junit" target="./results.xml" logIncompleteSkipped="false"/>
+	</logging>
+	<testsuites>
+		<testsuite name="Bootstrap" >
+			<file>tests/bootstrap/agaviBootstrapTest.php</file>
+			<file>tests/api/ConsoleInterfaceTest.php</file>
+		</testsuite>
+<!--		<testsuite name="Installation">
+			<file>tests/installation/userRightsTest.php</file>
+			<file>tests/installation/configSettingsTest.php</file>
+		</testsuite>
+-->
+<!--		<testsuite name="Database">
+			<file>tests/database/icingaDatabaseAccessibleTest.php</file>
+			<file>tests/database/icingaUserOperations.php</file>
+			<file>tests/database/icingaRoleOperations.php</file>
+			<file>tests/database/persistenceView.php</file>
+		</testsuite>
+-->		<testsuite name="API">
+<!--			
+			<directory>tests/api/hosts</directory>
+			<directory>tests/api/services</directory>	
+			<directory>tests/api/hostgroups</directory>	
+			<directory>tests/api/servicegroups</directory>
+			<directory>tests/api/misc</directory>	-->
+		</testsuite>
+<!--		<testsuite name="Interface">
+			<file>tests/interface/availabilityTest.php</file>
+		</testsuite>-->
+	</testsuites>
+</phpunit>
