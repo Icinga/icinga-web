@@ -143,8 +143,7 @@ class IcingaTemplateWorker {
 		if ($this->api_search !== null) {
 			$data = array ();
 			$dataSet = $this->api_search->fetch();
-//			var_dump($this->api_search);
-//			die();
+			
 			foreach ($dataSet as $result) {
 				if ($this->result_count === null) {
 					$this->result_count = $result->getResultCount();
