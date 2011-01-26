@@ -24,6 +24,9 @@ Ext.onReady(function() {
 	});
 	<?php } ?>
 	
+	// Default ajax timeout
+	Ext.Ajax.timeout = Number(<?php echo AgaviConfig::get('modules.appkit.ajax.timeout', 120000); ?>);
+	
 	var UserMenu = (function() {
 	    var pub = {};
 	    var _LA = AppKit.util.Layout;
