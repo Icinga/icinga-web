@@ -24,7 +24,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: testing.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: testing.php 4589 2010-12-07 08:05:52Z david $
  */
 
 $here = realpath(dirname(__FILE__));
@@ -34,9 +34,6 @@ require_once($here . '/agavi.php');
 
 // AgaviTesting class
 require_once($here . '/testing/AgaviTesting.class.php');
-
-// add our bundled PHPUnit to include path (until a new release is out :D)
-set_include_path($here . '/vendor' . PATH_SEPARATOR . get_include_path());
 
 // load PHPUnit basics
 require_once 'PHPUnit/Util/Getopt.php';

@@ -39,7 +39,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviValidator.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviValidator.class.php 4618 2010-12-19 16:37:19Z david $
  */
 abstract class AgaviValidator extends AgaviParameterHolder
 {
@@ -533,7 +533,7 @@ abstract class AgaviValidator extends AgaviParameterHolder
 			$name = $this->getParameter('export');
 		}
 
-		if(!$name) {
+		if(!is_string($name) || $name === '') {
 			return;
 		}
 

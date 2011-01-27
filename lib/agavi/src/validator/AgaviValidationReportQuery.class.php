@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviValidationReportQuery.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviValidationReportQuery.class.php 4591 2010-12-07 08:14:57Z david $
  */
 class AgaviValidationReportQuery implements AgaviIValidationReportQuery
 {
@@ -275,7 +275,6 @@ class AgaviValidationReportQuery implements AgaviIValidationReportQuery
 			foreach($incident->getErrors() as $error) {
 				if(!$this->errorNameFilter || in_array($error->getName(), $this->errorNameFilter)) {
 					$errors[] = $error;
-					break;
 				}
 			}
 		}

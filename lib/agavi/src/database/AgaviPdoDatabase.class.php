@@ -28,7 +28,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviPdoDatabase.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviPdoDatabase.class.php 4578 2010-08-20 19:16:28Z david $
  */
 class AgaviPdoDatabase extends AgaviDatabase
 {

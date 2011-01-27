@@ -19,11 +19,27 @@
 					<testfile>unit/date/AgaviGregorianCalendarTest.php</testfile>
 				</testfiles>
 			</suite>
+			<suite name="Exception_">
+				<!-- Setting suite name to "Exception" causes a weird issue: -->
+				<!--
+				There was 1 failure:
+				
+				1) Warning
+				No tests found in class "Exception".
+				
+				src/testing/AgaviTesting.class.php:101
+				test/run-tests.php:20
+				-->
+				<testfiles>
+					<testfile>unit/exception/AgaviExceptionTest.php</testfile>
+				</testfiles>
+			</suite>
 			<suite name="Routing">
 				<testfiles>
 					<testfile>unit/routing/AgaviRoutingTest.php</testfile>
 					<testfile>unit/routing/AgaviWebRoutingTest.php</testfile>
 					<testfile>unit/routing/Ticket1051Test.php</testfile>
+					<testfile>unit/routing/Ticket1294Test.php</testfile>
 				</testfiles>
 			</suite>
 			<suite name="Request">
@@ -56,6 +72,7 @@
 			<suite name="Validator">
 				<testfiles>
 					<testfile>unit/validator/AgaviNumberValidatorTest.php</testfile>
+					<testfile>unit/validator/AgaviBooleanValidatorTest.php</testfile>
 				</testfiles>
 			</suite>
 		</suites>

@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "America/Tijuana".
- * Compiled from olson file "northamerica", version 8.30.
+ * Compiled from olson file "northamerica", version 8.34.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: America_47_Tijuana.php 4414 2010-01-25 15:18:04Z david $
+ * @version    $Id: America_47_Tijuana.php 4577 2010-08-20 18:56:31Z david $
  */
 
 return array (
@@ -502,7 +502,7 @@ return array (
     'startYear' => 2003,
   ),
   'source' => 'northamerica',
-  'version' => '8.30',
+  'version' => '8.34',
   'name' => 'America/Tijuana',
 );
 

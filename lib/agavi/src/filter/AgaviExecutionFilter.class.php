@@ -28,7 +28,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviExecutionFilter.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviExecutionFilter.class.php 4597 2010-12-10 21:36:55Z david $
  */
 class AgaviExecutionFilter extends AgaviFilter implements AgaviIActionFilter
 {
@@ -243,6 +243,10 @@ class AgaviExecutionFilter extends AgaviFilter implements AgaviIActionFilter
 			
 			if($val === null || $val === false || $val === '') {
 				$val = '0';
+			}
+			
+			if(!is_scalar($val)) {
+				throw new AgaviUncacheableException('Group value is not a scalar, cannot construct a meaningful string representation.');
 			}
 			
 			$retval[] = $val;

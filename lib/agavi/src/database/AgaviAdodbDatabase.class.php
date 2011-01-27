@@ -50,7 +50,7 @@
  *
  * @deprecated To be removed in Agavi 1.1
  *
- * @version    $Id: AgaviAdodbDatabase.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviAdodbDatabase.class.php 4578 2010-08-20 19:16:28Z david $
  */
 class AgaviAdodbDatabase extends AgaviDatabase
 {

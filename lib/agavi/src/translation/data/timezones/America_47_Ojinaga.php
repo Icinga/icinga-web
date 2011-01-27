@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "America/Ojinaga".
- * Compiled from olson file "northamerica", version 8.30.
+ * Compiled from olson file "northamerica", version 8.34.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id$
+ * @version    $Id: America_47_Ojinaga.php 4577 2010-08-20 18:56:31Z david $
  */
 
 return array (
@@ -186,7 +186,7 @@ return array (
     'startYear' => 2002,
   ),
   'source' => 'northamerica',
-  'version' => '8.30',
+  'version' => '8.34',
   'name' => 'America/Ojinaga',
 );
 

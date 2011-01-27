@@ -741,7 +741,7 @@ tr.bp_serviceRow {
 
 .x-tab-tabmenu-right {
     background: transparent url(../images/ext3-ux/tab-scroller-menu.gif) no-repeat 0 0;
-    border-bottom: 1px solid #8db2e3;
+    border-bottom: 1px solid #ababab;
     width:18px;
     
     position:absolute;

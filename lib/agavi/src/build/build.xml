@@ -14,7 +14,7 @@
   -->
 
 <!--
-  $Id: build.xml 4439 2010-03-09 04:32:49Z david $
+  $Id: build.xml 4601 2010-12-12 00:08:13Z impl $
   -->
 <project name="Agavi" basedir="." default="status">
 
@@ -23,7 +23,9 @@
 
 	<!-- Load tasks relative to the build system. -->
 	<taskdef name="agavi.input" classname="org.agavi.build.tasks.AgaviInputTask" classpath="phing" />
-	
+
+	<taskdef name="agavi.import" classname="org.agavi.build.tasks.AgaviImportTask" classpath="phing" />
+
 	<taskdef name="agavi.transform-path" classname="org.agavi.build.tasks.AgaviTransformpathTask" classpath="phing" />
 	<taskdef name="agavi.transform-string-to-identifier" classname="org.agavi.build.tasks.AgaviTransformstringtoidentifierTask" classpath="phing" />
 	<taskdef name="agavi.transform-namespace-string-to-identifier" classname="org.agavi.build.tasks.AgaviTransformnamespacestringtoidentifierTask" classpath="phing" />
@@ -131,7 +133,7 @@
 
 	<taskdef name="agavi.read-configuration" classname="org.agavi.build.tasks.AgaviReadconfigurationTask" classpath="phing" />
 	<taskdef name="agavi.write-configuration" classname="org.agavi.build.tasks.AgaviWriteconfigurationTask" classpath="phing" />
-	
+
 	<!-- Load some basic configuration values. -->
 	<agavi.read-configuration property="agavi.version" configurationValue="agavi.version" />
 	<agavi.read-configuration property="agavi.url" configurationValue="agavi.url" />
@@ -1016,7 +1018,7 @@
 			</or>
 			<then>
 				<agavi.input property="public.base" message="Document-root-relative path to '${project.directory}/${project.directory.pub}/'" default="/" promptCharacter=":" failIfEmpty="true" ignoreIfSet="true" />
-				<copy tofile="${project.directory}/${project.directory.pub}/.htaccess" file="${project.directory}/${project.directory.dev.pub}/.htaccess">
+				<copy tofile="${project.directory}/${project.directory.pub}/.htaccess" file="${project.directory}/${project.directory.dev.pub}/.htaccess" overwrite="true">
 					<filterchain>
 						<replacetokens begintoken="%%" endtoken="%%">
 							<token key="AGAVI_SOURCE_LOCATION" value="${agavi.directory.src}" />
@@ -1030,7 +1032,7 @@
 			</then>
 		</if>
 
-		<copy todir="${project.directory}/${project.directory.pub}">
+		<copy todir="${project.directory}/${project.directory.pub}" overwrite="true">
 			<mapper type="regexp" from="^(?!\.htaccess).+" to="\0" />
 			<fileset dir="${project.directory}/${project.directory.dev.pub}">
 				<include name="**/*" />
@@ -1453,8 +1455,8 @@
 		<isset property="project.directory" />
 		<then>
 			<property userProperty="true" file="${project.directory}/build.properties" />
-			<import file="${project.directory}/build.xml" optional="true"/>
+			<agavi.import file="${project.directory}/build.xml" />
 		</then>
 	</if>
-	
+
 </project>

@@ -25,9 +25,9 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviConfig.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviConfig.class.php 4558 2010-08-11 14:14:45Z david $
  */
-final class AgaviConfig
+class AgaviConfig
 {
 	/**
 	 * @var        array
@@ -137,12 +137,12 @@ final class AgaviConfig
 	/**
 	 * Import a list of configuration directives.
 	 *
-	 * @param      string An array of configuration directives.
+	 * @param      array An array of configuration directives.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0
 	 */
-	public static function fromArray($data)
+	public static function fromArray(array $data)
 	{
 		// array_merge would reindex numeric keys, so we use the + operator
 		// mind the operand order: keys that exist in the left one aren't overridden

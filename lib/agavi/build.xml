@@ -6,10 +6,11 @@
 	<property environment="env"/>
 	<property file="build.properties"/>
 	<property name="package"  value="${phing.project.name}" override="true" />
-	<property name="builddir" value="pear-build" override="true" />
 	<property name="srcdir"   value="${project.basedir}" override="true" />
-	<taskdef classname="etc.phing.AgaviPackageTask" name="agavipackage"/>
-	<taskdef classname="etc.phing.AgaviOlsonCompileTask" name="agaviolsoncompile"/>
+	
+	<taskdef classname="etc.phing.AgaviVersionTask" name="agaviversion" />
+	<taskdef classname="etc.phing.AgaviPackageTask" name="agavipackage" />
+	<taskdef classname="etc.phing.AgaviOlsonCompileTask" name="agaviolsoncompile" />
 
 	<!-- fileset for -dist files -->
 	<fileset dir="." id="distfiles">
@@ -23,10 +24,8 @@
 		<echo msg="  apidocs         : regenerate API docs" />
 		<echo msg="  manuals         : regenerate manuals (-Doutput=html|html-onepage|fo)" />
 		<echo msg=" packages         : generate all packages" />
-		<echo msg="  package-zip     : generate .zip package" />
 		<echo msg="  package-pear    : generate PEAR package" />
-		<echo msg="  package-apidocs : generate API docs package" />
-		<echo msg="  package-manuals : generate manuals package" />
+		<echo msg="  package-release : generate API docs package" />
 		<echo msg=" test    : run unit test suite" />
 		<echo msg=" clean   : clean out cruft" />
 	</target>
@@ -189,6 +188,10 @@
 			<param name="paper.type" expression="A4" />
 		</xslt>
 	</target>
+	
+	<target name="generate-properties">
+		<agaviversion /> 
+	</target>
 
 	<target name="package-zip">
 		<!-- zip a release package -->
@@ -204,14 +207,18 @@
 		<!-- now zip that -->
 	</target>
 
-	<target name="package-pear" description="build pear package">
+	<target name="package-pear" depends="generate-properties" description="build pear package">
 		<!-- prepare -->
-		<delete dir="${builddir}" includeemptydirs="true" verbose="true" failonerror="false" />
+		<property name="basedir" value="pear-build" override="true" />
+		<property name="builddir" value="${basedir}/agavi-${agavi.pear.version}" override="true" />
+		
+		<delete dir="${builddir}" includeemptydirs="true" verbose="false" failonerror="true" />
+		<delete file="agavi-${agavi.pear.version}.tgz" verbose="false" failonerror="true" />
+		
 		<mkdir dir="${builddir}" />
-
+		
 		<copy todir="${builddir}/samples">
 			<fileset dir="samples/">
-				<exclude name="**/*.svn" />
 				<include name="**/*" />
 			</fileset>
 		</copy>
@@ -223,30 +230,58 @@
 		<copy file="LICENSE" todir="${builddir}" />
 		<copy file="LICENSE-AGAVI" todir="${builddir}" />
 		<copy file="LICENSE-ICU" todir="${builddir}" />
-		<copy file="LICENSE-TANGO_ICON_THEME" todir="${builddir}" />
+		<copy file="LICENSE-SCHEMATRON" todir="${builddir}" />
 		<copy file="LICENSE-UNICODE_CLDR" todir="${builddir}" />
 		<copy file="RELEASE_NOTES" todir="${builddir}" />
 		<copy file="TODO" todir="${builddir}" />
+		<copy file="UPGRADING" todir="${builddir}" />
 
 		<copy todir="${builddir}">
 			<fileset dir="src/">
-				<exclude name="**/*.svn" />
 				<include name="**/*" />
 			</fileset>
 		</copy>
 
 		<copy todir="${builddir}/bin">
 			<fileset dir="bin/">
-				<exclude name="**/*.svn" />
 				<include name="**/*" />
 			</fileset>
 		</copy>
 
 		<!-- generate package.xml -->
-		<agavipackage dir="${builddir}" />
-
-		<echo msg="package.xml generated to '${builddir}'. Use &quot;pear package&quot; in ${builddir}/ to create the package." />
+		<agavipackage baseDir="${basedir}" buildDir="${builddir}" />
+		
+		<!-- create .tgz file -->
+		<echo msg="Creating gzip file for PEAR." />
+		<tar destfile="agavi-${agavi.pear.version}.tgz" basedir="${basedir}" compression="gzip" />
 	</target>
+	
+	<target name="package-release" depends="generate-properties">
+		<delete dir="./package-build" includeemptydirs="true" verbose="false" failonerror="true" />
+		<delete file="${agavi.pear.version}.tgz" verbose="false" failonerror="true" />
+		<delete file="${agavi.pear.version}.zip" verbose="false" failonerror="true" />
+		
+		<mkdir dir="./package-build/agavi-${agavi.pear.version}" />
+		
+		<copy todir="./package-build/agavi-${agavi.pear.version}">
+			<fileset dir=".">
+				<exclude name="*-build/**" />
+				<exclude name="*.tgz*" />
+				<exclude name="*.zip*" />
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
+		<tar destfile="${agavi.pear.version}.tgz" compression="gzip">
+			<fileset dir="./package-build" />
+		</tar>
+		
+		<zip destfile="${agavi.pear.version}.zip">
+			<fileset dir="./package-build" />
+		</zip>
+	</target>
+	
+	<target name="packages" depends="package-pear,package-release" />
 
 	<target name="clean" description="clean out the cruft">
 		<delete dir="manuals" includeemptydirs="true" failonerror="true" />

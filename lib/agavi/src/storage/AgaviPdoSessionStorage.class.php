@@ -52,7 +52,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviPdoSessionStorage.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviPdoSessionStorage.class.php 4578 2010-08-20 19:16:28Z david $
  */
 class AgaviPdoSessionStorage extends AgaviSessionStorage
 {

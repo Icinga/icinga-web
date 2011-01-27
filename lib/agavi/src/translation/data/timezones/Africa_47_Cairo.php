@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Africa/Cairo".
- * Compiled from olson file "africa", version 8.24.
+ * Compiled from olson file "africa", version 8.28.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Africa_47_Cairo.php 4471 2010-04-08 01:01:16Z david $
+ * @version    $Id: Africa_47_Cairo.php 4577 2010-08-20 18:56:31Z david $
  */
 
 return array (
@@ -630,6 +630,26 @@ return array (
     ),
     119 => 
     array (
+      'time' => 1272578400,
+      'type' => 1,
+    ),
+    120 => 
+    array (
+      'time' => 1272578400,
+      'type' => 1,
+    ),
+    121 => 
+    array (
+      'time' => 1281474000,
+      'type' => 0,
+    ),
+    122 => 
+    array (
+      'time' => 1284069600,
+      'type' => 1,
+    ),
+    123 => 
+    array (
       'time' => 1285880400,
       'type' => 0,
     ),
@@ -656,10 +676,10 @@ return array (
       'time' => 82800000,
       'type' => 1,
     ),
-    'startYear' => 2010,
+    'startYear' => 2011,
   ),
   'source' => 'africa',
-  'version' => '8.24',
+  'version' => '8.28',
   'name' => 'Africa/Cairo',
 );
 

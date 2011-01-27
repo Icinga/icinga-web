@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id$
+ * @version    $Id: Antarctica_47_Macquarie.php 4506 2010-04-23 14:33:19Z david $
  */
 
 return array (

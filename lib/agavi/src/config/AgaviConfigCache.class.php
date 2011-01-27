@@ -28,7 +28,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviConfigCache.class.php 4443 2010-03-11 21:41:33Z david $
+ * @version    $Id: AgaviConfigCache.class.php 4578 2010-08-20 19:16:28Z david $
  */
 class AgaviConfigCache
 {

@@ -15,22 +15,30 @@
 
 class AgaviPackageTask extends Task
 {
-	private $dir = '';
+	private $baseDir;
+	private $buildDir;
 	
-	public function setDir($dir)
+	public function setBaseDir($baseDir)
 	{
-		$this->dir = (string) $dir;
+		$this->baseDir = (string) $baseDir;
+	}
+	
+	public function setBuildDir($buildDir)
+	{
+		$this->buildDir = (string) $buildDir;
 	}
 	
 	public function main()
 	{
-		if(!@require_once('PEAR/PackageFileManager2.php')) {
-			throw new BuildException('Requires PEAR_PackageFileManager >=1.6.0a1');
-		}
+		require_once('PEAR/PackageFileManager2.php');
 		require_once('PEAR/Exception.php');
 		PEAR::setErrorHandling(PEAR_ERROR_CALLBACK,'PEAR_ErrorToPEAR_Exception');
-		if(!$this->dir || !file_exists($this->dir)) {
-			throw new BuildException('Build dir is not defined or does not exist.');
+		if(!$this->baseDir || !file_exists($this->baseDir)) {
+			throw new BuildException('Base directory is not defined or does not exist.');
+		}
+		
+		if(!$this->buildDir || !file_exists($this->buildDir)) {
+			throw new BuildException('Build directory is not defined or does not exist.');
 		}
 		
 		set_time_limit(0);
@@ -50,6 +58,9 @@ class AgaviPackageTask extends Task
 		
 		$this->log(sprintf('Building package contents in: %s', $this->dir), PROJECT_MSG_INFO);
 		
+		$version = $this->project->getProperty('agavi.pear.version');
+		$status = $this->project->getProperty('agavi.status');
+		
 		// Modify short description. Try to keep under 80 chars width
 $shortDesc = <<<EOD
 PHP5 MVC Application Framework
@@ -63,7 +74,8 @@ EOD;
 		$p2 = new PEAR_PackageFileManager2;
 		$p2->setOptions(array(
 			'filelistgenerator' => 'file',
-			'packagedirectory' => $this->dir,
+			'outputdirectory' => $this->baseDir,
+			'packagedirectory' => $this->buildDir,
 			'baseinstalldir' => 'agavi',
 			'ignore' => array(
 				'.svn/',
@@ -87,7 +99,7 @@ EOD;
 				'LICENSE' => 'doc',
 				'LICENSE-AGAVI' => 'doc',
 				'LICENSE-ICU' => 'doc',
-				'LICENSE-TANGO_ICON_THEME' => 'doc',
+				'LICENSE-SCHEMATRON' => 'doc',
 				'LICENSE-UNICODE_CLDR' => 'doc',
 				'RELEASE_NOTES' => 'doc',
 				'TODO' => 'doc',
@@ -102,10 +114,10 @@ EOD;
 		$p2->addMaintainer('developer', 'impl', 'Noah Fontes', 'nfontes@cynigram.com');
 		$p2->addMaintainer('developer', 'v-dogg', 'Veikko Mäkinen', 'mail@veikkomakinen.com');
 		$p2->setChannel('pear.agavi.org');
-		$p2->setReleaseVersion('1.0.3');
-		$p2->setAPIVersion('1.0.3');
-		$p2->setReleaseStability('stable');
-		$p2->setAPIStability('stable');
+		$p2->setReleaseVersion($version);
+		$p2->setAPIVersion($version);
+		$p2->setReleaseStability($status);
+		$p2->setAPIStability($status);
 		$p2->setSummary($shortDesc);
 		$p2->setDescription($longDesc);
 		$p2->setNotes("To see what's new, please refer to the RELEASE_NOTES. Also, the CHANGELOG contains a full list of changes.\n\nFor installation instructions, consult INSTALL. Information on how to migrate applications written using previous releases can be found in UPGRADING.");

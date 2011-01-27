@@ -25,7 +25,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviBuild.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviBuild.class.php 4601 2010-12-12 00:08:13Z impl $
  */
 final class AgaviBuild
 {
@@ -54,6 +54,7 @@ final class AgaviBuild
 		'AgaviIEvent' => 'event/AgaviIEvent.interface.php',
 		'AgaviEvent' => 'event/AgaviEvent.class.php',
 		'AgaviProxyProject' => 'phing/AgaviProxyProject.class.php',
+		'AgaviProxyXmlContext' => 'phing/AgaviProxyXmlContext.class.php',
 		'AgaviProxyTarget' => 'phing/AgaviProxyTarget.class.php',
 		'AgaviPhingEventDispatcherManager' => 'phing/AgaviPhingEventDispatcherManager.class.php',
 		'AgaviPhingEventDispatcher' => 'phing/AgaviPhingEventDispatcher.class.php',

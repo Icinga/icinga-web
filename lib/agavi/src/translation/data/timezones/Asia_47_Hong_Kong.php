@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Asia/Hong_Kong".
- * Compiled from olson file "asia", version 8.59.
+ * Compiled from olson file "asia", version 8.62.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Asia_47_Hong_Kong.php 4471 2010-04-08 01:01:16Z david $
+ * @version    $Id: Asia_47_Hong_Kong.php 4590 2010-12-07 08:11:19Z david $
  */
 
 return array (
@@ -381,20 +381,10 @@ return array (
     ),
     68 => 
     array (
-      'time' => 230067000,
-      'type' => 1,
-    ),
-    69 => 
-    array (
-      'time' => 245788200,
-      'type' => 0,
-    ),
-    70 => 
-    array (
       'time' => 295385400,
       'type' => 1,
     ),
-    71 => 
+    69 => 
     array (
       'time' => 309292200,
       'type' => 0,
@@ -407,7 +397,7 @@ return array (
     'startYear' => 1980,
   ),
   'source' => 'asia',
-  'version' => '8.59',
+  'version' => '8.62',
   'name' => 'Asia/Hong_Kong',
 );
 

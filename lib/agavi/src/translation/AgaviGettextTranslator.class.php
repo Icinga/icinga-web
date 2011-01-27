@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviGettextTranslator.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviGettextTranslator.class.php 4512 2010-04-23 23:59:53Z david $
  */
 class AgaviGettextTranslator extends AgaviBasicTranslator
 {
@@ -177,6 +177,7 @@ class AgaviGettextTranslator extends AgaviBasicTranslator
 	{
 		$this->locale = $newLocale;
 		$this->domainData = array();
+		$this->pluralFormFunc = null;
 	}
 
 	/**
@@ -236,6 +237,7 @@ class AgaviGettextTranslator extends AgaviBasicTranslator
 			}
 		}
 
+		$this->pluralFormFunc = null;
 		if(isset($headers['Plural-Forms'])) {
 			$pf = $headers['Plural-Forms'];
 			if(preg_match('#nplurals=\d+;\s+plural=(.*)$#D', $pf, $match)) {

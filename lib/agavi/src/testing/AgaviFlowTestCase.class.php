@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviFlowTestCase.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviFlowTestCase.class.php 4531 2010-05-12 08:54:11Z david $
  */
 abstract class AgaviFlowTestCase extends AgaviPhpUnitTestCase implements AgaviIFlowTestCase
 {
@@ -38,7 +38,7 @@ abstract class AgaviFlowTestCase extends AgaviPhpUnitTestCase implements AgaviIF
 	/**
 	 * @var        string the name of the action to use
 	 */
-	protected $acionName;
+	protected $actionName;
 	
 	/**
 	 * @var        string the name of the module the action resides in

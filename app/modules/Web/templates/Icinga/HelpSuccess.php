@@ -20,7 +20,7 @@
 </h3>
 
 <p style="text-align: center;" class="legal">
-	Copyright &copy; 2009,2010 Icinga Development Team.<br /><br />
+	<?php echo AgaviConfig::get('org.icinga.version.copyright'); ?><br /><br />
 	Portions copyright by Nagios/Icinga community members - see the THANKS file for more information.
 </p>
 

@@ -27,7 +27,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviRouting.class.php 4434 2010-03-09 02:40:05Z david $
+ * @version    $Id: AgaviRouting.class.php 4596 2010-12-10 21:07:36Z david $
  */
 abstract class AgaviRouting extends AgaviParameterHolder
 {
@@ -831,8 +831,8 @@ abstract class AgaviRouting extends AgaviParameterHolder
 							$param = clone $defaultParams[$name];
 						}
 						$finalParams[$name] = $param;
-					} elseif(isset($availableParamsAsKeys[$name]) || array_key_exists($name, $availableParamsAsKeys) || $param === null) {
-						// when the parameter was available in one of the routes or has explicitly been unset
+					} elseif(isset($availableParamsAsKeys[$name])) {
+						// when the parameter was available in one of the routes
 						$finalParams[$name] = $param;
 					}
 				}
@@ -1010,6 +1010,12 @@ abstract class AgaviRouting extends AgaviParameterHolder
 	 */
 	public function gen($route, array $params = array(), $options = array())
 	{
+		if(array_key_exists('prefix', $options)) {
+			$prefix = (string) $options['prefix'];
+		} else {
+			$prefix = $this->getPrefix();
+		}
+		
 		$routes = $route;
 		$isNullRoute = false;
 		$routes = $this->getAffectedRoutes($route, $isNullRoute);
@@ -1046,7 +1052,7 @@ abstract class AgaviRouting extends AgaviParameterHolder
 		// but since the values are expected as plain values and not routing values, convert the routing values back to 
 		// 'plain' values
 		foreach($extras as &$extra) {
-			$extra = $extra->getValue();
+			$extra = ($extra instanceof AgaviIRoutingValue) ? $extra->getValue() : $extra;
 		}
 
 		$params = $finalParams;
@@ -1071,7 +1077,7 @@ abstract class AgaviRouting extends AgaviParameterHolder
 		}
 
 		$uri = str_replace($from, $to, $assembledInformation['uri']);
-		return array($this->prefix . $uri, $params, $options, $extras, $isNullRoute);
+		return array($prefix . $uri, $params, $options, $extras, $isNullRoute);
 	}
 	
 	

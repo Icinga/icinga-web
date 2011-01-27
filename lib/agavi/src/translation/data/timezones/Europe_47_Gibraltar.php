@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Europe/Gibraltar".
- * Compiled from olson file "europe", version 8.26.
+ * Compiled from olson file "europe", version 8.27.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Europe_47_Gibraltar.php 4471 2010-04-08 01:01:16Z david $
+ * @version    $Id: Europe_47_Gibraltar.php 4577 2010-08-20 18:56:31Z david $
  */
 
 return array (
@@ -668,7 +668,7 @@ return array (
     'startYear' => 1996,
   ),
   'source' => 'europe',
-  'version' => '8.26',
+  'version' => '8.27',
   'name' => 'Europe/Gibraltar',
 );
 

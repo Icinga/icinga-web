@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "America/Argentina/San_Luis".
- * Compiled from olson file "southamerica", version 8.43.
+ * Compiled from olson file "southamerica", version 8.44.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: America_47_Argentina_47_San_Luis.php 4453 2010-03-21 17:11:28Z david $
+ * @version    $Id: America_47_Argentina_47_San_Luis.php 4491 2010-04-22 16:13:16Z david $
  */
 
 return array (
@@ -369,33 +369,30 @@ return array (
       'time' => 1205031600,
       'type' => 5,
     ),
+    60 => 
+    array (
+      'time' => 1223784000,
+      'type' => 6,
+    ),
+    61 => 
+    array (
+      'time' => 1236481200,
+      'type' => 5,
+    ),
+    62 => 
+    array (
+      'time' => 1255233600,
+      'type' => 6,
+    ),
   ),
   'finalRule' => 
   array (
-    'type' => 'dynamic',
+    'type' => 'none',
     'offset' => -14400,
-    'name' => 'WAR%sT',
-    'save' => 3600,
-    'start' => 
-    array (
-      'month' => 9,
-      'date' => '8',
-      'day_of_week' => -1,
-      'time' => 0,
-      'type' => 0,
-    ),
-    'end' => 
-    array (
-      'month' => 2,
-      'date' => '8',
-      'day_of_week' => -1,
-      'time' => 0,
-      'type' => 0,
-    ),
-    'startYear' => 2009,
+    'startYear' => 2010,
   ),
   'source' => 'southamerica',
-  'version' => '8.43',
+  'version' => '8.44',
   'name' => 'America/Argentina/San_Luis',
 );
 
