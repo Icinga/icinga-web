@@ -70,11 +70,8 @@ Cronk.util.initEnvironment('viewport-center', function() {
 			layout: 'fit',
 			items: {
 				xtype: 'cronk-control-tabs',
-				plugins: new Cronk.util.CronkTabHelper(),
 				id : 'cronk-tabs',
 				border : false,
-				enableTabScroll :true,
-				resizeTabs : false,
 				stateful: true,
 				stateId: 'cronk-tab-panel'
 			},

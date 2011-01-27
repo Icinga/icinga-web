@@ -4,14 +4,41 @@ Cronk.util.Tabpanel = function(config) {
 
 	this.stateEvents = ['add', 'remove', 'tabchange', 'titlechange'];
 	
+	if (!Ext.isArray(config.plugins)) {
+		config.plugins = [
+			new Cronk.util.CronkTabHelper(),
+			
+			new Ext.ux.TabScrollerMenu({
+				maxText  : 15,
+				pageSize : 5
+			})
+		];
+	}
+	
 	Cronk.util.Tabpanel.superclass.constructor.call(this, config);	
 }
 
-Ext.extend(Cronk.util.Tabpanel, Ext.ux.SlidingTabPanel, {
+Ext.extend(Cronk.util.Tabpanel, Ext.TabPanel, {
 	URLTabData : false,
 	
-	minTabWidth: 115,
+	minTabWidth: 125,
     tabWidth:135,
+    
+    enableTabScroll : true,
+	resizeTabs      : true,
+	minTabWidth     : 75,
+	
+	initComponent : function() {
+		
+		Cronk.util.Tabpanel.superclass.initComponent.call(this);
+		
+		// This is missed globally
+		this.on('beforeadd', function(tabPanel, component, index) {
+			if (!Ext.isDefined(component.tabTip) && Ext.isDefined(component.title)) {
+				component.tabTip = component.title;
+			}
+		}, this);
+	},
 	
 	setURLTab : function(params) {
 		this.URLTabData = params;
