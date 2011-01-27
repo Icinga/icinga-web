@@ -516,6 +516,10 @@ div#menu {
 	color: #0000cc;	
 }
 
+.x-icinga-multiline-column div {
+	white-space: normal;	
+}
+
 /** Simple box classes **/
 .x-icinga-simplebox-green {
 	padding: 10px;

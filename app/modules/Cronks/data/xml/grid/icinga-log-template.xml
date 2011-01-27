@@ -300,6 +300,21 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Message</parameter>
+                
+                <parameter name="width">200</parameter>
+                
+                <parameter name="jsFunc">
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                	<parameter name="function">columnMetaData</parameter>
+                	
+                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                	<parameter name="type">renderer</parameter>
+                	
+                	<!-- Sets class for multiline columns -->
+                	<parameter name="arguments">
+                		<parameter name="css"><![CDATA[x-icinga-multiline-column]]></parameter>
+                	</parameter>
+				</parameter>
             </display>
             
             <filter>

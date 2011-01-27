@@ -84,6 +84,13 @@ Cronk.grid.ColumnRenderer = {
 		}
 	},
 	
+	columnMetaData : function(cfg) {
+		return function(value, metaData, record, rowIndex, colIndex, store) {
+			Ext.apply(metaData, Cronk.grid.ColumnRendererUtil.metaDataObject(cfg));
+			return String.format('{0}', value);
+		}
+	},
+	
 	columnImage : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			var my = cfg;	// local reference
