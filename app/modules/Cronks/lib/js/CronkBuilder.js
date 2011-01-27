@@ -38,7 +38,11 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	title: _('Save custom Cronk'),
 	modal: true,
 	closeAction: 'hide',
+	
+	minWidth: 800,
 	width: 880,
+	minHeight: 400,
+	height: 400,
 	
 	constructor : function(config) {
 		this.addEvents({
@@ -82,6 +86,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		// calculating sizes right
 		this.addListener('beforeshow', function(c) {
 			var checkItem = Ext.getCmp('cb-checkitem-expert-mode');
+			
 			if (checkItem.checked == true) {
 				this.showExpertMode(true);
 			}
@@ -182,7 +187,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	_paramGrid : function() {
 		return new Ext.grid.PropertyGrid({
 			id: 'cronkbuilder-param-properties',
-			height: 280,
+			height: 210,
 			viewConfig : {
             	forceFit: true,
             	scrollOffset: 2
@@ -247,10 +252,10 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.groups.load();
 		
-		return new Ext.form.FormPanel({
+		var formPanel = new Ext.form.FormPanel({
 			layout: 'border',
-			height: 650,
 			padding: '5px 0 5px 0',
+			border: false,
 			
 			defaults: {
 				border: false
@@ -259,8 +264,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			items: [{
 				padding: '5px',
 		        layout: 'form',
+		        
 		        region: 'center',
-		        height: 400,
 		        items: [{
 		        	xtype: 'fieldset',
 		        	title: _('Meta'),
@@ -337,7 +342,23 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	        			},
 	        			scope: this
 		        		}]
-		        }, {
+		        }]
+		    }, {
+		    	region: 'east',
+		    	width: 420,
+		    	padding: '5px',
+		    	layout: 'form',
+		    	
+		    	items: [{
+		    		xtype: 'fieldset',
+		    		title: _('Image'),
+		    		defaults: { msgTarget: 'side' },
+		    		items: [this.iconCombo, {
+		    			xtype: 'panel',
+		    			border: false,
+		    			id: this.id + '-panel-icon-preview'
+		    		}]
+		    	}, {
 		        	xtype: 'fieldset',
 		        	title: _('Share your Cronk'),
 		        	labelWidth: 100,
@@ -373,82 +394,109 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        	}]
 		        }]
 		    }, {
-		    	region: 'east',
-		    	width: 420,
+		    	region: 'south',
+		    	id: this.id + '-expert-form',
+		    	
 		    	padding: '5px',
-		    	layout: 'form',
+		    	height: 350,
+		    	
+		    	layout: 'border',
 		    	
 		    	items: [{
-		    		xtype: 'fieldset',
-		    		title: _('Image'),
-		    		defaults: { msgTarget: 'side' },
-		    		items: [this.iconCombo, {
-		    			xtype: 'panel',
-		    			border: false,
-		    			id: this.id + '-panel-icon-preview'
-		    		}]
-		    	}, {
-		    		xtype: 'fieldset',
-		    		title: _('Parameters'),
-		    		hidden: false,
-		    		id: this.id + '-fieldset-parameters',
-					defaults: { 
-						border: false,
-						msgTarget: 'side'
-					},
+		    		region: 'center',
+		    		padding: '5px',
+		    		border: false,
+		    		
 		    		items: [{
-		    			items: this.paramGrid
+			    		xtype: 'fieldset',
+			    		title: _('Parameters'),
+			    		id: this.id + '-fieldset-parameters',
+						defaults: { 
+							border: false,
+							msgTarget: 'side'
+						},
+			    		items: [{
+			    			items: this.paramGrid
+			    		}]
 		    		}]
+		    	
 		    	}, {
-		    		xtype: 'fieldset',
-		    		title: _('Agavi setting'),
-		    		hidden: false,
-		    		id: this.id + '-fieldset-agavi-settings',
-		    		defaults: {
-			        	width: 250,
-			        	msgTarget: 'side'
-			        },
+		    		region: 'east',
+		    		padding: '5px',
+		    		border: false,
+		    		width: 420,
+		    		
 		    		items: [{
-		    			xtype: 'textfield',
-		    			fieldLabel: _('Module'),
-		    			name: 'module',
-		    			value: 'Cronks',
-		    			allowBlank: false
-		    		}, {
-		    			xtype: 'textfield',
-		    			fieldLabel: _('Action'),
-		    			name: 'action',
-		    			allowBlank: false
-		    		}, {
-		    			xtype: 'textarea',
-		    			name: 'state',
-		    			fieldLabel: _('State information'),
-		    			allowBlank: true,
-		    			height: 100
+			    		xtype: 'fieldset',
+			    		title: _('Agavi setting'),
+			    		id: this.id + '-fieldset-agavi-settings',
+			    		defaults: {
+				        	width: 250,
+				        	msgTarget: 'side'
+				        },
+			    		items: [{
+			    			xtype: 'textfield',
+			    			fieldLabel: _('Module'),
+			    			name: 'module',
+			    			value: 'Cronks',
+			    			allowBlank: false
+			    		}, {
+			    			xtype: 'textfield',
+			    			fieldLabel: _('Action'),
+			    			name: 'action',
+			    			allowBlank: false
+			    		}, {
+			    			xtype: 'textarea',
+			    			name: 'state',
+			    			fieldLabel: _('State information'),
+			    			allowBlank: true,
+			    			height: 100
+			    		}]
 		    		}]
 		    	}]
 		    }]
 		});
+		
+		formPanel.on('render', function(f) {
+			this.on('resize', function(w, width, height) {
+				
+				var o = this.getSize();
+				this.formPanel.setSize(o.width-14, o.height);
+			});
+		}, this, { single: true });
+		
+		return formPanel;
+		
 	},
 	
 	showExpertMode : function(show) {
 		
-		show = (show==undefined) ? true : show;
+		var hdiff = 280;
+		var hact = this.getHeight();
 		
-		var fParameters = Ext.getCmp(this.id + '-fieldset-parameters');
-		var fAgaviSettings = Ext.getCmp(this.id + '-fieldset-agavi-settings');
+		show = (show==undefined) ? true : show;
+
+		var frmExpert = Ext.getCmp(this.id + '-expert-form');		
 		var fCronkId = this.formPanel.getForm().findField('cid');
 		
 		if (show == true) {
-			fParameters.show();
-			fAgaviSettings.show();
+			frmExpert.show();
 			fCronkId.show();
+			
+			if (hact < 680) {
+				this.setHeight(hdiff + hact);
+			}
 		}
 		else {
-			fParameters.hide();
-			fAgaviSettings.hide();
+			frmExpert.hide();
 			fCronkId.hide();
+			
+			if (hact > 400) {
+				this.setHeight(hact - hdiff);
+			}
 		}
+		
+		this.center();
 	},
 	
 	setCurrentCronkId : function(id) {
