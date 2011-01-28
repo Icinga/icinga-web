@@ -15,15 +15,18 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 	protected $append_stderr = false;
 	protected $stdin = null;
 
+	protected $output = "";
+	protected $returnCode = 0;
+
 	public function setCommand($cmd) {
 		$this->command = escapeshellcmd($cmd);
 	}
 	
 	public function addArgument($value, $key=null) {
 		if($key)
-			$this->$arguments[$key] = $value;
+			$this->arguments[$key] = $value;
 		else
-			$this->$arguments[] = $value;
+			$this->arguments[] = $value;
 	}
 	
 	public function stdinFile($file = null) {
@@ -37,8 +40,27 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 		$this->stderr = escapeshellcmd($file);
 		$this->append_stderr = $append;
 	}
-	public function pipeCmd(Api_Console_ConsoleInterfaceModel $cmd = null) {
+	public function pipeCmd(Api_Console_ConsoleCommandModel $cmd = null) {
 		$this->pipeCmd = $cmd;
+	}
+	public function setOutput($string) {
+		$this->output = $string;
+	}
+	public function setReturnCode($code) {
+		$this->returnCode = $code;
+	}
+	
+	public function getStdin() {
+		return $this->stdin;
+	}
+	public function getStderr() {
+		return $this->stderr;
+	}
+	public function getStdout() {
+		return $this->stdout;
+	}
+	public function getPipedCmd() {
+		return $this->pipeCmd;
 	}
 
 	public function getCommand() {
@@ -50,8 +72,15 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 	public function getConnection() {
 		return $this->connection;
 	}
-	
+	public function getOutput() {
+		return $this->output;
+	}
+	public function getReturnCode()	{
+		return $this->returnCode;
+	}
+
 	public function initialize($context, array $parameters = array()) {
+		
 		if(isset($parameters["command"]))
 			$this->setCommand($parameters["command"]);
 		if(isset($parameters["arguments"]))
@@ -65,51 +94,78 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 	
 	public function getCommandString() {
 		$this->isValid(true);	
-		$cmd = $this->$command;
-		foreach($arguments as $name=>$arg) {
-			if(is_nan($name)) {
-				$cmd .= escapeshellcmd($name);
+		$cmd = $this->command;
+		foreach($this->arguments as $name => $arg) {
+			if(!is_int($name)) {
+				$cmd .= ' '.escapeshellcmd($name);
 				if($name[strlen($name)-1] != '=')
 					$cmd .= ' ';	
 			}
-			$cmd .= escapeshellarg($arg);	
+			if($arg != '')
+				$cmd .= ' '.escapeshellarg($arg);	
 		}
 		if($this->stderr)
-			$cmd .= " 2".($this->append_stderr ? '>> ' : '> ').escapeshellcmd($this->stderr);
+			$cmd .= ' 2'.($this->append_stderr ? '>> ' : '> ').escapeshellcmd($this->stderr);
 		if($this->stdout)
-			$cmd .= ($this->append_stdout ? ' >> ' : ' > ').escapeshellcmd($this->stdout);
+			$cmd .= ' '.($this->append_stdout ? ' >> ' : ' > ').escapeshellcmd($this->stdout);
 		if($this->stdin)
 			$cmd .= ' < '.escapeshellcmd($this->stdin);
-		if($this->pipeCmd instanceof Api_Console_ConsoleInterfaceModel)
-			$cmd .= $his->pipeCmd->getCommandString();
+		if($this->pipeCmd instanceof Api_Console_ConsoleCommandModel)
+			$cmd .= ' | '.$this->pipeCmd->getCommandString();
 			
 		return $cmd;
 	}
 	
 	public function isValid($throwOnError = false, &$err = null) {
 		try {
+			$this->expandSymbols();
 			if($this->command == null) 
-				throw Exception("No command specified");
-			if($this->connectio == null)
-				throw Exception("No connection specified");
-
-			$this->validateCommand($host);
-			$this->validateStdin($host);				
-			$this->validateStdout($host);				
-			$this->validateStderr($host);				
+				throw new AppKitException("No command specified");
+			if($this->connection == null)
+				throw new AppKitException("No connection specified");
+			
+			$this->validateCommand();
+			$this->validateStdin();				
+			$this->validateStdout();				
+			$this->validateStderr();				
 			return true;
-		} catch(Exception $e) {
+		} catch(ApiRestrictedCommandException $e) {
 			if($throwOnError)
-				throw ApiRestrictedCommandException($e->getMessage());
+				throw new ApiRestrictedCommandException($e->getMessage());
 			$err = $e->getMessage();
 			return false;
 		}
+	}
+
+	protected function expandSymbols() {
+		$access = $this->connection->getAccessDefinition();
+		$this->stdinFile($this->getFullName($this->stdin,$access["r"]["files"])); 
+		$this->stdoutFile($this->getFullName($this->stdout,$access["w"]["files"])); 
+		$this->stderrFile($this->getFullName($this->stderr,$access["w"]["files"])); 
+		$this->setCommand($this->getFullName($this->command,$access["x"]["files"])); 
+	}	
+	
+	protected function getFullName($symbol = null,array $whiteList = array()) {
+		if($symbol == null)
+			return null;
+		
+		foreach($whiteList as $sym=>$name) {
+			if(!$sym) 
+				continue;
+			if($sym == $symbol)
+				return $name;
+		}
+		return $symbol;
 	}
 	
 	protected function validateCommand() {
 		$access = $this->connection->getAccessDefinition();
 		$command = $this->getCommand();
-		foreach($access["x"] as $exec) {
+		foreach($access["x"]["folders"] as $exec) {
+			if(trim(escapeshellcmd($exec)) == trim(dirname($command)))
+				return true;
+		}
+		foreach($access["x"]["files"] as $exec) {
 			if(trim(escapeshellcmd($exec)) == trim($command))
 				return true;
 		}
@@ -121,23 +177,32 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 		if(!$inFile)
 			return true;
 		$access = $this->connection->getAccessDefinition();
-		foreach($access["r"] as $read) {
+		foreach($access["r"]["folders"] as $read) {
+			
+			if(trim(escapeshellcmd($read)) == trim(dirname($inFile)))
+				return true;
+		}
+		foreach($access["r"]["files"] as $sym=>$read) {	
 			if(trim(escapeshellcmd($read)) == trim($inFile))
 				return true;
 		}
-		return false;
+		throw new ApiRestrictedCommandException($inFile." is not read enabled");
 	}
 	
 	protected function validateStdout() {
 		$outFile = $this->stdout;
-		if(!$inFile)
+		if(!$outFile)
 			return true;
 		$access = $this->connection->getAccessDefinition();
-		foreach($access["w"] as $write) {
+		foreach($access["w"]["folders"] as $write) {
+			if(trim(escapeshellcmd($write)) == trim(dirname($outFile)))
+				return true;
+		}
+		foreach($access["w"]["files"] as $write) {
 			if(trim(escapeshellcmd($write)) == trim($outFile))
 				return true;
 		}
-		return false;
+		throw new ApiRestrictedCommandException($outFile." is not write enabled");
 	}
 	
 	protected function validateStderr() {
@@ -145,11 +210,16 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 		if(!$errFile)
 			return true;
 		$access = $this->connection->getAccessDefinition();
-		foreach($access["w"] as $write) {
+		foreach($access["w"]["folders"] as $write) {
+			if(trim(escapeshellcmd($write)) == trim(dirname($errFile)))
+				return true;
+		}
+		foreach($access["w"]["files"] as $write) {
 			if(trim(escapeshellcmd($write)) == trim($errFile))
 				return true;
 		}
-		return false;
+	
+		throw new ApiRestrictedCommandException($errFile." is not read enabled");	
 	}
 	
 }

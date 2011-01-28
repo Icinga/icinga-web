@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="4" assertions="3" failures="0" errors="0" time="0.312181">
-    <testsuite name="Bootstrap" tests="4" assertions="3" failures="0" errors="0" time="0.312181">
-      <testsuite name="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.294136">
-        <testcase name="testRequiredFileAvailabilty" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="15" assertions="1" time="0.001836"/>
-        <testcase name="testBootstrap" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="29" assertions="1" time="0.292300"/>
+  <testsuite name="" tests="5" assertions="3" failures="0" errors="0" time="0.298896">
+    <testsuite name="Bootstrap" tests="5" assertions="3" failures="0" errors="0" time="0.298896">
+      <testsuite name="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.256521">
+        <testcase name="testRequiredFileAvailabilty" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="15" assertions="1" time="0.001844"/>
+        <testcase name="testBootstrap" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="29" assertions="1" time="0.254677"/>
       </testsuite>
-      <testsuite name="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" tests="2" assertions="1" failures="0" errors="0" time="0.018045">
-        <testcase name="testInterfaceInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="5" assertions="0" time="0.017307"/>
-        <testcase name="testUnknownHostInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="15" assertions="1" time="0.000738"/>
+      <testsuite name="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" tests="3" assertions="1" failures="0" errors="0" time="0.042375">
+        <testcase name="testInterfaceInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="5" assertions="0" time="0.004487"/>
+        <testcase name="testUnknownHostInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="15" assertions="1" time="0.001090"/>
+        <testcase name="testCommandSetup" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="20" assertions="0" time="0.036798"/>
       </testsuite>
     </testsuite>
     <testsuite name="API" tests="0" assertions="0" failures="0" errors="0" time="0.000000"/>

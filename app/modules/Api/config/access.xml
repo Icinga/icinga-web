@@ -2,26 +2,28 @@
 <settings prefix="modules.api.access." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 	<setting name="defaults">
 		<ae:parameter name="host">localhost</ae:parameter>
-		<ae:parameter name="paths">
-			<ae:parameter name="icinga_base">/usr/local/icinga</ae:parameter>
-			<ae:parameter name="icinga_objects">%modules.api.defaults.paths.icinga_base%/etc/objects</ae:parameter>
-			<ae:parameter name="icinga_rw">%modules.api.defaults.paths.icinga_base%/var/rw</ae:parameter>
-			<ae:parameter name="bin">/usr/bin</ae:parameter>
-		</ae:parameter>
 
 		<ae:parameter name="access">
 			<ae:parameter name="rw">
-				<ae:parameter name="folder">%modules.api.defaults.paths.icinga_objects%</ae:parameter>
+				<ae:parameter name="folders">
+					<ae:parameter>/usr/local/icinga/etc/objects</ae:parameter>
+				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="r">
 			</ae:parameter>
 			<ae:parameter name="w">
-				<ae:parameter name="file">$modules.api.defaults.paths.icinga_rw%/icinga.dat</ae:parameter>
+				<ae:parameter name="files">
+					<ae:parameter name="icinga_pipe">/usr/local/icinga/var/icinga.dat</ae:parameter>
+				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="x">
-				<ae:parameter name="file">%modules.api.defaults.paths.icinga_base%/icinga</ae:parameter>
-				<ae:parameter name="file">%modules.api.defaults.paths.bin%/echo</ae:parameter>
-				<ae:parameter name="file">%modules.api.defaults.paths.bin%/cp</ae:parameter>
+				<ae:parameter name="files">
+					<ae:parameter name="icinga_bin">/usr/local/bin/icinga</ae:parameter>
+					<ae:parameter name="echo">/bin/echo</ae:parameter>
+					<ae:parameter name="cp">/bin/cp</ae:parameter>
+					<ae:parameter name="ls">/bin/ls</ae:parameter>
+					<ae:parameter name="grep">/bin/grep</ae:parameter>
+				</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>						
 
@@ -32,7 +34,9 @@
 		<ae:parameter name="localhost">
 			<ae:parameter name="type">local</ae:parameter>
 			<!-- Only allow access to these files, folders or executables -->
-
+			<ae:parameter name="access">
+				<ae:parameter name="useDefaults">true</ae:parameter>
+			</ae:parameter>
 		</ae:parameter>
 		
 		<!--  Example for ssh connection with user/password auth -->
@@ -50,7 +54,9 @@
 			<ae:parameter name="access">
 				<ae:parameter name="useDefaults">true</ae:parameter>
 				<ae:parameter name="w">
-					<ae:parameter name="folder">/usr/local/icinga-web/</ae:parameter>
+					<ae:parameter name="folders">
+						<ae:parameter>/usr/local/icinga-web/</ae:parameter>
+					</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>	
 			
