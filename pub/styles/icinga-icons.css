@@ -63,7 +63,8 @@
 .icinga-icon-key-add { background-image: url(../images/icons/key--plus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-key-delete { background-image: url(../images/icons/key--minus.png) !important; background-repeat: no-repeat; }arr
 .icinga-icon-arrow-join { background-image: url(../images/icons/arrow-join.png) !important; background-repeat: no-repeat; }
-.icinga-icon-arrow-right { background-image: url(../images/icons/arrow-turn.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-right { background-image: url(../images/icons/arrow.png) !important; background-repeat: no-repeat; }
+.icinga-icon-arrow-left { background-image: url(../images/icons/arrow-180.png) !important; background-repeat: no-repeat; }
 .icinga-icon-arrow-redo { background-image: url(../images/icons/arrow-return.png) !important; background-repeat: no-repeat; }
 .icinga-icon-arrow-right-medium { background-image: url(../images/icons/arrow-curve.png) !important; background-repeat: no-repeat; }
 .icinga-icon-arrow-down { background-image: url(../images/icons/arrow-270.png) !important; background-repeat: no-repeat; }
