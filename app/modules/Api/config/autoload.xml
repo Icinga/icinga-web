@@ -10,5 +10,6 @@
 		
 		<autoload name="BaseConsoleConnection">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
 		<autoload name="LocalConsoleConnection">%core.module_dir%/Api/lib/console/LocalConsoleConnection.class.php</autoload>
+		<autoload name="SshConsoleConnection">%core.module_dir%/Api/lib/console/SshConsoleConnection.class.php</autoload>
 	</ae:configuration>
 </ae:configurations>

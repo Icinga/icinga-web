@@ -44,10 +44,10 @@
 			<ae:parameter name="type">ssh</ae:parameter>
 			<ae:parameter name="ssh">
 				<ae:parameter name="host">localhost</ae:parameter>
-				<ae:parameter name="port">22222</ae:parameter>
+				<ae:parameter name="port">22</ae:parameter>
 				<ae:parameter name="auth">
 					<ae:parameter name="type">password</ae:parameter>
-					<ae:parameter name="user">mojadev</ae:parameter>
+					<ae:parameter name="user">testuser</ae:parameter>
 					<ae:parameter name="password">supersecret</ae:parameter>
 				</ae:parameter>
 			</ae:parameter> 
@@ -67,18 +67,17 @@
 			<ae:parameter name="type">ssh</ae:parameter>
 			<ae:parameter name="ssh">
 				<ae:parameter name="host">localhost</ae:parameter>
-				<ae:parameter name="port">2222</ae:parameter>
+				<ae:parameter name="port">22</ae:parameter>
 				<ae:parameter name="auth">
-					<ae:parameter name="type">pubKey</ae:parameter>
+					<ae:parameter name="type">key</ae:parameter>
 					<ae:parameter name="user">mojadev</ae:parameter>
 					<ae:parameter name="pubkey">/usr/local/icinga-web/modules/Api/.ssh/host1_id.pub</ae:parameter>
 					<ae:parameter name="privKey">/usr/local/icinga-web/modules/Api/.ssh/host1_id</ae:parameter>
 					<ae:parameter name="password">supersecret</ae:parameter>
 				</ae:parameter>
 			</ae:parameter> 
-			<ae:parameter name="labels">
-				<ae:parameter name="icinga">icinga</ae:parameter>
-			</ae:parameter>
+			
+		
 			<ae:parameter name="access">
 				<ae:parameter name="useDefaults">true</ae:parameter>
 			</ae:parameter>	

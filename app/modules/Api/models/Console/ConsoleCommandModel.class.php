@@ -169,7 +169,8 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 			if(trim(escapeshellcmd($exec)) == trim($command))
 				return true;
 		}
-		return false;
+		
+		throw new ApiRestrictedCommandException($command." is not allowed");
 	}
 	
 	protected function validateStdin() {

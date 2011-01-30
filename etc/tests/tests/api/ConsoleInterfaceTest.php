@@ -13,8 +13,7 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
      * @expectedException ApiUnknownHostException
      */
 	public function testUnknownHostInstance() {
-		$model = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"dgjksdd"));
-		
+		$model = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"dgjksdd"));	
 	}
 
 	public function testCommandSetup() {
@@ -45,6 +44,58 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 		$grepCmd->stdoutFile("/usr/local/icinga/etc/objects/test");
 		$lsCmd->pipeCmd($grepCmd);
 		$console->exec($lsCmd);
-		print_r($lsCmd->getCommandString());
+	
+		$this->assertEquals($lsCmd->getCommandString(),"/bin/ls -la  '/usr/local/icinga-web/' | /bin/grep 'c.*'  > /usr/local/icinga/etc/objects/test"); 
+	}
+	
+
+	/**
+     * @expectedException ApiRestrictedCommandException
+     */
+	public function testInvalidCommand() {
+		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api");	
+		$lsCmd = AgaviContext::getInstance()->getModel(
+			'Console.ConsoleCommand',
+			"Api",
+			array(
+				"command" => "ls ; sudo su",
+				"connection" => $console, 
+				"arguments" => array(
+					'-c' => '', 
+					'1' => '/usr/local/icinga-web/' 
+				)
+			)
+		);
+		
+		$lsCmd->isValid(true,$msg);	
+	}
+
+	public function testSshConnection() {
+		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"vm_host1"));	
+		$lsCmd = AgaviContext::getInstance()->getModel(
+			'Console.ConsoleCommand',
+			"Api",
+			array(
+				"command" => "ls",
+				"connection" => $console, 
+				"arguments" => array(
+					'-la' => '', 
+					'1' => '/usr/local/icinga-web/' 
+				)
+			)
+		);
+		$grepCmd = AgaviContext::getInstance()->getModel(
+			'Console.ConsoleCommand',
+			"Api",
+			array(
+				"command" => "grep",
+				"connection" => $console, 
+				"arguments" => array(
+					'c.*'
+				)
+			)
+		);
+		$grepCmd->stdoutFile("/usr/local/icinga/etc/objects/test");
+		$console->exec($lsCmd);
 	}
 }

@@ -71,7 +71,7 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel {
 			$this->access["r"] = array_merge_recursive($container["access"]["rw"],$this->access["r"]);
 		}
 		if(isset($container["access"]["x"])) 
-			$this->access["x"] = array_merge_recursive($container["access"]["x"],$this->access["w"]);
+			$this->access["x"] = array_merge_recursive($container["access"]["x"],$this->access["x"]);
 	}
 
 
