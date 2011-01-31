@@ -84,18 +84,24 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 				)
 			)
 		);
-		$grepCmd = AgaviContext::getInstance()->getModel(
+		$console->exec($lsCmd);
+	}
+	
+	public function testSshKeyConnection() {
+		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"vm_host2"));	
+		$lsCmd = AgaviContext::getInstance()->getModel(
 			'Console.ConsoleCommand',
 			"Api",
 			array(
-				"command" => "grep",
+				"command" => "ls",
 				"connection" => $console, 
 				"arguments" => array(
-					'c.*'
+					'-la' => '', 
+					'1' => '/usr/local/icinga-web/' 
 				)
 			)
 		);
-		$grepCmd->stdoutFile("/usr/local/icinga/etc/objects/test");
 		$console->exec($lsCmd);
 	}
+
 }

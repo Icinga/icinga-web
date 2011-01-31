@@ -20,10 +20,10 @@
 			<file>tests/database/persistenceView.php</file>
 		</testsuite>
 -->		<testsuite name="API">
-<!--			
+			
 			<directory>tests/api/hosts</directory>
 			<directory>tests/api/services</directory>	
-			<directory>tests/api/hostgroups</directory>	
+<!--			<directory>tests/api/hostgroups</directory>	
 			<directory>tests/api/servicegroups</directory>
 			<directory>tests/api/misc</directory>	-->
 		</testsuite>

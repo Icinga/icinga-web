@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="7" assertions="5" failures="0" errors="0" time="0.902616">
-    <testsuite name="Bootstrap" tests="7" assertions="5" failures="0" errors="0" time="0.902616">
-      <testsuite name="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.264210">
-        <testcase name="testRequiredFileAvailabilty" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="15" assertions="1" time="0.001707"/>
-        <testcase name="testBootstrap" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="29" assertions="1" time="0.262503"/>
+  <testsuite name="" tests="8" assertions="5" failures="0" errors="1" time="1.106448">
+    <testsuite name="Bootstrap" tests="8" assertions="5" failures="0" errors="1" time="1.106448">
+      <testsuite name="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.262647">
+        <testcase name="testRequiredFileAvailabilty" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="15" assertions="1" time="0.001198"/>
+        <testcase name="testBootstrap" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="29" assertions="1" time="0.261449"/>
       </testsuite>
-      <testsuite name="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" tests="5" assertions="3" failures="0" errors="0" time="0.638406">
-        <testcase name="testInterfaceInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="5" assertions="0" time="0.003566"/>
-        <testcase name="testUnknownHostInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="15" assertions="1" time="0.001266"/>
-        <testcase name="testCommandSetup" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="19" assertions="1" time="0.042483"/>
-        <testcase name="testInvalidCommand" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="55" assertions="1" time="0.002441"/>
-        <testcase name="testSshConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="73" assertions="0" time="0.588650"/>
+      <testsuite name="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" tests="6" assertions="3" failures="0" errors="1" time="0.843801">
+        <testcase name="testInterfaceInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="5" assertions="0" time="0.004130"/>
+        <testcase name="testUnknownHostInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="15" assertions="1" time="0.003054"/>
+        <testcase name="testCommandSetup" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="19" assertions="1" time="0.045423"/>
+        <testcase name="testInvalidCommand" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="55" assertions="1" time="0.001850"/>
+        <testcase name="testSshConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="73" assertions="0" time="0.657724"/>
+        <testcase name="testSshKeyConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="90" assertions="0" time="0.131620">
+          <error type="PHPUnit_Framework_Error_Warning">ConsoleInterfaceTest::testSshKeyConnection
+ssh2_auth_pubkey_file(): Authentication failed for testuser using public key
+
+/usr/local/icinga-web/app/modules/Api/lib/console/SshConsoleConnection.class.php:42
+/usr/local/icinga-web/app/modules/Api/lib/console/SshConsoleConnection.class.php:88
+/usr/local/icinga-web/app/modules/Api/models/Console/ConsoleInterfaceModel.class.php:41
+/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php:104
+</error>
+        </testcase>
       </testsuite>
     </testsuite>
     <testsuite name="API" tests="0" assertions="0" failures="0" errors="0" time="0.000000"/>

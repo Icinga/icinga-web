@@ -6,5 +6,6 @@ class HostCommentsTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testReadComments() {
 		$this->fail("Not implemented");
+
 	}
 }

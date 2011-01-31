@@ -1,8 +1,15 @@
 <?php
 
 class ServiceDetailTest extends PHPUnit_Framework_TestCase {
+	public function serviceProvider() {
+		$model = AgaviContext::getInstance()->getModel("ApiServiceRequest","Api");
+		$host = $model->getHostsByName(array("pop3-gmx"));
+		return $host->getFirst();
+	
+	}
+
 	public function testGetStatus() {
-		$this->fail("Not implemented");
+		
 	}
 	public function testGetId() {
 		$this->fail("Not implemented");

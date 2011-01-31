@@ -70,10 +70,10 @@
 				<ae:parameter name="port">22</ae:parameter>
 				<ae:parameter name="auth">
 					<ae:parameter name="type">key</ae:parameter>
-					<ae:parameter name="user">mojadev</ae:parameter>
-					<ae:parameter name="pubkey">/usr/local/icinga-web/modules/Api/.ssh/host1_id.pub</ae:parameter>
-					<ae:parameter name="privKey">/usr/local/icinga-web/modules/Api/.ssh/host1_id</ae:parameter>
-					<ae:parameter name="password">supersecret</ae:parameter>
+					<ae:parameter name="user">testuser</ae:parameter>
+					<ae:parameter name="pubKey">/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa.pub</ae:parameter>
+					<ae:parameter name="privKey">/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa</ae:parameter>
+					<ae:parameter name="password">secret123</ae:parameter>
 				</ae:parameter>
 			</ae:parameter> 
 			

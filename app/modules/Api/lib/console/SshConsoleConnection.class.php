@@ -3,6 +3,7 @@ class ApiSSHNotInstalledException extends AppKitException {};
 class ApiInvalidAuthTypeException extends AppKitException {};
 class ApiCommandFailedException extends AppKitException {};
 
+
 class SshConsoleConnection extends BaseConsoleConnection {	
 	private $connected = false;
 	private $host = null;
@@ -16,16 +17,16 @@ class SshConsoleConnection extends BaseConsoleConnection {
 	private $terminal;
 	protected $stdout;
 	protected $stderr;
-
+	protected $methods =  array('hostkey'=>'ssh-rsa'); 
 	public function isConnected() {
 		return $connected;
 	}
-	
 	public function connect() {
 		if($this->connected)
 			return true;
 		$success = false;
-		$this->resource = ssh2_connect($this->host,$this->port, null);
+		$this->resource = ssh2_connect($this->host,$this->port, $this->methods);
+	
 		switch($this->authType) {
 			case 'none':
 				$success = ssh2_auth_none($this->resource,$this->username);
@@ -34,7 +35,11 @@ class SshConsoleConnection extends BaseConsoleConnection {
 				$success = ssh2_auth_password($this->resource,$this->username,$this->password);
 				break;
 			case 'key':
-				$success = ssh2_auth_key($this->resource,$this->username,$this->pubKeyLocation,$this->privKeyLocation,$this->password);
+				if(!is_readable($this->pubKeyLocation))
+					throw new ApiAuthorisationFailedException("SSH public key not found/readable at the specified location");
+				if(!is_readable($this->privKeyLocation))
+					throw new ApiAuthorisationFailedException("SSH private key not found/readable at the specified location");	
+				$success = ssh2_auth_pubkey_file($this->resource,$this->username,$this->pubKeyLocation,$this->privKeyLocation,$this->password);
 				break;
 			default:
 				throw new ApiInvalidAuthTypeException("Unknown authtype ".$this->authType);
@@ -121,8 +126,8 @@ class SshConsoleConnection extends BaseConsoleConnection {
 				if(isset($settings["password"]))
 					$this->password = $settings["password"];
 				$this->username = $settings["user"];
-				$this->pubKey = $settings["pubKey"];
-				$this->privKey = $settings["privKey"];
+				$this->pubKeyLocation = $settings["pubKey"];
+				$this->privKeyLocation = $settings["privKey"];
 				break;
 			default:
 				throw new ApiInvalidAuthTypeExcpetion("Unknown auth type ".$this->authType);
