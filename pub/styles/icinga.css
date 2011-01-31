@@ -173,6 +173,10 @@ div.cronk-data-view div.cronk-item-shared div.cronk-status-icon {
 	background: transparent url("../images/icons/application-share.png") top right no-repeat;
 }
 
+div.cronk-data-view div.cronk-preview {
+	background-color: #fff;
+}
+
 div.cronk-data-view div.cronk-preview:hover {
 	-o-transform: scale(1.1);
 	-moz-transform: scale(1.1);
@@ -209,11 +213,11 @@ div.cronk-data-view .x-view-selected .thumb{
 
 /* div.x-portlet div.x-panel-body { */
 #west-frame .x-panel-body-noborder {
-	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom left;
+	background: white url(../images/background/bg-frame-left.png) no-repeat bottom right;
 }
 
 #center-frame .x-panel-body-noborder {
-	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
+	background: white url(../images/background/bg-frame-right.png) no-repeat top right;
 }
 
 /** JS Message stack **/
