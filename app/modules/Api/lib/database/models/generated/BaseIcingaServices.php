@@ -621,6 +621,14 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'foreign' => 'contactgroup_object_id',
 	    'refclass' => 'IcingaServiceContactgroups'
 	));
+	$this->hasOne("IcingaCommands as checkCommand", array(
+	    'local' => 'check_command_object_id',
+	    'foreign' => 'object_id'
+	));
+	$this->hasOne("IcingaCommands as eventHandlerCommand", array(
+	    'local' => 'eventhandler_command_object_id',
+	    'foreign' => 'object_id'
+	));
 	$this->hasMany("IcingaStatehistory as history", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
@@ -662,6 +670,15 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	$this->hasMany("IcingaAcknowledgements as acknowledgements", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
+	));
+
+	$this->hasOne("IcingaTimeperiods as notificationTimeperiod", array(
+    	    'local' => 'notification_timeperiod_object_id',
+    	    'foreign' => 'timeperiod_object_id',
+	));	
+	$this->hasOne("IcingaTimeperiods as checkTimeperiod", array(
+    	    'local' => 'check_timeperiod_object_id',
+    	    'foreign' => 'timeperiod_object_id',
 	));
     }
 }
