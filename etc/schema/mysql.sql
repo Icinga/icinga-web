@@ -1,12 +1,12 @@
 /*****************************************************/
 /* Auto generated mysql SQL Schema file for icinga-web*/
-/* Creation date: 2010-12-30T16:26:59+01:00          */
+/* Creation date: 2011-02-01T16:40:23+01:00          */
 /****************************************************/
 
 
 /*           SQL schema defintiion        */
 CREATE TABLE cronk (cronk_id INT AUTO_INCREMENT, cronk_uid VARCHAR(45), cronk_name VARCHAR(45), cronk_description VARCHAR(100), cronk_xml TEXT, cronk_user_id INT, cronk_created DATETIME NOT NULL, cronk_modified DATETIME NOT NULL, UNIQUE INDEX cronk_uid_UNIQUE_idx (cronk_uid), INDEX cronk_user_id_idx (cronk_user_id), PRIMARY KEY(cronk_id)) ENGINE = INNODB;
-CREATE TABLE cronk_category (cc_id INT AUTO_INCREMENT, cc_name VARCHAR(45), cc_visible TINYINT DEFAULT '0', cc_position INT DEFAULT '0', cc_created DATETIME NOT NULL, cc_modified DATETIME NOT NULL, PRIMARY KEY(cc_id)) ENGINE = INNODB;
+CREATE TABLE cronk_category (cc_id INT AUTO_INCREMENT, cc_uid VARCHAR(45) NOT NULL, cc_name VARCHAR(45), cc_visible TINYINT DEFAULT '0', cc_position INT DEFAULT '0', cc_created DATETIME NOT NULL, cc_modified DATETIME NOT NULL, UNIQUE INDEX cc_uid_UNIQUE_idx (cc_uid), PRIMARY KEY(cc_id)) ENGINE = INNODB;
 CREATE TABLE cronk_category_cronk (ccc_cc_id INT, ccc_cronk_id INT, PRIMARY KEY(ccc_cc_id, ccc_cronk_id)) ENGINE = INNODB;
 CREATE TABLE cronk_principal_cronk (cpc_principal_id INT, cpc_cronk_id INT, PRIMARY KEY(cpc_principal_id, cpc_cronk_id)) ENGINE = INNODB;
 CREATE TABLE nsm_db_version (vers_id INT, version INT, PRIMARY KEY(vers_id)) ENGINE = INNODB;
@@ -39,10 +39,6 @@ ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_role_id_nsm_role_rol
 /*          Initial data import              */
  
 INSERT INTO nsm_db_version (vers_id,version) VALUES ('1','2');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('1','icinga_user','The default representation of a ICINGA user','0');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('2','appkit_user','Appkit user test','0');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent) VALUES ('3','appkit_admin','AppKit admin','0','2');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('4','guest','Unauthorized Guest','0');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('3','IcingaHostCustomVariablePair','Limit data access to specific custom variables','IcingaDataHostCustomVariablePrincipalTarget','icinga');
@@ -57,6 +53,11 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('12','appkit.user.dummy','Basic right for users','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('13','appkit.api.access','Access to web-based api adapter','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('14','icinga.demoMode','Hide features like password reset which are not wanted in demo systems','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('15','icinga.cronk.category.admin','Enables category admin features','','credential');
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('1','icinga_user','The default representation of a ICINGA user','0');
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('2','appkit_user','Appkit user test','0');
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent) VALUES ('3','appkit_admin','AppKit admin','0','2');
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('4','guest','Unauthorized Guest','0');
 INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0');
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','1');
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','2');
@@ -73,3 +74,4 @@ INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('4
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('5','3','11');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('6','4','8');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('7','5','7');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('8','3','15');
