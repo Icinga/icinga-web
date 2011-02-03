@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: agavi.php 4426 2010-02-17 22:42:35Z felix $
+ * @version    $Id: agavi.php 4601 2010-12-12 00:08:13Z impl $
  */
 
 define('BUILD_DIRECTORY', realpath(dirname(__FILE__) . '/../..'));
@@ -94,7 +94,7 @@ function input_help(AgaviOptionParser $parser, $name, $arguments, $scriptArgumen
 
 function input_version(AgaviOptionParser $parser, $name, $arguments, $scriptArguments)
 {
-	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4426 2010-02-17 22:42:35Z felix $' . PHP_EOL);
+	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4601 2010-12-12 00:08:13Z impl $' . PHP_EOL);
 	$GLOBALS['OUTPUT']->write(Phing::getPhingVersion() . PHP_EOL);
 	exit(0);
 }
@@ -183,13 +183,21 @@ try {
 	}
 	
 	$project->init();
-	ProjectConfigurator::configureProject($project, new PhingFile(BUILD_DIRECTORY . '/build.xml'));
+	ProjectConfigurator::configureProject($project, $GLOBALS['BUILD']);
 	
+	$project->addTaskDefinition('agavi.import', 'org.agavi.build.tasks.AgaviImportTask', 'phing');
+	$project->addTaskDefinition('agavi.locate-project', 'org.agavi.build.tasks.AgaviLocateprojectTask', 'phing');
+	$project->addTaskDefinition('agavi.check-project', 'org.agavi.build.tasks.AgaviCheckprojectTask', 'phing');
 	
 	Phing::setCurrentProject($project);
 	
 	try {
 		$project->fireBuildStarted();
+		
+		$task = $project->createTask('agavi.import');
+		$task->setFile(new PhingFile($GLOBALS['BUILD']->getAbsolutePath()));
+		$task->init();
+		$task->perform();
 		
 		$task = $project->createTask('agavi.locate-project');
 		$task->setProperty('project.directory');
@@ -252,7 +260,7 @@ try {
 			(isset($_SERVER['TERM_PROGRAM']) && $_SERVER['TERM_PROGRAM'] == 'Apple_Terminal') ||
 			(isset($_ENV['TERM_PROGRAM']) && $_ENV['TERM_PROGRAM'] == 'Apple_Terminal')
 		) &&
-		version_compare(preg_replace('/.*ProductVersion:\s*([0-9\.]+).*/s', '$1', shell_exec('sw_vers')), '10.5', 'ge') && 
+		version_compare(preg_replace('/^ProductVersion:\s*([0-9]+\.[0-9]+)/ms', '$1', shell_exec('sw_vers')), '10.5', 'eq') && 
 		!Phing::getProperty('phing.logger.defaults')
 	) {
 		Phing::setProperty('phing.logger.defaults', new PhingFile(BUILD_DIRECTORY . '/agavi/phing/ansicolorlogger_osxleopard.properties'));
@@ -264,7 +272,7 @@ try {
 	
 	$GLOBALS['LOGGER'] = Phing::import($GLOBALS['LOGGER']);
 	
-	$logger = new $GLOBALS['LOGGER']();
+	$logger = new AgaviProxyBuildLogger(new $GLOBALS['LOGGER']());
 	$logger->setMessageOutputLevel($GLOBALS['VERBOSE'] ? Project::MSG_VERBOSE : Project::MSG_INFO);
 	$logger->setOutputStream($GLOBALS['OUTPUT']);
 	$logger->setErrorStream($GLOBALS['ERROR']);
@@ -284,7 +292,6 @@ try {
 	
 	$project->init();
 	ProjectConfigurator::configureProject($project, $GLOBALS['BUILD']);
-
 	Phing::setCurrentProject($project);
 	
 	if($GLOBALS['SHOW_LIST'] === true) {

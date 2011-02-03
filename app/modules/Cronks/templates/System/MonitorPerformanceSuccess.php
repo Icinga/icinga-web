@@ -1,6 +1,5 @@
 <script type="text/javascript">
 Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
-	var CE = this;
 	
 	var ds = new Ext.data.JsonStore({
 		url: '<?php echo $ro->gen('cronks.monitorPerformance.json') ?>',
@@ -18,9 +17,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 
 	AppKit.getTr().start(monitorPerformanceRefreshTask);
 	
-	var monitorPerformancePanel = new Ext.DataView({
-		store: ds,
-		tpl: new Ext.XTemplate(
+	var mTpl = new Ext.XTemplate(
 			'<tpl for=".">',
 			
 			'<div class="float-container clearfix icinga-monitor-performance">',
@@ -66,10 +63,16 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			'</div>',
 			
 			'</tpl>'
-		)
+		);
+	
+	this.add({
+		xtype: 'dataview',
+		store: ds,
+		tpl: mTpl,
+		itemSelector:'div.icinga-monitor-performance-container',
+        emptyText: 'Error'
 	});
 	
-	CE.add(monitorPerformancePanel);
-	CE.doLayout();	
+	this.doLayout();	
 });
 </script>

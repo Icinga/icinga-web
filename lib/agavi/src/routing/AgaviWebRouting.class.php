@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviWebRouting.class.php 4438 2010-03-09 04:25:05Z david $
+ * @version    $Id: AgaviWebRouting.class.php 4596 2010-12-10 21:07:36Z david $
  */
 class AgaviWebRouting extends AgaviRouting
 {
@@ -157,8 +157,8 @@ class AgaviWebRouting extends AgaviRouting
 				$this->input = $input;
 			}
 
-			if(!isset($_SERVER['SERVER_SOFTWARE']) || strpos($_SERVER['SERVER_SOFTWARE'], 'Apache/1') === false) {
-				// don't do that for Apache 1, it's already rawurldecode()d there
+			if(!(isset($_SERVER['SERVER_SOFTWARE']) && (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache/1') !== false || (strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false && isset($_SERVER['UNENCODED_URL']))))) {
+				// don't do that for Apache 1 or IIS 7 with URL Rewrite Module, it's already rawurldecode()d there
 				$this->input = rawurldecode($this->input);
 			}
 
@@ -306,7 +306,10 @@ class AgaviWebRouting extends AgaviRouting
 					$extraParams = array_merge($this->inputParameters, $extraParams);
 				}
 				if(count($extraParams) > 0) {
-					$append = '?' . http_build_query($extraParams, '', $aso);
+					$append = http_build_query($extraParams, '', $aso);
+					if($append !== '') {
+					  $append = '?' . $append;
+					}
 				}
 			} else {
 				// the route exists, but we must create a normal index.php?foo=bar URL.

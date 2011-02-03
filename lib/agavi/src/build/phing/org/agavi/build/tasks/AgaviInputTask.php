@@ -14,6 +14,7 @@
 // +---------------------------------------------------------------------------+
 
 require_once(dirname(__FILE__) . '/AgaviTask.php');
+require_once('phing/input/InputRequest.php');
 
 /**
  * Requests an input value from the user.
@@ -27,7 +28,7 @@ require_once(dirname(__FILE__) . '/AgaviTask.php');
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviInputTask.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviInputTask.php 4598 2010-12-10 22:36:44Z david $
  */
 class AgaviInputTask extends AgaviTask
 {
@@ -145,8 +146,6 @@ class AgaviInputTask extends AgaviTask
 			}
 		}
 		
-		require_once('phing/input/InputRequest.php');
-	
 		$request = new InputRequest($this->message);
 		$request->setPromptChar($this->promptCharacter);
 		

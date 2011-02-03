@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviOutputTypeConfigHandler.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviOutputTypeConfigHandler.class.php 4537 2010-05-21 11:58:49Z david $
  */
 class AgaviOutputTypeConfigHandler extends AgaviXmlConfigHandler
 {
@@ -73,10 +73,6 @@ class AgaviOutputTypeConfigHandler extends AgaviXmlConfigHandler
 
 			if(!$cfg->getChild('output_types')->hasAttribute('default')) {
 				throw new AgaviConfigurationException('No default Output Type specified in ' . $config);
-			}
-
-			if(!in_array($cfg->getChild('output_types')->getAttribute('default'), $otnames)) {
-				throw new AgaviConfigurationException('Non-existent Output Type "' . $cfg->getChild('output_types')->getAttribute('default') . '" specified as default in ' . $config);
 			}
 
 			foreach($cfg->get('output_types') as $outputType) {
@@ -140,6 +136,12 @@ class AgaviOutputTypeConfigHandler extends AgaviXmlConfigHandler
 			$defaultOt = $cfg->getChild('output_types')->getAttribute('default');
 		}
 
+		if(!isset($data[$defaultOt])) {
+			$error = 'Configuration file "%s" specifies undefined default Output Type "%s".';
+			$error = sprintf($error, $document->documentURI, $defaultOt);
+			throw new AgaviConfigurationException($error);
+		}
+		
 		$code = array();
 		foreach($data as $outputTypeName => $outputType) {
 			$code[] = '$ot = new AgaviOutputType();';

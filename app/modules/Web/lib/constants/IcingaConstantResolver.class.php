@@ -53,6 +53,29 @@ class IcingaConstantResolver {
 		IcingaConstants::NSLOG_SERVICE_NOTIFICATION		=> "service notification"
 	);
 	
+	static private $logentry_type_icons = array (
+		IcingaConstants::NSLOG_RUNTIME_ERROR			=> "icons.gear--exclamation",
+		IcingaConstants::NSLOG_RUNTIME_WARNING			=> "icons.gear",
+		IcingaConstants::NSLOG_VERIFICATION_ERROR		=> "icons.flask--exclamation",
+		IcingaConstants::NSLOG_VERIFICATION_WARNING		=> "icons.flask",
+		IcingaConstants::NSLOG_CONFIG_ERROR				=> "icons.folder--exclamation",
+		IcingaConstants::NSLOG_CONFIG_WARNING			=> "icons.folder",
+		IcingaConstants::NSLOG_PROCESS_INFO				=> "icons.information",
+		IcingaConstants::NSLOG_EVENT_HANDLER			=> "icons.document-attribute-e",
+		IcingaConstants::NSLOG_EXTERNAL_COMMAND			=> "icons.drill--arrow",
+		IcingaConstants::NSLOG_HOST_UP					=> "icons.server",
+		IcingaConstants::NSLOG_HOST_DOWN				=> "icons.server--exclamation",
+		IcingaConstants::NSLOG_HOST_UNREACHABLE			=> "icons.server--exclamation",
+		IcingaConstants::NSLOG_SERVICE_OK				=> "icons.system-monitor",
+		IcingaConstants::NSLOG_SERVICE_UNKNOWN			=> "icons.system-monitor--exclamation",
+		IcingaConstants::NSLOG_SERVICE_WARNING			=> "icons.system-monitor--exclamation",
+		IcingaConstants::NSLOG_SERVICE_CRITICAL			=> "icons.system-monitor--exclamation",
+		IcingaConstants::NSLOG_PASSIVE_CHECK			=> "icons.socket--arrow",
+		IcingaConstants::NSLOG_INFO_MESSAGE				=> "icons.newspaper",
+		IcingaConstants::NSLOG_HOST_NOTIFICATION		=> "icons.bell",
+		IcingaConstants::NSLOG_SERVICE_NOTIFICATION		=> "icons.bell"
+	);
+	
 	/**
 	 * Generic resolver, change an integer into an array key
 	 * @param array $input
@@ -99,6 +122,15 @@ class IcingaConstantResolver {
 	 */
 	public static function logentryType($key) {
 		return self::resolveArrayConstants(self::$logentry_types, $key);
+	}
+	
+	/**
+	 * Return the icon for the logentry type
+	 * @param $key
+	 * @return string
+	 */
+	public static function logentryTypeIcon($key) {
+		return self::resolveArrayConstants(self::$logentry_type_icons, $key);
 	}
 	
 	/**

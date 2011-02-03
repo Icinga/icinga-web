@@ -16,58 +16,62 @@ Cronk.util.initEnvironment('viewport-center', function() {
 		items: [{
 			region: 'north',
 			id: 'north-frame',
-			layout: 'column',
-			style: 'height: 50px; padding: 5px; background-color: #ffffff',
-			defaults: { border: false },
-			autoHeight: true,
-
+			
+			layout: 'hbox',
+			layoutConfig: {
+			    align : 'stretch',
+			    pack  : 'start'
+			},
+			
+			padding: 5,
+			height: 65,
+			
+			defaults: { border: false },			
+			
 			items: [{
 				xtype: 'cronk',
 				crname: 'icingaSearch',
-				width: 250,
-				margin:0,
-				border: false
+				width: 240
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaOverallStatus',
-				width: 480,
-				border: false
+				width: 480
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaMonitorPerformance',
-				width: 280,
-				border: false
+				width: 280
 			}]
-		}, {
-			region: 'south',
-			id: 'south-frame',
-			layout: 'fit',
-			title: _('log'),
-			collapsible: true,
-			split: true,
-			minSize: 150,
-			height: 150,
-			stateful: true,
-			stateId: 'south-frame',
-			items: {
-				xtype: 'cronk',
-				crname: 'gridLogView',
-				border: false,
-				params: {
-					autoRefresh: <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>
-				}
-			}
-		}, {
+			
+		},
+//			{
+//				region: 'south',
+//				id: 'south-frame',
+//				layout: 'fit',
+//				title: _('log'),
+//				collapsible: true,
+//				split: true,
+//				minSize: 150,
+//				height: 150,
+//				stateful: true,
+//				stateId: 'south-frame',
+//				items: {
+//					xtype: 'cronk',
+//					crname: 'gridLogView',
+//					border: false,
+//					params: {
+//						autoRefresh: <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>
+//					}
+//				}
+//			}, 
+		
+		{
 			region: 'center',
 			id: 'center-frame',
 			layout: 'fit',
 			items: {
 				xtype: 'cronk-control-tabs',
-				plugins: new Cronk.util.CronkTabHelper(),
 				id : 'cronk-tabs',
 				border : false,
-				enableTabScroll :true,
-				resizeTabs : false,
 				stateful: true,
 				stateId: 'cronk-tab-panel'
 			},

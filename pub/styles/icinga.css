@@ -173,6 +173,10 @@ div.cronk-data-view div.cronk-item-shared div.cronk-status-icon {
 	background: transparent url("../images/icons/application-share.png") top right no-repeat;
 }
 
+div.cronk-data-view div.cronk-preview {
+	background-color: #fff;
+}
+
 div.cronk-data-view div.cronk-preview:hover {
 	-o-transform: scale(1.1);
 	-moz-transform: scale(1.1);
@@ -209,11 +213,11 @@ div.cronk-data-view .x-view-selected .thumb{
 
 /* div.x-portlet div.x-panel-body { */
 #west-frame .x-panel-body-noborder {
-	background: white url(../images/background/icinga_logo_cronk_left_bg.png) no-repeat bottom left;
+	background: white url(../images/background/bg-frame-left.png) no-repeat bottom right;
 }
 
 #center-frame .x-panel-body-noborder {
-	background: white url(../images/background/icinga_logo_cronk_bg.png) no-repeat bottom right;
+	background: white url(../images/background/bg-frame-right.png) no-repeat top right;
 }
 
 /** JS Message stack **/
@@ -476,65 +480,12 @@ table.icinga-detailed-info td.key {
 	
 }
 
-/** NORTH FRAME **/
-#north-frame {
-	height: 80px;
+div#menu {
+	border-bottom: 1px #999 solid;
 }
 
 #north-frame div {
 	border: none;
-}
-
-/** FANCY TEXT FIELDS **/
-.fancytextfield-box {
-	width: 220px;
-}
-
-.fancytextfield-box .x-box-mc {
-	padding: 0 4px;
-}
-
-.fancytextfield-container {
-	width: 200px;
-	height: 20px;
-	position: relative;
-	padding: 0px 0px 0px 0px;
-	margin: 0px 0px 0px 0px;
-}
-
-.fancytextfield-icon {
-	position: absolute;
-	top: 5px;
-	left: 0px;
-	width: 11px;
-	height: 11px;
-	background: url(../images/icons/fancytextfield-icon.png) no-repeat center left;
-}
-
-.fancytextfield-input {
-	position: absolute;
-	top: 2px;
-	left: 16px;
-	background: none;
-	border: none;
-	font:normal 10px tahoma, arial, helvetica, sans-serif;
-}
-
-.fancytextfield-reset-button {
-	position: absolute;
-	top: -1px;
-	right: 0px;
-	width: 11px;
-	height: 11px;
-	background: url(../images/icons/fancytextfield-reset.png) no-repeat center right;
-	border: none;
-}
-
-.fancytextfield-reset-button table, .fancytextfield-reset-button tr, .fancytextfield-reset-button td {
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-	border: none;
-	background: none;
 }
 
 /** STATUS-SUMMARY VIEW **/
@@ -567,6 +518,10 @@ table.icinga-detailed-info td.key {
 
 .x-icinga-grid-data-null {
 	color: #0000cc;	
+}
+
+.x-icinga-multiline-column div {
+	white-space: normal;	
 }
 
 /** Simple box classes **/
@@ -782,4 +737,36 @@ tr.bp_serviceRow {
 .icinga-icon-chart-organisation { background-image: url(../images/famfamfam/chart_organisation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-sitemap { background-image: url(../images/famfamfam/sitemap.png) !important; background-repeat: no-repeat; }
 
-/*MODULE[CRONK_BP]*/
+/*!
+ * Ext JS Library 3.3.1
+ * Copyright(c) 2006-2010 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
+ */
+.x-tab-scroller-right-over {
+    background-position: -18px 0;
+}
+
+.x-tab-tabmenu-right {
+    background: transparent url(../images/ext3-ux/tab-scroller-menu.gif) no-repeat 0 0;
+    border-bottom: 1px solid #ababab;
+    width:18px;
+    
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:10;
+    cursor:pointer;
+}
+.x-tab-tabmenu-over {
+    background-position: -18px 0;
+}
+.x-tab-tabmenu-disabled {
+    background-position: 0 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}
+
+

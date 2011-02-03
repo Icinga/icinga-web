@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Europe/Helsinki".
- * Compiled from olson file "europe", version 8.26.
+ * Compiled from olson file "europe", version 8.27.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Europe_47_Helsinki.php 4471 2010-04-08 01:01:16Z david $
+ * @version    $Id: Europe_47_Helsinki.php 4577 2010-08-20 18:56:31Z david $
  */
 
 return array (
@@ -62,26 +62,26 @@ return array (
     4 => 
     array (
       'time' => 354672000,
-      'type' => 1,
+      'type' => 2,
     ),
     5 => 
     array (
-      'time' => 354675600,
-      'type' => 2,
-    ),
-    6 => 
-    array (
-      'time' => 370400400,
+      'time' => 370396800,
       'type' => 1,
     ),
-    7 => 
+    6 => 
     array (
       'time' => 386125200,
       'type' => 2,
     ),
+    7 => 
+    array (
+      'time' => 401846400,
+      'type' => 1,
+    ),
     8 => 
     array (
-      'time' => 401850000,
+      'time' => 410220000,
       'type' => 1,
     ),
     9 => 
@@ -250,7 +250,7 @@ return array (
     'startYear' => 1996,
   ),
   'source' => 'europe',
-  'version' => '8.26',
+  'version' => '8.27',
   'name' => 'Europe/Helsinki',
 );
 

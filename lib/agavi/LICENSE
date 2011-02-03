@@ -32,21 +32,6 @@ The corresponding license can be found in LICENSE-AGAVI.
 --
 
 
-PHPUnit
--------
-
-This software bundles the PHPUnit library to facilitate software testing.
-This version of PHPUnit also bundles a part of the Symfony framework to handle
-the YAML data serialization language.
-
-For more information about PHPUnit, visit the homepage:
-http://phpunit.de/
-
-The corresponding licenses can be found in LICENSE-PHPUNIT.
-
---
-
-
 International Components for Unicode
 ------------------------------------
 
@@ -106,10 +91,9 @@ The Zoneinfo Database is licensed as Public Domain.
 Tango Icon Theme
 ----------------
 
-This software uses some icons from the Tango Desktop Project Icon Theme in their
-original SVG versions.
+This software uses some SVG icons from the Tango Desktop Project Icon Theme.
 
 For more information about the Tango Desktop Project, visit the homepage:
 http://tango.freedesktop.org/
 
-The corresponding license can be found in LICENSE-TANGO_ICON_THEME.
+The Tango Icons are licensed as Public Domain.

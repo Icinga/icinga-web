@@ -38,7 +38,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviFormPopulationFilter.class.php 4472 2010-04-08 09:51:41Z david $
+ * @version    $Id: AgaviFormPopulationFilter.class.php 4530 2010-05-11 13:57:54Z david $
  */
 class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilter, AgaviIActionFilter
 {
@@ -600,7 +600,7 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 					$this->doc->documentElement->setAttributeNode($attribute);
 				}
 			}
-			$out = $this->doc->saveXML(null, $cfg['savexml_options']);
+			$out = $this->doc->saveXML($this->doc, $cfg['savexml_options']);
 			if((!$cfg['parse_xhtml_as_xml'] || !$properXhtml) && $cfg['cdata_fix']) {
 				// these are ugly fixes so inline style and script blocks still work. better don't use them with XHTML to avoid trouble
 				// http://www.456bereastreet.com/archive/200501/the_perils_of_using_xhtml_properly/

@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Asia/Baku".
- * Compiled from olson file "asia", version 8.59.
+ * Compiled from olson file "asia", version 8.62.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Asia_47_Baku.php 4471 2010-04-08 01:01:16Z david $
+ * @version    $Id: Asia_47_Baku.php 4590 2010-12-07 08:11:19Z david $
  */
 
 return array (
@@ -266,7 +266,7 @@ return array (
     'startYear' => 1997,
   ),
   'source' => 'asia',
-  'version' => '8.59',
+  'version' => '8.62',
   'name' => 'Asia/Baku',
 );
 

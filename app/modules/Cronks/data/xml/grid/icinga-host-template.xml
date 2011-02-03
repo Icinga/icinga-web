@@ -773,7 +773,7 @@
 	                		<parameter name="titlePrefix">Statehistory for</parameter>
 							<parameter name="targetTemplate">icinga-host-history-template</parameter>
 							<parameter name="filterMap">
-								<parameter name="host_name">host_name</parameter>
+								<parameter name="host_object_id">host_object_id</parameter>
 							</parameter>
 							<parameter name="labelField">host_name</parameter>
 	                	</parameter>

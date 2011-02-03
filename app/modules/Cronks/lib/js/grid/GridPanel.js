@@ -250,7 +250,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		for (var i in params) {
 			this.store.setBaseParam(i, params[i]);
 		}
-	},
+	}
 	
 });
 

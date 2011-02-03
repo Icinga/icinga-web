@@ -55,6 +55,9 @@
 					<ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
 					<ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
 				</setting>
+				
+				<!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
+				<setting name="ajax.timeout">240000</setting>
 
 				<!-- Adding styles -->
 				<setting name="appkit_module.app.css_files">
@@ -100,7 +103,7 @@
 <!--				<setting name="appkit_module.app.javascript_dynamic"></setting>-->
 
 				<setting name="appkit_module.app.meta_tags">
-					<ae:parameter name="author">(c) 2009,2010 Icinga developer team - www.icinga.org</ae:parameter>
+					<ae:parameter name="author">(c) 2009-2011 Icinga developer team - www.icinga.org</ae:parameter>
 					<ae:parameter name="robots">noindex</ae:parameter>
 				</setting>
 

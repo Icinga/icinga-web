@@ -58,7 +58,7 @@ Cronk.grid.IcingaColumnRenderer = {
 					target: e.getTarget(),
 					srcId: cfg.src_id,
 					width: 400,
-					delay: 15000,
+					delay: cfg.delay || 15000,
 					filter: cfg.processedFilterData
 				});
 

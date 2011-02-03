@@ -29,7 +29,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviDecimalFormatter.class.php 4466 2010-03-24 15:24:30Z david $
+ * @version    $Id: AgaviDecimalFormatter.class.php 4599 2010-12-11 23:24:09Z david $
  */
 class AgaviDecimalFormatter
 {
@@ -652,7 +652,8 @@ class AgaviDecimalFormatter
 				$pastDecimalSeparator = false;
 				foreach($decimalFormatChunks as &$decimalFormatChunk) {
 					if($decimalFormatChunk == '-') {
-						$decimalFormatChunk = '(?P<minus>' . preg_quote($minusSign, '#') . ')';
+						// always allow "-" in addition to the minus sign supplied by the locale. we do this because some locales (e.g. da, fa, se, sv) have U+2212 (the "real" minus sign) defined in the locale data, but no human can really type that character on their keyboard. consider it lenient parsing ;) see ticket #1293
+						$decimalFormatChunk = '(?P<minus>' . preg_quote($minusSign, '#') . '|-)';
 					} elseif($decimalFormatChunk == '.') {
 						$pastDecimalSeparator = true;
 						if($withFraction) {

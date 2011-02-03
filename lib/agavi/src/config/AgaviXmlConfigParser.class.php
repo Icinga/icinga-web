@@ -28,7 +28,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviXmlConfigParser.class.php 4444 2010-03-13 02:26:07Z david $
+ * @version    $Id: AgaviXmlConfigParser.class.php 4578 2010-08-20 19:16:28Z david $
  */
 class AgaviXmlConfigParser
 {

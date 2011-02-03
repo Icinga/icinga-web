@@ -22,10 +22,10 @@
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/MultiSelect.js</ae:parameter>
+					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/TabScrollerMenu.js</ae:parameter>
 
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/FancyTextField.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</ae:parameter>
@@ -38,6 +38,7 @@
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridUtil.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/SearchHandler.js</ae:parameter>
 
 					<ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>

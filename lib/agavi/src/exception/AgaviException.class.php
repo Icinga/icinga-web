@@ -30,7 +30,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviException.class.php 4433 2010-03-09 02:19:24Z david $
+ * @version    $Id: AgaviException.class.php 4595 2010-12-07 09:05:16Z david $
  */
 class AgaviException extends Exception
 {
@@ -57,19 +57,33 @@ class AgaviException extends Exception
 	 * appears to happen from time to time or with certain PHP/XDebug versions.
 	 *
 	 * @param      Exception The exception to pull the trace from.
+	 * @param      Exception Optionally, the next exception to display (pulled
+	 *                       from Exception::getPrevious() and displayed in
+	 *                       reverse order), which will then result in identical
+	 *                       parts of the stack trace not being returned.
 	 *
 	 * @return     array The trace containing the exception origin as first item.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      1.0.3
 	 */
-	public static function getFixedTrace(Exception $e)
+	public static function getFixedTrace(Exception $e, Exception $next = null)
 	{
 		// fix stack trace in case it doesn't contain the exception origin as the first entry
 		$fixedTrace = $e->getTrace();
 		
 		if(isset($fixedTrace[0]['file']) && !($fixedTrace[0]['file'] == $e->getFile() && $fixedTrace[0]['line'] == $e->getLine())) {
 			$fixedTrace = array_merge(array(array('file' => $e->getFile(), 'line' => $e->getLine())), $fixedTrace);
+		}
+		
+		if($next) {
+			$nextTrace = self::getFixedTrace($next);
+			foreach($fixedTrace as $i => $fixedTraceItem) {
+				if($fixedTraceItem == $nextTrace[1]) {
+					$fixedTrace = array_slice($fixedTrace, 0, $i);
+					break;
+				}
+			}
 		}
 		
 		return $fixedTrace;
@@ -126,7 +140,11 @@ class AgaviException extends Exception
 					}
 					break;
 				case 'string':
-					$val = var_export(strlen($param) > 51 ? substr_replace($param, ' … ', 25, -25) : $param, true);
+					$val = $param;
+					if(preg_match('/^(.{20}).{3,}(.{20})$/u', $val, $matches)) {
+						$val = $matches[1] . ' … ' . $matches[2];
+					}
+					$val = var_export($val);
 					if($html) {
 						$retval[] = $key . htmlspecialchars($val);
 					} else {
@@ -223,6 +241,16 @@ class AgaviException extends Exception
 				}
 				// append closing tag
 				$line .= '</span>';
+				$closingSpanCount++;
+			}
+			
+			// in case things still are not right...
+			// can happen for instance when the first line of the file is HTML and we drop the first span, since that is a wrapper for everything
+			if($openingSpanCount < $closingSpanCount) {
+				$line = sprintf('%1$s%2$s', str_repeat('<span color="%3s">', $closingSpanCount - $openingSpanCount), $line, ini_get('highlight.html'));
+			}
+			if($closingSpanCount < $openingSpanCount) {
+				$line = sprintf('%s%s', $line, str_repeat('</span>', $openingSpanCount - $closingSpanCount), $line);
 			}
 		}
 		
@@ -245,10 +273,20 @@ class AgaviException extends Exception
 		// nice touch: an exception template can change this value :)
 		$exitCode = 70;
 		
-		// discard any previous output waiting in the buffer
-		if (ob_get_length()) {
-			while(@ob_end_clean());
+		$exceptions = array();
+		if(version_compare(PHP_VERSION, '5.3', 'ge')) {
+			// reverse order of exceptions
+			$ce = $e;
+			while($ce) {
+				array_unshift($exceptions, $ce);
+				$ce = $ce->getPrevious();
+			}
+		} else {
+			$exceptions[] = $e;
 		}
+		
+		// discard any previous output waiting in the buffer
+		while(@ob_end_clean());
 		
 		if($container !== null && $container->getOutputType() !== null && $container->getOutputType()->getExceptionTemplate() !== null) { 
 			// an exception template was defined for the container's output type

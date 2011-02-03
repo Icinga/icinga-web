@@ -29,7 +29,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviWebRequest.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviWebRequest.class.php 4565 2010-08-16 10:07:46Z david $
  */
 class AgaviWebRequest extends AgaviRequest
 {
@@ -356,9 +356,9 @@ class AgaviWebRequest extends AgaviRequest
 		
 		$this->protocol = self::getSourceValue($sources['SERVER_PROTOCOL'], $sourceDefaults['SERVER_PROTOCOL']);
 		
-		$HTTPS = self::getSourceValue($sources['HTTPS'], $sourceDefaults['HTTPS']);
+		$HTTPS = in_array(self::getSourceValue($sources['HTTPS'], $sourceDefaults['HTTPS']), array('on', 'On', 'oN', 'ON', 1, true), true);
 
-		$this->urlScheme = 'http' . (strtolower($HTTPS) == 'on' ? 's' : '');
+		$this->urlScheme = 'http' . ($HTTPS ? 's' : '');
 
 		$this->urlPort = (int)self::getSourceValue($sources['SERVER_PORT'], $sourceDefaults['SERVER_PORT']);
 
@@ -389,7 +389,10 @@ class AgaviWebRequest extends AgaviRequest
 			);
 		}
 
-		if(isset($_SERVER['HTTP_X_REWRITE_URL']) && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
+		if(isset($_SERVER['UNENCODED_URL']) && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
+			// Microsoft IIS 7 with URL Rewrite Module
+			$this->requestUri = $_SERVER['UNENCODED_URL'];
+		} elseif(isset($_SERVER['HTTP_X_REWRITE_URL']) && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
 			// Microsoft IIS with ISAPI_Rewrite
 			$this->requestUri = $_SERVER['HTTP_X_REWRITE_URL'];
 		} elseif(!isset($_SERVER['REQUEST_URI']) && isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) {
