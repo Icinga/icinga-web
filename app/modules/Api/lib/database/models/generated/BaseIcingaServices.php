@@ -74,7 +74,7 @@ abstract class BaseIcingaServices extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => true,
+             'primary' => false,
              'autoincrement' => true,
              ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -112,7 +112,7 @@ abstract class BaseIcingaServices extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -611,15 +611,16 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'local' => 'service_object_id',
 	    'foreign' => 'service_object_id'
 	));
+	///Retrieved by custom finder 
 	$this->hasMany("IcingaContacts as contacts", array(
 	    'local' => 'service_id',
-	    'foreign' => 'contact_object_id',
-	    'refclass' => 'IcingaServiceContacts'
+	    'foreign' => 'contact_object_id'
+	   // 'refclass' => 'IcingaServiceContacts'
 	));
 	$this->hasMany("IcingaContactgroups as contactgroups", array(
 	    'local' => 'service_id',
-	    'foreign' => 'contactgroup_object_id',
-	    'refclass' => 'IcingaServiceContactgroups'
+	    'foreign' => 'contactgroup_object_id'
+	 //   'refclass' => 'IcingaServiceContactgroups'
 	));
 	$this->hasOne("IcingaCommands as checkCommand", array(
 	    'local' => 'check_command_object_id',
@@ -637,7 +638,7 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'local' => 'service_object_id',
 	    'foreign' => 'service_object_id'
 	));
-	$this->hasMany("IcingaTimedevents as events", array(
+	$this->hasMany("IcingaTimedevents as timedevents", array(
 	    'local' => 'service_object_id',
 	    'foreign' => 'object_id'
 	));
@@ -658,9 +659,9 @@ abstract class BaseIcingaServices extends Doctrine_Record
 	    'foreign' => 'dependent_service_object_id',
 	    'refClass' => 'IcingaServicedependencies'
 	));
-	$this->hasMany("IcingaServicegroups as groups", array(
+	$this->hasMany("IcingaServicegroups as servicegroups", array(
 	    'local' => 'service_object_id',
-	    'foreign' => 'servicegroup_object_id',
+	    'foreign' => 'servicegroup_id',
 	    'refClass' => 'IcingaServicegroupMembers'
 	));
 	$this->hasMany("IcingaNotifications as notification", array(

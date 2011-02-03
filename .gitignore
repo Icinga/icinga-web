@@ -10,6 +10,7 @@ app/config/databases.xml
 app/config/settings.xml
 app/modules/Web/config/icinga-io.xml
 app/modules/AppKit/cache/Widgets/SquishLoader.xml
+app/modules/Api/lib/.ssh/*
 bin/clearcache.sh
 icinga-web.session
 icinga-web.webprj

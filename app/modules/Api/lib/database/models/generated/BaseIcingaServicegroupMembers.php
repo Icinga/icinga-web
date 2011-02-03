@@ -25,7 +25,7 @@ abstract class BaseIcingaServicegroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => true,
+             'primary' => false,
              'autoincrement' => true,
              ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -43,7 +43,7 @@ abstract class BaseIcingaServicegroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -53,7 +53,7 @@ abstract class BaseIcingaServicegroupMembers extends Doctrine_Record
              'length' => 4,
              'fixed' => false,
              'unsigned' => false,
-             'primary' => false,
+             'primary' => true,
              'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
@@ -62,22 +62,21 @@ abstract class BaseIcingaServicegroupMembers extends Doctrine_Record
 
     public function setUp()
     {
-	$this->hasOne('IcingaInstances as instance', array(
-	    'local' => 'instance_id',
-	    'foreign' => 'instance_id'
-	));	
 
-	$this->hasOne('IcingaServices as service', array(
-	    'local' => 'service_object_id',
-	    'foreign' => 'service_id'
-	));	
+		parent::setUp();
+		$this->hasOne('IcingaInstances as instance', array(
+			'local' => 'instance_id',
+			'foreign' => 'instance_id'
+		));	
 
-	$this->hasOne('IcingaServicegroups as servicegroup', array(
-	    'local' => 'servicegroup_id',
-	    'foreign' => 'servicegroup_id'
-	));	
+		$this->hasOne('IcingaServicegroups as servicegroup', array(
+			'local' => 'servicegroup_id',
+			'foreign' => 'servicegroup_id'
+		));		
 
-        parent::setUp();
-        
-    }
+		$this->hasOne('IcingaServices as service', array(
+			'local' => 'service_object_id',
+			'foreign' => 'service_object_id'
+		));	
+	}
 }
