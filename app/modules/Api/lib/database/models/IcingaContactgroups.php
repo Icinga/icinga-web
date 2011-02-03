@@ -19,6 +19,11 @@ class IcingaContactgroups extends BaseIcingaContactgroups
 				$this->set("hosts",$hosts);
 				return $hosts;
 				break;	
+			case 'services':
+				$services = $this->getServices();
+				$this->set("services",$services);
+				return $services;
+				break;	
 		}
 		return parent::__get($field);
 	}
@@ -33,4 +38,13 @@ class IcingaContactgroups extends BaseIcingaContactgroups
 				->execute(null,Doctrine_Core::HYDRATE_RECORD);
 	}
 
+	public function getServices() {
+		return Doctrine_Query::create()
+				->select("h.*")
+				->from("IcingaServices h")
+				->innerJoin("h.contactgroups cg ON cg.contactgroup_object_id = "
+					.$this->contactgroup_object_id." AND cg.instance_id = ".$this->instance_id.
+					" AND cg.service_id = h.service_id")
+				->execute(null,Doctrine_Core::HYDRATE_RECORD);
+	}
 }

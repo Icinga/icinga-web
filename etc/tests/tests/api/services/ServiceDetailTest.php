@@ -222,16 +222,15 @@ class ServiceDetailTest extends PHPUnit_Framework_TestCase {
 		$service = $this->serviceProvider();
 		$groups = $service->contactgroups;	
 		$this->assertFalse(is_null($groups));
-		
+			
 		foreach($groups as $group) {
 			$found = false;
-			foreach($group->services as $service_toCheck) {
+			foreach($group->services as $service_toCheck) {	
 				if($service_toCheck == $service) {
 					$found = true;
 					break;
 				}
 			}
-
 			$this->assertTrue($found,"Returned contactgroup didn't contain service");
 		}
 	}
@@ -245,8 +244,8 @@ class ServiceDetailTest extends PHPUnit_Framework_TestCase {
 		$host = $service->host;
 	
 		$this->assertFalse(is_null($host),"Couldn't retrieve host for service, returned null");
-		$this->assertEquals($host->count(),1,"Multiple hosts for one service returned, somethings not right here");
-		$this->assertEquals($host->getFirst()->instance_id, $service->instance_id,"Wrong instance id");
+	
+		$this->assertEquals($host->instance_id, $service->instance_id,"Wrong instance id");
 	}
 
 }

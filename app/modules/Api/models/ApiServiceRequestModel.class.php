@@ -26,7 +26,7 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel
 		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
-	public function getServicesByName(array $names,array $hosts = array()) {
+	public function getServicesByName(array $names,array $hosts = array(),$ignoreWildCards = false) {
 		$useLike = false;
 		foreach($names as $name) {
 			if(strpos($name,'%') !== false) {
@@ -36,9 +36,9 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel
 		}
 		$desc = $this->createRequestDescriptor();		
 		$desc->select('*')->from("IcingaServices s");
-		if(!$useLike || $ignoreWildCards)
-			$desc->whereIn("s.display_name",$names);
-		else {
+		if(!$useLike || $ignoreWildCards) {
+			$desc->whereIn("s.display_name",$names);	
+		} else {
 			$first = true;
 			foreach($names as $name) {
 				if($first)
@@ -52,34 +52,71 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel
 		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
-	public function getServicesById(array $ids,array $hosts = array()) {
-			
+	public function getServicesById(array $ids,array $hosts = array()) {	
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from('IcingaServices s');
+		$desc->whereIn("s.service_id",$ids);
+
+		$this->limitToHosts($desc,$hosts);
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
 	public function getServicesByObjectId(array $ids,array $hosts = array()) {
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from('IcingaServices s');
+		$desc->whereIn("s.service_object_id",$ids);
 
+		$this->limitToHosts($desc,$hosts);
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
 	public function getServicesByServicegroupNames(array $names,array $hosts = array()) {
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from('IcingaServices s');
+		$desc->innerJoin("s.servicegroups sg")->whereIn("sg.display_name",$names);
+
+		$this->limitToHosts($desc,$hosts);
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
 	public function getServicesByServicegroupIds(array $ids,array $hosts = array()) {
-	
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from('IcingaServices s');
+		$desc->innerJoin("s.servicegroups sg")->whereIn("sg.servicegroup_id",$ids);
+
+		$this->limitToHosts($desc,$hosts);
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	} 
 
 	public function getServicesByInstanceIds(array $ids,array $hosts = array()) {
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from('IcingaServices s')->whereIn("s.instance_id",$ids);
 
-	}
-
-	public function getServicesByInstances(array $instanceNames,array $hosts = array()) {
-		
+		$this->limitToHosts($desc,$hosts);
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
 	public function getServicesByState(array $statesToShow,array $hosts = array()) {
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from('IcingaServices s');
+		$desc->innerJoin("s.status stat")->whereIn("stat.current_state",$statesToShow);
 
+		$this->limitToHosts($desc,$hosts);
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
 	}
 
 	public function getServicesByCustomVars(array $keyVals,array $hosts = array()) {
-
+		$desc = $this->createRequestDescriptor();
+		$desc->select('*')->from("IcingaServices h")->innerJoin("h.customvariables cv");
+		$first =true;
+		foreach($keyVals as $key=>$val) {
+			if($first) 
+				$desc->addWhere("cv.varname LIKE ? AND cv.varvalue LIKE ?",array($key,$val));
+			else 
+				$desc->orWhere("cv.varname LIKE ? AND cv.varvalue LIKE ?",array($key,$val));
+			$first = false;
+		}
+		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
+	
 	}
 }
