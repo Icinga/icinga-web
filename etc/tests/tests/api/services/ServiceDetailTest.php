@@ -158,7 +158,7 @@ class ServiceDetailTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($groups->count(),2,"Group count didn't match excpected value");
 		foreach($groups as $group) {
 			$found = false;
-			foreach($group->services as $service_toCheck) {
+			foreach($group->members as $service_toCheck) {
 				if($service_toCheck == $service) {
 					$found = true;
 					break;
