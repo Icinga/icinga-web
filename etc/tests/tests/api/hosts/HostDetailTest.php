@@ -148,7 +148,12 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetHostgroups() {
 		$host = $this->hostProvider();
 		$this->assertFalse(is_null($host->hostgroups),"Hostgroups could not be retrieved, returned null");
-		$this->assertEquals($host->hostgroups->count(),1, "Hostgroupcount doesn't match expected value");
+		$this->assertTrue($host->hostgroups->count() > 0, "Hostgroupcount doesn't match expected value");
+		foreach($host->hostgroups as $hostgroup) {
+			$this->assertEquals($hostgroup->instance_id,$host->instance_id,"Hostgroup from wrong instance returned");
+		
+		}
+
 		$found = false;
 		foreach($host->hostgroups->getFirst()->members as $hgMember) {
 			if($hgMember == $host) {
@@ -177,8 +182,12 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetCustomvars() {
 		$host = $this->hostProvider();
-		$this->assertFalse(is_null($host->customvariables),"Customvars for host could not be retrieved, returned null");
-		$this->assertEquals($host->customvariables->count(),2,"Customvariable count doesn't match");
+		$this->assertFalse(is_null($host->customvariables),"Customvars for host could not be retrieved, returned null");	
+		
+		foreach($host->customvariables as $var) {
+			$this->assertEquals($var->instance_id,$host->instance_id,"Customvar from wrong instance returned");
+		}
+		
 		$found = false;
 		foreach($host->customvariables->hosts as $cvhost) {
 			if($cvhost = $host) {
@@ -218,9 +227,12 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetContactgroups() {
 		$host = $this->hostProvider();
 		$this->assertFalse(is_null($host->contactgroups), "Contactgroups for host couldn't be retrieved, returned null");
-		$this->assertEquals($host->contactgroups->count(),1,"Expected 1 contactgroup to be returned");
+		$this->assertEquals($host->contactgroups->count() > 0,"Expected at least 1 contactgroup to be returned");
 		$this->assertFalse(is_null($host->contactgroups->getFirst()->hosts),1,"Couldn't retrieve hosts for contactgroups" );
 		$found = false;
+		foreach($host->contactgroups as $group) {
+			$this->assertEquals($group->instance_id,$host->instance_id,"Contactgroup from wrong instance returned");
+		}
 		foreach($host->contactgroups->getFirst()->hosts as $_host) {
 			if($host == $_host) {
 				$found = true;
@@ -248,9 +260,12 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetServices() {
 		$host = $this->hostProvider();
 		$this->assertFalse(is_null($host->services));
-		$this->assertEquals($host->services->count(),2);
-		$this->assertTrue($host->services->getFirst()->host == $host,"Returned service doesn't belong to host");	
-		success("Retrieving Services from host succeeded\n");
+		foreach($host->services as $service) {
+			$this->assertEquals($service->instance_id,$host->instance_id,"Service from wrong instance returned");
+			$this->assertEquals($service->host->host_id, $host->host_id,"Wrong service (from different host) returned");
+		}
+		
+		//success("Retrieving Services from host succeeded\n");
 	}
 
 }

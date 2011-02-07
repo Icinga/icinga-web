@@ -23,9 +23,9 @@
 			
 			<directory>tests/api/hosts</directory>
 			<directory>tests/api/services</directory>	
-<!--			<directory>tests/api/hostgroups</directory>	
+			<directory>tests/api/hostgroups</directory>	
 			<directory>tests/api/servicegroups</directory>
-			<directory>tests/api/misc</directory>	-->
+		<!--	<directory>tests/api/misc</directory> -->
 		</testsuite>
 <!--		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>

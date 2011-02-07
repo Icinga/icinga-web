@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="85" assertions="248" failures="43" errors="1" time="2.835915">
-    <testsuite name="Bootstrap" tests="8" assertions="5" failures="0" errors="1" time="1.114705">
-      <testsuite name="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.309788">
-        <testcase name="testRequiredFileAvailabilty" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="15" assertions="1" time="0.001826"/>
-        <testcase name="testBootstrap" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="29" assertions="1" time="0.307962"/>
+  <testsuite name="" tests="118" assertions="278" failures="69" errors="1" time="3.037032">
+    <testsuite name="Bootstrap" tests="8" assertions="5" failures="0" errors="1" time="1.061954">
+      <testsuite name="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.267750">
+        <testcase name="testRequiredFileAvailabilty" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="15" assertions="1" time="0.001684"/>
+        <testcase name="testBootstrap" class="agaviBootstrapTest" file="/usr/local/icinga-web/etc/tests/tests/bootstrap/agaviBootstrapTest.php" line="29" assertions="1" time="0.266066"/>
       </testsuite>
-      <testsuite name="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" tests="6" assertions="3" failures="0" errors="1" time="0.804917">
-        <testcase name="testInterfaceInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="5" assertions="0" time="0.004355"/>
-        <testcase name="testUnknownHostInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="15" assertions="1" time="0.001798"/>
-        <testcase name="testCommandSetup" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="19" assertions="1" time="0.055929"/>
-        <testcase name="testInvalidCommand" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="55" assertions="1" time="0.001691"/>
-        <testcase name="testSshConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="73" assertions="0" time="0.609541"/>
-        <testcase name="testSshKeyConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="90" assertions="0" time="0.131603">
+      <testsuite name="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" tests="6" assertions="3" failures="0" errors="1" time="0.794204">
+        <testcase name="testInterfaceInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="5" assertions="0" time="0.004420"/>
+        <testcase name="testUnknownHostInstance" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="15" assertions="1" time="0.001512"/>
+        <testcase name="testCommandSetup" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="19" assertions="1" time="0.048614"/>
+        <testcase name="testInvalidCommand" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="55" assertions="1" time="0.002110"/>
+        <testcase name="testSshConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="73" assertions="0" time="0.581218"/>
+        <testcase name="testSshKeyConnection" class="ConsoleInterfaceTest" file="/usr/local/icinga-web/etc/tests/tests/api/ConsoleInterfaceTest.php" line="90" assertions="0" time="0.156330">
           <error type="PHPUnit_Framework_Error_Warning">ConsoleInterfaceTest::testSshKeyConnection
 ssh2_auth_pubkey_file(): Authentication failed for testuser using public key
 
@@ -24,25 +24,25 @@ ssh2_auth_pubkey_file(): Authentication failed for testuser using public key
         </testcase>
       </testsuite>
     </testsuite>
-    <testsuite name="API" tests="77" assertions="243" failures="43" errors="0" time="1.721210">
-      <testsuite name="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" tests="7" assertions="97" failures="0" errors="0" time="0.790655">
-        <testcase name="testHostListing" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="4" assertions="2" time="0.048652"/>
-        <testcase name="testStatusFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="15" assertions="33" time="0.285849"/>
-        <testcase name="testNameFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="42" assertions="5" time="0.013401"/>
-        <testcase name="testInstanceFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="59" assertions="34" time="0.304270"/>
-        <testcase name="testIdFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="91" assertions="6" time="0.021780"/>
-        <testcase name="testCustomVarFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="113" assertions="4" time="0.027488"/>
-        <testcase name="testHostgroupFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="131" assertions="13" time="0.089215"/>
+    <testsuite name="API" tests="110" assertions="273" failures="69" errors="0" time="1.975078">
+      <testsuite name="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" tests="7" assertions="97" failures="0" errors="0" time="0.796417">
+        <testcase name="testHostListing" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="4" assertions="2" time="0.044177"/>
+        <testcase name="testStatusFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="15" assertions="33" time="0.265755"/>
+        <testcase name="testNameFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="42" assertions="5" time="0.015930"/>
+        <testcase name="testInstanceFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="59" assertions="34" time="0.310745"/>
+        <testcase name="testIdFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="91" assertions="6" time="0.024607"/>
+        <testcase name="testCustomVarFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="113" assertions="4" time="0.026507"/>
+        <testcase name="testHostgroupFilters" class="HostOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostOverviewTest.php" line="131" assertions="13" time="0.108696"/>
       </testsuite>
-      <testsuite name="HostCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php" tests="2" assertions="0" failures="2" errors="0" time="0.001326">
-        <testcase name="testInsertComment" class="HostCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php" line="4" assertions="0" time="0.000604">
+      <testsuite name="HostCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php" tests="2" assertions="0" failures="2" errors="0" time="0.001763">
+        <testcase name="testInsertComment" class="HostCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php" line="4" assertions="0" time="0.000911">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommentsTest::testInsertComment
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php:5
 </failure>
         </testcase>
-        <testcase name="testReadComments" class="HostCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php" line="7" assertions="0" time="0.000722">
+        <testcase name="testReadComments" class="HostCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommentsTest.php" line="7" assertions="0" time="0.000852">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommentsTest::testReadComments
 Not implemented
 
@@ -50,155 +50,155 @@ Not implemented
 </failure>
         </testcase>
       </testsuite>
-      <testsuite name="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" tests="22" assertions="0" failures="22" errors="0" time="0.022282">
-        <testcase name="testProcessCheckResult" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="5" assertions="0" time="0.001667">
+      <testsuite name="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" tests="22" assertions="0" failures="22" errors="0" time="0.025568">
+        <testcase name="testProcessCheckResult" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="5" assertions="0" time="0.001150">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testProcessCheckResult
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:6
 </failure>
         </testcase>
-        <testcase name="testAcknowledgeHostProblems" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="8" assertions="0" time="0.000686">
+        <testcase name="testAcknowledgeHostProblems" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="8" assertions="0" time="0.000706">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testAcknowledgeHostProblems
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:9
 </failure>
         </testcase>
-        <testcase name="testSheduleDowntime" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="11" assertions="0" time="0.000813">
+        <testcase name="testSheduleDowntime" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="11" assertions="0" time="0.000944">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testSheduleDowntime
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:12
 </failure>
         </testcase>
-        <testcase name="testSheduleDowntimeWithServices" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="14" assertions="0" time="0.001098">
+        <testcase name="testSheduleDowntimeWithServices" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="14" assertions="0" time="0.001388">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testSheduleDowntimeWithServices
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:15
 </failure>
         </testcase>
-        <testcase name="testScheduleServiceCheck" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="17" assertions="0" time="0.000738">
+        <testcase name="testScheduleServiceCheck" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="17" assertions="0" time="0.001089">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testScheduleServiceCheck
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:18
 </failure>
         </testcase>
-        <testcase name="testSendCustomHostNotification" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="20" assertions="0" time="0.000776">
+        <testcase name="testSendCustomHostNotification" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="20" assertions="0" time="0.001358">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testSendCustomHostNotification
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:21
 </failure>
         </testcase>
-        <testcase name="testEnableActiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="23" assertions="0" time="0.000806">
+        <testcase name="testEnableActiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="23" assertions="0" time="0.001126">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testEnableActiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:24
 </failure>
         </testcase>
-        <testcase name="testDisableActiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="26" assertions="0" time="0.000589">
+        <testcase name="testDisableActiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="26" assertions="0" time="0.001526">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testDisableActiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:27
 </failure>
         </testcase>
-        <testcase name="testStartAcceptingPassiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="29" assertions="0" time="0.001064">
+        <testcase name="testStartAcceptingPassiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="29" assertions="0" time="0.001186">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testStartAcceptingPassiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:30
 </failure>
         </testcase>
-        <testcase name="testStopAcceptingPassiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="32" assertions="0" time="0.001093">
+        <testcase name="testStopAcceptingPassiveChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="32" assertions="0" time="0.001187">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testStopAcceptingPassiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:33
 </failure>
         </testcase>
-        <testcase name="testStartObsessing" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="35" assertions="0" time="0.001988">
+        <testcase name="testStartObsessing" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="35" assertions="0" time="0.001219">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testStartObsessing
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:36
 </failure>
         </testcase>
-        <testcase name="testStopObsessing" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="38" assertions="0" time="0.001411">
+        <testcase name="testStopObsessing" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="38" assertions="0" time="0.001168">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testStopObsessing
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:39
 </failure>
         </testcase>
-        <testcase name="testEnableNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="41" assertions="0" time="0.000953">
+        <testcase name="testEnableNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="41" assertions="0" time="0.001077">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testEnableNotifications
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:42
 </failure>
         </testcase>
-        <testcase name="testDisableNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="44" assertions="0" time="0.000937">
+        <testcase name="testDisableNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="44" assertions="0" time="0.001305">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testDisableNotifications
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:45
 </failure>
         </testcase>
-        <testcase name="testEnableServiceNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="47" assertions="0" time="0.000979">
+        <testcase name="testEnableServiceNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="47" assertions="0" time="0.001583">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testEnableServiceNotifications
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:48
 </failure>
         </testcase>
-        <testcase name="testDisableServiceNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="50" assertions="0" time="0.000904">
+        <testcase name="testDisableServiceNotifications" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="50" assertions="0" time="0.002048">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testDisableServiceNotifications
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:51
 </failure>
         </testcase>
-        <testcase name="testEnableServiceChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="53" assertions="0" time="0.001036">
+        <testcase name="testEnableServiceChecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="53" assertions="0" time="0.000992">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testEnableServiceChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:54
 </failure>
         </testcase>
-        <testcase name="testDisableServicechecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="56" assertions="0" time="0.000867">
+        <testcase name="testDisableServicechecks" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="56" assertions="0" time="0.001431">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testDisableServicechecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:57
 </failure>
         </testcase>
-        <testcase name="testEnableEventHandler" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="59" assertions="0" time="0.000970">
+        <testcase name="testEnableEventHandler" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="59" assertions="0" time="0.001163">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testEnableEventHandler
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:60
 </failure>
         </testcase>
-        <testcase name="testDisableEventHandler" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="62" assertions="0" time="0.001128">
+        <testcase name="testDisableEventHandler" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="62" assertions="0" time="0.000760">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testDisableEventHandler
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:63
 </failure>
         </testcase>
-        <testcase name="testEnableFlapDetection" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="65" assertions="0" time="0.000898">
+        <testcase name="testEnableFlapDetection" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="65" assertions="0" time="0.000301">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testEnableFlapDetection
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php:66
 </failure>
         </testcase>
-        <testcase name="testDisableFlapDetection" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="68" assertions="0" time="0.000880">
+        <testcase name="testDisableFlapDetection" class="HostCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostCommandsTest.php" line="68" assertions="0" time="0.000861">
           <failure type="PHPUnit_Framework_AssertionFailedError">HostCommandsTest::testDisableFlapDetection
 Not implemented
 
@@ -206,135 +206,135 @@ Not implemented
 </failure>
         </testcase>
       </testsuite>
-      <testsuite name="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" tests="13" assertions="28" failures="0" errors="0" time="0.262334">
-        <testcase name="testGetHost" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="14" assertions="2" time="0.010403"/>
-        <testcase name="testGetStatus" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="26" assertions="3" time="0.015028"/>
-        <testcase name="testGetId" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="39" assertions="1" time="0.014915"/>
-        <testcase name="testGetInstance" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="48" assertions="2" time="0.010093"/>
-        <testcase name="testGetAlias" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="58" assertions="1" time="0.009094"/>
-        <testcase name="testGetDisplayname" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="67" assertions="1" time="0.010136"/>
-        <testcase name="testGetAddress" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="76" assertions="1" time="0.008781"/>
-        <testcase name="testGetNotificationTimeperiod" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="96" assertions="2" time="0.011038"/>
-        <testcase name="testGetStateHistory" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="106" assertions="2" time="0.024872"/>
-        <testcase name="testGetHostgroups" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="148" assertions="3" time="0.029110"/>
-        <testcase name="testGetCustomvars" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="178" assertions="3" time="0.013436"/>
-        <testcase name="testGetContactgroups" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="218" assertions="4" time="0.073231"/>
-        <testcase name="testGetServices" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="248" assertions="3" time="0.032197"/>
+      <testsuite name="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" tests="13" assertions="33" failures="0" errors="0" time="0.219113">
+        <testcase name="testGetHost" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="14" assertions="2" time="0.009550"/>
+        <testcase name="testGetStatus" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="26" assertions="3" time="0.013237"/>
+        <testcase name="testGetId" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="39" assertions="1" time="0.007414"/>
+        <testcase name="testGetInstance" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="48" assertions="2" time="0.009721"/>
+        <testcase name="testGetAlias" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="58" assertions="1" time="0.005425"/>
+        <testcase name="testGetDisplayname" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="67" assertions="1" time="0.008519"/>
+        <testcase name="testGetAddress" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="76" assertions="1" time="0.008359"/>
+        <testcase name="testGetNotificationTimeperiod" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="96" assertions="2" time="0.010920"/>
+        <testcase name="testGetStateHistory" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="106" assertions="2" time="0.015512"/>
+        <testcase name="testGetHostgroups" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="148" assertions="4" time="0.035111"/>
+        <testcase name="testGetCustomvars" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="183" assertions="4" time="0.011026"/>
+        <testcase name="testGetContactgroups" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="227" assertions="5" time="0.053895"/>
+        <testcase name="testGetServices" class="HostDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hosts/HostDetailTest.php" line="260" assertions="5" time="0.030424"/>
       </testsuite>
-      <testsuite name="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" tests="17" assertions="0" failures="17" errors="0" time="0.019127">
-        <testcase name="testScheduleNextServiceCheck" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="5" assertions="0" time="0.000837">
+      <testsuite name="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" tests="17" assertions="0" failures="17" errors="0" time="0.017128">
+        <testcase name="testScheduleNextServiceCheck" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="5" assertions="0" time="0.000883">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testScheduleNextServiceCheck
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:6
 </failure>
         </testcase>
-        <testcase name="testProcessCheckResult" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="8" assertions="0" time="0.000860">
+        <testcase name="testProcessCheckResult" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="8" assertions="0" time="0.000798">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testProcessCheckResult
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:9
 </failure>
         </testcase>
-        <testcase name="testAcknowledgeServiceProblems" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="11" assertions="0" time="0.000818">
+        <testcase name="testAcknowledgeServiceProblems" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="11" assertions="0" time="0.000850">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testAcknowledgeServiceProblems
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:12
 </failure>
         </testcase>
-        <testcase name="testSheduleDowntime" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="14" assertions="0" time="0.000791">
+        <testcase name="testSheduleDowntime" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="14" assertions="0" time="0.000856">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testSheduleDowntime
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:15
 </failure>
         </testcase>
-        <testcase name="testSendCustomServiceNotification" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="17" assertions="0" time="0.000971">
+        <testcase name="testSendCustomServiceNotification" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="17" assertions="0" time="0.000907">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testSendCustomServiceNotification
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:18
 </failure>
         </testcase>
-        <testcase name="testEnableActiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="20" assertions="0" time="0.001064">
+        <testcase name="testEnableActiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="20" assertions="0" time="0.000887">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testEnableActiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:21
 </failure>
         </testcase>
-        <testcase name="testDisableActiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="23" assertions="0" time="0.001111">
+        <testcase name="testDisableActiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="23" assertions="0" time="0.001034">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testDisableActiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:24
 </failure>
         </testcase>
-        <testcase name="testStartAcceptingPassiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="26" assertions="0" time="0.000861">
+        <testcase name="testStartAcceptingPassiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="26" assertions="0" time="0.001013">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testStartAcceptingPassiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:27
 </failure>
         </testcase>
-        <testcase name="testStopAcceptingPassiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="29" assertions="0" time="0.001223">
+        <testcase name="testStopAcceptingPassiveChecks" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="29" assertions="0" time="0.000974">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testStopAcceptingPassiveChecks
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:30
 </failure>
         </testcase>
-        <testcase name="testStartObsessing" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="32" assertions="0" time="0.001431">
+        <testcase name="testStartObsessing" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="32" assertions="0" time="0.001257">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testStartObsessing
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:33
 </failure>
         </testcase>
-        <testcase name="testStopObsessing" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="35" assertions="0" time="0.001870">
+        <testcase name="testStopObsessing" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="35" assertions="0" time="0.001182">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testStopObsessing
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:36
 </failure>
         </testcase>
-        <testcase name="testEnableNotifications" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="38" assertions="0" time="0.001240">
+        <testcase name="testEnableNotifications" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="38" assertions="0" time="0.001113">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testEnableNotifications
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:39
 </failure>
         </testcase>
-        <testcase name="testDisableNotifications" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="41" assertions="0" time="0.001391">
+        <testcase name="testDisableNotifications" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="41" assertions="0" time="0.001820">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testDisableNotifications
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:42
 </failure>
         </testcase>
-        <testcase name="testEnableEventHandler" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="44" assertions="0" time="0.001042">
+        <testcase name="testEnableEventHandler" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="44" assertions="0" time="0.000802">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testEnableEventHandler
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:45
 </failure>
         </testcase>
-        <testcase name="testDisableEventHandler" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="47" assertions="0" time="0.001151">
+        <testcase name="testDisableEventHandler" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="47" assertions="0" time="0.001144">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testDisableEventHandler
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:48
 </failure>
         </testcase>
-        <testcase name="testEnableFlapDetection" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="50" assertions="0" time="0.001140">
+        <testcase name="testEnableFlapDetection" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="50" assertions="0" time="0.000845">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testEnableFlapDetection
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php:51
 </failure>
         </testcase>
-        <testcase name="testDisableFlapDetection" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="53" assertions="0" time="0.001326">
+        <testcase name="testDisableFlapDetection" class="ServiceCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommandsTest.php" line="53" assertions="0" time="0.000763">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommandsTest::testDisableFlapDetection
 Not implemented
 
@@ -342,37 +342,236 @@ Not implemented
 </failure>
         </testcase>
       </testsuite>
-      <testsuite name="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" tests="11" assertions="23" failures="0" errors="0" time="0.275003">
-        <testcase name="testGetServices" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="10" assertions="2" time="0.045978"/>
-        <testcase name="testGetStatus" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="20" assertions="3" time="0.026714"/>
-        <testcase name="testGetId" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="33" assertions="2" time="0.012474"/>
-        <testcase name="testGetInstance" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="44" assertions="1" time="0.010445"/>
-        <testcase name="testGetName" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="55" assertions="1" time="0.010934"/>
-        <testcase name="testGetCheckcommand" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="71" assertions="1" time="0.018034"/>
-        <testcase name="testGetEventhandler" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="83" assertions="1" time="0.015342"/>
-        <testcase name="testGetTimeperiods" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="92" assertions="4" time="0.016541"/>
-        <testcase name="testGetServicegroups" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="152" assertions="4" time="0.057114"/>
-        <testcase name="testGetContactgroups" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="220" assertions="2" time="0.043135"/>
-        <testcase name="testGetHost" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="241" assertions="2" time="0.018293"/>
+      <testsuite name="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" tests="11" assertions="23" failures="0" errors="0" time="0.230703">
+        <testcase name="testGetServices" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="10" assertions="2" time="0.040726"/>
+        <testcase name="testGetStatus" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="20" assertions="3" time="0.023808"/>
+        <testcase name="testGetId" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="33" assertions="2" time="0.007143"/>
+        <testcase name="testGetInstance" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="44" assertions="1" time="0.007297"/>
+        <testcase name="testGetName" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="55" assertions="1" time="0.008431"/>
+        <testcase name="testGetCheckcommand" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="71" assertions="1" time="0.013360"/>
+        <testcase name="testGetEventhandler" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="83" assertions="1" time="0.010121"/>
+        <testcase name="testGetTimeperiods" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="92" assertions="4" time="0.011704"/>
+        <testcase name="testGetServicegroups" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="152" assertions="4" time="0.055594"/>
+        <testcase name="testGetContactgroups" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="220" assertions="2" time="0.039836"/>
+        <testcase name="testGetHost" class="ServiceDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceDetailTest.php" line="241" assertions="2" time="0.012683"/>
       </testsuite>
-      <testsuite name="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" tests="3" assertions="95" failures="0" errors="0" time="0.348595">
-        <testcase name="testServiceListing" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="4" assertions="5" time="0.042448"/>
-        <testcase name="testStatusFilters" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="20" assertions="81" time="0.287638"/>
-        <testcase name="testNameFilters" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="43" assertions="9" time="0.018509"/>
+      <testsuite name="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" tests="4" assertions="100" failures="0" errors="0" time="0.512339">
+        <testcase name="testServiceListing" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="4" assertions="5" time="0.034784"/>
+        <testcase name="testStatusFilters" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="20" assertions="81" time="0.428353"/>
+        <testcase name="testNameFilters" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="43" assertions="9" time="0.019175"/>
+        <testcase name="testServicegroupFilters" class="ServiceOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceOverviewTest.php" line="70" assertions="5" time="0.030027"/>
       </testsuite>
-      <testsuite name="ServiceCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php" tests="2" assertions="0" failures="2" errors="0" time="0.001889">
-        <testcase name="testInsertComment" class="ServiceCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php" line="4" assertions="0" time="0.000930">
+      <testsuite name="ServiceCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php" tests="2" assertions="0" failures="2" errors="0" time="0.001687">
+        <testcase name="testInsertComment" class="ServiceCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php" line="4" assertions="0" time="0.000803">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommentsTest::testInsertComment
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php:5
 </failure>
         </testcase>
-        <testcase name="testReadComments" class="ServiceCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php" line="7" assertions="0" time="0.000959">
+        <testcase name="testReadComments" class="ServiceCommentsTest" file="/usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php" line="7" assertions="0" time="0.000884">
           <failure type="PHPUnit_Framework_AssertionFailedError">ServiceCommentsTest::testReadComments
 Not implemented
 
 /usr/local/icinga-web/etc/tests/tests/api/services/ServiceCommentsTest.php:8
+</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" tests="8" assertions="0" failures="8" errors="0" time="0.006409">
+        <testcase name="testSheduleDowntimeForHosts" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="4" assertions="0" time="0.000871">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testSheduleDowntimeForHosts
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:5
+</failure>
+        </testcase>
+        <testcase name="testSheduleDowntimeForServices" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="7" assertions="0" time="0.000975">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testSheduleDowntimeForServices
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:8
+</failure>
+        </testcase>
+        <testcase name="testEnableHostNotifications" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="11" assertions="0" time="0.000566">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testEnableHostNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:12
+</failure>
+        </testcase>
+        <testcase name="testDisableHostNotifications" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="14" assertions="0" time="0.000697">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testDisableHostNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:15
+</failure>
+        </testcase>
+        <testcase name="testEnableServiceNotifications" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="17" assertions="0" time="0.000637">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testEnableServiceNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:18
+</failure>
+        </testcase>
+        <testcase name="testDisableServiceNotifications" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="20" assertions="0" time="0.000907">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testDisableServiceNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:21
+</failure>
+        </testcase>
+        <testcase name="testEnableServiceActiveChecks" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="23" assertions="0" time="0.000607">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testEnableServiceActiveChecks
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:24
+</failure>
+        </testcase>
+        <testcase name="testDisableServiceActiveChecks" class="HostgroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php" line="26" assertions="0" time="0.001149">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupCommandsTest::testDisableServiceActiveChecks
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupCommandsTest.php:27
+</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" tests="6" assertions="20" failures="0" errors="0" time="0.144432">
+        <testcase name="testHostgroupListing" class="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" line="4" assertions="2" time="0.005956"/>
+        <testcase name="testStatusFilters" class="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" line="11" assertions="5" time="0.084249"/>
+        <testcase name="testHostFilters" class="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" line="29" assertions="6" time="0.012953"/>
+        <testcase name="testServiceFilters" class="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" line="61" assertions="3" time="0.026030"/>
+        <testcase name="testNameFilters" class="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" line="80" assertions="3" time="0.007951"/>
+        <testcase name="testInstanceFilters" class="HostgroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupOverviewTest.php" line="95" assertions="1" time="0.007293"/>
+      </testsuite>
+      <testsuite name="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" tests="6" assertions="0" failures="6" errors="0" time="0.007129">
+        <testcase name="testGetStatus" class="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" line="4" assertions="0" time="0.000851">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupDetailTest::testGetStatus
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php:5
+</failure>
+        </testcase>
+        <testcase name="testGetId" class="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" line="7" assertions="0" time="0.001458">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupDetailTest::testGetId
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php:8
+</failure>
+        </testcase>
+        <testcase name="testGetInstance" class="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" line="10" assertions="0" time="0.000585">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupDetailTest::testGetInstance
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php:11
+</failure>
+        </testcase>
+        <testcase name="testGetAlias" class="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" line="13" assertions="0" time="0.000579">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupDetailTest::testGetAlias
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php:14
+</failure>
+        </testcase>
+        <testcase name="testGetHosts" class="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" line="22" assertions="0" time="0.001746">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupDetailTest::testGetHosts
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php:23
+</failure>
+        </testcase>
+        <testcase name="testGetServices" class="HostgroupDetailTest" file="/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php" line="25" assertions="0" time="0.001910">
+          <failure type="PHPUnit_Framework_AssertionFailedError">HostgroupDetailTest::testGetServices
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/hostgroups/HostgroupDetailTest.php:26
+</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="ServicegroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php" tests="4" assertions="0" failures="4" errors="0" time="0.003639">
+        <testcase name="testServicegroupListing" class="ServicegroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php" line="4" assertions="0" time="0.000888">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupOverviewTest::testServicegroupListing
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php:5
+</failure>
+        </testcase>
+        <testcase name="testStatusFilters" class="ServicegroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php" line="7" assertions="0" time="0.001037">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupOverviewTest::testStatusFilters
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php:8
+</failure>
+        </testcase>
+        <testcase name="testNameFilters" class="ServicegroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php" line="10" assertions="0" time="0.001068">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupOverviewTest::testNameFilters
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php:11
+</failure>
+        </testcase>
+        <testcase name="testInstanceFilters" class="ServicegroupOverviewTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php" line="13" assertions="0" time="0.000646">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupOverviewTest::testInstanceFilters
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupOverviewTest.php:14
+</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" tests="8" assertions="0" failures="8" errors="0" time="0.008753">
+        <testcase name="testSheduleDowntimeForHosts" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="4" assertions="0" time="0.001850">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testSheduleDowntimeForHosts
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:5
+</failure>
+        </testcase>
+        <testcase name="testSheduleDowntimeForServices" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="7" assertions="0" time="0.000876">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testSheduleDowntimeForServices
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:8
+</failure>
+        </testcase>
+        <testcase name="testEnableHostNotifications" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="11" assertions="0" time="0.000978">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testEnableHostNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:12
+</failure>
+        </testcase>
+        <testcase name="testDisableHostNotifications" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="14" assertions="0" time="0.000241">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testDisableHostNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:15
+</failure>
+        </testcase>
+        <testcase name="testEnableServiceNotifications" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="17" assertions="0" time="0.001831">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testEnableServiceNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:18
+</failure>
+        </testcase>
+        <testcase name="testDisableServiceNotifications" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="20" assertions="0" time="0.000388">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testDisableServiceNotifications
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:21
+</failure>
+        </testcase>
+        <testcase name="testEnableServiceActiveChecks" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="23" assertions="0" time="0.001447">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testEnableServiceActiveChecks
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:24
+</failure>
+        </testcase>
+        <testcase name="testDisableServiceActiveChecks" class="ServicegroupCommandsTest" file="/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php" line="26" assertions="0" time="0.001142">
+          <failure type="PHPUnit_Framework_AssertionFailedError">ServicegroupCommandsTest::testDisableServiceActiveChecks
+Not implemented
+
+/usr/local/icinga-web/etc/tests/tests/api/servicegroups/ServicegroupCommandsTest.php:27
 </failure>
         </testcase>
       </testsuite>

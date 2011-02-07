@@ -33,6 +33,8 @@
  */
 class Doctrine_Relation_ForeignKey extends Doctrine_Relation
 {
+
+	private $tmp_rec;
     /**
      * fetchRelatedFor
      *
@@ -43,6 +45,7 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
      */
     public function fetchRelatedFor(Doctrine_Record $record)
     {
+		$this->tmp_rec = $record;
         $id = array();
         $localTable = $record->getTable();
         foreach ((array) $this->definition['local'] as $local) {
@@ -58,8 +61,10 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
                 $related = $this->getTable()->create();
             } else {
                 $dql  = 'FROM ' . $this->getTable()->getComponentName()
-                      . ' WHERE ' . $this->getCondition() . $this->getOrderBy(null, false);
-
+                      . ' WHERE ' . $this->getCondition();
+				if($record->contains('instance_id'))
+					$dql .= ' AND '.$this->getTable()->getComponentName().".instance_id = '".$record->instance_id."' ";
+				$dql .= $this->getOrderBy(null, false);
                 $coll = $this->getTable()->getConnection()->query($dql, $id);
                 $related = $coll[0];
             }
@@ -73,12 +78,26 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
                 
                 $related = Doctrine_Collection::create($this->getTable());
             } else {
-                $query      = $this->getRelationDql(1);
+                $query      = $this->getRelationDql(1);	
                 $related    = $this->getTable()->getConnection()->query($query, $id);
             }
             $related->setReference($record, $this);
         }
         return $related;
+    }
+
+    public function getRelationDql($count)
+    {
+        $component = $this->getTable()->getComponentName();
+
+        $dql  = 'FROM ' . $component
+              . ' WHERE ' . $component . '.' . $this->definition['foreign']
+              . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')';
+		if($this->tmp_rec->contains('instance_id'))
+        	$dql .= ' AND '.$component.".instance_id = '".$this->tmp_rec->instance_id."'"; 
+		$dql .= $this->getOrderBy($component);
+
+        return $dql;
     }
 
     /**

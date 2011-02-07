@@ -73,7 +73,7 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel
 	public function getServicesByServicegroupNames(array $names,array $hosts = array()) {
 		$desc = $this->createRequestDescriptor();
 		$desc->select('*')->from('IcingaServices s');
-		$desc->innerJoin("s.servicegroups sg")->whereIn("sg.display_name",$names);
+		$desc->innerJoin("s.servicegroups sg")->whereIn("sg.alias",$names);
 
 		$this->limitToHosts($desc,$hosts);
 		return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);

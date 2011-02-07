@@ -68,6 +68,22 @@ class ServiceOverviewTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testServicegroupFilters() {
-		$this->markTestIncomplete("Servicegroup filter test not implemented");
+		info("Testing servicegroup filter\n");
+		$model = AgaviContext::getInstance()->getModel("ApiServiceRequest","Api");
+		$services = $model->getServicesByServicegroupNames(array('Database services'));
+		
+		$this->assertFalse(is_null($services));
+		$this->assertFalse($services->count() == 0,"No services returned in servicegroup check");
+		
+		foreach($services as $service) {
+			$found = false;
+			foreach($service->servicegroups as $group) {
+				if($group->alias == "Database services") {
+					$found = true;
+					break;
+				}
+			}
+			$this->assertTrue($found,"Service is not in expected servicegroup");
+		}
 	}
 }
