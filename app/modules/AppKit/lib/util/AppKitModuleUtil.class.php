@@ -192,7 +192,7 @@ class AppKitModuleConfigItem extends AgaviAttributeHolder {
 		return $ns;
 	}
 
-	public function  getAttributes($ns = null) {
+	public function &getAttributes($ns = null) {
 		parent::getAttributes($ns);
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-abstract class AppKitBaseClass extends AppKit {
+abstract class AppKitBaseClass {
 	
 	public function toString() {
 		return get_class($this);
