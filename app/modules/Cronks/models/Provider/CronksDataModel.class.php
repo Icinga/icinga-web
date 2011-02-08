@@ -510,7 +510,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		
 		$record->cronk_description = $data['description'];
 		$record->cronk_name = $data['name'];
-		$record->cronk_xml = $dom->saveXML(null);
+		$record->cronk_xml = $dom->saveXML($dom);
 		
 		$this->cronkBuildCategoriesFromString($record, $data['categories']);
 		

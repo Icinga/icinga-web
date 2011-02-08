@@ -88,6 +88,10 @@
         			<parameter name="title">Acknowledge service check problem</parameter>
         			<parameter name="icon_class">icinga-icon-exclamation-white</parameter>
         		</parameter>
+        		<parameter name="REMOVE_SVC_ACKNOWLEDGEMENT">
+        			<parameter name="title">Remove service acknowledgement</parameter>
+        			<parameter name="icon_class">icinga-icon-exclamation-red</parameter>
+        		</parameter>
         		<parameter name="SCHEDULE_SVC_DOWNTIME">
         			<parameter name="title">Schedule a service downtime</parameter>
         			<parameter name="icon_class">icinga-icon-downtime</parameter>
