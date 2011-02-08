@@ -8,7 +8,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 	protected $connection;
 	
 	protected $pipeCmd = null;
-	
+	protected $symList = array();	
 	protected $stdout = null;
 	protected $append_stdout = false;
 	protected $stderr = null;
@@ -49,6 +49,9 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 	public function setReturnCode($code) {
 		$this->returnCode = $code;
 	}
+	public function setConnection($conn) {
+		$this->connection = $conn;
+	}	
 	
 	public function getStdin() {
 		return $this->stdin;
@@ -73,23 +76,19 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 		return $this->connection;
 	}
 	public function getOutput() {
+		if(is_array($this->output))
+			$this->output = implode("\n",$this->output);
 		return $this->output;
 	}
 	public function getReturnCode()	{
-		return $this->returnCode;
+		return intval($this->returnCode);
 	}
 
-	public function initialize($context, array $parameters = array()) {
-		
+	public function initialize(AgaviContext $context, array $parameters = array()) {
 		if(isset($parameters["command"]))
 			$this->setCommand($parameters["command"]);
 		if(isset($parameters["arguments"]))
-			$this->arguments = $parameters["arguments"];	
-		if(isset($parameters["connection"])) {
-			// Don't care about autoloading, as this should be called by a connectionModel
-			if($parameters["connection"] instanceof Api_Console_ConsoleInterfaceModel)
-				$this->connection = $parameters["connection"];
-		}
+			$this->arguments = $parameters["arguments"];		
 	}
 	
 	public function getCommandString() {
@@ -138,14 +137,41 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 	}
 
 	protected function expandSymbols() {
+		if(empty($this->symList))
+			$this->createSymbolList();
+
 		$access = $this->connection->getAccessDefinition();
 		$this->stdinFile($this->getFullName($this->stdin,$access["r"]["files"])); 
 		$this->stdoutFile($this->getFullName($this->stdout,$access["w"]["files"])); 
 		$this->stderrFile($this->getFullName($this->stderr,$access["w"]["files"])); 
 		$this->setCommand($this->getFullName($this->command,$access["x"]["files"])); 
+		$matches = array();
+		// replace %%VAL%% symbols in the argument list
+		foreach($this->arguments as $key=>&$val) {
+			$found = preg_match('/%%(\w+)%%/',$val,$matches);	
+			if($found == 0)
+				continue;
+			
+			foreach($matches as $match) {
+				if(!isset($this->symList[$match]))
+					continue;
+				$val = str_replace("%%".$match."%%",$this->symList[$match],$val);
+			}
+		}
 	}	
 	
-	protected function getFullName($symbol = null,array $whiteList = array()) {
+	protected function createSymbolList() {
+		$this->symList = array();
+		foreach($this->connection->getAccessDefinition() as $access=>$content) {
+			foreach($content as $fileOrFolder=>$symdefs) {
+				foreach($symdefs as $symname=>$resolved) {
+					$this->symList[$symname] = $resolved;
+				}
+			}
+		}
+	}
+	
+	public function getFullName($symbol = null,array $whiteList = array()) {
 		if($symbol == null)
 			return null;
 		
@@ -221,6 +247,5 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
 		}
 	
 		throw new ApiRestrictedCommandException($errFile." is not read enabled");	
-	}
-	
+	}		
 }

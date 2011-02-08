@@ -28,7 +28,7 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel {
 		return $this->access;	
 	}
 	
-	public function initialize($context,array $parameters = array()) {
+	public function initialize(AgaviContext $context, array $parameters = array()) {	
 		if(!isset($parameters["host"]))
 			$parameters["host"] = AgaviConfig::get("modules.api.access.defaults.host","localhost");
 
@@ -38,6 +38,7 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel {
 	public function exec(Api_Console_ConsoleCommandModel $cmd) 	{
 		if($this->connection == NULL)
 			return false;
+		$cmd->setConnection($this);	
 		$this->connection->exec($cmd);
 	}
 	

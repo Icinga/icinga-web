@@ -6,29 +6,29 @@
 	<testsuites>
 		<testsuite name="Bootstrap" >
 			<file>tests/bootstrap/agaviBootstrapTest.php</file>
-			<file>tests/api/ConsoleInterfaceTest.php</file>
+			
 		</testsuite>
-<!--		<testsuite name="Installation">
+<!--	<testsuite name="Installation">
 			<file>tests/installation/userRightsTest.php</file>
-			<file>tests/installation/configSettingsTest.php</file>
+			<file>tests/installation/configSettingsTest.php</file>	
 		</testsuite>
--->
-<!--		<testsuite name="Database">
+		<testsuite name="Database">
 			<file>tests/database/icingaDatabaseAccessibleTest.php</file>
 			<file>tests/database/icingaUserOperations.php</file>
 			<file>tests/database/icingaRoleOperations.php</file>
 			<file>tests/database/persistenceView.php</file>
 		</testsuite>
--->		<testsuite name="API">
-			
+			<testsuite name="API">
+			<file>tests/api/ConsoleInterfaceTest.php</file>
 			<directory>tests/api/hosts</directory>
 			<directory>tests/api/services</directory>	
 			<directory>tests/api/hostgroups</directory>	
 			<directory>tests/api/servicegroups</directory>
-		<!--	<directory>tests/api/misc</directory> -->
-		</testsuite>
-<!--		<testsuite name="Interface">
+			<directory>tests/api/misc</directory> 
+		</testsuite> -->
+		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
-		</testsuite>-->
+			<file>tests/interface/icingaReloadTest.php</file>
+		</testsuite>
 	</testsuites>
 </phpunit>

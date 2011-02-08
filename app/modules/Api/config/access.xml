@@ -6,20 +6,25 @@
 		<ae:parameter name="access">
 			<ae:parameter name="rw">
 				<ae:parameter name="folders">
-					<ae:parameter>/usr/local/icinga/etc/objects</ae:parameter>
+					<ae:parameter name="icinga_objects">/usr/local/icinga/etc/objects</ae:parameter>	
+				</ae:parameter>
+				<ae:parameter name="files">
+					<ae:parameter name="icinga_cfg">/usr/local/icinga/etc/icinga.cfg</ae:parameter>	
 				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="r">
 			</ae:parameter>
 			<ae:parameter name="w">
 				<ae:parameter name="files">
-					<ae:parameter name="icinga_pipe">/usr/local/icinga/var/icinga.dat</ae:parameter>
+					<ae:parameter name="icinga_pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="x">
 				<ae:parameter name="files">
-					<ae:parameter name="icinga_bin">/usr/local/bin/icinga</ae:parameter>
+					<ae:parameter name="icinga_service">/etc/init.d/icinga</ae:parameter>
+					<ae:parameter name="icinga_bin">/usr/local/icinga/bin/icinga</ae:parameter>
 					<ae:parameter name="echo">/bin/echo</ae:parameter>
+					<ae:parameter name="printf">printf</ae:parameter>
 					<ae:parameter name="cp">/bin/cp</ae:parameter>
 					<ae:parameter name="ls">/bin/ls</ae:parameter>
 					<ae:parameter name="grep">/bin/grep</ae:parameter>
@@ -48,16 +53,11 @@
 				<ae:parameter name="auth">
 					<ae:parameter name="type">password</ae:parameter>
 					<ae:parameter name="user">testuser</ae:parameter>
-					<ae:parameter name="password">supersecret</ae:parameter>
+					<ae:parameter name="password">test123</ae:parameter>
 				</ae:parameter>
 			</ae:parameter> 
 			<ae:parameter name="access">
 				<ae:parameter name="useDefaults">true</ae:parameter>
-				<ae:parameter name="w">
-					<ae:parameter name="folders">
-						<ae:parameter>/usr/local/icinga-web/</ae:parameter>
-					</ae:parameter>
-				</ae:parameter>
 			</ae:parameter>	
 			
 		</ae:parameter>
