@@ -332,6 +332,8 @@ INSERT INTO NSM_TARGET (target_id,target_name,target_description,target_class,ta
 INSERT INTO NSM_TARGET (target_id,target_name,target_description,target_class,target_type) VALUES ('10','appkit.admin.users','Access to user editor','','credential');
 INSERT INTO NSM_TARGET (target_id,target_name,target_description,target_class,target_type) VALUES ('11','appkit.admin','Access to admin panel ','','credential');
 INSERT INTO NSM_TARGET (target_id,target_name,target_description,target_class,target_type) VALUES ('12','appkit.user.dummy','Basic right for users','','credential');
+INSERT INTO NSM_TARGET (target_name,target_description,target_class,target_type) VALUES ('icinga.control.view','Allow user to view icinga status','','credential')
+INSERT INTO NSM_TARGET (target_name,target_description,target_class,target_type) VALUES ('icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO NSM_TARGET (target_id,target_name,target_description,target_class,target_type) VALUES ('13','appkit.api.access','Access to web-based api adapter','','credential');
 INSERT INTO NSM_ROLE (role_id,role_name,role_description,role_disabled) VALUES ('1','icinga_user','The default representation of a ICINGA user','0');
 INSERT INTO NSM_ROLE (role_id,role_name,role_description,role_disabled) VALUES ('2','appkit_user','Appkit user test','0');
