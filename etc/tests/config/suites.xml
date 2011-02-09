@@ -8,7 +8,7 @@
 			<file>tests/bootstrap/agaviBootstrapTest.php</file>
 			
 		</testsuite>
-<!--	<testsuite name="Installation">
+		<testsuite name="Installation">
 			<file>tests/installation/userRightsTest.php</file>
 			<file>tests/installation/configSettingsTest.php</file>	
 		</testsuite>
@@ -18,7 +18,9 @@
 			<file>tests/database/icingaRoleOperations.php</file>
 			<file>tests/database/persistenceView.php</file>
 		</testsuite>
-			<testsuite name="API">
+<!--	
+		Commented is developement testing for 1.4. 
+		<testsuite name="API">
 			<file>tests/api/ConsoleInterfaceTest.php</file>
 			<directory>tests/api/hosts</directory>
 			<directory>tests/api/services</directory>	
@@ -29,6 +31,6 @@
 		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
 			<file>tests/interface/icingaReloadTest.php</file>
-		</testsuite>
+		</testsuite>-->
 	</testsuites>
 </phpunit>

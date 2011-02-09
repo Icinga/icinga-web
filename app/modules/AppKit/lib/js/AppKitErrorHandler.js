@@ -278,7 +278,7 @@ Ext.ns("AppKit.errorHandler");
 			handleError(response,opts);
 		})
 		var handleError = function(response,proxy) {
-			switch(response.status) {
+			switch(response.status) {	
 				case 200:
 					break;
 				case 404:
@@ -291,6 +291,8 @@ Ext.ns("AppKit.errorHandler");
 					AppKit.AjaxErrorHandler.error_500(proxy.url,response);
 					break;
 				default:
+					if(response.status < 400 && response.status)
+						break;
 					AppKit.AjaxErrorHandler.error_unknown(proxy.url,response);
 					break;
 			}
@@ -327,8 +329,8 @@ Ext.ns("AppKit.errorHandler");
 			},
 			error_unknown : function(target,error) {
 				if(!(error.status)) {
-					Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server!"));
-					window.location.reload();
+					Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server."));
+			//		window.location.reload();
 				}
 				if(!error)
 					error = "Unkown error";
