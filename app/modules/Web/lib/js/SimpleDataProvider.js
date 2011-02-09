@@ -133,20 +133,26 @@ Icinga.util.SimpleDataProvider = (function () {
 			if (!Ext.isEmpty(responseObj.result.template)) {
 				tpl = new Ext.XTemplate(responseObj.result.template);
 			}
-			else {
+			else {	
 				tpl = new Ext.XTemplate(
 					'<tpl for="data">',
 					'<div class="icinga-detailed-info-container">',
 					'<table cellpadding="0" cellspacing="0" border="0" class="icinga-detailed-info">',
 					'<tpl for=".">',
+						'<tpl if="this.isCol(key)">',
 						'<tr>',
 							'<td class="key">{key}</td>',
 							'<td class="val">{val}</td>',
 						'</tr>',
+						'</tpl>',
 					'</tpl>',
 					'</table>',
 					'</div>',
-					'</tpl>'
+					'</tpl>', {
+		 				isCol : function(val) {
+							return val.substr(0,3) != "COL";
+						}
+					}
 				);
 			}
 			

@@ -7,11 +7,7 @@ class AppKitSoapFilterValidator extends AgaviValidator {
 		$data = $this->getData($argument);		
 	
 		$result = $this->processData($data);
-		ob_start();	
-		print_r($result);
-		
-		file_put_contents("/usr/local/icinga-web/tmp/test.txt",ob_get_contents(),FILE_APPEND);
-		ob_end_clean();	
+
 		
 /*		
 		print_r($data);
