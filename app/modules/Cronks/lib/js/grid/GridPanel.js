@@ -49,14 +49,15 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						checked: autoRefreshDefault,
 						checkHandler: function(checkItem, checked) {
 							if (checked == true) {
-								this.trefresh = AppKit.getTr().start({
-									run: function() {
-										if(this.getStore())
-											this.getStore().reload();
-									},
-									interval: (autoRefresh*1000),
-									scope: this
-								});
+							
+									this.trefresh = AppKit.getTr().start({
+										run: function() {	
+											this.refreshGrid();				
+										},
+										interval: (autoRefresh*1000),
+										scope: this
+									});
+						
 							}
 							else {
 								AppKit.getTr().stop(this.trefresh);
@@ -104,11 +105,10 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			}],
 			listeners: {
 				render: function(cmp) {
-					if(autoRefreshDefault) {
+					if(autoRefreshDefault) {	
 						this.trefresh = AppKit.getTr().start({
 							run: function() {
-								if(this.getStore())
-									this.getStore().reload();
+								this.refreshGrid();
 							},
 							interval: (autoRefresh*1000),
 							scope: this
@@ -201,7 +201,16 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			
 		}, this);
 	},
+	refreshGrid: function() {
+		if(Ext.isFunction(this.getTopToolbar().doRefresh)) {
+			this.getTopToolbar().doRefresh();
+		} else if(Ext.isFunction(this.getBottomToolbar().doRefresh)) {
+			this.getBottomToolbar().doRefresh();
+		} else if(this.getStore()) {	
+			this.getStore().reload();
+		}
 	
+	},
 	getState: function() {
 		var store = this.getStore();
 	
@@ -240,7 +249,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}
 		
 		if (reload == true) {
-			store.reload();
+			
+			this.refreshGrid();
 		}
 					
 		return true;
