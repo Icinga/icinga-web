@@ -94,21 +94,35 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
 		return $command->getReturnCode();
 	}
 	
-	public function restartIcinga() {
+	public function restartIcinga() {	
 		if(!$this->checkAccess("restart"))
 			throw new IcingaCommandSecurityException("Invalid credentials for icinga restart");
 		if($this->validateConfig() != 0)
 			throw new IcingaConfigValidationException($this->getValidationError());
 		
+		$status = $this->getIcingaStatus();
 		$cli = $this->getCli();
-		$command = AgaviContext::getInstance()->getModel("Console.ConsoleCommand","Api",array(
-			'command' => 'printf'	
-		));
-		$command->stdoutFile("icinga_pipe");
-		$command->addArgument("[".time()."] RESTART_PROGRAM");
-		$command->setConnection($cli);
+		$command;
+		if($status == 0) {
+			$command = AgaviContext::getInstance()->getModel("Console.ConsoleCommand","Api",array(
+				'command' => 'printf'	
+			));
+			$command->stdoutFile("icinga_pipe");
+			$command->addArgument("[".time()."] RESTART_PROGRAM");
+			$command->setConnection($cli);
 		
-		$cli->exec($command);
+			$cli->exec($command);
+		} else { // output.cmd won't be read, use service	
+			$command = AgaviContext::getInstance()->getModel("Console.ConsoleCommand","Api",array(
+				'command' => 'icinga_service'	
+			));
+	
+			$command->addArgument('restart');
+			$command->setConnection($cli);
+		
+			$cli->exec($command);
+
+		}
 		return $command->getReturnCode();
 	}
 

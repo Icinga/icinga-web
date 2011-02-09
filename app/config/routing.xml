@@ -114,8 +114,8 @@
 					<route name=".json" pattern="^/json" action="Icinga.ApiSimpleDataProvider"/>
 				</route>
 				<route module="Api" name=".api" pattern="^/api" action="ApiSearch">
-					<route name=".icinga" stop="false" pattern="^/icinga/statusProvider" action="Icinga.InstanceController"/>
-					<route name=".command" stop="false" pattern="^/cmd/" output_type="json" action="Icinga.ApiCommand">
+					<route name=".icingaStatus" output_type="json" stop="false" pattern="^/icinga/statusProvider" action="IcingaInstanceController"/>
+					<route name=".command" stop="false" pattern="^/cmd/" output_type="json" action="ApiCommand">
 						<route name=".cmdParam" stop="false" pattern="cmd=(command:[^/]*)/" />
 						<route name=".authkey" stop="false" pattern="authkey=(authkey:[^/]*)" />
 						<route name=".data" stop="false" pattern="data=(data:[^/]*)" />

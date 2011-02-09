@@ -39,7 +39,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
 					throw new ApiAuthorisationFailedException("SSH public key not found/readable at the specified location");
 				if(!is_readable($this->privKeyLocation))
 					throw new ApiAuthorisationFailedException("SSH private key not found/readable at the specified location");	
-				$success = ssh2_auth_pubkey_file($this->resource,$this->username,$this->pubKeyLocation,$this->privKeyLocation,$this->password);
+				$success = @ssh2_auth_pubkey_file($this->resource,$this->username,$this->pubKeyLocation,$this->privKeyLocation,$this->password);
 				break;
 			default:
 				throw new ApiInvalidAuthTypeException("Unknown authtype ".$this->authType);
@@ -130,7 +130,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
 				$this->privKeyLocation = $settings["privKey"];
 				break;
 			default:
-				throw new ApiInvalidAuthTypeExcpetion("Unknown auth type ".$this->authType);
+				throw new ApiInvalidAuthTypeException("Unknown auth type ".$this->authType);
 		}
 	}
 
