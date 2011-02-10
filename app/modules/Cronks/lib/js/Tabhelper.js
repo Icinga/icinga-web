@@ -81,13 +81,20 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 						
 						notifyDrop: function(dd, e, data){
 							// add them to the tabs
+			
 							var a = tp.add({
 								iconCls: Cronk.getIconClass(data.dragData['image_id']),
 								title: data.dragData['name'],
 								crname: data.dragData.cronkid,
 								closable: true,
+						
 								params: data.dragData.parameter,
-								xtype: 'cronk'
+								xtype: 'cronk',
+								params: Ext.apply({}, data.dragData['ae:parameter'], { 
+									customState: data.dragData.state,
+									module: data.dragData.module, 
+									action: data.dragData.action 
+								})
 							});
 							
 							// Set active
@@ -233,7 +240,6 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 			
 			c.store.load();
 			
-			AppKit.log(c.getState());
 		});
 		
 		return urlCronk;

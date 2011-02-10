@@ -386,7 +386,7 @@ Cronk.util.CronkListingPanel = function(c) {
 		        // Create the drag zone
 		        listeners: {
 		        	render: CLP.initCronkDragZone.createDelegate(CLP),
-		        	dblclick: CLP.dblClickHandler.createDelegate(CLP),
+		        	click: CLP.dblClickHandler.createDelegate(CLP),
 		        	contextmenu: CLP.handleContextmenu.createDelegate(CLP)
 		        } 
 		    }),
@@ -552,15 +552,19 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		var record = oView.getStore().getAt(index);
 		
 		var tabPanel = Ext.getCmp('cronk-tabs');
-		
+	
 		if (tabPanel) {
 			var panel = tabPanel.add({
 				xtype: 'cronk',
 				iconCls: Cronk.getIconClass(record.data['image_id']),
 				title: record.data['name'],
 				crname: record.data.cronkid,
-				closable: true,
-				params: Ext.apply({}, record.data['ae:parameter'], { module: record.data.module, action: record.data.action })
+				closable: true,	
+				params: Ext.apply({}, record.data['ae:parameter'], { 
+					customState: record.data.state,
+					module: record.data.module, 
+					action: record.data.action 
+				})
 			});
 			
 			tabPanel.setActiveTab(panel);

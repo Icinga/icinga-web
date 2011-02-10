@@ -304,7 +304,7 @@ Cronk.util.InterGridUtil = function(){
 			var tabs = Ext.getCmp('cronk-tabs');
 			var id = config.parentid || null;
 			var panel = Ext.getCmp(id);
-
+		
 			if (!panel) {
 				panel = Cronk.factory(config);
 				tabs.add(panel);
