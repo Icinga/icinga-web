@@ -522,6 +522,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			
 			form.findField('name').setValue(this.cronkCmp.title);
 			form.findField('cid').setValue(Ext.id(null, 'CUSTOM-' + this.cronk.crname));
+			AppKit.log(this.cronk);
 			form.findField('module').setValue(this.cronk.params.module);
 			form.findField('action').setValue(this.cronk.params.action);
 			
