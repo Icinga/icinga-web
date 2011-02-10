@@ -27,7 +27,7 @@
 		
 		<!-- Config for our session ... -->
 		<storage class="AppKitDoctrineSessionStorage">
-			<ae:parameter name="session_cookie_lifetime">3600</ae:parameter>
+			<ae:parameter name="session_cookie_lifetime">0</ae:parameter>
 			<ae:parameter name="session_name">icinga-web</ae:parameter>
 			<ae:parameter name="gzip_level">6</ae:parameter>
 		</storage>
