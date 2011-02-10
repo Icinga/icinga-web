@@ -202,9 +202,18 @@ Cronk.util.InterGridUtil = function(){
 			if (!Ext.isDefined(config.iconCls)) {
 				config.iconCls = 'icinga-cronk-icon-cube';
 			}
-			
+		
 			if (!panel) {
+				for(var i=0;i<tabs.items.items.length;i++) {
 				
+					var item = tabs.items.items[i];	
+					if(item.title == config.title) {
+						panel = item;
+					}
+				}
+			}
+			if(!panel) {
+				config.id = config.parentid;
 				panel = Cronk.factory(config);					
 								
 				panel.on('add', function(p, c, i) {
