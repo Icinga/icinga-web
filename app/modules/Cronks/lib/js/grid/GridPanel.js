@@ -202,9 +202,9 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}, this);
 	},
 	refreshGrid: function() {
-		if(Ext.isFunction(this.getTopToolbar().doRefresh)) {
+		if(Ext.isFunction((this.getTopToolbar() || {}).doRefresh)) {
 			this.getTopToolbar().doRefresh();
-		} else if(Ext.isFunction(this.getBottomToolbar().doRefresh)) {
+		} else if(Ext.isFunction((this.getBottomToolbar() || {}).doRefresh)) {
 			this.getBottomToolbar().doRefresh();
 		} else if(this.getStore()) {	
 			this.getStore().reload();
