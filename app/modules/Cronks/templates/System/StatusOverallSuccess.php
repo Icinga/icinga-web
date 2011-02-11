@@ -52,7 +52,9 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					var d = dview.getStore().getAt(index).data;
 
 					var params = {
-						template: 'icinga-' + d.type + '-template'
+						template: 'icinga-' + d.type + '-template',
+						action: 'System.ViewProc',
+						module: 'Cronks' 
 					};
 
 					var filter = {};
@@ -71,7 +73,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 						stateuid: id + '-persistent',
 						title: String.format('{0}s {1}', d.type, Icinga.StatusData.simpleText(d.type, d.state_org).toLowerCase()),
 						crname: 'gridProc',
-						closable: true,
+						closable: true,	
 						params: params
 					};
 
