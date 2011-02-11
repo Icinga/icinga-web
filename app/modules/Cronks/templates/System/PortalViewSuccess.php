@@ -97,16 +97,16 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 							notifyDrop: function(dd, e, data) {
 								var params = {
+									module: 'Cronks',
+									action: 'System.PortalView',
 									'p[parentid]': id
 								};
-								
 								if (data.dragData.parameter) {
 									for (var k in data.dragData.parameter) {
 										params['p[' + k + ']'] = data.dragData.parameter[k];
 									}
 								}
-								
-								var portlet  = Cronk.factory({
+									var portlet  = Cronk.factory({
 									id: Ext.id(),
 
 									params: params,
@@ -302,9 +302,13 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				}
 			});
 		}
-
+		
 		var portal = new Ext.ux.Portal(portal_config);
-	
+
+		if(this.params.customState) {	
+			portal.applyState(Ext.decode(this.params.customState));
+
+		}
 		CE.insert(0, portal);
 		CE.doLayout();
 
