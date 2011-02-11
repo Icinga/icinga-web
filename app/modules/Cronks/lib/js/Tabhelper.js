@@ -91,7 +91,6 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 								params: data.dragData.parameter,
 								xtype: 'cronk',
 								params: Ext.apply({}, data.dragData['ae:parameter'], { 
-									customState: data.dragData.state,
 									module: data.dragData.module, 
 									action: data.dragData.action 
 								})

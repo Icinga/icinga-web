@@ -561,7 +561,6 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 				crname: record.data.cronkid,
 				closable: true,	
 				params: Ext.apply({}, record.data['ae:parameter'], { 
-					customState: record.data.state,
 					module: record.data.module, 
 					action: record.data.action 
 				})

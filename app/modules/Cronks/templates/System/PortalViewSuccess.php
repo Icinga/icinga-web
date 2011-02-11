@@ -1,9 +1,5 @@
-<?php 
-	$parentid	= $rd->getParameter('parentid');
-	$stateuid	= $rd->getParameter('stateuid');
-?>
 <script type="text/javascript">
-Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
+Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 
 		var CE = this;
 
@@ -101,12 +97,14 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 									action: 'System.PortalView',
 									'p[parentid]': id
 								};
+								
 								if (data.dragData.parameter) {
 									for (var k in data.dragData.parameter) {
 										params['p[' + k + ']'] = data.dragData.parameter[k];
 									}
 								}
-									var portlet  = Cronk.factory({
+								
+								var portlet  = Cronk.factory({
 									id: Ext.id(),
 
 									params: params,
@@ -231,7 +229,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 		portal_config.items = items_config;
 
-		var cmp = Ext.getCmp("<?php echo $parentid; ?>");
+		var cmp = Ext.getCmp("<?php echo $rd->getParameter('parentid'); ?>");
 
 		// We need a state id from the cronkmanager, the parent id
 		// is a good choice
@@ -302,13 +300,13 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 				}
 			});
 		}
-		
+
 		var portal = new Ext.ux.Portal(portal_config);
-
-		if(this.params.customState) {	
-			portal.applyState(Ext.decode(this.params.customState));
-
+	
+		if (Ext.isDefined(CE.state)) {
+			portal.applyState(CE.state);
 		}
+	
 		CE.insert(0, portal);
 		CE.doLayout();
 

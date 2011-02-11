@@ -93,10 +93,10 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
-				<parameter name="width">45</parameter>
+				<parameter name="width">25</parameter>
 				<parameter name="Ext.grid.Column">
 		          	<parameter name="menuDisabled">true</parameter>
-		          	<parameter name="fixed">false</parameter>
+		          	<parameter name="fixed">true</parameter>
 			    </parameter>
                 <parameter name="jsFunc">
                 	<parameter>
@@ -139,7 +139,7 @@
         	</datasource>
 
         	<display>
-                <parameter name="visible">true</parameter>
+                <parameter name="visible">false</parameter>
                 <parameter name="label">Instance</parameter>
 
 				<parameter name="width">60</parameter>
