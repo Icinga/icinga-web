@@ -440,7 +440,7 @@ class IcingaTemplateWorker {
 		// Add or replace some asterix within count
 		if ($op == AppKitSQLConstants::SQL_OP_CONTAIN || $op == AppKitSQLConstants::SQL_OP_NOTCONTAIN) {
 			if (strpos($val, '*') === false) {
-				$val = $val. '%';
+				$val = '%'. $val. '%';
 			}
 			else {
 				$val = str_replace('*', '%', $val);
