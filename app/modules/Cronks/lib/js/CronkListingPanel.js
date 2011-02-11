@@ -554,7 +554,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		var tabPanel = Ext.getCmp('cronk-tabs');
 	
 		if (tabPanel) {
-			var panel = tabPanel.add({
+			var cronk = {
 				xtype: 'cronk',
 				iconCls: Cronk.getIconClass(record.data['image_id']),
 				title: record.data['name'],
@@ -565,9 +565,8 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 					module: record.data.module, 
 					action: record.data.action 
 				})
-			});
-			
-			tabPanel.setActiveTab(panel);
+			};
+			Cronk.util.InterGridUtil.gridFilterLink(cronk, {});
 		}
 	},
 	

@@ -65,6 +65,7 @@
 			Locale information:
 			
 			#loc: HOST_ADDRESS
+			#loc: HOST_ADDRESS6
 			#loc: HOST_ALIAS
 			#loc: HOST_DISPLAY_NAME
 			#loc: HOST_CURRENT_STATE
@@ -93,6 +94,9 @@
 			<ae:parameter name="result_columns">
 				<ae:parameter>
 					<ae:parameter name="field">HOST_ADDRESS</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_ADDRESS6</ae:parameter>
 				</ae:parameter>
 				<ae:parameter>
 					<ae:parameter name="field">HOST_ALIAS</ae:parameter>
