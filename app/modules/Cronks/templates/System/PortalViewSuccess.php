@@ -2,7 +2,7 @@
 Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 
 		var CE = this;
-		AppKit.log(CE);
+
 		var PortalHandler = function() {
 
 			var id = CE.cmpid;
@@ -93,6 +93,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 
 							notifyDrop: function(dd, e, data) {
 								var params = {
+									module: 'Cronks',
+									action: 'System.PortalView',
 									'p[parentid]': id
 								};
 								
