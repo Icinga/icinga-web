@@ -52,7 +52,9 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					var d = dview.getStore().getAt(index).data;
 
 					var params = {
-						template: 'icinga-' + d.type + '-template'
+						template: 'icinga-' + d.type + '-template',
+						module: 'Cronks',
+						action: 'System.ViewProc'
 					};
 
 					var filter = {};

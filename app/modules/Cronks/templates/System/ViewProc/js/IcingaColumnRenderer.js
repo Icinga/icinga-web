@@ -17,7 +17,11 @@ Cronk.grid.IcingaColumnRenderer = {
 					title: (cfg.titlePrefix || '') + " " + record.data[ cfg.labelField ],
 					crname: 'gridProc',
 					closable: true,
-					params: {template: cfg.targetTemplate}
+					params: {
+						template: cfg.targetTemplate,
+						module: 'Cronks',
+						action: 'System.ViewProc'
+					}
 				};
 				
 				var filter = {};
