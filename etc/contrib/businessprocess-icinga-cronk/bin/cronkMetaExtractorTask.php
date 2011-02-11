@@ -52,25 +52,21 @@ class cronkMetaExtractorTask extends Task {
 
 		// add agavi action,validation, view and templates
 		$cronkFS = new FileSet();
-		$cronkFS->setDir("../../app/modules/".$module->nodeValue);
+		$cronkFS->setDir($this->project->getUserProperty("PATH_Icinga")."/app/modules/".$module->nodeValue);
 			$cronkIncludes = "actions/".$actionName."Action.class.php"; 		
 			$cronkIncludes .= ",templates/".$actionName."*.class.php"; 		
 			$cronkIncludes .= ",validate/".$actionName.".xml"; 		
 			$cronkIncludes .= ",views/".$actionName."*.class.php"; 		
 		
 		$cronkFS->setIncludes($cronkIncludes);
-		$templateDir = $this->project->getUserProperty("templateDir");
+		
 		// add templates 
 		$templateFs = new FileSet();
-		$templateFs->setDir("../../app/modules/Cronks/data/xml/grid/".$templateDir."/");
-	
+		$templateFs->setDir($this->project->getUserProperty("PATH_Icinga")."/app/modules/Cronks/data/xml/");
 		$includes = "";
 		$first = true;
-		
 		foreach($templates as $template) {
-			echo "\nIncluding template ".$template;
-			$includes .= ($first ? '' : ',')."**".$template.".xml";
-
+			$includes .= ($first ? '' : ',').$template.".xml";
 		}
 		// export to phing
 		$templateFs->setIncludes($includes);
