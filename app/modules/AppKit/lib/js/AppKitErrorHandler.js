@@ -281,6 +281,8 @@ Ext.ns("AppKit.errorHandler");
 			switch(response.status) {	
 				case 200:
 					break;
+				case 403:
+					break;
 				case 404:
 					AppKit.AjaxErrorHandler.error_404(proxy.url);
 					break;
@@ -334,6 +336,7 @@ Ext.ns("AppKit.errorHandler");
 				}
 				if(!error)
 					error = "Unkown error";
+					AppKit.log(error, target);
 				trackError(_("A error occured when requesting ")+target);//+" : "+error.length <200 ? error: error.substr(0,200)+"...");
 			}
 		}
