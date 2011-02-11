@@ -5,42 +5,50 @@
 	parent="%core.module_dir%/Web/config/validators.xml"
 >
 	<ae:configuration>
-		
-		<validators>
-		
+
+	<validators>
+
 		<validator class="string" name="cmpid" required="false">
-					<argument>cmpid</argument>
-					
-					<errors>
-						<error>Validation of htmlid failed!</error>
-					</errors>
+			<argument>cmpid</argument>
+
+			<errors>
+				<error>Validation of htmlid failed!</error>
+			</errors>
 		</validator>
-		
+
 		<validator class="string" name="parentid" required="false">
-					<argument>parentid</argument>
-					
-					<errors>
-						<error>Validation of parentid failed!</error>
-					</errors>
+			<argument>parentid</argument>
+
+			<errors>
+				<error>Validation of parentid failed!</error>
+			</errors>
 		</validator>
 
 		<validator class="string" name="stateuid" required="false">
-					<argument>stateuid</argument>
-					
-					<errors>
-						<error>Validation of stateuid failed!</error>
-					</errors>
+			<argument>stateuid</argument>
+
+			<errors>
+				<error>Validation of stateuid failed!</error>
+			</errors>
 		</validator>
-		
+
+		<validator class="string" name="state" required="false">
+			<argument>state</argument>
+
+			<errors>
+				<error>Validation initial state string failed!</error>
+			</errors>
+		</validator>
+
 		<validator class="number" name="columns" required="false">
-					<argument>columns</argument>
-					
-					<errors>
-						<error>Validation of columns failed!</error>
-					</errors>
+			<argument>columns</argument>
+
+			<errors>
+				<error>Validation of columns failed!</error>
+			</errors>
 		</validator>
-		
-		</validators>
+
+	</validators>
 		
 	</ae:configuration>
 </ae:configurations>
