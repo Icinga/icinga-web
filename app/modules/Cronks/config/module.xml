@@ -13,6 +13,11 @@
 				<setting name="appkit_module.app.css_files">
 					<!-- JIT - JavaScript InfoVis Toolkit -->
 					<ae:parameter>/styles/statusmap.css</ae:parameter>
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.css_files.site']/node())">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+
+
 				</setting>
 
 				<setting name="appkit_module.app.javascript_files">
@@ -42,6 +47,11 @@
 
 					<ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.javascript_files.site']/node())">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+
+
 				</setting>
 
 				<setting name="appkit_module.app.javascript_dynamic">
@@ -50,6 +60,9 @@
 					<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
 					<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
 					<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.javascript_dynamic.site']/node())">
+						<xi:fallback></xi:fallback>
+					</xi:include>
 				</setting>
 
 				<!--
@@ -90,6 +103,11 @@
 					</xi:include>
 				</setting>
 				
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/node())">
+					<xi:fallback></xi:fallback>
+				</xi:include>
+
+		
 				<setting name="cronks">
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())" />
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())">

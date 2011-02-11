@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://agavi.org/agavi/config/parts/module/1.0"> 
+<!-- 
+	+++ Site configuration file +++
+		This file won't be overwritten
+
+-->
+	<setting name="Nosetting">
+
+
+	</setting>
+
+	<setting name="appkit_module.app.css_files.site">
+	</setting>
+
+	<setting name="appkit_module.app.javascript_dynamic.site">
+	</setting>
+	<setting xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" name="appkit_module.app.javascript_files.site"> 	
+	</setting>
+</settings>
