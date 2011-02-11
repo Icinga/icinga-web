@@ -12,6 +12,7 @@
  * @property string $alias
  * @property string $display_name
  * @property string $address
+ * @property string $address6
  * @property integer $check_command_object_id
  * @property string $check_command_args
  * @property integer $eventhandler_command_object_id
@@ -134,6 +135,16 @@ abstract class BaseIcingaHosts extends Doctrine_Record
              'autoincrement' => false,
              ));
         $this->hasColumn('address', 'string', 128, array(
+             'type' => 'string',
+             'length' => 128,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'default' => '',
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+		$this->hasColumn('address6', 'string', 128, array(
              'type' => 'string',
              'length' => 128,
              'fixed' => false,
