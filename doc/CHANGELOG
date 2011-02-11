@@ -1,3 +1,1130 @@
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 024f39262f1a0a7bab07cd5dc7afe96a3ca7a9a7
+
+* Added asterix before and after value if no asterisk given (fixes #1213)
+
+
+2011-02-11 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 15cfc9a11bc137a811cd4990fb51b9f66336d72e
+
+* Merged with master
+
+
+2011-02-11 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: b2b9fc81c221cc7cc979836673b70b64693e1bba
+
+* Added address6 field, cronklisting now doesn't reopen already existing tabs
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 12d694c888c4792d53ccdb28f4bb82fea18d0b3a
+
+* Added module and action params for js cronk processors (fixes #1205)
+
+
+2011-02-10 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 108f1be04299532470e6159605ab3ab019526fdf
+
+* Fixed store error on closed tabs caused by refresh
+
+
+2011-02-10 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 6c72910efae21903aae50a86bced3544a83d94e3
+
+* Session timeout is now 0 per default (#fixes 1197)
+
+
+2011-02-10 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: cbf1979d949125c5a639bfcb6357070edf7638e6
+
+* Reuse open tabs if title is the same (#fixes 1211)
+
+
+2011-02-10 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 8473cad994d84725a5f07c8f49dd917126263aa0
+
+* Fixed several portalview issues, changes cronks open from dblclick to click (#fixes 
+  988)
+
+
+2011-02-10 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 023b109f91b53b11c76dca54f56f4e946a6524f6
+
+* Added tbar existence check
+
+
+2011-02-10 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 27e51e86bfd886e16111f23f5d36f00501612163
+
+* Fixed #1205 - StatusOverview cronks now supply their action and module
+
+
+2011-02-09 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 9701bf580c8e782d2e8eb83779b426bf758fb72a
+
+* Removed COL_ in db results and removed debug snippets (#fixes 1194)
+
+
+2011-02-09 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 5d06db9d5a7a8960fbe235ffe8e9c550aaf12f4d
+
+* Gridpanel now uses paginationbars for refresh if available (#fixes 1193)
+
+
+2011-02-09 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 13add6e8ff4f0c9eb9bdffe7efcfeaccfa079e37
+
+* Added icinga.control credentials
+
+
+2011-02-09 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 95eeecd0b4841ed50d8a6c06d4baec84ba1d35b1
+
+* ErrorHandler commError now only reacts on communication errors
+
+
+2011-02-09 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: c5a894f541ad6f664a261dbe2c8d2e093a0c2806
+
+* Made access.xml more generic
+
+
+2011-02-09 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 3fc0536c4569fdad2fab423edcdb73610cbaf4a0
+
+* Added icinga control panel based on new console api
+
+
+2011-02-08 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 38ba7b8c91ee0e288c5623088d835f9c7a952be4
+
+* changed location of api
+
+
+2011-02-08 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 59edcb70265519881832d40efe365884b1291bd3
+
+* Started adding console access for icinga, moved lots of files and added tests
+
+
+2011-02-07 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: aaddac87b2f163ab98feab54f9c6f9ab58518330
+
+* Added servicegroup filters (mainly the same as hostgroupfilters)
+
+
+2011-02-07 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: edeac8373c6e02dbbf1d3e01404b321c6ed709de
+
+* Added hostgroup callers and tests
+
+
+2011-02-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 077b084419683a0961685091e69833eac60a7f90
+
+* Removed some method declaration errors
+
+
+2011-02-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9f9a253e407043d9c9bb49ce9dcf14ddb2168df2
+
+* Command for remove acknowledgements
+
+
+2011-02-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 13e097c66677dea2c627fe285e43e5caf3b6c076
+
+* Removed dom saveXML bug with php5.2.6
+
+
+2011-02-03 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 8dba36a0654eeba1cba0f302f9fd7902a7e11b87
+
+* Finised service retrieval tests, custom finders for contact and Service 
+  requesthelpers
+
+
+2011-02-03 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: e3b25f278dd137ae3809ea9908ce143713c09741
+
+* Removed deleted files from branch tree
+
+
+2011-02-03 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 67402421d5473bdebabdd6ad3d2409effa81edaa
+
+* Added service retrieval tests and fixed bugs
+
+
+2011-02-02 Marius Hein <mhein(AT)waheela(DOT)(none)>
+           Commit: 69c9dd4485e6792c1e04a161496d29e635f68526
+
+* Fixed mysql dump
+
+
+2011-02-01 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 887e376314999fe5c56abe61eba3f79fdd09931a
+
+* Added several service tests, added some service request presets
+
+
+2011-02-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f415a89b947e2702e92bc772a8240f0267877b3e
+
+* Level changes (cause pg errors, ref #1153)
+
+
+2011-01-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0c641cec828032fd154d61be5ae7025c3aff1f12
+
+* New background images for 1.3
+
+
+2011-01-31 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 84cfad1aa66593f80c4e1ed4e9e8ad25a25d4777
+
+* Finished SSH setup (pubkey auth seems to make problems in the libssh2 wrapper), 
+  started service db retrieval tests
+
+
+2011-01-30 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: e172c0466dc449c62f912ff53d19ad0ec745e3c7
+
+* SSH Console Interface with password authentification works now
+
+
+2011-01-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0bece37cdeb4b8b70367126ae6b676199db84984
+
+* Missing css classes
+
+
+2011-01-28 jmosshammer <jmosshammer(AT)debian(DOT)localhost>
+           Commit: 84de8bde01e2d2f295315bb45a32146ad44966b8
+
+* Added Console Interface to Api and implemented LocalConsole
+
+
+2011-01-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 71167f2d9b091126b9b040b2316ec88678e41e16
+
+* Readded json decoding of parameters for cronk loader
+
+
+2011-01-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 33b75dde51045b16e8134ed7a508cae142c2b1f9
+
+* CronkBuilder better window organized
+
+
+2011-01-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 775b2ecd40a36b1450c997c450a112915db73a6c
+
+* Tooltipdelay (fixes #1025)
+* Multiline grid columns css class
+* Meta col renderer 
+  (style, class, ...)
+
+
+2011-01-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d6ef3c2b7ce594da4630283eb9f962edc9b9a522
+
+* Agavi upgrade to 1.0.4
+* Style fixes
+
+
+2011-01-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fa878fb5a4ad5614c31303822aa63d5c75d8e7f6
+
+* Sencha ExtJS upgraded to 3.3.1
+* New tab overflow controller
+* Style overwrites
+* 
+  CronkTabPanel generalized
+
+
+2011-01-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7825485dcbafd9aec04237e95f9990570fa4f916
+
+* Added link to host in services (fixes #984)
+* Better link values for interlink 
+  templating
+
+
+2011-01-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a174136604cdc36aa36c644cbaf3122303dec7cb
+
+* Added index file (fixes #1055)
+* Removed debug statements
+
+
+2011-01-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f7466dfc1a27e694a1995b987ea9c7439cff9d84
+
+* Removed default bottom log view
+* Readded log cronk with filters
+
+
+2011-01-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 10f83cd411d27dcfd2c6fada4817d302838053b4
+
+* Global ajax timeout fix (for heavy load)
+
+
+2011-01-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 291c291ce1fff1d1fee40d68a128a4b66de65547
+
+* Removed deprecated libraries
+
+
+2011-01-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: aac1d73136f6ef466cf3102fdb2b7c5cfe68ba5a
+
+* Removed custom search box with standard elements
+
+
+2011-01-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f97b321700b288ea5d94ed2c62b11aacb23aa955
+
+* IE7 bug
+
+
+2011-01-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 572bb970efadfe19535837501b3363c95d708ac1
+
+* IE fix for tab closing
+
+
+2011-01-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4e720350e7b352bc66df77e043256ec87561d0fa
+
+* IE fix for DOMParser
+
+
+2011-01-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c3ec21f6a96e6331684dc36e504911e38fc884dc
+
+* IE7 quick fix
+
+
+2011-01-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 93a8800fe969fc6f49ff18fb6466367c44bd44a2
+
+* Added more agavi site config files (ref #970)
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ffc89e5eae568bf885831bc3bd20d823e1bae73e
+
+* Moved persistent implementation to grid object
+* Implemented basic stateful col 
+  model (ref #988)
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 78e513c76f8c99fcb0cc0e9921b7394bda6b4665
+
+* Portal column fixes for new cronk struct (fixes #1070)
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 37625a4351a2f23c2218e171d576004c97cc0077
+
+* get url view fix
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7edc7208bd4a765332b79eea6a6e9edb2ec7288a
+
+* Category -> Cronk match fix
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5d53e7c6de37620e8d205b6a7035f19a46670ab2
+
+* Added missing iteration in principalEditor
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 02699af47fffb83648f9d648dda57550801eb74c
+
+* ICINGA ACTIVE check constants (fixes #1130)
+* Internal auth provider available fix 
+  (fixes #1131)
+
+
+2011-01-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 29a145ea3e28f294cde2bdb62779a0c5c6ba07fd
+
+* ICINGA ACTIVE check constants (fixes #1130)
+* Internal auth provider available fix 
+  (fixes #1141)
+
+
+2011-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bfc56b9720f8aa3172d0f980694e23885fc05e41
+
+* renameTab: method name typo
+
+
+2011-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: bc269e4eb235b2a060a9871f4248d0d50373ab09
+
+* multiple principal targets possible display fix (principalEditor)
+
+
+2011-01-19 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: e855d29534d96d999a13ccad43464af60c41c99b
+
+* Finished host overview test
+
+
+2011-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 64ac3736e1128259899a59e9a1ea7df4267d9308
+
+* Removed GlobIterator
+* Works again with PHP5.2.6
+
+
+2011-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3fbd27eddcf834eb079ae89e4c0afc5f0bd8c8a5
+
+* Removed GlobIterator
+* Works again with PHP5.2.6
+
+
+2011-01-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b0ad433bc434299e5588a7882b4e5bdd323de5e9
+
+* Removed GlobIterator
+* Works again with PHP5.2.6
+
+
+2011-01-18 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 3f52e5ed900e1193075964f066a1e4fe9237942b
+
+* Added HostOverview classes and predefined API requests
+
+
+2011-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8269f9b2e8400abb3fb0c639bf10dea92c7f082b
+
+* Added cronk icon to anonymous filteredGrids
+
+
+2011-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f5568034c769e34aac44e01668f6a5ed104e388b
+
+* Added iconCls to url view params
+
+
+2011-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 540ab5a2004672879146dcd73a11f37d4f7861be
+
+* Fixed url persistent views
+
+
+2011-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 77532c32471a86a23d0e6ff9c8557b6af23fcf45
+
+* Added iframe doc cronk
+
+
+2011-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fbe7deb67a746b395c26fd8a1a5c719adc6da4f1
+
+* Added more config options to iframe cronk
+* Implemented iframe url as model
+
+
+2011-01-18 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 48a6f514669b6c5cc702f2e43ff7bda9427adbce
+
+* Added queries for contact groups, finished HostDetailTests
+
+
+2011-01-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d46d621d8925bf15f5472680ed236bbfd291364e
+
+* Changed icinga downtime template for new target
+
+
+2011-01-14 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2de78d883a2cb94c708884ac4bd9b034f24b1f34
+
+* Create icinga proxy classes for doctrine access, added tests, started handlers for 
+  messed up db relations like contacts
+
+
+2011-01-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d1e51e8f88d6aa7a009841ebf7600fb2ea38625c
+
+* Added downtime template (final, fixes #675)
+
+
+2011-01-13 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: a9aa1b616e50741eb68febb5db43574008a65be9
+
+* fix icinga-web.spec for sles 11 #888fixes #888
+
+
+
+2011-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5429c7b56633db53cd515a2232986e7bc6bbb25b
+
+* Added downtime grid xml template
+
+
+2011-01-13 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 83d4567fba39d6127fc123d402b1fd3b158acba0
+
+* Some more documentation updates
+
+
+2011-01-13 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 21d00132b7a4cfb4d5ddc902b6b5abcc413f8cf1
+
+* Switch to www-user/www-group (as specified in the test.properties file) using 
+  seteuid/setegid (fixes #1109)
+
+
+2011-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 164cdff95021251aa869d2da3ee485a63dfafe6e
+
+* Added new filters (fixes #573)
+
+
+2011-01-13 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 3b58582e361ec8d7286f7b3b1ff13f895e2024e4
+
+* Implemented Host_detail tests, started adding helper functions for hosts
+
+
+2011-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 898a1657a2c23ac3df400034089036594bf486b7
+
+* Form validation downtime (fixes #1062)
+
+
+2011-01-13 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: e02b8921a4f2f3610aa991c0952f90887a13200a
+
+* Don't use su when running the tests as an ordinary user (fixes #1115).
+
+
+2011-01-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1241fbf804af4f07dc9f8ebe087753e1939fdc12
+
+* Added command file switch (fixes #944)
+
+
+2011-01-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b459d1ae7885ee2ed5662b1f9bf72fb9267d7fb8
+
+* Added simple duration field (fixes #771)
+
+
+2011-01-12 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: bf0fcbcd8d1359ee7bd4eb50fb3f4cf1fe31e378
+
+* Updated documentation.
+
+
+2011-01-12 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 8a74dd5bcdf89d7dd1681c5d9ff425f4225578e2
+
+* Removed hard-coded target_id and pt_id
+
+
+2011-01-12 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 916c3917b7cd137461ba1c5477209092fe6d33db
+
+* PostgreSQL update script for 1.2 -> 1.3
+
+
+2011-01-11 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: b2cd6d86a0f86ff87a96bfda828a4c2eb723ad48
+
+* Added filter implementation
+
+
+2011-01-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 25c265dbbadacfe07ebdb3490edbab260acacc2b
+
+* CronkBuilder stateful object IE bugfix
+
+
+2011-01-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2d0100d3b40b26a592b4a73e03a59889b2eb19a1
+
+* MySQL updatefix (dynamic)
+* Cache fix for installer
+
+
+2011-01-10 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 16a20b47ec6be89247d454e765b0cdb30ac0578c
+
+* Wrote api tests
+
+
+2011-01-10 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 51a71ebf6f86b1e45e4deea86995058376dd7dd8
+
+* Fixed typos
+
+
+2011-01-10 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 925f400f1d06ce4c20b63cc9e3014bb1ae013fde
+
+* replaced passed fixture with shared fixtures, removed repair functions, fixed 
+  interface tests
+
+
+2011-01-10 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 1911e865485ce21063df52a3f40d45fc5eb56049
+
+* Detailed host/service info popup shouldn't close while hovering over it (fixes #998)
+
+
+2011-01-10 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 43aaeffd3f957d597a8fbde65efbdbe820063c23
+
+* update icinga-web.spec for 1.3
+
+
+2011-01-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2382fb2cb50630742da28c1ff6a68279d5368ade
+
+* Updated testing framework to only use phpunit so errors prior to agavi::bootstrap 
+  can be detected
+
+
+2011-01-09 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: f0c636847feee47557fe2997de9f20a6e87772b0
+
+* Update db-relations (intermediate commit)
+
+
+2011-01-08 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: c3945d649b4f99a5429fea0ba51020fcad02d3e0
+
+* Intermediate commit, db relations
+
+
+2011-01-08 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 468f319d495ed356f952075bbbc6f480586b9926
+
+* Added db-relations (intermediate commit)
+
+
+2011-01-07 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 44e4634ed8c60b1b990e821e041c62dd22dffb77
+
+* Change focus back to the search box after refreshing search results.
+
+
+2011-01-07 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: d6e6fa0fa82e76eac948de86be197d1b76e47ba4
+
+* Minor changes to the README and INSTALL files.
+* Added a paragraph about how to 
+  enable mod_rewrite.
+
+
+2011-01-07 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: ae85bd44c57fd69187cb420cc3ce31398259fdd8
+
+* Fixed translation: 'to to' -> 'to do' (log-out confirmation message).
+
+
+2011-01-07 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: ed7fd25db1ed28a3bd642e6d9c887dea2cc9715b
+
+* Remove IfModule directive for mod_rewrite as this module is a required   dependency 
+  and not having it installed causes some non-obvious issues   for new users (i.e. the 
+  web interface is only partially working)
+
+
+2011-01-07 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: 1cd709ea2d15f6fe7d7aefc8b4a18a670f3f1ee7
+
+* Change default endtime for scheduled service/host downtime events to (current time) 
+  + 2 hours (fixes #871).
+
+
+2011-01-07 Gunnar Beutner <gunnar(DOT)beutner(AT)netways(DOT)de>
+           Commit: d578cf8beb119518795597dfef4858ea4cf7f331
+
+* Use {2} instead of {1} in the format string (fixes #1016).
+
+
+2011-01-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9ca55981bf7020f36dcb8287ed98d6ae034b2c96
+
+* Style changes
+* Position of tab slider
+* icon things
+* cronk tab panel methods
+
+
+2011-01-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e8980c605e7b41f7f8fca069a968bd97cd8d26da
+
+* Added cronk-tab-icons mode
+
+
+2011-01-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ea7ce98e317d44c5fe59a9b5df0bd07e68e7855a
+
+* Some installation hints after configuration
+
+
+2011-01-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7d8bac63b2c33b95b2699da36174436917dcb2fb
+
+* DB model fixes
+* Category editor ready stage
+* CronkBuilder fixes
+
+
+2011-01-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5b75c1cc8f508ec6c310dde788c31ce9e6674b8d
+
+* CategoryEditor: Prepared working stage
+
+
+2011-01-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3dc755589408ade43946891daff443c171077f42
+
+* CronkBuilder form enhancements
+
+
+2011-01-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 62b3840c7e7d54002d1e1c740e55bf3673f7104d
+
+* Added tabslider
+
+
+2011-01-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 64e3da437df974c7f780950ea2e62e373a5ad53b
+
+* Delete FK fix
+
+
+2011-01-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f94886c5aa8f0f014d210cada6bd0ce32b321e94
+
+* CronkListing: Deleting cronks
+
+
+2011-01-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ab00bf0eb1a0a2218d595068d68a0365a450a6aa
+
+* Changes CronkInterface and CronkBuilder
+
+
+2010-12-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 64ff175ed8c7a4cf46b8ec661be0a7acbd881107
+
+* CronkListing: Reload fix
+
+
+2010-12-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: df0450cc3acec387a45c18e8af4a828074f497b1
+
+* CronkBuilder: fixes sql issues
+
+
+2010-12-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5cafb36fce6d336f5519a6272b67fad4d7ee3838
+
+* CronkBuilder finished working stage
+
+
+2010-12-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fe0efe6769d2e7c109e38b4fad213a06990f2e8c
+
+* Finished new cronk listing
+* Recreating cronk state from cronk builder
+* Enhanced 
+  AppKitExtJsonDocument
+* Parameter passthru for cronk loader
+* Apply runtime 
+  parameters to the cronk
+* CronksRequestUtil to create json string for cronk env
+
+
+2010-12-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 90fc7812e66a3842e4920b82953ff7156e5fb2ea
+
+* Removed old cronk data model
+
+
+2010-12-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 49c915d228ed8c774cd35bb80e0a2fb3059c8553
+
+* New cronk listing panel (reloadable)
+* Combined provider for cronk and categories
+* 
+  CronkLoader using the new model
+
+
+2010-12-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c23947162b77f581e5868b6066f06e278b5702fb
+
+* CronkBuilder: prepared rewrite listing
+* Cronk datamodel fixes
+* CronkBuilder: 
+  creation process
+
+
+2010-12-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 250359f81bfbd8671d11bfd0e131ca111a10a42d
+
+* Cronk icons now orange
+
+
+2010-12-21 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e4df67ec0bdfd29d50327c0bae84a12f9a15cb6e
+
+* CronkBuilder form ready state
+* Custom submit action to transmit property grid
+
+
+2010-12-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9c8646f91215dd83825192314a773dc4a31243ee
+
+* Prepared generic Doctrine output for groups provider
+* Added Ext <-> Doctrine 
+  mapper class
+
+
+2010-12-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 955170c34197f0b6fcbe411947bf130fedebbeaa
+
+* Groupprovider show own groups to all authenticated users
+* Fixes in group model for 
+  n:m relation
+
+
+2010-12-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 55e1b2db0030d5a21a4e78853bf6338932f282ee
+
+* Added more providers and fields to builder
+
+
+2010-12-16 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: da69543d31809fe9a0670813cd4c51e7644a7ed0
+
+* Fixed database models
+* Prepared provider for cronk builder
+* Added mysql schema 
+  update
+* Changed to model
+
+
+2010-12-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8a32441879d9f277ccfe18c96c5c77abd63f313b
+
+* Added cronks database models
+
+
+2010-12-14 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 26af8042c84b9e20f052a334ffcd021f1394e575
+
+* Extended doctrine and tables to support for multiple db instances and prefixes
+
+
+2010-12-14 jmosshammer <jmosshammer(AT)ws-jmosshammer(DOT)(none)>
+           Commit: 2b6867c71ffe38f90a1f100c5636cec508e2f759
+
+* Add fix in typesafe comparison of AuthKeyModel (thanks to E. Sobe)
+
+
+2010-12-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7e620c98174b0d3580ec8f4fecff2b95215e28b2
+
+* Added agavi debug to devel mode
+
+
+2010-12-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f2bd6e17543efa644ad8c204af4c0dfa2699001e
+
+* CronkBuild intermediate ci
+
+
+2010-12-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b460b8e68161e74cb44ef0d982119b16241d8153
+
+* Introducing: devel-mode (disabled js caching)
+
+
+2010-12-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 636597b757b3694095203b9bbcdc42df5059f5b0
+
+* Added image file
+
+
+2010-12-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 45da621534698ccd59f632e2861b0ebd8d8790c6
+
+* Adding -NO DATA- display to grids
+
+
+2010-12-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b2bf71cf8db2f56050a834b1cfe9eaa4ed5f8684
+
+* Added Javascript caching (squishloader)
+* Removed applicationState fromsquishloader
+
+
+2010-12-01 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: 4be93623b3a714c17f054b9f67a0b1b8e55e673e
+
+* Removed trailing comma
+
+
+2010-11-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1a5fb63e26450eb3d79fc86c5b897e4e05fe2f83
+
+* Upgrade handling
+* Typo
+
+
+2010-11-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ab403585d185f29d3e515cfa440773b1f4035bd2
+
+* Removed useless files
+* Added some dev targets
+
+
+2010-11-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7cbe44090db9df2d88831d03fc0dc098421cd731
+
+* Added more common installer method
+
+
+2010-11-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 397cbd93854550d613bf246fd5c62dd50a87f9e9
+
+* Added switch to disable api-check (fixes #863)
+
+
+2010-11-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 489bd5053e49ed43cc3971c9ede81685d0682c31
+
+* added --with-web-absolute-path configure option (ref #863)
+
+
+2010-11-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 590a2435ad7488d2cf6e4e31cbc7ddf2a9c55d32
+
+* Fixed login procedure (fixes #1018)
+
+
+2010-11-13 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: d59f48b45a194c4cc9f73148796a73243a3924e0
+
+* Updated business process integration to new master
+
+
+2010-11-10 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: 1020df157c283da36ccf4949aab18668b6653241
+
+* Changed transitive property names from absolute to relative, added Host relations
+
+
+2010-11-10 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: 0401d13d5fb3c77b5b63b9f54248ad28b02b09df
+
+* Added service relationships - not tested yet
+
+
+2010-11-10 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: 8bac9f7eb65c3b6e4217abd665ce2baa1df9e014
+
+* Updated doctrine, started API integration. Relations must be rebuild by hand...
+
+
+2010-11-09 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: 4178604265d48139d140db2acbd962bc6a3746d6
+
+* Updated ExtJs Version to 3.3.0, added click buffer to statusOverall (#fixes 977)
+
+
+2010-11-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7d58e7106474d6d8338dfde9e17fa6a59aa51fb8
+
+* Added missing files
+
+
+2010-11-09 jmosshammer <jmosshammer(AT)mojadev-VGN-NW11S-S(DOT)(none)>
+           Commit: ca0419075c29cac09a9a53f88a640c5d18c7c79b
+
+* Fixed namespace handling according to php version
+
+
+2010-11-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 02c03dc62a028e372f3ed4ca15a0dd7588224fcf
+
+* Avoiding 'silent' errors result in exceptions
+
+
+2010-11-03 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 83dba5e412a84d704edefc3556c57fa8dbe215ac
+
+* fix test.properties not being installed correctly for web tests
+
+
+2010-11-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 313e712cc7fdf9224bbe151082e4237b2153c6fd
+
+* Fixed PHP error
+
+
+2010-11-02 jmosshammer <jmosshammer(AT)localhost(DOT)localdomain>
+           Commit: b4546aec6109ee44d4574a404b5478519820688c
+
+* Added missing accents to RegExp
+
+
+2010-11-02 Netways <jmosshammer(AT)localhost(DOT)localdomain>
+           Commit: 651ae661e6109857a25d32c1ae850f5efeffd720
+
+* Accented letters will be ignored in command hash (js: Single letter, php: 
+  Multiletter) (#fixes 932)
+
+
+2010-10-31 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 1dd6dde2b953dffd3168ccb6555db275dd8a0137
+
+* Added additional host_object_id in open_problems (#fixes 934)
+
+
+2010-10-29 mojadev <mojadev(AT)mojadev-laptop(DOT)(none)>
+           Commit: 64feba66605e758891ade220cb0789b01ffd846e
+
+* Added dependencies (#fixes 938, #fixes 937 #fixes 930):# Please enter the commit 
+  message for your changes. Lines starting
+
+
+2010-10-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0475bf3ea0edd62904f5a51c2feb22091b5ef8be
+
+* Added patch to using xslt files for api queries (rest)
+* Thanks to William Preston
+
+
+2010-10-22 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: d13fea01c4babaea4f549fa6a2b7432b7dae1017
+
+* Fixed error window on invalid credentials
+
+
+2010-10-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 356292323e8858d90c6025e0bcafb492b305f11d
+
+* Fixed file list
+
+
+2010-10-21 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: d643320fa52c6122383263aa04e397bc8b4cedbc
+
+* Fixed starttime format in commands and interface freezing when trying to send an 
+  invalid form
+
+
+2010-10-21 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 18544f0cded2b94ce91147cb0b7588b31bba1a24
+
+* Added extra check that prevents harmless js errors on tab close
+
+
+2010-10-21 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: b5557175c98f412d274fdafed3e3d4ab40138e8c
+
+* Fixed schema for postgresql (#fixes 915)
+
+
+2010-10-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a9e77eda3a34e35a3c792d124caff0ecc9b91996
+
+* Removed vim swap file
+
+
+2010-10-19 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)com>
+           Commit: 3602796995e4c2814446ff0194690045facfd6e6
+
+* Fixed wrong time format in date commands
+
+
+2010-10-18 root <root(AT)localhost(DOT)localdomain>
+           Commit: a22b2f61d6e59608d09c28fa966f4b2106b308c0
+
+* Fixed psql schema and removed typeahead from filters (#fixes 885 #fixes 872)
+
+
+2010-10-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d6987370089ea47ab5aca798a13e1d2623978b82
+
+* Cache clearing from the webinterface (fixes #784)
+
+
+2010-10-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5337f9eb737d8ede4de24294a2c5002fb4b08f11
+
+* Disabled free edit of language preference (fixes #824)
+
+
+2010-10-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8b93671922deb297a9610cca565458ebbc9e21b7
+
+* Added favicon to template (fixes #855)
+
+
+2010-10-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 85e05dab5620d59955a974e046bef4e37228d5f2
+
+* Prepared 1.3 start
+* clearcache script
+
+
+2010-10-06 root <root(AT)localhost(DOT)localdomain>
+           Commit: 4c54960b51fbefca289d4dd04215ee754259e61b
+
+* URL Cronk now works again
+
+
+2010-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d0429a365df5630c6da8ba137b745a389cd772f4
+
+* Release babse date
+
+
+2010-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6c27a95a896b033a2648445046b4904553b90c42
+
+* Removed 'undefined' from openproblems
+
+
+2010-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 33fbc8b27b1b2bc8f791f8c205c1c2cffd6eefac
+
+* PNP integration, fixed urls and icons
+
+
+2010-10-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 51e9e87ded60a888f815cf6f202fee6aaf81ab31
+
+* Makefilefix
+
+
+2010-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c8220626599be352c8ab8a9ff8290daf93322bc7
+
+* Added new CHANGELOG version
+
+
 2010-10-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: 86dc291378ba388e727ab6fc50d9b75d348da4ef
 
