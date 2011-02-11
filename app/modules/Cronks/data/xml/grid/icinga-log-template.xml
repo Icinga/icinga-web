@@ -121,7 +121,7 @@
         	</datasource>
 
         	<display>
-                <parameter name="visible">true</parameter>
+                <parameter name="visible">false</parameter>
                 <parameter name="label">Instance</parameter>
 
 				<parameter name="width">60</parameter>
