@@ -18,9 +18,17 @@
 		<available_locale identifier="pl">
 		  <ae:parameter name="description">Polski</ae:parameter>
 		</available_locale>
+		<!-- Czech -->
+		<available_locale identifier="cs">
+                  <ae:parameter name="description">Czech</ae:parameter>
+                </available_locale>
 		<!-- Portugese -->
 		<available_locale identifier="pt">
-		  <ae:parameter name="description">Português</ae:parameter>
+		  <ae:parameter name="description">Portugese</ae:parameter>
+		</available_locale>
+		<!-- Brazilian Portugese -->
+		<available_locale identifier="pt_BR">
+		  <ae:parameter name="description">Brazilian Portugese</ae:parameter>
 		</available_locale>
 		<!-- Bulgarian -->
 		<available_locale identifier="bg">
