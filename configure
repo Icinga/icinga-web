@@ -1762,7 +1762,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 # Release date
-RELEASE_DATE=2010-10-06
+RELEASE_DATE=2011-02-16
 
 
 
