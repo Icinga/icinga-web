@@ -45,7 +45,7 @@ CREATE TABLE `cronk_principal_cronk` (
 
 -- Adding new credential and add them to appkit_admin
 
-INSERT INTO nsm_target (target_name,target_description,target_class,target_type) VALUES ('icinga.control.view','Allow user to view icinga status','','credential')
+INSERT INTO nsm_target (target_name,target_description,target_class,target_type) VALUES ('icinga.control.view','Allow user to view icinga status','','credential');
 INSERT INTO nsm_target (target_name,target_description,target_class,target_type) VALUES ('icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO nsm_target (`target_name`, `target_description`, `target_type`) VALUES ('icinga.cronk.category.admin', 'Enables category admin feature', 'credential');
 SET @TARGET_ID=LAST_INSERT_ID();
