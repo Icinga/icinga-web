@@ -744,7 +744,7 @@ Cronk.util.initEnvironment(_parent, function() {
 		
 		getConfigJson : function (filename) {
 			Ext.Ajax.request({
-				url: '<?php echo $ro->gen("cronks.bpAddon.configParser") ?>',
+				url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
 				params: {
 					action: 'parseCfg',
 					filename: filename
@@ -768,7 +768,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				if(btn != 'yes') 
 					return false;
 				Ext.Ajax.request({
-					url: '<?php echo $ro->gen("cronks.bpAddon.configParser") ?>',
+					url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
 					params: {
 						action: 'removeCfg',
 						filename: filename
@@ -834,7 +834,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			var json = this.buildJsonFromTree(tree);
 
 			Ext.Ajax.request({
-				url: '<?php echo $ro->gen("cronks.bpAddon.configParser") ?>',
+				url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
 				params: {
 					action: filename ? 'parseJSON_save' : 'parseJSON_show',
 					json: json,
@@ -915,7 +915,7 @@ Cronk.util.initEnvironment(_parent, function() {
 		autoScroll: true,
 		store: new Ext.data.JsonStore({
 		    autoLoad:true,
-		    url: '<?php echo $ro->gen("cronks.bpAddon.configParser") ?>',
+		    url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
 		    baseParams: {
 		    	action: 'getConfigList'
 		    },

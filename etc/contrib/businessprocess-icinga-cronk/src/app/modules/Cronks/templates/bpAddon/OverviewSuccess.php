@@ -189,7 +189,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				value: _('Default cfg'),
 				store: new Ext.data.JsonStore({
 				    autoLoad:true,
-				    url: '<?php echo $ro->gen("cronks.bpAddon.configParser") ?>',
+				    url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
 				    baseParams: {
 				    	action: 'getConfigList'
 				    },
