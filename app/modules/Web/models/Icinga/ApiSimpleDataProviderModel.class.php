@@ -172,7 +172,18 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 		$out = array ();
 		foreach ($result as $row) {
 			$tmp = array ();
+			$test = array ();
 			foreach ($row->getRow() as $key=>$val) {
+				
+				$key = strtoupper($key);
+				
+				if (in_array($key, $test)) {
+					continue;
+				}
+				else {
+					$test[] = $key;
+				}
+				
 				if ($this->mode == self::MODE_ARRAY_KEYVAL) {
 					$tmp[] = array (
 						'key' => $this->tm->_($key),
