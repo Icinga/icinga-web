@@ -168,18 +168,16 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 						ctxItem.getUpdater().refresh();
 					}
 				}, {
-					text: _("Settings"),
-					iconCls: 'icinga-icon-cog',
-					menu: [{
-						text: _("Save Cronk"),
-						tooltip: _("Save this view as new cronk"),
-						iconCls: 'icinga-icon-star-plus',
-						handler: function() {
-							var cb = Cronk.util.CronkBuilder.getInstance();
-							cb.show(this.getEl());
-							cb.setCurrentCronkId(ctxItem.getId());
-						}
-					}]
+					xtype: 'seperator'
+				}, {
+					text: _("Save Cronk"),
+					tooltip: _("Save this view as new cronk"),
+					iconCls: 'icinga-icon-star-plus',
+					handler: function() {
+						var cb = Cronk.util.CronkBuilder.getInstance();
+						cb.show(this.getEl());
+						cb.setCurrentCronkId(ctxItem.getId());
+					}
 				}]
 			});
 		}

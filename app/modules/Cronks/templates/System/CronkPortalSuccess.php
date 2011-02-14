@@ -11,7 +11,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 		id: 'view-container',
 		
 		defaults: { border: false, layout: 'fit' },
-		style: { padding: '0px 5px 0px 5px' },
+		style: { padding: '0px 5px 5px 5px' },
 		
 		items: [{
 			region: 'north',
