@@ -168,7 +168,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 						ctxItem.getUpdater().refresh();
 					}
 				}, {
-					xtype: 'seperator'
+					xtype: 'menuseparator'
 				}, {
 					text: _("Save Cronk"),
 					tooltip: _("Save this view as new cronk"),
