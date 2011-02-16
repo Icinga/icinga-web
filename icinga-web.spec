@@ -128,7 +128,7 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 %changelog
 ##############################
-* Mon Jan 10 2010 Michael Friedrich - 1.3.0-1
+* Mon Jan 10 2011 Michael Friedrich - 1.3.0-1
 - update for upcoming release
 
 * Tue Aug 31 2010 Christoph Maser <cmaser@gmx.de> - 1.0.3-2
