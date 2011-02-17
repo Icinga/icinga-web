@@ -84,6 +84,8 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record
 			array('pt_id'=>'6','pt_principal_id'=>'4','pt_target_id'=>'8'),
 			array('pt_id'=>'7','pt_principal_id'=>'5','pt_target_id'=>'7'),
 			array('pt_id'=>'8','pt_principal_id'=>'3','pt_target_id'=>'15'),
+			array('pt_id'=>'8','pt_principal_id'=>'3','pt_target_id'=>'16'),
+			array('pt_id'=>'8','pt_principal_id'=>'3','pt_target_id'=>'17')
 		);
     }
     

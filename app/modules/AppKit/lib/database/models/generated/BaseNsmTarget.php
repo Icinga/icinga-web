@@ -93,7 +93,9 @@ abstract class BaseNsmTarget extends Doctrine_Record
 			array('target_id'=>12,'target_name'=>"appkit.user.dummy",'target_description'=>"Basic right for users",'target_class'=>"",'target_type'=>"credential"),
 			array('target_id'=>13,'target_name'=>"appkit.api.access",'target_description'=>"Access to web-based api adapter",'target_class'=>"",'target_type'=>"credential"),
 			array('target_id'=>14,'target_name'=>"icinga.demoMode",'target_description'=>"Hide features like password reset which are not wanted in demo systems",'target_class'=>"",'target_type'=>"credential"),
-			array('target_id'=>15,'target_name'=>"icinga.cronk.category.admin",'target_description'=>"Enables category admin features",'target_class'=>"",'target_type'=>"credential")
+			array('target_id'=>15,'target_name'=>"icinga.cronk.category.admin",'target_description'=>"Enables category admin features",'target_class'=>"",'target_type'=>"credential"),
+			array('target_id'=>16,'target_name'=>"icinga.control.view",'target_description'=>"Allow user to view icinga status",'target_class'=>"",'target_type'=>"credential"),
+			array('target_id'=>17,'target_name'=>"icinga.control.admin",'target_description'=>"Allow user to administrate the icinga process",'target_class'=>"",'target_type'=>"credential")
 		);
 
 	}
