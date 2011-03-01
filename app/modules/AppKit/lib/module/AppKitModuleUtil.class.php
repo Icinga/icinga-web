@@ -11,13 +11,17 @@ class AppKitModuleUtil extends AppKitSingleton {
 	const DATA_FLAT			= 'flat';
 	const DATA_DEFAULT		= 'default';
 	const DATA_UNIQUE		= 'unique';
+	const DATA_ARRAY		= 'array';
 
 	protected static $default_config_keys = array (
 		'app.javascript_files'		=> self::DATA_FLAT,
 		'app.javascript_actions'	=> self::DATA_DEFAULT,
 		'app.javascript_dynamic'	=> self::DATA_UNIQUE,
 		'app.css_files'				=> self::DATA_FLAT,
-		'app.meta_tags'				=> self::DATA_DEFAULT
+		'app.meta_tags'				=> self::DATA_DEFAULT,
+	
+		// Namespaces for XML includes
+		'agavi.include_xml.routing'	=> self::DATA_FLAT	
 	);
 
 	private $modules = null;
@@ -98,7 +102,6 @@ class AppKitModuleUtil extends AppKitSingleton {
 		$out = array ();
 		foreach ($this->getValidConfigNamespaces() as $ns) {
 			$test = $ns. '.'. $subkey;
-
 			if (($data = AgaviConfig::get($test, false)) !== false) {
 				$out[$subkey][isset($this->s_modnames[$ns]) ? $this->s_modnames[$ns] : $ns] = $data;
 			}
@@ -135,6 +138,7 @@ class AppKitModuleUtil extends AppKitSingleton {
 		$rq = $container->getContext()->getRequest();
 
 		foreach (self::$default_config_keys as $subkey=>$subtype) {
+			
 			$data = $this->getSubConfig($subkey, $subtype);
 			
 			if (isset($data)) {
