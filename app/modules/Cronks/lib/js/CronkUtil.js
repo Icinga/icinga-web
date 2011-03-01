@@ -48,7 +48,7 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 			
 			if (r) {
 				parentCmp = Ext.getCmp(parentid);
-				this.parentd = parentid;
+				this.parentid = parentid;
 				Ext.apply(this, r);
 				
 				Ext.apply(this, {

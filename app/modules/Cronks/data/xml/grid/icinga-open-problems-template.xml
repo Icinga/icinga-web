@@ -513,7 +513,7 @@
 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-                <parameter name="subtype">appkit.ext.filter.hoststatus</parameter>
+                <parameter name="subtype">appkit.ext.filter.servicestatus</parameter>
 
                 <parameter name="no_operator">false</parameter>
             </filter>

@@ -50,8 +50,17 @@ function JitStatusMap (config) {
 
 	function jitInit (json, elementIds) {
 		var infovis = document.getElementById(elementIds.jitMap);
-		var w = infovis.offsetWidth, h = infovis.offsetHeight;
+		
+		var panel = Ext.DomQuery.selectNode('.x-panel-body',infovis);	
+		
+		if(panel) {
+			var pElem = Ext.get(panel);
+			pElem.setHeight(infovis.offsetHeight);
+			pElem.setWidth(infovis.offsetWidth);
+			infovis = panel;
+		}
 
+		var w = infovis.offsetWidth, h = infovis.offsetHeight;
 		var rgraph = new $jit.RGraph({
 			Node: {
 				overridable: true,
@@ -60,7 +69,7 @@ function JitStatusMap (config) {
 			Edge: {
 				color: "#56a5ec"
 			},
-			"injectInto": elementIds.jitMap,
+			"injectInto": infovis.id,
 			"width": w,
 			"height": h,
 			"background": {
@@ -94,6 +103,7 @@ function JitStatusMap (config) {
 				JitLog.write(elementIds.jitLog, "done");
 			},
 			onBeforePlotNode:function(node) {
+				
 				switch (node.data.status) {
 					case "0":
 						node.data.$color = "#00cc00";
@@ -130,8 +140,10 @@ function JitStatusMap (config) {
 				style.left = (left - w / 2) + "px";
 			}
 		});
+
 		rgraph.loadJSON(json);
 		rgraph.refresh();
+	
 		document.getElementById(elementIds.jitDetails).innerHTML = rgraph.graph.getNode(rgraph.root).data.relation;
 	}
 
@@ -200,6 +212,7 @@ function JitStatusMap (config) {
 				cls: "jitLog"
 			}]
 		});
+	
 		this.cmp.add(container);
 		this.cmp.doLayout();
 	}
