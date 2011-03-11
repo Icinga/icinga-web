@@ -80,6 +80,10 @@ Icinga Web for Icinga Core, requires Icinga API.
     COMMAND_OPTS="" \
     INIT_OPTS=""
 
+#copy icinga-web db sqls for upgrading
+cp -r etc/schema %{buildroot}%{_datadir}/icinga-web/etc/schema
+
+
 ##############################
 %pre
 ##############################
