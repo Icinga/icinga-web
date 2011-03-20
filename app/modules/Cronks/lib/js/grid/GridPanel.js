@@ -14,10 +14,12 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			// Add nodata background
 			this.store.on('datachanged', function(store) {
 				if (store.getCount() == 0) {
-					_G.getGridEl().child('div').addClass('x-icinga-nodata');
+					if(_G.getGridEl())
+						_G.getGridEl().child('div').addClass('x-icinga-nodata');
 				}
 				else {
-					_G.getGridEl().child('div').removeClass('x-icinga-nodata');
+					if(_G.getGridEl())
+						_G.getGridEl().child('div').removeClass('x-icinga-nodata');
 				}
 			});
 		}		
