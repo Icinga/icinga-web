@@ -108,7 +108,10 @@
 				</setting>
 
 			</settings>
-			
+	
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml">
+				<xi:fallback></xi:fallback>
+			</xi:include>		
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
 		</module>
 		
