@@ -279,7 +279,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 						this.appliedState = true;
 					// Defered execution
 					(function() {
-						if (state.col) {i
+						if (state.col) {
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
 									var c = citem;
