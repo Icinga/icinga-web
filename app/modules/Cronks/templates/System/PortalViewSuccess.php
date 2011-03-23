@@ -15,6 +15,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 					portlet.on('afterlayout',function(ct) {
 						
 						var params = ct.initialConfig.params;
+				;
 						params["stateuid"] = ct.stateuid;
 						params["p[stateuid]"] = ct.stateuid,
 						params["p[parentid]"] = ct.id;
@@ -97,13 +98,14 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 									action: 'System.PortalView',
 									'p[parentid]': id
 								};
-								
-								if (data.dragData.parameter) {
+								data.dragData.parameter = data.dragData.parameter || {};
+								if (Ext.apply(data.dragData.parameter, data.dragData["ae:parameter"] || {})) {
 									for (var k in data.dragData.parameter) {
 										params['p[' + k + ']'] = data.dragData.parameter[k];
 									}
 								}
 								
+
 								var portlet  = Cronk.factory({
 									id: Ext.id(),
 
@@ -270,10 +272,14 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 				},
 
 				applyState: function (state) {
-				
+					// Prevent multiple state restores
+					if(this.appliedState)
+						return true;
+					else
+						this.appliedState = true;
 					// Defered execution
 					(function() {
-						if (state.col) {
+						if (state.col) {i
 							Ext.each(state.col, function (item, index, arry) {
 								Ext.iterate(item, function (key, citem, o) {
 									var c = citem;
@@ -283,7 +289,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 									var cronk = Cronk.factory(c);
 						
 									PortalHandler.initPortlet(cronk);
-
+									AppKit.log("adding ",cronk);	
 									this.get(index).add(cronk);
 
 									cronk.show();
