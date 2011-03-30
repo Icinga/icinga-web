@@ -88,6 +88,10 @@ cp -r etc/schema %{buildroot}%{_datadir}/icinga-web/etc/schema
 %pre
 ##############################
 
+# Add apacheuser in the icingacmd group
+  /usr/sbin/usermod -a -G icingacmd %{apacheuser}
+
+
 #uncomment if building from git
 #%{__rm} -rf %{buildroot}%{_datadir}/icinga-web/.git
 
