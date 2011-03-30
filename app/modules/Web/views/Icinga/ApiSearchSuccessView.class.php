@@ -10,20 +10,24 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView
 	
 	public function executeJson(AgaviRequestDataHolder $rd) 
 	{
-		$count = $rd->getParameter("searchCount");
-		// just return the entities
-		if(!$rd->getParameter("withMeta",false) && !$count)
-			return json_encode($rd->getParameter("searchResult",null));
-		
-		// provide meta data for ExtJs stores
 		$searchResult = $rd->getParameter("searchResult");
-		$meta = $this->getMetaDataArray($rd); 
+		
+		$result = array(
+			"result" => $searchResult,
+			"success" => "true"
+		);
+			
+		if (false !== $rd->getParameter("withMeta", false)) {
+			// Configure ExtJS' JsonReader
+			$result["metaData"] = $this->getMetaDataArray($rd);
+		}
+		
 		$count = $rd->getParameter("searchCount");
-		$result = array("metaData" => $meta,"result"=>$searchResult,"success"=>"true");
-		if($count) {
+		if ($count) {
 			$count = array_values($count[0]);
 			$result["total"] = $count[0];
 		}
+
 		return json_encode($result);
 	}
 

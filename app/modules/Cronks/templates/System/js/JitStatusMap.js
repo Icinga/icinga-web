@@ -50,9 +50,9 @@ function JitStatusMap (config) {
 
 	function jitInit (json, elementIds) {
 		var infovis = document.getElementById(elementIds.jitMap);
-		
-		var panel = Ext.DomQuery.selectNode('.x-panel-body',infovis);	
-		
+		if(!infovis)
+			return true;
+		var panel = Ext.DomQuery.selectNode('.x-panel-body',infovis);		
 		if(panel) {
 			var pElem = Ext.get(panel);
 			pElem.setHeight(infovis.offsetHeight);

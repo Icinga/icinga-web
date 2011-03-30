@@ -1,7 +1,8 @@
 #!/bin/sh
-if type -P phpunit &> /dev/null == 0
+PHPUNIT=$(which phpunit)
+if [ -x ${PHPUNIT} ]
 then
-	phpunit --verbose --configuration=config/suites.xml 
+	${PHPUNIT} --verbose --configuration=config/suites.xml 
 else
-	echo "You need the newest phpunit package from pear in order to run the tests!"
+	echo "Sorry, PHPUnit not found."
 fi

@@ -108,10 +108,9 @@
 				<ae:parameter name="export">filters</ae:parameter>
 			</validator>
 			
-			<validator name="withMeta" class="set" required="false">
-				<argument>withMeta</argument>
-
-			</validator>
+            <validator name="withMeta" class="boolean" required="false">
+                <argument>withMeta</argument>
+            </validator>
 		</validators>
 		
 		<validators method="read">

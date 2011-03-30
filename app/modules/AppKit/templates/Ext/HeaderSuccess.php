@@ -106,11 +106,34 @@ Ext.onReady(function() {
 					border: false,
 					autoEl: 'div',
 					frame: false,
-		            style: 'background-image: url('+AppKit.c.path + '/images/icinga/idot-small.png);background-repeat:no-repeat;width: 27px;text-align:center; height: 30px; margin-left: 15px;margin-top:0px; display: block;'
+		            cls: 'menu-logo-icon',
+					style: 'background-image: url('+AppKit.c.path + '/images/icinga/idot-small.png);background-repeat:no-repeat;width: 27px;text-align:center; height: 30px; margin-left: 15px;margin-top:0px; display: block;'
 	    		}
 			}]
 		}, null, 'north');
-		
+	
+		Ext.Ajax.on("beforerequest",function() {
+			try {
+				var icon = Ext.DomQuery.selectNode('.menu-logo-icon');
+				if(!icon)
+					return true;
+				Ext.get(icon).setStyle('background-image','url('+AppKit.c.path+'/images/ajax/icinga-throbber.gif)');
+			} catch(e) {
+				// ignore any errors
+			}
+		});
+		Ext.Ajax.on("requestcomplete",function() {
+			try {
+				var icon = Ext.DomQuery.selectNode('.menu-logo-icon');
+				if(!icon)
+					return true;
+				Ext.get(icon).setStyle('background-image','url('+AppKit.c.path+'/images/icinga/idot-small.png)');
+			} catch(e) {
+				// ignore any errors
+			}
+		});
+
+
 		earry.items.get(1).on('render', function(c) {
 			c.getEl().on('click', function() {
 				AppKit.changeLocation('http://www.icinga.org');

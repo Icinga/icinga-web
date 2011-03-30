@@ -14,6 +14,10 @@ app/config/factories.site.xml
 app/modules/Web/config/icinga-io.xml
 app/modules/AppKit/cache/Widgets/SquishLoader.xml
 app/modules/Api/lib/.ssh/*
+app/modules/Api/config/module.site.xml
+app/modules/AppKit/config/module.site.xml
+app/modules/Web/config/module.site.xml
+app/modules/Cronks/config/module.site.xml
 bin/clearcache.sh
 icinga-web.session
 icinga-web.webprj
@@ -28,3 +32,4 @@ pub/soap/.htaccess
 icinga-web.mwb.bak
 *~
 *.swp
+

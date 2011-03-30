@@ -241,6 +241,8 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
 		$this->log('Auth.Dispatch: User %s not found, try to import', $username, AgaviLogger::DEBUG);
 		
+		$padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
+		
 		foreach ($this->provider_keys as $pid) {
 			$provider = $this->getProvider($pid);
 			if ($provider->canCreateProfile()) {
@@ -263,6 +265,14 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 					 			$user->NsmRole[] = $group;
 					 		}
 					 	}
+					 	
+					 	
+					 	$padmin->updatePrincipalValueData(
+						 	$user->NsmPrincipal,
+						 	array(),
+						 	array()
+					 	);
+					 	
 	
 					 	$user->save();
 	
