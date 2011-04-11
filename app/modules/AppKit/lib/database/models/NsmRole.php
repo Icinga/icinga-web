@@ -13,8 +13,8 @@ class NsmRole extends BaseNsmRole
 
 		parent::setUp();
 
-		$this->hasMany('NsmUser', array (	'local'		=> 'usro_user_id',
-											'foreign'	=> 'usro_role_id',
+		$this->hasMany('NsmUser', array (	'local'		=> 'usro_role_id',
+											'foreign'	=> 'usro_user_id',
 											'refClass'	=> 'NsmUserRole'));
 
         $options = array (
