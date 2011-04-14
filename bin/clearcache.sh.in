@@ -32,29 +32,29 @@ fi
 
 echo "Basedir: $PREFIX"
 
-CCDIR="$PREFIX/app/cache/config"
-CC_FILES=$(ls $CCDIR/*.php 2>/dev/null | wc -l)
+CCDIR="$PREFIX/app/cache/config $PREFIX/app/modules/AppKit/cache/* $PREFIX/app/modules/Cronks/cache/*"
 
-if [[ $CC_FILES -gt 0 ]]; then
+for CUR_CDIR in $CCDIR; do
+	CC_FILES=$(ls $CUR_CDIR/*.php 2>/dev/null | wc -l)
+	if [[ $CC_FILES -gt 0 ]]; then
 
-	msg_start "Deleting config cache ($CC_FILES files)"
-	
-	rm $CCDIR/*php > /dev/null 2>&1
-	
-	msg_result
-	
-fi
-
-COCDIR="$PREFIX/app/cache/content"
+		msg_start "Deleting config cache ($CC_FILES files)"
+		
+		rm $CUR_CDIR/*php > /dev/null 2>&1
+		
+		msg_result
+		
+	fi
+done
+CODIR="$PREFIX/app/cache/content"
 
 if [[ -e $CODIR ]]; then
 
-	msg_start "Deleting content cache dir"
+	msg_start "Deleting additionak cache dirs"
 	
 	rm -r $CODIR > /dev/null 2>&1
 	
-	msg_result
-	
+	msg_result	
 fi
 
 if [[ $NOTHING == true ]]; then
