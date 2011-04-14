@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 #
 # updatepo.sh - generates all language files

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 DIR=$(dirname $(dirname $0))
 PHING=$DIR/lib/phing/bin/phing

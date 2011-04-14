@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 ob_start();
 require_once 'PHPUnit/Framework.php';
