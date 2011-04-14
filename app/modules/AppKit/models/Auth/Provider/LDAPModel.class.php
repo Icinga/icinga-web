@@ -68,7 +68,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 		if (is_array($data)) {
 			$re = (array)$this->mapUserdata($data);
 			$re['user_authid'] = $data['dn'];
-			$re['user_name'] = $data[$this->getParameter('ldap_userattr', 'uid')];
+			$re['user_name'] = strtolower($data[$this->getParameter('ldap_userattr', 'uid')]);
 			$re['user_disabled'] = 0;
 		}
 		
