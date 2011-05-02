@@ -4,10 +4,9 @@
 // ---
 
 var IcingaCommandHandler = function(meta) {
-	
 	this.toolbaritem = undefined;
-	
-	this.meta = undefined;
+
+	this.meta = undefined;	
 	
 	this.command_options = {};
 	
@@ -180,7 +179,21 @@ IcingaCommandHandler.prototype = {
 						{boxLabel: _('No'), inputValue: 0, name: o.fieldName, checked: true}
 					]
 				});
-				
+				if(o.fieldName == "fixed") {
+					var affectedForms = ['duration','duration-minute','duration-hour'];
+					oDef.listeners = {
+						change: function(rg, checkedBox) {	
+							for(var i=0;i<affectedForms.length;i++) {
+								var m = form.getForm().findField(affectedForms[i])
+							
+								if(m) {
+									checkedBox.initialConfig.boxLabel == _('Yes') ? m.setReadOnly(true) : m.setReadOnly(false);
+									checkedBox.initialConfig.boxLabel == _('Yes') ? m.container.hide() : m.container.show();
+								}
+							}
+						}	
+					}
+				}	
 				return new Ext.form.RadioGroup(oDef);
 			break;
 			
