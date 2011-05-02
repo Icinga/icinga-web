@@ -203,11 +203,11 @@ Cronk.util.InterGridUtil = function(){
 				config.iconCls = 'icinga-cronk-icon-cube';
 			}
 		
-			if (!panel) {
+			if (!panel && !config.allowDuplicate) {
 				for(var i=0;i<tabs.items.items.length;i++) {
 				
 					var item = tabs.items.items[i];	
-					if(item.title == config.title) {
+					if(item.title == config.title) {		
 						panel = item;
 					}
 				}

@@ -253,7 +253,7 @@ Cronk.util.SearchHandler =  function(c) {
 			var filter = {};
 			
 			
-			var id = (type || 'empty') + 'searchResultComponent';
+			var id = (type || 'empty') + 'searchResultComponent'+Ext.id();
 			
 			switch (type) {
 				case 'host':
@@ -291,6 +291,7 @@ Cronk.util.SearchHandler =  function(c) {
 				title: 'Search result ' + type,
 				crname: 'gridProc',
 				closable: true,
+				allowDuplicate: true,
 				params: params
 			};
 			
