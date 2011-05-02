@@ -330,7 +330,7 @@
 										images/icons/application-monitor.png
 									</tpl>
 									<tpl if="service_icon != ''" />
-										{service_icon}
+										images/icinga/{service_icon}
 									</tpl>
 
 								]]>
