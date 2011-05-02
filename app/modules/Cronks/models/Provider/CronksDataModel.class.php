@@ -220,6 +220,17 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return false;
 	}
 	
+	private function checkPrincipals($listofprincipals) {
+		$principals = AppKitArrayUtil::trimSplit($listofprincipals);
+		if (is_array($principals)) {
+			foreach($principals as $principal) {
+				if($this->agaviUser->hasCredential($principal))
+					return true;
+			}
+		}	
+		return false;
+	}
+
 	private function getXmlCronks($all=false) {
 		$cronks = AgaviConfig::get('modules.cronks.cronks');
 		
@@ -230,6 +241,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			if (isset($cronk['groupsonly']) && $this->checkGroups($cronk['groupsonly']) !== true) {
 				continue;
 			}
+			elseif(isset($cronk['principalsonly']) && $this->checkPrincipals($cronk['principalsonly']) !== true) {
+				continue;
+			} 
 			elseif (isset($cronk['disabled']) && $cronk['disabled'] == true) {
 				continue;
 			}
@@ -241,7 +255,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				continue;
 			}
 			
-			
+
 			$out[$uid] = array (
 				'cronkid'		=> $uid,
 				'module'		=> $cronk['module'],

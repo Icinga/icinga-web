@@ -100,7 +100,7 @@ Cronk.grid.ColumnRenderer = {
 			delete metaData.attr;
 			
 			if (!('image' in my) || !my["image"]) {
-				return '[no image defined (attr=image)]';
+				return '';//[no image defined (attr=image)]';
 			}
 			else {
 				var imgName = new Ext.XTemplate(my.image).apply(record.data);
