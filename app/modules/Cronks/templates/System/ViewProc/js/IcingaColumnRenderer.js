@@ -56,13 +56,14 @@ Cronk.grid.IcingaColumnRenderer = {
 					},
 					cfg.processedFilterData
 				);
-				
+
 				Icinga.util.SimpleDataProvider.createToolTip({
 					title: cfg.title,
 					target: e.getTarget(),
 					srcId: cfg.src_id,
 					width: 400,
-					delay: cfg.delay || 15000,
+					autoHide: false,	
+					delay: typeof cfg.delay != "undefined" ? cfg.delay :2000,
 					filter: cfg.processedFilterData
 				});
 
