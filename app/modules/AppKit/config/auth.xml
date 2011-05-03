@@ -133,14 +133,14 @@
 				<ae:parameter name="user_email">mail</ae:parameter> 
 			</ae:parameter>
 																					
-			<ae:parameter name="ldap_dsn">ldap://ad.icinga.org</ae:parameter>
-			<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=org</ae:parameter>
-			<ae:parameter name="ldap_binddn">ldap@AD.ICINGA.ORG</ae:parameter>
-			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
-			<ae:parameter name="ldap_userattr">sAmAccountName</ae:parameter>
-			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAmAccountName=__USERNAME__))]]></ae:parameter>
+			<ae:parameter name="ldap_dsn">ldap://ad.icinga.foo</ae:parameter>
+			<ae:parameter name="ldap_basedn">DC=ad,DC=icinga,DC=foo</ae:parameter>
+			<ae:parameter name="ldap_binddn">serviceuser@AD.ICINGA.FOO</ae:parameter>
+			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXX]]></ae:parameter>
+			<ae:parameter name="ldap_userattr">sAMAccountName</ae:parameter>
+			<ae:parameter name="ldap_filter_user"><![CDATA[(&(sAMAccountName=__USERNAME__))]]></ae:parameter>
 		</ae:parameter>
-		 -->
+		-->
 		 
 		<!--
 		 	* LDAP (Again)

@@ -15,12 +15,17 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 		$this->log('Auth.Provider.LDAP Trying authenticate (authkey=%s,user=%s)', $authid, $username, AgaviLogger::DEBUG);
 		
 		try {
-			$conn = $this->getLdapConnection(false);
-			$re = @ldap_bind($conn, $authid, $password);
-			
-			if ($this->isLdapError($conn)==false && $re === true && ldap_errno($conn) === 0) {
-				$this->log('Auth.Provider.LDAP Successfull bind (authkey=%s,user=%s)', $authid, $username, AgaviLogger::DEBUG);
-				return true;
+			// Check if user always is available
+			$search_record = $this->getLdaprecord($this->getSearchFilter($user->user_name), $authid);
+			if (isset($search_record['dn']) && $search_record['dn'] === $authid) {
+				// Check bind
+				$conn = $this->getLdapConnection(false);
+				$re = @ldap_bind($conn, $authid, $password);
+				
+				if ($this->isLdapError($conn)==false && $re === true && ldap_errno($conn) === 0) {
+					$this->log('Auth.Provider.LDAP Successfull bind (authkey=%s,user=%s)', $authid, $username, AgaviLogger::DEBUG);
+					return true;
+				}
 			}
 		}
 		catch (AgaviSecurityException $e) {
@@ -68,6 +73,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 		if (is_array($data)) {
 			$re = (array)$this->mapUserdata($data);
 			$re['user_authid'] = $data['dn'];
+			
 			$re['user_name'] = strtolower($data[$this->getParameter('ldap_userattr', 'uid')]);
 			$re['user_disabled'] = 0;
 		}
