@@ -54,6 +54,7 @@
 					<ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
 					<ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
 					<ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
+					<ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
 				</setting>
 				
 				<!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
