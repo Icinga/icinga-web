@@ -83,28 +83,28 @@ Icinga.util.SimpleDataProvider = (function () {
 				if (!Ext.isEmpty(toolTip)) {
 					toolTip.destroy();
 				}
-				
 				toolTip = new Ext.ToolTip({
 					width: config.width,
-					dismissDelay: config.delay,
+					dismissDelay: 0,
+					hideDelay: config.delay || 2000,
 					closable: config.closable,
 					anchor: config.anchor,
-					target: config.target,
-					dismissDelay: 5000,
-					hideDelay: 1000,
-					draggable: true,
-					autoHide: true,
+					target: config.target,	
+					draggable: true,	
 					title: (!Ext.isEmpty(config.title)) ? _(config.title) : '' 
 				});
-				
-				toolTip.render(Ext.getBody());
-				
-				toolTip.getEl().on('mouseover', function(e) {
-					// set the tooltip as the new target and clear
-					// the autoHide timer.
-					toolTip.initTarget(toolTip.getEl());
-					toolTip.showAt([]); 
+			
+				// change tooltip timers when hovering target DOM
+				toolTip.on("render",function(tTip) {
+					tTip.getEl().on("mousemove",function() {
+						tTip.clearTimer('dismiss');
+						tTip.clearTimer('hide');
+					});	
+					tTip.getEl().on("mouseout",function() {
+						tTip.onTargetOut.apply(tTip,arguments);
+					});	
 				});
+				toolTip.render(Ext.getBody());	
 				
 				toolTip.getUpdater().update({
 					url: pub.getUrl(),
