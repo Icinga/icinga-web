@@ -68,7 +68,9 @@
 					<ae:parameter>/js/ext3/examples/ux/css/ux-all.css</ae:parameter>
 					
 					<!-- layout styles -->
+				
 					<ae:parameter>/styles/icinga.css</ae:parameter>
+					<ae:parameter>/styles/icinga.site.css</ae:parameter>
 					<ae:parameter>/styles/icinga-icons.css</ae:parameter>
 					<ae:parameter>/styles/icinga-cronk-icons.css</ae:parameter>
 				</setting>

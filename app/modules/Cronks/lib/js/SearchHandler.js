@@ -249,7 +249,10 @@ Cronk.util.SearchHandler =  function(c) {
 			var re = grid.getStore().getAt(rowIndex);
 			var type = re.data.type;
 			
-			var params = {};
+			var params = {	
+				module: 'Cronks',
+				action: 'System.ViewProc'
+			};
 			var filter = {};
 			
 			

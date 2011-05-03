@@ -30,6 +30,7 @@
 					<ae:parameter name="config_user">@api_db_user@</ae:parameter>
 					<ae:parameter name="config_password">@api_db_pass@</ae:parameter>
 					<ae:parameter name="config_table_prefix">@api_db_prefix@</ae:parameter>
+					<ae:parameter name="config_config_type">1</ae:parameter>
 					<!-- ###END_CONNECTION_IDO### -->
 
 					<!-- ###BEGIN_CONNECTION_LIFESTATUS### -->
