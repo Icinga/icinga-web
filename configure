@@ -2274,7 +2274,21 @@ fi
 if test "${with_web_apache_path+set}" = set; then :
   withval=$with_web_apache_path; web_apache_path=$withval
 else
-  web_apache_path=/etc/apache2/conf.d
+  web_apache_path=
+	web_apache_path=/etc/apache2/conf.d
+	for x in /etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d; do
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if path $x exists" >&5
+$as_echo_n "checking if path $x exists... " >&6; }
+		if test -d $x; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
+$as_echo "found" >&6; }; web_apache_path=$x; break
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
+$as_echo "not found" >&6; }
+
+fi
+	done
+
 
 fi
 
