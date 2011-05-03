@@ -80,7 +80,11 @@
         			<parameter name="title">Schedule next service check</parameter>
         			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
-        		<parameter name="PROCESS_SERVICE_CHECK_RESULT">
+        		<parameter name="SCHEDULE_FORCED_SVC_CHECK">
+        			<parameter name="title">Schedule forced service check</parameter>
+        			<parameter name="icon_class">icinga-icon-cog</parameter>
+        		</parameter>
+				<parameter name="PROCESS_SERVICE_CHECK_RESULT">
         			<parameter name="title">Process service check result</parameter>
         			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
