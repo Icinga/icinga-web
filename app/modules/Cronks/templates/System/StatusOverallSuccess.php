@@ -25,7 +25,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 
 	ds.load();
 
-	var interval = <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>;
+	var interval = <?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>;
 	
 	var statusOverallRefreshTask = {
 		run: function() { ds.reload(); },
