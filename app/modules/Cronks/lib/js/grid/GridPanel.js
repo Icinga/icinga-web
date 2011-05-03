@@ -6,6 +6,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	filter: {},
 	
 	initComponent : function() {
+		this.addEvents('autorefreshchange');	
+		this.autoRefreshEnabled = null;
 		this.tbar = this.buildTopToolbar();
 		
 		_G = this;
@@ -23,6 +25,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				}
 			});
 		}		
+		
+		
 		Cronk.grid.GridPanel.superclass.initComponent.call(this);
 	},
 
@@ -51,20 +55,21 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						checked: autoRefreshDefault,
 						checkHandler: function(checkItem, checked) {
 							if (checked == true) {
-							
-									this.trefresh = AppKit.getTr().start({
-										run: function() {	
-											this.refreshGrid();				
-										},
-										interval: (autoRefresh*1000),
-										scope: this
-									});
-						
-							}
-							else {
-								AppKit.getTr().stop(this.trefresh);
-								delete this.trefresh;
+								this.startRefreshTimer();	
+							} else {
+								this.stopRefreshTimer();	
 							}	
+						},
+						listeners: {
+							render: function(btn) {
+								if(this.autoRefreshEnabled !== null)
+									btn.setChecked(this.autoRefreshEnabled,true);
+								this.on("autorefreshchange",function(v) {			
+									btn.setChecked(v,true);
+								});
+							},
+							scope:this
+
 						},
 						scope: this
 					},{
@@ -107,14 +112,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			}],
 			listeners: {
 				render: function(cmp) {
-					if(autoRefreshDefault) {	
-						this.trefresh = AppKit.getTr().start({
-							run: function() {
-								this.refreshGrid();
-							},
-							interval: (autoRefresh*1000),
-							scope: this
-						});
+					if(autoRefreshDefault && this.autoRefreshEnabled === null) {	
+						this.startRefreshTimer();
 					}
 				},
 				scope: this			
@@ -166,9 +165,34 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	setFilter : function(f) {
 		this.filter = f;
 	},
+	stateEvents: ['autorefreshchange','activate', 'columnmove ', 'columnresize', 'groupchange', 'sortchange'],
 	
-	stateEvents: ['activate', 'columnmove ', 'columnresize', 'groupchange', 'sortchange'],
+	startRefreshTimer: function() {
+		var autoRefresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
+		this.stopRefreshTimer();
+		
+		this.trefresh = AppKit.getTr().start({
+			run: function() {
+				this.refreshGrid();
+			},
+			interval: (autoRefresh*1000),
+			scope: this
+		});
+		this.autoRefreshEnabled = true;
+		this.fireEvent('autorefreshchange',true);
+	},
+
+	stopRefreshTimer: function(noVisualUpdate) {
+		if(this.trefresh) {
+			AppKit.getTr().stop(this.trefresh);
+			delete this.trefresh;
+		}
+		this.autoRefreshEnabled = false;
+		if(!noVisualUpdate) {
+			this.fireEvent('autorefreshchange',false);
+		}
 	
+	},
 	getPersistentColumnModel : function() {
 		
 		o = {};
@@ -217,12 +241,17 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	getState: function() {
 		var store = this.getStore();
-	
+		var aR = null;
+		if(this.autoRefreshEnabled === true)
+			aR = 1;
+		if(this.autoRefreshEnabled === false)
+			aR = -1;
 		var o = {
 			filter_params: this.filter_params || {},
 			filter_types: this.filter_types || {},
 			store_origin_params: ("originParams" in store) ? store.originParams : {},
-			colModel: this.getPersistentColumnModel()
+			colModel: this.getPersistentColumnModel(),
+			autoRefresh: aR
 		};
 		
 		return o;
@@ -252,6 +281,12 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			reload = true;
 		}
 		
+		if (state.autoRefresh == 1) {
+			this.startRefreshTimer();
+		} else if (state.autoRefresh == -1) {
+			this.stopRefreshTimer();
+		}
+
 		if (reload == true) {
 			
 			this.refreshGrid();
