@@ -114,7 +114,7 @@ function JitStatusMap (config) {
 					case "2":
 						node.data.$color = "#ff8000";
 						break;
-					case "3":
+					case "99":
 						node.data.$color = "#aa3377";
 						break;
 				}

@@ -291,6 +291,7 @@
        	</parameter>
        	
        	<parameter name="additional_filter_fields">
+			<parameter name="host_is_pending">HOST_IS_PENDING</parameter>
        		<parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
        		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
 			<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
@@ -1038,9 +1039,7 @@
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                 
                 </parameter>
                 
             </display>

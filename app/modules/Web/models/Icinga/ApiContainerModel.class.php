@@ -151,7 +151,7 @@ implements AgaviISingletonModel {
 				$capi[ substr($ckey, 7) ] = $cdata;
 			}
 		}
-		
+
 		$this->apiData = IcingaApi::getConnection($type, $capi);
 		
 		return true;

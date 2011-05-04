@@ -232,8 +232,10 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			
 		}, this);
 	},
-	refreshGrid: function() {
-		if(!this.store)
+	refreshTask: new Ext.util.DelayedTask(function() {
+		//NOTE: hidden tabs won't be refreshed
+	
+		if(!this.store || this.ownerCt.hidden)
 			return true;
 		if(Ext.isFunction((this.getTopToolbar() || {}).doRefresh)) {
 			this.getTopToolbar().doRefresh();
@@ -242,7 +244,10 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		} else if(this.getStore()) {	
 			this.getStore().reload();
 		}
-	
+	}),
+
+	refreshGrid: function() {
+		this.refreshTask.delay(200,null,this);
 	},
 	getState: function() {
 		var store = this.getStore();

@@ -13,13 +13,14 @@ class IcingaServiceStateInfo extends IcingaStateInfo {
 		IcingaConstants::STATE_WARNING	=> 'WARNING',
 		IcingaConstants::STATE_CRITICAL	=> 'CRITICAL',
 		IcingaConstants::STATE_UNKNOWN	=> 'UNKNOWN',
+		IcingaConstants::STATE_PENDING	=> 'PENDING',
 	);
 
 	protected $colors = array (
 		IcingaConstants::STATE_OK		=> '00cc00',
 		IcingaConstants::STATE_WARNING	=> 'ffff00',
 		IcingaConstants::STATE_CRITICAL	=> 'ff0000',
-		IcingaConstants::STATE_UNKNOWN	=> 'ff8000',
+		IcingaConstants::STATE_PENDING	=> 'aa77ff',
 	);
 	
 	/**

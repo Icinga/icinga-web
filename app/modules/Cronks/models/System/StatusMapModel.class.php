@@ -62,7 +62,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel
 
 		foreach ($apiResHosts as $row) {
 			if($row['HOST_IS_PENDING'] == '1') {
-				$row['HOST_CURRENT_STATE'] = "3";	
+				$row['HOST_CURRENT_STATE'] = "99";	
 			}
 			$objectId = $idPrefix . $row['HOST_OBJECT_ID'];
 			$hosts[$objectId] = array(

@@ -444,9 +444,7 @@
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+           
                 </parameter>
             </display>
             

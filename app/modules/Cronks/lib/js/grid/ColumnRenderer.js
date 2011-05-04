@@ -49,6 +49,8 @@ Cronk.grid.ColumnRenderer = {
 	},
 	
 	truncateText : function(cfg) {
+		var defaultLength = AppKit.getPrefVal('org.icinga.grid.outputLength') || 70;
+		
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(!value) 
 				return "";
@@ -56,7 +58,7 @@ Cronk.grid.ColumnRenderer = {
 			if(value.match(/<.*?>(.*?)<\/.*?>/g))
 				return value;
 
-			var out = Ext.util.Format.ellipsis(value, (cfg.length || 50));
+			var out = Ext.util.Format.ellipsis(value, (cfg.length || defaultLength));
 			if (out.indexOf('...', (out.length-3)) != -1) {
 				// @todo Check if html encoding brings some trouble
 				metaData.attr = 'ext:qtip="' + value + '"';
@@ -132,10 +134,9 @@ Cronk.grid.ColumnRenderer = {
 	},
 	
 	serviceStatus : function(cfg) {
-		return function(value, metaData, record, rowIndex, colIndex, store) {
-		
+		return function(value, metaData, record, rowIndex, colIndex, store) {	
 			if(Ext.isDefined(record.json.service_is_pending)) {
-				if(record.json.service_is_pending == 1)
+				if(record.json.service_is_pending != -1)
 					value=99;
 			}
 			if(!Ext.isDefined(value))
@@ -147,7 +148,7 @@ Cronk.grid.ColumnRenderer = {
 	hostStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(Ext.isDefined(record.json.host_is_pending)) {
-				if(record.json.host_is_pending == 1)
+				if(record.json.host_is_pending != -1)
 					value=99;
 			}
 			if(!Ext.isDefined(value))

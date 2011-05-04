@@ -277,7 +277,7 @@
        		<parameter name="notifications_enabled">SERVICE_NOTIFICATIONS_ENABLED</parameter>
 			<parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
 			<parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
-
+			<parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
 			<!-- Stupid filter mapping -->
 			<parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="customvariable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
@@ -979,10 +979,7 @@
                 
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                	<parameter name="function">truncateText</parameter> 
                 </parameter>
             </display>
         	

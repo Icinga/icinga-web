@@ -49,6 +49,7 @@
 				<setting name="user_preferences_default">
 					<ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
 					<ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
+					<ae:parameter name="org.icinga.grid.outputLength">70</ae:parameter>
 					<ae:parameter name="org.icinga.tabslider.changeTime">10</ae:parameter>
 					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
 					<ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
