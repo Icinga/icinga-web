@@ -179,13 +179,15 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 							}
 						});
 					}
-				}, {
+				},'-', {
 					text: _("Expand"),
 					id: tp.id +'-expand',
 					iconCls: 'icinga-icon-arrow-out',
 					
 					handler: function() {
 						this.setFullscreen(true);
+						this.contextmenu.hide();
+						
 					},
 					scope: this
 				},{
@@ -198,14 +200,14 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 					},
 					scope: this
 
-				},{
+				},'-',{
 					text: _("Rename"),
 					id: tp.id + '-rename',
 					iconCls: 'icinga-icon-table-edit',
 					handler: this.renameTab,
 					scope: this
-				}, {
-					text: _("Refresh"),
+				},{
+					text: _("Reload cronk"),
 					tooltip: _("Reload the cronk (not the content)"), 
 					iconCls: 'icinga-icon-arrow-refresh',
 					handler: function() {

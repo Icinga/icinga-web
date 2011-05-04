@@ -24,10 +24,13 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						_G.getGridEl().child('div').removeClass('x-icinga-nodata');
 				}
 			});
-		}		
-		
-		
+		}			
 		Cronk.grid.GridPanel.superclass.initComponent.call(this);
+		this.on("show",function() {
+			if(this.autoRefreshEnabled)
+				this.startRefreshTimer();
+		},this);
+	
 	},
 
 	/*
@@ -115,6 +118,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if(autoRefreshDefault && this.autoRefreshEnabled === null) {	
 						this.startRefreshTimer();
 					}
+				
+				
 				},
 				scope: this			
 			}
@@ -301,6 +306,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}
 	}
 	
+
+
 });
 
 Ext.reg('cronkgrid', Cronk.grid.GridPanel);

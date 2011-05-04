@@ -108,7 +108,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.TabPanel, {
 	
 	listeners: {
 		tabchange: function(tab) {
-			var aTab = tab.getActiveTab();
+			var aTab = tab.getActiveTab();	
 			document.title = "Icinga - "+aTab.title;
 		}
 	}

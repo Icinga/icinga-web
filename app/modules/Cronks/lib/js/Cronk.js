@@ -186,7 +186,15 @@ Cronk.defaults.CONFIG_COPY = [
 				lcmp.on('afterrender', this.onComponentRender, this, { single: true });
 				lcmp.on('added', this.onComponentAdded, this);
 			}
-			
+
+			// inform the actual cronk items about the 'show' event
+			lcmp.on('show',function() {
+				if(this.items)
+					this.items.each(function(i) {
+						if(i.fireEvent)
+							i.fireEvent("show",i);
+					})
+			},lcmp);	
 			lcmp.on('destroy', this.onComponentDestroy, this);
 		},
 		
