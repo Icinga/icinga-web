@@ -70,6 +70,7 @@
 			#loc: HOST_DISPLAY_NAME
 			#loc: HOST_CURRENT_STATE
 			#loc: HOST_OUTPUT
+			#loc: HOST_LONG_OUTPUT
 			#loc: HOST_PERFDATA
 			#loc: HOST_CURRENT_CHECK_ATTEMPT
 			#loc: HOST_MAX_CHECK_ATTEMPTS
@@ -110,6 +111,9 @@
 				</ae:parameter>
 				<ae:parameter>
 					<ae:parameter name="field">HOST_OUTPUT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">HOST_LONG_OUTPUT</ae:parameter>
 				</ae:parameter>
 				<ae:parameter>
 					<ae:parameter name="field">HOST_PERFDATA</ae:parameter>
@@ -192,6 +196,7 @@
 			#loc: SERVICE_DISPLAY_NAME
 			#loc: SERVICE_CURRENT_STATE
 			#loc: SERVICE_OUTPUT
+			#loc: SERVICE_LONG_OUTPUT
 			#loc: SERVICE_PERFDATA
 			#loc: SERVICE_CURRENT_CHECK_ATTEMPT
 			#loc: SERVICE_MAX_CHECK_ATTEMPTS
@@ -222,6 +227,9 @@
 				</ae:parameter>
 				<ae:parameter>
 					<ae:parameter name="field">SERVICE_OUTPUT</ae:parameter>
+				</ae:parameter>
+				<ae:parameter>
+					<ae:parameter name="field">SERVICE_LONG_OUTPUT</ae:parameter>
 				</ae:parameter>
 				<ae:parameter>
 					<ae:parameter name="field">SERVICE_PERFDATA</ae:parameter>
