@@ -9,7 +9,7 @@ class AppKit_LogoutSuccessView extends AppKitBaseView
 		$this->setAttribute('title', 'Logout');
 		
 		
-		$this->getResponse()->setRedirect(AgaviConfig::get('org.icinga.appkit.web_path'));
+		$this->getResponse()->setRedirect(AgaviConfig::get('org.icinga.appkit.logout_path'));
 	}
 }
 
