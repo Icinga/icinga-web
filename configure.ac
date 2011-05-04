@@ -219,7 +219,7 @@ AC_ARG_WITH([api_cmd_file],
 )
 
 AC_ARG_WITH([api_cmd_instance],
-	AS_HELP_STRING([--with-api-cmd-instance=PATH], [Icinga default command instance name (default "default")]),
+	AS_HELP_STRING([--with-api-cmd-instance=NAME], [Icinga default command instance name (default "default")]),
 	api_cmd_instance=$withval,
 	api_cmd_instance=default
 )

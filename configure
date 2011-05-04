@@ -1324,7 +1324,7 @@ Optional Packages:
   --with-api-cmd-file=PATH
                           Icinga command file (default
                           /usr/local/icinga/var/rw/icinga.cmd)
-  --with-api-cmd-instance=PATH
+  --with-api-cmd-instance=NAME
                           Icinga default command instance name (default
                           "default")
   --with-devel-mode       Web devel mode (disable caching)
