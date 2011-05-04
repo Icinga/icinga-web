@@ -34,7 +34,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 	private $mapping = array (
 		'host'	=> array (
 			'target'		=> IcingaApi::TARGET_HOST,
-			'search'		=> 'HOST_NAME',
+			'search'		=> array('HOST_NAME', 'HOST_ALIAS', 'HOST_DISPLAY_NAME'),
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOST_NAME',
@@ -47,7 +47,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 		'service' => array (
 			'target'		=> IcingaApi::TARGET_SERVICE,
-			'search'		=> 'SERVICE_NAME',
+			'search'		=> array('SERVICE_NAME', 'SERVICE_DISPLAY_NAME'),
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICE_NAME',
@@ -61,7 +61,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 		'hostgroup' => array (
 			'target'		=> IcingaApi::TARGET_HOSTGROUP,
-			'search'		=> 'HOSTGROUP_NAME',
+			'search'		=> array('HOSTGROUP_NAME', 'HOSTGROUP_ALIAS'),
 		
 			'fields'		=> array (
 				'object_name'	=> 'HOSTGROUP_NAME',
@@ -72,7 +72,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 		
 		'servicegroup' => array (
 			'target'		=> IcingaApi::TARGET_SERVICEGROUP,
-			'search'		=> 'SERVICEGROUP_NAME',
+			'search'		=> array('SERVICEGROUP_NAME', 'SERVICEGROUP_ALIAS'),
 		
 			'fields'		=> array (
 				'object_name'	=> 'SERVICEGROUP_NAME',
@@ -138,9 +138,16 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 			$search = $this->api->createSearch()
 			->setSearchTarget($md['target'])
 			->setResultColumns(array_values($md['fields']))
-			->setSearchFilter($md['search'], $this->query, IcingaApi::MATCH_LIKE)
 			->setResultType(IcingaApi::RESULT_ARRAY)
 			->setSearchLimit(0, AgaviConfig::get('modules.cronks.search.maximumResults', 200));
+			
+			$search_group = $search->createFilterGroup(IcingaApi::SEARCH_OR);
+			
+			foreach ($md['search'] as $search_field) {
+				$search_group->addFilter($search->createFilter($search_field, $this->query, IcingaApi::MATCH_LIKE));
+			}
+			
+			$search->setSearchFilter($search_group);
 			
 			// Limiting results for security
 			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
