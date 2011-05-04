@@ -1,12 +1,59 @@
 <script type="text/javascript">
-var _parent = "<?php echo $rd->getParameter('parentid'); ?>";
-var _filter = "<?php echo $rd->getParameter('p[filters]'); ?>";
-var _bpConfig = "<?php echo $rd->getParameter('p[bpConfig]'); ?>";
-var _bpInfoTabs = <?php echo $rd->getParameter('p[externalTabs]','[]') ?>;
-
 // This is the init method called when the cronk environment is ready
-Cronk.util.initEnvironment(_parent, function() {
+Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 	Ext.Msg.minWidth = 250;
+
+	var _parent = "<?php echo $rd->getParameter('parentid'); ?>";
+	var _filter = "<?php echo $rd->getParameter('p[filters]'); ?>";
+	var _bpConfig = "<?php echo $rd->getParameter('p[bpConfig]'); ?>";
+	var _bpInfoTabs = <?php echo $rd->getParameter('p[externalTabs]','[]') ?>;
+	var _hideConfigSelector = "<?php echo $rd->getParameter('p[bpHideSelector]'); ?>";
+	
+	var getSelectorConfig = function() {
+		if (_hideConfigSelector == 'true') {
+			return {
+				xtype: 'tbtext',
+				text: _('Process') + ': ' + _bpConfig
+			};
+		}
+		else {
+			return {
+				/**
+				 * This combobox allows the user to switch beteween different config files
+				 */
+				xtype: 'combo',
+				width:150,
+				value: _('Default cfg'),
+				store: new Ext.data.JsonStore({
+				    autoLoad:true,
+				    url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
+				    baseParams: {
+				    	action: 'getConfigList'
+				    },
+				    fields: [
+				    	'filename', 
+				    	{name:'created',type:'date',dateFormat:'timestamp'},
+				    	{name:'last_modified',type:'date',dateFormat:'timestamp',format: "Y-m-d H:i:s"}
+				    ]
+				}),
+				displayField: 'filename',
+				valueField: 'filename',
+				triggerAction: 'all',
+				listeners: {
+					render: function(cmb) {
+						if(bpLoader.bp_config)
+							cmb.setValue(bpLoader.bp_config);						
+					},
+					select: function(cmb,rec,idx) {
+						bpLoader.bp_config = rec.get('filename');
+						cmb.ownerCt.ownerCt.handleStateChange();
+						root.reload();
+					},
+					scope:this
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Set up state vals and other needed variables like parentCmp
@@ -40,7 +87,7 @@ Cronk.util.initEnvironment(_parent, function() {
 		},
 		requestMethod:'GET',
 		filterManager: filterManager,
-		authKey: '<?php echo $t["authToken"]; ?>',
+		authKey: '<?php echo $t["authToken"]; ?>'
 		
 	})
 	// If there's a config globally written to the cronk, use it 
@@ -180,41 +227,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				}
 			},{
 				xtype: 'tbseparator'
-			},{
-				/**
-				 * This combobox allows the user to switch beteween different config files
-				 */
-				xtype: 'combo',
-				width:150,
-				value: _('Default cfg'),
-				store: new Ext.data.JsonStore({
-				    autoLoad:true,
-				    url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
-				    baseParams: {
-				    	action: 'getConfigList'
-				    },
-				    fields: [
-				    	'filename', 
-				    	{name:'created',type:'date',dateFormat:'timestamp'},
-				    	{name:'last_modified',type:'date',dateFormat:'timestamp',format: "Y-m-d H:i:s"}
-				    ]
-				}),
-				displayField: 'filename',
-				valueField: 'filename',
-				triggerAction: 'all',
-				listeners: {
-					render: function(cmb) {
-						if(bpLoader.bp_config)
-							cmb.setValue(bpLoader.bp_config);						
-					},
-					select: function(cmb,rec,idx) {
-						bpLoader.bp_config = rec.get('filename');
-						cmb.ownerCt.ownerCt.handleStateChange();
-						root.reload();
-					},
-					scope:this
-				}
-			},{
+			}, getSelectorConfig(), {
 				xtype: 'tbseparator'
 			},{
 				/**
@@ -690,7 +703,13 @@ Cronk.util.initEnvironment(_parent, function() {
 		
 	});
 
+	// Notify cronkbuilder for other state object
+	this.setStatefulObject(bpGridList);
 
+	// Saved state from the cronk builder
+	if (Ext.isObject(this.state)) {
+		bpGridList.applyState(this.state);
+	}
 
 	this.add({
 		xtype:'container',
@@ -714,7 +733,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			items: infoPanel
 		}]
 	});
-	this.doLayout();
+	this.doLayout.defer(300);
 });
 
 

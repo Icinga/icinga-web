@@ -43,14 +43,14 @@ Available targets:
 		
 		<!-- Install module and additional -->		
 		<echo>Installing to ${PATH_Icinga}</echo>
-		<copy todir="${PATH_Icinga}">
+		<copy overwrite="true" todir="${PATH_Icinga}">
 			<filterchain>
 				<filterreader classname="bin.saveCopyFilter"/>
 			</filterchain>
 			<fileset dir="src">
 				<exclude name="snippets.dat"></exclude>
 				<exclude name="routes.xml"></exclude>
-				<include name="**" />
+			<include name="**" />
 			</fileset>
 		</copy>	
 		
@@ -71,8 +71,9 @@ Available targets:
 		</if>
 		
 		<echo>Clearing cache</echo>
-		<delete dir="${PATH_Icinga}/app/cache/config" />	
+		<delete dir="${PATH_Icinga}/app/cache/*" />	
 		
+
 		<property name="buildAdditional" value="false" />
 		<available file="additional.xml" property="buildAdditional" value="true" />
 		<if>
@@ -81,6 +82,10 @@ Available targets:
 				<phing phingfile="additional.xml" inheritAll="true" />
 			</then>
 		</if>
+
+		<echo>
+		If, for any reason, your config is broken after installing this module, run the restoreConfig script (restoreConfig.sh). 
+		</echo>
 	</target>
 
 	

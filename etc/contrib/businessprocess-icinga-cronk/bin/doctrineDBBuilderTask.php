@@ -68,13 +68,14 @@ class doctrineDBBuilderTask extends Task {
 	 *
 	 */
 	public function buildDBFromModels() {	
+
 		$icinga = $this->project->getUserProperty("PATH_Icinga");
 		$modelPath = $icinga."/app/modules/".$this->project->getUserProperty("MODULE_Name")."/lib/";
 		
 		$appKitPath = $this->project->getUserProperty("PATH_AppKit");
 
-		Doctrine::loadModels($icinga."/".$appKitPath."database/models/generated");
-		Doctrine::loadModels($icinga."/".$appKitPath."database/models");
+		Doctrine::loadModels($icinga."/".$appKitPath."database/models/generated/");
+		Doctrine::loadModel($icinga."/".$appKitPath."database/models/");
 
 		$tables = Doctrine::getLoadedModels();
 		$tableList = array();
@@ -85,6 +86,7 @@ class doctrineDBBuilderTask extends Task {
 		Doctrine::createTablesFromModels(array($this->models.'/generated',$this->models));
 	
 		file_put_contents($modelPath."/.models.cfg",implode(",",$tableList));
+	
 	}
 	
 	/**

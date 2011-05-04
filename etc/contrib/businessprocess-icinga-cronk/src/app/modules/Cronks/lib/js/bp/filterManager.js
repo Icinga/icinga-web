@@ -1,4 +1,4 @@
-Ext.ns('Cronk.bp')
+Ext.ns('Cronk.bp');
 /**
  * Class that manages filters for the business process adapter cronk
  * The actual filtering is performed in the treegrid, so this only stores the filter types
@@ -79,12 +79,12 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 	addFilter : function(filter,noEvent) {
 		var filterId = Ext.id(null,"bp_filter");
 		this.activeFilters[filterId] = Ext.apply(filter,{
-			field: this.filterMap[filter["name"]],
-		})
+			field: this.filterMap[filter["name"]]
+		});
 
-		if(!noEvent)
+		if(!noEvent) {
 			this.fireEvent("filterChanged",this.getFilters());
-
+		}
 
 		return filterId;
 	},
@@ -142,13 +142,15 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 
 	removeFilter : function(id,noEvent) {
 		this.activeFilters[id] = null;
-		if(!noEvent)
+		if(!noEvent) {
 			this.fireEvent("filterChanged",this.getFilters());
+		}
 	},
 	removeAll : function(noEvent) {
-		this.activeFilters = {}
-		if(!noEvent)
+		this.activeFilters = {};
+		if(!noEvent) {
 			this.fireEvent("filterChanged",this.getFilters());
+		}
 	},
 
 	getFilters : function() {
@@ -165,7 +167,7 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 			values.field = [values.field];
 			values.operator = [values.operator];
 			values.value = [values.value];
-			values.value2 = values.value2 ? [values.value2] : ''
+			values.value2 = values.value2 ? [values.value2] : '';
 		}
 		
 		for(var i=0;i<values.field.length;i++) {
@@ -194,7 +196,7 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 				},
 				scope: this
 			}
-		}
+		};
 	},
 
 	filterWindow : function() {
@@ -274,9 +276,10 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 	 * @return Ext.form.ComboBox
 	 */
 	addFilterfield : function(value,container,preset) {
-		preset = preset || {}
-		if(!value)
+		preset = preset || {};
+		if(!value) {
 			return false;
+		}
 		value = value || preset.field;
 
 		var filterId = Ext.id('filterField');
@@ -306,9 +309,9 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 		 * then refactor
 		 */
 		var additionalOperator = 
-			(value.get('Type') == 'API' && value.get('api_secondary_field'))
-				? this.getOperatorField('text',preset["operator"])
-				: null;
+			(value.get('Type') == 'API' && value.get('api_secondary_field')) ?
+				this.getOperatorField('text',preset["operator"]) :
+				null;
 
 		if(additionalOperator) {
 			items.splice(2,0,additionalOperator);
@@ -320,7 +323,6 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 			id: filterId,
 			border: false,
 			style: 'padding: 2px;',
-			layout: 'column',
 			defaults: {
 				border: false,
 				style: 'padding: 2px;'
@@ -341,7 +343,7 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 	 */
 	getOperatorField : function(type,pre,value) {
 		// @ToDo: Not nice to add a special field here for one use case, refactor if there is further adjustment needed
-		var oCombo
+		var oCombo;
 		if(type == 'API') {
 			oCombo  = this.getAPIDrivenComboBox({
 				target: value.get('api_target'),
@@ -356,7 +358,7 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 				idIndex : 0,
 				fields : ['id', 'label'],
 				data : this.oOpList[type] || [],
-				triggerAction : 'all',
+				triggerAction : 'all'
 			}),
 
 			mode : 'local',
@@ -411,11 +413,13 @@ Cronk.bp.filterManager = Ext.extend(Ext.util.Observable,{
 				listeners: {
 					// Update to store values before loading
 					beforeload: function(store,options) {
-						if(!cfg.filters) 
+						if(!cfg.filters) {
 							return true;
+						}
 						if(cfg.filters.ctype) {
-							if(!cfg.filters.getValue())
+							if(!cfg.filters.getValue()) {
 								return false;
+							}
 							options.params["filters["+i+"][column]"] = cfg.filters.valueField;
 							options.params["filters["+i+"][relation]"] = "=";
 							options.params["filters["+i+"][value]"] = cfg.filters.getValue();

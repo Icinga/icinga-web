@@ -44,10 +44,12 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 	}
 	protected function parseProcessesFromArray(array $object) {
 		$cfgParts = array();
+		
 		foreach($object["children"] as $process) {
 			$bp = $this->getContext()->getModel("bpAddon.businessProcess","Cronks",array($process));	
 			$cfgParts[] = array("obj" => $bp, "str" => $bp->__toConfig());
 		}
+		
 		$cfgString = $this->orderResultSet($cfgParts);
 		
 		$config = $this->getConfigHeader();
@@ -57,16 +59,23 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 	
 	protected function orderResultSet(array $cfgParts) {
 		$orderChanged = false;
+		$ringRef = array ();
+		$i=0;
+		
 		do {
+			$i++;
 			$orderChanged = false;		
-			$newOrder = array();		
+			$newOrder = array();
 			$processed = array();
+					
 			foreach($cfgParts as $pos=>$name) {
 				if(!is_array($name))
 					continue;
 
 				$bp = $name["obj"];
+				
 				foreach($bp->getSubProcesses() as $subProcess) {
+					
 					if(!$subProcess->hasCompleteConfiguration() 
 							&& !in_array($subProcess->getName(),$processed)) {
 						
@@ -81,7 +90,7 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 			}
 			
 			$cfgParts = $newOrder;
-		} while($orderChanged);
+		} while($orderChanged && $i<2);
 		$newOrder = array();
 		foreach($cfgParts as $part) {
 			$newOrder[] = $part["str"];

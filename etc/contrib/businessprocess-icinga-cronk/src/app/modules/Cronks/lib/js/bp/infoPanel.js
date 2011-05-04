@@ -7,47 +7,50 @@ Ext.onReady(function() {
 	Ext.ns('Cronk.bp');
 
 	var eventGrid = Ext.extend(Ext.grid.GridPanel,{
-		colModel: new Ext.grid.ColumnModel({
-			defaults: {
-				width: 120,
-				sortable: true
-			},
-			columns: [
-				{id: 'HOST_NAME', header: _('Host'),dataIndex:'HOST_NAME'},
-				{id: 'SERVICE_NAME', header: _('Service'),dataIndex:'SERVICE_NAME'},
-				{	
-					id: 'STATUS',
-					header: _('Status'),
-					dataIndex:'STATEHISTORY_STATE',
-					renderer: function(value, metaData, record, rowIndex, colIndex, store) {
-						var state =''
-						switch(value) {
-							case '0':
-								state = 'OK';
-								break;
-							case '1':
-								state = 'WARNING';
-								break;
-							case '2':
-								state = 'CRITICAL';
-								break;
-							default:
-								state = 'UNKNOWN';
-								break;
-						}
-						return '<div class="icinga-status icinga-status-'+state.toLowerCase()+'" style="height:12px;text-align:center">'+state+'</div>';
-					}
+		constructor: function(cfg) {
+			this.colModel = new Ext.grid.ColumnModel({
+				defaults :  {
+					width: 120,
+					sortable: true
 				},
-				{id: 'LAST_CHECK', header: _('Timestamp'),dataIndex:'STATEHISTORY_STATE_TIME',groupable:false},
-				{id: 'ATTEMPT',width:40, header: _('Attempt'),dataIndex:'STATEHISTORY_CURRENT_CHECK_ATTEMPT'},
-				{id: 'OUTPUT', header:_('Output'),dataIndex: 'STATEHISTORY_OUTPUT'}
-			]			
-		}),
-		frame:true,
-		view: new Ext.grid.GroupingView({
-			forceFit:true,
-			groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
-		})
+				columns : [
+						{id: 'HOST_NAME', header: _('Host'),dataIndex:'HOST_NAME'},
+						{id: 'SERVICE_NAME', header: _('Service'),dataIndex:'SERVICE_NAME'},
+						{	
+							id: 'STATUS',
+							header: _('Status'),
+							dataIndex:'STATEHISTORY_STATE',
+							renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+								var state =''
+								switch(value) {
+									case '0':
+										state = 'OK';
+										break;
+									case '1':
+										state = 'WARNING';
+										break;
+									case '2':
+										state = 'CRITICAL';
+										break;
+									default:
+										state = 'UNKNOWN';
+										break;
+								}
+								return '<div class="icinga-status icinga-status-'+state.toLowerCase()+'" style="height:12px;text-align:center">'+state+'</div>';
+							}
+						},
+						{id: 'LAST_CHECK', header: _('Timestamp'),dataIndex:'STATEHISTORY_STATE_TIME',groupable:false},
+						{id: 'ATTEMPT',width:40, header: _('Attempt'),dataIndex:'STATEHISTORY_CURRENT_CHECK_ATTEMPT'},
+						{id: 'OUTPUT', header:_('Output'),dataIndex: 'STATEHISTORY_OUTPUT'}
+				]			
+			});
+			this.frame = true;
+			this.view = new Ext.grid.GroupingView({
+				forceFit:true,
+				groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
+			});
+			return  Ext.grid.GridPanel.prototype.constructor.call(this,cfg);
+		}
 	})
 
 	Cronk.bp.infoPanel =  Ext.extend(Ext.TabPanel,{
