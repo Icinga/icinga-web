@@ -288,8 +288,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 
 									var cronk = Cronk.factory(c);
 						
-									PortalHandler.initPortlet(cronk);
-									AppKit.log("adding ",cronk);	
+									PortalHandler.initPortlet(cronk);	
 									this.get(index).add(cronk);
 
 									cronk.show();

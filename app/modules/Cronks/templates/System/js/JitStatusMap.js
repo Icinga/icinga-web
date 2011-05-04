@@ -114,6 +114,9 @@ function JitStatusMap (config) {
 					case "2":
 						node.data.$color = "#ff8000";
 						break;
+					case "3":
+						node.data.$color = "#aa3377";
+						break;
 				}
   			},
 			onCreateLabel: function(domElement, node){
