@@ -9,7 +9,7 @@ class agaviBootstrapTest extends PHPUnit_Framework_TestCase {
 		'/app/modules/AppKit/lib/AppKit.class.php',
 		'/app/modules/AppKit/lib/class/AppKitBaseClass.class.php',
 		'/app/modules/AppKit/lib/class/AppKitSingleton.class.php',
-		'/app/modules/AppKit/lib/util/AppKitModuleUtil.class.php'
+		'/app/modules/AppKit/lib/module/AppKitModuleUtil.class.php'
 	);
 
 	public function testRequiredFileAvailabilty() {

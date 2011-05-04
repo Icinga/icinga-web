@@ -30,7 +30,7 @@
 		</testsuite> -->
 		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
-			<file>tests/interface/icingaReloadTest.php</file>
+			
 		</testsuite>-->
 	</testsuites>
 </phpunit>
