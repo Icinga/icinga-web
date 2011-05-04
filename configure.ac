@@ -218,6 +218,12 @@ AC_ARG_WITH([api_cmd_file],
 	api_cmd_file=/usr/local/icinga/var/rw/icinga.cmd
 )
 
+AC_ARG_WITH([api_cmd_instance],
+	AS_HELP_STRING([--with-api-cmd-instance=PATH], [Icinga default command instance name (default "default")]),
+	api_cmd_instance=$withval,
+	api_cmd_instance=default
+)
+
 AC_ARG_WITH([devel_mode],
 	AS_HELP_STRING([--with-devel-mode], [Web devel mode (disable caching)]),
 	devel_mode=$withval,
@@ -263,6 +269,7 @@ AC_SUBST(api_db_pass)
 AC_SUBST(api_db_name)
 AC_SUBST(api_db_prefix)
 AC_SUBST(api_cmd_file)
+AC_SUBST(api_cmd_instance)
 
 AC_SUBST(icinga_api)
 

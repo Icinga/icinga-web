@@ -41,13 +41,15 @@
 				</setting>
 				
 				<setting name="api.interfaces.command">
+				
+					<!-- Default pipe interface, single maschine installation -->
 					<ae:parameter name="pipe1">
 						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
 						<ae:parameter name="enabled">true</ae:parameter>
 						
 						<ae:parameter name="pipe">@api_cmd_file@</ae:parameter>
 
-						<ae:parameter name="instance">default</ae:parameter>
+						<ae:parameter name="instance">@api_cmd_instance@</ae:parameter>
 						<ae:parameter name="broadcast">false</ae:parameter>
 					</ae:parameter>
 
