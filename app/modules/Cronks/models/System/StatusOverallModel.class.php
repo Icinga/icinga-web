@@ -30,11 +30,11 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
 		foreach ($sources as $stype=>$tarray) {
 			$type = explode("_",strtoupper($stype));
 			$search = $this->api->createSearch()->setSearchTarget($stype);
-			$search->setSearchFilter($type[0]."_IS_PENDING","0","<");
+			$search->setSearchFilter($type[0]."_IS_PENDING","0","=");
 			IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 			$this->buildDataArray($search, $tarray[0], $tarray[1], $target, $stype);
 		}
-
+		
 		return $target;
 
 	}
@@ -51,6 +51,7 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
 
 	private function buildDataArray(IcingaApiSearch &$search, $type, array $states, array &$target,$stype) {
 		$data = $search->setResultType(IcingaApi::RESULT_ARRAY)->fetch()->getAll();
+		
 		$this->addPending($data,$stype);
 		
 		$field = sprintf('%s_STATE', strtoupper($type));
@@ -82,18 +83,22 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
 
 	protected function addPending(&$data,$stype) {	
 		$type = explode("_",strtoupper($stype));
+		
 		$search = $this->api->createSearch()->setSearchTarget($stype);
-		$search->setSearchFilter($type[0]."_IS_PENDING","0",">=");
+		$search->setSearchFilter($type[0]."_IS_PENDING","0",">");
 		IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 		$result = $search->setResultType(IcingaApi::RESULT_ARRAY)->fetch()->getAll();
+		
 		if(count($result) > 0) 
 			$result = $result[0];
 		else
 			return;
+		
 		foreach($result as $type=>&$val) {
 			if(preg_match("/^.*_STATE$/",$type))
 				$val = 99;
-		}	
+		}
+		
 		$data[] = $result;
 	}
 

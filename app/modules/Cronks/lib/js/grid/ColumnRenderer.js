@@ -136,7 +136,7 @@ Cronk.grid.ColumnRenderer = {
 	serviceStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {	
 			if(Ext.isDefined(record.json.service_is_pending)) {
-				if(record.json.service_is_pending != -1)
+				if(record.json.service_is_pending > 0)
 					value=99;
 			}
 			if(!Ext.isDefined(value))
@@ -148,7 +148,7 @@ Cronk.grid.ColumnRenderer = {
 	hostStatus : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(Ext.isDefined(record.json.host_is_pending)) {
-				if(record.json.host_is_pending != -1)
+				if(record.json.host_is_pending > 0)
 					value=99;
 			}
 			if(!Ext.isDefined(value))
