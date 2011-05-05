@@ -2,9 +2,11 @@
 	Ext.onReady(function () {
 		var lTitle = _("We're Icinga");
 		AppKit.util.Dom.makeImage('icinga-image-home', 'icinga.icinga-logo', { alt: lTitle , style: 'width: 200px' });
-		AppKit.util.Dom.makeImage('icinga-image-default', 'icinga.idot-small',	{ alt: lTitle });
-		AppKit.util.Dom.makeImage('icinga-image-dev', 'icinga.idot-small', { alt: lTitle });
-		AppKit.util.Dom.makeImage('icinga-image-docs', 'icinga.idot-small', { alt: lTitle });
+		
+		AppKit.util.Dom.makeImage('icinga-image-bugreport', 'icinga.bugreport', { alt: lTitle });
+		AppKit.util.Dom.makeImage('icinga-image-support', 'icinga.support', { alt: lTitle });
+		AppKit.util.Dom.makeImage('icinga-image-wiki', 'icinga.wiki', { alt: lTitle });
+		AppKit.util.Dom.makeImage('icinga-image-translate', 'icinga.translate', { alt: lTitle });
 	});
 </script>
 <div style="width: 200px; margin: 0 auto;">
@@ -31,8 +33,10 @@
 	All other trademarks are the property of their respective owners.
 </p>
 
-<p style="text-align: center; margin: 20px auto;">
-	<a id="icinga-image-default" title="<?php echo $tm->_('Icinga'); ?>" href="http://www.icinga.org/"></a>
-	<a id="icinga-image-dev" title="<?php echo $tm->_('Dev'); ?>" href="http://dev.icinga.org/"></a>
-	<a id="icinga-image-docs" title="<?php echo $tm->_('Docs'); ?>" href="http://docs.icinga.org/"></a> 
+<p style="width: 400px; margin: 0 auto;">
+	<a id="icinga-image-bugreport" href="http://www.icinga.org/faq/how-to-report-a-bug/"></a>
+	<a id="icinga-image-support" href="http://www.icinga.org/support/"></a>
+	<br />
+	<a id="icinga-image-wiki" href="http://wiki.icinga.org/"></a>
+	<a id="icinga-image-translate" href="http://translate.icinga.org/"></a>
 </p>
