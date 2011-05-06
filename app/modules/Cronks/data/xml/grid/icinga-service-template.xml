@@ -230,7 +230,13 @@
         		<parameter name="enabled">true</parameter>
         		<parameter name="type">extjs</parameter>
         		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">In Downtime</parameter>
+        		<parameter name="label">In downtime</parameter>
+        	</paramter>
+			<paramter name="service_is_pending">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Is pending</parameter>
         	</paramter>
         </parameter>
         
@@ -278,6 +284,7 @@
 			<parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
 			<parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
 			<parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
+			
 			<!-- Stupid filter mapping -->
 			<parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="customvariable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
