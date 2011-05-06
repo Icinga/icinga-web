@@ -254,7 +254,13 @@
         		<parameter name="enabled">true</parameter>
         		<parameter name="type">extjs</parameter>
         		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">In Downtime</parameter>
+        		<parameter name="label">In downtime</parameter>
+        	</paramter>
+			<paramter name="host_is_pending">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Is pending</parameter>
         	</paramter>
         </parameter>
     </option>
@@ -300,6 +306,7 @@
 			<parameter name="notifications_enabled">HOST_NOTIFICATIONS_ENABLED</parameter>
 			<parameter name="problem_acknowledged">HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
 			<parameter name="scheduled_downtime_depth">HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
+			<parameter name="host_is_pending">HOST_IS_PENDING</parameter>
 			
 			<!-- Some mapping for stupid filters -->
 			<parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
