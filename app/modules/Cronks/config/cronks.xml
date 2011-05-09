@@ -166,7 +166,7 @@
 				<ae:parameter name="name">LogView</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>
 				<ae:parameter name="image">cronks.Info</ae:parameter>
-				<ae:parameter name="principalsonly">icinga.cronks.log</ae:parameter>
+				<ae:parameter name="principalsonly">icinga.cronk.log</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="template">icinga-log-template</ae:parameter>
 				</ae:parameter>
