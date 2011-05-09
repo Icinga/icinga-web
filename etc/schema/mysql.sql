@@ -55,8 +55,8 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('14','icinga.demoMode','Hide features like password reset which are not wanted in demo systems','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('15','icinga.cronk.category.admin','Enables category admin features','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('16','icinga.cronk.log','Enables icinga-log cronk','','credential');
-INSERT INTO nsm_target (target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
-INSERT INTO nsm_target (target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('1','icinga_user','The default representation of a ICINGA user','0');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('2','appkit_user','Appkit user test','0');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent) VALUES ('3','appkit_admin','AppKit admin','0','2');
