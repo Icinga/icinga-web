@@ -142,7 +142,7 @@ AppKit.util = (function() {
 					width: 630,
 					layout: 'fit',
 					height: Ext.getBody().getHeight()>600 ? 600 : Ext.getBody().getHeight(),
-					
+					constrain: true,
 					closeAction: 'hide',
 					defaults: {
 						autoScroll: true,

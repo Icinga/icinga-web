@@ -658,7 +658,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 				}, {
 					id: idPrefix + '-button-delete',
 					text: _('Delete'),
-					iconCls: 'icinga-icon-bin',
+					iconCls: 'icinga-icon-delete',
 					handler: function(b, e) {
 						var item = ctxMenu.getItemData();
 						Ext.Msg.confirm(_('elete cronk'), String.format(_('Are you sure to delete {0}'), item['name']), function(btn) {
