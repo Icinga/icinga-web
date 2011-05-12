@@ -224,7 +224,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				var org = cm.getColumnById(colId);
 				
 				// Column was not moved arropund
-				if (org.dataIndex == col.dataIndex) {
+				if (Ext.isDefined(org) && org.dataIndex == col.dataIndex) {
 					cm.setHidden(colId, col.hidden);
 					cm.setColumnWidth(colId, col.width);
 				}
