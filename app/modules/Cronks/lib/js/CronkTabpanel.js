@@ -90,8 +90,20 @@ Ext.extend(Cronk.util.Tabpanel, Ext.TabPanel, {
 				}, this);
 				
 				if(this.URLTabData) {
-					var index = this.add(this.plugins.createURLCronk(this.URLTabData));
-					this.setActiveTab(index);	
+					
+					var tabPlugin = this.plugins;	
+					if(Ext.isArray(this.plugins)) {
+						tabPlugin = null;
+						for(var i=0;i<this.plugins.length;i++)
+							if(this.plugins[i].createURLCronk) {
+								tabPlugin = this.plugins[i];
+								break;
+							}
+					}
+					if(tabPlugin) {
+						var index = this.add(tabPlugin.createURLCronk(this.URLTabData));
+						this.setActiveTab(index);	
+					}
 				}				
 				else {
 					this.setActiveTab(state.active || 0);

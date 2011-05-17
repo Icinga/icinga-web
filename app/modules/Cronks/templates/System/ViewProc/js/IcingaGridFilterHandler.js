@@ -300,7 +300,7 @@ Cronk.util.GridFilterWindow = function() {
 				});
 				
 				if (oGrid.filter_params) {
-					this.applyFilters(oGrid.filter_params);
+					oGrid.on("render",this.applyFilters.createDelegate(this,oGrid.filter_params));
 				}
 			},
 			
@@ -353,6 +353,7 @@ Cronk.util.GridFilterWindow = function() {
 	//			console.log(data);
 	//			console.log('APPLY');
 	//			console.log(oGrid.getStore().baseParams);
+			
 				
 				oGrid.getStore().reload();
 				// oGrid.fireEvent('activate');
