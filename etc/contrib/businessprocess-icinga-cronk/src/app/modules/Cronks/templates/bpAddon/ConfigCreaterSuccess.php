@@ -337,6 +337,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		hostStore: new Ext.data.JsonStore({
 			autoDestroy:false,
 			url: '<?php echo $ro->gen("icinga.api");?>'+'/json',
+			root: 'result',
 			idProperty: 'HOST_ID',
 			baseParams: {
 				'target' : 'host',
@@ -348,6 +349,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		
 		serviceStore: new Ext.data.JsonStore({
 			autoDestroy:false,
+			root: 'result',
 			url: '<?php echo $ro->gen("icinga.api");?>'+'/json',
 			idProperty: 'SERVICE_ID',
 			baseParams: {
