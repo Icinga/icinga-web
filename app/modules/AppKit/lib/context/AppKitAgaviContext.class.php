@@ -1,4 +1,8 @@
 <?php
+/**
+ * The replacement agavi context to handle all bootstrap things
+ * in that
+ */
 
 class AppKitAgaviContext extends AgaviContext {
 
@@ -53,6 +57,8 @@ class AppKitAgaviContext extends AgaviContext {
 	 * Require doctrine orm
 	 */
 	private function initializeDoctrine() {
+		
+		// Failsafe doctrine loading
 		if (!class_exists('Doctrine')) {
 			if (file_exists(($path = AgaviConfig::get('modules.appkit.doctrine_path')))) {
 				require_once ($path. '/Doctrine.php');

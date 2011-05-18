@@ -1,9 +1,9 @@
 <?php
-ob_start();
-require_once 'PHPUnit/Framework.php';
-require_once dirname(__FILE__).'/../../lib/doctrine/lib/Doctrine.php';
 
-spl_autoload_register("Doctrine::autoload");
+define('TEST_PATH', __DIR__);
+define('ROOT_PATH', dirname(dirname(__DIR__)));
+
+ob_start();
 
 function info($str) {
 	//print("\x1b[2;34m".$str."\x1b[m");
@@ -33,3 +33,4 @@ function stdin($prompt = "", $args = array(),$default=null) {
 	
 	return $result[0];
 }
+

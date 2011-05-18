@@ -10,7 +10,7 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 	
 	protected function setUp() {
 		$core = AgaviConfig::get("core.root_dir");
-		$this->sharedFixture = parse_ini_file($core."/etc/tests/test.properties");
+		$this->sharedFixture = parse_ini_file($core."/tests/php/test.properties");
 	}
 	
 	/**

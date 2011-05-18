@@ -47,14 +47,14 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 			}
 			// insert user
 			$container = $context->getController()->createExecutionContainer("AppKit","Admin.Groups.Edit",$arguments,"simple","write");
-			$this->assertType("AgaviExecutionContainer",$container,"Couldn't create add-group action");
+			$this->assertInstanceOf("AgaviExecutionContainer",$container,"Couldn't create add-group action");
 			
 			$result = $container->execute();
 			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for adding groups not found");				
 
 			// Check if user is really added
 			$result = Doctrine_Core::getTable("NsmRole")->findBy("role_name",$role["role_name"])->getFirst();		
-			$this->assertType("NsmRole",$result,"No group found, something seemed to go wrong");
+			$this->assertInstanceOf("NsmRole",$result,"No group found, something seemed to go wrong");
 			
 			success("\tCreating roles suceeded!\n");
 			self::$idFixture = $result["role_id"];

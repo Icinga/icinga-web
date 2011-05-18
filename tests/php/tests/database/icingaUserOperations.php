@@ -65,14 +65,14 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			
 			// insert user
 			$container = $context->getController()->createExecutionContainer("AppKit","Admin.Users.Edit",$arguments,"simple","write");
-			$this->assertType("AgaviExecutionContainer",$container,"Couldn't create add-user action");
+			$this->assertInstanceOf("AgaviExecutionContainer",$container,"Couldn't create add-user action");
 			
 			$result = $container->execute();
 			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for adding users not found");				
 
 			// Check if user is really added
 			$result = Doctrine_Core::getTable("NsmUser")->findBy("user_name",$user["user_name"])->getFirst();		
-			$this->assertType("NsmUser",$result,"No user found, something seemed to go wrong");
+			$this->assertInstanceOf("NsmUser",$result,"No user found, something seemed to go wrong");
 			success("\tCreated user exists!\n");
 			self::$idFixture = $result->get("user_id");
 			return true;
@@ -189,7 +189,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			$preferenceData->setParameter("params",array("0"=>array("isLong"=>"false","upref_key"=>"TEST","upref_val"=>"TESTCASE")));
 	
 			$modifyAction = $context->getController()->createExecutionContainer("AppKit","User.Preferences",$preferenceData,"simple","write");
-			$this->assertType("AgaviExecutionContainer",$modifyAction,"Couldn't create add-preference action");
+			$this->assertInstanceOf("AgaviExecutionContainer",$modifyAction,"Couldn't create add-preference action");
 			
 			$result = $modifyAction->execute();		
 			$this->assertNotEquals($result->getHttpStatusCode(),"404","Action for editing users not found");				
@@ -223,7 +223,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 			$preferenceData->setParameters(array("remove"=>"true","isLong"=>"false","upref_key"=>"TEST","upref_val"=>"TESTCASE"));
 	
 			$modifyAction = $context->getController()->createExecutionContainer("AppKit","User.Preferences",$preferenceData,"simple","write");
-			$this->assertType("AgaviExecutionContainer",$modifyAction,"Couldn't create add-preference action");
+			$this->assertInstanceOf("AgaviExecutionContainer",$modifyAction,"Couldn't create add-preference action");
 			
 			$result = $modifyAction->execute();		
 	

@@ -27,7 +27,7 @@ class availabilityTest extends PHPUnit_Framework_TestCase {
 		info("Testing interface avaibility\n");
 		info("\tTesting wrong login \n");
 		$root = AgaviConfig::get("core.root_dir");
-		$ini = parse_ini_file($root."/etc/tests/test.properties");
+		$ini = parse_ini_file($root."/tests/php/test.properties");
 		$params = new AgaviRequestDataHolder();
 		$params->setParameters(array(
 			"dologin" => 1,
@@ -58,7 +58,7 @@ class availabilityTest extends PHPUnit_Framework_TestCase {
 	public function testCorrectLogin() {
 		info("\tTesting correct login\n");
 		$root = AgaviConfig::get("core.root_dir");
-		$ini = parse_ini_file($root."/etc/tests/test.properties");
+		$ini = parse_ini_file($root."/tests/php/test.properties");
 		$params = new AgaviRequestDataHolder();
 		$params->setParameters(array(
 			"dologin" => 1,
