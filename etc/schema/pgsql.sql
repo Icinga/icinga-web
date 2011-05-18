@@ -13,7 +13,7 @@ CREATE TABLE nsm_db_version (vers_id INT, version INT, PRIMARY KEY(vers_id));
 CREATE TABLE nsm_log (log_id SERIAL, log_level INT NOT NULL, log_message TEXT NOT NULL, log_created TIMESTAMP NOT NULL, log_modified TIMESTAMP NOT NULL, PRIMARY KEY(log_id));
 CREATE TABLE nsm_principal (principal_id SERIAL, principal_user_id INT, principal_role_id INT, principal_type VARCHAR(4) NOT NULL, principal_disabled SMALLINT DEFAULT 0, PRIMARY KEY(principal_id));
 CREATE TABLE nsm_principal_target (pt_id SERIAL, pt_principal_id INT NOT NULL, pt_target_id INT NOT NULL, PRIMARY KEY(pt_id));
-CREATE TABLE nsm_role (role_id SERIAL, role_name VARCHAR(40) NOT NULL, role_description VARCHAR(255), role_disabled SMALLINT DEFAULT 0 NOT NULL, role_created TIMESTAMP NOT NULL, role_modified TIMESTAMP NOT NULL, role_parent INT, PRIMARY KEY(role_id));
+CREATE TABLE nsm_role (role_id SERIAL, role_name VARCHAR(40) NOT NULL, role_description VARCHAR(255), role_disabled SMALLINT, role_created TIMESTAMP NOT NULL, role_modified TIMESTAMP NOT NULL, role_parent INT, PRIMARY KEY(role_id));
 CREATE TABLE nsm_session (session_entry_id SERIAL, session_id VARCHAR(255) NOT NULL, session_name VARCHAR(255) NOT NULL, session_data TEXT NOT NULL, session_checksum VARCHAR(255) NOT NULL, session_created TIMESTAMP NOT NULL, session_modified TIMESTAMP NOT NULL, PRIMARY KEY(session_entry_id));
 CREATE TABLE nsm_target (target_id SERIAL, target_name VARCHAR(45) NOT NULL, target_description VARCHAR(100), target_class VARCHAR(80), target_type VARCHAR(45) NOT NULL, PRIMARY KEY(target_id));
 CREATE TABLE nsm_target_value (tv_pt_id INT, tv_key VARCHAR(45), tv_val VARCHAR(45) NOT NULL, PRIMARY KEY(tv_pt_id, tv_key));
@@ -48,7 +48,7 @@ ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_role_id_nsm_role_rol
 
 /*          Initial data import              */
  
-INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0');
+INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled,user_created,user_modified) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0',now(),now());
 INSERT INTO nsm_db_version (vers_id,version) VALUES ('1','2');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
@@ -68,10 +68,10 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('16','icinga.cronk.log','Enables icinga-log cronk','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('1','icinga_user','The default representation of a ICINGA user','0');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('2','appkit_user','Appkit user test','0');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent) VALUES ('3','appkit_admin','AppKit admin','0','2');
-INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('4','guest','Unauthorized Guest','0');
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_modified,role_created) VALUES ('1','icinga_user','The default representation of a ICINGA user','0',now(),now());
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_modified,role_created) VALUES ('2','appkit_user','Appkit user test','0',now(),now());
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent,role_modified,role_created) VALUES ('3','appkit_admin','AppKit admin','0','2',now(),now());
+INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_modified,role_created) VALUES ('4','guest','Unauthorized Guest','0',now(),now());
 INSERT INTO nsm_principal (principal_id,principal_user_id,principal_type,principal_disabled) VALUES ('1','1','user','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('2','2','role','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('3','3','role','0');
@@ -89,3 +89,13 @@ INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('9
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','1');
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','2');
 INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','3');
+
+/*
+Update sequences
+*/
+ALTER SEQUENCE nsm_user_user_id_seq RESTART WITH 2;
+ALTER SEQUENCE nsm_target_target_id_seq RESTART WITH 19;
+ALTER SEQUENCE nsm_role_role_id_seq RESTART WITH 5;
+ALTER SEQUENCE nsm_principal_principal_id_seq RESTART WITH 6;
+ALTER SEQUENCE nsm_principal_target_pt_id_seq RESTART WITH 10;
+
