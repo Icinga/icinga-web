@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
 	<ae:configuration context="web">
 		<routes>
 
 			<!-- INDEX -->
 			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
 			<route name="modules" pattern="^/modules" stop="false">
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='web']/node())">
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='web']/node())">
 					<xi:fallback></xi:fallback>
 				</xi:include>
 
@@ -47,7 +47,7 @@
 				
 					<!-- Data Provider -->
 				 <route name=".data" pattern="^/provider" output_type="json">
-					<route name=".users" pattern="^/user" action="DataProvider.UserProvider">
+					<route name=".users" pattern="^/user" action="DataProvider.UserProvider" extdirect_provider="true">
 					  <route pattern="^/(userId:\d+)" action="DataProvider.UserProvider"/>
 					</route>
 					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
@@ -211,7 +211,7 @@
 	
 	<ae:configuration context="console">
 		<route name="modules" pattern="^/modules">	
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='console']/node())">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='console']/node())">
 					<xi:fallback></xi:fallback>
 			</xi:include>
 		</route>
@@ -220,7 +220,7 @@
 	
 	<ae:configuration context="soap">
 		<route name="modules" pattern="^/modules">	
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='soap']/node())">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='soap']/node())">
 					<xi:fallback></xi:fallback>
 			</xi:include>
 		</route>
