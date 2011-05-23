@@ -26,9 +26,9 @@ class agaviBootstrapTest extends PHPUnit_Framework_TestCase {
 	public function testBootstrap() {
     	$ctx = AgaviContext::getInstance('testing');
     	
-    	$this->assertInstanceOf('AppKitAgaviContext', $ctx);
-    	$this->assertInstanceOf('AgaviDoctrineDatabase', $ctx->getDatabaseManager()->getDatabase());
-    	$this->assertInstanceOf('Doctrine_Manager', $ctx->getDatabaseManager()->getDatabase()->getDoctrineManager());
+    	IcingaWebTestTool::assertInstanceOf('AppKitAgaviContext',$ctx,"AgaviContext has wrong instance");
+    	IcingaWebTestTool::assertInstanceOf('AgaviDoctrineDatabase', $ctx->getDatabaseManager()->getDatabase());
+    	IcingaWebTestTool::assertInstanceOf('Doctrine_Manager', $ctx->getDatabaseManager()->getDatabase()->getDoctrineManager());
     	
     	try {
     	    $ctx->getDatabaseManager()->getDatabase()->connect();

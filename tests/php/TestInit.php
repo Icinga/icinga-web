@@ -37,7 +37,44 @@ class IcingaWebTestTool {
         
         return $default;
     }
-    
+
+ 	/**
+	*	Asserts that $actual is of instance $expected, use instead of the one defined
+	*   in PHPUnit_Framework_Assert for compatibility reasons (doesn't exist prior to v3.5)
+	*	Fails with optional $message if instance doesn't match
+	*   If phpUnit provides an assertInstanceOf class (>= v.3.5) this one will be used, 
+	*	otherwise it will be checked directly here. 
+	*	@param $expected 	The expected Instance
+	*	@paran $actual		The object to test
+	*	@param $message		The message to return if assertion fails (optional)
+	*/
+	public static function assertInstanceOf($expected,$actual,$message = '') {
+		if(method_exists('PHPUnit_Framework_Assert','assertInstanceOf')) {
+			PHPUnit_Framework_Assert::assertInstanceOf($expected,$actual,$message);
+		} else {
+			$constraint;
+			if (is_string($expected)) {
+				if (class_exists($expected) || interface_exists($expected)) {
+					$constraint = new PHPUnit_Framework_Constraint_IsInstanceOf(
+					  $expected
+					);
+				}
+
+				else {
+					throw PHPUnit_Util_InvalidArgumentHelper::factory(
+					  1, 'class or interface name'
+					);
+				}
+			} else {
+            	throw PHPUnit_Util_InvalidArgumentHelper::factory(1, 'string');
+    	    }
+		
+
+	        if (!$constraint->evaluate($actual)) {
+    	        $constraint->fail($actual, $message);
+    	    } 
+		}
+	}   
 }
 
 class IcingaWebTestBootstrap {
