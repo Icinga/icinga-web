@@ -25,7 +25,7 @@ Makefile
 config.log
 config.status
 etc/build.properties
-tests/php/test.properties
+tests/phpunit/test.properties
 tests/php/results.xml
 etc/apache2/icinga-web.conf
 pub/.htaccess
