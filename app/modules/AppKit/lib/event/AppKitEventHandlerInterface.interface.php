@@ -1,7 +1,7 @@
 <?php
 
 interface AppKitEventHandlerInterface {
-	public function handleEvent(AppKitEvent &$event);
+    public function handleEvent(AppKitEvent &$event);
 }
 
 ?>

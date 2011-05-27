@@ -1,5 +1,4 @@
 <?php
-class NsmDbVersion extends BaseNsmDbVersion
-{
+class NsmDbVersion extends BaseNsmDbVersion {
 
 }
