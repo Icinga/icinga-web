@@ -14,6 +14,11 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
 		
 		$this->log('Auth.Provider.LDAP Trying authenticate (authkey=%s,user=%s)', $authid, $username, AgaviLogger::DEBUG);
 		
+		if ($password == '') {
+			$this->log('Auth.Provider.LDAP Empty password given, bind aborted', AgaviLogger::DEBUG);
+			return false;
+		}
+
 		try {
 			// Check if user always is available
 			$search_record = $this->getLdaprecord($this->getSearchFilter($user->user_name), $authid);
