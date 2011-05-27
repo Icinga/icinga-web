@@ -1,7 +1,6 @@
 <?php
 
 class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel implements AppKitIAuthProvider {
-<<<<<<< HEAD
 
     private $ldap_links = array();
 
