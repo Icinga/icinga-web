@@ -12,11 +12,11 @@ class AppKitRandomUtil {
     public static function initRand() {
         static $init = false;
 
-        if($init === true) {
+        if ($init === true) {
             return true;
         }
 
-        if(function_exists('posix_getpid')) {
+        if (function_exists('posix_getpid')) {
             $bitc = posix_getpid();
         }
 
@@ -36,7 +36,7 @@ class AppKitRandomUtil {
     public static function genSimpleId($length=5, $prefix="") {
         static $chars = null;
 
-        if($chars === null) {
+        if ($chars === null) {
             $chars = array_merge(
                          range(48, 57, 1), // 0..9
                          range(65, 90, 1), // A..Z
@@ -47,7 +47,7 @@ class AppKitRandomUtil {
 
         $o = null;
 
-        for($i=0; $i<$length; $i++) {
+        for ($i=0; $i<$length; $i++) {
             $o .= (chr($chars[mt_rand(0, count($chars)-1)]));
         }
 

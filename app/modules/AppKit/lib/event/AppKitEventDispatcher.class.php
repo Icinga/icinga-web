@@ -7,13 +7,13 @@ class AppKitEventDispatcher extends AppKitSingleton {
     public static function registerEventClasses(array $events) {
         $currentContext = AgaviContext::getInstance()->getName();
         foreach($events as $name=>$event) {
-            if($event['context'] != $currentContext) {
+            if ($event['context'] != $currentContext) {
                 continue;
             }
 
-            if($event['event'] && $event['class']) {
+            if ($event['event'] && $event['class']) {
 
-                if(!array_key_exists('parameter', $events)) {
+                if (!array_key_exists('parameter', $events)) {
                     $events['parameter'] = array();
                 }
 
@@ -56,14 +56,14 @@ class AppKitEventDispatcher extends AppKitSingleton {
      */
     public function addListener($name, AppKitEventHandlerInterface $handler) {
 
-        if(!array_key_exists($name, $this->listeners)) {
+        if (!array_key_exists($name, $this->listeners)) {
             $this->listeners[$name] = array();
         }
 
         // Invoke the main initialize method
         $ref = new ReflectionObject($handler);
 
-        if($ref->hasMethod('initializeHandler')) {
+        if ($ref->hasMethod('initializeHandler')) {
             $ref->getMethod('initializeHandler')->invoke($handler);
         }
 
@@ -84,16 +84,16 @@ class AppKitEventDispatcher extends AppKitSingleton {
     private function invokeListener(AppKitEventHandlerInterface &$h, AppKitEvent &$e) {
         $ref = new ReflectionObject($h);
 
-        if($ref->implementsInterface('AppKitEventHandlerInterface')) {
+        if ($ref->implementsInterface('AppKitEventHandlerInterface')) {
 
-            if($ref->hasMethod('checkEventType')) {
-                if($ref->getMethod('checkEventType')->invoke($h, $e) !== true) {
+            if ($ref->hasMethod('checkEventType')) {
+                if ($ref->getMethod('checkEventType')->invoke($h, $e) !== true) {
                     throw new AppKitEventDispatcherException('checkEventType have to return true');
                 }
             }
 
-            if($ref->hasMethod('checkObjectType')) {
-                if($ref->getMethod('checkObjectType')->invoke($h, $e) !== true) {
+            if ($ref->hasMethod('checkObjectType')) {
+                if ($ref->getMethod('checkObjectType')->invoke($h, $e) !== true) {
                     throw new AppKitEventDispatcherException('checkObjectType have to return true');
                 }
             }
@@ -101,7 +101,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
             $m = $ref->getMethod('handleEvent');
             $re = $m->invoke($h, $e);
 
-            if($re !== true) {
+            if ($re !== true) {
                 throw new AppKitEventDispatcherException('Handler have to return true!');
             } else {
                 $e->touch();
@@ -122,7 +122,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
      * @author Marius Hein
      */
     private function writeStats($key, $add=1) {
-        if(!isset($this->stats[$key])) {
+        if (!isset($this->stats[$key])) {
             $this->stats[$key] = 0;
         }
 
@@ -139,8 +139,8 @@ class AppKitEventDispatcher extends AppKitSingleton {
      */
     public function triggerEvent(AppKitEvent $event) {
 
-        if(array_key_exists($event->getName(), $this->listeners)) {
-            if($event->issetStatus(AppKitEvent::CANCELLED)) {
+        if (array_key_exists($event->getName(), $this->listeners)) {
+            if ($event->issetStatus(AppKitEvent::CANCELLED)) {
                 $event->unsetStatus(AppKitEvent::CANCELLED);
                 $event->setStatus(AppKitEvent::RESUMED);
                 $this->writeStats('status_resumed');
@@ -149,7 +149,7 @@ class AppKitEventDispatcher extends AppKitSingleton {
             $listeners = array_merge($this->listeners[self::ASTERISK], $this->listeners[$event->getName()]);
 
             foreach($listeners as $listener) {
-                if($event->issetStatus(AppKitEvent::CANCELLED)) {
+                if ($event->issetStatus(AppKitEvent::CANCELLED)) {
                     $this->writeStats('status_cancelled');
                     break;
                 }
@@ -176,15 +176,15 @@ class AppKitEventDispatcher extends AppKitSingleton {
 
         $event = new AppKitEvent($name);
 
-        if($object !== null) {
+        if ($object !== null) {
             $event->setObject($object);
         }
 
-        if($info !== null) {
+        if ($info !== null) {
             $event->setInfo($info);
         }
 
-        if($data !== null) {
+        if ($data !== null) {
             $event->setData($data);
         }
 

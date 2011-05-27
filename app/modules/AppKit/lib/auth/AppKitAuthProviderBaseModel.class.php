@@ -27,7 +27,7 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     protected function loadUserByDQL($value, $dql='user_name=?') {
         $users = Doctrine::getTable('NsmUser')->findByDql($dql, array($value));
 
-        if($users->count() == 1) {
+        if ($users->count() == 1) {
             return $users->getFirst();
         }
     }
@@ -64,7 +64,7 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function testBinary($setting_name, $flag) {
         $test = $this->getParameter($setting_name);
 
-        if($test && ($test & $flag)>0) {
+        if ($test && ($test & $flag)>0) {
             return true;
         }
 
@@ -82,7 +82,7 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function getDefaultGroups() {
         $string = $this->getParameter('auth_groups');
 
-        if($string) {
+        if ($string) {
             return explode(',', $string);
         }
     }
@@ -90,7 +90,7 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     protected function mapUserdata(array $data) {
         $re = array();
         foreach($this->getParameter('auth_map', array()) as $k=>$f) {
-            if(array_key_exists($f, $data)) {
+            if (array_key_exists($f, $data)) {
                 $re[$k] = $data[$f];
             }
         }

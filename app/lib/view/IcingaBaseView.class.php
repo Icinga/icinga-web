@@ -35,7 +35,7 @@ class IcingaBaseView extends AgaviView {
      * @param      string The layout to load.
      */
     public function setupHtml(AgaviRequestDataHolder $rd, $layoutName = null) {
-        if($layoutName === null && $this->getContainer()->getParameter('is_slot', false)) {
+        if ($layoutName === null && $this->getContainer()->getParameter('is_slot', false)) {
             // it is a slot, so we do not load the default layout, but a different one
             // otherwise, we could end up with an infinite loop
             $layoutName = self::SLOT_LAYOUT_NAME;
@@ -50,7 +50,7 @@ class IcingaBaseView extends AgaviView {
     public function initialize(AgaviExecutionContainer $container) {
         parent::initialize($container);
 
-        if($this->getAttribute('redirect', false) !== false) {
+        if ($this->getAttribute('redirect', false) !== false) {
             $params = $this->getAttribute('redirect_params', array());
             $this->getResponse()->setRedirect($this->getContext()->getRouting()->gen($this->getAttribute('redirect'), $params));
         }

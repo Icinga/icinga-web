@@ -30,7 +30,7 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
         foreach($this->params_array as $pKey=>$pVal) {
             $m = array();
 
-            if(preg_match('@^(.+)-value$@', $pKey, $m)) {
+            if (preg_match('@^(.+)-value$@', $pKey, $m)) {
 
                 // Fieldname (xml field name)
                 $name = $m[1];

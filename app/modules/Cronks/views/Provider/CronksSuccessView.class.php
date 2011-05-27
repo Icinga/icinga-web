@@ -7,12 +7,12 @@ class Cronks_Provider_CronksSuccessView extends CronksBaseView {
     }
 
     public function executeJson(AgaviRequestDataHolder $rd) {
-        if($this->hasAttribute('errors')) {
+        if ($this->hasAttribute('errors')) {
             $this->getContainer()->getResponse()->setHttpStatusCode(500);
             return json_encode(array('errors' => $this->getAttribute('errors')));
         }
 
-        if($rd->getParameter('xaction') == 'write') {
+        if ($rd->getParameter('xaction') == 'write') {
             $return = array(
                           'success' => true,
                           'errors' => new stdClass()
@@ -21,7 +21,7 @@ class Cronks_Provider_CronksSuccessView extends CronksBaseView {
             return json_encode($return);
         }
 
-        if($this->hasAttribute('cronks')) {
+        if ($this->hasAttribute('cronks')) {
             $json = new AppKitExtJsonDocument();
 
             $json->setAttribute(AppKitExtJsonDocument::ATTR_AUTODISCOVER);

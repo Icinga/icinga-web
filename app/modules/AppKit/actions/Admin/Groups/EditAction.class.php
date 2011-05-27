@@ -38,14 +38,14 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction {
     public function executeWrite(AgaviRequestDataHolder $rd) {
 
         try {
-            if($rd->getParameter("role_parent") == -1) {
+            if ($rd->getParameter("role_parent") == -1) {
                 $rd->setParameter("role_parent",null);
             }
 
             $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
             $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
 
-            if($rd->getParameter('id') == 'new') {
+            if ($rd->getParameter('id') == 'new') {
                 $role = new NsmRole();
             } else {
                 $role = $roleadmin->getRoleById($rd->getParameter('id'));
@@ -55,7 +55,7 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction {
             Doctrine_Manager::connection()->beginTransaction();
             $roleadmin->updateRoleData($role, $rd);
 
-            if(!$rd->getParameter("ignorePrincipals",false)) {
+            if (!$rd->getParameter("ignorePrincipals",false)) {
                 $padmin->updatePrincipalValueData(
                     $role->NsmPrincipal,
                     $rd->getParameter('principal_target', array()),
@@ -74,14 +74,14 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction {
             $this->updateUserRoles($allUsers,$role,$useradmin,$roleUsers);
 
 
-            if($rd->getParameter('id') == 'new') {
+            if ($rd->getParameter('id') == 'new') {
                 $this->setAttribute('redirect', 'appkit.admin.groups.edit');
                 $this->setAttribute('redirect_params', array('id' => $role->role_id));
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             try {
                 Doctrine_Manager::connection()->rollback();
-            } catch(Doctrine_Transaction_Exception $e) {}
+            } catch (Doctrine_Transaction_Exception $e) {}
 
 
         }
@@ -92,30 +92,30 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction {
 
     protected function updateUserRoles($allUsers,$role,$useradmin,$roleUsers) {
         foreach($allUsers as $user) {
-            if(!$user) {
+            if (!$user) {
                 continue;
             }
 
             $curUser = $useradmin->getUserById($user["user_id"]);
 
-            if(!$curUser) {
+            if (!$curUser) {
                 continue;
             }
 
             $roleExists = false;
             $modified = false;
             foreach($curUser->NsmRole as $key=>$user_role) {
-                if($user_role == $role) {
+                if ($user_role == $role) {
                     $roleExists = true;
 
-                    if(!in_array($user["user_id"],$roleUsers)) {
+                    if (!in_array($user["user_id"],$roleUsers)) {
                         $modified = true;
                         unset($curUser->NsmRole[$key]);
                     }
                 }
             }
 
-            if(!$roleExists && in_array($user["user_id"],$roleUsers)) {
+            if (!$roleExists && in_array($user["user_id"],$roleUsers)) {
                 $uRole = new NsmUserRole();
                 $uRole->usro_user_id = $user["user_id"];
                 $uRole->usro_role_id = $role->role_id;
@@ -124,13 +124,13 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction {
                 $modified = true;
             }
 
-            if(!$modified) {
+            if (!$modified) {
                 continue;
             }
 
             try {
                 $curUser->save();
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 print_r($e->getMessage());
             }
         }

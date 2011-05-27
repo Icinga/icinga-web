@@ -36,23 +36,23 @@ class Cronks_System_IframeUrlModel extends CronksBaseModel {
 
         $u = (string)$this->baseURl;
 
-        if(count($this->params)) {
+        if (count($this->params)) {
 
             $params = array();
 
             foreach($this->params as $target=>$source) {
                 $m = array();
 
-                if(preg_match('/^_(\w+)\[([^\]]+)\]$/', $source, $m)) {
+                if (preg_match('/^_(\w+)\[([^\]]+)\]$/', $source, $m)) {
                     $source = $this->rd->get(strtolower($m[1]), $m[2]);
                 }
 
-                if($source) {
+                if ($source) {
                     $params[] = sprintf('%s=%s', $target, urlencode($source));
                 }
             }
 
-            if(strpos($u, '?') !== false) {
+            if (strpos($u, '?') !== false) {
                 $u .= '&'. implode('&', $params);
             } else {
                 $u .= '?'. implode('&', $params);
@@ -60,7 +60,7 @@ class Cronks_System_IframeUrlModel extends CronksBaseModel {
 
         }
 
-        if($this->user && $this->pass) {
+        if ($this->user && $this->pass) {
             $u = str_replace('://', sprintf('://%s:%s@', $this->user, $this->pass), $u);
         }
 

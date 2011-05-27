@@ -28,14 +28,14 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
      * @return Doctrine_Connection or null
      */
     protected function getDatabaseConnection($connName = NULL) {
-        if(!$connName) {
+        if (!$connName) {
             $connName = $this->database;
         }
 
         $db = $this->getContext()->getDatabaseManager()->getDatabase($connName);
         $connection = null;
 
-        if($db) {
+        if ($db) {
             $connection = $db->getConnection();
         }
 
@@ -43,7 +43,7 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
     }
 
     public function createRequestDescriptor($connName = NULL) {
-        if(!$connName) {
+        if (!$connName) {
             $connName = $this->database;
         }
 

@@ -11,7 +11,7 @@ class AppKit_MyPreferencesModel extends AppKitBaseModel implements AgaviISinglet
     private function loadPrefValues() {
         $i = new ReflectionClass('AppKitUserPreferences');
 
-        if(count(($this->editablePreferences = $i->getConstants())) < 0) {
+        if (count(($this->editablePreferences = $i->getConstants())) < 0) {
             throw new AppKitModelException('Could not load the preference constants!');
         }
 
@@ -21,7 +21,7 @@ class AppKit_MyPreferencesModel extends AppKitBaseModel implements AgaviISinglet
     private function getUpdateAttributes(array $in) {
         $out = array();
         foreach($in as $key=>$val) {
-            if(array_search($key, $this->editablePreferences) !== false) {
+            if (array_search($key, $this->editablePreferences) !== false) {
                 $out[$key] = $val;
             }
         }

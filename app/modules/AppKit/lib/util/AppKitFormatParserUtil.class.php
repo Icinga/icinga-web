@@ -15,7 +15,7 @@ class AppKitFormatParserUtil {
     }
 
     public function registerNamespace($name, $type) {
-        if(!$this->namespaceExists($name)) {
+        if (!$this->namespaceExists($name)) {
             $this->namespaces[$name] = $type;
             return true;
         }
@@ -29,7 +29,7 @@ class AppKitFormatParserUtil {
 
     public function registerData($namespace, &$data) {
 
-        if(!$this->namespaceExists($namespace)) {
+        if (!$this->namespaceExists($namespace)) {
             throw new AppKitFormatParserUtilException('Namespace does not exists');
         }
 
@@ -38,7 +38,7 @@ class AppKitFormatParserUtil {
         $data = array_shift($params);
         $data2 = array_shift($params);
 
-        if($data2) {
+        if ($data2) {
             $this->data[$namespace][$data] = $data2;
         }
 
@@ -50,11 +50,11 @@ class AppKitFormatParserUtil {
     }
 
     public function registerMethod($namespace, $name, array $callback) {
-        if(!$this->namespaceExists($namespace)) {
+        if (!$this->namespaceExists($namespace)) {
             throw new AppKitFormatParserUtilException('Namespace does not exists');
         }
 
-        if($this->getNamespaceType($namespace) !==  self::TYPE_METHOD) {
+        if ($this->getNamespaceType($namespace) !==  self::TYPE_METHOD) {
             throw new AppKitFormatParserUtilException('Namespace %s is not suitable for methods!', $namespace);
         }
 
@@ -76,7 +76,7 @@ class AppKitFormatParserUtil {
         $mar = array();
         $args = array();
 
-        if(preg_match_all('@\(([^\)]+)\)@', $string, $mar, PREG_SET_ORDER)) {
+        if (preg_match_all('@\(([^\)]+)\)@', $string, $mar, PREG_SET_ORDER)) {
 
             $args = preg_split('@([\'"]*)\s*,\s*\\1@', $mar[0][1]);
 
@@ -101,10 +101,10 @@ class AppKitFormatParserUtil {
     }
 
     private function callMethod(array &$cb, array $args = array()) {
-        if(count($cb) == 2) {
+        if (count($cb) == 2) {
 
             // Check of we can call this without problems ....
-            if($cb[1] instanceof ReflectionMethod && $cb[0] instanceof $cb[1]->class) {
+            if ($cb[1] instanceof ReflectionMethod && $cb[0] instanceof $cb[1]->class) {
                 return $cb[1]->invokeArgs($cb[0], $args);
             }
         }
@@ -116,26 +116,26 @@ class AppKitFormatParserUtil {
         $m = array();
         $begin = $format;
 
-        if(preg_match_all('@\$\{([^\}]+)\}@', $format, $m, PREG_SET_ORDER)) {
+        if (preg_match_all('@\$\{([^\}]+)\}@', $format, $m, PREG_SET_ORDER)) {
             foreach($m as $match) {
                 $parts = explode('.', $match[1]);
                 $namespace = array_shift($parts);
 
                 $args = $this->extractArgs($match[1]);
 
-                if(count($args)) {
+                if (count($args)) {
                     $parts = $this->cleanPartsArray($parts);
                 }
 
                 $replace = null;
                 $data = $this->getData($namespace);
 
-                switch($this->getNamespaceType($namespace)) {
+                switch ($this->getNamespaceType($namespace)) {
 
                     case self::TYPE_ARRAY:
-                        if(count($parts) == 1) {
+                        if (count($parts) == 1) {
 
-                            if(isset($data[$parts[0]])) {
+                            if (isset($data[$parts[0]])) {
                                 $replace = $data[$parts[0]];
                             }
                         }
@@ -143,7 +143,7 @@ class AppKitFormatParserUtil {
                         break;
 
                     case self::TYPE_METHOD:
-                        if(isset($data[$parts[0]])) {
+                        if (isset($data[$parts[0]])) {
                             $replace = $this->callMethod($data[$parts[0]], $args);
                         }
 
@@ -151,7 +151,7 @@ class AppKitFormatParserUtil {
 
                     default:
 
-                    if($match[1] == '*' && $this->default !== null) {
+                    if ($match[1] == '*' && $this->default !== null) {
                                 $replace = $this->default;
                             }
 
@@ -162,7 +162,7 @@ class AppKitFormatParserUtil {
 
                 }
 
-                if(isset($replace)) {
+                if (isset($replace)) {
                     $format = preg_replace('@'. preg_quote($match[0]). '@', $replace, $format);
                 }
 
@@ -174,7 +174,7 @@ class AppKitFormatParserUtil {
     }
 
     private function getNamespaceType($namespace) {
-        if($this->namespaceExists($namespace)) {
+        if ($this->namespaceExists($namespace)) {
             return $this->namespaces[$namespace];
         }
 
@@ -182,7 +182,7 @@ class AppKitFormatParserUtil {
     }
 
     private function getData($namespace) {
-        if($this->namespaceExists($namespace) && isset($this->data[$namespace])) {
+        if ($this->namespaceExists($namespace) && isset($this->data[$namespace])) {
             return $this->data[$namespace];
         }
 

@@ -19,7 +19,7 @@ class Cronks_System_ObjectSearchSuccessView extends CronksBaseView {
         $this->model = $this->getContext()->getModel('System.ObjectSearchResult', 'Cronks');
         $this->model->setQuery($rd->getParameter('q'));
 
-        if($rd->getParameter('t')) {
+        if ($rd->getParameter('t')) {
             $this->model->setSearchType($rd->getParameter('t'));
         }
 

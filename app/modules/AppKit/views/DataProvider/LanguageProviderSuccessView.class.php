@@ -17,7 +17,7 @@ class AppKit_DataProvider_LanguageProviderSuccessView extends AppKitBaseView {
             }
             return json_encode(array("success"=>true,"locales"=>$localeList));
 
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->getResponse()->setHttpStatusCode(500);
             return json_encode(array("errorMessage" => "An exception occured: ".$e->getMessage(),"isBug"=>true));
         }

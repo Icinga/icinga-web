@@ -16,7 +16,7 @@ class IcingaHosts extends BaseIcingaHosts {
     public static $STATE_UNREACHABLE = 2;
 
     public function __get($method)  {
-        switch($method) {
+        switch ($method) {
             case  'contacts':
                 $contacts = $this->getContacts();
                 $this->set("contacts",$contacts);

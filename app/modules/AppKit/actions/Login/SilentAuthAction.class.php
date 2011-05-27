@@ -25,30 +25,30 @@ class AppKit_Login_SilentAuthAction extends AppKitBaseAction {
         $this->setAttribute('authenticated', false);
         $this->setAttribute('template', false);
 
-        if(!$enable_dialog && !$enable_silent) {
+        if (!$enable_dialog && !$enable_silent) {
             return 'ConfigError';
         }
 
         $dispatch = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
 
-        if($enable_silent == true) {
-            if($dispatch->hasSilentProvider()) {
+        if ($enable_silent == true) {
+            if ($dispatch->hasSilentProvider()) {
                 $username = $dispatch->guessUsername();
 
-                if($username !== false) {
+                if ($username !== false) {
                     $user = $this->getContext()->getUser();
 
                     try {
                         $user->doLogin($username, null, false);
                         $this->setAttribute('authenticated', true);
-                    } catch(AgaviSecurityException $e) {
+                    } catch (AgaviSecurityException $e) {
 
                     }
                 }
             }
         }
 
-        if($enable_dialog !== true) {
+        if ($enable_dialog !== true) {
             return 'Error';
         }
 

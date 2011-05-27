@@ -30,7 +30,7 @@ class Web_Icinga_ApiSimpleDataProviderSuccessView extends IcingaWebBaseView {
         // store final count and convert
         $jsonData['result']['count'] = count($jsonData['result']['data']);
 
-        if(($template = $model->getTemplateCode()) !== false) {
+        if (($template = $model->getTemplateCode()) !== false) {
             $jsonData['result']['template'] = $template;
         }
 

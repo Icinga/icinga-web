@@ -41,7 +41,7 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
         $tag = AppKitXmlTag::create('img')
                ->addAttribute('src', $this->imageUrl($image_name));
 
-        if($alt !== false) {
+        if ($alt !== false) {
             $tag->addAttribute('alt', $alt);
             $tag->addAttribute('title', $alt);
         }
@@ -60,7 +60,7 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
      * @return AppKitXmlTag
      */
     public function LinkToRoute($route_name, $caption, array $route_args = array(), array $attributes = array(), AgaviRequestDataHolder $other_args = null) {
-        if($other_args != null) {
+        if ($other_args != null) {
             $route_args = array_merge($other_args->getParameters(), $route_args);
         }
 
@@ -93,7 +93,7 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
                ->addAttribute('type', $submit==true ? 'submit' : 'button')
                ->addAttribute('value', $caption);
 
-        if($name !== null) {
+        if ($name !== null) {
             $tag->addAttribute('name', $name);
         }
 
@@ -113,7 +113,7 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
         static $changer = false;
         $changer = !$changer;
 
-        if($changer) {
+        if ($changer) {
             return $class1;
         } else {
             return $class2;
@@ -139,7 +139,7 @@ class AppKitHtmlHelper extends AppKitSingleton implements AppKitHtmlEntitiesInte
     public static function yuiTabSelector($name, $check) {
         static $yui_selected_tab_class = 'selected';
 
-        if($name==$check) {
+        if ($name==$check) {
             return $yui_selected_tab_class;
         }
 

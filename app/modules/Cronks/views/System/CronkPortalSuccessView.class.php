@@ -16,13 +16,13 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView {
         foreach($customViewFields as $name=>&$val) {
             $val = $rd->getParameter($name,null);
 
-            if($val == null) {
+            if ($val == null) {
                 $rd->setParameter("isURLView",false);
                 break;
             }
         }
 
-        if($rd->getParameter("isURLView"))  {
+        if ($rd->getParameter("isURLView"))  {
             $this->formatFields($customViewFields);
             $rd->setParameter("URLData",json_encode($customViewFields));
         }
@@ -48,14 +48,14 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView {
             $fieldParts = explode(';',$field);
 
             foreach($fieldParts as $currentField) {
-                if(!$currentField) {
+                if (!$currentField) {
                     continue;
                 }
 
                 //rebuild field
                 $parts = array();
 
-                if(preg_match("/(\w*?)\|(.*?)_\d+=(.*)/",$currentField,$parts)) {
+                if (preg_match("/(\w*?)\|(.*?)_\d+=(.*)/",$currentField,$parts)) {
 
                     // @todo: Works better without, quickfix!
                     //if(!isset($result[$parts[1]]))

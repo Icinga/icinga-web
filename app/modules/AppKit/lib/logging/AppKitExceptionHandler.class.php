@@ -24,10 +24,10 @@ class AppKitExceptionHandler extends AppKitBaseClass {
         AppKitAgaviUtil::log('Uncaught %s: %s (%s:%d)', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), self::LOG_LEVEL);
         // don't die in case of supressed errors (like the ob_clean in the agaviException has)
 
-        if(error_reporting()) {
+        if (error_reporting()) {
             $context = AgaviContext::getInstance();
 
-            if($context !== null && AgaviConfig::get('exception.templates.' . $context->getName()) !== null) {
+            if ($context !== null && AgaviConfig::get('exception.templates.' . $context->getName()) !== null) {
                 include(AgaviConfig::get('exception.templates.' . $context->getName()));
             } else {
                 include(AgaviConfig::get('exception.default_template'));

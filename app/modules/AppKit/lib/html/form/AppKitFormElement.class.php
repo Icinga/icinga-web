@@ -110,8 +110,8 @@ class AppKitFormElement extends AppKitXmlTag {
     }
 
     public function removeClass($class_name) {
-        if($this->classExists($class_name)) {
-            if(($index = array_search($class_name, $this->class)) !== false) {
+        if ($this->classExists($class_name)) {
+            if (($index = array_search($class_name, $this->class)) !== false) {
                 array_slice($this->class, $index, 1);
                 return true;
             }
@@ -141,21 +141,21 @@ class AppKitFormElement extends AppKitXmlTag {
     protected function buildTag() {
         $this->addAttribute('name', $this->name);
 
-        if(count($this->class)) {
+        if (count($this->class)) {
             $this->addAttribute('class', implode(' ', $this->class));
         }
 
         $this->addAttribute('id', $this->id);
 
-        if(isset($this->type)) {
+        if (isset($this->type)) {
             $this->addAttribute('type', $this->type);
         }
 
-        if(isset($this->value)) {
+        if (isset($this->value)) {
             $this->addAttribute('value', $this->value);
         }
 
-        switch($this->type) {
+        switch ($this->type) {
             case 'checkbox':
             case 'radio':
                 $label = $this->dom->createElement('label', $this->caption);

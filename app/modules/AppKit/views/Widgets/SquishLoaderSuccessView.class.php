@@ -3,7 +3,7 @@
 class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
     public function executeJavascript(AgaviRequestDataHolder $rd) {
 
-        if($this->getAttribute('errors', false)) {
+        if ($this->getAttribute('errors', false)) {
             return "throw '". join(", ", $this->getAttribute('errors')). "';";
         } else {
             $content = $this->getAttribute('javascript_content');
@@ -21,18 +21,18 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
     private function executeActions(array $actions = array()) {
         $out = null;
 
-        if(count($actions)==1 && isset($actions[0])) {
+        if (count($actions)==1 && isset($actions[0])) {
 
             foreach($actions[0] as $modules) {
 
                 foreach($modules as $a) {
                     $p = array();
 
-                    if(!isset($a['arguments'])) {
+                    if (!isset($a['arguments'])) {
                         $a['arguments'] = false;
                     }
 
-                    if(is_array($a['arguments'])) {
+                    if (is_array($a['arguments'])) {
                         $p = $a['arguments'];
                     }
 
@@ -40,7 +40,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
                     $r = $this->createForwardContainer($a['module'], $a['action'], $p, $a['output_type'])
                          ->execute();
 
-                    if($r->hasContent()) {
+                    if ($r->hasContent()) {
                         $out .= $r->getContent(). "\n\n";
                     }
                 }

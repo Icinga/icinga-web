@@ -19,10 +19,10 @@ class AppKitSelectDoctrineSource extends AppKitSelectSource {
     public function __construct(Doctrine_Collection $data, $selected, $key_field, $val_field) {
         parent::__construct('dummy', null);
 
-        if($selected instanceof Doctrine_Collection) {
+        if ($selected instanceof Doctrine_Collection) {
             $obj = $selected->getFirst();
 
-            if($obj && !$data->getFirst() instanceof $obj) {
+            if ($obj && !$data->getFirst() instanceof $obj) {
                 throw new AppKitSelectSourceException('Data and selected objects should use the same element source: '. get_class($data->getFirst()));
             }
         }
@@ -30,7 +30,7 @@ class AppKitSelectDoctrineSource extends AppKitSelectSource {
         elseif($selected instanceof Doctrine_Record) {
             $check_class = get_class($data->getFirst());
 
-            if($selected && !$selected instanceof $check_class) {
+            if ($selected && !$selected instanceof $check_class) {
                 throw new AppKitSelectSourceException('Data and selected objects should use the same element source: '. get_class($data->getFirst()));
             }
         }
@@ -55,16 +55,16 @@ class AppKitSelectDoctrineSource extends AppKitSelectSource {
             $element->setAttribute('value', $data-> { $this->key_field });
 
 
-            if($this->selected instanceof Doctrine_Collection) {
+            if ($this->selected instanceof Doctrine_Collection) {
                 foreach($this->selected as $selected) {
-                    if($data-> { $this->key_field } == $selected-> { $this->key_field }) {
+                    if ($data-> { $this->key_field } == $selected-> { $this->key_field }) {
                         $element->setAttribute('selected', 'selected');
                     }
                 }
             }
 
             elseif($this->selected instanceof Doctrine_Record) {
-                if($data-> { $this->key_field } == $this->selected-> { $this->key_field }) {
+                if ($data-> { $this->key_field } == $this->selected-> { $this->key_field }) {
                     $element->setAttribute('selected', 'selected');
                 }
             }

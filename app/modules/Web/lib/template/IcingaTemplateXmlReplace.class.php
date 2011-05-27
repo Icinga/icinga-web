@@ -32,7 +32,7 @@ class IcingaTemplateXmlReplace {
 
         $content = trim($content);
 
-        if(preg_match('@\$\{([^\}]+)\}@', $content)) {
+        if (preg_match('@\$\{([^\}]+)\}@', $content)) {
             return $this->parser->parseData($content);
         }
 
@@ -53,13 +53,13 @@ class IcingaTemplateXmlReplace {
 
         $content = trim($content);
 
-        if(preg_match('@\$\{([^\}]+)\}@', $content)) {
+        if (preg_match('@\$\{([^\}]+)\}@', $content)) {
             return $this->parser->parseData($content);
         }
 
         // Can't do this later (double parsing ....)
         elseif(strstr($content, '::')) {
-            if(defined($content)) {
+            if (defined($content)) {
                 $content = AppKit::getConstant($content);
             }
         }

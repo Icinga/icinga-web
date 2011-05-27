@@ -42,11 +42,11 @@ abstract class AppKitSingleton extends AppKitBaseClass {
         $args = func_get_args();
         $class_name = array_shift($args);
 
-        if(!$class_name) {
+        if (!$class_name) {
             $class_name = AppKitClassUtil::getCalledClass();
         }
 
-        if(!self::checkInstance($class_name)) {
+        if (!self::checkInstance($class_name)) {
             self::$instances[$class_name] =
                 self::createInstance($class_name, $args);
         }
@@ -69,7 +69,7 @@ abstract class AppKitSingleton extends AppKitBaseClass {
     }
 
     public static function checkInstance($class_name) {
-        if(array_key_exists($class_name, self::$instances) && self::$instances[$class_name] instanceof $class_name) {
+        if (array_key_exists($class_name, self::$instances) && self::$instances[$class_name] instanceof $class_name) {
 
             return true;
         }
@@ -86,7 +86,7 @@ abstract class AppKitSingleton extends AppKitBaseClass {
     public function __construct() {
         $class = get_class($this);
 
-        if(self::checkInstance($class)) {
+        if (self::checkInstance($class)) {
 
             throw new AppKitSingletonException("This is a singleton, try $class::getInstance() instead!");
         } else {

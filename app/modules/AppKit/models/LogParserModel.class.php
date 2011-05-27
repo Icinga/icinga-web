@@ -20,7 +20,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     }
 
     protected function getEntriesFromFiles(array $files,$start=0,$dir = "desc") {
-        if($dir == "desc") {
+        if ($dir == "desc") {
             sort($files);
         } else {
             rsort($files);
@@ -32,7 +32,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
         foreach($files as $file) {
             $content = file_get_contents($base."/".$file);
 
-            if(($count = substr_count($content,"\n[")+1) < $start) {
+            if (($count = substr_count($content,"\n[")+1) < $start) {
                 $completeCount += $count;
                 $start -= $count;
                 continue;
@@ -42,7 +42,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
             $string .= $content;
         }
 
-        if($start) {
+        if ($start) {
             $string = preg_replace("/(.*\n)/","",$string,$start);
         }
 
@@ -53,7 +53,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     protected function parseString($str,$end = 100) {
         $line = preg_split("/^(\[)|(\n(?:\[))/",$str,$end,PREG_SPLIT_NO_EMPTY);
 
-        if(isset($line[$end])) {
+        if (isset($line[$end])) {
             unset($line[$end]);
         }
 
@@ -69,11 +69,11 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     public function getLogAsArray($logname, $pattern = null) {
         $availableLogs = $this->getLogListing();
 
-        if(!in_array($availableLogs[$logname])) {
+        if (!in_array($availableLogs[$logname])) {
             return array();
         }
 
-        if($pattern) {
+        if ($pattern) {
             $this->pattern = $pattern;
         }
 
@@ -83,7 +83,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     protected function getLogDir() {
         $logDir = AgaviConfig::get('core.log_dir');
 
-        while(preg_match("/%(.*?)%/",$logDir,$match)) {
+        while (preg_match("/%(.*?)%/",$logDir,$match)) {
             $logDir = preg_replace("/%.*?%/",AgaviConfig::get($match[1]),$logDir);
         }
 
@@ -95,7 +95,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
         $files = scandir($logDir);
         $result = array();
         foreach($files as $file) {
-            if(preg_match("/^".$name.".*/",$file)) {
+            if (preg_match("/^".$name.".*/",$file)) {
                 $result[] = $file;
             }
         }
@@ -108,10 +108,10 @@ class AppKit_LogParserModel extends AppKitBaseModel {
         $availableLogFiles = array();
 
         foreach($files as $file) {
-            if(substr($file,-3) == 'log') {
+            if (substr($file,-3) == 'log') {
                 $file = preg_replace("/^([\w\-]+)\-\d{4}\-\d{2}\-\d{2}.log$/", "\\1",$file);
 
-                if(!isset($availableLogFiles[$file])) {
+                if (!isset($availableLogFiles[$file])) {
                     $availableLogFiles[$file] = $file;
                 }
             }

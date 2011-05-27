@@ -35,7 +35,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction {
         // The model
         $sender = $this->getContext()->getModel('System.CommandSender', 'Cronks');
 
-        if($sender->checkAuth($rd->getParameter('command'), $rd->getParameter('selection'), $rd->getParameter('data'), $auth) === true) {
+        if ($sender->checkAuth($rd->getParameter('command'), $rd->getParameter('selection'), $rd->getParameter('data'), $auth) === true) {
 
             $this->log('SendCommandAction: Successfull authentication (hmac=%s)', $auth, AgaviLogger::DEBUG);
 
@@ -47,7 +47,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction {
             // Prepare the data structures
             $coa = $sender->buildCommandObjects();
 
-            if($IcingaApiCommand->checkDispatcher() !== true) {
+            if ($IcingaApiCommand->checkDispatcher() !== true) {
 
                 $this->log('SendCommandAction: IcingaApi dispatcher is not ready!', AgaviLogger::ERROR);
 
@@ -61,7 +61,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction {
             try {
                 $IcingaApiCommand->dispatchCommandArray($coa);
                 $this->log('SendCommandAction: Commands sent', AgaviLogger::INFO);
-            } catch(IcingaApiCommandException $e) {
+            } catch (IcingaApiCommandException $e) {
                 $errors = $IcingaApiCommand->getLastErrors();
                 $error = array();
 

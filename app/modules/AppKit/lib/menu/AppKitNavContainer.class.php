@@ -18,7 +18,7 @@ class AppKitNavContainer extends AppKitArrayContainer
     }
 
     public function addItemBefore($name, AppKitNavItem $item) {
-        if(array_key_exists($name, $this->items)) {
+        if (array_key_exists($name, $this->items)) {
             $replace = array($item->getName() => &$item);
             $this->items = AppKitArrayUtil::arrayKeyInsertBefore($this->items, $name, $replace);
             return $item;
@@ -37,7 +37,7 @@ class AppKitNavContainer extends AppKitArrayContainer
      * @return AppKitNavItem
      */
     public function addSubItem($parent_name, AppKitNavItem $item) {
-        if($this->offsetExists($parent_name)) {
+        if ($this->offsetExists($parent_name)) {
             $container = $this->offsetGet($parent_name)->getContainer();
             return $container->addItem($item);
         }
@@ -47,7 +47,7 @@ class AppKitNavContainer extends AppKitArrayContainer
     }
 
     public function hasChildren() {
-        if($this->current() && $this->current()->getContainer()->count()) {
+        if ($this->current() && $this->current()->getContainer()->count()) {
             return true;
         }
 
@@ -63,7 +63,7 @@ class AppKitNavContainer extends AppKitArrayContainer
 
     public function current() {
 
-        if(isset($this->keys[ $this->key ])) {
+        if (isset($this->keys[ $this->key ])) {
             return $this->offsetGet($this->keys[ $this->key ]);
         }
 

@@ -12,7 +12,7 @@ class AppKitFactories extends AppKitSingleton {
                            $params['class'] => $params['file']
                        );
 
-            if(is_array($params['requiredClasses']) && count($params['requiredClasses'])) {
+            if (is_array($params['requiredClasses']) && count($params['requiredClasses'])) {
                 $classes = array_merge($params['requiredClasses'], $classes);
             }
 
@@ -25,7 +25,7 @@ class AppKitFactories extends AppKitSingleton {
 
     private static function includeClasses(array $classes) {
         foreach($classes as $name=>$file) {
-            if(!class_exists($name) && file_exists($file)) {
+            if (!class_exists($name) && file_exists($file)) {
                 require_once($file);
             } else {
                 throw new AppKitFactoryException('Could not load class: %s (%s). File and object does not exists and the autoloader could not handle the factory!', $name, $file);
@@ -46,7 +46,7 @@ class AppKitFactories extends AppKitSingleton {
 
             $ref = $this->getFactoryReflection($name);
 
-            if($ref->hasMethod('shutdownFactory')) {
+            if ($ref->hasMethod('shutdownFactory')) {
                 $method = $ref->getMethod('shutdownFactory');
                 $method->invoke($this->getFactory($name));
             }
@@ -56,7 +56,7 @@ class AppKitFactories extends AppKitSingleton {
     }
 
     public function addObject($name, AppKitFactory &$factory) {
-        if($this->factoryExists($name)) {
+        if ($this->factoryExists($name)) {
             throw new AppKitFactoryException('This factory exists, remove it first!');
         }
 
@@ -66,10 +66,10 @@ class AppKitFactories extends AppKitSingleton {
     }
 
     public function removeFactory($name) {
-        if($this->factoryExists($name)) {
+        if ($this->factoryExists($name)) {
             $ref = $this->getFactoryReflection($name);
 
-            if($ref->hasMethod('shutdownFactory')) {
+            if ($ref->hasMethod('shutdownFactory')) {
                 $method = $ref->getMethod('shutdownFactory');
                 $method->invoke($this->getFactory($name));
             }
@@ -88,7 +88,7 @@ class AppKitFactories extends AppKitSingleton {
      * @return ReflectionObject
      */
     public function getFactoryReflection($name) {
-        if($this->factoryExists($name)) {
+        if ($this->factoryExists($name)) {
             return new ReflectionObject($this->getFactory($name));
         }
 
@@ -96,7 +96,7 @@ class AppKitFactories extends AppKitSingleton {
     }
 
     public function getFactory($name) {
-        if($this->factoryExists($name)) {
+        if ($this->factoryExists($name)) {
             return $this->factories[$name];
         }
 
@@ -106,7 +106,7 @@ class AppKitFactories extends AppKitSingleton {
     public function addFactory($name, $className, array $parameters) {
         $ref = new ReflectionClass($className);
 
-        if($this->factoryExists($name)) {
+        if ($this->factoryExists($name)) {
             throw new AppKitFactoryException('This factory exists, remove it first!');
         }
 
@@ -130,7 +130,7 @@ class AppKitFactories extends AppKitSingleton {
     }
 
     public function factoryExists($name) {
-        if(array_key_exists($name, $this->factories) && $this->factories[$name] instanceof AppKitFactoryInterface) {
+        if (array_key_exists($name, $this->factories) && $this->factories[$name] instanceof AppKitFactoryInterface) {
             return true;
         }
 

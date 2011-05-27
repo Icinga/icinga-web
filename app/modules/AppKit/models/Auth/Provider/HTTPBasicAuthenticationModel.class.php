@@ -29,7 +29,7 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
     public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
         $tuser = $this->loadUserByDQL($user->user_name);
 
-        if($tuser && $tuser instanceof NsmUser && $user->user_name == $this->getAuthName()) {
+        if ($tuser && $tuser instanceof NsmUser && $user->user_name == $this->getAuthName()) {
             return true;
         }
 
@@ -56,11 +56,11 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
     private function getVarSource() {
         $source_name = $this->getParameter('http_source', self::DATASOURCE_NAME);
 
-        if(array_search($source_name, self::$sources_list) === false) {
+        if (array_search($source_name, self::$sources_list) === false) {
             throw new AppKitAuthProviderException('http_source (%s) is unknown', $source_name);
         }
 
-        switch($source_name) {
+        switch ($source_name) {
             case '_SERVER':
             default:
                 return new AgaviParameterHolder($_SERVER);
@@ -74,11 +74,11 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
         foreach(self::$source_map as $class_target => $config_target) {
             $search_keys = AppKitArrayUtil::trimSplit($this->getParameter($config_target, self::$source_map_defaults[$class_target]));
 
-            if(isset($search_keys[0]) && ($search_value = $source->getParameter($search_keys[0]))) {
-                if($class_target == 'auth_name') {
+            if (isset($search_keys[0]) && ($search_value = $source->getParameter($search_keys[0]))) {
+                if ($class_target == 'auth_name') {
                     $search_value = strtolower($search_value);
 
-                    if($strip = strtolower($this->getParameter('auth_strip_domain', ''))) {
+                    if ($strip = strtolower($this->getParameter('auth_strip_domain', ''))) {
                         $m = '~@' . preg_quote($strip, '~') . '~';
                         $this-> { $class_target } = preg_replace($m, '', $search_value);
                     } else {
@@ -90,7 +90,7 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
             }
         }
 
-        if($this->auth_type) {
+        if ($this->auth_type) {
             $this->auth_type = strtolower($this->auth_type);
         }
 

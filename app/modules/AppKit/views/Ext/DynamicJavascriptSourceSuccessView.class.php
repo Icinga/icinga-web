@@ -11,7 +11,7 @@ class AppKit_Ext_DynamicJavascriptSourceSuccessView extends AppKitBaseView {
         $scripts = $this->getContext()->getRequest()->getAttribute('app.javascript_dynamic', AppKitModuleUtil::DEFAULT_NAMESPACE);
         $script = $rd->getParameter('script');
 
-        if(isset($scripts) && array_key_exists($script, $scripts) && file_exists($scripts[$script])) {
+        if (isset($scripts) && array_key_exists($script, $scripts) && file_exists($scripts[$script])) {
             return file_get_contents($scripts[$script]);
         } else {
             throw new AgaviViewException(sprintf('Dynamic script %s was not defined', $script));

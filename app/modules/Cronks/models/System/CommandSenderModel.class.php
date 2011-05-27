@@ -48,7 +48,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
         foreach($data as $name=>$value) {
             // parse date
-            if(in_array($name, $this->timeFields)) {
+            if (in_array($name, $this->timeFields)) {
                 $value = strtotime($value);
             }
 
@@ -83,7 +83,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
         $test = hash_hmac(self::TIME_ALGO, $data, $this->genTimeKey());
 
-        if($key === $test) {
+        if ($key === $test) {
             return true;
         }
 

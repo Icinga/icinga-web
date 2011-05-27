@@ -18,7 +18,7 @@ class IcingaTemplateLayout {
     private $params = null;
 
     public function __construct(AgaviExecutionContainer  $agaviContainer = null) {
-        if($agaviContainer !== null) {
+        if ($agaviContainer !== null) {
             $this->setContainer($agaviContainer);
         }
 

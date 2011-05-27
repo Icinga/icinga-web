@@ -8,7 +8,7 @@ class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
 
     public function executeHtml(AgaviRequestDataHolder $rd) {
 
-        if($this->getAttribute('authenticated', false) == true) {
+        if ($this->getAttribute('authenticated', false) == true) {
 
             $url = $this->getContext()->getRequest()->getUrl();
 
@@ -18,14 +18,14 @@ class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
             //
             //			$route = $this->getContext()->getRouting()->getRoute(array_pop($routes));
 
-            if(preg_match('/\/login/', $url)) {
+            if (preg_match('/\/login/', $url)) {
                 $url = $this->getContext()->getRouting()->gen('index_page');
             }
 
             $this->getResponse()->setRedirect($url);
 
         } else {
-            if(AgaviConfig::get('modules.appkit.auth.behaviour.enable_dialog', false) == true) {
+            if (AgaviConfig::get('modules.appkit.auth.behaviour.enable_dialog', false) == true) {
                 return $this->createForwardContainer('AppKit', 'Login.AjaxLogin', null, null, 'read');
             }
         }

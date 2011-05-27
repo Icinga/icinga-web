@@ -48,7 +48,7 @@ class AppKitModuleUtil extends AppKitSingleton {
     public static function validConfig($module) {
         AppKitModuleUtil::normalizeModuleName($module);
 
-        if(AgaviConfig::get(sprintf('modules.%s.version', false)) !== false) {
+        if (AgaviConfig::get(sprintf('modules.%s.version', false)) !== false) {
             return true;
         }
 
@@ -66,7 +66,7 @@ class AppKitModuleUtil extends AppKitSingleton {
      * @return AppKitModuleConfigItem
      */
     public function registerModule($module) {
-        if(!$this->isRegistered($module) && AppKitModuleUtil::validConfig($module)) {
+        if (!$this->isRegistered($module) && AppKitModuleUtil::validConfig($module)) {
             $this->modules[$module] =
                 new AppKitModuleConfigItem($module);
         }
@@ -80,7 +80,7 @@ class AppKitModuleUtil extends AppKitSingleton {
      * @return AppKitModuleConfigItem
      */
     public function getConfigObject($module) {
-        if($this->isRegistered($module)) {
+        if ($this->isRegistered($module)) {
             return $this->modules[$module];
         }
 
@@ -88,7 +88,7 @@ class AppKitModuleUtil extends AppKitSingleton {
     }
 
     public function getValidConfigNamespaces() {
-        if(!count($this->s_configns)) {
+        if (!count($this->s_configns)) {
             foreach($this->modules as $module=>$ci) {
                 foreach($ci->getConfigNamespaces() as $config_ns) {
                     $this->s_configns[] = $config_ns;
@@ -105,12 +105,12 @@ class AppKitModuleUtil extends AppKitSingleton {
         foreach($this->getValidConfigNamespaces() as $ns) {
             $test = $ns. '.'. $subkey;
 
-            if(($data = AgaviConfig::get($test, false)) !== false) {
+            if (($data = AgaviConfig::get($test, false)) !== false) {
                 $out[$subkey][isset($this->s_modnames[$ns]) ? $this->s_modnames[$ns] : $ns] = $data;
             }
         }
 
-        switch($type) {
+        switch ($type) {
             case self::DATA_FLAT:
                 return AppKitArrayUtil::flattenArray($out, 'sub');
                 break;
@@ -135,7 +135,7 @@ class AppKitModuleUtil extends AppKitSingleton {
     }
 
     public function applyToRequestAttributes(AgaviExecutionContainer $container, array $which_subkeys=null, $ns=self::DEFAULT_NAMESPACE) {
-        if($which_subkeys===null) {
+        if ($which_subkeys===null) {
             $which_subkeys = self::$default_config_keys;
         }
 
@@ -145,8 +145,8 @@ class AppKitModuleUtil extends AppKitSingleton {
 
             $data = $this->getSubConfig($subkey, $subtype);
 
-            if(isset($data)) {
-                if($subtype == self::DATA_UNIQUE) {
+            if (isset($data)) {
+                if ($subtype == self::DATA_UNIQUE) {
                     $rq->setAttribute($subkey, $data, $ns);
                 } else {
                     foreach($data as $value) {
@@ -172,7 +172,7 @@ class AppKitModuleConfigItem extends AgaviAttributeHolder {
     public function  __construct($module) {
         $module = AppKitModuleUtil::normalizeModuleName($module);
 
-        if(AppKitModuleUtil::validConfig($module)) {
+        if (AppKitModuleUtil::validConfig($module)) {
             $this->setAttribute(self::A_MODULE_NAME, $module, self::NS_INT);
             $this->setAttribute(self::A_BASE_NS, 'modules.'. $module, self::NS_INT);
 
@@ -191,7 +191,7 @@ class AppKitModuleConfigItem extends AgaviAttributeHolder {
     public function getAttributeNamespaces() {
         $ns = parent::getAttributeNamespaces();
 
-        if(($index = array_search(self::NS_INT, $ns)) !== false) {
+        if (($index = array_search(self::NS_INT, $ns)) !== false) {
             unset($ns[$index]);
         }
 

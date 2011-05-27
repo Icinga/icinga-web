@@ -19,7 +19,7 @@ class AppKit_LogoutAction extends AppKitBaseAction {
 
     public function execute(AgaviRequestDataHolder $rd) {
 
-        if($rd->getParameter('logout', false) == 1) {
+        if ($rd->getParameter('logout', false) == 1) {
 
             $this->getContext()->getUser()->doLogout();
 

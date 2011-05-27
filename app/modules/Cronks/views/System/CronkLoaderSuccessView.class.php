@@ -15,13 +15,13 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
 
             $parameters = array() + (array)$rd->getParameter('p', array());
 
-            if($model->hasCronk($crname)) {
+            if ($model->hasCronk($crname)) {
                 $cronk = $model->getCronk($crname);
 
-                if(array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
+                if (array_key_exists('ae:parameter', $cronk) && is_array($cronk['ae:parameter'])) {
 
                     foreach($cronk['ae:parameter'] as $key=>$param) {
-                        if(is_array($param) || is_object($param)) {
+                        if (is_array($param) || is_object($param)) {
                             $param = json_encode($param);
                             $cronk['ae:parameter'][$key] = $param;
                             $parameters[$key] = $param;
@@ -33,7 +33,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
                                   + array('module' => $cronk['module'], 'action' => $cronk['action']);
                 }
 
-                if(array_key_exists('state', $cronk) && isset($cronk['state'])) {
+                if (array_key_exists('state', $cronk) && isset($cronk['state'])) {
                     $parameters['state'] = $cronk['state'];
                 }
 
@@ -41,7 +41,7 @@ class Cronks_System_CronkLoaderSuccessView extends CronksBaseView {
             } else {
                 return $tm->_('Sorry, cronk "%s" not found', null, null, array($crname));
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return $tm->_('Exception thrown: %s', null, null, array($e->getMessage()));
         }
 

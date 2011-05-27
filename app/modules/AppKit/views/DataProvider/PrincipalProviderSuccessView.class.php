@@ -7,14 +7,14 @@ class AppKit_DataProvider_PrincipalProviderSuccessView extends AppKitBaseView {
         $userId = $rd->getParameter("userId");
         $result;
 
-        if(!$groupId && !$userId) {
+        if (!$groupId && !$userId) {
             $result = array_values($principalAdmin->getTargetArray());
-        } else	if($userId)  {
+        } else	if ($userId)  {
             $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
             $user = $useradmin->getUserById($userId);
             $prid = $user->NsmPrincipal->principal_id;
             $result = $principalAdmin->getSelectedValues($prid);
-        } else if($groupId) {
+        } else if ($groupId) {
             $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
             $role = $roleadmin->getRoleById($groupId);
             $prid = $role->NsmPrincipal->principal_id;

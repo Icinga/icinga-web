@@ -3,18 +3,18 @@
 class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel {
 
     public function limitToHosts(Doctrine_Query $q,array $hosts = array()) {
-        if(empty($hosts)) {
+        if (empty($hosts)) {
             return $q;
         }
 
         $byName = array();
         $byId  = array();
         foreach($hosts as $host) {
-            if(is_string($host)) {
+            if (is_string($host)) {
                 $byName[] = $host;
-            } else if(is_int($host)) {
+            } else if (is_int($host)) {
                 $byId[] = $host;
-            } else if($host instanceof IcingaHosts) {
+            } else if ($host instanceof IcingaHosts) {
                 $byId[] = $host->host_id;
             }
         }
@@ -31,7 +31,7 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel {
     public function getServicesByName(array $names,array $hosts = array(),$ignoreWildCards = false) {
         $useLike = false;
         foreach($names as $name) {
-            if(strpos($name,'%') !== false) {
+            if (strpos($name,'%') !== false) {
                 $useLike = true;
                 break;
             }
@@ -39,12 +39,12 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel {
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaServices s");
 
-        if(!$useLike || $ignoreWildCards) {
+        if (!$useLike || $ignoreWildCards) {
             $desc->whereIn("s.display_name",$names);
         } else {
             $first = true;
             foreach($names as $name) {
-                if($first) {
+                if ($first) {
                     $desc->addWhere("s.display_name LIKE ?",array($name));
                 } else {
                     $desc->orWhere("s.display_name LIKE ?",array($name));
@@ -116,7 +116,7 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel {
         $desc->select('*')->from("IcingaServices h")->innerJoin("h.customvariables cv");
         $first =true;
         foreach($keyVals as $key=>$val) {
-            if($first) {
+            if ($first) {
                 $desc->addWhere("cv.varname LIKE ? AND cv.varvalue LIKE ?",array($key,$val));
             } else {
                 $desc->orWhere("cv.varname LIKE ? AND cv.varvalue LIKE ?",array($key,$val));

@@ -22,9 +22,9 @@ class NsmTarget extends BaseNsmTarget {
      */
     public function getTargetObject() {
 
-        if($this->target_class && class_exists($this->target_class)) {
+        if ($this->target_class && class_exists($this->target_class)) {
 
-            if($this->target_object === null) {
+            if ($this->target_object === null) {
                 $this->target_object = AppKit::getInstance($this->target_class);
             }
 

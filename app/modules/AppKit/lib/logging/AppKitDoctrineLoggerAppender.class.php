@@ -8,7 +8,7 @@ class AppKitDoctrineLoggerAppender extends AgaviLoggerAppender {
 
     public function write(AgaviLoggerMessage $message) {
 
-        if(($layout = $this->getLayout()) === null) {
+        if (($layout = $this->getLayout()) === null) {
             throw new AgaviLoggingException('No Layout set');
         }
 

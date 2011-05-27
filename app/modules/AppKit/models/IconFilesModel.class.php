@@ -17,11 +17,11 @@ class AppKit_IconFilesModel extends AppKitBaseModel implements Countable {
         $this->real_path = AgaviConfig::get('org.icinga.appkit.image_absolute_path');
         $this->web_path = AgaviConfig::get('org.icinga.appkit.image_path');
 
-        if($this->hasParameter('path')) {
+        if ($this->hasParameter('path')) {
             $this->setDirectoryPart($this->getParameter('path'));
         }
 
-        if($this->hasParameter('query')) {
+        if ($this->hasParameter('query')) {
             $this->globFiles($this->getParameter('query'));
         }
     }

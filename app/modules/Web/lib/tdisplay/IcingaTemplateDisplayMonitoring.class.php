@@ -18,8 +18,8 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
         $type = $method_params->getParameter('type');
         $ref = new ReflectionClass('IcingaConstantResolver');
 
-        if(($m = $ref->getMethod($type))) {
-            if($m->isPublic() && $m->isStatic()) {
+        if (($m = $ref->getMethod($type))) {
+            if ($m->isPublic() && $m->isStatic()) {
                 return  $this->getAgaviTranslationManager()->_($m->invoke(null, $val));
             }
         }
@@ -32,7 +32,7 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
         $instance_id = $row->getParameter($method_params->getParameter('instance_id_field', 'instance_id'), 0);
         $object_id = $row->getParameter($method_params->getParameter('object_id_field', 'object_id'), 0);
 
-        if($instance_id && $object_id) {
+        if ($instance_id && $object_id) {
             $res = $this->getApi()->createSearch()
                    ->setResultType(IcingaApi::RESULT_ARRAY)
                    ->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApi::MATCH_EXACT)
@@ -44,7 +44,7 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 
             $row = $res->getRow();
 
-            if($row['COUNT_COMMENT_ID']>0) {
+            if ($row['COUNT_COMMENT_ID']>0) {
                 $id = sprintf('%s-%d', 'comment-object-id', $object_id);
                 return (string)AppKitXmlTag::create('div', $object_id)
                        ->addAttribute('id', $id)

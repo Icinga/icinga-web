@@ -7,7 +7,7 @@ class Icinga_Doctrine_Table extends Doctrine_Table {
     *
     **/
     public function createQuery($alias = '') {
-        if(! empty($alias)) {
+        if (! empty($alias)) {
             $alias = ' ' . trim($alias);
         }
 

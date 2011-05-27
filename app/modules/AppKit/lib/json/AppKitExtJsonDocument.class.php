@@ -43,7 +43,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     public static function initializeStaticData() {
         static $run=false;
 
-        if($run===false) {
+        if ($run===false) {
 
             self::$reflection = new ReflectionClass(__CLASS__);
 
@@ -51,7 +51,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
                 list($ctype,$ctypeid) = explode('_', $cname, 2);
 
-                switch($ctype) {
+                switch ($ctype) {
                     case 'ATTR':
                         self::$attr_values[] = $cval;
                         break;
@@ -75,7 +75,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     }
 
     public static function checkConstantValue($value, array &$store) {
-        if(in_array($value, $store) === true) {
+        if (in_array($value, $store) === true) {
             return true;
         }
 
@@ -93,21 +93,21 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     }
 
     public function setMeta($key, $value=null) {
-        if(self::checkMetaConstantValue($key)) {
+        if (self::checkMetaConstantValue($key)) {
             $this->meta[$key] = $value;
             return true;
         }
     }
 
     public function setAttribute($attr, $value=true) {
-        if(self::checkAttributeConstantValue($attr)) {
+        if (self::checkAttributeConstantValue($attr)) {
             $this->attributes[$attr] = $value;
             return true;
         }
     }
 
     public function unsetAttribute($attr) {
-        if(self::checkAttributeConstantValue($attr) && array_key_exists($attr, $this->attributes)) {
+        if (self::checkAttributeConstantValue($attr) && array_key_exists($attr, $this->attributes)) {
             unset($this->attributes[$attr]);
             return true;
         }
@@ -134,13 +134,13 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     public function hasField($name, array $options=array()) {
 
-        if(isset($options['mapping'])) {
+        if (isset($options['mapping'])) {
             $name = $options['mapping'];
         }
 
         $options['name'] = $name;
 
-        if(!array_key_exists('sortType', $options)) {
+        if (!array_key_exists('sortType', $options)) {
             $options['sortType'] = AppKitExtDataInterface::EXT_SORT_TEXT;
         }
 
@@ -150,13 +150,13 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     public function hasFieldBulk(array $field_names, array $options=array(), $autoDetect=true) {
 
-        if(array_key_exists('sortType', $options) && $autoDetect) {
+        if (array_key_exists('sortType', $options) && $autoDetect) {
             $autoDetect=false;
         }
 
         foreach($field_names as $field_name=>$field_value) {
-            if($autoDetect) {
-                if(is_bool($field_value)) {
+            if ($autoDetect) {
+                if (is_bool($field_value)) {
                     $options['sortType'] = AppKitExtDataInterface::EXT_SORT_INT;
                 }
 
@@ -182,7 +182,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
                            'sortType' => AppKitExtDataInterface::doctrineColumn2ExtSortType($meta['type'])
                        );
 
-            if(isset($meta['primary']) && $meta['primary'] == true) {
+            if (isset($meta['primary']) && $meta['primary'] == true) {
                 $this->setMeta(self::PROPERTY_ID, $column);
             }
 
@@ -199,11 +199,11 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     public function offsetSet($offset, $value) {
 
-        if($offset !== null) {
+        if ($offset !== null) {
             throw new AppKitExtJsonDocumentException('$offset must be <null> - always!');
         }
 
-        if(!is_array($value)) {
+        if (!is_array($value)) {
             throw new AppKitExtJsonDocumentException('$value must be an associative array!');
         }
 
@@ -211,8 +211,8 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
 
 
-        if(is_array($diff) && count($diff)>0) {
-            if($this->hasAttribute(self::ATTR_AUTODISCOVER)) {
+        if (is_array($diff) && count($diff)>0) {
+            if ($this->hasAttribute(self::ATTR_AUTODISCOVER)) {
                 $this->hasFieldBulk($diff);
             } else {
                 //throw new AppKitExtJsonDocumentException('$value keys does not match field data set!');
@@ -228,11 +228,11 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     private function addIDField(array &$value) {
         $idf = $this->meta[self::PROPERTY_ID];
 
-        if(!array_key_exists($idf, $this->fields)) {
+        if (!array_key_exists($idf, $this->fields)) {
             $this->hasField($idf);
         }
 
-        if(!array_key_exists($idf, $value)) {
+        if (!array_key_exists($idf, $value)) {
             $value[$idf] = (count($this->rows) +1);
         }
     }
@@ -251,7 +251,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     }
 
     public function getDoc() {
-        if(count($this->doc)<1) {
+        if (count($this->doc)<1) {
             $this->buildDoc();
         }
 
@@ -269,7 +269,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     protected function buildDoc() {
         $doc =& $this->doc;
 
-        if($this->hasAttribute(self::ATTR_NOMETA) == false) {
+        if ($this->hasAttribute(self::ATTR_NOMETA) == false) {
 
             $doc[self::PROPERTY_META] = array();
 
@@ -281,12 +281,12 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 
             $meta[self::PROPERTY_FIELDS] = array_values($this->fields);
 
-            if($this->defaults[self::PROPERTY_TOTAL] == 0) {
+            if ($this->defaults[self::PROPERTY_TOTAL] == 0) {
                 $this->setDefault(self::PROPERTY_TOTAL, count($this->rows));
             }
 
             foreach($this->defaults as $k=>$v) {
-                if(isset($this->meta[$k])) {
+                if (isset($this->meta[$k])) {
                     $doc[$this->meta[$k]] = $v;
                 } else {
                     $doc[$k] = $v;

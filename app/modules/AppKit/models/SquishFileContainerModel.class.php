@@ -15,7 +15,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
      */
     public function initialize(AgaviContext $context, array $parameters = array()) {
 
-        if(array_key_exists('type', $parameters)) {
+        if (array_key_exists('type', $parameters)) {
             $this->setType($parameters['type']);
         }
 
@@ -29,7 +29,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
      * @return unknown_type
      */
     public function addFile($file) {
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             $this->files[] = $file;
             return true;
         }
@@ -71,7 +71,7 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
 
         $this->content = null;
 
-        if(is_array($this->files)) {
+        if (is_array($this->files)) {
             $loader = new AppKitBulkLoader();
             $loader->setCompress(false);
 

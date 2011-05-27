@@ -34,7 +34,7 @@ class AppKitCheckboxElement extends AppKitFormElement {
     }
 
     protected function buildTag() {
-        if($this->checked===true) {
+        if ($this->checked===true) {
             $this->addAttribute('checked', 'checked');
         }
 

@@ -35,7 +35,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
                   ->andWhere('session_name=? and session_id=?', array($this->getParameter('session_name'), 'id'))
                   ->execute();
 
-        if($result > 0) {
+        if ($result > 0) {
             return true;
         }
 
@@ -50,12 +50,12 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
                   ->delete('NsmSession')
                   ->execute();
 
-        if($result > 0) {
+        if ($result > 0) {
             $this->getContext()->getLoggerManager()
             ->log(sprintf('Session garbage collector, deleted %d old sessions.', $result), AgaviLogger::INFO);
         }
 
-        if($result > 0) {
+        if ($result > 0) {
             return true;
         }
 
@@ -75,7 +75,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
                   ->andWhere('session_id=? and session_name=?', array($id, $session_name))
                   ->execute();
 
-        if($result->count() == 0) {
+        if ($result->count() == 0) {
             $this->NsmSession = new NsmSession();
             $this->NsmSession->session_id = $id;
             $this->NsmSession->session_name = $session_name;
@@ -86,11 +86,11 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
             $this->NsmSession = $result->getFirst();
             $data = $this->NsmSession->get('session_data');
 
-            if(is_resource($data)) {
+            if (is_resource($data)) {
                 $data = stream_get_contents($this->NsmSession->get('session_data'));
             }
 
-            if(md5($data) == $this->NsmSession->session_checksum) {
+            if (md5($data) == $this->NsmSession->session_checksum) {
                 return $data;
             }
 

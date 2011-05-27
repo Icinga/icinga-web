@@ -11,13 +11,13 @@ class LocalConsoleConnection extends BaseConsoleConnection {
     }
 
     protected function checkFileExistence(Api_Console_ConsoleCommandModel $cmd) {
-        if($cmd->getStdin()) {
-            if(!file_exists($cmd->getStdin())) {
+        if ($cmd->getStdin()) {
+            if (!file_exists($cmd->getStdin())) {
                 throw new AppKitException("File ".$cmd->getStdin()." does not exist");
             }
         }
 
-        if($cmd->getPipedCmd()) {
+        if ($cmd->getPipedCmd()) {
             $this->checkFileExistence($cmd->getPipedCmd());
         }
     }

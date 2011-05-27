@@ -20,15 +20,15 @@ class AppKit_Ext_initI18nSuccessView extends AppKitBaseView {
 
         $translator = $tm->getDomainTranslator($default, AgaviTranslationManager::MESSAGE);
 
-        if($translator instanceof AppKitGettextTranslator) {
+        if ($translator instanceof AppKitGettextTranslator) {
             foreach($translator->getDomainPaths() as $domain=>$path) {
                 foreach(AgaviLocale::getLookupPath($tm->getCurrentLocale()->getIdentifier()) as $prefix) {
                     $file = sprintf('%s/%s.json', $path, $prefix);
 
-                    if(file_exists($file)) {
+                    if (file_exists($file)) {
                         $json = file_get_contents($file);
 
-                        if(strlen($json)) {
+                        if (strlen($json)) {
                             $sr = array('@\s*\/\*.+?\*\/@s', '@\s*\/\/.+$@m', '@$\s+@m');
                             $json = preg_replace($sr, '', $json);
                         } else {

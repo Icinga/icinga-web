@@ -35,13 +35,13 @@ class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
         $source = $method_params->getParameter('source');
         $format = $method_params->getParameter('format');
 
-        if(!$format) {
+        if (!$format) {
             return $val;
         }
 
         $date = null;
 
-        if($source && !preg_match('@iso@', $source)) {
+        if ($source && !preg_match('@iso@', $source)) {
 
         } else {
             $date = strtotime($val);
@@ -56,22 +56,22 @@ class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
     }
 
     public function durationString($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
-        if(($date = strtotime($val)) > 0) {
+        if (($date = strtotime($val)) > 0) {
             $diff = time()-$date;
 
-            if($diff > 0) {
+            if ($diff > 0) {
                 $out = array();
                 foreach(self::$duration_map as $k=>$v) {
                     $m = $diff%$v;
 
-                    if($diff==$m) {
+                    if ($diff==$m) {
                         continue;
                     } else {
                         $out[] = ceil($diff/$v).$k;
                         $diff = $m;
                     }
 
-                    if($m==0) {
+                    if ($m==0) {
                         break;
                     }
 

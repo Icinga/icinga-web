@@ -26,7 +26,7 @@ class NsmRole extends BaseNsmRole {
     }
 
     public function hasParent() {
-        if($this->get('role_parent')) {
+        if ($this->get('role_parent')) {
             return true;
         }
 
@@ -34,7 +34,7 @@ class NsmRole extends BaseNsmRole {
     }
 
     public function getParent() {
-        if($this->hasParent()) {
+        if ($this->hasParent()) {
             return $this->parent;
         }
 
@@ -42,7 +42,7 @@ class NsmRole extends BaseNsmRole {
     }
 
     public function getChildren() {
-        if($this->children === null) {
+        if ($this->children === null) {
             $this->children = Doctrine_Query::create()
                               ->select('r.*')
                               ->from("NsmRole r INDEXBY r.role_id")
@@ -58,7 +58,7 @@ class NsmRole extends BaseNsmRole {
     	 */
     public function getPrincipalsList() {
 
-        if($this->principals_list === null) {
+        if ($this->principals_list === null) {
 
             $this->principals_list = array_keys($this->getPrincipals()->toArray());
 
@@ -75,7 +75,7 @@ class NsmRole extends BaseNsmRole {
      */
     public function getPrincipals() {
 
-        if($this->principals === null) {
+        if ($this->principals === null) {
 
             $this->principals = Doctrine_Query::create()
                                 ->select('p.*')
@@ -104,7 +104,7 @@ class NsmRole extends BaseNsmRole {
              ->innerJoin('t.NsmPrincipalTarget pt')
              ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
 
-        if($type !== null) {
+        if ($type !== null) {
             $q->andWhere('t.target_type=?', array($type));
         }
 
@@ -131,7 +131,7 @@ class NsmRole extends BaseNsmRole {
         $q = $this->getTargetsQuery();
         $q->andWhere('t.target_name=?', array($name));
 
-        if($q->execute()->count() > 0) {
+        if ($q->execute()->count() > 0) {
             return true;
         }
 
@@ -146,7 +146,7 @@ class NsmRole extends BaseNsmRole {
     public function getTarget($name) {
         $col = Doctrine::getTable('NsmTarget')->findByDql('target_name=?', array($name));
 
-        if($col->count() == 1 && $this->hasTarget($name)) {
+        if ($col->count() == 1 && $this->hasTarget($name)) {
             return $col->getFirst();
         } else {
             return null;

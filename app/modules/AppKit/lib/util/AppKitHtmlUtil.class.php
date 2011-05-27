@@ -14,7 +14,7 @@ class AppKitHtmlUtil {
      * @return AppKitXmlTag
      */
     public static function LinkToRoute($route_name, $caption, array $route_args = array(), array $attributes = array(), AgaviRequestDataHolder $other_args = null) {
-        if($other_args != null) {
+        if ($other_args != null) {
             $route_args = array_merge($other_args->getParameters(), $route_args);
         }
 

@@ -41,13 +41,13 @@ class AppKitBaseModel extends AgaviModel {
      */
     protected function &getParameter($name, $default=null) {
 
-        if(isset($this->parameters[$name]) || array_key_exists($name, $this->parameters)) {
+        if (isset($this->parameters[$name]) || array_key_exists($name, $this->parameters)) {
             return $this->parameters[$name];
         }
 
         try {
             return AgaviArrayPathDefinition::getValue($name, $this->parameters, $default);
-        } catch(InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return $default;
         }
     }
@@ -60,13 +60,13 @@ class AppKitBaseModel extends AgaviModel {
      */
     protected function hasParameter($name) {
 
-        if(isset($this->parameters[$name]) || array_key_exists($name, $this->parameters)) {
+        if (isset($this->parameters[$name]) || array_key_exists($name, $this->parameters)) {
             return true;
         }
 
         try {
             return AgaviArrayPathDefinition::hasValue($name, $this->parameters);
-        } catch(InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             return false;
         }
     }

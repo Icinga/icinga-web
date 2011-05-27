@@ -27,17 +27,17 @@ class AppKit_Admin_Groups_RemoveAction extends AppKitBaseAction {
             foreach($ids as $id) {
                 $role = $roleadmin->getRoleById($id);
 
-                if(!$role) {
+                if (!$role) {
                     continue;
                 }
 
                 $roleadmin->removeRole($role);
             }
             Doctrine_Manager::connection()->commit();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             try {
                 Doctrine_Manager::connection()->rollback();
-            } catch(Doctrine_Transaction_Exception $e) {}
+            } catch (Doctrine_Transaction_Exception $e) {}
 
             $this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
             echo $e;

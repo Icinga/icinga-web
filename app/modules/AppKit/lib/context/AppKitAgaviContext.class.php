@@ -42,7 +42,7 @@ class AppKitAgaviContext extends AgaviContext {
     private function initializeModules() {
         (array)$list = AgaviConfig::get('org.icinga.appkit.init_modules', array());
 
-        if(array_search('AppKit', $list) == false) {
+        if (array_search('AppKit', $list) == false) {
             AppKitAgaviUtil::initializeModule('AppKit');
         }
 
@@ -59,29 +59,29 @@ class AppKitAgaviContext extends AgaviContext {
     private function initializeDoctrine() {
 
         // Failsafe doctrine loading
-        if(!class_exists('Doctrine')) {
-            if(file_exists(($path = AgaviConfig::get('modules.appkit.doctrine_path')))) {
+        if (!class_exists('Doctrine')) {
+            if (file_exists(($path = AgaviConfig::get('modules.appkit.doctrine_path')))) {
                 require_once($path. '/Doctrine.php');
             }
         }
 
-        if(!class_exists('Doctrine')) {
+        if (!class_exists('Doctrine')) {
             throw new AppKitException('Could not include doctrine!');
         }
     }
 
     private function initializeAutosettings() {
         // Try to set the web path to correct urls within the frontend
-        if(AgaviConfig::get('core.default_context') =='web') {
+        if (AgaviConfig::get('core.default_context') =='web') {
             // Try to set the web path to correct urls within the frontend
-            if(AgaviConfig::get('org.icinga.appkit.web_path', null) == null) {
+            if (AgaviConfig::get('org.icinga.appkit.web_path', null) == null) {
                 AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
             }
         }
     }
 
     private function buildVersionString() {
-        if(AgaviConfig::get('org.icinga.version.extension', false) == false) {
+        if (AgaviConfig::get('org.icinga.version.extension', false) == false) {
             $version_format = "%s/v%d.%d.%d";
         } else {
             $version_format = "%s/v%d.%d.%d-%s";
@@ -99,9 +99,9 @@ class AppKitAgaviContext extends AgaviContext {
 
     private function initializePhpSettings() {
         // Applying PHP settings
-        if(is_array($settings = AgaviConfig::get('modules.appkit.php_settings'))) {
+        if (is_array($settings = AgaviConfig::get('modules.appkit.php_settings'))) {
             foreach($settings as $ini_key=>$ini_val) {
-                if(ini_set($ini_key, $ini_val) === false) {
+                if (ini_set($ini_key, $ini_val) === false) {
                     throw new AppKitException("Could not set ini setting $ini_key to '$ini_val'");
                 }
             }
@@ -110,7 +110,7 @@ class AppKitAgaviContext extends AgaviContext {
 
     private function initializeEventHandling() {
         // Register additional events from config file
-        if(is_array($events = AgaviConfig::get('modules.appkit.custom_events'))) {
+        if (is_array($events = AgaviConfig::get('modules.appkit.custom_events'))) {
             AppKitEventDispatcher::registerEventClasses($events);
         }
 
@@ -124,11 +124,11 @@ class AppKitAgaviContext extends AgaviContext {
             $context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
             $user = $context->getUser();
 
-            if($user) {
+            if ($user) {
                 $user = $user->getNsmUser(true);
             }
 
-            if(!$user) {
+            if (!$user) {
                 return true;
             }
 
@@ -137,13 +137,13 @@ class AppKitAgaviContext extends AgaviContext {
             try {
                 $locale = $user->getPrefVal("org.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
                 $translationMgr->setLocale($locale);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
             }
 
             return true;
 
-        } catch(AppKitDoctrineException $e) {
+        } catch (AppKitDoctrineException $e) {
             return true;
         }
     }

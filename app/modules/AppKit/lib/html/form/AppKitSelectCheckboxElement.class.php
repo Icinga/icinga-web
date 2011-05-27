@@ -60,7 +60,7 @@ class AppKitSelectCheckboxElement extends AppKitFormElement {
         $this->source->applyDomChanges($dom);
 
         foreach($dom->childNodes as $node) {
-            if($node->getAttribute('value')) {
+            if ($node->getAttribute('value')) {
 
                 $check = AppKitCheckboxElement::create(
                              $this->name,
@@ -69,7 +69,7 @@ class AppKitSelectCheckboxElement extends AppKitFormElement {
                              $node->nodeValue
                          );
 
-                if($node->hasAttribute('selected')) {
+                if ($node->hasAttribute('selected')) {
                     $check->setChecked(true);
                 }
 

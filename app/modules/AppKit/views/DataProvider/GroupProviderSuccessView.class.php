@@ -15,15 +15,15 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView {
 
         $user = $this->getContext()->getUser();
 
-        if($user->hasCredential('appkit.admin') == false && $user->hasCredential('appkit.admin.groups') == false) {
+        if ($user->hasCredential('appkit.admin') == false && $user->hasCredential('appkit.admin.groups') == false) {
             $result = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc, true);
         } else {
             // return a single user when an id is provided
-            if($groupId) {
+            if ($groupId) {
                 $group = $roleadmin->getRoleById($groupId);
                 $role_users = array();
 
-                if(!$group instanceof NsmRole) {
+                if (!$group instanceof NsmRole) {
                     return "{}";
                 }
 
@@ -40,7 +40,7 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView {
 
             } else {	//return list of all users if no id is provided
 
-                if($start === false || $limit === false) {
+                if ($start === false || $limit === false) {
                     $groups = $roleadmin->getRoleCollection($disabled);
                 } else {
                     $groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc);
@@ -54,7 +54,7 @@ class AppKit_DataProvider_GroupProviderSuccessView extends AppKitBaseView {
         $doc = new AppKitExtJsonDocument();
 
         // Disable metadata
-        if(!$rd->getParameter('addMeta', false) == true) {
+        if (!$rd->getParameter('addMeta', false) == true) {
             $doc->setAttribute(AppKitExtJsonDocument::ATTR_NOMETA);
         }
 

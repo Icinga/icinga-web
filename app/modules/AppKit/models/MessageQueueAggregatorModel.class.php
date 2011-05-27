@@ -19,8 +19,8 @@ class AppKit_MessageQueueAggregatorModel extends AppKitBaseModel
         $out = array();
         $count = $this->getMessageQueue()->count();
 
-        while($i<=$count && ($item = $this->getMessageQueue()->dequeue())) {
-            if($item->getType() & $this->type) {
+        while ($i<=$count && ($item = $this->getMessageQueue()->dequeue())) {
+            if ($item->getType() & $this->type) {
                 $out[] = $item;
             } else {
                 $this->getMessageQueue()->enqueue($item);

@@ -16,13 +16,13 @@ class AppKit_ImageFileModel extends AppKitBaseModel
     private $image_header = null;
 
     public function __construct($image_string=null) {
-        if($image_string !== null) {
+        if ($image_string !== null) {
             $this->setImageString($image_string);
         }
     }
 
     public function getImageResource() {
-        if(file_exists($this->image_file)) {
+        if (file_exists($this->image_file)) {
             $resource = fopen($this->image_file, 'r');
             return $resource;
         }
@@ -66,7 +66,7 @@ class AppKit_ImageFileModel extends AppKitBaseModel
         foreach(self::$extensions as $extension) {
             $file = sprintf('%s/%s.%s', $this->getImagePath(), $this->image_string, $extension);
 
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 $this->image_extension = $extension;
                 $this->image_header = self::$headers[$extension];
                 return $file;

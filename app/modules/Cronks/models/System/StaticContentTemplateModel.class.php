@@ -33,7 +33,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     }
 
     private function setCache($name, &$value, $type=self::CACHE_DEFAULT) {
-        if(!isset(self::$tcache[$this->tid])) {
+        if (!isset(self::$tcache[$this->tid])) {
             self::$tcache[$this->tid] = array();
             self::$tcache[$this->tid][$type] = array();
         }
@@ -44,7 +44,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     }
 
     private function getCache($name, $type=self::CACHE_DEFAULT) {
-        if(isset(self::$tcache[$this->tid][$type][$name])) {
+        if (isset(self::$tcache[$this->tid][$type][$name])) {
             return self::$tcache[$this->tid][$type][$name];
         }
     }
@@ -56,7 +56,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
     private function evalPhp($code, array &$args=null) {
 
-        if($args==null) {
+        if ($args==null) {
             $args =& $this->args;
         }
 
@@ -73,7 +73,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
     private function appendArguments(array $args) {
         foreach(self::$protected_vars as $v) {
-            if(array_key_exists($v, $args)) {
+            if (array_key_exists($v, $args)) {
                 unset($args[$v]);
             }
         }
@@ -86,11 +86,11 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     private function substituteArguments(array &$args, array &$target=null) {
         static $tp = null;
 
-        if($target == null) {
+        if ($target == null) {
             $target =& $this->args;
         }
 
-        if($tp===null) {
+        if ($tp===null) {
             $tp = new AppKitFormatParserUtil();
             $tp->registerNamespace('arg', AppKitFormatParserUtil::TYPE_ARRAY);
             $tp->setDefault('NOT_FOUND');
@@ -99,7 +99,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         $tp->registerData('arg', $this->args);
 
         foreach($args as $key=>$val) {
-            if(is_array($val)) {
+            if (is_array($val)) {
                 $this->substituteArguments($args[$key], $target);
             }
 
@@ -118,19 +118,19 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
         $id = $method['name'];
 
-        if(!($reflection = $this->getCache($id, 'method'))) {
+        if (!($reflection = $this->getCache($id, 'method'))) {
             $reflection = new ReflectionFunction($method['name']);
             $this->setCache($id, $reflection, 'method');
         }
 
         $aargs = array();
 
-        if(isset($method['param'])) {
+        if (isset($method['param'])) {
             $aargs = explode(',', $method['param']);
         }
 
         foreach($array as $key=>$val) {
-            if(is_array($val)) {
+            if (is_array($val)) {
                 $this->dsRecursiveWalk($array[$key], $method);
             } else {
                 $args = array($val);
@@ -145,10 +145,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     }
 
     private function processDsFiltermap(array $dataSource, array $filter) {
-        if(isset($dataSource['filter_mapping']) && is_array($dataSource['filter_mapping'])) {
+        if (isset($dataSource['filter_mapping']) && is_array($dataSource['filter_mapping'])) {
             $map =& $dataSource['filter_mapping'];
 
-            if(array_key_exists($filter[0], $map)) {
+            if (array_key_exists($filter[0], $map)) {
                 $filter[0] = $map[ $filter[0] ];
             }
         }
@@ -158,11 +158,11 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
     private function getDsArray($name, array $filters=array(), $index=false) {
 
-        if(array_key_exists($name, $this->ds)) {
+        if (array_key_exists($name, $this->ds)) {
 
             $dataSource = $this->ds[$name];
 
-            if(!array_key_exists('target', $dataSource)) {
+            if (!array_key_exists('target', $dataSource)) {
                 throw new Cronks_System_StaticContentTemplateException('Datasource \'%s\' needs attribute target!', $name);
             } else {
 
@@ -172,24 +172,24 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
                              ->setSearchTarget(constant($dataSource['target']));
 
                 // set search type
-                if(array_key_exists('search_type', $dataSource)) {
+                if (array_key_exists('search_type', $dataSource)) {
                     $apiSearch->setSearchType(constant($dataSource['search_type']));
                 }
 
-                if(array_key_exists('columns', $dataSource)) {
+                if (array_key_exists('columns', $dataSource)) {
                     $columns = explode(',', $dataSource['columns']);
                     foreach($columns as $currentColumn) {
                         $apiSearch->setResultColumns(trim($currentColumn));
                     }
                 }
 
-                if(array_key_exists('limit', $dataSource)) {
+                if (array_key_exists('limit', $dataSource)) {
                     $apiSearch->setSearchLimit(0, (int)$dataSource['limit']);
                 }
 
-                if(count($filters)) {
+                if (count($filters)) {
                     foreach($filters as $f) {
-                        if(!isset($f[2])) {
+                        if (!isset($f[2])) {
                             $f[2] = IcingaApi::MATCH_EXACT;
                         }
 
@@ -208,15 +208,15 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
                 $d = $res->getAll();
 
-                if(is_array($d)) {
-                    if($res->getResultCount() > 0) {
-                        if($index !== false) {
-                            if(isset($d[$index])) {
+                if (is_array($d)) {
+                    if ($res->getResultCount() > 0) {
+                        if ($index !== false) {
+                            if (isset($d[$index])) {
                                 $d = $d[$index];
                             }
                         }
 
-                        if(isset($dataSource['function'])) {
+                        if (isset($dataSource['function'])) {
                             $this->dsRecursiveWalk($d, $dataSource['function']);
                         }
                     }
@@ -236,7 +236,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     public function getOid() {
         static $oid=null;
 
-        if($oid===null) {
+        if ($oid===null) {
             $oid = spl_object_hash($this);
         }
 
@@ -248,7 +248,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     }
 
     public function templateCode($name) {
-        if($this->templateExists($name)) {
+        if ($this->templateExists($name)) {
             return $this->ts[$name];
         }
 
@@ -256,7 +256,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     }
 
     public function renderSub($file, $name='MAIN', array $args=array()) {
-        if(!($tmpl = $this->getCache($file, 'template'))) {
+        if (!($tmpl = $this->getCache($file, 'template'))) {
             $tmpl = $this->getContext()->getModel('System.StaticContent', 'Cronks');
             $tmpl->setTemplateFile($file);
             $this->setCache($file, $tmpl, 'template');
@@ -265,7 +265,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         $new_args = $this->args;
 
         foreach($args as $k=>$v) {
-            if(array_key_exists($k, $new_args)) {
+            if (array_key_exists($k, $new_args)) {
                 unset($new_args[$k]);
             }
         }
@@ -282,7 +282,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
     public function renderTemplate($name, array $args=array(), $only_local_args=false, $is_root=false) {
 
-        if($only_local_args == false) {
+        if ($only_local_args == false) {
             $this->appendArguments($args);
             $this->substituteArguments($this->args);
             $args = $this->args;
@@ -290,13 +290,13 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
         elseif(is_array($only_local_args)) {
             foreach($only_local_args as $k=>$v) {
-                if(array_key_exists($v, $this->args) && !array_key_exists($v, $args)) {
+                if (array_key_exists($v, $this->args) && !array_key_exists($v, $args)) {
                     $args[$v] = $this->args[$v];
                 }
             }
         }
 
-        if($only_local_args !== false) {
+        if ($only_local_args !== false) {
             $this->substituteArguments($args, $args);
         }
 
@@ -305,7 +305,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         $content = ob_get_contents();
         ob_end_clean();
 
-        if($name === self::TEMPLATE_MAIN || $is_root==true) {
+        if ($name === self::TEMPLATE_MAIN || $is_root==true) {
             $content .= $this->jsGetCode();
         }
 
@@ -368,7 +368,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     public function link2Grid($content, $template, $title, array $filter=array()) {
         $uid = $this->getUid();
 
-        if(count($filter)==2 && isset($filter[0]) && isset($filter[1])) {
+        if (count($filter)==2 && isset($filter[0]) && isset($filter[1])) {
             $filter = array(
                           $filter[0] => $filter[1]
                       );
@@ -399,15 +399,15 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     }
 
     public function jsGetCode($with_tags = true, $flush=false) {
-        if(count($this->js_code)) {
+        if (count($this->js_code)) {
             $content = "\n". implode("\n\n", $this->js_code). "\n";
 
-            if($with_tags == true) {
+            if ($with_tags == true) {
                 $content = "\n".(string)AppKitXmlTag::create('script', $content)
                            ->addAttribute('type', 'text/javascript'). "\n";
             }
 
-            if($flush) {
+            if ($flush) {
                 $this->jsFlushData();
             }
 
@@ -422,12 +422,12 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     public function dsCachedField($name, $field) {
         $data = $this->getCache($name);
 
-        if(!$data) {
+        if (!$data) {
             $dsArray =  $this->getDsArray($name, array(), 0);
             $data = $this->setCache($name,$dsArray);
         }
 
-        if(array_key_exists($field, $data)) {
+        if (array_key_exists($field, $data)) {
             return $data[$field];
         }
     }
@@ -435,7 +435,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
     public function ds2Array($name, $filter=array(), $index=false, $keyfield=null) {
         $data =  $this->getDsArray($name, $filter, $index);
 
-        if(is_array($data) && $keyfield !== null && isset($data[0][$keyfield])) {
+        if (is_array($data) && $keyfield !== null && isset($data[0][$keyfield])) {
             $out = array();
             foreach($data as $key=>$val) {
                 $out[$val[$keyfield]] = $val;

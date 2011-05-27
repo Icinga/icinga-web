@@ -12,8 +12,8 @@ class AppKit_Auth_Provider_AuthKeyModel extends AppKitAuthProviderBaseModel  imp
      * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#doAuthenticate()
      */
     public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
-        if($user instanceof NsmUser && $user->user_id > 0) {
-            if($user->user_authkey === $username) {
+        if ($user instanceof NsmUser && $user->user_id > 0) {
+            if ($user->user_authkey === $username) {
                 return true;
             }
         }
@@ -34,7 +34,7 @@ class AppKit_Auth_Provider_AuthKeyModel extends AppKitAuthProviderBaseModel  imp
 
         $res = $res->execute(null, Doctrine::HYDRATE_ARRAY);
 
-        if(isset($res[0]['cnt']) && $res[0]['cnt'] == 1) {
+        if (isset($res[0]['cnt']) && $res[0]['cnt'] == 1) {
             return true;
         }
 

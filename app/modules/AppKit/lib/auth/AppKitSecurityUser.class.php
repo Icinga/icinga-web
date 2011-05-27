@@ -13,7 +13,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     }
 
     public function  getRoles() {
-        if(count($this->role_names) <= 0) {
+        if (count($this->role_names) <= 0) {
             foreach($this->getNsmUser()->NsmRole as $role) {
                 $this->role_names[$role->role_id] = $role->role_name;
             }
@@ -39,7 +39,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
             $user = $provider->doAuthenticate($username, $password);
 
-            if($user instanceof NsmUser && $user->user_id>0) {
+            if ($user instanceof NsmUser && $user->user_id>0) {
                 // Start from scratch
                 $this->clearCredentials();
 
@@ -59,7 +59,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
             }
 
-        } catch(AgaviSecurityException $e) {
+        } catch (AgaviSecurityException $e) {
             // Log authentification failure
             $this->getContext()->getLoggerManager()->log(sprintf('Userlogin by %s failed!', $username), AgaviLogger::ERROR);
 
@@ -107,7 +107,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @author Marius Hein
      */
     private function applyDoctrineUserRoles(NsmUser &$user) {
-        if(self::SOURCE == "XML") {
+        if (self::SOURCE == "XML") {
             foreach($user->NsmRole as $role) {
                 $this->grantRole($role->role_name);
 
@@ -125,7 +125,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
             $next = $role;
             $this->addCredentialsFromRole($role);
 
-            while($next->hasParent()) {
+            while ($next->hasParent()) {
                 $next = $next->getParent();
                 $this->addCredentialsFromRole($next);
                 $this->roles[] = $next;
@@ -159,11 +159,11 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     public function getNsmUser($noThrow = false) {
         $user =& $this->getAttribute(self::USEROBJ_ATTRIBUTE);
 
-        if($user instanceof NsmUser) {
+        if ($user instanceof NsmUser) {
             return $user;
         }
 
-        if(!$noThrow) {
+        if (!$noThrow) {
             throw new AppKitDoctrineException('User attribute is not a NsmUser!');
         }
     }
@@ -208,7 +208,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     }
 
     protected function loadDefinitions() {
-        if(self::SOURCE == 'XML') {
+        if (self::SOURCE == 'XML') {
             parent::loadDefinitions();
         }
 

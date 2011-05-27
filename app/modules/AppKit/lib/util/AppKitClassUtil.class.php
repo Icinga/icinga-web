@@ -12,13 +12,13 @@ class AppKitClassUtil {
         $args = func_get_args();
         $class = array_shift($args);
 
-        if(!class_exists($class)) {
+        if (!class_exists($class)) {
             throw new AppKitClassUtilException($class. ' does not exist');
         }
 
         $ref = new ReflectionClass($class);
 
-        if($ref->isInstantiable()) {
+        if ($ref->isInstantiable()) {
             return $ref->newInstanceArgs($args);
         } else {
             throw new AppKitClassUtilException($class. ' is not instantiable');
@@ -41,7 +41,7 @@ class AppKitClassUtil {
             preg_match('/([a-zA-Z0-9\_]+)::'.$bt[$l]['function'].'/',
                        $callerLine,
                        $matches);
-        } while($matches[1] == 'parent' && $matches[1]);
+        } while ($matches[1] == 'parent' && $matches[1]);
 
         return $matches[1];
     }

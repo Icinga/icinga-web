@@ -61,7 +61,7 @@ class AppKit_NavigationContainerModel extends AppKitBaseModel
      */
     public function getNavItemByName($name) {
         foreach($this->getContainerIterator() as $item) {
-            if($item->getName() == $name) {
+            if ($item->getName() == $name) {
                 return $item;
                 break;
             }
@@ -88,18 +88,18 @@ class AppKit_NavigationContainerModel extends AppKitBaseModel
 
             $tmp = array('text' => $this->tm->_($item->getCaption()));
 
-            if($item->getRoute()) {
+            if ($item->getRoute()) {
                 $tmp['href'] = $this->ro->gen($item->getRoute());
             }
 
             // Mapping custom attribute agains the extjs library
             foreach(self::$extjs_attribute_map as $name=>$jsname) {
-                if($item->hasAttribute($name)) {
+                if ($item->hasAttribute($name)) {
                     $tmp[$jsname] = $item->getAttribute($name);
                 }
             }
 
-            if($item->hasChildren()) {
+            if ($item->hasChildren()) {
                 $tmp['menu'] = array();
                 $this->arrayProc($tmp['menu'], $item->getContainer());
             }

@@ -27,14 +27,14 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
     }
 
     public function checkAccess($cmd) {
-        if(!isset($this->availableCommands[$cmd])) {
+        if (!isset($this->availableCommands[$cmd])) {
             throw new InvalidIcingaCommandException("Command $cmd is not available");
         }
 
         $user = AgaviContext::getInstance()->getUser();
         $allowed = false;
         foreach($this->availableCommands[$cmd] as $credential) {
-            if($user->hasCredential($credential)) {
+            if ($user->hasCredential($credential)) {
                 $allowed = true;
                 break;
             }
@@ -53,7 +53,7 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
     }
 
     public function validateConfig($cfg = NULL) {
-        if(!$this->checkAccess("validate")) {
+        if (!$this->checkAccess("validate")) {
             throw new IcingaCommandSecurityException("Invalid credentials for config validation");
         }
 
@@ -67,7 +67,7 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
 
         $cli->exec($command);
 
-        if($command->getReturnCode() != 0) {
+        if ($command->getReturnCode() != 0) {
             $this->validationError = $command->getOutput();
         }
 
@@ -75,11 +75,11 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
     }
 
     public function reloadIcinga() {
-        if(!$this->checkAccess("reload")) {
+        if (!$this->checkAccess("reload")) {
             throw new IcingaCommandSecurityException("Invalid credentials for icinga reload");
         }
 
-        if($this->validateConfig() != 0) {
+        if ($this->validateConfig() != 0) {
             throw new IcingaConfigValidationException($this->getValidationError());
         }
 
@@ -88,11 +88,11 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
     }
 
     public function stopIcinga() {
-        if(!$this->checkAccess("restart")) {
+        if (!$this->checkAccess("restart")) {
             throw new IcingaCommandSecurityException("Invalid credentials for icinga restart");
         }
 
-        if($this->validateConfig() != 0) {
+        if ($this->validateConfig() != 0) {
             throw new IcingaConfigValidationException($this->getValidationError());
         }
 
@@ -108,11 +108,11 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
     }
 
     public function restartIcinga() {
-        if(!$this->checkAccess("restart")) {
+        if (!$this->checkAccess("restart")) {
             throw new IcingaCommandSecurityException("Invalid credentials for icinga restart");
         }
 
-        if($this->validateConfig() != 0) {
+        if ($this->validateConfig() != 0) {
             throw new IcingaConfigValidationException($this->getValidationError());
         }
 
@@ -120,7 +120,7 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
         $cli = $this->getCli();
         $command;
 
-        if($status == 0) {
+        if ($status == 0) {
             $command = AgaviContext::getInstance()->getModel("Console.ConsoleCommand","Api",array(
                            'command' => 'printf'
                        ));
@@ -145,7 +145,7 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
     }
 
     public function getIcingaStatus() {
-        if(!$this->checkAccess("status")) {
+        if (!$this->checkAccess("status")) {
             throw new IcingaCommandSecurityException("Invalid credentials for icinga restart");
         }
 

@@ -5,7 +5,7 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
     const PREFNS = 'org.icinga.ext.appstate';
 
     public function stateAvailable() {
-        if($this->getContext()->getUser()->isAuthenticated()) {
+        if ($this->getContext()->getUser()->isAuthenticated()) {
             return true;
         }
 
@@ -15,7 +15,7 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
     public function readState() {
         $data = null;
 
-        if($this->stateAvailable()) {
+        if ($this->stateAvailable()) {
             $data = $this->getContext()->getUser()->getPrefVal(self::PREFNS, null, true);
         }
 
@@ -25,10 +25,10 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
     public function writeState($data) {
         $merge = array();
 
-        if($this->stateAvailable()) {
+        if ($this->stateAvailable()) {
             $existing = json_decode($this->readState());
 
-            if(is_array($existing)) foreach($existing as $v) {
+            if (is_array($existing)) foreach($existing as $v) {
                 $merge[$v->name] = $v->value;
             }
 

@@ -3,7 +3,7 @@
 class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandlerInterface {
 
     public function checkObjectType(AppKitEvent &$e) {
-        if(!$e->getObject() instanceof AppKit_NavigationContainerModel) {
+        if (!$e->getObject() instanceof AppKit_NavigationContainerModel) {
             throw new AppKitEventException('Object should be AppKit_NavigationContainerModel');
         }
 
@@ -16,7 +16,7 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
 
         $user = $nav->getContext()->getUser();
 
-        if($user->hasCredential('icinga.user')) {
+        if ($user->hasCredential('icinga.user')) {
 
             $icinga_base = AppKitNavItem::create('icinga.portalView', 'icinga.portalView')
                            ->setCaption('Monitoring')
@@ -24,7 +24,7 @@ class IcingaMenuExtender extends AppKitEventHandler implements AppKitEventHandle
                            ->setJsHandler("AppKit.changeLocation.createDelegate(null,['". AgaviContext::getInstance()->getRouting()->gen('icinga.portalView') ."'])");
 
             // Throws exception if the admin is not there ...
-            if($nav->getNavItemByName('appkit.admin')) {
+            if ($nav->getNavItemByName('appkit.admin')) {
                 // Navigation for "icinga"
                 $icinga = $nav->getContainer()->addItemBefore('appkit.admin', $icinga_base);
             } else {

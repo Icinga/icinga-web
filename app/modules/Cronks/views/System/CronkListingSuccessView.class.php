@@ -31,7 +31,7 @@ class Cronks_System_CronkListingSuccessView extends CronksBaseView {
                    'cronks'	=> array()
                );
 
-        if($type == 'cat') {
+        if ($type == 'cat') {
             unset($out['cronks']);
             return json_encode($out);
         }
@@ -47,7 +47,7 @@ class Cronks_System_CronkListingSuccessView extends CronksBaseView {
         }
 
 
-        if($cat !== null) {
+        if ($cat !== null) {
             $out['cronks'] = $out['cronks'][$cat];
             unset($out['cat']);
         }

@@ -22,14 +22,14 @@ class SshConsoleConnection extends BaseConsoleConnection {
         return $connected;
     }
     public function connect() {
-        if($this->connected) {
+        if ($this->connected) {
             return true;
         }
 
         $success = false;
         $this->resource = ssh2_connect($this->host,$this->port, $this->methods);
 
-        switch($this->authType) {
+        switch ($this->authType) {
             case 'none':
                 $success = ssh2_auth_none($this->resource,$this->username);
                 break;
@@ -39,11 +39,11 @@ class SshConsoleConnection extends BaseConsoleConnection {
                 break;
 
             case 'key':
-                if(!is_readable($this->pubKeyLocation)) {
+                if (!is_readable($this->pubKeyLocation)) {
                     throw new ApiAuthorisationFailedException("SSH public key not found/readable at the specified location");
                 }
 
-                if(!is_readable($this->privKeyLocation)) {
+                if (!is_readable($this->privKeyLocation)) {
                     throw new ApiAuthorisationFailedException("SSH private key not found/readable at the specified location");
                 }
 
@@ -54,7 +54,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
                 throw new ApiInvalidAuthTypeException("Unknown authtype ".$this->authType);
         }
 
-        if(!$success || !is_resource($this->resource)) {
+        if (!$success || !is_resource($this->resource)) {
             throw new ApiAuthorisationFailedException("SSH auth for user ".$this->username." failed (using authtype ".$this->authType);
         }
 
@@ -80,25 +80,25 @@ class SshConsoleConnection extends BaseConsoleConnection {
         $timeout = 5;
         $start = time();
 
-        while(true) {
+        while (true) {
             $buffer = fgets($this->stdout,2048);
 
-            if(trim($buffer) == trim($cmdString)) {
+            if (trim($buffer) == trim($cmdString)) {
                 continue;
             }
 
-            if(preg_match('/'.$this->username.'@\w*?:/',$buffer)) {
+            if (preg_match('/'.$this->username.'@\w*?:/',$buffer)) {
                 break;
             }
 
             $out .= $buffer;
             $current = time();
 
-            if($current-$start > $timeout) {
+            if ($current-$start > $timeout) {
                 break;
             }
 
-            if(!$buffer) {
+            if (!$buffer) {
                 usleep(40000);
             }
         }
@@ -136,7 +136,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
     }
 
     protected function setupAuth(array $settings) {
-        switch($this->authType) {
+        switch ($this->authType) {
             case 'none':
                 $this->username = $settings["user"];
                 break;
@@ -147,7 +147,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
                 break;
 
             case 'key':
-                if(isset($settings["password"])) {
+                if (isset($settings["password"])) {
                     $this->password = $settings["password"];
                 }
 
@@ -162,7 +162,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
     }
 
     protected function checkSSH2Support() {
-        if(!extension_loaded('ssh2')) {
+        if (!extension_loaded('ssh2')) {
             throw new ApiSSHNotInstalledException("SSH support is not enabled, install the php ssh2 module in order to use SSH");
         }
     }

@@ -62,7 +62,7 @@ class AppKitExtDataInterface {
             );
 
     public static function doctrineColumn2ExtSortType($doctrine_column_type, $default=self::DOCTRINE_TYPE_STRING) {
-        if(isset(self::$doctrineToExtSortType[$doctrine_column_type])) {
+        if (isset(self::$doctrineToExtSortType[$doctrine_column_type])) {
             return self::$doctrineToExtSortType[$doctrine_column_type];
         }
 

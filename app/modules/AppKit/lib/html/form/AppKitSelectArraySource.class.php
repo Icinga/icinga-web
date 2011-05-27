@@ -18,7 +18,7 @@ class AppKitSelectArraySource extends AppKitSelectSource {
             $element = $dom->ownerDocument->createElement('option', $val);
             $element->setAttribute('value', $key);
 
-            if(in_array($key, $this->selected) === true) {
+            if (in_array($key, $this->selected) === true) {
                 $element->setAttribute('selected', 'selected');
             }
 

@@ -14,10 +14,10 @@ class AppKit_DataProvider_UserProviderSuccessView extends AppKitBaseView {
         $result;
 
         // return a single user when an id is provided
-        if($userId) {
+        if ($userId) {
             $user = $useradmin->getUserById($userId);
 
-            if(!$user instanceof NsmUser) {
+            if (!$user instanceof NsmUser) {
                 return "{}";
             }
 
@@ -25,7 +25,7 @@ class AppKit_DataProvider_UserProviderSuccessView extends AppKitBaseView {
         } else {	//return list of all users if no id is provided
             $users;
 
-            if($start === false || $limit === false) {
+            if ($start === false || $limit === false) {
                 $users = $useradmin->getUsersCollection($disabled);
             } else {
                 $users = $useradmin->getUsersCollectionInRange($disabled,$start,$limit,$sort,$asc);

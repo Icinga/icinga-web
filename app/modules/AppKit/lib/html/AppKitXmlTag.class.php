@@ -21,7 +21,7 @@ class AppKitXmlTag extends AppKitBaseClass {
         $this->dom = new DOMDocument('1.0');
         $this->tag = $this->dom->createElement($tag_name);
 
-        if($content !== null) {
+        if ($content !== null) {
             $this->setContent($content);
         }
     }
@@ -43,11 +43,11 @@ class AppKitXmlTag extends AppKitBaseClass {
      */
     public function setContent($content) {
 
-        if($content instanceof AppKitXmlTag) {
+        if ($content instanceof AppKitXmlTag) {
             $content = $content->getDomElement();
         }
 
-        if($content instanceof DOMNode) {
+        if ($content instanceof DOMNode) {
             $this->tag->appendChild($this->dom->importNode($content, true));
         }
 
@@ -105,8 +105,8 @@ class AppKitXmlTag extends AppKitBaseClass {
     public function renderElement() {
 
 
-        if(isset($this->tag) && $this->tag instanceof DOMElement) {
-            if($this->dom->hasChildNodes()) {
+        if (isset($this->tag) && $this->tag instanceof DOMElement) {
+            if ($this->dom->hasChildNodes()) {
                 $this->dom->insertBefore($this->tag, $this->dom->firstChild);
             } else {
                 $this->dom->appendChild($this->tag);

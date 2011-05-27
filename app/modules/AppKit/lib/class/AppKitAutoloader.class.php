@@ -33,7 +33,7 @@ class AppKitAutoloader extends AppKitSingleton {
     private $classes_required = array();
 
     public static function addSearchPath($path) {
-        if(file_exists($path)) {
+        if (file_exists($path)) {
             self::$search_array[] = $path;
             return true;
         }
@@ -47,10 +47,10 @@ class AppKitAutoloader extends AppKitSingleton {
     }
 
     public function autoLoad($className) {
-        if($this->isValidClass($className)) {
+        if ($this->isValidClass($className)) {
             $file = $this->findClassfile($className);
 
-            if(file_exists($file)) {
+            if (file_exists($file)) {
                 require_once($file);
                 return true;
             }
@@ -62,7 +62,7 @@ class AppKitAutoloader extends AppKitSingleton {
     }
 
     private function isValidClass($className) {
-        if(preg_match($this->getNamePattern(), $className)) {
+        if (preg_match($this->getNamePattern(), $className)) {
             return true;
         }
 
@@ -72,8 +72,8 @@ class AppKitAutoloader extends AppKitSingleton {
     private function findClassfile($className, $nosearch=false, $nesting=0) {
 
         // Try to find the file within the cache!
-        if(is_array($this->classes_collected) && count($this->classes_collected)) {
-            if(array_key_exists($className, $this->classes_collected)) {
+        if (is_array($this->classes_collected) && count($this->classes_collected)) {
+            if (array_key_exists($className, $this->classes_collected)) {
                 return $this->classes_collected[$className];
             }
 
@@ -81,7 +81,7 @@ class AppKitAutoloader extends AppKitSingleton {
         }
 
         // Prevent nesting call errors
-        if($nesting > self::MAX_TRIES) {
+        if ($nesting > self::MAX_TRIES) {
             trigger_error('More than '. self::MAX_TRIES. ' find calls, thats to much!', E_USER_ERROR);
         }
 
@@ -91,11 +91,11 @@ class AppKitAutoloader extends AppKitSingleton {
             foreach($iterator as $fileInfo) {
                 $file = $this->getSplFileInfoPath($fileInfo);
 
-                if(!preg_match(self::$search_ignore, $file)) {
+                if (!preg_match(self::$search_ignore, $file)) {
                     foreach(self::$pattern_file as $pattern) {
                         $m = array();
 
-                        if(preg_match($pattern, $fileInfo->getFilename(), $m)) {
+                        if (preg_match($pattern, $fileInfo->getFilename(), $m)) {
                             $this->classes_collected[$m[1]] = $this->getSplFileInfoPath($fileInfo);
                         }
                     }
@@ -111,7 +111,7 @@ class AppKitAutoloader extends AppKitSingleton {
     }
 
     private function getNamePattern() {
-        if(self::$pattern_name === null) {
+        if (self::$pattern_name === null) {
             self::$pattern_name = sprintf('@^(%s)@', implode('|', self::$pattern_array));
         }
 

@@ -78,7 +78,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function __construct($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
     }
@@ -92,7 +92,7 @@ class AppKitBulkLoader {
     public function __get($key = false) {
         $retVal = false;
 
-        if($key !== false && array_key_exists($key, $this->config)) {
+        if ($key !== false && array_key_exists($key, $this->config)) {
             $retVal = $this->config[$key];
         } else {
             throw new AppKitBulkLoaderException(__CLASS__ . ': get(): Invalid key "' . $key . '"!');
@@ -109,7 +109,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function __set($key = false, $value = false) {
-        switch($key) {
+        switch ($key) {
             case 'base':
                 $this->setBase($value);
                 break;
@@ -145,7 +145,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function setBase($base = false) {
-        if($base !== false) {
+        if ($base !== false) {
             $this->config['base'] = $base;
         } else {
             throw new AppKitBulkLoaderException(__CLASS__ . ': setBase(): Invalid base: "' . $base . '"!');
@@ -161,7 +161,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function setCompress($compress = false) {
-        if($compress === true || $compress === false) {
+        if ($compress === true || $compress === false) {
             $this->config['compress'] = $compress;
         } else {
             throw new AppKitBulkLoaderException(__CLASS__ . ': setBase(): Invalid base: "' . $base . '"!');
@@ -177,14 +177,14 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function setFile($file = false) {
-        if($file !== false) {
-            if(!is_array($file)) {
-                if(!in_array($file, $this->config['file'])) {
+        if ($file !== false) {
+            if (!is_array($file)) {
+                if (!in_array($file, $this->config['file'])) {
                     array_push($this->config['file'], $file);
                 }
             } else {
                 foreach($file as $currentFile) {
-                    if(!in_array($currentFile, $this->config['file'])) {
+                    if (!in_array($currentFile, $this->config['file'])) {
                         array_push($this->config['file'], $currentFile);
                     }
                 }
@@ -203,7 +203,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function setOutput($output = false) {
-        if($output !== false && $output == self::OUTPUT_TYPE_INLINE || $output == self::OUTPUT_TYPE_URL) {
+        if ($output !== false && $output == self::OUTPUT_TYPE_INLINE || $output == self::OUTPUT_TYPE_URL) {
             $this->config['output'] = $output;
         } else {
             throw new AppKitBulkLoaderException(__CLASS__ . ': setBase(): Invalid output type: "' . $output . '"!');
@@ -219,7 +219,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function setType($type = false) {
-        if($type !== false && $type == self::CODE_TYPE_CSS || $type == self::CODE_TYPE_JAVASCRIPT) {
+        if ($type !== false && $type == self::CODE_TYPE_CSS || $type == self::CODE_TYPE_JAVASCRIPT) {
             $this->config['type'] = $type;
         } else {
             throw new AppKitBulkLoaderException(__CLASS__ . ': setBase(): Invalid type of code: "' . $type . '"!');
@@ -235,7 +235,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function setConfig(array $config = array()) {
-        if(!empty($config)) {
+        if (!empty($config)) {
             foreach($config as $key => $value) {
                 $this-> {$key} = $value;
             }
@@ -253,7 +253,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function checkFiles($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
@@ -261,7 +261,7 @@ class AppKitBulkLoader {
         foreach($this->config['file'] as $currentFile) {
             $currentAbsoluteFilename = $this->base . '/' . $currentFile;
 
-            if(file_exists($currentAbsoluteFilename) && is_readable($currentAbsoluteFilename)) {
+            if (file_exists($currentAbsoluteFilename) && is_readable($currentAbsoluteFilename)) {
                 array_push($this->fileList, $currentAbsoluteFilename);
             } else {
                 $this->fileList = array();
@@ -280,18 +280,18 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function readFiles($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
         $readOk = true;
 
-        if(!$this->filesRead) {
-            if($this->checkFiles()) {
+        if (!$this->filesRead) {
+            if ($this->checkFiles()) {
                 foreach($this->fileList as $file) {
                     $content = @file_get_contents($file);
 
-                    if($content !== false) {
+                    if ($content !== false) {
                         $this->fileContent .= $content . "\n\n";
                     } else {
                         $readOk = false;
@@ -301,10 +301,10 @@ class AppKitBulkLoader {
                     }
                 }
 
-                if($readOk) {
+                if ($readOk) {
                     $this->filesRead = true;
 
-                    if($this->compress) {
+                    if ($this->compress) {
                         $this->fileContent = str_replace(array("\r\n", "\n", "\r"), array('', '', ''), $this->fileContent);
                     }
                 }
@@ -321,7 +321,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     private function getJsUrlHtml($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
@@ -337,7 +337,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     private function getJsContentHtml($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
@@ -352,7 +352,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     private function getCssUrlHtml($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
@@ -368,7 +368,7 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     private function getCssContentHtml($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
@@ -384,17 +384,17 @@ class AppKitBulkLoader {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     public function getContent($config = false) {
-        if($config !== false) {
+        if ($config !== false) {
             $this->setConfig($config);
         }
 
         $error = false;
         $content = false;
 
-        switch($this->output) {
+        switch ($this->output) {
             case self::OUTPUT_TYPE_INLINE:
             case false:
-                if(!$this->filesRead) {
+                if (!$this->filesRead) {
                     $this->readFiles();
                 }
 
@@ -409,10 +409,10 @@ class AppKitBulkLoader {
                 break;
         }
 
-        if(!$error) {
-            switch($this->type) {
+        if (!$error) {
+            switch ($this->type) {
                 case self::CODE_TYPE_CSS:
-                    if($this->output == self::OUTPUT_TYPE_INLINE) {
+                    if ($this->output == self::OUTPUT_TYPE_INLINE) {
                         $content = $this->getCssContentHtml();
                     } else {
                         $content = $this->getCssUrlHtml();
@@ -421,7 +421,7 @@ class AppKitBulkLoader {
                     break;
 
                 case self::CODE_TYPE_JAVASCRIPT:
-                    if($this->output == self::OUTPUT_TYPE_INLINE) {
+                    if ($this->output == self::OUTPUT_TYPE_INLINE) {
                         $content = $this->getJsContentHtml();
                     } else {
                         $content = $this->getJsUrlHtml();

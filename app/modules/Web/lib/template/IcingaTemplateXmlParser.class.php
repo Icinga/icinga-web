@@ -29,7 +29,7 @@ class IcingaTemplateXmlParser {
      * @return CLASS
      */
     public function __construct($file = null) {
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             $this->loadFile($file);
         }
 
@@ -42,7 +42,7 @@ class IcingaTemplateXmlParser {
      * @return boolean
      */
     public function loadFile($file) {
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             return $this->loadXml(file_get_contents($file));
         }
 
@@ -88,11 +88,11 @@ class IcingaTemplateXmlParser {
      * @return AgaviParameterHolder
      */
     public function getFieldByName($name, $type=null) {
-        if(array_key_exists($name, $this->fields)) {
+        if (array_key_exists($name, $this->fields)) {
             $arry =& $this->fields[$name];
 
-            if($type !== null) {
-                if(array_key_exists($type, $arry)) {
+            if ($type !== null) {
+                if (array_key_exists($type, $arry)) {
                     $arry =& $arry[$type];
                 } else {
                     throw new IcingaTemplateXmlParserException('Type '. $type. ' does not exist!');
@@ -145,7 +145,7 @@ class IcingaTemplateXmlParser {
      * @return boolean
      */
     public function parseTemplate() {
-        if(!$this->dom instanceof DOMDocument) {
+        if (!$this->dom instanceof DOMDocument) {
             // throw new IcingaTemplateXmlParserException('DOMDocument not ready!');
         }
 
@@ -162,7 +162,7 @@ class IcingaTemplateXmlParser {
         unset($storage);
 
         // Check data
-        if(count($this->fields) && count($this->data)) {
+        if (count($this->fields) && count($this->data)) {
             return true;
         }
 
@@ -178,7 +178,7 @@ class IcingaTemplateXmlParser {
     private function domRoot() {
         static $root = null;
 
-        if($root === null) {
+        if ($root === null) {
             $root = $this->dom->getElementsByTagName('template')->item(0);
         }
 
@@ -186,9 +186,9 @@ class IcingaTemplateXmlParser {
     }
 
     private function elementHasElementChilds(DOMElement &$element) {
-        if($element->hasChildNodes()) {
+        if ($element->hasChildNodes()) {
             foreach($element->childNodes as $node) {
-                if($node->nodeType == XML_ELEMENT_NODE) {
+                if ($node->nodeType == XML_ELEMENT_NODE) {
                     return true;
                 }
             }
@@ -201,9 +201,9 @@ class IcingaTemplateXmlParser {
      * @return mixed
      */
     private function rewriteParamName($name) {
-        if(strstr($name, '::')) {
+        if (strstr($name, '::')) {
 
-            if(defined($name)) {
+            if (defined($name)) {
                 $name = AppKit::getConstant($name);
             }
 
@@ -213,12 +213,12 @@ class IcingaTemplateXmlParser {
     }
 
     private function parseDom(DOMElement $element, array &$storage) {
-        if($element->hasChildNodes()) {
+        if ($element->hasChildNodes()) {
             foreach($element->childNodes as $child) {
-                if($child->nodeType == XML_ELEMENT_NODE) {
+                if ($child->nodeType == XML_ELEMENT_NODE) {
                     $index = '__BAD_INDEX';
 
-                    if($child->hasAttribute('name')) {
+                    if ($child->hasAttribute('name')) {
                         $index = $this->rewrite->replaceKey($child->getAttribute('name'));
                     }
 
@@ -229,7 +229,7 @@ class IcingaTemplateXmlParser {
                         $index = $child->nodeName;
                     }
 
-                    if($this->elementHasElementChilds($child)) {
+                    if ($this->elementHasElementChilds($child)) {
                         $storage [ $index ] = array();
                         $this->parseDom($child, $storage [ $index ]);
                     } else {
@@ -248,7 +248,7 @@ class IcingaTemplateXmlParser {
         foreach($this->getFieldKeys() as $field) {
             $params = $this->getFieldByName($field, 'display');
 
-            if($params->getParameter('visible') == true) {
+            if ($params->getParameter('visible') == true) {
                 $header[$field] = $params->getParameter('label', $field);
             }
         }

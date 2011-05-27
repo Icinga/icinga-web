@@ -15,7 +15,7 @@ class NsmSession extends BaseNsmSession {
     public function get($val, $load=true) {
         $val = parent::get($val, $load);
 
-        if(is_resource($val)) {
+        if (is_resource($val)) {
             return stream_get_contents($val);
         }
 

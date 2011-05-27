@@ -13,17 +13,17 @@ class AppKitJsonResponse extends AppKitBaseClass {
     private $data	= array();
 
     public function __construct($status = null) {
-        if($status !== null) {
+        if ($status !== null) {
             $this->setStatus($status);
         }
     }
 
     public function addToResponse($namespace, $value, $key=null) {
-        if(!is_array($this->data[$namespace])) {
+        if (!is_array($this->data[$namespace])) {
             $this->data[$namespace] = array();
         }
 
-        if($key === false) {
+        if ($key === false) {
             $this->data[$namespace] = $value;
         }
 

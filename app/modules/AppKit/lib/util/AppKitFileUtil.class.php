@@ -17,7 +17,7 @@ class AppKitFileUtil {
                 $filename = $directory. '/'. $basename. $suffix. $extension;
                 self::fileExists($filename);
                 return new SplFileObject($filename);
-            } catch(AppKitFileUtilException $e) {}
+            } catch (AppKitFileUtilException $e) {}
 
         }
         throw new AppKitFileUtilException('Could not find any alternatives for '. $basename);
@@ -29,7 +29,7 @@ class AppKitFileUtil {
      * @throws AppKitFileUtilException
      */
     public static function fileExists($filename) {
-        if(is_file($filename)) {
+        if (is_file($filename)) {
             return true;
         }
 

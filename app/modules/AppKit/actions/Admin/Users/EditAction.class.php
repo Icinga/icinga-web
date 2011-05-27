@@ -42,7 +42,7 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction {
             $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
 
             // This is our user!
-            if($rd->getParameter('id') == 'new') {
+            if ($rd->getParameter('id') == 'new') {
                 $user = new NsmUser();
             } else {
                 $user = $useradmin->getUserById($rd->getParameter('id'));
@@ -51,7 +51,7 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction {
             // Update the simple data!
             $useradmin->updateUserData($user, $rd);
 
-            if($rd->getParameter('password_validate', false) !== false) {
+            if ($rd->getParameter('password_validate', false) !== false) {
                 $useradmin->updateUserPassword($user, $rd->getParameter('password_validate'));
             }
 
@@ -67,10 +67,10 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction {
             // Give notice!
 
             Doctrine_Manager::connection()->commit();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             try {
                 Doctrine_Manager::connection()->rollback();
-            } catch(Doctrine_Transaction_Exception $e) {}
+            } catch (Doctrine_Transaction_Exception $e) {}
 
             echo $e->getMessage();
 

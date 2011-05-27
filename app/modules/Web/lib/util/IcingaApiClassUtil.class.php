@@ -16,11 +16,11 @@ class IcingaApiClassUtil {
 
     public static function initialize() {
 
-        if(self::$classFile !== null && self::$className !== null) {
+        if (self::$classFile !== null && self::$className !== null) {
             return true;
         }
 
-        if(AgaviConfig::get('modules.web.version')) {
+        if (AgaviConfig::get('modules.web.version')) {
             self::$className = AgaviConfig::get('modules.web.api.class');
             self::$classFile = AgaviConfig::get('modules.web.api.file');
             self::checkClass();
@@ -32,7 +32,7 @@ class IcingaApiClassUtil {
     }
 
     public static function checkClass() {
-        if(!self::checkClassExists(self::$className)) {
+        if (!self::checkClassExists(self::$className)) {
             self::includeClassFile(self::$classFile);
         }
 
@@ -40,7 +40,7 @@ class IcingaApiClassUtil {
     }
 
     private static function includeClassFile($classFile) {
-        if(file_exists(self::$classFile)) {
+        if (file_exists(self::$classFile)) {
             require_once(self::$classFile);
             return true;
         }

@@ -25,7 +25,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
     }
 
     public function setTemplateFile($templateFile) {
-        if(!file_exists($templateFile)) {
+        if (!file_exists($templateFile)) {
             $this->templateFile = sprintf(
                                       '%s/%s.xml',
                                       AgaviConfig::get('modules.cronks.xml.path.to'),
@@ -50,14 +50,14 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
         $data = array();
 
-        if($element->hasChildNodes()) {
+        if ($element->hasChildNodes()) {
             $count = 0;
             foreach($element->childNodes as $child) {
-                if($child->nodeType == XML_ELEMENT_NODE) {
+                if ($child->nodeType == XML_ELEMENT_NODE) {
 
                     $index = $this->getDomIndex($child, $count);
 
-                    if($this->hasChildren($child)) {
+                    if ($this->hasChildren($child)) {
                         $data[$index] = $this->convertDom($child);
                     } else {
                         $data[$index] = $child->textContent;
@@ -81,7 +81,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
         $index = $this->namedIndex($element);
 
-        if(!$index && $this->arrayNode($element)) {
+        if (!$index && $this->arrayNode($element)) {
             $index = $fake++;
         }
 
@@ -99,7 +99,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
      */
     private function namedIndex(DOMElement &$element) {
         foreach(self::$indexAttributes as $attr) {
-            if($element->hasAttribute($attr)) {
+            if ($element->hasAttribute($attr)) {
                 return $element->getAttribute($attr);
             }
         }
@@ -126,9 +126,9 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
     private function hasChildren(DOMElement &$element) {
         $hasChildren = false;
 
-        if($element->hasChildNodes()) {
+        if ($element->hasChildNodes()) {
             foreach($element->childNodes as $node) {
-                if($node->nodeType == XML_ELEMENT_NODE) {
+                if ($node->nodeType == XML_ELEMENT_NODE) {
                     $hasChildren = true;
                     break;
                 }
@@ -154,7 +154,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
      */
     public function &getTemplateObj() {
 
-        if($this->templateObject === null) {
+        if ($this->templateObject === null) {
             $this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array(
                                         'templates'		=> $this->getTemplates(),
                                         'datasources'	=> $this->getDatasources()

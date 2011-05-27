@@ -58,7 +58,7 @@ class AppKitSelectElement extends AppKitFormElement {
         $this->source->applyDomChanges($this->getDomElement());
         parent::buildTag();
 
-        if($this->multiple === true) {
+        if ($this->multiple === true) {
             $this->addAttribute('multiple', 'multiple');
             $this->addAttribute('size', '5');
         }

@@ -21,11 +21,11 @@ class Cronks_System_IframeViewSuccessView extends CronksBaseView {
 
         $this->url->setBaseUrl($rd->getParameter('url'));
 
-        if($rd->hasParameter('user') && $rd->hasParameter('password')) {
+        if ($rd->hasParameter('user') && $rd->hasParameter('password')) {
             $this->url->setUserPassword($rd->getParameter('user'), $rd->getParameter('password'));
         }
 
-        if($rd->hasParameter('parameterMap')) {
+        if ($rd->hasParameter('parameterMap')) {
             $this->url->setParamMapArray($rd->getParameter('parameterMap'));
         }
 

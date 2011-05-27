@@ -17,7 +17,7 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView {
      */
     public function executeSimple(AgaviRequestDataHolder $rd) {
 
-        if($rd->getParameter('interface', false) == true) {
+        if ($rd->getParameter('interface', false) == true) {
             return $this->executeHtml($rd);
         }
 
@@ -32,12 +32,12 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView {
                 $content = $model->renderTemplate($rd->getParameter('render', 'MAIN'));
 
                 return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
-            } catch(AppKitFileUtilException $e) {
+            } catch (AppKitFileUtilException $e) {
                 $msg = 'Could not find template for '. $rd->getParameter('template');
                 AppKitAgaviUtil::log('Could not find template for '. $rd->getParameter('template'), AgaviLogger::ERROR);
                 return $msg;
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return $e->getMessage();
         }
 

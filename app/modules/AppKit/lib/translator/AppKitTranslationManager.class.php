@@ -5,13 +5,13 @@ class AppKitTranslationManager extends AgaviTranslationManager {
     private $__localeLoaded = false;
 
     public function loadCurrentLocale() {
-        if($this->__localeLoaded) {
+        if ($this->__localeLoaded) {
             return parent::loadCurrentLocale();
         }
 
         $user = $this->getContext()->getUser();
 
-        if(!$user || !($user instanceof AppKitSecurityUser)) {
+        if (!$user || !($user instanceof AppKitSecurityUser)) {
             return null;
         }
 
@@ -21,15 +21,15 @@ class AppKitTranslationManager extends AgaviTranslationManager {
 
             $translation = $this->getContext()->getTranslationManager();
 
-            if($dbUser instanceof NsmUser) {
+            if ($dbUser instanceof NsmUser) {
                 $langDomain = $dbUser->getPrefVal("org.icinga.appkit.locale");
 
-                if($langDomain) {
+                if ($langDomain) {
                     $translation->setLocale($langDomain);
                 }
             }
 
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // ignore
         }
 

@@ -27,15 +27,15 @@ class AppKit_Admin_Groups_IndexAction extends AppKitBaseAction {
 
     public function execute(AgaviRequestDataHolder $rd) {
         // We need the execute method to work with parameter od the request!
-        if($rd->getParameter('id')) {
+        if ($rd->getParameter('id')) {
             try {
                 $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
                 $role = $roleadmin->getRoleById($rd->getParameter('id'));
 
-                if($rd->getParameter('toggleActivity', false) == true) {
+                if ($rd->getParameter('toggleActivity', false) == true) {
                     $roleadmin->toggleActivity($role);
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
 
             }
         }

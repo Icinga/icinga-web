@@ -7,13 +7,13 @@ class AppKit_Auth_Provider_DatabaseModel extends AppKitAuthProviderBaseModel imp
      * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#doAuthenticate()
      */
     public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
-        if($user instanceof NsmUser && $user->user_id > 0) {
+        if ($user instanceof NsmUser && $user->user_id > 0) {
 
             $test_hash = hash_hmac(NsmUser::HASH_ALGO, $password, $user->user_salt);
 
             $this->log('Auth.Provider.Database: HASH(%s)', $test_hash, AgaviLogger::DEBUG);
 
-            if($test_hash === $user->user_password) {
+            if ($test_hash === $user->user_password) {
                 return true;
             }
         }
@@ -33,7 +33,7 @@ class AppKit_Auth_Provider_DatabaseModel extends AppKitAuthProviderBaseModel imp
                ->where('u.user_name=? and user_disabled=?', array($uid, 0))
                ->execute(null, Doctrine::HYDRATE_ARRAY);
 
-        if(isset($res[0]['cnt']) && $res[0]['cnt'] != "0" && (int)$res[0]['cnt'] === 1) {
+        if (isset($res[0]['cnt']) && $res[0]['cnt'] != "0" && (int)$res[0]['cnt'] === 1) {
             return true;
         }
 

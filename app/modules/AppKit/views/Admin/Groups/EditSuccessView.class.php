@@ -2,7 +2,7 @@
 
 class AppKit_Admin_Groups_EditSuccessView extends AppKitBaseView {
     public function executeSimple(AgaviRequestDataHolder $rd) {
-        if($this->getContext()->getRequest()->getMethod() == "write") {
+        if ($this->getContext()->getRequest()->getMethod() == "write") {
             return null;
         }
 
@@ -24,7 +24,7 @@ class AppKit_Admin_Groups_EditSuccessView extends AppKitBaseView {
 
 
 
-        } catch(AppKitDoctrineException $e) {
+        } catch (AppKitDoctrineException $e) {
             $this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
             $this->setAttribute('title', 'An error occured');
         }

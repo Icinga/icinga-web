@@ -42,7 +42,7 @@ class AppKit {
     public static function getConstant($value) {
         $value = preg_replace('@^CONST::@', null, $value);
 
-        if(defined($value)) {
+        if (defined($value)) {
             return constant($value);
         }
 
@@ -74,7 +74,7 @@ class AppKit {
     public static function getInstanceArray($class_name, array $args = array()) {
         $ref = new ReflectionClass($class_name);
 
-        if($ref->isInstantiable()) {
+        if ($ref->isInstantiable()) {
             return $ref->newInstanceArgs($args);
         }
 
@@ -91,10 +91,10 @@ class AppKit {
     public static function debugOut($mixed) {
         $queue = AppKitFactories::getInstance()->getFactory('MessageQueue');
 
-        if($queue instanceof AppKitQueue) {
+        if ($queue instanceof AppKitQueue) {
             $args = func_get_args();
 
-            if(count($args) == 1) {
+            if (count($args) == 1) {
                 $args = $args[0];
             }
 

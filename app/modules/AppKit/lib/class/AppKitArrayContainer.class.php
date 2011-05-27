@@ -10,7 +10,7 @@ abstract class AppKitArrayContainer extends AppKitBaseClass
     }
 
     public function offsetGet($offset) {
-        if($this->offsetExists($offset)) {
+        if ($this->offsetExists($offset)) {
             return $this->arrayContainer[$offset];
         }
 
@@ -18,7 +18,7 @@ abstract class AppKitArrayContainer extends AppKitBaseClass
     }
 
     public function offsetSet($offset, $value) {
-        if($offset === null) {
+        if ($offset === null) {
             $offset = $this->count();
         }
 
@@ -30,7 +30,7 @@ abstract class AppKitArrayContainer extends AppKitBaseClass
         foreach($this->arrayContainer as $srcKey => $srcData) {
             $tmpArray[$srcKey] = $srcData;
 
-            if($srcKey == $afterItem) {
+            if ($srcKey == $afterItem) {
                 $tmpArray[$key] = $data;
             }
         }
@@ -42,7 +42,7 @@ abstract class AppKitArrayContainer extends AppKitBaseClass
     }
 
     public function offsetUnset($offset) {
-        if($this->offsetExists($offset)) {
+        if ($this->offsetExists($offset)) {
             unset($this->arrayContainer[$offset]);
             return true;
         }

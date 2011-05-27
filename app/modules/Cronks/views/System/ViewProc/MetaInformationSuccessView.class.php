@@ -19,7 +19,7 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
                                    'keys'		=> $template->getFieldKeys(),
                                    'params'	=> $rd->getParameters()
                                ));
-        } catch(AppKitFileUtilException $e) {
+        } catch (AppKitFileUtilException $e) {
             $msg = 'Could not find template for '. $rd->getParameter('template');
             AppKitAgaviUtil::log('Could not find template for '. $rd->getParameter('template'), AgaviLogger::ERROR);
             return $msg;

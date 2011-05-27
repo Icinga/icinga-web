@@ -51,11 +51,11 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 
     public function executeWrite(AgaviParameterHolder $rd) {
 
-        if($rd->getParameter('xaction', false) == 'create' || $rd->getParameter('xaction', false) == 'update' || $rd->getParameter('xaction', false) == 'destroy') {
+        if ($rd->getParameter('xaction', false) == 'create' || $rd->getParameter('xaction', false) == 'update' || $rd->getParameter('xaction', false) == 'destroy') {
 
             $rows = json_decode($rd->getParameter('rows', array()));
 
-            if(!is_array($rows)) {
+            if (!is_array($rows)) {
                 $rows = array($rows);
             }
 
@@ -63,15 +63,15 @@ class Cronks_Provider_CategoriesAction extends CronksBaseAction {
 
             foreach($rows as $category) {
                 try {
-                    if($rd->getParameter('xaction', false) == 'destroy') {
-                        if(isset($category->catid)) {
+                    if ($rd->getParameter('xaction', false) == 'destroy') {
+                        if (isset($category->catid)) {
                             $this->cronks->deleteCategoryRecord($category->catid);
                         }
                     } else {
                         $this->cronks->createCategory((array)$category);
                         $c[] = (array)$category;
                     }
-                } catch(Doctrine_Exception $e) {}
+                } catch (Doctrine_Exception $e) {}
             }
 
             $this->setAttributeByRef('categories', $c);

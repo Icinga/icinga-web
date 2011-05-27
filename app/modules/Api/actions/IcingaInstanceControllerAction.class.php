@@ -27,19 +27,19 @@ class Api_IcingaInstanceControllerAction extends IcingaApiBaseAction {
         try {
             $icinga = $this->getContext()->getModel("IcingaControlTask","Api", array("host"=>$host));
             $status = $icinga->getIcingaStatus();
-        } catch(ApiSSHNotInstalledException $e) {
+        } catch (ApiSSHNotInstalledException $e) {
             $status = -1;
             $err = "SSH_NA_Err";
-        } catch(ApiInvalidAuthTypeException $e) {
+        } catch (ApiInvalidAuthTypeException $e) {
             $status = -1;
             $err = "IAuthErr";
-        } catch(ApiAuthorisationFailedException $e) {
+        } catch (ApiAuthorisationFailedException $e) {
             $status = -1;
             $err = "AuthErr";
-        } catch(ApiCommandFailedException $e) {
+        } catch (ApiCommandFailedException $e) {
             $status = -1;
             $err = "CommandErr";
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $status = -1;
             $err = "Unknown";
         }
@@ -52,7 +52,7 @@ class Api_IcingaInstanceControllerAction extends IcingaApiBaseAction {
         $instance = $rd->getParameter("instance",null);
         $this->setAttribute("write",true);
 
-        if($instance == null) {
+        if ($instance == null) {
             $this->setAttribute("errorMsg","Invalid request");
             return "Success";
         }
@@ -60,7 +60,7 @@ class Api_IcingaInstanceControllerAction extends IcingaApiBaseAction {
         $icinga = $this->getContext()->getModel("IcingaControlTask","Api", array("host"=>$instance));
 
         try {
-            switch($action) {
+            switch ($action) {
                 case 'restart':
                     $icinga->restartIcinga();
                     return "Success";
@@ -75,7 +75,7 @@ class Api_IcingaInstanceControllerAction extends IcingaApiBaseAction {
                     $this->setAttribute("errorMsg","Invalid action");
                     return "Success";
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->setAttribute("errorMsg",$e->getMessage());
             return "Success";
         }

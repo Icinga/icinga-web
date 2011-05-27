@@ -20,11 +20,11 @@ class AppKit_Ext_ApplicationStateSuccessView extends AppKitBaseView {
         $provider = $this->getContext()->getModel('Ext.ApplicationState', 'AppKit');
         $response = $this->getContainer()->getResponse();
 
-        switch($cmd) {
+        switch ($cmd) {
             case 'init':
                 $data = json_decode($provider->readState());
 
-                if(is_array($data)) {
+                if (is_array($data)) {
                     foreach($data as $i=>$v) {
                         $data[$i]->value = addslashes($v->value);
                     }
@@ -44,7 +44,7 @@ class AppKit_Ext_ApplicationStateSuccessView extends AppKitBaseView {
 
                 $response->setHttpHeader('Content-Type', 'text/x-json', true);
 
-                if(!$provider->stateAvailable()) {
+                if (!$provider->stateAvailable()) {
                     return null;
                 }
 

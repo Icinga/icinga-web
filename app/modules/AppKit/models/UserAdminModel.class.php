@@ -35,11 +35,11 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
                  ->limit($limit)
                  ->offset($start);
 
-        if($sort) {
+        if ($sort) {
             $query->orderBy($sort." ".($asc ? 'ASC' : 'DESC'));
         }
 
-        if($disabled === false) {
+        if ($disabled === false) {
             $query->andWhere('user_disabled=?', array(0));
         }
 
@@ -51,7 +51,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
                  ->select("COUNT(u.user_id) count")
                  ->from("NsmUser u");
 
-        if($disabled === false) {
+        if ($disabled === false) {
             $query->andWhere('user_disabled=?', array(0));
         }
 
@@ -70,7 +70,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
                  ->from('NsmUser')
                  ->orderBy('user_name ASC');
 
-        if($disabled === false) {
+        if ($disabled === false) {
             $query->andWhere('user_disabled=?', array(0));
         }
 
@@ -87,7 +87,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
     public function getUserById($id) {
         $user = Doctrine::getTable('NsmUser')->find($id);
 
-        if(!$user instanceof NsmUser) {
+        if (!$user instanceof NsmUser) {
             throw new AppKitDoctrineException('User not found with this id');
         }
 
@@ -104,7 +104,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
     public function updateUserData(NsmUser &$user, AgaviRequestDataHolder &$rd) {
         AppKitDoctrineUtil::updateRecordsetFromArray($user, $rd->getParameters(), self::$editableAttributes);
 
-        if(!$user->get("user_password")) {
+        if (!$user->get("user_password")) {
             $user->set("user_password",AppKitRandomUtil::initRand());
             $user->set("user_salt",AppKitRandomUtil::initRand());
         }
@@ -147,13 +147,13 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
         foreach($user_roles as $index=>$role_id) {
             $role = Doctrine::getTable('NsmRole')->find($role_id);
 
-            if($role instanceof NsmRole) {
+            if ($role instanceof NsmRole) {
                 $user->NsmRole[$index] = $role;
             }
         }
 
         // Checking the principal
-        if(!$user ->NsmPrincipal->principal_id) {
+        if (!$user ->NsmPrincipal->principal_id) {
             $user ->NsmPrincipal->principal_type = NsmPrincipal::TYPE_ROLE;
         }
 
@@ -189,9 +189,9 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             }
             $principals = $user->getPrincipals();
 
-            if(!$principals instanceof NsmPrincipal) {
+            if (!$principals instanceof NsmPrincipal) {
                 foreach($principals as $pr) {
-                    if($pr->NsmPrincipalTarget) {
+                    if ($pr->NsmPrincipalTarget) {
                         foreach($pr->NsmPrincipalTarget as $pr_t) {
                             $pr_t->delete();
                         }
@@ -200,7 +200,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
                     $pr->delete();
                 }
             } else {
-                if($principals->NsmPrincipalTarget) {
+                if ($principals->NsmPrincipalTarget) {
                     foreach($principals->NsmPrincipalTarget as $pr_t) {
                         $pr_t->delete();
                     }
@@ -213,7 +213,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             Doctrine_Manager::connection()->commit();
 
             return true;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Doctrine_Manager::connection()->rollback();
             $this->getContext()->getLoggerManager()->log($e->getMessage());
             throw($e);

@@ -27,15 +27,15 @@ class AppKit_Admin_Users_IndexAction extends AppKitBaseAction {
 
     public function execute(AgaviRequestDataHolder $rd) {
 
-        if($rd->getParameter('id')) {
+        if ($rd->getParameter('id')) {
             try {
                 $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
                 $user = $useradmin->getUserById($rd->getParameter('id'));
 
-                if($rd->getParameter('toggleActivity', false) == true) {
+                if ($rd->getParameter('toggleActivity', false) == true) {
                     $useradmin->toggleActivity($user);
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 throw $e;
             }
         }

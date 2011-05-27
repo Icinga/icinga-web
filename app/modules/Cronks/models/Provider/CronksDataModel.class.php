@@ -49,14 +49,14 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
         $this->agaviUser = $this->getContext()->getUser();
 
-        if($this->agaviUser->isAuthenticated()===true) {
+        if ($this->agaviUser->isAuthenticated()===true) {
             $this->user = $this->agaviUser->getNsmUser();
             $this->setPrincipals($this->user->getPrincipalsArray());
         } else {
             throw new AppKitModelException('The model need an authenticated user');
         }
 
-        if($this->hasParameter('categories')) {
+        if ($this->hasParameter('categories')) {
             $this->setCategories($this->getParameter('categores'));
         }
 
@@ -72,7 +72,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     }
 
     public function setCategories($list) {
-        if(is_array($list)) {
+        if (is_array($list)) {
             $this->categories = $list;
         } else {
             $this->categories = AppKitArrayUtil::trimSplit($list, ',');
@@ -106,7 +106,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                       ->select('cat.*')
                       ->from('CronkCategory cat');
 
-        if($get_all !== true) {
+        if ($get_all !== true) {
 
             $p = $this->principals;
             $p[] = $this->user->user_id;
@@ -136,7 +136,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
     public function getCategories($get_all=false, $show_invisible=false) {
 
-        if($show_invisible == true && !$this->agaviUser->hasCredential('icinga.cronk.category.admin')) {
+        if ($show_invisible == true && !$this->agaviUser->hasCredential('icinga.cronk.category.admin')) {
             $show_invisible = false;
         }
 
@@ -150,13 +150,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         foreach($categories as $cid=>$category) {
             $count = 0;
             foreach($cronks as $cronk) {
-                if(isset($cronk['categories']) && $this->matchCategoryString($cronk['categories'], $cid)) {
+                if (isset($cronk['categories']) && $this->matchCategoryString($cronk['categories'], $cid)) {
                     $count++;
                 }
             }
             $categories[$cid]['count_cronks'] = $count;
 
-            if(!$category['visible'] && !$show_invisible) {
+            if (!$category['visible'] && !$show_invisible) {
                 unset($categories[$cid]);
             }
         }
@@ -165,14 +165,14 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     }
 
     public function deleteCategoryRecord($cc_uid) {
-        if($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cc_uid)) {
+        if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cc_uid)) {
             $res = Doctrine_Query::create()
                    ->delete('CronkCategory cc')
                    ->andWhere('cc.cc_uid=?', array($cc_uid))
                    ->limit(1)
                    ->execute();
 
-            if($res == 1) {
+            if ($res == 1) {
                 return true;
             }
         }
@@ -185,14 +185,14 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
         $category = null;
 
-        if($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_uid'])) {
+        if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_uid'])) {
             $category = Doctrine_Query::create()
                         ->from('CronkCategory cc')
                         ->andWhere('cc.cc_uid=?', $cat['cc_uid'])
                         ->execute()->getFirst();
         }
 
-        if(!$category instanceof CronkCategory || !$category->cc_id > 0) {
+        if (!$category instanceof CronkCategory || !$category->cc_id > 0) {
             $category = new CronkCategory();
         }
 
@@ -205,7 +205,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     private function checkGroups($listofnames) {
         $groups = AppKitArrayUtil::trimSplit($listofnames, ',');
 
-        if(is_array($groups) && count($groups)) {
+        if (is_array($groups) && count($groups)) {
             $c = Doctrine_Query::create()
                  ->select('r.role_id')
                  ->from('NsmRole r')
@@ -213,7 +213,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                  ->whereIn('r.role_name', $groups)
                  ->count();
 
-            if($c === 1) {
+            if ($c === 1) {
                 return true;
             }
         }
@@ -224,9 +224,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     private function checkPrincipals($listofprincipals) {
         $principals = AppKitArrayUtil::trimSplit($listofprincipals);
 
-        if(is_array($principals)) {
+        if (is_array($principals)) {
             foreach($principals as $principal) {
-                if($this->agaviUser->hasCredential($principal)) {
+                if ($this->agaviUser->hasCredential($principal)) {
                     return true;
                 }
             }
@@ -242,7 +242,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
         foreach($cronks as $uid=>$cronk) {
 
-            if(isset($cronk['groupsonly']) && $this->checkGroups($cronk['groupsonly']) !== true) {
+            if (isset($cronk['groupsonly']) && $this->checkGroups($cronk['groupsonly']) !== true) {
                 continue;
             }
 
@@ -371,15 +371,15 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
         foreach($data as $name => $value) {
 
-            if(isset(self::$cronk_xml_map[$name])) {
+            if (isset(self::$cronk_xml_map[$name])) {
                 $name = self::$cronk_xml_map[$name];
             }
 
-            if(in_array($name, self::$cronk_xml_fields)) {
+            if (in_array($name, self::$cronk_xml_fields)) {
 
                 $ele = $dom->createElement('ae:parameter');
 
-                if(is_array($value)) {
+                if (is_array($value)) {
 
                     foreach($value as $sn=>$sv) {
                         $se = $dom->createElement('ae:parameter', $sv);
@@ -387,7 +387,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                         $ele->appendChild($se);
                     }
                 } else {
-                    switch($name) {
+                    switch ($name) {
                         case 'state':
                             $cdata = $dom->createCDATASection($value);
                             $ele->appendChild($cdata);
@@ -404,14 +404,14 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                                     ->andWhereIn('r.role_id', $roles)
                                     ->execute(null, Doctrine::HYDRATE_ARRAY);
 
-                            if(isset($arry) && is_array($arry)) {
+                            if (isset($arry) && is_array($arry)) {
                                 $value = implode(',', array_keys($arry));
                             }
 
                             break;
 
                         case 'hide':
-                            if($value && $value == 'on') {
+                            if ($value && $value == 'on') {
                                 $value = 'true';
                             } else {
                                 $value = 'false';
@@ -428,13 +428,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                             break;
                     }
 
-                    if(isset($value)) {
+                    if (isset($value)) {
                         $text = $dom->createTextNode($value);
                         $ele->appendChild($text);
                     }
                 }
 
-                if(isset($ele)) {
+                if (isset($ele)) {
                     $ele->setAttribute('name', $name);
                     $cronk->appendChild($ele);
                 }
@@ -471,7 +471,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
         $cronk->CronkPrincipalCronk->delete();
 
-        if(is_array($rarr)) {
+        if (is_array($rarr)) {
             $principals = Doctrine_Query::create()
                           ->select('p.principal_id')
                           ->from('NsmPrincipal p')
@@ -507,7 +507,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
      */
     public function createCronkRecord(array $data, $load = true) {
 
-        if(!isset($data['cid'])) {
+        if (!isset($data['cid'])) {
             throw new AppKitModelException('cid is needed for record creation/loading (Cronk UID)');
         }
 
@@ -517,11 +517,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
         $record = null;
 
-        if($load == true) {
+        if ($load == true) {
             $record = Doctrine::getTable('Cronk')->findBy('cronk_uid', $data['cid'])->getFirst();
         }
 
-        if(!$record instanceof Cronk) {
+        if (!$record instanceof Cronk) {
             $record = new Cronk();
             $record->cronk_uid = $data['cid'];
             $record->NsmUser = $this->user;
@@ -544,13 +544,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
              ->from('Cronk c')
              ->where('c.cronk_uid=? and c.cronk_name=?', array($cronkid, $cronkname));
 
-        if($own==true) {
+        if ($own==true) {
             $q->andWhere('c.cronk_user_id=?', array($this->user->user_id));
         }
 
         $cronk = $q->execute()->getFirst();
 
-        if($cronk instanceof Cronk && $cronk->cronk_id > 0) {
+        if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
             Doctrine_Manager::getInstance()->getCurrentConnection()->beginTransaction();
             $cronk->CronkCategoryCronk->delete();
             $cronk->CronkPrincipalCronk->delete();
@@ -578,13 +578,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
             $tmp = array();
 
             foreach($cronks as $cronk) {
-                if($this->matchCategoryString($cronk['categories'], $category_name)) {
+                if ($this->matchCategoryString($cronk['categories'], $category_name)) {
                     $tmp[] = $cronk;
                 }
 
             }
 
-            if(count($tmp)) {
+            if (count($tmp)) {
                 $cronks_out[$category_name] = array(
                                                   'rows'		=> $tmp,
                                                   'success'	=> true,

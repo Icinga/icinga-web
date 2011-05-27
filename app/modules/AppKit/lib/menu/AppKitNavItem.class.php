@@ -31,11 +31,11 @@ class AppKitNavItem extends AppKitBaseClass {
      * @param string $route
      */
     public function __construct($name=null, $route=null) {
-        if($name!==null) {
+        if ($name!==null) {
             $this->setName($name);
         }
 
-        if($route!==null) {
+        if ($route!==null) {
             $this->setRoute($route);
         }
     }
@@ -151,14 +151,14 @@ class AppKitNavItem extends AppKitBaseClass {
      * @return AppKitNavItem
      */
     public function addAttributes($key, $val=null, $append=false) {
-        if(func_num_args()>=2) {
-            if($append==true && $this->hasAttribute($key)) {
+        if (func_num_args()>=2) {
+            if ($append==true && $this->hasAttribute($key)) {
                 $this->attributes[$key] += $val;
             } else {
                 $this->attributes[$key] = $val;
             }
         } else {
-            if(is_array($key) && count($key)) {
+            if (is_array($key) && count($key)) {
                 $this->attributes = (array)$this->attributes + (array)$key;
             }
         }
@@ -181,7 +181,7 @@ class AppKitNavItem extends AppKitBaseClass {
      * @return mixed
      */
     public function getAttribute($key, $default=null) {
-        if($this->hasAttribute($key)) {
+        if ($this->hasAttribute($key)) {
             return $this->attributes[$key];
         }
 
@@ -260,7 +260,7 @@ class AppKitNavItem extends AppKitBaseClass {
     public function isActive() {
         $matched = $this->getAgaviRequest()->getAttribute('matched_routes', 'org.agavi.routing');
 
-        if(in_array($this->getRoute(), $matched)) {
+        if (in_array($this->getRoute(), $matched)) {
             return true;
         }
 
@@ -272,7 +272,7 @@ class AppKitNavItem extends AppKitBaseClass {
      * @return AppKitNavContainer
      */
     public function getContainer() {
-        if(!$this->sub_container instanceof AppKitNavContainer) {
+        if (!$this->sub_container instanceof AppKitNavContainer) {
             $this->sub_container = new AppKitNavContainer();
         }
 

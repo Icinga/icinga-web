@@ -37,7 +37,7 @@ abstract class IcingaStateInfo {
      * @return none
      */
     public function __construct($type) {
-        if(is_numeric($type)) {
+        if (is_numeric($type)) {
             $this->setStateById((int) $type);
         }
     }
@@ -65,7 +65,7 @@ abstract class IcingaStateInfo {
      * @return string
      */
     public function getCurrentStateAsText($wrap=null) {
-        if($wrap!==null) {
+        if ($wrap!==null) {
             return sprintf($wrap, $this->getStateText($this->getCurrentState()));
         } else {
             return $this->getWrappedText($this->getStateText($this->getCurrentState()));
@@ -100,7 +100,7 @@ abstract class IcingaStateInfo {
      * @return string
      */
     public function getStateText($state) {
-        if(array_key_exists($state, $this->state_list)) {
+        if (array_key_exists($state, $this->state_list)) {
 
             return $this->state_list[$state];
         }
@@ -117,10 +117,10 @@ abstract class IcingaStateInfo {
     }
 
     public function getColorByState($state, $with_hash=true) {
-        if(array_key_exists($state, $this->colors)) {
+        if (array_key_exists($state, $this->colors)) {
             $out = $this->colors[$state];
 
-            if($with_hash==true) {
+            if ($with_hash==true) {
                 $out = '#'. $out;
             }
 

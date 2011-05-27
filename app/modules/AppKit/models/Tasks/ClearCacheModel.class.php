@@ -7,7 +7,7 @@ class AppKit_Tasks_ClearCacheModel extends AppKitBaseModel {
 
         $content_dir = $cache_dir. '/content';
 
-        if(is_dir($content_dir)) {
+        if (is_dir($content_dir)) {
             $config_count = $this->removeFilesRecursive($content_dir);
             $this->getContext()->getLoggerManager()->log(sprintf('ClearCache: Deleted %d cache (content) objects', $config_count), AgaviLogger::INFO);
         }
@@ -15,7 +15,7 @@ class AppKit_Tasks_ClearCacheModel extends AppKitBaseModel {
         $config_files = glob($cache_dir. '/config/*.php', GLOB_NOSORT);
         $config_count = count($config_files);
 
-        if($config_count > 0) {
+        if ($config_count > 0) {
             foreach($config_files as $config_file) {
                 unlink($config_file);
             }
@@ -34,8 +34,8 @@ class AppKit_Tasks_ClearCacheModel extends AppKitBaseModel {
 
         $count = count($order);
 
-        while(($file = array_pop($order))) {
-            if(is_dir($file)) {
+        while (($file = array_pop($order))) {
+            if (is_dir($file)) {
                 rmdir($file);
             }
 

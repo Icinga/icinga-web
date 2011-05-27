@@ -14,14 +14,14 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView {
                       "success" => "true"
                   );
 
-        if(false !== $rd->getParameter("withMeta", false)) {
+        if (false !== $rd->getParameter("withMeta", false)) {
             // Configure ExtJS' JsonReader
             $result["metaData"] = $this->getMetaDataArray($rd);
         }
 
         $count = $rd->getParameter("searchCount");
 
-        if($count) {
+        if ($count) {
             $count = array_values($count[0]);
             $result["total"] = $count[0];
         }
@@ -33,15 +33,15 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView {
         $idField = $rd->getParameter("idField",false);
         $columns = $rd->getParameter("columns");
 
-        if($idField) {
+        if ($idField) {
             $metaData["idProperty"] = $idField;
-        } else if(count($columns) == 1) {
+        } else if (count($columns) == 1) {
             $metaData["idProperty"] = $idField = $columns[0];
         }
 
-        if($idField) {
+        if ($idField) {
             foreach($columns as &$column) {
-                if($column = $idField) {
+                if ($column = $idField) {
                     $columns[] = array("name"=>"idField","mapping"=>$column);
                 }
             }
@@ -77,7 +77,7 @@ class Web_Icinga_ApiSearchSuccessView extends IcingaWebBaseView {
             }
         }
 
-        if($count) {
+        if ($count) {
             $count = array_values($count[0]);
             $node = $DOM->createElement("total");
             $node->nodeValue = $count[0];

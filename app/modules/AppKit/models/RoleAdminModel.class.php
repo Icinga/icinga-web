@@ -17,7 +17,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
                  ->from('NsmRole')
                  ->orderBy('role_name ASC');
 
-        if($disabled == 0) {
+        if ($disabled == 0) {
             $roles->andWhere('role_disabled = 0');
         }
 
@@ -55,15 +55,15 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
                  ->limit($limit)
                  ->offset($start);
 
-        if($sort) {
+        if ($sort) {
             $query->orderBy('r.' . $sort." ".($asc ? 'ASC' : 'DESC'));
         }
 
-        if($disabled === false) {
+        if ($disabled === false) {
             $query->andWhere('r.role_disabled=?', array(0));
         }
 
-        if($own == true) {
+        if ($own == true) {
             $query->innerJoin('r.NsmUser u WITH user_id=?', $this->getContext()->getUser()->getNsmUser()->user_id);
         }
 
@@ -75,7 +75,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
                  ->select("COUNT(u.role_id) count")
                  ->from("NsmRole u");
 
-        if($disabled === false) {
+        if ($disabled === false) {
             $query->andWhere('role_disabled=?', array(0));
         }
 
@@ -92,7 +92,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
     public function getRoleById($role_id) {
         $role = Doctrine::getTable('NsmRole')->find($role_id);
 
-        if(!$role instanceof NsmRole) {
+        if (!$role instanceof NsmRole) {
             throw new AppKitDoctrineException('Role not found with this id');
         }
 
@@ -110,7 +110,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
         AppKitDoctrineUtil::updateRecordsetFromArray($role, $rd->getParameters(), self::$editableAttributes);
 
         // Checking the principal
-        if(!$role->NsmPrincipal->principal_id) {
+        if (!$role->NsmPrincipal->principal_id) {
             $role->NsmPrincipal->principal_type = NsmPrincipal::TYPE_ROLE;
         }
 
@@ -149,9 +149,9 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
 
         $principals = $role->NsmPrincipal;
 
-        if(!$principals instanceof NsmPrincipal) {
+        if (!$principals instanceof NsmPrincipal) {
             foreach($principals as $pr) {
-                if($pr->NsmPrincipalTarget) {
+                if ($pr->NsmPrincipalTarget) {
                     foreach($pr->NsmPrincipalTarget as $pr_t) {
                         $pr_t->delete();
                     }
@@ -160,7 +160,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
                 $pr->delete();
             }
         } else {
-            if($principals->NsmPrincipalTarget) {
+            if ($principals->NsmPrincipalTarget) {
                 foreach($principals->NsmPrincipalTarget as $pr_t) {
                     $pr_t->delete();
                 }

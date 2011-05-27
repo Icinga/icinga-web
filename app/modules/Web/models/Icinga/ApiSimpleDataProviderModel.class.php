@@ -41,14 +41,14 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     public function setSourceId($srcId = false) {
-        if(array_key_exists($srcId, $this->configAll)) {
+        if (array_key_exists($srcId, $this->configAll)) {
             $this->config = $this->configAll[$srcId];
 
-            if(isset($this->config['xtemplate_code'])) {
+            if (isset($this->config['xtemplate_code'])) {
                 $this->template = $this->config['xtemplate_code'];
             }
 
-            if(isset($this->config['result_type'])) {
+            if (isset($this->config['result_type'])) {
                 $this->mode = $this->config['result_type'];
             } else {
                 $this->mode = self::MODE_ARRAY_KEYVAL;
@@ -57,7 +57,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
             $this->setSearchTarget($this->config['target']);
 
             foreach($this->config['result_columns'] as $coldef) {
-                if(isset($coldef['field'])) {
+                if (isset($coldef['field'])) {
                     $this->resultColumns[$coldef['field']]=$coldef;
                 }
             }
@@ -68,7 +68,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     public function setFilter($filter = false) {
-        if(is_array($filter)) {
+        if (is_array($filter)) {
             $this->filter = $filter;
             $this->applyFilter();
         }
@@ -77,12 +77,12 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     private function applyFilter() {
-        if(array_key_exists('filter', $this->config) && $this->config['filter'] !== false && is_array($this->config['filter'])) {
+        if (array_key_exists('filter', $this->config) && $this->config['filter'] !== false && is_array($this->config['filter'])) {
             $filterDefs = (array_key_exists('column', $this->config['filter'])) ? array($this->config['filter']) : $this->config['filter'];
             foreach($filterDefs as $filter) {
                 $apiFilter = array($filter['column'], $filter['value']);
 
-                if(array_key_exists('match_type', $filter)) {
+                if (array_key_exists('match_type', $filter)) {
                     array_push($apiFilter, constant($filter['match_type']));
                 }
 
@@ -91,13 +91,13 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
             $this->config['filter'] = false;
         }
 
-        if(array_key_exists('user_filters', $this->config) && $this->config['user_filters'] !== false && $this->filter !== false) {
+        if (array_key_exists('user_filters', $this->config) && $this->config['user_filters'] !== false && $this->filter !== false) {
             $filterDefs = $this->config['user_filters'];
             foreach($this->filter as $key => $value) {
-                if(array_key_exists($key, $filterDefs)) {
+                if (array_key_exists($key, $filterDefs)) {
                     $filter = array($filterDefs[$key]['column'], $value);
 
-                    if(array_key_exists('match_type', $filterDefs[$key])) {
+                    if (array_key_exists('match_type', $filterDefs[$key])) {
                         array_push($filter, constant($filterDefs[$key]['match_type']));
                     }
 
@@ -112,10 +112,10 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     public function setOrder() {
-        if(array_key_exists('order', $this->config) && $this->config['order'] !== false) {
+        if (array_key_exists('order', $this->config) && $this->config['order'] !== false) {
             $orderDefs = (array_key_exists('column', $this->config['order'])) ? array($this->config['order']) : $this->config['order'];
             foreach($orderDefs as $currentDef) {
-                if(array_key_exists('direction', $currentDef)) {
+                if (array_key_exists('direction', $currentDef)) {
                     $this->setSearchOrder($currentDef['column'], $currentDef['direction']);
                 } else {
                     $this->setSearchOrder($currentDef['column']);
@@ -127,10 +127,10 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     public function setLimit() {
-        if(array_key_exists('limit', $this->config) && $this->config['limit'] !== false && is_array($this->config['limit'])) {
+        if (array_key_exists('limit', $this->config) && $this->config['limit'] !== false && is_array($this->config['limit'])) {
             $limitDefs = $this->config['limit'];
 
-            if(array_key_exists('length', $limitDefs)) {
+            if (array_key_exists('length', $limitDefs)) {
                 $this->setSearchLimit($limitDefs['start'], $limitDefs['length']);
             } else {
                 $this->setSearchLimit($limitDefs['start']);
@@ -142,10 +142,10 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
     private function rewriteColumn($key, &$val) {
 
-        if(isset($this->resultColumns[$key]['type'])) {
-            switch(strtolower($this->resultColumns[$key]['type'])) {
+        if (isset($this->resultColumns[$key]['type'])) {
+            switch (strtolower($this->resultColumns[$key]['type'])) {
                 case 'url':
-                    if(isset($val) && strlen($val)) {
+                    if (isset($val) && strlen($val)) {
                         $val = AppKitXmlTag::create('a', $val)
                                ->addAttribute('href', $val)
                                ->addAttribute('target', '_blank')
@@ -195,13 +195,13 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
                 $key = strtoupper($key);
 
-                if(in_array($key, $test)) {
+                if (in_array($key, $test)) {
                     continue;
                 } else {
                     $test[] = $key;
                 }
 
-                if($this->mode == self::MODE_ARRAY_KEYVAL) {
+                if ($this->mode == self::MODE_ARRAY_KEYVAL) {
                     $tmp[] = array(
                                  'key' => $this->tm->_($key),
                                  'val' => $this->rewriteColumn($key, $val)
@@ -219,7 +219,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     public function fetch() {
         $result = false;
 
-        if($this->filterSet === false) {
+        if ($this->filterSet === false) {
             $this->applyFilter();
         }
 
@@ -231,7 +231,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     public function getTemplateCode() {
-        if($this->template !== null && strlen($this->template)) {
+        if ($this->template !== null && strlen($this->template)) {
             return $this->template;
         }
 
@@ -247,7 +247,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
     }
 
     private function setSearchFilter($filter, $value = false, $defaultMatch = IcingaApi::MATCH_EXACT) {
-        if($defaultMatch != IcingaApi::MATCH_EXACT && defined($defaultMatch)) {
+        if ($defaultMatch != IcingaApi::MATCH_EXACT && defined($defaultMatch)) {
             $defaultMatch = constant($defaultMatch);
         }
 

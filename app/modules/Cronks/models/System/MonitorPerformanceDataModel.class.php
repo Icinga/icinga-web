@@ -77,11 +77,11 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
                        ->setSearchTarget($source[0])
                        ->setResultColumns($source[1]);
 
-                if(isset($source[2])) {
+                if (isset($source[2])) {
                     $res->setSearchType($source[2]);
                 }
 
-                if(isset($source[3])) {
+                if (isset($source[3])) {
                     $res->setSearchFilter($source[3]);
                 }
 
@@ -89,17 +89,17 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
                 foreach($arr as $key=>$value) {
 
-                    if(isset($source[4])) {
+                    if (isset($source[4])) {
                         $key = $source[4];
                     }
 
-                    if(is_numeric($value) && strpos($value, '.') !== false) {
+                    if (is_numeric($value) && strpos($value, '.') !== false) {
                         $value = sprintf('%.2f', $value);
                     }
 
                     $this->data->setParameter($key, $value);
                 }
-            } catch(IcingaApiException $e) {
+            } catch (IcingaApiException $e) {
                 return false;
             }
 

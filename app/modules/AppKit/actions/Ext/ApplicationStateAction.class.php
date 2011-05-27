@@ -30,10 +30,10 @@ class AppKit_Ext_ApplicationStateAction extends AppKitBaseAction {
         $cmd = $rd->getParameter('cmd', 'read');
         $provider = $this->getContext()->getModel('Ext.ApplicationState', 'AppKit');
 
-        switch($cmd) {
+        switch ($cmd) {
 
             case 'write':
-                if(($data = $rd->getParameter('data', null))) {
+                if (($data = $rd->getParameter('data', null))) {
                     $provider->writeState($data);
                 }
 

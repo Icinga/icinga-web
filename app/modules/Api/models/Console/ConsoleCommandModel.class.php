@@ -23,7 +23,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     }
 
     public function addArgument($value, $key=null) {
-        if($key) {
+        if ($key) {
             $this->arguments[$key] = $value;
         } else {
             $this->arguments[] = $value;
@@ -77,7 +77,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
         return $this->connection;
     }
     public function getOutput() {
-        if(is_array($this->output)) {
+        if (is_array($this->output)) {
             $this->output = implode("\n",$this->output);
         }
 
@@ -88,11 +88,11 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     }
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
-        if(isset($parameters["command"])) {
+        if (isset($parameters["command"])) {
             $this->setCommand($parameters["command"]);
         }
 
-        if(isset($parameters["arguments"])) {
+        if (isset($parameters["arguments"])) {
             $this->arguments = $parameters["arguments"];
         }
     }
@@ -101,32 +101,32 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
         $this->isValid(true);
         $cmd = $this->command;
         foreach($this->arguments as $name => $arg) {
-            if(!is_int($name)) {
+            if (!is_int($name)) {
                 $cmd .= ' '.escapeshellcmd($name);
 
-                if($name[strlen($name)-1] != '=') {
+                if ($name[strlen($name)-1] != '=') {
                     $cmd .= ' ';
                 }
             }
 
-            if($arg != '') {
+            if ($arg != '') {
                 $cmd .= ' '.escapeshellarg($arg);
             }
         }
 
-        if($this->stderr) {
+        if ($this->stderr) {
             $cmd .= ' 2'.($this->append_stderr ? '>> ' : '> ').escapeshellcmd($this->stderr);
         }
 
-        if($this->stdout) {
+        if ($this->stdout) {
             $cmd .= ' '.($this->append_stdout ? ' >> ' : ' > ').escapeshellcmd($this->stdout);
         }
 
-        if($this->stdin) {
+        if ($this->stdin) {
             $cmd .= ' < '.escapeshellcmd($this->stdin);
         }
 
-        if($this->pipeCmd instanceof Api_Console_ConsoleCommandModel) {
+        if ($this->pipeCmd instanceof Api_Console_ConsoleCommandModel) {
             $cmd .= ' | '.$this->pipeCmd->getCommandString();
         }
 
@@ -137,11 +137,11 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
         try {
             $this->expandSymbols();
 
-            if($this->command == null) {
+            if ($this->command == null) {
                 throw new AppKitException("No command specified");
             }
 
-            if($this->connection == null) {
+            if ($this->connection == null) {
                 throw new AppKitException("No connection specified");
             }
 
@@ -150,8 +150,8 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
             $this->validateStdout();
             $this->validateStderr();
             return true;
-        } catch(ApiRestrictedCommandException $e) {
-            if($throwOnError) {
+        } catch (ApiRestrictedCommandException $e) {
+            if ($throwOnError) {
                 throw new ApiRestrictedCommandException($e->getMessage());
             }
 
@@ -161,7 +161,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     }
 
     protected function expandSymbols() {
-        if(empty($this->symList)) {
+        if (empty($this->symList)) {
             $this->createSymbolList();
         }
 
@@ -175,12 +175,12 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
         foreach($this->arguments as $key=>&$val) {
             $found = preg_match('/%%(\w+)%%/',$val,$matches);
 
-            if($found == 0) {
+            if ($found == 0) {
                 continue;
             }
 
             foreach($matches as $match) {
-                if(!isset($this->symList[$match])) {
+                if (!isset($this->symList[$match])) {
                     continue;
                 }
 
@@ -201,16 +201,16 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     }
 
     public function getFullName($symbol = null,array $whiteList = array()) {
-        if($symbol == null) {
+        if ($symbol == null) {
             return null;
         }
 
         foreach($whiteList as $sym=>$name) {
-            if(!$sym) {
+            if (!$sym) {
                 continue;
             }
 
-            if($sym == $symbol) {
+            if ($sym == $symbol) {
                 return $name;
             }
         }
@@ -221,12 +221,12 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
         $access = $this->connection->getAccessDefinition();
         $command = $this->getCommand();
         foreach($access["x"]["folders"] as $exec) {
-            if(trim(escapeshellcmd($exec)) == trim(dirname($command))) {
+            if (trim(escapeshellcmd($exec)) == trim(dirname($command))) {
                 return true;
             }
         }
         foreach($access["x"]["files"] as $exec) {
-            if(trim(escapeshellcmd($exec)) == trim($command)) {
+            if (trim(escapeshellcmd($exec)) == trim($command)) {
                 return true;
             }
         }
@@ -237,19 +237,19 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     protected function validateStdin() {
         $inFile = $this->stdin;
 
-        if(!$inFile) {
+        if (!$inFile) {
             return true;
         }
 
         $access = $this->connection->getAccessDefinition();
         foreach($access["r"]["folders"] as $read) {
 
-            if(trim(escapeshellcmd($read)) == trim(dirname($inFile))) {
+            if (trim(escapeshellcmd($read)) == trim(dirname($inFile))) {
                 return true;
             }
         }
         foreach($access["r"]["files"] as $sym=>$read) {
-            if(trim(escapeshellcmd($read)) == trim($inFile)) {
+            if (trim(escapeshellcmd($read)) == trim($inFile)) {
                 return true;
             }
         }
@@ -259,18 +259,18 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     protected function validateStdout() {
         $outFile = $this->stdout;
 
-        if(!$outFile) {
+        if (!$outFile) {
             return true;
         }
 
         $access = $this->connection->getAccessDefinition();
         foreach($access["w"]["folders"] as $write) {
-            if(trim(escapeshellcmd($write)) == trim(dirname($outFile))) {
+            if (trim(escapeshellcmd($write)) == trim(dirname($outFile))) {
                 return true;
             }
         }
         foreach($access["w"]["files"] as $write) {
-            if(trim(escapeshellcmd($write)) == trim($outFile)) {
+            if (trim(escapeshellcmd($write)) == trim($outFile)) {
                 return true;
             }
         }
@@ -280,18 +280,18 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
     protected function validateStderr() {
         $errFile = $this->stdout;
 
-        if(!$errFile) {
+        if (!$errFile) {
             return true;
         }
 
         $access = $this->connection->getAccessDefinition();
         foreach($access["w"]["folders"] as $write) {
-            if(trim(escapeshellcmd($write)) == trim(dirname($errFile))) {
+            if (trim(escapeshellcmd($write)) == trim(dirname($errFile))) {
                 return true;
             }
         }
         foreach($access["w"]["files"] as $write) {
-            if(trim(escapeshellcmd($write)) == trim($errFile)) {
+            if (trim(escapeshellcmd($write)) == trim($errFile)) {
                 return true;
             }
         }

@@ -44,7 +44,7 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction {
             $this->setAttribute('javascript_content', $loader->getContent(). chr(10));
 
 
-        } catch(AppKitModelException $e) {
+        } catch (AppKitModelException $e) {
             $this->setAttribute('errors', $e->getMessage());
         }
 

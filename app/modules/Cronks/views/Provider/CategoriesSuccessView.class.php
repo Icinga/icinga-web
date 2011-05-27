@@ -8,7 +8,7 @@ class Cronks_Provider_CategoriesSuccessView extends CronksBaseView {
     }
 
     public function executeJson(AgaviRequestDataHolder $rd) {
-        if($this->hasAttribute('categories')) {
+        if ($this->hasAttribute('categories')) {
             $categories = $this->getAttribute('categories', array());
 
             $json = new AppKitExtJsonDocument();

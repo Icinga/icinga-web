@@ -62,7 +62,7 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function givenName() {
-        if($this->user_lastname && $this->user_firstname) {
+        if ($this->user_lastname && $this->user_firstname) {
             return sprintf('%s, %s', $this->user_lastname, $this->user_firstname);
         } else {
             return $this->user_name;
@@ -71,7 +71,7 @@ class NsmUser extends BaseNsmUser {
 
     public function hasRoleAssigned($role_id) {
         foreach($this->NsmRole as $role) {
-            if($role_id == $role->role_id) {
+            if ($role_id == $role->role_id) {
                 return true;
             }
         }
@@ -90,7 +90,7 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function updatePassword($password) {
-        if($this->state() !== self::STATE_TDIRTY) {
+        if ($this->state() !== self::STATE_TDIRTY) {
             $this->__updatePassword($password);
         } else {
             throw new AppKitDoctrineException('Could not change a password on a not existing record!');
@@ -115,22 +115,22 @@ class NsmUser extends BaseNsmUser {
             $pref = $this->getPrefObject($key);
 
             // DO NOT OVERWRITE
-            if($overwrite === false) {
+            if ($overwrite === false) {
                 return false;
             }
 
-            if($blob == true) {
+            if ($blob == true) {
                 $pref->upref_longval = $val;
             } else {
                 $pref->upref_val = $val;
             }
 
             $pref->save();
-        } catch(AppKitDoctrineException $e) {
+        } catch (AppKitDoctrineException $e) {
             $pref = new NsmUserPreference();
             $pref->upref_key = $key;
 
-            if($blob == true) {
+            if ($blob == true) {
                 $pref->upref_longval = $val;
             } else {
                 $pref->upref_val = $val;
@@ -157,7 +157,7 @@ class NsmUser extends BaseNsmUser {
                ->limit(1)
                ->execute();
 
-        if($res->count() == 1 && ($obj = $res->getFirst()) instanceof NsmUserPreference) {
+        if ($res->count() == 1 && ($obj = $res->getFirst()) instanceof NsmUserPreference) {
 
             //var_dump($res->toArray(true));
 
@@ -178,12 +178,12 @@ class NsmUser extends BaseNsmUser {
         try {
             $obj = $this->getPrefObject($key,$noThrow = false);
 
-            if($obj->upref_longval || $blob) {
+            if ($obj->upref_longval || $blob) {
                 return $obj->upref_longval;
             } else {
                 return $obj->upref_val;
             }
-        } catch(AppKitDoctrineException $e) {
+        } catch (AppKitDoctrineException $e) {
             return $default;
         }
     }
@@ -193,7 +193,7 @@ class NsmUser extends BaseNsmUser {
      * @return string
      */
     public function getAuthId() {
-        if($this->user_authid) {
+        if ($this->user_authid) {
             return $this->user_authid;
         }
 
@@ -203,7 +203,7 @@ class NsmUser extends BaseNsmUser {
     public function getPrefComponent($key, $component_name) {
         $val = $this->getPrefVal($key);
 
-        if($val) {
+        if ($val) {
             return Doctrine::getTable($component_name)->find($val);
         }
 
@@ -227,7 +227,7 @@ class NsmUser extends BaseNsmUser {
                       ->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
                       ->execute()->getFirst();
 
-        if(is_null($idToDelete)) {
+        if (is_null($idToDelete)) {
             return false;
         }
 
@@ -238,7 +238,7 @@ class NsmUser extends BaseNsmUser {
                 //->limit(1)  -> not supported by postgresql
                 ->execute();
 
-        if($test) {
+        if ($test) {
             return true;
         } else {
             return false;
@@ -257,7 +257,7 @@ class NsmUser extends BaseNsmUser {
 
         // Adding defaults
         foreach(AgaviConfig::get('modules.appkit.user_preferences_default', array()) as $k=>$v) {
-            if(!array_key_exists($k, $out)) {
+            if (!array_key_exists($k, $out)) {
                 $out[$k] = $v;
             }
         }
@@ -293,7 +293,7 @@ class NsmUser extends BaseNsmUser {
      */
     public function getPrincipalsList() {
 
-        if($this->principals_list === null) {
+        if ($this->principals_list === null) {
 
             $this->principals_list = array_keys($this->getPrincipals()->toArray());
 
@@ -310,7 +310,7 @@ class NsmUser extends BaseNsmUser {
      */
     public function getPrincipals() {
 
-        if($this->principals === null) {
+        if ($this->principals === null) {
 
             $this->principals = Doctrine_Query::create()
                                 ->select('p.*')
@@ -328,7 +328,7 @@ class NsmUser extends BaseNsmUser {
     public function getPrincipalsArray() {
         static $out = array();
 
-        if(count($out) == 0) {
+        if (count($out) == 0) {
             foreach($this->getPrincipals() as $p) {
                 $out[] = $p->principal_id;
             }
@@ -360,7 +360,7 @@ class NsmUser extends BaseNsmUser {
              ->innerJoin('t.NsmPrincipalTarget pt')
              ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
 
-        if($type !== null) {
+        if ($type !== null) {
             $q->andWhere('t.target_type=?', array($type));
         }
 
@@ -376,7 +376,7 @@ class NsmUser extends BaseNsmUser {
         $q = $this->getTargetsQuery();
         $q->andWhere('t.target_name=?', array($name));
 
-        if($q->execute()->count() > 0) {
+        if ($q->execute()->count() > 0) {
             return true;
         }
 
@@ -391,7 +391,7 @@ class NsmUser extends BaseNsmUser {
     public function getTarget($name) {
         $col = Doctrine::getTable('NsmTarget')->findByDql('target_name=?', array($name));
 
-        if($col->count() == 1 && $this->hasTarget($name)) {
+        if ($col->count() == 1 && $this->hasTarget($name)) {
             return $col->getFirst();
         } else {
             return null;

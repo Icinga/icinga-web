@@ -19,18 +19,18 @@ class AppKit_LoginAction extends AppKitBaseAction {
         $user = $this->getContext()->getUser();
 
         // Try http basic auth if it is configured
-        if($user->isAuthenticated() === false && AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
+        if ($user->isAuthenticated() === false && AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
             try {
                 $user->doLogin('__DUMMY__', '__DUMMY__');
                 $this->setAttribute('redirect', 'appkit');
                 return 'Success';
-            } catch(AppKitSecurityUserException $e) {
+            } catch (AppKitSecurityUserException $e) {
                 $this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
                 return 'Input';
             }
         }
 
-        if($user->isAuthenticated()) {
+        if ($user->isAuthenticated()) {
             return 'Success';
         }
 
@@ -46,7 +46,7 @@ class AppKit_LoginAction extends AppKitBaseAction {
         try {
             $user->doLogin($username, $password);
             return 'Success';
-        } catch(AppKitSecurityUserException $e) {
+        } catch (AppKitSecurityUserException $e) {
             // $this->setAttribute('error', $e->getMessage());
             $this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
             return 'Input';

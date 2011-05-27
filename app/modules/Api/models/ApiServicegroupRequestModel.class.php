@@ -36,7 +36,7 @@ class Api_ApiServicegroupRequestModel extends ApiDataRequestBaseModel {
     public function getServicegroupsByNames(array $names, $ignoreWildCards = false) {
         $useLike = false;
         foreach($names as $name) {
-            if(strpos($name,'%') !== false) {
+            if (strpos($name,'%') !== false) {
                 $useLike = true;
                 break;
             }
@@ -44,12 +44,12 @@ class Api_ApiServicegroupRequestModel extends ApiDataRequestBaseModel {
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaServicegroups s");
 
-        if(!$useLike || $ignoreWildCards) {
+        if (!$useLike || $ignoreWildCards) {
             $desc->whereIn("s.alias",$names);
         } else {
             $first = true;
             foreach($names as $name) {
-                if($first) {
+                if ($first) {
                     $desc->addWhere("s.alias LIKE ?",array($name));
                 } else {
                     $desc->orWhere("s.alias LIKE ?",array($name));

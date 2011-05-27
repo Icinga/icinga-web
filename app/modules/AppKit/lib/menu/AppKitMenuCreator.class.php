@@ -1,6 +1,6 @@
 <?php
 
-if(AgaviConfig::get('core.default_context') !== 'web') {
+if (AgaviConfig::get('core.default_context') !== 'web') {
     throw new AppKitException('No web context, no need to build the menu!');
 }
 
@@ -34,11 +34,11 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 
     private function registerMenuExtender() {
         // Register the following handler
-        if(is_array(($handler = AgaviConfig::get('modules.appkit.menu_extender')))) {
+        if (is_array(($handler = AgaviConfig::get('modules.appkit.menu_extender')))) {
             foreach($handler as $class) {
                 $ref = new ReflectionClass($class);
 
-                if($ref->isInstantiable()) {
+                if ($ref->isInstantiable()) {
                     AppKitEventDispatcher::getInstance()->addListener('appkit.menu.ready', $ref->newInstance());
                 }
             }
@@ -67,7 +67,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
 
         $nav = self::getContainer();
 
-        if($nav->getContainer()->Count() == 0) {
+        if ($nav->getContainer()->Count() == 0) {
 
             $user = self::getUser();
 
@@ -77,7 +77,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
             //			);
 
             //Add more homelinks
-            if(is_array($home_links = AgaviConfig::get('org.icinga.appkit.home_links'))) {
+            if (is_array($home_links = AgaviConfig::get('org.icinga.appkit.home_links'))) {
                 foreach($home_links as $link_route=>$link_caption) {
                     $nav->getContainer()->addSubItem('appkit', AppKitNavItem::create($link_route, $link_route)
                                                      ->setCaption($link_caption)
@@ -85,10 +85,10 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
                 }
             }
 
-            if($user->isAuthenticated()) {
+            if ($user->isAuthenticated()) {
 
                 // MENU FOR ADMIN
-                if($user->hasCredential('appkit.admin')) {
+                if ($user->hasCredential('appkit.admin')) {
                     $admin = $nav->getContainer()->addItem(AppKitNavItem::create('appkit.admin', 'appkit.admin')
                                                            ->setCaption('Admin')
                                                            ->addAttributes('extjs-iconcls', 'icinga-icon-wrench')

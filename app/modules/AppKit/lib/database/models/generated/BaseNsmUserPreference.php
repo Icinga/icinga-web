@@ -96,8 +96,8 @@ abstract class BaseNsmUserPreference extends Doctrine_Record {
     }
 
     public function set($name,$value,$load = true) {
-        if($col = $this->getTable()->getColumnDefinition($name)) {
-            if($col["type"] == 'blob') {
+        if ($col = $this->getTable()->getColumnDefinition($name)) {
+            if ($col["type"] == 'blob') {
                 $value = base64_encode($value);
             }
         }
@@ -108,12 +108,12 @@ abstract class BaseNsmUserPreference extends Doctrine_Record {
     public function get($column, $load=true) {
         $val = parent::get($column, $load);
 
-        if(is_resource($val)) {
+        if (is_resource($val)) {
             $val = stream_get_contents($val);
         }
 
-        if($col = $this->getTable()->getColumnDefinition($column)) {
-            if($col["type"] == 'blob') {
+        if ($col = $this->getTable()->getColumnDefinition($column)) {
+            if ($col["type"] == 'blob') {
                 $val = base64_decode($val);
             }
         }

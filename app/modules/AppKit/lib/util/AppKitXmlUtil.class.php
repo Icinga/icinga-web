@@ -11,7 +11,7 @@ class AppKitXmlUtil {
     public static function extractEntryNode(AgaviXmlConfigDomDocument $document, $query) {
         $list = $document->getXPath()->query($query);
 
-        if($list instanceof DOMNodeList && $list->length==1) {
+        if ($list instanceof DOMNodeList && $list->length==1) {
             return $list->item(0);
         }
     }

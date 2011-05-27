@@ -20,7 +20,7 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
                                         'fields'		=> array()
                                     );
 
-            if($r->target_type == 'icinga') {
+            if ($r->target_type == 'icinga') {
                 foreach($r->getTargetObject()->getFields() as $fname=>$fdesc) {
                     $out[$r->target_name]['fields'][$fname] =
                         array("description"=> $fdesc,
@@ -72,9 +72,9 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
         // var_dump(array($pt, $pv));
 
         foreach($pt as $target_id => $pt_garbage) {
-            if(isset($pt_garbage['set'])) {
+            if (isset($pt_garbage['set'])) {
                 foreach($pt_garbage['set'] as $aid=>$pt_set) {
-                    if($pt_set == 1) {
+                    if ($pt_set == 1) {
 
                         $target = Doctrine::getTable('NsmTarget')->find($target_id);
 
@@ -82,12 +82,12 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
                         $principal_target->NsmPrincipal = $p;
                         $principal_target->NsmTarget = $target;
 
-                        if(isset($pv[$target_id])) {
+                        if (isset($pv[$target_id])) {
                             foreach($pv[$target_id] as $pv_key => $pv_data) {
 
                                 $pv_val = null;
 
-                                if(isset($pv_data[$aid])) {
+                                if (isset($pv_data[$aid])) {
                                     $pv_val = $pv_data[$aid];
                                 }
 

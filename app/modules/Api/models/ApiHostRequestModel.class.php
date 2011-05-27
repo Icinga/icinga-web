@@ -12,7 +12,7 @@ class Api_ApiHostRequestModel extends ApiDataRequestBaseModel {
     public function getHostsByName(array $names, $ignoreWildCards = false) {
         $useLike = false;
         foreach($names as $name) {
-            if(strpos($name,'%') !== false) {
+            if (strpos($name,'%') !== false) {
                 $useLike = true;
                 break;
             }
@@ -20,12 +20,12 @@ class Api_ApiHostRequestModel extends ApiDataRequestBaseModel {
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaHosts h");
 
-        if(!$useLike || $ignoreWildCards) {
+        if (!$useLike || $ignoreWildCards) {
             $desc->whereIn("h.display_name",$names);
         } else {
             $first = true;
             foreach($names as $name) {
-                if($first) {
+                if ($first) {
                     $desc->addWhere("h.display_name LIKE ?",array($name));
                 } else {
                     $desc->orWhere("h.display_name LIKE ?",array($name));
@@ -91,7 +91,7 @@ class Api_ApiHostRequestModel extends ApiDataRequestBaseModel {
         $desc->select('*')->from("IcingaHosts h")->innerJoin("h.customvariables cv");
         $first =true;
         foreach($keyVals as $key=>$val) {
-            if($first) {
+            if ($first) {
                 $desc->addWhere("cv.varname LIKE ? AND cv.varvalue LIKE ?",array($key,$val));
             } else {
                 $desc->orWhere("cv.varname LIKE ? AND cv.varvalue LIKE ?",array($key,$val));

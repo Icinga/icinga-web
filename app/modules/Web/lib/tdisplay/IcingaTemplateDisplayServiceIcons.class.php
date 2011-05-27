@@ -169,18 +169,18 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
             foreach($mapping as $fkey=>$fm) {
                 $cond = 'return (int)('. $parser->parseData($fkey). ');';
 
-                if(($test = $this->evalCode($cond)) !== self::COND_ERROR) {
+                if (($test = $this->evalCode($cond)) !== self::COND_ERROR) {
                     // var_dump(array($fkey, $cond, $test));
-                    if(isset($fm[$test])) {
+                    if (isset($fm[$test])) {
                         // var_dump(" --> OK");
                         $i = $fm[$test];
                         $tag = AppKitXmlTag::create('img');
 
-                        if(isset($i[0])) {
+                        if (isset($i[0])) {
                             $tag->addAttribute('src', $this->wrapImagePath($this->image_path). '/'. $i[0]);
                         }
 
-                        if(isset($i[1])) {
+                        if (isset($i[1])) {
                             $tag->addAttribute('alt', $i[1])
                             ->addAttribute('title', $i[1]);
                         }
@@ -206,7 +206,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
     private function evalCode($code) {
         $re = @eval($code);
 
-        if($re === false) {
+        if ($re === false) {
             return self::COND_ERROR;
         }
 
@@ -221,7 +221,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
      */
     private function getObjectId($field_name, AgaviParameterHolder $row) {
 
-        if($row->hasParameter($field_name)) {
+        if ($row->hasParameter($field_name)) {
             return $row->getParameter($field_name);
         }
 
@@ -236,7 +236,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
     private function getIcingaApi() {
         static $api = null;
 
-        if($api === null) {
+        if ($api === null) {
             $api = AgaviContext::getInstance()->getModel('Icinga.ApiContainer', 'Web')->getConnection();
         }
 

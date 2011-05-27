@@ -89,12 +89,12 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
      * @author mhein
      */
     private function initDispatcher() {
-        if(isset($this->configCmd) && is_array($this->configCmd)) {
+        if (isset($this->configCmd) && is_array($this->configCmd)) {
 
             $this->instanceDispatcher[self::BROADCAST_KEY] = array();
 
             foreach($this->configCmd as $key=>$interface) {
-                if(array_key_exists('enabled', $interface) && $interface['enabled'] === true) {
+                if (array_key_exists('enabled', $interface) && $interface['enabled'] === true) {
 
                     $config = $interface;
                     unset($config['type']);
@@ -108,7 +108,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
 
                     $ikey = null;
 
-                    if(isset($config['broadcast']) && $config['broadcast']==true) {
+                    if (isset($config['broadcast']) && $config['broadcast']==true) {
                         $ikey = self::BROADCAST_KEY;
                     }
 
@@ -116,7 +116,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
                         $ikey = $config['instance'];
                     }
 
-                    if(!isset($this->instanceDispatcher[$ikey])) {
+                    if (!isset($this->instanceDispatcher[$ikey])) {
                         $this->instanceDispatcher[$ikey] = array();
                     }
 
@@ -125,7 +125,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
             }
         }
 
-        if(count($this->apiDispatcher) && count($this->instanceDispatcher)) {
+        if (count($this->apiDispatcher) && count($this->instanceDispatcher)) {
             return true;
         }
 
@@ -148,7 +148,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
 
         $capi = array();
         foreach($c as $ckey=>$cdata) {
-            if(strpos($ckey, 'config_') === 0) {
+            if (strpos($ckey, 'config_') === 0) {
                 $capi[ substr($ckey, 7) ] = $cdata;
             }
         }
@@ -166,7 +166,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
      */
     private function mapConfig() {
         foreach(self::$configMap as $setting=>$varname) {
-            if(AgaviConfig::has($setting)) {
+            if (AgaviConfig::has($setting)) {
                 $this-> { $varname } = AgaviConfig::get($setting, null);
             } else {
                 throw new AppKitModelException('IcingaApi setting \'%s\' not configured', $setting);
@@ -216,7 +216,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
         $a = func_get_args();
         $ref = new ReflectionObject($this->getConnection());
 
-        if($ref->hasMethod('createSearch')) {
+        if ($ref->hasMethod('createSearch')) {
             $m = $ref->getMethod('createSearch');
             return $m->invokeArgs($this->getConnection(), $a);
         }
@@ -246,11 +246,11 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
     private function getDispatcherByInstance($instance_name) {
         $out = array();
 
-        if(array_key_exists($instance_name, $this->instanceDispatcher)) {
+        if (array_key_exists($instance_name, $this->instanceDispatcher)) {
             $out = $this->instanceDispatcher[$instance_name];
         }
 
-        if($instance_name !== self::BROADCAST_KEY) {
+        if ($instance_name !== self::BROADCAST_KEY) {
             $out = (array)$this->instanceDispatcher[self::BROADCAST_KEY] + $out;
         }
 
@@ -274,7 +274,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
 
             $ds = $this->getDispatcherByInstance($command->getCommandInstance());
 
-            if(!count($ds)) {
+            if (!count($ds)) {
 
                 $lerror = sprintf('No dispatcher for instance \'%s\'. Could not send command!', $instance_name);
 
@@ -289,7 +289,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
                     try {
                         $d->setCommands(array($command));
                         $d->send();
-                    } catch(IcingaApiCommandException $e) {
+                    } catch (IcingaApiCommandException $e) {
                         $this->errors[] = $e;
                         $error = true;
 
@@ -302,7 +302,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
             }
         }
 
-        if($error === true) {
+        if ($error === true) {
             throw new IcingaApiCommandException('Errors occured try getLastError to fetch a exception stack!');
         }
 
@@ -313,7 +313,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
     public function getLastErrors($flush = true) {
         $err = $this->errors;
 
-        if($flush) {
+        if ($flush) {
             $this->errors = array();
         }
 

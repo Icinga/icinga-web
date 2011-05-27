@@ -8,7 +8,7 @@ class AppKitAgaviUtil {
     private static $context = null;
 
     public static function initContext(AgaviContext &$context) {
-        if(self::$context === null) {
+        if (self::$context === null) {
             self::$context =& $context;
         }
 
@@ -24,13 +24,13 @@ class AppKitAgaviUtil {
     }
 
     public static function log($arg1) {
-        if(is_array($arg1)) {
+        if (is_array($arg1)) {
             $argv =& $arg1;
         } else {
             $argv = func_get_args();
         }
 
-        if(count($argv) == 1) {
+        if (count($argv) == 1) {
             $format = $arg1;
             $severity = AgaviLogger::ALL;
         } else {
@@ -44,9 +44,9 @@ class AppKitAgaviUtil {
     public static function replaceConfigVars($text) {
         $m = array();
 
-        if(preg_match_all('/%([^%]+)%/', $text, $m, PREG_SET_ORDER)) {
+        if (preg_match_all('/%([^%]+)%/', $text, $m, PREG_SET_ORDER)) {
             foreach($m as $match) {
-                if(AgaviConfig::has($match[1])) {
+                if (AgaviConfig::has($match[1])) {
                     $text = preg_replace('/'. preg_quote($match[0]). '/', AgaviConfig::get($match[1]), $text);
                 }
             }
@@ -71,7 +71,7 @@ class AppKitAgaviUtil {
     public static function getAgaviControllerInstance() {
         static $agaviController = null;
 
-        if($agaviController === null) {
+        if ($agaviController === null) {
             $agaviController = new AgaviController();
         }
 

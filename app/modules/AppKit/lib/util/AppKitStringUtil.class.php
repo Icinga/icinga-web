@@ -39,7 +39,7 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
         $unim = array("B","KB","MB","GB","TB","PB");
         $c = 0;
 
-        while($a>=1024) {
+        while ($a>=1024) {
             $c++;
             $a = $a/1024;
         }
@@ -68,7 +68,7 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
 
         // Remove the fake path from the
         // uri
-        if($_SERVER['QUERY_STRING']) {
+        if ($_SERVER['QUERY_STRING']) {
             $q = preg_replace('@&@', '?', $_SERVER['QUERY_STRING'], 1);
             $request_uri = preg_replace('@'. preg_quote($q, '@'). '$@', '', $request_uri);
         }
@@ -77,7 +77,7 @@ class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
         $request_uri = preg_replace('@index.php$@', '', $request_uri, 1);
 
         // Take care about the leading slash
-        if(!preg_match('@^\/@', $request_uri)) {
+        if (!preg_match('@^\/@', $request_uri)) {
             $request_uri = '/'. $request_uri;
         }
 

@@ -42,7 +42,7 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
     private function normalizeData(array &$data, $state_field, $count_field='COUNT') {
         $out = array();
         foreach($data as $k=>$v) {
-            if(array_key_exists($state_field, $v) && array_key_exists($count_field, $v)) {
+            if (array_key_exists($state_field, $v) && array_key_exists($count_field, $v)) {
                 $out[ $v[$state_field] ] = $v[ $count_field ];
             }
         }
@@ -61,7 +61,7 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         foreach($states as $sid=>$sname) {
             $count = 0;
 
-            if(array_key_exists($sid, $data)) {
+            if (array_key_exists($sid, $data)) {
                 $count = $data[$sid];
             }
 
@@ -89,14 +89,14 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
         $result = $search->setResultType(IcingaApi::RESULT_ARRAY)->fetch()->getAll();
 
-        if(count($result) > 0) {
+        if (count($result) > 0) {
             $result = $result[0];
         } else {
             return;
         }
 
         foreach($result as $type=>&$val) {
-            if(preg_match("/^.*_STATE$/",$type)) {
+            if (preg_match("/^.*_STATE$/",$type)) {
                 $val = 99;
             }
         }

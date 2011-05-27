@@ -32,11 +32,11 @@ class AppKit_User_PreferencesAction extends AppKitBaseAction {
     public function executeWrite(AgaviRequestDataHolder $rd) {
         $user = $this->getContext()->getUser();
 
-        if(!$user) {
+        if (!$user) {
             throw new AppKitException("User doesn't exist!");
         }
 
-        if(($pass = $rd->getParameter("newPass",false))) {
+        if (($pass = $rd->getParameter("newPass",false))) {
             $nsm = $user->getNsmUser();
             $nsm->updatePassword($pass);
             $nsm->save();
@@ -47,17 +47,17 @@ class AppKit_User_PreferencesAction extends AppKitBaseAction {
             $key = $rd->getParameter("upref_key", false);
             $batch = $rd->getParameter('params',false);
 
-            if($key) {
+            if ($key) {
 
                 $val = $rd->getParameter("upref_val");
                 $isLong = $rd->getParameter("isLong",false);
 
-                if($val && !$rd->getParameter("remove",false)) {
+                if ($val && !$rd->getParameter("remove",false)) {
                     $this->setPreference($user,$key,$val,$isLong);
-                } else if($rd->getParameter("remove")) {
+                } else if ($rd->getParameter("remove")) {
                     $user->getNsmUser()->delPref($key);
                 }
-            } else if($batch) {
+            } else if ($batch) {
                 foreach($batch as $preference) {
                     $this->setPreference($user,	$preference["upref_key"],
                                          $preference["upref_val"],$preference["isLong"]);

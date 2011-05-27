@@ -7,7 +7,7 @@ class AppKitArrayUtil {
         $old = $input;
 
         foreach($old as $key=>$val) {
-            if($key == $before) {
+            if ($key == $before) {
                 foreach($insert as $iKey=>$iVal) {
                     $new[$iKey] = $iVal;
                 }
@@ -21,7 +21,7 @@ class AppKitArrayUtil {
     public static function searchKeyRecursive($needle, array $haystack) {
         $out = false;
         foreach($haystack as $key=>$val) {
-            if($key == $needle) {
+            if ($key == $needle) {
                 $out = true;
                 break;
             }
@@ -46,7 +46,7 @@ class AppKitArrayUtil {
      */
     public static function flattenArray(array &$data, $key_prefix='', array &$dump = array()) {
         foreach($data as $k=>$v) {
-            if(is_array($v)) {
+            if (is_array($v)) {
                 self::flattenArray($v, $key_prefix. '.'. $k, $dump);
             } else {
                 $dump[$key_prefix. '.'. $k] = $v;
@@ -69,7 +69,7 @@ class AppKitArrayUtil {
         $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
         foreach($it as $key=>$item) {
 
-            if($check_keys == true && array_key_exists($key, $out)) {
+            if ($check_keys == true && array_key_exists($key, $out)) {
                 throw new AppKitArrayUtilException('Key %s already defined', $key);
             }
 
@@ -97,9 +97,9 @@ class AppKitArrayUtil {
     private static function hasChildren(DOMElement &$element) {
         $hasChildren = false;
 
-        if($element->hasChildNodes()) {
+        if ($element->hasChildNodes()) {
             foreach($element->childNodes as $node) {
-                if($node->nodeType == XML_ELEMENT_NODE) {
+                if ($node->nodeType == XML_ELEMENT_NODE) {
                     $hasChildren = true;
                     break;
                 }
@@ -113,11 +113,11 @@ class AppKitArrayUtil {
         foreach($l as $n) {
 
 
-            if($n->nodeType == XML_ELEMENT_NODE) {
+            if ($n->nodeType == XML_ELEMENT_NODE) {
 
                 $name = null;
 
-                if($n->hasAttribute('name')) {
+                if ($n->hasAttribute('name')) {
                     $name = $n->getAttribute('name');
                 }
 
@@ -128,13 +128,13 @@ class AppKitArrayUtil {
                     $name = $n->nodeName;
                 }
 
-                if(self::hasChildren($n)) {
+                if (self::hasChildren($n)) {
                     $a[$name] = array();
                     self::xml2Array($n->childNodes, $a[$name]);
                 } else {
                     $c = $n->textContent;
 
-                    if($c=='false') {
+                    if ($c=='false') {
                         $c=false;
                     }
 
@@ -148,7 +148,7 @@ class AppKitArrayUtil {
 
     public static function swapKeys(array &$array, array $map, $remove_unused=false) {
         foreach($map as $src=>$target) {
-            if(isset($array[$src])) {
+            if (isset($array[$src])) {
                 $array[$target] = $array[$src];
             } else {
                 $array[$target] = null;
@@ -157,7 +157,7 @@ class AppKitArrayUtil {
             unset($array[$src]);
         }
 
-        if($remove_unused) {
+        if ($remove_unused) {
             $sect = array_intersect_key($array, array_flip($map));
             $array = $sect;
         }

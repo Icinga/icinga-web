@@ -59,7 +59,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
         $apiResHostParents = $apiResHostParents->fetch();
 
         foreach($apiResHosts as $row) {
-            if($row['HOST_IS_PENDING'] == '1') {
+            if ($row['HOST_IS_PENDING'] == '1') {
                 $row['HOST_CURRENT_STATE'] = "99";
             }
 
@@ -79,13 +79,13 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             $childObjectId = $idPrefix . $row->HOST_CHILD_OBJECT_ID;
             $parentObjectId = $idPrefix . $row->HOST_PARENT_OBJECT_ID;
 
-            if(!array_key_exists($childObjectId, $hostReferences)) {
+            if (!array_key_exists($childObjectId, $hostReferences)) {
                 $hostReferences[$childObjectId] = $hosts[$childObjectId];
             }
 
             unset($hosts[$childObjectId]);
 
-            if(array_key_exists($parentObjectId, $hosts)) {
+            if (array_key_exists($parentObjectId, $hosts)) {
                 $hosts[$parentObjectId]['children'][$childObjectId] =& $hostReferences[$childObjectId];
             }
 
@@ -96,7 +96,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
 
         $hostsFlatStruct = $this->flattenStructure($hosts);
 
-        if(count($hostsFlatStruct) == 1) {
+        if (count($hostsFlatStruct) == 1) {
             $hostsFlat = $hostsFlatStruct;
             $icingaProc = array(
                               'id'		=> $idPrefix . '-1',
@@ -134,12 +134,12 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
         $hostTable = null;
         $hostObjectId = false;
         foreach($hostData as $key => $value) {
-            if($key == 'HOST_OBJECT_ID') {
+            if ($key == 'HOST_OBJECT_ID') {
                 $hostObjectId = $value;
                 continue;
             }
 
-            switch($key) {
+            switch ($key) {
                 case 'HOST_CURRENT_STATE':
                     $value = IcingaHostStateInfo::Create($value)->getCurrentStateAsText();
                     break;
@@ -173,7 +173,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
                                'children'	=> array(),
                            );
 
-            if(count($hostData['children'])) {
+            if (count($hostData['children'])) {
                 $currentHost['children'] = $this->flattenStructure($hostData['children']);
             }
 

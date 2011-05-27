@@ -46,7 +46,7 @@ class Api_ApiHostgroupRequestModel extends ApiDataRequestBaseModel {
     public function getHostgroupsByNames(array $names, $ignoreWildCards = false) {
         $useLike = false;
         foreach($names as $name) {
-            if(strpos($name,'%') !== false) {
+            if (strpos($name,'%') !== false) {
                 $useLike = true;
                 break;
             }
@@ -54,12 +54,12 @@ class Api_ApiHostgroupRequestModel extends ApiDataRequestBaseModel {
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaHostgroups h");
 
-        if(!$useLike || $ignoreWildCards) {
+        if (!$useLike || $ignoreWildCards) {
             $desc->whereIn("h.alias",$names);
         } else {
             $first = true;
             foreach($names as $name) {
-                if($first) {
+                if ($first) {
                     $desc->addWhere("h.alias LIKE ?",array($name));
                 } else {
                     $desc->orWhere("h.alias LIKE ?",array($name));

@@ -21,7 +21,7 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
     }
 
     public function getApiMappingField($field) {
-        if(array_key_exists($field, $this->api_mapping_fields)) {
+        if (array_key_exists($field, $this->api_mapping_fields)) {
             return $this->api_mapping_fields[$field];
         }
 

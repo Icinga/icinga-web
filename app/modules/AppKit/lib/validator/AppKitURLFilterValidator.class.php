@@ -26,11 +26,11 @@ class AppKitURLFilterValidator extends AgaviValidator {
         $argument = $this->getArgument();
         $urlData = $this->getData($argument);
 
-        if(!$this->checkSyntax($urlData)) {
+        if (!$this->checkSyntax($urlData)) {
             return false;
         }
 
-        if(!$filterArray = $this->createFilterGroups($urlData)) {
+        if (!$filterArray = $this->createFilterGroups($urlData)) {
             return false;
         }
 
@@ -46,7 +46,7 @@ class AppKitURLFilterValidator extends AgaviValidator {
      */
     public function checkSyntax($data) {
         // Every open brace must have a close counterpart
-        if(substr_count($data, '(') != substr_count($data, ')')
+        if (substr_count($data, '(') != substr_count($data, ')')
             || substr_count($data, '[') != substr_count($data, ']')) {
             $this->throwError("error_braces");
             return false;
@@ -75,14 +75,14 @@ class AppKitURLFilterValidator extends AgaviValidator {
     protected function createFilterGroups($urlData,array &$filterArray = null) {
         $curLevel = $urlData;
 
-        if(!(substr($urlData,2) == 'OR' || substr($urlData,3) == 'AND')) {
+        if (!(substr($urlData,2) == 'OR' || substr($urlData,3) == 'AND')) {
             $urlData = "AND(".$urlData.")";
         }
 
         $nextLevel = array();
         $matches = preg_match_all("/(.*?)\((.*)\)/",$curLevel,$nextLevel);
 
-        if(count($nextLevel) != 3) {
+        if (count($nextLevel) != 3) {
             $this->throwError("general_syntax");
             return false;
         }
@@ -91,7 +91,7 @@ class AppKitURLFilterValidator extends AgaviValidator {
         // top level
         $this->processLevel($field,$nextLevel[2][0]);
 
-        if(is_null($filterArray)) {
+        if (is_null($filterArray)) {
             $filterArray = array("type" => $nextLevel[1][0], "field" => $field);
         } else {
             $filterArray[] = array("type" => $nextLevel[1][0], "field" => $field);
@@ -107,7 +107,7 @@ class AppKitURLFilterValidator extends AgaviValidator {
         $fields=preg_split("/((?:AND|OR)\(.*?\){1,})/",$curLevel,-1,PREG_SPLIT_DELIM_CAPTURE);
         $parts = array();
         foreach($fields as $field) {
-            if(preg_match("/(\w*?)\((.*)\)/",$field)) {
+            if (preg_match("/(\w*?)\((.*)\)/",$field)) {
                 $this->createFilterGroups($field,$target);
             } else {
                 $this->createFilter($target,$field);
@@ -118,13 +118,13 @@ class AppKitURLFilterValidator extends AgaviValidator {
     protected function createFilter(&$target,$fields) {
         $fields = explode(";",$fields);
         foreach($fields as $field) {
-            if(!$field) {
+            if (!$field) {
                 continue;
             }
 
             preg_match_all("/(\w*?)\|(.*?)\|(.*)/",$field,$parts);
 
-            if(count($parts) != 4) {
+            if (count($parts) != 4) {
                 continue;
             }
 

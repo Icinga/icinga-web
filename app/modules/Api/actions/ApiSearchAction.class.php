@@ -52,21 +52,21 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $authKey = $rd->getParameter("authkey");
         $validation = $this->getContainer()->getValidationManager();
 
-        if(!$user->isAuthenticated() && $authKey) {
+        if (!$user->isAuthenticated() && $authKey) {
             try {
                 $user->doAuthKeyLogin($authKey);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $validation->setError("Login error","Invalid Auth key!");
                 return false;
             }
         }
 
-        if(!$user->isAuthenticated()) {
+        if (!$user->isAuthenticated()) {
             $validation->setError("Login error","Not logged in!");
             return false;
         }
 
-        if($user->hasCredential("appkit.api.access") || $user->hasCredential("appkit.user")) {
+        if ($user->hasCredential("appkit.api.access") || $user->hasCredential("appkit.user")) {
             return true;
         }
 
@@ -75,7 +75,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
     }
 
     public function executeRead(AgaviRequestDataHolder $rd) {
-        if(!$this->checkAuth($rd)) {
+        if (!$this->checkAuth($rd)) {
             return "Error";
         }
 
@@ -99,7 +99,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $res = $search->fetch()->getAll();
 
         //Setup count
-        if($rd->getParameter("countColumn")) {
+        if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);
             $search->setSearchType(IcingaApiSearch::SEARCH_TYPE_COUNT);
             $this->addFilters($search,$rd);
@@ -118,11 +118,11 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         // URL filter definitions
         $field = $rd->getParameter("filter",null);
 
-        if(empty($field)) {
+        if (empty($field)) {
             $field = json_decode($rd->getParameter("filters_json"),true);
         }
 
-        if(!empty($field)) {
+        if (!empty($field)) {
             $search->setSearchFilter($this->buildFiltersFromArray($search,$field));
         }
 
@@ -138,13 +138,13 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
     public function buildFiltersFromArray(IcingaApiSearchIdo $search, array $filterdef) {
         $searchField = $filterdef;
 
-        if(isset($filterdef["type"])) {
+        if (isset($filterdef["type"])) {
             $searchField = $filterdef["field"];
         }
 
         $filterGroup = $search->createFilterGroup($filterdef["type"]);
         foreach($searchField as $element) {
-            if($element["type"] == "atom") {
+            if ($element["type"] == "atom") {
                 $filterGroup->addFilter($search->createFilter($element["field"][0],$element["value"][0],$element["method"][0]));
             } else {
                 $filterGroup->addFilter($this->buildFiltersFromArray($search,$element));
@@ -158,11 +158,11 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
     public function setGrouping(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
         $groups = $rd->getParameter("groups",array());
 
-        if(!is_array($groups)) {
+        if (!is_array($groups)) {
             $groups = array($groups);
         }
 
-        if(!empty($groups)) {
+        if (!empty($groups)) {
             $search->setSearchGroup($groups);
         }
     }
@@ -171,30 +171,30 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $order_col = $rd->getParameter("order_col",null);
         $order_dir = $rd->getParameter("order_dir",'asc');
 
-        if($order_col) {
+        if ($order_col) {
             $search->setSearchOrder($order_col,$order_dir);
         }
 
         $order = $rd->getParameter("order",array());
 
-        if(!is_array($order)) {
+        if (!is_array($order)) {
             $order = array($order);
         }
 
-        if(!empty($order)) {
+        if (!empty($order)) {
             $search->setSearchOrder($order["column"],$order["dir"]);
         }
     }
 
     public function setColumns(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
-        if($search->getSearchType() == IcingaApiSearch::SEARCH_TYPE_COUNT) {
+        if ($search->getSearchType() == IcingaApiSearch::SEARCH_TYPE_COUNT) {
             $search->setResultColumns($rd->getParameter("countColumn"));
             return true;
         }
 
         $columns = $rd->getParameter("columns",null);
 
-        if(!is_null($columns)) {
+        if (!is_null($columns)) {
             $search->setResultColumns($columns);
         } else {
             $search->setResultColumns(self::$defaultColumns[$rd->getParameter("target")]);
@@ -205,7 +205,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $start = $rd->getParameter("limit_start",0);
         $limit = $rd->getParameter("limit",null);
 
-        if($limit > 0) {
+        if ($limit > 0) {
             $search->setSearchLimit($start,$limit);
         }
     }

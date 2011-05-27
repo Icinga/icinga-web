@@ -12,7 +12,7 @@
  */
 class IcingaContacts extends BaseIcingaContacts {
     public function __get($field) {
-        switch($field) {
+        switch ($field) {
             case 'hosts':
                     $hosts = $this->getHosts();
                 $this->set("hosts",$hosts);

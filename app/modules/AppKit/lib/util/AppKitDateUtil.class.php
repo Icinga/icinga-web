@@ -15,11 +15,11 @@ class AppKitDateUtil {
      */
     public static function dateToDuration($iso_date, $reference_stamp = null) {
 
-        if(($tstamp = strtotime($iso_date)) < 0) {
+        if (($tstamp = strtotime($iso_date)) < 0) {
             throw new AppKitDateUtilException('$iso_date is not in iso format');
         }
 
-        if($reference_stamp === null) {
+        if ($reference_stamp === null) {
             $reference_stamp = time();
         }
 
@@ -40,7 +40,7 @@ class AppKitDateUtil {
                          );
 
         foreach($frames as $name=>$mod) {
-            if($seconds >= $mod && ($rest = $seconds%$mod)>0) {
+            if ($seconds >= $mod && ($rest = $seconds%$mod)>0) {
                 $parts[] = floor($seconds/$mod). $name;
                 $seconds = $rest;
             }

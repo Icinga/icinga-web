@@ -31,11 +31,11 @@ class AppKitSoapFilterValidator extends AgaviValidator {
     }
 
     public function processData($data) {
-        if(is_array($data)) {
+        if (is_array($data)) {
             return $data;
         }
 
-        while(!is_array($data) && $data->item)  {
+        while (!is_array($data) && $data->item)  {
             $data = $data->item;
         }
 

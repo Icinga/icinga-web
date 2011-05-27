@@ -15,7 +15,7 @@ class AppKit_Ext_HeaderSuccessView extends AppKitBaseView {
         $model = $this->getContext()->getModel('NavigationContainer', 'AppKit');
 
         // Notify the watcher to provide their menu data
-        if($model->getContainer()->Count() === 0) {
+        if ($model->getContainer()->Count() === 0) {
             AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.menu', 'we need the menu here ...');
         }
 

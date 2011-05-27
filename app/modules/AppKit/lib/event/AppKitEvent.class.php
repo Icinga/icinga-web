@@ -54,11 +54,11 @@ class AppKitEvent extends AppKitBaseClass {
     public function __construct($name, &$obj=null, $info=null) {
         $this->setName($name);
 
-        if($obj !== null && is_object($obj)) {
+        if ($obj !== null && is_object($obj)) {
             $this->setObject($object);
         }
 
-        if($info !== null) {
+        if ($info !== null) {
             $this->setInfo($info);
         }
     }
@@ -106,7 +106,7 @@ class AppKitEvent extends AppKitBaseClass {
      * @author Marius Hein
      */
     public function setObject($object) {
-        if(!is_object($object)) {
+        if (!is_object($object)) {
             throw new AppKitEventException('$object have to be an object!');
         }
 
@@ -129,7 +129,7 @@ class AppKitEvent extends AppKitBaseClass {
      * @author Marius Hein
      */
     public function addData($data, $key=null) {
-        if($key !== null) {
+        if ($key !== null) {
             $this->data[$key] = $data;
         } else {
             $this->data[] = $data;
@@ -162,7 +162,7 @@ class AppKitEvent extends AppKitBaseClass {
      * @author Marius Hein
      */
     public function issetStatus($status_flag) {
-        if($this->status & $status_flag) {
+        if ($this->status & $status_flag) {
             return true;
         }
 
@@ -184,7 +184,7 @@ class AppKitEvent extends AppKitBaseClass {
      * @author Marius Hein
      */
     public function unsetStatus($status_flag) {
-        if($this->status & $status_flag) {
+        if ($this->status & $status_flag) {
             $this->status = ($this->status & ~ $status_flag);
         }
     }
@@ -215,7 +215,7 @@ class AppKitEvent extends AppKitBaseClass {
      * @author Marius Hein
      */
     public function cancel() {
-        if($this->issetStatus(self::RESUMED)) {
+        if ($this->issetStatus(self::RESUMED)) {
             $this->unsetStatus(self::RESUMED);
         }
 

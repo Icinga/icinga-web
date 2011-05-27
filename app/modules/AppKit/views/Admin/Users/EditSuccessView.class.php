@@ -2,7 +2,7 @@
 
 class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView {
     public function executeSimple(AgaviRequestDataHolder $rd) {
-        if($this->getContainer()->getRequestMethod() == "write") {
+        if ($this->getContainer()->getRequestMethod() == "write") {
             return null;
         }
 
@@ -10,7 +10,7 @@ class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView {
         $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
         $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
 
-        if($rd->getParameter('id') == 'new') {
+        if ($rd->getParameter('id') == 'new') {
             $user = new NsmUser();
             $this->setAttribute('title', 'Create a new user');
             $this->setAttribute('new',true);
@@ -43,7 +43,7 @@ class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView {
             $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
             $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
 
-            if($rd->getParameter('id') == 'new') {
+            if ($rd->getParameter('id') == 'new') {
                 $user = new NsmUser();
                 $this->setAttribute('title', 'Create a new user');
             } else {
@@ -58,7 +58,7 @@ class AppKit_Admin_Users_EditSuccessView extends AppKitBaseView {
             $exec = $this->getContext()->getController()->createExecutionContainer("AppKit","Admin.PrincipalEditor",null,'simple');
             $resp = $exec->execute()->getContent();
             $this->setAttribute("principal_editor",$resp);
-        } catch(AppKitDoctrineException $e) {
+        } catch (AppKitDoctrineException $e) {
             $this->getMessageQueue()->enqueue(AppKitMessageQueueItem::Error($e->getMessage()));
             $this->setAttribute('title', 'An error occured');
         }

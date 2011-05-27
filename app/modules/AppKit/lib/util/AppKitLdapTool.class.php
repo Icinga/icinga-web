@@ -65,7 +65,7 @@ class AppKitLdapTool {
         // Try to connect ...
         $resource = ldap_connect($this->ldap_dsn);
 
-        if(!is_resource($resource)) {
+        if (!is_resource($resource)) {
             throw new AppKitLdapToolException("Could not connect to ldap_dsn: ". $this->ldap_dsn);
         } else {
             $this->ldap_resource =& $resource;
@@ -85,7 +85,7 @@ class AppKitLdapTool {
     }
 
     public function doBind($binddn, $bindpw) {
-        if(@ldap_bind($this->ldap_resource, $binddn, $bindpw) === false) {
+        if (@ldap_bind($this->ldap_resource, $binddn, $bindpw) === false) {
             $this->throwLdapException();
         }
 
@@ -111,7 +111,7 @@ class AppKitLdapTool {
      * @return unknown_type
      */
     public function doShutdown() {
-        if(is_resource($this->ldap_resource)) {
+        if (is_resource($this->ldap_resource)) {
             @ldap_unbind($this->ldap_resource);
             @ldap_close($this->ldap_resource);
             $this->ldap_valid = false;
@@ -131,7 +131,7 @@ class AppKitLdapTool {
      * @return integer
      */
     public function getLastErrorno() {
-        if(is_resource($this->ldap_resource)) {
+        if (is_resource($this->ldap_resource)) {
             return (int)ldap_errno($this->ldap_resource);
         }
 
@@ -143,7 +143,7 @@ class AppKitLdapTool {
      * @return string
      */
     public function getLastError() {
-        if(is_resource($this->ldap_resource)) {
+        if (is_resource($this->ldap_resource)) {
             return (string)sprintf('%s (%d)', ldap_error($this->ldap_resource), ldap_errno($this->ldap_resource));
         }
 
@@ -159,13 +159,13 @@ class AppKitLdapTool {
     public function doQuery($query, array $attributes = array()) {
         $res = null;
 
-        if(count($attributes)) {
+        if (count($attributes)) {
             $res = ldap_search($this->ldap_resource, $this->ldap_basedn, $query, $attributes);
         } else {
             $res = ldap_search($this->ldap_resource, $this->ldap_basedn, $query);
         }
 
-        if($res !== false) {
+        if ($res !== false) {
             return $this->getEntriesAsArray($res);
         }
 
@@ -178,7 +178,7 @@ class AppKitLdapTool {
      * @return unknown_type
      */
     public function resultCount(array $item) {
-        if(array_key_exists('objectclass', $item)) {
+        if (array_key_exists('objectclass', $item)) {
             return 1;
         }
 
@@ -199,10 +199,10 @@ class AppKitLdapTool {
      */
     public function resultParse(array $item, array $attributes, array &$return = array()) {
 
-        if($item['objectclass']) {
+        if ($item['objectclass']) {
             foreach($attributes as $attribute) {
-                if(array_key_exists($attribute, $item)) {
-                    if($item[$attribute]['count'] == 1) {
+                if (array_key_exists($attribute, $item)) {
+                    if ($item[$attribute]['count'] == 1) {
                         $return[$attribute] = $item[$attribute][0];
                     } else {
                         $return[$attribute] = $item[$attribute];
@@ -211,7 +211,7 @@ class AppKitLdapTool {
             }
         } else {
             foreach($item as $check => $subitem) {
-                if(is_array($subitem)) {
+                if (is_array($subitem)) {
                     $return[$check] = array();
                     $this->resultParse($subitem, $attributes, $return[$check]);
                 }
@@ -229,7 +229,7 @@ class AppKitLdapTool {
     private function getEntriesAsArray($search_res) {
         $result = ldap_get_entries($this->ldap_resource, $search_res);
 
-        if($this->resultCount($result) == 1) {
+        if ($this->resultCount($result) == 1) {
             return $result[0];
         }
 

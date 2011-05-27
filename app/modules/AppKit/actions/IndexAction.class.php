@@ -20,7 +20,7 @@ class AppKit_IndexAction extends AppKitBaseAction {
     public function executeRead(AgaviRequestDataHolder $rd) {
 
         // Detect basic auth and do the login!
-        if($this->getContext()->getUser()->isAuthenticated() === false && AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
+        if ($this->getContext()->getUser()->isAuthenticated() === false && AppKitFactories::getInstance()->getFactory('AuthProvider') instanceof AppKitAuthProviderHttpBasic) {
             $this->setAttribute('redirect', 'appkit.login');
         }
 

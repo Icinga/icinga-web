@@ -13,7 +13,7 @@ class AppKitException extends Exception {
     public function __construct($mixed) {
         $args = func_get_args();
 
-        if(AppKitStringUtil::detectFormatSyntax($mixed)) {
+        if (AppKitStringUtil::detectFormatSyntax($mixed)) {
             $format = array_shift($args);
 
             parent::__construct(vsprintf($format, $args));

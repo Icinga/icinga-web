@@ -26,17 +26,17 @@ class AppKit_Admin_Users_RemoveAction extends AppKitBaseAction {
             foreach($ids as $id) {
                 $user = $useradmin->getUserById($id);
 
-                if(!$user) {
+                if (!$user) {
                     continue;
                 }
 
                 $useradmin->removeUser($user);
             }
             Doctrine_Manager::connection()->commit();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             try {
                 Doctrine_Manager::connection()->rollback();
-            } catch(Doctrine_Transaction_Exception $e) {}
+            } catch (Doctrine_Transaction_Exception $e) {}
 
             echo $e;
             echo $e;

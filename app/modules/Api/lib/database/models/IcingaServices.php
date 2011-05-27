@@ -18,7 +18,7 @@ class IcingaServices extends BaseIcingaServices {
 
     public function __get($method)  {
 
-        switch($method) {
+        switch ($method) {
             case  'contacts':
                 $contacts = $this->getContacts();
                 $this->set("contacts",$contacts);

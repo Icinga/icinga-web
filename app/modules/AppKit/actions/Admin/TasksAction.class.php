@@ -41,10 +41,10 @@ class AppKit_Admin_TasksAction extends AppKitBaseAction {
 
         $task = $rd->getParameter('task');
 
-        if($task) {
+        if ($task) {
             $this->getContext()->getLoggerManager()->log(sprintf('Prepare running admin task: %s', $task), AgaviLogger::INFO);
 
-            switch($task) {
+            switch ($task) {
                 case 'purgeCache':
                     $model = $this->getContext()->getModel('Tasks.ClearCache', 'AppKit');
                     $model->clearCache();

@@ -8,7 +8,7 @@ class Cronks_Provider_CombinedSuccessView extends CronksBaseView {
     }
 
     public function executeJson(AgaviRequestDataHolder $rd) {
-        if($this->hasAttribute('data')) {
+        if ($this->hasAttribute('data')) {
             return json_encode($this->getAttribute('data', new stdClass()));
         }
 

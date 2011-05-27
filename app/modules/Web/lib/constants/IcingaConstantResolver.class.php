@@ -83,7 +83,7 @@ class IcingaConstantResolver {
      * @return string
      */
     protected static function resolveArrayConstants(array &$input, $key) {
-        if(array_key_exists($key, $input)) {
+        if (array_key_exists($key, $input)) {
             return $input[$key];
         }
 

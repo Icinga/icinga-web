@@ -9,36 +9,36 @@ class IcingaPrincipalTargetTool {
         $models = $user->getTargets();
         $parts = array();
         foreach($models as $model) {
-            if($model->target_type != 'icinga') {
+            if ($model->target_type != 'icinga') {
                 continue;
             }
 
             $targetname = $model->get('target_name');
 
-            if(!isset($sarr[$targetname])) {
+            if (!isset($sarr[$targetname])) {
                 continue;
             }
 
             $to = $model->getTargetObject($targetname);
 
-            if(!self::checkIfTargetAffectsSearch($to,$search,$sarr[$targetname])) {
+            if (!self::checkIfTargetAffectsSearch($to,$search,$sarr[$targetname])) {
                 continue;
             }
 
-            if(count($sarr[$targetname]) > 0) {
+            if (count($sarr[$targetname]) > 0) {
                 foreach($sarr[$targetname] as $vdata) {
                     $parts[] = $to->getMapArray($vdata);
                 }
             } else {
                 $map = $to->getCustomMap();
 
-                if($map) {
+                if ($map) {
                     $search->setSearchFilterAppendix($map, IcingaApi::SEARCH_AND);
                 }
             }
         }
 
-        if(count($parts) > 0) {
+        if (count($parts) > 0) {
             $query = join(' OR ', $parts);
             $search->setSearchFilterAppendix($query, IcingaApi::SEARCH_AND);
 
@@ -51,11 +51,11 @@ class IcingaPrincipalTargetTool {
 
     static protected function checkIfTargetAffectsSearch(IcingaDataPrincipalTarget $target,IcingaApiSearchIdo $search,$apiMapping) {
         // check the mapping
-        if(empty($apiMapping)) {
+        if (empty($apiMapping)) {
             return $target->getCustomMap();
         }
 
-        if($apiMapping === false) {
+        if ($apiMapping === false) {
             return false;
         }
 

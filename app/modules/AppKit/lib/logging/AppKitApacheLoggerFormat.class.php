@@ -12,7 +12,7 @@ class AppKitApacheLoggerFormat extends AgaviLoggerLayout {
                                      );
 
     public static function levenToString($level) {
-        if(isset(self::$severity_names[$level])) {
+        if (isset(self::$severity_names[$level])) {
             return self::$severity_names[$level];
         }
 

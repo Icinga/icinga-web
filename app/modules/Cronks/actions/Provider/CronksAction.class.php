@@ -46,7 +46,7 @@ class Cronks_Provider_CronksAction extends CronksBaseAction {
 
     public function executeWrite(AgaviParameterHolder $rd) {
 
-        if($rd->getParameter('xaction') == 'write') {
+        if ($rd->getParameter('xaction') == 'write') {
 
             $cronk_record = $this->cronks->createCronkRecord($rd->getParameters());
 
@@ -56,7 +56,7 @@ class Cronks_Provider_CronksAction extends CronksBaseAction {
         elseif($rd->getParameter('xaction') == 'delete') {
             try {
                 $this->cronks->deleteCronkRecord($rd->getParameter('cid'), $rd->getParameter('name'));
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 $this->appendAttribute('errors', $e->getMessage());
             }
         }

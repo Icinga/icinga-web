@@ -12,7 +12,7 @@ class AppKit_DataProvider_IconProviderSuccessView extends AppKitBaseView {
 
         $model = $this->getAttribute('filemodel');
 
-        if(!$rd->getParameter('path') || !$model) {
+        if (!$rd->getParameter('path') || !$model) {
             $success = false;
         }
 
@@ -22,7 +22,7 @@ class AppKit_DataProvider_IconProviderSuccessView extends AppKitBaseView {
                    'rows'		=> array()
                );
 
-        if($success) {
+        if ($success) {
             $out['total'] = $model->Count();
             $out['rows'] = $model->Files();
         }

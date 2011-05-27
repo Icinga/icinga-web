@@ -95,12 +95,12 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
      */
     public function setQuery($query) {
 
-        if(strpos($query, '*') !==false) {
+        if (strpos($query, '*') !==false) {
             $query = str_replace('*', '%', $query);
         }
 
         // Makes it easier for the user
-        if(strpos($query, '%') == false) {
+        if (strpos($query, '%') == false) {
             $query .= '%';
         }
 
@@ -120,7 +120,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
     private function bulkQuery() {
 
         // We want only one specific type
-        if($this->type && array_key_exists($this->type, $this->mapping)) {
+        if ($this->type && array_key_exists($this->type, $this->mapping)) {
             $mappings = array($this->type);
 
         } else {
@@ -212,7 +212,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
             foreach($this->mapping_fields as $field) {
                 $tmp[$field] = null;
 
-                if(array_key_exists($field, $fieldDef) && array_key_exists($fieldDef[$field], $row)) {
+                if (array_key_exists($field, $fieldDef) && array_key_exists($fieldDef[$field], $row)) {
                     $tmp[$field] = $row[$fieldDef[$field]];
                 }
             }

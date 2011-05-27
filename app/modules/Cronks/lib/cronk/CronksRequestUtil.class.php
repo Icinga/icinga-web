@@ -9,7 +9,7 @@ class CronksRequestUtil {
     public static function makeRequestDataStruct(AgaviRequestDataHolder $rd) {
         $data = array();
         foreach(self::$requestAttributes as $attr) {
-            if($rd->hasParameter($attr)) {
+            if ($rd->hasParameter($attr)) {
                 $data[$attr] = $rd->getParameter($attr);
             }
         }
