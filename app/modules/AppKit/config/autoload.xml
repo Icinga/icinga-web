@@ -96,7 +96,8 @@
 		
 		<!-- Module util classes -->
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
-		<autoload name="AppKitRoutingHandler">%core.module_dir%/AppKit/lib/routing/AppKitRoutingHandler.class.php</autoload>
+		<autoload name="AppKitRoutingHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingHandler.class.php</autoload>
+		<autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload> 
 		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
 		
 	</ae:configuration>
