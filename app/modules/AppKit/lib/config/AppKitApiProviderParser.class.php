@@ -1,40 +1,66 @@
 <?php
 class AppKitApiProviderParser  {
     private $jsResult;
-    private $remotingParams = array();
+   
+
     public function execute(array $directProviders) {
-
-
+        $paramList = array();
         foreach($directProviders as $provider) {
-            $dom = $this->getValidatorXMLForAction($provider['module'],$provider['action']);
-//			$this->getRemotingParams($dom,$module,$action);
+            $module = $provider['module'];
+    		$action = $provider['action'];
+            $dom = $this->getValidatorXMLForAction($provider['module'],$provider['action']);    	
+            $paramList[] = $this->getRequestParams($module,$action,$dom);
+            $this->checkActionType($module,$action);
+        }
+        
+    }
+
+    private function getRequestParams($module,$action,AgaviXmlConfigDomDocument $dom) { 
+        $validationParser = new AppKitValidatorArgumentExtractor(); 
+        return  array(
+            "module" => $module, 
+            "action" => $action, 
+            "arguments" =>  $validationParser->execute($dom)
+        );
+    }
+
+    private function checkActionType($module,$action) {
+        $class = $this->getActionClass($module,$action);
+        $reflected = new ReflectionClass($class);
+        foreach($reflected->getInterfaceNames() as $interface) {
+            echo $class." has interface ".$interface;
         }
     }
-
-    private function parseDOMToExtDirect(AgaviXmlConfigDomDocument $dom,$module,$action) {
-        if(!isset($this->remotingParams[$module])) {
-            $this->remotingParams[$module] = array();
-        }
-        $this->remotingParams[$module][] = array(
-                                               array("name" => $action, "params" => $this->getParametersFromDOM($dom))
-                                           );
+    
+    private function getActionClass($moduleName,$actionName) {
+        $actionName = AgaviToolkit::canonicalName($actionName);
+		$longActionName = str_replace('/', '_', $actionName);
+		$class = $moduleName . '_' . $longActionName . 'Action';
+		if(!class_exists($class)) {
+			if(false !== ($file = AgaviContext::getInstance()->getController()->checkActionFile($moduleName, $actionName))) {
+				require($file);
+			} else {
+				throw new AgaviException('Could not find file for Action "' . $actionName . '" in module "' . $moduleName . '"');
+			}
+			
+			if(!class_exists($class, false)) {
+				throw new AgaviException('Could not find Action "' . $longActionName . '" for module "' . $moduleName . '"');
+			}
+		}
+        return $class;
     }
 
-    private function getParametersFromDOM(AgaviXmlConfigDomDocument $DOM) {
-        $xpath = new DOMXPath($DOM);
-//		$query
-    }
-
+    
     /**
     * Fetches the Validation xml for the action/module combination and returns it as
     * an DOMDocument
     *
-    * @param	string	The module name
-    * @param	string	The action to get the validation xml for
-    * @return	AgaviXmlConfigDomDocument
+    * @param    string	The module name
+    * @param    string	The action to get the validation xml for
+    * @return    AgaviXmlConfigDomDocument
     *
-    * @author	Jannis Moßhammer<jannis.mosshammer@netways.de>
-    * @throws	AgaviConfigurationException 	when module or action does not exist
+    * @author    Jannis Moßhammer<jannis.mosshammer@netways.de>
+    * @throws    AgaviConfigurationException 	when module or action does not exist
     */
     protected function getValidatorXMLForAction($module,$action) {
         // get Module path
@@ -58,5 +84,6 @@ class AppKitApiProviderParser  {
         //TODO: Validate xml
         return $dom;
     }
+
 
 }

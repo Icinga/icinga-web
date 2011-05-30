@@ -7,7 +7,7 @@ class AppKitApiProviderParser  {
 		
 		foreach($directProviders as $provider) {
 			$dom = $this->getValidatorXMLForAction($provider['module'],$provider['action']);
-//			$this->getRemotingParams($dom,$module,$action);
+			$this->getRemotingParams($dom,$module,$action);
 		}	
 	}		
 	
@@ -15,14 +15,14 @@ class AppKitApiProviderParser  {
 		if(!isset($this->remotingParams[$module])) {
 			$this->remotingParams[$module] = array();	
 		}	
-		$this->remotingParams[$module][] = array(
-			array("name" => $action, "params" => $this->getParametersFromDOM($dom))
+		$this->remotingParams[$module][] = array(
+			array("name" => $action, "params" => $this->getParametersFromDOM($dom));
 		);
 	}
 	
 	private function getParametersFromDOM(AgaviXmlConfigDomDocument $DOM) {
 		$xpath = new DOMXPath($DOM);
-//		$query
+		$query
 	}
 	
 	/**
