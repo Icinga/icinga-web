@@ -1,0 +1,12 @@
+Code quality testing:
+
+* YACS
+
+Yet another coding style, oracle (SUN) based JAVA convention which
+suites for agavi and icinga-web
+
+* yacs-astyle
+
+Config file for astyle code parser (Artistic Style) which produces
+YACS / ORACLE / SUN / JAVA coding style
+

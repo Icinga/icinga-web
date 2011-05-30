@@ -1,7 +1,6 @@
 <?php
 
-class Api_ApiDataRequestModel extends ApiDataRequestBaseModel 
-{  
+class Api_ApiDataRequestModel extends ApiDataRequestBaseModel {
 
 }
 

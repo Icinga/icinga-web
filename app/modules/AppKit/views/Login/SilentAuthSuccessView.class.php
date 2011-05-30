@@ -1,39 +1,38 @@
 <?php
 
 class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
-		public function executeJson(AgaviRequestDataHolder $rd) {
-			return $this->executeHtml($rd);
-			
-		}
+    public function executeJson(AgaviRequestDataHolder $rd) {
+        return $this->executeHtml($rd);
 
-		public function executeHtml(AgaviRequestDataHolder $rd) {
+    }
 
-		if ($this->getAttribute('authenticated', false) == true) {
+    public function executeHtml(AgaviRequestDataHolder $rd) {
 
-			$url = $this->getContext()->getRequest()->getUrl();
+        if ($this->getAttribute('authenticated', false) == true) {
 
-//			$routes = $this->getContext()->getRequest()->getAttribute(
-//				'matched_routes', 'org.agavi.routing'
-//			);
-//
-//			$route = $this->getContext()->getRouting()->getRoute(array_pop($routes));
+            $url = $this->getContext()->getRequest()->getUrl();
 
-			if (preg_match('/\/login/', $url)) {
-				$url = $this->getContext()->getRouting()->gen('index_page');
-			}
+            //			$routes = $this->getContext()->getRequest()->getAttribute(
+            //				'matched_routes', 'org.agavi.routing'
+            //			);
+            //
+            //			$route = $this->getContext()->getRouting()->getRoute(array_pop($routes));
 
-			$this->getResponse()->setRedirect($url);
+            if (preg_match('/\/login/', $url)) {
+                $url = $this->getContext()->getRouting()->gen('index_page');
+            }
 
-		}
-		else {
-			if (AgaviConfig::get('modules.appkit.auth.behaviour.enable_dialog', false) == true) {
-				return $this->createForwardContainer('AppKit', 'Login.AjaxLogin', null, null, 'read');
-			}
-		}
+            $this->getResponse()->setRedirect($url);
 
-		$this->setupHtml($rd);
-	}
-	
+        } else {
+            if (AgaviConfig::get('modules.appkit.auth.behaviour.enable_dialog', false) == true) {
+                return $this->createForwardContainer('AppKit', 'Login.AjaxLogin', null, null, 'read');
+            }
+        }
+
+        $this->setupHtml($rd);
+    }
+
 }
 
 ?>

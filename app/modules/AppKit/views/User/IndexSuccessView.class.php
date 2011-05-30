@@ -1,13 +1,11 @@
 <?php
 
-class AppKit_User_IndexSuccessView extends AppKitBaseView
-{
-	public function executeHtml(AgaviRequestDataHolder $rd)
-	{
-		$this->setupHtml($rd);
+class AppKit_User_IndexSuccessView extends AppKitBaseView {
+    public function executeHtml(AgaviRequestDataHolder $rd) {
+        $this->setupHtml($rd);
 
-		$this->setAttribute('title', 'User preferences');
-	}
+        $this->setAttribute('title', 'User preferences');
+    }
 }
 
 ?>

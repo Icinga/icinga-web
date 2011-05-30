@@ -2,11 +2,11 @@
 
 class AppKitGettextTranslator extends AgaviGettextTranslator {
 
-	
-	public function getDomainPaths() {
-		return $this->domainPaths;
-	}
-	
+
+    public function getDomainPaths() {
+        return $this->domainPaths;
+    }
+
 }
 
 ?>

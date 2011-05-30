@@ -10,7 +10,7 @@ class IcingaApiRequestHelper {
     public function getServicesInServiceGroup($servicegroup,$instance = null,&$count = null,$offset = 0,$limit = -1) {}
     public function getServicesForHost($host,$instance = null,&$count = null,$offset = 0,$limit = -1) {}
     public function getHistoryForServices(array $services,$instance = null,&$count = null,$offset = 0,$limit = -1);
-    
+
     public function getHostsInHostGroup($hostgroup,$instance = null,&$count = null,$offset = 0,$limit = -1) {}
     public function getHost($hostName,$instance = null) {}
     public function getHistoryForHosts(array $hostNames,$instance = null,&$count = null,$offset = 0,$limit = -1) {}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="sun">
+	<description>Yet Another Coding Standard (YACS, adopted from sun)</description>
+	
+	<rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+	<rule ref="Generic.ControlStructures.InlineControlStructure"/>
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+ 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+ 	<rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+ 	<rule ref="Generic.Functions.CallTimePassByReference"/>
+ 	<rule ref="Generic.Classes.DuplicateClassName"/>
+ 	
+	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
+	<rule ref="Generic.PHP.DeprecatedFunctions"/>
+	<rule ref="Generic.PHP.ForbiddenFunctions"/>
+	<rule ref="Generic.PHP.LowerCaseConstant"/>
+	
+	<rule ref="Generic.Formatting.NoSpaceAfterCast"/>
+	
+	
+	<rule ref="PEAR.ControlStructures.ControlSignature"/>
+	
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="80"/>
+			<property name="absoluteLineLimit" value="160"/>
+		</properties>
+	</rule>
+	
+	<rule ref="Generic.Files.LineEndings">
+		<properties>
+			<property name="eolChar" value="\n"/>
+		</properties>
+	</rule>
+</ruleset>

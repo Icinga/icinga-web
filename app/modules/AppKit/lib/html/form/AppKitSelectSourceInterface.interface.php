@@ -1,7 +1,7 @@
 <?php
 
 interface AppKitSelectSourceInterface {
-	public function applyDomChanges(DomNode &$dom);
+    public function applyDomChanges(DomNode &$dom);
 }
 
 ?>
