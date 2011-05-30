@@ -140,7 +140,7 @@ testdeps:
 	 $(PHP) bin/testdeps.php
 
 devel-test:
-	$(PHP) $(SRC_DIR)/etc/tests/icingaWebTesting.php
+	cd tests/php && $(SHELL) runSuite.sh
 
 devel-inplace-config:
 	chown $(WEB_USER).$(WEB_GROUP) \

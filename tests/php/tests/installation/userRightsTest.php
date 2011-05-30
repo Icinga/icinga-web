@@ -8,11 +8,6 @@
 */	
 class userRightsTest extends PHPUnit_Framework_TestCase {
 	
-	protected function setUp() {
-		$core = AgaviConfig::get("core.root_dir");
-		$this->sharedFixture = parse_ini_file($core."/etc/tests/test.properties");
-	}
-	
 	/**
 	* @depends agaviBootstrapTest::testBootstrap 
 	*/	
@@ -42,8 +37,8 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 		$root = AgaviConfig::get("core.root_dir");
 		$cacheFolders = array($root."/app/cache");
 
-		$wwwUser = $this->sharedFixture['www-user'];
-		$wwwGroup = $this->sharedFixture['www-group'];
+		$wwwUser = IcingaWebTestTool::getProperty('www-user');
+		$wwwGroup = IcingaWebTestTool::getProperty('www-group');
 		$nonWriteable = array();
 
 		if(!$wwwUser)
@@ -81,8 +76,8 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 		$root = AgaviConfig::get("core.root_dir");
 		$logDir = $root."/app/data/log/";
 		
-		$wwwUser = $this->sharedFixture['www-user'];
-		$wwwGroup = $this->sharedFixture['www-group'];
+		$wwwUser = IcingaWebTestTool::getProperty('www-user');
+		$wwwGroup = IcingaWebTestTool::getProperty('www-group');
 
 		$command = "touch ".$logDir."/testfile.txt";
 

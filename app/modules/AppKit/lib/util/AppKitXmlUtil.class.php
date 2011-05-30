@@ -34,7 +34,29 @@ class AppKitXmlUtil {
 			$targetNode->appendChild($node);
 		}
 	}
-	
+
+	/**
+	* Checks wether $attribute is an attribute of the DOMElement $element or any of it's parents
+	* Returns the attribute value or null if it doesn't exist
+	* 
+    * @param 	AgaviXmlDomElement 	DomElement to start hangling up
+	* @param	string				Attribute to search for
+	*
+	* @author	Jannis Moßhammer <jannis.mosshammer@netways.de>
+	*/
+	public static function getInheritedAttribute(DomElement $element,$attribute) {	
+		$parent = $element;
+		do {		
+			if($parent->hasAttribute($attribute)) { 
+				return AgaviToolKit::literalize($parent->getAttribute($attribute));
+			}
+			$element = $parent;
+			$parent = $element->parentNode;
+			
+		} while($parent);
+
+		return null;
+	}	
 }
 
 ?>

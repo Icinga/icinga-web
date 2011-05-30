@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module_routes xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
+	<configuration context="web">
+	</configuration>
+	<configuration context="console">
+	</configuration>
+	<configuration context="soap">
+	</configuration>
+</module_routes>

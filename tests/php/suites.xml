@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit  bootstrap="icingaWebTesting.php">
+<phpunit  bootstrap="TestInit.php">
 	<logging>
 		 <log type="junit" target="./results.xml" logIncompleteSkipped="false"/>
 	</logging>
+	
 	<testsuites>
 		<testsuite name="Bootstrap" >
 			<file>tests/bootstrap/agaviBootstrapTest.php</file>
-			
 		</testsuite>
+
 		<testsuite name="Installation">
 			<file>tests/installation/userRightsTest.php</file>
 			<file>tests/installation/configSettingsTest.php</file>	
 		</testsuite>
+		<testsuite name="Configuration">
+			<file>tests/configuration/ExtDirectProviderTest.php</file>
+		</testsuite>		
 		<testsuite name="Database">
-			<file>tests/database/icingaDatabaseAccessibleTest.php</file>
-			<file>tests/database/icingaUserOperations.php</file>
-			<file>tests/database/icingaRoleOperations.php</file>
-			<file>tests/database/persistenceView.php</file>
+			<file>tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
+			<file>tests/configDatabase/icingaUserOperations.php</file>
+			<file>tests/configDatabase/icingaRoleOperations.php</file>
+			<file>tests/configDatabase/persistenceView.php</file>
 		</testsuite>
-<!--	
+
+		<!--	
 		Commented is developement testing for 1.4. 
 		<testsuite name="API">
 			<file>tests/api/ConsoleInterfaceTest.php</file>
@@ -27,10 +32,12 @@
 			<directory>tests/api/hostgroups</directory>	
 			<directory>tests/api/servicegroups</directory>
 			<directory>tests/api/misc</directory> 
-		</testsuite> -->
+		</testsuite>
+		-->
+
 		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
-			
-		</testsuite>-->
+		</testsuite>
+
 	</testsuites>
 </phpunit>

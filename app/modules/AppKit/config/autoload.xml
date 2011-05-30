@@ -32,7 +32,7 @@
 		
 		<!-- The same -->
 		<autoload name="AppKitBaseClass">%core.module_dir%/AppKit/lib/class/AppKitBaseClass.class.php</autoload>
-		<autoload name="AppKitException">%core.module_dir%/AppKit/lib/class/AppKitBaseClass.class.php</autoload>
+		<autoload name="AppKitException">%core.module_dir%/AppKit/lib/exception/AppKitException.class.php</autoload>
 		
 		<autoload name="AppKitSQLConstants">%core.module_dir%/AppKit/lib/database/AppKitSQLConstants.class.php</autoload>
 		<autoload name="AppKitDateTime">%core.module_dir%/AppKit/lib/date/AppKitDateTime.class.php</autoload>
@@ -96,7 +96,7 @@
 		
 		<!-- Module util classes -->
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
-		<autoload name="AppKitModuleRoutingHandler">%core.module_dir%/AppKit/lib/module/AppKitModuleRoutingHandler.class.php</autoload>
+		<autoload name="AppKitRoutingHandler">%core.module_dir%/AppKit/lib/routing/AppKitRoutingHandler.class.php</autoload>
 		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
 		
 	</ae:configuration>

@@ -299,7 +299,7 @@ AC_CONFIG_FILES([
 	app/modules/Web/config/icinga-io.xml
 	app/modules/AppKit/cache/Widgets/SquishLoader.xml
 	etc/build.properties
-	etc/tests/test.properties
+	tests/php/test.properties
 	etc/apache2/icinga-web.conf
 	bin/clearcache.sh
 	pub/.htaccess
