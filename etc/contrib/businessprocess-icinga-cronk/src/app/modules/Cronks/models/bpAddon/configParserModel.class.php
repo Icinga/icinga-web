@@ -38,8 +38,10 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 		} else {
 			if(!is_writeable($path))
 				throw new AppKitException("Can't write to config path ".$path);	
-		}
-		
+		} 
+		if($this->getConsistencyErrors($config)) {
+			throw new AppKitException("Config check failed, please check your syntax");	
+		}	
 		file_put_contents($file,$config);
 	}
 	protected function parseProcessesFromArray(array $object) {
@@ -49,7 +51,7 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 			$bp = $this->getContext()->getModel("bpAddon.businessProcess","Cronks",array($process));	
 			$cfgParts[] = array("obj" => $bp, "str" => $bp->__toConfig());
 		}
-		
+	
 		$cfgString = $this->orderResultSet($cfgParts);
 		
 		$config = $this->getConfigHeader();
@@ -95,7 +97,8 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 		foreach($cfgParts as $part) {
 			$newOrder[] = $part["str"];
 		}
-		return $newOrder;
+		// make sure processed don't appear doubled
+		return array_unique($newOrder);
 	}
 	
 	protected function getConfigHeader() {
@@ -130,10 +133,10 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 		file_put_contents($file,$cfg);
 		$ret = 0;
 		// Call the check command and save 
-		ob_start();
-		system($bp["paths"]["bin"]."/".$bp["commands"]["checkConsistency"]." ".$file,$ret);
-		$systemResult = ob_get_clean();
-
+		$systemResult = array();
+		exec($bp["paths"]["bin"]."/".$bp["commands"]["checkConsistency"]." ".$file,$systemResult,$ret);
+		$systemResult = implode("\n",$systemResult);
+		
 		unlink($file);
 		if($ret)
 			return $systemResult;

@@ -71,9 +71,18 @@ Available targets:
 		</if>
 		
 		<echo>Clearing cache</echo>
-		<delete dir="${PATH_Icinga}/app/cache/content" />	
-		<delete dir="${PATH_Icinga}/app/cache/config" />	
+		<delete dir="${PATH_Icinga}/app/cache/*" />	
 		
+
+		<property name="buildAdditional" value="false" />
+		<available file="additional.xml" property="buildAdditional" value="true" />
+		<if>
+			<equals arg1="${buildAdditional}" arg2="1" />
+			<then>
+				<phing phingfile="additional.xml" inheritAll="true" />
+			</then>
+		</if>
+
 		<echo>
 		If, for any reason, your config is broken after installing this module, run the restoreConfig script (restoreConfig.sh). 
 		</echo>
