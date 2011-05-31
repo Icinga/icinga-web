@@ -88,7 +88,8 @@
 		<autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
 		<autoload name="AppKitHtmlUtil">%core.module_dir%/AppKit/lib/util/AppKitHtmlUtil.class.php</autoload>
 		<autoload name="AppKitFileUtil">%core.module_dir%/AppKit/lib/util/AppKitFileUtil.class.php</autoload>
-	
+		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
+
 		<!-- Custom validators -->
 		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
 		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
@@ -96,11 +97,11 @@
 		
 		<!-- Module util classes -->
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
-		<!-- Classes for automatic clientside api creation -->
+	
+	       	<!-- Classes for automatic clientside api creation -->
         <autoload name="AppKitRoutingHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingHandler.class.php</autoload>
 		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>
 		<autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload> 
-		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
-		
+
 	</ae:configuration>
 </ae:configurations>
