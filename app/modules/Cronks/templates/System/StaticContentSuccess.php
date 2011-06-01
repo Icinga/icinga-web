@@ -1,9 +1,10 @@
 <?php
 	$template = $rd->getParameter('template');
 	$render = $rd->getParameter('render', 'MAIN');
+	$cmpid = $rd->getParameter('cmpid');
 ?>
 <script type="text/javascript">
-Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
+Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 		var CE = this;
 		
 		var p = (function() {
@@ -11,7 +12,9 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 			var panel = null;
 			var pc = null;
 			var template_name = '<?php echo $template; ?>';
-			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template, 'render' => $render)); ?>";
+			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template, 'render' => $render, 'cmpid' => $cmpid)); ?>";
+			
+			url = url.replace(/&amp;/g, '&');
 			
 			Ext.apply(pub, {
 				

@@ -321,7 +321,6 @@
 					<ae:parameter name="url"><![CDATA[http://docs.icinga.org/latest/en/]]></ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
-			http://docs.icinga.org/latest/en/
 	
 			<ae:parameter name="genericIFrame">
 				<ae:parameter name="module">Cronks</ae:parameter>
@@ -485,6 +484,33 @@
 						<ae:parameter name="interface">true</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
+
+			<!-- This TO is hidden per default, because you'll need a
+			     special custom variable layout to get work.
+			     
+			     Take a look into icinga-tactical-overview-template-cvtree.xml
+			     for further instructions
+			-->
+			<ae:parameter name="icingaTacticalOverviewTreeCV">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StaticContent</ae:parameter>
+				
+	                <ae:parameter name="hide">true</ae:parameter> <!-- HIDDEN -->
+	                
+	                <ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+	                <ae:parameter name="name">TO CV DrillDown</ae:parameter>
+					<ae:parameter name="categories">to</ae:parameter>
+	
+					<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
+					
+					<ae:parameter name="image">cronks.Tree</ae:parameter>
+					
+					<ae:parameter name="ae:parameter">
+						<ae:parameter name="template">icinga-tactical-overview-template-cvtree</ae:parameter>
+						<ae:parameter name="interface">true</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			
 			<!-- Tactical overviews - [STOP] -->
 			
 			<!-- Demo cronk - [START] -->

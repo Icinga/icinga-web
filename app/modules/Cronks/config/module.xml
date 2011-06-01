@@ -38,6 +38,7 @@
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkBuilder.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkListingPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/lib/js/StaticContentUtil.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>

@@ -269,6 +269,8 @@ div.icinga-status-container {
 	width: 180px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 8px 8px 5px #888;
 }
 
 div.icinga-status-container div.icinga-status-label {
@@ -538,13 +540,23 @@ div#menu {
 
 /** Static content container **/
 .static-content-container {
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	padding: 2px 5px 2px 5px;
 }
 
 .static-content-container table td {
 	margin: 4px 4px;
-	padding: 4px 4px;
+	padding: 4px 8px 8px 4px;
+}
+
+.static-content-container .drilldown-link-container {
+	margin: 10px 0px 10px 0px;
+	background: #f1f1f1;
+	padding: 4px;
+	text-align: center;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 
