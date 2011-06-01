@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+
+<!--
+	Documentation how it works:
+	
+	You'll need a special CustomVariable layout to dig into so-like threes.
+	
+	Example:
+	
+	(Depending on countries, federal countries, datacenter sites)
+	
+	1. Level:
+	
+		- Customfield with name 'TO_WORLD'
+		- Values are the countries with ISO2 code layout, e.g. DE, AU, AT, IT, ...
+		
+	2. Level:
+	
+		- Customfield with the name TO_WORLD_DE
+		- The filter builds the new field from the field before and its value:
+		  TO_WORLD with value de comes to a new CV named TO_WORLD_DE
+		- The new customfields holds the federal states, e.g. BY, HE, ...
+	
+	3. Level
+		
+		- Same as level2 but with the field TO_WORLD_DE_BY which
+		  holds all datacenter sub items  
+-->
+
+<datasources>
+	<datasource id="cv_country">
+			<source_type>IcingaApi</source_type>
+			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+			<columns>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</columns>
+			<filters>
+				<filter_entry id="cv_name">
+					<field>CUSTOMVARIABLE_NAME</field>
+					<match>IcingaApi::MATCH_EXACT</match>
+					<value>TO_WORLD</value>
+				</filter_entry>
+			</filters>
+		</datasource>
+</datasources>
+
+<filterchain>
+	<item>
+		<label>Countries</label>
+		<template>data_template</template>
+		<filter_column>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</filter_column>
+		<datasource>cv_country</datasource>
+	</item>
+	
+	<item>
+		<label>Territory</label>
+		<template>data_template</template>
+		<filter_column>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</filter_column>
+		<datasource>cv_country</datasource>
+	</item>
+	
+	<item>
+		<label>Sites</label>
+		<template>data_template</template>
+		<filter_column>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</filter_column>
+		<datasource>cv_country</datasource>
+	</item>
+</filterchain>
+
+<template_code>
+
+	<data_template>
+		<![CDATA[
+			<?php
+			
+				echo '<h2>'. $chain['label']. '</h2>';
+			
+				if ($hasprev) {
+					
+					$js_id_up = sprintf('%s-up', $cmpid);
+					
+					$t->jsAddCode('Cronk.util.StaticContentUtil.drillupLink('. json_encode(array(
+						'jsid'				=> $js_id_up,
+						'cmpid'				=> $cmpid,
+						'chainid'			=> $chainid
+					)). ');');
+					
+					echo '<div class="drilldown-link-container"><a id="'. $js_id_up. '">'. $tr->_('Roll one level up'). '</a></div>';
+				}
+				
+				if (count($data) == 0) {
+					echo '<i>'. $tr->_('Sorry, no data available for CV'). '</i>';
+				}
+				
+				foreach ($data as $row) {
+					
+					echo '<div style="width: 400px;">';
+					
+					echo $t->renderSub('icinga-tactical-overview-groupstat', 'customvariable', array(
+						'CUSTOMVARIABLE_NAME'	=> $row['CUSTOMVARIABLE_NAME'],
+						'CUSTOMVARIABLE_VALUE'	=> $row['CUSTOMVARIABLE_VALUE']
+					));
+					
+					if ($hasnext) {
+						
+						$data_columns = array_intersect_key($row, array_flip(AppKitArrayUtil::trimSplit($chain['filter_column'])));
+						
+						$js_id_down = sprintf('%s-%s-%s-down', $cmpid, $row['CUSTOMVARIABLE_NAME'], $row['CUSTOMVARIABLE_VALUE']);
+						
+						$t->jsAddCode('Cronk.util.StaticContentUtil.drilldownLink('. json_encode(array(
+							'jsid'				=> $js_id_down,
+							'cmpid'				=> $cmpid,
+							'filter_object'		=> $data_columns,
+							'filter_field'		=> 'CUSTOMVARIABLE_NAME',
+							'filter_value'		=> '{CUSTOMVARIABLE_NAME}_{CUSTOMVARIABLE_VALUE}',
+							'chainid'			=> $chainid
+						)). ');');
+						
+						echo '<div class="drilldown-link-container"><a id="'. $js_id_down. '">'. $tr->_('Drill down'). '</a></div>';
+					}
+					
+					echo '</div>';
+					
+				}
+				
+			?>
+		]]>
+	</data_template>
+
+	<MAIN>
+		<![CDATA[
+			<?php echo $t->renderFilterchain(
+				isset($a['p']['chain']) ? (integer)$a['p']['chain'] : 0 );
+			?>
+		]]>
+	</MAIN>
+</template_code>
+
+</template>

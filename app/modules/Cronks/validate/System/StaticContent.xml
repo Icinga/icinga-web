@@ -47,6 +47,16 @@
 					<error>Validation of parentid failed!</error>
 				</errors>
 			</validator>
+			
+			<validator class="string" name="p" required="false">
+				<arguments base="p[]">
+					<argument />
+				</arguments>
+					
+				<errors>
+					<error>Parameter validation fails!</error>
+				</errors>
+			</validator>			
 
 		</validators>
 		

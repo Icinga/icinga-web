@@ -10,6 +10,8 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 	private $tid					= null;
 	private $ts						= array ();
 	private $ds						= array ();
+	private $chain                  = array ();
+	private $rparam                 = array ();
 	private $args					= array ();
 	private $js_code				= array ();
 
@@ -24,7 +26,9 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
 		$this->ds = $this->getParameter('datasources', array ());
 		$this->ts = $this->getParameter('templates', array ());
-
+		$this->chain = $this->getParameter('chain', array ());
+		$this->rparam = $this->getParameter('rparam', array ());
+		
 		$this->tid = $this->getOid();
 	}
 
@@ -59,7 +63,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		if ($args==null) {
 			$args =& $this->args;
 		}
-
+		
+		$ctx = $this->getContext();
+		$ro = $this->getContext()->getRouting();
+		$tr = $this->getContext()->getTranslationManager();
 		$t =& $this;
 		$a =& $args;
 
@@ -153,7 +160,46 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		return $filter;
 	}
 
-	private function getDsArray($name, array $filters=array(), $index=false) {
+	private function getDsFilters($name, array $additional=array(), $ignore_defined_filters=false) {
+	    
+	    $out = array ();
+	    
+		if (array_key_exists($name, $this->ds)) {
+
+			$dataSource = $this->ds[$name];
+			
+			if (!array_key_exists('target', $dataSource)) {
+				throw new Cronks_System_StaticContentTemplateException('Datasource \'%s\' needs attribute target!', $name);
+			}
+			else {
+
+			    if (!$ignore_defined_filters && array_key_exists('filters', $dataSource)) {
+			        
+					foreach ($dataSource['filters'] as $filter) {
+					    $out[] = array(
+					        $filter['field'],
+					        $filter['value'], 
+					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApi::MATCH_LIKE')
+					    );
+					}
+					
+				}
+				
+				if (count($additional)) {
+					foreach ($additional as $f) {
+						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+						$f = $this->processDsFiltermap($dataSource, $f);
+						$out[] = array($f[0], $f[1], $f[2]);
+					}
+				}
+
+			}
+		}
+		
+		return $out;
+	}
+	
+	private function getDsArray($name, array $filters=array(), $index=false, $ignore_defined_filters=false) {
 
 		if (array_key_exists($name, $this->ds)) {
 
@@ -184,12 +230,32 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 					$apiSearch->setSearchLimit(0, (int)$dataSource['limit']);
 				}
 
-				if (count($filters)) {
-					foreach ($filters as $f) {
-						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
-						$f = $this->processDsFiltermap($dataSource, $f);
-						$apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
-					}
+				/*
+				 * @todo Check if we can remove this
+				 */
+//			    if (array_key_exists('filters', $dataSource)) {
+//			        
+//					foreach ($dataSource['filters'] as $filter) {
+//					    $filter = $apiSearch->createFilter($filter['field'], 
+//					        $filter['value'], 
+//					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApi::MATCH_LIKE')
+//					    );
+//
+//                        $apiSearch->setSearchFilter($filter);					    
+//					}
+//				}
+//				
+//				if (count($filters)) {
+//					foreach ($filters as $f) {
+//						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+//						$f = $this->processDsFiltermap($dataSource, $f);
+//						$apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
+//					}
+//				}
+
+				$add_filters = $this->getDsFilters($name, $filters, $ignore_defined_filters);
+				foreach ($add_filters as $f) {
+				    $apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
 				}
 
 				/*
@@ -227,6 +293,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 	// INTERFACE METHODS
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+	public function dumpData() {
+	    return $this->tree;
+	}
+	
 	public function getOid() {
 		static $oid=null;
 		if ($oid===null) {
@@ -292,10 +362,25 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		}
 		
 		ob_start();
+		
 		$re = $this->evalPhp($this->templateCode($name), $args);
-		$content = ob_get_contents();
+		
+		$error = error_get_last();
+		
+		if ($error === null) {
+		    $content = ob_get_contents();
+		} else {
+		    $error_message = sprintf(
+		        'TO PHP error: %s (Line %d) in template %s!',
+		        $error['message'],
+		        $error['line'],
+		        $name
+		    );
+		    
+		    $content = $error_message;
+		}
 		ob_end_clean();
-
+		
 		if ($name === self::TEMPLATE_MAIN || $is_root==true) {
 			$content .= $this->jsGetCode();
 		}
@@ -451,6 +536,36 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 		$data = $this->getDsArray($name, $filter, 0);
 		$this->appendArguments($data);
 		return $data;
+	}
+	
+	public function renderFilterchain($id=0) {
+	    $chains = $this->chain;
+	    
+	    if (isset($chains[$id])) {
+	        
+	        $chain = $chains[$id];
+	        
+	        $chain_filters = array ();
+	        if (isset($this->rparam['filter_appendix'])) {
+	            $parts = explode('|', $this->rparam['filter_appendix']);
+	            $chain_filters[] = explode(',', array_pop($parts));
+	        }
+	        
+	        $subfilters = $this->getDsFilters($chain['datasource'], $chain_filters, ($id==0) ? false : true);
+	        
+	        $data = $this->getDsArray($chain['datasource'], $chain_filters, false, ($id==0) ? false : true);
+	        	        
+	        return $this->renderTemplate($chain['template'], array (
+	            'chain'      => $chain,
+	            'chainid'    => $id,
+	            'hasnext'    => isset($chains[$id+1]) ? true : false,
+	            'hasprev'    => isset($chains[$id-1]) ? true : false,
+	            'data'       => $data,
+	            'subfilter'  => $subfilters
+	        ));
+	    } else {
+	        return sprintf('Filterchain with id %d not found!', $id);
+	    }
 	}
 
 }
