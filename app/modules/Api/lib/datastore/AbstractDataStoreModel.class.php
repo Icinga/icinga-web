@@ -5,16 +5,18 @@ class DataStorePermissionException extends AppKitException {};
 
 abstract class AbstractDataStoreModel extends IcingaBaseModel  
 {
-    
+    protected $modifiers = array();
+    protected $requestParameters = array();
     public function doRead() {
+        
         if(!$this->hasPermission($this->canRead()))
             throw new DataStorePermissionException("Store ".get_class($this)." is not readable");
         return $this->execRead(); 
     }
     
-    public function doWrite($valueDescriptor) {
-        if(!$this->hasPermission($this->canWrite()))
-            throw new DataStorePermissionException("Store ".get_class($this)." is not writeable");
+    public function doInsert($valueDescriptor) {
+        if(!$this->hasPermission($this->canInsert()))
+            throw new DataStorePermissionException("Store ".get_class($this)." is not insertable");
         return $this->execWrite($valueDescriptor);
     }
     
@@ -30,10 +32,48 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
         return $this->execDelete($valueDescriptor);
     }
     
-    protected function execWrite($valueDescriptor) {}
+    protected function execInsert($valueDescriptor) {}
     protected function execRead() {}
     protected function execDelete($idDescriptor) {}
     protected function execUpdate($updateDescriptor) {}
+    
+    /**
+    * Register a new modifier for this store. Should be done statically on @see setupModifier
+    * @param    IDataStoreModifier  The modifier to register
+    **/
+    protected function registerStoreModifier(IDataStoreModifier $modifier) {
+        $this->modifiers[] = modifier; 
+    }
+
+    /**
+    * Store modifiers must be defined and added here
+    * via the @see registerStoreModifier method.
+    *  
+    **/
+    protected function setupModifiers() {
+    }
+    
+    public function getModifiers() {
+        return $this->modifiers;
+    }
+    /**
+    * Initializes the module and calls setupModifers if parameters doesn't contain "noStoreModifierSetup"
+    * @param    AgaviContext    The context of the agavi instance
+    * @param    Array           An array of submitted parameters
+    *                               - AgaviRequestDataHolder request : the request information
+    *                               - noStoreModifierSetup : Don't setup modifiers (add when callin parent::initialize)
+    **/ 
+    public function initialize(AgaviContext $context,array $parameters = array()) {
+        $this->defaultInitialize($context,$parameters);
+    }
+    
+    protected function defaultInitialize(AgaviContext $context,array $parameters = array()) {   
+        if(!isset($parameters["noStoreModifierSetup"]))
+            $this->setupModifiers(); 
+        if(!isset($parameters["request"]))
+            throw new InvalidArgumentException("DataStoreModel must be called with the 'request' parameter");
+        $this->requestParameters($parameters["request"]->getParameters());
+    }
 
     protected function hasPermission($perm) {
         if($perm === true)
@@ -57,7 +97,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     public function canRead() {
         return true;
     }
-    public function canWrite() {
+    public function canInsert() {
         return false;
     }
     public function canUpdate() {
