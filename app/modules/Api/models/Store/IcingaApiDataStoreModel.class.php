@@ -1,7 +1,7 @@
 <?php
 class IcingaApiActionNotAvailableException extends AppKitException {};
 
-class IcingaApiDataStoreModel extends AbstractDataStoreModel {
+class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
     protected $connectionName;
     protected $database = "icinga";
     public $requiredParams = array("connectionName");    
@@ -27,21 +27,35 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     }
 
     protected function setupModifiers() {
-        
-    } 
+        $this->registerStoreModifier('Store.Modifiers.StoreTargetModifier','Api');
+        parent::setupModifiers();
+    }
 
-    public function defaultInitialize(AgaviContext $c, array $parameters()) { 
+    public function defaultInitialize(AgaviContext $c, array $parameters = array()) { 
         if(isset($parameters["connectionName"]))
             $this->connectionName = $parameters["connectionName"];
-        $this->setupModifers();
+        parent::defaultInitialize($c,$parameters); 
     }
    
     protected function createRequestDescriptor() {
-        $DBALMetaManager = $this->getContext()->getModel("DBALMetaManager","Api");
+        $DBALMetaManager = AgaviContext::getInstance()->getModel("DBALMetaManager","Api");
         $DBALMetaManager->switchIcingaDatabase($this->connectionName); 
-
+        
         return IcingaDoctrine_Query::create();
     }
-
-
+    /**
+    * Delegates unknown method calls to the modifiers and thereby extends the
+    * store by the modifiers methods
+    **/
+    public function __call($method,$argument) {
+        $found = false;
+        foreach($this->getModifiers() as $mod) {
+            if(method_exists($mod,$method)) {
+                $found = true;
+                call_user_func_array(array($mod,$method),$argument);
+            }
+        }
+        if(!$found)
+            throw new BadMethodCallException("Call to unknown method $method");
+    }
 }

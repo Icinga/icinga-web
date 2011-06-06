@@ -17,6 +17,7 @@ class Api_ApiHostRequestModel extends ApiDataRequestBaseModel {
                 break;
             }
         }
+      
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaHosts h");
 

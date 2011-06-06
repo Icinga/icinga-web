@@ -1,4 +1,6 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('NsmPrincipal', 'icinga_web');
+
 /**
  * BaseNsmPrincipal
  *

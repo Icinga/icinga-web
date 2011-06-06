@@ -1,9 +1,0 @@
-<?
-
-interface IFilterableDataStore {
-    
-    public setFilter() {}
-}
-
-
-?>

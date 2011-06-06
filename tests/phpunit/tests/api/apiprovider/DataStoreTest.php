@@ -2,7 +2,7 @@
 class TestDataStoreModel extends AbstractDataStoreModel 
 {
     public $readCalled = false;
-    public $writeCalled = false;
+    public $insertCalled = false;
     public $deleteCalled = false;
     public $updateCalled = false;
     
@@ -16,8 +16,8 @@ class TestDataStoreModel extends AbstractDataStoreModel
     public function execRead() {
         $this->readCalled = true;
     }
-    public function execWrite($d) {
-        $this->writeCalled = true;
+    public function execInsert($d) {
+        $this->insertCalled = true;
     }
     public function execDelete($d) {
         $this->deleteCalled = true;
@@ -46,7 +46,7 @@ class DataStoreTest extends PHPUnit_Framework_TestCase
         $model = new TestDataStoreModel();
         $e = null;
         try {
-            $model->doWrite("no data");
+            $model->doInsert("no data");
         } catch(DataStorePermissionException $p) {
             $e = $p;
         }
@@ -110,7 +110,7 @@ class DataStoreTest extends PHPUnit_Framework_TestCase
             "Data store read was ".($rights[0] ? 'not' : '')." executed on ".$method
         );
         $this->assertEquals(
-            $model->writeCalled,
+            $model->insertCalled,
             $rights[1],
             "Data store write was ".($rights[1] ? 'not' : '')." executed on ".$method
         );

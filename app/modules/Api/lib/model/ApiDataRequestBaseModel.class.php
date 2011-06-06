@@ -1,16 +1,4 @@
 <?php
-class IcingaDoctrine_Query extends Doctrine_Query {
-    public static function create($conn = NULL, $class = NULL) {
-        return new IcingaDoctrine_Query($conn);
-    }
-
-    public function execute($attr,$hyd) {
-        ApiDataRequestBaseModel::applySecurityPrincipals($this);
-        return parent::execute($attr,$hyd);
-    }
-}
-
-
 class ApiDataRequestBaseModel extends IcingaApiBaseModel {
     protected $database = "icinga";
     public function getDatabase() {
@@ -28,10 +16,11 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
      * @return Doctrine_Connection or null
      */
     protected function getDatabaseConnection($connName = NULL) {
+        
         if (!$connName) {
             $connName = $this->database;
         }
-
+        print_r($connName);
         $db = $this->getContext()->getDatabaseManager()->getDatabase($connName);
         $connection = null;
 
@@ -46,10 +35,13 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
         if (!$connName) {
             $connName = $this->database;
         }
-
+       
         $DBALMetaManager = $this->getContext()->getModel("DBALMetaManager","Api");
+       
         $DBALMetaManager->switchIcingaDatabase($connName);
-        return IcingaDoctrine_Query::create();
+        
+    
+        return Doctrine_Query::create();
     }
 
 

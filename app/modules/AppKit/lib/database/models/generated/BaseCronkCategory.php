@@ -1,4 +1,5 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('CronkCategory', 'icinga_web');
 /**
  * BaseCronkCategory
  *

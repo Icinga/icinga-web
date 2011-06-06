@@ -2,16 +2,16 @@
 
 class HostgroupDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetStatus() {
-		$this->fail("Not implemented");
+		$this->markTestIncomplete("Not implemented");
 	}
 	public function testGetId() {
-		$this->fail("Not implemented");
+		$this->markTestIncomplete("Not implemented");
 	}
 	public function testGetInstance() {
-		$this->fail("Not implemented");
+		$this->markTestIncomplete("Not implemented");
 	}
 	public function testGetAlias() {
-		$this->fail("Not implemented");
+		$this->markTestIncomplete("Not implemented");
 	}
 	
 	/**
@@ -20,10 +20,10 @@ class HostgroupDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	
 	public function testGetHosts() {
-		$this->fail("Not implemented");
+		$this->markTestIncomplete("Not implemented");
 	}
 	public function testGetServices() {
-		$this->fail("Not implemented");
+		$this->markTestIncomplete("Not implemented");
 	}
 
 }

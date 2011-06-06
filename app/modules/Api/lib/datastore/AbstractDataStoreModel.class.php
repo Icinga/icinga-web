@@ -39,10 +39,11 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     
     /**
     * Register a new modifier for this store. Should be done statically on @see setupModifier
-    * @param    IDataStoreModifier  The modifier to register
+    * @param    String  The modifier to add (module path)
+    * @param    String  The module where the modifier lies
     **/
-    protected function registerStoreModifier(IDataStoreModifier $modifier) {
-        $this->modifiers[] = modifier; 
+    protected function registerStoreModifier($modifier, $module) { 
+        $this->modifiers[] = AgaviContext::getInstance()->getModel($modifier,$module);
     }
 
     /**
@@ -51,6 +52,11 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     *  
     **/
     protected function setupModifiers() {
+        foreach($this->requestParameters as $parameter=>$value) {
+            foreach($this->modifiers as $modifier) {
+               $modifier->handleArgument($parameter,$value); 
+            }
+        }
     }
     
     public function getModifiers() {
@@ -72,7 +78,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
             $this->setupModifiers(); 
         if(!isset($parameters["request"]))
             throw new InvalidArgumentException("DataStoreModel must be called with the 'request' parameter");
-        $this->requestParameters($parameters["request"]->getParameters());
+        $this->requestParameters = $parameters["request"]->getParameters();
     }
 
     protected function hasPermission($perm) {

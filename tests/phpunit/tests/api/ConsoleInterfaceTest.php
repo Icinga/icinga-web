@@ -41,11 +41,12 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 				)
 			)
 		);
-		$grepCmd->stdoutFile("/usr/local/icinga/etc/objects/test");
+        $out=  "/tmp/IcingaApiTest";
+		$grepCmd->stdoutFile($out);
 		$lsCmd->pipeCmd($grepCmd);
 		$console->exec($lsCmd);
 	
-		$this->assertEquals($lsCmd->getCommandString(),"/bin/ls -la  '/usr/local/icinga-web/' | /bin/grep 'c.*'  > /usr/local/icinga/etc/objects/test"); 
+		$this->assertEquals($lsCmd->getCommandString(),"/bin/ls -la  '/usr/local/icinga-web/' | /bin/grep 'c.*'  > $out"); 
 	}
 	
 

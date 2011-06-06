@@ -61,7 +61,7 @@ class Api_DBALMetaManagerModel extends IcingaApiBaseModel {
             'IcingaTimedevents',
             'IcingaTimeperiodTimeranges',
             'IcingaTimeperiods'
-                                            );
+    );
 
     public function switchIcingaDatabase($connName) {
         $manager = Doctrine_Manager::getInstance();
