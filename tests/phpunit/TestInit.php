@@ -2,6 +2,8 @@
 
 class IcingaWebTestTool {
     
+    const PROPERTIES_FILE = "tests/phpunit/test.properties";
+    
     private static $path_test = null;
     private static $path_root = null;
     
@@ -21,9 +23,21 @@ class IcingaWebTestTool {
         return self::$path_test;
     }
     
+    /**
+     * Loads the ini file with test properties to make it
+     * project wide available for testing
+     * @throws Exception
+     * @return array Array of parsed properties
+     */
     private static function parseTestProperties() {
-        $file = self::getRootPath(). "/tests/php/test.properties";
-        return self::$properties = parse_ini_file($file);
+        $file = self::getRootPath(). '/'. self::PROPERTIES_FILE;
+        self::$properties = parse_ini_file($file);
+        
+        if (!is_array(self::$properties)) {
+            throw new Exception('Propertiesfile '. $file. ' not found!');
+        }
+        
+        return self::$properties;
     }
     
     public static function getProperties() {
@@ -45,7 +59,7 @@ class IcingaWebTestTool {
 	*   If phpUnit provides an assertInstanceOf class (>= v.3.5) this one will be used, 
 	*	otherwise it will be checked directly here. 
 	*	@param $expected 	The expected Instance
-	*	@paran $actual		The object to test
+	*	@param $actual		The object to test
 	*	@param $message		The message to return if assertion fails (optional)
 	*/
 	public static function assertInstanceOf($expected,$actual,$message = '') {
@@ -79,6 +93,12 @@ class IcingaWebTestTool {
 
 class IcingaWebTestBootstrap {
     
+    /**
+     * Starts an agavi context for testing purposes. This was bundled into the
+     * test bootstrap method to call this only once
+     * @param string $env	Name of the context
+     * @return AgaviContext	The created context
+     */
     public function bootstrapAgavi($env='testing') {
         
         require IcingaWebTestTool::getRootPath(). '/lib/agavi/src/agavi.php';
