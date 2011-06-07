@@ -25,18 +25,18 @@ class AppKitApiProviderParser  {
     }
 
     private function checkActionType($module,$action) {
-        $class = $this->getActionClass($module,$action);
+        /*$class = $this->getActionClass($module,$action);
         $reflected = new ReflectionClass($class);
         foreach($reflected->getInterfaceNames() as $interface) {
             echo $class." has interface ".$interface;
-        }
+        }*/
     }
     
     private function getActionClass($moduleName,$actionName) {
         $actionName = AgaviToolkit::canonicalName($actionName);
 		$longActionName = str_replace('/', '_', $actionName);
 		$class = $moduleName . '_' . $longActionName . 'Action';
-		if(!class_exists($class)) {
+/*		if(!class_exists($class)) {
 			if(false !== ($file = AgaviContext::getInstance()->getController()->checkActionFile($moduleName, $actionName))) {
 				require($file);
 			} else {
@@ -46,7 +46,7 @@ class AppKitApiProviderParser  {
 			if(!class_exists($class, false)) {
 				throw new AgaviException('Could not find Action "' . $longActionName . '" for module "' . $moduleName . '"');
 			}
-		}
+		}*/
         return $class;
     }
 

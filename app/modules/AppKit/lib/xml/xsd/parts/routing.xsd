@@ -109,7 +109,7 @@
 		<xs:attribute name="method" type="xs:string" />
 		<xs:attribute name="module" type="xs:string" />
 		<xs:attribute name="output_type" type="xs:string" />
-		<xs:attribute name="extdirect_provider" type="xs:boolean" />
+		<xs:attribute name="api_provider" type="xs:boolean" />
 	</xs:complexType>
 
 	<xs:complexType name="routes">

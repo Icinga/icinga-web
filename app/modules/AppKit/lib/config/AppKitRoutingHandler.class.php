@@ -56,7 +56,7 @@ class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
 
         foreach($document->getConfigurationElements() as $cfg) {
             if($cfg->has('routes')) {
-                $this->parseRoutes($routing, $cfg->get('routes'));
+                $this->parseRoutesExtended($routing, $cfg->get('routes'));
                 $this->parseApiProviders();
             }
         }
@@ -74,7 +74,7 @@ class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
     *
     * @author     Jannis Moßhammer <jannis.mosshammer@netways.de>
     */
-    protected function parseRoutes($routing,$routes,$parent = null)
+    protected function parseRoutesExtended($routing,$routes,$parent = null)
     {
         foreach($routes as $route) {
 
@@ -82,7 +82,7 @@ class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
                 $this->fetchApiProviderInformation($route);
             }
         }
-        parent::parseRoutes($routing,$routes,$parent = null);
+        $this->parseRoutes($routing,$routes,$parent = null);
     }
 
     private function parseApiProviders() {

@@ -47,7 +47,7 @@
 				
 					<!-- Data Provider -->
 				 <route name=".data" pattern="^/provider" output_type="json">
-					<route name=".users" pattern="^/user" action="DataProvider.UserProvider" extdirect_provider="true">
+					<route name=".users" pattern="^/user" action="DataProvider.UserProvider" api_provider="true">
 					  <route pattern="^/(userId:\d+)" action="DataProvider.UserProvider"/>
 					</route>
 					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
