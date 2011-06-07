@@ -1,4 +1,5 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('NsmDbVersion', 'icinga_web');
 /**
  * Icinga web table version
  */

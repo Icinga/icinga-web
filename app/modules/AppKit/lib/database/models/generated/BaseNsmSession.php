@@ -1,4 +1,6 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('NsmSession', 'icinga_web');
+
 /**
  * BaseNsmSession
  *

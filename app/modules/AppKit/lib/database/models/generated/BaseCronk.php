@@ -1,4 +1,6 @@
 <?php
+
+Doctrine_Manager::getInstance()->bindComponent('Cronk', 'icinga_web');
 /**
  * BaseCronk
  *

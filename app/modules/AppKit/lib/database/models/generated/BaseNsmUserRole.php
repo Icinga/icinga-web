@@ -1,4 +1,5 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('NsmUserRole', 'icinga_web');
 /**
  * BaseNsmUserRole
  *

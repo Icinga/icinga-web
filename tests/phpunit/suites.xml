@@ -8,19 +8,22 @@
 		<testsuite name="Bootstrap" >
 			<file>tests/bootstrap/agaviBootstrapTest.php</file>
 		</testsuite>
-		
+
 		<testsuite name="Installation">
 			<file>tests/installation/userRightsTest.php</file>
 			<file>tests/installation/configSettingsTest.php</file>	
 		</testsuite>
-		
+		<testsuite name="Configuration">
+			<file>tests/configuration/ApiProviderRoutesTest.php</file>
+			<file>tests/configuration/ApiValidationParserTest.php</file>
+		</testsuite>		
 		<testsuite name="Database">
-			<file>tests/database/icingaDatabaseAccessibleTest.php</file>
-			<file>tests/database/icingaUserOperations.php</file>
-			<file>tests/database/icingaRoleOperations.php</file>
-			<file>tests/database/persistenceView.php</file>
+			<file>tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
+			<file>tests/configDatabase/icingaUserOperations.php</file>
+			<file>tests/configDatabase/icingaRoleOperations.php</file>
+			<file>tests/configDatabase/persistenceView.php</file>
 		</testsuite>
-		
+
 		<!--	
 		Commented is developement testing for 1.4. 
 		<testsuite name="API">
@@ -32,9 +35,10 @@
 			<directory>tests/api/misc</directory> 
 		</testsuite>
 		-->
-		
+
 		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
 		</testsuite>
+
 	</testsuites>
 </phpunit>

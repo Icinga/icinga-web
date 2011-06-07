@@ -1,4 +1,6 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('NsmUserPreference', 'icinga_web');
+
 /**
  * BaseNsmUserPreference
  *

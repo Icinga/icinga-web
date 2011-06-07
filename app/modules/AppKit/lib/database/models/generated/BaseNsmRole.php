@@ -1,4 +1,6 @@
 <?php
+Doctrine_Manager::getInstance()->bindComponent('NsmRole', 'icinga_web');
+
 /**
  * BaseNsmRole
  *

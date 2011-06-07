@@ -5,6 +5,7 @@
 		<autoload name="IcingaApiBaseAction">%core.module_dir%/Api/lib/action/IcingaApiBaseAction.class.php</autoload>
 		<autoload name="IcingaApiBaseModel">%core.module_dir%/Api/lib/model/IcingaApiBaseModel.class.php</autoload>
 		<autoload name="ApiDataRequestBaseModel">%core.module_dir%/Api/lib/model/ApiDataRequestBaseModel.class.php</autoload>
+		<autoload name="IcingaDoctrine_Query">%core.module_dir%/Api/lib/database/IcingaDoctrine_Query.class.php</autoload>
 		<autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
 		<autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>		
 		<autoload name="BaseConsoleConnection">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
@@ -18,5 +19,17 @@
 		<autoload name="ApiRestrictedCommandException">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
 		<autoload name="ApiAuthorisationFailedException">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
 
+        <autoload name="StoreFilterBase">%core.module_dir%/Api/lib/datastore/filter/StoreFilterBase.class.php</autoload> 
+        <autoload name="GenericStoreFilterGroup">%core.module_dir%/Api/lib/datastore/filter/GenericStoreFilterGroup.class.php</autoload> 
+        <autoload name="GenericStoreFilter">%core.module_dir%/Api/lib/datastore/filter/GenericStoreFilter.class.php</autoload>   
+        <autoload name="StoreFilterField">%core.module_dir%/Api/lib/datastore/filter/StoreFilterField.class.php</autoload> 
+        <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/AbstractDataStoreModel.class.php</autoload> 
+        <autoload name="IDataStoreModifier">%core.module_dir%/Api/lib/datastore/interfaces/IDataStoreModifier.php</autoload> 
+<!--	
+        <autoload name="IFilterableDataStore">%core.module_dir%/Api/lib/datastore/interfaces/IFilterableDataStoreModel.class.php</autoload> 
+        <autoload name="IOrderableDataStoreModel">%core.module_dir%/Api/lib/datastore/IOrderableDataStoreModel.class.php</autoload> 
+        <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/IPageableDataStoreModel.class.php</autoload> 
+       
+        <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/DataStoreModel.class.php</autoload>--> 
 	</ae:configuration>
 </ae:configurations>

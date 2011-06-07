@@ -8,15 +8,16 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function hostProvider() {
 		$model = AgaviContext::getInstance()->getModel("ApiHostRequest","Api");
 		$host = $model->getHostsByName(array("c1-db1"));
-		return $host->getFirst();
+        return $host->getFirst();
 	}
 	
 	public function testGetHost() {
-		$model = AgaviContext::getInstance()->getModel("ApiHostRequest","Api");
-		$host = $model->getHostsByName(array("c1-db1","test"));
+        $model = AgaviContext::getInstance()->getModel("ApiHostRequest","Api");
+        
+        $host = $model->getHostsByName(array("c1-db1","test"));
 		$this->assertFalse(is_null($host),"Host request returned null");
 		$this->assertEquals($host->count(),1,"Number of hosts is wrong, should be 1, is ".$host->count());
-		
+	
 		success("Getting host succeeded \n");
 	}
 	

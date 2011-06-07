@@ -1,4 +1,7 @@
 <?php
+
+Doctrine_Manager::getInstance()->bindComponent('NsmLog', 'icinga_web');
+
 /**
  * BaseNsmLog
  *
