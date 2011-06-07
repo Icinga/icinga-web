@@ -52,8 +52,9 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     *  
     **/
     protected function setupModifiers() {
+        
         foreach($this->requestParameters as $parameter=>$value) {
-            foreach($this->modifiers as $modifier) {
+            foreach($this->modifiers as $modifier) { 
                $modifier->handleArgument($parameter,$value); 
             }
         }
@@ -74,11 +75,13 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     }
     
     protected function defaultInitialize(AgaviContext $context,array $parameters = array()) {   
-        if(!isset($parameters["noStoreModifierSetup"]))
-            $this->setupModifiers(); 
         if(!isset($parameters["request"]))
             throw new InvalidArgumentException("DataStoreModel must be called with the 'request' parameter");
+        
         $this->requestParameters = $parameters["request"]->getParameters();
+        if(!isset($parameters["noStoreModifierSetup"]))
+            $this->setupModifiers(); 
+
     }
 
     protected function hasPermission($perm) {

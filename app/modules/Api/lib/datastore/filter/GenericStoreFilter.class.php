@@ -53,11 +53,14 @@ abstract class GenericStoreFilter extends StoreFilterBase
     protected function addFilterField(StoreFilterField $filter) {
         $this->__fields[] = $filter;
     }
+    
     public function getPossibleFields() {
         return $this->__fields;
     }
 
-
+    public static function parse($filter,$parse) {
+        return null;
+    }
 
     /**
     * The creation of @see GenericFilterField is done here in our subclasses
@@ -71,7 +74,19 @@ abstract class GenericStoreFilter extends StoreFilterBase
     * @return Boolean/String    True if valid, errormessage instead
     **/
     protected function checkIfValid() {
-        return true;   
+        if(empty($this->__fields))
+            $this->initFieldDefinition();
+        
+        $fieldMatches = false;
+        $opMatches = false;
+        
+        foreach($this->__fields as $field) {
+            if($field->name == $this->field && 
+                in_array($this->operator,$field->operators))
+                return true;     
+        }
+       
+        return "Invalid Filter field/operator combination :".$this->field." ".$this->operator;
     }
 
     /**
@@ -83,7 +98,7 @@ abstract class GenericStoreFilter extends StoreFilterBase
     public function __toArray() {
         return array(
             "field" => $this->field,
-            "value" => is_array($this->value) ? impode($this->value) : $this->value,
+            "value" => is_array($this->value) ? implode($this->value) : $this->value,
             "operator" => $this->operator
         );
     }

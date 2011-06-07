@@ -5,6 +5,11 @@ class StoreFilterFieldApiValues
     public $action = "";
     public $module = "";
     public $filter = ""; 
+    public function __construct($action,$module,$filter) {
+        $this->action = $action;
+        $this->module = $module;
+        $this->filter = $filter;
+    }
 }
 
 class StoreFilterField 
@@ -25,7 +30,9 @@ class StoreFilterField
         "is exact" => "=", 
         "is not" => "!=",
         "is like" => "LIKE",
-        "is not like" => "NOT LIKE"
+        "is not like" => "NOT LIKE",
+        "in" => "IN",
+        "not in" => "NOT IN"
     );
     public $displayName;
     public $name;

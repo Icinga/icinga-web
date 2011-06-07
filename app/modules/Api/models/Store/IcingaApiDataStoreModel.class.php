@@ -20,18 +20,19 @@ class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
     
     public function execRead() {
         $request = $this->createRequestDescriptor();
-        foreach($this->getModifiers as $mod) {
+        foreach($this->getModifiers() as $mod) {
             $mod->modify($request);
         }
-        $request->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
+        return $request->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
     }
 
     protected function setupModifiers() {
         $this->registerStoreModifier('Store.Modifiers.StoreTargetModifier','Api');
+        $this->registerStoreModifier('Store.Modifiers.StoreFilterModifier','Api');
         parent::setupModifiers();
     }
 
-    public function defaultInitialize(AgaviContext $c, array $parameters = array()) { 
+    public function defaultInitialize(AgaviContext $c, array $parameters = array()) {  
         if(isset($parameters["connectionName"]))
             $this->connectionName = $parameters["connectionName"];
         parent::defaultInitialize($c,$parameters); 
@@ -41,7 +42,7 @@ class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
         $DBALMetaManager = AgaviContext::getInstance()->getModel("DBALMetaManager","Api");
         $DBALMetaManager->switchIcingaDatabase($this->connectionName); 
         
-        return IcingaDoctrine_Query::create();
+        return Doctrine_Query::create();
     }
     /**
     * Delegates unknown method calls to the modifiers and thereby extends the

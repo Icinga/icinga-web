@@ -19,7 +19,7 @@ class GenericStoreFilterGroup extends StoreFilterBase implements Iterator
         if(isset($this->possibleTypes[$type])) {
             $this->type = $this->possibleTypes[$type];
         } else if(in_array($type,$this->getPossibleTypes())) {
-            $this->type = "type";
+            $this->type = $type;
         } else {
             throw new InvalidFilterTypeException("Type ".$type." is not supported"); 
         }
@@ -29,14 +29,45 @@ class GenericStoreFilterGroup extends StoreFilterBase implements Iterator
         $this->subFilters[] = $b;
     }
     public function getSubFilters() {
-        return $this->b;
+        return $this->subFilters;
     }
     public function getPossibleTypes() {
         return $this->possibleTypes;
     }
 
-    public function __construct($type, array $subFilters = array()) {
-        $this->setType($type);
+
+    /**
+    * Try to parse from an (array) of values
+    * @param    array   Filter parameters to parse
+    * @param    DataStoreFilterModifier Backreference to parser \
+    *                                   (in order to be able to parse the subqueries)
+    * @return   GenericStoreFilterGroup on success, otherwise null
+    **/
+    public static function parse($filter,$parser, $instance=null) {
+        $o;
+        if($instance)
+            $o = new $instance();
+        else
+            $o = new self();
+        if(!isset($filter["type"]) || !isset($filter["items"]))
+            return null;
+        if(!in_array($filter["type"],$o->getPossibleTypes()) || empty($filter["items"]))
+            return null;
+        $o->setType($filter["type"]);
+        $availableItems = array();
+        foreach($filter["items"] as $item) {
+            $subFilter = $parser->tryParse($item);
+            
+            if(is_a($subFilter,'StoreFilterBase'))
+                $o->addSubFilter($subFilter); 
+         }
+       
+        return $o;
+    }
+    
+    public function __construct($type = null, array $subFilters = array()) {
+        if($type)
+            $this->setType($type);
         foreach($subFilters as $subFilter) {
             $this->addSubFilter($subFilters);
         }
@@ -45,7 +76,7 @@ class GenericStoreFilterGroup extends StoreFilterBase implements Iterator
     public function __toArray() {
         $group = array("type"=>$this->getType(),"filters"=>array());
         foreach($this as $filter) {
-            $group["filters"][] = $filter->__toArray();
+            $group["items"][] = $filter->__toArray();
         }
         return $group;
     }   
