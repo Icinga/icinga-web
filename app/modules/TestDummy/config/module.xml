@@ -20,6 +20,13 @@
 				<setting name="appkit_module.agavi.include_xml.routing">
 					<ae:parameter>%core.module_dir%/TestDummy/config/routing.xml</ae:parameter>
 				</setting>
+				
+				<!-- 
+					Adding module related databases
+				-->
+				<setting name="appkit_module.agavi.include_xml.databases">
+					<ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
+				</setting>
 
 			</settings>
 		</module>
