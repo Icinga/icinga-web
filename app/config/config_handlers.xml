@@ -2,10 +2,16 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/config_handlers/1.0" parent="%core.system_config_dir%/config_handlers.xml">
 
 	<ae:configuration>
-		<handlers>	
+		<handlers>
+		
 			<handler pattern="%core.config_dir%/routing.xml" class="AppKitRoutingHandler">
 				<validation>%core.module_dir%/AppKit/lib/xml/xsd/routing.xsd</validation>
 				<transformation>%core.module_dir%/AppKit/lib/xml/xsl/routing.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.config_dir%/databases.xml" class="AppKitDatabaseConfigHandler">
+				<validation>%core.agavi_dir%/config/xsd/databases.xsd</validation>
+				<transformation>%core.agavi_dir%/config/xsl/databases.xsl</transformation>
 			</handler>
 		
 		</handlers>

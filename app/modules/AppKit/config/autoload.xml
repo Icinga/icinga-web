@@ -100,8 +100,11 @@
 		<!-- Module util classes -->
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
 	
-	       	<!-- Classes for automatic clientside api creation -->
-        <autoload name="AppKitRoutingHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingHandler.class.php</autoload>
+		<!-- Agavi config file handler -->
+		<autoload name="AppKitRoutingHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingHandler.class.php</autoload>
+		<autoload name="AppKitDatabaseConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitDatabaseConfigHandler.class.php</autoload>
+	
+	    <!-- Classes for automatic clientside api creation -->
 		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>
 		<autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload> 
         

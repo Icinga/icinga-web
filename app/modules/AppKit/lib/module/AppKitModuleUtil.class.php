@@ -14,15 +14,16 @@ class AppKitModuleUtil extends AppKitSingleton {
     const DATA_ARRAY		= 'array';
 
     protected static $default_config_keys = array(
-            'app.javascript_files'		=> self::DATA_FLAT,
-            'app.javascript_actions'	=> self::DATA_DEFAULT,
-            'app.javascript_dynamic'	=> self::DATA_UNIQUE,
-            'app.css_files'				=> self::DATA_FLAT,
-            'app.meta_tags'				=> self::DATA_DEFAULT,
+            'app.javascript_files'		    => self::DATA_FLAT,
+            'app.javascript_actions'	    => self::DATA_DEFAULT,
+            'app.javascript_dynamic'	    => self::DATA_UNIQUE,
+            'app.css_files'				    => self::DATA_FLAT,
+            'app.meta_tags'				    => self::DATA_DEFAULT,
 
             // Namespaces for XML includes
-            'agavi.include_xml.routing'	=> self::DATA_FLAT
-                                            );
+            'agavi.include_xml.routing'     => self::DATA_FLAT,
+            'agavi.include_xml.databases'	=> self::DATA_FLAT
+    );
 
     private $modules = null;
 
@@ -99,6 +100,13 @@ class AppKitModuleUtil extends AppKitSingleton {
         return $this->s_configns;
     }
 
+    /**
+     * Returns configuration from namespace keys from all modules. This
+     * method is used e.g. to collect all additional javascript files
+     * from all registered modules 
+     * @param string $subkey
+     * @param string $type
+     */
     public function getSubConfig($subkey, $type=self::DATA_FLAT) {
         $out = array();
         foreach($this->getValidConfigNamespaces() as $ns) {
@@ -133,6 +141,13 @@ class AppKitModuleUtil extends AppKitSingleton {
         return $out;
     }
 
+    /**
+     * Append all attributes from modules to the request data from the
+     * agavi execution container
+     * @param AgaviExecutionContainer $container
+     * @param array $which_subkeys
+     * @param string $ns
+     */
     public function applyToRequestAttributes(AgaviExecutionContainer $container, array $which_subkeys=null, $ns=self::DEFAULT_NAMESPACE) {
         if ($which_subkeys===null) {
             $which_subkeys = self::$default_config_keys;
