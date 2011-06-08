@@ -10,7 +10,6 @@ class AppKitXmlUtil {
 	 */
 	public static function extractEntryNode(AgaviXmlConfigDomDocument $document, $query) {
 		$list = $document->getXPath()->query($query);
-		
 		if ($list instanceof DOMNodeList && $list->length==1) {
 			return $list->item(0);
 		}
@@ -28,6 +27,9 @@ class AppKitXmlUtil {
 	public static function includeXmlFilesToTarget(AgaviXmlConfigDomDocument $document, $query, $pointer, array $files) {
 		$targetNode = self::extractEntryNode($document, $query);
 		
+		if ($targetNode === null) {
+		    return;
+		}
 		
 		foreach ($files as $file) {
 			$node = self::createXIncludeNode($document, $file, $pointer);

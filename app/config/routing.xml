@@ -5,11 +5,11 @@
 
 			<!-- INDEX -->
 			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
+			
 			<route name="modules" pattern="^/modules" stop="false">
 				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='web']/node())">
 					<xi:fallback></xi:fallback>
 				</xi:include>
-
 			</route>
 			<!--
 				* AppKit routes
@@ -210,21 +210,35 @@
 	</ae:configuration>
 	
 	<ae:configuration context="console">
-		<route name="modules" pattern="^/modules">	
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='console']/node())">
-					<xi:fallback></xi:fallback>
-			</xi:include>
-		</route>
-
+		<routes>
+			<route name="modules" pattern="^/modules">	
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='console']/node())">
+						<xi:fallback></xi:fallback>
+				</xi:include>
+			</route>
+		</routes>
 	</ae:configuration>
 	
 	<ae:configuration context="soap">
-		<route name="modules" pattern="^/modules">	
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='soap']/node())">
-					<xi:fallback></xi:fallback>
-			</xi:include>
-		</route>
-		<route name="serviceMain" pattern="getIcingaAPI" action="Icinga.ApiSearch" module="Web"/>		
+		<routes>
+			<route name="modules" pattern="^/modules">	
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='soap']/node())">
+						<xi:fallback></xi:fallback>
+				</xi:include>
+			</route>
+			
+			<route name="serviceMain" pattern="getIcingaAPI" action="Icinga.ApiSearch" module="Web"/>
+		</routes>
+	</ae:configuration>
+	
+	<ae:configuration context="testing">
+		<routes>
+			<route name="modules" pattern="^/modules">	
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='testing']/node())">
+						<xi:fallback></xi:fallback>
+				</xi:include>
+			</route>
+		</routes>
 	</ae:configuration>
 		
 </ae:configurations>

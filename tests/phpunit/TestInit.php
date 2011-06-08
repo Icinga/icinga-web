@@ -9,6 +9,8 @@ class IcingaWebTestTool {
     
     private static $properties = null;
     
+    private static $context = null;
+    
     public static function initialize() {
         self::$path_test = __DIR__;
         self::$path_root = dirname(dirname(__DIR__));
@@ -50,6 +52,23 @@ class IcingaWebTestTool {
         }
         
         return $default;
+    }
+    
+    public static function setContext(AgaviContext $ctx) {
+        self::$context = $ctx;
+    }
+    
+    /**
+     * Returns the singleton agavi context for this testing session
+     * @throws Exception
+     * @return AgaviContext
+     */
+    public static function getContext() {
+        if (!self::$context instanceof AgaviContext) {
+            throw new Exception("No context previously set");
+        }
+        
+        return self::$context;
     }
 
  	/**
@@ -99,7 +118,7 @@ class IcingaWebTestBootstrap {
      * @param string $env	Name of the context
      * @return AgaviContext	The created context
      */
-    public function bootstrapAgavi($env='testing') {
+    public function bootstrapAgavi($env='testing', array $modules=array()) {
         
         require IcingaWebTestTool::getRootPath(). '/lib/agavi/src/agavi.php';
         
@@ -113,6 +132,10 @@ class IcingaWebTestBootstrap {
     	
     	AgaviConfig::set('core.default_context', $env);
     	
+    	$init_modules = AgaviConfig::get('org.icinga.appkit.init_modules', array());
+    	$init_modules = array_merge($init_modules, $modules);
+    	AgaviConfig::set('org.icinga.appkit.init_modules', $init_modules, true);
+    	
     	AppKitAgaviUtil::initializeModule('AppKit');
     	
     	AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
@@ -123,7 +146,10 @@ class IcingaWebTestBootstrap {
 }
 
 IcingaWebTestTool::initialize();
-IcingaWebTestBootstrap::bootstrapAgavi();
+IcingaWebTestTool::setContext(IcingaWebTestBootstrap::bootstrapAgavi(
+    'testing',
+    array('TestDummy')
+));
 
 function info($str) {
 	//print("\x1b[2;34m".$str."\x1b[m");

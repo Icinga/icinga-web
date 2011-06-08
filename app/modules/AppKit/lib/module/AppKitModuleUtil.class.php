@@ -47,7 +47,6 @@ class AppKitModuleUtil extends AppKitSingleton {
 
     public static function validConfig($module) {
         AppKitModuleUtil::normalizeModuleName($module);
-
         if (AgaviConfig::get(sprintf('modules.%s.version', false)) !== false) {
             return true;
         }
@@ -62,7 +61,7 @@ class AppKitModuleUtil extends AppKitSingleton {
 
     /**
      *
-     * @param <type> $module
+     * @param string $module
      * @return AppKitModuleConfigItem
      */
     public function registerModule($module) {
@@ -76,7 +75,7 @@ class AppKitModuleUtil extends AppKitSingleton {
 
     /**
      *
-     * @param <type> $module
+     * @param string $module
      * @return AppKitModuleConfigItem
      */
     public function getConfigObject($module) {
