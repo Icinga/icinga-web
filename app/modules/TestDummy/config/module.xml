@@ -27,6 +27,13 @@
 				<setting name="appkit_module.agavi.include_xml.databases">
 					<ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
 				</setting>
+				
+				<!-- 
+					Adding module specific cronks
+				-->
+				<setting name="appkit_module.agavi.include_xml.cronks">
+					<ae:parameter>%core.module_dir%/TestDummy/config/cronks.xml</ae:parameter>
+				</setting>
 
 			</settings>
 		</module>

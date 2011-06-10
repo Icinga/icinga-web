@@ -8,5 +8,7 @@
 		
 		<autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
 		
+		<autoload name="CronkModuleConfigHandler">%core.module_dir%/Cronks/lib/config/CronkModuleConfigHandler.class.php</autoload>
+		
 	</ae:configuration>
 </ae:configurations>

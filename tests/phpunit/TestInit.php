@@ -70,6 +70,31 @@ class IcingaWebTestTool {
         
         return self::$context;
     }
+    
+    /**
+     * Creates a valid user session for testing purposes
+     * @param string $username The username to login
+     * @param string $password The corresponding password
+     * @param boolean $force If a user is already logged in, force relogin
+     * @throws AgaviSecurityException If the login fails
+     * @return boolean
+     */
+    public static function authenticateTestUser($username=false, $password=false, $force=false) {
+        $ctx = self::getContext();
+        $user = $ctx->getUser();
+        
+        if (!$user->isAuthenticated() || $force===true) {
+            $username = ($username==false) ? self::getProperty('testLogin-name') : $username;
+            $password = ($password==false) ? self::getProperty('testLogin-pass') : $password;
+            $user->doLogin($username, $password);
+        }
+        
+        if ($user->isAuthenticated()) {
+            return true;
+        }
+        
+        return false;
+    }
 
  	/**
 	*	Asserts that $actual is of instance $expected, use instead of the one defined

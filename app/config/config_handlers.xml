@@ -13,7 +13,7 @@
 				<validation>%core.agavi_dir%/config/xsd/databases.xsd</validation>
 				<transformation>%core.agavi_dir%/config/xsl/databases.xsl</transformation>
 			</handler>
-		
+			
 		</handlers>
 	</ae:configuration>
 </ae:configurations>

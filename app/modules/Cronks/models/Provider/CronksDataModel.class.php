@@ -25,6 +25,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                                         'roles'		=> 'groupsonly',
                                     );
 
+    private static $xml_cronk_data = array ();
+    
+    private static $xml_category_data = array ();
+    
+    private static $xml_ready = false;
+                                    
     private $cronks = array();
 
     /**
@@ -42,8 +48,6 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
      */
     private $agaviUser = null;
 
-    private $categories = array();
-
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
 
@@ -55,12 +59,34 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         } else {
             throw new AppKitModelException('The model need an authenticated user');
         }
-
-        if ($this->hasParameter('categories')) {
-            $this->setCategories($this->getParameter('categores'));
-        }
+        
+        $this->initializeXmlData();
 
         $this->cronks = $this->getCronks(true);
+    }
+    
+    /**
+     * Fills the static xml cache variables with agavi config cache data of
+     * cronks and categories. This method is called only if the first instance
+     * of this model is initiated
+     * @throws AgaviParseException If XML parsin fails
+     * @return boolean If cache is parsed
+     */
+    private function initializeXmlData() {
+        
+        if (self::$xml_ready===true) {
+            return true;
+        }
+        
+        $xml_files = AppKitModuleUtil::getInstance()->getSubConfig('agavi.include_xml.cronks');
+        
+        foreach ($xml_files as $file) {
+            $tmp = include(AgaviConfigCache::checkConfig($file));
+            self::$xml_cronk_data = (array)$tmp[0] + self::$xml_cronk_data;
+            self::$xml_category_data = (array)$tmp[1] + self::$xml_category_data;
+        }
+        
+        return self::$xml_ready=true;
     }
 
     public function hasCronk($cronkid) {
@@ -71,24 +97,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         return $this->cronks[$cronkid];
     }
 
-    public function setCategories($list) {
-        if (is_array($list)) {
-            $this->categories = $list;
-        } else {
-            $this->categories = AppKitArrayUtil::trimSplit($list, ',');
-        }
-
-        return true;
-    }
-
     public function setPrincipals(array $p) {
         $this->principals = $p;
     }
 
-    private function getXMLCategories() {
-        $categories = AgaviConfig::get('modules.cronks.categories');
+    private function getXmlCategories() {
         $out = array();
-        foreach($categories as $cid=>$category) {
+        foreach(self::$xml_category_data as $cid=>$category) {
             $out[ $cid ] = array(
                                'catid'		=> $cid,
                                'title'		=> $category['title'],
@@ -141,7 +156,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         }
 
         $cronks = $this->getCronks(true);
-        $categories = $this->getXMLCategories();
+        $categories = $this->getXmlCategories();
         $categories = (array)$this->getDbCategories($get_all) + $categories;
 
         AppKitArrayUtil::subSort($categories, 'title');
@@ -236,11 +251,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     }
 
     private function getXmlCronks($all=false) {
-        $cronks = AgaviConfig::get('modules.cronks.cronks');
-
         $out = array();
 
-        foreach($cronks as $uid=>$cronk) {
+        foreach(self::$xml_cronk_data as $uid=>$cronk) {
 
             if (isset($cronk['groupsonly']) && $this->checkGroups($cronk['groupsonly']) !== true) {
                 continue;

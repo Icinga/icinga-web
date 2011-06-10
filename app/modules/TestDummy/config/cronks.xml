@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
+	<ae:configuration>
+		<cronks>
+			<cronk name="dummyTestCronk1">
+				<ae:parameter name="module">TestDummy</ae:parameter>
+				<ae:parameter name="action">TestAction</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Test Cronk 1</ae:parameter>
+				<ae:parameter name="name">Test Cronk 1</ae:parameter>
+				<ae:parameter name="categories">dummy_test_category1</ae:parameter>
+				<ae:parameter name="image">cronks.Dots</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="p1">v1</ae:parameter>
+					<ae:parameter name="p2">v2</ae:parameter>
+				</ae:parameter>
+			</cronk>
+			
+			<cronk name="dummyTestCronk2">
+				<ae:parameter name="module">TestDummy</ae:parameter>
+				<ae:parameter name="action">TestAction</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Test Cronk 2</ae:parameter>
+				<ae:parameter name="name">Test Cronk 2</ae:parameter>
+				<ae:parameter name="categories">6564_NOT_EXISTING_CATEGORY_123123</ae:parameter>
+				<ae:parameter name="image">cronks.Dots</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="p1">v1</ae:parameter>
+					<ae:parameter name="p2">v2</ae:parameter>
+				</ae:parameter>
+			</cronk>
+			
+			<cronk name="dummyTestCronk3">
+				<ae:parameter name="module">TestDummy</ae:parameter>
+				<ae:parameter name="action">TestAction</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Test Cronk 3</ae:parameter>
+				<ae:parameter name="name">Test Cronk 3</ae:parameter>
+				<ae:parameter name="categories">dummy_test_category1</ae:parameter>
+				<ae:parameter name="image">cronks.Dots</ae:parameter>
+				<ae:parameter name="groupsonly">123123_NOT_EXISTING_GROUP_123123</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="p1">v1</ae:parameter>
+					<ae:parameter name="p2">v2</ae:parameter>
+				</ae:parameter>
+			</cronk>
+			
+			<cronk name="dummyTestCronk4">
+				<ae:parameter name="module">TestDummy</ae:parameter>
+				<ae:parameter name="action">TestAction</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Test Cronk 3</ae:parameter>
+				<ae:parameter name="name">Test Cronk 3</ae:parameter>
+				<ae:parameter name="categories">dummy_test_category1</ae:parameter>
+				<ae:parameter name="image">cronks.Dots</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="p1">v1</ae:parameter>
+					<ae:parameter name="p2">v2</ae:parameter>
+				</ae:parameter>
+			</cronk>
+			
+			<cronk name="dummyTestCronk5">
+				<ae:parameter name="module">TestDummy</ae:parameter>
+				<ae:parameter name="action">TestAction</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="disabled">true</ae:parameter>
+				<ae:parameter name="description">Test Cronk 3</ae:parameter>
+				<ae:parameter name="name">Test Cronk 3</ae:parameter>
+				<ae:parameter name="categories">dummy_test_category1</ae:parameter>
+				<ae:parameter name="image">cronks.Dots</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="p1">v1</ae:parameter>
+					<ae:parameter name="p2">v2</ae:parameter>
+				</ae:parameter>
+			</cronk>
+		</cronks>
+		
+		<categories>
+			<category name="dummy_test_category1">
+				<ae:parameter name="title">TestCategory</ae:parameter>
+				<ae:parameter name="visible">true</ae:parameter>
+				<ae:parameter name="position">10</ae:parameter>
+			</category>
+			
+			<category name="dummy_test_category2">
+				<ae:parameter name="title">TestCategory</ae:parameter>
+				<ae:parameter name="visible">true</ae:parameter>
+				<ae:parameter name="position">10</ae:parameter>
+			</category>
+		</categories>
+	</ae:configuration>
+</ae:configurations>

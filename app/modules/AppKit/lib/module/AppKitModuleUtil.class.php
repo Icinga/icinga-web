@@ -22,7 +22,8 @@ class AppKitModuleUtil extends AppKitSingleton {
 
             // Namespaces for XML includes
             'agavi.include_xml.routing'     => self::DATA_FLAT,
-            'agavi.include_xml.databases'	=> self::DATA_FLAT
+            'agavi.include_xml.databases'	=> self::DATA_FLAT,
+    		'agavi.include_xml.cronks'      => self::DATA_FLAT
     );
 
     private $modules = null;

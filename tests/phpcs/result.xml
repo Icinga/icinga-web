@@ -187,6 +187,8 @@
   <error line="5" column="1" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="6" column="1" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/database/IcingaDoctrine_Query.class.php">
+ </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/database/models/IcingaAcknowledgements.php">
   <error line="13" column="1" severity="error" message="Type is missing for file: class; expected IcingaAcknowledgements.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
@@ -877,18 +879,119 @@
   <error line="18" column="10" severity="error" message="Type is missing for file: class; expected BaseIcingaTimeperiods.class.php" source="YACS.Classes.ClassFileName.NoType"/>
   <error line="20" column="112" severity="warning" message="Line exceeds 80 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/AbstractDataStoreModel.class.php">
+  <error line="4" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="6" column="10" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="7" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="12" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="13" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="18" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="19" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="24" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="25" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="30" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="31" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="41" column="1" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="46" column="59" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="46" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="56" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="57" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="58" column="27" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="67" column="1" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="70" column="1" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="71" column="1" severity="warning" message="Line exceeds 80 characters; contains 119 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="73" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="74" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="77" column="94" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="78" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="79" column="110" severity="warning" message="Line exceeds 80 characters; contains 109 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="82" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="88" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="90" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="95" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="97" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="99" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="100" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/DataStoreFilterModifier.class.php">
+  <error line="1" column="1" severity="error" message="Short PHP opening tag used; expected &quot;&lt;?php&quot; but found &quot;&lt;?&quot;" source="Generic.PHP.DisallowShortOpenTag.Found"/>
+  <error line="3" column="10" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="3" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="4" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="22" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="38" column="1" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="43" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="43" column="12" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="46" column="9" severity="error" message="Expected &quot;} else {\n&quot;; found &quot;}\n        else {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="65" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="65" column="33" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="67" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="69" column="17" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="72" column="21" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="73" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="73" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="73" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="75" column="55" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="78" column="17" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="78" column="37" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="88" column="32" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="88" column="32" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/filter/GenericStoreFilter.class.php">
+  <error line="16" column="10" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="16" column="10" severity="error" message="Class method GenericStoreFilter::parse must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="17" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="43" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="77" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="83" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="84" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="85" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="89" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="93" column="1" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="101" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/filter/GenericStoreFilterGroup.class.php">
+  <error line="5" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="5" column="1" severity="error" message="Class method GenericStoreFilterGroup::parse must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="6" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="19" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="21" column="11" severity="error" message="Expected &quot;} else if (...) {\n&quot;; found &quot;} else if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="21" column="16" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="21" column="19" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="24" column="85" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="43" column="1" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="48" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="50" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="52" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="54" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="54" column="13" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="54" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="58" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="61" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="61" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="69" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="71" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="78" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/filter/StoreFilterBase.class.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/filter/StoreFilterField.class.php">
+  <error line="4" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="15" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="16" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/datastore/interfaces/IDataStoreModifier.php">
+  <error line="7" column="1" severity="error" message="Type is missing for file: interface; expected IDataStoreModifier.interface.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="8" column="1" severity="error" message="Open brace for interface must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="14" column="1" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/model/ApiDataRequestBaseModel.class.php">
-  <error line="2" column="1" severity="error" message="Class method IcingaDoctrine_Query::create must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="3" column="43" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="3" column="58" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="9" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="14" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
-  <error line="14" column="1" severity="error" message="Class method ApiDataRequestBaseModel::applySecurityPrincipals must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="26" column="1" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="30" column="58" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="45" column="57" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="50" column="49" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="50" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="2" column="1" severity="error" message="Class method ApiDataRequestBaseModel::applySecurityPrincipals must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="14" column="1" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="18" column="58" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="34" column="57" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="39" column="49" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="39" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/model/IcingaApiBaseModel.class.php">
  </file>
@@ -901,51 +1004,51 @@
   <error line="9" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
   <error line="14" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
   <error line="15" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="24" column="20" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="27" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="29" column="28" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="31" column="28" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="38" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="38" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="43" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="44" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="44" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="49" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="49" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="50" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="50" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="55" column="82" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="55" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="56" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="56" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="61" column="82" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="61" column="121" severity="warning" message="Line exceeds 80 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="62" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="62" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="67" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="67" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="68" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="68" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="73" column="79" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="73" column="116" severity="warning" message="Line exceeds 80 characters; contains 115 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="74" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="74" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="79" column="77" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="79" column="118" severity="warning" message="Line exceeds 80 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="80" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="80" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="85" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="85" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="86" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="86" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="91" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="93" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="95" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="95" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="97" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="97" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="102" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="102" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="25" column="20" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="28" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="30" column="28" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="32" column="28" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="39" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="39" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="44" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="45" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="45" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="50" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="50" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="51" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="51" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="56" column="82" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="56" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="57" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="57" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="62" column="82" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="62" column="121" severity="warning" message="Line exceeds 80 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="63" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="63" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="68" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="68" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="69" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="69" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="74" column="79" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="74" column="116" severity="warning" message="Line exceeds 80 characters; contains 115 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="75" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="75" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="80" column="77" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="80" column="118" severity="warning" message="Line exceeds 80 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="81" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="81" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="86" column="52" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="86" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="87" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="87" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="92" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="94" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="96" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="96" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="98" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="98" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="103" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="103" column="31" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/models/ApiHostgroupRequestModel.class.php">
   <error line="8" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
@@ -1077,38 +1180,39 @@
   <error line="81" column="29" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
   <error line="86" column="37" severity="error" message="Expected a single space character between closing parenthesis and opening brace; found 	" source="Generic.Functions.OpeningFunctionBraceKernighanRitchie.SpaceBeforeBrace"/>
   <error line="90" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="103" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="118" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="122" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="169" column="33" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="169" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="170" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="170" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="171" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="171" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="172" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="172" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="175" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="176" column="22" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="176" column="22" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="182" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="187" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="187" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="187" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="194" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="195" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="196" column="17" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="208" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="223" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="228" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="245" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="107" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="122" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="126" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="173" column="33" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="173" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="174" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="174" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="175" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="175" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="176" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="176" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="179" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="180" column="22" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="180" column="22" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="186" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="191" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="191" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="191" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="198" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="200" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="201" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="202" column="17" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="214" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="229" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="234" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
   <error line="251" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="267" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="272" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="277" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="288" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="293" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="299" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="257" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="273" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="278" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="283" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="294" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="299" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="305" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/models/Console/ConsoleInterfaceModel.class.php">
   <error line="3" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
@@ -1180,6 +1284,81 @@
   <error line="153" column="49" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
   <error line="153" column="49" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
   <error line="153" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/models/Store/IcingaApiDataStoreModel.class.php">
+  <error line="4" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="18" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="23" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="26" column="26" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="26" column="34" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="30" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="30" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="31" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="31" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="35" column="86" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="36" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="38" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="42" column="57" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="42" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="53" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="54" column="13" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="54" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="56" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="59" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/models/Store/Modifiers/StoreFilterModifierModel.class.php">
+  <error line="2" column="1" severity="error" message="Class method ApiStoreFilter::parse must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="4" column="1" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="13" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="13" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="13" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="21" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="21" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="21" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="30" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="30" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="32" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="32" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="37" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="47" column="22" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="51" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="52" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="53" column="17" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="54" column="30" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="54" column="30" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="60" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="60" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="67" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="68" column="25" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="76" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="76" column="1" severity="error" message="Class method ApiStoreFilterGroup::parse must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="78" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="78" column="41" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="78" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="84" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="85" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="93" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="93" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="94" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="109" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/models/Store/Modifiers/StoreTargetModifierModel.class.php">
+  <error line="3" column="105" severity="warning" message="Line exceeds 80 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="4" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="22" column="17" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="27" column="17" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="28" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="30" column="17" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="31" column="21" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="32" column="120" severity="warning" message="Line exceeds 80 characters; contains 119 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="33" column="21" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="33" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="34" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="51" column="20" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="54" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="56" column="13" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="57" column="17" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="58" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/templates/ApiCommandError.php">
  </file>
@@ -1462,6 +1641,96 @@
   <error line="91" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="114" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
  </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/config/AppKitApiProviderParser.class.php">
+  <error line="2" column="1" severity="warning" message="Duplicate class name &quot;AppKitApiProviderParser&quot; found; first defined in /data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/context/AppKitApiProviderParser.class.php on line 2" source="Generic.Classes.DuplicateClassName.Found"/>
+  <error line="8" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="10" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="11" column="27" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="11" column="93" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="12" column="35" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="12" column="35" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="13" column="20" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="18" column="88" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="37" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="38" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="40" column="1" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="43" column="1" severity="warning" message="Line exceeds 80 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="47" column="1" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="55" column="1" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="63" column="1" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="69" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="70" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="74" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="74" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="77" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="78" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/config/AppKitDatabaseConfigHandler.class.php">
+  <error line="10" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="15" column="200" severity="error" message="Line exceeds maximum limit of 160 characters; contains 199 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="16" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/config/AppKitRoutingHandler.class.php">
+  <error line="3" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="5" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="14" column="1" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="43" column="231" severity="error" message="Line exceeds maximum limit of 160 characters; contains 230 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="44" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="53" column="1" severity="warning" message="Line exceeds 80 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="54" column="1" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="55" column="1" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="69" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="70" column="13" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="80" column="1" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="90" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="92" column="13" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="96" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="96" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="100" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="112" column="1" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="113" column="1" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="119" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="120" column="18" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="121" column="129" severity="warning" message="Line exceeds 80 characters; contains 128 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="123" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="124" column="18" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="125" column="129" severity="warning" message="Line exceeds 80 characters; contains 128 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="127" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="132" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="132" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="133" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php">
+  <error line="4" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="5" column="110" severity="warning" message="Line exceeds 80 characters; contains 109 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="10" column="15" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="10" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="12" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="13" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="14" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="14" column="14" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="14" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="15" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="16" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="17" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="18" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="18" column="7" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="18" column="84" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="19" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="20" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="21" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="22" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="22" column="32" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="24" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="27" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="31" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="37" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="47" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="48" column="25" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="49" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="57" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="58" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/context/AppKitAgaviContext.class.php">
   <error line="7" column="1" severity="error" message="Class method AppKitAgaviContext::setLanguageDomain must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="43" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -1478,9 +1747,70 @@
   <error line="138" column="124" severity="warning" message="Line exceeds 80 characters; contains 123 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="141" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/context/AppKitApiProviderParser.class.php">
+  <error line="3" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="4" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="5" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="7" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="8" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="8" column="3" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="9" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="9" column="18" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="9" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="10" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="10" column="11" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="10" column="11" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="11" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="12" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="13" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="14" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="14" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="15" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="15" column="3" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="16" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="17" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="18" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="19" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="20" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="21" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="22" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="23" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="24" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="25" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="26" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="27" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="28" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="29" column="1" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="39" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="40" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="41" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="42" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="43" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="43" column="3" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="44" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="45" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="47" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="48" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="48" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="48" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="49" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="50" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="51" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="51" column="3" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="52" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="52" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="53" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="55" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="56" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="57" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="58" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="59" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="60" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+ </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/AppKitSQLConstants.class.php">
   <error line="3" column="1" severity="error" message="Class method AppKitSQLConstants::getOperator must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="3" column="1" severity="error" message="Class method AppKitSQLConstants::getIcingaMatch must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="3" column="1" severity="error" message="Class method AppKitSQLConstants::getInternalDB must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="3" column="1" severity="error" message="Class method AppKitSQLConstants::getArrayContent must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="32" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="33" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -1492,7 +1822,7 @@
   <error line="39" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/Cronk.php">
-  <error line="14" column="1" severity="error" message="Type is missing for file: class; expected Cronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="15" column="1" severity="error" message="Type is missing for file: class; expected Cronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/CronkCategory.php">
   <error line="13" column="1" severity="error" message="Type is missing for file: class; expected CronkCategory.class.php" source="YACS.Classes.ClassFileName.NoType"/>
@@ -1501,7 +1831,7 @@
   <error line="13" column="1" severity="error" message="Type is missing for file: class; expected CronkCategoryCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/CronkPrincipalCronk.php">
-  <error line="13" column="1" severity="error" message="Type is missing for file: class; expected CronkPrincipalCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="14" column="1" severity="error" message="Type is missing for file: class; expected CronkPrincipalCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/NsmDbVersion.php">
   <error line="2" column="1" severity="warning" message="Duplicate class name &quot;NsmDbVersion&quot; found; first defined in /data/users/mhein/workspaces/icinga/icinga-web/app/modules/Api/lib/database/models/NsmDbVersion.php on line 2" source="Generic.Classes.DuplicateClassName.Found"/>
@@ -1575,113 +1905,117 @@
   <error line="6" column="1" severity="error" message="Type is missing for file: class; expected NsmUserRole.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseCronk.php">
-  <error line="24" column="10" severity="error" message="Type is missing for file: class; expected BaseCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="26" column="10" severity="error" message="Type is missing for file: class; expected BaseCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseCronkCategory.php">
-  <error line="20" column="10" severity="error" message="Type is missing for file: class; expected BaseCronkCategory.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="21" column="10" severity="error" message="Type is missing for file: class; expected BaseCronkCategory.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseCronkCategoryCronk.php">
-  <error line="17" column="10" severity="error" message="Type is missing for file: class; expected BaseCronkCategoryCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="2" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="19" column="10" severity="error" message="Type is missing for file: class; expected BaseCronkCategoryCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseCronkPrincipalCronk.php">
-  <error line="17" column="10" severity="error" message="Type is missing for file: class; expected BaseCronkPrincipalCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="2" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="19" column="10" severity="error" message="Type is missing for file: class; expected BaseCronkPrincipalCronk.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmDbVersion.php">
-  <error line="6" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmDbVersion.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="6" column="10" severity="error" message="Class method BaseNsmDbVersion::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="7" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmDbVersion.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="7" column="10" severity="error" message="Class method BaseNsmDbVersion::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmLog.php">
-  <error line="18" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmLog.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="21" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmLog.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmPrincipal.php">
-  <error line="21" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmPrincipal.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="21" column="10" severity="error" message="Class method BaseNsmPrincipal::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="21" column="10" severity="error" message="Class method BaseNsmPrincipal::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="71" column="9" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="72" column="9" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="96" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="97" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="23" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmPrincipal.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="23" column="10" severity="error" message="Class method BaseNsmPrincipal::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="23" column="10" severity="error" message="Class method BaseNsmPrincipal::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="73" column="9" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="74" column="9" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="98" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="99" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="100" column="122" severity="warning" message="Line exceeds 80 characters; contains 121 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="100" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="101" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="102" column="122" severity="warning" message="Line exceeds 80 characters; contains 121 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmPrincipalTarget.php">
-  <error line="19" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmPrincipalTarget.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="19" column="10" severity="error" message="Class method BaseNsmPrincipalTarget::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="19" column="10" severity="error" message="Class method BaseNsmPrincipalTarget::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="50" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="51" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="51" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="76" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="77" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="2" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="21" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmPrincipalTarget.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="21" column="10" severity="error" message="Class method BaseNsmPrincipalTarget::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="21" column="10" severity="error" message="Class method BaseNsmPrincipalTarget::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="52" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="53" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="53" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="78" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="79" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="80" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="81" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="82" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="83" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="84" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="80" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="81" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="82" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="83" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="84" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="85" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="86" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="86" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="87" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="88" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmRole.php">
-  <error line="23" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmRole.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="23" column="10" severity="error" message="Class method BaseNsmRole::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="23" column="10" severity="error" message="Class method BaseNsmRole::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="107" column="156" severity="warning" message="Line exceeds 80 characters; contains 155 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="108" column="129" severity="warning" message="Line exceeds 80 characters; contains 128 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="109" column="145" severity="warning" message="Line exceeds 80 characters; contains 144 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="110" column="124" severity="warning" message="Line exceeds 80 characters; contains 123 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="25" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmRole.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="25" column="10" severity="error" message="Class method BaseNsmRole::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="25" column="10" severity="error" message="Class method BaseNsmRole::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="109" column="156" severity="warning" message="Line exceeds 80 characters; contains 155 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="110" column="129" severity="warning" message="Line exceeds 80 characters; contains 128 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="111" column="145" severity="warning" message="Line exceeds 80 characters; contains 144 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="112" column="124" severity="warning" message="Line exceeds 80 characters; contains 123 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmSession.php">
-  <error line="20" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmSession.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="22" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmSession.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmTarget.php">
-  <error line="19" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmTarget.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="19" column="10" severity="error" message="Class method BaseNsmTarget::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="19" column="10" severity="error" message="Class method BaseNsmTarget::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="79" column="217" severity="error" message="Line exceeds maximum limit of 160 characters; contains 216 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="80" column="226" severity="error" message="Line exceeds maximum limit of 160 characters; contains 225 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="81" column="245" severity="error" message="Line exceeds maximum limit of 160 characters; contains 244 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="82" column="251" severity="error" message="Line exceeds maximum limit of 160 characters; contains 250 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="83" column="234" severity="error" message="Line exceeds maximum limit of 160 characters; contains 233 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="84" column="201" severity="error" message="Line exceeds maximum limit of 160 characters; contains 200 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="85" column="200" severity="error" message="Line exceeds maximum limit of 160 characters; contains 199 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="86" column="159" severity="warning" message="Line exceeds 80 characters; contains 158 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="87" column="173" severity="error" message="Line exceeds maximum limit of 160 characters; contains 172 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="88" column="172" severity="error" message="Line exceeds maximum limit of 160 characters; contains 171 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="89" column="167" severity="error" message="Line exceeds maximum limit of 160 characters; contains 166 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="90" column="171" severity="error" message="Line exceeds maximum limit of 160 characters; contains 170 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="91" column="181" severity="error" message="Line exceeds maximum limit of 160 characters; contains 180 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="92" column="218" severity="error" message="Line exceeds maximum limit of 160 characters; contains 217 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="93" column="191" severity="error" message="Line exceeds maximum limit of 160 characters; contains 190 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="94" column="178" severity="error" message="Line exceeds maximum limit of 160 characters; contains 177 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="95" column="184" severity="error" message="Line exceeds maximum limit of 160 characters; contains 183 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="96" column="197" severity="error" message="Line exceeds maximum limit of 160 characters; contains 196 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="21" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmTarget.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="21" column="10" severity="error" message="Class method BaseNsmTarget::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="21" column="10" severity="error" message="Class method BaseNsmTarget::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="81" column="217" severity="error" message="Line exceeds maximum limit of 160 characters; contains 216 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="82" column="226" severity="error" message="Line exceeds maximum limit of 160 characters; contains 225 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="83" column="245" severity="error" message="Line exceeds maximum limit of 160 characters; contains 244 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="84" column="251" severity="error" message="Line exceeds maximum limit of 160 characters; contains 250 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="85" column="234" severity="error" message="Line exceeds maximum limit of 160 characters; contains 233 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="86" column="201" severity="error" message="Line exceeds maximum limit of 160 characters; contains 200 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="87" column="200" severity="error" message="Line exceeds maximum limit of 160 characters; contains 199 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="88" column="159" severity="warning" message="Line exceeds 80 characters; contains 158 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="89" column="173" severity="error" message="Line exceeds maximum limit of 160 characters; contains 172 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="90" column="172" severity="error" message="Line exceeds maximum limit of 160 characters; contains 171 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="91" column="167" severity="error" message="Line exceeds maximum limit of 160 characters; contains 166 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="92" column="171" severity="error" message="Line exceeds maximum limit of 160 characters; contains 170 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="93" column="181" severity="error" message="Line exceeds maximum limit of 160 characters; contains 180 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="94" column="218" severity="error" message="Line exceeds maximum limit of 160 characters; contains 217 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="95" column="191" severity="error" message="Line exceeds maximum limit of 160 characters; contains 190 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="96" column="178" severity="error" message="Line exceeds maximum limit of 160 characters; contains 177 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="97" column="184" severity="error" message="Line exceeds maximum limit of 160 characters; contains 183 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="98" column="197" severity="error" message="Line exceeds maximum limit of 160 characters; contains 196 characters" source="Generic.Files.LineLength.MaxExceeded"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmTargetValue.php">
-  <error line="17" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmTargetValue.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="18" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmTargetValue.class.php" source="YACS.Classes.ClassFileName.NoType"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmUser.php">
-  <error line="30" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmUser.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="30" column="10" severity="error" message="Class method BaseNsmUser::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="30" column="10" severity="error" message="Class method BaseNsmUser::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="162" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="162" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="190" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="191" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="31" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmUser.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="31" column="10" severity="error" message="Class method BaseNsmUser::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="31" column="10" severity="error" message="Class method BaseNsmUser::getPgsqlSequenceOffsets must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="163" column="16" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="163" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="191" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="192" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmUserPreference.php">
-  <error line="21" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmUserPreference.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="84" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="85" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="105" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
-  <error line="105" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="2" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="23" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmUserPreference.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="86" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="87" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="107" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="107" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/database/models/generated/BaseNsmUserRole.php">
-  <error line="17" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmUserRole.class.php" source="YACS.Classes.ClassFileName.NoType"/>
-  <error line="17" column="10" severity="error" message="Class method BaseNsmUserRole::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="36" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="18" column="10" severity="error" message="Type is missing for file: class; expected BaseNsmUserRole.class.php" source="YACS.Classes.ClassFileName.NoType"/>
+  <error line="18" column="10" severity="error" message="Class method BaseNsmUserRole::getInitialData must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="37" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/date/AppKitDateTime.class.php">
   <error line="30" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
@@ -3367,22 +3701,23 @@
   <error line="7" column="1" severity="error" message="Class method AppKitModuleUtil::getInstance must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="7" column="1" severity="error" message="Class method AppKitModuleUtil::normalizeModuleName must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="7" column="1" severity="error" message="Class method AppKitModuleUtil::validConfig must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="69" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="87" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="92" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="93" column="17" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="105" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="109" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="131" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="132" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="137" column="139" severity="warning" message="Line exceeds 80 characters; contains 138 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="144" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="152" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="161" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
-  <error line="177" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="179" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="183" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="215" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="26" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="70" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="88" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="93" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="94" column="17" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="113" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="117" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="139" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="140" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="152" column="139" severity="warning" message="Line exceeds 80 characters; contains 138 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="159" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="167" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="176" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="192" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="194" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="198" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="230" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php">
   <error line="10" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -3530,11 +3865,64 @@
   <error line="3" column="1" severity="error" message="Class method AppKitXmlUtil::extractEntryNode must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="3" column="1" severity="error" message="Class method AppKitXmlUtil::createXIncludeNode must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
   <error line="3" column="1" severity="error" message="Class method AppKitXmlUtil::includeXmlFilesToTarget must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
-  <error line="11" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="19" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="20" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="28" column="122" severity="warning" message="Line exceeds 80 characters; contains 121 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="32" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="3" column="1" severity="error" message="Class method AppKitXmlUtil::getInheritedAttribute must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
+  <error line="4" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="5" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="6" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="12" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="12" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="13" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="14" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="15" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="16" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="17" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="18" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="19" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="25" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="25" column="99" severity="warning" message="Line exceeds 80 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="26" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="26" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="27" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="28" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="29" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="30" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="31" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="32" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="33" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="34" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="35" column="1" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="40" column="1" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="43" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="43" column="119" severity="warning" message="Line exceeds 80 characters; contains 118 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="44" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="45" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="46" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="47" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="48" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="49" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="50" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="51" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="52" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="53" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="54" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="56" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="57" column="1" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="65" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="66" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="67" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="68" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="68" column="3" severity="error" message="Expected &quot;do {\n...} while (...);\n&quot;; found &quot;do {		\n...} while(...);\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="69" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="69" column="4" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="70" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="71" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="72" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="73" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="74" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="75" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="75" column="11" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="77" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="78" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/util/JSMin.class.php">
   <error line="19" column="1" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -3592,6 +3980,42 @@
   <error line="711" column="17" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n\n                elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
   <error line="733" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="742" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/validator/AppKitJsonValidator.class.php">
+  <error line="7" column="1" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="26" column="1" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="31" column="1" severity="error" message="Only one interface or class is allowed in a file" source="YACS.Classes.SingleClass.MultipleClasses"/>
+  <error line="32" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="36" column="17" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="37" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="42" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="44" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="44" column="23" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="46" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="48" column="13" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="52" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="52" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="61" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="63" column="13" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="64" column="24" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="71" column="21" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="73" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="74" column="25" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) { \n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="75" column="29" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="75" column="40" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="78" column="30" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="78" column="34" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="84" column="21" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="85" column="32" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="88" column="35" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="91" column="21" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="91" column="25" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="92" column="32" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
+  <error line="106" column="9" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="107" column="13" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="112" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="115" column="9" severity="error" message="Inline control structures are not allowed" source="Generic.ControlStructures.InlineControlStructure.NotAllowed"/>
+  <error line="115" column="12" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/lib/validator/AppKitSoapFilterValidator.class.php">
   <error line="38" column="9" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while (...)  {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
@@ -3697,28 +4121,29 @@
   <error line="3" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="11" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="15" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="19" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="21" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="26" column="99" severity="warning" message="Line exceeds 80 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="27" column="132" severity="warning" message="Line exceeds 80 characters; contains 131 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="35" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="66" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="72" column="9" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n\n        elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="80" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="95" column="124" severity="warning" message="Line exceeds 80 characters; contains 123 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="107" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="119" column="148" severity="warning" message="Line exceeds 80 characters; contains 147 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="143" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="153" column="120" severity="warning" message="Line exceeds 80 characters; contains 119 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="157" column="163" severity="error" message="Line exceeds maximum limit of 160 characters; contains 162 characters" source="Generic.Files.LineLength.MaxExceeded"/>
-  <error line="161" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="175" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="176" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="179" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="183" column="128" severity="warning" message="Line exceeds 80 characters; contains 127 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="184" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="187" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="198" column="152" severity="warning" message="Line exceeds 80 characters; contains 151 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="18" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="24" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="26" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="31" column="99" severity="warning" message="Line exceeds 80 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="32" column="132" severity="warning" message="Line exceeds 80 characters; contains 131 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="40" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="71" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="77" column="9" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n\n        elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="85" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="100" column="124" severity="warning" message="Line exceeds 80 characters; contains 123 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="112" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="124" column="148" severity="warning" message="Line exceeds 80 characters; contains 147 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="148" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="158" column="120" severity="warning" message="Line exceeds 80 characters; contains 119 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="162" column="163" severity="error" message="Line exceeds maximum limit of 160 characters; contains 162 characters" source="Generic.Files.LineLength.MaxExceeded"/>
+  <error line="166" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="180" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="181" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="184" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="188" column="128" severity="warning" message="Line exceeds 80 characters; contains 127 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="189" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="192" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="203" column="152" severity="warning" message="Line exceeds 80 characters; contains 151 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/AppKit/models/Ext/ApplicationStateModel.class.php">
   <error line="3" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -4311,6 +4736,11 @@
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/config.php">
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/lib/action/CronksBaseAction.class.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/lib/config/CronkModuleConfigHandler.class.php">
+  <error line="18" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="26" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="30" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/lib/cronk/CronksRequestUtil.class.php">
   <error line="3" column="1" severity="error" message="Class method CronksRequestUtil::makeRequestDataStruct must have an accessor" source="YACS.Functions.FunctionDeclaration.NoAccessorFound"/>
@@ -8531,68 +8961,70 @@
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/models/Provider/CronksDataModel.class.php">
   <error line="13" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="14" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="47" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="56" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="91" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="95" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="96" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="97" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="123" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="127" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="129" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="139" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="150" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="152" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="153" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="168" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="188" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="212" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="228" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="243" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="245" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="249" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="249" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="252" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="255" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="255" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="258" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="259" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="268" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="269" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="270" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="271" column="104" severity="warning" message="Line exceeds 80 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="272" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="273" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="274" column="104" severity="warning" message="Line exceeds 80 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="275" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="276" column="110" severity="warning" message="Line exceeds 80 characters; contains 109 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="300" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="305" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="306" column="135" severity="warning" message="Line exceeds 80 characters; contains 134 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="307" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="308" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="309" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="310" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="311" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="312" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="313" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="315" column="118" severity="warning" message="Line exceeds 80 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="334" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="336" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="363" column="129" severity="warning" message="Line exceeds 80 characters; contains 128 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="372" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="384" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="459" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="482" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="493" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="511" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="521" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="536" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="545" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="554" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="577" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="580" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="581" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="51" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="60" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="81" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="86" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="106" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="110" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="111" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="112" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="138" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="142" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="144" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="154" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="165" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="167" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="168" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="183" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="203" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="227" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="243" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="256" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="258" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="262" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="262" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="265" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="268" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="268" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="271" column="13" severity="error" message="Expected &quot;} elseif (...) {\n&quot;; found &quot;}\n            elseif(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="272" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="281" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="282" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="283" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="284" column="104" severity="warning" message="Line exceeds 80 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="285" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="286" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="287" column="104" severity="warning" message="Line exceeds 80 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="288" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="289" column="110" severity="warning" message="Line exceeds 80 characters; contains 109 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="313" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="318" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="319" column="135" severity="warning" message="Line exceeds 80 characters; contains 134 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="320" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="321" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="322" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="323" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="324" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="325" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="326" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="328" column="118" severity="warning" message="Line exceeds 80 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="347" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="349" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="376" column="129" severity="warning" message="Line exceeds 80 characters; contains 128 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="385" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="397" column="21" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="472" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="495" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="506" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="524" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="534" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="549" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="558" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="567" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="590" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="593" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="594" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/models/System/CommandInfoModel.class.php">
   <error line="11" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -10096,8 +10528,6 @@
   <error line="12" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/views/System/CronkListingSuccessView.class.php">
-  <error line="20" column="121" severity="warning" message="Line exceeds 80 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="40" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Cronks/views/System/CronkLoaderSuccessView.class.php">
   <error line="12" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -10175,6 +10605,34 @@
   <error line="66" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="70" column="112" severity="warning" message="Line exceeds 80 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="75" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/actions/TestAction.class.php">
+  <error line="4" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="5" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="17" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="18" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="18" column="2" severity="error" message="Opening brace should be on the same line as the declaration" source="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"/>
+  <error line="19" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="20" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/config.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/lib/action/TestDummyBaseAction.class.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/lib/model/TestDummyBaseModel.class.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/lib/view/TestDummyBaseView.class.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/templates/TestSuccess.php">
+ </file>
+ <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/TestDummy/views/TestSuccessView.class.php">
+  <error line="4" column="1" severity="error" message="Open brace for class must be on the same line (like K+R function)" source="YACS.Classes.ClassDeclaration.OpenBraceSameLine"/>
+  <error line="5" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="6" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="6" column="2" severity="error" message="Opening brace should be on the same line as the declaration" source="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"/>
+  <error line="7" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="9" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="10" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Web/actions/Icinga/ApiCommandAction.class.php">
   <error line="30" column="30" severity="error" message="No space found after comma in function call" source="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"/>
@@ -10642,6 +11100,7 @@
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Web/lib/principal/IcingaDataPrincipalTarget.class.php">
   <error line="33" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="34" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/data/users/mhein/workspaces/icinga/icinga-web/app/modules/Web/lib/principal/IcingaDataServiceCustomVariablePrincipalTarget.class.php">
   <error line="3" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
