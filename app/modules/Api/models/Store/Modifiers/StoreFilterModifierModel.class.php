@@ -61,15 +61,19 @@ class ApiStoreFilter extends GenericStoreFilter {
         }
     }  
 
-    public function __toDQL() {
+    public function __toDQL(IcingaDoctrine_Query $q,$dqlOnly) {
         $dql = $this->field." ".$this->operator;
         $v = $this->formatValues();
         if(is_array($v)) 
-            $dql .= "(".implode(",",$v).")";
+            $dql .= " (".implode(",",$v).")";
         else { 
             $dql .= " ".$v;
         }
-        return $dql;
+        if($dqlOnly)
+            return $dql;
+        else 
+            $q->where($dql);
+        return;
     } 
 } 
 
@@ -78,15 +82,20 @@ class ApiStoreFilterGroup extends GenericStoreFilterGroup {
         return GenericStoreFilterGroup::parse($filter,$field,"ApiStoreFilterGroup");
     }
     
-    public function __toDQL() {
+    public function __toDQL(IcingaDoctrine_Query $q) { 
         $dql = " (";
         $first = true;
         foreach($this->getSubFilters() as $filter) {
-            $dql .= (($first) ? ' ' : ' '.$this->getType())." ".$filter->__toDQL();
+            $filterDQL = $filter->__toDQL($q,true);
+            if($filterDQL)
+                $dql .= (($first) ? ' ' : ' '.$this->getType())." ".$filterDQL;
             $first = false;
         }
         $dql .= ") ";
-        return $dql;
+        if($this->getType() == 'OR')
+            $q->orWhere($dql);
+        else 
+            $q->andWhere($dql);
     }
 }
 
@@ -104,22 +113,12 @@ class Api_Store_Modifiers_StoreFilterModifierModel extends DataStoreFilterModifi
         $this->modifyImpl($o);
     }
 
-    protected function modifyImpl(Doctrine_Query &$o) { 
+    protected function modifyImpl(IcingaDoctrine_Query &$o) { 
         $f = $this->filter;
         if($f) {
-            $dql = $f->__toDQL();
-            $this->fixAlias($dql,$o);
-            $o->addWhere($dql);
-        }
+            $f->__toDQL($o); 
+        } 
     }
     
-    private function fixAlias(&$dql, Doctrine_Query &$o) {
-        $matches = array();
-        preg_match_all("/(\w+)\.\w+/",$dql,$matches);
-        try {
-            print_r(array($matches,$o->getComponentAlias('h')));
-        } catch(Exception $e) {
-        }
-    }
         
 }  

@@ -183,7 +183,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
                         ),array(
                             "field" => "h.display_name",
                             "operator"=>"IN",
-                            "value" => array("c2-proxy","c2-mail-1")
+                            "value" => array("c2-db1")
                         )
                     )
                 )
