@@ -13,6 +13,9 @@
 			<file>tests/installation/userRightsTest.php</file>
 			<file>tests/installation/configSettingsTest.php</file>	
 		</testsuite>
+		<testsuite name="Module">
+			<file>tests/module/ModuleLoadingTest.php</file>
+		</testsuite>
 		<testsuite name="Configuration">
 			<file>tests/configuration/ApiProviderRoutesTest.php</file>
 			<file>tests/configuration/ApiValidationParserTest.php</file>
@@ -27,8 +30,12 @@
 			<file>tests/configDatabase/persistenceView.php</file>
 		</testsuite>
 
-		-->
-<!--
+
+
+
+
+		<!--	
+		Commented is developement testing for 1.4. 
 		<testsuite name="API">
 			<file>tests/api/ConsoleInterfaceTest.php</file>
 			<directory>tests/api/hosts</directory>

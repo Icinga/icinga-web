@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<module enabled="true">
+			<settings>
+				<setting name="title">TestDummy Module</setting>
+				<setting name="version">1.0</setting>
+
+				<setting name="authors">
+					<ae:parameter name="joe.cool@peanuts.com">Snoopy</ae:parameter>
+				</setting>
+				<setting name="homepage">http://www.icinga.org</setting>
+				<setting name="update_url" />
+				<setting name="description">TestModule to test module handling</setting>
+
+				<!-- 
+					Adding module specific routing configuration
+				-->
+				<setting name="appkit_module.agavi.include_xml.routing">
+					<ae:parameter>%core.module_dir%/TestDummy/config/routing.xml</ae:parameter>
+				</setting>
+				
+				<!-- 
+					Adding module related databases
+				-->
+				<setting name="appkit_module.agavi.include_xml.databases">
+					<ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
+				</setting>
+
+			</settings>
+		</module>
+		
+	</ae:configuration>
+</ae:configurations>

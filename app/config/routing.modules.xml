@@ -6,4 +6,6 @@
 	</configuration>
 	<configuration context="soap">
 	</configuration>
+	<configuration context="testing">
+	</configuration>
 </module_routes>

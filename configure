@@ -2618,7 +2618,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/settings.xml app/modules/Web/config/icinga-io.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties tests/php/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/settings.xml app/modules/Web/config/icinga-io.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3341,7 +3341,7 @@ do
     "app/modules/Web/config/icinga-io.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/icinga-io.xml" ;;
     "app/modules/AppKit/cache/Widgets/SquishLoader.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/cache/Widgets/SquishLoader.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
-    "tests/php/test.properties") CONFIG_FILES="$CONFIG_FILES tests/php/test.properties" ;;
+    "tests/phpunit/test.properties") CONFIG_FILES="$CONFIG_FILES tests/phpunit/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;
     "bin/clearcache.sh") CONFIG_FILES="$CONFIG_FILES bin/clearcache.sh" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;
