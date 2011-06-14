@@ -107,10 +107,19 @@ class Api_Store_Modifiers_StoreFilterModifierModel extends DataStoreFilterModifi
     protected function modifyImpl(Doctrine_Query &$o) { 
         $f = $this->filter;
         if($f) {
-            
-            $o->parseDqlQuery('WHERE '.$f->__toDQL());
+            $dql = $f->__toDQL();
+            $this->fixAlias($dql,$o);
+            $o->addWhere($dql);
         }
     }
     
+    private function fixAlias(&$dql, Doctrine_Query &$o) {
+        $matches = array();
+        preg_match_all("/(\w+)\.\w+/",$dql,$matches);
+        try {
+            print_r(array($matches,$o->getComponentAlias('h')));
+        } catch(Exception $e) {
+        }
+    }
         
 }  

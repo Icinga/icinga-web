@@ -42,8 +42,8 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * @param    String  The modifier to add (module path)
     * @param    String  The module where the modifier lies
     **/
-    protected function registerStoreModifier($modifier, $module) { 
-        $this->modifiers[] = AgaviContext::getInstance()->getModel($modifier,$module);
+    protected function registerStoreModifier($modifier, $module) {  
+        $this->modifiers[] = $this->context->getModel($modifier,$module);
     }
 
     /**
@@ -71,6 +71,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     *                               - noStoreModifierSetup : Don't setup modifiers (add when callin parent::initialize)
     **/ 
     public function initialize(AgaviContext $context,array $parameters = array()) {
+        parent::initialize($context,$parameters);
         $this->defaultInitialize($context,$parameters);
     }
     

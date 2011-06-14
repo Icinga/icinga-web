@@ -6,12 +6,12 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      * @var NsmSession
      */
     private $NsmSession = null;
-
+  
     public function initialize(AgaviContext $context, array $parameters = array()) {
 
         // initialize the parent
         parent::initialize($context, $parameters);
-
+         
         session_set_save_handler(
             array(&$this, 'sessionOpen'),
             array(&$this, 'sessionClose'),
@@ -29,8 +29,8 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
     }
 
     public function sessionDestroy($id) {
-
-        $result = Doctrine_Query::create()
+        $connection = AppKitSQLConstants::getInternalDB();
+        $result = Doctrine_Query::create($connection)
                   ->delete('NsmSession')
                   ->andWhere('session_name=? and session_id=?', array($this->getParameter('session_name'), 'id'))
                   ->execute();
@@ -45,7 +45,8 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 
     public function sessionGC($lifetime) {
         $maxlifetime = time()-$lifetime;
-        $result = Doctrine_Query::create()
+        $connection = AppKitSQLConstants::getInternalDB();
+        $result = Doctrine_Query::create($connection)
                   ->andWhere('session_created < ?', array(date("c",$maxlifetime)))
                   ->delete('NsmSession')
                   ->execute();
@@ -69,7 +70,8 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
     public function sessionRead($id) {
         $session_name = $this->getParameter('session_name');
 
-        $result = Doctrine_Query::create()
+        $connection = AppKitSQLConstants::getInternalDB();
+        $result = Doctrine_Query::create($connection)
                   ->select('*')
                   ->from('NsmSession n')
                   ->andWhere('session_id=? and session_name=?', array($id, $session_name))

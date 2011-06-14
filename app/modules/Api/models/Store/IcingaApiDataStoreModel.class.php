@@ -2,12 +2,18 @@
 class IcingaApiActionNotAvailableException extends AppKitException {};
 
 class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
-    protected $connectionName;
-    protected $database = "icinga";
     public $requiredParams = array("connectionName");    
+    
+    protected $connectionName;
+    protected $database = "icinga"; 
+    protected $resultTypes = array(
+        "ARRAY" => Doctrine_Core::HYDRATE_ARRAY,
+        "RECORD" => Doctrine_Core::HYDRATE_RECORD
+    );
+    protected $resultType =  Doctrine_Core::HYDRATE_RECORD;
 
     public function execUpdate($v) {
-        throw new IcingaApiActionNotAvailableException("Can't update from api");
+        throw new IcingaApiActionNotAvailableException("Can't update in api");
     }
 
     public function execDelete($d) {
@@ -23,18 +29,37 @@ class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
         foreach($this->getModifiers() as $mod) {
             $mod->modify($request);
         }
-        return $request->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
+        return $request->execute(NULL,$this->resultType);
     }
-
+    /**
+    *   Register modifiers, the StoreClass itself can do nothing else than creating 
+    *   a Query object which will be parsed through the Modifiers
+    *
+    **/
     protected function setupModifiers() {
-        $this->registerStoreModifier('Store.Modifiers.StoreTargetModifier','Api');
-        $this->registerStoreModifier('Store.Modifiers.StoreFilterModifier','Api');
+        $this->registerStoreModifier('Store.Modifiers.StoreTargetModifier','Api'); 
+        
+        $this->registerStoreModifier('Store.Modifiers.StoreFilterModifier','Api');     
+        $this->registerStoreModifier('Store.Modifiers.StorePaginationModifier','Api');
+        $this->registerStoreModifier('Store.Modifiers.StoreSortModifier','Api');
+        /* 
+        *   This should always be called last, because the AbstractDataModelStore
+        *   passes the request arguments to the modifiers, allowing them to setup
+        */
         parent::setupModifiers();
     }
-
-    public function defaultInitialize(AgaviContext $c, array $parameters = array()) {  
+    
+    public function setResultType($type) {
+        if(!isset($this->resultTypes[$type]))
+            throw new InvalidArgumentException("Unknown doctrine hydrator ".$type);
+        $this->resultType = $this->resultTypes[$type];
+    }
+    
+    public function defaultInitialize(AgaviContext $c, array $parameters = array()) {   
         if(isset($parameters["connectionName"]))
             $this->connectionName = $parameters["connectionName"];
+        if(isset($parameters["resultType"]))
+            $this->setResultType($parameters["resultType"]);
         parent::defaultInitialize($c,$parameters); 
     }
    

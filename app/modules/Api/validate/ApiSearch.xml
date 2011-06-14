@@ -181,7 +181,7 @@
 	
 			<!-- Ext JS Meta data parameter -->
 			<validator name="idProperty" class="string" required="false">
-				<arguments base="idProperty" />
+				<argument>idProperty</argument>
 			</validator>
 			
 			

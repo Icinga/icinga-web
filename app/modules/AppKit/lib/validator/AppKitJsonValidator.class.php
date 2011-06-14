@@ -53,6 +53,9 @@ class AppKitJsonValidator extends AgaviValidator
                 return false;
         }
         $this->export($data);
+        foreach($data as $field=>$val) {
+            $this->export($field,$val);
+        }
         return true; 
     }
     

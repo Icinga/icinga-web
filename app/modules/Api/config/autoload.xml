@@ -25,11 +25,8 @@
         <autoload name="StoreFilterField">%core.module_dir%/Api/lib/datastore/filter/StoreFilterField.class.php</autoload> 
         <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/AbstractDataStoreModel.class.php</autoload> 
         <autoload name="IDataStoreModifier">%core.module_dir%/Api/lib/datastore/interfaces/IDataStoreModifier.php</autoload> 
-<!--	
-        <autoload name="IFilterableDataStore">%core.module_dir%/Api/lib/datastore/interfaces/IFilterableDataStoreModel.class.php</autoload> 
-        <autoload name="IOrderableDataStoreModel">%core.module_dir%/Api/lib/datastore/IOrderableDataStoreModel.class.php</autoload> 
-        <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/IPageableDataStoreModel.class.php</autoload> 
-       
-        <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/DataStoreModel.class.php</autoload>--> 
-	</ae:configuration>
+
+        <autoload name="DataStoreFilterModifier">%core.module_dir%/Api/lib/datastore/DataStoreFilterModifier.class.php</autoload> 
+
+   	</ae:configuration>
 </ae:configurations>

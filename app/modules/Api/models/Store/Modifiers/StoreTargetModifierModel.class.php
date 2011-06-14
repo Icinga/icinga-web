@@ -25,7 +25,7 @@ class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel imple
             case 'joins':
                 // check structure
                 if(!is_array($value))
-                    throw new InvalidArgumentException("Joins in storetarget must be defined as"+
+                    throw new InvalidArgumentException("Joins in storetarget must be defined as".
                         " an array");
                 foreach($value as $val) {
                     if(!is_array($val))
@@ -63,3 +63,5 @@ class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel imple
         }
     }
 }
+
+?>
