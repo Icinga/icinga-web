@@ -103,6 +103,7 @@
 		<!-- Agavi config file handler -->
 		<autoload name="AppKitRoutingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingConfigHandler.class.php</autoload>
 		<autoload name="AppKitDatabaseConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitDatabaseConfigHandler.class.php</autoload>
+		<autoload name="AppKitTranslationConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitTranslationConfigHandler.class.php</autoload>
 	
 	    <!-- Classes for automatic clientside api creation -->
 		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>

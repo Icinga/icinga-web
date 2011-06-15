@@ -121,4 +121,19 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
         
         $this->assertFalse(array_key_exists('dummyTestCronk3', $cronks));
     }
+    
+    public function testModuleTranslations() {
+        $ctx = IcingaWebTestTool::getContext();
+        $tm = $ctx->getTranslationManager();
+        
+        $tm->setLocale('en');
+        
+        $this->assertEquals('en', $tm->getCurrentLocaleIdentifier());
+        
+        $this->assertEquals('test1-trans', $tm->_('test1', 'testdummy.text_simple'));
+        $this->assertEquals('test2-trans', $tm->_('test2', 'testdummy.text_simple'));
+        
+        $this->assertEquals(date('Y'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_year'));
+        $this->assertEquals(date('m'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_month'));
+    }
 }
