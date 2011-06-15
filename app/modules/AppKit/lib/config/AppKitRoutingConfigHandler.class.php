@@ -2,7 +2,7 @@
 class ApiProviderMissingActionException extends AgaviConfigurationException {};
 class ApiProviderMissingModuleException extends AgaviConfigurationException {};
 
-class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
+class AppKitRoutingConfigHandler extends AgaviRoutingConfigHandler {
 
     const XML_NAMESPACE = 'http://icinga.org/appkit/config/parts/routing/1.0';
 

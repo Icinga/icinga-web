@@ -4,7 +4,7 @@
 	<ae:configuration>
 		<handlers>
 		
-			<handler pattern="%core.config_dir%/routing.xml" class="AppKitRoutingHandler">
+			<handler pattern="%core.config_dir%/routing.xml" class="AppKitRoutingConfigHandler">
 				<validation>%core.module_dir%/AppKit/lib/xml/xsd/routing.xsd</validation>
 				<transformation>%core.module_dir%/AppKit/lib/xml/xsl/routing.xsl</transformation>
 			</handler>
