@@ -1,53 +1,53 @@
 <?php
 class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
 {
-    public function testSimpleRead()    {
+    /**
+    *
+    * @dataProvider storeModelProvider
+    **/
+    public function testSimpleRead($model)    {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
         $req->setParameter('target','IcingaHosts');
         $req->setParameter('fields','*');
         
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
             "request" => $req
         ));
         $this->assertEquals(count($dataStore->doRead()),30);  
     }
 
-
-
-    public function testMultiRelationRead() {
+    /**
+    *
+    * @dataProvider storeModelProvider
+    **/
+    public function testMultiRelationRead($model) {
        
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields',array('h.host_id','s.*'));
-        $req->setParameter('joins',array(
-            array(
-                "type"=>"inner",
-                "src"=>"h", 
-                "relation" => "services", 
-                "alias" =>"s"
-            )
-        ));
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
-           "request" => $req
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields',array('host_id','s.display_name','ss.output'));
+        $dataStore = $ctx->getModel($model,'Api',array(
+           "request" => $req,
+            "resultType" => "ARRAY"
         ));
         $result = $dataStore->doRead();
-        foreach($result as $host) {  
-            $this->assertNotEquals($host->services->display_name,"");
+        foreach($result as $host) {    
+            $this->assertNotEquals($host["services"][0]["display_name"],"");
         }
     }
+
     /**
     * @expectedException InvalidArgumentException
-    *
+    * @dataProvider      storeModelProvider
     **/
-    public function testInvalidMultiRelationReadWithScalar() {
+    public function testInvalidMultiRelationReadWithScalar($model) {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields',array('h.host_id','s.*'));
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields',array('host_id','s.*'));
         $req->setParameter('joins',"InvalidScalarRequest");
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req
         ));
         $result = $dataStore->doRead();
@@ -55,25 +55,29 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
 
     /**
     * @expectedException InvalidArgumentException
-    *
+    * @dataProvider      storeModelProvider
     **/
-    public function testInvalidMultiRelationReadWithMissingSrc() {
+    public function testInvalidMultiRelationReadWithMissingSrc($model) {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields',array('h.host_id','s.*'));
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields',array('host_id','s.*'));
         $req->setParameter('joins',array(array("relation"=> "services","alias" => "s")));
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req
         ));
         $result = $dataStore->doRead();
     }
 
-    public function testFilter()    {
+    /**
+    *
+    * @dataProvider      storeModelProvider
+    */
+    public function testFilter($model)    {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields','h.*');  
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields','*');  
         $req->setParameter('filter_json',array(
             "type"=>"OR",
             "items"=>array(
@@ -92,7 +96,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
                 )
             )
         ));
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req
         ));
         $recordCollection = $dataStore->doRead();
@@ -110,14 +114,18 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
         foreach($checkArr as $name=>$val)
             $this->assertFalse($val); 
     }
-    public function testOrder()  {
+
+    /**
+    * @dataProvider      storeModelProvider
+    */
+    public function testOrder($model)  {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields','h.display_name');  
-        $req->setParameter('sortfield','h.display_name');
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields','display_name');  
+        $req->setParameter('sortfield','display_name');
         $req->setParameter('dir','DESC');
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req,
            "resultType" => "ARRAY"
 
@@ -129,7 +137,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
         }
         
         $req->setParameter('dir','ASC');
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req,
            "resultType" => "ARRAY"
 
@@ -140,21 +148,24 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
             $this->assertLessThanOrEqual($current["display_name"],$recordCollection[$i-1]["display_name"]);
         } 
     }
-     
-    public function testLimit()  {
+    
+    /**
+    * @dataProvider      storeModelProvider
+    */
+    public function testLimit($model)  {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields','h.display_name');  
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields','display_name');  
         $req->setParameter('limit',5);
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req,
            "resultType" => "ARRAY"
         ));
         $firstResult = $dataStore->doRead();
         $this->assertEquals(count($firstResult),5);
         $req->setParameter('offset',4);
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req,
            "resultType" => "ARRAY"
         ));
@@ -162,26 +173,28 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($result[0],$firstResult[4]);
     }
 
-    public function testCombined()  {
+    /**
+    * @dataProvider      storeModelProvider
+    */
+    public function testCombined($model)  {
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts h');
-        $req->setParameter('fields','h.display_name,s.*'); 
-        $req->setParameter('joins',array(array("src"=>"h","relation"=> "services","alias" => "s")));
+        $req->setParameter('target','IcingaHosts');
+        $req->setParameter('fields','display_name,s.display_name'); 
         $req->setParameter('limit',5);
-        $req->setParameter('sortfield','h.display_name');
+        $req->setParameter('sortfield','display_name');
         $req->setParameter('dir','DESC');       
         $req->setParameter('filter_json',array(
             "type"=>"OR",
             "items"=>array(
-                array("field"=>"h.display_name","operator"=>"=","value"=>"c1-db1"),
+                array("field"=>"display_name","operator"=>"=","value"=>"c1-db1"),
                 array("type"=>"OR", "items"=>array(
                         array(
-                            "field" => "h.display_name",
+                            "field" => "display_name",
                             "operator"=>"LIKE",
                             "value" => "%mail%"
                         ),array(
-                            "field" => "h.display_name",
+                            "field" => "display_name",
                             "operator"=>"IN",
                             "value" => array("c2-db1")
                         )
@@ -189,12 +202,17 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
                 )
             )
         ));
-        $dataStore = $ctx->getModel('Store.IcingaApiDataStore','Api',array(
+        $dataStore = $ctx->getModel($model,'Api',array(
            "request" => $req,
            "resultType" => "ARRAY"
         ));
         $firstResult = $dataStore->doRead();
-        print_r($firstResult); 
+        $this->assertLessThanOrEqual(5,count($firstResult)); 
     }
-    
+
+    public function storeModelProvider() {
+        return array(
+            array('Store.HostStore',"Api")
+        );
+    }    
 }

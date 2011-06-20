@@ -137,6 +137,7 @@ class IcingaWebTestBootstrap {
     	AgaviConfig::set('org.icinga.appkit.init_modules', $init_modules, true);
     	
     	AppKitAgaviUtil::initializeModule('AppKit');
+    	AppKitAgaviUtil::initializeModule('Api');
     	
     	AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
     	

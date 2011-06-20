@@ -3,8 +3,8 @@ class Api_Store_Modifiers_StorePaginationModifierModel extends IcingaBaseModel i
 {
     public function getMappedArguments() {
         return array(
-            "offset" => false,
-            "limit" => false
+            "offset" => "offset",
+            "limit" => "limit"
         );
     }
 
@@ -38,7 +38,13 @@ class Api_Store_Modifiers_StorePaginationModifierModel extends IcingaBaseModel i
         if($this->limit>0)
             $o->limit($this->limit);
     }
-
+    
+    public function __getJSDescriptor() {
+        return array(
+            "type"=>"pagination",
+            "params" => $this->getMappedArguments() 
+        );
+    }
     
 }
 ?>

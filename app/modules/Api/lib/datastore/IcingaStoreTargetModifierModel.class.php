@@ -1,13 +1,16 @@
 <?php
 
-class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel implements IDataStoreModifier
+class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataStoreModifier
 {
     protected $mappedParameters = array(
-        "target" => true,
-        "joins" => false,
-        "fields" => false
+        "target" => "target",
+        "joins" => "joins",
+        "fields" => "fields"
     );
-
+    
+    protected $allowedFields = array();
+    protected $aliasDefs = array();
+    
     private $target = array();
     private $fields = array();
     private $joins = array();
@@ -18,9 +21,7 @@ class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel imple
                 $this->target = $value; 
                 break;
             case 'fields': 
-                $this->fields = $value;
-                if(!is_array($this->fields))
-                    $this->fields= array($this->fields);
+                $this->setFields($value);
                 break;
             case 'joins':
                 // check structure
@@ -38,6 +39,23 @@ class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel imple
         }
     }
     
+    public function setFields($fields) {
+        if(!is_array($fields))
+            $fields = array($fields);
+        $regExp = "/^(?<alias>\w+)\.(?<field>\w+)/";
+        foreach($fields as $field) {
+            // check for alias 
+            $match = array();
+            preg_match($regExp,$field,$match);
+            if(isset($match["alias"])) {
+                $this->addAlias($match["alias"]);
+                $this->fields[] = $field;
+            } else { 
+                $this->fields[] = "my.".$field;
+            }   
+        } 
+    }
+
     public function getMappedArguments() {
         return $this->mappedParameters;
     }
@@ -50,7 +68,7 @@ class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel imple
     protected function modifyImpl(Doctrine_Query &$o) { 
         $o->select(implode(",",$this->fields));
          
-        $o->from($this->target);
+        $o->from($this->target." my");
         foreach($this->joins as $join) {
             
             if(isset($join["type"])) {
@@ -61,6 +79,26 @@ class Api_Store_Modifiers_StoreTargetModifierModel extends IcingaBaseModel imple
             }
             $o->leftJoin($join["src"].".".$join["relation"]." ".$join["alias"]);
         }
+    }
+    
+    public function addAlias($alias) {
+        if(!isset($this->aliasDefs[$alias]))
+            throw new AppKitException("Tried to access hoststore field with invalid alias $alias");
+    
+        $join = $this->aliasDefs[$alias];
+        $join["alias"] = $alias;
+        if(in_array($join,$this->joins))
+            return true; // already added      
+        $this->joins[] = $join;
+   }        
+    
+    public function __getJSDescriptor() {
+        return array(
+            "type" => "fields",
+            "allowedFields" => $this->allowedFields,
+            //"allowedJoins" => $this->allowedJoins,
+            "params" => $this->getMappedArguments()
+        );
     }
 }
 

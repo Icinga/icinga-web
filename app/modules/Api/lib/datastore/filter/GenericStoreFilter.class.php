@@ -35,7 +35,9 @@ abstract class GenericStoreFilter extends StoreFilterBase
     *
     * @throws InvalidStoreFilterException   If validation fails
     **/
-    public function __construct($field,$operator,$value) {
+    public function __construct($field = null,$operator= null,$value=null) {
+        if($field == null)
+            return;
         $this->field = $field;
         $this->operator = $operator;
         $this->value = $value;
@@ -104,5 +106,15 @@ abstract class GenericStoreFilter extends StoreFilterBase
     }
     public function __toString() {
         return json_encode($this->__toArray());
+    }
+
+    public function __getJSDescriptor() {
+        if(empty($this->__fields)) 
+            $this->initFieldDefinition();
+        $fields = array();
+        foreach($this->__fields as $field) {
+            $fields[] = $field->__toArray();
+        }
+        return array("type"=>"atom", "filters"=>$fields);
     }
 }

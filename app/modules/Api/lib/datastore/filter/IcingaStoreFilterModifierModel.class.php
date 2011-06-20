@@ -5,25 +5,7 @@ class ApiStoreFilter extends GenericStoreFilter {
     * - invalid field/value combinations should be handled by the validator
     **/
     static private function getFilterDefs() {
-        return array(
-            array(
-                "display_name"=>"Host name",
-                "field"=>"display_name",
-                "operators"=>StoreFilterField::$TEXT_MODIFIER,
-                "possibleValues" => new StoreFilterFieldApiValues("ApiSearch","Api",array(
-                    "target"=>"hosts",
-                    "columns"=>"display_name"))
-            )
-            ,array(
-                "display_name"=>"Service name",
-                "field"=>"display_name",
-                "operators"=>StoreFilterField::$TEXT_MODIFIER,
-                "possibleValues" => new StoreFilterFieldApiValues("ApiSearch","Api",array(
-                    "target"=>"services",
-                    "columns"=>"display_name"))
-            )
-        );
-        
+        return array();    
     }
 
     public static function parse($filter,$parser) {
@@ -99,15 +81,15 @@ class ApiStoreFilterGroup extends GenericStoreFilterGroup {
     }
 }
 
-class Api_Store_Modifiers_StoreFilterModifierModel extends DataStoreFilterModifier implements IDataStoreModifier
+class IcingaStoreFilterModifierModel extends DataStoreFilterModifier implements IDataStoreModifier
 {
    
     // Use these filterclasses
     protected $filterClasses = array(
         "ApiStoreFilter",
         "ApiStoreFilterGroup"
-    );
- 
+    ); 
+
     public function modify(&$o) {
         // type safe call
         $this->modifyImpl($o);

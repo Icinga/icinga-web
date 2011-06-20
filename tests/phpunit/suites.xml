@@ -30,12 +30,10 @@
 			<file>tests/configDatabase/persistenceView.php</file>
 		</testsuite>
 -->
-
-
-
-
-			
-		Commented is developement testing for 1.4. 
+		<testsuite name="Interface">
+			<file>tests/interface/availabilityTest.php</file>
+		</testsuite>
+<!--
 		<testsuite name="API">
 			<file>tests/api/ConsoleInterfaceTest.php</file>
 			<directory>tests/api/hosts</directory>
@@ -44,17 +42,13 @@
 			<directory>tests/api/servicegroups</directory>
 			<directory>tests/api/misc</directory>
 		</testsuite>
-	
+-->	
         <testsuite name="ApiProvider">
             <file>tests/api/apiprovider/FilterTest.php</file>
             <file>tests/api/apiprovider/DataStoreTest.php</file>
             <file>tests/api/apiprovider/IcingaApiDatastoreTest.php</file>
             
         </testsuite>
-<!--
-		<testsuite name="Interface">
-			<file>tests/interface/availabilityTest.php</file>
-		</testsuite>
--->
+
 	</testsuites>
 </phpunit>

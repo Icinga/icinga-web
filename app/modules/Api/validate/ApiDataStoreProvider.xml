@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Api/config/validators.xml"
+>
+	<ae:configuration>
+       	
+		<validators method="write">
+            <validator name="target" class="String">
+                <argument>target</argument>
+            </validator> 
+            <validator name="fields" class="String">
+                <argument>fields</argument>
+            </validator>
+            <validator name="joins" class="AppKitJsonValidator">
+                <argument>joins</argument>
+            </validator>
+            <validator name="limit" class="Number">
+                <argument>limit</argument>
+                <ae:parameters>
+                    <ae:parameter name="min">0</ae:parameter>
+                    <ae:parameter name="max">100</ae:parameter>
+                </ae:parameters>
+            </validator>
+            <validator name="offset" class="Number">
+                <argument>offset</argument>
+            </validator>
+            <validator name="sortfield" class="String">
+                <argument>sortfield</argument>
+            </validator>
+            <validator name="dir" class="InArra">
+                <argument>dir</argument>
+                <ae:parameters>
+                    <ae:parameter name="type">String</ae:parameter>
+                    <ae:parameter name="case">true</ae:parameter>
+                    <ae:parameter name="values">
+                        <ae:parameter>ASC</ae:parameter>
+                        <ae:parameter>DESC</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters> 
+            </validator>
+            <validator name="filter_json" class="AppKitJsonValidator">
+                <argument>filter_json</argument>
+                <ae:parameters>
+                    <ae:parameter name="export">filter_json</ae:parameter> 
+                    <ae:parameter name="error"></ae:parameter>
+                </ae:parameters>
+            </validator>
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

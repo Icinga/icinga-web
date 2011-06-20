@@ -42,8 +42,11 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * @param    String  The modifier to add (module path)
     * @param    String  The module where the modifier lies
     **/
-    protected function registerStoreModifier($modifier, $module) {  
-        $this->modifiers[] = $this->context->getModel($modifier,$module);
+    protected function registerStoreModifier($modifier, $module= null) {  
+        if(is_a($modifier,"IDataStoreModifier"))
+            $this->modifiers[] = $modifier;
+        else 
+            $this->modifiers[] = $this->context->getModel($modifier,$module);
     }
 
     /**

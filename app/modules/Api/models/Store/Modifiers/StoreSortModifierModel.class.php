@@ -3,8 +3,8 @@ class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
         implements IDataStoreModifier 
 {
     protected $mappedParameters = array(
-        "sortfield" => false,
-        "dir" => false
+        "sortfield" => "sortfield",
+        "dir" => "dir"
     );
     
     private $sortfield ;
@@ -35,6 +35,13 @@ class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
     protected function modifyImpl(Doctrine_Query &$o) {
         if($this->sortfield)
             $o->orderBy($this->sortfield." ".$this->dir);
+    }
+    
+    public function __getJSDescriptor() {
+        return array(
+            "type"=>"sort",
+            "params" => $this->getMappedArguments()
+        );
     }
 }
 

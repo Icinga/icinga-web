@@ -24,8 +24,14 @@
         <autoload name="GenericStoreFilter">%core.module_dir%/Api/lib/datastore/filter/GenericStoreFilter.class.php</autoload>   
         <autoload name="StoreFilterField">%core.module_dir%/Api/lib/datastore/filter/StoreFilterField.class.php</autoload> 
         <autoload name="AbstractDataStoreModel">%core.module_dir%/Api/lib/datastore/AbstractDataStoreModel.class.php</autoload> 
+        <autoload name="IcingaApiDataStoreModel">%core.module_dir%/Api/lib/datastore/IcingaApiDataStoreModel.class.php</autoload> 
+        <autoload name="IcingaStoreFilterModifierModel">%core.module_dir%/Api/lib/datastore/filter/IcingaStoreFilterModifierModel.class.php</autoload> 
+        <autoload name="IcingaStoreTargetModifierModel">%core.module_dir%/Api/lib/datastore/IcingaStoreTargetModifierModel.class.php</autoload> 
         <autoload name="IDataStoreModifier">%core.module_dir%/Api/lib/datastore/interfaces/IDataStoreModifier.php</autoload> 
 
+        
+        <autoload name="ApiStoreFilter">%core.module_dir%/Api/lib/datastore/filter/ApiStoreFilter.class.php</autoload> 
+        <autoload name="ApiStoreFilterGroup">%core.module_dir%/Api/lib/datastore/filter/ApiStoreFilterGroup.class.php</autoload> 
         <autoload name="DataStoreFilterModifier">%core.module_dir%/Api/lib/datastore/DataStoreFilterModifier.class.php</autoload> 
 
    	</ae:configuration>

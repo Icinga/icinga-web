@@ -2,7 +2,7 @@
 class DataStoreFilterParseException extends AppKitException {};
 abstract class DataStoreFilterModifier extends IcingaBaseModel  implements IDataStoreModifier
 {
-    protected $mapped_arguments = array('filter_json');
+    protected $mapped_arguments = array('filter'=>'filter_json');
     protected $static_quirks = true;    
     /**
     * defines which filter classes are allowed for this FilterModifier
@@ -12,6 +12,18 @@ abstract class DataStoreFilterModifier extends IcingaBaseModel  implements IData
         "GenericStoreFilterGroup"
     );
 
+    public function __getJSDescriptor() {
+        $allowedFilter = array();
+        foreach($this->filterClasses as $filter) {         
+            $cl = new $filter();
+            $allowedFilter[] = $cl->__getJSDescriptor();
+        }
+        return array(
+            "type"=> "filter",
+            "allowedFilter" => $allowedFilter,
+            "params" => $this->getMappedArguments()
+        );
+    } 
   
     protected $filter = null;
     

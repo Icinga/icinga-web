@@ -20,7 +20,7 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
         if (!$connName) {
             $connName = $this->database;
         }
-        print_r($connName);
+
         $db = $this->getContext()->getDatabaseManager()->getDatabase($connName);
         $connection = null;
 

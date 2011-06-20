@@ -10,6 +10,14 @@ class StoreFilterFieldApiValues
         $this->module = $module;
         $this->filter = $filter;
     }
+
+    public function __toArray() {
+        return array(
+            "action"=>$this->action,
+            "module"=>$this->module,
+            "filter"=>$this->filter
+        );
+    }
 }
 
 class StoreFilterField 
@@ -41,5 +49,17 @@ class StoreFilterField
   
     public function __construct() {
         $this->operators = self::$TEXT_MODIFIER;
+    }
+
+    public function __toArray() {
+        $vals = $this->possibleValues;
+        if(is_object($this->possibleValues))
+            $vals = $this->possibleValues->__toArray();
+        return array(
+            "displayName" => $this->displayName,
+            "name" => $this->name,
+            "operators" => $this->operators,
+            "values" => $vals
+        );
     }
 }

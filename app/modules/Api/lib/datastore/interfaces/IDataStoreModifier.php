@@ -23,4 +23,11 @@ interface IDataStoreModifier
     */
     public function getMappedArguments();
 
+    /**
+    * Returns an array of information which will be used by the clients datastore
+    * to handle the stores abilities
+    *
+    * @return Array         An array that describes this moodifier for the client side 
+    **/
+    public function __getJSDescriptor();
 }

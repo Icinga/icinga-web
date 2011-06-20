@@ -40,7 +40,7 @@ class AppKitJsonValidator extends AgaviValidator
         }
         $format = $this->getParameter("format");
         if($format) {
-            // json workaroun
+            // json workaround for slashes ins string
             $format = str_replace('\\','\\\\',$format);
             
             $decoded = json_decode($format,true);

@@ -1,7 +1,7 @@
 <?php
 class IcingaApiActionNotAvailableException extends AppKitException {};
 
-class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
+class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     public $requiredParams = array("connectionName");    
     
     protected $connectionName;
@@ -28,7 +28,7 @@ class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
         $request = $this->createRequestDescriptor();
         foreach($this->getModifiers() as $mod) {
             $mod->modify($request);
-        }
+        } 
         return $request->execute(NULL,$this->resultType);
     }
     /**
@@ -36,10 +36,7 @@ class Api_Store_IcingaApiDataStoreModel extends AbstractDataStoreModel {
     *   a Query object which will be parsed through the Modifiers
     *
     **/
-    protected function setupModifiers() {
-        $this->registerStoreModifier('Store.Modifiers.StoreTargetModifier','Api'); 
-        
-        $this->registerStoreModifier('Store.Modifiers.StoreFilterModifier','Api');     
+    protected function setupModifiers() {  
         $this->registerStoreModifier('Store.Modifiers.StorePaginationModifier','Api');
         $this->registerStoreModifier('Store.Modifiers.StoreSortModifier','Api');
         /* 

@@ -52,7 +52,13 @@ class AppKitAgaviContext extends AgaviContext {
 
 
     }
-
+    
+    public function getModel($modelName, $moduleName = null, array $parameters = null) {
+        if($this->controller == null)
+            $this->controller = AppKitAgaviUtil::getAgaviControllerInstance(); 
+        return parent::getModel($modelName,$moduleName,$parameters);
+    }
+    
     /**
      * Require doctrine orm
      */

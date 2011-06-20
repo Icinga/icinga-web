@@ -34,7 +34,12 @@ class GenericStoreFilterGroup extends StoreFilterBase implements Iterator
     public function getPossibleTypes() {
         return $this->possibleTypes;
     }
-
+    public function __getJSDescriptor() {
+        return array(
+            "type" => "Group",
+            "types" => $this->possibleTypes  
+        );
+    }
 
     /**
     * Try to parse from an (array) of values

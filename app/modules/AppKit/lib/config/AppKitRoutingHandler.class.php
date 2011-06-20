@@ -70,9 +70,10 @@ class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
             if($cfg->has('routes')) {
                 $this->parseRoutesExtended($routing, $cfg->get('routes'));
                 $this->parseApiProviders();
+                $this->parseRoutes($routing,$cfg->get('routes'),$parent = null);
             }
         }
-
+       
         return serialize($routing->exportRoutes());
     }
 
@@ -88,15 +89,16 @@ class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
     */
     protected function parseRoutesExtended($routing,$routes,$parent = null) {
         foreach($routes as $route) {
-
             if($route->hasAttribute("api_provider")) {
                 $this->fetchApiProviderInformation($route);
             }
+            if($route->has('routes'))
+                $this->parseRoutesExtended($routing,$route->get('routes'),$route);
         }
-        $this->parseRoutes($routing,$routes,$parent = null);
     }
 
     private function parseApiProviders() {
+        
         if(empty($this->apiProviders))
             return;
         $extdirectParser = new AppKitApiProviderParser();
@@ -115,7 +117,7 @@ class AppKitRoutingHandler extends AgaviRoutingConfigHandler {
     protected function fetchApiProviderInformation(DomElement $route) {
         $module = AppKitXmlUtil::getInheritedAttribute($route, "module");
         $action = AppKitXmlUtil::getInheritedAttribute($route, "action");
-
+       
         if(!$action) {
             $r = print_r($route->getAttributes(),1);
             throw new ApiProviderMissingActionException("Missing action in route exported for ApiProvider route settings: ".$r);
