@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
+	xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
+	xmlns="http://icinga.org/cronks/config/parts/cronks/1.0"
+	targetNamespace="http://icinga.org/cronks/config/parts/cronks/1.0"
+	elementFormDefault="qualified"
+	version="$Id: routing.xsd 4502 2010-04-23 13:39:31Z david $">
+
+	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
+	           schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_types.xsd" />
+	<xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
+	           schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_envelope.xsd" />
+
+	<xs:group name="ignores">
+		<xs:choice>
+			<xs:element name="ignores" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ignore" type="xs:string"
+						            maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ignore" type="xs:string"
+			            maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+	
+	<xs:complexType name="cronk" mixed="true">
+		<xs:group ref="envelope_1_0:parameters" />
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="cronks">
+		<xs:sequence>
+			<xs:element name="cronk" type="cronk"
+			            maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="cronks">
+		<xs:choice>
+			<xs:element name="cronk" type="cronk"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="category" mixed="true">
+		<xs:group ref="envelope_1_0:parameters" />
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+
+	<xs:complexType name="categories">
+		<xs:sequence>
+			<xs:element name="category" type="category" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:group name="configuration">			
+		<xs:all>
+			<xs:element name="categories" type="categories" minOccurs="0"></xs:element>
+			<xs:element name="cronks" type="cronks" minOccurs="0"></xs:element>
+		</xs:all>
+	</xs:group>
+
+</xs:schema>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
+	<ae:configuration>
+		<cronks>
+		
+			<!--
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				System cronks - [START]
+				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+				To build the portal structures
+				* DO NOT CHANGE ANYTHING *
+			-->
+	
+			<cronk name="icingaOverallStatus">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StatusOverall</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Overall Status</ae:parameter>
+				<ae:parameter name="name">Displays the overall status</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+				<ae:parameter name="ae:parameter">
+				</ae:parameter>
+			</cronk>
+
+			<cronk name="icingaMonitorPerformance">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.MonitorPerformance</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Monitor performance data</ae:parameter>
+				<ae:parameter name="name">Display monitor performance data</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+				<ae:parameter name="ae:parameter">
+				</ae:parameter>
+			</cronk>
+	
+			<cronk name="icingaToProc">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.StaticContent</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Icinga Tactical Overview</ae:parameter>
+				<ae:parameter name="name">Generic TO processor</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+	
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="interface">true</ae:parameter>
+				</ae:parameter>
+			</cronk>
+	
+			<cronk name="gridProc">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">A generic ajax grid xml processor to display icinga information</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+			</cronk>
+	
+			<cronk name="crportal">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.CronkPortal</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">The cronkportal itself (icinga application)</ae:parameter>
+				<ae:parameter name="name">Cronk portal</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+			</cronk>
+	
+			<cronk name="crlist">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.CronkListing</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Lists available cronks</ae:parameter>
+				<ae:parameter name="name">Cronk dataview provider</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+			</cronk>
+	
+			<cronk name="icingaSearch">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ObjectSearch</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Search something</ae:parameter>
+				<ae:parameter name="name">Search</ae:parameter>
+				<ae:parameter name="categories">core</ae:parameter>
+				<ae:parameter name="ae:parameter">
+	
+				</ae:parameter>
+			</cronk>
+			
+			<cronk name="genericIFrame">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.IframeView</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">View something within an iframe</ae:parameter>
+				<ae:parameter name="name">Icinga</ae:parameter>
+				<ae:parameter name="image">cronks.world</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+			</cronk>
+			
+			<cronk name="portalHello">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.PortalHello</ae:parameter>
+				<ae:parameter name="hide">true</ae:parameter>
+				<ae:parameter name="description">Say hello to the world</ae:parameter>
+				<ae:parameter name="name">HelloWorld</ae:parameter>
+				<ae:parameter name="categories">demo</ae:parameter>
+			</cronk>
+			<!-- System cronks - [STOP] -->
+		
+		</cronks>
+	</ae:configuration>
+</ae:configurations>

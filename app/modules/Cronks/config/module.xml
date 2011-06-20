@@ -13,6 +13,7 @@
 				<setting name="appkit_module.app.css_files">
 					<!-- JIT - JavaScript InfoVis Toolkit -->
 					<ae:parameter>/styles/statusmap.css</ae:parameter>
+					
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.css_files.site']/node())">
 						<xi:fallback></xi:fallback>
 					</xi:include>
@@ -65,6 +66,15 @@
 					</xi:include>
 				</setting>
 
+				<setting name="appkit_module.agavi.include_xml.cronks">
+					<ae:parameter>%core.module_dir%/Cronks/config/cronks.xml</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/config/cronks_categories.xml</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/config/cronks_system.xml</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/config/cronks_grid.xml</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/config/cronks_misc.xml</ae:parameter>
+					<ae:parameter>%core.module_dir%/Cronks/config/cronks_to.xml</ae:parameter>
+				</setting>
+
 				<!--
 					* Path to our grid templates
 				-->
@@ -96,24 +106,24 @@
 				<!-- 
 					* Include cubconfig
 				-->
-				<setting name="categories">
+				<!--  <setting name="categories">
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())" />
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())">
 						<xi:fallback></xi:fallback>
 					</xi:include>
-				</setting>
+				</setting> -->
 				
 				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/node())">
 					<xi:fallback></xi:fallback>
 				</xi:include>
 
 		
-				<setting name="cronks">
+				<!--  <setting name="cronks">
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())" />
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())">
 						<xi:fallback></xi:fallback>
 					</xi:include>
-				</setting>
+				</setting> -->
 			</settings>
 		</module>
 		

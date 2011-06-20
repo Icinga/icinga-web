@@ -8,7 +8,7 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 	*/
 	public function testProviderAttributesInRouting(AgaviXmlConfigDomDocument $dom,$extRoutes) {
 		
-		$parser = new AppKitRoutingHandler();
+		$parser = new AppKitRoutingConfigHandler();
 		$parser->execute($dom);
 		$toExport = $parser->getApiProviders();
 	
@@ -26,7 +26,7 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 	* @depends testProviderAttributesInRouting
 	**/
 	public function testProviderWithoutAction($dom) { 
-		$parser = new AppKitRoutingHandler();
+		$parser = new AppKitRoutingConfigHandler();
 		$parser->execute($dom);
 	}
 
@@ -36,7 +36,7 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 	* @depends testProviderAttributesInRouting
 	**/
 	public function testProviderWithoutModule($dom) { 
-		$parser = new AppKitRoutingHandler();
+		$parser = new AppKitRoutingConfigHandler();
 		$parser->execute($dom);
 	}
 

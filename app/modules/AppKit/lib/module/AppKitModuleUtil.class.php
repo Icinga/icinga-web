@@ -14,15 +14,17 @@ class AppKitModuleUtil extends AppKitSingleton {
     const DATA_ARRAY		= 'array';
 
     protected static $default_config_keys = array(
-            'app.javascript_files'		    => self::DATA_FLAT,
-            'app.javascript_actions'	    => self::DATA_DEFAULT,
-            'app.javascript_dynamic'	    => self::DATA_UNIQUE,
-            'app.css_files'				    => self::DATA_FLAT,
-            'app.meta_tags'				    => self::DATA_DEFAULT,
+            'app.javascript_files'		        => self::DATA_FLAT,
+            'app.javascript_actions'	        => self::DATA_DEFAULT,
+            'app.javascript_dynamic'	        => self::DATA_UNIQUE,
+            'app.css_files'				        => self::DATA_FLAT,
+            'app.meta_tags'				        => self::DATA_DEFAULT,
 
             // Namespaces for XML includes
-            'agavi.include_xml.routing'     => self::DATA_FLAT,
-            'agavi.include_xml.databases'	=> self::DATA_FLAT
+            'agavi.include_xml.routing'         => self::DATA_FLAT,
+            'agavi.include_xml.databases'	    => self::DATA_FLAT,
+    		'agavi.include_xml.cronks'          => self::DATA_FLAT,
+    		'agavi.include_xml.translations'    => self::DATA_FLAT,
     );
 
     private $modules = null;
