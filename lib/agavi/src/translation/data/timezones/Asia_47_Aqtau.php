@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Asia/Aqtau".
- * Compiled from olson file "asia", version 8.62.
+ * Compiled from olson file "asia", version 8.64.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Asia_47_Aqtau.php 4590 2010-12-07 08:11:19Z david $
+ * @version    $Id: Asia_47_Aqtau.php 4640 2011-04-16 11:13:19Z david $
  */
 
 return array (
@@ -269,7 +269,7 @@ return array (
     'startYear' => 2006,
   ),
   'source' => 'asia',
-  'version' => '8.62',
+  'version' => '8.64',
   'name' => 'Asia/Aqtau',
 );
 

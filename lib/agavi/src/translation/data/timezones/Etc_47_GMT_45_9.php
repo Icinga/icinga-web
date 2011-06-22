@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Etc/GMT-9".
- * Compiled from olson file "etcetera", version 8.2.
+ * Compiled from olson file "etcetera", version 8.3.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Etc_47_GMT_45_9.php 4343 2009-11-06 13:59:00Z david $
+ * @version    $Id: Etc_47_GMT_45_9.php 4640 2011-04-16 11:13:19Z david $
  */
 
 return array (
@@ -30,7 +30,7 @@ return array (
     'startYear' => -2147483647,
   ),
   'source' => 'etcetera',
-  'version' => '8.2',
+  'version' => '8.3',
   'name' => 'Etc/GMT-9',
 );
 

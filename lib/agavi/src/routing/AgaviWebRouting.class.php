@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviWebRouting.class.php 4596 2010-12-10 21:07:36Z david $
+ * @version    $Id: AgaviWebRouting.class.php 4672 2011-05-30 15:34:46Z david $
  */
 class AgaviWebRouting extends AgaviRouting
 {
@@ -376,7 +376,7 @@ class AgaviWebRouting extends AgaviRouting
 				$options['port'] !== null
 			))
 		) {
-			$scheme = null;
+			$scheme = false;
 			if($options['scheme'] !== false) {
 				$scheme = ($options['scheme'] === null ? $req->getUrlScheme() : $options['scheme']);
 			}
@@ -412,7 +412,18 @@ class AgaviWebRouting extends AgaviRouting
 				$authority = $options['authority'];
 			}
 
-			$retval = ($scheme === null ? '' : $scheme . '://') . $authority . $retval;
+			if($scheme === false) {
+				// nothing at all, e.g. when displaying a URL without the "http://" prefix
+				$scheme = '';
+			} elseif(trim($scheme) === '') {
+				// a protocol-relative URL (see #1224)
+				$scheme = '//';
+			} else {
+				// given scheme plus "://"
+				$scheme = $scheme . '://';
+			}
+			
+			$retval = $scheme . $authority . $retval;
 		}
 
 		if($options['fragment'] !== null) {

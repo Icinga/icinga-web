@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -30,7 +30,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviException.class.php 4595 2010-12-07 09:05:16Z david $
+ * @version    $Id: AgaviException.class.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviException extends Exception
 {
@@ -101,7 +101,7 @@ class AgaviException extends Exception
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      0.11.0
 	 */
-	public static function buildParamList($params, $html = true)
+	public static function buildParamList($params, $html = true, $level = 1)
 	{
 		if($html) {
 			$oem = '<em>';
@@ -114,6 +114,9 @@ class AgaviException extends Exception
 		$retval = array();
 		foreach($params as $key => $param) {
 			if(is_string($key)) {
+				if(preg_match('/^(.{5}).{2,}(.{5})$/us', $key, $matches)) {
+					$key = $matches[1] . '…' . $matches[2];
+				}
 				$key = var_export($key, true) . ' => ';
 				if($html) {
 					$key = htmlspecialchars($key);
@@ -123,7 +126,7 @@ class AgaviException extends Exception
 			}
 			switch(gettype($param)) {
 				case 'array':
-					$retval[] = $key . 'array(' . self::buildParamList($param) . ')';
+					$retval[] = $key . 'array(' . ($level < 2 ? self::buildParamList($param, $html, ++$level) : (count($param) ? '…' : '')) . ')';
 					break;
 				case 'object':
 					if($html) {
@@ -141,10 +144,10 @@ class AgaviException extends Exception
 					break;
 				case 'string':
 					$val = $param;
-					if(preg_match('/^(.{20}).{3,}(.{20})$/u', $val, $matches)) {
+					if(preg_match('/^(.{20}).{3,}(.{20})$/us', $val, $matches)) {
 						$val = $matches[1] . ' … ' . $matches[2];
 					}
-					$val = var_export($val);
+					$val = var_export($val, true);
 					if($html) {
 						$retval[] = $key . htmlspecialchars($val);
 					} else {
@@ -286,9 +289,8 @@ class AgaviException extends Exception
 		}
 		
 		// discard any previous output waiting in the buffer
-		if(ob_get_length()) {
-			while(@ob_end_clean());
-		}
+		while(@ob_end_clean());
+		
 		if($container !== null && $container->getOutputType() !== null && $container->getOutputType()->getExceptionTemplate() !== null) { 
 			// an exception template was defined for the container's output type
 			include($container->getOutputType()->getExceptionTemplate()); 

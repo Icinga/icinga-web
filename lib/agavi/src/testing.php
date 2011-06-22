@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -24,7 +24,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: testing.php 4589 2010-12-07 08:05:52Z david $
+ * @version    $Id: testing.php 4717 2011-06-16 18:47:41Z david $
  */
 
 $here = realpath(dirname(__FILE__));
@@ -35,8 +35,12 @@ require_once($here . '/agavi.php');
 // AgaviTesting class
 require_once($here . '/testing/AgaviTesting.class.php');
 
+// changing the init procedure in a minor release... good job, PHPUnit...
+require_once('PHPUnit/Runner/Version.php'); 
+if(version_compare(PHPUnit_Runner_Version::id(), '3.5', '<')) { 
+	trigger_error('Agavi requires PHPUnit version 3.5 or higher', E_USER_ERROR);
+}
 // load PHPUnit basics
-require_once 'PHPUnit/Util/Getopt.php';
-require_once('PHPUnit/TextUI/TestRunner.php');
+require_once('PHPUnit/Autoload.php');
 
 ?>

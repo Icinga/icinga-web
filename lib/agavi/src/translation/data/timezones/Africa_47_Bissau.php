@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Africa/Bissau".
- * Compiled from olson file "africa", version 8.28.
+ * Compiled from olson file "africa", version 8.31.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Africa_47_Bissau.php 4577 2010-08-20 18:56:31Z david $
+ * @version    $Id: Africa_47_Bissau.php 4653 2011-04-27 06:48:36Z david $
  */
 
 return array (
@@ -52,7 +52,7 @@ return array (
     'startYear' => 1976,
   ),
   'source' => 'africa',
-  'version' => '8.28',
+  'version' => '8.31',
   'name' => 'Africa/Bissau',
 );
 

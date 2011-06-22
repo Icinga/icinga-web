@@ -3,7 +3,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: agavi.php 4601 2010-12-12 00:08:13Z impl $
+ * @version    $Id: agavi.php 4667 2011-05-20 12:34:58Z david $
  */
 
 define('BUILD_DIRECTORY', realpath(dirname(__FILE__) . '/../..'));
@@ -94,7 +94,7 @@ function input_help(AgaviOptionParser $parser, $name, $arguments, $scriptArgumen
 
 function input_version(AgaviOptionParser $parser, $name, $arguments, $scriptArguments)
 {
-	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4601 2010-12-12 00:08:13Z impl $' . PHP_EOL);
+	$GLOBALS['OUTPUT']->write('Agavi project configuration system, script version $Id: agavi.php 4667 2011-05-20 12:34:58Z david $' . PHP_EOL);
 	$GLOBALS['OUTPUT']->write(Phing::getPhingVersion() . PHP_EOL);
 	exit(0);
 }

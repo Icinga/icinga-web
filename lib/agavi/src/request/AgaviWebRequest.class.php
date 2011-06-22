@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -29,7 +29,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviWebRequest.class.php 4565 2010-08-16 10:07:46Z david $
+ * @version    $Id: AgaviWebRequest.class.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviWebRequest extends AgaviRequest
 {
@@ -356,7 +356,8 @@ class AgaviWebRequest extends AgaviRequest
 		
 		$this->protocol = self::getSourceValue($sources['SERVER_PROTOCOL'], $sourceDefaults['SERVER_PROTOCOL']);
 		
-		$HTTPS = in_array(self::getSourceValue($sources['HTTPS'], $sourceDefaults['HTTPS']), array('on', 'On', 'oN', 'ON', 1, true), true);
+		// "on" (e.g. Apache or IIS) or "https" (e.g. Amazon EC2 Elastic Load Balancer) or "1" or integer 1 or true (e.g. statically set from a config file)
+		$HTTPS = (bool)preg_match('/^(on|https|1)$/i', self::getSourceValue($sources['HTTPS'], $sourceDefaults['HTTPS']));
 
 		$this->urlScheme = 'http' . ($HTTPS ? 's' : '');
 
