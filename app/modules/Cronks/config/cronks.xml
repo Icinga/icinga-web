@@ -528,5 +528,10 @@
 			<!-- Demo cronk - [STOP] -->
 	
 	</setting>
+
+	<!-- Include the site config file *NEVER REMOVE THIS LINE* -->
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(cronk=http://icinga.org/cronks/config/parts/cronks/1.0) xpointer(//ae:configurations/ae:configuration)">
+		<xi:fallback></xi:fallback>
+	</xi:include>
 	
 </settings>
