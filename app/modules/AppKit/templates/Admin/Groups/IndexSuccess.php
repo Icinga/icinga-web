@@ -196,7 +196,7 @@ Ext.onReady(function() {
 			pageSize: 25,
 			store: AppKit.groups.groupList,
 			displayInfo: true,
-			displayMsg: _('Displaying groups')+' {0} - {1} '+_('of')+' {2}',
+			displayMsg: _('Displaying groups {0} - {1} of {2}'),
 			emptyMsg: _('No groups to display'),
 			items: [{
 				xtype: 'tbseparator',

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -28,7 +28,7 @@ require_once('phing/input/InputRequest.php');
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviInputTask.php 4598 2010-12-10 22:36:44Z david $
+ * @version    $Id: AgaviInputTask.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviInputTask extends AgaviTask
 {

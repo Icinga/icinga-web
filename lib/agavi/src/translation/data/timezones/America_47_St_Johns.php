@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "America/St_Johns".
- * Compiled from olson file "northamerica", version 8.34.
+ * Compiled from olson file "northamerica", version 8.42.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: America_47_St_Johns.php 4577 2010-08-20 18:56:31Z david $
+ * @version    $Id: America_47_St_Johns.php 4640 2011-04-16 11:13:19Z david $
  */
 
 return array (
@@ -1005,7 +1005,7 @@ return array (
     'startYear' => 2007,
   ),
   'source' => 'northamerica',
-  'version' => '8.34',
+  'version' => '8.42',
   'name' => 'America/St_Johns',
 );
 

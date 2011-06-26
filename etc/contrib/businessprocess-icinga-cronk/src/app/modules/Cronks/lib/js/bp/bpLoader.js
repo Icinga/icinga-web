@@ -148,7 +148,10 @@ Cronk.bp.bpLoader = Ext.extend(Ext.ux.tree.TreeGridLoader,{
 			objToAdd["uiProvider"] = 'col';
 			objToAdd["iconCls"] = 'icinga-icon-chart-organisation';
 			objToAdd["children"] = objToAdd["components"];
-
+			if(objToAdd["info_url"])
+				objToAdd["info_url"] = '<a href="'+objToAdd['info_url']+'" '+
+					'qtip="Show info_url" class="icinga-icon-information icinga-icon-24"></a>';
+			
 			objToAdd["isProcessed"] = true;
 			if(this.withGroups)
 			
@@ -183,6 +186,11 @@ Cronk.bp.bpLoader = Ext.extend(Ext.ux.tree.TreeGridLoader,{
 				// If it's a subprocess, handle it like ever other subprocess
 				child = this.formatEntry(all[child["subprocess"]],child["subprocess"],all);
 				child["iconCls"] = 'icinga-icon-chart-organisation';
+				if(child["info_url"])
+					child["info_url"] = 
+						'<a href="'+child['info_url']+'" '+
+							' qtip="Show info_url" class="icinga-icon-information icinga-icon-24">link</a>';
+
 				objToAdd["children"][i] = child;
 			} else  {
 				try {
@@ -211,10 +219,15 @@ Cronk.bp.bpLoader = Ext.extend(Ext.ux.tree.TreeGridLoader,{
 								child["service"]+
 								'</span>';
 						child["host"] =
-							'<span qtip="Show history for this host" class="bp_host_selector x-icinga-grid-link" '+
+							'<span qtip="Show host" class="bp_host_selector x-icinga-grid-link" '+
 								'host="'+child["host"]+'">'+
 								child["host"]+
 							'</span>';
+						
+						if(child["info_url"])
+							child["info_url"] = 
+								'<a href="'+child['info_url']+'" '+
+									' qtip="Show info_url" class="icinga-icon-information icinga-icon-24">link</a>';
 						var state = child["hardstate"];
 						if(state)
 							child["hardstate"] = '<div class="icinga-status icinga-status-'+state.toLowerCase()+'" style="height:12px;text-align:center">'+state+'</div>';

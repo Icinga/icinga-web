@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      1.0.0
  *
- * @version    $Id: AgaviTesting.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviTesting.class.php 4716 2011-06-16 15:53:00Z david $
  */
 class AgaviTesting
 {
@@ -101,7 +101,18 @@ class AgaviTesting
 		$runner->doRun($master_suite, $arguments);
 	}
 	
-	protected static function createSuite($name, $suite) 
+	/**
+	 * Initialize a suite from the given instructions and add registered tests.
+	 *
+	 * @param      string Name of the suite
+	 * @param      array  An array containing information about the suite
+	 *
+	 * @return     AgaviTestSuite The initialized test suite object.
+	 *
+	 * @author     Felix Gilcher <felix.gilcher@bitextender.com>
+	 * @since      1.0.0
+	 */
+	protected static function createSuite($name, array $suite) 
 	{
 		$s = new $suite['class']($name);
 		foreach($suite['testfiles'] as $file) {

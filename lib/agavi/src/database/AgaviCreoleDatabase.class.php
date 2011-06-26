@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -55,9 +55,11 @@
  * @copyright  Authors
  * @copyright  The Agavi Project
  *
+ * @deprecated To be removed in Agavi 1.1 
+ * 
  * @since      0.9.0
  *
- * @version    $Id: AgaviCreoleDatabase.class.php 4578 2010-08-20 19:16:28Z david $
+ * @version    $Id: AgaviCreoleDatabase.class.php 4675 2011-06-05 15:29:46Z david $
  */
 class AgaviCreoleDatabase extends AgaviDatabase
 {

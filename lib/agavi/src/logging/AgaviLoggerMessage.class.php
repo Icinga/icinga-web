@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,7 +26,7 @@
  *
  * @since      0.10.0
  *
- * @version    $Id: AgaviLoggerMessage.class.php 4560 2010-08-16 09:31:30Z david $
+ * @version    $Id: AgaviLoggerMessage.class.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviLoggerMessage extends AgaviParameterHolder
 {

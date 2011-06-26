@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -38,7 +38,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviFormPopulationFilter.class.php 4530 2010-05-11 13:57:54Z david $
+ * @version    $Id: AgaviFormPopulationFilter.class.php 4670 2011-05-25 20:55:13Z david $
  */
 class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilter, AgaviIActionFilter
 {
@@ -179,30 +179,49 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 
 		if(libxml_get_last_error() !== false) {
 			$errors = array();
+			$maxError = LIBXML_ERR_NONE;
 			foreach(libxml_get_errors() as $error) {
 				$errors[] = sprintf('[%s #%d] Line %d: %s', $error->level == LIBXML_ERR_WARNING ? 'Warning' : ($error->level == LIBXML_ERR_ERROR ? 'Error' : 'Fatal'), $error->code, $error->line, $error->message);
+				$maxError = max($maxError, $error->level);
 			}
 			libxml_clear_errors();
 			libxml_use_internal_errors($luie);
 			$emsg = sprintf(
-				'Form Population Filter could not parse the document due to the following error%s: ' . "\n\n%s",
+				"Form Population Filter encountered the following error%s while parsing the document:\n\n"
+				. "%s\n\n"
+				. "Non-fatal errors are typically recoverable; you may set the 'ignore_parse_errors' configuration parameter to LIBXML_ERR_WARNING or LIBXML_ERR_ERROR (default) to suppress them.\n"
+				. "If you set 'ignore_parse_errors' to LIBXML_ERR_FATAL (recommended for production), Form Population Filter will silently abort execution in the event of fatal errors.\n"
+				. "Regardless of the setting, all errors encountered will be logged.",
 				count($errors) > 1 ? 's' : '',
 				implode("\n", $errors)
 			);
 			if(AgaviConfig::get('core.use_logging') && $cfg['log_parse_errors']) {
+				$severity = AgaviLogger::INFO;
+				switch($maxError) {
+					case LIBXML_ERR_WARNING:
+						$severity = AgaviLogger::WARN;
+						break;
+					case LIBXML_ERR_ERROR:
+						$severity = AgaviLogger::ERROR;
+						break;
+					case LIBXML_ERR_FATAL:
+						$severity = AgaviLogger::FATAL;
+						break;
+				}
 				$lmsg = $emsg . "\n\nResponse content:\n\n" . $response->getContent();
 				$lm = $this->context->getLoggerManager();
 				$mc = $lm->getDefaultMessageClass();
-				$m = new $mc($lmsg, $cfg['logging_severity']);
+				$m = new $mc($lmsg, $severity);
 				$lm->log($m, $cfg['logging_logger']);
 			}
 			
-			// all in all, that didn't go so well. let's see if we should just silently abort instead of throwing an exception
-			if($cfg['ignore_parse_errors']) {
+			// should we throw an exception, or carry on?
+			if($maxError > $cfg['ignore_parse_errors']) {
+				throw new AgaviParseException($emsg);
+			} elseif($maxError == LIBXML_ERR_FATAL) {
+				// for fatal errors, we cannot continue populating, so we must silently abort
 				return;
 			}
-			
-			throw new AgaviParseException($emsg);
 		}
 
 		libxml_clear_errors();
@@ -600,7 +619,19 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 					$this->doc->documentElement->setAttributeNode($attribute);
 				}
 			}
-			$out = $this->doc->saveXML($this->doc, $cfg['savexml_options']);
+			if(strpos(PHP_VERSION, '5.2.6') === 0) { // check like this so 5.2.6-0.dotdeb.yourmom is also matched
+				// PHP 5.2.6 does not accept null as the first argument to saveXML()
+				// as a workaround, the whole document can be passed, but then it is saved as UTF-8, no matter what, so that won't work for other charsets
+				if(!$cfg['savexml_options']) {
+					$out = $this->doc->saveXML();
+				} elseif($utf8) {
+					$out = $this->doc->saveXML($this->doc, $cfg['savexml_options']);
+				} else {
+					throw new AgaviException("On systems running PHP version 5.2.6, the parameter 'savexml_options' cannot be used in combination with input documents that have a character set other than UTF-8. Please see the following tickets for details:\n\n- http://trac.agavi.org/ticket/1372\n- http://trac.agavi.org/ticket/1279\n- http://bugs.php.net/46191\n- http://trac.agavi.org/ticket/1262");
+				}
+			} else {
+				$out = $this->doc->saveXML(null, $cfg['savexml_options']);
+			}
 			if((!$cfg['parse_xhtml_as_xml'] || !$properXhtml) && $cfg['cdata_fix']) {
 				// these are ugly fixes so inline style and script blocks still work. better don't use them with XHTML to avoid trouble
 				// http://www.456bereastreet.com/archive/200501/the_perils_of_using_xhtml_properly/
@@ -960,9 +991,8 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 			'field_error_messages'       => array(),
 			'multi_field_error_messages' => array(),
 
-			'ignore_parse_errors'        => false,
+			'ignore_parse_errors'        => LIBXML_ERR_ERROR,
 			'log_parse_errors'           => true,
-			'logging_severity'           => AgaviLogger::FATAL,
 			'logging_logger'             => null,
 		));
 
@@ -991,6 +1021,17 @@ class AgaviFormPopulationFilter extends AgaviFilter implements AgaviIGlobalFilte
 			}
 		}
 		$this->setParameter('savexml_options', $savexmlOptions);
+
+		$ignoreParseErrors =& $this->getParameter('ignore_parse_errors');
+		if(is_string($ignoreParseErrors) && defined($ignoreParseErrors)) {
+			$ignoreParseErrors = constant($ignoreParseErrors);
+		}
+		// BC
+		if($ignoreParseErrors === true) {
+			$ignoreParseErrors = LIBXML_ERR_FATAL;
+		} elseif($ignoreParseErrors === false) {
+			$ignoreParseErrors = LIBXML_ERR_NONE;
+		}
 
 		// and now copy all that to the request namespace so it can all be modified at runtime, not just overwritten
 		$this->context->getRequest()->setAttributes($this->getParameters(), 'org.agavi.filter.FormPopulationFilter');

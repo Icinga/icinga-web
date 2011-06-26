@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   This file is part of the Agavi package.
-  Copyright (c) 2005-2010 the Agavi Project.
+  Copyright (c) 2005-2011 the Agavi Project.
   Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.
 
   For the full copyright and license information, please view the LICENSE file
@@ -14,7 +14,7 @@
   -->
 
 <!--
-  $Id: build.xml 4601 2010-12-12 00:08:13Z impl $
+  $Id: build.xml 4667 2011-05-20 12:34:58Z david $
   -->
 <project name="Agavi" basedir="." default="status">
 

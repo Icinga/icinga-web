@@ -30,7 +30,8 @@
 				<!-- The path to our models -->
 				<ae:parameter name="load_models">%core.module_dir%/AppKit/lib/database/models/generated</ae:parameter>
 				<ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>				
-	
+                                <!-- Oracle specific -->
+                                <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
 			</database>
 			
 			<!-- include alternative configuration -->

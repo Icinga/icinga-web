@@ -21,6 +21,16 @@
 .icon-24 { height:24px; width:24px}
 .icon-16 { height:16px; width:16px}
 
+.icinga-image-link {
+	height: 16px;
+	line-height: 16px;
+	background-position: 0px center;
+	display: inline-block;
+	padding: 0px 0px 0px 20px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
@@ -124,5 +134,8 @@
 
 .icinga-icon-status { background-image: url(../images/icons/status.png) !important; background-repeat: no-repeat; }
 .icinga-icon-status-busy { background-image: url(../images/icons/status-busy.png) !important; background-repeat: no-repeat; }
+
+.icinga-icon-drilldown { background-image: url(../images/icons/drill--plus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-drillup { background-image: url(../images/icons/drill--minus.png) !important; background-repeat: no-repeat; }
 
 /* EOF */

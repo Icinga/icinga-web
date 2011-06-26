@@ -287,8 +287,13 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 			width:100
 		},{
 			header:_('Status information'),
-			dataIndex: 'external_info',
+			dataIndex: 'external_info',	
 			width:100
+		},{
+            header: _(''),
+            width:25,
+            dataIndex: 'info_url'
+        	
 		},{
 			header:_('Priority'),
 			dataIndex: 'display_prio',
@@ -316,10 +321,16 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 					var host_name = el.getAttribute("service");
 					var cronk = {
 						parentid: Ext.id(),
-						title: 'Service history for '+service_name,
+						title: 'Services for '+service_name,
 						crname: 'gridProc',
 						closable: true,
-						params: {template: 'icinga-service-history-template'}
+						module: 'Cronks',
+						action: 'System.ViewProc',
+						params: {
+							module: 'Cronks',
+							action: 'System.ViewProc',
+							template: 'icinga-service-template'
+						}
 					};
 					var filter = {};
 					filter["f[service_name-value]"] = service_name; 	
@@ -351,10 +362,14 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 					var host_name = el.getAttribute("host");
 					var cronk = {
 						parentid: Ext.id(),
-						title: 'Host history for '+host_name,
+						title: 'Host '+host_name,
 						crname: 'gridProc',
 						closable: true,
-						params: {template: 'icinga-host-history-template'}
+						params: {
+							module: 'Cronks',
+							action: 'System.ViewProc',
+							template: 'icinga-host-template'
+						}
 					};
 					var filter = {};
 					filter["f[host_name-value]"] = host_name; 	
@@ -365,13 +380,56 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 				el.hasLink = true;
 			},this)					
 		},
+		/**
+		* Parses any links provided to iframe providers
+		*
+		*/	
+		buildExternalLinks: function() {
+			var link_selector = Ext.DomQuery.jsSelect(".x-treegrid a");
+			Ext.each(link_selector,function(item) {	
 		
+				var el = (Ext.get(item));
+				if(!el.getAttribute('href') || el.getAttribute('href')== "#")
+					return true;
+				var replace = document.createElement("div");		
+			
+				replace.innerHTML = el.dom.innerHTML || '&nbsp;';
+				var replaceEl = Ext.get(replace);
+				replaceEl.qtip = el.qtip;
+				replaceEl.addClass(el.dom.className);
+				var link = el.getAttribute('href');
+				replaceEl.on("click",function() {	
+					var panel = Ext.getCmp('cronk-tabs');
+					var urlTab = panel.add({
+						parentid: Ext.id(),
+						xtype: 'cronk',
+						title: replace.innerHTML+'('+link+')',
+						crname: 'genericIFrame',
+						closable: true,
+						params: {
+							module: 'Cronks',
+							action: 'System.ViewProc',
+							url: link
+						}
+					});
+					panel.doLayout();
+					panel.setActiveTab(urlTab);	
+				});	
+			
+				el.replaceWith(replace);
+			
+			});	
+		},
+
 		/**
 		 * Aggregate function that creates the links in the tree
 		 */
 		buildSelectors: new Ext.util.DelayedTask(function(args) {
 			this.buildServiceLinks();
 			this.buildHostLinks()
+			this.buildExternalLinks();
+			
+	
 		},this),
 		
 		/**
@@ -444,8 +502,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 							return false;
 					}
 				}
-			}
-			
+			}	
 		},
 
 		buildAPIFilterFromObject : function(obj,prefix) {
