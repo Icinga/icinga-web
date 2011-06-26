@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Atlantic/Stanley".
- * Compiled from olson file "southamerica", version 8.44.
+ * Compiled from olson file "southamerica", version 8.49.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Atlantic_47_Stanley.php 4491 2010-04-22 16:13:16Z david $
+ * @version    $Id: Atlantic_47_Stanley.php 4653 2011-04-27 06:48:36Z david $
  */
 
 return array (
@@ -316,6 +316,56 @@ return array (
       'time' => 999410400,
       'type' => 2,
     ),
+    53 => 
+    array (
+      'time' => 1019365200,
+      'type' => 1,
+    ),
+    54 => 
+    array (
+      'time' => 1050818400,
+      'type' => 1,
+    ),
+    55 => 
+    array (
+      'time' => 1082268000,
+      'type' => 1,
+    ),
+    56 => 
+    array (
+      'time' => 1113717600,
+      'type' => 1,
+    ),
+    57 => 
+    array (
+      'time' => 1145167200,
+      'type' => 1,
+    ),
+    58 => 
+    array (
+      'time' => 1176616800,
+      'type' => 1,
+    ),
+    59 => 
+    array (
+      'time' => 1208671200,
+      'type' => 1,
+    ),
+    60 => 
+    array (
+      'time' => 1240120800,
+      'type' => 1,
+    ),
+    61 => 
+    array (
+      'time' => 1271570400,
+      'type' => 1,
+    ),
+    62 => 
+    array (
+      'time' => 1334469600,
+      'type' => 1,
+    ),
   ),
   'finalRule' => 
   array (
@@ -339,10 +389,10 @@ return array (
       'time' => 7200000,
       'type' => 0,
     ),
-    'startYear' => 2001,
+    'startYear' => 2011,
   ),
   'source' => 'southamerica',
-  'version' => '8.44',
+  'version' => '8.49',
   'name' => 'Atlantic/Stanley',
 );
 

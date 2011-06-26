@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -25,7 +25,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: shiny.php 4579 2010-08-22 19:50:03Z david $
+ * @version    $Id: shiny.php 4667 2011-05-20 12:34:58Z david $
  */
 
 // we're not supposed to display errors
@@ -66,6 +66,9 @@ if($svg) {
 }
 
 ?>
+<!--
+<?php ob_start(); include('plaintext.php'); $plaintext = ob_get_contents(); ob_end_clean(); echo str_replace('--', '~~', $plaintext); /* or else unclosed comments break XHTML */ ?>
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"<?php if($svg): ?> xmlns:svg="http://www.w3.org/2000/svg"<?php endif; ?>>
 	<head>
@@ -413,3 +416,6 @@ endforeach;
 		</section>
 	</body>
 </html>
+<!--
+<?php ob_start(); include('plaintext.php'); $plaintext = ob_get_contents(); ob_end_clean(); echo str_replace('--', '~~', $plaintext); /* or else unclosed comments break XHTML */ ?>
+-->

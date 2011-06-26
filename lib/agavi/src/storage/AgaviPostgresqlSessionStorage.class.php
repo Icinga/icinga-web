@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -45,7 +45,7 @@
  *
  * @since      0.9.0
  *
- * @version    $Id: AgaviPostgresqlSessionStorage.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviPostgresqlSessionStorage.class.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviPostgresqlSessionStorage extends AgaviSessionStorage
 {
@@ -292,7 +292,7 @@ class AgaviPostgresqlSessionStorage extends AgaviSessionStorage
 		$id   = addslashes($id);
 		$data = addslashes($data);
 
-		$ts = date($this->getParameter('date_format', 'U'), $time);
+		$ts = date($this->getParameter('date_format', 'U'));
 		if(is_numeric($ts)) {
 			$ts = (int)$ts;
 		} else {

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -34,7 +34,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviNumberValidator.class.php 4456 2010-03-21 19:11:45Z david $
+ * @version    $Id: AgaviNumberValidator.class.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviNumberValidator extends AgaviValidator
 {

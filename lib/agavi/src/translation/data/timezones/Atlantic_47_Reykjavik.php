@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Atlantic/Reykjavik".
- * Compiled from olson file "europe", version 8.27.
+ * Compiled from olson file "europe", version 8.32.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Atlantic_47_Reykjavik.php 4577 2010-08-20 18:56:31Z david $
+ * @version    $Id: Atlantic_47_Reykjavik.php 4653 2011-04-27 06:48:36Z david $
  */
 
 return array (
@@ -379,7 +379,7 @@ return array (
     'startYear' => 1969,
   ),
   'source' => 'europe',
-  'version' => '8.27',
+  'version' => '8.32',
   'name' => 'Atlantic/Reykjavik',
 );
 

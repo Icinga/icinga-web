@@ -2,7 +2,7 @@
 
 /**
  * Data file for timezone "Australia/Brisbane".
- * Compiled from olson file "australasia", version 8.20.
+ * Compiled from olson file "australasia", version 8.23.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: Australia_47_Brisbane.php 4590 2010-12-07 08:11:19Z david $
+ * @version    $Id: Australia_47_Brisbane.php 4640 2011-04-16 11:13:19Z david $
  */
 
 return array (
@@ -131,7 +131,7 @@ return array (
     'startYear' => 1993,
   ),
   'source' => 'australasia',
-  'version' => '8.20',
+  'version' => '8.23',
   'name' => 'Australia/Brisbane',
 );
 

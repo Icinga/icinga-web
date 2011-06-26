@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -27,7 +27,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: AgaviDoctrineDatabase.class.php 4578 2010-08-20 19:16:28Z david $
+ * @version    $Id: AgaviDoctrineDatabase.class.php 4667 2011-05-20 12:34:58Z david $
  */
 class AgaviDoctrineDatabase extends AgaviDatabase
 {
@@ -106,7 +106,7 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 		// that way, you can just start using classes in your code
 		try {
 			$dsn = $this->getParameter('dsn');
-	
+			
 			if($dsn === null) {
 				// missing required dsn parameter
 				$error = 'Database configuration specifies method "dsn", but is missing dsn parameter';
@@ -119,12 +119,9 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 			
 			// set our event listener that, on connect, sets the configured charset and runs init queries
 			$this->connection->setListener(new AgaviDoctrineDatabaseEventListener($this));
-			
+		    $this->connection->setPrefix($this->getParameter('prefix',""));	
 			// set the context instance as a connection parameter
 			$this->connection->setParam('context', $databaseManager->getContext(), 'org.agavi');
-
-
-			$this->connection->setPrefix($this->getParameter('prefix',""));
 			
 			// date format
 			if($this->hasParameter('date_format')) {
@@ -181,7 +178,6 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 			if($is12 && ($this->hasParameter('load_models') || $this->hasParameter('models_directory'))) {
 				if(!in_array(array('Doctrine', 'modelsAutoload'), $splAutoloadFunctions) && !in_array(array('Doctrine_Core', 'modelsAutoload'), $splAutoloadFunctions)) {
 					spl_autoload_register(array('Doctrine_Core', 'modelsAutoload'));
-					
 				}
 				
 				if($this->hasParameter('models_directory')) {

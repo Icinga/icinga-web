@@ -2,7 +2,7 @@
 
 /**
  * Zone list file.
- * Generated on 2010-12-07T08:10:23+00:00.
+ * Generated on 2011-04-27T06:38:35+00:00.
  *
  * @package    agavi
  * @subpackage translation
@@ -12,7 +12,7 @@
  *
  * @since      0.11.0
  *
- * @version    $Id: zonelist.php 4590 2010-12-07 08:11:19Z david $
+ * @version    $Id: zonelist.php 4653 2011-04-27 06:48:36Z david $
  */
 
 return array (
@@ -316,6 +316,11 @@ return array (
     'type' => 'zone',
     'filename' => 'America_47_North_Dakota_47_New_Salem.php',
   ),
+  'America/North_Dakota/Beulah' => 
+  array (
+    'type' => 'zone',
+    'filename' => 'America_47_North_Dakota_47_Beulah.php',
+  ),
   'America/Denver' => 
   array (
     'type' => 'zone',
@@ -330,6 +335,16 @@ return array (
   array (
     'type' => 'zone',
     'filename' => 'America_47_Juneau.php',
+  ),
+  'America/Sitka' => 
+  array (
+    'type' => 'zone',
+    'filename' => 'America_47_Sitka.php',
+  ),
+  'America/Metlakatla' => 
+  array (
+    'type' => 'zone',
+    'filename' => 'America_47_Metlakatla.php',
   ),
   'America/Yakutat' => 
   array (

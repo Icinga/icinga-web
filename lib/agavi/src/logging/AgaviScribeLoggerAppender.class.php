@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
 // | file that was distributed with this source code. You can also view the    |
@@ -26,6 +26,7 @@
  *  'socket_host'            - Hostname of scribe server (default "localhost")
  *  'socket_port'            - Port of scribe server (default 1463)
  *  'socket_persist'         - Whether to use persistent conns (default false)
+ *  'socket_timeout'         - Socket timeout in seconds (default The thrift default)
  *  'transport_strict_read'  - Strict protocol reads (default false)
  *  'transport_strict_write' - Strict protocol writes (default true)
  *
@@ -70,6 +71,10 @@ class AgaviScribeLoggerAppender extends AgaviLoggerAppender
 		if(!$this->scribeClient) {
 			$socketClass = $this->getParameter('socket_class', 'TSocket');
 			$socket = new $socketClass($this->getParameter('socket_host', 'localhost'), $this->getParameter('socket_port', 1463), $this->getParameter('socket_persist', false));
+			if($this->hasParameter('socket_timeout')) {
+				// setRecvTimeout takes milliseconds
+				$socket->setRecvTimeout(1000 * $this->getParameter('socket_timeout'));
+			}
 			
 			$transportClass = $this->getParameter('transport_class', 'TFramedTransport');
 			$this->transport = new $transportClass($socket);
