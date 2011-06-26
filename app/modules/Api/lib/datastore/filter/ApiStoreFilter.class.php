@@ -4,10 +4,8 @@ class ApiStoreFilter extends GenericStoreFilter {
     * returns the filter definitions. These are mainly needed by the api-creation mechanismn
     * - invalid field/value combinations should be handled by the validator
     **/
-    static private function getFilterDefs() {
-        return array();    
-    }
-
+    protected $filterFields = array();
+    
     public static function parse($filter,$parser) {
         if(!isset($filter["field"]) || !isset($filter["operator"]) || !isset($filter["value"]))
             return null;
@@ -15,7 +13,7 @@ class ApiStoreFilter extends GenericStoreFilter {
     }
 
     public function initFieldDefinition() {
-        $filters = self::getFilterDefs();
+        $filters = $this->filterDefs;
         foreach($filters as $filter) {
             $f = new StoreFilterField();
             $f->displayName = $filter["display_name"];

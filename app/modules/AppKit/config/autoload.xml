@@ -89,7 +89,7 @@
 		<autoload name="AppKitHtmlUtil">%core.module_dir%/AppKit/lib/util/AppKitHtmlUtil.class.php</autoload>
 		<autoload name="AppKitFileUtil">%core.module_dir%/AppKit/lib/util/AppKitFileUtil.class.php</autoload>
 		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
-
+        <autoload name="IDispatchableAction">%core.module_dir%/AppKit/lib/action/IDispatchableAction.php</autoload>
 		<!-- Custom validators -->
 		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
 		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>

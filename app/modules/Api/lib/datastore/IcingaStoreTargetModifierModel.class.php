@@ -3,18 +3,19 @@
 class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataStoreModifier
 {
     protected $mappedParameters = array(
-        "target" => "target",
-        "joins" => "joins",
+        "target" => "target", 
         "fields" => "fields"
     );
     
     protected $allowedFields = array();
+    protected $defaultFields = array();
     protected $aliasDefs = array();
     
     private $target = array();
     private $fields = array();
     private $joins = array();
-
+    
+    
     public function handleArgument($name,$value) {
         switch($name) {
             case 'target':
@@ -23,20 +24,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             case 'fields': 
                 $this->setFields($value);
                 break;
-            case 'joins':
-                // check structure
-                if(!is_array($value))
-                    throw new InvalidArgumentException("Joins in storetarget must be defined as".
-                        " an array");
-                foreach($value as $val) {
-                    if(!is_array($val))
-                        throw new InvalidArgumentException("Joins must be defined as an array of json objects/arrays");
-                    if(!isset($val["src"]) || !isset($val["relation"]) || !isset($val["alias"]))
-                        throw new InvalidArgumentException("Invalid join: Must contain "+
-                            "src, relation and alias (optional : type)");
-                }
-                $this->joins = $value;
-        }
+         }
     }
     
     public function setFields($fields) {
@@ -96,7 +84,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
         return array(
             "type" => "fields",
             "allowedFields" => $this->allowedFields,
-            //"allowedJoins" => $this->allowedJoins,
+            "defaultFields" => $this->defaultFields,
             "params" => $this->getMappedArguments()
         );
     }

@@ -2,19 +2,19 @@
 
 class StoreFilterFieldApiValues 
 {
-    public $action = "";
-    public $module = "";
+    public $target = "";
+    public $column = "";
     public $filter = ""; 
-    public function __construct($action,$module,$filter) {
-        $this->action = $action;
-        $this->module = $module;
+    public function __construct($target,$column,array $filter = array()) {
+        $this->target = $target;
+        $this->column = $column;
         $this->filter = $filter;
     }
 
     public function __toArray() {
         return array(
-            "action"=>$this->action,
-            "module"=>$this->module,
+            "target"=>$this->target,
+            "column"=>$this->column,
             "filter"=>$this->filter
         );
     }
@@ -38,9 +38,7 @@ class StoreFilterField
         "is exact" => "=", 
         "is not" => "!=",
         "is like" => "LIKE",
-        "is not like" => "NOT LIKE",
-        "in" => "IN",
-        "not in" => "NOT IN"
+        "is not like" => "NOT LIKE" 
     );
     public $displayName;
     public $name;
@@ -50,6 +48,13 @@ class StoreFilterField
     public function __construct() {
         $this->operators = self::$TEXT_MODIFIER;
     }
+    
+    static public function init($display,$name,array $values = array()) {
+        $o = new self();
+        $o->displayName = $displayname;
+        $o->name = $name;
+        $o->possibleValues = $values;
+    } 
 
     public function __toArray() {
         $vals = $this->possibleValues;

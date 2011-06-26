@@ -104,16 +104,23 @@ class AppKitApiProviderParser  {
         /**
         * There is no controller available at this time, so we have to handle modelloading by ourselves
         **/ 
-        $modelDefinition = $obj->getDataStoreModel(); 
-        $modelName = $modelDefinition["model"];
-		$moduleName = $modelDefinition["module"];
-        
-        // fetch JS Descriptor 
-        $dataStore = AgaviContext::getInstance()->getModel($modelName,$moduleName,array("request" => new AgaviRequestDataHolder()));        
-        $dataStore->initialize(AgaviContext::getInstance(),array("request" => new AgaviRequestDataHolder()));
-        foreach($dataStore->getModifiers() as $modifier) {
-            $jsDescriptor[] = $modifier->__getJSDescriptor(); 
-            
+        $modelDefinitionList = $obj->getDataStoreModel();
+        if(!is_array($modelDefinitionList)) 
+            return array();
+        if(isset($modelDefinitionList["model"])) // allow objects with a flatter object structure
+            $modelDefinitionList = array($modelDefinitionList);
+        $jsDescriptor = array();
+        foreach($modelDefinitionList as $modelDefinition) {
+            $modelName = $modelDefinition["model"];
+		    $moduleName = $modelDefinition["module"];
+            $descArr = array();
+            // fetch JS Descriptor 
+            $dataStore = AgaviContext::getInstance()->getModel($modelName,$moduleName,array("request" => new AgaviRequestDataHolder()));        
+            $dataStore->initialize(AgaviContext::getInstance(),array("request" => new AgaviRequestDataHolder()));
+            foreach($dataStore->getModifiers() as $modifier) {
+               $descArr[] = $modifier->__getJSDescriptor(); 
+            }
+            $jsDescriptor[$modelDefinition["id"]] = $descArr;
         }
         return  $jsDescriptor; 
         

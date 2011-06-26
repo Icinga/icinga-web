@@ -36,39 +36,6 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
             $this->assertNotEquals($host["services"][0]["display_name"],"");
         }
     }
-
-    /**
-    * @expectedException InvalidArgumentException
-    * @dataProvider      storeModelProvider
-    **/
-    public function testInvalidMultiRelationReadWithScalar($model) {
-        $ctx = AgaviContext::getInstance();
-        $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts');
-        $req->setParameter('fields',array('host_id','s.*'));
-        $req->setParameter('joins',"InvalidScalarRequest");
-        $dataStore = $ctx->getModel($model,'Api',array(
-           "request" => $req
-        ));
-        $result = $dataStore->doRead();
-    }
-
-    /**
-    * @expectedException InvalidArgumentException
-    * @dataProvider      storeModelProvider
-    **/
-    public function testInvalidMultiRelationReadWithMissingSrc($model) {
-        $ctx = AgaviContext::getInstance();
-        $req = new AgaviRequestDataHolder();
-        $req->setParameter('target','IcingaHosts');
-        $req->setParameter('fields',array('host_id','s.*'));
-        $req->setParameter('joins',array(array("relation"=> "services","alias" => "s")));
-        $dataStore = $ctx->getModel($model,'Api',array(
-           "request" => $req
-        ));
-        $result = $dataStore->doRead();
-    }
-
     /**
     *
     * @dataProvider      storeModelProvider
