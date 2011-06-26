@@ -76,9 +76,10 @@ abstract class GenericStoreFilter extends StoreFilterBase
     * @return Boolean/String    True if valid, errormessage instead
     **/
     protected function checkIfValid() {
+       
         if(empty($this->__fields))
             $this->initFieldDefinition();
-        
+        /* EXAMPLE 
         $fieldMatches = false;
         $opMatches = false;
         
@@ -88,7 +89,8 @@ abstract class GenericStoreFilter extends StoreFilterBase
                 return true;     
         }
        
-        return "Invalid Filter field/operator combination :".$this->field." ".$this->operator;
+        return "Invalid Filter field/operator combination :".$this->field." ".$this->operator; */
+        return true;
     }
 
     /**
@@ -115,6 +117,7 @@ abstract class GenericStoreFilter extends StoreFilterBase
         foreach($this->__fields as $field) {
             $fields[] = $field->__toArray();
         }
-        return array("type"=>"atom", "filters"=>$fields);
+        
+        return array("type"=>"atom", "filter"=>$fields);
     }
 }

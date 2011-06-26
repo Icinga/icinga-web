@@ -1,9 +1,9 @@
 <?php
 class HostTargetModifier extends IcingaStoreTargetModifierModel {
    protected $allowedFields = array(
+        "Icon"                  => "icon_image", 
         "Host id"               => "host_id",
         "Instance"              => "i.instance_name",
-        "Icon"                  => "icon_image", 
         "Host name"             => "display_name",
         // Status definitions
         "Status"                => "hs.current_state", 
@@ -46,7 +46,17 @@ class HostTargetModifier extends IcingaStoreTargetModifierModel {
         "Service status"        => "ss.current_state",
         "Service last check"    => "ss.status_update_time"
     );
-
+    protected $defaultFields = array(
+        "icon_image",
+        "host_id", 
+        "display_name",
+        "hs.current_state",
+        "hs.output",
+        "hs.long_otput",
+        "hs.perfdata",
+        "hs.status_update_time"
+      
+    );
     protected $aliasDefs = array( 
         "i"     => array("src" => "my", "relation" => "instance"),
         "hs"    => array("src" => "my", "relation" => "status"),
@@ -64,7 +74,25 @@ class HostFilterModifier extends IcingaStoreFilterModifierModel {
 }
 
 class HostFilter extends ApiStoreFilter {
-    
+    public function initFieldDefinition() {
+        $hostnameFilter = new StoreFilterField();
+        $hostnameFilter->displayName    = "Hostname";
+        $hostnameFilter->name = "display_name";  
+        $hostnameFilter->possibleValues = array(new StoreFilterFieldApiValues(
+            "host","HOST_NAME", array("ANY")
+        ));
+
+        $statusFilter = new StoreFilterField();
+        $statusFilter->displayName = "Status";
+        $statusFilter->name = "hs.current_state";
+        $statusFilter->possibleValues = array(
+            "0" => "Up",
+            "1" => "Down",
+            "2" => "Unreachable"
+        );
+        $this->addFilterField($hostnameFilter);
+
+    } 
 } 
 
 

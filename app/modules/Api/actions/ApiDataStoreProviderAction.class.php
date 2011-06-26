@@ -21,21 +21,23 @@ class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction implements IApp
 
 
     public function getDataStoreModel() {
-       /* return array(
+       return array(
            /* array(
                 "module" => "Api",
                 model" => "Store.IcingaApiDataStore"
             ), array(
                 "module" => "Api",
                 "model" => "Store.IcingaApiDataStore"
-            ), array(
-                "module" => "Api",
-                "model" => "Store.IcingaApiDataStore"
-            ),*/ return array(
+            ),*/ array(
+                "id" => "Hosts",
                 "module" => "Api",
                 "model" => "Store.HostStore"
-            );
-       // );
+            ),array(
+                "id" => "Services",
+                "module" => "Api",
+                "model" => "Store.HostStore"
+            )
+       );
     }
 }
 

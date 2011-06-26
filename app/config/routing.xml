@@ -24,7 +24,7 @@
 				<route name=".logout" pattern="^/logout" action="Logout"/>
 
 				<route name=".squishloader" pattern="^/squishloader/javascript" action="Widgets.SquishLoader" output_type="javascript"/>
-
+                <route name=".dispatcher" pattern="^/dispatch" action="Dispatcher" output_type="json" /> 
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
 					 <route name=".principaledit" pattern="^/principaleditor" action="Admin.PrincipalEditor" output_type="simple"/>
 					 <route name=".users" pattern="^/users" action="Admin.Users.Index">
@@ -47,7 +47,7 @@
 				
 					<!-- Data Provider -->
 				 <route name=".data" pattern="^/provider" output_type="json">
-					<route name=".users" pattern="^/user" action="DataProvider.UserProvider" api_provider="true">
+					<route name=".users" pattern="^/user" action="DataProvider.UserProvider" >
 					  <route pattern="^/(userId:\d+)" action="DataProvider.UserProvider"/>
 					</route>
 					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
@@ -119,7 +119,8 @@
 					<route name=".json" pattern="^/json" action="Icinga.ApiSimpleDataProvider"/>
 				</route>
 				<route module="Api" name=".api" pattern="^/api" action="ApiSearch">
-					<route name=".icingaStatus" output_type="json" stop="false" pattern="^/icinga/statusProvider" action="IcingaInstanceController"/>
+					<route name=".dataStore" output_type="html" stop="true" pattern="^/dataStore" action="ApiDataStoreProvider" api_provider="true"/>
+                    <route name=".icingaStatus" output_type="json" stop="false" pattern="^/icinga/statusProvider" action="IcingaInstanceController"/>
 					<route name=".command" stop="false" pattern="^/cmd/" output_type="json" action="ApiCommand">
 						<route name=".cmdParam" stop="false" pattern="cmd=(command:[^/]*)/" />
 						<route name=".authkey" stop="false" pattern="authkey=(authkey:[^/]*)" />

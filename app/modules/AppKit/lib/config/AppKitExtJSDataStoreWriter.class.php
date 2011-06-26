@@ -8,7 +8,7 @@ class AppKitExtJSDataStoreWriter {
         foreach($descriptor as $store) {
             $this->createStore($store);
         }
-        $js = "Ext.ns('Icinga.ServerStore');\n\n";
+        $js = "Ext.ns('Icinga.Api');\n\n";
         foreach($this->jsParts as $part) {
             $js .= $part;
         } 
@@ -17,15 +17,27 @@ class AppKitExtJSDataStoreWriter {
     }
 
     private function createStore(array $store) {
-        $rewritten = array();
-        foreach($store as $key=>$elem) {
-            if(is_numeric($key))            
-                $rewritten[$elem["type"]] = $elem;
+        
+        $rewritten = array();
+       
+        foreach($store as $key=>$elem) { 
+            if(is_array($elem))            
+                $rewritten[$key] = $this->rewriteArray($elem);
             else 
                 $rewritten[$key] = $elem;
-         }
-        $this->jsParts[] = "Ext.ns('Icinga.ServerStore.".$store["module"]."')['".$store["action"]."'] = ".json_encode($rewritten)."\n\n";
+        }  
+  
+        $this->jsParts[] = "Ext.ns('Icinga.Api')['".$store["module"]."_".$store["action"]."'] = ".json_encode($rewritten)."\n\n";
         
     }
+    private function rewriteArray($arr) {
+        $rewritten = array();
 
+        foreach($arr as $key=>$elem) {
+            if(is_numeric($key))
+                $rewritten[$elem["type"]] = $elem;
+        }
+
+        return $rewritten;
+    }
 }
