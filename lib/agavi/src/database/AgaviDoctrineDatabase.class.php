@@ -119,7 +119,7 @@ class AgaviDoctrineDatabase extends AgaviDatabase
 			
 			// set our event listener that, on connect, sets the configured charset and runs init queries
 			$this->connection->setListener(new AgaviDoctrineDatabaseEventListener($this));
-			
+		    $this->connection->setPrefix($this->getParameter('prefix',""));	
 			// set the context instance as a connection parameter
 			$this->connection->setParam('context', $databaseManager->getContext(), 'org.agavi');
 			
