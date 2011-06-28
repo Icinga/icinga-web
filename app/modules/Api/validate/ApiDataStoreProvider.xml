@@ -7,32 +7,30 @@
 	<ae:configuration>
        	
 		<validators method="write">
-            <validator name="target" class="String">
+            <validator name="target" class="string">
                 <argument>target</argument>
             </validator> 
-            <validator name="fields" class="String">
+            <validator name="fields" class="string">
                 <argument>fields</argument>
             </validator>
-            <validator name="joins" class="AppKitJsonValidator">
-                <argument>joins</argument>
-            </validator>
-            <validator name="limit" class="Number">
+            
+            <validator name="limit" class="number" required="false">
                 <argument>limit</argument>
                 <ae:parameters>
                     <ae:parameter name="min">0</ae:parameter>
                     <ae:parameter name="max">100</ae:parameter>
                 </ae:parameters>
             </validator>
-            <validator name="offset" class="Number">
+            <validator name="offset" class="number" required="false">
                 <argument>offset</argument>
             </validator>
-            <validator name="sortfield" class="String">
+            <validator name="sortfield" class="string" required="false">
                 <argument>sortfield</argument>
             </validator>
-            <validator name="dir" class="InArra">
+            <validator name="dir" class="inarray" required="false">
                 <argument>dir</argument>
                 <ae:parameters>
-                    <ae:parameter name="type">String</ae:parameter>
+                    <ae:parameter name="type">string</ae:parameter>
                     <ae:parameter name="case">true</ae:parameter>
                     <ae:parameter name="values">
                         <ae:parameter>ASC</ae:parameter>
@@ -40,7 +38,8 @@
                     </ae:parameter>
                 </ae:parameters> 
             </validator>
-            <validator name="filter_json" class="AppKitJsonValidator">
+            
+            <validator name="filter_json" class="AppKitJsonValidator" required="False">
                 <argument>filter_json</argument>
                 <ae:parameters>
                     <ae:parameter name="export">filter_json</ae:parameter> 

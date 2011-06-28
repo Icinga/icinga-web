@@ -1,6 +1,6 @@
 <?php
 
-class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction implements IAppKitDataStoreProviderAction
+class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction implements IAppKitDataStoreProviderAction, IDispatchableAction
 {
 	/**
 	 * Returns the default view if the action does not serve the request
@@ -19,7 +19,38 @@ class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction implements IApp
 		return 'Success';
 	}
 
-
+    public function executeWrite(AgaviRequestDataHolder $rd) {
+        $params = $rd->getParameters();
+        foreach($params as $key=>$param) {
+            
+            if(!is_string($param))
+                continue;
+            
+            $json = json_decode($param,true);
+            if($json)
+                $rd->setParameter($key,$json);
+        }
+  
+        $model = $this->getDataStoreForTarget($params["target"],$rd);
+        if(!$model)
+            return "Error"; 
+        
+        $result = $model->execRead();
+        $r = $this->getContext()->getModel("Store.DataStoreResult","Api",array("model"=>$model));
+        $r->parseResult($result,$rd->getParameter("fields",array()));
+        $this->setAttribute("result",$r);
+        
+        
+        return $this->getDefaultViewName(); 
+    }
+    public function getDataStoreForTarget($target,AgaviRequestDataHolder $rd) {
+        foreach($this->getDataStoreModel() as $model) {
+            if($model["id"] == $target) {
+                return $this->getContext()->getModel($model["model"],$model["module"],array("request" => $rd));
+            }
+        }
+        return null;
+    } 
     public function getDataStoreModel() {
        return array(
            /* array(

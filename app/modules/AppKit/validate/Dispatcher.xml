@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/AppKit/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+		    <validator class="string" name="module" required="true">
+                <argument>module</argument>
+                <errors>
+                    <error>No moule given to dispatcher</error>
+                </errors>
+            </validator> 
+            <validator class="string" name="action" required="true">
+                <argument>action</argument>
+                <errors>
+                    <error>No action given to dispatcher</error>
+                </errors>
+            </validator> 
+            <validator class="string" name="params" required="true">
+                <argument>params</argument>
+                <errors>
+                    <error>No parameters given to dispatcher</error>
+                </errors>
+
+            </validator>
+            <validator class="string" name="output_type" required="false">
+                <argument>output_type</argument>
+             </validator>
+        </validators>
+		
+	</ae:configuration>
+</ae:configurations>

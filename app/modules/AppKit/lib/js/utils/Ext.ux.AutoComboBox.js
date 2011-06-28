@@ -11,9 +11,7 @@ Ext.ux.AutoComboBox = Ext.extend(Ext.form.ComboBox, {
 	constructor : function(cfg) {
 		cfg = cfg || {};
 		cfg.storeCfg = cfg.storeCfg || {};
-		
-        cfg.name = (cfg.name || cfg.field).toLowerCase();
-		
+			
 		Ext.applyIf(cfg, {
             triggerAction : 'all',
             

@@ -45,4 +45,4 @@ class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
     }
 }
 
-?> 
+?>

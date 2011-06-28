@@ -76,7 +76,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
         return this.filter;
     },
     
-    getFilterAsJson: function() {
+    getFilterAsJson: function() { 
         return Ext.encode(this.getFilter());
     },
     

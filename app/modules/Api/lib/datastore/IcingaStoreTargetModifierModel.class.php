@@ -9,6 +9,8 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     
     protected $allowedFields = array();
     protected $defaultFields = array();
+    protected $sortFields = array();
+    protected $groupFields = array();
     protected $aliasDefs = array();
     
     private $target = array();
@@ -19,13 +21,25 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     public function handleArgument($name,$value) {
         switch($name) {
             case 'target':
-                $this->target = $value; 
+                $this->setTarget($value); 
                 break;
             case 'fields': 
                 $this->setFields($value);
                 break;
          }
     }
+  
+    public function getAllowedFields() {
+        return $this->allowedFields;
+    }
+
+    public function getAliasDefs() {
+        return $this->aliasDefs;
+    }
+  
+    public function setTarget($target) {
+        $this->target = $target;
+    } 
     
     public function setFields($fields) {
         if(!is_array($fields))
@@ -85,6 +99,8 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             "type" => "fields",
             "allowedFields" => $this->allowedFields,
             "defaultFields" => $this->defaultFields,
+            "sortFields" => $this->sortFields,
+            "groupFields" => $this->groupFields,
             "params" => $this->getMappedArguments()
         );
     }

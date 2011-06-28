@@ -29,7 +29,9 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
         foreach($this->getModifiers() as $mod) {
             $mod->modify($request);
         } 
-        return $request->execute(NULL,$this->resultType);
+        $result = $request->execute(NULL,$this->resultType);
+        
+        return array("data"=>$result,"count"=>$request->count());
     }
     /**
     *   Register modifiers, the StoreClass itself can do nothing else than creating 
@@ -75,7 +77,7 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
         foreach($this->getModifiers() as $mod) {
             if(method_exists($mod,$method)) {
                 $found = true;
-                call_user_func_array(array($mod,$method),$argument);
+                return call_user_func_array(array($mod,$method),$argument);
             }
         }
         if(!$found)

@@ -1,6 +1,12 @@
 <?php
 class HostTargetModifier extends IcingaStoreTargetModifierModel {
-   protected $allowedFields = array(
+    public function setTarget($target) {
+        if(strpos($target,"Icinga") !== 0)
+            $target = "Icinga".$target;
+        parent::setTarget($target);
+    } 
+
+    protected $allowedFields = array(
         "Icon"                  => "icon_image", 
         "Host id"               => "host_id",
         "Instance"              => "i.instance_name",
@@ -46,13 +52,21 @@ class HostTargetModifier extends IcingaStoreTargetModifierModel {
         "Service status"        => "ss.current_state",
         "Service last check"    => "ss.status_update_time"
     );
+
+    protected $sortFields = array(
+        "host_id",
+        "display_name",
+        "hs.current_state",
+        "hs_status_update_time"
+    );
+    
     protected $defaultFields = array(
         "icon_image",
         "host_id", 
         "display_name",
         "hs.current_state",
         "hs.output",
-        "hs.long_otput",
+        "hs.long_output",
         "hs.perfdata",
         "hs.status_update_time"
       
@@ -90,7 +104,17 @@ class HostFilter extends ApiStoreFilter {
             "1" => "Down",
             "2" => "Unreachable"
         );
+        
+        $serviceContainFilter = new StoreFilterField();
+        $serviceContainFilter->displayName    = "Contains service";
+        $serviceContainFilter->name = "s.display_name";  
+        $serviceContainFilter->possibleValues = array(new StoreFilterFieldApiValues(
+            "service","SERVICE_NAME", array("ANY")
+        ));
+
         $this->addFilterField($hostnameFilter);
+        $this->addFilterField($statusFilter);
+        $this->addFilterField($serviceContainFilter);
 
     } 
 } 
