@@ -45,6 +45,12 @@
 		</if>
 		
 	</target>
+	
+	<target name="agavi-clear-cache">
+		<taskdef name="agaviClearCache" classname="etc.lib..agaviClearCache"/>
+		<agaviClearCache />
+    </target>
+
 
 	<target name="db-prepare" depends="prepare">
 		<taskdef name="agaviDBExtractor" classname="etc.lib.agaviDBExtractorTask"/>	

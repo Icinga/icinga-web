@@ -96,8 +96,7 @@ locclean:
 		$(LOC_MO)/*.json
 
 cacheclean:
-	rm -rf app/cache/config/*.php
-	rm -rf app/cache/content
+	$(PHING_CALL) agavi-clear-cache	
 
 distclean:
 	rm -rf \
