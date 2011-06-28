@@ -14,7 +14,8 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
         $dataStore = $ctx->getModel($model,'Api',array(
             "request" => $req
         ));
-        $this->assertEquals(count($dataStore->doRead()),30);  
+        $r = $dataStore->doRead();
+        $this->assertEquals(count($r["data"]),$r["count"]);  
     }
 
     /**
@@ -32,6 +33,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
             "resultType" => "ARRAY"
         ));
         $result = $dataStore->doRead();
+        $result = $result["data"];
         foreach($result as $host) {    
             $this->assertNotEquals($host["services"][0]["display_name"],"");
         }
@@ -67,6 +69,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
            "request" => $req
         ));
         $recordCollection = $dataStore->doRead();
+        $recordCollection = $recordCollection["data"];
         $checkArr = array(
             "c2-proxy"  =>  true,
             "c2-mail-1" =>  true,
@@ -97,7 +100,8 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
            "resultType" => "ARRAY"
 
         ));
-        $recordCollection = $dataStore->doRead();
+        $recordCollection = $dataStore->doRead(); 
+        $recordCollection = $recordCollection["data"];
         for($i=1;$i<count($recordCollection);$i++) {
             $current = $recordCollection[$i];
             $this->assertGreaterThanOrEqual($current["display_name"],$recordCollection[$i-1]["display_name"]);
@@ -110,6 +114,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
 
         ));
         $recordCollection = $dataStore->doRead();
+        $recordCollection = $recordCollection["data"];
         for($i=1;$i<count($recordCollection);$i++) {
             $current = $recordCollection[$i];
             $this->assertLessThanOrEqual($current["display_name"],$recordCollection[$i-1]["display_name"]);
@@ -130,6 +135,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
            "resultType" => "ARRAY"
         ));
         $firstResult = $dataStore->doRead();
+        $firstResult =$firstResult["data"];
         $this->assertEquals(count($firstResult),5);
         $req->setParameter('offset',4);
         $dataStore = $ctx->getModel($model,'Api',array(
@@ -137,6 +143,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
            "resultType" => "ARRAY"
         ));
         $result = $dataStore->doRead();
+        $result = $result["data"];
         $this->assertEquals($result[0],$firstResult[4]);
     }
 
@@ -174,6 +181,7 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
            "resultType" => "ARRAY"
         ));
         $firstResult = $dataStore->doRead();
+        $firstResult =$firstResult["data"];
         $this->assertLessThanOrEqual(5,count($firstResult)); 
     }
 
