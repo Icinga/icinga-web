@@ -5,12 +5,13 @@
 
 			<!-- INDEX -->
 			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
+			
 			<route name="modules" pattern="^/modules" stop="false">
 				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='web']/node())">
 					<xi:fallback></xi:fallback>
 				</xi:include>
-
 			</route>
+			
 			<!--
 				* AppKit routes
 			-->

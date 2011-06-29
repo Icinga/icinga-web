@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
+	<ae:configuration context="web">
+		<routes>
+			<route name=".reporting" pattern="^/reporting" stop="false" module="Reporting">
+				<route name=".provider" pattern="^/provider" stop="false" output_type="json">
+					<route pattern="^/(jasperconfig:([a-zA-Z\._-]+))" stop="false">
+						<route name=".jasperserver" pattern="^/jasperserver$" action="Provider.JasperServer" />
+						<route name=".treeloader" pattern="^/treeloader$" action="Provider.TreeLoader" />
+						<route name=".parameters" pattern="^/parameters$" action="Provider.ReportParameters" />
+					</route>
+				</route>
+			</route>
+		</routes>
+	</ae:configuration>
+</ae:configurations>

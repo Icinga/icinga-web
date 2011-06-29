@@ -21,6 +21,12 @@
 			<ae:parameter name="position">20</ae:parameter>
 		</ae:parameter>
 		
+		<ae:parameter name="reporting">
+			<ae:parameter name="title">Reporting</ae:parameter>
+			<ae:parameter name="visible">true</ae:parameter>
+			<ae:parameter name="position">30</ae:parameter>
+		</ae:parameter>
+		
 		<ae:parameter name="misc">
 			<ae:parameter name="title">Misc</ae:parameter>
 			<ae:parameter name="visible">true</ae:parameter>
@@ -512,6 +518,21 @@
 			</ae:parameter>
 			
 			<!-- Tactical overviews - [STOP] -->
+			
+			<!--  Reporting [START] -->
+			<ae:parameter name="icingaJasperReportingMain">
+				<ae:parameter name="module">Reporting</ae:parameter>
+				<ae:parameter name="action">Cronk.Main</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Seamless Jasper Integration</ae:parameter>
+				<ae:parameter name="name">Reporting</ae:parameter>
+				<ae:parameter name="categories">reporting</ae:parameter>
+				<ae:parameter name="image">cronks.Weather Could Sun</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="jasperconfig">modules.reporting.jasperconfig.default</ae:parameter>
+				</ae:parameter>
+			</ae:parameter>
+			<!-- Reporting [STOP] -->
 			
 			<!-- Demo cronk - [START] -->
 			<ae:parameter name="icingaExampleCronkHelloWorld">
