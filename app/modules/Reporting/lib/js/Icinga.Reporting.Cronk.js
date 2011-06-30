@@ -30,12 +30,16 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 			tabTip : _('Go here to create reports on the fly'),
 			items: this.appOnTheFly
 			
-		}, {
-			title: _('Repository'),
-			tabTip: _('Explore the server-repository')
-		}, {
-			title: _('Schedules'),
-			tabTip: _('Create and modify scheduled jobs')
-		}]);
+		}
+// @todo: Implement this
+//		, {
+//			title: _('Repository'),
+//			tabTip: _('Explore the server-repository')
+//		}, {
+//			title: _('Schedules'),
+//			tabTip: _('Create and modify scheduled jobs')
+//		}
+		
+		]);
 	}
 });

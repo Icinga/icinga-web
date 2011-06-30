@@ -35,9 +35,18 @@ class Reporting_Report_GenerateAction extends ReportingBaseAction {
             'parameters' => $data
         ));
         
-        $data = $creator->getReportData();
         
-        $userFile = $this->getContext()->getModel('ReportUserFile', 'Reporting');
+        try {
+            $data = $creator->getReportData();
+            
+            $userFile = $this->getContext()->getModel('ReportUserFile', 'Reporting');
+            
+            $userFile->storeFile($data, $rd->getParameter('output_type'), $reports[0]);
+            $this->setAttribute('success', true);
+        } catch (AppKitModelException $e) {
+            $this->setAttribute('success', false);
+            $this->setAttribute('error', $e->getMessage());
+        }
         
         return $this->getDefaultViewName();
     }
@@ -51,6 +60,8 @@ class Reporting_Report_GenerateAction extends ReportingBaseAction {
     }
     
     public function handleError(AgaviRequestDataHolder $rd) {
+        $this->setAttribute('success', false);
+        $this->setAttribute('error', 'Validation failed');
         return $this->getDefaultViewName();
     }
 }

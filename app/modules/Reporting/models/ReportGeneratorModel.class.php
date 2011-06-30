@@ -49,6 +49,7 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
         foreach ($this->__parameters as $pName=>$pValue) {
             $request->setParameter($pName, $pValue);
         }
+        
         $document = $this->getReportOutput($request);
         
         return $document;
@@ -57,12 +58,12 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
     private function getReportOutput(JasperRequestXmlDoc $doc) {
         $data = null;
         try {
-            $this->__client->runReport($doc->getSoapParameter());
-            $data = $this->parseReportResponse($this->__client);
+            $org = $this->__client->runReport($doc->getSoapParameter());
+            $data = $this->parseReportResponse($this->__client, $org);
         }
         catch (SoapFault $e) {
             if ($e->getMessage() == 'looks like we got no XML document') {
-                $data = $this->parseReportResponse($this->__client);
+                $data = $this->parseReportResponse($this->__client, null);
             }
             else {
                 throw $e;
@@ -72,17 +73,33 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
         return $data;
     }
     
-    private function parseReportResponse(SoapClient $client) {
+    private function parseReportResponse(SoapClient $client, $result) {
         $headers = $client->__getLastResponseHeaders();
         $body = $client->__getLastResponse();
-        $matches = array ();
-        if (preg_match('/boundary="([^"]+)"/', $headers, $matches)) {
-            $parts = explode($matches[1], $body);
-            foreach ($parts as $part) {
-                if (preg_match('/content-id:\s+<report>/i', $part)) {
-                    list($header,$content) = explode("\r\n\r\n", $part);
-                    return $content;
+        
+        if (preg_match('/Content-Type: multipart\/related/i', $headers)) {
+        
+            $matches = array ();
+            if (preg_match('/boundary="([^"]+)"/', $headers, $matches)) {
+                $parts = explode($matches[1], $body);
+                foreach ($parts as $part) {
+                    if (preg_match('/content-id:\s+<report>/i', $part)) {
+                        list($header,$content) = explode("\r\n\r\n", $part);
+                        return $content;
+                    }
                 }
+            }
+        
+        } else {
+            
+            if ($result) {
+                $response = new JasperResponseXmlDoc($result);
+                
+                if ($response->success() == false) {
+                    throw new AppKitModelException($response->returnMessage());
+                }
+            } else {
+                throw new AppKitModelException('Unknown soap fault');
             }
         }
     }

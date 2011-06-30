@@ -160,14 +160,43 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			style: 'margin: 0 0px 0 auto'
 		});
 		
-		this.formAction = new Ext.form.Action.JSONSubmit(this.form, { params : {} });
+		this.formAction = new Ext.form.Action.JSONSubmit(this.form, {
+			params : {},
+			scope: this,
+			success : function(form, action) {
+				this.startEmbeddedDownload();
+				submit.enable();
+			},
+			failure : function(form, action) {
+				if (action.failureType == "server") {
+					var data = Ext.util.JSON.decode(action.response.responseText);
+					if (!Ext.isEmpty(data.errors.message)) {
+						AppKit.notifyMessage(_('Jasperserver error'), data.errors.message);
+					}
+				}
+				submit.enable();
+			}
+		});
 		
 		submit.on('click', function(b, e) {
-			this.form.doAction(this.formAction, {
-				clientValidation : true 
-			});
+			this.form.doAction(this.formAction,{});
+			b.disable();
 		}, this);
 		
 		return submit;
+	},
+	
+	startEmbeddedDownload : function() {
+		var dlUrl = String.format('{0}/modules/reporting/provider/reportdata', AppKit.util.Config.getBaseUrl());
+		var eId = 'icinga-reporting-dl-iframe';
+		Ext.DomHelper.append(Ext.getBody(), {
+			tag : 'iframe',
+			id : eId,
+			src : dlUrl
+		});
+		
+		(function() {
+			Ext.get(eId).remove();
+		}).defer(2000);
 	}
 });
