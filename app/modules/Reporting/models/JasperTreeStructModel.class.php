@@ -1,6 +1,6 @@
 <?php
 
-class Reporting_JasperTreeStructModel extends ReportingBaseModel {
+class Reporting_JasperTreeStructModel extends JasperConfigBaseModel {
     
     private $__soap = null;
     
@@ -36,8 +36,24 @@ class Reporting_JasperTreeStructModel extends ReportingBaseModel {
         
         $uri = $this->__parent;
         
-        if ($uri == 'root') {
-            $uri = '/';
+        if ($this->hasParameter('tree_root')) {
+            if (!preg_match('/^'. preg_quote($this->getParameter('tree_root'), '/'). '/', $uri)) {
+                
+                if ($uri !== 'root') {
+                    $this->getContext()->getLoggerManager()->log(
+                    	'Reports: Possible security hack, try accessing jasper server on '
+                        . $uri
+                        . ' without matching root path',
+                        AgaviLogger::ERROR
+                    );
+                }
+                
+                $uri = $this->getParameter('tree_root');
+            }
+        } else {
+            if ($uri == 'root') {
+                $uri = '/';
+            }
         }
         
         $request->setResourceDescriptor(JasperRequestXmlDoc::RES_URI, $uri);

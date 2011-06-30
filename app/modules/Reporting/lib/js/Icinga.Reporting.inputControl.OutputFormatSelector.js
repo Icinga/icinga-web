@@ -11,7 +11,6 @@ Icinga.Reporting.inputControl.OutputFormatSelector = Ext.extend(Ext.form.ComboBo
 			displayField : 'label',
 			store : new Ext.data.ArrayStore({
 				autoDestroy : true,
-				id : 0,
 				fields: ['id', 'label'],
 				data : [
 					['pdf', _('PDF')],
@@ -20,11 +19,15 @@ Icinga.Reporting.inputControl.OutputFormatSelector = Ext.extend(Ext.form.ComboBo
 			})
 		});
 		
+		config.hiddenName = config.name
+		
 		Icinga.Reporting.inputControl.OutputFormatSelector.superclass.constructor.call(this, config);
 	},
 	
 	initComponent : function() {
 		Icinga.Reporting.inputControl.OutputFormatSelector.superclass.initComponent.call(this);
+		
+		this.setValue('pdf');
 	}
 	
 });

@@ -3,6 +3,7 @@
     $provider_config = array('jasperconfig' => $config_name);
     $treeloader_url = $ro->gen('modules.reporting.provider.treeloader', $provider_config);
     $parampanel_url = $ro->gen('modules.reporting.provider.parameters', $provider_config);
+    $creator_url = $ro->gen('modules.reporting.provider.generate', $provider_config);
 ?>
 <script type="text/javascript">
 
@@ -14,7 +15,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 	var jpanel = new Icinga.Reporting.Cronk({
 		jasperconfig : '<?php echo  $config_name; ?>',
 		treeloader_url : '<?php echo $treeloader_url; ?>',
-		parampanel_url : '<?php echo $parampanel_url; ?>'
+		parampanel_url : '<?php echo $parampanel_url; ?>',
+		creator_url : '<?php echo $creator_url; ?>'
 	});
 
 	// Better to remote all existing components

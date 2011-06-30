@@ -1,6 +1,6 @@
 <?php
 
-class Reporting_JasperSoapFactoryModel extends ReportingBaseModel implements AgaviISingletonModel {
+class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements AgaviISingletonModel {
     
     const SERVICE_SCHEDULER        = 'ReportScheduler';
     const SERVICE_PERMISSIONS      = 'PermissionsManagementService';
@@ -13,15 +13,6 @@ class Reporting_JasperSoapFactoryModel extends ReportingBaseModel implements Aga
     
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-        
-        $config_name = $this->getParameter('jasperconfig');
-        $config = AgaviConfig::get($config_name);
-        
-        if (is_array($config) == false) {
-            throw new AppKitModelException('Namespace for jasperconfig "'. $config_name. '" not found');
-        }
-        
-        $this->setParameters($config);
     }
     
     protected function wrapWsdl($service_name) {

@@ -9,6 +9,8 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 			mode : 'remote'
 		});
 		
+		config.hiddenName = config.name;
+		
 		var store = this.createStoreFromConfig({
 			target : config.target,
 			valueField : config.valueField,

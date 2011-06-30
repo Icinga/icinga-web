@@ -36,6 +36,9 @@
 					<ae:parameter>%core.module_dir%/Reporting/config/routing.xml</ae:parameter>
 				</setting>
 				
+				<!-- Temp report generation dir -->
+				<setting name="dir.download">%core.module_dir%/Reporting/data/tmp</setting>
+				
 				<!-- Parameter and datatype mapping -->
 				<setting name="parameter.mapping.name">
 					<ae:parameter name="p_host_object_id">
@@ -62,7 +65,8 @@
 				<setting name="parameter.mapping.type">
 					<ae:parameter name="2">
 						<ae:parameter name="className">Ext.form.DateField</ae:parameter>
-						<ae:parameter name="format">Y-m-d H.i.s</ae:parameter>
+						<ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
+						<!-- H:i:s -->
 					</ae:parameter>
 				</setting>
 				
@@ -79,6 +83,7 @@
 					<ae:parameter name="jasper_url">http://10.121.0.95:8080/jasperserver</ae:parameter>
 					<ae:parameter name="jasper_user">jasperadmin</ae:parameter>
 					<ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
+					<ae:parameter name="tree_root">/Icinga/reports</ae:parameter>
 				</setting>
 				
 				<!-- Custom config if I have more that once -->

@@ -17,7 +17,8 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 		
 		this.appOnTheFly = new Icinga.Reporting.util.OnTheFly({
 			treeloader_url: this.treeloader_url,
-			parampanel_url: this.parampanel_url
+			parampanel_url: this.parampanel_url,
+			creator_url : this.creator_url
 		});
 		
 		this.on('added', function() {

@@ -16,7 +16,8 @@ class Reporting_Provider_TreeLoaderSuccessView extends ReportingBaseView {
 
 	    $params = array (
 	        'client'    => $client,
-	        'parentid'  => $rd->getParameter('node')
+	        'parentid'  => $rd->getParameter('node'),
+	    	'jasperconfig' => $rd->getParameter('jasperconfig')
 	    );
 	    
 	    $filter_val = $rd->getParameter('filter', null);

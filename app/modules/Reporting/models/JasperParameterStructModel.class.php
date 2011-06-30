@@ -10,11 +10,15 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
     
     private $__nameMapping = array();
     
+    private $__filter = null;
+    
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
         
         $this->__client = $this->getParameter('client');
         $this->__uri = $this->getParameter('uri');
+        
+        $this->__filter = $this->getParameter('filter');
         
         if (!$this->__client instanceof SoapClient) {
             throw new AppKitModelException('Model needs SoapClient (parameter client)');
@@ -42,24 +46,35 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
         return $response;
     }
     
-    public function getJsonStructure() {
-        $doc = $this->getJasperResponse('inputControl');
+    public function getObjects() {
+        $doc = $this->getJasperResponse();
         
         $out = array ();
         
         foreach ($doc as $rd) {
-            if ($rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE) == 'inputControl') {
-                $tmp = array();
-                
-                $tmp = $rd->getResourceDescriptor()->getParameters();
-                $tmp += $rd->getProperties()->getParameters() + $tmp;
-                
-                $tmp['label'] = $rd->getLabel();
-                
-                $this->applyInputControlStructs($rd, $tmp);
-                
-                $out[$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME)] = $tmp;
+            if (!$this->__filter || $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE) == $this->__filter) {
+              $out[] = $rd;  
             }
+        }
+        
+        return $out;
+    }
+    
+    public function getJsonStructure() {
+        $objects = $this->getObjects();
+        foreach ($objects as $rd) {
+            $tmp = array();
+            
+            $tmp = $rd->getResourceDescriptor()->getParameters();
+            $tmp += $rd->getProperties()->getParameters() + $tmp;
+            
+            $tmp['label'] = $rd->getLabel();
+            
+            if ($this->__filter == 'inputControl') {
+                $this->applyInputControlStructs($rd, $tmp);
+            }
+            
+            $out[$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME)] = $tmp;
         }
         
         return $out;

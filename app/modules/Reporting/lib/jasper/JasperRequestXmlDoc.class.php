@@ -28,7 +28,7 @@ class JasperRequestXmlDoc extends DOMDocument {
         'name'        => '',
         'wsType'      => '',
         'uriString'   => '',
-        'isNew'       => false
+        'isNew'       => 'false'
     );
     
     private $__argumentData = array ();

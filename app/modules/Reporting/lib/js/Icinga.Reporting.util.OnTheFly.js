@@ -24,7 +24,8 @@ Icinga.Reporting.util.OnTheFly = Ext.extend(Ext.Container, {
 		
 		this.paramPanel = new Icinga.Reporting.util.RunReportPanel({
 			region : 'center',
-			parampanel_url: this.parampanel_url
+			parampanel_url: this.parampanel_url,
+			creator_url : this.creator_url
 		});
 		
 		this.add([

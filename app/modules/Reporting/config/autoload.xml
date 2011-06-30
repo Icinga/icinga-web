@@ -7,6 +7,9 @@
 		<autoload name="ReportingBaseModel">%core.module_dir%/Reporting/lib/model/ReportingBaseModel.class.php</autoload>
 		<autoload name="ReportingBaseView">%core.module_dir%/Reporting/lib/view/ReportingBaseView.class.php</autoload>
 		
+		<!-- Jasperconfig abstract model -->
+		<autoload name="JasperConfigBaseModel">%core.module_dir%/Reporting/lib/model/JasperConfigBaseModel.class.php</autoload>
+		
 		<!-- Jasper XML helpers -->
 		<autoload name="JasperRequestXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperRequestXmlDoc.class.php</autoload>
 		<autoload name="JasperResponseXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperResponseXmlDoc.class.php</autoload>

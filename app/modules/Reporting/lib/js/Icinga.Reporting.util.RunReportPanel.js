@@ -22,6 +22,14 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 	
 	initComponent : function() {
 		Icinga.Reporting.util.RunReportPanel.superclass.initComponent.call(this);
+		
+		this.add({
+			xtype : 'panel', 
+			html : '<div style="padding: 20px;"><h3>'
+				+ _('... please select a report from the left tree view')
+				+ '</h3></div>'
+		});
+		
 	},
 	
 	initUi : function(attributes) {
@@ -48,7 +56,8 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 				readonly : v.PROP_INPUTCONTROL_IS_READONLY=="true" ? true : false,
 				name : v.name,
 				width: 250,
-				fieldLabel : v['label']
+				fieldLabel : v['label'],
+				allowBlank : false
 			});
 			
 			Ext.applyIf(v.jsControl, Icinga.Reporting.DEFAULT_JSCONTROL);
@@ -83,9 +92,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 				html: String.format('<h4>{0}</h4><i>{1}</i>', _('No report'), _('Sorry, no report selected. Please select a report item in the tree on the left'))
 			});
 		} else {
-			this.formPanel = new Ext.form.FormPanel({
-				bodyStyle: { background: 'transparent' }
-			});
+			this.formPanel = this.createForm();
 			
 			this.buildFormItems(this.formPanel, this.parameterData);
 			
@@ -97,18 +104,18 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			
 			this.formPanel.add(outputSelector);
 			
+			this.submitButton = this.createSubmitButton(); 
+			
 			this.formPanel.add({
-				type : 'panel',
-				border: false,
-				bodyStyle : {
+				type : 'container',
+				width : 356,
+				border : false,
+				style : {
 					background : 'transparent',
-					padding : '10px:',
-					margin : '5px'
+					padding : '10px 10px 10px 10px',
+					margin: '10px'
 				},
-				items: [{
-					xtype : 'button',
-					text : _('Run report!')
-				}]
+				items: this.submitButton
 			});
 			
 			this.add(this.formPanel);
@@ -123,5 +130,44 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		delete this.loadingMask;
 		
 		this.buildInterface(this.parameterData);
+	},
+	
+	createForm : function() {
+		var panel = new Ext.form.FormPanel({
+			bodyStyle: { background: 'transparent' }
+		});
+		
+		this.form = panel.getForm();
+		
+		var baseUrl = this.creator_url;
+		var uri = this.nodeAttributes.uri;
+		
+		this.form.on('beforeaction', function(form, action) {
+			values = form.getFieldValues();
+			var useUrl = baseUrl.replace(/OUTPUT_TYPE/, values['_output_format']);
+			action.options.url = String.format('{0}?uri={1}', useUrl, uri);
+		});
+		
+		return panel;
+	},
+	
+	createSubmitButton : function() {
+		var submit = new Ext.Button({
+			xtype : 'button',
+			iconCls : 'icinga-icon-report-run',
+			iconAlign : 'top',
+			text : _('Run report!'),
+			style: 'margin: 0 0px 0 auto'
+		});
+		
+		this.formAction = new Ext.form.Action.JSONSubmit(this.form, { params : {} });
+		
+		submit.on('click', function(b, e) {
+			this.form.doAction(this.formAction, {
+				clientValidation : true 
+			});
+		}, this);
+		
+		return submit;
 	}
 });
