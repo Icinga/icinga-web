@@ -1,6 +1,19 @@
 <?php
-
+/**
+*
+* Filtergroup that operates on (Icinga)Doctrine_Query objects and allows to filter them.
+*
+* @package Icinga_Api
+* @category DataStoreModifier
+*
+**/
 class ApiStoreFilterGroup extends GenericStoreFilterGroup {
+        
+    /**
+    * @see GenericStoreFilter::parse
+    *
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
     public static function parse($filter,$field,$instance = null) {
         return GenericStoreFilterGroup::parse($filter,$field,"ApiStoreFilterGroup");
     }
@@ -8,7 +21,7 @@ class ApiStoreFilterGroup extends GenericStoreFilterGroup {
     *  Adds this filtergroup and all of it's nested filters to the Query object
     *  @param   IcingaDoctrine_Query    A query object to add the filter
     *  
-    * @author   Jannis Moßhammer <jannis.mosshammer@netways.de>
+    *  @author   Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     public function __toDQL(IcingaDoctrine_Query $q) { 
         $dql = ""; 
