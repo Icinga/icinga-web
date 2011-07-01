@@ -18,6 +18,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 	
 	constructor : function(config) {
 		Icinga.Reporting.util.RunReportPanel.superclass.constructor.call(this, config);
+		this.downloadUrl = String.format('{0}/modules/reporting/provider/reportdata', AppKit.util.Config.getBaseUrl());
 	},
 	
 	initComponent : function() {
@@ -106,6 +107,18 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			
 			this.submitButton = this.createSubmitButton(); 
 			
+			this.messagePanel = new Ext.Container({
+				border : false,
+				width : 356,
+				style : {
+					padding : '10px',
+					margin : '5px',
+					background : 'transparent'
+				}
+			});
+			
+			this.formPanel.add(this.messagePanel);
+			
 			this.formPanel.add({
 				type : 'container',
 				width : 356,
@@ -113,7 +126,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 				style : {
 					background : 'transparent',
 					padding : '10px 10px 10px 10px',
-					margin: '10px'
+					margin: '5px'
 				},
 				items: this.submitButton
 			});
@@ -121,6 +134,19 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			this.add(this.formPanel);
 		}
 		this.doLayout();
+	},
+	
+	addMessage : function(html, cls) {
+		this.messagePanel.removeAll();
+		this.messagePanel.add({
+			xtype : 'container',
+			html : {
+				tag : 'span',
+				html : html,
+				cls : cls
+			}
+		});
+		this.messagePanel.doLayout();
 	},
 	
 	parseOutput : function(response, options) {
@@ -166,13 +192,21 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			success : function(form, action) {
 				this.startEmbeddedDownload();
 				submit.enable();
+				this.addMessage('Report was created.', 'icinga-message-success');
 			},
 			failure : function(form, action) {
 				if (action.failureType == "server") {
 					var data = Ext.util.JSON.decode(action.response.responseText);
 					if (!Ext.isEmpty(data.errors.message)) {
 						AppKit.notifyMessage(_('Jasperserver error'), data.errors.message);
+						this.addMessage(data.errors.message, 'icinga-message-error');
 					}
+					else {
+						this.addMessage(_('Some general error, please examine jasperserver logs'), 'icinga-message-error');
+					}
+				}
+				else {
+					this.addMessage(_('Please check your parameters'), 'icinga-message-error');
 				}
 				submit.enable();
 			}
@@ -181,13 +215,14 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		submit.on('click', function(b, e) {
 			this.form.doAction(this.formAction,{});
 			b.disable();
+			this.addMessage(_('Report is being generated . . .'), 'icinga-message-success');
 		}, this);
 		
 		return submit;
 	},
 	
 	startEmbeddedDownload : function() {
-		var dlUrl = String.format('{0}/modules/reporting/provider/reportdata', AppKit.util.Config.getBaseUrl());
+		var dlUrl = this.downloadUrl;
 		var eId = 'icinga-reporting-dl-iframe';
 		Ext.DomHelper.append(Ext.getBody(), {
 			tag : 'iframe',

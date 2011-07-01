@@ -68,6 +68,16 @@ table {
 	-webkit-border-radius: 5px;
 }
 
+/** Message colors **/
+
+.icinga-message-success {
+	color: #00cc00;
+}
+
+.icinga-message-error {
+	color: #cc0000;
+}
+
 /** MISC **/
 
 div#icinga-portal-loading-mask {

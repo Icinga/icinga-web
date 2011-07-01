@@ -12,7 +12,6 @@ class Reporting_Report_GenerateAction extends ReportingBaseAction {
     public function executeWrite(AgaviParameterHolder $rd) {
         
         $data = (array)json_decode($rd->getParameter('data', ""));
-        unset($data['_output_format']);
         
         $factory = $this->getContext()->getModel('JasperSoapFactory', 'Reporting', array (
             'jasperconfig' => $rd->getParameter('jasperconfig')
@@ -20,23 +19,29 @@ class Reporting_Report_GenerateAction extends ReportingBaseAction {
         
         $client = $factory->getSoapClientForWSDL(Reporting_JasperSoapFactoryModel::SERVICE_REPOSITORY);
         
-        $parameters = $this->getContext()->getModel('JasperParameterStruct', 'Reporting', array (
-        	        'client'    => $client,
-        	        'uri'       => $rd->getParameter('uri'),
-        	        'filter'	=> 'reportUnit' 
-        ));
-        
-        $reports = $parameters->getObjects();
-        
-        $creator = $this->getContext()->getModel('ReportGenerator', 'Reporting', array(
-            'client' => $client,
-            'report' => $reports[0],
-            'format' => $rd->getParameter('output_type'),
-            'parameters' => $data
-        ));
-        
-        
         try {
+        
+            $parameters = $this->getContext()->getModel('JasperParameterStruct', 'Reporting', array (
+                'client'    => $client,
+                'uri'       => $rd->getParameter('uri'),
+                'filter'	=> 'reportUnit' 
+            ));
+            
+            $reports = $parameters->getObjects();
+            
+            $converter = $this->getContext()->getModel('FieldValueConverter', 'Reporting', array (
+                'client'	   => $client,
+                'uri'		   => $rd->getParameter('uri'),
+                'parameters'   => $data
+            ));
+            
+            $creator = $this->getContext()->getModel('ReportGenerator', 'Reporting', array(
+                'client' => $client,
+                'report' => $reports[0],
+                'format' => $rd->getParameter('output_type'),
+                'parameters' => $converter->getConvertedParameters()
+            ));
+            
             $data = $creator->getReportData();
             
             $userFile = $this->getContext()->getModel('ReportUserFile', 'Reporting');
