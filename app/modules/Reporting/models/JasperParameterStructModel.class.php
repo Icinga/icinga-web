@@ -62,6 +62,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
     
     public function getJsonStructure() {
         $objects = $this->getObjects();
+	$out = array ();
         foreach ($objects as $rd) {
             $tmp = array();
             
