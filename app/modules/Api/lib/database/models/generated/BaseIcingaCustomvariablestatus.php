@@ -96,7 +96,6 @@ abstract class BaseIcingaCustomvariablestatus extends Doctrine_Record {
                           'local' => 'instance_id',
                           'foreign' => 'instance_id'
                       ));
-
         parent::setUp();
 
     }

@@ -289,7 +289,14 @@ abstract class BaseIcingaContacts extends Doctrine_Record {
                           'local' => 'host_timeperiod_object_id',
                           'foreign' => 'timeperiod_id'
                       ));
-
+        $this->hasOne('IcingaObjects as object', array(
+            'local' => 'contact_object_id',
+            'foreign' => 'object_id'
+        ));
+        $this->hasMany("IcingaCustomvariablestatus as customvariablestatus", array(
+            'local' => 'contact_object_id',
+            'foreign' => 'object_id'
+        ));
         parent::setUp();
 
     }

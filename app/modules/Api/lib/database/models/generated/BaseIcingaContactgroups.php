@@ -89,7 +89,10 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record {
                            'foreign' => 'contact_object_id',
                            'refclass' => 'IcingaContactgroupMembers'
                        ));
-
+        $this->hasOne('IcingaObjects as object', array(
+            'local' => 'contactgroup_object_id',
+            'foreign' => 'object_id'
+        ));
         parent::setUp();
 
     }

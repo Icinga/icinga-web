@@ -121,6 +121,10 @@ abstract class BaseIcingaCustomvariables extends Doctrine_Record {
                            'local' => 'object_id',
                            'foreign' => 'contact_object_id'
                        ));
+        $this->hasOne('IcingaObjects as object', array(
+            'local' => 'object_id',
+            'foreign' => 'object_id'
+        ));
         parent::setUp();
 
     }

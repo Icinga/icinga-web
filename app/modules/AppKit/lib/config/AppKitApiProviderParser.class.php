@@ -14,12 +14,12 @@ class AppKitApiProviderParser  {
             $dom = $this->getValidatorXMLForAction($provider['module'],$provider['action']);    	
             $paramList = $this->getRequestParams($module,$action,$dom);
             $descriptor = $this->getJSDescriptor($module,$action);
-            $this->enhanceDescriptorByValidationParams($descriptor,$paramList);
-            
-           
-            $descriptor["module"] = $module;
-            $descriptor["action"] = $action;
-            $descriptors[$module."_".$action] = $descriptor;
+            if($descriptor) {
+                $this->enhanceDescriptorByValidationParams($descriptor,$paramList);
+                $descriptor["module"] = $module;
+                $descriptor["action"] = $action;
+                $descriptors[$module."_".$action] = $descriptor;
+            }
         }
         foreach($this->descriptorHandler as $handler) {
             $c = new $handler();

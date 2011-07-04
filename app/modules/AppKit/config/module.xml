@@ -91,8 +91,20 @@
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/ScriptDynaLoader.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</ae:parameter>
-
+                    
                     <ae:parameter>%core.root_dir%/pub/api/api.js</ae:parameter>
+                    <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/Ext.ux.AutoComboBox.js</ae:parameter>     
+                    <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/store/StoreFactory.js</ae:parameter>     
+                    <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/grid/GridFactory.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/grid/plugins/FilterableGrid.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/grid/plugins/PageableGrid.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/grid/plugins/SortableGrid.js</ae:parameter>
+					
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/api/Provider.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/api/RESTStore.js</ae:parameter>     
+                    
+                    <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/api/RESTFilterComboBox.js</ae:parameter>       
+
 					<!-- jsgettext -->
 					<ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
 				</setting>

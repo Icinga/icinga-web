@@ -79,6 +79,11 @@ abstract class BaseIcingaHostgroups extends Doctrine_Record {
                            'foreign' => 'host_object_id',
                            'refClass' => 'IcingaHostgroupMembers'
                        ));
+
+        $this->hasOne('IcingaObjects as object', array(
+            'local' => 'hostgroup_object_id',
+            'foreign' => 'object_id'
+        ));
         parent::setUp();
 
     }

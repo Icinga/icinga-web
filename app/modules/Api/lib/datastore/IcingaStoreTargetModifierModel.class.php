@@ -32,6 +32,14 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     protected $allowedFields = array();
     
     /**
+    * Defines the name of the alias given to the table in the 'from' clause
+    * @var String
+    *
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/ 
+    protected $mainAlias = "my";
+    
+    /**
     * Define fields that will be requested by default (only important for client side export)
     * @var Array
     *
@@ -111,26 +119,42 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     *   );
     * </code>
     * @param Array  Columns to request from  
-    *
+    * @param Boolean Whether to check if an column alias with this name exists
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
-    public function setFields($fields) {
+    public function setFields($fields, $useColumnAlias = false) {
         if(!is_array($fields))
             $fields = array($fields);
         $regExp = "/^(?<alias>\w+)\.(?<field>\w+)/";
-        foreach($fields as $field) {
+        foreach($fields as $field) { 
+            $aliasField = "";
+            if($useColumnAlias && isset($this->columns[$field])) {
+                $aliasField = $field; 
+                $field = $this->columns[$field]; 
+            }
             // check for alias 
             $match = array();
             preg_match($regExp,$field,$match);
             if(isset($match["alias"])) {
-                $this->addAlias($match["alias"]);
-                $this->fields[] = $field;
-            } else { 
-                $this->fields[] = "my.".$field;
+                $this->addAlias($match["alias"]);  
+            } else {
+                if($field[0] != '(')
+                    $field = $this->mainAlias.".".$field; 
             }   
+            $this->fields[] = $field;
+            /*
+            * workaround for doctrine alias bug 
+            * See http://www.doctrine-project.org/jira/browse/DC-601
+            * Because of this, all alias fields will be added additionaly to the original fields
+            * instead of replacing them in the result set
+            */
+            if($aliasField) 
+                $this->fields[] = $field." AS ".$aliasField;
+
         } 
     }
-    
+  
+     
     /**
     * Return the result-columns defined in this modifier
     * @return Array the columns that will be requested
@@ -215,7 +239,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     protected function modifyImpl(Doctrine_Query &$o) { 
         $o->select(implode(",",$this->fields));
          
-        $o->from($this->target." my");
+        $o->from($this->target." ".$this->mainAlias);
         foreach($this->joins as $join) {
             
             if(isset($join["type"])) {
@@ -237,6 +261,8 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/    
     protected function addAlias($alias) {
+        if($alias == $this->mainAlias)
+            return true; //ignore base table alias
         if(!isset($this->aliasDefs[$alias]))
             throw new AppKitException("Tried to access hoststore field with invalid alias $alias");
     

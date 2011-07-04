@@ -39,7 +39,7 @@ class FilterTest extends PHPUnit_Framework_TestCase
 
     public function testFilterCreation() {
         $filter1 = new TestFilter("Testfield_name","=","test1");  
-        
+        $filter1->initFieldDefinition();  
         $this->assertEquals(count($filter1->getPossibleFields()),2);
         $this->assertTrue(is_string($filter1->__toString()));
     }

@@ -7,14 +7,19 @@
 	<ae:configuration>
 		
 		<validators>
-			<validator name="target" class="string" required="true">
+			<validator name="target" class="regex" required="true">
 				<argument>target</argument>
 				<errors>
 					<error>Validation of target failed!</error>
 				</errors>
+                <ae:parameters>
+                    <ae:parameter name="pattern">
+                        <![CDATA[/[a-zA-Z]*/]]> 
+                    </ae:parameter>
+                </ae:parameters>
 			</validator>
 			
-			<validator name="field" class="string" required="false">
+			<validator name="field" class="regex" required="false">
 				<argument>field</argument>
 				<errors>
 					<error>Validation of target field!</error>

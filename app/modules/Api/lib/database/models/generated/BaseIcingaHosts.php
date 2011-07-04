@@ -657,6 +657,10 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
 
     public function setUp() {
         parent::setUp();
+        $this->hasOne('IcingaObjects as object', array(
+            'local' => 'host_object_id',
+            'foreign' => 'object_id'
+        ));
         $this->hasMany("IcingaServices as services",array(
                            'local' => 'host_object_id',
                            'foreign' => 'host_object_id'
@@ -751,6 +755,9 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
                           'local' => 'check_timeperiod_object_id',
                           'foreign' => 'timeperiod_object_id',
                       ));
-
+        $this->hasMany("IcingaCustomvariablestatus as customvariablestatus", array(
+            'local' => 'host_object_id',
+            'foreign' => 'object_id'
+        ));
     }
 }

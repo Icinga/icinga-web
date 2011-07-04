@@ -185,10 +185,9 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     }
     
     protected function defaultInitialize(AgaviContext $context,array $parameters = array()) {   
-        if(!isset($parameters["request"]))
-            throw new InvalidArgumentException("DataStoreModel must be called with the 'request' parameter");
+        if(isset($parameters["request"]))
+            $this->requestParameters = $parameters["request"]->getParameters();
         
-        $this->requestParameters = $parameters["request"]->getParameters();
         if(!isset($parameters["noStoreModifierSetup"]))
             $this->setupModifiers(); 
 

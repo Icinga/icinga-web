@@ -41,7 +41,7 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
         $DBALMetaManager->switchIcingaDatabase($connName);
         
     
-        return Doctrine_Query::create();
+        return IcingaDoctrine_Query::create();
     }
 
 
