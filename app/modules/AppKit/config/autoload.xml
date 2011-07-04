@@ -95,8 +95,8 @@
 		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
 		<autoload name="AppKitSoapFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitSoapFilterValidator.class.php</autoload>
 		<autoload name="AppKitJsonValidator">%core.module_dir%/AppKit/lib/validator/AppKitJsonValidator.class.php</autoload>
-
-
+		<autoload name="AppKitUriValidator">%core.module_dir%/AppKit/lib/validator/AppKitUriValidator.class.php</autoload>
+		
 		<!-- Module util classes -->
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
 	

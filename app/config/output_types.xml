@@ -137,8 +137,21 @@
 			
 			<output_type name="image">
 				<ae:parameter name="http_headers">
-					<!--  <ae:parameter name="Content-Type">text/x-json; charset=UTF-8</ae:parameter> -->
-					<ae:parameter name="Content-Type">image/png; charset=UTF-8</ae:parameter>
+					<ae:parameter name="Content-Type">image/png;</ae:parameter>
+				</ae:parameter>
+			</output_type>
+			
+			<output_type name="pdf">
+				<ae:parameter name="http_headers">
+					<!-- <ae:parameter name="Content-Type">application/pdf</ae:parameter> -->
+					<ae:parameter name="Content-Type">text/plain; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+			
+			<output_type name="csv">
+				<ae:parameter name="http_headers">
+					<!-- <ae:parameter name="Content-Type">text/comma-separated-values</ae:parameter> -->
+					<ae:parameter name="Content-Type">text/plain; charset=UTF-8</ae:parameter>
 				</ae:parameter>
 			</output_type>
 		</output_types>

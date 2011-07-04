@@ -18,6 +18,7 @@ app/modules/Api/config/module.site.xml
 app/modules/AppKit/config/module.site.xml
 app/modules/Web/config/module.site.xml
 app/modules/Cronks/config/module.site.xml
+app/modules/Reporting/data/tmp
 bin/clearcache.sh
 icinga-web.session
 icinga-web.webprj

@@ -43,10 +43,10 @@ class AppKitXmlUtil {
 	public static function includeXmlFilesToTarget(AgaviXmlConfigDomDocument $document, $query, $pointer, array $files) {
 		$targetNode = self::extractEntryNode($document, $query);
 		
-		if ($targetNode === null) {
+		if (!$targetNode) {
 		    return;
 		}
-		
+	
 		foreach ($files as $file) {
 			$node = self::createXIncludeNode($document, $file, $pointer);
 			$targetNode->appendChild($node);
