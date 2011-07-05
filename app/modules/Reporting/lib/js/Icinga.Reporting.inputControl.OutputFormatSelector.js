@@ -14,7 +14,11 @@ Icinga.Reporting.inputControl.OutputFormatSelector = Ext.extend(Ext.form.ComboBo
 				fields: ['id', 'label'],
 				data : [
 					['pdf', _('PDF')],
-					['csv', _('Comma seperated spreadsheet')]
+					['csv', _('Comma seperated spreadsheet')],
+					['xls', _('Microsoft Excel')],
+					['rtf', _('Ritch text format')],
+					['html', _('HTML')],
+					['xml', _('XML')]
 				]
 			})
 		});

@@ -24,11 +24,6 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
         $this->__userFile = $this->getContext()->getModel('ReportUserFile', 'Reporting');
     }
 
-    public function executeHtml(AgaviRequestDataHolder $rd) {
-        $this->setupHtml($rd);
-        $this->setAttribute('_title', 'Report.GetReportData');
-    }
-
     public function executeJson(AgaviRequestDataHolder $rd) {
         try {
             $struct = $this->__userFile->getUserFileStruct();
@@ -47,6 +42,22 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
     }
 
     public function executeCsv(AgaviRequestDataHolder $rd) {
+        $this->prepareReportingData();
+    }
+    
+    public function executeHtml(AgaviRequestDataHolder $rd) {
+        $this->prepareReportingData();
+    }
+    
+    public function executeXls(AgaviRequestDataHolder $rd) {
+        $this->prepareReportingData();
+    }
+    
+    public function executeRtf(AgaviRequestDataHolder $rd) {
+        $this->prepareReportingData();
+    }
+    
+    public function executeXml(AgaviRequestDataHolder $rd) {
         $this->prepareReportingData();
     }
 }
