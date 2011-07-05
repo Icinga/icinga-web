@@ -71,8 +71,9 @@ abstract class Doctrine_Relation implements ArrayAccess
                                   'owningSide'  => false, // whether this is the owning side
                                   'refClassRelationAlias' => null,
                                   'foreignKeyName' => null,
-                                  'orderBy' => null
-                                  );
+                                  'orderBy' => null,
+                                  'foreignKey' => null 
+                                    );
 
     protected $_isRefClass = null;
 
@@ -326,6 +327,9 @@ abstract class Doctrine_Relation implements ArrayAccess
        return $this->definition['table']->getColumnName($this->definition['foreign']);
     }
 
+    final public function __getForeignKey() {
+        return $this->definition["foreignKey"];
+    }
     /**
      * isOneToOne
      * returns whether or not this relation is a one-to-one relation

@@ -610,7 +610,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
 
         foreach ($refs as $reference) {
             $reference = trim($reference);
-
+            
             if (empty($reference)) {
                 continue;
             }
@@ -665,6 +665,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
 
                 $this->_pendingFields[$componentAlias][] = $field;
             }
+            
         }
     }
 
@@ -1011,7 +1012,6 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
     protected function _buildSqlFromPart($ignorePending = false)
     {
         $q = '';
-
         foreach ($this->_sqlParts['from'] as $k => $part) {
             $e = explode(' ', $part);
 
@@ -1047,15 +1047,17 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
             if ( ! preg_match('/\bJOIN\b/i', $part) && ! isset($this->_pendingJoinConditions[$k])) {
                 $q .= ', ' . $part;
             } else {
+
                 if (substr($part, 0, 9) === 'LEFT JOIN') {
                     $aliases = array_merge($this->_subqueryAliases,
                                 array_keys($this->_neededTables));
-
+                    
                     if ( ! in_array($e[3], $aliases) && ! in_array($e[2], $aliases) && ! empty($this->_pendingFields)) {
                         continue;
                     }
 
                 }
+
 
                 if ( ! $ignorePending && isset($this->_pendingJoinConditions[$k])) {
                     if (strpos($part, ' ON ') !== false) {
@@ -1065,11 +1067,13 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                     }
 
                     $part .= $this->_processPendingJoinConditions($k);
+                
+
                 }
 
                 $componentAlias = $this->getComponentAlias($e[3]);
                 $string = $this->getInheritanceCondition($componentAlias);
-
+                
                 if ($string) {
                     $part = $part . ' AND ' . $string;
                 }
@@ -1141,6 +1145,8 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      */
     public function buildSqlQuery($limitSubquery = true)
     {
+
+
         // reset the state
         if ( ! $this->isSubquery()) {
             $this->_queryComponents = array();
@@ -1789,10 +1795,10 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                             . $this->_conn->quoteIdentifier($assocTableName)
                             . ' '
                             . $this->_conn->quoteIdentifier($assocAlias);
-
+                    $ref = $relation->__getForeignKey();
                     $queryPart .= ' ON (' . $this->_conn->quoteIdentifier($localAlias
                                 . '.'
-                                . $localTable->getColumnName($localTable->getIdentifier())) // what about composite keys?
+                                . $localTable->getColumnName($ref ? $ref : $localTable->getIdentifier())) // what about composite keys?
                                 . ' = '
                                 . $this->_conn->quoteIdentifier($assocAlias . '.' . $relation->getLocalRefColumnName());
 
@@ -1807,7 +1813,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                     }
 
                     $queryPart .= ')';
-
+                    
                     $this->_sqlParts['from'][] = $queryPart;
 
                     $queryPart = $join . $foreignSql;
