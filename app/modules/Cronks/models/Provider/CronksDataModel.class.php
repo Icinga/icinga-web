@@ -546,9 +546,24 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		$cronk = $q->execute()->getFirst();
 		
 		if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
+		    $this->getContext()->getLoggerManager()->log(sprintf('Cronk::DELETE preare to delete %s (%s)', $cronkid, $cronkname), AgaviLogger::INFO);
+		    
 			Doctrine_Manager::getInstance()->getCurrentConnection()->beginTransaction();
-			$cronk->CronkCategoryCronk->delete();
-			$cronk->CronkPrincipalCronk->delete();
+			
+			
+			# $cronk->CronkCategoryCronk->delete();
+			$removed = Doctrine_Query::create()->delete('CronkCategoryCronk')
+			->andWhere('ccc_cronk_id=?', array($cronk->cronk_id))->execute();
+			
+			$this->getContext()->getLoggerManager()->log(sprintf('Cronk::DELETE deleted %d category relations', $removed), AgaviLogger::DEBUG);
+			
+			# $cronk->CronkPrincipalCronk->delete();
+			
+			$removed = Doctrine_Query::create()->delete('CronkPrincipalCronk')
+			->andWhere('cpc_cronk_id=?', array($cronk->cronk_id))->execute();
+			
+			$this->getContext()->getLoggerManager()->log(sprintf('Cronk::DELETE deleted %d principal relations', $removed), AgaviLogger::DEBUG);
+			
 			$cronk->save();
 			Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
 			
