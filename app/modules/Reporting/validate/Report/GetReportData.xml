@@ -8,6 +8,13 @@
 	<ae:configuration>
 		
 		<validators>
+			<validator class="number" name="inline" required="false">
+				<argument>inline</argument>
+				
+				<errors>
+					<error>Validation of parameter inline failed</error>
+				</errors>
+			</validator>
 		</validators>
 		
 	</ae:configuration>

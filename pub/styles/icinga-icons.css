@@ -132,4 +132,5 @@
 .icinga-icon-drilldown { background-image: url(../images/icons/drill--plus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-drillup { background-image: url(../images/icons/drill--minus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-report-run { background-image: url(../images/icons/report--arrow.png) !important; background-repeat: no-repeat; }
+.icinga-icon-report-preview { background-image: url(../images/icons/report-image.png) !important; background-repeat: no-repeat; } 
 /* EOF */

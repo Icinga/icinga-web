@@ -7,14 +7,16 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
      */
     private $__userFile = null;
 
-    private function prepareReportingData() {
+    private function prepareReportingData(AgaviRequestDataHolder $rd) {
         $struct = $this->__userFile->getUserFileStruct();
         $fp = $this->__userFile->getFilePointer();
         
-        $this->getResponse()->setHttpHeader(
-            'Content-Disposition',
-            sprintf('attachment; filename=%s', $struct['pushname'])
-        );
+        if ($rd->getParameter('inline', null) !== 1) {
+            $this->getResponse()->setHttpHeader(
+                'Content-Disposition',
+                sprintf('attachment; filename=%s', $struct['pushname'])
+            );
+        }
         
         $this->getResponse()->setContent($fp);
     }
@@ -38,27 +40,27 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
     }
 
     public function executePdf(AgaviRequestDataHolder $rd) {
-        return $this->prepareReportingData();
+        return $this->prepareReportingData($rd);
     }
 
     public function executeCsv(AgaviRequestDataHolder $rd) {
-        $this->prepareReportingData();
+        $this->prepareReportingData($rd);
     }
     
     public function executeHtml(AgaviRequestDataHolder $rd) {
-        $this->prepareReportingData();
+        $this->prepareReportingData($rd);
     }
     
     public function executeXls(AgaviRequestDataHolder $rd) {
-        $this->prepareReportingData();
+        $this->prepareReportingData($rd);
     }
     
     public function executeRtf(AgaviRequestDataHolder $rd) {
-        $this->prepareReportingData();
+        $this->prepareReportingData($rd);
     }
     
     public function executeXml(AgaviRequestDataHolder $rd) {
-        $this->prepareReportingData();
+        $this->prepareReportingData($rd);
     }
 }
 
