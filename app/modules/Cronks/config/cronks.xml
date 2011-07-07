@@ -530,6 +530,9 @@
 				<ae:parameter name="image">cronks.Weather Could Sun</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="jasperconfig">modules.reporting.jasperconfig.default</ae:parameter>
+					<ae:parameter name="enable_onthefly">1</ae:parameter>
+					<ae:parameter name="enable_repository">1</ae:parameter>
+					<ae:parameter name="enable_scheduling">1</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
 			<!-- Reporting [STOP] -->

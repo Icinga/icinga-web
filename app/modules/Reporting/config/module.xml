@@ -19,9 +19,14 @@
 				
 				<!-- Reporting Javascript libs -->
 				<setting name="appkit_module.app.javascript_files">
-					<!-- UI -->
+					<!-- UI - the cronk itself -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.Cronk.js</ae:parameter>
+					
+					<!-- The main modes, UI and component classes -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.OnTheFly.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.Repository.js</ae:parameter>
+					
+					<!-- Tool widgets -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ResourceTree.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.RunReportPanel.js</ae:parameter>
 					
@@ -41,6 +46,22 @@
 				
 				<!-- Temp report generation dir -->
 				<setting name="dir.download">%core.module_dir%/Reporting/data/tmp</setting>
+				
+				<!-- Resource type icon classes -->
+				<setting name="icon.wsType.mapping">
+					<ae:parameter name="reportUnit">icinga-icon-report</ae:parameter>
+					<ae:parameter name="bean">icinga-icon-bean</ae:parameter>
+					<ae:parameter name="contentResource">icinga-icon-report-run</ae:parameter>
+					<ae:parameter name="datasource">icinga-icon-database</ae:parameter>
+					<ae:parameter name="dataType">icinga-icon-cog</ae:parameter>
+					<ae:parameter name="folder"></ae:parameter>
+					<ae:parameter name="font">icinga-icon-document</ae:parameter>
+					<ae:parameter name="img">icinga-icon-image</ae:parameter>
+					<ae:parameter name="inputControl">icinga-icon-ui-text-field</ae:parameter>
+					<ae:parameter name="jar">icinga-icon-jar</ae:parameter>
+					<ae:parameter name="jdbc">icinga-icon-databases-relation</ae:parameter>
+					<ae:parameter name="jndi">icinga-icon-folder-network</ae:parameter>
+				</setting>
 				
 				<!-- Parameter and datatype mapping -->
 				<setting name="parameter.mapping.name">
@@ -86,7 +107,7 @@
 					<ae:parameter name="jasper_url">http://10.121.0.95:8080/jasperserver</ae:parameter>
 					<ae:parameter name="jasper_user">jasperadmin</ae:parameter>
 					<ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
-					<ae:parameter name="tree_root">/Icinga/reports</ae:parameter>
+					<ae:parameter name="tree_root">/</ae:parameter>
 				</setting>
 				
 				<!-- Custom config if I have more that once -->

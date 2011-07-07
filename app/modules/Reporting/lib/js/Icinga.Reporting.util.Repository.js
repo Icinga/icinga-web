@@ -1,6 +1,6 @@
 Ext.ns('Icinga.Reporting.util');
 
-Icinga.Reporting.util.OnTheFly = Ext.extend(Ext.Container, {
+Icinga.Reporting.util.Repository = Ext.extend(Ext.Container, {
 	layout : 'border',
 	height : 800, // Don't worry, we resize later
 	border : false,
@@ -18,21 +18,17 @@ Icinga.Reporting.util.OnTheFly = Ext.extend(Ext.Container, {
 			width : 350,
 			split: true,
 			collapsible: true,
-			treeloader_url: this.treeloader_url,
-			treeloader_filter: 'reports'
+			treeloader_url: this.treeloader_url
 		});
 		
-		this.paramPanel = new Icinga.Reporting.util.RunReportPanel({
+		this.targetPanel = new Ext.Panel({
 			region : 'center',
-			parampanel_url: this.parampanel_url,
-			creator_url : this.creator_url,
-			parentCmp : this
+			parentCmp : this,
+			title : 'test',
+			html: 'test'
 		});
 		
-		this.add([
-			this.resourceTree,
-			this.paramPanel
-		]);
+		this.add([this.resourceTree, this.targetPanel]);
 		
 		var resizeFn = function(c) {
 			var p = this.findParentByType('tabpanel');
@@ -46,15 +42,6 @@ Icinga.Reporting.util.OnTheFly = Ext.extend(Ext.Container, {
 		
 		Ext.EventManager.onWindowResize(resizeFn, this);
 		
-		this.on('afterrender', this.processApplication, this);
-	},
-	
-	processApplication : function() {
-		this.resourceTree.getTreePanel().on('click', function(node, e) {
-			if (node.id !== 'root') {
-				this.paramPanel.initUi(node.attributes);
-			}
-		}, this);
+		this.doLayout();
 	}
-	
 });

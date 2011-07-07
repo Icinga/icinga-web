@@ -131,6 +131,14 @@
 .icinga-icon-status-busy { background-image: url(../images/icons/status-busy.png) !important; background-repeat: no-repeat; }
 .icinga-icon-drilldown { background-image: url(../images/icons/drill--plus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-drillup { background-image: url(../images/icons/drill--minus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-report { background-image: url(../images/icons/report.png) !important; background-repeat: no-repeat; }
 .icinga-icon-report-run { background-image: url(../images/icons/report--arrow.png) !important; background-repeat: no-repeat; }
-.icinga-icon-report-preview { background-image: url(../images/icons/report-image.png) !important; background-repeat: no-repeat; } 
+.icinga-icon-report-preview { background-image: url(../images/icons/report-image.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bean { background-image: url(../images/icons/bean.png) !important; background-repeat: no-repeat; }
+.icinga-icon-document { background-image: url(../images/icons/document.png) !important; background-repeat: no-repeat; }
+.icinga-icon-image { background-image: url(../images/icons/image.png) !important; background-repeat: no-repeat; }
+.icinga-icon-ui-text-field { background-image: url(../images/icons/ui-text-field.png) !important; background-repeat: no-repeat; }
+.icinga-icon-jar { background-image: url(../images/icons/jar.png) !important; background-repeat: no-repeat; }
+.icinga-icon-databases-relation { background-image: url(../images/icons/databases-relation.png) !important; background-repeat: no-repeat; }
+.icinga-icon-folder-network { background-image: url(../images/icons/folder-network.png) !important; background-repeat: no-repeat; }
 /* EOF */
