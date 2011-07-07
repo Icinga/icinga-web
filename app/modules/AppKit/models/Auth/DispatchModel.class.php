@@ -125,6 +125,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
 			$this->log('Auth.Dispatch: Userdata found in db (uid=%d)', $user->user_id, AgaviLogger::DEBUG);
 
+			if ($user->user_disabled == true) {
+			    $this->log('Auth.Dispatch: User %s is disabled, login denied!', $user->user_name, AgaviLogger::WARN);
+			    throw new AgaviSecurityException("Authentification failed,  $username is disabled!");
+			}
+			
 			$provider = $this->getProvider($user->user_authsrc);
 				
 			// We've got a provider
