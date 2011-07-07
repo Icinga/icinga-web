@@ -54,6 +54,8 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction
 			// Update the simple data!
 			$useradmin->updateUserData($user, $rd);
 		
+			Doctrine_Manager::connection()->commit();
+			
 			if ($rd->getParameter('password_validate', false) !== false) {
 				$useradmin->updateUserPassword($user, $rd->getParameter('password_validate'));
 			}
@@ -66,10 +68,6 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction
 				$rd->getParameter('principal_target', array ()),
 				$rd->getParameter('principal_value', array ())
 			);
-			
-			// Give notice!
-			
-			Doctrine_Manager::connection()->commit();
 		}
 		catch (Exception $e) {
 			try {
