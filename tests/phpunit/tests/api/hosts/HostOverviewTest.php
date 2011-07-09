@@ -17,7 +17,7 @@ class HostOverviewTest extends PHPUnit_Framework_TestCase {
 		$hosts = $hostModel->getHostsByState(array(0,1,2));
 		$allHosts = $hostModel->getHosts();
 		$this->assertFalse(is_null($hosts),false,"Filter hosts by state returned null");
-		$this->assertEquals($allHosts,$hosts,"Filter by state (show all) didn't return all");
+		$this->assertEquals($allHosts->count(),$hosts->count(),"Filter by state (show all) didn't return all");
 		$upHosts = $hostModel->getHostsByState(array(IcingaHosts::$STATE_UP));
 		$downHosts = $hostModel->getHostsByState(array(IcingaHosts::$STATE_DOWN));
 		$unreachableHosts = $hostModel->getHostsByState(array(IcingaHosts::$STATE_UNREACHABLE));
@@ -59,17 +59,20 @@ class HostOverviewTest extends PHPUnit_Framework_TestCase {
 	public function testInstanceFilters() {
 		$hostModel = AgaviContext::getInstance()->getModel("ApiHostRequest","Api");
 		$allHosts = $hostModel->getHosts();
-		$hosts = $hostModel->getHostsByInstances(array("default"));
-		$hostIds = $hostModel->getHostsByInstanceIds(array(1));
 		
-		$this->assertFalse(is_null($hostIds->toArray()));
-		$this->assertFalse(is_null($hostIds->toArray()));
-		$this->assertEquals($hosts,$hostIds,"Id filter doesn't match text count");
+        $hosts = $hostModel->getHostsByInstances(array("default"));
 		
+        $hostIds = $hostModel->getHostsByInstanceIds(array(1));
+		
+		$this->assertFalse(0 == count($hosts->toArray()),"no host returned by filter from instance name");
+		$this->assertFalse(0 == count($hostIds->toArray()),"no host returned by filter from instance id");
+		$this->assertEquals($hosts->count(),$hostIds->count(),"Id filter doesn't match text count");
+        
 		$instanceCount =0;
 		foreach($allHosts as $_host) {
 			$found = false;
-			if($_host->instance->instance_name == "default") {
+		
+            if($_host->instance->instance_name == "default") {
 				$instanceCount++;
 				foreach($hosts as $_checkHost) {
 					if($_checkHost == $_host) {

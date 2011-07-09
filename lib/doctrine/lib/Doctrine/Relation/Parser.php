@@ -156,12 +156,13 @@ class Doctrine_Relation_Parser
         if (isset($this->_relations[$alias])) {
             return $this->_relations[$alias];
         }
-
+        
         if (isset($this->_pending[$alias])) {
             $def = $this->_pending[$alias];
             $identifierColumnNames = $this->_table->getIdentifierColumnNames();
             $idColumnName = array_pop($identifierColumnNames);
-
+            if(isset($def['idField']))
+                $idColumnName = $def['idField'];
             // check if reference class name exists
             // if it does we are dealing with association relation
             if (isset($def['refClass'])) {
@@ -219,6 +220,7 @@ class Doctrine_Relation_Parser
                         }
                     }
                 } else {
+                    
                     $rel = new Doctrine_Relation_ForeignKey($def);
                 }
             }

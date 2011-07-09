@@ -51,7 +51,7 @@ class Doctrine_Relation_Association extends Doctrine_Relation
 
     /**
      * getRelationDql
-     
+     *
      * @param integer $count
      * @return string
      */
@@ -59,6 +59,8 @@ class Doctrine_Relation_Association extends Doctrine_Relation
     {
         $table = $this->definition['refTable'];
         $component = $this->definition['refTable']->getComponentName();
+      
+       
         
         switch ($context) {
             case "record":
@@ -67,20 +69,21 @@ class Doctrine_Relation_Association extends Doctrine_Relation
                 $dql .= '.' . $component;
                 $dql .= ' WHERE ' . $this->getTable()->getComponentName()
                 . '.' . $component . '.' . $this->getLocalRefColumnName() . ' IN (' . $sub . ')';
-				if($this->tmp_rec->contains('instance_id'))
-					$dql .= ' AND '.$this->getTable()->getComponentName().".instance_id = '".$this->tmp_rec->instance_id."' ";
+			    
+            
+				
                 $dql .= $this->getOrderBy($this->getTable()->getComponentName(), false);
                 break;
             case "collection":
                 $sub  = substr(str_repeat("?, ", $count),0,-2);
                 $dql  = 'FROM ' . $component . '.' . $this->getTable()->getComponentName();
                 $dql .= ' WHERE ' . $component . '.' . $this->getLocalRefColumnName() . ' IN (' . $sub . ')';
-				if($this->tmp_rec->contains('instance_id'))
-					$dql .= ' AND '.$this->getTable()->getComponentName().".instance_id = '".$this->tmp_rec->instance_id."' ";
+				
+			
                 $dql .= $this->getOrderBy($component, false);
                 break;
         }
-
+        
         return $dql;
     }
 
@@ -130,7 +133,16 @@ class Doctrine_Relation_Association extends Doctrine_Relation
      */
     public function fetchRelatedFor(Doctrine_Record $record)
     {
-        $id = $record->getIncremented();
+        $id = -1;
+        try {
+            $recId = $record->get($this->getLocalRefFieldName());
+            if($recId)
+                $id = $recId;
+            else
+                $id = $record->getIncremented();
+        } catch(Exception $e) {
+            $id = $record->getIncremented();
+        }
 		$this->tmp_rec = $record;
         if (empty($id) || ! $this->definition['table']->getAttribute(Doctrine_Core::ATTR_LOAD_REFERENCES)) {
             $coll = Doctrine_Collection::create($this->getTable());

@@ -11,7 +11,7 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class IcingaContactgroups extends BaseIcingaContactgroups {
-    public function __get($field) {
+/*    public function __get($field) {
         switch ($field) {
             case 'hosts':
                     $hosts = $this->getHosts();
@@ -47,5 +47,5 @@ class IcingaContactgroups extends BaseIcingaContactgroups {
                            .$this->contactgroup_object_id." AND cg.instance_id = ".$this->instance_id.
                            " AND cg.service_id = h.service_id")
                ->execute(null,Doctrine_Core::HYDRATE_RECORD);
-    }
+    }*/
 }

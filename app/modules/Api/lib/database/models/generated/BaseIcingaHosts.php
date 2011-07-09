@@ -693,17 +693,20 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
                            'local' => 'host_object_id',
                            'foreign' => 'host_object_id'
                        ));
-        // Retrieved by custom finders
 
-        $this->hasMany("IcingaHostContacts as contacts", array(
-                           'local' => 'host_id',
-                           'foreign' => 'host_id',
-                       ));
-        $this->hasMany("IcingaHostContactgroups as contactgroups", array(
-                           'local' => 'host_id',
-                           'foreign' => 'host_id',
-                       ));
-
+        $this->hasMany("IcingaContacts as contacts", array(
+                       'local'      => 'host_id',
+                       'foreign'    => 'contact_object_id',
+                       'refClass'   => 'IcingaHostContacts',
+                       'idField' => 'host_id'
+                    ));
+        $this->hasMany("IcingaContactgroups as contactgroups", array(
+                       'local'      => 'host_id',
+                       'foreign'    => 'contactgroup_object_id',
+                       'refClass' => 'IcingaHostContactgroups',
+                       'idField' => 'host_id'
+                   ));
+        
         $this->hasMany("IcingaStatehistory as stateHistory", array(
                            'local' => 'host_object_id',
                            'foreign' => 'object_id'

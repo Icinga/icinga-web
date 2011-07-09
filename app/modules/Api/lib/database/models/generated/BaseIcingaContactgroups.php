@@ -26,7 +26,7 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record {
                              'length' => 4,
                              'fixed' => false,
                              'unsigned' => false,
-                             'primary' => true,
+                             'primary' => false,
                              'autoincrement' => true,
                          ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -54,7 +54,7 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record {
                              'length' => 4,
                              'fixed' => false,
                              'unsigned' => false,
-                             'primary' => false,
+                             'primary' => true,
                              'default' => '0',
                              'notnull' => true,
                              'autoincrement' => false,
@@ -76,14 +76,20 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record {
                           'local' => 'instance_id',
                           'foreign' => 'instance_id'
                       ));
-        $this->hasMany('IcingaHostContactgroups as hosts', array(
+     
+
+        $this->hasMany('IcingaHosts as hosts', array(
                            'local' => 'contactgroup_object_id',
-                           'foreign' => 'contactgroup_object_id',
-                       ));
-        $this->hasMany('IcingaServiceContactgroups as services', array(
+                           'foreign' => 'host_id',
+                           'refClass' => 'IcingaHostContactgroups'
+                          
+                    ));
+        $this->hasMany('IcingaServices as services', array(
                            'local' => 'contactgroup_object_id',
-                           'foreign' => 'contactgroup_object_id',
-                       ));
+                           'foreign' => 'service_id',
+                           'refClass' => 'IcingaServiceContactgroups'   
+                    ));
+
         $this->hasMany('IcingaContacts as members', array(
                            'local' => 'contactgroup_object_id',
                            'foreign' => 'contact_object_id',

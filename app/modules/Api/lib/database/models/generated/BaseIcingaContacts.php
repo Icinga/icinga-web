@@ -43,7 +43,7 @@ abstract class BaseIcingaContacts extends Doctrine_Record {
                              'length' => 4,
                              'fixed' => false,
                              'unsigned' => false,
-                             'primary' => true,
+                             'primary' => false,
                              'autoincrement' => true,
                          ));
         $this->hasColumn('instance_id', 'integer', 2, array(
@@ -71,7 +71,7 @@ abstract class BaseIcingaContacts extends Doctrine_Record {
                              'length' => 4,
                              'fixed' => false,
                              'unsigned' => false,
-                             'primary' => false,
+                             'primary' => true,
                              'default' => '0',
                              'notnull' => true,
                              'autoincrement' => false,
@@ -269,13 +269,15 @@ abstract class BaseIcingaContacts extends Doctrine_Record {
     }
 
     public function setUp() {
-        $this->hasMany('IcingaHostContacts as hosts',array(
+        $this->hasMany('IcingaHosts as hosts',array(
                            'local' => 'contact_object_id',
-                           'foreign' => 'contact_object_id'
+                           'foreign' => 'hostid',
+                            'refClass' => 'IcingaHostContacts'
                        ));
-        $this->hasMany('IcingaServiceContacts as services',array(
+        $this->hasMany('IcingaServices as services',array(
                            'local' => 'contact_object_id',
-                           'foreign' => 'contact_object_id'
+                           'foreign' => 'service_id',
+                           'refClass' => 'IcingaServiceContacts'
                        ));
         $this->hasOne('IcingaInstances as instance', array(
                           'local' => 'instance_id',

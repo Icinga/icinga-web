@@ -87,6 +87,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
         'oci'      => 'Doctrine_Connection_Oracle',
         'oci8'     => 'Doctrine_Connection_Oracle',
         'oracle'   => 'Doctrine_Connection_Oracle',
+        'icingaOracle'   => 'Doctrine_Connection_IcingaOracle',
         'mssql'    => 'Doctrine_Connection_Mssql',
         'dblib'    => 'Doctrine_Connection_Mssql',
         'odbc'     => 'Doctrine_Connection_Mssql', 
@@ -397,6 +398,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
      * @param string $dsn 
      * @return array $parts
      */
+    
     protected function _buildDsnPartsArray($dsn)
     {
         // fix sqlite dsn so that it will parse correctly
@@ -405,8 +407,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
         $dsn = preg_replace("/\/\/\/(.*):\//", "//$1:/", $dsn);
 
         // silence any warnings
-        $parts = @parse_url($dsn);
-
+        $parts = @parse_url($dsn); 
         $names = array('dsn', 'scheme', 'host', 'port', 'user', 'pass', 'path', 'query', 'fragment');
 
         foreach ($names as $name) {

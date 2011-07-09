@@ -14,7 +14,7 @@ class IcingaHosts extends BaseIcingaHosts {
     public static $STATE_UP = 0;
     public static $STATE_DOWN = 1;
     public static $STATE_UNREACHABLE = 2;
-
+/*
     public function __get($method)  {
         switch ($method) {
             case  'contacts':
@@ -49,5 +49,5 @@ class IcingaHosts extends BaseIcingaHosts {
                ->innerJoin("c.hosts hc ON hc.host_id = ".$this->host_id
                            ." AND hc.instance_id = ".$this->instance_id." AND hc.contactgroup_object_id = c.contactgroup_object_id")
                ->execute(null,Doctrine_Core::HYDRATE_RECORD);
-    }
+    }*/
 }

@@ -61,7 +61,7 @@ class Api_ApiServiceRequestModel extends ApiDataRequestBaseModel {
     public function getServicesById(array $ids,array $hosts = array()) {
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from('IcingaServices s');
-        $desc->whereIn("s.service_id",$ids);
+        $desc->whereIn("s.id",$ids);
 
         $this->limitToHosts($desc,$hosts);
         return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);

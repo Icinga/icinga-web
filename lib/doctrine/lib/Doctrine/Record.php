@@ -2473,7 +2473,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     public function unlinkInDb($alias, $ids = array())
     {
         $rel = $this->getTable()->getRelation($alias);
-
+        
         if ($rel instanceof Doctrine_Relation_Association) {
             $q = $rel->getAssociationTable()
                 ->createQuery()

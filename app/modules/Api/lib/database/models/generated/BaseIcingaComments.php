@@ -28,7 +28,8 @@
  */
 abstract class BaseIcingaComments extends Doctrine_Record {
     public function setTableDefinition() {
-        $this->setTableName('icinga_comments');
+        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCommands")->getPrefix();
+        $this->setTableName($prefix.'comments'); 
         $this->hasColumn('comment_id', 'integer', 4, array(
                              'type' => 'integer',
                              'length' => 4,

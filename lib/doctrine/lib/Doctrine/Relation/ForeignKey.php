@@ -62,13 +62,13 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
             } else {
                 $dql  = 'FROM ' . $this->getTable()->getComponentName()
                       . ' WHERE ' . $this->getCondition();
-				if($record->contains('instance_id'))
-					$dql .= ' AND '.$this->getTable()->getComponentName().".instance_id = '".$record->instance_id."' ";
+			     
 				$dql .= $this->getOrderBy(null, false);
+                
                 $coll = $this->getTable()->getConnection()->query($dql, $id);
                 $related = $coll[0];
             }
-
+            
             $related->set($related->getTable()->getFieldName($this->definition['foreign']),
                     $record, false);
         } else {
@@ -79,6 +79,7 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
                 $related = Doctrine_Collection::create($this->getTable());
             } else {
                 $query      = $this->getRelationDql(1);	
+               
                 $related    = $this->getTable()->getConnection()->query($query, $id);
             }
             $related->setReference($record, $this);
@@ -89,12 +90,12 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
     public function getRelationDql($count)
     {
         $component = $this->getTable()->getComponentName();
-
+        
         $dql  = 'FROM ' . $component
               . ' WHERE ' . $component . '.' . $this->definition['foreign']
               . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')';
-		if($this->tmp_rec->contains('instance_id'))
-        	$dql .= ' AND '.$component.".instance_id = '".$this->tmp_rec->instance_id."'"; 
+
+        
 		$dql .= $this->getOrderBy($component);
 
         return $dql;
@@ -111,6 +112,7 @@ class Doctrine_Relation_ForeignKey extends Doctrine_Relation
            $alias = $this->getTable()->getComponentName();
         }
         $conditions = array();
+        
         foreach ((array) $this->definition['foreign'] as $foreign) {
             $conditions[] = $alias . '.' . $foreign . ' = ?';
         }

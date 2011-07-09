@@ -71,9 +71,10 @@ abstract class Doctrine_Relation implements ArrayAccess
                                   'owningSide'  => false, // whether this is the owning side
                                   'refClassRelationAlias' => null,
                                   'foreignKeyName' => null,
-                                  'orderBy' => null,
-                                  'foreignKey' => null 
-                                    );
+                                  'orderBy' => null, 
+                                  'idField' => null 
+                            
+                        );
 
     protected $_isRefClass = null;
 
@@ -129,7 +130,9 @@ abstract class Doctrine_Relation implements ArrayAccess
     public function __construct(array $definition)
     {
         $def = array();
+       
         foreach ($this->definition as $key => $val) {
+            
             if ( ! isset($definition[$key]) && $val) {
                 throw new Doctrine_Exception($key . ' is required!');
             }
@@ -138,7 +141,9 @@ abstract class Doctrine_Relation implements ArrayAccess
             } else {
                 $def[$key] = $this->definition[$key];          
             }
+            
         }
+        
         $this->definition = $def;
     }
 
@@ -327,8 +332,9 @@ abstract class Doctrine_Relation implements ArrayAccess
        return $this->definition['table']->getColumnName($this->definition['foreign']);
     }
 
-    final public function __getForeignKey() {
-        return $this->definition["foreignKey"];
+    
+    final public function __getIdField() {
+        return $this->definition["idField"];
     }
     /**
      * isOneToOne
@@ -350,7 +356,7 @@ abstract class Doctrine_Relation implements ArrayAccess
     public function getRelationDql($count)
     {
         $component = $this->getTable()->getComponentName();
-
+        
         $dql  = 'FROM ' . $component
               . ' WHERE ' . $component . '.' . $this->definition['foreign']
               . ' IN (' . substr(str_repeat('?, ', $count), 0, -2) . ')'

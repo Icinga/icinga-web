@@ -305,8 +305,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     **/
     protected function setupApiTargetFor($target) {
         switch($target) {
-            case IcingaApiConstants::TARGET_INSTANCE:
-        
+            case IcingaApiConstants::TARGET_INSTANCE: 
+                $this->mainAlias = "i";
+                $this->setTarget("IcingaInstances");
             break;
             case IcingaApiConstants::TARGET_HOST:
                 $this->mainAlias = "h";
@@ -314,15 +315,32 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->aliasDefs = array( 
                     "oh"  => array("src" => "h", "relation" => "object"),
                     "hs"  => array("src" => "h", "relation" => "status"),
-                    "i"   => array("src" => "h", "relation" => "instance"),
-                    "cg"  => array("src" => "h", "relation" => "contactgroups"),
-                    "cgm" => array("src" => "h", "relation" => "contacts"),
+                    "i"   => array("src" => "h", "relation" => "instance","alwaysSelect" => "instance_id"),
+                    "cg"  => array("src" => "h", "relation" => "contactgroups","alwaysSelect" => "contactgroup_id"),
+                    "cgm" => array("src" => "h", "relation" => "contacts","alwaysSelect"=>"contact_id"),
                     "hg"  => array("src" => "h", "relation" => "hostgroups"),
                     "hgm" => array("src" => "h","relation" => "members"),
-                    "cvsc"=> array("src" => "h","relation" => "customvariablestatus")
+                    "oc"  => array("src" => "cgm","relation" => "object"),
+                    "ocg"  => array("src" => "cg","relation" => "object"),
+                    "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
+                    "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus")
                 ); 
             break;
             case IcingaApiConstants::TARGET_SERVICE:
+                $this->mainAlias = "s";
+                $this->setTarget("IcingaServices");
+                $this->aliasDefs = array(      
+                    "os"  => array("src" => "s", "relation" => "object"),
+                    "i"  => array("src" => "s", "relation" => "instance", "alwaysSelect" => "instance_id"),
+                    "cg" => array("src" => "s", "relation" => "contactgroups","alwaysSelect" => "contactgroup_id"),
+                    "cgm" => array("src"=> "s", "relation" => "contacts", "alwaysSelect" => "contact_id"),
+                    "oc"  => array("src" => "cgm","relation" => "object"),
+                    "ocg"  => array("src" => "cg","relation" => "object"),
+                    "cvsh"=> array("src" => "s","relation" => "customvariablestatus"),
+                    "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
+                    "ss" => array("src" => "s","relation" => "status")
+
+                ); 
             break;
             case IcingaApiConstants::TARGET_HOSTGROUP:
             break;

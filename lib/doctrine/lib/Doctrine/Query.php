@@ -1795,7 +1795,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                             . $this->_conn->quoteIdentifier($assocTableName)
                             . ' '
                             . $this->_conn->quoteIdentifier($assocAlias);
-                    $ref = $relation->__getForeignKey();
+                    $ref = $relation->__getIdField();
                     $queryPart .= ' ON (' . $this->_conn->quoteIdentifier($localAlias
                                 . '.'
                                 . $localTable->getColumnName($ref ? $ref : $localTable->getIdentifier())) // what about composite keys?

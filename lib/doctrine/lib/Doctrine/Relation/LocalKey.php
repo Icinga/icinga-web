@@ -57,7 +57,7 @@ class Doctrine_Relation_LocalKey extends Doctrine_Relation
         } else {
             $dql  = 'FROM ' . $this->getTable()->getComponentName()
                  . ' WHERE ' . $this->getCondition() . $this->getOrderBy(null, false);
-
+            
             $related = $this->getTable()
                             ->getConnection()
                             ->query($dql, array($id))
@@ -83,6 +83,9 @@ class Doctrine_Relation_LocalKey extends Doctrine_Relation
         if ( ! $alias) {
            $alias = $this->getTable()->getComponentName();
         }
+      
+     
+    
         return $alias . '.' . $this->definition['foreign'] . ' = ?';
     }
 }

@@ -1285,6 +1285,8 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      */
     public function setColumn($name, $type = null, $length = null, $options = array(), $prepend = false)
     {
+        if(strtolower($name) == strtolower(substr($this->getTableName(),0,-1)."_id"))
+         
         if (is_string($options)) {
             $options = explode('|', $options);
         }

@@ -38,7 +38,7 @@ class Api_ApiHostgroupRequestModel extends ApiDataRequestBaseModel {
         $desc = $this->createRequestDescriptor();
         $desc->select('hg.*')->distinct()->from('IcingaHostgroups hg');
         $desc->innerJoin('hg.members h')->where("h.instance_id = hg.instance_id");
-        $desc->innerJoin('h.services s')->where("s.instance_id = h.instance_id")->andWhere("i4.display_name IN('".join("','",$services)."')");
+        $desc->innerJoin('h.services s')->where("s.instance_id = h.instance_id")->andWhere("s.display_name IN('".join("','",$services)."')");
 
         return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
     }

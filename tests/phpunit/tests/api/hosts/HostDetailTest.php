@@ -39,6 +39,7 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	**/
 	public function testGetId() {
 		$host = $this->hostProvider();
+        
 		$this->assertEquals($host->host_id,181,"Id of returned host is wrong, should be 181 in the dbFixture");
 		success("Getting host id succeeded \n");
 	}
@@ -149,7 +150,8 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetHostgroups() {
 		$host = $this->hostProvider();
 		$this->assertFalse(is_null($host->hostgroups),"Hostgroups could not be retrieved, returned null");
-		$this->assertTrue($host->hostgroups->count() > 0, "Hostgroupcount doesn't match expected value");
+	    
+        $this->assertTrue($host->hostgroups->count() > 0, "Hostgroupcount doesn't match expected value");
 		foreach($host->hostgroups as $hostgroup) {
 			$this->assertEquals($hostgroup->instance_id,$host->instance_id,"Hostgroup from wrong instance returned");
 		
@@ -228,8 +230,9 @@ class HostDetailTest extends PHPUnit_Framework_TestCase {
 	public function testGetContactgroups() {
 		$host = $this->hostProvider();
 		$this->assertFalse(is_null($host->contactgroups), "Contactgroups for host couldn't be retrieved, returned null");
-		$this->assertEquals($host->contactgroups->count() > 0,"Expected at least 1 contactgroup to be returned");
-		$this->assertFalse(is_null($host->contactgroups->getFirst()->hosts),1,"Couldn't retrieve hosts for contactgroups" );
+		$this->assertTrue($host->contactgroups->count() > 0,"Expected at least 1 contactgroup to be returned");
+		
+        $this->assertFalse(is_null($host->contactgroups->getFirst()->hosts),1,"Couldn't retrieve hosts for contactgroups" );
 		$found = false;
 		foreach($host->contactgroups as $group) {
 			$this->assertEquals($group->instance_id,$host->instance_id,"Contactgroup from wrong instance returned");
