@@ -34,7 +34,7 @@ abstract class BaseIcingaDowntimehistory extends Doctrine_Record {
     public function setTableDefinition() {
         $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaDowntimehistory")->getPrefix();
         $this->setTableName($prefix.'downtimehistory');
-        $this->hasColumn('downtimehistory_id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', 4, array(
                              'type' => 'integer',
                              'length' => 4,
                              'fixed' => false,
@@ -222,21 +222,8 @@ abstract class BaseIcingaDowntimehistory extends Doctrine_Record {
     public function setUp() {
         $this->hasOne('IcingaInstances as instance', array(
                           'local' => 'instance_id',
-                          'foreign' => 'instance_id'
+                          'foreign' => 'id'
                       ));
-        $this->hasOne("IcingaObjects as object",array(
-            'local'     => 'object_id',
-            'foreign'   => 'object_id' 
-        ));
-
-        $this->hasOne("IcingaServices as service",array(
-            'local'     => 'object_id',
-            'foreign'   => 'service_object_id' 
-        ));
-        $this->hasOne("IcingaHosts as hosts",array(
-            'local'     => 'object_id',
-            'foreign'   => 'host_object_id' 
-        ));
         parent::setUp();
 
     }

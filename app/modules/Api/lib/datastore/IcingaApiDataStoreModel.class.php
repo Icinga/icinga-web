@@ -75,9 +75,11 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     **/
     public function execRead() {
         $request = $this->createRequestDescriptor();
-        $this->applyModifiers($request);
-        $result = $request->execute(NULL,$this->resultType);
+        $this->applyModifiers($request); 
         
+       
+        $result = $request->execute(NULL,$this->resultType);
+         
         return array("data"=>$result,"count"=>$request->count());
     }
     

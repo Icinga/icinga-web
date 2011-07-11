@@ -255,7 +255,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         'COMMENT_EXPIRATION_TIME'   =>  'co.expiration_time',
         
             // Downtimehistory
-        'DOWNTIMEHISTORY_ID'        =>  'dthh.downtimehistory_id',
+        'DOWNTIMEHISTORY_ID'        =>  'dth.downtimehistory_id',
         'DOWNTIMEHISTORY_INSTANCE_ID'=> 'dth.instance_id',
         'DOWNTIMEHISTORY_DOWNTIME_TYPE'=>'dth.downtime_type',
         'DOWNTIMEHISTORY_OBJECT_ID' =>  'dth.object_id',
@@ -293,6 +293,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         'DOWNTIME_ACTUAL_START_TIME'    =>        'dt.actual_start_time',
         'DOWNTIME_ACTUAL_START_TIME_USEC'=>       'dt.actual_start_time_usec'
     );
+    /**
+    * @see StoreTargetModifierModel::defaultJoinType
+    *
+    **/
+    protected $defaultJoinType = "inner";
 
     /**
     * @deprecated
@@ -317,7 +322,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                     "hs"  => array("src" => "h", "relation" => "status"),
                     "i"   => array("src" => "h", "relation" => "instance","alwaysSelect" => "instance_id"),
                     "cg"  => array("src" => "h", "relation" => "contactgroups","alwaysSelect" => "contactgroup_id"),
-                    "cgm" => array("src" => "h", "relation" => "contacts","alwaysSelect"=>"contact_id"),
+                    "cgm" => array("src" => "cg", "relation" => "members","alwaysSelect"=>"contact_id"),
                     "hg"  => array("src" => "h", "relation" => "hostgroups"),
                     "hgm" => array("src" => "h","relation" => "members"),
                     "oc"  => array("src" => "cgm","relation" => "object"),
@@ -338,49 +343,334 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                     "ocg"  => array("src" => "cg","relation" => "object"),
                     "cvsh"=> array("src" => "s","relation" => "customvariablestatus"),
                     "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
-                    "ss" => array("src" => "s","relation" => "status")
-
+                    "ss" => array("src" => "s","relation" => "status"),
+                    "h"  => array("src" => "s","relation" => "host"),
+                    "hs" => array("src" => "h","relation" => "status"),
+                    "oh" => array("src" => "h","relation" => "object"),
+                    "sg" => array(
+                        "src" => "s",
+                        "relation" => "servicegroups",
+                        "type" => "left"
+                    ),
+                    "sgm" => array(
+                        "src" => "sg", 
+                        "relation" => "members",
+                        "type"=>"left"
+                    ),
+                    "osg" => array(
+                        "src" => "sg", 
+                        "relation" => "object", 
+                        "type"=>"left"
+                    ),
+                    "hg"  => array("src" => "h", "relation" => "hostgroups"),
+                    "hgm" => array("src" => "h","relation" => "members"), 
+                    "ohg" => array("src" => "hg","relation" => "object"),
+                    "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
+                    "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+                    "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus")
                 ); 
             break;
-            case IcingaApiConstants::TARGET_HOSTGROUP:
+            case IcingaApiConstants::TARGET_HOSTGROUP: 
+                $this->mainAlias = "hg";
+                $this->setTarget("IcingaHostgroups");
+                $this->aliasDefs = array(
+                    "ohg"   => array("src" => "hg", "relation" => "object"),
+                    "hgm"   => array("src" => "hg", "relation" => "members"),
+                    "oh"    => array("src" => "hgm", "relation" => "object")
+                ); 
             break;
             case IcingaApiConstants::TARGET_SERVICEGROUP:
+                $this->mainAlias = "sg";
+                $this->setTarget("IcingaServicegroups");
+                $this->aliasDefs = array(
+                    "osg"   => array("src" => "sg", "relation" => "object"),
+                    "sgm"   => array("src" => "sg", "relation" => "members"),
+                    "os"    => array("src" => "s", "relation" => "object")
+                );
             break;
             case IcingaApiConstants::TARGET_CONTACTGROUP:
+                $this->mainAlias = "cg";
+                $this->setTarget("IcingaContactgroups");
+                $this->aliasDefs = array(
+                    "ocg"   => array("src" => "cg", "relation" => "object"),
+                    "cgm"   => array("src" => "cg", "relation" => "members"),
+                    "cvsc"    => array("src" => "cgm", "relation" => "customvariablestatus")
+                );
             break;
             case IcingaApiConstants::TARGET_TIMEPERIOD:
+                $this->mainAlias = "tp";
+                $this->setTarget("IcingaTimeperiods");
+                $this->aliasDefs = array(
+                    "otp"   => array("src" => "tp", "relation" => "object"),
+                    "tptr"   => array("src" => "tp", "relation" => "timeranges") 
+                );
             break;
             case IcingaApiConstants::TARGET_CUSTOMVARIABLE:
+                $this->mainAlias = "cv";
+                $this->setTarget("IcingaCustomvariables");
+                $this->aliasDefs = array(
+                    "cvs"   => array("src" => "cv", "relation" => "customvariablestatus")
+                );
+                
             break;
             case IcingaApiConstants::TARGET_CONFIG:
+                $this->mainAlias = "cfv";
+                $this->setTarget("IcingaConfigvariables");
             break;
             case IcingaApiConstants::TARGET_PROGRAM:
+                $this->mainAlias = "pe";
+                $this->setTarget("IcingaProcessevents");
+                $this->addStaticWhereField("pe.event_type = ?",100);  
             break;
             case IcingaApiConstants::TARGET_LOG:
+                $this->mainAlias = "le";
+                $this->setTarget("IcingaLogentries");
+                $this->aliasDefs = array(
+                    "i" => array("src" => "le", "relation" => "instance")
+                );
             break;
             case IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY:
+                $this->mainAlias = "hs";
+                $this->setTarget("IcingaHoststatus");
+                $this->aliasDefs = array(
+                    "h"  => array("src" => "hs", "relation" => "host"), 
+                    "oh" => array("src" => "h", "relation" => "object"),
+                    "i"  => array("src" => "h", "relation" => "instance"),
+                    "cg" => array("src" => "h", "relation" => "contactgroups"),
+                    "ocg"=> array("src" => "cg", "relation" => "object"),
+                    "cgm"=> array("src" => "cg", "relation" => "members"),
+                    "oc" => array("src" => "cgm", "relation" => "object"),
+                    "hg" => array("src" => "h", "relation" => "hostgroups"),
+                    "hgm" => array("src" => "hg", "relation" => "members"),
+                    "ohg" => array("src" => "hg", "relation" => "object"),
+                    "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),        
+                    "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus"),        
+                );    
             break;
             case IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY:
+                $this->mainAlias = "ss";
+                $this->setTarget("IcingaServicestatus");
+                $this->aliasDefs = array(
+                    "s"  => array("src" => "s", "relation" => "service"), 
+                    "os" => array("src" => "s", "relation" => "object"),
+                    "i"  => array("src" => "s", "relation" => "instance"),
+                    "cg" => array("src" => "s", "relation" => "contactgroups"),
+                    "ocg"=> array("src" => "cg", "relation" => "object"),
+                    "cgm"=> array("src" => "cg", "relation" => "members"),
+                    "oc" => array("src" => "cgm", "relation" => "object"),
+                    "sg" => array("src" => "s", "relation" => "servicegroups"),
+                    "sgm" => array("src" => "sg", "relation" => "members"),
+                    "osg" => array("src" => "sg", "relation" => "object"),
+                    "cvss"=> array("src" => "s", "relation" => "customvariablestatus"),        
+                    "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus"),        
+                ); 
             break;
             case IcingaApiConstants::TARGET_HOST_STATUS_HISTORY:
+                $this->mainAlias = "sh";
+                $this->setTarget("IcingaStatehistory");
+                $this->aliasDefs = array(
+                    "oh" => array("src" => "sh", "relation" => "object"),
+                    "h"  => array("src" => "sh", "relation" => "hosts"),
+                    "i"  => array("src" => "h", "relation" => "instance"), 
+                    "cg" => array("src" => "h", "relation" => "contactgroups"),
+                    "ocg"=> array("src" => "cg", "relation" => "object"),
+                    "cgm"=> array("src" => "cg", "relation" => "members"),
+                    "oc" => array("src" => "cgm", "relation" => "object"),
+                    "hg" => array("src" => "h", "relation" => "hostgroups"),
+                    "hgm" => array("src" => "hg", "relation" => "members"),
+                    "ohg" => array("src" => "hg", "relation" => "object"),
+                    "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),        
+                    "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus") 
+                ); 
             break;
-            case IcingaApiConstants::TARGET_SERVICE_STATUS_HISTROY:
+            case IcingaApiConstants::TARGET_SERVICE_STATUS_HISTORY:
+                $this->mainAlias = "sh";
+                $this->setTarget("IcingaStatehistory");
+                $this->aliasDefs = array(
+                    "os" => array("src" => "sh", "relation" => "object"),
+                    "s"  => array("src" => "sh", "relation" => "services"),
+                    "h"  => array("src" => "s", "relation" => "host"),
+                    "oh" => array("src" => "h", "relation" => "object"), 
+                    "i"  => array("src" => "s", "relation" => "instance"), 
+                    "cg" => array("src" => "s", "relation" => "contactgroups"),
+                    "ocg"=> array("src" => "cg", "relation" => "object"),
+                    "cgm"=> array("src" => "cg", "relation" => "members"),
+                    "oc" => array("src" => "cgm", "relation" => "object"),
+                    "hg" => array("src" => "s", "relation" => "hostgroups"),
+                    "hgm" => array("src" => "sg", "relation" => "members"),
+                    "ohg" => array("src" => "sg", "relation" => "object"),
+                    "cvsh"=> array("src" => "s", "relation" => "customvariablestatus"),        
+                    "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus") 
+                );
             break;
             case IcingaApiConstants::TARGET_HOST_PARENTS:
+                $this->mainAlias = "h";
+                $this->setTarget("IcingaHosts");
+                $this->aliasDefs = array(
+                    "oh" => array("src" => "h", "relation" => "object"),
+                    "hph" => array("src" => "h", "relation" => "parents"),
+                    "ohp" => array("src" => "hph", "relation" => "object")
+                );
             break;
             case IcingaApiConstants::TARGET_NOTIFICATIONS:
+                $this->mainAlias = "n";
+                $this->setTarget("IcingaNotifications");
+                $this->aliasDefs = array(
+                    "obn" => array("src" => "n", "relation" => "object"),
+                    "s" => array(
+                        "src" => "n", 
+                        "relation" => "services",
+                        "type" => "left"
+                    ),
+                    "h" => array(
+                        "src" => "n", 
+                        "relation" => "hosts",
+                        "type" => "left"
+                    ),
+                    "oh" => array(
+                        "src" => "h", 
+                        "relation" => "object",
+                        "type" => "left"
+                    ), 
+                    "os" => array(
+                        "src" => "s", 
+                        "relation" => "object",
+                        "type" => "left"
+                    )
+               ); 
             break;
             case IcingaApiConstants::TARGET_HOSTGROUP_SUMMARY:
+                $this->mainAlias = "hg";
+                $this->setTarget("IcingaHostgroups");
+                $this->aliasDefs = array(
+                    "i"   => array("src" => "hg", "relation" => "instances"),
+                    "ohg"   => array("src" => "hg", "relation" => "object"),
+                    "hgm"   => array("src" => "hg", "relation" => "members"),
+                    "oh"    => array("src" => "hgm", "relation" => "object")
+                );
             break;
             case IcingaApiConstants::TARGET_SERVICEGROUP_SUMMARY:
+                $this->mainAlias = "sg";
+                $this->setTarget("IcingaServicegroups");
+                $this->aliasDefs = array(
+                    "i"   => array("src" => "sg", "relation" => "instances"),
+                    "osg"   => array("src" => "sg", "relation" => "object"),
+                    "sgm"   => array("src" => "sg", "relation" => "members"),
+                    "os"    => array("src" => "sgm", "relation" => "object") 
+                );
             break;
             case IcingaApiConstants::TARGET_COMMENT:
+                $this->mainAlias = "co";
+                $this->setTarget("IcingaComments");
             break;
             case IcingaApiConstants::TARGET_HOST_SERVICE:
+                $this->mainAlias = "h";
+                $this->setTarget("IcingaHosts");
+                $this->aliasDefs = array( 
+                    "s"  => array("src" => "h","relation" => "host"),
+                    "os"  => array("src" => "s", "relation" => "object"),
+                    "i"  => array(
+                        "src" => "s", 
+                        "relation" => "instance", 
+                        "alwaysSelect" => "instance_id",
+                        "type" => "left"
+                    ),
+                    "cg" => array("src" => "s", "relation" => "contactgroups","alwaysSelect" => "contactgroup_id"),
+                    "cgm" => array("src"=> "s", "relation" => "contacts", "alwaysSelect" => "contact_id"),
+                    "oc"  => array("src" => "cgm","relation" => "object"),
+                    "ocg"  => array("src" => "cg","relation" => "object"),
+                    "cvsh"=> array("src" => "s","relation" => "customvariablestatus"),
+                    "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
+                    "ss" => array(
+                        "src" => "s",
+                        "relation" => "status",
+                        "type" => "left"
+                    ),
+                    "hs" => array(
+                        "src" => "h",
+                        "relation" => "status",
+                        "type" => "left"
+                    ),
+                    "oh" => array(
+                        "src" => "h",
+                        "relation" => "object",
+                        "type" => "left"
+                    ),
+                    "sg" => array(
+                        "src" => "s",
+                        "relation" => "servicegroups",
+                        "type" => "left"
+                    ),
+                    "sgm" => array(
+                        "src" => "sg", 
+                        "relation" => "members",
+                        "type" => "left"
+                    ),
+                    "osg" => array(
+                        "src" => "sg", 
+                        "relation" => "object", 
+                        "type" => "left"
+                    ),
+                    "hg"  => array(
+                        "src" => "h", 
+                        "relation" => "hostgroups", 
+                        "type" => "left"
+                    ),
+                    "hgm" => array(
+                        "src" => "h",
+                        "relation" => "members",
+                        "type" => "left"
+                    ), 
+                    "ohg" => array(
+                        "src" => "hg",
+                        "relation" => "object",
+                        "type" => "left"
+                    ),
+                    "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
+                    "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+                    "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus")
+            ); 
             break;   
             case IcingaApiConstants::TARGET_DOWNTIMEHISTORY:
+                $this->mainAlias = "dth";
+                $this->setTarget("IcingaDowntimehistory");
+                $this->defaultJoinType = "left";
+                $this->aliasDefs = array( 
+                    "i"  => array("src" => "dth", "relation" => "instance", "alwaysSelect" => "instance_id"),
+                    "os" => array("src" => "dth", "relation" => "object"),
+                    "s" => array("src" => "dth", "relation" => "service"),
+                    "ss" => array("src" => "s","relation" => "status"),
+                    "oh" => array("src" => "h","relation" => "object"),
+                    "h" => array("src" => "dth", "relation" => "host"),
+                    "sg" => array("src" => "s","relation" => "servicegroups"),
+                    "sgm" => array("src" => "sg", "relation" => "members"),
+                    "osg" => array("src" => "sg", "relation" => "object"),
+                    "hg"  => array("src" => "h", "relation" => "hostgroups"),
+                    "hgm" => array("src" => "h","relation" => "members"), 
+                    "hs"  => array("src" => "h", "relation" => "status"),
+                    "ohg" => array("src" => "hg","relation" => "object")
+            );
             break;
             case IcingaApiConstants::TARGET_DOWNTIME:
+                $this->mainAlias = "dt";
+                $this->setTarget("IcingaScheduleddowntime"); 
+                $this->defaultJoinType = "left";
+                $this->aliasDefs = array(
+                    "i"  => array("src" => "dt", "relation" => "instance", "alwaysSelect" => "instance_id"),
+                    "os" => array("src" => "dt", "relation" => "object", "alwaysSelect" => "object_id"),
+                    "s" => array("src" => "dt", "relation" => "services"),
+                    "ss" => array("src" => "s","relation" => "status"),
+                    "h" => array("src" => "dt", "relation" => "hosts"),
+                    "sh" => array("src" => "dt","relation" => "object", "alwaysSelect" => "object_id"),
+                    "oh" => array("src" => "dt","relation" => "object", "alwaysSelect" => "object_id"),
+                    "sg" => array("src" => "s","relation" => "servicegroups"),
+                    "sgm" => array("src" => "sg", "relation" => "members"),
+                    "osg" => array("src" => "sg", "relation" => "object", "alwaysSelect" => "object_id"),
+                    "hg"  => array("src" => "h", "relation" => "hostgroups"),
+                    "hgm" => array("src" => "h","relation" => "members"), 
+                    "ohg" => array("src" => "hg","relation" => "object", "alwaysSelect" => "object_id"),
+                    "hs"  => array("src" => "h", "relation" => "status")
+            );
             break;
         }
     }
@@ -389,10 +679,6 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     } 
     protected $aliasDefs = array( 
      
-        "i"     => array("src" => "my", "relation" => "instance"),
-        "hs"    => array("src" => "my", "relation" => "status"),
-        "chco"  => array("src" => "my", "relation" => "checkCommand"),
-        "s"     => array("src" => "my", "relation" => "services"),
-        "ss"    => array("src" => "s", "relation" => "status")
+
     ); 
 }

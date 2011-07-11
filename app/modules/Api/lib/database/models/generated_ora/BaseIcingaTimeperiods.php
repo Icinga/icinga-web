@@ -19,7 +19,7 @@ abstract class BaseIcingaTimeperiods extends Doctrine_Record {
     public function setTableDefinition() {
         $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaTimeperiods")->getPrefix();
         $this->setTableName($prefix.'timeperiods');
-        $this->hasColumn('timeperiod_id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', 4, array(
                              'type' => 'integer',
                              'length' => 4,
                              'fixed' => false,
@@ -72,15 +72,11 @@ abstract class BaseIcingaTimeperiods extends Doctrine_Record {
     public function setUp() {
         $this->hasOne('IcingaInstances as instance', array(
                           'local' => 'instance_id',
-                          'foreign' => 'instance_id'
+                          'foreign' => 'id'
                       ));
         $this->hasOne('IcingaObjects as object', array(
             'local' => 'timeperiod_object_id',
-            'foreign' => 'object_id'
-        ));
-        $this->hasMany('IcingaTimeperiodTimeranges as timeranges',array(
-            'local' => 'timeperiod_id',
-            'foreign' => 'timeperiod_id'
+            'foreign' => 'id'
         ));
         parent::setUp();
 

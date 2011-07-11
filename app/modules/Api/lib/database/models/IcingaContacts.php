@@ -11,7 +11,7 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class IcingaContacts extends BaseIcingaContacts {
-    public function __get($field) {
+/*    public function __get($field) {
         switch ($field) {
             case 'hosts':
                     $hosts = $this->getHosts();
@@ -32,6 +32,6 @@ class IcingaContacts extends BaseIcingaContacts {
                            " AND cg.host_id = h.host_id")
                ->execute(null,Doctrine_Core::HYDRATE_RECORD);
     }
-
+*/
 
 }

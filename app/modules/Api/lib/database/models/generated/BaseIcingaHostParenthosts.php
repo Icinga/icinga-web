@@ -74,7 +74,7 @@ abstract class BaseIcingaHostParenthosts extends Doctrine_Record {
 
         $this->hasOne('IcingaHosts as parent', array(
                           'local' => 'parent_host_object_id',
-                          'foreign' => 'host_id'
+                          'foreign' => 'host_óbject_id'
                       ));
 
 

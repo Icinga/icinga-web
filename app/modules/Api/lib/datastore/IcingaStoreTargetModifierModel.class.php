@@ -63,25 +63,46 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected $groupFields = array();
+    
+    /**
+    * Defines fields that will statically appended in the Where clause 
+    * @var Array An array containing arrays with clause,value
+    *
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
+    protected $staticWhereConditions = array();
 
     /**
     * Define aliases and their target relations depending on the target ('my') 
     * <code>
     *    protected $aliasDefs = array( 
-    *       "i"     => array("src" => "my", "relation" => "instance"),
+    *       "i"     => array("src" => "my", "relation" => "instance", "type" => "inner", "OR" => 'hs.state = 0', "AND" => "my.alias = 'test' "),
     *       "hs"    => array("src" => "my", "relation" => "status"),
     *       "chco"  => array("src" => "my", "relation" => "checkCommand"),
     *       "s"     => array("src" => "my", "relation" => "services"),
     *       "ss"    => array("src" => "s", "relation" => "status")
     *   ); 
-    *
+    *   
     * </code>
-    * @var Array
+    * @var Array With the aliases, which can contain the following fields:
+    *   - src: (Required)           The origin alias name of the relation
+    *   - relation: (Required)      The relation name as defined in the doctrine model
+    *   - type: (Optional)          Either "inner" or "left", defines the join type. If none is set, @see defaultJoinType will be used
+    *   - AND:  (Optional)          A string defining a join condition that will be added via (ex.: h.display_name = "PING") AND
+    *   - OR:  (Optional)          A string defining a join conditions that will be added via (ex.: h.display_name = "PING") OR
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected $aliasDefs = array();
-    
+
+    /**
+    * The default join type to use, either left or inner
+    * @var String 
+    *
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
+    protected $defaultJoinType = "left";
+
     private $target = array();
     private $fields = array();
     private $joins = array();
@@ -94,7 +115,25 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     **/
     public function setTarget($target) {
         $this->target = $target;
-    } 
+    }
+    
+    /**
+    * Adds a simple 'where' clause to the end of the query in order to  
+    * be able to limit the result set statically. 
+    *
+    * NOTE: Don't use this for dynamic filtering,
+    * but the filterModifiers instead. It is intended to limit the base relation which can 
+    * be additionally filtered by the filter modifiers
+    *
+    * @param    String  The condition (my.host_name = ?)
+    * @param    mixed   The value to set for the clause
+    *
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
+    public function addStaticWhereField($condition,$value = null) {
+        $this->staticWhereConditions[] = array($condition,$value);
+    }
+     
     /**
     * Returns the target table 
     * @return String The table this modifier sets
@@ -179,8 +218,8 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
                 $this->setFields($value);
                 break;
          }
-    }
-  
+    } 
+    
     /**
     * Returns fields that are allowed to be requested
     * @return Array
@@ -241,14 +280,27 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
          
         $o->from($this->target." ".$this->mainAlias);
         foreach($this->joins as $join) {
-            
-            if(isset($join["type"])) {
-                if($join["type"] == "inner") { 
-                    $o->innerJoin($join["src"].".".$join["relation"]." ".$join["alias"]);
-                    continue;
-                }
+            if(isset($join["alwaysSelect"]))
+                $o->addSelect($join["alias"].".".$join["alwaysSelect"]);
+            $joinTxt = $join["src"].".".$join["relation"]." ".$join["alias"];
+            if(isset($join["AND"]))
+                $joinTxt .= "AND ".$join["AND"];
+            if(isset($join["OR"]))
+                $joinTxt .= "OR ".$join["OR"];
+ 
+            if(!isset($join["type"])) 
+                $join["type"] = $this->defaultJoinType;
+            if($join["type"] == "inner") { 
+                $o->innerJoin($joinTxt);
+            } else {
+                $o->leftJoin($joinTxt);
             }
-            $o->leftJoin($join["src"].".".$join["relation"]." ".$join["alias"]);
+        }
+        foreach($this->staticWhereConditions as $cond) {
+            if(isset($cond[1]) && $cond[1] != null)
+                $o->addWhere($cond[0],$cond[1]);
+            else
+                $o->addWhere($cond[0]);
         }
     }
 
@@ -268,8 +320,13 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     
         $join = $this->aliasDefs[$alias];
         $join["alias"] = $alias;
+        
         if(in_array($join,$this->joins))
             return true; // already added      
+        // Add source alias
+        if($join["src"] != $this->mainAlias)
+            $this->addAlias($join["src"]);
+        
         $this->joins[] = $join;
     }        
     

@@ -271,7 +271,7 @@ abstract class BaseIcingaContacts extends Doctrine_Record {
     public function setUp() {
         $this->hasMany('IcingaHosts as hosts',array(
                            'local' => 'contact_object_id',
-                           'foreign' => 'hostid',
+                           'foreign' => 'host_id',
                             'refClass' => 'IcingaHostContacts'
                        ));
         $this->hasMany('IcingaServices as services',array(
@@ -298,6 +298,11 @@ abstract class BaseIcingaContacts extends Doctrine_Record {
         $this->hasMany("IcingaCustomvariablestatus as customvariablestatus", array(
             'local' => 'contact_object_id',
             'foreign' => 'object_id'
+        ));
+        $this->hasMany("IcingaContactgroups as contactgroups",array(
+            'local' => 'contact_object_id',
+            'foreign' => 'contactgroup_id',
+            'refClass' => 'IcingaContactgroupMembers'
         ));
         parent::setUp();
 

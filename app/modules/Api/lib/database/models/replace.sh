@@ -1,7 +1,8 @@
 #!/bin/sh
-for file in $(ls *.php);
+
+for file in $( cd generated && ls *.php && cd ..);
 do 
-sed 's/Doctrine_Table/Icinga_Doctrine_Table/g' $file > dummy
-mv dummy $file;
+sed "s/'(.*) *AS *id/'id/gi" -r generated/$file > generated_ora/$file
+
 done
 
