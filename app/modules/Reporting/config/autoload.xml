@@ -11,6 +11,7 @@
 		<autoload name="JasperConfigBaseModel">%core.module_dir%/Reporting/lib/model/JasperConfigBaseModel.class.php</autoload>
 		
 		<!-- Jasper XML helpers -->
+		<autoload name="JasperSoapMultipartClient">%core.module_dir%/Reporting/lib/jasper/JasperSoapMultipartClient.class.php</autoload>
 		<autoload name="JasperRequestXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperRequestXmlDoc.class.php</autoload>
 		<autoload name="JasperResponseXmlDoc">%core.module_dir%/Reporting/lib/jasper/JasperResponseXmlDoc.class.php</autoload>
 		<autoload name="JasperResourceDescriptor">%core.module_dir%/Reporting/lib/jasper/JasperResourceDescriptor.class.php</autoload>

@@ -6,12 +6,11 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Ext.Panel, {
 	minWidth: 200,
 	maxWidth: 300,
 	useArrows : true,
-	autoScroll : true,
-	
+	autoScroll : false,	
+	rootName : _('Repository'),
+	title : _('Resources'),
 	
 	constructor : function(config) {
-		
-		title : _('Resources'),
 		
 		config = Ext.apply(config || {}, {
 			'tbar' : [{
@@ -33,7 +32,7 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Ext.Panel, {
 		Icinga.Reporting.util.ResourceTree.superclass.initComponent.call(this);
 		
 		this.rootNode = new Ext.tree.AsyncTreeNode({
-			text : _('Repository'),
+			text : this.rootName,
 			iconCls : 'icinga-icon-bricks',
 			id : 'root'
 		});
@@ -82,14 +81,17 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Ext.Panel, {
 	createTreeLoader : function() {
 		var tl = new Ext.tree.TreeLoader({
 			dataUrl : this.treeloader_url,
+			
+			qtipTemplate : new Ext.XTemplate(
+				'<strong>{name}</strong><br />'
+				+ '<span>Type: {type}</span><br />'
+				+ '<span>URI: {uri:ellipsis(60)}</span>', 
+			{
+				compiled : true
+			}),
+			
 			createNode : function(attr) {
-				attr.qtip = String.format(
-					'<b>{0}</b><br />{1}: {2}<br />URI: {3}',
-					attr.text,
-					_('Type'),
-					attr.type,
-					attr.uri
-				);
+				attr.qtip = this.qtipTemplate.applyTemplate(attr);
 				
 				return Ext.tree.TreeLoader.prototype.createNode.call(this, attr);
 			}

@@ -47,6 +47,10 @@ class JasperRequestXmlDoc extends DOMDocument {
         
     }
     
+    public function getOperationName() {
+        return $this->__rootNode->getAttribute('operationName');
+    }
+    
     /**
      * To create the document root, the node and its attributes
      * are always the same

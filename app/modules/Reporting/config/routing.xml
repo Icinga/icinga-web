@@ -17,6 +17,11 @@
 								<default for="output_type">OUTPUT_TYPE</default>
 							</defaults>
 						</route>
+						<route name=".content" pattern="^/content/(action:(\w+))" action="Provider.ContentResource">
+							<defaults>
+								<default for="action">meta</default>
+							</defaults>
+						</route>
 					</route>
 					
 					

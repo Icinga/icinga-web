@@ -1,6 +1,6 @@
 Ext.ns('Icinga.Reporting.util');
 
-Icinga.Reporting.util.Repository = Ext.extend(Ext.Container, {
+Icinga.Reporting.util.Repository = Ext.extend(Icinga.Reporting.abstract.ResizedContainer, {
 	layout : 'border',
 	height : 800, // Don't worry, we resize later
 	border : false,
@@ -21,26 +21,14 @@ Icinga.Reporting.util.Repository = Ext.extend(Ext.Container, {
 			treeloader_url: this.treeloader_url
 		});
 		
-		this.targetPanel = new Ext.Panel({
+		this.contentResource = new Icinga.Reporting.util.ContentResourcePanel({
 			region : 'center',
-			parentCmp : this,
-			title : 'test',
-			html: 'test'
+			parentCmp : this
 		});
 		
-		this.add([this.resourceTree, this.targetPanel]);
+		this.resourceTree.getTreePanel().on('click', this.contentResource.processNodeClick, this.contentResource);
 		
-		var resizeFn = function(c) {
-			var p = this.findParentByType('tabpanel');
-			if (p) {
-				this.setHeight(p.getInnerHeight()-28);
-			}
-		}
-		
-		this.on('afterrender', resizeFn, this, { single : true });
-		this.on('resize', resizeFn, this, { single : true });
-		
-		Ext.EventManager.onWindowResize(resizeFn, this);
+		this.add([this.resourceTree, this.contentResource]);
 		
 		this.doLayout();
 	}

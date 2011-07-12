@@ -42,7 +42,7 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
             $options['password'] = $this->getParameter('jasper_pass');
         }
         
-        $this->clients[$wsdl] = new SoapClient($wsdl, $options);
+        $this->clients[$wsdl] = new JasperSoapMultipartClient($wsdl, $options);
         
         }
         

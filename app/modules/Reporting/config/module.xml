@@ -19,6 +19,10 @@
 				
 				<!-- Reporting Javascript libs -->
 				<setting name="appkit_module.app.javascript_files">
+				
+					<!-- Base classes -->
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.abstract.ResizedContainer.js</ae:parameter>
+				
 					<!-- UI - the cronk itself -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.Cronk.js</ae:parameter>
 					
@@ -29,6 +33,7 @@
 					<!-- Tool widgets -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ResourceTree.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.RunReportPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ContentResourcePanel.js</ae:parameter>
 					
 					<!-- Input Controls -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.Default.js</ae:parameter>

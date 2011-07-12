@@ -31,6 +31,10 @@ class JasperResponseXmlDoc extends DOMDocument implements Iterator {
     public function returnCode() {
         $rc_node = $this->getElementsByTagName('returnCode')->item(0);
         
+        if (!$rc_node || !$rc_node->hasChildNodes()) {
+            return 0;
+        }
+        
         while ($rc_node->hasChildNodes()) {
             $rc_node = $rc_node->firstChild;
         }

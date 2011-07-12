@@ -1,11 +1,18 @@
 <?php
 
 abstract class JasperConfigBaseModel extends IcingaBaseModel {
+    
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
         $this->applyJasperConfigToParameters($this->getParameter('jasperconfig'));
     }
     
+    /**
+     * Fill up the parameter array with keys from the jasper configuration made in the
+     * module.xml.
+     * @param string $config_ns
+     * @throws AppKitModelException
+     */
     private function applyJasperConfigToParameters($config_ns) {
         $config = AgaviConfig::get($config_ns);
         
@@ -22,6 +29,16 @@ abstract class JasperConfigBaseModel extends IcingaBaseModel {
         }
         
         $this->setParameters($config);
+    }
+    
+    /**
+     * Test security related resources against our jasper tree root
+     * to prevent data accessing without permission.
+     * @param string $uri
+     * @return boolean pass the security check
+     */
+    protected function checkUri($uri) {
+        return (boolean)preg_match('/^'. preg_quote($this->getParameter('tree_root'), '/'). '/', $uri);
     }
 }
 ?>

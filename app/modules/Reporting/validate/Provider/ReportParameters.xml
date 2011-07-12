@@ -15,7 +15,7 @@
 					<error>Parameter for jasperconfig namespace (jasperconfig) validation failed</error>
 				</errors>
 			</validator>
-			<validator class="string" name="uri" required="true">
+			<validator class="AppKitUriValidator" name="uri" required="true">
 				<argument>uri</argument>
 				
 				<errors>
