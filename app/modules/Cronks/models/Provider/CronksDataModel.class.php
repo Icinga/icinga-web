@@ -2,6 +2,7 @@
 
 class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
+
     private static $cat_map = array(
                                   'catid'		=> 'cc_uid',
                                   'title'		=> 'cc_name',
@@ -619,6 +620,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         $match=preg_quote($match);
         return preg_match('/(^|,)'. $match. '(,|$)/i', $categories);
     }
+
 }
 
 ?>

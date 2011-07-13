@@ -321,7 +321,6 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
         return null;
     }
-
 }
 
 ?>

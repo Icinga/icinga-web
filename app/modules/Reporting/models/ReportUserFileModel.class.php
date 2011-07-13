@@ -12,7 +12,11 @@ class Reporting_ReportUserFileModel extends ReportingBaseModel implements AgaviI
     
     private $__extensionMap = array (
         'pdf' => 'pdf',
-        'csv' => 'csv'
+        'csv' => 'csv',
+        'html' => 'html',
+        'xml' => 'xml',
+        'rtf' => 'rtf',
+        'xls' => 'xls'
     );
     
     private $__dir = null;

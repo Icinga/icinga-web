@@ -230,6 +230,10 @@ div.cronk-data-view .x-view-selected .thumb{
 	background: white url(../images/background/bg-frame-right.png) no-repeat top right;
 }
 
+#center-frame .x-panel-body-noborder  .x-panel-body-noborder {
+	background-image: none;
+}
+
 /** JS Message stack **/
 
 div.growl-msg-message {

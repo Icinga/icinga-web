@@ -1,5 +1,6 @@
 <?php
 
+
 class AppKit_Admin_Users_EditAction extends AppKitBaseAction {
     /**
      * Returns the default view if the action does not serve the request
@@ -84,6 +85,7 @@ class AppKit_Admin_Users_EditAction extends AppKitBaseAction {
         // Let the form populate filter display the errors!
         return 'Success';
     }
+
 }
 
 ?>

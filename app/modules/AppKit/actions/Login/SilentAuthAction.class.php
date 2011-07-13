@@ -1,5 +1,6 @@
 <?php
 
+
 class AppKit_Login_SilentAuthAction extends AppKitBaseAction {
     /**
      * Returns the default view if the action does not serve the request

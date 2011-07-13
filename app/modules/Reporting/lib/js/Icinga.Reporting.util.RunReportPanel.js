@@ -17,6 +17,29 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 	},
 	
 	constructor : function(config) {
+		
+		config = Ext.apply(config || {}, {
+			bbar : [{
+				
+			}],
+			
+			tbar : [{
+				text : _('Run report'),
+				iconCls : 'icinga-icon-report-run',
+				handler: this.runReport,
+				scope : this
+			}, {
+				text : _('Preview'),
+				iconCls : 'icinga-icon-report-preview',
+				handler : this.previewReport,
+				scope : this
+			}],
+			
+			plugins : [
+				new Ext.ux.plugins.ContainerMask ({msg : _('Please be patient, Jasper is working ...'), masked : false })
+			]
+		});
+		
 		Icinga.Reporting.util.RunReportPanel.superclass.constructor.call(this, config);
 		this.downloadUrl = String.format('{0}/modules/reporting/provider/reportdata', AppKit.util.Config.getBaseUrl());
 	},
@@ -31,6 +54,8 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 				+ '</h3></div>'
 		});
 		
+		
+		this.setToolbarEnabled(false);
 	},
 	
 	initUi : function(attributes) {
@@ -77,6 +102,8 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 	buildInterface : function(struct) {
 		this.removeAll();
 		
+		this.setTitle(_(String.format('Report details for {0}', this.nodeAttributes.text)));
+		
 		this.add({
 			layout : 'fit',
 			html : String.format('<h1>{0}</h1>{1}', this.nodeAttributes.text, this.nodeAttributes.uri),
@@ -105,8 +132,6 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			
 			this.formPanel.add(outputSelector);
 			
-			this.submitButton = this.createSubmitButton(); 
-			
 			this.messagePanel = new Ext.Container({
 				border : false,
 				width : 356,
@@ -119,21 +144,12 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 			
 			this.formPanel.add(this.messagePanel);
 			
-			this.formPanel.add({
-				type : 'container',
-				width : 356,
-				border : false,
-				style : {
-					background : 'transparent',
-					padding : '10px 10px 10px 10px',
-					margin: '5px'
-				},
-				items: this.submitButton
-			});
-			
 			this.add(this.formPanel);
 		}
+		
 		this.doLayout();
+		
+		this.setToolbarEnabled();
 	},
 	
 	addMessage : function(html, cls) {
@@ -165,36 +181,17 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		
 		this.form = panel.getForm();
 		
-		var baseUrl = this.creator_url;
-		var uri = this.nodeAttributes.uri;
-		
-		this.form.on('beforeaction', function(form, action) {
-			values = form.getFieldValues();
-			var useUrl = baseUrl.replace(/OUTPUT_TYPE/, values['_output_format']);
-			action.options.url = String.format('{0}?uri={1}', useUrl, uri);
-		});
-		
-		return panel;
-	},
-	
-	createSubmitButton : function() {
-		var submit = new Ext.Button({
-			xtype : 'button',
-			iconCls : 'icinga-icon-report-run',
-			iconAlign : 'top',
-			text : _('Run report!'),
-			style: 'margin: 0 0px 0 auto'
-		});
-		
 		this.formAction = new Ext.form.Action.JSONSubmit(this.form, {
 			params : {},
 			scope: this,
 			success : function(form, action) {
-				this.startEmbeddedDownload();
-				submit.enable();
-				this.addMessage('Report was created.', 'icinga-message-success');
+				this.setToolbarEnabled();
+				this.hideMask();
 			},
 			failure : function(form, action) {
+				this.setToolbarEnabled();
+				this.hideMask();
+				
 				if (action.failureType == "server") {
 					var data = Ext.util.JSON.decode(action.response.responseText);
 					if (!Ext.isEmpty(data.errors.message)) {
@@ -202,23 +199,71 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 						this.addMessage(data.errors.message, 'icinga-message-error');
 					}
 					else {
-						this.addMessage(_('Some general error, please examine jasperserver logs'), 'icinga-message-error');
+						var msg = _('Some general error, please examine jasperserver logs');
+						AppKit.notifyMessage(_('Jasperserver error'), msg);
+						this.addMessage(msg, 'icinga-message-error');
 					}
 				}
-				else {
-					this.addMessage(_('Please check your parameters'), 'icinga-message-error');
-				}
-				submit.enable();
 			}
 		});
 		
-		submit.on('click', function(b, e) {
-			this.form.doAction(this.formAction,{});
-			b.disable();
-			this.addMessage(_('Report is being generated . . .'), 'icinga-message-success');
+		var baseUrl = this.creator_url;
+		var uri = this.nodeAttributes.uri;
+		
+		this.form.on('beforeaction', function(form, action) {
+			values = form.getFieldValues();
+			AppKit.log(action);
+			
+			var format = values['_output_format']
+			
+			/**
+			 * Hook for changing the output type
+			 * without changing our form
+			 */
+			if (!Ext.isEmpty(this.formAction.options.overwrite_format)) {
+				format = this.formAction.options.overwrite_format;
+				delete this.formAction.options.overwrite_format;
+			}
+			
+			var useUrl = baseUrl.replace(/OUTPUT_TYPE/, format);
+			
+			action.options.url = String.format('{0}?uri={1}', useUrl, uri);
 		}, this);
 		
-		return submit;
+		return panel;
+	},
+	
+	submitForm : function(o) {
+		this.setToolbarEnabled(false);
+		this.showMask();
+		this.messagePanel.removeAll();
+		
+		if (Ext.isObject(o)) {
+		
+			if (Ext.isFunction(o.success)) {
+			
+				var successHandler = function(form, action) {
+					o.success.call(o.scope || this, form, action);
+				}
+				
+				this.form.on('actioncomplete', successHandler, this, { single : true });
+				
+				/*
+				 * We need to remove the handler when failed because the handler is
+				 * persistent and maybe three success handler would be called after
+				 * three failures for only one success ?!
+				 */
+				this.form.on('actionfailed', function(form, action) {
+					this.form.un('actioncomplete', successHandler, this);
+				}, this, { single : true });
+				
+			}
+			
+			
+		
+		}
+		
+		this.form.doAction(this.formAction);
 	},
 	
 	startEmbeddedDownload : function() {
@@ -233,5 +278,47 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		(function() {
 			Ext.get(eId).remove();
 		}).defer(2000);
+	},
+	
+	addEmbeddedReportPreview : function() {
+		var tabs = this.parentCmp.parentCmp;
+		var previewTab = tabs.add({
+			xtype : 'panel',
+			title : this.nodeAttributes.text,
+			closable : true,
+			bodyCfg : {
+				tag : 'iframe',
+				src : String.format('{0}?inline=1', this.downloadUrl)
+			}
+		});
+		tabs.setActiveTab(previewTab);
+	},
+	
+	setToolbarEnabled : function(bool) {
+		if (Ext.isEmpty(bool)) {
+			bool = true;
+		}
+		
+		this.getTopToolbar().items.eachKey(function(key, item) {
+			item.setDisabled(!bool);
+		});
+	},
+	runReport : function(b, e) {
+		this.submitForm({
+			success : function(form, action) {
+				this.startEmbeddedDownload();
+			},
+			scope : this
+		});
+	},
+	
+	previewReport : function(b, e) {
+		this.formAction.options.overwrite_format = 'html';
+		this.submitForm({
+			success : function(form, action) {
+				this.addEmbeddedReportPreview();
+			},
+			scope : this
+		});
 	}
 });
