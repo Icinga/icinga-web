@@ -26,9 +26,11 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			});
 		}			
 		Cronk.grid.GridPanel.superclass.initComponent.call(this);
+		
 		this.on("show",function() {
-			if(this.autoRefreshEnabled)
+			if(this.autoRefreshEnabled) {
 				this.startRefreshTimer();
+			}
 		},this);
 	
 	},
@@ -46,7 +48,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				text: _('Refresh'),
 				iconCls: 'icinga-icon-arrow-refresh',
 				tooltip: _('Refresh the data in the grid'),
-				handler: function(oBtn, e) { this.store.reload(); },
+				handler: function(oBtn, e) { this.store.load(); },
 				scope: this
 			}, {
 				text: _('Settings'),
@@ -256,6 +258,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			aR = 1;
 		if(this.autoRefreshEnabled === false)
 			aR = -1;
+		
 		var o = {
 			filter_params: this.filter_params || {},
 			filter_types: this.filter_types || {},
@@ -298,7 +301,6 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}
 
 		if (reload == true) {
-			
 			this.refreshGrid();
 		}
 					
