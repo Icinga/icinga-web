@@ -142,10 +142,12 @@ devel-test:
 	$(PHP) $(SRC_DIR)/etc/tests/icingaWebTesting.php
 
 devel-inplace-config:
-	chown $(WEB_USER).$(WEB_GROUP) \
+	-@mkdir $(SRC_DIR)/app/cache $(SRC_DIR)/app/cache/config 2> /dev/null
+	@chown $(WEB_USER).$(WEB_GROUP) \
 		$(SRC_DIR)/app/cache \
 		$(SRC_DIR)/app/cache/config \
 		$(SRC_DIR)/app/data/log
+	@printf "Done.\n"
 
 install-javascript:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js
