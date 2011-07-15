@@ -119,7 +119,7 @@
 										images/icons/application-monitor.png
 									</tpl>
 									<tpl if="service_icon != ''" />
-										{service_icon}
+										images/icinga/{service_icon}
 									</tpl>
 
 								]]>
@@ -258,6 +258,66 @@
             </order>
         </field>
         
+        <field name="host_alias">
+            <datasource>
+            	<parameter name="field">HOST_ALIAS</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Host alias</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_ALIAS</parameter>
+				<parameter name="api_valuefield">HOST_ALIAS</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field>
+        
+        <field name="host_display_name">
+            <datasource>
+            	<parameter name="field">HOST_DISPLAY_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Host display name</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
+				<parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field> 
+        
         <field name="service_object_id">
         	<datasource>
         		<parameter name="field">SERVICE_OBJECT_ID</parameter>
@@ -309,6 +369,34 @@
             <order>
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="service_display_name">
+            <datasource>
+            	<parameter name="field">SERVICE_DISPLAY_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Display Name</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">service</parameter>
+				<parameter name="api_keyfield">SERVICE_DISPLAY_NAME</parameter>
+				<parameter name="api_valuefield">SERVICE_DISPLAY_NAME</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
         </field>
         
@@ -444,9 +532,7 @@
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+           
                 </parameter>
             </display>
             

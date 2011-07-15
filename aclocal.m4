@@ -67,3 +67,14 @@ dnl		for parrallel requests
 		AC_MSG_RESULT([YES ... debug=false, jscache=false (!!)]) 
 	], [ AC_MSG_RESULT([no (good)]) ])
 ])
+
+AC_DEFUN([ACICINGA_PATH_GUESS], [
+	$2=$3
+	for x in $1; do
+		AC_MSG_CHECKING([if path $x exists])
+		AS_IF([test -d $x],
+			  [AC_MSG_RESULT([found]); $2=$x; break],
+			  [AC_MSG_RESULT([not found])]
+		)
+	done
+])

@@ -31,7 +31,7 @@ class IcingaDataPrincipalTarget extends AppKitPrincipalTarget {
 	public function getMapArray(array $arr) {
 		$p = array ();
 		foreach ($arr as $k=>$v) {
-			$p[] = sprintf('${%s} = \'%s\'', $this->getApiMappingField($k), $v);
+			$p[] = sprintf('${%s} LIKE \'%s\'', $this->getApiMappingField($k), $v);
 		}
 		
 		return '('. join(' AND ', $p). ')';

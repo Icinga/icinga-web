@@ -97,11 +97,15 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 	 */
 	public function updateUserData(NsmUser &$user, AgaviRequestDataHolder &$rd) {
 		AppKitDoctrineUtil::updateRecordsetFromArray($user, $rd->getParameters(), self::$editableAttributes);
+		
 		if(!$user->get("user_password")) {
-			$user->set("user_password",AppKitRandomUtil::initRand());
-			$user->set("user_salt",AppKitRandomUtil::initRand());
+		    $user->set('user_password', '__NOT_SET__');
+		    $user->set('user_salt', '__NOT_SET__');
 		}
+		
 		$user->save();
+		
+		$user->refresh(true);
 		
 		return true;
 	}
@@ -115,8 +119,6 @@ class AppKit_UserAdminModel extends AppKitBaseModel
 	 * @author Marius Hein
 	 */
 	public function updateUserPassword(NsmUser &$user, $user_password) {
-		AppKitRandomUtil::initRand(); 
-
 		$user->updatePassword($user_password);
 		$user->save();
 		

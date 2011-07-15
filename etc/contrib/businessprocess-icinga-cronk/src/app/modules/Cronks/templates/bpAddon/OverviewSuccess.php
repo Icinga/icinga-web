@@ -1,12 +1,59 @@
 <script type="text/javascript">
-var _parent = "<?php echo $rd->getParameter('parentid'); ?>";
-var _filter = "<?php echo $rd->getParameter('p[filters]'); ?>";
-var _bpConfig = "<?php echo $rd->getParameter('p[bpConfig]'); ?>";
-var _bpInfoTabs = <?php echo $rd->getParameter('p[externalTabs]','[]') ?>;
-
 // This is the init method called when the cronk environment is ready
-Cronk.util.initEnvironment(_parent, function() {
+Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 	Ext.Msg.minWidth = 250;
+
+	var _parent = "<?php echo $rd->getParameter('parentid'); ?>";
+	var _filter = "<?php echo $rd->getParameter('p[filters]'); ?>";
+	var _bpConfig = "<?php echo $rd->getParameter('p[bpConfig]'); ?>";
+	var _bpInfoTabs = <?php echo $rd->getParameter('p[externalTabs]','[]') ?>;
+	var _hideConfigSelector = "<?php echo $rd->getParameter('p[bpHideSelector]'); ?>";
+	
+	var getSelectorConfig = function() {
+		if (_hideConfigSelector == 'true') {
+			return {
+				xtype: 'tbtext',
+				text: _('Process') + ': ' + _bpConfig
+			};
+		}
+		else {
+			return {
+				/**
+				 * This combobox allows the user to switch beteween different config files
+				 */
+				xtype: 'combo',
+				width:150,
+				value: _('Default cfg'),
+				store: new Ext.data.JsonStore({
+				    autoLoad:true,
+				    url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
+				    baseParams: {
+				    	action: 'getConfigList'
+				    },
+				    fields: [
+				    	'filename', 
+				    	{name:'created',type:'date',dateFormat:'timestamp'},
+				    	{name:'last_modified',type:'date',dateFormat:'timestamp',format: "Y-m-d H:i:s"}
+				    ]
+				}),
+				displayField: 'filename',
+				valueField: 'filename',
+				triggerAction: 'all',
+				listeners: {
+					render: function(cmb) {
+						if(bpLoader.bp_config)
+							cmb.setValue(bpLoader.bp_config);						
+					},
+					select: function(cmb,rec,idx) {
+						bpLoader.bp_config = rec.get('filename');
+						cmb.ownerCt.ownerCt.handleStateChange();
+						root.reload();
+					},
+					scope:this
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Set up state vals and other needed variables like parentCmp
@@ -40,7 +87,7 @@ Cronk.util.initEnvironment(_parent, function() {
 		},
 		requestMethod:'GET',
 		filterManager: filterManager,
-		authKey: '<?php echo $t["authToken"]; ?>',
+		authKey: '<?php echo $t["authToken"]; ?>'
 		
 	})
 	// If there's a config globally written to the cronk, use it 
@@ -180,41 +227,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				}
 			},{
 				xtype: 'tbseparator'
-			},{
-				/**
-				 * This combobox allows the user to switch beteween different config files
-				 */
-				xtype: 'combo',
-				width:150,
-				value: _('Default cfg'),
-				store: new Ext.data.JsonStore({
-				    autoLoad:true,
-				    url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
-				    baseParams: {
-				    	action: 'getConfigList'
-				    },
-				    fields: [
-				    	'filename', 
-				    	{name:'created',type:'date',dateFormat:'timestamp'},
-				    	{name:'last_modified',type:'date',dateFormat:'timestamp',format: "Y-m-d H:i:s"}
-				    ]
-				}),
-				displayField: 'filename',
-				valueField: 'filename',
-				triggerAction: 'all',
-				listeners: {
-					render: function(cmb) {
-						if(bpLoader.bp_config)
-							cmb.setValue(bpLoader.bp_config);						
-					},
-					select: function(cmb,rec,idx) {
-						bpLoader.bp_config = rec.get('filename');
-						cmb.ownerCt.ownerCt.handleStateChange();
-						root.reload();
-					},
-					scope:this
-				}
-			},{
+			}, getSelectorConfig(), {
 				xtype: 'tbseparator'
 			},{
 				/**
@@ -274,8 +287,13 @@ Cronk.util.initEnvironment(_parent, function() {
 			width:100
 		},{
 			header:_('Status information'),
-			dataIndex: 'external_info',
+			dataIndex: 'external_info',	
 			width:100
+		},{
+            header: _(''),
+            width:25,
+            dataIndex: 'info_url'
+        	
 		},{
 			header:_('Priority'),
 			dataIndex: 'display_prio',
@@ -303,10 +321,16 @@ Cronk.util.initEnvironment(_parent, function() {
 					var host_name = el.getAttribute("service");
 					var cronk = {
 						parentid: Ext.id(),
-						title: 'Service history for '+service_name,
+						title: 'Services for '+service_name,
 						crname: 'gridProc',
 						closable: true,
-						params: {template: 'icinga-service-history-template'}
+						module: 'Cronks',
+						action: 'System.ViewProc',
+						params: {
+							module: 'Cronks',
+							action: 'System.ViewProc',
+							template: 'icinga-service-template'
+						}
 					};
 					var filter = {};
 					filter["f[service_name-value]"] = service_name; 	
@@ -338,10 +362,14 @@ Cronk.util.initEnvironment(_parent, function() {
 					var host_name = el.getAttribute("host");
 					var cronk = {
 						parentid: Ext.id(),
-						title: 'Host history for '+host_name,
+						title: 'Host '+host_name,
 						crname: 'gridProc',
 						closable: true,
-						params: {template: 'icinga-host-history-template'}
+						params: {
+							module: 'Cronks',
+							action: 'System.ViewProc',
+							template: 'icinga-host-template'
+						}
 					};
 					var filter = {};
 					filter["f[host_name-value]"] = host_name; 	
@@ -352,13 +380,56 @@ Cronk.util.initEnvironment(_parent, function() {
 				el.hasLink = true;
 			},this)					
 		},
+		/**
+		* Parses any links provided to iframe providers
+		*
+		*/	
+		buildExternalLinks: function() {
+			var link_selector = Ext.DomQuery.jsSelect(".x-treegrid a");
+			Ext.each(link_selector,function(item) {	
 		
+				var el = (Ext.get(item));
+				if(!el.getAttribute('href') || el.getAttribute('href')== "#")
+					return true;
+				var replace = document.createElement("div");		
+			
+				replace.innerHTML = el.dom.innerHTML || '&nbsp;';
+				var replaceEl = Ext.get(replace);
+				replaceEl.qtip = el.qtip;
+				replaceEl.addClass(el.dom.className);
+				var link = el.getAttribute('href');
+				replaceEl.on("click",function() {	
+					var panel = Ext.getCmp('cronk-tabs');
+					var urlTab = panel.add({
+						parentid: Ext.id(),
+						xtype: 'cronk',
+						title: replace.innerHTML+'('+link+')',
+						crname: 'genericIFrame',
+						closable: true,
+						params: {
+							module: 'Cronks',
+							action: 'System.ViewProc',
+							url: link
+						}
+					});
+					panel.doLayout();
+					panel.setActiveTab(urlTab);	
+				});	
+			
+				el.replaceWith(replace);
+			
+			});	
+		},
+
 		/**
 		 * Aggregate function that creates the links in the tree
 		 */
 		buildSelectors: new Ext.util.DelayedTask(function(args) {
 			this.buildServiceLinks();
 			this.buildHostLinks()
+			this.buildExternalLinks();
+			
+	
 		},this),
 		
 		/**
@@ -431,8 +502,7 @@ Cronk.util.initEnvironment(_parent, function() {
 							return false;
 					}
 				}
-			}
-			
+			}	
 		},
 
 		buildAPIFilterFromObject : function(obj,prefix) {
@@ -690,7 +760,13 @@ Cronk.util.initEnvironment(_parent, function() {
 		
 	});
 
+	// Notify cronkbuilder for other state object
+	this.setStatefulObject(bpGridList);
 
+	// Saved state from the cronk builder
+	if (Ext.isObject(this.state)) {
+		bpGridList.applyState(this.state);
+	}
 
 	this.add({
 		xtype:'container',
@@ -714,7 +790,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			items: infoPanel
 		}]
 	});
-	this.doLayout();
+	this.doLayout.defer(300);
 });
 
 

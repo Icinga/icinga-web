@@ -21,6 +21,16 @@
 .icon-24 { height:24px; width:24px}
 .icon-16 { height:16px; width:16px}
 
+.icinga-image-link {
+	height: 16px;
+	line-height: 16px;
+	background-position: 0px center;
+	display: inline-block;
+	padding: 0px 0px 0px 20px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
@@ -39,7 +49,6 @@
 .icinga-icon-application-view-list { background-image: url(../images/icons/application-list.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-view-tile { background-image: url(../images/icons/application-split.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-minus { background-image: url(../images/icons/application--minus.png) !important; background-repeat: no-repeat; }
-
 .icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock { background-image: url(../images/icons/lock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock-open { background-image: url(../images/icons/lock_unlock.png) !important; background-repeat: no-repeat; }
@@ -93,15 +102,12 @@
 .icinga-icon-world { background-image: url(../images/icons/globe.png) !important; background-repeat: no-repeat; }
 .icinga-icon-information { background-image: url(../images/icons/information-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-star-plus { background-image: url(../images/icons/star--plus.png) !important; background-repeat: no-repeat; }
-
 .icinga-icon-execution-time { background-image: url(../images/icons/hourglass--exclamation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-latency { background-image: url(../images/icons/hourglass--arrow.png) !important; background-repeat: no-repeat; }
-
 .icinga-icon-host { background-image: url(../images/icons/server.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-service { background-image: url(../images/icons/application-monitor.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-hostgroup { background-image: url(../images/icons/servers-network.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-servicegroup { background-image: url(../images/icons/applications-blue.png) !important; background-repeat: no-repeat; background-position: center center; }
-
 .icinga-icon-comment { background-image: url(../images/icons/balloon-ellipsis.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-downtime { background-image: url(../images/icons/contrast.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-exclamation-white { background-image: url(../images/icons/exclamation-white.png) !important; background-repeat: no-repeat; background-position: center center; }
@@ -121,8 +127,19 @@
 .icinga-icon-slide-arrow { background-image: url(../images/icons/slide--arrow.png) !important; background-repeat: no-repeat; }
 .icinga-icon-category { background-image: url(../images/icons/category.png) !important; background-repeat: no-repeat; }
 .icinga-icon-shield { background-image: url(../images/icons/shield.png) !important; background-repeat: no-repeat; }
-
 .icinga-icon-status { background-image: url(../images/icons/status.png) !important; background-repeat: no-repeat; }
 .icinga-icon-status-busy { background-image: url(../images/icons/status-busy.png) !important; background-repeat: no-repeat; }
-
+.icinga-icon-drilldown { background-image: url(../images/icons/drill--plus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-drillup { background-image: url(../images/icons/drill--minus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-report { background-image: url(../images/icons/report.png) !important; background-repeat: no-repeat; }
+.icinga-icon-report-run { background-image: url(../images/icons/report--arrow.png) !important; background-repeat: no-repeat; }
+.icinga-icon-report-preview { background-image: url(../images/icons/report-image.png) !important; background-repeat: no-repeat; }
+.icinga-icon-bean { background-image: url(../images/icons/bean.png) !important; background-repeat: no-repeat; }
+.icinga-icon-document { background-image: url(../images/icons/document.png) !important; background-repeat: no-repeat; }
+.icinga-icon-image { background-image: url(../images/icons/image.png) !important; background-repeat: no-repeat; }
+.icinga-icon-ui-text-field { background-image: url(../images/icons/ui-text-field.png) !important; background-repeat: no-repeat; }
+.icinga-icon-jar { background-image: url(../images/icons/jar.png) !important; background-repeat: no-repeat; }
+.icinga-icon-databases-relation { background-image: url(../images/icons/databases-relation.png) !important; background-repeat: no-repeat; }
+.icinga-icon-folder-network { background-image: url(../images/icons/folder-network.png) !important; background-repeat: no-repeat; }
+.icinga-icon-eye { background-image: url(../images/icons/eye.png) !important; background-repeat: no-repeat; }
 /* EOF */

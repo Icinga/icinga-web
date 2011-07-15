@@ -107,7 +107,9 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 			success("\tReading roles suceeded!\n");
 			return true;
 		} catch(Exception $e) {
-			$this->fail("Selecting roles failed!".$e->getMessage());
+			echo($e->getTraceAsString());
+			$this->fail("Selecting roles threw an exception in ".$e->getFile().":".$e->getLine()." :".$e->getMessage());
+			
 		}
 	}
 

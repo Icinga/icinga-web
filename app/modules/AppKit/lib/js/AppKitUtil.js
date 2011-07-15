@@ -142,7 +142,7 @@ AppKit.util = (function() {
 					width: 630,
 					layout: 'fit',
 					height: Ext.getBody().getHeight()>600 ? 600 : Ext.getBody().getHeight(),
-					
+					constrain: true,
 					closeAction: 'hide',
 					defaults: {
 						autoScroll: true,
@@ -190,10 +190,10 @@ AppKit.util.Config = (function() {
 		},
 		
 		getBaseUrl : function() {
-			return (this.get('issecure')==true) ? 'https://' : 'http://'
-				+ this.get('domain')
-				+ this.get('path');
-			
+			var out = (this.get('issecure')==true) ? 'https://' : 'http://';
+			out += this.get('domain');
+			out += this.get('path');
+			return out;			
 		}
 		
 	}))());

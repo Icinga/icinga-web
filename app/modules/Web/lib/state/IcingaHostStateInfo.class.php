@@ -11,13 +11,15 @@ class IcingaHostStateInfo extends IcingaStateInfo {
 	protected $state_list = array (
 		IcingaConstants::HOST_UP			=> 'UP',
 		IcingaConstants::HOST_DOWN			=> 'DOWN',
-		IcingaConstants::HOST_UNREACHABLE	=> 'UNREACHABLE'
+		IcingaConstants::HOST_UNREACHABLE	=> 'UNREACHABLE',
+		IcingaConstants::HOST_PENDING		=> 'PENDING'
 	);
 
 	protected $colors = array (
 		IcingaConstants::HOST_UP			=> '00cc00',
 		IcingaConstants::HOST_DOWN			=> 'cc0000',
-		IcingaConstants::HOST_UNREACHABLE	=> 'ff8000'
+		IcingaConstants::HOST_UNREACHABLE	=> 'ff8000',
+		IcingaConstants::HOST_PENDING		=> 'aa3377'
 	);
 
 

@@ -7,12 +7,6 @@
  */
 require_once("actionQueueTask.php");
 require_once("xmlHelperTask.php");
-
-
-if(PHP_MAJOR_VERSION < 5 || PHP_MINOR_VERSION < 3)
-	define("USE_XML_NSPREFIX_WORKAROUND",true);
-else 
-	define("USE_XML_NSPREFIX_WORKAROUND",false);
 	
 class xmlMergerTask extends xmlHelperTask {
 	/**
@@ -111,6 +105,7 @@ class xmlMergerTask extends xmlHelperTask {
 		$this->setupDOM();	
 		$this->prepareMerge();
 		$this->doMerge();
+		
 		$this->save();
 	}
 	
@@ -189,8 +184,9 @@ class xmlMergerTask extends xmlHelperTask {
 		$tgt_index = $this->__targetIndex;
 
 		foreach($nodes as $path=>$node) {
+		
 			if($node["real"]) {//element has no children 
-				if($this->getOverwrite()) {
+				if($this->getOverwrite()) {	
 					$tgt_index[$index][0]["elem"]->nodeValue = $node["elem"]->nodeValue;
 					continue;
 				} else if (!$this->getAllowDuplicates()) {
@@ -204,8 +200,10 @@ class xmlMergerTask extends xmlHelperTask {
 					}
 					if($dups)
 						continue;
-				}
+				} 
+				
 				$tgt_index[$index][0]["elem"]->parentNode->appendChild($tgtDOM->importNode($node["elem"],true));
+			
 			}
 		}
 	}
@@ -220,6 +218,8 @@ class xmlMergerTask extends xmlHelperTask {
 		$path_splitted = explode("/",$index);
 		$target = $this->__targetIndex;
 		foreach($nodes as $path=>$node) {
+			
+			
 			if(!$node["real"]) // only process nodes without children
 				continue;
 			array_pop($path_splitted);
@@ -240,7 +240,7 @@ class xmlMergerTask extends xmlHelperTask {
 				$prefix = (count($prefix) == 2 ? $prefix[0] : null);
 				$im_node = $this->getTargetDOM()->importNode($newNode,true);
 				// PHP removes the namespace prefix of our node, reappend it
-				if($prefix != null && USE_XML_NSPREFIX_WORKAROUND) 
+				if($prefix != null ) 
 					$im_node = $this->fixPrefix($im_node,$prefix,$newNode);
 				$target[$pathToAdd][0]["elem"]->appendChild($im_node);
 				
@@ -257,6 +257,8 @@ class xmlMergerTask extends xmlHelperTask {
 	 * @param DOMNode $newNode
 	 */
 	protected function fixPrefix(DOMNode $node, $prefix,DOMNode $newNode = null) {
+		if($node->nodeName == $newNode->nodeName)
+			return $node;
 		$result = $this->getTargetDOM()->createElement($prefix.":".$node->nodeName);
 		// Copy attributes
 		foreach($node->attributes as $att) {
@@ -271,7 +273,8 @@ class xmlMergerTask extends xmlHelperTask {
 		if($newNode) {
 			$target = $this->getTargetDOM();
 			foreach($newNode->childNodes as $child) {
-				$result->appendChild($target->importNode($child,true));		
+				if($child->nodeType != XML_TEXT_NODE) 
+					$result->appendChild($target->importNode($child,true));		
 			}
 		}
 		return $result;

@@ -18,10 +18,11 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		
 		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
-
 		MetaGrid.setParameters({storeDisableAutoload: true});
+		
 		var grid = MetaGrid.createGrid();
 		CE.setStatefulObject(grid);
+		
 		// Add the window to a toolbar button
 		grid.on('render', function(g) {
 			

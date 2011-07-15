@@ -25,7 +25,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 
 	ds.load();
 
-	var interval = <?php echo $us->getPrefVal('org.icinga.grid.refreshTime', AgaviConfig::get('modules.cronks.grid.refreshTime', 120)); ?>;
+	var interval = <?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>;
 	
 	var statusOverallRefreshTask = {
 		run: function() { ds.reload(); },
@@ -60,9 +60,20 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					var filter = {};
 
 					// 100 is the summary of all (== no filter)
-					if (d.state_org < 100) {
+					if (d.state_org < 99) {
+						// state ok
 						filter['f[' + d.type + '_status-value]'] = d.state_org;
+						filter['f[' + d.type + '_status-operator]'] = 50;	
+						// not pending
+						filter['f['+ d.type +'_is_pending-value]'] = 0;
+						filter['f['+ d.type +'_is_pending-operator]'] = 50;
+					} else if (d.state_org == 99) {	// check pending
+						// state ok
+						filter['f[' + d.type + '_status-value]'] = 0;
 						filter['f[' + d.type + '_status-operator]'] = 50;
+						// pending
+						filter['f['+ d.type +'_is_pending-value]'] = 1;
+						filter['f['+ d.type +'_is_pending-operator]'] = 50;
 					}
 
 					var id = 'status-overall-grid' + d.type + '-' + d.state_org;
@@ -87,7 +98,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 					'<tpl if="id==1">',
 					'<div class="icinga-overall-status-icon icinga-icon-host" title="' + _('Hosts') + '"></div>',
 					'</tpl>',
-					'<tpl if="id==5">',
+					'<tpl if="id==6">',
 					'<div class="x-clear icinga-overall-status-spacer"></div>',
 					'<div class="icinga-overall-status-icon icinga-icon-service" title="' + _('Services') + '"></div>',
 					'</tpl>',

@@ -87,9 +87,13 @@ class Cronks_bpAddon_businessProcessModel extends CronksBaseModel
 		$this->priority = $prio;
 	}
 	
-	public function __construct(array $params = array()) {
-		if(!empty($params))
-			$this->__fromConfig($params);
+	public function initialize(AgaviContext $context, array $parameters = array()) {
+		parent::initialize($context, $parameters);
+		
+		if(!empty($parameters[0])) {
+			$this->__fromConfig($parameters[0]);
+		}
+			
 	}
 	
 	protected function __fromConfig(array $params) {
@@ -119,7 +123,8 @@ class Cronks_bpAddon_businessProcessModel extends CronksBaseModel
 	}
 	
 	protected function parseChildren(array $children) {
-		$ctx = AgaviContext::getInstance('web');
+		$ctx = $this->getContext();
+		
 		foreach($children as $child) {
 			if(isset($child["service"]))
 				$this->addService($ctx->getModel('bpAddon.service','Cronks',array($child)));
@@ -140,11 +145,12 @@ class Cronks_bpAddon_businessProcessModel extends CronksBaseModel
 			"prio" => $this->getPriority(),
 			"children" => array()
 		);
+		
 		foreach($this->getServices() as $service) 
 			$obj["children"][] = $service->__toArray();
 		foreach($this->getSubProcesses() as $process) {
 			if($process instanceof Cronks_bpAddon_businessProcessModel) {
-				$obj["children"][] = $process->__toArray();
+					$obj["children"][] = $process->__toArray();
 			} else {
 				$obj["children"][] = array(
 					"isAlias"=>true,
@@ -152,6 +158,7 @@ class Cronks_bpAddon_businessProcessModel extends CronksBaseModel
 				);
 			}
 		}
+		
 		return $obj;
 	}
 	/**
@@ -185,7 +192,7 @@ class Cronks_bpAddon_businessProcessModel extends CronksBaseModel
 		foreach($this->getSubProcesses() as $bp) 
 			$services[] = $bp->getName();
 			
-		return implode($glueString,$services);
+		return $str .= implode($glueString,$services);
 	}
 	
 	private function cfgDisplay() {
@@ -210,8 +217,9 @@ class Cronks_bpAddon_businessProcessModel extends CronksBaseModel
 	public function __toConfig() {
 		$string = "";
 		foreach($this->subProcesses as $sub) {
-			if($sub->hasCompleteConfiguration())
+			if($sub->hasCompleteConfiguration()) {
 				$string.= $sub->__toConfig();
+			}
 		}
 		// Write down the process information
 		$string .= <<<PROCESS

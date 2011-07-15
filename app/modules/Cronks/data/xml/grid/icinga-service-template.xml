@@ -80,7 +80,11 @@
         			<parameter name="title">Schedule next service check</parameter>
         			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
-        		<parameter name="PROCESS_SERVICE_CHECK_RESULT">
+        		<parameter name="SCHEDULE_FORCED_SVC_CHECK">
+        			<parameter name="title">Schedule forced service check</parameter>
+        			<parameter name="icon_class">icinga-icon-cog</parameter>
+        		</parameter>
+				<parameter name="PROCESS_SERVICE_CHECK_RESULT">
         			<parameter name="title">Process service check result</parameter>
         			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
@@ -226,7 +230,13 @@
         		<parameter name="enabled">true</parameter>
         		<parameter name="type">extjs</parameter>
         		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">In Downtime</parameter>
+        		<parameter name="label">In downtime</parameter>
+        	</paramter>
+			<paramter name="service_is_pending">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Is pending</parameter>
         	</paramter>
         </parameter>
         
@@ -273,7 +283,8 @@
        		<parameter name="notifications_enabled">SERVICE_NOTIFICATIONS_ENABLED</parameter>
 			<parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
 			<parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
-
+			<parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
+			
 			<!-- Stupid filter mapping -->
 			<parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
        		<parameter name="customvariable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
@@ -330,7 +341,7 @@
 										images/icons/application-monitor.png
 									</tpl>
 									<tpl if="service_icon != ''" />
-										{service_icon}
+										images/icinga/{service_icon}
 									</tpl>
 
 								]]>
@@ -469,6 +480,66 @@
             </order>
         </field>
         
+        <field name="host_alias">
+            <datasource>
+            	<parameter name="field">HOST_ALIAS</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Host alias</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_ALIAS</parameter>
+				<parameter name="api_valuefield">HOST_ALIAS</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field>
+        
+        <field name="host_display_name">
+            <datasource>
+            	<parameter name="field">HOST_DISPLAY_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Host display name</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
+				<parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field> 
+        
         <field name="service_name">
             <datasource>
             	<parameter name="field">SERVICE_NAME</parameter>
@@ -489,6 +560,34 @@
 				<parameter name="api_target">service</parameter>
 				<parameter name="api_keyfield">SERVICE_NAME</parameter>
 				<parameter name="api_valuefield">SERVICE_NAME</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
+            </order>
+        </field>
+        
+        <field name="service_display_name">
+            <datasource>
+            	<parameter name="field">SERVICE_DISPLAY_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Display Name</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">service</parameter>
+				<parameter name="api_keyfield">SERVICE_DISPLAY_NAME</parameter>
+				<parameter name="api_valuefield">SERVICE_DISPLAY_NAME</parameter>
             </filter>
             
             <order>
@@ -975,10 +1074,7 @@
                 
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                	<parameter name="function">truncateText</parameter> 
                 </parameter>
             </display>
         	

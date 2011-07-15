@@ -113,7 +113,7 @@
 										images/icons/server.png
 									</tpl>
 									<tpl if="host_icon != ''" />
-										{host_icon}
+										images/icinga/{host_icon}
 									</tpl>
 
 								]]>
@@ -252,6 +252,66 @@
             </order>
         </field>
         
+        <field name="host_alias">
+            <datasource>
+            	<parameter name="field">HOST_ALIAS</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Alias</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_ALIAS</parameter>
+				<parameter name="api_valuefield">HOST_ALIAS</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field> 
+        
+        <field name="host_display_name">
+            <datasource>
+            	<parameter name="field">HOST_DISPLAY_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Display Name</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
+				<parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field> 
+        
         <field name="statehistory_status">
         	<datasource>
         		<parameter name="field">STATEHISTORY_STATE</parameter>
@@ -384,9 +444,9 @@
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                
+					
+               
                 </parameter>
             </display>
             

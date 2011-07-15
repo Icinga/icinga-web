@@ -131,6 +131,31 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 			this.last_tab = ctab.id;
 		}
 	},
+	isFullscreen: false,
+	setFullscreen: function(val) {
+		var func = "hide";
+		if(val == true) {
+			func = "hide";
+	 		if(Ext.getCmp(tp.id+'-expand')) {
+				Ext.getCmp(tp.id+'-expand').hide();
+				Ext.getCmp(tp.id+'-reset').show();
+			}
+			this.isFullscreen = true;
+		} else {
+			func = "show";
+			if(Ext.getCmp(tp.id+'-expand')) {
+				Ext.getCmp(tp.id+'-expand').show();
+				Ext.getCmp(tp.id+'-reset').hide();
+			}
+			this.isFullscreen = false;
+		}
+		Ext.getCmp('north-frame')[func]();	
+		Ext.getCmp('west-frame')[func]();
+		Ext.getCmp('viewport-north')[func]();
+		Ext.getCmp('view-container').doLayout();
+		AppKit.util.Layout.doLayout();
+	
+	}, 	
 	
 	contextMenu : function (myp, tab, e) {
 		if (!this.contextmenu) {
@@ -154,14 +179,35 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 							}
 						});
 					}
-				}, {
+				},'-', {
+					text: _("Expand"),
+					id: tp.id +'-expand',
+					iconCls: 'icinga-icon-arrow-out',
+					
+					handler: function() {
+						this.setFullscreen(true);
+						this.contextmenu.hide();
+						
+					},
+					scope: this
+				},{
+					text: _("Reset view"),
+					id: tp.id +'-reset',
+					iconCls: 'icinga-icon-arrow-in', 
+					hidden: true,	
+					handler: function() {
+						this.setFullscreen(false);	
+					},
+					scope: this
+
+				},'-',{
 					text: _("Rename"),
 					id: tp.id + '-rename',
 					iconCls: 'icinga-icon-table-edit',
 					handler: this.renameTab,
 					scope: this
-				}, {
-					text: _("Refresh"),
+				},{
+					text: _("Reload cronk"),
 					tooltip: _("Reload the cronk (not the content)"), 
 					iconCls: 'icinga-icon-arrow-refresh',
 					handler: function() {

@@ -17,9 +17,9 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.3.0
+Version: 1.4.0
 Release: 1%{?dist}
-License: GPL
+License: GPLv2+
 Group: Applications/System
 URL: http://www.icinga.org/
 BuildArch: noarch
@@ -80,9 +80,17 @@ Icinga Web for Icinga Core, requires Icinga API.
     COMMAND_OPTS="" \
     INIT_OPTS=""
 
+#copy icinga-web db sqls for upgrading
+#cp -r etc/schema %{buildroot}%{_datadir}/icinga-web/etc/schema
+
+
 ##############################
 %pre
 ##############################
+
+# Add apacheuser in the icingacmd group
+  /usr/sbin/usermod -a -G icingacmd %{apacheuser}
+
 
 #uncomment if building from git
 #%{__rm} -rf %{buildroot}%{_datadir}/icinga-web/.git
@@ -108,7 +116,7 @@ Icinga Web for Icinga Core, requires Icinga API.
 %defattr(-,root,root)
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
 %config(noreplace) %{_datadir}/icinga-web/app/config/databases.xml
-%config(noreplace) %{_datadir}/icinga-web/app/modules/Web/config/module.xml
+%{_datadir}/icinga-web/app/modules/Web/config/module.xml
 %attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/cache
 %attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/cache/config
 %{_datadir}/icinga-web/app/config
@@ -128,6 +136,9 @@ Icinga Web for Icinga Core, requires Icinga API.
 ##############################
 %changelog
 ##############################
+* Thu May 5 2011 Michael Friedrich - 1.4.0-1
+- update for upcoming release
+
 * Mon Jan 10 2011 Michael Friedrich - 1.3.0-1
 - update for upcoming release
 

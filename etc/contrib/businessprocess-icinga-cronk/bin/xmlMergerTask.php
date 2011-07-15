@@ -7,12 +7,6 @@
  */
 require_once("actionQueueTask.php");
 require_once("xmlHelperTask.php");
-
-if(PHP_MAJOR_VERSION < 5 || PHP_MINOR_VERSION < 3)
-	define("USE_XML_NSPREFIX_WORKAROUND",true);
-else 
-	define("USE_XML_NSPREFIX_WORKAROUND",false);
-
 	
 class xmlMergerTask extends xmlHelperTask {
 	/**
@@ -111,6 +105,7 @@ class xmlMergerTask extends xmlHelperTask {
 		$this->setupDOM();	
 		$this->prepareMerge();
 		$this->doMerge();
+		
 		$this->save();
 	}
 	
@@ -175,7 +170,7 @@ class xmlMergerTask extends xmlHelperTask {
 				$this->mergeMatching($index,$nodes);
 			else 
 				$this->mergeParents($index,$nodes);
-		}	
+		}
 	}
 	
 	/**
@@ -189,8 +184,9 @@ class xmlMergerTask extends xmlHelperTask {
 		$tgt_index = $this->__targetIndex;
 
 		foreach($nodes as $path=>$node) {
+		
 			if($node["real"]) {//element has no children 
-				if($this->getOverwrite()) {
+				if($this->getOverwrite()) {	
 					$tgt_index[$index][0]["elem"]->nodeValue = $node["elem"]->nodeValue;
 					continue;
 				} else if (!$this->getAllowDuplicates()) {
@@ -204,7 +200,8 @@ class xmlMergerTask extends xmlHelperTask {
 					}
 					if($dups)
 						continue;
-				}
+				} 
+				
 				$tgt_index[$index][0]["elem"]->parentNode->appendChild($tgtDOM->importNode($node["elem"],true));
 			
 			}
@@ -213,7 +210,7 @@ class xmlMergerTask extends xmlHelperTask {
 	
 	/**
 	 * Climbs down the index tree until a matching parent is found and reconstructs the xml
-	 * fragment in the targetDOM
+	 * fragement in the targetDOM
 	 * @param string $index The index of the source xml
 	 * @param array $nodes The nodes to append
 	 */
@@ -221,35 +218,36 @@ class xmlMergerTask extends xmlHelperTask {
 		$path_splitted = explode("/",$index);
 		$target = $this->__targetIndex;
 		foreach($nodes as $path=>$node) {
+			
+			
 			if(!$node["real"]) // only process nodes without children
 				continue;
-	
 			array_pop($path_splitted);
+			
 			while(!isset($target[implode($path_splitted,"/")]) && count($path_splitted)>1) {
 				if($node["elem"]->parentNode) 	
-					$node["elem"] = $node["elem"]->parentNode;	
+					$node["elem"] = $node["elem"]->parentNode;
+	
 				array_pop($path_splitted);
 			}
-	
-			$pathToAdd = implode($path_splitted,"/");
 			
+			$pathToAdd = implode($path_splitted,"/");
+
 			if($node["elem"]->parentNode) {
 				$newNode = $node["elem"]->parentNode->removeChild($node["elem"]);
 				// get the prefix
 				$prefix = preg_split("/:/",$newNode->nodeName);
 				$prefix = (count($prefix) == 2 ? $prefix[0] : null);
 				$im_node = $this->getTargetDOM()->importNode($newNode,true);
-				// PHP < 5.3 removes the namespace prefix of our node, reappend it
-				if($prefix != null && USE_XML_NSPREFIX_WORKAROUND) { 
-					$im_node = $this->fixPrefix($im_node,$prefix,$newNode);	
-				}
-				if($target[$pathToAdd][0]["elem"] != null)	
-					$target[$pathToAdd][0]["elem"]->appendChild($im_node);	
+				// PHP removes the namespace prefix of our node, reappend it
+				if($prefix != null ) 
+					$im_node = $this->fixPrefix($im_node,$prefix,$newNode);
+				$target[$pathToAdd][0]["elem"]->appendChild($im_node);
+				
 			} 
 			
 			$this->removeSubnodesFromSourceIndex($pathToAdd);
 		}
-
 	}
 	
 	/**
@@ -258,7 +256,9 @@ class xmlMergerTask extends xmlHelperTask {
 	 * @param string $prefix
 	 * @param DOMNode $newNode
 	 */
-	protected function fixPrefix(DOMNode $node, $prefix,DOMNode $newNode = null) {	
+	protected function fixPrefix(DOMNode $node, $prefix,DOMNode $newNode = null) {
+		if($node->nodeName == $newNode->nodeName)
+			return $node;
 		$result = $this->getTargetDOM()->createElement($prefix.":".$node->nodeName);
 		// Copy attributes
 		foreach($node->attributes as $att) {
@@ -270,12 +270,11 @@ class xmlMergerTask extends xmlHelperTask {
 		foreach($node->childNodes as $child) {
 			$result->appendChild($child);			
 		}
-		
 		if($newNode) {
 			$target = $this->getTargetDOM();
 			foreach($newNode->childNodes as $child) {
-				$imported = $target->importNode($child,true);				
-				$result->appendChild($imported);		
+				if($child->nodeType != XML_TEXT_NODE) 
+					$result->appendChild($target->importNode($child,true));		
 			}
 		}
 		return $result;

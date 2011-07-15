@@ -1,21 +1,20 @@
 <script type="text/javascript">
+Ext.ns("Cronk.bp");
 /**
  * TODO: Refactor this mess
  */
-var _parent = "<?php echo $rd->getParameter('parentid'); ?>";
-
 // This is the init method called when the cronk environment is ready
-Cronk.util.initEnvironment(_parent, function() {
+Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
 	Ext.Msg.minWidth = 350;
 	this.stateful = true;
 	this.stateId = "state_"+this.id;
-	Ext.ns("Cronk.bp");
+	
 	var fastMode = (Ext.isIE6 || Ext.isIE7 || Ext.isIE8);	
 	var CE = this;
 	var parentCmp = this.getParent();
+	var stateId = this.id + '_bpmanager_panel';
 	parentCmp.removeAll();
 	var treeLoader = new Ext.ux.tree.TreeGridLoader({});
-	
 	var root = new Ext.tree.TreeNode({
 		nodeText:_('Business processes'), 
 		bpType: 'bp', 
@@ -78,8 +77,8 @@ Cronk.util.initEnvironment(_parent, function() {
 
 			var hideEdit;
 			if(node.attributes)
-				hideEdit = node.attributes.isAlias;
-  					
+				hideEdit = node.attributes.isAlias && !node.attributes.service;
+				
 	    		var ctx = new Ext.menu.Menu({
 	    			items: [{
 	    				text: _('Create new business process at this level'),
@@ -95,7 +94,7 @@ Cronk.util.initEnvironment(_parent, function() {
 	    				hidden: node.attributes.isAlias || node.attributes.serviceInfo,
 	    				handler:function(btn) {
 	    					if(node.attributes)
-	    						Cronk.bp.processController.addBusinessProcess(node,node,event);
+	    						Cronk.bp.processController.addExistingBusinessProcess(node,node,event);
 	    				}
 	    			},{
 	    				text: _('Add service'),
@@ -137,8 +136,6 @@ Cronk.util.initEnvironment(_parent, function() {
 	    				scope: this
 	    			}]
 	    		}).showAt(event.getXY());
-	    		
-	    		
 	    	},
 	    	nodedragover: function(dragOverEvent) {
 	    		var dragNode;
@@ -184,6 +181,18 @@ Cronk.util.initEnvironment(_parent, function() {
 	    			default:
 	    				return false;
 	    		}
+	    	},
+	    	remove: function() {
+	    		Cronk.bp.processController.fireEvent('changed');
+	    	},
+	    	append: function() {
+	    		Cronk.bp.processController.fireEvent('changed');
+	    	},
+	    	movenode: function() {
+	    		Cronk.bp.processController.fireEvent('changed');
+	    	},
+	    	textchange: function() {
+	    		Cronk.bp.processController.fireEvent('changed');
 	    	}
 	    }
 	});
@@ -192,10 +201,143 @@ Cronk.util.initEnvironment(_parent, function() {
 	 * Controller class for adding nodes, parsing the config, and all things
 	 * that isn't view specific
 	 */
-	Cronk.bp.processController = new (Ext.extend(Ext.util.Observable,{
+	Cronk.bp.processController = new (Cronk.bp.processControllerClass = Ext.extend(Ext.util.Observable,{
+		
+		changed: false,
+		baseTitle: null,
+		
+		constructor: function() {
+			Cronk.bp.processControllerClass.superclass.constructor.call(this);
+			
+			this.on('changed', this.onChanged, this);
+			
+			this.baseTitle = parentCmp.title.replace(/\s+\([^\)]+\)$/, '');
+			
+			Ext.EventManager.addListener(window, 'blur', this.handleBlur, this);
+			
+			Ext.getCmp('cronk-tabs').on('beforetabchange', function(tabpanel, newTab, currentTab) {
+				if (currentTab == parentCmp) {
+					this.handleBlur(function() {
+						Ext.getCmp('cronk-tabs').setActiveTab(parentCmp);
+					})
+				}
+			}, this);
+			
+		},
+		
+		changeTitle: function(configName) {
+			var title = String.format('{0} ({1})', this.baseTitle, configName);
+			parentCmp.setTitle(title);
+			parentCmp.doLayout();
+		},
+		
+		onChanged: function() {
+			this.changed=true;
+		},
+		
+		hasChanged: function() {
+			return this.changed;
+		},
+		
+		processLoad: function(configName) {
+			Cronk.bp.processController.getConfigJson(configName, function() {
+				Cronk.bp.processController.curConfigName = configName;
+				Cronk.bp.processController.changed = false;
+				this.changeTitle(configName);
+				Ext.state.Manager.set(stateId, bpManager.getState());
+			}, this);
+		},
+		
+		processSave: function(configName) {
+			configName = configName || Cronk.bp.processController.curConfigName;
+			if (configName) {
+				this.createConfigForTree(configName);
+				this.changed = false;
+				this.changeTitle(configName);
+				Ext.state.Manager.set(stateId, bpManager.getState());
+			}
+			else {
+				this.processSaveAs();
+			}
+			
+			Cronk.bp.processController.curConfigName = configName;
+		},
+		
+		processSaveAs: function() {
+			var _this = this;
+			
+			Ext.Msg.prompt(_('Filename'), _('Please enter a name for the file:'), function(btn, text){
+			    if (btn == 'ok'){
+			    	if(!text.match(/^[A-Za-z0-9_-]{3,25}$/)) {
+				    	Ext.Msg.alert(_("Error"),_("Please provide a valid file name (min 3, max 25 chars, alphanumeric)"));
+				   		return false;
+			    	}
+			    	_this.processSave(text);
+			    }
+			});
+		},
+		
+		processNew: function() {
+			var _this = this;
+			var changed = (Cronk.bp.processController.curConfigName || this.changed)
+			
+			var doRemove = function() {
+				_this.changeTitle(_('New'));
+				root.removeAll();
+				_this.changed = false;
+		   		Cronk.bp.processController.curConfigName = null;
+		   		Ext.state.Manager.set(stateId, bpManager.getState());
+			}
+			
+			if (changed!== false) {
+				Ext.Msg.show({
+					title: _('Creating new'),
+					msg: _('Process exists, creating new one?'),
+					buttons: Ext.Msg.YESNO,
+					fn: function(button) {
+						if (button=='yes') {
+		   					doRemove();
+		   				}
+					},
+					icon: Ext.MessageBox.QUESTION
+				});
+				
+			}
+			else {
+				doRemove();
+			}
+		},
+		
+		handleBlur: function(callback) {
+			if (Cronk.bp.processController.hasChanged()) {
+				
+				var e = Ext.EventObject;
+				e.setEvent(window.event);
+				e.stopEvent();
+				
+				Ext.Msg.show({
+					title: _('Save Changes?'),
+					msg: 'You are closing a tab that has unsaved changes. Would you like to save your changes?',
+					buttons: Ext.Msg.YESNOCANCEL,
+					fn: function(button) {
+						if (button=='yes') {
+		   					Cronk.bp.processController.processSave();
+		   				}
+		   				else if (button=='cancel') {
+		   					if (Ext.isFunction(callback)) {
+		   						callback.call(this);
+		   					}
+		   				}
+					},
+					icon: Ext.MessageBox.QUESTION
+				});
+			}
+		},
+		
 		hostStore: new Ext.data.JsonStore({
 			autoDestroy:false,
 			url: '<?php echo $ro->gen("icinga.api");?>'+'/json',
+			root: 'result',
 			idProperty: 'HOST_ID',
 			baseParams: {
 				'target' : 'host',
@@ -207,6 +349,7 @@ Cronk.util.initEnvironment(_parent, function() {
 		
 		serviceStore: new Ext.data.JsonStore({
 			autoDestroy:false,
+			root: 'result',
 			url: '<?php echo $ro->gen("icinga.api");?>'+'/json',
 			idProperty: 'SERVICE_ID',
 			baseParams: {
@@ -263,17 +406,16 @@ Cronk.util.initEnvironment(_parent, function() {
 				    text: _('Add new node'),
 				    iconCls: 'icinga-icon-chart-organisation',
 				    handler: function() {
-					Cronk.bp.processController.addBusinessProcess(dropNode,event.target,event.rawEvent);
+						Cronk.bp.processController.addBusinessProcess(dropNode,event.target,event.rawEvent);
 				    }
 				},{
 				    text: _('Add existing node'),
 				    iconCls: 'icinga-icon-chart-organisation',
 				    handler: function() {
-					Cronk.bp.processController.addExistingBusinessProcess(dropNode,event.target,event.rawEvent);
+						Cronk.bp.processController.addExistingBusinessProcess(dropNode,event.target,event.rawEvent);
 				    }
 				}]
 			})).showAt(event.rawEvent.getXY());
-
 		},
 
 		addBusinessProcess: function(node,target,event,presets) {;
@@ -439,6 +581,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			var item =  this.createFunkyInputLayer(event.getPageX(),event.getPageY(),330,400,bpCfg)
 			item.show();
 		},
+		
 		addExistingBusinessProcess: function(node,target,event,presets) {
 		    var curId = Ext.id("","bpAdder");
 
@@ -565,6 +708,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				 	
 				} while(alias);
 			}
+			
 			return true;
 		},
 		
@@ -627,6 +771,7 @@ Cronk.util.initEnvironment(_parent, function() {
 				leaf: true
 			});
 			target.appendChild(node);
+			
 			return node;
 		},
 		
@@ -692,6 +837,14 @@ Cronk.util.initEnvironment(_parent, function() {
 						}
 					}],
 					buttons:[{
+						text: _('Close'),
+						iconCls: 'icinga-icon-close',
+						handler: function(btn) {
+
+						    btn.ownerCt.ownerCt.ownerCt.container.remove();
+						},
+						scope: this
+					    },{
 						text:(presets ? 'Edit ' : 'Add ')+' Service',
 						iconCls:'icinga-icon-add',
 						id: curId+'_btn',
@@ -719,6 +872,7 @@ Cronk.util.initEnvironment(_parent, function() {
 									nodeText: values.host_name+" : "+values.service_name,
 									host: values.host_name,
 									service: values.service_name,
+									isAlias:true,
 									iconCls: Cronk.bp.processElements.prototype.getIconCls('service'),
 	    							nodeType:'node',
 	    							bpType: 'service',
@@ -742,7 +896,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			
 		},
 		
-		getConfigJson : function (filename) {
+		getConfigJson : function (filename, callback, scope) {
 			Ext.Ajax.request({
 				url: '<?php echo $ro->gen("modules.cronks.bpAddon.configParser") ?>',
 				params: {
@@ -755,6 +909,10 @@ Cronk.util.initEnvironment(_parent, function() {
 					for(var i =0;i<data.length;i++) {
 						var node = data[i];
 						this.createNewProcessNode(root,root.getOwnerTree(),node);					
+					}
+					
+					if (Ext.isFunction(callback)) {
+						callback.call(scope || {});
 					}
 				},
 				failure: function(resp) {
@@ -909,7 +1067,7 @@ Cronk.util.initEnvironment(_parent, function() {
 			return obj;
 		}
 		
-	}))();
+	}));
 	
 	Cronk.bp.configFileListing = new (Ext.extend(Ext.DataView,{
 		autoScroll: true,
@@ -945,8 +1103,7 @@ Cronk.util.initEnvironment(_parent, function() {
 						iconCls: 'icinga-icon-page-edit',
 						text: _('Edit this config'),
 						handler: function() {
-							Cronk.bp.processController.getConfigJson(clicked.get('filename'));
-							Cronk.bp.processController.curConfigName = clicked.get('filename');
+							Cronk.bp.processController.processLoad(clicked.get('filename'));
 						}
 					},{
 						iconCls: 'icinga-icon-delete',
@@ -1069,9 +1226,26 @@ Cronk.util.initEnvironment(_parent, function() {
 		height:parentCmp.getInnerHeight()*0.98,
 		width:parentCmp.getInnerWidth()*0.98,
 		layout: 'border',
+		
 		defaults : {
 			split:true
 		},
+		
+		stateful: false,
+		stateid: stateId,
+		
+		getState: function() {
+			return {
+				configName: Cronk.bp.processController.curConfigName
+			}
+		},
+		
+		applyState: function(state) {
+			if (Ext.isObject(state) && !Ext.isEmpty(state.configName)) {
+				Cronk.bp.processController.processLoad(state.configName);
+			} 
+		},
+		
 		items: [{
 			xtype: 'panel',
 			region:'center',
@@ -1090,29 +1264,22 @@ Cronk.util.initEnvironment(_parent, function() {
 				text: _('Save'),
 				iconCls: 'icinga-icon-disk',
 				handler: function(btn) {
-				    if(Cronk.bp.processController.curConfigName) {
-					Cronk.bp.processController.createConfigForTree(text);
-				    } else {
-					Ext.Msg.alert(_("No name given"),_("New config, please choose 'save as'"));
-				    }
+				    Cronk.bp.processController.processSave();
 				},
 				scope:this
 			},{
 				text: _('Save as'),
 				iconCls: 'icinga-icon-disk',
 				handler: function(btn) {
-					Ext.Msg.prompt(_('Filename'), _('Please enter a name for the file:'), function(btn, text){
-					    if (btn == 'ok'){
-					    	if(!text.match(/^[A-Za-z0-9_-]{3,25}$/)) {
-						    Ext.Msg.alert(_("Error"),_("Please provide a valid file name (min 3, max 25 chars, alphanumeric)"));
-						    return false;
-					    	}
-						Cronk.bp.processController.createConfigForTree(text);
-					    }
-					});
-
+					Cronk.bp.processController.processSaveAs();
 				},
 				scope:this
+			}, {
+				text: _('New'),
+				iconCls: 'icinga-icon-add',
+				handler: function(btn) {
+					Cronk.bp.processController.processNew();
+				}	
 			}]
 		},{
 			xtype: 'panel',
@@ -1126,15 +1293,19 @@ Cronk.util.initEnvironment(_parent, function() {
 			items: Cronk.bp.configFileListing
 		}]
 	});
+	
+	bpManager.on('render', function(panel) {
+		panel.applyState(Ext.state.Manager.get(stateId));
+	});
+	
 	parentCmp.on("resize", function() {
 		this.setHeight(parentCmp.getInnerHeight()*0.98);
 		this.setWidth(parentCmp.getInnerWidth()*0.98);
 		this.doLayout();
-	},bpManager)
+	},bpManager);
+	
 	this.add(bpManager);
 
 	this.doLayout();
-	
-
 });
 </script>

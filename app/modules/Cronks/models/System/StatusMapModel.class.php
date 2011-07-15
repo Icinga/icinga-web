@@ -9,7 +9,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel
 	private $tm = false;
 
 	private $hostResultColumns = array(
-		'HOST_OBJECT_ID', 'HOST_NAME', 'HOST_ADDRESS', 'HOST_ALIAS', 'HOST_DISPLAY_NAME', 'HOST_CURRENT_STATE', 'HOST_OUTPUT',
+		'HOST_OBJECT_ID', 'HOST_NAME', 'HOST_ADDRESS', 'HOST_ALIAS', 'HOST_DISPLAY_NAME', 'HOST_CURRENT_STATE','HOST_IS_PENDING', 'HOST_OUTPUT',
 		'HOST_PERFDATA', 'HOST_CURRENT_CHECK_ATTEMPT', 'HOST_MAX_CHECK_ATTEMPTS', 'HOST_LAST_CHECK', 'HOST_CHECK_TYPE',
 		'HOST_LATENCY', 'HOST_EXECUTION_TIME', 'HOST_NEXT_CHECK', 'HOST_LAST_HARD_STATE_CHANGE', 'HOST_LAST_NOTIFICATION',
 		'HOST_IS_FLAPPING', 'HOST_SCHEDULED_DOWNTIME_DEPTH', 'HOST_STATUS_UPDATE_TIME'
@@ -53,7 +53,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel
 		$apiResHosts = $apiResHosts
 			->fetch()
 			->getAll();
-
+		
 		$apiResHostParents = $this->api->getConnection()->createSearch();
 		$apiResHostParents->setSearchTarget(IcingaApi::TARGET_HOST_PARENTS);
 
@@ -61,6 +61,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel
 		$apiResHostParents = $apiResHostParents->fetch();
 
 		foreach ($apiResHosts as $row) {
+			if($row['HOST_IS_PENDING'] == '1') {
+				$row['HOST_CURRENT_STATE'] = "99";	
+			}
 			$objectId = $idPrefix . $row['HOST_OBJECT_ID'];
 			$hosts[$objectId] = array(
 					'id'		=> $objectId,

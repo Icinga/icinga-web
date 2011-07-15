@@ -6,6 +6,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	filter: {},
 	
 	initComponent : function() {
+		this.addEvents('autorefreshchange');	
+		this.autoRefreshEnabled = null;
 		this.tbar = this.buildTopToolbar();
 		
 		_G = this;
@@ -22,8 +24,15 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						_G.getGridEl().child('div').removeClass('x-icinga-nodata');
 				}
 			});
-		}		
+		}			
 		Cronk.grid.GridPanel.superclass.initComponent.call(this);
+		
+		this.on("show",function() {
+			if(this.autoRefreshEnabled) {
+				this.startRefreshTimer();
+			}
+		},this);
+	
 	},
 
 	/*
@@ -39,7 +48,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				text: _('Refresh'),
 				iconCls: 'icinga-icon-arrow-refresh',
 				tooltip: _('Refresh the data in the grid'),
-				handler: function(oBtn, e) { this.store.reload(); },
+				handler: function(oBtn, e) { this.store.load(); },
 				scope: this
 			}, {
 				text: _('Settings'),
@@ -51,20 +60,21 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 						checked: autoRefreshDefault,
 						checkHandler: function(checkItem, checked) {
 							if (checked == true) {
-							
-									this.trefresh = AppKit.getTr().start({
-										run: function() {	
-											this.refreshGrid();				
-										},
-										interval: (autoRefresh*1000),
-										scope: this
-									});
-						
-							}
-							else {
-								AppKit.getTr().stop(this.trefresh);
-								delete this.trefresh;
+								this.startRefreshTimer();	
+							} else {
+								this.stopRefreshTimer();	
 							}	
+						},
+						listeners: {
+							render: function(btn) {
+								if(this.autoRefreshEnabled !== null)
+									btn.setChecked(this.autoRefreshEnabled,true);
+								this.on("autorefreshchange",function(v) {			
+									btn.setChecked(v,true);
+								});
+							},
+							scope:this
+
 						},
 						scope: this
 					},{
@@ -107,15 +117,11 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			}],
 			listeners: {
 				render: function(cmp) {
-					if(autoRefreshDefault) {	
-						this.trefresh = AppKit.getTr().start({
-							run: function() {
-								this.refreshGrid();
-							},
-							interval: (autoRefresh*1000),
-							scope: this
-						});
+					if(autoRefreshDefault && this.autoRefreshEnabled === null) {	
+						this.startRefreshTimer();
 					}
+				
+				
 				},
 				scope: this			
 			}
@@ -166,9 +172,34 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	setFilter : function(f) {
 		this.filter = f;
 	},
+	stateEvents: ['autorefreshchange','activate', 'columnmove ', 'columnresize', 'groupchange', 'sortchange'],
 	
-	stateEvents: ['activate', 'columnmove ', 'columnresize', 'groupchange', 'sortchange'],
+	startRefreshTimer: function() {
+		var autoRefresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
+		this.stopRefreshTimer();
+		
+		this.trefresh = AppKit.getTr().start({
+			run: function() {
+				this.refreshGrid();
+			},
+			interval: (autoRefresh*1000),
+			scope: this
+		});
+		this.autoRefreshEnabled = true;
+		this.fireEvent('autorefreshchange',true);
+	},
+
+	stopRefreshTimer: function(noVisualUpdate) {
+		if(this.trefresh) {
+			AppKit.getTr().stop(this.trefresh);
+			delete this.trefresh;
+		}
+		this.autoRefreshEnabled = false;
+		if(!noVisualUpdate) {
+			this.fireEvent('autorefreshchange',false);
+		}
 	
+	},
 	getPersistentColumnModel : function() {
 		
 		o = {};
@@ -195,7 +226,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				var org = cm.getColumnById(colId);
 				
 				// Column was not moved arropund
-				if (org.dataIndex == col.dataIndex) {
+				if (Ext.isDefined(org) && org.dataIndex == col.dataIndex) {
 					cm.setHidden(colId, col.hidden);
 					cm.setColumnWidth(colId, col.width);
 				}
@@ -203,8 +234,10 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			
 		}, this);
 	},
-	refreshGrid: function() {
-		if(!this.store)
+	refreshTask: new Ext.util.DelayedTask(function() {
+		//NOTE: hidden tabs won't be refreshed
+	
+		if(!this.store || this.ownerCt.hidden)
 			return true;
 		if(Ext.isFunction((this.getTopToolbar() || {}).doRefresh)) {
 			this.getTopToolbar().doRefresh();
@@ -213,16 +246,25 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		} else if(this.getStore()) {	
 			this.getStore().reload();
 		}
-	
+	}),
+
+	refreshGrid: function() {
+		this.refreshTask.delay(200,null,this);
 	},
 	getState: function() {
 		var store = this.getStore();
-	
+		var aR = null;
+		if(this.autoRefreshEnabled === true)
+			aR = 1;
+		if(this.autoRefreshEnabled === false)
+			aR = -1;
+		
 		var o = {
 			filter_params: this.filter_params || {},
 			filter_types: this.filter_types || {},
 			store_origin_params: ("originParams" in store) ? store.originParams : {},
-			colModel: this.getPersistentColumnModel()
+			colModel: this.getPersistentColumnModel(),
+			autoRefresh: aR
 		};
 		
 		return o;
@@ -252,8 +294,13 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			reload = true;
 		}
 		
+		if (state.autoRefresh == 1) {
+			this.startRefreshTimer();
+		} else if (state.autoRefresh == -1) {
+			this.stopRefreshTimer();
+		}
+
 		if (reload == true) {
-			
 			this.refreshGrid();
 		}
 					
@@ -266,6 +313,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		}
 	}
 	
+
+
 });
 
 Ext.reg('cronkgrid', Cronk.grid.GridPanel);

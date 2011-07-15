@@ -78,6 +78,14 @@
 					if (!$hosts && !$services) {
 						return;
 					}
+					
+					if (isset($title_prefix)) {
+						$title = $title_prefix. $title;
+					}
+					
+					if (isset($title_suffix)) {
+						$title .= $title_suffix;
+					}
 				?>
 
 				<?php if (isset($noheader) == false || (isset($noheader) && $noheader==false)) { ?>

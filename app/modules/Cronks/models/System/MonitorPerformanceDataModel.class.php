@@ -87,17 +87,17 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 				
 				$arr = $res->fetch()->getRow();
 				
-				foreach ($arr as $name=>$value) {
+				foreach ($arr as $key=>$value) {
 					
 					if (isset($source[4])) {
-						$name = $source[4];
+						$key = $source[4];
 					}
 					
 					if (is_numeric($value) && strpos($value, '.') !== false) {
 						$value = sprintf('%.2f', $value);
 					}
 					
-					$this->data->setParameter($name, $value);
+					$this->data->setParameter($key, $value);
 				}
 			}
 			catch(IcingaApiException $e) {

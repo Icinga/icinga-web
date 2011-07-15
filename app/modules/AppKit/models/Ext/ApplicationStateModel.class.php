@@ -22,9 +22,22 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
 	}
 	
 	public function writeState($data) {
+		$merge = array();	
 		if ($this->stateAvailable()) {
 			$existing = json_decode($this->readState());
-			$data = array_merge((is_array($existing)) ? $existing : array (), json_decode(($data)));
+			if (is_array($existing)) foreach ($existing as $v) {
+				$merge[$v->name] = $v->value;
+			}
+			foreach (json_decode($data) as $v) {
+				$merge[$v->name] = $v->value;
+			}
+			$data = array();
+			foreach ($merge as $k => $v) {
+				$data[] = (object) array(
+					'name' => $k,
+					'value' => $v
+				);
+			}		
 			$this->getContext()->getUser()->setPref(self::PREFNS, json_encode($data), true, true);
 		}
 	}

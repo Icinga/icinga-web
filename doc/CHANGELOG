@@ -1,3 +1,480 @@
+2011-05-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a3b38f6e600fc67dbf2a0c3edce0d4b2d1ab1443
+
+* Added pending filters in grids
+* Fixed overall status pending filters
+
+
+2011-05-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 76d6dc0ad030db9c583d1bbc4fe7bda4c95d609f
+
+* Quick fix for view and counter (pending state)
+
+
+2011-05-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 392e96db31eaae2939f4e2b3367b89a60b61c2cc
+
+* Tagged new dev version
+
+
+2011-05-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 72514d7357912975fe2eb19bf7c010924b974b7c
+
+* Added r1.4
+* Changed version meta data
+* Added new about layout and images
+
+
+2011-05-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 49442845b612ef45bbaf208e94471697cb94b928
+
+* Merged and fixed translations (fixes #1400)
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: cb989dc5199dd0ddaf685cb817e120bed334bc6d
+
+* Updated bp-addon
+
+
+2011-05-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 57d8eab7d9c616cf0d5e283c036c9902571e0cdf
+
+* Fixed typo (ref #1167)
+
+
+2011-05-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 39e9ab5c1cf2fd59447bb8e2926d1306891a5ec6
+
+* Added instance name configure flag (fixes #1167)
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d49ac98f22f8cb4d2b9940924c6c720931b5e168
+
+* Updated module installer, added update sql schemas
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 568f4406debb59041ac38ea2f6f3f2b726403c4b
+
+* Removed exception in AppKitExtJsonDocument triggered by Doctrine-relations, fixed 
+  tests
+
+
+2011-05-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 538ea163c56d705d21e6afc88be8ba0a2f6f1561
+
+* Added additional object meta fields (fixes #1001) NEW API IS NEEDED
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f1f67ebfb0b3723e38b907bb37a5bf9a0a54b443
+
+* Added long_output to host/service details, check_multi should no work (fixes #958)
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 50a68a6c2377aea03a6626a90d269ef1e2b0bd19
+
+* Readded unknown state constant
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3606583bce436111ad31fe436f1601e72f7c8911
+
+* Added output length as parameter (fixes #1360), fixed and extended pending state 
+  handling (is now in statussummary)
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 5b990819384d39722f7bede3ac54a4b6eb3ab507
+
+* Added configurable logout path (fixes #1017)
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8c61fd6aac97f06bbd35173e201095fc5bdbada0
+
+* Statusmap now recognizes pending hosts (fixes #961)
+* Also removed a debug message 
+  in PortalViewSuccess
+
+
+2011-05-04 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: da9e2b06ce980b88d75ffdce33324950141071ef
+
+* Autorefresh will now occur everytime a grid is shown (fixes #919)
+
+
+2011-05-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1d46a3acab7a5a68e37d1c37a8378d98b8735e40
+
+* Added HOST_DISPLAY_NAME for searching (ref #1011)
+
+
+2011-05-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 857cccb226aca4bb54206441c25740527db39897
+
+* Added more fields for search (fixes #1011)
+
+
+2011-05-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: eb7ee76946660ccbc58eb58c5ba96237a8ca9dca
+
+* Fixed apache conf.d guess (fixes #754)
+
+
+2011-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 4528718f365b0fabe5fcf3d8fc290db5872e77bf
+
+* Added fullscreen view to cronkPortal (fixes #493)
+
+
+2011-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 082963e0cd578d97d074c4e06d1b1cfba54b1714
+
+* Added config_type to icinga-api configurations
+
+
+2011-05-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 67f20caf7b8540e572b0279a08fc6847a818e708
+
+* Check against the LDAP filter on existing user binds (fixes #981)
+
+
+2011-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 4127e346767087a4461b1558420719760eb28b63
+
+* Added custom icinga.site.css stylesheet (#fixes 1330)
+
+
+2011-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 065535d8109c8f50d6d549477615a9368c267122
+
+* Added action/module definition to cronk search result (fixes #1408)
+
+
+2011-05-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a96526ac2604b33d31c0c2f1ea67ad3d9e001e60
+
+* Removed site config files
+
+
+2011-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 67bc3bb74ab71b47c01909c638e35479caf7586d
+
+* Refactored autorefresh code, added autorefresh changes to grid state (fixes #1348)
+
+
+2011-05-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 16e7f10f5015bc08a2bd0fee05edf81dbae967ed
+
+* Added new interval for status refreshes (fixes #978)
+
+
+2011-05-03 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 62515c1844dc99cd522c2a0ae9130a0ffaa08611
+
+* Added force service check (fixes #1318)
+
+
+2011-05-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f1757976eee9a05f19b8763589f851e10234e022
+
+* Search now always creates a new tab with the current result, added ignoreDuplicates 
+  paramter
+* to InterGridUtil (fixes #1292)
+
+
+2011-05-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 76c2375928ca53191b979da7469d4e292f0693de
+
+* Duration field in commands will no be hidden when a fixed-downtime is selected 
+  (fixes #1280)
+
+
+2011-05-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ade8e897ac497c4dea61d9e07ba6063212098996
+
+* Added images/icinga as image basepath for custom icons (fixes #1068)
+
+
+2011-05-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3acda9eb3c62b251dff0f22957b24eda69675ceb
+
+* Fixed host/servicedetail hide/dismiss timers only being resetted (instead of 
+  stopped) on mouseenter
+* fixes #998
+
+
+2011-05-02 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e5edb3609924cf4a424e48a56e519ca4bb7e0e6b
+
+* Added principal restriction support for cronks xml and added log principal (fixes 
+  #983)
+
+
+2011-04-14 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 57de2149529700246c60cf313e0699a95c62c8dc
+
+* Fixed wrong shebangs, removed superfluous getopts.php (#fixes 1266)
+
+
+2011-04-14 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 630e91d68c5f2a7912cd534198c15cef1a14474d
+
+* fixes #1273
+
+
+2011-04-14 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 496f6126f2dee3608ddd78b637d10e30b5420123
+
+* Added auth_strip_domain (fixes  #1294) and lowercase to ldap name comparisons 
+  (fixes #1293) thx to tgelf
+
+
+2011-04-14 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c117001106fea7034dba7b2b54072e6a903af79d
+
+* Fixed typo (thanks to yoris, fixes #1397) and added additional cache clean routines
+
+
+2011-04-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 839c1b69b384d6840aef3278b7c42a65670d4b17
+
+* Fixed wrong relation definition (fixes roles not showing proper users)
+
+
+2011-03-30 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: c9d945c16b6d80d4ebbb3a6e2bac15f37d2d55aa
+
+* fix icinga-web spec file does not perform %pre functions #1288fixes #1288
+
+
+
+2011-03-30 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 6fe903ce3d46df6ebee823c7bff326f0e0634b2f
+
+* fix schema updates not copied to icinga-web installation #1339
+
+
+2011-03-24 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: c6fc3ff4236f3e1692bc18cc9d92759b489f8f62
+
+* Fixed API to not return metaData if parameter "withMeta" is not set or set to 
+  false/0..
+* Fixed runSuite.sh
+
+
+2011-03-23 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 5fe73f3470a67906a8422f847b414223be484eaf
+
+* Removed vim - 'i' in code
+
+
+2011-03-23 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ed917d154754a334b126905085d7c3fceff4648f
+
+* Fixed missing parameters in drag->portal action, fixed saved portal cronk 
+  restoration
+
+
+2011-03-22 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: 5d413ac1d003d641ec075514207addacc643115c
+
+* Added missing principal creation on user import via external auth (resolves #1326)
+
+
+2011-03-20 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2f88b420da4e60660df9f6d91e5698a1de4762a9
+
+* Icinga icon now indicates if XHR Requests are ongoing
+
+
+2011-03-20 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 40ea52a2f5669e5c1bd431d9578a63b02e88c3a8
+
+* Fixed crashes when switching tabs quickly
+
+
+2011-03-20 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9cb9e502bd644cb070c4b76018a8e08134a826fa
+
+* Fixed updated agavi (#fixes 1307)
+
+
+2011-03-20 root <root(AT)debian(DOT)localhost>
+           Commit: 2eaff9434af079df37f8edc144f68ddb3d62057d
+
+* Added sitecfgs
+
+
+2011-03-11 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: b83854a14d0187e91978f994ed1bd11714490b53
+
+* copy sql script for upgrading in icinga-web.spec
+
+
+2011-03-01 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3afc188a77055ac3aaea8c6e6a5c687686e7a9a7
+
+* Fixed wrong filter in openproblems, fixed statusmap in portal
+
+
+2011-02-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8390f7437fed275276b07e4712f8b0f4d1ac4ec1
+
+* Added module specific routing xml
+
+
+2011-02-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f251a3eb179dfbe6048357f6828dbcde2cb26b9e
+
+* Readded agavi binary
+
+
+2011-02-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fa4d22455cdf33ac53ed79b9a3d1e1be8ecbf051
+
+* Added missing principal for initial stage
+
+
+2011-02-16 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: deab51579453698aaac163cab044f6dee69f4393
+
+* fix date typo in icinga-web.spec #1220refs #1220
+
+
+
+2011-02-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 372910af7d08ba951204381ba3097d54dfeaea7e
+
+* fixed new module target site config
+
+
+2011-02-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d0ad9ecd11426a1a3da4c8163bd91da63cca5f67
+
+* Menu seperator fix
+
+
+2011-02-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: cd69ac9f357fa8645058e7ad747e881460329f7d
+
+* PGSQL double result fix
+
+
+2011-02-14 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: e2cfa5ada3e3a4b92b86b295ee24414805d999d2
+
+* fix missing semicolon in mysql schema
+
+
+2011-02-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dd270274729e1c6de50a8f2e97f7776149b9378d
+
+* Added release dates
+
+
+2011-02-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5b49293b28477bae453daa069cabfa53b5e52d5f
+
+* Added bottom space
+* Removed submenu from save cronk entry
+
+
+2011-02-13 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: aa642838abec4c0e5df8ec465c1f921ec0e6f41f
+
+* Removed old files from cached tree
+
+
+2011-02-13 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: face98ac4168b6b7d1aba829d0c722cce60d97dc
+
+* Added updated oracle sql schemes
+
+
+2011-02-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 489137a6eed5bed1cf308412d99c545441225222
+
+* Updated makefile for sitecfg
+
+
+2011-02-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8eaacf7547abdf47993c33ac4fbde9c9d33be6e3
+
+* Little change in module.site.xml
+
+
+2011-02-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6b266a9592a68ab0d9e44f79c6139c553a81fd50
+
+* Business process cronk now uses new module-specific configs
+
+
+2011-02-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3a38f14dca99ae92443ba18dc65d32b1fb89b292
+
+* Added additional siteconfig (#refs 1187)
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2c5b8bb612c481fd4b55e57bb81627f3bcabfd40
+
+* Login triggers only one message (fixes #1204)
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b3fe39b80b343e62fd8959293df2602ceaa59a72
+
+* Hide instance column (fixes #1195)
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dc9f72010775c161e6d7b7fee3adde2ec044ec7d
+
+* Recreated pgsql schema (fixes #1099)
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2f26a2fe9dc03f55f36c205801822c6be5618683
+
+* Portal custom cronk possible
+
+
+2011-02-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 917d28383db7c69ff9e6fb0429caf94de5b06c7e
+
+* Added changed PortalViewSuccess
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f2d2562c5b9c12ba1a67649960ca678be0852204
+
+* Added compiled language files
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b264ecfb2c0b3f248440d667c0edacb6b51ec861
+
+* Added language changes (submodule pointer)
+* Added new languages: cs, pt_BR
+
+
+2011-02-11 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e6f51b738fd59f6a9d729c8c6d07d334f0e81043
+
+* added address6 field to new (yet unused) db api
+
+
+2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 68622ff43937199018a88a2eb1628d2ebd43daf0
+
+* Added changelog
+
+
 2011-02-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: 024f39262f1a0a7bab07cd5dc7afe96a3ca7a9a7
 

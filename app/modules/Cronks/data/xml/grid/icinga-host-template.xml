@@ -254,7 +254,13 @@
         		<parameter name="enabled">true</parameter>
         		<parameter name="type">extjs</parameter>
         		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">In Downtime</parameter>
+        		<parameter name="label">In downtime</parameter>
+        	</paramter>
+			<paramter name="host_is_pending">
+        		<parameter name="enabled">true</parameter>
+        		<parameter name="type">extjs</parameter>
+        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
+        		<parameter name="label">Is pending</parameter>
         	</paramter>
         </parameter>
     </option>
@@ -291,6 +297,7 @@
        	</parameter>
        	
        	<parameter name="additional_filter_fields">
+			<parameter name="host_is_pending">HOST_IS_PENDING</parameter>
        		<parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
        		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
 			<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
@@ -299,6 +306,7 @@
 			<parameter name="notifications_enabled">HOST_NOTIFICATIONS_ENABLED</parameter>
 			<parameter name="problem_acknowledged">HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
 			<parameter name="scheduled_downtime_depth">HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
+			<parameter name="host_is_pending">HOST_IS_PENDING</parameter>
 			
 			<!-- Some mapping for stupid filters -->
 			<parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
@@ -352,7 +360,7 @@
 										images/icons/server.png
 									</tpl>
 									<tpl if="host_icon != ''" />
-										{host_icon}
+										images/icinga/{host_icon}
 									</tpl>
 
 								]]>
@@ -507,7 +515,68 @@
                 
                 <!--  <parameter name="field">A_NEW_FIELD_TO_SORT</parameter> -->
             </order>
-        </field>  
+        </field>
+        
+        <field name="host_alias">
+            <datasource>
+            	<parameter name="field">HOST_ALIAS</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Alias</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_ALIAS</parameter>
+				<parameter name="api_valuefield">HOST_ALIAS</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field> 
+        
+        <field name="host_display_name">
+            <datasource>
+            	<parameter name="field">HOST_DISPLAY_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Display name</parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+                
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+				<parameter name="subtype">appkit.ext.filter.api</parameter>
+				<parameter name="operator_type">text</parameter>
+				<parameter name="api_target">host</parameter>
+				<parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
+				<parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="direction">ASC</parameter>
+            </order>
+        </field> 
+
 
 
 <!--	Example for adding a iframe cronk that creates an url depending on db-variables
@@ -705,6 +774,7 @@
 
 					<parameter>
 	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        :
 	                	<parameter name="function">ajaxClick</parameter>
 
 	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
@@ -712,8 +782,8 @@
 
 	                	<parameter name="arguments">
 	                		<parameter name="title">Detailed hostinfo</parameter>
-	                		<parameter name="src_id">hostinfo</parameter>
-	                		<parameter name="filter">
+	                		<parameter name="src_id">hostinfo</parameter> 
+							<parameter name="filter">
 	                			<parameter name="host">host_name</parameter>
 	                		</parameter>
 	                	</parameter>
@@ -1037,9 +1107,7 @@
                 <parameter name="jsFunc">
                 	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                 	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                 
                 </parameter>
                 
             </display>

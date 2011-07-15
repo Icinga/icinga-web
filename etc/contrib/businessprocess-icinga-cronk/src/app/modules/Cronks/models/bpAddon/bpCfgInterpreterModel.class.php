@@ -54,7 +54,7 @@ class Cronks_bpAddon_bpCfgInterpreterModel extends CronksBaseModel implements It
 			
 			$offset = strlen($matches[0][0])-1;
 			
-			preg_match_all("/(?>(?>(?P<HOST>[^;\&\|\+]{2,}[^ ]);(?P<SERVICE>[^\&\|\+]{2,}[^  &\+\|]))|(?P<BP>[^\&\|+]{2,}))/",
+			preg_match_all("/(?>(?>(: *?)?(?P<HOST>[^;\&\|\+]{2,}[^ ]);(?P<SERVICE>[^\&\|\+]{2,}[^  &\+\|]))|(?P<BP>[^\&\|+]{2,}))/",
 								$line,
 								$bpTargets,
 								PREG_PATTERN_ORDER,

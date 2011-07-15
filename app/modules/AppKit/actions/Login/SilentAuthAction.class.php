@@ -43,14 +43,12 @@ class AppKit_Login_SilentAuthAction extends AppKitBaseAction
 						$this->setAttribute('authenticated', true);
 					}
 					catch (AgaviSecurityException $e) {
-
+						if ($enable_dialog == false) {
+							return 'Error';
+						}
 					}
 				}
 			}
-		}
-
-		if ($enable_dialog !== true) {
-			return 'Error';
 		}
 
 		return $this->getDefaultViewName();

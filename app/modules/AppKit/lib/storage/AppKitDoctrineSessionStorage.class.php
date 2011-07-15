@@ -42,9 +42,15 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 	}
 	
 	public function sessionGC($lifetime) {
-		$maxlifetime = time()-$lifetime;
+		$diff = time() - $lifetime;
+		
+		$date = new DateTime(strftime('%Y-%m-%d %H:%M:%S', $diff));
+		// $date->sub(new DateInterval(sprintf('PT%dS', $lifetime)));
+
+		$this->getContext()->getLoggerManager()->log('Deleting sessions older that '. $date->format('c'), AgaviLogger::DEBUG);
+
 		$result = Doctrine_Query::create()
-		->andWhere('session_created < ?', array(date("c",$maxlifetime)))
+		->andWhere('session_created < ?', array($date->format('Y-m-d H:i:s')))
 		->delete('NsmSession')
 		->execute();
 		

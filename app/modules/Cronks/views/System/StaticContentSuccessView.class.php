@@ -26,11 +26,13 @@ class Cronks_System_StaticContentSuccessView extends CronksBaseView
 			try {
 				$file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.to'), $rd->getParameter('template'), '.xml');
 				
-				$model = $this->getContext()->getModel('System.StaticContent', 'Cronks');
+				$model = $this->getContext()->getModel('System.StaticContent', 'Cronks', array (
+				    'rparam' => $rd->getParameter('p', array ())
+				));
 				
 				$model->setTemplateFile($file->getRealPath());
 				
-				$content = $model->renderTemplate($rd->getParameter('render', 'MAIN'));
+				$content = $model->renderTemplate($rd->getParameter('render', 'MAIN'), $rd->getParameters());
 				
 				return sprintf('<div class="%s">%s</div>', 'static-content-container', $content);
 			}

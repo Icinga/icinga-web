@@ -2,7 +2,7 @@
 
 class Cronks_System_StaticContentModel extends CronksBaseModel {
 
-	private static $arrayNodes		= array('filter');
+	private static $arrayNodes		= array('filter', 'filterchain');
 	private static $indexAttributes	= array('id', 'name');
 
 	private $api = null;
@@ -81,7 +81,7 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 		static $c = 0;
 
 		$index = $this->namedIndex($element);
-
+		
 		if (!$index && $this->arrayNode($element)) {
 			$index = $fake++;
 		}
@@ -144,6 +144,10 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 	private function &getTemplates() {
 		return $this->xmlData['template_code'];
 	}
+	
+	private function &getChain() {
+	    return $this->xmlData['filterchain'];
+	}
 
 	/**
 	 *
@@ -156,7 +160,9 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 		if ($this->templateObject === null) {
 			$this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array (
 				'templates'		=> $this->getTemplates(),
-				'datasources'	=> $this->getDatasources()
+				'datasources'	=> $this->getDatasources(),
+			    'chain'			=> $this->getChain(),
+			    'rparam'		=> $this->getParameter('rparam', array ())
 			));
 		}
 

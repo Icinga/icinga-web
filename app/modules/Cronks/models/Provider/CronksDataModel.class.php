@@ -220,6 +220,17 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		return false;
 	}
 	
+	private function checkPrincipals($listofprincipals) {
+		$principals = AppKitArrayUtil::trimSplit($listofprincipals);
+		if (is_array($principals)) {
+			foreach($principals as $principal) {
+				if($this->agaviUser->hasCredential($principal))
+					return true;
+			}
+		}	
+		return false;
+	}
+
 	private function getXmlCronks($all=false) {
 		$cronks = AgaviConfig::get('modules.cronks.cronks');
 		
@@ -230,6 +241,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 			if (isset($cronk['groupsonly']) && $this->checkGroups($cronk['groupsonly']) !== true) {
 				continue;
 			}
+			elseif(isset($cronk['principalsonly']) && $this->checkPrincipals($cronk['principalsonly']) !== true) {
+				continue;
+			} 
 			elseif (isset($cronk['disabled']) && $cronk['disabled'] == true) {
 				continue;
 			}
@@ -241,7 +255,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 				continue;
 			}
 			
-			
+
 			$out[$uid] = array (
 				'cronkid'		=> $uid,
 				'module'		=> $cronk['module'],
@@ -532,9 +546,24 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 		$cronk = $q->execute()->getFirst();
 		
 		if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
+		    $this->getContext()->getLoggerManager()->log(sprintf('Cronk::DELETE preare to delete %s (%s)', $cronkid, $cronkname), AgaviLogger::INFO);
+		    
 			Doctrine_Manager::getInstance()->getCurrentConnection()->beginTransaction();
-			$cronk->CronkCategoryCronk->delete();
-			$cronk->CronkPrincipalCronk->delete();
+			
+			
+			# $cronk->CronkCategoryCronk->delete();
+			$removed = Doctrine_Query::create()->delete('CronkCategoryCronk')
+			->andWhere('ccc_cronk_id=?', array($cronk->cronk_id))->execute();
+			
+			$this->getContext()->getLoggerManager()->log(sprintf('Cronk::DELETE deleted %d category relations', $removed), AgaviLogger::DEBUG);
+			
+			# $cronk->CronkPrincipalCronk->delete();
+			
+			$removed = Doctrine_Query::create()->delete('CronkPrincipalCronk')
+			->andWhere('cpc_cronk_id=?', array($cronk->cronk_id))->execute();
+			
+			$this->getContext()->getLoggerManager()->log(sprintf('Cronk::DELETE deleted %d principal relations', $removed), AgaviLogger::DEBUG);
+			
 			$cronk->save();
 			Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
 			

@@ -2,7 +2,7 @@
 
 // +---------------------------------------------------------------------------+
 // | This file is part of the Agavi package.                                   |
-// | Copyright (c) 2005-2010 the Agavi Project.                                |
+// | Copyright (c) 2005-2011 the Agavi Project.                                |
 // | Based on the Mojavi3 MVC Framework, Copyright (c) 2003-2005 Sean Kerr.    |
 // |                                                                           |
 // | For the full copyright and license information, please view the LICENSE   |
@@ -32,7 +32,7 @@
  *
  * @deprecated Superseded by AgaviXmlConfigHandler, will be removed in Agavi 1.1
  *
- * @version    $Id: AgaviConfigHandler.class.php 4399 2010-01-11 16:41:20Z david $
+ * @version    $Id: AgaviConfigHandler.class.php 4667 2011-05-20 12:34:58Z david $
  */
 abstract class AgaviConfigHandler extends AgaviBaseConfigHandler implements AgaviILegacyConfigHandler
 {

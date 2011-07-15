@@ -204,8 +204,9 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 		if (!is_array($value)) {
 			throw new AppKitExtJsonDocumentException('$value must be an associative array!');
 		}
-
+	
 		$diff = array_diff_key($value, $this->fields);
+	
 
 		
 		if (is_array($diff) && count($diff)>0) {
@@ -213,7 +214,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 				$this->hasFieldBulk($diff);
 			}
 			else {
-				throw new AppKitExtJsonDocumentException('$value keys does not match field data set!');
+				//throw new AppKitExtJsonDocumentException('$value keys does not match field data set!');
 			}
 		}
 

@@ -120,6 +120,7 @@ Available targets:
 				<phing phingfile="additional.xml" inheritAll="true" />
 			</then>
 		</if>
+	
 	</target>
 
 	
@@ -185,6 +186,11 @@ Available targets:
 		<copy file="etc/db.ini" todir="${MODULE_Name}/" />
 		<copy file="build.properties" todir="${MODULE_Name}/" />
 		<!-- Packing -->
+		<copy todir="${MODULE_Name}" >
+			<fileset dir="./scripts">
+				<include name="*.sh"/>
+			</fileset>
+		</copy>
 		<tar basedir="${MODULE_Name}/." destfile="${MODULE_Name}_module.tar" compression="gzip" />
 		
 	</target>

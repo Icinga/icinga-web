@@ -74,7 +74,17 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 		foreach (self::$source_map as $class_target => $config_target) {
 			$search_keys = AppKitArrayUtil::trimSplit($this->getParameter($config_target, self::$source_map_defaults[$class_target]));
 			if (isset($search_keys[0]) && ($search_value = $source->getParameter($search_keys[0])) ) {
-				$this->{ $class_target } = $search_value;
+				if ($class_target == 'auth_name') {
+					$search_value = strtolower($search_value);
+					if ($strip = strtolower($this->getParameter('auth_strip_domain', ''))) {
+						$m = '~@' . preg_quote($strip, '~') . '~';
+						$this->{ $class_target } = preg_replace($m, '', $search_value);
+					} else {
+						$this->{ $class_target } = $search_value;
+					}
+				} else {
+					$this->{ $class_target } = $search_value;
+				}
 			}
 		}
 

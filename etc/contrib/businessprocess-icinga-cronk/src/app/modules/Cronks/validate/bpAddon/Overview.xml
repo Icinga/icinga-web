@@ -52,6 +52,12 @@
 			</errors>
 		</validator>
 		
+		<validator class="string" name="state" required="false">
+			<argument>state</argument>
+			<errors>
+				<error>Validation initial state string failed!</error>
+			</errors>
+		</validator>
 		
 		<validator class="string" name="url" required="true">
 			<argument>p[url]</argument>
@@ -86,8 +92,15 @@
 			<errors>
 				<error>Validation of filters failed!</error>
 			</errors>
-		</validator>		
-		</validators>
+		</validator>
 		
+		<validator class="string" name="bpHideSelector" required="false">
+			<argument>p[bpHideSelector]</argument>
+			<errors>
+				<error>Validation of bpHideSelector failed!</error>
+			</errors>
+		</validator>
+		
+	</validators>
 	</ae:configuration>
 </ae:configurations>

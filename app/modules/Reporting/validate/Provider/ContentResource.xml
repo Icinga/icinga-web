@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Reporting/config/validators.xml"
+>
+	
+	<ae:configuration>
+		
+		<validators>
+			<validator class="string" name="jasperconfig" required="true">
+				<argument>jasperconfig</argument>
+				
+				<errors>
+					<error>Parameter for jasperconfig namespace (jasperconfig) validation failed</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="action" required="true">
+				<argument>action</argument>
+				
+				<errors>
+					<error>Could not validata parameter action. Should be some of meta, content</error>
+				</errors>
+			</validator>
+			
+			<validator class="AppKitUriValidator" name="uri" required="true">
+				<argument>uri</argument>
+				
+				<errors>
+					<error>Could not validate uri</error>
+				</errors>
+			</validator> 
+			
+			<validator class="number" name="inline" required="false">
+				<argument>inline</argument>
+				
+				<errors>
+					<error>Could not validata parateter inline. Must be 1 or 0 or NULL</error>
+				</errors>
+			</validator>
+		</validators>
+		
+	</ae:configuration>
+	
+</ae:configurations>

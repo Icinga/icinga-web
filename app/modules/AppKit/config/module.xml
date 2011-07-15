@@ -49,11 +49,13 @@
 				<setting name="user_preferences_default">
 					<ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
 					<ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
+					<ae:parameter name="org.icinga.grid.outputLength">70</ae:parameter>
 					<ae:parameter name="org.icinga.tabslider.changeTime">10</ae:parameter>
 					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
 					<ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
 					<ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
 					<ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
+					<ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
 				</setting>
 				
 				<!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
@@ -67,7 +69,9 @@
 					<ae:parameter>/js/ext3/examples/ux/css/ux-all.css</ae:parameter>
 					
 					<!-- layout styles -->
+				
 					<ae:parameter>/styles/icinga.css</ae:parameter>
+					<ae:parameter>/styles/icinga.site.css</ae:parameter>
 					<ae:parameter>/styles/icinga-icons.css</ae:parameter>
 					<ae:parameter>/styles/icinga-cronk-icons.css</ae:parameter>
 				</setting>

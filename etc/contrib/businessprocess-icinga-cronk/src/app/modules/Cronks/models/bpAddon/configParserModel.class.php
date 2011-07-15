@@ -38,16 +38,20 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 		} else {
 			if(!is_writeable($path))
 				throw new AppKitException("Can't write to config path ".$path);	
-		}
-		
+		} 
+		if($this->getConsistencyErrors($config)) {
+			throw new AppKitException("Config check failed, please check your syntax");	
+		}	
 		file_put_contents($file,$config);
 	}
 	protected function parseProcessesFromArray(array $object) {
 		$cfgParts = array();
+		
 		foreach($object["children"] as $process) {
 			$bp = $this->getContext()->getModel("bpAddon.businessProcess","Cronks",array($process));	
 			$cfgParts[] = array("obj" => $bp, "str" => $bp->__toConfig());
 		}
+	
 		$cfgString = $this->orderResultSet($cfgParts);
 		
 		$config = $this->getConfigHeader();
@@ -57,16 +61,23 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 	
 	protected function orderResultSet(array $cfgParts) {
 		$orderChanged = false;
+		$ringRef = array ();
+		$i=0;
+		
 		do {
+			$i++;
 			$orderChanged = false;		
-			$newOrder = array();		
+			$newOrder = array();
 			$processed = array();
+					
 			foreach($cfgParts as $pos=>$name) {
 				if(!is_array($name))
 					continue;
 
 				$bp = $name["obj"];
+				
 				foreach($bp->getSubProcesses() as $subProcess) {
+					
 					if(!$subProcess->hasCompleteConfiguration() 
 							&& !in_array($subProcess->getName(),$processed)) {
 						
@@ -81,12 +92,13 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 			}
 			
 			$cfgParts = $newOrder;
-		} while($orderChanged);
+		} while($orderChanged && $i<2);
 		$newOrder = array();
 		foreach($cfgParts as $part) {
 			$newOrder[] = $part["str"];
 		}
-		return $newOrder;
+		// make sure processed don't appear doubled
+		return array_unique($newOrder);
 	}
 	
 	protected function getConfigHeader() {
@@ -121,10 +133,10 @@ class Cronks_bpAddon_configParserModel extends CronksBaseModel
 		file_put_contents($file,$cfg);
 		$ret = 0;
 		// Call the check command and save 
-		ob_start();
-		system($bp["paths"]["bin"]."/".$bp["commands"]["checkConsistency"]." ".$file,$ret);
-		$systemResult = ob_get_clean();
-
+		$systemResult = array();
+		exec($bp["paths"]["bin"]."/".$bp["commands"]["checkConsistency"]." ".$file,$systemResult,$ret);
+		$systemResult = implode("\n",$systemResult);
+		
 		unlink($file);
 		if($ret)
 			return $systemResult;
