@@ -78,7 +78,8 @@ abstract class BaseIcingaServicegroups extends Doctrine_Record {
         $this->hasOne('IcingaServices as members', array(
                           'local' => 'servicegroup_id',
                           'foreign' => 'service_object_id',
-                          'refClass' => 'IcingaServicegroupMembers'
+                          'refClass' => 'IcingaServicegroupMembers',
+                          'idField' => 'servicegroup_id'
                       ));
     $this->hasOne('IcingaObjects as object', array(
             'local' => 'servicegroup_object_id',

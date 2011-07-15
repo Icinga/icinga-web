@@ -76,13 +76,36 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     public function execRead() {
         $request = $this->createRequestDescriptor();
         $this->applyModifiers($request); 
-        
-       
+         
+        $this->lastQuery = $request;
         $result = $request->execute(NULL,$this->resultType);
          
         return array("data"=>$result,"count"=>$request->count());
     }
+    /**
+    * Contains the last executed query
+    * @access private
+    * @var IcingaDoctrine_Query
+    **/
+    protected $lastQuery = null;
+
+    public function getSqlQuery() {
+        if(!$this->lastQuery)
+            return "";
+        return $this->lastQuery->getSqlQuery(); 
+    }
     
+    /**
+    *  Sets the database to read from 
+    *  
+    *  @param String    The database alias
+    *
+    *  @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
+    public function setConnection($connection) {
+        $this->connectionName = $connection;
+    }
+ 
     /**
     *   Register modifiers, the StoreClass itself can do nothing else than creating 
     *   a Query object which will be parsed through the Modifiers

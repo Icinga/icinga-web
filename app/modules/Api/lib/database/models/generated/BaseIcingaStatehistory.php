@@ -177,12 +177,12 @@ abstract class BaseIcingaStatehistory extends Doctrine_Record {
         
         $this->hasMany("IcingaServices as services",array(
             'local' => 'object_id',
-            'foreign' => 'object_id'
+            'foreign' => 'service_object_id'
         ));
 
         $this->hasMany("IcingaHosts as hosts",array(
             'local' => 'object_id',
-            'foreign' => 'object_id'
+            'foreign' => 'host_object_id'
         ));
         parent::setUp();
 

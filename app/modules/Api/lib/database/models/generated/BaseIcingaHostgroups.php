@@ -73,6 +73,11 @@ abstract class BaseIcingaHostgroups extends Doctrine_Record {
     }
 
     public function setUp() {
+        $this->hasOne('IcingaInstances as instance', array(
+                          'local' => 'instance_id',
+                          'foreign' => 'instance_id'
+                      ));
+
 
         $this->hasMany("IcingaHosts as members", array(
                            'local' => 'hostgroup_id',

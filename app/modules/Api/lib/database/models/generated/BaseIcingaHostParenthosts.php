@@ -1,6 +1,6 @@
 <?php
 // Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('IcingaHostParenthosts', 'default');
+
 
 /**
  * BaseIcingaHostParenthosts
@@ -67,7 +67,7 @@ abstract class BaseIcingaHostParenthosts extends Doctrine_Record {
                           'foreign' => 'instance_id'
                       ));
 
-        $this->hasOne('IcingaHosts as hosts', array(
+        $this->hasOne('IcingaHosts as host', array(
                           'local' => 'host_id',
                           'foreign' => 'host_id'
                       ));

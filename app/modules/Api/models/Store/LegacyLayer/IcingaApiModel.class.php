@@ -171,11 +171,156 @@ class Api_Store_Legacy_IcingaApiModel extends AbstractDataStoreModel  {
     }
 }
 */
+interface IcingaApiInterface {};
+class LegacyApiResultModel {
+    protected $data;
+    
+    public function __construct($data) {
+        $this->data = is_int($data) ? array("count" =>array($data)) : $data;
+    }
+    public function getRow() {
+        $d = current($this->data);
+        next($this->data);
+        return $d;
+    }
+    public function getAll() {
+        if(is_object($this->data))
+            return $this->data->toArray();
+        else if(is_array($this->data))
+            return $this->data;
+    }
 
-class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel {
+}
+
+class ApiLegacyLayerCountObject {
+    public function count() {
+        return 1;
+    }
+    private $count;
+    public function get($noMatterWhat) {
+        return $this->count;
+    }
+    public function __construct($c) {
+        $this->count = $c;
+    }
+}
+
+class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel implements IcingaApiInterface 
+{
+    protected $isCount = false;
+    protected $resultType = Doctrine_Core::HYDRATE_ARRAY;
+    public function setResultType($type) {
+        if($type == IcingaApiConstants::RESULT_OBJECT)
+            $this->setResultType("RECORD");
+        if($type == IcingaApiConstants::RESULT_ARRAY)
+            $this->setResultType("ARRAY");
+        return $this;
+    }
     protected function setupModifiers() {
         $this->registerStoreModifier("Store.LegacyLayer.TargetModifier","Api");  
+        $this->registerStoreModifier("Store.Modifiers.StorePaginationModifier","Api");
+        $this->registerStoreModifier("Store.Modifiers.StoreSortModifier","Api");
+        $this->registerStoreModifier("Store.Modifiers.StoreGroupingModifier","Api");
+    }
+ 
+    public function createSearch() {
+        $this->result = null;
+        return $this;
+    }
+   
+    public function setSearchOrder ($column, $direction = 'asc') { 
+        $this->result = null;
+        $this->setFields(array($column),true); 
+        $column = $this->resolveColumnAlias($column);    
+        $this->setSortfield($column);
+        $this->setDir(strtoupper($direction)); 	
+        return $this;
+    }
+	
+    public function setSearchLimit ($start, $length = false) {
+        $this->result = null;
+        $this->setOffset($start);
+        if($length)
+            $this->setLimit($length);
+        return $this;
+    }
+
+    public function setSearchTarget($target) {
+        $this->result = null;
+        parent::setSearchTarget($target);
+        return $this;
+    }
+    
+    public function setResultColumns($target) {
+        $this->result = null;
+        parent::setResultColumns($target);
+        return $this;
+    }
+
+    public function execRead() {
+        $request = $this->createRequestDescriptor();
+        $this->applyModifiers($request); 
+        $result = null;
+        $this->lastQuery = $request;
+      
+        if(!$this->isCount)
+            $result = $request->execute(NULL,$this->resultType);
+        else
+            $result = $request->count();
+        return $result; 
+    }
+    private $result = null;
+    
+    public function fetch() {
+        if($this->result)
+            return $this->result;   
+
+        $data =  $this->execRead();     
+       
+        if($this->isCount) {
+            $fields = $this->getFields();
+            $countField = explode(".",$fields[0],2);
+            if(count($countField) > 1)
+                $countField = $countField[1];
+            $data = array(
+                "0" => array("COUNT_".strtoupper($countField) => $data)
+            );     
+            
+           
+        }
+        $this->result = $this->getContext()->getModel(
+            "Store.LegacyLayer.LegacyApiResult","Api",array(
+                "result" => $data 
+            )
+        );
+        return $this->result;
+    }
+   
+
+    public function setSearchFilter() {
+        return $this;
     } 
+
+   	public function setSearchGroup ($columns) {
+		if (!is_array($columns)) {
+			$columns = array($columns);
+		}
+        
+        $this->setFields($columns,true); 
+        foreach($columns as &$column) {
+            $column = $this->resolveColumnAlias($column);    
+        }
+        $this->setGroupfields($columns);
+        return $this;
+    }
+
+    public function setSearchType($type) {
+        if($type == IcingaApiConstants::SEARCH_TYPE_COUNT) 
+            $this->isCount = true;
+        else
+            $this->isCount = false;
+        return $this;
+    }   
 
 } 
 

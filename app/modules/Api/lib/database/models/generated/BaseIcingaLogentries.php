@@ -22,7 +22,7 @@
 abstract class BaseIcingaLogentries extends Doctrine_Record {
     public function setTableDefinition() {
         $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaLogentries")->getPrefix();
-        $this->setTableName($prefix.'logentry_id');
+        $this->setTableName($prefix.'logentries');
         $this->hasColumn('logentry_id', 'integer', 4, array(
                              'type' => 'integer',
                              'length' => 4,

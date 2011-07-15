@@ -106,7 +106,8 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     private $target = array();
     private $fields = array();
     private $joins = array();
-   
+    private $distinct = false;
+ 
     /**
     * Sets the target table 
     * @param String The table to request data from
@@ -115,6 +116,36 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     **/
     public function setTarget($target) {
         $this->target = $target;
+    }
+   
+    public function reset() {
+        $this->target = array();
+        $this->joins = array();
+        $this->fields = array();
+        $this->staticWhereConditions = array();
+        $this->groupFields = array();
+        $this->sortFields = array(); 
+       
+    }
+    
+    /**
+    * Sets whether the select should use distinct to avoid dublettes
+    *
+    * @param Boolean
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
+    public function setDistinct($bool) {
+        $this->distinct = $bool;
+    }
+    
+    /**
+    * Returns if the select uses distinct to avoid dublettes
+    *
+    * @return Boolean
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/
+    public function isDistinct() {
+        return $this->distinct;
     }
     
     /**
@@ -164,7 +195,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     public function setFields($fields, $useColumnAlias = false) {
         if(!is_array($fields))
             $fields = array($fields);
-        $regExp = "/^(?<alias>\w+)\.(?<field>\w+)/";
+        $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
         foreach($fields as $field) { 
             $aliasField = "";
             if($useColumnAlias && isset($this->columns[$field])) {
@@ -187,10 +218,11 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             * Because of this, all alias fields will be added additionaly to the original fields
             * instead of replacing them in the result set
             */
+           
             if($aliasField) 
                 $this->fields[] = $field." AS ".$aliasField;
 
-        } 
+        }    
     }
   
      
@@ -276,9 +308,11 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected function modifyImpl(Doctrine_Query &$o) { 
-        $o->select(implode(",",$this->fields));
-         
+        foreach($this->fields as $field)
+            $o->addSelect($field); 
+        $o->distinct($this->isDistinct()); 
         $o->from($this->target." ".$this->mainAlias);
+        $this->addDefaultJoins();
         foreach($this->joins as $join) {
             if(isset($join["alwaysSelect"]))
                 $o->addSelect($join["alias"].".".$join["alwaysSelect"]);
@@ -287,7 +321,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
                 $joinTxt .= "AND ".$join["AND"];
             if(isset($join["OR"]))
                 $joinTxt .= "OR ".$join["OR"];
- 
+       
             if(!isset($join["type"])) 
                 $join["type"] = $this->defaultJoinType;
             if($join["type"] == "inner") { 
@@ -296,11 +330,25 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
                 $o->leftJoin($joinTxt);
             }
         }
+        $table = Doctrine_Manager::getInstance()
+                ->getCurrentConnection()
+                ->getTable($this->target);
+      
+        
         foreach($this->staticWhereConditions as $cond) {
+           
             if(isset($cond[1]) && $cond[1] != null)
                 $o->addWhere($cond[0],$cond[1]);
             else
                 $o->addWhere($cond[0]);
+        }
+    }
+
+    protected function addDefaultJoins() {
+        foreach($this->aliasDefs as $key=>$alias) {
+            if(isset($alias["joinAlways"]))
+                $this->addAlias($key);
+        
         }
     }
 
@@ -313,10 +361,11 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/    
     protected function addAlias($alias) {
+        
         if($alias == $this->mainAlias)
             return true; //ignore base table alias
         if(!isset($this->aliasDefs[$alias]))
-            throw new AppKitException("Tried to access hoststore field with invalid alias $alias");
+            throw new AppKitException("Tried to access hoststore field with invalid alias $alias (Mainalias: $this->mainAlias)");
     
         $join = $this->aliasDefs[$alias];
         $join["alias"] = $alias;

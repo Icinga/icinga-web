@@ -182,7 +182,14 @@ abstract class BaseIcingaComments extends Doctrine_Record {
                           'local' => 'instance_id',
                           'foreign' => 'instance_id'
                       ));
-
+        $this->hasOne('IcingaHosts as host', array(
+            'local' => 'object_id',
+            'foreign' => 'host_object_id'
+        ));
+        $this->hasOne('IcingaServices as service', array(
+            'local' => 'object_id',
+            'foreign' => 'service_object_id'
+        ));
         $this->hasOne('IcingaObjects as object', array(
             'local' => 'object_id',
             'foreign' => 'object_id'
