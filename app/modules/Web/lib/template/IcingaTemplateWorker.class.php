@@ -60,7 +60,7 @@ class IcingaTemplateWorker {
         $this->template =& $template;
     }
 
-    public function setApi(IcingaApi $api) {
+    public function setApi(/*IcingaApiInterface*/ $api) {
         $this->api = $api;
     }
 
@@ -96,11 +96,11 @@ class IcingaTemplateWorker {
 
         if ($params->getParameter('countmode', null) !== 'simple') {
             if ($this->api_count !== null) {
-                $this->api_count->setSearchType(IcingaApi::SEARCH_TYPE_COUNT);
+                $this->api_count->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT);
 
                 if (is_array(($fields = $params->getParameter('countfields'))) && count($fields)) {
                     $this->api_count->setResultColumns($fields);
-                    $this->api_count->setResultType(IcingaApi::RESULT_ARRAY);
+                    $this->api_count->setResultType(IcingaApiConstants::RESULT_ARRAY);
                     $result  = $this->api_count->fetch();
                     // Try to determine the fields
                     $row = $result->getRow();
@@ -150,15 +150,16 @@ class IcingaTemplateWorker {
                 if ($this->result_count === null) {
                     $this->result_count = $result->getResultCount();
                 }
-
+              
                 $tmp = $this->rewriteResultRow($result);
-
+            
+               
                 /*
                  * @todo add additional fields and content here
                  */
                 $data[] = $tmp;
             }
-
+ 
             return $data;
         }
     }
@@ -168,7 +169,7 @@ class IcingaTemplateWorker {
      * @param IcingaApiResult$result
      * @return ArrayObject
      */
-    private function addAdditionalFieldResults(IcingaApiResult $result) {
+    private function addAdditionalFieldResults(/*IcingaApiResultInterface*/ $result) {
         $out = new ArrayObject();
         $ds = $this->getTemplate()->getSection('datasource');
 
@@ -191,8 +192,10 @@ class IcingaTemplateWorker {
      * @param IcingaApiResult $result
      * @return ArrayObject
      */
-    private function rewriteResultRow(IcingaApiResult $result) {
-        $row = new ArrayObject($result->getRow());
+    private function rewriteResultRow(/*IcingaApiResult*/ $result) {
+        
+        $row = $result->getRow();
+        $row = new ArrayObject($row);
         $out = new ArrayObject();
 
         foreach($this->getTemplate()->getFields() as $key=>$field) {
@@ -263,7 +266,7 @@ class IcingaTemplateWorker {
         return $this->getTemplate()->getFieldByName($field_name, 'datasource')->getParameter('field');
     }
 
-    private function setPrivileges(IcingaApiSearchInterface &$search) {
+    private function setPrivileges(/*IcingaApiSearchInterface*/ &$search) {
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
     }
 
@@ -293,7 +296,7 @@ class IcingaTemplateWorker {
 
             // our query target
             $search->setSearchTarget(AppKit::getConstant($params->getParameter('target')));
-
+           
             if ($params->getParameter('filterPresets')) {
                 foreach($params->getParameter('filterPresets') as $type=>$preset) {
                     $searchGroup = $search->createFilterGroup($type);
