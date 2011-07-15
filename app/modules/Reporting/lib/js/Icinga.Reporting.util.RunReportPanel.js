@@ -107,11 +107,8 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		this.add({
 			layout : 'fit',
 			html : String.format('<h1>{0}</h1>{1}', this.nodeAttributes.text, this.nodeAttributes.uri),
-			border : true,
-			bodyStyle : {
-				margin: '2px 0px 10px 0px',
-				padding: '2px'
-			}
+			border : false,
+			cls : 'simple-content-box'
 		});
 		
 		if (this.parameterData.length == 0) {

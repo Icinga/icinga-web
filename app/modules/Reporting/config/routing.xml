@@ -17,10 +17,9 @@
 								<default for="output_type">OUTPUT_TYPE</default>
 							</defaults>
 						</route>
-						<route name=".content" pattern="^/content/(action:(\w+))" action="Provider.ContentResource">
-							<defaults>
-								<default for="action">meta</default>
-							</defaults>
+						<route name=".content" pattern="^/content">
+							<route name=".meta" pattern="^/meta" action="Provider.ContentResource" />
+							<route name=".content" pattern="^/content" action="Provider.ContentResource" output_type="simple" />
 						</route>
 					</route>
 					

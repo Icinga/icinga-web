@@ -18,12 +18,13 @@ class AppKitAgaviContext extends AgaviContext {
 		$this->buildVersionString();
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
-		$this->initializeAutosettings();
 		$this->initializeModules();
 		$this->initializeEventHandling();
 		$this->setLanguageDomain();
 		
 		parent::initialize();
+		
+		$this->initializeAutosettings();
 		
 		$this->initializeExceptionHandling();
 	}
@@ -72,6 +73,9 @@ class AppKitAgaviContext extends AgaviContext {
 				AgaviConfig::set('org.icinga.appkit.web_path', AppKitStringUtil::extractWebPath(), true, true);
 			}
 		}
+		
+		// Global temp directory
+		AgaviConfig::set('core.tmp_dir', AgaviConfig::get('core.data_dir'). '/tmp');
 	}
 
 	private function buildVersionString() {
