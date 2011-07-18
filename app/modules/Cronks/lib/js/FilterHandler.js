@@ -46,6 +46,8 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 			autoDestroy : true,
 			url : AppKit.c.path + this.def_webpath,
 
+			root : 'result',
+
 			baseParams : {
 				target : meta.api_target,
 				order_col: (meta.api_order_col || meta.api_keyfield),
@@ -55,8 +57,28 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 
 			idProperty : (meta.api_id || meta.api_keyfield),
 
-			fields : fields
+			fields : fields,
+			
+			listeners : {
+				beforeload : function(store, options) {
+					if (!Ext.isEmpty(store.baseParams.query)) {
+						store.baseParams.filters_json = Ext.util.JSON.encode({
+							type : 'AND',
+							field : [{
+								type : 'atom',
+								field : [vf],
+								method : ['like'],
+								value : [String.format('*{0}*', store.baseParams.query)]
+							}]
+						});
+					}
+				}
+			}
 		});
+		
+		apiStore.load();
+		
+		AppKit.log(apiStore);
 
 		cfg = Ext.apply(cfg || {}, {
 			store : apiStore,
@@ -72,6 +94,8 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 
 		// Notify the parent class
 		Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
+		
+		AppKit.log(this);
 	}
 });
 
@@ -296,7 +320,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 	getApiCombo : function(meta) {
 		return new Cronk.IcingaApiComboBox({
 			typeAhead: false,
-			triggerAction: 'query',
+			triggerAction: 'all',
 			forceSelection: false,
 			'name': meta.name + '-field',
 			'id': meta.name + '-field',

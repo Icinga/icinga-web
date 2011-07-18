@@ -282,6 +282,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		var previewTab = tabs.add({
 			xtype : 'panel',
 			title : this.nodeAttributes.text,
+			iconCls : 'icinga-icon-eye',
 			closable : true,
 			bodyCfg : {
 				tag : 'iframe',

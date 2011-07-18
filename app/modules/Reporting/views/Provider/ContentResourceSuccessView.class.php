@@ -47,6 +47,15 @@ class Reporting_Provider_ContentResourceSuccessView extends ReportingBaseView {
 	    if ($m['has_attachment'] && $m['download_allowed']) {
 	        $this->getResponse()->setHttpHeader('content-length', $m['content_length'], true);
 	        $this->getResponse()->setHttpHeader('content-type', $m['content_type'], true);
+	        
+	        $content_disposition = sprintf(
+	        	'%s; filename=%s',
+	        	$rd->getParameter('inline') ? 'inline' : 'attachment',
+	        	$m['name']
+	        );
+	        
+	        $this->getResponse()->setHttpHeader('content-disposition', $content_disposition, true);
+	        
 	        return $resource->getContent();
 	    }
 	    

@@ -144,7 +144,18 @@ Icinga.Reporting.util.ContentResourcePanel = Ext.extend(Ext.Panel, {
 	},
 	
 	processDownload : function(b, e) {
+		var eId = 'icinga-reporting-dl-resource-iframe';
+		Ext.DomHelper.append(Ext.getBody(), {
+			tag : 'iframe',
+			id : eId,
+			src : Ext.urlAppend(this.content_url, Ext.urlEncode({
+				uri : this.node.attributes.uri
+			}))
+		});
 		
+		(function() {
+			Ext.get(eId).remove();
+		}).defer(2000);		
 	},
 	
 	processPreview : function(b, e) {
@@ -152,6 +163,7 @@ Icinga.Reporting.util.ContentResourcePanel = Ext.extend(Ext.Panel, {
 		tabs.setActiveTab(tabs.add({
 			title : this.data.data.name,
 			closable : true,
+			iconCls : 'icinga-icon-eye',
 			bodyCfg : {
 				tag : 'iframe',
 				src : Ext.urlAppend(this.content_url, Ext.urlEncode({
