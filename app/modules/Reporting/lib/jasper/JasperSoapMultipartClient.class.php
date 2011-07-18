@@ -2,12 +2,25 @@
 
 class JasperSoapMultipartClient extends SoapClient {
     
+    const XML_VERSION = '1.0';
+    const XML_ENCODING = 'UTF-8';
+    
     const CID_ATTACHMENT = 'attachment';
     const CID_REPORT = 'report';
     const CID_RESPONSE = 'direct-soap-reply';
-    const SOAP_BLIND_ERROR = 'looks like we got no XML document';
+    
     const HEADER_SPLIT = "\r\n\r\n";
     
+    const SOAP_BLIND_ERROR = 'looks like we got no XML document';
+    const SOAP_NS = 'http://schemas.xmlsoap.org/soap/envelope/';
+    const SOAP_ROOT = 'Envelope';
+    
+    const JASPER_NS = 'http://axis2.ws.jasperserver.jaspersoft.com';
+    
+    /**
+     * @var JasperRequestXmlDoc
+     */
+    private $__request = null;
     private $__header = array ();
     private $__data = array ();
     
@@ -23,6 +36,7 @@ class JasperSoapMultipartClient extends SoapClient {
      * @return boolean
      */
     public function doRequest(JasperRequestXmlDoc $doc) {
+        $this->__request =& $doc;
         $function = $doc->getOperationName();
         
         try {
@@ -59,7 +73,52 @@ class JasperSoapMultipartClient extends SoapClient {
             $this->__data[self::CID_RESPONSE] = $this->__getLastResponse();
         }
         
+        $this->decodeSoapReplies();
+        
         return true;
+    }
+    
+    private function decodeSoapReplies() {
+        foreach ($this->__data as &$data) {
+            if ($this->isSoapReply($data)) {
+                $data = $this->decodeSoapReply($data);
+            }
+        }
+    }
+    
+    private function isSoapReply($content) {
+        try {
+            if (preg_match('/<\?XML.+VERSION=[^>]+>.*</i', $content)) {
+                
+                $dom = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
+                $dom->loadXML($content);
+                $root = $dom->childNodes->item(0);
+                
+                if ($root->namespaceURI == self::SOAP_NS && $root->localName == self::SOAP_ROOT) {
+                    return true;
+                }
+            }
+        } catch (Exception $r) {
+            // We want to return always false on error or nomatch conditions
+        }
+        
+        return false;
+    }
+    
+    private function decodeSoapReply($content) {
+        $dom = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
+        $dom->loadXML($content);
+        
+        $xpath = new DOMXPath($dom);
+        $xpath->registerNamespace('soapenv', self::SOAP_NS);
+        $xpath->registerNamespace('jasper', self::JASPER_NS);
+        
+        $nodes = $xpath->evaluate(sprintf('soapenv:Body/jasper:%1$sResponse/%1$sReturn[@xsi:type=\'xsd:string\']', $this->__request->getOperationName()));
+        
+        if ($nodes && $nodes->length == 1) {
+            $result = $nodes->item(0)->nodeValue;
+            return $result;
+        }
     }
     
     private function parseMultipartSoapReply() {
@@ -179,6 +238,30 @@ class JasperSoapMultipartClient extends SoapClient {
         return array_key_exists($content_id, $this->__header) && array_key_exists($content_id, $this->__data);
     }
     
+    /**
+     * If we have a message for reportdata
+     * @return boolean
+     */
+    public function hasReport() {
+        return $this->hasContentId(self::CID_REPORT);
+    }
+    
+    /**
+     * If we have a message containing attachment
+     * @return boolean
+     */
+    public function hasAttachment() {
+        return $this->hasContentId(self::CID_ATTACHMENT);
+    }
+    
+    /**
+     * To get the attachment size quickly
+     * @param string $content_id
+     * @return integer
+     */
+    public function getContentSize($content_id) {
+        return strlen($this->getDataFor($content_id));
+    }
 }
 
 ?>

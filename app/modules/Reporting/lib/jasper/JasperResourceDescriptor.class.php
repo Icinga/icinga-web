@@ -137,7 +137,7 @@ class JasperResourceDescriptor extends DOMDocument {
      */
     public function getCrdate() {
         // Java provides ms
-        return $this->__crdate/1000;
+        return strftime('%Y-%m-%d %H:%M:%S', $this->__crdate/1000);
     }
     
     /**

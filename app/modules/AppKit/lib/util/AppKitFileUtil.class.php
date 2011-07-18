@@ -37,6 +37,15 @@ class AppKitFileUtil {
 		throw new AppKitFileUtilException('File %s does not exist!', $filename);
 	}
 	
+	public static function getMimeTypeForData($data, $default = null) {
+	    if (class_exists('finfo', false)) {
+	        $finfo = new finfo(FILEINFO_MIME);
+	        return $finfo->buffer($data);
+	    }
+	    
+	    return $default;
+	}
+	
 }
 
 class AppKitFileUtilException extends AppKitException {}

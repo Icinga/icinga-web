@@ -45,8 +45,25 @@ table {
 	border-collapse: collapse;
 }
 
+dt {
+	font-weight: bolder;
+}
+
+dd {
+	margin: 0 0 5px 10px;
+}
+
 #content {
 	padding: 5px 5px;
+}
+
+.simple-content-box {
+	margin: 10px 0 10px 0;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px #c0c0c0 solid;
 }
 
 .simple-content-container {

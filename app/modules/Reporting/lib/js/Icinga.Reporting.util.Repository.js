@@ -23,6 +23,7 @@ Icinga.Reporting.util.Repository = Ext.extend(Icinga.Reporting.abstract.ResizedC
 		
 		this.contentResource = new Icinga.Reporting.util.ContentResourcePanel({
 			region : 'center',
+			resource_url : this.resource_url,
 			parentCmp : this
 		});
 		

@@ -19,11 +19,47 @@ class Reporting_Provider_ContentResourceSuccessView extends ReportingBaseView {
 	        'uri' => $rd->getParameter('uri')
 	    ));
 	    
-	    if ($rd->getParameter('action') == 'meta') {
-	        $data = $resource->getMetaData();
+	    $resource->doJasperRequest();
+	    
+	    return json_encode(array (
+	    	'success' => true,
+	    	'count' => count(($data=$resource->getMetaData())),
+	    	'data' => $data
+	    ));
+	}
+	
+	public function executeSimple(AgaviRequestDataHolder $rd) {
+	    
+	    $client = $this->getContext()->getModel('JasperSoapFactory', 'Reporting', array (
+	    	        'jasperconfig' => $rd->getParameter('jasperconfig')
+	    ));
+	     
+	    $resource = $this->getContext()->getModel('ContentResource', 'Reporting', array (
+	    	        'jasperconfig' => $rd->getParameter('jasperconfig'),
+	    	        'client' => $client,
+	    	        'uri' => $rd->getParameter('uri')
+	    ));
+	    
+	    $resource->doJasperRequest();
+	    
+	    $m = $data=$resource->getMetaData();
+	    
+	    if ($m['has_attachment'] && $m['download_allowed']) {
+	        $this->getResponse()->setHttpHeader('content-length', $m['content_length'], true);
+	        $this->getResponse()->setHttpHeader('content-type', $m['content_type'], true);
+	        
+	        $content_disposition = sprintf(
+	        	'%s; filename=%s',
+	        	$rd->getParameter('inline') ? 'inline' : 'attachment',
+	        	$m['name']
+	        );
+	        
+	        $this->getResponse()->setHttpHeader('content-disposition', $content_disposition, true);
+	        
+	        return $resource->getContent();
 	    }
 	    
-	    return json_encode($rd);
+	    return null;
 	}
 }
 

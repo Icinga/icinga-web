@@ -40,7 +40,8 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 		if (this.enable_repository == true) {
 			
 			this.appRepository = new Icinga.Reporting.util.Repository({
-				treeloader_url: this.treeloader_url,
+				treeloader_url : this.treeloader_url,
+				resource_url : this.resource_url,
 				parentCmp : this
 			});
 			

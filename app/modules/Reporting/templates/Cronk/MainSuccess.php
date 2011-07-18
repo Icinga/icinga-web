@@ -10,6 +10,7 @@
     $treeloader_url = $ro->gen('modules.reporting.provider.treeloader', $provider_config);
     $parampanel_url = $ro->gen('modules.reporting.provider.parameters', $provider_config);
     $creator_url = $ro->gen('modules.reporting.provider.generate', $provider_config);
+    $resource_url = $ro->gen('modules.reporting.provider.content.meta', $provider_config);
     
     
 ?>
@@ -29,7 +30,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		
 		treeloader_url : '<?php echo $treeloader_url; ?>',
 		parampanel_url : '<?php echo $parampanel_url; ?>',
-		creator_url : '<?php echo $creator_url; ?>'
+		creator_url : '<?php echo $creator_url; ?>',
+		resource_url : '<?php echo $resource_url; ?>'
 	});
 
 	// Better to remote all existing components
