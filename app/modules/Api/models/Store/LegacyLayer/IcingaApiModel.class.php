@@ -1,176 +1,5 @@
 <?php
-/**
-* Emulates the behaviour of the deprecated icinga-api, should be removed 
-* when migration to doctrine is finished on the frontend/backend
-*
-* @package Icinga_Api
-* @category LegacyLayer
-* @author Jannis Moßhammer <jannis.mosshammer@netways.de>
-**/ 
-interface IcingaApiConstants {
 
-	// CONNECTION TYPES
-	const CONNECTION_IDO = 'Ido';
-	const CONNECTION_IDO_ABSTRACTION = 'IdoAbstraction';
-	const CONNECTION_FILE = 'File';
-	const CONNECTION_LIVESTATUS = 'Livestatus';
-
-	// CONTACT SOURCES
-	const CONTACT_SOURCE_PHP_AUTH_USER = 'PHP_AUTH_USER';
-
-	// DEBUGGING
-	const DEBUG_OVERALL_TIME = 'overall time';
-	const DEBUG_LEVEL_ALL = 0xff;
-	const DEBUG_LEVEL_ERROR = 0x01;
-	const DEBUG_LEVEL_WARNING = 0x02;
-	const DEBUG_LEVEL_DEBUG = 0x08;
-	
-	// FILE SOURCES
-	const FILE_OBJECTS = 'objects';
-	const FILE_RETENTION = 'retention';
-	const FILE_STATUS = 'status';
-
-	// TARGET TYPES
-	const TARGET_INSTANCE = 'instance';
-	const TARGET_HOST = 'host';
-	const TARGET_SERVICE = 'service';
-	const TARGET_HOSTGROUP = 'hostgroup';
-	const TARGET_SERVICEGROUP = 'servicegroup';
-	const TARGET_CONTACT = 'contact';
-	const TARGET_CONTACTGROUP = 'contactgroup';
-	const TARGET_TIMEPERIOD = 'timeperiod';
-	const TARGET_HOSTSTATUS = 'hoststatus';
-	const TARGET_SERVICESTATUS = 'servicestatus';
-	const TARGET_CUSTOMVARIABLE = 'customvariable';
-	const TARGET_HOST_TIMES = 'hosttimes';
-	const TARGET_SERVICE_TIMES = 'servicetimes';
-	const TARGET_CONFIG = 'config';
-	const TARGET_PROGRAM = 'program';
-	const TARGET_LOG = 'log';
-	const TARGET_HOST_STATUS_SUMMARY = 'host_status_summary';
-	const TARGET_SERVICE_STATUS_SUMMARY = 'service_status_summary';
-	const TARGET_HOST_STATUS_HISTORY = 'host_status_history';
-	const TARGET_SERVICE_STATUS_HISTORY = 'service_status_history';
-	const TARGET_HOST_PARENTS = 'host_parents';
-	const TARGET_NOTIFICATIONS = 'notifications';
-	const TARGET_HOSTGROUP_SUMMARY = 'hostgroup_summary';
-	const TARGET_SERVICEGROUP_SUMMARY = 'servicegroup_summary';
-	const TARGET_COMMAND = 'command';	// livestatus only
-	const TARGET_DOWNTIME = 'downtime';
-	const TARGET_DOWNTIMEHISTORY = 'downtimehistory';
-	const TARGET_COMMENT = 'comment';
-	const TARGET_STATUS = 'status';		// livestatus only
-	const TARGET_HOST_SERVICE = 'host_service';
-	// SEARCH TYPES
-	const SEARCH_TYPE_COUNT = 'count';
-
-	// SEARCH AGGREGATORS
-	const SEARCH_OR = 'or';
-	const SEARCH_AND = 'and';
-
-	// MATCH TYPES
-	const MATCH_EXACT = '=';
-	const MATCH_NOT_EQUAL = '!=';
-	const MATCH_LIKE = 'like';
-	const MATCH_NOT_LIKE = 'not like';
-	const MATCH_GREATER_THAN = '>';
-	const MATCH_GREATER_OR_EQUAL = '>=';
-	const MATCH_LESS_THAN = '<';
-	const MATCH_LESS_OR_EQUAL = '<=';
-	
-	// RESULT TYPES
-	const RESULT_OBJECT = 'object';
-	const RESULT_ARRAY = 'array';
-
-	// HOST STATES
-	const HOST_STATE_OK = 0;
-	const HOST_STATE_UNREACHABLE = 1;
-	const HOST_STATE_DOWN = 2;
-
-	// SERVICE STATES
-	const SERVICE_STATE_OK = 0;
-	const SERVICE_STATE_WARNING = 1;
-	const SERVICE_STATE_CRITICAL = 2;
-	const SERVICE_STATE_UNKNOWN = 3;
-
-	// COMMAND INTERFACES
-	const COMMAND_PIPE = 'Pipe';
-	const COMMAND_SSH = 'Ssh';
-
-	// COMMAND FIELDS
-	const COMMAND_INSTANCE = 'instance';
-	const COMMAND_HOSTGROUP = 'hostgroup';
-	const COMMAND_SERVICEGROUP = 'servicegroup';
-	const COMMAND_HOST = 'host';
-	const COMMAND_SERVICE = 'service';
-	const COMMAND_ID = 'id';
-	const COMMAND_AUTHOR = 'author';
-	const COMMAND_COMMENT = 'comment';
-	const COMMAND_STARTTIME = 'starttime';
-	const COMMAND_ENDTIME = 'endtime';
-	const COMMAND_STICKY = 'sticky';
-	const COMMAND_PERSISTENT = 'persistent';
-	const COMMAND_NOTIFY = 'notify';
-	const COMMAND_RETURN_CODE = 'return_code';
-	const COMMAND_CHECKTIME = 'checktime';
-	const COMMAND_FIXED = 'fixed';
-	const COMMAND_OUTPUT = 'output';
-	const COMMAND_PERFDATA = 'perfdata';
-	const COMMAND_DURATION = 'duration';
-	const COMMAND_DATA = 'data';
-	const COMMAND_NOTIFICATION_OPTIONS = 'notification_options';
-	const COMMAND_DOWNTIME_ID = 'downtime_id';
-
-
-
-}
-/*
-class Api_Store_Legacy_IcingaApiModel extends AbstractDataStoreModel  {
-    protected $apiValues = array(
-        "SearchTarget"   => "",
-        "Grouping"       => "",
-        "Order"          => "DESC",
-        "OrderColum"     => "DESC",
-        "Limit"          => 0,
-        "ResultType"     => IcingaApiSearch::RESULT_ARRAY
-        "Filter"         => array(),
-        "Columns"        => array(),
-        "ConfigType"     => 1,
-        "IsCount"     => false 
-    );
-
-    public function setSearchTarget($target) {
-        $this->apiValues["SearchTarget"] = $target;
-    }
-    public function setGrouping($target) {
-        $this->apiValues["SearchTarget"] = $target;
-    }
-    public function setSearchOrder($column,$direction) {
-        $this->apiValues["SearchColumn"] = $column;
-    }
-    public function setLimit($target) {
-        $this->apiValues["SearchTarget"] = $target;
-    }
-    public function setSearchType($type) {
-        if($type == IcingaApiSearch::SEARCH_TYPE_COUNT)
-            $this->apiValues["IsCount"] = true;
-        else 
-            $this->apiValues["IsCount"] = false;
-    }
-    public function setResultColumns($cols) {
-        $this->apiValues["Columns"] = $cols;
-    }
-    public function addSetSearchFilter($filter) {
-        $this->apiValues["Filter"] = $filter;
-    }
-    public function setResultType($target) {
-        $this->apiValues["SearchTarget"] = $target;
-    }
-    public function setConfigType($type) {
-        $this->apiValues["ConfigType"] = $type;
-    }
-}
-*/
 interface IcingaApiInterface {};
 class LegacyApiResultModel {
     protected $data;
@@ -208,35 +37,46 @@ class ApiLegacyLayerCountObject {
 class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel implements IcingaApiInterface 
 {
     protected $isCount = false;
-    protected $resultType = Doctrine_Core::HYDRATE_ARRAY;
+    protected $resultType = Doctrine_Core::HYDRATE_ARRAY; 
+    protected $searchFilter = false;
+    protected $searchType = false;
+    
     public function setResultType($type) {
         if($type == IcingaApiConstants::RESULT_OBJECT)
-            $this->setResultType("RECORD");
+            parent::setResultType("RECORD");
         if($type == IcingaApiConstants::RESULT_ARRAY)
-            $this->setResultType("ARRAY");
+            parent::setResultType("ARRAY");
         return $this;
     }
+    
     protected function setupModifiers() {
-        $this->registerStoreModifier("Store.LegacyLayer.TargetModifier","Api");  
+        $this->searchFilter = $this->createFilterGroup();
+
         $this->registerStoreModifier("Store.Modifiers.StorePaginationModifier","Api");
+        $this->registerStoreModifier($this->searchFilter);
         $this->registerStoreModifier("Store.Modifiers.StoreSortModifier","Api");
         $this->registerStoreModifier("Store.Modifiers.StoreGroupingModifier","Api");
+        
+        $this->registerStoreModifier("Store.LegacyLayer.TargetModifier","Api");  
     }
  
     public function createSearch() {
-        $this->result = null;
+        $this->reset();
         return $this;
     }
    
     public function setSearchOrder ($column, $direction = 'asc') { 
-        $this->result = null;
-        $this->setFields(array($column),true); 
+        $this->result = null; 
         $column = $this->resolveColumnAlias($column);    
         $this->setSortfield($column);
         $this->setDir(strtoupper($direction)); 	
         return $this;
     }
-	
+    public function reset() {
+        $this->result = null;
+        $this->isCount = false;
+
+    }	
     public function setSearchLimit ($start, $length = false) {
         $this->result = null;
         $this->setOffset($start);
@@ -246,7 +86,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
 
     public function setSearchTarget($target) {
-        $this->result = null;
+        $this->result = null; 
         parent::setSearchTarget($target);
         return $this;
     }
@@ -258,15 +98,17 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
 
     public function execRead() {
-        $request = $this->createRequestDescriptor();
+        $request = $this->createRequestDescriptor(); 
         $this->applyModifiers($request); 
         $result = null;
-        $this->lastQuery = $request;
-      
-        if(!$this->isCount)
-            $result = $request->execute(NULL,$this->resultType);
-        else
-            $result = $request->count();
+        $this->lastQuery = $request; 
+        $request->autoResolveAliases(); 
+        
+        if(!$this->isCount) { 
+            $result = $request->execute(NULL,$this->resultType); 
+        } else {
+            $result = $request->count(); 
+        }
         return $result; 
     }
     private $result = null;
@@ -276,17 +118,18 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
             return $this->result;   
 
         $data =  $this->execRead();     
-       
+
         if($this->isCount) {
             $fields = $this->getFields();
-            $countField = explode(".",$fields[0],2);
-            if(count($countField) > 1)
-                $countField = $countField[1];
-            $data = array(
-                "0" => array("COUNT_".strtoupper($countField) => $data)
-            );     
-            
-           
+            $_data = array(array());
+            foreach($fields as $field) {
+                $countField = explode(".",$field,2);
+                if(count($countField) > 1)
+                    $countField = $countField[1];
+                
+                $_data[0]["COUNT_".strtoupper($countField)] = $data;  
+            }
+            $data = $_data;  
         }
         $this->result = $this->getContext()->getModel(
             "Store.LegacyLayer.LegacyApiResult","Api",array(
@@ -295,12 +138,95 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
         );
         return $this->result;
     }
-   
-
-    public function setSearchFilter() {
-        return $this;
+  
+    public function resolveFilterFields(IcingaApiSearchFilterInterface &$filter) {
+        if($filter instanceof IcingaApiSearchFilter) { 
+		    $filter->setField($this->resolveColumnAlias($filter->getField()));
+            $filterfields[] = $filter->getField();
+        } else {
+            foreach($filter as $i) {
+                $this->resolveFilterFields($i);
+            }
+        }
     } 
 
+	/**
+	 * You should now use createFilter and createFilterGroup and use them as the filter parameter
+	 * Using $value and $defaultMatch is @deprecated
+	 * (non-PHPdoc)
+	 * @see objects/search/IcingaApiSearchInterface#setSearchFilter()
+	 */
+	public function setSearchFilter ($filter, $value = false, $defaultMatch = IcingaApiConstants::MATCH_EXACT) {       
+		if($filter instanceof IcingaApiSearchFilterInterface) {
+            $this->resolveFilterFields($filter);   
+            $this->searchFilter->addFilter($filter);
+
+		} else if (!is_array($filter) && $value === false) {
+			throw new AppKitException('setSearchFilter(): invalid definition of key-value pair(s)!');
+		
+		} else { // support the previous behaviour of the API and wrap it with filtergroups
+			// convert filter into array
+			if (!is_array($filter)) {
+				$filter = array(array($filter, $value, $defaultMatch));
+			} else {
+				if(isset($filter["val"])) {
+					$this->reIndexFilter($filter);
+        	        $filterfields[] = $filter[0][0];
+                }
+		    }
+			// loop through array and apply filters
+			foreach ($filter as $filterData) {
+				// check length
+				$filterDataCount = count($filterData);
+				if ($filterDataCount < 1 || $filterDataCount > 3) {
+					throw new AppKitException('setSearchFilter(): invalid definition of key-value pair(s)!');
+				}
+				// set default match type
+				if ($filterDataCount == 2) {
+					$filterData[2] = $defaultMatch;
+				}
+				
+				$matchType = $filterData[2];
+
+				// add values to filter
+				$filtersForGroup = $this->createFilterGroup();
+				$filtersForGroup->setType(IcingaApiConstants::SEARCH_OR);
+				
+                if (!is_array($filterData[1])) {
+					$filterData[1] = array($filterData[1]);
+				}
+				foreach ($filterData[1] as $filterValue) {
+	                $filterfields[] = $this->resolveColumnAlias($filterData[0]);
+					$filtersForGroup->addFilter($this->createFilter($this->resolveColumnAlias($filterData[0]),$filterValue,$filterData[2]));
+				}
+				$this->searchFilter->addFilter($filtersForGroup);
+			}
+		} 
+		return $this;
+	}
+
+	protected function reIndexFilter(&$filter) {
+		$filter[1] = $filter["val"];
+		$filter[0] = $this->resolveColumnAlias($filter["field"]);
+		$filter[2] = $filter["op"];
+		unset($filter["val"]);
+		unset($filter["field"]);
+		unset($filter["op"]);
+		$filter = array($filter);
+	}
+
+
+	public function createFilterGroup($type = null) {
+		
+        $filterGroup = IcingaApiSearchFilterGroup::createInstance($this,$type);
+		return $filterGroup;
+	}
+
+	public function createFilter($field = null,$value = null,$match = null) {
+		$filter = IcingaApiSearchFilter::createInstance($this,$field,$value,$match);
+		return $filter;
+	}
+	
    	public function setSearchGroup ($columns) {
 		if (!is_array($columns)) {
 			$columns = array($columns);
@@ -313,15 +239,18 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
         $this->setGroupfields($columns);
         return $this;
     }
-
+    
     public function setSearchType($type) {
+        $this->searchType = $type;
         if($type == IcingaApiConstants::SEARCH_TYPE_COUNT) 
             $this->isCount = true;
         else
             $this->isCount = false;
         return $this;
     }   
-
+    public function getSearchType() {
+        return $this->searchType;
+    }
 } 
 
 

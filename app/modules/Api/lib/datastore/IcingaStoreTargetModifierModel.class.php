@@ -195,7 +195,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     public function setFields($fields, $useColumnAlias = false) {
         if(!is_array($fields))
             $fields = array($fields);
-        $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
+        
         foreach($fields as $field) { 
             $aliasField = "";
             if($useColumnAlias && isset($this->columns[$field])) {
@@ -203,14 +203,13 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
                 $field = $this->columns[$field]; 
             }
             // check for alias 
+            $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
             $match = array();
             preg_match($regExp,$field,$match);
-            if(isset($match["alias"])) {
-                $this->addAlias($match["alias"]);  
-            } else {
+            if(!isset($match["alias"])) {
                 if($field[0] != '(')
-                    $field = $this->mainAlias.".".$field; 
-            }   
+                    $field = $this->mainAlias.".".$field;  
+            } 
             $this->fields[] = $field;
             /*
             * workaround for doctrine alias bug 
@@ -308,33 +307,14 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected function modifyImpl(Doctrine_Query &$o) { 
+        $o->setAliasDefs($this->mainAlias,$this->aliasDefs);
+        $o->setDefaultJoinType($this->defaultJoinType);
         foreach($this->fields as $field)
             $o->addSelect($field); 
-        $o->distinct($this->isDistinct()); 
+        $o->distinct($this->isDistinct());   
         $o->from($this->target." ".$this->mainAlias);
-        $this->addDefaultJoins();
-        foreach($this->joins as $join) {
-            if(isset($join["alwaysSelect"]))
-                $o->addSelect($join["alias"].".".$join["alwaysSelect"]);
-            $joinTxt = $join["src"].".".$join["relation"]." ".$join["alias"];
-            if(isset($join["AND"]))
-                $joinTxt .= "AND ".$join["AND"];
-            if(isset($join["OR"]))
-                $joinTxt .= "OR ".$join["OR"];
-       
-            if(!isset($join["type"])) 
-                $join["type"] = $this->defaultJoinType;
-            if($join["type"] == "inner") { 
-                $o->innerJoin($joinTxt);
-            } else {
-                $o->leftJoin($joinTxt);
-            }
-        }
-        $table = Doctrine_Manager::getInstance()
-                ->getCurrentConnection()
-                ->getTable($this->target);
-      
         
+               
         foreach($this->staticWhereConditions as $cond) {
            
             if(isset($cond[1]) && $cond[1] != null)
@@ -344,41 +324,6 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
         }
     }
 
-    protected function addDefaultJoins() {
-        foreach($this->aliasDefs as $key=>$alias) {
-            if(isset($alias["joinAlways"]))
-                $this->addAlias($key);
-        
-        }
-    }
-
-    /**
-    * Adds a join definition to this TargetModifier defined by an alias
-    * in @see aliasDefs
-    *
-    * @param String The alias to register a join for 
-    *
-    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
-    **/    
-    protected function addAlias($alias) {
-        
-        if($alias == $this->mainAlias)
-            return true; //ignore base table alias
-        if(!isset($this->aliasDefs[$alias]))
-            throw new AppKitException("Tried to access hoststore field with invalid alias $alias (Mainalias: $this->mainAlias)");
-    
-        $join = $this->aliasDefs[$alias];
-        $join["alias"] = $alias;
-        
-        if(in_array($join,$this->joins))
-            return true; // already added      
-        // Add source alias
-        if($join["src"] != $this->mainAlias)
-            $this->addAlias($join["src"]);
-        
-        $this->joins[] = $join;
-    }        
-    
     /**
     * @see IDataStoreModifier::__getJSDescriptor
     *

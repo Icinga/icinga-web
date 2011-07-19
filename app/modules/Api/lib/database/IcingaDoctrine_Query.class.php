@@ -17,8 +17,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
 
         if ( ! isset($this->_pendingFields[$componentAlias])) {
             if ($this->_hydrator->getHydrationMode() != Doctrine_Core::HYDRATE_NONE) {
-                if ( ! $this->_isSubquery && $componentAlias == $this->getRootAlias()) {
-                    
+                if ( ! $this->_isSubquery && $componentAlias == $this->getRootAlias()) {                    
                     $ids = $table->getIdentifierColumnNames();
                     $this->_pendingFields[$componentAlias][] = $ids[0];  
                 }
@@ -28,7 +27,6 @@ class IcingaDoctrine_Query extends Doctrine_Query {
 
         // At this point we know the component is FETCHED (either it's the base class of
         // the query (FROM xyz) or its a "fetch join").
-
         // Check that the parent join (if there is one), is a "fetch join", too.
         if ( ! $this->isSubquery() && isset($this->_queryComponents[$componentAlias]['parent'])) {
             $parentAlias = $this->_queryComponents[$componentAlias]['parent'];
@@ -99,12 +97,113 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         
         $groups = array_unique($groups);
     }
-/*
-    public function execute($attr,$hyd) {
-        ApiDataRequestBaseModel::applySecurityCredentials($this);
-        return parent::execute($attr,$hyd);
+
+    protected $defaultJoinType = "left";
+    protected $aliasDefs = array();
+    protected $mainAlias = "my";
+    private $aliasJoins = array();   
+    
+    public function setAliasDefs($mainAlias,array $defs) {
+        $this->aliasDefs = $defs;
+        $this->mainAlias = $mainAlias;
     }
-**/
+
+    public function setDefaultJoinType($type) {
+        $this->defaultJoinType = $type;
+    }    
+
+    public function getAliasDefs() {
+        return $this->aliasDefs;
+    }
+
+    public function getDefaultJoinType() {
+        return $this->defaultJoinType;
+    }
+    
+    public function addAliasJoin($join) {
+        if(isset($join["alwaysSelect"]))
+            $this->addSelect($join["alias"].".".$join["alwaysSelect"]);
+        $joinTxt = "";
+        if(isset($join["relation"]))
+            $joinTxt = $join["src"].".".$join["relation"]." ".$join["alias"];
+        
+        if(isset($join["with"])) 
+            $joinTxt .= " WITH ".$join["with"]; 
+        if(isset($join["on"])) 
+            $joinTxt .= " ON ".$join["on"]; 
+       
+
+        if(!isset($join["type"])) 
+            $join["type"] = $this->defaultJoinType;
+        if($join["type"] == "inner") { 
+            $this->innerJoin($joinTxt);
+        } else {
+            $this->leftJoin($joinTxt);
+        } 
+        
+    }
+
+    protected function checkForAlias($statement,$ignore = array()) {
+        $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
+        $matches = array();
+        preg_match_all($regExp,$statement,$matches);
+        
+        for($i=0;$i<count($matches["alias"]);$i++) {
+            
+            if(in_array($matches["alias"][$i],$ignore))
+                continue;     
+            $this->addAlias($matches["alias"][$i]);
+        }
+    }
+
+    /**
+    * Adds a join definition to this TargetModifier defined by an alias
+    * in @see aliasDefs
+    *
+    * @param String The alias to register a join for 
+    *
+    * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+    **/    
+   protected function addAlias($alias) {
+         
+        if($alias == $this->mainAlias)
+            return true; //ignore base table alias
+        if(!isset($this->aliasDefs[$alias]))
+            throw new AppKitException("Tried to access hoststore field with invalid alias $alias (Mainalias: $this->mainAlias)");
+        
+        $join = $this->aliasDefs[$alias];
+        $join["alias"] = $alias;
+       
+        if(isset($this->aliasJoins[$alias]))
+            return true; // already added      
+        
+         // Add source alias
+        if(isset($join["src"]) && $join["src"] != $this->mainAlias)
+            $this->addAlias($join["src"]);
+        $this->aliasJoins[$alias] = true; 
+        
+        $this->addAliasJoin($join);
+    }          
+
+    protected function addDefaultJoins() {
+        foreach($this->aliasDefs as $key=>$alias) {
+            if(isset($alias["alwaysJoin"]))
+                $this->addAlias($key);    
+        }        
+    }
+
+    public function autoResolveAliases() {
+        $this->addDefaultJoins();
+        foreach($this->_dqlParts as &$dqlGroup) {
+            if(is_array($dqlGroup))
+                foreach($dqlGroup as &$dql) {
+                    $this->checkForAlias($dql,array($this->mainAlias));
+                }
+            else
+                $this->checkForAlias($dql,array($this->mainAlias));
+        }
+    }
+    
   
 }
 ?>

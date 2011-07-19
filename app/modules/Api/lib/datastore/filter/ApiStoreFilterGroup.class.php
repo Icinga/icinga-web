@@ -23,7 +23,7 @@ class ApiStoreFilterGroup extends GenericStoreFilterGroup {
     *  
     *  @author   Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
-    public function __toDQL(IcingaDoctrine_Query $q) { 
+    public function __toDQL(IcingaDoctrine_Query $q,$dqlOnly = false) { 
         $dql = ""; 
         $content = ""; 
         $first = true;
@@ -42,7 +42,10 @@ class ApiStoreFilterGroup extends GenericStoreFilterGroup {
             return "";
     
         $dql = "(".$content.")";
-
+        
+       // if($dqlOnly) {
+       //     return $this->getType()." ".$content;
+       // } 
         if($this->getType() == 'OR')
             $q->orWhere($dql);
         else { 

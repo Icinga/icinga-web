@@ -29,6 +29,12 @@
         <autoload name="IcingaStoreTargetModifierModel">%core.module_dir%/Api/lib/datastore/IcingaStoreTargetModifierModel.class.php</autoload> 
         <autoload name="IDataStoreModifier">%core.module_dir%/Api/lib/datastore/interfaces/IDataStoreModifier.php</autoload> 
 
+        <autoload name="IcingaApiConstants">%core.module_dir%/Api/lib/legacylib/IcingaApiConstants.php</autoload> 
+        <autoload name="IcingaApiSearchFilterGroupIdo">%core.module_dir%/Api/lib/legacylib/filter/IcingaApiSearchFilterGroupIdo.php</autoload> 
+        <autoload name="IcingaApiSearchFilterGroup">%core.module_dir%/Api/lib/legacylib/filter/IcingaApiSearchFilterGroup.php</autoload> 
+        <autoload name="IcingaApiSearchFilter">%core.module_dir%/Api/lib/legacylib/filter/IcingaApiSearchFilter.php</autoload> 
+        <autoload name="IcingaApiSearchFilterIdo">%core.module_dir%/Api/lib/legacylib/filter/IcingaApiSearchFilterIdo.php</autoload> 
+        <autoload name="IcingaApiSearchFilterInterface">%core.module_dir%/Api/lib/legacylib/filter/IcingaApiSearchFilterInterface.php</autoload> 
         
         <autoload name="ApiStoreFilter">%core.module_dir%/Api/lib/datastore/filter/ApiStoreFilter.class.php</autoload> 
         <autoload name="ApiStoreFilterGroup">%core.module_dir%/Api/lib/datastore/filter/ApiStoreFilterGroup.class.php</autoload> 

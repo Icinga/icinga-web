@@ -70,7 +70,7 @@ class Api_LegacyApiContainerModel extends IcingaWebBaseModel
      */
     public function initialize(AgaviContext $c, array $p=array()) {
         parent::initialize($c, $p);
-        $this->apiData = $this->getContext()->getModel("Store.LegacyLayer.IcingaApi","Api");
+        $this->apiData = $this->getContext()->getModel("Store.LegacyLayer.IcingaApi","Api",array("connection"=>"icinga_mysql"));
     }
 
     /**
