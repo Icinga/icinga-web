@@ -1,8 +1,10 @@
 Ext.ns('Icinga.Reporting.util');
 
-Icinga.Reporting.util.ContentResourcePanel = Ext.extend(Ext.Panel, {
+Icinga.Reporting.util.ContentResourcePanel = Ext.extend(Icinga.Reporting.abstract.ApplicationWindow, {
 	
 	title : _('Content resource'),
+	
+	mask_text : _('Please be patient, fetching resource . . . '),
 	
 	constructor : function(config) {
 		
@@ -21,10 +23,6 @@ Icinga.Reporting.util.ContentResourcePanel = Ext.extend(Ext.Panel, {
 				handler : this.processPreview,
 				scope : this
 			}],
-			
-			plugins : [
-				new Ext.ux.plugins.ContainerMask ({msg : _('Please be patient, fetching resource ...'), masked : false })
-			],
 			
 			tpl : new Ext.XTemplate(
 				'<tpl for="data">'
@@ -85,23 +83,6 @@ Icinga.Reporting.util.ContentResourcePanel = Ext.extend(Ext.Panel, {
 		this.content_url = this.meta_url.replace(/\/meta$/, '/content');
 		
 		this.setToolbarEnabled(false);
-	},
-	
-	setToolbarEnabled : function(bool, pos) {
-		if (Ext.isEmpty(bool)) {
-			bool = true;
-		}
-		var i = 0;
-		this.getTopToolbar().items.eachKey(function(key, item) {
-			if (!Ext.isEmpty(pos)) {
-				if (pos == ++i) {
-					item.setDisabled(!bool);
-				}
-			}
-			else {
-				item.setDisabled(!bool);
-			}
-		});
 	},
 	
 	processMetaLoad : function(node) {

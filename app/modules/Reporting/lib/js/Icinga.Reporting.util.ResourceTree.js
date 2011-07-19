@@ -1,6 +1,6 @@
 Ext.ns('Icinga.Reporting.util');
 
-Icinga.Reporting.util.ResourceTree = Ext.extend(Ext.Panel, {
+Icinga.Reporting.util.ResourceTree = Ext.extend(Icinga.Reporting.abstract.ApplicationWindow, {
 	
 	layout : 'fit',
 	minWidth: 200,
@@ -10,6 +10,8 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Ext.Panel, {
 	rootName : _('Repository'),
 	title : _('Resources'),
 	
+	mask_text : _('Loading resource tree . . .'),
+	
 	constructor : function(config) {
 		
 		config = Ext.apply(config || {}, {
@@ -18,11 +20,7 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Ext.Panel, {
 				iconCls : 'icinga-icon-arrow-refresh',
 				handler : this.reloadTree,
 				scope : this
-			}],
-			
-			plugins : [
-				new Ext.ux.plugins.ContainerMask ({msg : _('Loading resources ...'), masked : false })
-			]
+			}]
 		});
 		
 		Icinga.Reporting.util.ResourceTree.superclass.constructor.call(this, config);

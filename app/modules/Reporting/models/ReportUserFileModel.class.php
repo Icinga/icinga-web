@@ -100,8 +100,8 @@ class Reporting_ReportUserFileModel extends ReportingBaseModel implements AgaviI
             'format'           => $output_format,
             'bytes'            => $bytes,
             'checksum'         => md5($data),
-            'reportname'       => $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME),
-            'pushname'         => sprintf('%s.%s', $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME), $extension)
+            'reportname'       => $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME),
+            'pushname'         => sprintf('%s.%s', $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME), $extension)
             
         );
         
