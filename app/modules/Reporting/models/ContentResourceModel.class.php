@@ -44,7 +44,7 @@ class Reporting_ContentResourceModel extends JasperConfigBaseModel {
         $this->__soap = $this->__client->getSoapClientForWSDL(Reporting_JasperSoapFactoryModel::SERVICE_REPOSITORY);
         
         $request = new JasperRequestXmlDoc('get');
-        $request->setResourceDescriptor(JasperRequestXmlDoc::RES_URI, $this->__uri);
+        $request->setResourceDescriptor(JasperRequestXmlDoc::DESCRIPTOR_ATTR_URI, $this->__uri);
         
         
         $this->__soap->doRequest($request);
@@ -53,7 +53,7 @@ class Reporting_ContentResourceModel extends JasperConfigBaseModel {
     }
     
     public function getMetaData() {
-        $response = $this->__soap->getJasperResponseFor(JasperSoapMultipartClient::CID_RESPONSE);
+        $response = $this->__soap->getJasperResponseFor(JasperSoapMultipartClient::CONTENT_ID_RESPONSE);
         
         if (count($response) == 1) {
             $rd = $response->current();
@@ -71,13 +71,13 @@ class Reporting_ContentResourceModel extends JasperConfigBaseModel {
             if ($struct['has_attachment']) {
                 
                 $mime = AppKitFileUtil::getMimeTypeForData(
-                    $this->__soap->getDataFor(JasperSoapMultipartClient::CID_ATTACHMENT),
-                    $this->__soap->getHeaderFor(JasperSoapMultipartClient::CID_ATTACHMENT, 'content-type')
+                    $this->__soap->getDataFor(JasperSoapMultipartClient::CONTENT_ID_ATTACHMENT),
+                    $this->__soap->getHeaderFor(JasperSoapMultipartClient::CONTENT_ID_ATTACHMENT, 'content-type')
                 );
                 
                 $struct = array (
                     'content_type' => $mime,
-                    'content_length' => $this->__soap->getContentSize(JasperSoapMultipartClient::CID_ATTACHMENT),
+                    'content_length' => $this->__soap->getContentSize(JasperSoapMultipartClient::CONTENT_ID_ATTACHMENT),
                     'preview_allowed' => $this->canPreview($mime),
                     'download_allowed' => $this->canDownload($rd->getProperties()->getParameter('PROP_RESOURCE_TYPE'))
                 ) + $struct;
@@ -88,7 +88,7 @@ class Reporting_ContentResourceModel extends JasperConfigBaseModel {
     }
     
     public function getContent() {
-        return $this->__soap->getDataFor(JasperSoapMultipartClient::CID_ATTACHMENT);
+        return $this->__soap->getDataFor(JasperSoapMultipartClient::CONTENT_ID_ATTACHMENT);
     }
     
     private function canPreview($mime) {

@@ -39,7 +39,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
      */
     private function getJasperResponse() {
         $request = new JasperRequestXmlDoc('get');
-        $request->setResourceDescriptor(JasperRequestXmlDoc::RES_URI, $this->__uri);
+        $request->setResourceDescriptor(JasperRequestXmlDoc::DESCRIPTOR_ATTR_URI, $this->__uri);
         
         $response = new JasperResponseXmlDoc($this->__client->get($request->getSoapParameter()));
         
@@ -52,7 +52,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
         $out = array ();
         
         foreach ($doc as $rd) {
-            if (!$this->__filter || $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE) == $this->__filter) {
+            if (!$this->__filter || $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_TYPE) == $this->__filter) {
               $out[] = $rd;  
             }
         }
@@ -75,7 +75,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
                 $this->applyInputControlStructs($rd, $tmp);
             }
             
-            $out[$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME)] = $tmp;
+            $out[$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME)] = $tmp;
         }
         
         return $out;
@@ -85,7 +85,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
         
         $struct = array();
         
-        $rd_name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME);
+        $rd_name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME);
         $rd_type = $rd->getProperties()->getParameter('PROP_INPUTCONTROL_TYPE');
         
         if (array_key_exists($rd_name, $this->__nameMapping)) {

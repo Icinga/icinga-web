@@ -1,21 +1,6 @@
 <?php
 
-class JasperSoapMultipartClient extends SoapClient {
-    
-    const XML_VERSION = '1.0';
-    const XML_ENCODING = 'UTF-8';
-    
-    const CID_ATTACHMENT = 'attachment';
-    const CID_REPORT = 'report';
-    const CID_RESPONSE = 'direct-soap-reply';
-    
-    const HEADER_SPLIT = "\r\n\r\n";
-    
-    const SOAP_BLIND_ERROR = 'looks like we got no XML document';
-    const SOAP_NS = 'http://schemas.xmlsoap.org/soap/envelope/';
-    const SOAP_ROOT = 'Envelope';
-    
-    const JASPER_NS = 'http://axis2.ws.jasperserver.jaspersoft.com';
+class JasperSoapMultipartClient extends SoapClient implements JasperI {
     
     /**
      * @var JasperRequestXmlDoc
@@ -38,7 +23,6 @@ class JasperSoapMultipartClient extends SoapClient {
     public function doRequest(JasperRequestXmlDoc $doc) {
         $this->__request =& $doc;
         $function = $doc->getOperationName();
-        
         try {
             $this->__call($function, array($doc->getSoapParameter()));
             $this->parseSoapReply();
@@ -53,8 +37,14 @@ class JasperSoapMultipartClient extends SoapClient {
             }
         }
         
-        return true;
+        var_dump($this->__getLastResponse());
+        die;
         
+        if ($this->getJasperResponseFor(self::CONTENT_ID_RESPONSE)->success() === false) {
+            throw new AppKitModelException($this->getJasperResponseFor(self::CONTENT_ID_RESPONSE)->returnMessage());
+        }
+        
+        return true;
     }
     
     /**
@@ -65,12 +55,12 @@ class JasperSoapMultipartClient extends SoapClient {
         $this->__header = array ();
         $this->__data = array ();
         
-        $response_header = $this->__header[self::CID_RESPONSE] = $this->parseHeader($this->__getLastResponseHeaders());
+        $response_header = $this->__header[self::CONTENT_ID_RESPONSE] = $this->parseHeader($this->__getLastResponseHeaders());
         
         if (strpos($response_header['content-type'], 'multipart/related') === 0) {
             $this->parseMultipartSoapReply();
         } else {
-            $this->__data[self::CID_RESPONSE] = $this->__getLastResponse();
+            $this->__data[self::CONTENT_ID_RESPONSE] = $this->__getLastResponse();
         }
         
         $this->decodeSoapReplies();
@@ -123,7 +113,7 @@ class JasperSoapMultipartClient extends SoapClient {
     
     private function parseMultipartSoapReply() {
         $m = array (); // Our match object
-        if (preg_match('/start="<([^">]+)>".+boundary="([^"]+)"/', $this->__header[self::CID_RESPONSE]['content-type'], $m)) {
+        if (preg_match('/start="<([^">]+)>".+boundary="([^"]+)"/', $this->__header[self::CONTENT_ID_RESPONSE]['content-type'], $m)) {
             $response = $this->__getLastResponse();
             $response_cid = $m[1];
             $boundary = $m[2];
@@ -143,8 +133,8 @@ class JasperSoapMultipartClient extends SoapClient {
              * We need the default response from multipart
              */
             if (array_key_exists($response_cid, $this->__header)) {
-                $this->__header[self::CID_RESPONSE] =& $this->__header[$response_cid];
-                $this->__data[self::CID_RESPONSE] =& $this->__data[$response_cid];
+                $this->__header[self::CONTENT_ID_RESPONSE] =& $this->__header[$response_cid];
+                $this->__data[self::CONTENT_ID_RESPONSE] =& $this->__data[$response_cid];
             }
         }
         
@@ -243,7 +233,7 @@ class JasperSoapMultipartClient extends SoapClient {
      * @return boolean
      */
     public function hasReport() {
-        return $this->hasContentId(self::CID_REPORT);
+        return $this->hasContentId(self::CONTENT_ID_REPORT);
     }
     
     /**
@@ -251,7 +241,7 @@ class JasperSoapMultipartClient extends SoapClient {
      * @return boolean
      */
     public function hasAttachment() {
-        return $this->hasContentId(self::CID_ATTACHMENT);
+        return $this->hasContentId(self::CONTENT_ID_ATTACHMENT);
     }
     
     /**

@@ -44,7 +44,7 @@ class Reporting_JasperTreeStructModel extends JasperConfigBaseModel {
     
     public function getJsonStructure() {
         $request = new JasperRequestXmlDoc('list');
-        $request->setResourceDescriptor(JasperRequestXmlDoc::RES_TYPE, 'folder');
+        $request->setResourceDescriptor(JasperRequestXmlDoc::DESCRIPTOR_ATTR_TYPE, 'folder');
         
         $uri = $this->__parent;
         
@@ -68,7 +68,7 @@ class Reporting_JasperTreeStructModel extends JasperConfigBaseModel {
             }
         }
         
-        $request->setResourceDescriptor(JasperRequestXmlDoc::RES_URI, $uri);
+        $request->setResourceDescriptor(JasperRequestXmlDoc::DESCRIPTOR_ATTR_URI, $uri);
         
         $response = new JasperResponseXmlDoc($this->__soap->list($request->getSoapParameter()));
         
@@ -79,7 +79,7 @@ class Reporting_JasperTreeStructModel extends JasperConfigBaseModel {
             /*
              * Maybe we should dereference references without name, don't know 
              */
-            if (!$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME)) {
+            if (!$rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME)) {
                 continue;
             }
             
@@ -92,14 +92,14 @@ class Reporting_JasperTreeStructModel extends JasperConfigBaseModel {
             $p = $rd->getResourceDescriptor();
             
             $tmp = array (
-                'id'    => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_URI),
-                'text'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME),
-                'leaf'  => ($p->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE)=='folder') ? false : true,
-                'type'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE),
-                'uri'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_URI),
-            	'name'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME),
+                'id'    => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_URI),
+                'text'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME),
+                'leaf'  => ($p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_TYPE)=='folder') ? false : true,
+                'type'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_TYPE),
+                'uri'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_URI),
+            	'name'  => $p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME),
             	'label'=> $rd->getLabel(),
-            	'iconCls' => $this->mapIconClassByType($p->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE))
+            	'iconCls' => $this->mapIconClassByType($p->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_TYPE))
             );
             
             $tmp = (array)$rd->getProperties()->getParameters() + $tmp;

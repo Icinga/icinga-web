@@ -22,6 +22,7 @@
 				
 					<!-- Base classes -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.abstract.ResizedContainer.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.abstract.ApplicationWindow.js</ae:parameter>
 				
 					<!-- UI - the cronk itself -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.Cronk.js</ae:parameter>
@@ -29,11 +30,15 @@
 					<!-- The main modes, UI and component classes -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.OnTheFly.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.Repository.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ReportScheduling.js</ae:parameter>
 					
 					<!-- Tool widgets -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ResourceTree.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.RunReportPanel.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ContentResourcePanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.SchedulingListPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ScheduleTaskList.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ScheduleEditForm.js</ae:parameter>
 					
 					<!-- Input Controls -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.Default.js</ae:parameter>
@@ -53,7 +58,7 @@
 				<setting name="dir.download">%core.module_dir%/Reporting/data/tmp</setting>
 				
 				<!-- Previewable mime types -->
-				<setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml.+/i]]></setting>
+				<setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml|application\/pdf.+/i]]></setting>
 				
 				<!-- Previewable ws types (Jasper short form) -->
 				<setting name="preview.jasper_resources">
@@ -121,7 +126,7 @@
 					<ae:parameter name="jasper_url">http://10.121.0.95:8080/jasperserver</ae:parameter>
 					<ae:parameter name="jasper_user">jasperadmin</ae:parameter>
 					<ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
-					<ae:parameter name="tree_root">/</ae:parameter>
+					<ae:parameter name="tree_root">/Icinga/reports</ae:parameter>
 				</setting>
 				
 				<!-- Custom config if I have more that once -->

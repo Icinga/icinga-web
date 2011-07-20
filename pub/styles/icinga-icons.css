@@ -142,4 +142,9 @@
 .icinga-icon-databases-relation { background-image: url(../images/icons/databases-relation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-folder-network { background-image: url(../images/icons/folder-network.png) !important; background-repeat: no-repeat; }
 .icinga-icon-eye { background-image: url(../images/icons/eye.png) !important; background-repeat: no-repeat; }
+.icinga-icon-alarm-clock { background-image: url(../images/icons/alarm-clock.png) !important; background-repeat: no-repeat; }
+.icinga-icon-alarm-clock-add { background-image: url(../images/icons/alarm-clock--plus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-alarm-clock-remove { background-image: url(../images/icons/alarm-clock--minus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-alarm-clock-edit { background-image: url(../images/icons/alarm-clock--pencil.png) !important; background-repeat: no-repeat; }
+.icinga-icon-alarm-clock-arrow { background-image: url(../images/icons/alarm-clock--arrow.png) !important; background-repeat: no-repeat; }
 /* EOF */

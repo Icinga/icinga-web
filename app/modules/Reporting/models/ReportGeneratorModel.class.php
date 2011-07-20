@@ -49,7 +49,7 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
     }
     
     public function getReportData() {
-        $uri = $this->__report->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_URI);
+        $uri = $this->__report->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_URI);
         $request = new JasperRequestXmlDoc('runReport');
         $request->setArgument('RUN_OUTPUT_FORMAT', $this->getFormat());
         
@@ -58,7 +58,7 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
             $request->setArgument('IMAGES_URI', 'base64_inline_image:');
         }
         
-        $request->setResourceDescriptor(JasperRequestXmlDoc::RES_URI, $uri);
+        $request->setResourceDescriptor(JasperRequestXmlDoc::DESCRIPTOR_ATTR_URI, $uri);
         foreach ($this->__parameters as $pName=>$pValue) {
             $request->setParameter($pName, $pValue);
         }
@@ -95,7 +95,7 @@ class Reporting_ReportGeneratorModel extends ReportingBaseModel {
     
     private function runReport(JasperRequestXmlDoc $doc) {
         $this->__client->doRequest($doc);
-        $this->__data = $this->__client->getDataFor(JasperSoapMultipartClient::CID_REPORT);
+        $this->__data = $this->__client->getDataFor(JasperSoapMultipartClient::CONTENT_ID_REPORT);
         return true;
     }
 }

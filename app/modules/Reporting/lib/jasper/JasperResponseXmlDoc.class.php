@@ -1,8 +1,6 @@
 <?php
 
-class JasperResponseXmlDoc extends DOMDocument implements Iterator, Countable {
-    const XML_VERSION = '1.0';
-    const XML_ENCODING = 'UTF-8';
+class JasperResponseXmlDoc extends DOMDocument implements Iterator, Countable, JasperI {
     
     /**
      * @var DOMNodeList

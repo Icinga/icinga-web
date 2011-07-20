@@ -6,18 +6,7 @@
  * @author mhein
  *
  */
-class JasperRequestXmlDoc extends DOMDocument {
-    
-    const XML_ENCODING   = 'UTF-8';
-    const XML_VERSION    = '1.0';
-    
-    const JASPER_LOCALE  = 'en';
-    const JASPER_SOAPPARAMNAME = 'requestXmlString';
-    
-    const RES_NAME = 'name';
-    const RES_TYPE = 'wsType';
-    const RES_URI = 'uriString';
-    const RES_ISNEW = 'isNew';
+class JasperRequestXmlDoc extends DOMDocument implements JasperI {
     
     /**
      * @var DOMElement
@@ -44,7 +33,6 @@ class JasperRequestXmlDoc extends DOMDocument {
         
         $this->__rootNode = $this->__createRootNode($operationName);
         $this->appendChild($this->__rootNode);
-        
     }
     
     public function getOperationName() {

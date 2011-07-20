@@ -36,10 +36,10 @@ class Reporting_FieldValueConverterModel extends ReportingBaseModel {
     
     private function buildSoapRequest($uri) {
         $request = new JasperRequestXmlDoc('get');
-        $request->setResourceDescriptor(JasperRequestXmlDoc::RES_URI, $uri);
+        $request->setResourceDescriptor(JasperRequestXmlDoc::DESCRIPTOR_ATTR_URI, $uri);
         $descriptors = new JasperResponseXmlDoc($this->__client->get($request->getSoapParameter()));
         foreach ($descriptors as $rd) {
-            if ($rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_TYPE) == 'inputControl') {
+            if ($rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_TYPE) == 'inputControl') {
                 $this->__inputControls[] = $rd;
             }
         }
@@ -48,7 +48,7 @@ class Reporting_FieldValueConverterModel extends ReportingBaseModel {
     public function getConvertedParameters() {
         $out = array ();
         foreach ($this->__inputControls as $rd) {
-            $name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_NAME);
+            $name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME);
             if (array_key_exists($name, $this->__p)) {
                 $type = $rd->getProperties()->getParameter('PROP_INPUTCONTROL_TYPE');
                 $value = $this->__p[$name];

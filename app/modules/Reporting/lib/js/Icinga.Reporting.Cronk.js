@@ -16,7 +16,7 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 		Icinga.Reporting.Cronk.superclass.initComponent.call(this);
 		
 		this.on('added', function() {
-			this.activate(1);
+			this.activate(2);
 		}, this, { single : true });
 		
 		if (this.enable_onthefly == true) {
@@ -50,6 +50,20 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 				tabTip: _('Explore the server-repository'),
 				items : this.appRepository,
 				iconCls : 'icinga-icon-bricks'
+			});
+		}
+		
+		if (this.enable_scheduling == true) {
+			this.enableScheduling = new Icinga.Reporting.util.ReportScheduling({
+				treeloader_url : this.treeloader_url,
+				parentCmp : this
+			});
+			
+			this.add({
+				title: _('Scheduling'),
+				tabTip: _('Report scheduling'),
+				items : this.enableScheduling,
+				iconCls : 'icinga-icon-alarm-clock'
 			});
 		}
 		
