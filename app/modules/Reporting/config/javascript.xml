@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/icinga/config/global/resource/1.0">
+
+    <ae:configuration>
+
+        <javascript>
+
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.abstract.ResizedContainer.js</ae:parameter>
+
+            <!-- UI - the cronk itself -->
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.Cronk.js</ae:parameter>
+
+            <!-- The main modes, UI and component classes -->
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.OnTheFly.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.Repository.js</ae:parameter>
+
+            <!-- Tool widgets -->
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ResourceTree.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.RunReportPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ContentResourcePanel.js</ae:parameter>
+
+            <!-- Input Controls -->
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.Default.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.ApiSelectionField.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.OutputFormatSelector.js</ae:parameter>
+
+            <!-- Misc stuff -->
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/ContainerMask.js</ae:parameter>
+        </javascript>
+    </ae:configuration>
+</ae:configurations>

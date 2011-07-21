@@ -99,6 +99,10 @@
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
 		<autoload name="AppKitModuleRoutingHandler">%core.module_dir%/AppKit/lib/module/AppKitModuleRoutingHandler.class.php</autoload>
 		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
+        
+        <autoload name="AppKitXIncludeConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitXIncludeConfigHandler.class.php</autoload>
+        <autoload name="AppKitResourceConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitResourceConfigHandler.class.php</autoload>
+        <autoload name="AppKitIteratorUtil">%core.module_dir%/AppKit/lib/util/AppKitIteratorUtil.class.php</autoload>
 		
 	</ae:configuration>
 </ae:configurations>

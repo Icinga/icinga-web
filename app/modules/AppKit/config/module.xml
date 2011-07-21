@@ -75,26 +75,10 @@
 					<ae:parameter>/styles/icinga-icons.css</ae:parameter>
 					<ae:parameter>/styles/icinga-cronk-icons.css</ae:parameter>
 				</setting>
-
-				<setting name="appkit_module.app.javascript_files">
-					<!-- ExtJS base files -->
-					<ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/ext-all.js</ae:parameter>
-
-					<!--AppKit JS -->
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/utils/stacktrace.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitErrorHandler.js</ae:parameter>
-
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/Layout.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/ScriptDynaLoader.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</ae:parameter>
-
-					<!-- jsgettext -->
-					<ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
-				</setting>
+                
+                <setting name="agavi.include.javascript">
+                    <ae:parameter>%core.module_dir%/AppKit/config/javascript.xml</ae:parameter>
+                </setting>
 
 				<setting name="appkit_module.app.javascript_actions">
 					<ae:parameter>
