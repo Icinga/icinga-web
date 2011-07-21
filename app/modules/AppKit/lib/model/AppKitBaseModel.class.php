@@ -101,6 +101,12 @@ class AppKitBaseModel extends AgaviModel {
 		$args = func_get_args();
 		return AppKitAgaviUtil::log($args);
 	}
+	
+	public function appendParameter($name, $value) {
+		if(!isset($this->parameters[$name]) || !is_array($this->parameters[$name])) {
+			settype($this->parameters[$name], 'array');
+		}
+		$this->parameters[$name][] = $value;
+	}
+	
 }
-
-?>

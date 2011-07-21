@@ -73,10 +73,13 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel
 		$this->content = null;
 		
 		if (is_array($this->files)) {
-			$loader = new AppKitBulkLoader();
-			$loader->setCompress(false);
+			$loader = $this->getContext()->getModel('BulkLoader', 'AppKit', array(
+				'newlines' => false,
+				'indent' => false,
+				'comments' => false
+			));
 			
-			array_walk($this->files, array(&$loader, 'setFile'));
+			$loader->setFiles($this->files);
 			
 			$this->content .= $loader->getContent();
 		}
