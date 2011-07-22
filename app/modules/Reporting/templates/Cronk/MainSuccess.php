@@ -11,7 +11,8 @@
     $parampanel_url = $ro->gen('modules.reporting.provider.parameters', $provider_config);
     $creator_url = $ro->gen('modules.reporting.provider.generate', $provider_config);
     $resource_url = $ro->gen('modules.reporting.provider.content.meta', $provider_config);
-    
+    $scheduler_list_url = $ro->gen('modules.reporting.provider.scheduler', $provider_config + array('action' => 'list'));
+    $scheduler_get_url = $ro->gen('modules.reporting.provider.scheduler', $provider_config + array('action' => 'job'));
     
 ?>
 <script type="text/javascript">
@@ -31,9 +32,11 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		treeloader_url : '<?php echo $treeloader_url; ?>',
 		parampanel_url : '<?php echo $parampanel_url; ?>',
 		creator_url : '<?php echo $creator_url; ?>',
-		resource_url : '<?php echo $resource_url; ?>'
+		resource_url : '<?php echo $resource_url; ?>',
+		scheduler_list_url : '<?php echo $scheduler_list_url; ?>',
+		scheduler_get_url : '<?php echo $scheduler_get_url; ?>'
 	});
-
+	
 	// Better to remote all existing components
 	// to avoid errors
 	this.getParent().removeAll();

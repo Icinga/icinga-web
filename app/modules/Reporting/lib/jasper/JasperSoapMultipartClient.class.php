@@ -37,9 +37,6 @@ class JasperSoapMultipartClient extends SoapClient implements JasperI {
             }
         }
         
-        var_dump($this->__getLastResponse());
-        die;
-        
         if ($this->getJasperResponseFor(self::CONTENT_ID_RESPONSE)->success() === false) {
             throw new AppKitModelException($this->getJasperResponseFor(self::CONTENT_ID_RESPONSE)->returnMessage());
         }

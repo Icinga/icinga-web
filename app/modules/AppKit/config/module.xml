@@ -80,7 +80,7 @@
 					<!-- ExtJS base files -->
 					<ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
 					<ae:parameter>%core.root_dir%/lib/ext3/ext-all.js</ae:parameter>
-
+					
 					<!--AppKit JS -->
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</ae:parameter>

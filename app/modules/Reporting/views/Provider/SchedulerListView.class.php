@@ -23,14 +23,17 @@ class Reporting_Provider_SchedulerListView extends ReportingBaseView {
 	    	    
 	    $response = new AppKitExtJsonDocument();
 	    $response->hasField('id');
-	    $response->hasAttribute('version');
-	    $response->hasAttribute('reportUnitURI');
-	    $response->hasAttribute('username');
-	    $response->hasAttribute('label');
-	    $response->hasAttribute('state');
-	    $response->hasAttribute('previousFireTime');
-	    $response->hasAttribute('nextFireTime');
+	    $response->hasField('version');
+	    $response->hasField('reportUnitURI');
+	    $response->hasField('username');
+	    $response->hasField('label');
+	    $response->hasField('state');
+	    $response->hasField('previousFireTime');
+	    $response->hasField('nextFireTime');
 	    $response->setData($data);
+	    
+	    $response->setSuccess();
+	    
 	    return $response->getJson();
 	}
 }

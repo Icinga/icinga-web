@@ -33,6 +33,8 @@
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ReportScheduling.js</ae:parameter>
 					
 					<!-- Tool widgets -->
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.widget.MonthPicker.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.widget.WeekDayPicker.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ResourceTree.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.RunReportPanel.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ContentResourcePanel.js</ae:parameter>
@@ -46,6 +48,8 @@
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.OutputFormatSelector.js</ae:parameter>
 					
 					<!-- Misc stuff -->
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.InputControlBuilder.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.JobFormValues.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/ContainerMask.js</ae:parameter>
 				</setting>
 				

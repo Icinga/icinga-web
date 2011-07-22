@@ -11,6 +11,8 @@ class Reporting_Provider_SchedulerAction extends ReportingBaseAction {
 	        case 'list':
 	            return 'List';
 	        break;
+	        case 'job':
+	            return 'Job';
 	        default:
 	            return $this->getDefaultViewName();
 	        break;

@@ -35,9 +35,25 @@ class Reporting_JasperSchedulerModel extends JasperConfigBaseModel {
     public function getScheduledJobs() {
         $re = $this->__client->getReportJobs($this->__uri);
         $out = array ();
-        foreach ($re as $stdclass) {
-            $out[] = (array)$stdclass;
+        if (is_array($re)) {
+            foreach ($re as $stdclass) {
+                
+                if (isset($stdclass->previousFireTime)) {
+                    $stdclass->previousFireTime = $this->context->getTranslationManager()->_d($stdclass->previousFireTime, 'date-tstamp');
+                }
+                
+                if (isset($stdclass->nextFireTime)) {
+                    $stdclass->nextFireTime = $this->context->getTranslationManager()->_d($stdclass->nextFireTime, 'date-tstamp');
+                }
+                
+                $out[] = (array)$stdclass;
+            }
         }
+        return $out;
+    }
+    
+    public function getJobDetail($job_id) {
+        $out = $this->__client->getJob($job_id);
         return $out;
     }
 }
