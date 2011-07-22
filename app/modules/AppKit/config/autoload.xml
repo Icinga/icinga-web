@@ -54,7 +54,6 @@
 		<autoload name="AppKitSelectSource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSource.class.php</autoload>
 		<autoload name="AppKitSelectSourceInterface">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSourceInterface.interface.php</autoload>
 		<autoload name="AppKitTextboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitTextboxElement.class.php</autoload>
-		<autoload name="AppKitBulkLoader">%core.module_dir%/AppKit/lib/html/AppKitBulkLoader.class.php</autoload>
 		<autoload name="AppKitHtmlEntitiesInterface">%core.module_dir%/AppKit/lib/html/AppKitHtmlEntitiesInterface.interface.php</autoload>
 		<autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
 		<autoload name="AppKitHtmlHelper">%core.module_dir%/AppKit/lib/html/AppKitHtmlHelper.class.php</autoload>
