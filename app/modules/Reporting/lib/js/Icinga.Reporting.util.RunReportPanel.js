@@ -4,7 +4,7 @@ Icinga.Reporting.DEFAULT_JSCONTROL = {
 	className : 'Icinga.Reporting.inputControl.Default'
 };
 
-Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
+Icinga.Reporting.util.RunReportPanel = Ext.extend(Icinga.Reporting.abstract.ApplicationWindow, {
 	title : _('Report details'),
 	border : false,
 	
@@ -15,6 +15,8 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 	defaults : {
 		border : false
 	},
+	
+	mask_text : _('Please be patient, generating report . . .'),
 	
 	constructor : function(config) {
 		
@@ -33,11 +35,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 				iconCls : 'icinga-icon-report-preview',
 				handler : this.previewReport,
 				scope : this
-			}],
-			
-			plugins : [
-				new Ext.ux.plugins.ContainerMask ({msg : _('Please be patient, Jasper is working ...'), masked : false })
-			]
+			}]
 		});
 		
 		Icinga.Reporting.util.RunReportPanel.superclass.constructor.call(this, config);
@@ -107,11 +105,8 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		this.add({
 			layout : 'fit',
 			html : String.format('<h1>{0}</h1>{1}', this.nodeAttributes.text, this.nodeAttributes.uri),
-			border : true,
-			bodyStyle : {
-				margin: '2px 0px 10px 0px',
-				padding: '2px'
-			}
+			border : false,
+			cls : 'simple-content-box'
 		});
 		
 		if (this.parameterData.length == 0) {
@@ -285,6 +280,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		var previewTab = tabs.add({
 			xtype : 'panel',
 			title : this.nodeAttributes.text,
+			iconCls : 'icinga-icon-eye',
 			closable : true,
 			bodyCfg : {
 				tag : 'iframe',
@@ -294,15 +290,6 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Ext.Panel, {
 		tabs.setActiveTab(previewTab);
 	},
 	
-	setToolbarEnabled : function(bool) {
-		if (Ext.isEmpty(bool)) {
-			bool = true;
-		}
-		
-		this.getTopToolbar().items.eachKey(function(key, item) {
-			item.setDisabled(!bool);
-		});
-	},
 	runReport : function(b, e) {
 		this.submitForm({
 			success : function(form, action) {

@@ -17,6 +17,17 @@
 								<default for="output_type">OUTPUT_TYPE</default>
 							</defaults>
 						</route>
+						
+						<route name=".scheduler" pattern="^/scheduler/(action:(\w+))" action="Provider.Scheduler">
+							<defaults>
+								<default for="action">list</default>
+							</defaults>
+						</route>
+						
+						<route name=".content" pattern="^/content">
+							<route name=".meta" pattern="^/meta" action="Provider.ContentResource" />
+							<route name=".content" pattern="^/content" action="Provider.ContentResource" output_type="simple" />
+						</route>
 					</route>
 					
 					

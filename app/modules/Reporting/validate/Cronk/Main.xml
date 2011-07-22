@@ -47,6 +47,30 @@
 					<error>Validation jasper config (jasperconfig) failed</error>
 				</errors>
 			</validator>
+			
+			<validator class="number" name="enable_onthefly" required="false">
+				<argument>enable_onthefly</argument>
+				
+				<errors>
+					<error>Validation of parameter 'enable_onthefly' could not be validated</error>
+				</errors>
+			</validator>
+			
+			<validator class="number" name="enable_repository" required="false">
+				<argument>enable_repository</argument>
+				
+				<errors>
+					<error>Validation of parameter 'enable_repository' could not be validated</error>
+				</errors>
+			</validator>
+			
+			<validator class="number" name="enable_scheduling" required="false">
+				<argument>enable_onthefly</argument>
+				
+				<errors>
+					<error>Validation of parameter 'enable_scheduling' could not be validated</error>
+				</errors>
+			</validator>
 		</validators>
 		
 	</ae:configuration>

@@ -27,13 +27,36 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 		var displayField = config.displayField;
 		var valueField = config.valueField;
 		
+		var url = AppKit.util.Config.getBaseUrl() + String.format('/web/api/{0}/json', config.target.toLowerCase());
+		
 		var store = new Ext.data.JsonStore({
-			url : AppKit.util.Config.getBaseUrl() + String.format('/web/api/{0}/json', config.target.toLowerCase()),
+			url : url,
 			autoDestroy : true,
 			root : 'result',
 			idProperty : displayField,
-			fields : [displayField, valueField]
+			fields : [displayField, valueField],
+			baseParams : {
+				order_col : displayField
+			},
+			
+			listeners : {
+				beforeload : function(store, options) {
+					if (!Ext.isEmpty(store.baseParams.query)) {
+						store.baseParams.filters_json = Ext.util.JSON.encode({
+							type : 'AND',
+							field : [{
+								type : 'atom',
+								field : [displayField],
+								method : ['like'],
+								value : [String.format('*{0}*', store.baseParams.query)]
+							}]
+						});
+					}
+				}
+			}
 		});
+		
+		store.load();
 		
 		return store;
 	},

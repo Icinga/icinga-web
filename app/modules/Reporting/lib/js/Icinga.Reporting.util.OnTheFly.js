@@ -1,6 +1,6 @@
 Ext.ns('Icinga.Reporting.util');
 
-Icinga.Reporting.util.OnTheFly = Ext.extend(Ext.Container, {
+Icinga.Reporting.util.OnTheFly = Ext.extend(Icinga.Reporting.abstract.ResizedContainer, {
 	layout : 'border',
 	height : 800, // Don't worry, we resize later
 	border : false,
@@ -34,24 +34,14 @@ Icinga.Reporting.util.OnTheFly = Ext.extend(Ext.Container, {
 			this.paramPanel
 		]);
 		
-		var resizeFn = function(c) {
-			var p = this.findParentByType('tabpanel');
-			if (p) {
-				this.setHeight(p.getInnerHeight());
-			}
-		}
-		
-		this.on('afterrender', resizeFn, this, { single : true });
-		this.on('resize', resizeFn, this, { single : true });
-		
-		Ext.EventManager.onWindowResize(resizeFn, this);
-		
 		this.on('afterrender', this.processApplication, this);
 	},
 	
 	processApplication : function() {
 		this.resourceTree.getTreePanel().on('click', function(node, e) {
-			this.paramPanel.initUi(node.attributes);
+			if (node.id !== 'root') {
+				this.paramPanel.initUi(node.attributes);
+			}
 		}, this);
 	}
 	

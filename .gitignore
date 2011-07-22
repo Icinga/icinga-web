@@ -5,6 +5,7 @@ autom4te.cache/
 app/cache/config/*.php
 app/cache/content
 app/data/log/
+app/data/tmp
 app/config/icinga.xml
 app/config/databases.xml
 app/config/settings.xml

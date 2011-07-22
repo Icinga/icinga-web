@@ -287,17 +287,21 @@ Cronk.util.GridFilterWindow = function() {
 			 */
 			setGrid : function(g) {
 				oGrid = g;
+				
 				if ("originParams" in oGrid.getStore()) {
 					oOrgBaseParams = oGrid.getStore().originParams;
 				}
 				
 				oGrid.on('activate', function() {
-	
 					if (oCoPanel) {
 						oGrid.filter_params = getFormValues(false);
 					}
 					return true;
-				});
+				}, this);
+				
+				oGrid.getStore().on('datachanged', function(store) {
+					this.markActiveFilters();
+				}, this);
 				
 				if (oGrid.filter_params) {
 					oGrid.on("render",this.applyFilters.createDelegate(this,oGrid.filter_params));
@@ -325,15 +329,18 @@ Cronk.util.GridFilterWindow = function() {
 				oFilter = {}; 
 			},
 
-			markActiveFilters : function(data) {
+			markActiveFilters : function() {
 				var btn = Ext.getCmp(oGrid.id+"_filterBtn");
 				if(!btn) {
 					this.markActiveFilters.defer(200,this,[data]);
 					return true;
 				}
+				
 				var i = 0;
-				for(var elem in data)
+				for (var ele in oGrid.filter_params) {
 					i++;
+				}
+			
 				if(i)
 					btn.addClass("activeFilter");
 				else
@@ -346,17 +353,13 @@ Cronk.util.GridFilterWindow = function() {
 			 */
 			applyFilters : function(owd) {
 				var data = owd || getFormValues();
-				this.markActiveFilters(data);
 				oGrid.getStore().baseParams = {};
 				Ext.apply(oGrid.getStore().baseParams, oOrgBaseParams);
 				Ext.apply(oGrid.getStore().baseParams, data);
-	//			console.log(data);
-	//			console.log('APPLY');
-	//			console.log(oGrid.getStore().baseParams);
 			
 				
-				oGrid.getStore().reload();
-				// oGrid.fireEvent('activate');
+				oGrid.getStore().load();
+				oGrid.fireEvent('activate');
 				
 				oWindow().hide();
 			},
@@ -369,10 +372,15 @@ Cronk.util.GridFilterWindow = function() {
 				oGrid.getStore().baseParams = oOrgBaseParams;
 				oGrid.filter_params = null;
 				oGrid.filter_types = null;
-				oGrid.getStore().reload();
+				oGrid.getStore().load();
+				
 				var btn = Ext.getCmp(oGrid.id+"_filterBtn");
-				if(btn)
+				
+				if(btn) {
 					btn.removeClass("activeFilter");
+				}
+				
+				oFilterHandler.removeAllComponents();
 				oGrid.fireEvent('activate');
 			},
 			

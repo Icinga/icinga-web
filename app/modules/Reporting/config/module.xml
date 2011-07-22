@@ -19,11 +19,26 @@
 				
 				<!-- Reporting Javascript libs -->
 				<setting name="appkit_module.app.javascript_files">
-					<!-- UI -->
+				
+					<!-- Base classes -->
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.abstract.ResizedContainer.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.abstract.ApplicationWindow.js</ae:parameter>
+				
+					<!-- UI - the cronk itself -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.Cronk.js</ae:parameter>
+					
+					<!-- The main modes, UI and component classes -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.OnTheFly.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.Repository.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ReportScheduling.js</ae:parameter>
+					
+					<!-- Tool widgets -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ResourceTree.js</ae:parameter>
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.RunReportPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ContentResourcePanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.SchedulingListPanel.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ScheduleTaskList.js</ae:parameter>
+					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.util.ScheduleEditForm.js</ae:parameter>
 					
 					<!-- Input Controls -->
 					<ae:parameter>%core.module_dir%/Reporting/lib/js/Icinga.Reporting.inputControl.Default.js</ae:parameter>
@@ -41,6 +56,31 @@
 				
 				<!-- Temp report generation dir -->
 				<setting name="dir.download">%core.module_dir%/Reporting/data/tmp</setting>
+				
+				<!-- Previewable mime types -->
+				<setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml|application\/pdf.+/i]]></setting>
+				
+				<!-- Previewable ws types (Jasper short form) -->
+				<setting name="preview.jasper_resources">
+					<ae:parameter>com.jaspersoft.jasperserver.api.metadata.common.domain.FileResource</ae:parameter>
+					<ae:parameter>com.jaspersoft.jasperserver.api.metadata.common.domain.ContentResource</ae:parameter>
+				</setting>
+				
+				<!-- Resource type icon classes -->
+				<setting name="icon.wsType.mapping">
+					<ae:parameter name="reportUnit">icinga-icon-report</ae:parameter>
+					<ae:parameter name="bean">icinga-icon-bean</ae:parameter>
+					<ae:parameter name="contentResource">icinga-icon-report-run</ae:parameter>
+					<ae:parameter name="datasource">icinga-icon-database</ae:parameter>
+					<ae:parameter name="dataType">icinga-icon-cog</ae:parameter>
+					<ae:parameter name="folder"></ae:parameter>
+					<ae:parameter name="font">icinga-icon-document</ae:parameter>
+					<ae:parameter name="img">icinga-icon-image</ae:parameter>
+					<ae:parameter name="inputControl">icinga-icon-ui-text-field</ae:parameter>
+					<ae:parameter name="jar">icinga-icon-jar</ae:parameter>
+					<ae:parameter name="jdbc">icinga-icon-databases-relation</ae:parameter>
+					<ae:parameter name="jndi">icinga-icon-folder-network</ae:parameter>
+				</setting>
 				
 				<!-- Parameter and datatype mapping -->
 				<setting name="parameter.mapping.name">

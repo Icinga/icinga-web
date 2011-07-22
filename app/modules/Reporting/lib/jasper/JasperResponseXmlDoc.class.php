@@ -1,8 +1,6 @@
 <?php
 
-class JasperResponseXmlDoc extends DOMDocument implements Iterator {
-    const XML_VERSION = '1.0';
-    const XML_ENCODING = 'UTF-8';
+class JasperResponseXmlDoc extends DOMDocument implements Iterator, Countable, JasperI {
     
     /**
      * @var DOMNodeList
@@ -31,6 +29,10 @@ class JasperResponseXmlDoc extends DOMDocument implements Iterator {
     public function returnCode() {
         $rc_node = $this->getElementsByTagName('returnCode')->item(0);
         
+        if (!$rc_node || !$rc_node->hasChildNodes()) {
+            return 0;
+        }
+        
         while ($rc_node->hasChildNodes()) {
             $rc_node = $rc_node->firstChild;
         }
@@ -55,6 +57,16 @@ class JasperResponseXmlDoc extends DOMDocument implements Iterator {
         }
         
         return false;
+    }
+    
+    public function count() {
+        $xpath = new DOMXPath($this);
+        $nodes = $xpath->evaluate('resourceDescriptor[@name]');
+        if ($nodes && $nodes->length) {
+            return $nodes->length;
+        }
+        
+        return 0;
     }
     
     public function current() {

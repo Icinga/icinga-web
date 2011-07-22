@@ -26,7 +26,7 @@ class Reporting_Provider_TreeLoaderSuccessView extends ReportingBaseView {
 	        $filter = $this->getContext()->getModel('JasperTreeFilter', 'Reporting');
 	        
 	        if ($filter_val == 'reports') {
-	            $filter->addFilter(Reporting_JasperTreeFilterModel::TYPE_DESCRIPTOR, JasperResourceDescriptor::DESCRIPTOR_TYPE, '/^folder|reportunit$/i');
+	            $filter->addFilter(Reporting_JasperTreeFilterModel::TYPE_DESCRIPTOR, JasperResourceDescriptor::DESCRIPTOR_ATTR_TYPE, '/^folder|reportunit$/i');
 	        }
 	        
 	        $params['filter'] = $filter;

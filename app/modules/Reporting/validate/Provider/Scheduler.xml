@@ -15,13 +15,22 @@
 					<error>Parameter for jasperconfig namespace (jasperconfig) validation failed</error>
 				</errors>
 			</validator>
+			
+			<validator class="string" name="action" required="true">
+				<argument>action</argument>
+				
+				<errors>
+					<error>Could not validata parameter action. Should be some of meta, content</error>
+				</errors>
+			</validator>
+			
 			<validator class="AppKitUriValidator" name="uri" required="true">
 				<argument>uri</argument>
 				
 				<errors>
-					<error>Could no validate uri parameter for fetching report parameters</error>
+					<error>Could not validate uri</error>
 				</errors>
-			</validator>
+			</validator> 
 		</validators>
 		
 	</ae:configuration>

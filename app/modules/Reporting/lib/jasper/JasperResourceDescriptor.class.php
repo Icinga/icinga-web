@@ -1,14 +1,6 @@
 <?php
 
-class JasperResourceDescriptor extends DOMDocument {
-    
-    const XML_VERSION = '1.0';
-    const XML_ENCODING = 'UTF-8';
-    
-    const DESCRIPTOR_NAME = 'name';
-    const DESCRIPTOR_TYPE = 'wsType';
-    const DESCRIPTOR_URI = 'uriString';
-    const DESCRIPTOR_NEW = 'isNew';
+class JasperResourceDescriptor extends DOMDocument implements JasperI {
     
     /**
      * @var AgaviParameterHolder
@@ -137,7 +129,7 @@ class JasperResourceDescriptor extends DOMDocument {
      */
     public function getCrdate() {
         // Java provides ms
-        return $this->__crdate/1000;
+        return strftime('%Y-%m-%d %H:%M:%S', $this->__crdate/1000);
     }
     
     /**
