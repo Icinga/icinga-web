@@ -919,7 +919,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
             list ($expression, $components, $alias) = $aggregate;
 
             $tableAliases = array();
-            print_r($aggregate);
+            
             // iterate through the component references within the aggregate function
             if ( ! empty ($components)) {
                 foreach ($components as $component) {
