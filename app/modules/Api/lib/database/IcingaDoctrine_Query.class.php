@@ -202,6 +202,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
             else
                 $this->checkForAlias($dql,array($this->mainAlias));
         }
+        
     }
     
   

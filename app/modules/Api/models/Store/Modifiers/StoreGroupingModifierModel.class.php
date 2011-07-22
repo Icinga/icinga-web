@@ -50,8 +50,11 @@ class Api_Store_Modifiers_StoreGroupingModifierModel extends IcingaBaseModel
     * @access private
     **/
     protected function modifyImpl(Doctrine_Query &$o) {
-        if($this->groupfields)
-            $o->groupBy($this->groupfields);
+        if($this->groupfields) {
+            $groups = explode(",",$this->groupfields);
+            foreach($groups as $group)
+                $o->addGroupBy($group);
+        }    
     }
 
     /**

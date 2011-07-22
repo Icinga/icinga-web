@@ -81,13 +81,15 @@ abstract class BaseIcingaContactgroups extends Doctrine_Record {
         $this->hasMany('IcingaHosts as hosts', array(
                            'local' => 'contactgroup_object_id',
                            'foreign' => 'host_id',
-                           'refClass' => 'IcingaHostContactgroups'
+                           'refClass' => 'IcingaHostContactgroups', 
+                           'idField' => 'contactgroup_object_id' 
                           
                     ));
         $this->hasMany('IcingaServices as services', array(
                            'local' => 'contactgroup_object_id',
                            'foreign' => 'service_id',
-                           'refClass' => 'IcingaServiceContactgroups'   
+                           'refClass' => 'IcingaServiceContactgroups', 
+                           'idField' => 'contactgroup_object_id' 
                     ));
 
         $this->hasMany('IcingaContacts as members', array(

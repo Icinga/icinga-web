@@ -36,7 +36,7 @@
 abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
 {
     protected $_tables = array();
-
+    private static $i = 0;
     /**
      * Gets the custom field used for indexing for the specified component alias.
      *
@@ -111,19 +111,21 @@ abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
             $activeRootIdentifier = null;
         } else { 
             $data = $stmt->fetch(Doctrine_Core::FETCH_ASSOC); 
+            
             if ( ! $data) { 
                 return $result; 
             }
         }
-
+         
         do {
             $table = $this->_queryComponents[$rootAlias]['table'];
-        
+            
             if ($table->getConnection()->getAttribute(Doctrine_Core::ATTR_PORTABILITY) & Doctrine_Core::PORTABILITY_RTRIM) {
                 array_map('rtrim', $data);
             }
         
             $id = $idTemplate; // initialize the id-memory
+           
             $nonemptyComponents = array();
             $rowData = $this->_gatherRowData($data, $cache, $id, $nonemptyComponents);
 
@@ -183,6 +185,7 @@ abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
             // now hydrate the rest of the data found in the current row, that belongs to other
             // (related) components.
             foreach ($rowData as $dqlAlias => $data) {
+                
                 $index = false;
                 $map = $this->_queryComponents[$dqlAlias];
                 $table = $map['table'];
@@ -287,9 +290,11 @@ abstract class Doctrine_Hydrator_Graph extends Doctrine_Hydrator_Abstract
     protected function _gatherRowData(&$data, &$cache, &$id, &$nonemptyComponents)
     {
         $rowData = array();
-
+      
+         
         foreach ($data as $key => $value) {
-            // Parse each column name only once. Cache the results. 
+           
+             // Parse each column name only once. Cache the results. 
             if ( ! isset($cache[$key])) {
                 // check ignored names. fastest solution for now. if we get more we'll start
                 // to introduce a list.

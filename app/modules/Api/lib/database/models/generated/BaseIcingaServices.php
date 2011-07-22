@@ -614,13 +614,13 @@ abstract class BaseIcingaServices extends Doctrine_Record {
         ///Retrieved by custom finder
         $this->hasMany("IcingaContacts as contacts", array(
                            'local' => 'service_id',
-                           'foreign' => 'service_id',
+                           'foreign' => 'contactgroup_object_id',
                            'refClass' => 'IcingaServiceContacts',
                            'idField' => 'service_id'
                        ));
         $this->hasMany("IcingaContactgroups as contactgroups", array(
                            'local' => 'service_id',
-                           'foreign' => 'service_id',
+                           'foreign' => 'contactgroup_object_id',
                            'refClass' => 'IcingaServiceContactgroups',
                            'idField' => 'service_id'
                        ));

@@ -129,7 +129,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         'HOST_CHILD_NAME'                =>      'oh.name1',
         'HOST_CUSTOMVARIABLE_NAME'         =>        'cvsh.varname',
         'HOST_CUSTOMVARIABLE_VALUE'        =>        'cvsh.varvalue',
-        'HOST_IS_PENDING'       =>        '(hs.has_been_checked-hs.should_be_scheduled)*-1 > 0',
+        'HOST_IS_PENDING'       =>        '(hs.has_been_checked-hs.should_be_scheduled)*-1',
             // Service data
 
         'SERVICE_ID'            =>        's.service_id',
@@ -186,7 +186,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         'SERVICE_CUSTOMVARIABLE_NAME'=> 'cvss.varname',
         'SERVICE_CUSTOMVARIABLE_VALUE'=>'cvss.varvalue',
         'SERVICE_STATE_COUNT'        => 'count(ss.current_state)',
-        'SERVICE_IS_PENDING'        =>  '(ss.has_been_checked-ss.should_be_scheduled)*-1 > 0',
+        'SERVICE_IS_PENDING'        =>  '(ss.has_been_checked-ss.should_be_scheduled)*-1',
 
         // Config vars
         'CONFIG_VAR_ID'             =>  'cfv.configfilevariable_id',
@@ -332,16 +332,17 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->setTarget("IcingaInstances");
             break;
             case IcingaApiConstants::TARGET_HOST:
-                $this->mainAlias = "h";
-                $this->setTarget("IcingaHosts");
+                $this->mainAlias = "oh";
+                $this->setTarget("IcingaObjects");
                 
                 $this->aliasDefs = array( 
-                    "oh"  => array("src" => "h", "relation" => "object","type"=>"left", "alwaysJoin" => true),
+                    "h"  => array("src" => "oh", "relation" => "host", "alwaysJoin" => true),
                     "hs"  => array("src" => "h", "relation" => "status","alwaysJoin" => true),
                     "i"   => array("src" => "h", "relation" => "instance"),
                     "cg"  => array("src" => "h", "relation" => "contactgroups"),
                     "cgm" => array("src" => "cg", "relation" => "members"),
                     "hg"  => array("src" => "h", "relation" => "hostgroups"),
+                    'ohg' => array('src' => 'hg', "relation" => "object"),
                     "hgm" => array("src" => "h","relation" => "members"),
                     "oc"  => array("src" => "cgm","relation" => "object"),
                     "ocg"  => array("src" => "cg","relation" => "object"),
@@ -352,11 +353,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 ); 
             break;
             case IcingaApiConstants::TARGET_SERVICE:
-                $this->mainAlias = "s";
-                $this->setTarget("IcingaServices");
+                $this->mainAlias = "os";
+                $this->setTarget("IcingaObjects");
                 
                 $this->aliasDefs = array(      
-                    "os"  => array("src" => "s", "relation" => "object", "alwaysJoin" => true),
+                    "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
                     "i"  => array("src" => "s", "relation" => "instance"),
                     "cg" => array("src" => "s", "relation" => "contactgroups"),
                     "cgm" => array("src"=> "s", "relation" => "contacts"),
@@ -405,7 +406,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_SERVICEGROUP:
                 $this->mainAlias = "sg";
                 $this->setTarget("IcingaServicegroups");
-                
+               
                 $this->aliasDefs = array(
                     "osg"   => array("src" => "sg", "relation" => "object"),
                     "sgm"   => array("src" => "sg", "relation" => "members"), 
@@ -508,6 +509,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_HOST_STATUS_HISTORY:
                 $this->mainAlias = "sh";
                 $this->setTarget("IcingaStatehistory");
+                
                 $this->aliasDefs = array(
                     "oh" => array("src" => "sh", "relation" => "object"),
                     "h"  => array("src" => "sh", "relation" => "hosts"),
@@ -787,7 +789,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         }
         foreach($this->additionalSelects as $select) {
             $o->addSelect($select);
-        }
+        }  
+       
         foreach($this->forceGroup as $group) {
             $o->addGroupBy($group);
         } 

@@ -85,6 +85,7 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
                     $res->setSearchFilter($source[3]);
                 }
 
+                
                 $arr = $res->fetch()->getRow();
 
                 foreach($arr as $key=>$value) {
@@ -99,6 +100,7 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
                     $this->data->setParameter($key, $value);
                 }
+
             } catch (IcingaApiException $e) {
                 return false;
             }

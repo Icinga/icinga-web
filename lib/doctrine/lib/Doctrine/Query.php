@@ -651,6 +651,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                 $this->_queryComponents[$componentAlias]['agg'][$index] = $alias;
 
                 $this->_neededTables[] = $tableAlias;
+
             } else {
                 $e = explode('.', $terms[0]);
 
@@ -662,7 +663,6 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                     $componentAlias = key($this->_queryComponents);
                     $field = $e[0];
                 }
-
                 $this->_pendingFields[$componentAlias][] = $field;
             }
             
@@ -915,14 +915,15 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
     {
         // iterate trhough all aggregates
         foreach ($this->_pendingAggregates as $aggregate) {
+            
             list ($expression, $components, $alias) = $aggregate;
 
             $tableAliases = array();
-
+            print_r($aggregate);
             // iterate through the component references within the aggregate function
             if ( ! empty ($components)) {
                 foreach ($components as $component) {
-
+                
                     if (is_numeric($component)) {
                         continue;
                     }
@@ -1404,7 +1405,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
         $subquery .= $this->_conn->quoteIdentifier($primaryKey);
 
         // pgsql & oracle need the order by fields to be preserved in select clause
-        if ($driverName == 'pgsql' || $driverName == 'oracle' || $driverName == 'oci' || $driverName == 'mssql' || $driverName == 'odbc') {
+        if ($driverName == 'pgsql' || $driverName == 'oracle' || $driverName == 'icingaOracle' || $driverName == 'oci' || $driverName == 'mssql' || $driverName == 'odbc') {
             foreach ($this->_sqlParts['orderby'] as $part) {
                 // Remove identifier quoting if it exists
                 $e = $this->_tokenizer->bracketExplode($part, ' ');

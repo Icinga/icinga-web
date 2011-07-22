@@ -96,17 +96,22 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $this->resolveIdFields($query); 
         $this->createAliasMap($query);
         $this->removeInvalidAliases($query); 
-      
+        
+        // dirty icinga specific fixes  
         $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
+        $query = preg_replace("/([^ ]*long_output)/i", "TO_CHAR($1)",$query);
+        
         if(substr_count($query,"(") != substr_count($query,")"))  
             $query .= ")";
+    
         return $query; 
     }
 
-    private function removeInvalidAliases(&$query) { 
-        $query = preg_replace("/(ORDER BY) *([A-Za-z._0-9]+) +AS +[_A-Za-z0-9]+ /i","$1 $2",$query);  
+    private function removeInvalidAliases(&$query) {
+      
+        $query = preg_replace("/(ORDER BY) *([A-Za-z._0-9]+) +AS +[_A-Za-z0-9]+/i","$1 $2",$query);  
        // $query = preg_replace("/(FROM *\( *SELECT.*? *)ORDER BY .*?(\) *\w+ *WHERE.*)/","$1 $2",$query);
-        
+       
     }
     
     private function resolveIdFields(&$query) {

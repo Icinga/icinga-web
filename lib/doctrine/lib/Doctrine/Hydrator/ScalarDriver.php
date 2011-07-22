@@ -36,7 +36,7 @@ class Doctrine_Hydrator_ScalarDriver extends Doctrine_Hydrator_Abstract
     {
         $cache = array();
         $result = array();
-
+       
         while ($data = $stmt->fetch(Doctrine_Core::FETCH_ASSOC)) {
             $result[] = $this->_gatherRowData($data, $cache);
         }
@@ -48,6 +48,7 @@ class Doctrine_Hydrator_ScalarDriver extends Doctrine_Hydrator_Abstract
     {
         $rowData = array();
         foreach ($data as $key => $value) {
+           
             // Parse each column name only once. Cache the results.
             if ( ! isset($cache[$key])) {
                 if ($key == 'DOCTRINE_ROWNUM') {
@@ -56,6 +57,8 @@ class Doctrine_Hydrator_ScalarDriver extends Doctrine_Hydrator_Abstract
                 // cache general information like the column name <-> field name mapping
                 $e = explode('__', $key);
                 $columnName = strtolower(array_pop($e)); 
+                if(!isset($this->_tableAliases[strtolower(implode('__', $e))]))
+                    continue;
                 $cache[$key]['dqlAlias'] = $this->_tableAliases[strtolower(implode('__', $e))];
                 $table = $this->_queryComponents[$cache[$key]['dqlAlias']]['table'];
                 // check whether it's an aggregate value or a regular field

@@ -5,7 +5,8 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
     protected $searchObject = false;
 	protected $resultType = IcingaApiConstants::RESULT_OBJECT;
 	protected $resultArray = false;
-	protected $resultRow = false;
+	
+    protected $resultRow = false;
 	protected $numResults = false;
 	protected $offset = false;
 
@@ -22,11 +23,11 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
 		$this->resultType = $type;
 	}
     public function current() {
+        
         return $this;
     }    
-    public function valid() {
-        
-        return($this->offset < $this->numResults); 
+    public function valid() { 
+        return($this->offset-1 < $this->numResults); 
     }
     public function key () {
  		return $this->offset;
@@ -43,21 +44,23 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
             $this->numResults = count($result);
         else
             $this->numResults = $result->count();
-       
+        
         $this->next(); 
      }
     public function next() {
         if($this->offset >= $this->numResults)
             $this->resultRow = false; 
         else if(is_object($this->searchObject))
-            $this->resultRow = $this->searchObject->get($this->offset++);
+            $this->resultRow = $this->searchObject->get($this->offset);
         else if (is_array($this->searchObject))
-            $this->resultRow = $this->searchObject[($this->offset++)];
-       
+            $this->resultRow = $this->searchObject[($this->offset)];
+        
+        $this->offset++; 
     }
 
     public function rewind() {
-        $this->offset = 0;
+    //    $this->offset = 0;
+       
     }
 
     public function get ($searchField = false) {

@@ -664,12 +664,12 @@ abstract class Doctrine_Query_Abstract
     public function getSqlTableAlias($componentAlias, $tableName = null)
     {
         $alias = array_search($componentAlias, $this->_tableAliasMap);
-
+        
         if ($alias !== false) {
             return $alias;
         }
 
-        if ($tableName === null) {
+        if ($tableName === null) { 
             throw new Doctrine_Query_Exception("Couldn't get short alias for " . $componentAlias);
         }
 

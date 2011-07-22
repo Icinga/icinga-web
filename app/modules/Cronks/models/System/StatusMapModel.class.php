@@ -11,7 +11,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
                                      'HOST_OBJECT_ID', 'HOST_NAME', 'HOST_ADDRESS', 'HOST_ALIAS', 'HOST_DISPLAY_NAME', 'HOST_CURRENT_STATE','HOST_IS_PENDING', 'HOST_OUTPUT',
                                      'HOST_PERFDATA', 'HOST_CURRENT_CHECK_ATTEMPT', 'HOST_MAX_CHECK_ATTEMPTS', 'HOST_LAST_CHECK', 'HOST_CHECK_TYPE',
                                      'HOST_LATENCY', 'HOST_EXECUTION_TIME', 'HOST_NEXT_CHECK', 'HOST_LAST_HARD_STATE_CHANGE', 'HOST_LAST_NOTIFICATION',
-                                     'HOST_IS_FLAPPING', 'HOST_SCHEDULED_DOWNTIME_DEPTH', 'HOST_STATUS_UPDATE_TIME'
+                                     'HOST_IS_FLAPPING', 'HOST_SCHEDULED_DOWNTIME_DEPTH', 'HOST_STATUS_UPDATE_TIME','HOST_CHILD_OBJECT_ID'
                                  );
 
     private $scriptTemplate = '<a href="#" onclick="return CronkTrigger({objectId:%s,objectName:\'%s\',objectType:\'host\'});">%s</a>';
@@ -62,8 +62,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             if ($row['HOST_IS_PENDING'] == '1') {
                 $row['HOST_CURRENT_STATE'] = "99";
             }
-
-            $objectId = $idPrefix . $row['HOST_OBJECT_ID'];
+           
+            $objectId = $idPrefix . $row['HOST_OBJECT_ID']; 
+           
             $hosts[$objectId] = array(
                                     'id'		=> $objectId,
                                     'name'		=> $row['HOST_NAME'],
@@ -80,7 +81,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             $parentObjectId = $idPrefix . $row->HOST_PARENT_OBJECT_ID;
 
             if (!array_key_exists($childObjectId, $hostReferences)) {
-                $hostReferences[$childObjectId] = $hosts[$childObjectId];
+            //    $hostReferences[$childObjectId] = $hosts[$childObjectId];
             }
 
             unset($hosts[$childObjectId]);
@@ -162,10 +163,13 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     private function flattenStructure($hosts) {
-
+       
         $hostsFlat = array();
-
+       
         foreach($hosts as $hostId => $hostData) {
+             
+            if(!isset($hostData['id']))
+                continue; 
             $currentHost = array(
                                'id'		=> $hostData['id'],
                                'name'		=> $hostData['name'],

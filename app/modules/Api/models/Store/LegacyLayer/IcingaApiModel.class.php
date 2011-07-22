@@ -68,6 +68,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
    
     public function setSearchOrder ($column, $direction = 'asc') { 
         $this->result = null; 
+        $this->setFields($column,true);
         $column = $this->resolveColumnAlias($column);    
         $this->setSortfield($column);
         $this->setDir(strtoupper($direction)); 	
@@ -75,6 +76,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
     public function reset() {
         $this->result = null;
+        $this->searchFilter->clear();	
         $this->resultColumns = array();
         $this->isCount = false;
     }	
@@ -89,11 +91,13 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     public function setSearchTarget($target) {
         $this->result = null; 
         parent::setSearchTarget($target);
+        
         return $this;
     }
     
     public function setResultColumns($target) {
         $this->result = null;
+        
         $this->resultColumns[] = $target;
         parent::setResultColumns($target);
         return $this;
@@ -111,6 +115,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
         } else {
             $result = $request->count(); 
         }
+       
         return $result; 
     }
     private $result = null;
@@ -169,7 +174,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
 	 * @see objects/search/IcingaApiSearchInterface#setSearchFilter()
 	 */
 	public function setSearchFilter ($filter, $value = false, $defaultMatch = IcingaApiConstants::MATCH_EXACT) {       
-	    $this->searchFilter->clear();	
+	    
         if($filter instanceof IcingaApiSearchFilterInterface) {
             $this->resolveFilterFields($filter);   
             $this->searchFilter->addFilter($filter);
