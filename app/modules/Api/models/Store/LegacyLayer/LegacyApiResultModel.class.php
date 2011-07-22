@@ -65,7 +65,7 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
 		$returnData = false;
 
 		if ($searchField === false) {
-			throw new IcingaApiResultException('get(): No search field defined!');
+		throw new AppKitException('get(): No search field defined!');
 			return false;
 		}
 
@@ -85,14 +85,14 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
 		$returnValue = false;
 	    if(is_object($this->resultRow)) {		
 			if ($this->resultRow->{$name} === null) {
-				throw new IcingaApiResultException('Search field "' . $name . '" not available!');
+				throw new AppKitException('Search field "' . $name . '" not available!');
 			} else {
 				$returnValue = $this->resultRow->{$name};
 			}
 		} else if(is_array($this->resultRow)) {
     		if ($this->resultRow !== false) {
 				if (!array_key_exists($name, $this->resultRow)) {
-					throw new IcingaApiResultException('Search field "' . $name . '" not available!');
+					throw new AppKitException('Search field "' . $name . '" not available!');
 				} else {
 					$returnValue = $this->resultRow[$name];
 				}

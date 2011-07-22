@@ -22,6 +22,9 @@ abstract class IcingaApiSearchFilterGroup implements IcingaApiSearchFilterInterf
 			$this->addFilter($filter);
 		}
 	}
+    public function clear() {
+        $this->filters = array();
+    }
 
 	/**
 	 * Adds a filter/filtergroup to this filtergroup

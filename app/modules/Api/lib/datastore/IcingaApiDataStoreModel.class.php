@@ -31,7 +31,8 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     **/
     protected $resultTypes = array(
         "ARRAY" => Doctrine_Core::HYDRATE_ARRAY,
-        "RECORD" => Doctrine_Core::HYDRATE_RECORD
+        "RECORD" => Doctrine_Core::HYDRATE_RECORD,
+        "SCALAR" => Doctrine_Core::HYDRATE_SCALAR
     );
     protected $resultType =  Doctrine_Core::HYDRATE_RECORD;
     

@@ -531,6 +531,11 @@ abstract class BaseIcingaServicestatus extends Doctrine_Record {
                           'local' => 'service_object_id',
                           'foreign' => 'service_object_id'
                       ));
+        $this->hasOne("IcingaObjects as serviceobject", array(
+                          'local' => 'service_object_id',
+                          'foreign' => 'object_id'
+                      ));
+
 
         $this->hasOne("IcingaTimePeriods as timeperiod",array(
                           'local' => 'check_timeperiod_object_id',

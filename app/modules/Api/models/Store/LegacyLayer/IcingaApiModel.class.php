@@ -40,12 +40,13 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     protected $resultType = Doctrine_Core::HYDRATE_ARRAY; 
     protected $searchFilter = false;
     protected $searchType = false;
-    
+    protected $resultColumns = array();
+ 
     public function setResultType($type) {
         if($type == IcingaApiConstants::RESULT_OBJECT)
             parent::setResultType("RECORD");
         if($type == IcingaApiConstants::RESULT_ARRAY)
-            parent::setResultType("ARRAY");
+            parent::setResultType("SCALAR");
         return $this;
     }
     
@@ -74,8 +75,8 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
     public function reset() {
         $this->result = null;
+        $this->resultColumns = array();
         $this->isCount = false;
-
     }	
     public function setSearchLimit ($start, $length = false) {
         $this->result = null;
@@ -93,6 +94,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     
     public function setResultColumns($target) {
         $this->result = null;
+        $this->resultColumns[] = $target;
         parent::setResultColumns($target);
         return $this;
     }
@@ -118,7 +120,6 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
             return $this->result;   
 
         $data =  $this->execRead();     
-
         if($this->isCount) {
             $fields = $this->getFields();
             $_data = array(array());
@@ -131,9 +132,20 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
             }
             $data = $_data;  
         }
+        if(is_array($data)) {
+            foreach($data as &$elem) {
+                foreach($elem as $key=>$val) {
+                    $ex = explode("_",$key,2);
+                    if(count($ex) > 1)
+                        $elem[$ex[1]] = $val;
+                }
+            }
+            
+        }
         $this->result = $this->getContext()->getModel(
             "Store.LegacyLayer.LegacyApiResult","Api",array(
-                "result" => $data 
+                "result" => $data,
+                "columns" => $this->resultColumns
             )
         );
         return $this->result;
@@ -157,7 +169,8 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
 	 * @see objects/search/IcingaApiSearchInterface#setSearchFilter()
 	 */
 	public function setSearchFilter ($filter, $value = false, $defaultMatch = IcingaApiConstants::MATCH_EXACT) {       
-		if($filter instanceof IcingaApiSearchFilterInterface) {
+	    $this->searchFilter->clear();	
+        if($filter instanceof IcingaApiSearchFilterInterface) {
             $this->resolveFilterFields($filter);   
             $this->searchFilter->addFilter($filter);
 

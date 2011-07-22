@@ -663,7 +663,7 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
         ));
         $this->hasMany("IcingaHosts as parents", array(
             'local' => 'host_id',
-            'foreign' => 'host_object_id',
+            'foreign' => 'parent_host_object_id',
             'refClass' => 'IcingaHostParenthosts',
             'idField' => 'host_id'
         ));
