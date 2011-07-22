@@ -92,51 +92,56 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
     }
     
     private $aliasMap = array();
-    public function fixCrappyIcingaTables($query) {
-        $this->resolveIdFields($query);
+    public function fixCrappyIcingaTables($query) { 
+        $this->resolveIdFields($query); 
         $this->createAliasMap($query);
         $this->removeInvalidAliases($query); 
-       
+      
         $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
-         
+        if(substr_count($query,"(") != substr_count($query,")"))  
+            $query .= ")";
         return $query; 
     }
 
-    private function removeInvalidAliases(&$query) {
+    private function removeInvalidAliases(&$query) { 
+        $query = preg_replace("/(ORDER BY) *([A-Za-z._0-9]+) +AS +[_A-Za-z0-9]+ /i","$1 $2",$query);  
+       // $query = preg_replace("/(FROM *\( *SELECT.*? *)ORDER BY .*?(\) *\w+ *WHERE.*)/","$1 $2",$query);
         
-        $query = preg_replace("/(ORDER BY) *([A-Za-z._]+) *AS *[_A-Za-z0-9]+/i","$1 $2",$query);
     }
     
     private function resolveIdFields(&$query) {
         
-        $tableRefMapRegExpNoAlias = "/(FROM|JOIN) *(?<table>\w+) *(WHERE|INNER|JOIN|ON|ORDER|LIMIT|GROUP)/"; 
-        
+        $tableRefMapRegExpNoAlias = "/(FROM|JOIN) *(?<table>\w+) *(WHERE|INNER|JOIN|ON|ORDER|LIMIT|GROUP)/";   
         $tableRefMapRegExp = "/(FROM|JOIN) *(?<table>\w+) *(AS)? *(?<alias>\w+) */"; 
+        $aliasedSelectExp = "/FROM *\( *SELECT.*?FROM *(?<table>\w+) .*\) *(?<alias>\w+) *WHERE/";
+
         $matches = array();
         $noAliasMatches = array();
-         
+        $aliasedSelectMatches = array();
+
         preg_match_all($tableRefMapRegExpNoAlias,$query,$noAliasMatches);
         preg_match_all($tableRefMapRegExp,$query,$matches);
+        preg_match_all($aliasedSelectExp,$query,$aliasedSelectMatches);
         foreach($noAliasMatches["table"] as $entry) { 
             $matches["table"][] = $entry;
             $matches["alias"][] = $entry;
         }
+        $matches["table"] = array_merge($matches["table"],$aliasedSelectMatches["table"]);
+        $matches["alias"] = array_merge($matches["alias"],$aliasedSelectMatches["alias"]);
         
         for($i=0;$i<count($matches["table"]);$i++) {
             $table = $matches["table"][$i];
-            $alias = $matches["alias"][$i];
-            
+            $alias = $matches["alias"][$i];  
                 
             $editedTable = $table;
             if(preg_match("/[^uai]s$/",$table))
                 $editedTable = substr($table,0,-1);
             $editedTable = preg_replace("/ie$/","y",$editedTable);
-            
-            $id = $alias.".".$editedTable."_id";
-            
-            $query = preg_replace("/".$id."/",$alias.".id",$query);
            
-         }
+            $id = $alias.".".$editedTable."_id";
+           
+            $query = preg_replace("/".$id."/",$alias.".id",$query);      
+        }
         
     } 
 
@@ -148,6 +153,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
        
         preg_match_all($reg,$query,$matches);
         foreach($matches["alias"] as $alias) {
+            if(preg_match("/DOCTRINE.*?/i",$alias))
+                continue;
             $query = preg_replace("/(AS *)".$alias."/","AS f_".$ctr,$query,1);
             $this->aliasMap[("f_".($ctr++))] = $alias;
         }
@@ -422,7 +429,10 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
             case Doctrine_Core::FETCH_ASSOC:
                 
                 foreach($this->aliasMap as $alias=>$value) { 
-                    
+                    if(!array_key_exists(strtoupper($alias),$result)) {
+                       // $result[$value] = ""; 
+                        continue;
+                    } 
                     $result[$value] = $result[strtoupper($alias)];    
                 }
           
