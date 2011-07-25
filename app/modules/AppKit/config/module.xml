@@ -61,19 +61,8 @@
 				<!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
 				<setting name="ajax.timeout">240000</setting>
 
-				<!-- Adding styles -->
-				<setting name="appkit_module.app.css_files">
-					<!-- extjs stylesheets -->
-					<ae:parameter>/js/ext3/resources/css/ext-all-notheme.css</ae:parameter>
-					<ae:parameter>/js/ext3/resources/css/xtheme-gray.css</ae:parameter>
-					<ae:parameter>/js/ext3/examples/ux/css/ux-all.css</ae:parameter>
-					
-					<!-- layout styles -->
-				
-					<ae:parameter>/styles/icinga.css</ae:parameter>
-					<ae:parameter>/styles/icinga.site.css</ae:parameter>
-					<ae:parameter>/styles/icinga-icons.css</ae:parameter>
-					<ae:parameter>/styles/icinga-cronk-icons.css</ae:parameter>
+				<setting name="agavi.include.css">
+                    <ae:parameter>%core.module_dir%/AppKit/config/css.xml</ae:parameter>
 				</setting>
                 
                 <setting name="agavi.include.javascript">
@@ -89,11 +78,6 @@
 				</setting>
 
 <!--				<setting name="appkit_module.app.javascript_dynamic"></setting>-->
-
-				<setting name="appkit_module.app.meta_tags">
-					<ae:parameter name="author">(c) 2009-2011 Icinga developer team - www.icinga.org</ae:parameter>
-					<ae:parameter name="robots">noindex</ae:parameter>
-				</setting>
 
 			</settings>
 	

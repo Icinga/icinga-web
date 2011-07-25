@@ -19,7 +19,13 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="stylesheets">
+    <xs:complexType name="css">
+        <xs:sequence>
+            <xs:group ref="envelope_1_0:parameters" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="css_import">
         <xs:sequence>
             <xs:group ref="envelope_1_0:parameters" />
         </xs:sequence>
@@ -28,7 +34,8 @@
     <xs:group name="configuration">
         <xs:all>
             <xs:element name="javascript" type="javascript" minOccurs="0" />
-            <xs:element name="stylesheets" type="stylesheets" minOccurs="0" />
+            <xs:element name="css" type="css" minOccurs="0" />
+            <xs:element name="css_import" type="css_import" minOccurs="0" />
         </xs:all>
     </xs:group>
 </xs:schema>

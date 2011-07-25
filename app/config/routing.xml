@@ -24,7 +24,10 @@
 
 				<route name=".logout" pattern="^/logout" action="Logout"/>
 
-				<route name=".squishloader" pattern="^/squishloader/javascript" action="Widgets.SquishLoader" output_type="javascript"/>
+				<route name=".squishloader" pattern="^/squishloader" action="Widgets.SquishLoader">
+                    <route name=".javascript" pattern="^/javascript" output_type="javascript" />
+                    <route name=".css" pattern="^/css" output_type="css" />
+                </route>
 
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
 					 <route name=".principaledit" pattern="^/principaleditor" action="Admin.PrincipalEditor" output_type="simple"/>

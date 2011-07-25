@@ -24,7 +24,7 @@ class AppKit_ResourcesModel extends AppKitBaseModel implements AgaviISingletonMo
             AgaviConfig::get('core.config_dir') . '/javascript.xml'
         );
         include AgaviConfigCache::checkConfig(
-            AgaviConfig::get('core.config_dir') . '/stylesheets.xml'
+            AgaviConfig::get('core.config_dir') . '/css.xml'
         );
     }
 
@@ -41,15 +41,27 @@ class AppKit_ResourcesModel extends AppKitBaseModel implements AgaviISingletonMo
     }
 
     /**
-     * Get stylesheet files
+     * Get css files
      *
-     * @return array stylesheet files
+     * @return array css files
      *
      * @author Eric Lippmann <eric.lippmann@netways.de>
      * @since 1.5.0
      */
-    public function getStylesheetFiles() {
-        return $this->resources['stylesheets'];
+    public function getCssFiles() {
+        return $this->resources['css'];
+    }
+    
+    /**
+    * Get css imports
+    *
+    * @return array css files
+    *
+    * @author Eric Lippmann <eric.lippmann@netways.de>
+    * @since 1.5.0
+    */
+    public function getCssImports() {
+    	return $this->resources['css_import'];
     }
 
 }

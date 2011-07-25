@@ -9,15 +9,8 @@
 
 				<!-- Module configuration -->
 
-				<!-- Adding styles -->
-				<setting name="appkit_module.app.css_files">
-					<!-- JIT - JavaScript InfoVis Toolkit -->
-					<ae:parameter>/styles/statusmap.css</ae:parameter>
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.css_files.site']/node())">
-						<xi:fallback></xi:fallback>
-					</xi:include>
-
-
+				<setting name="agavi.include.css">
+                    <ae:parameter>%core.module_dir%/Cronks/config/css.xml</ae:parameter>
 				</setting>
 
                 <setting name="agavi.include.javascript">

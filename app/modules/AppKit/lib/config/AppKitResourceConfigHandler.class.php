@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AppKitResourceConfigHandler allows you to define resource files like javascript and stylesheets which will be sent to the client
+ * AppKitResourceConfigHandler collects resources like javascript and css files from global and module configs
  * @author Eric Lippmann <eric.lippmann@netways.de>
  * @since 1.5.0
  */
@@ -17,7 +17,7 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
      * Resource types to collect
      * @var array string type => string suffix
      */
-    protected $_resources = array('javascript' => '.js', 'stylesheets' => '.css');
+    protected $_resources = array('javascript' => '.js', 'css' => '.css', 'css_import' => '.css');
 
     /**
      * Collect resource files
@@ -34,7 +34,7 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
     protected function collectResource($resource, $sfx, AgaviXmlConfigDomElement $cfg) {
         $resources = array();
 
-        foreach($cfg->get($resource) as $rcfg) {
+        foreach($cfg->getChildren($resource, null, false) as $rcfg) {
             $_resources = array();
 
             foreach($rcfg->getAgaviParameters() as $r) {

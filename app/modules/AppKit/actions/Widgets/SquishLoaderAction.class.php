@@ -7,32 +7,53 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction {
 	}
 	
 	public function executeRead(AgaviRequestDataHolder $rd) {
-		$files = array ();
-		$actions = array ();
+		$ra = explode('.', array_pop(
+			$this->getContext()->getRequest()->getAttribute(
+				'matched_routes', 'org.agavi.routing'
+			)
+		));
+		
+		$type = array_pop($ra);
+		
+		$loader = $this->getContext()->getModel(
+			'SquishFileContainer',
+			'AppKit',
+			array('type' => $type)
+		);
 		
 		$resources = $this->getContext()->getModel('Resources', 'AppKit');
-		$loader = $this->getContext()->getModel('SquishFileContainer', 'AppKit', array('type' => 'javascript'));
-
-		try {
-			
-			$loader->addFiles(
-				$resources->getJavascriptFiles()
-			);
-			
-			$loader->squishContents();
-
-			$actions = $this->getContext()->getRequest()->getAttribute('app.javascript_actions', AppKitModuleUtil::DEFAULT_NAMESPACE, array());
-
-			$this->setAttribute('javascript_actions', $actions);
-
-			$this->setAttribute('javascript_content', $loader->getContent(). chr(10));
-			
 		
+		switch($type) {
+			case 'javascript':
+				try {	
+					$loader->addFiles(
+						$resources->getJavascriptFiles()
+					);
+				
+					$actions = $this->getContext()->getRequest()->getAttribute('app.javascript_actions', AppKitModuleUtil::DEFAULT_NAMESPACE, array());
+				
+					$this->setAttribute('javascript_actions', $actions);
+				} catch(AppKitModelException $e) {
+					$this->setAttribute('errors', $e->getMessage());
+				}
+				
+				break;
+			case 'css':
+				try {
+					$loader->addFiles(
+						$resources->getCssFiles()
+					);
+				} catch(AppKitModelException $e) {
+					$this->setAttribute('errors', $e->getMessage());
+				}
+				
+				break;
 		}
-		catch(AppKitModelException $e) {
-			$this->setAttribute('errors', $e->getMessage());
-		}
+		
+		$loader->squishContents();
+		$this->setAttribute('content', $loader->getContent(). chr(10));
 		
 		return $this->getDefaultViewName();
 	}
+	
 }

@@ -46,11 +46,23 @@
                 <transformation>%core.module_dir%/AppKit/lib/config/xsl/resource.xsl</transformation>
             </handler>
 
-             <handler pattern="%core.config_dir%/stylesheets.xml" class="AppKitXIncludeConfigHandler">
+             <handler pattern="%core.config_dir%/css.xml" class="AppKitXIncludeConfigHandler">
                 <ae:parameters>
                     <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration]]></ae:parameter>
-                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/icinga/config/global/resource/1.0) xpointer(//ae:configurations/ae:configuration/r:stylesheets)]]></ae:parameter>
+                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/icinga/config/global/resource/1.0) xpointer(//ae:configurations/ae:configuration/r:css)]]></ae:parameter>
                     <ae:parameter name="handler">AppKitResourceConfigHandler</ae:parameter>
+                </ae:parameters>
+
+                <validation>%core.module_dir%/AppKit/lib/config/xsd/resource.xsd</validation>
+                <transformation>%core.module_dir%/AppKit/lib/config/xsl/resource.xsl</transformation>
+            </handler>
+            
+             <handler pattern="%core.config_dir%/css.xml" class="AppKitXIncludeConfigHandler">
+                <ae:parameters>
+                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration]]></ae:parameter>
+                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/icinga/config/global/resource/1.0) xpointer(//ae:configurations/ae:configuration/r:css_import)]]></ae:parameter>
+                    <ae:parameter name="handler">AppKitResourceConfigHandler</ae:parameter>
+                    <ae:parameter name="includeNS">css</ae:parameter>
                 </ae:parameters>
 
                 <validation>%core.module_dir%/AppKit/lib/config/xsd/resource.xsd</validation>
