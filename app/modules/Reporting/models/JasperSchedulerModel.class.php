@@ -56,6 +56,11 @@ class Reporting_JasperSchedulerModel extends JasperConfigBaseModel {
         $out = $this->__client->getJob($job_id);
         return $out;
     }
+    
+    public function deleteJob($job_id) {
+        $this->__client->deleteJob($job_id);
+        return true;
+    }
 }
 
 ?>

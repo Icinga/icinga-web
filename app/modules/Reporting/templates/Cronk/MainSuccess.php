@@ -13,6 +13,7 @@
     $resource_url = $ro->gen('modules.reporting.provider.content.meta', $provider_config);
     $scheduler_list_url = $ro->gen('modules.reporting.provider.scheduler', $provider_config + array('action' => 'list'));
     $scheduler_get_url = $ro->gen('modules.reporting.provider.scheduler', $provider_config + array('action' => 'job'));
+    $scheduler_delete_url = $ro->gen('modules.reporting.provider.scheduler', $provider_config + array('action' => 'delete'));
     
 ?>
 <script type="text/javascript">
@@ -34,7 +35,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		creator_url : '<?php echo $creator_url; ?>',
 		resource_url : '<?php echo $resource_url; ?>',
 		scheduler_list_url : '<?php echo $scheduler_list_url; ?>',
-		scheduler_get_url : '<?php echo $scheduler_get_url; ?>'
+		scheduler_get_url : '<?php echo $scheduler_get_url; ?>',
+		scheduler_delete_url : '<?php echo $scheduler_delete_url; ?>'
 	});
 	
 	// Better to remote all existing components

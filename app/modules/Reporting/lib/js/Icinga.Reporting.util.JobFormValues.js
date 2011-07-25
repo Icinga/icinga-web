@@ -13,9 +13,19 @@ Ext.apply(Icinga.Reporting.form.converter, {
 		}
 	},
 	
+	'default.simpleArray' : {
+		encode : function(value, fieldName) {
+			
+		},
+		
+		decode : function(value, fieldName) {
+			return value
+		}
+	},
+	
 	'mailNotification.toAddresses' : 'default.arrayValues',
-	'calendarTrigger.weekDays' : 'default.arrayValues',
-	'calendarTrigger.months' : 'default.arrayValues',
+	'calendarTrigger.weekDays' : 'default.simpleArray',
+	'calendarTrigger.months' : 'default.simpleArray',
 	
 	'outputFormats' : {
 		decode : function(value, fieldName) {
@@ -25,7 +35,21 @@ Ext.apply(Icinga.Reporting.form.converter, {
 			}
 			return out;
 		}
-}
+	},
+	
+	'mailNotification.resultSendType' : {
+		encode : function(value, fieldName) {
+			
+		},
+		
+		decode : function(value, fieldName) {
+			if (value == 'SEND_ATTACHMENT') {
+				return true;
+			}
+			
+			return false;
+		}
+	}
 });
 
 Icinga.Reporting.form.FieldConverterUtil = (function() {
@@ -58,6 +82,11 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 	data : {},
 	
 	form : null,
+	
+	triggerFields : {
+		simpleTrigger : false,
+		calendarTrigger : false
+	},
 	
 	constructor : function(config) {
 		Icinga.Reporting.util.JobFormValues.superclass.constructor.call(this);
@@ -101,10 +130,29 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 	
 	applyFlatData : function(data) {
 		Ext.iterate(data, this.applySingleFieldValue, this);
+		
+		// Decide which calendar trigger you want to use
+		if (this.triggerFields.simpleTrigger == false && this.triggerFields.calendaTrigger == false) {
+			this.form.findField('trigger').setValueForItem('recurrence-none'); 
+		} else if (this.triggerFields.simpleTrigger == true) {
+			this.form.findField('trigger').setValueForItem('recurrence-simple');
+			this.triggerFields.simpleTrigger = false;
+		} else if (this.triggerFields.calendarTrigger == true) {
+			this.form.findField('trigger').setValueForItem('recurrence-calendar');
+			this.triggerFields.calendarTrigger = false;
+		}
 	},
 	
 	applySingleFieldValue : function(fieldName, value) {
 		var fieldElement = this.form.findField(fieldName);
+		
+		if (fieldName == 'simpleTrigger' && value == null) {
+			this.triggerFields.calendarTrigger = true;
+		}
+		
+		if (fieldName == 'calendarTrigger' && value == null) {
+			this.triggerFields.simpleTrigger = true;
+		}
 		
 		if (!fieldElement) {
 			AppKit.log('Field not found', fieldName);

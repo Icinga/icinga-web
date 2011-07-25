@@ -58,11 +58,11 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 			region : 'south',
 			collapsible : false,
 			collapsed : true,
-			scheduler_get_url : this.scheduler_get_url,
+			scheduler_get_url : this.scheduler_get_url
 		});
 		
 		this.on('afterlayout', function() {
-			this.scheduleEditForm.setHeight(Math.floor(this.getInnerHeight() * .75));
+			this.scheduleEditForm.setHeight(528); // Math.floor(this.getInnerHeight() * .75)
 		}, this, { single : true })
 		
 		this.add([this.scheduleTaskList, this.scheduleEditForm]);
@@ -100,7 +100,42 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 	},
 	
 	processRemoveJob : function(b, e) {
+		var reFunc = function(buttonId, text, opt) {
+			if (buttonId == 'yes') {
+				Ext.Ajax.request({
+					url : this.scheduler_delete_url,
+					params : {
+						uri : this.selected_report.uri,
+						job : this.selected_record.id
+					},
+					success : function(response, opts) {
+						try {
+							var o = Ext.util.JSON.decode(response.responseText);
+							if (o.success == true) {
+								AppKit.notifyMessage(_('Job deleted'), _('Job was deleted successfully'));
+								this.scheduleTaskList.reload();
+							}
+							else {
+								AppKit.notifyMessage(_('Error'), String.format(_('Could not delete job: {0}'), o.error));
+							}
+					} catch(e) {
+							AppKit.log(response);
+						}
+					},
+					scope : this
+				})
+			}
+		};
 		
+		Ext.MessageBox.show({
+			title : _('Delete job'),
+			msg : _('Do you want delete the selected job?'),
+			buttons : Ext.MessageBox.YESNO,
+			fn : reFunc,
+			icon : Ext.MessageBox.WARNING,
+			animEl : e.getRelatedTarget(),
+			scope : this
+		});
 	},
 	
 	processRefreshTasklist : function(b, e) {
@@ -109,7 +144,11 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 	
 	processRowClick : function(grid, rowIndex, e) {
 		var sm = grid.getSelectionModel();
+		
+		this.scheduleEditForm.cancelEdit();
+		
 		delete(this.selected_record);
+		
 		if (sm.getCount()) {
 			this.selected_record = sm.getSelected();
 			this.setToolbarEnabled(true, [2,4,5]);

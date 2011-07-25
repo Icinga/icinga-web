@@ -59,6 +59,7 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 				treeloader_url : this.treeloader_url,
 				scheduler_list_url : this.scheduler_list_url,
 				scheduler_get_url : this.scheduler_get_url,
+				scheduler_delete_url : this.scheduler_delete_url,
 				parentCmp : this
 			});
 			

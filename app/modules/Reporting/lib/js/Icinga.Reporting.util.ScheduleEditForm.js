@@ -31,19 +31,22 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 		Icinga.Reporting.util.ScheduleEditForm.superclass.initComponent.call(this);
 		
 		this.formTabs = new Ext.TabPanel({
-			height : 400,
+			height : 500,
 			border : false,
 			activeTab : 0,
-
+			
+			deferredRender : false,
+			
 			defaults:{
 				bodyStyle:'padding:10px',
-				layout : 'form'
+				layout : 'form',
+				deferredRender : false
 			},
 			items : [{
 				iconCls : 'icinga-cronk-icon-1',
 				title : _('Basics'),
 				autoScroll : true,
-				height : 400,
+				height : 500,
 				defaults : {
 					width : 300
 				},
@@ -101,8 +104,9 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 						}, {
 							xtype : 'datefield',
 							name : 'trigger.startDate',
+							format : 'c',
 							disabled : true,
-							width : 150
+							width : 300
 						}]
 					}]
 				}]
@@ -139,7 +143,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					xtype : 'fieldset',
 					title : _('Simple'),
 					id : this.getId() + '-recurrence-simple',
-					hidden : true,
+					hidden : false,
 					items : [{
 						xtype : 'container',
 						layout : {
@@ -151,7 +155,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							xtype : 'textfield',
 							width : 50,
 							value : 1,
-							name : 'trigger.recurrenceInterval'
+							name : 'simpleTrigger.recurrenceInterval'
 						}, {
 							xtype : 'combo',
 							typeAhead : true,
@@ -166,16 +170,16 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 									'label'
 								],
 								data : [
-									[1, _('minutes')],
-									[2, _('hours')],
-									[3, _('days')],
-									[4, _('weeks')]
+									['MINUTE', _('minutes')],
+									['HOUR', _('hours')],
+									['DAY', _('days')],
+									['WEEK', _('weeks')]
 								]
 							}),
 							value : 3,
 							valueField : 'interval',
 							displayField : 'label',
-							name : 'trigger.recurrenceIntervalUnit'
+							name : 'simpleTrigger.recurrenceIntervalUnit'
 						}]
 					}, {
 						xtype : 'container',
@@ -195,20 +199,20 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 								type : 'hbox',
 								defaultMargins : ' 10 0 0 0' // BUG: Prefix with space to get work
 							},
-							width : 250,
+							width : 350,
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Times'),
 								name : 'recurrence_type',
 								width : 60,
 								listeners : {
-									check : this.processRecurrenceChange.createDelegate(this, ['times'], true)
+									check : this.processRecurrenceChange.createDelegate(this, ['simpleTrigger.occurrenceCount'], true)
 								}
 							}, {
 								xtype : 'textfield',
-								name : 'maxOccurrences',
+								name : 'simpleTrigger.occurrenceCount',
 								disabled : true,
-								width: 120
+								width: 200
 							}]
 						}, {
 							xtype : 'container',
@@ -216,20 +220,21 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 								type : 'hbox',
 								defaultMargins : ' 10 0 0 0' // BUG: Prefix with space to get work
 							},
-							width : 200,
+							width : 350,
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Until'),
 								name : 'recurrence_type',
 								width : 60,
 								listeners : {
-									check : this.processRecurrenceChange.createDelegate(this, ['endDate'], true)
+									check : this.processRecurrenceChange.createDelegate(this, ['simpleTrigger.endDate'], true)
 								}
 							}, {
 								xtype : 'datefield',
-								name : 'trigger.endDate',
+								name : 'simpleTrigger.endDate',
+								format : 'c',
 								disabled : true,
-								width: 120
+								width: 200
 							}]
 						}]
 					}]
@@ -237,8 +242,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					xtype : 'fieldset',
 					title : _('Calendar'),
 					id : this.getId() + '-recurrence-calendar',
-					height: 400,
-					hidden : true,
+					height: 500,
+					hidden : false,
 					items : [{
 						xtype : 'container',
 						height : 200,
@@ -372,6 +377,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							}, {
 								xtype :'datefield',
 								name : 'calendarTrigger.endDate',
+								format : 'c',
 								width : 200
 							}]
 						}]
@@ -554,6 +560,10 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 	},
 	
 	processFormCancel : function() {
+		this.cancelEdit();
+	},
+	
+	cancelEdit : function() {
 		try {
 			this.getForm().reset();
 		} catch (e) {
@@ -581,7 +591,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 				success : function(response, options) {
 //					try {
 						var data = Ext.util.JSON.decode(response.responseText);
-						this.applyFormData(data);
+						this.applyFormData.defer(10, this, [data]);
 //					} catch (e) {
 //						AppKit.notifyMessage(_('Error'), _(String.format(_('Could not parse response: {0}'), e)));
 //					}
