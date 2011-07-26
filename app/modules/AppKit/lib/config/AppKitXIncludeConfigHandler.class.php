@@ -68,16 +68,27 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
             );
 
             if($includes) {
-                AppKitXmlUtil::includeXmlFilesToTarget(
-                    $document,
-                    $this->getParameter('query'),
-                    $this->getParameter('pointer'),
-                    $includes
-                );
+                $pointers = $this->getParameter('pointer');
+                if(!is_array($pointers)) {
+                    $pointers = array($pointers);
+                }
+
+                foreach($pointers as $pointer) {
+                    AppKitXmlUtil::includeXmlFilesToTarget(
+                        $document,
+                        $this->getParameter('query'),
+                        $pointer,
+                        $includes
+                    );
+
+                    try {
+                        $document->xinclude();
+                    } catch(Exception $e) {
+
+                    }
+                }
             }
         }
-
-        $document->xinclude();
 
         return $configHandler->execute($document);
     }

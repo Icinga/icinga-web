@@ -41,12 +41,12 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
                 if(is_dir($r)) {
                     $_resources = array_merge(
                         $_resources,
-                        iterator_to_array(
+                        array_keys(iterator_to_array(
                             AppKitIteratorUtil::RegexRecursiveDirectoryIterator(
                                 $r,
                                 sprintf('/\%s/i', $sfx)
                             )
-                        )
+                        ))
                     );
                 } else {
                     $_resources[] = $r;
