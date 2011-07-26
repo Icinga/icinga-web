@@ -19,7 +19,7 @@ class AppKit_Widgets_HeaderDataAction extends AppKitBaseAction {
 				break;
 			case 'css':
 				$includes = array(
-					$this->getContext()->getRouting()->gen('appkit.squishloader.css')
+					$this->getContext()->getRouting()->gen('styles.css')
 				);
 
 				$resources = $this->getContext()->getModel('Resources', 'AppKit');

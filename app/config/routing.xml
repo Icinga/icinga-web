@@ -11,6 +11,10 @@
 					<xi:fallback></xi:fallback>
 				</xi:include>
 			</route>
+            
+            <route name="styles" pattern="^/styles" module="%actions.default_module%" action="Widgets.SquishLoader">
+                <route name=".css" pattern="^/css" output_type="css" />
+            </route>
 			
 			<!--
 				* AppKit routes
@@ -26,7 +30,6 @@
 
 				<route name=".squishloader" pattern="^/squishloader" action="Widgets.SquishLoader">
                     <route name=".javascript" pattern="^/javascript" output_type="javascript" />
-                    <route name=".css" pattern="^/css" output_type="css" />
                 </route>
 
 				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
