@@ -33,7 +33,18 @@
                                 <!-- Oracle specific -->
                                 <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
 			</database>
-			
+	
+	        <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AgaviDoctrineDatabase">
+		        <ae:parameter name="dsn">@api_subtype@://@api_db_user@:@api_db_pass@@@api_host@:@api_port@/@api_db_name@</ae:parameter>
+                <ae:parameter name="prefix">@api_db_prefix@</ae:parameter>
+                <ae:parameter name="charset">utf8</ae:parameter>
+                <ae:parameter name="manager_attributes">
+                    <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
+                </ae:parameter>
+                <ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
+                <ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>				
+            </database>
+                
 			<!-- include alternative configuration -->
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="databases.site.xml#xpointer(databases/node())">
 				<xi:fallback></xi:fallback>

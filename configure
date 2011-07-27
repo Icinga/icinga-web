@@ -653,8 +653,6 @@ with_web_absolute_path
 with_web_apache_path
 with_bin_user
 with_bin_group
-with_icinga_api
-with_api_check
 with_db_type
 with_db_host
 with_db_port
@@ -1300,9 +1298,6 @@ Optional Packages:
                           Include folder apache2 (default /etc/apache2/conf.d
   --with-bin-user=USER    user for all other files (default root)
   --with-bin-group=GROUP  group for all other files (default bin)
-  --with-icinga-api=PATH  Path to icinga-api (default
-                          /usr/local/icinga/share/icinga-api)
-  --without-api-check     Disable check for an existing icinga api
   --with-db-type=DBTYPE   Type of dbms (default mysql)
   --with-db-host=HOST     Host of dbms (default localhost)
   --with-db-port=PORT     Port of the dbms (default 3306)
@@ -2318,45 +2313,6 @@ else
 fi
 
 
-# Api related
-
-# Check whether --with-icinga_api was given.
-if test "${with_icinga_api+set}" = set; then :
-  withval=$with_icinga_api; icinga_api=$withval
-else
-  icinga_api=/usr/local/icinga/share/icinga-api
-
-fi
-
-
-
-# Check whether --with-api_check was given.
-if test "${with_api_check+set}" = set; then :
-  withval=$with_api_check; api_check=$withval
-else
-  api_check=yes
-
-fi
-
-
-
-if test "x$api_check" = xyes; then :
-
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for IcingaApi" >&5
-$as_echo_n "checking for IcingaApi... " >&6; }
-	if  test -e $icinga_api/IcingaApi.php && $GREP -q "class IcingaApi" $icinga_api/IcingaApi.php ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
-$as_echo "found" >&6; }
-else
-   as_fn_error $? "not found" "$LINENO" 5
-fi
-
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: *** Disable API check ***" >&5
-$as_echo "*** Disable API check ***" >&6; }
-fi
-
-
 # Web database switches
 
 # Check whether --with-db_type was given.
@@ -2618,7 +2574,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/settings.xml app/modules/Web/config/icinga-io.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/settings.xml app/modules/Api/config/access.xml app/modules/AppKit/cache/Widgets/SquishLoader.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3338,7 +3294,7 @@ do
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "app/config/settings.xml") CONFIG_FILES="$CONFIG_FILES app/config/settings.xml" ;;
-    "app/modules/Web/config/icinga-io.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/icinga-io.xml" ;;
+    "app/modules/Api/config/access.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/access.xml" ;;
     "app/modules/AppKit/cache/Widgets/SquishLoader.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/cache/Widgets/SquishLoader.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "tests/phpunit/test.properties") CONFIG_FILES="$CONFIG_FILES tests/phpunit/test.properties" ;;

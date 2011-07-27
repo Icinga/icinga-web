@@ -94,25 +94,6 @@ AC_ARG_WITH([bin_group],
 	bin_group=bin
 )
 
-# Api related
-AC_ARG_WITH([icinga_api],
-	AS_HELP_STRING([--with-icinga-api=PATH], [Path to icinga-api (default /usr/local/icinga/share/icinga-api)]),
-	icinga_api=$withval,
-	icinga_api=/usr/local/icinga/share/icinga-api
-)
-
-AC_ARG_WITH([api_check],
-	AS_HELP_STRING([--without-api-check], [Disable check for an existing icinga api]),
-	api_check=$withval,
-	api_check=yes
-)
-
-
-AS_IF([test "x$api_check" = xyes],
-       ACICINGA_CHECK_API([$icinga_api]),
-       AC_MSG_RESULT([*** Disable API check ***]))
-       
-
 # Web database switches
 AC_ARG_WITH([db_type],
 	AS_HELP_STRING([--with-db-type=DBTYPE], [Type of dbms (default mysql)]),
@@ -296,7 +277,7 @@ AC_CONFIG_FILES([
 	app/config/databases.xml
 	app/config/icinga.xml
 	app/config/settings.xml
-	app/modules/Web/config/icinga-io.xml
+    app/modules/Api/config/access.xml
 	app/modules/AppKit/cache/Widgets/SquishLoader.xml
 	etc/build.properties
 	tests/phpunit/test.properties
