@@ -35,12 +35,16 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 			border : false,
 			activeTab : 0,
 			
-			deferredRender : false,
+			layoutConfig : {
+				deferredRender : false
+			},
+			
+			forceLayout : true,
 			
 			defaults:{
 				bodyStyle:'padding:10px',
 				layout : 'form',
-				deferredRender : false
+				forceLayout : true
 			},
 			items : [{
 				iconCls : 'icinga-cronk-icon-1',
@@ -88,7 +92,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 						inputValue : 1 
 					}, {
 						xtype : 'container',
-						width : 200,
+						width : 350,
 						layout : {
 							type : 'hbox',
 							defaultMargins : ' 10 0 0 0'
@@ -160,7 +164,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							xtype : 'combo',
 							typeAhead : true,
 							triggerAction : 'all',
-							lazyRender : true,
+							width: 100,
 							
 							mode : 'local',
 							store : new Ext.data.ArrayStore({
@@ -176,7 +180,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 									['WEEK', _('weeks')]
 								]
 							}),
-							value : 3,
+							value : 'DAY',
 							valueField : 'interval',
 							displayField : 'label',
 							name : 'simpleTrigger.recurrenceIntervalUnit'
@@ -187,19 +191,29 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							type : 'vbox',
 							defaultMargins : ' 0 10 0 0'
 						},
-						height: 100,
+						height : 150,
 						items : [{
-							xtype : 'radio',
-							boxLabel : _('Indefinitely'),
-							name : 'recurrence_type',
-							checked : true
+							xtype : 'container',
+							width: 300,
+							height : 25,
+							layout : {
+								type : 'hbox',
+								defaultMargins : ' 10 0 0 0'
+							},
+							items : [{
+								xtype : 'radio',
+								boxLabel : _('Indefinitely'),
+								name : 'recurrence_type',
+								checked : true
+							}]
 						}, {
 							xtype : 'container',
 							layout : {
 								type : 'hbox',
-								defaultMargins : ' 10 0 0 0' // BUG: Prefix with space to get work
+								defaultMargins : ' 10 0 0 0'
 							},
 							width : 350,
+							height : 25,
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Times'),
@@ -221,6 +235,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 								defaultMargins : ' 10 0 0 0' // BUG: Prefix with space to get work
 							},
 							width : 350,
+							height : 25,
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Until'),
@@ -328,13 +343,14 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 						defaults : {
 							width : 300
 						},
-						height: 200,
+						height: 300,
 						items : [{
 							xtype : 'label',
 							text : _('Times')
 							
 						}, {
 							xtype : 'container',
+							height : 25,
 							layout : {
 								type : 'hbox',
 								defaultMargins : ' 0 0 10 0'
@@ -348,9 +364,11 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							}]
 						}, {
 							xtype : 'label',
+							height : 25,
 							text : _('Hint: Enter 24-hour times like 9,12,15 or ranges like 9-12,1-17')
 						}, {
 							xtype : 'container',
+							height : 25,
 							layout : {
 								type : 'hbox',
 								defaultMargins : ' 0 0 10 0'
@@ -364,9 +382,11 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							}]
 						}, {
 							xtype : 'label',
-							text : _('Hint: Enter 0,15,30,45 to run every 1/2 hour'),
+							height : 25,
+							text : _('Hint: Enter 0,15,30,45 to run every 1/2 hour')
 						}, {
 							xtype : 'container',
+							height : 25,
 							layout : {
 								type : 'hbox',
 								defaultMargins : ' 10 0 0 0'
@@ -513,6 +533,26 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 				}]
 			}]
 		});
+		
+		/*
+		 * Need to prerender all items in tab panel. Because
+		 * the form is not ready we don't do this.
+		 * @todo Check why deferred rendering is not working in card layout
+		 */
+		this.formTabs.on('afterrender', function(component) {
+			component.findBy(function(item, two) {
+				item.show();
+				if (['panel'].indexOf(item.getXType()) >= 0) {
+					item.doLayout();
+				}
+			}, this);
+			
+			this.collapse(false);
+
+		}, this, { single : true, delay : 400 });
+		/*
+		 * ----------------------------------------------------------------
+		 */
 		
 		this.add(this.formTabs);
 		

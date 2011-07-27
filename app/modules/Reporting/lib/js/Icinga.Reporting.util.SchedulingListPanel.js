@@ -57,12 +57,12 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 			border : false,
 			region : 'south',
 			collapsible : false,
-			collapsed : true,
+			collapsed : false,
 			scheduler_get_url : this.scheduler_get_url
 		});
 		
 		this.on('afterlayout', function() {
-			this.scheduleEditForm.setHeight(528); // Math.floor(this.getInnerHeight() * .75)
+			this.scheduleEditForm.setHeight(Math.floor(this.getInnerHeight()));
 		}, this, { single : true })
 		
 		this.add([this.scheduleTaskList, this.scheduleEditForm]);

@@ -49,6 +49,28 @@ Ext.apply(Icinga.Reporting.form.converter, {
 			
 			return false;
 		}
+	},
+	
+	'parameters' : {
+		encode : function(value, fieldName) {
+			
+		},
+		
+		decode : function(value, fieldName) {
+			var out = {};
+			Ext.iterate(value, function(val, key) {
+				out[val.name] = val.value;
+			});
+			
+			/**
+			 * Return this structure to add another
+			 * formvalues from this converter
+			 */
+			return {
+				flatData : true,
+				data : out
+			};
+		}
 	}
 });
 
@@ -106,7 +128,7 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 		if (Ext.isEmpty(this.flat_data)) {
 			this.flat_data = this.flattenObject(data, {}, '');
 		}
-		
+		AppKit.log(this.flat_data);
 		this.applyFlatData(this.flat_data);
 	},
 	
@@ -117,7 +139,18 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 				
 				if (Icinga.Reporting.form.FieldConverterUtil.hasConverter(newKey)) {
 					var converter = Icinga.Reporting.form.FieldConverterUtil.getConverter(newKey);
-					out[newKey] = converter.decode(val, newKey);
+					var newVal  = converter.decode(val, newKey);
+					
+					if (Ext.isObject(newVal) && !Ext.isEmpty(newVal.flatData) && !Ext.isEmpty(newVal.data)) {
+						/*
+						 * Flattening again the structue for setting sub form values
+						 * from object source
+						 */
+						this.flattenObject(newVal.data, out, newKey + '.');
+					} else {
+						out[newKey] = newVal;
+					}
+					
 				} else if (Ext.isArray(val) || Ext.isObject(val)) {
 					this.flattenObject(val, out, newKey + '.')
 				} else {
