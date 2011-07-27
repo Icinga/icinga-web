@@ -9,7 +9,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
     private $selection			= array();
     private $data				= array();
     private $command			= null;
-
+    private $instances           = array();
     private $timeFields			= array("checktime","endtime","starttime");
 
     public function  initialize(AgaviContext $context, array $parameters = array()) {
@@ -24,39 +24,31 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
         $this->selection = (array)$selection;
     }
 
-    public function setData(stdClass &$data) {
-        $this->data = (array)$data;
+    public function setData(array $data) {
+        $this->data = $data;
     }
 
-    public function buildCommandObjects() {
+    public function getConsoleInstance($instance) {
+        if(!isset($this->instances[$instance]))
+            $this->instances[$instance] = $this->getContext()->getModel("Console.ConsoleInterface","Api",
+                array(
+                    "icingaInstance"=>$instance
+                ))
+            ;
 
-        $co = array();
+        return $this->instances[$instance];
+        
+    }
 
-        foreach($this->selection as $sel) {
-            $item = array();
-            $item = array_merge((array)$sel, $this->data);
-
-            $co[] = $this->createSingleCommandObject($this->command, $item);
+    public function dispatchCommands() {
+        $dispatcher = $this->getContext()->getModel("Commands.CommandDispatcher","Api");
+        foreach($this->selection as $target) {
+            $console = $this->getConsoleInstance($target['instance']);
+            $dispatcher->setConsoleContext($console);        
+            $dispatcher->submitCommand($this->command,array_merge($target,$this->data));
         }
-
-        return $co;
-    }
-
-    private function createSingleCommandObject($command_name, array $data) {
-        $cmd = IcingaApi::getCommandObject();
-        $cmd->setCommand($command_name);
-
-        foreach($data as $name=>$value) {
-            // parse date
-            if (in_array($name, $this->timeFields)) {
-                $value = strtotime($value);
-            }
-
-            $cmd->setTarget($name, $value);
-        }
-
-        return $cmd;
-    }
+     
+    }    
 
     /**
      * Generate a time key

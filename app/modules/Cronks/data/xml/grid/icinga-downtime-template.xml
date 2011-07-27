@@ -51,13 +51,13 @@
         	<parameter name="enabled">true</parameter>
         	
         	<parameter name="source">
-        		<parameter name="IcingaApi::COMMAND_DOWNTIME_ID">downtime_internal_id</parameter>
-        		<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+        		<parameter name="IcingaApiConstants::COMMAND_DOWNTIME_ID">downtime_internal_id</parameter>
+        		<parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
         	</parameter>
         	
         	<parameter name="predefined">
-        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
-				<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
+        		<parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+				<parameter name="IcingaApiConstants::COMMAND_ENDTIME">now+7200</parameter>
         	</parameter>
         	
         	<parameter name="items">
@@ -80,7 +80,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_DOWNTIME</parameter>
+        <parameter name="target">IcingaApiConstants::TARGET_DOWNTIME</parameter>
         
         <!-- Limit the result (LOAD) -->
         <!-- <parameter name="limit">25</parameter> -->

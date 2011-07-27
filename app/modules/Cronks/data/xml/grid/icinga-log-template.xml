@@ -46,7 +46,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_LOG</parameter>
+        <parameter name="target">IcingaApiConstants::TARGET_LOG</parameter>
         
         <parameter name="id">log_id</parameter>
         

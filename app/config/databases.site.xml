@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databases xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+
+<!--
+	+++ Site configuration file +++
+	
+	This file won't be overwritten
+	
+-->
+
+ 
+
+<!--
+	<database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AgaviDoctrineDatabase">
+		
+        <ae:parameter name="dsn">pgsql://icinga:icinga@localhost:5432/icinga</ae:parameter>
+	
+
+		<ae:parameter name="prefix">icinga_</ae:parameter>
+        <ae:parameter name="charset">utf8</ae:parameter>
+		<ae:parameter name="manager_attributes">
+			<ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
+		</ae:parameter>
+		<ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
+		<ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>				
+	</database>
+-->
+<!--
+    <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AgaviDoctrineDatabase">
+		
+        <ae:parameter name="dsn">mysql://icinga_test:test@localhost:3306/icinga_test</ae:parameter>
+	
+
+		<ae:parameter name="prefix">icinga_</ae:parameter>
+        <ae:parameter name="charset">utf8</ae:parameter>
+		<ae:parameter name="manager_attributes">
+			<ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
+		</ae:parameter>
+		<ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
+		<ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>				
+	</database>
+	
+
+-->
+
+
+	<database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AgaviDoctrineDatabase">
+		<ae:parameter name="dsn">icingaOracle://icinga_test:icinga_test@127.0.0.1:1521/XE</ae:parameter>
+   
+	
+        <ae:parameter name="charset">utf8</ae:parameter>
+		<ae:parameter name="manager_attributes">
+			<ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
+		</ae:parameter>
+		<ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
+		<ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>				
+	</database>
+</databases>

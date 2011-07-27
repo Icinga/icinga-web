@@ -18,19 +18,19 @@
 
 		<datasource id="HOSTGROUPS">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOSTGROUP</target>
+			<target>IcingaApiConstants::TARGET_HOSTGROUP</target>
 			<columns>HOSTGROUP_ALIAS, HOSTGROUP_NAME</columns>
 		</datasource>
 
 		<datasource id="SERVICEGROUPS">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICEGROUP</target>
+			<target>IcingaApiConstants::TARGET_SERVICEGROUP</target>
 			<columns>SERVICEGROUP_ALIAS, SERVICEGROUP_NAME</columns>
 		</datasource>
 
 		<datasource id="HOST_STATUS_SUMMARY">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST_STATUS_SUMMARY</target>
+			<target>IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY</target>
 			<columns>HOST_CURRENT_STATE,HOST_STATE_COUNT</columns>
 			<filter_mapping>
 				<map name="CUSTOMVARIABLE_NAME">HOST_CUSTOMVARIABLE_NAME</map>
@@ -40,7 +40,7 @@
 
 		<datasource id="SERVICE_STATUS_SUMMARY">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_SERVICE_STATUS_SUMMARY</target>
+			<target>IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY</target>
 			<columns>SERVICE_CURRENT_STATE,SERVICE_STATE_COUNT</columns>
 			<filter_mapping>
 				<map name="CUSTOMVARIABLE_NAME">SERVICE_CUSTOMVARIABLE_NAME</map>

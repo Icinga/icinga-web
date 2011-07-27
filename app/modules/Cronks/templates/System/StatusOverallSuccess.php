@@ -66,14 +66,14 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 						filter['f[' + d.type + '_status-operator]'] = 50;	
 						// not pending
 						filter['f['+ d.type +'_is_pending-value]'] = 0;
-						filter['f['+ d.type +'_is_pending-operator]'] = 70;
+						filter['f['+ d.type +'_is_pending-operator]'] = 80;
 					} else if (d.state_org == 99) {	// check pending
 						// state ok
 						filter['f[' + d.type + '_status-value]'] = 0;
 						filter['f[' + d.type + '_status-operator]'] = 50;
 						// pending
 						filter['f['+ d.type +'_is_pending-value]'] = 0;
-						filter['f['+ d.type +'_is_pending-operator]'] = 81;
+						filter['f['+ d.type +'_is_pending-operator]'] = 71;
 					}
 
 					var id = 'status-overall-grid' + d.type + '-' + d.state_org;

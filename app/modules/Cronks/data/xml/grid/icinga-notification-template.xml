@@ -46,7 +46,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_NOTIFICATIONS</parameter>
+        <parameter name="target">IcingaApiConstants::TARGET_NOTIFICATIONS</parameter>
         
         <!-- Limit the result (LOAD) -->
         <!-- <parameter name="limit">25</parameter> -->

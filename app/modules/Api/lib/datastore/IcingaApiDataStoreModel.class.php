@@ -78,6 +78,7 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
         $request = $this->createRequestDescriptor();
         $this->applyModifiers($request); 
          
+        $request->autoResolveAliases(); 
         $this->lastQuery = $request;
         $result = $request->execute(NULL,$this->resultType);
          

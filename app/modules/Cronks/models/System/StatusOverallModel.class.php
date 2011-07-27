@@ -19,9 +19,9 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
     private function getData() {
 
         $sources = array(
-                       IcingaApi::TARGET_HOST_STATUS_SUMMARY =>
+                       IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY =>
                        array(self::TYPE_HOST, IcingaHostStateInfo::Create()->getStateList()),
-                       IcingaApi::TARGET_SERVICE_STATUS_SUMMARY =>
+                       IcingaApiConstants::TARGET_SERVICE_STATUS_SUMMARY =>
                        array(self::TYPE_SERVICE, IcingaServiceStateInfo::Create()->getStateList())
                    );
 

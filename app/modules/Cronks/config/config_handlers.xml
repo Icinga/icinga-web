@@ -3,8 +3,7 @@
 	<ae:configuration>
 		<handlers>
 			<handler pattern="%core.module_dir%/*/config/cronks*.xml" class="CronkModuleConfigHandler">
-				<validation>%core.module_dir%/Cronks/lib/xml/xsd/cronks.xsd</validation>
-				<transformation>%core.module_dir%/Cronks/lib/xml/xsl/cronks.xsl</transformation>
+				<validation>%core.module_dir%/Cronks/lib/xml/xsd/cronks.xsd</validation>	
 			</handler>
 		</handlers>
 	</ae:configuration>

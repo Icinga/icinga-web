@@ -186,7 +186,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
         return $val;
     }
 
-    private function prepareOutput(IcingaApiResult $result) {
+    private function prepareOutput(/*IcingaApiResult*/ $result) {
         $out = array();
         foreach($result as $row) {
             $tmp = array();
@@ -246,8 +246,8 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
         return $this;
     }
 
-    private function setSearchFilter($filter, $value = false, $defaultMatch = IcingaApi::MATCH_EXACT) {
-        if ($defaultMatch != IcingaApi::MATCH_EXACT && defined($defaultMatch)) {
+    private function setSearchFilter($filter, $value = false, $defaultMatch = IcingaApiConstants::MATCH_EXACT) {
+        if ($defaultMatch != IcingaApiConstants::MATCH_EXACT && defined($defaultMatch)) {
             $defaultMatch = constant($defaultMatch);
         }
 

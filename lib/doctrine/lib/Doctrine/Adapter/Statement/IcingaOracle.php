@@ -83,7 +83,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
      
         $this->connection  = $connection->getConnection();
         $this->queryString  =$this->fixCrappyIcingaTables($query);
-   
+      
         $this->executeMode = $executeMode;
         $this->attributes[Doctrine_Core::ATTR_ERRMODE] = $connection->getAttribute(Doctrine_Core::ATTR_ERRMODE);
 
@@ -702,7 +702,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $bind_index = 1;
         // Replace ? bind-placeholders with :oci_b_var_ variables
         $query = preg_replace("/(\?)/e", '":oci_b_var_". $bind_index++' , $query);
-
+         
         $this->statement =  @oci_parse($this->connection, $query);
 
         if ( $this->statement == false )

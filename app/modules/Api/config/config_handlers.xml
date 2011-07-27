@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/config_handlers/1.0">
+    <ae:configuration>
+        <handlers>
+            <handler pattern="%core.module_dir%/*/config/icingaCommands.xml" class="IcingaCommandsConfigHandler">
+				<validation>%core.module_dir%/Api/lib/xml/xsd/icingaCommands.xsd</validation>	
+			</handler>
+        </handlers>
+    </ae:configuration>
 </ae:configurations>

@@ -2,7 +2,7 @@
 class ApiUnknownHostException extends AppKitException {};
 class ApiUnknownConsoleException extends AppKitException {};
 
-class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel {
+class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel implements IcingaConsoleInterface {
     protected $host;
     protected $connection;
     protected $access = array(
@@ -29,14 +29,19 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel {
     }
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
-        if (!isset($parameters["host"])) {
+        if (!isset($parameters["host"]) && !isset($parameters["icingaInstance"])) {
             $parameters["host"] = AgaviConfig::get("modules.api.access.defaults.host","localhost");
+        } else if(!isset($parameters["host"]) && isset($parameters["icingaInstance"])) {
+            $instances = AgaviConfig::get("modules.api.access.instances");
+            $instance = (isset($instances[$parameters["icingaInstance"]]) ? 
+                $instances[$parameters["icingaInstance"]] :
+                null); 
+            $parameters["host"] = $instance; 
         }
-
         $this->initConnection($parameters["host"]);
     }
 
-    public function exec(Api_Console_ConsoleCommandModel $cmd) 	{
+    public function exec(IcingaConsoleCommandInterface $cmd) 	{
         if ($this->connection == NULL) {
             return false;
         }

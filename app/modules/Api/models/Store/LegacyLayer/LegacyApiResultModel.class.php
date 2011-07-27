@@ -5,7 +5,7 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
     protected $searchObject = false;
 	protected $resultType = IcingaApiConstants::RESULT_OBJECT;
 	protected $resultArray = false;
-	
+    protected $resultColumns = array();	
     protected $resultRow = false;
 	protected $numResults = false;
 	protected $offset = false;
@@ -38,7 +38,7 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
     public function initialize(AgaviContext $ctx,array $params = array()) {
         $result = $params["result"];
         
-        $this->searchObject = $result;
+        $this->searchObject = $this->createSearchObjectFromResult($result,$params["columns"]);
         $this->offset = 0;
         if(is_array($result))
             $this->numResults = count($result);
@@ -46,7 +46,52 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
             $this->numResults = $result->count();
         
         $this->next(); 
-     }
+    }
+    
+    public function createSearchObjectFromResult($resultCollection,array $columns) {
+        $r = array();
+        foreach($resultCollection as $result) {
+           
+            if(is_array($result)) { 
+                $res = $this->remapResult($columns,$result);
+                $r[] = $res;
+            } else {
+                $res = new StdObject();
+                foreach($columns as $col)
+                    $res->{$col} = $result->{$col};
+                $r[] = $res;
+            } 
+        }
+        return $r;
+    }
+    private $mapping = array();
+    public function remapResult(array $columns, array $result) {
+        $remapped = array();
+        if(empty($this->mapping))
+            $this->createMappingForResult($columns,$result);
+        foreach($this->mapping as $srckey=>$targetkey) {
+            if(isset($result[$srckey]))
+                $remapped[$targetkey] = $result[$srckey]; 
+        }
+        return $remapped;
+    }
+
+    protected function createMappingForResult(array $columns,$result) {
+        foreach($result as $key=>$value) {
+            if(in_array($key,$columns)) {
+                $this->mapping[$key] = $key;
+                continue;
+            }
+            $exploded = explode("_",$key,2);
+            if(count($exploded) < 2)
+                continue;
+            if(in_array($exploded[1],$columns))
+                $this->mapping[$key] = $exploded[1];
+        
+        }
+
+    }
+
     public function next() {
         if($this->offset >= $this->numResults)
             $this->resultRow = false; 

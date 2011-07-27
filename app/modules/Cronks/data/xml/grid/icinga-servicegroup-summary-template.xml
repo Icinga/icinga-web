@@ -63,12 +63,12 @@
         		* Which field content comes from the template data source
         	-->
         	<parameter name="source">
-        		<parameter name="IcingaApi::COMMAND_SERVICEGROUP">servicegroup_name</parameter>
-				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+        		<parameter name="IcingaApiConstants::COMMAND_SERVICEGROUP">servicegroup_name</parameter>
+				<parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
         	</parameter>
         	
         	<parameter name="predefined">
-        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+        		<parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
         	</parameter>
         	
         	<!-- 
@@ -121,7 +121,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_SERVICEGROUP_SUMMARY</parameter>
+        <parameter name="target">IcingaApiConstants::TARGET_SERVICEGROUP_SUMMARY</parameter>
         
         <!-- Limit the result (LOAD) -->
         <!-- <parameter name="limit">25</parameter> -->

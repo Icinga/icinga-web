@@ -140,7 +140,7 @@ abstract class IcingaApiSearchFilterGroup implements IcingaApiSearchFilterInterf
 	 *
 	 * @throws IcingaApiException
 	 */
-	public static function createInstance($search, $type = IcingaApi::SEARCH_AND) {
+	public static function createInstance($search, $type = IcingaApiConstants::SEARCH_AND) {
 		
 		$class = 'IcingaApiSearchFilterGroupIdo';
 		try {

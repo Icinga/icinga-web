@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ic:commands
+    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
+
+    <ic:command name="SCHEDULE_HOSTGROUP_HOST_DOWNTIME">
+        <ic:definition>SCHEDULE_HOSTGROUP_HOST_DOWNTIME</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+            <ic:parameter ref="COMMAND_STARTTIME" />
+            <ic:parameter ref="COMMAND_ENDTIME" />
+            <ic:parameter ref="COMMAND_FIXED" />
+            <ic:parameter ref="COMMAND_DATA" />
+            <ic:parameter ref="COMMAND_DURATION" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="SCHEDULE_HOSTGROUP_SVC_DOWNTIME">
+        <ic:definition>SCHEDULE_HOSTGROUP_SVC_DOWNTIME</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+            <ic:parameter ref="COMMAND_STARTTIME" />
+            <ic:parameter ref="COMMAND_ENDTIME" />
+            <ic:parameter ref="COMMAND_FIXED" />
+            <ic:parameter ref="COMMAND_DATA" />
+            <ic:parameter ref="COMMAND_DURATION" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOSTGROUP_HOST_NOTIFICATIONS">
+        <ic:definition>ENABLE_HOSTGROUP_HOST_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOSTGROUP_HOST_NOTIFICATIONS">
+        <ic:definition>DISABLE_HOSTGROUP_HOST_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOSTGROUP_SVC_NOTIFICATIONS">
+        <ic:definition>ENABLE_HOSTGROUP_SVC_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOSTGROUP_SVC_NOTIFICATIONS">
+        <ic:definition>DISABLE_HOSTGROUP_SVC_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOSTGROUP_SVC_CHECKS">
+        <ic:definition>ENABLE_HOSTGROUP_SVC_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOSTGROUP_SVC_CHECKS">
+        <ic:definition>DISABLE_HOSTGROUP_SVC_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOSTGROUP" />
+        </ic:parameters>
+    </ic:command>
+</ic:commands>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ic:commands
+    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
+ 
+    <ic:command name="DEL_HOST_DOWNTIME">
+        <ic:definition>DEL_HOST_DOWNTIME</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_DOWNTIME_ID" />
+        </ic:parameters>
+    </ic:command>
+    
+
+    <ic:command name="SCHEDULE_HOST_CHECK">
+        <ic:definition>SCHEDULE_HOST_CHECK</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_CHECKTIME" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="SCHEDULE_FORCED_HOST_CHECK">
+        <ic:definition>SCHEDULE_FORCED_HOST_CHECK</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_CHECKTIME" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="SCHEDULE_HOST_DOWNTIME">
+        <ic:definition>SCHEDULE_HOST_DOWNTIME</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_STARTTIME" />
+            <ic:parameter ref="COMMAND_ENDTIME" />
+            <ic:parameter ref="COMMAND_FIXED" />
+            <ic:parameter ref="COMMAND_DATA" />
+            <ic:parameter ref="COMMAND_DURATION" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="SCHEDULE_HOST_SVC_DOWNTIME">
+        <ic:definition>SCHEDULE_HOST_SVC_DOWNTIME</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_STARTTIME" />
+            <ic:parameter ref="COMMAND_ENDTIME" />
+            <ic:parameter ref="COMMAND_FIXED" />
+            <ic:parameter ref="COMMAND_DATA" />
+            <ic:parameter ref="COMMAND_DURATION" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="PROCESS_HOST_CHECK_RESULT">
+        <ic:definition>PROCESS_HOST_CHECK_RESULT</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_RETURN_CODE" />
+            <ic:parameter ref="COMMAND_OUTPUT" />
+            <ic:parameter ref="COMMAND_PERFDATA" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ACKNOWLEDGE_HOST_PROBLEM">
+        <ic:definition>ACKNOWLEDGE_HOST_PROBLEM</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_STICKY" />
+            <ic:parameter ref="COMMAND_NOTIFY" />
+            <ic:parameter ref="COMMAND_PERSISTENT" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="REMOVE_HOST_ACKNOWLEDGEMENT">
+        <ic:definition>REMOVE_HOST_ACKNOWLEDGEMENT</ic:definition>
+        <ic:parameters>
+        	<ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ADD_HOST_COMMENT">
+        <ic:definition>ADD_HOST_COMMENT</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_DATA" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOST_CHECK">
+        <ic:definition>DISABLE_HOST_CHECK</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOST_CHECK">
+        <ic:definition>ENABLE_HOST_CHECK</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_PASSIVE_HOST_CHECKS">
+        <ic:definition>DISABLE_PASSIVE_HOST_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_PASSIVE_HOST_CHECKS">
+        <ic:definition>ENABLE_PASSIVE_HOST_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="STOP_OBSESSING_OVER_HOST">
+        <ic:definition>STOP_OBSESSING_OVER_HOST</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="START_OBSESSING_OVER_HOST">
+        <ic:definition>START_OBSESSING_OVER_HOST</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOST_NOTIFICATIONS">
+        <ic:definition>DISABLE_HOST_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOST_NOTIFICATIONS">
+        <ic:definition>ENABLE_HOST_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="SEND_CUSTOM_HOST_NOTIFICATION">
+        <ic:definition>SEND_CUSTOM_HOST_NOTIFICATION</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_NOTIFICATION_OPTIONS" />
+            <ic:parameter ref="COMMAND_AUTHOR" />
+            <ic:parameter ref="COMMAND_COMMENT" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOST_SVC_NOTIFICATIONS">
+        <ic:definition>DISABLE_HOST_SVC_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOST_SVC_NOTIFICATIONS">
+        <ic:definition>ENABLE_HOST_SVC_NOTIFICATIONS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="SCHEDULE_FORCED_HOST_SVC_CHECKS">
+        <ic:definition>SCHEDULE_FORCED_HOST_SVC_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOST_SVC_CHECKS">
+        <ic:definition>DISABLE_HOST_SVC_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOST_SVC_CHECKS">
+        <ic:definition>ENABLE_HOST_SVC_CHECKS</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOST_EVENT_HANDLER">
+        <ic:definition>DISABLE_HOST_EVENT_HANDLER</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOST_EVENT_HANDLER">
+        <ic:definition>ENABLE_HOST_EVENT_HANDLER</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="DISABLE_HOST_FLAP_DETECTION">
+        <ic:definition>DISABLE_HOST_FLAP_DETECTION</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+    <ic:command name="ENABLE_HOST_FLAP_DETECTION">
+        <ic:definition>ENABLE_HOST_FLAP_DETECTION</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
+</ic:commands>

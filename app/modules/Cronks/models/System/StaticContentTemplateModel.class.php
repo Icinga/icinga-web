@@ -179,7 +179,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 					    $out[] = array(
 					        $filter['field'],
 					        $filter['value'], 
-					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApi::MATCH_LIKE')
+					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApiConstants::MATCH_LIKE')
 					    );
 					}
 					
@@ -187,7 +187,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 				
 				if (count($additional)) {
 					foreach ($additional as $f) {
-						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+						if (!isset($f[2])) $f[2] = IcingaApiConstants::MATCH_EXACT;
 						$f = $this->processDsFiltermap($dataSource, $f);
 						$out[] = array($f[0], $f[1], $f[2]);
 					}
@@ -211,7 +211,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
 				$apiSearch = $this->api->getConnection()
 				->createSearch()
-				->setResultType(IcingaApi::RESULT_ARRAY)
+				->setResultType(IcingaApiConstants::RESULT_ARRAY)
 				->setSearchTarget(constant($dataSource['target']));
 
 				// set search type
@@ -238,7 +238,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 //					foreach ($dataSource['filters'] as $filter) {
 //					    $filter = $apiSearch->createFilter($filter['field'], 
 //					        $filter['value'], 
-//					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApi::MATCH_LIKE')
+//					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApiConstants::MATCH_LIKE')
 //					    );
 //
 //                        $apiSearch->setSearchFilter($filter);					    
@@ -247,7 +247,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 //				
 //				if (count($filters)) {
 //					foreach ($filters as $f) {
-//						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+//						if (!isset($f[2])) $f[2] = IcingaApiConstants::MATCH_EXACT;
 //						$f = $this->processDsFiltermap($dataSource, $f);
 //						$apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
 //					}

@@ -23,8 +23,8 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction {
 
     public function executeWrite(AgaviParameterHolder $rd) {
 
-        $data = json_decode($rd->getParameter('data'));
-        $selection = json_decode($rd->getParameter('selection'));
+        $data = json_decode($rd->getParameter('data'), true);
+        $selection = json_decode($rd->getParameter('selection'),true);
         $command = $rd->getParameter('command');
         $auth = $rd->getParameter('auth');
 
@@ -43,39 +43,7 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction {
             $sender->setCommandName($command);
             $sender->setSelection($selection);
             $sender->setData($data);
-
-            // Prepare the data structures
-            $coa = $sender->buildCommandObjects();
-
-            if ($IcingaApiCommand->checkDispatcher() !== true) {
-
-                $this->log('SendCommandAction: IcingaApi dispatcher is not ready!', AgaviLogger::ERROR);
-
-                $this->setAttribute('ok', false);
-                $this->setAttribute('error', 'No command dispatchers configured!');
-
-                return $this->getDefaultViewName();
-            }
-
-            // Send the bundle
-            try {
-                $IcingaApiCommand->dispatchCommandArray($coa);
-                $this->log('SendCommandAction: Commands sent', AgaviLogger::INFO);
-            } catch (IcingaApiCommandException $e) {
-                $errors = $IcingaApiCommand->getLastErrors();
-                $error = array();
-
-                foreach($errors as $err) {
-                    $error[] = sprintf('%s: %s', get_class($err), $err->getMessage());
-                }
-
-                $this->setAttribute('ok', false);
-                $this->setAttribute('error', join(', ', $error));
-
-                $this->log('SendCommandAction: Command distribution failed! (error=%s)', join(', ', $error), AgaviLogger::FATAL);
-
-                return $this->getDefaultViewName();
-            }
+            $sender->dispatchCommands();
 
             $this->setAttribute('ok', true);
             $this->setAttribute('error', null);

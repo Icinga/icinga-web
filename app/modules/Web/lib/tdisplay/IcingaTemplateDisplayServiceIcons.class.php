@@ -65,6 +65,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
      * @var array
      */
     private static $host_fields = array(
+                                      'HOST_ID',
                                       'HOST_NOTIFICATIONS_ENABLED', 'HOST_ACTIVE_CHECKS_ENABLED',
                                       'HOST_PASSIVE_CHECKS_ENABLED', 'HOST_CURRENT_STATE',
                                       'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED', 'HOST_IS_FLAPPING',
@@ -125,7 +126,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
         $id = $this->getObjectId($method_params->getParameter('field', null), $row);
 
         $dh = $this->getIcingaApi()->createSearch()
-              ->setSearchTarget(IcingaApi::TARGET_SERVICE)
+              ->setSearchTarget(IcingaApiConstants::TARGET_SERVICE)
               ->setResultColumns(self::$service_fields)
               ->setSearchFilter('SERVICE_OBJECT_ID', $id);
 
@@ -143,7 +144,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 
         $id = $this->getObjectId($method_params->getParameter('field', null), $row);
         $dh = $this->getIcingaApi()->createSearch()
-              ->setSearchTarget(IcingaApi::TARGET_HOST)
+              ->setSearchTarget(IcingaApiConstants::TARGET_HOST)
               ->setResultColumns(self::$host_fields)
               ->setSearchFilter('HOST_OBJECT_ID', $id);
 
@@ -156,12 +157,12 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
      * @param array $mapping
      * @return string html code
      */
-    private function buildIcons(IcingaApiSearch &$dh, array $mapping) {
+    private function buildIcons(&$dh, array $mapping) {
         $out = null;
 
         $parser = new AppKitFormatParserUtil();
         $parser->registerNamespace('field', AppKitFormatParserUtil::TYPE_ARRAY);
-
+/*
         foreach($dh->fetch() as $res) {
             $row = (array)$res->getRow();
             $parser->registerData('field', $row);
@@ -193,7 +194,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
             }
 
         }
-
+*/
         return $out;
     }
 

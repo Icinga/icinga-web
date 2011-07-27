@@ -305,13 +305,15 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     protected $defaultJoinType = "inner";
     protected $additionalSelects = array();
     protected $forceGroup = array();
-    
+    protected $resultColumns = array();
+
     public function reset() {
         $this->setDistinct(true);    
         $this->defaultJoinType = "inner";
         $this->additionalSelects = array();
         $this->forceGroup = array();
         $this->ignoreIds = false;
+        $this->resultColumns = array();
         parent::reset();
     }
     
@@ -463,8 +465,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY:
                 $this->mainAlias = "hs";
                 $this->setTarget("IcingaHoststatus");
-                $this->additionalSelects[] = "hs.current_state HOST_STATE";
-                $this->additionalSelects[] = "count(DISTINCT hs.host_object_id) COUNT";
+                $this->additionalSelects["HOST_STATE"] = "hs.current_state";
+                $this->additionalSelects["COUNT"] = "count(DISTINCT hs.host_object_id)";
                 $this->ignoreIds = true;
                 $this->forceGroup[] = "hs.current_state";
                 $this->aliasDefs = array(
@@ -486,8 +488,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->mainAlias = "ss";
                 $this->ignoreIds = true;
                 $this->setTarget("IcingaServicestatus");
-                $this->additionalSelects[] = "ss.current_state SERVICE_STATE";
-                $this->additionalSelects[] = "count(DISTINCT ss.service_object_id) COUNT"; 
+                $this->additionalSelects["SERVICE_STATE"] = "ss.current_state";
+                $this->additionalSelects["COUNT"] = "count(DISTINCT ss.service_object_id)"; 
+
                 $this->forceGroup[] = "ss.current_state";
                 $this->aliasDefs = array(
                     "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true), 
@@ -503,7 +506,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                     "sgm" => array("src" => "sg", "relation" => "members"),
                     "osg" => array("src" => "sg", "relation" => "object"),
                     "cvss"=> array("src" => "s", "relation" => "customvariablestatus"),        
-                    "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus"),        
+                    "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
+                    "oh"   => array("src" => "h", "relation" => "object"),
+                    "hg"   => array("src" => "h", "relation" => "hostgroups"),
+                    "ohg"   => array("src" => "hg", "relation" => "object"),
+                    "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus")        
                 ); 
             break;
             case IcingaApiConstants::TARGET_HOST_STATUS_HISTORY:
@@ -541,7 +548,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                     "hg" => array("src" => "s", "relation" => "hostgroups"),
                     "hgm" => array("src" => "sg", "relation" => "members"),
                     "ohg" => array("src" => "sg", "relation" => "object"),
-                    "cvsh"=> array("src" => "s", "relation" => "customvariablestatus"),        
+                    "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+                    "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),        
                     "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus") 
                 );
             break;
@@ -549,15 +557,20 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->mainAlias = "h";
                 $this->setTarget("IcingaHosts");
                 $this->additionalSelects = array(
-                    'ohp.object_id HOST_PARENT_OBJECT_ID',
-                    'ohp.name1 HOST_PARENT_NAME',
-                    'oh.object_id HOST_CHILD_OBJECT_ID',
-                    'oh.name1 HOST_CHILD_NAME'
+                    'HOST_PARENT_OBJECT_ID' => 'ohp.object_id',
+                    'HOST_PARENT_NAME' => 'ohp.name1',
+                    'HOST_CHILD_OBJECT_ID' => 'oh.object_id',
+                    'HOST_CHILD_NAME' => 'oh.name1' 
                 );
                 $this->aliasDefs = array(
                     "oh" => array("src" => "h", "relation" => "object"),
                     "hph" => array("src" => "h", "relation" => "parents"),
-                    "ohp" => array("src" => "hph", "relation" => "object")
+                    "ohp" => array("src" => "hph", "relation" => "object"),
+                    "hg" => array("src" => "h", "relation" => "hostgroups"),
+                    "ohg" => array("src" => "hg", "relation" => "object"),
+                    "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
+                   
+
                 );
             break;
             case IcingaApiConstants::TARGET_NOTIFICATIONS:
@@ -575,6 +588,14 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "relation" => "hosts",
                         "type" => "left"
                     ),
+                    "hg" => array(
+                        "src" => "h",
+                        "relation" => "hostgroups" 
+                    ),
+                    "ohg" => array(
+                        "src" => "hg",
+                        "relation" => "object"
+                    ),
                     "oh" => array(
                         "src" => "h", 
                         "relation" => "object",
@@ -584,7 +605,19 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "src" => "s", 
                         "relation" => "object",
                         "type" => "left"
-                    )
+                    ),
+                    "sg" => array(
+                        "src" => "s",
+                        "relation" => "servicegroups"   
+                    ),
+                    "osg" => array(
+                        "src" => "sg",
+                        "relation" => "object"
+                        
+                    ),
+                    "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
+                    "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+
                ); 
             break;
             case IcingaApiConstants::TARGET_HOSTGROUP_SUMMARY:
@@ -607,6 +640,10 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                     "osg"   => array("src" => "sg", "relation" => "object"),
                     "sgm"   => array("src" => "sg", "relation" => "members"),
                     "s"   => array("src" => "sg", "relation" => "members"),
+                    "h"   => array("src" => "s", "relation" => "host"),
+                    "oh"   => array("src" => "h", "relation" => "object"),
+                    "hg"   => array("src" => "h", "relation" => "hostgroups"),
+                    "ohg"   => array("src" => "hg", "relation" => "object"),
                     "ss"   => array("src" => "sgm", "relation" => "status"),
                     "os"    => array("src" => "sgm", "relation" => "object") 
                 );
@@ -763,22 +800,26 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     
 
     public function setResultColumns($cols) {
+        if(is_array($cols))
+            $this->resultColumns = array_merge($this->resultColumns,$cols);
+        else
+            $this->resultColumns[] = $cols;
         $this->setFields($cols,true);
     }
      
-   
-  
     public function setSearchTarget($target) {
         $this->reset();
         $this->setupApiTargetFor($target); 
     } 
 
-    public function getResultColumns() {
-        return $this->getFields();
-    }
 
 	public function setSearchFilterAppendix ($statement, $searchAggregator = IcingaApiConstants::SEARCH_AND) {
-       $this->addStaticWhereField($statement,$searchAggregator);
+        $match = array();
+        
+        while(preg_match("/\\$\{(?<match>.*?)\}/",$statement,$match))
+            $statement = preg_replace("/\\$\{\w+\}/",$this->columns[$match["match"]],$statement,1);
+        
+        $this->addStaticWhereField($statement/*,$searchAggregator*/);
     }
     protected $ignoreIds = false;
     protected function modifyImpl(Doctrine_Query &$o) { 
@@ -787,8 +828,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             $keys = $table->getIdentifierColumnNames();
             $o->addSelect(implode($keys));
         }
-        foreach($this->additionalSelects as $select) {
-            $o->addSelect($select);
+        foreach($this->additionalSelects as $alias => $select) {
+            $o->addSelect($select.(is_numeric($alias) ? "" : " AS ".$alias));
+            
         }  
        
         foreach($this->forceGroup as $group) {
@@ -796,7 +838,40 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         } 
         parent::modifyImpl($o);
     }
-    protected $aliasDefs = array( 
+    
+    public function getResultColumns() {
+        $result = array();
+        foreach($this->additionalSelects as $alias=>$val) {
+            if(!is_numeric($alias))
+                $result[] = $alias;
+        }
+        
+        return array_unique(array_merge($result,$this->resultColumns));
+    }
+
+	/**
+	 * returns an array containing the names of all affected columns
+	 * @return array
+	 * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+	 */
+	public function getAffectedColumns() {
+	  
+		$map = array_keys($this->aliasDefs);
+        $map[] = $this->mainAlias; 
+		$affected = array();
+	
+		foreach($map as $table) {
+			$len = strlen($table);
+            foreach($this->columns as $name=>$column) {
+				if(substr($column,0,$len) == $table)
+					$affected[] = $name;
+			}
+		}
+		return $affected;
+	}
+    
+
+     protected $aliasDefs = array( 
      
 
     ); 

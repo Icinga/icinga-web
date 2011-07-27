@@ -1,0 +1,345 @@
+./data/log/debug-2011-06-25.log:[Sat Jun 25 14:15:06 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined offset: 1 (/usr/local/icinga/share/icinga-api/objects/search/IcingaApiSearchIdo.php:322) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:10:29 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined variable: hosts (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:36) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:10:43 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:36) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:10:55 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:38) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:11:42 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:12:13 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:12:44 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:13:28 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-20.log:[Mon Jun 20 08:14:10 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-28.log:[Tue Jun 28 08:57:51 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined variable: resultTypes (/usr/local/icinga-web/app/modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:33) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-28.log:[Tue Jun 28 16:49:40 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:36) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-28.log:[Tue Jun 28 16:51:21 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-28.log:[Tue Jun 28 16:53:19 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined offset: 1 (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:104) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-27.log:[Mon Jun 27 09:14:22 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga/share/icinga-api/objects/search/IcingaApiSearchIdo.php:490) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-27.log:[Mon Jun 27 09:14:24 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga/share/icinga-api/objects/search/IcingaApiSearchIdo.php:490) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-27.log:[Mon Jun 27 15:37:14 2011] [fatal] Uncaught AppKitPHPError: PHP Error Argument 3 passed to API_Store_DataStoreResultModel::parseInputFromRecord() must be an instance of IcingaApiDataStoreModel, none given, called in /usr/local/icinga-web/app/modules/Api/models/Store/DataStoreResultModel.class.php on line 15 and defined (/usr/local/icinga-web/app/modules/Api/models/Store/DataStoreResultModel.class.php:30) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-25.log:[Sat Jun 25 14:15:06 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined offset: 1 (/usr/local/icinga/share/icinga-api/objects/search/IcingaApiSearchIdo.php:322) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-27.log:[Mon Jun 27 09:14:22 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga/share/icinga-api/objects/search/IcingaApiSearchIdo.php:490) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-27.log:[Mon Jun 27 09:14:24 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga/share/icinga-api/objects/search/IcingaApiSearchIdo.php:490) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-27.log:[Mon Jun 27 15:37:14 2011] [fatal] Uncaught AppKitPHPError: PHP Error Argument 3 passed to API_Store_DataStoreResultModel::parseInputFromRecord() must be an instance of IcingaApiDataStoreModel, none given, called in /usr/local/icinga-web/app/modules/Api/models/Store/DataStoreResultModel.class.php on line 15 and defined (/usr/local/icinga-web/app/modules/Api/models/Store/DataStoreResultModel.class.php:30) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-28.log:[Tue Jun 28 08:57:51 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined variable: resultTypes (/usr/local/icinga-web/app/modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:33) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-28.log:[Tue Jun 28 16:49:40 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:36) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-28.log:[Tue Jun 28 16:51:21 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/debug-2011-06-28.log:[Tue Jun 28 16:53:19 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined offset: 1 (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:104) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:10:29 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined variable: hosts (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:36) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:10:43 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:36) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:10:55 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:38) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:11:42 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:12:13 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:12:44 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:13:28 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./data/log/icinga-web-2011-06-20.log:[Mon Jun 20 08:14:10 2011] [fatal] Uncaught AppKitPHPError: PHP Error Undefined index: services (/usr/local/icinga-web/tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php:37) (/usr/local/icinga-web/app/modules/AppKit/lib/logging/AppKitExceptionHandler.class.php:20)
+./modules/Api/config/autoload.xml:		<autoload name="IcingaApiBaseAction">%core.module_dir%/Api/lib/action/IcingaApiBaseAction.class.php</autoload>
+./modules/Api/config/autoload.xml:		<autoload name="IcingaApiBaseModel">%core.module_dir%/Api/lib/model/IcingaApiBaseModel.class.php</autoload>
+./modules/Api/config/autoload.xml:		<autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>		
+./modules/Api/config/autoload.xml:        <autoload name="IcingaApiDataStoreModel">%core.module_dir%/Api/lib/datastore/IcingaApiDataStoreModel.class.php</autoload> 
+./modules/Api/models/DBALMetaManagerModel.class.php:class Api_DBALMetaManagerModel extends IcingaApiBaseModel {
+Übereinstimmungen in Binärdatei ./modules/Api/models/Store/.HostStoreModel.class.php.swn.
+./modules/Api/models/Store/DataStoreResultModel.class.php:    public function setModel(IcingaApiDataStoreModel $model) {
+Übereinstimmungen in Binärdatei ./modules/Api/models/Store/.HostStoreModel.class.php.swp.
+Übereinstimmungen in Binärdatei ./modules/Api/models/Store/.HostStoreModel.class.php.swo.
+./modules/Api/models/Store/HostStoreModel.class.php:class Api_Store_HostStoreModel extends IcingaApiDataStoreModel {
+./modules/Api/models/Console/ConsoleInterfaceModel.class.php:class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel {
+./modules/Api/models/Console/ConsoleCommandModel.class.php:class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
+./modules/Api/actions/ApiSearchAction.class.php:class Api_ApiSearchAction extends IcingaApiBaseAction {
+./modules/Api/actions/ApiSearchAction.class.php:        $search->setResultType(IcingaApiSearch::RESULT_ARRAY);
+./modules/Api/actions/ApiSearchAction.class.php:            $search->setSearchType(IcingaApiSearch::SEARCH_TYPE_COUNT);
+./modules/Api/actions/ApiSearchAction.class.php:            $search->setResultType(IcingaApiSearch::RESULT_ARRAY);
+./modules/Api/actions/ApiSearchAction.class.php:    protected function addFilters(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Api/actions/ApiSearchAction.class.php:    public function buildFiltersFromArray(IcingaApiSearchIdo $search, array $filterdef) {
+./modules/Api/actions/ApiSearchAction.class.php:    public function setGrouping(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Api/actions/ApiSearchAction.class.php:    public function setOrder(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Api/actions/ApiSearchAction.class.php:    public function setColumns(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Api/actions/ApiSearchAction.class.php:        if ($search->getSearchType() == IcingaApiSearch::SEARCH_TYPE_COUNT) {
+./modules/Api/actions/ApiSearchAction.class.php:    public function setLimit(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Api/actions/IcingaInstanceControllerAction.class.php:class Api_IcingaInstanceControllerAction extends IcingaApiBaseAction {
+./modules/Api/actions/Test/RequestTestAction.class.php:class Api_Test_RequestTestAction extends IcingaApiBaseAction {
+./modules/Api/actions/ApiDataStoreProviderAction.class.php:class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction implements IAppKitDataStoreProviderAction, IDispatchableAction
+./modules/Api/actions/ApiDataStoreProviderAction.class.php:                model" => "Store.IcingaApiDataStore"
+./modules/Api/actions/ApiDataStoreProviderAction.class.php:                "model" => "Store.IcingaApiDataStore"
+./modules/Api/actions/ApiCommandAction.class.php:class Api_ApiCommandAction extends IcingaApiBaseAction {
+./modules/Api/actions/ApiCommandAction.class.php:        } catch (IcingaApiCommandException $e) {
+./modules/Api/actions/ApiCommandAction.class.php:            $cmd = IcingaApi::getCommandObject();
+./modules/Api/lib/action/IcingaApiBaseAction.class.php:class IcingaApiBaseAction extends IcingaBaseAction {
+./modules/Api/lib/model/IcingaApiBaseModel.class.php:class IcingaApiBaseModel extends IcingaBaseModel {
+./modules/Api/lib/model/ApiDataRequestBaseModel.class.php:class ApiDataRequestBaseModel extends IcingaApiBaseModel {
+./modules/Api/lib/classes/IcingaApiDoctrineRecord.class.php:abstract class IcingaApiDoctrineRecord extends Doctrine_Record {
+./modules/Api/lib/classes/IcingaApiDataAccessor.class.php:interface IcingaApiDataAccessor {
+./modules/Api/lib/classes/IcingaApiRequestHelper.class.php: * All methods must return a IcingaApiRequestDescriptor
+./modules/Api/lib/classes/IcingaApiRequestHelper.class.php:class IcingaApiRequestHelper {
+./modules/Api/lib/view/IcingaApiBaseView.class.php:class IcingaApiBaseView extends IcingaBaseView {
+./modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:class IcingaApiActionNotAvailableException extends AppKitException {};
+./modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:class IcingaApiDataStoreModel extends AbstractDataStoreModel {
+./modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:        throw new IcingaApiActionNotAvailableException("Can't update in api");
+./modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:        throw new IcingaApiActionNotAvailableException("Can't delete from api");
+./modules/Api/lib/datastore/IcingaApiDataStoreModel.class.php:        throw new IcingaApiActionNotAvailableException("Can't insert in api store");
+./modules/Api/views/IcingaInstanceControllerSuccessView.class.php:class Api_IcingaInstanceControllerSuccessView extends IcingaApiBaseView {
+./modules/Api/views/ApiSearchSuccessView.class.php:class Api_ApiSearchSuccessView extends IcingaApiBaseView {
+./modules/Api/views/Test/RequestTestSuccessView.class.php:class Api_Test_RequestTestSuccessView extends IcingaApiBaseView {
+./modules/Api/views/ApiDataStoreProviderSuccessView.class.php:class Api_ApiDataStoreProviderSuccessView extends IcingaApiBaseView
+./modules/Api/views/ApiCommandSuccessView.class.php:class Api_ApiCommandSuccessView extends IcingaApiBaseView {
+./modules/Api/views/ApiDataStoreProviderErrorView.class.php:class Api_ApiDataStoreProviderErrorView extends IcingaApiBaseView {
+./modules/Api/views/ApiCommandErrorView.class.php:class Api_ApiCommandSuccessView extends IcingaApiBaseView {
+./modules/Api/views/ApiSearchErrorView.class.php:class Api_ApiSearchErrorView extends IcingaApiBaseView {
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                  array(IcingaApi::TARGET_HOST, array(
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                  array(IcingaApi::TARGET_HOST_SERVICE, array(
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::TARGET_HOST,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::SEARCH_TYPE_COUNT,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::TARGET_HOST,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::SEARCH_TYPE_COUNT,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::TARGET_SERVICE,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::SEARCH_TYPE_COUNT,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::TARGET_SERVICE,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                                      IcingaApi::SEARCH_TYPE_COUNT,
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:                       ->setResultType(IcingaApi::RESULT_ARRAY)
+./modules/Cronks/models/System/MonitorPerformanceDataModel.class.php:            } catch (IcingaApiException $e) {
+./modules/Cronks/models/System/CommandSenderModel.class.php:        $cmd = IcingaApi::getCommandObject();
+./modules/Cronks/models/System/StaticContentTemplateModel.class.php:					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApi::MATCH_LIKE')
+./modules/Cronks/models/System/StaticContentTemplateModel.class.php:						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+./modules/Cronks/models/System/StaticContentTemplateModel.class.php:				->setResultType(IcingaApi::RESULT_ARRAY)
+./modules/Cronks/models/System/StaticContentTemplateModel.class.php://					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApi::MATCH_LIKE')
+./modules/Cronks/models/System/StaticContentTemplateModel.class.php://						if (!isset($f[2])) $f[2] = IcingaApi::MATCH_EXACT;
+./modules/Cronks/models/System/StatusMapModel.class.php:        $apiResHosts->setResultType(IcingaApi::RESULT_ARRAY)
+./modules/Cronks/models/System/StatusMapModel.class.php:        ->setSearchTarget(IcingaApi::TARGET_HOST)
+./modules/Cronks/models/System/StatusMapModel.class.php:        $apiResHostParents->setSearchTarget(IcingaApi::TARGET_HOST_PARENTS);
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:     * @var IcingaApiConnectionIdo
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:                               'target'		=> IcingaApi::TARGET_HOST,
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:                               'target'		=> IcingaApi::TARGET_SERVICE,
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:                               'target'		=> IcingaApi::TARGET_HOSTGROUP,
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:                               'target'		=> IcingaApi::TARGET_SERVICEGROUP,
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:                      ->setResultType(IcingaApi::RESULT_ARRAY)
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:            $search_group = $search->createFilterGroup(IcingaApi::SEARCH_OR);
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:                $search_group->addFilter($search->createFilter($search_field, $this->query, IcingaApi::MATCH_LIKE));
+./modules/Cronks/models/System/ObjectSearchResultModel.class.php:    private function resultToArray(IcingaApiResult &$res, array $fieldDef, $type) {
+./modules/Cronks/models/System/StatusOverallModel.class.php:                       IcingaApi::TARGET_HOST_STATUS_SUMMARY =>
+./modules/Cronks/models/System/StatusOverallModel.class.php:                       IcingaApi::TARGET_SERVICE_STATUS_SUMMARY =>
+./modules/Cronks/models/System/StatusOverallModel.class.php:    private function buildDataArray(IcingaApiSearch &$search, $type, array $states, array &$target,$stype) {
+./modules/Cronks/models/System/StatusOverallModel.class.php:        $data = $search->setResultType(IcingaApi::RESULT_ARRAY)->fetch()->getAll();
+./modules/Cronks/models/System/StatusOverallModel.class.php:        $result = $search->setResultType(IcingaApi::RESULT_ARRAY)->fetch()->getAll();
+./modules/Cronks/models/System/CommandInfoModel.class.php:     * @var IcingaApiCommandCollection
+./modules/Cronks/models/System/CommandInfoModel.class.php:        $this->command_collection = IcingaApi::getCommandCollection();
+./modules/Cronks/actions/System/ViewProc/SendCommandAction.class.php:        $IcingaApiCommand = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+./modules/Cronks/actions/System/ViewProc/SendCommandAction.class.php:            if ($IcingaApiCommand->checkDispatcher() !== true) {
+./modules/Cronks/actions/System/ViewProc/SendCommandAction.class.php:                $this->log('SendCommandAction: IcingaApi dispatcher is not ready!', AgaviLogger::ERROR);
+./modules/Cronks/actions/System/ViewProc/SendCommandAction.class.php:                $IcingaApiCommand->dispatchCommandArray($coa);
+./modules/Cronks/actions/System/ViewProc/SendCommandAction.class.php:            } catch (IcingaApiCommandException $e) {
+./modules/Cronks/actions/System/ViewProc/SendCommandAction.class.php:                $errors = $IcingaApiCommand->getLastErrors();
+./modules/Cronks/lib/js/FilterHandler.js: * IcingaApiComboBox
+./modules/Cronks/lib/js/FilterHandler.js:Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
+./modules/Cronks/lib/js/FilterHandler.js:		Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
+./modules/Cronks/lib/js/FilterHandler.js:		return new Cronk.IcingaApiComboBox({
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<target>IcingaApi::TARGET_HOSTGROUP</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<target>IcingaApi::TARGET_SERVICEGROUP</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<target>IcingaApi::TARGET_HOST_STATUS_SUMMARY</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-groupstat.xml:			<target>IcingaApi::TARGET_SERVICE_STATUS_SUMMARY</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_SERVICE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_SERVICE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_HOST</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_HOST</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_HOST</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_SERVICE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_HOST</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<target>IcingaApi::TARGET_SERVICE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-presets.xml:			<search_type>IcingaApi::SEARCH_TYPE_COUNT</search_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-iteration.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-iteration.xml:			<target>IcingaApi::TARGET_HOST</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml:			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cv.xml:			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cvtree.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cvtree.xml:			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-cvtree.xml:					<match>IcingaApi::MATCH_EXACT</match>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-charts.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-charts.xml:			<target>IcingaApi::TARGET_HOST_STATUS_SUMMARY</target>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-charts.xml:			<source_type>IcingaApi</source_type>
+./modules/Cronks/data/xml/to/icinga-tactical-overview-template-charts.xml:			<target>IcingaApi::TARGET_SERVICE_STATUS_SUMMARY</target>
+./modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml:        		<parameter name="IcingaApi::COMMAND_HOSTGROUP">hostgroup_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml:				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml:        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+./modules/Cronks/data/xml/grid/icinga-hostgroup-summary-template.xml:        <parameter name="target">IcingaApi::TARGET_HOSTGROUP_SUMMARY</parameter>
+./modules/Cronks/data/xml/grid/icinga-downtime-template.xml:        		<parameter name="IcingaApi::COMMAND_DOWNTIME_ID">downtime_internal_id</parameter>
+./modules/Cronks/data/xml/grid/icinga-downtime-template.xml:        		<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-downtime-template.xml:        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+./modules/Cronks/data/xml/grid/icinga-downtime-template.xml:				<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
+./modules/Cronks/data/xml/grid/icinga-downtime-template.xml:        <parameter name="target">IcingaApi::TARGET_DOWNTIME</parameter>
+./modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml:        		<parameter name="IcingaApi::COMMAND_SERVICEGROUP">servicegroup_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml:				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml:        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+./modules/Cronks/data/xml/grid/icinga-servicegroup-summary-template.xml:        <parameter name="target">IcingaApi::TARGET_SERVICEGROUP_SUMMARY</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-template.xml:        		<parameter name="IcingaApi::COMMAND_HOST">host_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-template.xml:        		<parameter name="IcingaApi::COMMAND_SERVICE">service_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-template.xml:				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-template.xml:        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-template.xml:			<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-template.xml:        <parameter name="target">IcingaApi::TARGET_SERVICE</parameter>
+./modules/Cronks/data/xml/grid/icinga-open-problems-template.xml:        		<parameter name="IcingaApi::COMMAND_HOST">host_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-open-problems-template.xml:				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-open-problems-template.xml:        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+./modules/Cronks/data/xml/grid/icinga-open-problems-template.xml:        <parameter name="target">IcingaApi::TARGET_HOST_SERVICE</parameter>
+./modules/Cronks/data/xml/grid/icinga-host-template.xml:        		<parameter name="IcingaApi::COMMAND_HOST">host_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-host-template.xml:				<parameter name="IcingaApi::COMMAND_INSTANCE">instance_name</parameter>
+./modules/Cronks/data/xml/grid/icinga-host-template.xml:        		<parameter name="IcingaApi::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+./modules/Cronks/data/xml/grid/icinga-host-template.xml:				<parameter name="IcingaApi::COMMAND_ENDTIME">now+7200</parameter>
+./modules/Cronks/data/xml/grid/icinga-host-template.xml:        <parameter name="target">IcingaApi::TARGET_HOST</parameter>
+./modules/Cronks/data/xml/grid/icinga-service-history-template.xml:        <parameter name="target">IcingaApi::TARGET_SERVICE_STATUS_HISTORY</parameter>
+./modules/Cronks/data/xml/grid/icinga-host-history-template.xml:        <parameter name="target">IcingaApi::TARGET_HOST_STATUS_HISTORY</parameter>
+./modules/Cronks/data/xml/grid/icinga-notification-template.xml:        <parameter name="target">IcingaApi::TARGET_NOTIFICATIONS</parameter>
+./modules/Cronks/data/xml/grid/icinga-log-template.xml:        <parameter name="target">IcingaApi::TARGET_LOG</parameter>
+./modules/Web/config/autoload.xml:		<autoload name="IcingaApiClassUtil">%core.module_dir%/Web/lib/util/IcingaApiClassUtil.class.php</autoload>
+./modules/Web/config/icinga-io.site.xml:		<ae:parameter name="api_type">IcingaApi::CONNECTION_IDO</ae:parameter>
+./modules/Web/config/icinga-io.xml.in:				<setting name="api.file">@icinga_api@/IcingaApi.php</setting>
+./modules/Web/config/icinga-io.xml.in:					IcingaApi classname
+./modules/Web/config/icinga-io.xml.in:				<setting name="api.class">IcingaApi</setting>
+./modules/Web/config/icinga-io.xml.in:					<!-- IcingaApi connection interface -->
+./modules/Web/config/icinga-io.xml.in:					<ae:parameter name="api_type">IcingaApi::@api_type@</ae:parameter>
+./modules/Web/config/icinga-io.xml.in:					<!-- Database specific (IcingaApi::CONNECTION_IDO) -->
+./modules/Web/config/icinga-io.xml.in:					<!-- MK Lifestatus options (IcingaApi::CONNECTION_LIFESTATUS) -->
+./modules/Web/config/icinga-io.xml.in:						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+./modules/Web/config/icinga-io.xml.in:						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+./modules/Web/config/icinga-io.xml.in:						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+./modules/Web/config/icinga-io.xml.in:						<ae:parameter name="type">IcingaApi::COMMAND_SSH</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:			<ae:parameter name="target">IcingaApi::TARGET_COMMENT</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:			<ae:parameter name="target">IcingaApi::TARGET_HOST</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_LIKE</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:			<ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:			<ae:parameter name="target">IcingaApi::TARGET_SERVICE</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_LIKE</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+./modules/Web/config/simple_data_provider.xml:					<ae:parameter name="match_type">IcingaApi::MATCH_EXACT</ae:parameter>
+./modules/Web/config/icinga-io.xml:				<setting name="api.file">/usr/local/icinga/share/icinga-api/IcingaApi.php</setting>
+./modules/Web/config/icinga-io.xml:					IcingaApi classname
+./modules/Web/config/icinga-io.xml:				<setting name="api.class">IcingaApi</setting>
+./modules/Web/config/icinga-io.xml:					<!-- IcingaApi connection interface -->
+./modules/Web/config/icinga-io.xml:					<ae:parameter name="api_type">IcingaApi::CONNECTION_IDO</ae:parameter>
+./modules/Web/config/icinga-io.xml:					<!-- Database specific (IcingaApi::CONNECTION_IDO) -->
+./modules/Web/config/icinga-io.xml:						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+./modules/Web/config/icinga-io.xml:						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+./modules/Web/config/icinga-io.xml:						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
+./modules/Web/config/icinga-io.xml:						<ae:parameter name="type">IcingaApi::COMMAND_SSH</ae:parameter>
+./modules/Web/models/Icinga/ApiContainerModel.class.php: * Provides access to preconfigured IcingaApi
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * @var IcingaApiConnection
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * Array of IcingaApiCommandDispatcher
+./modules/Web/models/Icinga/ApiContainerModel.class.php:        // Notice about missing IcingaApi
+./modules/Web/models/Icinga/ApiContainerModel.class.php:                    $this->apiDispatcher[$key] = IcingaApi::getCommandDispatcher();
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * Initiates the IcingaApiConnection
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * @throws IcingaApiException
+./modules/Web/models/Icinga/ApiContainerModel.class.php:        $this->apiData = IcingaApi::getConnection($type, $capi);
+./modules/Web/models/Icinga/ApiContainerModel.class.php:                throw new AppKitModelException('IcingaApi setting \'%s\' not configured', $setting);
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * Check the IcingaApi class, includes
+./modules/Web/models/Icinga/ApiContainerModel.class.php:        IcingaApiClassUtil::initialize();
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * @return IcingaApiConnection
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * @return IcingaApiConnection
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * @return IcingaApiSearch
+./modules/Web/models/Icinga/ApiContainerModel.class.php:        throw new IcingaApiException("Could not create search (method not found)");
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * Sends a single IcingaApi command definition
+./modules/Web/models/Icinga/ApiContainerModel.class.php:     * @param IcingaApiCommand $cmd
+./modules/Web/models/Icinga/ApiContainerModel.class.php:    public function dispatchCommand(IcingaApiCommand &$cmd) {
+./modules/Web/models/Icinga/ApiContainerModel.class.php:                $this->errors[] = new IcingaApiCommandException($lerror);
+./modules/Web/models/Icinga/ApiContainerModel.class.php:                    } catch (IcingaApiCommandException $e) {
+./modules/Web/models/Icinga/ApiContainerModel.class.php:            throw new IcingaApiCommandException('Errors occured try getLastError to fetch a exception stack!');
+Übereinstimmungen in Binärdatei ./modules/Web/models/Icinga/.LegacyApiContainerModel.class.php.swp.
+Übereinstimmungen in Binärdatei ./modules/Web/models/Icinga/.ApiContainerModel.class.php.swp.
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php: * Provides access to preconfigured IcingaApi
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * @var IcingaApiConnection
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * Array of IcingaApiCommandDispatcher
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:        // Notice about missing IcingaApi
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:                    $this->apiDispatcher[$key] = IcingaApi::getCommandDispatcher();
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * Initiates the IcingaApiConnection
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * @throws IcingaApiException
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:        $this->apiData = IcingaApi::getConnection($type, $capi);
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:                throw new AppKitModelException('IcingaApi setting \'%s\' not configured', $setting);
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * Check the IcingaApi class, includes
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:        IcingaApiClassUtil::initialize();
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * @return IcingaApiConnection
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * @return IcingaApiConnection
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * @return IcingaApiSearch
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:        throw new IcingaApiException("Could not create search (method not found)");
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * Sends a single IcingaApi command definition
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:     * @param IcingaApiCommand $cmd
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:    public function dispatchCommand(IcingaApiCommand &$cmd) {
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:                $this->errors[] = new IcingaApiCommandException($lerror);
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:                    } catch (IcingaApiCommandException $e) {
+./modules/Web/models/Icinga/LegacyApiContainerModel.class.php:            throw new IcingaApiCommandException('Errors occured try getLastError to fetch a exception stack!');
+./modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php:     * @var IcingaApiSearch
+./modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php:    private function prepareOutput(IcingaApiResult $result) {
+./modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php:    private function setSearchFilter($filter, $value = false, $defaultMatch = IcingaApi::MATCH_EXACT) {
+./modules/Web/models/Icinga/ApiSimpleDataProviderModel.class.php:        if ($defaultMatch != IcingaApi::MATCH_EXACT && defined($defaultMatch)) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:        $search->setResultType(IcingaApiSearch::RESULT_ARRAY);
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:            $search->setSearchType(IcingaApiSearch::SEARCH_TYPE_COUNT);
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:            $search->setResultType(IcingaApiSearch::RESULT_ARRAY);
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:    protected function addFilters(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:    public function buildFiltersFromArray(IcingaApiSearchIdo $search, array $filterdef) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:    public function setGrouping(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:    public function setOrder(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:    public function setColumns(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:        if ($search->getSearchType() == IcingaApiSearch::SEARCH_TYPE_COUNT) {
+./modules/Web/actions/Icinga/ApiSearchAction.class.php:    public function setLimit(IcingaApiSearchIdo $search,AgaviRequestDataHolder $rd) {
+./modules/Web/actions/Icinga/ApiCommandAction.class.php:        } catch (IcingaApiCommandException $e) {
+./modules/Web/actions/Icinga/ApiCommandAction.class.php:            $cmd = IcingaApi::getCommandObject();
+./modules/Web/lib/principal/IcingaPrincipalTargetTool.class.php:    public static function applyApiSecurityPrincipals(IcingaApiSearchIdo &$search) {
+./modules/Web/lib/principal/IcingaPrincipalTargetTool.class.php:                    $search->setSearchFilterAppendix($map, IcingaApi::SEARCH_AND);
+./modules/Web/lib/principal/IcingaPrincipalTargetTool.class.php:            $search->setSearchFilterAppendix($query, IcingaApi::SEARCH_AND);
+./modules/Web/lib/principal/IcingaPrincipalTargetTool.class.php:    static protected function checkIfTargetAffectsSearch(IcingaDataPrincipalTarget $target,IcingaApiSearchIdo $search,$apiMapping) {
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayMonitoring.class.php:                   ->setResultType(IcingaApi::RESULT_ARRAY)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayMonitoring.class.php:                   ->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApi::MATCH_EXACT)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayMonitoring.class.php:                   ->setSearchFilter('COMMENT_INSTANCE_ID', $instance_id, IcingaApi::MATCH_EXACT)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayMonitoring.class.php:                   ->setSearchTarget(IcingaApi::TARGET_COMMENT)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayMonitoring.class.php:                   ->setSearchType(IcingaApi::SEARCH_TYPE_COUNT)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:        $dh = $this->getIcingaApi()->createSearch()
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:              ->setSearchTarget(IcingaApi::TARGET_SERVICE)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:        $dh = $this->getIcingaApi()->createSearch()
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:              ->setSearchTarget(IcingaApi::TARGET_HOST)
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:     * @param IcingaApiSearch $dh
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:    private function buildIcons(IcingaApiSearch &$dh, array $mapping) {
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:     * @return IcingaApiConnectionIdo
+./modules/Web/lib/tdisplay/IcingaTemplateDisplayServiceIcons.class.php:    private function getIcingaApi() {
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:     * @var IcingaApiConnectionIdo
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:     * @var IcingaApiSearchIdo
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:     * @var IcingaApiSearchIdo
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:    public function setApi(IcingaApi $api) {
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:     * @return IcingaApiConnectionIdo
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:                $this->api_count->setSearchType(IcingaApi::SEARCH_TYPE_COUNT);
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:                    $this->api_count->setResultType(IcingaApi::RESULT_ARRAY);
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:     * @param IcingaApiResult$result
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:    private function addAdditionalFieldResults(IcingaApiResult $result) {
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:     * @param IcingaApiResult $result
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:    private function rewriteResultRow(IcingaApiResult $result) {
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:    private function setPrivileges(IcingaApiSearchInterface &$search) {
+./modules/Web/lib/template/IcingaTemplateWorker.class.php:                    if ($condition instanceof IcingaApiSearchFilter) {
+./modules/Web/lib/util/IcingaApiClassUtil.class.php: * Description of IcingaApiClassUtil
+./modules/Web/lib/util/IcingaApiClassUtil.class.php:class IcingaApiClassUtil {
+./modules/Web/lib/util/IcingaApiClassUtil.class.php:            throw new IcingaApiClassUtilException('Module \'Web\' not ready initialized!');
+./modules/Web/lib/util/IcingaApiClassUtil.class.php:        throw new IcingaApiClassUtilException('Classfile \'%s\' does not exist!', $classFile);
+./modules/Web/lib/util/IcingaApiClassUtil.class.php:class IcingaApiClassUtilException extends IcingaBaseException {}
+./modules/Web/config.php:IcingaApiClassUtil::initialize();
+./modules/Web/views/Icinga/ApiSimpleDataProviderSuccessView.class.php:        $this->setAttribute('_title', 'IcingaApiSimpleDataProvider');
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_IS				=> IcingaApi::MATCH_EXACT,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_NOTIS			=> IcingaApi::MATCH_NOT_EQUAL,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_CONTAIN		=> IcingaApi::MATCH_LIKE,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_NOTCONTAIN		=> IcingaApi::MATCH_NOT_LIKE,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_GREATERTHAN	=> IcingaApi::MATCH_GREATER_THAN,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_LESSTHAN		=> IcingaApi::MATCH_LESS_THAN,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_GREATEROREQUAL	=> IcingaApi::MATCH_GREATER_OR_EQUAL,
+./modules/AppKit/lib/database/AppKitSQLConstants.class.php:                                           self::SQL_OP_LESSOREQUAL	=> IcingaApi::MATCH_LESS_OR_EQUAL

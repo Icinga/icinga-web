@@ -7,7 +7,7 @@ class AppKitApiProviderParser  {
 
     public function execute(array $directProviders) {
         $descriptors = array();
-        
+/*        
         foreach($directProviders as $provider) {
             $module = $provider['module'];
     	    $action = $provider['action'];
@@ -24,7 +24,7 @@ class AppKitApiProviderParser  {
         foreach($this->descriptorHandler as $handler) {
             $c = new $handler();
             $c->write($descriptors,AgaviConfig::get('org.icinga.appkit.exthandler.jsfile'));
-        } 
+        }*/ 
     }
    
 

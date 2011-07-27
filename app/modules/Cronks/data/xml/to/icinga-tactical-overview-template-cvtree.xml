@@ -31,12 +31,12 @@
 <datasources>
 	<datasource id="cv_country">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+			<target>IcingaApiConstants::TARGET_CUSTOMVARIABLE</target>
 			<columns>CUSTOMVARIABLE_NAME, CUSTOMVARIABLE_VALUE</columns>
 			<filters>
 				<filter_entry id="cv_name">
 					<field>CUSTOMVARIABLE_NAME</field>
-					<match>IcingaApi::MATCH_EXACT</match>
+					<match>IcingaApiConstants::MATCH_EXACT</match>
 					<value>TO_WORLD</value>
 				</filter_entry>
 			</filters>

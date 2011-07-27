@@ -34,12 +34,13 @@ class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
 
         if ($instance_id && $object_id) {
             $res = $this->getApi()->createSearch()
-                   ->setResultType(IcingaApi::RESULT_ARRAY)
-                   ->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApi::MATCH_EXACT)
-                   ->setSearchFilter('COMMENT_INSTANCE_ID', $instance_id, IcingaApi::MATCH_EXACT)
+                   ->setSearchTarget(IcingaApiConstants::TARGET_COMMENT)
+                   ->setResultType(IcingaApiConstants::RESULT_ARRAY)
+                   ->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApiConstants::MATCH_EXACT)
+                   ->setSearchFilter('COMMENT_INSTANCE_ID', $instance_id, IcingaApiConstants::MATCH_EXACT)
                    ->setResultColumns(array('COMMENT_ID'))
-                   ->setSearchTarget(IcingaApi::TARGET_COMMENT)
-                   ->setSearchType(IcingaApi::SEARCH_TYPE_COUNT)
+                   
+                   ->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT)
                    ->fetch();
 
             $row = $res->getRow();

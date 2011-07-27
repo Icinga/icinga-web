@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings prefix="modules.api.access." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<setting name="defaults">
+    
+    <!-- Map your instances to hosts here -->
+	<setting name="instances">
+        <ae:parameter name="default">icinga</ae:parameter>
+    </setting>
+
+    <!--
+        Default settings that will be set if useDefaults is true
+    -->
+    <setting name="defaults">
 		<ae:parameter name="host">localhost</ae:parameter>
 
 		<ae:parameter name="access">
@@ -34,6 +43,7 @@
 
 	</setting>
 	
+	
 	<!-- Hosts that can be accessed via the console interface -->
 	<setting name="hosts">
 		<ae:parameter name="localhost">
@@ -52,8 +62,8 @@
 				<ae:parameter name="port">22</ae:parameter>
 				<ae:parameter name="auth">
 					<ae:parameter name="type">password</ae:parameter>
-					<ae:parameter name="user">testuser</ae:parameter>
-					<ae:parameter name="password">test123</ae:parameter>
+					<ae:parameter name="user">jmosshammer</ae:parameter>
+					<ae:parameter name="password">test</ae:parameter>
 				</ae:parameter>
 			</ae:parameter> 
 			<ae:parameter name="access">
@@ -61,6 +71,7 @@
 			</ae:parameter>	
 			
 		</ae:parameter>
+
 -->
 <!--
 		  This is experimental, try to avoid password encrypted keyfiles when encountering errors
@@ -86,4 +97,9 @@
 		</ae:parameter>
 -->
 	</setting>
+
+
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="access.site.xml#xpointer(settings/node())">
+	    <xi:fallback></xi:fallback>
+	</xi:include>
 </settings>

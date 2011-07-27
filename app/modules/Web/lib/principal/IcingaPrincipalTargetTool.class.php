@@ -2,7 +2,7 @@
 
 class IcingaPrincipalTargetTool {
 
-    public static function applyApiSecurityPrincipals(IcingaApiSearchIdo &$search) {
+    public static function applyApiSecurityPrincipals(/*IcingaApiSearchIdo*/ &$search) {
         $user = AgaviContext::getInstance()->getUser()->getNsmUser();
 
         $sarr = $user->getTargetValuesArray();
@@ -33,14 +33,14 @@ class IcingaPrincipalTargetTool {
                 $map = $to->getCustomMap();
 
                 if ($map) {
-                    $search->setSearchFilterAppendix($map, IcingaApi::SEARCH_AND);
+                    $search->setSearchFilterAppendix($map, IcingaApiConstants::SEARCH_AND);
                 }
             }
         }
 
         if (count($parts) > 0) {
             $query = join(' OR ', $parts);
-            $search->setSearchFilterAppendix($query, IcingaApi::SEARCH_AND);
+            $search->setSearchFilterAppendix($query, IcingaApiConstants::SEARCH_AND);
 
             return true;
         }
@@ -49,7 +49,7 @@ class IcingaPrincipalTargetTool {
     }
 
 
-    static protected function checkIfTargetAffectsSearch(IcingaDataPrincipalTarget $target,IcingaApiSearchIdo $search,$apiMapping) {
+    static protected function checkIfTargetAffectsSearch(/*IcingaDataPrincipalTarget*/ $target,/*IcingaApiSearchIdo*/ $search,$apiMapping) {
         // check the mapping
         if (empty($apiMapping)) {
             return $target->getCustomMap();

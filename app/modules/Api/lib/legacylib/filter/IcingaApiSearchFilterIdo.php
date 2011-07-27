@@ -8,7 +8,7 @@ class IcingaApiSearchFilterIdo extends IcingaApiSearchFilter {
 		$field = $this->getField();
 		$value = $this->getValue();
 		$match = $this->getMatch();
-		if($match == IcingaApi::MATCH_LIKE || $match == IcingaApi::MATCH_NOT_LIKE)
+		if($match == IcingaApiConstants::MATCH_LIKE || $match == IcingaApiConstants::MATCH_NOT_LIKE)
 			$value = str_replace("*","%",$value);
 		
 		$statementSkeleton = $field." ".$match." '".$value."' ";
@@ -20,7 +20,7 @@ class IcingaApiSearchFilterIdo extends IcingaApiSearchFilter {
     	$field = $this->getField();
 		$value = $this->getValue();
 		$match = $this->getMatch();
-		if($match == IcingaApi::MATCH_LIKE || $match == IcingaApi::MATCH_NOT_LIKE)
+		if($match == IcingaApiConstants::MATCH_LIKE || $match == IcingaApiConstants::MATCH_NOT_LIKE)
 			$value = str_replace("*","%",$value);
 	    $field = preg_replace("/(.*?) +AS +.+ */i","$1",$field);
         	

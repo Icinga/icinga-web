@@ -17,7 +17,7 @@
 	<datasources>
 		<datasource id="hosts">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_HOST</target>
+			<target>IcingaApiConstants::TARGET_HOST</target>
 			<columns>HOST_NAME</columns>
 			<limit>10</limit>
 		</datasource>

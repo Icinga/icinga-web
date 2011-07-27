@@ -30,7 +30,7 @@
     	What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApi::TARGET_HOST_STATUS_HISTORY</parameter>
+        <parameter name="target">IcingaApiConstants::TARGET_HOST_STATUS_HISTORY</parameter>
         
         <parameter name="id">statehistory_id</parameter>
         

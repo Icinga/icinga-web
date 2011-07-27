@@ -17,13 +17,13 @@
 	<datasources>
 		<datasource id="cv_name">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+			<target>IcingaApiConstants::TARGET_CUSTOMVARIABLE</target>
 			<columns>CUSTOMVARIABLE_NAME</columns>
 		</datasource>
 
 		<datasource id="cv_val">
 			<source_type>IcingaApi</source_type>
-			<target>IcingaApi::TARGET_CUSTOMVARIABLE</target>
+			<target>IcingaApiConstants::TARGET_CUSTOMVARIABLE</target>
 			<columns>CUSTOMVARIABLE_VALUE</columns>
 		</datasource>
 	</datasources>

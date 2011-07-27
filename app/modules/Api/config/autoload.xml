@@ -8,6 +8,8 @@
 		<autoload name="IcingaDoctrine_Query">%core.module_dir%/Api/lib/database/IcingaDoctrine_Query.class.php</autoload>
 		<autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
 		<autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>		
+		<autoload name="IcingaConsoleInterface">%core.module_dir%/Api/lib/console/IcingaConsoleInterface.php</autoload>
+		<autoload name="IcingaConsoleCommandInterface">%core.module_dir%/Api/lib/console/IcingaConsoleCommandInterface.php</autoload>
 		<autoload name="BaseConsoleConnection">%core.module_dir%/Api/lib/console/BaseConsoleConnection.class.php</autoload>
 		<autoload name="LocalConsoleConnection">%core.module_dir%/Api/lib/console/LocalConsoleConnection.class.php</autoload>
 		<autoload name="SshConsoleConnection">%core.module_dir%/Api/lib/console/SshConsoleConnection.class.php</autoload>	
@@ -40,5 +42,6 @@
         <autoload name="ApiStoreFilterGroup">%core.module_dir%/Api/lib/datastore/filter/ApiStoreFilterGroup.class.php</autoload> 
         <autoload name="DataStoreFilterModifier">%core.module_dir%/Api/lib/datastore/DataStoreFilterModifier.class.php</autoload> 
 
+		<autoload name="IcingaCommandsConfigHandler">%core.module_dir%/Api/lib/config/IcingaCommandsConfigHandler.class.php</autoload>
    	</ae:configuration>
 </ae:configurations>

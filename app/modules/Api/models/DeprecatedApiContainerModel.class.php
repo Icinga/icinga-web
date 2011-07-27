@@ -102,7 +102,7 @@ class Api_DeprecatedApiContainerModel extends IcingaWebBaseModel
 
                     $type = AppKit::getConstant($interface['type']);
 
-                    $this->apiDispatcher[$key] = IcingaApi::getCommandDispatcher();
+                    $this->apiDispatcher[$key] = IcingaApiConstants::getCommandDispatcher();
                     $this->apiDispatcher[$key]->setInterface($type, $config);
 
 
@@ -153,7 +153,7 @@ class Api_DeprecatedApiContainerModel extends IcingaWebBaseModel
             }
         }
 
-        $this->apiData = IcingaApi::getConnection($type, $capi);
+        $this->apiData = IcingaApiConstants::getConnection($type, $capi);
 
         return true;
     }

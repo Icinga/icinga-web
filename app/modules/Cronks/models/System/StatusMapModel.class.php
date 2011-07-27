@@ -43,8 +43,8 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
         $idPrefix = sha1(microtime()) . '-';
 
         $apiResHosts = $this->api->getConnection()->createSearch();
-        $apiResHosts->setResultType(IcingaApi::RESULT_ARRAY)
-        ->setSearchTarget(IcingaApi::TARGET_HOST)
+        $apiResHosts->setResultType(IcingaApiConstants::RESULT_ARRAY)
+        ->setSearchTarget(IcingaApiConstants::TARGET_HOST)
         ->setResultColumns($this->hostResultColumns);
 
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($apiResHosts);
@@ -53,7 +53,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
                        ->getAll();
 
         $apiResHostParents = $this->api->getConnection()->createSearch();
-        $apiResHostParents->setSearchTarget(IcingaApi::TARGET_HOST_PARENTS);
+        $apiResHostParents->setSearchTarget(IcingaApiConstants::TARGET_HOST_PARENTS);
 
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($apiResHostParents);
         $apiResHostParents = $apiResHostParents->fetch();

@@ -29,14 +29,14 @@ class AppKitSQLConstants {
                                     );
 
     private static $ICINGA_OPERATORS = array(
-                                           self::SQL_OP_IS				=> IcingaApi::MATCH_EXACT,
-                                           self::SQL_OP_NOTIS			=> IcingaApi::MATCH_NOT_EQUAL,
-                                           self::SQL_OP_CONTAIN		=> IcingaApi::MATCH_LIKE,
-                                           self::SQL_OP_NOTCONTAIN		=> IcingaApi::MATCH_NOT_LIKE,
-                                           self::SQL_OP_GREATERTHAN	=> IcingaApi::MATCH_GREATER_THAN,
-                                           self::SQL_OP_LESSTHAN		=> IcingaApi::MATCH_LESS_THAN,
-                                           self::SQL_OP_GREATEROREQUAL	=> IcingaApi::MATCH_GREATER_OR_EQUAL,
-                                           self::SQL_OP_LESSOREQUAL	=> IcingaApi::MATCH_LESS_OR_EQUAL
+                                           self::SQL_OP_IS				=> IcingaApiConstants::MATCH_EXACT,
+                                           self::SQL_OP_NOTIS			=> IcingaApiConstants::MATCH_NOT_EQUAL,
+                                           self::SQL_OP_CONTAIN		=> IcingaApiConstants::MATCH_LIKE,
+                                           self::SQL_OP_NOTCONTAIN		=> IcingaApiConstants::MATCH_NOT_LIKE,
+                                           self::SQL_OP_GREATERTHAN	=> IcingaApiConstants::MATCH_GREATER_THAN,
+                                           self::SQL_OP_LESSTHAN		=> IcingaApiConstants::MATCH_LESS_THAN,
+                                           self::SQL_OP_GREATEROREQUAL	=> IcingaApiConstants::MATCH_GREATER_OR_EQUAL,
+                                           self::SQL_OP_LESSOREQUAL	=> IcingaApiConstants::MATCH_LESS_OR_EQUAL
                                        );
 
     /**

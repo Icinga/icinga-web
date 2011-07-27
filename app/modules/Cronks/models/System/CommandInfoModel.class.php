@@ -6,11 +6,12 @@ class Cronks_System_CommandInfoModel extends CronksBaseModel
     /**
      * @var IcingaApiCommandCollection
      */
-    private $command_collection = null;
+    private $commandDispatcher = null;
 
     public function  initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-        $this->command_collection = IcingaApi::getCommandCollection();
+        $this->commandDispatcher = $context->getModel("Commands.CommandDispatcher","Api");
+        
     }
 
     /**
@@ -19,20 +20,19 @@ class Cronks_System_CommandInfoModel extends CronksBaseModel
      * @return array
      */
     public function getCommandInfo($name) {
-        $d = array();
-
-        $d['fields'] = $this->command_collection->getCommandFields($name);
-
-        $d['types'] = array();
-        foreach($d['fields'] as $f) {
-            $d['types'][$f] = $this->command_collection->getCommandFieldDefinition($f);
-        }
-
-        // We need some generic time specific authentification source
-        $sender = $this->getContext()->getModel('System.CommandSender', 'Cronks');
-        $d['tk'] = $sender->genTimeKey();
-
-        return $d;
+        $cmd = $this->commandDispatcher->getCommand($name);
+        $result = array(
+            "fields"=>array(),
+            "types" => array(),
+            "tk" => $this->getContext()->getModel("System.CommandSender","Cronks")->genTimeKey()
+        );
+        $cmd = $this->commandDispatcher->getCommand($name);
+        foreach($cmd["parameters"] as $field) {
+            $name = $field["alias"];
+            $result["fields"][] = $name;
+            $result["types"][$name] = $field;
+        } 
+        return $result;
     }
 
 }

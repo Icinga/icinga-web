@@ -33,7 +33,8 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
             "resultType" => "ARRAY"
         ));
         $result = $dataStore->doRead();
-        $result = $result["data"];
+        $this->assertTrue(isset($result["data"]),"No result returned");
+        $result = $result["data"]; 
         foreach($result as $host) {    
             $this->assertNotEquals($host["services"][0]["display_name"],"");
         }
@@ -154,17 +155,17 @@ class IcingaApiDatastoreTest extends PHPUnit_Framework_TestCase
         $ctx = AgaviContext::getInstance();
         $req = new AgaviRequestDataHolder();
         $req->setParameter('target','IcingaHosts');
-        $req->setParameter('fields','display_name,s.display_name'); 
+        $req->setParameter('fields','my.host_object_id,my.display_name,s.display_name'); 
         $req->setParameter('limit',5);
-        $req->setParameter('sortfield','display_name');
-        $req->setParameter('dir','DESC');       
+        //$req->setParameter('sortfield','my.display_name');
+        //$req->setParameter('dir','DESC');       
         $req->setParameter('filter_json',array(
             "type"=>"OR",
             "items"=>array(
-                array("field"=>"display_name","operator"=>"=","value"=>"c1-db1"),
+                array("field"=>"my.display_name","operator"=>"=","value"=>"c1-db1"),
                 array("type"=>"OR", "items"=>array(
                         array(
-                            "field" => "display_name",
+                            "field" => "my.display_name",
                             "operator"=>"LIKE",
                             "value" => "%mail%"
                         ),array(

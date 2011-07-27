@@ -236,7 +236,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * Returns true or false whether read can be performed. Override with a custom
     * credential check if you need to.
     *
-    * @return boolean   
+    * @return boolean or Array with credentials 
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
@@ -248,7 +248,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * Returns true or false whether insert can be performed. Override with a custom
     * credential check if you need to.
     *
-    * @return boolean   
+    * @return boolean  or Array with credentials  
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
@@ -260,7 +260,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * Returns true or false whether update can be performed. Override with a custom
     * credential check if you need to.
     *
-    * @return boolean   
+    * @return boolean  or Array with credentials  
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
@@ -272,7 +272,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * Returns true or false whether delete can be performed. Override with a custom
     * credential check if you need to.
     *
-    * @return boolean   
+    * @return boolean  or Array with credentials  
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/

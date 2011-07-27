@@ -189,7 +189,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
     }
 
     public function setColumns($search,AgaviRequestDataHolder $rd) {
-        if ($search->getSearchType() == IcingaApiSearch::SEARCH_TYPE_COUNT) {
+        if ($search->getSearchType() == IcingaApiConstants::SEARCH_TYPE_COUNT) {
             $search->setResultColumns($rd->getParameter("countColumn"));
             return true;
         }

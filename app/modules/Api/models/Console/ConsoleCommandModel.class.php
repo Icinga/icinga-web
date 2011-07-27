@@ -1,5 +1,5 @@
 <?php
-class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
+class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements IcingaConsoleCommandInterface{
     protected $command;
     protected $arguments = array();
     /**
@@ -41,7 +41,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel {
         $this->stderr = escapeshellcmd($file);
         $this->append_stderr = $append;
     }
-    public function pipeCmd(Api_Console_ConsoleCommandModel $cmd = null) {
+    public function pipeCmd(IcingaConsoleCommandInterface $cmd = null) {
         $this->pipeCmd = $cmd;
     }
     public function setOutput($string) {

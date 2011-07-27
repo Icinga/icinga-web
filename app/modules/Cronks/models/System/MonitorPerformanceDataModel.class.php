@@ -3,44 +3,44 @@
 class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
     private static $sources = array(
-                                  array(IcingaApi::TARGET_HOST, array(
+                                  array(IcingaApiConstants::TARGET_HOST, array(
                                             'HOST_EXECUTION_TIME_MIN', 'HOST_EXECUTION_TIME_MAX', 'HOST_EXECUTION_TIME_AVG',
                                             'HOST_LATENCY_MIN', 'HOST_LATENCY_MAX', 'HOST_LATENCY_AVG'
                                         )),
 
-                                  array(IcingaApi::TARGET_HOST_SERVICE, array(
+                                  array(IcingaApiConstants::TARGET_HOST_SERVICE, array(
                                             'SERVICE_EXECUTION_TIME_MIN', 'SERVICE_EXECUTION_TIME_MAX', 'SERVICE_EXECUTION_TIME_AVG',
                                             'SERVICE_LATENCY_MIN', 'SERVICE_LATENCY_MAX', 'SERVICE_LATENCY_AVG'
                                         )),
 
                                   array(
-                                      IcingaApi::TARGET_HOST,
+                                      IcingaApiConstants::TARGET_HOST,
                                       array('HOST_OBJECT_ID'),
-                                      IcingaApi::SEARCH_TYPE_COUNT,
+                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
                                       array(array('HOST_CHECK_TYPE', 0)),
                                       'NUM_ACTIVE_HOST_CHECKS'
                                   ),
 
                                   array(
-                                      IcingaApi::TARGET_HOST,
+                                      IcingaApiConstants::TARGET_HOST,
                                       array('HOST_OBJECT_ID'),
-                                      IcingaApi::SEARCH_TYPE_COUNT,
+                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
                                       array(array('HOST_CHECK_TYPE', 1)),
                                       'NUM_PASSIVE_HOST_CHECKS'
                                   ),
 
                                   array(
-                                      IcingaApi::TARGET_SERVICE,
+                                      IcingaApiConstants::TARGET_SERVICE,
                                       array('SERVICE_OBJECT_ID'),
-                                      IcingaApi::SEARCH_TYPE_COUNT,
+                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
                                       array(array('SERVICE_CHECK_TYPE', 0)),
                                       'NUM_ACTIVE_SERVICE_CHECKS'
                                   ),
 
                                   array(
-                                      IcingaApi::TARGET_SERVICE,
+                                      IcingaApiConstants::TARGET_SERVICE,
                                       array('SERVICE_OBJECT_ID'),
-                                      IcingaApi::SEARCH_TYPE_COUNT,
+                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
                                       array(array('SERVICE_CHECK_TYPE', 1)),
                                       'NUM_PASSIVE_SERVICE_CHECKS'
                                   ),
@@ -73,10 +73,10 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
         foreach(self::$sources as $source) {
             try {
                 $res = $this->api->createSearch()
-                       ->setResultType(IcingaApi::RESULT_ARRAY)
+                       ->setResultType(IcingaApiConstants::RESULT_ARRAY)
                        ->setSearchTarget($source[0])
                        ->setResultColumns($source[1]);
-
+                IcingaPrincipalTargetTool::applyApiSecurityPrincipals($res);
                 if (isset($source[2])) {
                     $res->setSearchType($source[2]);
                 }
@@ -87,7 +87,8 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
                 
                 $arr = $res->fetch()->getRow();
-
+                if(!$arr)
+                    continue;
                 foreach($arr as $key=>$value) {
 
                     if (isset($source[4])) {

@@ -1,26 +1,10 @@
 <?php
 
 interface IcingaApiInterface {};
-class LegacyApiResultModel {
-    protected $data;
-    
-    public function __construct($data) {
-        $this->data = is_int($data) ? array("count" =>array($data)) : $data;
-    }
-    public function getRow() {
-        $d = current($this->data);
-        next($this->data);
-        return $d;
-    }
-    public function getAll() {
-        if(is_object($this->data))
-            return $this->data->toArray();
-        else if(is_array($this->data))
-            return $this->data;
-    }
-
-}
-
+/**
+* Helper object to represenet count results in object form
+* @author Jannis Moßhammer <jannis.mosshammer@netways.de>
+**/
 class ApiLegacyLayerCountObject {
     public function count() {
         return 1;
@@ -40,7 +24,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     protected $resultType = Doctrine_Core::HYDRATE_ARRAY; 
     protected $searchFilter = false;
     protected $searchType = false;
-    protected $resultColumns = array();
+    
  
     public function setResultType($type) {
         if($type == IcingaApiConstants::RESULT_OBJECT)
@@ -77,14 +61,18 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     public function reset() {
         $this->result = null;
         $this->searchFilter->clear();	
-        $this->resultColumns = array();
+        
         $this->isCount = false;
     }	
     public function setSearchLimit ($start, $length = false) {
         $this->result = null;
-        $this->setOffset($start);
-        if($length)
+        
+        if(!$length)
+            $this->setLimit($start);
+        else {
+            $this->setOffset($start);
             $this->setLimit($length);
+        }
         return $this;
     }
 
@@ -96,9 +84,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
     
     public function setResultColumns($target) {
-        $this->result = null;
-        
-        $this->resultColumns[] = $target;
+        $this->result = null; 
         parent::setResultColumns($target);
         return $this;
     }
@@ -115,15 +101,15 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
         } else {
             $result = $request->count(); 
         }
-       
         return $result; 
     }
+
     private $result = null;
     
     public function fetch() {
         if($this->result)
             return $this->result;   
-
+        $resultCols =  $this->getResultColumns();
         $data =  $this->execRead();     
         if($this->isCount) {
             $fields = $this->getFields();
@@ -134,25 +120,17 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
                     $countField = $countField[1];
                 
                 $_data[0]["COUNT_".strtoupper($countField)] = $data;  
+                $resultCols[] = "COUNT_".strtoupper($countField);
             }
             $data = $_data;  
-        }
-        if(is_array($data)) {
-            foreach($data as &$elem) {
-                foreach($elem as $key=>$val) {
-                    $ex = explode("_",$key,2);
-                    if(count($ex) > 1)
-                        $elem[$ex[1]] = $val;
-                }
-            }
-            
         }
         $this->result = $this->getContext()->getModel(
             "Store.LegacyLayer.LegacyApiResult","Api",array(
                 "result" => $data,
-                "columns" => $this->resultColumns
+                "columns" => $resultCols 
             )
         );
+
         return $this->result;
     }
   

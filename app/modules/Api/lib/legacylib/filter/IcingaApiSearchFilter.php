@@ -8,7 +8,7 @@
  */
 abstract class IcingaApiSearchFilter implements IcingaApiSearchFilterInterface {
 	protected $field;
-	protected $match = IcingaApi::MATCH_EXACT;
+	protected $match = IcingaApiConstants::MATCH_EXACT;
 	protected $value;
 	public $search = null;
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/1.0/config" prefix="org.icinga.">
+
+<!--
+	+++ Site configuration file +++
+	
+	This file won't be overwritten
+	
+-->
+
+<!-- 
+	PLEASE CHANGE ONLY IF YOU'RE KNOW WHAT YOU'RE DOING :-)
+-->
+
+<!--
+	<setting name="appkit.web_path">/icinga-web</setting>
+	<setting name="appkit.web_absolute_path">%core.root_dir%/pub</setting>
+	<setting name="appkit.image_path">/icinga-web/images</setting>
+-->
+
+<!--
+	<setting name="version.extension">mycustom</setting>
+-->
+
+	<setting name="bogus.include">true</setting>
+
+</settings>
