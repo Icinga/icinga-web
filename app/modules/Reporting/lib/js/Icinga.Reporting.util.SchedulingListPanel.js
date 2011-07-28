@@ -48,7 +48,8 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 		this.scheduleTaskList = new Icinga.Reporting.util.ScheduleTaskList({
 			region : 'center',
 			border : false,
-			scheduler_list_url : this.scheduler_list_url
+			scheduler_list_url : this.scheduler_list_url,
+			parentCmp : this
 		});
 		
 		this.scheduleTaskList.getGrid().on('rowclick', this.processRowClick, this);
@@ -58,7 +59,9 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 			region : 'south',
 			collapsible : false,
 			collapsed : false,
-			scheduler_get_url : this.scheduler_get_url
+			scheduler_edit_url : this.scheduler_edit_url,
+			scheduler_get_url : this.scheduler_get_url,
+			parentCmp : this
 		});
 		
 		this.on('afterlayout', function() {
