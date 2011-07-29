@@ -39,7 +39,7 @@ class AppKit_DispatcherAction extends AppKitBaseAction
         $controller = $this->getContext()->getController();
         $actionInstance = $controller->createActionInstance($module,$action);
         
-        if(!is_a($actionInstance,"IDispatchableAction")) {
+        if(!@is_a($actionInstance,"IDispatchableAction")) {
             $this->setAttribute("error",$module.".".$action." is not accessible via the dispatcher");
             return "Error";
         }

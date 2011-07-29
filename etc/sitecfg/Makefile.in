@@ -11,7 +11,7 @@ INSTALL_OPTS=@INSTALL_OPTS@
 
 install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) icinga.site.css $(DESTDIR)$(prefix)/pub/styles/icinga.site.css
-	$(INSTALL) -m 755 $(INSTALL_OPTS) icinga-io.site.xml $(DESTDIR)$(prefix)/app/modules/Web/config/icinga-io.site.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) access.site.xml $(DESTDIR)$(prefix)/app/modules/Api/config/access.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) routing.modules.xml $(DESTDIR)$(prefix)/app/config/routing.modules.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) cronks.module.site.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/module.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) appkit.module.site.xml $(DESTDIR)$(prefix)/app/modules/AppKit/config/module.site.xml

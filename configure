@@ -3755,17 +3755,6 @@ fi
 
 
 
-	FILE="app/modules/Web/config/icinga-io.xml"
-	BLOCKS=`echo "CONNECTION_IDO CONNECTION_LIFESTATUS CONNECTION_FILE" | $SED "s/\s*$api_type//g"`
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: Create api config in $FILE" >&5
-$as_echo "$as_me: Create api config in $FILE" >&6;}
-	for T in $BLOCKS; do
-
-	$SED -i -e "/###BEGIN_$T###/,/###END_$T###/d" $FILE
-
-	done
-
-
 echo ""
 echo "icinga-web successfully configured!"
 echo ""

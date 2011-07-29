@@ -289,7 +289,6 @@ AC_CONFIG_FILES([
 
 AC_OUTPUT
 
-ACICINGA_CLEANUP_APICONFIG([$api_type], [app/modules/Web/config/icinga-io.xml])
 
 echo ""
 echo "icinga-web successfully configured!"

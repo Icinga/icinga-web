@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<setting name="instances">
+	</setting>
+
+	<setting name="defaults">
+	</setting>
+
+	<setting name="hosts">
+	</setting>
+
+</settings>
+ 
