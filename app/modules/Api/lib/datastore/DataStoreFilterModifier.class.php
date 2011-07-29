@@ -96,7 +96,7 @@ abstract class DataStoreFilterModifier extends IcingaBaseModel  implements IData
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/ 
     public function setFilter($filter) {
-        if(is_a($filter,"StoreFilterBase")) {
+        if(@is_a($filter,"StoreFilterBase")) {
             $this->filter = $filter; 
         }
         else {
@@ -145,7 +145,7 @@ abstract class DataStoreFilterModifier extends IcingaBaseModel  implements IData
         try {
             
             $filterParsed = $this->customArgumentParser($filter);
-            if($filterParsed && is_a($filterParsed,"StoreFilterBase"))
+            if($filterParsed && @is_a($filterParsed,"StoreFilterBase"))
                 return $filterParsed; 
             foreach($this->filterClasses as $filterClass) {
                 
@@ -158,7 +158,7 @@ abstract class DataStoreFilterModifier extends IcingaBaseModel  implements IData
                         $filterParsed = $filterClass::parse($filter,$this);
                     }
                 }
-                if($filterParsed && is_a($filterParsed,"StoreFilterBase"))
+                if($filterParsed && @is_a($filterParsed,"StoreFilterBase"))
                     return $filterParsed;
             }  
         } catch(Exception $e) {

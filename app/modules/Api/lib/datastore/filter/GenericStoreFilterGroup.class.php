@@ -128,7 +128,7 @@ class GenericStoreFilterGroup extends StoreFilterBase implements Iterator
         foreach($filter["items"] as $item) {
             $subFilter = $parser->tryParse($item);
             
-            if(is_a($subFilter,'StoreFilterBase'))
+            if(@is_a($subFilter,'StoreFilterBase'))
                 $o->addSubFilter($subFilter); 
          }
        

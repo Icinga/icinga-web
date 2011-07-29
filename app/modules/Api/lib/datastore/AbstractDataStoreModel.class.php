@@ -136,7 +136,7 @@ abstract class AbstractDataStoreModel extends IcingaBaseModel
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected function registerStoreModifier($modifier, $module= null) {  
-        if(is_a($modifier,"IDataStoreModifier"))
+        if(@is_a($modifier,"IDataStoreModifier"))
             $this->modifiers[] = $modifier;
         else 
             $this->modifiers[] = $this->context->getModel($modifier,$module);

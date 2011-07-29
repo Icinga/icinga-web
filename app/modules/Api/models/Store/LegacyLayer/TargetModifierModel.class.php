@@ -795,7 +795,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             );
             break;
         }
-        
+        foreach($this->defaultAliasDefs as $name=>$defs) {
+            if(array_key_exists($name,$this->aliasDefs) || $name == $this->mainAlias) {
+                continue;
+            }
+            $this->aliasDefs[$name] = $defs;
+        } 
     }
     
 
@@ -871,8 +876,22 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 	}
     
 
-     protected $aliasDefs = array( 
-     
-
+     protected $defaultAliasDefs = array( 
+        "i"  => array("src" => "dt", "relation" => "instance"),
+        "os" => array("src" => "s", "relation" => "object"), 
+        "ss" => array("src" => "s","relation" => "status"),
+        "oh" => array("src" => "h","relation" => "object"),
+        "sg" => array("src" => "s","relation" => "servicegroups"),
+        "sgm" => array("src" => "sg", "relation" => "members"),
+        "osg" => array("src" => "sg", "relation" => "object"),
+        "hg"  => array("src" => "h", "relation" => "hostgroups"),
+        "hgm" => array("src" => "h","relation" => "members"), 
+        "ohg" => array("src" => "hg","relation" => "object"),
+        "hs"  => array("src" => "h", "relation" => "status"),
+        "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+        "cvsh"=> array("src" => "h", "relation" => "customvariablestatus")        
+      
     ); 
+
+    protected $aliasDefs = array();
 }

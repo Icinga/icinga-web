@@ -72,7 +72,7 @@ class AppKitXmlUtil {
 			$element = $parent;
 			$parent = $element->parentNode;
 			
-		} while(is_a($parent,"DomElement"));
+		} while(@is_a($parent,"DomElement"));
 
 		return null;
 	}	
