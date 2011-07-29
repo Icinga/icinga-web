@@ -107,31 +107,44 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     private $result = null;
     
     public function fetch() {
-        if($this->result)
-            return $this->result;   
-        $resultCols =  $this->getResultColumns();
-        $data =  $this->execRead();     
-        if($this->isCount) {
-            $fields = $this->getFields();
-            $_data = array(array());
-            foreach($fields as $field) {
-                $countField = explode(".",$field,2);
-                if(count($countField) > 1)
-                    $countField = $countField[1];
-                
-                $_data[0]["COUNT_".strtoupper($countField)] = $data;  
-                $resultCols[] = "COUNT_".strtoupper($countField);
+        try {
+            if($this->result)
+                return $this->result;   
+            $resultCols =  $this->getResultColumns();
+            $data =  $this->execRead();     
+            if($this->isCount) {
+                $fields = $this->getFields();
+                $_data = array(array());
+                foreach($fields as $field) {
+                    $countField = explode(".",$field,2);
+                    if(count($countField) > 1)
+                        $countField = $countField[1];
+        
+                    $_data[0]["COUNT_".strtoupper($countField)] = $data;  
+                    $resultCols[] = "COUNT_".strtoupper($countField);
+                }
+                $data = $_data;  
             }
-            $data = $_data;  
-        }
-        $this->result = $this->getContext()->getModel(
-            "Store.LegacyLayer.LegacyApiResult","Api",array(
-                "result" => $data,
-                "columns" => $resultCols 
-            )
-        );
+            $this->result = $this->getContext()->getModel(
+                "Store.LegacyLayer.LegacyApiResult","Api",array(
+                    "result" => $data,
+                    "columns" => $resultCols 
+                )
+            );
 
-        return $this->result;
+            return $this->result;
+        } catch(Exception $e) {
+            $sql = "";
+            try {
+                $sql = $this->getSqlQuery(); 
+            } catch(Exception $esub) {
+                $sql = "(No query created)";
+            }
+            AgaviContext::getInstance()->getLoggerManager()
+                ->log("Fetch failed with message ".$e->getMessage()."\n Query: ".$sql." \nTargetStore info (IcingaApiModel): ".$this->toString(), AgaviLogger::ERROR);
+        
+            throw $e; 
+        }
     }
   
     public function resolveFilterFields(IcingaApiSearchFilterInterface &$filter) {
@@ -246,6 +259,12 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }   
     public function getSearchType() {
         return $this->searchType;
+    }
+
+    public function toString() {
+        return "
+        \t - Store target: ".$this->getTarget()."
+        \t - Searchtype: ".$this->getSearchType();       
     }
 } 
 
