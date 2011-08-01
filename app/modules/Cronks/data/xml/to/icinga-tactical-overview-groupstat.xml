@@ -58,7 +58,9 @@
 			<![CDATA[
 				<?php
 					if (!isset($type)) $type=3;
-
+					
+					
+					
 					if ($type & 1) {
 						$hosts = $t->ds2Array('HOST_STATUS_SUMMARY', $apiFilter, false, 'HOST_CURRENT_STATE');
 						$host_states = new IcingaHostStateInfo(null);
@@ -68,7 +70,9 @@
 					}
 
 					if ($type & 2) {
-						$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', $apiFilter, false, 'SERVICE_CURRENT_STATE');
+						$serviceApiFilter = $apiFilter;
+						$serviceApiFilter[] = array('SERVICE_SCHEDULED_DOWNTIME_DEPTH', 0);
+						$services = $t->ds2Array('SERVICE_STATUS_SUMMARY', $serviceApiFilter, false, 'SERVICE_CURRENT_STATE');
 						$service_states = new IcingaServiceStateInfo(null);
 					}
 					else {

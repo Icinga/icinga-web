@@ -50,7 +50,7 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Icinga.Reporting.abstract.Applic
 			useArrows : true,
 		    autoScroll : true,
 		    animate : true,
-		    enableDD : true,
+		    enableDD : false,
 		    containerScroll : true,
 		    border : false,
 		    loader: this.treeLoader,

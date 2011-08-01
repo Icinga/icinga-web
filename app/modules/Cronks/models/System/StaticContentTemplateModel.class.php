@@ -507,7 +507,7 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 			return $data[$field];
 		}
 	}
-
+	
 	public function ds2Array($name, $filter=array(), $index=false, $keyfield=null) {
 		$data =  $this->getDsArray($name, $filter, $index);
 		if (is_array($data) && $keyfield !== null && isset($data[0][$keyfield])) {

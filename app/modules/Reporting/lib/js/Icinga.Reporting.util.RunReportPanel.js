@@ -71,32 +71,6 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Icinga.Reporting.abstract.Appl
 		
 	},
 	
-	buildFormItems : function(panel, struct) {
-		Ext.iterate(struct, function(k,v) {
-			var inputConfig = {};
-			
-			Ext.apply(v.jsControl, {
-				hidden : v.PROP_INPUTCONTROL_IS_VISIBLE=="false" ? true : false,
-				readonly : v.PROP_INPUTCONTROL_IS_READONLY=="true" ? true : false,
-				name : v.name,
-				width: 250,
-				fieldLabel : v['label'],
-				allowBlank : false
-			});
-			
-			Ext.applyIf(v.jsControl, Icinga.Reporting.DEFAULT_JSCONTROL);
-			
-			inputConfig = v.jsControl;
-			
-			if (!Ext.isEmpty(inputConfig.className)) {
-				var inputClass = eval('window.' + inputConfig.className);
-				var inputControl = new inputClass(inputConfig);
-				panel.add(inputControl);
-			}
-			
-		}, this);
-	},
-	
 	buildInterface : function(struct) {
 		this.removeAll();
 		
@@ -117,7 +91,12 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Icinga.Reporting.abstract.Appl
 		} else {
 			this.formPanel = this.createForm();
 			
-			this.buildFormItems(this.formPanel, this.parameterData);
+			var builder = new Icinga.Reporting.util.InputControlBuilder({
+				target : this.formPanel,
+				controlStruct : this.parameterData
+			});
+			
+			builder.applyToTarget();
 			
 			var outputSelector = new Icinga.Reporting.inputControl.OutputFormatSelector({
 				name : '_output_format',

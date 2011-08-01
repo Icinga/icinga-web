@@ -33,6 +33,14 @@
 			</validator> 
 		</validators>
 		
+		<validator class="number" name="job" required="false">
+			<argument>job</argument>
+			
+			<errors>
+				<error>Could not validate jobid (job)</error>
+			</errors>
+		</validator>
+		
 	</ae:configuration>
 	
 </ae:configurations>
