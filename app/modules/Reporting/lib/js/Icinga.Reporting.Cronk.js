@@ -56,7 +56,6 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 		/**
 		 * @Todo: Implement this (80%)
 		 */
-
 //		if (this.enable_scheduling == true) {
 //			
 //			this.enableScheduling = new Icinga.Reporting.util.ReportScheduling({
