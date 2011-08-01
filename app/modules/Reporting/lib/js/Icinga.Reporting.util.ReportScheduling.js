@@ -23,8 +23,11 @@ Icinga.Reporting.util.ReportScheduling = Ext.extend(Icinga.Reporting.abstract.Re
 		
 		this.schedulingList = new Icinga.Reporting.util.SchedulingListPanel({
 			region : 'center',
-			parentCmp : this.parentCmp
-			
+			parentCmp : this.parentCmp,
+			scheduler_list_url : this.scheduler_list_url,
+			scheduler_get_url : this.scheduler_get_url,
+			scheduler_edit_url : this.scheduler_edit_url,
+			scheduler_delete_url : this.scheduler_delete_url
 		});
 		
 		this.resourceTree.getTreePanel().on('click', this.schedulingList.processNodeClick, this.schedulingList);
