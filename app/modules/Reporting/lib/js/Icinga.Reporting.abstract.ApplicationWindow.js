@@ -25,9 +25,17 @@ Icinga.Reporting.abstract.ApplicationWindow = Ext.extend(Ext.Panel, {
 		}
 		var i = 0;
 		this.getTopToolbar().items.eachKey(function(key, item) {
+			i++;
 			if (!Ext.isEmpty(pos)) {
-				if (pos == ++i) {
-					item.setDisabled(!bool);
+				if (Ext.isArray(pos)) {
+					if (pos.indexOf(i) >= 0) {
+						item.setDisabled(!bool);
+					}
+				}
+				else {
+					if (pos == i) {
+						item.setDisabled(!bool);
+					}
 				}
 			}
 			else {

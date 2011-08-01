@@ -79,7 +79,11 @@
 				<setting name="appkit_module.app.javascript_files">
 					<!-- ExtJS base files -->
 					<ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
-                    <ae:parameter>%core.root_dir%/lib/ext3/ext-all.js</ae:parameter>
+					
+					<ae:parameter>%core.root_dir%/lib/ext3/ext-all.js</ae:parameter>
+					
+					<!-- debug file -->
+					<!-- <ae:parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</ae:parameter> -->
 
 					<!--AppKit JS -->
 					<ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
