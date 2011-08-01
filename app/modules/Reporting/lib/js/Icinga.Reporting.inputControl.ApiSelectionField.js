@@ -63,5 +63,12 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 	
 	initComponent : function() {
 		Icinga.Reporting.inputControl.ApiSelectionField.superclass.initComponent.call(this);
+		
+		this.on('beforequery', function(queryEvent) {
+			if (Ext.isEmpty(queryEvent.query)) {
+				delete(this.store.baseParams.filters_json);
+				this.store.reload();
+			}
+		}, this);
 	}
 });

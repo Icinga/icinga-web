@@ -5,7 +5,7 @@ Icinga.Reporting.form.converter = {};
 Ext.apply(Icinga.Reporting.form.converter, {
 	'default.arrayValues' : {
 		encode : function(value, fieldName) {
-			
+			return String(value).split(',');
 		},
 		
 		decode : function(value, fieldName) {
@@ -15,7 +15,7 @@ Ext.apply(Icinga.Reporting.form.converter, {
 	
 	'default.simpleArray' : {
 		encode : function(value, fieldName) {
-			
+			return String(value).split(',');
 		},
 		
 		decode : function(value, fieldName) {
@@ -122,13 +122,34 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 		return this.form;
 	},
 	
+	createJsonStructure : function() {
+		var values = this.form.getValues();
+		
+		var o = {};
+		
+		Ext.iterate(values, function(key, val) {
+			
+			if (Icinga.Reporting.form.FieldConverterUtil.hasConverter(key)) {
+				val = Icinga.Reporting.form.FieldConverterUtil.getConverter(key).encode(val, key);
+			}
+			
+			var subitems = String(key).split('.');
+			var subkey = null;
+			var oo = o;
+			while ((subkey = subitems.shift())) {
+				oo = (oo[subkey] = oo[subkey] || (subitems.length ? {} : val));
+			}
+		}, this);
+		
+		AppKit.log(o);
+	},
+	
 	applyFormValues : function(data) {
 		data = data || this.data;
 		
 		if (Ext.isEmpty(this.flat_data)) {
 			this.flat_data = this.flattenObject(data, {}, '');
 		}
-		AppKit.log(this.flat_data);
 		this.applyFlatData(this.flat_data);
 	},
 	
@@ -164,15 +185,51 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 	applyFlatData : function(data) {
 		Ext.iterate(data, this.applySingleFieldValue, this);
 		
+		var triggerPrefix = null;
+		var trigger = null;
+		
 		// Decide which calendar trigger you want to use
 		if (this.triggerFields.simpleTrigger == false && this.triggerFields.calendaTrigger == false) {
-			this.form.findField('trigger').setValueForItem('recurrence-none'); 
+			this.form.findField('trigger').setValueForItem('recurrence-none');
+			trigger = null; 
 		} else if (this.triggerFields.simpleTrigger == true) {
 			this.form.findField('trigger').setValueForItem('recurrence-simple');
+			triggerPrefix = 'simpleTrigger';
+			trigger = 'simple';
 			this.triggerFields.simpleTrigger = false;
 		} else if (this.triggerFields.calendarTrigger == true) {
 			this.form.findField('trigger').setValueForItem('recurrence-calendar');
+			triggerPrefix = 'calendarTrigger';
+			trigger = 'calendar';
 			this.triggerFields.calendarTrigger = false;
+		}
+		
+		if (triggerPrefix) {
+			if (!Ext.isEmpty(data[triggerPrefix + ".startDate"])) {
+				this.form.findField(triggerPrefix + ".startType").setValue(2);
+			} else {
+				this.form.findField(triggerPrefix + ".startType").setValue(1);
+			}
+		}
+		
+		switch(trigger) {
+			case 'simple':
+				if (!Ext.isEmpty(data['simpleTrigger.occurrenceCount']) && data['simpleTrigger.occurrenceCount'] > -1) {
+					this.form.findField('simpleTrigger.recurrenceType').setValue(2);
+				} else if (!Ext.isEmpty(data['simpleTrigger.endDate'])) {
+					this.form.findField('simpleTrigger.recurrenceType').setValue(3);
+				} else {
+					this.form.findField('simpleTrigger.recurrenceType').setValue(1);
+				}
+			break;
+			
+			case 'calendar':
+				if (!Ext.isEmpty(data['calendarTrigger.months'])) {
+					this.form.findField("calendarTrigger.monthsType").setValue(2);
+				} else {
+					this.form.findField("calendarTrigger.monthsType").setValue(1);
+				}
+			break;
 		}
 	},
 	
@@ -188,11 +245,12 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 		}
 		
 		if (!fieldElement) {
-			AppKit.log('Field not found', fieldName);
+			AppKit.log('Field not found', fieldName, value);
 			return true;
 		}
 		
 		AppKit.log('Set value on field', fieldName, value);
+		
 		fieldElement.setValue(value);
 	}
 });

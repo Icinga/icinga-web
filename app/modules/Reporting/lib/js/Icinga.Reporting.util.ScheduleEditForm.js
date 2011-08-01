@@ -31,7 +31,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 		Icinga.Reporting.util.ScheduleEditForm.superclass.initComponent.call(this);
 		
 		this.formTabs = new Ext.TabPanel({
-			height : 500,
+			height : 600,
 			border : false,
 			activeTab : 0,
 			
@@ -50,7 +50,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 				iconCls : 'icinga-cronk-icon-1',
 				title : _('Basics'),
 				autoScroll : true,
-				height : 500,
+				height : 560,
 				defaults : {
 					width : 300
 				},
@@ -75,47 +75,6 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 				}]
 			}, {
 				iconCls : 'icinga-cronk-icon-2',
-				title : _('Scheduling'),
-				items : [{
-					xtype : 'fieldset',
-					title : _('Start time'),
-					height : 120,
-					layout : {
-						type : 'vbox',
-						defaultMargins : ' 0 10 0 0'
-					},
-					items : [{
-						xtype : 'radio',
-						name : 'trigger.startType',
-						boxLabel : _('Run immediately'),
-						checked : true,
-						inputValue : 1 
-					}, {
-						xtype : 'container',
-						width : 350,
-						layout : {
-							type : 'hbox',
-							defaultMargins : ' 10 0 0 0'
-						},
-						items : [{
-							xtype : 'radio',
-							name : 'trigger.startType',
-							boxLabel : _('On'),
-							inputValue : 2,
-							listeners : {
-								check : this.processStartTimeToggle.createDelegate(this)
-							}
-						}, {
-							xtype : 'datefield',
-							name : 'trigger.startDate',
-							format : 'c',
-							disabled : true,
-							width : 300
-						}]
-					}]
-				}]
-			}, {
-				iconCls : 'icinga-cronk-icon-3',
 				title : _('Recurrence'),
 				autoScroll : true,
 				items : [{
@@ -149,6 +108,42 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					id : this.getId() + '-recurrence-simple',
 					hidden : false,
 					items : [{
+						xtype : 'container',
+						height : 80,
+						layout : {
+							type : 'vbox',
+							defaultMargins : ' 0 10 0 0'
+						},
+						items : [{
+							xtype : 'radio',
+							name : 'simpleTrigger.startType',
+							boxLabel : _('Run immediately'),
+							checked : true,
+							inputValue : 1 
+						}, {
+							xtype : 'container',
+							width : 350,
+							layout : {
+								type : 'hbox',
+								defaultMargins : ' 10 0 0 0'
+							},
+							items : [{
+								xtype : 'radio',
+								name : 'simpleTrigger.startType',
+								boxLabel : _('On'),
+								inputValue : 2,
+								listeners : {
+									check : this.processStartTimeToggle.createDelegate(this, ['simpleTrigger.startDate'], true)
+								}
+							}, {
+								xtype : 'datefield',
+								name : 'simpleTrigger.startDate',
+								format : 'c',
+								disabled : true,
+								width : 300
+							}]
+						}]
+					}, {
 						xtype : 'container',
 						layout : {
 							type : 'hbox',
@@ -203,7 +198,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Indefinitely'),
-								name : 'recurrence_type',
+								name : 'simpleTrigger.recurrenceType',
+								inputValue : 1,
 								checked : true
 							}]
 						}, {
@@ -217,7 +213,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Times'),
-								name : 'recurrence_type',
+								name : 'simpleTrigger.recurrenceType',
+								inputValue : 2,
 								width : 60,
 								listeners : {
 									check : this.processRecurrenceChange.createDelegate(this, ['simpleTrigger.occurrenceCount'], true)
@@ -239,7 +236,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							items : [{
 								xtype : 'radio',
 								boxLabel : _('Until'),
-								name : 'recurrence_type',
+								name : 'simpleTrigger.recurrenceType',
+								inputValue : 3,
 								width : 60,
 								listeners : {
 									check : this.processRecurrenceChange.createDelegate(this, ['simpleTrigger.endDate'], true)
@@ -260,6 +258,42 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					height: 500,
 					hidden : false,
 					items : [{
+						xtype : 'container',
+						height : 80,
+						layout : {
+							type : 'vbox',
+							defaultMargins : ' 0 10 0 0'
+						},
+						items : [{
+							xtype : 'radio',
+							name : 'calendarTrigger.startType',
+							boxLabel : _('Run immediately'),
+							checked : true,
+							inputValue : 1 
+						}, {
+							xtype : 'container',
+							width : 350,
+							layout : {
+								type : 'hbox',
+								defaultMargins : ' 10 0 0 0'
+							},
+							items : [{
+								xtype : 'radio',
+								name : 'calendarTrigger.startType',
+								boxLabel : _('On'),
+								inputValue : 2,
+								listeners : {
+									check : this.processStartTimeToggle.createDelegate(this, ['calendarTrigger.startDate'], true)
+								}
+							}, {
+								xtype : 'datefield',
+								name : 'calendarTrigger.startDate',
+								format : 'c',
+								disabled : true,
+								width : 300
+							}]
+						}]
+					}, {
 						xtype : 'container',
 						height : 200,
 						autoScroll : true,
@@ -293,11 +327,13 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 								}, {
 									xtype : 'radio',
 									boxLabel : _('Every month'),
-									name : 'calendar_month_type'
+									name : 'calendarTrigger.monthsType',
+									inputValue : 1
 								}, {
 									xtype : 'radio',
 									boxLabel : _('Selected months'),
-									name : 'calendar_month_type'
+									name : 'calendarTrigger.monthsType',
+									inputValue : 2
 								}, new Icinga.Reporting.widget.MonthPicker({
 									name : 'calendarTrigger.months',
 									height : 80
@@ -316,18 +352,21 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 								}, {
 									xtype : 'radio',
 									boxLabel : _('Every day'),
-									name : 'calendar_day_type'
+									name : 'calendarTrigger.daysType',
+									inputValue : 'ALL'
 								}, {
 									xtype : 'radio',
 									boxLabel : _('Week days'),
-									name : 'calendar_day_type'
+									name : 'calendarTrigger.daysType',
+									inputValue : 'WEEK'
 								}, new Icinga.Reporting.widget.WeekDayPicker({
 									name : 'calendarTrigger.weekDays',
 									height : 80
 								}), {
 									xtype : 'radio',
 									boxLabel : _('Month days'),
-									name : 'calendar_day_type'
+									name : 'calendarTrigger.daysType',
+									inputValue : 'MONTH'
 								}, {
 									xtype : 'textfield',
 									name : 'calendarTrigger.monthDays'
@@ -404,7 +443,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					}]
 				}]
 			}, {
-				iconCls : 'icinga-cronk-icon-4',
+				iconCls : 'icinga-cronk-icon-3',
 				title : _('Parameters'),
 				autoScroll : true,
 				layout : {
@@ -419,7 +458,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					}]
 				}]
 			}, {
-				iconCls : 'icinga-cronk-icon-5',
+				iconCls : 'icinga-cronk-icon-4',
 				title : _('Output'),
 				autoScroll : true,
 				layout : {
@@ -554,14 +593,17 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 		 * ----------------------------------------------------------------
 		 */
 		
+		this.on('afterrender', function() {
+			this.formTabs.setHeight(this.parentCmp.getInnerHeight()-30);
+		}, this, { single : true })
 		this.add(this.formTabs);
 		
 		this.doLayout();
 		
 	},
 	
-	processStartTimeToggle : function(checkboxChecked, checked) {
-		var field = this.getForm().findField('trigger.startDate');
+	processStartTimeToggle : function(checkboxChecked, checked, fieldName) {
+		var field = this.getForm().findField(fieldName);
 		if (field) {
 			field.setDisabled(!checked);
 		}
@@ -595,8 +637,14 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 	},
 	
 	processFormSave : function() {
-		var values = this.getForm().getFieldValues();
-		AppKit.log(values);
+		
+		var dataTool = new Icinga.Reporting.util.JobFormValues({
+			form : this.getForm()
+		});
+		
+		var data = dataTool.createJsonStructure();
+		
+		AppKit.log(data);
 	},
 	
 	processFormCancel : function() {
