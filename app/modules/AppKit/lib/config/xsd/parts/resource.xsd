@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
+    xmlns="http://icinga.org/icinga/config/parts/resource/1.0"
+    targetNamespace="http://icinga.org/icinga/config/parts/resource/1.0"
+    elementFormDefault="qualified"
+    version="">
+
+    <xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
+               schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_types.xsd" />
+    <xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
+               schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_envelope.xsd" />
+
+    <xs:complexType name="javascript">
+        <xs:sequence>
+            <xs:group ref="envelope_1_0:parameters" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="css">
+        <xs:sequence>
+            <xs:group ref="envelope_1_0:parameters" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="css_import">
+        <xs:sequence>
+            <xs:group ref="envelope_1_0:parameters" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:group name="configuration">
+        <xs:all>
+            <xs:element name="javascript" type="javascript" minOccurs="0" />
+            <xs:element name="css" type="css" minOccurs="0" />
+            <xs:element name="css_import" type="css_import" minOccurs="0" />
+        </xs:all>
+    </xs:group>
+</xs:schema>

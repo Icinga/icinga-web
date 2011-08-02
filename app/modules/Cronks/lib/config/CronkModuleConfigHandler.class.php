@@ -5,7 +5,6 @@ class CronkModuleConfigHandler extends AgaviXmlConfigHandler {
     const XML_NAMESPACE = 'http://icinga.org/cronks/config/parts/cronks/1.0';
     
     public function execute(AgaviXmlConfigDomDocument $document) {
-        
         $document->setDefaultNamespace(self::XML_NAMESPACE, 'cronk');
         
         $config = $document->documentURI;

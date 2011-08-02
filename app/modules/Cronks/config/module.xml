@@ -9,52 +9,13 @@
 
 				<!-- Module configuration -->
 
-				<!-- Adding styles -->
-				<setting name="appkit_module.app.css_files">
-					<!-- JIT - JavaScript InfoVis Toolkit -->
-					<ae:parameter>/styles/statusmap.css</ae:parameter>
-					
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.css_files.site']/node())">
-						<xi:fallback></xi:fallback>
-					</xi:include>
-
-
+				<setting name="agavi.include.css">
+                    <ae:parameter>%core.module_dir%/Cronks/config/css.xml</ae:parameter>
 				</setting>
 
-				<setting name="appkit_module.app.javascript_files">
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/Portal.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/PortalColumn.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/Portlet.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTabPanel.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/MultiSelect.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/TabScrollerMenu.js</ae:parameter>
-
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/SlidingTabs.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/Tabhelper.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTabpanel.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/rmd160.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkBuilder.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkListingPanel.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/StaticContentUtil.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridUtil.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</ae:parameter>
-					<ae:parameter>%core.module_dir%/Cronks/lib/js/SearchHandler.js</ae:parameter>
-
-					<ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
-					<ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.javascript_files.site']/node())">
-						<xi:fallback></xi:fallback>
-					</xi:include>
-
-
-				</setting>
+                <setting name="agavi.include.javascript">
+                    <ae:parameter>%core.module_dir%/Cronks/config/javascript.xml</ae:parameter>
+                </setting>
 
 				<setting name="appkit_module.app.javascript_dynamic">
 					<ae:parameter name="Cronk.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
@@ -67,7 +28,7 @@
 					</xi:include>
 				</setting>
 
-				<setting name="appkit_module.agavi.include_xml.cronks">
+				<setting name="agavi.include.cronks">
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks.xml</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks_categories.xml</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks_system.xml</ae:parameter>

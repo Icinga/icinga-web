@@ -54,7 +54,6 @@
 		<autoload name="AppKitSelectSource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSource.class.php</autoload>
 		<autoload name="AppKitSelectSourceInterface">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSourceInterface.interface.php</autoload>
 		<autoload name="AppKitTextboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitTextboxElement.class.php</autoload>
-		<autoload name="AppKitBulkLoader">%core.module_dir%/AppKit/lib/html/AppKitBulkLoader.class.php</autoload>
 		<autoload name="AppKitHtmlEntitiesInterface">%core.module_dir%/AppKit/lib/html/AppKitHtmlEntitiesInterface.interface.php</autoload>
 		<autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
 		<autoload name="AppKitHtmlHelper">%core.module_dir%/AppKit/lib/html/AppKitHtmlHelper.class.php</autoload>
@@ -88,8 +87,7 @@
 		<autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
 		<autoload name="AppKitHtmlUtil">%core.module_dir%/AppKit/lib/util/AppKitHtmlUtil.class.php</autoload>
 		<autoload name="AppKitFileUtil">%core.module_dir%/AppKit/lib/util/AppKitFileUtil.class.php</autoload>
-		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
-        <autoload name="IDispatchableAction">%core.module_dir%/AppKit/lib/action/IDispatchableAction.php</autoload>
+	
 		<!-- Custom validators -->
 		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
 		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
@@ -99,6 +97,13 @@
 		
 		<!-- Module util classes -->
 		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
+
+		<autoload name="AppKitModuleRoutingHandler">%core.module_dir%/AppKit/lib/module/AppKitModuleRoutingHandler.class.php</autoload>
+		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
+        
+        <autoload name="AppKitXIncludeConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitXIncludeConfigHandler.class.php</autoload>
+        <autoload name="AppKitResourceConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitResourceConfigHandler.class.php</autoload>
+        <autoload name="AppKitIteratorUtil">%core.module_dir%/AppKit/lib/util/AppKitIteratorUtil.class.php</autoload>
 	
 		<!-- Agavi config file handler -->
 		<autoload name="AppKitRoutingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingConfigHandler.class.php</autoload>
@@ -110,7 +115,5 @@
 		<autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload>         
 		<autoload name="IAppKitDataStoreProviderAction">%core.module_dir%/AppKit/lib/action/IAppKitDataStoreProviderAction.php</autoload>
 		<autoload name="AppKitExtJSDataStoreWriter">%core.module_dir%/AppKit/lib/config/AppKitExtJSDataStoreWriter.class.php</autoload>
-
- 
 	</ae:configuration>
 </ae:configurations>

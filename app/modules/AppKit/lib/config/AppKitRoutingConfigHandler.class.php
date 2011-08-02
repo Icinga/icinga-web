@@ -20,32 +20,12 @@ class AppKitRoutingConfigHandler extends AgaviRoutingConfigHandler {
     }
 
     /**
-     * Overwrites the default execute method to include module specific 
-     * routing definitions with the right context. The XML files are collected 
-     * with the AppKit module handler which collects information about a module
-     * and provide summary config at request time
      * @see		AgaviRoutingConfigHandler::execute()
      * @author	Marius Hein <marius.hein@netways.de>
      */
     public function execute(AgaviXmlConfigDomDocument $document) {
         // set up our default namespace
         $document->setDefaultNamespace(self::XML_NAMESPACE, 'routing');
-        
-        $context_name = AgaviConfig::get('core.default_context', 'web');
-        
-        $entry_xpath_query = '//ae:configurations/ae:configuration'
-        . '[@context=\''. $context_name. '\']'
-        . '/routing:routes/routing:route[@name=\'modules\']';
-        
-        AppKitXmlUtil::includeXmlFilesToTarget(
-            $document,
-            $entry_xpath_query,
-            'xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//ae:configurations/ae:configuration[@context=\''. $context_name. '\']/r:routes/node())',
-            AppKitModuleUtil::getInstance()->getSubConfig('agavi.include_xml.routing')
-        );
-        
-        $document->xinclude();
-        
         return $this->parent_execute($document);
     }
 

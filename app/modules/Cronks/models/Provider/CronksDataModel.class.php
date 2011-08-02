@@ -79,13 +79,9 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
             return true;
         }
         
-        $xml_files = AppKitModuleUtil::getInstance()->getSubConfig('agavi.include_xml.cronks');
-        
-        foreach ($xml_files as $file) {
-            $tmp = include(AgaviConfigCache::checkConfig($file));
-            self::$xml_cronk_data = (array)$tmp[0] + self::$xml_cronk_data;
-            self::$xml_category_data = (array)$tmp[1] + self::$xml_category_data;
-        }
+        $tmp = include(AgaviConfigCache::checkConfig(AgaviConfig::get('core.config_dir'). '/cronks.xml'));
+        self::$xml_cronk_data = (array)$tmp[0] + self::$xml_cronk_data;
+        self::$xml_category_data = (array)$tmp[1] + self::$xml_category_data;
         
         return self::$xml_ready=true;
     }
