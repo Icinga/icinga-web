@@ -4,6 +4,9 @@
     <!-- Map your instances to hosts here -->
 	<setting name="instances">
         <ae:parameter name="@api_cmd_instance@">localhost</ae:parameter>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="access.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='instances']/node())">
+            <xi:fallback></xi:fallback>
+        </xi:include>
     </setting>
 
     <!--
@@ -40,7 +43,9 @@
 				</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>						
-
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="access.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='defaults']/node())">
+			<xi:fallback></xi:fallback>
+		</xi:include>
 	</setting>
 	
 	
@@ -96,10 +101,12 @@
 			</ae:parameter>	
 		</ae:parameter>
 -->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="access.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='hosts']/node())">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+
+
+
 	</setting>
 
-
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="access.site.xml#xpointer(settings/node())">
-	    <xi:fallback></xi:fallback>
-	</xi:include>
 </settings>

@@ -19,7 +19,7 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
 
     public function setType($type) {
         if(isset(self::$TYPES[$type])) {
-            if($self::$TYPES[$type] == $this->type) 
+            if(self::$TYPES[$type] == $this->type) 
                 return;
             $this->type = self::$TYPES[$type];
             $this->model = $this->getModel();
