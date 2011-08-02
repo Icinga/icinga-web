@@ -6,7 +6,10 @@
 
             <handler pattern="%core.config_dir%/routing.xml" class="AppKitXIncludeConfigHandler">
                 <ae:parameters>
-                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration[@context='web']/routing:routes/routing:route[@name='modules']]]></ae:parameter>
+	                <!-- 
+	                	You can use __CONTEXT__ to expand the current context
+	                -->
+                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration[@context='__CONTEXT__']/routing:routes/routing:route[@name='modules']]]></ae:parameter>
                     <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//ae:configurations/ae:configuration/r:routes/node())]]></ae:parameter>
                     <ae:parameter name="includeNS">routing</ae:parameter>
                     <!--
@@ -22,8 +25,8 @@
 
             <handler pattern="%core.config_dir%/databases.xml" class="AppKitXIncludeConfigHandler">
                 <ae:parameters>
-                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration/database:databases]]></ae:parameter>
-                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(d=http://agavi.org/agavi/config/parts/databases/1.0) xpointer(//ae:configurations/ae:configuration/d:databases/node())]]></ae:parameter>
+                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration/databases:databases]]></ae:parameter>
+                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(d=http://agavi.org/agavi/config/parts/databases/1.0) xpointer(//ae:configurations/ae:configuration/d:databases/d:database)]]></ae:parameter>
                 </ae:parameters>
 
                 <validation>%core.agavi_dir%/config/xsd/databases.xsd</validation>
@@ -32,7 +35,7 @@
 
             <handler pattern="%core.config_dir%/translation.xml" class="AppKitXIncludeConfigHandler">
                 <ae:parameters>
-                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration/t:translators[@default_domain='icinga.default']]]></ae:parameter>
+                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration/translation:translators[@default_domain='icinga.default']]]></ae:parameter>
                     <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(t=http://agavi.org/agavi/config/parts/translation/1.0) xpointer(//ae:configurations/ae:configuration/t:translators/t:translator)]]></ae:parameter>
                 </ae:parameters>
 

@@ -8,7 +8,6 @@
 		<testsuite name="Bootstrap" >
 			<file>tests/bootstrap/agaviBootstrapTest.php</file>
 		</testsuite>
-<!--
 		<testsuite name="Installation">
 			<file>tests/installation/userRightsTest.php</file>
 			<file>tests/installation/configSettingsTest.php</file>	
@@ -19,10 +18,10 @@
 		<testsuite name="Configuration">
 			<file>tests/configuration/ApiProviderRoutesTest.php</file>
 			<file>tests/configuration/ApiValidationParserTest.php</file>
-		</testsuite>		-->
+		</testsuite>
 		<testsuite name="validators">
 			<file>tests/validators/AppKitJsonValidatorTest.php</file>
-        </testsuite>
+	        </testsuite>
 <!--        <testsuite name="Database">
 			<file>tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
 			<file>tests/configDatabase/icingaUserOperations.php</file>

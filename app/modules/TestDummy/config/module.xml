@@ -17,25 +17,25 @@
 				<!-- 
 					Adding module specific routing configuration
 				-->
-				<setting name="appkit_module.agavi.include_xml.routing">
+				<setting name="agavi.include.routing">
 					<ae:parameter>%core.module_dir%/TestDummy/config/routing.xml</ae:parameter>
 				</setting>
 				
 				<!-- 
 					Adding module related databases
 				-->
-				<setting name="appkit_module.agavi.include_xml.databases">
+				<setting name="agavi.include.database">
 					<ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
 				</setting>
 				
 				<!-- 
 					Adding module specific cronks
 				-->
-				<setting name="appkit_module.agavi.include_xml.cronks">
+				<setting name="agavi.include.cronks">
 					<ae:parameter>%core.module_dir%/TestDummy/config/cronks.xml</ae:parameter>
 				</setting>
 
-				<setting name="appkit_module.agavi.include_xml.translations">
+				<setting name="agavi.include.translation">
 					<ae:parameter>%core.module_dir%/TestDummy/config/translation.xml</ae:parameter>
 				</setting>
 

@@ -57,6 +57,14 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
             AgaviConfig::get('org.icinga.appkit.init_modules')
         );
 
+        $query = $this->getParameter('query');
+        
+        // Allow different contexts in xpath queries and
+        // substitude the variable
+        if (strpos($query, '__CONTEXT__') !== false) {
+            $query = str_replace('__CONTEXT__', AgaviConfig::get('core.default_context', 'web'), $query);
+        }
+        
         foreach($modules as $module) {
             $includes = AgaviConfig::get(
                 sprintf(
@@ -66,7 +74,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                 ),
                 false
             );
-
+            
             if($includes) {
                 $pointers = $this->getParameter('pointer');
                 if(!is_array($pointers)) {
@@ -76,11 +84,11 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                 foreach($pointers as $pointer) {
                     AppKitXmlUtil::includeXmlFilesToTarget(
                         $document,
-                        $this->getParameter('query'),
+                        $query,
                         $pointer,
                         $includes
                     );
-
+                    
                     try {
                         $document->xinclude();
                     } catch(Exception $e) {
