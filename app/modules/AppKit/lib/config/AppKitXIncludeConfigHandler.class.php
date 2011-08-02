@@ -29,13 +29,18 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         $configHandler = $refClass->newInstance();
         
         $configHandler->initialize($this->context, $this->parameters);
-
-        $nsprefix = array();
-        preg_match('/\/([a-z]+)\/[^\/]+$/', $configHandler::XML_NAMESPACE, $nsprefix);
-        $nsprefix = $nsprefix[1];
-
+        
+        $nsprefix = null;
+        
         if ($refClass->hasConstant('XML_NAMESPACE')) {
+            
+            $m = array();
+            preg_match('/\/([a-z]+)\/[^\/]+$/', $refClass->getConstant('XML_NAMESPACE'), $m);
+            $nsprefix = $m[1];
+            
             $document->setDefaultNamespace($refClass->getConstant('XML_NAMESPACE'), $nsprefix);
+        } else {
+            throw new AgaviConfigurationException('Could not read XML_NAMESPACE from class: '. $refClass->getName());
         }
 
         // Order of includes is essential because of dependencies
