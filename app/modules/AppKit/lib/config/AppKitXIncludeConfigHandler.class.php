@@ -21,49 +21,32 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
      * @see AgaviIXmlConfigHandler::execute()
      */
     public function execute(AgaviXmlConfigDomDocument $document) {
+        
         $config = basename($document->baseURI, '.xml');
-
-        // For Agavi configuration files we call their appropriate handlers
-        // else we hopefully have a handler defined
-        if(false == ($configHandlerClass = $this->getParameter('handler', false))) {
-            switch($config) {
-                case 'databases':
-                    $config = 'database';
-                    break;
-            }
-
-            $configHandlerClass = sprintf('Agavi%sConfigHandler', ucfirst($config));
-        }
-
-        if(!class_exists($configHandlerClass)) {
-            throw new AgaviConfigurationException("$configHandlerClass not found.");
-        }
-
-        $configHandler = new $configHandlerClass($this->getParameters());
-        $configHandler->initialize(
-            AgaviContext::getInstance($this->context),
-            $this->getParameters()
-        );
+        
+        $refClass = $this->getConfigHandlerClass($config);
+        
+        $configHandler = $refClass->newInstance();
+        
+        $configHandler->initialize($this->context, $this->parameters);
 
         $nsprefix = array();
         preg_match('/\/([a-z]+)\/[^\/]+$/', $configHandler::XML_NAMESPACE, $nsprefix);
         $nsprefix = $nsprefix[1];
 
-        $document->setDefaultNamespace($configHandler::XML_NAMESPACE, $nsprefix);
+        if ($refClass->hasConstant('XML_NAMESPACE')) {
+            $document->setDefaultNamespace($refClass->getConstant('XML_NAMESPACE'), $nsprefix);
+        }
 
         // Order of includes is essential because of dependencies
         $modules = array_merge(
             array('AppKit'),
             AgaviConfig::get('org.icinga.appkit.init_modules')
         );
-
-        $query = $this->getParameter('query');
         
-        // Allow different contexts in xpath queries and
-        // substitude the variable
-        if (strpos($query, '__CONTEXT__') !== false) {
-            $query = str_replace('__CONTEXT__', AgaviConfig::get('core.default_context', 'web'), $query);
-        }
+        $query = $this->getQuery();
+        
+        $pointers = $this->getPointers();
         
         foreach($modules as $module) {
             $includes = AgaviConfig::get(
@@ -76,10 +59,6 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
             );
             
             if($includes) {
-                $pointers = $this->getParameter('pointer');
-                if(!is_array($pointers)) {
-                    $pointers = array($pointers);
-                }
 
                 foreach($pointers as $pointer) {
                     AppKitXmlUtil::includeXmlFilesToTarget(
@@ -97,8 +76,64 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                 }
             }
         }
-
+        
+        // The confighandler behind this included definition
         return $configHandler->execute($document);
+    }
+    
+    /**
+     * Returns the right config handler
+     * @param string $config
+     * @throws AgaviConfigurationException
+     * @return ReflectionClass
+     */
+    private function getConfigHandlerClass($config) {
+        // For Agavi configuration files we call their appropriate handlers
+        // else we hopefully have a handler defined
+        if(false == ($configHandlerClass = $this->getParameter('handler', false))) {
+            switch($config) {
+                case 'databases':
+                    $config = 'database';
+                    break;
+            }
+        
+            $configHandlerClass = sprintf('Agavi%sConfigHandler', ucfirst($config));
+        }
+        
+        if(!class_exists($configHandlerClass)) {
+            throw new AgaviConfigurationException("$configHandlerClass not found.");
+        }
+        
+        $ref = new ReflectionClass($configHandlerClass);
+        return $ref;
+    }
+    
+    /**
+     * Returns the XPath query and substitude some vars needed there
+     * @return string
+     */
+    private function getQuery() {
+        $query = $this->getParameter('query');
+        
+        // Allow different contexts in xpath queries and
+        // substitude the variable
+        if (strpos($query, '__CONTEXT__') !== false) {
+            $query = str_replace('__CONTEXT__', AgaviConfig::get('core.default_context', 'web'), $query);
+        }
+        
+        return $query;
+    }
+    
+    /**
+     * Returns an array of xpointer to include from
+     * @return array
+     */
+    private function getPointers() {
+        $pointers = $this->getParameter('pointer');
+        if(!is_array($pointers)) {
+            $pointers = array($pointers);
+        }
+        return $pointers;
     }
 
 }
