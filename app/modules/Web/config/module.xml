@@ -17,8 +17,8 @@
 
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml" />
 			
-			<!-- include icnga connection settings -->
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga-io.xml" />
+
+
 			
 			<!-- include optional override settings file -->
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga-io.site.xml">
