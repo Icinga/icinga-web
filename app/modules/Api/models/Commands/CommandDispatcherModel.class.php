@@ -17,7 +17,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
     }
 
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
-        if(isset($parameters["console"]) && @is_a($parameters["console"],"IcingaConsoleInterface"))
+        if(isset($parameters["console"]) && $parameters["console"] instanceof IcingaConsoleInterface)
             $this->setConsoleContext($parameters["console"]);
      
         parent::initialize($ctx,$parameters);

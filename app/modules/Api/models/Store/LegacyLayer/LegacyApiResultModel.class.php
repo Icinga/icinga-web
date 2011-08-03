@@ -124,8 +124,8 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
 		return $returnData;
 
 	}
-    public function __call ($name, $arguments = array()) {
-		return $this->__get($name);
+    public function __call ($method,$argument) {
+		return $this->__get($method);
 	}
 
 
