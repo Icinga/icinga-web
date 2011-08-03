@@ -26,7 +26,7 @@ class AppKit_Login_SilentAuthSuccessView extends AppKitBaseView {
 
         } else {
             if (AgaviConfig::get('modules.appkit.auth.behaviour.enable_dialog', false) == true) {
-                return $this->createForwardContainer('AppKit', 'Login.AjaxLogin', null, null, 'read');
+                return $this->createForwardContainer('AppKit', 'Login.AjaxLogin', null, null, 'write');
             }
         }
 

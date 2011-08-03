@@ -1,9 +1,9 @@
 <?php
 	$message = $t['message'];
+	$username = isset($t['username']) ? $t['username'] : '';
 ?>
-<script type="text/javascript">
+<script pe="text/javascript">
 Ext.onReady(function() {
-
 	var bAuthenticated = false;
 	
 	<?php if ($us->isAuthenticated() == true) { ?>
@@ -36,7 +36,7 @@ Ext.onReady(function() {
 				fieldLabel: '<?php echo $tm->_("User"); ?>',
 				name: 'username',
 				id: 'username',
-				allowBlank: false
+				allowBlank: false 
 			}, {
 				fieldLabel: '<?php echo $tm->_("Password"); ?>',
 				inputType: 'password',
@@ -48,6 +48,7 @@ Ext.onReady(function() {
 			listeners: {
 				afterrender: function(p) {
 					pub.resetForm(true);
+					oFormPanel.getForm().findField('username').setValue('<?php echo $username; ?>');
 				}
 			},
 			

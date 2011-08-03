@@ -24,6 +24,12 @@
 	    * Are both settings enabled, the dialog will be displayed as fallback
 	-->
 	<setting name="behaviour.enable_dialog">true</setting>
+	
+	<!--
+		Enable store of login name into cookie and provide
+		this as default username for the login mask
+	-->
+	<setting name="behaviour.store_loginname">true</setting>
 
 	<!-- Provider default settings -->
 	<setting name="defaults">

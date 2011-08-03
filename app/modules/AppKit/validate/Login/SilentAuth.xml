@@ -10,7 +10,7 @@
 			<validator class="string" source="headers" required="false">
 				<argument>PHP_AUTH_USER</argument>
 			</validator>
-
+			
 		</validators>
 	</ae:configuration>
 </ae:configurations>

@@ -8,7 +8,7 @@
 		
 		<validators method="write">
 		
-			<validator class="string" name="username_length" required="true">
+			<validator class="string" name="username_length" required="false">
 					<arguments>
 						<argument>username</argument>
 					</arguments>
@@ -43,6 +43,10 @@
 					<errors>
 						<error>Validation of login start failed</error>
 					</errors>
+			</validator>
+			
+			<validator class="string" name="icinga-web-loginname" required="false" source="cookies">
+				<argument>icinga-web-loginname</argument>
 			</validator>
 		
 		</validators>
