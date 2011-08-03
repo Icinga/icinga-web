@@ -23,7 +23,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/CronkBuilder.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/CronkListingPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/StaticContentUtil.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/ColumnRenderer.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/ColumnRenderer.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridUtil.js</ae:parameter>
@@ -32,9 +32,15 @@
 
             <ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.javascript_files.site']/node())">
-                <xi:fallback></xi:fallback>
-            </xi:include>
+            
+            <!-- Formerly dynamic scripts -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaGridFilterHandler.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaCommandHandler.js</ae:parameter>
+			
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/JitStatusMap.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
+            
         </javascript>
     </ae:configuration>
 </ae:configurations>

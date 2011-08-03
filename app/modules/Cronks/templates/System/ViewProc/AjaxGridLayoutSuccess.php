@@ -101,31 +101,21 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 						}
 					});
 					
-					// We need a new class
-					AppKit.ScriptDynaLoader.loadScript({
-						url: "<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronks.CommandHandler')) ?>",
-						
-						callback: function() {
-							
-							// An instance to work with
-							var cHandler = new IcingaCommandHandler(meta);
-							
-							// The entry point to start
-							cHandler.setToolbarEntry(tbEntry);
-							
-							// We need some selection from a grid panel
-							cHandler.setGrid(grid);
-							
-							// Where we can get some info
-							cHandler.setInfoUrl('<?php echo urldecode($ro->gen("cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
-							cHandler.setSendUrl('<?php echo urldecode($ro->gen("cronks.commandProc.send", array("command" => "{0}"))); ?>');
-							
-							// We need something to click on :D
-							cHandler.enhanceToolbar();
-							
-						}
-					});
+					// An instance to work with
+					var cHandler = new IcingaCommandHandler(meta);
 					
+					// The entry point to start
+					cHandler.setToolbarEntry(tbEntry);
+					
+					// We need some selection from a grid panel
+					cHandler.setGrid(grid);
+					
+					// Where we can get some info
+					cHandler.setInfoUrl('<?php echo urldecode($ro->gen("cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
+					cHandler.setSendUrl('<?php echo urldecode($ro->gen("cronks.commandProc.send", array("command" => "{0}"))); ?>');
+					
+					// We need something to click on
+					cHandler.enhanceToolbar();
 				}
 			
 			}
@@ -155,27 +145,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		var template = "<?php echo $rd->getParameter('template'); ?>";
 		var initGrid = function() {
 			var meta = s.get(template);
-
-			if (Ext.isEmpty(Cronk.util.GridFilterWindow) || !Ext.isEmpty(meta.template.option.dynamicscript)) {
-
-				AppKit.ScriptDynaLoader.on('bulkfinish', CreateGridProcessor.createCallback(meta), this, { single : true });
-				AppKit.ScriptDynaLoader.startBulkMode();
-				
-				if (!Ext.isEmpty(meta.template.option.dynamicscript)) {
-					Ext.iterate(meta.template.option.dynamicscript, function(v,k) {
-						AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => null)) ?>" + v);
-					});
-				}
-
-				if (Ext.isEmpty(Cronk.util.GridFilterWindow)) {
-					AppKit.ScriptDynaLoader.loadScript("<?php echo $ro->gen('appkit.ext.dynamicScriptSource', array('script' => 'Cronk.grid.IcingaGridFilterHandler')) ?>");
-				}
-
-			}
-			else {
-				CreateGridProcessor(meta);
-			}
-			
+			CreateGridProcessor(meta);
 		}
 		
 		if (s.containsKey(template)) {

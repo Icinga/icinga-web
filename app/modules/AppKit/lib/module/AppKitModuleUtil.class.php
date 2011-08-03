@@ -16,7 +16,6 @@ class AppKitModuleUtil extends AppKitSingleton {
     protected static $default_config_keys = array(
             'app.javascript_files'		        => self::DATA_FLAT,
             'app.javascript_actions'	        => self::DATA_DEFAULT,
-            'app.javascript_dynamic'	        => self::DATA_UNIQUE,
             'app.css_files'				        => self::DATA_FLAT,
             'app.meta_tags'				        => self::DATA_DEFAULT,
 

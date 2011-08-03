@@ -37,13 +37,6 @@
 	-->
 	<setting name="appkit.include_javascript"></setting>
 
-	<!--
-		ScriptDynaLoader
-		* This scripts are included dynamically by modules if needed (js code)
-		* You have to predefine the libraries
-	-->
-	<setting name="appkit.include_dynamic_javascript"></setting>
-	
 	<!-- 
 		Version information
 		* names, and revisions

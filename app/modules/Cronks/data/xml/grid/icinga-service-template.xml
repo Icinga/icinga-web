@@ -20,11 +20,6 @@
         <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
-
-        <!-- These are a dynamic js lib for using specific column renderes within this template -->
-        <parameter name="dynamicscript">
-        	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
-        </parameter>
         
         <parameter name="gridEvents">
         	

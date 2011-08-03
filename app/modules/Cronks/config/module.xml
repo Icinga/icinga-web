@@ -17,17 +17,6 @@
                     <ae:parameter>%core.module_dir%/Cronks/config/javascript.xml</ae:parameter>
                 </setting>
 
-				<setting name="appkit_module.app.javascript_dynamic">
-					<ae:parameter name="Cronk.grid.IcingaColumnRenderer">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaColumnRenderer.js</ae:parameter>
-					<ae:parameter name="Cronk.grid.IcingaGridFilterHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaGridFilterHandler.js</ae:parameter>
-					<ae:parameter name="Cronks.CommandHandler">%core.module_dir%/Cronks/templates/System/ViewProc/js/IcingaCommandHandler.js</ae:parameter>
-					<ae:parameter name="Cronks.JitStatusMap">%core.module_dir%/Cronks/templates/System/js/JitStatusMap.js</ae:parameter>
-					<ae:parameter name="Cronks.CronkTrigger">%core.module_dir%/Cronks/templates/System/js/CronkTrigger.js</ae:parameter>
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//m:settings/m:setting[@name='appkit_module.app.javascript_dynamic.site']/node())">
-						<xi:fallback></xi:fallback>
-					</xi:include>
-				</setting>
-
 				<setting name="agavi.include.cronks">
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks.xml</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks_categories.xml</ae:parameter>

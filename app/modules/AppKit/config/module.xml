@@ -77,8 +77,6 @@
 					</ae:parameter>
 				</setting>
 
-<!--				<setting name="appkit_module.app.javascript_dynamic"></setting>-->
-
 			</settings>
 	
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml">

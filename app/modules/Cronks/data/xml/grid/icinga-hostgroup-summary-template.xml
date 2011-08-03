@@ -17,11 +17,6 @@
     -->
     <option>
     
-    	<!-- These are a dynamic js lib for using specific column renderes within this template -->
-        <parameter name="dynamicscript">
-        	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
-        </parameter>
-    
     	<!-- 
     		Some layout modes:
     			- default: full featured view

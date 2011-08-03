@@ -26,10 +26,6 @@
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
 
-		<parameter name="dynamicscript">
-        	<parameter>Cronk.grid.IcingaColumnRenderer</parameter>
-        </parameter>
-
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <!-- <parameter name="Ext.grid.GridView">
         	<parameter name="headersDisabled">true</parameter>
