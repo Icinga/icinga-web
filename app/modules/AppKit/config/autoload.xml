@@ -96,19 +96,13 @@
 		<autoload name="AppKitUriValidator">%core.module_dir%/AppKit/lib/validator/AppKitUriValidator.class.php</autoload>
 		
 		<!-- Module util classes -->
-		<autoload name="AppKitModuleUtil">%core.module_dir%/AppKit/lib/module/AppKitModuleUtil.class.php</autoload>
-
-		<autoload name="AppKitModuleRoutingHandler">%core.module_dir%/AppKit/lib/module/AppKitModuleRoutingHandler.class.php</autoload>
 		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
-        
-        <autoload name="AppKitXIncludeConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitXIncludeConfigHandler.class.php</autoload>
-        <autoload name="AppKitResourceConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitResourceConfigHandler.class.php</autoload>
-        <autoload name="AppKitIteratorUtil">%core.module_dir%/AppKit/lib/util/AppKitIteratorUtil.class.php</autoload>
+	        <autoload name="AppKitXIncludeConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitXIncludeConfigHandler.class.php</autoload>
+	        <autoload name="AppKitResourceConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitResourceConfigHandler.class.php</autoload>
+	        <autoload name="AppKitIteratorUtil">%core.module_dir%/AppKit/lib/util/AppKitIteratorUtil.class.php</autoload>
 	
 		<!-- Agavi config file handler -->
 		<autoload name="AppKitRoutingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingConfigHandler.class.php</autoload>
-		<autoload name="AppKitDatabaseConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitDatabaseConfigHandler.class.php</autoload>
-		<autoload name="AppKitTranslationConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitTranslationConfigHandler.class.php</autoload>
 	
 	    <!-- Classes for automatic clientside api creation -->
 		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>
