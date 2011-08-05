@@ -2,9 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/icinga/config/global/resource/1.0">
 
     <ae:configuration>
-
         <javascript>
-
             <!-- ExtJS base files -->
             <ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/ext-all.js</ae:parameter>
@@ -22,5 +20,15 @@
             <!-- jsgettext -->
             <ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
         </javascript>
+        
+        <!-- testtest -->
+        <jactions>
+        	<jaction>
+        		<ae:parameter name="module">AppKit</ae:parameter>
+				<ae:parameter name="action">Ext.initI18n</ae:parameter>
+				<ae:parameter name="output_type">javascript</ae:parameter>
+        	</jaction>
+        </jactions>
+        
     </ae:configuration>
 </ae:configurations>

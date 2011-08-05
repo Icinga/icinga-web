@@ -52,7 +52,7 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
                     $_resources[] = $r;
                 }
             }
-
+            
             $resources = array_merge($resources, $_resources);
         }
 
@@ -68,19 +68,30 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
             array_keys($this->_resources),
             array_fill(0, count($this->_resources), array())
         );
-
+        
+        $jactions = array ();
+        
         foreach($doc->getConfigurationElements() as $cfg) {
+            
+            // Collecting resources
             foreach($this->_resources as $resource => $sfx) {
                 $resources[$resource] = array_merge(
                     $resources[$resource],
                     $this->collectResource($resource, $sfx, $cfg)
                 );
             }
+            // Collecting javascript actions
+            foreach ($cfg->getChildren('jactions', null, true) as $jaction) {
+                $jactions[] = $jaction->getAgaviParameters();
+            }
+            
         }
-
+        
         return $this->generate(sprintf(
-            '$this->resources = array_merge_recursive($this->resources, %s);',
-            var_export($resources, true)
+            '$this->resources = array_merge_recursive($this->resources, %s);%s$this->jactions=array_merge_recursive($this->jactions, %s);',
+            var_export($resources, true),
+            chr(10),
+            var_export($jactions, true)
         ), $doc->documentURI);
     }
 

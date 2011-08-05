@@ -46,7 +46,10 @@
             <handler pattern="%core.config_dir%/javascript.xml" class="AppKitXIncludeConfigHandler">
                 <ae:parameters>
                     <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration]]></ae:parameter>
-                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/icinga/config/global/resource/1.0) xpointer(//ae:configurations/ae:configuration/r:javascript)]]></ae:parameter>
+                    <ae:parameter name="pointer">
+                    	<ae:parameter><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/icinga/config/global/resource/1.0) xpointer(//ae:configurations/ae:configuration/r:javascript)]]></ae:parameter>
+                    	<ae:parameter><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://icinga.org/icinga/config/global/resource/1.0) xpointer(//ae:configurations/ae:configuration/r:jactions)]]></ae:parameter>
+                    </ae:parameter>
                     <ae:parameter name="handler">AppKitResourceConfigHandler</ae:parameter>
                 </ae:parameters>
 
