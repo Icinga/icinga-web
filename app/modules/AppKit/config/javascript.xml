@@ -16,6 +16,8 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/Layout.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/HttpStateProvider.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/JSONSubmit.js</ae:parameter>
+            
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/request/Ajax.js</ae:parameter>
 
             <!-- jsgettext -->
             <ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>

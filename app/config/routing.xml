@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
 	<ae:configuration context="web">
 		<routes>
-
+            
 			<!-- INDEX -->
 			<route name="index_page" pattern="^/$" module="Web" action="Icinga.PortalView"/>
 			
@@ -20,8 +20,10 @@
 				* AppKit routes
 			-->
 			<route name="appkit" pattern="^/appkit" module="%actions.default_module%">
-
-				<route name=".login" pattern="^/login" action="%actions.login_action%">
+                <!-- check if the webserver is dead -->
+                <route name="ping" pattern="^/ping" action="Ping"/>
+				
+                <route name=".login" pattern="^/login" action="%actions.login_action%">
 					<route name=".provider" pattern="^/json" module="%actions.default_module%" action="Login.AjaxLogin" output_type="json"/>
 					<route name=".check" pattern="^/check" module="%actions.default_module%" action="Login.LoginCheck" output_type="simple"/>
 				</route>
