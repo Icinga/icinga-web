@@ -277,6 +277,17 @@ Ext.ns("AppKit.errorHandler");
 		Ext.Ajax.on("requestException",function(conn,response,opts) {
 			handleError(response,opts);
 		})
+        var pingCount = 0;
+        var pingServer = function() {
+            Ext.Ajax.request({
+                icingaAction: 'Ping',
+                icingaModule: 'AppKit',
+                isPing: true
+            });
+            
+            
+        }
+    
 		var handleError = function(response,proxy) {
 			switch(response.status) {	
 				case 200:
@@ -295,8 +306,14 @@ Ext.ns("AppKit.errorHandler");
 				default:
 					if(response.status < 400 && response.status)
 						break;
-					AppKit.AjaxErrorHandler.error_unknown(proxy.url,response);
-					break;
+                    // check if a ping failed
+                    if(proxy.isPing)
+                        AppKit.AjaxErrorHandler.error_connection();
+                    // check if the server is dead
+			        else 
+                        AppKit.AjaxErrorHandler.error_unknown(proxy.url,response); 
+					
+                    break;
 			}
 		}
 		return {
@@ -329,11 +346,15 @@ Ext.ns("AppKit.errorHandler");
 			error_401 : function(target) {
 				trackError(_("Access denied"));
 			},
+            error_connection : function(target) {
+               
+				Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server."));   
+				
+				trackError(_("A error occured when requesting ")+target);//+" : "+error.length <200 ? error: error.substr(0,200)+"...");
+            },
 			error_unknown : function(target,error) {
-				if(!(error.status)) {
-					Ext.Msg.alert(_("Critical error"),_("Couldn't connect to web-server."));
-			//		window.location.reload();
-				}
+				
+                pingServer();	
 				if(!error)
 					error = "Unkown error";
 					AppKit.log(error, target);
