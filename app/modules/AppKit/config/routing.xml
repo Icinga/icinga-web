@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
+	<ae:configuration context="web">
+		<routes>
+
+			<!-- * AppKit routes -->
+			<route name=".appkit" pattern="^/appkit" module="%actions.default_module%">
+				<!-- check if the webserver is dead -->
+				<route name="ping" pattern="^/ping" action="Ping" />
+
+				<route name=".login" pattern="^/login" action="%actions.login_action%">
+					<route name=".provider" pattern="^/json" module="%actions.default_module%"
+						action="Login.AjaxLogin" output_type="json" />
+					<route name=".check" pattern="^/check" module="%actions.default_module%"
+						action="Login.LoginCheck" output_type="simple" />
+				</route>
+
+				<route name=".logout" pattern="^/logout" action="Logout" />
+
+				<route name=".squishloader" pattern="^/squishloader" action="Widgets.SquishLoader">
+					<route name=".javascript" pattern="^/javascript" output_type="javascript" />
+				</route>
+
+				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
+					<route name=".principaledit" pattern="^/principaleditor"
+						action="Admin.PrincipalEditor" output_type="simple" />
+					<route name=".users" pattern="^/users" action="Admin.Users.Index">
+						<route name=".edit" pattern="^/edit/(id:(\d+|new))" action="Admin.Users.Edit">
+							<route name=".simple" pattern="^/(container:\w+)$"
+								output_type="simple" />
+						</route>
+						<route name=".alter" pattern="^/alter/(id:(\d+|new))$"
+							output_type="simple" action="Admin.Users.Edit" />
+						<route name=".remove" pattern="^/remove$" output_type="simple"
+							action="Admin.Users.Remove" />
+					</route>
+					<route name=".groups" pattern="^/groups" action="Admin.Groups.Index">
+						<route name=".edit" pattern="^/edit/(id:(\d+|new))" action="Admin.Groups.Edit">
+							<route name=".simple" pattern="^/(container:\w+)$"
+								output_type="simple" />
+						</route>
+						<route name=".alter" pattern="^/alter/(id:(\d+|new))$"
+							output_type="simple" action="Admin.Groups.Edit" />
+						<route name=".remove" pattern="^/remove$" output_type="simple"
+							action="Admin.Groups.Remove" />
+					</route>
+					<route name=".logs" pattern="^/logs" action="Admin.ViewLogs" />
+					<route name=".tasks" pattern="^/tasks" action="Admin.Tasks"
+						output_type="simple" />
+				</route>
+
+				<!-- Data Provider -->
+				<route name=".data" pattern="^/provider" output_type="json">
+					<route name=".users" pattern="^/user" action="DataProvider.UserProvider">
+						<route pattern="^/(userId:\d+)" action="DataProvider.UserProvider" />
+					</route>
+					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
+						<route pattern="^/(groupId:\d+)" action="DataProvider.GroupProvider" />
+					</route>
+					<route name=".principals" pattern="^/principals"
+						action="DataProvider.PrincipalProvider">
+						<route name=".user" pattern="^/user/(userId:\d+)" action="DataProvider.PrincipalProvider" />
+						<route name=".group" pattern="^/group/(groupId:\d+)"
+							action="DataProvider.PrincipalProvider" />
+
+					</route>
+					<route name=".log" pattern="^/log" action="DataProvider.LogProvider" />
+					<route name=".languages" pattern="^/languages"
+						action="DataProvider.LanguageProvider" />
+					<route name=".icons" pattern="^/icons" action="DataProvider.IconProvider" />
+				</route>
+
+
+				<!-- ExtJS specific content. * The app state from the database as json 
+					* Loading occasional used javascript on the fly -->
+				<route pattern="^/ext" name=".ext">
+					<route pattern="^/applicationState$" name=".applicationState"
+						output_type="javascript" action="Ext.ApplicationState" />
+				</route>
+
+			</route>
+			<!-- END: AppKt -->
+
+			<!-- My routes (AppKit preferences) -->
+			<route name="my" pattern="^/my" module="AppKit">
+				<route pattern="^$" action="User.Index" />
+
+				<route name=".preferences" pattern="^/preferences">
+					<route pattern="^$" action="User.Preferences" output_type="simple" />
+				</route>
+			</route>
+			<!-- END: My -->
+
+		</routes>
+	</ae:configuration>
+</ae:configurations>

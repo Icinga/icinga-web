@@ -16,7 +16,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 			MetaGrid.setInitialState(CE.state);
 		}
 		
-		MetaGrid.setStoreUrl("<?php echo $ro->gen('cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
+		MetaGrid.setStoreUrl("<?php echo $ro->gen('modules.cronks.viewProc.json', array('template' => $rd->getParameter('template'))); ?>");
 		MetaGrid.setParameters(<?php echo json_encode($rd->getParameters()); ?>);
 		MetaGrid.setParameters({storeDisableAutoload: true});
 		
@@ -111,8 +111,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 					cHandler.setGrid(grid);
 					
 					// Where we can get some info
-					cHandler.setInfoUrl('<?php echo urldecode($ro->gen("cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
-					cHandler.setSendUrl('<?php echo urldecode($ro->gen("cronks.commandProc.send", array("command" => "{0}"))); ?>');
+					cHandler.setInfoUrl('<?php echo urldecode($ro->gen("modules.cronks.commandProc.metaInfo", array("command" => "{0}"))); ?>');
+					cHandler.setSendUrl('<?php echo urldecode($ro->gen("modules.cronks.commandProc.send", array("command" => "{0}"))); ?>');
 					
 					// We need something to click on
 					cHandler.enhanceToolbar();
@@ -154,7 +154,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 		else {
 		
 			Ext.Ajax.request({
-				   url: "<?php echo $ro->gen('cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
+				   url: "<?php echo $ro->gen('modules.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 				   
 				   success: function(response, opts) {
 				   		s.add(template, Ext.decode(response.responseText));

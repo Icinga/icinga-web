@@ -27,7 +27,7 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 		var displayField = config.displayField;
 		var valueField = config.valueField;
 		
-		var url = AppKit.util.Config.getBaseUrl() + String.format('/web/api/{0}/json', config.target.toLowerCase());
+		var url = AppKit.util.Config.getBaseUrl() + String.format('/modules/web/api/{0}/json', config.target.toLowerCase());
 		
 		var store = new Ext.data.JsonStore({
 			url : url,

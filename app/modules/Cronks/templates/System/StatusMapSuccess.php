@@ -15,7 +15,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 	
 	var drawMap = function() {
 		var statusMap = new JitStatusMap({
-			url: "<?php echo $ro->gen('cronks.statusMap.json'); ?>",
+			url: "<?php echo $ro->gen('modules.cronks.statusMap.json'); ?>",
 			parentId: CE.parentid
 		});
 	}

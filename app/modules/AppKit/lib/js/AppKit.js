@@ -34,7 +34,7 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 			growlStack();
 			
 			stateProvider = new Ext.ux.state.HttpProvider({
-				url: String.format(me.c.path + '/appkit/ext/applicationState'),
+				url: String.format(me.c.path + '/modules/appkit/ext/applicationState'),
 				id: 1,
 				readBaseParams: { cmd: 'read' },
 				saveBaseParams: { cmd: 'write' }

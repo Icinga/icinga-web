@@ -2,7 +2,7 @@
 	<p class="error"><?php echo $t['error'] ?></p>
 <?php } ?>
 
-<form action="<?php echo $ro->gen('appkit.login') ?>" method="post">
+<form action="<?php echo $ro->gen('modules.appkit.login') ?>" method="post">
 
 <div class="form_login">
 

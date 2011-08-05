@@ -75,7 +75,7 @@ Ext.onReady(function() {
                         iconCls: 'icinga-icon-user-go',
                         width: 'auto',
                         handler: function() {
-							AppKit.util.doLogout('<?php echo $ro->gen("appkit.logout", array('logout' => 1)); ?>');
+							AppKit.util.doLogout('<?php echo $ro->gen("modules.appkit.logout", array('logout' => 1)); ?>');
                         }
                     }]
                 }

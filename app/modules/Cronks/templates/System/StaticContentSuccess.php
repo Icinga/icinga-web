@@ -12,7 +12,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 			var panel = null;
 			var pc = null;
 			var template_name = '<?php echo $template; ?>';
-			var url = "<?php echo $ro->gen('cronks.staticContent.content', array('template' => $template, 'render' => $render, 'cmpid' => $cmpid)); ?>";
+			var url = "<?php echo $ro->gen('modules.cronks.staticContent.content', array('template' => $template, 'render' => $render, 'cmpid' => $cmpid)); ?>";
 			
 			url = url.replace(/&amp;/g, '&');
 			

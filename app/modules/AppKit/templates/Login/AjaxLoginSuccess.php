@@ -115,7 +115,7 @@ Ext.onReady(function() {
 
 		var oFormAction = new Ext.form.Action.Submit(oFormPanel.getForm(), {
 			clientValidation: true,
-			url: '<?php echo $ro->gen("appkit.login.provider"); ?>',
+			url: '<?php echo $ro->gen("modules.appkit.login.provider"); ?>',
 			
 			params: {
 				dologin: 1

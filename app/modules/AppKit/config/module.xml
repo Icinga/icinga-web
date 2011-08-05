@@ -65,16 +65,12 @@
                    			<ae:parameter>%core.module_dir%/AppKit/config/css.xml</ae:parameter>
 				</setting>
                 
-		                <setting name="agavi.include.javascript">
-		                    <ae:parameter>%core.module_dir%/AppKit/config/javascript.xml</ae:parameter>
-		                </setting>
+				<setting name="agavi.include.javascript">
+					<ae:parameter>%core.module_dir%/AppKit/config/javascript.xml</ae:parameter>
+				</setting>
 
-				<setting name="appkit_module.app.javascript_actions">
-					<ae:parameter>
-						<ae:parameter name="module">AppKit</ae:parameter>
-						<ae:parameter name="action">Ext.initI18n</ae:parameter>
-						<ae:parameter name="output_type">javascript</ae:parameter>
-					</ae:parameter>
+				<setting name="agavi.include.routing">
+					<ae:parameter>%core.module_dir%/AppKit/config/routing.xml</ae:parameter>
 				</setting>
 
 			</settings>

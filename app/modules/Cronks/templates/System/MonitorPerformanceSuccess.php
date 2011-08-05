@@ -2,7 +2,7 @@
 Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
 	
 	var ds = new Ext.data.JsonStore({
-		url: '<?php echo $ro->gen('cronks.monitorPerformance.json') ?>',
+		url: '<?php echo $ro->gen('modules.cronks.monitorPerformance.json') ?>',
 		storeId: 'overall-status-store'
 	});
 

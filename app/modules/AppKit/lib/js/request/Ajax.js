@@ -17,7 +17,7 @@ Ext.Ajax.directRequest = function(o) {
 Ext.Ajax.dispatchRequest = function(o) {
    
     if(!o.url)
-        o.url = AppKit.c.path+'/appkit/dispatch';
+        o.url = AppKit.c.path+'/modules/appkit/dispatch';
     var p = o.params;
     o.params = {}
     o.params.module = o.icingaModule;

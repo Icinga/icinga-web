@@ -16,7 +16,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
                 cfg.fields = cfg.columns : cfg.fields = [cfg.columns];
         }
         cfg.root = 'result';
-        cfg.url = AppKit.c.path+"/web/api/json"; 
+        cfg.url = AppKit.c.path+"/modules/web/api/json"; 
         Ext.data.JsonStore.prototype.constructor.call(this,cfg);
     },  
 
