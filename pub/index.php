@@ -1,5 +1,6 @@
 <?php
-
+putenv("ORACLE_HOME=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server/");
+putenv("ORACLE_SID=XE");
 /**
  * Allow XHR access from other domains (response for cors preflight requests)
  */
@@ -30,7 +31,7 @@ Agavi::bootstrap('development');
 AgaviConfig::set('core.default_context', 'web');
 
 // Main module
-AppKitAgaviUtil::initializeModule('AppKit');
+
 
 // Some kind of agavi like bootstrap
 // hook in
