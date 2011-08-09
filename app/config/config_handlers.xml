@@ -76,6 +76,19 @@
 				<validation>%core.module_dir%/Cronks/lib/xml/xsd/cronks.xsd</validation>
 			</handler>
             
+            <!-- Menu handler --> 
+            <handler pattern="%core.config_dir%/menu.xml" class="AppKitXIncludeConfigHandler">
+                <ae:parameters>
+                    <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration]]></ae:parameter>
+                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(m=http://icinga.org/icinga/config/global/menu/1.0) xpointer(//ae:configurations/ae:configuration/m:menu)]]></ae:parameter>
+                </ae:parameters>
+
+				<ae:parameter name="handler">AppKitMenuConfigHandler</ae:parameter>
+                <validation>%core.module_dir%/AppKit/lib/xml/xsd/menu.xsd</validation>
+           
+            </handler>
+
+           
         </handlers>
     </ae:configuration>
 </ae:configurations>
