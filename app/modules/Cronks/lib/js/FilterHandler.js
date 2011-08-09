@@ -6,7 +6,7 @@
  */
 Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 
-	def_webpath : '/web/api/json',
+	def_webpath : '/modules/web/api/json',
 	def_sortorder : 'asc',
 
 	constructor : function(cfg, meta) {

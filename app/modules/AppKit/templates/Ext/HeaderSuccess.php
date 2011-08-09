@@ -30,8 +30,9 @@ Ext.onReady(function() {
 	(function() {
 	    var pub = {};
 	    var _LA = AppKit.util.Layout;
+
 	    var navbar = new AppKit.util.AppKitNavBar({
-            logoutURL:      '<?php echo $ro->gen("appkit.logout", array('logout' => 1)); ?>',
+            logoutURL:      '<?php echo $ro->gen("modules.appkit.logout", array('logout' => 1)); ?>',
             preferenceURL:  '<?php echo $ro->gen("my.preferences"); ?>',
             username:       '<?php echo $username; ?>',
             hasAuth:        <?php echo ($auth == true) ? 'true' : 'false' ?>,

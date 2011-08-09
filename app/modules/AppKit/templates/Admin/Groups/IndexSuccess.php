@@ -61,7 +61,7 @@ Ext.onReady(function() {
 				Ext.apply(params,node.record.data);
 				params["ignorePrincipals"] = true;
 				Ext.Ajax.request({
-					url: '<?php echo $ro->gen("appkit.admin.groups.alter")?>'+groupId,
+					url: '<?php echo $ro->gen("modules.appkit.admin.groups.alter")?>'+groupId,
 					params: params,
 					success: function() {
 						AppKit.groups.groupList.reload();
@@ -85,7 +85,7 @@ Ext.onReady(function() {
 		root: 'roles',
 		autoLoad:true,
 		remoteSort: true,
-		url: '<?php echo $ro->gen("appkit.data.groups")?>',
+		url: '<?php echo $ro->gen("modules.appkit.data.groups")?>',
 		fields: [
 			{name: 'role_id', type:'int'},
 			'role_name',
@@ -129,7 +129,7 @@ Ext.onReady(function() {
 				}
 				if(!AppKit.groupEditor) {
 					this.getUpdater().update({
-						url : String.format('<?php echo $ro->gen("appkit.admin.groups.edit")?>{0}/{1}',id,'wnd_groupEditPanel'),
+						url : String.format('<?php echo $ro->gen("modules.appkit.admin.groups.edit")?>{0}/{1}',id,'wnd_groupEditPanel'),
 						scripts: true,
 						callback: function(el,success,response,options) {
 							AppKit.groupEditor.editorWidget.instance.insertPresets(id);
@@ -181,7 +181,7 @@ Ext.onReady(function() {
 				},this);
 				
 				Ext.Ajax.request({
-					url: '<?php echo $ro->gen("appkit.admin.groups.remove") ?>',
+					url: '<?php echo $ro->gen("modules.appkit.admin.groups.remove") ?>',
 					success: function() {
 						this.getStore().reload();
 					},

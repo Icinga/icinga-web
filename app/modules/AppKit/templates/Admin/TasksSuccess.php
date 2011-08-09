@@ -1,6 +1,6 @@
 <script language="text/javascript">
 Ext.onReady(function() {
-	var tasksUrl = '<?php echo $ro->gen("appkit.admin.tasks") ?>';
+	var tasksUrl = '<?php echo $ro->gen("modules.appkit.admin.tasks") ?>';
 	var icingaControl = (function() {
 		var viewAccess = <?php echo AgaviContext::getInstance()->getUser()->hasCredentials("icinga.control.admin") ? 'true' : 'false'; ?>;	
 		var icingaStatUrl = '<?php echo $ro->gen("icinga.api.icingaStatus") ?>';	

@@ -15,8 +15,9 @@
 
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml" />
 			
-
-
+			<setting name="agavi.include.routing">
+				<ae:parameter>%core.module_dir%/Web/config/routing.xml</ae:parameter>
+			</setting>
 			
 			<!-- include optional override settings file -->
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga-io.site.xml">

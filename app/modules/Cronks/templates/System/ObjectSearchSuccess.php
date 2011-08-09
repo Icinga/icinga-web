@@ -3,7 +3,7 @@ Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid')
 
 	var searchHandler = Cronk.util.SearchHandler({
 		minChars: "<?php echo AgaviConfig::get('modules.cronks.search.numberMinimumLetters', 2); ?>",
-		proxyUrl: "<?php echo $ro->gen('cronks.objectsearch.json')?>"
+		proxyUrl: "<?php echo $ro->gen('modules.cronks.objectsearch.json')?>"
 	});
 
 	var myTextField = new Ext.form.TextField({

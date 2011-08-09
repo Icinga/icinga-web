@@ -26,7 +26,7 @@ Icinga.util.SimpleDataProvider = (function () {
 		};
 
 		pub.reset = function () {
-			config.url = AppKit.c.path + "/web/simpleDataProvider/json?src_id=";
+			config.url = AppKit.c.path + "/modules/web/simpleDataProvider/json?src_id=";
 			config.srcId = "";
 			config.width = 200;
 			config.filter = {};

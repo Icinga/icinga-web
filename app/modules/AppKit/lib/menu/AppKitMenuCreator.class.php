@@ -108,7 +108,7 @@ class AppKitMenuCreator extends AppKitEventHandler implements AppKitEventHandler
                     $admin->addSubItem(AppKitNavItem::create('icinga-tasks')
                                        ->setCaption('Tasks')
                                        ->addAttributes('extjs-iconcls', 'icinga-icon-application-task')
-                                       ->setJsHandler("AppKit.util.doTasks.createDelegate(null, ['". AgaviContext::getInstance()->getRouting()->gen('appkit.admin.tasks') ."'])")
+                                       ->setJsHandler("AppKit.util.doTasks.createDelegate(null, ['". AgaviContext::getInstance()->getRouting()->gen('modules.appkit.admin.tasks') ."'])")
                                       );
                 }
 

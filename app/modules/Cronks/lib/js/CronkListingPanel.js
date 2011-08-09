@@ -71,7 +71,7 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 			}),
 			
 			store: new Ext.data.JsonStore({
-				url: AppKit.c.path + '/cronks/provider/categories',
+				url: AppKit.c.path + '/modules/cronks/provider/categories',
 				writer: writer,
 				autoLoad: true,
 				autoSave: true,
@@ -664,7 +664,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 						Ext.Msg.confirm(_('elete cronk'), String.format(_('Are you sure to delete {0}'), item['name']), function(btn) {
 							if (btn == 'yes') {
 								Ext.Ajax.request({
-									url: AppKit.c.path + '/cronks/provider/cronks',
+									url: AppKit.c.path + '/modules/cronks/provider/cronks',
 									params: {
 										xaction: 'delete',
 										cid: item.cronkid,

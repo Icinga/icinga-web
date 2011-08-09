@@ -47,7 +47,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     constructor: function(cfg) {
         if(Ext.getCmp(this.defaultCfg.id))
             throw("Menubar is already loaded");   
-        Ext.apply(this,cfg);
+        Ext.apply(this,cfg); 
         this.buildNavBar();
         this.buildIconField();
         Ext.apply(cfg,this.defaultCfg);
@@ -177,14 +177,16 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                     text: _('Preferences'),
                     handler: function() { 
                         AppKit.util.doPreferences(this.peferenceURL);
-                    }
+                    },
+                    scope: this
                 }, {
                     tooltip: _('Logout'),
                     iconCls: 'icinga-icon-user-go',
                     width: 'auto',
                     handler: function() {
                         AppKit.util.doLogout(this.logoutURL);
-                    }
+                    },
+                    scope:this
                 }]
             } 
         }

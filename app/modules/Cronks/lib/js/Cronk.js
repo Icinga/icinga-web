@@ -52,7 +52,7 @@ Ext.ns('Cronk.defaults', 'Cronk.lib', 'Cronk.util');
  * Cronk defaults
  */
 Cronk.defaults.SETTINGS = {
-	loaderUrl:		'cronks/cloader',
+	loaderUrl:		'modules/cronks/cloader',
 	autoLayout:		false,
 	autoRefresh:	true,
 	params:			{},

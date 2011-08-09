@@ -56,7 +56,7 @@ Icinga.Store.StoreFactory = function() {
         var cfg = {
             
             fields: getFieldDefinition(descriptor), 
-            url: AppKit.c.path+'/appkit/dispatch',
+            url: AppKit.c.path+'/modules/appkit/dispatch',
             totalProperty: 'totalCount',       
             storeId: module+"_"+provider+"_"+store,
             baseParams: getBaseParams(descriptor,module,provider,db)

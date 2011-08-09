@@ -12,6 +12,11 @@ class AppKit_ResourcesModel extends AppKitBaseModel implements AgaviISingletonMo
      * @var array string type => array files
      */
     protected $resources = array();
+    
+    /**
+	 * Collected agavi actions which produces javascript
+     */
+    protected $jactions = array ();
 
     /**
      * (non-PHPdoc)
@@ -62,6 +67,10 @@ class AppKit_ResourcesModel extends AppKitBaseModel implements AgaviISingletonMo
     */
     public function getCssImports() {
     	return $this->resources['css_import'];
+    }
+    
+    public function getJavascriptActions() {
+        return $this->jactions;
     }
 
 }

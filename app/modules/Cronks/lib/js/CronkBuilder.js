@@ -66,7 +66,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.action = new Cronk.util.form.action.CronkBuilderCustom(this.formPanel.getForm(), {
 			params: { xaction: 'write' },
-			url: AppKit.c.path + '/cronks/provider/cronks',
+			url: AppKit.c.path + '/modules/cronks/provider/cronks',
 			success: function() {
 				this.hide();
 				this.fireEvent('writeSuccess');
@@ -145,7 +145,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	_iconCombo: function() {
 		var iconStore = new Ext.data.JsonStore({
 			autoDestroy: true,
-			url: AppKit.c.path + '/appkit/provider/icons',
+			url: AppKit.c.path + '/modules/appkit/provider/icons',
 			baseParams: { path: 'cronks' },
 			fields: ['web_path', 'name', 'short'],
 			root: 'rows'
@@ -230,7 +230,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.categories = new Ext.data.JsonStore({
 			autoDestroy: true,
-			url: AppKit.c.path + '/cronks/provider/categories',
+			url: AppKit.c.path + '/modules/cronks/provider/categories',
 			baseParams: { all : 1 },
 			writer: new Ext.data.JsonWriter({
 			    encode: true,
@@ -242,7 +242,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.groups = new Ext.data.JsonStore({
 			autoDestroy: true,
-			url: AppKit.c.path + '/appkit/provider/groups',
+			url: AppKit.c.path + '/modules/appkit/provider/groups',
 			baseParams: { addMeta : 1 },
 			writer: new Ext.data.JsonWriter({
 			    encode: true,

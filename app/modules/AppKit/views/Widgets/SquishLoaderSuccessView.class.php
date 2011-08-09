@@ -31,30 +31,23 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
 		}		
 	}
 	
-	private function executeActions(array $actions = array()) {
+	private function executeActions(array $jactions = array()) {
 		$out = null;
 
-		if (count($actions)==1 && isset($actions[0])) {
+		foreach ($jactions as $jaction) {
 
-			foreach ($actions[0] as $modules) {
-
-				foreach ($modules as $a) {
-					$p = array ();
-					if(!isset($a['arguments']))
-						$a['arguments'] = false;
-					if (is_array($a['arguments'])) $p = $a['arguments'];
-					$a['arguments']['is_slot'] = true;
-					$r = $this->createForwardContainer($a['module'], $a['action'], $p, $a['output_type'])
-					->execute();
-
-					if ($r->hasContent()) {
-						$out .= $r->getContent(). "\n\n";
-					}
-				}
-
-			}
-
+		    if (!isset($jaction['arguments'])) {
+		        $jaction['arguments'] = array ();
+		    }
+		    
+		    $r = $this->createForwardContainer($jaction['module'], $jaction['action'], $jaction['arguments'], $jaction['output_type'])
+		        ->execute();
+		    
+		    if ($r->hasContent()) {
+		        $out .= $r->getContent(). str_repeat(chr(10), 2);
+		    }
 		}
+
 		return $out;
 	}
 	

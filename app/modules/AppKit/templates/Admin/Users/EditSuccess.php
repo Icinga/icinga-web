@@ -230,13 +230,13 @@ Ext.onReady(function(){
 				 	values["password_validate"] = values["user_password_confirmed"];
 				 	values["user_disabled"] = (values["user_disabled"] == "on" ? 1 : 0)
 				 	Ext.Ajax.request({
-						url: '<?php echo $ro->gen("appkit.admin.users.alter")?>'+userId,
+						url: '<?php echo $ro->gen("modules.appkit.admin.users.alter")?>'+userId,
 						params: values,
 						success: function() {
 							if(Ext.getCmp('<?php echo $t["container"] ?>'))
 								Ext.getCmp('<?php echo $t["container"] ?>').hide();
 							else {
-								AppKit.changeLocation('<?php echo $ro->gen("appkit.admin.users") ?>');
+								AppKit.changeLocation('<?php echo $ro->gen("modules.appkit.admin.users") ?>');
 							}
 						},
 						scope:this
@@ -313,7 +313,7 @@ Ext.onReady(function(){
 					return true;
 				}
 				Ext.Ajax.request({
-					url: '<?php echo $ro->gen("appkit.data.users")?>/'+id,
+					url: '<?php echo $ro->gen("modules.appkit.data.users")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
 						this.fillUserValues(data.users);

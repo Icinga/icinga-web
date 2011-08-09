@@ -54,6 +54,10 @@
 				<setting name="search.numberMinimumLetters">2</setting>
 				<setting name="search.maximumResults">200</setting>
 				
+				<setting name="agavi.include.routing">
+					<ae:parameter>%core.module_dir%/Cronks/config/routing.xml</ae:parameter>
+				</setting>
+				
 				<!-- 
 					* Include cubconfig
 				-->

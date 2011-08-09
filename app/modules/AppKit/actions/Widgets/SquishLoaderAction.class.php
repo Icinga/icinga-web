@@ -29,13 +29,9 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction {
 					$loader->addFiles(
 						$resources->getJavascriptFiles()
 					);
-					/**
-					 * @todo URGENT: IMPLEMENT THIS ANYWAY
-					 **/	
-					// $actions = $this->getContext()->getRequest()->getAttribute('app.javascript_actions', AppKitModuleUtil::DEFAULT_NAMESPACE, array());
-					$actions = array ();
-				
-					$this->setAttribute('javascript_actions', $actions);
+					
+					$this->setAttribute('javascript_actions', $resources->getJavascriptActions());
+					
 				} catch(AppKitModelException $e) {
 					$this->setAttribute('errors', $e->getMessage());
 				}

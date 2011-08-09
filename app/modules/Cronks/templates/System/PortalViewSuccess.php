@@ -21,7 +21,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 						params["p[parentid]"] = ct.id;
 						
 						portlet.getUpdater().setDefaultUrl({
-							url: "<?php echo $ro->gen('cronks.crloader', array('cronk' => null)); ?>"+ct.crname,
+							url: "<?php echo $ro->gen('modules.cronks.crloader', array('cronk' => null)); ?>"+ct.crname,
 							params: params,
 							scripts: true							
 						});

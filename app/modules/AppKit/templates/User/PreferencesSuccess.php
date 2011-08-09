@@ -6,7 +6,7 @@ Ext.ns("AppKit.UserPrefs");
 Ext.onReady(function() {
 	
 	AppKit.UserPrefs.languageStore = new Ext.data.JsonStore({
-		url: '<?php echo $ro->gen("appkit.data.languages") ?>',
+		url: '<?php echo $ro->gen("modules.appkit.data.languages") ?>',
 		storeId: 'availableLocales',
 		root: 'locales',
 		idProperty: 'id',

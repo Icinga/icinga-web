@@ -7,7 +7,7 @@ Ext.onReady(function() {
 		totalProperty: 'totalCount',
 		root: 'users',
 		idProperty: 'user_id',
-		url: '<?php echo $ro->gen("appkit.data.users")?>',
+		url: '<?php echo $ro->gen("modules.appkit.data.users")?>',
 		remoteSort: true,
 		baseParams: {
 			hideDisabled: false
@@ -52,7 +52,7 @@ Ext.onReady(function() {
 				}
 				if(!AppKit.userEditor) {
 					this.getUpdater().update({
-						url : String.format('<?php echo $ro->gen("appkit.admin.users.edit")?>{0}/{1}',id,'wnd_userEditPanel'),
+						url : String.format('<?php echo $ro->gen("modules.appkit.admin.users.edit")?>{0}/{1}',id,'wnd_userEditPanel'),
 						scripts: true,
 						callback: function(el,success,response,options) {
 							AppKit.userEditor.editorWidget.instance.insertPresets(id);
@@ -106,7 +106,7 @@ Ext.onReady(function() {
 				},this);
 				
 				Ext.Ajax.request({
-					url: '<?php echo $ro->gen("appkit.admin.users.remove") ?>',
+					url: '<?php echo $ro->gen("modules.appkit.admin.users.remove") ?>',
 					success: function() {
 						this.getStore().reload();
 					},

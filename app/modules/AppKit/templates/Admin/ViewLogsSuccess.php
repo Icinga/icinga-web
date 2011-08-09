@@ -41,7 +41,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 	});
 
 	var logStore = new Ext.data.JsonStore({
-		url: '<?php echo $ro->gen("appkit.data.log") ?>',
+		url: '<?php echo $ro->gen("modules.appkit.data.log") ?>',
 		fields: ['Time','Message','Severity'],
 		autoLoad:false,
 		autoDestroy: true,

@@ -125,7 +125,7 @@ Ext.onReady(function(){
 					   values["role_users"]+=chkbox.id+";";
 					});
 				 	Ext.Ajax.request({
-						url: '<?php echo $ro->gen("appkit.admin.groups.alter")?>'+roleId,
+						url: '<?php echo $ro->gen("modules.appkit.admin.groups.alter")?>'+roleId,
 						params: values,
 						success: function() {
 							if(Ext.getCmp('<?php echo $t["container"] ?>'))
@@ -228,7 +228,7 @@ Ext.onReady(function(){
 					return true;
 				}
 				Ext.Ajax.request({
-					url: '<?php echo $ro->gen("appkit.data.groups")?>/'+id,
+					url: '<?php echo $ro->gen("modules.appkit.data.groups")?>/'+id,
 					success: function(resp,options) {
 						var data = Ext.decode(resp.responseText);
 						data = data.roles;
