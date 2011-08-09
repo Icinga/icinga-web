@@ -1,6 +1,6 @@
 <?php
 
-class AppKitStringUtil implements AppKitHtmlEntitiesInterface {
+class AppKitStringUtil {
 
     /**
      * Replaces a string with marker within an attay

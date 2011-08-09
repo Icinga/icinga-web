@@ -30,6 +30,7 @@
 		<autoload name="AppKitFactoryInterface">%core.module_dir%/AppKit/lib/class/AppKitFactoryInterface.interface.php</autoload>
 		<autoload name="AppKitSingleton">%core.module_dir%/AppKit/lib/class/AppKitSingleton.class.php</autoload>
 		
+		
 		<!-- The same -->
 		<autoload name="AppKitBaseClass">%core.module_dir%/AppKit/lib/class/AppKitBaseClass.class.php</autoload>
 		<autoload name="AppKitException">%core.module_dir%/AppKit/lib/exception/AppKitException.class.php</autoload>
@@ -39,25 +40,9 @@
 		<autoload name="AppKitDoctrineException">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineException.class.php</autoload>
 		<autoload name="AppKitDoctrineRecord">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineRecord.class.php</autoload>
 		<autoload name="AppKitDoctrineUtil">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineUtil.class.php</autoload>
-		<autoload name="AppKitEvent">%core.module_dir%/AppKit/lib/event/AppKitEvent.class.php</autoload>
-		<autoload name="AppKitEventHandler">%core.module_dir%/AppKit/lib/event/AppKitEventHandler.class.php</autoload>
-		<autoload name="AppKitEventHandlerInterface">%core.module_dir%/AppKit/lib/event/AppKitEventHandlerInterface.interface.php</autoload>
-		<autoload name="AppKitEventDispatcher">%core.module_dir%/AppKit/lib/event/AppKitEventDispatcher.class.php</autoload>
-		<autoload name="AppKitModelException">%core.module_dir%/AppKit/lib/exception/AppKitModelException.class.php</autoload>
-		<autoload name="AppKitCheckboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitCheckboxElement.class.php</autoload>
-		<autoload name="AppKitFormElement">%core.module_dir%/AppKit/lib/html/form/AppKitFormElement.class.php</autoload>
-		<autoload name="AppKitHiddenElement">%core.module_dir%/AppKit/lib/html/form/AppKitHiddenElement.class.php</autoload>
-		<autoload name="AppKitSelectArraySource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectArraySource.class.php</autoload>
-		<autoload name="AppKitSelectCheckboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitSelectCheckboxElement.class.php</autoload>
-		<autoload name="AppKitSelectDoctrineSource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectDoctrineSource.class.php</autoload>
-		<autoload name="AppKitSelectElement">%core.module_dir%/AppKit/lib/html/form/AppKitSelectElement.class.php</autoload>
-		<autoload name="AppKitSelectSource">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSource.class.php</autoload>
-		<autoload name="AppKitSelectSourceInterface">%core.module_dir%/AppKit/lib/html/form/AppKitSelectSourceInterface.interface.php</autoload>
-		<autoload name="AppKitTextboxElement">%core.module_dir%/AppKit/lib/html/form/AppKitTextboxElement.class.php</autoload>
-		<autoload name="AppKitHtmlEntitiesInterface">%core.module_dir%/AppKit/lib/html/AppKitHtmlEntitiesInterface.interface.php</autoload>
 		<autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
-		<autoload name="AppKitHtmlHelper">%core.module_dir%/AppKit/lib/html/AppKitHtmlHelper.class.php</autoload>
-		
+		<autoload name="AppKitModelException">%core.module_dir%/AppKit/lib/exception/AppKitModelException.class.php</autoload>
+	
 		<!-- JSON things -->
 		<autoload name="AppKitJsonResponse">%core.module_dir%/AppKit/lib/json/AppKitJsonResponse.class.php</autoload>
 		<autoload name="AppKitExtJsonDocument">%core.module_dir%/AppKit/lib/json/AppKitExtJsonDocument.class.php</autoload>
@@ -75,6 +60,7 @@
 		<autoload name="AppKitGettextTranslator">%core.module_dir%/AppKit/lib/translator/AppKitGettextTranslator.class.php</autoload>
 		<autoload name="AppKitTranslationManager">%core.module_dir%/AppKit/lib/translator/AppKitTranslationManager.class.php</autoload>
 		<autoload name="AppKitArrayUtil">%core.module_dir%/AppKit/lib/util/AppKitArrayUtil.class.php</autoload>
+        <autoload name="AppKitLinkedList">%core.module_dir%/AppKit/lib/util/AppKitLinkedList.class.php</autoload>
 		<autoload name="AppKitClassUtil">%core.module_dir%/AppKit/lib/util/AppKitClassUtil.class.php</autoload>
 		<autoload name="AppKitColorUtil">%core.module_dir%/AppKit/lib/util/AppKitColorUtil.class.php</autoload>
 		<autoload name="AppKitDateUtil">%core.module_dir%/AppKit/lib/util/AppKitDateUtil.class.php</autoload>
@@ -103,6 +89,7 @@
 	
 		<!-- Agavi config file handler -->
 		<autoload name="AppKitRoutingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingConfigHandler.class.php</autoload>
+		<autoload name="AppKitMenuConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitMenuConfigHandler.class.php</autoload>
 	
 	    <!-- Classes for automatic clientside api creation -->
 		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>

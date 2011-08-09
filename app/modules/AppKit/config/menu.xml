@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/icinga/config/global/menu/1.0">
+    <ae:configuration>
+        <menu id="menu_monitoring">
+            <credential>icinga.user</credential>
+            <preferposition>first</preferposition>
+            <icon>icinga-icon-dot</icon>
+            <caption>Monitoring</caption>
+            <route target="new">icinga.portalView</route>
+        </menu>
+
+        <menu id="menu_help">
+            <preferposition>last</preferposition>
+            <icon>icinga-icon-help</icon>
+            <caption>Help</caption>
+            <items>
+                <item id="icinga_home">
+                    <icon>icinga-icon-world</icon>
+                    <caption>Icinga home</caption>
+                    <url target="new">http://www.icinga.org</url>
+                </item>
+                <item id="icinga_about">
+                    <icon>icinga-icon-information</icon>
+                    <caption>About</caption>
+                    <route target="window" id="icinga-window-about">
+                        icinga.about
+                    </route>
+                </item>
+            </items>
+        </menu>
+
+        <menu id="menu_admin">
+            <credential>icinga.user;appkit.admin</credential>
+            
+            <preferposition>before:menu_help</preferposition>
+            <icon>icinga-icon-wrench</icon>
+            <caption>Admin</caption>
+            <items>
+                <item id="menu_admin_users">
+                    <credential>appkit.admin.users</credential>
+                    <icon>icinga-icon-user</icon>
+                    <caption>Users</caption>
+                    <route target="new">
+                        appkit.admin.users
+                    </route>
+                </item>
+                <item id="menu_admin_groups">
+                    <credential>appkit.admin.groups</credential>
+                    <icon>icinga-icon-group</icon>
+                    <caption>Groups</caption>
+                    <route target="new">
+                        appkit.admin.groups
+                    </route>
+                </item>
+                <item id="menu_admin_logs">
+                    <icon>icinga-icon-note</icon>
+                    <caption>Logs</caption>
+                    <route target="new">
+                        appkit.admin.logs
+                    </route>
+                </item>
+                <item id="menu_admin_tasks">
+                    <icon>icinga-icon-application-task</icon>
+                    <caption>Tasks</caption>
+                    <route target="window" title="Admin tasks" disableContent="true" id="admin_tasks_window">
+                        appkit.admin.tasks
+                    </route>
+                </item>
+            </items>
+        </menu>
+    </ae:configuration>
+</ae:configurations>

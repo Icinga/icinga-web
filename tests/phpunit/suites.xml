@@ -14,40 +14,43 @@
 		</testsuite>
 		<testsuite name="Module">
 			<file>tests/module/ModuleLoadingTest.php</file>
-		</testsuite>
-		<testsuite name="Configuration">
+		</testsuite>-->
+		<testsuite name="AppKit">
+            <directory>tests/appkit/</directory>
+        </testsuite>
+        <testsuite name="Configuration">
 			<file>tests/configuration/ApiProviderRoutesTest.php</file>
 			<file>tests/configuration/ApiValidationParserTest.php</file>
 		</testsuite>
 		<testsuite name="validators">
 			<file>tests/validators/AppKitJsonValidatorTest.php</file>
 	        </testsuite>
-<!--        <testsuite name="Database">
+        <testsuite name="Database">
 			<file>tests/configDatabase/icingaDatabaseAccessibleTest.php</file>
 			<file>tests/configDatabase/icingaUserOperations.php</file>
 			<file>tests/configDatabase/icingaRoleOperations.php</file>
 			<file>tests/configDatabase/persistenceView.php</file>
 		</testsuite>
--->
+
 		<testsuite name="Interface">
 			<file>tests/interface/availabilityTest.php</file>
 		</testsuite>
-<!--
+
 		<testsuite name="API">
 			<file>tests/api/ConsoleInterfaceTest.php</file>
-			<directory>tests/api/hosts</directory>
+<!--			<directory>tests/api/hosts</directory>
             <directory>tests/api/services</directory>	
 			<directory>tests/api/hostgroups</directory>	
 			<directory>tests/api/servicegroups</directory>
-			<directory>tests/api/misc</directory>
+			<directory>tests/api/misc</directory>-->
 		</testsuite>
--->	
+	<!--
         <testsuite name="ApiProvider">
             <file>tests/api/apiprovider/FilterTest.php</file>
             <file>tests/api/apiprovider/DataStoreTest.php</file>
             <file>tests/api/apiprovider/IcingaApiDatastoreTest.php</file>
             
         </testsuite>
-
+-->
 	</testsuites>
 </phpunit>

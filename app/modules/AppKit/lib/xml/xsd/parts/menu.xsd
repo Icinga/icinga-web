@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
+    xmlns="http://icinga.org/icinga/config/parts/menu/1.0"
+    targetNamespace="http://icinga.org/icinga/config/parts/menu/1.0"
+    elementFormDefault="qualified"
+    version="">
+
+    <xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
+               schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_types.xsd" />
+    <xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
+               schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_envelope.xsd" />
+
+    <xs:complexType name="menu">
+        <xs:sequence>
+            <xs:element name="preferposition" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="credential" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="icon" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="caption" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="action" type="target" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="items" type="items" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="target">
+        <xs:choice>
+            <xs:element name="route" type="xs:string"/>
+            <xs:element name="url" type="xs:string" />
+            <xs:element name="handler" type="xs:string" />
+        </xs:choice>
+        <xs:anyAttribute/>
+    </xs:complexType>
+ 
+   
+    <xs:complexType name="item">
+        <xs:sequence>
+            <xs:element name="icon" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="caption" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="target" type="target"/>
+            <xs:element name="items" type="items" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>    
+
+    <xs:complexType name="items">
+        <xs:sequence>
+            <xs:element name="item" type="item" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:group name="configuration">
+        <xs:all>
+            <xs:element name="menu" type="menu" minOccurs="0"/>
+        </xs:all>
+    </xs:group>
+</xs:schema>

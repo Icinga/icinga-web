@@ -13,12 +13,6 @@ class AppKit_Ext_HeaderSuccessView extends AppKitBaseView {
 
     private function jsonMenuData() {
         $model = $this->getContext()->getModel('NavigationContainer', 'AppKit');
-
-        // Notify the watcher to provide their menu data
-        if ($model->getContainer()->Count() === 0) {
-            AppKitEventDispatcher::getInstance()->triggerSimpleEvent('appkit.menu', 'we need the menu here ...');
-        }
-
         return $model->getJsonData();
     }
 

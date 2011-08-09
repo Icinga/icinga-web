@@ -22,7 +22,6 @@ class AppKitAgaviContext extends AgaviContext {
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
 		$this->initializeModules();
-		$this->initializeEventHandling();
 		$this->setLanguageDomain();
 		
 		parent::initialize();
@@ -110,15 +109,7 @@ class AppKitAgaviContext extends AgaviContext {
 		}
 	}
 	
-	private function initializeEventHandling() {
-		// Register additional events from config file
-		if (is_array($events = AgaviConfig::get('modules.appkit.custom_events'))) {
-			AppKitEventDispatcher::registerEventClasses($events);
-		}
-		
-		return true;
-	}
-	
+
 	private static function setLanguageDomain() {
 		return true;
 		try {

@@ -8,7 +8,10 @@ class AppKit_Widgets_HeaderDataAction extends AppKitBaseAction {
 	
 	public function execute(AgaviRequestDataHolder $rd) {
 		$type = $rd->getParameter('type', 'javascript');
-		
+
+
+         
+	
 		switch($type) {
 			case 'javascript':
 				$includes = array(
@@ -31,7 +34,7 @@ class AppKit_Widgets_HeaderDataAction extends AppKitBaseAction {
 				break;
 		}
 		$this->setAttribute('includes', $includes);
-		
+       
 		return $this->getDefaultViewName();
 	}
 	

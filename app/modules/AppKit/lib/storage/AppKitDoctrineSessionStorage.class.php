@@ -8,7 +8,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 	private $NsmSession = null;
 	
 	public function initialize(AgaviContext $context, array $parameters = array()) {
-		
+        
 		// initialize the parent
 		parent::initialize($context, $parameters);
 		

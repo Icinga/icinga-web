@@ -1,12 +1,6 @@
 <?php
 
-class AppKit_NavigationContainerModel extends AppKitBaseModel
-    implements AgaviISingletonModel, AppKitNavContainerInterface {
-    /**
-     * @var AppKitNavContainer
-     */
-    private $navContainer = null;
-
+class AppKit_NavigationContainerModel extends AppKitBaseModel {
     /**
      * @var AgaviTranslationManager
      */
@@ -16,58 +10,11 @@ class AppKit_NavigationContainerModel extends AppKitBaseModel
      * @var AgaviWebRouting
      */
     private $ro = null;
-
-    /**
-     *
-     * @return unknown_type
-     */
-    private static $extjs_attribute_map = array(
-            'extjs-handler'	=> 'handler',
-            'extjs-href'	=> 'href',
-            'extjs-iconcls'	=> 'iconCls'
-                                          );
-
-    public function __construct() {
-        $this->navContainer = new AppKitNavContainer();
-    }
-
+    private $config = null;
+    private $user;
     public function initialize(AgaviContext $context, array $parameters = array()) {
-        parent::initialize($context, $parameters);
-        $this->tm = $this->getContext()->getTranslationManager();
-        $this->ro = $this->getContext()->getRouting();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see lib/appkit/menu/AppKitNavContainerInterface#getContainer()
-     */
-    public function getContainer() {
-        return $this->navContainer;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see lib/appkit/menu/AppKitNavContainerInterface#getContainerIterator()
-     */
-    public function getContainerIterator() {
-        return $this->navContainer->getIterator();
-    }
-
-    /**
-     * Returns a nav item by name
-     * @param string $name
-     * @return AppKitNavItem
-     * @author Marius Hein
-     */
-    public function getNavItemByName($name) {
-        foreach($this->getContainerIterator() as $item) {
-            if ($item->getName() == $name) {
-                return $item;
-                break;
-            }
-        }
-
-        return null;
+        parent::initialize($context, $parameters);       
+        $this->user = $context->getUser();
     }
 
     /**
@@ -75,38 +22,50 @@ class AppKit_NavigationContainerModel extends AppKitBaseModel
      * @return string
      */
     public function getJsonData() {
-        $d = array();
-        $this->arrayProc($d, $this->navContainer);
-        return json_encode($d);
+        
+        return json_encode($this->createMenuDescriptor());
     }
 
-    private function arrayProc(&$array, AppKitNavContainer $container) {
-        $array['items']=array();
-        $array = &$array['items'];
+    public function readJsonFromConfig() {
+        $config = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.config_dir%/menu.xml'));
+        $menu = $this->getAllowedMenuPoints($config); 
 
-        foreach($container as $item) {
+        return $menu;
+    }
 
-            $tmp = array('text' => $this->tm->_($item->getCaption()));
-
-            if ($item->getRoute()) {
-                $tmp['href'] = $this->ro->gen($item->getRoute());
+    private function getAllowedMenuPoints(array $config) {
+        $m = array();
+        foreach($config as $elem) {
+            if(isset($elem["credential"])) {
+                $credentials = explode(";",$elem["credential"]);
+                if(!$this->hasCredentials($credentials))
+                    continue;
             }
-
-            // Mapping custom attribute agains the extjs library
-            foreach(self::$extjs_attribute_map as $name=>$jsname) {
-                if ($item->hasAttribute($name)) {
-                    $tmp[$jsname] = $item->getAttribute($name);
-                }
+           
+            if(isset($elem['items'])) {
+                $items = $this->getAllowedMenuPoints($elem['items']);
+                $elem['items'] = $items;
             }
-
-            if ($item->hasChildren()) {
-                $tmp['menu'] = array();
-                $this->arrayProc($tmp['menu'], $item->getContainer());
-            }
-
-            array_push($array, $tmp);
+          
+            $m[] = $elem;
         }
+        return $m;
     }
+    private function hasCredentials(array $credentials) {
+        foreach($credentials as $credential) {
+            if(!$this->user->hasCredential($credential))
+                return false; 
+        }
+        return true; 
+    }
+
+    private function createMenuDescriptor() {
+        $cfg = $this->readJsonFromConfig();        
+       
+          
+        return $cfg;
+    }
+
 
 }
 

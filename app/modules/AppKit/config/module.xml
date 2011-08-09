@@ -1,89 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<ae:configuration>
-		
-		<module enabled="true">
-			<settings>
-				<setting name="title">AppKit Module</setting>
-				<setting name="version">1.0</setting>
+    <ae:configuration>
+        
+        <module enabled="true">
+            <settings>
+                <setting name="title">AppKit Module</setting>
+                <setting name="version">1.0</setting>
 
-				<setting name="authors">
-					<ae:parameter name="info@icinga.org">icinga developer team</ae:parameter>
-				</setting>
-				<setting name="homepage">http://www.icinga.org</setting>
-				<setting name="update_url" />
-				<setting name="description">Appkit main application kit</setting>
+                <setting name="authors">
+                    <ae:parameter name="info@icinga.org">icinga developer team</ae:parameter>
+                </setting>
+                <setting name="homepage">http://www.icinga.org</setting>
+                <setting name="update_url" />
+                <setting name="description">Appkit main application kit</setting>
 
-				<setting name="doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
-				
-				<setting name="php_settings">
-					<ae:parameter name="session.gc_probability">3</ae:parameter>
-					<ae:parameter name="session.gc_divisor">100</ae:parameter>
-					<ae:parameter name="session.gc_maxlifetime">86400</ae:parameter>
-					
-					<!-- Set the default timezone, this is missing on some systems -->
-					<ae:parameter name="date.timezone">GMT</ae:parameter>
-				</setting>
-				
-				<!-- 
-					Menu extender
-					* Register classes to change the navigation
-				-->
-				<setting name="menu_extender">
-					<ae:parameter>IcingaMenuExtender</ae:parameter>
-				</setting>
-			
-				<!-- 
-					Eventhandling
-					* Code-less, predefined events to register tasks
-				-->
-				<setting name="custom_events">
-					<!-- This is our root menu (If all ready, the sub menues will be created -->  
-					<ae:parameter name="AppKitMenuEventDistributor">
-						<ae:parameter name="context">web</ae:parameter>
-						<ae:parameter name="event">appkit.menu</ae:parameter>
-						<ae:parameter name="class">AppKitMenuCreator</ae:parameter>
-					</ae:parameter>
-				</setting>
-
-				<setting name="user_preferences_default">
-					<ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
-					<ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
-					<ae:parameter name="org.icinga.grid.outputLength">70</ae:parameter>
-					<ae:parameter name="org.icinga.tabslider.changeTime">10</ae:parameter>
-					<ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
-					<ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
-					<ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
-					<ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
-					<ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
-				</setting>
-				
-				<!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
-				<setting name="ajax.timeout">240000</setting>
-
-				<setting name="agavi.include.css">
-                   			<ae:parameter>%core.module_dir%/AppKit/config/css.xml</ae:parameter>
-				</setting>
+                <setting name="doctrine_path">%core.root_dir%/lib/doctrine/lib</setting>
                 
-		                <setting name="agavi.include.javascript">
-		                    <ae:parameter>%core.module_dir%/AppKit/config/javascript.xml</ae:parameter>
-		                </setting>
+                <setting name="php_settings">
+                    <ae:parameter name="session.gc_probability">3</ae:parameter>
+                    <ae:parameter name="session.gc_divisor">100</ae:parameter>
+                    <ae:parameter name="session.gc_maxlifetime">86400</ae:parameter>
+                    
+                    <!-- Set the default timezone, this is missing on some systems -->
+                    <ae:parameter name="date.timezone">GMT</ae:parameter>
+                </setting>
+                
+                <!-- 
+                    Menu extender
+                    * Register classes to change the navigation
+                -->
+                <setting name="menu_extender">
+                    <ae:parameter>IcingaMenuExtender</ae:parameter>
+                </setting>
+            
+                <!-- 
+                    Eventhandling
+                    * Code-less, predefined events to register tasks
+                -->
+                <setting name="custom_events">
+                    <!-- This is our root menu (If all ready, the sub menues will be created -->  
+                    <ae:parameter name="AppKitMenuEventDistributor">
+                        <ae:parameter name="context">web</ae:parameter>
+                        <ae:parameter name="event">appkit.menu</ae:parameter>
+                        <ae:parameter name="class">AppKitMenuCreator</ae:parameter>
+                    </ae:parameter>
+                </setting>
 
-				<setting name="appkit_module.app.javascript_actions">
-					<ae:parameter>
-						<ae:parameter name="module">AppKit</ae:parameter>
-						<ae:parameter name="action">Ext.initI18n</ae:parameter>
-						<ae:parameter name="output_type">javascript</ae:parameter>
-					</ae:parameter>
-				</setting>
+                <setting name="user_preferences_default">
+                    <ae:parameter name="org.icinga.grid.pagerMaxItems">25</ae:parameter>
+                    <ae:parameter name="org.icinga.grid.refreshTime">300</ae:parameter>
+                    <ae:parameter name="org.icinga.grid.outputLength">70</ae:parameter>
+                    <ae:parameter name="org.icinga.tabslider.changeTime">10</ae:parameter>
+                    <ae:parameter name="org.icinga.cronk.default">portalHello</ae:parameter>
+                    <ae:parameter name="org.icinga.bugTrackerEnabled">true</ae:parameter>
+                    <ae:parameter name="org.icinga.errorNotificationsEnabled">true</ae:parameter>
+                    <ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
+                    <ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
+                </setting>
+                
+                <!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
+                <setting name="ajax.timeout">240000</setting>
 
-			</settings>
-	
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml">
-				<xi:fallback></xi:fallback>
-			</xi:include>		
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
-		</module>
-		
-	</ae:configuration>
+                <setting name="agavi.include.css">
+                    <ae:parameter>%core.module_dir%/AppKit/config/css.xml</ae:parameter>
+                </setting>
+                
+                <setting name="agavi.include.javascript">
+                    <ae:parameter>%core.module_dir%/AppKit/config/javascript.xml</ae:parameter>
+                </setting>
+                <setting name="agavi.include.menu">
+                    <ae:parameter>%core.module_dir%/AppKit/config/menu.xml</ae:parameter>
+                </setting>
+
+
+                <setting name="appkit_module.app.javascript_actions">
+                    <ae:parameter>
+                        <ae:parameter name="module">AppKit</ae:parameter>
+                        <ae:parameter name="action">Ext.initI18n</ae:parameter>
+                        <ae:parameter name="output_type">javascript</ae:parameter>
+                    </ae:parameter>
+                </setting>
+
+            </settings>
+    
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml">
+                <xi:fallback></xi:fallback>
+            </xi:include>        
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
+        </module>
+        
+    </ae:configuration>
 </ae:configurations>
