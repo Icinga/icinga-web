@@ -13,10 +13,24 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
 			$content .= 'AppKit.util.Config.add(\'image_path\', \''. AgaviConfig::get('org.icinga.appkit.image_path'). '\');'. chr(10);
 				
 			$content .= $this->executeActions(
-				$this->getAttribute('javascript_actions')
+				$this->getAttribute('javascript_actions',array())
 			);
-			
-			return $content;
+           
+          
+			$etag = $this->getAttribute("etag",rand()); 
+           
+            
+     	
+            header('Cache-Control: private');
+            header('Pragma: ');
+            header('Expires: ');
+            header('ETag: "'.$etag.'"');   
+            if($this->getAttribute('existsOnClient',false)) {
+                $this->getResponse()->setHttpStatusCode("304"); 
+                return "";
+            }
+            
+	        return $content;
 		}
 	}
 	

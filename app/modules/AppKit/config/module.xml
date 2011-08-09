@@ -24,26 +24,10 @@
                     <!-- Set the default timezone, this is missing on some systems -->
                     <ae:parameter name="date.timezone">GMT</ae:parameter>
                 </setting>
-                
-                <!-- 
-                    Menu extender
-                    * Register classes to change the navigation
-                -->
-                <setting name="menu_extender">
-                    <ae:parameter>IcingaMenuExtender</ae:parameter>
-                </setting>
-            
-                <!-- 
-                    Eventhandling
-                    * Code-less, predefined events to register tasks
-                -->
-                <setting name="custom_events">
-                    <!-- This is our root menu (If all ready, the sub menues will be created -->  
-                    <ae:parameter name="AppKitMenuEventDistributor">
-                        <ae:parameter name="context">web</ae:parameter>
-                        <ae:parameter name="event">appkit.menu</ae:parameter>
-                        <ae:parameter name="class">AppKitMenuCreator</ae:parameter>
-                    </ae:parameter>
+
+                <setting name="squishloader">
+                    <ae:parameter name="cache_dir">%core.cache_dir%/Squished</ae:parameter>
+                    <ae:parameter name="use_caching">true</ae:parameter>
                 </setting>
 
                 <setting name="user_preferences_default">

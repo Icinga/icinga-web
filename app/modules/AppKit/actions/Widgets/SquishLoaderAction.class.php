@@ -48,11 +48,24 @@ class AppKit_Widgets_SquishLoaderAction extends AppKitBaseAction {
 				
 				break;
 		}
-		
-		$loader->squishContents();
-		$this->setAttribute('content', $loader->getContent(). chr(10));
-		
-		return $this->getDefaultViewName();
+	    
+        $headers = $rd->getHeaders();
+    	$etag = rand();
+        if(isset($headers['IF_NONE_MATCH']))
+            $etag = str_replace('"',"",$headers['IF_NONE_MATCH']);
+
+        if(!$loader->squishContents($etag)) {
+            $content = $loader->getContent();
+		    $this->setAttribute('content', $content. chr(10));
+		} else {
+            $this->setAttribute('existsOnClient',true);
+        }
+        $this->setAttribute('etag',$loader->getChecksum());
+        
+      	return $this->getDefaultViewName();
 	}
-	
+    
+  
+ 
+
 }

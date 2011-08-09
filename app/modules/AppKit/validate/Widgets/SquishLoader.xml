@@ -7,6 +7,10 @@
 	<ae:configuration>
 		
 		<validators>
-		</validators>
+           <validator class="string" name="IfNoneMatch" source="headers" required="false">
+                <argument>IF_NONE_MATCH</argument>
+            </validator> 
+		 
+        </validators>
 	</ae:configuration>
 </ae:configurations>

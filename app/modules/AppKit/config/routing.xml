@@ -8,7 +8,7 @@
 			<route name=".appkit" pattern="^/appkit" module="%actions.default_module%">
 				<!-- check if the webserver is dead -->
 				<route name="ping" pattern="^/ping" action="Ping" />
-
+                <route name=".dispatcher" pattern="^/dispatch" action="Dispatcher" output_type="json" /> 
 				<route name=".login" pattern="^/login" action="%actions.login_action%">
 					<route name=".provider" pattern="^/json" module="%actions.default_module%"
 						action="Login.AjaxLogin" output_type="json" />
