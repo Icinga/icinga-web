@@ -203,7 +203,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
         return $out;
     }
 
-    private function resultToArray(IcingaApiResult &$res, array $fieldDef, $type) {
+    private function resultToArray(&$res, array $fieldDef, $type) {
         $array = array();
 
         foreach($res as $oRow) {
