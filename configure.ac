@@ -279,6 +279,7 @@ AC_CONFIG_FILES([
 	app/config/settings.xml
     app/modules/Api/config/access.xml
 	app/modules/AppKit/cache/Widgets/SquishLoader.xml
+	app/modules/AppKit/config/module.xml
 	etc/build.properties
 	tests/phpunit/test.properties
 	etc/apache2/icinga-web.conf
