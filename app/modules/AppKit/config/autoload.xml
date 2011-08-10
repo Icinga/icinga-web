@@ -29,6 +29,7 @@
 		<autoload name="AppKitFactory">%core.module_dir%/AppKit/lib/class/AppKitFactory.class.php</autoload>
 		<autoload name="AppKitFactoryInterface">%core.module_dir%/AppKit/lib/class/AppKitFactoryInterface.interface.php</autoload>
 		<autoload name="AppKitSingleton">%core.module_dir%/AppKit/lib/class/AppKitSingleton.class.php</autoload>
+		<autoload name="AppKitDoctrineDatabase">%core.module_dir%/AppKit/lib/database/AppKitDoctrineDatabase.class.php</autoload>
 		
 		
 		<!-- The same -->

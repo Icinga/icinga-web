@@ -3,7 +3,7 @@
 	
 	<ae:configuration>
 		<databases default="icinga_web">
-			<database name="icinga_web" class="AgaviDoctrineDatabase">
+			<database name="icinga_web" class="AppKitDoctrineDatabase">
 
 				<!--
 					Doctrine dsn strings:
@@ -32,9 +32,31 @@
 				<ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>				
                 <!-- Oracle specific -->
                 <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
+            
+                <!-- Define caching rules for this connection -->
+                <ae:parameter name="caching">
+                    <!-- enable caching -->
+                    <ae:parameter name="enabled">false</ae:parameter>
+                    <!-- curerntly supported: memcache and APC -->
+                    <ae:parameter name="driver">apc</ae:parameter>
+                    <!--
+                        Memcache specific
+                    <ae:parameter name="memcache_server">localhost</ae:parameter>
+                    <ae:parameter name="memcache_port">11211</ae:parameter>
+                    -->
+                
+                    <!-- there aren't many reasons for not using query-caches -->
+                    <ae:parameter name="use_query_cache">true</ae:parameter>
+                    <!-- result cache: If in doubt, let it out! This caches results from the database -->
+                    <ae:parameter name="use_result_cache">true</ae:parameter>
+                    <ae:parameter name="result_cache_lifespan">60</ae:parameter>
+                </ae:parameter>		
+    
+
+
 			</database>
 	
-	        <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AgaviDoctrineDatabase">
+	        <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AppKitDoctrineDatabase">
 		        <ae:parameter name="dsn">@api_subtype@://@api_db_user@:@api_db_pass@@@api_host@:@api_port@/@api_db_name@</ae:parameter>
                 <ae:parameter name="prefix">@api_db_prefix@</ae:parameter>
                 <ae:parameter name="charset">utf8</ae:parameter>
@@ -43,6 +65,14 @@
                 </ae:parameter>
                 <ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
                 <ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>				
+                <ae:parameter name="caching">
+                    <!-- enable caching -->
+                    <ae:parameter name="enabled">false</ae:parameter>
+                    <!-- curerntly supported: memcache and APC -->
+                    <ae:parameter name="driver">apc</ae:parameter>
+                    <ae:parameter name="use_query_cache">true</ae:parameter>
+                </ae:parameter>
+
             </database>
                 
 			<!-- include alternative configuration -->

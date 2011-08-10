@@ -1,0 +1,8 @@
+#!/usr/bin/php
+<?php
+$basepath = dirname(__FILE__).'/../lib/doctrine';
+require_once($basepath.'/lib/Doctrine.php');
+spl_autoload_register(array('Doctrine', 'autoload'));
+
+Doctrine_Core::compile($basepath.'/Doctrine.compiled.php');
+
