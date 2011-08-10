@@ -1,6 +1,6 @@
 <?php
 
-class AppKitXmlTag extends AppKitBaseClass {
+class AppKitXmlTag {
 
     /**
      * @var DomDocument
@@ -141,11 +141,7 @@ class AppKitXmlTag extends AppKitBaseClass {
         }
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see app/modules/AppKit/lib/class/ICINGAAppKitBaseClass#toString()
-     */
-    public function toString() {
+    public function __toString() {
         return $this->renderElement();
     }
 
@@ -170,5 +166,3 @@ class AppKitXmlTag extends AppKitBaseClass {
 }
 
 class AppKitXmlTagException extends AppKitException {}
-
-?>

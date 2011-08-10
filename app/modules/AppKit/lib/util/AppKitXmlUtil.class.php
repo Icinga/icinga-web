@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Collection of xml/dom helper functions
+ * @author mhein
+ *
+ */
 class AppKitXmlUtil {
 	
 	
@@ -77,5 +82,3 @@ class AppKitXmlUtil {
 		return null;
 	}	
 }
-
-?>

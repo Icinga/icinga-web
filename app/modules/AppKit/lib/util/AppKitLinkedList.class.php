@@ -540,6 +540,10 @@ class AppKitLinkedList implements IAppKitLinkedList, Iterator , ArrayAccess , Co
         $str .= "END";
         return $str;
     }
+    
+    public function __toString() {
+        return $this->toString();
+    }
 
     public function toArray() {
         $arr = array();

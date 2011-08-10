@@ -3,7 +3,6 @@
  * The replacement agavi context to handle all bootstrap things
  * in that
  */
-
 class AppKitAgaviContext extends AgaviContext {
 	/**
 	 * (non-PHPdoc)
@@ -22,7 +21,6 @@ class AppKitAgaviContext extends AgaviContext {
 		$this->initializePhpSettings();
 		$this->initializeDoctrine();
 		$this->initializeModules();
-		$this->setLanguageDomain();
 		
 		parent::initialize();
 		
@@ -30,7 +28,10 @@ class AppKitAgaviContext extends AgaviContext {
 		
 		$this->initializeExceptionHandling();
 	}
-
+	
+	/**
+	 * Our own exception handler created here
+	 */
 	private function initializeExceptionHandling() {
 		AppKitExceptionHandler::initializeHandler();
 	}
@@ -67,6 +68,9 @@ class AppKitAgaviContext extends AgaviContext {
 		}
 	}
 	
+	/**
+	 * Inject some dynamic settings into AgaviConfig
+	 */
 	private function initializeAutosettings() {
 		// Try to set the web path to correct urls within the frontend
 		if(AgaviConfig::get('core.default_context') =='web') {
@@ -80,6 +84,9 @@ class AppKitAgaviContext extends AgaviContext {
 		AgaviConfig::set('core.tmp_dir', AgaviConfig::get('core.data_dir'). '/tmp');
 	}
 
+	/**
+	 * Glue our version string together
+	 */
 	private function buildVersionString() {
 		if (AgaviConfig::get('org.icinga.version.extension', false) == false) {
 			$version_format = "%s/v%d.%d.%d";
@@ -98,6 +105,10 @@ class AppKitAgaviContext extends AgaviContext {
 		), true, true);
 	}
 	
+	/**
+	 * Change PHP settings at runtime
+	 * @throws AppKitException
+	 */
 	private function initializePhpSettings() {
 		// Applying PHP settings
 		if (is_array($settings = AgaviConfig::get('modules.appkit.php_settings'))) {
@@ -108,36 +119,5 @@ class AppKitAgaviContext extends AgaviContext {
 			}
 		}
 	}
-	
-
-	private static function setLanguageDomain() {
-		return true;
-		try {
-			$context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
-			$user = $context->getUser();	
-			if($user) {		
-				$user = $user->getNsmUser(true);
-			}
-		
-			if(!$user)
-				return true;
-		
-			$translationMgr = $context->getTranslationManager();
-					
-			try {
-				$locale = $user->getPrefVal("org.icinga.appkit.locale",$translationMgr->getDefaultLocaleIdentifier(),true);
-				$translationMgr->setLocale($locale);
-			} catch(Exception $e) {
-				$translationMgr->setLocale($translationMgr->getDefaultLocaleIdentifier());
-			}
-			
-			return true;
-		
-		} catch(AppKitDoctrineException $e) {
-			return true;	
-		}
-	}
 
 }
-
-?>

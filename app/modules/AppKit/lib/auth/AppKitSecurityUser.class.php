@@ -1,17 +1,49 @@
 <?php
 
+/**
+ * AppKit implementation of the agavi role based security user
+ * @author mhein
+ * @author jmosshammer
+ *
+ */
 class AppKitSecurityUser extends AgaviRbacSecurityUser {
-
-    const SOURCE = "DB"; // change this to xml to read from rbac_definitions.xml
-
+    
+    /**
+     * Value to use database role system
+     * @var string
+     */
+    const ROLES_SOURCE_DB = 'DB';
+    
+    /**
+     * 
+     * Value to use XML based roles
+     * @var string
+     */
+    const ROLES_SOURCE_XML = 'XML';
+    
+    /**
+     * Static value for object paraneter holds our NsmUser object
+     * @var string
+     */
     const USEROBJ_ATTRIBUTE = 'userobj';
 
+    /**
+     * List of roles applies to this user
+     * @var array
+     */
     protected $role_names = array();
 
-    public function doAuthKeyLogin($key) {
-        $this->doLogin($key,$key);
-    }
-
+    /**
+     * Which source of roles we want to use for out user?
+     * Change this to its appropriate constante to change.
+     * @var string
+     */
+    private static $role_source = self::ROLES_SOURCE_DB;
+    
+    /**
+     * (non-PHPdoc)
+     * @see AgaviRbacSecurityUser::getRoles()
+     */
     public function  getRoles() {
         if (count($this->role_names) <= 0) {
             foreach($this->getNsmUser()->NsmRole as $role) {
@@ -21,7 +53,15 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
         return $this->role_names;
     }
-
+    
+    /**
+     * Shortcut method to authenticate user with auth key
+     * @param string $key
+     */
+    public function doAuthKeyLogin($key) {
+        $this->doLogin($key,$key);
+    }
+    
     /**
      * Login method, uses the AppKitAuthProvider to determine if this is correct
      * @param string $username
@@ -79,7 +119,6 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         $this->clearCredentials();
         $this->setAuthenticated(false);
 
-        // Give notice
         $this->getContext()->getLoggerManager()
         ->log(sprintf('User %s (%s) logged out!', $this->getAttribute('userobj')->user_name, $this->getAttribute('userobj')->givenName()), AgaviLogger::INFO);
 
@@ -97,9 +136,6 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         return true;
     }
 
-
-
-
     /**
      * Applying the roles the the agavi rbac struct
      * @param NsmUser $user
@@ -107,7 +143,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @author Marius Hein
      */
     private function applyDoctrineUserRoles(NsmUser &$user) {
-        if (self::SOURCE == "XML") {
+        if (self::$role_source == self::ROLES_SOURCE_XML) {
             foreach($user->NsmRole as $role) {
                 $this->grantRole($role->role_name);
 
@@ -119,6 +155,10 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         return true;
     }
 
+    /**
+     * Adding credential from database to the rbac user
+     * @param NsmUser $user
+     */
     private function getCredentialsFromDB(NsmUser &$user) {
         foreach($user->NsmRole as $role) {
             $this->roles[] = $role;
@@ -133,21 +173,22 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
             }
 
         }
+        
         foreach($user->getTargets("credential") as $credential) {
             $this->addCredential($credential->get("target_name"));
 
         }
 
     }
-
+    
+    /**
+     * Adding credentials from role
+     * @param NsmRole $role
+     */
     private function addCredentialsFromRole(NsmRole &$role) {
-        foreach($role->getTargets("credential") as $credential) {
-            $this->addCredential($credential->get("target_name"));
+        foreach($role->getTargets('credential') as $credential) {
+            $this->addCredential($credential->get('target_name'));
         }
-    }
-
-    public function initialize(AgaviContext $context, array $parameters = array()) {
-        parent::initialize($context, $parameters);
     }
 
     /**
@@ -193,6 +234,10 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         return $this->getNsmUser()->getPrefVal($key, $default, $blob);
     }
 
+    /**
+     * All user preferences at once
+     * @return array List of the preferences
+     */
     public function getPreferences() {
         return $this->getNsmUser()->getPreferences();
     }
@@ -207,8 +252,12 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         return $this->getNsmUser()->delPref($ley);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see AgaviRbacSecurityUser::loadDefinitions()
+     */
     protected function loadDefinitions() {
-        if (self::SOURCE == 'XML') {
+        if (self::$role_source == self::ROLES_SOURCE_XML) {
             parent::loadDefinitions();
         }
 
@@ -218,5 +267,3 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 }
 
 class AppKitSecurityUserException extends AppKitException {}
-
-?>

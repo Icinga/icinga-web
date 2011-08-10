@@ -8,5 +8,5 @@ possible applications within the same context.</p>
 performance data from other applications (e.g. NAGIOS).</p>
 
 <?php if (!$us->isAuthenticated()) { ?>
-<p>We've noticed that you are not logged in, you can do this right now at the <?php echo AppKitHtmlHelper::Obj()->LinkToRoute('appkit.login', 'loginpage')?>.</p>
+<p>We've noticed that you are not logged in, you can do this right now at the <a href="<?php echo $ro->get('appkit.login'); ?>">loginpage</a>.</p>
 <?php } ?>

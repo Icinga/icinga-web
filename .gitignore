@@ -4,6 +4,7 @@
 autom4te.cache/
 app/cache/config/*.php
 app/cache/content
+app/cache/Squished/
 app/data/log/
 app/data/tmp
 app/config/icinga.xml

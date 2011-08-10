@@ -1,21 +1,29 @@
 <?php
 
-class IcingaTemplateDisplay extends AppKitSingleton {
+class IcingaTemplateDisplay {
 
+    private static $instance = null;
+    
     /**
      * @var AgaviContext
      */
-    protected $context = null;
+    protected static $context = null;
 
     /**
      * @var Web_Icinga_ApiContainerModel
      */
-    protected $api = null;
-
+    protected static $api = null;
+    
+    
     public function __construct() {
-        parent::__construct();
-        $this->context = AgaviContext::getInstance(AgaviConfig::get('core.default_context'));
-        $this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+        
+        if (self::$context === null) {
+            self::$context = AgaviContext::getInstance();
+        }
+        
+        if (self::$api === null) {
+            self::$api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+        }
 
     }
 
@@ -27,14 +35,14 @@ class IcingaTemplateDisplay extends AppKitSingleton {
      * @return AgaviContext
      */
     protected function getContext() {
-        return $this->context;
+        return self::$context;
     }
 
     /**
      * @return Web_Icinga_ApiContainerModel
      */
     protected function getApi() {
-        return $this->api;
+        return self::$api;
     }
 
 }

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Agavi toolkit, shortening things
+ * @author mhein
+ *
+ */
 class AppKitAgaviUtil {
 
     /**
@@ -7,6 +12,10 @@ class AppKitAgaviUtil {
      */
     private static $context = null;
 
+    /**
+     * Inject static data
+     * @param AgaviContext $context
+     */
     public static function initContext(AgaviContext &$context) {
         if (self::$context === null) {
             self::$context =& $context;
@@ -23,6 +32,12 @@ class AppKitAgaviUtil {
         return self::$context;
     }
 
+    /**
+     * Variable log method, provide sprintf format, 
+     * arguments and Agavi log level at once
+     * @param mixed $arg1
+     * @oaram mixed $argN LogLevel or sprintf format
+     */
     public static function log($arg1) {
         if (is_array($arg1)) {
             $argv =& $arg1;
@@ -41,6 +56,14 @@ class AppKitAgaviUtil {
         return self::getContext()->getLoggerManager()->log(@vsprintf($format, $argv), $severity);
     }
 
+    /**
+     * 
+     * Replace custom strings with agavi configuration items
+     * @param string $text
+     * @todo Move into better class space
+     * @deprecated Please implement bether construct (Maybe Agavi itself can?)
+     * @return string
+     */
     public static function replaceConfigVars($text) {
         $m = array();
 
@@ -57,7 +80,8 @@ class AppKitAgaviUtil {
 
     /**
      * Shortcut to initialize modules without strict warnings
-     * @param AgaviController
+     * @deprecated Use agavi onbord context method (but its not static)
+     * @param string module name
      */
     public static function initializeModule($moduleName) {
         return self::getAgaviControllerInstance()->initializeModule($moduleName);
@@ -79,6 +103,3 @@ class AppKitAgaviUtil {
     }
 
 }
-
-
-?>

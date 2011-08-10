@@ -1,23 +1,17 @@
 <?php
 
+/**
+ * Set of array helper methods
+ * @author mhein
+ *
+ */
 class AppKitArrayUtil {
-
-    public static function arrayKeyInsertBefore(array $input, $before, array $insert) {
-        $new = array();
-        $old = $input;
-
-        foreach($old as $key=>$val) {
-            if ($key == $before) {
-                foreach($insert as $iKey=>$iVal) {
-                    $new[$iKey] = $iVal;
-                }
-            }
-
-            $new[$key] = $val;
-        }
-        return $new;
-    }
-
+    /**
+     * Search a tree like array structure
+     * @param mixed $needle
+     * @param array $haystack
+     * @return boolean found or not
+     */
     public static function searchKeyRecursive($needle, array $haystack) {
         $out = false;
         foreach($haystack as $key=>$val) {
@@ -62,6 +56,7 @@ class AppKitArrayUtil {
      *
      * @param array $array
      * @param boolean $check_keys
+     * @deprecated Not used in icinga-web
      * @return array
      */
     public static function uniqueKeysArray(array $array, $check_keys=false) {
@@ -89,11 +84,22 @@ class AppKitArrayUtil {
         return preg_split('/\s*'. preg_quote($split_char). '\s*/', $string);
     }
 
+    /**
+     * Sorting associative arrays of arrays by subfields
+     * @param array $arry
+     * @param string $field fieldname existing in sub array
+     * @param string $op something like '<' or '>'
+     */
     public static function subSort(array &$arry, $field, $op='<') {
         $cfn = create_function('$a, $b', 'return ($a[\''. $field. '\'] '. $op. '$b[\''. $field. '\']) ? -1 : 1;');
         return uasort($arry, $cfn);
     }
 
+    /**
+     * Helper function for xml2array
+     * @param DOMElement $element
+     * @return boolean
+     */
     private static function hasChildren(DOMElement &$element) {
         $hasChildren = false;
 
@@ -109,6 +115,12 @@ class AppKitArrayUtil {
         return $hasChildren;
     }
 
+    /**
+     * Converts a XML fragment to an array based on 
+     * id attributes like name or id itself
+     * @param DOMNodeList $l
+     * @param array $a
+     */
     public static function xml2Array(DOMNodeList $l, &$a) {
         foreach($l as $n) {
 
@@ -146,6 +158,13 @@ class AppKitArrayUtil {
         }
     }
 
+    /**
+     * Rewrite array key to new ones based on a associative
+     * map array
+     * @param array $array
+     * @param array $map
+     * @param boolean $remove_unused remove keys not found
+     */
     public static function swapKeys(array &$array, array $map, $remove_unused=false) {
         foreach($map as $src=>$target) {
             if (isset($array[$src])) {
@@ -165,5 +184,3 @@ class AppKitArrayUtil {
 }
 
 class AppKitArrayUtilException extends AppKitException {}
-
-?>

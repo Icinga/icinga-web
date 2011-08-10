@@ -53,8 +53,7 @@
                     <ae:parameter name="handler">AppKitResourceConfigHandler</ae:parameter>
                 </ae:parameters>
 
-                <validation>%core.module_dir%/AppKit/lib/config/xsd/resource.xsd</validation>
-                <transformation>%core.module_dir%/AppKit/lib/config/xsl/resource.xsl</transformation>
+                <validation>%core.module_dir%/AppKit/lib/xml/xsd/resource.xsd</validation>
             </handler>
 
              <handler pattern="%core.config_dir%/css.xml" class="AppKitXIncludeConfigHandler">
@@ -67,8 +66,7 @@
                     <ae:parameter name="handler">AppKitResourceConfigHandler</ae:parameter>
                 </ae:parameters>
 
-                <validation>%core.module_dir%/AppKit/lib/config/xsd/resource.xsd</validation>
-                <transformation>%core.module_dir%/AppKit/lib/config/xsl/resource.xsl</transformation>
+                <validation>%core.module_dir%/AppKit/lib/xml/xsd/resource.xsd</validation>
             </handler>
             
             <handler pattern="%core.config_dir%/cronks.xml" class="AppKitXIncludeConfigHandler">

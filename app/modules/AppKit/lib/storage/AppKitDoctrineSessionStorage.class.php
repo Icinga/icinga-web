@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Store agavi sesstion data (or simple php session data) into
+ * appkit doctrine tables
+ * @author mhein
+ *
+ */
 class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 	
 	/**
@@ -28,6 +34,11 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 
 	}
 	
+	/**
+	 * Trigger the sesstion destroy and remove
+	 * data from database
+	 * @param string $id
+	 */
 	public function sessionDestroy($id) {
 		
 		$result = Doctrine_Query::create()
@@ -41,6 +52,11 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 		
 	}
 	
+	/**
+	 Trigger for garbage selector, runs
+	 every X times to remove old sessions
+	 * @param integer $lifetime
+	 */
 	public function sessionGC($lifetime) {
 		$diff = time() - $lifetime;
 		
@@ -64,10 +80,20 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 		return false;
 	}
 	
+	/**
+	 * Trigger to open the session
+	 * @param string $path
+	 * @param string $name
+	 */
 	public function sessionOpen($path, $name) {
 		// Hm should we do anything here?
 	}
 	
+	/**
+	 * Reads data from doctrine tables and return its content
+	 * @param string $id
+	 * @throws AppKitDoctrineSessionStorageException
+	 */
 	public function sessionRead($id) {
 		$session_name = $this->getParameter('session_name');
 		
@@ -99,16 +125,17 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 	
 	}
 	
+	/**
+	 * Writes session data to database tables
+	 * @param string $id
+	 * @param mixed $data
+	 */
 	public function sessionWrite($id, &$data) {
-		$this->NsmSession->session_data = $data;//, $this->getParameter('gzip_level', 6)));
+		$this->NsmSession->session_data = $data;
 		$this->NsmSession->session_checksum = md5($data);
-
 		$this->NsmSession->save();
-
 	}
 	
 }
 
 class AppKitDoctrineSessionStorageException extends AppKitException {}
-
-?>

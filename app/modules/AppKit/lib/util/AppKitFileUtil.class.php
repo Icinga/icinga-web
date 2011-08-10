@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Util collection for working with files
+ * @author mhein
+ *
+ */
 class AppKitFileUtil {
 	
 	/**
@@ -37,6 +42,12 @@ class AppKitFileUtil {
 		throw new AppKitFileUtilException('File %s does not exist!', $filename);
 	}
 	
+	/**
+	 * Returns the mime type for content of a string
+	 * @param mixed $data
+	 * @param string $default
+	 * @return string the mime type or default
+	 */
 	public static function getMimeTypeForData($data, $default = null) {
 	    if (class_exists('finfo', false)) {
 	        $finfo = new finfo(FILEINFO_MIME);
@@ -50,5 +61,3 @@ class AppKitFileUtil {
 }
 
 class AppKitFileUtilException extends AppKitException {}
-
-?>
