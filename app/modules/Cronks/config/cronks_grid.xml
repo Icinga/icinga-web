@@ -107,12 +107,37 @@
 				<ae:parameter name="module">Cronks</ae:parameter>
 				<ae:parameter name="action">System.ViewProc</ae:parameter>
 				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Show summary of open problem</ae:parameter>
+				<ae:parameter name="description">Show summary of open problems</ae:parameter>
 				<ae:parameter name="name">Open problems</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>
 				<ae:parameter name="image">cronks.Warning</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="template">icinga-open-problems-template</ae:parameter>
+				</ae:parameter>
+			</cronk>
+	
+    		<cronk name="gridUnhandledHostProblemsView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Show summary of unhandled host problems</ae:parameter>
+				<ae:parameter name="name">Unhandled host problems</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="image">cronks.Warning</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-unhandled-host-problems</ae:parameter>
+				</ae:parameter>
+			</cronk>
+	  		<cronk name="gridUnhandledServiceProblemsView">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Show summary of unhandled service problems</ae:parameter>
+				<ae:parameter name="name">Unhandled service problems</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="image">cronks.Warning</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-unhandled-service-problems</ae:parameter>
 				</ae:parameter>
 			</cronk>
 	

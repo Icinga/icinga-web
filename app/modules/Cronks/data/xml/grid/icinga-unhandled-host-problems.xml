@@ -6,8 +6,8 @@
     	knows what the template is doing
     -->
     <meta>
-        <parameter name="name">Default icinga host status template</parameter>
-        <parameter name="description">Displays object status information</parameter>
+        <parameter name="name">Icinga unhandled host problems</parameter>
+        <parameter name="description">Displays host status information for all problems not in downtime and not acknowledged</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
     
@@ -26,7 +26,7 @@
         	<!-- Initialize comments -->
         	<parameter>
         		<parameter name="type">viewready</parameter>
-        		<parameter name="function">Cronk.grid.CommentColumnRenderer.init</parameter>
+        		<parameter name="function">Cronk.grid.CommentColumnRenderer.init</parameter>	
         		<parameter name="arguments">
         			<parameter name="column_name">comments</parameter>
                		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
@@ -287,7 +287,6 @@
         -->
        	<parameter name="additional_fields">
        		<parameter name="max_attempt">HOST_MAX_CHECK_ATTEMPTS</parameter>
-       		<parameter name="host_id">HOST_ID</parameter>
        		<parameter name="instance_id">HOST_INSTANCE_ID</parameter>
 			<parameter name="host_is_pending">HOST_IS_PENDING</parameter>
        	</parameter>
@@ -308,6 +307,27 @@
 			<parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
 			<parameter name="customvariable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
        	</parameter>
+
+		<parameter name="filterPresets">
+			<parameter name="AND">
+                <parameter>
+					<parameter name="field">HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
+					<parameter name="val">0</parameter>
+					<parameter name="op">=</parameter>
+				</parameter>
+				<parameter>
+					<parameter name="field">HOST_CURRENT_STATE</parameter>
+					<parameter name="val">0</parameter>
+					<parameter name="op">!=</parameter>
+				</parameter>
+				<parameter>
+					<parameter name="field">HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+					<parameter name="val">1</parameter>
+					<parameter name="op">!=</parameter>
+				</parameter>
+			
+			</parameter>
+        </parameter>
     </datasource>
     
     <!-- 
@@ -707,14 +727,13 @@
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
 
-                <parameter name="width">22</parameter>
-        		
+                <parameter name="width">26</parameter>
+
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                 	<parameter name="menuDisabled">true</parameter>
                 	<parameter name="fixed">true</parameter>
                 </parameter>
-
 
                 <parameter name="jsFunc">
 					<parameter>

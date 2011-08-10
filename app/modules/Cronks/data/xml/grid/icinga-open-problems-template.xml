@@ -23,17 +23,6 @@
         
         <parameter name="gridEvents">
         	
-        	<!-- Initialize comments -->
-        	<parameter>
-        		<parameter name="type">viewready</parameter>
-        		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
-        		<parameter name="arguments">
-        			<parameter name="column_name">comments</parameter>
-               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
-               		<parameter name="title">Comments for {host_name}</parameter>
-        		</parameter>
-        	</parameter>
-        	
         </parameter>
         
         <!-- 

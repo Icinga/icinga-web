@@ -2,7 +2,14 @@
 
 class AppKit_PingSuccessView extends AppKitBaseView
 {
-	public function executeHtml(AgaviRequestDataHolder $rd)
+	public function executeJson(AgaviRequestDataHolder $rd)
+	{
+	
+		
+		$this->setAttribute('_title', 'Ping');
+	}
+
+    public function executeHtml(AgaviRequestDataHolder $rd)
 	{
 		$this->setupHtml($rd);
 		

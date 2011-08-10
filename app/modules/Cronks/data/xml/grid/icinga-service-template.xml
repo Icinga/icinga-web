@@ -26,7 +26,7 @@
         	<!-- Initialize comments -->
         	<parameter>
         		<parameter name="type">viewready</parameter>
-        		<parameter name="function">Cronk.grid.GridUtil.initCommentEventHandler</parameter>
+        		<parameter name="function">Cronk.grid.CommentColumnRenderer.init</parameter>
         		<parameter name="arguments">
         			<parameter name="column_name">comments</parameter>
                		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
@@ -608,14 +608,20 @@
                 	<parameter name="fixed">true</parameter>
                 </parameter>
 
-				<parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
-                	<parameter name="method">icingaComments</parameter>
-                	<parameter name="arguments">
-                		<parameter name="object_id_field">comments</parameter>
-                		<parameter name="instance_id_field">instance_id</parameter>
-                	</parameter>
-                </parameter>
+                <parameter name="jsFunc">
+					<parameter>
+		               	<parameter name="namespace">Cronk.grid.CommentColumnRenderer</parameter>
+		               	<parameter name="function">commentColumn</parameter>
+
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        <parameter name="arguments">
+                            <parameter name="target">service</parameter>
+                            <parameter name="target_field">service_object_id</parameter> 
+                        </parameter>
+                    </parameter>
+                </parameter>	
+
             </display>
             
             <filter>

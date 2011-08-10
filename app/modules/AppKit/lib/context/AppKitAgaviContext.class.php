@@ -20,7 +20,7 @@ class AppKitAgaviContext extends AgaviContext {
 		 */
 		$this->buildVersionString();
 		$this->initializePhpSettings();
-		$this->initializeDoctrine();
+
 		$this->initializeModules();
 		$this->setLanguageDomain();
 		
@@ -51,22 +51,7 @@ class AppKitAgaviContext extends AgaviContext {
 
 
 	}
-	
-	/**
-	 * Require doctrine orm
-	 */
-	private function initializeDoctrine() {
-		if (!class_exists('Doctrine')) {
-			if (file_exists(($path = AgaviConfig::get('modules.appkit.doctrine_path')))) {
-				require_once ($path. '/Doctrine.php');
-			}
-		}
-		
-		if (!class_exists('Doctrine')) {
-			throw new AppKitException('Could not include doctrine!');
-		}
-	}
-	
+
 	private function initializeAutosettings() {
 		// Try to set the web path to correct urls within the frontend
 		if(AgaviConfig::get('core.default_context') =='web') {
