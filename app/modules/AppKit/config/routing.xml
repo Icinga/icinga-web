@@ -22,7 +22,7 @@
 					<route name=".javascript" pattern="^/javascript" output_type="javascript" />
 				</route>
 
-				<route name="appkit.admin" pattern="^/admin" action="Admin.Index">
+				<route name=".admin" pattern="^/admin" action="Admin.Index">
 					<route name=".principaledit" pattern="^/principaleditor"
 						action="Admin.PrincipalEditor" output_type="simple" />
 					<route name=".users" pattern="^/users" action="Admin.Users.Index">
