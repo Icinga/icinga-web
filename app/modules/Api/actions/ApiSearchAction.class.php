@@ -130,7 +130,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
 
         // POST filter definitions
         $advFilter = $rd->getParameter("filters",array());
-
+        if(!is_array($advFilter))
+            $advFilter = array($advFilter);
         foreach($advFilter as $fl) {
             $fl["value"] = str_replace("*","%",$fl["value"]);
             $search->setSearchFilter($fl["column"],$fl["value"],$fl["relation"]);
@@ -145,6 +146,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         }
 
         $filterGroup = $search->createFilterGroup($filterdef["type"]);
+        if(!is_array($filterGroup))
+            $filterGroup = array($filterGroup);
         foreach($searchField as $element) {
             if ($element["type"] == "atom") {
                 $filterGroup->addFilter($search->createFilter($element["field"][0],$element["value"][0],$element["method"][0]));
@@ -195,6 +198,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         }
 
         $columns = $rd->getParameter("columns",null);
+        if(!is_array($columns))
+            $columns = array($columns);
         foreach($columns as &$column) {
             $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
             $column = strtoupper($column);
