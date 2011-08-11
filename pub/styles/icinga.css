@@ -862,4 +862,56 @@ tr.bp_serviceRow {
     cursor:default;
 }
 
+.icinga-status-adv {
 
+}
+
+.icinga-status-adv .host-upper {
+    height: 15px;
+    text-align: center;
+    padding-top:2px;
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+
+}
+
+.icinga-status-adv .host-lower.icinga-status-warning {
+    text-align: center;
+    width: 50%;
+    float:left;
+    border-radius: 0px 0px 0px 5px;
+    -moz-border-radius: 0px 0px 0px 5px;
+    -webkit-border-radius: 0px 0px 0px 5px;
+}
+
+.icinga-status-adv .host-lower.icinga-status-critical {
+    text-align: center;
+    width: 50%;
+    float:right;
+    border-radius: 0px 0px 5px 0px;
+    -moz-border-radius: 0px 0px 5px 0px;
+    -webkit-border-radius: 0px 0px 5px 0px;
+
+}
+
+.icinga-status-adv .host-lower.icinga-status-warning-disabled {
+    text-align: center;
+    width: 50%;
+    float:left;
+    border-radius: 0px 0px 0px 5px;
+    -moz-border-radius: 0px 0px 0px 5px;
+    -webkit-border-radius: 0px 0px 0px 5px;
+    background-color: #dedede;  
+}
+
+.icinga-status-adv .host-lower.icinga-status-critical-disabled {
+    background-color: #dedede;
+    text-align: center;
+    width: 50%;
+    float:right;
+    border-radius: 0px 0px 5px 0px;
+    -moz-border-radius: 0px 0px 5px 0px;
+    -webkit-border-radius: 0px 0px 5px 0px;
+
+}
