@@ -5,10 +5,19 @@
 		<autoload name="CronksBaseAction">%core.module_dir%/Cronks/lib/action/CronksBaseAction.class.php</autoload>
 		<autoload name="CronksBaseModel">%core.module_dir%/Cronks/lib/model/CronksBaseModel.class.php</autoload>
 		<autoload name="CronksBaseView">%core.module_dir%/Cronks/lib/view/CronksBaseView.class.php</autoload>
-		
 		<autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
-		
 		<autoload name="CronkModuleConfigHandler">%core.module_dir%/Cronks/lib/config/CronkModuleConfigHandler.class.php</autoload>
 		
+		<!-- Classes for the grid templates -->
+		<autoload name="CronkGridTemplateDisplay">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplay.class.php</autoload>
+		<autoload name="CronkGridTemplateDisplayFormat">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayFormat.class.php</autoload>
+		<autoload name="CronkGridTemplateDisplayMonitoring">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayMonitoring.class.php</autoload>
+		<autoload name="CronkGridTemplateDisplayServiceIcons">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayServiceIcons.class.php</autoload>
+		<autoload name="CronkGridTemplateDisplayTest">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayTest.class.php</autoload>
+		<autoload name="CronkGridTemplateAjaxGridLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateAjaxGridLayout.class.php</autoload>
+		<autoload name="CronkGridTemplateLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateLayout.class.php</autoload>
+		<autoload name="CronkGridTemplateXmlReplace">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlReplace.class.php</autoload>
+		<autoload name="CronkGridTemplateXmlParser">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlParser.class.php</autoload>
+		<autoload name="CronkGridTemplateWorker">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorker.class.php</autoload>
 	</ae:configuration>
 </ae:configurations>

@@ -1,5 +1,5 @@
 <?php
-class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
+class CronkGridTemplateDisplayFormat extends CronkGridTemplateDisplay {
 
     private static $duration_map = array(
                                        'w'	=> 604800,

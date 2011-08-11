@@ -75,5 +75,3 @@ class AppKit_HeaderDataModel extends AppKitBaseModel
         return false;
     }
 }
-
-?>

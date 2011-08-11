@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Working with principals and user credentials 
+ * bound to users or groups
+ * @author mhein
+ *
+ */
 class AppKit_PrincipalAdminModel extends AppKitBaseModel {
 
     public function __construct() {
@@ -122,5 +128,3 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
     }
 
 }
-
-?>

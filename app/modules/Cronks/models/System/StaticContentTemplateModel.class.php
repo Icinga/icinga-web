@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Tactical overview XML template parser
+ * @author mhein
+ *
+ */
 class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
 	const CACHE_DEFAULT				= 'data';
@@ -574,5 +579,3 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 class Cronks_System_StaticContentTemplateException extends AppKitException {
 
 }
-
-?>

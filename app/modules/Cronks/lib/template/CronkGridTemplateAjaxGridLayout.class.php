@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateAjaxGridLayout extends IcingaTemplateLayout {
+class CronkGridTemplateAjaxGridLayout extends CronkGridTemplateLayout {
     const LAYOUT_ACTION = 'System.ViewProc.AjaxGridLayout';
     const LAYOUT_MODULE = 'Cronks';
 

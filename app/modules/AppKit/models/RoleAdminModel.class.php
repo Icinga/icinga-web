@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Working with roles
+ * @author mhein
+ *
+ */
 class AppKit_RoleAdminModel extends AppKitBaseModel {
 
     private static $editableAttributes = array(
@@ -182,5 +187,3 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
         }
     }
 }
-
-?>

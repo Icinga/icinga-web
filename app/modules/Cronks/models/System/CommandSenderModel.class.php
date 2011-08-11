@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Sending commands to icinga from json sources
+ * @author mhein
+ *
+ */
 class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
     const TIME_KEY				= 'V2Pxq9J2GVt1dk6OO0x3'; // Please change this if you need more security!
@@ -85,5 +90,3 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
 
 }
-
-?>

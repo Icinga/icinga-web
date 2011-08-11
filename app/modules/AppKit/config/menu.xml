@@ -41,7 +41,7 @@
                     <icon>icinga-icon-user</icon>
                     <caption>Users</caption>
                     <route target="new">
-                        appkit.admin.users
+                        modules.appkit.admin.users
                     </route>
                 </item>
                 <item id="menu_admin_groups">
@@ -49,21 +49,21 @@
                     <icon>icinga-icon-group</icon>
                     <caption>Groups</caption>
                     <route target="new">
-                        appkit.admin.groups
+                        modules.appkit.admin.groups
                     </route>
                 </item>
                 <item id="menu_admin_logs">
                     <icon>icinga-icon-note</icon>
                     <caption>Logs</caption>
                     <route target="new">
-                        appkit.admin.logs
+                        modules.appkit.admin.logs
                     </route>
                 </item>
                 <item id="menu_admin_tasks">
                     <icon>icinga-icon-application-task</icon>
                     <caption>Tasks</caption>
                     <route target="window" title="Admin tasks" disableContent="true" id="admin_tasks_window">
-                        appkit.admin.tasks
+                        modules.appkit.admin.tasks
                     </route>
                 </item>
             </items>

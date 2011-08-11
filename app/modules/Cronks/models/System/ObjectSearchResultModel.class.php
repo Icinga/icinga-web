@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Datamodel for combined searches
+ * @author mhein
+ *
+ */
 class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 
     /**
@@ -222,5 +227,3 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
     }
 
 }
-
-?>

@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateDisplayMonitoring extends IcingaTemplateDisplay {
+class CronkGridTemplateDisplayMonitoring extends CronkGridTemplateDisplay {
 
     public static function getInstance() {
         return parent::getInstance(__CLASS__);

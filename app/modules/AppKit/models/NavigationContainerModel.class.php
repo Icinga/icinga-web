@@ -1,17 +1,22 @@
 <?php
 
+/**
+ * Checking menu entries for specific conditions (e.g. credentials)
+ * @author jmosshammer
+ *
+ */
 class AppKit_NavigationContainerModel extends AppKitBaseModel {
-    /**
-     * @var AgaviTranslationManager
-     */
-    private $tm = null;
-
     /**
      * @var AgaviWebRouting
      */
     private $ro = null;
     private $config = null;
     private $user;
+    
+    /**
+     * (non-PHPdoc)
+     * @see AppKitBaseModel::initialize()
+     */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);       
         $this->user = $context->getUser();
@@ -68,5 +73,3 @@ class AppKit_NavigationContainerModel extends AppKitBaseModel {
 
 
 }
-
-?>

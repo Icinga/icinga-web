@@ -1,6 +1,11 @@
 <?php
 
 
+/**
+ * Model for working with user
+ * @author mhein
+ *
+ */
 class AppKit_UserAdminModel extends AppKitBaseModel {
 
     private static $editableAttributes = array(
@@ -221,5 +226,3 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
         }
     }
 }
-
-?>

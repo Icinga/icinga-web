@@ -17,7 +17,7 @@
     -->
     <option>
         <parameter name="mode">default</parameter>
-        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
         
@@ -517,7 +517,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
@@ -543,7 +543,7 @@
 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
@@ -569,7 +569,7 @@
                 <parameter name="label">Attempt (Host)</parameter>
                 
 				<parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[${field.check_attempt_host} / ${field.max_attempt_host}]]></parameter>
@@ -611,7 +611,7 @@
 					</parameter>
 				</parameter>
 				<parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[${field.check_attempt_service} / ${field.max_attempt_service}]]></parameter>

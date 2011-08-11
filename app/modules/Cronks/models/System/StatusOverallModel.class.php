@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Status provider for the StatusSummaryCronk
+ * @author mhein
+ *
+ */
 class Cronks_System_StatusOverallModel extends CronksBaseModel {
 
     const TYPE_HOST		= 'host';
@@ -124,5 +129,3 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
     }
 
 }
-
-?>

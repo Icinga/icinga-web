@@ -10,7 +10,7 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
     public function executeJson(AgaviRequestDataHolder $rd) {
         try {
             $file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.grid'), $rd->getParameter('template'), '.xml');
-            $template = new IcingaTemplateXmlParser($file);
+            $template = new CronkGridTemplateXmlParser($file);
             $template->parseTemplate();
 
             return json_encode(array(

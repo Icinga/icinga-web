@@ -1,5 +1,6 @@
 <?php
 /**
+ * Data provider for the status map
  * @author Christian Doebler <christian.doebler@netways.de>
  */
 class Cronks_System_StatusMapModel extends CronksBaseModel {
@@ -188,5 +189,3 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
     }
 
 }
-
-?>

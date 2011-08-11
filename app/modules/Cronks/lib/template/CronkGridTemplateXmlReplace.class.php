@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateXmlReplace {
+class CronkGridTemplateXmlReplace {
 
     /**
      * @var AppKitFormatParserUtil

@@ -1,17 +1,46 @@
 <?php
 
+/**
+ * Handling all image icons for use in Ext providers
+ * @author mhein
+ *
+ */
 class AppKit_IconFilesModel extends AppKitBaseModel implements Countable {
 
+    /**
+     * Filesystem path
+     * @var string
+     */
     private $real_path = null;
 
+    /**
+     * Relative web path
+     * @var string
+     */
     private $web_path = null;
 
+    /**
+     * Glob output list
+     * @var array
+     */
     private $files = array();
 
+    /**
+     * Sub part from the icon directory
+     * @var string
+     */
     private $part = null;
 
+    /**
+     * Number of globbed files
+     * @var integer
+     */
     private $count = 0;
 
+    /**
+     * (non-PHPdoc)
+     * @see AppKitBaseModel::initialize()
+     */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
         $this->real_path = AgaviConfig::get('org.icinga.appkit.image_absolute_path');
@@ -26,12 +55,21 @@ class AppKit_IconFilesModel extends AppKitBaseModel implements Countable {
         }
     }
 
+    /**
+     * Add the sub directory part after images/ e.g. cronks
+     * @param unknown_type $path
+     */
     public function setDirectoryPart($path) {
         $this->real_path .= DIRECTORY_SEPARATOR. $path;
         $this->web_path .= DIRECTORY_SEPARATOR. $path;
         $this->part = $path;
     }
 
+    /**
+     * Collect the files together
+     * @param string $query
+     * @return boolean always true
+     */
     public function globFiles($query) {
         $s = '.'. $this->getParameter('extension', 'png');
 
@@ -59,13 +97,19 @@ class AppKit_IconFilesModel extends AppKitBaseModel implements Countable {
         return true;
     }
 
+    /**
+     * Return number of globbed files
+     * @return number
+     */
     public function Count() {
         return $this->count;
     }
 
+    /**
+     * Return the files
+     * @return array
+     */
     public function Files() {
         return $this->files;
     }
 }
-
-?>

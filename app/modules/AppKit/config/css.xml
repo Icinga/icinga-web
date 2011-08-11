@@ -4,7 +4,6 @@
     <ae:configuration>
 
         <css_import>
-        
             <ae:parameter>/js/ext3/resources/css/ext-all-notheme.css</ae:parameter>
             <ae:parameter>/js/ext3/resources/css/xtheme-gray.css</ae:parameter>
             <ae:parameter>/js/ext3/examples/ux/css/ux-all.css</ae:parameter>

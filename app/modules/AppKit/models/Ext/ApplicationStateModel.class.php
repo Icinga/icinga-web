@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Interface to read and write application states
+ * @author mhein
+ *
+ */
 class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviISingletonModel {
 
     const PREFNS = 'org.icinga.ext.appstate';
@@ -46,5 +51,3 @@ class AppKit_Ext_ApplicationStateModel extends AppKitBaseModel implements AgaviI
         }
     }
 }
-
-?>
