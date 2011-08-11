@@ -79,8 +79,8 @@ none:
 	@printf "\t%-22s - %s\n" "loc-compile" "Compile language files into mo and json"
 
 	@printf "\nScheduler targets:\n"
-	@printf "\t%-22s - %s\n" "scheduler-install" "Install the icingaScheduler cronkjob"
-	@printf "\t%-22s - %s\n" "scheduler-remove" "remove the icingaScheduler cronkjob"
+	@printf "\t%-22s - %s\n" "scheduler-install" "Install the icingaScheduler cronjob"
+	@printf "\t%-22s - %s\n" "scheduler-remove" "remove the icingaScheduler cronjob"
 	
 	@printf "\nDevelopment targets:\n"
 	@printf "\t%-22s - %s\n" "devel-inplace-config" "Prepare src tree for running inplace"
