@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
   <ae:configuration>
-	 <available_locales default_locale="en" default_timezone="GMT">
+	 <available_locales default_locale="en" >
 		<!-- German, Germany -->
 		<available_locale identifier="de_DE">
 		  <ae:parameter name="description">Deutsch</ae:parameter>
