@@ -195,8 +195,10 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     public function setFields($fields, $useColumnAlias = false) {
         if(!is_array($fields))
             $fields = array($fields);
-        
+       
         foreach($fields as $field) { 
+            if(!$field)
+                continue;
             $aliasField = "";
             if($useColumnAlias && isset($this->columns[$field])) {
                 $aliasField = $field; 
@@ -206,6 +208,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
             $match = array();
             preg_match($regExp,$field,$match);
+            
             if(!isset($match["alias"])) {
                 if($field[0] != '(')
                     $field = $this->mainAlias.".".$field;  
