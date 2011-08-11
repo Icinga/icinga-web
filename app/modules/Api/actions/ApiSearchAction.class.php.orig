@@ -196,10 +196,20 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             $search->setResultColumns($rd->getParameter("countColumn"));
             return true;
         }
-        
+
         $columns = $rd->getParameter("columns",null);
         if(!is_array($columns))
             $columns = array($columns);
+<<<<<<< HEAD
+        foreach($columns as &$column) {
+            $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
+            $column = strtoupper($column);
+        }
+
+        if (!is_null($columns)) {
+            $search->setResultColumns($columns);
+        } else {
+=======
         $columns_result = array();
         foreach($columns as $column) {
             $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
@@ -212,6 +222,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             
             $search->setResultColumns($columns_result);
         } else {            
+>>>>>>> 8d51b9907cad0004284a32f6a8db6fec9afc5efe
             $search->setResultColumns(self::$defaultColumns[$rd->getParameter("target")]);
         }
     }
