@@ -5,7 +5,7 @@ class LegacyApiFactory {
 
 /**
  * Api wrapping agavi model
- * 
+ *
  * Provides access to preconfigured IcingaApi
  * @deprecated
  * @author mhein
@@ -25,11 +25,11 @@ class Api_LegacyApiContainerModel extends IcingaWebBaseModel
         $this->apiData = $this->getContext()->getModel("Store.LegacyLayer.IcingaApi","Api",array("connection"=>"icinga"));
     }
 
-     /**
-     * Returns the initiated ApiConnecton
-     * @return IcingaApiConnection
-     * @author mhein
-     */
+    /**
+    * Returns the initiated ApiConnecton
+    * @return IcingaApiConnection
+    * @author mhein
+    */
     public function getConnection() {
         return $this;
     }
@@ -51,9 +51,9 @@ class Api_LegacyApiContainerModel extends IcingaWebBaseModel
      * @author mhein
      */
     public function createSearch() {
-        
+
         return $this->getContext()->getModel("Store.LegacyLayer.IcingaApi","Api",array("connection"=>"icinga"));
-;
+        ;
         throw new IcingaApiException("Could not create search (method not found)");
     }
 

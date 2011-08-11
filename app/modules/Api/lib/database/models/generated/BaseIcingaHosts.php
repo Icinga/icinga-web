@@ -658,15 +658,15 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
     public function setUp() {
         parent::setUp();
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'host_object_id',
-            'foreign' => 'object_id'
-        ));
+                          'local' => 'host_object_id',
+                          'foreign' => 'object_id'
+                      ));
         $this->hasMany("IcingaHosts as parents", array(
-            'local' => 'host_id',
-            'foreign' => 'parent_host_object_id',
-            'refClass' => 'IcingaHostParenthosts',
-            'idField' => 'host_id'
-        ));
+                           'local' => 'host_id',
+                           'foreign' => 'parent_host_object_id',
+                           'refClass' => 'IcingaHostParenthosts',
+                           'idField' => 'host_id'
+                       ));
         $this->hasMany("IcingaServices as services",array(
                            'local' => 'host_object_id',
                            'foreign' => 'host_object_id'
@@ -701,18 +701,18 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
                        ));
 
         $this->hasMany("IcingaContacts as contacts", array(
-                       'local'      => 'host_id',
-                       'foreign'    => 'contact_object_id',
-                       'refClass'   => 'IcingaHostContacts',
-                       'idField' => 'host_id'
-                    ));
+                           'local'      => 'host_id',
+                           'foreign'    => 'contact_object_id',
+                           'refClass'   => 'IcingaHostContacts',
+                           'idField' => 'host_id'
+                       ));
         $this->hasMany("IcingaContactgroups as contactgroups", array(
-                       'local'      => 'host_id',
-                       'foreign'    => 'contactgroup_object_id',
-                       'refClass' => 'IcingaHostContactgroups',
-                       'idField' => 'host_id'
-                   ));
-        
+                           'local'      => 'host_id',
+                           'foreign'    => 'contactgroup_object_id',
+                           'refClass' => 'IcingaHostContactgroups',
+                           'idField' => 'host_id'
+                       ));
+
         $this->hasMany("IcingaStatehistory as stateHistory", array(
                            'local' => 'host_object_id',
                            'foreign' => 'object_id'
@@ -765,8 +765,8 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
                           'foreign' => 'timeperiod_object_id',
                       ));
         $this->hasMany("IcingaCustomvariablestatus as customvariablestatus", array(
-            'local' => 'host_object_id',
-            'foreign' => 'object_id'
-        ));
+                           'local' => 'host_object_id',
+                           'foreign' => 'object_id'
+                       ));
     }
 }

@@ -56,7 +56,7 @@ class AppKitSQLConstants {
     public static function getIcingaMatch($op) {
         return self::getArrayContent(self::$ICINGA_OPERATORS, $op);
     }
-    
+
     public static function getInternalDB() {
         return AgaviContext::getInstance()->getDatabaseConnection('icinga_web');
     }

@@ -5,7 +5,7 @@
  * @author Jannis Mosshammer <jannis.mosshammer@netways.de>
  */
 interface IcingaApiSearchFilterInterface {
-	public function getAllFilterColumns();
-	public function createQueryStatement();
+    public function getAllFilterColumns();
+    public function createQueryStatement();
 }
 ?>

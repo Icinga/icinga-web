@@ -7,14 +7,14 @@ class AppKit_Login_AjaxLoginSuccessView extends AppKitBaseView {
         if ($this->getContext()->getUser()->isAuthenticated() !== true) {
             $this->getResponse()->setHttpStatusCode('403');
         }
-        
+
         $this->setAttribute('message', false);
         $message = AgaviConfig::get('modules.appkit.auth.message', false);
-        
+
         if ($rd->has('cookies', 'icinga-web-loginname') && AgaviConfig::get('modules.appkit.auth.behaviour.store_loginname', false)===true) {
             $this->setAttribute('username', $rd->get('cookies', 'icinga-web-loginname'));
         }
-        
+
         if ($message !== false && is_array($message)) {
             if (isset($message['show']) && $message['show']==true) {
 

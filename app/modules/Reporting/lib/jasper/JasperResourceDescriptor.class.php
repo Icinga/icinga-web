@@ -1,37 +1,37 @@
 <?php
 
 class JasperResourceDescriptor extends DOMDocument implements JasperI {
-    
+
     /**
      * @var AgaviParameterHolder
      */
     private $__descriptorAttributes = null;
-    
+
     /**
      * @var AgaviParameterHolder
      */
     private $__resourceProperties = null;
-    
+
     /**
      * @var AgaviParameterHolder
      */
     private $__resourceParameters = null;
-    
+
     private $__label = null;
-    
+
     private $__crdate = null;
-    
+
     /**
      * The root node of the document
      * @var DOMElement
      */
     private $__rootNode = null;
-    
+
     public function __construct() {
         parent::__construct(self::XML_VERSION, self::XML_ENCODING);
         $this->resetDocument();
     }
-    
+
     /**
      * Loads the object from string
      * @param string $xml_string
@@ -41,7 +41,7 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
         $doc->loadXML($xml_string);
         return $this->loadFromDom($doc);
     }
-    
+
     /**
      * Loads the object from foreign DOM
      * @param DOMNode $node
@@ -51,28 +51,28 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
         $this->resetDocument($new_root);
         $this->syncDataStructures();
     }
-    
+
     /**
      * Syncs the data structures from XML structure
      */
     public function syncDataStructures() {
-        foreach ($this->__rootNode->attributes as $attribute) {
+        foreach($this->__rootNode->attributes as $attribute) {
             $this->__descriptorAttributes->setParameter($attribute->name, $attribute->value);
         }
-        
+
         if (is_array(($tmp = $this->queryToArray('//resourceDescriptor/resourceProperty', 'name')))) {
             $this->__resourceProperties->setParameters($tmp);
         }
-        
+
         if ($this->getElementsByTagName('label')->length) {
             $this->__label = trim($this->getElementsByTagName('label')->item(0)->nodeValue);
         }
-        
+
         if ($this->getElementsByTagName('creationDate')->length) {
             $this->__crdate = trim($this->getElementsByTagName('creationDate')->item(0)->nodeValue);
         }
     }
-    
+
     /**
      * Converts a XQuery to array structure
      * @param string $query
@@ -82,16 +82,17 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
     public function queryToArray($query, $key_attribute) {
         $xpath = new DOMXPath($this);
         $list = $xpath->query($query);
+
         if ($list && $list instanceof DOMNodeList) {
-            $out = array ();
-            foreach ($list as $node) {
+            $out = array();
+            foreach($list as $node) {
                 $key = $node->getAttribute($key_attribute);
                 $out[$key] = trim($node->nodeValue);
             }
             return $out;
         }
     }
-    
+
     /**
      * Reset the object into initial state
      * @param DOMNode $new_root
@@ -100,21 +101,20 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
         $this->__descriptorAttributes = new AgaviParameterHolder();
         $this->__resourceProperties = new AgaviParameterHolder();
         $this->__resourceParameters = new AgaviParameterHolder();
-        
+
         if ($this->__rootNode) {
             $this->removeChild($this->__rootNode);
         }
-        
+
         if ($new_root === null) {
-            $this->__rootNode = $this->createElement('resourceDescriptor'); 
-        }
-        else if ($new_root instanceof DOMNode) {
+            $this->__rootNode = $this->createElement('resourceDescriptor');
+        } else if ($new_root instanceof DOMNode) {
             $this->__rootNode = $new_root;
         }
-        
+
         $this->appendChild($this->__rootNode);
     }
-    
+
     /**
      * Returns the descriptor attributes
      * @return AgaviParameterHolder
@@ -122,7 +122,7 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
     public function getResourceDescriptor() {
         return $this->__descriptorAttributes;
     }
-    
+
     /**
      * Get the timstamp from response when its created
      * @return DateTime
@@ -131,7 +131,7 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
         // Java provides ms
         return strftime('%Y-%m-%d %H:%M:%S', $this->__crdate/1000);
     }
-    
+
     /**
      * Returns the resource label from the descriptor
      * @return string
@@ -139,7 +139,7 @@ class JasperResourceDescriptor extends DOMDocument implements JasperI {
     public function getLabel() {
         return $this->__label;
     }
-    
+
     /**
      * Returns the properties object
      * @return AgaviParameterHolder

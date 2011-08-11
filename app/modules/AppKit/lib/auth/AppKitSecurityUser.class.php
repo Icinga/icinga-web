@@ -7,20 +7,20 @@
  *
  */
 class AppKitSecurityUser extends AgaviRbacSecurityUser {
-    
+
     /**
      * Value to use database role system
      * @var string
      */
     const ROLES_SOURCE_DB = 'DB';
-    
+
     /**
-     * 
+     *
      * Value to use XML based roles
      * @var string
      */
     const ROLES_SOURCE_XML = 'XML';
-    
+
     /**
      * Static value for object paraneter holds our NsmUser object
      * @var string
@@ -39,7 +39,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @var string
      */
     private static $role_source = self::ROLES_SOURCE_DB;
-    
+
     /**
      * (non-PHPdoc)
      * @see AgaviRbacSecurityUser::getRoles()
@@ -53,7 +53,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
         return $this->role_names;
     }
-    
+
     /**
      * Shortcut method to authenticate user with auth key
      * @param string $key
@@ -61,7 +61,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     public function doAuthKeyLogin($key) {
         $this->doLogin($key,$key);
     }
-    
+
     /**
      * Login method, uses the AppKitAuthProvider to determine if this is correct
      * @param string $username
@@ -173,14 +173,14 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
             }
 
         }
-        
+
         foreach($user->getTargets("credential") as $credential) {
             $this->addCredential($credential->get("target_name"));
 
         }
 
     }
-    
+
     /**
      * Adding credentials from role
      * @param NsmRole $role

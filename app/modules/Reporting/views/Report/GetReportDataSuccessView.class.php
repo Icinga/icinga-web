@@ -10,14 +10,14 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
     private function prepareReportingData(AgaviRequestDataHolder $rd) {
         $struct = $this->__userFile->getUserFileStruct();
         $fp = $this->__userFile->getFilePointer();
-        
+
         if ($rd->getParameter('inline', null) !== 1) {
             $this->getResponse()->setHttpHeader(
                 'Content-Disposition',
                 sprintf('attachment; filename=%s', $struct['pushname'])
             );
         }
-        
+
         $this->getResponse()->setContent($fp);
     }
 
@@ -30,12 +30,11 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
         try {
             $struct = $this->__userFile->getUserFileStruct();
             return $this->createForwardContainer('Reporting', 'Report.GetReportData', null, $struct['format']);
-        }
-        catch (AppKitModelException $e) {
-            return json_encode(array (
-	             'success' => false,
-	             'errors' => array('exception' => $e->getMessage())
-            ));
+        } catch (AppKitModelException $e) {
+            return json_encode(array(
+                                   'success' => false,
+                                   'errors' => array('exception' => $e->getMessage())
+                               ));
         }
     }
 
@@ -46,19 +45,19 @@ class Reporting_Report_GetReportDataSuccessView extends ReportingBaseView {
     public function executeCsv(AgaviRequestDataHolder $rd) {
         $this->prepareReportingData($rd);
     }
-    
+
     public function executeHtml(AgaviRequestDataHolder $rd) {
         $this->prepareReportingData($rd);
     }
-    
+
     public function executeXls(AgaviRequestDataHolder $rd) {
         $this->prepareReportingData($rd);
     }
-    
+
     public function executeRtf(AgaviRequestDataHolder $rd) {
         $this->prepareReportingData($rd);
     }
-    
+
     public function executeXml(AgaviRequestDataHolder $rd) {
         $this->prepareReportingData($rd);
     }

@@ -39,7 +39,7 @@ class CronkGridTemplateDisplayMonitoring extends CronkGridTemplateDisplay {
                    ->setSearchFilter('COMMENT_OBJECT_ID', $object_id, IcingaApiConstants::MATCH_EXACT)
                    ->setSearchFilter('COMMENT_INSTANCE_ID', $instance_id, IcingaApiConstants::MATCH_EXACT)
                    ->setResultColumns(array('COMMENT_ID'))
-                   
+
                    ->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT)
                    ->fetch();
 

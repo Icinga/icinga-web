@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Working with principals and user credentials 
+ * Working with principals and user credentials
  * bound to users or groups
  * @author mhein
  *

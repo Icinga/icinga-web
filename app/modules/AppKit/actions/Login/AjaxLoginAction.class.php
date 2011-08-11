@@ -46,9 +46,9 @@ class AppKit_Login_AjaxLoginAction extends AppKitBaseAction {
         return $this->getDefaultViewName();
     }
 
-     public function handleError(AgaviRequestDataHolder $rd) {
-         return $this->getDefaultViewName();
-     }
+    public function handleError(AgaviRequestDataHolder $rd) {
+        return $this->getDefaultViewName();
+    }
 }
 
 ?>

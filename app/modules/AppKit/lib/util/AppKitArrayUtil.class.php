@@ -116,7 +116,7 @@ class AppKitArrayUtil {
     }
 
     /**
-     * Converts a XML fragment to an array based on 
+     * Converts a XML fragment to an array based on
      * id attributes like name or id itself
      * @param DOMNodeList $l
      * @param array $a

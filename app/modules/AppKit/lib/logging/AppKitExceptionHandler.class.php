@@ -23,7 +23,7 @@ class AppKitExceptionHandler {
         self::$oldErrorHandler = set_error_handler(self::$handlerError);
         ini_set('display_errors', false);
     }
-    
+
     /**
      * Converts php simple error into an exception
      * @param integer $errno
@@ -39,7 +39,7 @@ class AppKitExceptionHandler {
 
     public static function logException(Exception $e) {
         AppKitAgaviUtil::log('Uncaught %s: %s (%s:%d)', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), self::LOG_LEVEL);
-        
+
         // don't die in case of supressed errors (like the ob_clean in the agaviException has)
 
         if (error_reporting()) {

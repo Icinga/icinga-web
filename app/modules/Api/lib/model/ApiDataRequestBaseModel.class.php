@@ -16,7 +16,7 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
      * @return Doctrine_Connection or null
      */
     protected function getDatabaseConnection($connName = NULL) {
-        
+
         if (!$connName) {
             $connName = $this->database;
         }
@@ -35,12 +35,12 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
         if (!$connName) {
             $connName = $this->database;
         }
-       
+
         $DBALMetaManager = $this->getContext()->getModel("DBALMetaManager","Api");
-       
+
         $DBALMetaManager->switchIcingaDatabase($connName);
-        
-    
+
+
         return IcingaDoctrine_Query::create();
     }
 

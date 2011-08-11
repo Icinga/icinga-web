@@ -5,7 +5,7 @@ class Api_ApiDataStoreProviderErrorView extends IcingaApiBaseView {
         $errors = $this->getContainer()->getValidationManager()->getErrorMessages();
         print_r($errors);
         return json_encode(array(
-            "success" => "false",
-            "errors" => $errors));
+                               "success" => "false",
+                               "errors" => $errors));
     }
 }

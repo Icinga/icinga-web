@@ -17,27 +17,29 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
     }
 
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
-        if(isset($parameters["console"]) && $parameters["console"] instanceof IcingaConsoleInterface)
+        if (isset($parameters["console"]) && $parameters["console"] instanceof IcingaConsoleInterface) {
             $this->setConsoleContext($parameters["console"]);
-     
+        }
+
         parent::initialize($ctx,$parameters);
-        $this->loadConfig(); 
+        $this->loadConfig();
     }
 
     public function submitCommand($cmd_name,array $params,
-                    $commandClass = array("Console.ConsoleCommand","Api")) {
-        $command = $this->getCommand($cmd_name);    
+                                  $commandClass = array("Console.ConsoleCommand","Api")) {
+        $command = $this->getCommand($cmd_name);
         $string = $this->buildCommandString($command,$params);
         $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
-            array(
-                "command" => "printf", 
-                "connection" => $this->consoleContext,
-                "arguments" => array($string)   
-            )
-        );
+                                             array(
+                                                     "command" => "printf",
+                                                     "connection" => $this->consoleContext,
+                                                     "arguments" => array($string)
+                                             )
+                                            );
         $cmd->stdoutFile("icinga_pipe");
+
         try {
-            $this->consoleContext->exec($cmd); 
+            $this->consoleContext->exec($cmd);
         } catch (Exception $e) {
             print_r($e);
         }
@@ -46,37 +48,41 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
     private function buildCommandString(array $command, array $params) {
         $str = "[".time()."] ".$command["definition"];
         foreach($command["parameters"] as $param=>$vals) {
-            if(!isset($params[$vals["alias"]]) && $vals["required"])
+            if (!isset($params[$vals["alias"]]) && $vals["required"]) {
                 throw new MissingCommandParameterException($vals["alias"]." is missing");
-            else if(!isset($params[$vals["alias"]]))
+            } else if (!isset($params[$vals["alias"]])) {
                 $str .= ";";
-            else { 
+            } else {
                 $val = $params[$vals["alias"]];
-                switch($vals["type"]) {
+
+                switch ($vals["type"]) {
                     case "date":
                         $val = strtotime($val);
                         break;
-                   
+
                 }
+
                 $str .= ";".$val;
             }
         }
         return $str;
     }
-    
+
     public function getCommands() {
         return $this->config;
     }
 
     public function getCommand($name) {
-        
-        if(isset($this->config[$name]))
+
+        if (isset($this->config[$name])) {
             return $this->config[$name];
-        else throw new UnknownIcingaCommandException("Command $name is undefined");
+        } else {
+            throw new UnknownIcingaCommandException("Command $name is undefined");
+        }
     }
 
-    protected function loadConfig() { 
-       $this->config = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/icingaCommands.xml'));
+    protected function loadConfig() {
+        $this->config = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/icingaCommands.xml'));
     }
 
-} 
+}

@@ -8,7 +8,7 @@
  *
  */
 class AppKitGettextTranslator extends AgaviGettextTranslator {
-    
+
     /**
      * Provide this information public to read the json compiled
      * client files

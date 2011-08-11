@@ -1,7 +1,7 @@
 <?php
 /**
  * Api wrapping agavi model
- * 
+ *
  * Provides access to preconfigured IcingaApi
  * @deprecated
  * @author mhein

@@ -13,7 +13,7 @@ abstract class AppKitArrayContainer
      * @var array
      */
     private $arrayContainer = null;
-    
+
     /**
      * Connect any array to the container methods
      * @param array $array

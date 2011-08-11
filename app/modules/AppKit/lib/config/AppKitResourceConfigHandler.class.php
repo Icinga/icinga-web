@@ -38,21 +38,21 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
             $_resources = array();
 
             foreach($rcfg->getAgaviParameters() as $r) {
-                if(is_dir($r)) {
+                if (is_dir($r)) {
                     $_resources = array_merge(
-                        $_resources,
-                        array_keys(iterator_to_array(
-                            AppKitIteratorUtil::RegexRecursiveDirectoryIterator(
-                                $r,
-                                sprintf('/\%s/i', $sfx)
-                            )
-                        ))
-                    );
+                                      $_resources,
+                                      array_keys(iterator_to_array(
+                                                     AppKitIteratorUtil::RegexRecursiveDirectoryIterator(
+                                                         $r,
+                                                         sprintf('/\%s/i', $sfx)
+                                                     )
+                                                 ))
+                                  );
                 } else {
                     $_resources[] = $r;
                 }
             }
-            
+
             $resources = array_merge($resources, $_resources);
         }
 
@@ -65,34 +65,34 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
      */
     public function execute(AgaviXmlConfigDomDocument $doc) {
         $resources = array_combine(
-            array_keys($this->_resources),
-            array_fill(0, count($this->_resources), array())
-        );
-        
-        $jactions = array ();
-        
+                         array_keys($this->_resources),
+                         array_fill(0, count($this->_resources), array())
+                     );
+
+        $jactions = array();
+
         foreach($doc->getConfigurationElements() as $cfg) {
-            
+
             // Collecting resources
             foreach($this->_resources as $resource => $sfx) {
                 $resources[$resource] = array_merge(
-                    $resources[$resource],
-                    $this->collectResource($resource, $sfx, $cfg)
-                );
+                                            $resources[$resource],
+                                            $this->collectResource($resource, $sfx, $cfg)
+                                        );
             }
             // Collecting javascript actions
-            foreach ($cfg->getChildren('jactions', null, true) as $jaction) {
+            foreach($cfg->getChildren('jactions', null, true) as $jaction) {
                 $jactions[] = $jaction->getAgaviParameters();
             }
-            
+
         }
-        
+
         return $this->generate(sprintf(
-            '$this->resources = array_merge_recursive($this->resources, %s);%s$this->jactions=array_merge_recursive($this->jactions, %s);',
-            var_export($resources, true),
-            chr(10),
-            var_export($jactions, true)
-        ), $doc->documentURI);
+                                   '$this->resources = array_merge_recursive($this->resources, %s);%s$this->jactions=array_merge_recursive($this->jactions, %s);',
+                                   var_export($resources, true),
+                                   chr(10),
+                                   var_export($jactions, true)
+                               ), $doc->documentURI);
     }
 
 }

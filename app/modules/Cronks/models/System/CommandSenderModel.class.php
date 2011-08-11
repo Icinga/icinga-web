@@ -34,26 +34,26 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
     }
 
     public function getConsoleInstance($instance) {
-        if(!isset($this->instances[$instance]))
+        if (!isset($this->instances[$instance]))
             $this->instances[$instance] = $this->getContext()->getModel("Console.ConsoleInterface","Api",
-                array(
-                    "icingaInstance"=>$instance
-                ))
-            ;
+                                          array(
+                                              "icingaInstance"=>$instance
+                                          ))
+                                          ;
 
         return $this->instances[$instance];
-        
+
     }
 
     public function dispatchCommands() {
         $dispatcher = $this->getContext()->getModel("Commands.CommandDispatcher","Api");
         foreach($this->selection as $target) {
             $console = $this->getConsoleInstance($target['instance']);
-            $dispatcher->setConsoleContext($console);        
+            $dispatcher->setConsoleContext($console);
             $dispatcher->submitCommand($this->command,array_merge($target,$this->data));
         }
-     
-    }    
+
+    }
 
     /**
      * Generate a time key

@@ -33,7 +33,7 @@ class AppKitAgaviUtil {
     }
 
     /**
-     * Variable log method, provide sprintf format, 
+     * Variable log method, provide sprintf format,
      * arguments and Agavi log level at once
      * @param mixed $arg1
      * @oaram mixed $argN LogLevel or sprintf format
@@ -57,7 +57,7 @@ class AppKitAgaviUtil {
     }
 
     /**
-     * 
+     *
      * Replace custom strings with agavi configuration items
      * @param string $text
      * @todo Move into better class space

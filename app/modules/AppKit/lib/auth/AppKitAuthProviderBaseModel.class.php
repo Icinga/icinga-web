@@ -6,7 +6,7 @@
  *
  */
 abstract class AppKitAuthProviderBaseModel extends IcingaBaseModel {
-    
+
     /**
      * Default parameters for the new provider
      * @var unknown_type
@@ -63,7 +63,7 @@ abstract class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function resumeAuthentification() {
         return $this->testBoolean(AppKitIAuthProvider::AUTH_RESUME);
     }
-    
+
     /**
      * If we can update existig user profiles
      * @return boolean
@@ -112,7 +112,7 @@ abstract class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function getProviderName() {
         return $this->getParameter('name');
     }
-    
+
     /**
      * Default groups used by this provider
      * @return array List of groups

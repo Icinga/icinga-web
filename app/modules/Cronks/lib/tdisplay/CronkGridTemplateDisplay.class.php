@@ -3,7 +3,7 @@
 class CronkGridTemplateDisplay {
 
     private static $instance = null;
-    
+
     /**
      * @var AgaviContext
      */
@@ -13,14 +13,14 @@ class CronkGridTemplateDisplay {
      * @var Web_Icinga_ApiContainerModel
      */
     protected static $api = null;
-    
-    
+
+
     public function __construct() {
-        
+
         if (self::$context === null) {
             self::$context = AgaviContext::getInstance();
         }
-        
+
         if (self::$api === null) {
             self::$api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
         }

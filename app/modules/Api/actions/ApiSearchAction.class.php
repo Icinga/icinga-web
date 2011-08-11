@@ -97,9 +97,9 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
         $res = $search->fetch()->getAll();
-    
-       
-     
+
+
+
         //Setup count
         if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);
@@ -193,12 +193,13 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             $search->setResultColumns($rd->getParameter("countColumn"));
             return true;
         }
-        
+
         $columns = $rd->getParameter("columns",null);
         foreach($columns as &$column) {
-           $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
-           $column = strtoupper($column);
-        } 
+            $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
+            $column = strtoupper($column);
+        }
+
         if (!is_null($columns)) {
             $search->setResultColumns($columns);
         } else {

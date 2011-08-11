@@ -43,7 +43,7 @@ class NsmUser extends BaseNsmUser {
                          )
                      ));
     }
-    
+
     public function setUp() {
 
         parent::setUp();

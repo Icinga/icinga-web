@@ -192,17 +192,17 @@ abstract class BaseIcingaScheduleddowntime extends Doctrine_Record {
                           'foreign' => 'instance_id'
                       ));
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'object_id',
-            'foreign' => 'object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'object_id'
+                      ));
         $this->hasOne("IcingaServices as service",array(
-            'local'     => 'object_id',
-            'foreign'   => 'service_object_id' 
-        ));
+                          'local'     => 'object_id',
+                          'foreign'   => 'service_object_id'
+                      ));
         $this->hasOne("IcingaHosts as host",array(
-            'local'     => 'object_id',
-            'foreign'   => 'host_object_id' 
-        ));
+                          'local'     => 'object_id',
+                          'foreign'   => 'host_object_id'
+                      ));
         parent::setUp();
 
     }

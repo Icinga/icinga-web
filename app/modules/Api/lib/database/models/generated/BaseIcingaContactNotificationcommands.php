@@ -98,9 +98,9 @@ abstract class BaseIcingaContactNotificationcommands extends Doctrine_Record {
                           'foreign' => 'command_id'
                       ));
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'command_object_id',
-            'foreign' => 'object_id'
-        ));
+                          'local' => 'command_object_id',
+                          'foreign' => 'object_id'
+                      ));
         parent::setUp();
 
     }

@@ -167,23 +167,23 @@ abstract class BaseIcingaStatehistory extends Doctrine_Record {
 
     public function setUp() {
         $this->hasOne('IcingaInstances as instance', array(
-            'local' => 'instance_id',
-            'foreign' => 'instance_id'
-        ));
+                          'local' => 'instance_id',
+                          'foreign' => 'instance_id'
+                      ));
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'object_id',
-            'foreign' => 'object_id'
-        ));
-        
+                          'local' => 'object_id',
+                          'foreign' => 'object_id'
+                      ));
+
         $this->hasMany("IcingaServices as services",array(
-            'local' => 'object_id',
-            'foreign' => 'service_object_id'
-        ));
+                           'local' => 'object_id',
+                           'foreign' => 'service_object_id'
+                       ));
 
         $this->hasMany("IcingaHosts as hosts",array(
-            'local' => 'object_id',
-            'foreign' => 'host_object_id'
-        ));
+                           'local' => 'object_id',
+                           'foreign' => 'host_object_id'
+                       ));
         parent::setUp();
 
     }

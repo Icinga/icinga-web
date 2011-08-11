@@ -47,13 +47,13 @@ class AppKitRoutingConfigHandler extends AgaviRoutingConfigHandler {
         $data = array();
 
         foreach($document->getConfigurationElements() as $cfg) {
-            if($cfg->has('routes')) {
+            if ($cfg->has('routes')) {
                 $this->parseRoutesExtended($routing, $cfg->get('routes'));
                 $this->parseApiProviders();
                 $this->parseRoutes($routing,$cfg->get('routes'),$parent = null);
             }
         }
-       
+
         return serialize($routing->exportRoutes());
     }
 
@@ -69,18 +69,22 @@ class AppKitRoutingConfigHandler extends AgaviRoutingConfigHandler {
     */
     protected function parseRoutesExtended($routing,$routes,$parent = null) {
         foreach($routes as $route) {
-            if($route->hasAttribute("api_provider")) {
+            if ($route->hasAttribute("api_provider")) {
                 $this->fetchApiProviderInformation($route);
             }
-            if($route->has('routes'))
+
+            if ($route->has('routes')) {
                 $this->parseRoutesExtended($routing,$route->get('routes'),$route);
+            }
         }
     }
 
     private function parseApiProviders() {
-        
-        if(empty($this->apiProviders))
+
+        if (empty($this->apiProviders)) {
             return;
+        }
+
         $extdirectParser = new AppKitApiProviderParser();
         $extdirectParser->execute($this->apiProviders);
     }
@@ -97,22 +101,26 @@ class AppKitRoutingConfigHandler extends AgaviRoutingConfigHandler {
     protected function fetchApiProviderInformation(DomElement $route) {
         $module = AppKitXmlUtil::getInheritedAttribute($route, "module");
         $action = AppKitXmlUtil::getInheritedAttribute($route, "action");
-       
-        if(!$action) {
+
+        if (!$action) {
             $r = print_r($route->getAttributes(),1);
             throw new ApiProviderMissingActionException("Missing action in route exported for ApiProvider route settings: ".$r);
         }
-        if(!$module) {
+
+        if (!$module) {
             $r = print_r($route->getAttributes(),1);
             throw new ApiProviderMissingModuleException("Missing module in route exported for ApiProvider route settings: ".$r);
         }
-        if($module != null && $action != null) {
+
+        if ($module != null && $action != null) {
             $toExport = array(
                             "module" => $module,
                             "action" => $action
                         );
-            if(!in_array($toExport,$this->apiProviders))
+
+            if (!in_array($toExport,$this->apiProviders)) {
                 array_push($this->apiProviders,$toExport);
+            }
         }
     }
 

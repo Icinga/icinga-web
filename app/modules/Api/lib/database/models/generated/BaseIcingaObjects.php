@@ -81,44 +81,44 @@ abstract class BaseIcingaObjects extends Doctrine_Record {
 
     public function setUp() {
         $this->hasOne('IcingaInstances as instance', array(
-            'local' => 'instance_id',
-            'foreign' => 'instance_id'
-        ));
+                          'local' => 'instance_id',
+                          'foreign' => 'instance_id'
+                      ));
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'object_id',
-            'foreign' => 'object_id'
-        ));
-        
+                          'local' => 'object_id',
+                          'foreign' => 'object_id'
+                      ));
+
         // Weak binding to derived objects
-        
+
         $this->hasOne('IcingaHosts as host', array(
-            'local' => 'object_id',
-            'foreign' => 'host_object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'host_object_id'
+                      ));
         $this->hasOne('IcingaServices as service', array(
-            'local' => 'object_id',
-            'foreign' => 'service_object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'service_object_id'
+                      ));
         $this->hasOne('IcingaServicegroups as servicegroup', array(
-            'local' => 'object_id',
-            'foreign' => 'servicegroup_object_id' 
-        )); 
+                          'local' => 'object_id',
+                          'foreign' => 'servicegroup_object_id'
+                      ));
         $this->hasOne('IcingaHostgroups as hostgroup', array(
-            'local' => 'object_id',
-            'foreign' => 'hostgroup_object_id' 
-        )); 
+                          'local' => 'object_id',
+                          'foreign' => 'hostgroup_object_id'
+                      ));
         $this->hasOne('IcingaContactgroups as contactgroup', array(
-            'local' => 'object_id',
-            'foreign' => 'contactgroup_object_id' 
-        )); 
+                          'local' => 'object_id',
+                          'foreign' => 'contactgroup_object_id'
+                      ));
         $this->hasOne('IcingaTimeperiods as timeperiod', array(
-            'local' => 'object_id',
-            'foreign' => 'timeperiod_object_id'
-        )); 
+                          'local' => 'object_id',
+                          'foreign' => 'timeperiod_object_id'
+                      ));
         $this->hasOne('IcingaNotifications as notification', array(
-            'local' => 'object_id',
-            'foreign' => 'notification_object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'notification_object_id'
+                      ));
         parent::setUp();
 
     }
