@@ -3,7 +3,7 @@ Ext.ns("AppKit.util");
 AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{ 
 	layout:         null, 
     menuData:       {},
-    preferenceURL:  null,
+    preferenceURL:  AppKit.util.Config.get('path') + '/modules/my/preferences',
     logoutURL:      null,
     username:       null,
     hasAuth:        false,
@@ -176,7 +176,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                     iconCls: 'icinga-icon-user-edit',
                     text: _('Preferences'),
                     handler: function() { 
-                        AppKit.util.doPreferences(this.peferenceURL);
+                        AppKit.util.doPreferences(this.preferenceURL);
                     },
                     scope: this
                 }, {

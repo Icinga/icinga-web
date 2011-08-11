@@ -1,6 +1,11 @@
 <?php
 
-abstract class AppKitPrincipalTarget extends AppKitBaseClass {
+/**
+ * Base class for writing principals
+ * @author mhein
+ *
+ */
+abstract class AppKitPrincipalTarget {
 
     protected $fields		= array();
     protected $type			= null;
@@ -29,5 +34,3 @@ abstract class AppKitPrincipalTarget extends AppKitBaseClass {
 }
 
 class AppKitPrincipalTargetException extends AppKitException {}
-
-?>

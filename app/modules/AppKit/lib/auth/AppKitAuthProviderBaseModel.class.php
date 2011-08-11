@@ -1,11 +1,23 @@
 <?php
 
-class AppKitAuthProviderBaseModel extends IcingaBaseModel {
-
+/**
+ * Base class for writing auth providers
+ * @author mhein
+ *
+ */
+abstract class AppKitAuthProviderBaseModel extends IcingaBaseModel {
+    
+    /**
+     * Default parameters for the new provider
+     * @var unknown_type
+     */
     protected $parameters_default = array(
                                         AppKitIAuthProvider::AUTH_MODE => AppKitIAuthProvider::MODE_DEFAULT
                                     );
-
+    /**
+     * (non-PHPdoc)
+     * @see AppKitBaseModel::initialize()
+     */
     public function  initialize(AgaviContext $context, array $parameters = array()) {
         $parameters = $parameters + $this->parameters_default;
 
@@ -16,6 +28,9 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
         $this->log('Auth.Provider: Object (name=%s) initialized', $this->getProviderName(), AgaviLogger::DEBUG);
     }
 
+    /**
+     * Method to overwrite explicit provider intialization
+     */
     protected function initializeProvider() {}
 
     /**
@@ -48,19 +63,38 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function resumeAuthentification() {
         return $this->testBoolean(AppKitIAuthProvider::AUTH_RESUME);
     }
-
+    
+    /**
+     * If we can update existig user profiles
+     * @return boolean
+     */
     public function canUpdateProfile() {
         return $this->testBoolean(AppKitIAuthProvider::AUTH_UPDATE);
     }
 
+    /**
+     * If we can create new user profiles
+     * @return boolean
+     */
     public function canCreateProfile() {
         return $this->testBoolean(AppKitIAuthProvider::AUTH_CREATE);
     }
 
+    /**
+     * Shortcut to test object parameters for real boolean parameters
+     * @param boolean $setting_name
+     * @return boolean
+     */
     public function testBoolean($setting_name) {
         return ($this->getParameter($setting_name, false) !== false) ? true : false;
     }
 
+    /**
+     * Test object parameters against binary conditions (flags)
+     * @param string $setting_name
+     * @param integer $flag
+     * @return boolean
+     */
     public function testBinary($setting_name, $flag) {
         $test = $this->getParameter($setting_name);
 
@@ -78,15 +112,24 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function getProviderName() {
         return $this->getParameter('name');
     }
-
+    
+    /**
+     * Default groups used by this provider
+     * @return array List of groups
+     */
     public function getDefaultGroups() {
         $string = $this->getParameter('auth_groups');
 
         if ($string) {
-            return explode(',', $string);
+            return AppKitArrayUtil::trimSplit($string);
         }
     }
 
+    /**
+     * Maps all provider user fields to our internal user record by
+     * xml configuration
+     * @param array $data List of fields matching for NsmUser
+     */
     protected function mapUserdata(array $data) {
         $re = array();
         foreach($this->getParameter('auth_map', array()) as $k=>$f) {
@@ -98,6 +141,10 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
         return $re;
     }
 
+    /**
+     * So providers can guess usernames
+     * @return string
+     */
     public function determineUsername() {
         return null;
     }
@@ -105,5 +152,3 @@ class AppKitAuthProviderBaseModel extends IcingaBaseModel {
 }
 
 class AppKitAuthProviderException extends AppKitException {}
-
-?>

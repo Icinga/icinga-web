@@ -69,5 +69,3 @@ class AppKitExtDataInterface {
         return $default;
     }
 }
-
-?>

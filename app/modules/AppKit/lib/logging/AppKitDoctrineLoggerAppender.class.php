@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * Write agavi logs into icinga doctrine database
+ * @author mhein
+ *
+ */
 class AppKitDoctrineLoggerAppender extends AgaviLoggerAppender {
 
+    /**
+     * (non-PHPdoc)
+     * @see AgaviLoggerAppender::initialize()
+     */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see AgaviLoggerAppender::write()
+     */
     public function write(AgaviLoggerMessage $message) {
 
         if (($layout = $this->getLayout()) === null) {
@@ -19,11 +32,11 @@ class AppKitDoctrineLoggerAppender extends AgaviLoggerAppender {
 
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see AgaviLoggerAppender::shutdown()
+     */
     public function shutdown() {
         // Do nothing here ... ;-)
     }
 }
-
-class AppKitDoctrineLoggerAppenderException extends AppKitException {}
-
-?>

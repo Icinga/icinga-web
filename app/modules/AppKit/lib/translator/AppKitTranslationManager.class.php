@@ -1,6 +1,11 @@
 <?php
 
-
+/**
+ * AppKit implementation of translation manager
+ * Load the current user defined locale if needed
+ * @author jmosshammer
+ *
+ */
 class AppKitTranslationManager extends AgaviTranslationManager {
     private $__localeLoaded = false;
 

@@ -235,9 +235,8 @@ class IcingaTemplateWorker {
     
     private function rewritePerClassMethod($class, $method, $data_val, array $params = array (), array $row = array()) {
         $ref = new ReflectionClass($class);
-        if ($ref->isSubclassOf('IcingaTemplateDisplay') && $ref->hasMethod('getInstance') && $ref->hasMethod($method)) {
-            $minstance = $ref->getMethod('getInstance');
-            $obj = $minstance->invoke(null);
+        if ($ref->isSubclassOf('IcingaTemplateDisplay') && $ref->hasMethod($method)) {
+            $obj = $ref->newInstance();
             if ($obj instanceof IcingaTemplateDisplay) {
                 $change = $ref->getMethod($method);
                 return $change->invoke($obj, 

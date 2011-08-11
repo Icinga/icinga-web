@@ -2,9 +2,8 @@
 /**
  * Custom exception class to use printf formats
  * @author mhein
- *
  */
-class AppKitException extends Exception {
+class AppKitException extends AgaviException {
 
     /**
      * Customized constructor
@@ -24,5 +23,3 @@ class AppKitException extends Exception {
     }
 
 }
-
-?>

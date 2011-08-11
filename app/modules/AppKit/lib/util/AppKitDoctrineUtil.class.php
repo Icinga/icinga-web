@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * Util class for working with doctrine records
+ * @author mhein
+ *
+ */
 class AppKitDoctrineUtil {
 
     /**
@@ -29,6 +33,12 @@ class AppKitDoctrineUtil {
         return true;
     }
 
+    /**
+     * Automatic 'disabled' field handling
+     * @param Doctrine_Record $record
+     * @param string $field
+     * @throws AppKitDoctrineUtilException
+     */
     public static function toggleRecordValue(Doctrine_Record &$record, $field=null) {
         // Try to autodetect the fieldname
         if ($field === null) {
@@ -45,16 +55,6 @@ class AppKitDoctrineUtil {
             throw new AppKitDoctrineUtilException("Field does not exist on the record (tableobject) ");
         }
 
-    }
-
-    public static function checkNullAttributes(AgaviRequestDataHolder &$rd, array $null_attribute_names, $set=null) {
-        foreach($null_attribute_names as $attrib_name) {
-            if ($rd->getParameter($attrib_name, null) === null) {
-                $rd->setParameter($attrib_name, $set);
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -83,5 +83,3 @@ class AppKitDoctrineUtil {
 }
 
 class AppKitDoctrineUtilException extends AppKitDoctrineException {}
-
-?>

@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Logoutput format to write apache like logfiles
+ * @author mhein
+ *
+ */
 class AppKitApacheLoggerFormat extends AgaviLoggerLayout {
 
     const UNKNOWN_NAME = 'unknown';
@@ -19,6 +25,10 @@ class AppKitApacheLoggerFormat extends AgaviLoggerLayout {
         return self::UNKNOWN_NAME;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see AgaviLoggerLayout::format()
+     */
     public function  format(AgaviLoggerMessage $message) {
         return sprintf(
                    '[%s] [%s] %s',
@@ -29,4 +39,3 @@ class AppKitApacheLoggerFormat extends AgaviLoggerLayout {
     }
 
 }
-?>

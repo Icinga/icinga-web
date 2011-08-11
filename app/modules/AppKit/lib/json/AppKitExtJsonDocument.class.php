@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * To handling auto store configuration from agavi view
+ * you can use this class to do this
+ * @author mhein
+ *
+ */
 class AppKitExtJsonDocument extends AppKitArrayContainer {
 
     // -- CONSTANTS
@@ -314,5 +320,3 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
 AppKitExtJsonDocument::initializeStaticData();
 
 class AppKitExtJsonDocumentException extends AppKitException {}
-
-?>

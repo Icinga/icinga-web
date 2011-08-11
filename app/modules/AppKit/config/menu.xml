@@ -6,7 +6,7 @@
             <preferposition>first</preferposition>
             <icon>icinga-icon-dot</icon>
             <caption>Monitoring</caption>
-            <route target="new">icinga.portalView</route>
+            <route target="new">modules.icinga.portalView</route>
         </menu>
 
         <menu id="menu_help">

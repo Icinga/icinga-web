@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Working with strings
+ * @author mhein
+ *
+ */
 class AppKitStringUtil {
 
     /**
@@ -20,15 +25,9 @@ class AppKitStringUtil {
 
     }
 
-    public static function htmlPseudoPreformat($string) {
-        // Converts spaces into breaking spaces ^^
-        $string = str_replace(' ', self::ENTITY_BSP, $string);
-        $string = nl2br($string);
-        return $string;
-    }
-
     /**
      * Convert bytes to an human readable string
+     * @deprecated Not used
      * @param integer $val
      * @param $arg
      * @return string
@@ -104,5 +103,3 @@ class AppKitStringUtil {
     }
 
 }
-
-?>

@@ -51,8 +51,7 @@ class IcingaTemplateDisplayFormat extends IcingaTemplateDisplay {
     }
 
     public function agaviDateFormat($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
-        $tm = $this->getAgaviTranslationManager();
-        return $tm->_d($val, $method_params->getParameter('domain', 'date-tstamp'));
+        return AgaviContext::getInstance()->getTranslationManager()->_d($val, $method_params->getParameter('domain', 'date-tstamp'));
     }
 
     public function durationString($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {

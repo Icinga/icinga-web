@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Working with random data
+ * @author mhein
+ *
+ */
 class AppKitRandomUtil {
 
     protected static $htmlid_counter = 0;
@@ -33,6 +38,11 @@ class AppKitRandomUtil {
         return $init;
     }
 
+    /**
+     * Returns a simple id string based on letters and numbers
+     * @param unknown_type $length
+     * @param unknown_type $prefix
+     */
     public static function genSimpleId($length=5, $prefix="") {
         static $chars = null;
 
@@ -54,13 +64,15 @@ class AppKitRandomUtil {
         return $prefix. $o;
     }
 
+    /**
+     * Generate a unique continuous html id string
+     * @param unknown_type $prefix
+     */
     public static function htmlId($prefix='appkit-htmlid') {
         return sprintf('%s-%04d', $prefix, (++self::$htmlid_counter));
     }
 
 }
 
-// INIT THE RAND PROCESSOR IF INCLUDED
+// Lazy initialising
 AppKitRandomUtil::initRand();
-
-?>

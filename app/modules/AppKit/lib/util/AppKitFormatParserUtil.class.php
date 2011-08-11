@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Implement string parsing logic based on a generic syntax and
+ * namespaces with different data
+ * @author mhein
+ *
+ */
 class AppKitFormatParserUtil {
     const TYPE_DATA			= 1;
     const TYPE_ARRAY		= 2;
@@ -192,5 +198,3 @@ class AppKitFormatParserUtil {
 }
 
 class AppKitFormatParserUtilException extends AppKitException {}
-
-?>

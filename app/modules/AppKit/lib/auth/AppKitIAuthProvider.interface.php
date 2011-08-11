@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * The interface that the auth dispatcher can control our providers
+ * @author mhein
+ *
+ */
 interface AppKitIAuthProvider {
 
     const AUTH_CREATE			= 'auth_create';
@@ -61,5 +66,3 @@ interface AppKitIAuthProvider {
      */
     public function determineUsername();
 }
-
-?>
