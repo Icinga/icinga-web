@@ -62,7 +62,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                             ),
                             false
                         );
-
+            
             if ($includes) {
 
                 foreach($pointers as $pointer) {

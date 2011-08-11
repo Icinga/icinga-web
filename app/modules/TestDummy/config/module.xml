@@ -24,7 +24,7 @@
 				<!-- 
 					Adding module related databases
 				-->
-				<setting name="agavi.include.database">
+				<setting name="agavi.include.databases">
 					<ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
 				</setting>
 				
