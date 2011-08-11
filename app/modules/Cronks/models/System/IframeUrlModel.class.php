@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * URLs in iframes handles here
+ * @author mhein
+ *
+ */
 class Cronks_System_IframeUrlModel extends CronksBaseModel {
 
     private $baseURl = null;
@@ -71,5 +76,3 @@ class Cronks_System_IframeUrlModel extends CronksBaseModel {
         return $this->glueTogether();
     }
 }
-
-?>

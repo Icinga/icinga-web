@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
+class CronkGridTemplateDisplayServiceIcons extends CronkGridTemplateDisplay {
 
     /**
      * Eval condition return constant
@@ -108,7 +108,7 @@ class IcingaTemplateDisplayServiceIcons extends IcingaTemplateDisplay {
 
     /**
      * Returns a singleton class instance
-     * @return IcingaTemplateDisplayServiceIcons
+     * @return CronkGridTemplateDisplayServiceIcons
      */
     public static function getInstance() {
         return parent::getInstance(__CLASS__);

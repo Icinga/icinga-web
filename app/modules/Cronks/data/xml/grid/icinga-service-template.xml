@@ -17,7 +17,7 @@
     -->
     <option>
         <parameter name="mode">default</parameter>
-        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter> 
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
         
@@ -948,7 +948,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
@@ -975,7 +975,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                		<parameter name="method">durationString</parameter>
                 </parameter>
             </display>
@@ -1009,7 +1009,7 @@
                 </parameter>
                 
                 <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayServiceIcons</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayServiceIcons</parameter>
                 	<parameter name="method">serviceIcons</parameter>
                 	<parameter name="arguments">
                 		<!-- Column for the service object id -->
@@ -1046,7 +1046,7 @@
                 </parameter>
                 
 				<parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[${field.service_check_attempt} / ${field.service_max_attempt}]]></parameter>

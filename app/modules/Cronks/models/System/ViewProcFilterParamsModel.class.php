@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Handling parameters for grids
+ * @author mhein
+ *
+ */
 class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
 
     /**
@@ -23,10 +28,10 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
      * This apply all parameters to the worker to
      * modify IcingaAPI search filters
      *
-     * @param IcingaTemplateWorker $template
+     * @param CronkGridTemplateWorker $template
      * @return boolean
      */
-    public function applyToWorker(IcingaTemplateWorker &$template) {
+    public function applyToWorker(CronkGridTemplateWorker &$template) {
         foreach($this->params_array as $pKey=>$pVal) {
             $m = array();
 
@@ -52,5 +57,3 @@ class Cronks_System_ViewProcFilterParamsModel extends CronksBaseModel {
 
     }
 }
-
-?>

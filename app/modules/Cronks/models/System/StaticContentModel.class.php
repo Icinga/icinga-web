@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Model for tactical overview initial data views
+ * @author mhein
+ *
+ */
 class Cronks_System_StaticContentModel extends CronksBaseModel {
 
 	private static $arrayNodes		= array('filter', 'filterchain');

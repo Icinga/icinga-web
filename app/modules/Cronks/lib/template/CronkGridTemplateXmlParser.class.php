@@ -1,10 +1,10 @@
 <?php
-class __IcingaTemplateXmlParserInternalCacheContainer__ {
+class __CronkGridTemplateXmlParserInternalCacheContainer__ {
     public $data = array();
     public $fields = array(); 
     public $rewrite = null;
 }
-class IcingaTemplateXmlParser {
+class CronkGridTemplateXmlParser {
 
     /**
      * @var DOMDocument
@@ -23,7 +23,7 @@ class IcingaTemplateXmlParser {
     private $filename           = "";
     /**
      * Object to replace some values
-     * @var IcingaTemplateXmlReplace
+     * @var CronkGridTemplateXmlReplace
      */
     private $rewrite			= null;
 
@@ -60,7 +60,7 @@ class IcingaTemplateXmlParser {
             return false;
         
         $this->readCached($file);
-        if(!$this->cachedContent instanceof __IcingaTemplateXmlParserInternalCacheContainer__)
+        if(!$this->cachedContent instanceof __CronkGridTemplateXmlParserInternalCacheContainer__)
             return false;
         $this->data = $this->cachedContent->data;  
         $this->fields = $this->cachedContent->fields;
@@ -95,7 +95,7 @@ class IcingaTemplateXmlParser {
         if(!is_dir($cacheDir) || !is_writeable($cacheDir))
             return;
         
-        $container = new __IcingaTemplateXmlParserInternalCacheContainer__();  
+        $container = new __CronkGridTemplateXmlParserInternalCacheContainer__();  
         $container->data = $this->data; 
         $container->fields = $this->fields;
         
@@ -116,7 +116,7 @@ class IcingaTemplateXmlParser {
                 $this->loadFile($file);
             }
 
-            $this->rewrite = new IcingaTemplateXmlReplace();
+            $this->rewrite = new CronkGridTemplateXmlReplace();
         }
     }
 
@@ -131,7 +131,7 @@ class IcingaTemplateXmlParser {
             return $this->loadXml(file_get_contents($file));
         }
 
-        throw new IcingaTemplateXmlParserException('File does not exist');
+        throw new CronkGridTemplateXmlParserException('File does not exist');
     }
 
     /**
@@ -180,7 +180,7 @@ class IcingaTemplateXmlParser {
                 if (array_key_exists($type, $arry)) {
                     $arry =& $arry[$type];
                 } else {
-                    throw new IcingaTemplateXmlParserException('Type '. $type. ' does not exist!');
+                    throw new CronkGridTemplateXmlParserException('Type '. $type. ' does not exist!');
                 }
             }
 
@@ -233,7 +233,7 @@ class IcingaTemplateXmlParser {
         if($this->cacheHit)
             return true; 
         if (!$this->dom instanceof DOMDocument) {
-            // throw new IcingaTemplateXmlParserException('DOMDocument not ready!');
+            // throw new CronkGridTemplateXmlParserException('DOMDocument not ready!');
         }
 
         $storage = array();
@@ -254,7 +254,7 @@ class IcingaTemplateXmlParser {
             return true;
         }
 
-        throw new IcingaTemplateXmlParserException('Empty xml!');
+        throw new CronkGridTemplateXmlParserException('Empty xml!');
 
         return false;
     }
@@ -346,6 +346,6 @@ class IcingaTemplateXmlParser {
     }
 }
 
-class IcingaTemplateXmlParserException extends AppKitException { }
+class CronkGridTemplateXmlParserException extends AppKitException { }
 
 ?>

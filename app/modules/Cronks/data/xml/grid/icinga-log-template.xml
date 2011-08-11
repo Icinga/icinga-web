@@ -22,7 +22,7 @@
     			- minimal: reduce space consumption (e.g. filters, pagers, ...)
     	-->
         <parameter name="mode">default</parameter>
-        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
 
@@ -167,7 +167,7 @@
                 </parameter>
                 
                 <parameter name="userFunc">
-                	<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                 	<parameter name="method">formatDate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[Y-m-d H:00:00]]></parameter>
@@ -229,7 +229,7 @@
                 </parameter>
                 
                 <parameter name="phpFunc">
-                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">icingaConstants</parameter>
 					<parameter name="arguments">
 						<parameter name="type">logentryTypeIcon</parameter>
@@ -274,7 +274,7 @@
                 </parameter>
                 
                 <parameter name="phpFunc">
-                	<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+                	<parameter name="class">CronkGridTemplateDisplayMonitoring</parameter>
                 	<parameter name="method">icingaConstants</parameter>
 					<parameter name="arguments">
 						<parameter name="type">logentryType</parameter>

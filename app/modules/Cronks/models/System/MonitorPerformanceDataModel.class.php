@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Providing summary preformance information from icinga
+ * @author mhein
+ *
+ */
 class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
     private static $sources = array(
@@ -131,5 +136,3 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
     }
 
 }
-
-?>

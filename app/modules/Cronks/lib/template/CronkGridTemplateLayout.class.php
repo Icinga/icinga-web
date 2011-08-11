@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateLayout {
+class CronkGridTemplateLayout {
 
     /**
      * @var AgaviExecutionContainer
@@ -8,7 +8,7 @@ class IcingaTemplateLayout {
     private $container = null;
 
     /**
-     * @var IcingaTemplateWorker
+     * @var CronkGridTemplateWorker
      */
     private $worker = null;
 
@@ -37,13 +37,13 @@ class IcingaTemplateLayout {
         return $this->container;
     }
 
-    public function setWorker(IcingaTemplateWorker $worker) {
+    public function setWorker(CronkGridTemplateWorker $worker) {
         $this->worker =& $worker;
     }
 
     /**
      * Returns the template worker engine
-     * @return IcingaTemplateWorker
+     * @return CronkGridTemplateWorker
      */
     protected function getWorker() {
         return $this->worker;
@@ -76,6 +76,6 @@ class IcingaTemplateLayout {
     }
 }
 
-class IcingaTemplateLayoutException extends AppKitException { }
+class CronkGridTemplateLayoutException extends AppKitException { }
 
 ?>

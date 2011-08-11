@@ -1,8 +1,8 @@
 <?php
 
-class IcingaTemplateWorker {    
+class CronkGridTemplateWorker {    
     /**
-     * @var IcingaTemplateXmlParser
+     * @var CronkGridTemplateXmlParser
      */
     private $template        = null;
     
@@ -49,11 +49,11 @@ class IcingaTemplateWorker {
      */
     private $user            = null;
     
-    public function __construct(IcingaTemplateXmlParser &$template = null) {
+    public function __construct(CronkGridTemplateXmlParser &$template = null) {
         if ($template) $this->setTemplate($template);
     }
     
-    public function setTemplate(IcingaTemplateXmlParser &$template) {
+    public function setTemplate(CronkGridTemplateXmlParser &$template) {
         $this->template =& $template;
     }
     
@@ -62,7 +62,7 @@ class IcingaTemplateWorker {
     }
     
     /**
-     * @return IcingaTemplateXmlParser
+     * @return CronkGridTemplateXmlParser
      */
     public function getTemplate() {
         return $this->template;
@@ -235,9 +235,9 @@ class IcingaTemplateWorker {
     
     private function rewritePerClassMethod($class, $method, $data_val, array $params = array (), array $row = array()) {
         $ref = new ReflectionClass($class);
-        if ($ref->isSubclassOf('IcingaTemplateDisplay') && $ref->hasMethod($method)) {
+        if ($ref->isSubclassOf('CronkGridTemplateDisplay') && $ref->hasMethod($method)) {
             $obj = $ref->newInstance();
-            if ($obj instanceof IcingaTemplateDisplay) {
+            if ($obj instanceof CronkGridTemplateDisplay) {
                 $change = $ref->getMethod($method);
                 return $change->invoke($obj, 
                     $data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row)
@@ -433,7 +433,7 @@ class IcingaTemplateWorker {
         }
         
         if (!$new_field) {
-            throw new IcingaTemplateWorkerException('Could not determine the icinga api field for '. $field);
+            throw new CronkGridTemplateWorkerException('Could not determine the icinga api field for '. $field);
         }
         
         // Add or replace some asterix within count
@@ -449,7 +449,7 @@ class IcingaTemplateWorker {
         $new_op = AppKitSQLConstants::getIcingaMatch($op);
         
         if ($new_op == false) {
-            throw new IcingaTemplateWorkerException('No existing icinga search match operator found!');
+            throw new CronkGridTemplateWorkerException('No existing icinga search match operator found!');
         }
         
         $this->conditions[ $id ] = array (
@@ -468,6 +468,6 @@ class IcingaTemplateWorker {
 
 }
 
-class IcingaTemplateWorkerException extends AppKitException { }
+class CronkGridTemplateWorkerException extends AppKitException { }
 
 ?>

@@ -172,5 +172,3 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel
 		return $this->actions;
 	}
 }
-
-?>

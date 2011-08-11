@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Providing information about icinga commands to core
+ * @author mhein
+ *
+ */
 class Cronks_System_CommandInfoModel extends CronksBaseModel
     implements AgaviISingletonModel {
 
@@ -36,5 +41,3 @@ class Cronks_System_CommandInfoModel extends CronksBaseModel
     }
 
 }
-
-?>

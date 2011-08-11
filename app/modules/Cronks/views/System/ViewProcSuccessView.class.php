@@ -28,10 +28,10 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
         try {
             $file = $this->getTemplateFile($rd);
 
-            $template = new IcingaTemplateXmlParser($file->getRealPath(), $this->getContext());
+            $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
 
-            $worker = new IcingaTemplateWorker();
+            $worker = new CronkGridTemplateWorker();
             $worker->setTemplate($template);
             $worker->setApi($this->api->getConnection());
 
@@ -54,10 +54,10 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
         try {
 
             $file = $this->getTemplateFile($rd);
-            $template = new IcingaTemplateXmlParser($file->getRealPath(), $this->getContext());
+            $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
 
-            $worker = new IcingaTemplateWorker();
+            $worker = new CronkGridTemplateWorker();
             $worker->setTemplate($template);
             $worker->setApi($this->api->getConnection());
             $worker->setUser($this->getContext()->getUser()->getNsmUser());

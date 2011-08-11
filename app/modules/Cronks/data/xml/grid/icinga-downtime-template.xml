@@ -22,7 +22,7 @@
     			- minimal: reduce space consumption (e.g. filters, pagers, ...)
     	-->
         <parameter name="mode">default</parameter>
-        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
 
@@ -214,7 +214,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayMonitoring</parameter>
                		<parameter name="method">icingaDowntimeType</parameter>
                 </parameter>
             </display>
@@ -448,7 +448,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
@@ -482,7 +482,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayFormat</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
@@ -575,7 +575,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">IcingaTemplateDisplayMonitoring</parameter>
+               		<parameter name="class">CronkGridTemplateDisplayMonitoring</parameter>
                		<parameter name="method">icingaDowntimeRunning</parameter>
                 </parameter>
             </display>

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Our provider (readable/writable) from combined cronk
+ * data sets (xml and database)
+ * @author mhein
+ *
+ */
 class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
 
@@ -618,5 +624,3 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     }
 
 }
-
-?>

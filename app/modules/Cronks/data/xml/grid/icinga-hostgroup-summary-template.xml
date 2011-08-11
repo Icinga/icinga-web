@@ -23,7 +23,7 @@
     			- minimal: reduce space consumption (e.g. filters, pagers, ...)
     	-->
         <parameter name="mode">default</parameter>
-        <parameter name="layout">IcingaTemplateAjaxGridLayout</parameter>
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
 		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
 

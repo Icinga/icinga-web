@@ -5,7 +5,7 @@
  * @author mhein
  *
  */
-class AppKitFileUtil {
+final class AppKitFileUtil {
 	
 	/**
 	 * Tries to find a file with different suffixes 
@@ -55,6 +55,26 @@ class AppKitFileUtil {
 	    }
 	    
 	    return $default;
+	}
+	
+	/**
+	 * Recursive deletion of a directory with all content
+	 * @param string $directory
+	 */
+	public static function rmdir($directory) {
+	    if (is_dir($directory)) {
+	        $content = scandir($directory);
+	        foreach ($content as $item) {
+	            if ($item !== '.' && $item !== '..') {
+	                $newitem = $directory. DIRECTORY_SEPARATOR. $item;
+	                if (filetype($newitem) == 'dir') {
+	                    self::rmdir($newitem);
+	                } else {
+	                    unlink($newitem);
+	                }
+	            }
+	        }
+	    }
 	}
 	
 

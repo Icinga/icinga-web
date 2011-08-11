@@ -14,6 +14,7 @@ app/config/settings.site.xml
 app/config/translation.site.xml
 app/config/translation.xml
 app/config/factories.site.xml
+app/config/logging.xml
 app/modules/Web/config/icinga-io.xml
 app/modules/AppKit/config/auth.xml
 app/modules/AppKit/cache/Widgets/SquishLoader.xml
@@ -22,6 +23,7 @@ app/modules/Api/config/module.site.xml
 app/modules/Api/config/access.xml
 app/modules/Api/config/module.xml
 app/modules/Cronks/config/module.xml
+app/modules/AppKit/config/module.xml
 app/modules/AppKit/config/module.site.xml
 app/modules/Web/config/module.site.xml
 app/modules/Cronks/config/module.site.xml

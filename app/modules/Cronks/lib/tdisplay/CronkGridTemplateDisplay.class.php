@@ -1,6 +1,6 @@
 <?php
 
-class IcingaTemplateDisplay {
+class CronkGridTemplateDisplay {
 
     private static $instance = null;
     
