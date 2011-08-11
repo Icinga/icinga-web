@@ -200,13 +200,18 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $columns = $rd->getParameter("columns",null);
         if(!is_array($columns))
             $columns = array($columns);
-        foreach($columns as &$column) {
-           $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
-           $column = strtoupper($column);
-        } 
-        if (!is_null($columns)) {
-            $search->setResultColumns($columns);
-        } else {
+        $columns_result = array();
+        foreach($columns as $column) {
+            $column = preg_replace("/[^1-9_A-Za-z]/","",$column);
+            $column = strtoupper($column);
+            if($column)
+                $columns_result[] = $column;
+        }
+         
+        if (!is_null($columns_result) && !empty($columns_result)) {
+            
+            $search->setResultColumns($columns_result);
+        } else {            
             $search->setResultColumns(self::$defaultColumns[$rd->getParameter("target")]);
         }
     }
