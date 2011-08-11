@@ -1,5 +1,9 @@
 <?php
-
+class __IcingaTemplateXmlParserInternalCacheContainer__ {
+    public $data = array();
+    public $fields = array(); 
+    public $rewrite = null;
+}
 class IcingaTemplateXmlParser {
 
     /**
@@ -16,12 +20,89 @@ class IcingaTemplateXmlParser {
     private static $available	= array(
                                       'datasource', 'meta', 'option', 'fields'
                                   );
-
+    private $filename           = "";
     /**
      * Object to replace some values
      * @var IcingaTemplateXmlReplace
      */
     private $rewrite			= null;
+
+    private $useCaching         = false;
+    private $maxCacheTime       = 14400; 
+    private $cachedContent      = null;
+    private $cacheHit           = false;
+    private function initCaching() {
+        $cfg = AgaviConfig::get('modules.cronks.templates');
+        if(isset($cfg['use_caching']))
+	        $this->useCaching = $cfg['use_caching'];
+    
+        if(isset($cfg['cache_dir']))
+	        $this->cache_dir = $cfg['cache_dir'];
+ 
+        if(!$this->cache_dir)
+            $this->useCaching = false;
+  
+    } 
+	
+    private function getCacheFilename($file) {
+        $file = "template_".md5($file);
+         
+        $cached = $this->cache_dir.'/'.$file;
+        if(!file_exists($this->cache_dir))
+            AgaviToolkit::mkdir($this->cache_dir);        
+        return $cached;
+    }
+
+
+    private function loadFromCache($file = null) {
+        $this->initCaching();
+        if($file == null || !$this->useCaching)
+            return false;
+        
+        $this->readCached($file);
+        if(!$this->cachedContent instanceof __IcingaTemplateXmlParserInternalCacheContainer__)
+            return false;
+        $this->data = $this->cachedContent->data;  
+        $this->fields = $this->cachedContent->fields;
+        $this->cacheHit = true;
+       
+        return true;
+    }
+
+    private function readCached($file) {
+        $cached = $this->getCacheFilename($file);
+        
+        if(file_exists($cached)  && is_readable($cached)) {
+            // check cache date
+            if(time()-filemtime($cached) > $this->maxCacheTime)
+                return null;
+            $this->cachedContent = unserialize(file_get_contents($cached));
+           
+        }
+        return null;
+    }
+
+    private function cacheContent($file) {
+       
+         if(!$this->useCaching)
+            return false;
+        $cached = $this->getCacheFilename($file);
+        $cacheDir = dirname($cached);
+      
+        if(file_exists($cached) && !is_writeable($cached))
+            return;
+        
+        if(!is_dir($cacheDir) || !is_writeable($cacheDir))
+            return;
+        
+        $container = new __IcingaTemplateXmlParserInternalCacheContainer__();  
+        $container->data = $this->data; 
+        $container->fields = $this->fields;
+        
+        file_put_contents($cached,serialize($container));
+    }
+
+
 
     /**
      * Generic constructor
@@ -29,11 +110,14 @@ class IcingaTemplateXmlParser {
      * @return CLASS
      */
     public function __construct($file = null) {
-        if (file_exists($file)) {
-            $this->loadFile($file);
-        }
+        if(!$this->loadFromCache($file)) {
+            
+            if (file_exists($file)) {
+                $this->loadFile($file);
+            }
 
-        $this->rewrite = new IcingaTemplateXmlReplace();
+            $this->rewrite = new IcingaTemplateXmlReplace();
+        }
     }
 
     /**
@@ -43,6 +127,7 @@ class IcingaTemplateXmlParser {
      */
     public function loadFile($file) {
         if (file_exists($file)) {
+            $this->file = $file;
             return $this->loadXml(file_get_contents($file));
         }
 
@@ -145,6 +230,8 @@ class IcingaTemplateXmlParser {
      * @return boolean
      */
     public function parseTemplate() {
+        if($this->cacheHit)
+            return true; 
         if (!$this->dom instanceof DOMDocument) {
             // throw new IcingaTemplateXmlParserException('DOMDocument not ready!');
         }
@@ -163,6 +250,7 @@ class IcingaTemplateXmlParser {
 
         // Check data
         if (count($this->fields) && count($this->data)) {
+            $this->cacheContent($this->file);
             return true;
         }
 
@@ -213,6 +301,8 @@ class IcingaTemplateXmlParser {
     }
 
     private function parseDom(DOMElement $element, array &$storage) {
+        
+       
         if ($element->hasChildNodes()) {
             foreach($element->childNodes as $child) {
                 if ($child->nodeType == XML_ELEMENT_NODE) {
