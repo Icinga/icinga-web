@@ -23,7 +23,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		storeId: 'overall-status-store'
 	});
 
-	ds.load();
+
 
 	var interval = <?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>;
 	
