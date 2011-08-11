@@ -146,8 +146,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         }
 
         $filterGroup = $search->createFilterGroup($filterdef["type"]);
-        if(!is_array($filterGroup))
-            $filterGroup = array($filterGroup);
+        if(!is_array($searchField))
+            $searchField = array($searchField);
         foreach($searchField as $element) {
             if ($element["type"] == "atom") {
                 $filterGroup->addFilter($search->createFilter($element["field"][0],$element["value"][0],$element["method"][0]));
