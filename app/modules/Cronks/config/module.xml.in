@@ -24,6 +24,7 @@
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks_grid.xml</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks_misc.xml</ae:parameter>
 					<ae:parameter>%core.module_dir%/Cronks/config/cronks_to.xml</ae:parameter>
+					<ae:parameter>@web_conf_path@/cronks.xml</ae:parameter>
 				</setting>
 
 				<!--
@@ -62,28 +63,6 @@
 				<setting name="agavi.include.routing">
 					<ae:parameter>%core.module_dir%/Cronks/config/routing.xml</ae:parameter>
 				</setting>
-				
-				<!-- 
-					* Include cubconfig
-				-->
-				<!--  <setting name="categories">
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())" />
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='categories']/node())">
-						<xi:fallback></xi:fallback>
-					</xi:include>
-				</setting> -->
-				
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/node())">
-					<xi:fallback></xi:fallback>
-				</xi:include>
-
-		
-				<!--  <setting name="cronks">
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())" />
-					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xpointer(//settings/setting[@name='cronks']/node())">
-						<xi:fallback></xi:fallback>
-					</xi:include>
-				</setting> -->
 			</settings>
 		</module>
 		

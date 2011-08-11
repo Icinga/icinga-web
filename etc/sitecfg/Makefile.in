@@ -11,16 +11,11 @@ INSTALL_OPTS=@INSTALL_OPTS@
 
 install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) icinga.site.css $(DESTDIR)$(prefix)/pub/styles/icinga.site.css
-	$(INSTALL) -m 755 $(INSTALL_OPTS) access.site.xml $(DESTDIR)$(prefix)/app/modules/Api/config/access.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) routing.modules.xml $(DESTDIR)$(prefix)/app/config/routing.modules.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) cronks.module.site.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/module.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) appkit.module.site.xml $(DESTDIR)$(prefix)/app/modules/AppKit/config/module.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) web.module.site.xml $(DESTDIR)$(prefix)/app/modules/Web/config/module.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) api.module.site.xml $(DESTDIR)$(prefix)/app/modules/Api/config/module.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) auth.site.xml $(DESTDIR)$(prefix)/app/modules/AppKit/config/auth.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) cronks.site.xml $(DESTDIR)$(prefix)/app/modules/Cronks/config/cronks.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) databases.site.xml $(DESTDIR)$(prefix)/app/config/databases.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) icinga.site.xml $(DESTDIR)$(prefix)/app/config/icinga.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) settings.site.xml $(DESTDIR)$(prefix)/app/config/settings.site.xml
-	$(INSTALL) -m 755 $(INSTALL_OPTS) translation.site.xml $(DESTDIR)$(prefix)/app/config/translation.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) factories.site.xml $(DESTDIR)$(prefix)/app/config/factories.site.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) access.xml $(DESTDIR)$(prefix)/etc/conf.d/access.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) auth.xml $(DESTDIR)$(prefix)/etc/conf.d/auth.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) databases.xml $(DESTDIR)$(prefix)/etc/conf.d/databases.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) cronks.xml $(DESTDIR)$(prefix)/etc/conf.d/cronks.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) translation.xml $(DESTDIR)$(prefix)/etc/conf.d/translation.xml

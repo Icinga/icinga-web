@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    access.xml
+    This files defines which hosts exist, which icinga-instance they represent and which actions can be performed on them.
+    
+    It conists of three parts: instances, defaults and hosts:
+    -instances:  
+        Simple mapping of instance names to host names,
+    
+    -defaults:
+        Defines read, write, and execute access on files an folders that are used if hosts have the useDefaults flag active
+        Rules will be accessed by their rules, especially important is the icinga_service, icinga_bin and icinga_pipe rules,
+        which define where the service control, the binary and the icinga pipe can be found
+
+    -hosts
+        Defines hosts/servers that can be accessed via icinga-web and which rules to use for them
+        The type can be either 'local', which means that actions will be performed directly on this system or 'ssh', which means
+        that the host will be accessed via ssh (see example below). Not that you need php-libssh2 to use this
+         
+
+-->
+
 <settings prefix="modules.api.access." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     
     <!-- Map your instances to hosts here -->
 	<setting name="instances">
-        <ae:parameter name="@api_cmd_instance@">localhost</ae:parameter>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='instances']/node())">
-            <xi:fallback></xi:fallback>
-        </xi:include>
+        <!-- 
+        example: map instance default to localhost 
+        <ae:parameter name="default">localhost</ae:parameter>
+        
+        -->
     </setting>
 
     <!--
         Default settings that will be set if useDefaults is true
     -->
     <setting name="defaults">
-		<ae:parameter name="host">localhost</ae:parameter>
-
-		<ae:parameter name="access">
+        <!-- 
+            sets the default host to use 
+		    <ae:parameter name="host">localhost</ae:parameter>
+        -->
+		<!-- 
+            Define default access rights
+        <ae:parameter name="access">
 			<ae:parameter name="rw">
 				<ae:parameter name="folders">
-<!--    			<ae:parameter name="icinga_objects">/usr/local/icinga/etc/objects</ae:parameter>-->	
 				</ae:parameter>
 				<ae:parameter name="files">
-<!--        		<ae:parameter name="icinga_cfg">/usr/local/icinga/etc/icinga.cfg</ae:parameter>-->	
 				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="r">
 			</ae:parameter>
 			<ae:parameter name="w">
 				<ae:parameter name="files">
-					<ae:parameter name="icinga_pipe">@api_cmd_file@</ae:parameter>
+					<ae:parameter name="icinga_pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
 			<ae:parameter name="x">
@@ -43,22 +67,21 @@
 				</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>						
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='defaults']/node())">
-			<xi:fallback></xi:fallback>
-		</xi:include>
+       --> 
 	</setting>
 	
 	
 	<!-- Hosts that can be accessed via the console interface -->
 	<setting name="hosts">
-		<ae:parameter name="localhost">
+	<!-- localhost overwrite
+    	<ae:parameter name="localhost">
 			<ae:parameter name="type">local</ae:parameter>
-			<!-- Only allow access to these files, folders or executables -->
+
 			<ae:parameter name="access">
 				<ae:parameter name="useDefaults">true</ae:parameter>
 			</ae:parameter>
 		</ae:parameter>
-		
+    -->
 		<!--  Example for ssh connection with user/password auth -->
 <!--		<ae:parameter name="vm_host1">
 			<ae:parameter name="type">ssh</ae:parameter>
@@ -101,11 +124,6 @@
 			</ae:parameter>	
 		</ae:parameter>
 -->
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='hosts']/node())">
-            <xi:fallback></xi:fallback>
-        </xi:include>
-
-
 
 	</setting>
 

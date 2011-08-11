@@ -14,7 +14,11 @@ AC_INIT(icinga-web, [ICINGA_VERSION], [dev.icinga.org])
 RELEASE_DATE=ICINGA_RELEASE_DATE
 
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
-
+if test "x$prefix" = "xNONE" ; then
+    installDir="/usr/local/icinga-web"
+else
+    installDir=$prefix 
+fi
 # Checks for programs.
 AC_PROG_INSTALL
 AC_PROG_GREP
@@ -211,6 +215,20 @@ AC_ARG_WITH([devel_mode],
 	devel_mode=no
 )
 
+# Configuration location
+AC_ARG_WITH([conf_folder],
+    AS_HELP_STRING([--with-conf-folder=PATH], [Folder where to store custom user configurations (default etc/conf.d/)]),
+    web_conf_folder=$withval,
+    web_conf_folder=$installDir/etc/conf.d   
+)
+
+# Log location
+AC_ARG_WITH([log_folder],
+    AS_HELP_STRING([--with-log-folder=PATH], [Folder where to store log files (default log/)]),
+    web_log_folder=$withval,
+    web_log_folder=$installDir/log 
+)
+
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
@@ -264,6 +282,8 @@ AC_SUBST(INSTALL_OPTS_CACHE)
 AC_SUBST(flag_caching)
 AC_SUBST(flag_debug)
 
+AC_SUBST(web_log_folder)
+AC_SUBST(web_conf_folder)
 
 AC_CONFIG_FILES([
 	Makefile
@@ -276,9 +296,13 @@ AC_CONFIG_FILES([
 	etc/sitecfg/Makefile
 	app/config/databases.xml
 	app/config/icinga.xml
+	app/config/logging.xml
 	app/config/settings.xml
+	app/config/translation.xml
     app/modules/Api/config/access.xml
 	app/modules/AppKit/config/module.xml
+	app/modules/AppKit/config/auth.xml
+	app/modules/Cronks/config/module.xml
 	etc/build.properties
 	tests/phpunit/test.properties
 	etc/apache2/icinga-web.conf

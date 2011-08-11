@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
+	<ae:configuration>
+		<cronks>
+	    <!-- 
+            Cronk overwrites - for example 
+			
+            <cronk name="gridHostgroupSummary">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.ViewProc</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Display hostgroup summary</ae:parameter>
+				<ae:parameter name="name">Hostgroups</ae:parameter>
+				<ae:parameter name="categories">data</ae:parameter>
+				<ae:parameter name="image">cronks.Dots</ae:parameter>
+
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
+				</ae:parameter>
+			</cronk>	
+        -->
+       	</cronks>
+        <categories>
+        <!--
+            Category overwrites - for example:
+        			
+			<category name="misc">
+				<ae:parameter name="title">Misc</ae:parameter>
+				<ae:parameter name="visible">true</ae:parameter>
+				<ae:parameter name="position">99</ae:parameter>
+			</category>
+	
+            -->
+        </categories>
+	</ae:configuration>
+</ae:configurations>

@@ -560,6 +560,8 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+web_conf_folder
+web_log_folder
 flag_debug
 flag_caching
 INSTALL_OPTS_CACHE
@@ -672,6 +674,8 @@ with_api_db_prefix
 with_api_cmd_file
 with_api_cmd_instance
 with_devel_mode
+with_conf_folder
+with_log_folder
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1323,6 +1327,9 @@ Optional Packages:
                           Icinga default command instance name (default
                           "default")
   --with-devel-mode       Web devel mode (disable caching)
+  --with-conf-folder=PATH Folder where to store custom user configurations
+                          (default etc/conf.d/)
+  --with-log-folder=PATH  Folder where to store log files (default log/)
 
 Some influential environment variables:
   PHP         php cli binary
@@ -1765,7 +1772,11 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 RELEASE_DATE=2011-05-12
 
 
-
+if test "x$prefix" = "xNONE" ; then
+    installDir="/usr/local/icinga-web"
+else
+    installDir=$prefix
+fi
 # Checks for programs.
 ac_aux_dir=
 for ac_dir in "$srcdir" "$srcdir/.." "$srcdir/../.."; do
@@ -2506,6 +2517,28 @@ else
 fi
 
 
+# Configuration location
+
+# Check whether --with-conf_folder was given.
+if test "${with_conf_folder+set}" = set; then :
+  withval=$with_conf_folder; web_conf_folder=$withval
+else
+  web_conf_folder=$installDir/etc/conf.d
+
+fi
+
+
+# Log location
+
+# Check whether --with-log_folder was given.
+if test "${with_log_folder+set}" = set; then :
+  withval=$with_log_folder; web_log_folder=$withval
+else
+  web_log_folder=$installDir/log
+
+fi
+
+
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
@@ -2574,7 +2607,9 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/settings.xml app/modules/Api/config/access.xml app/modules/AppKit/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+
+
+ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3293,9 +3328,13 @@ do
     "etc/sitecfg/Makefile") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/Makefile" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
+    "app/config/logging.xml") CONFIG_FILES="$CONFIG_FILES app/config/logging.xml" ;;
     "app/config/settings.xml") CONFIG_FILES="$CONFIG_FILES app/config/settings.xml" ;;
+    "app/config/translation.xml") CONFIG_FILES="$CONFIG_FILES app/config/translation.xml" ;;
     "app/modules/Api/config/access.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/access.xml" ;;
     "app/modules/AppKit/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/module.xml" ;;
+    "app/modules/AppKit/config/auth.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/auth.xml" ;;
+    "app/modules/Cronks/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Cronks/config/module.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "tests/phpunit/test.properties") CONFIG_FILES="$CONFIG_FILES tests/phpunit/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;

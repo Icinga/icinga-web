@@ -88,7 +88,7 @@ none:
 	@printf "\n\n"
 	
 logclean:
-	rm -rf app/data/log/*.log
+	rm -rf @web_log_folder@/*.log
 
 locclean:
 	rm -f \
@@ -146,7 +146,7 @@ devel-inplace-config:
 	@chown $(WEB_USER).$(WEB_GROUP) \
 		$(SRC_DIR)/app/cache \
 		$(SRC_DIR)/app/cache/config \
-		$(SRC_DIR)/app/data/log
+		$web_log_folder@
 	@printf "Done.\n"
 
 install-javascript:
