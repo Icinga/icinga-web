@@ -76,16 +76,26 @@ Icinga.DEFAULTS.STATUS_DATA = {
 	}
 };
 
+
 Icinga.StatusData = (function() {
 	
 	var pub = Ext.apply({}, Icinga.DEFAULTS.STATUS_DATA);
 	
 	var elementTemplate = new Ext.Template('<div class="icinga-status {cls}"><span>{text}</span></div>');
-	elementTemplate.compile();
 	
-	var elementWrapper = function(type, statusid, format, cls) {
+    var extendedElementTemplate = new Ext.Template(
+        '<div class="icinga-status-adv">',
+            '<div class="host-upper {cls}"><span>{text}</span></div>',
+            '<div qtip="'+_("Services with state warning")+'" class="host-lower icinga-status-warning-disabled" host_object_id="{object_id}">{warnings}</div>',
+            '<div qtip="'+_('Services with state critical')+'" class="host-lower icinga-status-critical-disabled" host_object_id="{object_id}">{criticals}</div>',
+        '</div>');
+    elementTemplate.compile();
+    extendedElementTemplate.compile();
+	
+	var elementWrapper = function(type, statusid, format, cls, additional) {
+        additional = additional || {};
 		format = (format || '{0}');
-		
+        		
 		var c = '';
 		if (type == 'host') {
 			c = pub.hoststatusClass[statusid];
@@ -110,7 +120,7 @@ Icinga.StatusData = (function() {
 			t = '';
 		}
 		
-		return {cls: c, text: String.format.call(String, format, t)};
+		return Ext.apply(additional,{cls: c,text: String.format.call(String, format, t)});
 	};
 	
 	var textTemplate = new Ext.Template('<span class="icinga-status-text {cls}">{text}</span>');
@@ -122,6 +132,9 @@ Icinga.StatusData = (function() {
 			return elementTemplate.apply(elementWrapper(type, statusid, format, cls));
 		},
 		
+		wrapExtendedElement : function(type, statusid, format, cls,additional) {
+			return extendedElementTemplate.apply(elementWrapper(type, statusid, format, cls,additional));
+		},
 		wrapText : function(type, statusid, format) {
 			return textTemplate.apply(elementWrapper(type, statusid, format));
 		},

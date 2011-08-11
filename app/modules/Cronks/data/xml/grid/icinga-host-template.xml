@@ -34,6 +34,17 @@
         		</parameter>
         	</parameter>
         	
+            <!-- Initialize comments -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.AdvancedHostStatusColumnRenderer.init</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">status</parameter>
+               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
+               		<parameter name="title">Comments for {host_name}</parameter>
+        		</parameter>
+        	</parameter>
+        	
         </parameter>
         
         <!-- 
@@ -884,7 +895,7 @@
                 </parameter>
                 
 				<parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                	<parameter name="namespace">Cronk.grid.AdvancedHostStatusColumnRenderer</parameter>
 	                <parameter name="function">hostStatus</parameter>
 	                	
 	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->

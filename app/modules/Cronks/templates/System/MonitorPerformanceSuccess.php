@@ -6,7 +6,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		storeId: 'overall-status-store'
 	});
 
-	ds.load();
+
 	
 	var interval = <?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>;
 	
@@ -14,7 +14,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		run: function() { ds.reload(); },
 		interval: (1000*interval)
 	}
-
+    
 	AppKit.getTr().start(monitorPerformanceRefreshTask);
 	
 	var mTpl = new Ext.XTemplate(
