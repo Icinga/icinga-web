@@ -29,7 +29,7 @@
 abstract class BaseIcingaComments extends Doctrine_Record {
     public function setTableDefinition() {
         $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCommands")->getPrefix();
-        $this->setTableName($prefix.'comments'); 
+        $this->setTableName($prefix.'comments');
         $this->hasColumn('comment_id', 'integer', 4, array(
                              'type' => 'integer',
                              'length' => 4,
@@ -183,17 +183,17 @@ abstract class BaseIcingaComments extends Doctrine_Record {
                           'foreign' => 'instance_id'
                       ));
         $this->hasOne('IcingaHosts as host', array(
-            'local' => 'object_id',
-            'foreign' => 'host_object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'host_object_id'
+                      ));
         $this->hasOne('IcingaServices as service', array(
-            'local' => 'object_id',
-            'foreign' => 'service_object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'service_object_id'
+                      ));
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'object_id',
-            'foreign' => 'object_id'
-        ));
+                          'local' => 'object_id',
+                          'foreign' => 'object_id'
+                      ));
         parent::setUp();
 
     }

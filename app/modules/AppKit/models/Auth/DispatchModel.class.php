@@ -106,17 +106,17 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
     }
 
     public function doAuthenticate($username, $password) {
-        
+
         /**
          * 1. Find the user
          * 2. If not found, try to import
          * 3. If the user is there, try to auth
          */
-        
+
         $this->log('Auth.Dispatch: Starting authenticate (username=%s)', $username, AgaviLogger::DEBUG);
-        
+
         $success = false;
-        
+
         $user = $this->findUser($username);
         $import = false;
 
@@ -163,18 +163,18 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                 }
 
             }
-            
+
             if ($success === true) {
-                
+
                 // We can use it later if we want login again (#723)
                 if (AgaviConfig::get('modules.appkit.auth.behaviour.store_loginname', false) === true) {
                     $response = $this->context->getController()->getGlobalResponse();
                     $response->setCookie('icinga-web-loginname', $user->user_name);
                 }
-                
+
                 return $user;
             }
-            
+
         }
 
         $this->log('Auth.Dispatch: User cound not authorized (username=%s)', $username, AgaviLogger::DEBUG);

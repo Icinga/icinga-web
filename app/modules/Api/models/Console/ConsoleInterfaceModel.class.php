@@ -31,13 +31,14 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel implements Ic
     public function initialize(AgaviContext $context, array $parameters = array()) {
         if (!isset($parameters["host"]) && !isset($parameters["icingaInstance"])) {
             $parameters["host"] = AgaviConfig::get("modules.api.access.defaults.host","localhost");
-        } else if(!isset($parameters["host"]) && isset($parameters["icingaInstance"])) {
+        } else if (!isset($parameters["host"]) && isset($parameters["icingaInstance"])) {
             $instances = AgaviConfig::get("modules.api.access.instances");
-            $instance = (isset($instances[$parameters["icingaInstance"]]) ? 
-                $instances[$parameters["icingaInstance"]] :
-                null); 
-            $parameters["host"] = $instance; 
+            $instance = (isset($instances[$parameters["icingaInstance"]]) ?
+                         $instances[$parameters["icingaInstance"]] :
+                         null);
+            $parameters["host"] = $instance;
         }
+
         $this->initConnection($parameters["host"]);
     }
 

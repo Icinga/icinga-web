@@ -1,6 +1,6 @@
 <?php
 /**
-* Modifier that handles Sorting by a field and extends the DataStore by the 
+* Modifier that handles Sorting by a field and extends the DataStore by the
 * setOffset and setLimit functions
 *
 * @package Icinga_Api
@@ -8,15 +8,14 @@
 *
 * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
 **/
-class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel 
-        implements IDataStoreModifier 
-{
-    
+class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
+    implements IDataStoreModifier {
+
     protected $mappedParameters = array(
-        "sortfield" => "sortfield",
-        "dir" => "dir"
-    );
-    
+                                      "sortfield" => "sortfield",
+                                      "dir" => "dir"
+                                  );
+
     protected $sortfield ;
     protected $dir = "DESC";
 
@@ -32,24 +31,27 @@ class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
     public function getDir() {
         return $this->dir;
     }
-    
+
     /**
     * @see IDataStoreModifier::handleArgument
     **/
     public function handleArgument($name,$value) {
-        switch($name)   {
+        switch ($name)   {
             case 'sortfield':
                 $this->sortfield = $value;
                 break;
+
             case 'dir':
-                if($value == "ASC" || $value == "DESC")
+                if ($value == "ASC" || $value == "DESC") {
                     $this->dir = $value;
-                else
+                } else {
                     throw new InvalidArgumentException("Sort direction $value is not allowed");
+                }
+
                 break;
         }
     }
-    
+
     /**
     * @see IDataStoreModifier::getMappedArguments();
     **/
@@ -58,20 +60,21 @@ class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
     }
 
     /**
-    * 
+    *
     * @see IDataStoreModifier::modify();
     **/
     public function modify(&$o) {
         $this->modifyImpl($o); // type safe call
     }
-    
+
     /**
     * Typesafe call to modify
     * @access private
     **/
     protected function modifyImpl(Doctrine_Query &$o) {
-        if($this->sortfield)
+        if ($this->sortfield) {
             $o->orderBy($this->sortfield." ".$this->dir);
+        }
     }
 
     /**
@@ -79,9 +82,9 @@ class Api_Store_Modifiers_StoreSortModifierModel extends IcingaBaseModel
     **/
     public function __getJSDescriptor() {
         return array(
-            "type"=>"sort",
-            "params" => $this->getMappedArguments()
-        );
+                   "type"=>"sort",
+                   "params" => $this->getMappedArguments()
+               );
     }
 }
 

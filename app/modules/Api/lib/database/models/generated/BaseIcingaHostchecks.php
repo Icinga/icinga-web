@@ -276,7 +276,7 @@ abstract class BaseIcingaHostchecks extends Doctrine_Record {
                           'local' => 'instance_id',
                           'foreign' => 'instance_id'
                       ));
-        
+
         $this->hasOne('IcingaHosts as host', array(
                           'local' => 'host_object_id',
                           'foreign' => 'host_id'

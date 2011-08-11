@@ -32,12 +32,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                                         'roles'		=> 'groupsonly',
                                     );
 
-    private static $xml_cronk_data = array ();
-    
-    private static $xml_category_data = array ();
-    
+    private static $xml_cronk_data = array();
+
+    private static $xml_category_data = array();
+
     private static $xml_ready = false;
-                                    
+
     private $cronks = array();
 
     /**
@@ -66,12 +66,12 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         } else {
             throw new AppKitModelException('The model need an authenticated user');
         }
-        
+
         $this->initializeXmlData();
 
         $this->cronks = $this->getCronks(true);
     }
-    
+
     /**
      * Fills the static xml cache variables with agavi config cache data of
      * cronks and categories. This method is called only if the first instance
@@ -80,15 +80,15 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
      * @return boolean If cache is parsed
      */
     private function initializeXmlData() {
-        
+
         if (self::$xml_ready===true) {
             return true;
         }
-        
+
         $tmp = include(AgaviConfigCache::checkConfig(AgaviConfig::get('core.config_dir'). '/cronks.xml'));
         self::$xml_cronk_data = (array)$tmp[0] + self::$xml_cronk_data;
         self::$xml_category_data = (array)$tmp[1] + self::$xml_category_data;
-        
+
         return self::$xml_ready=true;
     }
 

@@ -28,7 +28,7 @@ interface IcingaConsoleCommandInterface {
     public function getCommandString();
     public function isValid($throwOnError = false, &$err = null);
     public function getFullName($symbol = null,array $whiteList = array());
-   
+
 
 
 }

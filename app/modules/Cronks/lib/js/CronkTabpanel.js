@@ -18,7 +18,7 @@ Cronk.util.Tabpanel = function(config) {
 	Cronk.util.Tabpanel.superclass.constructor.call(this, config);	
 }
 
-Ext.extend(Cronk.util.Tabpanel, Ext.TabPanel, {
+Ext.extend(Cronk.util.Tabpanel, Ext.ux.panel.DDTabPanel, {
 	URLTabData : false,
 	
 	minTabWidth: 125,

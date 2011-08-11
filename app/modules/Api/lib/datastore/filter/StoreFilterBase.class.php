@@ -1,4 +1,4 @@
 <?php
 abstract class StoreFilterBase {
-    abstract public function __toArray();    
+    abstract public function __toArray();
 }

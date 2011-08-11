@@ -97,9 +97,9 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
         $res = $search->fetch()->getAll();
-    
-       
-     
+
+
+
         //Setup count
         if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);

@@ -1,13 +1,11 @@
 <?php
 
-class TestDummy_TestSuccessView extends IcingaTestDummyBaseView
-{
-	public function executeHtml(AgaviRequestDataHolder $rd)
-	{
-		$this->setupHtml($rd);
+class TestDummy_TestSuccessView extends IcingaTestDummyBaseView {
+    public function executeHtml(AgaviRequestDataHolder $rd) {
+        $this->setupHtml($rd);
 
-		$this->setAttribute('_title', 'Test');
-	}
+        $this->setAttribute('_title', 'Test');
+    }
 }
 
 ?>

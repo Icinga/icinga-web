@@ -162,39 +162,39 @@ class CronkGridTemplateDisplayServiceIcons extends CronkGridTemplateDisplay {
 
         $parser = new AppKitFormatParserUtil();
         $parser->registerNamespace('field', AppKitFormatParserUtil::TYPE_ARRAY);
-/*
-        foreach($dh->fetch() as $res) {
-            $row = (array)$res->getRow();
-            $parser->registerData('field', $row);
+        /*
+                foreach($dh->fetch() as $res) {
+                    $row = (array)$res->getRow();
+                    $parser->registerData('field', $row);
 
-            foreach($mapping as $fkey=>$fm) {
-                $cond = 'return (int)('. $parser->parseData($fkey). ');';
+                    foreach($mapping as $fkey=>$fm) {
+                        $cond = 'return (int)('. $parser->parseData($fkey). ');';
 
-                if (($test = $this->evalCode($cond)) !== self::COND_ERROR) {
-                    // var_dump(array($fkey, $cond, $test));
-                    if (isset($fm[$test])) {
-                        // var_dump(" --> OK");
-                        $i = $fm[$test];
-                        $tag = AppKitXmlTag::create('img');
+                        if (($test = $this->evalCode($cond)) !== self::COND_ERROR) {
+                            // var_dump(array($fkey, $cond, $test));
+                            if (isset($fm[$test])) {
+                                // var_dump(" --> OK");
+                                $i = $fm[$test];
+                                $tag = AppKitXmlTag::create('img');
 
-                        if (isset($i[0])) {
-                            $tag->addAttribute('src', $this->wrapImagePath($this->image_path). '/'. $i[0]);
+                                if (isset($i[0])) {
+                                    $tag->addAttribute('src', $this->wrapImagePath($this->image_path). '/'. $i[0]);
+                                }
+
+                                if (isset($i[1])) {
+                                    $tag->addAttribute('alt', $i[1])
+                                    ->addAttribute('title', $i[1]);
+                                }
+
+                                $out .= (string)$tag;
+                            }
                         }
 
-                        if (isset($i[1])) {
-                            $tag->addAttribute('alt', $i[1])
-                            ->addAttribute('title', $i[1]);
-                        }
 
-                        $out .= (string)$tag;
                     }
+
                 }
-
-
-            }
-
-        }
-*/
+        */
         return $out;
     }
 

@@ -7,187 +7,188 @@
  */
 class Cronks_System_StaticContentModel extends CronksBaseModel {
 
-	private static $arrayNodes		= array('filter', 'filterchain');
-	private static $indexAttributes	= array('id', 'name');
+    private static $arrayNodes		= array('filter', 'filterchain');
+    private static $indexAttributes	= array('id', 'name');
 
-	private $api = null;
-	
-	/**
-	 * @var DOMDocument
-	 */
-	private $dom = null;
+    private $api = null;
 
-	private $xmlData = array ();
-	private $templateFile = null;
-	
-	/**
-	 * @var Cronks_System_StaticContentTemplateModel
-	 */
-	private $templateObject = null;
+    /**
+     * @var DOMDocument
+     */
+    private $dom = null;
 
-	public function  initialize(AgaviContext $context, array $parameters = array()) {
-		parent::initialize($context, $parameters);
-	}
+    private $xmlData = array();
+    private $templateFile = null;
 
-	public function setTemplateFile($templateFile) {
-		if (!file_exists($templateFile)) {
-				$this->templateFile = sprintf(
-				'%s/%s.xml',
-				AgaviConfig::get('modules.cronks.xml.path.to'),
-				$templateFile
-			);
-		}
-		else {
-			$this->templateFile = $templateFile;
-		}
-		
-		AppKitFileUtil::fileExists($this->templateFile);
-		
-		$this->dom = new DOMDocument('1.0', 'utf-8');
-		$this->dom->preserveWhiteSpace = false;
-		$this->dom->load($this->templateFile);
+    /**
+     * @var Cronks_System_StaticContentTemplateModel
+     */
+    private $templateObject = null;
 
-		$this->xmlData = $this->convertDom(
-			$this->dom->getElementsByTagName('template')->item(0)
-		);
-	}
+    public function  initialize(AgaviContext $context, array $parameters = array()) {
+        parent::initialize($context, $parameters);
+    }
 
-	private function convertDom(DOMElement $element) {
+    public function setTemplateFile($templateFile) {
+        if (!file_exists($templateFile)) {
+            $this->templateFile = sprintf(
+                                      '%s/%s.xml',
+                                      AgaviConfig::get('modules.cronks.xml.path.to'),
+                                      $templateFile
+                                  );
+        } else {
+            $this->templateFile = $templateFile;
+        }
 
-		$data = array();
+        AppKitFileUtil::fileExists($this->templateFile);
 
-		if ($element->hasChildNodes()) {
-			$count = 0;
-			foreach ($element->childNodes as $child) {
-				if ($child->nodeType == XML_ELEMENT_NODE) {
+        $this->dom = new DOMDocument('1.0', 'utf-8');
+        $this->dom->preserveWhiteSpace = false;
+        $this->dom->load($this->templateFile);
 
-					$index = $this->getDomIndex($child, $count);
+        $this->xmlData = $this->convertDom(
+                             $this->dom->getElementsByTagName('template')->item(0)
+                         );
+    }
 
-					if ($this->hasChildren($child)) {
-						$data[$index] = $this->convertDom($child);
-					} else {
-						$data[$index] = $child->textContent;
-					}
-				}
-			}
-		}
+    private function convertDom(DOMElement $element) {
 
-		return $data;
-	}
+        $data = array();
 
-	/**
-	 * Returns index value from the dom element
-	 * @param DOMElement $element
-	 * @param integer $fake Fake array counter for loop sequence
-	 * @return mixed
-	 * @author mhein
-	 */
-	private function getDomIndex(DOMElement &$element, &$fake=0) {
-		static $c = 0;
+        if ($element->hasChildNodes()) {
+            $count = 0;
+            foreach($element->childNodes as $child) {
+                if ($child->nodeType == XML_ELEMENT_NODE) {
 
-		$index = $this->namedIndex($element);
-		
-		if (!$index && $this->arrayNode($element)) {
-			$index = $fake++;
-		}
-		elseif (!$index) {
-			$index = $element->nodeName;
-		}
-		return $index;
-	}
+                    $index = $this->getDomIndex($child, $count);
 
-	/**
-	 * Returns an index of the dom element
-	 * @param DOMElement $element
-	 * @return mixed
-	 * @author mhein
-	 */
-	private function namedIndex(DOMElement &$element) {
-		foreach (self::$indexAttributes as $attr) {
-			if ($element->hasAttribute($attr)) {
-				return $element->getAttribute($attr);
-			}
-		}
-		return false;
-	}
+                    if ($this->hasChildren($child)) {
+                        $data[$index] = $this->convertDom($child);
+                    } else {
+                        $data[$index] = $child->textContent;
+                    }
+                }
+            }
+        }
 
-	/**
-	 * Tests if the node contains array to provide an
-	 * array like index
-	 * @param DOMElement $element
-	 * @return boolean
-	 * @author mhein
-	 */
-	private function arrayNode(DOMElement &$element) {
-		return in_array($element->parentNode->nodeName, self::$arrayNodes);
-	}
+        return $data;
+    }
 
-	/**
-	 * checks whether XML node for child nodes
-	 * @param	DOMElement		$element			element to check for child nodes
-	 * @return	boolean								true if element has children otherwise false
-	 * @author	Christian Doebler <christian.doebler@netways.de>
-	 */
-	private function hasChildren (DOMElement &$element) {
-		$hasChildren = false;
-		if ($element->hasChildNodes()) {
-			foreach ($element->childNodes as $node) {
-				if ($node->nodeType == XML_ELEMENT_NODE) {
-					$hasChildren = true;
-					break;
-				}
-			}
-		}
+    /**
+     * Returns index value from the dom element
+     * @param DOMElement $element
+     * @param integer $fake Fake array counter for loop sequence
+     * @return mixed
+     * @author mhein
+     */
+    private function getDomIndex(DOMElement &$element, &$fake=0) {
+        static $c = 0;
 
-		return $hasChildren;
-	}
+        $index = $this->namedIndex($element);
 
-	private function &getDatasources() {
-		return $this->xmlData['datasources'];
-	}
+        if (!$index && $this->arrayNode($element)) {
+            $index = $fake++;
+        }
 
-	private function &getTemplates() {
-		return $this->xmlData['template_code'];
-	}
-	
-	private function &getChain() {
-	    return $this->xmlData['filterchain'];
-	}
+        elseif(!$index) {
+            $index = $element->nodeName;
+        }
+        return $index;
+    }
 
-	/**
-	 *
-	 * @param string $tplName
-	 * @param array $args
-	 * @return Cronks_System_StaticContentTemplateModel
-	 */
-	public function &getTemplateObj() {
+    /**
+     * Returns an index of the dom element
+     * @param DOMElement $element
+     * @return mixed
+     * @author mhein
+     */
+    private function namedIndex(DOMElement &$element) {
+        foreach(self::$indexAttributes as $attr) {
+            if ($element->hasAttribute($attr)) {
+                return $element->getAttribute($attr);
+            }
+        }
+        return false;
+    }
 
-		if ($this->templateObject === null) {
-			$this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array (
-				'templates'		=> $this->getTemplates(),
-				'datasources'	=> $this->getDatasources(),
-			    'chain'			=> $this->getChain(),
-			    'rparam'		=> $this->getParameter('rparam', array ())
-			));
-		}
+    /**
+     * Tests if the node contains array to provide an
+     * array like index
+     * @param DOMElement $element
+     * @return boolean
+     * @author mhein
+     */
+    private function arrayNode(DOMElement &$element) {
+        return in_array($element->parentNode->nodeName, self::$arrayNodes);
+    }
 
-		return $this->templateObject;
-	}
+    /**
+     * checks whether XML node for child nodes
+     * @param	DOMElement		$element			element to check for child nodes
+     * @return	boolean								true if element has children otherwise false
+     * @author	Christian Doebler <christian.doebler@netways.de>
+     */
+    private function hasChildren(DOMElement &$element) {
+        $hasChildren = false;
 
-	public function renderTemplate($tplName, array $args=array()) {
-		return $this->getTemplateObj()->renderTemplate($tplName, $args, false, true);
-	}
+        if ($element->hasChildNodes()) {
+            foreach($element->childNodes as $node) {
+                if ($node->nodeType == XML_ELEMENT_NODE) {
+                    $hasChildren = true;
+                    break;
+                }
+            }
+        }
 
-	public function getTemplateJavascript() {
-		return $this->getTemplateObj()->jsGetCode(false);
-	}
+        return $hasChildren;
+    }
 
-	/**
-	 * @deprecated
-	 */
-	public function parseTemplate($tplName, array $args=array()) {
-		return $this->renderTemplate($tplName, $args);
-	}
+    private function &getDatasources() {
+        return $this->xmlData['datasources'];
+    }
+
+    private function &getTemplates() {
+        return $this->xmlData['template_code'];
+    }
+
+    private function &getChain() {
+        return $this->xmlData['filterchain'];
+    }
+
+    /**
+     *
+     * @param string $tplName
+     * @param array $args
+     * @return Cronks_System_StaticContentTemplateModel
+     */
+    public function &getTemplateObj() {
+
+        if ($this->templateObject === null) {
+            $this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array(
+                                        'templates'		=> $this->getTemplates(),
+                                        'datasources'	=> $this->getDatasources(),
+                                        'chain'			=> $this->getChain(),
+                                        'rparam'		=> $this->getParameter('rparam', array())
+                                    ));
+        }
+
+        return $this->templateObject;
+    }
+
+    public function renderTemplate($tplName, array $args=array()) {
+        return $this->getTemplateObj()->renderTemplate($tplName, $args, false, true);
+    }
+
+    public function getTemplateJavascript() {
+        return $this->getTemplateObj()->jsGetCode(false);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function parseTemplate($tplName, array $args=array()) {
+        return $this->renderTemplate($tplName, $args);
+    }
 
 
 }

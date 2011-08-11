@@ -23,7 +23,7 @@ class NsmPrincipal extends BaseNsmPrincipal {
                            'refClass'	=> 'CronkPrincipalCronk'
                        ));
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Doctrine_Record::preUpdate()
@@ -31,7 +31,7 @@ class NsmPrincipal extends BaseNsmPrincipal {
     public function preUpdate($event) {
         $this->updatePrincipalType();
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Doctrine_Record::preInsert()
@@ -39,7 +39,7 @@ class NsmPrincipal extends BaseNsmPrincipal {
     public function preInsert($event) {
         $this->updatePrincipalType();
     }
-    
+
     /**
      * Checks for existing principal type and change
      * id needed
@@ -47,21 +47,23 @@ class NsmPrincipal extends BaseNsmPrincipal {
      * @return true if no exception
      */
     private function updatePrincipalType() {
-        
+
         if (in_array($this->principal_type, array(self::TYPE_ROLE, self::TYPE_USER)) === true) {
             return true;
         }
-        
+
         if ($this->principal_role_id > 0 && $this->principal_user_id > 0) {
             throw new AppKitDoctrineException('Unexpected principal condition, please check the object');
         }
-        
+
         if ($this->principal_role_id > 0) {
             $this->principal_type = self::TYPE_ROLE;
-        } elseif ($this->principal_user_id > 0) {
+        }
+
+        elseif($this->principal_user_id > 0) {
             $this->principal_type = self::TYPE_USER;
         }
-        
+
         return true;
     }
 }

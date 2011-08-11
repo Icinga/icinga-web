@@ -1,5 +1,5 @@
 <?php
-class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements IcingaConsoleCommandInterface{
+class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements IcingaConsoleCommandInterface {
     protected $command;
     protected $arguments = array();
     /**
@@ -91,6 +91,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
         if (isset($parameters["command"])) {
             $this->setCommand($parameters["command"]);
         }
+
         if (isset($parameters["connection"])) {
             $this->setConnection($parameters["connection"]);
         }
@@ -195,8 +196,11 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
 
     protected function createSymbolList() {
         $this->symList = array();
-        if(!$this->connection)
+
+        if (!$this->connection) {
             throw new AppKitException("No connection established");
+        }
+
         foreach($this->connection->getAccessDefinition() as $access=>$content) {
             foreach($content as $fileOrFolder=>$symdefs) {
                 foreach($symdefs as $symname=>$resolved) {

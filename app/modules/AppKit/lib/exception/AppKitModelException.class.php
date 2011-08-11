@@ -6,5 +6,5 @@
  *
  */
 class AppKitModelException extends AppKitException {
-    
+
 }

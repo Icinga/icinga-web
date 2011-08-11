@@ -17,7 +17,7 @@ class Api_ApiHostRequestModel extends ApiDataRequestBaseModel {
                 break;
             }
         }
-      
+
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaHosts h");
 
@@ -72,7 +72,7 @@ class Api_ApiHostRequestModel extends ApiDataRequestBaseModel {
     public function getHostsByInstances(array $instance) {
         $desc = $this->createRequestDescriptor();
         $desc->select('*')->from("IcingaHosts h")->innerJoin("h.instance i")->whereIn("i.instance_name",$instance);
-        
+
         return $desc->execute(NULL,Doctrine_Core::HYDRATE_RECORD);
     }
 

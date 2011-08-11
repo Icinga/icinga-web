@@ -63,9 +63,9 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             if ($row['HOST_IS_PENDING'] == '1') {
                 $row['HOST_CURRENT_STATE'] = "99";
             }
-           
-            $objectId = $idPrefix . $row['HOST_OBJECT_ID']; 
-           
+
+            $objectId = $idPrefix . $row['HOST_OBJECT_ID'];
+
             $hosts[$objectId] = array(
                                     'id'		=> $objectId,
                                     'name'		=> $row['HOST_NAME'],
@@ -82,7 +82,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             $parentObjectId = $idPrefix . $row->HOST_PARENT_OBJECT_ID;
 
             if (!array_key_exists($childObjectId, $hostReferences)) {
-            //    $hostReferences[$childObjectId] = $hosts[$childObjectId];
+                //    $hostReferences[$childObjectId] = $hosts[$childObjectId];
             }
 
             unset($hosts[$childObjectId]);
@@ -164,13 +164,15 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
      * @author	Christian Doebler <christian.doebler@netways.de>
      */
     private function flattenStructure($hosts) {
-       
+
         $hostsFlat = array();
-       
+
         foreach($hosts as $hostId => $hostData) {
-             
-            if(!isset($hostData['id']))
-                continue; 
+
+            if (!isset($hostData['id'])) {
+                continue;
+            }
+
             $currentHost = array(
                                'id'		=> $hostData['id'],
                                'name'		=> $hostData['name'],

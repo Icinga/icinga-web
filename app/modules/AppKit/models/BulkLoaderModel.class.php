@@ -62,14 +62,14 @@ class AppKit_BulkLoaderModel extends AppKitBaseModel implements AgaviISingletonM
         $files = array();
 
         foreach($this->getParameter('files') as $file) {
-            if(false !== ($file = realpath($file)) && @is_readable($file)) {
+            if (false !== ($file = realpath($file)) && @is_readable($file)) {
                 $files[] = $file;
             } else {
                 AppKitAgaviUtil::log(sprintf(
-                    '%s: File %s not readable.',
-                    get_class($this),
-                    $file
-                ), AgaviLogger::ERROR);
+                                         '%s: File %s not readable.',
+                                         get_class($this),
+                                         $file
+                                     ), AgaviLogger::ERROR);
             }
         }
 
@@ -89,27 +89,27 @@ class AppKit_BulkLoaderModel extends AppKitBaseModel implements AgaviISingletonM
         $content = null;
 
         foreach($this->getParameter('files') as $file) {
-            if(false !== ($fcontent = @file_get_contents($file))) {
-                if(!$this->getParameter('comments', true)) {
+            if (false !== ($fcontent = @file_get_contents($file))) {
+                if (!$this->getParameter('comments', true)) {
                     $fcontent = preg_replace("!^\s*//.*$!m", "\n", $fcontent);
                     $fcontent = preg_replace("!^\s*/\*.*?\*/!s", "", $fcontent);
                 }
 
-                if(!$this->getParameter('indent', true)) {
+                if (!$this->getParameter('indent', true)) {
                     $fcontent = implode("\n", array_map('trim', explode("\n", $fcontent)));
                 }
 
-                if(!$this->getParameter('newlines', true)) {
+                if (!$this->getParameter('newlines', true)) {
                     $fcontent = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $fcontent);
                 }
 
                 $content .= $fcontent . "\n";
             } else {
                 AppKitAgaviUtil::log(sprintf(
-                    '%s: Could not get contents of file %s.',
-                    get_class($this),
-                    $file
-                ), AgaviLogger::ERROR);
+                                         '%s: Could not get contents of file %s.',
+                                         get_class($this),
+                                         $file
+                                     ), AgaviLogger::ERROR);
             }
         }
 

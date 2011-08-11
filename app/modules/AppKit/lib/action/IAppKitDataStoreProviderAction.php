@@ -1,7 +1,7 @@
 <?
 /**
 * IAppKitDataStoreProviderAction
-* Tags an action as an provider for DataStores, which will be automatically parsed 
+* Tags an action as an provider for DataStores, which will be automatically parsed
 * for client-side use
 *
 *

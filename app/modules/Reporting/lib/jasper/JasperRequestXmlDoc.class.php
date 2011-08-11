@@ -1,44 +1,44 @@
 <?php
 
 /**
- * 
+ *
  * Handles the XML request for jasperserver with soap.
  * @author mhein
  *
  */
 class JasperRequestXmlDoc extends DOMDocument implements JasperI {
-    
+
     /**
      * @var DOMElement
      */
     private $__rootNode = null;
-    
-    private $__resourceDescriptors = array (
-        'name'        => '',
-        'wsType'      => '',
-        'uriString'   => '',
-        'isNew'       => 'false'
-    );
-    
-    private $__argumentData = array ();
-    
-    private $__parameterData = array ();
-    
+
+    private $__resourceDescriptors = array(
+                                         'name'        => '',
+                                         'wsType'      => '',
+                                         'uriString'   => '',
+                                         'isNew'       => 'false'
+                                     );
+
+    private $__argumentData = array();
+
+    private $__parameterData = array();
+
     private $__label = null;
-    
+
     private $__documentReady = false;
-    
+
     public function __construct($operationName) {
         parent::__construct(self::XML_VERSION, self::XML_ENCODING);
-        
+
         $this->__rootNode = $this->__createRootNode($operationName);
         $this->appendChild($this->__rootNode);
     }
-    
+
     public function getOperationName() {
         return $this->__rootNode->getAttribute('operationName');
     }
-    
+
     /**
      * To create the document root, the node and its attributes
      * are always the same
@@ -50,60 +50,60 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
         $root->setAttribute('locale', self::JASPER_LOCALE);
         return $root;
     }
-    
+
     /**
      * Build the document structures based on parameters and arguments. This method
      * is also called if you convert ths class instance to string
      */
     public function createRequest() {
-        
+
         if ($this->__documentReady === true) {
             return true;
         }
-        
-        foreach ($this->__argumentData as $aName=>$aValue) {
+
+        foreach($this->__argumentData as $aName=>$aValue) {
             $argument = $this->createElement('argument');
             $argument->setAttribute('name', $aName);
             $argument->appendChild($this->createCDATASection($aValue));
             $this->__rootNode->appendChild($argument);
         }
-        
+
         $resourceDescriptor = $this->createElement('resourceDescriptor');
-        
-        foreach ($this->__resourceDescriptors as $rName => $rValue) {
+
+        foreach($this->__resourceDescriptors as $rName => $rValue) {
             $resourceDescriptor->setAttribute($rName, $rValue);
         }
-        
+
         $label = $this->createElement('label', ($this->__label==null) ? 'null' : $this->__label);
         $resourceDescriptor->appendChild($label);
-        
-        foreach ($this->__parameterData as $pName => $pValue) {
+
+        foreach($this->__parameterData as $pName => $pValue) {
             $parameter = $this->createElement('parameter');
             $parameter->setAttribute('name', $pName);
             $parameter->appendChild($this->createCDATASection($pValue));
             $resourceDescriptor->appendChild($parameter);
         }
-        
+
         $this->__rootNode->appendChild($resourceDescriptor);
-        
+
         return $this->__documentReady = true;
     }
-    
+
     /**
      * Remove all DOM structures to build new
      */
     public function resetDocument() {
-        foreach ($this->getElementsByTagName('argument') as $delNode) {
+        foreach($this->getElementsByTagName('argument') as $delNode) {
             $this->__rootNode->removeChild($delNode);
         }
-        
-        foreach ($this->getElementsByTagName('resourceDescriptor') as $delNode) {
+
+        foreach($this->getElementsByTagName('resourceDescriptor') as $delNode) {
             $this->__rootNode->removeChild($delNode);
         }
-        
+
         $this->__documentReady = false;
     }
-    
+
     /**
      * Adds a parameter to resource descriptor
      * @param string $name
@@ -112,7 +112,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
     public function setParameter($name, $value) {
         $this->__parameterData[$name] = $value;
     }
-    
+
     /**
      * Removes a parameter from stack
      * @param string $name
@@ -123,7 +123,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
             return true;
         }
     }
-    
+
     /**
      * Adds an argument to the request
      * @param string $name
@@ -132,7 +132,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
     public function setArgument($name, $value) {
         $this->__argumentData[$name] = $value;
     }
-    
+
     /**
      * Deletes an argument from argument stack
      * @param string $name
@@ -143,7 +143,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
             return true;
         }
     }
-    
+
     /**
      * Adds a resaource descriptor attribute to rd node
      * @param string $name
@@ -152,7 +152,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
     public function setResourceDescriptor($name, $value) {
         $this->__resourceDescriptors[$name] = $value;
     }
-    
+
     /**
      * Removes a resource descriptor attribute from stack
      * @param string $name
@@ -162,7 +162,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
             unset($this->__resourceDescriptors[$name]);
         }
     }
-    
+
     /**
      * Sets the label for the operation
      * @param string $label
@@ -170,7 +170,7 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
     public function setLabel($label) {
         $this->__label = $label;
     }
-    
+
     /**
      * Converst the DOM structure to xml string. If the document is not
      * created yet the method creates the DOM for you
@@ -180,10 +180,10 @@ class JasperRequestXmlDoc extends DOMDocument implements JasperI {
         if ($this->__documentReady === false) {
             $this->createRequest();
         }
-        
+
         return $this->saveXML($this);
     }
-    
+
     /**
      * Returns the XML as soap parameter ready to throw into
      * the jasperserver to Apache Axis

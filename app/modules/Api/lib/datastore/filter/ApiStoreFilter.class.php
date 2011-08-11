@@ -17,16 +17,18 @@ class ApiStoreFilter extends GenericStoreFilter {
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected $filterFields = array();
-    
+
     /**
     * @see GenericStoreFilter::parse
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     public static function parse($filter,$parser) {
-        if(!isset($filter["field"]) || !isset($filter["operator"]) || !isset($filter["value"]))
+        if (!isset($filter["field"]) || !isset($filter["operator"]) || !isset($filter["value"])) {
             return null;
-        else return new self($filter['field'],$filter['operator'],$filter['value']);
+        } else {
+            return new self($filter['field'],$filter['operator'],$filter['value']);
+        }
     }
 
     /**
@@ -44,8 +46,8 @@ class ApiStoreFilter extends GenericStoreFilter {
             $f->name = $filter["field"];
             $f->operators = $filter["operators"];
             $f->possibleValues = $filter["possibleValues"];
-            $this->addFilterField($f); 
-        } 
+            $this->addFilterField($f);
+        }
     }
 
     /**
@@ -62,24 +64,26 @@ class ApiStoreFilter extends GenericStoreFilter {
     * Formats the value in this Filter and adds quotes if necessary
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
-    **/ 
+    **/
     private function formatValues(Doctrine_Connection $c) {
         $value = array();
-        if(is_array($this->value)) {
+
+        if (is_array($this->value)) {
             foreach($this->value as $v) {
-                if(!is_numeric($v)) {
+                if (!is_numeric($v)) {
                     $v = $c->quote($v,"string");
                 }
+
                 $value[] = $c->quote($v,"decimal");
             }
             return $value;
-        } else { 
+        } else {
             return $c->quote($this->value,"string");
         }
-    }  
+    }
 
     /**
-    * Applies this filter to a IcingaDoctrine_Query or exports it (depending 
+    * Applies this filter to a IcingaDoctrine_Query or exports it (depending
     * if the $dqlOnly is set)
     *
     * @param IcingaDoctrine_Query   The query to apply this filter to
@@ -92,17 +96,21 @@ class ApiStoreFilter extends GenericStoreFilter {
         $connection = $q->getConnection();
         $v = $this->formatValues($connection);
         $dql = $connection->quoteIdentifier($this->field)." ".$this->operator;
-        if(is_array($v)) 
+
+        if (is_array($v)) {
             $dql .= " (".implode(",",$v).")";
-        else { 
+        } else {
             $dql .= " ".$v;
         }
-        if($dqlOnly)
+
+        if ($dqlOnly) {
             return $dql;
-        else 
+        } else {
             $q->where($dql);
+        }
+
         return;
-    } 
-} 
+    }
+}
 
 

@@ -1,39 +1,38 @@
 <?php
 /**
-* Model that can be used to transform raw DataStoreModel results for  
+* Model that can be used to transform raw DataStoreModel results for
 * ExtJS Grids/Trees, etc
 * Currently supported:
 * Input:
 *   - Objects
 *
 * Output:
-*   - Grid 
+*   - Grid
 * @package Icinga_Api
 * @category DataStore
-* 
+*
 *
 * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
 **/
-class API_Store_DataStoreResultModel extends IcingaBaseModel 
-{
+class API_Store_DataStoreResultModel extends IcingaBaseModel {
     protected $root = "result";
 
-    public $data = array();    
+    public $data = array();
     protected $model = null;
-    protected $aliasMap; 
-    
+    protected $aliasMap;
+
     /**
     * Binds a model for this result (needed for recreation of aliases)
     *
     * @param IcingaApiDataStoreModel The model to bind to this result
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
-    **/   
+    **/
     public function setModel(IcingaApiDataStoreModel $model) {
         $this->model = $model;
         $this->createAliasMap();
     }
-    
+
     /**
     * Parses this result for export
     *
@@ -44,8 +43,8 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     public function parseResult($rawResult,array $fields) {
-        if(is_array($rawResult)) {
-            if(isset($rawResult["count"])) {
+        if (is_array($rawResult)) {
+            if (isset($rawResult["count"])) {
                 $this->count = $rawResult["count"];
                 $rawResult = $rawResult["data"];
             } else {
@@ -54,17 +53,18 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
         } else {
             $this->count = count($rawResult);
         }
-        if(is_array($rawResult)) {
-             
+
+        if (is_array($rawResult)) {
+
             $this->parseInputFromArray($rawResult,$fields);
         } else  {
             $this->parseInputFromRecord($rawResult,$fields);
         }
     }
-   
+
 
     /**
-    * Internal section that sets all fields \w alias from the 
+    * Internal section that sets all fields \w alias from the
     * record defined here
     *
     * @param Doctrine_Record    The record to get the result for
@@ -76,39 +76,44 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
     **/
     protected function fetchFieldsFromRecord($record, array $fields) {
         $result = array();
-        
+
         foreach($fields as $field) {
             $value;
             $aliasFieldSplit = explode(".",$field,2);
-            if(count($aliasFieldSplit) > 1) { 
+
+            if (count($aliasFieldSplit) > 1) {
                 $map = $this->aliasMap[$aliasFieldSplit[0]];
                 $nodeInRecord = $record;
                 foreach($map as $mapNode) {
-                    $nodeInRecord = $nodeInRecord->{$mapNode};        
-                } 
+                    $nodeInRecord = $nodeInRecord-> {$mapNode};
+                }
                 $value = $nodeInRecord;
-                if(count($value) == 1) {
-                    $value = $value->getFirst()->{$aliasFieldSplit[1]};
+
+                if (count($value) == 1) {
+                    $value = $value->getFirst()-> {$aliasFieldSplit[1]};
                 } else {
                     $valueArr = array();
                     foreach($value as $element) {
-                        $valueArr[] = $element->{$aliasFieldSplit[1]};
+                        $valueArr[] = $element-> {$aliasFieldSplit[1]};
                     }
                     $value = $valueArr;
                 }
-                if(!isset($result[$aliasFieldSplit[0]]))
+
+                if (!isset($result[$aliasFieldSplit[0]])) {
                     $result[$aliasFieldSplit[0]] = array();
-                $result[$aliasFieldSplit[0]][$aliasFieldSplit[1]] = $value; 
+                }
+
+                $result[$aliasFieldSplit[0]][$aliasFieldSplit[1]] = $value;
             } else {
-                $result[$field] = $record->{$field};     
-            } 
+                $result[$field] = $record-> {$field};
+            }
         }
         return $result;
     }
     /**
-    * Initializes @see aliasMap with the relation names and orders to 
+    * Initializes @see aliasMap with the relation names and orders to
     * resolve aliases in the record tree
-    * @access private  
+    * @access private
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
@@ -117,9 +122,9 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
         $aliases = $this->model->getAliasDefs();
         foreach($aliases as $alias=>$relation) {
             $this->aliasMap[$alias] = $this->resolveRelation($relation,$aliases);
-        } 
+        }
     }
-    
+
     /**
     * Resolves a relation to a complete path (which joins are needed to get from table a to table c
     * @access private
@@ -128,31 +133,31 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
-    protected function resolveRelation(array $relation,array $aliases) {  
-        if($relation["src"] == "my") {
+    protected function resolveRelation(array $relation,array $aliases) {
+        if ($relation["src"] == "my") {
             return array($relation["relation"]);
-        } else {  
+        } else {
             $path = $this->resolveRelation($aliases[$relation["src"]],$aliases);
             array_push($path,$relation["relation"]);
             return $path;
         }
     }
-    
-    /**  
+
+    /**
     * @TODO: IMPLEMENT
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     protected function parseInputFromArray(array $rawResult,array $fields) {
         foreach($rawResult as $key=>$value) {
-            if(is_string($value)) {
+            if (is_string($value)) {
                 $data[$key] = $value;
             } else {
                 $data[$key] = json_encode($value);
             }
-        } 
+        }
     }
-    
+
     /**
     * Parses a record for use in this class
     * @param Doctrine_Collection    The records to parse
@@ -160,16 +165,16 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
     *
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
-    protected function parseInputFromRecord(Doctrine_Collection $records,array $fields) {  
+    protected function parseInputFromRecord(Doctrine_Collection $records,array $fields) {
         foreach($records as $current) {
             $iterator = $current->getIterator();
             $record = array();
-            $this->data[] = $this->fetchFieldsFromRecord($current,$fields);      
-        } 
+            $this->data[] = $this->fetchFieldsFromRecord($current,$fields);
+        }
     }
-    
+
     /**
-    *   Returns an array that can be send to the client as a json 
+    *   Returns an array that can be send to the client as a json
     *   object and is suitable as a result for ExtJS Grids
     *   @param {mixed}  The result returned from doctrine, either an array or Doctrine_Record instance
     *
@@ -183,7 +188,7 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
         $result[$root] = $this->data;
         $result["totalCount"] = $this->count;
         return $result;
-         
+
     }
 
     /**
@@ -196,7 +201,8 @@ class API_Store_DataStoreResultModel extends IcingaBaseModel
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
-        if(isset($parameters["model"]))
+        if (isset($parameters["model"])) {
             $this->setModel($parameters["model"]);
+        }
     }
 }

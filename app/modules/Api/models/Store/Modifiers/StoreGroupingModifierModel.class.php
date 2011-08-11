@@ -1,35 +1,36 @@
 <?php
-class Api_Store_Modifiers_StoreGroupingModifierModel extends IcingaBaseModel 
-        implements IDataStoreModifier 
-{
-    
+class Api_Store_Modifiers_StoreGroupingModifierModel extends IcingaBaseModel
+    implements IDataStoreModifier {
+
     protected $mappedParameters = array(
-        "groupfields" => "groupfields"
-    );
-    
+                                      "groupfields" => "groupfields"
+                                  );
+
     protected $groupfields = array();
 
     public function setGroupfields($field) {
-        if(is_array($field))
+        if (is_array($field)) {
             $field = implode(",",$field);
+        }
+
         $this->groupfields = $field;
     }
     public function getGroupfields() {
         return $this->groupfields;
     }
-    
-    
+
+
     /**
     * @see IDataStoreModifier::handleArgument
     **/
     public function handleArgument($name,$value) {
-        switch($name)   {
+        switch ($name)   {
             case 'groupfields':
                 $this->groupfields = $value;
                 break;
         }
-    }   
-    
+    }
+
     /**
     * @see IDataStoreModifier::getMappedArguments();
     **/
@@ -38,23 +39,23 @@ class Api_Store_Modifiers_StoreGroupingModifierModel extends IcingaBaseModel
     }
 
     /**
-    * 
+    *
     * @see IDataStoreModifier::modify();
     **/
     public function modify(&$o) {
         $this->modifyImpl($o); // type safe call
     }
-    
+
     /**
     * Typesafe call to modify
     * @access private
     **/
     protected function modifyImpl(Doctrine_Query &$o) {
-        if($this->groupfields) {
+        if ($this->groupfields) {
             $groups = explode(",",$this->groupfields);
             foreach($groups as $group)
-                $o->addGroupBy($group);
-        }    
+            $o->addGroupBy($group);
+        }
     }
 
     /**
@@ -62,9 +63,9 @@ class Api_Store_Modifiers_StoreGroupingModifierModel extends IcingaBaseModel
     **/
     public function __getJSDescriptor() {
         return array(
-            "type"=>"group",
-            "params" => $this->getMappedArguments()
-        );
+                   "type"=>"group",
+                   "params" => $this->getMappedArguments()
+               );
     }
 }
 

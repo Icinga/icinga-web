@@ -22,12 +22,12 @@ final class AppKitIteratorUtil {
      */
     public static function RegexRecursiveDirectoryIterator($dir, $re, $mode=RecursiveRegexIterator::MATCH) {
         return new RegexIterator(
-            new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($dir)
-            ),
-            $re,
-            $mode
-        );
+                   new RecursiveIteratorIterator(
+                       new RecursiveDirectoryIterator($dir)
+                   ),
+                   $re,
+                   $mode
+               );
     }
 
 }

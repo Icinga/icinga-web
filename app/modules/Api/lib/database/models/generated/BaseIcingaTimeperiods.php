@@ -75,13 +75,13 @@ abstract class BaseIcingaTimeperiods extends Doctrine_Record {
                           'foreign' => 'instance_id'
                       ));
         $this->hasOne('IcingaObjects as object', array(
-            'local' => 'timeperiod_object_id',
-            'foreign' => 'object_id'
-        ));
+                          'local' => 'timeperiod_object_id',
+                          'foreign' => 'object_id'
+                      ));
         $this->hasMany('IcingaTimeperiodTimeranges as timeranges',array(
-            'local' => 'timeperiod_id',
-            'foreign' => 'timeperiod_id'
-        ));
+                           'local' => 'timeperiod_id',
+                           'foreign' => 'timeperiod_id'
+                       ));
         parent::setUp();
 
     }
