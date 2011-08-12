@@ -55,7 +55,7 @@ class doctrineTask extends Task {
 	}
 	
 	public function dropDB() {
-		Doctrine::dropDatabases("mainConnection");
+		Doctrine::dropDatabases(self::DB_NAME);
 	}
 	
 }
