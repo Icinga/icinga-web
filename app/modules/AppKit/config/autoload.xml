@@ -6,6 +6,7 @@
 		<autoload name="AppKitBaseAction">%core.module_dir%/AppKit/lib/action/AppKitBaseAction.class.php</autoload>
 		<autoload name="AppKitBaseModel">%core.module_dir%/AppKit/lib/model/AppKitBaseModel.class.php</autoload>
 		<autoload name="AppKitBaseView">%core.module_dir%/AppKit/lib/view/AppKitBaseView.class.php</autoload>
+		<autoload name="Net_SSH2">%core.root_dir%/lib/phpseclib/Net/SSH2.php</autoload>
 
 		<!-- Auth and auth providers -->
 		<autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
