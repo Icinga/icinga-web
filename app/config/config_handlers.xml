@@ -27,6 +27,8 @@
                 <ae:parameters>
                     <ae:parameter name="query"><![CDATA[//ae:configurations/ae:configuration/databases:databases]]></ae:parameter>
                     <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(d=http://agavi.org/agavi/config/parts/databases/1.0) xpointer(//ae:configurations/ae:configuration/d:databases/d:database)]]></ae:parameter>
+                    <ae:parameter name="includeNS">databases</ae:parameter>
+                    <ae:parameter name="debug">true</ae:parameter>
                 </ae:parameters>
 
                 <validation>%core.agavi_dir%/config/xsd/databases.xsd</validation>

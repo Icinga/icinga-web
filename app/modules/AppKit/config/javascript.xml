@@ -24,7 +24,6 @@
             <ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
         </javascript>
         
-        <!-- testtest -->
         <jactions>
         	<jaction>
         		<ae:parameter name="module">AppKit</ae:parameter>
