@@ -7,6 +7,8 @@ class NsmRole extends BaseNsmRole {
     private $principals_list = null;
     private $principals = null;
     private $children = null;
+    private $context = null;
+    private $storage = null;
 
     public function setUp() {
 
@@ -24,6 +26,19 @@ class NsmRole extends BaseNsmRole {
         $this->actAs('Timestampable', $options);
 
     }
+
+    public function getContext() {
+        if(!$this->context)
+            $this->context = AgaviContext::getInstance();
+        return $this->context;
+    }
+
+    public function getStorage() {
+        if(!$this->storage)
+            $this->storage = $this->getContext()->getStorage();
+        return $this->storage;
+    }
+
 
     public function hasParent() {
         if ($this->get('role_parent')) {
@@ -174,10 +189,21 @@ class NsmRole extends BaseNsmRole {
      * @return Doctrine_Collection
      */
     public function getTargetValues($target_name) {
+        if($this->getStorage()->read("target_".$target_name."_role")) {
+            $targets = unserialize($this->getStorage()->read("target_".$target_name."_role"));
+            if($targets)
+                return $targets;
+        }
+        $this->getStorage()->write("target_".$target_name."_role",serialize($result));
         return $this->getTargetValuesQuery($target_name)->execute();
     }
 
     public function getTargetValue($target_name, $value_name) {
+        if($this->getStorage()->read("target_".$target_name."_".$value_name."_role")) {
+            $targets = unserialize($this->getStorage()->read("target_".$target_name."_".$value_name."_role"));
+            if($targets)
+                return $targets;
+        }
         $q = $this->getTargetValuesQuery($target_name);
         $q->select('tv.tv_val');
         $q->andWhere('tv.tv_key=?', array($value_name));
@@ -187,10 +213,19 @@ class NsmRole extends BaseNsmRole {
         foreach($res as $r) {
             $out[] = $r->tv_val;
         }
+        
+        $this->getStorage()->write("target_".$target_name."_".$value_name."_role",serialize($out));
         return $out;
     }
 
     public function getTargetValuesArray() {
+        if($this->getStorage()->read("targetValuesArray_role")) {
+            $targets = unserialize($this->getStorage()->read("targetValuesArray_role"));
+            if($targets)
+                return $targets;
+        }
+
+
         $tc = Doctrine_Query::create()
               ->select('t.target_name, t.target_id')
               ->from('NsmTarget t')
@@ -219,7 +254,8 @@ class NsmRole extends BaseNsmRole {
                 $out[ $t->target_name ][] = $tmp;
             }
         }
-
+        
+        $this->getStorage()->write("targetValuesArray_role",serialize($out));
         return $out;
     }
 }

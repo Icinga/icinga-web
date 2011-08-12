@@ -7,6 +7,8 @@ class NsmUser extends BaseNsmUser {
 
     const HASH_ALGO = 'sha256';
 
+    private static $prefCache = array();
+
     /**
      *
      * @var Doctrine_Collection
@@ -18,7 +20,8 @@ class NsmUser extends BaseNsmUser {
      * @var array
      */
     private $principals_list	= null;
-
+    private $context = null;
+    private $storage = null;
     /**
      * (non-PHPdoc)
      * @see lib/appkit/database/models/generated/BaseNsmUser#setTableDefinition()
@@ -44,8 +47,20 @@ class NsmUser extends BaseNsmUser {
                      ));
     }
 
-    public function setUp() {
+    public function getContext() {
+        if(!$this->context)
+            $this->context = AgaviContext::getInstance();
+        return $this->context;
+    }
 
+    public function getStorage() {
+        if(!$this->storage)
+            $this->storage = $this->getContext()->getStorage();
+        return $this->storage;
+    }
+
+    public function setUp() {
+        
         parent::setUp();
 
         $this->hasMany('NsmRole', array('local'		=> 'usro_user_id',
@@ -419,10 +434,23 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getTargetValues($target_name) {
-        return $this->getTargetValuesQuery($target_name)->execute();
+        if($this->getStorage()->read("target_".$target_name)) {
+            $targets = unserialize($this->getStorage()->read("target_".$target_name));
+            if($targets)
+                return $targets;
+        }
+        $result =  $this->getTargetValuesQuery($target_name)->execute(); 
+        $this->getStorage()->write("target_".$target_name,serialize($result));
+        
+        return $result;
     }
 
     public function getTargetValue($target_name, $value_name) {
+        if($this->getStorage()->read("target_".$target_name."_".$value_name)) {
+            $targets = unserialize($this->getStorage()->read("target_".$target_name."_".$value_name));
+            if($targets)
+                return $targets;
+        }
         $q = $this->getTargetValuesQuery($target_name);
         $q->select('tv.tv_val');
         $q->andWhere('tv.tv_key=?', array($value_name));
@@ -432,10 +460,17 @@ class NsmUser extends BaseNsmUser {
         foreach($res as $r) {
             $out[] = $r->tv_val;
         }
-        return $out;
+        $this->getStorage()->write("target_".$target_name."_".$value_name,serialize($out));
+        return $targets;
     }
 
     public function getTargetValuesArray() {
+        if($this->getStorage()->read("targetValuesArray")) {
+            $targets = unserialize($this->getStorage()->read("targetValuesArray"));
+            if($targets)
+                return $targets;
+        }
+
         $tc = Doctrine_Query::create()
               ->select('t.target_name, t.target_id')
               ->from('NsmTarget t')
@@ -464,7 +499,8 @@ class NsmUser extends BaseNsmUser {
                 $out[ $t->target_name ][] = $tmp;
             }
         }
-
+    
+        $this->getStorage()->write("targetValuesArray",serialize($out));
         return $out;
     }
 }
