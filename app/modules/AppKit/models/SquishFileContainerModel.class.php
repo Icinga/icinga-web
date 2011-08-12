@@ -91,28 +91,54 @@ class AppKit_SquishFileContainerModel extends AppKitBaseModel {
                 return true;
             }
         }
-
+        
+        if ($this->useCaching) {
+            $this->readCached();
+        }
+        
+        if ($this->content) {
+            return false;
+        }
+        
         $this->content = null;
-
+        
         if (is_array($this->files)) {
-            if ($this->useCaching) {
-                $this->readCached();
-            }
-
-            if ($this->content) {
-                return false;
-            }
+            
+            $this->content .= '// --- Squished files ---'. str_repeat(chr(10), 2);
 
             $loader = $this->getContext()->getModel('BulkLoader', 'AppKit', array(
                     'newlines' => false,
                     'indent' => false,
                     'comments' => false
-                                                    ));
+            ));
 
             $loader->setFiles($this->files);
-            $this->content = $loader->getContent();
+            
+            $this->content .= $loader->getContent(). str_repeat(chr(10), 2);
+        }
+        
+        if ($this->actions) {
+            
+            $this->content .= '// --- Squished actions ---'. str_repeat(chr(10), 2);
+            
+            foreach ($this->actions as $action) {
+                if (isset($action['module']) && isset($action['action'])) {
+                    
+                    $r = $this->getContext()->getController()->createExecutionContainer($action['module'], $action['action'], null, $action['output_type'])->execute();
+                    
+                    if ($r->hasContent()) {
+                        $this->content .= $r->getContent(). str_repeat(chr(10), 2);
+                    }
+                    
+                } else {
+                    throw new AppKitModelException('Content action to squish need module and action as parameter!');
+                }
+            }
+        }
+        
+        if ($this->content !== null) {
             $this->checksum = md5($this->content);
-
+            
             if ($this->useCaching) {
                 $this->cacheContent();
             }
