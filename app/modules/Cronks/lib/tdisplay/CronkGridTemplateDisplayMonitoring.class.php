@@ -20,7 +20,7 @@ class CronkGridTemplateDisplayMonitoring extends CronkGridTemplateDisplay {
 
         if (($m = $ref->getMethod($type))) {
             if ($m->isPublic() && $m->isStatic()) {
-                return  $this->getAgaviTranslationManager()->_($m->invoke(null, $val));
+                return  AgaviContext::getInstance()->getTranslationManager()->_($m->invoke(null, $val));
             }
         }
 
