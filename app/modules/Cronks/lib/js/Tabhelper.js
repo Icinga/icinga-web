@@ -168,6 +168,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
 				}, {
 					text: _("Close others"),
 					id: tp.id + '-close-others',
+					iconCls : 'icinga-icon-applications-stack',
 					handler: function() {
 						tp.items.each(function(item){
 							if(item.closable && item != ctxItem){
