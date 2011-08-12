@@ -27,15 +27,17 @@ class SshConsoleConnection extends BaseConsoleConnection {
         }
 
         $success = false;
-        $this->resource = ssh2_connect($this->host,$this->port, $this->methods);
+        $this->resource = new Net_SSH2($this->host,$this->port);
+        
 
         switch ($this->authType) {
             case 'none':
-                $success = ssh2_auth_none($this->resource,$this->username);
+                $success = $this->resource->login($this->username);
                 break;
 
             case 'password':
-                $success = ssh2_auth_password($this->resource,$this->username,$this->password);
+                
+                $success = $this->resource->login($this->username,$this->password);
                 break;
 
             case 'key':
@@ -46,24 +48,22 @@ class SshConsoleConnection extends BaseConsoleConnection {
                 if (!is_readable($this->privKeyLocation)) {
                     throw new ApiAuthorisationFailedException("SSH private key not found/readable at the specified location");
                 }
-
-                $success = @ssh2_auth_pubkey_file($this->resource,$this->username,$this->pubKeyLocation,$this->privKeyLocation,$this->password);
+                $key = new Crypt_RSA();
+                if($this->password)
+                    $key->loadKey($this->password);
+                $key->loadKey(file_get_contents($this->privKeyLocation));
+                $success = $this->resource->login($this->username,$key);
                 break;
 
             default:
                 throw new ApiInvalidAuthTypeException("Unknown authtype ".$this->authType);
         }
 
-        if (!$success || !is_resource($this->resource)) {
-            throw new ApiAuthorisationFailedException("SSH auth for user ".$this->username." failed (using authtype ".$this->authType);
+        if (!$success || !is_object($this->resource)) {
+            throw new ApiAuthorisationFailedException("SSH auth for user ".$this->username." failed (using authtype ".$this->authType.') :'.print_r($this->resource->getErrors(),true));
         }
 
         $this->connected = true;
-        $this->terminal = ssh2_shell($this->resource);
-        $this->stdout = ssh2_fetch_stream($this->terminal,SSH2_STREAM_STDIO);
-        $this->stderr = ssh2_fetch_stream($this->terminal,SSH2_STREAM_STDERR);
-
-
     }
 
     public function onDisconnect($reason,$message,$language) {
@@ -75,60 +75,26 @@ class SshConsoleConnection extends BaseConsoleConnection {
     *	console output. Read is stopped when "username@host:" is reached
     **/
     private function readUntilFinished($cmdString) {
-        $buffer = "";
-        $out = "";
-        $timeout = 5;
-        $start = time();
+        
+        return $this->resource->read('/'.$this->username.'@\w*?:/',NET_SSH2_READ_REGEX);    
 
-        while (true) {
-            $buffer = fgets($this->stdout,2048);
-
-            if (trim($buffer) == trim($cmdString)) {
-                continue;
-            }
-
-            if (preg_match('/'.$this->username.'@\w*?:/',$buffer)) {
-                break;
-            }
-
-            $out .= $buffer;
-            $current = time();
-
-            if ($current-$start > $timeout) {
-                break;
-            }
-
-            if (!$buffer) {
-                usleep(40000);
-            }
-        }
-
-        return $out;
     }
 
     public function exec(Api_Console_ConsoleCommandModel $cmd) {
         $this->connect();
         $cmdString = $cmd->getCommandString();
-        $r = array($this->stdout,$this->stderr);
-        $w = null;
-        $e = null;
-        $out = "";
-        // Discard content in buffer
-        $this->readUntilFinished($cmdString);
-        fwrite($this->terminal, $cmdString.PHP_EOL);
-        $out = $this->readUntilFinished($cmdString);
+        $out = $this->resource->exec($cmdString);
         $cmd->setOutput($out);
         $cmd->setReturnCode($this->getLastReturnValue());
     }
 
     public function getLastReturnValue() {
-        fwrite($this->terminal, "echo $?".PHP_EOL);
-        $retVal = $this->readUntilFinished("echo $?");
+        $retVal = $this->resource->exec("echo $?".PHP_EOL); 
         return $retVal;
     }
     public function __construct(array $settings = array()) {
         $settings = $settings["ssh"];
-        $this->checkSSH2Support();
+        
         $this->host = $settings["host"];
         $this->port = $settings["port"];
         $this->authType = $settings["auth"]["type"];
@@ -162,9 +128,9 @@ class SshConsoleConnection extends BaseConsoleConnection {
     }
 
     protected function checkSSH2Support() {
-        if (!extension_loaded('ssh2')) {
-            throw new ApiSSHNotInstalledException("SSH support is not enabled, install the php ssh2 module in order to use SSH");
-        }
+       
+      
+     
     }
 
 }
