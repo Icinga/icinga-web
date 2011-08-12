@@ -23,7 +23,7 @@
                     <icon>icinga-icon-information</icon>
                     <caption>About</caption>
                     <route target="window" id="icinga-window-about">
-                        icinga.about
+                        modules.icinga.about
                     </route>
                 </item>
             </items>
