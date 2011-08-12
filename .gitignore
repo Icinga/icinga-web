@@ -42,6 +42,7 @@ etc/apache2/icinga-web.conf
 pub/.htaccess
 pub/soap/.htaccess
 icinga-web.mwb.bak
+.build
 *~
 *.swp
 **/*.log

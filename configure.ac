@@ -14,11 +14,13 @@ AC_INIT(icinga-web, [ICINGA_VERSION], [dev.icinga.org])
 RELEASE_DATE=ICINGA_RELEASE_DATE
 
 AC_PREFIX_DEFAULT(/usr/local/icinga-web)
+
 if test "x$prefix" = "xNONE" ; then
     installDir="/usr/local/icinga-web"
 else
     installDir=$prefix 
 fi
+
 # Checks for programs.
 AC_PROG_INSTALL
 AC_PROG_GREP
@@ -229,6 +231,23 @@ AC_ARG_WITH([log_folder],
     web_log_folder=$installDir/log 
 )
 
+# Testing switches
+AC_ARG_WITH([phpunit],
+	AS_HELP_STRING([--with-phpunit=BINARY], [Path to phpunit script]),
+	phpunit=$withval,
+	phpunit=phpunit
+)
+
+ACICINGA_CHECK_BIN([PHPUNIT], [$phpunit])
+
+AC_ARG_WITH([phpcs],
+	AS_HELP_STRING([--with-phpcs=BINARY], [Path to phpcs script]),
+	phpcs=$withval,
+	phpcs=phpcs
+)
+
+ACICINGA_CHECK_BIN([PHPCS], [$phpcs])
+
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
 INSTALL_OPTS_WEB="-o $web_user -g $web_group"
@@ -276,6 +295,8 @@ AC_SUBST(CFLAGS)
 AC_SUBST(PHP)
 AC_SUBST(MYSQL)
 AC_SUBST(PHING)
+AC_SUBST(PHPUNIT)
+AC_SUBST(PHPCS)
 AC_SUBST(INSTALL_OPTS)
 AC_SUBST(INSTALL_OPTS_WEB)
 AC_SUBST(INSTALL_OPTS_CACHE)

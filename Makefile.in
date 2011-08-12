@@ -14,7 +14,7 @@ TAR_DIR_NAME=$(shell basename `pwd`)
 
 prefix=@prefix@
 exec_prefix=@exec_prefix@
-LOGDIR=@localstatedir@
+LOGDIR=@web_log_folder@
 CFGDIR=@sysconfdir@
 BINDIR=@bindir@
 CGIDIR=@sbindir@
@@ -36,6 +36,8 @@ SED=@SED@
 PHP=@PHP@
 PHING=@PHING@
 PHING_CALL=bin/phing -f etc/build.xml
+PHPUNIT=@PHPUNIT@
+PHPCS=@PHPCS@
 
 API_DIR=@icinga_api@
 
@@ -84,11 +86,12 @@ none:
 	
 	@printf "\nDevelopment targets:\n"
 	@printf "\t%-22s - %s\n" "devel-inplace-config" "Prepare src tree for running inplace"
-	@printf "\t%-22s - %s\n" "devel-test" "Running devel tests"
+	@printf "\t%-22s - %s\n" "test" "Running tests"
+	@printf "\t%-22s - %s\n" "test-cs" "Running codestyle tests"
 	@printf "\n\n"
 	
 logclean:
-	rm -rf @web_log_folder@/*.log
+	rm -rf $(LOGDIR)/*.log
 
 locclean:
 	rm -f \
@@ -97,6 +100,8 @@ locclean:
 
 cacheclean:
 	$(PHING_CALL) agavi-clear-cache	
+
+clean: distclean
 
 distclean:
 	rm -rf \
@@ -138,8 +143,23 @@ create-tarball-nightly:
 testdeps:
 	 $(PHP) bin/testdeps.php
 
-devel-test:
-	cd tests/php && $(SHELL) runSuite.sh
+test-precede:
+	if test ! -d "$(SRC_DIR)/.build"; then mkdir .build; fi
+	
+
+test: test-precede
+	rm -f ./build/test-results.xml
+	$(PHPUNIT) --configuration=$(SRC_DIR)/tests/phpunit/suites.xml
+
+test-cs: test-precede
+	rm -f $(SRC_DIR)/.build/checkstyle.xml
+	touch $(SRC_DIR)/.build/checkstyle.xml
+	$(PHPCS) \
+		--standard=$(SRC_DIR)/tests/phpcs/YACS \
+		--report=checkstyle \
+		--report-file=$(SRC_DIR)/.build/checkstyle.xml \
+		--ignore=cache \
+		$(SRC_DIR)/app
 
 devel-inplace-config:
 	-@mkdir $(SRC_DIR)/app/cache $(SRC_DIR)/app/cache/config 2> /dev/null
@@ -181,7 +201,10 @@ install-app:
 install-siteconfig:
 	cd $(SRC_SITE) && $(MAKE)
 
-install-all: install-lib install-pub install-etc install-bin install-doc install-app
+install-log:
+	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(LOGDIR)
+
+install-all: install-lib install-pub install-etc install-bin install-doc install-app install-log
 
 install: install-all install-siteconfig install-done
 

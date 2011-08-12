@@ -74,7 +74,7 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 	public function testLogDir() {
 		info("\tTesting log write-access for web user\n");
 		$root = AgaviConfig::get("core.root_dir");
-		$logDir = $root."/app/data/log/";
+		$logDir = $root."/log";
 		
 		$wwwUser = IcingaWebTestTool::getProperty('www-user');
 		$wwwGroup = IcingaWebTestTool::getProperty('www-group');

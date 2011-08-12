@@ -14,6 +14,8 @@ install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) icinga.site.xml $(DESTDIR)$(prefix)/app/config/icinga.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) settings.site.xml $(DESTDIR)$(prefix)/app/config/settings.site.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) factories.site.xml $(DESTDIR)$(prefix)/app/config/factories.site.xml
+
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/conf.d
 	$(INSTALL) -m 755 $(INSTALL_OPTS) access.xml $(DESTDIR)$(prefix)/etc/conf.d/access.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) auth.xml $(DESTDIR)$(prefix)/etc/conf.d/auth.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) databases.xml $(DESTDIR)$(prefix)/etc/conf.d/databases.xml
