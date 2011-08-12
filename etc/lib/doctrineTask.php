@@ -5,6 +5,9 @@
  */
 
 class doctrineTask extends Task {
+
+	const DB_NAME = 'icinga_web';
+
 	protected $icingaPath = "";
 	protected $modelPath = "app/modules/AppKit/lib/database/models/";
 	protected $dsn;
@@ -38,7 +41,7 @@ class doctrineTask extends Task {
 		$this->dropOnFinish = true;
 	}
 	public function main() {
-		Doctrine_Manager::connection($this->dsn,"mainConnection");
+		Doctrine_Manager::connection($this->dsn, self::DB_NAME);
 		Doctrine::loadModels($this->modelPath."/generated/");
 		Doctrine::setModelsDirectory($this->modelPath."/");
 		if($this->action == 'dropDB') {

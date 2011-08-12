@@ -14,7 +14,7 @@ TAR_DIR_NAME=$(shell basename `pwd`)
 
 prefix=@prefix@
 exec_prefix=@exec_prefix@
-LOGDIR=@localstatedir@
+LOGDIR=@web_log_folder@
 CFGDIR=@sysconfdir@
 BINDIR=@bindir@
 CGIDIR=@sbindir@
@@ -91,7 +91,7 @@ none:
 	@printf "\n\n"
 	
 logclean:
-	rm -rf @web_log_folder@/*.log
+	rm -rf $(LOGDIR)/*.log
 
 locclean:
 	rm -f \
@@ -100,6 +100,8 @@ locclean:
 
 cacheclean:
 	$(PHING_CALL) agavi-clear-cache	
+
+clean: distclean
 
 distclean:
 	rm -rf \
@@ -199,7 +201,10 @@ install-app:
 install-siteconfig:
 	cd $(SRC_SITE) && $(MAKE)
 
-install-all: install-lib install-pub install-etc install-bin install-doc install-app
+install-log:
+	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(LOGDIR)
+
+install-all: install-lib install-pub install-etc install-bin install-doc install-app install-log
 
 install: install-all install-siteconfig install-done
 
