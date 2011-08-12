@@ -143,8 +143,9 @@ class CronkGridTemplateWorker {
     private function getDataAsArray() {
         if ($this->api_search !== null) {
             $data = array();
+            $this->api_search->setResultType(IcingaApiConstants::RESULT_ARRAY);
             $dataSet = $this->api_search->fetch();
-
+           
             foreach($dataSet as $result) {
                 if ($this->result_count === null) {
                     $this->result_count = $result->getResultCount();
