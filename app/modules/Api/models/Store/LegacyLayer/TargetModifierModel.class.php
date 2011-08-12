@@ -598,7 +598,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->mainAlias = "n";
                 $this->setTarget("IcingaNotifications");
                 $this->aliasDefs = array(
-                                       "obn" => array("src" => "n", "relation" => "object"),
+                                       "on" => array(
+                                           "src" => "n", 
+                                           "relation" => "object", 
+                                           "with"=>"on.is_active=1",
+                                           "alwaysJoin" => true
+                                       ),
                                        "s" => array(
                                            "src" => "n",
                                            "relation" => "services",
@@ -644,10 +649,17 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
             case IcingaApiConstants::TARGET_HOSTGROUP_SUMMARY:
                 $this->mainAlias = "hg";
+                $this->setDistinct(false); 
                 $this->setTarget("IcingaHostgroups");
+                $this->ignoreIds = true; 
                 $this->aliasDefs = array(
                                        "i"   => array("src" => "hg", "relation" => "instance"),
-                                       "ohg"   => array("src" => "hg", "relation" => "object"),
+                                       "ohg"   => array(
+                                            "src" => "hg",
+                                            "alwaysJoin" => true, 
+                                            "relation" => "object", 
+                                            "with" => "ohg.is_active = 1" 
+                                        ),
                                        "hgm"   => array("src" => "hg", "relation" => "members"),
                                        "hs"    => array("src" => "hgm", "relation" => "status"),
                                        "oh"    => array("src" => "hgm", "relation" => "object")
@@ -657,6 +669,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
             case IcingaApiConstants::TARGET_SERVICEGROUP_SUMMARY:
                 $this->mainAlias = "sg";
+                $this->ignoreIds = true;
                 $this->setTarget("IcingaServicegroups");
                 $this->aliasDefs = array(
                                        "i"   => array("src" => "sg", "relation" => "instance"),
