@@ -19,7 +19,7 @@
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
 
-		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
+
         
         <parameter name="gridEvents">
         	
@@ -313,7 +313,7 @@
     -->
     <pager>
     	<parameter name="enabled">true</parameter>
-    	<parameter name="size">${xmlfn.pagerMaxItems}</parameter>
+    	
     	<parameter name="start">0</parameter>
     </pager>
     
