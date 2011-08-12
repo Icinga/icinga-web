@@ -601,7 +601,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "on" => array(
                                            "src" => "n", 
                                            "relation" => "object", 
-                                           "with"=>"on.is_active=1",
+                                           
                                            "alwaysJoin" => true
                                        ),
                                        "s" => array(
