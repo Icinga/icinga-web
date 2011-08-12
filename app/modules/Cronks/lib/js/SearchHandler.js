@@ -262,7 +262,7 @@ Cronk.util.SearchHandler =  function(c) {
 				case 'host':
 					filter['f[host_object_id-value]'] = re.data.object_id;
 					filter['f[host_object_id-operator]'] = 50;
-					params['template'] = 'icinga-host-template';
+					params['template'] = 'icinga-service-template';
 				break;
 				
 				case 'service':
@@ -300,7 +300,7 @@ Cronk.util.SearchHandler =  function(c) {
 			
 			Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
 			
-			oWindow().hide();
+		//	oWindow().hide();
 			oTextField.setValue('');
 			
 			return true;
