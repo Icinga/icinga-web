@@ -316,6 +316,7 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
+                <parameter name="icon">icinga-icon-image</parameter>
 				<parameter name="width">25</parameter>
 				<parameter name="Ext.grid.Column">
 		          	<parameter name="menuDisabled">true</parameter>
@@ -599,7 +600,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
-
+                <parameter name="icon">icinga-icon-comment</parameter>
                 <parameter name="width">26</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
@@ -641,6 +642,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
+                <parameter name="icon">icinga-icon-information</parameter>
                 <parameter name="width">22</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
@@ -702,7 +704,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
-
+                <parameter name="icon">icinga-icon-book</parameter>  
                 <parameter name="width">22</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
@@ -773,7 +775,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
-
+                <paramater name="icon">icinga-icon-server</parameter>
                 <parameter name="width">22</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->

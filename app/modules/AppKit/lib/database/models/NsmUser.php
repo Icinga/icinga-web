@@ -434,20 +434,20 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getTargetValues($target_name) {
-        if($this->getStorage()->read("target_".$target_name)) {
-            $targets = unserialize($this->getStorage()->read("target_".$target_name));
+        if($this->getStorage()->read("target_".$target_name."_user")) {
+            $targets = unserialize($this->getStorage()->read("target_".$target_name."_user"));
             if($targets)
                 return $targets;
         }
         $result =  $this->getTargetValuesQuery($target_name)->execute(); 
-        $this->getStorage()->write("target_".$target_name,serialize($result));
+        $this->getStorage()->write("target_".$target_name."_user",serialize($result));
         
         return $result;
     }
 
     public function getTargetValue($target_name, $value_name) {
-        if($this->getStorage()->read("target_".$target_name."_".$value_name)) {
-            $targets = unserialize($this->getStorage()->read("target_".$target_name."_".$value_name));
+        if($this->getStorage()->read("target_".$target_name."_".$value_name."_user")) {
+            $targets = unserialize($this->getStorage()->read("target_".$target_name."_".$value_name."_user"));
             if($targets)
                 return $targets;
         }
@@ -460,13 +460,13 @@ class NsmUser extends BaseNsmUser {
         foreach($res as $r) {
             $out[] = $r->tv_val;
         }
-        $this->getStorage()->write("target_".$target_name."_".$value_name,serialize($out));
+        $this->getStorage()->write("target_".$target_name."_".$value_name."_user",serialize($out));
         return $targets;
     }
 
     public function getTargetValuesArray() {
-        if($this->getStorage()->read("targetValuesArray")) {
-            $targets = unserialize($this->getStorage()->read("targetValuesArray"));
+        if($this->getStorage()->read("targetValuesArray_user")) {
+            $targets = unserialize($this->getStorage()->read("targetValuesArray_user"));
             if($targets)
                 return $targets;
         }
@@ -500,7 +500,7 @@ class NsmUser extends BaseNsmUser {
             }
         }
     
-        $this->getStorage()->write("targetValuesArray",serialize($out));
+        $this->getStorage()->write("targetValuesArray_user",serialize($out));
         return $out;
     }
 }

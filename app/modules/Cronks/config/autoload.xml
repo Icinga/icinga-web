@@ -7,6 +7,7 @@
 		<autoload name="CronksBaseView">%core.module_dir%/Cronks/lib/view/CronksBaseView.class.php</autoload>
 		<autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
 		<autoload name="CronkModuleConfigHandler">%core.module_dir%/Cronks/lib/config/CronkModuleConfigHandler.class.php</autoload>
+		<autoload name="TemplateExtenderConfigHandler">%core.module_dir%/Cronks/lib/config/TemplateExtenderConfigHandler.class.php</autoload>
 		
 		<!-- Classes for the grid templates -->
 		<autoload name="CronkGridTemplateDisplay">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplay.class.php</autoload>

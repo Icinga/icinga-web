@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/config_handlers/1.0">
 	<ae:configuration>
+        <handler pattern="%core.module_dir%/Cronks/config/templateExtensions.xml" class="AppKitXIncludeConfigHandler">
+            <ae:parameters>
+                <ae:parameter name="query"><![CDATA[/templates]]></ae:parameter>
+                <ae:parameter name="pointer">
+                    <ae:parameter><![CDATA[xpointer(/node())]]></ae:parameter>  
+                </ae:parameter>
+                <ae:parameter name="handler">TemplateExtenderConfigHandler</ae:parameter>
+            </ae:parameters>
+
+            
+        </handler>
 	</ae:configuration>
 </ae:configurations>

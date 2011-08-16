@@ -565,7 +565,8 @@
         	
 			<display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+
+                <parameter name="icon">icinga-icon-downtime</parameter>
                 <parameter name="width">25</parameter>
 				<parameter name="Ext.grid.Column">
 		          	<parameter name="menuDisabled">true</parameter>

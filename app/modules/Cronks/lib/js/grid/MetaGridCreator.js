@@ -154,7 +154,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 			Ext.each(arry, function(item, index, allArry) {
 				if (!Ext.isEmpty(item.fn) && Ext.isFunction(item.fn)) {
                     
-					grid.on(e, item.fn, item.scope || window, {single:true});
+					grid.on(e, item.fn, item.scope || window);
 				}
 			});
 		});
@@ -179,7 +179,8 @@ Cronk.grid.MetaGridCreator = function(meta) {
 			pub.mapping_array[index] = { name : item };
 			
 			pub.column_array[index] = {
-				header:			field.display['label'],
+				header:			(field.display['icon'] ? '<div class="icon-16 '+field.display['icon']+'"></div>' : "")+
+                                (field.display['label'] || ""),
 				dataIndex:		item,
 				sortable:		(field.order.enabled ? true : false),
 				hidden:			(field.display.visible ? false : true)
@@ -235,7 +236,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		
 		Ext.apply(pub.pager_array, {
 			enabled : pub.meta.template.pager.enabled || false ,
-			size : pub.meta.template.pager.size || 25,
+			size :  parseInt(AppKit.getPrefVal('org.icinga.grid.pagerMaxItems'),10) || 25,
 			start : pub.meta.template.pager.start || 0
 		});
 		

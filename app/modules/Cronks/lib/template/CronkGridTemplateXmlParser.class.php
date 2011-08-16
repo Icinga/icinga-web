@@ -31,97 +31,8 @@ class CronkGridTemplateXmlParser {
     private $maxCacheTime       = 14400;
     private $cachedContent      = null;
     private $cacheHit           = false;
-    private function initCaching() {
-        $cfg = AgaviConfig::get('modules.cronks.templates');
-
-        if (isset($cfg['use_caching'])) {
-            $this->useCaching = $cfg['use_caching'];
-        }
-
-        if (isset($cfg['cache_dir'])) {
-            $this->cache_dir = $cfg['cache_dir'];
-        }
-
-        if (!$this->cache_dir) {
-            $this->useCaching = false;
-        }
-
-    }
-
-    private function getCacheFilename($file) {
-        $file = "template_".md5($file);
-
-        $cached = $this->cache_dir.'/'.$file;
-
-        if (!file_exists($this->cache_dir)) {
-            AgaviToolkit::mkdir($this->cache_dir);
-        }
-
-        return $cached;
-    }
-
-
-    private function loadFromCache($file = null) {
-        $this->initCaching();
-
-        if ($file == null || !$this->useCaching) {
-            return false;
-        }
-
-        $this->readCached($file);
-
-        if (!$this->cachedContent instanceof __CronkGridTemplateXmlParserInternalCacheContainer__) {
-            return false;
-        }
-
-        $this->data = $this->cachedContent->data;
-        $this->fields = $this->cachedContent->fields;
-        $this->cacheHit = true;
-
-        return true;
-    }
-
-    private function readCached($file) {
-        $cached = $this->getCacheFilename($file);
-
-        if (file_exists($cached)  && is_readable($cached)) {
-            // check cache date
-            if (time()-filemtime($cached) > $this->maxCacheTime) {
-                return null;
-            }
-
-            $this->cachedContent = unserialize(file_get_contents($cached));
-
-        }
-
-        return null;
-    }
-
-    private function cacheContent($file) {
-
-        if (!$this->useCaching) {
-            return false;
-        }
-
-        $cached = $this->getCacheFilename($file);
-        $cacheDir = dirname($cached);
-
-        if (file_exists($cached) && !is_writeable($cached)) {
-            return;
-        }
-
-        if (!is_dir($cacheDir) || !is_writeable($cacheDir)) {
-            return;
-        }
-
-        $container = new __CronkGridTemplateXmlParserInternalCacheContainer__();
-        $container->data = $this->data;
-        $container->fields = $this->fields;
-
-        file_put_contents($cached,serialize($container));
-    }
-
-
+    private static $registeredExtenders = array();
+    private $file               = null;
 
     /**
      * Generic constructor
@@ -151,6 +62,15 @@ class CronkGridTemplateXmlParser {
         }
 
         throw new CronkGridTemplateXmlParserException('File does not exist');
+    }
+
+    /**
+    *
+    * Allows to manually set the dom node to parse
+    * @param DOMDocument    The DomDocument to parse
+    **/
+    public function setDom($dom) {
+        $this->dom = $dom;
     }
 
     /**
@@ -248,36 +168,96 @@ class CronkGridTemplateXmlParser {
      * Start parsing the template
      * @return boolean
      */
-    public function parseTemplate() {
+    public function parseTemplate($ignoreExtensions = false) {
         if ($this->cacheHit) {
             return true;
         }
-
-        if (!$this->dom instanceof DOMDocument) {
+        
+        if (!$this->dom instanceof DOMNode) {
             // throw new CronkGridTemplateXmlParserException('DOMDocument not ready!');
         }
-
+        
         $storage = array();
 
         // Parse the template structure
         $this->parseDom($this->domRoot(), $storage);
-
         // Move the data to its place
         $this->fields = $storage['fields'];
         unset($storage['fields']);
 
         $this->data = $storage;
         unset($storage);
-
-        // Check data
+      
+      
+        if(!$ignoreExtensions)
+            $this->extendTemplate();
+      
+        // Check data  
         if (count($this->fields) && count($this->data)) {
             $this->cacheContent($this->file);
             return true;
         }
+         
+        //throw new CronkGridTemplateXmlParserException('Empty xml!');
 
-        throw new CronkGridTemplateXmlParserException('Empty xml!');
+            return false;
+    }
 
-        return false;
+
+    private function extendTemplate() {
+        $filename = "";
+        if(is_object($this->file))
+            $filename = basename($this->file->getFilename(),".xml");
+        if(is_string($this->file))
+            $filename = basename($this->file,".xml");
+        
+        if(empty(self::$registeredExtenders))
+            self::$registeredExtenders = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Cronks/config/templateExtensions.xml'));
+       
+        foreach(self::$registeredExtenders as $handler) {  
+            if(preg_match("/".$handler["pattern"]."/i",basename($filename)))
+                $this->applyExtender($handler);
+        }
+    }
+
+    private function applyExtender(array $extender) {
+        $this->data = array_merge($this->data,$extender["data"]);
+        foreach($extender["fields"] as $fieldname=>$field) {
+            
+            if(!isset($field['preferPosition'])) {
+                $this->fields[$fieldname] = $field;
+                continue; 
+            }
+            $splitted = explode(":",$field['preferPosition']);
+            if(count($splitted) != 2) {
+                $this->fields[$fieldname] = $field;
+                continue;
+            }
+            
+            if(!isset($this->fields[$splitted[1]])) {
+                $this->fields[$fieldname] = $field;            
+                 continue;
+            }
+            $newKeys = array();
+            // get index of keys
+            foreach($this->fields as $key=>$existing) {
+                if($key != $splitted[1])
+                    $newKeys[$key] = $existing;
+                else {
+                    switch($splitted[0]) {
+                        case 'before':
+                            $newKeys[$fieldname] = $field;    
+                            $newKeys[$key] = $existing;
+                            break;
+                        case 'after':   
+                        default:
+                            $newKeys[$key] = $existing;
+                            $newKeys[$fieldname] = $field; 
+                    }
+                }
+            }
+            $this->fields = $newKeys;   
+        }
     }
 
     /**
@@ -285,8 +265,9 @@ class CronkGridTemplateXmlParser {
      * @return DOMElement
      */
     private function domRoot() {
-        static $root = null;
-
+        $root = null;
+        if($this->dom->nodeName == "template")
+            return $this->dom;
         if ($root === null) {
             $root = $this->dom->getElementsByTagName('template')->item(0);
         }
@@ -322,10 +303,11 @@ class CronkGridTemplateXmlParser {
     }
 
     private function parseDom(DOMElement $element, array &$storage) {
-
-
+        
+       
         if ($element->hasChildNodes()) {
             foreach($element->childNodes as $child) {
+                
                 if ($child->nodeType == XML_ELEMENT_NODE) {
                     $index = '__BAD_INDEX';
 
@@ -339,19 +321,24 @@ class CronkGridTemplateXmlParser {
                     else {
                         $index = $child->nodeName;
                     }
-
+                    
                     if ($this->elementHasElementChilds($child)) {
                         $storage [ $index ] = array();
+                        
                         $this->parseDom($child, $storage [ $index ]);
+                    
                     } else {
 
                         // Substitute boolean or numbers, ...
                         $storage [ $index ] = $this->rewrite->replaceValue($child->textContent);
                     }
 
+    
                 }
             }
         }
+        
+       
     }
 
     public function getHeaderArray() {
@@ -364,6 +351,103 @@ class CronkGridTemplateXmlParser {
             }
         }
         return $header;
+    }
+
+   
+    /** Caching functions **/ 
+    
+    private function initCaching() {
+        $cfg = AgaviConfig::get('modules.cronks.templates');
+
+        if (isset($cfg['use_caching'])) {
+            $this->useCaching = $cfg['use_caching'];
+        }
+
+        if (isset($cfg['cache_dir'])) {
+            $this->cache_dir = $cfg['cache_dir'];
+        }
+
+        if (!$this->cache_dir) {
+            $this->useCaching = false;
+        }
+
+    }
+
+    private function getCacheFilename($file) {
+        $file = "template_".md5($file);
+
+        $cached = $this->cache_dir.'/'.$file;
+
+        if (!file_exists($this->cache_dir)) {
+            AgaviToolkit::mkdir($this->cache_dir);
+        }
+
+        return $cached;
+    }
+
+
+    private function loadFromCache($file = null) {
+        $this->initCaching();
+
+        if ($file == null || !$this->useCaching) {
+            return false;
+        }
+       
+        $this->readCached($file);
+
+        if (!$this->cachedContent instanceof __CronkGridTemplateXmlParserInternalCacheContainer__) {
+            return false;
+        }
+
+        $this->data = $this->cachedContent->data;
+        $this->fields = $this->cachedContent->fields; 
+        $this->cacheHit = true;
+        
+        return true;
+    }
+
+    private function readCached($file) {
+        $cached = $this->getCacheFilename($file);
+
+        if (file_exists($cached)  && is_readable($cached)) {
+            // check cache date
+            if (time()-filemtime($cached) > $this->maxCacheTime) {
+                return null;
+            }
+
+            $this->cachedContent = unserialize(file_get_contents($cached));
+
+        }
+
+        return null;
+    }
+
+    private function cacheContent($file) {
+
+        if (!$this->useCaching) {
+            return false;
+        }
+
+        $cached = $this->getCacheFilename($file);
+        $cacheDir = dirname($cached);
+
+        if (file_exists($cached) && !is_writeable($cached)) {
+            return;
+        }
+
+        if (!is_dir($cacheDir) || !is_writeable($cacheDir)) {
+            return;
+        }
+
+        $container = new __CronkGridTemplateXmlParserInternalCacheContainer__();
+        $container->data = $this->data;
+        $container->fields = $this->fields;
+
+        file_put_contents($cached,serialize($container));
+    }
+
+    public function disableCache() {
+        $this->useCaching = false;
     }
 }
 
