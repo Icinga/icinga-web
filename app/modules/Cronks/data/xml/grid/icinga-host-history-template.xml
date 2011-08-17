@@ -19,7 +19,7 @@
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
 
-		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
+	
     </option>
     
     <!-- 
@@ -57,7 +57,7 @@
     -->
     <pager>
     	<parameter name="enabled">true</parameter>
-    	<parameter name="size">${xmlfn.pagerMaxItems}</parameter>
+    
     	<parameter name="start">0</parameter>
     </pager>
     
@@ -89,6 +89,7 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
+                <parameter name="icon">icinga-icon-image</parameter>
 				<parameter name="width">25</parameter>
 				<parameter name="Ext.grid.Column">
 		          	<parameter name="menuDisabled">true</parameter>

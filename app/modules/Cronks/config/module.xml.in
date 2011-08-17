@@ -63,6 +63,11 @@
 				<setting name="agavi.include.routing">
 					<ae:parameter>%core.module_dir%/Cronks/config/routing.xml</ae:parameter>
 				</setting>
+                <setting name="agavi.include.templateExtensions">
+                    <ae:parameter name="folder">%core.module_dir%/Cronks/data/xml/extensions/</ae:parameter>
+                    <ae:parameter name="pattern">.*\.xml$</ae:parameter>
+                </setting>
+
 			</settings>
 		</module>
 		

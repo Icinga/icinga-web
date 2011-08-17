@@ -34,12 +34,7 @@
 				<ae:parameter name="visible">true</ae:parameter>
 				<ae:parameter name="position">999</ae:parameter>
 			</category>
-			
-			<!-- Include the site config file *NEVER REMOVE THIS LINE* -->
-			<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cronks.site.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(cronk=http://icinga.org/cronks/config/parts/cronks/1.0) xpointer(//ae:configurations/ae:configuration/cronk:categories/cronk:category)">
-				<xi:fallback></xi:fallback>
-			</xi:include> -->
-		
+	
 		</categories>
 	</ae:configuration>
 </ae:configurations>

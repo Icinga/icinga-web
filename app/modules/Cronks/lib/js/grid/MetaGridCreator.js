@@ -149,10 +149,11 @@ Cronk.grid.MetaGridCreator = function(meta) {
 				addGridEvent(k);				
 			}, this);
 		}
-		
+	
 		Ext.iterate(grid_events, function(e, arry) {
 			Ext.each(arry, function(item, index, allArry) {
 				if (!Ext.isEmpty(item.fn) && Ext.isFunction(item.fn)) {
+                    
 					grid.on(e, item.fn, item.scope || window);
 				}
 			});
@@ -178,7 +179,8 @@ Cronk.grid.MetaGridCreator = function(meta) {
 			pub.mapping_array[index] = { name : item };
 			
 			pub.column_array[index] = {
-				header:			field.display['label'],
+				header:			(field.display['icon'] ? '<div class="icon-16 '+field.display['icon']+'"></div>' : "")+
+                                (field.display['label'] || ""),
 				dataIndex:		item,
 				sortable:		(field.order.enabled ? true : false),
 				hidden:			(field.display.visible ? false : true)
@@ -234,7 +236,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		
 		Ext.apply(pub.pager_array, {
 			enabled : pub.meta.template.pager.enabled || false ,
-			size : pub.meta.template.pager.size || 25,
+			size :  parseInt(AppKit.getPrefVal('org.icinga.grid.pagerMaxItems'),10) || 25,
 			start : pub.meta.template.pager.start || 0
 		});
 		
@@ -312,7 +314,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		// Adding a pager bar if wanted
 		if (pub.pager_array.enabled == true) {
 			grid_config.bbar = new Ext.PagingToolbar({
-				pageSize:		parseInt(pub.pager_array.size,10),
+				pageSize:		parseInt(AppKit.getPrefVal('org.icinga.grid.pagerMaxItems'),10),
 				store:			pub.getMetaStore(),
 				displayInfo:	true,
 				displayMsg:		_('Displaying topics {0} - {1} of {2}'),
@@ -334,7 +336,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 
 		// Start autoloading
 		if (!Ext.isEmpty(pub.params.autoRefresh)) {
-			var i = pub.params.autoRefresh*1000;
+			var i = parseInt(AppKit.getPrefVal('org.icinga.grid.refreshTime'),10)*1000;
 			var gridRefreshTask = {
 				run: function() {
 					this.getStore().reload();
@@ -447,7 +449,7 @@ Cronk.grid.MetaGridCreator = function(meta) {
 		},
 		
 		getStore : function() {
-			return this.mmeta_store;
+			return this.meta_store;
 		},
 		
 		getMetaStore : function() {

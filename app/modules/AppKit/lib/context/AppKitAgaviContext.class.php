@@ -40,12 +40,19 @@ class AppKitAgaviContext extends AgaviContext {
      * Load all needed modules
      */
     private function initializeModules() {
-        (array)$list = AgaviConfig::get('org.icinga.appkit.init_modules', array());
-
-        if (array_search('AppKit', $list) == false) {
-            AppKitAgaviUtil::initializeModule('AppKit');
+        $list = array();
+        $module_dir = AgaviToolKit::literalize("%core.module_dir%");
+        $files = scandir($module_dir);
+       
+        foreach($files as $file) {
+            if($file == '.' || $file == '..')
+                continue;
+            if(!is_dir($module_dir."/".$file) || !is_readable($module_dir."/".$file))
+                continue;
+            $list[] = $file;
         }
-
+        
+       
         foreach($list as $mod_name) {
             AppKitAgaviUtil::initializeModule($mod_name);
         }

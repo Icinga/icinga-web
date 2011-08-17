@@ -24,7 +24,7 @@
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
-		<parameter name="autoRefreshTime">${xmlfn.autoRefreshTime}</parameter>
+
 
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <!-- <parameter name="Ext.grid.GridView">
@@ -103,7 +103,6 @@
     -->
     <pager>
     	<parameter name="enabled">true</parameter>
-    	<parameter name="size">${xmlfn.pagerMaxItems}</parameter>
     	<parameter name="start">0</parameter>
     </pager>
     
@@ -566,7 +565,8 @@
         	
 			<display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+
+                <parameter name="icon">icinga-icon-downtime</parameter>
                 <parameter name="width">25</parameter>
 				<parameter name="Ext.grid.Column">
 		          	<parameter name="menuDisabled">true</parameter>

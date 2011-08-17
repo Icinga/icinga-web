@@ -78,7 +78,7 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 		
 		apiStore.load();
 		
-		AppKit.log(apiStore);
+		
 
 		cfg = Ext.apply(cfg || {}, {
 			store : apiStore,
@@ -95,7 +95,7 @@ Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 		// Notify the parent class
 		Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
 		
-		AppKit.log(this);
+		
 	}
 });
 

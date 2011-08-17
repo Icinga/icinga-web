@@ -16,6 +16,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
      */
     const INCLUDE_FMT = 'modules.%s.agavi.include.%s';
 
+
     /**
      * (non-PHPdoc)
      * @see AgaviIXmlConfigHandler::execute()
@@ -42,12 +43,9 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         } else {
             throw new AgaviConfigurationException('Could not read XML_NAMESPACE from class: '. $refClass->getName());
         }
-
-        // Order of includes is essential because of dependencies
-        $modules = array_merge(
-                       array('AppKit'),
-                       AgaviConfig::get('org.icinga.appkit.init_modules')
-                   );
+     
+     
+        $modules = $this->getAvailableModules(); 
 
         $query = $this->getQuery();
 
@@ -64,7 +62,10 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                         );
             
             if ($includes) {
-
+                
+                if(isset($includes["folder"]))
+                    $includes = $this->resolveFolder($includes); 
+                
                 foreach($pointers as $pointer) {
                     AppKitXmlUtil::includeXmlFilesToTarget(
                         $document,
@@ -85,6 +86,28 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         // The confighandler behind this included definition
         return $configHandler->execute($document);
     }
+
+    private function resolveFolder(array $include) {
+        $folder = $include["folder"];
+        if(!is_dir($folder)) 
+            return array();
+        if(!is_readable($folder))
+            return array();
+        $files = scandir($folder);
+        $pattern = "/.*\.xml/";
+        if(isset($include["pattern"]))
+            $pattern = "/".$include["pattern"]."/";
+      
+        
+        $resultset = array();
+        foreach($files as $file) {
+            if(preg_match($pattern,$file))
+                $resultset[] = $folder."/".$file;
+        }
+        
+        return $resultset;
+    }
+    
 
     /**
      * Returns the right config handler
@@ -127,6 +150,21 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         }
 
         return $query;
+    }
+
+    private function getAvailableModules() {
+        $modules = array('AppKit');
+        $module_dir = AgaviToolKit::literalize("%core.module_dir%");
+        $files = scandir($module_dir);
+       
+        foreach($files as $file) {
+            if($file == '.' || $file == '..' || $file == 'AppKit')
+                continue;
+            if(!is_dir($module_dir."/".$file) || !is_readable($module_dir."/".$file))
+                continue;
+            $modules[] = $file;
+        }
+        return $modules;
     }
 
     /**

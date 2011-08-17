@@ -570,6 +570,10 @@ div#menu {
 
 .icinga-icon-dot { background-image: url(../images/icinga/idot-icon.png) !important; background-repeat: no-repeat; }
 
+.x-grid3-header * .icon-16 {
+    display:none;
+}
+
 /** ExtJS grid classes **/
 .x-icinga-grid-link {
 	color: #0000ff;
