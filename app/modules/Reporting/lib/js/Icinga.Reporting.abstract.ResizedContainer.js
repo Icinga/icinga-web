@@ -11,9 +11,16 @@ Icinga.Reporting.abstract.ResizedContainer = Ext.extend(Ext.Container, {
 		
 		this.on('afterrender', function() {
 			var p = this.findParentByType('tabpanel');
-		
+			
+			var setSize = false;
+			
 			p.on('resize', function(tb, adjWidth, adjHeight, rawWidth, rawHeight) {
-				this.setHeight(adjHeight-53);
+				if (setSize == false) {
+					this.setHeight(adjHeight-53);
+					setSize = true;
+				} else {
+					setSize = false;
+				}
 			}, this);
 			
 		}, this, { single : true });
