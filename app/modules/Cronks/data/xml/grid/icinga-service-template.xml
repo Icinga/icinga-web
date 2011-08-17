@@ -775,7 +775,7 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
-                <paramater name="icon">icinga-icon-server</parameter>
+                <parameter name="icon">icinga-icon-server</parameter>
                 <parameter name="width">22</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
