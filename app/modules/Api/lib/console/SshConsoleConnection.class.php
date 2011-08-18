@@ -93,15 +93,17 @@ class SshConsoleConnection extends BaseConsoleConnection {
         return $retVal;
     }
     public function __construct(array $settings = array()) {
-        $settings = $settings["ssh"];
+        $settings = $settings["auth"];
         
         $this->host = $settings["host"];
         $this->port = $settings["port"];
-        $this->authType = $settings["auth"]["type"];
-        $this->setupAuth($settings["auth"]);
+        $this->authType = $settings["method"];
+        $this->setupAuth($settings);
     }
 
     protected function setupAuth(array $settings) {
+        
+
         switch ($this->authType) {
             case 'none':
                 $this->username = $settings["user"];
@@ -118,7 +120,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
                 }
 
                 $this->username = $settings["user"];
-                $this->pubKeyLocation = $settings["pubKey"];
+                
                 $this->privKeyLocation = $settings["privKey"];
                 break;
 

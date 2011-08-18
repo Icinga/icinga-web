@@ -6,7 +6,6 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
      * @property Api_Console_ConsoleInterfaceModel
      */
     protected $connection;
-
     protected $pipeCmd = null;
     protected $symList = array();
     protected $stdout = null;
@@ -14,7 +13,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     protected $stderr = null;
     protected $append_stderr = false;
     protected $stdin = null;
-
+    protected $host;
     protected $output = "";
     protected $returnCode = 0;
 
@@ -53,7 +52,12 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     public function setConnection($conn) {
         $this->connection = $conn;
     }
-
+    public function setHost($host) {
+        $this->host = $host;
+    }
+    public function getHost() {
+        return $this->host;
+    }
     public function getStdin() {
         return $this->stdin;
     }
@@ -73,6 +77,9 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     public function getArguments() {
         return $this->arguments;
     }
+    /**
+    * @deprecated
+    **/
     public function getConnection() {
         return $this->connection;
     }
@@ -91,8 +98,9 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
         if (isset($parameters["command"])) {
             $this->setCommand($parameters["command"]);
         }
-
+        
         if (isset($parameters["connection"])) {
+            $this->setHost($parameters["connection"]->getHostName());
             $this->setConnection($parameters["connection"]);
         }
 
@@ -166,15 +174,11 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     }
 
     protected function expandSymbols() {
-        if (empty($this->symList)) {
-            $this->createSymbolList();
-        }
-
-        $access = $this->connection->getAccessDefinition();
-        $this->stdinFile($this->getFullName($this->stdin,$access["r"]["files"]));
-        $this->stdoutFile($this->getFullName($this->stdout,$access["w"]["files"]));
-        $this->stderrFile($this->getFullName($this->stderr,$access["w"]["files"]));
-        $this->setCommand($this->getFullName($this->command,$access["x"]["files"]));
+        
+        $this->stdinFile(AccessConfig::expandSymbol($this->stdin,"r",$this->host));
+        $this->stdoutFile(AccessConfig::expandSymbol($this->stdout,"w",$this->host));
+        $this->stderrFile(AccessConfig::expandSymbol($this->stderr,"w",$this->host));
+        $this->setCommand(AccessConfig::expandSymbol($this->command,"x",$this->host));
         $matches = array();
         // replace %%VAL%% symbols in the argument list
         foreach($this->arguments as $key=>&$val) {
@@ -189,59 +193,17 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
                     continue;
                 }
 
-                $val = str_replace("%%".$match."%%",$this->symList[$match],$val);
+                $val = str_replace("%%".$match."%%",AccessConfig::expandSymbol($match,"rw",$this->host),$val);
             }
         }
     }
 
-    protected function createSymbolList() {
-        $this->symList = array();
-
-        if (!$this->connection) {
-            throw new AppKitException("No connection established");
-        }
-
-        foreach($this->connection->getAccessDefinition() as $access=>$content) {
-            foreach($content as $fileOrFolder=>$symdefs) {
-                foreach($symdefs as $symname=>$resolved) {
-                    $this->symList[$symname] = $resolved;
-                }
-            }
-        }
-    }
-
-    public function getFullName($symbol = null,array $whiteList = array()) {
-        if ($symbol == null) {
-            return null;
-        }
-
-        foreach($whiteList as $sym=>$name) {
-            if (!$sym) {
-                continue;
-            }
-
-            if ($sym == $symbol) {
-                return $name;
-            }
-        }
-        return $symbol;
-    }
 
     protected function validateCommand() {
-        $access = $this->connection->getAccessDefinition();
+       
         $command = $this->getCommand();
-        foreach($access["x"]["folders"] as $exec) {
-            if (trim(escapeshellcmd($exec)) == trim(dirname($command))) {
-                return true;
-            }
-        }
-        foreach($access["x"]["files"] as $exec) {
-            if (trim(escapeshellcmd($exec)) == trim($command)) {
-                return true;
-            }
-        }
-
-        throw new ApiRestrictedCommandException($command." is not allowed");
+        if(!AccessConfig::canExecute($command,$this->host)) 
+            throw new ApiRestrictedCommandException($command." is not allowed");
     }
 
     protected function validateStdin() {
@@ -251,19 +213,8 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
             return true;
         }
 
-        $access = $this->connection->getAccessDefinition();
-        foreach($access["r"]["folders"] as $read) {
-
-            if (trim(escapeshellcmd($read)) == trim(dirname($inFile))) {
-                return true;
-            }
-        }
-        foreach($access["r"]["files"] as $sym=>$read) {
-            if (trim(escapeshellcmd($read)) == trim($inFile)) {
-                return true;
-            }
-        }
-        throw new ApiRestrictedCommandException($inFile." is not read enabled");
+        if(!AccessConfig::canRead($inFile,$this->host))
+            throw new ApiRestrictedCommandException($inFile." is not read enabled");
     }
 
     protected function validateStdout() {
@@ -272,19 +223,8 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
         if (!$outFile) {
             return true;
         }
-
-        $access = $this->connection->getAccessDefinition();
-        foreach($access["w"]["folders"] as $write) {
-            if (trim(escapeshellcmd($write)) == trim(dirname($outFile))) {
-                return true;
-            }
-        }
-        foreach($access["w"]["files"] as $write) {
-            if (trim(escapeshellcmd($write)) == trim($outFile)) {
-                return true;
-            }
-        }
-        throw new ApiRestrictedCommandException($outFile." is not write enabled");
+        if(!AccessConfig::canWrite($outFile,$this->host))
+            throw new ApiRestrictedCommandException($outFile." is not write enabled");
     }
 
     protected function validateStderr() {
@@ -294,18 +234,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
             return true;
         }
 
-        $access = $this->connection->getAccessDefinition();
-        foreach($access["w"]["folders"] as $write) {
-            if (trim(escapeshellcmd($write)) == trim(dirname($errFile))) {
-                return true;
-            }
-        }
-        foreach($access["w"]["files"] as $write) {
-            if (trim(escapeshellcmd($write)) == trim($errFile)) {
-                return true;
-            }
-        }
-
-        throw new ApiRestrictedCommandException($errFile." is not read enabled");
+        if(!AccessConfig::canWrite($errFile,$this->host))
+            throw new ApiRestrictedCommandException($errFile." is not read enabled");
     }
 }

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
+	xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
+	xmlns="http://icinga.org/api/config/parts/access/module/1.0"
+	targetNamespace="http://icinga.org/api/config/parts/access/module/1.0"
+	elementFormDefault="qualified"
+>
+   
+	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
+	           schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_types.xsd" />
+	<xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
+	           schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_envelope.xsd" />
+
+    <xs:simpleType name="allowModuleOverwrites">
+        <xs:restriction base="xs:boolean" />
+    </xs:simpleType>
+
+    <xs:complexType name="instances">
+        <xs:sequence>
+            <xs:element name="instance" type="instance" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- mapping of a host to an instance -->
+    <xs:complexType name="instance">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent> 
+    </xs:complexType>
+
+    <!--
+        Entities for default section
+
+    -->
+    <xs:complexType name="defaults">
+        <xs:sequence>
+            <!-- most definitions are unbounded because later definitions will overwrite the initial value -->
+            <xs:element name="defaultHost" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="access" type="access" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="access">
+        <xs:sequence>
+             <xs:element name="readwrite" type="resourcedescriptor" minOccurs="0" maxOccurs="unbounded" />
+             <xs:element name="read" type="resourcedescriptor" minOccurs="0" maxOccurs="unbounded" />
+             <xs:element name="write" type="resourcedescriptor" minOccurs="0" maxOccurs="unbounded" />
+             <xs:element name="execute" type="resourcedescriptor" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="resourcedescriptor">
+        <xs:sequence>
+            <xs:element name="folders" type="resourcecontainer" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="files"  type="resourcecontainer" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="resourcecontainer">
+        <xs:sequence>
+            <xs:element name="resource" type="resource" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="resource">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!--
+        Hosts definition entities
+    -->
+    <xs:complexType name="hosts">
+        <xs:sequence>
+            <xs:element name="host" type="host" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="host">
+        <xs:all>
+            <xs:element name="type" type="hosttype" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="access" type="hostaccess" minOccurs="1" maxOccurs="1" />
+            <xs:element name="ssh-config" type="ssh-config" minOccurs="0" maxOccurs="1" /> 
+        </xs:all>
+        <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="ssh-config">
+        <xs:sequence>
+            <xs:element name="host" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="port" type="xs:integer" minOccurs="1" maxOccurs="1" />
+            <xs:element name="auth" type="ssh-auth" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ssh-auth">
+        <xs:all>
+            <xs:element name="type" type="ssh-authtypes"/>
+            <xs:element name="user" type="xs:string"/>
+            <xs:element name="private-key" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:simpleType name="hosttype">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="local" /> 
+            <xs:enumeration value="ssh" />  
+        </xs:restriction>
+    </xs:simpleType>
+   
+    <!-- 
+        The access attribute in the hosts section must define if it uses the default values
+    --> 
+    <xs:complexType name="hostaccess">
+        <xs:complexContent>
+            <xs:extension base="access">
+                <xs:attribute name="useDefaults" type="xs:boolean" use="required"/>
+            </xs:extension> 
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="ssh-authtypes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="none" /> 
+            <xs:enumeration value="password" /> 
+            <xs:enumeration value="key" /> 
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 
+        Root node
+    -->
+    <xs:group name="configuration">
+        <xs:all>
+			
+			<xs:element name="instances" type="instances" minOccurs="1" maxOccurs="1"></xs:element>	
+			<xs:element name="defaults" type="defaults" minOccurs="1" maxOccurs="1"></xs:element>	
+			<xs:element name="hosts" type="hosts" minOccurs="1" maxOccurs="1"></xs:element>	
+		</xs:all>
+	</xs:group>
+ 
+
+</xs:schema>

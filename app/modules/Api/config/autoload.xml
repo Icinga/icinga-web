@@ -4,7 +4,11 @@
 		
 		<autoload name="IcingaApiBaseAction">%core.module_dir%/Api/lib/action/IcingaApiBaseAction.class.php</autoload>
 		<autoload name="IcingaApiBaseModel">%core.module_dir%/Api/lib/model/IcingaApiBaseModel.class.php</autoload>
-		<autoload name="ApiDataRequestBaseModel">%core.module_dir%/Api/lib/model/ApiDataRequestBaseModel.class.php</autoload>
+        <autoload name="ApiDataRequestBaseModel">%core.module_dir%/Api/lib/model/ApiDataRequestBaseModel.class.php</autoload>
+
+        <autoload name="AccessConfig">%core.module_dir%/Api/lib/config/AccessConfig.class.php</autoload>		
+        <autoload name="AccessConfigHandler">%core.module_dir%/Api/lib/config/AccessConfigHandler.class.php</autoload>		
+
 		<autoload name="IcingaDoctrine_Query">%core.module_dir%/Api/lib/database/IcingaDoctrine_Query.class.php</autoload>
 		<autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
 		<autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>		

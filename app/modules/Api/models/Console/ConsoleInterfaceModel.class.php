@@ -1,45 +1,26 @@
 <?php
-class ApiUnknownHostException extends AppKitException {};
+
 class ApiUnknownConsoleException extends AppKitException {};
 
 class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel implements IcingaConsoleInterface {
     protected $host;
+    protected $hostname;
     protected $connection;
-    protected $access = array(
-                            "r" => array(
-                                "folders" => array(),
-                                "files" => array()
-                            ),
-                            "w" => array(
-                                "folders" => array(),
-                                "files" => array()
-                            ),
-                            "x" => array(
-                                "folders" => array(),
-                                "files" => array()
-                            )
-                        );
-
     public function getHostName() {
-        return $this->host;
+        return $this->hostname;
     }
 
-    public function getAccessDefinition() {
-        return $this->access;
-    }
-
+    
     public function initialize(AgaviContext $context, array $parameters = array()) {
         if (!isset($parameters["host"]) && !isset($parameters["icingaInstance"])) {
-            $parameters["host"] = AgaviConfig::get("modules.api.access.defaults.host","localhost");
+            $this->hostname = AccessConfig::getDefaultHostname();
         } else if (!isset($parameters["host"]) && isset($parameters["icingaInstance"])) {
-            $instances = AgaviConfig::get("modules.api.access.instances");
-            $instance = (isset($instances[$parameters["icingaInstance"]]) ?
-                         $instances[$parameters["icingaInstance"]] :
-                         null);
-            $parameters["host"] = $instance;
+            $this->hostname = AccessConfig::getHostnameByInstance($parameters["icingaInstance"]);
         }
-
-        $this->initConnection($parameters["host"]);
+        
+        if(isset($parameters["host"]))
+            $this->hostname = AccessConfig::getHostByName($parameters["host"]);
+        $this->initConnection();
     }
 
     public function exec(IcingaConsoleCommandInterface $cmd) 	{
@@ -51,58 +32,16 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel implements Ic
         $this->connection->exec($cmd);
     }
 
-    protected function initConnection($name) {
-        $hostList= AgaviConfig::get("modules.api.access.hosts",array());
 
-        if (!isset($hostList[$name])) {
-            throw new ApiUnknownHostException("Host ".$name." doesn't exists in api module.xml");
-        }
-
-        $this->host = $name;
-        $this->updateAccess();
+    protected function initConnection() { 
+        $this->host = AccessConfig::getHostByName($this->hostname);
+      
         $this->setUpConsole();
-    }
-
-    protected function updateAccess() {
-        $hostList = AgaviConfig::get("modules.api.access.hosts",array());
-        $defaults = AgaviConfig::get("modules.api.access.defaults",array());
-
-        if ($hostList[$this->host]["access"]["useDefaults"]) {
-            $this->__updateAccessVals($defaults);
-        }
-
-        $this->__updateAccessVals($hostList[$this->host]);
-    }
-
-    protected function __updateAccessVals(array $container) {
-        if (isset($container["access"]["r"])) {
-            $this->access["r"] = array_merge_recursive($container["access"]["r"],$this->access["r"]);
-        }
-
-        if (isset($container["access"]["w"])) {
-            $this->access["w"] = array_merge_recursive($container["access"]["w"],$this->access["r"]);
-        }
-
-        if (isset($container["access"]["rw"])) {
-            $this->access["w"] = array_merge_recursive($container["access"]["rw"],$this->access["w"]);
-            $this->access["r"] = array_merge_recursive($container["access"]["rw"],$this->access["r"]);
-        }
-
-        if (isset($container["access"]["x"])) {
-            $this->access["x"] = array_merge_recursive($container["access"]["x"],$this->access["x"]);
-        }
-    }
-
+    } 
 
     protected function setUpConsole() {
-        $hostList = AgaviConfig::get("modules.api.access.hosts",array());
-        $type = "local";
-
-        if (isset($hostList[$this->host]["type"])) {
-            $type = $hostList[$this->host]["type"];
-        }
-
-        $type = strtolower($type);
+        
+        $type = strtolower($this->host["auth"]["type"]);
         $type[0] = strtoupper($type[0]);
         $class = $type."ConsoleConnection";
 
@@ -110,6 +49,6 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel implements Ic
             throw new ApiUnknownConsoleException("Unknown connection type: $type");
         }
 
-        $this->connection = new $class($hostList[$this->host]);
+        $this->connection = new $class($this->host);
     }
 };

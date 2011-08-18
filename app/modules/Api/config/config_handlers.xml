@@ -4,7 +4,16 @@
         <handlers>
             <handler pattern="%core.module_dir%/*/config/icingaCommands.xml" class="IcingaCommandsConfigHandler">
 				<validation>%core.module_dir%/Api/lib/xml/xsd/icingaCommands.xsd</validation>	
-			</handler>
+			</handler>            
+    
+            <!-- extend access.xml via xincludes -->
+            <handler pattern="%core.module_dir%/Api/config/access.xml" class="AccessConfigHandler">
+				<validation>%core.module_dir%/Api/lib/xml/xsd/access.xsd</validation>	
+            </handler>
+            <!-- extend access.xml via xincludes -->
+            <handler pattern="%core.module_dir%/*/config/access.xml" class="AccessConfigModuleHandler">
+				<validation>%core.module_dir%/Api/lib/xml/xsd/access-module.xsd</validation>	
+            </handler>           
         </handlers>
     </ae:configuration>
 </ae:configurations>

@@ -1,112 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings prefix="modules.api.access." xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+<ae:configurations xmlns="http://icinga.org/api/config/parts/access/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
     
-    <!-- Map your instances to hosts here -->
-	<setting name="instances">
-        <ae:parameter name="@api_cmd_instance@">localhost</ae:parameter>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='instances']/node())">
-            <xi:fallback></xi:fallback>
-        </xi:include>
-    </setting>
+      
+        <!-- Map your instances to hosts here -->
+        <instances>
+            <instance name="default">localhost</instance>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://icinga.org/api/config/parts/access/1.0) xpointer(//ae:configurations//ae:configuration/ac:instances/node())">
+                <xi:fallback></xi:fallback>
+            </xi:include>
+
+
+            <!-- include user configs statically -->
+        </instances>
+
+        <!--
+            Default settings that will be set if useDefaults is true
+        -->
+        <defaults>
+            <defaultHost>localhost</defaultHost>
+            <access>
+                <!-- allowed to read to and from -->
+                <readwrite>
+                    <folders>
+           			    <resource name="icinga_objects">/usr/local/icinga/etc/objects</resource>	
+                    </folders>
+                    <files>
+    <!--        		<resource name="icinga_cfg">/usr/local/icinga/etc/icinga.cfg</resource>-->	
+                    </files>
+                </readwrite>
+                <!-- allowed to be read from -->
+                <read>
+                </read>
+                <!-- allowed to be written to -->
+                <write>
+                    <files>
+                        <resource name="icinga_pipe">/usr/local/icinga/var/rw/icinga.cmd</resource>
+                    </files>
+                </write>
+                <!-- allowed to be executed -->
+                <execute>
+                    <files>
+                        <resource name="icinga_service">/etc/init.d/icinga</resource>
+                       
+                        <resource name="icinga_bin">/usr/local/icinga/bin/icinga</resource>
+                        <resource name="echo">/bin/echo</resource>
+                        <resource name="printf">printf</resource>
+                        <resource name="cp">/bin/cp</resource>
+                        <resource name="ls">/bin/ls</resource>
+                        <resource name="grep">/bin/grep</resource>
+                    </files>
+                </execute>
+            </access>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://icinga.org/api/config/parts/access/1.0) xpointer(//ae:configurations//ae:configuration/ac:defaults/node())">
+                <xi:fallback></xi:fallback>
+            </xi:include>
+        </defaults>
+        
+        
+        <!-- Hosts that can be accessed via the console interface -->
+        <hosts>
+            <host name="localhost">
+                <type>local</type>
+                <!-- Only allow access to these files, folders or executables -->
+                <access useDefaults="true">
+                    <read>
+                        <files>
+                            <resource name="test">test</resource>
+                        </files>  
+                    </read>
+
+                    
+                </access>
+            </host>
+            
+            <!--  Example for ssh connection with user/password auth -->
+            <host name="vm_host1">
+                <type>ssh</type>
+                <ssh-config>
+                    <host>localhost</host>
+                    <port>22</port>
+                    <auth>
+                        <type>password</type>
+                        <user>jmosshammer</user>
+                        <password>test</password>
+                    </auth>
+                </ssh-config> 
+                
+                <access useDefaults="true" />
+               
+            </host>
+
 
     <!--
-        Default settings that will be set if useDefaults is true
-    -->
-    <setting name="defaults">
-		<ae:parameter name="host">localhost</ae:parameter>
+              This is experimental, try to avoid password encrypted keyfiles when encountering errors
+              Example for ssh connection with pubkey auth -->					
+    <!--	
+            <host name="vm_host2">
+                <type>ssh</type>
+                <ssh-config>
+                    <host>localhost</ae:parameter>
+                    <port>22</ae:parameter>
+                    <auth>
+                        <type>key</type>
+                        <user>testuser</user>	
+                        <private-key>/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa</private-key>
+                        <password>secret123</password>
+                    </auth>
+                </ssh-config> 
+                
+            
+                <access useDefaults="true" />
+            </host>
+    -->	
 
-		<ae:parameter name="access">
-			<ae:parameter name="rw">
-				<ae:parameter name="folders">
-<!--    			<ae:parameter name="icinga_objects">/usr/local/icinga/etc/objects</ae:parameter>-->	
-				</ae:parameter>
-				<ae:parameter name="files">
-<!--        		<ae:parameter name="icinga_cfg">/usr/local/icinga/etc/icinga.cfg</ae:parameter>-->	
-				</ae:parameter>
-			</ae:parameter>
-			<ae:parameter name="r">
-			</ae:parameter>
-			<ae:parameter name="w">
-				<ae:parameter name="files">
-					<ae:parameter name="icinga_pipe">@api_cmd_file@</ae:parameter>
-				</ae:parameter>
-			</ae:parameter>
-			<ae:parameter name="x">
-				<ae:parameter name="files">
-					<ae:parameter name="icinga_service">/etc/init.d/icinga</ae:parameter>
-					<ae:parameter name="icinga_bin">/usr/local/icinga/bin/icinga</ae:parameter>
-					<ae:parameter name="echo">/bin/echo</ae:parameter>
-					<ae:parameter name="printf">printf</ae:parameter>
-					<ae:parameter name="cp">/bin/cp</ae:parameter>
-					<ae:parameter name="ls">/bin/ls</ae:parameter>
-					<ae:parameter name="grep">/bin/grep</ae:parameter>
-				</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>						
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='defaults']/node())">
-			<xi:fallback></xi:fallback>
-		</xi:include>
-	</setting>
-	
-	
-	<!-- Hosts that can be accessed via the console interface -->
-	<setting name="hosts">
-		<ae:parameter name="localhost">
-			<ae:parameter name="type">local</ae:parameter>
-			<!-- Only allow access to these files, folders or executables -->
-			<ae:parameter name="access">
-				<ae:parameter name="useDefaults">true</ae:parameter>
-			</ae:parameter>
-		</ae:parameter>
-		
-		<!--  Example for ssh connection with user/password auth -->
-<!--		<ae:parameter name="vm_host1">
-			<ae:parameter name="type">ssh</ae:parameter>
-			<ae:parameter name="ssh">
-				<ae:parameter name="host">localhost</ae:parameter>
-				<ae:parameter name="port">22</ae:parameter>
-				<ae:parameter name="auth">
-					<ae:parameter name="type">password</ae:parameter>
-					<ae:parameter name="user">jmosshammer</ae:parameter>
-					<ae:parameter name="password">test</ae:parameter>
-				</ae:parameter>
-			</ae:parameter> 
-			<ae:parameter name="access">
-				<ae:parameter name="useDefaults">true</ae:parameter>
-			</ae:parameter>	
-			
-		</ae:parameter>
-
--->
-<!--
-		  This is experimental, try to avoid password encrypted keyfiles when encountering errors
-		  Example for ssh connection with pubkey auth -->					
-<!--	<ae:parameter name="vm_host2">
-			<ae:parameter name="type">ssh</ae:parameter>
-			<ae:parameter name="ssh">
-				<ae:parameter name="host">localhost</ae:parameter>
-				<ae:parameter name="port">22</ae:parameter>
-				<ae:parameter name="auth">
-					<ae:parameter name="type">key</ae:parameter>
-					<ae:parameter name="user">testuser</ae:parameter>
-					<ae:parameter name="pubKey">/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa.pub</ae:parameter>
-					<ae:parameter name="privKey">/usr/local/icinga-web/app/modules/Api/lib/.ssh/host1_rsa</ae:parameter>
-					<ae:parameter name="password">secret123</ae:parameter>
-				</ae:parameter>
-			</ae:parameter> 
-			
-		
-			<ae:parameter name="access">
-				<ae:parameter name="useDefaults">true</ae:parameter>
-			</ae:parameter>	
-		</ae:parameter>
--->
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(m=http://agavi.org/agavi/config/parts/module/1.0) xpointer(//m:settings/m:setting[@name='hosts']/node())">
-            <xi:fallback></xi:fallback>
-        </xi:include>
+            <!-- include user configs statically -->
 
 
+        </hosts>
 
-	</setting>
-
-</settings>
+    </ae:configuration>
+</ae:configurations>

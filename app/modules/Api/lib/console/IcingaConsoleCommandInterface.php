@@ -15,6 +15,8 @@ interface IcingaConsoleCommandInterface {
     public function setOutput($string);
     public function setReturnCode($code);
     public function setConnection($conn);
+    public function setHost($host);
+    public function getHost();
     public function getStdin();
     public function getStderr();
     public function getStdout();
@@ -27,7 +29,7 @@ interface IcingaConsoleCommandInterface {
     public function initialize(AgaviContext $context, array $parameters = array());
     public function getCommandString();
     public function isValid($throwOnError = false, &$err = null);
-    public function getFullName($symbol = null,array $whiteList = array());
+
 
 
 
