@@ -44,6 +44,7 @@ class AppKitAgaviContext extends AgaviContext {
         $module_dir = AgaviToolKit::literalize("%core.module_dir%");
         $files = scandir($module_dir);
        
+        AppKitAgaviUtil::initializeModule('AppKit');
         foreach($files as $file) {
             if($file == '.' || $file == '..')
                 continue;
@@ -52,11 +53,16 @@ class AppKitAgaviContext extends AgaviContext {
             $list[] = $file;
         }
         
-       
+      
         foreach($list as $mod_name) {
-            AppKitAgaviUtil::initializeModule($mod_name);
+            try {
+               if($mod_name != 'AppKit')
+                    AppKitAgaviUtil::initializeModule($mod_name);
+            } catch(AgaviDisabledModuleException $e) {
+            
+            }
         }
-
+       
 
     }
 
@@ -70,6 +76,8 @@ class AppKitAgaviContext extends AgaviContext {
             }
         }
 
+        include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.config_dir%/schedules.xml'));
+         
         // Global temp directory
         AgaviConfig::set('core.tmp_dir', AgaviConfig::get('core.data_dir'). '/tmp');
     }
