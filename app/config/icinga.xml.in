@@ -53,10 +53,4 @@
 	<setting name="version.releasedate"><![CDATA[@RELEASE_DATE@]]></setting>
 	<setting name="version.name">icinga-web</setting>
 
-	<!--
-		Early initialize modules
-		* This controls which agavi modules are initialized at start
-		* needed for classes, javascript, ...
-	-->
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="schedules.xml"/>
 </settings>

@@ -87,11 +87,20 @@
                 </ae:parameters>
 
 				<ae:parameter name="handler">AppKitMenuConfigHandler</ae:parameter>
-                <validation>%core.module_dir%/AppKit/lib/xml/xsd/menu.xsd</validation>
-           
+                <validation>%core.module_dir%/AppKit/lib/xml/xsd/menu.xsd</validation>           
             </handler>
+            
+            <handler pattern="%core.config_dir%/schedules.xml" class="AppKitXIncludeConfigHandler">
+                 
+                    <ae:parameter name="query"><![CDATA[//settings:settings]]></ae:parameter>
+                    <ae:parameter name="pointer"><![CDATA[xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(c=http://agavi.org/agavi/config/parts/settings/1.0) xpointer(//ae:configurations/ae:configuration/c:settings/node())]]></ae:parameter>
+            	    
+                
 
-           
+				<ae:parameter name="handler">AppKitSubSettingConfigHandler</ae:parameter>
+    
+            </handler>
+          
         </handlers>
     </ae:configuration>
 </ae:configurations>
