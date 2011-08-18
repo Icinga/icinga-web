@@ -63,7 +63,7 @@
 	
 	<ae:configuration context="console">
 		<routes>
-			<route name="modules" pattern="^/modules">	
+			<route name="modules" pattern="">	
 				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="routing.modules.xml" xpointer="xmlns(r=http://icinga.org/appkit/config/parts/routing/1.0) xpointer(//r:module_routes/r:configuration[@context='console']/node())">
 						<xi:fallback></xi:fallback>
 				</xi:include>

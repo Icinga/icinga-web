@@ -22,7 +22,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
      * @see AgaviIXmlConfigHandler::execute()
      */
     public function execute(AgaviXmlConfigDomDocument $document) {
-
+        
         $config = basename($document->baseURI, '.xml');
 
         $refClass = $this->getConfigHandlerClass($config);
@@ -50,7 +50,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         $query = $this->getQuery();
 
         $pointers = $this->getPointers();
-
+        
         foreach($modules as $module) {
             $includes = AgaviConfig::get(
                             sprintf(
@@ -59,13 +59,13 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                                 $this->getParameter('includeNS', $config)
                             ),
                             false
-                        );
+                       );
             
             if ($includes) {
                 
                 if(isset($includes["folder"]))
                     $includes = $this->resolveFolder($includes); 
-                
+              
                 foreach($pointers as $pointer) {
                     AppKitXmlUtil::includeXmlFilesToTarget(
                         $document,
@@ -73,16 +73,17 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                         $pointer,
                         $includes
                     );
-
+             
                     try {
                         $document->xinclude();
                     } catch (Exception $e) {
-
+                        
                     }
+                   
                 }
             }
         }
-
+      
         // The confighandler behind this included definition
         return $configHandler->execute($document);
     }
@@ -177,7 +178,11 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         if (!is_array($pointers)) {
             $pointers = array($pointers);
         }
-
+        foreach($pointers as &$pointer) {
+            if (strpos($pointer, '__CONTEXT__') !== false) {
+                $pointer = str_replace('__CONTEXT__', AgaviConfig::get('core.default_context', 'web'), $pointer);
+            }
+        }
         return $pointers;
     }
 
