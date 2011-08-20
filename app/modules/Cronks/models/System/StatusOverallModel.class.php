@@ -110,6 +110,44 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
 
         $data[] = $result;
     }
+    
+    protected function getInstanceDataStatus() {
+        $model = $this->getContext()->getModel('ApiDataRequest','Api');
+        
+        $r = $model->createRequestDescriptor();
+        $instances = $r->select('p.programstatus_id, p.instance_id, p.last_command_check, i.instance_name')
+        ->from('IcingaProgramstatus p')
+        ->innerJoin('p.instance i')->execute();
+        
+        $checkTime = 300;
+        
+        $diff = 0;
+        
+        $out = array();
+        
+        $status = false;
+        
+        foreach ($instances as $instance) {
+            $date = (int)strtotime($instance->last_command_check);
+            $diff = (time()-$date);
+            if ($diff < $checkTime && $instance->is_currently_running) {
+                $status = true;
+            } else {
+                $status = false;
+            }
+            
+            $out[] = array (
+                'instance' => $instance->instance->instance_name,
+                'status' => $status,
+                'last_check' => $instance->last_command_check,
+                'start' => $instance->program_start_time,
+                'diff' => $diff,
+                'check' => $checkTime
+            );
+        }
+        
+        return $out;
+    }
 
     /**
      * @return AppKitExtJsonDocument
@@ -125,6 +163,9 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         $json->setSuccess(true);
         $json->setData($data);
         $json->setSortinfo('type');
+        
+        $json->addMiscData('rowsInstanceStatus', $this->getInstanceDataStatus());
+        
         return $json;
     }
 

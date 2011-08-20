@@ -34,6 +34,7 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
     protected $doc					= array();
     protected $defaults				= array();
     protected $attributes			= array();
+    protected $misc                 = array();
 
     // -- STATIC --
 
@@ -248,6 +249,15 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
             $this->offsetSet(null, $row);
         }
     }
+    
+    /**
+     * Add any data to output structure
+     * @param string $name
+     * @param mixed $data
+     */
+    public function addMiscData($name, $data) {
+        $this->misc[$name] = $data;
+    }
 
     public function resetDoc() {
         $this->setSuccess(false);
@@ -302,6 +312,10 @@ class AppKitExtJsonDocument extends AppKitArrayContainer {
         }
 
         $doc[$this->meta[self::PROPERTY_ROOT]] = $this->rows;
+        
+        foreach ($this->misc as $name=>$data) {
+            $doc[$name] = $data;
+        } 
     }
 
     protected function docDefaults() {
