@@ -82,7 +82,7 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
                        ->setSearchTarget($source[0])
                        ->setResultColumns($source[1]);
                 IcingaPrincipalTargetTool::applyApiSecurityPrincipals($res);
-
+                $res->setIgnoreIds(true);
                 if (isset($source[2])) {
                     $res->setSearchType($source[2]);
                 }
@@ -91,13 +91,9 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
                     $res->setSearchFilter($source[3]);
                 }
 
-
-                $arr = $res->fetch()->getRow();
-
-                if (!$arr) {
-                    continue;
-                }
-
+                
+                $arr = $res->fetch()->getRow();       
+             
                 foreach($arr as $key=>$value) {
 
                     if (isset($source[4])) {
