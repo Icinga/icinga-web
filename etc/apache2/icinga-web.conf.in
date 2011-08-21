@@ -10,6 +10,17 @@ AliasMatch @web_path@/modules/([A-Za-z0-9]*)/resources/images/([A-Za-z_\-0-9]*\.
 Alias @web_path@/js/ext3 @prefix@/lib/ext3
 Alias @web_path@ @prefix@/pub
 
+<DirectoryMatch @prefix@/app/modules/\w+/pub/styles/>
+	Order allow,deny
+	Allow from all
+</DirectoryMatch>
+
+<DirectoryMatch @prefix@/app/modules/\w+/pub/images/>
+	Order allow,deny
+	Allow from all
+</DirectoryMatch>
+
+
 <Directory @prefix@/lib/ext3>
 	Order allow,deny
 	Allow from all
