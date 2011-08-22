@@ -16,10 +16,9 @@ class Api_IcingaControlTaskModel extends AppKitBaseModel {
         return AgaviContext::getInstance()->getModel("Console.ConsoleInterface","Api",array("host"=>$this->host));
     }
 
-    public function initialize($context, array $parameters = array()) {
-        $host = isset($parameters["host"]) ? $parameters["host"] :
-                AgaviConfig::get("modules.api.access.defaults.host","localhost");
-        $this->host = $host;
+    public function initialize(AgaviContext $context, array $parameters = array()) {
+        $host = isset($parameters["host"]) ? $parameters["host"] : AccessConfig::getDefaultHostname();
+        $this->host = AccessConfig::getHostByName($host);
     }
 
     public function getValidationError() {

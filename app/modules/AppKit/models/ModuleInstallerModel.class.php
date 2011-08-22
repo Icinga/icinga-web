@@ -31,7 +31,7 @@ class AppKit_ModuleInstallerModel extends AppKitBaseModel {
         $version = $this->getModuleVar("version");
         if(!$version)
             throw new ModuleNotFoundException('Module '.$modulename.' couldn\'t be found');
-        if($version
+       
         $this->initDB(); 
         $this->startTransaction();
         try {   

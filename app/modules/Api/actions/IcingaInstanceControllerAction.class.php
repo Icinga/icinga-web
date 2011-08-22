@@ -11,9 +11,9 @@ class Api_IcingaInstanceControllerAction extends IcingaApiBaseAction {
 
     public function executeRead(AgaviRequestDataHolder $rd) {
         // return host status
-        $hosts = AgaviConfig::get('modules.api.access.hosts');
+        $hosts = AccessConfig::getAvailableHosts();
         $status = array();
-        foreach($hosts as $host=>$content) {
+        foreach($hosts as $host) {
             $status[] = $this->getStatusForIcingaOnHost($host);
         }
         $this->setAttributeByRef("status",$status);
