@@ -25,6 +25,10 @@ Icinga.Cronks.System.StatusOverall.renderer = {
         }
         
         data.state = Icinga.StatusData.wrapElement('service', data.id, msg);
+        
+        /*
+         * @todo: Qtip is missing
+         */
         data.qtip = data.msg.join('<br />');
         
         return data;
