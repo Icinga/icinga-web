@@ -46,3 +46,4 @@ icinga-web.mwb.bak
 *~
 *.swp
 **/*.log
+/.settings/

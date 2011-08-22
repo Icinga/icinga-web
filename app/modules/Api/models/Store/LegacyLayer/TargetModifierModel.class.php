@@ -8,6 +8,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             return $alias;
         }
     }
+    
+    protected $ignoreIds = false;
+    
     public $columns = array(
                           'PROBLEMS_OBJECT_ID'           =>        'op.object_id',
                           // Program information
@@ -321,6 +324,10 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         parent::reset();
     }
 
+    public function setIgnoreIds($boolean) {
+        $this->ignoreIds = $boolean;
+    }
+    
     /**
     * @deprecated
     * Takes depracted icinga_api target names and sets up this modifier
@@ -871,7 +878,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
         $this->addStaticWhereField($statement/*,$searchAggregator*/);
     }
-    protected $ignoreIds = false;
+
     protected function modifyImpl(Doctrine_Query &$o) {
         if (!$this->ignoreIds) {
             $table = $o->getConnection()->getTable($this->getTarget());

@@ -35,7 +35,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaOverallStatus',
-				width: 550
+				width: 600
 			}, {
 				xtype: 'cronk',
 				crname: 'icingaMonitorPerformance',

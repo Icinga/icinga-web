@@ -48,10 +48,12 @@ final class AccessConfig {
     }
     
     public static function getHostByInstance($instance) {
+        self::loadConfig();
         return self::getHostByName(self::getHostnameByInstance($instance)); 
     }
     
     public static function canRead($file,$host) {
+        self::loadConfig();
         $host = self::getHostByName($host);
         if(isset($host["r"][$file]) || isset($host["rw"][$file]))
             return true;
@@ -60,6 +62,7 @@ final class AccessConfig {
     }   
     
     public static function canWrite($file,$host) {
+        
         $host = self::getHostByName($host);
         if(isset($host["w"][$file]) || isset($host["rw"][$file]))
             return true;
@@ -69,8 +72,8 @@ final class AccessConfig {
 
     public static function canExecute($file,$host) {
         $host = self::getHostByName($host);
-        if(isset($host["x"][$file]))
-            return true;
+        if(!isset($host["x"][$file]))
+            return false;
         return (in_array($file,$host["x"]) || in_array(dirname($file)."/*",$host["x"]));
     }
 
@@ -87,9 +90,19 @@ final class AccessConfig {
         // mind the operand order: keys that exist in the left one aren't overridden
         self::$config = $data + self::$config;
     }
+    public static function getAvailableHosts() {
+        self::loadConfig();
+        $hostnames = array();
+        foreach(self::$config["hosts"] as $name=>$host) {
+            $hostnames[] = $name;
+        }
+        return $hostnames;
 
+    }
+    
     public static function toArray()
     {
+        self::loadConfig();
         return self::$config;
     }
 
