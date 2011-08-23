@@ -60,8 +60,7 @@ Cronk.grid.ColumnRenderer = {
 
 			var out = Ext.util.Format.ellipsis(value, (cfg.length || defaultLength));
 			if (out.indexOf('...', (out.length-3)) != -1) {
-				// @todo Check if html encoding brings some trouble
-				metaData.attr = 'ext:qtip="' + value + '"';
+                metaData.attr = 'ext:qtip="' + value.replace(/"/g, "'") + '"';
 			}
 			
 			return out;
