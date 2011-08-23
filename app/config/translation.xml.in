@@ -133,6 +133,10 @@
 						<ae:parameter name="text_domains">
 							<ae:parameter name="default">%core.root_dir%/app/data/i18n/mo</ae:parameter>
 						</ae:parameter>
+                        <!-- pattern for automatic module domain detection -->
+                        <ae:parameter name="text_domain_pattern">
+                            %core.root_dir%/app/modules/${domain}/data/i18n/mo                       
+                        </ae:parameter>
 					</message_translator>
 					
 					<!-- Date/time (also important for the validators) -->

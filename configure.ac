@@ -317,6 +317,7 @@ AC_SUBST(web_conf_folder)
 AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
+    lib/icingaScheduler/config.php
 	pub/Makefile
 	etc/Makefile
 	bin/Makefile
@@ -335,6 +336,7 @@ AC_CONFIG_FILES([
 	etc/build.properties
 	tests/phpunit/test.properties
 	etc/apache2/icinga-web.conf
+    etc/scheduler/icingaCron
 	bin/clearcache.sh
 	pub/.htaccess
 	pub/soap/.htaccess

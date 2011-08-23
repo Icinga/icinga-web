@@ -1,6 +1,6 @@
 <?php
 
-define("CRON_DEFAULT_LOG_FILE","/var/log/icingaCron/cron.log");
+include 'config.php';
 include "IcingaCronJobInterface.php";
 
 /**
@@ -30,7 +30,7 @@ class icingaCron implements IcingaCronJobInterface {
 	protected $action = "";
 	protected $verbose = false;
 	protected $parser;
-	protected $logfile = CRON_DEFAULT_LOG_FILE;
+	protected $logfile = "CRON_DEFAULT_LOG_FILE";
 	
 	public function getAction() {
 		return $this->action;
@@ -104,7 +104,8 @@ class icingaCron implements IcingaCronJobInterface {
 					$this->execute();
 		} catch(Exception $e) {
 			$this->log($e->getMessage(),true);
-		}
+			$this->log($e->getTraceAsString(),true);
+        }
 	}
 	
 	/**

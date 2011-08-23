@@ -2755,7 +2755,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3466,6 +3466,7 @@ do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "lib/Makefile") CONFIG_FILES="$CONFIG_FILES lib/Makefile" ;;
+    "lib/icingaScheduler/config.php") CONFIG_FILES="$CONFIG_FILES lib/icingaScheduler/config.php" ;;
     "pub/Makefile") CONFIG_FILES="$CONFIG_FILES pub/Makefile" ;;
     "etc/Makefile") CONFIG_FILES="$CONFIG_FILES etc/Makefile" ;;
     "bin/Makefile") CONFIG_FILES="$CONFIG_FILES bin/Makefile" ;;
@@ -3484,6 +3485,7 @@ do
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "tests/phpunit/test.properties") CONFIG_FILES="$CONFIG_FILES tests/phpunit/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;
+    "etc/scheduler/icingaCron") CONFIG_FILES="$CONFIG_FILES etc/scheduler/icingaCron" ;;
     "bin/clearcache.sh") CONFIG_FILES="$CONFIG_FILES bin/clearcache.sh" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;
     "pub/soap/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/soap/.htaccess" ;;

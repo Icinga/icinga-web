@@ -16,14 +16,17 @@ class AppKitApiProviderParser  {
             $this->remotingParams[$module] = array();
         }
 
-        $this->remotingParams[$module][] = array(
-                                                array("name" => $action, "params" => $this->getParametersFromDOM($dom));
-                                            );
+        $this->remotingParams[$module][] = array(
+            array(
+                "name" => $action, 
+                "params" => $this->getParametersFromDOM($dom)
+            )
+        );
     }
 
     private function getParametersFromDOM(AgaviXmlConfigDomDocument $DOM) {
         $xpath = new DOMXPath($DOM);
-        $query
+
     }
 
     /**

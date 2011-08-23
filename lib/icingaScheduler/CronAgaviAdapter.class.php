@@ -59,7 +59,7 @@ class CronAgaviAdapter {
 	 * @return AgaviDatabaseManager
 	 */
 	public function getDBConnection() {
-		return AgaviContext::getInstance()->getDatabaseManager();
+		return AgaviContext::getInstance()->getDatabaseManager()->getDatabase('icinga_web');
 	}
 	
 	/**
@@ -72,16 +72,17 @@ class CronAgaviAdapter {
 	private function bootstrap() {
 		require_once($this->agaviPath);
 		require_once($this->configPath);
-		
-		require_once(PATH_TO_DOCTRINE);
-		spl_autoload_register(array('Doctrine', 'autoload'));
-		Doctrine::loadModels(PATH_TO_DOCTRINE_MODELS."/generated");
-		Doctrine::loadModels(PATH_TO_DOCTRINE_MODELS);
-		
-		Agavi::bootstrap('development');
-		AgaviController::initializeModule('AppKit');
-		AgaviConfig::set('core.default_context', 'console');
-		
+	
+		// +---------------------------------------------------------------------------+
+        // Setting the running context to web ...
+        Agavi::bootstrap('development');
+        AgaviConfig::set('core.default_context', 'console');
+
+        AgaviController::initializeModule('AppKit');
+
+        AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
+        AppKitAgaviContext::getInstance();
+
 	}
 	
 	/**
