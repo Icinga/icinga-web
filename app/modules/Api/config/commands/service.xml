@@ -82,7 +82,7 @@
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
-            <ic:parameter ref="COMMAND_DATA" />
+            <ic:parameter ref="COMMAND_PERSISTENT" />
             <ic:parameter ref="COMMAND_AUTHOR" />
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
