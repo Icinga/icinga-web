@@ -35,11 +35,13 @@
             <ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
             
+            <!-- Cronks -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Icinga.Cronks.System.StatusOverall.js</ae:parameter>
+            
             <!-- Formerly dynamic scripts -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaGridFilterHandler.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaCommandHandler.js</ae:parameter>
-			
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/JitStatusMap.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
             

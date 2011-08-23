@@ -40,7 +40,7 @@ Cronk.grid.ColumnRenderer = {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			
 			if (value == undefined) {
-				metaData.css = 'x-icinga-grid-data-null';
+				metaData.css += ' x-icinga-grid-data-null';
 				return '(null)';
 			}
 			
@@ -50,18 +50,17 @@ Cronk.grid.ColumnRenderer = {
 	
 	truncateText : function(cfg) {
 		var defaultLength = AppKit.getPrefVal('org.icinga.grid.outputLength') || 70;
-		
+		AppKit.log(cfg);
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(!value) 
 				return "";
 			// skip truncate if html is located at the ouput
 			if(value.match(/<.*?>(.*?)<\/.*?>/g))
 				return value;
-
+            
 			var out = Ext.util.Format.ellipsis(value, (cfg.length || defaultLength));
 			if (out.indexOf('...', (out.length-3)) != -1) {
-				// @todo Check if html encoding brings some trouble
-				metaData.attr = 'ext:qtip="' + value + '"';
+                metaData.attr = 'ext:qtip="' + value.replace(/"/g, "'") + '"';
 			}
 			
 			return out;
@@ -166,5 +165,12 @@ Cronk.grid.ColumnRenderer = {
 			}
 			return Icinga.StatusData.wrapElement(type, value);
 		}
-	}
+	},
+    
+    selectableColumn : function(cfg) {
+        return function(value, metaData, record, rowIndex, colIndex, store) {
+            metaData.css += ' x-icinga-grid-cell-selectable'
+			return value;
+		}
+    }
 };

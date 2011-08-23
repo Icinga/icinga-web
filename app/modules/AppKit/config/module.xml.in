@@ -42,6 +42,27 @@
                     <ae:parameter name="org.icinga.autoRefresh">true</ae:parameter>
                     <ae:parameter name="org.icinga.status.refreshTime">60</ae:parameter>
                 </setting>
+
+                <!--
+                    Mapping between AgaviConfig and AppKit.util.Config
+                -->
+                <setting name="js_config_mapping">
+                    <ae:parameter name="path">org.icinga.appkit.web_path</ae:parameter>
+                    <ae:parameter name="image_path">org.icinga.appkit.image_path</ae:parameter>
+                    
+                    <!--
+                        Leaving source blank: target and source is just the same
+                    -->
+                    <ae:parameter name="core.app_name"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.copyright"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.homeref"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.major"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.minor"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.patch"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.extension"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.releasedate"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.name"></ae:parameter>
+                </setting>
                 
                 <!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
                 <setting name="ajax.timeout">240000</setting>

@@ -570,6 +570,26 @@ div#menu {
 
 .icinga-icon-dot { background-image: url(../images/icinga/idot-icon.png) !important; background-repeat: no-repeat; }
 
+/*
+ * To enable global selectable text in grids
+ * just enable these lines of css
+ */
+ 
+/*.x-grid3-row td,
+.x-grid3-summary-row td,
+.x-grid3-cell-text,
+.x-grid3-hd-text,
+.x-grid3-hd,
+.x-grid3-row {
+	-moz-user-select:inherit;
+	-khtml-user-select:text;
+}*/
+
+.x-icinga-grid-cell-selectable .x-grid3-cell-inner {
+	-moz-user-select: all;
+	-khtml-user-select:text;
+}
+
 .x-grid3-header * .icon-16 {
     display:none;
 }
@@ -647,7 +667,6 @@ div.role_user_wrap {
 div.role_user_icon {
 	width:25px;
 	height:25px;
-	float:left;
 }
 
 /* OverallStatus */
@@ -672,6 +691,13 @@ div.icinga-overall-status-icon {
 
 div.icinga-overall-status-container {
 	
+}
+
+div.icinga-overall-status-icon-instance {
+    display: block;
+    width: 18px;
+    height: 18px;
+    float: left;
 }
 
 /** Bug display **/

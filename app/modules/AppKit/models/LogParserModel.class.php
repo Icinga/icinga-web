@@ -81,13 +81,7 @@ class AppKit_LogParserModel extends AppKitBaseModel {
     }
 
     protected function getLogDir() {
-        $logDir = AgaviConfig::get('org.icinga.appkit.log_path');
-
-        while (preg_match("/%(.*?)%/",$logDir,$match)) {
-            $logDir = preg_replace("/%.*?%/",AgaviConfig::get($match[1]),$logDir);
-        }
-
-        return $logDir;
+        return AppKitAgaviUtil::replaceConfigVars(AgaviConfig::get('core.log_dir'));
     }
 
     public function getLogFilesByName($name) {

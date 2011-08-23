@@ -1,3 +1,1258 @@
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b90f058bc5479a89c31d8cc7f22dffd4842e982c
+
+* Added persistent flag for add comment in api (fixes #1437)
+
+
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b03ad65f1449f65844ada76f7412ad741aa59086
+
+* Allow selectable text in grids (fixes #1612)
+
+
+2011-08-23 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 383ed49e1abcbfe7b3be12ac6286ec98739cf80a
+
+* Fixed scheduler, updated translation.xml to automagically check for Translations
+
+
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9ec99d028e5bad5f5e59e64dd186b90868b2392d
+
+* Fixed #1646, ColumnRenderer encodings
+
+
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9800229227016000cd295c093e44a5acce324063
+
+* Configurable app name (fixes #1648)
+
+
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 75c75bda35fc9e8e73801a939aa7434e82793598
+
+* Added view for instances and their status (ref #1821)
+
+
+2011-08-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ec8f1cd502873332878e9cca9372142506b59321
+
+* Added mini instance status (fixes #1821)
+
+
+2011-08-22 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: efdbebba2ac7cbed8743b9b52e45a4db1faa2fcf
+
+* Fixed db-initialize complaining, fixed log to respect dynamic path, disabled task 
+  view
+
+
+2011-08-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8e8032ae5b2d6742bcc3aa764148f9d418361955
+
+* Added new OverallStatus JS implementation
+
+
+2011-08-21 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ee1183e8e6c16bb79e7b62160d74997ce8d7c9eb
+
+* Added DirectoryMatch to allow proper access to module ressources
+
+
+2011-08-21 root <root(AT)linux-7kv8(DOT)site>
+           Commit: 7f0d70c0167a5300e196ff1e30e5de8c41873554
+
+* Fixed sql-issue in status-summary and missing quoting in legacy filter
+
+
+2011-08-21 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6868938645cdb8764d621edf21ebcca986a43167
+
+* working state module installer, not used anywhere at this time
+
+
+2011-08-20 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7c203eb0fba3c02f42d5b646ba30ee0217ca3a80
+
+* Log dir fixes
+
+
+2011-08-18 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 237841ae9c793aad5b9edbd618ae19b26e102022
+
+* Fixed context awareness bug in AppKitXIncludeConfigHandler
+
+
+2011-08-18 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3187fb3cb7e0a65083c345ae30165ac0977800b0
+
+* Modules can now be disabled (altough menu,etc. will be displayed)
+
+
+2011-08-18 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 04041d094703affe486eba09cb061639889fc03e
+
+* modlarized schedules xml, created SubSettingConfigHandler that allows to create own 
+  setting-xmls
+
+
+2011-08-18 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e614b440ebc2b96e5fa794c4a9bd5b1c4769f96d
+
+* Added AliasMatch for public module resources
+
+
+2011-08-18 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 1592dda2f166cd28246ac6dab45709ef2931dde1
+
+* Removed initModules from icinga.xml
+
+
+2011-08-18 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 4340b033864f9ef6c843aefbd7600117a1549e53
+
+* Removed access.xml from modules and put it in a own xml document, added 
+  ConfigHandler that enables modules to add access definitions
+
+
+2011-08-17 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 4e5117487f04ae933a98c9ff76c7c2ff8f8ec431
+
+* Fixed typo in service-tempalte
+
+
+2011-08-17 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ec9f83f00d1df3f8653c2ab17e208e9fa6dc40fe
+
+* Changed version to beta
+* Resize bug in reporting cronk (fixes #1822)
+* Fixed fuzzy 
+  translation
+
+
+2011-08-16 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 14ab31e5165a3ce9d426805dc74fb27b3df4b067
+
+* Fixed clickhandler. added column extensions to Cronks, fixed icons missing in 
+  column selection, modularisation fixes
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8aee5b7b7a1dd0958a418abf5f8eaa0c1b1b3f67
+
+* Removed template based refresh and pagination values (fixes #1817)
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f4c6b7cb49f2b70fc9c54b55aae011991f53e006
+
+* Fixed drop action
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f044a9fb1773fb604a41903294f56bb5f27c1dc7
+
+* removed with
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fd708b05ee5eb3dbef85418079abf057d8666130
+
+* fixes #1816
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0ee43ad1d86246b0e023865c84d1bc80058b2b34
+
+* Added PHPSeclib implementation instead of libssh
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b81df97245e6d5f0ebf424d672dae20c4f16eec3
+
+* Installation fixes for Reporting
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0db32fcc3c28650ace628913ff7ec360b615fa12
+
+* Install fixes
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 83135a1510309545344214f36c7015a39706d348
+
+* Added session-caching for principals
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 53bec97d8c9a6bc89a2300a7a62b61942cbd28a5
+
+* Testing starts now only from make (fixes #1814)
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c09e3459d0cf1e893b607666f5dd19ac877a685d
+
+* Search now stays open on click, services are displayed on host-click (fixes #1815)
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3a246a65b5101c90da767429e856f5da41e96b94
+
+* Excluded disabled hostgroups in view
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 845cb9c46c7c164d3a6c2ea4ac7675359eabd9b8
+
+* Changed menu route for about
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 31425cd7f79749c54870771f8d19e162e0b2f3d4
+
+* Due to a bug in doctrine, CronkGridTemplateWorker retrieves data now as array
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 97a58c7b631b4cd77bc0dbdcd9abf9a8e83c85a1
+
+* Moved js action to squishloader action because of etag handling (fixes #1813)
+
+
+2011-08-12 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c7fb653344bec7df527f3d87b39539f7d8917a4e
+
+* Added host_id to default sort in host view to prevent hosts not showing in 
+  pagination when they have exactly the same check dates
+
+
+2011-08-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 37086c14ec98405ff6e4ed9e9067ee99c0f2efa4
+
+* Applied new translations from pootle (THANKS TO ALL TRANSLATOR
+* DOING THIS GREAT 
+  WORK!) fixes #1811
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 7ea3adec657c8db4ee99884d87e062ba4a304815
+
+* Added icinga.css
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0f4bc9f5e198caed71ce2c42c33b6c3bc64f7325
+
+* Fixed tyepo from conflict
+
+
+2011-08-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2254006f093a876db565d1b0e71a8c0e2439883d
+
+* Fixed small overview cronks (fixes #1808)
+
+
+2011-08-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7ac3e10e7867f2e52233c9f914f7055e14349f08
+
+* Fixed config handler issue (sub module include databases)
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0b9e08e328e30bfe0cc4cf378968c2024dda5572
+
+* Added failure fallback for IcingaStoreTargetModifier w/o columns given
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: dbd53a5d77b3d4e9ce8ca22f0154abcc439a2406
+
+* Removed duplicated cronk loadings on start (fixes #1804) and added open problems 
+  summary to hosts (fixes #1803)
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8d51b9907cad0004284a32f6a8db6fec9afc5efe
+
+* fixed default columns not working in search
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d37522aa6a3d9163d64e99c6298d0471ddcaeb7e
+
+* Fixed wrong variable in check
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 634bb915dd45dc075cf8c65b82d6cd6f61334b80
+
+* Made api more tolerant, added slash to folder definition in logging.xml.in
+
+
+2011-08-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1417c30a4274370323cbf38ccfd005be1deec91a
+
+* Applied coding style (ref #1536)
+
+
+2011-08-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 04c7fc79c915b8a23399877b582ea36950a14a73
+
+* Added astyle config
+
+
+2011-08-11 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 114909bda538d87054150c6d9e336af013e8ebfe
+
+* Cleanup pt2 (fixes #1530, fixes #1532)
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 1e365827d8170eb52ea407f9a9cbf4c244658e48
+
+* Removed timezone conversion in translation.xml.in (fixes #1733)
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: df15c0adb0699e65f88a763a3207848ca214747c
+
+* Fixed makefile type (fixes #1801)
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b15dbc475e6ebd58ff4d99eb31d5b8f1870e6d6d
+
+* Fixed appkit.admin routing
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 85e2347856326bc1afca669c7d71dd642b2a5e69
+
+* Moved config files to etc/conf.d (or --with-conf-folder, fixes #1708), moved log to 
+  log (or --with-log-folder, fixes #1714)
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 87ccfbbd675e3531e001e8bf9851838490c89f98
+
+* Fixed css typo that killed the layout on non-WebKit browser
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ad9d4a2d2bc6d867d019eb076afe65bdeeeb02cb
+
+* Removed squishloader from configure
+
+
+2011-08-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b45f3fcca2ff17287aa92a73261061d954b42e7e
+
+* Added caching for template xmls, removed Agavi-based Squishloader cache
+
+
+2011-08-10 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: cd499a264283031d8d7ce6581519c132b4451361
+
+* updated gitignore
+
+
+2011-08-10 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ceb1596779b58e49c578b96c12c60fad67992361
+
+* Added unhandled host/service problems (fixes #1614) added lazy loading of comments 
+  (fixes #1806)
+
+
+2011-08-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0a0d70099ea634a91609f0ca74d08fea17759e70
+
+* Cleanup AppKit library (fixes #1531)
+
+
+2011-08-10 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 83ce3e1f33791bcef8f91da5c0fc82415771da30
+
+* added configure flag to squishloader cache
+
+
+2011-08-10 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 64a401b1bbee3e886f68a2f08d866adcf05556c6
+
+* Fixed old IcingaApi definition breaking ObjectSearch
+
+
+2011-08-10 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: eaaf53595e21e56fea694099ee67164add8db3f2
+
+* Compiled doctrine, added config-property in module.xml for using the compiled 
+  version, moved Doctrine-specific changes to
+* own AppKitDoctrineDatabase class and 
+  added caching configuration in databases.xml
+
+
+2011-08-09 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 64ce97f7166f58b4ae715c7a2d93842f5fef34eb
+
+* Added custom caching mechanism for squishloader (uses ETags)
+
+
+2011-08-09 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 830e6dfb363a1a70f7d8d84a4928a5df3de50134
+
+* Updated stylesheet for menubar
+
+
+2011-08-09 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6d783075a6d2e0c0b08defa3093d254f4a03e6be
+
+* Forgot config_handler.xml changes
+
+
+2011-08-09 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f231d82838c1c2f53d72e7203a92817ee6392628
+
+* Rewrite of menubar, removed events, added AppKitLinkedList (that is used by the 
+  menu), replaced DoctrineSessionStorage with simple AgaviSessionstorage
+* which should 
+  be a major performance improvement
+
+
+2011-08-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4be5ffb1168a05f478f23958dbe8970fe53f9ca2
+
+* Fixed simpleDataProvider URL  (ref #1548)
+
+
+2011-08-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e295e8cbb6632d734c461010e30d4b77bce3d86e
+
+* Removed global routing space and moved everything into modules (ref #1548)
+
+
+2011-08-05 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 062a430bd0bd9a52f6df8f83f32e95268d4b7e35
+
+* Removed initializeModule from index and added AgaviAppKitContext to compile.xml
+
+
+2011-08-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5ed55109433a6bff2098c6ab78d204438bbaf503
+
+* Added agavi javascript actions to javascript config handler (ref #1548)
+
+
+2011-08-05 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: bca31028bf9f15837ec531ca7e5581cd1b55ea03
+
+* Added dispatcher routes to Ext.Ajax and Ping action to avoid false-positives on 
+  server-down check
+
+
+2011-08-05 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f9551a52bdf4216609a6c35c6184cb4eba26044f
+
+* Added (HOST|SERVICE)_PROCESS_PERFORMANCE_DATA to target defs
+
+
+2011-08-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 93340db0a41ef7019e0f42e086c3bf130e15cd7d
+
+* Removed the module util (ref #1548)
+
+
+2011-08-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7cde0ba5d0cc3e90ed3ec19d6f149f4e01281517
+
+* Removed the javascript dynamic loader (fixes #1534)
+
+
+2011-08-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2d4765aa53ad2ff608e3f359be1de138e655d061
+
+* fixes #723 cookie for login credntials
+
+
+2011-08-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: df06e9da59b6b6b145299ca1045765c10faa5149
+
+* Removed some php5.2 errors
+
+
+2011-08-03 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ab3898c2e8ac03cac5697ca264f1a763c1809b42
+
+* Finished merge of new module based configuration (II)
+
+
+2011-08-02 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 233548439d054cbd6df4cedc9cf23bf3a6d2ae59
+
+* Removed PHP syntax error getting contants from dynamic class
+
+
+2011-08-02 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: acd2c80e49af713c71c8e2039843c6bada688a86
+
+* Finished merge of new module based configuration
+
+
+2011-08-02 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b28a702010a6e56e350f8814359ba8c845af27fb
+
+* Fixed typo that crashed php 5.2.x
+
+
+2011-08-02 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 946989ef09a0b83f83da7386cdd692c7e6e4e462
+
+* fixed xmls
+
+
+2011-08-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3960125883ba4c04c31a60b383c95edf9741b254
+
+* REPORTING: Fixed merge structure
+
+
+2011-08-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 947a54b11562213d144bd8cc6bdc13e6bd5772ab
+
+* Merge branch 'mhein/reporting'
+
+
+2011-08-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 15fda344c68755188d15724960e8598bd25f6c2a
+
+* REPORTING: Ready for release
+
+
+2011-07-29 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d64ada4a77f391b5af86de2826cd70a8a3f024e1
+
+* Added logging for queries
+
+
+2011-07-29 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ba4812274a9a95704f708d01a5b80c14e1699518
+
+* Fixed installation
+
+
+2011-07-29 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0cef24db3a27db984c03ca5de300271e90416249
+
+* Fixed relations, cleaned up configs/vim swp files
+
+
+2011-07-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ee10e9c5308838ade042d7cbcf72926a649b8ed6
+
+* REPORTING: Work in progress
+
+
+2011-07-28 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 324dee03b867c1ec8f8193637e4ee2a2346ca9e9
+
+* REPORTING: pre merge
+
+
+2011-07-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3fa3e1f2ffb8ea44c0bbbd241c0f55ddaf4339b3
+
+* REPORTING: Working stage
+
+
+2011-07-27 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a0c6a7217055771f94d0707cbcf06d2b97f985cc
+
+* Updated configure
+
+
+2011-07-27 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2dda181f3c7a39fb309a8d046ffd83abd283a9f2
+
+* Removed the icinga-api dependencies and created Commanddispatcher, several fixes in 
+  relations
+
+
+2011-07-26 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: ededf0ecb72e978e79845931e98a85fe66977936
+
+* Fixed AppKitResourceConfigHandler using values of directory iterator's array 
+  instead of keys
+* Added try catch to missing xincludes
+* Allowed array syntax for 
+  pointer definition of AppKitXIncludeConfigHandler since Agavi is not capable of 
+  multiple config handlers for one file (which I assumed)
+* Dropped second css.xml 
+  handler and updated the remaining onerefs #1548
+
+
+
+2011-07-26 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: 1414202fea679cb3d12136425d048192c140c7db
+
+* Removed squishloader.css route
+* Added styles.css route allowing url(../images*) 
+  for module css filesrefs #1548
+
+
+
+2011-07-25 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: 75b3960c914997e200a2861f3519d2da2ed3ab38
+
+* Added css / css_import processing to AppKitResourceConfigHandler
+* Moved css 
+  imports from module.xmls to own files
+* Revamped AddHeaderDataAction
+* Dropped meta 
+  config from module.xml but added to template
+* Dropped HeaderData modelrefs #1548
+
+
+
+2011-07-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4cca607779bc2b01827328cfe5d69536bd598ee3
+
+* REPORTING: Working stage
+
+
+2011-07-22 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b84cb11563f8eeee7c36baa604af52a02360d109
+
+* Removed debug print_r
+
+
+2011-07-22 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0cda6e9a64f8838957727288dfaa9eb5e3e30265
+
+* Several LegacyLayer fixes, only statusmap query must be fixed
+
+
+2011-07-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 236d38a6500a54001b9b0331a2018c6207059c58
+
+* REPORTING: Fill scheduling form from soap request
+
+
+2011-07-22 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: e2b09a1a829a0eb6cede62e77cc0ed1788147823
+
+* Removed AppKit BulkLoader from autoload
+
+
+2011-07-22 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2a21e1c2e56e20c2a1344139b240c506d4924abb
+
+* Fixed parent_host relation, fixed LegacyApiQueries
+
+
+2011-07-22 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: acafaf090f89115ae1aeb2c2036866f5223055fc
+
+* Added cronks.xml from mhein/testing
+
+
+2011-07-21 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: ffbfae93473aa5b5ba2b6fe24792edb2779fa428
+
+* Added AppKit_BuldLoader model, replacing class AppKitBulkLoader
+* Added minify 
+  tasks to loader
+* Adapted SquishFileContainer model to use the new model
+
+
+2011-07-21 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: d5fadaf517c092cece8aefb69f2f96dab1de08c1
+
+* Added AppKitXIncludeConfigHandler which includes module config files into their 
+  global equivalent respectively
+* Added xsd/xsl validation/transformation for configs 
+  handled with AppKitXIncludeConfigHandler
+* Added AppKitResourceConfigHandler which 
+  collects modules' javascript and stylesheet (not yet) includes
+* Added 
+  AppKit_Resources model holding those includes
+* Outsourced modules' javascript 
+  includes to own files
+* Adapted global config_handlers and SquishLoader for the 
+  changes to take effectrefs #1548
+
+
+
+2011-07-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 61811b516d3eae06d5928d9e1de0b44eb7275687
+
+* REPORTING: Rewritten the constants handling of jasper
+* REPORTING: Started 
+  scheduleing implementation
+
+
+2011-07-19 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: da5f844b920f715538b6286eb9387a1e8a7b1882
+
+* Current working state
+
+
+2011-07-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 1e4f122502d3f4a0e63481e683fa8b20382a102d
+
+* Added global temp directory
+
+
+2011-07-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f771adeb410e4fef4b78c6946190337f87133be7
+
+* Fixes grid filter (fixes #1564)
+* REPORTING: Resource view ready now
+
+
+2011-07-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b997f182d8d9dbab15027560dc7d22be1f6771a7
+
+* REPORTING: Add resource tab panel
+* REPORTING: Added preview for resource data
+
+
+2011-07-15 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 50f0021f64e5eeacec66e8d09e84c8c803307c8c
+
+* Changed Icinga-Api functions to be able to call doctrine based legacy layer
+
+
+2011-07-15 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0a6fb326da2093c432ab6d3be9ef0d04964fa2e4
+
+* Added grouping functions to query, LegacyLayer only needs filtering to be 
+  finished
+* Fixed some relations and made the alias functions more comfortable *
+
+
+2011-07-15 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: 10771dd11a042dc07c69e81f67baa9bb27231f4f
+
+* Added folder creation (app/cache/config) to make devel-inplace-config
+
+
+2011-07-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a76918047365a6428023960fcc59096410a84f1a
+
+* Reporting: Added missing files
+
+
+2011-07-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fcfffda7c00b875cea9f0c0fff2c290f42cd879d
+
+* Added fix for filters in grid
+
+
+2011-07-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a619b8150ab1793df15724863d5c1879c5821910
+
+* Reporting: Added multipart soap client
+* Reporting: Changed multipart 
+  implementation to new client
+
+
+2011-07-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: dc55be9e9576c33d4bc566c4dd2355914b403566
+
+* Removed working files
+
+
+2011-07-11 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 91719fbe0d788fdd91df3ab653a966c49469fa58
+
+* Fixed some relations, added raw setting of all icinga-api targets
+
+
+2011-07-09 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d1952ecb756691394b9ad8408546b3fdba0d8b4d
+
+* Created custom adapter for oracle and fixed several model issues NOTE: The 
+  icinga-Api should now work in oracle without any changes in code. The driver name 
+  herefore is icingaOracle://... and it reparses the sql prior to executing it (it's 
+  not very nice but the cleanest way to realize it i found - and I tried EVERYTHING :) )
+
+
+2011-07-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 39ca1234dda8eed4ae908133f009a195579c9cd6
+
+* Reporting: Added repository node
+* Reporting: Better tree, icons, qtips, tree filter
+
+
+2011-07-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b6e9eb9a3a4960b8c4127118efd460bb4d87424a
+
+* Fixed "SilentAuth" login issue
+* Disabled silent user could not login
+* Fixed 
+  session creation for silent providers
+
+
+2011-07-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 867f5803edccd14edb2821deecbbc69d6669ed20
+
+* Oracle fix for editing users with principals
+
+
+2011-07-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 426e2a1932ae680708491e5753414d306a00d0ea
+
+* Rewritten report form handling in JS
+* Reports: Added preview option with html 
+  reports
+* Reports: Better UI integration
+
+
+2011-07-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 261fad312db6a7c6b749d3ecf54531d2c62267a6
+
+* Added oracle fix for deleting cronks
+
+
+2011-07-05 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 458841f1c52248e0cadb64110530a75827e80bd5
+
+* Extended Doctrine to support n-m relations without being forced to use the primary 
+  key
+
+
+2011-07-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 314a00e3e50bfd23125c13d1f7304aca0e6bb5fb
+
+* Added additional output types
+* Better parsing of multipart response
+* Added HTML 
+  embedded images for HTML export
+
+
+2011-07-04 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: eaa7cad278aba9baa45f30254c3fd617626c8b9f
+
+* Added additional relations to doctrine models, started LegacyLayer for Icinga-Api 
+  emulation
+
+
+2011-07-04 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 87cecf940224ff860bc57bf5a8a1ea27e0cf5115
+
+* Fix for FF4
+
+
+2011-07-01 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8a7438cef1b4438e7d26d3deb64abe3ac7d76e38
+
+* Added a bunch of PHPDoc tags to store/data classes
+
+
+2011-07-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9a527a0ac831835774afc838d96e848b4a2de9c2
+
+* Bugfixes, reporting and session only for PHP5.3
+
+
+2011-07-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 37db20f458a06b794c2fb6b71fd0b3ee92c98686
+
+* Working stage final
+
+
+2011-07-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 39565af64ff200e4838dd585bdde08830291836e
+
+* Working stage
+
+
+2011-06-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fff6a8c5619ad1495eb6977a94b33e5173acb393
+
+* Working stage
+
+
+2011-06-29 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8c83c561bbbc126a68e684f5f46f5961c521e1a6
+
+* Added initial reporting module
+
+
+2011-06-28 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ff3b392bd99ca4656e84f24fb4edfb39e084d6c5
+
+* Updated tests
+
+
+2011-06-28 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: aa37619ca5d56792c95e34da888bab17ea8e786e
+
+* Grid concept works, needs some tweaking in the filtering, but this can be handled 
+  when it will be implemented in icinga 1.6
+
+
+2011-06-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dd2791f409b1062f41092892d0b009f862cf7700
+
+* Provded oracle fix for session garbage collector
+
+
+2011-06-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a216431bb4af0d8b1c927d1c73f32747e42ab579
+
+* Changed clear cache to agavi way
+
+
+2011-06-26 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 7d63bb602f19c8e74ec48b69a00cf4fb5f4f27af
+
+* removed debug output
+
+
+2011-06-26 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d30255cec126fbe68d40a2412fd014deeca08383
+
+* Patched agavi exceptions and classes for doctrine connection
+
+
+2011-06-26 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 1b05582ef962cb22f983ece80d7c38b370eead35
+
+* Added IDispatchable
+
+
+2011-06-26 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ec319694bd9e9f7c7f85843600f31b1e8c4cb22d
+
+* Added JS functions for frontend
+
+
+2011-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9ab4e4f3f4ae24b0472761181fdbc2416f3ec069
+
+* Provded oracle fix for session garbage collector
+
+
+2011-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 25d93fb5c7ec1d60cb691272c1381d71748a3030
+
+* Provded oracle fix for session garbage collector
+
+
+2011-06-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b6da33ecb4e13e4f9cbf835cdc51194ac60f9882
+
+* Fixed translation issue (fixes #1671)
+
+
+2011-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9f6bb962827c5a6971c12485532792780171a4bb
+
+* Upgraded to agavi 1.0.5
+
+
+2011-06-22 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8832c25ce321bf387f3e43452bb40504841a0f8c
+
+* Added icinga-web db oracle default config option (fixes #1284)
+
+
+2011-06-20 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: eec2600a341e7fc8cabc6260f14c375618d78c02
+
+* Almost finished server side part of api creationJ:
+
+
+2011-06-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a46b9e729459117997d80c1df973206ddc713df1
+
+* Added module based translation and tests (ref #1548)
+
+
+2011-06-15 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5f3808d381823618fe69ea7692d2227153a690e9
+
+* Renamed AppKitRoutingHandler -> AppKitRoutingConfigHandler
+
+
+2011-06-14 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d33e3b64967642e7908f0f4bd5b5bebc79aa987e
+
+* Added IcingaDoctrine_Query (readded), finished DataStoreModel
+
+
+2011-06-14 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 42fd32b91eab43af9ab57caa8a3e7491d4424dec
+
+* Current working state !! unstable, just for merge !!
+
+
+2011-06-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b905a4775374048cb44e4bea7e5f89435995b056
+
+* Independent cronk module ref (cronk.xml, AppKitModuleUticronk.xml, 
+  AppKitModuleUtil) #1548
+
+
+2011-06-10 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ae749ff07406e81912ef17c388bfdd6b16ba2a9c
+
+* Added database independent configuration for modules (ref #1548)
+
+
+2011-06-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 66a17e5b3b17eeef960da518225a903ff8a9cf3c
+
+* Added database independent configuration for modules (ref #1548)
+
+
+2011-06-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 625d0ca0df67882d76f25ae18bd9fd503b3712b6
+
+* Fixed modules based routing handler
+* Added testing context for module routes
+* 
+  Added test stub module for use with phpunit
+
+
+2011-06-07 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d4c7d729b8edb3fd3bb1f061e9a99e478375545a
+
+* Fixes some errors in TestInit
+
+
+2011-06-07 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9febfa198410be09cd55c69dbad581cb457ef1a5
+
+* Fixed problem in routing provider
+
+
+2011-06-07 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 48e089f19c25adc1358f69fa576ef55b99797130
+
+* Added Filter modifier for DataStore
+
+
+2011-06-06 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 542984d2913d500ee41a089bbe7e788b2a2137ea
+
+* Added connection identifier to internal icinga_web doctrine models (icinga_web 
+  connection can now
+* be placed in anywhere in the databases.xml and needn't to be the 
+  last element anymore)
+* Prepared API tests to succeed where they should
+* Added 
+  'connection' property to ConsoleCommand
+* Removed deleted files
+
+
+2011-06-04 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 2b3ab8db6e5f00c242f9da05ba4d77515b7a9d36
+
+* add .gitattributes to ignore .git* in git archive
+
+
+2011-06-01 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: fdbf7e3006007a792a2c4b4e4d8f0d4637c9db48
+
+* Added AppKitJson Validator, started concrete DataStore implementation
+
+
+2011-06-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4e5f5ce416defd9731b551fe316dd5195acc1b1b
+
+* Added tree-like tactical overview (based on special CV layout)
+
+
+2011-05-31 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 486f66cd440554949c590387d0f14eddddbe610d
+
+* current (unstable and not usable) working state
+* - Added Filter definitions
+* - 
+  Started DataStore implementation
+* - Started DataStoreModifier implementation
+* - 
+  Wrote tests
+
+
+2011-05-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e458c48a2ceba2d2e5db0e1370c38bfbf5392aab
+
+* Upgraded bp icinga cronk
+
+
+2011-05-30 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ac166cbb2702fa386880a9ded2551b5542bcd5ff
+
+* Validator arguments are now parsed for apiProvider routes, started action 
+  reflection in cache creation process
+
+
+2011-05-30 Jannis Mosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 61f1faf82f16142889482e614074e0ad025e6900
+
+* Updated to working status
+
+
+2011-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 69af3196cd0caca8cf5f19f5b9d419e195d4faf1
+
+* Merge branch 'master' into 
+  mhein/testingConflicts:	app/modules/AppKit/models/Auth/Provider/LDAPModel.class.php
+
+* 	app/modules/Web/lib/principal/IcingaDataPrincipalTarget.class.php
+
+
+
+
+2011-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5765288e7e006846bd082fe37cd35c5ef33b2cad
+
+* Applied patch from lydon, thanks, fixes #1596
+
+
+2011-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0e5d219b4204faf8fccd3de0d798e8f383e11f1b
+
+* Moved php tests to phpunit
+* Added CodeSniffer tests (YACS)
+
+
+2011-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: dc27487bca745dfe067067df80eb29e749ca97bc
+
+* Added padding header for control structs
+
+
+2011-05-27 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e7f711aa2e3aa91ccf6d419bc149be6345a10768
+
+* Part 1 of code styling
+
+
+2011-05-25 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d95bb41b5ab8ba34dedc5073883045d1d3182a83
+
+* Principals now work with wildcards
+
+
+2011-05-23 jmosshammer <jmosshammer(AT)debian(DOT)int(DOT)netways(DOT)de>
+           Commit: 07a5c02d2632065414aa4d377e18d30a3ba343fa
+
+* modules and actions for ext.direct export can now be marked in the routing xml
+
+
+2011-05-23 jmosshammer <jmosshammer(AT)debian(DOT)int(DOT)netways(DOT)de>
+           Commit: 4ce95c2a8db3eab27eae5eda17410aa40f803afd
+
+* Replaced AppKitModuleRoutingHandler with AppKitRoutingHandler,
+* Routing XMLs can 
+  now be modified via their own xsd/xsls
+* Added own xsd/xsl files for routing and put 
+  routing in a own icinga.org context
+
+
+2011-05-23 jmosshammer <jmosshammer(AT)debian(DOT)int(DOT)netways(DOT)de>
+           Commit: bb48870b4e393e8f0a24861ad176ebb3ed59b1c9
+
+* Fixed compatibility with PHPUnit 3.4.x (which is default in debian squeeze)
+
+
+2011-05-19 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 617469fbbc4b618bc711ef7f2b255f0d54d3fa69
+
+* Added testing toolkit (bootstrap, properties)
+* Changed agavi bootstrapping test
+* 
+  rel #1568
+
+
+2011-05-18 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6fca3280cf916ab4290593ee98b41d3e78f46b62
+
+* Reorganised structure for php testing ref #1536
+
+
+2011-05-18 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6f1f45eeb8d6a9759562dff69486d35cf39bfda3
+
+* Fixed postgresql scheme
+
+
+2011-05-17 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ac5cbfc5b7c39762f592773a1340589ea383aebc
+
+* Added bp bugfix for editor
+
+
+2011-05-17 root <root(AT)debian(DOT)localhost>
+           Commit: fe60941e024d98f176da09c8e659bc9a01baa628
+
+* Fixed #1525, fixed #1513, fixed #1509
+
+
+2011-05-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c1a6364738e2361e853f925e9d0ad4c65f473dac
+
+* Provided IE JS fix
+
+
+2011-05-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fdefb8b9bf7c2548ef5a351a5aeddd5ccfe14b56
+
+* Prepared 1.5 dev trunk
+
+
+2011-05-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9bccb96fc684854e5095238f9ceb165bca9e0908
+
+* fixed cache clearing in bp-integration
+
+
+2011-05-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 003a1dc1ff5a6ea99f87c454994eb5479482ba49
+
+* Chaanged delete icon in cronks, fixed preferences window not constraining to view
+
+
+2011-05-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 07aa4a5f6b176704623c391ce03bf38527f4ae93
+
+* Fixed log-cronk principal name in template
+
+
+2011-05-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: dc73e978f6f13cf14702f94264a1eaa403cc4c33
+
+* Fixed typo
+
+
+2011-05-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: fdca745f4e20af723a9668079ccf48b458ff918e
+
+* Removed id from update routine
+
+
+2011-05-09 jmosshammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9206ec49963edee9f459ba20250f138135fdc188
+
+* added target id to schemes
+
+
+2011-05-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 89ff2e3d29b3151f19aed47244826942b7513fca
+
+* Added smaller bg images
+
+
+2011-05-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d2c1d2a683b37871470ab8e9daf692ee90f6438d
+
+* Recreated changelog
+
+
 2011-05-06 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: a3b38f6e600fc67dbf2a0c3edce0d4b2d1ab1443
 
@@ -5,10 +1260,23 @@
 * Fixed overall status pending filters
 
 
+2011-05-05 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: fc9f5361139abf518ed8e68fa67c23d8362a6e1b
+
+* set version to 1.4.0
+
+
 2011-05-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: 76d6dc0ad030db9c583d1bbc4fe7bda4c95d609f
 
 * Quick fix for view and counter (pending state)
+
+
+2011-05-05 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 2235f044fb24f4f1e0cb20728780df2f4515baf4
+
+* update icinga-web.spec for 1.4, rpms build ok #1455fixes #1455
+
 
 
 2011-05-05 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
@@ -278,6 +1546,14 @@
 
 * Fixed missing parameters in drag->portal action, fixed saved portal cronk 
   restoration
+
+
+2011-03-23 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: a79e9b0a5b85202b88c708f5e4dfc46993382949
+
+* Fixed API to not return metaData if parameter "withMeta" is not set or set to 
+  false/0..
+* Fixed runSuite.sh
 
 
 2011-03-22 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>

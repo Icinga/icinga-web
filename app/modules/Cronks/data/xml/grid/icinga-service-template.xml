@@ -1076,8 +1076,10 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter> 
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">selectableColumn</parameter> 
+                    </parameter>
                 </parameter>
             </display>
         	

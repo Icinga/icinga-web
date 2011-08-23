@@ -36,7 +36,7 @@
 		</system_actions>
 
 		<settings>
-			<setting name="app_name">icinga</setting>
+			<setting name="app_name">@app_name@</setting>
 
 			<setting name="available">true</setting>
 			

@@ -39,7 +39,7 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
     private $mapping = array(
                            'host'	=> array(
                                'target'		=> IcingaApiConstants::TARGET_HOST,
-                               'search'		=> array('HOST_NAME', 'HOST_ALIAS', 'HOST_DISPLAY_NAME'),
+                               'search'		=> array('HOST_NAME', 'HOST_ALIAS', 'HOST_DISPLAY_NAME', 'HOST_ADDRESS'),
 
                                'fields'		=> array(
                                    'object_name'	=> 'HOST_NAME',

@@ -5,7 +5,7 @@
 ?>
 <div style="margin: 10px auto; padding: 10px 10px;">
 
-	<h1>Welcome to Icinga (<?php echo $version_string; ?>)</h1>
+	<h1>Welcome to <?php echo AgaviConfig::get('core.app_name'); ?> (<?php echo $version_string; ?>)</h1>
 	
 	<p>Feel free to poke around and don't forget to visit the project homepage 	to post bug advisories or feature requests.</p>
 	

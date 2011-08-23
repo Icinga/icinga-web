@@ -57,6 +57,13 @@ ACICINGA_CHECK_BIN([PHING], [phing])
 
 # Define install options
 
+# Meta option
+AC_ARG_WITH([app_name],
+	AS_HELP_STRING([--with-app-name=NAME], [Application name (default Icinga)]),
+	app_name=$withval,
+	app_name=Icinga
+)
+
 # Users for webfiles
 AC_ARG_WITH([web_user],
 	AS_HELP_STRING([--with-web-user=USER], [username for web writable files (default www-data)]),
@@ -261,6 +268,7 @@ CFLAGS=""
 ACICINGA_DEVEL_MODE()
 
 # Substitutions
+AC_SUBST(app_name)
 AC_SUBST(web_user)
 AC_SUBST(web_group)
 AC_SUBST(web_path)

@@ -235,7 +235,6 @@ Cronk.util.InterGridUtil = function(){
 			panel.setTitle(config.title);
 			tabs.setActiveTab(panel);
 			
-			tabs.doLayout();
 			return panel;
 		},
 		
