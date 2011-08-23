@@ -19,17 +19,12 @@ Icinga.Cronks.System.StatusOverall.renderer = {
         var msg = "";
         
         if (data.id == 0) {
-            msg = String.format(_('{0} instances OK'), data.count);
+            msg = String.format(_('{0} OK'), data.count);
         } else {
-            msg = String.format(_('{0} instances DOWN'), data.count);
+            msg = String.format(_('{0} DOWN'), data.count);
         }
         
         data.state = Icinga.StatusData.wrapElement('service', data.id, msg);
-        
-        /*
-         * @todo: Qtip is missing
-         */
-        data.qtip = data.msg.join('<br />');
         
         return data;
     }
@@ -48,7 +43,7 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
 		Icinga.Cronks.System.StatusOverall.Cronk.superclass.initComponent.call(this);
 		
 		this.refreshTask = {
-			run : (function() {this.dataStore.reload();AppKit.log(this.dataStore);}).createDelegate(this),
+			run : (function() {this.dataStore.reload();}).createDelegate(this),
 			interval : (1000*this.refreshTime)
 		}
 		
@@ -58,11 +53,11 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
 			'<div class="icinga-overall-status-container clearfix">',
 			'<tpl for=".">',
 				'<tpl if="id==1">',
-				'<div class="icinga-overall-status-icon icinga-icon-host" title="' + _('Hosts') + '"></div>',
+				'<div class="icinga-overall-status-icon icinga-icon-host" ext:qtip="' + _('Hosts') + '"></div>',
 				'</tpl>',
 				'<tpl if="id==6">',
 				'<div class="x-clear icinga-overall-status-spacer"></div>',
-				'<div class="icinga-overall-status-icon icinga-icon-service" title="' + _('Services') + '"></div>',
+				'<div class="icinga-overall-status-icon icinga-icon-service" ext:qtip="' + _('Services') + '"></div>',
 				'</tpl>',
 				'<div class="icinga-overall-status-item" id="overall-status-{id}">',
 				'<span>{state}</span>',
@@ -156,18 +151,54 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
         
         this.instanceView = new Ext.DataView({
             store : this.instanceStore,
+            itemSelector:'div.icinga-overall-status-item-instance',
             prepareData : Icinga.Cronks.System.StatusOverall.renderer.prepareInstanceData,
+            
             tpl : new Ext.XTemplate(
                 '<div style="margin-left: 5px;">',
                 '<tpl for=".">',
-                '<div ext.qtip="{qtip}">',
-                '<span>{state}</span>',
-                '<div class="icinga-overall-status-spacer"></div>',
+                '<div>',
+                '<tpl if="id==0">',
+                '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>',
+                '</tpl>',
+                '<tpl if="id==2">',
+                '<div class="icinga-overall-status-icon-instance icinga-icon-application-minus" ext:qtip="Instances down"></div>',
+                '</tpl>',
+                '<div class="icinga-overall-status-item icinga-overall-status-item-instance"><span>{state}</span></div>',
+                '<div class="x-clear icinga-overall-status-spacer"></div>',
                 '</div>',
                 '</tpl>',
                 '</div>'
             )
         });
+        
+        this.instanceView.on('click', function(dview, index, node, e) {
+            var d = dview.getStore().getAt(index).data;
+            
+            if (d.count <= 0) {
+                return false;
+            }
+            
+            if (Ext.isEmpty(this.instanceTip)) {
+                this.instanceTip = new Ext.QuickTip({
+                    autoDestroy : false,
+                    title : _('Instance status'),
+                    tpl: new Ext.XTemplate(
+                        '<tpl for=".">',
+                        '<div>{msg}</div>',
+                        '</tpl>'
+                    ),
+                    renderTo : Ext.getBody()
+                });
+                
+                this.instanceTip.render();
+            }
+            
+            this.instanceTip.update(d.msg);
+            this.instanceTip.setTitle(_('Instance status'));
+            this.instanceTip.showAt(e.getXY());
+            
+        }, this);
         
         this.add(this.instanceView);
         
@@ -188,7 +219,7 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
         
         Ext.iterate(data, function(item, index) {
             var msg = String.format(
-                _('Instance {0} (status is {1}, data is {2} minutes old)'),
+                _('Instance \'{0}\' (status is {1}, data is {2} minutes old)'),
                 item.instance,
                 item.status,
                 Ext.util.Format.round(item.diff / 60, 2)
@@ -196,10 +227,10 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
             
             if (item.status == false) {
                 out[1][1] += 1;
-                out[1][2].push(msg);
+                out[1][2].push({msg : msg});
             } else {
                 out[0][1] += 1;
-                out[0][2].push(msg);
+                out[0][2].push({msg : msg});
             }
         }, this);
         

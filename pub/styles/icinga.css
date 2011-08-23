@@ -647,7 +647,6 @@ div.role_user_wrap {
 div.role_user_icon {
 	width:25px;
 	height:25px;
-	float:left;
 }
 
 /* OverallStatus */
@@ -672,6 +671,13 @@ div.icinga-overall-status-icon {
 
 div.icinga-overall-status-container {
 	
+}
+
+div.icinga-overall-status-icon-instance {
+    display: block;
+    width: 18px;
+    height: 18px;
+    float: left;
 }
 
 /** Bug display **/
