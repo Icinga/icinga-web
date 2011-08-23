@@ -91,16 +91,17 @@ class CronJobParser_CronDBParser extends CronJobParser {
 	public function setFields(array $fields) {
 		$this->fields = $fields;
 	}
-	
+	private static $connection = null;
 	/**
 	 * @see CronJobParser
 	 */
 	public function __construct($model = null, $verbose = false, $logFile = null) {
 		if($model) 
-			$this->setModel($model);			
+			$this->setModel($model);	
+        self::$connection = AgaviContext::getInstance()->getDatabaseManager()->getDatabase('icinga_web')->getConnection();
 		$this->setAgavi(CronAgaviAdapter::getInstance());
 		if(!self::$connected)  {
-			AgaviContext::getInstance()->getDatabaseManager()->getDatabase()->connect();
+			
 			self::$connected = true;
 		}
 		parent::__construct($model,$verbose,$logFile);
@@ -112,11 +113,15 @@ class CronJobParser_CronDBParser extends CronJobParser {
 	 */
 	protected function parse() {
 		$agavi = $this->getAgavi();
+        Doctrine_Manager::getInstance()->bindComponent('HmSchedulerentries', 'icinga_web');
 
-		$query = Doctrine_Query::create(null,'Doctrine_Query')
+		$query = AgaviContext::getInstance()->getDatabaseManager()
+                ->getDatabase('icinga_web')->getConnection()
+                ->createQuery(null,'Doctrine_Query')
 			->select(implode(",",$this->getFields()))
 			->from($this->getModel());
 		$result = $query->fetchArray();
+
 		if($result)
 			$this->setDbResult($result);
 	}
@@ -144,15 +149,23 @@ class CronJobParser_CronDBParser extends CronJobParser {
 		$jobEntry = $jobEntry[$index[1]];
 		$modelName = $this->getModel();
 		$model;
-		if(!$model = Doctrine::getTable('HmSchedulerEntries')->find($jobEntry["entry_id"]))
-			$model = new $modelName();
+            
+        $connection = Doctrine_Manager::getInstance()->getConnection('icinga_web');
+		$model = Doctrine_Query::create($connection)->
+                    select('*')->
+                    from('HmSchedulerEntries h')->
+                    where("h.entry_id = ?",$jobEntry["entry_id"])->
+                    fetchOne(null,Doctrine_Core::HYDRATE_RECORD);
 		
+        if(!$model)
+			$model = new $modelName();
+
 		foreach($jobEntry as $field=>$value) {
 			$model->set($field,$value);
 		}
-		
+
 		$model->set("lastrun",time());	
-		$model->save();
+		$model->save($connection);
 	}
 	
 	/**
