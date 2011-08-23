@@ -6,10 +6,9 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
         if ($this->getAttribute('errors', false)) {
             return "throw '". join(", ", $this->getAttribute('errors')). "';";
         } else {
+            
             $content = $this->getAttribute('content');
-
-            $content .= 'AppKit.util.Config.add(\'path\', \''. AgaviConfig::get('org.icinga.appkit.web_path'). '\');'. chr(10);
-            $content .= 'AppKit.util.Config.add(\'image_path\', \''. AgaviConfig::get('org.icinga.appkit.image_path'). '\');'. chr(10);
+            $this->copyConfigToJavascript($content);
             
             $etag = $this->getAttribute("etag",rand());
             
@@ -22,6 +21,8 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
                 $this->getResponse()->setHttpStatusCode("304");
                 return "";
             }
+            
+
 
             return $content;
         }
@@ -34,6 +35,22 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
             $content = $this->getAttribute('content');
 
             return $content;
+        }
+    }
+    
+    /**
+     * Mapping configuration items from AgaviConfig to JS AppKit.util.Config
+     * @param string $content 
+     */
+    private function copyConfigToJavascript(&$content) {
+        $map = AgaviConfig::get('modules.appkit.js_config_mapping', array ());
+        if (count($map)) {
+            
+            foreach ($map as $target=>$source) {
+                $val = AgaviConfig::get($source ? $source : $target, null);
+                $content .= 'AppKit.util.Config.add('. json_encode($target). ', '. json_encode($val). ');'. chr(10);
+            }
+            
         }
     }
 

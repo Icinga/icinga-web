@@ -121,7 +121,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.panel.DDTabPanel, {
 	listeners: {
 		tabchange: function(tab) {
 			var aTab = tab.getActiveTab();	
-			document.title = "Icinga - "+aTab.title;
+			document.title = String.format('{0} - {1}', AppKit.util.Config.get('core.app_name'), aTab.title);
 		}
 	}
 });

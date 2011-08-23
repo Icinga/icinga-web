@@ -594,6 +594,7 @@ web_absolute_path
 web_path
 web_group
 web_user
+app_name
 PHPCS
 PHPUNIT
 PHING
@@ -650,6 +651,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+with_app_name
 with_web_user
 with_web_group
 with_web_path
@@ -1297,6 +1299,7 @@ if test -n "$ac_init_help"; then
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-app-name=NAME    Application name (default Icinga)
   --with-web-user=USER    username for web writable files (default www-data)
   --with-web-group=GROUP  group for web writable files (default www-data)
   --with-web-path=PATH    web sub path (default /icinga-web)
@@ -2221,6 +2224,17 @@ fi
 
 # Define install options
 
+# Meta option
+
+# Check whether --with-app_name was given.
+if test "${with_app_name+set}" = set; then :
+  withval=$with_app_name; app_name=$withval
+else
+  app_name=Icinga
+
+fi
+
+
 # Users for webfiles
 
 # Check whether --with-web_user was given.
@@ -2695,6 +2709,7 @@ fi
 
 
 # Substitutions
+
 
 
 
