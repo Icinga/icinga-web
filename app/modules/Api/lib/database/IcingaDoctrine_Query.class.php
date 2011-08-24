@@ -188,7 +188,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         }
 
         if (!isset($this->aliasDefs[$alias])) {
-            throw new AppKitException("Tried to access hoststore field with invalid alias $alias (Mainalias: $this->mainAlias)");
+            return true; //throw new AppKitException("Tried to access hoststore field with invalid alias $alias (Mainalias: $this->mainAlias)");
         }
 
         $join = $this->aliasDefs[$alias];
