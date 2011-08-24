@@ -39,6 +39,7 @@ Available targets:
 		<echo msg="Checking dependencies..." />
 		<manifestDependencyChecker refid="manifest"/>
 	
+	
 		<!-- Install module and additional -->		
 		<echo>Installing to ${PATH_Icinga}</echo>
         <mkdir dir="${PATH_Icinga}/app/modules/BPAddon" />
@@ -47,5 +48,9 @@ Available targets:
 				<include name="*/**" />
 			</fileset>
 		</copy>	
-    </target>
+		<echo>Clearing cache</echo>
+		<delete dir="${PATH_Icinga}/app/cache/CronkTemplates" />	
+		<delete dir="${PATH_Icinga}/app/cache/config" />	
+		<delete dir="${PATH_Icinga}/app/cache/Squished" />	
+	</target>
 </project>
