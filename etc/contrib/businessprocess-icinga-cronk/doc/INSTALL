@@ -5,12 +5,12 @@ You need a working instance of the nagiosBP Addon (>= 0.9.6) installed on the sa
 as icinga-web. 
 
 
-2) Installing the plugin
+2) Installing the cronk
 
-	1) run phing install-cronk (A version of phing is shipped with the cronk)
+	1) run ./install.sh
 
 3) Setup 
-	1) Go to %icinga-web%/app/modules/Cronks/config
+	1) Go to %icinga-web%/app/modules/BPAddon/config
 	
 	2) Enter the correct path and credentials for the nagios cgi (the hostname MUST be the name under which icinga web
 		is called, do not enter localhost when icinga-web is accessed via another domain, as it won't work via other domains then.
@@ -19,6 +19,6 @@ as icinga-web.
 	 
 	4) Make sure your www-user can read and write (if you wan't to use the editor) *.conf files into the nagiosbp/etc folder. 
 
-4) Removing the plugin
+4) Removing the cronk
 	
-   1) run phing rollback to revert all changed made to icinga-web   
+   1) just remove the app/modules/BPAddon folder   
