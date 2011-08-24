@@ -14,7 +14,7 @@
             </route>
 
 
-            <route module="Api" name=".api" pattern="^/web/api" action="ApiSearch">
+            <route module="Api" name="icinga.api" pattern="^/web/api" action="ApiSearch">
                 <route name=".dataStore" output_type="html" stop="true"
                     pattern="^/dataStore" action="ApiDataStoreProvider" api_provider="true" />
                 <route name=".icingaStatus" output_type="json" stop="false"
