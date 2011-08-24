@@ -18,12 +18,7 @@
 			<setting name="agavi.include.routing">
 				<ae:parameter>%core.module_dir%/Web/config/routing.xml</ae:parameter>
 			</setting>
-			
-			<!-- include optional override settings file -->
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga-io.site.xml">
-				<xi:fallback></xi:fallback>
-			</xi:include>
-	
+            
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml">
 				<xi:fallback></xi:fallback>
 			</xi:include>		
