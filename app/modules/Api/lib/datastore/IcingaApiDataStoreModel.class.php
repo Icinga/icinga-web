@@ -20,7 +20,7 @@ class IcingaApiActionNotAvailableException extends AppKitException {};
 **/
 class IcingaApiDataStoreModel extends AbstractDataStoreModel {
 
-    protected $connectionName;
+    protected $connectionName = 'icinga';
     protected $database = "icinga";
     /**
     * The possible result types
@@ -172,8 +172,8 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     protected function createRequestDescriptor() {
         $DBALMetaManager = AgaviContext::getInstance()->getModel("DBALMetaManager","Api");
         $DBALMetaManager->switchIcingaDatabase($this->connectionName);
-
-        return IcingaDoctrine_Query::create();
+      //  $connection = Doctrine_Manager::getInstance()->getConnection($this->connectionName);
+        return IcingaDoctrine_Query::create(/*$connection*/);
     }
 
 }
