@@ -2103,11 +2103,12 @@ fi
 
 
 
-   if  test "XXphp" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
+   if  test "XX${PHP}" == "XXnot found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary php not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary php not found in PATH" >&2;}
 fi
 
+   test "XX${PHP}" == "XXnot found" && PHP=""
 
 
 # Check for mysql
@@ -2155,11 +2156,12 @@ fi
 
 
 
-   if  test "XXmysql" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
+   if  test "XX${MYSQL}" == "XXnot found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary mysql not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary mysql not found in PATH" >&2;}
 fi
 
+   test "XX${MYSQL}" == "XXnot found" && MYSQL=""
 
 
 # Check for phing
@@ -2207,11 +2209,12 @@ fi
 
 
 
-   if  test "XXphing" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
+   if  test "XX${PHING}" == "XXnot found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary phing not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary phing not found in PATH" >&2;}
 fi
 
+   test "XX${PHING}" == "XXnot found" && PHING=""
 
 
 # Checks for libraries.
@@ -2615,11 +2618,12 @@ fi
 
 
 
-   if  test "XX$phpunit" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
+   if  test "XX${PHPUNIT}" == "XXnot found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary $phpunit not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary $phpunit not found in PATH" >&2;}
 fi
 
+   test "XX${PHPUNIT}" == "XXnot found" && PHPUNIT=""
 
 
 
@@ -2675,11 +2679,12 @@ fi
 
 
 
-   if  test "XX$phpcs" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary  not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary  not found in PATH" >&2;}
+   if  test "XX${PHPCS}" == "XXnot found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary $phpcs not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary $phpcs not found in PATH" >&2;}
 fi
 
+   test "XX${PHPCS}" == "XXnot found" && PHPCS=""
 
 
 # Custom vars

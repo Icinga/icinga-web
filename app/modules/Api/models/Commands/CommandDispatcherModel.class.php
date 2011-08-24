@@ -41,7 +41,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
         try {
             $this->consoleContext->exec($cmd);
         } catch (Exception $e) {
-            print_r($e);
+           $this->context->getLoggerManager()->log("Sending command failed ".$e->getMessage() );
         }
     }
 
