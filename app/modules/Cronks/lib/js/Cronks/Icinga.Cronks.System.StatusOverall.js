@@ -24,7 +24,11 @@ Icinga.Cronks.System.StatusOverall.renderer = {
             msg = String.format(_('{0} DOWN'), data.count);
         }
         
-        data.state = Icinga.StatusData.wrapElement('service', data.id, msg);
+        if (data.count == 0) {
+            data.state = Icinga.StatusData.wrapElement('service', data.id, msg, Icinga.DEFAULTS.STATUS_DATA.servicestatusClass[100]);
+        } else {
+            data.state = Icinga.StatusData.wrapElement('service', data.id, msg);
+        }
         
         return data;
     }
