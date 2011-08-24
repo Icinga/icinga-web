@@ -109,25 +109,31 @@ distclean:
 	.build/ \
 	
 	rm -f \
-	Makefile \
-	lib/Makefile \
-	pub/Makefile \
-	etc/Makefile \
-	bin/Makefile \
-	doc/Makefile \
-	app/Makefile \
-	etc/sitecfg/Makefile \
-	app/config/databases.xml \
-	app/config/icinga.xml \
-	app/config/settings.xml \
-	app/modules/Web/config/icinga-io.xml \
-	app/modules/AppKit/cache/Widgets/SquishLoader.xml \
-	etc/build.properties \
-	etc/tests/test.properties \
-	etc/apache2/icinga-web.conf \
-	bin/clearcache.sh \
-	pub/.htaccess \
-	pub/soap/.htaccess \
+        Makefile \
+        lib/Makefile \
+	lib/icingaScheduler/config.php \
+        pub/Makefile \
+        etc/Makefile \
+        bin/Makefile \
+        doc/Makefile \
+        app/Makefile \
+        etc/sitecfg/Makefile \
+        app/config/databases.xml \
+        app/config/icinga.xml \
+        app/config/logging.xml \
+        app/config/settings.xml \
+        app/config/translation.xml \
+    	app/modules/Api/config/access.xml \
+        app/modules/AppKit/config/module.xml \
+        app/modules/AppKit/config/auth.xml \
+        app/modules/Cronks/config/module.xml \
+        etc/build.properties \
+        tests/phpunit/test.properties \
+        etc/apache2/icinga-web.conf \
+    	etc/scheduler/icingaCron \
+        bin/clearcache.sh \
+        pub/.htaccess \
+        pub/soap/.htaccess
 	
 remove-temp-files:
 	bin/rmtmp-files.sh
