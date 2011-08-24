@@ -1,5 +1,0 @@
-# Icinga Cron entry
-#
-# Simply executes the scheduler every minute
-
-*/1 *	* * *	%%USER%% /usr/bin/php %%PATH%%/lib/icingaScheduler/icingaCron.php --useAgavi --exec >> /usr/local/icinga-web/log/cron_error.log
