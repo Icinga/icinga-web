@@ -5,7 +5,7 @@
 *************************  Icinga Module Toolkit   ************************ 
 Available targets: 
 	- install-cronk:	Installs the current module	
-	- rollback:		Restores files that we're altered by install-module
+	
 
 ***************************************************************************
 		</echo>
@@ -13,14 +13,12 @@ Available targets:
 	<target name="install-cronk">
 		<!-- define tasks -->
 		
-		<taskdef name="actionQueue" classname="bin.actionQueueTask" />
 		<typedef name="icingaManifest" classname="bin.icingaManifest" />
 		<taskdef name="moduleMetaPrinter" classname="bin.moduleMetaPrinterTask"/>	
 		<taskdef name="dependencyChecker" classname="bin.dependencyCheckerTask" />
 		<taskdef name="manifestDependencyChecker" classname="bin.dependencyCheckerTask"/>
-		<taskdef name="xmlMergerChain" classname="bin.xmlMergerChainTask" />
 		
-		<actionQueue path="./"/>
+		
 		<!--  load defaults -->
 		<property file="build.properties" />
 
@@ -40,67 +38,14 @@ Available targets:
 		<!--  Check dependencies -->		
 		<echo msg="Checking dependencies..." />
 		<manifestDependencyChecker refid="manifest"/>
-		
+	
 		<!-- Install module and additional -->		
 		<echo>Installing to ${PATH_Icinga}</echo>
-		<copy overwrite="true" todir="${PATH_Icinga}">
-			<filterchain>
-				<filterreader classname="bin.saveCopyFilter"/>
-			</filterchain>
-			<fileset dir="src">
-				<exclude name="snippets.dat"></exclude>
-				<exclude name="routes.xml"></exclude>
-			<include name="**" />
+        <mkdir dir="${PATH_Icinga}/app/modules/BPAddon" />
+		<copy todir="${PATH_Icinga}/app/modules/BPAddon">
+			<fileset dir="BPAddon">
+				<include name="*/**" />
 			</fileset>
 		</copy>	
-		
-		<xmlMergerChain  folder="etc/xml/"/>
-		
-		<echo>Inserting snippets</echo>
-		<!-- Inject snippets -->
-		<taskdef name="snippetInjector" classname="bin.snippetInjectorTask" />
-		<snippetInjector file="src/snippets.dat" />
-		
-		<property name="buildAdditional" value="false" />
-		<available file="additional.xml" property="buildAdditional" value="true" />
-		<if>
-			<equals arg1="${buildAdditional}" arg2="1" />
-			<then>
-				<phing phingfile="additional.xml" inheritAll="true" />
-			</then>
-		</if>
-		
-		<echo>Clearing cache</echo>
-		<delete dir="${PATH_Icinga}/app/cache/*" />	
-		
-
-		<property name="buildAdditional" value="false" />
-		<available file="additional.xml" property="buildAdditional" value="true" />
-		<if>
-			<equals arg1="${buildAdditional}" arg2="1" />
-			<then>
-				<phing phingfile="additional.xml" inheritAll="true" />
-			</then>
-		</if>
-
-		<echo>
-		If, for any reason, your config is broken after installing this module, run the restoreConfig script (restoreConfig.sh). 
-		</echo>
-	</target>
-
-	
-	<target name="structure-create">
-		<mkdir dir="${MODULE_Name}"/>
-		<mkdir dir="${MODULE_Name}/src"/>
-		<mkdir dir="${MODULE_Name}/doc"/>
-		<mkdir dir="${MODULE_Name}/etc/"/>
-		<mkdir dir="${MODULE_Name}/etc/doctrine"/>
-		<mkdir dir="${MODULE_Name}/etc/sql"/>
-		<mkdir dir="${MODULE_Name}/etc/xml"/>
-	</target>
-		
-	<target name="rollback">
-		<taskdef name="actionQueue" classname="bin.actionQueueTask" />
-		<actionQueue path="./" restore="true"/>
-	</target>
+    </target>
 </project>

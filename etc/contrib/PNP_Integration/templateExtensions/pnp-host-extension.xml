@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template match-pattern="icinga-host-template">
+	<fields>
+		
+		<field name="image_hover">
+                    <preferPosition>after:comments</preferPosition>
+
+					<datasource>
+						<parameter name="field">HOST_NAME</parameter>
+					</datasource>
+
+					<display>
+						 <parameter name="visible">true</parameter>
+						 <parameter name="label"></parameter>
+
+						 <parameter name="width">22</parameter>
+
+					
+						 <parameter name="Ext.grid.Column">
+							 <parameter name="menuDisabled">true</parameter>
+							 <parameter name="fixed">true</parameter>
+						 </parameter>
+
+						 <parameter name="jsFunc">
+							 <parameter>
+								 <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+								 <parameter name="function">columnImage</parameter>
+
+								  renderer/gridevent[cellclick|celldblclick|...] 
+								 <parameter name="type">renderer</parameter>
+
+								 <parameter name="arguments">
+								<parameter name="image">images/icons/chart.png</parameter>
+								<parameter name="css">x-icinga-grid-link</parameter>
+								<parameter name="attr">
+									<parameter name="qtip">Display performance graph</parameter>
+								</parameter>
+								 </parameter>
+							 </parameter>
+
+						<parameter>
+								 <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+								 <parameter name="function">imagePopup</parameter>
+
+								  renderer/gridevent[cellclick|celldblclick|...] 
+								 <parameter name="type">cellclick</parameter>
+
+								 <parameter name="arguments">
+									 <parameter name="title">Image for {host_name}</parameter>
+									 <parameter name="url"><![CDATA[/pnp4nagios/image?host={host_name}&srv=_HOST_&view=0]]></parameter>
+								<parameter name="width">400</parameter>
+								<parameter name="height">400</parameter>
+								 </parameter>
+							 </parameter>
+						 </parameter>
+					</display>
+
+					<filter>
+						 <parameter name="enabled">false</parameter>
+					</filter>
+
+					<order>
+						 <parameter name="enabled">false</parameter>
+					</order>
+		</field>
+
+		<field name="pnp4nagios_host_link">
+             <preferPosition>after:image_hover</preferPosition>
+
+            <!-- datasource maps a data field from api call -->
+            <datasource>
+                <parameter name="field">HOST_NAME</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Perfdata</parameter>
+                <parameter name="width">55</parameter>
+
+                <parameter name="Ext.grid.Column">
+                        <parameter name="menuDisabled">true</parameter>
+                        <parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                        <!-- fnuction to display column with icon in host status grid view -->
+                        <parameter>
+                                <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                                <parameter name="function">columnImage</parameter>
+                                <parameter name="type">renderer</parameter>
+
+                                <parameter name="arguments">
+                                                        <parameter name="image">images/icons/chart--arrow.png</parameter>
+                                                        <parameter name="css">x-icinga-grid-link</parameter>
+                                                        <parameter name="attr">
+                                                                <parameter name="qtip">Show host perfdata for this host</parameter>
+                                                        </parameter>
+                                </parameter>
+                        </parameter>
+
+                        <!-- create cell click event for the previously defined column -->
+                        <parameter>
+                                <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                                <parameter name="function">iFrameCronk</parameter>
+                                <parameter name="type">cellclick</parameter>
+                                <parameter name="arguments">
+                                        <parameter name="title">Service perfdata for {service_name} on {host_name}</parameter>
+                                        <parameter name="url"><![CDATA[/pnp4nagios/index.php/graph?host={host_name}&srv=_HOST_]]></parameter>
+                                        <parameter name="activateOnClick">true</parameter>
+                                </parameter>
+                        </parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+	</fields>
+</template>
+

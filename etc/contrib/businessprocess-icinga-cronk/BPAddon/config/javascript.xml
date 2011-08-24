@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/icinga/config/global/resource/1.0">
+
+    <ae:configuration>
+        <javascript>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridSorter.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGrid.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridColumns.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridLoader.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/BPAddon/lib/js/filterManager.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/BPAddon/lib/js/infoPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/BPAddon/lib/js/eventGrid.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/BPAddon/lib/js/processVizPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/BPAddon/lib/js/bpLoader.js</ae:parameter>
+        </javascript>
+    </ae:configuration>
+</ae:configurations>
