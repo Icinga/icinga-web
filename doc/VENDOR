@@ -12,10 +12,6 @@ A list of foreign components and frameworks used by icinga-web:
 	* ExtJS
 	  Javascript widget and ajax library
 	  http://www.extjs.com/products/js/ (GPLv3)
-	
-	* Icinga-API ;-)
-	  Data abstraction layer between icinga-core and other software
-	  http://dev.icinga.org (GPLv2)
 
 	* PHING
 	  PHP build platform, a Java ANT clone for PHP
