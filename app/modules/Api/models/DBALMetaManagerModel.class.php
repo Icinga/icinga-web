@@ -26,7 +26,7 @@ class Api_DBALMetaManagerModel extends IcingaApiBaseModel {
             'IcingaFlappinghistory',
             'IcingaHostContactgroups',
             'IcingaHostContacts',
-            'IcingaParenthosts',
+            'IcingaHostParenthosts',
             'IcingaHostchecks',
             'IcingaHostdependencies',
             'IcingaHostescalationContactgroups',
