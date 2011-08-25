@@ -36,7 +36,7 @@
                 <!-- allowed to be written to -->
                 <write>
                     <files>
-                        <resource name="icinga_pipe">/usr/local/icinga/var/rw/icinga.cmd</resource>
+                        <resource name="icinga_pipe">@api_cmd_file@</resource>
                     </files>
                 </write>
                 <!-- allowed to be executed -->

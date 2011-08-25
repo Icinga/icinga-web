@@ -32,6 +32,6 @@ installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache
 	$(INSTALL) -m 755 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache/config
 	
-	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(LOGFOLDER)
+	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(LOGFOLDER)
 	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(prefix)/app/data/tmp
 	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(prefix)/app/modules/Reporting/data

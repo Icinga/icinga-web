@@ -209,7 +209,7 @@ install-siteconfig:
 	cd $(SRC_SITE) && $(MAKE)
 
 install-log:
-	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(LOGDIR)
+	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(LOGDIR)
 
 install-all: install-lib install-pub install-etc install-bin install-doc install-app install-log
 
