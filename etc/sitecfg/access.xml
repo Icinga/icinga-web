@@ -3,18 +3,21 @@
     <ae:configuration>
     
 <!--      
-         Map your instances to hosts here 
-        <instances>
+         Map your instances to hosts here
+         
+         -->
+       <instances>
+       <!--
             <instance name="default">localhost</instance>
 
-           
-             include user configs statically 
-        </instances>
-
+        -->
+       </instances>
+<!--
         
             Default settings that will be set if useDefaults is true
-        
+    -->    
         <defaults>
+        <!--
             <defaultHost>localhost</defaultHost>
             <access>
                  allowed to read to and from 
@@ -49,12 +52,12 @@
                     </files>
                 </execute>
             </access>
-          
+         -->   
         </defaults>
-        -->
+      
         
         <!-- Hosts that can be accessed via the console interface -->
-<!--        <hosts>
+        <hosts><!--
             <host name="localhost">
                 <type>local</type>
                  Only allow access to these files, folders or executables 
@@ -109,8 +112,8 @@
             </host>
   
 
-
-        </hosts>  -->	
+-->
+        </hosts> 
 
     </ae:configuration>
 </ae:configurations>
