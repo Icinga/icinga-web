@@ -494,6 +494,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->forceGroup[] = "hs.current_state";
                 $this->aliasDefs = array(
                                        "h"  => array("src" => "oh", "relation" => "host"),
+                                       "s"  => array("src" => "h", "relation" => "services"),
                                        "oh" => array("src" => "hs", "relation" => "hostobject", "alwaysJoin" => true),
                                        "i"  => array("src" => "h", "relation" => "instance"),
                                        "cg" => array("src" => "h", "relation" => "contactgroups"),
@@ -668,6 +669,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                             "with" => "ohg.is_active = 1" 
                                         ),
                                        "hgm"   => array("src" => "hg", "relation" => "members"),
+                                       "s"   => array("src" => "hgm", "relation" => "services"),
                                        "hs"    => array("src" => "hgm", "relation" => "status"),
                                        "oh"    => array("src" => "hgm", "relation" => "object")
                                    );
