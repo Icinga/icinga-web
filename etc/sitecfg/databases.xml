@@ -35,10 +35,13 @@
 
     <!-- 
         Overwrite the default database conneciton for icinga data retrieval
-    <db:database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AppKitDoctrineDatabase">
+        Make sure to use IcingaDoctrineDatabase, otherwise the use_retained parameter will be ignored
+       
+    <db:database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="IcingaDoctrineDatabase">
         <ae:parameter name="dsn">mysql://icinga_test:test@localhost:3306/icinga_test</ae:parameter>
         <ae:parameter name="prefix">icinga_</ae:parameter>
         <ae:parameter name="charset">utf8</ae:parameter>
+         <ae:parameter name="use_retained">true</ae:parameter>
         <ae:parameter name="manager_attributes">
             <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
         </ae:parameter>

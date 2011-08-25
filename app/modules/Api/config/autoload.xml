@@ -8,6 +8,7 @@
 
         <autoload name="AccessConfig">%core.module_dir%/Api/lib/config/AccessConfig.class.php</autoload>		
         <autoload name="AccessConfigHandler">%core.module_dir%/Api/lib/config/AccessConfigHandler.class.php</autoload>		
+		<autoload name="IcingaDoctrineDatabase">%core.module_dir%/Api/lib/database/IcingaDoctrineDatabase.class.php</autoload>
 
 		<autoload name="IcingaDoctrine_Query">%core.module_dir%/Api/lib/database/IcingaDoctrine_Query.class.php</autoload>
 		<autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
