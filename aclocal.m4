@@ -25,9 +25,10 @@ AC_DEFUN([ACICINGA_GROUP_GUESS],[
 AC_DEFUN([ACICINGA_CHECK_BIN], [
    AC_PATH_PROG([$1],[$2],[not found])
 
-   AS_IF([ test "XX$2" == "XXnot found" ],
-	 [ AC_MSG_WARN([binary $3 not found in PATH]) ])
-    
+   AS_IF([ test "XX${$1}" == "XXnot found" ],
+	 [ AC_MSG_WARN([binary $2 not found in PATH]) ])
+
+   test "XX${$1}" == "XXnot found" && $1=""
 ])
 
 AC_DEFUN([ACICINGA_CHECK_API], [
