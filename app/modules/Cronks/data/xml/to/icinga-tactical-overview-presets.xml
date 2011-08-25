@@ -61,12 +61,12 @@
 			<target>IcingaApiConstants::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CHECK_TYPE</column>
-					<value>0</value>
-				</columns>
-			</filter>
+			<filters>
+				<filter>
+					<parameter name="field">HOST_CHECK_TYPE</parameter>
+					<parameter name="value">0</parameter>
+				</filter>
+			</filters>
 		</datasource>
 
 		<datasource id="NUM_ACTIVE_SERVICE_CHECKS">
@@ -74,12 +74,12 @@
 			<target>IcingaApiConstants::TARGET_SERVICE</target>
 			<columns>SERVICE_OBJECT_ID</columns>
 			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CHECK_TYPE</column>
-					<value>0</value>
-				</columns>
-			</filter>
+			<filters>
+				<filter>
+					<parameter name="field">SERVICE_CHECK_TYPE</parameter>
+					<parameter name="value">0</parameter>
+				</filter>
+			</filters>
 		</datasource>
 
 		<datasource id="NUM_PASSIVE_HOST_CHECKS">
@@ -87,12 +87,12 @@
 			<target>IcingaApiConstants::TARGET_HOST</target>
 			<columns>HOST_OBJECT_ID</columns>
 			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>HOST_CHECK_TYPE</column>
-					<value>1</value>
-				</columns>
-			</filter>
+			<filters>
+				<filter>
+                    <parameter name="field">HOST_CHECK_TYPE</parameter>
+					<parameter name="value">1</parameter>
+				</filter>
+			</filters>
 		</datasource>
 
 		<datasource id="NUM_PASSIVE_SERVICE_CHECKS">
@@ -100,12 +100,12 @@
 			<target>IcingaApiConstants::TARGET_SERVICE</target>
 			<columns>SERVICE_OBJECT_ID</columns>
 			<search_type>IcingaApiConstants::SEARCH_TYPE_COUNT</search_type>
-			<filter>
-				<columns>
-					<column>SERVICE_CHECK_TYPE</column>
-					<value>1</value>
-				</columns>
-			</filter>
+			<filters>
+				<filter>
+					<parameter name="field">SERVICE_CHECK_TYPE</parameter>
+					<parameter name="value">1</parameter>
+				</filter>
+			</filters>
 		</datasource>
 	</datasources>
 
