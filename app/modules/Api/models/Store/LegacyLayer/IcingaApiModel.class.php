@@ -124,12 +124,13 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
                 $fields = $this->getFields();
                 $_data = array(array());
                 foreach($fields as $field) {
+                    $field = preg_replace("/\w* +AS +/","",$field);
                     $countField = explode(".",$field,2);
 
                     if (count($countField) > 1) {
                         $countField = $countField[1];
                     }
-
+                    
                     $_data[0]["COUNT_".strtoupper($countField)] = $data;
                     $resultCols[] = "COUNT_".strtoupper($countField);
                 }
