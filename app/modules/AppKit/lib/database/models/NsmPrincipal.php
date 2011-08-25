@@ -52,15 +52,15 @@ class NsmPrincipal extends BaseNsmPrincipal {
             return true;
         }
 
-        if ($this->principal_role_id > 0 && $this->principal_user_id > 0) {
+        if ($this->principal_role_id && $this->principal_user_id) {
             throw new AppKitDoctrineException('Unexpected principal condition, please check the object');
         }
 
-        if ($this->principal_role_id > 0) {
+        if ($this->principal_role_id) {
             $this->principal_type = self::TYPE_ROLE;
         }
 
-        elseif($this->principal_user_id > 0) {
+        elseif($this->principal_user_id) {
             $this->principal_type = self::TYPE_USER;
         }
 
