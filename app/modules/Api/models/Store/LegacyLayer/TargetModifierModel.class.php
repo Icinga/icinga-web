@@ -896,9 +896,10 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
         }
         $db = $this->getContext()->getDatabaseManager()->getDatabase('icinga');
+        // check if retained state must be respected
         if(method_exists($db,"useRetained")) {
             if($this->retainedAlias) {
-                $o->andWhere($this->retainedAlias.".config_type= ?",$db->useRetained() ? "0" : "1");
+                $o->andWhere($this->retainedAlias.".config_type= ?",$db->useRetained() ? "1" : "0");
                                        
             }
         }
