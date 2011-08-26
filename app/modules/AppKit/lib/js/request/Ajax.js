@@ -27,4 +27,4 @@ Ext.Ajax.dispatchRequest = function(o) {
     
     o.params.params = Ext.encode(p);
     return Ext.data.Connection.prototype.request.call(this,o);
-}
+};

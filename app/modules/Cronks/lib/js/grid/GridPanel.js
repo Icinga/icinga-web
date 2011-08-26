@@ -98,7 +98,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 									fieldLabel: _('Link'),
 									width:350,
 									value: AppKit.util.Config.getBaseUrl()
-									+ "/web/customPortal/"
+									+ "/modules/web/customPortal/"
 									+ urlParams
 								},
 								bbar: [{
