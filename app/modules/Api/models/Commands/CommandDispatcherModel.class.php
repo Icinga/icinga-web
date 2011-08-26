@@ -41,7 +41,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
         try {
             $this->consoleContext->exec($cmd);
             if($cmd->getReturnCode() != '0')
-                throw new Exception("Could not send command. Check your webserver's user has correct permissions for writing to the command pipe.");
+                throw new Exception("Could not send command. Check if your webserver's user has correct permissions for writing to the command pipe.");
         } catch (Exception $e) {
            
            $this->context->getLoggerManager()->log("Sending command failed ".$e->getMessage() );
