@@ -18,10 +18,7 @@
 			<setting name="agavi.include.routing">
 				<ae:parameter>%core.module_dir%/Web/config/routing.xml</ae:parameter>
 			</setting>
-            
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module.site.xml">
-				<xi:fallback></xi:fallback>
-			</xi:include>		
+          
 				
 		</module>
 		

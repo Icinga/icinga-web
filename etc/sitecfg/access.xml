@@ -92,7 +92,8 @@
 
     <!--
               This is experimental, try to avoid password encrypted keyfiles when encountering errors
-              Example for ssh connection with pubkey auth -->					
+              Example for ssh connection with pubkey auth 
+    -->					
     <!--	
             <host name="vm_host2">
                 <type>ssh</type>
