@@ -1,3 +1,285 @@
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: dd70358ef51fc7838f8367fedd9a1b14bcdb1375
+
+* Fixed installation issue and set fallback timezone if none is provided
+
+
+2011-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e1cdb8b3fad8665b428a1c2bfc7b2cd57540e574
+
+* Removed test module from context
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 51f9a755d0b6924f7c1d8456122c3d006f1e4100
+
+* status map now hides layer if an error occurs and doesn'T freeze interface
+
+
+2011-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 35e4ca340cecc990e16f23fca3cebc8dbfe510c0
+
+* Fixed wrong url in custom portal
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: dab5124eed2473b5b56d34f49c164f54e7385ff5
+
+* fixed status map
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d25bada97c563fee9a4fa565aeb83d552fd4c94b
+
+* Fixed command author name being cached in template, added hint for timezone 
+  problems to translation.xml.in
+
+
+2011-08-26 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: 5572c3ebfaf8851833e13b929392e252a20ae37c
+
+* Added missing semicolons to critical places
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: bbeeef5239fd218db9d9978f51754d76f47d6009
+
+* Added static join in host_status, should fix wrong state information
+
+
+2011-08-26 Michael Friedrich <michael(DOT)friedrich(AT)univie(DOT)ac(DOT)at>
+           Commit: 5aa8ce2393eba6f15fd88d33894122ec8808d160
+
+* correct retained config_type selection in doctrine legacy layer, add description 
+  how to be used
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0084ed2fb1c71c54cf298adb2cd28715e302ad8e
+
+* Fixed flipped retained state selection
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3ef22e8ff499c02701fb8dd7980521d010938fb1
+
+* Cleaned up default configs (comment separations, default db settings)
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d2b945cf75ea2c1a256f1866aafefc9b994f78a5
+
+* Added field displaying current servertime to indicate timezone errors to menu
+
+
+2011-08-26 Eric Lippmann <eric(DOT)lippmann(AT)netways(DOT)de>
+           Commit: 716876c8cf6784bf02b2806ae84e01402dc886b0
+
+* Fixed AppkitResourceConfigHandler possibly including same file multiple times
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 92d59b76bfbd79e207b11bf6b474c18d64a62a45
+
+* Fixed log dir not being created
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c360030799df9f5f93ce9bc969a89bd0336c2ada
+
+* typo error
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 70300b073cc71cfd2daf269e432921b84c395b66
+
+* Changed www-user error to a more general version
+
+
+2011-08-26 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e60273a6dfa1b94fc09c6a39a42dd4d0feca8736
+
+* Command sending errors now are more verbose and will be send
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 11811e73c6229548c0ecdb6c6c6af586254e690f
+
+* Removed deprecated site.xml link
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 127d41fa74dff5af1c04569fc427f0235db7e076
+
+* Readded default.timezone and added default timezone set before agavi check
+
+
+2011-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b1fed8f55cfd5c426074ce12cf4e3a3270441a95
+
+* Export reporting cronk configuration (fixes #1846)
+
+
+2011-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ecdfddc01ee68666fd99dce48c83f22c8134ef7c
+
+* Export reporting cronk configuration (fixes #1846)
+
+
+2011-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: fd59b848a36f17ebf4d628f32be740edb20d358f
+
+* Removed JS files from PHP syntax check
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b8037f4e0133ff5e4dd60c4abf9b221bba39946f
+
+* Added use_retained to database config
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8dcae6ad8bcbf232b116c3569ba41fd98e61752e
+
+* Wrong comments on access.xml
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 55ee11bb6cf559ed880ee4b69634c0e1b53c5268
+
+* Fixed access.xml from siteconfig
+
+
+2011-08-25 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8b0cff16018726ad0ae4884b8ed8f8187f0c08be
+
+* LDAP fix based on doctrine bug?
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2f66fe0d5f2f6d55161340b7d3084d960406e960
+
+* Fixed active/passive performance view in hostgroups-to
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 4f31d2310dfa722d4e0b10e430f3857d5ec9c274
+
+* Fixed aliased count fields in legacy api
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8a0b76a7ad6f6f0aa2bee2fe05ba1f7aa8a494d7
+
+* Adde missing alias
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8c48ca9b13b079365e5651c3c82596b85732ec2a
+
+* Fixed status map freeze in some cases
+
+
+2011-08-24 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3f0aae0cdb8b6ec24c6a22bd9ddad07d68d0d006
+
+* added databases namespace to example template documentation
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ba34b991a9b209f1f1015f38121dfc68e991ee4a
+
+* Fixed cronks including
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 09d771ccac146bcd50dd43c40cfb663e74191190
+
+* distclean fixes
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 34fc5778033311654f9c5ae83133fa2a47ac071f
+
+* configure fixes for finding binaries
+
+
+2011-08-24 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f34354e17cf77143cb8192d29a31bebd34e3dcac
+
+* fixed log, fixed data overflow on wrong ssh key
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5d82ce5f1b2a6c5630da56ba575e094f8f3009a6
+
+* fixes #1839
+* removed configured files
+* changed gitignore to match configure output
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 6da75677485ec753451416ebef578329da7b5748
+
+* fixes #1839
+* removed configured files
+* changed gitignore to match configure output
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: b1693d94abc3224eb48d80af8dde4b0c04fb5474
+
+* Changed meta things
+
+
+2011-08-24 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 17a828b235439ab7a254170b3de99410987478aa
+
+* update in contrib
+
+
+2011-08-24 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: c16c697be83183b13f7cbd6bffb97cfb91f5bdd5
+
+* updated api fallback route name
+
+
+2011-08-24 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a245ca5411bef008cf63b0e0ca68cbcfaa39cd85
+
+* Updated contrib
+
+
+2011-08-24 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 54697b206ed552073c6b30cee0aa6ef96bdf0749
+
+* Conform view for Instance status
+
+
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0ac2ea3a7c3b82366fffbf73d26d78684f5fdfc9
+
+* Changed submodule pointer
+
+
+2011-08-23 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 3eb3c6e944e7e841cc2ffebebe4e30e0c79768d1
+
+* Fixed missing default conenction name in DataStoreModel
+
+
+2011-08-23 Jannis Moßhanner <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b23af03c303a095fa2baf146eb91d7ae68c53b0f
+
+* Fixed IcignaDoctrine_Query auto-alias resolve bug
+
+
+2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: e8cdfb8fa87a3abd6fb470625ae49c7ce2db4331
+
+* Updated changelog
+
+
 2011-08-23 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
            Commit: b90f058bc5479a89c31d8cc7f22dffd4842e982c
 
