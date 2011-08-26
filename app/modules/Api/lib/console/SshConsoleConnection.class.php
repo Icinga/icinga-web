@@ -60,6 +60,7 @@ class SshConsoleConnection extends BaseConsoleConnection {
         }
 
         if (!$success || !is_object($this->resource)) {
+            print_r($this->resource->getErrors());
             throw new ApiAuthorisationFailedException("SSH auth for user ".$this->username." failed (using authtype ".$this->authType.') :'.print_r($this->resource->getErrors(),true));
         }
 

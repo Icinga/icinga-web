@@ -48,12 +48,22 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
         if (count($this->role_names) <= 0) {
             foreach($this->getNsmUser()->NsmRole as $role) {
                 $this->role_names[$role->role_id] = $role->role_name;
+                $this->addParentRoles($role);                
             }
+
         }
 
         return $this->role_names;
     }
 
+    private function addParentRoles(NsmRole $role) {
+        if($role->hasParent()) {
+            $p = $role->getParent();
+            $this->role_names[$p->role_id] = $p->role_name;
+            $this->addParentRoles($p);
+        }
+    }
+    
     /**
      * Shortcut method to authenticate user with auth key
      * @param string $key
@@ -168,17 +178,18 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
             while ($next->hasParent()) {
                 $next = $next->getParent();
                 $this->addCredentialsFromRole($next);
+                
                 $this->roles[] = $next;
 
             }
-
+            
         }
-
+        
         foreach($user->getTargets("credential") as $credential) {
             $this->addCredential($credential->get("target_name"));
 
         }
-
+   
     }
 
     /**
@@ -188,6 +199,7 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
     private function addCredentialsFromRole(NsmRole &$role) {
         foreach($role->getTargets('credential') as $credential) {
             $this->addCredential($credential->get('target_name'));
+            
         }
     }
 
