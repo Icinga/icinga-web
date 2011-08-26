@@ -317,7 +317,19 @@ class NsmUser extends BaseNsmUser {
         return $this->principals_list;
     }
 
-
+    private function getRoleIds() {
+        $ids = array();
+        foreach($this->NsmRole as $role) {
+            $ids[] = $role->role_id;
+            while ($role->hasParent()){
+                $role = $role->parent;
+                $ids[] = $role->role_id;        
+            }
+        }
+         
+        return $ids;
+    }
+    
     /**
      * Return all principals belonging to this
      * user
@@ -326,17 +338,16 @@ class NsmUser extends BaseNsmUser {
     public function getPrincipals() {
 
         if ($this->principals === null) {
-
+            $roles = $this->getRoleIds();
             $this->principals = Doctrine_Query::create()
                                 ->select('p.*')
                                 ->from('NsmPrincipal p INDEXBY p.principal_id')
-                                ->leftJoin('p.NsmRole r')
-                                ->leftJoin('r.NsmUserRole ur')
-                                ->andWhere('ur.usro_user_id=? or p.principal_user_id=?', array($this->user_id, $this->user_id))
+                                ->andWhereIn('p.principal_role_id',$roles)
+                                ->orWhere('p.principal_user_id = ?',$this->user_id)
                                 ->execute();
 
         }
-
+        
         return $this->principals;
     }
 
