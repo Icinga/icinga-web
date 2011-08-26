@@ -43,10 +43,16 @@ class Cronks_System_ViewProc_SendCommandAction extends CronksBaseAction {
             $sender->setCommandName($command);
             $sender->setSelection($selection);
             $sender->setData($data);
-            $sender->dispatchCommands();
-
-            $this->setAttribute('ok', true);
-            $this->setAttribute('error', null);
+            try {
+                $sender->dispatchCommands();
+            
+                $this->setAttribute('ok', true);
+                $this->setAttribute('error', null);
+            } catch(Exception $e) {
+                $this->setAttribute("ok", false);
+                $this->setAttribute("error",$e->getMessage());
+            }
+            
         } else {
             $this->setAttribute('ok', false);
             $this->setAttribute('error', 'Authentification failed');
