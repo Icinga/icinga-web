@@ -296,7 +296,7 @@ Ext.ns("AppKit.errorHandler");
 					break;
 				case 404:
 					AppKit.AjaxErrorHandler.error_404(proxy.url);
-					break;
+					break;new E
 				case 401:
 					AppKit.AjaxErrorHandler.error_401(proxy.url);
 					break;

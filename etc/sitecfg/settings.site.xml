@@ -4,6 +4,8 @@
 		<!--
 		* Disable whole application
 		Example how to overwrite settings from settings.xml
+        -->
+        <!--
 		<settings>
 			<setting name="available">false</setting>
 		</settings>
