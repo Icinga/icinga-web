@@ -4,7 +4,8 @@
 		<cronks>
 	    <!-- 
             Cronk overwrites - for example 
-			
+        -->
+        <!--
             <cronk name="gridHostgroupSummary">
 				<ae:parameter name="module">Cronks</ae:parameter>
 				<ae:parameter name="action">System.ViewProc</ae:parameter>
@@ -23,14 +24,15 @@
         <categories>
         <!--
             Category overwrites - for example:
-        			
+        -->
+        <!--
 			<category name="misc">
 				<ae:parameter name="title">Misc</ae:parameter>
 				<ae:parameter name="visible">true</ae:parameter>
 				<ae:parameter name="position">99</ae:parameter>
 			</category>
 	
-            -->
+         -->
         </categories>
 	</ae:configuration>
 </ae:configurations>
