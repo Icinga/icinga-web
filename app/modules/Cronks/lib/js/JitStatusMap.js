@@ -249,10 +249,13 @@ function JitStatusMap (config) {
 
 	this.getMapDataFail = function (response, o) {
 		this.jitJson = {};
+        this.mask.hide();
+		this.mask.disable();
 	}
 
 	this.getMapDataDefault = function (options, success, request) {
-		
+		this.mask.hide();
+		this.mask.disable();
 	}
 
 	this.init(config);
