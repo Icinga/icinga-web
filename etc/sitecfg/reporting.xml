@@ -7,8 +7,8 @@
 		here
 	-->
 
+    <module enabled="true">
 	<!--
-        <module enabled="true">
             <settings>
                     <setting name="jasperconfig.default">
                         <ae:parameter name="jasper_url">http://127.0.0.1:8080/jasperserver</ae:parameter>
@@ -17,7 +17,8 @@
                         <ae:parameter name="tree_root">/</ae:parameter>
                     </setting>
             </settings>
-        </module>
 	-->
+    </module>
+    
     </ae:configuration>
 </ae:configurations>
