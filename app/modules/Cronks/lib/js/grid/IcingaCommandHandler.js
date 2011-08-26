@@ -422,7 +422,6 @@ IcingaCommandHandler.prototype = {
 							});
 						}
 					},
-					
 					success: function(f, a) {
 						oWin.close();
 						AppKit.notifyMessage(_('Command sent'), String.format(_('{0} command was sent successfully!'), command));
@@ -434,7 +433,8 @@ IcingaCommandHandler.prototype = {
 				Ext.each(o.fields, function(item, index, arry) {
 					
 					if (this.command_options.source[item]) return;
-					
+					if(item == "author")
+                        this.command_options.predefined[item] = AppKit.getPreferences()["author_name"];
 					var f = this.getField({
 						fieldLabel: item,
 						fieldName: item,
