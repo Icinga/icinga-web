@@ -40,4 +40,4 @@ Icinga.Grid.Plugins.PageableGrid = function(cfg) {
     }
     this.constructor.apply(this,arguments);
 
-}
+};

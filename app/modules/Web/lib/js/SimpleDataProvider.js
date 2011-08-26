@@ -181,4 +181,4 @@ Icinga.util.showComments = function(oid, instanceid, target) {
 		],
 		target: target
 	});
-}
+};
