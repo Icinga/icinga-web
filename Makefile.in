@@ -164,7 +164,7 @@ test-cs: test-precede
 		--standard=$(SRC_DIR)/tests/phpcs/YACS \
 		--report=checkstyle \
 		--report-file=$(SRC_DIR)/.build/checkstyle.xml \
-		--ignore=cache \
+		--ignore="cache,\.js$$" \
 		$(SRC_DIR)/app
 
 devel-inplace-config:
