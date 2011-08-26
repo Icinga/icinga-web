@@ -898,10 +898,19 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         $db = $this->getContext()->getDatabaseManager()->getDatabase('icinga');
         // check if retained state must be respected
         if(method_exists($db,"useRetained")) {
-            if($this->retainedAlias) {
+            /*
+             * the core with idomod dumps 2 different config types
+             * idomod.cfg:config_output_options
+             * 1 = original config => config_type = 0
+             * 2 = retained config => config_type = 1
+             * 3 = both, both config_types are available
+             */
+            if($this->retainedAlias) {      
                 $o->andWhere($this->retainedAlias.".config_type= ?",$db->useRetained() ? "1" : "0");
-                                       
-            }
+
+            }                   
+		
+                
         }
         foreach($this->forceGroup as $group) {
             $o->addGroupBy($group);
