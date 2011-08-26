@@ -123,10 +123,10 @@ class Doctrine_Adapter_IcingaOracle implements Doctrine_Adapter_Interface
 
 
         if ($this->config['persistent'] == 'true'){ 
-            $this->connection = oci_pconnect($this->config['username'], $this->config['password'], 
+            $this->connection = @oci_pconnect($this->config['username'], $this->config['password'], 
                 $this->config['dbname'], $this->config['charset']); 
         } else { 
-            $this->connection = oci_new_connect($this->config['username'], $this->config['password'], 
+            $this->connection = @oci_new_connect($this->config['username'], $this->config['password'], 
                 $this->config['dbname'], $this->config['charset']); 
         }
 
