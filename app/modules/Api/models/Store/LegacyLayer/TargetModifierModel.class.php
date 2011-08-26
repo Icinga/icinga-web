@@ -494,7 +494,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->forceGroup[] = "hs.current_state";
                 $this->retainedAlias = "h";
                 $this->aliasDefs = array(
-                                       "h"  => array("src" => "oh", "relation" => "host"),
+                                       "h"  => array("src" => "oh", "relation" => "host","alwaysJoin"=>true),
                                        "s"  => array("src" => "h", "relation" => "services"),
                                        "oh" => array("src" => "hs", "relation" => "hostobject", "alwaysJoin" => true),
                                        "i"  => array("src" => "h", "relation" => "instance"),
