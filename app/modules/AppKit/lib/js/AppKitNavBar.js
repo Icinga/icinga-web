@@ -15,13 +15,13 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         layout: 'column',
 	    id: 'menu',
 	    border: false,
-	    defaults: { style: { borderLeft: '1px #d0d0d0 solid' }, border: false, height: 40 }
+	    defaults: {style: {borderLeft: '1px #d0d0d0 solid'}, border: false, height: 40}
     },
 
     // default config for the menubar field
     tbarCfg: {
     	id: 'menu-navigation',
-		defaults: { border: false, style: 'margin:2px' },
+		defaults: {border: false, style: 'margin:2px'},
 		style: 'border: none',	
         height: 35,
         items: {},
@@ -48,6 +48,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         if(Ext.getCmp(this.defaultCfg.id))
             throw("Menubar is already loaded");   
         Ext.apply(this,cfg); 
+       
         this.buildNavBar();
         this.buildIconField();
         Ext.apply(cfg,this.defaultCfg);
@@ -102,7 +103,16 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     initMenuItems : function(cfg) {
         cfg.items = [];
         this.addMenuFields(cfg.items,this.menuData); 
+        cfg.items.push({xtype : 'tbfill'});
+        this.addClock(cfg.items);
+
         this.addUserFields(cfg.items);
+    },
+
+    addClock : function(itemsCfg) {
+        var item = new AppKit.util.Servertime();
+        AppKit.log(item)
+        itemsCfg.push({xtype: 'container',items:item});
     },
 
     addMenuFields : function(itemsCfg,menuData) {
@@ -145,7 +155,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                     }
                 }
 
-            case 'window': 
+            case 'window':
                 target.bodyStyle = target.style || "background-color: #ffffff";
                 return Ext.createDelegate(AppKit.util.contentWindow, this, [{
                     url: target.url
@@ -154,12 +164,13 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     },
 
     addUserFields : function(itemsCfg) { 
-        itemsCfg.push({xtype : 'tbfill'});
+        
         var userField = {
             iconCls: this.hasAuth ? 'icinga-icon-user' : 'icinga-icon-user-delete',
             text: this.username
         }
         if(this.hasAuth) {
+            
             userField.menu = {};
             userField.menu.items = {
                 xtype: 'buttongroup',

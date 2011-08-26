@@ -8,7 +8,36 @@
  */
 class AppKitTranslationManager extends AgaviTranslationManager {
     private $__localeLoaded = false;
+    public function initialize(AgaviContext $context, array $parameters = array()) {
+        $this->context = $context;
 
+		include(AgaviConfigCache::checkConfig(AgaviConfig::get('core.config_dir') . '/translation.xml'));
+		$this->loadSupplementalData();
+		$this->loadTimeZoneData();
+		$this->loadAvailableLocales();
+       
+       
+        
+		if($this->defaultLocaleIdentifier === null) {
+			throw new AgaviException('Tried to use the translation system without a default locale and without a locale set');
+		}
+		$this->setLocale($this->defaultLocaleIdentifier);
+
+		if($this->defaultTimeZone === null) {
+			$this->defaultTimeZone = date_default_timezone_get();
+		} else {
+            date_default_timezone_set($this->defaultTimeZone);
+        }
+        
+        
+		if($this->defaultTimeZone === 'System/Localtime') {
+			// http://trac.agavi.org/ticket/1008
+			throw new AgaviException("Your default timezone is 'System/Localtime', which will causes problems with icinga-web date function."
+                   ."Please set  date.timezone in your php.ini or set a default timezone in the app/config/translations.xml file of icinga-web.");
+		}
+        
+    }
+    
     public function loadCurrentLocale() {
         if ($this->__localeLoaded) {
             return parent::loadCurrentLocale();

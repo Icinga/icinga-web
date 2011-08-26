@@ -10,7 +10,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     }
     
     protected $ignoreIds = false;
-    
+    protected $retainedAlias = false;
     public $columns = array(
                           'PROBLEMS_OBJECT_ID'           =>        'op.object_id',
                           // Program information
@@ -339,7 +339,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     **/
     protected function setupApiTargetFor($target) {
         $this->reset();
-
+        $this->retainedAlias = false;
         switch ($target) {
             case IcingaApiConstants::TARGET_INSTANCE:
                 $this->mainAlias = "i";
@@ -349,7 +349,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_HOST:
                 $this->mainAlias = "oh";
                 $this->setTarget("IcingaObjects");
-
+                $this->retainedAlias = "h";
                 $this->aliasDefs = array(
                                        "h"  => array("src" => "oh", "relation" => "host", "alwaysJoin" => true),
                                        "hs"  => array("src" => "h", "relation" => "status","alwaysJoin" => true),
@@ -371,7 +371,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_SERVICE:
                 $this->mainAlias = "os";
                 $this->setTarget("IcingaObjects");
-
+                $this->retainedAlias = "s";
                 $this->aliasDefs = array(
                                        "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
                                        "i"  => array("src" => "s", "relation" => "instance"),
@@ -412,7 +412,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_HOSTGROUP:
                 $this->mainAlias = "hg";
                 $this->setTarget("IcingaHostgroups");
-
+               
                 $this->aliasDefs = array(
                                        "ohg"   => array("src" => "hg", "relation" => "object"),
                                        "hgm"   => array("src" => "hg", "relation" => "members"),
@@ -492,8 +492,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->additionalSelects["COUNT"] = "count(DISTINCT hs.host_object_id)";
                 $this->ignoreIds = true;
                 $this->forceGroup[] = "hs.current_state";
+                $this->retainedAlias = "h";
                 $this->aliasDefs = array(
-                                       "h"  => array("src" => "oh", "relation" => "host"),
+                                       "h"  => array("src" => "oh", "relation" => "host","alwaysJoin"=>true),
                                        "s"  => array("src" => "h", "relation" => "services"),
                                        "oh" => array("src" => "hs", "relation" => "hostobject", "alwaysJoin" => true),
                                        "i"  => array("src" => "h", "relation" => "instance"),
@@ -515,7 +516,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->setTarget("IcingaServicestatus");
                 $this->additionalSelects["SERVICE_STATE"] = "ss.current_state";
                 $this->additionalSelects["COUNT"] = "count(DISTINCT ss.service_object_id)";
-
+                $this->retainedAlias = "s";
                 $this->forceGroup[] = "ss.current_state";
                 $this->aliasDefs = array(
                                        "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
@@ -711,6 +712,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_HOST_SERVICE:
                 $this->mainAlias = "op";
                 $this->setTarget("IcingaObjects");
+                $this->retainedAlias = "h";
+
                 $this->aliasDefs = array(
 
                                        "os"  => array(
@@ -892,7 +895,23 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             $o->addSelect($select.(is_numeric($alias) ? "" : " AS ".$alias));
 
         }
+        $db = $this->getContext()->getDatabaseManager()->getDatabase('icinga');
+        // check if retained state must be respected
+        if(method_exists($db,"useRetained")) {
+            /*
+             * the core with idomod dumps 2 different config types
+             * idomod.cfg:config_output_options
+             * 1 = original config => config_type = 0
+             * 2 = retained config => config_type = 1
+             * 3 = both, both config_types are available
+             */
+            if($this->retainedAlias) {      
+                $o->andWhere($this->retainedAlias.".config_type= ?",$db->useRetained() ? "1" : "0");
 
+            }                   
+		
+                
+        }
         foreach($this->forceGroup as $group) {
             $o->addGroupBy($group);
         }

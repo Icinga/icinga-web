@@ -8,8 +8,10 @@
 <databases xmlns:db="http://agavi.org/agavi/config/parts/databases/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 
 
-    <!-- Overwrite the icinga-web database (where users, roles, views, etc are stored 
-    EXAMPLE (oracle need icingaOracle as the db driver 
+    <!-- 
+    Overwrite the icinga-web database (where users, roles, views, etc are stored 
+    -->
+    <!--
     <db:database name="icinga_web" class="AppKitDoctrineDatabase">
         <ae:parameter name="dsn">mysql://icinga_web:icinga_web@localhost:3306/icinga_web</ae:parameter>
         <ae:parameter name="charset">utf8</ae:parameter>
@@ -35,10 +37,15 @@
 
     <!-- 
         Overwrite the default database conneciton for icinga data retrieval
-    <db:database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="AppKitDoctrineDatabase">
-        <ae:parameter name="dsn">mysql://icinga_test:test@localhost:3306/icinga_test</ae:parameter>
+        Make sure to use IcingaDoctrineDatabase, otherwise the use_retained parameter will be ignored
+        EXAMPLE (oracle needs icingaOracle as the db driver) 
+    -->
+    <!--
+    <db:database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="IcingaDoctrineDatabase">
+        <ae:parameter name="dsn">mysql://icinga:icinga@localhost:3306/icinga</ae:parameter>
         <ae:parameter name="prefix">icinga_</ae:parameter>
         <ae:parameter name="charset">utf8</ae:parameter>
+         <ae:parameter name="use_retained">true</ae:parameter>
         <ae:parameter name="manager_attributes">
             <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
         </ae:parameter>

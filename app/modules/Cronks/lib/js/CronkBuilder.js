@@ -610,6 +610,6 @@ Cronk.util.CronkBuilder.getInstance = function() {
 		Cronk.util.CronkBuilder.INSTANCE = new Cronk.util.CronkBuilder();
 	}
 	return Cronk.util.CronkBuilder.INSTANCE;
-}
+};
 
 // ...

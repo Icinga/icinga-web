@@ -6,6 +6,8 @@
         $username = $us->getNsmUser()->givenName();
         $auth = true;
 		$pref = $us->getPreferences();
+     
+        $pref["author_name"] = $us->getNsmUser()->user_name;
     }
 	else {
 		$pref = new stdClass();

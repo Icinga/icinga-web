@@ -56,7 +56,7 @@ class AppKitAgaviContext extends AgaviContext {
       
         foreach($list as $mod_name) {
             try {
-               if($mod_name != 'AppKit')
+               if($mod_name != 'AppKit' && $mod_name != 'TestDummy')
                     AppKitAgaviUtil::initializeModule($mod_name);
             } catch(AgaviDisabledModuleException $e) {
             

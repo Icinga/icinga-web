@@ -82,7 +82,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
             $parentObjectId = $idPrefix . $row->HOST_PARENT_OBJECT_ID;
 
             if (!array_key_exists($childObjectId, $hostReferences)) {
-                //    $hostReferences[$childObjectId] = $hosts[$childObjectId];
+                    $hostReferences[$childObjectId] = $hosts[$childObjectId];
             }
 
             unset($hosts[$childObjectId]);

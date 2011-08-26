@@ -5,6 +5,8 @@
   		<!--
   		* Example to change locales
   		Stripping down available languages and set one as default
+        -->
+        <!--
 		 <available_locales default_locale="de" default_timezone="GMT">
 			<available_locale identifier="de_DE">
 			  <ae:parameter name="description">Deutsch</ae:parameter>
@@ -18,6 +20,8 @@
 		<!-- 
 		* Example changing date formats
 		Changing the tstamp format for icinga grids
+        -->
+        <!--
 		<translators default_domain="icinga.default">
 			<translator domain="date-tstamp">
 				<date_formatter>

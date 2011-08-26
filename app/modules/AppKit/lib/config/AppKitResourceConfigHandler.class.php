@@ -75,10 +75,10 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
 
             // Collecting resources
             foreach($this->_resources as $resource => $sfx) {
-                $resources[$resource] = array_merge(
+                $resources[$resource] = array_unique(array_merge(
                                             $resources[$resource],
                                             $this->collectResource($resource, $sfx, $cfg)
-                                        );
+                                        ));
             }
             // Collecting javascript actions
             foreach($cfg->getChildren('jactions', null, true) as $jaction) {
