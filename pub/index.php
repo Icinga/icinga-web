@@ -8,7 +8,9 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods:POST GET UPDATE");
 header("Access-Control-Allow-Headers: x-requested-with");
 header("Access-Control-Max-Age: 720000");
-
+// just make sure a default timezone exists
+if(!ini_get("date.timezone"))
+	ini_set("date.timezone","GMT");
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to the agavi/agavi.php script.                |
 // +---------------------------------------------------------------------------+
