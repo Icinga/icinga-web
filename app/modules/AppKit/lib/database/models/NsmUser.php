@@ -434,23 +434,12 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Collection
      */
     public function getTargetValues($target_name) {
-        if($this->getStorage()->read("target_".$target_name."_user")) {
-            $targets = unserialize($this->getStorage()->read("target_".$target_name."_user"));
-            if($targets)
-                return $targets;
-        }
         $result =  $this->getTargetValuesQuery($target_name)->execute(); 
-        $this->getStorage()->write("target_".$target_name."_user",serialize($result));
         
         return $result;
     }
 
     public function getTargetValue($target_name, $value_name) {
-        if($this->getStorage()->read("target_".$target_name."_".$value_name."_user")) {
-            $targets = unserialize($this->getStorage()->read("target_".$target_name."_".$value_name."_user"));
-            if($targets)
-                return $targets;
-        }
         $q = $this->getTargetValuesQuery($target_name);
         $q->select('tv.tv_val');
         $q->andWhere('tv.tv_key=?', array($value_name));
@@ -460,17 +449,11 @@ class NsmUser extends BaseNsmUser {
         foreach($res as $r) {
             $out[] = $r->tv_val;
         }
-        $this->getStorage()->write("target_".$target_name."_".$value_name."_user",serialize($out));
+
         return $targets;
     }
 
     public function getTargetValuesArray() {
-        if($this->getStorage()->read("targetValuesArray_user")) {
-            $targets = unserialize($this->getStorage()->read("targetValuesArray_user"));
-            if($targets)
-                return $targets;
-        }
-
         $tc = Doctrine_Query::create()
               ->select('t.target_name, t.target_id')
               ->from('NsmTarget t')
@@ -500,7 +483,7 @@ class NsmUser extends BaseNsmUser {
             }
         }
     
-        $this->getStorage()->write("targetValuesArray_user",serialize($out));
+
         return $out;
     }
 }
