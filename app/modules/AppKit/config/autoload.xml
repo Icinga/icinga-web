@@ -72,6 +72,7 @@
 		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>
 		<autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload>         
 		<autoload name="IAppKitDataStoreProviderAction">%core.module_dir%/AppKit/lib/action/IAppKitDataStoreProviderAction.php</autoload>
+        <autoload name="IAppKitDispatchableAction">%core.module_dir%/AppKit/lib/action/IAppKitDispatchableAction.php</autoload>
 		<autoload name="AppKitExtJSDataStoreWriter">%core.module_dir%/AppKit/lib/config/AppKitExtJSDataStoreWriter.class.php</autoload>
 	</ae:configuration>
 </ae:configurations>

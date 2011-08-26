@@ -13,7 +13,6 @@
 		<autoload name="CronkGridTemplateDisplay">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplay.class.php</autoload>
 		<autoload name="CronkGridTemplateDisplayFormat">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayFormat.class.php</autoload>
 		<autoload name="CronkGridTemplateDisplayMonitoring">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayMonitoring.class.php</autoload>
-		<autoload name="CronkGridTemplateDisplayServiceIcons">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayServiceIcons.class.php</autoload>
 		<autoload name="CronkGridTemplateDisplayTest">%core.module_dir%/Cronks/lib/tdisplay/CronkGridTemplateDisplayTest.class.php</autoload>
 		<autoload name="CronkGridTemplateAjaxGridLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateAjaxGridLayout.class.php</autoload>
 		<autoload name="CronkGridTemplateLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateLayout.class.php</autoload>

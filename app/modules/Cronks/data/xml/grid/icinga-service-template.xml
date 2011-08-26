@@ -34,6 +34,15 @@
         		</parameter>
         	</parameter>
         	
+        	<!-- Initialize info icons lazy -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.InfoIconColumnRenderer.init</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">service_info_icons</parameter>
+        		</parameter>
+        	</parameter>
+        	
         </parameter>
         
         <!-- 
@@ -1010,13 +1019,14 @@
                 	<parameter name="menuDisabled">true</parameter>
                 </parameter>
                 
-                <parameter name="userFunc">
-                	<parameter name="class">CronkGridTemplateDisplayServiceIcons</parameter>
-                	<parameter name="method">serviceIcons</parameter>
-                	<parameter name="arguments">
-                		<!-- Column for the service object id -->
-                		<parameter name="field">service_info_icons</parameter>
-                	</parameter>
+                <parameter name="jsFunc">
+                	<parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
+	                <parameter name="function">infoColumn</parameter>
+	                <parameter name="type">renderer</parameter>
+	                <parameter name="arguments">
+	                	<!-- 1==Host 2==Service -->
+	                	<parameter name="type">2</parameter>
+	                </parameter>
                 </parameter>
             </display>
             
@@ -1076,6 +1086,10 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">truncateText</parameter>    
+                    </parameter>
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                         <parameter name="function">selectableColumn</parameter> 
