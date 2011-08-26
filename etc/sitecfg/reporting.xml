@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+
+	<!--
+		Overwrite or append your reporting cronk configuration
+		here
+	-->
+
+	<!--
+        <module enabled="true">
+            <settings>
+                    <setting name="jasperconfig.default">
+                        <ae:parameter name="jasper_url">http://127.0.0.1:8080/jasperserver</ae:parameter>
+                        <ae:parameter name="jasper_user">jasperadmin</ae:parameter>
+                        <ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
+                        <ae:parameter name="tree_root">/</ae:parameter>
+                    </setting>
+            </settings>
+        </module>
+	-->
+    </ae:configuration>
+</ae:configurations>

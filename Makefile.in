@@ -127,6 +127,7 @@ distclean:
         app/modules/AppKit/config/module.xml \
         app/modules/AppKit/config/auth.xml \
         app/modules/Cronks/config/module.xml \
+	app/modules/Reporting/config/module.xml \
         etc/build.properties \
         tests/phpunit/test.properties \
         etc/apache2/icinga-web.conf \

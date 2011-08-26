@@ -21,3 +21,4 @@ install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) databases.xml $(DESTDIR)$(prefix)/etc/conf.d/databases.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) cronks.xml $(DESTDIR)$(prefix)/etc/conf.d/cronks.xml
 	$(INSTALL) -m 755 $(INSTALL_OPTS) translation.xml $(DESTDIR)$(prefix)/etc/conf.d/translation.xml
+	$(INSTALL) -m 755 $(INSTALL_OPTS) reporting.xml $(DESTDIR)$(prefix)/etc/conf.d/reporting.xml
