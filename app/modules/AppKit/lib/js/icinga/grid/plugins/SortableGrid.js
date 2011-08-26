@@ -17,4 +17,4 @@ Icinga.Grid.Plugins.SortableGrid = function(cfg) {
     }
     this.constructor.apply(this,arguments);
 
-}
+};

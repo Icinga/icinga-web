@@ -160,4 +160,4 @@ Icinga.Grid.GridFactory = function() {
             load: loadFunction
         }
     }
-}
+};
