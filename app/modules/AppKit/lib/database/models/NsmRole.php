@@ -189,21 +189,10 @@ class NsmRole extends BaseNsmRole {
      * @return Doctrine_Collection
      */
     public function getTargetValues($target_name) {
-        if($this->getStorage()->read("target_".$target_name."_role")) {
-            $targets = unserialize($this->getStorage()->read("target_".$target_name."_role"));
-            if($targets)
-                return $targets;
-        }
-        $this->getStorage()->write("target_".$target_name."_role",serialize($result));
         return $this->getTargetValuesQuery($target_name)->execute();
     }
 
     public function getTargetValue($target_name, $value_name) {
-        if($this->getStorage()->read("target_".$target_name."_".$value_name."_role")) {
-            $targets = unserialize($this->getStorage()->read("target_".$target_name."_".$value_name."_role"));
-            if($targets)
-                return $targets;
-        }
         $q = $this->getTargetValuesQuery($target_name);
         $q->select('tv.tv_val');
         $q->andWhere('tv.tv_key=?', array($value_name));
@@ -214,18 +203,11 @@ class NsmRole extends BaseNsmRole {
             $out[] = $r->tv_val;
         }
         
-        $this->getStorage()->write("target_".$target_name."_".$value_name."_role",serialize($out));
+
         return $out;
     }
 
     public function getTargetValuesArray() {
-        if($this->getStorage()->read("targetValuesArray_role")) {
-            $targets = unserialize($this->getStorage()->read("targetValuesArray_role"));
-            if($targets)
-                return $targets;
-        }
-
-
         $tc = Doctrine_Query::create()
               ->select('t.target_name, t.target_id')
               ->from('NsmTarget t')
@@ -255,7 +237,7 @@ class NsmRole extends BaseNsmRole {
             }
         }
         
-        $this->getStorage()->write("targetValuesArray_role",serialize($out));
+
         return $out;
     }
 }
