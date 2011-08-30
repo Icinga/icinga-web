@@ -44,7 +44,7 @@ class AppKit_ModuleInstaller_ModuleValidatorModel extends AppKitBaseModel {
     
 
     protected function checkModuleConfig() {
-        $
+
     }
 
     protected function checkVersion() {
