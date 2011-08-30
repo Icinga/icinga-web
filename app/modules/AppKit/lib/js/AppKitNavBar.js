@@ -122,7 +122,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             var p = {
                 text: _(menuPoint.caption),
                 iconCls: menuPoint.icon || null,
-                id: menuPoint.id || Ext.id(),          
+                id: menuPoint.id || Ext.id()          
             }         
             if(menuPoint.target) {
                 p.handler = this.createHandlerForTarget(menuPoint.target);
