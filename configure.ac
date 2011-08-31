@@ -228,14 +228,14 @@ AC_ARG_WITH([devel_mode],
 AC_ARG_WITH([conf_folder],
     AS_HELP_STRING([--with-conf-folder=PATH], [Folder where to store custom user configurations (default etc/conf.d/)]),
     web_conf_folder=$withval,
-    web_conf_folder=$installDir/etc/conf.d   
+    web_conf_folder=$prefix/etc/conf.d   
 )
 
 # Log location
 AC_ARG_WITH([log_folder],
     AS_HELP_STRING([--with-log-folder=PATH], [Folder where to store log files (default log/)]),
     web_log_folder=$withval,
-    web_log_folder=$installDir/log 
+    web_log_folder=$prefix/log 
 )
 
 # Testing switches
