@@ -13,7 +13,8 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
      *                     executed.</li>
      *                   </ul>
      */
-
+    private $instances           = array();
+    
     public function getDefaultViewName() {
         return 'Success';
     }
@@ -66,24 +67,24 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
             $targets = array($targets);
         }
 
-        $api = $this->getContext()->getModel("Icinga.ApiContainer","Web");
-
-        $commands = $this->buildCommandArray($command,$targets,$data);
-
+        $api = $this->getContext()->getModel("System.CommandSender","Cronks");
+        $api->setCommandName($command);
+        $api->setData($data);
+        $api->setSelection($targets);
+        
         // send it
         try {
-            $api->dispatchCommandArray($commands);
+            $api->dispatchCommands();
             $this->setAttribute("success",true);
         } catch (IcingaApiCommandException $e) {
-            $str= "";
-            foreach($api->getLastErrors() as $err) {
-                $str .= $err->getMessage()."\n";
-            }
-            $this->setAttribute("error",$str);
+            $this->setAttribute("error",$e->getMessage());
+            return 'Error';
         }
 
         return 'Success';
     }
+    
+    
 
     private function buildCommandArray($command,array $targets, $data) {
         $commands = array();
