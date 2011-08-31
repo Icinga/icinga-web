@@ -26,7 +26,7 @@ class AppKit_DispatcherAction extends AppKitBaseAction {
         $module = $rd->getParameter("module");
         $action = $rd->getParameter("action");
         $output_type = $rd->getParameter("output_type","json");
-        $dispatchParams = json_decode($rd->getParameter("params"),true);
+        $dispatchParams = json_decode($rd->getParameter("params"), 1);
         $params = new AgaviRequestDataHolder();
 
         if (is_array($dispatchParams)) {
@@ -36,11 +36,11 @@ class AppKit_DispatcherAction extends AppKitBaseAction {
                 }
             }
         }
-
+        
         $controller = $this->getContext()->getController();
         $actionInstance = $controller->createActionInstance($module,$action);
 
-        if ($actionInstance instanceof IDispatchableAction) {
+        if (!($actionInstance instanceof IAppKitDispatchableAction)) {
             $this->setAttribute("error",$module.".".$action." is not accessible via the dispatcher");
             return "Error";
         }
@@ -53,5 +53,3 @@ class AppKit_DispatcherAction extends AppKitBaseAction {
         return true;
     }
 }
-
-?>

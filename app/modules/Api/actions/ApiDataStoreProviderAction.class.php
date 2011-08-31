@@ -1,6 +1,8 @@
 <?php
 
-class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction implements IAppKitDataStoreProviderAction, IDispatchableAction {
+class Api_ApiDataStoreProviderAction extends IcingaApiBaseAction
+    implements IAppKitDataStoreProviderAction, IAppKitDispatchableAction {
+
     /**
      * Returns the default view if the action does not serve the request
      * method used.

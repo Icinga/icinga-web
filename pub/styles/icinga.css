@@ -297,6 +297,15 @@ div#growl-msg-stack {
     z-index: 20000;
 }
 
+/** Info icon **/
+
+.x-icinga-info-icon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin: 0 1px 0 0;
+}
+
 /** Icinga status classes **/
 
 .icinga-notext {

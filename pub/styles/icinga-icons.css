@@ -31,6 +31,21 @@
 	text-decoration: underline;
 }
 
+/*
+ * Info icons
+ */
+.icinga-icon-info-problem-acknowledged { background-image: url("../images/icons/wrench-screwdriver.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-disabled { background-image: url("../images/icons/slash.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-downtime { background-image: url("../images/icons/contrast.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-flapping { background-image: url("../images/icons/arrow-switch.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-notifications-disabled { background-image: url("../images/icons/megaphone--minus.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-off { background-image: url("../images/icons/exclamation-red.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-on { background-image: url("../images/icons/accept.png") !important; background-repeat: no-repeat; }
+.icinga-icon-info-passive { background-image: url("../images/icons/arrow-in.png") !important; background-repeat: no-repeat; }
+
+/*
+ *	Default iconset
+ */
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
