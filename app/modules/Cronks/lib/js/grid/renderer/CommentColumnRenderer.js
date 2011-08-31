@@ -46,7 +46,8 @@ Cronk.grid.CommentColumnRenderer = new (function () {
         var throbber = grid.getEl().select('div[comment_source]');
         throbber.each(function(elem) {
             if(ids.indexOf(elem.getAttribute("comment_source")) > -1)
-                elem.replaceClass('icinga-icon-throbber','icinga-icon-comment');
+                // elem.replaceClass('icinga-icon-throbber','icinga-icon-comment');
+                elem.addClass('icinga-icon-comment');
             else 
                 elem.remove();
         });
@@ -128,7 +129,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
             var my = cfg;
             record.comment_field    = my.target_field;
             record.comment_target   = my.target;
-            return '<div class="icinga-icon-throbber icon-16" comment_source="'+value+'"></div>'
+            return '<div class="icon-16" comment_source="'+value+'"></div>'; // icinga-icon-throbber
         }
     }
 

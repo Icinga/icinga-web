@@ -34,7 +34,7 @@
         		</parameter>
         	</parameter>
         	
-            <!-- Initialize comments -->
+            <!-- Initialize advanced status boxes -->
         	<parameter>
         		<parameter name="type">viewready</parameter>
         		<parameter name="function">Cronk.grid.AdvancedHostStatusColumnRenderer.init</parameter>
@@ -42,6 +42,15 @@
         			<parameter name="column_name">status</parameter>
                		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
                		<parameter name="title">Comments for {host_name}</parameter>
+        		</parameter>
+        	</parameter>
+        	
+        	<!-- Initialize info icons lazy -->
+        	<parameter>
+        		<parameter name="type">viewready</parameter>
+        		<parameter name="function">Cronk.grid.InfoIconColumnRenderer.init</parameter>
+        		<parameter name="arguments">
+        			<parameter name="column_name">host_info_icons</parameter>
         		</parameter>
         	</parameter>
         	
@@ -988,19 +997,18 @@
                 
                 <parameter name="width">50</parameter>
                 
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
                 	<parameter name="menuDisabled">true</parameter>
                 </parameter>
                 
-                <parameter name="userFunc">
-                	<parameter name="class">CronkGridTemplateDisplayServiceIcons</parameter>
-                	<parameter name="method">hostIcons</parameter>
-                	<parameter name="arguments">
-                	
-                		<!-- Column for the service object id -->
-                		<parameter name="field">host_info_icons</parameter>
-                	</parameter>
+                <parameter name="jsFunc">
+                	<parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
+	                <parameter name="function">infoColumn</parameter>
+	                <parameter name="type">renderer</parameter>
+	                <parameter name="arguments">
+	                	<!-- 1==Host 2==Service -->
+	                	<parameter name="type">1</parameter>
+	                </parameter>
                 </parameter>
             </display>
             
@@ -1121,6 +1129,10 @@
                 <parameter name="label">Output</parameter>
                 
                 <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">truncateText</parameter>    
+                    </parameter>                    
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                         <parameter name="function">selectableColumn</parameter>
