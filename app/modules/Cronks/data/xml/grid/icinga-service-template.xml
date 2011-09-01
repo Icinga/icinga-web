@@ -1088,11 +1088,7 @@
                 <parameter name="jsFunc">
                     <parameter>
                         <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">truncateText</parameter>    
-                    </parameter>
-                    <parameter>
-                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                        <parameter name="function">selectableColumn</parameter> 
+                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
                     </parameter>
                 </parameter>
             </display>

@@ -75,7 +75,7 @@ class AppKit_Admin_Groups_EditAction extends AppKitBaseAction {
 
 
             if ($rd->getParameter('id') == 'new') {
-                $this->setAttribute('redirect', 'appkit.admin.groups.edit');
+                $this->setAttribute('redirect', 'modules.appkit.admin.groups.edit');
                 $this->setAttribute('redirect_params', array('id' => $role->role_id));
             }
         } catch (Exception $e) {
