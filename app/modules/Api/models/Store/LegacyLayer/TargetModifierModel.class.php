@@ -709,7 +709,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_COMMENT:
                 $this->mainAlias = "co";
                 $this->aliasDefs = array(
-                                       "s" => array("src" => "co", "relation" => "servics"),
+                                       "s" => array("src" => "co", "relation" => "service"),
                                        "h" => array("src" => "co", "relation" => "host"),
                                        "sh" => array("src" => "s", "relation" => "object"),
                                        "oh" => array("src" => "h", "relation" => "object"),
