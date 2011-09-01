@@ -29,6 +29,30 @@ Cronk.grid.ColumnRendererUtil = function() {
  * Default column renderes
  */
 Cronk.grid.ColumnRenderer = {
+
+	customColumnPerfdataSanatized: function(cfg) {
+		AppKit.log(cfg);
+		return function(value, metaData, record, rowIndex, colIndex, store) {
+			if(!value)
+				return _('no value');
+
+			if( value.match(/check_multi/) ) {
+				var output = '';
+				var expression = /(check_multi.*?)<br \/>/;
+				expression.exec(value);
+
+				output += RegExp.$1;
+
+				metaData.attr = 'ext:qtip="' + output + '"';
+
+				return output;
+			}
+
+			metaData.attr = 'ext:qtip="' + value + '"';
+			return value;
+		}
+	},
+
 	
 	bogusGroupRenderer : function(cfg) {
 		return function(value, garbage, record, rowIndex, colIndex, store) {
