@@ -27,19 +27,20 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
 
     public function submitCommand($cmd_name,array $params,
                                   $commandClass = array("Console.ConsoleCommand","Api")) {
-        $command = $this->getCommand($cmd_name);
-        $string = $this->buildCommandString($command,$params);
-        $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
-                                             array(
-                                                     "command" => "printf",
-                                                     "connection" => $this->consoleContext,
-                                                     "arguments" => array($string)
-                                             )
-                                            );
-        $cmd->stdoutFile("icinga_pipe");
-
+        
         try {
-            $this->consoleContext->exec($cmd);
+            $command = $this->getCommand($cmd_name);
+            $string = $this->buildCommandString($command,$params);
+            $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
+                                                 array(
+                                                         "command" => "printf",
+                                                         "connection" => $this->consoleContext,
+                                                         "arguments" => array($string)
+                                                 )
+                                                );
+            $cmd->stdoutFile("icinga_pipe");
+
+            @($this->consoleContext->exec($cmd));
             if($cmd->getReturnCode() != '0')
                 throw new Exception("Could not send command. Check if your webserver's user has correct permissions for writing to the command pipe.");
         } catch (Exception $e) {
