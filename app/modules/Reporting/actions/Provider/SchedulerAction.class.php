@@ -25,6 +25,16 @@ class Reporting_Provider_SchedulerAction extends ReportingBaseAction {
             case 'job':
                 return 'Job';
 
+            case 'edit':
+                try {
+                    $scheduler->editJob($rd->getParameter('job_data'));
+                    $this->setAttribute('success', true);
+                } catch (SoapFault $e) {
+                    $this->setAttribute('error', $e->getMessage());
+                }
+                return $this->getDefaultViewName();
+                break;
+                
             case 'delete':
                 try {
                     $scheduler->deleteJob($rd->getParameter('job'));
@@ -32,7 +42,9 @@ class Reporting_Provider_SchedulerAction extends ReportingBaseAction {
                 } catch (SoapFault $e) {
                     $this->setAttribute('error', $e->getMessage());
                 }
-
+                return $this->getDefaultViewName();
+                break;
+            
             default:
                 return $this->getDefaultViewName();
                 break;
