@@ -16,7 +16,7 @@ Icinga.Reporting.Cronk = Ext.extend(Ext.TabPanel, {
 		Icinga.Reporting.Cronk.superclass.initComponent.call(this);
 		
 		this.on('added', function() {
-			this.activate(2);
+			this.activate(0);
 		}, this, { single : true });
 		
 		if (this.enable_onthefly == true) {
