@@ -178,7 +178,7 @@ abstract class BaseIcingaNotifications extends Doctrine_Record {
                           'local' => 'object_id',
                           'foreign' => 'service_object_id'
                       ));
-        $this->hasMany("IcingaHosts as hosts" ,array(
+        $this->hasOne("IcingaHosts as hosts" ,array(
                            'local' => 'object_id',
                            'foreign' => 'host_object_id'
                        ));

@@ -586,6 +586,19 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 		});
 		
 		/*
+		 * Dirty hack for form processing:
+		 * Items are rendered only if the tab has been activated. To initialize
+		 * the initial state of the form do this on first show
+		 */
+		(function() {
+			this.formTabs.getItem(1).on('show', function() {
+				if (Ext.isEmpty(this.job_id)) {
+					this.getForm().findField('trigger').setValueForItem('recurrence-simple');
+				}
+			}, this, { single : true });
+		}).defer(1000, this);
+	
+		/*
 		 * Need to prerender all items in tab panel. Because
 		 * the form is not ready we don't do this.
 		 * @todo Check why deferred rendering is not working in card layout
@@ -659,6 +672,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 			uri : this.report_uri
 		}
 		
+		this.parentCmp.showMask();
+		
 		Ext.Ajax.request({
 			url : this.scheduler_edit_url,
 			params : params,
@@ -666,14 +681,19 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 				try {
 					var re = Ext.decode(response.responseText);
 					if (re.success === true) {
-						// Reload job
-						this.startEdit(this.report_uri, this.job_id);
+						this.cancelEdit();
 					} else {
 						AppKit.notifyMessage(_('Error'), _(String.format(_('Could not save: {0}'), re.error)));
 					}
 				} catch (e) {
 					AppKit.notifyMessage(_('Error'), _(String.format(_('Could not parse response: {0}'), e)));
+					this.parentCmp.hideMask();
 				}
+				
+				this.parentCmp.hideMask();
+			},
+			failure : function(response, opts) {
+				this.parentCmp.hideMask();
 			},
 			scope : this
 		})
@@ -697,6 +717,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 	cancelEdit : function() {
 		this.resetForm();
 		this.collapse(true);
+		this.parentCmp.reloadTaskList();
 	},
 	
 	startEdit : function(report_uri, job_id) {

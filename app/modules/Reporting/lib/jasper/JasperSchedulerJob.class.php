@@ -79,6 +79,8 @@ class JasperSchedulerJob {
     }
     
     private function buildSoapStruct(stdClass $data, &$target=null) {
+        $ref = new ReflectionObject($data);
+        
         /*
          * BASIC
          */
@@ -95,19 +97,37 @@ class JasperSchedulerJob {
             $this->processFields(
                 $target['simpleTrigger'], 
                 $data->simpleTrigger, 
-                self::$mapJobSimpleTrigger);
+                self::$mapJobSimpleTrigger
+            );
             
         } elseif ($data->trigger == self::TRIGGER_CALENDAR) {
             $target['simpleTrigger'] = null;
             $target['calendarTrigger'] = array ();
+            
+            $this->processFields(
+                $target['calendarTrigger'],
+                $data->calendarTrigger,
+                self::$mapJobCalendarTrigger
+            );
+            
+            if (!$data->calendarTrigger->months[0]) {
+                $data->calendarTrigger->months = null;
+            }
+            
+            if (!$data->calendarTrigger->weekDays[0]) {
+                $data->calendarTrigger->weekDays = null;
+            }
         }
         
         /*
          * OUTPUT TYPES
          */
-        $target['outputFormats'] = array();
-        $this->processOutputTypes($target['outputFormats'], $data->outputFormats);
-        
+        if ($ref->hasProperty('outputFormats')) {
+            $target['outputFormats'] = array();
+            $this->processOutputTypes($target['outputFormats'], $data->outputFormats);
+        } else {
+            throw new JasperSchedulerJobException('OutputFormats not defined');
+        }
         /*
          * REPOSITORY DESTINATION
          */
@@ -131,7 +151,7 @@ class JasperSchedulerJob {
         $this->processFields($target['mailNotification'], $data->mailNotification, self::$mapMailNotification);
         
         if (!$data->mailNotification->toAddresses[0]) {
-            $target['mailNotification']['toAddresses'] = null;
+            $target['mailNotification'] = null;
         }
         
         return true;
@@ -176,3 +196,5 @@ class JasperSchedulerJob {
         }
     }
 }
+
+class JasperSchedulerJobException extends AppKitException {}

@@ -31,6 +31,8 @@ class Reporting_Provider_SchedulerAction extends ReportingBaseAction {
                     $this->setAttribute('success', true);
                 } catch (SoapFault $e) {
                     $this->setAttribute('error', $e->getMessage());
+                } catch (JasperSchedulerJobException $e) {
+                    $this->setAttribute('error', $e->getMessage());
                 }
                 return $this->getDefaultViewName();
                 break;

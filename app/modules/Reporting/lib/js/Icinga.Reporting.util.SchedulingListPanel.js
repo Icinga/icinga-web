@@ -14,11 +14,6 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 				iconCls : 'icinga-icon-alarm-clock-add',
 				handler : this.processScheduleNew,
 				scope : this
-			}, {
-				text : _('Run now'),
-				iconCls : 'icinga-icon-alarm-clock-arrow',
-				handler : this.processRunNow,
-				scope : this
 			}, '-', {
 				text : _('Edit job'),
 				iconCls : 'icinga-icon-alarm-clock-edit',
@@ -92,10 +87,6 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 		}
 	},
 	
-	processRunNow : function(b, e) {
-		
-	},
-	
 	processEditJob : function(b, e) {
 		if (!Ext.isEmpty(this.selected_report) && !Ext.isEmpty(this.selected_record)) {
 			this.scheduleEditForm.startEdit(this.selected_report.uri, this.selected_record.id);
@@ -121,9 +112,11 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 							else {
 								AppKit.notifyMessage(_('Error'), String.format(_('Could not delete job: {0}'), o.error));
 							}
-					} catch(e) {
-							AppKit.log(response);
-						}
+							} catch(e) {
+								AppKit.log(response);
+							}
+							
+							this.cancelEdit();
 					},
 					scope : this
 				})
@@ -142,6 +135,10 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 	},
 	
 	processRefreshTasklist : function(b, e) {
+		this.reloadTaskList();
+	},
+	
+	reloadTaskList : function() {
 		this.scheduleTaskList.reload();
 	},
 	
@@ -154,7 +151,7 @@ Icinga.Reporting.util.SchedulingListPanel = Ext.extend(Icinga.Reporting.abstract
 		
 		if (sm.getCount()) {
 			this.selected_record = sm.getSelected();
-			this.setToolbarEnabled(true, [2,4,5]);
+			this.setToolbarEnabled(true, [3,4,6]);
 		}
 	}
 	
