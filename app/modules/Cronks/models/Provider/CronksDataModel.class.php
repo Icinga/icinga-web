@@ -8,6 +8,7 @@
  */
 class Cronks_Provider_CronksDataModel extends CronksBaseModel {
 
+    const DEFAULT_CRONK_IMAGE = 'cronks.Folder';
 
     private static $cat_map = array(
                                   'catid'		=> 'cc_uid',
@@ -285,7 +286,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                              'description'	=> isset($cronk['description']) ? $cronk['description'] : null,
                              'name'			=> isset($cronk['name']) ? $cronk['name'] : null,
                              'categories'	=> isset($cronk['categories']) ? $cronk['categories'] : null,
-                             'image'			=> isset($cronk['image']) ? $cronk['image'] : null,
+                             'image'			=> isset($cronk['image']) ? $cronk['image'] : self::DEFAULT_CRONK_IMAGE,
                              'disabled'		=> isset($cronk['disabled']) ? (bool)$cronk['disabled'] : false,
                              'groupsonly'	=> isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
                              'state'			=> isset($cronk['state']) ? $cronk['state'] : null,
@@ -322,7 +323,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                                           'description'	=> $cronk->cronk_description ? $cronk->cronk_description : $cd['description'],
                                           'name'			=> $cronk->cronk_name ? $cronk->cronk_name : $cd['name'],
                                           'categories'	=> isset($cd['categories']) ? $cd['categories'] : null,
-                                          'image'			=> isset($cd['image']) ? $cd['image'] : null,
+                                          'image'			=> isset($cd['image']) ? $cd['image'] : self::DEFAULT_CRONK_IMAGE,
                                           'disabled'		=> isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
                                           'groupsonly'	=> isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
                                           'state'			=> isset($cd['state']) ? $cd['state'] : null,
