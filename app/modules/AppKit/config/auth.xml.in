@@ -82,7 +82,7 @@
 		<!-- Just including your configuration -->
 		<xi:include 
 			xmlns:xi="http://www.w3.org/2001/XInclude" 
-			href="@web_conf_folder@/auth.xml" 
+			href="@web_conf_dir@/auth.xml" 
 			xpointer="xpointer(//settings/setting[@name='defaults']/node())">
 			<xi:fallback></xi:fallback>
 		</xi:include>
@@ -221,7 +221,7 @@
 		<!-- Just including your configuration -->
 		<xi:include 
 			xmlns:xi="http://www.w3.org/2001/XInclude" 
-			href="@web_conf_folder@/auth.xml" 
+			href="@web_conf_dir@/auth.xml" 
 			xpointer="xpointer(//settings/setting[@name='provider']/node())">
 			<xi:fallback></xi:fallback>
 		</xi:include>
@@ -238,7 +238,7 @@
 		<!-- Just including your configuration -->
 		<xi:include 
 			xmlns:xi="http://www.w3.org/2001/XInclude" 
-			href="@web_conf_folder@/auth.xml" 
+			href="@web_conf_dir@/auth.xml" 
 			xpointer="xpointer(//settings/setting[@name='message']/node())">
 			<xi:fallback></xi:fallback>
 		</xi:include>

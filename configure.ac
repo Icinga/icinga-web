@@ -225,18 +225,36 @@ AC_ARG_WITH([devel_mode],
 )
 
 # Configuration location
+# DEPRECATED
 AC_ARG_WITH([conf_folder],
-    AS_HELP_STRING([--with-conf-folder=PATH], [Folder where to store custom user configurations (default etc/conf.d/)]),
-    web_conf_folder=$withval,
-    web_conf_folder=$prefix/etc/conf.d   
+    AS_HELP_STRING([--with-conf-folder=PATH], [DEPRECATED, please use --with-conf-dir instead]),
+    web_conf_dir=$withval,
+    web_conf_dir=$prefix/etc/conf.d   
 )
 
-# Log location
-AC_ARG_WITH([log_folder],
-    AS_HELP_STRING([--with-log-folder=PATH], [Folder where to store log files (default log/)]),
-    web_log_folder=$withval,
-    web_log_folder=$prefix/log 
+AC_ARG_WITH([conf_dir],
+    AS_HELP_STRING([--with-conf-dir=PATH], [Folder where to store custom user configurations (default etc/conf.d/)]),
+    web_conf_dir=$withval,
+    web_conf_dir=$prefix/etc/conf.d   
 )
+
+
+
+# Log location
+# DEPRECATED
+AC_ARG_WITH([log_folder],
+    AS_HELP_STRING([--with-log-folder=PATH], [DEPRECATED, please use --with-log-dir instead]),
+    web_log_dir=$withval,
+    web_log_dir=$prefix/log 
+)
+
+AC_ARG_WITH([log_dir],
+    AS_HELP_STRING([--with-log-dir=PATH], [Folder where to store log files (default log/)]),
+    web_log_dir=$withval,
+    web_log_dir=$prefix/log 
+)
+
+
 
 # Testing switches
 AC_ARG_WITH([phpunit],
@@ -311,8 +329,8 @@ AC_SUBST(INSTALL_OPTS_CACHE)
 AC_SUBST(flag_caching)
 AC_SUBST(flag_debug)
 
-AC_SUBST(web_log_folder)
-AC_SUBST(web_conf_folder)
+AC_SUBST(web_log_dir)
+AC_SUBST(web_conf_dir)
 
 AC_CONFIG_FILES([
 	Makefile

@@ -76,7 +76,7 @@
                 </ae:parameter>
 
             </database>
-        	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/databases.xml#xpointer(databases/node())">
+        	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/databases.xml#xpointer(databases/node())">
 				<xi:fallback></xi:fallback>
 			</xi:include>
 		

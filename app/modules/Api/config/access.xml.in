@@ -7,7 +7,7 @@
         <instances>
             <instance name="default">localhost</instance>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://icinga.org/api/config/parts/access/1.0) xpointer(//ae:configurations//ae:configuration/ac:instances/node())">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/access.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://icinga.org/api/config/parts/access/1.0) xpointer(//ae:configurations//ae:configuration/ac:instances/node())">
                 <xi:fallback></xi:fallback>
             </xi:include>
 
@@ -53,7 +53,7 @@
                     </files>
                 </execute>
             </access>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://icinga.org/api/config/parts/access/1.0) xpointer(//ae:configurations//ae:configuration/ac:defaults/node())">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/access.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ac=http://icinga.org/api/config/parts/access/1.0) xpointer(//ae:configurations//ae:configuration/ac:defaults/node())">
                 <xi:fallback></xi:fallback>
             </xi:include>
         </defaults>
@@ -117,7 +117,7 @@
 
             <!-- include user configs statically -->
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/access.xml" 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/access.xml" 
                     xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) 
                     xmlns(ac=http://icinga.org/api/config/parts/access/1.0) 
                      xpointer(//ae:configurations//ae:configuration/ac:hosts/node())">

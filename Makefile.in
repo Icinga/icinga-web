@@ -14,7 +14,7 @@ TAR_DIR_NAME=$(shell basename `pwd`)
 
 prefix=@prefix@
 exec_prefix=@exec_prefix@
-LOGDIR=@web_log_folder@
+LOGDIR=@web_log_dir@
 CFGDIR=@sysconfdir@
 BINDIR=@bindir@
 CGIDIR=@sbindir@
