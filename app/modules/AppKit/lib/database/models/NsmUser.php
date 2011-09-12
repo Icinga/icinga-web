@@ -10,18 +10,19 @@ class NsmUser extends BaseNsmUser {
     private static $prefCache = array();
 
     /**
-     *
      * @var Doctrine_Collection
      */
     private $principals			= null;
 
     /**
-     *
      * @var array
      */
     private $principals_list	= null;
+    
     private $context = null;
+    
     private $storage = null;
+    
     /**
      * (non-PHPdoc)
      * @see lib/appkit/database/models/generated/BaseNsmUser#setTableDefinition()
@@ -30,13 +31,20 @@ class NsmUser extends BaseNsmUser {
 
         parent::setTableDefinition();
 
-        $this->index('user_unique', array(
+        $this->index('user_name_unique', array(
                          'fields' => array(
                              'user_name'
                          ),
                          'type' => 'unique'
-                     ));
+        ));
 
+        $this->index('user_email_unique', array(
+                         'fields' => array(
+                             'user_email'
+                          ),
+                          'type' => 'unique'
+        ));
+        
         $this->index('user_search', array(
                          'fields' => array(
                              'user_name',
@@ -44,7 +52,7 @@ class NsmUser extends BaseNsmUser {
                              'user_authid',
                              'user_disabled'
                          )
-                     ));
+        ));
     }
 
     public function getContext() {
