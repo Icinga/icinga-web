@@ -182,6 +182,13 @@ abstract class BaseIcingaNotifications extends Doctrine_Record {
                            'local' => 'object_id',
                            'foreign' => 'host_object_id'
                        ));
+        $this->hasMany("IcingaContacts as notificationcontacts",array(
+                            'local' => 'notification_id',
+                            'foreign' => 'contact_object_id',
+                            'refClass' => 'IcingaContactnotifications',
+                            'idField' => 'notification_id'
+            
+        ));
         parent::setUp();
 
     }

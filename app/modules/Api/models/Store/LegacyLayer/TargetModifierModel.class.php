@@ -232,6 +232,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'NOTIFICATION_ID'           =>  'n.notification_id',
                           'NOTIFICATION_INSTANCE_ID'  =>  'n.instance_id',
                           'NOTIFICATION_TYPE'         =>  'n.notification_type',
+                          'NOTIFICATION_CONTACT'      =>  'nc.alias',
                           'NOTIFICATION_REASON'       =>  'n.notification_reason',
                           'NOTIFICATION_STARTTIME'    =>  'n.start_time',
                           'NOTIFICATION_STARTTIME_USEC'=> 'n.start_time_usec',
@@ -657,6 +658,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                            "relation" => "object"
 
                                        ),
+                                       "nc" => array("src"=>"n","relation"=>"notificationcontacts"),
                                        "cg"   => array("src" => "s", "relation" => "contactgroups"),
                                        "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
                                        "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
