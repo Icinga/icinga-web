@@ -32,7 +32,7 @@ fi
 
 echo "Basedir: $PREFIX"
 
-CCDIR="$PREFIX/app/cache/config $PREFIX/app/modules/AppKit/cache/* $PREFIX/app/modules/Cronks/cache/*"
+CCDIR="$PREFIX/app/cache/config $PREFIX/app/cache/content $PREFIX/app/cache/CronkTemplates PREFIX/app/cache/Squished"
 
 for CUR_CDIR in $CCDIR; do
 	CC_FILES=$(ls $CUR_CDIR/*.php 2>/dev/null | wc -l)
