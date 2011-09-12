@@ -158,13 +158,17 @@ class IcingaDoctrine_Query extends Doctrine_Query {
 
     }
 
-    protected function checkForAlias($statement,$ignore = array()) {
-        $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
+    protected function checkForAlias(&$statement,$ignore = array()) {
+        $regExp = "/(?<alias>\w+)\.(?<field>[\*A-Za-z]+)/";
         $matches = array();
         preg_match_all($regExp,$statement,$matches);
 
         for ($i=0; $i<count($matches["alias"]); $i++) {
-
+            if($matches["alias"] == $this->mainAlias) {
+                $resolved = explode(".",$statement,2);
+                $statement = $resolved[1];
+            }
+                
             if (in_array($matches["alias"][$i],$ignore)) {
                 continue;
             }
@@ -221,7 +225,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         foreach($this->_dqlParts as &$dqlGroup) {
             if (is_array($dqlGroup))
                 foreach($dqlGroup as &$dql) {
-                $this->checkForAlias($dql,array($this->mainAlias));
+                    $this->checkForAlias($dql,array($this->mainAlias));
             } else {
                 $this->checkForAlias($dql,array($this->mainAlias));
             }

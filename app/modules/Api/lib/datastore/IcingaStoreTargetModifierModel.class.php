@@ -208,7 +208,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             }
 
             // check for alias
-            $regExp = "/(?<alias>\w+)\.(?<field>\w+)/";
+            $regExp = "/(?<alias>\w+)\.(?<field>[\*\w]+)/";
             $match = array();
             preg_match($regExp,$field,$match);
 
@@ -225,7 +225,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             * instead of replacing them in the result set
             */
 
-            if ($aliasField) {
+            if ($aliasField && strpos($field,'*') === false) {
                 $this->fields[] = $field." AS ".$aliasField;
             }
 
