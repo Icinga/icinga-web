@@ -365,6 +365,8 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
                                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
                                        "s" => array("src" => "os", "relation" => "service"),
+                                       "ss" => array("src" => "s", "relation" => "status"),
+
                                        "os" => array("src" => "h", "relation" => "object")
                                    );
                 break;
