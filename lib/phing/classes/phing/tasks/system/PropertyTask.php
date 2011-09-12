@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: PropertyTask.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: PropertyTask.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ include_once 'phing/system/util/Properties.php';
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision$
+ * @version   $Revision: 552 $
  * @package   phing.tasks.system
  */
 class PropertyTask extends Task {
@@ -71,15 +71,15 @@ class PropertyTask extends Task {
     function setValue($value) {
         $this->value = (string) $value;
     }
-	
-	/**
-	 * Sets value of property to CDATA tag contents.
-	 * @param string $values
-	 * @since 2.2.0
-	 */
-	public function addText($value) {
-		$this->setValue($value);
-	}
+    
+    /**
+     * Sets value of property to CDATA tag contents.
+     * @param string $values
+     * @since 2.2.0
+     */
+    public function addText($value) {
+        $this->setValue($value);
+    }
     
     /** Get the value of current property component. */
     function getValue() {
@@ -182,9 +182,9 @@ class PropertyTask extends Task {
         return (string) $this->value;
     }
 
-	/**
-	 * @param Project $p
-	 */
+    /**
+     * @param Project $p
+     */
     function setFallback($p) {
         $this->fallback = $p;
     }

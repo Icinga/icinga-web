@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: FilterReader.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: FilterReader.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,9 +27,9 @@ require_once 'phing/system/io/Reader.php';
  */
 class FilterReader extends Reader {
     
-	/** 
-	 * @var Reader
-	 */
+    /** 
+     * @var Reader
+     */
     protected $in;
     
     function __construct(Reader $in = null) {

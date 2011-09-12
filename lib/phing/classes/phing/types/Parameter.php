@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Parameter.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: Parameter.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -21,7 +21,7 @@
 
 include_once 'phing/types/DataType.php';
 
-/*
+/**
  * A parameter is composed of a name, type and value. Nested
  * Parameters are also possible, but the using task/type has
  * to support them
@@ -29,7 +29,7 @@ include_once 'phing/types/DataType.php';
  * @author    Manuel Holtgrewe
  * @author    <a href="mailto:yl@seasonfive.com">Yannick Lecaillez</a>
  * @package   phing.types
-*/
+ */
 class Parameter extends DataType {
 
     /** Parameter name */
@@ -52,14 +52,14 @@ class Parameter extends DataType {
         $this->type = (string) $type;
     }
 
-	/**
+    /**
      * Sets value to dynamic register slot.
      * @param RegisterSlot $value
      */
     public function setListeningValue(RegisterSlot $value) {
         $this->value = $value;
     }
-	
+    
     function setValue($value) {
         $this->value = (string) $value;
     }
@@ -73,7 +73,7 @@ class Parameter extends DataType {
     }
 
     function getValue() {
-		if ($this->value instanceof RegisterSlot) {
+        if ($this->value instanceof RegisterSlot) {
             return $this->value->getValue();
         } else {
             return $this->value;

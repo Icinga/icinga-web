@@ -1,6 +1,6 @@
 <?php
 /*
- * $Id: NoBannerLogger.php 227 2007-08-28 02:17:00Z hans $
+ * $Id: NoBannerLogger.php 912 2010-10-12 01:08:31Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,35 +25,35 @@ require_once 'phing/listener/DefaultLogger.php';
  *  Extends DefaultLogger to strip out empty targets.
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
- *  @copyright � 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.4 $ $Date: 2007-08-28 04:17:00 +0200 (Tue, 28 Aug 2007) $
+ *  @copyright 2001,2002 THYRELL. All rights reserved
+ *  @version   $Revision: 912 $ $Date: 2010-10-12 03:08:31 +0200 (Tue, 12 Oct 2010) $
  *  @package   phing.listener
  */
 class NoBannerLogger extends DefaultLogger {
 
-	private $targetName = null;
+    private $targetName = null;
 
-	function targetStarted(BuildEvent $event) {
-		$target = $event->getTarget();
-		$this->targetName = $target->getName();
-	}
+    function targetStarted(BuildEvent $event) {
+        $target = $event->getTarget();
+        $this->targetName = $target->getName();
+    }
 
-	function targetFinished(BuildEvent $event) {
-		$this->targetName = null;
-	}
+    function targetFinished(BuildEvent $event) {
+        $this->targetName = null;
+    }
 
-	function messageLogged(BuildEvent $event) {
-		
-		if ($event->getPriority() > $this->msgOutputLevel || null === $event->getMessage() || trim($event->getMessage() === "")) {
-			return;
-		}
-		
-		if ($this->targetName !== null) {
-			$msg = PHP_EOL . $event->getProject()->getName() . ' > ' . $this->targetName . ':' . PHP_EOL;
-			$this->printMessage($msg, $this->out, $event->getPriority());
-			$this->targetName = null;
-		}
+    function messageLogged(BuildEvent $event) {
+        
+        if ($event->getPriority() > $this->msgOutputLevel || null === $event->getMessage() || trim($event->getMessage() === "")) {
+            return;
+        }
+        
+        if ($this->targetName !== null) {
+            $msg = PHP_EOL . $event->getProject()->getName() . ' > ' . $this->targetName . ':' . PHP_EOL;
+            $this->printMessage($msg, $this->out, $event->getPriority());
+            $this->targetName = null;
+        }
 
-		parent::messageLogged($event);
-	}
+        parent::messageLogged($event);
+    }
 }

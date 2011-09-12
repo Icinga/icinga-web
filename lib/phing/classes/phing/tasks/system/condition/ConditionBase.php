@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: ConditionBase.php 43 2006-03-10 14:31:51Z mrook $
+ *  $Id: ConditionBase.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -32,7 +32,7 @@ include_once 'phing/tasks/system/condition/Condition.php';
  *    @author    Hans Lellelid <hans@xmpl.org>
  *  @author    Andreas Aderhold <andi@binarycloud.com>
  *  @copyright © 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.16 $
+ *  @version   $Revision: 557 $
  *  @package   phing.tasks.system.condition
  */
 abstract class ConditionBase extends ProjectComponent implements IteratorAggregate {
@@ -156,6 +156,8 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
 /**
  * "Inner" class for handling enumerations.
  * Uses build-in PHP5 iterator support.
+ *
+ * @package   phing.tasks.system.condition
  */
 class ConditionEnumeration implements Iterator {
     

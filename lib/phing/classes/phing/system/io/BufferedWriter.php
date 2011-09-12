@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: BufferedWriter.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: BufferedWriter.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@ include_once 'phing/system/io/Writer.php';
  * Convenience class for writing files.
  *
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.10 $
+ * @version   $Revision: 552 $
  * @package   phing.system.io 
  */
 class BufferedWriter extends Writer {
@@ -58,9 +58,9 @@ class BufferedWriter extends Writer {
     }
     
     public function flush() {
-    	$this->out->flush();
+        $this->out->flush();
     }
-	
+    
     /**
      * Close attached stream.
      */

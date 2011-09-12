@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: UnknownElement.php 205 2007-07-29 21:04:42Z hans $
+ *  $Id: UnknownElement.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ require_once 'phing/Task.php';
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.9 $
+ * @version   $Revision: 552 $
  * @package   phing
  */
 class UnknownElement extends Task {
@@ -130,17 +130,17 @@ class UnknownElement extends Task {
                 $realChild = $this->makeTask($child, $childWrapper, false);
                 $parent->addTask($realChild);
             } else {
-				$project = $this->project === null ? $parent->project : $this->project;
-				$realChild = $ih->createElement($project, $parent, $child->getTag());
+                $project = $this->project === null ? $parent->project : $this->project;
+                $realChild = $ih->createElement($project, $parent, $child->getTag());
             }
 
             $childWrapper->setProxy($realChild);
             if ($realChild instanceof Task) {
                 $realChild->setRuntimeConfigurableWrapper($childWrapper);
             }
-			
+            
             if ($realChild instanceof ProjectComponent) {
-            	$child->handleChildren($realChild, $childWrapper);
+                $child->handleChildren($realChild, $childWrapper);
             }
             
             if ($realChild instanceof Task) {

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: XmlLintTask.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: XmlLintTask.php 1001 2010-11-24 10:40:05Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,6 +25,7 @@ require_once 'phing/Task.php';
  * A XML lint task. Checking syntax of one or more XML files against an XML Schema using the DOM extension.
  *
  * @author   Knut Urdalen <knut.urdalen@telio.no>
+ * @version  $Id: XmlLintTask.php 1001 2010-11-24 10:40:05Z mrook $
  * @package  phing.tasks.ext
  */
 class XmlLintTask extends Task {
@@ -32,6 +33,8 @@ class XmlLintTask extends Task {
   protected $file;  // the source file (from xml attribute)
   protected $schema; // the schema file (from xml attribute)
   protected $filesets = array(); // all fileset objects assigned to this task
+  
+  protected $haltonfailure = true;
 
   /**
    * File to be performed syntax check on
@@ -56,21 +59,26 @@ class XmlLintTask extends Task {
    *
    * @return FileSet The created fileset object
    */
-  function createFileSet() {
+  public function createFileSet() {
     $num = array_push($this->filesets, new FileSet());
     return $this->filesets[$num-1];
+  }
+  
+  /**
+   * Sets the haltonfailure attribute
+   *
+   * @param bool $haltonfailure
+   */
+  public function setHaltonfailure($haltonfailure) {
+    $this->haltonfailure = (bool) $haltonfailure;
   }
 
   /**
    * Execute lint check against PhingFile or a FileSet
    */
   public function main() {
-    if(!isset($this->schema)) {
-      throw new BuildException("Missing attribute 'schema'");
-    }
-    $schema = $this->schema->getPath();
-    if(!file_exists($schema)) {
-      throw new BuildException("File not found: ".$schema);
+    if(isset($this->schema) && !file_exists($this->schema->getPath())) {
+      throw new BuildException("Schema file not found: ".$this->schema->getPath());
     }
     if(!isset($this->file) and count($this->filesets) == 0) {
       throw new BuildException("Missing either a nested fileset or attribute 'file' set");
@@ -82,15 +90,23 @@ class XmlLintTask extends Task {
     } else { // process filesets
       $project = $this->getProject();
       foreach($this->filesets as $fs) {
-	$ds = $fs->getDirectoryScanner($project);
-	$files = $ds->getIncludedFiles();
-	$dir = $fs->getDir($this->project)->getPath();
-	foreach($files as $file) {
-	  $this->lint($dir.DIRECTORY_SEPARATOR.$file);
-	}
+    $ds = $fs->getDirectoryScanner($project);
+    $files = $ds->getIncludedFiles();
+    $dir = $fs->getDir($this->project)->getPath();
+    foreach($files as $file) {
+      $this->lint($dir.DIRECTORY_SEPARATOR.$file);
+    }
       }
     }
     restore_error_handler();
+  }
+  
+  protected function logError($message) {
+    if ($this->haltonfailure) {
+      throw new BuildException($message);
+    } else {
+      $this->log($message, Project::MSG_ERR);
+    }
   }
 
   /**
@@ -102,18 +118,26 @@ class XmlLintTask extends Task {
   protected function lint($file) {
     if(file_exists($file)) {
       if(is_readable($file)) {
-	$dom = new DOMDocument();
-	$dom->load($file);
-	if($dom->schemaValidate($this->schema->getPath())) {
-	  $this->log($file.' validated', Project::MSG_INFO);
-	} else {
-	  $this->log($file.' fails to validate (See messages above)', Project::MSG_ERR);
-	}
+        $dom = new DOMDocument();
+        if ($dom->load($file) === false) {
+          $error = libxml_get_last_error();
+          $this->logError($file.' is not well-formed (See messages above)');
+        } else {
+          if(isset($this->schema)) {
+            if($dom->schemaValidate($this->schema->getPath())) {
+              $this->log($file.' validated', Project::MSG_INFO);
+            } else {
+              $this->logError($file.' fails to validate (See messages above)');
+            }
+          } else {
+            $this->log($file.' is well-formed', Project::MSG_INFO);
+          }
+        }
       } else {
-	throw new BuildException('Permission denied: '.$file);
+        $this->logError('Permission denied: '.$file);
       }
     } else {
-      throw new BuildException('File not found: '.$file);
+      $this->logError('File not found: '.$file);
     }
   }
 

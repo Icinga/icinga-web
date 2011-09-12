@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PearLogListener.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: PearLogListener.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -36,7 +36,7 @@ require_once 'phing/BuildListener.php';
  * </code>
  * 
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.3 $ $Date: 2007-08-28 04:17:00 +0200 (Tue, 28 Aug 2007) $
+ * @version   $Revision: 552 $ $Date: 2009-08-29 14:18:13 +0200 (Sat, 29 Aug 2009) $
  * @see       BuildEvent
  * @package   phing.listener
  */
@@ -73,13 +73,13 @@ class PearLogListener implements BuildListener {
     /**
      * @var Log PEAR Log object.
      */
-   	protected $logger;
-   	
+    protected $logger;
+    
     /**
      * Configure the logger.
      */
     protected function configureLogging() {
-    	
+        
         $type = Phing::getDefinedProperty('pear.log.type');
         $name = Phing::getDefinedProperty('pear.log.name');
         $ident = Phing::getDefinedProperty('pear.log.ident');
@@ -92,7 +92,7 @@ class PearLogListener implements BuildListener {
         
         include_once 'Log.php';
         if (!class_exists('Log')) {
-        	throw new BuildException("Cannot find PEAR Log class for use by PearLogger.");
+            throw new BuildException("Cannot find PEAR Log class for use by PearLogger.");
         }
         
         $this->logger = Log::singleton($type, $name, $ident, $conf, self::$levelMap[$this->msgOutputLevel]);

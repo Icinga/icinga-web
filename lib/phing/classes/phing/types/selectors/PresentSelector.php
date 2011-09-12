@@ -1,7 +1,7 @@
 <?php
 
 /*
- * $Id: PresentSelector.php 123 2006-09-14 20:19:08Z mrook $
+ * $Id: PresentSelector.php 1084 2011-05-06 09:55:25Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -92,8 +92,8 @@ class PresentSelector extends BaseSelector {
      * that already exist in the source directory, hence the lack of
      * a <code>destonly</code> option.
      *
-     * @param string $fp An attribute set to either <code>srconly</code or
-     *           ><code>both</code>.
+     * @param string $fp An attribute set to either <code>srconly</code> or
+     *           <code>both</code>.
      */
     public function setPresent($fp) {
         $idx = array_search($fp, self::$filePresence, true);

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Writer.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: Writer.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,13 +25,13 @@
  * @package   phing.system.io
  */
 abstract class Writer {
-	
-	/**
-	 * Writes data to output stream.
-	 * @param string $buf
-	 * @param int $off
-	 * @param int $len
-	 */
+    
+    /**
+     * Writes data to output stream.
+     * @param string $buf
+     * @param int $off
+     * @param int $len
+     */
     abstract public function write($buf, $off = null, $len = null);
     
     /**
@@ -39,7 +39,7 @@ abstract class Writer {
      * @throws IOException - if there is an error closing stream.
      */
     abstract public function close();
-	
+    
     /**
      * Flush the stream, if supported by the stream.
      */

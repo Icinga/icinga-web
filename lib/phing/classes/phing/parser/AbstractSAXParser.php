@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: AbstractSAXParser.php 322 2007-12-20 03:00:35Z hans $
+ *  $Id: AbstractSAXParser.php 912 2010-10-12 01:08:31Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,8 +27,8 @@
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @copyright � 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.13 $
+ * @copyright 2001,2002 THYRELL. All rights reserved
+ * @version   $Revision: 912 $
  * @package   phing.parser
  */
 abstract class AbstractSAXParser {
@@ -105,7 +105,7 @@ abstract class AbstractSAXParser {
      * @throws Exception - Exceptions may be thrown by the Handler
      */
     function characters($parser, $data) {
-		$this->handler->characters($data);
+        $this->handler->characters($data);
     }
 
     /**

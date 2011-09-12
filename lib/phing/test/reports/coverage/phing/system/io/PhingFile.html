@@ -1,0 +1,5028 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<LINK REL="stylesheet" TYPE="text/css" TITLE="Style" href="../../../stylesheet.css">
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="bannercell" rowspan="2"><a href="http://www.phing.info/"><img src="http://www.phing.info/images/phing.gif" alt="http://www.phing.info/" align="left" border="0"></a></td>
+<td style="text-align:right"><h2>Source Code Coverage</h2></td>
+</tr>
+<tr><td style="text-align:right">Designed for use with <a href="http://www.phpunit.de">PHPUnit</a>, <a href="http://www.xdebug.org/">Xdebug</a> and <a href="http://www.phing.info/">Phing</a>.</td></tr>
+</table>
+<hr size="1">
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tr class="a">
+<td class="small">Methods: 54</td>
+<td class="small">LOC: 996</td>
+<td class="small">Statements: 0</td>
+</tr></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tbody><tr>
+<td class="legendItem" width="0%">Legend:</td>
+<td class="legendValue" width="100%">
+<span class="legendCovered">executed</span><span class="legendUncovered">not executed</span><span class="legendDeadCode">dead code</span>
+</td>
+</tr></tbody></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<th width="100%">Source file</th>
+<th>Statements</th>
+<th>Methods</th>
+<th width="250" colspan="2" nowrap>Total coverage</th>
+</tr>
+<tr class="a">
+<td>PhingFile.php</td>
+<td>-</td>
+<td>0.0%</td>
+<td>0.0%</td>
+<td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="display: inline"><tr><td class="uncovered" width="200" height="12"> </td></tr></table></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td class="lineCount">1</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">&lt;?php</pre></td>
+</tr>
+<tr>
+<td class="lineCount">2</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/*</pre></td>
+</tr>
+<tr>
+<td class="lineCount">3</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  $Id: PhingFile.php 1110 2011-05-23 16:00:43Z mrook $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">4</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">5</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</pre></td>
+</tr>
+<tr>
+<td class="lineCount">6</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">7</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</pre></td>
+</tr>
+<tr>
+<td class="lineCount">8</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">9</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">10</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">11</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">12</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</pre></td>
+</tr>
+<tr>
+<td class="lineCount">13</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">14</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</pre></td>
+</tr>
+<tr>
+<td class="lineCount">15</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">16</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">17</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * This software consists of voluntary contributions made by many individuals</pre></td>
+</tr>
+<tr>
+<td class="lineCount">18</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * and is licensed under the LGPL. For more information please see</pre></td>
+</tr>
+<tr>
+<td class="lineCount">19</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;http://phing.info&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">20</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">21</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">22</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/system/io/FileSystem.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">23</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/system/lang/NullPointerException.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">24</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">25</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">26</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * An abstract representation of file and directory pathnames.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">27</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">28</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @version   $Revision: 1110 $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">29</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @package   phing.system.io</pre></td>
+</tr>
+<tr>
+<td class="lineCount">30</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">31</td>
+<td class="coverageCount"></td>
+<td class="srcLineClassStart"><pre class="srcLine">class PhingFile {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">32</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">33</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** separator string, static, obtained from FileSystem */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">34</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public static $separator;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">35</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">36</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** path separator string, static, obtained from FileSystem (; or :)*/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">37</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public static $pathSeparator;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">38</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">39</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">40</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * This abstract pathname's normalized pathname string.  A normalized</pre></td>
+</tr>
+<tr>
+<td class="lineCount">41</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname string uses the default name-separator character and does not</pre></td>
+</tr>
+<tr>
+<td class="lineCount">42</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * contain any duplicate or redundant separators.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">43</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">44</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $path = null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">45</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">46</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">47</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * The length of this abstract pathname's prefix, or zero if it has no prefix.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">48</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @var int</pre></td>
+</tr>
+<tr>
+<td class="lineCount">49</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">50</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $prefixLength = 0;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">51</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">52</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** constructor */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">53</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function __construct($arg1 = null, $arg2 = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">54</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">55</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (self::$separator === null || self::$pathSeparator === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">56</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">57</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            self::$separator = $fs-&gt;getSeparator();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">58</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            self::$pathSeparator = $fs-&gt;getPathSeparator();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">59</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">60</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">61</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        /* simulate signature identified constructors */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">62</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($arg1 instanceof PhingFile &amp;&amp; is_string($arg2)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">63</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;_constructFileParentStringChild($arg1, $arg2);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">64</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } elseif (is_string($arg1) &amp;&amp; ($arg2 === null)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">65</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;_constructPathname($arg1);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">66</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } elseif(is_string($arg1) &amp;&amp; is_string($arg2)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">67</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;_constructStringParentStringChild($arg1, $arg2);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">68</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">69</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($arg1 === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">70</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new NullPointerException("Argument1 to function must not be null");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">71</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">72</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;path = (string) $arg1;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">73</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;prefixLength = (int) $arg2;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">74</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">75</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">76</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">77</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">78</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the length of this abstract pathname's prefix.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">79</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">80</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int</pre></td>
+</tr>
+<tr>
+<td class="lineCount">81</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">82</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getPrefixLength() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">83</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (int) $this-&gt;prefixLength;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">84</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">85</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">86</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- constructors not called by signature match, so we need some helpers --*/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">87</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">88</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">89</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">90</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Enter description here ...</pre></td>
+</tr>
+<tr>
+<td class="lineCount">91</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param unknown_type $pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">92</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">93</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected function _constructPathname($pathname) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">94</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // obtain ref to the filesystem layer</pre></td>
+</tr>
+<tr>
+<td class="lineCount">95</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">96</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">97</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($pathname === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">98</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new NullPointerException("Argument to function must not be null");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">99</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">100</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">101</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;path = (string) $fs-&gt;normalize($pathname);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">102</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;prefixLength = (int) $fs-&gt;prefixLength($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">103</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">104</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">105</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">106</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">107</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Enter description here ...</pre></td>
+</tr>
+<tr>
+<td class="lineCount">108</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param unknown_type $parent</pre></td>
+</tr>
+<tr>
+<td class="lineCount">109</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param unknown_type $child</pre></td>
+</tr>
+<tr>
+<td class="lineCount">110</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">111</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected function _constructStringParentStringChild($parent, $child = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">112</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // obtain ref to the filesystem layer</pre></td>
+</tr>
+<tr>
+<td class="lineCount">113</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">114</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">115</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($child === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">116</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new NullPointerException("Argument to function must not be null");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">117</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">118</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($parent !== null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">119</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($parent === "") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">120</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;path = $fs-&gt;resolve($fs-&gt;getDefaultParent(), $fs-&gt;normalize($child));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">121</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">122</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;path = $fs-&gt;resolve($fs-&gt;normalize($parent), $fs-&gt;normalize($child));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">123</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">124</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">125</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;path = (string) $fs-&gt;normalize($child);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">126</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">127</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;prefixLength = (int) $fs-&gt;prefixLength($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">128</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">129</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">130</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">131</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">132</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Enter description here ...</pre></td>
+</tr>
+<tr>
+<td class="lineCount">133</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param unknown_type $parent</pre></td>
+</tr>
+<tr>
+<td class="lineCount">134</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param unknown_type $child</pre></td>
+</tr>
+<tr>
+<td class="lineCount">135</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">136</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected function _constructFileParentStringChild($parent, $child = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">137</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // obtain ref to the filesystem layer</pre></td>
+</tr>
+<tr>
+<td class="lineCount">138</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">139</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">140</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($child === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">141</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new NullPointerException("Argument to function must not be null");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">142</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">143</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">144</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($parent !== null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">145</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($parent-&gt;path === "") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">146</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;path = $fs-&gt;resolve($fs-&gt;getDefaultParent(), $fs-&gt;normalize($child));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">147</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">148</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;path = $fs-&gt;resolve($parent-&gt;path, $fs-&gt;normalize($child));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">149</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">150</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">151</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;path = $fs-&gt;normalize($child);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">152</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">153</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;prefixLength = $fs-&gt;prefixLength($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">154</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">155</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">156</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- Path-component accessors -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">157</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">158</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">159</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the name of the file or directory denoted by this abstract</pre></td>
+</tr>
+<tr>
+<td class="lineCount">160</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname.  This is just the last name in the pathname's name</pre></td>
+</tr>
+<tr>
+<td class="lineCount">161</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * sequence.  If the pathname's name sequence is empty, then the empty</pre></td>
+</tr>
+<tr>
+<td class="lineCount">162</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * string is returned.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">163</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">164</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  The name of the file or directory denoted by this abstract</pre></td>
+</tr>
+<tr>
+<td class="lineCount">165</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          pathname, or the empty string if this pathname's name sequence</pre></td>
+</tr>
+<tr>
+<td class="lineCount">166</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          is empty</pre></td>
+</tr>
+<tr>
+<td class="lineCount">167</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">168</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getName() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">169</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // that's a lastIndexOf</pre></td>
+</tr>
+<tr>
+<td class="lineCount">170</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $index = ((($res = strrpos($this-&gt;path, self::$separator)) === false) ? -1 : $res);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">171</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($index &lt; $this-&gt;prefixLength) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">172</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return substr($this-&gt;path, $this-&gt;prefixLength);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">173</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">174</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return substr($this-&gt;path, $index + 1);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">175</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">176</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">177</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">178</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the pathname string of this abstract pathname's parent, or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">179</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * null if this pathname does not name a parent directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">180</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">181</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * The parent of an abstract pathname consists of the pathname's prefix,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">182</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * if any, and each name in the pathname's name sequence except for the last.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">183</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * If the name sequence is empty then the pathname does not name a parent</pre></td>
+</tr>
+<tr>
+<td class="lineCount">184</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">185</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">186</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  The pathname string of the parent directory named by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">187</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          abstract pathname, or null if this pathname does not name a parent</pre></td>
+</tr>
+<tr>
+<td class="lineCount">188</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">189</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getParent() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">190</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // that's a lastIndexOf</pre></td>
+</tr>
+<tr>
+<td class="lineCount">191</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $index = ((($res = strrpos($this-&gt;path, self::$separator)) === false) ? -1 : $res);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">192</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($index &lt; $this-&gt;prefixLength) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">193</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (($this-&gt;prefixLength &gt; 0) &amp;&amp; (strlen($this-&gt;path) &gt; $this-&gt;prefixLength)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">194</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                return substr($this-&gt;path, 0, $this-&gt;prefixLength);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">195</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">196</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">197</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">198</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return substr($this-&gt;path, 0, $index);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">199</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">200</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">201</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">202</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the abstract pathname of this abstract pathname's parent,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">203</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * or null if this pathname does not name a parent directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">204</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">205</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * The parent of an abstract pathname consists of the pathname's prefix,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">206</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * if any, and each name in the pathname's name sequence except for the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">207</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * last.  If the name sequence is empty then the pathname does not name</pre></td>
+</tr>
+<tr>
+<td class="lineCount">208</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * a parent directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">209</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">210</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  The abstract pathname of the parent directory named by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">211</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          abstract pathname, or null if this pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">212</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          does not name a parent</pre></td>
+</tr>
+<tr>
+<td class="lineCount">213</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">214</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getParentFile() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">215</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $p = $this-&gt;getParent();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">216</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($p === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">217</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">218</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">219</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return new PhingFile((string) $p, (int) $this-&gt;prefixLength);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">220</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">221</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">222</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">223</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Converts this abstract pathname into a pathname string.  The resulting</pre></td>
+</tr>
+<tr>
+<td class="lineCount">224</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * string uses the default name-separator character to separate the names</pre></td>
+</tr>
+<tr>
+<td class="lineCount">225</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * in the name sequence.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">226</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">227</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string The string form of this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">228</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">229</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getPath() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">230</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (string) $this-&gt;path;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">231</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">232</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">233</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">234</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns path without leading basedir.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">235</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">236</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $basedir Base directory to strip</pre></td>
+</tr>
+<tr>
+<td class="lineCount">237</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">238</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string Path without basedir</pre></td>
+</tr>
+<tr>
+<td class="lineCount">239</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">240</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @uses getPath()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">241</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">242</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getPathWithoutBase($basedir)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">243</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">244</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!StringHelper::endsWith(self::$separator, $basedir)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">245</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $basedir .= self::$separator;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">246</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">247</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $path = $this-&gt;getPath();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">248</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!substr($path, 0, strlen($basedir)) == $basedir) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">249</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            //path does not begin with basedir, we don't modify it</pre></td>
+</tr>
+<tr>
+<td class="lineCount">250</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return $path;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">251</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">252</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return substr($path, strlen($basedir));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">253</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">254</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">255</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">256</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether this abstract pathname is absolute.  The definition of</pre></td>
+</tr>
+<tr>
+<td class="lineCount">257</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * absolute pathname is system dependent.  On UNIX systems, a pathname is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">258</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * absolute if its prefix is "/".  On Win32 systems, a pathname is absolute</pre></td>
+</tr>
+<tr>
+<td class="lineCount">259</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * if its prefix is a drive specifier followed by "\\", or if its prefix</pre></td>
+</tr>
+<tr>
+<td class="lineCount">260</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * is "\\".</pre></td>
+</tr>
+<tr>
+<td class="lineCount">261</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">262</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if this abstract pathname is absolute, false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">263</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">264</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function isAbsolute() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">265</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return ($this-&gt;prefixLength !== 0);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">266</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">267</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">268</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">269</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">270</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the absolute pathname string of this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">271</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">272</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * If this abstract pathname is already absolute, then the pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">273</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * string is simply returned as if by the getPath method.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">274</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * If this abstract pathname is the empty abstract pathname then</pre></td>
+</tr>
+<tr>
+<td class="lineCount">275</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * the pathname string of the current user directory, which is named by the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">276</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * system property user.dir, is returned.  Otherwise this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">277</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname is resolved in a system-dependent way.  On UNIX systems, a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">278</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * relative pathname is made absolute by resolving it against the current</pre></td>
+</tr>
+<tr>
+<td class="lineCount">279</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * user directory.  On Win32 systems, a relative pathname is made absolute</pre></td>
+</tr>
+<tr>
+<td class="lineCount">280</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * by resolving it against the current directory of the drive named by the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">281</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname, if any; if not, it is resolved against the current user</pre></td>
+</tr>
+<tr>
+<td class="lineCount">282</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">283</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">284</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string The absolute pathname string denoting the same file or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">285</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                directory as this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">286</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @see    #isAbsolute()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">287</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">288</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getAbsolutePath() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">289</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">290</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;resolveFile($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">291</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">292</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">293</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">294</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the absolute form of this abstract pathname.  Equivalent to</pre></td>
+</tr>
+<tr>
+<td class="lineCount">295</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * getAbsolutePath.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">296</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">297</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string The absolute abstract pathname denoting the same file or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">298</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                directory as this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">299</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">300</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getAbsoluteFile() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">301</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return new PhingFile((string) $this-&gt;getAbsolutePath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">302</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">303</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">304</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">305</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">306</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the canonical pathname string of this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">307</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">308</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * A canonical pathname is both absolute and unique. The precise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">309</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * definition of canonical form is system-dependent. This method first</pre></td>
+</tr>
+<tr>
+<td class="lineCount">310</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * converts this pathname to absolute form if necessary, as if by invoking the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">311</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * getAbsolutePath() method, and then maps it to its unique form in a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">312</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * system-dependent way.  This typically involves removing redundant names</pre></td>
+</tr>
+<tr>
+<td class="lineCount">313</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * such as "." and .. from the pathname, resolving symbolic links</pre></td>
+</tr>
+<tr>
+<td class="lineCount">314</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * (on UNIX platforms), and converting drive letters to a standard case</pre></td>
+</tr>
+<tr>
+<td class="lineCount">315</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * (on Win32 platforms).</pre></td>
+</tr>
+<tr>
+<td class="lineCount">316</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">317</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Every pathname that denotes an existing file or directory has a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">318</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * unique canonical form.  Every pathname that denotes a nonexistent file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">319</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * or directory also has a unique canonical form.  The canonical form of</pre></td>
+</tr>
+<tr>
+<td class="lineCount">320</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * the pathname of a nonexistent file or directory may be different from</pre></td>
+</tr>
+<tr>
+<td class="lineCount">321</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * the canonical form of the same pathname after the file or directory is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">322</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * created.  Similarly, the canonical form of the pathname of an existing</pre></td>
+</tr>
+<tr>
+<td class="lineCount">323</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * file or directory may be different from the canonical form of the same</pre></td>
+</tr>
+<tr>
+<td class="lineCount">324</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname after the file or directory is deleted.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">325</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">326</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string The canonical pathname string denoting the same file or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">327</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                directory as this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">328</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">329</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getCanonicalPath() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">330</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">331</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;canonicalize($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">332</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">333</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">334</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">335</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">336</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the canonical form of this abstract pathname.  Equivalent to</pre></td>
+</tr>
+<tr>
+<td class="lineCount">337</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * getCanonicalPath(.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">338</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">339</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  PhingFile The canonical pathname string denoting the same file or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">340</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          directory as this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">341</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">342</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getCanonicalFile() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">343</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return new PhingFile($this-&gt;getCanonicalPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">344</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">345</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">346</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">347</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Converts this abstract pathname into a file: URL.  The</pre></td>
+</tr>
+<tr>
+<td class="lineCount">348</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * exact form of the URL is system-dependent.  If it can be determined that</pre></td>
+</tr>
+<tr>
+<td class="lineCount">349</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * the file denoted by this abstract pathname is a directory, then the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">350</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * resulting URL will end with a slash.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">351</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">352</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Usage note: This method does not automatically escape</pre></td>
+</tr>
+<tr>
+<td class="lineCount">353</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * characters that are illegal in URLs.  It is recommended that new code</pre></td>
+</tr>
+<tr>
+<td class="lineCount">354</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * convert an abstract pathname into a URL by first converting it into a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">355</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * URI, via the toURI() method, and then converting the URI</pre></td>
+</tr>
+<tr>
+<td class="lineCount">356</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * into a URL via the URI::toURL()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">357</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">358</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return void A URL object representing the equivalent file URL</pre></td>
+</tr>
+<tr>
+<td class="lineCount">359</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @todo   Not implemented yet</pre></td>
+</tr>
+<tr>
+<td class="lineCount">360</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">361</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">362</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function toURL() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">363</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        /*</pre></td>
+</tr>
+<tr>
+<td class="lineCount">364</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // URL class not implemented yet</pre></td>
+</tr>
+<tr>
+<td class="lineCount">365</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return new URL("file", "", $this-&gt;_slashify($this-&gt;getAbsolutePath(), $this-&gt;isDirectory()));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">366</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">367</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">368</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">369</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">370</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Constructs a file: URI that represents this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">371</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @todo   Not implemented yet</pre></td>
+</tr>
+<tr>
+<td class="lineCount">372</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">373</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">374</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function toURI() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">375</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        /*</pre></td>
+</tr>
+<tr>
+<td class="lineCount">376</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $f = $this-&gt;getAbsoluteFile();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">377</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">           $sp = (string) $this-&gt;slashify($f-&gt;getPath(), $f-&gt;isDirectory());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">378</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">           if (StringHelper::startsWith('//', $sp))</pre></td>
+</tr>
+<tr>
+<td class="lineCount">379</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $sp = '//' + sp;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">380</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">           return new URI('file', null, $sp, null);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">381</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">382</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">383</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">384</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">385</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">386</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Enter description here ...</pre></td>
+</tr>
+<tr>
+<td class="lineCount">387</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  PhingFile|string $path</pre></td>
+</tr>
+<tr>
+<td class="lineCount">388</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  boolean $isDirectory</pre></td>
+</tr>
+<tr>
+<td class="lineCount">389</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string</pre></td>
+</tr>
+<tr>
+<td class="lineCount">390</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">391</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function _slashify($path, $isDirectory) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">392</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $p = (string) $path;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">393</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">394</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (self::$separator !== '/') {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">395</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $p = str_replace(self::$separator, '/', $p);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">396</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">397</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">398</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!StringHelper::startsWith('/', $p)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">399</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $p = '/'.$p;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">400</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">401</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">402</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!StringHelper::endsWith('/', $p) &amp;&amp; $isDirectory) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">403</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $p = $p.'/';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">404</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">405</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">406</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $p;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">407</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">408</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">409</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- Attribute accessors -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">410</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">411</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">412</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the application can read the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">413</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">414</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">415</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file specified by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">416</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 abstract pathname exists and can be read by the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">417</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 application; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">418</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">419</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function canRead() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">420</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">421</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">422</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">423</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return (boolean) @is_readable($this-&gt;getAbsolutePath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">424</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">425</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return false;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">426</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">427</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">428</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">429</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the application can modify to the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">430</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">431</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">432</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file system actually</pre></td>
+</tr>
+<tr>
+<td class="lineCount">433</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 contains a file denoted by this abstract pathname and</pre></td>
+</tr>
+<tr>
+<td class="lineCount">434</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 the application is allowed to write to the file;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">435</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 false otherwise.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">436</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">437</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function canWrite() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">438</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">439</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;checkAccess($this, true);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">440</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">441</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">442</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">443</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the file denoted by this abstract pathname exists.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">444</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">445</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">446</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 abstract pathname exists; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">447</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">448</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function exists() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">449</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        clearstatcache();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">450</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">451</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (is_link($this-&gt;path)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">452</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return true;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">453</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else if ($this-&gt;isFile()) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">454</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return @file_exists($this-&gt;path) || is_link($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">455</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">456</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return @is_dir($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">457</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">458</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">459</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">460</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">461</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the file denoted by this abstract pathname is a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">462</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">463</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">464</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">465</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 abstract pathname exists and is a directory;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">466</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">467</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">468</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function isDirectory() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">469</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        clearstatcache();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">470</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">471</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">472</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No read access to ".$this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">473</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">474</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @is_dir($this-&gt;path) &amp;&amp; !@is_link($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">475</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">476</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">477</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">478</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the file denoted by this abstract pathname is a normal</pre></td>
+</tr>
+<tr>
+<td class="lineCount">479</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * file.  A file is normal if it is not a directory and, in</pre></td>
+</tr>
+<tr>
+<td class="lineCount">480</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * addition, satisfies other system-dependent criteria.  Any non-directory</pre></td>
+</tr>
+<tr>
+<td class="lineCount">481</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * file created by a Java application is guaranteed to be a normal file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">482</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">483</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">484</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 abstract pathname exists and is a normal file;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">485</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">486</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">487</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function isFile() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">488</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        clearstatcache();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">489</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        //$fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">490</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @is_file($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">491</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">492</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">493</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">494</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the file named by this abstract pathname is a hidden</pre></td>
+</tr>
+<tr>
+<td class="lineCount">495</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * file.  The exact definition of hidden is system-dependent.  On</pre></td>
+</tr>
+<tr>
+<td class="lineCount">496</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * UNIX systems, a file is considered to be hidden if its name begins with</pre></td>
+</tr>
+<tr>
+<td class="lineCount">497</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * a period character ('.').  On Win32 systems, a file is considered to be</pre></td>
+</tr>
+<tr>
+<td class="lineCount">498</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * hidden if it has been marked as such in the filesystem. Currently there</pre></td>
+</tr>
+<tr>
+<td class="lineCount">499</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * seems to be no way to dermine isHidden on Win file systems via PHP</pre></td>
+</tr>
+<tr>
+<td class="lineCount">500</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">501</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">502</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 abstract pathname is hidden according to the conventions of the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">503</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 underlying platform</pre></td>
+</tr>
+<tr>
+<td class="lineCount">504</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">505</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function isHidden() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">506</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">507</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">508</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No read access to ".$this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">509</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">510</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (($fs-&gt;getBooleanAttributes($this) &amp; $fs-&gt;BA_HIDDEN) !== 0);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">511</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">512</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">513</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">514</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests whether the file denoted by this abstract pathname is a symbolic link.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">515</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">516</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file denoted by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">517</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 abstract pathname exists and is a symbolic link;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">518</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">519</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">520</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function isLink()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">521</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">522</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        clearstatcache();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">523</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">524</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">525</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No read access to ".$this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">526</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">527</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @is_link($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">528</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">529</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">530</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">531</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the target of the symbolic link denoted by this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">532</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">533</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string the target of the symbolic link denoted by this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">534</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">535</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getLinkTarget()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">536</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">537</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @readlink($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">538</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">539</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">540</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">541</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the time that the file denoted by this abstract pathname was</pre></td>
+</tr>
+<tr>
+<td class="lineCount">542</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * last modified.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">543</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">544</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int An integer value representing the time the file was</pre></td>
+</tr>
+<tr>
+<td class="lineCount">545</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             last modified, measured in milliseconds since the epoch</pre></td>
+</tr>
+<tr>
+<td class="lineCount">546</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             (00:00:00 GMT, January 1, 1970), or 0 if the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">547</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             file does not exist or if an I/O error occurs</pre></td>
+</tr>
+<tr>
+<td class="lineCount">548</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">549</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function lastModified() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">550</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">551</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">552</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No read access to " . $this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">553</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">554</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;getLastModifiedTime($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">555</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">556</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">557</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">558</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the length of the file denoted by this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">559</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * The return value is unspecified if this pathname denotes a directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">560</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">561</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int The length, in bytes, of the file denoted by this abstract</pre></td>
+</tr>
+<tr>
+<td class="lineCount">562</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             pathname, or 0 if the file does not exist</pre></td>
+</tr>
+<tr>
+<td class="lineCount">563</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">564</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function length() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">565</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">566</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">567</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No read access to ".$this-&gt;path."\n");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">568</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">569</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;getLength($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">570</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">571</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">572</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">573</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Convenience method for returning the contents of this file as a string.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">574</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * This method uses file_get_contents() to read file in an optimized way.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">575</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string</pre></td>
+</tr>
+<tr>
+<td class="lineCount">576</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws Exception - if file cannot be read</pre></td>
+</tr>
+<tr>
+<td class="lineCount">577</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">578</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function contents() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">579</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!$this-&gt;canRead() || !$this-&gt;isFile()) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">580</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("Cannot read file contents!");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">581</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">582</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return file_get_contents($this-&gt;getAbsolutePath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">583</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">584</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">585</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- File operations -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">586</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">587</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">588</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Atomically creates a new, empty file named by this abstract pathname if</pre></td>
+</tr>
+<tr>
+<td class="lineCount">589</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * and only if a file with this name does not yet exist.  The check for the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">590</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * existence of the file and the creation of the file if it does not exist</pre></td>
+</tr>
+<tr>
+<td class="lineCount">591</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * are a single operation that is atomic with respect to all other</pre></td>
+</tr>
+<tr>
+<td class="lineCount">592</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * filesystem activities that might affect the file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">593</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">594</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if the named file does not exist and was</pre></td>
+</tr>
+<tr>
+<td class="lineCount">595</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 successfully created; &lt;code&gt;false&lt;/code&gt; if the named file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">596</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 already exists</pre></td>
+</tr>
+<tr>
+<td class="lineCount">597</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws IOException if file can't be created</pre></td>
+</tr>
+<tr>
+<td class="lineCount">598</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">599</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function createNewFile($parents=true, $mode=0777) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">600</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $file = FileSystem::getFileSystem()-&gt;createNewFile($this-&gt;path);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">601</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $file;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">602</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">603</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">604</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">605</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Deletes the file or directory denoted by this abstract pathname.  If</pre></td>
+</tr>
+<tr>
+<td class="lineCount">606</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * this pathname denotes a directory, then the directory must be empty in</pre></td>
+</tr>
+<tr>
+<td class="lineCount">607</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * order to be deleted.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">608</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">609</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the file or directory is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">610</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 successfully deleted; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">611</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">612</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function delete($recursive = false) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">613</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">614</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;canDelete($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">615</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("Cannot delete " . $this-&gt;path . "\n");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">616</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">617</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;delete($this, $recursive);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">618</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">619</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">620</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">621</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Requests that the file or directory denoted by this abstract pathname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">622</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * be deleted when php terminates.  Deletion will be attempted only for</pre></td>
+</tr>
+<tr>
+<td class="lineCount">623</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * normal termination of php and if and if only Phing::shutdown() is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">624</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * called.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">625</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">626</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Once deletion has been requested, it is not possible to cancel the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">627</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * request.  This method should therefore be used with care.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">628</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">629</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">630</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function deleteOnExit() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">631</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">632</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs-&gt;deleteOnExit($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">633</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">634</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">635</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">636</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns an array of strings naming the files and directories in the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">637</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * directory denoted by this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">638</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">639</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * If this abstract pathname does not denote a directory, then this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">640</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * method returns null  Otherwise an array of strings is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">641</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * returned, one for each file or directory in the directory.  Names</pre></td>
+</tr>
+<tr>
+<td class="lineCount">642</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * denoting the directory itself and the directory's parent directory are</pre></td>
+</tr>
+<tr>
+<td class="lineCount">643</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * not included in the result.  Each string is a file name rather than a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">644</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * complete path.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">645</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">646</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * There is no guarantee that the name strings in the resulting array</pre></td>
+</tr>
+<tr>
+<td class="lineCount">647</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * will appear in any specific order; they are not, in particular,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">648</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * guaranteed to appear in alphabetical order.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">649</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">650</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param $filter string</pre></td>
+</tr>
+<tr>
+<td class="lineCount">651</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return array An array of strings naming the files and directories in the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">652</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               directory denoted by this abstract pathname.  The array will be</pre></td>
+</tr>
+<tr>
+<td class="lineCount">653</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               empty if the directory is empty.  Returns null if</pre></td>
+</tr>
+<tr>
+<td class="lineCount">654</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               this abstract pathname does not denote a directory, or if an</pre></td>
+</tr>
+<tr>
+<td class="lineCount">655</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               I/O error occurs.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">656</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">657</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function listDir($filter = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">658</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">659</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;lister($this, $filter);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">660</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">661</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">662</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">663</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">664</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Enter description here ...</pre></td>
+</tr>
+<tr>
+<td class="lineCount">665</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param PhingFile[] $filter</pre></td>
+</tr>
+<tr>
+<td class="lineCount">666</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">667</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function listFiles($filter = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">668</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $ss = $this-&gt;listDir($filter);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">669</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($ss === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">670</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">671</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">672</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $n = count($ss);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">673</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">674</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        for ($i = 0; $i &lt; $n; $i++) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">675</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $fs[$i] = new PhingFile((string)$this-&gt;path, (string)$ss[$i]);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">676</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">677</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">678</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">679</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">680</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">681</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Creates the directory named by this abstract pathname, including any</pre></td>
+</tr>
+<tr>
+<td class="lineCount">682</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * necessary but nonexistent parent directories.  Note that if this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">683</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * operation fails it may have succeeded in creating some of the necessary</pre></td>
+</tr>
+<tr>
+<td class="lineCount">684</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * parent directories.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">685</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">686</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the directory was created,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">687</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 along with all necessary parent directories; false</pre></td>
+</tr>
+<tr>
+<td class="lineCount">688</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                 otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">689</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws IOException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">690</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">691</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function mkdirs($mode = 0755) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">692</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($this-&gt;exists()) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">693</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return false;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">694</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">695</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        try {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">696</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($this-&gt;mkdir($mode)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">697</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                return true;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">698</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">699</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } catch (IOException $ioe) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">700</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            // IOException from mkdir() means that directory propbably didn't exist.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">701</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">702</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $parentFile = $this-&gt;getParentFile();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">703</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (($parentFile !== null) &amp;&amp; ($parentFile-&gt;mkdirs($mode) &amp;&amp; $this-&gt;mkdir($mode)));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">704</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">705</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">706</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">707</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Creates the directory named by this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">708</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">709</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the directory was created; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">710</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws IOException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">711</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">712</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function mkdir($mode = 0755) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">713</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">714</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">715</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess(new PhingFile($this-&gt;path), true) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">716</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No write access to " . $this-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">717</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">718</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;createDirectory($this, $mode);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">719</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">720</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">721</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">722</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Renames the file denoted by this abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">723</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">724</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  PhingFile $destFile The new abstract pathname for the named file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">725</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the renaming succeeded; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">726</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">727</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function renameTo(PhingFile $destFile) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">728</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">729</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">730</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No write access to ".$this-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">731</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">732</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;rename($this, $destFile);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">733</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">734</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">735</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">736</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Simple-copies file denoted by this abstract pathname into another</pre></td>
+</tr>
+<tr>
+<td class="lineCount">737</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * PhingFile</pre></td>
+</tr>
+<tr>
+<td class="lineCount">738</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">739</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  PhingFile $destFile  The new abstract pathname for the named file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">740</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the renaming succeeded; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">741</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">742</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function copyTo(PhingFile $destFile) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">743</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">744</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">745</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">746</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No read access to ".$this-&gt;getPath()."\n");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">747</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">748</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">749</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($destFile, true) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">750</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("File::copyTo() No write access to ".$destFile-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">751</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">752</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;copy($this, $destFile);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">753</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">754</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">755</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">756</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the last-modified time of the file or directory named by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">757</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * abstract pathname.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">758</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">759</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * All platforms support file-modification times to the nearest second,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">760</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * but some provide more precision.  The argument will be truncated to fit</pre></td>
+</tr>
+<tr>
+<td class="lineCount">761</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * the supported precision.  If the operation succeeds and no intervening</pre></td>
+</tr>
+<tr>
+<td class="lineCount">762</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * operations on the file take place, then the next invocation of the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">763</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * lastModified method will return the (possibly truncated) time argument</pre></td>
+</tr>
+<tr>
+<td class="lineCount">764</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * that was passed to this method.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">765</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">766</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  int $time The new last-modified time, measured in milliseconds since</pre></td>
+</tr>
+<tr>
+<td class="lineCount">767</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                   the epoch (00:00:00 GMT, January 1, 1970)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">768</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the operation succeeded; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">769</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">770</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setLastModified($time) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">771</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $time = (int) $time;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">772</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($time &lt; 0) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">773</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new Exception("IllegalArgumentException, Negative $time\n");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">774</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">775</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">776</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">777</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;setLastModifiedTime($this, $time);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">778</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">779</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">780</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">781</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Marks the file or directory named by this abstract pathname so that</pre></td>
+</tr>
+<tr>
+<td class="lineCount">782</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * only read operations are allowed.  After invoking this method the file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">783</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * or directory is guaranteed not to change until it is either deleted or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">784</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * marked to allow write access.  Whether or not a read-only file or</pre></td>
+</tr>
+<tr>
+<td class="lineCount">785</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * directory may be deleted depends upon the underlying system.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">786</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">787</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean true if and only if the operation succeeded; false otherwise</pre></td>
+</tr>
+<tr>
+<td class="lineCount">788</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">789</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setReadOnly() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">790</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">791</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($fs-&gt;checkAccess($this, true) !== true) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">792</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            // Error, no write access</pre></td>
+</tr>
+<tr>
+<td class="lineCount">793</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new IOException("No write access to " . $this-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">794</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">795</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;setReadOnly($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">796</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">797</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">798</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">799</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the owner of the file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">800</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param mixed $user User name or number.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">801</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">802</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setUser($user) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">803</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">804</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;chown($this-&gt;getPath(), $user);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">805</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">806</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">807</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">808</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Retrieve the owner of this file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">809</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int User ID of the owner of this file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">810</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">811</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getUser() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">812</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @fileowner($this-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">813</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">814</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">815</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">816</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the group of the file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">817</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param mixed $user User name or number.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">818</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">819</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setGroup($group) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">820</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">821</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;chgrp($this-&gt;getPath(), $group);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">822</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">823</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">824</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">825</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Retrieve the group of this file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">826</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int User ID of the owner of this file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">827</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">828</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getGroup() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">829</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @filegroup($this-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">830</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">831</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">832</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">833</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the mode of the file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">834</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param int $mode Ocatal mode.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">835</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">836</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setMode($mode) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">837</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">838</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;chmod($this-&gt;getPath(), $mode);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">839</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">840</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">841</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">842</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Retrieve the mode of this file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">843</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int</pre></td>
+</tr>
+<tr>
+<td class="lineCount">844</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">845</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getMode() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">846</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return @fileperms($this-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">847</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">848</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">849</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- Filesystem interface -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">850</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">851</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">852</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * List the available filesystem roots.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">853</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">854</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * A particular platform may support zero or more hierarchically-organized</pre></td>
+</tr>
+<tr>
+<td class="lineCount">855</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * file systems.  Each file system has a root  directory from which all</pre></td>
+</tr>
+<tr>
+<td class="lineCount">856</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * other files in that file system can be reached.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">857</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Windows platforms, for example, have a root directory for each active</pre></td>
+</tr>
+<tr>
+<td class="lineCount">858</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * drive; UNIX platforms have a single root directory, namely "/".</pre></td>
+</tr>
+<tr>
+<td class="lineCount">859</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * The set of available filesystem roots is affected by various system-level</pre></td>
+</tr>
+<tr>
+<td class="lineCount">860</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * operations such the insertion or ejection of removable media and the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">861</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * disconnecting or unmounting of physical or virtual disk drives.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">862</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">863</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * This method returns an array of PhingFile objects that</pre></td>
+</tr>
+<tr>
+<td class="lineCount">864</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * denote the root directories of the available filesystem roots.  It is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">865</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * guaranteed that the canonical pathname of any file physically present on</pre></td>
+</tr>
+<tr>
+<td class="lineCount">866</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * the local machine will begin with one of the roots returned by this</pre></td>
+</tr>
+<tr>
+<td class="lineCount">867</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * method.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">868</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">869</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * The canonical pathname of a file that resides on some other machine</pre></td>
+</tr>
+<tr>
+<td class="lineCount">870</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * and is accessed via a remote-filesystem protocol such as SMB or NFS may</pre></td>
+</tr>
+<tr>
+<td class="lineCount">871</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * or may not begin with one of the roots returned by this method.  If the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">872</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname of a remote file is syntactically indistinguishable from the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">873</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathname of a local file then it will begin with one of the roots</pre></td>
+</tr>
+<tr>
+<td class="lineCount">874</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * returned by this method.  Thus, for example, PhingFile objects</pre></td>
+</tr>
+<tr>
+<td class="lineCount">875</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * denoting the root directories of the mapped network drives of a Windows</pre></td>
+</tr>
+<tr>
+<td class="lineCount">876</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * platform will be returned by this method, while PhingFile</pre></td>
+</tr>
+<tr>
+<td class="lineCount">877</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * objects containing UNC pathnames will not be returned by this method.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">878</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">879</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return array An array of PhingFile objects denoting the available</pre></td>
+</tr>
+<tr>
+<td class="lineCount">880</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               filesystem roots, or null if the set of roots</pre></td>
+</tr>
+<tr>
+<td class="lineCount">881</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               could not be determined.  The array will be empty if there are</pre></td>
+</tr>
+<tr>
+<td class="lineCount">882</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *               no filesystem roots.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">883</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">884</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function listRoots() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">885</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">886</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (array) $fs-&gt;listRoots();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">887</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">888</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">889</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- Tempfile management -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">890</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">891</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">892</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the path to the temp directory.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">893</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string</pre></td>
+</tr>
+<tr>
+<td class="lineCount">894</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">895</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getTempDir() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">896</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return Phing::getProperty('php.tmpdir');</pre></td>
+</tr>
+<tr>
+<td class="lineCount">897</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">898</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">899</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">900</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Static method that creates a unique filename whose name begins with</pre></td>
+</tr>
+<tr>
+<td class="lineCount">901</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * $prefix and ends with $suffix in the directory $directory. $directory</pre></td>
+</tr>
+<tr>
+<td class="lineCount">902</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * is a reference to a PhingFile Object.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">903</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Then, the file is locked for exclusive reading/writing.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">904</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">905</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @author manuel holtgrewe, grin@gmx.net</pre></td>
+</tr>
+<tr>
+<td class="lineCount">906</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws IOException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">907</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return PhingFile</pre></td>
+</tr>
+<tr>
+<td class="lineCount">908</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">909</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public static function createTempFile($prefix, $suffix, PhingFile $directory) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">910</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">911</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // quick but efficient hack to create a unique filename ;-)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">912</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $result = null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">913</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        do {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">914</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $result = new PhingFile($directory, $prefix . substr(md5(time()), 0, 8) . $suffix);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">915</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } while (file_exists($result-&gt;getPath()));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">916</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">917</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">918</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs-&gt;createNewFile($result-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">919</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs-&gt;lock($result);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">920</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">921</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $result;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">922</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">923</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">924</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">925</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * If necessary, $File the lock on $File is removed and then the file is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">926</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * deleted</pre></td>
+</tr>
+<tr>
+<td class="lineCount">927</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">928</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @access      public</pre></td>
+</tr>
+<tr>
+<td class="lineCount">929</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">930</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function removeTempFile() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">931</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">932</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // catch IO Exception</pre></td>
+</tr>
+<tr>
+<td class="lineCount">933</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs-&gt;unlock($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">934</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;delete();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">935</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">936</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">937</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">938</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- Basic infrastructure -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">939</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">940</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">941</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Compares two abstract pathnames lexicographically.  The ordering</pre></td>
+</tr>
+<tr>
+<td class="lineCount">942</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * defined by this method depends upon the underlying system.  On UNIX</pre></td>
+</tr>
+<tr>
+<td class="lineCount">943</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * systems, alphabetic case is significant in comparing pathnames; on Win32</pre></td>
+</tr>
+<tr>
+<td class="lineCount">944</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * systems it is not.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">945</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">946</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param PhingFile $file Th file whose pathname sould be compared to the pathname of this file.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">947</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">948</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return int Zero if the argument is equal to this abstract pathname, a</pre></td>
+</tr>
+<tr>
+<td class="lineCount">949</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *        value less than zero if this abstract pathname is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">950</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *        lexicographically less than the argument, or a value greater</pre></td>
+</tr>
+<tr>
+<td class="lineCount">951</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *        than zero if this abstract pathname is lexicographically</pre></td>
+</tr>
+<tr>
+<td class="lineCount">952</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *        greater than the argument</pre></td>
+</tr>
+<tr>
+<td class="lineCount">953</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">954</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function compareTo(PhingFile $file) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">955</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $fs = FileSystem::getFileSystem();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">956</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $fs-&gt;compare($this, $file);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">957</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">958</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">959</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">960</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Tests this abstract pathname for equality with the given object.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">961</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns &lt;code&gt;true&lt;/code&gt; if and only if the argument is not</pre></td>
+</tr>
+<tr>
+<td class="lineCount">962</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * &lt;code&gt;null&lt;/code&gt; and is an abstract pathname that denotes the same file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">963</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * or directory as this abstract pathname.  Whether or not two abstract</pre></td>
+</tr>
+<tr>
+<td class="lineCount">964</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * pathnames are equal depends upon the underlying system.  On UNIX</pre></td>
+</tr>
+<tr>
+<td class="lineCount">965</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * systems, alphabetic case is significant in comparing pathnames; on Win32</pre></td>
+</tr>
+<tr>
+<td class="lineCount">966</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * systems it is not.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">967</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return boolean</pre></td>
+</tr>
+<tr>
+<td class="lineCount">968</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">969</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function equals($obj) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">970</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (($obj !== null) &amp;&amp; ($obj instanceof PhingFile)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">971</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return ($this-&gt;compareTo($obj) === 0);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">972</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">973</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return false;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">974</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">975</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">976</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">977</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Backwards compatibility - @see __toString()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">978</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">979</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string</pre></td>
+</tr>
+<tr>
+<td class="lineCount">980</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">981</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function toString()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">982</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">983</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;__toString();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">984</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">985</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">986</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">987</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Return string representation of the object</pre></td>
+</tr>
+<tr>
+<td class="lineCount">988</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">989</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string</pre></td>
+</tr>
+<tr>
+<td class="lineCount">990</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">991</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function __toString()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">992</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">993</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;getPath();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">994</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">995</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">}</pre></td>
+</tr>
+<tr>
+<td class="lineCount">996</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+</table>
+<br><table width="100%">
+<tr><td><hr noshade size="1"></td></tr>
+<tr><td class="small">Report generated at 2011-07-09T21:37:03+02:00</td></tr>
+</table>
+</body>
+</html>

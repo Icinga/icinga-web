@@ -35,7 +35,7 @@ WEB_APACHE_PATH=@web_apache_path@
 SED=@SED@
 PHP=@PHP@
 PHING=@PHING@
-PHING_CALL=bin/phing -f etc/build.xml
+PHING_CALL=cd @srcdir@/etc/ && ../bin/phing -f build.xml
 PHPUNIT=@PHPUNIT@
 PHPCS=@PHPCS@
 

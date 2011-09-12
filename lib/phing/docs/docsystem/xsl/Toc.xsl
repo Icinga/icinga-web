@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!--
 // {{{ Header
--File         $Id: Toc.xsl 123 2006-09-14 20:19:08Z mrook $
+-File         $Id: Toc.xsl 576 2009-09-20 18:59:21Z johan162 $
 -License      LGPL (http://www.gnu.org/copyleft/lesser.html)
 -Copyright    2002, The Turing Studio, Inc.
 -Author       alex black, enigma@turingstudio.com
@@ -24,36 +24,36 @@
                 </xsl:if>
                 <xsl:value-of select="." />
             </a>
+            <ul>
+              <xsl:for-each select="//h2">
+                <li>
+                  <xsl:if test="a">
+                    <a>
+                      <xsl:apply-templates select="a" />
+                      <xsl:value-of select="." />
+                    </a>
+                  </xsl:if>
+                  <xsl:if test="not(a)">
+                    <xsl:value-of select="." />
+                  </xsl:if>
+                </li>
+              </xsl:for-each>
+            </ul>
         </li>
         </xsl:for-each>
-        <ul>
-        <xsl:for-each select="//h2">
-            <li>
-                <xsl:if test="a">
-                <a>
-                    <xsl:apply-templates select="a" />
-                    <xsl:value-of select="." />
-                </a>
-                </xsl:if>
-                <xsl:if test="not(a)">
-                    <xsl:value-of select="." />
-                </xsl:if>
-            </li>
-        </xsl:for-each>
-        </ul>
     </ul>
     </xsl:template>
 
     <xsl:template match="a">
-		<xsl:attribute name="href">
-    		<xsl:text>../</xsl:text><xsl:value-of select="$file_name" />
-    		<xsl:if test="@name">
-        		<xsl:text>#</xsl:text><xsl:value-of select="@name" />
-            </xsl:if>
-		</xsl:attribute>
-        <xsl:if test="$mode = 'frame'">
-            <xsl:attribute name="target"><xsl:text>Content</xsl:text></xsl:attribute>
+      <xsl:attribute name="href">
+    	<xsl:text>../</xsl:text><xsl:value-of select="$file_name" />
+    	<xsl:if test="@name">
+          <xsl:text>#</xsl:text><xsl:value-of select="@name" />
         </xsl:if>
+      </xsl:attribute>
+      <xsl:if test="$mode = 'frame'">
+        <xsl:attribute name="target"><xsl:text>Content</xsl:text></xsl:attribute>
+      </xsl:if>
     </xsl:template>      
-
+    
 </xsl:stylesheet>

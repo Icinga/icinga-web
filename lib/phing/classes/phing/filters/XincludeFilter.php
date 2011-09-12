@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: XincludeFilter.php,v 1.16 2005/12/07 20:05:01 hlellelid Exp $
+ *  $Id: XincludeFilter.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,13 +29,49 @@ include_once 'phing/filters/ChainableReader.php';
  * Uses PHP DOM XML support
  * 
  * @author    Bill Karwin <bill@karwin.com>
- * @version   $Revision: 1.16 $
+ * @version   $Id: XincludeFilter.php 526 2009-08-11 12:11:17Z mrook $
  * @see       FilterReader
  * @package   phing.filters
  */
 class XincludeFilter extends BaseParamFilterReader implements ChainableReader {
 
     private $basedir = null;
+
+    /**
+     * @var bool
+     */
+    private $processed = false;
+    
+    /**
+     * Whether to resolve entities.
+     * 
+     * @var bool
+     * 
+     * @since 2.4
+     */
+    private $resolveExternals = false;
+    
+    /**
+     * Whether to resolve entities.
+     * 
+     * @param $resolveExternals
+     * 
+     * @since 2.4
+     */
+    public function setResolveExternals($resolveExternals)
+    {
+        $this->resolveExternals = (bool)$resolveExternals;
+    }
+    
+    /**
+     * @return bool
+     * 
+     * @since 2.4
+     */
+    public function getResolveExternals()
+    {
+        return $this->resolveExternals;
+    }
 
     public function setBasedir(PhingFile $dir)
     {
@@ -103,7 +139,10 @@ class XincludeFilter extends BaseParamFilterReader implements ChainableReader {
             chdir($this->basedir);
         }
 
-        $xmlDom = new DomDocument();
+        // Create and setup document.
+        $xmlDom                   = new DomDocument();
+        $xmlDom->resolveExternals = $this->resolveExternals;
+        
         $xmlDom->loadXML($xml);
         
         $xmlDom->xinclude();

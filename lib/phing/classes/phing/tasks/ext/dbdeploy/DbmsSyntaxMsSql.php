@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: DbDeployTask.php 59 2006-04-28 14:49:47Z lcrouch $
+ *  $Id: DbmsSyntaxMsSql.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -23,15 +23,15 @@
  *  Utility class for generating necessary server-specific SQL commands
  *
  *  @author   Luke Crouch at SourceForge (http://sourceforge.net)
- *  @version  $Revision: 1.1 $
+ *  @version  $Revision: 552 $
  *  @package  phing.tasks.ext.dbdeploy
  */
 
 class DbmsSyntaxMsSql extends DbmsSyntax 
 {
-	public function generateTimestamp()
-	{
-		return "DATEDIFF(s, '19700101', GETDATE())";
-	}
+    public function generateTimestamp()
+    {
+        return "DATEDIFF(s, '19700101', GETDATE())";
+    }
 }
 

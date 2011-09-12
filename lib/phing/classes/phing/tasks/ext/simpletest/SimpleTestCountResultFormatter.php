@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: SimpleTestCountResultFormatter.php 325 2007-12-20 15:44:58Z hans $
+ * $Id: SimpleTestCountResultFormatter.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,27 +25,27 @@ require_once 'phing/tasks/ext/simpletest/SimpleTestResultFormatter.php';
  * Dummy result formatter used to count SimpleTest results
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @version $Id: SimpleTestCountResultFormatter.php 325 2007-12-20 15:44:58Z hans $
+ * @version $Id: SimpleTestCountResultFormatter.php 552 2009-08-29 12:18:13Z mrook $
  * @package phing.tasks.ext.simpletest
  * @since 2.2.0
  */
 class SimpleTestCountResultFormatter extends SimpleTestResultFormatter
 {
-	const SUCCESS = 0;
-	const FAILURES = 1;
-	const ERRORS = 2;
-	
-	function getRetCode()
-	{
-		if ($this->getExceptionCount() != 0)
-		{
-			return self::ERRORS;
-		}
-		else if ($this->getFailCount() != 0)
-		{
-			return self::FAILURES;
-		}
-		
-		return self::SUCCESS;
-	}	
+    const SUCCESS = 0;
+    const FAILURES = 1;
+    const ERRORS = 2;
+    
+    function getRetCode()
+    {
+        if ($this->getExceptionCount() != 0)
+        {
+            return self::ERRORS;
+        }
+        else if ($this->getFailCount() != 0)
+        {
+            return self::FAILURES;
+        }
+        
+        return self::SUCCESS;
+    }   
 }
