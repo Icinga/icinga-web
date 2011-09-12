@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: ResolvePathTask.php 144 2007-02-05 15:19:00Z hans $  
+ *  $Id: ResolvePathTask.php 552 2009-08-29 12:18:13Z mrook $  
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -39,7 +39,7 @@ require_once 'phing/Task.php';
  *      - Possibly integrate this with PackageAsPath, for handling/resolving dot-path paths.
  * 
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.6 $
+ * @version   $Revision: 552 $
  * @package   phing.tasks.system
  */
 class ResolvePathTask extends Task {
@@ -103,11 +103,11 @@ class ResolvePathTask extends Task {
             throw new BuildException("You must specify a path to resolve", $this->getLocation());
         }
         
-		$fs = FileSystem::getFileSystem();
-		
+        $fs = FileSystem::getFileSystem();
+        
         // if dir attribute was specified then we should
         // use that as basedir to which file was relative.
-		// -- unless the file specified is an absolute path
+        // -- unless the file specified is an absolute path
         if ($this->dir !== null && !$fs->isAbsolute(new PhingFile($this->file))) {
             $resolved = new PhingFile($this->dir->getPath(), $this->file);
         } else {

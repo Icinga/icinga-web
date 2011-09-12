@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: InputRequest.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: InputRequest.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@
  *
  * @author Hans Lellelid <hans@xmpl.org> (Phing)
  * @author Stefan Bodewig <stefan.bodewig@epost.de> (Ant)
- * @version $Revision: 1.4 $
+ * @version $Revision: 526 $
  * @package phing.input
  */
 class InputRequest {

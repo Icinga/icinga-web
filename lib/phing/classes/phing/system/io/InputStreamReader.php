@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: FileReader.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: InputStreamReader.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,36 +28,37 @@ include_once 'phing/system/io/Reader.php';
  * Unlike the Java counterpart, this class does not (yet) handle
  * character set transformations.  This will be an important function
  * of this class with move to supporting PHP6.
- *  * @package   phing.system.io
+ *
+ * @package   phing.system.io
  */
 class InputStreamReader extends Reader {
-	
-	/**
-	 * @var InputStream
-	 */
-	protected $inStream;
-	
-	/**
+    
+    /**
+     * @var InputStream
+     */
+    protected $inStream;
+    
+    /**
      * Construct a new InputStreamReader.
      * @param InputStream $$inStream InputStream to read from
      */
     public function __construct(InputStream $inStream) {
         $this->inStream = $inStream;
     }
-	
+    
     /**
      * Close the stream.
      */
     public function close() {
-    	return $this->inStream->close();
+        return $this->inStream->close();
     }
-	
+    
     /**
      * Skip over $n bytes.
      * @param int $n
      */
     public function skip($n) {
-    	return $this->inStream->skip($n);
+        return $this->inStream->skip($n);
     }
     
     /**
@@ -66,7 +67,7 @@ class InputStreamReader extends Reader {
      * @return string chars read or -1 if eof.
      */
     public function read($len = null) {
-    	return $this->inStream->read($len);
+        return $this->inStream->read($len);
     }
     
     /**
@@ -82,7 +83,7 @@ class InputStreamReader extends Reader {
      * @return boolean
      */
     public function markSupported() {
-    	return $this->inStream->markSupported();
+        return $this->inStream->markSupported();
     }
     
     /**
@@ -113,7 +114,7 @@ class InputStreamReader extends Reader {
      * @deprecated Use read() or BufferedReader instead.
      */
     public function readInto(&$rBuffer) {
-		return $this->inStream->readInto($rBuffer);
+        return $this->inStream->readInto($rBuffer);
     }
     
     /**

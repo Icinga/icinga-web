@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Commandline.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: Commandline.php 1085 2011-05-06 11:01:21Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -41,6 +41,7 @@
  *
  * @author thomas.haas@softwired-inc.com
  * @author <a href="mailto:stefan.bodewig@epost.de">Stefan Bodewig</a>
+ * @package phing.types
  */
 class Commandline {
 
@@ -307,7 +308,7 @@ class Commandline {
     /**
      * Returns a String that describes the command and arguments
      * suitable for verbose output before a call to
-     * <code>Runtime.exec(String[])<code>.
+     * <code>Runtime.exec(String[])</code>.
      *
      * <p>This method assumes that the first entry in the array is the
      * executable to run.</p>
@@ -339,7 +340,7 @@ class Commandline {
     /**
      * Returns a String that describes the arguments suitable for
      * verbose output before a call to
-     * <code>Runtime.exec(String[])<code>
+     * <code>Runtime.exec(String[])</code>
      * @param $args arguments to use (default is to use current class args)
      * @param $offset ignore entries before this index
      * @return string
@@ -369,6 +370,8 @@ class Commandline {
 
 /**
  * "Inner" class used for nested xml command line definitions.
+ *
+ * @package phing.types
  */
 class CommandlineArgument {
 
@@ -432,10 +435,13 @@ class CommandlineArgument {
 
 /**
  * Class to keep track of the position of an Argument.
+ *
+ * <p>This class is there to support the srcfile and targetfile
+ * elements of &lt;execon&gt; and &lt;transform&gt; - don't know
+ * whether there might be additional use cases.</p> --SB
+ *
+ * @package phing.types
  */
-// <p>This class is there to support the srcfile and targetfile
-// elements of &lt;execon&gt; and &lt;transform&gt; - don't know
-// whether there might be additional use cases.</p> --SB
 class CommandlineMarker {
 
     private $position;

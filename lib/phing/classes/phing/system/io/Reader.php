@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Reader.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: Reader.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,7 +24,7 @@
  * 
  * @author Hans Lellelid <hans@xmpl.org>
  * @author Yannick Lecaillez <yl@seasonfive.com>
- * @version $Revision: 1.5 $
+ * @version $Revision: 552 $
  * @package phing.system.io
  */
 abstract class Reader {
@@ -76,7 +76,7 @@ abstract class Reader {
      * @return boolean
      */
     public function markSupported() {
-    	return false;
+        return false;
     }
     
     /**
@@ -84,7 +84,7 @@ abstract class Reader {
      * @return boolean
      */
     public function ready() {
-    	return true;
+        return true;
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: TouchTask.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: TouchTask.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ include_once 'phing/system/io/IOException.php';
  *
  * If the file to touch doesn't exist, an empty one is created.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 526 $
  * @package phing.tasks.system
  */
 class TouchTask extends Task {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: CreoleTask.php 259 2007-10-21 01:05:43Z hans $
+ *  $Id: CreoleTask.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ include_once 'phing/types/Reference.php';
  * @author    Jeff Martin <jeff@custommonkey.org> (Ant)
  * @author    Michael McCallum <gholam@xtra.co.nz> (Ant)
  * @author    Tim Stephenson <tim.stephenson@sybase.com> (Ant)
- * @version   $Revision: 1.13 $
+ * @version   $Revision: 526 $
  * @package   phing.tasks.system
  */
 abstract class CreoleTask extends Task {

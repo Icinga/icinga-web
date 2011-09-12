@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Task.php 174 2007-03-12 21:01:37Z hans $
+ *  $Id: Task.php 912 2010-10-12 01:08:31Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,41 +28,41 @@ include_once 'phing/RuntimeConfigurable.php';
  * Use {@link Project#createTask} to register a new Task.
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
- * @copyright � 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.11 $
+ * @copyright 2001,2002 THYRELL. All rights reserved
+ * @version   $Revision: 912 $
  * @see       Project#createTask()
  * @package   phing
  */
 abstract class Task extends ProjectComponent {
 
     /**
-	 * @var Target owning Target object
-	 */
+     * @var Target owning Target object
+     */
     protected $target;
     
     /**
-	 * @var string description of the task
-	 */
+     * @var string description of the task
+     */
     protected $description;
     
     /**
-	 * @var string internal taskname (req)
-	 */
+     * @var string internal taskname (req)
+     */
     protected $taskType;
     
     /**
-	 * @var string Taskname for logger
-	 */
+     * @var string Taskname for logger
+     */
     protected $taskName;
     
     /**
-	 * @var Location stored buildfile location
-	 */
+     * @var Location stored buildfile location
+     */
     protected $location;
     
     /**
-	 * @var RuntimeConfigurable wrapper of the task
-	 */
+     * @var RuntimeConfigurable wrapper of the task
+     */
     protected $wrapper;
 
     /**
@@ -127,15 +127,15 @@ abstract class Task extends ProjectComponent {
     public function setTaskType($name) {
         $this->taskType = (string) $name;
     }
-	
-	/**
-	 * Returns a name 
-	 * 
-	 */
-	protected function getRegisterSlot($slotName) {
-		return Register::getSlot('task.' . $this->getTaskName() . '.' . $slotName);
-	}
-	
+    
+    /**
+     * Returns a name 
+     * 
+     */
+    protected function getRegisterSlot($slotName) {
+        return Register::getSlot('task.' . $this->getTaskName() . '.' . $slotName);
+    }
+    
     /**
      * Provides a project level log event to the task.
      *
@@ -205,7 +205,7 @@ abstract class Task extends ProjectComponent {
      * the parser to set location information.
      *
      * @param Location $location The location object describing the position of this
-     *                  		 task within the buildfile.
+     *                           task within the buildfile.
      */
     function setLocation(Location $location) {
         $this->location = $location;

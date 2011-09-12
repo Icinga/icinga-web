@@ -1,7 +1,7 @@
 <?php
 
 /*
- * $Id: SelectSelector.php 123 2006-09-14 20:19:08Z mrook $
+ * $Id: SelectSelector.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -32,7 +32,7 @@ require_once 'phing/types/selectors/AndSelector.php';
  *
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Bruce Atherton <bruce@callenish.com> (Ant)
- * @version   $Revision: 1.6 $
+ * @version   $Revision: 526 $
  * @package   phing.types.selectors
  */
 class SelectSelector extends AndSelector {

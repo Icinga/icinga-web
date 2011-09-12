@@ -1,0 +1,5043 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<LINK REL="stylesheet" TYPE="text/css" TITLE="Style" href="../stylesheet.css">
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="bannercell" rowspan="2"><a href="http://www.phing.info/"><img src="http://www.phing.info/images/phing.gif" alt="http://www.phing.info/" align="left" border="0"></a></td>
+<td style="text-align:right"><h2>Source Code Coverage</h2></td>
+</tr>
+<tr><td style="text-align:right">Designed for use with <a href="http://www.phpunit.de">PHPUnit</a>, <a href="http://www.xdebug.org/">Xdebug</a> and <a href="http://www.phing.info/">Phing</a>.</td></tr>
+</table>
+<hr size="1">
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tr class="a">
+<td class="small">Methods: 59</td>
+<td class="small">LOC: 999</td>
+<td class="small">Statements: 0</td>
+</tr></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tbody><tr>
+<td class="legendItem" width="0%">Legend:</td>
+<td class="legendValue" width="100%">
+<span class="legendCovered">executed</span><span class="legendUncovered">not executed</span><span class="legendDeadCode">dead code</span>
+</td>
+</tr></tbody></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<th width="100%">Source file</th>
+<th>Statements</th>
+<th>Methods</th>
+<th width="250" colspan="2" nowrap>Total coverage</th>
+</tr>
+<tr class="a">
+<td>Project.php</td>
+<td>-</td>
+<td>0.0%</td>
+<td>0.0%</td>
+<td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="display: inline"><tr><td class="uncovered" width="200" height="12"> </td></tr></table></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td class="lineCount">1</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">&lt;?php</pre></td>
+</tr>
+<tr>
+<td class="lineCount">2</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/*</pre></td>
+</tr>
+<tr>
+<td class="lineCount">3</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  $Id: Project.php 1097 2011-05-17 17:10:32Z mrook $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">4</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">5</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</pre></td>
+</tr>
+<tr>
+<td class="lineCount">6</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">7</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</pre></td>
+</tr>
+<tr>
+<td class="lineCount">8</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">9</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">10</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">11</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">12</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</pre></td>
+</tr>
+<tr>
+<td class="lineCount">13</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">14</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</pre></td>
+</tr>
+<tr>
+<td class="lineCount">15</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">16</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">17</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * This software consists of voluntary contributions made by many individuals</pre></td>
+</tr>
+<tr>
+<td class="lineCount">18</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * and is licensed under the LGPL. For more information please see</pre></td>
+</tr>
+<tr>
+<td class="lineCount">19</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;http://phing.info&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">20</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">21</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">22</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/system/io/PhingFile.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">23</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/util/FileUtils.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">24</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/TaskAdapter.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">25</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/util/StringHelper.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">26</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/BuildEvent.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">27</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">include_once 'phing/input/DefaultInputHandler.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">28</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">29</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">30</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  The Phing project class. Represents a completely configured Phing project.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">31</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  The class defines the project and all tasks/targets. It also contains</pre></td>
+</tr>
+<tr>
+<td class="lineCount">32</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  methods to start a build as well as some properties and FileSystem</pre></td>
+</tr>
+<tr>
+<td class="lineCount">33</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  abstraction.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">34</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">35</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @author    Andreas Aderhold &lt;andi@binarycloud.com&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">36</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @author    Hans Lellelid &lt;hans@xmpl.org&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">37</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @version   $Revision: 1097 $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">38</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @package   phing</pre></td>
+</tr>
+<tr>
+<td class="lineCount">39</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">40</td>
+<td class="coverageCount"></td>
+<td class="srcLineClassStart"><pre class="srcLine">class Project {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">41</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">42</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // Logging level constants.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">43</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    const MSG_DEBUG = 4;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">44</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    const MSG_VERBOSE = 3;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">45</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    const MSG_INFO = 2;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">46</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    const MSG_WARN = 1;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">47</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    const MSG_ERR = 0;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">48</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">49</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** contains the targets */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">50</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $targets         = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">51</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** global filterset (future use) */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">52</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $globalFilterSet = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">53</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**  all globals filters (future use) */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">54</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $globalFilters   = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">55</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">56</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** Project properties map (usually String to String). */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">57</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $properties = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">58</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">59</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">60</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Map of "user" properties (as created in the Ant task, for example).</pre></td>
+</tr>
+<tr>
+<td class="lineCount">61</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Note that these key/value pairs are also always put into the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">62</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * project properties, so only the project properties need to be queried.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">63</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Mapping is String to String.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">64</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">65</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $userProperties = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">66</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">67</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">68</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Map of inherited "user" properties - that are those "user"</pre></td>
+</tr>
+<tr>
+<td class="lineCount">69</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * properties that have been created by tasks and not been set</pre></td>
+</tr>
+<tr>
+<td class="lineCount">70</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * from the command line or a GUI tool.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">71</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Mapping is String to String.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">72</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">73</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $inheritedProperties = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">74</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">75</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** task definitions for this project*/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">76</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $taskdefs = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">77</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">78</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** type definitions for this project */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">79</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $typedefs = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">80</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">81</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** holds ref names and a reference to the referred object*/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">82</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $references = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">83</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">84</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** The InputHandler being used by this project. */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">85</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $inputHandler;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">86</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">87</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /* -- properties that come in via xml attributes -- */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">88</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">89</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** basedir (PhingFile object) */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">90</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $basedir;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">91</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">92</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** the default target name */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">93</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $defaultTarget = 'all';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">94</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">95</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** project name (required) */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">96</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $name;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">97</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">98</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** project description */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">99</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $description;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">100</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">101</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** require phing version */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">102</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $phingVersion;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">103</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">104</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** a FileUtils object */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">105</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $fileUtils;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">106</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">107</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**  Build listeneers */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">108</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $listeners = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">109</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">110</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">111</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *  Constructor, sets any default vars.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">112</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">113</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function __construct() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">114</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;fileUtils = new FileUtils();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">115</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;inputHandler = new DefaultInputHandler();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">116</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">117</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">118</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">119</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the input handler</pre></td>
+</tr>
+<tr>
+<td class="lineCount">120</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">121</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setInputHandler(InputHandler $handler) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">122</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;inputHandler = $handler;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">123</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">124</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">125</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">126</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Retrieves the current input handler.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">127</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">128</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getInputHandler() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">129</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;inputHandler;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">130</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">131</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">132</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** inits the project, called from main app */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">133</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function init() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">134</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // set builtin properties</pre></td>
+</tr>
+<tr>
+<td class="lineCount">135</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;setSystemProperties();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">136</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">137</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // load default tasks</pre></td>
+</tr>
+<tr>
+<td class="lineCount">138</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $taskdefs = Phing::getResourcePath("phing/tasks/defaults.properties");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">139</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">140</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        try { // try to load taskdefs</pre></td>
+</tr>
+<tr>
+<td class="lineCount">141</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $props = new Properties();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">142</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $in = new PhingFile((string)$taskdefs);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">143</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">144</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($in === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">145</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new BuildException("Can't load default task list");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">146</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">147</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $props-&gt;load($in);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">148</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">149</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $enum = $props-&gt;propertyNames();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">150</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach($enum as $key) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">151</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $value = $props-&gt;getProperty($key);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">152</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;addTaskDefinition($key, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">153</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">154</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } catch (IOException $ioe) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">155</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Can't load default task list");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">156</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">157</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">158</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // load default tasks</pre></td>
+</tr>
+<tr>
+<td class="lineCount">159</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $typedefs = Phing::getResourcePath("phing/types/defaults.properties");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">160</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">161</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        try { // try to load typedefs</pre></td>
+</tr>
+<tr>
+<td class="lineCount">162</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $props = new Properties();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">163</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $in    = new PhingFile((string)$typedefs);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">164</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($in === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">165</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new BuildException("Can't load default datatype list");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">166</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">167</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $props-&gt;load($in);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">168</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">169</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $enum = $props-&gt;propertyNames();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">170</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach($enum as $key) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">171</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $value = $props-&gt;getProperty($key);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">172</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;addDataTypeDefinition($key, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">173</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">174</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } catch(IOException $ioe) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">175</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Can't load default datatype list");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">176</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">177</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">178</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">179</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** returns the global filterset (future use) */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">180</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getGlobalFilterSet() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">181</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;globalFilterSet;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">182</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">183</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">184</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // ---------------------------------------------------------</pre></td>
+</tr>
+<tr>
+<td class="lineCount">185</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // Property methods</pre></td>
+</tr>
+<tr>
+<td class="lineCount">186</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // ---------------------------------------------------------</pre></td>
+</tr>
+<tr>
+<td class="lineCount">187</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">188</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">189</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets a property. Any existing property of the same name</pre></td>
+</tr>
+<tr>
+<td class="lineCount">190</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * is overwritten, unless it is a user property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">191</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name The name of property to set.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">192</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">193</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $value The new value of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">194</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *              Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">195</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">196</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">197</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setProperty($name, $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">198</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">199</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // command line properties take precedence</pre></td>
+</tr>
+<tr>
+<td class="lineCount">200</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;userProperties[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">201</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Override ignored for user property " . $name, Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">202</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">203</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">204</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">205</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;properties[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">206</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Overriding previous definition of property " . $name, Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">207</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">208</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">209</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Setting project property: " . $name . " -&gt; " . $value, Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">210</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;properties[$name] = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">211</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">212</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">213</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">214</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets a property if no value currently exists. If the property</pre></td>
+</tr>
+<tr>
+<td class="lineCount">215</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * exists already, a message is logged and the method returns with</pre></td>
+</tr>
+<tr>
+<td class="lineCount">216</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * no other effect.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">217</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">218</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name The name of property to set.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">219</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">220</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $value The new value of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">221</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *              Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">222</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @since 2.0</pre></td>
+</tr>
+<tr>
+<td class="lineCount">223</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">224</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setNewProperty($name, $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">225</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;properties[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">226</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Override ignored for property " . $name, Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">227</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">228</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">229</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Setting project property: " . $name . " -&gt; " . $value, Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">230</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;properties[$name] = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">231</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">232</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">233</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">234</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets a user property, which cannot be overwritten by</pre></td>
+</tr>
+<tr>
+<td class="lineCount">235</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * set/unset property calls. Any previous value is overwritten.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">236</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name The name of property to set.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">237</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">238</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $value The new value of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">239</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *              Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">240</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @see #setProperty()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">241</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">242</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setUserProperty($name, $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">243</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Setting ro project property: " . $name . " -&gt; " . $value, Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">244</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;userProperties[$name] = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">245</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;properties[$name] = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">246</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">247</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">248</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">249</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets a user property, which cannot be overwritten by set/unset</pre></td>
+</tr>
+<tr>
+<td class="lineCount">250</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * property calls. Any previous value is overwritten. Also marks</pre></td>
+</tr>
+<tr>
+<td class="lineCount">251</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * these properties as properties that have not come from the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">252</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * command line.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">253</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">254</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name The name of property to set.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">255</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">256</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $value The new value of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">257</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *              Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">258</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @see #setProperty()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">259</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">260</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setInheritedProperty($name, $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">261</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;inheritedProperties[$name] = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">262</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;setUserProperty($name, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">263</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">264</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">265</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">266</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets a property unless it is already defined as a user property</pre></td>
+</tr>
+<tr>
+<td class="lineCount">267</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * (in which case the method returns silently).</pre></td>
+</tr>
+<tr>
+<td class="lineCount">268</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">269</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param name The name of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">270</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">271</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param value The property value. Must not be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">272</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">273</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private function setPropertyInternal($name, $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">274</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;userProperties[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">275</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Override ignored for user property " . $name, Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">276</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">277</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">278</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;properties[$name] = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">279</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">280</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">281</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">282</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the value of a property, if it is set.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">283</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">284</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name The name of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">285</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             May be &lt;code&gt;null&lt;/code&gt;, in which case</pre></td>
+</tr>
+<tr>
+<td class="lineCount">286</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             the return value is also &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">287</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string The property value, or &lt;code&gt;null&lt;/code&gt; for no match</pre></td>
+</tr>
+<tr>
+<td class="lineCount">288</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         or if a &lt;code&gt;null&lt;/code&gt; name is provided.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">289</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">290</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getProperty($name) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">291</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!isset($this-&gt;properties[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">292</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">293</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">294</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $found = $this-&gt;properties[$name];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">295</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // check to see if there are unresolved property references</pre></td>
+</tr>
+<tr>
+<td class="lineCount">296</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (false !== strpos($found, '${')) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">297</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">          // attempt to resolve properties</pre></td>
+</tr>
+<tr>
+<td class="lineCount">298</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">          $found = $this-&gt;replaceProperties($found);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">299</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">          // save resolved value</pre></td>
+</tr>
+<tr>
+<td class="lineCount">300</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">          $this-&gt;properties[$name] = $found;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">301</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">302</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $found;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">303</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">304</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">305</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">306</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Replaces ${} style constructions in the given value with the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">307</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * string value of the corresponding data types.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">308</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">309</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param value The string to be scanned for property references.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">310</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *              May be &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">311</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">312</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return the given string with embedded property names replaced</pre></td>
+</tr>
+<tr>
+<td class="lineCount">313</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         by values, or &lt;code&gt;null&lt;/code&gt; if the given string is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">314</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">315</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">316</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @exception BuildException if the given value has an unclosed</pre></td>
+</tr>
+<tr>
+<td class="lineCount">317</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *                           property name, e.g. &lt;code&gt;${xxx&lt;/code&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">318</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">319</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function replaceProperties($value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">320</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return ProjectConfigurator::replaceProperties($this, $value, $this-&gt;properties);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">321</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">322</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">323</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">324</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the value of a user property, if it is set.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">325</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">326</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name The name of the property.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">327</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             May be &lt;code&gt;null&lt;/code&gt;, in which case</pre></td>
+</tr>
+<tr>
+<td class="lineCount">328</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *             the return value is also &lt;code&gt;null&lt;/code&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">329</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return string  The property value, or &lt;code&gt;null&lt;/code&gt; for no match</pre></td>
+</tr>
+<tr>
+<td class="lineCount">330</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         or if a &lt;code&gt;null&lt;/code&gt; name is provided.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">331</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">332</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     public function getUserProperty($name) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">333</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!isset($this-&gt;userProperties[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">334</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">335</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">336</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;userProperties[$name];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">337</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">338</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">339</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">340</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns a copy of the properties table.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">341</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return array A hashtable containing all properties</pre></td>
+</tr>
+<tr>
+<td class="lineCount">342</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         (including user properties).</pre></td>
+</tr>
+<tr>
+<td class="lineCount">343</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">344</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getProperties() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">345</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;properties;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">346</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">347</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">348</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">349</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns a copy of the user property hashtable</pre></td>
+</tr>
+<tr>
+<td class="lineCount">350</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return a hashtable containing just the user properties</pre></td>
+</tr>
+<tr>
+<td class="lineCount">351</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">352</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getUserProperties() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">353</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;userProperties;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">354</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">355</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">356</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">357</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Copies all user properties that have been set on the command</pre></td>
+</tr>
+<tr>
+<td class="lineCount">358</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * line or a GUI tool from this instance to the Project instance</pre></td>
+</tr>
+<tr>
+<td class="lineCount">359</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * given as the argument.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">360</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">361</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * &lt;p&gt;To copy all "user" properties, you will also have to call</pre></td>
+</tr>
+<tr>
+<td class="lineCount">362</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * {@link #copyInheritedProperties copyInheritedProperties}.&lt;/p&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">363</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">364</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param Project $other the project to copy the properties to.  Must not be null.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">365</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">366</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @since phing 2.0</pre></td>
+</tr>
+<tr>
+<td class="lineCount">367</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">368</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function copyUserProperties(Project $other) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">369</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;userProperties as $arg =&gt; $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">370</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (isset($this-&gt;inheritedProperties[$arg])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">371</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                continue;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">372</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">373</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $other-&gt;setUserProperty($arg, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">374</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">375</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">376</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">377</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">378</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Copies all user properties that have not been set on the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">379</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * command line or a GUI tool from this instance to the Project</pre></td>
+</tr>
+<tr>
+<td class="lineCount">380</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * instance given as the argument.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">381</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">382</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * &lt;p&gt;To copy all "user" properties, you will also have to call</pre></td>
+</tr>
+<tr>
+<td class="lineCount">383</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * {@link #copyUserProperties copyUserProperties}.&lt;/p&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">384</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">385</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param other the project to copy the properties to.  Must not be null.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">386</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">387</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @since phing 2.0</pre></td>
+</tr>
+<tr>
+<td class="lineCount">388</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">389</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function copyInheritedProperties(Project $other) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">390</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;userProperties as $arg =&gt; $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">391</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($other-&gt;getUserProperty($arg) !== null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">392</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                continue;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">393</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">394</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $other-&gt;setInheritedProperty($arg, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">395</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">396</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">397</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">398</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // ---------------------------------------------------------</pre></td>
+</tr>
+<tr>
+<td class="lineCount">399</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //  END Properties methods</pre></td>
+</tr>
+<tr>
+<td class="lineCount">400</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // ---------------------------------------------------------</pre></td>
+</tr>
+<tr>
+<td class="lineCount">401</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">402</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">403</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setDefaultTarget($targetName) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">404</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;defaultTarget = (string) trim($targetName);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">405</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">406</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">407</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getDefaultTarget() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">408</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (string) $this-&gt;defaultTarget;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">409</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">410</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">411</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">412</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the name of the current project</pre></td>
+</tr>
+<tr>
+<td class="lineCount">413</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">414</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param    string   name of project</pre></td>
+</tr>
+<tr>
+<td class="lineCount">415</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return   void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">416</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @access   public</pre></td>
+</tr>
+<tr>
+<td class="lineCount">417</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @author   Andreas Aderhold, andi@binarycloud.com</pre></td>
+</tr>
+<tr>
+<td class="lineCount">418</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">419</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">420</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setName($name) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">421</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;name = (string) trim($name);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">422</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;setProperty("phing.project.name", $this-&gt;name);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">423</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">424</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">425</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">426</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the name of this project</pre></td>
+</tr>
+<tr>
+<td class="lineCount">427</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">428</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  string  projectname</pre></td>
+</tr>
+<tr>
+<td class="lineCount">429</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @access  public</pre></td>
+</tr>
+<tr>
+<td class="lineCount">430</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @author  Andreas Aderhold, andi@binarycloud.com</pre></td>
+</tr>
+<tr>
+<td class="lineCount">431</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">432</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getName() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">433</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return (string) $this-&gt;name;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">434</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">435</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">436</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** Set the projects description */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">437</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setDescription($description) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">438</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;description = (string) trim($description);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">439</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">440</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">441</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** return the description, null otherwise */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">442</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getDescription() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">443</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;description;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">444</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">445</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">446</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** Set the minimum required phing version **/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">447</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setPhingVersion($version) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">448</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $version = str_replace('phing', '', strtolower($version));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">449</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;phingVersion = (string)trim($version);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">450</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">451</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">452</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** Get the minimum required phing version **/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">453</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getPhingVersion() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">454</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if($this-&gt;phingVersion === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">455</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;setPhingVersion(Phing::getPhingVersion());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">456</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">457</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;phingVersion;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">458</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">459</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">460</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** Set basedir object from xml*/</pre></td>
+</tr>
+<tr>
+<td class="lineCount">461</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setBasedir($dir) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">462</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($dir instanceof PhingFile) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">463</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $dir = $dir-&gt;getAbsolutePath();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">464</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">465</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">466</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $dir = $this-&gt;fileUtils-&gt;normalize($dir);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">467</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">468</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $dir = new PhingFile((string) $dir);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">469</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!$dir-&gt;exists()) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">470</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Basedir ".$dir-&gt;getAbsolutePath()." does not exist");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">471</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">472</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!$dir-&gt;isDirectory()) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">473</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Basedir ".$dir-&gt;getAbsolutePath()." is not a directory");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">474</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">475</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;basedir = $dir;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">476</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;setPropertyInternal("project.basedir", $this-&gt;basedir-&gt;getAbsolutePath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">477</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Project base dir set to: " . $this-&gt;basedir-&gt;getPath(), Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">478</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">479</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // [HL] added this so that ./ files resolve correctly.  This may be a mistake ... or may be in wrong place.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">480</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        chdir($dir-&gt;getAbsolutePath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">481</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">482</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">483</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">484</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the basedir of this project</pre></td>
+</tr>
+<tr>
+<td class="lineCount">485</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">486</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  PhingFile  Basedir PhingFile object</pre></td>
+</tr>
+<tr>
+<td class="lineCount">487</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @access  public</pre></td>
+</tr>
+<tr>
+<td class="lineCount">488</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws  BuildException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">489</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @author  Andreas Aderhold, andi@binarycloud.com</pre></td>
+</tr>
+<tr>
+<td class="lineCount">490</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">491</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getBasedir() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">492</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($this-&gt;basedir === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">493</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            try { // try to set it</pre></td>
+</tr>
+<tr>
+<td class="lineCount">494</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;setBasedir(".");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">495</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } catch (BuildException $exc) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">496</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new BuildException("Can not set default basedir. ".$exc-&gt;getMessage());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">497</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">498</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">499</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;basedir;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">500</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">501</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">502</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">503</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets system properties and the environment variables for this project.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">504</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">505</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">506</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">507</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function setSystemProperties() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">508</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">509</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // first get system properties</pre></td>
+</tr>
+<tr>
+<td class="lineCount">510</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $systemP = array_merge( self::getProperties(), Phing::getProperties() );</pre></td>
+</tr>
+<tr>
+<td class="lineCount">511</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($systemP as $name =&gt; $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">512</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;setPropertyInternal($name, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">513</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">514</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">515</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // and now the env vars</pre></td>
+</tr>
+<tr>
+<td class="lineCount">516</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($_SERVER as $name =&gt; $value) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">517</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            // skip arrays</pre></td>
+</tr>
+<tr>
+<td class="lineCount">518</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (is_array($value)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">519</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                continue;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">520</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">521</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;setPropertyInternal('env.' . $name, $value);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">522</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">523</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return true;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">524</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">525</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">526</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">527</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">528</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Adds a task definition.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">529</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name Name of tag.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">530</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $class The class path to use.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">531</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $classpath The classpat to use.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">532</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">533</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function addTaskDefinition($name, $class, $classpath = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">534</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $name  = $name;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">535</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $class = $class;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">536</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($class === "") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">537</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Task $name has no class defined.", Project::MSG_ERR);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">538</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }  elseif (!isset($this-&gt;taskdefs[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">539</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            Phing::import($class, $classpath);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">540</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;taskdefs[$name] = $class;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">541</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("  +Task definiton: $name ($class)", Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">542</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">543</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Task $name ($class) already registerd, skipping", Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">544</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">545</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">546</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">547</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getTaskDefinitions() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">548</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;taskdefs;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">549</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">550</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">551</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">552</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Adds a data type definition.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">553</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $name Name of tag.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">554</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $class The class path to use.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">555</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $classpath The classpat to use.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">556</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">557</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function addDataTypeDefinition($typeName, $typeClass, $classpath = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">558</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!isset($this-&gt;typedefs[$typeName])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">559</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            Phing::import($typeClass, $classpath);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">560</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;typedefs[$typeName] = $typeClass;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">561</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("  +User datatype: $typeName ($typeClass)", Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">562</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">563</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Type $typeName ($typeClass) already registerd, skipping", Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">564</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">565</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">566</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">567</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getDataTypeDefinitions() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">568</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;typedefs;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">569</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">570</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">571</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** add a new target to the project */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">572</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function addTarget($targetName, &amp;$target) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">573</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;targets[$targetName])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">574</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Duplicate target: $targetName");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">575</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">576</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;addOrReplaceTarget($targetName, $target);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">577</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">578</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">579</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function addOrReplaceTarget($targetName, &amp;$target) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">580</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("  +Target: $targetName", Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">581</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $target-&gt;setProject($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">582</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;targets[$targetName] = $target;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">583</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">584</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $ctx = $this-&gt;getReference("phing.parsing.context");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">585</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $current = $ctx-&gt;getConfigurator()-&gt;getCurrentTargets();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">586</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $current[$targetName] = $target;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">587</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">588</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">589</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getTargets() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">590</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;targets;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">591</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">592</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">593</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">594</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Create a new task instance and return reference to it. This method is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">595</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * sorta factory like. A _local_ instance is created and a reference returned to</pre></td>
+</tr>
+<tr>
+<td class="lineCount">596</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * that instance. Usually PHP destroys local variables when the function call</pre></td>
+</tr>
+<tr>
+<td class="lineCount">597</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * ends. But not if you return a reference to that variable.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">598</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * This is kinda error prone, because if no reference exists to the variable</pre></td>
+</tr>
+<tr>
+<td class="lineCount">599</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * it is destroyed just like leaving the local scope with primitive vars. There's no</pre></td>
+</tr>
+<tr>
+<td class="lineCount">600</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * central place where the instance is stored as in other OOP like languages.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">601</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">602</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * [HL] Well, ZE2 is here now, and this is  still working. We'll leave this alone</pre></td>
+</tr>
+<tr>
+<td class="lineCount">603</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * unless there's any good reason not to.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">604</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">605</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param    string    $taskType    Task name</pre></td>
+</tr>
+<tr>
+<td class="lineCount">606</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return   Task                A task object</pre></td>
+</tr>
+<tr>
+<td class="lineCount">607</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws   BuildException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">608</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *           Exception</pre></td>
+</tr>
+<tr>
+<td class="lineCount">609</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">610</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function createTask($taskType) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">611</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        try {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">612</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $classname = "";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">613</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $tasklwr = strtolower($taskType);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">614</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach ($this-&gt;taskdefs as $name =&gt; $class) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">615</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                if (strtolower($name) === $tasklwr) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">616</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $classname = $class;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">617</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    break;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">618</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">619</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">620</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">621</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($classname === "") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">622</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">623</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">624</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">625</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $cls = Phing::import($classname);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">626</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">627</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (!class_exists($cls)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">628</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new BuildException("Could not instantiate class $cls, even though a class was specified. (Make sure that the specified class file contains a class with the correct name.)");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">629</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">630</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">631</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $o = new $cls();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">632</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">633</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($o instanceof Task) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">634</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $task = $o;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">635</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">636</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;log ("  (Using TaskAdapter for: $taskType)", Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">637</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                // not a real task, try adapter</pre></td>
+</tr>
+<tr>
+<td class="lineCount">638</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $taskA = new TaskAdapter();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">639</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $taskA-&gt;setProxy($o);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">640</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $task = $taskA;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">641</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">642</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $task-&gt;setProject($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">643</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $task-&gt;setTaskType($taskType);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">644</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            // set default value, can be changed by the user</pre></td>
+</tr>
+<tr>
+<td class="lineCount">645</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $task-&gt;setTaskName($taskType);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">646</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log ("  +Task: " . $taskType, Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">647</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } catch (Exception $t) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">648</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Could not create task of type: " . $taskType, $t);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">649</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">650</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // everything fine return reference</pre></td>
+</tr>
+<tr>
+<td class="lineCount">651</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $task;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">652</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">653</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">654</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">655</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Create a datatype instance and return reference to it</pre></td>
+</tr>
+<tr>
+<td class="lineCount">656</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * See createTask() for explanation how this works</pre></td>
+</tr>
+<tr>
+<td class="lineCount">657</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">658</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param   string   Type name</pre></td>
+</tr>
+<tr>
+<td class="lineCount">659</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  object   A datatype object</pre></td>
+</tr>
+<tr>
+<td class="lineCount">660</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws  BuildException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">661</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *          Exception</pre></td>
+</tr>
+<tr>
+<td class="lineCount">662</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">663</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function createDataType($typeName) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">664</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        try {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">665</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $cls = "";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">666</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $typelwr = strtolower($typeName);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">667</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach ($this-&gt;typedefs as $name =&gt; $class) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">668</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                if (strtolower($name) === $typelwr) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">669</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $cls = StringHelper::unqualify($class);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">670</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    break;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">671</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">672</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">673</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">674</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($cls === "") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">675</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                return null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">676</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">677</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">678</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (!class_exists($cls)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">679</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new BuildException("Could not instantiate class $cls, even though a class was specified. (Make sure that the specified class file contains a class with the correct name.)");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">680</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">681</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">682</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $type = new $cls();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">683</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("  +Type: $typeName", Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">684</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (!($type instanceof DataType)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">685</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new Exception("$class is not an instance of phing.types.DataType");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">686</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">687</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($type instanceof ProjectComponent) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">688</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $type-&gt;setProject($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">689</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">690</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } catch (Exception $t) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">691</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Could not create type: $typeName", $t);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">692</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">693</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // everything fine return reference</pre></td>
+</tr>
+<tr>
+<td class="lineCount">694</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $type;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">695</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">696</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">697</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">698</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Executes a list of targets</pre></td>
+</tr>
+<tr>
+<td class="lineCount">699</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">700</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param   array  List of target names to execute</pre></td>
+</tr>
+<tr>
+<td class="lineCount">701</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">702</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws  BuildException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">703</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">704</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function executeTargets($targetNames) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">705</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($targetNames as $tname) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">706</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;executeTarget($tname);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">707</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">708</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">709</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">710</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">711</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Executes a target</pre></td>
+</tr>
+<tr>
+<td class="lineCount">712</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">713</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param   string  Name of Target to execute</pre></td>
+</tr>
+<tr>
+<td class="lineCount">714</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return  void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">715</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @throws  BuildException</pre></td>
+</tr>
+<tr>
+<td class="lineCount">716</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">717</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function executeTarget($targetName) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">718</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">719</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // complain about executing void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">720</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($targetName === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">721</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("No target specified");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">722</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">723</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">724</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // invoke topological sort of the target tree and run all targets</pre></td>
+</tr>
+<tr>
+<td class="lineCount">725</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // until targetName occurs.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">726</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $sortedTargets = $this-&gt;_topoSort($targetName, $this-&gt;targets);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">727</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">728</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $curIndex = (int) 0;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">729</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $curTarget = null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">730</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        do {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">731</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            try {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">732</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $curTarget = $sortedTargets[$curIndex++];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">733</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $curTarget-&gt;performTasks();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">734</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } catch (BuildException $exc) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">735</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;log("Execution of target \"".$curTarget-&gt;getName()."\" failed for the following reason: ".$exc-&gt;getMessage(), Project::MSG_ERR);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">736</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw $exc;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">737</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">738</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } while ($curTarget-&gt;getName() !== $targetName);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">739</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">740</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">741</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">742</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function resolveFile($fileName, $rootDir = null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">743</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($rootDir === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">744</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return $this-&gt;fileUtils-&gt;resolveFile($this-&gt;basedir, $fileName);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">745</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">746</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return $this-&gt;fileUtils-&gt;resolveFile($rootDir, $fileName);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">747</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">748</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">749</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">750</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">751</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Topologically sort a set of Targets.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">752</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  $root is the (String) name of the root Target. The sort is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">753</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         created in such a way that the sequence of Targets until the root</pre></td>
+</tr>
+<tr>
+<td class="lineCount">754</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         target is the minimum possible such sequence.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">755</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param  $targets is a array representing a "name to Target" mapping</pre></td>
+</tr>
+<tr>
+<td class="lineCount">756</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return An array of Strings with the names of the targets in</pre></td>
+</tr>
+<tr>
+<td class="lineCount">757</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *         sorted order.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">758</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">759</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function _topoSort($root, &amp;$targets) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">760</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">761</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $root     = (string) $root;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">762</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $ret      = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">763</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $state    = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">764</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $visiting = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">765</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">766</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // We first run a DFS based sort using the root as the starting node.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">767</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // This creates the minimum sequence of Targets to the root node.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">768</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // We then do a sort on any remaining unVISITED targets.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">769</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // This is unnecessary for doing our build, but it catches</pre></td>
+</tr>
+<tr>
+<td class="lineCount">770</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // circular dependencies or missing Targets on the entire</pre></td>
+</tr>
+<tr>
+<td class="lineCount">771</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // dependency tree, not just on the Targets that depend on the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">772</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // build Target.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">773</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">774</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;_tsort($root, $targets, $state, $visiting, $ret);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">775</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">776</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $retHuman = "";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">777</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        for ($i=0, $_i=count($ret); $i &lt; $_i; $i++) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">778</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $retHuman .= $ret[$i]-&gt;toString()." ";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">779</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">780</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Build sequence for target '$root' is: $retHuman", Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">781</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">782</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $keys = array_keys($targets);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">783</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        while($keys) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">784</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $curTargetName = (string) array_shift($keys);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">785</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (!isset($state[$curTargetName])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">786</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $st = null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">787</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">788</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $st = (string) $state[$curTargetName];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">789</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">790</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">791</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($st === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">792</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;_tsort($curTargetName, $targets, $state, $visiting, $ret);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">793</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } elseif ($st === "VISITING") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">794</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new Exception("Unexpected node in visiting state: $curTargetName");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">795</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">796</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">797</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">798</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $retHuman = "";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">799</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        for ($i=0,$_i=count($ret); $i &lt; $_i; $i++) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">800</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $retHuman .= $ret[$i]-&gt;toString()." ";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">801</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">802</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Complete build sequence is: $retHuman", Project::MSG_VERBOSE);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">803</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">804</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $ret;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">805</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">806</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">807</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // one step in a recursive DFS traversal of the target dependency tree.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">808</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // - The array "state" contains the state (VISITED or VISITING or null)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">809</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //   of all the target names.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">810</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // - The stack "visiting" contains a stack of target names that are</pre></td>
+</tr>
+<tr>
+<td class="lineCount">811</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //   currently on the DFS stack. (NB: the target names in "visiting" are</pre></td>
+</tr>
+<tr>
+<td class="lineCount">812</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    exactly the target names in "state" that are in the VISITING state.)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">813</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // 1. Set the current target to the VISITING state, and push it onto</pre></td>
+</tr>
+<tr>
+<td class="lineCount">814</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    the "visiting" stack.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">815</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // 2. Throw a BuildException if any child of the current node is</pre></td>
+</tr>
+<tr>
+<td class="lineCount">816</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    in the VISITING state (implies there is a cycle.) It uses the</pre></td>
+</tr>
+<tr>
+<td class="lineCount">817</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    "visiting" Stack to construct the cycle.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">818</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // 3. If any children have not been VISITED, tsort() the child.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">819</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    // 4. Add the current target to the Vector "ret" after the children</pre></td>
+</tr>
+<tr>
+<td class="lineCount">820</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    have been visited. Move the current target to the VISITED state.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">821</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    "ret" now contains the sorted sequence of Targets upto the current</pre></td>
+</tr>
+<tr>
+<td class="lineCount">822</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    //    Target.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">823</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">824</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function _tsort($root, &amp;$targets, &amp;$state, &amp;$visiting, &amp;$ret) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">825</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $state[$root] = "VISITING";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">826</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $visiting[]  = $root;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">827</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">828</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (!isset($targets[$root]) || !($targets[$root] instanceof Target)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">829</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $target = null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">830</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">831</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $target = $targets[$root];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">832</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">833</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">834</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        // make sure we exist</pre></td>
+</tr>
+<tr>
+<td class="lineCount">835</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($target === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">836</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $sb = "Target '$root' does not exist in this project.";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">837</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            array_pop($visiting);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">838</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (!empty($visiting)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">839</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $parent = (string) $visiting[count($visiting)-1];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">840</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $sb .= "It is used from target '$parent'.";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">841</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">842</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException($sb);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">843</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">844</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">845</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $deps = $target-&gt;getDependencies();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">846</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">847</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        while($deps) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">848</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $cur = (string) array_shift($deps);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">849</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if (!isset($state[$cur])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">850</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $m = null;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">851</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">852</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $m = (string) $state[$cur];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">853</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">854</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($m === null) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">855</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                // not been visited</pre></td>
+</tr>
+<tr>
+<td class="lineCount">856</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;_tsort($cur, $targets, $state, $visiting, $ret);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">857</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            } elseif ($m == "VISITING") {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">858</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                // currently visiting this node, so have a cycle</pre></td>
+</tr>
+<tr>
+<td class="lineCount">859</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw $this-&gt;_makeCircularException($cur, $visiting);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">860</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">861</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">862</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">863</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $p = (string) array_pop($visiting);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">864</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($root !== $p) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">865</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new Exception("Unexpected internal error: expected to pop $root but got $p");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">866</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">867</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">868</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $state[$root] = "VISITED";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">869</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $ret[] = $target;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">870</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">871</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">872</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function _makeCircularException($end, $stk) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">873</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $sb = "Circular dependency: $end";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">874</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        do {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">875</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $c = (string) array_pop($stk);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">876</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $sb .= " &lt;- ".$c;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">877</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } while($c != $end);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">878</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return new BuildException($sb);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">879</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">880</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">881</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">882</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Adds a reference to an object. This method is called when the parser</pre></td>
+</tr>
+<tr>
+<td class="lineCount">883</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * detects a id="foo" attribute. It passes the id as $name and a reference</pre></td>
+</tr>
+<tr>
+<td class="lineCount">884</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * to the object assigned to this id as $value</pre></td>
+</tr>
+<tr>
+<td class="lineCount">885</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">886</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function addReference($name, $object) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">887</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;references[$name])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">888</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;log("Overriding previous definition of reference to $name", Project::MSG_WARN);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">889</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">890</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Adding reference: $name -&gt; ".get_class($object), Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">891</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;references[$name] = $object;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">892</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">893</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">894</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">895</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the references array.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">896</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return array</pre></td>
+</tr>
+<tr>
+<td class="lineCount">897</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">898</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getReferences() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">899</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;references;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">900</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">901</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">902</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">903</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns a specific reference.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">904</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $key The reference id/key.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">905</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return Reference or null if not defined</pre></td>
+</tr>
+<tr>
+<td class="lineCount">906</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">907</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getReference($key)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">908</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">909</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if (isset($this-&gt;references[$key])) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">910</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            return $this-&gt;references[$key];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">911</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">912</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return null; // just to be explicit</pre></td>
+</tr>
+<tr>
+<td class="lineCount">913</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">914</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">915</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">916</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Abstracting and simplifyling Logger calls for project messages</pre></td>
+</tr>
+<tr>
+<td class="lineCount">917</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">918</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function log($msg, $level = Project::MSG_INFO) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">919</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;logObject($this, $msg, $level);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">920</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">921</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">922</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function logObject($obj, $msg, $level) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">923</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;fireMessageLogged($obj, $msg, $level);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">924</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">925</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">926</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function addBuildListener(BuildListener $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">927</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;listeners[] = $listener;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">928</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">929</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">930</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function removeBuildListener(BuildListener $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">931</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $newarray = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">932</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        for ($i=0, $size=count($this-&gt;listeners); $i &lt; $size; $i++) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">933</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if ($this-&gt;listeners[$i] !== $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">934</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $newarray[] = $this-&gt;listeners[$i];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">935</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">936</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">937</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;listeners = $newarray;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">938</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">939</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">940</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function getBuildListeners() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">941</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;listeners;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">942</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">943</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">944</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireBuildStarted() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">945</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event = new BuildEvent($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">946</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">947</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;buildStarted($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">948</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">949</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">950</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">951</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireBuildFinished($exception) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">952</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event = new BuildEvent($this);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">953</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event-&gt;setException($exception);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">954</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">955</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;buildFinished($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">956</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">957</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">958</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">959</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireTargetStarted($target) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">960</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event = new BuildEvent($target);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">961</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">           foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">962</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;targetStarted($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">963</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">964</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">965</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">966</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireTargetFinished($target, $exception) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">967</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event = new BuildEvent($target);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">968</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event-&gt;setException($exception);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">969</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">970</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;targetFinished($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">971</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">972</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">973</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">974</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireTaskStarted($task) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">975</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event = new BuildEvent($task);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">976</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">977</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;taskStarted($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">978</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">979</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">980</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">981</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireTaskFinished($task, $exception) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">982</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event = new BuildEvent($task);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">983</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event-&gt;setException($exception);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">984</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">985</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;taskFinished($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">986</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">987</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">988</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">989</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireMessageLoggedEvent($event, $message, $priority) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">990</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $event-&gt;setMessage($message, $priority);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">991</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach($this-&gt;listeners as $listener) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">992</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $listener-&gt;messageLogged($event);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">993</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">994</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">995</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">996</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    function fireMessageLogged($object, $message, $priority) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">997</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;fireMessageLoggedEvent(new BuildEvent($object), $message, $priority);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">998</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">999</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">}</pre></td>
+</tr>
+</table>
+<br><table width="100%">
+<tr><td><hr noshade size="1"></td></tr>
+<tr><td class="small">Report generated at 2011-07-09T21:37:01+02:00</td></tr>
+</table>
+</body>
+</html>

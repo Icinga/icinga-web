@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mapper.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: Mapper.php 532 2009-08-21 13:32:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -134,7 +134,7 @@ class Mapper extends DataType {
      *
      * You must not set any other attribute if you make it a reference.
      */
-    function setRefid($r) {
+    function setRefid(Reference $r) {
         if ($this->type !== null || $this->from !== null || $this->to !== null) {
             throw DataType::tooManyAttributes();
         }
