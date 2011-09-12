@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: EchoTask.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: EchoTask.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,12 +26,12 @@ include_once 'phing/Task.php';
  *
  *  @author   Michiel Rook <michiel.rook@gmail.com>
  *  @author   Andreas Aderhold, andi@binarycloud.com
- *  @version  $Revision: 1.5 $ $Date: 2007-02-05 16:19:00 +0100 (Mon, 05 Feb 2007) $
+ *  @version  $Revision: 552 $ $Date: 2009-08-29 14:18:13 +0200 (Sat, 29 Aug 2009) $
  *  @package  phing.tasks.system
  */
 
 class EchoTask extends Task {
-	
+    
     protected $msg = "";
     
     protected $file = "";
@@ -40,54 +40,54 @@ class EchoTask extends Task {
     
     protected $level = "info";
 
-    function main() {		
-		switch ($this->level)
-		{
-			case "error": $loglevel = Project::MSG_ERR; break;
-			case "warning": $loglevel = Project::MSG_WARN; break;
-			case "info": $loglevel = Project::MSG_INFO; break;
-			case "verbose": $loglevel = Project::MSG_VERBOSE; break;
-			case "debug": $loglevel = Project::MSG_DEBUG; break;
-		}
-		
-		if (empty($this->file))
-		{
-        	$this->log($this->msg, $loglevel);
-		}
-		else
-		{
-			if ($this->append)
-			{
-				$handle = fopen($this->file, "a");
-			}
-			else
-			{
-				$handle = fopen($this->file, "w");
-			}
-			
-			fwrite($handle, $this->msg);
-			
-			fclose($handle);
-		}
+    function main() {       
+        switch ($this->level)
+        {
+            case "error": $loglevel = Project::MSG_ERR; break;
+            case "warning": $loglevel = Project::MSG_WARN; break;
+            case "info": $loglevel = Project::MSG_INFO; break;
+            case "verbose": $loglevel = Project::MSG_VERBOSE; break;
+            case "debug": $loglevel = Project::MSG_DEBUG; break;
+        }
+        
+        if (empty($this->file))
+        {
+            $this->log($this->msg, $loglevel);
+        }
+        else
+        {
+            if ($this->append)
+            {
+                $handle = fopen($this->file, "a");
+            }
+            else
+            {
+                $handle = fopen($this->file, "w");
+            }
+            
+            fwrite($handle, $this->msg);
+            
+            fclose($handle);
+        }
     }
     
     /** setter for file */
     function setFile($file)
     {
-		$this->file = (string) $file;
-	}
+        $this->file = (string) $file;
+    }
 
     /** setter for level */
     function setLevel($level)
     {
-		$this->level = (string) $level;
-	}
+        $this->level = (string) $level;
+    }
 
     /** setter for append */
     function setAppend($append)
     {
-		$this->append = $append;
-	}
+        $this->append = $append;
+    }
 
     /** setter for message */
     function setMsg($msg) {

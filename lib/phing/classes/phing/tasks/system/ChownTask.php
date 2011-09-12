@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: ChownTask.php 353 2008-02-06 19:43:18Z hans $
+ *  $Id: ChownTask.php 765 2010-04-13 20:43:37Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,8 +25,8 @@ include_once 'phing/types/FileSet.php';
 /**
  * Task that changes the permissions on a file/directory.
  *
- * @author	  Mehmet Emre Yilmaz <mehmety@gmail.com>
- * @version   $Revision$
+ * @author    Mehmet Emre Yilmaz <mehmety@gmail.com>
+ * @version   $Revision: 765 $
  * @package   phing.tasks.system
  */
 class ChownTask extends Task {
@@ -39,21 +39,21 @@ class ChownTask extends Task {
 
     private $filesystem;
 
-	private $quiet = false;
-	private $failonerror = true;
-	private $verbose = true;
+    private $quiet = false;
+    private $failonerror = true;
+    private $verbose = true;
 
-	/**
-	 * This flag means 'note errors to the output, but keep going'
-	 * @see setQuiet()
-	 */
+    /**
+     * This flag means 'note errors to the output, but keep going'
+     * @see setQuiet()
+     */
     function setFailonerror($bool) {
         $this->failonerror = $bool;
     }
 
     /**
      * Set quiet mode, which suppresses warnings if chown() fails.
-	 * @see setFailonerror()
+     * @see setFailonerror()
      */
     function setQuiet($bool) {
         $this->quiet = $bool;
@@ -78,8 +78,11 @@ class ChownTask extends Task {
         $this->file = $file;
     }
 
-    function setUser($str) {
-        $this->user = $str;
+    /**
+     * Sets the user
+     */
+    function setUser($user) {
+        $this->user = $user;
     }
 
     /**
@@ -111,12 +114,8 @@ class ChownTask extends Task {
         }
 
         if ($this->user === null) {
-            throw new BuildException("You have to specify a user for chown.");
+            throw new BuildException("You have to specify an owner for chown.");
         }
-
-        // check for mode to be in the correct format
-
-
     }
 
     /**
@@ -124,8 +123,15 @@ class ChownTask extends Task {
      * @return void
      */
     private function chown() {
+        $userElements = explode('.', $this->user);
 
-		$user= $this->user;
+        $user = $userElements[0];
+        
+        if (count($userElements) > 1) {
+            $group = $userElements[1];
+        } else {
+            $group = null;
+        }
 
         // counters for non-verbose output
         $total_files = 0;
@@ -134,7 +140,7 @@ class ChownTask extends Task {
         // one file
         if ($this->file !== null) {
             $total_files = 1;
-            $this->chownFile($this->file, $user);
+            $this->chownFile($this->file, $user, $group);
         }
 
         // filesets
@@ -149,45 +155,51 @@ class ChownTask extends Task {
             $filecount = count($srcFiles);
             $total_files = $total_files + $filecount;
             for ($j = 0; $j < $filecount; $j++) {
-                $this->chownFile(new PhingFile($fromDir, $srcFiles[$j]), $user);
+                $this->chownFile(new PhingFile($fromDir, $srcFiles[$j]), $user, $group);
             }
 
             $dircount = count($srcDirs);
             $total_dirs = $total_dirs + $dircount;
             for ($j = 0; $j <  $dircount; $j++) {
-                $this->chownFile(new PhingFile($fromDir, $srcDirs[$j]), $user);
+                $this->chownFile(new PhingFile($fromDir, $srcDirs[$j]), $user, $group);
             }
         }
 
         if (!$this->verbose) {
-            $this->log('Total files changed to ' . vsprintf('%o', $mode) . ': ' . $total_files);
-            $this->log('Total directories changed to ' . vsprintf('%o', $mode) . ': ' . $total_dirs);
+            $this->log('Total files changed to ' . $user . ($group ? "." . $group : "") . ': ' . $total_files);
+            $this->log('Total directories changed to ' . $user . ($group ? "." . $group : "") . ': ' . $total_dirs);
         }
 
     }
 
-	/**
-	 * Actually change the mode for the file.
-	 * @param PhingFile $file
-	 * @param int $mode
-	 */
-    private function chownFile(PhingFile $file, $user) {
+    /**
+     * Actually change the mode for the file.
+     * @param PhingFile $file
+     * @param string $user
+     * @param string $group
+     */
+    private function chownFile(PhingFile $file, $user, $group = "") {
         if ( !$file->exists() ) {
             throw new BuildException("The file " . $file->__toString() . " does not exist");
         }
 
-		try {
-			$file->setUser($user);
-			if ($this->verbose) {
-				$this->log("Changed file owner on '" . $file->__toString() ."' to " . $user);
-			}
-		} catch (Exception $e) {
-			if($this->failonerror) {
-				throw $e;
-			} else {
-				$this->log($e->getMessage(), $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
-			}
-		}
+        try {
+            $file->setUser($user);
+            
+            if (!empty($group)) {
+                $file->setGroup($group);
+            }
+            
+            if ($this->verbose) {
+                $this->log("Changed file owner on '" . $file->__toString() ."' to " . $user . ($group ? "." . $group : ""));
+            }
+        } catch (Exception $e) {
+            if($this->failonerror) {
+                throw $e;
+            } else {
+                $this->log($e->getMessage(), $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
+            }
+        }
     }
 
 }

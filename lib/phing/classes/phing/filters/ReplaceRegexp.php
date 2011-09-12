@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: ReplaceRegexp.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: ReplaceRegexp.php 779 2010-05-13 03:57:59Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -36,7 +36,7 @@ include_once 'phing/types/RegularExpression.php';
  * </pre>
  *
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.5 $
+ * @version   $Revision: 779 $
  * @package   phing.filters
  */
 class ReplaceRegexp extends BaseFilterReader implements ChainableReader {
@@ -97,7 +97,7 @@ class ReplaceRegexp extends BaseFilterReader implements ChainableReader {
             $regexp = $exptype->getRegexp($this->project);
             try {
                 $buffer = $regexp->replace($buffer);
-                $this->log("Performing regexp replace: /".$regexp->getPattern()."/".$regexp->getReplace()."/g".($regexp->getIgnoreCase() ? 'i' : ''), Project::MSG_VERBOSE);
+                $this->log("Performing regexp replace: /".$regexp->getPattern()."/".$regexp->getReplace()."/g".$regexp->getModifiers(), Project::MSG_VERBOSE);
             } catch (Exception $e) {
                 // perhaps mismatch in params (e.g. no replace or pattern specified)
                 $this->log("Error performing regexp replace: " . $e->getMessage(), Project::MSG_WARN);

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: ConsoleReader.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: ConsoleReader.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ include_once 'phing/system/io/Reader.php';
  * 
  * @author Hans Lellelid <hans@xmpl.org>
  * @author Matthew Hershberger <matthewh@lightsp.com>
- * @version $Revision: 1.4 $
+ * @version $Revision: 552 $
  * @package phing.system.io
  */
 class ConsoleReader extends Reader {
@@ -58,11 +58,11 @@ class ConsoleReader extends Reader {
     }   
         
     function close() {
-		// STDIN is always open
+        // STDIN is always open
     }
 
     function open() {
-		// STDIN is always open
+        // STDIN is always open
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: RuntimeConfigurable.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: RuntimeConfigurable.php 829 2010-08-25 15:14:53Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.6 $
+ * @version   $Revision: 829 $
  * @package   phing
  */
 class RuntimeConfigurable {
@@ -94,8 +94,6 @@ class RuntimeConfigurable {
             if (isset($this->attributes["id"])) {
                 $id = $this->attributes["id"];
             }
-
-            $this->attributes = null;
 
             if ($this->characters) {
                 ProjectConfigurator::addText($project, $this->wrappedObject, (string) $this->characters);

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: LineContainsRegexp.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: LineContainsRegexp.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -42,7 +42,7 @@ include_once 'phing/filters/ChainableReader.php';
  *
  * @author    Yannick Lecaillez <yl@seasonfive.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.8 $
+ * @version   $Revision: 526 $
  * @see       FilterReader
  * @package   phing.filters
  */

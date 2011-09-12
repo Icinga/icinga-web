@@ -113,6 +113,15 @@
 				<parameter name="ADD_HOST_COMMENT">
         			<parameter name="title">Add a host comment</parameter>
         			<parameter name="icon_class">icinga-icon-comment</parameter>
+        			<parameter name="seperator">true</parameter>
+        		</parameter>
+        		<parameter name="SCHEDULE_HOST_CHECK">
+        			<parameter name="title">Schedule next host check</parameter>
+        			<parameter name="icon_class">icinga-icon-cog</parameter>
+        		</parameter>
+        		<parameter name="SCHEDULE_FORCED_HOST_CHECK">
+        			<parameter name="title">Schedule next forced host check</parameter>
+        			<parameter name="icon_class">icinga-icon-cog</parameter>
         		</parameter>
         		<parameter name="SCHEDULE_FORCED_HOST_SVC_CHECKS">
         			<parameter name="title">Schedule a check of all services on this host</parameter>

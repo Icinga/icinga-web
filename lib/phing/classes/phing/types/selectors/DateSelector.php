@@ -1,7 +1,7 @@
 <?php
 
 /*
- * $Id: DateSelector.php 396 2008-10-15 14:26:00Z hans $
+ * $Id: DateSelector.php 1207 2011-07-07 12:49:41Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +29,8 @@ require_once 'phing/types/selectors/BaseExtendSelector.php';
  *
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Bruce Atherton <bruce@callenish.com> (Ant)
- * @version   $Revision: 1.10 $
- * @package   phing.types.selecctors
+ * @version   $Revision: 1207 $
+ * @package   phing.types.selectors
  */
 class DateSelector extends BaseExtendSelector {
 

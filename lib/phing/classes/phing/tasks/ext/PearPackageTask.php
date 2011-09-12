@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PearPackageTask.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: PearPackageTask.php 1162 2011-06-17 21:24:01Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -74,7 +74,7 @@ include_once 'phing/types/FileSet.php';
  * 
  * @author   Hans Lellelid <hans@xmpl.org>
  * @package  phing.tasks.ext
- * @version  $Revision: 1.9 $
+ * @version  $Id: PearPackageTask.php 1162 2011-06-17 21:24:01Z mrook $
  */
 class PearPackageTask extends MatchingTask {
     
@@ -100,6 +100,12 @@ class PearPackageTask extends MatchingTask {
     
     /** Nested <mapping> (complex options) types. */
     protected $mappings = array();
+    
+    /**
+     * Nested <role> elements
+     * @var PearPkgRole[]
+     */
+    protected $roles = array();
     
     public function init() {
         include_once 'PEAR/PackageFileManager.php';
@@ -146,6 +152,11 @@ class PearPackageTask extends MatchingTask {
             
         if (PEAR::isError($e)) {
             throw new BuildException("Unable to set options.", new Exception($e->getMessage()));
+        }
+        
+        // convert roles
+        foreach ($this->roles as $role) {
+            $this->pkg->addRole($role->getExtension(), $role->getRole());
         }
     }
     
@@ -246,7 +257,7 @@ class PearPackageTask extends MatchingTask {
      *
      * @return FileSet The created fileset object
      */
-    function createFileSet() {
+    public function createFileSet() {
         $num = array_push($this->filesets, new FileSet());
         return $this->filesets[$num-1];
     }
@@ -289,7 +300,7 @@ class PearPackageTask extends MatchingTask {
     /**
      * Handles nested generic <option> elements.
      */
-    function createOption() {
+    public function createOption() {
         $o = new PearPkgOption();
         $this->options[] = $o;
         return $o;
@@ -298,10 +309,21 @@ class PearPackageTask extends MatchingTask {
     /**
      * Handles nested generic <option> elements.
      */
-    function createMapping() {
+    public function createMapping() {
         $o = new PearPkgMapping();
         $this->mappings[] = $o;
         return $o;
+    }
+    
+    /**
+     * Handles nested <role> elements
+     * @return PearPkgRole
+     */
+    public function createRole()
+    {
+        $role = new PearPkgRole();
+        $this->roles[] = $role;
+        return $role;
     }
 }
 
@@ -309,6 +331,8 @@ class PearPackageTask extends MatchingTask {
 
 /**
  * Generic option class is used for non-complex options.
+ *
+ * @package  phing.tasks.ext
  */
 class PearPkgOption {
     
@@ -326,6 +350,8 @@ class PearPkgOption {
 
 /**
  * Handles complex options <mapping> elements which are hashes (assoc arrays).
+ *
+ * @package  phing.tasks.ext
  */
 class PearPkgMapping {
 
@@ -369,6 +395,8 @@ class PearPkgMapping {
 
 /**
  * Sub-element of <mapping>.
+ *
+ * @package  phing.tasks.ext
  */
 class PearPkgMappingElement {
 
@@ -418,4 +446,58 @@ class PearPkgMappingElement {
         return $e;
     }
     
+}
+
+/**
+ * Encapsulates file roles
+ *
+ * @package phing.tasks.ext
+ */
+class PearPkgRole
+{
+    /**
+     * @var string
+     */
+    private $extension;
+    
+    /**
+     * @var string
+     */
+    private $role;
+    
+    /**
+     * Sets the file extension
+     * @param string $extension
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+    
+    /**
+     * Retrieves the file extension
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+    
+    /**
+     * Sets the role
+     * @param string $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+    
+    /**
+     * Retrieves the role
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 }

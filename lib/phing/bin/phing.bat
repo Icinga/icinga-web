@@ -2,7 +2,7 @@
 
 rem *********************************************************************
 rem ** the phing build script for Windows based systems
-rem ** $Id: phing.bat 384 2008-08-19 17:56:05Z mrook $
+rem ** $Id: phing.bat 1136 2011-06-08 11:34:56Z mrook $
 rem *********************************************************************
 
 rem This script will do the following:
@@ -33,7 +33,7 @@ goto run
 goto cleanup
 
 :run
-%PHP_COMMAND% -d html_errors=off -qC "%PHING_HOME%\bin\phing.php" %1 %2 %3 %4 %5 %6 %7 %8 %9
+"%PHP_COMMAND%" -d html_errors=off -qC "%PHING_HOME%\bin\phing.php" %*
 goto cleanup
 
 :no_phpcommand

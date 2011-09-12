@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: CreoleSQLExecTask.php 266 2007-10-25 01:32:38Z hans $
+ *  $Id: CreoleSQLExecTask.php 1084 2011-05-06 09:55:25Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -48,8 +48,8 @@ include_once 'phing/system/io/StringReader.php';
  * @author    Jeff Martin <jeff@custommonkey.org> (Ant)
  * @author    Michael McCallum <gholam@xtra.co.nz> (Ant)
  * @author    Tim Stephenson <tim.stephenson@sybase.com> (Ant)
- * @package   phing.tasks.ext
- * @version   $Revision: 1.21 $
+ * @package   phing.tasks.ext.creole
+ * @version   $Revision: 1084 $
  */
 class CreoleSQLExecTask extends CreoleTask {
 
@@ -374,24 +374,24 @@ class CreoleSQLExecTask extends CreoleTask {
         $sql = "";
         $line = "";
 
-		$buffer = '';
+        $buffer = '';
 
         if ((is_array($this->filterChains)) && (!empty($this->filterChains))) {    
             $in = FileUtils::getChainedReader(new BufferedReader($reader), $this->filterChains, $this->getProject());
-			while(-1 !== ($read = $in->read())) { // -1 indicates EOF
-				   $buffer .= $read;
+            while(-1 !== ($read = $in->read())) { // -1 indicates EOF
+                   $buffer .= $read;
             }
             $lines = explode("\n", $buffer);
         } else {
-	        $in = new BufferedReader($reader);
+            $in = new BufferedReader($reader);
 
             while (($line = $in->readLine()) !== null) {
-				$lines[] = $line;
-			}
-		}
+                $lines[] = $line;
+            }
+        }
 
         try {
-			foreach ($lines as $line) {
+            foreach ($lines as $line) {
                 $line = trim($line);
                 $line = ProjectConfigurator::replaceProperties($this->project, $line,
                         $this->project->getProperties());
@@ -470,7 +470,7 @@ class CreoleSQLExecTask extends CreoleTask {
     
     /**
      * print any results in the statement.
-     * @throw SQLException
+     * @throws SQLException
      */
     protected function printResults($out = null) {
         
@@ -542,6 +542,8 @@ class CreoleSQLExecTask extends CreoleTask {
  * Transactions allow several files or blocks of statements
  * to be executed using the same JDBC connection and commit
  * operation in between.
+ *
+ * @package   phing.tasks.ext.creole
  */
 class SQLExecTransaction {
 

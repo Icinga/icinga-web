@@ -1,6 +1,6 @@
 <?php
 /*
- * $Id: Target.php 175 2007-03-14 13:52:03Z hans $
+ * $Id: Target.php 915 2010-10-12 02:30:52Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,8 +26,8 @@ include_once 'phing/TaskContainer.php';
  *  abstract class {@link TaskContainer}
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
- *  @copyright � 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.10 $ $Date: 2007-03-14 14:52:03 +0100 (Wed, 14 Mar 2007) $
+ *  @copyright 2001,2002 THYRELL. All rights reserved
+ *  @version   $Revision: 915 $ $Date: 2010-10-12 04:30:52 +0200 (Tue, 12 Oct 2010) $
  *  @access    public
  *  @see       TaskContainer
  *  @package   phing
@@ -52,6 +52,12 @@ class Target implements TaskContainer {
     
     /** description of this target */
     private $description;
+
+    /**
+     * Whether to hide target in targets list (-list -p switches)
+     * @var boolean
+     */
+    private $hidden = false;
     
     /** reference to project */
     private $project;
@@ -129,6 +135,37 @@ class Target implements TaskContainer {
      */
     function getName() {
         return (string) $this->name;
+    }
+
+    /**
+     * Set target status. If true, target does not come in phing -list
+     *
+     * @return Target
+     */
+    public function setHidden($flag)
+    {
+        $this->hidden = (boolean) $flag;
+        return $this;
+    }
+
+    /**
+     * Get target status. If true, target does not come in phing -list
+     *
+     * @return boolean
+     */
+    public function getHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * Alias for getHidden()
+     *
+     * @return boolean
+     */
+    public function isHidden()
+    {
+        return $this->getHidden();
     }
 
     /**

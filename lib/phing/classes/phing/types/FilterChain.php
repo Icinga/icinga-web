@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: FilterChain.php 247 2007-10-16 21:09:37Z hans $
+ *  $Id: FilterChain.php 1084 2011-05-06 09:55:25Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -21,6 +21,7 @@
 
 include_once 'phing/types/DataType.php';
 include_once 'phing/filters/HeadFilter.php';
+include_once 'phing/filters/IconvFilter.php';
 include_once 'phing/filters/TailFilter.php';
 include_once 'phing/filters/LineContains.php';
 include_once 'phing/filters/LineContainsRegexp.php';
@@ -28,6 +29,7 @@ include_once 'phing/filters/ExpandProperties.php';
 include_once 'phing/filters/PrefixLines.php';
 include_once 'phing/filters/ReplaceRegexp.php';
 include_once 'phing/filters/ReplaceTokens.php';
+include_once 'phing/filters/ReplaceTokensWithFile.php';
 include_once 'phing/filters/StripPhpComments.php';
 include_once 'phing/filters/StripLineBreaks.php';
 include_once 'phing/filters/StripLineComments.php';
@@ -38,19 +40,22 @@ include_once 'phing/filters/TranslateGettext.php';
 include_once 'phing/filters/XincludeFilter.php';
 include_once 'phing/filters/XsltFilter.php';
 
-/*
+/**
  * FilterChain may contain a chained set of filter readers.
  *
  * @author    Yannick Lecaillez <yl@seasonfive.com>
- * @version   $Revision: 1.11 $
+ * @version   $Revision: 1084 $
  * @package   phing.types
  */
 class FilterChain extends DataType {
 
     private $filterReaders = array();
 
-    function __construct(Project $project) {
-        $this->project = $project;
+    function __construct($project = null) {
+        if ($project)
+        {
+            $this->project = $project;
+        }
     }
 
     function getFilterReaders() {
@@ -66,72 +71,82 @@ class FilterChain extends DataType {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addHeadFilter(HeadFilter $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
+    function addIconvFilter(IconvFilter $o) {
+        $o->setProject($this->project);
+        $this->filterReaders[] = $o;
+    }
+
     function addTailFilter(TailFilter $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addLineContains(LineContains $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addLineContainsRegExp(LineContainsRegExp $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addPrefixLines(PrefixLines $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addReplaceTokens(ReplaceTokens $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
 
+    function addReplaceTokensWithFile(ReplaceTokensWithFile $o) { 
+        $o->setProject($this->project); 
+        $this->filterReaders[] = $o; 
+    } 
+
     function addReplaceRegexp(ReplaceRegexp $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addStripPhpComments(StripPhpComments $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addStripLineBreaks(StripLineBreaks $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addStripLineComments(StripLineComments $o) {
         $o->setProject($this->project);
-        $this->filterReaders[] = $o;        
+        $this->filterReaders[] = $o;
     }
-    
-	function addStripWhitespace(StripWhitespace $o) {
+
+    function addStripWhitespace(StripWhitespace $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
-	function addTidyFilter(TidyFilter $o) {
+
+    function addTidyFilter(TidyFilter $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-	
+
     function addTabToSpaces(TabToSpaces $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addXincludeFilter(XincludeFilter $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
@@ -141,25 +156,25 @@ class FilterChain extends DataType {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
-    
+
     function addFilterReader(PhingFilterReader $o) {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
     }
 
     /*
-     * Makes this instance in effect a reference to another FilterChain 
+     * Makes this instance in effect a reference to another FilterChain
      * instance.
      *
      * <p>You must not set another attribute or nest elements inside
      * this element if you make it a reference.</p>
      *
-     * @param r the reference to which this instance is associated
-     * @throw BuildException if this instance already has been configured.
+     * @param  $r the reference to which this instance is associated
+     * @throws BuildException if this instance already has been configured.
     */
     function setRefid(Reference $r) {
-    
-        if ( count($this->filterReaders) === 0 ) {
+
+        if ( count($this->filterReaders) !== 0 ) {
             throw $this->tooManyAttributes();
         }
 
@@ -172,5 +187,5 @@ class FilterChain extends DataType {
         }
         parent::setRefid($r);
     }
-    
+
 }

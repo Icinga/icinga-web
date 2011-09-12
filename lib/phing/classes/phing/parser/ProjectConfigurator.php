@@ -1,6 +1,6 @@
 <?php
 /*
- * $Id: ProjectConfigurator.php 147 2007-02-06 20:32:22Z hans $
+ * $Id: ProjectConfigurator.php 1000 2010-11-24 10:28:55Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,6 +24,8 @@ include_once 'phing/system/io/FileReader.php';
 include_once 'phing/BuildException.php';
 include_once 'phing/system/lang/FileNotFoundException.php';
 include_once 'phing/system/io/PhingFile.php';
+include_once 'phing/parser/PhingXMLContext.php';
+include_once 'phing/IntrospectionHelper.php';
 
 /**
  * The datatype handler class.
@@ -31,9 +33,9 @@ include_once 'phing/system/io/PhingFile.php';
  * This class handles the occurance of registered datatype tags like
  * FileSet
  *
- * @author      Andreas Aderhold <andi@binarycloud.com>
- * @copyright � 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.17 $ $Date: 2007-02-06 21:32:22 +0100 (Tue, 06 Feb 2007) $
+ * @author    Andreas Aderhold <andi@binarycloud.com>
+ * @copyright 2001,2002 THYRELL. All rights reserved
+ * @version   $Revision: 1000 $ $Date: 2010-11-24 11:28:55 +0100 (wo, 24 nov 2010) $
  * @access    public
  * @package   phing.parser
  */
@@ -44,7 +46,24 @@ class ProjectConfigurator {
     
     public $buildFile;
     public $buildFileParent;
-        
+
+    /** Targets in current file */
+    private $currentTargets;
+
+    /** Synthetic target that will be called at the end to the parse phase */
+    private $parseEndTarget;
+
+    /** Name of the current project */
+    private $currentProjectName;
+
+    private $isParsing = true;
+
+    /**
+     * Indicates whether the project tag attributes are to be ignored
+     * when processing a particular build file.
+     */
+    private $ignoreProjectTag = false;
+
     /**
      * Static call to ProjectConfigurator. Use this to configure a
      * project. Do not use the new operator.
@@ -71,6 +90,64 @@ class ProjectConfigurator {
         $this->project = $project;
         $this->buildFile = new PhingFile($buildFile->getAbsolutePath());
         $this->buildFileParent = new PhingFile($this->buildFile->getParent());
+        $this->currentTargets = array();
+        $this->parseEndTarget = new Target();
+    }
+
+    /**
+     * find out the build file
+     * @return  the build file to which the xml context belongs
+     */
+    public function getBuildFile() {
+        return $this->buildFile;
+    }
+
+    /**
+     * find out the parent build file of this build file
+     * @return the parent build file of this build file
+     */
+    public function getBuildFileParent() {
+        return $this->buildFileParent;
+    }
+
+    /**
+     * find out the current project name
+     * @return current project name
+     */
+    public function getCurrentProjectName() {
+        return $this->currentProjectName;
+    }
+
+    /**
+     * set the name of the current project
+     * @param name name of the current project
+     */
+    public function setCurrentProjectName($name) {
+        $this->currentProjectName = $name;
+    }
+
+    /**
+     * tells whether the project tag is being ignored
+     * @return whether the project tag is being ignored
+     */
+    public function isIgnoringProjectTag() {
+        return $this->ignoreProjectTag;
+    }
+
+    /**
+     *  sets the flag to ignore the project tag
+     * @param flag to ignore the project tag
+     */
+    public function setIgnoreProjectTag($flag) {
+        $this->ignoreProjectTag = $flag;
+    }
+
+    public function &getCurrentTargets () {
+      return $this->currentTargets;
+    }
+
+    public function isParsing () {
+      return $this->isParsing;
     }
 
     /**
@@ -82,7 +159,26 @@ class ProjectConfigurator {
      * @access private
      */
     protected function parse() {
-        try {
+      try {
+        // get parse context
+        $ctx = $this->project->getReference("phing.parsing.context");
+        if (null == $ctx) {
+          // make a new context and register it with project
+          $ctx = new PhingXMLContext($this->project);
+          $this->project->addReference("phing.parsing.context", $ctx);
+        }
+
+        //record this parse with context
+        $ctx->addImport($this->buildFile);
+
+        if (count($ctx->getImportStack()) > 1) {
+          // this is an imported file
+          // modify project tag parse behavior
+          $this->setIgnoreProjectTag(true);
+        }
+        // push action onto global stack
+        $ctx->startConfigure($this);
+
             $reader = new BufferedReader(new FileReader($this->buildFile));
             $parser = new ExpatParser($reader);
             $parser->parserSetOption(XML_OPTION_CASE_FOLDING,0);
@@ -90,9 +186,26 @@ class ProjectConfigurator {
             $this->project->log("parsing buildfile ".$this->buildFile->getName(), Project::MSG_VERBOSE);
             $parser->parse();
             $reader->close();
+
+            // mark parse phase as completed
+            $this->isParsing = false;
+            // execute delayed tasks
+            $this->parseEndTarget->main();
+            // pop this action from the global stack
+            $ctx->endConfigure();
         } catch (Exception $exc) {
             throw new BuildException("Error reading project file", $exc);
         }
+    }
+
+    /**
+     * Delay execution of a task until after the current parse phase has 
+     * completed.
+     *
+     * @param Task $task Task to execute after parse
+     */
+    public function delayTaskUntilParseEnd ($task) {
+      $this->parseEndTarget->addTask($task);
     }
 
     /**
@@ -111,16 +224,16 @@ class ProjectConfigurator {
             $target = $target->getProxy();
         }
         
-		// if the target is an UnknownElement, this means that the tag had not been registered
-		// when the enclosing element (task, target, etc.) was configured.  It is possible, however, 
-		// that the tag was registered (e.g. using <taskdef>) after the original configuration.
-		// ... so, try to load it again:
-		if ($target instanceof UnknownElement) {
-			$tryTarget = $project->createTask($target->getTaskType());
-			if ($tryTarget) {
-				$target = $tryTarget;
-			}
-		}
+        // if the target is an UnknownElement, this means that the tag had not been registered
+        // when the enclosing element (task, target, etc.) was configured.  It is possible, however, 
+        // that the tag was registered (e.g. using <taskdef>) after the original configuration.
+        // ... so, try to load it again:
+        if ($target instanceof UnknownElement) {
+            $tryTarget = $project->createTask($target->getTaskType());
+            if ($tryTarget) {
+                $target = $tryTarget;
+            }
+        }
 
         $bean = get_class($target);
         $ih = IntrospectionHelper::getHelper($bean);
@@ -209,8 +322,23 @@ class ProjectConfigurator {
         // regex is the simplest / fastest.  PropertyTask, though, uses
         // the old parsePropertyString() method, since it has more stringent
         // requirements.
+
+        $sb = $value;
+        $iteration = 0;
         
-        $sb = preg_replace_callback('/\$\{([^}]+)\}/', array('ProjectConfigurator', 'replacePropertyCallback'), $value);
+        // loop to recursively replace tokens
+        while (strpos($sb, '${') !== false)
+        { 
+            $sb = preg_replace_callback('/\$\{([^\$}]+)\}/', array('ProjectConfigurator', 'replacePropertyCallback'), $sb);
+
+            // keep track of iterations so we can break out of otherwise infinite loops.
+            $iteration++;
+            if ($iteration == 5)
+            {
+                return $sb;
+            }
+        }
+        
         return $sb;        
     }
     
@@ -225,9 +353,20 @@ class ProjectConfigurator {
                     self::$propReplaceProject->log('Property ${'.$propertyName.'} has not been set.', Project::MSG_VERBOSE);
                     return $matches[0];
         } else {
-			self::$propReplaceProject->log('Property ${'.$propertyName.'} => ' . self::$propReplaceProperties[$propertyName], Project::MSG_DEBUG);
-		}
-        return self::$propReplaceProperties[$propertyName];
+            self::$propReplaceProject->log('Property ${'.$propertyName.'} => ' . self::$propReplaceProperties[$propertyName], Project::MSG_DEBUG);
+        }
+        
+        $propertyValue = self::$propReplaceProperties[$propertyName];
+        
+        if (is_bool($propertyValue)) {
+            if ($propertyValue === true) {
+                $propertyValue = "true";
+            } else {
+                $propertyValue = "false";
+            }
+        }
+        
+        return $propertyValue;
     }           
 
     /**

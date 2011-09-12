@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Path.php 377 2008-06-27 16:02:16Z mrook $
+ *  $Id: Path.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -426,6 +426,8 @@ class Path extends DataType {
 
 /**
  * Helper class, holds the nested <code>&lt;pathelement&gt;</code> values.
+ *
+ * @package phing.types
  */
 class PathElement {
 

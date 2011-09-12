@@ -1,6 +1,6 @@
 <?php
 /* 
- *  $Id: RegexpEngine.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: RegexpEngine.php 1207 2011-07-07 12:49:41Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,8 +24,8 @@
  * engine-specific implementations that sub-classes must override.
  * 
  * @author Hans Lellelid <hans@velum.net>
- * @package phing.util.regex
- * @version $Revision: 1.4 $
+ * @package phing.util.regexp
+ * @version $Revision: 1207 $
  */
 interface RegexpEngine {
     

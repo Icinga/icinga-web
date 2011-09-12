@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: TypedefTaskTest.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: TypedefTaskTest.php 1014 2010-12-17 20:51:26Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,7 +24,8 @@ require_once 'phing/BuildFileTest.php';
 /**
  * @author Hans Lellelid <hans@xmpl.org> (Phing)
  * @author Stefan Bodewig <stefan.bodewig@epost.de> (Ant)
- * @version $Revision: 1.5 $
+ * @version $Revision: 1014 $
+ * @package phing.tasks.system
  */
 class TypedefTaskTest extends BuildFileTest { 
         
@@ -44,8 +45,16 @@ class TypedefTaskTest extends BuildFileTest {
         $this->expectBuildException("noClassname", "required argument not specified");
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
     public function testClassNotFound() { 
-        $this->expectBuildException("classNotFound", "classname specified doesn't exist");
+        try {
+            $this->executeTarget("classNotFound");
+            $this->fail("Should throw ConfigurationException because: " . 
+              "classname specified doesn't exist");
+        } catch (ConfigurationException $ignored) {
+        }
     }
 
     public function testGlobal() {

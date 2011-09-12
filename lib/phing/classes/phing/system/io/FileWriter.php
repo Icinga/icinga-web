@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: FileWriter.php 227 2007-08-28 02:17:00Z hans $  
+ *  $Id: FileWriter.php 552 2009-08-29 12:18:13Z mrook $  
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -35,8 +35,8 @@ class FileWriter extends OutputStreamWriter {
      * @param boolean $append Append to existing file?
      */
     function __construct($file, $append = false) {
-    	$out = new FileOutputStream($file, $append);
-    	parent::__construct($out);
+        $out = new FileOutputStream($file, $append);
+        parent::__construct($out);
     }
 }
 

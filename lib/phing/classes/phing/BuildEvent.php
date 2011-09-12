@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: BuildEvent.php 173 2007-03-12 20:34:30Z hans $
+ *  $Id: BuildEvent.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -37,7 +37,7 @@ require_once 'phing/system/lang/EventObject.php';
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.10 $
+ * @version   $Revision: 526 $
  * @package   phing
  */
 class BuildEvent extends EventObject {

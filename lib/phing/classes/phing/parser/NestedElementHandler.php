@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: NestedElementHandler.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: NestedElementHandler.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ include_once 'phing/TaskContainer.php';
  *
  * @author      Andreas Aderhold <andi@binarycloud.com>
  * @copyright © 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.10 $ $Date: 2006-09-14 22:19:08 +0200 (Thu, 14 Sep 2006) $
+ * @version   $Revision: 552 $ $Date: 2009-08-29 14:18:13 +0200 (Sat, 29 Aug 2009) $
  * @access    public
  * @package   phing.parser
  */
@@ -173,14 +173,14 @@ class NestedElementHandler extends AbstractHandler {
      */
     function startElement($name, $attrs) {
         //print(get_class($this) . " name = $name, attrs = " . implode(",",$attrs) . "\n");
-		if ($this->child instanceof TaskContainer) {
+        if ($this->child instanceof TaskContainer) {
                 // taskcontainer nested element can contain other tasks - no other
                 // nested elements possible
-			$tc = new TaskHandler($this->parser, $this, $this->configurator, $this->child, $this->childWrapper, $this->target);
-			$tc->init($name, $attrs);
-		} else {
-			$neh = new NestedElementHandler($this->parser, $this, $this->configurator, $this->child, $this->childWrapper, $this->target);
-        	$neh->init($name, $attrs);
-		}
+            $tc = new TaskHandler($this->parser, $this, $this->configurator, $this->child, $this->childWrapper, $this->target);
+            $tc->init($name, $attrs);
+        } else {
+            $neh = new NestedElementHandler($this->parser, $this, $this->configurator, $this->child, $this->childWrapper, $this->target);
+            $neh->init($name, $attrs);
+        }
     }
 }

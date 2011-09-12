@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="Hello World Example" default="build" basedir="." description="This is an example buildfile for Phing.">
+<project name="Hello World Example" default="build" description="This is an example buildfile for Phing.">
 	<target name="prepare">
 		<mkdir dir="reports/coverage"/>
 		<mkdir dir="reports/tests"/>
@@ -16,32 +16,39 @@
 		</coverage-setup>
 		<phpunit codecoverage="true">
 			<formatter type="xml" todir="reports"/>
+			<formatter type="clover" todir="."/>
 			<batchtest>
 				<fileset dir="src">
 					<include name="*Test.php"/>
 				</fileset>
 			</batchtest>
 		</phpunit>
-		<phpunitreport infile="reports/testsuites.xml" format="frames" todir="reports/tests" styledir="../../etc"/>
+		<phpunitreport infile="reports/testsuites.xml" format="frames" todir="reports/tests"
+			styledir="../../etc" usesorttable="true"/>
 		<coverage-report outfile="reports/coverage.xml">
-			<report todir="reports/coverage" styledir="../../etc"/>
+			<report todir="reports/coverage" styledir="../../etc" title="Demo Project"
+				usesorttable="true"/>
 		</coverage-report>
 	</target>
 	
 	<target name="test">
-		<phpunit2 haltonerror="true" haltonfailure="true">
+		<phpunit haltonerror="true" haltonfailure="true">
+			<formatter type="plain" usefile="false"/>
 			<batchtest>
 				<fileset dir="src">
 					<include name="*Test.php"/>
 				</fileset>
 			</batchtest>
-		</phpunit2>
+		</phpunit>
 	</target>
 	
 	<target name="docs">
-		<phpdoc title="Phing Example" destdir="docs"
-			sourcepath="src" output="HTML:Smarty:PHP"
-			linksource="true"/>
+		<phpdoc title="Phing Example" destdir="docs" output="HTML:Smarty:PHP"
+		linksource="true" quiet="true">
+			<fileset dir="src">
+				<include name="*.php"/>
+			</fileset>
+		</phpdoc>
 	</target>
 	
 	<target name="build" depends="test,prepare,reports,docs">

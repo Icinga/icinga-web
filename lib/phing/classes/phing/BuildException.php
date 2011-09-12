@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: BuildException.php 287 2007-11-04 14:59:39Z hans $
+ *  $Id: BuildException.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -23,21 +23,21 @@
  * BuildException is for when things go wrong in a build execution.
  *
  * @author   Andreas Aderhold <andi@binarycloud.com>
- * @version  $Revision: 1.12 $
+ * @version  $Revision: 552 $
  * @package  phing
  */
 class BuildException extends Exception {
 
     /**
-	 * Location in the xml file.
-	 * @var Location
-	 */
+     * Location in the xml file.
+     * @var Location
+     */
     protected $location;
             
     /**
-	 * The nested "cause" exception.
-	 * @var Exception
-	 */
+     * The nested "cause" exception.
+     * @var Exception
+     */
     protected $cause;
     
     /**

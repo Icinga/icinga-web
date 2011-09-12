@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: FormatterElement.php 148 2007-02-13 11:15:53Z mrook $
+ * $Id: PDOResultFormatter.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,55 +30,55 @@ require_once 'phing/system/io/PhingFile.php';
  */
 abstract class PDOResultFormatter
 {
-	/**
-	 * Output writer.
-	 *
-	 * @var Writer
-	 */
-	protected $out;
+    /**
+     * Output writer.
+     *
+     * @var Writer
+     */
+    protected $out;
 
-	/**
-	 * Sets the output writer.
-	 *
-	 * @param Writer $out
-	 */
-	public function setOutput(Writer $out) {
-		$this->out = $out;
-	}
+    /**
+     * Sets the output writer.
+     *
+     * @param Writer $out
+     */
+    public function setOutput(Writer $out) {
+        $this->out = $out;
+    }
 
-	/**
-	 * Gets the output writer.
-	 *
-	 * @return Writer
-	 */
-	public function getOutput() {
-		return $this->out;
-	}
+    /**
+     * Gets the output writer.
+     *
+     * @return Writer
+     */
+    public function getOutput() {
+        return $this->out;
+    }
 
-	/**
-	 * Gets the preferred output filename for this formatter.
-	 * @return string
-	 */
-	abstract public function getPreferredOutfile();
+    /**
+     * Gets the preferred output filename for this formatter.
+     * @return string
+     */
+    abstract public function getPreferredOutfile();
 
-	/**
-	 * Perform any initialization.
-	 */
-	public function initialize() {
+    /**
+     * Perform any initialization.
+     */
+    public function initialize() {
 
-	}
+    }
 
-	/**
-	 * Processes a specific row from PDO result set.
-	 *
-	 * @param array $row Row of PDO result set.
-	 */
-	abstract public function processRow($row);
+    /**
+     * Processes a specific row from PDO result set.
+     *
+     * @param array $row Row of PDO result set.
+     */
+    abstract public function processRow($row);
 
-	/**
-	 * Perform any final tasks and Close the writer.
-	 */
-	public function close() {
-		$this->out->close();
-	}
+    /**
+     * Perform any final tasks and Close the writer.
+     */
+    public function close() {
+        $this->out->close();
+    }
 }

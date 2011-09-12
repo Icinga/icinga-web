@@ -1,6 +1,6 @@
 <?php
 /* 
- *  $Id: PregEngine.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: PregEngine.php 1207 2011-07-07 12:49:41Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,14 +26,60 @@ require_once 'phing/util/regexp/RegexpEngine.php';
  * Implements a regexp engine using PHP's preg_match(), preg_match_all(), and preg_replace() functions.
  * 
  * @author hans lellelid, hans@velum.net
- * @package phing.util.regex
+ * @package phing.util.regexp
  */
 class PregEngine implements RegexpEngine {
 
     /**
+     * Set to null by default to distinguish between false and not set
      * @var boolean
      */
-    private $ignoreCase = false;
+    private $ignoreCase = null;
+
+    /**
+     * Set to null by default to distinguish between false and not set
+     * @var boolean
+     */
+    private $multiline = null;
+
+    /**
+     * Pattern modifiers 
+     * @link http://php.net/manual/en/reference.pcre.pattern.modifiers.php
+     * @var string
+     */
+    private $modifiers = null;
+
+    /**
+     * Sets pattern modifiers for regex engine
+     *
+     * @param string $mods Modifiers to be applied to a given regex
+     * @return void
+     */
+    public function setModifiers($mods) {
+        $this->modifiers =  (string)$mods;
+    }
+
+    /**
+     * Gets pattern modifiers.
+     * @return string
+     */
+    public function getModifiers() {
+        $mods = $this->modifiers;
+        if($this->getIgnoreCase()) {
+            $mods .= 'i';
+        } elseif($this->getIgnoreCase() === false) {
+            $mods = str_replace('i', '', $mods);
+        }
+        if($this->getMultiline()) {
+            $mods .= 's';
+        } elseif($this->getMultiline() === false) {
+            $mods = str_replace('s', '', $mods);
+        }
+        // filter out duplicates
+        $mods = preg_split('//', $mods, -1, PREG_SPLIT_NO_EMPTY);
+        $mods = implode('', array_unique($mods));
+        return $mods;
+    }
         
     /**
      * Sets whether or not regex operation is case sensitive.
@@ -51,6 +97,22 @@ class PregEngine implements RegexpEngine {
     function getIgnoreCase() {
         return $this->ignoreCase;
     }
+
+    /**
+     * Sets whether regexp should be applied in multiline mode.
+     * @param boolean $bit
+     */
+    function setMultiline($bit) {
+        $this->multiline = $bit;
+    }
+
+    /**
+     * Gets whether regexp is to be applied in multiline mode.
+     * @return boolean
+     */
+    function getMultiline() {
+        return $this->multiline;
+    }
         
     /**
      * The pattern needs to be converted into PREG style -- which includes adding expression delims & any flags, etc.
@@ -59,7 +121,8 @@ class PregEngine implements RegexpEngine {
      */
     private function preparePattern($pattern)
     {
-        return '/'.$pattern.'/'.($this->ignoreCase ? 'i' : '');
+        // Use backquotes since hardly ever found in a regexp pattern, avoids using preg_quote
+        return '`'.$pattern.'`' . $this->getModifiers();
     }
     
     /**

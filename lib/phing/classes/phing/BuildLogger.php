@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: BuildLogger.php 147 2007-02-06 20:32:22Z hans $
+ *  $Id: BuildLogger.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,18 +31,18 @@ require_once 'phing/BuildListener.php';
  * Classes that implement a listener must implement this interface.
  *
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.6 $
+ * @version   $Revision: 552 $
  * @see       BuildEvent
  * @see       Project::addBuildListener()
  * @package   phing
  */
 interface BuildLogger extends BuildListener {
 
-	/**
-	 * Sets the min log level that this logger should respect.
-	 * 
-	 * Messages below this level are ignored.
-	 *
+    /**
+     * Sets the min log level that this logger should respect.
+     * 
+     * Messages below this level are ignored.
+     *
      * Constants for the message levels are in Project.php. The order of
      * the levels, from least to most verbose, is:
      *   - Project::MSG_ERR
@@ -51,8 +51,8 @@ interface BuildLogger extends BuildListener {
      *   - Project::MSG_VERBOSE
      *   - Project::MSG_DEBUG
      *
-	 * @param int $level The log level integer (e.g. Project::MSG_VERBOSE, etc.).
-	 */
+     * @param int $level The log level integer (e.g. Project::MSG_VERBOSE, etc.).
+     */
     public function setMessageOutputLevel($level);
 
     /**

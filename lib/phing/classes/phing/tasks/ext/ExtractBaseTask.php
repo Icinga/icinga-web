@@ -24,7 +24,7 @@ require_once 'phing/tasks/system/MatchingTask.php';
  * Base class for extracting tasks such as Unzip and Untar.
  *
  * @author    Joakim Bodin <joakim.bodin+phing@gmail.com>
- * @version   $Revision: 1.0 $
+ * @version   $Id: ExtractBaseTask.php 552 2009-08-29 12:18:13Z mrook $
  * @package   phing.tasks.ext
  * @since     2.2.0
  */
@@ -68,7 +68,7 @@ abstract class ExtractBaseTask extends MatchingTask {
     
     public function setRemovePath($removepath)
     {
-    	$this->removepath = $removepath;
+        $this->removepath = $removepath;
     }
 
     /**
@@ -84,7 +84,7 @@ abstract class ExtractBaseTask extends MatchingTask {
             if(!$this->isDestinationUpToDate($this->file)) {
                 $filesToExtract[] = $this->file;
             } else {
-            	$this->log('Nothing to do: ' . $this->todir->getAbsolutePath() . ' is up to date for ' .  $this->file->getCanonicalPath(), Project::MSG_INFO);
+                $this->log('Nothing to do: ' . $this->todir->getAbsolutePath() . ' is up to date for ' .  $this->file->getCanonicalPath(), Project::MSG_INFO);
             }
         }
         
@@ -100,11 +100,11 @@ abstract class ExtractBaseTask extends MatchingTask {
                     throw new BuildException($compressedArchiveFile->getAbsolutePath() . ' compressed archive cannot be a directory.');
                 }
                 
-            	if(!$this->isDestinationUpToDate($compressedArchiveFile)) {
-            	   $filesToExtract[] = $compressedArchiveFile;
-            	} else {
-            		$this->log('Nothing to do: ' . $this->todir->getAbsolutePath() . ' is up to date for ' .  $compressedArchiveFile->getCanonicalPath(), Project::MSG_INFO);
-            	}
+                if(!$this->isDestinationUpToDate($compressedArchiveFile)) {
+                   $filesToExtract[] = $compressedArchiveFile;
+                } else {
+                    $this->log('Nothing to do: ' . $this->todir->getAbsolutePath() . ' is up to date for ' .  $compressedArchiveFile->getCanonicalPath(), Project::MSG_INFO);
+                }
             }
         }
         
@@ -122,7 +122,7 @@ abstract class ExtractBaseTask extends MatchingTask {
      */
     protected function isDestinationUpToDate(PhingFile $compressedArchiveFile) {
         if (!$compressedArchiveFile->exists()) {
-        	throw new BuildException("Could not find file " . $compressedArchiveFile->__toString() . " to extract.");
+            throw new BuildException("Could not find file " . $compressedArchiveFile->__toString() . " to extract.");
         }
         
         $compressedArchiveContent = $this->listArchiveContent($compressedArchiveFile);
@@ -176,7 +176,7 @@ abstract class ExtractBaseTask extends MatchingTask {
         }
         
         if ($this->file !== null && !$this->file->exists()) {
-        	throw new BuildException("Could not find compressed archive file " . $this->file->__toString() . " to extract.");
+            throw new BuildException("Could not find compressed archive file " . $this->file->__toString() . " to extract.");
         }
     }
     

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: InputTask.php 43 2006-03-10 14:31:51Z mrook $
+ *  $Id: InputTask.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ include_once 'phing/input/MultipleChoiceInputRequest.php';
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Ulrich Schmidt <usch@usch.net> (Ant)
  * @author    Stefan Bodewig <stefan.bodewig@epost.de> (Ant)
- * @version   $Revision: 1.6 $
+ * @version   $Revision: 526 $
  * @package   phing.tasks.system
  */
 class InputTask extends Task {

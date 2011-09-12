@@ -1,7 +1,7 @@
 <?php
 
 /*
- * $Id: TaskdefTestSimpleTask.php 144 2007-02-05 15:19:00Z hans $
+ * $Id: TaskdefTestSimpleTask.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -35,7 +35,7 @@ class TaskdefTestSimpleTask extends Task {
     }
     
     public function main() {
-        $this->log("simpletask: " . $echo->message, Project::MSG_INFO);
+      $this->log("simpletask: " . $this->echo->message, Project::MSG_INFO);
     }
 
 }
