@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PropertyPromptTask.php 272 2007-10-30 23:06:04Z hans $
+ *  $Id: PropertyPromptTask.php 1074 2011-04-07 11:59:00Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,16 +31,16 @@ include_once 'phing/system/io/ConsoleReader.php';
  * 
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Anthony J. Young-Garner <ajyoung@alum.mit.edu> (Ant)
- * @version   $Revision: 1.4 $
+ * @version   $Revision: 1074 $
  * @package   phing.tasks.system
  * @deprecated - in favor of the more capable InputTask
  */ 
 class PropertyPromptTask extends Task {
-	
-	/**
-	 * The property name to set with the output.
-	 * @var string
-	 */
+    
+    /**
+     * The property name to set with the output.
+     * @var string
+     */
     private $propertyName;        // required
     
     /**
@@ -77,14 +77,14 @@ class PropertyPromptTask extends Task {
      * @throws BuildException
      */
     public function main() {
-    	
+        
         $this->proposedValue = $this->project->getProperty($this->propertyName);
         $currentValue = $this->defaultValue;
         
         if ($currentValue == "" && $this->proposedValue !== null) {
-        		$currentValue = $this->proposedValue;
-       	}
-       	
+                $currentValue = $this->proposedValue;
+        }
+        
         if ($this->useExistingValue !== true || $this->proposedValue === null) {
                         
             $this->log("Prompting user for " . $this->propertyName . ". " . $this->getDefaultMessage(), Project::MSG_VERBOSE);
@@ -106,7 +106,7 @@ class PropertyPromptTask extends Task {
                 $this->proposedValue = $this->defaultValue;
             }
             
-            if (isset($this->proposedValue) && $this->proposedValue !== "") {                    
+            if (isset($this->proposedValue)) {                    
                 $this->project->setProperty($this->propertyName, $this->proposedValue);
             }
              

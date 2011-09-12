@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PathTokenizer.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: PathTokenizer.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -45,7 +45,7 @@ include_once 'phing/util/StringHelper.php';
 
  * @author Jeff Tulley <jtulley@novell.com>  (Ant)
 
- * @pacakge phing.util
+ * @package phing.util
 
  */ 
 

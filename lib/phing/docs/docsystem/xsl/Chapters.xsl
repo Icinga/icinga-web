@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!--
 // {{{ Header
--File         $Id: Chapters.xsl 123 2006-09-14 20:19:08Z mrook $
+-File         $Id: Chapters.xsl 478 2009-07-29 17:25:59Z mrook $
 -License      LGPL (http://www.gnu.org/copyleft/lesser.html)
 -Copyright    2002, The Turing Studio, Inc.
 -Author       alex black, enigma@turingstudio.com

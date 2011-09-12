@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PhingFilterReader.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: PhingFilterReader.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -22,15 +22,15 @@
 include_once 'phing/types/DataType.php';
 include_once 'phing/types/Parameter.php';
 
-/*
+/**
  * A PhingFilterReader is a wrapper class that encloses the className
  * and configuration of a Configurable FilterReader.
  *
  * @author    Yannick Lecaillez <yl@seasonfive.com>
- * @version   $Revision: 1.9 $
+ * @version   $Revision: 557 $
  * @see       FilterReader
  * @package   phing.types
-*/
+ */
 class PhingFilterReader extends DataType {
 
     private $className;
@@ -84,16 +84,16 @@ class PhingFilterReader extends DataType {
         $o = $this->createClasspath();
         $o->setRefid($r);
     }
-	
-	function addParam(Parameter $param) {
-		$this->parameters[] = $param;
-	}
+    
+    function addParam(Parameter $param) {
+        $this->parameters[] = $param;
+    }
 
     function createParam() {
         $num = array_push($this->parameters, new Parameter());
         return $this->parameters[$num-1];
     }
-		
+        
     function getParams() {
         // We return a COPY
         $ret = array();

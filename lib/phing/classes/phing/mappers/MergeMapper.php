@@ -1,6 +1,6 @@
 <?php
 /* 
- *  $Id: MergeMapper.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: MergeMapper.php 1097 2011-05-17 17:10:32Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@ include_once 'phing/mappers/FileNameMapper.php';
  * was set for "to".
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
- * @version   $Revision: 1.8 $
+ * @version   $Revision: 1097 $
  * @package   phing.mappers
  */
 class MergeMapper implements FileNameMapper {
@@ -37,10 +37,10 @@ class MergeMapper implements FileNameMapper {
     /**
      * The mapper implementation. Basically does nothing in this case.
      *
-     * @param    mixed     The data the mapper works on
-     * @returns  mixed     The data after the mapper has been applied
-     * @access   public
-     * @author   Andreas Aderhold, andi@binarycloud.com
+     * @param   mixed     The data the mapper works on
+     * @return  mixed     The data after the mapper has been applied
+     * @access  public
+     * @author  Andreas Aderhold, andi@binarycloud.com
      */
     function main($sourceFileName) {
         if ($this->mergedFile === null) {            
@@ -52,10 +52,10 @@ class MergeMapper implements FileNameMapper {
     /**
      * Accessor. Sets the to property
      *
-     * @param    string     To what this mapper should convert the from string
-     * @returns  boolean    True
-     * @access   public
-     * @author   Andreas Aderhold, andi@binarycloud.com
+     * @param   string     To what this mapper should convert the from string
+     * @return  boolean    True
+     * @access  public
+     * @author  Andreas Aderhold, andi@binarycloud.com
      */
     function setTo($to) {
         $this->mergedFile = $to;

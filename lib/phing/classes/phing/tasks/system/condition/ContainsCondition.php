@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: ContainsCondition.php 410 2008-10-21 13:10:52Z hans $
+ *  $Id: ContainsCondition.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@ require_once 'phing/tasks/system/condition/Condition.php';
  *
  * @author Hans Lellelid <hans@xmpl.org> (Phing)
  * @author Stefan Bodewig <stefan.bodewig@epost.de> (Ant)
- * @version $Revision: 1.3 $
+ * @version $Revision: 526 $
  * @package phing.tasks.system.condition
  */
 class ContainsCondition implements Condition {

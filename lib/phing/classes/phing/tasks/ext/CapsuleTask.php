@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: CapsuleTask.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: CapsuleTask.php 843 2010-09-02 14:39:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ include_once 'phing/util/StringHelper.php';
  * This is based on the interface to TexenTask from Apache's Velocity engine. 
  *
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.17 $
+ * @version   $Id: CapsuleTask.php 843 2010-09-02 14:39:13Z mrook $
  * @package   phing.tasks.ext
  */
 class CapsuleTask extends Task {
@@ -453,25 +453,27 @@ class CapsuleTask extends Task {
 /**
  * An "inner" class for holding assigned var values.
  * May be need to expand beyond name/value in the future.
+ *
+ * @package phing.tasks.ext
  */
 class AssignedVar {
     
     private $name;
     private $value;
     
-    function setName($v) {
+    public function setName($v) {
         $this->name = $v;
     }
     
-    function setValue($v) {
+    public function setValue($v) {
         $this->value = $v;
     }
     
-    function getName() {
+    public function getName() {
         return $this->name;
     }
     
-    function getValue() {
+    public function getValue() {
         return $this->value;
     }
 

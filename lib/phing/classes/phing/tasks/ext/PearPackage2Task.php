@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PearPackage2Task.php 210 2007-08-01 22:48:36Z hans $
+ *  $Id: PearPackage2Task.php 862 2010-09-15 02:17:59Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -74,6 +74,7 @@ require_once 'phing/tasks/ext/PearPackageTask.php';
  *    <element key="name" value="Hans"/>
  *    <element key="email" value="hans@xmpl.org"/>
  *    <element key="role" value="lead"/>
+ *    <element key="active" value="yes"/>
  *   </element>
  *  </mapping>
  * </pearpkg2>
@@ -85,7 +86,7 @@ require_once 'phing/tasks/ext/PearPackageTask.php';
  * @author   Stuart Binge <stuart.binge@complinet.com>
  * @author   Hans Lellelid <hans@xmpl.org>
  * @package  phing.tasks.ext
- * @version  $Revision: 1.9 $
+ * @version  $Id: PearPackage2Task.php 862 2010-09-15 02:17:59Z victor $
  */
 class PearPackage2Task extends PearPackageTask {
 
@@ -172,8 +173,8 @@ class PearPackage2Task extends PearPackageTask {
                     foreach ($deps as $dep) {
                         $type = isset($dep['optional']) ? 'optional' : 'required';
                         $min = isset($dep['min']) ? $dep['min'] : $dep['version'];
-                        $max = isset($dep['max']) ? $dep['max'] : $dep['version'];
-                        $rec = isset($dep['recommended']) ? $dep['recommended'] : $dep['version'];
+                        $max = isset($dep['max']) ? $dep['max'] : null;
+                        $rec = isset($dep['recommended']) ? $dep['recommended'] : null;
                         $channel = isset($dep['channel']) ? $dep['channel'] : false;
                         $uri = isset($dep['uri']) ? $dep['uri'] : false;
 
@@ -209,6 +210,8 @@ class PearPackage2Task extends PearPackageTask {
                     foreach ($maintainers as $maintainer) {
                         if (!isset($maintainer['active'])) {
                             $maintainer['active'] = 'yes';
+                        } else {
+                            $maintainer['active'] = $maintainer['active'] === false ? 'no' : 'yes';
                         }
                         $this->pkg->addMaintainer(
                             $maintainer['role'],
@@ -226,12 +229,12 @@ class PearPackage2Task extends PearPackageTask {
                     foreach($replacements as $replacement) { 
                         $this->pkg->addReplacement(
                             $replacement['path'], 
-							$replacement['type'], 
-							$replacement['from'], 
-							$replacement['to']
-						);
-					}
-				    break;
+                            $replacement['type'], 
+                            $replacement['from'], 
+                            $replacement['to']
+                        );
+                    }
+                    break;
 
                 default:
                     $newmaps[] = $map;

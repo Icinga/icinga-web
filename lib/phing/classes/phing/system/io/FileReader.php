@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: FileReader.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: FileReader.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,13 +28,13 @@ require_once 'phing/system/io/FileInputStream.php';
  */
 class FileReader extends InputStreamReader {
 
-	/**
+    /**
      * Construct a new FileReader.
      * @param mixed $file PhingFile or string pathname.
      */
     public function __construct($file) {
-    	$in = new FileInputStream($file);
-    	parent::__construct($in);
+        $in = new FileInputStream($file);
+        parent::__construct($in);
     }
         
 }

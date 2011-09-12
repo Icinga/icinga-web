@@ -18,7 +18,8 @@
             <ic:parameter name="COMMAND_STICKY" alias="sticky" type="checkbox" required="false"/>
             <ic:parameter name="COMMAND_PERSISTENT" alias="persistent" type="checkbox" required="false"/>
             <ic:parameter name="COMMAND_NOTIFY" alias="notify" type="checkbox" required="false"/>
-            <ic:parameter name="COMMAND_RETURN_CODE" alias="return code" type="return_code"/>
+            <ic:parameter name="COMMAND_RETURN_CODE_HOST" alias="return code" type="return_code_host"/>
+            <ic:parameter name="COMMAND_RETURN_CODE_SERVICE" alias="return code" type="return_code_service"/>
             <ic:parameter name="COMMAND_CHECKTIME" alias="checktime" type="date" required="true"/>
             <ic:parameter name="COMMAND_FIXED" alias="fixed" type="checkbox" required="false"/>
             <ic:parameter name="COMMAND_OUTPUT" alias="output" type="textarea" required="true"/>

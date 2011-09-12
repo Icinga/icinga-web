@@ -1,0 +1,1088 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<LINK REL="stylesheet" TYPE="text/css" TITLE="Style" href="../../../../stylesheet.css">
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="bannercell" rowspan="2"><a href="http://www.phing.info/"><img src="http://www.phing.info/images/phing.gif" alt="http://www.phing.info/" align="left" border="0"></a></td>
+<td style="text-align:right"><h2>Source Code Coverage</h2></td>
+</tr>
+<tr><td style="text-align:right">Designed for use with <a href="http://www.phpunit.de">PHPUnit</a>, <a href="http://www.xdebug.org/">Xdebug</a> and <a href="http://www.phing.info/">Phing</a>.</td></tr>
+</table>
+<hr size="1">
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tr class="a">
+<td class="small">Methods: 12</td>
+<td class="small">LOC: 208</td>
+<td class="small">Statements: 0</td>
+</tr></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tbody><tr>
+<td class="legendItem" width="0%">Legend:</td>
+<td class="legendValue" width="100%">
+<span class="legendCovered">executed</span><span class="legendUncovered">not executed</span><span class="legendDeadCode">dead code</span>
+</td>
+</tr></tbody></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<th width="100%">Source file</th>
+<th>Statements</th>
+<th>Methods</th>
+<th width="250" colspan="2" nowrap>Total coverage</th>
+</tr>
+<tr class="a">
+<td>BatchTest.php</td>
+<td>-</td>
+<td>0.0%</td>
+<td>0.0%</td>
+<td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="display: inline"><tr><td class="uncovered" width="200" height="12"> </td></tr></table></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td class="lineCount">1</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">&lt;?php</pre></td>
+</tr>
+<tr>
+<td class="lineCount">2</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">3</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * $Id: BatchTest.php 972 2010-11-09 16:06:29Z mrook $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">4</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">5</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</pre></td>
+</tr>
+<tr>
+<td class="lineCount">6</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">7</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</pre></td>
+</tr>
+<tr>
+<td class="lineCount">8</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">9</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">10</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">11</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">12</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</pre></td>
+</tr>
+<tr>
+<td class="lineCount">13</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">14</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</pre></td>
+</tr>
+<tr>
+<td class="lineCount">15</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">16</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">17</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * This software consists of voluntary contributions made by many individuals</pre></td>
+</tr>
+<tr>
+<td class="lineCount">18</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * and is licensed under the LGPL. For more information please see</pre></td>
+</tr>
+<tr>
+<td class="lineCount">19</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;http://phing.info&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">20</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">21</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">22</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">require_once 'phing/tasks/ext/phpunit/PHPUnitUtil.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">23</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">require_once 'phing/types/FileSet.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">24</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">25</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">26</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * Scans a list of files given by the fileset attribute, extracts valid test cases</pre></td>
+</tr>
+<tr>
+<td class="lineCount">27</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">28</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @author Michiel Rook &lt;michiel.rook@gmail.com&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">29</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @version $Id: BatchTest.php 972 2010-11-09 16:06:29Z mrook $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">30</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @package phing.tasks.ext.phpunit</pre></td>
+</tr>
+<tr>
+<td class="lineCount">31</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @since 2.1.0</pre></td>
+</tr>
+<tr>
+<td class="lineCount">32</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">33</td>
+<td class="coverageCount"></td>
+<td class="srcLineClassStart"><pre class="srcLine">class BatchTest</pre></td>
+</tr>
+<tr>
+<td class="lineCount">34</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">{</pre></td>
+</tr>
+<tr>
+<td class="lineCount">35</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** the list of filesets containing the testcase filename rules */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">36</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $filesets = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">37</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">38</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** the reference to the project */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">39</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $project = NULL;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">40</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">41</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** the classpath to use with Phing::__import() calls */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">42</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $classpath = NULL;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">43</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">44</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** names of classes to exclude */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">45</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $excludeClasses = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">46</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">47</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /** name of the batchtest/suite */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">48</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $name = "Phing Batchtest";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">49</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">50</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">51</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Create a new batchtest instance</pre></td>
+</tr>
+<tr>
+<td class="lineCount">52</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">53</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param Project the project it depends on.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">54</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">55</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function __construct(Project $project)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">56</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">57</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;project = $project;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">58</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">59</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">60</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">61</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the name of the batchtest/suite</pre></td>
+</tr>
+<tr>
+<td class="lineCount">62</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">63</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setName($name)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">64</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">65</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;name = $name;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">66</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">67</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">68</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">69</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the classes to exclude</pre></td>
+</tr>
+<tr>
+<td class="lineCount">70</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">71</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setExclude($exclude)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">72</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">73</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;excludeClasses = explode(" ", $exclude);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">74</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">75</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">76</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">77</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the classpath</pre></td>
+</tr>
+<tr>
+<td class="lineCount">78</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">79</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setClasspath(Path $classpath)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">80</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">81</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if ($this-&gt;classpath === null)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">82</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">83</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;classpath = $classpath;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">84</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">85</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        else</pre></td>
+</tr>
+<tr>
+<td class="lineCount">86</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">87</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;classpath-&gt;append($classpath);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">88</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">89</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">90</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">91</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">92</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Creates a new Path object</pre></td>
+</tr>
+<tr>
+<td class="lineCount">93</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">94</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function createClasspath()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">95</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">96</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;classpath = new Path();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">97</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;classpath;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">98</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">99</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">100</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">101</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns the classpath</pre></td>
+</tr>
+<tr>
+<td class="lineCount">102</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">103</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getClasspath()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">104</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">105</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;classpath;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">106</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">107</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">108</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">109</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Add a new fileset containing the XML results to aggregate</pre></td>
+</tr>
+<tr>
+<td class="lineCount">110</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">111</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param FileSet the new fileset containing XML results.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">112</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">113</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function addFileSet(FileSet $fileset)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">114</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">115</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;filesets[] = $fileset;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">116</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">117</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">118</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">119</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Iterate over all filesets and return the filename of all files.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">120</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">121</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return array an array of filenames</pre></td>
+</tr>
+<tr>
+<td class="lineCount">122</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">123</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private function getFilenames()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">124</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">125</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $filenames = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">126</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">127</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach ($this-&gt;filesets as $fileset)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">128</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">129</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $ds = $fileset-&gt;getDirectoryScanner($this-&gt;project);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">130</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $ds-&gt;scan();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">131</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">132</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $files = $ds-&gt;getIncludedFiles();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">133</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">134</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach ($files as $file)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">135</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">136</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $filenames[] = $ds-&gt;getBaseDir() . "/" . $file;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">137</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">138</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">139</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">140</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $filenames;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">141</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">142</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">143</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">144</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Checks wheter $input is a PHPUnit Test</pre></td>
+</tr>
+<tr>
+<td class="lineCount">145</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">146</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private function isTestCase($input)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">147</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">148</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return is_subclass_of($input, 'PHPUnit_Framework_TestCase') || is_subclass_of($input, 'PHPUnit_Framework_TestSuite');</pre></td>
+</tr>
+<tr>
+<td class="lineCount">149</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">150</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">151</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">152</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Filters an array of classes, removes all classes that are not test cases or test suites,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">153</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * or classes that are declared abstract</pre></td>
+</tr>
+<tr>
+<td class="lineCount">154</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">155</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private function filterTests($input)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">156</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">157</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $reflect = new ReflectionClass($input);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">158</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">159</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;isTestCase($input) &amp;&amp; (!$reflect-&gt;isAbstract());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">160</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">161</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">162</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">163</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns an array of test cases and test suites that are declared</pre></td>
+</tr>
+<tr>
+<td class="lineCount">164</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * by the files included by the filesets</pre></td>
+</tr>
+<tr>
+<td class="lineCount">165</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">166</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return array an array of tests.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">167</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">168</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected function elements()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">169</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">170</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $filenames = $this-&gt;getFilenames();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">171</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">172</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $declaredClasses = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">173</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">174</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach ($filenames as $filename)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">175</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">176</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $definedClasses = PHPUnitUtil::getDefinedClasses($filename, $this-&gt;classpath);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">177</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">178</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach($definedClasses as $definedClass) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">179</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $this-&gt;project-&gt;log("(PHPUnit) Adding $definedClass (from $filename) to tests.", Project::MSG_DEBUG);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">180</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">181</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">182</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $declaredClasses = array_merge($declaredClasses, $definedClasses);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">183</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">184</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">185</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $elements = array_filter($declaredClasses, array($this, "filterTests"));</pre></td>
+</tr>
+<tr>
+<td class="lineCount">186</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">187</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $elements;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">188</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">189</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">190</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">191</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Returns a testsuite containing all the tests in this batch</pre></td>
+</tr>
+<tr>
+<td class="lineCount">192</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">193</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return PHPUnit_Framework_TestSuite</pre></td>
+</tr>
+<tr>
+<td class="lineCount">194</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">195</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function getTestSuite()</pre></td>
+</tr>
+<tr>
+<td class="lineCount">196</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">197</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $suite = new PHPUnit_Framework_TestSuite($this-&gt;name);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">198</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">199</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        foreach ($this-&gt;elements() as $test)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">200</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">201</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $testClass = new ReflectionClass($test);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">202</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">203</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $suite-&gt;addTestSuite($testClass);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">204</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">205</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">206</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $suite;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">207</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">208</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">}</pre></td>
+</tr>
+</table>
+<br><table width="100%">
+<tr><td><hr noshade size="1"></td></tr>
+<tr><td class="small">Report generated at 2011-07-09T21:37:01+02:00</td></tr>
+</table>
+</body>
+</html>

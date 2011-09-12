@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: MapperTest.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: MapperTest.php 655 2009-12-14 12:53:15Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,7 +20,7 @@
  * <http://phing.info>.
  */
 
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 include_once 'phing/BuildFileTest.php';
 include_once 'phing/types/Mapper.php';
 include_once 'phing/Project.php';
@@ -33,7 +33,7 @@ include_once 'phing/types/Reference.php';
  * @author Stefan Bodewig <stefan.bodewig@epost.de> (Ant)
  * @package phing.types
  */
-class MapperTest extends PHPUnit2_Framework_TestCase {
+class MapperTest extends PHPUnit_Framework_TestCase {
 
     private $project;
 
@@ -144,6 +144,9 @@ class MapperTest extends PHPUnit2_Framework_TestCase {
 }
 
 
+/**
+ * @package phing.mappers
+ */
 class TaskdefForCopyTest extends BuildFileTest {
 
     public function setUp() {

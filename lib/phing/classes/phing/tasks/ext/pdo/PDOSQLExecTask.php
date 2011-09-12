@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: CreoleSQLExecTask.php 83 2006-07-07 18:17:00Z mrook $
+ *  $Id: PDOSQLExecTask.php 1084 2011-05-06 09:55:25Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -49,25 +49,25 @@ include_once 'phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php';
  * @author    Jeff Martin <jeff@custommonkey.org> (Ant)
  * @author    Michael McCallum <gholam@xtra.co.nz> (Ant)
  * @author    Tim Stephenson <tim.stephenson@sybase.com> (Ant)
- * @package   phing.tasks.ext
- * @version   $Revision: 1.21 $
+ * @package   phing.tasks.ext.pdo
+ * @version   $Revision: 1084 $
  */
 class PDOSQLExecTask extends PDOTask {
 
-	/**
-	 * Count of how many statements were executed successfully.
-	 * @var int
-	 */
-	private $goodSql = 0;
+    /**
+     * Count of how many statements were executed successfully.
+     * @var int
+     */
+    private $goodSql = 0;
 
-	/**
-	 * Count of total number of SQL statements.
-	 * @var int
-	 */
-	private $totalSql = 0;
+    /**
+     * Count of total number of SQL statements.
+     * @var int
+     */
+    private $totalSql = 0;
 
-	const DELIM_ROW = "row";
-	const DELIM_NORMAL = "normal";
+    const DELIM_ROW = "row";
+    const DELIM_NORMAL = "normal";
 
     /**
      * Database connection
@@ -81,6 +81,12 @@ class PDOSQLExecTask extends PDOTask {
      */
     private $filesets = array();
 
+    /**
+     * Files to load
+     * @var array FileList[]
+     */
+    private $filelists = array();
+    
     /**
      * Formatter elements.
      * @var array PDOSQLExecFormatterElement[]
@@ -143,7 +149,7 @@ class PDOSQLExecTask extends PDOTask {
      * Required unless statements are enclosed in the build file
      */
     public function setSrc(PhingFile $srcFile) {
-    	$this->srcFile = $srcFile;
+        $this->srcFile = $srcFile;
     }
 
     /**
@@ -151,34 +157,41 @@ class PDOSQLExecTask extends PDOTask {
      * NB: Properties are not expanded in this text.
      */
     public function addText($sql) {
-    	$this->sqlCommand .= $sql;
+        $this->sqlCommand .= $sql;
     }
 
     /**
      * Adds a set of files (nested fileset attribute).
      */
     public function addFileset(FileSet $set) {
-    	$this->filesets[] = $set;
+        $this->filesets[] = $set;
     }
 
+    /**
+     * Adds a set of files (nested filelist attribute).
+     */
+    public function addFilelist(FileList $list) {
+        $this->filelists[] = $list;
+    }
+    
     /**
      * Creates a new PDOSQLExecFormatterElement for <formatter> element.
      * @return PDOSQLExecFormatterElement
      */
     public function createFormatter()
     {
-    	$fe = new PDOSQLExecFormatterElement($this);
-    	$this->formatters[] = $fe;
-    	return $fe;
+        $fe = new PDOSQLExecFormatterElement($this);
+        $this->formatters[] = $fe;
+        return $fe;
     }
 
     /**
      * Add a SQL transaction to execute
      */
     public function createTransaction() {
-    	$t = new PDOSQLExecTransaction($this);
-    	$this->transactions[] = $t;
-    	return $t;
+        $t = new PDOSQLExecTransaction($this);
+        $this->transactions[] = $t;
+        return $t;
     }
 
     /**
@@ -187,7 +200,7 @@ class PDOSQLExecTask extends PDOTask {
      * @param encoding the encoding to use on the files
      */
     public function setEncoding($encoding) {
-    	$this->encoding = $encoding;
+        $this->encoding = $encoding;
     }
 
     /**
@@ -200,7 +213,7 @@ class PDOSQLExecTask extends PDOTask {
      */
     public function setDelimiter($delimiter)
     {
-    	$this->delimiter = $delimiter;
+        $this->delimiter = $delimiter;
     }
 
     /**
@@ -213,7 +226,7 @@ class PDOSQLExecTask extends PDOTask {
      */
     public function setDelimiterType($delimiterType)
     {
-    	$this->delimiterType = $delimiterType;
+        $this->delimiterType = $delimiterType;
     }
 
     /**
@@ -221,7 +234,7 @@ class PDOSQLExecTask extends PDOTask {
      * optional; default &quot;abort&quot;
      */
     public function setOnerror($action) {
-    	$this->onError = $action;
+        $this->onError = $action;
     }
 
     /**
@@ -229,15 +242,15 @@ class PDOSQLExecTask extends PDOTask {
      * @param mixed $mode The PDO fetchmode integer or constant name.
      */
     public function setFetchmode($mode) {
-    	if (is_numeric($mode)) {
-    		$this->fetchMode = (int) $mode;
-    	} else {
-    		if (defined($mode)) {
-    			$this->fetchMode = constant($mode);
-    		} else {
-    			throw new BuildException("Invalid PDO fetch mode specified: " . $mode, $this->getLocation());
-    		}
-    	}
+        if (is_numeric($mode)) {
+            $this->fetchMode = (int) $mode;
+        } else {
+            if (defined($mode)) {
+                $this->fetchMode = constant($mode);
+            } else {
+                throw new BuildException("Invalid PDO fetch mode specified: " . $mode, $this->getLocation());
+            }
+        }
     }
 
     /**
@@ -246,7 +259,7 @@ class PDOSQLExecTask extends PDOTask {
      */
     private function getDefaultOutput()
     {
-    	return new LogWriter($this);
+        return new LogWriter($this);
     }
 
     /**
@@ -255,114 +268,128 @@ class PDOSQLExecTask extends PDOTask {
      */
     public function main()  {
 
-    	// Set a default fetchmode if none was specified
-    	// (We're doing that here to prevent errors loading the class is PDO is not available.)
-    	if ($this->fetchMode === null) {
-    		$this->fetchMode = PDO::FETCH_BOTH;
-    	}
+        // Set a default fetchmode if none was specified
+        // (We're doing that here to prevent errors loading the class is PDO is not available.)
+        if ($this->fetchMode === null) {
+            $this->fetchMode = PDO::FETCH_BOTH;
+        }
 
-    	// Initialize the formatters here.  This ensures that any parameters passed to the formatter
-    	// element get passed along to the actual formatter object
-    	foreach($this->formatters as $fe) {
-    		$fe->prepare();
-    	}
+        // Initialize the formatters here.  This ensures that any parameters passed to the formatter
+        // element get passed along to the actual formatter object
+        foreach($this->formatters as $fe) {
+            $fe->prepare();
+        }
 
-    	$savedTransaction = array();
-    	for($i=0,$size=count($this->transactions); $i < $size; $i++) {
-    		$savedTransaction[] = clone $this->transactions[$i];
-    	}
+        $savedTransaction = array();
+        for($i=0,$size=count($this->transactions); $i < $size; $i++) {
+            $savedTransaction[] = clone $this->transactions[$i];
+        }
 
-    	$savedSqlCommand = $this->sqlCommand;
+        $savedSqlCommand = $this->sqlCommand;
 
-    	$this->sqlCommand = trim($this->sqlCommand);
+        $this->sqlCommand = trim($this->sqlCommand);
 
-    	try {
-    		if ($this->srcFile === null && $this->sqlCommand === ""
-    		&& empty($this->filesets)) {
-    			if (count($this->transactions) === 0) {
-    				throw new BuildException("Source file or fileset, "
-    				. "transactions or sql statement "
-    				. "must be set!", $this->location);
-    			}
-    		}
+        try {
+            if ($this->srcFile === null && $this->sqlCommand === ""
+                && empty($this->filesets) && empty($this->filelists) 
+                && count($this->transactions) === 0) {
+                    throw new BuildException("Source file or fileset/filelist, "
+                    . "transactions or sql statement "
+                    . "must be set!", $this->location);
+            }
 
-    		if ($this->srcFile !== null && !$this->srcFile->exists()) {
-    			throw new BuildException("Source file does not exist!", $this->location);
-    		}
+            if ($this->srcFile !== null && !$this->srcFile->exists()) {
+                throw new BuildException("Source file does not exist!", $this->location);
+            }
 
-    		// deal with the filesets
-    		foreach($this->filesets as $fs) {
-    			$ds = $fs->getDirectoryScanner($this->project);
-    			$srcDir = $fs->getDir($this->project);
-    			$srcFiles = $ds->getIncludedFiles();
-    			// Make a transaction for each file
-    			foreach($srcFiles as $srcFile) {
-    				$t = $this->createTransaction();
-    				$t->setSrc(new PhingFile($srcDir, $srcFile));
-    			}
-    		}
+            // deal with the filesets
+            foreach($this->filesets as $fs) {
+                $ds = $fs->getDirectoryScanner($this->project);
+                $srcDir = $fs->getDir($this->project);
+                $srcFiles = $ds->getIncludedFiles();
+                // Make a transaction for each file
+                foreach($srcFiles as $srcFile) {
+                    $t = $this->createTransaction();
+                    $t->setSrc(new PhingFile($srcDir, $srcFile));
+                }
+            }
+            
+            // process filelists
+            foreach($this->filelists as $fl) {
+                $srcDir  = $fl->getDir($this->project);
+                $srcFiles = $fl->getFiles($this->project);                
+                // Make a transaction for each file
+                foreach($srcFiles as $srcFile) {
+                    $t = $this->createTransaction();
+                    $t->setSrc(new PhingFile($srcDir, $srcFile));
+                }
+            }
 
-    		// Make a transaction group for the outer command
-    		$t = $this->createTransaction();
-    		if ($this->srcFile) $t->setSrc($this->srcFile);
-    		$t->addText($this->sqlCommand);
-    		$this->conn = $this->getConnection();
+            // Make a transaction group for the outer command
+            $t = $this->createTransaction();
+            if ($this->srcFile) $t->setSrc($this->srcFile);
+            $t->addText($this->sqlCommand);
+            $this->conn = $this->getConnection();
 
-    		try {
+            try {
 
-    			$this->statement = null;
+                $this->statement = null;
 
-    			// Initialize the formatters.
-    			$this->initFormatters();
+                // Initialize the formatters.
+                $this->initFormatters();
 
-    			try {
+                try {
 
-    				// Process all transactions
-    				for ($i=0,$size=count($this->transactions); $i < $size; $i++) {
-    					if (!$this->isAutocommit()) {
-    						$this->log("Beginning transaction", Project::MSG_VERBOSE);
-    						$this->conn->beginTransaction();
-    					}
-    					$this->transactions[$i]->runTransaction();
-    					if (!$this->isAutocommit()) {
-    						$this->log("Commiting transaction", Project::MSG_VERBOSE);
-    						$this->conn->commit();
-    					}
-    				}
-    			} catch (Exception $e) {
-    				throw $e;
-    			}
-    		} catch (IOException $e) {
-    			if (!$this->isAutocommit() && $this->conn !== null && $this->onError == "abort") {
-    				try {
-    					$this->conn->rollback();
-    				} catch (PDOException $ex) {}
-    			}
-    			throw new BuildException($e->getMessage(), $this->location);
-    		} catch (PDOException $e){
-    			if (!$this->isAutocommit() && $this->conn !== null && $this->onError == "abort") {
-    				try {
-    					$this->conn->rollback();
-    				} catch (PDOException $ex) {}
-    			}
-    			throw new BuildException($e->getMessage(), $this->location);
-    		}
-    			
-    		// Close the formatters.
-    		$this->closeFormatters();
+                    // Process all transactions
+                    for ($i=0,$size=count($this->transactions); $i < $size; $i++) {
+                        if (!$this->isAutocommit()) {
+                            $this->log("Beginning transaction", Project::MSG_VERBOSE);
+                            $this->conn->beginTransaction();
+                        }
+                        $this->transactions[$i]->runTransaction();
+                        if (!$this->isAutocommit()) {
+                            $this->log("Commiting transaction", Project::MSG_VERBOSE);
+                            $this->conn->commit();
+                        }
+                    }
+                } catch (Exception $e) {
+                    $this->closeConnection();
+                    throw $e;
+                }
+            } catch (IOException $e) {
+                if (!$this->isAutocommit() && $this->conn !== null && $this->onError == "abort") {
+                    try {
+                        $this->conn->rollback();
+                    } catch (PDOException $ex) {}
+                }
+                $this->closeConnection();
+                throw new BuildException($e->getMessage(), $this->location);
+            } catch (PDOException $e){
+                if (!$this->isAutocommit() && $this->conn !== null && $this->onError == "abort") {
+                    try {
+                        $this->conn->rollback();
+                    } catch (PDOException $ex) {}
+                }
+                $this->closeConnection();
+                throw new BuildException($e->getMessage(), $this->location);
+            }
+                
+            // Close the formatters.
+            $this->closeFormatters();
 
-    		$this->log($this->goodSql . " of " . $this->totalSql .
+            $this->log($this->goodSql . " of " . $this->totalSql .
                 " SQL statements executed successfully");
 
-    	} catch (Exception $e) {
-    		$this->transactions = $savedTransaction;
-    		$this->sqlCommand = $savedSqlCommand;
-    		throw $e;
-    	}
-    	// finally {
-    	$this->transactions = $savedTransaction;
-    	$this->sqlCommand = $savedSqlCommand;
-
+        } catch (Exception $e) {
+            $this->transactions = $savedTransaction;
+            $this->sqlCommand = $savedSqlCommand;
+            $this->closeConnection();
+            throw $e;
+        }
+        // finally {
+        $this->transactions = $savedTransaction;
+        $this->sqlCommand = $savedSqlCommand;
+        $this->closeConnection();
     }
 
 
@@ -371,81 +398,88 @@ class PDOSQLExecTask extends PDOTask {
      * @throws PDOException, IOException 
      */
     public function runStatements(Reader $reader) {
-    	$sql = "";
-		$line = "";
-		$sqlBacklog = "";
-		$hasQuery = false;
+        $sql = "";
+        $line = "";
+        $sqlBacklog = "";
+        $hasQuery = false;
 
-		$in = new BufferedReader($reader);
+        $in = new BufferedReader($reader);
 
-		try {
-			while (($line = $in->readLine()) !== null) {
-				$line = trim($line);
-				$line = ProjectConfigurator::replaceProperties($this->project, $line,
-						$this->project->getProperties());
+        try {
+            while (($line = $in->readLine()) !== null) {
+                $line = trim($line);
+                $line = ProjectConfigurator::replaceProperties($this->project, $line,
+                        $this->project->getProperties());
 
-				if (StringHelper::startsWith("//", $line) ||
-					StringHelper::startsWith("--", $line) ||
-					StringHelper::startsWith("#", $line)) {
-					continue;
-				}
+                if (($line != $this->delimiter) && (
+                    StringHelper::startsWith("//", $line) ||
+                    StringHelper::startsWith("--", $line) ||
+                    StringHelper::startsWith("#", $line))) {
+                    continue;
+                }
 
-				if (strlen($line) > 4
-						&& strtoupper(substr($line,0, 4)) == "REM ") {
-					continue;
-				}
+                if (strlen($line) > 4
+                        && strtoupper(substr($line,0, 4)) == "REM ") {
+                    continue;
+                }
 
-				if ($sqlBacklog !== "") {
-					$sql = $sqlBacklog;
-					$sqlBacklog = "";
-				}
+                // MySQL supports defining new delimiters
+                if (preg_match('/DELIMITER [\'"]?([^\'" $]+)[\'"]?/i', $line, $matches)) {
+                    $this->setDelimiter($matches[1]);
+                    continue;
+                }
 
-				$sql .= " " . $line . "\n";
+                if ($sqlBacklog !== "") {
+                    $sql = $sqlBacklog;
+                    $sqlBacklog = "";
+                }
 
-				// SQL defines "--" as a comment to EOL
-				// and in Oracle it may contain a hint
-				// so we cannot just remove it, instead we must end it
-				if (strpos($line, "--") !== false) {
-					$sql .= "\n";
-				}
+                $sql .= " " . $line . "\n";
 
-				// DELIM_ROW doesn't need this (as far as i can tell)
-				if ($this->delimiterType == self::DELIM_NORMAL) {
+                // SQL defines "--" as a comment to EOL
+                // and in Oracle it may contain a hint
+                // so we cannot just remove it, instead we must end it
+                if (strpos($line, "--") !== false) {
+                    $sql .= "\n";
+                }
 
-					$reg = "#((?:\"(?:\\\\.|[^\"])*\"?)+|'(?:\\\\.|[^'])*'?|" . preg_quote($this->delimiter) . ")#";
+                // DELIM_ROW doesn't need this (as far as i can tell)
+                if ($this->delimiterType == self::DELIM_NORMAL) {
 
-					$sqlParts = preg_split($reg, $sql, 0, PREG_SPLIT_DELIM_CAPTURE);
-					$sqlBacklog = "";
-					foreach ($sqlParts as $sqlPart) {
-						// we always want to append, even if it's a delim (which will be stripped off later)
-						$sqlBacklog .= $sqlPart;
+                    $reg = "#((?:\"(?:\\\\.|[^\"])*\"?)+|'(?:\\\\.|[^'])*'?|" . preg_quote($this->delimiter) . ")#";
 
-						// we found a single (not enclosed by ' or ") delimiter, so we can use all stuff before the delim as the actual query
-						if ($sqlPart === $this->delimiter) {
-							$sql = $sqlBacklog;
-							$sqlBacklog = "";
-							$hasQuery = true;
-						}
-					}
-				}
+                    $sqlParts = preg_split($reg, $sql, 0, PREG_SPLIT_DELIM_CAPTURE);
+                    $sqlBacklog = "";
+                    foreach ($sqlParts as $sqlPart) {
+                        // we always want to append, even if it's a delim (which will be stripped off later)
+                        $sqlBacklog .= $sqlPart;
 
-				if ($hasQuery || ($this->delimiterType == self::DELIM_ROW && $line == $this->delimiter)) {
-					// this assumes there is always a delimter on the end of the SQL statement.
-					$sql = StringHelper::substring($sql, 0, strlen($sql) - 1 - strlen($this->delimiter));
-					$this->log("SQL: " . $sql, Project::MSG_VERBOSE);
-					$this->execSQL($sql);
-					$sql = "";
-					$hasQuery = false;
-				}
-			}
+                        // we found a single (not enclosed by ' or ") delimiter, so we can use all stuff before the delim as the actual query
+                        if ($sqlPart === $this->delimiter) {
+                            $sql = $sqlBacklog;
+                            $sqlBacklog = "";
+                            $hasQuery = true;
+                        }
+                    }
+                }
 
-			// Catch any statements not followed by ;
-			if ($sql !== "") {
-				$this->execSQL($sql);
-			}
-		} catch (PDOException $e) {
-			throw $e;
-		}
+                if ($hasQuery || ($this->delimiterType == self::DELIM_ROW && $line == $this->delimiter)) {
+                    // this assumes there is always a delimter on the end of the SQL statement.
+                    $sql = StringHelper::substring($sql, 0, strlen($sql) - 1 - strlen($this->delimiter));
+                    $this->log("SQL: " . $sql, Project::MSG_VERBOSE);
+                    $this->execSQL($sql);
+                    $sql = "";
+                    $hasQuery = false;
+                }
+            }
+
+            // Catch any statements not followed by ;
+            if ($sql !== "") {
+                $this->execSQL($sql);
+            }
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -458,8 +492,8 @@ class PDOSQLExecTask extends PDOTask {
      */
     protected function isSelectSql($sql)
     {
-    	$sql = trim($sql);
-    	return (stripos($sql, 'select') === 0 && stripos($sql, 'select into ') !== 0);
+        $sql = trim($sql);
+        return (stripos($sql, 'select') === 0 && stripos($sql, 'select into ') !== 0);
     }
 
     /**
@@ -468,36 +502,36 @@ class PDOSQLExecTask extends PDOTask {
      */
     protected function execSQL($sql) {
 
-    	// Check and ignore empty statements
-    	if (trim($sql) == "") {
-    		return;
-    	}
+        // Check and ignore empty statements
+        if (trim($sql) == "") {
+            return;
+        }
 
-    	try {
-    		$this->totalSql++;
+        try {
+            $this->totalSql++;
 
-    		$this->statement = $this->conn->prepare($sql);
-    		$this->statement->execute();
-    		$this->log($this->statement->rowCount() . " rows affected", Project::MSG_VERBOSE);
+            $this->statement = $this->conn->prepare($sql);
+            $this->statement->execute();
+            $this->log($this->statement->rowCount() . " rows affected", Project::MSG_VERBOSE);
 
-    		// only call processResults() for statements that return actual data (such as 'select')
-    		if ($this->statement->columnCount() > 0)
-    		{
-    			$this->processResults();
-    		}
+            // only call processResults() for statements that return actual data (such as 'select')
+            if ($this->statement->columnCount() > 0)
+            {
+                $this->processResults();
+            }
 
-    		$this->statement->closeCursor();
-    		$this->statement = null;
+            $this->statement->closeCursor();
+            $this->statement = null;
 
-    		$this->goodSql++;
+            $this->goodSql++;
 
-    	} catch (PDOException $e) {
-    		$this->log("Failed to execute: " . $sql, Project::MSG_ERR);
-    		if ($this->onError != "continue") {
-    			throw new BuildException("Failed to execute SQL", $e);
-    		}
-    		$this->log($e->getMessage(), Project::MSG_ERR);
-    	}
+        } catch (PDOException $e) {
+            $this->log("Failed to execute: " . $sql, Project::MSG_ERR);
+            if ($this->onError != "continue") {
+                throw new BuildException("Failed to execute SQL", $e);
+            }
+            $this->log($e->getMessage(), Project::MSG_ERR);
+        }
     }
 
     /**
@@ -506,21 +540,21 @@ class PDOSQLExecTask extends PDOTask {
      */
     protected function getConfiguredFormatters()
     {
-    	$formatters = array();
-    	foreach ($this->formatters as $fe) {
-    		$formatters[] = $fe->getFormatter();
-    	}
-    	return $formatters;
+        $formatters = array();
+        foreach ($this->formatters as $fe) {
+            $formatters[] = $fe->getFormatter();
+        }
+        return $formatters;
     }
 
     /**
      * Initialize the formatters.
      */
     protected function initFormatters() {
-    	$formatters = $this->getConfiguredFormatters();
-    	foreach ($formatters as $formatter) {
-    		$formatter->initialize();
-    	}
+        $formatters = $this->getConfiguredFormatters();
+        foreach ($formatters as $formatter) {
+            $formatter->initialize();
+        }
 
     }
 
@@ -528,38 +562,48 @@ class PDOSQLExecTask extends PDOTask {
      * Run cleanup and close formatters.
      */
     protected function closeFormatters() {
-    	$formatters = $this->getConfiguredFormatters();
-    	foreach ($formatters as $formatter) {
-    		$formatter->close();
-    	}
+        $formatters = $this->getConfiguredFormatters();
+        foreach ($formatters as $formatter) {
+            $formatter->close();
+        }
     }
 
     /**
      * Passes results from query to any formatters.
-     * @throw PDOException
+     * @throws PDOException
      */
     protected function processResults() {
 
-    	try {
+        try {
 
-    		$this->log("Processing new result set.", Project::MSG_VERBOSE);
+            $this->log("Processing new result set.", Project::MSG_VERBOSE);
 
-    		$formatters = $this->getConfiguredFormatters();
+            $formatters = $this->getConfiguredFormatters();
 
-	    	while ($row = $this->statement->fetch($this->fetchMode)) {
-	    		foreach ($formatters as $formatter) {
-	    			$formatter->processRow($row);
-	    		}
-	    	}
+            while ($row = $this->statement->fetch($this->fetchMode)) {
+                foreach ($formatters as $formatter) {
+                    $formatter->processRow($row);
+                }
+            }
 
-    	} catch (Exception $x) {
-    		$this->log("Error processing reults: " . $x->getMessage(), Project::MSG_ERR);
-    		foreach ($formatters as $formatter) {
-	    		$formatter->close();
-	    	}
-    		throw $x;
-    	}
+        } catch (Exception $x) {
+            $this->log("Error processing reults: " . $x->getMessage(), Project::MSG_ERR);
+            foreach ($formatters as $formatter) {
+                $formatter->close();
+            }
+            throw $x;
+        }
 
+    }
+
+    /**
+     * Closes current connection
+     */
+    protected function closeConnection()
+    {
+        if ($this->conn) {
+            unset($this->conn);
+        }
     }
 }
 
@@ -568,46 +612,48 @@ class PDOSQLExecTask extends PDOTask {
  * Transactions allow several files or blocks of statements
  * to be executed using the same JDBC connection and commit
  * operation in between.
+ *
+ * @package   phing.tasks.ext.pdo
  */
 class PDOSQLExecTransaction {
 
-	private $tSrcFile = null;
-	private $tSqlCommand = "";
-	private $parent;
+    private $tSrcFile = null;
+    private $tSqlCommand = "";
+    private $parent;
 
-	function __construct($parent)
-	{
-		// Parent is required so that we can log things ...
-		$this->parent = $parent;
-	}
+    function __construct($parent)
+    {
+        // Parent is required so that we can log things ...
+        $this->parent = $parent;
+    }
 
-	public function setSrc(PhingFile $src)
-	{
-		$this->tSrcFile = $src;
-	}
+    public function setSrc(PhingFile $src)
+    {
+        $this->tSrcFile = $src;
+    }
 
-	public function addText($sql)
-	{
-		$this->tSqlCommand .= $sql;
-	}
+    public function addText($sql)
+    {
+        $this->tSqlCommand .= $sql;
+    }
 
     /**
      * @throws IOException, PDOException
      */
     public function runTransaction()
     {
-    	if (!empty($this->tSqlCommand)) {
-    		$this->parent->log("Executing commands", Project::MSG_INFO);
-    		$this->parent->runStatements(new StringReader($this->tSqlCommand));
-    	}
+        if (!empty($this->tSqlCommand)) {
+            $this->parent->log("Executing commands", Project::MSG_INFO);
+            $this->parent->runStatements(new StringReader($this->tSqlCommand));
+        }
 
-    	if ($this->tSrcFile !== null) {
-    		$this->parent->log("Executing file: " . $this->tSrcFile->getAbsolutePath(),
-    		Project::MSG_INFO);
-    		$reader = new FileReader($this->tSrcFile);
-    		$this->parent->runStatements($reader);
-    		$reader->close();
-    	}
+        if ($this->tSrcFile !== null) {
+            $this->parent->log("Executing file: " . $this->tSrcFile->getAbsolutePath(),
+            Project::MSG_INFO);
+            $reader = new FileReader($this->tSrcFile);
+            $this->parent->runStatements($reader);
+            $reader->close();
+        }
     }
 }
 

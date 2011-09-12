@@ -1,0 +1,1083 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<LINK REL="stylesheet" TYPE="text/css" TITLE="Style" href="../../../stylesheet.css">
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="bannercell" rowspan="2"><a href="http://www.phing.info/"><img src="http://www.phing.info/images/phing.gif" alt="http://www.phing.info/" align="left" border="0"></a></td>
+<td style="text-align:right"><h2>Source Code Coverage</h2></td>
+</tr>
+<tr><td style="text-align:right">Designed for use with <a href="http://www.phpunit.de">PHPUnit</a>, <a href="http://www.xdebug.org/">Xdebug</a> and <a href="http://www.phing.info/">Phing</a>.</td></tr>
+</table>
+<hr size="1">
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tr class="a">
+<td class="small">Methods: 8</td>
+<td class="small">LOC: 207</td>
+<td class="small">Statements: 0</td>
+</tr></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%"><tbody><tr>
+<td class="legendItem" width="0%">Legend:</td>
+<td class="legendValue" width="100%">
+<span class="legendCovered">executed</span><span class="legendUncovered">not executed</span><span class="legendDeadCode">dead code</span>
+</td>
+</tr></tbody></table>
+<table class="log" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<th width="100%">Source file</th>
+<th>Statements</th>
+<th>Methods</th>
+<th width="250" colspan="2" nowrap>Total coverage</th>
+</tr>
+<tr class="a">
+<td>ZendCodeAnalyzerTask.php</td>
+<td>-</td>
+<td>0.0%</td>
+<td>0.0%</td>
+<td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="display: inline"><tr><td class="uncovered" width="200" height="12"> </td></tr></table></td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td class="lineCount">1</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">&lt;?php</pre></td>
+</tr>
+<tr>
+<td class="lineCount">2</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/*</pre></td>
+</tr>
+<tr>
+<td class="lineCount">3</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *  $Id: ZendCodeAnalyzerTask.php 843 2010-09-02 14:39:13Z mrook $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">4</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">5</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</pre></td>
+</tr>
+<tr>
+<td class="lineCount">6</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">7</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</pre></td>
+</tr>
+<tr>
+<td class="lineCount">8</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">9</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">10</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">11</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</pre></td>
+</tr>
+<tr>
+<td class="lineCount">12</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</pre></td>
+</tr>
+<tr>
+<td class="lineCount">13</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</pre></td>
+</tr>
+<tr>
+<td class="lineCount">14</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</pre></td>
+</tr>
+<tr>
+<td class="lineCount">15</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">16</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">17</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * This software consists of voluntary contributions made by many individuals</pre></td>
+</tr>
+<tr>
+<td class="lineCount">18</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * and is licensed under the LGPL. For more information please see</pre></td>
+</tr>
+<tr>
+<td class="lineCount">19</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;http://phing.info&gt;.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">20</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">21</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">22</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">require_once 'phing/Task.php';</pre></td>
+</tr>
+<tr>
+<td class="lineCount">23</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">24</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">/**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">25</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * ZendCodeAnalyzerTask analyze PHP source code using the ZendCodeAnalyzer included in Zend Studio 5.1</pre></td>
+</tr>
+<tr>
+<td class="lineCount">26</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">27</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * Available warnings:</pre></td>
+</tr>
+<tr>
+<td class="lineCount">28</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;zend-error&lt;/b&gt; - %s(line %d): %s</pre></td>
+</tr>
+<tr>
+<td class="lineCount">29</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;oneline-comment&lt;/b&gt; - One-line comment ends with  tag.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">30</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;bool-assign&lt;/b&gt; - Assignment seen where boolean expression is expected. Did you mean '==' instead of '='?</pre></td>
+</tr>
+<tr>
+<td class="lineCount">31</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;bool-print&lt;/b&gt; - Print statement used when boolean expression is expected.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">32</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;bool-array&lt;/b&gt; - Array used when boolean expression is expected.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">33</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;bool-object&lt;/b&gt; - Object used when boolean expression is expected.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">34</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;call-time-ref&lt;/b&gt; - Call-time reference is deprecated. Define function as accepting parameter by reference instead.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">35</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;if-if-else&lt;/b&gt; - In if-if-else construction else relates to the closest if. Use braces to make the code clearer.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">36</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;define-params&lt;/b&gt; - define() requires two or three parameters.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">37</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;define-const&lt;/b&gt; - First parameter for define() should be string. Maybe you forgot quotes?</pre></td>
+</tr>
+<tr>
+<td class="lineCount">38</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;break-var&lt;/b&gt; - Break/continue with variable is dangerous - break level can be out of scope.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">39</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;break-depth&lt;/b&gt; - Break/continue with depth more than current nesting level.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">40</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-once&lt;/b&gt; - Variable '%s' encountered only once. May be a typo?</pre></td>
+</tr>
+<tr>
+<td class="lineCount">41</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-arg-unused&lt;/b&gt; - Function argument '%s' is never used.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">42</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-global-unused&lt;/b&gt; - Global variable '%s' is defined but never used.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">43</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-use-before-def&lt;/b&gt; - Variable '%s' is used before it was assigned.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">44</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-use-before-def-global&lt;/b&gt; - Global variable '%s' is used without being assigned. You are probably relying on register_globals feature of PHP. Note that this feature is off by default.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">45</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-no-global&lt;/b&gt; - PHP global variable '%s' is used as local. Maybe you wanted to define '%s' as global?</pre></td>
+</tr>
+<tr>
+<td class="lineCount">46</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-value-unused&lt;/b&gt; - Value assigned to variable '%s' is never used</pre></td>
+</tr>
+<tr>
+<td class="lineCount">47</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;var-ref-notmodified&lt;/b&gt; - Function parameter '%s' is passed by reference but never modified. Consider passing by value.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">48</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;return-empty-val&lt;/b&gt; - Function '%s' has both empty return and return with value.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">49</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;return-empty-used&lt;/b&gt; - Function '%s' has empty return but return value is used.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">50</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;return-noref&lt;/b&gt; - Function '%s' returns reference but the value is not assigned by reference. Maybe you meant '=&amp;' instead of '='?</pre></td>
+</tr>
+<tr>
+<td class="lineCount">51</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;return-end-used&lt;/b&gt; - Control reaches the end of function '%s'(file %s, line %d) but return value is used.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">52</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;sprintf-miss-args&lt;/b&gt; - Missing arguments for sprintf: format reqires %d arguments but %d are supplied.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">53</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;sprintf-extra-args&lt;/b&gt; - Extra arguments for sprintf: format reqires %d arguments but %d are supplied.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">54</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;unreach-code&lt;/b&gt; - Unreachable code in function '%s'.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">55</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;include-var&lt;/b&gt; - include/require with user-accessible variable can be dangerous. Consider using constant instead.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">56</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;non-object&lt;/b&gt; - Variable '%s' used as object, but has different type.</pre></td>
+</tr>
+<tr>
+<td class="lineCount">57</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;bad-escape&lt;/b&gt; - Bad escape sequence: \%c, did you mean \\%c?</pre></td>
+</tr>
+<tr>
+<td class="lineCount">58</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;empty-cond&lt;/b&gt; - Condition without a body</pre></td>
+</tr>
+<tr>
+<td class="lineCount">59</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * &lt;b&gt;expr-unused&lt;/b&gt; - Expression result is never used</pre></td>
+</tr>
+<tr>
+<td class="lineCount">60</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">61</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @author   Knut Urdalen &lt;knut.urdalen@gmail.com&gt;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">62</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @version  $Id: ZendCodeAnalyzerTask.php 843 2010-09-02 14:39:13Z mrook $</pre></td>
+</tr>
+<tr>
+<td class="lineCount">63</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> * @package  phing.tasks.ext</pre></td>
+</tr>
+<tr>
+<td class="lineCount">64</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"> */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">65</td>
+<td class="coverageCount"></td>
+<td class="srcLineClassStart"><pre class="srcLine">class ZendCodeAnalyzerTask extends Task</pre></td>
+</tr>
+<tr>
+<td class="lineCount">66</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">{</pre></td>
+</tr>
+<tr>
+<td class="lineCount">67</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $analyzerPath = ""; // Path to ZendCodeAnalyzer binary</pre></td>
+</tr>
+<tr>
+<td class="lineCount">68</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $file = "";  // the source file (from xml attribute)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">69</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $filesets = array(); // all fileset objects assigned to this task</pre></td>
+</tr>
+<tr>
+<td class="lineCount">70</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $counter = 0;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">71</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $disable = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">72</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected $enable = array();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">73</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">74</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    private $haltonwarning = false;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">75</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">76</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">77</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * File to be analyzed</pre></td>
+</tr>
+<tr>
+<td class="lineCount">78</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">79</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param PhingFile $file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">80</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">81</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setFile(PhingFile $file) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">82</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;file = $file;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">83</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">84</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">85</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">86</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Path to ZendCodeAnalyzer binary</pre></td>
+</tr>
+<tr>
+<td class="lineCount">87</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">88</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $analyzerPath</pre></td>
+</tr>
+<tr>
+<td class="lineCount">89</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">90</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setAnalyzerPath($analyzerPath) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">91</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;analyzerPath = $analyzerPath;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">92</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">93</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">94</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">95</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    * Disable warning levels. Seperate warning levels with ','</pre></td>
+</tr>
+<tr>
+<td class="lineCount">96</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">97</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    * @param string $disable</pre></td>
+</tr>
+<tr>
+<td class="lineCount">98</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">99</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setDisable($disable) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">100</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;disable = explode(",", $disable);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">101</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">102</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">103</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">104</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Enable warning levels. Seperate warning levels with ','</pre></td>
+</tr>
+<tr>
+<td class="lineCount">105</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">106</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $enable</pre></td>
+</tr>
+<tr>
+<td class="lineCount">107</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">108</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setEnable($enable) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">109</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;enable = explode(",", $enable);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">110</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">111</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">112</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">113</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Sets the haltonwarning flag</pre></td>
+</tr>
+<tr>
+<td class="lineCount">114</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param boolean $value</pre></td>
+</tr>
+<tr>
+<td class="lineCount">115</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">116</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function setHaltonwarning($value)</pre></td>
+</tr>
+<tr>
+<td class="lineCount">117</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">118</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;haltonwarning = $value;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">119</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">120</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">121</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">122</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Nested creator, creates a FileSet for this task</pre></td>
+</tr>
+<tr>
+<td class="lineCount">123</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">124</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return FileSet The created fileset object</pre></td>
+</tr>
+<tr>
+<td class="lineCount">125</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">126</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function createFileSet() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">127</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $num = array_push($this-&gt;filesets, new FileSet());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">128</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        return $this-&gt;filesets[$num-1];</pre></td>
+</tr>
+<tr>
+<td class="lineCount">129</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">130</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">131</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">132</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Analyze against PhingFile or a FileSet</pre></td>
+</tr>
+<tr>
+<td class="lineCount">133</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">134</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    public function main() {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">135</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if(!isset($this-&gt;analyzerPath)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">136</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Missing attribute 'analyzerPath'");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">137</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">138</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">139</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if(!isset($this-&gt;file) and count($this-&gt;filesets) == 0) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">140</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException("Missing either a nested fileset or attribute 'file' set");</pre></td>
+</tr>
+<tr>
+<td class="lineCount">141</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">142</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">143</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if($this-&gt;file instanceof PhingFile) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">144</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $this-&gt;analyze($this-&gt;file-&gt;getPath());</pre></td>
+</tr>
+<tr>
+<td class="lineCount">145</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else { // process filesets</pre></td>
+</tr>
+<tr>
+<td class="lineCount">146</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            $project = $this-&gt;getProject();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">147</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">148</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            foreach($this-&gt;filesets as $fs) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">149</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $ds = $fs-&gt;getDirectoryScanner($project);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">150</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $files = $ds-&gt;getIncludedFiles();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">151</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $dir = $fs-&gt;getDir($this-&gt;project)-&gt;getPath();</pre></td>
+</tr>
+<tr>
+<td class="lineCount">152</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">153</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                foreach($files as $file) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">154</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $this-&gt;analyze($dir.DIRECTORY_SEPARATOR.$file);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">155</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">156</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">157</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">158</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">159</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        $this-&gt;log("Number of findings: ".$this-&gt;counter, Project::MSG_INFO);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">160</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">161</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">162</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    /**</pre></td>
+</tr>
+<tr>
+<td class="lineCount">163</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * Analyze file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">164</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     *</pre></td>
+</tr>
+<tr>
+<td class="lineCount">165</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @param string $file</pre></td>
+</tr>
+<tr>
+<td class="lineCount">166</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     * @return void</pre></td>
+</tr>
+<tr>
+<td class="lineCount">167</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">     */</pre></td>
+</tr>
+<tr>
+<td class="lineCount">168</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    protected function analyze($file) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">169</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        if(file_exists($file)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">170</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            if(is_readable($file)) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">171</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                // Construct shell command</pre></td>
+</tr>
+<tr>
+<td class="lineCount">172</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $cmd = $this-&gt;analyzerPath." ";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">173</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">174</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                foreach($this-&gt;enable as $enable) { // Enable warning levels</pre></td>
+</tr>
+<tr>
+<td class="lineCount">175</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $cmd .= " --enable $enable ";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">176</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">177</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">178</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                foreach($this-&gt;disable as $disable) { // Disable warning levels</pre></td>
+</tr>
+<tr>
+<td class="lineCount">179</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $cmd .= " --disable $disable ";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">180</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">181</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">182</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $cmd .= "$file 2&gt;&amp;1";</pre></td>
+</tr>
+<tr>
+<td class="lineCount">183</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">184</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                // Execute command</pre></td>
+</tr>
+<tr>
+<td class="lineCount">185</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $result = shell_exec($cmd);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">186</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $result = explode("\n", $result);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">187</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">188</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                for($i=2, $size=count($result); $i&lt;($size-1); $i++) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">189</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $this-&gt;counter++;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">190</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    $this-&gt;log($result[$i], Project::MSG_WARN);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">191</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">192</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">193</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                $total = count($result) - 3;</pre></td>
+</tr>
+<tr>
+<td class="lineCount">194</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine"></pre></td>
+</tr>
+<tr>
+<td class="lineCount">195</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                if ($total &gt; 0 &amp;&amp; $this-&gt;haltonwarning) {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">196</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                    throw new BuildException('zendcodeanalyzer detected ' . $total . ' warning' . ($total &gt; 1 ? 's' : '') . ' in ' . $file);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">197</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">198</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">199</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            else</pre></td>
+</tr>
+<tr>
+<td class="lineCount">200</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">201</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">                throw new BuildException('Permission denied: '.$file);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">202</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">203</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        } else {</pre></td>
+</tr>
+<tr>
+<td class="lineCount">204</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">            throw new BuildException('File not found: '.$file);</pre></td>
+</tr>
+<tr>
+<td class="lineCount">205</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">        }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">206</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">    }</pre></td>
+</tr>
+<tr>
+<td class="lineCount">207</td>
+<td class="coverageCount"></td>
+<td><pre class="srcLine">}</pre></td>
+</tr>
+</table>
+<br><table width="100%">
+<tr><td><hr noshade size="1"></td></tr>
+<tr><td class="small">Report generated at 2011-07-09T21:37:00+02:00</td></tr>
+</table>
+</body>
+</html>

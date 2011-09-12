@@ -1,6 +1,6 @@
 <?php
 /*
- * $Id: ProjectHandler.php 132 2007-01-25 19:38:05Z mrook $
+ * $Id: ProjectHandler.php 775 2010-05-11 13:51:39Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +28,7 @@ require_once 'phing/system/io/PhingFile.php';
  *
  * @author      Andreas Aderhold <andi@binarycloud.com>
  * @copyright (c) 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.14 $ $Date: 2007-01-25 20:38:05 +0100 (Thu, 25 Jan 2007) $
+ * @version   $Revision: 775 $ $Date: 2010-05-11 15:51:39 +0200 (Tue, 11 May 2010) $
  * @access    public
  * @package   phing.parser
  */
@@ -69,6 +69,7 @@ class ProjectHandler extends AbstractHandler {
         $id    = null;
         $desc = null;
         $baseDir = null;
+        $ver = null;
 
         // some shorthands
         $project = $this->configurator->project;
@@ -85,42 +86,60 @@ class ProjectHandler extends AbstractHandler {
                 $baseDir = $value;
             } elseif ($key === "description") {
                 $desc = $value;
+            } elseif ($key === "phingVersion") {
+                $ver = $value;
             } else {
                 throw new ExpatParseException("Unexpected attribute '$key'");
             }
         }
-        if ($def === null) {
-            throw new ExpatParseException("The default attribute of project is required");
+        // these things get done no matter what
+        if (null != $name) {
+          $canonicalName = self::canonicalName($name);
+          $this->configurator->setCurrentProjectName($canonicalName);
+          $project->setUserProperty("phing.file.{$canonicalName}",
+              (string) $this->configurator->getBuildFile());
         }
-        $project->setDefaultTarget($def);
 
-        if ($name !== null) {
+        if (!$this->configurator->isIgnoringProjectTag()) {
+          if ($def === null) {
+            throw new ExpatParseException(
+                "The default attribute of project is required");
+          }
+          $project->setDefaultTarget($def);
+
+          if ($name !== null) {
             $project->setName($name);
             $project->addReference($name, $project);
-        }
 
-        if ($id !== null) {
+          }
+
+          if ($id !== null) {
             $project->addReference($id, $project);
-        }
-        
-        if ($desc !== null) {
-            $project->setDescription($desc);
-        }        
+          }
 
-        if ($project->getProperty("project.basedir") !== null) {
+          if ($desc !== null) {
+            $project->setDescription($desc);
+          }        
+
+          if($ver !== null) {
+              $project->setPhingVersion($ver);
+          }
+
+          if ($project->getProperty("project.basedir") !== null) {
             $project->setBasedir($project->getProperty("project.basedir"));
-        } else {
+          } else {
             if ($baseDir === null) {
-                $project->setBasedir($buildFileParent->getAbsolutePath());
+              $project->setBasedir($buildFileParent->getAbsolutePath());
             } else {
-                // check whether the user has specified an absolute path
-                $f = new PhingFile($baseDir);
-                if ($f->isAbsolute()) {
-                    $project->setBasedir($baseDir);
-                } else {
-                    $project->setBaseDir($project->resolveFile($baseDir, $buildFileParent));
-                }
+              // check whether the user has specified an absolute path
+              $f = new PhingFile($baseDir);
+              if ($f->isAbsolute()) {
+                $project->setBasedir($baseDir);
+              } else {
+                $project->setBaseDir($project->resolveFile($baseDir, new PhingFile(getcwd())));
+              }
             }
+          }
         }
     }
 
@@ -135,19 +154,23 @@ class ProjectHandler extends AbstractHandler {
      */
     function startElement($name, $attrs) {
     
-		$project = $this->configurator->project;
+        $project = $this->configurator->project;
         $types = $project->getDataTypeDefinitions();
-		
-		if ($name == "target") {
-			$tf = new TargetHandler($this->parser, $this, $this->configurator);
-			$tf->init($name, $attrs);
-		} elseif (isset($types[$name])) {
+        
+        if ($name == "target") {
+            $tf = new TargetHandler($this->parser, $this, $this->configurator);
+            $tf->init($name, $attrs);
+        } elseif (isset($types[$name])) {
            $tyf = new DataTypeHandler($this->parser, $this, $this->configurator);
            $tyf->init($name, $attrs);
         } else {
-			$tf = new TaskHandler($this->parser, $this, $this->configurator);
-			$tf->init($name, $attrs);
+            $tf = new TaskHandler($this->parser, $this, $this->configurator);
+            $tf->init($name, $attrs);
         }
+    }
+
+    static function canonicalName ($name) {
+      return preg_replace('/\W/', '_', strtolower($name));
     }
 }
 

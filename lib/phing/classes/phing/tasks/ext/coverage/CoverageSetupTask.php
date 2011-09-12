@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: CoverageSetupTask.php 426 2008-10-28 19:29:49Z mrook $
+ * $Id: CoverageSetupTask.php 1182 2011-06-22 13:11:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,130 +29,154 @@ require_once 'phing/tasks/ext/coverage/CoverageMerger.php';
  * Initializes a code coverage database
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @version $Id: CoverageSetupTask.php 426 2008-10-28 19:29:49Z mrook $
+ * @version $Id: CoverageSetupTask.php 1182 2011-06-22 13:11:38Z mrook $
  * @package phing.tasks.ext.coverage
  * @since 2.1.0
  */
 class CoverageSetupTask extends Task
 {
-	/** the list of filesets containing the .php filename rules */
-	private $filesets = array();
+    /** the list of filesets containing the .php filename rules */
+    private $filesets = array();
 
-	/** the filename of the coverage database */
-	private $database = "coverage.db";
+    /** Any filelists of files containing the .php filenames */
+    private $filelists = array();
 
-	/** the classpath to use (optional) */
-	private $classpath = NULL;
+    /** the filename of the coverage database */
+    private $database = "coverage.db";
 
-	/**
-	 * Add a new fileset containing the .php files to process
-	 *
-	 * @param FileSet the new fileset containing .php files
-	 */
-	function addFileSet(FileSet $fileset)
-	{
-		$this->filesets[] = $fileset;
-	}
+    /** the classpath to use (optional) */
+    private $classpath = NULL;
 
-	/**
-	 * Sets the filename of the coverage database to use
-	 *
-	 * @param string the filename of the database
-	 */
-	function setDatabase($database)
-	{
-		$this->database = $database;
-	}
+    /**
+     * Add a new fileset containing the .php files to process
+     *
+     * @param FileSet the new fileset containing .php files
+     */
+    function addFileSet(FileSet $fileset)
+    {
+        $this->filesets[] = $fileset;
+    }
 
-	function setClasspath(Path $classpath)
-	{
-		if ($this->classpath === null)
-		{
-			$this->classpath = $classpath;
-		}
-		else
-		{
-			$this->classpath->append($classpath);
-		}
-	}
+    /**
+     * Supports embedded <filelist> element.
+     * @return FileList
+     */
+    function createFileList() {
+        $num = array_push($this->filelists, new FileList());
+        return $this->filelists[$num-1];
+    }
 
-	function createClasspath()
-	{
-		$this->classpath = new Path();
-		return $this->classpath;
-	}
-	
-	/**
-	 * Iterate over all filesets and return the filename of all files.
-	 *
-	 * @return array an array of (basedir, filenames) pairs
-	 */
-	private function getFilenames()
-	{
-		$files = array();
+    /**
+     * Sets the filename of the coverage database to use
+     *
+     * @param string the filename of the database
+     */
+    function setDatabase($database)
+    {
+        $this->database = $database;
+    }
 
-		foreach ($this->filesets as $fileset)
-		{
-			$ds = $fileset->getDirectoryScanner($this->project);
-			$ds->scan();
+    function setClasspath(Path $classpath)
+    {
+        if ($this->classpath === null)
+        {
+            $this->classpath = $classpath;
+        }
+        else
+        {
+            $this->classpath->append($classpath);
+        }
+    }
 
-			$includedFiles = $ds->getIncludedFiles();
+    function createClasspath()
+    {
+        $this->classpath = new Path();
+        return $this->classpath;
+    }
+    
+    /**
+     * Iterate over all filesets and return the filename of all files.
+     *
+     * @return array an array of (basedir, filenames) pairs
+     */
+    private function getFilenames()
+    {
+        $files = array();
 
-			foreach ($includedFiles as $file)
-			{
-				$fs = new PhingFile(realpath($ds->getBaseDir()), $file);
-					
-				$files[] = array('key' => strtolower($fs->getAbsolutePath()), 'fullname' => $fs->getAbsolutePath());
-			}
-		}
+        foreach($this->filelists as $fl) {
+            try {
+                $list = $fl->getFiles($this->project);
+                foreach($list as $file) {
+                    $fs = new PhingFile(strval($fl->getDir($this->project)), $file);
+                    $files[] = array('key' => strtolower($fs->getAbsolutePath()), 'fullname' => $fs->getAbsolutePath());
+                }
+            } catch (BuildException $be) {
+                $this->log($be->getMessage(), Project::MSG_WARN);
+            }
+        }
 
-		return $files;
-	}
-	
-	function init()
-	{
-		if (!extension_loaded('xdebug'))
-		{
-			throw new Exception("CoverageSetupTask depends on Xdebug being installed.");
-		}
-	}
 
-	function main()
-	{
-		$files = $this->getFilenames();
+        foreach ($this->filesets as $fileset)
+        {
+            $ds = $fileset->getDirectoryScanner($this->project);
+            $ds->scan();
 
-		$this->log("Setting up coverage database for " . count($files) . " files");
+            $includedFiles = $ds->getIncludedFiles();
 
-		$props = new Properties();
+            foreach ($includedFiles as $file)
+            {
+                $fs = new PhingFile(realpath($ds->getBaseDir()), $file);
+                    
+                $files[] = array('key' => strtolower($fs->getAbsolutePath()), 'fullname' => $fs->getAbsolutePath());
+            }
+        }
 
-		foreach ($files as $file)
-		{
-			$fullname = $file['fullname'];
-			$filename = $file['key'];
-			
-			$props->setProperty($filename, serialize(array('fullname' => $fullname, 'coverage' => array())));
-		}
+        return $files;
+    }
+    
+    function init()
+    {
+    }
 
-		$dbfile = new PhingFile($this->database);
+    function main()
+    {
+        /**
+         * Whitelist files when using PHPUnit > 3.5
+         */
+        @include_once 'PHPUnit/Runner/Version.php';
 
-		$props->store($dbfile);
+        if (version_compare(PHPUnit_Runner_Version::id(), '3.5.0') >= 0) {
+            $newFilter = true;
+        } else {
+            $newFilter = false;
+            @include_once 'PHPUnit/Util/Filter.php';
+        }
+        
+        $files = $this->getFilenames();
 
-		$this->project->setProperty('coverage.database', $dbfile->getAbsolutePath());
-	
-		foreach ($files as $file)
-		{
-			$fullname = $file['fullname'];
-			
-			xdebug_start_code_coverage(XDEBUG_CC_DEAD_CODE | XDEBUG_CC_UNUSED);
-			
-			Phing::__import($fullname, $this->classpath);
-			
-			$coverage = xdebug_get_code_coverage();
-			
-			xdebug_stop_code_coverage();
-			
-			CoverageMerger::merge($this->project, array($coverage));
-		}
-	}
+        $this->log("Setting up coverage database for " . count($files) . " files");
+
+        $props = new Properties();
+
+        foreach ($files as $file)
+        {
+            $fullname = $file['fullname'];
+            $filename = $file['key'];
+            
+            $props->setProperty($filename, serialize(array('fullname' => $fullname, 'coverage' => array())));
+            
+            if ($newFilter) {
+            	PHP_CodeCoverage_Filter::getInstance()->addFileToWhiteList($file['fullname']);
+            } else {
+                PHPUnit_Util_Filter::addFileToWhitelist($file['fullname']);
+            }
+        }
+
+        $dbfile = new PhingFile($this->database);
+
+        $props->store($dbfile);
+
+        $this->project->setProperty('coverage.database', $dbfile->getAbsolutePath());
+    }
 }
 

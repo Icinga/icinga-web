@@ -31,7 +31,6 @@ Cronk.grid.ColumnRendererUtil = function() {
 Cronk.grid.ColumnRenderer = {
 
 	customColumnPerfdataSanatized: function(cfg) {
-		AppKit.log(cfg);
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(!value)
 				return _('no value');
@@ -74,7 +73,6 @@ Cronk.grid.ColumnRenderer = {
 	
 	truncateText : function(cfg) {
 		var defaultLength = AppKit.getPrefVal('org.icinga.grid.outputLength') || 70;
-		AppKit.log(cfg);
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(!value) 
 				return "";

@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: ChainableReader.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: ChainableReader.php 557 2009-08-29 13:54:38Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,6 +24,7 @@
  * Interface indicating that a reader may be chained to another one.
  *
  * @author Magesh Umasankar
+ * @package phing.filters
  */
 interface ChainableReader {
 

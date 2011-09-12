@@ -1,6 +1,6 @@
 <?php
-/*
- *  $Id: TaskContainer.php 123 2006-09-14 20:19:08Z mrook $
+/**
+ *  $Id: TaskContainer.php 1085 2011-05-06 11:01:21Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,6 +17,8 @@
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
+ *
+ * @package phing
  */
 
 /**
@@ -25,7 +27,7 @@
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
  *  @copyright © 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.5 $ $Date: 2006-09-14 22:19:08 +0200 (Thu, 14 Sep 2006) $
+ *  @version   $Revision: 1085 $ $Date: 2011-05-06 13:01:21 +0200 (Fri, 06 May 2011) $
  *  @access    public
  *  @package   phing
  */

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Fileset.php 325 2007-12-20 15:44:58Z hans $
+ *  $Id: Fileset.php 772 2010-04-21 15:02:00Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,16 +30,10 @@ include_once 'phing/system/io/PhingFile.php';
  * @author   Greg Beaver 
  * @author   Hans Lellelid <hans@xmpl.org>
  * @package  phing.tasks.ext.pearpackage
- * @version  $Revision: 1.7 $
+ * @version  $Revision: 772 $
  */
 class PEAR_PackageFileManager_Fileset {
 
-    /**
-     * @access private
-     * @var PEAR_PackageFileManager
-     */
-    private $parent;
-    
     /**
      * Curent Phing Project.
      * @var Project
@@ -60,9 +54,12 @@ class PEAR_PackageFileManager_Fileset {
      * @param PEAR_PackageFileManager
      * @param array
      */
-    function __construct($parent, $options)
+    function __construct($options)
     {
-        $this->parent = $parent;
+        if (!is_array($options)) {
+            $options = $options->getOptions();
+        }
+        
         $this->project = $options['phing_project'];
         $this->filesets = $options['phing_filesets'];
     }
@@ -109,7 +106,7 @@ class PEAR_PackageFileManager_Fileset {
                     $path = '/'; // for array index
                 }
                 
-				$parts = explode('.', basename($file));
+                $parts = explode('.', basename($file));
                 $ext = array_pop($parts);
                 if (strlen($ext) == strlen($file)) {
                     $ext = '';
