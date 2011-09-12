@@ -65,6 +65,37 @@ IcingaCommandHandler.prototype = {
 		return this.grid.getSelectionModel().hasSelection();
 	},
 	
+	getArrayComboField : function(o, oDef, data) {
+		var orgName = oDef['name'];
+		delete oDef['name'];
+		
+		Ext.apply(oDef, {
+			store: new Ext.data.ArrayStore({
+				idIndex: 0,
+				fields: ['fId', 'fStatus', 'fLabel'],
+				data: data,
+				autoDestroy : true
+			}),
+			
+			'name': '__return_value_combo',
+			
+			mode: 'local',
+			typeAhead: true,
+			triggerAction: 'all',
+			forceSelection: true,
+			
+			
+			fieldLabel: o.fieldLabel,
+			
+			valueField: 'fStatus',
+			displayField: 'fLabel',
+			
+			hiddenName: o.fieldName
+		});
+			
+		return new Ext.form.ComboBox(oDef);
+	},
+	
 	getField : function(o) {
 		
 		oDef = {
@@ -80,77 +111,39 @@ IcingaCommandHandler.prototype = {
 		switch (o.fieldType) {
 			
 			case 'notification_options':
-
-				delete oDef['name'];
-			
-				Ext.apply(oDef, {
-					store: new Ext.data.ArrayStore({
-						idIndex: 0,
-						fields: ['fId', 'fStatus', 'fLabel'],
-						data: [
-							['1', '0', _('(default) no option')],
-							['2', '1', _('Broadcast')],
-							['3', '2', _('Forced')],
-							['4', '4', _('Increment current notification')]
-						]
-					}),
-					
-					'name': '__return_value_combo',
-					
-					mode: 'local',
-					typeAhead: true,
-					triggerAction: 'all',
-					forceSelection: true,
-					
-					
-					fieldLabel: _('Option'),
-					
-					valueField: 'fStatus',
-					displayField: 'fLabel',
-					
-					hiddenName: o.fieldName
-				});
-					
-				return new Ext.form.ComboBox(oDef);
-
+				var data = [
+					['1', '0', _('(default) no option')],
+					['2', '1', _('Broadcast')],
+					['3', '2', _('Forced')],
+					['4', '4', _('Increment current notification')]
+				];
+				
+				return this.getArrayComboField(o, oDef, data);
 			break;
 			
-			case 'return_code':
-			
-				delete oDef['name'];
-			
-				Ext.apply(oDef, {
-					store: new Ext.data.ArrayStore({
-						idIndex: 0,
-						fields: ['fId', 'fStatus', 'fLabel'],
-						data: [
-							['1', '0', _('OK')],
-							['2', '1', _('Warning')],
-							['3', '2', _('Critical')],
-							['4', '3', _('Unknown')],
-							['5', '255', _('Return code out of bounds')]
-						]
-					}),
-					
-					'name': '__return_value_combo',
-					width:300,
-					mode: 'local',
-					typeAhead: true,
-					triggerAction: 'all',
-					forceSelection: true,
-					
-					
-					fieldLabel: _("Status"),
-					
-					valueField: 'fStatus',
-					displayField: 'fLabel',
-					
-					hiddenName: o.fieldName
-				});
-					
-				return new Ext.form.ComboBox(oDef);
-			
+			case 'return_code_service':
+				var data = [
+					['1', '0', _('OK')],
+					['2', '1', _('Warning')],
+					['3', '2', _('Critical')],
+					['4', '3', _('Unknown')],
+					['5', '255', _('Return code out of bounds')]
+				];
+				
+				return this.getArrayComboField(o, oDef, data);
 			break;
+			
+			case 'return_code_host':
+				var data = [
+					['1', '0', _('UP')],
+					['2', '1', _('Down')],
+					['3', '2', _('Unreachable')],
+					['5', '255', _('Return code out of bounds')]
+				];
+				
+				return this.getArrayComboField(o, oDef, data);
+			break;
+			
 			case  'hidden':
 				return new Ext.form.Hidden(oDef);
 			break;
