@@ -57,11 +57,11 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
 			'<div class="icinga-overall-status-container clearfix">',
 			'<tpl for=".">',
 				'<tpl if="id==1">',
-				'<div class="icinga-overall-status-icon icinga-icon-host" ext:qtip="' + _('Hosts') + '"></div>',
+				'<div class="icinga-overall-status-icon icinga-icon-host" qtip="' + _('Hosts') + '"></div>',
 				'</tpl>',
 				'<tpl if="id==6">',
 				'<div class="x-clear icinga-overall-status-spacer"></div>',
-				'<div class="icinga-overall-status-icon icinga-icon-service" ext:qtip="' + _('Services') + '"></div>',
+				'<div class="icinga-overall-status-icon icinga-icon-service" qtip="' + _('Services') + '"></div>',
 				'</tpl>',
 				'<div class="icinga-overall-status-item" id="overall-status-{id}">',
 				'<span>{state}</span>',
@@ -168,7 +168,7 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
                 '<tpl if="id==2">',
                 '<div class="icinga-overall-status-icon-instance icinga-icon-application-minus" ext:qtip="Instances down"></div>',
                 '</tpl>',
-                '<div class="icinga-overall-status-item icinga-overall-status-item-instance"><span>{state}</span></div>',
+                '<div class="icinga-overall-status-item icinga-overall-status-item-instance">{state}</div>',
                 '<div class="x-clear icinga-overall-status-spacer"></div>',
                 '</div>',
                 '</tpl>',
@@ -184,7 +184,7 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
             }
             
             if (Ext.isEmpty(this.instanceTip)) {
-                this.instanceTip = new Ext.QuickTip({
+                this.instanceTip = new Ext.ToolTip({
                     autoDestroy : false,
                     title : _('Instance status'),
                     tpl: new Ext.XTemplate(
@@ -192,6 +192,7 @@ Icinga.Cronks.System.StatusOverall.Cronk = Ext.extend(Ext.Panel, {
                         '<div>{msg}</div>',
                         '</tpl>'
                     ),
+                    hideDelay:2000,
                     renderTo : Ext.getBody()
                 });
                 
