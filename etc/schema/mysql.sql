@@ -1,6 +1,6 @@
 /*****************************************************/
 /* Auto generated mysql SQL Schema file for icinga-web*/
-/* Creation date: 2011-02-01T16:40:23+01:00          */
+/* Creation date: 2011-09-12T14:53:22+02:00          */
 /****************************************************/
 
 
@@ -17,7 +17,7 @@ CREATE TABLE nsm_role (role_id INT AUTO_INCREMENT, role_name VARCHAR(40) NOT NUL
 CREATE TABLE nsm_session (session_entry_id INT AUTO_INCREMENT, session_id VARCHAR(255) NOT NULL, session_name VARCHAR(255) NOT NULL, session_data LONGTEXT NOT NULL, session_checksum VARCHAR(255) NOT NULL, session_created DATETIME NOT NULL, session_modified DATETIME NOT NULL, PRIMARY KEY(session_entry_id)) ENGINE = INNODB;
 CREATE TABLE nsm_target (target_id INT AUTO_INCREMENT, target_name VARCHAR(45) NOT NULL, target_description VARCHAR(100), target_class VARCHAR(80), target_type VARCHAR(45) NOT NULL, PRIMARY KEY(target_id)) ENGINE = INNODB;
 CREATE TABLE nsm_target_value (tv_pt_id INT, tv_key VARCHAR(45), tv_val VARCHAR(45) NOT NULL, PRIMARY KEY(tv_pt_id, tv_key)) ENGINE = INNODB;
-CREATE TABLE nsm_user (user_id INT AUTO_INCREMENT, user_account INT DEFAULT 0 NOT NULL, user_name VARCHAR(127) NOT NULL, user_lastname VARCHAR(40) NOT NULL, user_firstname VARCHAR(40) NOT NULL, user_password VARCHAR(64) NOT NULL, user_salt VARCHAR(64) NOT NULL, user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR(127), user_authkey VARCHAR(64), user_email VARCHAR(40) NOT NULL, user_disabled TINYINT DEFAULT '1' NOT NULL, user_created DATETIME NOT NULL, user_modified DATETIME NOT NULL, INDEX user_search_idx_idx (user_authsrc, user_authid, user_disabled), UNIQUE INDEX user_unique_idx (user_name), INDEX user_search_idx (user_name, user_authsrc, user_authid, user_disabled), PRIMARY KEY(user_id)) ENGINE = INNODB;
+CREATE TABLE nsm_user (user_id INT AUTO_INCREMENT, user_account INT DEFAULT 0 NOT NULL, user_name VARCHAR(127) NOT NULL, user_lastname VARCHAR(40) NOT NULL, user_firstname VARCHAR(40) NOT NULL, user_password VARCHAR(64) NOT NULL, user_salt VARCHAR(64) NOT NULL, user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR(127), user_authkey VARCHAR(64), user_email VARCHAR(254) NOT NULL, user_disabled TINYINT DEFAULT '1' NOT NULL, user_created DATETIME NOT NULL, user_modified DATETIME NOT NULL, UNIQUE INDEX user_name_unique_idx (user_name), UNIQUE INDEX user_email_unique_idx (user_email), INDEX user_search_idx (user_name, user_authsrc, user_authid, user_disabled), PRIMARY KEY(user_id)) ENGINE = INNODB;
 CREATE TABLE nsm_user_preference (upref_id INT AUTO_INCREMENT, upref_user_id INT NOT NULL, upref_val VARCHAR(100), upref_longval LONGTEXT, upref_key VARCHAR(50) NOT NULL, upref_created DATETIME NOT NULL, upref_modified DATETIME NOT NULL, INDEX upref_search_key_idx_idx (upref_key), INDEX principal_role_id_ix_idx (upref_user_id), PRIMARY KEY(upref_id)) ENGINE = INNODB;
 CREATE TABLE nsm_user_role (usro_user_id INT, usro_role_id INT, INDEX nsm_user_role_ix_idx (usro_role_id), PRIMARY KEY(usro_user_id, usro_role_id)) ENGINE = INNODB;
 ALTER TABLE cronk ADD CONSTRAINT cronk_cronk_user_id_nsm_user_user_id FOREIGN KEY (cronk_user_id) REFERENCES nsm_user(user_id);
@@ -38,6 +38,7 @@ ALTER TABLE nsm_user_role ADD CONSTRAINT nsm_user_role_usro_role_id_nsm_role_rol
 
 /*          Initial data import              */
  
+INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0');
 INSERT INTO nsm_db_version (vers_id,version) VALUES ('1','2');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
@@ -54,17 +55,13 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('13','appkit.api.access','Access to web-based api adapter','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('14','icinga.demoMode','Hide features like password reset which are not wanted in demo systems','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('15','icinga.cronk.category.admin','Enables category admin features','','credential');
-INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('16','icinga.cronk.log','Enables icinga-log cronk','','credential');
+INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('16','icinga.cronk.log','Allow user to view icinga-log','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('17','icinga.control.view','Allow user to view icinga status','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('1','icinga_user','The default representation of a ICINGA user','0');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('2','appkit_user','Appkit user test','0');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled,role_parent) VALUES ('3','appkit_admin','AppKit admin','0','2');
 INSERT INTO nsm_role (role_id,role_name,role_description,role_disabled) VALUES ('4','guest','Unauthorized Guest','0');
-INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0');
-INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','1');
-INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','2');
-INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','3');
 INSERT INTO nsm_principal (principal_id,principal_user_id,principal_type,principal_disabled) VALUES ('1','1','user','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('2','2','role','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('3','3','role','0');
@@ -79,3 +76,8 @@ INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('6
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('7','5','7');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('8','3','15');
 INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('9','3','16');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('10','3','17');
+INSERT INTO nsm_principal_target (pt_id,pt_principal_id,pt_target_id) VALUES ('11','3','18');
+INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','1');
+INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','2');
+INSERT INTO nsm_user_role (usro_user_id,usro_role_id) VALUES ('1','3');
