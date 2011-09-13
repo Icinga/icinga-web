@@ -69,7 +69,8 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
 
         $api = $this->getContext()->getModel("System.CommandSender","Cronks");
         $api->setCommandName($command);
-        $api->setData($data);
+        
+        $api->setData(array_merge($data,array("data"=>$data)));
         $api->setSelection($targets);
         
         // send it

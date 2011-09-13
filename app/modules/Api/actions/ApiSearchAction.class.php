@@ -95,8 +95,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         // Adding security principal targets to the query
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
         $res = $search->fetch()->getAll();
-  
-
+ 
 
         //Setup count
         if ($rd->getParameter("countColumn")) {
