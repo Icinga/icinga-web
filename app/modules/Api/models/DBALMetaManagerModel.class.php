@@ -37,7 +37,7 @@ class Api_DBALMetaManagerModel extends IcingaApiBaseModel {
             'IcingaHosts',
             'IcingaHoststatus',
             'IcingaInstances',
-            'IcingaLogentres',
+            'IcingaLogentries',
             'IcingaNotifications',
             'IcingaObjects',
             'IcingaProcessevents',

@@ -72,8 +72,9 @@ final class AccessConfig {
 
     public static function canExecute($file,$host) {
         $host = self::getHostByName($host);
-        if(!isset($host["x"][$file]))
-            return false;
+
+	if(isset($host["x"][$file]))
+            return true;
         return (in_array($file,$host["x"]) || in_array(dirname($file)."/*",$host["x"]));
     }
 
