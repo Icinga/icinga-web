@@ -92,12 +92,10 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $this->setLimit($search,$rd);
 
         $search->setResultType(IcingaApiConstants::RESULT_ARRAY);
-        $search->fetch()->getAll();
         // Adding security principal targets to the query
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
-
         $res = $search->fetch()->getAll();
-
+  
 
 
         //Setup count
@@ -150,7 +148,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             $searchField = array($searchField);
         foreach($searchField as $element) {
             if ($element["type"] == "atom") {
-                $filterGroup->addFilter($search->createFilter($element["field"][0],$element["value"][0],$element["method"][0]));
+                $filterGroup->addFilter($search->createFilter(strtoupper($element["field"][0]),$element["value"][0],$element["method"][0]));
             } else {
                 $filterGroup->addFilter($this->buildFiltersFromArray($search,$element));
             }
