@@ -17,6 +17,7 @@ AC_PREFIX_DEFAULT(/usr/local/icinga-web)
 
 if test "x$prefix" = "xNONE" ; then
     installDir="/usr/local/icinga-web"
+    prefix=$installDir
 else
     installDir=$prefix 
 fi
