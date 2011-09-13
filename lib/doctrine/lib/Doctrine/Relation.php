@@ -72,8 +72,9 @@ abstract class Doctrine_Relation implements ArrayAccess
                                   'refClassRelationAlias' => null,
                                   'foreignKeyName' => null,
                                   'orderBy' => null, 
-                                  'idField' => null 
-                            
+                                  'idField' => null,
+                                  'foreignId' => null
+                           
                         );
 
     protected $_isRefClass = null;
@@ -335,6 +336,9 @@ abstract class Doctrine_Relation implements ArrayAccess
     
     final public function __getIdField() {
         return $this->definition["idField"];
+    }
+     final public function __getForeignId() {
+        return $this->definition["foreignId"];
     }
     /**
      * isOneToOne

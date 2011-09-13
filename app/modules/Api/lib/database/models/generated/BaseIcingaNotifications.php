@@ -194,9 +194,9 @@ abstract class BaseIcingaNotifications extends Doctrine_Record {
                             'foreign' => 'contactnotification_id',
                             'refClass' => 'IcingaContactnotifications',
                             'idField' => 'notification_id',
-                            'targetField' => 'contactnotification_id'
+                            'foreignId' => 'contactnotification_id',
         ));
-        
+      
         parent::setUp();
 
     }
