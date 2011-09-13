@@ -135,7 +135,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'HOST_CHILD_NAME'                =>      'oh.name1',
                           'HOST_CUSTOMVARIABLE_NAME'         =>        'cvsh.varname',
                           'HOST_CUSTOMVARIABLE_VALUE'        =>        'cvsh.varvalue',
-                          'HOST_IS_PENDING'       =>        '(hs.has_been_checked-hs.should_be_scheduled)*-1',
+                          'HOST_IS_PENDING'       =>        '(hs.has_been_checked-hs.should_be_scheduled)*-1 as HOST_IS_PENDING',
                           // Service data
 
                           'SERVICE_ID'            =>        's.service_id',
