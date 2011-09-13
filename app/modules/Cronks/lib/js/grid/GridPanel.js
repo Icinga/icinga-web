@@ -263,6 +263,10 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			filter_params: this.filter_params || {},
 			filter_types: this.filter_types || {},
 			store_origin_params: ("originParams" in store) ? store.originParams : {},
+            sortToggle: store.sortToggle,
+            sortInfo: store.sortInfo,
+            groupDir: store.groupDir,
+            groupOnSort: store.groupOnSort,
 			colModel: this.getPersistentColumnModel(),
 			autoRefresh: aR
 		};
@@ -281,7 +285,18 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		if (state.filter_types) {
 			this.filter_types = state.filter_types;
 		}
-		
+		if (state.sortToggle) {
+			store.sortToggle = state.sortToggle;
+		}
+		if (state.sortInfo) {
+			store.sortInfo = state.sortInfo;
+		}	
+        if (state.groupDir) {
+			store.groupDir = state.groupDir;
+		}
+		if (state.groupOnSort) {
+			store.groupOnSort = state.groupOnSort;
+		}
 		if (state.store_origin_params) {
 			store.originParams = state.store_origin_params;
 			this.applyParamsToStore(store.originParams, store);
