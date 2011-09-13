@@ -26,7 +26,7 @@
 		<security_filter class="AgaviSecurityFilter" />
 		
 		<!-- Config for our session ... -->
-		<storage class="AppKitDoctrineSessionStorage">
+		<storage class="AgaviSessionStorage">
 			<ae:parameter name="session_cookie_lifetime">0</ae:parameter>
 			<ae:parameter name="session_name">icinga-web</ae:parameter>
 			<ae:parameter name="gzip_level">6</ae:parameter>

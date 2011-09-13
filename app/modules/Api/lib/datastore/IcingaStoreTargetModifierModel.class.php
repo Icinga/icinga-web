@@ -319,10 +319,9 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
         $o->setAliasDefs($this->mainAlias,$this->aliasDefs);
         $o->setDefaultJoinType($this->defaultJoinType);
         foreach($this->fields as $field)
-        $o->addSelect($field);
+            $o->addSelect($field);
         $o->distinct($this->isDistinct());
         $o->from($this->target." ".$this->mainAlias);
-
 
         foreach($this->staticWhereConditions as $cond) {
 
