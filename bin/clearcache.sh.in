@@ -32,30 +32,22 @@ fi
 
 echo "Basedir: $PREFIX"
 
-CCDIR="$PREFIX/app/cache/config $PREFIX/app/cache/content $PREFIX/app/cache/CronkTemplates PREFIX/app/cache/Squished"
+CCDIR="$PREFIX/app/cache/config $PREFIX/app/cache/content $PREFIX/app/cache/CronkTemplates $PREFIX/app/cache/Squished"
 
 for CUR_CDIR in $CCDIR; do
-	CC_FILES=$(ls $CUR_CDIR/*.php 2>/dev/null | wc -l)
+	CC_FILES=$(ls $CUR_CDIR/* 2>/dev/null | wc -l)
 	if [[ $CC_FILES -gt 0 ]]; then
 
-		msg_start "Deleting config cache ($CC_FILES files)"
+		CUR_CNAME=$(basename $CUR_CDIR)
+
+		msg_start "Deleting cache from $CUR_CNAME ($CC_FILES files)"
 		
-		rm $CUR_CDIR/*php > /dev/null 2>&1
+		rm $CUR_CDIR/* > /dev/null 2>&1
 		
 		msg_result
 		
 	fi
 done
-CODIR="$PREFIX/app/cache/content"
-
-if [[ -e $CODIR ]]; then
-
-	msg_start "Deleting additionak cache dirs"
-	
-	rm -r $CODIR > /dev/null 2>&1
-	
-	msg_result	
-fi
 
 if [[ $NOTHING == true ]]; then
 	echo "Cache already purged!"
