@@ -212,6 +212,14 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'LOG_REALTIME_DATA'         =>  'le.realtime_data',
                           'LOG_INFERRED_DATA'         =>  'le.inferred_data_extracted',
 
+                          // Commands
+                          'COMMAND_NAME'              =>  'oco.name1',
+                          'COMMAND_ID'                =>  'co.command_id',
+                          'COMMAND_INSTANCE_ID'       =>  'co.instance_id',
+                          'COMMAND_CONFIG_TYPE'       =>  'co.config_type',
+                          'COMMAND_OBJECT_ID'         =>  'oco.object_id',
+                          'COMMAND_COMMAND_LINE'      =>  'co.command_line',
+                          
                           // Statehistory
                           'STATEHISTORY_ID'           =>  'sh.statehistory_id',
                           'STATEHISTORY_INSTANCE_ID'  =>  'sh.instance_id',
@@ -629,8 +637,13 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                            "type" => "left"
                                        ),
                                        "h" => array(
-                                           "src" => "n",
-                                           "relation" => "hosts",
+                                           "src" => "s",
+                                           "relation" => "host",
+                                           "on" => "("
+                                               . "(n.notification_type = 0 and n.object_id = h.host_object_id)"
+                                               . " OR "
+                                               . "(n.notification_type = 1 and s.host_object_id = h.host_object_id)"
+                                               . ")",
                                            "type" => "left"
                                        ),
                                        "hg" => array(
@@ -661,6 +674,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
                                        ),
                                        "nc" => array("src"=>"n","relation"=>"notificationcontacts"),
+//                                        "co" => array("src" => "nc", "relation" => "command"),
+//                                        "oco" => array("src" => "co", "relation" => "object"),
+                                       "nm" => array("src"=>"n","relation"=>"notificationmethods"),
+                                       "co" => array("src"=>"nm","relation"=>"command"),
+                                       "oco" => array("src"=>"co","relation"=>"object"),
                                        "cg"   => array("src" => "s", "relation" => "contactgroups"),
                                        "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
                                        "cvss"=> array("src" => "s","relation" => "customvariablestatus"),

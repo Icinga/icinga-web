@@ -337,7 +337,36 @@
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        </field>        
+        </field>
+        
+		<field name="notification_command">
+        	<datasource>
+        		<parameter name="field">COMMAND_NAME</parameter>
+        	</datasource>
+        	
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Contact</parameter>
+                <parameter name="width">120</parameter>
+               
+                <parameter name="jsFunc">
+                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                	<parameter name="function">truncateText</parameter>
+                	<parameter name="arguments">
+						<parameter name="length">40</parameter>
+                	</parameter>
+                </parameter>
+            </display>
+        	
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field> 
     </fields>
     
 </template>
