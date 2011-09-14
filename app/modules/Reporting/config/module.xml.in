@@ -65,12 +65,20 @@
 					<ae:parameter name="p_host_object_id">
 						<ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
 						<ae:parameter name="target">host</ae:parameter>
+						<ae:parameter name="columns">
+							<ae:parameter>HOST_OBJECT_ID</ae:parameter>
+							<ae:parameter>HOST_NAME</ae:parameter>
+						</ae:parameter>
 						<ae:parameter name="valueField">HOST_OBJECT_ID</ae:parameter>
 						<ae:parameter name="displayField">HOST_NAME</ae:parameter>
 					</ae:parameter>
 					<ae:parameter name="p_hostgroup_object_id">
 						<ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
 						<ae:parameter name="target">hostgroup</ae:parameter>
+						<ae:parameter name="columns">
+							<ae:parameter>HOSTGROUP_OBJECT_ID</ae:parameter>
+							<ae:parameter>HOSTGROUP_NAME</ae:parameter>
+						</ae:parameter>
 						<ae:parameter name="valueField">HOSTGROUP_OBJECT_ID</ae:parameter>
 						<ae:parameter name="displayField">HOSTGROUP_NAME</ae:parameter>
 					</ae:parameter>
@@ -78,8 +86,14 @@
 					<ae:parameter name="p_service_object_id">
 						<ae:parameter name="className">Icinga.Reporting.inputControl.ApiSelectionField</ae:parameter>
 						<ae:parameter name="target">service</ae:parameter>
+						<ae:parameter name="columns">
+							<ae:parameter>SERVICE_OBJECT_ID</ae:parameter>
+							<ae:parameter>HOST_NAME</ae:parameter>
+							<ae:parameter>SERVICE_NAME</ae:parameter>
+						</ae:parameter>
 						<ae:parameter name="valueField">SERVICE_OBJECT_ID</ae:parameter>
 						<ae:parameter name="displayField">SERVICE_NAME</ae:parameter>
+						<ae:parameter name="tpl"><![CDATA[{HOST_NAME} - {SERVICE_NAME}]]></ae:parameter>
 					</ae:parameter>
 				</setting>
 				
@@ -101,7 +115,7 @@
 				
 				<!-- Jasper configurations -->
 				<setting name="jasperconfig.default">
-					<ae:parameter name="jasper_url">http://10.121.0.95:8080/jasperserver</ae:parameter>
+					<ae:parameter name="jasper_url">http://localhost:8080/jasperserver</ae:parameter>
 					<ae:parameter name="jasper_user">jasperadmin</ae:parameter>
 					<ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
 					<ae:parameter name="tree_root">/Icinga/reports</ae:parameter>
@@ -122,7 +136,7 @@
 	</ae:configuration>
 
     <!--  Try include the overwriting file -->
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_folder@/reporting.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/reporting.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
             <xi:fallback></xi:fallback>
     </xi:include>
 	

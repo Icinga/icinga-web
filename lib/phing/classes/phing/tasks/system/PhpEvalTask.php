@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: PhpEvalTask.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: PhpEvalTask.php 680 2010-01-04 13:36:02Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,7 +29,7 @@ require_once 'phing/Task.php';
  *        modify internal Phing classes unless you know what you are doing.
  *
  * @author   Hans Lellelid <hans@xmpl.org>
- * @version  $Revision: 1.7 $
+ * @version  $Revision: 680 $
  * @package  phing.tasks.system
  *
  * @todo Add support for evaluating expressions
@@ -39,7 +39,7 @@ class PhpEvalTask extends Task {
     protected $expression; // Expression to evaluate
     protected $function; // Function to execute
     protected $class; // Class containing function to execute
-    protected $returnProperty; // name of property to set to return value 
+    protected $returnProperty = null; // name of property to set to return value 
     protected $params = array(); // parameters for function calls
     
     /** Main entry point. */
@@ -57,15 +57,10 @@ class PhpEvalTask extends Task {
             throw new BuildException("You cannot use nested <param> tags when evaluationg a PHP expression.", $this->location);
         }
         
-        $retval = null;
         if ($this->function !== null) {
-            $retval = $this->callFunction();                                    
+            $this->callFunction();                                    
         } elseif ($this->expression !== null) {
-            $retval = $this->evalExpression();
-        }
-        
-        if ($this->returnProperty !== null) {
-            $this->project->setProperty($this->returnProperty, $retval);
+            $this->evalExpression();
         }
     }
     
@@ -98,7 +93,10 @@ class PhpEvalTask extends Task {
         } 
         
         $return = call_user_func_array($user_func, $params);
-        return $return;
+        
+        if ($this->returnProperty !== null) {
+            $this->project->setProperty($this->returnProperty, $return);
+        }
     }
     
     /**
@@ -110,9 +108,14 @@ class PhpEvalTask extends Task {
         if (!StringHelper::endsWith(';', trim($this->expression))) {
             $this->expression .= ';';
         }
-        $retval = null;
-        eval('$retval = ' . $this->expression);
-        return $retval;
+
+        if ($this->returnProperty !== null) {
+            $retval = null;
+            eval('$retval = ' . $this->expression);
+            $this->project->setProperty($this->returnProperty, $retval);
+        } else {
+            eval($this->expression);
+        }
     }
     
     /** Set function to execute */
@@ -150,6 +153,8 @@ class PhpEvalTask extends Task {
 
 /**
  * Supports the <param> nested tag for PhpTask.
+ *
+ * @package  phing.tasks.system
  */
 class FunctionParam {
 

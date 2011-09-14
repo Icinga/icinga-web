@@ -47,14 +47,14 @@
 			-->
 			<appender name="UniversalLogfileAppender" class="AgaviRotatingFileLoggerAppender" layout="ApacheStyle">
 				<ae:parameters>
-					<ae:parameter name="dir">@web_log_folder@/</ae:parameter>
+					<ae:parameter name="dir">@web_log_dir@/</ae:parameter>
 					<ae:parameter name="prefix">icinga-web-</ae:parameter>
 				</ae:parameters>
 			</appender>
 			
 			<appender name="DebugLogfileAppender" class="AgaviRotatingFileLoggerAppender" layout="ApacheStyle">
 				<ae:parameters>
-					<ae:parameter name="dir">@web_log_folder@/</ae:parameter>
+					<ae:parameter name="dir">@web_log_dir@/</ae:parameter>
 					<ae:parameter name="prefix">debug-</ae:parameter>
 				</ae:parameters>
 			</appender>

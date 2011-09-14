@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: CreoleTask.php 59 2006-04-28 14:49:47Z mrook $
+ *  $Id: PDOTask.php 1208 2011-07-08 19:41:30Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -31,7 +31,7 @@ include_once 'phing/types/Reference.php';
  * @author    Jeff Martin <jeff@custommonkey.org> (Ant)
  * @author    Michael McCallum <gholam@xtra.co.nz> (Ant)
  * @author    Tim Stephenson <tim.stephenson@sybase.com> (Ant)
- * @version   $Revision: 1.13 $
+ * @version   $Revision: 1208 $
  * @package   phing.tasks.system
  */
 abstract class PDOTask extends Task {
@@ -142,9 +142,9 @@ abstract class PDOTask extends Task {
             
             $user = null;
             $pass = null;
-				
+                
             if ($this->userId) {
-            	$user = $this->getUserId();
+                $user = $this->getUserId();
             }
             
             if ($this->password) {
@@ -154,13 +154,11 @@ abstract class PDOTask extends Task {
             $conn = new PDO($this->getUrl(), $user, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            if ($this->autocommit) {
-            	try {
-					$conn->setAttribute(PDO::ATTR_AUTOCOMMIT, $this->autocommit);
-				} catch (PDOException $pe) {
-					$this->log("Unable to enable auto-commit for this database: " . $pe->getMessage(), Project::MSG_WARN);
-				}
-			}
+            try {
+                $conn->setAttribute(PDO::ATTR_AUTOCOMMIT, $this->autocommit);
+            } catch (PDOException $pe) {
+                $this->log("Unable to enable auto-commit for this database: " . $pe->getMessage(), Project::MSG_VERBOSE); 
+            }
             
             return $conn;
             

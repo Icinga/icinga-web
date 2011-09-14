@@ -14,7 +14,11 @@ class AppKitSplitValidator extends AgaviValidator {
         $argument = $this->getArgument();
         $data = $this->getData($argument);
         $splitChar = $this->getParameter("split",";");
-        $splitted = explode($splitChar,$data);
+        $splitted = array();
+        if(is_array($data)) // ignore if already splitted
+           $splitted = $data;
+        else
+            $splitted = explode($splitChar,$data);
         $this->export($splitted);
         return true;
     }

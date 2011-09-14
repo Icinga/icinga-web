@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: DbDeployTask.php 59 2006-04-28 14:49:47Z lcrouch $
+ *  $Id: DbmsSyntaxFactory.php 1019 2010-12-22 09:22:55Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,34 +26,37 @@ require_once 'phing/tasks/ext/dbdeploy/DbmsSyntax.php';
  *  Factory for generating dbms-specific syntax-generating objects
  *
  *  @author   Luke Crouch at SourceForge (http://sourceforge.net)
- *  @version  $Revision: 1.1 $
+ *  @version  $Revision: 1019 $
  *  @package  phing.tasks.ext.dbdeploy
  */
 
 class DbmsSyntaxFactory
 {
-	private $dbms;
-	
-	public function __construct($dbms)
-	{
-		$this->dbms = $dbms;
-	}
-	
-	public function getDbmsSyntax()
-	{
-		switch ($this->dbms){
-			case('sqlite') :
-				require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxSQLite.php';
-				return new DbmsSyntaxSQLite();
-			case('mysql'):
-				require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxMysql.php';
-				return new DbmsSyntaxMysql();
-			case('mssql'):
-				require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxMsSql.php';
-				return new DbmsSyntaxMsSql();
-			default:
-				throw new Exception($this->dbms . ' is not supported by dbdeploy task.');
-		}
-	}
+    private $dbms;
+    
+    public function __construct($dbms)
+    {
+        $this->dbms = $dbms;
+    }
+    
+    public function getDbmsSyntax()
+    {
+        switch ($this->dbms){
+            case('sqlite') :
+                require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxSQLite.php';
+                return new DbmsSyntaxSQLite();
+            case('mysql'):
+                require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxMysql.php';
+                return new DbmsSyntaxMysql();
+            case('mssql'):
+                require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxMsSql.php';
+                return new DbmsSyntaxMsSql();
+            case('pgsql'):
+                require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxPgSQL.php';
+                return new DbmsSyntaxPgSQL();
+            default:
+                throw new Exception($this->dbms . ' is not supported by dbdeploy task.');
+        }
+    }
 }
 

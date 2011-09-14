@@ -71,7 +71,14 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 					xtype : 'textfield',
 					fieldLabel : _('Job ID'),
 					name : 'id',
-					readOnly : true
+					readOnly : true,
+					value : 0
+				}, {
+					xtype : 'textfield',
+					fieldLabel : _('Job Version'),
+					name : 'version',
+					readOnly : true,
+					value : 0
 				}]
 			}, {
 				iconCls : 'icinga-cronk-icon-2',
@@ -178,6 +185,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							value : 'DAY',
 							valueField : 'interval',
 							displayField : 'label',
+							hiddenName : 'simpleTrigger.recurrenceIntervalUnit',
 							name : 'simpleTrigger.recurrenceIntervalUnit'
 						}]
 					}, {
@@ -503,6 +511,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 							items : [{
 								xtype : 'checkbox',
 								boxLabel : _('Sequential File Names'),
+								inputValue : true,
 								name : 'repositoryDestination.sequentialFilenames'
 							}, {
 								xtype : 'textfield',
@@ -514,7 +523,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 						}, {
 							xtype : 'checkbox',
 							boxLabel : _('Overwrite files'),
-							name : 'repositoryDestination.overwriteFiles'
+							name : 'repositoryDestination.overwriteFiles',
+							inputValue : true
 						}]
 					}, {
 						xtype : 'fieldset',
@@ -562,17 +572,32 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 						}, {
 							xtype : 'checkbox',
 							boxLabel : _('Attach files'),
-							name : 'mailNotification.resultSendType'
+							name : 'mailNotification.resultSendType',
+							inputValue : true
 						}, {
 							xtype : 'checkbox',
 							boxLabel : _('Skip empty reports'),
-							name : 'mailNotification.skipEmptyReports'
+							name : 'mailNotification.skipEmptyReports',
+							inputValue : true
 						}]
 					}]
 				}]
 			}]
 		});
 		
+		/*
+		 * Dirty hack for form processing:
+		 * Items are rendered only if the tab has been activated. To initialize
+		 * the initial state of the form do this on first show
+		 */
+		(function() {
+			this.formTabs.getItem(1).on('show', function() {
+				if (Ext.isEmpty(this.job_id)) {
+					this.getForm().findField('trigger').setValueForItem('recurrence-simple');
+				}
+			}, this, { single : true });
+		}).defer(1000, this);
+	
 		/*
 		 * Need to prerender all items in tab panel. Because
 		 * the form is not ready we don't do this.
@@ -642,25 +667,64 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 			form : this.getForm()
 		});
 		
-		var data = dataTool.createJsonStructure();
+		var params = {
+			job_data : Ext.encode(dataTool.createJsonStructure()),
+			uri : this.report_uri
+		}
 		
-		AppKit.log(data);
+		this.parentCmp.showMask();
+		
+		Ext.Ajax.request({
+			url : this.scheduler_edit_url,
+			params : params,
+			success : function(response, opts) {
+				try {
+					var re = Ext.decode(response.responseText);
+					if (re.success === true) {
+						this.cancelEdit();
+					} else {
+						AppKit.notifyMessage(_('Error'), _(String.format(_('Could not save: {0}'), re.error)));
+					}
+				} catch (e) {
+					AppKit.notifyMessage(_('Error'), _(String.format(_('Could not parse response: {0}'), e)));
+					this.parentCmp.hideMask();
+				}
+				
+				this.parentCmp.hideMask();
+			},
+			failure : function(response, opts) {
+				this.parentCmp.hideMask();
+			},
+			scope : this
+		})
 	},
 	
 	processFormCancel : function() {
 		this.cancelEdit();
 	},
 	
-	cancelEdit : function() {
+	resetForm : function() {
+		this.report_uri = null;
+		this.job_id = null;
+		
 		try {
 			this.getForm().reset();
 		} catch (e) {
 			// DO NOTHING
 		}
+	},
+	
+	cancelEdit : function() {
+		this.resetForm();
 		this.collapse(true);
+		this.parentCmp.reloadTaskList();
 	},
 	
 	startEdit : function(report_uri, job_id) {
+		
+		this.resetForm();
+		
+		this.report_uri = report_uri;
 		
 		var params = {
 			uri : report_uri
@@ -668,6 +732,7 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 		
 		if (job_id) {
 			params.job = job_id
+			this.job_id = job_id;
 		}
 		
 		if (params.uri) {
@@ -702,6 +767,8 @@ Icinga.Reporting.util.ScheduleEditForm = Ext.extend(Ext.form.FormPanel, {
 			});
 			
 			dataTool.applyFormValues();
+		} else {
+			this.getForm().findField('reportUnitURI').setValue(this.report_uri);
 		}
 	},
 	

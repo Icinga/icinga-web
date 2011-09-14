@@ -123,14 +123,14 @@ abstract class BaseNsmUser extends Doctrine_Record {
                              'notnull' => false,
                              'autoincrement' => false,
                          ));
-        $this->hasColumn('user_email', 'string', 40, array(
+        $this->hasColumn('user_email', 'string', 254, array(
                              'type' => 'string',
                              'length' => 40,
                              'fixed' => false,
                              'unsigned' => false,
                              'primary' => false,
                              'notnull' => true,
-                             'autoincrement' => false,
+                             'autoincrement' => false
                          ));
         $this->hasColumn('user_disabled', 'integer', 1, array(
                              'type' => 'integer',
@@ -158,9 +158,6 @@ abstract class BaseNsmUser extends Doctrine_Record {
                              'notnull' => true,
                              'autoincrement' => false,
                          ));
-
-        //	$this->index('user_unique_idx',array('fields'=>array('user_name')));
-        $this->index('user_search_idx',array('fields'=>	array('user_authsrc','user_authid','user_disabled')));
     }
 
 

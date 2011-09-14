@@ -30,9 +30,8 @@
 				<errors>
 					<error>Could not validate uri</error>
 				</errors>
-			</validator> 
-		</validators>
-		
+			</validator>
+			
 		<validator class="number" name="job" required="false">
 			<argument>job</argument>
 			
@@ -40,6 +39,15 @@
 				<error>Could not validate jobid (job)</error>
 			</errors>
 		</validator>
+		
+		<validator class="string" name="job_data" required="false">
+			<argument>job_data</argument>
+			
+			<errors>
+				<error>Could not validate job json document (job_data)</error>
+			</errors>
+		</validator> 
+		</validators>
 		
 	</ae:configuration>
 	

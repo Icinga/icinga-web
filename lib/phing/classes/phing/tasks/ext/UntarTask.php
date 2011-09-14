@@ -24,7 +24,7 @@ require_once 'phing/tasks/ext/ExtractBaseTask.php';
  * Extracts one or several tar archives using PEAR Archive_Tar
  *
  * @author    Joakim Bodin <joakim.bodin+phing@gmail.com>
- * @version   $Revision: 1.0 $
+ * @version   $Id: UntarTask.php 526 2009-08-11 12:11:17Z mrook $
  * @package   phing.tasks.ext
  * @since     2.2.0
  */

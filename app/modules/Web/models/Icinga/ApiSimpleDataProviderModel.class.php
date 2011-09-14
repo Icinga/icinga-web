@@ -146,10 +146,9 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
             switch (strtolower($this->resultColumns[$key]['type'])) {
                 case 'url':
                     if (isset($val) && strlen($val)) {
-                        $val = AppKitXmlTag::create('a', $val)
+                        $val = (string)AppKitXmlTag::create('a', $val)
                                ->addAttribute('href', $val)
-                               ->addAttribute('target', '_blank')
-                               ->toString();
+                               ->addAttribute('target', '_blank');
                     }
 
                     break;

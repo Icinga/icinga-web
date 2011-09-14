@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: DataType.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: DataType.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -75,9 +75,9 @@ class DataType extends ProjectComponent {
      * Subclasses may need to check whether any other attributes
      * have been set as well or child elements have been created and
      * thus override this method. if they do they must call parent::setRefid()
-	 * 
-	 * @param Reference $r
-	 * @return void
+     * 
+     * @param Reference $r
+     * @return void
      */
     function setRefid(Reference $r) {
         $this->ref = $r;

@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: BuildFileTest.php 227 2007-08-28 02:17:00Z hans $
+ *  $Id: BuildFileTest.php 1150 2011-06-14 19:16:57Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -20,7 +20,7 @@
  * <http://phing.info>.
  */
  
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'phing/BuildListener.php';
 require_once 'phing/system/io/PhingFile.php';
 
@@ -33,8 +33,9 @@ require_once 'phing/system/io/PhingFile.php';
  * 
  * @author Nico Seessle <nico@seessle.de>
  * @author Conor MacNeill
+ * @author Victor Farazdagi <simple.square@gmail.com>
  */
-abstract class BuildFileTest extends PHPUnit2_Framework_TestCase { 
+abstract class BuildFileTest extends PHPUnit_Framework_TestCase { 
     
     protected $project;
     
@@ -49,18 +50,36 @@ abstract class BuildFileTest extends PHPUnit2_Framework_TestCase {
     
     /**
      * Asserts that the log buffer contains specified message at specified priority.
-     * @param string $$expected Message subsctring
+     * @param string $expected Message subsctring
      * @param int $priority Message priority (default: any)
      * @param string $errmsg The error message to display.
      */
     protected function assertInLogs($expected, $priority = null, $errormsg = "Expected to find '%s' in logs: %s")
     {
-    	foreach($this->logBuffer as $log) {
-    		if (false !== stripos($log, $expected)) {
-    			return;
-    		}
-    	}
-    	$this->fail(sprintf($errormsg, $expected, var_export($this->logBuffer,true)));
+        foreach($this->logBuffer as $log) {
+            if (false !== stripos($log, $expected)) {
+                $this->assertEquals(1, 1); // increase number of positive assertions
+                return;
+            }
+        }
+        $this->fail(sprintf($errormsg, $expected, var_export($this->logBuffer,true)));
+    }
+
+    /**
+     * Asserts that the log buffer does NOT contain specified message at specified priority.
+     * @param string $expected Message subsctring
+     * @param int $priority Message priority (default: any)
+     * @param string $errmsg The error message to display.
+     */
+    protected function assertNotInLogs($message, $priority = null, $errormsg = "Unexpected string '%s' found in logs: %s")
+    {
+        foreach($this->logBuffer as $log) {
+            if (false !== stripos($log, $message)) {
+                $this->fail(sprintf($errormsg, $message, var_export($this->logBuffer,true)));
+            }
+        }
+
+        $this->assertEquals(1, 1); // increase number of positive assertions
     }
     
     /**
@@ -227,11 +246,12 @@ abstract class BuildFileTest extends PHPUnit2_Framework_TestCase {
             $this->executeTarget($target);
         } catch (BuildException $ex) {
             $this->buildException = $ex;
-            if (($msg !== null) && (!$ex->getMessage() == $msg)) {
+            if (($msg !== null) && ($ex->getMessage() != $msg)) {
                 $this->fail("Should throw BuildException because '" . $cause
                         . "' with message '" . $msg
                         . "' (actual message '" . $ex->getMessage() . "' instead)");
             }
+            $this->assertEquals(1, 1); // increase number of positive assertions
             return;
         }
         $this->fail("Should throw BuildException because: " . $cause);
@@ -254,6 +274,7 @@ abstract class BuildFileTest extends PHPUnit2_Framework_TestCase {
             if ((null != $contains) && (false === strpos($ex->getMessage(), $contains))) {
                 $this->fail("Should throw BuildException because '" . $cause . "' with message containing '" . $contains . "' (actual message '" . $ex->getMessage() . "' instead)");
             }
+            $this->assertEquals(1, 1); // increase number of positive assertions
             return;
         }
         $this->fail("Should throw BuildException because: " . $cause);
@@ -280,7 +301,7 @@ abstract class BuildFileTest extends PHPUnit2_Framework_TestCase {
      */
     protected function assertPropertyEquals($property, $value) {
         $result = $this->project->getProperty($property);
-        $this->assertEquals("property " . $property,$value,$result);
+        $this->assertEquals($value, $result, "property " . $property);
     }
 
     /**
@@ -335,7 +356,7 @@ class PhingTestListener implements BuildListener {
     private $parent;
 
     public function __construct($parent) {
-    	$this->parent = $parent;
+        $this->parent = $parent;
     }
 
     /**

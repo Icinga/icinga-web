@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: StripLineComments.php 325 2007-12-20 15:44:58Z hans $  
+ *  $Id: StripLineComments.php 557 2009-08-29 13:54:38Z mrook $  
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -23,7 +23,7 @@
 include_once 'phing/filters/BaseParamFilterReader.php';
 include_once 'phing/filters/ChainableReader.php';
 
-/*
+/**
  * This filter strips line comments.
  *
  * Example:
@@ -48,7 +48,7 @@ include_once 'phing/filters/ChainableReader.php';
  *
  * @author    <a href="mailto:yl@seasonfive.com">Yannick Lecaillez</a>
  * @author    hans lellelid, hans@velum.net
- * @version   $Revision: 1.8 $ $Date: 2007-12-20 16:44:58 +0100 (Thu, 20 Dec 2007) $
+ * @version   $Revision: 557 $ $Date: 2009-08-29 15:54:38 +0200 (Sat, 29 Aug 2009) $
  * @access    public
  * @see       BaseParamFilterReader
  * @package   phing.filters
@@ -175,9 +175,11 @@ class StripLineComments extends BaseParamFilterReader implements ChainableReader
     }
 }
 
-/*
+/**
  * The class that holds a comment representation.
-*/
+ *
+ * @package phing.filters
+ */
 class Comment {
     
     /** The prefix for a line comment. */

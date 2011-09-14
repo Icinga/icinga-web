@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: FormatterElement.php 325 2007-12-20 15:44:58Z hans $
+ * $Id: FormatterElement.php 794 2010-06-24 14:16:00Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,126 +25,154 @@ require_once 'phing/system/io/PhingFile.php';
  * A wrapper for the implementations of PHPUnit2ResultFormatter.
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @version $Id: FormatterElement.php 325 2007-12-20 15:44:58Z hans $
+ * @version $Id: FormatterElement.php 794 2010-06-24 14:16:00Z mrook $
  * @package phing.tasks.ext.phpunit
  * @since 2.1.0
  */
 class FormatterElement
 {
-	protected $formatter = NULL;
-	
-	protected $type = "";
-	
-	protected $useFile = true;
-	
-	protected $toDir = ".";
-	
-	protected $outfile = "";
+    protected $formatter = NULL;
+    
+    protected $type = "";
+    
+    protected $useFile = true;
+    
+    protected $toDir = ".";
+    
+    protected $outfile = "";
+    
+    protected $parent = NULL;
+    
+    /**
+     * Sets parent task
+     * @param Task $parent Calling Task
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
 
-	function setType($type)
-	{
-		$this->type = $type;
-		
-		if ($this->type == "summary")
-		{
-			if (PHPUnitUtil::$installedVersion == 3)
-			{
-				require_once 'phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php';
-				$this->formatter = new SummaryPHPUnit3ResultFormatter();
-			}
-			else			
-			{
-				require_once 'phing/tasks/ext/phpunit/phpunit2/SummaryPHPUnit2ResultFormatter.php';
-				$this->formatter = new SummaryPHPUnit2ResultFormatter();
-			}
-		}
-		else
-		if ($this->type == "xml")
-		{
-			$destFile = new PhingFile($this->toDir, 'testsuites.xml');
+    /**
+     * Loads a specific formatter type
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        
+        if ($this->type == "summary")
+        {
+            require_once 'phing/tasks/ext/phpunit/formatter/SummaryPHPUnitResultFormatter.php';
+            $this->formatter = new SummaryPHPUnitResultFormatter($this->parent);
+        }
+        else
+        if ($this->type == "clover")
+        {
+            require_once 'phing/tasks/ext/phpunit/formatter/CloverPHPUnitResultFormatter.php';
+            $this->formatter = new CloverPHPUnitResultFormatter($this->parent);
+        }
+        else
+        if ($this->type == "xml")
+        {
+            require_once 'phing/tasks/ext/phpunit/formatter/XMLPHPUnitResultFormatter.php';
+            $this->formatter = new XMLPHPUnitResultFormatter($this->parent);
+        }
+        else
+        if ($this->type == "plain")
+        {
+            require_once 'phing/tasks/ext/phpunit/formatter/PlainPHPUnitResultFormatter.php';
+            $this->formatter = new PlainPHPUnitResultFormatter($this->parent);
+        }
+        else
+        {
+            throw new BuildException("Formatter '" . $this->type . "' not implemented");
+        }
+    }
 
-			if (PHPUnitUtil::$installedVersion == 3)
-			{
-				require_once 'phing/tasks/ext/phpunit/phpunit3/XMLPHPUnit3ResultFormatter.php';
-				$this->formatter = new XMLPHPUnit3ResultFormatter();
-			}
-			else
-			{
-				require_once 'phing/tasks/ext/phpunit/phpunit2/XMLPHPUnit2ResultFormatter.php';
-				$this->formatter = new XMLPHPUnit2ResultFormatter();
-			}
-		}
-		else
-		if ($this->type == "plain")
-		{
-			if (PHPUnitUtil::$installedVersion == 3)
-			{
-				require_once 'phing/tasks/ext/phpunit/phpunit3/PlainPHPUnit3ResultFormatter.php';
-				$this->formatter = new PlainPHPUnit3ResultFormatter();
-			}
-			else
-			{
-				require_once 'phing/tasks/ext/phpunit/phpunit2/PlainPHPUnit2ResultFormatter.php';
-				$this->formatter = new PlainPHPUnit2ResultFormatter();
-			}
-		}
-		else
-		{
-			throw new BuildException("Formatter '" . $this->type . "' not implemented");
-		}
-	}
+    /**
+     * Loads a specific formatter class
+     */
+    public function setClassName($className)
+    {
+        $classNameNoDot = Phing::import($className);
 
-	function setClassName($className)
-	{
-		$classNameNoDot = Phing::import($className);
+        $this->formatter = new $classNameNoDot();
+    }
 
-		$this->formatter = new $classNameNoDot();
-	}
+    /**
+     * Sets whether to store formatting results in a file
+     */
+    public function setUseFile($useFile)
+    {
+        $this->useFile = $useFile;
+    }
+    
+    /**
+     * Returns whether to store formatting results in a file
+     */
+    public function getUseFile()
+    {
+        return $this->useFile;
+    }
+    
+    /**
+     * Sets output directory
+     * @param string $toDir
+     */
+    public function setToDir($toDir)
+    {
+        $this->toDir = $toDir;
+    }
+    
+    /**
+     * Returns output directory
+     * @return string
+     */
+    public function getToDir()
+    {
+        return $this->toDir;
+    }
 
-	function setUseFile($useFile)
-	{
-		$this->useFile = $useFile;
-	}
-	
-	function getUseFile()
-	{
-		return $this->useFile;
-	}
-	
-	function setToDir($toDir)
-	{
-		$this->toDir = $toDir;
-	}
-	
-	function getToDir()
-	{
-		return $this->toDir;
-	}
+    /**
+     * Sets output filename
+     * @param string $outfile
+     */
+    public function setOutfile($outfile)
+    {
+        $this->outfile = $outfile;
+    }
+    
+    /**
+     * Returns output filename
+     * @return string
+     */
+    public function getOutfile()
+    {
+        if ($this->outfile)
+        {
+            return $this->outfile;
+        }
+        else
+        {
+            return $this->formatter->getPreferredOutfile() . $this->getExtension();
+        }
+    }
+    
+    /**
+     * Returns extension
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->formatter->getExtension();
+    }
 
-	function setOutfile($outfile)
-	{
-		$this->outfile = $outfile;
-	}
-	
-	function getOutfile()
-	{
-		if ($this->outfile)
-		{
-			return $this->outfile;
-		}
-		else
-		{
-			return $this->formatter->getPreferredOutfile() . $this->getExtension();
-		}
-	}
-	
-	function getExtension()
-	{
-		return $this->formatter->getExtension();
-	}
-
-	function getFormatter()
-	{
-		return $this->formatter;
-	}
+    /**
+     * Returns formatter object
+     * @return PHPUnitResultFormatter
+     */
+    public function getFormatter()
+    {
+        return $this->formatter;
+    }
 }

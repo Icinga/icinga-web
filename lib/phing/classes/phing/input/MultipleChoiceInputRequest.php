@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: MultipleChoiceInputRequest.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: MultipleChoiceInputRequest.php 526 2009-08-11 12:11:17Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,7 +25,7 @@ require_once 'phing/input/InputRequest.php';
  * Encapsulates an input request.
  *
  * @author Stefan Bodewig <stefan.bodewig@epost.de>
- * @version $Revision: 1.5 $
+ * @version $Revision: 526 $
  * @package phing.input
  */
 class MultipleChoiceInputRequest extends InputRequest {

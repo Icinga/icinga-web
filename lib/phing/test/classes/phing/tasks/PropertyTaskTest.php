@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: PropertyTaskTest.php 123 2006-09-14 20:19:08Z mrook $
+ *  $Id: PropertyTaskTest.php 655 2009-12-14 12:53:15Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,6 +25,7 @@ require_once 'phing/BuildFileTest.php';
 /**
  * @author Hans Lellelid (Phing)
  * @author Conor MacNeill (Ant)
+ * @package phing.tasks.system
  */
 class PropertyTaskTest extends BuildFileTest { 
         

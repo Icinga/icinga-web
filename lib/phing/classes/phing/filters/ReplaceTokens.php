@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: ReplaceTokens.php 325 2007-12-20 15:44:58Z hans $  
+ *  $Id: ReplaceTokens.php 1039 2011-02-20 19:19:21Z mrook $  
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -24,7 +24,7 @@ include_once 'phing/filters/BaseParamFilterReader.php';
 include_once 'phing/types/TokenSource.php';
 include_once 'phing/filters/ChainableReader.php';
 
-/*
+/**
  * Replaces tokens in the original input with user-supplied values.
  *
  * Example:
@@ -43,7 +43,7 @@ include_once 'phing/filters/ChainableReader.php';
  *
  * @author    <a href="mailto:yl@seasonfive.com">Yannick Lecaillez</a>
  * @author    hans lellelid, hans@velum.net
- * @version   $Revision: 1.14 $ $Date: 2007-12-20 16:44:58 +0100 (Thu, 20 Dec 2007) $
+ * @version   $Revision: 1039 $ $Date: 2011-02-20 20:19:21 +0100 (Sun, 20 Feb 2011) $
  * @access    public
  * @see       BaseParamFilterReader
  * @package   phing.filters
@@ -142,7 +142,7 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader {
             $replaceWith = $this->_beginToken . $key . $this->_endToken;            
             $this->log("No token defined for key \"".$this->_beginToken  . $key . $this->_endToken."\"");
         } else {
-            $this->log("Replaced \"".$this->_beginToken  . $key . $this->_endToken ."\" with \"".$replaceWith."\"");
+            $this->log("Replaced \"".$this->_beginToken  . $key . $this->_endToken ."\" with \"".$replaceWith."\"", Project::MSG_VERBOSE);
         }
 
         return $replaceWith;
@@ -360,6 +360,8 @@ class ReplaceTokens extends BaseParamFilterReader implements ChainableReader {
 
 /**
  * Holds a token.
+ *
+ * @package   phing.filters
  */
 class Token {
 
@@ -390,7 +392,16 @@ class Token {
      * @param string $value The value for this token. Must not be <code>null</code>.
      */
     function setValue($value) {
-        $this->_value = (string) $value;
+        // special case for boolean values
+        if (is_bool($value)) {
+            if ($value) {
+                $this->_value = "true";
+            } else {
+                $this->_value = "false";
+            }
+        } else {        
+            $this->_value = (string) $value;
+        }
     }
 
     /**
@@ -409,6 +420,15 @@ class Token {
      */
     function getValue() {
         return $this->_value;
+    }
+
+    /**
+     * Sets the token value from text.
+     *
+     * @param string $value The value for this token. Must not be <code>null</code>.
+     */
+    function addText($value) {
+        $this->setValue($value);
     }
 }
 

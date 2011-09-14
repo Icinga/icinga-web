@@ -115,6 +115,11 @@ abstract class BaseIcingaContactnotifications extends Doctrine_Record {
                           'local' => 'notification_id',
                           'foreign' => 'notification_id'
                       ));
+        $this->hasOne('IcingaContactnotificationmethods as notificationmethod', array(
+                          'local' => 'contactnotification_id',
+                          'foreign' => 'contactnotification_id'
+                       
+                      ));
 
         parent::setUp();
 

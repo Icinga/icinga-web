@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: DefaultLogger.php 279 2007-11-01 20:11:07Z hans $
+ *  $Id: DefaultLogger.php 912 2010-10-12 01:08:31Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,8 +29,8 @@ include_once 'phing/BuildEvent.php';
  *  any messages that get logged.
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
- *  @copyright � 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.11 $ $Date: 2007-11-01 21:11:07 +0100 (Thu, 01 Nov 2007) $
+ *  @copyright 2001,2002 THYRELL. All rights reserved
+ *  @version   $Revision: 912 $ $Date: 2010-10-12 03:08:31 +0200 (Tue, 12 Oct 2010) $
  *  @see       BuildEvent
  *  @package   phing.listener
  */
@@ -69,7 +69,7 @@ class DefaultLogger implements StreamRequiredBuildLogger {
      *  Construct a new default logger.
      */
     public function __construct() {
-    	
+        
     }
 
     /**
@@ -104,16 +104,16 @@ class DefaultLogger implements StreamRequiredBuildLogger {
      * @see BuildLogger#setOutputStream()
      */
     public function setOutputStream(OutputStream $output) {
-    	$this->out = $output;
+        $this->out = $output;
     }
-	
+    
     /**
      * Sets the error stream.
      * @param OutputStream $err
      * @see BuildLogger#setErrorStream()
      */
     public function setErrorStream(OutputStream $err) {
-    	$this->err = $err;
+        $this->err = $err;
     }
     
     /**
@@ -151,14 +151,14 @@ class DefaultLogger implements StreamRequiredBuildLogger {
         }
         $msg .= PHP_EOL . "Total time: " .self::formatTime(Phing::currentTimeMillis() - $this->startTime) . PHP_EOL;
         
-    	if ($error === null) {
+        if ($error === null) {
             $this->printMessage($msg, $this->out, Project::MSG_VERBOSE);
         } else {
             $this->printMessage($msg, $this->err, Project::MSG_ERR);
         }
     }
 
-	/**
+    /**
      * Get the message to return when a build failed.
      * @return string The classic "BUILD FAILED"
      */
@@ -183,8 +183,9 @@ class DefaultLogger implements StreamRequiredBuildLogger {
      */
     public function targetStarted(BuildEvent $event) {
         if (Project::MSG_INFO <= $this->msgOutputLevel) {
-        	$msg = PHP_EOL . $event->getProject()->getName() . ' > ' . $event->getTarget()->getName() . ':' . PHP_EOL;
-        	$this->printMessage($msg, $this->out, $event->getPriority());
+            $showLongTargets = $event->getProject()->getProperty("phing.showlongtargets");
+            $msg = PHP_EOL . $event->getProject()->getName() . ' > ' . $event->getTarget()->getName() . ($showLongTargets ? ' [' . $event->getTarget()->getDescription() . ']' : '') . ':' . PHP_EOL;
+            $this->printMessage($msg, $this->out, $event->getPriority());
         }
     }
 
@@ -225,7 +226,7 @@ class DefaultLogger implements StreamRequiredBuildLogger {
      *  @see    BuildEvent::getMessage()
      */
     public function messageLogged(BuildEvent $event) {
-    	$priority = $event->getPriority();
+        $priority = $event->getPriority();
         if ($priority <= $this->msgOutputLevel) {
             $msg = "";
             if ($event->getTask() !== null) {
@@ -239,7 +240,7 @@ class DefaultLogger implements StreamRequiredBuildLogger {
             if ($priority != Project::MSG_ERR) {
                 $this->printMessage($msg, $this->out, $priority);
             } else {
-            	$this->printMessage($msg, $this->err, $priority);
+                $this->printMessage($msg, $this->err, $priority);
             }
         }
     }
@@ -273,6 +274,6 @@ class DefaultLogger implements StreamRequiredBuildLogger {
      * @return void
      */
     protected function printMessage($message, OutputStream $stream, $priority) {
-    	$stream->write($message . PHP_EOL);
+        $stream->write($message . PHP_EOL);
     }    
 }

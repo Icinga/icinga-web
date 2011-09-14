@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  $Id: IntrospectionHelper.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: IntrospectionHelper.php 930 2010-10-13 19:03:28Z victor $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -36,8 +36,8 @@ include_once 'phing/util/StringHelper.php';
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @copyright © 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.19 $
+ * @copyright 2001,2002 THYRELL. All rights reserved
+ * @version   $Revision: 930 $
  * @package   phing
  */
 class IntrospectionHelper {
@@ -178,7 +178,7 @@ class IntrospectionHelper {
                     
                 } elseif (strpos($name, "create") === 0) {                            
                     
-                    if (count($method->getParameters()) > 0) {
+                    if ($method->getNumberOfRequiredParameters() > 0) {
                         throw new BuildException($method->getDeclaringClass()->getName()."::".$method->getName()."() may not take any parameters.");
                     }
                     
@@ -309,10 +309,6 @@ class IntrospectionHelper {
             if ($as == "setrefid") {            
                 $value = new Reference($value);
             } else {
-            
-                // decode any html entities in string
-                $value = html_entity_decode($value);                
-                
                 // value is a string representation of a boolean type,
                 // convert it to primitive
                 if (StringHelper::isBoolean($value)) {

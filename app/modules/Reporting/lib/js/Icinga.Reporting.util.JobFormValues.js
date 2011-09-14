@@ -9,7 +9,7 @@ Ext.apply(Icinga.Reporting.form.converter, {
 		},
 		
 		decode : function(value, fieldName) {
-			return value.join(', ');
+			return value;
 		}
 	},
 	
@@ -39,7 +39,11 @@ Ext.apply(Icinga.Reporting.form.converter, {
 	
 	'mailNotification.resultSendType' : {
 		encode : function(value, fieldName) {
-			
+			if (value == 'true') {
+				return 'SEND_ATTACHMENT';
+			} else {
+				return 'SEND';
+			}
 		},
 		
 		decode : function(value, fieldName) {
@@ -141,7 +145,9 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 			}
 		}, this);
 		
-		AppKit.log(o);
+		// AppKit.log(o);
+		
+		return o;
 	},
 	
 	applyFormValues : function(data) {
@@ -245,11 +251,11 @@ Icinga.Reporting.util.JobFormValues = Ext.extend(Object, {
 		}
 		
 		if (!fieldElement) {
-			AppKit.log('Field not found', fieldName, value);
+//			AppKit.log('Field not found', fieldName, value);
 			return true;
 		}
 		
-		AppKit.log('Set value on field', fieldName, value);
+//		AppKit.log('Set value on field', fieldName, value);
 		
 		fieldElement.setValue(value);
 	}

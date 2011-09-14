@@ -1,3 +1,3 @@
 <?php
 
-define("CRON_DEFAULT_LOG_FILE","@web_log_folder@/cron.log");
+define("CRON_DEFAULT_LOG_FILE","@web_log_dir@/cron.log");

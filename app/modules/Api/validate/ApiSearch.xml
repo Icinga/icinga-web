@@ -116,9 +116,7 @@
 			<validator name="withMeta" class="boolean" required="false">
 				<argument>withMeta</argument>
 			</validator>
-		</validators>
-		
-		<validators method="read">
+
 			<validator name="columns" class="AppKitSplitValidator" required="false">
 				<argument>columns</argument>
 				<errors>
@@ -129,7 +127,9 @@
 					<ae:parameter name="export">columns</ae:parameter>
 				</ae:parameters>
 			</validator>
-			
+		</validators>
+		
+		<validators method="read">
 		</validators>
 		
 		<validators method="write">

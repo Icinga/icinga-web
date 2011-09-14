@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: AbstractFileSet.php 144 2007-02-05 15:19:00Z hans $
+ *  $Id: AbstractFileSet.php 744 2010-03-09 10:08:31Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -62,7 +62,7 @@ include_once 'phing/util/DirectoryScanner.php';
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version    $Revision: 1.15 $ $Date: 2007-02-05 16:19:00 +0100 (Mon, 05 Feb 2007) $
+ * @version    $Revision: 744 $ $Date: 2010-03-09 11:08:31 +0100 (Tue, 09 Mar 2010) $
  * @see        ProjectComponent
  * @package    phing.types
  */
@@ -74,6 +74,12 @@ class AbstractFileSet extends DataType implements SelectorContainer {
      * @var boolean
      */
     public $useDefaultExcludes = true;
+    
+    /** 
+     * Whether to expand/dereference symbolic links, default is false
+     * @var boolean
+     */
+    protected $expandSymbolicLinks = false;
     
     /**
      * @var PatternSet
@@ -96,7 +102,15 @@ class AbstractFileSet extends DataType implements SelectorContainer {
         }
         $this->defaultPatterns = new PatternSet();
     }
-
+    
+    /** 
+     * Sets whether to expand/dereference symbolic links, default is false
+     * @var boolean
+     */
+    function setExpandSymbolicLinks($expandSymbolicLinks)
+    {
+        $this->expandSymbolicLinks = $expandSymbolicLinks;
+    }
 
     /**
     * Makes this instance in effect a reference to another PatternSet
@@ -268,10 +282,13 @@ class AbstractFileSet extends DataType implements SelectorContainer {
         if (!$this->dir->exists()) {
             throw new BuildException("Directory ".$this->dir->getAbsolutePath()." not found.");
         }
-        if (!$this->dir->isDirectory()) {
-            throw new BuildException($this->dir->getAbsolutePath()." is not a directory.");
+        if (!$this->dir->isLink() || !$this->expandSymbolicLinks) {
+            if (!$this->dir->isDirectory()) {
+                throw new BuildException($this->dir->getAbsolutePath()." is not a directory.");
+            }
         }
         $ds = new DirectoryScanner();
+        $ds->setExpandSymbolicLinks($this->expandSymbolicLinks);
         $this->setupDirectoryScanner($ds, $p);
         $ds->scan();
         return $ds;

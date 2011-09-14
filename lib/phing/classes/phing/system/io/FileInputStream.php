@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: FileWriter.php 123 2006-09-14 20:19:08Z mrook $  
+ *  $Id: FileInputStream.php 1110 2011-05-23 16:00:43Z mrook $  
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,20 +28,23 @@ require_once 'phing/system/io/PhingFile.php';
  * @package   phing.system.io
  */
 class FileInputStream extends InputStream {
-	
-	/**
-	 * @var PhingFile The associated file.
-	 */
-	protected $file;
-	
+    
+    /**
+     * The associated file.
+     * @var PhingFile
+     */
+    protected $file;
+    
     /**
      * Construct a new FileInputStream.
-     * @param mixed $file
+     * 
+     * @param PhingFile|string $file Path to the file
+     * @param boolean $append Whether to append (ignored)
      * @throws Exception - if invalid argument specified.
      * @throws IOException - if unable to open file.
      */
     public function __construct($file, $append = false) {
-    	if ($file instanceof PhingFile) {
+        if ($file instanceof PhingFile) {
             $this->file = $file;
         } elseif (is_string($file)) {
             $this->file = new PhingFile($file);
@@ -51,7 +54,7 @@ class FileInputStream extends InputStream {
         
         $stream = @fopen($this->file->getAbsolutePath(), "rb");
         if ($stream === false) {
-        	throw new IOException("Unable to open " . $this->file->__toString() . " for reading: " . $php_errormsg);
+            throw new IOException("Unable to open " . $this->file->__toString() . " for reading: " . $php_errormsg);
         }
         
         parent::__construct($stream);
@@ -69,7 +72,7 @@ class FileInputStream extends InputStream {
      * Mark is supported by FileInputStream.
      * @return boolean TRUE
      */
-	public function markSupported() {
+    public function markSupported() {
         return true;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Project.php 345 2008-01-30 19:46:32Z mrook $
+ *  $Id: Project.php 1097 2011-05-17 17:10:32Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -34,18 +34,18 @@ include_once 'phing/input/DefaultInputHandler.php';
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision: 1.29 $
+ * @version   $Revision: 1097 $
  * @package   phing
  */
 class Project {
 
-	// Logging level constants.
-	const MSG_DEBUG = 4;
-	const MSG_VERBOSE = 3;
-	const MSG_INFO = 2;
-	const MSG_WARN = 1;
-	const MSG_ERR = 0;
-	
+    // Logging level constants.
+    const MSG_DEBUG = 4;
+    const MSG_VERBOSE = 3;
+    const MSG_INFO = 2;
+    const MSG_WARN = 1;
+    const MSG_ERR = 0;
+    
     /** contains the targets */
     private $targets         = array();
     /** global filterset (future use) */
@@ -97,6 +97,9 @@ class Project {
     
     /** project description */
     private $description;
+
+    /** require phing version */
+    private $phingVersion;
 
     /** a FileUtils object */
     private $fileUtils;
@@ -192,7 +195,7 @@ class Project {
      * @return void
      */
     public function setProperty($name, $value) {
-	
+    
         // command line properties take precedence
         if (isset($this->userProperties[$name])) {
             $this->log("Override ignored for user property " . $name, Project::MSG_VERBOSE);
@@ -269,7 +272,7 @@ class Project {
      */
     private function setPropertyInternal($name, $value) {
         if (isset($this->userProperties[$name])) {
-			$this->log("Override ignored for user property " . $name, Project::MSG_VERBOSE);
+            $this->log("Override ignored for user property " . $name, Project::MSG_VERBOSE);
             return;
         }
         $this->properties[$name] = $value;
@@ -288,7 +291,15 @@ class Project {
         if (!isset($this->properties[$name])) {
             return null;
         }
-        return $this->properties[$name];
+        $found = $this->properties[$name];
+        // check to see if there are unresolved property references
+        if (false !== strpos($found, '${')) {
+          // attempt to resolve properties
+          $found = $this->replaceProperties($found);
+          // save resolved value
+          $this->properties[$name] = $found;
+        }
+        return $found;
     }
 
     /**
@@ -414,9 +425,9 @@ class Project {
     /**
      * Returns the name of this project
      *
-     * @returns  string  projectname
-     * @access   public
-     * @author   Andreas Aderhold, andi@binarycloud.com
+     * @return  string  projectname
+     * @access  public
+     * @author  Andreas Aderhold, andi@binarycloud.com
      */
     function getName() {
         return (string) $this->name;
@@ -430,6 +441,20 @@ class Project {
     /** return the description, null otherwise */
     function getDescription() {
         return $this->description;
+    }
+
+    /** Set the minimum required phing version **/
+    function setPhingVersion($version) {
+        $version = str_replace('phing', '', strtolower($version));
+        $this->phingVersion = (string)trim($version);
+    }
+
+    /** Get the minimum required phing version **/
+    function getPhingVersion() {
+        if($this->phingVersion === null) {
+            $this->setPhingVersion(Phing::getPhingVersion());
+        }
+        return $this->phingVersion;
     }
 
     /** Set basedir object from xml*/
@@ -458,10 +483,10 @@ class Project {
     /**
      * Returns the basedir of this project
      *
-     * @returns  PhingFile  Basedir PhingFile object
-     * @access   public
-     * @throws   BuildException
-     * @author   Andreas Aderhold, andi@binarycloud.com
+     * @return  PhingFile  Basedir PhingFile object
+     * @access  public
+     * @throws  BuildException
+     * @author  Andreas Aderhold, andi@binarycloud.com
      */
     function getBasedir() {
         if ($this->basedir === null) {            
@@ -519,7 +544,7 @@ class Project {
         }
     }
 
-    function &getTaskDefinitions() {
+    function getTaskDefinitions() {
         return $this->taskdefs;
     }
 
@@ -535,7 +560,7 @@ class Project {
             $this->typedefs[$typeName] = $typeClass;
             $this->log("  +User datatype: $typeName ($typeClass)", Project::MSG_DEBUG);
         } else {
-            $this->log("Type $name ($class) already registerd, skipping", Project::MSG_VERBOSE);
+            $this->log("Type $typeName ($typeClass) already registerd, skipping", Project::MSG_VERBOSE);
         }
     }
 
@@ -555,6 +580,10 @@ class Project {
         $this->log("  +Target: $targetName", Project::MSG_DEBUG);
         $target->setProject($this);
         $this->targets[$targetName] = $target;
+
+        $ctx = $this->getReference("phing.parsing.context");
+        $current = $ctx->getConfigurator()->getCurrentTargets();
+        $current[$targetName] = $target;
     }
 
     function getTargets() {
@@ -574,30 +603,32 @@ class Project {
      * unless there's any good reason not to.
      *
      * @param    string    $taskType    Task name
-     * @returns  Task                A task object
+     * @return   Task                A task object
      * @throws   BuildException
      *           Exception
      */
     function createTask($taskType) {
         try {
-            $cls = "";
+            $classname = "";
             $tasklwr = strtolower($taskType);
             foreach ($this->taskdefs as $name => $class) {
                 if (strtolower($name) === $tasklwr) {
-                    $cls = StringHelper::unqualify($class);                                    
+                    $classname = $class;
                     break;
                 }
             }
             
-            if ($cls === "") {
+            if ($classname === "") {
                 return null;
             }
+            
+            $cls = Phing::import($classname);
             
             if (!class_exists($cls)) {
                 throw new BuildException("Could not instantiate class $cls, even though a class was specified. (Make sure that the specified class file contains a class with the correct name.)");
             }
             
-            $o = new $cls();        
+            $o = new $cls();
     
             if ($o instanceof Task) {
                 $task = $o;
@@ -621,13 +652,13 @@ class Project {
     }
 
     /**
-     * Create a task instance and return reference to it
+     * Create a datatype instance and return reference to it
      * See createTask() for explanation how this works
      *
-     * @param    string   Type name
-     * @returns  object   A datatype object
-     * @throws   BuildException
-     *           Exception
+     * @param   string   Type name
+     * @return  object   A datatype object
+     * @throws  BuildException
+     *          Exception
      */
     function createDataType($typeName) {        
         try {
@@ -666,9 +697,9 @@ class Project {
     /**
      * Executes a list of targets
      *
-     * @param    array  List of target names to execute
-     * @returns  void
-     * @throws   BuildException
+     * @param   array  List of target names to execute
+     * @return  void
+     * @throws  BuildException
      */
     function executeTargets($targetNames) {
         foreach($targetNames as $tname) {
@@ -679,9 +710,9 @@ class Project {
     /**
      * Executes a target
      *
-     * @param    string  Name of Target to execute
-     * @returns  void
-     * @throws   BuildException
+     * @param   string  Name of Target to execute
+     * @return  void
+     * @throws  BuildException
      */
     function executeTarget($targetName) {
 
@@ -867,19 +898,19 @@ class Project {
     function getReferences() {
         return $this->references;
     }
-	
-	/**
-	 * Returns a specific reference.
-	 * @param string $key The reference id/key.
-	 * @return Reference or null if not defined
-	 */
-	function getReference($key)
-	{
-		if (isset($this->references[$key])) {
-		    return $this->references[$key];
-		}
-		return null; // just to be explicit
-	}
+    
+    /**
+     * Returns a specific reference.
+     * @param string $key The reference id/key.
+     * @return Reference or null if not defined
+     */
+    function getReference($key)
+    {
+        if (isset($this->references[$key])) {
+            return $this->references[$key];
+        }
+        return null; // just to be explicit
+    }
 
     /**
      * Abstracting and simplifyling Logger calls for project messages

@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: CoverageReportTransformer.php 325 2007-12-20 15:44:58Z hans $
+ * $Id: CoverageReportTransformer.php 1123 2011-05-31 13:51:42Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -29,39 +29,68 @@ require_once 'phing/util/ExtendedFileStream.php';
  * The default transformation generates an html report in framed style.
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @version $Id: CoverageReportTransformer.php 325 2007-12-20 15:44:58Z hans $
+ * @version $Id: CoverageReportTransformer.php 1123 2011-05-31 13:51:42Z mrook $
  * @package phing.tasks.ext.coverage
  * @since 2.1.0
  */
 class CoverageReportTransformer
 {
-	private $task = NULL;
-	private $styleDir = "";
-	private $toDir = "";
-	private $document = NULL;
+    private $task = NULL;
+    private $styleDir = "";
+    private $toDir = "";
+    private $document = NULL;
 
-	function __construct(Task $task)
-	{
-		$this->task = $task;
-	}
+    /** title of the project, used in the coverage report */
+    private $title = "";
+    
+    /**
+     * Whether to use the sorttable JavaScript library, defaults to false
+     * See {@link http://www.kryogenix.org/code/browser/sorttable/)}
+     *
+     * @var boolean
+     */
+    private $useSortTable = false;
+    
+    function __construct(Task $task)
+    {
+        $this->task = $task;
+    }
 
-	function setStyleDir($styleDir)
-	{
-		$this->styleDir = $styleDir;
-	}
+    function setStyleDir($styleDir)
+    {
+        $this->styleDir = $styleDir;
+    }
 
-	function setToDir($toDir)
-	{
-		$this->toDir = $toDir;
-	}
+    function setToDir($toDir)
+    {
+        $this->toDir = $toDir;
+    }
 
-	function setXmlDocument($document)
-	{
-		$this->document = $document;
-	}
+    function setXmlDocument($document)
+    {
+        $this->document = $document;
+    }
 
-	function transform()
-	{
+    /**
+     * Setter for title parameter
+     */
+    function setTitle($title) {
+        $this->title = $title;
+    }
+
+    /**
+     * Sets whether to use the sorttable JavaScript library, defaults to false
+     * See {@link http://www.kryogenix.org/code/browser/sorttable/)}
+     *
+     * @param boolean $useSortTable
+     */
+    public function setUseSortTable($useSortTable)
+    {
+        $this->useSortTable = (boolean) $useSortTable;
+    }
+    
+    function transform()
+    {
         $dir = new PhingFile($this->toDir);
 
         if (!$dir->exists())
@@ -69,52 +98,56 @@ class CoverageReportTransformer
             throw new BuildException("Directory '" . $this->toDir . "' does not exist");
         }
 
-		$xslfile = $this->getStyleSheet();
+        $xslfile = $this->getStyleSheet();
 
-		$xsl = new DOMDocument();
-		$xsl->load($xslfile->getAbsolutePath());
+        $xsl = new DOMDocument();
+        $xsl->load($xslfile->getAbsolutePath());
 
-		$proc = new XSLTProcessor();
-		$proc->importStyleSheet($xsl);
+        $proc = new XSLTProcessor();
+        $proc->importStyleSheet($xsl);
 
-		ExtendedFileStream::registerStream();
+        ExtendedFileStream::registerStream();
 
-		// no output for the framed report
-		// it's all done by extension...
-		$proc->setParameter('', 'output.dir', $dir->getAbsolutePath());
-		$proc->transformToXML($this->document);
-	}
+        // no output for the framed report
+        // it's all done by extension...
+        $proc->setParameter('', 'output.dir', urlencode((string) $dir));
+        $proc->setParameter('', 'output.sorttable', $this->useSortTable);
+        $proc->setParameter('', 'document.title', $this->title);
+        $proc->transformToXML($this->document);
+        
+        ExtendedFileStream::unregisterStream();
+    }
 
-	private function getStyleSheet()
-	{
-		$xslname = "coverage-frames.xsl";
+    private function getStyleSheet()
+    {
+        $xslname = "coverage-frames.xsl";
 
-		if ($this->styleDir)
-		{
-			$file = new PhingFile($this->styleDir, $xslname);
-		}
-		else
-		{
-			$path = Phing::getResourcePath("phing/etc/$xslname");
-			
-			if ($path === NULL)
-			{
-				$path = Phing::getResourcePath("etc/$xslname");
+        if ($this->styleDir)
+        {
+            $file = new PhingFile($this->styleDir, $xslname);
+        }
+        else
+        {
+            $path = Phing::getResourcePath("phing/etc/$xslname");
+            
+            if ($path === NULL)
+            {
+                $path = Phing::getResourcePath("etc/$xslname");
 
-				if ($path === NULL)
-				{
-					throw new BuildException("Could not find $xslname in resource path");
-				}
-			}
-			
-			$file = new PhingFile($path);
-		}
+                if ($path === NULL)
+                {
+                    throw new BuildException("Could not find $xslname in resource path");
+                }
+            }
+            
+            $file = new PhingFile($path);
+        }
 
-		if (!$file->exists())
-		{
-			throw new BuildException("Could not find file " . $file->getPath());
-		}
+        if (!$file->exists())
+        {
+            throw new BuildException("Could not find file " . $file->getPath());
+        }
 
-		return $file;
-	}
+        return $file;
+    }
 }

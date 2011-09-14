@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: SimpleTestSummaryResultFormatter.php 325 2007-12-20 15:44:58Z hans $
+ * $Id: SimpleTestSummaryResultFormatter.php 552 2009-08-29 12:18:13Z mrook $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -25,29 +25,29 @@ require_once 'phing/tasks/ext/simpletest/SimpleTestResultFormatter.php';
  * Prints short summary output of the test to Phing's logging system.
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @version $Id: SimpleTestSummaryResultFormatter.php 325 2007-12-20 15:44:58Z hans $
+ * @version $Id: SimpleTestSummaryResultFormatter.php 552 2009-08-29 12:18:13Z mrook $
  * @package phing.tasks.ext.simpletest
  * @since 2.2.0
  */
 class SimpleTestSummaryResultFormatter extends SimpleTestResultFormatter
 {
-	function paintCaseEnd($test_name)
-	{
-		parent::paintCaseEnd($test_name);
-		
-		/* Only count suites where more than one test was run */
-		if ($this->getRunCount())
-		{
-			$sb.= "Tests run: " . $this->getRunCount();
-			$sb.= ", Failures: " . $this->getFailureCount();
-			$sb.= ", Errors: " . $this->getErrorCount();
-			$sb.= ", Time elapsed: " . $this->getElapsedTime();
-			$sb.= " sec\n";
+    function paintCaseEnd($test_name)
+    {
+        parent::paintCaseEnd($test_name);
+        
+        /* Only count suites where more than one test was run */
+        if ($this->getRunCount())
+        {
+            $sb.= "Tests run: " . $this->getRunCount();
+            $sb.= ", Failures: " . $this->getFailureCount();
+            $sb.= ", Errors: " . $this->getErrorCount();
+            $sb.= ", Time elapsed: " . $this->getElapsedTime();
+            $sb.= " sec\n";
 
-			if ($this->out != NULL)
-			{
-				$this->out->write($sb);
-			}
-		}
-	}
+            if ($this->out != NULL)
+            {
+                $this->out->write($sb);
+            }
+        }
+    }
 }

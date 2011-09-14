@@ -42,6 +42,7 @@ abstract class IcingaApiSearchFilter implements IcingaApiSearchFilterInterface {
         } else {
             $this->field = $field;
         }
+        $this->field == strtoupper(preg_replace("/[^1-9_A-Za-z]/","",$this->field));
     }
 
     public function getField() {
