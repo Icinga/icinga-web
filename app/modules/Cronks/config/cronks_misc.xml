@@ -69,6 +69,7 @@
 				Iframes - [START]
 				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			-->
+			<!--
 			<cronk name="iframeViewGoogle">
 				<ae:parameter name="module">Cronks</ae:parameter>
 				<ae:parameter name="action">System.IframeView</ae:parameter>
@@ -81,34 +82,49 @@
 					<ae:parameter name="url"><![CDATA[http://www.google.de/]]></ae:parameter>
 				</ae:parameter>
 			</cronk>
+			-->
 			
 			<cronk name="iframeViewIcinga">
 				<ae:parameter name="module">Cronks</ae:parameter>
 				<ae:parameter name="action">System.IframeView</ae:parameter>
 				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">View something within an iframe</ae:parameter>
-				<ae:parameter name="name">Icinga</ae:parameter>
+				<ae:parameter name="description">View icinga classic on same server</ae:parameter>
+				<ae:parameter name="name">Icinga Classic</ae:parameter>
 				<ae:parameter name="image">cronks.Globe</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
 				<ae:parameter name="ae:parameter">
-					<ae:parameter name="url"><![CDATA[http://classic.demo.icinga.org/icinga/]]></ae:parameter>
+					<ae:parameter name="url"><![CDATA[/icinga/]]></ae:parameter>
 					<ae:parameter name="user">guest</ae:parameter>
 					<ae:parameter name="password">guest</ae:parameter>
 				</ae:parameter>
 			</cronk>
 
-			<cronk name="iframeViewIcingaDocs">
+			<cronk name="iframeViewIcingaDocsEn">
 				<ae:parameter name="module">Cronks</ae:parameter>
 				<ae:parameter name="action">System.IframeView</ae:parameter>
 				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Icinga docs</ae:parameter>
-				<ae:parameter name="name">Documentation</ae:parameter>
+				<ae:parameter name="description">Icinga docs english version</ae:parameter>
+				<ae:parameter name="name">Docs EN</ae:parameter>
 				<ae:parameter name="image">cronks.Info2</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
 				<ae:parameter name="ae:parameter">
-					<ae:parameter name="url"><![CDATA[http://docs.icinga.org/latest/en/]]></ae:parameter>
+					<ae:parameter name="url"><![CDATA[/icinga/docs/en/index.html]]></ae:parameter>
 				</ae:parameter>
 			</cronk>
+			
+			<cronk name="iframeViewIcingaDocsDe">
+				<ae:parameter name="module">Cronks</ae:parameter>
+				<ae:parameter name="action">System.IframeView</ae:parameter>
+				<ae:parameter name="hide">false</ae:parameter>
+				<ae:parameter name="description">Icinga docs german version</ae:parameter>
+				<ae:parameter name="name">Docs DE</ae:parameter>
+				<ae:parameter name="image">cronks.Info2</ae:parameter>
+				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="ae:parameter">
+					<ae:parameter name="url"><![CDATA[/icinga/docs/de/index.html]]></ae:parameter>
+				</ae:parameter>
+			</cronk>
+			
 			<!-- Iframes - [STOP] -->
 			
 			<!-- Demo cronk - [START] -->

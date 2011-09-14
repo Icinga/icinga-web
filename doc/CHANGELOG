@@ -1,3 +1,334 @@
+2011-09-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 64c1f540c8ea239e62960afeba694c2402483d71
+
+* Prepared tagging of 1.5.2
+
+
+2011-09-14 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5b089f51b355314aefd8dfde5f24d064d7aa08bc
+
+* Changed default cronks to run icinga classic items on same server
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 2ab50bf4758dc329ba986df386f187d4c4dc9454
+
+* Patched doctrine to use foreignId, added service notifications method
+* (fixes 
+  #1836)
+
+
+2011-09-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 52f3c2319eb8e3cac38b7a68ffd7799d11628461
+
+* CSS fix for to's
+
+
+2011-09-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: d89a0632581ff9a9e1af075ae1382254d7a097fc
+
+* Fixed bug for status map model
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 62b9b7686c763dc8dfe4f2f9590c8a12e945bc83
+
+* Added sort and grouping persistence
+
+
+2011-09-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 5ab7b92a1bddb70f331d37246a0385fc15d6b288
+
+* Prepared notification template issue (ref #1896)
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 9467784b058c836c24e602c42fc0f9200cb04eb9
+
+* Fixed configure using NONE as path for config when no prefix is given
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 456456ff53020df9712336977031691e9abf3b04
+
+* Added sqlite schema
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f26ac530ef4aec9e62c4bda5a83727f2781d6be0
+
+* Fixed http-command handler
+
+
+2011-09-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 8d5867d86cc54f94e6ddfac2cbf355a1a5f68658
+
+* Re added +x for dev tools
+* Fixed fuzzy translation error
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: d0ac635671bc58669bc2c920239575ba50007567
+
+* Removed DoctrineSessionStorage, fixed Api principals not being
+* recognized, fixed 
+  navbar not escaping user name
+
+
+2011-09-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 69e043909fd33cf9ca4a29f5f6ccb0c7d7c946b2
+
+* Removed swap files
+
+
+2011-09-13 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 97fc2cb73d4501049f51d8b4030ff683194b7a0e
+
+* Default localhost for reporting (fixes #1894)
+* Fixed clear cache console version
+
+
+2011-09-13 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: fe7ffca713eb72080469b5febe317d8eefec63eb
+
+* Fixed typo in DBALMetaManagerModel which prevented connection binding
+* to the 
+  logEntries table
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 0228a17b27c2043cee727d10c61e5f3ddd03f6f1
+
+* Expanded email length to VARCHAR(254) (fixes #1784)
+
+
+2011-09-12 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0f7b407d8a0d3d802bd08b68fb35820c2fe052b1
+
+* Fixed executable check not testing for filenames (just for symbols)
+
+
+2011-09-12 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 0074f76ceb2db81442aa454cb3aa8c2c0cedc8c6
+
+* Fixed Typo in relation, fixed '*' not being recognized when appended
+* to alias, 
+  fixed AppKitSplitValidator crashing on array input
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 41bfe35ca59ccf2d5d5108da9b88028403e160c9
+
+* Added host check commands to open problems (ref #1892)
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 550f844bce6e9b3513ba7e712cbcd53e6e95eb5f
+
+* Merge branch 'mhein/default'
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4f28bf6987821f34d21962e599db91438b0d46a0
+
+* Added missing commands (fixes #1812)
+* Consolidate ArrayCombos for commands
+
+
+2011-09-12 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ac29b5fd2e62faa1a7ca77051479dd0d62bcbda6
+
+* Removed uneccessary exec flags from several files and added missing +x
+* to other 
+  executables
+
+
+2011-09-12 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 40ae013e3db936f8ef08acb1d861c903ad66f315
+
+* Added hideDelay(refs #1842)
+
+
+2011-09-12 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: ac3c196d834c994cedae760bb42b86504cd6d844
+
+* Added notification target (fixes #1891)
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2ba1e4978ee4668c4467b237d22397b65f7c5248
+
+* Removed contrib/Skeleton
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 650f9d28da673b468e00a0738b20c6e7be37daf6
+
+* Fixed console clear cache
+
+
+2011-09-12 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 3fcfc23e9b80c3e2500a227c7b8f4c7c030fc167
+
+* Upgraded phing version to 2.4.6
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7d48dd246e643d9656868b9f12a5be48106cd929
+
+* Removed unused additional index from contrib folder
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 38f77074776ec6a82f0314d5e09ef4917e8da694
+
+* Fixed TARGET_LOGENTRIES relation
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: c5a00d24f506e09aa2c631afeea51473028c4f30
+
+* Added default cronk image (fixed #1588)
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 14da124fad2ab084a2a250be7b99ca9519fb3288
+
+* Moved etc/contrib to contrib
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f0e7e3f8f077a5fb24086b3113331c260db58cf4
+
+* Fixed conf and log options and deprecated marker (fixes #1876)
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 57e54b4db88acef87ea78227d1a43e58697813cb
+
+* 500er error on note_url (fixes #1881)
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 7fc1a172296a0dc067472d93fb2f3271c8876c4c
+
+* REPORTING: Fixed service search field (fixes #1873)
+
+
+2011-09-09 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 4bc5e6286d87c95dfd621027b736c12f5544a8a1
+
+* Reporting: Finished scheduling mode (fixes #1872)
+
+
+2011-09-08 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 9977a326363bfb36156f9ee0023a1a5d056786f5
+
+* REPORTING: Scheduling Feature - working stage
+
+
+2011-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: ba0152e18543cc5216270e82afbdafe7948e75d3
+
+* Fixed typo in relations
+
+
+2011-09-01 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: a07a3afa09f452f2141a8e079a0208d1aa93650f
+
+* Fixed missing hosts xinclude, fixed Uncaught PHPError when command
+* times out
+
+
+2011-09-01 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 371f7a6a8306c72db0336539f14cb6455a7f7e3c
+
+* HTML check_multi patch applied (THANKS to Philipp Herz)
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: b40ff1913e2a78aeaea1370d8062d24ac3a584a1
+
+* Fixed relation issues causing search to craash when used with
+* principals
+
+
+2011-08-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: a7e7b845fb2fd456eb308a0c8c3573675cd9933e
+
+* Merge branch 'master' into r1.5
+
+
+2011-08-31 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: f293746cbf8fb704b5011d3b479ca83654f57ae8
+
+* Better way for info icons: Readded object info icons (fixes #1854)
+
+
+2011-08-31 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 54ceb7d8a539c6b8e10469a1b5a08a2b133e24f9
+
+* Updated REST commandhandler
+
+
+2011-08-31 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 723d75bb05be056e04e09d479772ee1c0dc481b1
+
+* Made web_cfg_path absolute in siteconfig, removed oracle debug
+* settings from 
+  index.php
+
+
+2011-08-31 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: bfa780f27b45c16d19fdbd6f760f96be00caeec9
+
+* Fixed wrong contact alias name in api
+
+
+2011-08-30 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 71e30e080730ed52c5c4d07d9b6bb2ede962c54f
+
+* Fixed PHP syntax error
+
+
+2011-08-30 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 84831d30aaeb7ed50bba0a9aa94b4d84d39f1ad9
+
+* Fixed trailing comma of dead that crashed IE
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: e12c66c36749dbc4a535a610a6e8acf97076f5d5
+
+* Fixed principal inheritance
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 8027897c133a9882c6f51a2b30a3e50a64550fba
+
+* icingaOracle fixes in Doctrine, fixed outdated route in group edit
+
+
+2011-08-25 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: 6401e51fb9561327fef8acd5715673aff3b0198a
+
+* fixed install paths and configure option regression (fixes #1851,
+* fixes #1852)
+
+
+2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
+           Commit: f7b70e7f32bb7796357649ef1c2f9772cfde4d2e
+
+* Fixed principal caching error that prevented some principals to work
+* correctly
+
+
+2011-08-26 Marius Hein <marius(DOT)hein(AT)netways(DOT)de>
+           Commit: 2e64f9a9e822e607362ae16963bdb88c9678a61f
+
+* Changed meta data
+
+
 2011-08-26 Jannis Moßhammer <jannis(DOT)mosshammer(AT)netways(DOT)de>
            Commit: dd70358ef51fc7838f8367fedd9a1b14bcdb1375
 
