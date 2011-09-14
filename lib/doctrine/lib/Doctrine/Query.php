@@ -1902,15 +1902,17 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
     protected function buildAssociativeRelationSql(Doctrine_Relation $relation, $assocAlias, $foreignAlias, $localAlias)
     {
         $table = $relation->getTable();
-
+        $localIdentifier = null;
         $queryPart = ' ON ';
 
         if ($relation->isEqual()) {
             $queryPart .= '(';
         }
-
-        $localIdentifier = $table->getColumnName($table->getIdentifier());
-
+        $foreignField = $relation->__getForeignId();
+        if(!$foreignField)
+            $localIdentifier = $table->getColumnName($table->getIdentifier());
+        else
+            $localIdentifier = $foreignField;
         $queryPart .= $this->_conn->quoteIdentifier($foreignAlias . '.' . $localIdentifier)
                     . ' = '
                     . $this->_conn->quoteIdentifier($assocAlias . '.' . $relation->getForeignRefColumnName());
