@@ -346,7 +346,7 @@
         	
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label">Contact</parameter>
+                <parameter name="label">Command</parameter>
                 <parameter name="width">120</parameter>
                
                 <parameter name="jsFunc">
