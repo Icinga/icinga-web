@@ -77,6 +77,8 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
     DESTDIR="%{buildroot}" \
     INSTALL_OPTS="" \
     COMMAND_OPTS="" \
+    INSTALL_OPTS_WEB="" \
+    INSTALL_OPTS_CACHE="" \
     INIT_OPTS=""
 
 # uncomment to copy icinga-web db sqls for upgrading
