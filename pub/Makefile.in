@@ -10,7 +10,7 @@ INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
 install: installdirs
-	find . -mindepth 1 -type f -not -name "*.in" -and -not -name "Makefile" -exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/pub/{} \;
+	find . -mindepth 1 -type f \! -name "*.in" -and \! -name "Makefile" -exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/pub/{} \;
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub

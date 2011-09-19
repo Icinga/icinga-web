@@ -46,7 +46,8 @@ AC_DEFUN([ACICINGA_EXTRACT_VERSION], [
 ])
 
 AC_DEFUN([ACICINGA_REMOVE_BLOCK], [
-	$SED -i -e "/###BEGIN_$2###/,/###END_$2###/d" $1
+	$SED -e "/###BEGIN_$2###/,/###END_$2###/d" $1 > $1.tmp
+	mv $1.tmp $1
 ])
 
 AC_DEFUN([ACICINGA_CLEANUP_APICONFIG], [

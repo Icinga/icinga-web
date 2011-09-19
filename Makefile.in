@@ -257,7 +257,8 @@ db-purge-userprefs:
 	$(PHING_CALL) db-purge-userprefs
 
 make-create-files:
-	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES)
+	$(SED) -i '/^# INSTALL_FILES_BEGIN/,/^# INSTALL_FILES_END/{D}' $(INC_MAKE_FILES) > $(INC_MAKE_FILES).tmp
+	mv $(INC_MAKE_FILES).tmp $(INC_MAKE_FILES)
 	./bin/create-makefile.sh ./ >> $(INC_MAKE_FILES)
 
 loc-update-catalog:

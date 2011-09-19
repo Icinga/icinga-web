@@ -13,20 +13,20 @@ INSTALL_OPTS_CACHE=@INSTALL_OPTS_CACHE@
 
 install: installdirs
 	find . -mindepth 1 -type f \
-	-not -name "*.in" \
-	-and -not -name "Makefile" \
-	-and -not -path "./cache/*" \
-	-and -not -path "*/data/log*" \
+	\! -name "*.in" \
+	-and \! -name "Makefile" \
+	-and \! -path "./cache/*" \
+	-and \! -path "*/data/log*" \
 	-exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/app/{} \;
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app
 	
 	find . -mindepth 1 -type d \
-	-not -path "./cache/*" \
-	-and -not -path "*/data/log*" \
-	-and -not -path "*/data/tmp*" \
-	-and -not -path "*Reporting/data*" \
+	\! -path "./cache/*" \
+	-and \! -path "*/data/log*" \
+	-and \! -path "*/data/tmp*" \
+	-and \! -path "*Reporting/data*" \
 	-exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/{} \;
 	
 	$(INSTALL) -m 755 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache
