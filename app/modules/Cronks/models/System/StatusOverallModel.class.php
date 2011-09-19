@@ -35,7 +35,7 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         foreach($sources as $stype=>$tarray) {
             $type = explode("_",strtoupper($stype));
             $search = $this->api->createSearch()->setSearchTarget($stype);
-            $search->setSearchFilter($type[0]."_IS_PENDING","0","<=");
+            //$search->setSearchFilter($type[0]."_IS_PENDING","0","<=");
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
 
             $this->buildDataArray($search, $tarray[0], $tarray[1], $target, $stype);
@@ -50,30 +50,33 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         $out = array();
         foreach($data as $k=>$v) {
             if (array_key_exists($state_field, $v) && array_key_exists($count_field, $v)) {
-                $out[ $v[$state_field] ] = $v[ $count_field ];
+                if(!isset($out[$v[$state_field]]))
+                    $out[$v[$state_field]] = 0;
+                $out[ $v[$state_field] ] += $v[ $count_field ];
             }
         }
         return $out;
     }
 
     private function buildDataArray(&$search, $type, array $states, array &$target,$stype) {
+        $field = sprintf('%s_CURRENT_STATE', strtoupper($type));
+        $pendingField = sprintf('%s_IS_PENDING', strtoupper($type));
+        
+        $search->setResultColumns(array($field,$pendingField));
+        $search->setSearchGroup(sprintf('%s_IS_PENDING', strtoupper($type)));
         $data = $search->setResultType(IcingaApiConstants::RESULT_ARRAY)->fetch()->getAll();
-
-        $this->addPending($data,$stype);
-
-        $field = sprintf('%s_STATE', strtoupper($type));
+     
         $data = $this->normalizeData($data, $field);
         $sum = 0;
 
         foreach($states as $sid=>$sname) {
             $count = 0;
-
+            
             if (array_key_exists($sid, $data)) {
                 $count = $data[$sid];
             }
 
             $sum += $count;
-
             $target[] = array(
                             'type'	=> $type,
                             'state'	=> $sid,

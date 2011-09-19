@@ -54,7 +54,7 @@ class Api_Store_Modifiers_StoreGroupingModifierModel extends IcingaBaseModel
         if ($this->groupfields) {
             $groups = explode(",",$this->groupfields);
             foreach($groups as $group)
-            $o->addGroupBy($group);
+                $o->addGroupBy($group);
         }
     }
 

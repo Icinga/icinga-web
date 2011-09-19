@@ -225,7 +225,7 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
             * instead of replacing them in the result set
             */
 
-            if ($aliasField && strpos($field,'*') === false) {
+            if ($aliasField && strpos($field,'.*') === false) {
                 $this->fields[] = $field." AS ".$aliasField;
             }
 

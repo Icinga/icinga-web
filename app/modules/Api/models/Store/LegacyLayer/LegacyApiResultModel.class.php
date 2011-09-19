@@ -53,14 +53,21 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
     public function createSearchObjectFromResult($resultCollection,array $columns) {
         $r = array();
         foreach($resultCollection as $result) {
-
+           
             if (is_array($result)) {
                 $res = $this->remapResult($columns,$result);
                 $r[] = $res;
             } else {
                 $res = new StdObject();
-                foreach($columns as $col)
-                $res-> {$col} = $result-> {$col};
+                foreach($columns as $col) {
+                    $res-> {$col} = $result-> {$col};
+                    if($col == "HOST_CURRENT_STATE")
+                        if($result->{"HOST_IS_PENDING"} == 1)
+                            $res->{$col} = 99;
+                    if($col == "SERVICE_CURRENT_STATE")
+                        if($result->{"SERVICE_IS_PENDING"} == 1)
+                            $res->{$col} = 99;                 
+                }
                 $r[] = $res;
             }
         }
@@ -79,9 +86,20 @@ class Api_Store_LegacyLayer_LegacyApiResultModel extends IcingaApiDataStoreModel
                 $remapped[$targetkey] = $result[$srckey];
             }
         }
+        $this->updatePendingStates($remapped);
+        
         return $remapped;
     }
 
+    protected function updatePendingStates(&$remapped) {
+        if(isset($remapped["HOST_IS_PENDING"]) && isset($remapped["HOST_CURRENT_STATE"]))
+            if($remapped["HOST_IS_PENDING"] > 0)
+                $remapped["HOST_CURRENT_STATE"] = 99;
+        if(isset($remapped["SERVICE_IS_PENDING"]) && isset($remapped["SERVICE_CURRENT_STATE"]))
+            if($remapped["SERVICE_IS_PENDING"] > 0)
+                $remapped["SERVICE_CURRENT_STATE"] = 99;
+    }
+    
     protected function createMappingForResult(array $columns,$result) {
         foreach($result as $key=>$value) {
             if (in_array($key,$columns)) {

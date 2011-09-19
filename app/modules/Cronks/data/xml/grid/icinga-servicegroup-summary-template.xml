@@ -141,6 +141,7 @@
         	<parameter>SERVICEGROUP_NAME</parameter>
         	<parameter>SERVICEGROUP_ALIAS</parameter>
         	<parameter>SERVICE_CURRENT_STATE</parameter>
+            <parameter>SERVICE_IS_PENDING</parameter>
         </parameter>
     </datasource>
     

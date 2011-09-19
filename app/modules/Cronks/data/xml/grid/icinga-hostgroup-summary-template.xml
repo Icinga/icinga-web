@@ -175,6 +175,7 @@
         	<parameter>HOSTGROUP_NAME</parameter>
         	<parameter>HOSTGROUP_ALIAS</parameter>
         	<parameter>HOST_CURRENT_STATE</parameter>
+            <parameter>HOST_IS_PENDING</parameter>
         </parameter>
     </datasource>
     
