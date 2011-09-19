@@ -12,8 +12,8 @@ class IcingaWebTestTool {
     private static $context = null;
     
     public static function initialize() {
-        self::$path_test = __DIR__;
-        self::$path_root = dirname(dirname(__DIR__));
+        self::$path_test = dirname(__FILE__);
+        self::$path_root = dirname(dirname(self::$path_test));
         self::parseTestProperties();
     }
    

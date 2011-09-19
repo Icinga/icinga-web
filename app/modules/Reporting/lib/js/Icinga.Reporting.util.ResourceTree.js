@@ -105,6 +105,30 @@ Icinga.Reporting.util.ResourceTree = Ext.extend(Icinga.Reporting.abstract.Applic
 			this.baseParams.filter = filter;
 		});
 		
+		tl.on('load', function(treeLoader, node, response) {
+			if (response.responseText.match(/error/)) {
+				
+				var msg = "";
+				
+				try {
+					var data = Ext.decode(response.responseText);
+					if (data.success == false && !Ext.isEmpty(data.error)) {
+						msg = data.error;
+					}
+				} catch (e) {
+						msg = response.responseText;
+				}
+				
+				Ext.Msg.show({
+					title : _('Reporting error'),
+					msg : String.format(_("Could not connect to the JasperServer (Raw: {0}).<br />Seems that reporting is unconfigured or not installed!"), msg),
+					buttons : Ext.Msg.OK,
+					icon : Ext.Msg.WARNING,
+					modal : true
+				});
+			}
+		}); 
+		
 		return tl;
 	},
 	

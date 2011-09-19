@@ -11,8 +11,15 @@ class Reporting_Provider_TreeLoaderSuccessView extends ReportingBaseView {
         $factory = $this->getContext()->getModel('JasperSoapFactory', 'Reporting', array(
                        'jasperconfig' => $rd->getParameter('jasperconfig')
                    ));
-
-        $client = $factory->getSoapClientForWSDL(Reporting_JasperSoapFactoryModel::SERVICE_REPOSITORY);
+        
+        try {
+            $client = $factory->getSoapClientForWSDL(Reporting_JasperSoapFactoryModel::SERVICE_REPOSITORY);
+        } catch(SoapFault $e) {
+            return json_encode(array(
+                'success' => false,
+                'error' => $e->getMessage()
+            ));
+        }
 
         $params = array(
                       'client'    => $client,

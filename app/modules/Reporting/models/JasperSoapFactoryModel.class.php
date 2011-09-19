@@ -27,11 +27,13 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
      */
     protected function getSoapClient($wsdl, array $additional_options=array()) {
         if (!isset($this->clients[$wsdl]) || !$this->clients[$wsdl] instanceof SoapClient) {
-
+            
+            $this->testWsdl($wsdl);
+            
             $options = array(
                            'cache_wsdl'    => WSDL_CACHE_NONE,
                            'trace'         => true,
-                           'exceptions'	=> true
+                           'exceptions'    => true
                        );
 
             if ($this->getParameter('jasper_user') !== null) {
@@ -41,12 +43,31 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
             if ($this->getParameter('jasper_pass') !== null) {
                 $options['password'] = $this->getParameter('jasper_pass');
             }
-
+            
             $this->clients[$wsdl] = new JasperSoapMultipartClient($wsdl, $options);
-
         }
 
         return $this->clients[$wsdl];
+    }
+    
+    /**
+     * Tests the SOCKET connection to jasper
+     * (This is small hack because I can not catch/supress constructor
+     * created PHP FATAL ERRORS (which occurs as AppKit Exceptions))
+     * @param string $wsdl
+     * @throws Reporting_JasperSoapFactoryModelExceltion
+     * @return boolean true on success
+     */
+    protected function testWsdl($wsdl) {
+        $parts = parse_url($wsdl);
+        $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        $test = @socket_connect($sock, $parts['host'], $parts['port']);
+        socket_close($sock);
+        if ($test) {
+            return true;
+        } else {
+            throw new Reporting_JasperSoapFactoryModelExceltion(null, 'Could not connect to server');
+        }
     }
 
     /**
@@ -75,5 +96,7 @@ class Reporting_JasperSoapFactoryModel extends JasperConfigBaseModel implements 
     }
 
 }
+
+class Reporting_JasperSoapFactoryModelExceltion extends SoapFault {}
 
 ?>
