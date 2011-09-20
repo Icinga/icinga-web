@@ -45,7 +45,8 @@
         <ae:parameter name="dsn">mysql://icinga:icinga@localhost:3306/icinga</ae:parameter>
         <ae:parameter name="prefix">icinga_</ae:parameter>
         <ae:parameter name="charset">utf8</ae:parameter>
-         <ae:parameter name="use_retained">true</ae:parameter>
+        <ae:parameter name="use_retained">true</ae:parameter>
+        <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
         <ae:parameter name="manager_attributes">
             <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
         </ae:parameter>
