@@ -16,12 +16,35 @@ Ext.onReady(function(){
 	var container = "<?php echo $t['container'] ?>";
 	if(!container)
 		container = AppKit.userEditor.STD_CONTAINER;
-	
+    
+	var setInternalFieldsEnabled = function(bool) {
+        var field = Ext.getCmp('user_disabled');
+        var passfield = Ext.getCmp('password_fieldset');
+
+        field.setVisible(bool);
+        passfield.setVisible(bool);
+        field.setDisabled(!bool);
+        passfield.setDisabled(!bool);
+       
+    }
+    
+    var getApiKey = function() {
+        var _string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz1234567890";
+        var rnd = parseInt(Math.random()*5,10)+25;
+        var key = "";
+        
+        while(rnd--) {
+            var nr = parseInt(Math.random()*_string.length,10);
+            key += _string[nr];
+        }
+        return key;
+    }
+    
 	var initEditorWidget = function() {
 		/**
 		 * Forms definition
 		 *
-		 **/
+		 **/    
 		AppKit.userEditor.formFields = [
 			{
 				xtype: 'hidden',
@@ -104,13 +127,12 @@ Ext.onReady(function(){
 					}),
                     listeners: {
                         change: function(cmp) {
-                            var field = Ext.getCmp('user_disabled');
                             var authMethod = cmp.getValue();
                             if(authMethod == 'internal' || authMethod == 'auth_key') {
-                                field.setVisible(true);
+                                setInternalFieldsEnabled(true);
                                 return true;
                             }
-                            field.setVisible(false);                          
+                            setInternalFieldsEnabled(false);
                         }
                     },
 					valueField: 'user_authkey',
@@ -122,12 +144,17 @@ Ext.onReady(function(){
 			},{
 				xtype: 'fieldset',
 				title: _('Change Password'),
+                id:'password_fieldset',
 				items: [{
 					xtype:'textfield',
 					fieldLabel: _('Password'),
 					id: 'user_password',
 					name: 'user_password',
 					validator: function(value) {
+                        var auth = Ext.getCmp('user_authsrc');
+                        if(auth != 'internal' && auth != 'auth_key')
+                            return true;
+                        
 						if(Ext.getCmp('user_id').getValue() == 'new' && !value) 
 							return _("Please provide a password for this user");
 						return true;
@@ -149,14 +176,27 @@ Ext.onReady(function(){
 					},
 					width: '200'
 				}, {
-					xtype: 'textfield',
-					fieldLabel: _('Authkey for Api (optional)'),
-					id: 'user_authkey',
-					name: 'user_authkey',
-					minLength: 8,
-					maxLength: 40,
-					width: '200',
-					regex: /[A-Za-z0-9]*/
+					xtype: 'compositefield',
+                    items: [{
+                        fieldLabel: _('Authkey for Api (optional)'),
+                        id: 'user_authkey',
+                        name: 'user_authkey',
+                        readOnly:true,
+                        minLength: 8,
+                        maxLength: 40,
+                        text: getApiKey(),
+                        width: '200',
+                        xtype:'textfield',
+                        regex: /[A-Za-z0-9]*/
+                    },{
+                        xtype:'button',
+                        iconCls:'icinga-icon-arrow-refresh',
+                        qtip: 'Create new api key',
+                  
+                        handler: function() {
+                            Ext.getCmp('user_authkey').setValue(getApiKey());
+                        }
+                    }]
 				}]
 			},{
 				xtype: 'fieldset',
@@ -212,7 +252,9 @@ Ext.onReady(function(){
 					items: AppKit.principalEditor.instance
 				}]
 			}
-		]
+		];
+        
+        
 
 		/**
 		 * Forms end
