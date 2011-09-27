@@ -102,6 +102,17 @@ Ext.onReady(function(){
 						fields: ['user_authkey'],
 						data:<?php echo $authTypes ?>
 					}),
+                    listeners: {
+                        change: function(cmp) {
+                            var field = Ext.getCmp('user_disabled');
+                            var authMethod = cmp.getValue();
+                            if(authMethod == 'internal' || authMethod == 'auth_key') {
+                                field.setVisible(true);
+                                return true;
+                            }
+                            field.setVisible(false);                          
+                        }
+                    },
 					valueField: 'user_authkey',
 					displayField: 'user_authkey'
 				}]
@@ -268,6 +279,10 @@ Ext.onReady(function(){
 				}
 				form.setValues(blank);
 				form.setValues(userVals);
+                // just to make sure the invalid button is really visible when needed
+                var authField = Ext.getCmp('user_authsrc');
+                if(authField)
+                    authField.fireEvent('change',authField);
 			},
 			
 			addPrincipalsToForm: function(values) {
