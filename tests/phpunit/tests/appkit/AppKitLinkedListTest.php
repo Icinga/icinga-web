@@ -2,15 +2,18 @@
 
 
 class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
+    /**
+    * @group AppKit
+    */
     public function testCreateInstance() {
         $llist = new AppKitLinkedList();
         $this->assertTrue($llist != null);
     }
     
     /**
-    *
-    * @depends testCreateInstance
-    **/
+     * @depends testCreateInstance
+     * @group AppKit
+     */
     public function testPush() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -24,8 +27,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
     
     /**
-    * @depends testPush
-    **/
+     * @depends testPush
+     * @group AppKit
+     */
     public function testCount() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -39,8 +43,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
     
     /**
-    * @depends testPush
-    **/
+     * @depends testPush
+     * @group AppKit
+     */
     public function testToString() {
         $data = array(
             "id1" => "test",
@@ -58,10 +63,11 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
         $str .= "END";
         $this->assertEquals($llist->toString(),$str,"toString failed");      
     }
+    
     /**
-    *
-    * @depends testCreateInstance
-    **/
+     * @depends testCreateInstance
+     * @group AppKit
+     */
     public function testUnshift() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -74,12 +80,12 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals($i->previous,$i2, "Previous pointer not correctly chained");
         $this->assertEquals($llist->count(),2,"Wrong count result");
     }
-
+    
     /**
-    *
-    * @depends testPush
-    * @depends testUnshift 
-    **/ 
+     * @depends testPush
+     * @depends testUnshift
+     * @group AppKit 
+     */
     public function testNext() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2"); 
@@ -96,9 +102,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
-    *
-    * @depends testNext
-    **/ 
+     * @depends testNext
+     * @group AppKit
+     */
     public function testPrev() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -119,8 +125,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
-    * @depends testNext
-    **/
+     * @depends testNext
+     * @group AppKit
+     */
     public function testPop() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -139,8 +146,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
     
     /**
-    * @depends testNext
-    **/
+     * @depends testNext
+     * @group AppKit
+     */
     public function testShift() { 
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -160,8 +168,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
-    * @depends testShift
-    **/
+     * @depends testShift
+     * @group AppKit
+     */
     public function testTop() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -181,8 +190,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
-    * @depends testPop
-    **/
+     * @depends testPop
+     * @group AppKit
+     */
     public function testBottom() {
         $i = new AppKitLinkedListItem("test");
         $i2 = new AppKitLinkedListItem("test2");
@@ -202,10 +212,10 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
     
     /**
-    *
-    * @depends testPush
-    * @depends testUnshift
-    **/
+     * @depends testPush
+     * @depends testUnshift
+     * @group AppKit
+     */
     public function testOffsetExistsNumeric() {
         $llist = new AppKitLinkedList();
         $llist->push("test2");
@@ -217,10 +227,10 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
     
     /**
-    *
-    * @depends testPush
-    * @depends testUnshift
-    **/
+     * @depends testPush
+     * @depends testUnshift
+     * @group AppKit
+     */
     public function testOffsetExistsId() {
         $llist = new AppKitLinkedList();
         $llist->push(array("id"=>"testId","value"=>"test2"));
@@ -233,9 +243,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
  
     /**
-    *
-    * @depends testOffsetExistsNumeric
-    **/
+     * @depends testOffsetExistsNumeric
+     * @group AppKit
+     */
     public function testOffsetGetNumeric() {
         $llist = new AppKitLinkedList();
         $llist->push("test2");
@@ -244,11 +254,12 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals($llist->offsetGet(-5),null,"Negative offset not recognized");
         $this->assertEquals($llist->offsetGet(2),"test3","Offset 2 not found in 3 element list");
         $this->assertEquals($llist->offsetExists(3),null,"Out of bounds offset not recognized in 3 element list"); 
-    }   
+    }
+    
     /**
-    *
-    * @depends testOffsetExistsId
-    **/
+     * @depends testOffsetExistsId
+     * @group AppKit
+     */
     public function testOffsetGetId() {
         $llist = new AppKitLinkedList();
         $llist->push(array("id"=>"testId","value"=>"test2"));
@@ -261,9 +272,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
     
     /**
-    *
-    * @depends testOffsetGetId
-    **/
+     * @depends testOffsetGetId
+     * @group AppKit
+     */
     public function testOffsetSet() {
         $llist = new AppKitLinkedList();
         $llist->push(new AppKitLinkedListItem("test2","testId"));
@@ -276,9 +287,10 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
-    *
-    * @depends testOffsetSet
-    **/
+     *
+     * @depends testOffsetSet
+     * @group AppKit
+     */
     public function testOffsetPush() {
         $llist = new AppKitLinkedList();
         $llist->push(new AppKitLinkedListItem("test2","testId"));
@@ -289,9 +301,9 @@ class AppKitLinkedListTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
-    *
-    * @depends testOffsetSet
-    **/
+     * @depends testOffsetSet
+     * @group AppKit
+     */
     public function testOffsetUnshift() {
         $llist = new AppKitLinkedList();
         $llist->push(new AppKitLinkedListItem("test2","testId"));

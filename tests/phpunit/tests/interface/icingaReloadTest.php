@@ -5,8 +5,8 @@
 */	
 class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/**
-	* @depends agaviBootstrapTest::testBootstrap 
-	*/	
+	 * @depends agaviBootstrapTest::testBootstrap 
+	 */	
 	public static function setUpBeforeClass() {
 		try {
 			Doctrine_Manager::connection()->beginTransaction();
@@ -63,6 +63,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	}
 */
 
+	/**
+	 * @group Interface
+	 */
 	public function testIcingaStatus() {
 		$context = AgaviContext::getInstance();
 		$icingaCmd = $context->getModel("IcingaControlTask","Api",array("host"=>"vm_host1"));

@@ -7,6 +7,7 @@
  * @author jmosshammer <jannis.mosshammer@netways.de>
  *
  */
+
 /**
 * @depends agaviBootstrapTest::testBootstrap 
 */	
@@ -81,6 +82,9 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * 
 	 */
+    /** 
+     * @group Database
+     */
 	public function testAvailable() {
 		info("Testing accessibility\n");
 		Doctrine_Manager::connection()->beginTransaction();
@@ -98,6 +102,7 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testAvailable
+	 * @group Database
 	 */
 	public function testInsert() {
 		
@@ -126,6 +131,7 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @depends testInsert
+	 * @group Database
 	 */
 	public function testDataEquality() {
 		info("Checking inserted data\n");
@@ -145,6 +151,7 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @depends testDataEquality
 	 * @depends testInsert
+	 * @group Database
 	 */
 	public function testRemove() {
 		info("Test delete operation\n");
@@ -166,7 +173,9 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 		return $entries;
 	}
 
-	
+    /** 
+    * @group Database
+    */
 	public function doctrineModelProvider()	{
 		$models = Doctrine::getLoadedModels();
     	foreach($models as &$model) {
@@ -174,11 +183,12 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
     	}
     	return $models;
 	}
-
+	
+    /** 
+    * @group Database
+    */
 	public function testRollback() {
 		Doctrine_Manager::connection()->rollback();
 	}
-	
-
 	
 }

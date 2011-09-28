@@ -5,6 +5,7 @@
 class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	/**
 	* @depends agaviBootstrapTest::testBootstrap 
+	* @group Database
 	*/	
 	public static function setUpBeforeClass() {
 		try {
@@ -50,7 +51,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends icingaDatabaseAccessibleTest::testInsert
-	 * 
+	 * @group Database
 	 */
 	public function testUserAdd() {
 		try {
@@ -85,6 +86,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testUserAdd
+	 * @group Database
 	 */
 	public function testUserSelect() {
 		try {
@@ -136,6 +138,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testUserSelect
+	 * @group Database
 	 */
 	public function testUserAlter() {
 		try {
@@ -176,8 +179,8 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * 
 	 * @depends testUserAlter
+	 * @group Database
 	 */
 	public function testUserPreferenceAdd() {
 		try {
@@ -210,8 +213,8 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * 
 	 * @depends testUserPreferenceAdd
+	 * @group Database
 	 */
 	public function testUserPreferenceRemove() {	
 		try {
@@ -239,6 +242,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 	/** 
 	 * @depends testUserAlter
+	 * @group Database
 	 */
 	public function testPrincipalAdd() {
 		try {
@@ -272,6 +276,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 	/** 
 	 * @depends testPrincipalAdd
+	 * @group Database
 	 */
 	public function testPrincipalRead() {
 		try {
@@ -292,6 +297,7 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testUserAdd
+	 * @group Database
 	 */
 	public function testUserDelete() {
 		$user = self::$idFixture;	
@@ -315,7 +321,9 @@ class icingaUserOperations extends PHPUnit_Framework_TestCase {
 		}		
 	}
 	
-
+    /** 
+    * @group Database
+    */
 	public static function tearDownAfterClass() {
 		try {	
 			Doctrine_Manager::connection()->rollback();

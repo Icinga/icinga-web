@@ -3,6 +3,9 @@
 * @depends agaviBootstrapTest::testBootstrap 
 */	
 class persistenceView extends PHPUnit_Framework_TestCase {
+    /** 
+    * @group Database
+    */
 	public static function setUpBeforeClass() {
 		try {
 			Doctrine_Manager::connection()->beginTransaction();
@@ -20,6 +23,7 @@ class persistenceView extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends icingaDatabaseAccessibleTest::testInsert
+	 * @group Database
 	 */
 	public function testReadState() {
 		info("Testing Persistence functions \n");
@@ -48,6 +52,7 @@ class persistenceView extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testReadState
+	 * @group Database
 	 */
 	public function testSaveState() {
 		info("\tTesting state-save\n");
@@ -87,6 +92,9 @@ class persistenceView extends PHPUnit_Framework_TestCase {
 		success("\tWriting state succeeded!\n");
 	}
 	
+    /** 
+    * @group Database
+    */
 	public static function tearDownAfterClass() {
 		try {
 			Doctrine_Manager::connection()->rollback();

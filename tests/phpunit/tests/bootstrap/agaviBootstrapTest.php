@@ -7,6 +7,9 @@ class agaviBootstrapTest extends PHPUnit_Framework_TestCase {
 		'/lib/doctrine/lib/Doctrine.php'
 	);
 
+     /**
+     * @group Bootstrap
+     */
 	public function testLibs() {
 		$success = true;
 		$basePath = IcingaWebTestTool::getRootPath();
@@ -21,8 +24,9 @@ class agaviBootstrapTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	* @depends testLibs
-	**/
+	 * @depends testLibs
+	 * @group Bootstrap
+	 **/
 	public function testBootstrap() {
     	$ctx = AgaviContext::getInstance('testing');
     	

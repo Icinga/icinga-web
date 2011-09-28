@@ -1,6 +1,10 @@
 <?php
 
 class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
+
+    /**
+    * @group Interface
+    */
 	
 	public function testInterfaceInstance() {
 		// default
@@ -12,9 +16,17 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 	/**
      * @expectedException ApiUnknownHostException
      */
+    /**
+    * @group Interface
+    */
+
 	public function testUnknownHostInstance() {
 		$model = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"dgjksdd"));	
 	}
+
+    /**
+    * @group Interface
+    */
 
 	public function testCommandSetup() {
 		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api");	
@@ -52,6 +64,7 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 
 	/**
      * @expectedException ApiRestrictedCommandException
+     * @group Interface
      */
 	public function testInvalidCommand() {
 		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api");	
@@ -70,7 +83,10 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 		
 		$lsCmd->isValid(true,$msg);	
 	}
-
+	
+	/**
+	 * @group Interface
+	 */
 	public function testSshConnection() {
 		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"vm_host1"));	
 		$lsCmd = AgaviContext::getInstance()->getModel(
@@ -87,7 +103,10 @@ class ConsoleInterfaceTest extends PHPUnit_Framework_TestCase {
 		);
 		$console->exec($lsCmd);
 	}
-	
+
+    /**
+    * @group Interface
+    */
 	public function testSshKeyConnection() {
 		$console = AgaviContext::getInstance()->getModel('Console.ConsoleInterface',"Api",array("host"=>"vm_host2"));	
 		$lsCmd = AgaviContext::getInstance()->getModel(

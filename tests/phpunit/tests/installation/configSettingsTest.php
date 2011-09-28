@@ -5,6 +5,9 @@
 */	
 class configSettingsTest extends PHPUnit_Framework_TestCase {
 
+    /**
+    * @group Installation 
+    */
 	public function testAPIConnection() {
 		$root = AgaviConfig::get("core.root_dir");
 		info("\tTesting if API Connection is available\n");
