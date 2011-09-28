@@ -2,9 +2,8 @@
 
 class ApiProviderTest extends PHPUnit_Framework_TestCase {
 	/**
-	* 
 	* @dataProvider testDOMProvider
-	*
+	* @group Configuration
 	*/
 	public function testProviderAttributesInRouting(AgaviXmlConfigDomDocument $dom,$extRoutes) {
 		
@@ -24,6 +23,7 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 	* @expectedException ApiProviderMissingActionException 
 	* @dataProvider testDOMProviderWithoutAction
 	* @depends testProviderAttributesInRouting
+	* @group Configuration
 	**/
 	public function testProviderWithoutAction($dom) { 
 		$parser = new AppKitRoutingConfigHandler();
@@ -34,13 +34,16 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 	* @expectedException ApiProviderMissingModuleException
 	* @dataProvider testDOMProviderWithoutModule
 	* @depends testProviderAttributesInRouting
+	* @group Configuration
 	**/
 	public function testProviderWithoutModule($dom) { 
 		$parser = new AppKitRoutingConfigHandler();
 		$parser->execute($dom);
 	}
 
-
+    /** 
+    * @group Configuration
+    */
 	public function testDOMProviderWithoutModule() {
 		$dom = '<?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
@@ -58,7 +61,10 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 		$domDoc->loadXML($dom);	
 		return array(array($domDoc));
 	}
-
+	
+    /** 
+    * @group Configuration
+    */
 	public function testDOMProviderWithoutAction() {
 		$dom = '<?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
@@ -77,8 +83,9 @@ class ApiProviderTest extends PHPUnit_Framework_TestCase {
 		return array(array($domDoc));
 	}
 
-
-
+    /** 
+    * @group Configuration
+    */
 	public function testDOMProvider() {
 		$dom = '<?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">

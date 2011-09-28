@@ -1,13 +1,18 @@
 <?php
-class TestValidator extends AppKitJsonValidator 
-{
+class TestValidator extends AppKitJsonValidator {
+    /** 
+     * @group Validators
+     */
     public function  setValidationParameters(AgaviRequestDataHolder $r) {
         $this->validationParameters = $r;
     }
 
 }
 class AppKitJsonValidatorTest extends PHPUnit_Framework_TestCase {
-   
+    
+    /**
+     * @group Validators
+     */
     public function runValidator($f,$in) { 
         $req = new AgaviRequestDataHolder();
         $req->setParameter("input",$in);
@@ -36,30 +41,35 @@ class AppKitJsonValidatorTest extends PHPUnit_Framework_TestCase {
     }
  
     /**
-    *
-    * @dataProvider correctDataProvider
-    **/    
+     * @dataProvider correctDataProvider
+     * @group Validators
+     **/
     public function testCorrectValidation($f,$in) {
        $this->assertTrue($this->runValidator($f,$in),"Correct format/input validation failed");
     }
     
     /** 
-    * @dataProvider invalidFormatProvider
-    * @expectedException UnknownJsonFieldValidatorTypeException
-    * @depends testCorrectValidation
-    **/    
+     * @dataProvider invalidFormatProvider
+     * @expectedException UnknownJsonFieldValidatorTypeException
+     * @depends testCorrectValidation
+     * @group Validators
+     **/    
     public function testInvalidFormat($f,$in) {
         $this->assertFalse($this->runValidator($f,$in));
     }
 
     /** 
-    * @dataProvider invalidInputProvider 
-    * @depends testCorrectValidation
-    **/    
+     * @dataProvider invalidInputProvider 
+     * @depends testCorrectValidation
+     * @group Validators
+     **/
     public function testInvalidInput($f,$in) {
         $this->assertFalse($this->runValidator($f,$in));
     }
-
+    
+    /**
+     * @group Validators
+     */
     public function correctDataProvider() {
         return array(
             array('{"testField": "ANY"}','{"testField":"hello","blob":"TEST"}'),
@@ -108,6 +118,10 @@ class AppKitJsonValidatorTest extends PHPUnit_Framework_TestCase {
 
         );
     }
+    
+    /**
+     * @group Validators
+     */
     public function invalidFormatProvider() {
         return array(
             array('{"testField" : "BLOB"}','{"testField": "dsdsgdgs"}'), 
@@ -115,6 +129,10 @@ class AppKitJsonValidatorTest extends PHPUnit_Framework_TestCase {
 
         );
     }
+    
+    /**
+     * @group Validators
+     */
     public function invalidInputProvider() {
         return array( 
            array('{"testField": "ANY"}','{"blob": "TEST"}'), 

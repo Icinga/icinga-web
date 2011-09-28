@@ -9,8 +9,9 @@
 class userRightsTest extends PHPUnit_Framework_TestCase {
 	
 	/**
-	* @depends agaviBootstrapTest::testBootstrap 
-	*/	
+	* @depends agaviBootstrapTest::testBootstrap
+	* @group Installation 
+	*/
 	public function testCacheDirsExist() {
 		info("Running post installation checks \n");
 		info("\tChecking if cache folders exist\n");
@@ -31,6 +32,7 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testCacheDirsExist
+	 * @group Installation
 	 */
 	public function testCacheDirsAreWriteable() {
 		info("\tTesting if web user can write to cache\n");
@@ -70,6 +72,7 @@ class userRightsTest extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * Check if logs are writeable
+	 * @group Installation 
 	 */
 	public function testLogDir() {
 		info("\tTesting log write-access for web user\n");

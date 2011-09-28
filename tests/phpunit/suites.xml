@@ -22,7 +22,7 @@
 			<file>tests/phpunit/tests/configuration/ApiProviderRoutesTest.php</file>
 			<file>tests/phpunit/tests/configuration/ApiValidationParserTest.php</file>
 		</testsuite>
-		<testsuite name="validators">
+		<testsuite name="Validators">
 			<file>tests/phpunit/tests/validators/AppKitJsonValidatorTest.php</file>
 	        </testsuite>
         <testsuite name="Database">
@@ -37,20 +37,24 @@
 		</testsuite>
 
 		<testsuite name="API">
+		<!--
 			<file>tests/phpunit/tests/api/ConsoleInterfaceTest.php</file>
-<!--			<directory>tests/phpunit/tests/api/hosts</directory>
-            <directory>tests/phpunit/tests/api/services</directory>	
+			<directory>tests/phpunit/tests/api/hosts</directory>
+			<directory>tests/phpunit/tests/api/services</directory>	
 			<directory>tests/phpunit/tests/api/hostgroups</directory>	
 			<directory>tests/phpunit/tests/api/servicegroups</directory>
-			<directory>tests/phpunit/tests/api/misc</directory>-->
+			<directory>tests/phpunit/tests/api/misc</directory>
+		-->
 		</testsuite>
-	<!--
+		
+		<!--
         <testsuite name="ApiProvider">
             <file>tests/phpunit/tests/api/apiprovider/FilterTest.php</file>
             <file>tests/phpunit/tests/api/apiprovider/DataStoreTest.php</file>
             <file>tests/phpunit/tests/api/apiprovider/IcingaApiDatastoreTest.php</file>
             
         </testsuite>
--->
+        -->
+        
 	</testsuites>
 </phpunit>

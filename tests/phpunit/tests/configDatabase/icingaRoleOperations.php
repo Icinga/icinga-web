@@ -4,6 +4,10 @@
 */	
 class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	public static $idFixture;
+	
+    /** 
+    * @group Database
+    */
 	public static function setUpBeforeClass() {
 		try {	
 			Doctrine_Manager::connection()->beginTransaction();
@@ -33,7 +37,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends icingaDatabaseAccessibleTest::testInsert
-	 * 
+	 * @group Database
 	 */
 	public function testRoleAdd() {
 		try {
@@ -66,6 +70,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testRoleAdd
+	 * @group Database
 	 */
 	public function testRoleSelect() {
 		try {
@@ -115,6 +120,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 
 	/** 
 	 * @depends testRoleSelect
+	 * @group Database
 	 */
 	public function testPrincipalAdd() {
 		try {
@@ -147,6 +153,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	
 	/** 
 	 * @depends testPrincipalAdd
+	 * @group Database
 	 */
 	public function testPrincipalRead() {
 		try {
@@ -167,6 +174,7 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testRoleAdd
+	 * @group Database
 	 */
 	public function testRoleRemove() {
 		$id = self::$idFixture;				
@@ -188,7 +196,11 @@ class icingaRoleOperations extends PHPUnit_Framework_TestCase {
 		} catch(Exception $e) {
 			$this->fail("Selecting roles failed!".$e->getMessage());
 		}
-	}	
+	}
+	
+    /** 
+    * @group Database
+    */
 	public static function tearDownAfterClass() {
 		try {	
 			Doctrine_Manager::connection()->rollback();

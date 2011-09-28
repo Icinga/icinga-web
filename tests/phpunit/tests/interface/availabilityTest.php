@@ -10,7 +10,10 @@
 * @depends agaviBootstrapTest::testBootstrap 
 */	
 class availabilityTest extends PHPUnit_Framework_TestCase {
-			
+	
+    /** 
+     * @group Interface
+     */
 	public function testShowLoginMask() {
 		$ctx = AgaviContext::getInstance('web');
 		$container = $ctx->getController()->createExecutionContainer("AppKit","Login.AjaxLogin",null,"html");
@@ -23,6 +26,9 @@ class availabilityTest extends PHPUnit_Framework_TestCase {
 		}		
 	}	
 	
+    /** 
+     * @group Interface
+     */
 	public function testWrongLogin() {
 		info("Testing interface avaibility\n");
 		info("\tTesting wrong login \n");
@@ -53,6 +59,7 @@ class availabilityTest extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @depends testShowLoginMask
+	 * @group Interface
 	 */
 	public function testCorrectLogin() {
 		info("\tTesting correct login\n");
