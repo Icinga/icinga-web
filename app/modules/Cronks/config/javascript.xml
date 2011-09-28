@@ -12,7 +12,8 @@
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/GroupTab.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/MultiSelect.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/TabScrollerMenu.js</ae:parameter>
-
+            
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/widgets/Ext.ux.form.MultiSelect.Override.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronk.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/CronkUtil.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/FilterHandler.js</ae:parameter>

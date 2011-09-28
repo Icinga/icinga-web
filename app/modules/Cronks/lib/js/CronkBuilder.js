@@ -562,6 +562,12 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 			f.findField('categories').setValue(o['categories']);
 			f.findField('image').setValue(o['image_id']);
 			
+			if (!Ext.isEmpty(o['groupsonly'])) {
+				f.findField('share').setValue(true);
+				// Overridden method @see js/widgets/Ext.ux.form.MultiSelect.Override.js
+				f.findField('roles').setValueByDisplayValues(o['groupsonly']);
+			}
+			
 			this.paramGrid.setSource(Ext.isObject(o['ae:parameter']) ? o['ae:parameter'] : {});
 			
 			this.refreshIconPreview();

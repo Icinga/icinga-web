@@ -227,7 +227,7 @@ Cronk.util.CronkListingPanel = function(c) {
 	    '<div class="x-clear"></div>'
 	);
 	
-	this.loadData = function(url) {
+	this.loadData = function(url, act) {
 		
 		var mask = null;
 		
@@ -272,6 +272,11 @@ Cronk.util.CronkListingPanel = function(c) {
 					}, this);
 					
 					AppKit.util.Layout.doLayout(null, 200);
+					// this.doLayout();
+					
+					if (!Ext.isEmpty(act)) {
+						this.getLayout().setActiveItem(act);
+					}
 				}
 			},
 			failure: function (r, o) {
@@ -725,6 +730,16 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 	},
 	
 	reloadAll : function() {
+		
+		var act = 0, i = 0;
+		this.items.each(function(item) {
+			if (this.getLayout().activeItem == item) {
+				act = i;
+				return false;
+			}
+			i++;
+		}, this);
+		
 		this.removeAll();
 		
 		Ext.iterate(this.stores, function(storeid, store) {
@@ -732,7 +747,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 			delete(this.stores[storeid]);
 		}, this);
 		
-		this.loadData(this.combinedProviderUrl);
+		this.loadData(this.combinedProviderUrl, act);
 	}
 });
  
