@@ -44,6 +44,11 @@
 .icinga-icon-info-passive { background-image: url("../images/icons/arrow-in.png") !important; background-repeat: no-repeat; }
 
 /*
+ * Common actions
+ */
+.icinga-action-icon-search { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
+
+/*
  *	Default iconset
  */
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }

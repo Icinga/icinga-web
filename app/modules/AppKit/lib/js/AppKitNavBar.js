@@ -105,7 +105,11 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         this.addMenuFields(cfg.items,this.menuData); 
         cfg.items.push({xtype : 'tbfill'});
         this.addClock(cfg.items);
-
+        
+        if (AppKit.search.SearchHandler.isReady() === true) {
+            this.addSearchBox(cfg.items);
+        }
+        
         this.addUserFields(cfg.items);
     },
 
@@ -113,6 +117,15 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         var item = new AppKit.util.Servertime();
         AppKit.log(item)
         itemsCfg.push({xtype: 'container',items:item});
+    },
+    
+    addSearchBox : function(itemsCfg) {
+    	item = new AppKit.search.Searchbox();
+    	
+    	itemsCfg.push({
+    		xtype : 'container',
+    		items : item
+    	});
     },
 
     addMenuFields : function(itemsCfg,menuData) {
