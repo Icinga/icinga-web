@@ -1,9 +1,11 @@
-<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
-	<ae:configuration context="testing">
-	<routes>
-		<route name=".testdummy" pattern="^/testdummy" module="TestDummy">
-			<route name=".test1" pattern="^/test/route/c1" action="Test"/>
-		</route>
-	</routes>
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
+    <ae:configuration context="testing">
+        <routes>
+            <route name=".testdummy" pattern="^/testdummy" module="TestDummy">
+                <route name=".test1" pattern="^/test/route/c1" action="Test"/>
+            </route>
+        </routes>
 	</ae:configuration>
 </ae:configurations>

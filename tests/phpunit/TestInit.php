@@ -157,12 +157,12 @@ class IcingaWebTestBootstrap {
     	
     	AgaviConfig::set('core.default_context', $env);
     	
-    	$init_modules = AgaviConfig::get('org.icinga.appkit.init_modules', array());
-    	$init_modules = array_merge($init_modules, $modules);
-    	AgaviConfig::set('org.icinga.appkit.init_modules', $init_modules, true);
-    	
     	AppKitAgaviUtil::initializeModule('AppKit');
     	AppKitAgaviUtil::initializeModule('Api');
+    	
+    	foreach ($modules as $module) {
+    	    AppKitAgaviUtil::initializeModule($module);
+    	}
     	
     	AgaviConfig::set('core.context_implementation', 'AppKitAgaviContext');
     	

@@ -25,29 +25,29 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
     /**
      * @group Module
      */
-    public function testModuleDatabaseConfiguration() {
-        $ctx = IcingaWebTestTool::getContext();
+//     public function testModuleDatabaseConfiguration() {
+//         $ctx = IcingaWebTestTool::getContext();
         
-        $database = $ctx->getDatabaseManager()->getDatabase('icinga_test_database');
+//         $database = $ctx->getDatabaseManager()->getDatabase('icinga_test_database');
         
-        IcingaWebTestTool::assertInstanceOf('AgaviPdoDatabase', $database);
+//         IcingaWebTestTool::assertInstanceOf('AgaviPdoDatabase', $database);
         
-        $resource = $database->getConnection();
+//         $resource = $database->getConnection();
         
-        IcingaWebTestTool::assertInstanceOf('PDO', $resource);
+//         IcingaWebTestTool::assertInstanceOf('PDO', $resource);
         
-        $sth = $resource->prepare('SELECT count(*) as cnt from nsm_user where user_name=\'root\'');
+//         $sth = $resource->prepare('SELECT count(*) as cnt from nsm_user where user_name=\'root\'');
         
-        $re = $sth->execute();
+//         $re = $sth->execute();
         
-        $this->assertTrue($re);
+//         $this->assertTrue($re);
         
-        $row = $sth->fetch();
+//         $row = $sth->fetch();
         
-        $this->assertEquals(1, $row['cnt']);
+//         $this->assertEquals(1, $row['cnt']);
         
-        $this->assertTrue($sth->closeCursor());
-    }
+//         $this->assertTrue($sth->closeCursor());
+//     }
     
     /**
      * @group Module
@@ -145,18 +145,18 @@ class ModuleLoadingTest extends PHPUnit_Framework_TestCase {
     /**
      * @group Module
      */
-    public function testModuleTranslations() {
-        $ctx = IcingaWebTestTool::getContext();
-        $tm = $ctx->getTranslationManager();
+//     public function testModuleTranslations() {
+//         $ctx = IcingaWebTestTool::getContext();
+//         $tm = $ctx->getTranslationManager();
         
-        $tm->setLocale('en');
+//         $tm->setLocale('en');
         
-        $this->assertEquals('en', $tm->getCurrentLocaleIdentifier());
+//         $this->assertEquals('en', $tm->getCurrentLocaleIdentifier());
         
-        $this->assertEquals('test1-trans', $tm->_('test1', 'testdummy.text_simple'));
-        $this->assertEquals('test2-trans', $tm->_('test2', 'testdummy.text_simple'));
+//         $this->assertEquals('test1-trans', $tm->_('test1', 'testdummy.text_simple'));
+//         $this->assertEquals('test2-trans', $tm->_('test2', 'testdummy.text_simple'));
         
-        $this->assertEquals(date('Y'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_year'));
-        $this->assertEquals(date('m'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_month'));
-    }
+//         $this->assertEquals(date('Y'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_year'));
+//         $this->assertEquals(date('m'), $tm->_d(date('Y-m-d H:i:s'), 'testdummy.date_month'));
+//     }
 }

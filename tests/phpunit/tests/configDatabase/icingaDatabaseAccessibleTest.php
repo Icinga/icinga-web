@@ -24,7 +24,8 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 			),
 			"toProp" => "lastRole"
 		),
-		"2" => array("model"=>"NsmUser",
+		
+		array("model"=>"NsmUser",
 			"fields"=>array(
 				"user_name" => "TestCaseUser",
 				"user_account" => 0,
@@ -38,6 +39,7 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 			),
 			"toProp" => "lastUser"
 		),
+		
 		array("model"=>"NsmTarget",
 			"fields"=>array(
 				"target_name" => "TestCase",
@@ -47,6 +49,7 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 			),
 			"toProp" => "lastTarget"
 		),
+		
 		array("model" => "NsmPrincipal",
 			"fields" => array(
 				"principal_type" =>  'role',
@@ -63,7 +66,6 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 			"toProp" => "lastPrincipal_Role"
 		),
 	
-		
 		array("model"=>"NsmSession",
 			"fields"=>array(
 				"session_id"=>"TestCaseID",
@@ -72,6 +74,7 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 				"session_checksum" => "1b8e97d364c6f7a6a600a00b203cfd34"
 			)
 		),
+		
 		array("model"=>"NsmLog",
 			"fields" => array(
 				"log_level" => 0,
@@ -88,7 +91,13 @@ class icingaDatabaseAccessibleTest extends PHPUnit_Framework_TestCase {
 	public function testAvailable() {
 		info("Testing accessibility\n");
 		Doctrine_Manager::connection()->beginTransaction();
+		
 		foreach(Doctrine::getLoadedModels() as $model) {
+		    
+		    if (strpos($model, 'Doctrine_File') !== false) {
+		        continue;
+		    }
+		    
 			info("\tChecking table for ".$model."... \n");
 			try {
 				$result = Doctrine_Query::create()->select("*")->from($model)->execute();
