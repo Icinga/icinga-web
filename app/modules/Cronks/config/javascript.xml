@@ -32,13 +32,16 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/MetaGridCreator.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/GridUtil.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/ColumnNodeUI.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/SearchHandler.js</ae:parameter>
 
             <ae:parameter>%core.root_dir%/lib/jit/Extras/excanvas.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
             
             <!-- Cronks -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Icinga.Cronks.System.StatusOverall.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Icinga.Cronks.System.CronkPortal.js</ae:parameter>
+            
+            <!-- Search -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/search/Icinga.Cronks.search.SearchHandler.js</ae:parameter>
             
             <!-- Formerly dynamic scripts -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>

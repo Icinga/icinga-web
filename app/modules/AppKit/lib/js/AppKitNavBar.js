@@ -122,6 +122,8 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     addSearchBox : function(itemsCfg) {
     	item = new AppKit.search.Searchbox();
     	
+    	AppKit.search.SearchHandler.setSearchbox(item);
+    	
     	itemsCfg.push({
     		xtype : 'container',
     		items : item

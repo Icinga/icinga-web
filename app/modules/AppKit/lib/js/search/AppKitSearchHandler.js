@@ -6,6 +6,8 @@ AppKit.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
 	
 	handlers : [],
 	
+	searchBox : null,
+	
 	constructor : function(config) {
 		
 		config = config || {};
@@ -13,7 +15,8 @@ AppKit.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
 		this.addEvents({
 			'activate' : true,
 			'deactivate' : true,
-			'process' : true
+			'process' : true,
+			'submit' : true
 		})
 		
 		this.listeners = config.listeners;
@@ -21,14 +24,30 @@ AppKit.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
 		Ext.util.Observable.prototype.constructor.call(this, config);
 	},
 	
+	setSearchbox : function(cmp) {
+		this.searchBox = cmp;
+	},
+	
+	getSearchbox : function() {
+		return this.searchBox;
+	},
+	
+	getTargetElement : function() {
+		return this.searchBox.getEl();
+	},
+	
 	getQuery : function() {
 		return this.query;
 	},
 	
-	doSearch : function(query) {
+	doSearch : function(query, event) {
 		
-		if (query !== this.query) {
-			if (this.fireEvent('process', this, query) !== false) {
+		if (Ext.isEmpty(event)) {
+			event = 'process';
+		}
+		
+		if (query !== this.query || event == 'submit') {
+			if (this.fireEvent(event, this, query) !== false) {
 				this.query = query;
 			}
 		}
@@ -39,7 +58,9 @@ AppKit.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
 	},
 	
 	deactivate : function() {
-		return this.fireEvent('deactivate', this);
+		if (this.fireEvent('deactivate', this) !== false) {
+			this.query = "";
+		}
 	},
 	
 	registerHandler : function(fn, scope) {

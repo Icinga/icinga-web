@@ -5,7 +5,6 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
     width : 16,
     height : 16,
     border : false,
-    
     stopShow : false,
     
     constructor : function(c) {
@@ -15,7 +14,8 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
             bodyCfg : {
                 tag : 'div',
                 cls : 'icinga-action-icon-search',
-                html : ''
+                html : '',
+                qtip : _('Press STRG+ALT+F to activate search')
             }
         });
     	
@@ -29,6 +29,7 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
         	this.getEl().on('mouseleave', this.onMouseleave, this);
         	this.getEl().on('mouseenter', this.onMouseenter, this);
         	this.getEl().on('click', this.onMouseenter, this);
+        	this.textfield = this.getWindow().findById('global_search');
         }, this, { single : true });
         
         this.keymap = new Ext.KeyMap(Ext.getBody(), {
@@ -45,10 +46,17 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
         		}
         		
         	}).createDelegate(this)
-        })
+        });
     },
     
+    /**
+     * Alias
+     */
     getSearchbox : function() {
+    	return this.getWindow();
+    },
+    
+    getWindow : function() {
     	if (Ext.isEmpty(this.searchBox)) {
     		this.searchBox = new Ext.Window({
     			closable : true,
@@ -77,6 +85,12 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
     				listeners : {
     					keyup : function(field, event) {
     						AppKit.search.SearchHandler.doSearch(field.getValue());
+    					},
+    					
+    					keydown : function(field, event) {
+    						if (event.getCharCode() === Ext.EventObject.ENTER) {
+    							AppKit.search.SearchHandler.doSearch(field.getValue(), 'submit');
+    						}
     					}
     				}
     			}],
@@ -89,12 +103,22 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
     				},
     				
     				blur : function(field) {
-    					this.hide();
+    					if (!AppKit.search.SearchHandler.getQuery()) {
+    					   this.hide();
+    					}
     				},
-    				
-    				hide : this.onMouseleave.createDelegate(this)
     			}
     		});
+    		
+	         this.searchBox.on('hide', function() {
+	            this.onMouseleave();
+	            AppKit.search.SearchHandler.deactivate();
+	        }, this);
+    		
+    		AppKit.search.SearchHandler.on('deactivate', function() {
+    			this.searchBox.hide();
+    		}, this);
+    		
     	}
     	
     	return this.searchBox;
@@ -121,6 +145,10 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
     
     onMouseleave : function(event, element, object) {
     	this.stopShow = false;
+    },
+    
+    focus : function() {
+    	this.textfield.focus.apply(this.textfield, arguments);
     }
     
 });
