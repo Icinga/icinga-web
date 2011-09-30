@@ -15,7 +15,7 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
                 tag : 'div',
                 cls : 'icinga-action-icon-search',
                 html : '',
-                qtip : _('Press STRG+ALT+F to activate search')
+                qtip : _('Press CTRL+ALT+F to activate search')
             }
         });
     	
