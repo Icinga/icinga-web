@@ -131,6 +131,7 @@
 .icinga-icon-comment { background-image: url(../images/icons/balloon-ellipsis.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-downtime { background-image: url(../images/icons/contrast.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-exclamation-white { background-image: url(../images/icons/exclamation-white.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-icon-exclamation-clock { background-image: url(../images/icons/clock--exclamation.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-exclamation-red { background-image: url(../images/icons/exclamation-red.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-notify { background-image: url(../images/icons/speaker-volume.png) !important; background-repeat: no-repeat; background-position: center center; }
 .icinga-icon-notify-disabled { background-image: url(../images/icons/speaker-volume-control-mute.png) !important; background-repeat: no-repeat; background-position: center center; }

@@ -98,6 +98,10 @@
         			<parameter name="title">Acknowledge host problem</parameter>
         			<parameter name="icon_class">icinga-icon-exclamation-white</parameter>
         		</parameter>
+        		<parameter name="ACKNOWLEDGE_HOST_PROBLEM_EXPIRE">
+                    <parameter name="title">Acknowledge host problem with expiration time</parameter>
+                    <parameter name="icon_class">icinga-icon-exclamation-clock</parameter>
+                </parameter>
         		<parameter name="REMOVE_HOST_ACKNOWLEDGEMENT">
         			<parameter name="title">Remove host acknowledgement</parameter>
         			<parameter name="icon_class">icinga-icon-exclamation-red</parameter>
