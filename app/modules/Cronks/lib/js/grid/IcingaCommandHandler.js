@@ -243,7 +243,20 @@ IcingaCommandHandler.prototype = {
 			break;
 			
 			case 'textarea':
-				oDef.height = 120;
+                Ext.apply(oDef, {
+                	height : 120,
+                	enableKeyEvents : true,
+                	listeners : {
+                		/*
+                		 * For text consistency system-wide
+                		 */
+                        keydown : function(textField, event) {
+                        	if (event.getKey() === Ext.EventObject.ENTER) {
+                        		event.stopEvent();
+                        	}
+                        }
+                	}
+                });
 				return new Ext.form.TextArea(oDef);
 			break;
 			
