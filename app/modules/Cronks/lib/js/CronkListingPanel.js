@@ -219,7 +219,7 @@ Cronk.util.CronkListingPanel = function(c) {
 	    '<tpl for=".">',
 	    	'<div class="{statusclass}" id="{name}">',
 	    	'<div class="cronk-status-icon">',
-        	'<div class="thumb"><img ext:qtip="{description}" src="{image}"></div>',
+        	'<div class="thumb"><img ext:qtip="{name}: {description}" src="{image}"></div>',
         	'<span class="x-editable">{name}</span>',
         	'</div>',
         	'</div>',
@@ -308,7 +308,14 @@ Cronk.util.CronkListingPanel = function(c) {
 			    root: 'rows',
 			    idProperty: 'cronkid',
 			    fields: [
-			        'name', 'cronkid', 'description', 
+			         {
+                        name : 'name',
+                        convert : function(v, record) {
+                        	return Ext.util.Format.ellipsis(v, 15, false);
+                        }
+			         },
+			        
+			        'cronkid', 'description', 
 			        'module', 'action', 'system', 'owner',
 			        'categories', 'groupsonly', 'state',
 			        {
@@ -393,7 +400,7 @@ Cronk.util.CronkListingPanel = function(c) {
 		        	render: CLP.initCronkDragZone.createDelegate(CLP),
 		        	click: CLP.dblClickHandler.createDelegate(CLP),
 		        	contextmenu: CLP.handleContextmenu.createDelegate(CLP)
-		        } 
+		        }
 		    }),
 			border: false
 		});
