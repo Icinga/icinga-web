@@ -201,10 +201,11 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	
 	},
 	getPersistentColumnModel : function() {
-		
+
 		o = {};
-		Ext.iterate(this.colModel.config, function(col, colId) {
+		Ext.iterate(this.colModel.lookup, function(col, colId) {
 			o[colId] = {};
+ 
 			Ext.copyTo(o[colId], col, [
 				'hidden',
 				'width',
@@ -213,25 +214,25 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				'sortable'
 			]);
 		}, this);
-		
 		return o;
 	},
 	
 	applyPersistentColumnModel : function(data) {
 		var cm = this.colModel;
-		
+
 		Ext.iterate(data, function(colId, col) {
-			
-			if (Ext.isDefined(col.dataIndex)){
+            cm.lookup[col.id] = col;
+			/*if (Ext.isDefined(col.dataIndex)){
 				var org = cm.getColumnById(colId);
-				
+
 				// Column was not moved arropund
 				if (Ext.isDefined(org) && org.dataIndex == col.dataIndex) {
 					cm.setHidden(colId, col.hidden);
 					cm.setColumnWidth(colId, col.width);
+                   
 				}
 			}
-			
+			*/
 		}, this);
 	},
 	refreshTask: new Ext.util.DelayedTask(function() {
@@ -258,8 +259,9 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			aR = 1;
 		if(this.autoRefreshEnabled === false)
 			aR = -1;
-		
+
 		var o = {
+            nativeState: Ext.grid.GridPanel.prototype.getState.apply(this),
 			filter_params: this.filter_params || {},
 			filter_types: this.filter_types || {},
 			store_origin_params: ("originParams" in store) ? store.originParams : {},
@@ -277,7 +279,6 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	applyState: function(state) {
 		var reload = false;
 		var store = this.getStore();
-		
 		if (Ext.isObject(state.colModel)) {
 			this.applyPersistentColumnModel(state.colModel);
 		}
@@ -318,8 +319,9 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		if (reload == true) {
 			this.refreshGrid();
 		}
-					
-		return true;
+		if(Ext.isObject(state.nativeState))
+    		return Ext.grid.GridPanel.prototype.applyState.call(this,{columns: state.nativeState.columns});
+        return true;
 	},
 	
 	applyParamsToStore : function(params) {
