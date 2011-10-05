@@ -20,6 +20,8 @@
 				
 				<ae:parameter name="image">cronks.Dots</ae:parameter>
 				
+				<ae:parameter name="position">200</ae:parameter>
+				
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="template">icinga-tactical-overview-template-hg</ae:parameter>
 					<ae:parameter name="interface">true</ae:parameter>
@@ -35,7 +37,7 @@
 				<ae:parameter name="categories">to</ae:parameter>
 	
 				<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
-	
+				<ae:parameter name="position">100</ae:parameter>
 				<ae:parameter name="image">cronks.Stats</ae:parameter>
 	
 				<ae:parameter name="ae:parameter">
@@ -55,6 +57,8 @@
 					<!--<ae:parameter name="groupsonly">appkit_admin</ae:parameter>-->
 					
 					<ae:parameter name="image">cronks.Tag</ae:parameter>
+					
+					<ae:parameter name="position">300</ae:parameter>
 					
 					<ae:parameter name="ae:parameter">
 						<ae:parameter name="template">icinga-tactical-overview-template-cv</ae:parameter>

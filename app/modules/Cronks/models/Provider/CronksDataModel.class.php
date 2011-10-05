@@ -6,7 +6,7 @@
  * @author mhein
  *
  */
-class Cronks_Provider_CronksDataModel extends CronksBaseModel {
+class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviISingletonModel {
 
     const DEFAULT_CRONK_IMAGE = 'cronks.Folder';
 
@@ -20,12 +20,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
     private static $cronk_xml_fields = array(
                                            'module', 'action', 'hide', 'description', 'name',
                                            'categories', 'image', 'disabled', 'groupsonly', 'state',
-                                           'ae:parameter', 'disabled'
+                                           'ae:parameter', 'disabled', 'position'
                                        );
 
     private static $cronk_xml_default = array(
-                                            'hide'		=> false,
-                                            'disabled'	=> false
+                                            'hide'      => false,
+                                            'disabled'  => false,
+                                            'position'  => 0
                                         );
 
     private static $cronk_xml_map = array(
@@ -276,26 +277,26 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                 $this->getContext()->getLoggerManager()->log('No action or module for cronk: '. $uid, AgaviLogger::ERROR);
                 continue;
             }
-
-
+            
             $out[$uid] = array(
-                             'cronkid'		=> $uid,
-                             'module'		=> $cronk['module'],
-                             'action'		=> $cronk['action'],
-                             'hide'			=> isset($cronk['hide']) ? (bool)$cronk['hide'] : false,
-                             'description'	=> isset($cronk['description']) ? $cronk['description'] : null,
-                             'name'			=> isset($cronk['name']) ? $cronk['name'] : null,
-                             'categories'	=> isset($cronk['categories']) ? $cronk['categories'] : null,
-                             'image'			=> isset($cronk['image']) ? $cronk['image'] : self::DEFAULT_CRONK_IMAGE,
-                             'disabled'		=> isset($cronk['disabled']) ? (bool)$cronk['disabled'] : false,
-                             'groupsonly'	=> isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
-                             'state'			=> isset($cronk['state']) ? $cronk['state'] : null,
-                             'ae:parameter'	=> isset($cronk['ae:parameter']) ? $cronk['ae:parameter'] : null,
-                             'system'		=> true,
-                             'owner'			=> false
+                             'cronkid' => $uid,
+                             'module' => $cronk['module'],
+                             'action' => $cronk['action'],
+                             'hide' => isset($cronk['hide']) ? (bool)$cronk['hide'] : false,
+                             'description' => isset($cronk['description']) ? $cronk['description'] : null,
+                             'name' => isset($cronk['name']) ? $cronk['name'] : null,
+                             'categories' => isset($cronk['categories']) ? $cronk['categories'] : null,
+                             'image' => isset($cronk['image']) ? $cronk['image'] : self::DEFAULT_CRONK_IMAGE,
+                             'disabled' => isset($cronk['disabled']) ? (bool)$cronk['disabled'] : false,
+                             'groupsonly' => isset($cronk['groupsonly']) ? $cronk['groupsonly'] : null,
+                             'state' => isset($cronk['state']) ? $cronk['state'] : null,
+                             'ae:parameter' => isset($cronk['ae:parameter']) ? $cronk['ae:parameter'] : null,
+                             'system' => true,
+                             'owner' => false,
+                             'position' => isset($cronk['position']) ? $cronk['position'] : 0
                          );
         }
-
+        
         return $out;
     }
 
@@ -316,20 +317,21 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         $out = array();
         foreach($c as $cuid=>$cd) {
             $out[$cronk->cronk_uid] = array(
-                                          'cronkid'		=> $cronk->cronk_uid,
-                                          'module'		=> $cd['module'],
-                                          'action'		=> $cd['action'],
-                                          'hide'			=> isset($cd['hide']) ? (bool)$cd['hide'] : false,
-                                          'description'	=> $cronk->cronk_description ? $cronk->cronk_description : $cd['description'],
-                                          'name'			=> $cronk->cronk_name ? $cronk->cronk_name : $cd['name'],
-                                          'categories'	=> isset($cd['categories']) ? $cd['categories'] : null,
-                                          'image'			=> isset($cd['image']) ? $cd['image'] : self::DEFAULT_CRONK_IMAGE,
-                                          'disabled'		=> isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
-                                          'groupsonly'	=> isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
-                                          'state'			=> isset($cd['state']) ? $cd['state'] : null,
-                                          'ae:parameter'	=> isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
-                                          'system'		=> false,
-                                          'owner'			=> ($this->user->user_id == $cronk->cronk_user_id) ? true : false
+                                          'cronkid' => $cronk->cronk_uid,
+                                          'module' => $cd['module'],
+                                          'action' => $cd['action'],
+                                          'hide' => isset($cd['hide']) ? (bool)$cd['hide'] : false,
+                                          'description' => $cronk->cronk_description ? $cronk->cronk_description : $cd['description'],
+                                          'name' => $cronk->cronk_name ? $cronk->cronk_name : $cd['name'],
+                                          'categories' => isset($cd['categories']) ? $cd['categories'] : null,
+                                          'image' => isset($cd['image']) ? $cd['image'] : self::DEFAULT_CRONK_IMAGE,
+                                          'disabled' => isset($cd['disabled']) ? (bool)$cd['disabled'] : false,
+                                          'groupsonly' => isset($cd['groupsonly']) ? $cd['groupsonly'] : null,
+                                          'state' => isset($cd['state']) ? $cd['state'] : null,
+                                          'ae:parameter' => isset($cd['ae:parameter']) ? $cd['ae:parameter'] : null,
+                                          'system' => false,
+                                          'owner' => ($this->user->user_id == $cronk->cronk_user_id) ? true : false,
+                                          'position' => isset($cd['position']) ? $cd['position'] : 0 
                                       );
         }
 
@@ -362,7 +364,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
         $cronks = $this->getXmlCronks($all);
         $cronks = (array)$this->getDbCronks() + $cronks;
 
-        AppKitArrayUtil::subSort($cronks, 'name');
+        $this->reorderCronks($cronks);
 
         return $cronks;
     }
@@ -598,14 +600,13 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                 if ($this->matchCategoryString($cronk['categories'], $category_name)) {
                     $tmp[] = $cronk;
                 }
-
             }
-
-            if (count($tmp)) {
+            
+            if (($count = count($tmp))) {
                 $cronks_out[$category_name] = array(
-                                                  'rows'		=> $tmp,
-                                                  'success'	=> true,
-                                                  'total'		=> count($tmp)
+                                                  'rows' => $tmp,
+                                                  'success' => true,
+                                                  'total' => $count
                                               );
                 $cat_out[] = $category;
             }
@@ -617,6 +618,26 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel {
                 );
 
         return $data;
+    }
+    
+    /**
+     * Sorting of cronks based on position flag in the cronk records
+     * @param array $cronks
+     */
+    private function reorderCronks(array &$cronks) {
+        
+        $c_ids = array();
+        $c_names = array();
+        $c_positions = array();
+        
+        foreach ($cronks as $id=>$cronk) {
+            $c_ids[$id] = $cronk['cronkid'];
+            $c_names[$id] = $cronk['name'];
+            $c_positions[$id] = (int)$cronk['position'];
+        }
+        array_multisort($c_positions, SORT_ASC, $c_names, SORT_STRING, $c_ids, SORT_STRING, $cronks);
+        
+        return $cronks;
     }
 
     private function matchCategoryString($categories, $match) {
