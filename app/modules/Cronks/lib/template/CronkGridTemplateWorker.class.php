@@ -7,6 +7,11 @@ class CronkGridTemplateWorker {
     private $template        = null;
 
     /**
+     * @var AgaviContext
+     */
+    private $context         = null;
+
+    /**
      * @var IcingaApiConnectionIdo
      */
     private $api            = null;
@@ -49,16 +54,24 @@ class CronkGridTemplateWorker {
      */
     private $user            = null;
 
-    public function __construct(CronkGridTemplateXmlParser &$template = null) {
+    public function __construct(CronkGridTemplateXmlParser $template = null, AgaviContext $context = null) {
         if ($template) {
             $this->setTemplate($template);
         }
+        
+        if ($context) {
+            $this->setContext($context);
+        }
     }
 
-    public function setTemplate(CronkGridTemplateXmlParser &$template) {
-        $this->template =& $template;
+    public function setTemplate(CronkGridTemplateXmlParser $template) {
+        $this->template = $template;
     }
 
+    public function setContext(AgaviContext $context) {
+        $this->context = $context;
+    }
+    
     public function setApi(/*IcingaApi*/ $api) {
         $this->api = $api;
     }
@@ -215,16 +228,14 @@ class CronkGridTemplateWorker {
             $meta = $this->getTemplate()->getFieldByName($key, 'display');
 
             if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
-                if ($param['class'] && $param['method']) {
+                if ($param['model'] && $param['method']) {
                     if (!array_key_exists('arguments', $param) && !isset($param['arguments'])) {
                         $param['arguments'] = array();
-                    }
-
-                    if (!is_array($param['arguments'])) {
+                    } elseif (!is_array($param['arguments'])) {
                         $param['arguments'] = array();
                     }
 
-                    $out[$key] = $this->rewritePerClassMethod($param['class'], $param['method'], $val, $param['arguments'], (array)$raw);
+                    $out[$key] = $this->rewritePerClassMethod($param['model'], $param['method'], $val, $param['arguments'], (array)$raw);
                 }
             }
         }
@@ -243,20 +254,12 @@ class CronkGridTemplateWorker {
 
         return null;
     }
-
-    private function rewritePerClassMethod($class, $method, $data_val, array $params = array(), array $row = array()) {
-        $ref = new ReflectionClass($class);
-
-        if ($ref->isSubclassOf('CronkGridTemplateDisplay') && $ref->hasMethod($method)) {
-            $obj = $ref->newInstance();
-
-            if ($obj instanceof CronkGridTemplateDisplay) {
-                $change = $ref->getMethod($method);
-                return $change->invoke($obj,
-                                       $data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row)
-                                      );
-            }
-        }
+    
+    
+    private function rewritePerClassMethod($model, $method, $data_val, array $params = array(), array $row = array()) {
+        list($module, $model) = explode('.', $model, 2);
+        $modelObject = $this->context->getModel($model, $module);
+        return $modelObject->$method($data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row));
     }
 
     private function getApiField($field_name) {

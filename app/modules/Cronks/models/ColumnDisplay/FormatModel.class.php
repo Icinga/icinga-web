@@ -1,17 +1,14 @@
 <?php
-class CronkGridTemplateDisplayFormat extends CronkGridTemplateDisplay {
+
+class Cronks_ColumnDisplay_FormatModel extends CronksBaseModel implements AgaviISingletonModel {
 
     private static $duration_map = array(
-                                       'w'	=> 604800,
-                                       'd' => 86400,
-                                       'h'	=> 3600,
-                                       'm' => 60,
-                                       's' => 1
-                                   );
-
-    public static function getInstance() {
-        return parent::getInstance(__CLASS__);
-    }
+    'w'	=> 604800,
+    'd' => 86400,
+    'h'	=> 3600,
+    'm' => 60,
+    's' => 1
+    );
 
     /**
      * You can give a format to return a custom string
@@ -51,7 +48,11 @@ class CronkGridTemplateDisplayFormat extends CronkGridTemplateDisplay {
     }
 
     public function agaviDateFormat($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
-        return AgaviContext::getInstance()->getTranslationManager()->_d($val, $method_params->getParameter('domain', 'date-tstamp'));
+        $check = strtotime($val);
+        if ($check === 0) {
+            return '(null)';
+        }
+        return $this->context->getTranslationManager()->_d($val, $method_params->getParameter('domain', 'date-tstamp'));
     }
 
     public function durationString($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
@@ -82,4 +83,3 @@ class CronkGridTemplateDisplayFormat extends CronkGridTemplateDisplay {
         return '';
     }
 }
-?>
