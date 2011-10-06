@@ -463,7 +463,7 @@
                 <parameter name="label">Groupdate</parameter>
                 
                 <parameter name="userFunc">
-                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
+                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                 	<parameter name="method">formatDate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[Y-m-d H:00:00]]></parameter>
@@ -499,7 +499,7 @@
                 </parameter>
                 
 				<parameter name="userFunc">
-                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
+                	<parameter name="model">Cronks.ColumnImage.Format</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[${field.state_check_attempt} / ${field.state_max_check_attempts}]]></parameter>

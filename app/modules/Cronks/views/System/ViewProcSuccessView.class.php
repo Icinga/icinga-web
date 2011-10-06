@@ -31,8 +31,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
 
-            $worker = new CronkGridTemplateWorker();
-            $worker->setTemplate($template);
+            $worker = new CronkGridTemplateWorker($template, $this->getContext());
             $worker->setApi($this->api->getConnection());
 
             $layout_class = $template->getSectionParams('option')->getParameter('layout');
@@ -57,7 +56,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
 
-            $worker = new CronkGridTemplateWorker();
+            $worker = new CronkGridTemplateWorker($template, $this->getContext());
             $worker->setTemplate($template);
             $worker->setApi($this->api->getConnection());
             $worker->setUser($this->getContext()->getUser()->getNsmUser());

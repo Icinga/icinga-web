@@ -18,6 +18,7 @@
 				<ae:parameter name="name">Status Map</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>
 				<ae:parameter name="image">cronks.Graph</ae:parameter>
+				<ae:parameter name="position">420</ae:parameter>
 				<ae:parameter name="ae:parameter"></ae:parameter>
 			</cronk>
 	
@@ -30,6 +31,7 @@
 				<ae:parameter name="image">cronks.portal</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
 				<ae:parameter name="image">cronks.1</ae:parameter>
+				<ae:parameter name="position">100</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="columns">1</ae:parameter>
 				</ae:parameter>
@@ -44,6 +46,7 @@
 				<ae:parameter name="image">cronks.portal</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
 				<ae:parameter name="image">cronks.2</ae:parameter>
+				<ae:parameter name="position">110</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="columns">2</ae:parameter>
 				</ae:parameter>
@@ -58,6 +61,7 @@
 				<ae:parameter name="image">cronks.portal</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
 				<ae:parameter name="image">cronks.3</ae:parameter>
+				<ae:parameter name="position">120</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="columns">3</ae:parameter>
 				</ae:parameter>
@@ -92,6 +96,7 @@
 				<ae:parameter name="name">Icinga Classic</ae:parameter>
 				<ae:parameter name="image">cronks.Globe</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="position">200</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="url"><![CDATA[/icinga/]]></ae:parameter>
 					<ae:parameter name="user">guest</ae:parameter>
@@ -107,6 +112,7 @@
 				<ae:parameter name="name">Docs EN</ae:parameter>
 				<ae:parameter name="image">cronks.Info2</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="position">300</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="url"><![CDATA[/icinga/docs/en/index.html]]></ae:parameter>
 				</ae:parameter>
@@ -120,6 +126,7 @@
 				<ae:parameter name="name">Docs DE</ae:parameter>
 				<ae:parameter name="image">cronks.Info2</ae:parameter>
 				<ae:parameter name="categories">misc</ae:parameter>
+				<ae:parameter name="position">310</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="url"><![CDATA[/icinga/docs/de/index.html]]></ae:parameter>
 				</ae:parameter>

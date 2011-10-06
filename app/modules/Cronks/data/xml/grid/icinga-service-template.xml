@@ -963,7 +963,7 @@
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
+               		<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
@@ -981,17 +981,18 @@
         
         <field name="service_duration">
         	<datasource>
-        		<parameter name="field">SERVICE_LAST_STATE_CHANGE</parameter>
+        		<parameter name="field">SERVICE_OBJECT_ID</parameter>
         	</datasource>
         	
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
-                
-                <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
-               		<parameter name="method">durationString</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
+                    <parameter name="method">durationString</parameter>
+                    <parameter name="arguments">
+                       <parameter name="type">service</parameter>
+                    </parameter>
                 </parameter>
             </display>
         	
@@ -1062,7 +1063,7 @@
                 </parameter>
                 
 				<parameter name="userFunc">
-                	<parameter name="class">CronkGridTemplateDisplayFormat</parameter>
+                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[${field.service_check_attempt} / ${field.service_max_attempt}]]></parameter>
