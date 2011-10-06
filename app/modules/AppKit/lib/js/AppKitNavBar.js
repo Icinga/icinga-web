@@ -141,6 +141,11 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             }         
             if(menuPoint.target) {
                 p.handler = this.createHandlerForTarget(menuPoint.target);
+                
+                // To allow native browser actions e.g. 'open in new tab', ...
+                if (menuPoint.target.target == 'new' && "url" in menuPoint.target) {
+                	p.href = menuPoint.target.url;
+                }
             }
             if(menuPoint.items) {
                 p.menu = [];
@@ -152,6 +157,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     },
 
     createHandlerForTarget: function(target) {
+    	AppKit.log(target);
         switch(target.target) {
             case 'new':
                 return Ext.createDelegate(AppKit.changeLocation,window,[target.url]); 
