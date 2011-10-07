@@ -1,6 +1,6 @@
 <script type="text/javascript">
 Cronk.util.initEnvironment("<?php echo $parentid = $rd->getParameter('parentid'); ?>", function() {
-	var panel = new Cronk.util.CronkListingPanel({
+	var panel = new Icinga.Cronks.System.CronkListingPanel({
 		combinedProviderUrl: '<?php echo $ro->gen("modules.cronks.provider.combined"); ?>',
 		id: 'cronk-listing-panel',
 		stateId: 'cronk-listing-panel'

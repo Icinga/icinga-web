@@ -1,6 +1,105 @@
-Ext.ns('Cronks.util');
+Ext.ns('Icinga.Cronks.System');
 
-Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
+Icinga.Cronks.System.CategoryEditorForm = Ext.extend(Ext.Window, {
+	
+	layout : 'fit',
+	width : 350,
+	height : 180,
+	resizable : false,
+	closeable : false,
+	title : _('Add new category'),
+	iconCls : 'icinga-icon-category',
+	modal : true,
+	
+	bbar : ['->'],
+	
+	constructor : function(config) {
+		
+		this.addEvents({
+			submitForm : true
+		});
+		
+		Icinga.Cronks.System.CategoryEditorForm.superclass.constructor.call(this, config);
+	},
+	
+	initComponent : function() {
+		Icinga.Cronks.System.CategoryEditorForm.superclass.initComponent.call(this);
+		
+		this.getBottomToolbar().add({
+	        iconCls : 'icinga-action-icon-cancel',
+	        text : _('Cancel'),
+	        handler : function(b, e) {
+	            this.close();
+	        },
+	        scope : this
+	    }, {
+	        iconCls : 'icinga-action-icon-ok',
+	        text : _('OK'),
+	        handler : function(b, e) {
+	            this.doSubmit();
+	        },
+	        scope : this
+	    });
+		
+		this.form = this.add({
+			border : false,
+			xtype : 'form',
+			padding : 10,
+			defaults: {
+                msgTarget: 'side',
+                labelWidth: 75,
+                allowBlank : false,
+                width : 200
+			},
+			items : [{
+				xtype : 'textfield',
+				name : 'catid',
+				fieldLabel : _('Category ID'),
+				vtype : 'alphanum',
+				
+			}, {
+				xtype : 'textfield',
+				name : 'title',
+				fieldLabel : _('Title'),
+			}, {
+				xtype : 'radiogroup',
+				fieldLabel : _('Visibility'),
+				items : [{
+					xtype : 'radio',
+					name : 'visible',
+					boxLabel : _('false'),
+					value : 0
+				}, {
+                    xtype : 'radio',
+                    name : 'visible',
+                    boxLabel : _('true'),
+                    value : 1,
+                    checked : true
+				}]
+			}, {
+				xtype : 'textfield',
+				name : 'position',
+				fieldLabel : _('Position'),
+				maskRe : new RegExp(/[0-9]+/),
+				value : 0
+			}]
+		});
+		
+		this.doLayout();
+	},
+	
+	doSubmit : function() {
+		var form = this.form.getForm();
+		if (form.isValid()) {
+			var values = form.getValues();
+			if (this.fireEvent('submitForm', this, values, form) === true) {
+				this.close();
+			}
+		}
+	}
+});
+
+Icinga.Cronks.System.CategoryEditor = Ext.extend(Ext.Window, {
 	title: _('Category editor'),
 	
 	closeAction: 'hide',
@@ -8,13 +107,22 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 	resizable: false,
 	layout: 'fit',
 	
+	tools : [{
+		id : 'help',
+		handler : Ext.emptyFn,
+		qtip : {
+			title : _('Category editor'),
+			text : _('To edit double click into the field you want to edit. Note: System categories and catids are not editable!')
+		}
+	}],
+	
 	constructor : function(cfg) {
-		Cronks.util.CategoryEditor.superclass.constructor.call(this, cfg);
+		Icinga.Cronks.System.CategoryEditor.superclass.constructor.call(this, cfg);
 	},
 	
 	initComponent : function() {
 		
-		Cronks.util.CategoryEditor.superclass.initComponent.call(this);
+		Icinga.Cronks.System.CategoryEditor.superclass.initComponent.call(this);
 		
 		this.grid = this.buildGrid();
 		
@@ -45,6 +153,8 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 		
 		var editor = new Ext.form.TextField();
 		
+		var intEditor = new Ext.form.TextField({maskRe : new RegExp(/[0-9]+/)});
+		
 		var booleanEditor = new Ext.form.ComboBox({
 			typeAhead: true,
 			triggerAction: 'all',
@@ -74,7 +184,7 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				url: AppKit.c.path + '/modules/cronks/provider/categories',
 				writer: writer,
 				autoLoad: true,
-				autoSave: true,
+				autoSave: false,
 				paramsAsHash: true,
 				baseParams: {
 					all: 1,
@@ -117,7 +227,7 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				}, {
 					header: _('Position'),
 					dataIndex: 'position',
-					editor: editor,
+					editor: intEditor,
 					width: 80,
 					fixed: true
 				}, {
@@ -132,7 +242,15 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				forceFit: true
 			},
 			
-			bbar: [{
+			bbar: ['->', {
+				text : _('Cancel'),
+				iconCls : 'icinga-action-icon-cancel',
+				handler : function(b, e) {
+					this.grid.store.rejectChanges();
+					this.hide();
+				},
+				scope : this
+			}, '-', {
 				text: _('Reload'),
 				iconCls: 'icinga-icon-database-refresh',
 				handler: function(b, e) {
@@ -144,20 +262,47 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 				iconCls: 'icinga-icon-add',
 				handler: function(b, e) {
 					
-					Ext.Msg.prompt('New category', 'Please enter CatId:', function(btn, text){
-						if (btn == 'ok'){
-							var record = new this.grid.store.recordType({
-								id: this.grid.store.getCount()+1,
-								catid: String(text).toLowerCase(),
-								title: String(text),
-								system: false,
-								position: 0,
-								visible: true
-							});
-							
-							this.grid.store.addSorted(record);
-						}
+					var win = new Icinga.Cronks.System.CategoryEditorForm({
+						renderTo : Ext.getBody()
+					});
+					
+					win.on('submitForm', function(formPanel, values, form) {
+						AppKit.log(values);
+						
+						var record = new this.grid.store.recordType({
+							id: this.grid.store.getCount()+1,
+							catid : values.catid,
+							title : values.title,
+							system : false,
+							position : values.position,
+							visible : Boolean(values.visible)
+						});
+						
+						this.grid.store.addSorted(record);
+						
+						return true;
+						
 					}, this);
+					
+					win.show(b);
+					
+//					Ext.Msg.prompt('New category', 'Please enter CatId:', function(btn, text){
+//						if (btn == 'ok'){
+//							var record = new this.grid.store.recordType({
+//								id: this.grid.store.getCount()+1,
+//								catid: String(text).toLowerCase(),
+//								title: String(text),
+//								system: false,
+//								position: 0,
+//								visible: true
+//							});
+//							
+//							this.grid.store.addSorted(record);
+//						}
+//					}, this);
+
+                    
+
 
 				},
 				scope: this
@@ -201,11 +346,11 @@ Cronks.util.CategoryEditor = Ext.extend(Ext.Window, {
 	}
 });
 
-Cronk.util.CronkListingPanel = function(c) {
+Icinga.Cronks.System.CronkListingPanel = function(c) {
 	
 	var CLP = this;
 	
-	Cronk.util.CronkListingPanel.superclass.constructor.call(this, c);
+	Icinga.Cronks.System.CronkListingPanel.superclass.constructor.call(this, c);
 	
 	this.stores = {};
 	
@@ -428,7 +573,7 @@ Cronk.util.CronkListingPanel = function(c) {
 	});
 }
 
-Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
+Ext.extend(Icinga.Cronks.System.CronkListingPanel, Ext.Panel, {
 	layout: 'accordion',
 	layoutConfig: {
 		animate: true,
@@ -544,7 +689,7 @@ Ext.extend(Cronk.util.CronkListingPanel, Ext.Panel, {
 		}
 		
 		if (!Ext.isDefined(this.categoryEditor)) {
-			this.categoryEditor = new Cronks.util.CategoryEditor({
+			this.categoryEditor = new Icinga.Cronks.System.CategoryEditor({
 				id: this.id + '-category-editor'
 			});
 		}

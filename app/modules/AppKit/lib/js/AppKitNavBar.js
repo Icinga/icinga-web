@@ -157,7 +157,6 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
     },
 
     createHandlerForTarget: function(target) {
-    	AppKit.log(target);
         switch(target.target) {
             case 'new':
                 return Ext.createDelegate(AppKit.changeLocation,window,[target.url]); 
