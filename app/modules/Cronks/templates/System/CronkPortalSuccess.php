@@ -1,7 +1,3 @@
-<?php
-    var_dump(AgaviConfig::toArray());
-    die();
-?>
 <script type="text/javascript">
 
 /*
