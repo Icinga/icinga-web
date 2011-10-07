@@ -43,7 +43,7 @@ AgaviConfig::set('core.root_dir', dirname(dirname(__FILE__)));
 // | This constant will be auto-set by Agavi if you do not supply it.          |
 // | The default value is: "<core.app_dir>/cache"                              |
 // +---------------------------------------------------------------------------+
-// AgaviConfig::set('core.cache_dir', AgaviConfig::get('core.app_dir') . '/cache');
+AgaviConfig::set('core.cache_dir', '@web_cache_dir@');
 
 // +---------------------------------------------------------------------------+
 // | You may also modify the following other directives in this file:          |

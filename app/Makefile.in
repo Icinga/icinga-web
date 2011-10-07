@@ -1,6 +1,7 @@
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 LOGDIR=@localstatedir@
+CACHEDIR=@web_cache_dir@
 CFGDIR=@sysconfdir@
 BINDIR=@bindir@
 CGIDIR=@sbindir@
@@ -28,9 +29,9 @@ installdirs:
 	-and \! -path "*/data/tmp*" \
 	-and \! -path "*Reporting/data*" \
 	-exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/app/{} \;
-	
-	$(INSTALL) -m 755 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache
-	$(INSTALL) -m 755 $(INSTALL_OPTS_CACHE) -d $(DESTDIR)$(prefix)/app/cache/config
+
+	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(CACHEDIR)
+	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(CACHEDIR)/config
 	
 	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(LOGFOLDER)
 	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(prefix)/app/data/tmp

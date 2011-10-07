@@ -560,6 +560,7 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+web_cache_dir
 web_conf_dir
 web_log_dir
 flag_debug
@@ -682,6 +683,7 @@ with_conf_folder
 with_conf_dir
 with_log_folder
 with_log_dir
+with_cache_dir
 with_phpunit
 with_phpcs
 '
@@ -1341,6 +1343,8 @@ Optional Packages:
                           (default etc/conf.d/)
   --with-log-folder=PATH  DEPRECATED, please use --with-log-dir instead
   --with-log-dir=PATH     Folder where to store log files (default log/)
+  --with-cache-dir=PATH   Directory to store agavi cache files (default
+                          app/cache/)
   --with-phpunit=BINARY   Path to phpunit script
   --with-phpcs=BINARY     Path to phpcs script
 
@@ -2569,8 +2573,6 @@ else
 fi
 
 
-
-
 # Log location
 # DEPRECATED
 
@@ -2593,6 +2595,15 @@ else
 fi
 
 
+# Agavi caching directory
+
+# Check whether --with-cache_dir was given.
+if test "${with_cache_dir+set}" = set; then :
+  withval=$with_cache_dir; web_cache_dir=$withval
+else
+  web_cache_dir=$prefix/app/cache
+
+fi
 
 
 # Testing switches
@@ -2791,7 +2802,8 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3509,6 +3521,7 @@ do
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "app/Makefile") CONFIG_FILES="$CONFIG_FILES app/Makefile" ;;
     "etc/sitecfg/Makefile") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/Makefile" ;;
+    "app/config.php") CONFIG_FILES="$CONFIG_FILES app/config.php" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "app/config/logging.xml") CONFIG_FILES="$CONFIG_FILES app/config/logging.xml" ;;

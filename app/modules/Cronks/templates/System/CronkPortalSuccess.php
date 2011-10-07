@@ -1,5 +1,13 @@
+<?php
+    var_dump(AgaviConfig::toArray());
+    die();
+?>
 <script type="text/javascript">
 
+/*
+ * We want to use the global search with our Cronks object search window
+ * Just registering the handler ...
+ */
 (function() {
 	var s = Icinga.Cronks.search.SearchHandler;
 	s.setProxyUrl("<?php echo $ro->gen('modules.cronks.objectsearch.json')?>");

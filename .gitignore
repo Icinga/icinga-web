@@ -6,6 +6,7 @@ app/cache/config/*.php
 app/cache/*
 app/data/log/
 ./log/
+app/config.php
 app/data/tmp
 app/config/icinga.xml
 app/config/databases.xml

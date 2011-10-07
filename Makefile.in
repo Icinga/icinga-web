@@ -118,6 +118,7 @@ distclean:
         doc/Makefile \
         app/Makefile \
         etc/sitecfg/Makefile \
+	app/config.php \
         app/config/databases.xml \
         app/config/icinga.xml \
         app/config/logging.xml \

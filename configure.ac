@@ -239,8 +239,6 @@ AC_ARG_WITH([conf_dir],
     web_conf_dir=$prefix/etc/conf.d   
 )
 
-
-
 # Log location
 # DEPRECATED
 AC_ARG_WITH([log_folder],
@@ -255,7 +253,12 @@ AC_ARG_WITH([log_dir],
     web_log_dir=$prefix/log 
 )
 
-
+# Agavi caching directory
+AC_ARG_WITH([cache_dir],
+    AS_HELP_STRING([--with-cache-dir=PATH], [Directory to store agavi cache files (default app/cache/)]),
+    web_cache_dir=$withval,
+    web_cache_dir=$prefix/app/cache
+)
 
 # Testing switches
 AC_ARG_WITH([phpunit],
@@ -332,6 +335,7 @@ AC_SUBST(flag_debug)
 
 AC_SUBST(web_log_dir)
 AC_SUBST(web_conf_dir)
+AC_SUBST(web_cache_dir)
 
 AC_CONFIG_FILES([
 	Makefile
@@ -343,6 +347,7 @@ AC_CONFIG_FILES([
 	doc/Makefile
 	app/Makefile
 	etc/sitecfg/Makefile
+	app/config.php
 	app/config/databases.xml
 	app/config/icinga.xml
 	app/config/logging.xml
