@@ -47,6 +47,8 @@
  * Common actions
  */
 .icinga-action-icon-search { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
+.icinga-action-icon-ok { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; } 
+.icinga-action-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 
 /*
  *	Default iconset
