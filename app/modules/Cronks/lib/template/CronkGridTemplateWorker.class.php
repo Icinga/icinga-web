@@ -228,6 +228,10 @@ class CronkGridTemplateWorker {
             $meta = $this->getTemplate()->getFieldByName($key, 'display');
 
             if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
+		if (!isset($param['model'])) {
+			continue;
+		}
+
                 if ($param['model'] && $param['method']) {
                     if (!array_key_exists('arguments', $param) && !isset($param['arguments'])) {
                         $param['arguments'] = array();

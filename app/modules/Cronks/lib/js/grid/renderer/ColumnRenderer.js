@@ -134,8 +134,27 @@ Cronk.grid.ColumnRenderer = {
 				imgName = imgName.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 				metaData.style += String.format("background: transparent url('{0}/{1}') center center no-repeat;", AppKit.c.path, imgName);
 				
-				return "<div style=\"width: 24px; height: 24px\"" + (flat_attr && " " + flat_attr + " ") + "></div>";
+				return "<div style=\"" + (flat_attr && " " + flat_attr + " ") + "></div>";
 			}
+		}
+	},
+	
+	booleanImage : function(cfg) {
+		return function(value, metaData, record, rowIndex, colIndex, store) {
+			var iconCls = 'icon-16';
+			var bVal = Boolean(Ext.decode(value));
+			
+			if (bVal === true) {
+				iconCls += " " + cfg.TrueImageClass;
+			} else if (bVal === false) {
+				iconCls += " " + cfg.FalseImageClass;
+			}
+			
+			if (!Ext.isEmpty(cfg.qtip)) {
+				metaData.attr = "ext:qtip='" + cfg.qtip + "'";
+			}
+			
+			return '<div class="' + iconCls + '"></div>';
 		}
 	},
 	

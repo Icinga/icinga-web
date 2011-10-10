@@ -1,6 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 	<setting name="simpledataprovider">
+	
+       <!-- 
+            Locale information:
+            
+            #loc: PROGRAMSTATUS_STATUS_UPDATE_TIME
+            #loc: PROGRAMSTATUS_PROGRAM_START_TIME
+            #loc: PROGRAMSTATUS_IS_CURRENTLY_RUNNING
+            #loc: PROGRAMSTATUS_DAEMON_MODE
+            #loc: PROGRAMSTATUS_LAST_COMMAND_CHECK
+            #loc: PROGRAMSTATUS_LAST_LOG_ROTATION
+            #loc: PROGRAMSTATUS_NOTIFICATIONS_ENABLED
+            #loc: PROGRAMSTATUS_ACTIVE_SERVICE_CHECKS_ENABLED
+            #loc: PROGRAMSTATUS_PASSIVE_SERVICE_CHECKS_ENABLED
+            #loc: PROGRAMSTATUS_ACTIVE_HOST_CHECKS_ENABLED
+            #loc: PROGRAMSTATUS_PASSIVE_HOST_CHECKS_ENABLED
+            #loc: PROGRAMSTATUS_EVENT_HANDLERS_ENABLED
+            #loc: PROGRAMSTATUS_FLAP_DETECTION_ENABLED
+            #loc: PROGRAMSTATUS_FAILURE_PREDICTION_ENABLED
+            #loc: PROGRAMSTATUS_PROCESS_PERFORMANCE_DATA
+            #loc: PROGRAMSTATUS_OBSESS_OVER_HOSTS
+            #loc: PROGRAMSTATUS_OBSESS_OVER_SERVICES
+            
+        -->
+	   <ae:parameter name="instance">
+            <ae:parameter name="module">Web</ae:parameter>
+            <ae:parameter name="action">IcingaApiSimpleDataProvider</ae:parameter>
+            <ae:parameter name="description">query for instace information</ae:parameter>
+            <ae:parameter name="target">IcingaApiConstants::TARGET_INSTANCE</ae:parameter>
+            <ae:parameter name="result_columns">
+            
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_STATUS_UPDATE_TIME</ae:parameter>
+                    <ae:parameter name="type">timestamp</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_PROGRAM_START_TIME</ae:parameter>
+                    <ae:parameter name="type">timestamp</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_IS_CURRENTLY_RUNNING</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_DAEMON_MODE</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_LAST_COMMAND_CHECK</ae:parameter>
+                    <ae:parameter name="type">timestamp</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_LAST_LOG_ROTATION</ae:parameter>
+                    <ae:parameter name="type">timestamp</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_NOTIFICATIONS_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_ACTIVE_SERVICE_CHECKS_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_PASSIVE_SERVICE_CHECKS_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_ACTIVE_HOST_CHECKS_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_PASSIVE_HOST_CHECKS_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_EVENT_HANDLERS_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_FLAP_DETECTION_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_FAILURE_PREDICTION_ENABLED</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_PROCESS_PERFORMANCE_DATA</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_OBSESS_OVER_HOSTS</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+                <ae:parameter>
+                    <ae:parameter name="field">PROGRAMSTATUS_OBSESS_OVER_SERVICES</ae:parameter>
+                    <ae:parameter name="type">boolean</ae:parameter>
+                </ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="user_filters">
+                <ae:parameter name="instance_id">
+                    <ae:parameter name="column">INSTANCE_ID</ae:parameter>
+                    <ae:parameter name="match_type">IcingaApiConstants::MATCH_EXACT</ae:parameter>
+                </ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="order">
+                <ae:parameter name="column">INSTANCE_ID</ae:parameter>
+                <ae:parameter name="direction">asc</ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="limit">
+                <ae:parameter name="start">1</ae:parameter>
+            </ae:parameter>
+	   </ae:parameter>
 		<!-- 
 			Locale information:
 			

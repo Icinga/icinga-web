@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    <meta>
+        <parameter name="name">Default instance template</parameter>
+        <parameter name="description">Shows instance summary</parameter>
+        <parameter name="author">icinga-web developers</parameter>
+    </meta>
+    <option>
+        <parameter name="mode">default</parameter>
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
+        <parameter name="Ext.grid.GridView">
+            <parameter name="headersDisabled">false</parameter>
+        </parameter>
+        <parameter name="selection_model">checkbox</parameter>
+        <parameter name="commands">
+            <parameter name="enabled">true</parameter>
+            <parameter name="source">
+                <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
+            </parameter>
+            <parameter name="predefined">
+                <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+            </parameter>
+            <parameter name="items">
+                <parameter name="SHUTDOWN_PROGRAM">
+                    <parameter name="title">Shutdown icinga instance</parameter>
+                    <parameter name="icon_class">icinga-icon-lightning-minus</parameter>
+                </parameter>
+                <parameter name="RESTART_PROGRAM">
+                    <parameter name="title">Restart icinga instance</parameter>
+                    <parameter name="icon_class">icinga-icon-lightning-arrow</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_NOTIFICATIONS">
+                    <parameter name="title">Enable notifications</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="DISABLE_NOTIFICATIONS">
+                    <parameter name="title">Disable notifications</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="START_EXECUTING_SVC_CHECKS">
+                    <parameter name="title">Start executing service checks</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="STOP_EXECUTING_SVC_CHECKS">
+                    <parameter name="title">Stop executing service checks</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                </parameter>
+                <parameter name="START_ACCEPTING_PASSIVE_SVC_CHECKS">
+                    <parameter name="title">Stop accepting passive service checks</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="STOP_ACCEPTING_PASSIVE_SVC_CHECKS">
+                    <parameter name="title">Stop accepting passive service checks</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="START_EXECUTING_HOST_CHECKS">
+                    <parameter name="title">Start executing host checks</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="STOP_EXECUTING_HOST_CHECKS">
+                    <parameter name="title">Stop executing host checks</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                </parameter>
+                <parameter name="START_ACCEPTING_PASSIVE_HOST_CHECKS">
+                    <parameter name="title">Start accepting passive host checks</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="STOP_ACCEPTING_PASSIVE_HOST_CHECKS">
+                    <parameter name="title">Stop accepting passive host checks</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_EVENT_HANDLERS">
+                    <parameter name="title">Enable event handlers</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="DISABLE_EVENT_HANDLERS">
+                    <parameter name="title">Disable event handlers</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="START_OBSESSING_OVER_SVC_CHECKS">
+                    <parameter name="title">Start obsessing over services</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="STOP_OBSESSING_OVER_SVC_CHECKS">
+                    <parameter name="title">Stop obsessing over services</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                </parameter>
+                <parameter name="START_OBSESSING_OVER_HOST_CHECKS">
+                    <parameter name="title">Start obsessing over hosts</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="STOP_OBSESSING_OVER_HOST_CHECKS">
+                    <parameter name="title">Stop obsessing over hosts</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_FLAP_DETECTION">
+                    <parameter name="title">Enable flap detection</parameter>
+                    <parameter name="icon_class">icinga-icon-accept</parameter>
+                </parameter>
+                <parameter name="DISABLE_FLAP_DETECTION">
+                    <parameter name="title">Disable flap detections</parameter>
+                    <parameter name="icon_class">icinga-icon-cancel</parameter>
+                </parameter>
+            </parameter>
+        </parameter>
+    </option>
+    <datasource>
+        <parameter name="target">IcingaApiConstants::TARGET_INSTANCE</parameter>
+        <parameter name="id">instance_id</parameter>
+        <parameter name="countmode">field</parameter>
+        <parameter name="countfields">
+            <parameter>INSTANCE_ID</parameter>
+        </parameter>
+    </datasource>
+    <pager>
+        <parameter name="enabled">true</parameter>
+        <parameter name="start">0</parameter>
+    </pager>
+    <grouping>
+        <parameter name="enabled">false</parameter>
+        <parameter name="field">log_group_timestamp</parameter>
+    </grouping>
+    
+    <fields>
+        <field name="instance_id">
+            <datasource>
+                <parameter name="field">INSTANCE_ID</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Id</parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+    </fields>
+    
+    <fields>
+        <field name="instance_name">
+            <datasource>
+                <parameter name="field">INSTANCE_NAME</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Name</parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">instance</parameter>
+                <parameter name="api_keyfield">INSTANCE_NAME</parameter>
+                <parameter name="api_valuefield">INSTANCE_NAME</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="instance_currently_running">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_IS_CURRENTLY_RUNNING</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="width">24</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-accept</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-cancel</parameter>
+                        <parameter name="qtip">Instance running</parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
+        <field name="instance_info">
+            <datasource>
+                <parameter name="field">INSTANCE_ID</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="icon">icinga-icon-information</parameter>
+                <parameter name="width">22</parameter>
+
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/information.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="qtip">Click here for information</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">ajaxClick</parameter>
+
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+
+                        <parameter name="arguments">
+                            <parameter name="title">Detailed serviceinfo</parameter>
+                            <parameter name="src_id">instance</parameter>
+                            <parameter name="width">500</parameter>
+                            <parameter name="filter">
+                                <parameter name="instance_id">instance_info</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
+        <field name="instance_start_time">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_PROGRAM_START_TIME</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Starttime</parameter>
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">agaviDateFormat</parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
+        <field name="instance_end_time">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_PROGRAM_END_TIME</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Endtime</parameter>
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">agaviDateFormat</parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
+        <field name="instance_update_duration">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_LAST_COMMAND_CHECK</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Duration</parameter>
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
+                    <parameter name="method">simpleDurationString</parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
+        <field name="instance_pid">
+            <datasource>
+                <parameter name="field">PROGRAMSTATUS_PROCESS_ID</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">PID</parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+    </fields>
+</template>

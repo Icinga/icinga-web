@@ -13,10 +13,38 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     protected $retainedAlias = false;
     public $columns = array(
                           'PROBLEMS_OBJECT_ID'           =>        'op.object_id',
+                          
                           // Program information
-                          'PROGRAM_INSTANCE_ID'          =>        'pe.instance_id',
-                          'PROGRAM_DATE'                 =>        'pe.program_date',
-                          'PROGRAM_VERSION'              =>        'pe.program_version',
+                          // 'PROGRAM_INSTANCE_ID'          =>        'pe.instance_id',
+                          // 'PROGRAM_DATE'                 =>        'pe.program_date',
+                          // 'PROGRAM_VERSION'              =>        'pe.program_version',
+                          
+                          'PROGRAMSTATUS_ID' => 'ps.programstatus_id',
+                          'PROGRAMSTATUS_INSTANCE_ID' => 'ps.instance_id',
+                          'PROGRAMSTATUS_STATUS_UPDATE_TIME' => 'ps.status_update_time',
+                          'PROGRAMSTATUS_PROGRAM_START_TIME' => 'ps.program_start_time',
+                          'PROGRAMSTATUS_PROGRAM_END_TIME' => 'ps.program_end_time',
+                          'PROGRAMSTATUS_IS_CURRENTLY_RUNNING' => 'ps.is_currently_running',
+                          'PROGRAMSTATUS_PROCESS_ID' => 'ps.process_id',
+                          'PROGRAMSTATUS_DAEMON_MODE' => 'ps.daemon_mode',
+                          'PROGRAMSTATUS_LAST_COMMAND_CHECK' => 'ps.last_command_check',
+                          'PROGRAMSTATUS_LAST_LOG_ROTATION' => 'ps.last_log_rotation',
+                          'PROGRAMSTATUS_NOTIFICATIONS_ENABLED' => 'ps.notifications_enabled',
+                          'PROGRAMSTATUS_ACTIVE_SERVICE_CHECKS_ENABLED' => 'ps.active_service_checks_enabled',
+                          'PROGRAMSTATUS_PASSIVE_SERVICE_CHECKS_ENABLED' => 'ps.passive_service_checks_enabled',
+                          'PROGRAMSTATUS_ACTIVE_HOST_CHECKS_ENABLED' => 'ps.active_host_checks_enabled',
+                          'PROGRAMSTATUS_PASSIVE_HOST_CHECKS_ENABLED' => 'ps.passive_host_checks_enabled',
+                          'PROGRAMSTATUS_EVENT_HANDLERS_ENABLED' => 'ps.event_handlers_enabled',
+                          'PROGRAMSTATUS_FLAP_DETECTION_ENABLED' => 'ps.flap_detection_enabled',
+                          'PROGRAMSTATUS_FAILURE_PREDICTION_ENABLED' => 'ps.failure_prediction_enabled',
+                          'PROGRAMSTATUS_PROCESS_PERFORMANCE_DATA' => 'ps.process_performance_data',
+                          'PROGRAMSTATUS_OBSESS_OVER_HOSTS' => 'ps.obsess_over_hosts',
+                          'PROGRAMSTATUS_OBSESS_OVER_SERVICES' => 'ps.obsess_over_services',
+                          'PROGRAMSTATUS_MODIFIED_HOST_ATTRIBUTES' => 'ps.modified_host_attributes',
+                          'PROGRAMSTATUS_MODIFIED_SERVICE_ATTRIBUTES' => 'ps.modified_service_attributes',
+                          'PROGRAMSTATUS_GLOBAL_HOST_EVENT_HANDLER' => 'ps.global_host_event_handler',
+                          'PROGRAMSTATUS_GLOBAL_SERVICE_EVENT_HANDLER' => 'ps.global_service_event_handler',
+    
 
                           // Instance things
                           'INSTANCE_ID'                  =>        'i.instance_id',
@@ -353,6 +381,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             case IcingaApiConstants::TARGET_INSTANCE:
                 $this->mainAlias = "i";
                 $this->setTarget("IcingaInstances");
+                $this->aliasDefs = array(
+                                        "ps" => array("src" => "i", "relation" => "programstatus", "alwaysJoin" => true)
+                );
                 break;
 
             case IcingaApiConstants::TARGET_HOST:

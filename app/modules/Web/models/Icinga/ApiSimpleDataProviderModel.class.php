@@ -160,7 +160,12 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
 
                 case 'timestamp':
                 case 'datetime':
-                    $val = $this->tm->_d($val, 'date-tstamp');
+                    $check = strtotime($val);
+                    if ($check <= 0) {
+                        $val = '(null)';
+                    } else {
+                        $val = $this->tm->_d($val, 'date-tstamp');
+                    }
                     break;
 
                 case 'hoststate':

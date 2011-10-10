@@ -178,6 +178,21 @@
 					<ae:parameter name="template">icinga-downtime-template</ae:parameter>
 				</ae:parameter>
 			</cronk>
+			
+			<cronk name="gridInstanceStatus">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display instance overview</ae:parameter>
+                <ae:parameter name="name">Instances</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Tree</ae:parameter>
+                <ae:parameter name="position">520</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-instance-template</ae:parameter>
+                </ae:parameter>
+			</cronk>
+			
 			<!-- Datagrids - [STOP] -->
 		</cronks>
 	</ae:configuration>

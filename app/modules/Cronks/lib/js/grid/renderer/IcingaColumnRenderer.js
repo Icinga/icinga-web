@@ -56,12 +56,12 @@ Cronk.grid.IcingaColumnRenderer = {
 					},
 					cfg.processedFilterData
 				);
-
+AppKit.log(cfg.width);
 				Icinga.util.SimpleDataProvider.createToolTip({
 					title: cfg.title,
 					target: e.getTarget(),
 					srcId: cfg.src_id,
-					width: 400,
+					width: Ext.isEmpty(cfg.width) ? 400 : cfg.width,
 					autoHide: false,	
 					delay: typeof cfg.delay != "undefined" ? cfg.delay :2000,
 					filter: cfg.processedFilterData

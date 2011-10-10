@@ -49,7 +49,7 @@ class Cronks_ColumnDisplay_FormatModel extends CronksBaseModel implements AgaviI
 
     public function agaviDateFormat($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
         $check = strtotime($val);
-        if ($check === 0) {
+        if ($check <= 0) {
             return '(null)';
         }
         return $this->context->getTranslationManager()->_d($val, $method_params->getParameter('domain', 'date-tstamp'));

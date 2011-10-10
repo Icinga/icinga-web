@@ -45,9 +45,11 @@ class Cronks_ColumnDisplay_DurationModel extends CronksBaseModel implements Agav
         if ($res->count()) {
             $record = $res->getFirst();
             
-            $tstamp = strtotime($record->last_state_change);
-            if ($tstamp == 0) {
-                $tstamp = strtotime($record->instance->programstatus->program_start_time);
+            $tstamp = $record->last_state_change;
+            
+            $check = strtotime($tstamp);
+            if ($check <= 0) {
+                $tstamp = $record->instance->programstatus->program_start_time;
             }
             
             return $tstamp;
@@ -55,15 +57,21 @@ class Cronks_ColumnDisplay_DurationModel extends CronksBaseModel implements Agav
     }
     
     public function durationString($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
+        $tstamp = $this->getDateString($val, $method_params->getParameter('type'));
+        return $this->simpleDurationString($tstamp);
+    }
+    
+    public function simpleDurationString($val, AgaviParameterHolder $method_params=null, AgaviParameterHolder $row=null) {
         static $durationMap = array (
-            'w' => 604800,
-            'd' => 86400,
-            'h' => 3600,
-            'm' => 60,
-            's' => 1
+                    'w' => 604800,
+                    'd' => 86400,
+                    'h' => 3600,
+                    'm' => 60,
+                    's' => 1
         );
         
-        $tstamp = $this->getDateString($val, $method_params->getParameter('type'));
+        $tstamp = strtotime($val);
+        
         $diff = time() - $tstamp;
         
         if ($diff > 0) {
@@ -76,16 +84,16 @@ class Cronks_ColumnDisplay_DurationModel extends CronksBaseModel implements Agav
                     $out[] = ceil($diff/$v).$k;
                     $diff = $m;
                 }
-                
+        
                 if ($m===0) {
                     break;
                 }
             }
-            
+        
             return implode(' ', $out);
         }
         
-        return '';
+        return '0s';
     }
     
 }
