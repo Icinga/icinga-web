@@ -56,7 +56,7 @@ Cronk.grid.IcingaColumnRenderer = {
 					},
 					cfg.processedFilterData
 				);
-AppKit.log(cfg.width);
+				
 				Icinga.util.SimpleDataProvider.createToolTip({
 					title: cfg.title,
 					target: e.getTarget(),
