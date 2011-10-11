@@ -23,6 +23,7 @@
 				</route>
 
 				<route name=".admin" pattern="^/admin" action="Admin.Index">
+                    
 					<route name=".principaledit" pattern="^/principaleditor"
 						action="Admin.PrincipalEditor" output_type="simple" />
 					<route name=".users" pattern="^/users" action="Admin.Users.Index">
@@ -53,11 +54,24 @@
 				<!-- Data Provider -->
 				<route name=".data" pattern="^/provider" output_type="json">
 					<route name=".users" pattern="^/user" action="DataProvider.UserProvider">
-						<route pattern="^/(userId:\d+)" action="DataProvider.UserProvider" />
-					</route>
+						<route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.UserProvider" stop="false" />
+                        <route pattern="start=(start:\d+)" stop="false"/>
+                        <route pattern="limit=(limit:\d+)" stop="false"  />
+                        <route pattern="sort=(sort:\w+)"  stop="false" />
+                        <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
+   						<route pattern="id=(userId:\d+)" stop="false"/>
+                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>
+                    </route>
+                    
 					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
-						<route pattern="^/(groupId:\d+)" action="DataProvider.GroupProvider" />
-					</route>
+                        <route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.GroupProvider" stop="false" />
+                        <route pattern="start=(start:\d+)" stop="false"/>
+                        <route pattern="limit=(limit:\d+)" stop="false"  />
+                        <route pattern="sort=(sort:\w+)"  stop="false" />
+                        <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
+   						<route pattern="id=(groupId:\d+)" stop="false"/>
+                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>					
+                    </route>
 					<route name=".principals" pattern="^/principals"
 						action="DataProvider.PrincipalProvider">
 						<route name=".user" pattern="^/user/(userId:\d+)" action="DataProvider.PrincipalProvider" />

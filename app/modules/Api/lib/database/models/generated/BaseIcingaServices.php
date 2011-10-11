@@ -618,6 +618,7 @@ abstract class BaseIcingaServices extends Doctrine_Record {
                            'refClass' => 'IcingaServiceContacts',
                            'idField' => 'service_id'
                        ));
+       
         $this->hasMany("IcingaContactgroups as contactgroups", array(
                            'local' => 'service_id',
                            'foreign' => 'contactgroup_object_id',
