@@ -242,6 +242,19 @@ Cronk.util.GridFilterWindow = function() {
 		
 		function getFormValues(raw) {
 			var data = {}
+			
+			var items = oCoPanel.getForm().items;
+			
+			// Trigger fields are very slow to update its "raw value"
+			// Force validation when getting the values (KeyPress event
+			// is often faster than the element validation
+			// (fixes #1955)
+			items.each(function(item, index, len) {
+				if (Ext.isFunction(item.assertValue)) {
+					// AppKit.log("-> Can assert");
+					item.assertValue();
+				}		});
+			
 			try {
 				data = oCoPanel.getForm().getValues();
 			} catch(e) {
@@ -353,12 +366,14 @@ Cronk.util.GridFilterWindow = function() {
 			 */
 			applyFilters : function(owd) {
 				var data = owd || getFormValues();
+				
 				oGrid.getStore().baseParams = {};
 				Ext.apply(oGrid.getStore().baseParams, oOrgBaseParams);
 				Ext.apply(oGrid.getStore().baseParams, data);
 			
 				
 				oGrid.getStore().load();
+				
 				oGrid.fireEvent('activate');
 				
 				oWindow().hide();
