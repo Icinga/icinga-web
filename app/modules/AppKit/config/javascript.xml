@@ -6,7 +6,8 @@
             <!-- ExtJS base files -->
             <ae:parameter>%core.root_dir%/lib/ext3/adapter/ext/ext-base.js</ae:parameter>
             <ae:parameter>%core.root_dir%/lib/ext3/ext-all-debug.js</ae:parameter>
-
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/PagingMemoryProxy.js</ae:parameter>
+            
             <!--AppKit JS -->
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</ae:parameter>
@@ -26,6 +27,16 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/ux/DDTabPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/search/AppKitSearchBox.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/search/AppKitSearchHandler.js</ae:parameter>
+            <!-- Admin interface components -->
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/RoleListingGrid.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/UserListingGrid.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/RoleInheritanceView.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/GroupRestrictionView.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/CVGridPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/UserSelectionGrid.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/CredentialGrid.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/components/RestrictionFlagsView.js</ae:parameter>
+            
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/UserEditForm.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/UserManager.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/RoleEditForm.js</ae:parameter>

@@ -1,47 +1,47 @@
 Ext.ns("AppKit.Admin");
-AppKit.Admin.UserManager = function(cfg) {
+(function() {
 
     // private static
-    var userProviderURI = cfg.userProviderURI;
-
-    var containerCmp = null;
+    var userProviderURI = "";
     var userGridCmp = null;
     var userFormCmp = null;
+    var userList = null;
     
-    var userList = new Ext.data.JsonStore({
-		autoDestroy: true,
-		storeId: 'userListStore',
-		totalProperty: 'totalCount',
-		root: 'users',
-		idProperty: 'id',
+    var initUserListStore = function(cfg) {
+        userList = new Ext.data.JsonStore({
+            autoDestroy: true,
+            storeId: 'userListStore',
+            totalProperty: 'totalCount',
+            root: 'users',
+            idProperty: 'id',
 
-        url: userProviderURI,
-		remoteSort: true,
+            url: userProviderURI,
+            remoteSort: true,
 
-		baseParams: {
-			hideDisabled: false
-		},
-        proxy: new Ext.data.HttpProxy({
-            api: {
-                read: {method: 'GET', url: userProviderURI}
-            }
-        }),
-  		fields: [
-			{name: 'id', type:'int'},
-			'name',
-			'lastname',
-			'firstname',
-			'email',
-			{name: 'disabled',type:'boolean'},
-			{name: 'disabled_icon',mapping:'disabled',convert: function(v) {
-				return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
-			}},
-			{name: 'created'},
-			{name: 'modified'}
-		]
-	})
- 
-    var initUserGridComponent = function() {
+            baseParams: {
+                hideDisabled: false
+            },
+            proxy: new Ext.data.HttpProxy({
+                api: {
+                    read: {method: 'GET', url: userProviderURI}
+                }
+            }),
+            fields: [
+                {name: 'id', type:'int'},
+                'name',
+                'lastname',
+                'firstname',
+                'email',
+                {name: 'disabled',type:'boolean'},
+                {name: 'disabled_icon',mapping:'disabled',convert: function(v) {
+                    return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
+                }},
+                {name: 'created'},
+                {name: 'modified'}
+            ]
+        })
+    }
+    var initUserGridComponent = function(cfg) {
        userGridCmp = new Ext.grid.GridPanel({
             title: _('Available users'), 
             stateful: false,
@@ -162,11 +162,11 @@ AppKit.Admin.UserManager = function(cfg) {
         });
     }
     
-    var initContainerComponent = function() {
+    var initContainerComponent = function(cfg) {
         if(userGridCmp == null)
             throw "User grid component not correctly initialized, aborting container creation";
         
-        containerCmp = new Ext.Container({
+        return {
             layout: 'fit',
             
             items: new Ext.Panel({
@@ -237,17 +237,28 @@ AppKit.Admin.UserManager = function(cfg) {
                     width: '30%'
                 }]	
             })
-        });
+        }
         
     }
     
-    var initUserFormComponent = function() {
+    var initUserFormComponent = function(cfg) {
        
         userFormCmp = new Ext.form.FormPanel({
             border: false,
             items: AppKit.Admin.UserEditForm(cfg)
         })
     }
+    AppKit.Admin.UserManager = Ext.extend(Ext.Container,{
+        constructor: function(cfg) {
+            userProviderURI = cfg.userProviderURI;
+            initUserListStore(cfg);
+            initUserGridComponent(cfg);
+            initUserFormComponent(cfg);
+
+            Ext.apply(cfg,initContainerComponent(cfg));
+            Ext.Container.prototype.constructor.call(this,cfg)
+        }
+    });
     /*
     this.construct = function() {
         initUserGridComponent();
@@ -259,4 +270,4 @@ AppKit.Admin.UserManager = function(cfg) {
     }
     
     this.construct();*/
-}
+})();

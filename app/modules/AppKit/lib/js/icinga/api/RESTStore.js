@@ -124,7 +124,6 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     load: function(options) {
         options = options || {params: {}};
         this.storeOptions(options);
-        AppKit.log(options);
         var cols    = this.getColumns();
        
         var target      = this.getTarget();

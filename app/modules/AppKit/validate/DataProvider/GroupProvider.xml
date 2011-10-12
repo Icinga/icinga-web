@@ -38,7 +38,7 @@
 		</validators>
         
 		<validators method="write">
-			<validator class="regex" name="user_id" required="false">
+			<validator class="regex" name="id" required="false">
 						<argument>id</argument>
 						<ae:parameter name="pattern"><![CDATA[@^\d+|new$@]]></ae:parameter>
 			</validator>
@@ -79,7 +79,7 @@
 					</errors>
 			</validator>
 			<validator class="string" name="role_users" required="false">
-					<argument>role_users</argument>
+					<arguments base="role_users[]"></arguments>
 					<errors>
 						<error>Validation of 'role_users' failed</error>
 					</errors>
@@ -107,13 +107,13 @@
 		</validators>
         
         <validators method="remove">
-			<validator class="number" name="group_id" required="true">
-				<arguments base="group_id[]">
-					<argument />
-				</arguments>
-			</validator>
-			<validator class="isset" name="disable_only" required="false">
-				<argument>disable_only</argument>			
+            <validator class="AppKitSplitValidator" name="ids" required="true">
+                <argument>ids</argument>
+                <ae:parameter name="split">,</ae:parameter>
+                <ae:parameter name="export">ids</ae:parameter>
+            </validator>
+            <validator class="isset" name="disable_only" required="false">
+                <argument>disable_only</argument>			
 			</validator>
 		</validators>
 		

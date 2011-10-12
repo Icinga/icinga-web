@@ -1,4 +1,10 @@
 (function() {
+    
+ 
+/**
+ * Helper function to generate a random api key
+ * @return String
+ **/
 var getApiKey = function() {
 
     var _string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz1234567890";
@@ -129,488 +135,35 @@ AppKit.Admin.UserEditForm = function(cfg) {
        
     });
     
-    var hostgroupPrincipalsView = new Ext.Panel({
-        iconCls: 'icinga-icon-hostgroup',
-        title: 'Hostgroups',
-        layout: 'fit',
-        autoScroll:true,
-        tbar: [{
-            text: _('Add restriction'),
-            iconCls: 'icinga-icon-add',
-            handler: function() {
-                var emptyRecord = Ext.data.Record.create([{'name': 'hostgroup'}]);
-                userHostgroupPrincipalStore.add(new emptyRecord({hostgroup: 'new restriction'}),true);
-            }
-        },{
-            text: _('Remove selected'),
-            iconCls: 'icinga-icon-cancel',
-            handler: function(c) {
-                var panel = c.ownerCt.ownerCt;
-                var list = panel.findByType('editorgrid')[0];
-                userHostgroupPrincipalStore.remove(list.getSelectionModel().getSelections());
-                
-            },
-            scope:this
-        }],
-        items: [{
-            xtype: 'editorgrid',
-            autoScroll:true,
-            sm: new Ext.grid.RowSelectionModel({singleSelect:false}),
-            store: userHostgroupPrincipalStore,
-            emptyText: _('No hostgroup restrictions set for this user'),
-            columns: [{
-                header: _('Only show members of the following hostgroups:'),
-                dataIndex: 'hostgroup',
-                editor: Icinga.Api.HostgroupsComboBox  
-            }],
-            viewConfig: {
-                forceFit: true
-            }
-            
-        }],
-        selectValues: function(principals) {
-            var record = Ext.data.Record.create([{name: 'hostgroup'}]);
-            userHostgroupPrincipalStore.removeAll();
-            Ext.iterate(principals, function(p) {
-                if(p.target.target_name == 'IcingaHostgroup')
-                    Ext.iterate(p.values,function(v) {
-                        userHostgroupPrincipalStore.add(new record({hostgroup: v.tv_val}));
-                    });
-            },this);
-        }
+    var hostgroupPrincipalsView = new AppKit.Admin.Components.GroupRestrictionView({
+        target: 'hostgroup',
+        store: userHostgroupPrincipalStore
     });
     
-    var servicegroupPrincipalsView = new Ext.Panel({
-        iconCls: 'icinga-icon-servicegroup',
-        title: 'Servicegroups',
-        layout: 'fit',
-        autoScroll:true,
-        tbar: [{
-            text: _('Add restriction'),
-            iconCls: 'icinga-icon-add',
-            handler: function() {
-                var emptyRecord = Ext.data.Record.create([{'name': 'servicegroup'}]);
-                userServicegroupPrincipalStore.add(new emptyRecord({servicegroup: 'new restriction'}),true);
-            }
-        },{
-            text: _('Remove selected'),
-            iconCls: 'icinga-icon-cancel',
-            handler: function(c) {
-                var panel = c.ownerCt.ownerCt;
-                var list = panel.findByType('editorgrid')[0];
-                userServicegroupPrincipalStore.remove(list.getSelectionModel().getSelections());
-            },
-            scope:this
-        }],
-   
-        items: [{
-            xtype: 'editorgrid',
-            autoScroll:true,
-            store: userServicegroupPrincipalStore,
-            sm: new Ext.grid.RowSelectionModel({singleSelect:false}),
-            emptyText: _('No servicegroup restrictions set for this user'),
-            columns: [{
-                header: _('Only show members of the following servicegroups:'),
-                dataIndex: 'servicegroup',
-                editor: Icinga.Api.ServicegroupsComboBox  
-            }],
-            viewConfig: {
-                forceFit: true
-            }
-            
-        }],
-        selectValues: function(principals) {
-            var record = Ext.data.Record.create([{name: 'servicegroup'}]);
-            userServicegroupPrincipalStore.removeAll();
-            Ext.iterate(principals, function(p) {
-                if(p.target.target_name == 'IcingaServicegroup')
-                    Ext.iterate(p.values,function(v) {
-                        userServicegroupPrincipalStore.add(new record({servicegroup: v.tv_val}));
-                    });
-            },this);
-        }
+    var servicegroupPrincipalsView = new AppKit.Admin.Components.GroupRestrictionView({
+        target: 'servicegroup',
+        store: userServicegroupPrincipalStore
     });
    
-    var showCVWindowForTarget = function(c,target) {
-        target = target || 'host';
-        var nameField = new Icinga.Api.RESTFilterComboBox({
-            targetField: target.toUpperCase()+'_CUSTOMVARIABLE_NAME',
-            target: target,
-            width: 300,
-            name: 'name',
-            fieldLabel: Ext.util.Format.capitalize(target)+_(' customvariable'),
-            allowBlank: false,
-            listeners: {
-                select: function(v,record) {
-                    var value = record.get(v.displayField);
-                    valueField.filter(v.displayField,value,true);
-                    valueField.setDisabled(false);
-                    valueField.reset();
-                    valueField.getStore().removeAll();
-                }
-            }
-        });
+    var customVariableView = new AppKit.Admin.Components.CVGridPanel({
+        target: 'servicegroup',
+        store: userCustomvarPrincipalStore
+    });
 
-        var valueField = new Icinga.Api.RESTFilterComboBox({
-            targetField: target.toUpperCase()+'_CUSTOMVARIABLE_VALUE',
-            target: 'host',
-            name: 'value',
-            fieldLabel: _(Ext.util.Format.capitalize(target)+' customvariable value'),
-            width: 300,
-            disabled: true
-
-        });
-
-        new Ext.Window({
-            title: _('Add '+target+' customvariable'),
-            width: 500,
-            height: 180,
-            layout: 'fit',
-            modal: true,
-            items: [{
-                xtype: 'form',
-                padding: 5,
-                border:false,
-                items: [
-                    nameField,
-                    valueField
-                ]
-            }],
-            buttons: [{
-                text: _('Add customvariable'),
-                iconCls: 'icinga-icon-add',
-                handler: function(b) {
-                    var record = Ext.data.Record.create([
-                        {name:'id'}, {name: 'name'}, {name:'value'}, {name:'target'}
-                    ]);
-                    var form = b.ownerCt.ownerCt.findByType('form')[0].getForm();
-                    if(form.isValid()) {
-                        userCustomvarPrincipalStore.add(
-                            new record(
-                                Ext.apply(form.getValues(),{target: target})
-                            )
-                        );
-                        b.ownerCt.ownerCt.close();      
-                    }
-
-                }
-            }, {
-                text: _('Cancel'),
-                iconCls: 'icinga-icon-cancel',
-                handler: function(c) {
-                    c.ownerCt.ownerCt.close();
-                }
-            }]
-        }).show(document.body);
-    }
-   
-    var customVariableView = new Ext.Panel({
-        title: _('Customvariable'),
-        iconCls: 'icinga-icon-bricks',
-        layout: 'fit',
-        tbar: [{
-            text: _('Add customvariable restriction'),
-            iconCls: 'icinga-icon-add',
-            menu: [{
-                text: _('Host customvariable'),
-                handler: function(c) {
-                    showCVWindowForTarget(c,'host');
-                },
-                iconCls: 'icinga-icon-host',
-                scope: this
-            },{
-                text: _('Service customvariable'),
-                handler: function(c) {
-                    showCVWindowForTarget(c,'service')
-                },
-                iconCls: 'icinga-icon-service',
-                scope: this
-            }]
-            
-        },{
-            text: _('Remove selected'),
-            iconCls: 'icinga-icon-cancel',
-            handler: function(c) {
-                var grid = c.ownerCt.ownerCt.findByType('grid')[0];
-                userCustomvarPrincipalStore.remove(grid.getSelectionModel().getSelections());
-            }
-        }],
-        items: [{
-            xtype: 'grid',
-            multiSelect: true,
-            store: userCustomvarPrincipalStore,
-            viewConfig: {
-                forceFit: true
-            },
-            columns: [{
-                header: ' ',
-                width:20,
-                dataIndex: 'target',
-                renderer: function(v) {
-                    return '<div class="icon-16 icinga-icon-'+v+'"></div>';
-                }
-            },{
-                header: _('Variable'),
-                dataIndex: 'name'
-            }, {
-                header: _('Value'),
-                dataIndex: 'value'
-            },{
-                header: _('Affects'),
-                dataIndex: 'target'
-            }]
-        }],
-        selectValues: function(principals) {
-            var record = Ext.data.Record.create([
-                {name: 'value'},{name: 'name'},{name: 'target'}
-            ]);
-            userCustomvarPrincipalStore.removeAll();
-            Ext.iterate(principals, function(p) {
-                if(p.target.target_name == 'IcingaHostCustomVariablePair' ||
-                    p.target.target_name == 'IcingaServiceCustomVariablePair') {
-                    var entry = new record({
-                        target: p.target.target_name == 'IcingaHostCustomVariablePair' ?
-                            'host' : 'service'
-                    });
-                    Ext.iterate(p.values,function(value) {
-                        switch(value.tv_key) {
-                            case 'cv_name':
-                                entry.set('name',value.tv_val);
-                                break;
-                            case 'cv_value':
-                                entry.set('value',value.tv_val);
-                                break;
-                        }
-                    },true);
-                    userCustomvarPrincipalStore.add(entry);
-                }
-            },this);
-        }
+    var credentialView = new  AppKit.Admin.Components.CredentialGrid({
+        store: userCredentialStore,
+        type: 'user'
     });
     
-    var credentialSelectBox = new Ext.grid.CheckboxSelectionModel({
-        width: 20,
-        checkOnly: true,
-        listeners: {
-            selectionchange: function(_this) {
-                userCredentialStore.selectedValues = _this.getSelections();
-            }
-        }
+    var roleView = new AppKit.Admin.Components.UserListingGrid({
+        store: userRoleStore,
+        roleProviderURI: cfg.roleProviderURI
     });
-    var credentialView = new Ext.Panel({
-        title: _('Credentials'),
-        layout:'fit',
-        iconCls: 'icinga-icon-key',
-        tbar: [_('Define credentials and access rights to this user here')],
-        items: [{
-            xtype: 'grid',
-            store: userCredentialStore,
-            viewConfig: {
-                forceFit: true
-            },
-            sm: credentialSelectBox,
-
-            columns: [ 
-                credentialSelectBox
-            ,{
-                header: _('Credential'),
-                dataIndex: 'target_name',
-                width: 100
-            },{
-                header: _('Description'),
-                dataIndex: 'target_description',
-                width: 300
-            }]
-        }],
-        updateView: function() {
-            if(userCredentialStore.selectedValues)
-                credentialSelectBox.selectRecords(userCredentialStore.selectedValues);
-        },
-        selectValues: function(principals) {
-            credentialSelectBox.clearSelections();
-            userCredentialStore.selectedValues = [];
-            Ext.iterate(principals, function(p) {
-                if(p.target.target_type != 'credential') 
-                    return true;
-                userCredentialStore.selectedValues.push(userCredentialStore.getById(p.target.target_id));
-            },true);
-            this.updateView();
-        } 
-    })
     
-    
-    var roleView = new Ext.Panel({
-        title: 'Roles',
-        iconCls: 'icinga-icon-group',
-        items:[{
-            xtype: 'listview',
-            store: userRoleStore,
-            multiSelect: true,
-            columns: [{
-                header: _('Role'),
-                dataIndex: 'name'
-            },{
-                header: _('Description'),
-                dataIndex: 'description'
-            },new (Ext.extend(Ext.list.BooleanColumn,{
-                trueText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-accept"></div>',
-                falseText: '<div style="width:16px;height:16px;margin-left:25px" class="icinga-icon-cancel"></div>'
-            }))({                
-                header: _('Active'),
-                dataIndex:'active',
-                width: 0.1
-            })]
-        }],
-        tbar: [{
-            text: _('Add role'),
-            iconCls: 'icinga-icon-add',
-            handler: function(c) {
-                var panel = c.ownerCt.ownerCt;
-                panel.showRoleSelectionDialog()
-            },
-            scope:this
-        },{
-            text: _('Remove selected'),
-            iconCls: 'icinga-icon-cancel',
-            handler: function(c) {
-                var panel = c.ownerCt.ownerCt;
-                var list = panel.findByType('listview')[0];
-                userRoleStore.remove(list.getSelectedRecords());
-                
-            },
-            scope:this
-        }],
-        showRoleSelectionDialog: function() {
-            var groupsStore = new Ext.data.JsonStore({
-                url: cfg.roleProviderURI,
-                autoLoad:true,
-                autoDestroy:true,
-                root: 'roles',
-                fields: [{
-                    name: 'id'
-                },{
-                    name: 'name'
-                },{
-                    name: 'description'
-                },{
-                    name: 'active'
-                },{
-                    name: 'daisabled_icon',
-                    mapping:'active',
-                    convert: function(v) {
-                         return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==1? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
-                    }
-                }]
-            });
-            var grid = new Ext.grid.GridPanel({ 
-                
-                bbar:new Ext.PagingToolbar({
-                    pageSize: 25,
-                    store: groupsStore,
-                    displayInfo: true,
-                    displayMsg: _('Displaying roles')+' {0} - {1} '+_('of')+' {2}',
-                    emptyMsg: _('No roles to display')
-                }),
-                store: groupsStore,
-                viewConfig: {
-                    forceFit:true
-                },
-                columns: [{
-                    header: _('Id'),
-                    width: 20,
-                    dataIndex: 'id'
-                },{
-                    header: _('Name'),
-                    dataIndex: 'name'
-                },{
-                    header: _('Description'),
-                    dataIndex: 'description'
-                },{
-                    header: _('Status'),
-                    width: 50,
-                    dataIndex: 'disabled_icon'
-                }]
-            });
-            
-            (new Ext.Window({
-                title: _('Select roles'),
-                modal:true,
-                layout:'fit',
-                iconCls: 'icinga-icon-group',
-                height: Ext.getBody().getHeight()*0.5,
-                width: Ext.getBody().getWidth()*0.5,
-                items: [grid],
-                buttons: [{
-                  text: _('Add selected'),
-                  iconCls: 'icinga-icon-add',
-                  handler: function(c) {
-                      var selected = grid.getSelectionModel().getSelections();
-                      Ext.iterate(selected, function(item) {
-                        if(userRoleStore.getById(item.get('id')))
-                            return true;
-                        userRoleStore.add(item);
-                        return true;
-                      },this)
-                      c.ownerCt.ownerCt.close();
-                  }
-                },{
-                  text: _('Cancel'),
-                  iconCls: 'icinga-icon-cancel',
-                  handler: function(c) {
-                      c.ownerCt.ownerCt.close();
-                  }
-                }]
-            })).show(Ext.getBody())
-        }
-    })
-    
-    var userRestrictionFlagsView = (function() {
-        var items = [];
-        for(var i=0;i<userFlags.length;i++) {
-            var flag = userFlags[i];
-            items.push(new Ext.form.Checkbox({
-                xtype: 'checkbox',
-                boxLabel: flag.text,
-                id: flag.id,
-                name: flag.principal
-            }));
-        }
+    var userRestrictionFlagsView = new AppKit.Admin.Components.RestrictionFlagsView({
+        type: 'user'
+    });
         
-        var panel = new Ext.Panel({
-            layout: 'fit',
-            tbar: new Ext.Toolbar({
-                items: [{
-                    xtype: 'tbtext',
-                   text: _('You can define additional restrictions for this user here')
-                }]
-            }),
-            title: 'Other restrictions',
-            iconCls: 'icinga-icon-cancel',
-            padding: 10,
-            items: {
-                xtype: 'container',
-                layout: 'form',
-                
-                border: false,
-                items: items
-            }
-            
-        });
-        panel.selectedValue = [];
-        panel.selectValues = function(principals) {
-            var checkboxes = panel.findByType('checkbox');
-            Ext.iterate(checkboxes, function(checkbox) {
-                checkbox.reset();
-                Ext.iterate(principals, function(p) {
-                    if(p.target.target_name == checkbox.getName())
-                        checkbox.setValue(true);
-                })
-            },this);
-        }
-        
-        return panel;
-    })();
-      
     AppKit.Admin.UserEditForm.bindUser = function(id,url) {
         if(id != 'new') {
             userStore.proxy.setUrl(url+"/id="+id);
@@ -897,6 +450,6 @@ AppKit.Admin.UserEditForm = function(cfg) {
         height:400
     }]
    
-}
+};
 
 })();

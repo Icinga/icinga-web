@@ -35,7 +35,37 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             "parent" => $r->role_parent,
             "active" => $r->role_disabled != true
         );
-     }
+    }
+    
+    private function formatRole(NsmRole $r,$simple) {
+        $roleObject = $this->getGroupAsArray($r);
+        if($simple)
+            return $roleObject;
+
+        $roleObject["users"] = array();
+        $users = $r->NsmUser;
+
+       
+        foreach($users as $user) {
+            $roleObject["users"][] = array(
+                "id"=>$user->user_id,
+                "name"=>$user->user_name,
+                "firstname" => $user->user_firstname,
+                "lastname" => $user->user_lastname,
+                "active"=>$user->user_disabled != true
+            );
+        }
+        $principals = $r->getPrincipals();
+        $roleObject["principals"] = array();
+        foreach($principals as $principal)
+            $targets = $principal->NsmPrincipalTarget;
+            foreach($targets as $t)
+                $roleObject["principals"][] = array(
+                    "target" => $t->NsmTarget->toArray(),
+                    "values" => $t->NsmTargetValue->toArray()
+                );
+        return $roleObject;    
+    }
     
     public function executeRead(AgaviRequestDataHolder $rd) {
         $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
@@ -62,20 +92,16 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                     return "{}";
                 }
 
-                foreach($group->NsmUser as $user) {
-                    $id =  $user->get("user_id");
-                    $name = $user->get("user_name");
-                    $role_users[] = array("user_id"=>$id,"user_name"=>$name);
-                }
+                
 
-                $result = $this->getGroupAsArray($group);
-                $result["users"] = $role_users;
+                $result = $this->formatRole($group);
 
                 $this->setAttribute("role",$result);
 
             } else {	//return list of all roles if no id is provided
 
                 if ($start === false || $limit === false) {
+                   
                     $groups = $roleadmin->getRoleCollection($disabled);
                 } else {
                     $groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc);
@@ -84,7 +110,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             
                 $result = array();
                 foreach($groups as $group) {
-                   $result[] = $this->getGroupAsArray($group,true);
+                   $result[] = $this->formatRole($group,true);
                 }
                 $this->setAttribute("roles",$result);
             }
@@ -98,6 +124,8 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
     }
 
     public function executeWrite(AgaviRequestDataHolder $rd) {
+        $user = $this->getContext()->getUser();
+
         if($user->hasCredential('appkit.admin') == false && $user->hasCredential('appkit.admin.groups') == false)
             throw new AgaviSecurityException (("Not Authorized"), 401);
         try {
@@ -126,21 +154,15 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                 );
             }
 
-            $useradmin = $this->getContext()->getModel('UserAdmin','AppKit');
-            $allUsers = $useradmin->getUsersCollection()->toArray();
-
-            $roleUsers = $rd->getParameter("role_users","");
-            $roleUsers = explode(";",$roleUsers);
-
-
             Doctrine_Manager::connection()->commit();
-            $this->updateUserRoles($allUsers,$role,$useradmin,$roleUsers);
-
-
-            if ($rd->getParameter('id') == 'new') {
-                $this->setAttribute('redirect', 'modules.appkit.admin.groups.edit');
-                $this->setAttribute('redirect_params', array('id' => $role->role_id));
+            
+            if (!$rd->getParameter("ignorePrincipals",false)) {
+                $useradmin = $this->getContext()->getModel('UserAdmin','AppKit');
+                $allUsers = $useradmin->getUsersCollection()->toArray();
+                $roleUsers = $rd->getParameter("role_users",array());
+                $this->updateUserRoles($allUsers,$role,$useradmin,$roleUsers);
             }
+          
         } catch (Exception $e) {
             $this->setAttribute("error", $e->getMessage());
             try {
@@ -205,7 +227,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             Doctrine_Manager::connection()->beginTransaction();
             $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
             $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
-            $ids = $rd->getParameter("group_id",false);
+            $ids = $rd->getParameter("ids",array());
             foreach($ids as $id) {
                 $role = $roleadmin->getRoleById($id);
 
