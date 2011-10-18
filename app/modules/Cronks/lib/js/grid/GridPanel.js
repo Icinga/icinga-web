@@ -172,7 +172,11 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	setFilter : function(f) {
 		this.filter = f;
 	},
-	stateEvents: ['autorefreshchange','activate', 'columnmove ', 'columnresize', 'groupchange', 'sortchange'],
+	
+	stateEvents: [
+	   'autorefreshchange','activate', 'columnmove ', 'columnresize', 
+	   'groupchange', 'sortchange', 'afterrender'
+	],
 	
 	startRefreshTimer: function() {
 		var autoRefresh = AppKit.getPrefVal('org.icinga.grid.refreshTime') || 300;
@@ -235,6 +239,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			*/
 		}, this);
 	},
+	
 	refreshTask: new Ext.util.DelayedTask(function() {
 		//NOTE: hidden tabs won't be refreshed
 	
@@ -252,6 +257,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	refreshGrid: function() {
 		this.refreshTask.delay(200,null,this);
 	},
+	
 	getState: function() {
 		var store = this.getStore();
 		var aR = null;
