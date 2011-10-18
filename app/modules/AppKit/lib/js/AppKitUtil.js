@@ -149,9 +149,9 @@ AppKit.util = (function() {
 						style: 'overflow:scroll'
 					},
 					bbar: {
-						items: [{
-							text: _('Close'),
-							iconCls: 'icinga-icon-accept',
+						items: ['->', {
+							text: _('OK'),
+							iconCls: 'icinga-action-icon-ok',
 							handler: function() {
 								AppKit.changeLocation(AppKit.c.path);
 							}
