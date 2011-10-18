@@ -78,7 +78,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         if (!$this->checkAuth($rd)) {
             return "Error";
         }
-
+        
         $context = $this->getContext();
         $API = $context->getModel("Icinga.ApiContainer","Web");
         $target = $rd->getParameter("target");
@@ -95,8 +95,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         // Adding security principal targets to the query
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
         $res = $search->fetch()->getAll();
- 
-
+       
+        
         //Setup count
         if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);
@@ -141,12 +141,13 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         if (isset($filterdef["type"])) {
             $searchField = $filterdef["field"];
         }
-
+       
         $filterGroup = $search->createFilterGroup($filterdef["type"]);
         if(!is_array($searchField))
             $searchField = array($searchField);
         foreach($searchField as $element) {
             if ($element["type"] == "atom") {
+                $element["value"] = str_replace("*","%",$element["value"]);
                 $filterGroup->addFilter($search->createFilter(strtoupper($element["field"][0]),$element["value"][0],$element["method"][0]));
             } else {
                 $filterGroup->addFilter($this->buildFiltersFromArray($search,$element));

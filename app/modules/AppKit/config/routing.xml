@@ -23,28 +23,10 @@
 				</route>
 
 				<route name=".admin" pattern="^/admin" action="Admin.Index">
-					<route name=".principaledit" pattern="^/principaleditor"
-						action="Admin.PrincipalEditor" output_type="simple" />
-					<route name=".users" pattern="^/users" action="Admin.Users.Index">
-						<route name=".edit" pattern="^/edit/(id:(\d+|new))" action="Admin.Users.Edit">
-							<route name=".simple" pattern="^/(container:\w+)$"
-								output_type="simple" />
-						</route>
-						<route name=".alter" pattern="^/alter/(id:(\d+|new))$"
-							output_type="simple" action="Admin.Users.Edit" />
-						<route name=".remove" pattern="^/remove$" output_type="simple"
-							action="Admin.Users.Remove" />
-					</route>
-					<route name=".groups" pattern="^/groups" action="Admin.Groups.Index">
-						<route name=".edit" pattern="^/edit/(id:(\d+|new))" action="Admin.Groups.Edit">
-							<route name=".simple" pattern="^/(container:\w+)$"
-								output_type="simple" />
-						</route>
-						<route name=".alter" pattern="^/alter/(id:(\d+|new))$"
-							output_type="simple" action="Admin.Groups.Edit" />
-						<route name=".remove" pattern="^/remove$" output_type="simple"
-							action="Admin.Groups.Remove" />
-					</route>
+                    <!-- User and group editor interfaces -->
+					<route name=".users" pattern="^/users" action="Admin.Users.Index" />
+					<route name=".groups" pattern="^/groups" action="Admin.Groups.Index" />
+
 					<route name=".logs" pattern="^/logs" action="Admin.ViewLogs" />
 					<route name=".tasks" pattern="^/tasks" action="Admin.Tasks"
 						output_type="simple" />
@@ -53,18 +35,25 @@
 				<!-- Data Provider -->
 				<route name=".data" pattern="^/provider" output_type="json">
 					<route name=".users" pattern="^/user" action="DataProvider.UserProvider">
-						<route pattern="^/(userId:\d+)" action="DataProvider.UserProvider" />
-					</route>
+						<route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.UserProvider" stop="false" />
+                        <route pattern="start=(start:\d+)" stop="false"/>
+                        <route pattern="limit=(limit:\d+)" stop="false"  />
+                        <route pattern="sort=(sort:\w+)"  stop="false" />
+                        <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
+   						<route pattern="id=(userId:\d+)" stop="false"/>
+                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>
+                    </route>
+                    
 					<route name=".groups" pattern="^/groups" action="DataProvider.GroupProvider">
-						<route pattern="^/(groupId:\d+)" action="DataProvider.GroupProvider" />
-					</route>
-					<route name=".principals" pattern="^/principals"
-						action="DataProvider.PrincipalProvider">
-						<route name=".user" pattern="^/user/(userId:\d+)" action="DataProvider.PrincipalProvider" />
-						<route name=".group" pattern="^/group/(groupId:\d+)"
-							action="DataProvider.PrincipalProvider" />
-
-					</route>
+                        <route pattern="hideDisabled=(hideDisabled:[10])" action="DataProvider.GroupProvider" stop="false" />
+                        <route pattern="start=(start:\d+)" stop="false"/>
+                        <route pattern="limit=(limit:\d+)" stop="false"  />
+                        <route pattern="sort=(sort:\w+)"  stop="false" />
+                        <route pattern="dir=(dir:(ASC|DESC))"  stop="false" />
+   						<route pattern="id=(groupId:\d+)" stop="false"/>
+                        <route pattern="ids=(ids:[\d+,]+)" stop="false"/>					
+                    </route>
+				
 					<route name=".log" pattern="^/log" action="DataProvider.LogProvider" />
 					<route name=".languages" pattern="^/languages"
 						action="DataProvider.LanguageProvider" />

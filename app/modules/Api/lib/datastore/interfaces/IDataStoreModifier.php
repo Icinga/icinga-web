@@ -87,8 +87,8 @@ interface IDataStoreModifier {
     * to handle the stores abilities
     *
     * @return Array         An array that describes this moodifier for the client side
-    *
+    * @internal 
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
-    public function __getJSDescriptor();
+//    public function __getJSDescriptor();
 }
