@@ -912,6 +912,65 @@
             </order>
         </field>
         
+        <field name="host_statusmap_link">
+            <datasource>
+                <parameter name="field">HOST_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="width">22</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+
+                <parameter name="jsFunc">
+                
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/folder-tree.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="qtip">Show statusmap in host</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                    
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.StatusmapColumnRenderer</parameter>
+                        <parameter name="function">hostToStatusmap</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="laola">True</parameter>
+                        </parameter>
+                    </parameter>
+                
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+        
         <field name="host_status">
         	<datasource>
         		<parameter name="field">HOST_CURRENT_STATE</parameter>

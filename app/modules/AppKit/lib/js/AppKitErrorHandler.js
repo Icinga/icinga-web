@@ -367,12 +367,12 @@ Ext.ns("AppKit.errorHandler");
 
 	var setupErrorHandler = function() {
 		var setHandlerFunc = function() {
-			if(AppKit.getPreferences()["org.icinga.errorNotificationsEnabled"] == 'true') {
+			if(AppKit.getPreferences()["org.icinga.errorNotificationsEnabled"] == true) {
 				AppKit.AjaxErrorHandler.enableErrorNotifyBox();
 			} else {
 				AppKit.AjaxErrorHandler.disableErrorNotifyBox();
 			}
-			if(AppKit.getPreferences()["org.icinga.bugTrackerEnabled"]  == 'true') {
+			if(AppKit.getPreferences()["org.icinga.bugTrackerEnabled"]  == true) {
 				AppKit.BugTracker.setShowErrors(true);
 				AppKit.AjaxErrorHandler.enableBugTrackerReport();
 			} else {
