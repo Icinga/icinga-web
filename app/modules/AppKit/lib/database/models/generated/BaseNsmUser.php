@@ -164,16 +164,16 @@ abstract class BaseNsmUser extends Doctrine_Record {
     public function setUp() {
         parent::setUp();
 
-        $this->hasOne('NsmPrincipal', array(
+        $this->hasOne('NsmPrincipal as principals', array(
                           'local' => 'user_id',
                           'foreign' => 'principal_user_id'
                       ));
 
-        $this->hasMany('NsmUserPreference', array(
+        $this->hasMany('NsmUserPreference as preferences', array(
                            'local' => 'user_id',
                            'foreign' => 'upref_user_id'));
 
-        $this->hasMany('NsmUserRole', array(
+        $this->hasMany('NsmUserRole as roles', array(
                            'local' => 'user_id',
                            'foreign' => 'usro_user_id'));
     }

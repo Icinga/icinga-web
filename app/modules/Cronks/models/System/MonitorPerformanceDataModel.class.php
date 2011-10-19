@@ -93,7 +93,7 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
                 
                 $arr = $res->fetch()->getRow();       
-             
+                $query = $res->getSqlQuery();
                 foreach($arr as $key=>$value) {
 
                     if (isset($source[4])) {

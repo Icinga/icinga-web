@@ -69,7 +69,8 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
         throw new AgaviSecurityException('Provider '. $id. ' does not exist!');
     }
-
+    
+    
     public function providerExists($id) {
         return array_key_exists($id, $this->config);
     }

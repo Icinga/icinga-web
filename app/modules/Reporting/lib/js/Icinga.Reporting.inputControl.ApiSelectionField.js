@@ -28,9 +28,7 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 		}, config);
 		
 		config.store = store;
-		
-		AppKit.log(config);
-		
+
 		Icinga.Reporting.inputControl.ApiSelectionField.superclass.constructor.call(this, config);
 	},
 	
@@ -55,8 +53,6 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 		} else {
 			fields = [displayField, valueField];
 		}
-		
-		AppKit.log(fields);
 		
 		var store = new Ext.data.JsonStore({
 			url : url,

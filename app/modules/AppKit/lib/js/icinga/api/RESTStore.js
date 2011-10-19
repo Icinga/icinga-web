@@ -7,26 +7,37 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     orderDirection: null,
     limit: -1,
     offset: 0,
-    countField: null,
+    countColumn: null,
 
     constructor: function(cfg) {
         Ext.apply(this,cfg);
         if(cfg.columns) {
-            Ext.isArray(this.fields) ? 
+            Ext.isArray(cfg.columns) ? 
                 cfg.fields = cfg.columns : cfg.fields = [cfg.columns];
         }
+        
         cfg.root = 'result';
         cfg.url = AppKit.c.path+"/modules/web/api/json"; 
+        cfg.totalProperty = "total";
+        cfg.paramNames = {
+            start: 'limit_start',
+            limit: 'limit'
+        }
         Ext.data.JsonStore.prototype.constructor.call(this,cfg);
+        
     },  
 
     setColumns: function(cols) {
-        this.columns = cols;
-        
+        this.columns = cols;    
     },
     
-    setCountField: function(field) {
-        this.countField = field;
+    addColumn: function(col) {
+        if(this.columns.indexOf(col) == -1)
+            this.columns.push(col);
+    },
+    
+    setCountColumn: function(field) {
+        this.countColumn = field;
     },    
 
     setTarget: function(target) {
@@ -37,7 +48,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
         this.filter = filter;
     },
 
-    setOderColumn: function(order) {
+    setOrderColumn: function(order) {
         this.orderColumn = order;
     },
 
@@ -112,7 +123,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     }, 
     load: function(options) {
         options = options || {params: {}};
-        
+        this.storeOptions(options);
         var cols    = this.getColumns();
        
         var target      = this.getTarget();
@@ -141,7 +152,8 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
          for(var i=0;i<cols.length;i++) {
             cfg["columns["+i+"]"] = cols[i];      
         } 
-        options.params = cfg;
+        Ext.apply(options.params,cfg);
+
         return Ext.data.JsonStore.prototype.load.call(this,options);
     }
 });

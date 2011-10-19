@@ -186,8 +186,7 @@ Icinga.Reporting.util.RunReportPanel = Ext.extend(Icinga.Reporting.abstract.Appl
 		
 		this.form.on('beforeaction', function(form, action) {
 			values = form.getFieldValues();
-			AppKit.log(action);
-			
+
 			var format = values['_output_format']
 			
 			/**
