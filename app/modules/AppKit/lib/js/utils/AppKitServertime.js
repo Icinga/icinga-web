@@ -17,7 +17,7 @@ AppKit.util.Servertime = Ext.extend(Ext.menu.BaseItem, {
         cfg = cfg || {};
         Ext.TaskMgr.start({
             run: this.updateClock,
-            interval: 10000,
+            interval: 60000,
             scope:this
         });
         cfg.style = {margin : "3px"};

@@ -37,7 +37,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         );
     }
     
-    private function formatRole(NsmRole $r,$simple) {
+    private function formatRole(NsmRole $r,$simple = false) {
         $roleObject = $this->getGroupAsArray($r);
         if($simple)
             return $roleObject;
