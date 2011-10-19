@@ -90,7 +90,8 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 				var bCommands = (Options['commands'] && Options['commands']['enabled'] == true) ? true : false;
 				
 				var bCommandRo = '<?php echo $us->getNsmUser()->hasTarget("IcingaCommandRo"); ?>';
-				
+			
+                
 				if (bCommands == true && !bCommandRo == 1) {
 					
 					var tbEntry = this.topToolbar.add({
@@ -100,7 +101,6 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 							items: []
 						}
 					});
-					
 					// An instance to work with
 					var cHandler = new IcingaCommandHandler(meta);
 					
@@ -157,6 +157,7 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 				   url: "<?php echo $ro->gen('modules.cronks.viewProc.json.metaInfo', array('template' => $rd->getParameter('template'))); ?>",
 				   
 				   success: function(response, opts) {
+
 				   		s.add(template, Ext.decode(response.responseText));
 				   		initGrid();
 				   },

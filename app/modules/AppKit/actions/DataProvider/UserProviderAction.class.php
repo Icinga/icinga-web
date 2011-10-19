@@ -146,8 +146,6 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
                 $rd->getParameter('principal_value', array())
             );
 
-            // Give notice!
-
             Doctrine_Manager::connection()->commit();
         } catch (Exception $e) {
             try {
