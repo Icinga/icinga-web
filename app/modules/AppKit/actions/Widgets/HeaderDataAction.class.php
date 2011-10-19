@@ -15,10 +15,10 @@ class AppKit_Widgets_HeaderDataAction extends AppKitBaseAction {
         switch ($type) {
             case 'javascript':
                 $includes = array(
-                                $this->getContext()->getRouting()->gen('modules.appkit.squishloader.javascript')
+                                $this->getContext()->getRouting()->gen('modules.appkit.squishloader.javascript'),
+                                $this->getContext()->getRouting()->gen('modules.appkit.ext.applicationState', array('cmd' => 'init')),
+                                $this->getContext()->getRouting()->gen('modules.appkit.ext.initI18n')
                             );
-                $includes[] = $this->getContext()->getRouting()->gen('modules.appkit.ext.applicationState', array('cmd' => 'init'));
-
                 break;
 
             case 'css':
