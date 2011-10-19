@@ -72,6 +72,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
                                     'data'		=> array(
                                         'status'	=> $row['HOST_CURRENT_STATE'],
                                         'relation'	=> $this->getHostDataTable($row),
+                                        'object_id' => $row['HOST_OBJECT_ID']
                                     ),
                                     'children'	=> array(),
                                 );
@@ -104,6 +105,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
                               'id'		=> $idPrefix . '-1',
                               'name'		=> 'Icinga',
                               'data'		=> array(
+                                  'object_id' => 0,
                                   'status'	=> '-1',
                                   'relation'	=> 'Icinga Monitoring Process',
                               ),
@@ -115,6 +117,7 @@ class Cronks_System_StatusMapModel extends CronksBaseModel {
                              'id'		=> $idPrefix . '-1',
                              'name'		=> 'Icinga',
                              'data'		=> array(
+                                 'object_id' => 0,
                                  'status'	=> '-1',
                                  'relation'	=> 'Icinga Monitoring Process',
                              ),

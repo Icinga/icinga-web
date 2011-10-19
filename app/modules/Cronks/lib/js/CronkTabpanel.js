@@ -65,7 +65,14 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.panel.DDTabPanel, {
 	
 		this.items.each(function(item, index, l) {
 			if (Cronk.Registry.get(item.getId())) {
-				cout[item.getId()] = Cronk.Registry.get(item.getId());
+				
+				// Copy reference
+				cout[item.getId()] = Ext.apply({}, Cronk.Registry.get(item.getId()));
+				
+				// Local space is not for serializing
+				if (Ext.isDefined(cout[item.getId()].local)) {
+					delete(cout[item.getId()].local);
+				}
 				
 				if (Ext.isDefined(item.iconCls)) {
 					cout[item.getId()].iconCls = item.iconCls;

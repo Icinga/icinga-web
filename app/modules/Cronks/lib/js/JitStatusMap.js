@@ -47,6 +47,8 @@ function JitStatusMap (config) {
 	this.elementIdsWrite = ["jitContainer", "jitContainerCenter", "jitMap", "jitContainerRight", "jitDetails", "jitLog", "jitCanvas"];
 
 	this.jitJson = false;
+	
+	var rgraph = null;
 
 	function jitInit (json, elementIds) {
 		var infovis = document.getElementById(elementIds.jitMap);
@@ -61,7 +63,7 @@ function JitStatusMap (config) {
 		}
 
 		var w = infovis.offsetWidth, h = infovis.offsetHeight;
-		var rgraph = new $jit.RGraph({
+		rgraph = new $jit.RGraph({
 			Node: {
 				overridable: true,
 				color: "#ccddee"
@@ -96,11 +98,11 @@ function JitStatusMap (config) {
 				zooming: 20
 			},
 			onBeforeCompute: function(node){
-				JitLog.write(elementIds.jitLog, "centering " + node.name + "...");
+				JitLog.write(elementIds.jitLog, String.format(_('centering {0} ...'), node.name));
 				document.getElementById(elementIds.jitDetails).innerHTML = node.data.relation;
 			},
 			onAfterCompute: function(){
-				JitLog.write(elementIds.jitLog, "done");
+				JitLog.write(elementIds.jitLog, _('done'));
 			},
 			onBeforePlotNode:function(node) {
 				
@@ -149,7 +151,43 @@ function JitStatusMap (config) {
 	
 		document.getElementById(elementIds.jitDetails).innerHTML = rgraph.graph.getNode(rgraph.root).data.relation;
 	}
-
+	
+	this.getRGraph = function() {
+		return rgraph;
+	}
+	
+	this.centerNodeByObjectId = function(oid) {
+		var centerFunction = (function() {
+			var node = this.findNodeByObjectId(this.jitJson, oid);
+			if (Ext.isObject(node)) {
+				rgraph.onClick(node.id);
+			}
+		}).createDelegate(this);
+		
+		var waitFunction = (function() {
+			if (this.jitJson === false) {
+				waitFunction.defer(200);
+			} else {
+				centerFunction();
+			}
+		}).createDelegate(this);
+		
+		waitFunction();
+	}
+	
+	this.findNodeByObjectId = function(misc, oid) {
+		var node = null;
+		Ext.each(misc, function(item) {
+			if (item.data.object_id == oid) {
+				node = item;
+				return false;
+			} else if (Ext.isDefined(item.children) && item.children.length > 0) {
+				node = this.findNodeByObjectId(item.children, oid);
+			}
+		}, this);
+		return node;
+	}
+	
 	this.init = function (config) {
 		this.setConfig(config);
 		this.setElementIds();

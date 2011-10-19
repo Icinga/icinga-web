@@ -186,7 +186,7 @@ Ext.onReady(function() {
 						}
 					}),
 					buttons: [{
-						text: 'Save these preferences',
+						text: _('Save these preferences'),
 						handler: function(b,e) {
 							var mask = new Ext.LoadMask(Ext.getBody(), {msg: _("Saving")});
 							mask.show();

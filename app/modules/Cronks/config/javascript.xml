@@ -43,10 +43,11 @@
             <!-- Search -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/search/Icinga.Cronks.search.SearchHandler.js</ae:parameter>
             
-            <!-- Formerly dynamic scripts -->
+            <!-- Formerly dynamic scripts and column renderers -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaGridFilterHandler.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaCommandHandler.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/StatusMapColumnRenderer.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/JitStatusMap.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
             

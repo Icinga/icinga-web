@@ -54,11 +54,11 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 				Ext.apply(this, {
 					insert: parentCall('insert'),
 					add: parentCall('add'),
-					doLayout: parentCall('doLayout')					
+					doLayout: parentCall('doLayout'),
+					registry : r
 				});
 				
 			}
-			
 		},
 		
 		applyParams : function(o) {
@@ -83,7 +83,7 @@ Cronk.util.scriptInterface = Ext.extend(Object, function () {
 		},
 		
 		getRegistryEntry : function() {
-			return r;
+			return this.registry;
 		},
 		
 		getParent : function() {

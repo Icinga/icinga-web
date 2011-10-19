@@ -58,6 +58,7 @@ Cronk.defaults.SETTINGS = {
 	params:			{},
 	cdata:			{},
 	cenv:			{},
+	local:          {},
 	
 	// Some default panel configs
 	layout: 		'fit'
@@ -66,7 +67,8 @@ Cronk.defaults.SETTINGS = {
 Cronk.defaults.CONFIG_ITEMS = [
 	'loaderUrl', 'params', 'crname',
 	'autoRefresh', 'cdata', 'cenv',
-	'autoLayout', 'cmpid', 'stateuid'
+	'autoLayout', 'cmpid', 'stateuid',
+	'vars'
 ];
 
 Cronk.defaults.CONFIG_COPY = [
@@ -285,6 +287,9 @@ Cronk.defaults.CONFIG_COPY = [
 			}
 			
 			delete(l.loaderUrl);
+			
+			// Space for local data exchange
+			l.local = {};
 			
 			return l;
 		}
