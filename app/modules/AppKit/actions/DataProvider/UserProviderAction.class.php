@@ -39,7 +39,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
         );
     }
     
-    private function formatUser(NsmUser $user, $simple) {
+    private function formatUser(NsmUser $user, $simple = false) {
 
         $userObject = $this->getUserAsArray($user);
         if($simple)
