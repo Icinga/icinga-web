@@ -134,20 +134,34 @@
 			
 			<!-- Iframes - [STOP] -->
 			
-			<!-- Demo cronk - [START] -->
-			<cronk name="icingaExampleCronkHelloWorld">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">Example.HelloWorld</ae:parameter>
-				<ae:parameter name="hide">true</ae:parameter>
-				<ae:parameter name="description">Just say hello to the world</ae:parameter>
-				<ae:parameter name="name">HelloWorld</ae:parameter>
-				<ae:parameter name="categories">misc</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="say_what">Hello icinga-web!</ae:parameter>
-				</ae:parameter>
-			</cronk>
-			<!-- Demo cronk - [STOP] -->
+			<!-- Tackle Cronks [START] -->
+            <cronk name="icingaTackleMainCronk">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">Tackle.Cronk</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Stumble across problems</ae:parameter>
+                <ae:parameter name="name">Tackle</ae:parameter>
+                <ae:parameter name="image">cronks.Puzzle</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="position">530</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                </ae:parameter>
+            </cronk>
+			<!-- Tackle Cronks [STOP] -->
 			
+			<!-- Demo cronk - [START] -->
+            <cronk name="icingaExampleCronkHelloWorld">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">Example.HelloWorld</ae:parameter>
+                <ae:parameter name="hide">true</ae:parameter>
+                <ae:parameter name="description">Just say hello to the world</ae:parameter>
+                <ae:parameter name="name">HelloWorld</ae:parameter>
+                <ae:parameter name="categories">misc</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="say_what">Hello icinga-web!</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            <!-- Demo cronk - [STOP] -->
 		</cronks>
 	</ae:configuration>
 </ae:configurations>
