@@ -53,11 +53,15 @@ IcingaCommandHandler.prototype = {
 				this.toolbaritem.menu.add('-');
 			}
 			
-			b.on('click', function(b, e) { this.showCommandWindow(k, v.title) }, this);
+			b.on('click', function(b, e) {this.showCommandWindow(k, v.title)}, this);
 			
 		}, this);
-		
-		
+		if(Ext.isEmpty(this.command_options.items))
+            this.toolbaritem.menu.add({
+                xtype: 'tbtext',
+				text: _("No commands are available for your user")
+                
+			});
 		
 	},
 	
@@ -98,7 +102,7 @@ IcingaCommandHandler.prototype = {
 	
 	getField : function(o) {
 		
-		oDef = {
+		var oDef = {
 			fieldLabel: o.fieldLabel,
 			name: o.fieldName,
 			value: o.fieldValue,
@@ -201,7 +205,7 @@ IcingaCommandHandler.prototype = {
 				return new Ext.Container({
 					fieldLabel: o.fieldLabel,
 					defaults: {
-						style: { padding: '0 5px 0 5px' }
+						style: {padding: '0 5px 0 5px'}
 					},
 					items: [{
 						xtype: 'numberfield',
@@ -234,7 +238,7 @@ IcingaCommandHandler.prototype = {
 						minValue: 1,
 						width: 50,
 						readOnly: true,
-						style: { background: '#00cc00' }
+						style: {background: '#00cc00'}
 					}, {
 						xtype: 'label',
 						text: _('seconds')	
@@ -356,7 +360,7 @@ IcingaCommandHandler.prototype = {
 					}, {
 						text: _('Abort'),
 						iconCls: 'icinga-icon-cross',
-						handler: function(b, e) { oWin.close(); }
+						handler: function(b, e) {oWin.close();}
 					}]
 				});
 				
@@ -364,7 +368,7 @@ IcingaCommandHandler.prototype = {
 				oWin.on('afterrender', function() {
 					this.syncSize();
 					this.syncShadow();
-				}, oWin, { delay: 40, single: true });
+				}, oWin, {delay: 40, single: true});
 				
 				var oForm = new Ext.form.FormPanel({
 					border: false,

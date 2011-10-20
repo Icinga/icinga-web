@@ -29,8 +29,14 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
                                   $commandClass = array("Console.ConsoleCommand","Api")) {
         
         try {
+            $user = $this->getContext()->getUser()->getNsmUser();
+            $onlySimple = $user->hasTarget('IcingaCommandRestrictions');
+            
             $command = $this->getCommand($cmd_name);
-            $string = $this->buildCommandString($command,$params);
+           
+            $string = $this->buildCommandString($command,$params);   
+            if($onlySimple && !$command["isSimple"])
+                throw new Exception("Could not send command. Your user isn't allowed to send this command.");
             $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
                                                  array(
                                                          "command" => "printf",

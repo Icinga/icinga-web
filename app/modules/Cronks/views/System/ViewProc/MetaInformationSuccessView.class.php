@@ -12,7 +12,13 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
             $file = AppKitFileUtil::getAlternateFilename(AgaviConfig::get('modules.cronks.xml.path.grid'), $rd->getParameter('template'), '.xml');
             $template = new CronkGridTemplateXmlParser($file);
             $template->parseTemplate();
-
+            $user = $this->getContext()->getUser()->getNsmUser();
+            $data = $template->getTemplateData();
+           
+            if($user->hasTarget('IcingaCommandRestrictions')) {
+                $template->removeRestrictedCommands();
+            }
+            
             return json_encode(array(
                                    'template'	=> $template->getTemplateData(),
                                    'fields'	=> $template->getFields(),
@@ -25,6 +31,7 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
             return $msg;
         }
     }
+    
 }
 
 ?>

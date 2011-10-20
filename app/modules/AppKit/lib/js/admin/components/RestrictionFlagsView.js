@@ -10,8 +10,14 @@ AppKit.Admin.Components.RestrictionFlagsView = Ext.extend(Ext.Panel, {
         icon: 'icinga-icon-group', 
         principal: 'IcingaContactgroup',
         id: 'flag-contacts-only',
-        text: _('Only show items that contain a contact with this name '+
+        text: _('Only show items that contain a contact with this name'+
             ' in their contactgroup definitions'
+        )
+    }, {
+        icon: 'icinga-icon-group', 
+        principal: 'IcingaCommandRestrictions',
+        id: 'flag-commands-restricted',
+        text: _('Don\'t allow critical commands (like disabling host checks)'
         )
     }],
     constructor: function(cfg) {
@@ -42,7 +48,7 @@ AppKit.Admin.Components.RestrictionFlagsView = Ext.extend(Ext.Panel, {
         Ext.Panel.prototype.constructor.call(this,cfg);
     },
     title: _('Other restrictions'),
-    iconCls: 'icinga-icon-cancel',
+    iconCls: 'icinga-icon-lock',
     padding: 10, 
     layout: 'fit',
     selectedValue: [],

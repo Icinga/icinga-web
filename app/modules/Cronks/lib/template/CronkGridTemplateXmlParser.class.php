@@ -449,6 +449,32 @@ class CronkGridTemplateXmlParser {
     public function disableCache() {
         $this->useCaching = false;
     }
+    
+    
+    public function removeRestrictedCommands() {
+        $data = $this->data;
+        if(!isset($data["option"]))
+            return;
+        if(!isset($data["option"]["commands"]))
+            return;
+
+        $items = $data["option"]["commands"]["items"];
+        if(!is_array($items))
+            return;
+        $config = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/icingaCommands.xml'));
+        $toRemove = array();
+        foreach($items as $cmd_name=>$cmd_def) {
+            if(!isset($config[$cmd_name])) {
+                $toRemove[] = $cmd_name;
+                continue;
+            }
+            if(!$config[$cmd_name]["isSimple"])
+                $toRemove[] = $cmd_name;
+        }
+        foreach($toRemove as $removeItem)
+            unset($data["option"]["commands"]["items"][$removeItem]);
+        $this->data = $data;
+    }
 }
 
 class CronkGridTemplateXmlParserException extends AppKitException { }

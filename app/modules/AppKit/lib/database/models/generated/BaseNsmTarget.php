@@ -95,12 +95,14 @@ abstract class BaseNsmTarget extends Doctrine_Record {
                    array('target_id'=>15,'target_name'=>"icinga.cronk.category.admin",'target_description'=>"Enables category admin features",'target_class'=>"",'target_type'=>"credential"),
                    array('target_id'=>16,'target_name'=>"icinga.cronk.log",'target_description'=>"Allow user to view icinga-log",'target_class'=>"",'target_type'=>"credential"),
                    array('target_id'=>17,'target_name'=>"icinga.control.view",'target_description'=>"Allow user to view icinga status",'target_class'=>"",'target_type'=>"credential"),
-                   array('target_id'=>18,'target_name'=>"icinga.control.admin",'target_description'=>"Allow user to administrate the icinga process",'target_class'=>"",'target_type'=>"credential")
-               );
+                   array('target_id'=>18,'target_name'=>"icinga.control.admin",'target_description'=>"Allow user to administrate the icinga process",'target_class'=>"",'target_type'=>"credential"),
+                   array('target_id'=>19,'target_name'=>"IcingaCommandRestrictions",'target_description'=>"Disable critical commands for this user",'target_class'=>"IcingaDataCommandRestrictionPrincipalTarget",'target_type'=>"icinga")
+
+            );
 
     }
 
     public static function getPgsqlSequenceOffsets() {
-        return array("nsm_target_target_id_seq" => 16);
+        return array("nsm_target_target_id_seq" => 20);
     }
 }

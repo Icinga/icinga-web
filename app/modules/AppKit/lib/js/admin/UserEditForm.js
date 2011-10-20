@@ -39,19 +39,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
         authTypes.push([type]);
     });
     
-    var userFlags = [{
-        icon: 'icinga-icon-user-delete',
-        principal: 'IcingaCommandRo',
-        id: 'flag-command-only',
-        text: _('Disable commands for this user')
-    }, {
-        icon: 'icinga-icon-group', 
-        principal: 'IcingaContactgroup',
-        id: 'flag-contacts-only',
-        text: _('Only show items that contain a contact with this name '+
-            ' in their contactgroup definitions'
-        )
-    }];
+   
     var userRoleStore = new Ext.data.JsonStore({
         idProperty: 'id',
         fields: ['name','active','description','id']
@@ -212,7 +200,8 @@ AppKit.Admin.UserEditForm = function(cfg) {
             params["principal_target["+i+"][name][]"] = p.get("target_name");
             i++;
         });
-        Ext.iterate(userFlags,function(flag) {
+
+        Ext.iterate(userRestrictionFlagsView.roleFlags,function(flag) {
             if(!Ext.getCmp(flag.id).getValue())
                 return true;
             params["principal_target["+i+"][set][]"] = 1;
