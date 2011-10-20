@@ -22,13 +22,15 @@ Icinga.Cronks.Tackle.Cronk = Ext.extend(Ext.Panel, {
             region : 'center'
 		});
 		
-		this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel({});
+		this.objectGrid.on('rowclick', this.rowSingleClickHandler, this);
 		
 		this.tabDefaults = new Icinga.Cronks.Tackle.Information.Default();
-		this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
-		this.tabComments = new Icinga.Cronks.Tackle.Information.Comments();
-		this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
-		this.tabServices = new Icinga.Cronks.Tackle.Information.Services();
+        this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
+        this.tabComments = new Icinga.Cronks.Tackle.Information.Comments();
+        this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
+        this.tabServices = new Icinga.Cronks.Tackle.Information.Services();
+		
+		this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
 		
 		this.infoTabs.add([
 		  this.tabDefaults,
@@ -38,20 +40,37 @@ Icinga.Cronks.Tackle.Cronk = Ext.extend(Ext.Panel, {
 		  this.tabRelations
 		])
 		
+		this.collapsibleFrame = new Ext.Panel({
+             layout : 'fit',
+             iconCls : 'icinga-icon-universal',
+             region : 'south',
+             title : _('Object'),
+             height : 300,
+             minSize : 300,
+             maxSize : 600,
+             collapsible : true,
+             split : true,
+             border : false,
+             items : this.infoTabs
+         });
+		
 		this.add([
-		  this.objectGrid, {
-		  	xtype : 'panel',
-		  	iconCls : 'icinga-icon-universal',
-		  	region : 'south',
-		  	title : _('Object'),
-		  	height : 300,
-		  	minSize : 300,
-		  	maxSize : 600,
-		  	collapsible : true,
-		  	split : true,
-		  	items : this.infoTabs
-		  }
+		  this.collapsibleFrame,
+		  this.objectGrid
 		]);
+	},
+	
+	rowSingleClickHandler : function(grid, index, e) {
+		var store = grid.getStore();
+		var record = store.getAt(index);
+		var object_id = record.data['HOST_OBJECT_ID'];
+		
+		// Notify all other tabs
+		this.tabComments.setObjectId(object_id);
+		
+		if (this.collapsibleFrame.collapsed === true) {
+			this.collapsibleFrame.expand(true);
+		}
 	}
 });
 
