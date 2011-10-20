@@ -50,6 +50,18 @@
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/StatusMapColumnRenderer.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/JitStatusMap.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
+			
+			<!-- Treegrid user extension -->
+			<ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridSorter.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGrid.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridColumnResizer.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridColumns.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridLoader.js</ae:parameter>
+            <ae:parameter>%core.root_dir%/lib/ext3/examples/ux/treegrid/TreeGridNodeUI.js</ae:parameter>
+			
+			<!-- Tackle view components -->
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Cronk.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.ObjectTree.js</ae:parameter>
             
         </javascript>
     </ae:configuration>
