@@ -383,7 +383,7 @@ span.icinga-status-warning {
 	color: #ffff00;
 }
 
-div.icinga-status-critical, div.servicechart-2 {
+td.icinga-status-critical, div.icinga-status-critical, div.servicechart-2 {
 	background-color: #ff0000;
 	color: #fff;
 }
@@ -392,7 +392,7 @@ span.icinga-status-critical {
 	color: #ff0000;
 }
 
-div.icinga-status-up, div.hostchart-0 {
+td.icinga-status-up, div.icinga-status-up, div.hostchart-0 {
 	background-color: #00cc00;
 }
 
@@ -400,7 +400,7 @@ span.icinga-status-up {
 	color: #00cc00;
 }
 
-div.icinga-status-down, div.hostchart-1 {
+td.icinga-status-down, div.icinga-status-down, div.hostchart-1 {
 	background-color: #cc0000;
 }
 
@@ -412,7 +412,7 @@ div.icinga-status-down span {
 	color: #fff;	
 }
 
-div.icinga-status-unreachable, div.hostchart-2 {
+td.icinga-status-unreachable, div.icinga-status-unreachable, div.hostchart-2 {
 	background-color: #ff8000;
 }
 
@@ -432,7 +432,7 @@ span.icinga-status-pending {
 	color: #aa3377;
 }
 
-div.icinga-status-pending {
+td.icinga-status-pending, div.icinga-status-pending {
 	background-color: #aa2277;
 }
 
@@ -957,4 +957,8 @@ tr.bp_serviceRow {
     -moz-border-radius: 0px 0px 5px 0px;
     -webkit-border-radius: 0px 0px 5px 0px;
 
+}
+
+div.icinga-row-downtime {
+    background-color: #dedede;
 }
