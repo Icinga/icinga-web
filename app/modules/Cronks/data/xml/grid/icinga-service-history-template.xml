@@ -499,7 +499,7 @@
                 </parameter>
                 
 				<parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnImage.Format</parameter>
+                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                 	<parameter name="method">formatTemplate</parameter>
 					<parameter name="arguments">
 						<parameter name="format"><![CDATA[${field.state_check_attempt} / ${field.state_max_check_attempts}]]></parameter>
