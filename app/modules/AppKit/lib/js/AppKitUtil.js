@@ -202,6 +202,34 @@ AppKit.util.Config = (function() {
 // Reset the config object
 AppKit.c = AppKit.util.Config.getMap();
 
+AppKit.util.Date = (function() {
+       var time = {}
+           time.second = 1;
+           time.minute = 60;
+           time.hour = 3600;
+           time.day  = 86400;
+       return {
+           getElapsedString: function(value) {
+                var now = new Date();
+                var valueDate = new Date(value);
+                var elapsed = parseInt(now.getElapsed(valueDate)/1000,10);
+
+                var dd = parseInt(elapsed/time.day,10);
+                elapsed %= time.day;
+                var hh = parseInt(elapsed/time.hour,10);
+                elapsed %= time.hour;
+                var mm = parseInt(elapsed/time.minute,10);
+                elapsed %= time.minute;
+                var ss = parseInt(elapsed/time.second,10);
+
+                var result = dd ? dd+_(" days, ") :"";
+                    result += hh ? hh+_(" hrs, ") : "";
+                    result += mm ? mm+_(" min, ") : "";
+                return result += ss+_(" sec. ago");
+           }
+     }
+})();
+
 // Domhelper
 AppKit.util.Dom = (function () {
 	

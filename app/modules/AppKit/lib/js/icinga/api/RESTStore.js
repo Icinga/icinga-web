@@ -1,7 +1,7 @@
 Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     target: null,
     columns: null,
-    filter: null, 
+    __filter: null, 
 
     orderColumn: null,
     orderDirection: null,
@@ -45,7 +45,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     },
 
     setFilter: function(filter) {
-        this.filter = filter;
+        this._filter = filter;
     },
 
     setOrderColumn: function(order) {
@@ -84,7 +84,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     },
     
     getFilter: function() {
-        return this.filter;
+        return this.__filter;
     },
     
     getFilterAsJson: function() { 

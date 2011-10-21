@@ -163,6 +163,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'HOST_CHILD_NAME'                =>      'oh.name1',
                           'HOST_CUSTOMVARIABLE_NAME'         =>        'cvsh.varname',
                           'HOST_CUSTOMVARIABLE_VALUE'        =>        'cvsh.varvalue',
+                          'HOST_CURRENT_PROBLEM_STATE'   =>  '(hs.current_state*(hs.problem_has_been_acknowledged-1)*(hs.scheduled_downtime_depth-1))',
                           'HOST_IS_PENDING'       =>        '(hs.has_been_checked-hs.should_be_scheduled)*-1',
                           // Service data
 
@@ -221,6 +222,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'SERVICE_CUSTOMVARIABLE_NAME'=> 'cvss.varname',
                           'SERVICE_CUSTOMVARIABLE_VALUE'=>'cvss.varvalue',
                           'SERVICE_STATE_COUNT'        => 'count(ss.current_state)',
+                          'SERVICE_CURRENT_PROBLEM_STATE'   =>  '(ss.current_state*(ss.problem_has_been_acknowledged-1)*(ss.scheduled_downtime_depth-1))',
                           'SERVICE_IS_PENDING'        =>  '(ss.has_been_checked-ss.should_be_scheduled)*-1',
 
                           // Config vars
@@ -401,6 +403,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "hgm" => array("src" => "h","relation" => "members"),
                                        "oc"  => array("src" => "cgm","relation" => "object"),
                                        "ocg"  => array("src" => "cg","relation" => "object"),
+                                       "dt"   => array("src" => "h", "relation" => "scheduledDowntimes"),
                                        "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
                                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
                                        "s" => array("src" => "os", "relation" => "service"),
@@ -969,7 +972,6 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
     
     public function setResultColumns($cols) {
         $this->checkForPending($cols);
-        
         if (is_array($cols)) {
             $this->resultColumns = array_merge($this->resultColumns,$cols);
         } else {
