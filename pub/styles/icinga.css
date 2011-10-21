@@ -297,6 +297,16 @@ div#growl-msg-stack {
     z-index: 20000;
 }
 
+/** Comments **/
+.x-icinga-comment-expander-row {
+	margin: 5px 5px 5px 5px;
+	margin: 5px;
+    padding: 5px;
+    border: 1px #333 solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
 /** Info icon **/
 
 .x-icinga-info-icon {

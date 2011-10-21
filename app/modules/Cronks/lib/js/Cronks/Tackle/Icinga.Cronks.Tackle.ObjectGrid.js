@@ -43,7 +43,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 				header : _('State'),
 				dataIndex : 'HOST_CURRENT_STATE',
                 columnWidth: 25,
-                width; 25,
+                width: 25,
                 renderer: function(value, metaData, record, rowIndex, colIndex, store) {
                     value = parseInt(value,10);
                     switch(value) {
