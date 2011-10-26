@@ -4,6 +4,11 @@
  * in that
  */
 class AppKitAgaviContext extends AgaviContext {
+    
+    private static $excludeModules = array (
+        'AppKit', 'TestDummy'
+    );
+    
     /**
      * (non-PHPdoc)
      * @see lib/agavi/src/core/AgaviContext#initialize()
@@ -52,18 +57,16 @@ class AppKitAgaviContext extends AgaviContext {
                 continue;
             $list[] = $file;
         }
-        
-      
+
         foreach($list as $mod_name) {
             try {
-               if($mod_name != 'AppKit' && $mod_name != 'TestDummy')
+               if(in_array($mod_name, self::$excludeModules) === false) {
                     AppKitAgaviUtil::initializeModule($mod_name);
+               }
             } catch(AgaviDisabledModuleException $e) {
             
             }
         }
-       
-
     }
 
 

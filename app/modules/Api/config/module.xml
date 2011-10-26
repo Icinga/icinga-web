@@ -6,10 +6,11 @@
 			<settings>
 				<setting name="title">Api Module</setting>
 				<setting name="version">1.0</setting>
-				<setting name="access"></setting>		
+				<setting name="access"></setting>
+				<setting name="agavi.include.javascript">
+                    <ae:parameter>%core.module_dir%/Api/config/javascript.xml</ae:parameter>
+                </setting>		
 			</settings>
-	
-			
 		</module>
 		
 	</ae:configuration>

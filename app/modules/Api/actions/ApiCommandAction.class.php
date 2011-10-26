@@ -1,19 +1,6 @@
 <?php
 
 class Api_ApiCommandAction extends IcingaApiBaseAction {
-    /**
-     * Returns the default view if the action does not serve the request
-     * method used.
-     *
-     * @return     mixed <ul>
-     *                     <li>A string containing the view name associated
-     *                     with this action; or</li>
-     *                     <li>An array with two indices: the parent module
-     *                     of the view to be executed and the view to be
-     *                     executed.</li>
-     *                   </ul>
-     */
-    private $instances           = array();
     
     public function getDefaultViewName() {
         return 'Success';
@@ -37,7 +24,7 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
             $validation->setError("Login error","Not logged in!");
             return false;
         }
-        if( $user->getNsmUser()->getNsmTarget()->hasTarget('IcingaCommandRo')) {
+        if( $user->getNsmUser()->getTarget('IcingaCommandRo')) {
             $validation->setError("Error","Commands are disabled for this user!");
             return false;
             
@@ -50,11 +37,8 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
         return false;
     }
 
-
-
     public function executeRead(AgaviRequestDataHolder $rd) {
-        $this->executeWrite($rd);
-
+        return $this->executeWrite($rd);
     }
 
     public function executeWrite(AgaviRequestDataHolder $rd) {
@@ -63,7 +47,7 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
         }
 
         $command = $rd->getParameter("command");
-
+        
         $targets = json_decode($rd->getParameter("target"),true);
         $data = json_decode($rd->getParameter("data"),true);
 
@@ -89,25 +73,7 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
         return 'Success';
     }
     
-    
-
-    private function buildCommandArray($command,array $targets, $data) {
-        $commands = array();
-        foreach($targets as $target)	{
-            $cmd = IcingaApiConstants::getCommandObject();
-            $cmd->setCommand($command);
-            foreach($target as $field=>$value) {
-
-                $cmd->setTarget($field,$value);
-            }
-            foreach($data as $field=>$value) {
-
-                $cmd->setTarget($field,$value);
-            }
-            $commands[] = $cmd;
-        }
-        return $commands;
+    public function handleError(AgaviRequestDataHolder $rd) {
+        return "Error";
     }
 }
-
-?>

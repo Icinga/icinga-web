@@ -25,7 +25,7 @@
 					<error>Data parameter is required</error>
 				</errors>
 			</validator>
-                        <validator name="authkey" class="string" required="false">
+            <validator name="authkey" class="string" required="false">
 				<argument>authkey</argument>
 				<errors>
 					<error>Validation of authkey failed!</error>
