@@ -764,6 +764,12 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
                           'local' => 'check_timeperiod_object_id',
                           'foreign' => 'timeperiod_object_id',
                       ));
+        $this->hasMany('IcingaSlahistory as slaentries', array(
+                           'local' => 'host_object_id',
+                           'foreign' => 'object_id'
+                            
+                       ));
+
         $this->hasMany("IcingaCustomvariablestatus as customvariablestatus", array(
                            'local' => 'host_object_id',
                            'foreign' => 'object_id'

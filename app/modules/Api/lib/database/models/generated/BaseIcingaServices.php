@@ -689,5 +689,9 @@ abstract class BaseIcingaServices extends Doctrine_Record {
                            'local' => 'service_object_id',
                            'foreign' => 'object_id'
                        ));
+        $this->hasMany('IcingaSlahistory as slaentries', array(
+                            'local' => 'host_object_id',
+                            'foreign' => 'object_id'
+                       ));
     }
 }
