@@ -1,0 +1,33 @@
+Ext.ns('Icinga.Api.Command');
+
+Icinga.Api.Command.Facade = (new (Ext.extend(Object, {
+	
+	commandSender : null,
+	
+	constructor : function() {
+		Object.prototype.constructor.call(this);
+		
+		this.commandSender = new Icinga.Api.Command.Sender({
+			autoReset : true
+		});
+	},
+	
+	/**
+	 * Interface method to send commands quickly
+	 * <pre><code>
+	 * Icinga.Api.Command.Facade.sendCommand({
+	 *     command : 'ADD_HOST_COMMENT',
+	 *     data : {author: 'test_author', comment: 'test_comment', persistent : 1},
+	 *     targets : [ {instance: 'default', host: 'test_host1'} ]
+	 * });
+	 * </code></pre>
+	 */
+	sendCommand : function(o) {
+		Ext.copyTo(this.commandSender, o, [
+	        'command', 'targets', 'data'
+		]);
+		
+		this.commandSender.send();
+	}
+	
+}))());

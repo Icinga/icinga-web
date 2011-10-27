@@ -48,5 +48,7 @@
         <autoload name="DataStoreFilterModifier">%core.module_dir%/Api/lib/datastore/DataStoreFilterModifier.class.php</autoload> 
 
 		<autoload name="IcingaCommandsConfigHandler">%core.module_dir%/Api/lib/config/IcingaCommandsConfigHandler.class.php</autoload>
+		
+		<autoload name="IcingaApiAuthentificationRoutingCallback">%core.module_dir%/Api/lib/auth/IcingaApiAuthentificationRoutingCallback.class.php</autoload>
    	</ae:configuration>
 </ae:configurations>

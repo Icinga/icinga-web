@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<ae:configuration>
-		
-		<module enabled="true">
-			<settings>
-				<setting name="title">Api Module</setting>
-				<setting name="version">1.0</setting>
-				<setting name="access"></setting>
-                <setting name="sla_settings">
-                    <!-- 
-                        The default timespan used for sla calculations 
-                        This mostly affects the 'quick overview' values like 
-                        the tackle overview (not host details)
-                    -->
-                    <ae:parameter name="default_timespan">-60 days</ae:parameter>
-                </setting>
-			</settings>
-	
-			
-		</module>
-		
-	</ae:configuration>
+    <ae:configuration>
+    	
+    	<module enabled="true">
+    		<settings>
+    			<setting name="title">Api Module</setting>
+    			<setting name="version">1.0</setting>
+    			<setting name="access"></setting>
+
+    		<setting name="sla_settings">
+    		    <!-- 
+    			The default timespan used for sla calculations 
+    			This mostly affects the 'quick overview' values like 
+    			the tackle overview (not host details)
+    		    -->
+    		    <ae:parameter name="default_timespan">-60 days</ae:parameter>
+    		</setting>
+
+    		<setting name="agavi.include.javascript">
+
+    		    <ae:parameter>%core.module_dir%/Api/config/javascript.xml</ae:parameter>
+    		</setting>		
+
+    		</settings>
+    	</module>
+    	
+    </ae:configuration>
 </ae:configurations>
