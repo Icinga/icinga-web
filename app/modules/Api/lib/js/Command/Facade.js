@@ -4,12 +4,20 @@ Icinga.Api.Command.Facade = (new (Ext.extend(Object, {
 	
 	commandSender : null,
 	
+	commandInfo : null,
+	
 	constructor : function() {
 		Object.prototype.constructor.call(this);
 		
 		this.commandSender = new Icinga.Api.Command.Sender({
 			autoReset : true
 		});
+		
+		this.commandInfo = new Icinga.Api.Command.Info({
+			autoLoad : false
+		});
+		
+		this.commandInfo.loadCommandDefinitions.defer(300, this.commandInfo);
 	},
 	
 	/**
@@ -28,6 +36,10 @@ Icinga.Api.Command.Facade = (new (Ext.extend(Object, {
 		]);
 		
 		this.commandSender.send();
+	},
+	
+	getCommand : function(commandNameOrEmpty) {
+		return this.commandInfo.get(commandNameOrEmpty);
 	}
 	
 }))());
