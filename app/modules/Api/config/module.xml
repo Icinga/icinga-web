@@ -6,7 +6,15 @@
 			<settings>
 				<setting name="title">Api Module</setting>
 				<setting name="version">1.0</setting>
-				<setting name="access"></setting>		
+				<setting name="access"></setting>
+                <setting name="sla_settings">
+                    <!-- 
+                        The default timespan used for sla calculations 
+                        This mostly affects the 'quick overview' values like 
+                        the tackle overview (not host details)
+                    -->
+                    <ae:parameter name="default_timespan">-60 days</ae:parameter>
+                </setting>
 			</settings>
 	
 			
