@@ -12,24 +12,120 @@
  */
 class IcingaSlahistoryTable extends Doctrine_Table {
 
-    private static function registerSLAQueries($prefix, $driver) {
-        switch($driver) {
-            case 'icingaOracle':
-            case 'oracle':
-                self::registerOracleQueries($prefix);
-                break;
-            case 'mysql':
-                self::registerMysqlQueries($prefix);
-                break;
-            case 'pgsql':
-                self::registerPsqlQueries($prefix);
+    private static function buildWherePart(Api_SLA_SLAFilterModel $filter, $prefix, $date = "now()") {
+        $q = " WHERE ";
+        $AND = false;
+        $params = array();
+        
+        $states = $filter->getStates();
+        $startTime = $filter->getStartTime();
+        $endTime = $filter->getEndTime();
+        $hostnamePatterns = $filter->getHostnamePattern();
+        $servicenamePatterns = $filter->getServicenamePattern();
+        $instanceIds = $filter->getInstanceIds();
+        $objectIds = $filter->getObjectIds();
+
+        if(!empty($states)) {
+            $c = 0;
+            foreach($states as $state) { 
+                if($c) $q .= " OR ";
+                $q .= "(state*(scheduled_downtime-1)*-1) = :states_".$c." ";
+                $params["states_".$c++] = $state;
+            }
+            $AND = true;
         }
+        if($startTime) {
+            if($AND) $q .= " AND ";
+            $q .= "(start_time  <= (SELECT start_time FROM slahistory WHERE start_time <= :starttime AND rownum <= 1)) "; 
+            $params["starttime"] = $startTime;
+            $AND = true;
+        }
+        if($endTime) {
+            if($AND) $q .= " AND ";
+            $q .= "(COALESCE(acknowledgement_time,end_time,$date) <= :endtime )"; 
+            $params["endtime"] = $endTime;
+            $AND = true;
+        }
+        if($filter->getIncludeHosts() && !$filter->getIncludeServices()) {
+     
+            if($AND) $q .= " AND ";
+            $q .= "obj.objecttype_id = 1 "; 
+            $AND = true;
+        }
+        if($filter->getIncludeServices() && !$filter->getIncludeHosts()) {
+            if($AND) $q .= " AND ";
+            $q .= "obj.objecttype_id = 2 "; 
+            $AND = true;
+        }
+        if(!empty($hostnamePatterns)) {
+            if($AND) $q .= " AND ";
+            $q .= "(";
+            $c = 0;
+
+            foreach($hostnamePatterns as $p) {
+                if($c)
+                    $q .= " OR ";
+                $q .= "obj.name1 LIKE :hostnamepattern_".$c." ";
+                $params["hostnamepattern_".($c++)] = $p;
+            }
+            $q .= ")";
+            $AND = true;
+        }
+        if(!empty($servicenamePatterns)) {
+            if($AND) $q .= " AND ";
+            $q .= "(";
+            $c = 0;
+            foreach($servicenamePatterns as $p) {
+                if($c)
+                    $q .= " OR ";
+                $q .= "obj.name1 LIKE :servicenamepattern_".$c." ";
+                $params["servicenamepattern_".($c++)] = $p;
+            }
+            $q .= ")";
+            $AND = true;
+        }
+        if(!empty($instanceIds)) {
+            if($AND) $q .= " AND ";
+            $c = 0;
+            $q .= "(";
+
+            foreach($instanceIds as $id) {
+                if($c)
+                    $q .= " OR ";
+                $q .= "obj.instance_id = :instance_id".$c." ";
+                $params["instance_id".$c++] = $id;
+            }
+            $q .= ") ";
+            
+            $AND = true;
+        }
+        
+        if(!empty($objectIds)) {
+            if($AND) $q .= " AND ";
+            $c = 0;
+            $q .= "(";
+
+            foreach($objectIds as $id) {
+                if($c)
+                    $q .= " OR ";
+                $q .= "s.object_id = :object_id".$c." ";
+                $params["object_id".$c++] = $id;
+            }
+            $q .= ") ";
+            
+            $AND = true;
+        }
+        
+        if(!$AND)
+            return array("wherePart" => "", "params" => array()); // no filter
+
+        return array("wherePart" => $q, "params" => $params);
     }
     
-    private static function registerOracleQueries($prefix) {    
-        $query = "
-        WITH slatable AS (
-            SELECT 
+    
+    public static function getOracleSummaryQuery($prefix,$filter = null) {    
+        $dbh = AgaviContext::getInstance()->getDatabaseConnection("icinga")->getDbh();
+        $mainQuery = "SELECT 
                 (state*(scheduled_downtime-1)*-1) as sla_state, 
                 object_id, 
                 scheduled_downtime, 
@@ -40,46 +136,54 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                         CURRENT_DATE-start_time
                     )
                  )*60*60*24 AS duration 
-             FROM ".$prefix."slahistory
-             GROUP BY 
-                 sla_state, 
+             FROM ".$prefix."slahistory s INNER JOIN ".$prefix.
+                "objects obj ON obj.id = s.object_id ";
+        
+        if($filter) {
+            $filterParts = self::buildWherePart($filter,$prefix,"CURRENT_DATE");
+            $mainQuery .= $filterParts["wherePart"];
+        }
+        $mainQuery .= " GROUP BY 
+                 (state*(scheduled_downtime-1)*-1), 
                  object_id, 
-                 scheduled_downtime
-        ),
-        completeDuration AS (
-             SELECT object_id,
-                SUM(
-                    COALESCE(
-                        acknowledgement_time-start_time,
-                        end_time-start_time,
-                        CURRENT_DATE-start_time
-                    )*60*60*24
-                ) AS complete 
-              FROM ".$prefix."slahistory 
-              GROUP BY object_id
-        ) 
-        SELECT 
-            s.object_id, 
-            s.sla_state, 
-            SUM(s.duration/c.complete*100)
-        FROM slatable s 
-        INNER JOIN 
-            completeDuration c 
-            ON 
-                c.object_id = s.object_id          
-        GROUP BY s.object_id, s.sla_state
-";
-    }   
+                 scheduled_downtime";
+        
+        $stmt = $dbh->prepareBase($query = "
+            WITH slatable as (".$mainQuery." ),
+        
+            completeDuration AS (
+                 SELECT object_id,
+                    SUM(
+                        COALESCE(
+                            acknowledgement_time-start_time,
+                            end_time-start_time,
+                            CURRENT_DATE-start_time
+                        )*60*60*24
+                    ) AS complete 
+                  FROM ".$prefix."slahistory 
+                  GROUP BY object_id
+            ) 
+            SELECT 
+                s.object_id, 
+                s.sla_state, 
+                SUM(s.duration/c.complete*100) as percentage
+            FROM slatable s 
+            INNER JOIN 
+                completeDuration c 
+                ON 
+                    c.object_id = s.object_id          
+            GROUP BY s.object_id, s.sla_state
+        ");
+      foreach($filterParts["params"] as $param=>$value)
+          $stmt->bindValue($param,$value);
+      return $stmt;
+    }
+    
+    public static function getMySQLummaryQuery($prefix,$filter = null) {   
+        $dbh = AgaviContext::getInstance()->getDatabaseConnection("icinga")->getDbh();
 
-    public static function registerMysqlQueries($prefix) {    
-        return  "
-        SELECT 
-            slahistory_main.sla_state, 
-            slahistory_main.object_id, 
-            SUM(slahistory_main.duration/s.complete*100) 
-        FROM
-            (SELECT 
-                object_id,
+        $mainQuery = "(SELECT 
+                s.object_id,
                 state*(scheduled_downtime-1)*-1 as sla_state,
                 SUM(
                     COALESCE(
@@ -88,74 +192,46 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                         UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                     )
                 ) as duration          
-             FROM ".$prefix."slahistory 
+             FROM ".$prefix."slahistory s
+             INNER JOIN ".$prefix."objects obj ON obj.object_id = s.object_id ";
+
+        if($filter) {
+            $filterParts = self::buildWherePart($filter,$prefix);
+            $mainQuery .= $filterParts["wherePart"];
+        }
+        
+        $mainQuery .= "
              GROUP BY 
                  state*(scheduled_downtime-1)*-1,
                  object_id
-             ) slahistory_main 
-             INNER JOIN (
-                 SELECT object_id,
-                 SUM(
-                     COALESCE(
-                         UNIX_TIMESTAMP(acknowledgement_time)-UNIX_TIMESTAMP(start_time),
-                         UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time),
-                         UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
-                     )         
-                ) as complete FROM ".$prefix."slahistory 
-                GROUP BY 
-                    object_id     
-             ) as s ON slahistory_main.object_id = s.object_id  
-         GROUP BY 
-            slahistory_main.object_id,
-            slahistory_main.sla_state;
-";
-    }
-    
-    private static function registerPsqlQueries($prefix) {
-        $registry = Doctrine_Manager::getInstance()->getQueryRegistry(); 
-        $query_wDowntime = "
-        WITH slatable AS (
+             ) slahistory_main";
+                
+        $stmt = $dbh->prepare("
             SELECT 
-                (state*(scheduled_downtime-1)*-1) as sla_state, 
-                object_id, 
-                scheduled_downtime, 
-                SUM(
-                    date_part('epoch',COALESCE(
-                        acknowledgement_time-start_time,
-                        end_time-start_time,
-                        CURRENT_DATE-start_time
-                    ))
-                 ) AS duration 
-             FROM ".$prefix."slahistory
+                slahistory_main.sla_state AS SLA_STATE, 
+                slahistory_main.object_id AS OBJECT_ID, 
+                SUM(slahistory_main.duration/s.complete*100) AS PERCENTAGE
+            FROM
+                 $mainQuery 
+                 INNER JOIN (
+                     SELECT object_id,
+                     SUM(
+                         COALESCE(
+                             UNIX_TIMESTAMP(acknowledgement_time)-UNIX_TIMESTAMP(start_time),
+                             UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time),
+                             UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
+                         )         
+                    ) as complete FROM ".$prefix."slahistory 
+                    GROUP BY 
+                        object_id     
+                 ) as s ON slahistory_main.object_id = s.object_id  
              GROUP BY 
-                 sla_state, 
-                 object_id, 
-                 scheduled_downtime
-        ),
-        completeDuration AS (
-             SELECT object_id,
-                SUM(
-                    date_part('epoch',COALESCE(
-                        acknowledgement_time-start_time,
-                        end_time-start_time,
-                        CURRENT_DATE-start_time
-                    ))
-                ) AS complete 
-              FROM ".$prefix."slahistory 
-              GROUP BY object_id
-        ) 
-        SELECT 
-            s.object_id, 
-            s.sla_state, 
-            SUM(s.duration/c.complete*100)
-        FROM slatable s 
-        INNER JOIN 
-            completeDuration c 
-            ON 
-                c.object_id = s.object_id          
-        GROUP BY s.object_id, s.sla_state";
-    
-        }
-       
-    
+                slahistory_main.object_id,
+                slahistory_main.sla_state;");
+        foreach($filterParts["params"] as $param=>$value)
+            $stmt->bindValue($param,$value);
+        
+        return $stmt;
+        
+    }
 }

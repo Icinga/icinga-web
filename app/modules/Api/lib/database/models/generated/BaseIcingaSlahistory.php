@@ -20,7 +20,7 @@
  * @author     ##NAME## <##EMAIL##>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-abstract class BaseIcingaSlahistoory extends Doctrine_Record {
+abstract class BaseIcingaSlahistory extends Doctrine_Record {
     public function setTableDefinition() {
         $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaConfiginfo")->getPrefix();
         $this->setTableName($prefix.'slahistory');
