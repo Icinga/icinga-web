@@ -5,7 +5,7 @@
             Global parameter definition, can be referenced to by <ic:parameter ref="COMMAND_INSTANCE"/> for example 
         -->
         <ic:parameters>
-            <ic:parameter name="COMMAND_INSTANCE" alias="instance" type="ro" required="true"/>
+            <ic:parameter name="COMMAND_INSTANCE" alias="instance" type="ro" required="true" />
             <ic:parameter name="COMMAND_HOSTGROUP" alias="hostgroup" type="ro" required="true"/>
             <ic:parameter name="COMMAND_SERVICEGROUP" alias="servicegroup" type="ro" required="true"/>
             <ic:parameter name="COMMAND_HOST" alias="host" type="ro" required="true"/>

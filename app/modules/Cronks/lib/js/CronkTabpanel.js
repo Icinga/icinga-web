@@ -54,13 +54,13 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.panel.DDTabPanel, {
 			
 			// Item does not exist anymore
 			if (this.items.get(item) === false) {
-				this.item.splice(number, 1);
+				this.tabOrder.splice(number, 1);
 				return false;
 			}
 			
 			// Doubled entry
 			if (lastItem === item) {
-				this.item.splice(number-1, 1);
+				this.tabOrder.splice(number-1, 1);
 			}
 			
 			lastItem = item;
