@@ -38,11 +38,11 @@
             <ae:parameter>%core.root_dir%/lib/jit/jit-yc.js</ae:parameter>
             
             <!-- Cronks -->
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Icinga.Cronks.System.StatusOverall.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Icinga.Cronks.System.CronkPortal.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusOverall.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/CronkPortal.js</ae:parameter>
             
             <!-- Search -->
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/search/Icinga.Cronks.search.SearchHandler.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/search/SearchHandler.js</ae:parameter>
             
             <!-- Formerly dynamic scripts and column renderers -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
@@ -53,14 +53,16 @@
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
 			
 			<!-- Tackle view components -->
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Cronk.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.ObjectGrid.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.InfoTabPanel.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Information.Default.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Information.Commands.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Information.Comments.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Information.Services.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Icinga.Cronks.Tackle.Information.Relations.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Cronk.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Renderer/ServiceHealthRenderer.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Renderer/StatusColumnRenderer.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ObjectGrid.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/InfoTabPanel.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Default.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Commands.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Comments.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Services.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Relations.js</ae:parameter>
             
         </javascript>
     </ae:configuration>
