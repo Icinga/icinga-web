@@ -11,12 +11,40 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class IcingaSlahistoryTable extends Doctrine_Table {
-
-    private static function buildWherePart(Api_SLA_SLAFilterModel $filter, $prefix, $date = "now()") {
+    
+    /**
+     * TODO: REFACTOR
+     * @param Api_SLA_SLAFilterModel $filter
+     * @param type $prefix
+     * @param type $date
+     * @return type 
+     */
+    private static function buildWherePart(Doctrine_Connection $c,Api_SLA_SLAFilterModel $filter) {
         $q = " WHERE ";
         $AND = false;
         $params = array();
+        $driver = $c->getDriverName();
+        $prefix = $c->getPrefix();
+        $date = "CURRENT_DATE";
+        if(strtolower($driver) == "mysql")
+            $now = "now()";
         
+        $DATE_FORMAT;
+        $DATE;
+        switch(strtolower($c->getDriverName())) {
+            case 'oracle':
+            case 'pgsql':
+            case 'icingaOracle':
+                $DATE_FORMAT = "'YYYY-MM-DD HH24:MI:SS'";
+                $DATE = "TO_DATE";
+                break;
+            case 'mysql':
+                $DATE_FORMAT = "'%Y-%m-%d %H:%i:%s'";
+                $DATE = "STR_TO_DATE";
+                break;
+                
+        }
+         
         $states = $filter->getStates();
         $startTime = $filter->getStartTime();
         $endTime = $filter->getEndTime();
@@ -36,7 +64,27 @@ class IcingaSlahistoryTable extends Doctrine_Table {
         }
         if($startTime) {
             if($AND) $q .= " AND ";
-            $q .= "(start_time  <= (SELECT start_time FROM slahistory WHERE start_time <= :starttime AND rownum <= 1)) "; 
+            if(strtolower($driver) == "icingaoracle" || strtolower($driver) == "oracle")
+                $q .= "(start_time  >= 
+                    COALESCE(
+                        (SELECT start_time 
+                        FROM (
+                            SELECT start_time 
+                            FROM timerange 
+                            WHERE 
+                                start_time <= $DATE(:starttime,$DATE_FORMAT) 
+                            ORDER BY start_time ASC
+                        ) WHERE ROWNUM = 1 ),
+                        (SELECT start_time 
+                        FROM (
+                            SELECT start_time 
+                            FROM timerange 
+                            ORDER BY start_time ASC
+                        ) WHERE rownum <=1)
+                    ) 
+                )"; 
+            else
+                $q .= "(start_time  >= COALESCE((SELECT start_time FROM timerange WHERE start_time <= $DATE(:starttime,$DATE_FORMAT) ORDER BY start_time ASC LIMIT 1), (SELECT start_time FROM timerange ORDER BY start_time ASC LIMIT 1)))";
             $params["starttime"] = $startTime;
             $AND = true;
         }
@@ -122,51 +170,137 @@ class IcingaSlahistoryTable extends Doctrine_Table {
         return array("wherePart" => $q, "params" => $params);
     }
     
+    /**
+     * Returns the SLA Summary (@see IcingaSLASummary) for this filter
+     * 
+     * @param Doctrine_Connection $dbConnection
+     * @param type $filter
+     * @return Doctrine_Collection 
+     */
+    public static function getSummary(Doctrine_Connection $dbConnection =null, $filter = null) {
+        if($dbConnection == null)
+            $dbConnection = AgaviContext::getInstance()->getDatabaseConnection("icinga");
+
+        $driver = $dbConnection->getDriverName();
+        $stmt = null;
+        switch(strtolower($driver)) {
+            case 'pgsql':
+                $stmt = self::getPgsqlSummaryQuery($dbConnection, $filter);
+                break;
+            case 'oracle':
+            case 'icingaoracle':
+                $stmt = self::getOracleSummaryQuery($dbConnection,$filter);
+                break;
+            case 'mysql':
+                $stmt = self::getMySQLSummaryQuery($dbConnection,$filter);
+                break;
+            default:
+                throw new AppKitDoctrineException("Invalid driver ".$driver);
+        }
+        $stmt->execute();
+        $result = new Doctrine_Collection("IcingaSLASummary");
+        
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $record = new IcingaSLASummary();
+            foreach($row as $key=>$value) {
+                $record->{strtolower($key)} = $value;
+            }
+            $result->add($record);
+        }
+        
+        return $result;        
+    }
+
+    private static function getTimeRangeQuery(Doctrine_Connection $c, $filter) {
+        $prefix = $c->getPrefix();
+        $startTime = $filter->getStartTime();
+        $endTime = $filter->getEndTime();
+        $DATE_FORMAT;
+        $DATE;
+        switch(strtolower($c->getDriverName())) {
+            case 'oracle':
+            case 'pgsql':
+            case 'icingaOracle':
+                $DATE_FORMAT = "'YYYY-MM-DD HH24:MI:SS'";
+                $DATE = "TO_DATE";
+                break;
+            case 'mysql':
+                $DATE_FORMAT = "'%Y-%m-%d %H:%i:%s'";
+                $DATE = "STR_TO_DATE";
+                break;
+                
+        }
+        if(!$startTime && !$endTime)
+            return "SELECT * FROM ".$prefix."slahistory";
+        $timeRange = "SELECT state, object_id, scheduled_downtime,acknowledgement_time";
+        if(!$startTime)
+            $timeRange .= ",start_time";
+        else 
+            $timeRange .= "
+                ,CASE 
+                   WHEN start_time < $DATE('$startTime',$DATE_FORMAT) AND
+                        COALESCE(acknowledgement_time,end_time) > $DATE('$startTime',$DATE_FORMAT) THEN $DATE('$startTime',$DATE_FORMAT)
+                   ELSE start_time 
+                END AS start_time";
+
+        if(!$endTime)
+            $timeRange .= ",end_time";
+        else 
+            $timeRange .= "
+                ,CASE 
+                   WHEN COALESCE(acknowledgement_time,end_time) < $DATE('$endTime',$DATE_FORMAT) THEN $DATE('$endTime',$DATE_FORMAT)
+                   ELSE end_time 
+                END AS end_time";
+        return $timeRange." FROM ".$prefix."slahistory";
+    }
     
-    public static function getOracleSummaryQuery($prefix,$filter = null) {    
-        $dbh = AgaviContext::getInstance()->getDatabaseConnection("icinga")->getDbh();
+    
+    private static function getPgsqlSummaryQuery(Doctrine_Connection $c, $filter = null) {
+        $dbh = $c->getDbh();
+        $prefix = $c->getPrefix();
         $mainQuery = "SELECT 
                 (state*(scheduled_downtime-1)*-1) as sla_state, 
-                object_id, 
+                s.object_id, 
                 scheduled_downtime, 
-                SUM(
+                SUM(date_part('epoch',
                     COALESCE(
                         acknowledgement_time-start_time,
                         end_time-start_time,
                         CURRENT_DATE-start_time
                     )
-                 )*60*60*24 AS duration 
-             FROM ".$prefix."slahistory s INNER JOIN ".$prefix.
-                "objects obj ON obj.id = s.object_id ";
+                 )) AS duration FROM timeRange s INNER JOIN ".$prefix.
+                "objects obj ON obj.object_id = s.object_id ";
         
         if($filter) {
-            $filterParts = self::buildWherePart($filter,$prefix,"CURRENT_DATE");
+            $filterParts = self::buildWherePart($c,$filter);
             $mainQuery .= $filterParts["wherePart"];
         }
         $mainQuery .= " GROUP BY 
                  (state*(scheduled_downtime-1)*-1), 
-                 object_id, 
+                 s.object_id, 
                  scheduled_downtime";
         
-        $stmt = $dbh->prepareBase($query = "
-            WITH slatable as (".$mainQuery." ),
-        
+        $timeRangeQuery = self::getTimeRangeQuery($c,$filter);
+        $stmt = $dbh->prepare($query = "
+            WITH 
+                timeRange AS (".$timeRangeQuery."),
+                slatable as (".$mainQuery." ),
             completeDuration AS (
                  SELECT object_id,
-                    SUM(
+                    SUM(date_part('epoch',
                         COALESCE(
                             acknowledgement_time-start_time,
                             end_time-start_time,
                             CURRENT_DATE-start_time
-                        )*60*60*24
+                        ))
                     ) AS complete 
-                  FROM ".$prefix."slahistory 
+                  FROM timeRange
                   GROUP BY object_id
             ) 
             SELECT 
-                s.object_id, 
-                s.sla_state, 
-                SUM(s.duration/c.complete*100) as percentage
+                s.object_id AS OBJECT_ID, 
+                s.sla_state AS SLA_STATE, 
+                SUM(s.duration/c.complete*100) as PERCENTAGE
             FROM slatable s 
             INNER JOIN 
                 completeDuration c 
@@ -174,16 +308,80 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                     c.object_id = s.object_id          
             GROUP BY s.object_id, s.sla_state
         ");
-      foreach($filterParts["params"] as $param=>$value)
-          $stmt->bindValue($param,$value);
-      return $stmt;
+       
+      
+        foreach($filterParts["params"] as $param=>$value)
+            $stmt->bindValue($param,$value);
+        return $stmt;
+        
     }
     
-    public static function getMySQLummaryQuery($prefix,$filter = null) {   
-        $dbh = AgaviContext::getInstance()->getDatabaseConnection("icinga")->getDbh();
-
+    private static function getOracleSummaryQuery(Doctrine_Connection $c, $filter = null) {    
+        $dbh = $c->getDbh();
+        $prefix = $c->getPrefix();
+        $mainQuery = "SELECT 
+                (state*(scheduled_downtime-1)*-1) as sla_state, 
+                s.object_id, 
+                scheduled_downtime, 
+                SUM(
+                    COALESCE(
+                        acknowledgement_time-start_time,
+                        end_time-start_time,
+                        CURRENT_DATE-start_time
+                    )
+                 )*86400 AS duration FROM timeRange s INNER JOIN ".$prefix.
+                "objects obj ON obj.id = s.object_id ";
+        
+        if($filter) {
+            $filterParts = self::buildWherePart($c,$filter);
+            $mainQuery .= $filterParts["wherePart"];
+        }
+        $mainQuery .= " GROUP BY 
+                 (state*(scheduled_downtime-1)*-1), 
+                 s.object_id, 
+                 scheduled_downtime";
+        
+        $timeRangeQuery = self::getTimeRangeQuery($c,$filter);
+        $stmt = $dbh->prepareBase($query = "
+            WITH 
+                timeRange AS (".$timeRangeQuery."),
+                slatable as (".$mainQuery." ),
+            completeDuration AS (
+                 SELECT object_id,
+                    SUM(
+                        COALESCE(
+                            acknowledgement_time-start_time,
+                            end_time-start_time,
+                            CURRENT_DATE-start_time
+                        )
+                    )*86400 AS complete 
+                  FROM timeRange
+                  GROUP BY object_id
+            ) 
+            SELECT 
+                s.object_id AS OBJECT_ID, 
+                s.sla_state AS SLA_STATE, 
+                SUM(s.duration/c.complete*100) as PERCENTAGE
+            FROM slatable s 
+            INNER JOIN 
+                completeDuration c 
+                ON 
+                    c.object_id = s.object_id          
+            GROUP BY s.object_id, s.sla_state
+        ");
+       
+      
+        foreach($filterParts["params"] as $param=>$value)
+            $stmt->bindValue($param,$value);
+        return $stmt;
+    }
+    
+    private static function getMySQLSummaryQuery(Doctrine_Connection $c, $filter = null) {   
+        $dbh = $c->getDbh();
+        $prefix = $c->getPrefix();
+        // MYSQL has no with clause, so we need two queries
         $mainQuery = "(SELECT 
-                s.object_id,
+                tr.object_id,
                 state*(scheduled_downtime-1)*-1 as sla_state,
                 SUM(
                     COALESCE(
@@ -192,21 +390,36 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                         UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                     )
                 ) as duration          
-             FROM ".$prefix."slahistory s
-             INNER JOIN ".$prefix."objects obj ON obj.object_id = s.object_id ";
-
+             FROM  timerange tr
+             INNER JOIN ".$prefix."objects obj ON obj.object_id = tr.object_id ";
+        
         if($filter) {
-            $filterParts = self::buildWherePart($filter,$prefix);
+            $filterParts = self::buildWherePart($c,$filter);
             $mainQuery .= $filterParts["wherePart"];
         }
         
         $mainQuery .= "
+            
              GROUP BY 
                  state*(scheduled_downtime-1)*-1,
                  object_id
              ) slahistory_main";
-                
-        $stmt = $dbh->prepare("
+        
+        $result = $dbh->query($query = "
+
+            START TRANSACTION;
+            DROP VIEW IF EXISTS timerange;
+            CREATE ALGORITHM=MERGE VIEW timerange AS
+                ".self::getTimeRangeQuery($c,$filter).";");
+        echo $query."<br/>";
+        if($result == false) {
+            $err = $dbh->errorInfo();
+            throw new PDOException($err[0],$err[1],$err[2]);
+        }
+         
+       
+        $stmt = $dbh->prepare($query = "
+            
             SELECT 
                 slahistory_main.sla_state AS SLA_STATE, 
                 slahistory_main.object_id AS OBJECT_ID, 
@@ -221,17 +434,21 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                              UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time),
                              UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                          )         
-                    ) as complete FROM ".$prefix."slahistory 
+                    ) as complete FROM timerange
                     GROUP BY 
                         object_id     
                  ) as s ON slahistory_main.object_id = s.object_id  
              GROUP BY 
                 slahistory_main.object_id,
-                slahistory_main.sla_state;");
+                slahistory_main.sla_state;
+                
+             DROP VIEW timerange;
+         ");
+        echo $query;
         foreach($filterParts["params"] as $param=>$value)
             $stmt->bindValue($param,$value);
         
         return $stmt;
-        
+       
     }
 }
