@@ -9,6 +9,12 @@ Icinga.Api.Command.FormAction = Ext.extend(Ext.form.Action, {
 	command : {},
 	
 	constructor : function(form, options) {
+		
+		Ext.applyIf(options, {
+            clientValidation : true,
+            waitMsg : _('Sending command . . .')
+		});
+		
 		Icinga.Api.Command.FormAction.superclass.constructor.call(this, form, options);
 		
 		if (Ext.isEmpty(options.targets) === false) {
@@ -24,7 +30,7 @@ Icinga.Api.Command.FormAction = Ext.extend(Ext.form.Action, {
 		});
 		
 		this.commandSender.on('success', this.success.createDelegate(this));
-		this.commandSender.on('error', this.failure.createDelegate(this));
+		this.commandSender.on('failure', this.failure.createDelegate(this));
 	},
 	
 	setTargets : function(targets) {
@@ -40,11 +46,11 @@ Icinga.Api.Command.FormAction = Ext.extend(Ext.form.Action, {
 		if(o.clientValidation === false || this.form.isValid()) {
 			var data = this.form.getFieldValues();
 			
-			this.commandSender.send({
-				command : this.command.definition,
-				targets : this.targets,
-				data : data
-			});
+			this.commandSender.setCommand(this.command.definition);
+			this.commandSender.setData(data);
+			this.commandSender.addTarget(this.targets);
+			
+			this.commandSender.send();
 			
 		} else if (o.clientValidation !== false){ // client validation failed
             this.failureType = Ext.form.Action.CLIENT_INVALID;
@@ -53,6 +59,7 @@ Icinga.Api.Command.FormAction = Ext.extend(Ext.form.Action, {
 	},
 	
 	success : function() {
+		this.form.clearInvalid();
 		this.form.afterAction(this, true);
 	},
 	

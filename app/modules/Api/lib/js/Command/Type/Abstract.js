@@ -21,7 +21,6 @@ Icinga.Api.Command.Type.Abstract = Ext.extend(Ext.form.FormPanel, {
 	
 	renderSubmit : false,
 	cancelHandler : null,
-    bbar : null,
 	
     xtypeMap : {
         date : 'datefield',
@@ -62,13 +61,7 @@ Icinga.Api.Command.Type.Abstract = Ext.extend(Ext.form.FormPanel, {
     	
     	this.registerHandlers();
     	
-    	var aOptions = Ext.apply({
-    		clientValidation : true,
-    		waitMsg : _('Sending command . . .')
-    	}, 
-    	this.initialConfig);
-    	
-    	AppKit.log(aOptions);
+    	var aOptions = Ext.apply({}, this.initialConfig);
     	
     	this.formAction = new Icinga.Api.Command.FormAction(this.getForm(), aOptions);
     	
@@ -83,10 +76,6 @@ Icinga.Api.Command.Type.Abstract = Ext.extend(Ext.form.FormPanel, {
     	this.form.on('actioncomplete', function(form, action) {
             this.disable();
         }, this);
-        
-        if (this.cancelHandler !== null) {
-            this.form.on('actionfailed', this.cancelhandler, this);
-        }
     },
     
     createSubmitBar : function() {
