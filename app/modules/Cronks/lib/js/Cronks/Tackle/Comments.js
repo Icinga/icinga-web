@@ -1,6 +1,7 @@
 Ext.ns('Icinga.Cronks.Tackle.Information');
 
 Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
+	type : null,
 	
 	title : _('Comments'),
 	iconCls : 'icinga-icon-comment',
@@ -10,6 +11,11 @@ Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
 	border : false,
 	
     constructor : function(config) {
+    	
+    	if (Ext.isEmpty(config.type)) {
+    		throw("config.type is needed: host or service!");
+    	}
+    	
         Icinga.Cronks.Tackle.Information.Comments.superclass.constructor.call(this, config);
     },
     
@@ -26,6 +32,8 @@ Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
     	
         Icinga.Cronks.Tackle.Information.Comments.superclass.initComponent.call(this);
         
+        this.on('activate', this.onActivate, this);
+        
         this.setLayout(new Ext.layout.FitLayout(Ext.apply({}, this.layoutConfig)));
         
         this.store = new Icinga.Api.RESTStore({
@@ -33,6 +41,7 @@ Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
         	idIndex : 0,
         	target : 'comment',
         	columns : [
+        	   'INSTANCE_NAME',
         	   'COMMENT_ID',
         	   'COMMENT_DATA',
         	   'COMMENT_AUTHOR_NAME',
@@ -62,6 +71,18 @@ Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
         		}, {
         			header : _('Author'),
         			dataIndex : 'COMMENT_AUTHOR_NAME'
+        		}, {
+        			header : "",
+        			dataIndex : "",
+        			width: 16,
+        			fixed : true,
+        			renderer : Icinga.Cronks.Tackle.Renderer.Generic.showIconCls.createDelegate(this, [{
+        					iconCls : 'icinga-icon-delete', 
+        					qtip : _('Delete comment')
+        			}], true),
+        			listeners : {
+        				click : this.onDeleteComment.createDelegate(this)
+        			}
         		}]
         	}),
         	
@@ -79,20 +100,53 @@ Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
         this.doLayout();
     },
     
-    setObjectId : function(oid) {
-    	if (oid === this.objectId && this.dataLoaded === true) {
-    		return true;
-    	} 
+    onDeleteComment : function(renderer, grid, rowIndex, event) {
     	
-    	this.loadCommentsForObjectId(oid);
+    	var data = grid.store.getAt(rowIndex).data;
+    	var command = "DEL_" + this.type.toUpperCase() + "_COMMENT";
+    	
+    	Ext.Msg.show({
+    		title : _('Confirmation'),
+    		msg : String.format(_('Delete comment {0}?'), data.COMMENT_ID),
+    		buttons : Ext.Msg.YESNO,
+    		icon: Ext.MessageBox.QUESTION,
+    		scope : this,
+    		fn : function(buttonId, text, opt) {
+    			if (buttonId === 'yes') {
+                    Icinga.Api.Command.Facade.sendCommand({
+                        command : command,
+                        targets : [{instance : data.INSTANCE_NAME}],
+                        data : {comment_id : data.COMMENT_ID}
+                    });
+                    
+                    this.store.reload();
+    			}
+    		}
+    		
+   	    });
+    },
+    
+    setObjectId : function(oid) {
+    	if (oid !== this.objectId) {
+    		this.objectId = oid;
+    		this.dataLoaded = false;
+    		if (this.isVisible() === true) {
+    			this.onActivate();
+    		}
+    	}
     },
     
     getObjectId : function() {
     	return this.objectId;
     },
     
+    onActivate : function() {
+    	if (this.dataLoaded == false && this.objectId) {
+    		this.loadCommentsForObjectId(this.objectId);
+    	}
+    },
+    
     loadCommentsForObjectId : function(oid) {
-    	
     	this.store.setFilter({
     		type : 'AND',
     		field : [{

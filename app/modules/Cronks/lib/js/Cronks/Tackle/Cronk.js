@@ -26,7 +26,9 @@ Icinga.Cronks.Tackle.Cronk = Ext.extend(Ext.Panel, {
 		
 		this.tabDefaults = new Icinga.Cronks.Tackle.Information.Default();
         this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
-        this.tabComments = new Icinga.Cronks.Tackle.Information.Comments();
+        this.tabComments = new Icinga.Cronks.Tackle.Information.Comments({
+        	type : 'host'
+        });
         this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
         this.tabServices = new Icinga.Cronks.Tackle.Information.Services();
 		

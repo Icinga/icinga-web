@@ -10,6 +10,12 @@
         </ic:parameters>
     </ic:command>
     
+    <ic:command name="DEL_HOST_COMMENT">
+        <ic:definition>DEL_HOST_COMMENT</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_COMMENT_ID" />
+        </ic:parameters>
+    </ic:command>
 
     <ic:command name="SCHEDULE_HOST_CHECK">
         <ic:definition>SCHEDULE_HOST_CHECK</ic:definition>

@@ -10,6 +10,13 @@
         </ic:parameters>
     </ic:command>
     
+    <ic:command name="DEL_HOST_COMMENT">
+        <ic:definition>DEL_HOST_COMMENT</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_COMMENT_ID" />
+        </ic:parameters>
+    </ic:command>
+    
     <ic:command name="SET_SVC_NOTIFICATION_NUMBER">
         <ic:definition>SET_SVC_NOTIFICATION_NUMBER</ic:definition>
         <ic:parameters>

@@ -11,6 +11,8 @@
             <ic:parameter name="COMMAND_HOST" alias="host" type="ro" required="true"/>
             <ic:parameter name="COMMAND_SERVICE" alias="service" type="ro" required="true"/>
             <ic:parameter name="COMMAND_ID" alias="id" type="ro" required="true"/>
+            <ic:parameter name="COMMAND_COMMENT_ID" alias="comment_id" type="ro" required="true" />
+            
             <ic:parameter name="COMMAND_AUTHOR" alias="author" type="ro" required="true"/>
             <ic:parameter name="COMMAND_COMMENT" alias="comment" type="textarea" required="true"/>
             <ic:parameter name="COMMAND_STARTTIME" alias="starttime" type="date" required="true"/>

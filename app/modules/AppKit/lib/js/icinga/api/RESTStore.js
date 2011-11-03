@@ -45,7 +45,7 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     },
 
     setFilter: function(filter) {
-        this._filter = filter;
+        this.__filter = filter;
     },
 
     setOrderColumn: function(order) {
@@ -151,7 +151,8 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
             cols = [cols];
          for(var i=0;i<cols.length;i++) {
             cfg["columns["+i+"]"] = cols[i];      
-        } 
+        }
+        
         Ext.apply(options.params,cfg);
 
         return Ext.data.JsonStore.prototype.load.call(this,options);
