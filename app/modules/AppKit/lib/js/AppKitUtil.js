@@ -183,6 +183,10 @@ AppKit.util.Config = (function() {
 				path: document.location.pathname.replace(/\/$/, ''),
 				issecure: (document.location.protocol.indexOf('https') == 0) ? true : false
 			});
+			
+			if (Ext.isEmpty(Icinga.AppKit.configMap) == false) {
+				this.addAll(Icinga.AppKit.configMap);
+			}
 		},
 		
 		getMap : function() {

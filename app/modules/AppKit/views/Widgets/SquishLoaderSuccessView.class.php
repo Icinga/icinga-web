@@ -6,9 +6,10 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
         if ($this->getAttribute('errors', false)) {
             return "throw '". join(", ", $this->getAttribute('errors')). "';";
         } else {
-            
-            $content = $this->getAttribute('content');
+	
+            $content = '';    
             $this->copyConfigToJavascript($content);
+            $content .= $this->getAttribute('content');
             
             $etag = $this->getAttribute("etag",rand());
             
@@ -45,12 +46,12 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
     private function copyConfigToJavascript(&$content) {
         $map = AgaviConfig::get('modules.appkit.js_config_mapping', array ());
         if (count($map)) {
-            
+            $out = 'var Icinga = { AppKit: { configMap: {} }};'. chr(10);
             foreach ($map as $target=>$source) {
                 $val = AgaviConfig::get($source ? $source : $target, null);
-                $content .= 'AppKit.util.Config.add('. json_encode($target). ', '. json_encode($val). ');'. chr(10);
+                $out .= 'Icinga.AppKit.configMap['. json_encode($target). '] = '. json_encode($val). ';'. chr(10);
             }
-            
+            $content .= $out;
         }
     }
 
