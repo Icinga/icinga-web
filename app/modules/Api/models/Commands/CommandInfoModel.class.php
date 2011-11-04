@@ -10,6 +10,7 @@ class Api_Commands_CommandInfoModel extends IcingaApiBaseModel implements AgaviI
     }
     
     public function getInfo($commandName=null) {
+      
         if ($commandName !== null && array_key_exists($commandName, $this->config)) {
             return $this->config[$commandName];
         }

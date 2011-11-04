@@ -52,14 +52,34 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                         p.getEl().on('mouseenter', function (e) {
                             var el = p.getEl().first('.cancelable');
                             el.addClass('icinga-icon-cancel');
-                            var title, msg;
+                            var title, msg, fn;
                             if (inDowntime) {
                                 title = _('Cancel downtime');
                                 msg = _('Do you want to cancel this downtime?');
+                                fn = function () {
+                                    Icinga.Api.Command.Facade.sendCommand({
+                                        command : 'DEL_DOWNTIME_BY_HOST_NAME',
+                                        data : {host: record.get('HOST_NAME')},
+                                        targets : [{
+                                            instance: record.get('INSTANCE_NAME'), 
+                                            host: record.get('HOST_NAME')
+                                        }]
+                                     });
+                                };
                             }
                             if (isAcknowledged) {
                                 title = _('Remove acknwoledgment');
                                 msg = _('Do you want to remove this acknowledgment?');
+                                fn = function () {
+                                    Icinga.Api.Command.Facade.sendCommand({
+                                        command : 'REMOVE_HOST_ACKNOWLEDGEMENT',
+                                        data : {host: record.get('HOST_NAME')},
+                                        targets : [{
+                                            instance: record.get('INSTANCE_NAME'), 
+                                            host: record.get('HOST_NAME')
+                                        }]
+                                     });
+                                };
                             }
                             el.addListener('click', function () {
                                 Ext.Msg.show({
@@ -67,11 +87,11 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                                     msg: msg,
                                     buttons: Ext.Msg.YESNO,
                                     icon: Ext.Msg.WARNING,
-                                    fn: function (btn) {
-                                        if (btn === "yes") {
-                                            alert("Implement me!");
-                                        }
-                                    }
+                                    fn: function(btn) {
+                                        if(btn == "yes")
+                                            fn();
+                                    },
+                                    scope:this
                                 });
                             }, this);
                         }, this);
@@ -80,7 +100,8 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
 
 
                         }, this);
-                    }
+                    },
+                    scope: this
                 }
             });
 

@@ -1,8 +1,8 @@
+/*global Ext: false, Icinga: false, _: false */
 Ext.ns('Icinga.Cronks.Tackle');
 
 Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 	title : 'Object tree',
-
     viewConfig: {
    //     forceFit: true,
         getRowClass: function(record,index) {
@@ -30,12 +30,18 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             columns: [
                 'HOST_ID',
                 'SERVICE_CURRENT_PROBLEM_STATE',
+                'SERVICE_SCHEDULED_DOWNTIME_DEPTH',
+                'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
                 'SERVICE_STATE_COUNT'
             ]
             
         });
 		this.store = new Icinga.Api.RESTStore({
             target: 'host',
+            limit: 25,
+            offset: 0,
+            countColumn: true,
+            withSLA: true,
             columns: [
                 'HOST_ID',
                 'HOST_NAME',
@@ -43,6 +49,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_OBJECT_ID',
                 'HOST_LAST_CHECK',
                 'HOST_NEXT_CHECK',
+                'INSTANCE_NAME',
                 'HOST_SCHEDULED_DOWNTIME_DEPTH',
                 'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
             ],
@@ -68,7 +75,8 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             }
         });
         cfgRef.bbar = new Ext.PagingToolbar({
-            store: this.store
+            store: this.store,
+            displayInfo: true
         });
     },
    
@@ -93,9 +101,21 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: Icinga.Cronks.Tackle.Renderer.ServiceHealthRenderer,
                 scope:this
             },{
+                header: _('Availability'),
+                dataIndex: 'SLA_STATE_AVAILABLE',
+                renderer: function(value,meta,record) {
+                    if(record.get('SLA_STATE_AVAILABLE') == 0 &&
+                         record.get('SLA_STATE_UNAVAILABLE') == 0)
+                          return "<div style='width:50px;height:14px' qtip='"+_('No SLA information available')+"'></div>";
+                    value = parseFloat(value,10).toFixed(3);
+                    
+                    return value+"%";
+                }
+                
+            },{
                 header: _('Last check'),
                 dataIndex : 'HOST_LAST_CHECK',
-                width: 250,
+                width: 150,
                 renderer: function(value,meta,record) {
                    var str = AppKit.util.Date.getElapsedString(value);
                    var now = new Date();
@@ -108,7 +128,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                               " qtip='Should have been checked "+AppKit.util.Date.getElapsedString(value)+"'>"+value+"</div>";
                    if(elapsed > (60*60*24))
                        return "<div qtip='"+str+"'>"+value+"</div>";
-                   return "<div qtip='"+value+"'>"+str+"</div>"
+                   return "<div qtip='"+value+"'>"+str+"</div>";
                 }
             }]
 		});

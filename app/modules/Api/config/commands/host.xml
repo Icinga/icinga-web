@@ -9,7 +9,12 @@
             <ic:parameter ref="COMMAND_DOWNTIME_ID" />
         </ic:parameters>
     </ic:command>
-    
+    <ic:command name="DEL_HOST_DOWNTIME_BY_HOST_NAME">
+        <ic:definition>DEL_HOST_DOWNTIME_BY_HOST_NAME</ic:definition>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+        </ic:parameters>
+    </ic:command>
     <ic:command name="DEL_HOST_COMMENT">
         <ic:definition>DEL_HOST_COMMENT</ic:definition>
         <ic:parameters>

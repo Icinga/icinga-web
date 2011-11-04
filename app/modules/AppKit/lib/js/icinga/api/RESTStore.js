@@ -8,14 +8,21 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
     limit: -1,
     offset: 0,
     countColumn: null,
-
+    withSLA: false,
     constructor: function(cfg) {
         Ext.apply(this,cfg);
         if(cfg.columns) {
             Ext.isArray(cfg.columns) ? 
                 cfg.fields = cfg.columns : cfg.fields = [cfg.columns];
         }
-        
+        if(cfg.withSLA) {
+            cfg.fields.push("SLA_STATE_AVAILABLE");
+            cfg.fields.push("SLA_STATE_UNAVAILABLE");
+            cfg.fields.push("SLA_STATE_0");
+            cfg.fields.push("SLA_STATE_1");
+            cfg.fields.push("SLA_STATE_2");
+            cfg.fields.push("SLA_STATE_3");
+        }
         cfg.root = 'result';
         cfg.url = AppKit.c.path+"/modules/web/api/json"; 
         cfg.totalProperty = "total";
@@ -26,6 +33,10 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
         Ext.data.JsonStore.prototype.constructor.call(this,cfg);
         
     },  
+
+    setWithSLA: function(bool) {
+        this.withSLA = bool;
+    },
 
     setColumns: function(cols) {
         this.columns = cols;    
@@ -78,7 +89,11 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
         else
             this.offset = 0;
     },
-
+    
+    getWithSLA: function() {
+        return this.withSLA;
+    },
+    
     getTarget: function() {
         return this.target;
     },
@@ -133,10 +148,13 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
         var limit       = this.getLimit();
         var offset      = this.getOffset();
         var db          = this.getDB();
+        var wSLA        = this.getWithSLA();
         cfg = {
             db : db,
             target: target
         }
+        if(wSLA)
+            cfg.withSLA = true;
         if(filter != 'null' && filter)
             cfg.filters_json = filter;
         if(order)
@@ -150,6 +168,8 @@ Ext.ns('Icinga.Api').RESTStore = Ext.extend(Ext.data.JsonStore,{
         if(!Ext.isArray(cols)) 
             cols = [cols];
          for(var i=0;i<cols.length;i++) {
+            if(cols[i].substr(0,3) == "SLA")
+                continue;
             cfg["columns["+i+"]"] = cols[i];      
         }
         

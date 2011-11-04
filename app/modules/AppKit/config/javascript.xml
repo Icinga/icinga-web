@@ -19,6 +19,7 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/Ext.ux.AutoComboBox.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/api/RESTStore.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/api/RESTFilterComboBox.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/grid/plugins/PageableGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/Layout.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitNavBar.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/HttpStateProvider.js</ae:parameter>

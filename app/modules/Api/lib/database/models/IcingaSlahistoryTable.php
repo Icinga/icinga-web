@@ -74,8 +74,13 @@ class IcingaSlahistoryTable extends Doctrine_Table {
         $DATE;
         $NOW;
         switch(strtolower($c->getDriverName())) {
-            case 'oracle':
+            
             case 'pgsql':
+                $DATE_FORMAT = "'YYYY-MM-DD HH24:MI:SS'";
+                $DATE = "TO_DATE";
+                $NOW = "NOW()";
+                break;
+            case 'oracle':
             case 'icingaOracle':
                 $DATE_FORMAT = "'YYYY-MM-DD HH24:MI:SS'";
                 $DATE = "TO_DATE";
@@ -138,7 +143,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                     COALESCE(
                         acknowledgement_time-start_time,
                         end_time-start_time,
-                        CURRENT_DATE-start_time
+                        NOW()-start_time
                     )
                  )) AS duration FROM timeRange s INNER JOIN ".$prefix.
                 "objects obj ON obj.object_id = s.object_id ";
@@ -165,7 +170,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                         COALESCE(
                             acknowledgement_time-start_time,
                             end_time-start_time,
-                            CURRENT_DATE-start_time
+                            NOW()-start_time
                         ))
                     ) AS complete 
                   FROM timeRange
