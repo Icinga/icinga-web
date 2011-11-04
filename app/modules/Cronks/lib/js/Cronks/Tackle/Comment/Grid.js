@@ -1,15 +1,12 @@
 /*global Ext: false, Icinga: false, _: false */
+
+Ext.ns('Icinga.Cronks.Tackle.Comment');
+
 (function () {
     "use strict";
 
-    Ext.ns('Icinga.Cronks.Tackle.Information');
-
-    Icinga.Cronks.Tackle.Information.Comments = Ext.extend(Ext.Panel, {
+    Icinga.Cronks.Tackle.Comment.Grid = Ext.extend(Ext.Panel, {
         type: null,
-
-        title: _('Comments'),
-        iconCls: 'icinga-icon-comment',
-
         dataLoaded: false,
         objectId: null,
         border: false,
@@ -20,7 +17,7 @@
                 throw ("config.type is needed: host or service!");
             }
 
-            Icinga.Cronks.Tackle.Information.Comments.superclass.constructor.call(this, config);
+            Icinga.Cronks.Tackle.Comment.Grid.superclass.constructor.call(this, config);
         },
 
         initComponent: function () {
@@ -34,7 +31,7 @@
                 }
             }];
 
-            Icinga.Cronks.Tackle.Information.Comments.superclass.initComponent.call(this);
+            Icinga.Cronks.Tackle.Comment.Grid.superclass.initComponent.call(this);
 
             this.on('activate', this.onActivate, this);
 
@@ -161,6 +158,6 @@
         }
     });
 
-    Ext.reg('cronks-tackle-information-comments', Icinga.Cronks.Tackle.Information.Comments);
+    Ext.reg('cronks-tackle-comment-grid', Icinga.Cronks.Tackle.Comment.Grid);
 
 })();

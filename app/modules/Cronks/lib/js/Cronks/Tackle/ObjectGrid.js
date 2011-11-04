@@ -43,6 +43,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             countColumn: true,
             withSLA: true,
             columns: [
+                'INSTANCE_NAME',
                 'HOST_ID',
                 'HOST_NAME',
                 'HOST_CURRENT_STATE',
