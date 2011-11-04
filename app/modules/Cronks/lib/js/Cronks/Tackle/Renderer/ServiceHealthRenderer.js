@@ -1,6 +1,8 @@
-Ext.ns('Icinga.Cronks.Tackle.Renderer').ServiceHealthRenderer = function(value) {
+Ext.ns('Icinga.Cronks.Tackle.Renderer');
+Icinga.Cronks.Tackle.Renderer.ServiceHealthRenderer = function(value) {
     var id = Ext.id();
     var _this = this; 
+    
     (function() {
         var cmp = new Ext.BoxComponent({
             layout: 'fit',
@@ -43,5 +45,6 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer').ServiceHealthRenderer = function(value) 
             cmp.update(obj);
         },_this,{single:true});
     }).defer(100);
-    return '<div id="'+id+'"></div>'
+    
+    return '<div id="'+id+'"></div>';
 }
