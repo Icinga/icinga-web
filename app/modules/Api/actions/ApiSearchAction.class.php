@@ -68,9 +68,9 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $search->setResultType(IcingaApiConstants::RESULT_ARRAY);
         // Adding security principal targets to the query
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
+
         $res = $search->fetch()->getAll();
-       
-        
+
         //Setup count
         if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);
@@ -82,11 +82,67 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
             $rd->setParameter("searchCount",$search->fetch()->getAll());
         }
-
+        
+        if($rd->getParameter("withSLA") && ($target == "host" || $target == "service")) {
+            $slaDefaults = AgaviConfig::get("modules.api.sla_settings");
+            if(!isset($slaDefaults["default_timespan"]))
+                $slaDefaults["default_timespan"] = "-1 Month";
+            $ts = $rd->getParameter("slaTimespan",$slaDefaults["default_timespan"]);
+            $this->addSLAData($res,$ts);
+        }
+        
         $rd->setParameter("searchResult", $res);
+
         return $this->getDefaultViewName();
     }
+    private function addSLAData(array &$result,$timespan) {
+        $objIds = array();
+        $map = array(); //hashmap for fast lookup
+        foreach($result as $idx=>&$record) {
+            $id = "";
+            if(isset($record["HOST_OBJECT_ID"]))
+                $id = $record["HOST_OBJECT_ID"];
+            else if (isset($record["SERVICE_OBJECT_ID"]))
+                $id = $record["SERVICE_OBJECT_ID"];
+            else
+                continue;
+            $record["SLA_STATE_AVAILABLE"] = 0;
+            $record["SLA_STATE_UNAVAILABLE"] = 0;
+            $record["SLA_STATE_0"] = 0;
+            $record["SLA_STATE_1"] = 0;
+            $record["SLA_STATE_2"] = 0;
+            $record["SLA_STATE_3"] = 0;
 
+
+            $map[$id] = $idx;
+            $objIds[] = $id;
+        }
+        $filter = $this->getContext()->getModel("SLA.SLAFilter","Api");
+        $filter->setObjectId($objIds);
+        
+        $filter->setTimespan($timespan);
+
+        $stmt = IcingaSlahistoryTable::getSummary(null, $filter);
+
+        foreach($stmt as $sla_entry) {
+            $oid = $sla_entry->object_id;
+            $state = $sla_entry->sla_state;
+            if(!isset($map[$oid]))
+                continue;
+            $entry = &$result[$map[$oid]];
+            
+            if(($state > 0 && $sla_entry->objecttype_id == 1) ||
+                ($state > 1 && $sla_entry->objecttype_id == 2))
+                $entry["SLA_STATE_UNAVAILABLE"] += $sla_entry->percentage;
+            else
+                $entry["SLA_STATE_AVAILABLE"] += $sla_entry->percentage;
+            if(isset($entry["SLA_STATE_".$state]))
+                $entry["SLA_STATE_".$state] += $sla_entry->percentage;
+
+           
+        }
+
+    }
     protected function addFilters($search,AgaviRequestDataHolder $rd) {
         // URL filter definitions
         $field = $rd->getParameter("filter",null);

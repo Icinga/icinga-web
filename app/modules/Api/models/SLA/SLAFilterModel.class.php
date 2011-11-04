@@ -9,27 +9,36 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     private $objectIds = array();
     private $hostnamePatterns = array();
     private $servicenamePatterns = array();
-    private $hostgroupIds = array();
-    private $servicegroupIds = array();
     private $instanceIds = array();
     private $states = array();
     private $includeHosts = true;
     private $includeServices = true;
-    
+    private $servicegroupNames = array();
+    private $hostgroupNames = array();
+    private $limitToContactgroup = false;
+    private $hostCustomVariables = array();
+    private $serviceCustomVariables = array();
     
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
-        $this->endTime = time();
+        //$this->endTime = time();
         if(!empty($parameters))
             $this->__fromArray($parameters);
     }
     
     
     public function getStartTime() {
-        return $this->startTime;
+        if(!$this->startTime)
+            return null;
+        else 
+            return Date("Y-m-d H:i:s",$this->startTime);
+        
     }
     public function getEndTime() {
-        return $this->endTime;
+        if($this->endTime == time() || !$this->endTime)
+            return null;
+
+        return Date("Y-m-d H:i:s",$this->endTime);
     }
     public function getIgnoreAcknowledged() {
         return $this->ignoreAcknowledged;
@@ -46,15 +55,10 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     public function getObjectIds() {
         return $this->objectIds;
     }
-    public function getHostgroupIds() {
-        return $this->hostgroupIds;
-    }
-    public function getServicegroupIds() {
-        return $this->servicegroupIds;
-    }
     public function getInstanceIds() {
         return $this->instanceIds;
     }
+
     public function getStates() {
         return $this->states;
     }
@@ -64,8 +68,24 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
     public function getIncludeServices() {
         return $this->includeServices;
     }
+    public function getServicegroupNames() {
+        return $this->servicegroupNames;
+    }
+    public function getHostgroupNames() {
+        return $this->hostgroupNames;
+    }    
+    public function getHostCVs() {
+        return $this->hostCustomVariables;
+    }
+    public function getServiceCVs() {
+        return $this->serviceCustomVariables;
+    }
+    public function onlyContacts() {
+        return $this->limitToContactgroup;
+    }
     
     public function setTimespan($timespan,$fromStart = false) {
+        $offset = $this->endTime ? $this->endTime : time();
         if($fromStart) {
             if($this->startTime == null)
                 $this->setStartTime(time());
@@ -76,7 +96,7 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
             $this->setEndTime($time ? $time : time());
             
         } else { 
-            $time = strtotime($timespan, $this->endTime);
+            $time = strtotime($timespan, $offset);
             if(!$time)
                 $this->getContext()->getLoggerManager()
                     ->log("Invalid timespan given to SLA Filter, using time() as startdate");
@@ -96,19 +116,19 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
         $this->ignoreDowntime = $boolean !== false;
     }    
     public function setHostnamePattern($pattern) {
-        $this->hostnamePatterns = is_array($pattern) ? $pattern : array(pattern);
+        $this->hostnamePatterns = is_array($pattern) ? $pattern : array($pattern);
     }
     public function setServicenamePattern($pattern) {
-        $this->servicenamePatterns = is_array($pattern) ? $pattern : array(pattern);
+        $this->servicenamePatterns = is_array($pattern) ? $pattern : array($pattern);
     }
     public function setObjectId($ids) {
         $this->objectIds = is_array($ids) ? $ids : array($ids);
     }
-    public function setHostgroupIds($ids) {
-        $this->hostgroupIds = is_array($ids) ? $ids : array($ids);
+    public function setHostgroupNames($names) {
+        $this->hostgroupNames = is_array($names) ? array_values($names) : array($names);
     }
-    public function setServicegroupIds($ids) {
-        $this->servicegroupIds = is_array($ids) ? $ids : array($ids);
+    public function setServicegroupNames($names) {
+        $this->servicegroupNames = is_array($names) ? array_values($names) : array($names);
     }
     public function setInstanceIds($ids) {
         $this->instanceIds = is_array($ids) ? $ids : array($ids);
@@ -128,6 +148,20 @@ class Api_SLA_SLAFilterModel extends IcingaApiBaseModel {
         $this->includeHosts = true;
         $this->includeServices = true;
     }
+    public function setOnlyContacts($bool) {
+        $this->limitToContactgroup = $bool;
+    }
+    
+    public function addHostCV($name,$value) {
+     
+        $this->hostCustomVariables[] =array("name"=>$name, "value" => $value);
+               
+    }
+    public function addServiceCV($name,$value) {
+        $this->serviceCustomVariables[] =array("name"=>$name, "value" => $value);
+        
+    }
+
     
     private function __fromArray($array) {
         if(isset($array["startTime"]))

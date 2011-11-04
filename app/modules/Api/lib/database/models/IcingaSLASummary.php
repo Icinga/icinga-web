@@ -21,6 +21,14 @@ class IcingaSLASummary extends Doctrine_Record {
             'primary' => true,
             'autoincrement' => true,
         ));
+        $this->hasColumn('objecttype_id', 'integer', 4, array(
+            'type' => 'integer',
+            'length' => 4,
+            'fixed' => false,
+            'unsigned' => false,
+            'primary' => true,
+            'autoincrement' => true,
+        ));
         $this->hasColumn('sla_state', 'integer', 4, array(
             'type' => 'integer',
             'length' => 4,
