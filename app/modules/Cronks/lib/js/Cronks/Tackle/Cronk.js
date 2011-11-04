@@ -30,9 +30,11 @@ Ext.ns('Icinga.Cronks.Tackle');
 
             this.tabDefaults = new Icinga.Cronks.Tackle.Information.Default();
             this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
-            this.tabComments = new Icinga.Cronks.Tackle.Information.Comments({
+            
+            this.tabComments = new Icinga.Cronks.Tackle.Comment.Panel({
                 type: 'host'
             });
+            
             this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
             this.tabServices = new Icinga.Cronks.Tackle.Information.Services();
 
@@ -66,10 +68,17 @@ Ext.ns('Icinga.Cronks.Tackle');
         rowSingleClickHandler: function (grid, index, e) {
             var store = grid.getStore();
             var record = store.getAt(index);
-            var object_id = record.data.HOST_OBJECT_ID;
 
             // Notify all other tabs
-            this.tabComments.setObjectId(object_id);
+
+            this.tabComments.grid.setObjectId(record.data.HOST_ID);
+
+            this.tabComments.form.setObjectData({
+            	objectName : record.data.HOST_NAME,
+            	objectId : record.data.HOST_ID,
+            	objectInstance : record.data.INSTANCE_NAME
+            });
+
 
             if (this.collapsibleFrame.collapsed === true) {
                 this.collapsibleFrame.expand(true);

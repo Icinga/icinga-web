@@ -17,7 +17,7 @@ Ext.ns('Icinga.Api.Command');
             Ext.apply(this, config);
 
             this.infoUrl = String.format('{0}/web/api/cmdInfo/json', AppKit.util.Config.get("path"));
-
+            
             if (this.autoLoad === true) {
                 this.loadCommandDefinitions();
             }

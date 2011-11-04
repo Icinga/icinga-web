@@ -37,6 +37,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 		this.store = new Icinga.Api.RESTStore({
             target: 'host',
             columns: [
+                'INSTANCE_NAME',
                 'HOST_ID',
                 'HOST_NAME',
                 'HOST_CURRENT_STATE',
