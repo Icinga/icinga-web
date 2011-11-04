@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/Web/config/validators.xml"
+>
+	<ae:configuration>
+		<validators>
+            <validator class="number" name="starttime" required="false">
+                <argument>starttime</argument>
+            </validator>
+            <validator class="number" name="endtime" required="false">
+                <argument>endtime</argument>
+            </validator>
+            <validator name="hostOnlyFlag" class="set" required="false">
+                <argument>hostsonly</argument>
+            </validator>
+            <validator name="servicesOnlyFlag" class="set" required="false">
+                <argument>servicesonly</argument>
+            </validator>
+            <validator name="timespan" class="string" required="false">
+                <argument>timespan</argument>
+
+            </validator>
+       </validators>
+       <validators method="read">
+            <validator name="hostnames" class="string" required="false">
+                <argument>hostnames</argument>
+                <ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">hostnames</ae:parameter>
+				</ae:parameters>
+            </validator>
+            <validator name="instanceIds" class="string" required="false">
+                <argument>instanceIds</argument>
+                <ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">instances</ae:parameter>
+				</ae:parameters>
+            </validator>
+             <validator name="servicegroups" class="string" required="false">
+                <argument>servicegroups</argument>
+                <ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">servicegroups</ae:parameter>
+				</ae:parameters>
+            </validator>
+            <validator name="ids" class="string" required="false">
+                <argument>ids</argument>
+                <ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">ids</ae:parameter>
+				</ae:parameters>
+            </validator>
+            <validator name="servicenames" class="string" required="false">
+                <argument>servicenames</argument>
+                <ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">servicenames</ae:parameter>
+				</ae:parameters>
+            </validator>
+            <validator name="ids" class="string" required="false">
+                <argument>ids</argument>
+                <ae:parameters>
+					<ae:parameter name="split">|</ae:parameter>
+					<ae:parameter name="export">ids</ae:parameter>
+				</ae:parameters>
+            </validator>
+        </validators>
+        
+        <validators method="write">
+            <validator name="hostnames" class="string" required="false">
+                <arguments base="hostnames[]" />
+            </validator>
+            <validator name="instanceIds" class="string" required="false">
+                <arguments base="instanceIds[]" />   
+            </validator>
+            <validator name="servicenames" class="string" required="false">
+                <arguments base="servicenames[]" />
+            </validator>
+            <validator name="ids" class="string" required="false">
+                <arguments base="ids[]" />
+            </validator>
+        
+        </validators>
+    </ae:configuration>
+</ae:configurations>

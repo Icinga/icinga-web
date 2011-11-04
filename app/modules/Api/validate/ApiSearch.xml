@@ -116,7 +116,9 @@
 			<validator name="withMeta" class="boolean" required="false">
 				<argument>withMeta</argument>
 			</validator>
-
+            <validator name="withSLA" class="boolean" required="false">
+				<argument>withSLA</argument>
+			</validator>
 			<validator name="columns" class="AppKitSplitValidator" required="false">
 				<argument>columns</argument>
 				<errors>

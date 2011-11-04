@@ -44,7 +44,26 @@
                         </ignores>
                     </route>
                 </route>
-                
+                <route name=".sla" pattern="^/sla" output_type="json" action="SLAProvider">
+                    <route name=".starttime" stop="false" pattern="start=(starttime:\d*)" />
+                    <route name=".endtime" stop="false" pattern="end=(endtime:\d*)" />
+                    <route name=".hostOnlyFlag" stop="false" pattern="(hostsonly:hostsOnly)" />
+                    <route name=".servicesOnlyFlag" stop="false" pattern="(servicesonly:servicesOnly)" />
+                    <route name=".hostNamePattern" stop="false" pattern="hostnames[(hostnames:(.*?))]" />
+                    <route name=".serviceNamePattern" stop="false" pattern="servicenames[(servicenames:(.*?))]" />
+                    <route name=".hostGroupPattern" stop="false" pattern="hostgroups[(hostgroups:(.*?))]" />
+                    <route name=".serviceGroupPattern" stop="false" pattern="servicegroups[(servicegroups:(.*?))]" />
+                    <route name=".ids" stop="false" pattern="ids[(ids:(.*?))]" />
+                    <route name=".instances" stop="false" pattern="instances[(instanceIds:(.*?))]" />
+                    <route name=".timespan" stop="false" pattern="timespan[(timespan:(.*?))]" />
+                    
+                    <route name=".output" stop="true" pattern="(output:json|xml|soap|rest)$"
+                        output_type="${output}">
+                        <ignores>
+                            <ignore>output</ignore>
+                        </ignores>
+                    </route>
+                </route>
                 <route name=".target" stop="false"
                     pattern="^/(target:instance|host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|status|host_service)/">
                     <!-- Filter will be split by AppKitUrlFilterValidator -->
@@ -58,6 +77,7 @@
                         pattern="limit[({limit_start:\d*};)?(limit:\d*)]" />
                     <route name=".countcolumn" stop="false"
                         pattern="countColumn=(countColumn:\w*)" />
+                    <route name=".withSLA" stop="false" pattern="withSLA=(withSLA:\d)" />
                     <route name=".withMeta" stop="false" pattern="withMeta=(withMeta:\d)" />
                     <route name=".output" stop="true" pattern="(output:json|xml|soap|rest)$"
                         output_type="${output}">
