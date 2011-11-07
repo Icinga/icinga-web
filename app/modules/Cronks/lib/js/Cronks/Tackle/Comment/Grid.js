@@ -41,7 +41,10 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
                 autoDestroy: true,
                 idIndex: 0,
                 target: 'comment',
-                columns: ['INSTANCE_NAME', 'COMMENT_ID', 'COMMENT_DATA', 'COMMENT_AUTHOR_NAME', 'COMMENT_TIME', 'COMMENT_OBJECT_ID', 'COMMENT_TYPE']
+                columns: ['INSTANCE_NAME', 'COMMENT_ID', 'COMMENT_DATA', 'COMMENT_AUTHOR_NAME', 'COMMENT_TIME', 'COMMENT_OBJECT_ID', 'COMMENT_TYPE'],
+                listeners : {
+                	load : this.onStoreLoad.createDelegate(this)
+                }
             });
 
             this.expander = new Ext.ux.grid.RowExpander({
@@ -91,6 +94,20 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
 
             this.doLayout();
         },
+        
+        onStoreLoad : function(store, records, options) {
+        	this.updateParentTitle(records.length);
+        },
+        
+        updateParentTitle : function(count) {
+        	if (this.parentCmp) {
+        		if (count > 0) {
+        			this.parentCmp.setTitle(String.format(_('Comments ({0})'), count));
+        		} else {
+        			this.parentCmp.setTitle(_('Comments'));
+        		}
+        	}
+        },
 
         onDeleteComment: function (renderer, grid, rowIndex, event) {
 
@@ -126,6 +143,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
             if (oid !== this.objectId) {
                 this.objectId = oid;
                 this.dataLoaded = false;
+                this.updateParentTitle(0);
                 if (this.isVisible() === true) {
                     this.onActivate();
                 }

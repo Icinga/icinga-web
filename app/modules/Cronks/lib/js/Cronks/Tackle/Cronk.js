@@ -21,18 +21,23 @@ Ext.ns('Icinga.Cronks.Tackle');
 
         initComponent: function () {
             Icinga.Cronks.Tackle.Cronk.superclass.initComponent.call(this);
-
+            
+            var type = 'host';
+            
             this.objectGrid = new Icinga.Cronks.Tackle.ObjectGrid({
                 region: 'center'
             });
 
             this.objectGrid.on('rowclick', this.rowSingleClickHandler, this);
 
-            this.tabDefaults = new Icinga.Cronks.Tackle.Information.Default();
+            this.tabObjectInfo = new Icinga.Cronks.Tackle.Information.Default( {
+            	type: type
+            });
+            
             this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
             
             this.tabComments = new Icinga.Cronks.Tackle.Comment.Panel({
-                type: 'host'
+                type: type
             });
             
             this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
@@ -41,7 +46,7 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
 
             this.infoTabs.add([
-                this.tabDefaults, 
+                this.tabObjectInfo, 
                 this.tabServices, 
                 this.tabCommands, 
                 this.tabComments, 
