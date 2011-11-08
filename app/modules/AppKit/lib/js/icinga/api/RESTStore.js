@@ -17,15 +17,12 @@ Ext.ns('Icinga.Api');
         countColumn: null,
         withSLA: false,
         constructor: function (cfg) {
-            Ext.apply(this, cfg);
-            if (Ext.isEmpty(cfg.columns) === false) {
-            	
+            if (Ext.isEmpty(cfg.columns) === false) {	
             	/*
             	 * Use default ext fields syntax for mapping or 
             	 * special icinga column syntax for simple api
             	 * queries 
             	 */
-            	
             	if (Ext.isArray(cfg.columns)) {
             		if (Ext.isObject(cfg.columns[0])) {
             			cfg.fields = cfg.columns;
@@ -33,8 +30,6 @@ Ext.ns('Icinga.Api');
             			Ext.each(cfg.fields, function(val, key) {
             				cfg.columns.push( (Ext.isEmpty(val.mapping) === true) ? val.name : val.mapping );
             			}, this);
-            			
-            			AppKit.log(cfg);
             		} else {
             			cfg.fields = cfg.columns;
             		}
@@ -230,7 +225,8 @@ Ext.ns('Icinga.Api');
 
             Ext.apply(options.params, cfg);
 
-            return Ext.data.JsonStore.prototype.load.call(this, options);
+            // return Ext.data.JsonStore.prototype.load.call(this, options);
+            Icinga.Api.RESTStore.superclass.load.call(this, options);
         }
     });
 

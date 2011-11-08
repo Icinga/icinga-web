@@ -30,7 +30,7 @@ Ext.ns('Icinga.Cronks.Tackle');
 
             this.objectGrid.on('rowclick', this.rowSingleClickHandler, this);
 
-            this.tabObjectInfo = new Icinga.Cronks.Tackle.Information.Default( {
+            this.tabHeadInfo = new Icinga.Cronks.Tackle.Information.Head({
             	type: type
             });
             
@@ -46,7 +46,7 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
 
             this.infoTabs.add([
-                this.tabObjectInfo, 
+                this.tabHeadInfo, 
                 this.tabServices, 
                 this.tabCommands, 
                 this.tabComments, 
@@ -76,7 +76,8 @@ Ext.ns('Icinga.Cronks.Tackle');
 
             // Notify all other tabs
 
-            this.tabComments.grid.setObjectId(record.data.HOST_ID);
+            this.tabComments.grid.setObjectId(record.data.HOST_OBJECT_ID);
+            this.tabHeadInfo.loadDataForObjectId(record.data.HOST_OBJECT_ID);
 
             this.tabComments.form.setObjectData({
             	objectName : record.data.HOST_NAME,
