@@ -29,7 +29,7 @@ Ext.ns('Icinga.Api.Command');
             Ext.apply(this, config);
 
             if (Ext.isEmpty(this.apiCommandUrl)) {
-                this.apiCommandUrl = String.format('{0}/web/api/cmd/', AppKit.util.Config.get('path'));
+                this.apiCommandUrl = String.format('{0}/web/api/cmd/json', AppKit.util.Config.get('path'));
             }
 
             Icinga.Api.Command.Sender.superclass.constructor.call(this, config);
@@ -81,6 +81,7 @@ Ext.ns('Icinga.Api.Command');
                 params: data,
                 method: 'POST',
                 callback: this.processResponse,
+                successProperty: 'success',
                 scope: this
             });
 
@@ -88,7 +89,8 @@ Ext.ns('Icinga.Api.Command');
         },
 
         processResponse: function (options, success, response) {
-            if (success === true) {
+            var jsonResponse = Ext.decode(response.responseText);
+            if (success === true && jsonResponse.success === true) {
 
                 if (this.autoReset === true) {
                     this.reset();
@@ -96,6 +98,7 @@ Ext.ns('Icinga.Api.Command');
 
                 return this.fireEvent('success', response, this);
             } else {
+                
                 return this.fireEvent('error', response, this);
             }
         }

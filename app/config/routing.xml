@@ -35,7 +35,7 @@
                     <route name=".target" stop="false" pattern="target=(target:[^/]*)" />
                 </route>
                 
-                <route name=".commandInfo" pattern="^/cmdInfo" stop="false" action="ApiCommandInfo">
+                <route name=".commandInfo" pattern="^/cmdInfo" stop="false" action="ApiCommandInfo" output_type="json">
                     <route name=".cmdParam" stop="false" pattern="cmd=(command:[^/]*)/" />
                     <route name=".output" stop="true" pattern="(output:json|xml)$"
                         output_type="${output}">

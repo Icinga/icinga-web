@@ -9,7 +9,10 @@
             
             <ae:parameter>%core.module_dir%/Api/lib/js/Command/Type/Abstract.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Api/lib/js/Command/Type/Generic.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Api/lib/js/Command/Type/AcknowledgeProblem.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Api/lib/js/Command/Type/AddComment.js</ae:parameter>
             
+
             <ae:parameter>%core.module_dir%/Api/lib/js/Command/Facade.js</ae:parameter>
         </javascript>
     </ae:configuration>

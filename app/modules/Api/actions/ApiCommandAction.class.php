@@ -34,7 +34,7 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
         try {
             $api->dispatchCommands();
             $this->setAttribute("success",true);
-        } catch (IcingaApiCommandException $e) {
+        } catch (Exception $e) {
             $this->setAttribute("error",$e->getMessage());
             return 'Error';
         }

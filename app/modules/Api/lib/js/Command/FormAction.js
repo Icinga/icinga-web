@@ -32,9 +32,7 @@ Ext.ns('Icinga.Api.Command');
             this.commandSender = new Icinga.Api.Command.Sender({
                 autoReset: true
             });
-
-            this.commandSender.on('success', this.success.createDelegate(this));
-            this.commandSender.on('failure', this.failure.createDelegate(this));
+           
         },
 
         setTargets: function (targets) {
@@ -46,6 +44,9 @@ Ext.ns('Icinga.Api.Command');
         },
 
         run: function () {
+            this.commandSender.on('success', this.success,this,{single:true});
+            this.commandSender.on('error', this.failure,this,{single:true});
+
             var o = this.options;
             if (o.clientValidation === false || this.form.isValid()) {
                 var data = this.form.getFieldValues();

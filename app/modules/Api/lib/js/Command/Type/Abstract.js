@@ -26,7 +26,7 @@ Ext.ns('Icinga.Api.Command.Type');
 
         renderSubmit: false,
         cancelHandler: null,
-
+        padding: 5,
         xtypeMap: {
             date: 'datefield',
             ro: 'field',
@@ -81,7 +81,7 @@ Ext.ns('Icinga.Api.Command.Type');
 
         createSubmitBar: function () {
 
-            this.bbar = [{
+            this.buttons = [{
                 text: _('Send'),
                 iconCls: 'icinga-action-icon-ok',
                 handler: function (b, e) {
@@ -92,7 +92,7 @@ Ext.ns('Icinga.Api.Command.Type');
             }];
 
             if (this.cancelHandler !== null) {
-                this.bbar.push({
+                this.buttons.push({
                     text: _('Cancel'),
                     iconCls: 'icinga-action-icon-cancel',
                     handler: function (b, e) {
