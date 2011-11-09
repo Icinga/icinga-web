@@ -15,7 +15,6 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             align: 'stretch',
             pack: 'start'
         },
-        style: 'height: 100%;',
         fields: [],
         title: _('Default'),
         iconCls: 'icinga-icon-information',
@@ -67,27 +66,22 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             // this.loadDataForObjectId(3);
 
             this.stateInfo = new Icinga.Cronks.Tackle.Information.State({
-                width: 400,
-                type: this.type
+                type: this.type,
+                flex: 1,
+                layout : 'fit'
             });
 
             this.pluginOutputInfo = new Icinga.Cronks.Tackle.Information.PluginOutput({
-                width: 400,
-                height: 100,
+                // height : 40,
                 type: this.type,
+                flex: 1,
                 layout: 'fit'
             });
 
             this.pluginPerfdataInfo = new Icinga.Cronks.Tackle.Information.Perfdata({
-                width: 400,
-                height: 100,
+                // height: 40,
                 type: this.type,
-                layout: 'fit'
-            });
-
-            var dummyPanel = new Ext.Panel({
-                title: 'TEST PANEL',
-                html: 'Stupid test panel without meaning!',
+                flex: 1,
                 layout: 'fit'
             });
 
@@ -96,11 +90,13 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 xtype: 'panel',
                 border: false,
                 layout: 'vbox',
+                flex: 1,
                 
                 layoutConfig: {
-                    align: 'stretchmax',
+                    align: 'stretch',
                     pack: 'start'
                 },
+                
                 items: [this.pluginOutputInfo, this.pluginPerfdataInfo]
             });
 
