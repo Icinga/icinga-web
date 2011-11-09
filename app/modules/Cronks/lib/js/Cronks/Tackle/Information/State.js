@@ -6,7 +6,8 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 
     Icinga.Cronks.Tackle.Information.State = Ext.extend(Ext.grid.PropertyGrid, {
         title: _('State information'),
-
+        clicksToEdit: 3,
+        
         constructor: function (config) {
             Icinga.Cronks.Tackle.Information.State.superclass.constructor.call(this, config);
         },
@@ -17,6 +18,10 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 
         setSource: function (source) {
             source = this.translateNames(source);
+            
+            this.customEditors = this.createSimpleEditors(source);
+            this.rewriteValues(source);
+            
             Icinga.Cronks.Tackle.Information.State.superclass.setSource.call(this, source);
         },
 
@@ -26,6 +31,29 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 newSource[Icinga.Cronks.Tackle.Translation.get(key)] = val;
             }, this);
             return newSource;
+        },
+        
+        createSimpleEditors : function(source) {
+        	var field = new Ext.grid.GridEditor(new Ext.form.TextField({
+        		selectOnFocus:false,
+        		readOnly : true
+            }));
+            
+            var editors = {};
+            
+            Ext.iterate(source, function(key, val) {
+            	editors[key] = field;
+            }, this);
+            
+            return editors;
+        },
+        
+        rewriteValues : function(source) {
+        	Ext.iterate(source, function(key, val) {
+        		if (!val) {
+        			source[key] = '(null)';
+        		}
+        	}, this);
         }
     });
 

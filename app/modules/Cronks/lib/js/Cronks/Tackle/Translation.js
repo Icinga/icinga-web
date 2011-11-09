@@ -16,7 +16,7 @@ Ext.ns('Icinga.Cronks.Tackle');
             object_current_check_attempt: _("Check attempt"),
             object_current_state: _("State"),
             object_display_name: _("Display name"),
-            object_event_handler_enabled: _("Eventhandler enbaled"),
+            object_event_handler_enabled: _("Eventhandler enabled"),
             object_execution_time: _("Execution time"),
             object_execution_time_avg: _("Execution time (avg)"),
             object_execution_time_max: _("Execution time (max)"),
