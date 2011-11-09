@@ -3,7 +3,7 @@
  * Class that encapsulates helpers for the ApiDataRequestModel
  * All methods must return a IcingaApiRequestDescriptor
  */
-class IcingaApiRequestHelper {
+abstract class IcingaApiRequestHelper {
 
 
     public function getService($serviceName,$hostName,$instance = null) {}
