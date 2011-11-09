@@ -98,7 +98,7 @@
 				</setting>
 				
 				<setting name="parameter.mapping.type">
-					<ae:parameter name="2">
+					<ae:parameter name="4">
 						<ae:parameter name="className">Ext.form.DateField</ae:parameter>
 						<ae:parameter name="format">Y-m-d H:i:s</ae:parameter>
 						<!-- H:i:s -->
