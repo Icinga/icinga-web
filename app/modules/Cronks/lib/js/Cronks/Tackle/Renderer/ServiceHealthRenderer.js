@@ -12,7 +12,15 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
         (function () {
             var cmp = new Ext.BoxComponent({
                 layout: 'fit',
-                tpl: new Ext.XTemplate('<tpl>', "<div qtip='{SERVICES_0} (of {COUNT_SERVICES_TOTAL}) services without open problems' style='width:{PERC_SERVICES_0}%;background-color:green;height:15px;float:left;'></div>", "<div qtip='{SERVICES_1} (of {COUNT_SERVICES_TOTAL}) services with state warning (open problems)' style='width:{PERC_SERVICES_1}%;background-color:yellow;height:15px;float:left;'></div>", "<div qtip='{SERVICES_2} (of {COUNT_SERVICES_TOTAL}) services with state critical (open problems)' style='width:{PERC_SERVICES_2}%;background-color:red;height:15px;float:left;'></div>", "<div qtip='{SERVICES_3} (of {COUNT_SERVICES_TOTAL}) services with state unknown (open problems)' style='width:{PERC_SERVICES_3}%;background-color:#ffee00;height:15px;float:left'></div>", '</tpl>'),
+                tpl: new Ext.XTemplate(
+                    '<tpl>',
+                        "<div style='border:1px solid #dedede;height:15px'>",
+                            "<div qtip='{SERVICES_0} (of {COUNT_SERVICES_TOTAL}) services without open problems' style='width:{PERC_SERVICES_0}%;background-color:green;height:15px;float:left;'></div>",
+                            "<div qtip='{SERVICES_1} (of {COUNT_SERVICES_TOTAL}) services with state warning (open problems)' style='width:{PERC_SERVICES_1}%;background-color:yellow;height:15px;float:left;'></div>",
+                            "<div qtip='{SERVICES_2} (of {COUNT_SERVICES_TOTAL}) services with state critical (open problems)' style='width:{PERC_SERVICES_2}%;background-color:red;height:15px;float:left;'></div>",
+                            "<div qtip='{SERVICES_3} (of {COUNT_SERVICES_TOTAL}) services with state unknown (open problems)' style='width:{PERC_SERVICES_3}%;background-color:#ffee00;height:15px;float:left'></div>",
+                        '</div>',
+                     '</tpl>'),
                 renderTo: id
             });
 

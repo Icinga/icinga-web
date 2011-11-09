@@ -3,6 +3,7 @@ Ext.ns('Icinga.Cronks.Tackle');
 
 Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 	title : 'Object tree',
+    autoRefresh: true,
     viewConfig: {
    //     forceFit: true,
         getRowClass: function(record,index) {
@@ -13,16 +14,23 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
     },
     hostStore: null,
     serviceInfoStore: null,
-	
+
     constructor : function(config) {
-		
+		this.id = Ext.id();
 		config = Ext.apply(config || {}, {
 			layout : 'fit'
 		});
 
         this.createDataHandler(config);
-		Icinga.Cronks.Tackle.ObjectGrid.superclass.constructor.call(this, config);
+        config.tbar = new Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar({
+            id:this.id,
+            store: this.store
+        });
+        this.updateFilter = config.tbar.updateFilter;
+        Icinga.Cronks.Tackle.ObjectGrid.superclass.constructor.call(this, config);
 	},
+
+
     
     createDataHandler: function(cfgRef) {
 		this.summaryStore = new Icinga.Api.RESTStore({
@@ -46,6 +54,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'INSTANCE_NAME',
                 'HOST_ID',
                 'HOST_NAME',
+                'HOST_CURRENT_PROBLEM_STATE',
                 'HOST_CURRENT_STATE',
                 'HOST_OBJECT_ID',
                 'HOST_LAST_CHECK',
@@ -80,17 +89,20 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             displayInfo: true
         });
     },
-   
+    sm : new Ext.grid.CheckboxSelectionModel(),
+
 	initComponent : function() {
 		
+        
 		this.store.load();
 		this.cm = new Ext.grid.ColumnModel({
-
-			columns : [{
-				header : _('State'),
+			columns : [
+                this.sm,
+            {
 				dataIndex : 'HOST_CURRENT_STATE',
                 columnWidth: 25,
                 width: 25,
+                resizable: false,
                 renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 scope:this
             },{
@@ -99,11 +111,15 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             },{
                 header: _('Health'),
                 dataIndex: 'HOST_ID',
+                width:100,
+                resizable: false,
                 renderer: Icinga.Cronks.Tackle.Renderer.ServiceHealthRenderer,
                 scope:this
             },{
-                header: _('Availability'),
+                header: _('SLA'),
                 dataIndex: 'SLA_STATE_AVAILABLE',
+                width:50,
+                resizable:false,
                 renderer: function(value,meta,record) {
                     if(record.get('SLA_STATE_AVAILABLE') == 0 &&
                          record.get('SLA_STATE_UNAVAILABLE') == 0)

@@ -972,3 +972,60 @@ tr.bp_serviceRow {
 div.icinga-row-downtime {
     background-color: #dedede;
 }
+.tackle_qbtn .x-btn-text {
+    background-color: #acacac;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    width:100%;
+}
+.tackle_qbtn.state_up .x-btn-pressed .x-btn-text  {
+        background-color: #00cc00;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        width:100%;
+}
+.tackle_qbtn.state_critical .x-btn-pressed .x-btn-text {
+        background-color: #dd0000;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        width:100%;
+}
+.tackle_qbtn.state_down .x-btn-pressed .x-btn-text {
+        width:100%;
+        background-color: #cc0000;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+}
+.tackle_qbtn.state_unreachable .x-btn-pressed .x-btn-text {
+        width:100%;
+        background-color: #ff8000;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+}
+.tackle_qbtn.state_unknown .x-btn-pressed .x-btn-text {
+        width:100%;
+        background-color: #ff8800;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+}
+.tackle_qbtn.state_warning .x-btn-pressed .x-btn-text {
+        width:100%;
+        background-color: #ffff00;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+}
+.tackle_qbtn.state_pending .x-btn-pressed .x-btn-text {
+        width:100%;
+        color:#dedede;
+        background-color: #aa3377;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+}
