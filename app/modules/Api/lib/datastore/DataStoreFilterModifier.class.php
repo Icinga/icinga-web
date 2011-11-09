@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 * Thrown if an invalid formatted filter will be send to the FilterModifier
@@ -154,12 +154,15 @@ abstract class DataStoreFilterModifier extends IcingaBaseModel  implements IData
 
                 if (class_exists($filterClass)) {
                     // work around lack of lsb in php <5.3.0
+                    // throws errors below 5.3.0
 
-                    if ($this->static_quirks) {
-                        $filterParsed = call_user_func($filterClass."::parse",$filter,$this);
-                    } else {
-                        $filterParsed = $filterClass::parse($filter,$this);
-                    }
+                    // if ($this->static_quirks) {
+                    //    $filterParsed = call_user_func($filterClass."::parse",$filter,$this);
+                    //} else {
+                    //    $filterParsed = $filterClass::parse($filter,$this);
+                    //}
+                    
+                    $filterParsed = call_user_func($filterClass."::parse",$filter,$this);
                 }
 
                 if ($filterParsed && $filterParsed instanceof StoreFilterBase) {

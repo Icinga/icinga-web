@@ -92,16 +92,16 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             });
 
             this.add(
-            this.stateInfo, {
+                this.stateInfo, {
                 xtype: 'panel',
                 border: false,
                 layout: 'vbox',
+                
                 layoutConfig: {
                     align: 'stretchmax',
                     pack: 'start'
                 },
-                items: [
-                this.pluginOutputInfo, this.pluginPerfdataInfo]
+                items: [this.pluginOutputInfo, this.pluginPerfdataInfo]
             });
 
             this.doLayout();
