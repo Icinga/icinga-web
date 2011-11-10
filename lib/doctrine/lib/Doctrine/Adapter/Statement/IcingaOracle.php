@@ -153,14 +153,14 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
     private function createAliasMap(&$query) {
         $ctr = 0; 
         $matches = array();
-        $reg = "/AS *(?<alias>\w+)/";
+        $reg = "/AS +(?<alias>\w+)/";
         $this->aliasMap = array();
        
         preg_match_all($reg,$query,$matches);
         foreach($matches["alias"] as $alias) {
             if(preg_match("/DOCTRINE.*?/i",$alias))
                 continue;
-            $query = preg_replace("/(AS *)".$alias."/","AS f_".$ctr,$query,1);
+            $query = preg_replace("/(AS +)".$alias."/","AS f_".$ctr,$query,1);
             $this->aliasMap[("f_".($ctr++))] = $alias;
         }
       

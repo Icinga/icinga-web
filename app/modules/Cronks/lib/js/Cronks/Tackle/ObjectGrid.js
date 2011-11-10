@@ -5,8 +5,8 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 	title : 'Object tree',
     autoRefresh: true,
     viewConfig: {
-   //     forceFit: true,
-        getRowClass: function(record,index) {
+//       forceFit: true,
+       getRowClass: function(record,index) {
 
             if(parseInt(record.get('HOST_SCHEDULED_DOWNTIME_DEPTH'),10) > 0)
                 return 'icinga-row-downtime ';
@@ -46,7 +46,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
         });
 		this.store = new Icinga.Api.RESTStore({
             target: 'host',
-            limit: 25,
+            limit: 50,
             offset: 0,
             countColumn: true,
             withSLA: true,
@@ -86,7 +86,8 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
         });
         cfgRef.bbar = new Ext.PagingToolbar({
             store: this.store,
-            displayInfo: true
+            displayInfo: true,
+            pageSize:50
         });
     },
     sm : new Ext.grid.CheckboxSelectionModel(),
@@ -105,6 +106,43 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 resizable: false,
                 renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 scope:this
+            },{
+                dataIndex: 'HOST_ID',
+                width: 25,
+                resizable: false,
+                tooltip: _('Show services for this host'),
+                renderer: function() {
+                    return '<div class="icinga-icon-service" style="cursor:pointer;height:16px;width:16px"></div>';
+                },
+
+                listeners: {
+                    click: function(col,grid,rowIdx,event) {
+                        console.log(this,arguments);
+                        if(grid.parent == this)
+                            return false;
+                        if(this.servicesShown) {
+                            Ext.util.Observable.releaseCapture(this);
+                            this.servicesShown.destroy();
+                            delete(this.servicesShown);
+                            return true;
+                        }
+
+                        Ext.util.Observable.capture(this,function() {
+                            return false;
+                        },this);
+
+                        var row = this.getView().getRow(rowIdx);
+                        var record = this.getStore().getAt(rowIdx);
+                        this.servicesShown = new Icinga.Cronks.Tackle.ServicesSubGrid({
+                            hostId: record.get('HOST_ID'),
+                            renderTo: row,
+                            parent:this
+                        })
+
+                    },
+                    scope:this
+                }
+                
             },{
                 header: _('Host'),
                 dataIndex : 'HOST_NAME'
@@ -147,6 +185,11 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                        return "<div qtip='"+str+"'>"+value+"</div>";
                    return "<div qtip='"+value+"'>"+str+"</div>";
                 }
+            },{
+                dataIndex: 'HOST_ID',
+                renderer: function() {return ""},
+                menuDisabled: true,
+                width: 100
             }]
 		});
 		
