@@ -49,14 +49,19 @@ Icinga.Cronks.Tackle.Command.Panel = Ext.extend(Ext.Panel, {
 			flex : 1
 		});
 		
-		var dummyPanel2 = new Ext.Panel({
-            title : 'DUMMY',
-            html : 'I am a stupid dummy panel',
-            flex : 1
-        });
+		this.commandDataView.on('click', this.onCommandClick, this);
 		
-		this.add(this.commandDataView, dummyPanel2);
+		this.commandForm = new Icinga.Cronks.Tackle.Command.Form({
+			flex : 1
+		});
+		
+		this.add(this.commandDataView, this.commandForm);
 		
 		this.doLayout();
+	},
+	
+	onCommandClick : function(dataView, index, node, e) {
+		var record = this.store.getAt(index);
+		this.commandForm.rebuildFormForCommand(record.data.definition);
 	}
 });

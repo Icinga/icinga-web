@@ -263,6 +263,27 @@ div.cronk-data-view .x-view-selected .thumb{
 	background:transparent;
 }
 
+/* Command dataview (tackle) */
+div.tackle-command-view-item {
+    margin-right: 0;
+    margin: 10px;
+    padding: 5px;
+    border: 1px #c0c0c0 solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+}
+
+div.tackle-command-view-item-over {
+    border: 1px #333 solid;
+}
+
+div.tackle-command-view-item-inline {
+    display: inline-block;
+    margin-right: 5px;
+}
+
 /* div.x-portlet div.x-panel-body { */
 #west-frame .x-panel-body-noborder {
 	background: white url(../images/background/bg-frame-left.png) no-repeat bottom right;
