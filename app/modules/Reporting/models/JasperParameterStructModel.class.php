@@ -86,7 +86,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
         $struct = array();
 
         $rd_name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME);
-        $rd_type = $rd->getProperties()->getParameter('PROP_INPUTCONTROL_TYPE');
+        $rd_type = $rd->getProperties()->getParameter(JasperResourceDescriptor::PROP_DATATYPE_TYPE);
 
         if (array_key_exists($rd_name, $this->__nameMapping)) {
             $struct = $this->__nameMapping[$rd_name];
@@ -94,7 +94,7 @@ class Reporting_JasperParameterStructModel extends ReportingBaseModel {
 
         elseif(array_key_exists($rd_type, $this->__typeMapping)) {
             $struct = $this->__typeMapping[$rd_type];
-        }
+       }
 
         $target[$key] = $struct;
 

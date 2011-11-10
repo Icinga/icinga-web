@@ -6,6 +6,7 @@ Ext.ns('Icinga.Api.Command.Type');
     "use strict";
     Icinga.Api.Command.Type.AddComment = Ext.extend(Icinga.Api.Command.Type.Abstract, {
         layout: 'form',
+        border: false,
         buildForm: function() {
             var errorLabel = new Ext.form.Label({
                 
@@ -27,9 +28,9 @@ Ext.ns('Icinga.Api.Command.Type');
             },{
                 xtype: 'textarea',
                 fieldLabel: _('Comment'),
+                allowBlank : false,
                 name: 'comment',
-                anchor: '100% 80%',
-                height: 300
+                anchor: '100% 80%'
             },errorLabel
             ]);
             this.formAction.failure = function(rawResponse) {

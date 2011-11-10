@@ -2,8 +2,6 @@
 
 class Reporting_FieldValueConverterModel extends ReportingBaseModel {
 
-    const TYPE_DATE = 2;
-
     /**
      * @var SoapClient
      */
@@ -51,11 +49,11 @@ class Reporting_FieldValueConverterModel extends ReportingBaseModel {
             $name = $rd->getResourceDescriptor()->getParameter(JasperResourceDescriptor::DESCRIPTOR_ATTR_NAME);
 
             if (array_key_exists($name, $this->__p)) {
-                $type = $rd->getProperties()->getParameter('PROP_INPUTCONTROL_TYPE');
+                $type = $rd->getProperties()->getParameter('PROP_DATATYPE_TYPE');
                 $value = $this->__p[$name];
 
                 switch ($type) {
-                    case self::TYPE_DATE:
+                    case JasperRequestXmlDoc::DT_TYPE_DATE_TIME:
                         $value = $this->convertDate($value);
                         break;
                 }

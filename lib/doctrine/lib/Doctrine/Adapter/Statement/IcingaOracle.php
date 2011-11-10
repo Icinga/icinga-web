@@ -100,6 +100,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         // dirty icinga specific fixes  
         $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
         $query = preg_replace("/([^ ]*long_output)/i", "TO_CHAR($1)",$query);
+        $query = preg_replace("/([^ ]*perfdata)/i", "TO_CHAR($1)",$query);
+        $query = preg_replace("/([^ ]*logenry_data)/i", "TO_CHAR($1)",$query);
         
         if(substr_count($query,"(") != substr_count($query,")"))  
             $query .= ")";
@@ -153,14 +155,14 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
     private function createAliasMap(&$query) {
         $ctr = 0; 
         $matches = array();
-        $reg = "/AS *(?<alias>\w+)/";
+        $reg = "/AS +(?<alias>\w+)/";
         $this->aliasMap = array();
        
         preg_match_all($reg,$query,$matches);
         foreach($matches["alias"] as $alias) {
             if(preg_match("/DOCTRINE.*?/i",$alias))
                 continue;
-            $query = preg_replace("/(AS *)".$alias."/","AS f_".$ctr,$query,1);
+            $query = preg_replace("/(AS +)".$alias."/","AS f_".$ctr,$query,1);
             $this->aliasMap[("f_".($ctr++))] = $alias;
         }
       

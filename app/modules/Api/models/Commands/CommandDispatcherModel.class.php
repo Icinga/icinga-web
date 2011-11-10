@@ -10,19 +10,27 @@ class UnknownIcingaCommandException extends CommandDispatcherException {}
 class MissingCommandParameterException extends CommandDispatcherException {}
 class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements AgaviISingletonModel {
     protected $consoleContext = null;
+    
     protected $config = null;
-    protected static $xmlLoaded = false;
+    
+    /**
+     * @var Api_Commands_CommandInfoModel
+     */
+    protected $commandInfoModel = null;
+    
     public function setConsoleContext(IcingaConsoleInterface $model) {
         $this->consoleContext = $model;
     }
 
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
+        
         if (isset($parameters["console"]) && $parameters["console"] instanceof IcingaConsoleInterface) {
             $this->setConsoleContext($parameters["console"]);
         }
 
         parent::initialize($ctx,$parameters);
-        $this->loadConfig();
+        
+        $this->commandInfoModel = $ctx->getModel('Commands.CommandInfo', 'Api');
     }
 
     public function submitCommand($cmd_name,array $params,
@@ -81,20 +89,16 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
     }
 
     public function getCommands() {
-        return $this->config;
+        return $this->commandInfoModel->getInfo();
     }
 
     public function getCommand($name) {
 
-        if (isset($this->config[$name])) {
-            return $this->config[$name];
+        if ($this->commandInfoModel->hasCommand($name)) {
+            return $this->commandInfoModel->getInfo($name);
         } else {
             throw new UnknownIcingaCommandException("Command $name is undefined");
         }
-    }
-
-    protected function loadConfig() {
-        $this->config = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/icingaCommands.xml'));
     }
 
 }

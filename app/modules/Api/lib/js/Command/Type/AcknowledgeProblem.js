@@ -63,6 +63,7 @@ Ext.ns('Icinga.Api.Command.Type');
         }
 
     });
+    
     Icinga.Api.Command.Type.AcknowledgeHostProblem = Icinga.Api.Command.Type.AcknowledgeProblem;
     Icinga.Api.Command.Type.AcknowledgeSvcProblem = Icinga.Api.Command.Type.AcknowledgeProblem;
 })();

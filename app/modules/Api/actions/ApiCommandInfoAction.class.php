@@ -1,6 +1,6 @@
 <?php
 
-class Api_ApiCommandInfoAction extends IcingaApiBaseAction {
+class Api_ApiCommandInfoAction extends IcingaApiBaseAction implements IAppKitDispatchableAction {
 	public function getDefaultViewName() {
 		return 'Success';
 	}
@@ -13,6 +13,21 @@ class Api_ApiCommandInfoAction extends IcingaApiBaseAction {
 	    if (!$this->context->getUser()->isAuthenticated()) {
 	        return array('Api', 'GenericError');
 	    }
+	    
+	    $model = $this->getContext()->getModel('Commands.CommandInfo', 'Api');
+	    
+	    $commands = array ();
+	    
+	    if ($rd->getParameter('command')) {
+	        $commands = $model->getInfo($rd->getParameter('command'));
+	    } elseif ($rd->getParameter('type')) {
+	        $commands = $model->filterCommandByType($rd->getParameter('type'));
+	    } else {
+	        $commands = $model->getAll();
+	    }
+	    
+	    $this->setAttributeByRef('commands', $commands);
+	    
 	    return $this->getDefaultViewName();
 	}
 }

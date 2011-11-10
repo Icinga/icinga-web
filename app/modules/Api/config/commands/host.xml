@@ -5,18 +5,24 @@
  
     <ic:command name="DEL_HOST_DOWNTIME">
         <ic:definition>DEL_HOST_DOWNTIME</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_DOWNTIME_ID" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DEL_HOST_DOWNTIME_BY_HOST_NAME">
         <ic:definition>DEL_HOST_DOWNTIME_BY_HOST_NAME</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DEL_HOST_COMMENT">
         <ic:definition>DEL_HOST_COMMENT</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_COMMENT_ID" />
         </ic:parameters>
@@ -25,6 +31,8 @@
     <ic:command name="SCHEDULE_HOST_CHECK">
         <ic:definition>SCHEDULE_HOST_CHECK</ic:definition>
         <ic:isSimple>true</ic:isSimple>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_CHECKTIME" />
@@ -34,6 +42,8 @@
     <ic:command name="SCHEDULE_FORCED_HOST_CHECK">
         <ic:definition>SCHEDULE_FORCED_HOST_CHECK</ic:definition>
         <ic:isSimple>true</ic:isSimple>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_CHECKTIME" />
@@ -41,6 +51,8 @@
     </ic:command>
     <ic:command name="SCHEDULE_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_HOST_DOWNTIME</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -54,6 +66,8 @@
     </ic:command>
     <ic:command name="SCHEDULE_AND_PROPAGATE_TRIGGERED_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_AND_PROPAGATE_TRIGGERED_HOST_DOWNTIME</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -67,6 +81,8 @@
     </ic:command>
     <ic:command name="SCHEDULE_AND_PROPAGATE_HOST_DOWNTIME">
         <ic:definition>SCHEDULE_AND_PROPAGATE_HOST_DOWNTIME</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -80,6 +96,8 @@
     </ic:command>
     <ic:command name="SCHEDULE_HOST_SVC_DOWNTIME">
         <ic:definition>SCHEDULE_HOST_SVC_DOWNTIME</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -93,6 +111,8 @@
     </ic:command>
     <ic:command name="PROCESS_HOST_CHECK_RESULT">
         <ic:definition>PROCESS_HOST_CHECK_RESULT</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_RETURN_CODE_HOST" />
@@ -102,6 +122,8 @@
     </ic:command>
     <ic:command name="ACKNOWLEDGE_HOST_PROBLEM">
         <ic:definition>ACKNOWLEDGE_HOST_PROBLEM</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_STICKY" />
@@ -113,6 +135,8 @@
     </ic:command>
     <ic:command name="ACKNOWLEDGE_HOST_PROBLEM_EXPIRE">
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM_EXPIRE</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_STICKY" />
@@ -125,6 +149,8 @@
     </ic:command>
     <ic:command name="REMOVE_HOST_ACKNOWLEDGEMENT">
         <ic:definition>REMOVE_HOST_ACKNOWLEDGEMENT</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
         	<ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
@@ -132,6 +158,8 @@
     <ic:command name="ADD_HOST_COMMENT">
         <ic:definition>ADD_HOST_COMMENT</ic:definition>
         <ic:isSimple>true</ic:isSimple>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_PERSISTENT" />
@@ -141,48 +169,64 @@
     </ic:command>
     <ic:command name="DISABLE_HOST_CHECK">
         <ic:definition>DISABLE_HOST_CHECK</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_HOST_CHECK">
         <ic:definition>ENABLE_HOST_CHECK</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_PASSIVE_HOST_CHECKS">
         <ic:definition>DISABLE_PASSIVE_HOST_CHECKS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_PASSIVE_HOST_CHECKS">
         <ic:definition>ENABLE_PASSIVE_HOST_CHECKS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="STOP_OBSESSING_OVER_HOST">
         <ic:definition>STOP_OBSESSING_OVER_HOST</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="START_OBSESSING_OVER_HOST">
         <ic:definition>START_OBSESSING_OVER_HOST</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_HOST_NOTIFICATIONS">
         <ic:definition>DISABLE_HOST_NOTIFICATIONS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_HOST_NOTIFICATIONS">
         <ic:definition>ENABLE_HOST_NOTIFICATIONS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
@@ -190,6 +234,8 @@
     <ic:command name="SEND_CUSTOM_HOST_NOTIFICATION">
         <ic:definition>SEND_CUSTOM_HOST_NOTIFICATION</ic:definition>
         <ic:isSimple>true</ic:isSimple>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_NOTIFICATION_OPTIONS" />
@@ -199,54 +245,72 @@
     </ic:command>
     <ic:command name="DISABLE_HOST_SVC_NOTIFICATIONS">
         <ic:definition>DISABLE_HOST_SVC_NOTIFICATIONS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_HOST_SVC_NOTIFICATIONS">
         <ic:definition>ENABLE_HOST_SVC_NOTIFICATIONS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="SCHEDULE_FORCED_HOST_SVC_CHECKS">
         <ic:definition>SCHEDULE_FORCED_HOST_SVC_CHECKS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_HOST_SVC_CHECKS">
         <ic:definition>DISABLE_HOST_SVC_CHECKS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_HOST_SVC_CHECKS">
         <ic:definition>ENABLE_HOST_SVC_CHECKS</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_HOST_EVENT_HANDLER">
         <ic:definition>DISABLE_HOST_EVENT_HANDLER</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_HOST_EVENT_HANDLER">
         <ic:definition>ENABLE_HOST_EVENT_HANDLER</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="DISABLE_HOST_FLAP_DETECTION">
         <ic:definition>DISABLE_HOST_FLAP_DETECTION</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>
     </ic:command>
     <ic:command name="ENABLE_HOST_FLAP_DETECTION">
         <ic:definition>ENABLE_HOST_FLAP_DETECTION</ic:definition>
+        <ic:type>host</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
         </ic:parameters>

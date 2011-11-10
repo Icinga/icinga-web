@@ -25,10 +25,23 @@
        <xs:attributeGroup ref="parameterAttrs" />
     </xs:complexType> 
     
+    <xs:simpleType name="commandType">
+        <xs:restriction base="xs:normalizedString">
+            <xs:enumeration value="host"/>
+            <xs:enumeration value="service"/>
+            <xs:enumeration value="hostgroup"/>
+            <xs:enumeration value="servicegroup"/>
+            <xs:enumeration value="process"/>
+            <xs:enumeration value="unknown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:complexType name="command" mixed="true">       
         <xs:sequence>
             <xs:element name="definition" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="isSimple" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="type" type="commandType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="iconCls" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="parameters" type="parameters" minOccurs="1"></xs:element>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" /> 

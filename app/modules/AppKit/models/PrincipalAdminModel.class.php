@@ -75,7 +75,6 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
          */
         $this->deleteAllPrincipalTargetEntries($p);
 
-
         foreach($pt as $id=>$principalToSet) {
             if (isset($principalToSet['set'])) {
                 foreach($principalToSet['set'] as $aid=>$pt_set) {
