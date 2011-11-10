@@ -2,21 +2,43 @@
 Ext.ns('Icinga.Cronks.Tackle.Filter');
 
 Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
+    autoRefreshEnabled: true,
+
     constructor: function(config) {
         "use strict";
         this.parentId = config.id;
         this.store = config.store;
 		var filterUpdateTask = new Ext.util.DelayedTask(this.updateFilterImpl, this);
-        this.updateFilter = function() {
-            filterUpdateTask.delay(200);
+        this.updateFilter = function(t) {
+            filterUpdateTask.delay(200,null);
         };
         Ext.Toolbar.prototype.constructor.call(this,{
             items: this.createTbar(config)
         });
 
     },
+    startAutoRefresh: function() {
+        if(this.arTask)
+            return;
+       this.autoRefreshEnabled = false;
+       this.arTask = new Ext.util.TaskRunner();
+       this.arTask.start({
+            run: this.updateFilterImpl,
+            interval: AppKit.getPrefVal('org.icinga.grid.refreshTime')*100 || 30000,
+            scope:this
+        });
+    },
+    stopAutoRefresh: function() {
+        if(!this.arTask)
+            return;
+        this.autoRefreshEnabled = false;
+        this.arTask.stopAll()
+        delete(this.arTask);
+
+    },
     updateFilterImpl: function() {
-       
+         if(!this.isVisible)
+            return;
         var filter = {
             states: {
                 0 : Ext.getCmp('filterbuttons_host_state_up_'+this.parentId).pressed,
@@ -36,7 +58,6 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
             type: 'AND',
             field: []
         };
-
         for(var i in filter.states) {
             var state = filter.states[i];
             if(state)
@@ -86,7 +107,10 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
            });
         }
         this.store.setFilter(jsonFilter);
-        this.store.load();
+        this.ownerCt.bottomToolbar.doLoad();
+        if(this.autoRefreshEnabled) {
+            this.startAutoRefresh()
+        }
 
     },
 
@@ -97,7 +121,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
             text: _('Refresh'),
             iconCls: 'icinga-icon-arrow-refresh',
             handler: function() {
-                config.bbar.doLoad();
+                this.ownerCt.bottomToolbar.doLoad();
             },
             scope: this
         },{
@@ -107,7 +131,11 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
             menu: [{
                 text: _('Autorefresh'),
                 xtype: 'menucheckitem',
-                checked: true
+                checked: this.autoRefreshEnabled,
+                handler: function(state) {
+                    this.stopAutoRefresh();
+                },
+                scope:this
             }]
         },{
             xtype: 'tbspacer',

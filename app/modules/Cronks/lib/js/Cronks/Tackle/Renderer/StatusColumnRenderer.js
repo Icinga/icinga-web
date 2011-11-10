@@ -14,19 +14,21 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
         },
         applyClickHandler: function(el,record) {
             var type = record.get('SERVICE_ID') ? 'SERVICE' : 'HOST';
-            console.log("CLICKy", record,type,this,arguments)
+            var targets = [{instance: record.get('INSTANCE_NAME'), host: record.get('HOST_NAME')}];
+            targets[0][type.toLowerCase()] = record.get(type+'_NAME');
+
             el.addListener('click', function (e) {
                 (new Ext.menu.Menu({
                     items: [{
                         text: _('Acknowledge problem'),
                         iconCls: 'icinga-icon-info-problem-acknowledged',
                         handler: function() {
-                            var w = new Ext.Window({ title: _('Acknowledge problem'), width: 500, height: 400, renderTo: Ext.getBody(), layout:'fit' });
+                            var w = new Ext.Window({title: _('Acknowledge problem'), width: 500, height: 400, renderTo: Ext.getBody(), layout:'fit'});
                             var b = new Icinga.Api.Command.FormBuilder();
                             var i = b.build('ACKNOWLEDGE_'+(type == 'SERVICE' ? 'SVC' : type)+'_PROBLEM', {
                                 renderSubmit : true,
-                                targets : [{ instance : record.get('INSTANCE_NAME'), host: record.get(type+'_NAME')}],
-                                cancelHandler : function(form, action) {w.hide(); }
+                                targets : targets,
+                                cancelHandler : function(form, action) {w.hide();}
 
                             });
                             w.add(i);
@@ -36,13 +38,12 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                         text: _('Add comment'),
                         iconCls: 'icinga-icon-comment',
                         handler: function() {
-                            var w = new Ext.Window({ title: _('Add comment'), width: 500, height: 300, renderTo: Ext.getBody(), layout:'fit' });
+                            var w = new Ext.Window({title: _('Add comment'), width: 500, height: 300, renderTo: Ext.getBody(), layout:'fit'});
                             var b = new Icinga.Api.Command.FormBuilder();
                             var i = b.build('ADD_'+(type == 'SERVICE' ? 'SVC' : type)+'_COMMENT', {
                                 renderSubmit : true,
-                                targets : [{ instance : record.get('INSTANCE_NAME'), host: record.get(type+'_NAME')}],
-                                cancelHandler : function(form, action) {w.hide(); }
-
+                                targets : targets,
+                                cancelHandler : function(form, action) {w.hide();}
                             });
                             w.add(i);
                             w.show(Ext.getBody());
@@ -77,14 +78,19 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                     fn: function(btn) {
                         if(btn == "yes") {
                             var cmd =
-                            {   command : 'REMOVE_'+(type === 'SERVICE' ? 'SVC' : type)+'_ACKNOWLEDGEMENT',
-                                data : {},
+                            {command : 'REMOVE_'+(type === 'SERVICE' ? 'SVC' : type)+'_ACKNOWLEDGEMENT',
+                                data : {
+                                    host: record.get('HOST_NAME')
+                                },
                                 targets : [{
                                     instance: record.get('INSTANCE_NAME'),
-                                    host: record.get(type+'_NAME')
+                                    host: record.get('HOST_NAME')
                                 }]
                             }
-                            cmd.data[type == 'SERVICE' ? 'service' : 'host'] = record.get(type+'_NAME');
+                            if(type == 'SERVICE') {
+                                cmd.data['service'] = record.get(type+'_NAME');
+                                cmd.targets[0]['service'] = record.get(type+'_NAME');
+                            }
                             Icinga.Api.Command.Facade.sendCommand(cmd);
                         }
                     },
@@ -125,7 +131,10 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                                     host: record.get(type+'_NAME')
                                 }]
                             };
-                            cmd.data[type == 'SERVICE' ? 'service' : 'host'] = record.get(type+'_NAME');
+                            if(type == 'SERVICE') {
+                                cmd.data['service'] = record.get(type+'_NAME');
+                                cmd.targets[0]['service'] = record.get(type+'_NAME');
+                            }
                             Icinga.Api.Command.Facade.sendCommand(cmd);
                         }
                     },
@@ -168,7 +177,6 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                 metaData.css = 'icinga-status-pending';
                 break;
         }
-        console.log(metaData);
         var id = Ext.id();
 
         (function () {

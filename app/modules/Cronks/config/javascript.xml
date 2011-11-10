@@ -61,6 +61,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Comment/Grid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Comment/CreateForm.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Comment/Panel.js</ae:parameter>
+
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Filter/TackleMainFilterTbar.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/Head.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/State.js</ae:parameter>
@@ -68,10 +69,10 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/Perfdata.js</ae:parameter>
             
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Cronk.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ServicesSubGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ObjectGrid.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/InfoTabPanel.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Commands.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Services.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Relations.js</ae:parameter>
             
         </javascript>

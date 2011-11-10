@@ -1,10 +1,20 @@
 Ext.ns('Icinga.Cronks.Tackle');
 
-Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
 
+Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
+    autoDestroy: true,
     ctCls: 'x-tree-lines',
     stripeRows: true,
-    style:'margin-left:25px',
+    style:'margin-left:25px',    
+    cls: 'icinga-service-subgrid',
+    events: ['serviceSelected'],
+    bubbleEvents: ['serviceSelected'],
+    listeners: {
+        rowClick: function(grid, idx,event) {
+            grid.fireEvent('serviceSelected',grid.getStore().getAt(idx));
+        }
+    },
+
     constructor : function(config) {
         
         config.store = this.createStore(config.hostId);
@@ -13,11 +23,12 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             store: config.store,
             displayInfo: true,
             pageSize:25
-        })
+        });
+        
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.constructor.call(this, config);
     },
-    
     createStore: function(hostId) {
+
         this.store = new Icinga.Api.RESTStore({
             target: 'service',
             limit: 25,
@@ -27,6 +38,8 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             columns: [
                 'INSTANCE_NAME',
                 'SERVICE_ID',
+                'HOST_NAME',
+                
                 'SERVICE_NAME',
                 'SERVICE_CURRENT_PROBLEM_STATE',
                 'SERVICE_CURRENT_STATE',
@@ -50,12 +63,19 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         return this.store;
     },
     realign: function() {
-        this.setWidth(this.parent.getInnerWidth()-25);
-        var adjHeight = this.parent.getInnerHeight();
-        var reqHeight = this.getStore().getCount()*30;
-        var maxHeight = adjHeight*0.7;
-        this.setHeight(reqHeight > maxHeight ? maxHeight : reqHeight);
-        this.doLayout();
+        try {
+            this.setWidth(this.parent.getInnerWidth()*0.8);
+            var adjHeight = this.parent.getInnerHeight();
+            var reqHeight = (this.getStore().getCount()+1)*30;
+            if(reqHeight < 200)
+                reqHeight = 200;
+            var maxHeight = adjHeight*0.7;
+            if(this.el && this.el.dom)
+                this.setHeight(reqHeight > maxHeight ? maxHeight : reqHeight);
+            this.doLayout();
+        } catch(e) {
+            // ignore errors, those can occur when the grid is refreshed
+        }
     },
 
     initComponent : function() {
@@ -66,11 +86,11 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             this.realign();
         },this);
         this.store.on("load",function(store,records) {
-            this.setHeight((records.length*30)%(this.parent.getHeight()*0.8));
+            this.realign();
         },this);
         this.on("afterrender",function() {
             this.realign();
-        },this)
+        },this);
         
         this.cm = new Ext.grid.ColumnModel({
 			columns : [{
@@ -89,15 +109,6 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: function() {
                     return '<div class="icinga-icon-service" style="width:20px;height:16px"></div>';
                 },
-                listeners: {
-
-                    click: function(col,grid,rowIdx,e) {
-                        e.stopEvent();
-                        return false;
-                    },
-                    scope: this
-                },
-
                 width:35
             },{
                 header: _('Service name'),
@@ -138,6 +149,34 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
 		});
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.initComponent.call(this);
         this.store.load();
+        this.preventEventBubbling();
+    },
+    
+    /**
+     * As grids arent supposed to be nested in other grid rows, this requires a little bit
+     * of hacking around event bubbling issues. rowSelection and clicks would be called
+     * in the child grid and afterwards bubble to the parent grid, which leads to situations
+     * like row selection being performed simultaneously on both grids.
+     *
+     * This stops those events in the child grid before they can reach the parent grid
+     * 
+     * @author jannis.mosshammer<jannis.mosshammer@netways.de>
+     */
+    preventEventBubbling: function() {
+        var methods = [ "onRowOver","onRowOut"];
+        Ext.iterate(methods, function(m) {
+            this.getView()[m] = function(e) {
+                if(e.stopEvent)
+                    e.stopEvent();
+                return Ext.grid.GridView.prototype[m].apply(this,arguments);
+                
+            };
+        },this);
+
+        this.processEvent = function(name,e) {
+            e.stopEvent();
+            return Ext.grid.GridPanel.prototype.processEvent.apply(this,arguments);
+        };
     }
 });
 
