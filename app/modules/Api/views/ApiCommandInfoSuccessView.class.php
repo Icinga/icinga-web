@@ -1,14 +1,12 @@
 <?php
 
 class Api_ApiCommandInfoSuccessView extends IcingaApiBaseView {
-    /**
-     * @var Api_Commands_CommandInfoModel
-     */
-    private $model = null;
+    
+    private $commands = array ();
     
     public function initialize(AgaviExecutionContainer $container) {
         parent::initialize($container);
-        $this->model = $container->getContext()->getModel('Commands.CommandInfo', 'Api');
+        $this->commands = $container->getAttribute('commands', null, array ());
     }
     
 	public function executeHtml(AgaviRequestDataHolder $rd) {
@@ -18,12 +16,11 @@ class Api_ApiCommandInfoSuccessView extends IcingaApiBaseView {
 	}
 	
 	public function executeXml(AgaviRequestDataHolder $rd) {
-	    $commands = $this->model->getInfo($rd->getParameter('command', null));
 	    
 	    $dom = new DOMDocument('1.0', 'utf-8');
 	    $root = $dom->createElement('results');
 	    $dom->appendChild($root);
-	    $this->xml2Array($commands, $root, $dom);
+	    $this->xml2Array($this->commands, $root, $dom);
 	    
 	    return $dom->saveXML();
 	}
@@ -42,9 +39,21 @@ class Api_ApiCommandInfoSuccessView extends IcingaApiBaseView {
 	}
 	
 	public function executeJson(AgaviRequestDataHolder $rd) {
-	    return json_encode(array(
-	        'success' => true,
-	        'results' => $this->model->getInfo($rd->getParameter('command', null))
-	    ));
+	    
+	    if ($rd->getParameter('extjs')) {
+	        $json = new AppKitExtJsonDocument();
+	        $json->hasField('definition');
+	        $json->hasField('type');
+	        $json->hasField('isSimple');
+	        $json->hasField('iconCls');
+	        $json->setData($this->commands);
+	        $json->setSuccess(true);
+	        return $json->getJson();
+	    } else {
+    	    return json_encode(array(
+    	        'success' => true,
+    	        'results' => $this->commands
+    	    ));
+	    }
 	}
 }

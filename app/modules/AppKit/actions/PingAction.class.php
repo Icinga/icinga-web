@@ -1,6 +1,6 @@
 <?php
 
-class AppKit_PingAction extends AppKitBaseAction {
+class AppKit_PingAction extends AppKitBaseAction implements IAppKitDispatchableAction {
     /**
      * Returns the default view if the action does not serve the request
      * method used.

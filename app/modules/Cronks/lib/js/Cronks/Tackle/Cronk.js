@@ -34,18 +34,23 @@ Ext.ns('Icinga.Cronks.Tackle');
             	type: type
             });
             
-            this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
+            this.tabCommands = new Icinga.Cronks.Tackle.Command.Panel({
+            	type : type
+            });
             
             this.tabComments = new Icinga.Cronks.Tackle.Comment.Panel({
                 type: type
             });
             
             this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
+            
+            this.tabServices = new Icinga.Cronks.Tackle.Information.Services();
 
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
 
             this.infoTabs.add([
                 this.tabHeadInfo, 
+                this.tabServices, 
                 this.tabCommands, 
                 this.tabComments, 
                 this.tabRelations]

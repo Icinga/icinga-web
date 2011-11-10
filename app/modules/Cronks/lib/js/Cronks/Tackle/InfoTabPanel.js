@@ -1,7 +1,7 @@
 Ext.ns('Icinga.Cronks.Tackle');
 
 Icinga.Cronks.Tackle.InfoTabPanel = Ext.extend(Ext.TabPanel, {
-	activeTab : 0,
+	activeTab : 2,
 	border : false,
 	
 	constructor : function(config) {
