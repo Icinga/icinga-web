@@ -36,12 +36,17 @@ class IcingaCommandsConfigHandler extends AgaviXmlConfigHandler {
 
             $definition = $xpath->query("ic:definition",$command);
             $isSimple = $xpath->query("ic:isSimple",$command);
+            $type = $xpath->query("ic:type",$command);
+            $iconCls = $xpath->query("ic:iconCls",$command);
             $currentCommand["definition"] = $definition->item(0)->nodeValue;
             if($isSimple->length>0)
                 $currentCommand["isSimple"] = $isSimple->item(0)->nodeValue;
             else 
                 $currentCommand["isSimple"] = false;
-            $currentCommand["parameters"] = $this->extractParamsFromCommandNode($command);;
+            
+            $currentCommand['type'] = $type->item(0)->nodeValue;
+            $currentCommand['iconCls'] = $iconCls->item(0)->nodeValue;
+            $currentCommand["parameters"] = $this->extractParamsFromCommandNode($command);
             $commandResult[$command->attributes->getNamedItem("name")->value] = $currentCommand;
         }
         return $commandResult;

@@ -15,6 +15,21 @@
                 </errors>
             </validator>
             
+            <validator name="type" class="regex" required="false">
+                <argument>type</argument>
+                <ae:parameter name="pattern"><![CDATA[@^(host|service|hostgroup|servicegroup|process)$@]]></ae:parameter>
+                <errors>
+                    <error>Could not validate type, must be one of host, service, hostgroup, servicegroup, process</error>
+                </errors>
+            </validator>
+            
+            <validator name="extjs" class="number" required="false">
+                <argument>extjs</argument>
+                <errors>
+                    <error>Could not validate parameter extjs (store formatting)</error>
+                </errors>
+            </validator>
+            
 		</validators>
 		
 	</ae:configuration>
