@@ -4,9 +4,16 @@ Ext.ns('Icinga.Cronks.Tackle');
 Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 	title : 'Object tree',
     autoRefresh: true,
+    events: ['hostSelected','serviceSelected'],
+    bubbleEvents: ['hostSelected','serviceSelected'],
     viewConfig: {
+        
 //       forceFit: true,
-       getRowClass: function(record,index) {
+       getRowClass: function(record,index,rp) {
+
+            rp.body = '<p>'+record.data.HOST_NAME+'</p>';
+                return 'x-grid3-row-expanded';
+
 
             if(parseInt(record.get('HOST_SCHEDULED_DOWNTIME_DEPTH'),10) > 0)
                 return 'icinga-row-downtime ';
@@ -30,6 +37,12 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
         Icinga.Cronks.Tackle.ObjectGrid.superclass.constructor.call(this, config);
 	},
 
+    listeners: {
+        rowclick: function(grid, idx, event ) {
+            var record = grid.getStore().getAt(idx);
+            grid.fireEvent('hostSelected',record);
+        }
+    },
 
     
     createDataHandler: function(cfgRef) {
@@ -64,6 +77,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
             ],
             listeners: {
+ 
                 load: function(s,records) {
                     var idFilter = {
                         type: 'OR',
@@ -79,7 +93,8 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                     },this);
                     this.summaryStore.setFilter(idFilter);
                     this.summaryStore.load();
-                    
+                    for(var i in this.visibleServicePanels)
+                        this.closeServicePanel(i);
                 },
                 scope: this
             }
@@ -91,11 +106,69 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
         });
     },
     sm : new Ext.grid.CheckboxSelectionModel(),
+    refreshLocked: false,
+    lockRefresh: function() {
+        if(this.refreshLocked)
+            return;
+        var load = this.store.load;
+        this.store.load = function() {
+            this.store.load.defer(500);
+        }
+        this.refreshLocked = true;
+        (function() {
+            this.store.load=load;
+            this.refreshLocked = false;
+        }).defer(300);
+    },
+
+    visibleServicePanels: {
+        length: 0
+    },
+
+    closeServicePanel: function(id) {
+        if(this.visibleServicePanels[id]) {
+            if(!this.visibleServicePanels[id] || !this.visibleServicePanels[id].destroy) {
+                delete(this.visibleServicePanels[id]);
+                return true;
+            }
+            this.visibleServicePanels[id].destroy();
+            delete(this.visibleServicePanels[id]);
+            this.visibleServicePanels.length--;
+            return true;
+        }
+    },
+    
+    openServicePanel: function(id, el) {
+        if(this.visibleServicePanels[id])
+            this.visibleServicePanels[id].destroy();
+        this.visibleServicePanels[id] = new Icinga.Cronks.Tackle.ServicesSubGrid({
+            hostId: id,
+            renderTo: el,
+            parent:this,
+            listeners: {
+                beforeadd: function() {
+                    this.lockRefresh();
+                },
+                removed: function() {
+                    closeServicePanel(id);
+                },
+                serviceSelected: function(val) {
+                    AppKit.log(this,arguments);
+                    this.fireEvent("serviceSelected",val);
+
+                },
+                scope: this
+            }
+        });
+        this.visibleServicePanels.length++;
+    },
 
 	initComponent : function() {
 		
-        
-		this.store.load();
+        this.on("render", function() {
+            this.updateFilter();
+        },this);
+
 		this.cm = new Ext.grid.ColumnModel({
 			columns : [
                 this.sm,
@@ -107,6 +180,30 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 scope:this
             },{
+                header: _('Host'),
+                dataIndex : 'HOST_NAME',
+                style: 'border: 1px solid black;',
+                renderer: function(value, metaData, record, rowIndex, colIndex, store) {   
+                    var state = parseInt(record.get("HOST_CURRENT_STATE"),10);
+
+                    switch(state) {
+                        case 0:
+                            metaData.css = 'icinga-status-up';
+                            break;
+                        case 1:
+                            metaData.css = 'icinga-status-down';
+                            break;
+                        case 2:
+                            metaData.css = 'icinga-status-unreachable';
+                            break;
+                        case 99:
+                            metaData.css = 'icinga-status-pending';
+                            break;
+                    }
+                    
+                    return "<span style='"+((state == 1 || state == 99) ? 'color:#ffffff' : 'color:#000000') +"'>"+value+"</span>";
+                }
+            },{
                 dataIndex: 'HOST_ID',
                 width: 25,
                 resizable: false,
@@ -116,38 +213,22 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 },
 
                 listeners: {
-                    click: function(col,grid,rowIdx,event) {
-                        console.log(this,arguments);
-                        if(grid.parent == this)
-                            return false;
-                        if(this.servicesShown) {
-                            Ext.util.Observable.releaseCapture(this);
-                            this.servicesShown.destroy();
-                            delete(this.servicesShown);
-                            return true;
-                        }
-
-                        Ext.util.Observable.capture(this,function() {
-                            return false;
-                        },this);
-
+                    click: function(col,grid,rowIdx,e) {
+                       
                         var row = this.getView().getRow(rowIdx);
                         var record = this.getStore().getAt(rowIdx);
-                        this.servicesShown = new Icinga.Cronks.Tackle.ServicesSubGrid({
-                            hostId: record.get('HOST_ID'),
-                            renderTo: row,
-                            parent:this
-                        })
-
+                        var id = record.get('HOST_ID');
+                        if(this.visibleServicePanels[id])
+                            this.closeServicePanel(id);
+                        else 
+                            this.openServicePanel(id,row);
+                       
                     },
                     scope:this
                 }
                 
             },{
-                header: _('Host'),
-                dataIndex : 'HOST_NAME'
-            },{
-                header: _('Health'),
+                header: _('Service health'),
                 dataIndex: 'HOST_ID',
                 width:100,
                 resizable: false,

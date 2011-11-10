@@ -28,15 +28,15 @@ Ext.ns('Icinga.Cronks.Tackle');
                 region: 'center'
             });
 
-            this.objectGrid.on('rowclick', this.rowSingleClickHandler, this);
 
-            this.tabHeadInfo = new Icinga.Cronks.Tackle.Information.Head({
-            	type: type
+            this.tabHeadHostInfo = new Icinga.Cronks.Tackle.Information.Head({
+                type: 'host'
             });
-            
-            this.tabCommands = new Icinga.Cronks.Tackle.Command.Panel({
-            	type : type
+            this.tabHeadServiceInfo = new Icinga.Cronks.Tackle.Information.Head({
+                type: 'service'
             });
+
+            this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
             
             this.tabComments = new Icinga.Cronks.Tackle.Comment.Panel({
                 type: type
@@ -49,12 +49,12 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
 
             this.infoTabs.add([
-                this.tabHeadInfo, 
-                this.tabServices, 
+                this.tabHeadHostInfo,
+                this.tabHeadServiceInfo,
                 this.tabCommands, 
                 this.tabComments, 
-                this.tabRelations]
-            );
+                this.tabRelations
+            ]);
 
             this.collapsibleFrame = new Ext.Panel({
                 layout: 'fit',
@@ -71,27 +71,44 @@ Ext.ns('Icinga.Cronks.Tackle');
             });
 
             this.add([this.collapsibleFrame, this.objectGrid]);
+            this.initEvents();
         },
 
-        rowSingleClickHandler: function (grid, index, e) {
-            var store = grid.getStore();
-            var record = store.getAt(index);
+        initEvents: function () {
+            this.objectGrid.on("hostSelected", function(record) {
+                this.tabComments.grid.setObjectId(record.data.HOST_OBJECT_ID);
 
-            // Notify all other tabs
+                this.infoTabs.unhideTabStripItem(this.tabHeadHostInfo);
+                this.tabHeadHostInfo.loadDataForObjectId(record.data.HOST_OBJECT_ID);
+                this.infoTabs.hideTabStripItem(this.tabHeadServiceInfo);
 
-            this.tabComments.grid.setObjectId(record.data.HOST_OBJECT_ID);
-            this.tabHeadInfo.loadDataForObjectId(record.data.HOST_OBJECT_ID);
+                this.tabComments.form.setObjectData({
+                    objectName : record.data.HOST_NAME,
+                    objectId : record.data.HOST_ID,
+                    objectInstance : record.data.INSTANCE_NAME
+                });
+                if (this.collapsibleFrame.collapsed === true) {
+                    this.collapsibleFrame.expand(true);
+                }
+            },this);
+            this.objectGrid.on("serviceSelected", function(record) {
+                if(!record.data)
+                    return;
+                this.infoTabs.unhideTabStripItem(this.tabHeadServiceInfo);
+                this.infoTabs.setActiveTab(this.tabHeadServiceInfo);
+                this.infoTabs.hideTabStripItem(this.tabHeadHostInfo);
+                //this.tabComments.grid.setObjectId(record.data.SERVICE_OBJECT_ID);
+                this.tabHeadServiceInfo.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                /*this.tabComments.form.setObjectData({
+                    objectName : record.data.SERVICE_NAME,
+                    objectId : record.data.SERVICE_ID,
+                    objectInstance : record.data.INSTANCE_NAME
+                });*/
+                if (this.collapsibleFrame.collapsed === true) {
+                    this.collapsibleFrame.expand(true);
+                }
+            },this);
 
-            this.tabComments.form.setObjectData({
-            	objectName : record.data.HOST_NAME,
-            	objectId : record.data.HOST_ID,
-            	objectInstance : record.data.INSTANCE_NAME
-            });
-
-
-            if (this.collapsibleFrame.collapsed === true) {
-                this.collapsibleFrame.expand(true);
-            }
         }
     });
 

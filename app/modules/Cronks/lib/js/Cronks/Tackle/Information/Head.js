@@ -24,11 +24,12 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             if (Ext.isEmpty(config.type)) {
                 throw ("config.type is needed: host or service!");
             }
-
+            this.targetType = config.type;
             Icinga.Cronks.Tackle.Information.Head.superclass.constructor.call(this, config);
         },
 
         buildFieldsObject: function (type) {
+            
             var sourceArray = this['columns_' + type];
 
             if (Ext.isArray(sourceArray) === false) {
@@ -56,7 +57,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             this.store = new Icinga.Api.RESTStore({
                 autoDestroy: true,
                 idIndex: 0,
-                target: 'host',
+                target: this.targetType,
                 columns: this.fields
             });
 

@@ -100,6 +100,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         // dirty icinga specific fixes  
         $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
         $query = preg_replace("/([^ ]*long_output)/i", "TO_CHAR($1)",$query);
+        $query = preg_replace("/([^ ]*perfdata)/i", "TO_CHAR($1)",$query);
+        $query = preg_replace("/([^ ]*logenry_data)/i", "TO_CHAR($1)",$query);
         
         if(substr_count($query,"(") != substr_count($query,")"))  
             $query .= ")";

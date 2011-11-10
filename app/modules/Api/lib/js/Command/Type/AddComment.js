@@ -48,5 +48,5 @@ Ext.ns('Icinga.Api.Command.Type');
 
     });
     Icinga.Api.Command.Type.AddHostComment = Icinga.Api.Command.Type.AddComment;
-    Icinga.Api.Command.Type.AddSVCComment = Icinga.Api.Command.Type.AddComment;
+    Icinga.Api.Command.Type.AddSvcComment = Icinga.Api.Command.Type.AddComment;
 })();
