@@ -35,16 +35,16 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.tabHeadServiceInfo = new Icinga.Cronks.Tackle.Information.Head({
                 type: 'service'
             });
-
-            this.tabCommands = new Icinga.Cronks.Tackle.Information.Commands();
             
             this.tabComments = new Icinga.Cronks.Tackle.Comment.Panel({
                 type: type
             });
             
-            this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
+            this.tabCommands = new Icinga.Cronks.Tackle.Command.Panel({
+                type: type
+            });
             
-            this.tabServices = new Icinga.Cronks.Tackle.Information.Services();
+            this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
 
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
 
