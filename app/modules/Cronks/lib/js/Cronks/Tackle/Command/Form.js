@@ -19,7 +19,6 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 	
 	setRecord : function(record) {
 		this.record = record;
-		alert("SET");
 	},
 	
 	rebuildFormForCommand : function(commandName) {
