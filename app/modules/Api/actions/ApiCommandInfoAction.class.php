@@ -30,4 +30,11 @@ class Api_ApiCommandInfoAction extends IcingaApiBaseAction implements IAppKitDis
 	    
 	    return $this->getDefaultViewName();
 	}
+	
+	public function isSecure() {
+	    return true;
+	}
+	public function getCredentials() {
+	    return "icinga.user";
+	}
 }

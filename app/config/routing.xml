@@ -44,6 +44,11 @@
                         </ignores>
                     </route>
                 </route>
+                
+                <route name=".relation" pattern="^/relation" stop="false" action="RelationProvider" output_type="json">
+                    <route name=".objectId" stop="true" pattern="^/(objectId:[0-9]+)" />
+                </route>
+                
                 <route name=".sla" pattern="^/sla" output_type="json" action="SLAProvider">
                     <route name=".starttime" stop="false" pattern="start=(starttime:\d*)" />
                     <route name=".endtime" stop="false" pattern="end=(endtime:\d*)" />

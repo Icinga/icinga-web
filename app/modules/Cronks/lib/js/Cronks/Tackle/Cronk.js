@@ -90,7 +90,9 @@ Ext.ns('Icinga.Cronks.Tackle');
                 }
 
                 this.infoTabs.setActiveTab(this.tabItems.host.head);
+                
                 this.tabItems.host.head.loadDataForObjectId(record.data.HOST_OBJECT_ID);
+                
                 this.tabItems.host.comments.grid.recordUpdated(record);
 
                 this.tabItems.host.comments.form.setObjectData({
@@ -99,6 +101,8 @@ Ext.ns('Icinga.Cronks.Tackle');
                     record: record,
                     objectInstance : record.data.INSTANCE_NAME
                 });
+                
+                this.tabItems.host.commands.form.setRecord(record);
                 
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
@@ -128,11 +132,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                     objectInstance : record.data.INSTANCE_NAME
                 });
                 
-                this.tabCommands.form.setTargetData({
-                	host_name : record.data.HOST_NAME,
-                    service_name : record.data.SERVICE_NAME,
-                    instance : record.data.INSTANCE_NAME
-                });
+                this.tabItems.service.commands.form.setRecord(record);
                 
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);

@@ -8,6 +8,7 @@
         <ic:definition>SCHEDULE_SERVICEGROUP_HOST_DOWNTIME</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule downtime for hosts</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -23,6 +24,7 @@
         <ic:definition>SCHEDULE_SERVICEGROUP_SVC_DOWNTIME</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule downtime for services</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -38,6 +40,7 @@
         <ic:definition>ENABLE_SERVICEGROUP_HOST_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable host notifications</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
@@ -46,6 +49,7 @@
         <ic:definition>DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable host notifications</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
@@ -54,6 +58,7 @@
         <ic:definition>ENABLE_SERVICEGROUP_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable service notifications</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
@@ -62,6 +67,7 @@
         <ic:definition>DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable service notifications</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
@@ -70,6 +76,7 @@
         <ic:definition>ENABLE_SERVICEGROUP_SVC_CHECKS</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable service checks</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
@@ -78,11 +85,9 @@
         <ic:definition>DISABLE_SERVICEGROUP_SVC_CHECKS</ic:definition>
         <ic:type>servicegroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable service checks</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_SERVICEGROUP" />
         </ic:parameters>
     </ic:command>
-
-
-
 </ic:commands>

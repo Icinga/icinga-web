@@ -27,6 +27,12 @@ Ext.ns('Icinga.Api.Command');
             if (this.loaded === true) {
                 return true;
             }
+            
+            
+            // Not logged in, abort loading of info
+            if (!AppKit.getPrefVal("author_name")) {
+            	return;
+            }
 
             var abort = false;
 

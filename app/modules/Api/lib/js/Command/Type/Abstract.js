@@ -66,19 +66,47 @@ Ext.ns('Icinga.Api.Command.Type');
             this.registerHandlers();
 
             var aOptions = Ext.apply({}, this.initialConfig);
-
+            
+            this.errorLabel = new Ext.form.Label({
+                html :'',
+                anchor: '100% 10%'
+            });
+            
             this.formAction = new Icinga.Api.Command.FormAction(this.getForm(), aOptions);
+            
+            this.on('actionfailed', this.onActionFailed, this);
 
             this.buildForm(this.command);
         },
+        
+        onActionFailed : function(form, action) {
+            var json = null;
+            
+            try {
+                json = Ext.decode(action.response.responseText);
+            } catch(e) {
+                json = {error: _('Unknown error, check your logs')};
+            }
+            
+            this.errorLabel.update("<div style='float:left;width:16px;height:16px' class='icinga-icon-exclamation-red'></div><span style='color:red'>"+json.error+"</span>");
+        },
 
         buildForm: function (o) {
+        	
+        	/**
+        	 * Just a information for the user that he
+        	 * doesn't need to take further actions
+        	 */
         	if (this.countRealFields() === 0) {
         		this.add({
         			xtype : 'panel',
         			border: false,
         			html : _('No more fields required. Just press "Send" to commit.')
         		});
+        	}
+        	
+        	if (this.errorLabel) {
+        		this.add(this.errorLabel);
         	}
         	
         	this.doLayout();

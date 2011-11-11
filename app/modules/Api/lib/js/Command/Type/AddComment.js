@@ -8,11 +8,7 @@ Ext.ns('Icinga.Api.Command.Type');
         layout: 'form',
         border: false,
         buildForm: function() {
-            var errorLabel = new Ext.form.Label({
-                
-                html :'',
-                anchor: '100% 10%'
-            })
+            
             this.add([{
                 xtype: 'checkbox',
                 boxLabel: _('Create persistent comment (i.e. stays after icinga restart)'),
@@ -31,19 +27,7 @@ Ext.ns('Icinga.Api.Command.Type');
                 allowBlank : false,
                 name: 'comment',
                 anchor: '100% 80%'
-            },errorLabel
-            ]);
-            this.formAction.failure = function(rawResponse) {
-                var json = {error: _('Unknown error, check your logs')};
-                try {
-                    json = Ext.decode(rawResponse.responseText);
-                } catch(e) {
-                    json = {error: _('Unknown error, check your logs')};
-                }
-                errorLabel.update("<div style='float:left;width:16px;height:16px' class='icinga-icon-exclamation-red'></div><span style='color:red'>"+json.error+"</span>")
-                this.failureType = Ext.form.Action.SERVER_INVALID;
-                this.form.afterAction(this, false);
-            }
+            }]);
             
             Icinga.Api.Command.Type.AddComment.superclass.buildForm.call(this);
         }

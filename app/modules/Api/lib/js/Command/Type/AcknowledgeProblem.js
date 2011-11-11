@@ -7,11 +7,6 @@ Ext.ns('Icinga.Api.Command.Type');
     Icinga.Api.Command.Type.AcknowledgeProblem = Ext.extend(Icinga.Api.Command.Type.Abstract, {
         layout: 'form',
         buildForm: function() {
-            var errorLabel = new Ext.form.Label({
-                
-                html :'',
-                anchor: '100% 10%'
-            })
             this.add([
             {
                 xtype: 'checkbox',
@@ -47,19 +42,7 @@ Ext.ns('Icinga.Api.Command.Type');
                 name: 'comment',
                 anchor: '100% 60%',
                 height: 300
-            },errorLabel
-            ]);
-            this.formAction.failure = function(rawResponse) {
-                var json = {error: _('Unknown error, check your logs')};
-                try {
-                    json = Ext.decode(rawResponse.responseText);
-                } catch(e) {
-                    json = {error: _('Unknown error, check your logs')};
-                }
-                errorLabel.update("<div style='float:left;width:16px;height:16px' class='icinga-icon-exclamation-red'></div><span style='color:red'>"+json.error+"</span>")
-                this.failureType = Ext.form.Action.SERVER_INVALID;
-                this.form.afterAction(this, false);
-            }
+            }]);
             
             Icinga.Api.Command.Type.AcknowledgeProblem.superclass.buildForm.call(this);
         }
