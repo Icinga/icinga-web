@@ -12,6 +12,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
         objectName: null,
         objectInstance: null,
         objectId: null,
+        record: null,
         command: null,
         target: null,
         form: null,
@@ -33,7 +34,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
         },
 
         rebuildForm: function () {
-            var command = 'ADD_' + this.type.toUpperCase() + '_COMMENT';
+            var command = 'ADD_' + (this.type.toUpperCase() == 'SERVICE' ? 'SVC' : this.type.toUpperCase())+ '_COMMENT';
 
             // Leave if we do not need to rebuild
             if (this.command === command) {
@@ -44,6 +45,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
 
             this.target = {};
             this.target.instance = this.objectInstance;
+            this.target.host = this.record.get('HOST_NAME');
             this.target[this.type] = this.objectName;
 
             this.removeAll();
@@ -57,7 +59,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
                     this.form.form.reset();
                     this.collapse();
             };
-
+            AppKit.log(this.target,this.form);
             this.form = this.formBuilder.build(this.command, {
                 renderSubmit: true,
                 targets: [this.target],
@@ -72,7 +74,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
         },
 
         setObjectData: function (o) {
-            Ext.copyTo(this, o, ['objectName', 'objectInstance', 'objectId']);
+            Ext.copyTo(this, o, ['objectName', 'objectInstance', 'objectId','record']);
             this.rebuildForm();
         }
     });

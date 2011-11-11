@@ -5,14 +5,17 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
     autoDestroy: true,
     ctCls: 'x-tree-lines',
     stripeRows: true,
-    style:'margin-left:25px',    
+    style:'margin-left:25px',
     cls: 'icinga-service-subgrid',
-    events: ['serviceSelected'],
-    bubbleEvents: ['serviceSelected'],
+    events: ['serviceSelected_sub'],
+    selectEV: new Ext.util.DelayedTask(),
     listeners: {
         rowClick: function(grid, idx,event) {
-            grid.fireEvent('serviceSelected',grid.getStore().getAt(idx));
-        }
+            grid.selectEV.delay(200,function() {
+                grid.fireEvent('serviceSelected_sub',grid.getStore().getAt(idx));
+            },this);
+        },
+        scope:this
     },
 
     constructor : function(config) {
@@ -64,7 +67,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
     },
     realign: function() {
         try {
-            this.setWidth(this.parent.getInnerWidth()*0.8);
+            this.setWidth(this.parent.getInnerWidth()-50);
             var adjHeight = this.parent.getInnerHeight();
             var reqHeight = (this.getStore().getCount()+1)*30;
             if(reqHeight < 200)

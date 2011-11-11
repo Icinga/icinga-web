@@ -23,36 +23,39 @@ Ext.ns('Icinga.Cronks.Tackle');
             Icinga.Cronks.Tackle.Cronk.superclass.initComponent.call(this);
             
             var type = 'host';
-            
+            this.tabItems = {
+                host: {},
+                service: {}
+            }
             this.objectGrid = new Icinga.Cronks.Tackle.ObjectGrid({
                 region: 'center'
-            });
-
-
-            this.tabHeadHostInfo = new Icinga.Cronks.Tackle.Information.Head({
-                type: 'host'
-            });
-            this.tabHeadServiceInfo = new Icinga.Cronks.Tackle.Information.Head({
-                type: 'service'
-            });
-            
-            this.tabComments = new Icinga.Cronks.Tackle.Comment.Panel({
-                type: type
-            });
-            
-            this.tabCommands = new Icinga.Cronks.Tackle.Command.Panel({
-                type: type
             });
             
             this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
 
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
+            
+            for(var i in this.tabItems) {
+                this.tabItems[i].head = new Icinga.Cronks.Tackle.Information.Head({
+                    type: i
+                    
+                });
+                this.tabItems[i].comments = new Icinga.Cronks.Tackle.Comment.Panel({
+                    type: i
+                });
+                this.tabItems[i].commands = new Icinga.Cronks.Tackle.Command.Panel({
+                    type: i
+                });
+                // add all items and hide service items
+                for(var x in this.tabItems[i]) {
+                    this.infoTabs.add(this.tabItems[i][x]);
+
+                    if(i == "service")
+                        this.infoTabs.hideTabStripItem(this.tabItems[i][x])
+                }
+            }
 
             this.infoTabs.add([
-                this.tabHeadHostInfo,
-                this.tabHeadServiceInfo,
-                this.tabCommands, 
-                this.tabComments, 
                 this.tabRelations
             ]);
 
@@ -60,7 +63,6 @@ Ext.ns('Icinga.Cronks.Tackle');
                 layout: 'fit',
                 iconCls: 'icinga-icon-universal',
                 region: 'south',
-                title: _('Object'),
                 height: 300,
                 minSize: 300,
                 maxSize: 600,
@@ -71,42 +73,59 @@ Ext.ns('Icinga.Cronks.Tackle');
             });
 
             this.add([this.collapsibleFrame, this.objectGrid]);
-            this.initEvents();
+            this.initInternalEvents();
         },
 
-        initEvents: function () {
+        initInternalEvents: function () {
+            /**
+             * TODO: these objects should just need the record and be able to deal with it
+             */
             this.objectGrid.on("hostSelected", function(record) {
-                this.tabComments.grid.setObjectId(record.data.HOST_OBJECT_ID);
+                for(var i in this.tabItems.host) {
+                    this.infoTabs.unhideTabStripItem(this.tabItems.host[i]);
+                }
 
-                this.infoTabs.unhideTabStripItem(this.tabHeadHostInfo);
-                this.tabHeadHostInfo.loadDataForObjectId(record.data.HOST_OBJECT_ID);
-                this.infoTabs.hideTabStripItem(this.tabHeadServiceInfo);
+                for(var i in this.tabItems.service) {
+                    this.infoTabs.hideTabStripItem(this.tabItems.service[i]);
+                }
 
-                this.tabComments.form.setObjectData({
+                this.infoTabs.setActiveTab(this.tabItems.host.head);
+                this.tabItems.host.head.loadDataForObjectId(record.data.HOST_OBJECT_ID);
+                this.tabItems.host.comments.grid.recordUpdated(record);
+
+                this.tabItems.host.comments.form.setObjectData({
                     objectName : record.data.HOST_NAME,
                     objectId : record.data.HOST_ID,
+                    record: record,
                     objectInstance : record.data.INSTANCE_NAME
                 });
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
             },this);
+
             this.objectGrid.on("serviceSelected", function(record) {
                 if(!record.data)
                     return;
-                this.infoTabs.unhideTabStripItem(this.tabHeadServiceInfo);
-                this.infoTabs.setActiveTab(this.tabHeadServiceInfo);
-                this.infoTabs.hideTabStripItem(this.tabHeadHostInfo);
-                //this.tabComments.grid.setObjectId(record.data.SERVICE_OBJECT_ID);
-                this.tabHeadServiceInfo.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
-                /*this.tabComments.form.setObjectData({
+                
+                for(var i in this.tabItems.host) {
+                    this.infoTabs.hideTabStripItem(this.tabItems.host[i]);
+                }
+
+                for(var i in this.tabItems.service) {
+                    this.infoTabs.unhideTabStripItem(this.tabItems.service[i]);
+                }
+
+                this.infoTabs.setActiveTab(this.tabItems.service.head);
+                this.tabItems.service.head.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                this.tabItems.service.comments.grid.recordUpdated(record);
+
+                this.tabItems.service.comments.form.setObjectData({
                     objectName : record.data.SERVICE_NAME,
                     objectId : record.data.SERVICE_ID,
+                    record: record,
                     objectInstance : record.data.INSTANCE_NAME
-                });*/
-                if (this.collapsibleFrame.collapsed === true) {
-                    this.collapsibleFrame.expand(true);
-                }
+                });
             },this);
 
         }

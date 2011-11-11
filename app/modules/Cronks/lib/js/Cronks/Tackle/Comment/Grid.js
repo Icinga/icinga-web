@@ -27,7 +27,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
                 iconCls: 'icinga-action-refresh',
                 scope: this,
                 handler: function () {
-                    this.store.reload();
+                    this.store.load();
                 }
             }];
 
@@ -112,7 +112,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
         onDeleteComment: function (renderer, grid, rowIndex, event) {
 
             var data = grid.store.getAt(rowIndex).data;
-            var command = "DEL_" + this.type.toUpperCase() + "_COMMENT";
+            var command = "DEL_"+(this.type=="service" ? "SVC" : this.type.toUpperCase())+"_COMMENT";
 
             Ext.Msg.show({
                 title: _('Confirmation'),
@@ -139,8 +139,12 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
             });
         },
 
-        setObjectId: function (oid) {
+        recordUpdated: function (record) {
+            var oid = record.get(this.type.toUpperCase()+"_OBJECT_ID");
+            if(!oid)
+                return;
             if (oid !== this.objectId) {
+                this.record = record;
                 this.objectId = oid;
                 this.dataLoaded = false;
                 this.updateParentTitle(0);

@@ -51,7 +51,9 @@ Ext.ns('Icinga.Api');
             cfg.totalProperty = "total";
             cfg.paramNames = {
                 start: 'limit_start',
-                limit: 'limit'
+                limit: 'limit',
+                sort: 'order_col',
+                dir: 'order_dir'
             };
             Ext.data.JsonStore.prototype.constructor.call(this, cfg);
 

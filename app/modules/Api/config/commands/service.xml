@@ -12,8 +12,8 @@
         </ic:parameters>
     </ic:command>
     
-    <ic:command name="DEL_HOST_COMMENT">
-        <ic:definition>DEL_HOST_COMMENT</ic:definition>
+    <ic:command name="DEL_SVC_COMMENT">
+        <ic:definition>DEL_SVC_COMMENT</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:parameters>
