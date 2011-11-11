@@ -111,12 +111,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'HOST_PROCESS_PERFORMANCE_DATA'        =>'hs.process_performance_data',
                           'HOST_FRESHNESS_CHECKS_ENABLED'        =>'h.freshness_checks_enabled',
                           'HOST_FRESHNESS_THRESHOLD'        =>     'h.freshness_threshold',
-                          'HOST_PASSIVE_CHECKS_ENABLED'        =>  'h.passive_checks_enabled',
+                          'HOST_PASSIVE_CHECKS_ENABLED'        =>  'hs.passive_checks_enabled',
                           'HOST_EVENT_HANDLER_ENABLED'        =>   'h.event_handler_enabled',
-                          'HOST_ACTIVE_CHECKS_ENABLED'        =>   'h.active_checks_enabled',
+                          'HOST_ACTIVE_CHECKS_ENABLED'        =>   'hs.active_checks_enabled',
                           'HOST_RETAIN_STATUS_INFORMATION'        =>'h.retain_status_information',
                           'HOST_RETAIN_NONSTATUS_INFORMATION'        =>'h.retain_nonstatus_information',
-                          'HOST_NOTIFICATIONS_ENABLED'        =>   'h.notifications_enabled',
+                          'HOST_NOTIFICATIONS_ENABLED'        =>   'hs.notifications_enabled',
                           'HOST_OBSESS_OVER_HOST'        =>        'h.obsess_over_host',
                           'HOST_FAILURE_PREDICTION_ENABLED'        =>        'hs.failure_prediction_enabled',
                           'HOST_NOTES'                   =>        'h.notes',
@@ -174,11 +174,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                           'SERVICE_OBJECT_ID'     =>        'os.object_id',
                           'SERVICE_NAME'          =>        'os.name2',
                           'SERVICE_DISPLAY_NAME'  =>        's.display_name',
-                          'SERVICE_NOTIFICATIONS_ENABLED'=> 's.notifications_enabled',
-                          'SERVICE_FLAP_DETECTION_ENABLED'=>'s.flap_detection_enabled',
-                          'SERVICE_PASSIVE_CHECKS_ENABLED'=>'s.passive_checks_enabled',
+                          'SERVICE_NOTIFICATIONS_ENABLED'=> 'ss.notifications_enabled',
+                          'SERVICE_FLAP_DETECTION_ENABLED'=>'ss.flap_detection_enabled',
+                          'SERVICE_PASSIVE_CHECKS_ENABLED'=>'ss.passive_checks_enabled',
                           'SERVICE_EVENT_HANDLER_ENABLED'=> 's.event_handler_enabled',
-                          'SERVICE_ACTIVE_CHECKS_ENABLED'=> 's.active_checks_enabled',
+                          'SERVICE_ACTIVE_CHECKS_ENABLED'=> 'ss.active_checks_enabled',
                           'SERVICE_RETAIN_STATUS_INFORMATION'=>'s.retain_status_information',
                           'SERVICE_RETAIN_NONSTATUS_INFORMATION'=>'s.retain_nonstatus_information',
                           'SERVICE_OBSESS_OVER_SERVICE'=>   's.obsess_over_service',
@@ -392,6 +392,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->mainAlias = "oh";
                 $this->setTarget("IcingaObjects");
                 $this->retainedAlias = "h";
+
                 $this->aliasDefs = array(
                                        "h"  => array("src" => "oh", "relation" => "host", "alwaysJoin" => true),
                                        "hs"  => array("src" => "h", "relation" => "status","alwaysJoin" => true),
@@ -403,10 +404,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "hgm" => array("src" => "h","relation" => "members"),
                                        "oc"  => array("src" => "cgm","relation" => "object"),
                                        "ocg"  => array("src" => "cg","relation" => "object"),
+                                       "os"     => array("src" => "s", "relation" => "object"),
                                        "dt"   => array("src" => "h", "relation" => "scheduledDowntimes"),
                                        "cvsh"=> array("src" => "h","relation" => "customvariablestatus"),
                                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
-                                       "s" => array("src" => "os", "relation" => "service"),
+                                       "s" => array("src" => "h", "relation" => "services"),
                                        "ss" => array("src" => "s", "relation" => "status"),
 
                                        "os" => array("src" => "h", "relation" => "object")
