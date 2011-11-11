@@ -60,6 +60,8 @@ Ext.ns('Icinga.Api.Command.Type');
                 this.failureType = Ext.form.Action.SERVER_INVALID;
                 this.form.afterAction(this, false);
             }
+            
+            Icinga.Api.Command.Type.AcknowledgeProblem.superclass.buildForm.call(this);
         }
 
     });

@@ -41,7 +41,7 @@ Ext.ns('Icinga.Cronks.Tackle');
             });
             
             this.tabCommands = new Icinga.Cronks.Tackle.Command.Panel({
-                type: type
+            	type : type
             });
             
             this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
@@ -87,6 +87,12 @@ Ext.ns('Icinga.Cronks.Tackle');
                     objectId : record.data.HOST_ID,
                     objectInstance : record.data.INSTANCE_NAME
                 });
+                
+                this.tabCommands.form.setTargetData({
+                	host_name : record.data.HOST_NAME,
+                	instance : record.data.INSTANCE_NAME
+                });
+                
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
@@ -97,13 +103,22 @@ Ext.ns('Icinga.Cronks.Tackle');
                 this.infoTabs.unhideTabStripItem(this.tabHeadServiceInfo);
                 this.infoTabs.setActiveTab(this.tabHeadServiceInfo);
                 this.infoTabs.hideTabStripItem(this.tabHeadHostInfo);
+                
                 //this.tabComments.grid.setObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabHeadServiceInfo.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                
                 /*this.tabComments.form.setObjectData({
                     objectName : record.data.SERVICE_NAME,
                     objectId : record.data.SERVICE_ID,
                     objectInstance : record.data.INSTANCE_NAME
                 });*/
+                
+                this.tabCommands.form.setTargetData({
+                	host_name : record.data.HOST_NAME,
+                    service_name : record.data.SERVICE_NAME,
+                    instance : record.data.INSTANCE_NAME
+                });
+                
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
