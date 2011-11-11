@@ -2,10 +2,8 @@
 Ext.ns('Icinga.Cronks.Tackle');
 
 Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
-	title : 'Object tree',
     autoRefresh: true,
     events: ['hostSelected','serviceSelected'],
-    bubbleEvents: ['hostSelected','serviceSelected'],
     viewConfig: {
         
 //       forceFit: true,
@@ -61,6 +59,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             target: 'host',
             limit: 50,
             offset: 0,
+            remoteSort:true,
             countColumn: true,
             withSLA: true,
             columns: [
@@ -74,7 +73,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_NEXT_CHECK',
                 'INSTANCE_NAME',
                 'HOST_SCHEDULED_DOWNTIME_DEPTH',
-                'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
+                'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
+                'HOST_IS_FLAPPING',
+                'HOST_PASSIVE_CHECKS_ENABLED',
+                'HOST_ACTIVE_CHECKS_ENABLED'
             ],
             listeners: {
  
@@ -124,6 +126,12 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
     visibleServicePanels: {
         length: 0
     },
+    
+    closeAllServicePanels: function() {
+        for(var i in this.visibleServicePanels) {
+            this.closeServicePanel(i);
+        }
+    },
 
     closeServicePanel: function(id) {
         if(this.visibleServicePanels[id]) {
@@ -152,10 +160,8 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 removed: function() {
                     closeServicePanel(id);
                 },
-                serviceSelected: function(val) {
-                    AppKit.log(this,arguments);
-                    this.fireEvent("serviceSelected",val);
-
+                serviceSelected_sub: function(val) {
+                    this.fireEvent('serviceSelected',val);
                 },
                 scope: this
             }
@@ -177,11 +183,13 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 columnWidth: 25,
                 width: 25,
                 resizable: false,
+                sortable:true,
                 renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 scope:this
             },{
                 header: _('Host'),
                 dataIndex : 'HOST_NAME',
+                sortable: true,
                 style: 'border: 1px solid black;',
                 renderer: function(value, metaData, record, rowIndex, colIndex, store) {   
                     var state = parseInt(record.get("HOST_CURRENT_STATE"),10);
@@ -205,6 +213,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 }
             },{
                 dataIndex: 'HOST_ID',
+                disableHeader: true,
                 width: 25,
                 resizable: false,
                 tooltip: _('Show services for this host'),
@@ -220,8 +229,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                         var id = record.get('HOST_ID');
                         if(this.visibleServicePanels[id])
                             this.closeServicePanel(id);
-                        else 
+                        else  {
+                            this.closeAllServicePanels();
                             this.openServicePanel(id,row);
+                        }
                        
                     },
                     scope:this
@@ -230,6 +241,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             },{
                 header: _('Service health'),
                 dataIndex: 'HOST_ID',
+                menuDisabled: true,
                 width:100,
                 resizable: false,
                 renderer: Icinga.Cronks.Tackle.Renderer.ServiceHealthRenderer,
@@ -238,6 +250,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 header: _('SLA'),
                 dataIndex: 'SLA_STATE_AVAILABLE',
                 width:50,
+                sortable: true,
                 resizable:false,
                 renderer: function(value,meta,record) {
                     if(record.get('SLA_STATE_AVAILABLE') == 0 &&
@@ -251,6 +264,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             },{
                 header: _('Last check'),
                 dataIndex : 'HOST_LAST_CHECK',
+                sortable: true,
                 width: 150,
                 renderer: function(value,meta,record) {
                    var str = AppKit.util.Date.getElapsedString(value);
@@ -266,6 +280,12 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                        return "<div qtip='"+str+"'>"+value+"</div>";
                    return "<div qtip='"+value+"'>"+str+"</div>";
                 }
+            },{
+                header: _('Flags'),
+                dataIndex: 'HOST_ID',
+                sortable: false,
+                width: 150,
+                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer
             },{
                 dataIndex: 'HOST_ID',
                 renderer: function() {return ""},

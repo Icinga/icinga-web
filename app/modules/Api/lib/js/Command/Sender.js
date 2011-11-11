@@ -10,7 +10,7 @@ Ext.ns('Icinga.Api.Command');
         targets: [],
         data: {},
         command: null,
-        autoReset: false,
+        autoReset: true,
 
         constructor: function (config) {
             config = config || {};
