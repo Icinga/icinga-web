@@ -46,6 +46,7 @@ class Api_ApiCommandInfoSuccessView extends IcingaApiBaseView {
 	        $json->hasField('type');
 	        $json->hasField('isSimple');
 	        $json->hasField('iconCls');
+	        $json->hasField('label');
 	        $json->setData($this->commands);
 	        $json->setSuccess(true);
 	        return $json->getJson();

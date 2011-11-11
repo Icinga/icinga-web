@@ -7,7 +7,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
     Icinga.Cronks.Tackle.Comment.CreateForm = Ext.extend(Ext.Panel, {
 
         title: _('Add new comment'),
-
+        autoScroll : true,
         type: null,
         objectName: null,
         objectInstance: null,

@@ -7,6 +7,7 @@
         <ic:definition>SCHEDULE_HOSTGROUP_HOST_DOWNTIME</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule downtime for covered hosts</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -22,6 +23,7 @@
         <ic:definition>SCHEDULE_HOSTGROUP_SVC_DOWNTIME</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule downtime for covered services</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
             <ic:parameter ref="COMMAND_STARTTIME" />
@@ -37,6 +39,7 @@
         <ic:definition>ENABLE_HOSTGROUP_HOST_NOTIFICATIONS</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable notification for hosts</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
         </ic:parameters>
@@ -45,6 +48,7 @@
         <ic:definition>DISABLE_HOSTGROUP_HOST_NOTIFICATIONS</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable notification for hosts</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
         </ic:parameters>
@@ -53,6 +57,7 @@
         <ic:definition>ENABLE_HOSTGROUP_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable notification for services</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
         </ic:parameters>
@@ -61,6 +66,7 @@
         <ic:definition>DISABLE_HOSTGROUP_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable notification for services</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
         </ic:parameters>
@@ -69,6 +75,7 @@
         <ic:definition>ENABLE_HOSTGROUP_SVC_CHECKS</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable service checks</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
         </ic:parameters>
@@ -77,6 +84,7 @@
         <ic:definition>DISABLE_HOSTGROUP_SVC_CHECKS</ic:definition>
         <ic:type>hostgroup</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable service checks</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOSTGROUP" />
         </ic:parameters>

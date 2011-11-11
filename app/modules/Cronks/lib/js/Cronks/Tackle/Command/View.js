@@ -6,7 +6,7 @@ Icinga.Cronks.Tackle.Command.View = Ext.extend(Ext.DataView, {
 	    '<tpl for=".">',
 	    '<div class="tackle-command-view-item">',
 	    '<div class="tackle-command-view-item-inline icon-16 {iconCls}"></div>',
-	    '<div class="tackle-command-view-item-inline">{definition}</div>',
+	    '<div class="tackle-command-view-item-inline">{label} ({definition})</div>',
 	    '</div>',
 	    '</tpl>'
 	),

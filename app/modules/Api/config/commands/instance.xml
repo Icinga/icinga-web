@@ -7,6 +7,7 @@
         <ic:definition>SHUTDOWN_PROGRAM</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Shutdown instance</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -14,6 +15,7 @@
         <ic:definition>RESTART_PROGRAM</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Restart instance</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -21,6 +23,7 @@
         <ic:definition>ENABLE_NOTIFICATIONS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable notifications</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -28,6 +31,7 @@
         <ic:definition>DISABLE_NOTIFICATIONS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable notifications</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -35,6 +39,7 @@
         <ic:definition>ENABLE_PERFORMANCE_DATA</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable performance data</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -42,6 +47,7 @@
         <ic:definition>DISABLE_PERFORMANCE_DATA</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable performance data</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -49,6 +55,7 @@
         <ic:definition>START_ACCEPTING_PASSIVE_HOST_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Accepting passive host checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -56,6 +63,7 @@
         <ic:definition>STOP_ACCEPTING_PASSIVE_HOST_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Deny passive host checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -63,6 +71,7 @@
         <ic:definition>START_ACCEPTING_PASSIVE_SVC_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Accepting passive service checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -70,6 +79,7 @@
         <ic:definition>STOP_ACCEPTING_PASSIVE_SVC_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Deny passive service checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -77,6 +87,7 @@
         <ic:definition>START_EXECUTING_HOST_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Start executing host checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -84,6 +95,7 @@
         <ic:definition>STOP_EXECUTING_HOST_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Stop executing host checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -91,6 +103,7 @@
         <ic:definition>START_EXECUTING_SVC_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Start executing service checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -98,6 +111,7 @@
         <ic:definition>STOP_EXECUTING_SVC_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Stop executing service checks</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -105,6 +119,7 @@
         <ic:definition>START_OBSESSING_OVER_HOST_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Start host obsessing</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -112,6 +127,7 @@
         <ic:definition>STOP_OBSESSING_OVER_HOST_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Stop host obsessing</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -119,6 +135,7 @@
         <ic:definition>START_OBSESSING_OVER_SVC_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Start service obsessing</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -126,6 +143,7 @@
         <ic:definition>STOP_OBSESSING_OVER_SVC_CHECKS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Stop service obsessing</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -133,6 +151,7 @@
         <ic:definition>ENABLE_FLAP_DETECTION</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable flap detection</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -140,6 +159,7 @@
         <ic:definition>DISABLE_FLAP_DETECTION</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable flap detection</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -147,6 +167,7 @@
         <ic:definition>ENABLE_EVENT_HANDLERS</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable event handlers</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
     
@@ -154,6 +175,7 @@
         <ic:definition>"DISABLE_EVENT_HANDLERS"</ic:definition>
         <ic:type>process</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable event handlers</ic:label>
         <ic:parameters></ic:parameters>
     </ic:command>
 </ic:commands>

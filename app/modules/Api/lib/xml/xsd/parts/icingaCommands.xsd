@@ -42,6 +42,7 @@
             <xs:element name="isSimple" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
             <xs:element name="type" type="commandType" minOccurs="1" maxOccurs="1"/>
             <xs:element name="iconCls" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="label" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="parameters" type="parameters" minOccurs="1"></xs:element>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" /> 

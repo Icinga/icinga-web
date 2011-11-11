@@ -7,6 +7,7 @@
         <ic:definition>DEL_SVC_DOWNTIME</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Remove downtime</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_DOWNTIME_ID" />
         </ic:parameters>
@@ -16,6 +17,7 @@
         <ic:definition>DEL_SVC_COMMENT</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Delete comment</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_COMMENT_ID" />
         </ic:parameters>
@@ -25,6 +27,7 @@
         <ic:definition>SET_SVC_NOTIFICATION_NUMBER</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Set notification number</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -36,6 +39,7 @@
         <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule next check</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -47,6 +51,7 @@
         <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule next check (forced)</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -57,6 +62,7 @@
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Acknowledge problem</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -71,6 +77,7 @@
         <ic:definition>ACKNOWLEDGE_SVC_PROBLEM_EXPIRE</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Acknowledge problem (expiration)</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -86,6 +93,7 @@
         <ic:definition>REMOVE_SVC_ACKNOWLEDGEMENT</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Remove acknowledgement</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -95,6 +103,7 @@
         <ic:definition>SCHEDULE_SVC_DOWNTIME</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Schedule downtime</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -111,6 +120,7 @@
         <ic:definition>PROCESS_SERVICE_CHECK_RESULT</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Submit check result</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -124,6 +134,7 @@
         <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Add comment</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -132,28 +143,11 @@
             <ic:parameter ref="COMMAND_COMMENT" />
         </ic:parameters>
     </ic:command>
-    <ic:command name="DISABLE_PASSIVE_SVC_CHECKS">
-        <ic:definition>DISABLE_PASSIVE_SVC_CHECKS</ic:definition>
-        <ic:type>service</ic:type>
-        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
-        <ic:parameters>
-            <ic:parameter ref="COMMAND_HOST" />
-            <ic:parameter ref="COMMAND_SERVICE" />
-        </ic:parameters>
-    </ic:command>
-    <ic:command name="ENABLE_PASSIVE_SVC_CHECKS">
-        <ic:definition>ENABLE_PASSIVE_SVC_CHECKS</ic:definition>
-        <ic:type>service</ic:type>
-        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
-        <ic:parameters>
-            <ic:parameter ref="COMMAND_HOST" />
-            <ic:parameter ref="COMMAND_SERVICE" />
-        </ic:parameters>
-    </ic:command>
     <ic:command name="DISABLE_SVC_CHECK">
         <ic:definition>DISABLE_SVC_CHECK</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable check</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -163,6 +157,7 @@
         <ic:definition>ENABLE_SVC_CHECK</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable check</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -172,6 +167,7 @@
         <ic:definition>DISABLE_PASSIVE_SVC_CHECKS</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable passive checks</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -181,6 +177,7 @@
         <ic:definition>ENABLE_PASSIVE_SVC_CHECKS</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable passive checks</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -190,6 +187,7 @@
         <ic:definition>START_OBSESSING_OVER_SVC</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Start obsessing</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -199,6 +197,7 @@
         <ic:definition>STOP_OBSESSING_OVER_SVC</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Stop obsessing</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -208,6 +207,7 @@
         <ic:definition>DISABLE_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable notifications</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -217,6 +217,7 @@
         <ic:definition>ENABLE_SVC_NOTIFICATIONS</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable notifications</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -227,6 +228,7 @@
         <ic:isSimple>true</ic:isSimple>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Send custom notification</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -240,6 +242,7 @@
         <ic:definition>ENABLE_SVC_EVENT_HANDLER</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable event handler</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -249,6 +252,7 @@
         <ic:definition>DISABLE_SVC_EVENT_HANDLER</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable event handler</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -259,6 +263,7 @@
         <ic:definition>ENABLE_SVC_FLAP_DETECTION</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Enable flap detection</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
@@ -268,6 +273,7 @@
         <ic:definition>DISABLE_SVC_FLAP_DETECTION</ic:definition>
         <ic:type>service</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Disable flap detection</ic:label>
         <ic:parameters>
             <ic:parameter ref="COMMAND_HOST" />
             <ic:parameter ref="COMMAND_SERVICE" />
