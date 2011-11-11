@@ -44,24 +44,24 @@ Icinga.Cronks.Tackle.Command.Panel = Ext.extend(Ext.Panel, {
 		
 		this.setType(this.type);
 		
-		this.commandDataView = new Icinga.Cronks.Tackle.Command.View({
+		this.dataview = new Icinga.Cronks.Tackle.Command.View({
 			store : this.store,
 			flex : 1
 		});
 		
-		this.commandDataView.on('click', this.onCommandClick, this);
+		this.dataview.on('click', this.onCommandClick, this);
 		
-		this.commandForm = new Icinga.Cronks.Tackle.Command.Form({
+		this.form = new Icinga.Cronks.Tackle.Command.Form({
 			flex : 1
 		});
 		
-		this.add(this.commandDataView, this.commandForm);
+		this.add(this.dataview, this.form);
 		
 		this.doLayout();
 	},
 	
 	onCommandClick : function(dataView, index, node, e) {
 		var record = this.store.getAt(index);
-		this.commandForm.rebuildFormForCommand(record.data.definition);
+		this.form.rebuildFormForCommand(record.data.definition);
 	}
 });

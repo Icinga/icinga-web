@@ -27,6 +27,7 @@ Ext.ns('Icinga.Api.Command.Type');
         renderSubmit: false,
         cancelHandler: null,
         padding: 5,
+        
         xtypeMap: {
             date: 'datefield',
             ro: 'field',
@@ -42,6 +43,8 @@ Ext.ns('Icinga.Api.Command.Type');
         fieldDefaults: {
             width: 200
         },
+        
+        labelWidth : 160,
 
         constructor: function (config) {
 
@@ -70,7 +73,15 @@ Ext.ns('Icinga.Api.Command.Type');
         },
 
         buildForm: function (o) {
-
+        	if (this.countRealFields() === 0) {
+        		this.add({
+        			xtype : 'panel',
+        			border: false,
+        			html : _('No more fields required. Just press "Send" to commit.')
+        		});
+        	}
+        	
+        	this.doLayout();
         },
 
         registerHandlers: function () {
@@ -134,6 +145,16 @@ Ext.ns('Icinga.Api.Command.Type');
             }
 
             return false;
+        },
+        
+        countRealFields : function() {
+        	var c = 0;
+        	Ext.iterate(this.command.parameters, function (key, value) {
+        		if (this.isSourceField(key) === false) {
+        			c++;
+        		}
+        	}, this);
+        	return c;
         }
     });
 })();

@@ -8,14 +8,14 @@ Ext.ns('Icinga.Api.Command.Type');
     Icinga.Api.Command.Type.Generic = Ext.extend(Icinga.Api.Command.Type.Abstract, {
 
         buildForm: function (o) {
-            Icinga.Api.Command.Type.Generic.superclass.buildForm.call(this, o);
-
             Ext.iterate(o.parameters, function (key, value) {
                 if (this.isSourceField(key) === false) {
                     var field = this.getFieldByName(key, value);
                     this.add(field);
                 }
             }, this);
+            
+            Icinga.Api.Command.Type.Generic.superclass.buildForm.call(this, o);
         },
 
         getFieldByName: function (fieldName, fieldParams) {

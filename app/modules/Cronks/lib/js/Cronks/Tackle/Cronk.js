@@ -99,6 +99,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                     record: record,
                     objectInstance : record.data.INSTANCE_NAME
                 });
+                
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
@@ -107,7 +108,7 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.objectGrid.on("serviceSelected", function(record) {
                 if(!record.data)
                     return;
-                
+
                 for(var i in this.tabItems.host) {
                     this.infoTabs.hideTabStripItem(this.tabItems.host[i]);
                 }
@@ -126,6 +127,16 @@ Ext.ns('Icinga.Cronks.Tackle');
                     record: record,
                     objectInstance : record.data.INSTANCE_NAME
                 });
+                
+                this.tabCommands.form.setTargetData({
+                	host_name : record.data.HOST_NAME,
+                    service_name : record.data.SERVICE_NAME,
+                    instance : record.data.INSTANCE_NAME
+                });
+                
+                if (this.collapsibleFrame.collapsed === true) {
+                    this.collapsibleFrame.expand(true);
+                }
             },this);
 
         }
