@@ -32,6 +32,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             store: this.store
         });
         this.updateFilter = config.tbar.updateFilter;
+        this.getSVCFilter = config.tbar.getSVCFilter.createDelegate(config.tbar);
         Icinga.Cronks.Tackle.ObjectGrid.superclass.constructor.call(this, config);
 	},
 
@@ -152,7 +153,9 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
     openServicePanel: function(id, el) {
         if(this.visibleServicePanels[id])
             this.visibleServicePanels[id].destroy();
+        
         this.visibleServicePanels[id] = new Icinga.Cronks.Tackle.ServicesSubGrid({
+            filter: this.getSVCFilter(),
             hostId: id,
             renderTo: el,
             parent:this,
