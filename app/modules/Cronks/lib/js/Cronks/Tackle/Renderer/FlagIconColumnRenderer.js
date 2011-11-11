@@ -8,7 +8,7 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer =  function (value, metaDat
     var isFlapping = parseInt(record.get(type.toUpperCase()+'_IS_FLAPPING'),10);
     var isNotifying = parseInt(record.get(type.toUpperCase()+'_NOTIFICATIONS_ENABLED'),10);
     var isActive = parseInt(record.get(type.toUpperCase()+'_ACTIVE_CHECKS_ENABLED'),10);
-    var value = "";
+    value = "";
     var tpl = new Ext.XTemplate("<div class='{icon}' qtip='{tip}' style='width:20px;height:18px;float:left' id='{id}'></div>");
     var idBase = Ext.id();
     if(!isActive) {

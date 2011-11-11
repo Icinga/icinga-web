@@ -37,8 +37,23 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
 
     },
     updateFilterImpl: function() {
-         if(!this.isVisible)
+       if(!this.isVisible)
             return;
+      
+        var jsonFilter = this.buildFilter();
+        this.store.setFilter(jsonFilter);
+        this.ownerCt.bottomToolbar.doLoad();
+        if(this.autoRefreshEnabled) {
+            this.startAutoRefresh()
+        }
+    },
+    getSVCFilter : function() {
+        if(!Ext.getCmp('filterbuttons_filter_svc_'+this.parentId).pressed)
+            return false;
+        return this.buildFilter()
+    },
+
+    buildFilter: function() {
         var filter = {
             states: {
                 0 : Ext.getCmp('filterbuttons_host_state_up_'+this.parentId).pressed,
@@ -46,14 +61,11 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
                 2 : Ext.getCmp('filterbuttons_host_state_unreachable_'+this.parentId).pressed,
                 99: Ext.getCmp('filterbuttons_host_state_pending_'+this.parentId).pressed
             },
+
             ack : Ext.getCmp('filterbuttons_host_ack_'+this.parentId).pressed,
             dtime : Ext.getCmp('filterbuttons_host_downtime_'+this.parentId).pressed,
             text : Ext.getCmp('filtertxt_search_'+this.parentId).getValue()
         };
-        this.buildFilter(filter);
-    },
-
-    buildFilter: function(filter) {
         var jsonFilter = {
             type: 'AND',
             field: []
@@ -106,12 +118,8 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
                }]
            });
         }
-        this.store.setFilter(jsonFilter);
-        this.ownerCt.bottomToolbar.doLoad();
-        if(this.autoRefreshEnabled) {
-            this.startAutoRefresh()
-        }
-
+       
+        return jsonFilter;
     },
 
     createTbar : function(config) {
@@ -204,26 +212,22 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
                 bubbleEvents: ['toggle']
             },
             items: [{
-                toggled: true,
                 ctCls: 'tackle_qbtn state_up',
                 id: 'filterbuttons_host_state_up_'+id,
                 pressed: true,
                 text: _('Up')
             },{
-                toggled: true,
                 ctCls: 'tackle_qbtn state_down',
                 id: 'filterbuttons_host_state_down_'+id,
                 pressed: true,
                 text: _('Down')
             },{
-                toggled: true,
                 ctCls: 'tackle_qbtn state_unreachable',
                 id: 'filterbuttons_host_state_unreachable_'+id,
                 pressed: true,
                 tooltip: _('Unreachable'),
                 text: _('Unreach.')
             },{
-                toggled: true,
                 ctCls: 'tackle_qbtn state_pending',
                 id: 'filterbuttons_host_state_pending_'+id,
                 pressed: true,
@@ -257,6 +261,18 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
 
             style: 'position:relative;margin-left:-25px',
             disabled:true
+        },{
+            xtype: 'button',
+            iconCls: 'icinga-icon-service',
+            id: 'filterbuttons_filter_svc_'+id,
+            tooltip: 'Filter service results, too',
+            enableToggle: true,
+            listeners: {
+                toggle: function(btn) {
+                    this.updateFilter();
+                },
+               scope:this
+            }
         }];
     }
 });
