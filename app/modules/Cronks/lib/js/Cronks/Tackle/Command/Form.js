@@ -8,6 +8,7 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 	autoScroll : true,
 	
 	constructor : function(config) {
+        Ext.apply(this,config);
 		Icinga.Cronks.Tackle.Command.Form.superclass.constructor.call(this, config);
 	},
 	
@@ -28,8 +29,8 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 		this.removeAll();
 		
 		this.form = this.formBuilder.build(commandName, {
-            renderSubmit: true,
-            targets: [this.target]
+            renderSubmit: this.standalone,
+            targets: Ext.isArray(this.target) ? this.target : [this.target]
 		});
 		
 		this.add(this.form);

@@ -6,14 +6,16 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     
     constructor: function(cfg) {
         cfg = cfg || {};
-        cfg.buttons = this.buttons;
+
         cfg.width = Ext.getBody().getWidth()*0.7;
         cfg.height = Ext.getBody().getHeight()*0.9;
         this.setInitialValues();
         this.id = Ext.id();
         this.buildPreviewGrid(cfg);
         this.buildView(cfg);
+        cfg.buttons = this.getSubmitButtons();
         Ext.Window.prototype.constructor.call(this, cfg);
+        
     },
 
     setInitialValues: function() {
@@ -113,15 +115,29 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
 
         var svcCommands = new Icinga.Cronks.Tackle.Command.Panel({
             type: 'service',
-            title: 'Service commands'
+            title: 'Service commands',
+            isStandaloneComponent: false,
+            listeners: {
+                render: function(cmp) {
+                    cmp.dataview.on("click",function() {this.submitBtn.setDisabled(false);},this);
+                },
+                scope:this
+            }
         });
         var hostCommands = new Icinga.Cronks.Tackle.Command.Panel({
             type: 'host',
-            title: 'Host commands'
+            title: 'Host commands',
+            isStandaloneComponent: false,
+            listeners: {
+                render: function(cmp) {
+                    cmp.dataview.on("click",function() {this.submitBtn.setDisabled(false);},this);
+                },
+                scope:this
+            }
         });
 
         cfg.items = [new Ext.TabPanel({
-            region: 'north',
+            region: 'south',
             activeTab: 0,
             items: [
                 hostCommands,
@@ -146,7 +162,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 },
                 scope:this
             },
-            height: 200
+            height: 300
         }),{
             title: _('Filter command recipients'),
             region: 'west',
@@ -518,16 +534,44 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         }];
     },
 
-    buttons: [{
-        text: _('Send commands'),
-        iconCls: 'icinga-icon-accept'
-    },{
-        text: _('Cancel'),
-        iconCls: 'icinga-icon-cancel',
-        handler: function(cmp) {
-            cmp.ownerCt.ownerCt.close();
-        }
-    }]
+    getSubmitButtons: function() {
+       this.submitBtn = new Ext.Button({
+            text: _('Send commands'),
+            iconCls: 'icinga-icon-accept',
+            disabled:true,
+            handler: function(cmp) {
+                var count = this.recipientStore.getTotalCount();
+                Ext.Msg.confirm(
+                    _("Submitting commands to multiple targets"),
+                    _("This command will be send to "+count+" "+this.type+"s, proceed?"),
+                    function(btn) {
+                        if(btn != "yes")
+                            return false;
+                        var targets = [];
+                        this.recipientStore.each(function(record) {
+                            targets.push({
+                                host : record.get('HOST_NAME'),
+                                service : record.get('SERVICE_NAME'),
+                                instance: record.get('INSTANCE_NAME')
+                            });
+                        },this);
+                        this.findByType('tabpanel')[0].getActiveTab().submit(targets);
+                    },
+                    this
+                );
+            },
+            scope:this
+        });
+        return [this.submitBtn,{
+            text: _('Cancel'),
+            iconCls: 'icinga-icon-cancel',
+            handler: function(cmp) {
+                cmp.ownerCt.ownerCt.close();
+            },
+            scope:this
+        }];
+
+    }
 
 
 

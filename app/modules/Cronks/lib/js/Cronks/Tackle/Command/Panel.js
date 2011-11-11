@@ -26,7 +26,10 @@ Icinga.Cronks.Tackle.Command.Panel = Ext.extend(Ext.Panel, {
 				}
 			}
 		});
-		
+        if(typeof config.standalone === "undefined")
+            this.isStandaloneComponent = true; // show buttons
+        else
+            this.isStandaloneComponent = config.standalone;
 		Icinga.Cronks.Tackle.Command.Panel.superclass.constructor.call(this, config);
 	},
 	
@@ -52,6 +55,7 @@ Icinga.Cronks.Tackle.Command.Panel = Ext.extend(Ext.Panel, {
 		this.dataview.on('click', this.onCommandClick, this);
 		
 		this.form = new Icinga.Cronks.Tackle.Command.Form({
+            standalone: this.isStandaloneComponent,
 			flex : 1
 		});
 		
@@ -59,7 +63,14 @@ Icinga.Cronks.Tackle.Command.Panel = Ext.extend(Ext.Panel, {
 		
 		this.doLayout();
 	},
-	
+
+    submit: function(targets) {
+         var fPanel = this.form.form;
+         var form = fPanel.getForm();
+         fPanel.formAction.setTargets(targets);
+         form.doAction(fPanel.formAction);
+    },
+
 	onCommandClick : function(dataView, index, node, e) {
 		var record = this.store.getAt(index);
 		this.form.rebuildFormForCommand(record.data.definition);
