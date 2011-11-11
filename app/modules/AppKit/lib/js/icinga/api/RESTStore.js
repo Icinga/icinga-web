@@ -14,6 +14,7 @@ Ext.ns('Icinga.Api');
         orderDirection: null,
         limit: -1,
         offset: 0,
+        groupBy: null,
         countColumn: null,
         withSLA: false,
         constructor: function (cfg) {
@@ -100,7 +101,9 @@ Ext.ns('Icinga.Api');
         setDB: function (db) {
             this.db = db;
         },
-
+        setGroupBy: function(col) {
+            this.groupBy = col;
+        },
         setLimit: function (limit) {
             limit = parseInt(limit, 10);
             if (limit > 0) {
@@ -167,6 +170,9 @@ Ext.ns('Icinga.Api');
         getColumns: function () {
             return this.columns;
         },
+        getGroupBy: function() {
+            return this.groupBy;
+        },
         load: function (options) {
             options = options  ||   {
                 params: {}
@@ -179,6 +185,7 @@ Ext.ns('Icinga.Api');
             var order = this.getOrderColumn() ? this.getOrderColumn() + ";" + this.getOrderDirection() : null;
             var countCol = this.getCountColumn();
             var limit = this.getLimit();
+            var groupBy = this.getGroupBy();
             var offset = this.getOffset();
             var db = this.getDB();
             var wSLA = this.getWithSLA();
@@ -211,7 +218,9 @@ Ext.ns('Icinga.Api');
             if (offset) {
                 cfg.limit_start = offset;
             }
-
+            if (groupBy) {
+                cfg["groups[]"] = groupBy;
+            }
             if (!Ext.isArray(cols)) {
                 cols = [cols];
             }

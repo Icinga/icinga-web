@@ -81,6 +81,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
                 value: [i]
             });
         }
+
         if(!filter.ack) {
             jsonFilter.field.push({
                 type: 'atom',
@@ -175,6 +176,17 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
             }]
         },{
             xtype: 'tbspacer',
+            width: 20
+        },{
+            xtype: 'button',
+            iconCls: 'icinga-icon-bricks',
+            text: _('Batch commands'),
+            handler: function() {
+                (new Icinga.Cronks.Tackle.Command.BatchCommandWindow()).show(document.body);
+            },
+            hidden: config.noBatch
+        },{
+            xtype:'tbspacer',
             width: 20
         },{
             xtype: 'button',
