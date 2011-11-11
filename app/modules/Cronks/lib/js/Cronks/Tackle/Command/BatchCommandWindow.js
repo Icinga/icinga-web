@@ -25,14 +25,15 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             hostgroupFilter: "",
             showAcknowledged: true,
             showDowntimes: true,
-            showFlapping: true,
-            showDisabledNotifications: true,
-            showPassiveOnly: true,
-            showDisabled: true
+            showFlapping: false,
+            showDisabledNotifications: false,
+            showPassiveOnly: false,
+            showDisabled: false
         })
     },
 
     buildPreviewGrid: function(cfg) {
+        var scope = this;
         this.recipientStore = new Icinga.Api.RESTStore({
             target: 'service',
             limit: 30,
@@ -58,14 +59,8 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 'HOST_CURRENT_STATE',
                 'SERVICE_CURRENT_STATE'
             ],
-            listeners : {
-                beforeload: function() {
-
-                    this.updateFilter();
-                    return true;
-                },
-                scope:this
-            }
+            // beforeLoad fires too late to apply filters
+           
         });
         this.gridBbar = new Ext.PagingToolbar({
             store: this.recipientStore,
@@ -137,11 +132,13 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                     if(tab == svcCommands) {
                         this.previewGrid.getColumnModel().setHidden(0,false);
                         this.previewGrid.getColumnModel().setHidden(3,false);
+                        this.previewGrid.getColumnModel().setHidden(5,false);
                         this.recipientStore.setGroupBy(null);
                         this.type = 'service';
                     } else {
                         this.previewGrid.getColumnModel().setHidden(0,true);
                         this.previewGrid.getColumnModel().setHidden(3,true);
+                        this.previewGrid.getColumnModel().setHidden(5,true);
                         this.recipientStore.setGroupBy("HOST_NAME");
                         this.type = 'host';
                     }
@@ -169,46 +166,58 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     },
     toggleServiceState: function(state,val) {
         this.svcStates[state] = val;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleHostState: function(state,val) {
         this.hostStates[state] = val;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     setHostFilter: function(txt) {
         this.hostFilter = txt.replace("*","%");
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     setServiceFilter: function(txt) {
         this.serviceFilter = txt.replace("*","%");
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     setHostgroupFilter: function(txt) {
         this.hostgroupFilter = txt.replace("*","%");
+        this.updateFilter();
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleDowntime: function(bool) {
         this.showDowntime = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleAck : function(bool) {
         this.showAcknowledged = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleNotification : function(bool) {
         this.showDisabledNotifications = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleFlapping : function(bool) {
         this.showFlapping = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     togglePassive : function(bool) {
         this.showPassive = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleDisabled : function(bool) {
         this.showDisabled = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     updateFilter: function() {
@@ -234,7 +243,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 method: ['!='],
                 value: [i]
             });
-        };
+        }
         if(this.hostFilter != "") {
             filter.push({
                 type: 'atom',
@@ -261,14 +270,14 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         }
         var t = this.type;
         var flags = {
-            showDowntime : [t+'_SCHEDULED_DOWNTIME_DEPTH',0],
-            showAcknowledged : [t+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED',0],
-            showDisabledNotifications: [t+'_NOTIFICATIONS_ENABLED',1],
-            showFlapping: [t+'_IS_FLAPPING',0],
+            showDowntime : [t+'_SCHEDULED_DOWNTIME_DEPTH',0,false],
+            showAcknowledged : [t+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED',0,false],
+            showDisabledNotifications: [t+'_NOTIFICATIONS_ENABLED',0,true],
+            showFlapping: [t+'_IS_FLAPPING',1,true],
         
         }
         for(var i in flags) {
-            if(this[i] === false) {
+            if(this[i] === flags[i][2]) {
                 filter.push({
                     type: 'atom',
                     field: [flags[i][0]],
@@ -277,9 +286,25 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 });
             }
         };
-        if(this.showPassive === false) {
+        if(this.showPassive === true) {
             filter.push({
-                type:'OR',
+                type:'AND',
+                field: [{
+                    type: 'atom',
+                    field: [t+"_PASSIVE_CHECKS_ENABLED"],
+                    method: ['='],
+                    value: [1]
+                },{
+                    type: 'atom',
+                    field: [t+"_ACTIVE_CHECKS_ENABLED"],
+                    method: ['='],
+                    value: [0]
+                }]
+            });
+        }
+       if(this.showDisabled === true) {
+            filter.push({
+                type:'AND',
                 field: [{
                     type: 'atom',
                     field: [t+"_PASSIVE_CHECKS_ENABLED"],
@@ -289,23 +314,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                     type: 'atom',
                     field: [t+"_ACTIVE_CHECKS_ENABLED"],
                     method: ['='],
-                    value: [1]
-                }]
-            });
-        }
-       if(this.showDisabled === false) {
-            filter.push({
-                type:'OR',
-                field: [{
-                    type: 'atom',
-                    field: [t+"_PASSIVE_CHECKS_ENABLED"],
-                    method: ['='],
-                    value: [1]
-                },{
-                    type: 'atom',
-                    field: [t+"_ACTIVE_CHECKS_ENABLED"],
-                    method: ['='],
-                    value: [1]
+                    value: [0]
                 }]
             });
         }
@@ -440,7 +449,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 }
             }
         },{
-            fieldLabel: 'Other flags',
+            fieldLabel: _('Also show:'),
             xtype: 'buttongroup',
             defaults: {
                 enableToggle: true,
@@ -464,7 +473,16 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                         this.toggleDowntime(val);
                     },scope:this
                 }
-            },{
+            }]
+        },{
+            fieldLabel: _('<b/>Only</b> show:'),
+            xtype: 'buttongroup',
+            defaults: {
+                enableToggle: true,
+                width: 25,
+                pressed: false
+            },
+            items: [{
                 iconCls: 'icinga-icon-info-notifications-disabled',
                 tooltip: _('Include items with disabled notifications'),
                 listeners: {
