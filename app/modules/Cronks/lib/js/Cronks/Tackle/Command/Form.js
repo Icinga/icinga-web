@@ -4,7 +4,7 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 	title : _('Commands'),
 	
 	formBuilder : null,
-	target : {},
+	record : {},
 	autoScroll : true,
 	
 	constructor : function(config) {
@@ -17,8 +17,9 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 		this.formBuilder = new Icinga.Api.Command.FormBuilder();
 	},
 	
-	setTargetData : function(target) {
-		this.target = target;
+	setRecord : function(record) {
+		this.record = record;
+		alert("SET");
 	},
 	
 	rebuildFormForCommand : function(commandName) {
@@ -29,7 +30,7 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 		
 		this.form = this.formBuilder.build(commandName, {
             renderSubmit: true,
-            targets: [this.target]
+            targets: [this.record]
 		});
 		
 		this.add(this.form);
