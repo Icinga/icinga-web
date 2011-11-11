@@ -20,7 +20,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
 
     constructor : function(config) {
         
-        config.store = this.createStore(config.hostId);
+        config.store = this.createStore(config.hostId,config.filter);
 
         config.bbar = new Ext.PagingToolbar({
             store: config.store,
@@ -30,7 +30,8 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
         
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.constructor.call(this, config);
     },
-    createStore: function(hostId) {
+    
+    createStore: function(hostId,filter) {
 
         this.store = new Icinga.Api.RESTStore({
             target: 'service',
@@ -50,21 +51,38 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 'SERVICE_LAST_CHECK',
                 'SERVICE_NEXT_CHECK',
                 'SERVICE_SCHEDULED_DOWNTIME_DEPTH',
-                'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED'
+                'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
+                'SERVICE_ACTIVE_CHECKS_ENABLED',
+                'SERVICE_PASSIVE_CHECKS_ENABLED',
+                'SERVICE_NOTIFICATIONS_ENABLED',
+                'SERVICE_IS_FLAPPING'
+
             ]
            
         });
-        this.store.setFilter({
-            type: 'AND',
-            field: [{
-                type: 'atom',
-                method: ['='],
-                field: ['HOST_ID'],
-                value: [hostId]
-            }]
-        });
+        var jsonFilter;
+        var hostFilter = {
+            type: 'atom',
+            method: ['='],
+            field: ['HOST_ID'],
+            value: [hostId]
+        }
+        if(filter) {
+            jsonFilter = filter;
+            jsonFilter["field"].push(hostFilter);
+        } else {
+            jsonFilter =  {
+                type: 'AND',
+                field: [hostFilter]
+            }
+        }
+        this.store.setFilter(
+            jsonFilter
+        );
+
         return this.store;
     },
+
     realign: function() {
         try {
             this.setWidth(this.parent.getInnerWidth()-50);
@@ -148,6 +166,16 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                        return "<div qtip='"+str+"'>"+value+"</div>";
                    return "<div qtip='"+value+"'>"+str+"</div>";
                 }
+            }, {
+                header: _('Flags'),
+                dataIndex: 'SERVICE_ID',
+                width: 100,
+                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer,
+                listeners: {
+                    click: Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler,
+                    scope: this
+                }
+
             }]
 		});
         Icinga.Cronks.Tackle.ServicesSubGrid.superclass.initComponent.call(this);
