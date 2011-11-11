@@ -170,7 +170,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 header: _('Flags'),
                 dataIndex: 'SERVICE_ID',
                 width: 100,
-                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer,
+                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer('service'),
                 listeners: {
                     click: Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler,
                     scope: this
