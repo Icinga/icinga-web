@@ -150,15 +150,15 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         this.previewGrid.getStore().load();
     },
     setHostFilter: function(txt) {
-        this.hostFilter = txt;
+        this.hostFilter = txt.replace("*","%");
         this.previewGrid.getStore().load();
     },
     setServiceFilter: function(txt) {
-        this.serviceFilter = txt;
+        this.serviceFilter = txt.replace("*","%");
         this.previewGrid.getStore().load();
     },
     setHostgroupFilter: function(txt) {
-        this.hostgroupFilter = txt;
+        this.hostgroupFilter = txt.replace("*","%");
         this.previewGrid.getStore().load();
     },
     toggleDowntime: function(bool) {
