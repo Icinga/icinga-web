@@ -155,11 +155,11 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: function(value,meta,record) {
                    var str = AppKit.util.Date.getElapsedString(value);
                    var now = new Date();
-                   var lastCheckDate = new Date(value);
-                   var nextCheckDate = new Date(record.get('SERVICE_NEXT_CHECK'));
+                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s');
+                   var nextCheckDate = Date.parseDate(record.get('SERVICE_NEXT_CHECK'),'Y-m-d H:i:s');
                    var elapsed = parseInt(now.getElapsed(lastCheckDate)/1000,10);
 
-                   if(!now.between(lastCheckDate,nextCheckDate))
+                   if(!now.between(lastCheckDate,nextCheckDate.add(Date.SECOND,30)))
                        return "<div style='color:red;padding-left:19px;background-position: left center;' class='icinga-icon-exclamation-red'"+
                               " qtip='Should have been checked "+AppKit.util.Date.getElapsedString(value)+"'>"+value+"</div>";
                    if(elapsed > (60*60*24))
