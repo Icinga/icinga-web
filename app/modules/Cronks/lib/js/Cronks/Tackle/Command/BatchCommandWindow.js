@@ -31,7 +31,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             showDisabledNotifications: false,
             showPassiveOnly: false,
             showDisabled: false
-        })
+        });
     },
 
     buildPreviewGrid: function(cfg) {
@@ -60,8 +60,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 'SERVICE_IS_FLAPPING',
                 'HOST_CURRENT_STATE',
                 'SERVICE_CURRENT_STATE'
-            ],
-            // beforeLoad fires too late to apply filters
+            ]
            
         });
         this.gridBbar = new Ext.PagingToolbar({
@@ -145,7 +144,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             ],
             listeners: {
                 tabChange: function(panel,tab) {
-                    if(tab == svcCommands) {
+                    if(tab === svcCommands) {
                         this.previewGrid.getColumnModel().setHidden(0,false);
                         this.previewGrid.getColumnModel().setHidden(3,false);
                         this.previewGrid.getColumnModel().setHidden(5,false);
@@ -238,7 +237,6 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     },
     updateFilter: function() {
         var filter = [];
-        var type = this.getAct
         for(var i in this.svcStates) {
             if(this.svcStates[i] == true)
                 continue;
@@ -248,7 +246,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 method: ['!='],
                 value: [i]
             });
-        };
+        }
         
         for(var i in this.hostStates) {
             if(this.hostStates[i] == true)
@@ -289,9 +287,10 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             showDowntime : [t+'_SCHEDULED_DOWNTIME_DEPTH',0,false],
             showAcknowledged : [t+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED',0,false],
             showDisabledNotifications: [t+'_NOTIFICATIONS_ENABLED',0,true],
-            showFlapping: [t+'_IS_FLAPPING',1,true],
+            showFlapping: [t+'_IS_FLAPPING',1,true]
         
-        }
+        };
+
         for(var i in flags) {
             if(this[i] === flags[i][2]) {
                 filter.push({
@@ -301,7 +300,8 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                     value: [flags[i][1]]
                 });
             }
-        };
+        }
+        
         if(this.showPassive === true) {
             filter.push({
                 type:'AND',
