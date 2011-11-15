@@ -15,7 +15,7 @@
                 <setting name="description">Appkit main application kit</setting>
 
                 <setting name="doctrine_path">%core.root_dir%/lib/doctrine/</setting>
-                <setting name="doctrine_use_compressed">true</setting>
+                <setting name="doctrine_use_compressed">false</setting>
                 
                 <setting name="php_settings">
                     <ae:parameter name="session.gc_probability">3</ae:parameter>
