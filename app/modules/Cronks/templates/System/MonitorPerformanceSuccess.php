@@ -25,8 +25,8 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			'<div class="icinga-monitor-performance-container-50">',
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Hosts (active/passive)') + '" class="key icinga-icon-host"></div>',
-					'<div class="value">{NUM_ACTIVE_HOST_CHECKS} / {NUM_PASSIVE_HOST_CHECKS}</div>',
+					'<div title="' + _('Hosts (active/passive/disabled)') + '" class="key icinga-icon-host"></div>',
+					'<div class="value">{NUM_ACTIVE_HOST_CHECKS} / {NUM_PASSIVE_HOST_CHECKS} / {NUM_DISABLED_HOST_CHECKS}</div>',
 				'</div>',
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
@@ -44,8 +44,8 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			'<div class="icinga-monitor-performance-container-50">',
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Services (active/passive)') + '" class="key icinga-icon-service"></div>',
-					'<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS}</div>',
+					'<div title="' + _('Services (active/passive/disabled)') + '" class="key icinga-icon-service"></div>',
+					'<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS} /  / {NUM_DISABLED_SERVICE_CHECKS}</div>',
 				'</div>',
 				
 				'<div class="clearfix icinga-monitor-performance-container">',

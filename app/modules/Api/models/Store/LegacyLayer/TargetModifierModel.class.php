@@ -561,7 +561,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->aliasDefs = array(
                                        "h"  => array("src" => "oh", "relation" => "host","alwaysJoin"=>true),
                                        "s"  => array("src" => "h", "relation" => "services"),
-                                       "oh" => array("src" => "hs", "relation" => "hostobject", "alwaysJoin" => true),
+                                       "oh" => array("src" => "hs", "relation" => "hostobject", "alwaysJoin" => true, "with"=>"oh.is_active=1"),
                                        "i"  => array("src" => "h", "relation" => "instance"),
                                        "cg" => array("src" => "h", "relation" => "contactgroups"),
                                        "ocg"=> array("src" => "cg", "relation" => "object"),
@@ -585,7 +585,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->forceGroup[] = "ss.current_state";
                 $this->aliasDefs = array(
                                        "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
-                                       "os" => array("src" => "ss", "relation" => "serviceobject", "alwaysJoin" => true),
+                                       "os" => array("src" => "ss", "relation" => "serviceobject", "alwaysJoin" => true, "with"=>"os.is_active=1"),
                                        "i"  => array("src" => "s", "relation" => "instance"),
                                        "cg" => array("src" => "s", "relation" => "contactgroups"),
                                        "ocg"=> array("src" => "cg", "relation" => "object"),
@@ -1024,10 +1024,11 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             if($this->retainedAlias) {      
                 $o->andWhere($this->retainedAlias.".config_type= ?",$db->useRetained() ? "1" : "0");
 
-            }                   
-		
-                
+            }                               
         }
+        if($this->getTarget() == "IcingaObjects")
+            $o->andWhere($this->mainAlias.".is_active = 1");
+
         foreach($this->forceGroup as $group) {
             $o->addGroupBy($group);
         }
@@ -1069,22 +1070,22 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
 
     protected $defaultAliasDefs = array(
-                                      "i"  => array("src" => "dt", "relation" => "instance"),
-                                      "os" => array("src" => "s", "relation" => "object"),
-                                      "ss" => array("src" => "s","relation" => "status"),
-                                      "oh" => array("src" => "h","relation" => "object"),
-                                      "sg" => array("src" => "s","relation" => "servicegroups"),
-                                      "sgm" => array("src" => "sg", "relation" => "members"),
-                                      "osg" => array("src" => "sg", "relation" => "object"),
-                                      "hg"  => array("src" => "h", "relation" => "hostgroups"),
-                                      "hgm" => array("src" => "h","relation" => "members"),
-                                      "ohg" => array("src" => "hg","relation" => "object"),
+      "i"  => array("src" => "dt", "relation" => "instance"),
+      "os" => array("src" => "s", "relation" => "object"),
+      "ss" => array("src" => "s","relation" => "status"),
+      "oh" => array("src" => "h","relation" => "object"),
+      "sg" => array("src" => "s","relation" => "servicegroups"),
+      "sgm" => array("src" => "sg", "relation" => "members"),
+      "osg" => array("src" => "sg", "relation" => "object"),
+      "hg"  => array("src" => "h", "relation" => "hostgroups"),
+      "hgm" => array("src" => "h","relation" => "members"),
+      "ohg" => array("src" => "hg","relation" => "object"),
 
-                                      "hs"  => array("src" => "h", "relation" => "status"),
-                                      "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
-                                      "cvsh"=> array("src" => "h", "relation" => "customvariablestatus")
+      "hs"  => array("src" => "h", "relation" => "status"),
+      "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
+      "cvsh"=> array("src" => "h", "relation" => "customvariablestatus")
 
-                                  );
+  );
 
     protected $aliasDefs = array();
 }

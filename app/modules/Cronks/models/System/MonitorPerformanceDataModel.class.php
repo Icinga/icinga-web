@@ -8,48 +8,62 @@
 class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
 
     private static $sources = array(
-                                  array(IcingaApiConstants::TARGET_HOST, array(
-                                            'HOST_EXECUTION_TIME_MIN', 'HOST_EXECUTION_TIME_MAX', 'HOST_EXECUTION_TIME_AVG',
-                                            'HOST_LATENCY_MIN', 'HOST_LATENCY_MAX', 'HOST_LATENCY_AVG'
-                                        )),
+          array(IcingaApiConstants::TARGET_HOST, array(
+                    'HOST_EXECUTION_TIME_MIN', 'HOST_EXECUTION_TIME_MAX', 'HOST_EXECUTION_TIME_AVG',
+                    'HOST_LATENCY_MIN', 'HOST_LATENCY_MAX', 'HOST_LATENCY_AVG'
+                )),
 
-                                  array(IcingaApiConstants::TARGET_HOST_SERVICE, array(
-                                            'SERVICE_EXECUTION_TIME_MIN', 'SERVICE_EXECUTION_TIME_MAX', 'SERVICE_EXECUTION_TIME_AVG',
-                                            'SERVICE_LATENCY_MIN', 'SERVICE_LATENCY_MAX', 'SERVICE_LATENCY_AVG'
-                                        )),
+          array(IcingaApiConstants::TARGET_HOST_SERVICE, array(
+                    'SERVICE_EXECUTION_TIME_MIN', 'SERVICE_EXECUTION_TIME_MAX', 'SERVICE_EXECUTION_TIME_AVG',
+                    'SERVICE_LATENCY_MIN', 'SERVICE_LATENCY_MAX', 'SERVICE_LATENCY_AVG'
+                )),
 
-                                  array(
-                                      IcingaApiConstants::TARGET_HOST,
-                                      array('HOST_OBJECT_ID'),
-                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
-                                      array(array('HOST_CHECK_TYPE', 0)),
-                                      'NUM_ACTIVE_HOST_CHECKS'
-                                  ),
+          array(
+              IcingaApiConstants::TARGET_HOST,
+              array('HOST_OBJECT_ID'),
+              IcingaApiConstants::SEARCH_TYPE_COUNT,
+              array(array('HOST_ACTIVE_CHECKS_ENABLED', 1)),
+             'NUM_ACTIVE_HOST_CHECKS'
+          ),
 
-                                  array(
-                                      IcingaApiConstants::TARGET_HOST,
-                                      array('HOST_OBJECT_ID'),
-                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
-                                      array(array('HOST_CHECK_TYPE', 1)),
-                                      'NUM_PASSIVE_HOST_CHECKS'
-                                  ),
+          array(
+              IcingaApiConstants::TARGET_HOST,
+              array('HOST_OBJECT_ID'),
+              IcingaApiConstants::SEARCH_TYPE_COUNT,
+              array(array('HOST_PASSIVE_CHECKS_ENABLED', 1),array('HOST_ACTIVE_CHECKS_ENABLED', 0)),
+              'NUM_PASSIVE_HOST_CHECKS'
+          ),
+          array(
+              IcingaApiConstants::TARGET_HOST,
+              array('HOST_OBJECT_ID'),
+              IcingaApiConstants::SEARCH_TYPE_COUNT,
+              array(array('HOST_PASSIVE_CHECKS_ENABLED', 0),array('HOST_ACTIVE_CHECKS_ENABLED', 0)),
+              'NUM_DISABLED_HOST_CHECKS'
+          ),
+          array(
+              IcingaApiConstants::TARGET_SERVICE,
+              array('SERVICE_OBJECT_ID'),
+              IcingaApiConstants::SEARCH_TYPE_COUNT,
+              array(array('SERVICE_ACTIVE_CHECKS_ENABLED', 1)),
+              'NUM_ACTIVE_SERVICE_CHECKS'
+          ),
 
-                                  array(
-                                      IcingaApiConstants::TARGET_SERVICE,
-                                      array('SERVICE_OBJECT_ID'),
-                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
-                                      array(array('SERVICE_CHECK_TYPE', 0)),
-                                      'NUM_ACTIVE_SERVICE_CHECKS'
-                                  ),
+          array(
+              IcingaApiConstants::TARGET_SERVICE,
+              array('SERVICE_OBJECT_ID'),
+              IcingaApiConstants::SEARCH_TYPE_COUNT,
+              array(array('SERVICE_PASSIVE_CHECKS_ENABLED', 1),array('SERVICE_ACTIVE_CHECKS_ENABLED', 0)),
+              'NUM_PASSIVE_SERVICE_CHECKS'
+          ),
 
-                                  array(
-                                      IcingaApiConstants::TARGET_SERVICE,
-                                      array('SERVICE_OBJECT_ID'),
-                                      IcingaApiConstants::SEARCH_TYPE_COUNT,
-                                      array(array('SERVICE_CHECK_TYPE', 1)),
-                                      'NUM_PASSIVE_SERVICE_CHECKS'
-                                  ),
-                              );
+          array(
+              IcingaApiConstants::TARGET_SERVICE,
+              array('SERVICE_OBJECT_ID'),
+              IcingaApiConstants::SEARCH_TYPE_COUNT,
+              array(array('SERVICE_PASSIVE_CHECKS_ENABLED', 1),array('SERVICE_ACTIVE_CHECKS_ENABLED', 0)),
+              'NUM_DISABLED_SERVICE_CHECKS'
+          )
+      );
 
     /**
      * @var AgaviParameterHolder

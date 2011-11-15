@@ -13,6 +13,7 @@
 class Api_SLAProviderAction extends IcingaApiBaseAction {
     
     public function executeRead(AgaviRequestDataHolder $rd) {
+
         $filter = $this->getContext()->getModel("SLA.SLAFilter","Api");
         $params = $rd->getParameters();
 

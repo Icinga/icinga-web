@@ -54,6 +54,8 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
     },
 
     buildFilter: function() {
+        if(!Ext.getCmp('filterbuttons_host_state_up_'+this.parentId))
+            return null;
         var filter = {
             states: {
                 0 : Ext.getCmp('filterbuttons_host_state_up_'+this.parentId).pressed,
