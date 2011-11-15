@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <settings> 
+            <ae:parameter name="default_timespan">-1 month</ae:parameter>
+    		<ae:parameter name="enabled">false</ae:parameter>
+        </settings>
+    </ae:configuration>
+</ae:configurations>

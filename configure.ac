@@ -354,6 +354,7 @@ AC_CONFIG_FILES([
 	app/config/settings.xml
 	app/config/translation.xml
 	app/modules/Api/config/access.xml
+	app/modules/Api/config/module.xml
 	app/modules/AppKit/config/module.xml
 	app/modules/AppKit/config/auth.xml
 	app/modules/Cronks/config/module.xml

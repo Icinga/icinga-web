@@ -82,10 +82,13 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         
         if($rd->getParameter("withSLA") && ($target == "host" || $target == "service")) {
             $slaDefaults = AgaviConfig::get("modules.api.sla_settings");
-            if(!isset($slaDefaults["default_timespan"]))
-                $slaDefaults["default_timespan"] = "-1 Month";
-            $ts = $rd->getParameter("slaTimespan",$slaDefaults["default_timespan"]);
-            $this->addSLAData($res,$ts);
+            print_r($slaDefaults);die();
+            if(isset($slaDefaults["enabled"]) && $slaDefaults["enabled"]) {
+                if(!isset($slaDefaults["default_timespan"]))
+                    $slaDefaults["default_timespan"] = "-1 Month";
+                $ts = $rd->getParameter("slaTimespan",$slaDefaults["default_timespan"]);
+                $this->addSLAData($res,$ts);
+            }
         }
         
         $rd->setParameter("searchResult", $res);

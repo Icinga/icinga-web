@@ -18,6 +18,7 @@ install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)/$(WEB_CFG_DIR)
 	$(INSTALL) -m 644 $(INSTALL_OPTS) access.xml $(DESTDIR)$(WEB_CFG_DIR)/access.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) auth.xml $(DESTDIR)$(WEB_CFG_DIR)/auth.xml
+	$(INSTALL) -m 644 $(INSTALL_OPTS) sla.xml $(DESTDIR)$(WEB_CFG_DIR)/sla.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) databases.xml $(DESTDIR)$(WEB_CFG_DIR)/databases.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) cronks.xml $(DESTDIR)$(WEB_CFG_DIR)/cronks.xml
 	$(INSTALL) -m 644 $(INSTALL_OPTS) translation.xml $(DESTDIR)$(WEB_CFG_DIR)/translation.xml
