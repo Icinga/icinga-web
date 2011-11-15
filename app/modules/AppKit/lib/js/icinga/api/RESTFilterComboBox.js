@@ -19,6 +19,7 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
         cfg.displayField = cfg.targetField; 
         cfg.valueField = cfg.targetField; 
         this.storeFieldName = cfg.targetField;
+        AppKit.log(cfg);
         cfg.store = store; 
         Ext.ux.AutoComboBox.prototype.constructor.call(this,cfg);
 
@@ -83,50 +84,48 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
 
 Icinga.Api.HostgroupsComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
     constructor: function(cfg) {
-        cfg = cfg || {};
-        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,Ext.apply(cfg,{
+
+        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,{
             targetField: 'HOSTGROUP_NAME',
             idField: 'HOSTGROUP_ID',
             target: 'hostgroup',
             displayField: 'HOSTGROUP_NAME'
-        }));
+        });
     }
 });
 
 Icinga.Api.ServicegroupsComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
     constructor: function(cfg) {
-        cfg = cfg || {};
-        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,Ext.apply(cfg,{
+        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,{
             targetField: 'SERVICEGROUP_NAME',
             idField: 'SERVICEGROUP_ID',
             target: 'servicegroup',
             displayField: 'SERVICEGROUP_NAME'
-        }));
+        });
     }
 });
 
 
 Icinga.Api.HostsComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
     constructor: function(cfg) {
-        cfg = cfg || {};
-        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,Ext.apply(cfg,{
+        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,{
             targetField: 'HOST_NAME',
             idField: 'HOST_ID',
             target: 'host',
             displayField: 'HOST_NAME'
-        }));
+        });
     }
 });
 
 Icinga.Api.ServicesComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
     constructor: function(cfg) {
-        cfg = cfg || {};
-        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,Ext.apply(cfg,{
+
+        Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,{
             targetField: 'SERVICE_NAME',
             target: 'service',
             idField: 'SERVICE_ID',
             displayField: 'SERVICE_NAME'
-        }));
+        });
     }
 });
 Ext.reg('IcingaRESTComboBox', Icinga.Api.RESTFilterComboBox);
