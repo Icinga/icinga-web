@@ -4,6 +4,7 @@
 # ExcludeDist: el4 el3
 
 %define logdir %{_localstatedir}/log/icinga-web
+%define cachedir %{_localstatedir}/cache/icinga-web
 
 %if "%{_vendor}" == "suse"
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
@@ -18,7 +19,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.5.2
+Version: 1.6.0
 Release: 1%{?dist}
 License: GPLv2+
 Group: Applications/System
@@ -67,6 +68,7 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
     --with-web-group='%{apachegroup}' \
     --with-api-cmd-file='%{_localstatedir}/icinga/rw/icinga.cmd' \
     --with-log-dir='%{logdir}' \
+    --with-cache-dir='%{cachedir}' \
     --with-web-apache-path=%{apacheconfdir}
 
 %install
@@ -135,12 +137,16 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 %config(noreplace) %{_sysconfdir}/icinga-web/translation.xml
 # logs+cache
 %attr(2775,%{apacheuser},%{apachegroup}) %dir %{logdir}
-%attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/cache
-%attr(-,%{apacheuser},%{apachegroup}) %{_datadir}/icinga-web/app/cache/config
+%attr(-,%{apacheuser},%{apachegroup}) %{cachedir}
+%attr(-,%{apacheuser},%{apachegroup}) %{cachedir}/config
 
 ##############################
 %changelog
 ##############################
+* Sat Oct 22 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.0-1
+- bump to 1.6.0
+- add --with-cache-dir and use %{_localstatedir}/cache/icinga-web
+
 * Thu Sep 15 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.5.2-1
 - drop icinga-api dependency
 - drop BuildRequires - not needed at this stage
