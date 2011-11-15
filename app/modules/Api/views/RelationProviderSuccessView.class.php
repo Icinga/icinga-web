@@ -7,8 +7,18 @@ class Api_RelationProviderSuccessView extends IcingaApiBaseView {
 	}
 	
 	public function executeJson(AgaviRequestDataHolder $rd) {
-	    var_dump($this->getAttribute('data', array ()));
-	    return json_encode(array('huhu' => true));
+	    $data = $this->getAttribute('data', array ());
+	    
+	    $out = array (
+	        'result' => $data,
+	        'success' => false
+	    );
+	    
+	    if (isset($data['object']) && is_array($data['object'])) {
+	        $out['success'] = true;
+	    }
+	    
+	    return json_encode($data);
 	}
 }
 

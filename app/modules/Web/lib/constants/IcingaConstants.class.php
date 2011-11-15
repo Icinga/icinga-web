@@ -1,6 +1,6 @@
 <?php
 
-class IcingaConstants {
+interface IcingaConstants {
 
     // Host states
     const HOST_UP							= 0;
@@ -57,6 +57,10 @@ class IcingaConstants {
     const DOWNTIME_COMMENT					= 2;
     const FLAPPING_COMMENT					= 3;
     const ACKNOWLEDGEMENT_COMMENT			= 4;
+    
+    // Types
+    const TYPE_HOST                         = 1;
+    const TYPE_SERVICE                      = 2;
 }
 
 ?>
