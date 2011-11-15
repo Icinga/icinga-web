@@ -73,16 +73,24 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
 
         //Setup count
         if ($rd->getParameter("countColumn")) {
+            $search = @$API->createSearch()->setSearchTarget($target);
+            $this->addFilters($search,$rd);
+
+            $this->setColumns($search,$rd);
+            $this->setGrouping($search,$rd);
+            $this->setOrder($search,$rd);
+            $this->setLimit($search,$rd);
+
             $search->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT);
 
-
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
+           
             $rd->setParameter("searchCount",$search->fetch()->getAll());
         }
         
         if($rd->getParameter("withSLA") && ($target == "host" || $target == "service")) {
             $slaDefaults = AgaviConfig::get("modules.api.sla_settings");
-            print_r($slaDefaults);die();
+
             if(isset($slaDefaults["enabled"]) && $slaDefaults["enabled"]) {
                 if(!isset($slaDefaults["default_timespan"]))
                     $slaDefaults["default_timespan"] = "-1 Month";

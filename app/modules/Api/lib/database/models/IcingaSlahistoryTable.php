@@ -271,7 +271,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                         UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                     )
                 ) as duration          
-             FROM  timerange  s
+             FROM  timerange1 s
              INNER JOIN ".$prefix."objects obj ON obj.object_id = s.object_id ";
         
         if($filter) {
@@ -290,9 +290,12 @@ class IcingaSlahistoryTable extends Doctrine_Table {
         $result = $dbh->query($query = "
 
             START TRANSACTION;
-            DROP VIEW IF EXISTS timerange;
-            CREATE ALGORITHM=MERGE VIEW timerange AS
-                ".self::getTimeRangeQuery($c,$filter).";");
+            CREATE TEMPORARY TABLE timerange1 LIKE ".$prefix."slahistory;
+            CREATE TEMPORARY TABLE timerange2 LIKE ".$prefix."slahistory;
+            INSERT INTO timerange1 (
+                ".self::getTimeRangeQuery($c,$filter).");
+            INSERT INTO timerange2 (
+                ".self::getTimeRangeQuery($c,$filter).");");
 
         if($result == false) {
             $err = $dbh->errorInfo();
@@ -317,7 +320,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                              UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time),
                              UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                          )         
-                    ) as complete FROM timerange
+                    ) as complete FROM timerange2
                     GROUP BY 
                         object_id     
                  ) as s ON slahistory_main.object_id = s.object_id  
@@ -325,12 +328,11 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                 slahistory_main.object_id,
                 slahistory_main.sla_state,
                 slahistory_main.objecttype_id;
-             DROP VIEW timerange;
          ");
        
         foreach($filterParts["params"] as $param=>$value)
             $stmt->bindValue($param,$value);
-        
+
         return $stmt;
        
     }
