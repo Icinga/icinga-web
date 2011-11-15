@@ -4,13 +4,11 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
 
     layout: 'border',
     
-    
-    
     constructor: function(cfg) {
         cfg = cfg || {};
         cfg.buttons = this.buttons;
         cfg.width = Ext.getBody().getWidth()*0.7;
-        cfg.height = Ext.getBody().getHeight()*0.7;
+        cfg.height = Ext.getBody().getHeight()*0.9;
         this.setInitialValues();
         this.id = Ext.id();
         this.buildPreviewGrid(cfg);
@@ -26,14 +24,19 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             serviceFilter: "",
             hostgroupFilter: "",
             showAcknowledged: true,
-            showDowntimes: true
+            showDowntimes: true,
+            showFlapping: false,
+            showDisabledNotifications: false,
+            showPassiveOnly: false,
+            showDisabled: false
         })
     },
 
     buildPreviewGrid: function(cfg) {
+        var scope = this;
         this.recipientStore = new Icinga.Api.RESTStore({
             target: 'service',
-            limit: 50,
+            limit: 30,
             offset: 0,
             countColumn: true,
             columns: [
@@ -41,47 +44,63 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 'HOST_ID',
                 'HOST_NAME',
                 'SERVICE_NAME',
+                'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
+                'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
+                'HOST_SCHEDULED_DOWNTIME_DEPTH',
+                'SERVICE_SCHEDULED_DOWNTIME_DEPTH',
+                'HOST_ACTIVE_CHECKS_ENABLED',
+                'SERVICE_ACTIVE_CHECKS_ENABLED',
+                'HOST_PASSIVE_CHECKS_ENABLED',
+                'SERVICE_PASSIVE_CHECKS_ENABLED',
+                'HOST_NOTIFICATIONS_ENABLED',
+                'SERVICE_NOTIFICATIONS_ENABLED',
+                'HOST_IS_FLAPPING',
+                'SERVICE_IS_FLAPPING',
                 'HOST_CURRENT_STATE',
                 'SERVICE_CURRENT_STATE'
             ],
-            listeners : {
-                beforeload: function() {
-
-                    this.updateFilter();
-                    return true;
-                },
-                scope:this
-            }
+            // beforeLoad fires too late to apply filters
+           
         });
         this.gridBbar = new Ext.PagingToolbar({
             store: this.recipientStore,
+            pageSize:30,
             displayInfo:true
         });
         this.previewGrid = new Ext.grid.GridPanel({
             title: 'Batch target',
            
             cm: new Ext.grid.ColumnModel({
+                defaults: {
+                   menuDisabled: true
+                },
                 columns:[{
                     dataIndex: 'SERVICE_NAME',
                     header: _('Service name'),
-                    menuDisabled: true,
                     hidden: true
                 },{
                     dataIndex: 'HOST_NAME',
-                    menuDisabled: true,
                     header: _('Host name')
                 },{
                     dataIndex: 'HOST_CURRENT_STATE',
                     header: ('Host status'),
-                    menuDisabled: true,
                     renderer: Cronk.grid.ColumnRenderer.hostStatus()
                 },{
                     dataIndex: 'SERVICE_CURRENT_STATE',
                     header: ('Service status'),
                     renderer: Cronk.grid.ColumnRenderer.serviceStatus(),
-                    menuDisabled: true,
                     hidden:true
+                }, {
+                    dataIndex: 'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
+                    header: _('Host flags'),
+                    renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer('host')
+                },{
+                    dataIndex: 'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
+                    header: _('Service flags'),
+                    renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer('service'),
+                    hidden: true
                 }]
+
             }),
             bbar: this.gridBbar,
             store: this.recipientStore
@@ -113,17 +132,21 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                     if(tab == svcCommands) {
                         this.previewGrid.getColumnModel().setHidden(0,false);
                         this.previewGrid.getColumnModel().setHidden(3,false);
+                        this.previewGrid.getColumnModel().setHidden(5,false);
                         this.recipientStore.setGroupBy(null);
+                        this.type = 'service';
                     } else {
                         this.previewGrid.getColumnModel().setHidden(0,true);
                         this.previewGrid.getColumnModel().setHidden(3,true);
+                        this.previewGrid.getColumnModel().setHidden(5,true);
                         this.recipientStore.setGroupBy("HOST_NAME");
+                        this.type = 'host';
                     }
                     this.previewGrid.getStore().load();
                 },
                 scope:this
             },
-            height: 300
+            height: 200
         }),{
             title: _('Filter command recipients'),
             region: 'west',
@@ -143,36 +166,63 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     },
     toggleServiceState: function(state,val) {
         this.svcStates[state] = val;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleHostState: function(state,val) {
         this.hostStates[state] = val;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     setHostFilter: function(txt) {
         this.hostFilter = txt.replace("*","%");
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     setServiceFilter: function(txt) {
         this.serviceFilter = txt.replace("*","%");
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     setHostgroupFilter: function(txt) {
         this.hostgroupFilter = txt.replace("*","%");
+        this.updateFilter();
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleDowntime: function(bool) {
         this.showDowntime = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
     toggleAck : function(bool) {
         this.showAcknowledged = bool;
+        this.updateFilter();
         this.previewGrid.getStore().load();
     },
-
-
+    toggleNotification : function(bool) {
+        this.showDisabledNotifications = bool;
+        this.updateFilter();
+        this.previewGrid.getStore().load();
+    },
+    toggleFlapping : function(bool) {
+        this.showFlapping = bool;
+        this.updateFilter();
+        this.previewGrid.getStore().load();
+    },
+    togglePassive : function(bool) {
+        this.showPassive = bool;
+        this.updateFilter();
+        this.previewGrid.getStore().load();
+    },
+    toggleDisabled : function(bool) {
+        this.showDisabled = bool;
+        this.updateFilter();
+        this.previewGrid.getStore().load();
+    },
     updateFilter: function() {
         var filter = [];
+        var type = this.getAct
         for(var i in this.svcStates) {
             if(this.svcStates[i] == true)
                 continue;
@@ -193,7 +243,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 method: ['!='],
                 value: [i]
             });
-        };
+        }
         if(this.hostFilter != "") {
             filter.push({
                 type: 'atom',
@@ -218,23 +268,56 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 value: [this.serviceFilter]
             });
         }
-        if(this.showDowntime === false) {
+        var t = this.type;
+        var flags = {
+            showDowntime : [t+'_SCHEDULED_DOWNTIME_DEPTH',0,false],
+            showAcknowledged : [t+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED',0,false],
+            showDisabledNotifications: [t+'_NOTIFICATIONS_ENABLED',0,true],
+            showFlapping: [t+'_IS_FLAPPING',1,true],
+        
+        }
+        for(var i in flags) {
+            if(this[i] === flags[i][2]) {
+                filter.push({
+                    type: 'atom',
+                    field: [flags[i][0]],
+                    method: ['='],
+                    value: [flags[i][1]]
+                });
+            }
+        };
+        if(this.showPassive === true) {
             filter.push({
-                type: 'atom',
-                field: ['HOST_SCHEDULED_DOWNTIME_DEPTH'],
-                method: ['='],
-                value: [0]
+                type:'AND',
+                field: [{
+                    type: 'atom',
+                    field: [t+"_PASSIVE_CHECKS_ENABLED"],
+                    method: ['='],
+                    value: [1]
+                },{
+                    type: 'atom',
+                    field: [t+"_ACTIVE_CHECKS_ENABLED"],
+                    method: ['='],
+                    value: [0]
+                }]
             });
         }
-        if(this.showAcknowledged === false) {
+       if(this.showDisabled === true) {
             filter.push({
-                type: 'atom',
-                field: ['HOST_PROBLEM_IS_ACKNOWLEDGED'],
-                method: ['='],
-                value: [0]
+                type:'AND',
+                field: [{
+                    type: 'atom',
+                    field: [t+"_PASSIVE_CHECKS_ENABLED"],
+                    method: ['='],
+                    value: [0]
+                },{
+                    type: 'atom',
+                    field: [t+"_ACTIVE_CHECKS_ENABLED"],
+                    method: ['='],
+                    value: [0]
+                }]
             });
         }
-        AppKit.log(filter);
         this.recipientStore.setFilter({
             type: 'AND',
             field: filter
@@ -366,16 +449,17 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 }
             }
         },{
-            fieldLabel: 'Other flags',
+            fieldLabel: _('Also show:'),
             xtype: 'buttongroup',
             defaults: {
                 enableToggle: true,
-                width:25
+                width:25,
+                pressed:true
             },
 
             items: [{
                 iconCls: 'icinga-icon-info-problem-acknowledged',
-                tooltip: _('Show acknowledged items'),
+                tooltip: _('Include acknowledged items'),
                 listeners: {
                     toggle: function(cmp,val) {
                         this.toggleAck(val);
@@ -383,10 +467,51 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 }
             },{
                 iconCls: 'icinga-icon-info-downtime',
-                tooltip: _('Show items in downtime'),
+                tooltip: _('Include items in downtime'),
                 listeners: {
                     toggle: function(cmp,val) {
                         this.toggleDowntime(val);
+                    },scope:this
+                }
+            }]
+        },{
+            fieldLabel: _('<b/>Only</b> show:'),
+            xtype: 'buttongroup',
+            defaults: {
+                enableToggle: true,
+                width: 25,
+                pressed: false
+            },
+            items: [{
+                iconCls: 'icinga-icon-info-notifications-disabled',
+                tooltip: _('Include items with disabled notifications'),
+                listeners: {
+                    toggle: function(cmp,val) {
+                        this.toggleNotification(val);
+                    },scope:this
+                }
+            },{
+                iconCls: 'icinga-icon-info-flapping',
+                tooltip: _('Include flapping objects'),
+                listeners: {
+                    toggle: function(cmp,val) {
+                        this.toggleFlapping(val);
+                    },scope:this
+                }
+            },{
+                iconCls: 'icinga-icon-info-passive',
+                tooltip: _('Include passive items'),
+                listeners: {
+                    toggle: function(cmp,val) {
+                        this.togglePassive(val);
+                    },scope:this
+                }
+            },{
+                iconCls: 'icinga-icon-info-disabled',
+                tooltip: _('Include disabled items'),
+                listeners: {
+                    toggle: function(cmp,val) {
+                        this.toggleDisabled(val);
                     },scope:this
                 }
             }]
@@ -398,7 +523,10 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         iconCls: 'icinga-icon-accept'
     },{
         text: _('Cancel'),
-        iconCls: 'icinga-icon-cancel'
+        iconCls: 'icinga-icon-cancel',
+        handler: function(cmp) {
+            cmp.ownerCt.ownerCt.close();
+        }
     }]
 
 

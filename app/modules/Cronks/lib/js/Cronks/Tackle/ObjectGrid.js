@@ -291,7 +291,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 dataIndex: 'HOST_ID',
                 sortable: false,
                 width: 150,
-                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer,
+                renderer: Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer('host'),
                 listeners: {
                     click: Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler,
                     scope: this

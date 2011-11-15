@@ -543,7 +543,7 @@
 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="model">CronksColumnDisplay.Format</parameter>
+               		<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
                		<parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
