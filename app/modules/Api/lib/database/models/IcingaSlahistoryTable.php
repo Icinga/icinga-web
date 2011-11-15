@@ -253,12 +253,15 @@ class IcingaSlahistoryTable extends Doctrine_Table {
         
         foreach($filterParts["params"] as $param=>$value)
             $stmt->bindValue($param,$value);
+
         return $stmt;
     }
     
     private static function getMySQLSummaryQuery(Doctrine_Connection $c, $filter = null) {   
         $dbh = $c->getDbh();
         $prefix = $c->getPrefix();
+        $timeQuery = self::getTimeRangeQuery($c,$filter);
+
         // MYSQL has no with clause, so we need two queries
         $mainQuery = "(SELECT 
                 s.object_id,
@@ -271,7 +274,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                         UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                     )
                 ) as duration          
-             FROM  timerange1 s
+             FROM  ($timeQuery) s
              INNER JOIN ".$prefix."objects obj ON obj.object_id = s.object_id ";
         
         if($filter) {
@@ -279,28 +282,12 @@ class IcingaSlahistoryTable extends Doctrine_Table {
             $mainQuery .= $filterParts["wherePart"];
         }
         
-        $mainQuery .= "
-            
+        $mainQuery .= "            
              GROUP BY 
                  state*(scheduled_downtime-1)*-1,
                  object_id,
                  objecttype_id
              ) slahistory_main";
-        
-        $result = $dbh->query($query = "
-
-            START TRANSACTION;
-            CREATE TEMPORARY TABLE timerange1 LIKE ".$prefix."slahistory;
-            CREATE TEMPORARY TABLE timerange2 LIKE ".$prefix."slahistory;
-            INSERT INTO timerange1 (
-                ".self::getTimeRangeQuery($c,$filter).");
-            INSERT INTO timerange2 (
-                ".self::getTimeRangeQuery($c,$filter).");");
-
-        if($result == false) {
-            $err = $dbh->errorInfo();
-            throw new PDOException($err[0],$err[1],$err[2]);
-        }
          
        
         $stmt = $dbh->prepare($query = "
@@ -313,14 +300,14 @@ class IcingaSlahistoryTable extends Doctrine_Table {
             FROM
                  $mainQuery 
                  INNER JOIN (
-                     SELECT object_id,
+                     SELECT t1.object_id,
                      SUM(
                          COALESCE(
                              UNIX_TIMESTAMP(acknowledgement_time)-UNIX_TIMESTAMP(start_time),
                              UNIX_TIMESTAMP(end_time)-UNIX_TIMESTAMP(start_time),
                              UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(start_time)
                          )         
-                    ) as complete FROM timerange2
+                    ) as complete FROM ($timeQuery) t1
                     GROUP BY 
                         object_id     
                  ) as s ON slahistory_main.object_id = s.object_id  
@@ -332,7 +319,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
        
         foreach($filterParts["params"] as $param=>$value)
             $stmt->bindValue($param,$value);
-
+//         echo $query;die();
         return $stmt;
        
     }
