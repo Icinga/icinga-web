@@ -638,9 +638,9 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "ocg"=> array("src" => "cg", "relation" => "object"),
                                        "cgm"=> array("src" => "cg", "relation" => "members"),
                                        "oc" => array("src" => "cgm", "relation" => "object"),
-                                       "hg" => array("src" => "s", "relation" => "hostgroups"),
-                                       "hgm" => array("src" => "sg", "relation" => "members"),
-                                       "ohg" => array("src" => "sg", "relation" => "object"),
+                                       "hg" => array("src" => "h", "relation" => "hostgroups"),
+                                       "hgm" => array("src" => "hg", "relation" => "members"),
+                                       "ohg" => array("src" => "hg", "relation" => "object"),
                                        "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
                                        "cvsh"=> array("src" => "h", "relation" => "customvariablestatus"),
                                        "cvsc"=> array("src" => "cgm", "relation" => "customvariablestatus")
