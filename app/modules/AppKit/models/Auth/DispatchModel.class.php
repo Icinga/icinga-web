@@ -170,9 +170,10 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                 // We can use it later if we want login again (#723)
                 if (AgaviConfig::get('modules.appkit.auth.behaviour.store_loginname', false) === true) {
                     $response = $this->context->getController()->getGlobalResponse();
-                    $response->setCookie('icinga-web-loginname', $user->user_name);
+                    if ($response instanceof AgaviWebResponse) {
+                        $response->setCookie('icinga-web-loginname', $user->user_name);
+                    }
                 }
-
                 return $user;
             }
 
