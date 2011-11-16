@@ -11,7 +11,7 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer = function(type) {
         var isActive = parseInt(record.get(type.toUpperCase()+'_ACTIVE_CHECKS_ENABLED'),10);
         var isAck = parseInt(record.get(type.toUpperCase()+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED'),10);
         var inDowntime = parseInt(record.get(type.toUpperCase()+'_SCHEDULED_DOWNTIME_DEPTH'),10);
-        value = "";
+        value = "<div style='border:1px solid #cecece;background-color:#dedede;height:16px;cursor:pointer;padding:1px;padding-left:4px;border-radius:2px'>";
         var tpl = new Ext.XTemplate("<div class='{icon}' qtip='{tip}' style='width:20px;height:18px;float:left' id='{id}'></div>");
         var idBase = Ext.id();
         if(!isActive) {
@@ -57,7 +57,7 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer = function(type) {
                 id: 'dtime_'+idBase
             });
         }
-        return value;
+        return value+"</div>";
     }
 };
 Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler =  function(col,grid,rowIdx,e) {

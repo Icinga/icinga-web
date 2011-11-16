@@ -179,8 +179,15 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
         }
         var id = Ext.id();
 
-        (function () {
+        var render = function (nrOfTry) {
+            nrOfTry = nrOfTry || 1;
+            if(!Ext.get(id)) {
+                render.defer(100,this,[nrOfTry+1]);
+                return false;
+            }
+
             var tpl;
+
             // apply status column render strategy
             for(var i = 0;i<statusColRenderStrategies.length;i++) {
                 if(statusColRenderStrategies[i].applies(record))
@@ -211,8 +218,9 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                     scope: this
                 }
             });
-
-        }).defer(100);
+        }
+        
+        render.defer(100);
         return "<div id='" + id + "'></div>";
     };
 

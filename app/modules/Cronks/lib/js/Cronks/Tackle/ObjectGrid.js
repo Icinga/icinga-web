@@ -72,6 +72,8 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_OBJECT_ID',
                 'HOST_LAST_CHECK',
                 'HOST_NEXT_CHECK',
+                'HOST_OUTPUT',
+                'HOST_LONG_OUTPUT',
                 'INSTANCE_NAME',
                 'HOST_SCHEDULED_DOWNTIME_DEPTH',
                 'HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
@@ -298,9 +300,48 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                     scope: this
                 }
 
-            },{
+            }, {
+                header: _('Output'),
+                dataIndex: 'HOST_OUTPUT',
+                sortable: false,
+                width: 200,
+                listeners: {
+                    scope:this
+                },
+                renderer: AppKit.renderer.ColumnComponentRenderer({
+                    html: "%VALUE%",
+                    border: false,
+                    record: "%RECORD%",
+                    listeners: {
+                        render: function(c) {
+                            c.getEl().on("click",function(el) {
+                                if(!c.getEl())
+                                    return;
+                                if(c.toggleState && c.toggleState == "open") {
+                                    c.getEl().setHeight(c.origHeight)
+                                    c.update(c.origValue);
+                                    c.toggleState = "closed";
+                                } else {
+                                    c.origHeight = c.getEl().getHeight();
+                                    c.origValue = c.getEl().dom.innerHTML;
+                                    c.toggleState = "open";
+                                    c.getEl().setHeight(100);
+                                    c.update(
+                                        "Long output: <br/>"+
+                                        c.record.get("HOST_LONG_OUTPUT")
+                                    );
+                                }
+                            });
+                        },
+                        scope:this
+                    }
+                }),
+                scope:this
+               
+            }, {
                 dataIndex: 'HOST_ID',
                 renderer: function() {return ""},
+                autoExpand:true,
                 menuDisabled: true,
                 width: 100
             }]

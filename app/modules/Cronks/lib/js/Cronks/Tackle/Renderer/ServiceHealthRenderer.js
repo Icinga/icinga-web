@@ -9,7 +9,13 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
         var id = Ext.id();
         var _this = this;
 
-        (function () {
+        var render = function (nrOfTry) {
+            nrOfTry = nrOfTry || 1;
+            if(!Ext.get(id)) {
+                render.defer(100,this,[nrOfTry+1]);
+                return false;
+            }
+
             var cmp = new Ext.BoxComponent({
                 layout: 'fit',
                 tpl: new Ext.XTemplate(
@@ -58,7 +64,9 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
             }, _this, {
                 single: true
             });
-        }).defer(100);
+        }
+        
+        render.defer(100);
 
         return '<div id="' + id + '"></div>';
     };
