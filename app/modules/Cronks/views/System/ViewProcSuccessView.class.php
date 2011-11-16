@@ -63,7 +63,11 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
                 $worker->setResultLimit($rd->getParameter('page_start'), $rd->getParameter('page_limit'));
+            } else {
+                $user = $this->context->getUser();
+                $worker->setResultLimit(0, $user->getPrefVal('org.icinga.grid.pagerMaxItems', AgaviConfig::get('modules.cronks.grid.pagerMaxItems', 25)));
             }
+
 
             if ($rd->getParameter('sort_field', null) !== null) {
                 $worker->setOrderColumn($rd->getParameter('sort_field'), $rd->getParameter('sort_dir', 'ASC'));
@@ -95,5 +99,3 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
         return json_encode($data);
     }
 }
-
-?>
