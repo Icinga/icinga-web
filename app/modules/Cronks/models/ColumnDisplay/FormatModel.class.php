@@ -67,7 +67,7 @@ class Cronks_ColumnDisplay_FormatModel extends CronksBaseModel implements AgaviI
                     if ($diff==$m) {
                         continue;
                     } else {
-                        $out[] = ceil($diff/$v).$k;
+                        $out[] = floor($diff/$v).$k;
                         $diff = $m;
                     }
 
