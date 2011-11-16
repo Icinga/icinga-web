@@ -189,8 +189,8 @@ IcingaCommandHandler.prototype = {
                             var m = form.getForm().findField(affectedForms[i])
 
                             if (m) {
-                                checkedBox.initialConfig.boxLabel == _('Yes') ? m.setReadOnly(true) : m.setReadOnly(false);
-                                checkedBox.initialConfig.boxLabel == _('Yes') ? m.container.hide() : m.container.show();
+                                m.setReadOnly((checkedBox.initialConfig.boxLabel == _('Yes')) ? true : false);
+                                m.container.setVisible((checkedBox.initialConfig.boxLabel == _('Yes')) ? false : true);
                             }
                         }
                     }
@@ -483,8 +483,8 @@ IcingaCommandHandler.prototype = {
                 oWin.add(oForm);
 
                 oWin.render(Ext.getBody());
-
-                if (this.command_options.predefined.fixed === '1') {
+                
+                if (this.command_options.predefined.fixed === 1) {
                     var fdur = oForm.getForm().findField('duration');
                     fdur.setReadOnly(true);
                     fdur.container.hide();

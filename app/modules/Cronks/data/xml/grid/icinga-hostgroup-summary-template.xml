@@ -68,6 +68,7 @@
         	
         	<parameter name="predefined">
         		<parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+			<parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
         	</parameter>
         	
         	<!-- 
