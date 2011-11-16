@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PREFIX='@prefix@'
+CACHEDIR='@web_cache_dir@'
 EXIT=0
 NOTHING=true
 
@@ -30,9 +31,9 @@ if [[ ! -e $PREFIX ]]; then
 	exit 1
 fi
 
-echo "Basedir: $PREFIX"
+echo "Basedir: $PREFIX Cachedir: $CACHEDIR"
 
-CCDIR="$PREFIX/app/cache/config $PREFIX/app/cache/content $PREFIX/app/cache/CronkTemplates $PREFIX/app/cache/Squished"
+CCDIR="$CACHEDIR/config $CACHEDIR/content $CACHEDIR/CronkTemplates $CACHEDIR/Squished"
 
 for CUR_CDIR in $CCDIR; do
 	CC_FILES=$(ls $CUR_CDIR/* 2>/dev/null | wc -l)
@@ -41,11 +42,11 @@ for CUR_CDIR in $CCDIR; do
 		CUR_CNAME=$(basename $CUR_CDIR)
 
 		msg_start "Deleting cache from $CUR_CNAME ($CC_FILES files)"
-		
+
 		rm $CUR_CDIR/* > /dev/null 2>&1
-		
+
 		msg_result
-		
+
 	fi
 done
 
