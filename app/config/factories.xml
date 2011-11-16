@@ -25,8 +25,19 @@
 		
 		<security_filter class="AgaviSecurityFilter" />
 		
-		<!-- Config for our session ... -->
-		<storage class="AgaviSessionStorage">
+		
+        <!--
+            * Session configuration
+            
+            - Choose between AppKitDoctrineSessionStorage and AgaviSessionStorage
+            - Database sessions are default again because of PHP session file locking
+              (Only one request per session)
+            - https://dev.icinga.org/issues/2061
+            - https://dev.icinga.org/issues/2035
+            - https://dev.icinga.org/issues/2054
+            
+        -->
+		<storage class="AppKitDoctrineSessionStorage">
 			<ae:parameter name="session_cookie_lifetime">0</ae:parameter>
 			<ae:parameter name="session_name">icinga-web</ae:parameter>
 			<ae:parameter name="gzip_level">6</ae:parameter>
