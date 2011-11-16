@@ -68,7 +68,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
         $this->getContext()->getLoggerManager()->log('Deleting sessions older that '. $date->format('c'), AgaviLogger::DEBUG);
 
         $result = Doctrine_Query::create()
-                  ->andWhere('session_created < ?', array($date->format('Y-m-d H:i:s')))
+                  ->andWhere('session_modified < ?', array($date->format('Y-m-d H:i:s')))
                   ->delete('NsmSession')
                   ->execute();
 
@@ -140,6 +140,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
     public function sessionWrite($id, &$data) {
         $this->NsmSession->session_data = $data;
         $this->NsmSession->session_checksum = md5($data);
+        $this->NsmSession->session_modified = date('Y-m-d H:i:s');
         $this->NsmSession->save();
     }
 
