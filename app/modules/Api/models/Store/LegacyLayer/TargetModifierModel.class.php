@@ -557,6 +557,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->additionalSelects["COUNT"] = "count(DISTINCT hs.host_object_id)";
                 $this->ignoreIds = true;
                 $this->forceGroup[] = "hs.current_state";
+                $this->forceGroup[] = "(hs.has_been_checked-hs.should_be_scheduled)*-1";
                 $this->retainedAlias = "h";
                 $this->aliasDefs = array(
                                        "h"  => array("src" => "oh", "relation" => "host","alwaysJoin"=>true),
@@ -583,6 +584,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->additionalSelects["COUNT"] = "count(DISTINCT ss.service_object_id)";
                 $this->retainedAlias = "s";
                 $this->forceGroup[] = "ss.current_state";
+                $this->forceGroup[] = "(ss.has_been_checked-ss.should_be_scheduled)*-1";
                 $this->aliasDefs = array(
                                        "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
                                        "os" => array("src" => "ss", "relation" => "serviceobject", "alwaysJoin" => true, "with"=>"os.is_active=1"),
