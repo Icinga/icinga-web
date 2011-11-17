@@ -131,8 +131,10 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         $status = false;
         
         foreach ($instances as $instance) {
+            
             $date = (int)strtotime($instance->last_command_check);
             $diff = (time()-$date);
+            
             if ($diff < $checkTime && $instance->is_currently_running) {
                 $status = true;
             } else {

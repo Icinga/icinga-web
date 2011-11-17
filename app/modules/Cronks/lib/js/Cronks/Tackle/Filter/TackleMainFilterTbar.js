@@ -46,7 +46,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
         this.store.setFilter(jsonFilter);
         this.ownerCt.bottomToolbar.doLoad();
         if(this.autoRefreshEnabled) {
-            this.startAutoRefresh.defer(this.autoRefreshInterval);
+            this.startAutoRefresh.defer(this.autoRefreshInterval,this);
         }
     },
     getSVCFilter : function() {
