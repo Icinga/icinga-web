@@ -1,6 +1,6 @@
 /* 
  * ColumnRenderer that allows to inject components to columns
- *
+ * @param Ext.Component     The grid that contains this column (the "render" event is needed)
  * @param Function|Object   The component to add, either as json object or as a function if cfg is provided
  * @param cfg               (optional) If cmp is a function, cfg is the json used for construction
  *
@@ -20,7 +20,7 @@
  * })
  */
 Ext.onReady(function() {
-    Ext.ns("AppKit.renderer").ColumnComponentRenderer = function(cmp,cfg, maxDepth) {
+    Ext.ns("AppKit.renderer").ColumnComponentRenderer = function(grid, cmp,cfg, maxDepth) {
         maxDepth = maxDepth || 5;
 
         var tokens = {
@@ -46,7 +46,7 @@ Ext.onReady(function() {
                         obj[i] = args[tokens[obj[i]]]; // resolve token from arglist
                     } else if(typeof obj[i] === "object") {
                         obj[i] = resolveVals(obj[i],args,curDepth+1);
-                    }                }
+                    }}
             } else if (Ext.isObject(obj)) {
                 for(var o in obj) {
                     if(typeof obj[o] === "string"  && typeof tokens[obj[o]] !== "undefined") {
@@ -84,42 +84,24 @@ Ext.onReady(function() {
 
         return function(value, metaData, record, rowIndex, colIndex, store) {
             var id = Ext.id();
-            var start = new Date();
-            AppKit.log(id,"Render schedule ",start.getTime(),start);
+            
+            var cfgCpy  = {}
             var args = arguments;
-            var renderFn = function(nrOfTry) {
-                var sched = new Date();
-                AppKit.log(id,"Render start ",sched.getTime(),sched);
-                if(!Ext.get(id)) {
-                    // try 5 times and then give up
-                    if(nrOfTry++ < 5) {
-                        renderFn.defer(100,this,[renderFn,nrOfTry]);
-                    }
-                    return false;
-                }
-                
-                if(Ext.isObject(cmp)) {
-                    var cfgCpy = copyObject(cmp);
-                    cfgCpy.renderTo = id;
-                    resolveVals(cfgCpy,args);
-                    new Ext.Component(cfgCpy);
-                } else if(Ext.isFunction(cmp)) {
-                    cfg = cfg || {};
-                    var cfgCpy = copyObject(cfg);
-                    cfgCpy.renderTo = id;
-                    cfgCpy = resolveVals(cfgCpy,args);
-                    new cmp(cfgCpy);
-                }
-                var end = new Date();
-                AppKit.log(id,"Render finished",end.getTime(),sched);
-                AppKit.log(id,"Complete time needed:",end-start);
-                AppKit.log(id,"Render time needed:",end-sched);
+            var toRender = null;
+            if(Ext.isObject(cmp)) {
+                cfgCpy = copyObject(cmp);
+                resolveVals(cfgCpy,args);
+                toRender = new Ext.Component(cfgCpy);
+            } else if(Ext.isFunction(cmp)) {
+                cfg = cfg || {};
+                cfgCpy = copyObject(cfg);
+                cfgCpy = resolveVals(cfgCpy,args);
+                toRender = new cmp(cfgCpy);
             }
-
-            renderFn.defer(100,this,[1]);
+            grid.getStore().on("load", function() {
+                toRender.render(Ext.get(id));
+            },{delay:50})
             return "<div id='"+id+"'></div>";
         }
     }
 });
-
-
