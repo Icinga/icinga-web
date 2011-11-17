@@ -80,6 +80,7 @@ class Doctrine_Connection_IcingaOracle extends Doctrine_Connection_Common
     public function setDateFormat($format = 'YYYY-MM-DD HH24:MI:SS')
     {
         $this->exec('ALTER SESSION SET NLS_DATE_FORMAT = "' . $format . '"');
+        $this->exec('ALTER SESSION SET NLS_TIMESTAMP_FORMAT = "' . $format . '"');
     }
 
     /**
