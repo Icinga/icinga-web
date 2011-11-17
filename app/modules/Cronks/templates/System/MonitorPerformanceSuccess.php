@@ -45,7 +45,7 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 			
 				'<div class="clearfix icinga-monitor-performance-container">',
 					'<div title="' + _('Services (active/passive/disabled)') + '" class="key icinga-icon-service"></div>',
-					'<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS} /  / {NUM_DISABLED_SERVICE_CHECKS}</div>',
+					'<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS} /  {NUM_DISABLED_SERVICE_CHECKS}</div>',
 				'</div>',
 				
 				'<div class="clearfix icinga-monitor-performance-container">',
@@ -70,7 +70,18 @@ Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", funct
 		store: ds,
 		tpl: mTpl,
 		itemSelector:'div.icinga-monitor-performance-container',
-        emptyText: 'Error'
+        emptyText: 'Error',
+        prepareData : function(data, recordIndex, record) {
+        	Ext.iterate(data, function(k, v) {
+        		v = String(v).replace(/,/, '.');
+        		if (k.indexOf('NUM_') === 0) {
+        			data[k] = Ext.util.Format.number(v, '0');
+        		} else if (k.indexOf('.') >>> -1) {
+        			data[k] = Ext.util.Format.number(v, '0.00');
+        		}
+        	}, this);
+        	return data;
+        }
 	});
 	
 	this.doLayout();	
