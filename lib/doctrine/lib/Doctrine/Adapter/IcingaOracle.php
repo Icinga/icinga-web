@@ -148,6 +148,14 @@ class Doctrine_Adapter_IcingaOracle implements Doctrine_Adapter_Interface
         return $stmt;
     }
 
+    public function prepareBase($query)
+    {
+        $stmt = new Doctrine_Adapter_Statement_Oracle($this, $query, $this->executeMode);
+
+        return $stmt;
+    }
+
+
     /**
      * Execute query and return results as statement object
      *
