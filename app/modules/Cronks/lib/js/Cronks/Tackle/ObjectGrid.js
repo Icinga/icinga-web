@@ -72,6 +72,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_OBJECT_ID',
                 'HOST_LAST_CHECK',
                 'HOST_NEXT_CHECK',
+                'HOST_PERFDATA',
                 'HOST_OUTPUT',
                 'HOST_LONG_OUTPUT',
                 'INSTANCE_NAME',
@@ -308,7 +309,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 listeners: {
                     scope:this
                 },
-                renderer: AppKit.renderer.ColumnComponentRenderer({
+                renderer: AppKit.renderer.ColumnComponentRenderer(this,{
                     html: "%VALUE%",
                     border: false,
                     record: "%RECORD%",
@@ -327,11 +328,14 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                                     c.toggleState = "open";
                                     c.getEl().setHeight(100);
                                     c.update(
-                                        "Long output: <br/>"+
-                                        c.record.get("HOST_LONG_OUTPUT")
+                                        "<p><b>Long output:</b> <br/>"+
+                                        c.record.get("HOST_LONG_OUTPUT")+" </p>"+
+                                        "<p><b>Perfdata:</b><br/>"+
+                                        c.record.get("HOST_PERFDATA")+"</p>"
                                     );
                                 }
                             });
+                            c.getEl().innerHTML = "<div class='icinga-icon-info'>"+c.getEl().innerHTML+"</div>";
                         },
                         scope:this
                     }

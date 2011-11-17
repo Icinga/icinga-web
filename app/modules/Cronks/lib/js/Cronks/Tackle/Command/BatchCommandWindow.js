@@ -37,7 +37,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     buildPreviewGrid: function(cfg) {
         var scope = this;
         this.recipientStore = new Icinga.Api.RESTStore({
-            target: 'service',
+            target: 'host',
             limit: 30,
             offset: 0,
             countColumn: true,
@@ -148,13 +148,13 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                         this.previewGrid.getColumnModel().setHidden(0,false);
                         this.previewGrid.getColumnModel().setHidden(3,false);
                         this.previewGrid.getColumnModel().setHidden(5,false);
-                        this.recipientStore.setGroupBy(null);
+                        this.recipientStore.setTarget("service");
                         this.type = 'service';
                     } else {
                         this.previewGrid.getColumnModel().setHidden(0,true);
                         this.previewGrid.getColumnModel().setHidden(3,true);
                         this.previewGrid.getColumnModel().setHidden(5,true);
-                        this.recipientStore.setGroupBy("HOST_NAME");
+                        this.recipientStore.setTarget("host");
                         this.type = 'host';
                     }
                     this.previewGrid.getStore().load();
@@ -533,8 +533,30 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
             }]
         }];
     },
+    submitCommand: function() {
+        var submitStore = new Icinga.Api.RESTStore({
+            target: this.type,
+            columns: ['HOST_NAME','INSTANCE_NAME',this.type+'_NAME']
+        });
+        submitStore.setFilter(this.recipientStore.getFilter())
+        submitStore.on("load", function(store,records) {
+            var targets = [];
+            Ext.each(records,function(record) {
+                targets.push({
+                    host : record.get('HOST_NAME'),
+                    service : record.get('SERVICE_NAME'),
+                    instance: record.get('INSTANCE_NAME')
+                });
+            },this);
+            this.findByType('tabpanel')[0].getActiveTab().submit(targets);
+            this.close();
+        },this,{single:true});
+        submitStore.load();
 
+
+    },
     getSubmitButtons: function() {
+
        this.submitBtn = new Ext.Button({
             text: _('Send commands'),
             iconCls: 'icinga-icon-accept',
@@ -547,15 +569,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                     function(btn) {
                         if(btn != "yes")
                             return false;
-                        var targets = [];
-                        this.recipientStore.each(function(record) {
-                            targets.push({
-                                host : record.get('HOST_NAME'),
-                                service : record.get('SERVICE_NAME'),
-                                instance: record.get('INSTANCE_NAME')
-                            });
-                        },this);
-                        this.findByType('tabpanel')[0].getActiveTab().submit(targets);
+                        this.submitCommand();
                     },
                     this
                 );

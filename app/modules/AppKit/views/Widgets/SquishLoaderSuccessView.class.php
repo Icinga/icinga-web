@@ -23,7 +23,7 @@ class AppKit_Widgets_SquishLoaderSuccessView extends AppKitBaseView {
                 return "";
             }
             
-
+            ob_start("ob_gzhandler");
 
             return $content;
         }

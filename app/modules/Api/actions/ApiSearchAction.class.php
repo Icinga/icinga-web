@@ -68,7 +68,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $search->setResultType(IcingaApiConstants::RESULT_ARRAY);
         // Adding security principal targets to the query
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
-
+        
         $res = $search->fetch()->getAll();
 
         //Setup count
