@@ -134,7 +134,10 @@ Cronk.grid.ColumnRenderer = {
 				imgName = imgName.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 				metaData.style += String.format("background: transparent url('{0}/{1}') center center no-repeat;", AppKit.c.path, imgName);
 				
-				return "<div style=\"" + (flat_attr && " " + flat_attr + " ") + "></div>";
+
+
+
+				return "<div style='width:24px;height:24px' " + (flat_attr && " " + flat_attr + " ") + "></div>";
 			}
 		}
 	},
