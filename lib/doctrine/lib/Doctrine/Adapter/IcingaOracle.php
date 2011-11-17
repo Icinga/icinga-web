@@ -33,7 +33,7 @@
  * @version     $Revision$
  */
 
-class Doctrine_Adapter_IcingaOracle implements Doctrine_Adapter_Interface
+class Doctrine_Adapter_IcingaOracle extends Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
 {
     /**
      *    execution mode

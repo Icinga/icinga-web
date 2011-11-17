@@ -203,11 +203,11 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                 obj.objecttype_id,
                 scheduled_downtime, 
                 SUM(
-                    COALESCE(
-                        acknowledgement_time-start_time,
-                        end_time-start_time,
-                        CURRENT_DATE-start_time
-                    )
+                        COALESCE(
+                            cast(acknowledgement_time as date)-cast(start_time as date),
+                            cast(end_time as date)-cast(start_time as date),
+                            CURRENT_DATE-cast(start_time as date)
+                        )
                  )*86400 AS duration FROM timeRange s INNER JOIN ".$prefix.
                 "objects obj ON obj.id = s.object_id ";
         
@@ -229,9 +229,9 @@ class IcingaSlahistoryTable extends Doctrine_Table {
                  SELECT object_id,
                     SUM(
                         COALESCE(
-                            acknowledgement_time-start_time,
-                            end_time-start_time,
-                            CURRENT_DATE-start_time
+                            cast(acknowledgement_time as date)-cast(start_time as date),
+                            cast(end_time as date)-cast(start_time as date),
+                            CURRENT_DATE-cast(start_time as date)
                         )
                     )*86400 AS complete 
                   FROM timeRange
@@ -253,7 +253,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
         
         foreach($filterParts["params"] as $param=>$value)
             $stmt->bindValue($param,$value);
-
+        
         return $stmt;
     }
     
