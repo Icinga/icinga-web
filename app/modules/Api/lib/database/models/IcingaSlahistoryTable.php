@@ -319,7 +319,7 @@ class IcingaSlahistoryTable extends Doctrine_Table {
        
         foreach($filterParts["params"] as $param=>$value)
             $stmt->bindValue($param,$value);
-//         echo $query;die();
+
         return $stmt;
        
     }

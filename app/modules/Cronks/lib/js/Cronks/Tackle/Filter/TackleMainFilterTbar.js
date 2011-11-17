@@ -3,11 +3,13 @@ Ext.ns('Icinga.Cronks.Tackle.Filter');
 
 Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
     autoRefreshEnabled: true,
+    autoRefreshInterval: 30000,
 
     constructor: function(config) {
         "use strict";
         this.parentId = config.id;
         this.store = config.store;
+        this.autoRefreshInterval = AppKit.getPrefVal('org.icinga.grid.refreshTime')*100 || 30000
 		var filterUpdateTask = new Ext.util.DelayedTask(this.updateFilterImpl, this);
         this.updateFilter = function(t) {
             filterUpdateTask.delay(200,null);
@@ -24,7 +26,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
        this.arTask = new Ext.util.TaskRunner();
        this.arTask.start({
             run: this.updateFilterImpl,
-            interval: AppKit.getPrefVal('org.icinga.grid.refreshTime')*100 || 30000,
+            interval: this.autoRefreshInterval,
             scope:this
         });
     },
@@ -44,7 +46,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
         this.store.setFilter(jsonFilter);
         this.ownerCt.bottomToolbar.doLoad();
         if(this.autoRefreshEnabled) {
-            this.startAutoRefresh()
+            this.startAutoRefresh.defer(this.autoRefreshInterval);
         }
     },
     getSVCFilter : function() {

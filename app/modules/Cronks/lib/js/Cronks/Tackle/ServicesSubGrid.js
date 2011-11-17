@@ -43,13 +43,15 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 'INSTANCE_NAME',
                 'SERVICE_ID',
                 'HOST_NAME',
-                
                 'SERVICE_NAME',
                 'SERVICE_CURRENT_PROBLEM_STATE',
                 'SERVICE_CURRENT_STATE',
                 'SERVICE_OBJECT_ID',
                 'SERVICE_LAST_CHECK',
                 'SERVICE_NEXT_CHECK',
+                'SERVICE_PERFDATA',
+                'SERVICE_OUTPUT',
+                'SERVICE_LONG_OUTPUT',
                 'SERVICE_SCHEDULED_DOWNTIME_DEPTH',
                 'SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED',
                 'SERVICE_ACTIVE_CHECKS_ENABLED',
@@ -175,6 +177,47 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                     click: Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler,
                     scope: this
                 }
+
+            }, {
+                header: _('Output'),
+                dataIndex: 'SERVICE_OUTPUT',
+                sortable: false,
+                width: 200,
+                listeners: {
+                    scope:this
+                },
+                renderer: AppKit.renderer.ColumnComponentRenderer(this,{
+                    html: "%VALUE%",
+                    border: false,
+                    record: "%RECORD%",
+                    listeners: {
+                        render: function(c) {
+                            c.getEl().on("click",function(el) {
+                                if(!c.getEl())
+                                    return;
+                                if(c.toggleState && c.toggleState == "open") {
+                                    c.getEl().setHeight(c.origHeight)
+                                    c.update(c.origValue);
+                                    c.toggleState = "closed";
+                                } else {
+                                    c.origHeight = c.getEl().getHeight();
+                                    c.origValue = c.getEl().dom.innerHTML;
+                                    c.toggleState = "open";
+                                    c.getEl().setHeight(100);
+                                    c.update(
+                                        "<p><b>Long output:</b> <br/>"+
+                                        c.record.get("SERVICE_LONG_OUTPUT")+" </p>"+
+                                        "<p><b>Perfdata:</b>"+
+                                        c.record.get("SERVICE_PERFDATA")+"</p>"
+                                    );
+                                }
+                            });
+                            c.getEl().innerHTML = "<div class='icinga-icon-info'>"+c.getEl().innerHTML+"</div>";
+                        },
+                        scope:this
+                    }
+                }),
+                scope:this
 
             }]
 		});

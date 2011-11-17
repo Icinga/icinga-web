@@ -89,18 +89,21 @@ Icinga.Api.HostgroupsComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
             targetField: 'HOSTGROUP_NAME',
             idField: 'HOSTGROUP_ID',
             target: 'hostgroup',
-            displayField: 'HOSTGROUP_NAME'
+            displayField: 'HOSTGROUP_NAME',
+            listeners: cfg ? cfg.listeners : null
         });
     }
 });
 
 Icinga.Api.ServicegroupsComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
     constructor: function(cfg) {
+
         Icinga.Api.RESTFilterComboBox.prototype.constructor.call(this,{
             targetField: 'SERVICEGROUP_NAME',
             idField: 'SERVICEGROUP_ID',
             target: 'servicegroup',
-            displayField: 'SERVICEGROUP_NAME'
+            displayField: 'SERVICEGROUP_NAME',
+            listeners: cfg ? cfg.listeners : null
         });
     }
 });
@@ -112,7 +115,8 @@ Icinga.Api.HostsComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
             targetField: 'HOST_NAME',
             idField: 'HOST_ID',
             target: 'host',
-            displayField: 'HOST_NAME'
+            displayField: 'HOST_NAME',
+            listeners: cfg ? cfg.listeners : null
         });
     }
 });
@@ -124,7 +128,8 @@ Icinga.Api.ServicesComboBox = Ext.extend(Icinga.Api.RESTFilterComboBox, {
             targetField: 'SERVICE_NAME',
             target: 'service',
             idField: 'SERVICE_ID',
-            displayField: 'SERVICE_NAME'
+            displayField: 'SERVICE_NAME',
+            listeners: cfg ? cfg.listeners : null
         });
     }
 });
