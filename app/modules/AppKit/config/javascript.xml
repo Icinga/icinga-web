@@ -22,6 +22,7 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/icinga/grid/plugins/PageableGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/Layout.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitNavBar.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/renderer/ColumnComponentRenderer.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/HttpStateProvider.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/form/action/JSONSubmit.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/request/Ajax.js</ae:parameter>
