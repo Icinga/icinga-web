@@ -305,7 +305,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 header: _('Output'),
                 dataIndex: 'HOST_OUTPUT',
                 sortable: false,
-                width: 200,
+                width: 300,
                 listeners: {
                     scope:this
                 },
@@ -313,6 +313,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                     html: "%VALUE%",
                     border: false,
                     record: "%RECORD%",
+                    style: 'cursor: pointer',
                     listeners: {
                         render: function(c) {
                             c.getEl().on("click",function(el) {
@@ -326,16 +327,21 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                                     c.origHeight = c.getEl().getHeight();
                                     c.origValue = c.getEl().dom.innerHTML;
                                     c.toggleState = "open";
-                                    c.getEl().setHeight(100);
-                                    c.update(
-                                        "<p><b>Long output:</b> <br/>"+
-                                        c.record.get("HOST_LONG_OUTPUT")+" </p>"+
-                                        "<p><b>Perfdata:</b><br/>"+
-                                        c.record.get("HOST_PERFDATA")+"</p>"
-                                    );
+                                    
+                                    var html = Ext.DomHelper.markup({
+                                        tag: 'div',
+                                        children: [
+                                            {tag: 'b', html: _('Long output')},
+                                            {tag: 'div', html: c.record.get('HOST_LONG_OUTPUT')},
+                                            {tag: 'b', html: _('<br/>Performance data')},
+                                            {tag: 'div', html: c.record.get('HOST_PERFDATA')},
+                                        ]
+                                    });
+                                    var height = Ext.util.TextMetrics.createInstance(c.getEl()).getHeight(html);
+                                    c.getEl().setHeight(height);
+                                    c.update(html);
                                 }
-                            });
-                            c.getEl().innerHTML = "<div class='icinga-icon-info'>"+c.getEl().innerHTML+"</div>";
+                            });                           
                         },
                         scope:this
                     }
