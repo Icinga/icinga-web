@@ -221,6 +221,15 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                         },
                         scope:this
                     }
+                },{
+                    dataIndex: 'SERVICE_ACTION_URL',
+                    width: 75,
+                    renderer: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnRenderer("SERVICE"),
+                    listeners: {
+                        click: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnClickHandler("SERVICE"),
+                        scope:this
+                    }
+
                 }),
                 scope:this
 

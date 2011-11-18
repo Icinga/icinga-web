@@ -82,7 +82,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_ACTIVE_CHECKS_ENABLED',
                 'HOST_IS_FLAPPING',
                 'HOST_CHECK_TYPE',
-                'HOST_NOTIFICATIONS_ENABLED'
+                'HOST_NOTIFICATIONS_ENABLED',
+                'HOST_ACTION_URL',
+                'HOST_NOTES_URL'
+                
                 
             ],
             listeners: {
@@ -193,7 +196,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 width: 25,
                 resizable: false,
                 sortable:true,
-               renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
+                renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 scope:this
             },{
                 header: _('Host'),
@@ -348,6 +351,15 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 }),
                 scope:this
                
+            },{
+                dataIndex: 'HOST_ACTION_URL',
+                width: 75,
+                renderer: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnRenderer("HOST"),
+                listeners: {
+                    click: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnClickHandler("HOST"),
+                    scope:this
+                }
+                   
             }, {
                 dataIndex: 'HOST_ID',
                 renderer: function() {return ""},
