@@ -128,7 +128,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                     return;
              
                 this.tabItems.service.head.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
-                //this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabItems.service.comments.grid.recordUpdated(record);
 
                 this.tabItems.service.comments.form.setObjectData({
