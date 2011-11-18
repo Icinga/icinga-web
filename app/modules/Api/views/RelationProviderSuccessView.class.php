@@ -9,6 +9,8 @@ class Api_RelationProviderSuccessView extends IcingaApiBaseView {
 	public function executeJson(AgaviRequestDataHolder $rd) {
 	    $data = $this->getAttribute('data', array ());
 	    
+	    $data['id'] = 1;
+	    
 	    $out = array (
 	        'result' => $data,
 	        'success' => false
@@ -18,7 +20,7 @@ class Api_RelationProviderSuccessView extends IcingaApiBaseView {
 	        $out['success'] = true;
 	    }
 	    
-	    return json_encode($data);
+	    return json_encode($out);
 	}
 }
 
