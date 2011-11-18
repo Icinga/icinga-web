@@ -25,7 +25,6 @@ Ext.onReady(function() {
     
     
     Ext.ns("AppKit.renderer").ColumnComponentRenderer = function(grid, cmp,cfg, maxDepth) {
-        var json = Ext.encode(cfg);
 
         return function(value, metaData, record, rowIndex, colIndex, store) {
             var id = Ext.id();
