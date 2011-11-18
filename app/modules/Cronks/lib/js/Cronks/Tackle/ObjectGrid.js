@@ -82,7 +82,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 'HOST_ACTIVE_CHECKS_ENABLED',
                 'HOST_IS_FLAPPING',
                 'HOST_CHECK_TYPE',
-                'HOST_NOTIFICATIONS_ENABLED'
+                'HOST_NOTIFICATIONS_ENABLED',
+                'HOST_ACTION_URL',
+                'HOST_NOTES_URL'
+                
                 
             ],
             listeners: {
@@ -310,12 +313,12 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                     scope:this
                 },
                 renderer: AppKit.renderer.ColumnComponentRenderer(this,{
-                    html: "%VALUE%",
+
                     border: false,
-                    record: "%RECORD%",
                     style: 'cursor: pointer',
                     listeners: {
                         render: function(c) {
+                            c.update(c.baseArgs.value);
                             c.getEl().on("click",function(el) {
                                 if(!c.getEl())
                                     return;
@@ -332,9 +335,9 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                                         tag: 'div',
                                         children: [
                                             {tag: 'b', html: _('Long output')},
-                                            {tag: 'div', html: c.record.get('HOST_LONG_OUTPUT')},
+                                            {tag: 'div', html: c.baseArgs.record.get('HOST_LONG_OUTPUT')},
                                             {tag: 'b', html: _('<br/>Performance data')},
-                                            {tag: 'div', html: c.record.get('HOST_PERFDATA')},
+                                            {tag: 'div', html: c.baseArgs.record.get('HOST_PERFDATA')},
                                         ]
                                     });
                                     var height = Ext.util.TextMetrics.createInstance(c.getEl()).getHeight(html);
@@ -348,6 +351,15 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 }),
                 scope:this
                
+            },{
+                dataIndex: 'HOST_ACTION_URL',
+                width: 75,
+                renderer: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnRenderer("HOST"),
+                listeners: {
+                    click: Icinga.Cronks.Tackle.Renderer.AdditionalURLColumnClickHandler("HOST"),
+                    scope:this
+                }
+                   
             }, {
                 dataIndex: 'HOST_ID',
                 renderer: function() {return ""},
