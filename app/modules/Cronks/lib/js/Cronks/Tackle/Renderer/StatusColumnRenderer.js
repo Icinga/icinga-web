@@ -183,7 +183,8 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
             nrOfTry = nrOfTry || 1;
 
             if(!Ext.get(id)) {
-                render.defer(400,this,[nrOfTry+1]);
+                if(nrOfTry < 4)
+                    render.defer(100,this,[nrOfTry+1]);
                 return false;
             }
 
