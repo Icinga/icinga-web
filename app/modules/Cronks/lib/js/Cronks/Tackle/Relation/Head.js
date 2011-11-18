@@ -8,7 +8,11 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             align: 'stretch',
             pack: 'start'
     },
+    
 	stores : [],
+	
+	objectId : null,
+	loaded : false,
 	
     constructor : function(config) {
     	if (Ext.isEmpty(config.type)) {
@@ -142,14 +146,35 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             this.buildGroupGrid()
         ]);
         
+        this.on('show', this.loadData.createDelegate(this, [], false));
+        
         this.doLayout();
     },
     
     loadDataForObjectId : function(objectId) {
-    	this.loadData(objectId);
+    	if (Ext.isEmpty(objectId) === false && objectId === this.objectId) {
+    		return;
+    	}
+    	
+    	this.objectId = objectId;
+    	this.loaded = false;
+    	
+    	
+    	if (this.isVisible()) {
+    		this.loadData();
+    	}
     },
     
     loadData : function(id) {
+    	
+    	if (this.loaded === true) {
+    		return;
+    	}
+    	
+    	if (Ext.isEmpty(id) && this.objectId) {
+    		id = this.objectId;
+    	}
+    	
     	Ext.Ajax.request({
     		url : String.format('{0}/web/api/relation/{1}', AppKit.util.Config.get('path'), id),
     		success : function(response, opts) {
