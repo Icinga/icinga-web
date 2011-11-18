@@ -29,7 +29,7 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         }
         
         $records = IcingaDoctrine_Query::create()
-        ->select('c.contact_id, c.alias as contact_alias, co.name1 as contact_name, co.object_id as contact_object_id, NULL as contactgroup, NULL as contactgroup_object_id')
+        ->select('c.contact_id, c.alias as contact_alias, co.name1 as contact_name, c.email_address as contact_email_address, co.object_id as contact_object_id, NULL as contactgroup_name, NULL as contactgroup_object_id')
         ->from('IcingaContacts c')
         ->innerJoin('c.object co')
         ->innerJoin('c.'. $type. 's h WITH h.'. $type. '_object_id=?', $objectId)
@@ -40,7 +40,7 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         }
         
         $records = IcingaDoctrine_Query::create()
-        ->select('c.contact_id, c.alias as contact_alias, co.name1 as contact_name, co.object_id as contact_object_id,  cg.alias as contactgroup, cg.contactgroup_object_id as contactgroup_object_id')
+        ->select('c.contact_id, c.alias as contact_alias, co.name1 as contact_name, c.email_address as contact_email_address, co.object_id as contact_object_id,  cg.alias as contactgroup_name, cg.contactgroup_object_id as contactgroup_object_id')
         ->from('IcingaContacts c')
         ->innerJoin('c.object co')
         ->innerJoin('c.contactgroups cg')

@@ -31,7 +31,6 @@ Ext.ns('Icinga.Cronks.Tackle');
                 region: 'center'
             });
             
-            this.tabRelations = new Icinga.Cronks.Tackle.Information.Relations();
 
             this.infoTabs = new Icinga.Cronks.Tackle.InfoTabPanel();
             
@@ -46,17 +45,17 @@ Ext.ns('Icinga.Cronks.Tackle');
                 this.tabItems[i].commands = new Icinga.Cronks.Tackle.Command.Panel({
                     type: i
                 });
+                
+                this.tabItems[i].relation = new Icinga.Cronks.Tackle.Relation.Head({
+                	type : i
+                });
+                
                 // add all items and hide service items
-
                 for(var x in this.tabItems[i]) {
                     this.infoTabs.add(this.tabItems[i][x]);
                    
                 }
             }
-
-            this.infoTabs.add([
-                this.tabRelations
-            ]);
             
             this.collapsibleFrame = new Ext.Panel({
                 layout: 'fit',
@@ -99,7 +98,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                 this.toggleTabView('host');
                 
                 this.tabItems.host.head.loadDataForObjectId(record.data.HOST_OBJECT_ID);
-                
+                this.tabItems.host.relation.loadDataForObjectId(record.data.HOST_OBJECT_ID);
                 this.tabItems.host.comments.grid.recordUpdated(record);
 
                 this.tabItems.host.comments.form.setObjectData({
@@ -119,10 +118,11 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.objectGrid.on("serviceSelected", function(record) {
                 if(!record.data)
                     return;
+                
                 this.toggleTabView('service');
 
-
                 this.tabItems.service.head.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabItems.service.comments.grid.recordUpdated(record);
 
                 this.tabItems.service.comments.form.setObjectData({
