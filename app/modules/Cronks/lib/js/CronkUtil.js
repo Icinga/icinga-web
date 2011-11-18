@@ -322,8 +322,28 @@ Cronk.util.InterGridUtil = function(){
 			tabs.setActiveTab(panel);
 			tabs.doLayout();
 			return panel;
-		}
-	};	
+		},
+        
+        openExternalCronk: function(title,url) {
+
+            var panel = Ext.getCmp('cronk-tabs');
+            var urlTab = panel.add({
+                parentid: Ext.id(),
+                xtype: 'cronk',
+                title: title,
+                crname: 'genericIFrame',
+                closable: true,
+                params: {
+                    module: 'Cronks',
+                    action: 'System.ViewProc',
+                    url: url
+                }
+            });
+            panel.doLayout();
+            panel.setActiveTab(urlTab);
+
+        }
+    }
 	
 	return pub;
 	
