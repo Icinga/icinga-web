@@ -193,7 +193,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 width: 25,
                 resizable: false,
                 sortable:true,
-                renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
+               renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 scope:this
             },{
                 header: _('Host'),
@@ -310,12 +310,12 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                     scope:this
                 },
                 renderer: AppKit.renderer.ColumnComponentRenderer(this,{
-                    html: "%VALUE%",
+
                     border: false,
-                    record: "%RECORD%",
                     style: 'cursor: pointer',
                     listeners: {
                         render: function(c) {
+                            c.update(c.baseArgs.value);
                             c.getEl().on("click",function(el) {
                                 if(!c.getEl())
                                     return;
@@ -332,9 +332,9 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                                         tag: 'div',
                                         children: [
                                             {tag: 'b', html: _('Long output')},
-                                            {tag: 'div', html: c.record.get('HOST_LONG_OUTPUT')},
+                                            {tag: 'div', html: c.baseArgs.record.get('HOST_LONG_OUTPUT')},
                                             {tag: 'b', html: _('<br/>Performance data')},
-                                            {tag: 'div', html: c.record.get('HOST_PERFDATA')},
+                                            {tag: 'div', html: c.baseArgs.record.get('HOST_PERFDATA')},
                                         ]
                                     });
                                     var height = Ext.util.TextMetrics.createInstance(c.getEl()).getHeight(html);

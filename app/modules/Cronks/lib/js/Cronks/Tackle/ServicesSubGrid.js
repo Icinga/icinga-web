@@ -187,12 +187,11 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                     scope:this
                 },
                 renderer: AppKit.renderer.ColumnComponentRenderer(this,{
-                    html: "%VALUE%",
                     border: false,
-                    record: "%RECORD%",
                     style: 'cursor: pointer',
                     listeners: {
                         render: function(c) {
+                            c.update(c.baseArgs.value);
                             c.getEl().on("click",function(el) {
                                 if(!c.getEl())
                                     return;
@@ -209,9 +208,9 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                                         tag: 'div',
                                         children: [
                                             {tag: 'b', html: _('Long output')},
-                                            {tag: 'div', html: c.record.get('SERVICE_LONG_OUTPUT')},
+                                            {tag: 'div', html: c.baseArgs.record.get('SERVICE_LONG_OUTPUT')},
                                             {tag: 'b', html: _('<br/>Performance data')},
-                                            {tag: 'div', html: c.record.get('SERVICE_PERFDATA')},
+                                            {tag: 'div', html: c.baseArgs.record.get('SERVICE_PERFDATA')},
                                         ]
                                     });
                                     var height = Ext.util.TextMetrics.createInstance(c.getEl()).getHeight(html);

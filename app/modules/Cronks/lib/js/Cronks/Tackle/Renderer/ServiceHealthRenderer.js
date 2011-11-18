@@ -10,12 +10,12 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
         var _this = this;
 
         var render = function (nrOfTry) {
-            nrOfTry = nrOfTry || 1;
+        /*    nrOfTry = nrOfTry || 1;
             if(!Ext.get(id)) {
                 render.defer(100,this,[nrOfTry+1]);
                 return false;
             }
-
+*/
             var cmp = new Ext.BoxComponent({
                 layout: 'fit',
                 tpl: new Ext.XTemplate(
