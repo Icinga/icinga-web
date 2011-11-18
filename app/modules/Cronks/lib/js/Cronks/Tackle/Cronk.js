@@ -88,15 +88,20 @@ Ext.ns('Icinga.Cronks.Tackle');
                 this.infoTabs.hideTabStripItem(this.tabItems[hide][i]);
             }
             this.infoTabs.setActiveTab(this.tabItems[show].head);
+            this.currentView = type;
+
         },
+
+        currentView: 'none',
 
         initInternalEvents: function () {
             /**
              * TODO: these objects should just need the record and be able to deal with it
              */
             this.objectGrid.on("hostSelected", function(record) {
-                this.toggleTabView('host');
-                
+                if(this.currentView != 'host') {
+                    this.toggleTabView('host');
+                }
                 this.tabItems.host.head.loadDataForObjectId(record.data.HOST_OBJECT_ID);
                 this.tabItems.host.relation.loadDataForObjectId(record.data.HOST_OBJECT_ID);
                 this.tabItems.host.comments.grid.recordUpdated(record);
@@ -116,13 +121,14 @@ Ext.ns('Icinga.Cronks.Tackle');
             },this);
 
             this.objectGrid.on("serviceSelected", function(record) {
+                if(this.currentView != 'service') {
+                    this.toggleTabView('service');
+                }
                 if(!record.data)
                     return;
-                
-                this.toggleTabView('service');
-
+             
                 this.tabItems.service.head.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
-                this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                //this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabItems.service.comments.grid.recordUpdated(record);
 
                 this.tabItems.service.comments.form.setObjectData({
@@ -137,6 +143,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
+                this.currentView == 'service';
             },this);
 
         }
