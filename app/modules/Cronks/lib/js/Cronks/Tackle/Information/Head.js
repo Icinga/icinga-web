@@ -105,6 +105,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
         },
 
         updateSubComponents: function (store, records, options) {
+
             var record = store.getAt(0);
 
             this.stateInfo.setSource(record.data);
