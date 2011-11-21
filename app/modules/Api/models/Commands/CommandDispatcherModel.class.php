@@ -68,6 +68,9 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
     private function buildCommandString(array $command, array $params) {
         $str = "[".time()."] ".$command["definition"];
         foreach($command["parameters"] as $param=>$vals) {
+            if(!isset($vals["required"]))
+                $vals["required"] = true;
+
             if (!isset($params[$vals["alias"]]) && $vals["required"]) {
                 throw new MissingCommandParameterException($vals["alias"]." is missing");
             } else if (!isset($params[$vals["alias"]])) {

@@ -55,11 +55,15 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
                 "active" => $role->role_disabled != 1
             );
         }
+
         $principals = $user->getPrincipals();
+        
         $userObject["principals"] = array();
         foreach($principals as $principal)
             $targets = $principal->NsmPrincipalTarget;
+            
             foreach($targets as $t)
+                
                 $userObject["principals"][] = array(
                     "target" => $t->NsmTarget->toArray(),
                     "values" => $t->NsmTargetValue->toArray()
@@ -94,7 +98,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             if (!$user instanceof NsmUser) {
                 return "{}";
             }
-
+            
             $result = $this->formatUser($user);
 
             $this->setAttribute("user", $result);

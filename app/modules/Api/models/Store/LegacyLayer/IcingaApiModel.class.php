@@ -105,6 +105,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
         } else {
             $result = $request->count();
         }
+
         return $result;
     }
 

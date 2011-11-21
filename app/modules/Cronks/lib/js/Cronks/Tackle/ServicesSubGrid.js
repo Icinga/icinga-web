@@ -129,13 +129,36 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer,
                 width: 25
             },{
+                header: _('Service name'),
+                dataIndex : 'SERVICE_NAME',
+                renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+                    var state = parseInt(record.get("SERVICE_CURRENT_STATE"),10);
+
+                    switch(state) {
+                        case 0:
+                            metaData.css = 'icinga-status-up';
+                            break;
+                        case 1:
+                            metaData.css = 'icinga-status-critical';
+                            break;
+                        case 2:
+                            metaData.css = 'icinga-status-critical';
+                            break;
+                        case 2:
+                            metaData.css = 'icinga-status-unreachable';
+                            break;
+                        case 99:
+                            metaData.css = 'icinga-status-pending';
+                            break;
+                    }
+
+                    return "<span style='"+((state == 1 || state == 99) ? 'color:#ffffff' : 'color:#000000') +"'>"+value+"</span>";
+                }
+            },{
                 renderer: function() {
                     return '<div class="icinga-icon-service" style="width:20px;height:16px"></div>';
                 },
                 width:35
-            },{
-                header: _('Service name'),
-                dataIndex : 'SERVICE_NAME'
             },{
                 header: _('SLA'),
                 dataIndex: 'SLA_STATE_AVAILABLE',

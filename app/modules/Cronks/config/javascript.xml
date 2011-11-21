@@ -80,6 +80,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ServicesSubGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ObjectGrid.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/InfoTabPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/SLAChartPanel.js</ae:parameter>
             
         </javascript>
     </ae:configuration>

@@ -49,7 +49,9 @@ Ext.ns('Icinga.Cronks.Tackle');
                 this.tabItems[i].relation = new Icinga.Cronks.Tackle.Relation.Head({
                 	type : i
                 });
-                
+                this.tabItems[i].sla = new Icinga.Cronks.Tackle.SLAChartPanel({
+                	type : i
+                });
                 // add all items and hide service items
                 for(var x in this.tabItems[i]) {
                     this.infoTabs.add(this.tabItems[i][x]);
@@ -104,6 +106,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                 }
                 this.tabItems.host.head.loadDataForObjectId(record.data.HOST_OBJECT_ID);
                 this.tabItems.host.relation.loadDataForObjectId(record.data.HOST_OBJECT_ID);
+                this.tabItems.host.sla.updateRecord(record);
                 this.tabItems.host.comments.grid.recordUpdated(record);
 
                 this.tabItems.host.comments.form.setObjectData({
@@ -128,8 +131,9 @@ Ext.ns('Icinga.Cronks.Tackle');
                     return;
              
                 this.tabItems.service.head.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
-                //this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
+                this.tabItems.service.relation.loadDataForObjectId(record.data.SERVICE_OBJECT_ID);
                 this.tabItems.service.comments.grid.recordUpdated(record);
+                this.tabItems.service.sla.updateRecord(record);
 
                 this.tabItems.service.comments.form.setObjectData({
                     objectName : record.data.SERVICE_NAME,

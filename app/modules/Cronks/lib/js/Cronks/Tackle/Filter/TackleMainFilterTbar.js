@@ -45,7 +45,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
         var jsonFilter = this.buildFilter();
         this.store.setFilter(jsonFilter);
         this.ownerCt.bottomToolbar.doLoad();
-        if(this.autoRefreshEnabled) {
+        if(this.autoRefreshEnabled && !this.arTask) {
             this.startAutoRefresh.defer(this.autoRefreshInterval,this);
         }
     },
@@ -113,6 +113,16 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
                },{
                    type: 'atom',
                    field: ['HOSTGROUP_NAME'],
+                   method: ["LIKE"],
+                   value: [filter.text]
+               },{
+                   type: 'atom',
+                   field: ['HOST_ALIAS'],
+                   method: ["LIKE"],
+                   value: [filter.text]
+               },{
+                   type: 'atom',
+                   field: ['HOST_DISPLAY_NAME'],
                    method: ["LIKE"],
                    value: [filter.text]
                },{

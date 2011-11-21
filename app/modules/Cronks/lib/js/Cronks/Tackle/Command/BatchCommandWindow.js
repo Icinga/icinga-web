@@ -238,8 +238,9 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     updateFilter: function() {
         var filter = [];
         for(var i in this.svcStates) {
-            if(this.svcStates[i] == true)
+            if(this.svcStates[i] === true) {
                 continue;
+            }
             filter.push({
                 type: 'atom',
                 field: ['SERVICE_CURRENT_STATE'],
@@ -249,8 +250,9 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
         }
         
         for(var i in this.hostStates) {
-            if(this.hostStates[i] == true)
+            if(this.hostStates[i] === true) {
                 continue;
+            }
             filter.push({
                 type: 'atom',
                 field: ['HOST_CURRENT_STATE'],
@@ -258,7 +260,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 value: [i]
             });
         }
-        if(this.hostFilter != "") {
+        if(this.hostFilter !== "") {
             filter.push({
                 type: 'atom',
                 field: ['HOST_NAME'],
@@ -266,7 +268,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 value: [this.hostFilter]
             });
         }
-        if(this.hostgroupFilter != "") {
+        if(this.hostgroupFilter !== "") {
             filter.push({
                 type: 'atom',
                 field: ['HOSTGROUP_NAME'],
@@ -274,7 +276,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 value: [this.hostgroupFilter]
             });
         }
-        if(this.serviceFilter != "") {
+        if(this.serviceFilter !== "") {
             filter.push({
                 type: 'atom',
                 field: ['SERVICE_NAME'],
@@ -536,9 +538,10 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
     submitCommand: function() {
         var submitStore = new Icinga.Api.RESTStore({
             target: this.type,
-            columns: ['HOST_NAME','INSTANCE_NAME',this.type+'_NAME']
+            columns: ['HOST_NAME','INSTANCE_NAME',this.type.toUpperCase()+'_NAME']
         });
-        submitStore.setFilter(this.recipientStore.getFilter())
+
+        submitStore.setFilter(this.recipientStore.getFilter());
         submitStore.on("load", function(store,records) {
             var targets = [];
             Ext.each(records,function(record) {
@@ -549,7 +552,7 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                 });
             },this);
             this.findByType('tabpanel')[0].getActiveTab().submit(targets);
-            this.close();
+
         },this,{single:true});
         submitStore.load();
 
@@ -567,8 +570,9 @@ Ext.ns('Icinga.Cronks.Tackle.Command').BatchCommandWindow = Ext.extend(Ext.Windo
                     _("Submitting commands to multiple targets"),
                     _("This command will be send to "+count+" "+this.type+"s, proceed?"),
                     function(btn) {
-                        if(btn != "yes")
+                        if(btn !== "yes") {
                             return false;
+                        }
                         this.submitCommand();
                     },
                     this

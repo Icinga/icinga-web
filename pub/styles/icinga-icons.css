@@ -56,6 +56,7 @@
  */
 .icinga-icon-accept { background-image: url(../images/icons/tick-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
+.icinga-icon-chart-pie { background-image: url(../images/icons/chart-pie.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-add { background-image: url(../images/icons/application-plus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-cascade { background-image: url(../images/icons/applications.png) !important; background-repeat: no-repeat; }
