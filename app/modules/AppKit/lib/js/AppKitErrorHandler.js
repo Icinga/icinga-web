@@ -123,12 +123,13 @@ Ext.ns("AppKit.errorHandler");
 		}
 
 		window.onerror = handleError;
-
+        var clearErrors = function() {
+            occuredErrors = [];
+            updateErrorDisplay();
+        };
 		return {
-			clearErrors : function() {
-				occuredErrors = [];
-				updateErrorDisplay();
-			},
+			clearErrors: this.clearErrors,
+            
 			getErrors: function() {
 				return occuredErrors;
 			},
@@ -200,6 +201,7 @@ Ext.ns("AppKit.errorHandler");
 
 				});
 				var boxId = Ext.id('box_bug');
+                var _this = this;
 				var box = new Ext.Window({
 					modal:true,
 					height: 400,
@@ -236,10 +238,10 @@ Ext.ns("AppKit.errorHandler");
 						text: _('Clear errors'),
 						iconCls: 'icinga-icon-delete',
 						handler: function() {
-							AppKit.errorHandler.clearErrors()
+                            clearErrors();
 							Ext.getCmp(boxId).close();
 						},
-						scope:this
+						scope:_this
 					},{
 						text: _('Close'),
 						iconCls: 'icinga-icon-cancel',
