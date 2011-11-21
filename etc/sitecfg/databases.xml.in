@@ -13,7 +13,8 @@
     -->
     <!--
     <db:database name="icinga_web" class="AppKitDoctrineDatabase">
-        <ae:parameter name="dsn">mysql://icinga_web:icinga_web@localhost:3306/icinga_web</ae:parameter>
+         <ae:parameter name="dsn">@db_type@://@db_user@:@db_pass@@@db_host@:@db_port@/@db_name@</ae:parameter>
+
         <ae:parameter name="charset">utf8</ae:parameter>
         <ae:parameter name="manager_attributes">
             <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
@@ -42,8 +43,8 @@
     -->
     <!--
     <db:database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="IcingaDoctrineDatabase">
-        <ae:parameter name="dsn">mysql://icinga:icinga@localhost:3306/icinga</ae:parameter>
-        <ae:parameter name="prefix">icinga_</ae:parameter>
+        <ae:parameter name="dsn">@api_subtype@://@api_db_user@:@api_db_pass@@@api_host@:@api_port@/@api_db_name@</ae:parameter>
+        <ae:parameter name="prefix">@api_db_prefix@</ae:parameter>
         <ae:parameter name="charset">utf8</ae:parameter>
         <ae:parameter name="use_retained">true</ae:parameter>
         <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>

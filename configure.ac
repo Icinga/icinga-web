@@ -225,6 +225,20 @@ AC_ARG_WITH([devel_mode],
 	devel_mode=no
 )
 
+AC_ARG_WITH([sla_default_timespan],
+	AS_HELP_STRING([--with-sla-default-timespan=TIMESPAN], [The timespan used for non-detailed sla overviews]),
+	sla_default_timespan=$withval,
+	sla_default_timespan="-1 month"
+)
+
+
+AC_ARG_WITH([enable_sla],
+	AS_HELP_STRING([--with-enable-sla], [Enable SLA support]),
+	enable_sla=$withval,
+	enable_sla=false
+)
+
+
 # Configuration location
 # DEPRECATED
 AC_ARG_WITH([conf_folder],
@@ -319,6 +333,9 @@ AC_SUBST(api_db_prefix)
 AC_SUBST(api_cmd_file)
 AC_SUBST(api_cmd_instance)
 
+AC_SUBST(enable_sla)
+AC_SUBST(sla_default_timespan)
+
 AC_SUBST(icinga_api)
 
 AC_SUBST(CFLAGS)
@@ -355,6 +372,8 @@ AC_CONFIG_FILES([
 	app/config/translation.xml
 	app/modules/Api/config/access.xml
 	etc/sitecfg/access.xml
+	etc/sitecfg/databases.xml
+	etc/sitecfg/sla.xml
 	app/modules/Api/config/module.xml
 	app/modules/AppKit/config/module.xml
 	app/modules/AppKit/config/auth.xml

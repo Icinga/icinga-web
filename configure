@@ -570,6 +570,8 @@ INSTALL_OPTS_WEB
 INSTALL_OPTS
 CFLAGS
 icinga_api
+sla_default_timespan
+enable_sla
 api_cmd_instance
 api_cmd_file
 api_db_prefix
@@ -679,6 +681,8 @@ with_api_db_prefix
 with_api_cmd_file
 with_api_cmd_instance
 with_devel_mode
+with_sla_default_timespan
+with_enable_sla
 with_conf_folder
 with_conf_dir
 with_log_folder
@@ -1337,6 +1341,9 @@ Optional Packages:
                           Icinga default command instance name (default
                           "default")
   --with-devel-mode       Web devel mode (disable caching)
+  --with-sla-default-timespan=TIMESPAN
+                          The timespan used for non-detailed sla overviews
+  --with-enable-sla       Enable SLA support
   --with-conf-folder=PATH DEPRECATED, please use --with-conf-dir instead
   --with-conf-dir=PATH    Folder where to store custom user configurations
                           (default etc/conf.d/)
@@ -2543,6 +2550,28 @@ else
 fi
 
 
+
+# Check whether --with-sla_default_timespan was given.
+if test "${with_sla_default_timespan+set}" = set; then :
+  withval=$with_sla_default_timespan; sla_default_timespan=$withval
+else
+  sla_default_timespan="-1 month"
+
+fi
+
+
+
+
+# Check whether --with-enable_sla was given.
+if test "${with_enable_sla+set}" = set; then :
+  withval=$with_enable_sla; enable_sla=$withval
+else
+  enable_sla=false
+
+fi
+
+
+
 # Configuration location
 # DEPRECATED
 
@@ -2795,7 +2824,10 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml etc/sitecfg/access.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+
+
+
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml etc/sitecfg/access.xml etc/sitecfg/databases.xml etc/sitecfg/sla.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
 
 
 cat >confcache <<\_ACEOF
@@ -3514,6 +3546,8 @@ do
     "app/config/translation.xml") CONFIG_FILES="$CONFIG_FILES app/config/translation.xml" ;;
     "app/modules/Api/config/access.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/access.xml" ;;
     "etc/sitecfg/access.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/access.xml" ;;
+    "etc/sitecfg/databases.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/databases.xml" ;;
+    "etc/sitecfg/sla.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/sla.xml" ;;
     "app/modules/Api/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/module.xml" ;;
     "app/modules/AppKit/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/module.xml" ;;
     "app/modules/AppKit/config/auth.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/auth.xml" ;;
