@@ -95,7 +95,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
         },
         
         getState: function(code) {
-            switch(code) {
+            switch(parseInt(code,10)) {
                 case 0:
                     return this.type === 'host' ? _('Up') : _('Ok');
                 case 1:
@@ -107,7 +107,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             }
         },
         getStateColor: function(code) {
-            switch(code) {
+            switch(parseInt(code,10)) {
                 case 0:
                     return '#00ff00';
                 case 1:
@@ -153,9 +153,9 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
               showLabels:true,
               updateHeights: false,
               Label: {
-                type: 'Native', //Native or HTML
+                type: 'HTML', //Native or HTML
                 size: 12,
-                family: 'verdana',
+                family: 'arial',
                 color: 'black'
               },
               //enable tips
