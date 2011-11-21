@@ -955,7 +955,7 @@
                         <parameter name="type">cellclick</parameter>
                         
                         <parameter name="arguments">
-                            <parameter name="laola">True</parameter>
+                            <parameter name="hostname_field">host_name</parameter>
                         </parameter>
                     </parameter>
                 
