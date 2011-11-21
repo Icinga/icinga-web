@@ -102,7 +102,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
      */
     
     var hostgroupPrincipalsView = new AppKit.Admin.Components.GroupRestrictionView({
-        store: roleServicegroupPrincipalStore,
+        store: roleHostgroupPrincipalStore,
         type: 'role',
         target: 'hostgroup'
     })
