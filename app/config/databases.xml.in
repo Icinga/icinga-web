@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/databases/1.0">
-	
-	<ae:configuration>
-		<databases default="icinga_web">
-			<database name="icinga_web" class="AppKitDoctrineDatabase">
+    
+    <ae:configuration>
+        <databases default="icinga_web">
+            <database name="icinga_web" class="AppKitDoctrineDatabase">
 
-				<!--
-					Doctrine dsn strings:
-					
-					http://www.doctrine-project.org/documentation/manual/1_1/en/introduction-to-connections
-					
-					* Postgre: pgsql://icinga_web:icinga_web@localhost:5432/icinga_web
-					* MySQL: mysql://icinga_web:icinga_web@127.0.0.1:3306/icinga_web
-					* Oracle: oracle://icinga_web:icinga_web@localhost/iweb (iweb is the DSN name on localhost)
-					* Oracle TSNAMES (e.g. /opt/oracle/instantclient_11_2/network/admin/tnsnames.ora):
-							iweb =
-							        (DESCRIPTION =
-							        (ADDRESS = (PROTOCOL = TCP)(HOST = 10.121.0.85)(PORT = 1521))
-							        (CONNECT_DATA =
-							        (SERVER = DEDICATED)
-							        (SERVICE_NAME = XE)
-							        )
-							 )
+                <!--
+                    Doctrine dsn strings:
+                    
+                    http://www.doctrine-project.org/documentation/manual/1_1/en/introduction-to-connections
+                    
+                    * Postgre: pgsql://icinga_web:icinga_web@localhost:5432/icinga_web
+                    * MySQL: mysql://icinga_web:icinga_web@127.0.0.1:3306/icinga_web
+                    * Oracle: oracle://icinga_web:icinga_web@localhost/iweb (iweb is the DSN name on localhost)
+                    * Oracle TSNAMES (e.g. /opt/oracle/instantclient_11_2/network/admin/tnsnames.ora):
+                            iweb =
+                                    (DESCRIPTION =
+                                    (ADDRESS = (PROTOCOL = TCP)(HOST = 10.121.0.85)(PORT = 1521))
+                                    (CONNECT_DATA =
+                                    (SERVER = DEDICATED)
+                                    (SERVICE_NAME = XE)
+                                    )
+                             )
  
-					
-				-->
-				<ae:parameter name="dsn">@db_type@://@db_user@:@db_pass@@@db_host@:@db_port@/@db_name@</ae:parameter>
-				
-				<!-- Generic credentials  -->
-				<!-- <ae:parameter name="username">@db_user@</ae:parameter> -->
-				<!-- <ae:parameter name="password">@db_pass@</ae:parameter> -->
-				
-				<!-- DB encoding type -->
-				<ae:parameter name="charset">utf8</ae:parameter>
-				
-				<!--
-					Doctrine_Manager configuration
-				-->
-				<ae:parameter name="manager_attributes">
-					<!-- This allows lazy loading of the models -->
-					<ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
-				</ae:parameter>
-				
-				<!-- The path to our models -->
-				<ae:parameter name="load_models">%core.module_dir%/AppKit/lib/database/models/generated</ae:parameter>
-				<ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>				
+                    
+                -->
+                <ae:parameter name="dsn">@db_type@://@db_user@:@db_pass@@@db_host@:@db_port@/@db_name@</ae:parameter>
+                
+                <!-- Generic credentials  -->
+                <!-- <ae:parameter name="username">@db_user@</ae:parameter> -->
+                <!-- <ae:parameter name="password">@db_pass@</ae:parameter> -->
+                
+                <!-- DB encoding type -->
+                <ae:parameter name="charset">utf8</ae:parameter>
+                
+                <!--
+                    Doctrine_Manager configuration
+                -->
+                <ae:parameter name="manager_attributes">
+                    <!-- This allows lazy loading of the models -->
+                    <ae:parameter name="Doctrine_Core::ATTR_MODEL_LOADING">CONSERVATIVE</ae:parameter>
+                </ae:parameter>
+                
+                <!-- The path to our models -->
+                <ae:parameter name="load_models">%core.module_dir%/AppKit/lib/database/models/generated</ae:parameter>
+                <ae:parameter name="models_directory">%core.module_dir%/AppKit/lib/database/models</ae:parameter>               
                 <!-- Oracle specific -->
                 <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
             
@@ -65,14 +65,18 @@
                     <!-- result cache: If in doubt, let it out! This caches results from the database -->
                     <ae:parameter name="use_result_cache">true</ae:parameter>
                     <ae:parameter name="result_cache_lifespan">60</ae:parameter>
-                </ae:parameter>		
-    
+                </ae:parameter>     
+            </database>
 
-
-			</database>
-	
-	        <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="IcingaDoctrineDatabase">
-		        <ae:parameter name="dsn">@api_subtype@://@api_db_user@:@api_db_pass@@@api_host@:@api_port@/@api_db_name@</ae:parameter>
+            <!-- 
+                This part configures the icinga database (destination to ido2db)
+                
+                If you're using oracle in this case the driver 'icingaOracle' is needed.
+                
+                - oracle: icingaOracle://icinga:icinga@localhost/iweb
+            -->
+            <database xmlns="http://agavi.org/agavi/config/parts/databases/1.0" name="icinga" class="IcingaDoctrineDatabase">
+                <ae:parameter name="dsn">@api_subtype@://@api_db_user@:@api_db_pass@@@api_host@:@api_port@/@api_db_name@</ae:parameter>
                 <ae:parameter name="prefix">@api_db_prefix@</ae:parameter>
                 <ae:parameter name="charset">utf8</ae:parameter>
                 <ae:parameter name="date_format"><![CDATA[YYYY-MM-DD HH24:MI:SS]]></ae:parameter>
@@ -82,7 +86,7 @@
                 <ae:parameter name="use_retained">true</ae:parameter>
 
                 <ae:parameter name="load_models">%core.module_dir%/Api/lib/database/models/generated</ae:parameter>
-                <ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>				
+                <ae:parameter name="models_directory">%core.module_dir%/Api/lib/database/models</ae:parameter>              
                 <ae:parameter name="caching">
                     <!-- enable caching -->
                     <ae:parameter name="enabled">false</ae:parameter>
@@ -92,11 +96,9 @@
                 </ae:parameter>
 
             </database>
-        	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/databases.xml#xpointer(databases/node())">
-				<xi:fallback></xi:fallback>
-			</xi:include>
-		
-		</databases>
-	</ae:configuration>
-	
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/databases.xml#xpointer(databases/node())">
+                <xi:fallback></xi:fallback>
+            </xi:include>
+        </databases>
+    </ae:configuration>
 </ae:configurations>

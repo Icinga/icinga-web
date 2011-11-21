@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ic:commands
+    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
+
+    <ic:command name="DEL_HOST_DOWNTIME">
+        <ic:definition>DEL_HOST_DOWNTIME</ic:definition>
+        <ic:type>downtime</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Remove downtime</ic:label>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_DOWNTIME_ID" />
+        </ic:parameters>
+    </ic:command>
+    
+    <ic:command name="DEL_SVC_DOWNTIME">
+        <ic:definition>DEL_SVC_DOWNTIME</ic:definition>
+        <ic:type>downtime</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Remove downtime</ic:label>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_DOWNTIME_ID" />
+        </ic:parameters>
+    </ic:command>
+
+</ic:commands>
