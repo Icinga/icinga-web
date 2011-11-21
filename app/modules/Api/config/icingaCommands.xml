@@ -54,6 +54,14 @@
                 href="commands/instance.xml"
                 xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
             />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                href="commands/downtime.xml"
+                xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
+            />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                href="commands/notification.xml"
+                xpointer="xmlns(ic=http://icinga.org/api/config/parts/icingacommands/1.0) xpointer(//ic:commands/node())"
+            />
         </ic:commands>
 	</ae:configuration>
 </ae:configurations> 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ic:commands
+    xmlns:ic="http://icinga.org/api/config/parts/icingacommands/1.0" 
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" >
+
+
+    <ic:command name="DEL_SVC_COMMENT">
+        <ic:definition>DEL_SVC_COMMENT</ic:definition>
+        <ic:type>notification</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Delete comment</ic:label>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_COMMENT_ID" />
+        </ic:parameters>
+    </ic:command>
+    
+    <ic:command name="SET_SVC_NOTIFICATION_NUMBER">
+        <ic:definition>SET_SVC_NOTIFICATION_NUMBER</ic:definition>
+        <ic:type>notification</ic:type>
+        <ic:iconCls>icinga-icon-bricks</ic:iconCls>
+        <ic:label>Set notification number</ic:label>
+        <ic:parameters>
+            <ic:parameter ref="COMMAND_HOST" />
+            <ic:parameter ref="COMMAND_SERVICE" />
+            <ic:parameter ref="COMMAND_DATA" />
+        </ic:parameters>
+    </ic:command>
+    
+</ic:commands>
