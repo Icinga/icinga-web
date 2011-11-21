@@ -60,6 +60,7 @@ Ext.ns("Icinga.Cronks.Tackle.Renderer").AdditionalURLColumnClickHandler = functi
             var curURLs = urls[urltype].data.split(" ");
             for(var i=0;i<curURLs.length;i++) {
                 var url = curURLs[i];
+                // Multiple urls are wrapped '', so we have to check those before we can use the url
                 if(/^'.*'$/.test(url)) {
                     menu.items.push({
                         text: urltype+(i+1),

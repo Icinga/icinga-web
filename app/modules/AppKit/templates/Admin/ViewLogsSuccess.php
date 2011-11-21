@@ -61,7 +61,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 		colModel: new Ext.grid.ColumnModel({
 			defaults: {
 				width: 120,
-				sortable: true
+				sortable: false
 			},
 			columns: [
 				{id: 'Time',header:_('Time'),width:100,sortable:true,dataIndex:'Time'},
