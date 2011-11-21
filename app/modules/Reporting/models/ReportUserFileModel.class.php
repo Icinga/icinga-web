@@ -27,20 +27,23 @@ class Reporting_ReportUserFileModel extends ReportingBaseModel implements AgaviI
     private $__user = null;
 
     private function fileGarbageCollector() {
-        $it = new FilesystemIterator($this->__dir, FilesystemIterator::CURRENT_AS_FILEINFO);
+        
+        $this->getContext()->getLoggerManager()->log('REPORTING: Running garbage collector for user files.', AgaviLogger::DEBUG);
+        
         $count = 0;
-        foreach($it as $fileInfo) {
-            $diff = time() - $fileInfo->getCTime();
-
-            if ($diff > self::MAX_TIME) {
-                if (unlink($fileInfo->getRealPath())) {
-                    $count++;
-                } else {
-                    throw new AppKitModelException('Could not delete report user file: '. $fileInfo->getBaseName());
+        foreach (scandir($this->__dir) as $f) {
+            if ($f !== '.' && $f !== '..' && is_file(($file = $this->__dir . '/'. $f))) {
+                $diff = time() - filectime($file);
+                if ($diff > self::MAX_TIME) {
+                    if (unlink($file)) {
+                        $count++;
+                    } else {
+                        throw new AppKitModelException('Could not delete report user file: '. $file);
+                    }
                 }
             }
         }
-
+        
         if ($count>0) {
             $this->getContext()->getLoggerManager()->log('Deleted '. $count. ' reporting user files', AgaviLogger::INFO);
             return true;

@@ -32,6 +32,8 @@
             <xs:enumeration value="hostgroup"/>
             <xs:enumeration value="servicegroup"/>
             <xs:enumeration value="process"/>
+            <xs:enumeration value="downtime"/>
+            <xs:enumeration value="notification"/>
             <xs:enumeration value="unknown"/>
         </xs:restriction>
     </xs:simpleType>
