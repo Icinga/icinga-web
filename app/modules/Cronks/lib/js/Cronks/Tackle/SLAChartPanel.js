@@ -127,6 +127,13 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             };
             
             for(var i=0;i<data.length;i++) {
+                data[i].percentage = parseFloat(data[i].percentage.replace(",","."),10);
+                
+                if(isNaN(data[i].percentage)) {
+                    AppKit.log("Object returned NaN as percentage");
+                    return {};
+                }
+
                 json.values.push({
                     label: this.getState(data[i].sla_state),
                     values: data[i].percentage < 0.1 ? 0.1 : data[i].percentage
