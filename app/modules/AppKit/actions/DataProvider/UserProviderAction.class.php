@@ -23,7 +23,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
     public function getCredentials() {
         return array('appkit.admin', 'appkit.admin.users');
     }
-    
+
     private function getUserAsArray(NsmUser $user) {
         return array(
             "id" => $user->user_id,
@@ -38,7 +38,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             "disabled" => $user->user_disabled
         );
     }
-    
+
     private function formatUser(NsmUser $user, $simple = false) {
 
         $userObject = $this->getUserAsArray($user);
@@ -47,7 +47,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
         $groups = $user->NsmRole;
         $userObject["roles"] = array();
         foreach($groups as $role) {
-            
+
             $userObject["roles"][] = array(
                 "id" => $role->role_id,
                 "name" => $role->role_name,
@@ -56,21 +56,24 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             );
         }
 
-        $principals = $user->getPrincipals();
-        
+
+
         $userObject["principals"] = array();
-        foreach($principals as $principal)
-            $targets = $principal->NsmPrincipalTarget;
-            
-            foreach($targets as $t)
-                
-                $userObject["principals"][] = array(
-                    "target" => $t->NsmTarget->toArray(),
-                    "values" => $t->NsmTargetValue->toArray()
-                );
+        $targets = $user->getTargets();
+
+        foreach($targets as $t) {
+            if($t->target_type != "icinga")
+                continue;
+            $userObject["principals"][] = array(
+                "target" => $t->toArray(),
+                "values" => $user->getTargetValues($t->target_name)->toArray()
+
+            );
+        }
+
         return $userObject;
     }
-    
+
     public function executeRead(AgaviRequestDataHolder $rd) {
         $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
         $userId = $rd->getParameter('userId',false);
@@ -86,9 +89,9 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             else
                 $sort = false;
         }
-        
-        
-        
+
+
+
         $result;
 
         // return a single user when an id is provided
@@ -98,11 +101,11 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             if (!$user instanceof NsmUser) {
                 return "{}";
             }
-            
+
             $result = $this->formatUser($user);
 
             $this->setAttribute("user", $result);
-            
+
         } else {	//return list of all users if no id is provided
             $users;
 
@@ -120,7 +123,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
        }
        return 'Success';
     }
-    
+
     public function executeWrite(AgaviRequestDataHolder $rd) {
         // We need the execute method to work with parameter od the request!
         try {
@@ -162,7 +165,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
 
         return 'Success';
     }
-    
+
     public function executeRemove(AgaviRequestDataHolder $rd) {
 
         try {
@@ -189,7 +192,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
 
         return 'Success';
     }
-    
+
     public function handleError(AgaviRequestDataHolder $rd) {
         return 'Success';
     }
