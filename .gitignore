@@ -30,6 +30,7 @@ app/modules/AppKit/config/module.site.xml
 app/modules/Web/config/module.site.xml
 app/modules/Cronks/config/module.site.xml
 app/modules/Reporting/data/tmp
+etc/sitecfg/access.xml
 bin/clearcache.sh
 icinga-web.session
 icinga-web.webprj

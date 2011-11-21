@@ -127,8 +127,8 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             };
             
             for(var i=0;i<data.length;i++) {
-                data[i].percentage = parseFloat(data[i].percentage.replace(",","."),10);
                 
+                data[i].percentage = parseFloat(data[i].percentage.replace(",","."),10);
                 if(isNaN(data[i].percentage)) {
                     AppKit.log("Object returned NaN as percentage");
                     return {};
