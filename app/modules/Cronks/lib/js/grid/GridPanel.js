@@ -52,7 +52,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				scope: this
 			}, {
 				text: _('Settings'),
-				iconCls: 'icinga-icon-cog',
+				iconCls: 'icinga-icon-application-edit',
 				toolTip: _('Grid settings'),
 				menu: {
 					items: [{

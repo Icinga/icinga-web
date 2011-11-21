@@ -150,7 +150,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
         },{
             xtype: 'button',
             iconCls: 'icinga-icon-application-edit',
-            text: 'Options',
+            text: _('Settings'),
             menu: [{
                 text: _('Autorefresh'),
                 xtype: 'menucheckitem',
