@@ -180,8 +180,12 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: function(value,meta,record) {
                    var str = AppKit.util.Date.getElapsedString(value);
                    var now = new Date();
-                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s');
-                   var nextCheckDate = Date.parseDate(record.get('SERVICE_NEXT_CHECK'),'Y-m-d H:i:s');
+                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s')
+                        || Date.parseDate(value,'Y-m-d H:i:sP')
+                        || Date.parseDate(value+":00",'Y-m-d H:i:sP');
+                   var nextCheckDate = Date.parseDate(record.get('SERVICE_NEXT_CHECK'),'Y-m-d H:i:s')
+                        || Date.parseDate(value,'Y-m-d H:i:sP')
+                        || Date.parseDate(value+":00",'Y-m-d H:i:sP');
                    var elapsed = parseInt(now.getElapsed(lastCheckDate)/1000,10);
 
                    if(!now.between(lastCheckDate,nextCheckDate.add(Date.SECOND,30)))

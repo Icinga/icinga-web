@@ -117,7 +117,6 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
             pageSize:50
         });
     },
-    sm : new Ext.grid.CheckboxSelectionModel(),
     refreshLocked: false,
     lockRefresh: function() {
         if(this.refreshLocked)
@@ -189,7 +188,6 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
 
 		this.cm = new Ext.grid.ColumnModel({
 			columns : [
-                this.sm,
             {
 				dataIndex : 'HOST_CURRENT_STATE',
                 columnWidth: 25,

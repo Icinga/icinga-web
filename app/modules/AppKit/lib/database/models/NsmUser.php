@@ -336,10 +336,15 @@ class NsmUser extends BaseNsmUser {
     private function getRoleIds() {
         $ids = array();
         foreach($this->NsmRole as $role) {
+            if($role->role_disabled)
+                continue;
             $ids[] = $role->role_id;
+
             while ($role->hasParent()){
                 $role = $role->parent;
-                $ids[] = $role->role_id;        
+                if($role->role_disabled)
+                    continue;
+                $ids[] = $role->role_id;       
             }
         }
          
@@ -359,6 +364,7 @@ class NsmUser extends BaseNsmUser {
                                 ->select('p.*')
                                 ->from('NsmPrincipal p INDEXBY p.principal_id')
                                 ->andWhereIn('p.principal_role_id',$roles)
+
                                 ->orWhere('p.principal_user_id = ?',$this->user_id)
                                 ->execute();
 

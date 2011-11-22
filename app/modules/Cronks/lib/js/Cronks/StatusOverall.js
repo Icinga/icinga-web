@@ -5,13 +5,29 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
     "use strict";
 
     Icinga.Cronks.System.StatusOverall.renderer = {
+        itemTpl: new Ext.XTemplate(
+            '<tpl if="!this.isSimple(state)">',
+                "<span qTip='Resolved / Open Problems / Overall '>",
+                    "{resolved} / {open} / {count}",
+                "</span>",
+            "</tpl>",
+            '<tpl if="this.isSimple(state)">',
+                "{count}",
+            "</tpl>", {
+                isSimple: function(v) {
+                    var nr = parseInt(v,10);
+                    return (nr == 99 || nr == 0)
+                }
+            }
+        ),
+
         prepareData: function (data, recordIndex, record) {
             data.state_org = data.state;
-
+            var r = Icinga.Cronks.System.StatusOverall.renderer.itemTpl; // just as a shortcut
             if (data.count === 0) {
-                data.state = Icinga.StatusData.wrapElement(data.type, data.state, data.count + ' {0}', Icinga.DEFAULTS.STATUS_DATA.servicestatusClass[100]);
+                data.state = Icinga.StatusData.wrapElement(data.type, data.state, r.apply(data)+" {0}" , Icinga.DEFAULTS.STATUS_DATA.servicestatusClass[100]);
             } else {
-                data.state = Icinga.StatusData.wrapElement(data.type, data.state, data.count + ' {0}');
+                data.state = Icinga.StatusData.wrapElement(data.type, data.state, r.apply(data)+" {0}");
             }
 
             return data;

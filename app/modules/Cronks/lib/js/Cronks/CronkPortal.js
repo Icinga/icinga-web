@@ -51,7 +51,7 @@ Ext.ns('Icinga.Cronks.System');
                 items: [{
                     xtype: 'cronk',
                     crname: 'icingaOverallStatus',
-                    width: 620
+                    width: 720
                 }, {
                     xtype: 'cronk',
                     crname: 'icingaMonitorPerformance',
