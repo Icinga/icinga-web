@@ -486,8 +486,10 @@ IcingaCommandHandler.prototype = {
                 
                 if (this.command_options.predefined.fixed === 1) {
                     var fdur = oForm.getForm().findField('duration');
-                    fdur.setReadOnly(true);
-                    fdur.container.hide();
+                    if(fdur) {
+                        fdur.setReadOnly(true);
+                        fdur.container.hide();
+                    }
                 }
 
                 oWin.show();
