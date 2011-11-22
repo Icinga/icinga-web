@@ -1,3 +1,5 @@
+Ext.ns('Icinga.Cronks.StatusMap');
+
 function jitAddEvent(obj, type, fn) {
 	if (obj.addEventListener) {
 		obj.addEventListener(type, fn, false);
@@ -18,7 +20,7 @@ var JitLog = {
 	}
 };
 
-function JitStatusMap (config) {
+Icinga.Cronks.StatusMap.RGraph = function (config) {
 
 	this.cmp = false;
 
@@ -63,6 +65,7 @@ function JitStatusMap (config) {
 		}
 
 		var w = infovis.offsetWidth, h = infovis.offsetHeight;
+		
 		rgraph = new $jit.RGraph({
 			Node: {
 				overridable: true,
@@ -186,7 +189,20 @@ function JitStatusMap (config) {
 			}
 		}, this);
 		return node;
-	}
+	};
+	
+	this.findNodeById = function(misc, oid) {
+		var node = null;
+        Ext.each(misc, function(item) {
+            if (item.id == oid) {
+                node = item;
+                return false;
+            } else if (Ext.isDefined(item.children) && item.children.length > 0) {
+                node = this.findNodeById(item.children, oid);
+            }
+        }, this);
+        return node;
+    };
 	
 	this.init = function (config) {
 		this.setConfig(config);
@@ -221,7 +237,7 @@ function JitStatusMap (config) {
 	}
 
 	this.createContainer = function () {
-		var container = new Ext.Container({
+		this.container = new Ext.Container({
 			id: this.elementIds.jitContainer,
 			autoEl: 'div', 
 			layout: 'column',
@@ -254,7 +270,7 @@ function JitStatusMap (config) {
 			}]
 		});
 	
-		this.cmp.add(container);
+		this.cmp.add(this.container);
 		this.cmp.doLayout();
 	}
 
@@ -263,9 +279,35 @@ function JitStatusMap (config) {
 		this.mask.show();			
 	}
 
+    this.reloadTree = function() {
+        this.showMask();
+        
+        var root = rgraph.root;
+        var node = this.findNodeById(this.jitJson, root);
+        
+        Ext.Ajax.request({
+            url : this.config.url,
+            params : this.config.params,
+            method : this.config.method,
+            success : function (response, o) {
+                this.jitJson = Ext.decode(response.responseText);
+                rgraph.loadJSON(this.jitJson);
+                rgraph.refresh();
+                this.centerNodeByObjectId(node.data.object_id);
+                this.mask.hide();
+                this.mask.disable();
+            },
+            failure : this.getMapDataFail,
+            callback : this.getMapDataDefault,
+            scope: this,
+            timeout : this.config.timeout,
+            disableCaching : this.config.disableCaching
+        });
+    };
+
 	this.getMapData = function () {
 		this.showMask();
-		var ajax = Ext.Ajax.request({
+		Ext.Ajax.request({
 			url : this.config.url,
 			params : this.config.params,
 			method : this.config.method,
