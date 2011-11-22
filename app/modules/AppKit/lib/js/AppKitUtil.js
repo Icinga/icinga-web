@@ -215,7 +215,9 @@ AppKit.util.Date = (function() {
        return {
            getElapsedString: function(value) {
                 var now = new Date();
-                var valueDate = Date.parseDate(value,'Y-m-d H:i:s');
+                var valueDate = Date.parseDate(value,'Y-m-d H:i:s')
+                    || Date.parseDate(value,'Y-m-d H:i:sP')
+                    || Date.parseDate(value+":00",'Y-m-d H:i:sP');
                 var elapsed = parseInt(now.getElapsed(valueDate)/1000,10);
 
                 var dd = parseInt(elapsed/time.day,10);

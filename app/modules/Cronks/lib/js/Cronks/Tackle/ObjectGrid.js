@@ -281,8 +281,13 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: function(value,meta,record) {
                    var str = AppKit.util.Date.getElapsedString(value);
                    var now = new Date();
-                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s');
-                   var nextCheckDate = Date.parseDate(record.get('HOST_NEXT_CHECK'),'Y-m-d H:i:s');
+                   // Postgresql doesn't return timestamps in format that extjs can read without problems
+                   var lastCheckDate = Date.parseDate(value,'Y-m-d H:i:s') 
+                       || Date.parseDate(value,'Y-m-d H:i:sP')
+                       || Date.parseDate(value+":00",'Y-m-d H:i:sP');
+                   var nextCheckDate = Date.parseDate(record.get('HOST_NEXT_CHECK'),'Y-m-d H:i:s')
+                       || Date.parseDate(record.get('HOST_NEXT_CHECK'),'Y-m-d H:i:sP')
+                       || Date.parseDate(record.get('HOST_NEXT_CHECK')+":00",'Y-m-d H:i:sP');
 
                    var elapsed = parseInt(now.getElapsed(lastCheckDate)/1000,10);
                    
