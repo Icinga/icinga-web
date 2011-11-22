@@ -243,11 +243,15 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		this.groups = new Ext.data.JsonStore({
 			autoDestroy: true,
 			url: AppKit.c.path + '/modules/appkit/provider/groups',
-			baseParams: { addMeta : 1 },
-			writer: new Ext.data.JsonWriter({
-			    encode: true,
-			    writeAllFields: false
-			})
+			fields : [{
+				name : 'id'
+			}, {
+				name : 'name'
+			}],
+			idProperty : 'id',
+			root : 'roles',
+			totalProperty : 'totalCount',
+			successProperty : 'success'
 		});
 		
 		this.groups.load();
@@ -387,8 +391,8 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		        		height: 100,
 		        		fieldLabel: _('Principals'),
 		        		store: this.groups,
-		        		valueField: 'role_id',
-		        		displayField: 'role_name',
+		        		valueField: 'id',
+		        		displayField: 'name',
 		        		disabled: true,
 		        		msgTarget: 'side'
 		        	}]

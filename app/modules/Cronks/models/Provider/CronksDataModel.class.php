@@ -484,7 +484,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
     private function cronkBuildRoleDepencies(Cronk $cronk, $roles) {
 
-        $parr = array($this->user->NsmPrincipal->principal_id);
+        $parr = array($this->user->principal->principal_id);
 
         $rarr = AppKitArrayUtil::trimSplit($roles, ',');
 
@@ -575,7 +575,15 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
             $cronk->CronkPrincipalCronk->delete();
             $cronk->save();
             Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
-
+            
+            // bad but helps doctrine to work
+            // with oracle ;-)
+            try {
+                $cronk->CronkPrincipalCronk->delete();
+            } catch (Exception $e) {
+                // BYPASS
+            }
+            
             $cronk->delete();
 
             return true;
