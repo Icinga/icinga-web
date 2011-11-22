@@ -83,7 +83,7 @@
                     <port>22</port>
                     <auth>
                         <type>password</type>
-                        <user>jmosshammer</user>
+                        <user>testuser</user>
                         <password>test</password>
                     </auth>
                 </ssh-config> 
