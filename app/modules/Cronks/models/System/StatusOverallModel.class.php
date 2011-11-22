@@ -53,7 +53,6 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         $out = array(
 
         );
-
         foreach($data as $index=>$currentStateSummary) {
             
             if (isset($currentStateSummary[$state_field]) && isset($currentStateSummary[$count_field])) {
@@ -99,7 +98,11 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
 
         foreach($states as $sid=>$sname) {
             $count = 0;
-
+            $entry = array(
+                self::IDX_NO_PROBLEM => 0,
+                self::IDX_OPEN_PROBLEM => 0,
+                self::IDX_SUM => 0
+            );
             if (array_key_exists($sid, $data)) {
                 $entry = $data[$sid];
             }
