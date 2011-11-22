@@ -65,6 +65,7 @@
 				<filter>
 					<parameter name="field">HOST_CHECK_TYPE</parameter>
 					<parameter name="value">0</parameter>
+                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
 				</filter>
 			</filters>
 		</datasource>
@@ -78,6 +79,7 @@
 				<filter>
 					<parameter name="field">SERVICE_CHECK_TYPE</parameter>
 					<parameter name="value">0</parameter>
+                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
 				</filter>
 			</filters>
 		</datasource>
@@ -91,6 +93,7 @@
 				<filter>
                     <parameter name="field">HOST_CHECK_TYPE</parameter>
 					<parameter name="value">1</parameter>
+                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
 				</filter>
 			</filters>
 		</datasource>
@@ -104,6 +107,7 @@
 				<filter>
 					<parameter name="field">SERVICE_CHECK_TYPE</parameter>
 					<parameter name="value">1</parameter>
+                    <parameter name="match">IcingaApiConstants::MATCH_EXACT</parameter>
 				</filter>
 			</filters>
 		</datasource>
