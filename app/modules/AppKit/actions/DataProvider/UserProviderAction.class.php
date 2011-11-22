@@ -59,11 +59,11 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
 
 
         $userObject["principals"] = array();
-        $targets = $user->getTargets();
+        $targets = $user->getTargets(null,true);
 
         foreach($targets as $t) {
-            if($t->target_type != "icinga")
-                continue;
+            //if($t->target_type != "icinga")
+            //    continue;
             $userObject["principals"][] = array(
                 "target" => $t->toArray(),
                 "values" => $user->getTargetValues($t->target_name)->toArray()

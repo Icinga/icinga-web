@@ -325,6 +325,14 @@ class NsmUser extends BaseNsmUser {
         return $this->principals_list;
     }
 
+    public function getUserPrincipalsList() {
+        return array_keys(Doctrine_Query::create()
+            ->select('p.*')
+            ->from('NsmPrincipal p INDEXBY p.principal_id')
+            ->orWhere('p.principal_user_id = ?',$this->user_id)
+            ->execute()->toArray());
+    }
+
     private function getRoleIds() {
         $ids = array();
         foreach($this->NsmRole as $role) {
@@ -343,7 +351,7 @@ class NsmUser extends BaseNsmUser {
      * user
      * @return Doctrine_Collection
      */
-    public function getPrincipals() {
+    public function getPrincipals($userOnly= false) {
 
         if ($this->principals === null) {
             $roles = $this->getRoleIds();
@@ -376,23 +384,25 @@ class NsmUser extends BaseNsmUser {
      * @param string $type
      * @return Doctrine_Collection
      */
-    public function getTargets($type=null) {
+    public function getTargets($type=null,$userOnly = false) {
 
-        return $this->getTargetsQuery($type)->execute();
+        return $this->getTargetsQuery($type,$userOnly)->execute();
     }
 
     /**
+     *
      * Returns a DQL providing the user targets
      * @param string $type
      * @return Doctrine_Query
      */
-    protected function getTargetsQuery($type=null) {
+    protected function getTargetsQuery($type=null,$userOnly = false) {
+        $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
         $q = Doctrine_Query::create()
              ->select('t.*')
              ->distinct(true)
              ->from('NsmTarget t INDEXBY t.target_id')
              ->innerJoin('t.NsmPrincipalTarget pt')
-             ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList());
+             ->andWhereIn('pt.pt_principal_id', $principals);
 
         if ($type !== null) {
             $q->andWhere('t.target_type=?', array($type));
