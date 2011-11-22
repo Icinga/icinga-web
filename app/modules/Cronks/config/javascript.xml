@@ -49,7 +49,8 @@
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaGridFilterHandler.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaCommandHandler.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/StatusMapColumnRenderer.js</ae:parameter>
-			<ae:parameter>%core.module_dir%/Cronks/lib/js/JitStatusMap.js</ae:parameter>
+			<ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusMap/RGraph.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusMap/Cronk.js</ae:parameter>
 			<ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
 			
 			<!-- Tackle view components -->
