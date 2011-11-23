@@ -127,6 +127,7 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         $records = IcingaDoctrine_Query::create()
         ->select('c.varname, c.varvalue')
         ->from('IcingaCustomvariables c')
+        ->appendCustomvarFilter()
         ->andWhere('c.object_id=?', array($objectId));
         
         return $records->execute(null, Doctrine::HYDRATE_ARRAY);

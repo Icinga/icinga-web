@@ -230,7 +230,48 @@ class IcingaDoctrine_Query extends Doctrine_Query {
                 $this->checkForAlias($dql,array($this->mainAlias));
             }
         }
-
+    }
+    
+    /**
+     * Tries to find the alias name used in the query
+     * @todo Search over joins too
+     * @param string $componentName
+     * @return string
+     */
+    protected function findAliasByComponent($componentName) {
+        $alias = null;
+        
+        foreach ($this->_dqlParts['from'] as $from) {
+            if (!(strstr($from, $componentName)!==false)) {
+                $alias = $from;
+            }
+        }
+        
+        if ($alias) {
+            $arry = explode(' ', $alias);
+            return $arry[1];
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Appends a custom variable filter to doctrine query
+     * @param string $alias
+     * @return IcingaDoctrine_Query
+     */
+    public function appendCustomvarFilter($alias=null) {
+        if ($alias === null) {
+            $alias = $this->findAliasByComponent('IcingaCustomVars');
+        }
+        
+        if ($alias) {
+            $exclude = AgaviConfig::get('modules.api.exclude_customvars');
+            if (is_array($exclude) && count($exclude)) {
+                $this->andWhereNotIn($alias. '.varname', $exclude);
+            }
+        }
+        return $this;
     }
 
 

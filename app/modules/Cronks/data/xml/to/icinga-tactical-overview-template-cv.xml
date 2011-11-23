@@ -15,17 +15,6 @@
 		data sources 
 	-->
 	<datasources>
-		<datasource id="cv_name">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_CUSTOMVARIABLE</target>
-			<columns>CUSTOMVARIABLE_NAME</columns>
-		</datasource>
-
-		<datasource id="cv_val">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_CUSTOMVARIABLE</target>
-			<columns>CUSTOMVARIABLE_VALUE</columns>
-		</datasource>
 	</datasources>
 	
 	
@@ -34,28 +23,28 @@
     	html template
     -->
     <template_code>
-		<cv_aggregate>
-			<![CDATA[
-				<?php
-					$data = $t->ds2Array('cv_val', array(array(
-						'CUSTOMVARIABLE_NAME', $CUSTOMVARIABLE_NAME
-					)));
-
-					foreach ($data as $row) {
-						echo $t->renderSub('icinga-tactical-overview-groupstat', 'customvariable', array(
-							'CUSTOMVARIABLE_NAME' => $CUSTOMVARIABLE_NAME,
-							'CUSTOMVARIABLE_VALUE' => $row['CUSTOMVARIABLE_VALUE']
-						));
-					}
-				?>
-			]]>
-		</cv_aggregate>
-
     	<MAIN>
 	    	<![CDATA[
 				<h3>TO: Howto organize by customvariables</h3>
 				<div style="padding: 5px 5px;">
-				<?php echo $t->ds2Template('cv_name', 'cv_aggregate', '__xcount')?>
+                <?php 
+                
+                    $records = IcingaDoctrine_Query::create()
+                    ->from('IcingaCustomvariables c')
+                    ->distinct(true)
+                    ->select('c.customvariable_id, c.varname, c.varvalue')
+                    ->orderBy('c.varname ASC')
+                    ->andWhereNotIn('c.varname', array('PASSWORD'))
+                    ->execute();
+                    
+                    foreach ($records as $record) {
+                        echo $t->renderSub('icinga-tactical-overview-groupstat', 'customvariable', array(
+                            'CUSTOMVARIABLE_NAME' => $record->varname,
+                            'CUSTOMVARIABLE_VALUE' => $record->varvalue
+                        ));
+                    }
+                
+                ?>
 				</div>
 			]]>
 		</MAIN>
