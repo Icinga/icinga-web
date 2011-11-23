@@ -20,7 +20,14 @@ AppKit.Admin.RoleEditForm = function(cfg) {
             'id',
             'name',
             'description',
-            {name: 'disabled', type:'boolean'},
+            {
+                name: 'disabled',
+                type:'boolean',
+                mapping: 'active',
+                convert: function(v) {
+                    return !v;
+                }
+            },
             'modified',
             'created',
             'users',
