@@ -59,7 +59,8 @@ Cronk.grid.CommentColumnRenderer = new (function () {
         Ext.Ajax.request({
             url: AppKit.c.path+"/web/api/json",
             params: {
-                target: 'comment',
+                target: 'servicecomment',
+                
                 filters_json: Ext.encode(buildIdFilter(field,ids)),
                 "columns[0]": field
             }, 

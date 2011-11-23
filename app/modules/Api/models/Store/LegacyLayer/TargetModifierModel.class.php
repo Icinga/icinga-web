@@ -791,13 +791,14 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
             case IcingaApiConstants::TARGET_COMMENT:
                 $this->mainAlias = "co";
+                $this->setDistinct(false);
                 $this->aliasDefs = array(
                                        "i"   => array("src" => "co", "relation" => "instance"),
-                                       "s" => array("src" => "co", "relation" => "service"),
-                                       "h" => array("src" => "co", "relation" => "host"),
+                                       "s" => array("src" => "co", "relation" => "service","type"=>"left"),
+                                       "h" => array("src" => "co", "relation" => "host","type"=>"left"),
                                        "sh" => array("src" => "s", "relation" => "object"),
-                                       "oh" => array("src" => "h", "relation" => "object"),
-                                       "os" => array("src" => "s", "relation" => "object"),
+                                       "oh" => array("src" => "h", "relation" => "object","type"=>"left"),
+                                       "os" => array("src" => "s", "relation" => "object","type"=>"left"),
                                        "hs" => array("src" => "h", "relation" => "status"),
                                        "ss" => array("src" => "s", "relation" => "status"),
                                        "cg" => array("src" => "h", "relation" => "contactgroups"),
@@ -805,6 +806,46 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "oc"  => array("src" => "cgm","relation" => "object"),
                                        "ocg"  => array("src" => "cg","relation" => "object")
                                    );
+                $this->setTarget("IcingaComments");
+                break;
+
+            case IcingaApiConstants::TARGET_HOST_COMMENT:
+                $this->mainAlias = "co";
+                $this->setDistinct(false);
+                $this->aliasDefs = array(
+                                       "i"   => array("src" => "co", "relation" => "instance"),
+                                       "h" => array("src" => "co", "relation" => "host","type"=>"inner", "alwaysJoin" => true),
+                                       "s" => array("src" => "h", "relation" => "service","type"=>"left"),
+                                       "sh" => array("src" => "s", "relation" => "object"),
+                                       "oh" => array("src" => "h", "relation" => "object","type"=>"left"),
+                                       "os" => array("src" => "s", "relation" => "object","type"=>"left"),
+                                       "hs" => array("src" => "h", "relation" => "status"),
+                                       "ss" => array("src" => "s", "relation" => "status"),
+                                       "cg" => array("src" => "h", "relation" => "contactgroups"),
+                                       "cgm" => array("src"=> "cg", "relation" => "members"),
+                                       "oc"  => array("src" => "cgm","relation" => "object"),
+                                       "ocg"  => array("src" => "cg","relation" => "object")
+                                   );
+                $this->setTarget("IcingaComments");
+                break;
+
+            case IcingaApiConstants::TARGET_SERVICE_COMMENT:
+                $this->mainAlias = "co";
+                $this->setDistinct(false);
+                $this->aliasDefs = array(
+                           "i"   => array("src" => "co", "relation" => "instance"),
+                           "s" => array("src" => "co", "relation" => "service","type"=>"inner", "alwaysJoin"=>true),
+                           "h" => array("src" => "s", "relation" => "host","type"=>"left"),
+                           "sh" => array("src" => "s", "relation" => "object"),
+                           "oh" => array("src" => "h", "relation" => "object","type"=>"left"),
+                           "os" => array("src" => "s", "relation" => "object","type"=>"left"),
+                           "hs" => array("src" => "h", "relation" => "status"),
+                           "ss" => array("src" => "s", "relation" => "status"),
+                           "cg" => array("src" => "h", "relation" => "contactgroups"),
+                           "cgm" => array("src"=> "cg", "relation" => "members"),
+                           "oc"  => array("src" => "cgm","relation" => "object"),
+                           "ocg"  => array("src" => "cg","relation" => "object")
+                       );
                 $this->setTarget("IcingaComments");
                 break;
 
@@ -1076,12 +1117,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
       "os" => array("src" => "s", "relation" => "object"),
       "ss" => array("src" => "s","relation" => "status"),
       "oh" => array("src" => "h","relation" => "object"),
-      "sg" => array("src" => "s","relation" => "servicegroups"),
-      "sgm" => array("src" => "sg", "relation" => "members"),
-      "osg" => array("src" => "sg", "relation" => "object"),
-      "hg"  => array("src" => "h", "relation" => "hostgroups"),
-      "hgm" => array("src" => "h","relation" => "members"),
-      "ohg" => array("src" => "hg","relation" => "object"),
+      "sg" => array("src" => "s","relation" => "servicegroups", "type" => "left"),
+      "sgm" => array("src" => "sg", "relation" => "members", "type" => "left"),
+      "osg" => array("src" => "sg", "relation" => "object", "type" => "left"),
+      "hg"  => array("src" => "h", "relation" => "hostgroups", "type" => "left"),
+      "hgm" => array("src" => "h","relation" => "members", "type" => "left"),
+      "ohg" => array("src" => "hg","relation" => "object", "type" => "left"),
 
       "hs"  => array("src" => "h", "relation" => "status"),
       "cvss"=> array("src" => "s","relation" => "customvariablestatus"),

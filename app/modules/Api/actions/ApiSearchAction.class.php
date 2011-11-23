@@ -39,6 +39,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
                                         "notifications" => array("NOTIFICATION_ID","NOTIFICATION_TYPE","NOTIFICATION_REASON","NOTIFICATION_STARTTIME","NOTIFICATION_ENDTIME","NOTIFICATION_OUTPUT","NOTIFICATION_OBJECT_ID","NOTIFICATION_OBJECTTYPE_ID"),
                                         "hostgroup_summary" => array('HOSTGROUP_SUMMARY_COUNT',"HOSTGROUP_ID","HOSTGROUP_OBJECT_ID","HOSTGROUP_NAME"),
                                         "comment" => array('SERVICEGROUP_SUMMARY_COUNT',"SERVICEGROUP_ID","SERVICEGROUP_OBJECT_ID","SERVICEGROUP_NAME"),
+                                        "servicecomment" => array('SERVICE_NAME',"SERVICE_ID","COMMENT_ID","COMMENT_DATA"),
+                                        "hostcomment" => array('HOST_NAME',"HOST_ID","COMMENT_ID","COMMENT_DATA"),
                                         "host_service" => array('HOST_NAME',"SERVICE_NAME")
                                     );
 

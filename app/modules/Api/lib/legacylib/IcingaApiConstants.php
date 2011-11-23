@@ -58,6 +58,8 @@ interface IcingaApiConstants {
     const TARGET_DOWNTIME = 'downtime';
     const TARGET_DOWNTIMEHISTORY = 'downtimehistory';
     const TARGET_COMMENT = 'comment';
+    const TARGET_HOST_COMMENT = 'hostcomment';
+    const TARGET_SERVICE_COMMENT = 'servicecomment';
     const TARGET_STATUS = 'status';		// livestatus only
     const TARGET_HOST_SERVICE = 'host_service';
     // SEARCH TYPES

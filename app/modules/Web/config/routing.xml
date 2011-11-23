@@ -54,7 +54,7 @@
 						<route name=".target" stop="false" pattern="target=(target:[^/]*)" />
 					</route>
 					<route name=".target" stop="false"
-						pattern="^/(target:instance|host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|status|host_service)/">
+						pattern="^/(target:instance|host|service|hostgroup|servicegroup|customvariable|contact|contactgroup|timeperiod|hoststatus|servicestatus|hosttimes|servicetimes|config|program|log|host_status_summary|service_status_summary|host_status_history|service_status_history|host_parents|notifications|hostgroup_summary|servicegroup_summary|command|downtime|comment|hostcomment|servicecomment|status|host_service)/">
 						<!-- Filter will be split by AppKitUrlFilterValidator -->
 						<route name=".authkey" stop="false" pattern="authkey=(authkey:[^/]*)" />
 						<route name=".filter" stop="false" pattern="filter[(filter:.*)]" />
