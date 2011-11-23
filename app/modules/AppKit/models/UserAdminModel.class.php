@@ -159,8 +159,8 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
         }
 
         // Checking the principal
-        if (!$user ->principals->principal_id) {
-            $user ->principals->principal_type = NsmPrincipal::TYPE_ROLE;
+        if (!$user ->principal->principal_id) {
+            $user ->principal->principal_type = NsmPrincipal::TYPE_ROLE;
         }
 
         // Save the record

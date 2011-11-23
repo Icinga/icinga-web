@@ -220,7 +220,8 @@ Ext.ns("AppKit.Admin");
                                     b.setIconClass('icinga-icon-disk');
                                     b.setText(_("Save"));
                                     b.setDisabled(false);
-                                    userList.load({params: {start:0,limit:25}})
+                                    userList.load({params: {start:0,limit:25}});
+                                    
                                 },
                                 function() {
                                     Ext.getCmp('progressbar-field').setValue(

@@ -148,7 +148,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             $useradmin->updateUserroles($user, $rd->getParameter('userroles', array()));
 
             $padmin->updatePrincipalValueData(
-                $user->principals,
+                $user->principal,
                 $rd->getParameter('principal_target', array()),
                 $rd->getParameter('principal_value', array())
             );
@@ -158,7 +158,7 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
             try {
                 Doctrine_Manager::connection()->rollback();
             } catch (Doctrine_Transaction_Exception $e) {}
-
+            print_r($e->getTraceAsString());
             $this->setAttribute("error",$e->getMessage());
 
         }

@@ -96,7 +96,8 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                     handler:  function(b) {
                         b.setIconClass('icinga-icon-throbber');
                         b.setText(_("Saving role"));
-                        b.setDisabled(true);
+                        b.setDisabled(false);
+                        var _this = this;
                         AppKit.Admin.RoleEditForm.saveRole(
                             cfg.roleProviderURI,
                             function() {
@@ -106,7 +107,8 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                                 b.setIconClass('icinga-icon-disk');
                                 b.setText(_("Save"));
                                 b.setDisabled(false);
-                                this.roleList.load({params: {start:0,limit:25}})
+                                _this.roleList.load({params: {start:0,limit:25}});
+                                Ext.getCmp('roleEditor').setDisabled(true);
                             },
                             function() {
                                 Ext.getCmp('progressbar-field').setValue(
