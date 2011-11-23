@@ -32,6 +32,22 @@
 					</errors>
 		</validator>
 
+		<validator class="string" name="serviceLatencyWarningThreshold" required="false">
+					<argument>serviceLatencyWarningThreshold</argument>
+
+					<errors>
+						<error>Validation of serviceLatencyWarningThreshold failed!</error>
+					</errors>
+		</validator>
+
+		<validator class="string" name="hostLatencyWarningThreshold" required="false">
+					<argument>hostLatencyWarningThreshold</argument>
+
+					<errors>
+						<error>Validation of hostLatencyWarningThreshold failed!</error>
+					</errors>
+		</validator>
+	
 		</validators>
 		
 	</ae:configuration>

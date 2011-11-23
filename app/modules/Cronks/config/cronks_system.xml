@@ -31,6 +31,9 @@
 				<ae:parameter name="name">Display monitor performance data</ae:parameter>
 				<ae:parameter name="categories">core</ae:parameter>
 				<ae:parameter name="ae:parameter">
+					<ae:parameter name="serviceLatencyWarningThreshold">10.00</ae:parameter>
+					<ae:parameter name="hostLatencyWarningThreshold">10.00</ae:parameter>
+					
 				</ae:parameter>
 			</cronk>
 	

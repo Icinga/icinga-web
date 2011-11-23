@@ -1,89 +1,97 @@
 <script type="text/javascript">
+
 Cronk.util.initEnvironment("<?php echo $rd->getParameter('parentid'); ?>", function() {
-	
-	var ds = new Ext.data.JsonStore({
-		url: '<?php echo $ro->gen('modules.cronks.monitorPerformance.json') ?>',
-		storeId: 'overall-status-store'
-	});
 
+    var ds = new Ext.data.JsonStore({
+        url: '<?php echo $ro->gen('modules.cronks.monitorPerformance.json') ?>',
+        storeId: 'overall-status-store'
+    });
+    var hostThreshold = <?php echo $rd->getParameter('hostLatencyWarningThreshold',10000);?>;
+    var serviceThreshold = <?php echo $rd->getParameter('serviceLatencyWarningThreshold',10000);?>;
 
-	
-	var interval = <?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>;
-	
-	var monitorPerformanceRefreshTask = {
-		run: function() { ds.reload(); },
-		interval: (1000*interval)
-	}
+    var interval = <?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>;
+
+    var monitorPerformanceRefreshTask = {
+        run: function() { ds.reload(); },
+        interval: (1000*interval)
+    }
     
-	AppKit.getTr().start(monitorPerformanceRefreshTask);
-	
-	var mTpl = new Ext.XTemplate(
-			'<tpl for=".">',
-			
-			'<div class="float-container clearfix icinga-monitor-performance">',
-			
-			'<div class="icinga-monitor-performance-container-50">',
-			
-				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Hosts (active/passive/disabled)') + '" class="key icinga-icon-host"></div>',
-					'<div class="value">{NUM_ACTIVE_HOST_CHECKS} / {NUM_PASSIVE_HOST_CHECKS} / {NUM_DISABLED_HOST_CHECKS}</div>',
-				'</div>',
-			
-				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Host execution time (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
-					'<div class="value">{HOST_EXECUTION_TIME_MIN} / {HOST_EXECUTION_TIME_AVG} / {HOST_EXECUTION_TIME_MAX}</div>',
-				'</div>',
-				
-				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Host latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
-					'<div class="value">{HOST_LATENCY_MIN} / {HOST_LATENCY_AVG} / {HOST_LATENCY_MAX}</div>',
-				'</div>',
-			
-			'</div>',
-			
-			'<div class="icinga-monitor-performance-container-50">',
-			
-				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Services (active/passive/disabled)') + '" class="key icinga-icon-service"></div>',
-					'<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS} /  {NUM_DISABLED_SERVICE_CHECKS}</div>',
-				'</div>',
-				
-				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Service execution (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
-					'<div class="value">{SERVICE_EXECUTION_TIME_MIN} / {SERVICE_EXECUTION_TIME_AVG} / {SERVICE_EXECUTION_TIME_MAX}</div>',
-				'</div>',
-				
-				'<div class="clearfix icinga-monitor-performance-container">',
-					'<div title="' + _('Service latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
-					'<div class="value">{SERVICE_LATENCY_MIN} / {SERVICE_LATENCY_AVG} / {SERVICE_LATENCY_MAX}</div>',
-				'</div>',
-				
-			'</div>',
-			
-			'</div>',
-			
-			'</tpl>'
-		);
-	
-	this.add({
-		xtype: 'dataview',
-		store: ds,
-		tpl: mTpl,
-		itemSelector:'div.icinga-monitor-performance-container',
+    AppKit.getTr().start(monitorPerformanceRefreshTask);
+
+
+    var mTpl = new Ext.XTemplate(
+            '<tpl for=".">',
+
+            '<div class="float-container clearfix icinga-monitor-performance">',
+
+            '<div class="icinga-monitor-performance-container-50">',
+
+                '<div class="clearfix icinga-monitor-performance-container">',
+                    '<div title="' + _('Hosts (active/passive/disabled)') + '" class="key icinga-icon-host"></div>',
+                    '<div class="value">{NUM_ACTIVE_HOST_CHECKS} / {NUM_PASSIVE_HOST_CHECKS} / {NUM_DISABLED_HOST_CHECKS}</div>',
+                '</div>',
+
+                '<div class="clearfix icinga-monitor-performance-container">',
+                    '<div title="' + _('Host execution time (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
+                    '<div class="value">{HOST_EXECUTION_TIME_MIN} / {HOST_EXECUTION_TIME_AVG} / {HOST_EXECUTION_TIME_MAX}</div>',
+                '</div>',
+
+                '<div class="clearfix icinga-monitor-performance-container">',
+                    '<div title="' + _('Host latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
+                    '<div class="value">{HOST_LATENCY_MIN} / ',
+                    '<tpl if="HOST_LATENCY_AVG &gt; '+hostThreshold+'"><span style="color:red" qtip="Threshold reached"> {HOST_LATENCY_AVG} </span></tpl>',
+                    '<tpl if="HOST_LATENCY_AVG &lt;= '+hostThreshold+'">{HOST_LATENCY_AVG} </tpl>',
+                    ' / {HOST_LATENCY_MAX}</div>',
+                '</div>',
+
+            '</div>',
+
+            '<div class="icinga-monitor-performance-container-50">',
+
+                '<div class="clearfix icinga-monitor-performance-container">',
+                    '<div title="' + _('Services (active/passive/disabled)') + '" class="key icinga-icon-service"></div>',
+                    '<div class="value">{NUM_ACTIVE_SERVICE_CHECKS} / {NUM_PASSIVE_SERVICE_CHECKS} /  {NUM_DISABLED_SERVICE_CHECKS}</div>',
+                '</div>',
+
+                '<div class="clearfix icinga-monitor-performance-container">',
+                    '<div title="' + _('Service execution (min/avg/max)') + '" class="key icinga-icon-execution-time"></div>',
+                    '<div class="value">{SERVICE_EXECUTION_TIME_MIN} / {SERVICE_EXECUTION_TIME_AVG} / {SERVICE_EXECUTION_TIME_MAX}</div>',
+                '</div>',
+
+                '<div class="clearfix icinga-monitor-performance-container">',
+                    '<div title="' + _('Service latency (min/avg/max)') + '" class="key icinga-icon-latency"></div>',
+                    '<div class="value">{SERVICE_LATENCY_MIN} / ',
+                    '<tpl if="SERVICE_LATENCY_AVG &gt; '+serviceThreshold+'"><span style="color:red" qtip="Threshold reached"> {SERVICE_LATENCY_AVG} </span></tpl>',
+                    '<tpl if="SERVICE_LATENCY_AVG &lt;= '+serviceThreshold+'">{SERVICE_LATENCY_AVG} </tpl>',
+                    ' / {SERVICE_LATENCY_MAX}</div>',
+                '</div>',
+
+            '</div>',
+
+            '</div>',
+
+            '</tpl>'
+        );
+
+    this.add({
+        xtype: 'dataview',
+        store: ds,
+        tpl: mTpl,
+        itemSelector:'div.icinga-monitor-performance-container',
         emptyText: 'Error',
         prepareData : function(data, recordIndex, record) {
-        	Ext.iterate(data, function(k, v) {
-        		v = String(v).replace(/,/, '.');
-        		if (k.indexOf('NUM_') === 0) {
-        			data[k] = Ext.util.Format.number(v, '0');
-        		} else if (k.indexOf('.') >>> -1) {
-        			data[k] = Ext.util.Format.number(v, '0.00');
-        		}
-        	}, this);
-        	return data;
+            Ext.iterate(data, function(k, v) {
+                v = String(v).replace(/,/, '.');
+                if (k.indexOf('NUM_') === 0) {
+                    data[k] = Ext.util.Format.number(v, '0');
+                } else if (k.indexOf('.') >>> -1) {
+                    data[k] = Ext.util.Format.number(v, '0.00');
+                }
+            }, this);
+            return data;
         }
-	});
-	
-	this.doLayout();	
+    });
+
+    this.doLayout();
 });
 </script>

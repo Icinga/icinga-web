@@ -36,12 +36,13 @@ AppKit.Admin.RoleEditForm = function(cfg) {
         newRole: function() {
             Ext.iterate(this.fields.keys,function(key) {
                 var field = Ext.getCmp("form_role_"+key);
-                if(!field)
+                if(!field) {
                     return;
+                }
                 field.setValue("");
             },this);
             Ext.getCmp("form_role_id").setValue('new');
-            roleUserStore.removeAll()
+            roleUserStore.removeAll();
             credentialView.selectValues([]);
             hostgroupPrincipalsView.selectValues([]);
             servicegroupPrincipalsView.selectValues([]);
@@ -112,13 +113,13 @@ AppKit.Admin.RoleEditForm = function(cfg) {
         store: roleHostgroupPrincipalStore,
         type: 'role',
         target: 'hostgroup'
-    })
+    });
     
     var servicegroupPrincipalsView = new AppKit.Admin.Components.GroupRestrictionView({
         store: roleServicegroupPrincipalStore,
         type: 'role',
         target: 'servicegroup'
-    })
+    });
     var usersView = new AppKit.Admin.Components.UserSelectionGrid({
         store: roleUserStore,
         userProviderURI: cfg.userProviderURI
@@ -143,13 +144,13 @@ AppKit.Admin.RoleEditForm = function(cfg) {
      * @param String  The url that provides role lookup 
      */
     AppKit.Admin.RoleEditForm.bindRole = function(id,url) {
-        if(id != 'new') {
+        if(id !== 'new') {
             roleStore.proxy.setUrl(url+"/id="+id);
             roleStore.load();
         } else {
             roleStore.newRole();
         }
-    }
+    };
     
     /**
      * Saves the current bound role (or new role)
@@ -159,13 +160,13 @@ AppKit.Admin.RoleEditForm = function(cfg) {
      */
     AppKit.Admin.RoleEditForm.saveRole = function(url,success,fail) {
         roleStore.proxy.setUrl(url+"/create?dc="+parseInt(Math.random()*10000,10));
-        var params = {}
+        var params = {};
         
         var i=0;
         roleUserStore.each(function(user) {
             params["role_users["+(i++)+"]"] = user.get("id");
         });
-        var i=0;
+        i=0;
         roleHostgroupPrincipalStore.each(function(p) {
             params["principal_target["+i+"][name][]"] = "IcingaHostgroup";
             params["principal_value["+i+"][hostgroup][]"] = p.get("hostgroup"); 
@@ -179,9 +180,9 @@ AppKit.Admin.RoleEditForm = function(cfg) {
             i++;
         });
         roleCustomvarPrincipalStore.each(function(p) {
-            if(p.get("target") == "host")
+            if(p.get("target") === "host")
                 params["principal_target["+i+"][name][]"] = "IcingaHostCustomVariablePair";
-            else if(p.get("target") == "service")
+            else if(p.get("target") === "service")
                 params["principal_target["+i+"][name][]"] = "IcingaServiceCustomVariablePair";
             else 
                 return;
@@ -202,6 +203,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
             params["principal_target["+i+"][set][]"] = 1;
             params["principal_target["+i+"][name][]"] = flag.principal;
             i++;
+            return true;
         });
         
         var paramMap = {
@@ -209,12 +211,12 @@ AppKit.Admin.RoleEditForm = function(cfg) {
             role_name: 'form_role_name',
             role_description: 'form_role_description',
             role_disabled: 'form_role_disabled'
-        }
+        };
         for(var id in paramMap) {
             var cmp = Ext.getCmp(paramMap[id]);
             if(cmp.isValid()) 
                 if(cmp.getValue()) // don't write empty fields 
-                    params[id] = cmp.getValue()
+                    params[id] = cmp.getValue();
                 else continue;
             else return fail(arguments);
         }
@@ -227,7 +229,8 @@ AppKit.Admin.RoleEditForm = function(cfg) {
         if(params.role_disabled)
             params.role_disabled = 1;
         roleStore.load({params: params});
-    }
+        
+    };
     
     /**
      * Return form definition
@@ -290,7 +293,6 @@ AppKit.Admin.RoleEditForm = function(cfg) {
         },{
             xtype: 'tabpanel',
             activeTab: 0,
-            height:300,
             enableTabScroll: true,
             items: [
                 credentialView,
@@ -311,6 +313,6 @@ AppKit.Admin.RoleEditForm = function(cfg) {
             autScroll:true,
             height:400
         }
-    ]
+    ];
 
-}
+};

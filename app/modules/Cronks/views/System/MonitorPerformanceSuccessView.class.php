@@ -3,6 +3,7 @@
 class Cronks_System_MonitorPerformanceSuccessView extends CronksBaseView {
 
     public function executeHtml(AgaviRequestDataHolder $rd) {
+   
         $this->setupHtml($rd);
         $this->setAttribute('_title', 'System.MonitorPerformance');
     }

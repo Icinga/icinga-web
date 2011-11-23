@@ -26,13 +26,13 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                 'description',
                 {name: 'active', type:'boolean'},
                 {name: 'disabled_icon',type:'boolean' , mapping:'active', convert: function(v) {
-                    return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v==0? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
+                    return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v===0? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
                 }},
                 {name: 'created'},
                 {name: 'modified'},
                 {name: 'parent'}
             ]
-        })
+        });
     },
 
     constructor: function(cfg) {
@@ -61,13 +61,13 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
 
                 items: [
                     grid,
-                    new AppKit.Admin.Components.RoleInheritanceView(Ext.apply(cfg),{grid:grid,store: this.roleList}),
+                    new AppKit.Admin.Components.RoleInheritanceView(Ext.apply(cfg),{grid:grid,store: this.roleList})
 
                 ],
                 autoScroll:true,
                 listeners: {
                     render: function() {
-                        this.roleList.load({params: {start:0,limit:25}})
+                        this.roleList.load({params: {start:0,limit:25}});
                     },
                     scope:this
                 }
