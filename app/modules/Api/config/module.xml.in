@@ -21,8 +21,17 @@
                 </xi:include>
             </setting>
 
-    		<setting name="agavi.include.javascript">
+            <!--
+                Excluding customvars from queries system wide. So you
+                can hide passwords and other system related information
+                from the users
+            -->
+            <setting name="exclude_customvars">
+                <!-- <ae:parameter>PASSWORD</ae:parameter> -->
+                <!-- <ae:parameter>DN</ae:parameter> -->
+            </setting>
 
+    		<setting name="agavi.include.javascript">
     		    <ae:parameter>%core.module_dir%/Api/config/javascript.xml</ae:parameter>
     		</setting>		
 
