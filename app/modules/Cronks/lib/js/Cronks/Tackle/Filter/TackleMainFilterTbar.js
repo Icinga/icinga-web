@@ -15,14 +15,18 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
             filterUpdateTask.delay(200,null);
         };
         Ext.Toolbar.prototype.constructor.call(this,{
-            items: this.createTbar(config)
+            items: this.createTbar(config),
+            autoDestroy: true
         });
-
+        
+        this.on("destroy", this.stopAutoRefresh.createCallback(true), this);
+        this.on("show", this.startAutoRefresh, this);
     },
+
     startAutoRefresh: function() {
         if(this.arTask)
             return;
-       this.autoRefreshEnabled = false;
+       this.autoRefreshEnabled = true;
        this.arTask = new Ext.util.TaskRunner();
        this.arTask.start({
             run: this.updateFilterImpl,
@@ -30,24 +34,34 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
             scope:this
         });
     },
-    stopAutoRefresh: function() {
+    stopAutoRefresh: function(onDestroy) {
+        // prevents restart of the autorefresh when view is destroyed before the
+        // initial delay restart delay has passed
         if(!this.arTask)
             return;
         this.autoRefreshEnabled = false;
         this.arTask.stopAll()
-        delete(this.arTask);
+        if(onDestroy)
+            this.arTask = true;
+        else
+            delete(this.arTask);
 
     },
     updateFilterImpl: function() {
-       if(!this.isVisible)
-            return;
-      
-        var jsonFilter = this.buildFilter();
-        this.store.setFilter(jsonFilter);
-        this.ownerCt.bottomToolbar.doLoad();
-        if(this.autoRefreshEnabled && !this.arTask) {
-            this.startAutoRefresh.defer(this.autoRefreshInterval,this);
-        }
+       try {
+           if(!this.isVisible())
+                return;
+
+            var jsonFilter = this.buildFilter();
+            this.store.setFilter(jsonFilter);
+
+            this.ownerCt.bottomToolbar.doLoad();
+            if(this.autoRefreshEnabled && !this.arTask) {
+                this.startAutoRefresh.defer(this.autoRefreshInterval,this);
+            }
+       } catch(e) {
+           this.stopAutoRefresh(); // prevent error madness 
+       }
     },
     getSVCFilter : function() {
         if(!Ext.getCmp('filterbuttons_filter_svc_'+this.parentId).pressed)
