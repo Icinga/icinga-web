@@ -108,6 +108,12 @@ Cronk.grid.IcingaColumnRenderer = {
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
 			if (fieldName == cfg.field) {
 				
+				if (Ext.isEmpty(cfg.booleanConditionField) == false) {
+	                if (!Cronk.grid.ColumnRendererUtil.testBooleanCondition(cfg.booleanConditionField, record)) {
+	                    return;
+	                }
+                }
+				
 				var dhelper_spec = {
 						tag: 'img',
 						src: url
@@ -151,6 +157,12 @@ Cronk.grid.IcingaColumnRenderer = {
 			
 			var fieldName = grid.getColumnModel().getDataIndex(colIndex);
 			if (fieldName == cfg.field) {
+				
+                if (Ext.isEmpty(cfg.booleanConditionField) == false) {
+                    if (!Cronk.grid.ColumnRendererUtil.testBooleanCondition(cfg.booleanConditionField, record)) {
+                        return;
+                    }
+                }
 				
 				var tabPanel = Ext.getCmp("cronk-tabs");
 				var cmp = tabPanel.add({
