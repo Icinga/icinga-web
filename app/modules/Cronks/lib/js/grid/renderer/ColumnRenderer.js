@@ -19,11 +19,18 @@ Cronk.grid.ColumnRendererUtil = function() {
 			var data = grid.getStore().getAt(index).data;
 			var tpl = new Ext.XTemplate(string);
 			return tpl.apply(data);
-		}
+		},
+		
+		testBooleanCondition : function(field, record) {
+			if (Ext.isEmpty(record.data[field]) === false) {
+				return Boolean(Ext.decode(record.data[field]));
+			}
+			
+			return false;
+	    }
 	}
 	
-	return pub;
-}();
+	return pub}();
 
 /**
  * Default column renderes
@@ -117,17 +124,24 @@ Cronk.grid.ColumnRenderer = {
 	columnImage : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			var my = cfg;	// local reference
-			Ext.apply(metaData, Cronk.grid.ColumnRendererUtil.metaDataObject(my));
 			
-			var flat_attr = metaData.attr;
-			delete metaData.attr;
+            if (Ext.isEmpty(my.booleanConditionField) == false) {
+                if (!Cronk.grid.ColumnRendererUtil.testBooleanCondition(my.booleanConditionField, record)) {
+                    return '';
+                }
+            }
+            
+            Ext.apply(metaData, Cronk.grid.ColumnRendererUtil.metaDataObject(my));
+            
+            var flat_attr = metaData.attr;
+            
+            delete metaData.attr;
 			
 			if (!('image' in my) || !my["image"]) {
 				return '';//[no image defined (attr=image)]';
-			}
-			else {
+			} else {
+				AppKit.log(my.booleanConditionField, my.image, record.data[my.booleanConditionField]);
 				var imgName = new Ext.XTemplate(my.image).apply(record.data);
-				
 				// Old version
 				// return String.format('<img src="{0}/{1}"{2} />', AppKit.c.path, imgName, (flat_attr && " " + flat_attr + " "));
 				
