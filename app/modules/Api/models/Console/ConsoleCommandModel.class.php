@@ -54,6 +54,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     }
     public function setHost($host) {
         $this->host = $host;
+        $this->expandSymbols();
     }
     public function getHost() {
         return $this->host;
@@ -95,6 +96,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     }
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
+
         if (isset($parameters["command"])) {
             $this->setCommand($parameters["command"]);
         }
@@ -174,7 +176,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     }
 
     protected function expandSymbols() {
-        
+
         $this->stdinFile(AccessConfig::expandSymbol($this->stdin,"r",$this->host));
         $this->stdoutFile(AccessConfig::expandSymbol($this->stdout,"w",$this->host));
         $this->stderrFile(AccessConfig::expandSymbol($this->stderr,"w",$this->host));
@@ -223,6 +225,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
         if (!$outFile) {
             return true;
         }
+
         if(!AccessConfig::canWrite($outFile,$this->host))
             throw new ApiRestrictedCommandException($outFile." is not write enabled");
     }

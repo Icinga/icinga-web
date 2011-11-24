@@ -33,8 +33,16 @@ final class AccessConfig {
 
     public static function getHostByName($hostname) {
         self::loadConfig();
+        if(is_array($hostname)) {
+           $hosts = array();
+           foreach($hostname as $hostEntry) {
+               if(isset(self::$config["hosts"][$hostEntry]))
+                    $hosts[$hostEntry] = self::$config["hosts"][$hostEntry];
+           }
+           return $hosts;
+        }
         if(!is_string($hostname))
-            return $hostname; 
+            return $hostname;
         if(isset(self::$config["hosts"][$hostname]))
             return self::$config["hosts"][$hostname];
         throw new ApiUnknownHostException("Unknown host ".$hostname.". You must first define it in your access.xml if you want to use it");
@@ -54,34 +62,56 @@ final class AccessConfig {
     
     public static function canRead($file,$host) {
         self::loadConfig();
-        $host = self::getHostByName($host);
-        if(isset($host["r"][$file]) || isset($host["rw"][$file]))
-            return true;
-        return (in_array($file,$host["r"]) || in_array($file,$host["rw"]) 
-            || in_array(dirname($file)."/*",$host["r"]) || in_array(dirname($file)."/*",$host["rw"]));
-    }   
+        $hosts = self::getHostByName($host);
+        if(isset($hosts["auth"]))
+            $hosts = array($hosts);
+        foreach($hosts as $host) {
+            if(isset($host["r"][$file]) || isset($host["rw"][$file]))
+                continue;
+            if(in_array($file,$host["r"]) || in_array($file,$host["rw"])
+                || in_array(dirname($file)."/*",$host["r"]) || in_array(dirname($file)."/*",$host["rw"]))
+                continue;
+            return false;
+        }
+        return true;
+    }
     
     public static function canWrite($file,$host) {
         
-        $host = self::getHostByName($host);
-        if(isset($host["w"][$file]) || isset($host["rw"][$file]))
-            return true;
-        return (in_array($file,$host["w"]) || in_array($file,$host["rw"]) 
-            || in_array(dirname($file)."/*",$host["w"]) || in_array(dirname($file)."/*",$host["rw"]));
+        $hosts = self::getHostByName($host);
+        if(isset($hosts["auth"]))
+            $hosts = array($hosts);
+        foreach($hosts as $host) {
+            if(isset($host["w"][$file]) || isset($host["rw"][$file]))
+                continue;
+            if (in_array($file,$host["w"]) || in_array($file,$host["rw"])
+                || in_array(dirname($file)."/*",$host["w"]) || in_array(dirname($file)."/*",$host["rw"]))
+                continue;
+            return false;
+        }
+        return true;
     }
 
     public static function canExecute($file,$host) {
-        $host = self::getHostByName($host);
-
-	if(isset($host["x"][$file]))
-            return true;
-        return (in_array($file,$host["x"]) || in_array(dirname($file)."/*",$host["x"]));
+        $hosts = self::getHostByName($host);
+        if(isset($hosts["auth"]))
+            $hosts = array($hosts);
+        foreach($hosts as $host) {
+            if(isset($host["x"][$file]))
+                continue;
+            if(in_array($file,$host["x"]) || in_array(dirname($file)."/*",$host["x"]))
+                continue;
+            return false;
+        }
+        return true;
     }
 
     public static function expandSymbol($file,$type,$host) {
         $host = self::getHostByName($host);
+
         if(isset($host[$type][$file]))
             return $host[$type][$file];
+
         return $file; 
     }
 

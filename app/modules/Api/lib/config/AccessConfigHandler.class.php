@@ -97,11 +97,14 @@ class AccessConfigHandler extends AgaviXmlConfigHandler {
             if($node->nodeType != XML_ELEMENT_NODE)
                 continue;
             $instance = $node->getAttribute("name");
-            $host = $node->nodeValue;
-            if(!isset($this->hosts[$host]))
-                throw new AppKitException("Instance ".$instance." is mapped to unknown host ".$host);
-        
-            $this->instances[$instance] = $host;
+            $hosts = explode(";",$node->nodeValue);
+            
+            foreach($hosts as $host) {
+                if(!isset($this->hosts[$host]))
+                    throw new AppKitException("Instance ".$instance." is mapped to unknown host ".$host);
+            }
+            $this->instances[$instance] = $hosts;
+
         }
     }
 

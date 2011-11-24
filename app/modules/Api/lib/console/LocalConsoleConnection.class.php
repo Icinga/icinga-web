@@ -5,6 +5,7 @@ class LocalConsoleConnection extends BaseConsoleConnection {
     public function exec(Api_Console_ConsoleCommandModel $cmd) {
         $cmdString = $cmd->getCommandString();
         $this->checkFileExistence($cmd);
+        
         exec($cmdString,$out,$ret);
         $cmd->setReturnCode($ret);
         $cmd->setOutput($out);
