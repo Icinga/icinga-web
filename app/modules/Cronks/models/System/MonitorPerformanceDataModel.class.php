@@ -60,7 +60,7 @@ class Cronks_System_MonitorPerformanceDataModel extends CronksBaseModel {
               IcingaApiConstants::TARGET_SERVICE,
               array('SERVICE_OBJECT_ID'),
               IcingaApiConstants::SEARCH_TYPE_COUNT,
-              array(array('SERVICE_PASSIVE_CHECKS_ENABLED', 1),array('SERVICE_ACTIVE_CHECKS_ENABLED', 0)),
+              array(array('SERVICE_PASSIVE_CHECKS_ENABLED', 0),array('SERVICE_ACTIVE_CHECKS_ENABLED', 0)),
               'NUM_DISABLED_SERVICE_CHECKS'
           )
       );
