@@ -106,7 +106,7 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
     					if (!AppKit.search.SearchHandler.getQuery()) {
     					   this.hide();
     					}
-    				},
+    				}
     			}
     		});
     		
