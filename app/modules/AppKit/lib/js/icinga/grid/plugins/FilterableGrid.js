@@ -1,19 +1,19 @@
 Ext.ns("Icinga.Grid.Plugins");
 Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
-    this.filter = {}
+    this.filter = {};
     this.target = null;
         this.nodeTpl = new Ext.XTemplate('{filter_displayName} <b>{filter_operator}</b> {filter_value}'); 
     this.descriptor = null;
     this.constructor = function(cfg) {
         this.descriptor = cfg.filter;
-    }
+    };
     
     this.init = function(grid) {
         this.target = grid;
         grid.showFilterWindow = this.showFilterWindow.createDelegate(this);
         this.extendGridStore();
         this.extendToolbar();
-    }
+    };
 
     this.extendToolbar = function() {
         var grid = this.target;
@@ -37,7 +37,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 }
             }]
         });    
-    }
+    };
     
     this.extendGridStore = function() {
         var grid = this.target;
@@ -56,7 +56,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
         }).createDelegate(this);
         store.on("filterChanged", grid.getStore().reload,grid.getStore());
         
-    }    
+    };    
     
     this.showFilterWindow = function() {
         var body = Ext.getBody();
@@ -102,9 +102,9 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 },
                 scope:this
             }]
-        })
+        });
         wnd.show(); 
-    }
+    };
    
     this.getOperatorBox = function(data) {
         var operatorArray = [];
@@ -132,7 +132,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             displayField: 'display'
         });
         return cmb; 
-    }
+    };
  
     this.getValueField = function(data) {
         var store;
@@ -149,7 +149,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
            else {
                 var vals = [];
                 for(var x=0;x<data.values.length;x++) {
-                    vals.push([x,data.values[x]])
+                    vals.push([x,data.values[x]]);
                 }
                 
                 return  new Ext.form.ComboBox({
@@ -180,7 +180,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 allowBlank: false
             });
         }
-    }   
+    };   
 
     this.showFilterDialog = function(data,targetNode,tree,replace) {
         var h = Ext.getBody().getHeight();
@@ -216,7 +216,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 layout: 'form',
                 padding: 5,
                 items: filterItems,
-                id: wndId, 
+                id: wndId 
             }), 
             buttons: [{
                 text: _('Save'),
@@ -245,7 +245,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                     } else {
                         targetNode.appendChild(node);
                     }
-                    form.ownerCt.close() 
+                    form.ownerCt.close(); 
                 },
                 scope: this
             }, {
@@ -260,7 +260,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
         if(replace) {
             Ext.getCmp(wndId).getForm().setValues(replace);
         }
-    }
+    };
     
     this.getDescriptorForNode = function(node) {
         var filterList = this.descriptor.allowedFilter;
@@ -275,7 +275,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 }
             }
         } 
-    }
+    };
 
     this.getFilterTree = function() {
         var defaultTreeRoot =  new Ext.tree.TreeNode({
@@ -319,7 +319,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                             nodeType:'node',
                             filterType: 'group',
                             leaf: false
-                        })
+                        });
                 
                     } else if(node.field && filter.type == "atom") {
                         
@@ -370,11 +370,11 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                     return {
                         type: node.attributes.text,
                         items: subFilter
-                    }
+                    };
                 } else {
                     
                     var values = node.attributes.values;
-                    return {field: values.filter_target,operator: values.filter_operator, value: values.filter_value}
+                    return {field: values.filter_target,operator: values.filter_operator, value: values.filter_value};
                 }
             },
             getTreeAsObject: function() {
@@ -473,14 +473,14 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                                 })
                             ); 
                         }
-                    },this)
+                    },this);
                 }
             }
 
         });
         
         return tree;        
-    }
+    };
 
     this.getFilterListData = function() {
         var filterList = []; 
@@ -504,7 +504,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
             }
         }
         return filterList;
-    }
+    };
 
     this.getFilterList = function() { 
         return new Ext.grid.GridPanel({    
@@ -525,8 +525,7 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                     
                     renderer: function(value, metaData) {
                         metaData.css = (value == 'group' ? 'icinga-icon-bricks' : (value == 'atom') ? 'icinga-icon-brick' : 'icinga-icon-attach');
-                        value = ''
-                        return value;
+                        return '';
                     },
                     width:16
                     
@@ -536,11 +535,11 @@ Icinga.Grid.Plugins.FilterableGrid = function(cfg) {
                 }]
             
             })
-        })
+        });
 
-    }  
+    };  
  
     this.constructor(cfg);
-}
+};
 
 

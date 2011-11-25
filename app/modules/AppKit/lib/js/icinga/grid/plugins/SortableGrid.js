@@ -11,10 +11,10 @@ Icinga.Grid.Plugins.SortableGrid = function(cfg) {
             gridCfg.canSort[descriptor.fields.sortFields[i]] = true; 
         }
         
-    }
+    };
     this.init = function(grid) {
         this.target = grid;
-    }
+    };
     this.constructor.apply(this,arguments);
 
 };

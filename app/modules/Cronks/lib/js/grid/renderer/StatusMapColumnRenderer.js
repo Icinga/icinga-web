@@ -43,4 +43,4 @@ Cronk.grid.StatusmapColumnRenderer = {
 		}
 	}
 	
-}
+};

@@ -26,7 +26,7 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.tabItems = {
                 host: {},
                 service: {}
-            }
+            };
             this.objectGrid = new Icinga.Cronks.Tackle.ObjectGrid({
                 region: 'center'
             });
@@ -76,12 +76,12 @@ Ext.ns('Icinga.Cronks.Tackle');
             this.initInternalEvents();
             this.infoTabs.on("afterrender",function() {
                 this.toggleTabView('host');
-            },this,{single: true})
+            },this,{single: true});
         },
 
         toggleTabView: function(type) {
             var show = type;
-            var hide = type === "host" ? "service" : "host"
+            var hide = type === "host" ? "service" : "hos;t"
 
             for(var i in this.tabItems[show]) {
                 this.infoTabs.unhideTabStripItem(this.tabItems[show][i]);

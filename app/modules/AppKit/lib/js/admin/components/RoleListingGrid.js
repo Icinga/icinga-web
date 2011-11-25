@@ -42,7 +42,7 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
                 params: ids
 
             });
-        },this)
+        },this);
     },
     viewConfig : {
         scrollOffset:30,

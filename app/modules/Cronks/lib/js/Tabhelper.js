@@ -6,7 +6,7 @@ Cronk.util.CronkTabHelper = function() {
 	var ctxItem = null;
 	var contextmenu = null;
 	var keyMap = null;
-}
+};
 	
 Cronk.util.CronkTabHelper = Ext.extend(Object, { 
 		

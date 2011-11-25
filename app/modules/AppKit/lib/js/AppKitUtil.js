@@ -207,7 +207,7 @@ AppKit.util.Config = (function() {
 AppKit.c = AppKit.util.Config.getMap();
 
 AppKit.util.Date = (function() {
-       var time = {}
+       var time = {};
            time.second = 1;
            time.minute = 60;
            time.hour = 3600;
@@ -233,7 +233,7 @@ AppKit.util.Date = (function() {
                     result += mm ? mm+_(" min, ") : "";
                 return (result += ss+_(" sec. ago"));
            }
-     }
+     };
 })();
 
 // Domhelper

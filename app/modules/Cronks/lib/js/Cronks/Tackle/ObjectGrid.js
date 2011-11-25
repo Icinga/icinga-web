@@ -124,7 +124,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
         var load = this.store.load;
         this.store.load = function() {
             this.store.load.defer(500);
-        }
+        };
         this.refreshLocked = true;
         (function() {
             this.store.load=load;
@@ -326,7 +326,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                                 if(!c.getEl())
                                     return;
                                 if(c.toggleState && c.toggleState == "open") {
-                                    c.getEl().setHeight(c.origHeight)
+                                    c.getEl().setHeight(c.origHeight);
                                     c.update(c.origValue);
                                     c.toggleState = "closed";
                                 } else {
@@ -340,7 +340,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                                             {tag: 'b', html: _('Long output')},
                                             {tag: 'div', html: c.baseArgs.record.get('HOST_LONG_OUTPUT')},
                                             {tag: 'b', html: _('<br/>Performance data')},
-                                            {tag: 'div', html: c.baseArgs.record.get('HOST_PERFDATA')},
+                                            {tag: 'div', html: c.baseArgs.record.get('HOST_PERFDATA')}
                                         ]
                                     });
                                     var height = Ext.util.TextMetrics.createInstance(c.getEl()).getHeight(html);
@@ -365,7 +365,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
                    
             }, {
                 dataIndex: 'HOST_ID',
-                renderer: function() {return ""},
+                renderer: function() {return ;""},
                 autoExpand:true,
                 menuDisabled: true,
                 width: 100

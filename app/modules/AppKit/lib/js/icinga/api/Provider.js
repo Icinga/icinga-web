@@ -15,15 +15,15 @@ Icinga.Api.Provider = new (function() {
         }
         return Icinga.Api[providerDesc][store];
 
-    }
+    };
 
     this.getStoreFor = function(module,provider,store,db,overrides) { 
         return storeFactory.getStoreFor.apply(storeFactory,arguments);
-    }          
+    };          
 
     this.getGridFor = function(module,provider,store,db) {
         return gridFactory.getGridFor.apply(gridFactory,arguments);
                           
-    }   
-})()
+    };   
+})();
 

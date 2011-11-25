@@ -86,7 +86,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                                     instance: record.get('INSTANCE_NAME'),
                                     host: record.get('HOST_NAME')
                                 }]
-                            }
+                            };
                             if(type == 'SERVICE') {
                                 cmd.data['service'] = record.get(type+'_NAME');
                                 cmd.targets[0]['service'] = record.get(type+'_NAME');
@@ -148,7 +148,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
         ackHandler,
         dTimeHandler,
         openProblemHandler
-    ]
+    ];
 
     Icinga.Cronks.Tackle.Renderer.StatusColumnRenderer = function (value, metaData, record, rowIndex, colIndex, store) {
         var type = record.get('SERVICE_ID') ? 'SERVICE' : 'HOST';
@@ -220,7 +220,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
                     scope: this
                 }
             });
-        }
+        };
         
         render.defer(100);
         return "<div id='" + id + "'></div>";

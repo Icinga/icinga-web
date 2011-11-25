@@ -68,7 +68,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             method: ['='],
             field: ['HOST_ID'],
             value: [hostId]
-        }
+        };
         if(filter) {
             jsonFilter = filter;
             jsonFilter["field"].push(hostFilter);
@@ -76,7 +76,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
             jsonFilter =  {
                 type: 'AND',
                 field: [hostFilter]
-            }
+            };
         }
         this.store.setFilter(
             jsonFilter
@@ -223,7 +223,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                                 if(!c.getEl())
                                     return;
                                 if(c.toggleState && c.toggleState == "open") {
-                                    c.getEl().setHeight(c.origHeight)
+                                    c.getEl().setHeight(c.origHeight);
                                     c.update(c.origValue);
                                     c.toggleState = "closed";
                                 } else {
@@ -237,7 +237,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                                             {tag: 'b', html: _('Long output')},
                                             {tag: 'div', html: c.baseArgs.record.get('SERVICE_LONG_OUTPUT')},
                                             {tag: 'b', html: _('<br/>Performance data')},
-                                            {tag: 'div', html: c.baseArgs.record.get('SERVICE_PERFDATA')},
+                                            {tag: 'div', html: c.baseArgs.record.get('SERVICE_PERFDATA')}
                                         ]
                                     });
                                     var height = Ext.util.TextMetrics.createInstance(c.getEl()).getHeight(html);

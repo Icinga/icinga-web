@@ -16,7 +16,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
             "</tpl>", {
                 isSimple: function(v) {
                     var nr = parseInt(v,10);
-                    return (nr == 99 || nr == 0)
+                    return (nr == 99 || nr == 0);
                 }
             }
         ),

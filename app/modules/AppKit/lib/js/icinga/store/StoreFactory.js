@@ -10,7 +10,7 @@ Icinga.Store.StoreFactory = function() {
             fields.push(descriptor.fields.allowedFields[i]);
         }
         return fields;
-    } 
+    }; 
   
      
     var getBaseParams = function(descriptor,module,provider,db) {
@@ -22,7 +22,7 @@ Icinga.Store.StoreFactory = function() {
                 database: db
             })
         };         
-    }
+    };
 
     
   
@@ -30,7 +30,7 @@ Icinga.Store.StoreFactory = function() {
         return Ext.extend(store,{
             dispatcherParams: {}, 
             setDispatcherParam: function(field,value) { 
-                this.dispatcherParams[field] = value
+                this.dispatcherParams[field] = value;
             },
             load: function(options) {
                 options =  options || {};
@@ -39,11 +39,11 @@ Icinga.Store.StoreFactory = function() {
                     dispatcherParams[i] = options.dispatcherParams[i];
                 }
                 options.params = options.params || {};
-                options.params.params = Ext.encode(dispatcherParams)
+                options.params.params = Ext.encode(dispatcherParams);
                 return store.prototype.load.call(this,options);
             }
         });
-    }
+    };
 
     this.getStoreFor = function(module,provider,store,db,overrides) {
         db = db || "icinga";
@@ -51,7 +51,7 @@ Icinga.Store.StoreFactory = function() {
 
         if(!descriptor.fields) {
             AppKit.log("Missing field description in store "+store+"("+module+","+provider+")");
-            return null
+            return null;
         }
         var cfg = {
             
@@ -68,7 +68,7 @@ Icinga.Store.StoreFactory = function() {
        
         
         return store; 
-    }
+    };
 
-}
+};
 

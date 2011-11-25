@@ -4,7 +4,7 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
         cfg = cfg || {};
      
         Ext.apply(this,cfg);
-        cfg.pageSize = 20
+        cfg.pageSize = 20;
 
         cfg.idProperty = cfg.targetField; 
         var store = new Icinga.Api.RESTStore({
@@ -53,7 +53,7 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
             field: [field],
             method: method,
             value: [value]
-        }
+        };
     },
     
     getFilter:  function(query) {
@@ -65,9 +65,9 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
                 method: ['LIKE'],
                 value: ['%'+query+'%']
             }]
-        }
+        };
         if(this.baseFilter)
-            filter.field.push(this.baseFilter)
+            filter.field.push(this.baseFilter);
         return filter;
     },
     

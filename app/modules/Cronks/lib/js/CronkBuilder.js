@@ -32,7 +32,7 @@ Cronk.util.form.action.CronkBuilderCustom = Ext.extend(Ext.form.Action.Submit, {
 
 Cronk.util.CronkBuilder = function(config) {
 	Cronk.util.CronkBuilder.superclass.constructor.call(this, config);
-}
+};
 
 Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 	title: _('Save custom Cronk'),

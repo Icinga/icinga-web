@@ -343,7 +343,7 @@ Cronk.util.InterGridUtil = function(){
             panel.setActiveTab(urlTab);
 
         }
-    }
+    };
 	
 	return pub;
 	

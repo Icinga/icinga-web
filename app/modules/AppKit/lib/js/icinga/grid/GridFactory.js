@@ -5,13 +5,13 @@ Icinga.Grid.GridFactory = function() {
             if(allFields[i] == field)
                 return i;
         return field;
-    }
+    };
 
     var pluginMap = {
         filter:  Icinga.Grid.Plugins.FilterableGrid,
         pagination: Icinga.Grid.Plugins.PageableGrid,
         sort: Icinga.Grid.Plugins.SortableGrid      
-    }
+    };
 
 
 
@@ -31,17 +31,17 @@ Icinga.Grid.GridFactory = function() {
                     checked: true
                 }]
             },'-']  
-        } 
+        }; 
         
        
         var tbar = new Ext.Toolbar(tbarCfg);
         cfg.tbar = tbar;
         return cfg;
-    }  
+    };  
              
 
     var loadFunction = function(cfg) {
-        cfg = cfg || {}
+        cfg = cfg || {};
         var cm = this.getColumnModel();
         var fieldParam = this.descriptor.fields.params.fields;
         var fields = [];
@@ -55,7 +55,7 @@ Icinga.Grid.GridFactory = function() {
             this.getStore().setDispatcherParam(i,params[i]); 
         this.getStore().setDispatcherParam(fieldParam,Ext.encode(fields));
         this.getStore().load();
-    }
+    };
 
     this.getGridFor = function(module,provider,store,db,overrides) {
         var obj = Ext.grid.GridPanel;  
@@ -74,7 +74,7 @@ Icinga.Grid.GridFactory = function() {
         var grid = Ext.extend(obj,cfg);
          
         return grid;
-    }
+    };
 
 
     this.getDefaultExtendConfig = function(descriptor,dataStore,target) {
@@ -115,7 +115,7 @@ Icinga.Grid.GridFactory = function() {
                     totalProperty: 'totalCount',
                     fields: [],
                     paramNames: this.storeParamNames || Ext.data.Store.prototype.defaultParamNames
-                }
+                };
                 for(var i=0;i<colModel.getColumnCount();i++) { 
                     cfg.fields.push(colModel.getDataIndex(i));
                 }
@@ -146,7 +146,7 @@ Icinga.Grid.GridFactory = function() {
                             header: column,
                             dataIndex: available[column],
                             sortable: column.sortable || this.canSort[available[column]] || false
-                        }
+                        };
                     }
                     
                     colModelCols.push(column); 
@@ -158,6 +158,6 @@ Icinga.Grid.GridFactory = function() {
             storeParamNames: {},
             plugins: [],
             load: loadFunction
-        }
-    }
+        };
+    };
 };

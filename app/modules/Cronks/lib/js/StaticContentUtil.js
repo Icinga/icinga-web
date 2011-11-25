@@ -89,5 +89,5 @@ Cronk.util.StaticContentUtil = {
 			});
 		}
 	}
-}
+};
 	

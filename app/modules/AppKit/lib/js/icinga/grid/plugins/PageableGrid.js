@@ -25,15 +25,15 @@ Icinga.Grid.Plugins.PageableGrid = function(cfg) {
             displayInfo:true
         }); 
         gridCfg.bbar = this.tbarRef;
-    }
+    };
     this.init = function(grid) {
         this.target = grid;
         this.target._super = {
             load: this.target.load
-        }
+        };
         this.target.load = this.tbarRef.doLoad.createDelegate(this.tbarRef);
         this.tbarRef.bindStore(grid.getStore());
-    }
+    };
     this.constructor.apply(this,arguments);
 
 };

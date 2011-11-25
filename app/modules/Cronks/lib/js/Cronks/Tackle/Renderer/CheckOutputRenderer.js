@@ -11,6 +11,6 @@ Ext.ns("Icinga.Cronks.Tackle.Renderer").CheckOutputRenderer = Ext.extend(Ext.Con
         Ext.Container.prototype.constructor.apply(this,arguments);
     },
     border: false,
-    record: '%RECORD%',
+    record: '%RECORD%'
 
-})
+});

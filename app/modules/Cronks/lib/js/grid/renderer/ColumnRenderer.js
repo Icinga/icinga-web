@@ -30,7 +30,7 @@ Cronk.grid.ColumnRendererUtil = function() {
 	    }
 	}
 	
-	return pub}();
+	return pub}();;
 
 /**
  * Default column renderes
@@ -227,7 +227,7 @@ Cronk.grid.ColumnRenderer = {
     
     selectableColumn : function(cfg) {
         return function(value, metaData, record, rowIndex, colIndex, store) {
-            metaData.css += ' x-icinga-grid-cell-selectable'
+            metaData.css += ' x-icinga-grid-cell-selectabl;e'
 			return value;
 		}
     }
