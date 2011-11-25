@@ -58,12 +58,12 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer = function(type) {
             });
         }
         return value+"</div>";
-    }
+    };
 };
 Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler =  function(col,grid,rowIdx,e) {
     var row = this.getView().getRow(rowIdx);
     var record = this.getStore().getAt(rowIdx);
-    var type = record.get('SERVICE_ID') ? 'service' : 'host'
+    var type = record.get('SERVICE_ID') ? 'service' : 'hos;t'
 
     var allowPassive = parseInt(record.get(type.toUpperCase()+'_PASSIVE_CHECKS_ENABLED'),10);
     var isFlapping = parseInt(record.get(type.toUpperCase()+'_IS_FLAPPING'),10);
@@ -84,13 +84,13 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler =  function(col,grid,ro
                         command : cmdDef,
                         data : data,
                         targets : [target]
-                    }
+                    };
                     Icinga.Api.Command.Facade.sendCommand(cmd);
                 }
             },
             scope:this
         });
-    }
+    };
     var data = {
         host: record.get('HOST_NAME'),
         instance: record.get('INSTANCE_NAME')
@@ -98,7 +98,7 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler =  function(col,grid,ro
     var target = {
         host: record.get('HOST_NAME'),
         instance: record.get('INSTANCE_NAME')
-    }
+    };
     if(type == 'service') {
         data.service = record.get('SERVICE_NAME');
         target.service = record.get('SERVICE_NAME');
@@ -172,6 +172,6 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler =  function(col,grid,ro
 
     var menu = new Ext.menu.Menu({
         items: mItems
-    }).showAt(e.getXY())
+    }).showAt(e.getXY());
 
 };

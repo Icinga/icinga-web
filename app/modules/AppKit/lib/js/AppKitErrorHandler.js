@@ -17,8 +17,6 @@ Ext.ns("AppKit.errorHandler");
 				this.msg = msg;
 				this.file = file;
 				this.line = line;
-
-			//	this.stack = printStackTrace({e:msg,guess:false})
 			} catch(e) {}
 		};
 
@@ -288,7 +286,7 @@ Ext.ns("AppKit.errorHandler");
             });
             
             
-        }
+        };
     
 		var handleError = function(response,proxy) {
 			switch(response.status) {	

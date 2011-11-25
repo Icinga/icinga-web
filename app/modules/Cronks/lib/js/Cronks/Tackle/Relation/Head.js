@@ -27,7 +27,7 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
 	        autoDestroy: true,
 	        reader: new Ext.data.JsonReader({
 	            fields : ['contact_name', 'contact_alias', 'contact_email_address', 'contact_id', 'contact_object_id', 'contactgroup_name', 'contactgroup_object_id'],
-                idProperty : 'contact_id',
+                idProperty : 'contact_id'
 	        }),
 	        groupOnSort: false,
 	        remoteGroup: false,

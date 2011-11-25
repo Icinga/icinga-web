@@ -65,7 +65,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
             }, _this, {
                 single: true
             });
-        }
+        };
         
         render.defer(100);
 

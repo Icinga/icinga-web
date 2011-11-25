@@ -16,7 +16,7 @@ var getApiKey = function() {
         key += _string[nr];
     }
     return key;
-}
+};
 
 Ext.ns("AppKit.Admin");
 
@@ -29,7 +29,7 @@ var setInternalFieldsEnabled = function(bool) {
     field.setDisabled(!bool);
     passfield.setDisabled(!bool);
 
-}
+};
 
 
 
@@ -90,7 +90,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
                 field.setValue("");
             },this);
             Ext.getCmp("form_user_id").setValue('new');
-            userRoleStore.removeAll()
+            userRoleStore.removeAll();
             credentialView.selectValues([]);
             hostgroupPrincipalsView.selectValues([]);
             servicegroupPrincipalsView.selectValues([]);
@@ -110,7 +110,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
                     field.setValue(record.get(key));
                 },this);
                 
-                userRoleStore.loadData(record.get('roles'))
+                userRoleStore.loadData(record.get('roles'));
                 var principals = record.get('principals');
                 credentialView.selectValues(principals);
                 hostgroupPrincipalsView.selectValues(principals);
@@ -159,11 +159,11 @@ AppKit.Admin.UserEditForm = function(cfg) {
         } else {
             userStore.newUser();
         }
-    }
+    };
     
     AppKit.Admin.UserEditForm.saveUser = function(url,success,fail) {
         userStore.proxy.setUrl(url+"/create");
-        var params = {}
+        var params = {};
         
         var i=0;
         userRoleStore.each(function(role) {
@@ -220,12 +220,12 @@ AppKit.Admin.UserEditForm = function(cfg) {
             user_authkey: 'form_user_authkey',
             password: 'form_user_password',
             password_validate: 'form_user_password_confirmed'
-        }
+        };
         for(var id in paramMap) {
             var cmp = Ext.getCmp(paramMap[id]);
             if(cmp.isValid()) 
                 if(cmp.getValue()) // don't write empty fields 
-                    params[id] = cmp.getValue()
+                    params[id] = cmp.getValue();
                 else continue;
             else return fail(arguments);
         }
@@ -238,7 +238,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
         if(params.user_disabled)
             params.user_disabled = 1;
         userStore.load({params: params});
-    }
+    };
     
     return [
     {
@@ -437,7 +437,7 @@ AppKit.Admin.UserEditForm = function(cfg) {
         minHeight:200,
         autScroll:true,
         height:400
-    }]
+    }];
    
 };
 

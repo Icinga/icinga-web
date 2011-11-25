@@ -31,9 +31,9 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
                     elem.dom.innerHTML = current.COUNT;
                     return false;
                 }
-            },this)
+            },this);
         } 
-    }
+    };
     
     /**
     * Lazy loads open problems which will be injected into the status view after success
@@ -86,7 +86,7 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
            
             scope: this
         });            
-    }
+    };
     /**
     *   Start point for the grid evenlistener
     *   @param Ext.grid.GridPanel   The gridpanel that should be extended by this columnRenderer
@@ -98,7 +98,7 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
         store.on("load", function() {
             loadServiceStateTask(grid);
         },this);
-    }
+    };
     
     /**
     * The columnrenderer definition, should be in the renderer column of the cronk tempalte
@@ -118,6 +118,6 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
 		}
 
 
-    }
+    };
 })();
 

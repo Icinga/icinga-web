@@ -6,7 +6,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
         var filter = {
             type: 'OR',
             field: []
-        }
+        };
         for(var i=0;i<ids.length;i++) {
             if(!ids[i])
                 continue;
@@ -18,14 +18,14 @@ Cronk.grid.CommentColumnRenderer = new (function () {
             });
         }
         return filter;
-    }
+    };
     
     var clearThrobberFields = function(grid,selector) {
         var throbber = grid.getEl().select(selector);
         throbber.each(function(element) {
             element.remove();
         });
-    }	
+    };	
     
     var getIdsFromJSON = function(json, fieldname) {
         var ids = [];
@@ -39,7 +39,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
                 ids.push(obj[fieldname.toUpperCase()]);
         }
         return ids;
-    }
+    };
 
     var createCommentButtons = function(grid) {
         var ids = grid.commentIds;
@@ -51,7 +51,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
             else 
                 elem.remove();
         });
-    }
+    };
 
 
 
@@ -79,7 +79,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
             failure: Ext.createDelegate(clearThrobberFields,this,[grid,'div[comment_source]']),
             scope: this
         }); 
-    } 
+    }; 
 
     this.init = function(grid, c) {
         grid.commentIds = [];
@@ -123,7 +123,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
                 
             }
         }, this);
-    }
+    };
 
     this.commentColumn = function(cfg) {
         return function(value, metaData, record, rowIndex, colIndex, store) {
@@ -131,8 +131,8 @@ Cronk.grid.CommentColumnRenderer = new (function () {
             record.comment_field    = my.target_field;
             record.comment_target   = my.target;
             return '<div class="icon-16" comment_source="'+value+'"></div>'; // icinga-icon-throbber
-        }
-    }
+        };
+    };
 
       
 })();

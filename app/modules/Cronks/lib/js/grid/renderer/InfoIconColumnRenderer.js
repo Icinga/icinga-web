@@ -101,7 +101,7 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
             	cls : 'object-info-icon-cell', // icinga-icon-throbber icon-16
             	id : 'object-info-icon-' + cfg.type + '-' + value
             });
-        }
-    }
+        };
+    };
 	
 })();

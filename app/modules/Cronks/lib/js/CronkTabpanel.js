@@ -5,7 +5,7 @@ Cronk.util.Tabpanel = function(config) {
 	this.stateEvents = ['add', 'remove', 'tabchange', 'titlechange'];
 	
 	Cronk.util.Tabpanel.superclass.constructor.call(this, config);	
-}
+};
 
 Ext.extend(Cronk.util.Tabpanel, Ext.ux.panel.DDTabPanel, {
 	

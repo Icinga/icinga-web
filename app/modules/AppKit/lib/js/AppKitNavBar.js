@@ -55,7 +55,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         cfg.items = [
             this.navBar,
             this.iconField
-        ]
+        ];
         
         Ext.Container.prototype.constructor.call(this,cfg); 
     }, 
@@ -137,7 +137,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                 text: _(menuPoint.caption),
                 iconCls: menuPoint.icon || null,
                 id: menuPoint.id || Ext.id()          
-            }         
+            };         
             if(menuPoint.target) {
                 p.handler = this.createHandlerForTarget(menuPoint.target);
                 
@@ -148,7 +148,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
             }
             if(menuPoint.items) {
                 p.menu = [];
-                this.addMenuFields(p.menu,menuPoint.items)
+                this.addMenuFields(p.menu,menuPoint.items);
             }
             itemsCfg.push(p); 
         }
@@ -172,7 +172,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                             params: target.params || null
                         });
                     }
-                }
+                };
 
             case 'window':
                 target.bodyStyle = target.style || "background-color: #ffffff";
@@ -187,7 +187,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
         var userField = {
             iconCls: this.hasAuth ? 'icinga-icon-user' : 'icinga-icon-user-delete',
             text: this.username
-        }
+        };
         if(this.hasAuth) {
             
             userField.menu = {};
@@ -218,7 +218,7 @@ AppKit.util.AppKitNavBar = Ext.extend(Ext.Container,{
                     },
                     scope:this
                 }]
-            } 
+            }; 
         }
         itemsCfg.push(userField);
     }

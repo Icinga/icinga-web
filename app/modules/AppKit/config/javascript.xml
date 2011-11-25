@@ -11,7 +11,6 @@
             <!--AppKit JS -->
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKit.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitUtil.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/stacktrace.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/utils/AppKitServertime.js</ae:parameter>
 
             <ae:parameter>%core.module_dir%/AppKit/lib/js/AppKitErrorHandler.js</ae:parameter>

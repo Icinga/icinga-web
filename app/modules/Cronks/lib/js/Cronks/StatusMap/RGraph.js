@@ -340,4 +340,4 @@ Icinga.Cronks.StatusMap.RGraph = function (config) {
 
 	this.init(config);
 
-}
+};

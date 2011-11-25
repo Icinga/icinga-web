@@ -265,6 +265,6 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
         Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
         
         return true;
-    },
+    }
 	
 })));

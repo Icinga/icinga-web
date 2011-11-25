@@ -36,7 +36,7 @@ Ext.onReady(function() {
                 rowIndex: rowIndex,
                 colIndex: colIndex,
                 store: store
-            }
+            };
             
             var toRender = null;
             
@@ -47,10 +47,10 @@ Ext.onReady(function() {
             }
             grid.getStore().on("load", function() {
                 toRender.render(Ext.get(id));
-            })
+            });
             return "<div id='"+id+"'></div>";
-        }
-    }
+        };
+    };
 
     
 });

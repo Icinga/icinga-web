@@ -52,7 +52,7 @@ IcingaCommandHandler.prototype = {
             }
 
             b.on('click', function (b, e) {
-                this.showCommandWindow(k, v.title)
+                this.showCommandWindow(k, v.title);
             }, this);
 
         }, this);
@@ -107,7 +107,7 @@ IcingaCommandHandler.prototype = {
             value: o.fieldValue,
             width: 200,
             allowBlank: (o.fieldRequired == true) ? false : true
-        }
+        };
 
         var form = o.form;
 
@@ -186,7 +186,7 @@ IcingaCommandHandler.prototype = {
                 oDef.listeners = {
                     change: function (rg, checkedBox) {
                         for (var i = 0; i < affectedForms.length; i++) {
-                            var m = form.getForm().findField(affectedForms[i])
+                            var m = form.getForm().findField(affectedForms[i]);
 
                             if (m) {
                                 m.setReadOnly((checkedBox.initialConfig.boxLabel == _('Yes')) ? true : false);
@@ -194,7 +194,7 @@ IcingaCommandHandler.prototype = {
                             }
                         }
                     }
-                }
+                };
             }
             return new Ext.form.RadioGroup(oDef);
             break;
@@ -205,7 +205,7 @@ IcingaCommandHandler.prototype = {
                     var m = form.getForm().findField('duration-minute').getValue();
                     var h = form.getForm().findField('duration-hour').getValue();
                     form.getForm().findField('duration').setValue((m * 60) + (h * 3600));
-                }
+                };
 
             return new Ext.Container({
                 fieldLabel: o.fieldLabel,
@@ -252,7 +252,7 @@ IcingaCommandHandler.prototype = {
                     xtype: 'label',
                     text: _('seconds')
                 }]
-            })
+            });
             break;
 
         case 'textarea':
@@ -295,7 +295,7 @@ IcingaCommandHandler.prototype = {
             for (var skey in this.command_options.source) {
 
                 if (item.data[this.command_options.source[skey]]) {
-                    td[skey] = item.data[this.command_options.source[skey]]
+                    td[skey] = item.data[this.command_options.source[skey]];
                 }
 
             }

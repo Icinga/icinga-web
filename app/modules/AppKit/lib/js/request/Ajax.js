@@ -4,7 +4,7 @@ Ext.Ajax.request = function(o) {
     } else {
         return this.dispatchRequest(o);
     }
-}
+};
 
 Ext.Ajax.directRequest = function(o) {
     if(!o.allowBatch) {
@@ -12,14 +12,14 @@ Ext.Ajax.directRequest = function(o) {
     } else {
         return Ext.data.Connection.prototype.request.call(this,o);
     }
-}
+};
 
 Ext.Ajax.dispatchRequest = function(o) {
    
     if(!o.url)
         o.url = AppKit.c.path+'/modules/appkit/dispatch';
     var p = o.params;
-    o.params = {}
+    o.params = {};
     o.params.module = o.icingaModule;
     o.params.action = o.icingaAction;
     if(o.output_type)
