@@ -141,14 +141,6 @@ var AppKit, _=function() { return Array.prototype.join.call(arguments, ' '); };
 					/*.No logging.*/
 				}
 			},
-			
-			/**
-			 * log calee arguments
-			 */
-			logargs : function(context) {
-				this.log(context,arguments.callee.caller.arguments);
-			},
-	
 			/**
 			 * Sets the window location
 			 */

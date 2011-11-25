@@ -38,7 +38,7 @@ AppKit.Admin.Components.CredentialGrid = Ext.extend(Ext.Panel,{
                 dataIndex: 'target_description',
                 width: 300
             }]
-        }],
+        }];
         Ext.Panel.prototype.constructor.call(this,cfg);
     },
     

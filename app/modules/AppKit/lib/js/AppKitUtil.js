@@ -231,7 +231,7 @@ AppKit.util.Date = (function() {
                 var result = dd ? dd+_(" days, ") :"";
                     result += hh ? hh+_(" hrs, ") : "";
                     result += mm ? mm+_(" min, ") : "";
-                return result += ss+_(" sec. ago");
+                return (result += ss+_(" sec. ago"));
            }
      }
 })();

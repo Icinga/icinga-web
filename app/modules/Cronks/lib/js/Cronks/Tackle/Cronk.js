@@ -147,7 +147,7 @@ Ext.ns('Icinga.Cronks.Tackle');
                 if (this.collapsibleFrame.collapsed === true) {
                     this.collapsibleFrame.expand(true);
                 }
-                this.currentView == 'service';
+                this.currentView = 'service';
             },this);
 
         }

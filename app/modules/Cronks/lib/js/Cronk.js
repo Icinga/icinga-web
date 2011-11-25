@@ -333,7 +333,7 @@ Cronk.Container = Ext.extend(Ext.Panel, {
 			return this.id;
 		}
 		
-		return this.id = Cronk.getId('cr-panel-');
+		return (this.id = Cronk.getId('cr-panel-'));
 	}
 });
 
