@@ -89,7 +89,6 @@ class Cronks_System_StatusOverallModel extends CronksBaseModel {
         $search->setResultColumns(array($field,$pendingField,$dtimeField,$ackField));
         $search->setSearchGroup(sprintf('%s_IS_PENDING', strtoupper($type)));
         $data = $search->setResultType(IcingaApiConstants::RESULT_ARRAY)->fetch()->getAll();
-
         $data = $this->normalizeData($data, $field,'COUNT',$dtimeField,$ackField);
 
         $sum_total      = 0;
