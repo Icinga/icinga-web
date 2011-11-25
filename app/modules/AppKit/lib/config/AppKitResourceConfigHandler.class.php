@@ -44,7 +44,7 @@ class AppKitResourceConfigHandler extends AgaviXmlConfigHandler {
                                       array_keys(iterator_to_array(
                                                      AppKitIteratorUtil::RegexRecursiveDirectoryIterator(
                                                          $r,
-                                                         sprintf('/\%s/i', $sfx)
+                                                         sprintf('/^[^.].+\%s$/i', $sfx)
                                                      )
                                                  ))
                                   );
