@@ -221,7 +221,7 @@ class CronkGridTemplateXmlParser {
     }
 
     private function applyExtender(array $extender) {
-        $this->data = array_merge($this->data,$extender["data"]);
+        $this->data = array_merge_recursive($this->data,$extender["data"]);
         foreach($extender["fields"] as $fieldname=>$field) {
             
             if(!isset($field['preferPosition'])) {
