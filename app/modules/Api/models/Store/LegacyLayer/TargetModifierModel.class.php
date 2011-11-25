@@ -423,7 +423,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
                                        "i"  => array("src" => "s", "relation" => "instance"),
                                        "h"  => array("src" => "s","relation" => "host"),
-                                       "hs" => array("src" => "h","relation" => "status","alwaysJoin" => true),
+                                       "hs" => array("src" => "h","relation" => "status","alwaysJoin" => true, "type"=>"left"),
                                        "oh" => array("src" => "h","relation" => "object"),
 /*                                       "hcg" => array("src" => "h", "relation" => "contactgroups"),
                                        "hcgm" => array("src" => "h", "relation" => "contacts"),*/
@@ -431,7 +431,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                        "cgm" => array("src"=> "cg", "relation" => "members"),
                                        "cvsh"=> array("src" => "s","relation" => "customvariablestatus"),
                                        "cvsc"=> array("src" => "cgm","relation" => "customvariablestatus"),
-                                       "ss" => array("src" => "s","relation" => "status","alwaysJoin" => true),
+                                       "ss" => array("src" => "s","relation" => "status","alwaysJoin" => true, "type"=>"left"),
 
                                        "sg" => array(
                                            "src" => "s",
@@ -551,18 +551,18 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 break;
 
             case IcingaApiConstants::TARGET_HOST_STATUS_SUMMARY:
-                $this->mainAlias = "hs";
-                $this->setTarget("IcingaHoststatus");
+                $this->mainAlias = "h";
+                $this->setTarget("IcingaHosts");
                 $this->additionalSelects["HOST_STATE"] = "hs.current_state";
-                $this->additionalSelects["COUNT"] = "count(DISTINCT hs.host_object_id)";
+                $this->additionalSelects["COUNT"] = "count(DISTINCT h.host_object_id)";
                 $this->ignoreIds = true;
                 $this->forceGroup[] = "hs.current_state";
                 $this->forceGroup[] = "(hs.has_been_checked-hs.should_be_scheduled)*-1";
                 $this->retainedAlias = "h";
                 $this->aliasDefs = array(
-                                       "h"  => array("src" => "oh", "relation" => "host","alwaysJoin"=>true),
+                                       "hs"  => array("src" => "h", "relation" => "status","type"=>"left","alwaysJoin"=>true),
                                        "s"  => array("src" => "h", "relation" => "services"),
-                                       "oh" => array("src" => "hs", "relation" => "hostobject", "alwaysJoin" => true, "with"=>"oh.is_active=1"),
+                                       "oh" => array("src" => "h", "relation" => "object", "alwaysJoin" => true, "with"=>"oh.is_active=1"),
                                        "i"  => array("src" => "h", "relation" => "instance"),
                                        "cg" => array("src" => "h", "relation" => "contactgroups"),
                                        "ocg"=> array("src" => "cg", "relation" => "object"),
@@ -581,12 +581,12 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->ignoreIds = true;
                 $this->setTarget("IcingaServicestatus");
                 $this->additionalSelects["SERVICE_STATE"] = "ss.current_state";
-                $this->additionalSelects["COUNT"] = "count(DISTINCT ss.service_object_id)";
+                $this->additionalSelects["COUNT"] = "count(DISTINCT s.service_object_id)";
                 $this->retainedAlias = "s";
                 $this->forceGroup[] = "ss.current_state";
                 $this->forceGroup[] = "(ss.has_been_checked-ss.should_be_scheduled)*-1";
                 $this->aliasDefs = array(
-                                       "s"  => array("src" => "os", "relation" => "service", "alwaysJoin" => true),
+                                       "s"  => array("src" => "ss", "relation" => "service", "alwaysJoin" => true, "type"=>"inner"),
                                        "os" => array("src" => "ss", "relation" => "serviceobject", "alwaysJoin" => true, "with"=>"os.is_active=1"),
                                        "i"  => array("src" => "s", "relation" => "instance"),
                                        "cg" => array("src" => "s", "relation" => "contactgroups"),

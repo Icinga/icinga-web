@@ -130,13 +130,13 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
                     if (count($countField) > 1) {
                         $countField = $countField[1];
                     }
-                    
+
                     $_data[0]["COUNT_".strtoupper($countField)] = $data;
                     $resultCols[] = "COUNT_".strtoupper($countField);
                 }
                 $data = $_data;
             }
-
+            
             $this->result = $this->getContext()->getModel(
                                 "Store.LegacyLayer.LegacyApiResult","Api",array(
                                     "result" => $data,
