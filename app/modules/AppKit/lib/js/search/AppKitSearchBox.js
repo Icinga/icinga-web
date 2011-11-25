@@ -38,7 +38,7 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
         	alt : true,
         	fn : (function() {
         		
-        		win = this.getSearchbox();
+        		var win = this.getSearchbox();
         		if (win.hidden === true) {
         		  this.onMouseenter.defer(100, this);
         		} else {
