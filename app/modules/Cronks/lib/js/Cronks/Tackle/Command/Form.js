@@ -28,6 +28,10 @@ Icinga.Cronks.Tackle.Command.Form = Ext.extend(Ext.Panel, {
 		
 		this.removeAll();
 		
+		if (this.record) {
+			this.target = this.record;
+		}
+		
 		this.form = this.formBuilder.build(commandName, {
             renderSubmit: this.standalone,
             targets: Ext.isArray(this.target) ? this.target : [this.target]

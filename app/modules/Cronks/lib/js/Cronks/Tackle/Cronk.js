@@ -81,7 +81,7 @@ Ext.ns('Icinga.Cronks.Tackle');
 
         toggleTabView: function(type) {
             var show = type;
-            var hide = type === "host" ? "service" : "hos;t"
+            var hide = (type === "host") ? "service" : "host"
 
             for(var i in this.tabItems[show]) {
                 this.infoTabs.unhideTabStripItem(this.tabItems[show][i]);

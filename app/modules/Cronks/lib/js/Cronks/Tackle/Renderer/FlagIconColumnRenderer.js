@@ -63,7 +63,7 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer = function(type) {
 Icinga.Cronks.Tackle.Renderer.FlagIconColumnClickHandler =  function(col,grid,rowIdx,e) {
     var row = this.getView().getRow(rowIdx);
     var record = this.getStore().getAt(rowIdx);
-    var type = record.get('SERVICE_ID') ? 'service' : 'hos;t'
+    var type = record.get('SERVICE_ID') ? 'service' : 'host'
 
     var allowPassive = parseInt(record.get(type.toUpperCase()+'_PASSIVE_CHECKS_ENABLED'),10);
     var isFlapping = parseInt(record.get(type.toUpperCase()+'_IS_FLAPPING'),10);
