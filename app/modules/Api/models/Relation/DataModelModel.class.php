@@ -98,18 +98,6 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         return $out;
     }
     
-    public function getServiceContactDetails($objectId) {
-        $records = IcingaDoctrine_Query::create()
-        ->select('c.alias, co.name1 as name1, co.object_id as contact_object_id, NULL as group')
-        ->from('IcingaContacts c')
-        ->innerJoin('c.object co')
-        ->innerJoin('c.services h WITH h.service_object_id=?', $objectId)
-        ->execute(null, Doctrine::HYDRATE_ARRAY);
-        
-        var_dump($records);
-        die;
-    }
-    
     public function getObjectData($objectId) {
         $record = IcingaDoctrine_Query::create()
         ->from('IcingaObjects o')

@@ -36,7 +36,7 @@ Ext.onReady(function() {
 				fieldLabel: '<?php echo $tm->_("User"); ?>',
 				name: 'username',
 				id: 'username',
-				allowBlank: false 
+				allowBlank: false
 			}, {
 				fieldLabel: '<?php echo $tm->_("Password"); ?>',
 				inputType: 'password',
@@ -49,6 +49,23 @@ Ext.onReady(function() {
 				afterrender: function(p) {
 					pub.resetForm(true);
 					oFormPanel.getForm().findField('username').setValue('<?php echo $username; ?>');
+					
+					Ext.getCmp('menu').destroy();
+					
+					var v = Ext.getCmp('viewport-center');
+					Ext.DomHelper.append(Ext.getBody(), {
+						tag : 'div',
+						style : 'position: absolute;'
+						+ ' top: 0; left: 0;'
+						+ ' right: 0;'
+						+ ' height: 300px;'
+						+ ' background-color: #fff',
+						html : '',
+						children : [{
+							tag : 'img',
+							src : String.format('{0}/images/icinga/icinga-login-teaser.png', AppKit.util.Config.get('path'))
+						}]
+					});
 				}
 			},
 			
@@ -74,7 +91,7 @@ Ext.onReady(function() {
 
 		var oContainer = new Ext.Panel({
 			width: 400,
-			style: { margin: '120px auto', padding: '10px 0 0 0' },
+			style: { margin: '280px 70px', padding: '10px 0 0 0' },
 			items: oBox,
 			border: false,
 			id: 'login-container'
