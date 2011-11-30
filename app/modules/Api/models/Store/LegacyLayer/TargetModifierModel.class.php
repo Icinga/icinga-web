@@ -495,6 +495,18 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "ocg"  => array("src" => "cg","relation" => "object")
                 );
                 break;
+        
+            case IcingaApiConstants::TARGET_CONTACT:
+                $this->mainAlias = "cgm";
+                $this->setTarget("IcingaContacts");
+
+                $this->aliasDefs = array(
+                        "ocg"   => array("src" => "cg", "relation" => "object"),
+                        "cg"   => array("src" => "cgm", "relation" => "contactgroups","join"=>"left"),
+                        "cvsc"    => array("src" => "cgm", "relation" => "customvariablestatus"),
+                        "oc"  => array("src" => "cgm","relation" => "object")
+                );
+                break;
 
             case IcingaApiConstants::TARGET_CONTACTGROUP:
                 $this->mainAlias = "cg";
