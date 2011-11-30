@@ -118,7 +118,7 @@
 					<ae:parameter name="jasper_url">http://localhost:8080/jasperserver</ae:parameter>
 					<ae:parameter name="jasper_user">jasperadmin</ae:parameter>
 					<ae:parameter name="jasper_pass">jasperadmin</ae:parameter>
-					<ae:parameter name="tree_root">/Icinga/reports</ae:parameter>
+					<ae:parameter name="tree_root">/icinga/reports</ae:parameter>
 				</setting>
 				
 				<!-- Custom config if I have more that once -->
