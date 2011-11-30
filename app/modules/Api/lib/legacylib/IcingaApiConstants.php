@@ -48,6 +48,8 @@ interface IcingaApiConstants {
     const TARGET_LOG = 'log';
     const TARGET_HOST_STATUS_SUMMARY = 'host_status_summary';
     const TARGET_SERVICE_STATUS_SUMMARY = 'service_status_summary';
+    const TARGET_HOST_STATUS_SUMMARY_STRICT = 'host_status_summary_strict';
+    const TARGET_SERVICE_STATUS_SUMMARY_STRICT = 'service_status_summary_strict';
     const TARGET_HOST_STATUS_HISTORY = 'host_status_history';
     const TARGET_SERVICE_STATUS_HISTORY = 'service_status_history';
     const TARGET_HOST_PARENTS = 'host_parents';
