@@ -1,6 +1,7 @@
 <?php
 	$message = $t['message'];
 	$username = isset($t['username']) ? $t['username'] : '';
+	$app_string = AgaviConfig::get('org.icinga.version.release');
 ?>
 <script pe="text/javascript">
 Ext.onReady(function() {
@@ -52,19 +53,18 @@ Ext.onReady(function() {
 					
 					Ext.getCmp('menu').destroy();
 					
-					var v = Ext.getCmp('viewport-center');
-					Ext.DomHelper.append(Ext.getBody(), {
+					// Disable some borders
+					Ext.getCmp('viewport-center').getEl().addClass('login-page');
+					
+					var ele = Ext.DomHelper.append(Ext.getBody(), {
 						tag : 'div',
 						style : 'position: absolute;'
-						+ ' top: 0; left: 0;'
-						+ ' right: 0;'
-						+ ' height: 300px;'
-						+ ' background-color: #fff',
-						html : '',
-						children : [{
-							tag : 'img',
-							src : String.format('{0}/images/icinga/icinga-login-teaser.png', AppKit.util.Config.get('path'))
-						}]
+                        + ' top: 20px; left: 100px;'
+                        + ' height: 170px;'
+                        + ' width : 500px;'
+                        + String.format(' background-image: url(\'{0}/images/icinga/icinga-logo-big.png\');', AppKit.util.Config.get('path'))
+                        + ' background-color: #fff',
+						html : '&nbsp;'
 					});
 				}
 			},
@@ -83,17 +83,23 @@ Ext.onReady(function() {
 
 		var oBox = new Ext.Panel({
 			id: 'login-dialog',
-			baseCls: 'x-box',
-			frame: true,
+			title : String.format(_('Login ({0})'), '<?php echo $app_string; ?>'),
+			width : 400,
+			frame : true,
+			border : true,
 			defaults: { border: false },
-			items: [ { bodyCfg: { tag: 'h1', html: _('Login') } }, oFormPanel ]
+			items: [ oFormPanel ]
 		});
 
 		var oContainer = new Ext.Panel({
-			width: 400,
-			style: { margin: '280px 70px', padding: '10px 0 0 0' },
+			width: 420,
+			height : 170,
+			style: {
+			    margin: '200px 140px', 
+                padding: '10px 0 0 0'
+			},
 			items: oBox,
-			border: false,
+			border: true,
 			id: 'login-container'
 		});
 

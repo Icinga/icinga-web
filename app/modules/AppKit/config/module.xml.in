@@ -62,6 +62,7 @@
                     <ae:parameter name="org.icinga.version.extension"></ae:parameter>
                     <ae:parameter name="org.icinga.version.releasedate"></ae:parameter>
                     <ae:parameter name="org.icinga.version.name"></ae:parameter>
+                    <ae:parameter name="org.icinga.version.release"></ae:parameter>
                 </setting>
                 
                 <!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
