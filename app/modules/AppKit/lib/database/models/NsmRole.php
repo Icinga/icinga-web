@@ -9,6 +9,12 @@ class NsmRole extends BaseNsmRole {
     private $children = null;
     private $context = null;
     private $storage = null;
+    
+    /**
+    * Reduce database query overhead
+    * @var array
+    */
+    private static $targetValuesCache = array();
 
     public function setUp() {
 
@@ -208,36 +214,42 @@ class NsmRole extends BaseNsmRole {
     }
 
     public function getTargetValuesArray() {
-        $tc = Doctrine_Query::create()
-              ->select('t.target_name, t.target_id')
-              ->from('NsmTarget t')
-              ->innerJoin('t.NsmPrincipalTarget pt')
-              ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
-              ->execute();
-
-        $out = array();
-
-        foreach($tc as $t) {
-            $out[ $t->target_name ] = array();
-
-            $ptc = Doctrine_Query::create()
-                   ->from('NsmPrincipalTarget pt')
-                   ->innerJoin('pt.NsmTargetValue tv')
-                   ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
-                   ->andWhere('pt.pt_target_id=?', array($t->target_id))
-                   ->execute();
-
-            foreach($ptc as $pt) {
-                $tmp = array();
-                foreach($pt->NsmTargetValue as $tv) {
-                    $tmp[ $tv->tv_key ] = $tv->tv_val;
+        
+        if (count(self::$targetValuesCache) == 0) {
+            $tc = Doctrine_Query::create()
+                  ->select('t.target_name, t.target_id')
+                  ->from('NsmTarget t')
+                  ->innerJoin('t.NsmPrincipalTarget pt')
+                  ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                  ->execute();
+    
+            $out = array();
+    
+            foreach($tc as $t) {
+                $out[ $t->target_name ] = array();
+    
+                $ptc = Doctrine_Query::create()
+                       ->from('NsmPrincipalTarget pt')
+                       ->innerJoin('pt.NsmTargetValue tv')
+                       ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                       ->andWhere('pt.pt_target_id=?', array($t->target_id))
+                       ->execute();
+    
+                foreach($ptc as $pt) {
+                    $tmp = array();
+                    foreach($pt->NsmTargetValue as $tv) {
+                        $tmp[ $tv->tv_key ] = $tv->tv_val;
+                    }
+    
+                    $out[ $t->target_name ][] = $tmp;
                 }
-
-                $out[ $t->target_name ][] = $tmp;
             }
+            
+            self::$targetValuesCache =& $out;
+        
         }
         
 
-        return $out;
+        return self::$targetValuesCache;
     }
 }

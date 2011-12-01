@@ -8,6 +8,12 @@ class NsmUser extends BaseNsmUser {
     const HASH_ALGO = 'sha256';
 
     private static $prefCache = array();
+    
+    /**
+     * Reduce database query overhead
+     * @var array
+     */
+    private static $targetValuesCache = array();
 
     /**
      * @var Doctrine_Collection
@@ -489,36 +495,39 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function getTargetValuesArray() {
-        $tc = Doctrine_Query::create()
-              ->select('t.target_name, t.target_id')
-              ->from('NsmTarget t')
-              ->innerJoin('t.NsmPrincipalTarget pt')
-              ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
-              ->execute();
-
-        $out = array();
-
-        foreach($tc as $t) {
-            $out[ $t->target_name ] = array();
-
-            $ptc = Doctrine_Query::create()
-                   ->from('NsmPrincipalTarget pt')
-                   ->innerJoin('pt.NsmTargetValue tv')
-                   ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
-                   ->andWhere('pt.pt_target_id=?', array($t->target_id))
-                   ->execute();
-
-            foreach($ptc as $pt) {
-                $tmp = array();
-                foreach($pt->NsmTargetValue as $tv) {
-                    $tmp[ $tv->tv_key ] = $tv->tv_val;
-                }
-
-                $out[ $t->target_name ][] = $tmp;
-            }
-        }
+        if (count(self::$targetValuesCache) == 0) {
+            $tc = Doctrine_Query::create()
+                  ->select('t.target_name, t.target_id')
+                  ->from('NsmTarget t')
+                  ->innerJoin('t.NsmPrincipalTarget pt')
+                  ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                  ->execute();
     
-
-        return $out;
+            $out = array();
+    
+            foreach($tc as $t) {
+                $out[ $t->target_name ] = array();
+    
+                $ptc = Doctrine_Query::create()
+                       ->from('NsmPrincipalTarget pt')
+                       ->innerJoin('pt.NsmTargetValue tv')
+                       ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())
+                       ->andWhere('pt.pt_target_id=?', array($t->target_id))
+                       ->execute();
+    
+                foreach($ptc as $pt) {
+                    $tmp = array();
+                    foreach($pt->NsmTargetValue as $tv) {
+                        $tmp[ $tv->tv_key ] = $tv->tv_val;
+                    }
+    
+                    $out[ $t->target_name ][] = $tmp;
+                }
+                
+                self::$targetValuesCache =& $out;
+            }
+        
+        }
+        return self::$targetValuesCache;
     }
 }

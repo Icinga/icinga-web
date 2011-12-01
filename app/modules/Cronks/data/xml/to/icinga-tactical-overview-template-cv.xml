@@ -32,12 +32,14 @@
                     $records = IcingaDoctrine_Query::create()
                     ->from('IcingaCustomvariables c')
                     ->distinct(true)
-                    ->select('c.customvariable_id, c.varname, c.varvalue')
+                    ->select('c.varname, c.varvalue')
                     ->orderBy('c.varname ASC')
-                    ->andWhereNotIn('c.varname', array('PASSWORD'))
+                    ->appendCustomvarFilter()
+                    ->disableAutoIdentifierFields(true)
                     ->execute();
                     
                     foreach ($records as $record) {
+                        // echo $record->varname . ":" . $record->varvalue . "<br />";
                         echo $t->renderSub('icinga-tactical-overview-groupstat', 'customvariable', array(
                             'CUSTOMVARIABLE_NAME' => $record->varname,
                             'CUSTOMVARIABLE_VALUE' => $record->varvalue
