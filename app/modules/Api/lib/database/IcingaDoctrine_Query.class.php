@@ -1,9 +1,16 @@
 <?php
 class IcingaDoctrine_Query extends Doctrine_Query {
     public static function create($conn = NULL, $class = NULL) {
-
         return new IcingaDoctrine_Query($conn);
     }
+    
+    /**
+     * To disable the hydrator fixing feature. In some cases it is needed
+     * to produce 'real' distinct queries
+     * @var boolean
+     */
+    protected $_disableAutoIdentifiedFields = false;
+    
     /**
     * @see Doctrine_Query::processPendingFields
     *
@@ -52,7 +59,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
             // only auto-add the primary key fields if this query object is not
             // a subquery of another query object or we're using a child of the Object Graph
             // hydrator
-            if (! $this->_isSubquery && is_subclass_of($driverClassName, 'Doctrine_Hydrator_Graph')) {
+            if (! $this->_isSubquery && is_subclass_of($driverClassName, 'Doctrine_Hydrator_Graph') && $this->_disableAutoIdentifiedFields == false) {
                 $fields = array_unique(array_merge((array) $table->getIdentifier(), $fields));
             }
         }
@@ -271,6 +278,17 @@ class IcingaDoctrine_Query extends Doctrine_Query {
                 $this->andWhereNotIn($alias. '.varname', $exclude);
             }
         }
+        return $this;
+    }
+    
+    /**
+     * To produce real distinct query this function
+     * can disable to autoid feature
+     * @param boolean $flag
+     * @return IcingaDoctrine_Query
+     */
+    public function disableAutoIdentifierFields($flag) {
+        $this->_disableAutoIdentifiedFields = (boolean)$flag;
         return $this;
     }
 
