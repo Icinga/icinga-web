@@ -29,7 +29,7 @@
 				<div style="padding: 5px 5px;">
                 <?php 
                 
-                    $records = IcingaDoctrine_Query::create()
+                    $records = IcingaDoctrine_Query::create('icinga')
                     ->from('IcingaCustomvariables c')
                     ->distinct(true)
                     ->select('c.varname, c.varvalue')

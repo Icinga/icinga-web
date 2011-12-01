@@ -1,7 +1,19 @@
 <?php
 class IcingaDoctrine_Query extends Doctrine_Query {
+    
+    /**
+     * Enter description here ...
+     * @param mixed $conn
+     * @param mixed $class
+     * @return IcingaDoctrine_Query
+     */
     public static function create($conn = NULL, $class = NULL) {
-        return new IcingaDoctrine_Query($conn);
+        
+        if (!($conn instanceof Doctrine_Connection) && $conn) {
+            $conn = Doctrine_Manager::getInstance()->getConnection($conn);
+        }
+        
+        return parent::create($conn, 'IcingaDoctrine_Query');
     }
     
     /**
