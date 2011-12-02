@@ -71,6 +71,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
      */
     protected $ociErrors = array();
     
+    private $aliasMap = array();
+    
     /**
      * the constructor
      * 
@@ -91,11 +93,20 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $this->parseQuery();
     }
     
-    private $aliasMap = array();
-    public function fixCrappyIcingaTables($query) { 
+    
+    
+    private function fixCrappyIcingaTables($query) {
+
+        if (!preg_match('/^\s*(SELECT|INSERT|UPDATE|DELETE)/i', $query)) {
+            return $query;
+        }
+        
+        
         $this->resolveIdFields($query); 
         $this->createAliasMap($query);
-        $this->removeInvalidAliases($query); 
+        $this->removeInvalidAliases($query);
+        $this->fixOrderFields($query);
+        
         
         // dirty icinga specific fixes  
         $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
@@ -110,10 +121,32 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
     }
 
     private function removeInvalidAliases(&$query) {
-      
         $query = preg_replace("/(ORDER BY) *([A-Za-z._0-9]+) +AS +[_A-Za-z0-9]+/i","$1 $2",$query);  
        // $query = preg_replace("/(FROM *\( *SELECT.*? *)ORDER BY .*?(\) *\w+ *WHERE.*)/","$1 $2",$query);
        
+    }
+    
+    /**
+     * Search for all ORDER tags and check if they selected. If not
+     * remove the error-prone statement part
+     * @param string $query
+     * @return integer Number of removed order parts
+     */
+    private function fixOrderFields(&$query) {
+        $matches = array ();
+        $re = 0;
+        
+        preg_match_all('/ORDER\s+BY\s+([\w\.]+)\s*(ASC|DESC)?/i', $query, $matches, PREG_SET_ORDER);
+        
+        foreach ($matches as $m) {
+            $re = sprintf('/SELECT\s+.*(%s).*FROM/i', preg_quote($m[1]));
+            if (!preg_match($re, $query)) {
+                $query = str_replace($m[0], '', $query);
+                $re++;
+            }
+        }
+        
+        return $re;
     }
     
     private function resolveIdFields(&$query) {

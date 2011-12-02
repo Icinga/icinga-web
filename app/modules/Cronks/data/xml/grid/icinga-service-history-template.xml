@@ -19,8 +19,6 @@
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
 
-
-        
         <parameter name="security">
         	<parameter>IcingaServicegroup</parameter>
         	<parameter>IcingaHostCustomVariablePair</parameter>
@@ -68,19 +66,7 @@
     </pager>
     
     <grouping>
-    	<parameter name="enabled">true</parameter>
-    	<parameter name="field">state_group_date</parameter>
-    	
-    	<!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
-    	<parameter name="Ext.grid.GroupingView">
-    		<parameter name="hideGroupedColumn">true</parameter>
-    		<parameter name="startCollapsed">false</parameter>
-    	</parameter>
-    	
-    	<!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
-    	<!-- <parameter name="Ext.data.GroupingStore">
-    		
-    	</parameter> -->
+    	<parameter name="enabled">false</parameter>
     </grouping>
     
     <!--
@@ -440,35 +426,6 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
-            </display>
-            
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-            
-            <order>
-                <parameter name="enabled">true</parameter>
-                <parameter name="default">false</parameter>
-                <parameter name="order">DESC</parameter>
-            </order>
-        </field>
-        
-        <field name="state_group_date">
-        	<datasource>
-        		<parameter name="field">STATEHISTORY_STATE_TIME</parameter>
-        	</datasource>
-        	
-        	<display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label">Groupdate</parameter>
-                
-                <parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-                	<parameter name="method">formatDate</parameter>
-					<parameter name="arguments">
-						<parameter name="format"><![CDATA[Y-m-d H:00:00]]></parameter>
-					</parameter>
-                </parameter>
             </display>
             
             <filter>
