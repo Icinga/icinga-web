@@ -8,10 +8,17 @@ class IcingaDoctrine_Query extends Doctrine_Query {
      * @return IcingaDoctrine_Query
      */
     public static function create($conn = NULL, $class = NULL) {
+        $manager = Doctrine_Manager::getInstance();
         
         if (!($conn instanceof Doctrine_Connection) && $conn) {
-            $conn = Doctrine_Manager::getInstance()->getConnection($conn);
+            $conn = $manager->getConnection($conn);
+        } else {
+            $conn = $manager->getConnection('icinga');
         }
+        
+        $conn_name = $manager->getConnectionName($conn);
+        
+        AgaviContext::getInstance()->getLoggerManager()->log('QUERY::CREATE Obtain doctrine connection: '. $conn_name, AgaviLogger::DEBUG);
         
         return parent::create($conn, 'IcingaDoctrine_Query');
     }
