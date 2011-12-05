@@ -59,7 +59,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
                     this.form.form.reset();
                     this.collapse();
             };
-            AppKit.log(this.target,this.form);
+            // AppKit.log(this.target,this.form);
             this.form = this.formBuilder.build(this.command, {
                 renderSubmit: true,
                 targets: [this.target],

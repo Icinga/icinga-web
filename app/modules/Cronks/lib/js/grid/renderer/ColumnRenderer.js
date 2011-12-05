@@ -140,7 +140,7 @@ Cronk.grid.ColumnRenderer = {
 			if (!('image' in my) || !my["image"]) {
 				return '';//[no image defined (attr=image)]';
 			} else {
-				AppKit.log(my.booleanConditionField, my.image, record.data[my.booleanConditionField]);
+				// AppKit.log(my.booleanConditionField, my.image, record.data[my.booleanConditionField]);
 				var imgName = new Ext.XTemplate(my.image).apply(record.data);
 				// Old version
 				// return String.format('<img src="{0}/{1}"{2} />', AppKit.c.path, imgName, (flat_attr && " " + flat_attr + " "));

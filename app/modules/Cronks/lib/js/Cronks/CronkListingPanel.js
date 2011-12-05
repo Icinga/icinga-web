@@ -275,7 +275,7 @@ Ext.ns('Icinga.Cronks.System');
                         });
 
                         win.on('submitForm', function (formPanel, values, form) {
-                            AppKit.log(values);
+                            // AppKit.log(values);
 
                             var record = new this.grid.store.recordType({
                                 id: this.grid.store.getCount() + 1,

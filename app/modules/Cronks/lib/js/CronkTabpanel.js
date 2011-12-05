@@ -170,7 +170,7 @@ Ext.extend(Cronk.util.Tabpanel, Ext.ux.panel.DDTabPanel, {
 				if (Ext.isArray(state.tabOrder)) {
 					this.tabOrder = state.tabOrder;
 					
-					AppKit.log("Got state: ", state.tabOrder);
+					// AppKit.log("Got state: ", state.tabOrder);
 				}
 				
 				this.getActiveTab().doLayout();
