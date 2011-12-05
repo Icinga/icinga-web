@@ -37,7 +37,7 @@
  */
 abstract class BaseIcingaProgramstatus extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaProgramstatus")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'programstatus');
         $this->hasColumn('programstatus_id', 'integer', 4, array(
                              'type' => 'integer',

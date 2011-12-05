@@ -16,7 +16,7 @@
  */
 abstract class BaseIcingaInstances extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHoststatus")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'instances');
         $this->hasColumn('instance_id', 'integer', 2, array(
                              'type' => 'integer',

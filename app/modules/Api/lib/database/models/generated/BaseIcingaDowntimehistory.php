@@ -32,7 +32,7 @@
  */
 abstract class BaseIcingaDowntimehistory extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaDowntimehistory")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'downtimehistory');
         $this->hasColumn('downtimehistory_id', 'integer', 4, array(
                              'type' => 'integer',

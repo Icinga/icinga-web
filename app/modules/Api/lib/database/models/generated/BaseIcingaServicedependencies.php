@@ -24,7 +24,7 @@
  */
 abstract class BaseIcingaServicedependencies extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicedependencies")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'servicedependencies');
         $this->hasColumn('servicedependency_id', 'integer', 4, array(
                              'type' => 'integer',

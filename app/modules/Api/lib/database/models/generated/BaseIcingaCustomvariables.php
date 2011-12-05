@@ -20,7 +20,7 @@
  */
 abstract class BaseIcingaCustomvariables extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCustomvariables")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'customvariables');
         $this->hasColumn('customvariable_id', 'integer', 4, array(
                              'type' => 'integer',

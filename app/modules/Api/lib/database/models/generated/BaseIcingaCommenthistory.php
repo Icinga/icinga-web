@@ -31,7 +31,7 @@
  */
 abstract class BaseIcingaCommenthistory extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaCommenthistory")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'commenthistory');
         $this->hasColumn('commenthistory_id', 'integer', 4, array(
                              'type' => 'integer',

@@ -22,7 +22,7 @@
  */
 abstract class BaseIcingaSlahistory extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaConfiginfo")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'slahistory');
         $this->hasColumn('slahistory_id', 'integer', 4, array(
                              'type' => 'integer',

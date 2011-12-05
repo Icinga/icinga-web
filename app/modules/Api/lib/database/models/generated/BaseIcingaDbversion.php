@@ -15,7 +15,7 @@
  */
 abstract class BaseIcingaDbversion extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaDbversion")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'dbversion');
         $this->hasColumn('name', 'string', 10, array(
                              'type' => 'string',

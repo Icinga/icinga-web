@@ -16,7 +16,7 @@
  */
 abstract class BaseIcingaServicegroupMembers extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicegroupMembers")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'servicegroup_members');
         $this->hasColumn('servicegroup_member_id', 'integer', 4, array(
                              'type' => 'integer',

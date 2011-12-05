@@ -26,7 +26,7 @@
  */
 abstract class BaseIcingaNotifications extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaNotifications")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'notifications');
         $this->hasColumn('notification_id', 'integer', 4, array(
                              'type' => 'integer',

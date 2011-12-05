@@ -17,7 +17,7 @@
  */
 abstract class BaseIcingaHostescalationContacts extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostescalationContacts")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'hostescalation_contacts');
         $this->hasColumn('hostescalation_contact_id', 'integer', 4, array(
                              'type' => 'integer',

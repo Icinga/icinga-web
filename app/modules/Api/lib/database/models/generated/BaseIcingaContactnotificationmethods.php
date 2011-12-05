@@ -23,7 +23,7 @@
  */
 abstract class BaseIcingaContactnotificationmethods extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaContactnotificationmethods")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'contactnotificationmethods');
         $this->hasColumn('contactnotificationmethod_id', 'integer', 4, array(
                              'type' => 'integer',

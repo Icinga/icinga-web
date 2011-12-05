@@ -18,7 +18,7 @@
  */
 abstract class BaseIcingaObjects extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaObjects")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'objects');
         $this->hasColumn('object_id', 'integer', 4, array(
                              'type' => 'integer',

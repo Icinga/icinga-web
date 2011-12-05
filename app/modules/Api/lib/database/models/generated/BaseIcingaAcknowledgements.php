@@ -27,7 +27,7 @@
  */
 abstract class BaseIcingaAcknowledgements extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaAcknowledgements")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'acknowledgements');
         $this->hasColumn('acknowledgement_id', 'integer', 4, array(
                              'type' => 'integer',

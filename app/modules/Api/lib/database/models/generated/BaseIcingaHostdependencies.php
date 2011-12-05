@@ -24,7 +24,7 @@
  */
 abstract class BaseIcingaHostdependencies extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostdependencies")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'hostdependencies');
         $this->hasColumn('hostdependency_id', 'integer', 4, array(
                              'type' => 'integer',

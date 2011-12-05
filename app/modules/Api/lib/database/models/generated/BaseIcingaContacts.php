@@ -36,7 +36,7 @@
  */
 abstract class BaseIcingaContacts extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaContacts")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'contacts');
         $this->hasColumn('contact_id', 'integer', 4, array(
                              'type' => 'integer',

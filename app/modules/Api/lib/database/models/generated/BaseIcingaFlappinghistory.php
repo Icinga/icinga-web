@@ -25,7 +25,7 @@
  */
 abstract class BaseIcingaFlappinghistory extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaFlappinghistory")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'flappinghistory');
         $this->hasColumn('flappinghistory_id', 'integer', 4, array(
                              'type' => 'integer',

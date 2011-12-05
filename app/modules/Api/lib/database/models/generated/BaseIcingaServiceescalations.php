@@ -25,7 +25,7 @@
  */
 abstract class BaseIcingaServiceescalations extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServiceescalations")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'serviceescalations');
         $this->hasColumn('serviceescalation_id', 'integer', 4, array(
                              'type' => 'integer',

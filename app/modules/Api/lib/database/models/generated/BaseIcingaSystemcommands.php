@@ -26,7 +26,7 @@
  */
 abstract class BaseIcingaSystemcommands extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicestatus")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'systemcommands');
         $this->hasColumn('systemcommand_id', 'integer', 4, array(
                              'type' => 'integer',

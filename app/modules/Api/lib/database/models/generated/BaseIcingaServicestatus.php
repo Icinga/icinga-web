@@ -60,7 +60,7 @@
  */
 abstract class BaseIcingaServicestatus extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaServicestatus")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'servicestatus');
         $this->hasColumn('servicestatus_id', 'integer', 4, array(
                              'type' => 'integer',

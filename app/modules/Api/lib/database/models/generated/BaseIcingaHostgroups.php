@@ -20,7 +20,7 @@
  */
 abstract class BaseIcingaHostgroups extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaHostgroups")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'hostgroups');
         $this->hasColumn('hostgroup_id', 'integer', 4, array(
                              'type' => 'integer',

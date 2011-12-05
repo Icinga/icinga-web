@@ -18,7 +18,7 @@
  */
 abstract class BaseIcingaTimeperiodTimeranges extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnectionForComponent("IcingaTimeperiodTimeranges")->getPrefix();
+        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
         $this->setTableName($prefix.'stimeperiod_timeranges');
         $this->hasColumn('timeperiod_timerange_id', 'integer', 4, array(
                              'type' => 'integer',
