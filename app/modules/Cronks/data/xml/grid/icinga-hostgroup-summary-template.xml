@@ -184,8 +184,7 @@
     	Paging record on its result
     -->
     <pager>
-    	<parameter name="enabled">false</parameter>
-    	
+    	<parameter name="enabled">true</parameter>
     	<parameter name="start">0</parameter>
     </pager>
     
