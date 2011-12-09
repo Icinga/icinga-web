@@ -439,41 +439,6 @@
             </order>
         </field>
         
-        <field name="state_check_attempt">
-        	<datasource>
-        		<parameter name="field">STATEHISTORY_CURRENT_CHECK_ATTEMPT</parameter>
-        	</datasource>
-        	
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label">Attempt</parameter>
-                
-                <parameter name="width">100</parameter>
-                
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
-                </parameter>
-                
-				<parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-                	<parameter name="method">formatTemplate</parameter>
-					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.state_check_attempt} / ${field.state_max_check_attempts}]]></parameter>
-					</parameter>
-                </parameter>
-            </display>
-        	
-            <filter>
-                <parameter name="enabled">false</parameter>    
-            </filter>
-            
-            <order>
-                <parameter name="enabled">true</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-        </field>
-        
         <field name="state_output">
         	<datasource>
         		<parameter name="field">STATEHISTORY_OUTPUT</parameter>
@@ -482,11 +447,12 @@
         	<display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
-                
-                <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter>
-           
+               
+                 <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
+                    </parameter>
                 </parameter>
             </display>
             
@@ -498,6 +464,41 @@
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
                 <parameter name="order">DESC</parameter>
+            </order>
+        </field>
+        
+        <field name="state_check_attempt">
+            <datasource>
+                <parameter name="field">STATEHISTORY_CURRENT_CHECK_ATTEMPT</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Attempt</parameter>
+                
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">formatTemplate</parameter>
+                    <parameter name="arguments">
+                        <parameter name="format"><![CDATA[${field.state_check_attempt} / ${field.state_max_check_attempts}]]></parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
             </order>
         </field>
         

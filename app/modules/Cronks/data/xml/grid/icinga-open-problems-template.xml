@@ -558,76 +558,6 @@
                 <parameter name="order">DESC</parameter>
             </order>
         </field>
-        
-        <field name="check_attempt_host">
-        	<datasource>
-        		<parameter name="field">HOST_CURRENT_CHECK_ATTEMPT</parameter>
-        	</datasource>
-        	
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label">Attempt (Host)</parameter>
-                
-				<parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-                	<parameter name="method">formatTemplate</parameter>
-					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.check_attempt_host} / ${field.max_attempt_host}]]></parameter>
-					</parameter>
-                </parameter>
-            </display>
-        	
-            <filter>
-                <parameter name="enabled">false</parameter>    
-            </filter>
-            
-            <order>
-                <parameter name="enabled">true</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-        </field>
-
-        <field name="check_attempt_service">
-        	<datasource>
-        		<parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
-        	</datasource>
-
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label">Attempt (Service)</parameter>
-				<parameter name="jsFunc">
-					<parameter>
-						<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-						<parameter name="function">regExpReplace</parameter>
-
-						<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-						<parameter name="type">renderer</parameter>
-
-						<parameter name="arguments">
-
-							<parameter name="expression"><![CDATA[^[^0-9]*?[^ ][^\/][^ ][^0-9]*?$]]></parameter>
-							<parameter name="replacement">N/A</parameter>
-						</parameter>
-					</parameter>
-				</parameter>
-				<parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-                	<parameter name="method">formatTemplate</parameter>
-					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.check_attempt_service} / ${field.max_attempt_service}]]></parameter>
-					</parameter>
-                </parameter>
-            </display>
-
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-
-            <order>
-                <parameter name="enabled">true</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-        </field>
 
         <field name="plugin_output">
         	<datasource>
@@ -637,13 +567,12 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Hostcheck output</parameter>
-                
+
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
+                    </parameter>
                 </parameter>
                 
             </display>
@@ -668,13 +597,12 @@
                 <parameter name="label">Servicecheck output</parameter>
 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter>
-                	<parameter name="arguments">
-						<parameter name="length">40</parameter>
-                	</parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
+                    </parameter>
                 </parameter>
-
+ 
             </display>
 
             <filter>
@@ -686,6 +614,77 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
+        
+        <field name="check_attempt_host">
+            <datasource>
+                <parameter name="field">HOST_CURRENT_CHECK_ATTEMPT</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Attempt (Host)</parameter>
+                
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">formatTemplate</parameter>
+                    <parameter name="arguments">
+                        <parameter name="format"><![CDATA[${field.check_attempt_host} / ${field.max_attempt_host}]]></parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+
+        <field name="check_attempt_service">
+            <datasource>
+                <parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Attempt (Service)</parameter>
+                <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">regExpReplace</parameter>
+
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+
+                        <parameter name="arguments">
+
+                            <parameter name="expression"><![CDATA[^[^0-9]*?[^ ][^\/][^ ][^0-9]*?$]]></parameter>
+                            <parameter name="replacement">N/A</parameter>
+                        </parameter>
+                    </parameter>
+                </parameter>
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">formatTemplate</parameter>
+                    <parameter name="arguments">
+                        <parameter name="format"><![CDATA[${field.check_attempt_service} / ${field.max_attempt_service}]]></parameter>
+                    </parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
     </fields>
     
 </template>

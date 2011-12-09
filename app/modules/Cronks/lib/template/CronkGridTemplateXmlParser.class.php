@@ -359,6 +359,7 @@ class CronkGridTemplateXmlParser {
     private function initCaching() {
         $cfg = AgaviConfig::get('modules.cronks.templates');
 
+	/*
         if (isset($cfg['use_caching'])) {
             $this->useCaching = $cfg['use_caching'];
         }
@@ -370,6 +371,9 @@ class CronkGridTemplateXmlParser {
         if (!$this->cache_dir) {
             $this->useCaching = false;
         }
+	*/
+
+	$this->useCaching = false;
 
     }
 

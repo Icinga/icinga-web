@@ -1070,41 +1070,6 @@
             </order>
         	
         </field>
-
-        <field name="service_check_attempt">
-        	<datasource>
-        		<parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
-        	</datasource>
-        	
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label">Attempt</parameter>
-                
-                <parameter name="width">100</parameter>
-                
-                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
-                <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
-                </parameter>
-                
-				<parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-                	<parameter name="method">formatTemplate</parameter>
-					<parameter name="arguments">
-						<parameter name="format"><![CDATA[${field.service_check_attempt} / ${field.service_max_attempt}]]></parameter>
-					</parameter>
-                </parameter>
-            </display>
-        	
-            <filter>
-                <parameter name="enabled">false</parameter>    
-            </filter>
-            
-            <order>
-                <parameter name="enabled">true</parameter>
-                <parameter name="default">false</parameter>
-            </order>
-        </field>
         
         <field name="plugin_output">
         	<datasource>
@@ -1114,10 +1079,12 @@
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
-                
+
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">truncateText</parameter> 
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">customColumnPerfdataSanatized</parameter> 
+                    </parameter>
                 </parameter>
             </display>
         	
@@ -1131,6 +1098,40 @@
             </order>
         </field>
         
+        <field name="service_check_attempt">
+            <datasource>
+                <parameter name="field">SERVICE_CURRENT_CHECK_ATTEMPT</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Attempt</parameter>
+                
+                <parameter name="width">100</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                
+                <parameter name="userFunc">
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">formatTemplate</parameter>
+                    <parameter name="arguments">
+                        <parameter name="format"><![CDATA[${field.service_check_attempt} / ${field.service_max_attempt}]]></parameter>
+                    </parameter>
+                </parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
         
     </fields>
     
