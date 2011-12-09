@@ -290,7 +290,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
 
                         $padmin->updatePrincipalValueData(
-                            $user->NsmPrincipal,
+                            $user->principal,
                             array(),
                             array()
                         );
