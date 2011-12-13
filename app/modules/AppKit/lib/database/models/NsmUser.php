@@ -338,22 +338,48 @@ class NsmUser extends BaseNsmUser {
             ->orWhere('p.principal_user_id = ?',$this->user_id)
             ->execute()->toArray());
     }
+    
+    private function collectChildRoleIdentifier(NsmRole $role, array &$store = array ()) {
+            foreach ($role->getChildren() as $child) {
+                $this->collectChildRoleIdentifier($child, $store);
+                $store[] = $child->role_id;
+            }
+    }
 
     private function getRoleIds() {
+        
+        $use_topdown = AgaviConfig::get('modules.appkit.auth.behaviour.group_topdown');
+        
         $ids = array();
         foreach($this->NsmRole as $role) {
             if($role->role_disabled)
                 continue;
             $ids[] = $role->role_id;
-
-            while ($role->hasParent()){
-                $role = $role->parent;
-                if($role->role_disabled)
-                    continue;
-                $ids[] = $role->role_id;       
+            
+            /*
+             * This is devel classic behaviour. Inheritance
+             * of roles goes top-down. This means the role with all
+             * credentials is the deepest.
+             */
+            if ($use_topdown === true) {
+                while ($role->hasParent()){
+                    $role = $role->parent;
+                    if($role->role_disabled)
+                        continue;
+                    $ids[] = $role->role_id;       
+                }
+            
+            /*
+             * This is more group managing like. The group on top
+             * collects all credentials from underlaying groups
+             */
+            } else {
+                $this->collectChildRoleIdentifier($role, $ids);
             }
         }
-         
+
+        $ids = array_unique($ids);
+        
         return $ids;
     }
     

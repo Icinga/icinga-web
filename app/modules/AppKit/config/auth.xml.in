@@ -15,6 +15,16 @@
 	
 
 	-->
+	
+	<!--
+	   This is how group-inheritance works. Top-down is like
+	   class inheritance: The deepest group gets all credentials.
+	   
+	   Setting this to 'false' its more like group management
+	   systems like LDAP/AD: The group on top will get all
+	   credentials
+	-->
+	<setting name="behaviour.group_topdown">true</setting>
 
 	<!-- Allow silent providers (like HTTPBasicAuthentication) -->
 	<setting name="behaviour.enable_silent">true</setting>

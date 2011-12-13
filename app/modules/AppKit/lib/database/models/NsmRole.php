@@ -45,7 +45,6 @@ class NsmRole extends BaseNsmRole {
         return $this->storage;
     }
 
-
     public function hasParent() {
         if ($this->get('role_parent')) {
             return true;
