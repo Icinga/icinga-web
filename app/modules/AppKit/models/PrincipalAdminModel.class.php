@@ -44,7 +44,7 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
     }
 
     public function getSelectedValues($principal_id) {
-        $r = Doctrine_Query::create()
+        $r = AppKitDoctrineUtil::createQuery()
              ->select('pt.pt_principal_id, tv.*, t.*')
              ->from('NsmPrincipalTarget pt')
              ->leftJoin('pt.NsmTargetValue tv')
@@ -111,14 +111,14 @@ class AppKit_PrincipalAdminModel extends AppKitBaseModel {
 
     private function deleteAllPrincipalTargetEntries(NsmPrincipal &$p) {
 
-        Doctrine_Manager::connection()->beginTransaction();
+        AppKitDoctrineUtil::getConnection()->beginTransaction();
 
         foreach($p->NsmPrincipalTarget as $pt) {
             $pt->NsmTargetValue->delete();
             $pt->delete();
         }
 
-        Doctrine_Manager::connection()->commit();
+        AppKitDoctrineUtil::getConnection()->commit();
 
         return true;
     }

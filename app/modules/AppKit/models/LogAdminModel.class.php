@@ -9,7 +9,7 @@ class AppKit_LogAdminModel extends AppKitBaseModel {
      * @author Marius Hein
      */
     public function getLogQuery($limit=1000) {
-        return Doctrine_Query::create()
+        return AppKitDoctrineUtil::createQuery()
                ->from('NsmLog')
                ->limit('1000')
                ->orderBy('log_created DESC');

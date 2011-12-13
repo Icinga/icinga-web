@@ -122,7 +122,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
     }
 
     private function getDbCategories($get_all=false) {
-        $collection = Doctrine_Query::create()
+        $collection = AppKitDoctrineUtil::createQuery()
                       ->select('cat.*')
                       ->from('CronkCategory cat');
 
@@ -186,7 +186,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
     public function deleteCategoryRecord($cc_uid) {
         if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cc_uid)) {
-            $res = Doctrine_Query::create()
+            $res = AppKitDoctrineUtil::createQuery()
                    ->delete('CronkCategory cc')
                    ->andWhere('cc.cc_uid=?', array($cc_uid))
                    ->limit(1)
@@ -206,7 +206,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $category = null;
 
         if ($this->agaviUser->hasCredential('icinga.cronk.category.admin') && isset($cat['cc_uid'])) {
-            $category = Doctrine_Query::create()
+            $category = AppKitDoctrineUtil::createQuery()
                         ->from('CronkCategory cc')
                         ->andWhere('cc.cc_uid=?', $cat['cc_uid'])
                         ->execute()->getFirst();
@@ -226,7 +226,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $groups = AppKitArrayUtil::trimSplit($listofnames, ',');
 
         if (is_array($groups) && count($groups)) {
-            $c = Doctrine_Query::create()
+            $c = AppKitDoctrineUtil::createQuery()
                  ->select('r.role_id')
                  ->from('NsmRole r')
                  ->innerJoin('r.NsmUserRole ur WITH ur.usro_user_id=?', $this->user->user_id)
@@ -342,7 +342,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
         $p = $this->principals;
 
-        $cronks = Doctrine_Query::create()
+        $cronks = AppKitDoctrineUtil::createQuery()
                   ->from('Cronk c')
                   ->innerJoin('c.CronkPrincipalCronk cpc')
                   ->andWhereIn('cpc.cpc_principal_id', $p)
@@ -417,7 +417,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
                             $roles = AppKitArrayUtil::trimSplit($value, ',');
 
-                            $arry = Doctrine_Query::create()
+                            $arry = AppKitDoctrineUtil::createQuery()
                                     ->select('r.role_name')
                                     ->from('NsmRole r INDEXBY r.role_name')
                                     ->andWhereIn('r.role_id', $roles)
@@ -470,7 +470,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
         $cronk->CronkCategoryCronk->delete();
 
-        $ccollection = Doctrine_Query::create()
+        $ccollection = AppKitDoctrineUtil::createQuery()
                        ->from('CronkCategory cc')
                        ->andWhereIn('cc.cc_uid', $carr)
                        ->execute();
@@ -491,7 +491,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $cronk->CronkPrincipalCronk->delete();
 
         if (is_array($rarr)) {
-            $principals = Doctrine_Query::create()
+            $principals = AppKitDoctrineUtil::createQuery()
                           ->select('p.principal_id')
                           ->from('NsmPrincipal p')
                           ->innerJoin('p.NsmRole r')
@@ -503,7 +503,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
             }
         }
 
-        $principals = Doctrine_Query::create()
+        $principals = AppKitDoctrineUtil::createQuery()
                       ->select('p.principal_id')
                       ->from('NsmPrincipal p')
                       ->andWhereIn('p.principal_id', $parr)
@@ -558,7 +558,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
     }
 
     public function deleteCronkRecord($cronkid, $cronkname, $own=true) {
-        $q = Doctrine_Query::create()
+        $q = AppKitDoctrineUtil::createQuery()
              ->select('c.*')
              ->from('Cronk c')
              ->where('c.cronk_uid=? and c.cronk_name=?', array($cronkid, $cronkname));
@@ -570,11 +570,11 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $cronk = $q->execute()->getFirst();
 
         if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
-            Doctrine_Manager::getInstance()->getCurrentConnection()->beginTransaction();
+            AppKitDoctrineUtil::getConnection()->beginTransaction();
             $cronk->CronkCategoryCronk->delete();
             $cronk->CronkPrincipalCronk->delete();
             $cronk->save();
-            Doctrine_Manager::getInstance()->getCurrentConnection()->commit();
+            AppKitDoctrineUtil::getConnection()->commit();
             
             // bad but helps doctrine to work
             // with oracle ;-)

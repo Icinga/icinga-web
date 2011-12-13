@@ -64,7 +64,7 @@ class NsmRole extends BaseNsmRole {
 
     public function getChildren() {
         if ($this->children === null) {
-            $this->children = Doctrine_Query::create()
+            $this->children = AppKitDoctrineUtil::createQuery()
                               ->select('r.*')
                               ->from("NsmRole r INDEXBY r.role_id")
                               ->where("r.role_parent = ?",$this->get("role_id"))
@@ -98,7 +98,7 @@ class NsmRole extends BaseNsmRole {
 
         if ($this->principals === null) {
 
-            $this->principals = Doctrine_Query::create()
+            $this->principals = AppKitDoctrineUtil::createQuery()
                                 ->select('p.*')
                                 ->from('NsmPrincipal p INDEXBY p.principal_id')
                                 ->andWhere('p.principal_type = ? AND p.principal_role_id = ?',array('role',$this->get("role_id")))
@@ -118,7 +118,7 @@ class NsmRole extends BaseNsmRole {
      */
     protected function getTargetsQuery($type=null) {
 
-        $q = Doctrine_Query::create()
+        $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
              ->distinct(true)
              ->from('NsmTarget t INDEXBY t.target_id')
@@ -180,7 +180,7 @@ class NsmRole extends BaseNsmRole {
      * @return Doctrine_Query
      */
     protected function getTargetValuesQuery($target_name) {
-        $q = Doctrine_Query::create()
+        $q = AppKitDoctrineUtil::createQuery()
              ->select('tv.*')
              ->from('NsmTargetValue tv')
              ->innerJoin('tv.NsmPrincipalTarget pt')
@@ -216,7 +216,7 @@ class NsmRole extends BaseNsmRole {
     public function getTargetValuesArray() {
         
         if (count(self::$targetValuesCache) == 0) {
-            $tc = Doctrine_Query::create()
+            $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
                   ->from('NsmTarget t')
                   ->innerJoin('t.NsmPrincipalTarget pt')
@@ -228,7 +228,7 @@ class NsmRole extends BaseNsmRole {
             foreach($tc as $t) {
                 $out[ $t->target_name ] = array();
     
-                $ptc = Doctrine_Query::create()
+                $ptc = AppKitDoctrineUtil::createQuery()
                        ->from('NsmPrincipalTarget pt')
                        ->innerJoin('pt.NsmTargetValue tv')
                        ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())

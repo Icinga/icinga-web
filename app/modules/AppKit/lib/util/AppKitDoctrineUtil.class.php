@@ -79,6 +79,26 @@ class AppKitDoctrineUtil {
 
         return $query->execute();
     }
+    
+    /**
+     * @return Doctrine_Connection
+     */
+    public static function getConnection() {
+        static $connection = null;
+        
+        if ($connection === null) {
+            $connection = Doctrine_Manager::getInstance()->getConnection(AppKitIConstants::DEFAULT_CONNECTION);
+        }
+        
+        return $connection;
+    }
+    
+    /**
+     * @return Doctrine_Query
+     */
+    public static function createQuery() {
+        return Doctrine_Query::create(self::getConnection());
+    }
 
 }
 

@@ -13,7 +13,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         if (!($conn instanceof Doctrine_Connection) && $conn) {
             $conn = $manager->getConnection($conn);
         } else {
-            $conn = $manager->getConnection('icinga');
+            $conn = $manager->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA);
         }
         
         $conn_name = $manager->getConnectionName($conn);

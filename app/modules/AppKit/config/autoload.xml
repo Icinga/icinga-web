@@ -8,6 +8,9 @@
 		<autoload name="AppKitBaseView">%core.module_dir%/AppKit/lib/view/AppKitBaseView.class.php</autoload>
 		<autoload name="Net_SSH2">%core.root_dir%/lib/phpseclib/Net/SSH2.php</autoload>
 
+        <!-- CONSTANTS -->
+        <autoload name="AppKitIConstants">%core.module_dir%/AppKit/lib/constants/AppKitIConstants.interface.php</autoload>
+
 		<!-- Auth and auth providers -->
 		<autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
 		<autoload name="AppKitAuthProviderBaseModel">%core.module_dir%/AppKit/lib/auth/AppKitAuthProviderBaseModel.class.php</autoload>

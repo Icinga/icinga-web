@@ -143,7 +143,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
             }
 
             // Update the basics
-            Doctrine_Manager::connection()->beginTransaction();
+            AppKitDoctrineUtil::getConnection()->beginTransaction();
             $roleadmin->updateRoleData($role, $rd);
 
             if (!$rd->getParameter("ignorePrincipals",false)) {
@@ -154,7 +154,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                 );
             }
 
-            Doctrine_Manager::connection()->commit();
+            AppKitDoctrineUtil::getConnection()->commit();
             
             if (!$rd->getParameter("ignorePrincipals",false)) {
                 $useradmin = $this->getContext()->getModel('UserAdmin','AppKit');
@@ -166,7 +166,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         } catch (Exception $e) {
             $this->setAttribute("error", $e->getMessage());
             try {
-                Doctrine_Manager::connection()->rollback();
+                AppKitDoctrineUtil::getConnection()->rollback();
             } catch (Doctrine_Transaction_Exception $e) {}
 
 
@@ -224,7 +224,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
     
     public function executeRemove(AgaviRequestDataHolder $rd) {
         try {
-            Doctrine_Manager::connection()->beginTransaction();
+            AppKitDoctrineUtil::getConnection()->beginTransaction();
             $roleadmin = $this->getContext()->getModel('RoleAdmin', 'AppKit');
             $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
             $ids = $rd->getParameter("ids",array());
@@ -237,10 +237,10 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
 
                 $roleadmin->removeRole($role);
             }
-            Doctrine_Manager::connection()->commit();
+            AppKitDoctrineUtil::getConnection()->commit();
         } catch (Exception $e) {
             try {
-                Doctrine_Manager::connection()->rollback();
+                AppKitDoctrineUtil::getConnection()->rollback();
             } catch (Doctrine_Transaction_Exception $e) {}
             $this->setAttribute("error",$e->getMessage());
         }

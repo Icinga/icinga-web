@@ -27,7 +27,7 @@ class AppKit_Auth_Provider_AuthKeyModel extends AppKitAuthProviderBaseModel  imp
      */
     public function isAvailable($uid, $authid=null) {
 
-        $res = Doctrine_Query::create()
+        $res = AppKitDoctrineUtil::createQuery()
                ->select('COUNT(u.user_id) as cnt')
                ->from('NsmUser u')
                ->where('u.user_authkey=? and user_disabled=? and user_authsrc = ?', array($uid, 0,'auth_key'));

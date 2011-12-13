@@ -36,7 +36,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
      * @author Jannis Mosshammer
      */
     public function getUsersCollectionInRange($disabled=false,$start = 0,$limit=25,$sort= null,$asc = true) {
-        $query = Doctrine_Query::create()
+        $query = AppKitDoctrineUtil::createQuery()
                  ->from("NsmUser")
                  ->limit($limit)
                  ->offset($start);
@@ -53,7 +53,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
     }
 
     public function getUserCount($disabled=false) {
-        $query = Doctrine_Query::create()
+        $query = AppKitDoctrineUtil::createQuery()
                  ->select("COUNT(u.user_id) count")
                  ->from("NsmUser u");
 
@@ -72,7 +72,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
      * @author Marius Hein
      */
     public function getUsersQuery($disabled=false) {
-        $query = Doctrine_Query::create()
+        $query = AppKitDoctrineUtil::createQuery()
                  ->from('NsmUser')
                  ->orderBy('user_name ASC');
 
@@ -184,7 +184,7 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
 
     public function removeUser(NsmUser &$user) {
         try {
-            Doctrine_Manager::connection()->beginTransaction();
+            AppKitDoctrineUtil::getConnection()->beginTransaction();
             $this->updateUserroles($user,array());
             $targets = $user->getTargets();
             foreach($targets as $target) {
@@ -216,11 +216,11 @@ class AppKit_UserAdminModel extends AppKitBaseModel {
             }
 
             $user->delete();
-            Doctrine_Manager::connection()->commit();
+            AppKitDoctrineUtil::getConnection()->commit();
 
             return true;
         } catch (Exception $e) {
-            Doctrine_Manager::connection()->rollback();
+            AppKitDoctrineUtil::getConnection()->rollback();
             $this->getContext()->getLoggerManager()->log($e->getMessage());
             throw($e);
         }

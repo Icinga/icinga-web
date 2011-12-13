@@ -18,7 +18,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
      * @author Marius Hein
      */
     public function getRoleQuery($disabled = 0) {
-        $roles = Doctrine_Query::create()
+        $roles = AppKitDoctrineUtil::createQuery()
                  ->from('NsmRole')
                  ->orderBy('role_name ASC');
 
@@ -54,7 +54,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
      * @author Jannis Mosshammer
      */
     public function getRoleCollectionInRange($disabled=false,$start = 0,$limit=25,$sort= null,$asc = true,$own=false) {
-        $query = Doctrine_Query::create()
+        $query = AppKitDoctrineUtil::createQuery()
                  ->select('r.*')
                  ->from("NsmRole r")
                  ->limit($limit)
@@ -76,7 +76,7 @@ class AppKit_RoleAdminModel extends AppKitBaseModel {
     }
 
     public function getRoleCount($disabled=false) {
-        $query = Doctrine_Query::create()
+        $query = AppKitDoctrineUtil::createQuery()
                  ->select("COUNT(u.role_id) count")
                  ->from("NsmRole u");
 

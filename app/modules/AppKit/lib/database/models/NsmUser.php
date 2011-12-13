@@ -180,7 +180,7 @@ class NsmUser extends BaseNsmUser {
      * @author Marius Hein
      */
     public function getPrefObject($key) {
-        $res = Doctrine_Query::create()
+        $res = AppKitDoctrineUtil::createQuery()
                ->from('NsmUserPreference p')
                ->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
                ->limit(1)
@@ -250,7 +250,7 @@ class NsmUser extends BaseNsmUser {
          * WORKAROUND:
          * Postgresql doesn't support limit, so we must first select a row, then delete it
          */
-        $idToDelete = Doctrine_Query::create()
+        $idToDelete = AppKitDoctrineUtil::createQuery()
                       ->select("upref_id")
                       ->from("NsmUserPreference p")
                       ->where('p.upref_user_id=? and p.upref_key=?', array($this->user_id, $key))
@@ -261,7 +261,7 @@ class NsmUser extends BaseNsmUser {
         }
 
         $upref_id = $idToDelete->get('upref_id');
-        $test = Doctrine_Query::create()
+        $test = AppKitDoctrineUtil::createQuery()
                 ->delete('NsmUserPreference p')
                 ->where('p.upref_id=? and p.upref_user_id=? and p.upref_key=?', array($upref_id,$this->user_id, $key))
                 //->limit(1)  -> not supported by postgresql
@@ -275,7 +275,7 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function getPreferences() {
-        $res = Doctrine_Query::create()
+        $res = AppKitDoctrineUtil::createQuery()
                ->select('p.upref_val, p.upref_key, p.upref_longval')
                ->from('NsmUserPreference p INDEXBY p.upref_key')
                ->where('p.upref_user_id=?', array($this->user_id))
@@ -295,7 +295,7 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function getPreferencesList(array $list=array()) {
-        $res = Doctrine_Query::create()
+        $res = AppKitDoctrineUtil::createQuery()
                ->select('p.upref_val, p.upref_key')
                ->from('NsmUserPreference p INDEXBY p.upref_key')
                ->where('p.upref_user_id=?', array($this->user_id))
@@ -332,7 +332,7 @@ class NsmUser extends BaseNsmUser {
     }
 
     public function getUserPrincipalsList() {
-        return array_keys(Doctrine_Query::create()
+        return array_keys(AppKitDoctrineUtil::createQuery()
             ->select('p.*')
             ->from('NsmPrincipal p INDEXBY p.principal_id')
             ->orWhere('p.principal_user_id = ?',$this->user_id)
@@ -366,7 +366,7 @@ class NsmUser extends BaseNsmUser {
 
         if ($this->principals === null) {
             $roles = $this->getRoleIds();
-            $this->principals = Doctrine_Query::create()
+            $this->principals = AppKitDoctrineUtil::createQuery()
                                 ->select('p.*')
                                 ->from('NsmPrincipal p INDEXBY p.principal_id')
                                 ->andWhereIn('p.principal_role_id',$roles)
@@ -409,7 +409,7 @@ class NsmUser extends BaseNsmUser {
      */
     protected function getTargetsQuery($type=null,$userOnly = false) {
         $principals = $userOnly ? $this->getUserPrincipalsList() : $this->getPrincipalsList();
-        $q = Doctrine_Query::create()
+        $q = AppKitDoctrineUtil::createQuery()
              ->select('t.*')
              ->distinct(true)
              ->from('NsmTarget t INDEXBY t.target_id')
@@ -460,7 +460,7 @@ class NsmUser extends BaseNsmUser {
      * @return Doctrine_Query
      */
     protected function getTargetValuesQuery($target_name) {
-        $q = Doctrine_Query::create()
+        $q = AppKitDoctrineUtil::createQuery()
              ->select('tv.*')
              ->from('NsmTargetValue tv')
              ->innerJoin('tv.NsmPrincipalTarget pt')
@@ -496,7 +496,7 @@ class NsmUser extends BaseNsmUser {
 
     public function getTargetValuesArray() {
         if (count(self::$targetValuesCache) == 0) {
-            $tc = Doctrine_Query::create()
+            $tc = AppKitDoctrineUtil::createQuery()
                   ->select('t.target_name, t.target_id')
                   ->from('NsmTarget t')
                   ->innerJoin('t.NsmPrincipalTarget pt')
@@ -508,7 +508,7 @@ class NsmUser extends BaseNsmUser {
             foreach($tc as $t) {
                 $out[ $t->target_name ] = array();
     
-                $ptc = Doctrine_Query::create()
+                $ptc = AppKitDoctrineUtil::createQuery()
                        ->from('NsmPrincipalTarget pt')
                        ->innerJoin('pt.NsmTargetValue tv')
                        ->andWhereIn('pt.pt_principal_id', $this->getPrincipalsList())

@@ -41,7 +41,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      */
     public function sessionDestroy($id) {
 
-        $result = Doctrine_Query::create()
+        $result = AppKitDoctrineUtil::createQuery()
                   ->delete('NsmSession')
                   ->andWhere('session_name=? and session_id=?', array($this->getParameter('session_name'), 'id'))
                   ->execute();
@@ -67,7 +67,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
 
         $this->getContext()->getLoggerManager()->log('Deleting sessions older that '. $date->format('c'), AgaviLogger::DEBUG);
 
-        $result = Doctrine_Query::create()
+        $result = AppKitDoctrineUtil::createQuery()
                   ->andWhere('session_modified < ?', array($date->format('Y-m-d H:i:s')))
                   ->delete('NsmSession')
                   ->execute();
@@ -101,7 +101,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
     public function sessionRead($id) {
         $session_name = $this->getParameter('session_name');
 
-        $result = Doctrine_Query::create()
+        $result = AppKitDoctrineUtil::createQuery()
                   ->select('*')
                   ->from('NsmSession n')
                   ->andWhere('session_id=? and session_name=?', array($id, $session_name))
