@@ -62,7 +62,6 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                 items: [
                     grid,
                     new AppKit.Admin.Components.RoleInheritanceView(Ext.apply(cfg),{grid:grid,store: this.roleList})
-
                 ],
                 autoScroll:true,
                 listeners: {

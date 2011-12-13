@@ -8,10 +8,12 @@ Ext.ns("AppKit.Admin.Components");
     AppKit.Admin.Components.RoleInheritanceView = Ext.extend(Ext.tree.TreePanel, {
         roleProviderURI: "",
         region: 'south',
+        split: true,
         height: 300,
         grid: null,
         store: null,
         layout: 'fit',
+        autoScroll : true,
         constructor: function (cfg) {
             if (!cfg) {
                 cfg = {};
