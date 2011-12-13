@@ -61,7 +61,9 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
             scope:this,
             text: 'Refresh',
             handler: function(c) {
-                c.ownerCt.ownerCt.getBottomToolbar().doRefresh();
+            	if (!Ext.isEmpty(c.ownerCt.ownerCt.store) && "reload" in c.ownerCt.ownerCt.store) {
+                    c.ownerCt.ownerCt.store.reload();
+            	}
             }
 
         },{

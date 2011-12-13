@@ -58,12 +58,13 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         $principals = $r->getPrincipals();
         $roleObject["principals"] = array();
         foreach($principals as $principal)
-            $targets = $principal->NsmPrincipalTarget;
+            if (($targets = $principal->NsmPrincipalTarget)) {
             foreach($targets as $t)
                 $roleObject["principals"][] = array(
                     "target" => $t->NsmTarget->toArray(),
                     "values" => $t->NsmTargetValue->toArray()
                 );
+            }
         return $roleObject;    
     }
     

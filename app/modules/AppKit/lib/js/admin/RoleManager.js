@@ -66,7 +66,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                 autoScroll:true,
                 listeners: {
                     render: function() {
-                        this.roleList.load({params: {start:0,limit:25}});
+                        this.roleList.load();
                     },
                     scope:this
                 }
@@ -106,7 +106,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                                 b.setIconClass('icinga-icon-disk');
                                 b.setText(_("Save"));
                                 b.setDisabled(false);
-                                _this.roleList.load({params: {start:0,limit:25}});
+                                _this.roleList.load();
                                 Ext.getCmp('roleEditor').setDisabled(true);
                             },
                             function() {
