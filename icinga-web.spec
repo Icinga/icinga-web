@@ -135,6 +135,7 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 %config(noreplace) %{_sysconfdir}/icinga-web/databases.xml
 %config(noreplace) %{_sysconfdir}/icinga-web/reporting.xml
 %config(noreplace) %{_sysconfdir}/icinga-web/translation.xml
+%config(noreplace) %{_sysconfdir}/icinga-web/sla.xml
 # logs+cache
 %attr(2775,%{apacheuser},%{apachegroup}) %dir %{logdir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}
@@ -143,6 +144,10 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 ##############################
 %changelog
 ##############################
+* Mon Dec 12 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.1-1
+- bump to 1.6.1
+- fix forgotten sla.xml inclusion
+
 * Sat Oct 22 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.0-1
 - bump to 1.6.0
 - add --with-cache-dir and use %{_localstatedir}/cache/icinga-web
