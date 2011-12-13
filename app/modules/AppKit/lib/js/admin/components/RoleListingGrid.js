@@ -8,16 +8,22 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
     iconCls: 'icinga-icon-group',
     
     constructor: function(cfg) {
-        
-        cfg.bbar = new Ext.PagingToolbar({
-            pageSize: 25,
-            store: cfg.store,
-            displayInfo: true,
-            displayMsg: _('Displaying roles')+' {0} - {1} '+_('of')+' {2}',
-            emptyMsg: _('No roles to display')
-        });
-        Ext.apply(this,cfg);
         Ext.grid.GridPanel.prototype.constructor.call(this,cfg);
+    },
+    
+    initComponent: function() {
+    	this.bbar = [];
+    	
+    	AppKit.Admin.Components.RoleListingGrid.superclass.initComponent.call(this);
+    	
+    	this.counterLabel = this.getBottomToolbar().add({
+    		xtype : 'tbtext',
+    		tpl: new Ext.Template(_('{0} roles loaded.'))
+    	});
+    	
+    	this.store.on('load', function(store, records, o) {
+    		this.counterLabel.update([store.getCount()]);
+    	}, this);
     },
     
     deleteSelected: function() {
