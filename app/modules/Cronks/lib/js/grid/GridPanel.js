@@ -283,6 +283,11 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	
 	applyState: function(state) {
+
+		if (!Ext.isObject(state)) {
+			return false;
+		}
+
 		var reload = false;
 		var store = this.getStore();
 		if (Ext.isObject(state.colModel)) {
