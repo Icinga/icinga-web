@@ -47,6 +47,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
     layout: 'fit', 
     getItems: function(cfg) {
         var grid = new AppKit.Admin.Components.RoleListingGrid(Ext.apply(cfg,{store: this.roleList}));
+        
         return new Ext.Panel({
             layout: 'border',
             border:false,
@@ -61,7 +62,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
 
                 items: [
                     grid,
-                    new AppKit.Admin.Components.RoleInheritanceView(Ext.apply(cfg),{grid:grid,store: this.roleList})
+                    new AppKit.Admin.Components.RoleInheritanceView(Ext.apply(cfg,{grid:grid,store: this.roleList}))
                 ],
                 autoScroll:true,
                 listeners: {

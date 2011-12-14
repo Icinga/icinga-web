@@ -14,6 +14,7 @@ Ext.ns("AppKit.Admin.Components");
         store: null,
         layout: 'fit',
         autoScroll : true,
+        
         constructor: function (cfg) {
             if (!cfg) {
                 cfg = {};
@@ -24,35 +25,59 @@ Ext.ns("AppKit.Admin.Components");
                 hidden: false,
                 editable: false,
                 text: 'Groups',
-                expanded: true
+                expanded: true,
+                id: 'xroot-0'
             });
-            Ext.apply(this, cfg);
-            Ext.tree.TreePanel.superclass.constructor.call(this, cfg);
+            
+            AppKit.Admin.Components.RoleInheritanceView.superclass.constructor.call(this, cfg);
+        },
+        
+        initComponent : function() {
+        	
+        	AppKit.Admin.Components.RoleInheritanceView.superclass.initComponent.call(this);
+        	
+        	this.store.on("load", function () {
+                this.insertRoles();
+            }, this);
+        	
             this.getSelectionModel().on("selectionchange", function (model, node) {
                 if (!node) {
                     return true;
                 }
                 var record = [node.record];
-                cfg.grid.getSelectionModel().selectRecords(record);
+                if (!Ext.isEmpty(this.grid)) {
+                    this.grid.getSelectionModel().selectRecords(record);
+                } else {
+                	throw("<object>.grid configuration was not set!");
+                }
 
             }, this);
-            this.store.on("load", function () {
-                this.insertRoles();
-            }, this);
         },
+        
         tbar: new Ext.Toolbar({
             items: [{
                 xtype: 'tbtext',
                 text: _('Drag&Drop groups underneath other groups to let them inherit credentials/restrictions of the parent group')
             }]
         }),
+        
         enableDD: true,
         inserted: {},
         title: _('Role inheritance'),
+        
         insertRoles: function () {
             this.inserted = {};
-            this.getRootNode().removeAll();
+            
             var noInsert = false;
+            var selected_node = this.getSelectionModel().getSelectedNode();
+            var selected = null;
+            
+            if (selected_node) {
+            	selected = selected_node.id;
+            }
+            
+            this.getRootNode().removeAll();
+            
             while (!noInsert) {
                 noInsert = true;
                 this.store.each(function (record) {
@@ -62,6 +87,7 @@ Ext.ns("AppKit.Admin.Components");
                     var parent = record.get("parent");
                     if (!this.inserted[id] && (!parent || (parent && this.inserted[parent]))) {
                         var node = new Ext.tree.TreeNode({
+                        	id: 'xrole-' + id,
                             text: name,
                             iconCls: 'icinga-icon-group'
                         });
@@ -77,7 +103,15 @@ Ext.ns("AppKit.Admin.Components");
                     }
                 }, this);
             }
+            
             this.doLayout();
+            
+            if (selected) {
+            	selected_node = this.getNodeById(selected);
+            	this.expandPath(selected_node.getPath());
+            	this.getSelectionModel().select(selected_node);
+            }
+            
             return true;
         },
         listeners: {
@@ -98,7 +132,7 @@ Ext.ns("AppKit.Admin.Components");
                     url: tree.roleProviderURI + '/create',
                     params: params,
                     success: function () {
-                        tree.store.reload();
+                        // tree.store.reload();
                     },
                     scope: this
                 });
