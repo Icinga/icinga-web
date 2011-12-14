@@ -87,9 +87,9 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
         return $this;
     }
 
-    public function setResultColumns($target) {
+    public function setResultColumns($target, $replace = false) {
         $this->result = null;
-        parent::setResultColumns($target);
+        parent::setResultColumns($target, $replace);
         return $this;
     }
 
@@ -119,7 +119,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
 
             $resultCols =  $this->getResultColumns();
             $data =  $this->execRead();
-
+            
             if ($this->isCount) {
                 $fields = $this->getFields();
                 $_data = array(array());

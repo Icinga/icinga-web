@@ -191,7 +191,10 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @param Boolean Whether to check if an column alias with this name exists
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
-    public function setFields($fields, $useColumnAlias = false) {
+    public function setFields($fields, $useColumnAlias = false, $reset = false) {
+	if ($reset === true) {
+		$this->fields = array ();
+	}
         if (!is_array($fields)) {
             $fields = array($fields);
         }

@@ -162,12 +162,14 @@
         	If the countmode is 'simple' countfields will be ignored always! To use with a pager
         	you have to use the 'field' mode to count all data independent from data
         -->
-		<parameter name="countmode">simple</parameter>
+		<parameter name="countmode">field</parameter>
 		
 		<!-- 
 			If the counting differs from data result you can specify a field to count
 		-->
         <parameter name="countfields">
+            <parameter>HOSTGROUP_NAME</parameter>
+            <parameter>HOST_CURRENT_STATE</parameter>
         </parameter>
         
         <!-- Database group by -->

@@ -1073,15 +1073,19 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
         }
     }
 
-    public function setResultColumns($cols) {
+    public function setResultColumns($cols, $replace=false) {
         $this->checkForPending($cols);
         if (is_array($cols)) {
-            $this->resultColumns = array_merge($this->resultColumns,$cols);
+            if ($replace === true) {
+                $this->resultColumns = $cols;
+            } else {
+             $this->resultColumns = array_merge($this->resultColumns,$cols);
+            }
         } else {
             $this->resultColumns[] = $cols;
         }
 
-        $this->setFields($cols,true);
+        $this->setFields($cols,true,$replace);
     }
 
     public function setSearchTarget($target) {

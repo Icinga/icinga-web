@@ -111,12 +111,19 @@ class CronkGridTemplateWorker {
                 $this->api_count->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT);
 
                 if (is_array(($fields = $params->getParameter('countfields'))) && count($fields)) {
-                    $this->api_count->setResultColumns($fields);
+                    
+                    /**
+                     * We need to reset the columns here. Count columns differs 
+                     * from result set columns
+                     */
+                    $this->api_count->setResultColumns($fields, true);
+                    
                     $this->api_count->setResultType(IcingaApiConstants::RESULT_ARRAY);
+                    
                     $result  = $this->api_count->fetch();
+                    
                     // Try to determine the fields
                     $row = $result->getRow();
-
                     if ($row !== false) {
                         $fields = array_keys($row);
                         $field = array_shift($fields);
