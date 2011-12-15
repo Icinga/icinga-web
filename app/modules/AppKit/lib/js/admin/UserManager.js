@@ -59,7 +59,7 @@ Ext.ns("AppKit.Admin");
                 iconCls: 'icinga-icon-user',
 
                 deleteSelected: function () {
-                    Ext.Msg.confirm(_("Delete user"), _("Do you really want to delete these users?"), function (btn) {
+                    Ext.Msg.confirm(_("Delete user"), _("Do you really want to delete these users and their settings and cronks?"), function (btn) {
                         if (btn !== "yes") {
                             return false;
                         }

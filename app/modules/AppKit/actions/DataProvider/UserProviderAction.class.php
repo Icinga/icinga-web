@@ -167,27 +167,19 @@ class AppKit_DataProvider_UserProviderAction extends AppKitBaseAction {
     }
 
     public function executeRemove(AgaviRequestDataHolder $rd) {
+        $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
+        $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
+        
+        $ids = $rd->getParameter("ids",array());
+        
+        foreach($ids as $id) {
+            $user = $useradmin->getUserById($id);
 
-        try {
-            AppKitDoctrineUtil::getConnection()->beginTransaction();
-            $useradmin = $this->getContext()->getModel('UserAdmin', 'AppKit');
-            $padmin = $this->getContext()->getModel('PrincipalAdmin', 'AppKit');
-            $ids = $rd->getParameter("ids",array());
-            foreach($ids as $id) {
-                $user = $useradmin->getUserById($id);
-
-                if (!$user) {
-                    continue;
-                }
-
-                $useradmin->removeUser($user);
+            if (!$user) {
+                continue;
             }
-            AppKitDoctrineUtil::getConnection()->commit();
-        } catch (Exception $e) {
-            try {
-                AppKitDoctrineUtil::getConnection()->rollback();
-            } catch (Doctrine_Transaction_Exception $e) {}
 
+            $useradmin->removeUser($user);
         }
 
         return 'Success';

@@ -176,6 +176,17 @@ abstract class BaseNsmUser extends Doctrine_Record {
         $this->hasMany('NsmUserRole as roles', array(
                            'local' => 'user_id',
                            'foreign' => 'usro_user_id'));
+        
+        $this->hasMany('Cronk as cronks', array(
+                           'local' => 'user_id',
+                           'foreign' => 'cronk_user_id'
+        ));
+        
+        $this->hasMany('CronkPrincipalCronk as cronkPrincipals', array(
+                           'local' => 'principal_user_id',
+                           'foreign' => 'principal_id',
+                           'refClass' => 'NsmPrincipal'
+        ));
     }
     public static function getInitialData() {
         return  array(
