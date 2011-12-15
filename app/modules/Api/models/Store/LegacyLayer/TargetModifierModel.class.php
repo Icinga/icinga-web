@@ -800,7 +800,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
 
             case IcingaApiConstants::TARGET_HOSTGROUP_SUMMARY:
                 $this->mainAlias = "hg";
-                $this->setDistinct(false);
+                $this->setDistinct(true);
                 $this->setTarget("IcingaHostgroups");
                 $this->ignoreIds = true;
                 $this->aliasDefs = array(
