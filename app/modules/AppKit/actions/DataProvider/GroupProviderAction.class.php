@@ -76,13 +76,15 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         $limit = $rd->getParameter('limit',false);
         $sort = $rd->getParameter('sort',false);
         $asc = ($rd->getParameter('dir','ASC') == 'ASC');
-
-        $result = array();
-
+        
         $user = $this->getContext()->getUser();
-
+        $groups = null;
+        
+        // Return roles the user belongs to
         if ($user->hasCredential('appkit.admin') == false && $user->hasCredential('appkit.admin.groups') == false) {
-            $result = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc, true);
+            $groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc, true);
+        
+        // Global access to all rules
         } else {
             // return a single role when an id is provided
             if ($groupId) {
@@ -98,6 +100,8 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                 $result = $this->formatRole($group);
 
                 $this->setAttribute("role",$result);
+                
+                return $this->getDefaultViewName();
 
             } else {	//return list of all roles if no id is provided
 
@@ -107,15 +111,17 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                 } else {
                     $groups = $roleadmin->getRoleCollectionInRange($disabled,$start,$limit,$sort,$asc);
                 }
-
-            
-                $result = array();
-                foreach($groups as $group) {
-                   $result[] = $this->formatRole($group,true);
-                }
-                $this->setAttribute("roles",$result);
             }
         }
+        
+        if ($groups && $groups instanceof Doctrine_Collection) {
+            $result = array();
+            foreach($groups as $group) {
+                $result[] = $this->formatRole($group,true);
+            }
+            $this->setAttribute("roles",$result);
+        }
+        
         return 'Success';
     }
 
