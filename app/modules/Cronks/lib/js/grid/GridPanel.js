@@ -205,39 +205,75 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	
 	},
 	getPersistentColumnModel : function() {
-
-		o = {};
-		Ext.iterate(this.colModel.lookup, function(col, colId) {
-			o[colId] = {};
- 
-			Ext.copyTo(o[colId], col, [
-				'hidden',
-				'width',
-				'dataIndex',
-				'id',
-				'sortable'
-			]);
+		o = {
+			groupField : null,
+			columns : []
+		};
+		
+		if (Ext.isDefined(this.store.groupField)) {
+			o.groupField = this.store.getGroupState()
+			o.groupDir = this.store.groupDir;
+			o.groupOnSort = this.store.groupOnSort;
+		}
+		
+		Ext.iterate(this.colModel.lookup, function(colId, col) {
+			if (Ext.isEmpty(col.dataIndex) === false) {
+				var colData = {}
+				Ext.copyTo(colData, col, [
+					'hidden',
+					'width',
+					'dataIndex',
+					'id',
+					'sortable'
+				]);
+				o.columns.push(colData);
+			}
 		}, this);
+		
 		return o;
 	},
 	
 	applyPersistentColumnModel : function(data) {
 		var cm = this.colModel;
+        
+        if (Ext.isArray(data.columns)) {
+        	Ext.each(data.columns, function(item, index) {
+        		if (Ext.isDefined(item.dataIndex)) {
+        			var ci = cm.findColumnIndex(item.dataIndex);
+        			if (ci>0) {
+        				var org = cm.getColumnById(ci);
+        				if (Ext.isDefined(org)) {
+        					
+        					if (Ext.isDefined(data.groupField) && data.groupField === org.dataIndex) {
+        						cm.setHidden(org.id, false);
+        					} else {
+                                cm.setHidden(org.id, item.hidden);
+        					}
+        					
+                            cm.setColumnWidth(org.id, item.width)
+        				}
+        			}
+        		}
+        	}, this);
+        }
+        
+        if (Ext.isDefined(data.groupField)) {
+        	this.store.on('beforeload', function() {
+	            (function() {
+		            var dir = Ext.isEmpty(data.groupDir) ? 'ASC' : data.groupDir;
+		            
+		            if (Ext.isDefined(data.groupOnSort)) {
+		                this.store.groupOnSort = data.groupOnSort 
+		            }
+		            
+		            this.store.groupBy(data.groupField, true, dir);
+		            this.store.reload();
+	            }).defer(50, this);
+	            return false;
+        	}, this, { single : true });
+        };
+        
 
-		Ext.iterate(data, function(colId, col) {
-            cm.lookup[col.id] = col;
-			/*if (Ext.isDefined(col.dataIndex)){
-				var org = cm.getColumnById(colId);
-
-				// Column was not moved arropund
-				if (Ext.isDefined(org) && org.dataIndex == col.dataIndex) {
-					cm.setHidden(colId, col.hidden);
-					cm.setColumnWidth(colId, col.width);
-                   
-				}
-			}
-			*/
-		}, this);
 	},
 	
 	refreshTask: new Ext.util.DelayedTask(function() {
@@ -273,8 +309,6 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 			store_origin_params: ("originParams" in store) ? store.originParams : {},
             sortToggle: store.sortToggle,
             sortInfo: store.sortInfo,
-            groupDir: store.groupDir,
-            groupOnSort: store.groupOnSort,
 			colModel: this.getPersistentColumnModel(),
 			autoRefresh: aR
 		};
@@ -303,9 +337,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		if (state.sortInfo) {
 			store.sortInfo = state.sortInfo;
 		}	
-        if (state.groupDir) {
-			store.groupDir = state.groupDir;
-		}
+		
 		if (state.groupOnSort) {
 			store.groupOnSort = state.groupOnSort;
 		}
