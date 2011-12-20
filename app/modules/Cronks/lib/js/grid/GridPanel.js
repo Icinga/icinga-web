@@ -257,7 +257,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
         	}, this);
         }
         
-        if (Ext.isDefined(data.groupField)) {
+        if (Ext.isDefined(data.groupField) && Ext.isDefined(this.store.groupBy)) {
         	this.store.on('beforeload', function() {
 	            (function() {
 		            var dir = Ext.isEmpty(data.groupDir) ? 'ASC' : data.groupDir;
@@ -334,8 +334,9 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		if (state.sortToggle) {
 			store.sortToggle = state.sortToggle;
 		}
-		if (state.sortInfo) {
-			store.sortInfo = state.sortInfo;
+		if (state.sortInfo && Ext.isDefined(state.sortInfo.field)) {
+			var direction = Ext.isDefined(state.sortInfo.direction) ? state.sortInfo.direction : 'ASC';
+			store.sort(state.sortInfo.field, state.sortInfo.direction);
 		}	
 		
 		if (state.groupOnSort) {
