@@ -25,7 +25,19 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         return null;
     }
     
-    private function getGroupAsArray(NsmRole $r) {
+    private function getGroupAsArray(NsmRole $r, $oldBehaviour=false) {
+        if ($oldBehaviour == true) {
+            return array(
+                'role_id' => $r->role_id,
+		'role_name' => $r->role_name,
+		'role_description' => $r->role_description,
+		'role_created' => $r->role_created,
+		'role_modified' => $r->role_modified,
+		'role_parent' => $r->role_parent,
+		'role_disabled' => $r->role_disabled
+            );
+        }
+
         return array(
             "id" => $r->role_id,
             "name" => $r->role_name,
@@ -37,8 +49,8 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         );
     }
     
-    private function formatRole(NsmRole $r,$simple = false) {
-        $roleObject = $this->getGroupAsArray($r);
+    private function formatRole(NsmRole $r,$simple = false, $oldBehaviour = false) {
+        $roleObject = $this->getGroupAsArray($r, $oldBehaviour);
         if($simple)
             return $roleObject;
 
@@ -76,7 +88,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         $limit = $rd->getParameter('limit',false);
         $sort = $rd->getParameter('sort',false);
         $asc = ($rd->getParameter('dir','ASC') == 'ASC');
-        
+	$oldBehaviour = (bool)$rd->getParameter('oldBehaviour', true) ? true : false;
         $user = $this->getContext()->getUser();
         $groups = null;
         
@@ -97,7 +109,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
 
                 
 
-                $result = $this->formatRole($group);
+                $result = $this->formatRole($group, false, $oldBehaviour);
 
                 $this->setAttribute("role",$result);
                 
@@ -117,7 +129,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         if ($groups && $groups instanceof Doctrine_Collection) {
             $result = array();
             foreach($groups as $group) {
-                $result[] = $this->formatRole($group,true);
+                $result[] = $this->formatRole($group,true,$oldBehaviour);
             }
             $this->setAttribute("roles",$result);
         }

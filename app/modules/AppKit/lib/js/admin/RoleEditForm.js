@@ -145,7 +145,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
      */
     AppKit.Admin.RoleEditForm.bindRole = function(id,url) {
         if(id !== 'new') {
-            roleStore.proxy.setUrl(url+"/id="+id);
+            roleStore.proxy.setUrl(url+"/id="+id+'?oldBehaviour=0');
             roleStore.load();
         } else {
             roleStore.newRole();
