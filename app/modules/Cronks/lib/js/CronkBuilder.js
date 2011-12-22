@@ -242,7 +242,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.groups = new Ext.data.JsonStore({
 			autoDestroy: true,
-			url: AppKit.c.path + '/modules/appkit/provider/groups',
+			url: AppKit.c.path + '/modules/appkit/provider/groups?oldBehaviour=0',
 			fields : [{
 				name : 'id'
 			}, {
