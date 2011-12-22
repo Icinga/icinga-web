@@ -19,7 +19,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.6.0
+Version: 1.6.1
 Release: 1%{?dist}
 License: GPLv2+
 Group: Applications/System
