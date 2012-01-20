@@ -135,10 +135,15 @@
 			<!-- Iframes - [STOP] -->
 			
 			<!-- Tackle Cronks [START] -->
+            <!-- 
+                KEEP IN MIND THAT TackleView IS HIGHLY EXPERIMENTAL
+                - Because of this it's deactivated per default
+            -->
             <cronk name="icingaTackleMainCronk">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">Tackle.Cronk</ae:parameter>
-                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="hide">true</ae:parameter>
+                <ae:parameter name="disabled">true</ae:parameter>
                 <ae:parameter name="description">Stumble across problems</ae:parameter>
                 <ae:parameter name="name">Tackle</ae:parameter>
                 <ae:parameter name="image">cronks.Puzzle</ae:parameter>
