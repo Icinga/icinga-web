@@ -118,7 +118,7 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
                     }
                     $items['dn'] = ldap_get_dn($ldap, $eid);
                 }
-
+                
                 ldap_free_result($res);
             } else {
                 $this->log('Auth.Provider.LDAP/getLdaprecord Filter returns no result (base=%s, filter=%s)', $basedn, $filter, AgaviLogger::DEBUG);
@@ -169,6 +169,13 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
         ldap_set_option($res, LDAP_OPT_REFERRALS, 0);
         ldap_set_option($res, LDAP_OPT_PROTOCOL_VERSION, 3);
 
+        if ($this->getParameter('ldap_start_tls', false) == true) {
+            $this->log('Auth.Provider.LDAP: Starting TLS', AgaviLogger::DEBUG);
+            $tls = @ldap_start_tls($res);
+            $this->log('Auth.Provider.LDAP: Using TLS on connection %s.', ($tls==true && !$this->isLdapError($res, true) ? 'succeeded' : 'failed'), AgaviLogger::INFO);
+        }
+
+        
         if ($bind === true) {
 
             $binddn = $this->getParameter('ldap_binddn');

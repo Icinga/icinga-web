@@ -36,6 +36,7 @@
 				<ae:parameter name="user_email">mail</ae:parameter> 
 			</ae:parameter>
 			<ae:parameter name="ldap_dsn">ldap://ldap.myopenldap.foo/</ae:parameter>
+            <ae:parameter name="ldap_start_tls">false</ae:parameter>
 			<ae:parameter name="ldap_basedn">dc=myopenldap,dc=foo</ae:parameter>
 			<ae:parameter name="ldap_binddn">cn=user,ou=authusers,dc=myopenldap,dc=foo</ae:parameter>
 			<ae:parameter name="ldap_bindpw"><![CDATA[XXXXXXXXX]]></ae:parameter>
