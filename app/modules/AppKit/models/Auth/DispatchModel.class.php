@@ -284,17 +284,24 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                         if (is_array($groups)) {
                             foreach($groups as $group_name) {
                                 $group = Doctrine::getTable('NsmRole')->findOneBy('role_name', $group_name);
-                                $user->NsmRole[] = $group;
+                                if ($group instanceof NsmRole) {
+                                    $user->NsmRole[] = $group;
+                                } else {
+                                    $this->log('Auth.Dispatch/import: Could not assign group %s', $group_name, AgaviLogger::WARN);
+                                }
                             }
                         }
-
-
+                        
+                        if (!$user->NsmRole->Count) {
+                            $this->log('Auth.Dispatch/import: No groups available for user, ABORT!', AgaviLogger::FATAL);
+                            return null;
+                        }
+                        
                         $padmin->updatePrincipalValueData(
                             $user->principal,
                             array(),
                             array()
                         );
-
 
                         $user->save();
 
