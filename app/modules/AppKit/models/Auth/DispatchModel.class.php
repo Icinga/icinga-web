@@ -76,8 +76,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
     }
 
     public function initialize(AgaviContext $context, array $parameters=array()) {
-        parent::initialize($context, $parameters);
         $this->loadProviderConfig();
+        
+        $parameters = array_merge_recursive($parameters, $this->config_def);
+        
+        parent::initialize($context, $parameters);
     }
 
     public function guessUsername() {
@@ -116,6 +119,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
         $this->log('Auth.Dispatch: Starting authenticate (username=%s)', $username, AgaviLogger::DEBUG);
 
+        if ($this->getParameter('auth_lowercase_username', false) == true) {
+            $this->log('Auth.Dispatch: Converting username to lowercase', AgaviLogger::INFO);
+            $username = strtolower($username);
+        }
+        
         $success = false;
 
         $user = $this->findUser($username);

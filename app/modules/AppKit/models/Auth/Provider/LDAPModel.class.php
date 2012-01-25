@@ -82,7 +82,19 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
             $re = (array)$this->mapUserdata($data);
             $re['user_authid'] = $data['dn'];
 
-            $re['user_name'] = strtolower($data[$this->getParameter('ldap_userattr', 'uid')]);
+            $userattr = $this->getParameter('ldap_userattr', 'uid');
+            
+            if (array_key_exists($userattr, $data)) {
+                $re['user_name'] = $data[$userattr];
+            } else {
+                $this->log('Auth.Provider.LDAP Username attribute (%s) not found', $userattr, AgaviLogger::FATAL);
+                throw new AgaviSecurityException("Username attribute '$userattr' not found!");
+            }
+            
+            if ($this->getParameter('auth_lowercase_username', false) == true) {
+                $re['user_name'] = strtolower($re['user_name']);
+            }
+            
             $re['user_disabled'] = 0;
         }
 
