@@ -32,7 +32,7 @@
                         <parameter name="type">renderer</parameter>
 
                         <parameter name="arguments">
-                            <parameter name="booleanConfitionField">pnp4nagios_service_image_hover
+                            <parameter name="booleanConditionField">pnp4nagios_service_image_hover
                             </parameter>
                             <parameter name="image">images/icons/chart.png
                             </parameter>
@@ -54,7 +54,7 @@
                         <parameter name="type">cellclick</parameter>
 
                         <parameter name="arguments">
-                            <parameter name="booleanConfitionField">pnp4nagios_service_image_hover
+                            <parameter name="booleanConditionField">pnp4nagios_service_image_hover
                             </parameter>
                             <parameter name="title">Image for
                                 {host_name}</parameter>
@@ -104,7 +104,7 @@
                         <parameter name="type">renderer</parameter>
 
                         <parameter name="arguments">
-                            <parameter name="booleanConfitionField">pnp4nagios_service_link
+                            <parameter name="booleanConditionField">pnp4nagios_service_link
                             </parameter>
                             <parameter name="image">images/icons/chart--arrow.png
                             </parameter>
@@ -127,7 +127,7 @@
                         </parameter>
                         <parameter name="type">cellclick</parameter>
                         <parameter name="arguments">
-                            <parameter name="booleanConfitionField">pnp4nagios_service_link
+                            <parameter name="booleanConditionField">pnp4nagios_service_link
                             </parameter>
                             <parameter name="title">Service perfdata
                                 for {service_name} on {host_name}
