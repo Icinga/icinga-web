@@ -234,6 +234,12 @@
 
             <!-- Source for the data (_SERVER == $_SERVER == 'only one') -->
             <ae:parameter name="http_source">_SERVER</ae:parameter>
+            
+            <!--
+                Set realm to the same as your apache AuthName to send
+                the right headers at logout
+            -->
+            <ae:parameter name="http_realm">Icinga Access</ae:parameter>
         </ae:parameter>
         
         <!-- Just including your configuration -->

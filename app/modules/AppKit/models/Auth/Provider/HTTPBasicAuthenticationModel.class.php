@@ -106,6 +106,10 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
     public function getAuthType() {
         return $this->auth_type;
     }
+    
+    public function getRealm() {
+        return $this->getParameter('http_realm');
+    }
 
 }
 

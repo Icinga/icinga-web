@@ -18,7 +18,13 @@
 	<setting name="appkit.web_path">@web_path@</setting>
     <setting name="appkit.log_path">@web_log_dir@</setting>
 	<setting name="appkit.web_absolute_path">@web_absolute_path@</setting>
-	<setting name="appkit.logout_path">@web_path@</setting>
+	
+	<!-- 
+	   This was changed, after logout this route name will be used
+	   to redirect to
+	-->
+	<setting name="appkit.logout_route">index_page</setting>
+	
 	<setting name="appkit.image_path">@web_path@/images</setting>
 	<setting name="appkit.image_absolute_path">@web_absolute_path@/images</setting>
 

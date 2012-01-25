@@ -148,6 +148,10 @@ abstract class AppKitAuthProviderBaseModel extends IcingaBaseModel {
     public function determineUsername() {
         return null;
     }
+    
+    public function getName() {
+        return $this->getParameter(AppKitIAuthProvider::AUTH_NAME);
+    }
 
 }
 

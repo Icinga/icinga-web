@@ -10,6 +10,8 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
     private $provider		= array();
     private $provider_keys	= array();
+    
+    private $currentProvider = null;
 
     /**
      * Loads the provider config into an array for later use
@@ -51,7 +53,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
      * @param string $id
      * @return AppKitIAuthProvider
      */
-    private function getProvider($id) {
+    public function getProvider($id) {
         if ($this->providerExists($id)) {
 
             if (!isset($this->provider[$id])) {
@@ -159,6 +161,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                     // Check password
                     if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password, $username, $authid)) {
                         $this->log('Auth.Dispatch: Successfull authentication (provder=%s)', $provider->getProviderName(), AgaviLogger::DEBUG);
+                        $this->setCurrentProvider($provider);
                         $success = true;
                     }
 
@@ -182,6 +185,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                         $response->setCookie('icinga-web-loginname', $user->user_name);
                     }
                 }
+                
                 return $user;
             }
 
@@ -213,7 +217,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
                 if ($provider->isAuthoritative() && $provider->doAuthenticate($user, $password)) {
                     $this->log('Auth.Dispatch: Delegate authentication, %s successfully authenticate %s', $pid, $username, AgaviLogger::INFO);
-
+                    $this->setCurrentProvider($provider);
                     return true;
                 }
             }
@@ -351,6 +355,14 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
         }
 
         return null;
+    }
+    
+    private function setCurrentProvider(AppKitIAuthProvider $provider) {
+        $this->currentProvider = $provider;
+    }
+    
+    public function getCurrentProvider() {
+        return $this->currentProvider;
     }
 }
 
