@@ -44,12 +44,13 @@ class NsmUser extends BaseNsmUser {
                          'type' => 'unique'
         ));
 
-        $this->index('user_email_unique', array(
-                         'fields' => array(
-                             'user_email'
-                          ),
-                          'type' => 'unique'
-        ));
+           // Removed by #2228
+//         $this->index('user_email_unique', array(
+//                          'fields' => array(
+//                              'user_email'
+//                           ),
+//                           'type' => 'unique'
+//         ));
         
         $this->index('user_search', array(
                          'fields' => array(
