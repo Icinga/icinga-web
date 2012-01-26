@@ -20,6 +20,19 @@
 					<ae:parameter name="min">0</ae:parameter>
 				</ae:parameters>
 		</validator>
+        
+        <validator class="number" name="sendheader_arg" required="false">
+                <arguments>
+                    <argument>unauthorized</argument>
+                </arguments>
+                <errors>
+                    <error>Something went wrong with the sendUnauthior parameter!</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="max">1</ae:parameter>
+                    <ae:parameter name="min">0</ae:parameter>
+                </ae:parameters>
+        </validator>
 		
 		</validators>
 		

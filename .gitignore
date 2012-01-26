@@ -14,7 +14,7 @@ app/config/settings.xml
 app/config/settings.site.xml
 app/config/translation.site.xml
 app/config/translation.xml
-app/config/factories.site.xml
+app/config/factories.xml
 app/config/logging.xml
 app/modules/Web/config/icinga-io.xml
 app/modules/AppKit/config/auth.xml

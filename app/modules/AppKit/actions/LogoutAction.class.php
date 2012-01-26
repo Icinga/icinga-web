@@ -22,11 +22,15 @@ class AppKit_LogoutAction extends AppKitBaseAction {
         $this->setAttribute('sendHeader', false);
         $this->setAttribute('doRedirect', true);
         
+        if ($rd->getParameter('unauthorized', false) == 1) {
+            $this->setAttribute('sendHeader', true);
+        }
+        
         if ($rd->getParameter('logout', false) == 1) {
             
             if ($this->isHttpRelated() == true) {
-                $this->setAttribute('doRedirect', true);
-                $this->setAttribute('sendHeader', true);
+                $this->setAttribute('httpBasic', true);
+                $this->setAttribute('doRedirect', false);
             }
             
             $this->getContext()->getUser()->doLogout();
