@@ -26,13 +26,14 @@ app/modules/Api/config/module.xml
 app/modules/Cronks/config/module.xml
 app/modules/AppKit/config/module.xml
 app/modules/Reporting/config/module.xml
+app/modules/Web/config/module.xml
 app/modules/AppKit/config/module.site.xml
 app/modules/Web/config/module.site.xml
 app/modules/Cronks/config/module.site.xml
 app/modules/Reporting/data/tmp
-etc/sitecfg/access.xml
-etc/sitecfg/sla.xml
-etc/sitecfg/databases.xml
+etc/conf.d/access.xml
+etc/conf.d/sla.xml
+etc/conf.d/databases.xml
 bin/clearcache.sh
 icinga-web.session
 icinga-web.webprj

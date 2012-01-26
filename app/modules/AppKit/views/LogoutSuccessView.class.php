@@ -28,8 +28,9 @@ class AppKit_LogoutSuccessView extends AppKitBaseView {
             
             if ($this->getAttribute('auth_realm') !== null) {
                 $url = str_replace('://', '://anonymous@', $url);
-                $this->getResponse()->setHttpHeader('Refresh', '0; url='. $url);
-            }            
+            }
+
+            $this->getResponse()->setHttpHeader('Refresh', '0; url='. $url);
         } else {
             $this->setupHtml($rd);
         }

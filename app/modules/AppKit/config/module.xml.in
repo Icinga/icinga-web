@@ -87,6 +87,9 @@
     
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
         </module>
-        
     </ae:configuration>
+    <!--  Try include the overwriting file -->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/module_appkit.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
+            <xi:fallback></xi:fallback>
+    </xi:include>
 </ae:configurations>

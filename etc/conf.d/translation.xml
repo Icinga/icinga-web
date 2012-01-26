@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
+    <ae:configuration>
+        <!--
+        * Example to change locales
+        Stripping down available languages and set one as default
+        -->
+        <!--
+         <available_locales default_locale="de" default_timezone="GMT">
+            <available_locale identifier="de_DE">
+              <ae:parameter name="description">Deutsch</ae:parameter>
+            </available_locale>
+            <available_locale identifier="en">
+              <ae:parameter name="description">English</ae:parameter>
+            </available_locale>
+         </available_locales>
+         -->
+        
+        <!-- 
+        * Example changing date formats
+        Changing the tstamp format for icinga grids
+        -->
+        <!--
+        <translators default_domain="icinga.default">
+            <translator domain="date-tstamp">
+                <date_formatter>
+                    <ae:parameter name="type">date</ae:parameter>
+                    <ae:parameter name="format">yyyy-MM-dd</ae:parameter>
+                </date_formatter>
+            </translator>
+        </translators>
+        -->
+        
+    </ae:configuration>
+</ae:configurations>

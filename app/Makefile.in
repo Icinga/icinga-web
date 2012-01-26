@@ -18,6 +18,7 @@ install: installdirs
 	-and \! -name "Makefile" \
 	-and \! -path "./cache/*" \
 	-and \! -path "*/data/log*" \
+	-and \! -path "*Reporting/data*" \
 	-exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/app/{} \;
 
 installdirs:

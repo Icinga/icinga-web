@@ -52,7 +52,7 @@ SRC_ETC=@srcdir@/etc
 SRC_BIN=@srcdir@/bin
 SRC_DOC=@srcdir@/doc
 SRC_APP=@srcdir@/app
-SRC_SITE=@srcdir@/etc/sitecfg
+SRC_SITE=@srcdir@/etc/conf.d
 
 none:
 #	@printf "\t%-22s - %s\n" "" ""
@@ -117,26 +117,31 @@ distclean:
         bin/Makefile \
         doc/Makefile \
         app/Makefile \
-        etc/sitecfg/Makefile \
 	app/config.php \
         app/config/databases.xml \
         app/config/icinga.xml \
         app/config/logging.xml \
         app/config/settings.xml \
         app/config/translation.xml \
+	app/config/factories.xml \
         app/modules/Api/config/module.xml \
     	app/modules/Api/config/access.xml \
         app/modules/AppKit/config/module.xml \
         app/modules/AppKit/config/auth.xml
 	app/modules/Cronks/config/module.xml \
 	app/modules/Reporting/config/module.xml \
+	app/modules/Web/config/module.xml \
         etc/build.properties \
         tests/phpunit/test.properties \
         etc/apache2/icinga-web.conf \
     	etc/scheduler/icingaCron \
         bin/clearcache.sh \
         pub/.htaccess \
-        pub/soap/.htaccess
+        pub/soap/.htaccess \
+        etc/conf.d/access.xml \
+        etc/conf.d/databases.xml \
+        etc/conf.d/Makefile \
+        etc/conf.d/sla.xml \
 	
 remove-temp-files:
 	bin/rmtmp-files.sh

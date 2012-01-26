@@ -2843,7 +2843,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml etc/sitecfg/access.xml etc/sitecfg/databases.xml etc/sitecfg/sla.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/config/factories.xml app/modules/Api/config/access.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml app/modules/Web/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess etc/conf.d/access.xml etc/conf.d/databases.xml etc/conf.d/Makefile etc/conf.d/sla.xml"
 
 
 cat >confcache <<\_ACEOF
@@ -3572,22 +3572,20 @@ do
     "bin/Makefile") CONFIG_FILES="$CONFIG_FILES bin/Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "app/Makefile") CONFIG_FILES="$CONFIG_FILES app/Makefile" ;;
-    "etc/sitecfg/Makefile") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/Makefile" ;;
     "app/config.php") CONFIG_FILES="$CONFIG_FILES app/config.php" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "app/config/logging.xml") CONFIG_FILES="$CONFIG_FILES app/config/logging.xml" ;;
     "app/config/settings.xml") CONFIG_FILES="$CONFIG_FILES app/config/settings.xml" ;;
     "app/config/translation.xml") CONFIG_FILES="$CONFIG_FILES app/config/translation.xml" ;;
+    "app/config/factories.xml") CONFIG_FILES="$CONFIG_FILES app/config/factories.xml" ;;
     "app/modules/Api/config/access.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/access.xml" ;;
-    "etc/sitecfg/access.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/access.xml" ;;
-    "etc/sitecfg/databases.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/databases.xml" ;;
-    "etc/sitecfg/sla.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/sla.xml" ;;
     "app/modules/Api/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/module.xml" ;;
     "app/modules/AppKit/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/module.xml" ;;
     "app/modules/AppKit/config/auth.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/auth.xml" ;;
     "app/modules/Cronks/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Cronks/config/module.xml" ;;
     "app/modules/Reporting/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Reporting/config/module.xml" ;;
+    "app/modules/Web/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/module.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "tests/phpunit/test.properties") CONFIG_FILES="$CONFIG_FILES tests/phpunit/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;
@@ -3595,6 +3593,10 @@ do
     "bin/clearcache.sh") CONFIG_FILES="$CONFIG_FILES bin/clearcache.sh" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;
     "pub/soap/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/soap/.htaccess" ;;
+    "etc/conf.d/access.xml") CONFIG_FILES="$CONFIG_FILES etc/conf.d/access.xml" ;;
+    "etc/conf.d/databases.xml") CONFIG_FILES="$CONFIG_FILES etc/conf.d/databases.xml" ;;
+    "etc/conf.d/Makefile") CONFIG_FILES="$CONFIG_FILES etc/conf.d/Makefile" ;;
+    "etc/conf.d/sla.xml") CONFIG_FILES="$CONFIG_FILES etc/conf.d/sla.xml" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

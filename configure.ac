@@ -363,22 +363,20 @@ AC_CONFIG_FILES([
 	bin/Makefile
 	doc/Makefile
 	app/Makefile
-	etc/sitecfg/Makefile
 	app/config.php
 	app/config/databases.xml
 	app/config/icinga.xml
 	app/config/logging.xml
 	app/config/settings.xml
 	app/config/translation.xml
+	app/config/factories.xml
 	app/modules/Api/config/access.xml
-	etc/sitecfg/access.xml
-	etc/sitecfg/databases.xml
-	etc/sitecfg/sla.xml
 	app/modules/Api/config/module.xml
 	app/modules/AppKit/config/module.xml
 	app/modules/AppKit/config/auth.xml
 	app/modules/Cronks/config/module.xml
 	app/modules/Reporting/config/module.xml
+	app/modules/Web/config/module.xml
 	etc/build.properties
 	tests/phpunit/test.properties
 	etc/apache2/icinga-web.conf
@@ -386,6 +384,10 @@ AC_CONFIG_FILES([
 	bin/clearcache.sh
 	pub/.htaccess
 	pub/soap/.htaccess
+	etc/conf.d/access.xml
+	etc/conf.d/databases.xml
+	etc/conf.d/Makefile
+	etc/conf.d/sla.xml
 ])
 
 AC_OUTPUT
