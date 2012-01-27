@@ -10,10 +10,14 @@ INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
 install: installdirs
-	find . -mindepth 1 -type f \! -name "*.in" -and \! -name "Makefile" -exec $(INSTALL) -m 775 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/bin/{} \;
-	find . -mindepth 1 -type f \! -name "*.in" -and \! -name "Makefile" -exec chmod +x $(DESTDIR)$(prefix)/bin/{} \;
+	@files=`find . -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`; \
+	for file in $$files; do \
+		$(INSTALL) -m 775 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/bin/"$$file"; \
+	done
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin
-	find . -mindepth 1 -type d -exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin/{} \;
-	
+	@dirs=`find . -mindepth 1 -type d`; \
+	for dir in $$dirs; do \
+		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin/"$$dir"; \
+	done

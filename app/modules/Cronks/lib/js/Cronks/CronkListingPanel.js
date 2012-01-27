@@ -687,7 +687,6 @@ Ext.ns('Icinga.Cronks.System');
             var record = oView.getStore().getAt(index);
 
             var tabPanel = Ext.getCmp('cronk-tabs');
-
             if (tabPanel) {
                 var cronk = {
                     xtype: 'cronk',

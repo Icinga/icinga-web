@@ -10,13 +10,16 @@ INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
 install: installdirs
-	find . -mindepth 1 -maxdepth 1 -type f \! -name "*.in" -and \! -name "Makefile" -exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/etc/{} \;
-	find lib/ -mindepth 1 -type f \! -name "*.in" -and \! -name "Makefile" -exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/etc/{} \;
-	find schema/ -mindepth 1 -type f \! -name "*.in" -and \! -name "Makefile" -exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/etc/{} \;
+	@files=`find . -mindepth 1 -maxdepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`; \
+	files="$$files `find lib/ -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`"; \
+	files="$$files `find schema/ -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`"; \
+	for file in $$files; do \
+		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/etc/"$$file"; \
+	done
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/lib
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/schema
-	find lib/ -mindepth 1 -type d -exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/{} \;
-	find schema/ -mindepth 1 -type d -exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/{} \;
+	@dirs=`find . -type d \( -path "./lib*" -or -path "./schema*" \)`; \
+	for dir in $$dirs; do \
+		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/etc/"$$dir"; \
+	done

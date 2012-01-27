@@ -10,9 +10,13 @@ INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
 install: installdirs
-	find . -mindepth 1 -type f -not -name "*.in" -and -not -name "Makefile" -exec $(INSTALL) -m 644 $(INSTALL_OPTS) {} $(DESTDIR)$(prefix)/lib/{} \;
-
+	@files=`find . -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`; \
+	for file in $$files; do \
+		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/lib/"$$file"; \
+	done
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib
-	find . -mindepth 1 -type d -exec $(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/{} \;
-	
+	@dirs=`find . -mindepth 1 -type d`; \
+	for dir in $$dirs; do \
+		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/"$$dir"; \
+	done
