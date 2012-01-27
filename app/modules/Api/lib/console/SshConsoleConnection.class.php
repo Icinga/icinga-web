@@ -83,15 +83,14 @@ class SshConsoleConnection extends BaseConsoleConnection {
     public function exec(Api_Console_ConsoleCommandModel $cmd) {
         $this->connect();
         $cmdString = $cmd->getCommandString();
-        $out = $this->resource->exec($cmdString);
+        $out = $this->resource->exec($cmdString . '; echo -n "|$?"');
+        $lines = preg_split('/\|/', $out);
+        $ret = (int) array_pop($lines);
+        $out = implode('|', $lines);
         $cmd->setOutput($out);
-        $cmd->setReturnCode($this->getLastReturnValue());
+        $cmd->setReturnCode($ret);
     }
 
-    public function getLastReturnValue() {
-        $retVal = $this->resource->exec("echo $?".PHP_EOL); 
-        return $retVal;
-    }
     public function __construct(array $settings = array()) {
         $settings = $settings["auth"];
         
