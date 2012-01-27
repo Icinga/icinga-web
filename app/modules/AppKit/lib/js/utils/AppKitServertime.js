@@ -22,15 +22,15 @@ AppKit.util.Servertime = Ext.extend(Ext.menu.BaseItem, {
    initComponent : function() {
    	    AppKit.util.Servertime.superclass.initComponent.call(this);
    	    
-   	    if (this.getEl()) {
-	        AppKit.getTr().start({
-	            run: this.updateClock,
-	            interval: 60000,
-	            scope:this
-	        });
-	        
-	        cfg.style = {margin : "3px"};
-   	    }
+   	    this.on('afterrender', function() {
+   	    	if (this.getEl()) {
+	            AppKit.getTr().start({
+	                run: this.updateClock,
+	                interval: 60000,
+	                scope:this
+	            });
+   	    	}
+   	    }, this, { single : true  });
    },
    
    // private
