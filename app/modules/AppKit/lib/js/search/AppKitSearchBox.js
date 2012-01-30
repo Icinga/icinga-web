@@ -15,7 +15,7 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
                 tag : 'div',
                 cls : 'icinga-action-icon-search',
                 html : '',
-                qtip : _('Press CTRL+ALT+F to activate search')
+                qtip : _('Press F to activate search')
             }
         });
     	
@@ -32,10 +32,10 @@ AppKit.search.Searchbox = Ext.extend(Ext.Panel, {
         	this.textfield = this.getWindow().findById('global_search');
         }, this, { single : true });
         
-        this.keymap = new Ext.KeyMap(Ext.getBody(), {
+        this.keymap = new Ext.KeyMap(Ext.getDoc(), {
         	key : Ext.EventObject.F,
-        	ctrl : true,
-        	alt : true,
+        	// ctrl : true,
+        	// alt : true,
         	fn : (function() {
         		
         		var win = this.getSearchbox();

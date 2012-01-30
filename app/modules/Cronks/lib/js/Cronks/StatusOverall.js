@@ -161,7 +161,21 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 itemSelector: 'div.icinga-overall-status-item-instance',
                 prepareData: Icinga.Cronks.System.StatusOverall.renderer.prepareInstanceData,
 
-                tpl: new Ext.XTemplate('<div style="margin-left: 5px;">', '<tpl for=".">', '<div style="width: 100px;">', '<tpl if="id==0">', '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>', '</tpl>', '<tpl if="id==2">', '<div class="icinga-overall-status-icon-instance icinga-icon-application-minus" ext:qtip="Instances down"></div>', '</tpl>', '<div class="icinga-overall-status-item icinga-overall-status-item-instance">{state}</div>', '<div class="x-clear icinga-overall-status-spacer"></div>', '</div>', '</tpl>', '</div>')
+                tpl: new Ext.XTemplate(
+                    '<div style="margin-left: 5px;">', 
+                    '<tpl for=".">', 
+                    '<div style="min-width: 130px;">', 
+                    '<tpl if="id==0">', 
+                    '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>', 
+                    '</tpl>', 
+                    '<tpl if="id==2">', 
+                    '<div class="icinga-overall-status-icon-instance icinga-icon-application-minus" ext:qtip="Instances down"></div>', 
+                    '</tpl>', '<div class="icinga-overall-status-item icinga-overall-status-item-instance">{state}</div>', 
+                    '<div class="x-clear icinga-overall-status-spacer"></div>', 
+                    '</div>', 
+                    '</tpl>', 
+                    '</div>'
+                )
             });
 
             this.instanceView.on('click', function (dview, index, node, e) {
