@@ -343,7 +343,7 @@
 							<parameter name="image">images/icons/database.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here to display containing hosts</parameter>
+								<parameter name="ext:qtip">Click here to display containing hosts</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -400,7 +400,7 @@
 							<parameter name="image">images/icons/cog.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here to display containing services</parameter>
+								<parameter name="ext:qtip">Click here to display containing services</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>

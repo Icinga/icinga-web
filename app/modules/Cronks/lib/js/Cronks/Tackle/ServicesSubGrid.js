@@ -167,7 +167,7 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
                 renderer: function(value,meta,record) {
                     if(record.get('SLA_STATE_AVAILABLE') == 0 &&
                          record.get('SLA_STATE_UNAVAILABLE') == 0)
-                          return "<div style='width:50px;height:14px' qtip='"+_('No SLA information available')+"'></div>";
+                          return "<div style='width:50px;height:14px' ext:qtip='"+_('No SLA information available')+"'></div>";
                     value = parseFloat(value,10).toFixed(3);
 
                     return value+"%";
@@ -190,10 +190,10 @@ Icinga.Cronks.Tackle.ServicesSubGrid = Ext.extend(Ext.grid.GridPanel, {
 
                    if(!now.between(lastCheckDate,nextCheckDate.add(Date.SECOND,30)))
                        return "<div style='color:red;padding-left:19px;background-position: left center;' class='icinga-icon-exclamation-red'"+
-                              " qtip='Should have been checked "+AppKit.util.Date.getElapsedString(value)+"'>"+value+"</div>";
+                              " ext:qtip='Should have been checked "+AppKit.util.Date.getElapsedString(value)+"'>"+value+"</div>";
                    if(elapsed > (60*60*24))
-                       return "<div qtip='"+str+"'>"+value+"</div>";
-                   return "<div qtip='"+value+"'>"+str+"</div>";
+                       return "<div ext:qtip='"+str+"'>"+value+"</div>";
+                   return "<div ext:qtip='"+value+"'>"+str+"</div>";
                 }
             }, {
                 header: _('Flags'),

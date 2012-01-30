@@ -12,7 +12,7 @@ Icinga.Cronks.Tackle.Renderer.FlagIconColumnRenderer = function(type) {
         var isAck = parseInt(record.get(type.toUpperCase()+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED'),10);
         var inDowntime = parseInt(record.get(type.toUpperCase()+'_SCHEDULED_DOWNTIME_DEPTH'),10);
         value = "<div style='border:1px solid #cecece;background-color:#dedede;height:16px;cursor:pointer;padding:1px;padding-left:4px;border-radius:2px'>";
-        var tpl = new Ext.XTemplate("<div class='{icon}' qtip='{tip}' style='width:20px;height:18px;float:left' id='{id}'></div>");
+        var tpl = new Ext.XTemplate("<div class='{icon}' ext:qtip='{tip}' style='width:20px;height:18px;float:left' id='{id}'></div>");
         var idBase = Ext.id();
         if(!isActive) {
             if(allowPassive) {

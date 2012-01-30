@@ -278,7 +278,7 @@
 	                		<parameter name="css">x-icinga-grid-link</parameter>
 	                		
 							<parameter name="attr">
-								<parameter name="qtip">Click to view covered services</parameter>
+								<parameter name="ext:ext:qtip">Click to view covered services</parameter>
 							</parameter>
 							
 	                	</parameter>

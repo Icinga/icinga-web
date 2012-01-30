@@ -85,7 +85,7 @@ Ext.ns('Icinga');
 
         var elementTemplate = new Ext.Template('<div class="icinga-status {cls}"><span>{text}</span></div>');
 
-        var extendedElementTemplate = new Ext.Template('<div class="icinga-status-adv">', '<div class="host-upper {cls}"><span>{text}</span></div>', '<div qtip="' + _("Services with state warning") + '" class="host-lower icinga-status-warning-disabled" host_object_id="{object_id}">{warnings}</div>', '<div qtip="' + _('Services with state critical') + '" class="host-lower icinga-status-critical-disabled" host_object_id="{object_id}">{criticals}</div>', '</div>');
+        var extendedElementTemplate = new Ext.Template('<div class="icinga-status-adv">', '<div class="host-upper {cls}"><span>{text}</span></div>', '<div ext:qtip="' + _("Services with state warning") + '" class="host-lower icinga-status-warning-disabled" host_object_id="{object_id}">{warnings}</div>', '<div ext:qtip="' + _('Services with state critical') + '" class="host-lower icinga-status-critical-disabled" host_object_id="{object_id}">{criticals}</div>', '</div>');
         elementTemplate.compile();
         extendedElementTemplate.compile();
 

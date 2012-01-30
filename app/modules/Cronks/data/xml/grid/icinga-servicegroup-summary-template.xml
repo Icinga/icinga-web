@@ -307,7 +307,7 @@
 							<parameter name="image">images/icons/cog.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here to display containing services</parameter>
+								<parameter name="ext:qtip">Click here to display containing services</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>

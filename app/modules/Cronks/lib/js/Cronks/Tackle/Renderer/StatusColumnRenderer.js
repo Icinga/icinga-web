@@ -10,7 +10,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
             return (parseInt(record.get(type+'_CURRENT_PROBLEM_STATE'), 10) > 0);
         },
         getTpl: function() {
-            return "<div class='cancelable icinga-icon-exclamation-red' style='cursor:pointer;width:16;height:16px;margin:auto' qtip='" +_('Open Problem')+ "'></div>";
+            return "<div class='cancelable icinga-icon-exclamation-red' style='cursor:pointer;width:16;height:16px;margin:auto' ext:qtip='" +_('Open Problem')+ "'></div>";
         },
         applyClickHandler: function(el,record) {
             var type = record.get('SERVICE_ID') ? 'SERVICE' : 'HOST';
@@ -64,7 +64,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
             return (parseInt(record.get(type+'_PROBLEM_HAS_BEEN_ACKNOWLEDGED'), 10) > 0);
         },
         getTpl: function() {
-            return "<div class='cancelable icinga-icon-info-problem-acknowledged' style='cursor:pointer;width:25px;height:16px;margin:auto' qtip='" +_('Problem has been acknowledged')+ "'></div>";
+            return "<div class='cancelable icinga-icon-info-problem-acknowledged' style='cursor:pointer;width:25px;height:16px;margin:auto' ext:qtip='" +_('Problem has been acknowledged')+ "'></div>";
         },
         applyClickHandler: function(el,record) {
             var type = record.get('SERVICE_ID') ? 'SERVICE' : 'HOST';
@@ -108,7 +108,7 @@ Ext.ns('Icinga.Cronks.Tackle.Renderer');
             return (parseInt(record.get(type+'_SCHEDULED_DOWNTIME_DEPTH'), 10) > 0);
         },
         getTpl: function() {
-            return "<div class='cancelable icinga-icon-info-downtime' style='cursor:pointer;width:25px;height:16px;margin:auto' qtip='" +_('Object is currently in a downtime')+ "'></div>";
+            return "<div class='cancelable icinga-icon-info-downtime' style='cursor:pointer;width:25px;height:16px;margin:auto' ext:qtip='" +_('Object is currently in a downtime')+ "'></div>";
         },
         applyClickHandler: function(el,record) {
             el.addClass('icinga-icon-cancel');

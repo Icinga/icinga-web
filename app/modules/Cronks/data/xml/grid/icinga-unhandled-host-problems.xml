@@ -516,7 +516,7 @@
 	                		<parameter name="css">x-icinga-grid-link</parameter>
 	                		
 							<parameter name="attr">
-								<parameter name="qtip">Click to view covered services</parameter>
+								<parameter name="ext:ext:qtip">Click to view covered services</parameter>
 							</parameter>
 							
 	                	</parameter>
@@ -657,7 +657,7 @@
 							<parameter name="image">images/icons/table.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Go to Event DB</parameter>
+								<parameter name="ext:ext:qtip">Go to Event DB</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -718,7 +718,7 @@
 							<parameter name="image">images/icons/image.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Display performance graph</parameter>
+								<parameter name="ext:ext:qtip">Display performance graph</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -822,7 +822,7 @@
 							<parameter name="image">images/icons/information.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for information</parameter>
+								<parameter name="ext:ext:qtip">Click here for information</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -886,7 +886,7 @@
 							<parameter name="image">images/icons/book.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for history</parameter>
+								<parameter name="ext:ext:qtip">Click here for history</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -1091,7 +1091,7 @@
 							<parameter name="image">images/icons/book.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for history</parameter>
+								<parameter name="ext:ext:qtip">Click here for history</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
