@@ -74,7 +74,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
 
             AppKit.getTr().start(this.refreshTask);
 
-            this.statusXTemplate = new Ext.XTemplate('<div class="icinga-overall-status-container clearfix">', '<tpl for=".">', '<tpl if="id==1">', '<div class="icinga-overall-status-icon icinga-icon-host" qtip="' + _('Hosts') + '"></div>', '</tpl>', '<tpl if="id==6">', '<div class="x-clear icinga-overall-status-spacer"></div>', '<div class="icinga-overall-status-icon icinga-icon-service" qtip="' + _('Services') + '"></div>', '</tpl>', '<div class="icinga-overall-status-item" id="overall-status-{id}">', '<span>{state}</span>', '</div>', '</tpl>', '</div>'
+            this.statusXTemplate = new Ext.XTemplate('<div class="icinga-overall-status-container clearfix">', '<tpl for=".">', '<tpl if="id==1">', '<div class="icinga-overall-status-icon icinga-icon-host" ext:qtip="' + _('Hosts') + '"></div>', '</tpl>', '<tpl if="id==6">', '<div class="x-clear icinga-overall-status-spacer"></div>', '<div class="icinga-overall-status-icon icinga-icon-service" ext:qtip="' + _('Services') + '"></div>', '</tpl>', '<div class="icinga-overall-status-item" id="overall-status-{id}">', '<span>{state}</span>', '</div>', '</tpl>', '</div>'
             // ,
             // '<div class="x-clear"></div>'
             );

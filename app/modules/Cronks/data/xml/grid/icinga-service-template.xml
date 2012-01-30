@@ -677,7 +677,7 @@
 							<parameter name="image">images/icons/information.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for information</parameter>
+								<parameter name="ext:qtip">Click here for information</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -740,7 +740,7 @@
 							<parameter name="image">images/icons/book.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for history</parameter>
+								<parameter name="ext:qtip">Click here for history</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -811,7 +811,7 @@
 							<parameter name="image">images/icons/server.png</parameter>
 							<parameter name="css">x-icinga-grid-link</parameter>
 							<parameter name="attr">
-								<parameter name="qtip">Click here for the host</parameter>
+								<parameter name="ext:qtip">Click here for the host</parameter>
 							</parameter>
 	                	</parameter>
 	                </parameter>
@@ -882,7 +882,7 @@
                                                         <parameter name="image"><![CDATA[images/famfamfam/chart_line.png?host={host_name}&service={service_name}]]></parameter>
                                                         <parameter name="css">x-icinga-grid-link</parameter>
                                                         <parameter name="attr">
-                                                                <parameter name="qtip">Click here for grapher</parameter>
+                                                                <parameter name="ext:qtip">Click here for grapher</parameter>
                                                         </parameter>
                                 </parameter>
                         </parameter>

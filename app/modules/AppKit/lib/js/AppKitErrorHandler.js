@@ -168,7 +168,7 @@ Ext.ns("AppKit.errorHandler");
 					}),
 					tpl: new Ext.XTemplate(
 						'<tpl for=".">',
-							'<div qtip="Click to comment this bug" class="icinga-bugBox">',
+							'<div ext:qtip="Click to comment this bug" class="icinga-bugBox">',
 								'<b>Message</b>: {msg}<br/>',
 								'<b>File</b>: {file}<br/>',
 								'<b>Line</b>: {line}<br/>',

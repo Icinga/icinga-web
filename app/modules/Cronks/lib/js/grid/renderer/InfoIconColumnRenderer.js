@@ -6,7 +6,7 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
 		return Ext.DomHelper.createDom({
 			tag : 'div',
 			cls : 'x-icinga-info-icon ' + iconCls,
-			qtip : title
+			'ext:qtip' : title
 		});
 	}
 	
