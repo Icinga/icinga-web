@@ -7,7 +7,7 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
     Icinga.Cronks.System.StatusOverall.renderer = {
         itemTpl: new Ext.XTemplate(
             '<tpl if="!this.isSimple(state)">',
-                "<span qTip='Resolved / Open Problems / Overall '>",
+                "<span ext:qtip='Resolved / Open Problems / Overall '>",
                     "{resolved} / {open} / {count}",
                 "</span>",
             "</tpl>",
