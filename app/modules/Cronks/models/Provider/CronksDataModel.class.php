@@ -561,7 +561,7 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
         $q = AppKitDoctrineUtil::createQuery()
              ->select('c.*')
              ->from('Cronk c')
-             ->where('c.cronk_uid=? and c.cronk_name=?', array($cronkid, $cronkname));
+             ->where('c.cronk_uid=?', array($cronkid));
 
         if ($own==true) {
             $q->andWhere('c.cronk_user_id=?', array($this->user->user_id));
@@ -571,24 +571,24 @@ class Cronks_Provider_CronksDataModel extends CronksBaseModel implements AgaviIS
 
         if ($cronk instanceof Cronk && $cronk->cronk_id > 0) {
             AppKitDoctrineUtil::getConnection()->beginTransaction();
-            $cronk->CronkCategoryCronk->delete();
-            $cronk->CronkPrincipalCronk->delete();
-            $cronk->save();
-            AppKitDoctrineUtil::getConnection()->commit();
             
-            // bad but helps doctrine to work
-            // with oracle ;-)
-            try {
-                $cronk->CronkPrincipalCronk->delete();
-            } catch (Exception $e) {
-                // BYPASS
-            }
+            $params = array($cronk->cronk_id);
+            
+            AppKitDoctrineUtil::createQuery()->delete('CronkCategoryCronk c')
+            ->andWhere('c.ccc_cronk_id=?')
+            ->execute($params);
+            
+            AppKitDoctrineUtil::createQuery()->delete('CronkPrincipalCronk c')
+            ->andWhere('c.cpc_cronk_id=?')
+            ->execute($params);
+            
+            AppKitDoctrineUtil::getConnection()->commit();
             
             $cronk->delete();
 
             return true;
         } else {
-            throw new AppKitModelException('Cronk not found: '. $cronkid);
+            throw new AppKitModelException('Could not delete cronk: '. $cronkid);
         }
     }
 
