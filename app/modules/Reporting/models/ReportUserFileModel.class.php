@@ -58,11 +58,12 @@ class Reporting_ReportUserFileModel extends ReportingBaseModel implements AgaviI
         $this->__dir = AgaviConfig::get('modules.reporting.dir.download');
 
         if (!is_dir($this->__dir)) {
-            mkdir($this->__dir);
+            @mkdir($this->__dir);
         }
 
         if (!is_dir($this->__dir)) {
-            throw new AppKitModelException('Could not create dir: '. $this->__dir);
+            $this->log('Reporting: Permission denied to create temp dir: "%s"', $this->__dir, AgaviLogger::FATAL);
+            throw new AppKitModelException('Reporting: No permission, could not create dir: '. $this->__dir);
         } else {
             $this->fileGarbageCollector();
         }
