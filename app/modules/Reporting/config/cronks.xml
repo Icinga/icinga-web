@@ -18,7 +18,7 @@
 				<ae:parameter name="description">Seamless Jasper Integration</ae:parameter>
 				<ae:parameter name="name">Reporting</ae:parameter>
 				<ae:parameter name="categories">icinga-reporting</ae:parameter>
-				<ae:parameter name="image">cronks.Weather Could Sun</ae:parameter>
+				<ae:parameter name="image">cronks.Weather_Could_Sun</ae:parameter>
 				<ae:parameter name="groupsonly">appkit_admin</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="jasperconfig">modules.reporting.jasperconfig.default</ae:parameter>

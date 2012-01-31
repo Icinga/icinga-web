@@ -179,11 +179,13 @@ test-cs: test-precede
 devel-inplace-config:
 	mkdir -p \
 	$(SRC_DIR)/app/cache/config \
-	$(SRC_DIR)/log
+	$(LOGDIR) \
+	$(SRC_DIR)/app/modules/Reporting/data/tmp
 	chown $(WEB_USER).$(WEB_GROUP) \
 		$(SRC_DIR)/app/cache \
 		$(SRC_DIR)/app/cache/config \
-		$(LOGDIR)
+		$(LOGDIR) \
+		$(SRC_DIR)/app/modules/Reporting/data/tmp
 	@printf "Done.\n"
 
 devel-reconfigure:
