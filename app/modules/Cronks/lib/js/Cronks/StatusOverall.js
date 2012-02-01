@@ -6,17 +6,27 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
 
     Icinga.Cronks.System.StatusOverall.renderer = {
         itemTpl: new Ext.XTemplate(
-            '<tpl if="!this.isSimple(state)">',
-                "<span qTip='Resolved / Open Problems / Overall '>",
-                    "{resolved} / {open} / {count}",
+            '<tpl if="state == 99">',
+                '{count}',
+            "</tpl>",
+            '<tpl if="state == 100">',
+                "<span ext:qtip='All problem services / all services '>",
+                    "{allProblems} / {count}",
                 "</span>",
             "</tpl>",
-            '<tpl if="this.isSimple(state)">',
-                "{count}",
+            '<tpl if="state == 0">',
+                "<span ext:qtip='Not disabled / disabled'>",
+                    "{working} / {disabled}",
+                "</span>",
+            "</tpl>",
+            '<tpl if="this.isProblem(state)">',
+                "<span ext:qtip='Unacknowledged / Acknowledged / Handled '>",
+                    "{unacknowledged} / {acknowledged} / {handled}",
+                "</span>",
             "</tpl>", {
-                isSimple: function(v) {
+                isProblem: function(v) {
                     var nr = parseInt(v,10);
-                    return (nr == 99 || nr == 0);
+                    return (nr > 0 && nr <= 3);
                 }
             }
         ),
