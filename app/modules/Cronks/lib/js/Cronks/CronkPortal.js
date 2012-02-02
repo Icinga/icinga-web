@@ -42,7 +42,7 @@ Ext.ns('Icinga.Cronks.System');
                 },
 
                 padding: 10,
-                height: 68,
+                height: 72,
 
                 defaults: {
                     border: false
@@ -55,7 +55,7 @@ Ext.ns('Icinga.Cronks.System');
                 }, {
                     xtype: 'cronk',
                     crname: 'icingaMonitorPerformance',
-                    width: 320
+                    width: 350
                 }]
 
             }, {

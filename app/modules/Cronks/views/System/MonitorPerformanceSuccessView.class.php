@@ -10,10 +10,9 @@ class Cronks_System_MonitorPerformanceSuccessView extends CronksBaseView {
 
     public function executeJson(AgaviRequestDataHolder $rd) {
 
-        $model = $this->getContext()->getModel('System.MonitorPerformanceData', 'Cronks');
+        $model = $this->getContext()->getModel('Provider.SystemPerformance', 'Cronks');
 
         $json_doc = $model->getJson();
-        $json_doc->setSuccess(true);
 
         return (string)$json_doc;
 

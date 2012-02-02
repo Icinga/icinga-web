@@ -41,6 +41,7 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusOverall.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/CronkPortal.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/PortalView.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/MonitorPerformance.js</ae:parameter>
             
             <!-- Search -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/search/SearchHandler.js</ae:parameter>
