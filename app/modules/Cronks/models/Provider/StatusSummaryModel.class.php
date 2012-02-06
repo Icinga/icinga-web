@@ -1,6 +1,15 @@
 <?php 
 
+/**
+ * Data provider model for summary status
+ * @author mhein
+ *
+ */
 class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
+    /**
+     * (non-PHPdoc)
+     * @see CronksBaseModel::initialize()
+     */
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
     }
@@ -60,9 +69,19 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             . 'count(x.display_name) as count'
         );
         
+        $filter = $this->getContext()->getModel('Filter.DoctrineUserRestriction', 'Api');
+        $filter->setCurrentUser();
+        
         if ($type==='host') {
             $query->from('IcingaHosts x')
             ->leftJoin('x.status a');
+            
+            $filter->enableModels(array(
+                IcingaIPrincipalConstants::TYPE_HOSTGROUP => 'x',
+                IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => 'x',
+                IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x'
+            ));
+            
         } elseif ($type==='service') {
             $query->from('IcingaServices x')
             ->leftJoin('x.status a')
@@ -71,10 +90,20 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             
            $query->addSelect('hs.current_state, hs.scheduled_downtime_depth, hs.problem_has_been_acknowledged');
            $query->addGroupBy('hs.current_state, hs.scheduled_downtime_depth, hs.problem_has_been_acknowledged');
+           
+           $filter->enableModels(array(
+               IcingaIPrincipalConstants::TYPE_HOSTGROUP => 'h',
+               IcingaIPrincipalConstants::TYPE_CUSTOMVAR_HOST => 'h',
+               IcingaIPrincipalConstants::TYPE_SERVICEGROUP => 'x',
+               IcingaIPrincipalConstants::TYPE_CUSTOMVAR_SERVICE => 'x',
+               IcingaIPrincipalConstants::TYPE_CONTACTGROUP => 'x'
+           ));
         }
         
-        $query->groupBy('a.current_state, a.has_been_checked, a.should_be_scheduled, a.scheduled_downtime_depth, a.problem_has_been_acknowledged, a.passive_checks_enabled, a.active_checks_enabled')
+        $query->addGroupBy('a.current_state, a.has_been_checked, a.should_be_scheduled, a.scheduled_downtime_depth, a.problem_has_been_acknowledged, a.passive_checks_enabled, a.active_checks_enabled')
         ->disableAutoIdentifierFields(true);
+        
+        $query->addFilter($filter);
         
         $records = $query->execute(array(), Doctrine::HYDRATE_SCALAR);
         

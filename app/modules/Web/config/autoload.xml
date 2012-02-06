@@ -10,6 +10,7 @@
 
 		<autoload name="IcingaConstantResolver">%core.module_dir%/Web/lib/constants/IcingaConstantResolver.class.php</autoload>
 		<autoload name="IcingaConstants">%core.module_dir%/Web/lib/constants/IcingaConstants.class.php</autoload>
+        <autoload name="IcingaIPrincipalConstants">%core.module_dir%/Web/lib/principal/IcingaIPrincipalConstants.interface.php</autoload>
 		<autoload name="IcingaDataCommandRoPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRoPrincipalTarget.class.php</autoload>
 		<autoload name="IcingaDataCommandRestrictionPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataCommandRestrictionPrincipalTarget.class.php</autoload>
 		<autoload name="IcingaDataContactgroupPrincipalTarget">%core.module_dir%/Web/lib/principal/IcingaDataContactgroupPrincipalTarget.class.php</autoload>
