@@ -59,6 +59,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
      */
     public function addFilter(IcingaIDoctrineQueryFilter $filter) {
         $this->filterChain->add($filter);
+        return $this;
     }
     
     /**
