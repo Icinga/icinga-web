@@ -693,8 +693,8 @@
 	                		<parameter name="title">Detailed serviceinfo</parameter>
 	                		<parameter name="src_id">serviceinfo</parameter>
 	                		<parameter name="filter">
-	                			<parameter name="host">host_name</parameter>
-	                			<parameter name="service">service_name</parameter>
+	                			<parameter name="host">host_object_id</parameter>
+	                			<parameter name="service">service_object_id</parameter>
 	                		</parameter>
 	                	</parameter>
 	                </parameter>
