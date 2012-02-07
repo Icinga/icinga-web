@@ -289,7 +289,7 @@
 			</ae:parameter>
 			<ae:parameter name="user_filters">
 				<ae:parameter name="host">
-					<ae:parameter name="column">HOST_NAME</ae:parameter>
+					<ae:parameter name="column">HOST_OBJECT_ID</ae:parameter>
 					<ae:parameter name="match_type">IcingaApiConstants::MATCH_EXACT</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
@@ -406,11 +406,11 @@
 			</ae:parameter>
 			<ae:parameter name="user_filters">
 				<ae:parameter name="host">
-					<ae:parameter name="column">HOST_NAME</ae:parameter>
+					<ae:parameter name="column">HOST_OBJECT_ID</ae:parameter>
 					<ae:parameter name="match_type">IcingaApiConstants::MATCH_EXACT</ae:parameter>
 				</ae:parameter>
 				<ae:parameter name="service">
-					<ae:parameter name="column">SERVICE_NAME</ae:parameter>
+					<ae:parameter name="column">SERVICE_OBJECT_ID</ae:parameter>
 					<ae:parameter name="match_type">IcingaApiConstants::MATCH_EXACT</ae:parameter>
 				</ae:parameter>
 			</ae:parameter>
