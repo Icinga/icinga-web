@@ -142,9 +142,11 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             
             $out[$state]['count'] += $record['x_count'];
             
-            $out[$state]['working'] = $out[$state]['count'] - $out[$state]['disabled'];
-            
-            $out[$state]['unacknowledged'] = $out[$state]['count'] - $out[$state]['acknowledged'] - $out[$state]['handled'];
+        }
+        
+        foreach ($out as $state=>$array) {
+            $out[$state]['working'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['disabled']) > 0 ? $g : 0;
+            $out[$state]['unacknowledged'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['acknowledged'] - (int)$out[$state]['handled']) > 0 ? $g : 0;
         }
         
         $sum = $this->createStateDescriptor(100, 'TOTAL', $type);
