@@ -113,7 +113,7 @@
     <datasource>
         <parameter name="target">IcingaApiConstants::TARGET_INSTANCE</parameter>
         <parameter name="id">instance_id</parameter>
-        <parameter name="countmode">field</parameter>
+        <parameter name="countmode">none</parameter>
         <parameter name="countfields">
             <parameter>INSTANCE_ID</parameter>
         </parameter>
