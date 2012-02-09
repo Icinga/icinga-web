@@ -51,7 +51,7 @@
         <!-- Limit the result (LOAD) -->
         <!-- <parameter name="limit">25</parameter> -->
         
-        <parameter name="id">notification_id</parameter>
+        <parameter name="id">false</parameter>
         
         <!--
         	If the countmode is 'simple' countfields will be ignored always! To use with a pager
