@@ -2,6 +2,11 @@
 <!--
     databases.xml
     Defines which databases to use to store internal icinga-data and where to request icinga monitoring status from
+    
+    Have a look on app/config/databases.xml for configuration examples.
+    
+    http://docs.icinga.org/latest/de/icinga-web-config.html#configweb-databases
+    https://wiki.icinga.org/display/howtos/databases.xml
 -->
 
 	

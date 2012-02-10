@@ -31,6 +31,13 @@ AC_DEFUN([ACICINGA_CHECK_BIN], [
    test "XX${$1}" == "XXnot found" && $1=""
 ])
 
+AC_DEFUN([ACICINGA_RESOURCE_EXISTS], [
+    AC_MSG_CHECKING([if resource $2 exists])
+    AS_IF([ test -e $2 -a -r $2 ],
+        [ AC_MSG_RESULT([found]) ],
+        [ AC_MSG_WARN([not found]) ])
+])
+
 AC_DEFUN([ACICINGA_CHECK_API], [
 	AC_MSG_CHECKING([for IcingaApi])
 	AS_IF([ test -e $1/IcingaApi.php && $GREP -q "class IcingaApi" $1/IcingaApi.php ],

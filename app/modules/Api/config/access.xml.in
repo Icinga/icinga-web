@@ -24,10 +24,10 @@
                 <!-- allowed to read to and from -->
                 <readwrite>
                     <folders>
-           			    <resource name="icinga_objects">/usr/local/icinga/etc/objects</resource>	
+           			    <resource name="icinga_objects">@icinga_objects_dir@</resource>	
                     </folders>
                     <files>
-    <!--        		<resource name="icinga_cfg">/usr/local/icinga/etc/icinga.cfg</resource>-->	
+    <!--        		<resource name="icinga_cfg">@icinga_cfg@</resource>-->	
                     </files>
                 </readwrite>
                 <!-- allowed to be read from -->
