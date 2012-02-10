@@ -2077,10 +2077,10 @@ $as_echo "$ac_cv_path_SED" >&6; }
 
 # Extract version parts
 
-	VERSION_MAJOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\1/g'`
-	VERSION_MINOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\2/g'`
-	VERSION_PATCH=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\3/g'`
-	VERSION_EXTEN=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\5/g'`
+    VERSION_MAJOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\1/g'`
+    VERSION_MINOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\2/g'`
+    VERSION_PATCH=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\3/g'`
+    VERSION_EXTEN=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\5/g'`
 
 
 
@@ -2342,11 +2342,11 @@ if test "${with_web_apache_path+set}" = set; then :
   withval=$with_web_apache_path; web_apache_path=$withval
 else
   web_apache_path=
-	web_apache_path=/etc/apache2/conf.d
-	for x in /etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d; do
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if path $x exists" >&5
+    web_apache_path=/etc/apache2/conf.d
+    for x in /etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d; do
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking if path $x exists" >&5
 $as_echo_n "checking if path $x exists... " >&6; }
-		if test -d $x; then :
+        if test -d $x; then :
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
 $as_echo "found" >&6; }; web_apache_path=$x; break
 else
@@ -2354,7 +2354,7 @@ else
 $as_echo "not found" >&6; }
 
 fi
-	done
+    done
 
 
 fi
@@ -2866,13 +2866,13 @@ flag_debug=false
 CFLAGS=""
 
 
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for devel-mode" >&5
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for devel-mode" >&5
 $as_echo_n "checking for devel-mode... " >&6; }
-	if  test "$devel_mode" == "yes" ; then :
+    if  test "$devel_mode" == "yes" ; then :
 
-		flag_caching="false"
-		flag_debug="false"
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=false, jscache=false (!!)" >&5
+        flag_caching="false"
+        flag_debug="false"
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=false, jscache=false (!!)" >&5
 $as_echo "YES ... debug=false, jscache=false (!!)" >&6; }
 
 else
