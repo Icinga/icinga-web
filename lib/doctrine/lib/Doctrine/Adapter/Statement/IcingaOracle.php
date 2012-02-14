@@ -25,6 +25,7 @@
  * @package     Doctrine
  * @subpackage  Adapter
  * @author      Jannis Moßhammer <jannis.mosshammer@netways.de>
+ * @author      Marius Hein <marius.hein@netways.de>
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      vadik56
  * @author      Miloslav Kmet <adrive-nospam@hip-hop.sk> 
@@ -106,13 +107,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $this->createAliasMap($query);
         $this->removeInvalidAliases($query);
         $this->fixOrderFields($query);
-        
-        
-        // dirty icinga specific fixes  
-        $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
-        $query = preg_replace("/([^ ]*long_output)/i", "TO_CHAR($1)",$query);
-        $query = preg_replace("/([^ ]*perfdata)/i", "TO_CHAR($1)",$query);
-        $query = preg_replace("/([^ ]*logentry_data)/i", "TO_CHAR($1)",$query);
+        $this->fixOrdersInSubqueries($query);
+        $this->addFieldConversion($query);
         
         if(substr_count($query,"(") != substr_count($query,")"))  
             $query .= ")";
@@ -124,6 +120,73 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $query = preg_replace("/(ORDER BY) *([A-Za-z._0-9]+) +AS +[_A-Za-z0-9]+/i","$1 $2",$query);  
        // $query = preg_replace("/(FROM *\( *SELECT.*? *)ORDER BY .*?(\) *\w+ *WHERE.*)/","$1 $2",$query);
        
+    }
+    
+    /**
+     * Add TO_CHAR conversions for CLOB fields for oracle
+     * @param string $query
+     * @return string Parsed query
+     */
+    private function addFieldConversion(&$query) {
+        $query = preg_replace("/notification_timeperiod_object_id/", "notif_timeperiod_object_id",$query);
+        $query = preg_replace("/([^ ]*long_output)/i", "TO_CHAR($1)",$query);
+        $query = preg_replace("/([^ ]*perfdata)/i", "TO_CHAR($1)",$query);
+        $query = preg_replace("/([^ ]*logentry_data)/i", "TO_CHAR($1)",$query);
+        return $query;
+    }
+    
+    /**
+     * Adding order parts from main query to subquery which delivers
+     * the recordset
+     * https://dev.icinga.org/issues/2215
+     * @param string $query
+     * @return string
+     */
+    private function fixOrdersInSubqueries(&$query) {
+        $m = array();
+        
+        list($mainTable, $mainAlias) = $this->getTableParts($query);
+        
+        if ($mainTable && $mainAlias) {
+            
+            if (preg_match('/ORDER\s+BY\s+(.+)(;|$)/i', $query, $m)) {
+                $fields = AppKitArrayUtil::trimSplit($m[1]);
+                if (preg_match_all('/FROM\s+\(\s*(SELECT\s+[\w\.\,\s]+\s+FROM\s+'. $mainTable. '[^\)]+)\)/i', $query, $m, PREG_SET_ORDER)) {
+                    foreach ($m as $match) {
+                        $replaceMarker = $match[0];
+                        $subQuery = $match[1];
+                        list($subTable, $subAlias) = $this->getTableParts($subQuery);
+                        if ($subTable == $mainTable && !preg_match('/ORDER BY/i', $subQuery)) {
+                            $orderParts = array();
+                            foreach ($fields as $field) {
+                                $newOrder = preg_replace('/^\w+\./', $subAlias. '.', $field);
+                                $newField = preg_replace('/\s+.+$/', '', $newOrder);
+                                $orderParts[] = $newOrder;
+                                $subQuery = preg_replace('/^\s*(SELECT\s+(DISTINCT)?\s*)'. $subAlias. '/i', '\1 '. $newField. ', '. $subAlias, $subQuery);
+                            }
+                            $newSub = ' FROM ( '. $subQuery. ' ORDER BY '. implode(', ', $orderParts). ' ) ';
+                            
+                            $query = preg_replace('/'. preg_quote($replaceMarker, '/'). '/', $newSub, $query);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return $query;
+    }
+    
+    /**
+     * Extracts table name and corresponding alias from query (part)
+     * @param string $queryPart
+     * @return string[TABLE_NAME, ALIAS]
+     */
+    private function getTableParts($queryPart) {
+        if (preg_match('/from (\w+)\s(\w+)\s/i', $queryPart, $m)) {
+            return array($m[1], $m[2]);
+        }
+        
+        return array(null, null);
     }
     
     /**

@@ -233,7 +233,7 @@
             </filter>
             
             <order>
-                <parameter name="enabled">false</parameter>
+                <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
             </order>
         </field>
