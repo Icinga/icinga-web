@@ -87,6 +87,7 @@ none:
 	@printf "\nDevelopment targets:\n"
 	@printf "\t%-22s - %s\n" "devel-inplace-config" "Prepare src tree for running inplace"
 	@printf "\t%-22s - %s\n" "devel-reconfigure" "Clean and reconfigure source"
+	@printf "\t%-22s - %s\n" "devel-update-version" "Upgrades the version file"
 	@printf "\t%-22s - %s\n" "test" "Running tests"
 	@printf "\t%-22s - %s\n" "test-cs" "Running codestyle tests"
 	@printf "\n\n"
@@ -192,6 +193,13 @@ devel-reconfigure:
 	@EXEC=`head config.log  | grep "$$ configure" | sed -e 's/\s\+\$$\s\+//g'`; \
 	make distclean; \
 	sh $$EXEC
+
+devel-update-version:
+	@VFILE="doc/VERSION"; \
+        VERSION=`printf "%d.%d.%d" "$(VERSION_MAJOR)" "$(VERSION_MINOR)" "$(VERSION_PATCH)"`; \
+        test ! "X$(VERSION_EXTEN)" = "X" && VERSION=`printf "%s-%s" "$$VERSION" "$(VERSION_EXTEN)"`; \
+        echo "$$VERSION" > $$VFILE; \
+        echo "Upgraded $$VFILE to version $$VERSION"
 
 install-javascript:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js
