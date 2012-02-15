@@ -51,8 +51,8 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
 
     public function executeRead(AgaviRequestDataHolder $rd) {
         
-        if (!$this->context->getUser()->isAuthenticated()) {
-	        return array('Api', 'GenericError');
+        if (!$this->context->getUser()->isAuthenticated() || !$this->context->getUser()->hasCredential('icinga.user')) {
+            return array('Api', 'GenericError');
 	    }
         
         $context = $this->getContext();
