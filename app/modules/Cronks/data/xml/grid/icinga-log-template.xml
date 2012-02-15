@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Default logviewer template</parameter>
@@ -12,15 +12,15 @@
     </meta>
     
     <!-- 
-    	Options for the template. Change layout and view style to fit the type you
-    	want to display
+        Options for the template. Change layout and view style to fit the type you
+        want to display
     -->
     <option>
-    	<!-- 
-    		Some layout modes:
-    			- default: full featured view
-    			- minimal: reduce space consumption (e.g. filters, pagers, ...)
-    	-->
+        <!-- 
+            Some layout modes:
+                - default: full featured view
+                - minimal: reduce space consumption (e.g. filters, pagers, ...)
+        -->
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
@@ -28,22 +28,22 @@
 
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <parameter name="Ext.grid.GridView">
-        	<parameter name="headersDisabled">false</parameter>
+            <parameter name="headersDisabled">false</parameter>
         </parameter>
         
         <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
         <!-- 
-        	!!! Attention: this options goes to the main grid panel, only change layout attributes, all other
-        	will corrupt the auto build of the GridPanel
+            !!! Attention: this options goes to the main grid panel, only change layout attributes, all other
+            will corrupt the auto build of the GridPanel
         -->
         <!-- <parameter name="Ext.grid.GridPanel">
-        	<parameter name="disable">true</parameter>
-        	<parameter name="hidden">false</parameter>
+            <parameter name="disable">true</parameter>
+            <parameter name="hidden">false</parameter>
         </parameter> -->
     </option>
     
     <!-- 
-    	What data to display? Define icinga data targets and countfields
+        What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">IcingaApiConstants::TARGET_LOG</parameter>
@@ -51,57 +51,57 @@
         <parameter name="id">log_id</parameter>
         
         <!--
-        	If the countmode is 'simple' countfields will be ignored always! To use with a pager
-        	you have to use the 'field' mode to count all data independent from data.
+            If the countmode is 'simple' countfields will be ignored always! To use with a pager
+            you have to use the 'field' mode to count all data independent from data.
             'none' disabled the counting completely
         -->
-		<parameter name="countmode">none</parameter>
-		
-		<!-- 
-			If the counting differs from data result you can specify a field to count
-		-->
+        <parameter name="countmode">none</parameter>
+        
+        <!-- 
+            If the counting differs from data result you can specify a field to count
+        -->
         <parameter name="countfields">
-        	<parameter>LOG_ID</parameter>
+            <parameter>LOG_ID</parameter>
         </parameter>
          
     </datasource>
     
     <!-- 
-    	Paging record on its result
+        Paging record on its result
     -->
-	<pager>
-    	<parameter name="enabled">true</parameter>
+    <pager>
+        <parameter name="enabled">true</parameter>
     
-    	<parameter name="start">0</parameter>
+        <parameter name="start">0</parameter>
     </pager>
     
     <grouping>
-    	<parameter name="enabled">true</parameter>
-    	<parameter name="field">log_group_timestamp</parameter>
-    	
-    	<!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
-    	<parameter name="Ext.grid.GroupingView">
-    		<parameter name="hideGroupedColumn">true</parameter>
-    		<parameter name="startCollapsed">false</parameter>
-    	</parameter>
-    	
-    	<!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
-    	<!-- <parameter name="Ext.data.GroupingStore">
-    		
-    	</parameter> -->
+        <parameter name="enabled">true</parameter>
+        <parameter name="field">log_group_timestamp</parameter>
+        
+        <!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
+        <parameter name="Ext.grid.GroupingView">
+            <parameter name="hideGroupedColumn">true</parameter>
+            <parameter name="startCollapsed">false</parameter>
+        </parameter>
+        
+        <!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
+        <!-- <parameter name="Ext.data.GroupingStore">
+            
+        </parameter> -->
     </grouping>
     
     <!--
-    	Field decleration: What to display and how
+        Field decleration: What to display and how
     -->
     <fields>
     
         <field name="log_id">
-        	<datasource>
-        		<parameter name="field">LOG_ID</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">LOG_ID</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Id</parameter>
             </display>
@@ -117,34 +117,34 @@
         </field>
         
         <field name="log_instance_name">
-        	<datasource>
-        		<parameter name="field">INSTANCE_NAME</parameter>
-        	</datasource>
+            <datasource>
+                <parameter name="field">INSTANCE_NAME</parameter>
+            </datasource>
 
-        	<display>
+            <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Instance</parameter>
 
-				<parameter name="width">60</parameter>
+                <parameter name="width">60</parameter>
 
-				<parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
                 </parameter>
             </display>
 
             <filter>
                 <parameter name="enabled">true</parameter>
 
-				<!-- Filter configuration -->
+                <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
 
-				<!-- Operator type is needed because we don't know which type returned-->
-				<parameter name="operator_type">text</parameter>
+                <!-- Operator type is needed because we don't know which type returned-->
+                <parameter name="operator_type">text</parameter>
 
-				<parameter name="api_target">instance</parameter>
-				<parameter name="api_keyfield">INSTANCE_NAME</parameter>
-				<parameter name="api_valuefield">INSTANCE_NAME</parameter>
+                <parameter name="api_target">instance</parameter>
+                <parameter name="api_keyfield">INSTANCE_NAME</parameter>
+                <parameter name="api_valuefield">INSTANCE_NAME</parameter>
             </filter>
 
             <order>
@@ -154,25 +154,25 @@
         </field>
         
         <field name="log_group_timestamp">
-        	<datasource>
-        		<parameter name="field">LOG_TIME</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">LOG_TIME</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Hour</parameter>
                 <parameter name="width">200</parameter>
                 
                 <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
                 
                 <parameter name="userFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-                	<parameter name="method">formatDate</parameter>
-					<parameter name="arguments">
-						<parameter name="format"><![CDATA[Y-m-d H:00:00]]></parameter>
-					</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">formatDate</parameter>
+                    <parameter name="arguments">
+                        <parameter name="format"><![CDATA[Y-m-d H:00:00]]></parameter>
+                    </parameter>
                 </parameter>
             </display>
             
@@ -188,18 +188,18 @@
         </field>
         
         <field name="log_timestamp">
-        	<datasource>
-        		<parameter name="field">LOG_TIME</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">LOG_TIME</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Timestamp</parameter>
                 <parameter name="width">120</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
             </display>
             
@@ -215,11 +215,11 @@
         </field>
         
         <field name="log_entry_type_icon">
-        	<datasource>
-        		<parameter name="field">LOG_TYPE</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">LOG_TYPE</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
                 <parameter name="icon">icinga-icon-information</parameter>
@@ -227,26 +227,26 @@
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
                 
                 <parameter name="phpFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
-                	<parameter name="method">icingaConstants</parameter>
-					<parameter name="arguments">
-						<parameter name="type">logentryTypeIcon</parameter>
-					</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
+                    <parameter name="method">icingaConstants</parameter>
+                    <parameter name="arguments">
+                        <parameter name="type">logentryTypeIcon</parameter>
+                    </parameter>
                 </parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">columnImageFromValue</parameter>
-                	
-                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                	<parameter name="type">renderer</parameter>
-                	
-                	<parameter name="arguments"></parameter>
-				</parameter>
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">columnImageFromValue</parameter>
+                    
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
+                    
+                    <parameter name="arguments"></parameter>
+                </parameter>
                 
             </display>
             
@@ -261,26 +261,26 @@
         </field> 
 
         <field name="log_entry_type">
-        	<datasource>
-        		<parameter name="field">LOG_TYPE</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">LOG_TYPE</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Type</parameter>
                 <parameter name="width">120</parameter>
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
                 
                 <parameter name="phpFunc">
-                	<parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
-                	<parameter name="method">icingaConstants</parameter>
-					<parameter name="arguments">
-						<parameter name="type">logentryType</parameter>
-					</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
+                    <parameter name="method">icingaConstants</parameter>
+                    <parameter name="arguments">
+                        <parameter name="type">logentryType</parameter>
+                    </parameter>
                 </parameter>
             </display>
             
@@ -295,28 +295,28 @@
         </field> 
     
         <field name="log_data">
-        	<datasource>
-        		<parameter name="field">LOG_DATA</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">LOG_DATA</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Message</parameter>
                 
                 <parameter name="width">200</parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                	<parameter name="function">columnMetaData</parameter>
-                	
-                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-                	<parameter name="type">renderer</parameter>
-                	
-                	<!-- Sets class for multiline columns -->
-                	<parameter name="arguments">
-                		<parameter name="css"><![CDATA[x-icinga-multiline-column]]></parameter>
-                	</parameter>
-				</parameter>
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">columnMetaData</parameter>
+                    
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
+                    
+                    <!-- Sets class for multiline columns -->
+                    <parameter name="arguments">
+                        <parameter name="css"><![CDATA[x-icinga-multiline-column]]></parameter>
+                    </parameter>
+                </parameter>
             </display>
             
             <filter>
@@ -324,7 +324,7 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.text</parameter>
+                <parameter name="subtype">appkit.ext.filter.text</parameter>
             </filter>
             
             <order>

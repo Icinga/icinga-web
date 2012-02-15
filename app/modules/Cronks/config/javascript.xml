@@ -39,14 +39,6 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/MonitorPerformance.js</ae:parameter>
             <!-- Search -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/search/SearchHandler.js</ae:parameter>
-            <!-- Formerly dynamic scripts and column renderers -->
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaGridFilterHandler.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaCommandHandler.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/StatusMapColumnRenderer.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusMap/RGraph.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusMap/Cronk.js</ae:parameter>
-            <ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
             <!-- Tackle view components -->
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Translation.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Renderer/ServiceHealthRenderer.js</ae:parameter>
@@ -72,6 +64,15 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ObjectGrid.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/InfoTabPanel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/SLAChartPanel.js</ae:parameter>
+            <!-- Formerly dynamic scripts and column renderers -->
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/IcingaColumnRenderer.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaGridFilterHandler.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/IcingaCommandHandler.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/StatusMapColumnRenderer.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/grid/renderer/ObjectInfoComponentRenderer.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusMap/RGraph.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/StatusMap/Cronk.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/CronkTrigger.js</ae:parameter>
         </javascript>
     </ae:configuration>
 </ae:configurations>

@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Icinga services with unhandled problems</parameter>
@@ -12,8 +12,8 @@
     </meta>
     
     <!-- 
-    	Options for the template. Change layout and view style to fit the type you
-    	want to display
+        Options for the template. Change layout and view style to fit the type you
+        want to display
     -->
     <option>
         <parameter name="mode">default</parameter>
@@ -22,237 +22,237 @@
 
         
         <parameter name="gridEvents">
-        	
-        	<!-- Initialize comments -->
-        	<parameter>
-        		<parameter name="type">viewready</parameter>
-        		<parameter name="function">Cronk.grid.CommentColumnRenderer.init</parameter>	
-        		<parameter name="arguments">
-        			<parameter name="column_name">comments</parameter>
-               		<!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
-               		<parameter name="title">Comments for {service_name}</parameter>
-        		</parameter>
-        	</parameter>
-        	
-        	<!-- Initialize info icons lazy -->
-        	<parameter>
-        		<parameter name="type">viewready</parameter>
-        		<parameter name="function">Cronk.grid.InfoIconColumnRenderer.init</parameter>
-        		<parameter name="arguments">
-        			<parameter name="column_name">service_info_icons</parameter>
-        		</parameter>
-        	</parameter>
-        	
+            
+            <!-- Initialize comments -->
+            <parameter>
+                <parameter name="type">viewready</parameter>
+                <parameter name="function">Cronk.grid.CommentColumnRenderer.init</parameter>    
+                <parameter name="arguments">
+                    <parameter name="column_name">comments</parameter>
+                    <!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
+                    <parameter name="title">Comments for {service_name}</parameter>
+                </parameter>
+            </parameter>
+            
+            <!-- Initialize info icons lazy -->
+            <parameter>
+                <parameter name="type">viewready</parameter>
+                <parameter name="function">Cronk.grid.InfoIconColumnRenderer.init</parameter>
+                <parameter name="arguments">
+                    <parameter name="column_name">service_info_icons</parameter>
+                </parameter>
+            </parameter>
+            
         </parameter>
         
         <!-- 
-        	Selection model of rows (checkbox/row). This is needed for
-        	commands and maybe other user things ...
+            Selection model of rows (checkbox/row). This is needed for
+            commands and maybe other user things ...
         -->
         <parameter name="selection_model">checkbox</parameter>
         
         <!-- 
-        	Enable/disable commands and specify which of type you'll need
+            Enable/disable commands and specify which of type you'll need
         -->
         <parameter name="commands">
-        	<!-- 
-        		Generally enabled od disabled
-        	-->
-        	<parameter name="enabled">true</parameter>
+            <!-- 
+                Generally enabled od disabled
+            -->
+            <parameter name="enabled">true</parameter>
         
-        	<!--
-        		Sourcefieldmapping
-        		* Which field content comes from the template data source
-        	-->
-        	<parameter name="source">
-        		<parameter name="IcingaApiConstants::COMMAND_HOST">host_name</parameter>
-        		<parameter name="IcingaApiConstants::COMMAND_SERVICE">service_name</parameter>
-				<parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
-        	</parameter>
-        	
-        	<parameter name="predefined">
-        		<parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
-			<parameter name="IcingaApiConstants::COMMAND_ENDTIME">now+7200</parameter>
-			<parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
-        	</parameter>
-        	
-        	<!-- 
-        		Which commands are available in this template and can charged
-        		with template data
-        	-->
-        	<parameter name="items">
-        		<parameter name="SCHEDULE_SVC_CHECK">
-        			<parameter name="title">Schedule next service check</parameter>
-        			<parameter name="icon_class">icinga-icon-cog</parameter>
-        		</parameter>
-        		<parameter name="SCHEDULE_FORCED_SVC_CHECK">
-        			<parameter name="title">Schedule forced service check</parameter>
-        			<parameter name="icon_class">icinga-icon-cog</parameter>
-        		</parameter>
-				<parameter name="PROCESS_SERVICE_CHECK_RESULT">
-        			<parameter name="title">Process service check result</parameter>
-        			<parameter name="icon_class">icinga-icon-cog</parameter>
-        		</parameter>
-        		<parameter name="ACKNOWLEDGE_SVC_PROBLEM">
-        			<parameter name="title">Acknowledge service check problem</parameter>
-        			<parameter name="icon_class">icinga-icon-exclamation-white</parameter>
-        		</parameter>
+            <!--
+                Sourcefieldmapping
+                * Which field content comes from the template data source
+            -->
+            <parameter name="source">
+                <parameter name="IcingaApiConstants::COMMAND_HOST">host_name</parameter>
+                <parameter name="IcingaApiConstants::COMMAND_SERVICE">service_name</parameter>
+                <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
+            </parameter>
+            
+            <parameter name="predefined">
+                <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+            <parameter name="IcingaApiConstants::COMMAND_ENDTIME">now+7200</parameter>
+            <parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
+            </parameter>
+            
+            <!-- 
+                Which commands are available in this template and can charged
+                with template data
+            -->
+            <parameter name="items">
+                <parameter name="SCHEDULE_SVC_CHECK">
+                    <parameter name="title">Schedule next service check</parameter>
+                    <parameter name="icon_class">icinga-icon-cog</parameter>
+                </parameter>
+                <parameter name="SCHEDULE_FORCED_SVC_CHECK">
+                    <parameter name="title">Schedule forced service check</parameter>
+                    <parameter name="icon_class">icinga-icon-cog</parameter>
+                </parameter>
+                <parameter name="PROCESS_SERVICE_CHECK_RESULT">
+                    <parameter name="title">Process service check result</parameter>
+                    <parameter name="icon_class">icinga-icon-cog</parameter>
+                </parameter>
+                <parameter name="ACKNOWLEDGE_SVC_PROBLEM">
+                    <parameter name="title">Acknowledge service check problem</parameter>
+                    <parameter name="icon_class">icinga-icon-exclamation-white</parameter>
+                </parameter>
                 <parameter name="ACKNOWLEDGE_SVC_PROBLEM_EXPIRE">
                     <parameter name="title">Acknowledge service check problem with expiration time</parameter>
                     <parameter name="icon_class">icinga-icon-exclamation-white</parameter>
                 </parameter>
-        		<parameter name="REMOVE_SVC_ACKNOWLEDGEMENT">
-        			<parameter name="title">Remove service acknowledgement</parameter>
-        			<parameter name="icon_class">icinga-icon-exclamation-red</parameter>
-        		</parameter>
-        		<parameter name="SCHEDULE_SVC_DOWNTIME">
-        			<parameter name="title">Schedule a service downtime</parameter>
-        			<parameter name="icon_class">icinga-icon-downtime</parameter>
-        		</parameter>
-        		<parameter name="ADD_SVC_COMMENT">
-        			<parameter name="title">Add a service comment</parameter>
-        			<parameter name="icon_class">icinga-icon-comment</parameter>
-        		</parameter>
-        		<parameter name="SEND_CUSTOM_SVC_NOTIFICATION">
-        			<parameter name="title">Send custom service notification</parameter>
-        			<parameter name="icon_class">icinga-icon-notify</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_SVC_CHECK">
-        			<parameter name="title">Enable active checks of this service</parameter>
-        			<parameter name="icon_class">icinga-icon-arrow-out</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_SVC_CHECK">
-        			<parameter name="title">Disable active checks of this service</parameter>
-        			<parameter name="icon_class">icinga-icon-cross</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_PASSIVE_SVC_CHECKS">
-        			<parameter name="title">Start accepting passive checks for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-arrow-in</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_PASSIVE_SVC_CHECKS">
-        			<parameter name="title">Stop accepting passive checks for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-cross</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="START_OBSESSING_OVER_SVC">
-        			<parameter name="title">Start obsessing over this service</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
-        		</parameter>
-        		<parameter name="STOP_OBSESSING_OVER_SVC">
-        			<parameter name="title">Stop obsessing over this service</parameter>
-        			<parameter name="icon_class">icinga-icon-cross</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_SVC_NOTIFICATIONS">
-        			<parameter name="title">Enable notifications for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-notify</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_SVC_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-notify-disabled</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_SVC_EVENT_HANDLER">
-        			<parameter name="title">Enable event handler for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-bricks</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_SVC_EVENT_HANDLER">
-        			<parameter name="title">Disable event handler for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-cross</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-        		<parameter name="ENABLE_SVC_FLAP_DETECTION">
-        			<parameter name="title">Enable flap detection for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-flapping</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_SVC_FLAP_DETECTION">
-        			<parameter name="title">Disable flap detection for this service</parameter>
-        			<parameter name="icon_class">icinga-icon-cross</parameter>
-        		</parameter>
-        		
-        	</parameter>
+                <parameter name="REMOVE_SVC_ACKNOWLEDGEMENT">
+                    <parameter name="title">Remove service acknowledgement</parameter>
+                    <parameter name="icon_class">icinga-icon-exclamation-red</parameter>
+                </parameter>
+                <parameter name="SCHEDULE_SVC_DOWNTIME">
+                    <parameter name="title">Schedule a service downtime</parameter>
+                    <parameter name="icon_class">icinga-icon-downtime</parameter>
+                </parameter>
+                <parameter name="ADD_SVC_COMMENT">
+                    <parameter name="title">Add a service comment</parameter>
+                    <parameter name="icon_class">icinga-icon-comment</parameter>
+                </parameter>
+                <parameter name="SEND_CUSTOM_SVC_NOTIFICATION">
+                    <parameter name="title">Send custom service notification</parameter>
+                    <parameter name="icon_class">icinga-icon-notify</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SVC_CHECK">
+                    <parameter name="title">Enable active checks of this service</parameter>
+                    <parameter name="icon_class">icinga-icon-arrow-out</parameter>
+                </parameter>
+                <parameter name="DISABLE_SVC_CHECK">
+                    <parameter name="title">Disable active checks of this service</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_PASSIVE_SVC_CHECKS">
+                    <parameter name="title">Start accepting passive checks for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-arrow-in</parameter>
+                </parameter>
+                <parameter name="DISABLE_PASSIVE_SVC_CHECKS">
+                    <parameter name="title">Stop accepting passive checks for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="START_OBSESSING_OVER_SVC">
+                    <parameter name="title">Start obsessing over this service</parameter>
+                    <parameter name="icon_class">icinga-icon-bricks</parameter>
+                </parameter>
+                <parameter name="STOP_OBSESSING_OVER_SVC">
+                    <parameter name="title">Stop obsessing over this service</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SVC_NOTIFICATIONS">
+                    <parameter name="title">Enable notifications for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-notify</parameter>
+                </parameter>
+                <parameter name="DISABLE_SVC_NOTIFICATIONS">
+                    <parameter name="title">Disable notifications for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-notify-disabled</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SVC_EVENT_HANDLER">
+                    <parameter name="title">Enable event handler for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-bricks</parameter>
+                </parameter>
+                <parameter name="DISABLE_SVC_EVENT_HANDLER">
+                    <parameter name="title">Disable event handler for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SVC_FLAP_DETECTION">
+                    <parameter name="title">Enable flap detection for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-flapping</parameter>
+                </parameter>
+                <parameter name="DISABLE_SVC_FLAP_DETECTION">
+                    <parameter name="title">Disable flap detection for this service</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                </parameter>
+                
+            </parameter>
         </parameter>
-        	
-		<!-- 
-        	Additional filter
-        	* Keep in mind to map the names in datasource.additional_filter_fields
+            
+        <!-- 
+            Additional filter
+            * Keep in mind to map the names in datasource.additional_filter_fields
         -->
         <parameter name="filter">
-        	<paramter name="custom_variable_name">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.api</parameter>
-        		<parameter name="label">CV Name</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">customvariable</parameter>
-				<parameter name="api_keyfield">CUSTOMVARIABLE_NAME</parameter>
-				<parameter name="api_valuefield">CUSTOMVARIABLE_NAME</parameter>
-        	</paramter>
-        	<paramter name="custom_variable_value">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.api</parameter>
-        		<parameter name="label">CV Val</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">customvariable</parameter>
-				<parameter name="api_keyfield">CUSTOMVARIABLE_VALUE</parameter>
-				<parameter name="api_valuefield">CUSTOMVARIABLE_VALUE</parameter>
-				<parameter name="api_additional">CUSTOMVARIABLE_NAME</parameter>
-				<parameter name="api_exttpl"><![CDATA[ {CUSTOMVARIABLE_NAME}: {CUSTOMVARIABLE_VALUE} ]]></parameter>
-				<parameter name="api_id">CUSTOMVARIABLE_VALUE</parameter>
-        	</paramter>
-        	<paramter name="hostgroup_name">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.api</parameter>
-        		<parameter name="label">Hostgroup</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">hostgroup</parameter>
-				<parameter name="api_keyfield">HOSTGROUP_NAME</parameter>
-				<parameter name="api_valuefield">HOSTGROUP_NAME</parameter>
-        	</paramter>
-        	<paramter name="servicegroup_name">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.api</parameter>
-        		<parameter name="label">Servicegroup</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">servicegroup</parameter>
-				<parameter name="api_keyfield">SERVICEGROUP_NAME</parameter>
-				<parameter name="api_valuefield">SERVICEGROUP_NAME</parameter>
-        	</paramter>
-        	<paramter name="notifications_enabled">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">Notifications enabled</parameter>
-        	</paramter>
-        	<paramter name="problem_acknowledged">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">Acknowledged</parameter>
-        	</paramter>
-        	<paramter name="scheduled_downtime_depth">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">In downtime</parameter>
-        	</paramter>
-			<paramter name="service_is_pending">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.bool</parameter>
-        		<parameter name="label">Is pending</parameter>
-        	</paramter>
+            <paramter name="custom_variable_name">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="label">CV Name</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">customvariable</parameter>
+                <parameter name="api_keyfield">CUSTOMVARIABLE_NAME</parameter>
+                <parameter name="api_valuefield">CUSTOMVARIABLE_NAME</parameter>
+            </paramter>
+            <paramter name="custom_variable_value">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="label">CV Val</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">customvariable</parameter>
+                <parameter name="api_keyfield">CUSTOMVARIABLE_VALUE</parameter>
+                <parameter name="api_valuefield">CUSTOMVARIABLE_VALUE</parameter>
+                <parameter name="api_additional">CUSTOMVARIABLE_NAME</parameter>
+                <parameter name="api_exttpl"><![CDATA[ {CUSTOMVARIABLE_NAME}: {CUSTOMVARIABLE_VALUE} ]]></parameter>
+                <parameter name="api_id">CUSTOMVARIABLE_VALUE</parameter>
+            </paramter>
+            <paramter name="hostgroup_name">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="label">Hostgroup</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">hostgroup</parameter>
+                <parameter name="api_keyfield">HOSTGROUP_NAME</parameter>
+                <parameter name="api_valuefield">HOSTGROUP_NAME</parameter>
+            </paramter>
+            <paramter name="servicegroup_name">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="label">Servicegroup</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">servicegroup</parameter>
+                <parameter name="api_keyfield">SERVICEGROUP_NAME</parameter>
+                <parameter name="api_valuefield">SERVICEGROUP_NAME</parameter>
+            </paramter>
+            <paramter name="notifications_enabled">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.bool</parameter>
+                <parameter name="label">Notifications enabled</parameter>
+            </paramter>
+            <paramter name="problem_acknowledged">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.bool</parameter>
+                <parameter name="label">Acknowledged</parameter>
+            </paramter>
+            <paramter name="scheduled_downtime_depth">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.bool</parameter>
+                <parameter name="label">In downtime</parameter>
+            </paramter>
+            <paramter name="service_is_pending">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.bool</parameter>
+                <parameter name="label">Is pending</parameter>
+            </paramter>
         </parameter>
         
     </option>
     
     <!-- 
-    	What data to display? Define icinga data targets and countfields
+        What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">IcingaApiConstants::TARGET_SERVICE</parameter>
@@ -260,127 +260,127 @@
         <parameter name="id">service_object_id</parameter>
         
         <!--
-        	If the countmode is 'simple' countfields will be ignored always! To use with a pager
-        	you have to use the 'field' mode to count all data independent from data
+            If the countmode is 'simple' countfields will be ignored always! To use with a pager
+            you have to use the 'field' mode to count all data independent from data
         -->
-		<parameter name="countmode">field</parameter>
-		
-		<!-- 
-			If the counting differs from data result you can specify a field to count
-		-->
+        <parameter name="countmode">field</parameter>
+        
+        <!-- 
+            If the counting differs from data result you can specify a field to count
+        -->
         <parameter name="countfields">
-        	<parameter>SERVICE_ID</parameter>
+            <parameter>SERVICE_ID</parameter>
         </parameter>
         
         <!-- 
-        	Additional fields we would like to work with it (append them on the datasource
-        	without working the default structures, e.g. for user classes)
+            Additional fields we would like to work with it (append them on the datasource
+            without working the default structures, e.g. for user classes)
         -->
-       	<parameter name="additional_fields">
-       		<parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
-       		<parameter name="instance_id">SERVICE_INSTANCE_ID</parameter>
-			<parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
-		</parameter>
-       	
-       	<parameter name="additional_filter_fields">
-       		<parameter name="servicegroup_object_id">SERVICEGROUP_OBJECT_ID</parameter>
-       		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
-       		<parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
-       		<parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
-			<parameter name="custom_variable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
-       		<parameter name="custom_variable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
-       		<parameter name="notifications_enabled">SERVICE_NOTIFICATIONS_ENABLED</parameter>
-			<parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
-			<parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
-			<parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
-			
-			<!-- Stupid filter mapping -->
-			<parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
-       		<parameter name="customvariable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
-       	</parameter>
+        <parameter name="additional_fields">
+            <parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
+            <parameter name="instance_id">SERVICE_INSTANCE_ID</parameter>
+            <parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
+        </parameter>
+        
+        <parameter name="additional_filter_fields">
+            <parameter name="servicegroup_object_id">SERVICEGROUP_OBJECT_ID</parameter>
+            <parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
+            <parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
+            <parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
+            <parameter name="custom_variable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
+            <parameter name="custom_variable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
+            <parameter name="notifications_enabled">SERVICE_NOTIFICATIONS_ENABLED</parameter>
+            <parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+            <parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
+            <parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
+            
+            <!-- Stupid filter mapping -->
+            <parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
+            <parameter name="customvariable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
+        </parameter>
 
 
-		<parameter name="filterPresets">
-			<parameter name="AND">
+        <parameter name="filterPresets">
+            <parameter name="AND">
                 <parameter>
-					<parameter name="field">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
-					<parameter name="val">0</parameter>
-					<parameter name="op">=</parameter>
-				</parameter>
-				<parameter>
-					<parameter name="field">SERVICE_CURRENT_STATE</parameter>
-					<parameter name="val">0</parameter>
-					<parameter name="op">!=</parameter>
-				</parameter>
-				<parameter>
-					<parameter name="field">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
-					<parameter name="val">1</parameter>
-					<parameter name="op">!=</parameter>
-				</parameter>
-			
-			</parameter>
+                    <parameter name="field">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
+                    <parameter name="val">0</parameter>
+                    <parameter name="op">=</parameter>
+                </parameter>
+                <parameter>
+                    <parameter name="field">SERVICE_CURRENT_STATE</parameter>
+                    <parameter name="val">0</parameter>
+                    <parameter name="op">!=</parameter>
+                </parameter>
+                <parameter>
+                    <parameter name="field">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
+                    <parameter name="val">1</parameter>
+                    <parameter name="op">!=</parameter>
+                </parameter>
+            
+            </parameter>
         </parameter>
     </datasource>
     
     <!-- 
-    	Paging record on its result
+        Paging record on its result
     -->
     <pager>
-    	<parameter name="enabled">true</parameter>
-    	
-    	<parameter name="start">0</parameter>
+        <parameter name="enabled">true</parameter>
+        
+        <parameter name="start">0</parameter>
     </pager>
     
     <grouping>
-    	<parameter name="enabled">true</parameter>
-    	<parameter name="field">host_name</parameter>
-    	
-    	<parameter name="Ext.grid.GroupingView">
-    		<parameter name="hideGroupedColumn">true</parameter>
-    	</parameter>
+        <parameter name="enabled">true</parameter>
+        <parameter name="field">host_name</parameter>
+        
+        <parameter name="Ext.grid.GroupingView">
+            <parameter name="hideGroupedColumn">true</parameter>
+        </parameter>
     </grouping>
     
     <!--
-    	Field decleration: What to display and how
+        Field decleration: What to display and how
     -->
     <fields>
-		<field name="service_icon">
-        	<datasource>
-        		<parameter name="field">SERVICE_ICON_IMAGE</parameter>
-        	</datasource>
+        <field name="service_icon">
+            <datasource>
+                <parameter name="field">SERVICE_ICON_IMAGE</parameter>
+            </datasource>
 
-        	<display>
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
                 <parameter name="icon">icinga-icon-image</parameter>
-				<parameter name="width">25</parameter>
-				<parameter name="Ext.grid.Column">
-		          	<parameter name="menuDisabled">true</parameter>
-		          	<parameter name="fixed">true</parameter>
-			    </parameter>
+                <parameter name="width">25</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
+                </parameter>
                 <parameter name="jsFunc">
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
 
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
 
-	                	<parameter name="arguments">
-							<parameter name="image">
-								<![CDATA[
-									<tpl if="service_icon == ''" />
-										images/icons/application-monitor.png
-									</tpl>
-									<tpl if="service_icon != ''" />
-										images/icinga/{service_icon}
-									</tpl>
+                        <parameter name="arguments">
+                            <parameter name="image">
+                                <![CDATA[
+                                    <tpl if="service_icon == ''" />
+                                        images/icons/application-monitor.png
+                                    </tpl>
+                                    <tpl if="service_icon != ''" />
+                                        images/icinga/{service_icon}
+                                    </tpl>
 
-								]]>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-				</parameter>
+                                ]]>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                </parameter>
             </display>
 
             <filter>
@@ -393,32 +393,32 @@
             </order>
 
         </field>
-	<field name="instance_name">
-        	<datasource>
-        		<parameter name="field">INSTANCE_NAME</parameter>
-        	</datasource>
+    <field name="instance_name">
+            <datasource>
+                <parameter name="field">INSTANCE_NAME</parameter>
+            </datasource>
 
-        	<display>
+            <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Instance</parameter>
 
-				<parameter name="width">60</parameter>
+                <parameter name="width">60</parameter>
 
-				<parameter name="Ext.grid.Column">
-                	<parameter name="fixed">false</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">false</parameter>
                 </parameter>
             </display>
 
             <filter>
                 <parameter name="enabled">true</parameter>
 
-				<!-- Filter configuration -->
+                <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">instance</parameter>
-				<parameter name="api_keyfield">INSTANCE_NAME</parameter>
-				<parameter name="api_valuefield">INSTANCE_NAME</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">instance</parameter>
+                <parameter name="api_keyfield">INSTANCE_NAME</parameter>
+                <parameter name="api_valuefield">INSTANCE_NAME</parameter>
             </filter>
 
             <order>
@@ -427,9 +427,9 @@
             </order>
         </field>
 
-		<field name="host_object_id">
+        <field name="host_object_id">
             <datasource>
-            	<parameter name="field">HOST_OBJECT_ID</parameter>
+                <parameter name="field">HOST_OBJECT_ID</parameter>
             </datasource>
             
             <display>
@@ -442,7 +442,7 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.number</parameter>
+                <parameter name="subtype">appkit.ext.filter.number</parameter>
             </filter>
             
             <order>
@@ -453,16 +453,16 @@
         </field>
     
         <field name="service_object_id">
-        	<datasource>
-        		<parameter name="field">SERVICE_OBJECT_ID</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">SERVICE_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Id</parameter>
             </display>
             
-			<filter>
+            <filter>
                 <parameter name="enabled">true</parameter>
                 
                 <!-- Filter configuration -->
@@ -470,8 +470,8 @@
                 <parameter name="subtype">appkit.ext.filter.number</parameter>
                 
                 <parameter name="no_operator">false</parameter>
-               	                
-				<parameter name="field">SERVICE_OBJECT_ID</parameter>
+                                
+                <parameter name="field">SERVICE_OBJECT_ID</parameter>
             </filter>
             
             <order>
@@ -482,7 +482,7 @@
     
         <field name="host_name">
             <datasource>
-            	<parameter name="field">HOST_NAME</parameter>
+                <parameter name="field">HOST_NAME</parameter>
             </datasource>
             
             <display>
@@ -495,11 +495,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">host</parameter>
-				<parameter name="api_keyfield">HOST_NAME</parameter>
-				<parameter name="api_valuefield">HOST_NAME</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">host</parameter>
+                <parameter name="api_keyfield">HOST_NAME</parameter>
+                <parameter name="api_valuefield">HOST_NAME</parameter>
 
             </filter>
             
@@ -514,7 +514,7 @@
         
         <field name="host_alias">
             <datasource>
-            	<parameter name="field">HOST_ALIAS</parameter>
+                <parameter name="field">HOST_ALIAS</parameter>
             </datasource>
             
             <display>
@@ -528,11 +528,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">host</parameter>
-				<parameter name="api_keyfield">HOST_ALIAS</parameter>
-				<parameter name="api_valuefield">HOST_ALIAS</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">host</parameter>
+                <parameter name="api_keyfield">HOST_ALIAS</parameter>
+                <parameter name="api_valuefield">HOST_ALIAS</parameter>
             </filter>
             
             <order>
@@ -544,7 +544,7 @@
         
         <field name="host_display_name">
             <datasource>
-            	<parameter name="field">HOST_DISPLAY_NAME</parameter>
+                <parameter name="field">HOST_DISPLAY_NAME</parameter>
             </datasource>
             
             <display>
@@ -558,11 +558,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">host</parameter>
-				<parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
-				<parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">host</parameter>
+                <parameter name="api_keyfield">HOST_DISPLAY_NAME</parameter>
+                <parameter name="api_valuefield">HOST_DISPLAY_NAME</parameter>
             </filter>
             
             <order>
@@ -574,7 +574,7 @@
         
         <field name="service_name">
             <datasource>
-            	<parameter name="field">SERVICE_NAME</parameter>
+                <parameter name="field">SERVICE_NAME</parameter>
             </datasource>
             
             <display>
@@ -587,11 +587,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">service</parameter>
-				<parameter name="api_keyfield">SERVICE_NAME</parameter>
-				<parameter name="api_valuefield">SERVICE_NAME</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">service</parameter>
+                <parameter name="api_keyfield">SERVICE_NAME</parameter>
+                <parameter name="api_valuefield">SERVICE_NAME</parameter>
             </filter>
             
             <order>
@@ -602,7 +602,7 @@
         
         <field name="service_display_name">
             <datasource>
-            	<parameter name="field">SERVICE_DISPLAY_NAME</parameter>
+                <parameter name="field">SERVICE_DISPLAY_NAME</parameter>
             </datasource>
             
             <display>
@@ -615,11 +615,11 @@
                 
                 <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
-				<parameter name="operator_type">text</parameter>
-				<parameter name="api_target">service</parameter>
-				<parameter name="api_keyfield">SERVICE_DISPLAY_NAME</parameter>
-				<parameter name="api_valuefield">SERVICE_DISPLAY_NAME</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="operator_type">text</parameter>
+                <parameter name="api_target">service</parameter>
+                <parameter name="api_keyfield">SERVICE_DISPLAY_NAME</parameter>
+                <parameter name="api_valuefield">SERVICE_DISPLAY_NAME</parameter>
             </filter>
             
             <order>
@@ -628,9 +628,9 @@
             </order>
         </field>
         
-		<field name="comments">
-			<datasource>
-            	<parameter name="field">SERVICE_OBJECT_ID</parameter>
+        <field name="comments">
+            <datasource>
+                <parameter name="field">SERVICE_OBJECT_ID</parameter>
             </datasource>
             
             <display>
@@ -642,14 +642,14 @@
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
 
                 <parameter name="jsFunc">
-					<parameter>
-		               	<parameter name="namespace">Cronk.grid.CommentColumnRenderer</parameter>
-		               	<parameter name="function">commentColumn</parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.CommentColumnRenderer</parameter>
+                        <parameter name="function">commentColumn</parameter>
                 
                         <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                         <parameter name="type">renderer</parameter>
@@ -658,7 +658,7 @@
                             <parameter name="target_field">service_object_id</parameter> 
                         </parameter>
                     </parameter>
-                </parameter>	
+                </parameter>    
 
             </display>
             
@@ -669,11 +669,11 @@
             <order>
                 <parameter name="enabled">false</parameter>
             </order>
-		</field>
+        </field>
         
         <field name="service_info">
             <datasource>
-            	<parameter name="field">SERVICE_NAME</parameter>
+                <parameter name="field">SERVICE_NAME</parameter>
             </datasource>
 
             <display>
@@ -684,43 +684,42 @@
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
 
                 <parameter name="jsFunc">
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/icons/information.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="ext:qtip">Click here for information</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/information.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click here for information</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
 
-					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">ajaxClick</parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ObjectInfoComponentRenderer</parameter>
+                        :
+                        <parameter name="function">infoColumn</parameter>
 
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">cellclick</parameter>
-
-	                	<parameter name="arguments">
-	                		<parameter name="title">Detailed serviceinfo</parameter>
-	                		<parameter name="src_id">serviceinfo</parameter>
-	                		<parameter name="filter">
-	                			<parameter name="host">host_object_id</parameter>
-	                			<parameter name="service">service_object_id</parameter>
-	                		</parameter>
-	                	</parameter>
-	                </parameter>
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="title">Detailed serviceinfo</parameter>
+                            <parameter name="src_id">hostinfo</parameter> 
+                            <parameter name="object_id">service_object_id</parameter>
+                            <parameter name="type">service</parameter>
+                        </parameter>
+                    </parameter>
                 </parameter>
             </display>
 
@@ -735,7 +734,7 @@
 
         <field name="service_history_link">
             <datasource>
-            	<parameter name="field">SERVICE_NAME</parameter>
+                <parameter name="field">SERVICE_NAME</parameter>
             </datasource>
             
             <display>
@@ -747,50 +746,50 @@
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
 
                 <parameter name="jsFunc">
                 
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/icons/book.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="ext:qtip">Click here for history</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-	                
-					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">subGrid</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">cellclick</parameter>
-	                	
-	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">historyForService</parameter>
-	                		<parameter name="titlePrefix">Statehistory for</parameter>
-							<parameter name="targetTemplate">icinga-service-history-template</parameter>
-							<!--<parameter name="sourceField">service_name</parameter>
-							<parameter name="targetField">service_name</parameter>-->
-							
-							<parameter name="filterMap">
-								<parameter name="service_object_id">service_object_id</parameter>
-								<parameter name="host_object_id">host_object_id</parameter>
-							</parameter>
-							
-							<parameter name="labelField">service_name</parameter>
-	                	</parameter>
-	                </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/book.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click here for history</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                    
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">subGrid</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="idPrefix">historyForService</parameter>
+                            <parameter name="titlePrefix">Statehistory for</parameter>
+                            <parameter name="targetTemplate">icinga-service-history-template</parameter>
+                            <!--<parameter name="sourceField">service_name</parameter>
+                            <parameter name="targetField">service_name</parameter>-->
+                            
+                            <parameter name="filterMap">
+                                <parameter name="service_object_id">service_object_id</parameter>
+                                <parameter name="host_object_id">host_object_id</parameter>
+                            </parameter>
+                            
+                            <parameter name="labelField">service_name</parameter>
+                        </parameter>
+                    </parameter>
                 
                 </parameter>
                 
@@ -807,7 +806,7 @@
         
         <field name="service_to_host_link">
             <datasource>
-            	<parameter name="field">SERVICE_OBJECT_ID</parameter>
+                <parameter name="field">SERVICE_OBJECT_ID</parameter>
             </datasource>
             
             <display>
@@ -819,49 +818,49 @@
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="menuDisabled">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
 
                 <parameter name="jsFunc">
                 
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/icons/server.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="ext:qtip">Click here for the host</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-	                
-					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">subGrid</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">cellclick</parameter>
-	                	
-	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">serviceToHost</parameter>
-	                		<parameter name="titlePrefix">Host for service </parameter>
-							<parameter name="targetTemplate">icinga-host-template</parameter>
-							<!--<parameter name="sourceField">service_name</parameter>
-							<parameter name="targetField">service_name</parameter>-->
-							
-							<parameter name="filterMap">
-								<parameter name="host_object_id">host_object_id</parameter>
-							</parameter>
-							
-							<parameter name="labelField">service_name</parameter>
-	                	</parameter>
-	                </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/server.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click here for the host</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                    
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">subGrid</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="idPrefix">serviceToHost</parameter>
+                            <parameter name="titlePrefix">Host for service </parameter>
+                            <parameter name="targetTemplate">icinga-host-template</parameter>
+                            <!--<parameter name="sourceField">service_name</parameter>
+                            <parameter name="targetField">service_name</parameter>-->
+                            
+                            <parameter name="filterMap">
+                                <parameter name="host_object_id">host_object_id</parameter>
+                            </parameter>
+                            
+                            <parameter name="labelField">service_name</parameter>
+                        </parameter>
+                    </parameter>
                 
                 </parameter>
                 
@@ -877,14 +876,14 @@
         </field>
         
 <!--
-		Preliminary example for adding grapher icon integration
-		<field name="service_graph_link">
-			<datasource>
-					<parameter name="field">SERVICE_NAME</parameter>
-			</datasource>
+        Preliminary example for adding grapher icon integration
+        <field name="service_graph_link">
+            <datasource>
+                    <parameter name="field">SERVICE_NAME</parameter>
+            </datasource>
 
-			<display>
-				<parameter name="visible">true</parameter>
+            <display>
+                <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
 
                 <parameter name="width">22</parameter>
@@ -918,7 +917,7 @@
                                 <parameter name="type">cellclick</parameter>
 
                                 <parameter name="arguments">
-									<parameter name="url"><![CDATA[/grapher/grapher/misc/ext/show?host={host_name}&service={service_name}]]></parameter>
+                                    <parameter name="url"><![CDATA[/grapher/grapher/misc/ext/show?host={host_name}&service={service_name}]]></parameter>
                                     <parameter name="newWindow">true</parameter>
                                 </parameter>
                         </parameter>
@@ -935,12 +934,12 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-		-->
+        -->
         <field name="service_status">
-        	<datasource>
-        		<parameter name="field">SERVICE_CURRENT_STATE</parameter>
-        	</datasource>
-        	
+            <datasource>
+                <parameter name="field">SERVICE_CURRENT_STATE</parameter>
+            </datasource>
+            
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
@@ -949,18 +948,18 @@
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
                 
-				<parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                <parameter name="function">serviceStatus</parameter>
-	                	
-	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                <parameter name="type">renderer</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">serviceStatus</parameter>
+                        
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
-        	
+            
             <filter>
                 <parameter name="enabled">true</parameter>
                 
@@ -979,21 +978,21 @@
         </field>
 
         <field name="service_last_check">
-        	<datasource>
-        		<parameter name="field">SERVICE_LAST_CHECK</parameter>
-        	</datasource>
-        	
+            <datasource>
+                <parameter name="field">SERVICE_LAST_CHECK</parameter>
+            </datasource>
+            
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Last check</parameter>
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-               		<parameter name="method">agaviDateFormat</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">agaviDateFormat</parameter>
                 </parameter>
             </display>
-        	
+            
             <filter>
                 <parameter name="enabled">false</parameter>    
             </filter>
@@ -1006,21 +1005,21 @@
         </field>
         
         <field name="service_duration">
-        	<datasource>
-        		<parameter name="field">SERVICE_LAST_STATE_CHANGE</parameter>
-        	</datasource>
-        	
+            <datasource>
+                <parameter name="field">SERVICE_LAST_STATE_CHANGE</parameter>
+            </datasource>
+            
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
                 
                 <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
-               		<parameter name="model">Cronks.ColumnDisplay.Format</parameter>
-               		<parameter name="method">durationString</parameter>
+                    <parameter name="model">Cronks.ColumnDisplay.Format</parameter>
+                    <parameter name="method">durationString</parameter>
                 </parameter>
             </display>
-        	
+            
             <filter>
                 <parameter name="enabled">false</parameter>    
             </filter>
@@ -1033,12 +1032,12 @@
         </field>
 
         <field name="service_info_icons">
-        	
-        	<datasource>
-        		<parameter name="field">SERVICE_OBJECT_ID</parameter>
-        	</datasource>
-        	
-        	<display>
+            
+            <datasource>
+                <parameter name="field">SERVICE_OBJECT_ID</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Info</parameter>
                 
@@ -1046,21 +1045,21 @@
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="menuDisabled">true</parameter>
+                    <parameter name="menuDisabled">true</parameter>
                 </parameter>
                 
                 <parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
-	                <parameter name="function">infoColumn</parameter>
-	                <parameter name="type">renderer</parameter>
-	                <parameter name="arguments">
-	                	<!-- 1==Host 2==Service -->
-	                	<parameter name="type">2</parameter>
-	                </parameter>
+                    <parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
+                    <parameter name="function">infoColumn</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <!-- 1==Host 2==Service -->
+                        <parameter name="type">2</parameter>
+                    </parameter>
                 </parameter>
             </display>
             
-			<filter>
+            <filter>
                 <parameter name="enabled">false</parameter>
             </filter>
             
@@ -1068,14 +1067,14 @@
                 <parameter name="enabled">false</parameter>
                 <parameter name="default">false</parameter>
             </order>
-        	
+            
         </field>
         
         <field name="plugin_output">
-        	<datasource>
-        		<parameter name="field">SERVICE_OUTPUT</parameter>
-        	</datasource>
-        	
+            <datasource>
+                <parameter name="field">SERVICE_OUTPUT</parameter>
+            </datasource>
+            
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Output</parameter>
@@ -1087,7 +1086,7 @@
                     </parameter>
                 </parameter>
             </display>
-        	
+            
             <filter>
                 <parameter name="enabled">false</parameter>    
             </filter>
