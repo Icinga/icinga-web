@@ -37,8 +37,10 @@
         <!--
         	If the countmode is 'simple' countfields will be ignored always! To use with a pager
         	you have to use the 'field' mode to count all data independent from data
+            
+            Type 'none' to disable sql counts
         -->
-		<parameter name="countmode">field</parameter>
+		<parameter name="countmode">none</parameter>
 		
 		<!-- 
 			If the counting differs from data result you can specify a field to count
