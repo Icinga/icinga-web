@@ -47,18 +47,19 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 									text: _('Refresh'),
 									iconCls: 'icinga-icon-arrow-refresh',
 									tooltip: _('Refresh the data in the grid'),
-									handler: function(oBtn, e) { panel.getUpdater().refresh(); }
-								}, {
+									handler: function(oBtn, e) { panel.getUpdater().refresh(); },
+                                    
+                                }, {
 									text: _('Settings'),
 									iconCls: 'icinga-icon-cog',
 									toolTip: _('Tactical overview settings'),
 									menu: {
 										items: [{
 											text: _('Auto refresh'),
-											checked: false,
+											checked: true,
 											checkHandler: function(checkItem, checked) {
 												if (checked == true) {
-													this.trefresh = AppKit.getTr().start({
+													panel.trefresh = AppKit.getTr().start({
 														run: function() {
 															this.getUpdater().refresh();
 														},
@@ -67,20 +68,27 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 													});
 												}
 												else {
-													AppKit.getTr().stop(this.trefresh);
-													delete this.trefresh;
+													AppKit.getTr().stop(panel.trefresh);
+													delete panel.trefresh;
 												}
 											}
+
 										}]
 									}
 								}]
 							}
 						});
-						
+
 						CE.add(panel);
-						
 						CE.doLayout();
-						
+                        //refresh
+						panel.trefresh = AppKit.getTr().start({
+                            run: function() {
+                                this.getUpdater().refresh();
+                            },
+                            interval: 120000,
+                            scope: panel
+                        });
 						return true;						
 					}
 					
