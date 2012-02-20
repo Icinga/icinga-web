@@ -57,6 +57,10 @@ Cronk.grid.CommentColumnRenderer = new (function () {
 
     var requestComments = function(grid,field,ids) {
         Ext.Ajax.request({
+            cancelOn: {
+                component: grid.getStore(),
+                event: 'beforeload'
+            },
             url: AppKit.c.path+"/web/api/json",
             params: {
                 target: 'comment',

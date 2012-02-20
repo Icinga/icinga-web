@@ -1,9 +1,16 @@
 Ext.Ajax.request = function(o) {
+    var req = null;
     if(!o.icingaAction || !o.icingaModule) {
-        return this.directRequest(o);
+        req = this.directRequest(o);
     } else {
-        return this.dispatchRequest(o);
+        req = this.dispatchRequest(o);
     }
+    if(Ext.isObject(o.cancelOn)) {
+        o.cancelOn.component.on(o.cancelOn.event,function() {
+            Ext.data.Connection.prototype.abort.call(this,req);
+        });
+    }
+    return req;
 };
 
 Ext.Ajax.directRequest = function(o) {
