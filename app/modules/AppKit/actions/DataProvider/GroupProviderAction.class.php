@@ -29,12 +29,12 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         if ($oldBehaviour == true) {
             return array(
                 'role_id' => $r->role_id,
-		'role_name' => $r->role_name,
-		'role_description' => $r->role_description,
-		'role_created' => $r->role_created,
-		'role_modified' => $r->role_modified,
-		'role_parent' => $r->role_parent,
-		'role_disabled' => $r->role_disabled
+                'role_name' => $r->role_name,
+                'role_description' => $r->role_description,
+                'role_created' => $r->role_created,
+                'role_modified' => $r->role_modified,
+                'role_parent' => $r->role_parent,
+                'role_disabled' => $r->role_disabled
             );
         }
 
@@ -50,6 +50,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
     }
     
     private function formatRole(NsmRole $r,$simple = false, $oldBehaviour = false) {
+        
         $roleObject = $this->getGroupAsArray($r, $oldBehaviour);
         if($simple)
             return $roleObject;
@@ -88,7 +89,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
         $limit = $rd->getParameter('limit',false);
         $sort = $rd->getParameter('sort',false);
         $asc = ($rd->getParameter('dir','ASC') == 'ASC');
-	$oldBehaviour = (bool)$rd->getParameter('oldBehaviour', true) ? true : false;
+        $oldBehaviour = $rd->getParameter('oldBehaviour', false);
         $user = $this->getContext()->getUser();
         $groups = null;
         
