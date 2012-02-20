@@ -19,7 +19,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.6.0
+Version: 1.6.2
 Release: 1%{?dist}
 License: GPLv2+
 Group: Applications/System
@@ -144,6 +144,9 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 ##############################
 %changelog
 ##############################
+* Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
+- bump to 1.6.2
+
 * Mon Dec 12 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.1-1
 - bump to 1.6.1
 - fix forgotten sla.xml inclusion
