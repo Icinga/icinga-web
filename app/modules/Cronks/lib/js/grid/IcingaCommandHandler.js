@@ -256,8 +256,10 @@ IcingaCommandHandler.prototype = {
             break;
 
         case 'textarea':
+            
             Ext.apply(oDef, {
                 height: 120,
+                allowBlank: !(o.fieldRequired || false),
                 enableKeyEvents: true,
                 listeners: {
                     /*
