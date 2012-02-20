@@ -407,6 +407,10 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 $this->mainAlias = "i";
                 $this->setTarget("IcingaInstances");
                 $this->aliasDefs = array(
+                        "cg" => array("src" => "i", "relation"=>"contactgroups"),
+                        "cgm" => array("src" => "i", "relation"=>"contacts"),
+                        "oc"  => array("src" => "cgm","relation" => "object"),
+                        "ocg"  => array("src" => "cg","relation" => "object"),
                         "ps" => array("src" => "i", "relation" => "programstatus", "alwaysJoin" => true)
                 );
                 break;
@@ -1191,7 +1195,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
      * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
      */
     public function getAffectedColumns() {
-
+        
         $map = array_keys($this->aliasDefs);
         $map[] = $this->mainAlias;
         $affected = array();
@@ -1204,6 +1208,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                 }
             }
         }
+        
         return $affected;
     }
 
