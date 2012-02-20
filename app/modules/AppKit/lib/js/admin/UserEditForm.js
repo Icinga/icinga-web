@@ -377,12 +377,12 @@ AppKit.Admin.UserEditForm = function(cfg) {
                 fieldLabel: _('Authkey for Api (optional)'),
                 id: 'form_user_authkey',
                 name: 'user_authkey',
-                readOnly:true,
+                readOnly:false,
                 minLength: 8,
                 maxLength: 40,
                 text: getApiKey(),
-                width: '200',
                 xtype:'textfield',
+                width:175,
                 regex: /[A-Za-z0-9]*/
             },{
                 xtype:'button',
