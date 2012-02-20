@@ -19,7 +19,7 @@
 
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.6.0
+Version: 1.6.2
 Release: 1%{?dist}
 License: GPLv2+
 Group: Applications/System
@@ -83,10 +83,9 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
     INSTALL_OPTS_CACHE="" \
     INIT_OPTS=""
 
-# uncomment to copy icinga-web db sqls for upgrading
-#  cp -r etc/schema %{buildroot}%{_sysconfdir}/icinga-web/schema
-# set in %files then:
-#  %{_sysconfdir}/icinga-web/schema
+# copy icinga-web db schemas for upgrading
+%{__mkdir} -p %{buildroot}/%{_sysconfdir}/icinga-web/schema
+%{__cp} -r etc/schema/* %{buildroot}%{_sysconfdir}/icinga-web/schema
 
 ##############################
 %pre
@@ -106,8 +105,8 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 %post
 ##############################
 
-# clean config cache
-# %{__rm} -rf %{_datadir}/icinga-web/app/cache/config/*.php
+# clean config cache, e.g. after upgrading
+%{__rm} -rf %{cachedir}/config/*.php
 
 ##############################
 %clean
@@ -136,6 +135,8 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 %config(noreplace) %{_sysconfdir}/icinga-web/reporting.xml
 %config(noreplace) %{_sysconfdir}/icinga-web/translation.xml
 %config(noreplace) %{_sysconfdir}/icinga-web/sla.xml
+# sql schemas
+%{_sysconfdir}/icinga-web/schema
 # logs+cache
 %attr(2775,%{apacheuser},%{apachegroup}) %dir %{logdir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}
@@ -144,6 +145,11 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 ##############################
 %changelog
 ##############################
+* Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
+- bump to 1.6.2
+- copy schema files to /etc/icinga-web/schema
+- clean config cache in %post (important for upgrades)
+
 * Mon Dec 12 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.1-1
 - bump to 1.6.1
 - fix forgotten sla.xml inclusion
