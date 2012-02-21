@@ -428,7 +428,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "cgm" => array("src" => "cg", "relation" => "members", "type"=>"left"),
                         "hg"  => array("src" => "h", "relation" => "hostgroups", "type"=>"left"),
                         'ohg' => array('src' => 'hg', "relation" => "object", "type"=>"left"),
-                        "hgm" => array("src" => "h","relation" => "members", "type"=>"left"),
+                        "hgm" => array("src" => "hg","relation" => "members", "type"=>"left"),
                         "oc"  => array("src" => "cgm","relation" => "object"),
                         "ocg"  => array("src" => "cg","relation" => "object"),
                         "os"     => array("src" => "s", "relation" => "object"),
@@ -478,7 +478,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "oc"  => array("src" => "cgm","relation" => "object"),
                         "ocg"  => array("src" => "cg","relation" => "object"),
                         "hg"  => array("src" => "h", "relation" => "hostgroups", "type"=>"left"),
-                        "hgm" => array("src" => "h","relation" => "members", "type"=>"left"),
+                        "hgm" => array("src" => "hg","relation" => "members", "type"=>"left"),
                         "ohg" => array("src" => "hg","relation" => "object"),
                         "cvsh" => array("src" => "h","relation"=> "customvariablestatus"),
                         "cvss"=> array("src" => "s","relation" => "customvariablestatus"),
@@ -856,7 +856,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "hs"    => array("src" => "hgm", "relation" => "status"),
                         "cg"   => array("src" => "h", "relation" => "contactgroups"),
                         "oh"    => array("src" => "hgm", "relation" => "object"),
-                        "cgm" => array("src"=> "h", "relation" => "members"),
+                        "cgm" => array("src"=> "cg", "relation" => "members"),
                         "oc"  => array("src" => "cgm","relation" => "object"),
                         "ocg"  => array("src" => "cg","relation" => "object")
                 );
@@ -1023,7 +1023,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                                 "type" => "left"
                         ),
                         "hgm" => array(
-                                "src" => "h",
+                                "src" => "hg",
                                 "relation" => "members",
                                 "type" => "left"
                         ),
@@ -1055,7 +1055,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "sgm" => array("src" => "sg", "relation" => "members"),
                         "osg" => array("src" => "sg", "relation" => "object"),
                         "hg"  => array("src" => "h", "relation" => "hostgroups"),
-                        "hgm" => array("src" => "h","relation" => "members"),
+                        "hgm" => array("src" => "hg","relation" => "members"),
                         "ohg" => array("src" => "hg","relation" => "object"),
                         "hs"  => array("src" => "h", "relation" => "status"),
                         "cg" => array("src" => "h", "relation" => "contactgroups"),
@@ -1081,7 +1081,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
                         "sgm" => array("src" => "sg", "relation" => "members"),
                         "osg" => array("src" => "sg", "relation" => "object"),
                         "hg"  => array("src" => "h", "relation" => "hostgroups"),
-                        "hgm" => array("src" => "h","relation" => "members"),
+                        "hgm" => array("src" => "hg","relation" => "members"),
                         "ohg" => array("src" => "hg","relation" => "object"),
                         "hs"  => array("src" => "h", "relation" => "status")
                 );
@@ -1222,7 +1222,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             "sgm" => array("src" => "sg", "relation" => "members", "type" => "left"),
             "osg" => array("src" => "sg", "relation" => "object", "type" => "left"),
             "hg"  => array("src" => "h", "relation" => "hostgroups", "type" => "left"),
-            "hgm" => array("src" => "h","relation" => "members", "type" => "left"),
+            "hgm" => array("src" => "hg","relation" => "members", "type" => "left"),
             "ohg" => array("src" => "hg","relation" => "object", "type" => "left"),
 
             "hs"  => array("src" => "h", "relation" => "status"),
