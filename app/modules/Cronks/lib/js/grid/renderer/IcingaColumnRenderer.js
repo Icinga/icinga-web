@@ -77,7 +77,7 @@ Cronk.grid.IcingaColumnRenderer = {
         if (!'url' in cfg) {
             throw('url XTemplate configuration needed! (parameter name="url")');
         }
-
+        cfg.url = encodeURI(cfg.url);
         return function(grid, rowIndex, colIndex, e) {
             
             var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
@@ -101,6 +101,8 @@ Cronk.grid.IcingaColumnRenderer = {
         if (!'url' in cfg) {
             throw('url XTemplate configuration needed! (parameter name="url")');
         }
+        
+        cfg.url = encodeURI(cfg.url);
         return function(grid, rowIndex, colIndex, e) {
             var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
             var title = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.title);
@@ -151,6 +153,7 @@ Cronk.grid.IcingaColumnRenderer = {
         if (!'url' in cfg) {
             throw('url XTemplate configuration needed! (parameter name="url")');
         }
+        cfg.url = encodeURI(cfg.url);
         return function(grid, rowIndex, colIndex, e) {
             
             var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
