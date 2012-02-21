@@ -68,16 +68,20 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
         	colModel : new Ext.grid.ColumnModel({
         		columns : [{
         			header : _('Group'),
-        			dataIndex : 'contactgroup_name'
+        			dataIndex : 'contactgroup_name',
+        			xtype: 'ellipsiscolumn'
         		}, {
                     header : _('Name'),
-                    dataIndex : 'contact_name'
+                    dataIndex : 'contact_name',
+                    xtype: 'ellipsiscolumn'
                 }, {
         			header : _('Alias'),
-        			dataIndex : 'contact_alias'
+        			dataIndex : 'contact_alias',
+        			xtype: 'ellipsiscolumn'
         		}, {
         			header : _('Email address'),
-        			dataIndex : 'contact_email_address'
+        			dataIndex : 'contact_email_address',
+        			xtype: 'ellipsiscolumn'
         		}]
         	}),
         	
@@ -101,10 +105,12 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
     		colModel : new Ext.grid.ColumnModel({
     			columns : [{
     				header : _('Name'),
-    				dataIndex : 'varname'
+    				dataIndex : 'varname',
+    				xtype: 'ellipsiscolumn'
     			}, {
     				header : _('Value'),
-    				dataIndex : 'varvalue'
+    				dataIndex : 'varvalue',
+    				xtype: 'ellipsiscolumn'
     			}]
     		}),
             viewConfig : {
@@ -123,10 +129,12 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
             colModel : new Ext.grid.ColumnModel({
             	columns : [{
             		header : _('Name'),
-            		dataIndex : 'name'
+            		dataIndex : 'name',
+            		xtype: 'ellipsiscolumn'
             	}, {
             		header : _('Alias'),
-            		dataIndex : 'alias'
+            		dataIndex : 'alias',
+            		xtype: 'ellipsiscolumn'
             	}]
             }),
             viewConfig : {

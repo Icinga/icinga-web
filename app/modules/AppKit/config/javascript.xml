@@ -26,6 +26,7 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/form/action/JSONSubmit.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/request/Ajax.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/ux/DDTabPanel.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/AppKit/lib/js/ux/EllipsisColumn.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/search/AppKitSearchBox.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/search/AppKitSearchHandler.js</ae:parameter>
             
