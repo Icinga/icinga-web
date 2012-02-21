@@ -26,7 +26,8 @@
             <!-- Initialize comments -->
             <parameter>
                 <parameter name="type">viewready</parameter>
-                <parameter name="function">Cronk.grid.CommentColumnRenderer.init</parameter>
+                <parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
+               	<parameter name="function">init</parameter>
                 <parameter name="arguments">
                     <parameter name="column_name">comments</parameter>
                     <!-- <parameter name="class">icinga-icon-comment icon-24 icinga-link icinga-notext</parameter> -->
@@ -48,7 +49,9 @@
             <!-- Initialize info icons lazy -->
             <parameter>
                 <parameter name="type">viewready</parameter>
-                <parameter name="function">Cronk.grid.InfoIconColumnRenderer.init</parameter>
+                <parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
+                <parameter name="function">init</parameter>
+
                 <parameter name="arguments">
                     <parameter name="column_name">host_info_icons</parameter>
                 </parameter>
