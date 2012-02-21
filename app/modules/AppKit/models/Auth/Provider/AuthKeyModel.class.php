@@ -12,8 +12,9 @@ class AppKit_Auth_Provider_AuthKeyModel extends AppKitAuthProviderBaseModel  imp
      * @see app/modules/AppKit/lib/auth/AppKitIAuthProvider#doAuthenticate()
      */
     public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
+
         if ($user instanceof NsmUser && $user->user_id > 0) {
-            if ($user->user_authkey === $username) {
+            if ($user->user_authkey === $password) {
                 return true;
             }
         }
