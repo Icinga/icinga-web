@@ -47,6 +47,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
     public function dispatchCommands() {
         $dispatcher = $this->getContext()->getModel("Commands.CommandDispatcher","Api");
+        $this->selection = array_unique($this->selection);
         foreach($this->selection as $target) {
             $console = $this->getConsoleInstance($target['instance']);
             $dispatcher->setConsoleContext($console);
