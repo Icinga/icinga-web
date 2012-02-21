@@ -149,8 +149,7 @@ remove-temp-files:
 	bin/rmtmp-files.sh
 
 create-tarball:
-	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
-	./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
+	@./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
 
 create-tarball-nightly:
 	#${MAKE} submodule-update
