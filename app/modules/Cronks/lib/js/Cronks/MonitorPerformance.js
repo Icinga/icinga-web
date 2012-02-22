@@ -111,7 +111,7 @@ Ext.ns('Icinga.Cronks.System.MonitorPerformance');
                 store: this.store,
                 tpl: this.viewTemplate,
                 itemSelector:'div.icinga-monitor-performance-container',
-                emptyText: 'Error'
+                emptyText: _('No performance data available')
             });
             
             this.add(this.view);

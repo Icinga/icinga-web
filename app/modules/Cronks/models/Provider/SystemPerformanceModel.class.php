@@ -108,5 +108,3 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
         return $json;
     }
 }
-
-?>
