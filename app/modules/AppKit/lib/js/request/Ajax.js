@@ -10,6 +10,9 @@ Ext.Ajax.request = function(o) {
             Ext.data.Connection.prototype.abort.call(this,req);
         });
     }
+    Ext.EventManager.on(window,"beforeunload",function() {
+        Ext.data.Connection.prototype.abort.call(this,req);
+    });
     return req;
 };
 
