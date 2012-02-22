@@ -33,7 +33,7 @@
 				</setting>
 				
 				<!-- Temp report generation dir -->
-				<setting name="dir.download">%core.module_dir%/Reporting/data/tmp</setting>
+				<setting name="dir.download">@reporting_tmp_dir@</setting>
 				
 				<!-- Previewable mime types -->
 				<setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml|application\/pdf.+/i]]></setting>

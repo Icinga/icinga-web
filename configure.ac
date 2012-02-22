@@ -258,6 +258,13 @@ AC_ARG_WITH([cache_dir],
     web_cache_dir=$prefix/app/cache
 )
 
+# Jasper temporary directory for downloads
+AC_ARG_WITH([reporting_tmp_dir],
+    AS_HELP_STRING([--with-reporting-tmp-dir=PATH], [Directory to store temporary files for jasper (default app/modules/Reporting/data/tmp)]),
+    reporting_tmp_dir=$withval,
+    reporting_tmp_dir=$prefix/app/modules/Reporting/data/tmp/
+)
+
 # icinga core options
 AC_ARG_WITH([icinga_objects_dir],
     AS_HELP_STRING([--with-icinga-objects-dir=PATH], [Path Icinga configuration items]),
@@ -360,6 +367,7 @@ AC_SUBST(flag_debug)
 AC_SUBST(web_log_dir)
 AC_SUBST(web_conf_dir)
 AC_SUBST(web_cache_dir)
+AC_SUBST(reporting_tmp_dir)
 
 AC_SUBST(icinga_api)
 AC_SUBST(icinga_objects_dir)
