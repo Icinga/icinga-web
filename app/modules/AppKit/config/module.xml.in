@@ -86,6 +86,9 @@
             </settings>
     
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="debug.xml">
+                <xi:fallback></xi:fallback>
+            </xi:include>
         </module>
     </ae:configuration>
     <!--  Try include the overwriting file -->

@@ -34,12 +34,14 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
     }
 
     public function getConsoleInstance($instance) {
-        if (!isset($this->instances[$instance]))
+        if (!isset($this->instances[$instance])) {
+            AppKitLogger::debug("Setting up console for instance %s ",$instance);
             $this->instances[$instance] = $this->getContext()->getModel("Console.ConsoleInterface","Api",
-                                          array(
-                                              "icingaInstance"=>$instance
-                                          ))
-                                          ;
+               array(
+                   "icingaInstance"=>$instance
+                )
+            );
+        }
 
         return $this->instances[$instance];
 
@@ -47,11 +49,15 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
     public function dispatchCommands() {
         $dispatcher = $this->getContext()->getModel("Commands.CommandDispatcher","Api");
+
         $this->selection = array_unique($this->selection);
+        AppKitLogger::debug("Trying to send commands, targets: %s , data: %s ",json_encode($this->selection), json_encode($this->data));
         foreach($this->selection as $target) {
             $console = $this->getConsoleInstance($target['instance']);
             $dispatcher->setConsoleContext($console);
+            AppKitLogger::debug("Submitting command %s to %s",$this->command,json_encode($target));
             $dispatcher->submitCommand($this->command,array_merge($target,$this->data));
+            AppKitLogger::debug("Finished submitting command");
         }
 
     }

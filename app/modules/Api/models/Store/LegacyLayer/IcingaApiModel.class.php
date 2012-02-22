@@ -89,22 +89,28 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
 
     public function setResultColumns($target, $replace = false) {
         $this->result = null;
+        AppKitLogger::verbose("Setting result columns (target=%s)",$target);
         parent::setResultColumns($target, $replace);
         return $this;
     }
 
     public function execRead() {
+
         $request = $this->createRequestDescriptor();
+
         $this->applyModifiers($request);
         $result = null;
         $this->lastQuery = $request;
         $request->autoResolveAliases();
 
         if (!$this->isCount) {
+            AppKitLogger::verbose("Executing non count query (resultType = %s)",$this->resultType);
             $result = $request->execute(NULL,$this->resultType);
         } else {
+            AppKitLogger::verbose("Executing count query");
             $result = $request->count();
         }
+        AppKitLogger::verbose("Query: %s, \n Result: %s",$request->getSqlQuery(), $result);
 
         return $result;
     }
@@ -179,7 +185,7 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
      * @see objects/search/IcingaApiSearchInterface#setSearchFilter()
      */
     public function setSearchFilter($filter, $value = false, $defaultMatch = IcingaApiConstants::MATCH_EXACT) {
-
+              
         if ($filter instanceof IcingaApiSearchFilterInterface) {
             $this->resolveFilterFields($filter);
             $this->searchFilter->addFilter($filter);
