@@ -66,6 +66,10 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
 			type = test[1];
 			
 			Ext.Ajax.request({
+                cancelOn: {
+                    component: this.grid.getStore(),
+                    event: 'beforeload'
+                },
 				url : AppKit.util.Config.get('path') + '/modules/appkit/dispatch',
 				params : {
 					module : 'Cronks',

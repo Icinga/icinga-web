@@ -10,7 +10,7 @@
 			<validator class="number" name="groupId" required="false">
 				<argument>groupId</argument>
 				<errors>
-					<error>Validation of 'userId' failed</error>
+					<error>Validation of 'groupId' failed</error>
 				</errors>
 			</validator>
 			
@@ -18,6 +18,10 @@
 				<argument>hideDisabled</argument>
 			</validator>
 			
+			<validator class="string" name="oldBehaviour" required="false">
+				<argument>oldBehaviour</argument>
+			</validator>
+
 			<validator class="number" name="addMeta" required="false">
 				<argument>addMeta</argument>
 			</validator>

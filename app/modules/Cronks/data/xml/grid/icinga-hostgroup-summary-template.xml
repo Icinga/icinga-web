@@ -2,8 +2,8 @@
 <template>
     
     <!-- 
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Default hostgroup summary template</parameter>
@@ -12,16 +12,16 @@
     </meta>
     
     <!-- 
-    	Options for the template. Change layout and view style to fit the type you
-    	want to display
+        Options for the template. Change layout and view style to fit the type you
+        want to display
     -->
     <option>
     
-    	<!-- 
-    		Some layout modes:
-    			- default: full featured view
-    			- minimal: reduce space consumption (e.g. filters, pagers, ...)
-    	-->
+        <!-- 
+            Some layout modes:
+                - default: full featured view
+                - minimal: reduce space consumption (e.g. filters, pagers, ...)
+        -->
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
 
@@ -29,126 +29,126 @@
 
         <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
         <parameter name="Ext.grid.GridView">
-        	<parameter name="headersDisabled">true</parameter>
+            <parameter name="headersDisabled">true</parameter>
         </parameter>
         
         <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
         <!-- 
-        	!!! Attention: this options goes to the main grid panel, only change layout attributes, all other
-        	will corrupt the auto build of the GridPanel
+            !!! Attention: this options goes to the main grid panel, only change layout attributes, all other
+            will corrupt the auto build of the GridPanel
         -->
         <!-- <parameter name="Ext.grid.GridPanel">
-        	<parameter name="disable">true</parameter>
-        	<parameter name="hidden">false</parameter>
+            <parameter name="disable">true</parameter>
+            <parameter name="hidden">false</parameter>
         </parameter> -->
         
         <!-- 
-        	Selection model of rows (checkbox/row). This is needed for
-        	commands and maybe other user things ...
+            Selection model of rows (checkbox/row). This is needed for
+            commands and maybe other user things ...
         -->
         <parameter name="selection_model">checkbox</parameter>
         
-		<!-- 
-        	Enable/disable commands and specify which of type you'll need
+        <!-- 
+            Enable/disable commands and specify which of type you'll need
         -->
         <parameter name="commands">
-        	<!-- 
-        		Generally enabled od disabled
-        	-->
-        	<parameter name="enabled">true</parameter>
+            <!-- 
+                Generally enabled od disabled
+            -->
+            <parameter name="enabled">true</parameter>
         
-        	<!--
-        		Sourcefieldmapping
-        		* Which field content comes from the template data source
-        	-->
-        	<parameter name="source">
-        		<parameter name="IcingaApiConstants::COMMAND_HOSTGROUP">hostgroup_name</parameter>
-				<parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
-        	</parameter>
-        	
-        	<parameter name="predefined">
-        		<parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
-			<parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
-        	</parameter>
-        	
-        	<!-- 
-        		Which commands are available in this template and can charged
-        		with template data
-        	-->
-        	<parameter name="items">
-        		<parameter name="SCHEDULE_HOSTGROUP_HOST_DOWNTIME">
-        			<parameter name="title">Schedule downtime for all hosts in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-downtime</parameter>
-        		</parameter>
-        		<parameter name="SCHEDULE_HOSTGROUP_SVC_DOWNTIME">
-        			<parameter name="title">Schedule downtime for all services in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-downtime</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-				<parameter name="ENABLE_HOSTGROUP_HOST_NOTIFICATIONS">
-        			<parameter name="title">Enable notifications for all hosts in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-notify</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOSTGROUP_HOST_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for all hosts in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-notify-disabled</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-				<parameter name="ENABLE_HOSTGROUP_SVC_NOTIFICATIONS">
-        			<parameter name="title">Enable notifications for all services in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-notify</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOSTGROUP_SVC_NOTIFICATIONS">
-        			<parameter name="title">Disable notifications for all services in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-notify-disabled</parameter>
-        			<parameter name="seperator">true</parameter>
-        		</parameter>
-				<parameter name="ENABLE_HOSTGROUP_SVC_CHECKS">
-        			<parameter name="title">Enable active checks of all services in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-arrow-out</parameter>
-        		</parameter>
-        		<parameter name="DISABLE_HOSTGROUP_SVC_CHECKS">
-        			<parameter name="title">Disable active checks of all services in this hostgroup</parameter>
-        			<parameter name="icon_class">icinga-icon-cross</parameter>
-        		</parameter>
-        	</parameter>
-        	
+            <!--
+                Sourcefieldmapping
+                * Which field content comes from the template data source
+            -->
+            <parameter name="source">
+                <parameter name="IcingaApiConstants::COMMAND_HOSTGROUP">hostgroup_name</parameter>
+                <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
+            </parameter>
+            
+            <parameter name="predefined">
+                <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+            <parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
+            </parameter>
+            
+            <!-- 
+                Which commands are available in this template and can charged
+                with template data
+            -->
+            <parameter name="items">
+                <parameter name="SCHEDULE_HOSTGROUP_HOST_DOWNTIME">
+                    <parameter name="title">Schedule downtime for all hosts in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-downtime</parameter>
+                </parameter>
+                <parameter name="SCHEDULE_HOSTGROUP_SVC_DOWNTIME">
+                    <parameter name="title">Schedule downtime for all services in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-downtime</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_HOSTGROUP_HOST_NOTIFICATIONS">
+                    <parameter name="title">Enable notifications for all hosts in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify</parameter>
+                </parameter>
+                <parameter name="DISABLE_HOSTGROUP_HOST_NOTIFICATIONS">
+                    <parameter name="title">Disable notifications for all hosts in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify-disabled</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_HOSTGROUP_SVC_NOTIFICATIONS">
+                    <parameter name="title">Enable notifications for all services in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify</parameter>
+                </parameter>
+                <parameter name="DISABLE_HOSTGROUP_SVC_NOTIFICATIONS">
+                    <parameter name="title">Disable notifications for all services in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify-disabled</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_HOSTGROUP_SVC_CHECKS">
+                    <parameter name="title">Enable active checks of all services in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-arrow-out</parameter>
+                </parameter>
+                <parameter name="DISABLE_HOSTGROUP_SVC_CHECKS">
+                    <parameter name="title">Disable active checks of all services in this hostgroup</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                </parameter>
+            </parameter>
+            
         </parameter>
 <!--
-		<parameter name="filter">
-        	<paramter name="hostgroup_alias">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.api</parameter>
-        		<parameter name="label">Alias</parameter>
+        <parameter name="filter">
+            <paramter name="hostgroup_alias">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="label">Alias</parameter>
 
-				 Operator type is needed because we don't know which type returned
-				<parameter name="operator_type">text</parameter>
+                 Operator type is needed because we don't know which type returned
+                <parameter name="operator_type">text</parameter>
 
-				<parameter name="api_target">hostgroup</parameter>
-				<parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
-				<parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
+                <parameter name="api_target">hostgroup</parameter>
+                <parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
+                <parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
 
-        	</paramter>
-			<paramter name="hostgroup_alias">
-        		<parameter name="enabled">true</parameter>
-        		<parameter name="type">extjs</parameter>
-        		<parameter name="subtype">appkit.ext.filter.api</parameter>
-        		<parameter name="label">Alias</parameter>
+            </paramter>
+            <paramter name="hostgroup_alias">
+                <parameter name="enabled">true</parameter>
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="label">Alias</parameter>
 
-				 Operator type is needed because we don't know which type returned
-				<parameter name="operator_type">text</parameter>
+                 Operator type is needed because we don't know which type returned
+                <parameter name="operator_type">text</parameter>
 
-				<parameter name="api_target">hostgroup</parameter>
-				<parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
-				<parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
+                <parameter name="api_target">hostgroup</parameter>
+                <parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
+                <parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
 
-        	</paramter>
-		</parameter>-->
+            </paramter>
+        </parameter>-->
     </option>
     
     <!-- 
-    	What data to display? Define icinga data targets and countfields
+        What data to display? Define icinga data targets and countfields
     -->
     <datasource>
         <parameter name="target">IcingaApiConstants::TARGET_HOSTGROUP_SUMMARY</parameter>
@@ -159,14 +159,14 @@
         <!-- <parameter name="id">log_id</parameter> -->
         
         <!--
-        	If the countmode is 'simple' countfields will be ignored always! To use with a pager
-        	you have to use the 'field' mode to count all data independent from data
+            If the countmode is 'simple' countfields will be ignored always! To use with a pager
+            you have to use the 'field' mode to count all data independent from data
         -->
-		<parameter name="countmode">field</parameter>
-		
-		<!-- 
-			If the counting differs from data result you can specify a field to count
-		-->
+        <parameter name="countmode">field</parameter>
+        
+        <!-- 
+            If the counting differs from data result you can specify a field to count
+        -->
         <parameter name="countfields">
             <parameter>HOSTGROUP_NAME</parameter>
             <parameter>HOST_CURRENT_STATE</parameter>
@@ -174,71 +174,71 @@
         
         <!-- Database group by -->
         <parameter name="groupby">
-        	<parameter>HOSTGROUP_ID</parameter>
-        	<parameter>HOSTGROUP_NAME</parameter>
-        	<parameter>HOSTGROUP_ALIAS</parameter>
-        	<parameter>HOST_CURRENT_STATE</parameter>
+            <parameter>HOSTGROUP_ID</parameter>
+            <parameter>HOSTGROUP_NAME</parameter>
+            <parameter>HOSTGROUP_ALIAS</parameter>
+            <parameter>HOST_CURRENT_STATE</parameter>
             <parameter>HOST_IS_PENDING</parameter>
         </parameter>
     </datasource>
     
     <!-- 
-    	Paging record on its result
+        Paging record on its result
     -->
     <pager>
-    	<parameter name="enabled">true</parameter>
-    	<parameter name="start">0</parameter>
+        <parameter name="enabled">true</parameter>
+        <parameter name="start">0</parameter>
     </pager>
     
     <grouping>
-    	<parameter name="enabled">true</parameter>
-    	<parameter name="field">hostgroup_name</parameter>
-    	
-    	<!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
-    	<parameter name="Ext.grid.GroupingView">
-    		<parameter name="hideGroupedColumn">true</parameter>
-    		<parameter name="startCollapsed">false</parameter>
-    	</parameter>
-    	
-    	<!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
-    	<!-- <parameter name="Ext.data.GroupingStore">
-    		
-    	</parameter> -->
+        <parameter name="enabled">true</parameter>
+        <parameter name="field">hostgroup_name</parameter>
+        
+        <!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
+        <parameter name="Ext.grid.GroupingView">
+            <parameter name="hideGroupedColumn">true</parameter>
+            <parameter name="startCollapsed">false</parameter>
+        </parameter>
+        
+        <!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
+        <!-- <parameter name="Ext.data.GroupingStore">
+            
+        </parameter> -->
     </grouping>
     
     <!--
-    	Field decleration: What to display and how
+        Field decleration: What to display and how
     -->
     <fields>
-		<field name="instance_name">
-        	<datasource>
-        		<parameter name="field">INSTANCE_NAME</parameter>
-        	</datasource>
+        <field name="instance_name">
+            <datasource>
+                <parameter name="field">INSTANCE_NAME</parameter>
+            </datasource>
 
-        	<display>
+            <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">Instance</parameter>
 
-				<parameter name="width">60</parameter>
+                <parameter name="width">60</parameter>
 
-				<parameter name="Ext.grid.Column">
-                	<parameter name="fixed">false</parameter>
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">false</parameter>
                 </parameter>
             </display>
 
             <filter>
                 <parameter name="enabled">true</parameter>
 
-				<!-- Filter configuration -->
+                <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
 
-				<!-- Operator type is needed because we don't know which type returned-->
-				<parameter name="operator_type">text</parameter>
+                <!-- Operator type is needed because we don't know which type returned-->
+                <parameter name="operator_type">text</parameter>
 
-				<parameter name="api_target">instance</parameter>
-				<parameter name="api_keyfield">INSTANCE_NAME</parameter>
-				<parameter name="api_valuefield">INSTANCE_NAME</parameter>
+                <parameter name="api_target">instance</parameter>
+                <parameter name="api_keyfield">INSTANCE_NAME</parameter>
+                <parameter name="api_valuefield">INSTANCE_NAME</parameter>
             </filter>
 
             <order>
@@ -246,13 +246,13 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-		
+        
         <field name="hostgroup_id">
-        	<datasource>
-        		<parameter name="field">HOSTGROUP_ID</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">HOSTGROUP_ID</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">false</parameter>
                 <parameter name="label">ID</parameter>
             </display>
@@ -267,12 +267,12 @@
             </order>
         </field> 
         
-		<field name="hostgroup_name">
-        	<datasource>
-        		<parameter name="field">HOSTGROUP_NAME</parameter>
-        	</datasource>
-        	
-        	<display>
+        <field name="hostgroup_name">
+            <datasource>
+                <parameter name="field">HOSTGROUP_NAME</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Hostgroup</parameter>
             </display>
@@ -288,11 +288,11 @@
         </field>
         
         <field name="hostgroup_alias">
-        	<datasource>
-        		<parameter name="field">HOSTGROUP_ALIAS</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">HOSTGROUP_ALIAS</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Alias</parameter>
             </display>
@@ -302,16 +302,16 @@
             <filter>
                 <parameter name="enabled">true</parameter>
 
-				<!-- Filter configuration -->
+                <!-- Filter configuration -->
                 <parameter name="type">extjs</parameter>
-				<parameter name="subtype">appkit.ext.filter.api</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
 
-				<!-- Operator type is needed because we don't know which type returned-->
-				<parameter name="operator_type">text</parameter>
+                <!-- Operator type is needed because we don't know which type returned-->
+                <parameter name="operator_type">text</parameter>
 
-				<parameter name="api_target">hostgroup</parameter>
-				<parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
-				<parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
+                <parameter name="api_target">hostgroup</parameter>
+                <parameter name="api_keyfield">HOSTGROUP_ALIAS</parameter>
+                <parameter name="api_valuefield">HOSTGROUP_ALIAS</parameter>
             </filter>
 
             
@@ -322,48 +322,48 @@
         </field> 
         
         <field name="hostgroup_hosts_click">
-        	<datasource>
-        		<parameter name="field">HOSTGROUP_ID</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">HOSTGROUP_ID</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
                 <parameter name="icon">icinga-icon-database</parameter>
                 <parameter name="width">16</parameter>
                 <parameter name="jsFunc">
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/icons/database.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="ext:qtip">Click here to display containing hosts</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">subGrid</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">cellclick</parameter>
-	                	
-	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">hostgroupHosts</parameter>
-	                		<parameter name="titlePrefix">Hosts in</parameter>
-							<parameter name="targetTemplate">icinga-host-template</parameter>
-							<parameter name="filterMap">
-								<parameter name="hostgroup_name">hostgroup_name</parameter>
-							</parameter>
-							<parameter name="labelField">hostgroup_name</parameter>
-	                	</parameter>
-	                </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/database.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click here to display containing hosts</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">subGrid</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="idPrefix">hostgroupHosts</parameter>
+                            <parameter name="titlePrefix">Hosts in</parameter>
+                            <parameter name="targetTemplate">icinga-host-template</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="hostgroup_name">hostgroup_name</parameter>
+                            </parameter>
+                            <parameter name="labelField">hostgroup_name</parameter>
+                        </parameter>
+                    </parameter>
                 </parameter>
                 
             </display>
@@ -379,48 +379,48 @@
         </field>
         
         <field name="hostgroup_services_click">
-        	<datasource>
-        		<parameter name="field">HOSTGROUP_ID</parameter>
-        	</datasource>
-        	
-        	<display>
+            <datasource>
+                <parameter name="field">HOSTGROUP_ID</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
                 <parameter name="icon">icinga-icon-cog</parameter> 
                 <parameter name="width">16</parameter>
                 <parameter name="jsFunc">
-                	<parameter>
-	                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                	<parameter name="function">columnImage</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">renderer</parameter>
-	                	
-	                	<parameter name="arguments">
-							<parameter name="image">images/icons/cog.png</parameter>
-							<parameter name="css">x-icinga-grid-link</parameter>
-							<parameter name="attr">
-								<parameter name="ext:qtip">Click here to display containing services</parameter>
-							</parameter>
-	                	</parameter>
-	                </parameter>
-					<parameter>
-	                	<parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-	                	<parameter name="function">subGrid</parameter>
-	                	
-	                	<!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                	<parameter name="type">cellclick</parameter>
-	                	
-	                	<parameter name="arguments">
-	                		<parameter name="idPrefix">hostgroupServices</parameter>
-	                		<parameter name="titlePrefix">Services in</parameter>
-							<parameter name="targetTemplate">icinga-service-template</parameter>
-							<parameter name="filterMap">
-								<parameter name="hostgroup_name">hostgroup_name</parameter>
-							</parameter>
-							<parameter name="labelField">hostgroup_name</parameter>
-	                	</parameter>
-	                </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/cog.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click here to display containing services</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">subGrid</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="idPrefix">hostgroupServices</parameter>
+                            <parameter name="titlePrefix">Services in</parameter>
+                            <parameter name="targetTemplate">icinga-service-template</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="hostgroup_name">hostgroup_name</parameter>
+                            </parameter>
+                            <parameter name="labelField">hostgroup_name</parameter>
+                        </parameter>
+                    </parameter>
                 </parameter>
                 
             </display>
@@ -435,11 +435,11 @@
             </order>
         </field>
         
-		<field name="host_status">
-        	<datasource>
-        		<parameter name="field">HOST_CURRENT_STATE</parameter>
-        	</datasource>
-        	
+        <field name="host_status">
+            <datasource>
+                <parameter name="field">HOST_CURRENT_STATE</parameter>
+            </datasource>
+            
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
@@ -447,18 +447,18 @@
                 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
-                	<parameter name="fixed">true</parameter>
+                    <parameter name="fixed">true</parameter>
                 </parameter>
                 
-				<parameter name="jsFunc">
-                	<parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-	                <parameter name="function">hostStatus</parameter>
-	                	
-	                <!-- renderer/gridevent[cellclick|celldblclick|...] -->
-	                <parameter name="type">renderer</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">hostStatus</parameter>
+                        
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
                 </parameter>
             </display>
-        	
+            
           
             <filter>
                 <parameter name="enabled">true</parameter>
@@ -476,12 +476,12 @@
             </order>
         </field>
         
-		<field name="host_status_count">
-        	<datasource>
-        		<parameter name="field">HOSTGROUP_SUMMARY_COUNT</parameter>
-        	</datasource>
-        	
-        	<display>
+        <field name="host_status_count">
+            <datasource>
+                <parameter name="field">HOSTGROUP_SUMMARY_COUNT</parameter>
+            </datasource>
+            
+            <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Count</parameter>
             </display>
@@ -489,7 +489,7 @@
            <filter>
                 <parameter name="enabled">false</parameter>
 
-				
+                
             </filter>
 
             

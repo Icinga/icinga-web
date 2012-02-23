@@ -134,11 +134,11 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
 
         $data = array();
         $count = array();
-
+        AppKitLogger::verbose("Performing bulk query (mappings = %s)",$mappings);
         foreach($mappings as $mapping) {
             $md = $this->mapping[$mapping];
             $fields = $md['fields'];
-
+            AppKitLogger::verbose("Performing bulk query (current mapping = %s)",$md);
             $search = $this->api->createSearch()
                       ->setSearchTarget($md['target'])
                       ->setResultColumns(array_values($md['fields']))
@@ -150,21 +150,23 @@ class Cronks_System_ObjectSearchResultModel extends CronksBaseModel {
             foreach($md['search'] as $search_field) {
                 $search_group->addFilter($search->createFilter($search_field, $this->query, IcingaApiConstants::MATCH_LIKE));
             }
-
+            
             $search->setSearchFilter($search_group);
 
             // Limiting results for security
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
-
+            
             $result = $search->fetch();
-
+            AppKitLogger::verbose("Query: %s ",$search->getSqlQuery());
+            
             $count[$mapping] = $result->getResultCount();
             $data[$mapping] = $this->resultToArray($result, $fields, $mapping);
+            AppKitLogger::verbose("Result: %s ",$data[$mapping]);
         }
 
         $new = $this->sortArray($data, $count);
         $sum = array_sum($count);
-
+        AppKitLogger::verbose("Complete search result: %s ",$data);
         return array(
                    'resultCount'		=> array_sum($count),
                    'resultRows'		=> $new,

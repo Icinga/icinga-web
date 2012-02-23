@@ -13,7 +13,8 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
             remoteSort: true,
 
             baseParams: {
-                hideDisabled: false
+                hideDisabled: false,
+		oldBehaviour : 0
             },
             proxy: new Ext.data.HttpProxy({
                 api: {

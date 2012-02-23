@@ -46,6 +46,10 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
         // REST Call
         Ext.Ajax.request({
             url: AppKit.c.path+"/web/api/json",
+            cancelOn: {
+                component: grid.getStore(),
+                event: 'beforeload'
+            },
             params: {
                 target: 'service_status_summary', 
                 "columns[0]": "host_object_id",

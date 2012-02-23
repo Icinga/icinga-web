@@ -26,6 +26,12 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      * @var string
      */
     const USEROBJ_ATTRIBUTE = 'userobj';
+    
+    /**
+     * Attribute name of the currentProvider
+     * @var string
+     */
+    const AUTHPROVIDER_ATTRIBUTE = 'currentProvider';
 
     /**
      * List of roles applies to this user
@@ -83,11 +89,11 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
      */
     public function doLogin($username, $password, $isHashedPassword=false) {
 
-        $provider = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
+        $dispatcher = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
 
         try {
 
-            $user = $provider->doAuthenticate($username, $password);
+            $user = $dispatcher->doAuthenticate($username, $password);
 
             if ($user instanceof NsmUser && $user->user_id>0) {
                 // Start from scratch
@@ -101,6 +107,9 @@ class AppKitSecurityUser extends AgaviRbacSecurityUser {
 
                 // Grant related roles
                 $this->applyDoctrineUserRoles($user);
+                
+                $this->setAttribute('currentProvider', $dispatcher->getCurrentProvider()->getName());
+                
                 // Give notice
                 $this->getContext()->getLoggerManager()
                 ->log(sprintf('User %s (%s) logged in!', $username, $user->givenName()), AgaviLogger::INFO);

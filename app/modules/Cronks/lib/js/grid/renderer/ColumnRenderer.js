@@ -80,6 +80,7 @@ Cronk.grid.ColumnRenderer = {
 	
 	truncateText : function(cfg) {
 		var defaultLength = AppKit.getPrefVal('org.icinga.grid.outputLength') || 70;
+		cfg = cfg || {};
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			if(!value) 
 				return "";
@@ -87,7 +88,7 @@ Cronk.grid.ColumnRenderer = {
 			if(value.match(/<.*?>(.*?)<\/.*?>/g))
 				return value;
             
-			var out = Ext.util.Format.ellipsis(value, (cfg.length || defaultLength));
+			var out = Ext.util.Format.ellipsis(value, (Ext.isEmpty(cfg.length)) ? defaultLength : cfg.length);
 			if (out.indexOf('...', (out.length-3)) != -1) {
                 metaData.attr = 'ext:qtip="' + value.replace(/"/g, "'") + '"';
 			}
@@ -227,7 +228,7 @@ Cronk.grid.ColumnRenderer = {
     
     selectableColumn : function(cfg) {
         return function(value, metaData, record, rowIndex, colIndex, store) {
-            metaData.css += ' x-icinga-grid-cell-selectabl;e'
+            metaData.css += ' x-icinga-grid-cell-selectable';
 			return value;
 		}
     }

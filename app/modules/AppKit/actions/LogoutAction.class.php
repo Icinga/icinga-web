@@ -14,24 +14,51 @@ class AppKit_LogoutAction extends AppKitBaseAction {
      *                   </ul>
      */
     public function getDefaultViewName() {
-        return 'Input';
+        return 'Success';
     }
 
     public function execute(AgaviRequestDataHolder $rd) {
 
+        $this->setAttribute('sendHeader', false);
+        $this->setAttribute('doRedirect', true);
+        
+        if ($rd->getParameter('unauthorized', false) == 1) {
+            $this->setAttribute('sendHeader', true);
+        }
+        
         if ($rd->getParameter('logout', false) == 1) {
-
+            
+            if ($this->isHttpRelated() == true) {
+                $this->setAttribute('httpBasic', true);
+                $this->setAttribute('doRedirect', false);
+            }
+            
             $this->getContext()->getUser()->doLogout();
-
-            return 'Success';
 
         }
 
-        return 'Input';
+        return $this->getDefaultViewName();
     }
 
     public function isSecure() {
         return true;
+    }
+    
+    private function isHttpRelated() {
+        $providerName = $this->getContext()->getUser()->getAttribute(AppKitSecurityUser::AUTHPROVIDER_ATTRIBUTE);
+        $model = $this->getContext()->getModel('Auth.Dispatch', 'AppKit');
+        try {
+            $provider = $model->getProvider($providerName);
+        } catch(AgaviSecurityException $e) {
+            return false;
+        }
+        
+        if ($provider && $provider instanceof AppKit_Auth_Provider_HTTPBasicAuthenticationModel) {
+            $this->setAttribute('auth_realm', $provider->getRealm());
+            return true;
+        }
+        
+        return false;
     }
 }
 

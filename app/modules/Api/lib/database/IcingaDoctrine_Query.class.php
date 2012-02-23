@@ -1,8 +1,25 @@
 <?php
 class IcingaDoctrine_Query extends Doctrine_Query {
     
+    protected $defaultJoinType = "left";
+    protected $aliasDefs = array();
+    protected $mainAlias = "my";
+    private $aliasJoins = array();
+    
     /**
-     * Enter description here ...
+     * @var IcingaDoctrineQueryFilterChain
+     */
+    private $filterChain = null;
+    
+    /**
+    * To disable the hydrator fixing feature. In some cases it is needed
+    * to produce 'real' distinct queries
+    * @var boolean
+    */
+    protected $_disableAutoIdentifiedFields = false;
+    
+    /**
+     * Creates an instance
      * @param mixed $conn
      * @param mixed $class
      * @return IcingaDoctrine_Query
@@ -17,8 +34,8 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         }
         
         $conn_name = $manager->getConnectionName($conn);
-	
-	if ($conn_name !== IcingaDoctrineDatabase::CONNECTION_ICINGA) {        
+    
+        if ($conn_name !== IcingaDoctrineDatabase::CONNECTION_ICINGA) {        
             AgaviContext::getInstance()->getLoggerManager()->log('QUERY::CREATE Obtain doctrine connection: '. $conn_name, AgaviLogger::DEBUG);
         }
 
@@ -26,11 +43,55 @@ class IcingaDoctrine_Query extends Doctrine_Query {
     }
     
     /**
-     * To disable the hydrator fixing feature. In some cases it is needed
-     * to produce 'real' distinct queries
-     * @var boolean
+     * Overwritten constructor from Doctrine_Query_Abstract to initialize
+     * some objects we need here
+     * @param Doctrine_Connection $connection
+     * @param Doctrine_Hydrator_Abstract $hydrator
      */
-    protected $_disableAutoIdentifiedFields = false;
+    public function __construct(Doctrine_Connection $connection = null, Doctrine_Hydrator_Abstract $hydrator = null) {
+        parent::__construct($connection, $hydrator);
+        $this->filterChain = new IcingaDoctrineQueryFilterChain();
+    }
+    
+    /**
+     * Shortcut method to add filters to this query
+     * @param Doctrine_Query_Filter_Interface $filter
+     */
+    public function addFilter(IcingaIDoctrineQueryFilter $filter) {
+        $this->filterChain->add($filter);
+        return $this;
+    }
+    
+    /**
+     * Shurtcut method to remove filters from chain
+     * @param IcingaIDoctrineQueryFilter $filter
+     */
+    public function removeFilter(IcingaIDoctrineQueryFilter $filter) {
+        $this->filterChain->remove($filter);
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Doctrine_Query_Abstract::_preQuery()
+     */
+    protected function _preQuery($params = array()) {
+        if ($this->_preQueried === false && $this->filterChain->canExecutePre()) {
+            $this->filterChain->preQuery($this);
+        }
+        return parent::_preQuery($params);
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Doctrine_Query_Abstract::_execute()
+     */
+    protected function _execute($params) {
+        if ($this->filterChain->canExecutePost()) {
+            $this->filterChain->postQuery($this);
+        }
+        return parent::_execute($params);
+    }
+    
     
     /**
     * @see Doctrine_Query::processPendingFields
@@ -131,11 +192,6 @@ class IcingaDoctrine_Query extends Doctrine_Query {
 
         $groups = array_unique($groups);
     }
-
-    protected $defaultJoinType = "left";
-    protected $aliasDefs = array();
-    protected $mainAlias = "my";
-    private $aliasJoins = array();
 
     public function setAliasDefs($mainAlias,array $defs) {
         $this->aliasDefs = $defs;
@@ -312,7 +368,6 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         $this->_disableAutoIdentifiedFields = (boolean)$flag;
         return $this;
     }
-
 
 }
 ?>

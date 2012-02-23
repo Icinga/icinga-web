@@ -33,7 +33,7 @@
 				</setting>
 				
 				<!-- Temp report generation dir -->
-				<setting name="dir.download">%core.module_dir%/Reporting/data/tmp</setting>
+				<setting name="dir.download">@reporting_tmp_dir@</setting>
 				
 				<!-- Previewable mime types -->
 				<setting name="preview.mime_regex"><![CDATA[/^(image|text)\/.+|application\/xml|application\/pdf.+/i]]></setting>
@@ -136,7 +136,7 @@
 	</ae:configuration>
 
     <!--  Try include the overwriting file -->
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/reporting.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/module_reporting.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
             <xi:fallback></xi:fallback>
     </xi:include>
 	

@@ -58,10 +58,11 @@
 		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.xml"/>
 		
 		<!--  Try include the overwriting file -->
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.site.xml">
+		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/icinga.xml">
 			<xi:fallback />
 		</xi:include>
-		
+
+	
 
 		<exception_templates>
 			<!-- this is the exception template that's used by default unless one for a specific context has been defined, or for the current output type -->
@@ -88,4 +89,9 @@
 
 		</exception_templates>
 	</ae:configuration>
+
+	<!--  Try include the overwriting file -->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/settings.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
+                <xi:fallback></xi:fallback>
+        </xi:include>
 </ae:configurations>

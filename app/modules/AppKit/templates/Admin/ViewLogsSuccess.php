@@ -51,7 +51,7 @@ Cronk.util.initEnvironment('viewport-center', function() {
 	var logGrid = new Ext.grid.GridPanel({
 		store: logStore,
 		
-		tbar: new Ext.PagingToolbar({
+		bbar: new Ext.PagingToolbar({
 			store: logStore,
 			pageSize:100,
 			displayInfo:true,

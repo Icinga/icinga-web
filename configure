@@ -568,6 +568,11 @@ PACKAGE_URL=''
 ac_default_prefix=/usr/local/icinga-web
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+icinga_cfg
+icinga_bin
+icinga_objects_dir
+icinga_api
+reporting_tmp_dir
 web_cache_dir
 web_conf_dir
 web_log_dir
@@ -577,7 +582,6 @@ INSTALL_OPTS_CACHE
 INSTALL_OPTS_WEB
 INSTALL_OPTS
 CFLAGS
-icinga_api
 sla_default_timespan
 enable_sla
 api_cmd_instance
@@ -608,6 +612,7 @@ web_user
 app_name
 PHPCS
 PHPUNIT
+icinga
 PHING
 MYSQL
 PHP
@@ -691,11 +696,13 @@ with_api_cmd_instance
 with_devel_mode
 with_sla_default_timespan
 with_enable_sla
-with_conf_folder
 with_conf_dir
-with_log_folder
 with_log_dir
 with_cache_dir
+with_reporting_tmp_dir
+with_icinga_objects_dir
+with_icinga_bin
+with_icinga_cfg
 with_phpunit
 with_phpcs
 '
@@ -1353,13 +1360,18 @@ Optional Packages:
   --with-sla-default-timespan=TIMESPAN
                           The timespan used for non-detailed sla overviews
   --with-enable-sla       Enable SLA support
-  --with-conf-folder=PATH DEPRECATED, please use --with-conf-dir instead
   --with-conf-dir=PATH    Folder where to store custom user configurations
                           (default etc/conf.d/)
-  --with-log-folder=PATH  DEPRECATED, please use --with-log-dir instead
   --with-log-dir=PATH     Folder where to store log files (default log/)
   --with-cache-dir=PATH   Directory to store agavi cache files (default
                           app/cache/)
+  --with-reporting-tmp-dir=PATH
+                          Directory to store temporary files for jasper
+                          (default app/modules/Reporting/data/tmp)
+  --with-icinga-objects-dir=PATH
+                          Path Icinga configuration items
+  --with-icinga-bin=PATH  Icinga core binary
+  --with-icinga-cfg=PATH  Icinga core main configuration file
   --with-phpunit=BINARY   Path to phpunit script
   --with-phpcs=BINARY     Path to phpcs script
 
@@ -1801,7 +1813,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 # Release date
-RELEASE_DATE=2012-01-31
+RELEASE_DATE=2012-03-01
 
 
 
@@ -2070,10 +2082,10 @@ $as_echo "$ac_cv_path_SED" >&6; }
 
 # Extract version parts
 
-	VERSION_MAJOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\1/g'`
-	VERSION_MINOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\2/g'`
-	VERSION_PATCH=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\3/g'`
-	VERSION_EXTEN=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\5/g'`
+    VERSION_MAJOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\1/g'`
+    VERSION_MINOR=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\2/g'`
+    VERSION_PATCH=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\3/g'`
+    VERSION_EXTEN=`echo "$PACKAGE_VERSION" | $SED 's/^\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(\-\(.\+\)\)\?$/\5/g'`
 
 
 
@@ -2335,11 +2347,11 @@ if test "${with_web_apache_path+set}" = set; then :
   withval=$with_web_apache_path; web_apache_path=$withval
 else
   web_apache_path=
-	web_apache_path=/etc/apache2/conf.d
-	for x in /etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d; do
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if path $x exists" >&5
+    web_apache_path=/etc/apache2/conf.d
+    for x in /etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d; do
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking if path $x exists" >&5
 $as_echo_n "checking if path $x exists... " >&6; }
-		if test -d $x; then :
+        if test -d $x; then :
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
 $as_echo "found" >&6; }; web_apache_path=$x; break
 else
@@ -2347,7 +2359,7 @@ else
 $as_echo "not found" >&6; }
 
 fi
-	done
+    done
 
 
 fi
@@ -2577,7 +2589,6 @@ fi
 
 
 
-
 # Check whether --with-enable_sla was given.
 if test "${with_enable_sla+set}" = set; then :
   withval=$with_enable_sla; enable_sla=$withval
@@ -2587,19 +2598,7 @@ else
 fi
 
 
-
 # Configuration location
-# DEPRECATED
-
-# Check whether --with-conf_folder was given.
-if test "${with_conf_folder+set}" = set; then :
-  withval=$with_conf_folder; web_conf_dir=$withval
-else
-  web_conf_dir=$prefix/etc/conf.d
-
-fi
-
-
 
 # Check whether --with-conf_dir was given.
 if test "${with_conf_dir+set}" = set; then :
@@ -2611,17 +2610,6 @@ fi
 
 
 # Log location
-# DEPRECATED
-
-# Check whether --with-log_folder was given.
-if test "${with_log_folder+set}" = set; then :
-  withval=$with_log_folder; web_log_dir=$withval
-else
-  web_log_dir=$prefix/log
-
-fi
-
-
 
 # Check whether --with-log_dir was given.
 if test "${with_log_dir+set}" = set; then :
@@ -2640,6 +2628,123 @@ if test "${with_cache_dir+set}" = set; then :
 else
   web_cache_dir=$prefix/app/cache
 
+fi
+
+
+# Jasper temporary directory for downloads
+
+# Check whether --with-reporting_tmp_dir was given.
+if test "${with_reporting_tmp_dir+set}" = set; then :
+  withval=$with_reporting_tmp_dir; reporting_tmp_dir=$withval
+else
+  reporting_tmp_dir=$prefix/app/modules/Reporting/data/tmp/
+
+fi
+
+
+# icinga core options
+
+# Check whether --with-icinga_objects_dir was given.
+if test "${with_icinga_objects_dir+set}" = set; then :
+  withval=$with_icinga_objects_dir; icinga_objects_dir=$withval
+else
+  icinga_objects_dir=/usr/local/icinga/etc/objects
+
+fi
+
+
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking if resource $icinga_objects_dir exists" >&5
+$as_echo_n "checking if resource $icinga_objects_dir exists... " >&6; }
+    if  test -e $icinga_objects_dir -a -r $icinga_objects_dir ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
+$as_echo "found" >&6; }
+else
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: not found" >&5
+$as_echo "$as_me: WARNING: not found" >&2;}
+fi
+
+
+
+# Check whether --with-icinga_bin was given.
+if test "${with_icinga_bin+set}" = set; then :
+  withval=$with_icinga_bin; icinga_bin=$withval
+else
+  icinga_bin=/usr/local/icinga/bin/icinga
+
+fi
+
+
+
+   # Extract the first word of "$icinga_bin", so it can be a program name with args.
+set dummy $icinga_bin; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_icinga+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $icinga in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_icinga="$icinga" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_icinga="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_path_icinga" && ac_cv_path_icinga="not found"
+  ;;
+esac
+fi
+icinga=$ac_cv_path_icinga
+if test -n "$icinga"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $icinga" >&5
+$as_echo "$icinga" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+
+   if  test "XX${icinga}" == "XXnot found" ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary $icinga_bin not found in PATH" >&5
+$as_echo "$as_me: WARNING: binary $icinga_bin not found in PATH" >&2;}
+fi
+
+   test "XX${icinga}" == "XXnot found" && icinga=""
+
+
+
+# Check whether --with-icinga_cfg was given.
+if test "${with_icinga_cfg+set}" = set; then :
+  withval=$with_icinga_cfg; icinga_cfg=$withval
+else
+  icinga_cfg=/usr/local/icinga/etc/icinga.cfg
+
+fi
+
+
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking if resource $icinga_cfg exists" >&5
+$as_echo_n "checking if resource $icinga_cfg exists... " >&6; }
+    if  test -e $icinga_cfg -a -r $icinga_cfg ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
+$as_echo "found" >&6; }
+else
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: not found" >&5
+$as_echo "$as_me: WARNING: not found" >&2;}
 fi
 
 
@@ -2777,13 +2882,13 @@ flag_debug=false
 CFLAGS=""
 
 
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for devel-mode" >&5
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for devel-mode" >&5
 $as_echo_n "checking for devel-mode... " >&6; }
-	if  test "$devel_mode" == "yes" ; then :
+    if  test "$devel_mode" == "yes" ; then :
 
-		flag_caching="false"
-		flag_debug="false"
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=false, jscache=false (!!)" >&5
+        flag_caching="false"
+        flag_debug="false"
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: YES ... debug=false, jscache=false (!!)" >&5
 $as_echo "YES ... debug=false, jscache=false (!!)" >&6; }
 
 else
@@ -2843,7 +2948,11 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile etc/sitecfg/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/modules/Api/config/access.xml etc/sitecfg/access.xml etc/sitecfg/databases.xml etc/sitecfg/sla.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess"
+
+
+
+
+ac_config_files="$ac_config_files Makefile lib/Makefile lib/icingaScheduler/config.php pub/Makefile etc/Makefile bin/Makefile doc/Makefile app/Makefile app/config.php app/config/databases.xml app/config/icinga.xml app/config/logging.xml app/config/settings.xml app/config/translation.xml app/config/factories.xml app/modules/Api/config/access.xml app/modules/Api/config/module.xml app/modules/AppKit/config/module.xml app/modules/AppKit/config/auth.xml app/modules/Cronks/config/module.xml app/modules/Reporting/config/module.xml app/modules/Web/config/module.xml etc/build.properties tests/phpunit/test.properties etc/apache2/icinga-web.conf etc/scheduler/icingaCron bin/clearcache.sh pub/.htaccess pub/soap/.htaccess etc/conf.d/access.xml etc/conf.d/databases.xml etc/conf.d/Makefile etc/conf.d/sla.xml"
 
 
 cat >confcache <<\_ACEOF
@@ -3572,22 +3681,20 @@ do
     "bin/Makefile") CONFIG_FILES="$CONFIG_FILES bin/Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "app/Makefile") CONFIG_FILES="$CONFIG_FILES app/Makefile" ;;
-    "etc/sitecfg/Makefile") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/Makefile" ;;
     "app/config.php") CONFIG_FILES="$CONFIG_FILES app/config.php" ;;
     "app/config/databases.xml") CONFIG_FILES="$CONFIG_FILES app/config/databases.xml" ;;
     "app/config/icinga.xml") CONFIG_FILES="$CONFIG_FILES app/config/icinga.xml" ;;
     "app/config/logging.xml") CONFIG_FILES="$CONFIG_FILES app/config/logging.xml" ;;
     "app/config/settings.xml") CONFIG_FILES="$CONFIG_FILES app/config/settings.xml" ;;
     "app/config/translation.xml") CONFIG_FILES="$CONFIG_FILES app/config/translation.xml" ;;
+    "app/config/factories.xml") CONFIG_FILES="$CONFIG_FILES app/config/factories.xml" ;;
     "app/modules/Api/config/access.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/access.xml" ;;
-    "etc/sitecfg/access.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/access.xml" ;;
-    "etc/sitecfg/databases.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/databases.xml" ;;
-    "etc/sitecfg/sla.xml") CONFIG_FILES="$CONFIG_FILES etc/sitecfg/sla.xml" ;;
     "app/modules/Api/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Api/config/module.xml" ;;
     "app/modules/AppKit/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/module.xml" ;;
     "app/modules/AppKit/config/auth.xml") CONFIG_FILES="$CONFIG_FILES app/modules/AppKit/config/auth.xml" ;;
     "app/modules/Cronks/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Cronks/config/module.xml" ;;
     "app/modules/Reporting/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Reporting/config/module.xml" ;;
+    "app/modules/Web/config/module.xml") CONFIG_FILES="$CONFIG_FILES app/modules/Web/config/module.xml" ;;
     "etc/build.properties") CONFIG_FILES="$CONFIG_FILES etc/build.properties" ;;
     "tests/phpunit/test.properties") CONFIG_FILES="$CONFIG_FILES tests/phpunit/test.properties" ;;
     "etc/apache2/icinga-web.conf") CONFIG_FILES="$CONFIG_FILES etc/apache2/icinga-web.conf" ;;
@@ -3595,6 +3702,10 @@ do
     "bin/clearcache.sh") CONFIG_FILES="$CONFIG_FILES bin/clearcache.sh" ;;
     "pub/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/.htaccess" ;;
     "pub/soap/.htaccess") CONFIG_FILES="$CONFIG_FILES pub/soap/.htaccess" ;;
+    "etc/conf.d/access.xml") CONFIG_FILES="$CONFIG_FILES etc/conf.d/access.xml" ;;
+    "etc/conf.d/databases.xml") CONFIG_FILES="$CONFIG_FILES etc/conf.d/databases.xml" ;;
+    "etc/conf.d/Makefile") CONFIG_FILES="$CONFIG_FILES etc/conf.d/Makefile" ;;
+    "etc/conf.d/sla.xml") CONFIG_FILES="$CONFIG_FILES etc/conf.d/sla.xml" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

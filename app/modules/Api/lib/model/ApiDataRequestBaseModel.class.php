@@ -12,7 +12,7 @@ class ApiDataRequestBaseModel extends IcingaApiBaseModel {
     /**
      * Returns the doctrine connection handler
      * @param String $connName The connection name. Defaults to "icinga" (optional)
-     *
+         *
      * @return Doctrine_Connection or null
      */
     protected function getDatabaseConnection($connName = NULL) {

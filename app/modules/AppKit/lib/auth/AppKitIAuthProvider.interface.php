@@ -7,13 +7,14 @@
  */
 interface AppKitIAuthProvider {
 
-    const AUTH_CREATE			= 'auth_create';
-    const AUTH_UPDATE			= 'auth_update';
-    const AUTH_RESUME			= 'auth_resume';
-    const AUTH_GROUPS			= 'auth_groups';
-    const AUTH_ENABLE			= 'auth_enable';
-    const AUTH_AUTHORITATIVE	= 'auth_authoritative';
-    const AUTH_MODE				= 'auth_mode';
+    const AUTH_CREATE          = 'auth_create';
+    const AUTH_UPDATE          = 'auth_update';
+    const AUTH_RESUME          = 'auth_resume';
+    const AUTH_GROUPS          = 'auth_groups';
+    const AUTH_ENABLE          = 'auth_enable';
+    const AUTH_AUTHORITATIVE   = 'auth_authoritative';
+    const AUTH_MODE            = 'auth_mode';
+    const AUTH_NAME            = 'name';
 
     const MODE_DEFAULT			= 1;
     const MODE_SILENT			= 2;
@@ -65,4 +66,10 @@ interface AppKitIAuthProvider {
      * @return string
      */
     public function determineUsername();
+    
+    /**
+     * Lots of magic: returns the provider name
+     * @return string
+     */
+    public function getName();
 }

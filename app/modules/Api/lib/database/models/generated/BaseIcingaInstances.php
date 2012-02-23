@@ -65,7 +65,14 @@ abstract class BaseIcingaInstances extends Doctrine_Record {
                            'local' => 'instance_id',
                            'foreign' => 'instance_id'
                        ));
-        
+        $this->hasMany('IcingaContactgroups as contactgroups', array(
+                           'local' => 'instance_id',
+                           'foreign' => 'instance_id'
+                       ));
+        $this->hasMany('IcingaContacts as contacts', array(
+                           'local' => 'instance_id',
+                           'foreign' => 'instance_id'
+                       ));
         $this->hasOne('IcingaProgramstatus as programstatus', array(
                            'local' => 'instance_id',
                            'foreign' => 'instance_id'

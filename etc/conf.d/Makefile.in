@@ -1,0 +1,18 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+LOGDIR=@localstatedir@
+CFGDIR=@sysconfdir@
+BINDIR=@bindir@
+CGIDIR=@sbindir@
+HTMLDIR=@datarootdir@
+WEB_CFG_DIR=@web_conf_dir@
+INSTALL=@INSTALL@
+INSTALL_OPTS=@INSTALL_OPTS@
+
+install:
+	$(INSTALL) -m 644 $(INSTALL_OPTS) icinga.site.css $(DESTDIR)$(prefix)/pub/styles/icinga.site.css
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)/$(WEB_CFG_DIR)
+	@files=`find . -type f -name "*.xml"`; \
+	for file in $$files; do \
+		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(WEB_CFG_DIR)/"$$file"; \
+	done

@@ -9,15 +9,13 @@ class Cronks_ColumnDisplay_DurationModel extends CronksBaseModel implements Agav
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
         
-        $model = $this->getContext()->getModel("ApiDataRequest","Api");
-        
-        $this->serviceQuery = $model->createRequestDescriptor()->select('ss.servicestatus_id, ss.last_state_change')
+        $this->serviceQuery = IcingaDoctrine_Query::create()->select('ss.servicestatus_id, ss.last_state_change')
         ->from('IcingaServicestatus ss')
         ->innerJoin('ss.instance i')
         ->innerJoin('i.programstatus p')
         ->andWhere('ss.service_object_id=?');
         
-        $this->hostQuery = $model->createRequestDescriptor()->select()
+        $this->hostQuery = IcingaDoctrine_Query::create()->select()
         ->from('IcingaHoststatus hs')
         ->innerJoin('hs.instance i')
         ->innerJoin('i.programstatus p')
@@ -70,10 +68,11 @@ class Cronks_ColumnDisplay_DurationModel extends CronksBaseModel implements Agav
                     's' => 1
         );
         
+        $new_val = $this->context->getTranslationManager()->_d($val, 'date-tstamp');
+        
         $tstamp = strtotime($val);
         
         $diff = time() - $tstamp;
-        
         if ($diff > 0) {
             $out = array ();
             foreach ($durationMap as $k=>$v) {
@@ -81,7 +80,7 @@ class Cronks_ColumnDisplay_DurationModel extends CronksBaseModel implements Agav
                 if ($diff===$m) {
                     continue;
                 } else {
-                    $out[] = ceil($diff/$v).$k;
+                    $out[] = floor($diff/$v).$k;
                     $diff = $m;
                 }
         

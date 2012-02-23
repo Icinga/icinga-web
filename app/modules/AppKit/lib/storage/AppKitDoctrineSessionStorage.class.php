@@ -100,7 +100,7 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      */
     public function sessionRead($id) {
         $session_name = $this->getParameter('session_name');
-
+        AppKitLogger::verbose("Reading session %s ",$session_name);
         $result = AppKitDoctrineUtil::createQuery()
                   ->select('*')
                   ->from('NsmSession n')
@@ -108,24 +108,27 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
                   ->execute();
 
         if ($result->count() == 0) {
+            AppKitLogger::verbose("No session found, creating new ");
             $this->NsmSession = new NsmSession();
             $this->NsmSession->session_id = $id;
             $this->NsmSession->session_name = $session_name;
 
             return '';
         } else {
-
+            AppKitLogger::verbose("Session found in database, reading data");
             $this->NsmSession = $result->getFirst();
             $data = $this->NsmSession->get('session_data');
 
             if (is_resource($data)) {
+                AppKitLogger::verbose("Reading session from BLOB");
                 $data = stream_get_contents($this->NsmSession->get('session_data'));
             }
-
+            AppKitLogger::verbose("MD5 Check: %s == %s ", md5($data), $this->NsmSession->session_checksum);
             if (md5($data) == $this->NsmSession->session_checksum) {
+                AppKitLogger::verbose("Using persisted session");
                 return $data;
             }
-
+            AppKitLogger::verbose("Session invalid, deleting it");
             $this->NsmSession->delete();
             throw new AppKitDoctrineSessionStorageException('Sessiondata integrity error, should be: '. $this->NsmSession->session_checksum);
         }
@@ -138,10 +141,12 @@ class AppKitDoctrineSessionStorage extends AgaviSessionStorage {
      * @param mixed $data
      */
     public function sessionWrite($id, &$data) {
+        AppKitLogger::verbose("Writing new session information (checksum=%s)",md5($data));
         $this->NsmSession->session_data = $data;
         $this->NsmSession->session_checksum = md5($data);
         $this->NsmSession->session_modified = date('Y-m-d H:i:s');
         $this->NsmSession->save();
+        AppKitLogger::verbose("Writing new session information successful");
     }
 
 }

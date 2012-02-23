@@ -229,6 +229,7 @@ Ext.ns("AppKit.Admin");
                         region: 'east',
                         xtype: 'panel',
                         padding: 5,
+                        minWidth:225,
                         disabled: true,
                         split: true,
                         id: 'userEditor',

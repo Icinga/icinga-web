@@ -127,6 +127,10 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             });
 
             this.store.load();
+        },
+        
+        getStore: function() {
+        	return this.store;
         }
     });
 

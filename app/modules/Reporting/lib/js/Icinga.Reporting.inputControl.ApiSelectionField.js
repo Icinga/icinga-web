@@ -58,7 +58,7 @@ Icinga.Reporting.inputControl.ApiSelectionField = Ext.extend(Ext.form.ComboBox, 
 			url : url,
 			autoDestroy : true,
 			root : 'result',
-			idProperty : displayField,
+			idProperty : valueField,
 			fields : fields,
 			baseParams : baseParams,
 			

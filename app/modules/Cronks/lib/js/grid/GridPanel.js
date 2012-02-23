@@ -101,7 +101,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 									+ "/modules/web/customPortal/"
 									+ urlParams
 								},
-								bbar: [{
+								buttons: [{
 									text: _('Close'),
 									iconCls: 'icinga-icon-close',
 									handler: function(b, e) {

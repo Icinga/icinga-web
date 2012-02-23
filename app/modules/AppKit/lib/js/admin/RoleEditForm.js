@@ -145,7 +145,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
      */
     AppKit.Admin.RoleEditForm.bindRole = function(id,url) {
         if(id !== 'new') {
-            roleStore.proxy.setUrl(url+"/id="+id);
+            roleStore.proxy.setUrl(url+"/id="+id+'?oldBehaviour=0');
             roleStore.load();
         } else {
             roleStore.newRole();
@@ -175,7 +175,7 @@ AppKit.Admin.RoleEditForm = function(cfg) {
         });
         roleServicegroupPrincipalStore.each(function(p) {
             params["principal_target["+i+"][name][]"] = "IcingaServicegroup";
-            params["principal_value["+i+"][serviegroup][]"] = p.get("servicegroup"); 
+            params["principal_value["+i+"][servicegroup][]"] = p.get("servicegroup"); 
             params["principal_target["+i+"][set][]"] = 1;
             i++;
         });

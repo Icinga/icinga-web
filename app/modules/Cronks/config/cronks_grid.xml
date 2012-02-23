@@ -158,7 +158,7 @@
 				<ae:parameter name="description">Display icinga notifications</ae:parameter>
 				<ae:parameter name="name">Notifications</ae:parameter>
 				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Bubble 1</ae:parameter>
+				<ae:parameter name="image">cronks.Bubble_1</ae:parameter>
 				<ae:parameter name="position">410</ae:parameter>
 				<ae:parameter name="ae:parameter">
 					<ae:parameter name="template">icinga-notification-template</ae:parameter>

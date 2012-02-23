@@ -33,7 +33,7 @@ class IcingaApiAuthentificationRoutingCallback extends AgaviRoutingCallback {
             // PASS
         }
         
-        if (!$this->user->hasCredential("appkit.api.access") && !$this->user->hasCredential("appkit.user")) {
+        if (!$this->user->hasCredential("appkit.api.access") && !$this->user->hasCredential("icinga.user")) {
             $errors[] = 'User has insufficient rights to access the api';
         }
         

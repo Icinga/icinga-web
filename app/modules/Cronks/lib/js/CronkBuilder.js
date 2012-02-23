@@ -105,15 +105,15 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		var CB = this;
 		
-		this.bbar = [{
+		this.buttons = [{
 			text: _('Save'),
-			iconCls: 'icinga-icon-star-plus',
+			iconCls: 'icinga-icon-accept',
 			handler: function(b, e) {
 				this.formPanel.getForm().doAction(this.action);
 			},
 			scope: this
 		}, {
-			text: _('Close'),
+			text: _('Cancel'),
 			iconCls: 'icinga-icon-cross',
 			handler: function(b, e) {
 				CB.hide();
@@ -242,7 +242,7 @@ Ext.extend(Cronk.util.CronkBuilder, Ext.Window, {
 		
 		this.groups = new Ext.data.JsonStore({
 			autoDestroy: true,
-			url: AppKit.c.path + '/modules/appkit/provider/groups',
+			url: AppKit.c.path + '/modules/appkit/provider/groups?oldBehaviour=0',
 			fields : [{
 				name : 'id'
 			}, {

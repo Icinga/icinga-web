@@ -256,8 +256,10 @@ IcingaCommandHandler.prototype = {
             break;
 
         case 'textarea':
+            
             Ext.apply(oDef, {
                 height: 120,
+                allowBlank: !(o.fieldRequired || false),
                 enableKeyEvents: true,
                 listeners: {
                     /*
@@ -340,9 +342,6 @@ IcingaCommandHandler.prototype = {
             return;
         }
 
-
-
-
         Ext.Ajax.request({
             url: String.format(this.url_info, command),
             scope: this,
@@ -358,15 +357,17 @@ IcingaCommandHandler.prototype = {
                     closable: true,
                     modal: true,
                     defaultType: 'field',
-
-                    bbar: [{
+                    defaults: {
+                        padding: 5
+                    },
+                    buttons: [{
                         text: _('OK'),
                         iconCls: 'icinga-icon-accept',
                         handler: function (b, e) {
                             oForm.getForm().doAction(oFormAction);
                         }
                     }, {
-                        text: _('Abort'),
+                        text: _('Cancel'),
                         iconCls: 'icinga-icon-cross',
                         handler: function (b, e) {
                             oWin.close();
@@ -403,7 +404,7 @@ IcingaCommandHandler.prototype = {
                     var h_data = command + '-' + selection;
                     h_data += '-' + Ext.util.JSON.encode(f.getValues(false));
                     // simplify string
-                    h_data = h_data.replace(/[ẃéŕźúíóṕǘáśǵḱĺýćǘńḿèàẁùìòàỳǜǹȩŗźíóṕáşḑģḩķĺýçńḿÈẀÙÌÒÀỲǛǸẂÉŔŹÚÍÓṔÚÜÁŚǴḰĹÝĆǗǸḾȨŖŢŞḐĢḨĶĻÝÇŅ]/g, "");
+                   
 
                     var h_key = o.tk;
                     var h_auth = hex_hmac_rmd160(h_key, h_data);

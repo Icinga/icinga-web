@@ -4,6 +4,45 @@ Icinga-web 1.6 changelog
 
 Thanks to all contributers, testers and developers. Please read AUTHORS and THANKS for a detailed list :-)
 
+1.6.2 - 01/03/2012
+
+Features
+    * Default reporting cronk for admins only
+    * Disabled tackle per default #2275 (not ready yet)
+    * LDAP TLS feature #1980
+    * Logout for HTTP BASIC AUTH #1005
+    * Cleaner configuration way, more overwrites #2080
+    * Analogue head summary counts to classic interface #2159, #2328
+    * Manual refresh counter for head cronks
+    * New security layer for new api (DOCTRINE filter chain) #2297
+    * Removed useless SQL counts for views: history, logs, notification 
+    * Fixed old JS objects the JSHINT way (performance, IE compat)
+    * Added tackle components for object info #2132
+    * Some UI enhancements (congruent icons, label and locations) #1558
+    * More logging, verbose query logging #2277
+
+Bugs
+    * Fixed Auth.Dispatch import group assign #2284
+    * Auth dispatcher lowercase fix #2080
+    * PNP integration fixes (typo, js errors)
+    * Update script fixes #2229
+    * Removed unique index from email field #2228
+    * Fix for sending commands to slaves
+    * Rewritten makefiles for more portable installation #2080
+    * Removed all spaces from files (mostly cronk images)
+    * Servertime fix if not logged in #1005
+    * Automatic width fix for cronks in head bar #2230
+    * Global search (CTRL+ALT+F) works not on all browsers
+    * QTIP fixes
+    * Fixing custom cronk deletion #2155
+    * Error handling reporting module #2248
+    * Growl stack IE fix (also new layout and icons support) #2194
+    * Json error handling if not logged in
+    * Doctrine connection handling for modules
+    * Fixes for host comments and object_id for info icons #2225
+    * Notification view shows random contacts #1987, #2199
+    * API and authkey access fixes #2305, #2325, #2326
+
 1.6.1 - 19/12/2011
 
 Features

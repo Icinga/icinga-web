@@ -52,7 +52,7 @@ SRC_ETC=@srcdir@/etc
 SRC_BIN=@srcdir@/bin
 SRC_DOC=@srcdir@/doc
 SRC_APP=@srcdir@/app
-SRC_SITE=@srcdir@/etc/sitecfg
+SRC_SITE=@srcdir@/etc/conf.d
 
 none:
 #	@printf "\t%-22s - %s\n" "" ""
@@ -86,6 +86,8 @@ none:
 	
 	@printf "\nDevelopment targets:\n"
 	@printf "\t%-22s - %s\n" "devel-inplace-config" "Prepare src tree for running inplace"
+	@printf "\t%-22s - %s\n" "devel-reconfigure" "Clean and reconfigure source"
+	@printf "\t%-22s - %s\n" "devel-update-version" "Upgrades the version file"
 	@printf "\t%-22s - %s\n" "test" "Running tests"
 	@printf "\t%-22s - %s\n" "test-cs" "Running codestyle tests"
 	@printf "\n\n"
@@ -109,41 +111,45 @@ distclean:
 	.build/ \
 	
 	rm -f \
-        Makefile \
-        lib/Makefile \
+	Makefile \
+	lib/Makefile \
 	lib/icingaScheduler/config.php \
-        pub/Makefile \
-        etc/Makefile \
-        bin/Makefile \
-        doc/Makefile \
-        app/Makefile \
-        etc/sitecfg/Makefile \
+	pub/Makefile \
+	etc/Makefile \
+	bin/Makefile \
+	doc/Makefile \
+	app/Makefile \
 	app/config.php \
-        app/config/databases.xml \
-        app/config/icinga.xml \
-        app/config/logging.xml \
-        app/config/settings.xml \
-        app/config/translation.xml \
-        app/modules/Api/config/module.xml \
-    	app/modules/Api/config/access.xml \
-        app/modules/AppKit/config/module.xml \
-        app/modules/AppKit/config/auth.xml \
+	app/config/databases.xml \
+	app/config/icinga.xml \
+	app/config/logging.xml \
+	app/config/settings.xml \
+	app/config/translation.xml \
+	app/config/factories.xml \
+	app/modules/Api/config/module.xml \
+	app/modules/Api/config/access.xml \
+	app/modules/AppKit/config/module.xml \
+	app/modules/AppKit/config/auth.xml \
 	app/modules/Cronks/config/module.xml \
 	app/modules/Reporting/config/module.xml \
-        etc/build.properties \
-        tests/phpunit/test.properties \
-        etc/apache2/icinga-web.conf \
-    	etc/scheduler/icingaCron \
-        bin/clearcache.sh \
-        pub/.htaccess \
-        pub/soap/.htaccess
+	app/modules/Web/config/module.xml \
+	etc/build.properties \
+	tests/phpunit/test.properties \
+	etc/apache2/icinga-web.conf \
+	etc/scheduler/icingaCron \
+	bin/clearcache.sh \
+	pub/.htaccess \
+	pub/soap/.htaccess \
+	etc/conf.d/access.xml \
+	etc/conf.d/databases.xml \
+	etc/conf.d/Makefile \
+	etc/conf.d/sla.xml
 	
 remove-temp-files:
 	bin/rmtmp-files.sh
 
 create-tarball:
-	#tar -czf ../$(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz ../$(TAR_DIR_NAME)
-	./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
+	@./bin/make-tarball --prefix $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)/
 
 create-tarball-nightly:
 	#${MAKE} submodule-update
@@ -171,12 +177,28 @@ test-cs: test-precede
 		$(SRC_DIR)/app
 
 devel-inplace-config:
-	-@mkdir $(SRC_DIR)/app/cache $(SRC_DIR)/app/cache/config 2> /dev/null
-	@chown $(WEB_USER).$(WEB_GROUP) \
+	mkdir -p \
+	$(SRC_DIR)/app/cache/config \
+	$(LOGDIR) \
+	$(SRC_DIR)/app/modules/Reporting/data/tmp
+	chown $(WEB_USER).$(WEB_GROUP) \
 		$(SRC_DIR)/app/cache \
 		$(SRC_DIR)/app/cache/config \
-		$web_log_folder@
+		$(LOGDIR) \
+		$(SRC_DIR)/app/modules/Reporting/data/tmp
 	@printf "Done.\n"
+
+devel-reconfigure:
+	@EXEC=`head config.log  | grep "$$ configure" | sed -e 's/\s\+\$$\s\+//g'`; \
+	make distclean; \
+	sh $$EXEC
+
+devel-update-version:
+	@VFILE="doc/VERSION"; \
+        VERSION=`printf "%d.%d.%d" "$(VERSION_MAJOR)" "$(VERSION_MINOR)" "$(VERSION_PATCH)"`; \
+        test ! "X$(VERSION_EXTEN)" = "X" && VERSION=`printf "%s-%s" "$$VERSION" "$(VERSION_EXTEN)"`; \
+        echo "$$VERSION" > $$VFILE; \
+        echo "Upgraded $$VFILE to version $$VERSION"
 
 install-javascript:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/pub/js

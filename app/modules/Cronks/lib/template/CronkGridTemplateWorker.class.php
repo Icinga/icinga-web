@@ -105,8 +105,11 @@ class CronkGridTemplateWorker {
      */
     public function countResults() {
         $params = $this->getTemplate()->getSectionParams('datasource');
-
-        if ($params->getParameter('countmode', null) !== 'simple') {
+        
+        if ($params->getParameter('countmode', null) === 'none') {
+            $this->api_count = null;
+            $this->result_count = 0;
+        } elseif ($params->getParameter('countmode', null) !== 'simple') {
             if ($this->api_count !== null) {
                 $this->api_count->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT);
 
@@ -339,7 +342,9 @@ class CronkGridTemplateWorker {
             $this->setPrivileges($search);
 
             // Clone our count query
-            $this->api_count = clone $search;
+            if ($params->getParameter('countmode', null) !== 'none') {
+                $this->api_count = clone $search;
+            }
 
             // Groupby fields
             $gbf = $this->getGroupByFields();
