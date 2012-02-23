@@ -314,7 +314,6 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                             array(),
                             array()
                         );
-
                         $user->save();
 
                         $this->log(
@@ -330,6 +329,8 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
 
                 } catch (AgaviSecurityException $e) {
                     $this->log('Auth.Dispatch/import: Import failed (provider=%s,msg=%s)', $provider->getProviderName(), $e->getMessage(), AgaviLogger::ERROR);
+                } catch(Exception $e) {
+                   $this->log('Auth.Dispatch/import failed: Import failed: (provider=%s, msg=%s)', $provider->getProviderName(),$e->getMessage,AgaviLogger::ERROR);
                 }
             }
         }
