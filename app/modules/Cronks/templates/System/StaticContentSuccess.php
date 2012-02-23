@@ -47,7 +47,7 @@ $cmpid = $rd->getParameter('cmpid');
                                         text: _('Refresh'),
                                         iconCls: 'icinga-icon-arrow-refresh',
                                         tooltip: _('Refresh the data in the grid'),
-                                        handler: function(oBtn, e) { panel.getUpdater().refresh(); },
+                                        handler: function(oBtn, e) { panel.getUpdater().refresh(); }
 
                                     }, {
                                         text: _('Settings'),
