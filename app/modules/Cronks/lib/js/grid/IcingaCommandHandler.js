@@ -360,15 +360,17 @@ IcingaCommandHandler.prototype = {
                     closable: true,
                     modal: true,
                     defaultType: 'field',
-
-                    bbar: [{
+                    defaults: {
+                        padding: 5
+                    },
+                    buttons: [{
                         text: _('OK'),
                         iconCls: 'icinga-icon-accept',
                         handler: function (b, e) {
                             oForm.getForm().doAction(oFormAction);
                         }
                     }, {
-                        text: _('Abort'),
+                        text: _('Cancel'),
                         iconCls: 'icinga-icon-cross',
                         handler: function (b, e) {
                             oWin.close();
