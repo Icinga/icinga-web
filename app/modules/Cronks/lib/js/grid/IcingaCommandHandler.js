@@ -342,9 +342,6 @@ IcingaCommandHandler.prototype = {
             return;
         }
 
-
-
-
         Ext.Ajax.request({
             url: String.format(this.url_info, command),
             scope: this,
