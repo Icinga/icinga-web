@@ -112,26 +112,34 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
         foreach ($records as $record) {
             $state = $record['a_current_state'];
             
-            if ((!$record['a_has_been_checked'] && $record['a_should_be_scheduled']) || ($record['a_should_be_scheduled'] === null)) {
+            if ((!$record['a_has_been_checked'] && $record['a_should_be_scheduled']) || ($record['a_should_be_scheduled'] === null)
+                || $record['a_should_be_scheduled'] == 0) {
                 $state = IcingaConstants::HOST_PENDING;
             }
             
-            if ($record['a_problem_has_been_acknowledged'] !== null) {
-                if ($record['a_problem_has_been_acknowledged']) {
+            if ($type === 'service') {
+                if ($record['hs_current_state'] !== "0" && (int)$record['hs_current_state'] > 0) {
+                    $out[$state]['handled'] += $record['x_count'];
+                } elseif ((int)$record['a_scheduled_downtime_depth'] > 0) {
+                    $out[$state]['handled'] += $record['x_count'];
+                } elseif ($record['a_problem_has_been_acknowledged'] == 1) {
                     $out[$state]['acknowledged'] += $record['x_count'];
-                } elseif ($record['a_scheduled_downtime_depth']) {
-                    $out[$state]['handled'] += $record['x_count']; 
+                } else {
+                    $out[$state]['unacknowledged'] += $record['x_count'];
+                }
+            } elseif ($type === 'host') {
+                if ($record['a_problem_has_been_acknowledged'] == 1) {
+                    if ($record['a_problem_has_been_acknowledged']) {
+                        $out[$state]['acknowledged'] += $record['x_count'];
+                    } elseif ($record['a_scheduled_downtime_depth']) {
+                        $out[$state]['handled'] += $record['x_count'];
+                    } else {
+                        $out[$state]['unacknowledged'] += $record['x_count'];
+                    }
                 }
             }
             
-            if ($type === 'service') {
-                if ($record['hs_current_state'] > 0) {
-                    $out[$state]['handled'] += $record['x_count'];
-                } elseif ($record['a_scheduled_downtime_depth'] > 0) {
-                    $out[$state]['handled'] += $record['x_count'];
-                }  
-            }
-            
+            // Active / passive
             if ($record['a_passive_checks_enabled']) {
                 $out[$state]['active'] += $record['x_count']; 
             } elseif ($record['a_active_checks_enabled']) {
@@ -140,15 +148,23 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
                 $out[$state]['disabled'] += $record['x_count'];
             }
             
+            // Sum
             $out[$state]['count'] += $record['x_count'];
             
         }
-        
+//         var_dump($out);
         foreach ($out as $state=>$array) {
+            
             $out[$state]['working'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['disabled']) > 0 ? $g : 0;
-            $out[$state]['unacknowledged'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['acknowledged'] - (int)$out[$state]['handled']) > 0 ? $g : 0;
+            
+            
+            /*
+             * 
+             */
+            // $out[$state]['unacknowledged'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['acknowledged'] - (int)$out[$state]['handled']) > 0 ? $g : 0; 
+            
         }
-        
+//         var_dump($out);
         $sum = $this->createStateDescriptor(100, 'TOTAL', $type);
         foreach ($out as $a) {
             foreach ($sum as $k=>&$b) {
