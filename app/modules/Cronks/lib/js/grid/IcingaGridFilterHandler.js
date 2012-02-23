@@ -57,7 +57,8 @@ Cronk.util.GridFilterWindow = function() {
 					// layout: 'fit',
 					
 					defaults: {
-						border: false
+						border: false,
+                        padding: 5
 					},
 					
 					listeners: {
@@ -121,8 +122,15 @@ Cronk.util.GridFilterWindow = function() {
 						},
 						scope: pub
 					},
-	
-					bbar: {
+                    tbar: [{
+                        text: _("Reset"),
+                        iconCls: 'icinga-icon-delete',
+                        handler: function(b, y) {
+                            pub.resetFilterForm();
+                        }
+
+                    }],
+					buttons: {
 						items: [{
 							text: _("Apply"),
 							iconCls: 'icinga-icon-accept',
@@ -130,16 +138,10 @@ Cronk.util.GridFilterWindow = function() {
 								pub.applyFilters();
 							}
 						},{
-							text: _("Discard"),
+							text: _("Cancel"),
 							iconCls: 'icinga-icon-cross',
 							handler: function(b, y) {
 								oWin.hide();
-							}
-						}, '-',{
-							text: _("Reset"),
-							iconCls: 'icinga-icon-delete',
-							handler: function(b, y) {
-								pub.resetFilterForm();
 							}
 						}]
 					}
