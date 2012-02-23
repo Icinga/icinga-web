@@ -15,8 +15,7 @@ Ext.ns('Icinga.Cronks.System');
         title: _('Add new category'),
         iconCls: 'icinga-icon-category',
         modal: true,
-
-        bbar: ['->'],
+       
 
         constructor: function (config) {
 
@@ -30,18 +29,20 @@ Ext.ns('Icinga.Cronks.System');
         initComponent: function () {
             Icinga.Cronks.System.CategoryEditorForm.superclass.initComponent.call(this);
 
-            this.getBottomToolbar().add({
-                iconCls: 'icinga-action-icon-cancel',
-                text: _('Cancel'),
-                handler: function (b, e) {
-                    this.close();
-                },
-                scope: this
-            }, {
+            this.addButton({
                 iconCls: 'icinga-action-icon-ok',
                 text: _('OK'),
                 handler: function (b, e) {
                     this.doSubmit();
+                },
+                scope: this
+            })
+
+            this.addButton({
+                iconCls: 'icinga-action-icon-cancel',
+                text: _('Cancel'),
+                handler: function (b, e) {
+                    this.close();
                 },
                 scope: this
             });
@@ -184,7 +185,23 @@ Ext.ns('Icinga.Cronks.System');
                 selModel: new Ext.grid.RowSelectionModel({
                     singleSelect: true
                 }),
-
+                buttons: [{
+                    text: _('OK'),
+                    iconCls: 'icinga-icon-accept',
+                    handler: function (b, e) {
+                        this.grid.store.save();
+                        this.hide();
+                    },
+                    scope: this
+                },{
+                    text: _('Cancel'),
+                    iconCls: 'icinga-action-icon-cancel',
+                    handler: function (b, e) {
+                        this.grid.store.rejectChanges();
+                        this.hide();
+                    },
+                    scope: this
+                }],
                 store: new Ext.data.JsonStore({
                     url: AppKit.c.path + '/modules/cronks/provider/categories',
                     writer: writer,
@@ -247,25 +264,14 @@ Ext.ns('Icinga.Cronks.System');
                     forceFit: true
                 },
 
-                bbar: ['->',
-                {
-                    text: _('Cancel'),
-                    iconCls: 'icinga-action-icon-cancel',
-                    handler: function (b, e) {
-                        this.grid.store.rejectChanges();
-                        this.hide();
-                    },
-                    scope: this
-                }, '-',
-                {
+                tbar: [{
                     text: _('Reload'),
-                    iconCls: 'icinga-icon-database-refresh',
+                    iconCls: 'icinga-icon-arrow-refresh',
                     handler: function (b, e) {
                         this.grid.getStore().reload();
                     },
                     scope: this
-                }, '-',
-                {
+                }, '-', {
                     text: _('Add'),
                     iconCls: 'icinga-icon-add',
                     handler: function (b, e) {
@@ -311,15 +317,6 @@ Ext.ns('Icinga.Cronks.System');
                         }
 
                         this.grid.store.remove(record);
-                    },
-                    scope: this
-                }, '-',
-                {
-                    text: _('OK'),
-                    iconCls: 'icinga-icon-accept',
-                    handler: function (b, e) {
-                        this.grid.store.save();
-                        this.hide();
                     },
                     scope: this
                 }]
