@@ -21,6 +21,18 @@ Cronk.grid.ColumnRendererUtil = function() {
 			return tpl.apply(data);
 		},
 		
+        applyXTemplateOnMetaData: function(metaData,store,rowIndex) {
+            for(var i in metaData) {
+                if(Ext.isString(metaData[i]))
+                    metaData[i] = Cronk.grid.ColumnRendererUtil.applyXTemplate({
+                        getStore :function() {return store;}
+                    },
+                    rowIndex,
+                    metaData[i]
+                );
+            }
+        },
+
 		testBooleanCondition : function(field, record) {
 			if (Ext.isEmpty(record.data[field]) === false) {
 				return Boolean(Ext.decode(record.data[field]));
@@ -100,9 +112,9 @@ Cronk.grid.ColumnRenderer = {
 	columnElement : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			var my = cfg;	// local reference
-			
+
 			Ext.apply(metaData, Cronk.grid.ColumnRendererUtil.metaDataObject(my));
-			
+			Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
 			if (("value" in my)) {
 				return my.value;
 			}
@@ -118,6 +130,7 @@ Cronk.grid.ColumnRenderer = {
 	columnMetaData : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			Ext.apply(metaData, Cronk.grid.ColumnRendererUtil.metaDataObject(cfg));
+            Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
 			return String.format('{0}', value);
 		}
 	},
@@ -133,7 +146,7 @@ Cronk.grid.ColumnRenderer = {
             }
             
             Ext.apply(metaData, Cronk.grid.ColumnRendererUtil.metaDataObject(my));
-            
+            Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
             var flat_attr = metaData.attr;
             
             delete metaData.attr;
@@ -171,7 +184,7 @@ Cronk.grid.ColumnRenderer = {
 			if (!Ext.isEmpty(cfg.qtip)) {
 				metaData.attr = "ext:qtip='" + cfg.qtip + "'";
 			}
-			
+			Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
 			return '<div class="' + iconCls + '"></div>';
 		}
 	},
@@ -179,6 +192,7 @@ Cronk.grid.ColumnRenderer = {
 	columnImageFromValue : function(cfg) {
 		return function(value, metaData, record, rowIndex, colIndex, store) {
 			metaData.style += String.format("background: transparent url('{0}') center center no-repeat;", AppKit.util.Dom.imageUrl(value));
+            Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
 			return "<div style=\"width: 24px; height: 24px\"></div>";
 		}
 	},
