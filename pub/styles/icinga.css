@@ -1048,3 +1048,9 @@ div.icinga-row-downtime {
 .login-page .x-panel-body {
     border: none;
 }
+
+/** Search Box **/
+input.icinga-global-search-box {
+    padding-left: 22px;
+    background: #fff url("../images/icons/magnifier.png") 2px center no-repeat;
+}

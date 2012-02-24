@@ -86,6 +86,7 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
                 listeners: {
                     show: function(w) {
                     	var h = AppKit.search.SearchHandler.getSearchbox();
+                    	AppKit.search.SearchHandler.activate();
                         h.focus(false, 100);
                     },
                     hide : function() {
