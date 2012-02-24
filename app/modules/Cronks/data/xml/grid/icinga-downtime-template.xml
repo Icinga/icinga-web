@@ -204,14 +204,13 @@
             
             <display>
                 <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
+                <parameter name="label">Object type</parameter>
                 <parameter name="width">25</parameter>
                 <parameter name="Ext.grid.Column">
                     <parameter name="menuDisabled">true</parameter>
                     <parameter name="fixed">true</parameter>
                 </parameter>
                 
-                <!-- Let the agavi translation manager transform the date -->
                 <parameter name="userFunc">
                     <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
                     <parameter name="method">icingaDowntimeType</parameter>
@@ -429,6 +428,58 @@
             </order>
         </field>
         
+        <field name="downtime_type_fixed">
+            <datasource>
+                <parameter name="field">DOWNTIME_IS_FIXED</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Downtime type</parameter>
+                
+                <parameter name="width">24</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                
+                <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">booleanImage</parameter>
+                            <parameter name="arguments">
+                                <parameter name="TrueImageClass">icinga-icon-monitoring-downtime-fixed</parameter>
+                                <parameter name="TrueQtipText">Fixed downtime</parameter>
+                                <parameter name="FalseImageClass">icinga-icon-monitoring-downtime-flexible</parameter>
+                                <parameter name="FalseQtipText">Flexible downtime</parameter>
+                            </parameter>
+                    </parameter>
+                </parameter>
+                <!-- 
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRendererUtil</parameter>
+                    <parameter name="function">booleanImage</parameter>
+                    <parameter name="type">renderer</parameter>
+                    <parameter name="arguments">
+                        <parameter name="TrueImageClass">icinga-icon-monitoring-downtime-fixed</parameter>
+                        <parameter name="FalseImageClass">icinga-icon-monitoring-downtime-flexible</parameter>
+                    </parameter>
+                </parameter>
+                 -->
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+                <parameter name="order">ASC</parameter>
+            </order>
+        </field>
+        
         <field name="downtime_scheduled_start">
             <datasource>
                 <parameter name="field">DOWNTIME_SCHEDULED_START_TIME</parameter>
@@ -565,7 +616,7 @@
             
             <display>
                 <parameter name="visible">true</parameter>
-
+                <parameter name="label">Currently running</parameter>
                 <parameter name="icon">icinga-icon-downtime</parameter>
                 <parameter name="width">25</parameter>
                 <parameter name="Ext.grid.Column">
