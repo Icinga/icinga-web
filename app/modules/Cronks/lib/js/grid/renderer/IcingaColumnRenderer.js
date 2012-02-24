@@ -52,10 +52,13 @@ Cronk.grid.IcingaColumnRenderer = {
                 Ext.iterate(
                     cfg.filter,
                     function (key, value) {
-                        this.push({key: key, value: grid.getStore().getAt(rowIndex).data[value]});
+                        this.push({
+                            key: key,
+                            value: grid.getStore().getAt(rowIndex).data[value]
+                            });
                     },
                     cfg.processedFilterData
-                );
+                    );
                 
                 Icinga.util.SimpleDataProvider.createToolTip({
                     title: cfg.title,
@@ -101,8 +104,6 @@ Cronk.grid.IcingaColumnRenderer = {
         if (!'url' in cfg) {
             throw('url XTemplate configuration needed! (parameter name="url")');
         }
-        
-        cfg.url = encodeURI(cfg.url);
         return function(grid, rowIndex, colIndex, e) {
             var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
             var title = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.title);
@@ -111,22 +112,22 @@ Cronk.grid.IcingaColumnRenderer = {
             if (fieldName == cfg.field) {
                 
                 if (Ext.isEmpty(cfg.booleanConditionField) == false) {
-                	var record = grid.getStore().getAt(rowIndex);
+                    var record = grid.getStore().getAt(rowIndex);
                     if (!Cronk.grid.ColumnRendererUtil.testBooleanCondition(cfg.booleanConditionField, record)) {
                         return;
                     }
                 }
                 
                 var dhelper_spec = {
-                        tag: 'img',
-                        src: url
+                    tag: 'img',
+                    src: encodeURI(url)
                 };
                 
                 var qtip_spec = {
-                        target: e.getTarget(),
-                        bodyCfg: dhelper_spec,
-                        title: title,
-                        anchor: 'left'
+                    target: e.getTarget(),
+                    bodyCfg: dhelper_spec,
+                    title: title,
+                    anchor: 'left'
                 };
                 
                 Ext.iterate(['width', 'height'], function(item, index, allItems) {
@@ -136,7 +137,7 @@ Cronk.grid.IcingaColumnRenderer = {
                 });
                 
                 var toolTip = new Ext.ToolTip(qtip_spec);
-                
+               
                 toolTip.render(Ext.getBody());
                 
                 toolTip.on('hide', function(tt) {
@@ -153,7 +154,7 @@ Cronk.grid.IcingaColumnRenderer = {
         if (!'url' in cfg) {
             throw('url XTemplate configuration needed! (parameter name="url")');
         }
-        cfg.url = encodeURI(cfg.url);
+        
         return function(grid, rowIndex, colIndex, e) {
             
             var url = Cronk.grid.ColumnRendererUtil.applyXTemplate(grid, rowIndex, cfg.url);
@@ -175,7 +176,7 @@ Cronk.grid.IcingaColumnRenderer = {
                     'title': title,
                     'crname': 'genericIFrame',
                     'params': {
-                        url:  url
+                        url:  encodeURI(url)
                     },
                     'closable':true
                 });
