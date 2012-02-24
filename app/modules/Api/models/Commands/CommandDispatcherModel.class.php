@@ -78,7 +78,8 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
                 $str .= ";";
             } else {
                 $val = $params[$vals["alias"]];
-
+                $val = preg_replace("/\n/"," ",$val);
+                    
                 switch ($vals["type"]) {
                     case "date":
                         $val = strtotime($val);
@@ -90,6 +91,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
                 else
                     $str .= "|".$val;
             }
+
         }
         return $str;
     }
