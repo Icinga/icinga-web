@@ -39,7 +39,7 @@
                             <parameter name="css">x-icinga-grid-link
                             </parameter>
                             <parameter name="attr">
-                                <parameter name="qtip">Display
+                                <parameter name="ext:qtip">Display
                                     performance graph</parameter>
                             </parameter>
                         </parameter>
@@ -111,7 +111,7 @@
                             <parameter name="css">x-icinga-grid-link
                             </parameter>
                             <parameter name="attr">
-                                <parameter name="qtip">Show host
+                                <parameter name="ext:qtip">Show host
                                     perfdata for this service
                                 </parameter>
                             </parameter>
