@@ -43,8 +43,10 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
             $command = $this->getCommand($cmd_name);
            
             $string = $this->buildCommandString($command,$params);   
+           
             if($onlySimple && !$command["isSimple"])
                 throw new Exception("Could not send command. Your user isn't allowed to send this command.");
+            
             $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
                                                  array(
                                                          "command" => "printf",
@@ -81,10 +83,12 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
                     case "date":
                         $val = strtotime($val);
                         break;
-
                 }
-
-                $str .= ";".$val;
+                // Perfdata is a a special case that requires | instead of ;
+                if($param != "COMMAND_PERFDATA")
+                    $str .= ";".$val;
+                else
+                    $str .= "|".$val;
             }
         }
         return $str;
