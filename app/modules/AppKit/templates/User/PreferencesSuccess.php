@@ -254,6 +254,7 @@ Ext.onReady(function() {
 								},
 								success: function() {
 									AppKit.notifyMessage(_('App reset'), _('Your application profile has been deleted!'));
+                                    window.location.reload();
 								}
 
 							});
