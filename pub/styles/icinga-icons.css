@@ -44,6 +44,12 @@
 .icinga-icon-info-passive { background-image: url("../images/icons/arrow-in.png") !important; background-repeat: no-repeat; }
 
 /*
+ * Misc monitoring icons
+ */
+.icinga-icon-monitoring-downtime-fixed { background-image: url("../images/icons/chain--arrow.png") !important; background-repeat: no-repeat; }
+.icinga-icon-monitoring-downtime-flexible { background-image: url("../images/icons/chain-unchain.png") !important; background-repeat: no-repeat; }
+
+/*
  * Common actions
  */
 .icinga-action-icon-search { background-image: url(../images/icons/magnifier.png) !important; background-repeat: no-repeat; background-position: center center; }
@@ -58,14 +64,14 @@
 .icinga-icon-cancel { background-image: url(../images/icons/cross-circle-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-chart-pie { background-image: url(../images/icons/chart-pie.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application { background-image: url(../images/icons/application.png) !important; background-repeat: no-repeat; }
-.icinga-icon-application-add { background-image: url(../images/icons/application-plus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-add { background-image: url(../images/icons/application--plus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-cascade { background-image: url(../images/icons/applications.png) !important; background-repeat: no-repeat; }
-.icinga-icon-application-delete { background-image:  url(../images/icons/application-remove.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-delete { background-image:  url(../images/icons/application--minus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-double { background-image: url(../images/icons/application-tile.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-edit { background-image: url(../images/icons/application--pencil.png) !important; background-repeat: no-repeat; }
-.icinga-icon-application-error { background-image: url(../images/icons/application-exclamation.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-error { background-image: url(../images/icons/application--exclamation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-form { background-image: url(../images/icons/application-form.png) !important; background-repeat: no-repeat; }
-.icinga-icon-application-lightning { background-image: url(../images/icons/application-exclamation.png) !important; background-repeat: no-repeat; }
+.icinga-icon-application-lightning { background-image: url(../images/icons/application--exclamation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-side-boxes { background-image: url(../images/icons/application-sidebar.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-split { background-image: url(../images/icons/application-split.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-view_columns { background-image: url(../images/icons/application-documents.png) !important; background-repeat: no-repeat; }
@@ -75,12 +81,12 @@
 .icinga-icon-application-minus { background-image: url(../images/icons/application--minus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-application-xp { background-image: url(../images/icons/application_xp.png) !important; background-repeat: no-repeat; }
 .icinga-icon-lock { background-image: url(../images/icons/lock.png) !important; background-repeat: no-repeat; }
-.icinga-icon-lock-open { background-image: url(../images/icons/lock_unlock.png) !important; background-repeat: no-repeat; }
+.icinga-icon-lock-open { background-image: url(../images/icons/lock-unlock.png) !important; background-repeat: no-repeat; }
 .icinga-icon-wrench { background-image: url(../images/icons/wrench.png) !important; background-repeat: no-repeat; }
 .icinga-icon-wrench-screwdriver { background-image: url(../images/icons/wrench-screwdriver.png) !important; background-repeat: no-repeat; } 
 .icinga-icon-user { background-image: url(../images/icons/user.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-add { background-image: url(../images/icons/user--plus.png) !important; background-repeat: no-repeat; }
-.icinga-icon-user-comment { background-image: url(../images/icons/user-pencil.png) !important; background-repeat: no-repeat; }
+.icinga-icon-user-comment { background-image: url(../images/icons/user--pencil.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-delete { background-image: url(../images/icons/user--minus.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-edit { background-image: url(../images/icons/user--pencil.png) !important; background-repeat: no-repeat; }
 .icinga-icon-user-go { background-image: url(../images/icons/door-open-out.png) !important; background-repeat: no-repeat; }

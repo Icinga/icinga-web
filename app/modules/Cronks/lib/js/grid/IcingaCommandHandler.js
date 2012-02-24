@@ -262,14 +262,7 @@ IcingaCommandHandler.prototype = {
                 allowBlank: !(o.fieldRequired || false),
                 enableKeyEvents: true,
                 listeners: {
-                    /*
-                     * For text consistency system-wide
-                     */
-                    keydown: function (textField, event) {
-                        if (event.getKey() === Ext.EventObject.ENTER) {
-                            event.stopEvent();
-                        }
-                    }
+                    
                 }
             });
             return new Ext.form.TextArea(oDef);

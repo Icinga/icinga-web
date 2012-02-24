@@ -16,7 +16,7 @@ Ext.onReady(function() {
 				layout: 'border',
 				defaults: { border: false },
 				items: [
-					{ layout: 'fit', region: 'north', id: 'viewport-north', border: false, height: 30 }, 
+					{ layout: 'fit', region: 'north', id: 'viewport-north', border: false, height: 27 }, 
 					{ layout: 'fit',region: 'center', id: 'viewport-center', border: false, contentEl: 'content' }
 				]
 			});
