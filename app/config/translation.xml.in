@@ -7,186 +7,186 @@
      to set your timezone like this:
      -->
      <!--
-	 <available_locales default_locale="en" default_timezone="GMT">
+     <available_locales default_locale="en" default_timezone="GMT">
      -->
-	 <available_locales default_locale="en" >
-		<!-- German, Germany -->
-		<available_locale identifier="de_DE">
-		  <ae:parameter name="description">Deutsch</ae:parameter>
-		</available_locale>
-		<!-- English -->
-		<available_locale identifier="en">
-		  <ae:parameter name="description">English</ae:parameter>
-		</available_locale>
-		<!-- Spanish -->
-		<available_locale identifier="es">
-		  <ae:parameter name="description">Español</ae:parameter>
-		</available_locale>
-		<!-- Polish -->
-		<available_locale identifier="pl">
-		  <ae:parameter name="description">Polski</ae:parameter>
-		</available_locale>
-		<!-- Czech -->
-		<available_locale identifier="cs">
+     <available_locales default_locale="en" >
+        <!-- German, Germany -->
+        <available_locale identifier="de_DE">
+          <ae:parameter name="description">Deutsch</ae:parameter>
+        </available_locale>
+        <!-- English -->
+        <available_locale identifier="en">
+          <ae:parameter name="description">English</ae:parameter>
+        </available_locale>
+        <!-- Spanish -->
+        <available_locale identifier="es">
+          <ae:parameter name="description">Español</ae:parameter>
+        </available_locale>
+        <!-- Polish -->
+        <available_locale identifier="pl">
+          <ae:parameter name="description">Polski</ae:parameter>
+        </available_locale>
+        <!-- Czech -->
+        <available_locale identifier="cs">
                   <ae:parameter name="description">Czech</ae:parameter>
                 </available_locale>
-		<!-- Portugese -->
-		<available_locale identifier="pt">
-		  <ae:parameter name="description">Portugese</ae:parameter>
-		</available_locale>
-		<!-- Brazilian Portugese -->
-		<available_locale identifier="pt_BR">
-		  <ae:parameter name="description">Brazilian Portugese</ae:parameter>
-		</available_locale>
-		<!-- Bulgarian -->
-		<available_locale identifier="bg">
-		  <ae:parameter name="description">Bulgarian</ae:parameter>
-		</available_locale>
-		<!-- Catalan -->
-		<available_locale identifier="ca">
-		  <ae:parameter name="description">Catalan</ae:parameter>
-		</available_locale>
-		<!-- Danish -->
-		<available_locale identifier="da">
-		  <ae:parameter name="description">Danish</ae:parameter>
-		</available_locale>
-		<!-- Greek -->
-		<available_locale identifier="el">
-		  <ae:parameter name="description">Greek</ae:parameter>
-		</available_locale>
-		<!-- Finnish -->
-		<available_locale identifier="fi">
-		  <ae:parameter name="description">Finnish</ae:parameter>
-		</available_locale>
-		<!-- French -->
-		<available_locale identifier="fr">
-		  <ae:parameter name="description">French</ae:parameter>
-		</available_locale>
-		<!-- Hebrew -->
-		<available_locale identifier="he">
-		  <ae:parameter name="description">Hebrew</ae:parameter>
-		</available_locale>
-		<!-- Croatian -->
-		<available_locale identifier="hr">
-		  <ae:parameter name="description">Croatian</ae:parameter>
-		</available_locale>
-		<!-- Hungarian -->
-		<available_locale identifier="hu">
-		  <ae:parameter name="description">Hungarian</ae:parameter>
-		</available_locale>
-		<!-- Italian -->
-		<available_locale identifier="it">
-		  <ae:parameter name="description">Italian</ae:parameter>
-		</available_locale>
-		<!-- Japanese -->
-		<available_locale identifier="ja">
-		  <ae:parameter name="description">Japanese</ae:parameter>
-		</available_locale>
-		<!-- Luxembourgish -->
-		<available_locale identifier="lb">
-		  <ae:parameter name="description">Luxembourgish</ae:parameter>
-		</available_locale>
-		<!-- Bokmål -->
-		<available_locale identifier="nb">
-		  <ae:parameter name="description">Bokmål</ae:parameter>
-		</available_locale>
-		<!-- Dutch -->
-		<available_locale identifier="nl">
-		  <ae:parameter name="description">Dutch</ae:parameter>
-		</available_locale>
-		<!-- Norwegian -->
-		<available_locale identifier="nn">
-		  <ae:parameter name="description">Norwegian</ae:parameter>
-		</available_locale>
-		<!-- Romanian -->
-		<available_locale identifier="ro">
-		  <ae:parameter name="description">Romanian</ae:parameter>
-		</available_locale>
-		<!-- Russian -->
-		<available_locale identifier="ru">
-		  <ae:parameter name="description">Russian</ae:parameter>
-		</available_locale>
-		<!-- Slovak -->
-		<available_locale identifier="sk">
-		  <ae:parameter name="description">Slovak</ae:parameter>
-		</available_locale>
-		<!-- Swedish -->
-		<available_locale identifier="sv">
-		  <ae:parameter name="description">Swedish</ae:parameter>
-		</available_locale>
-		<!-- Turkish -->
-		<available_locale identifier="tr">
-		  <ae:parameter name="description">Turkish</ae:parameter>
-		</available_locale>
-		<!-- Chinese -->
-		<available_locale identifier="zh_CN">
-		  <ae:parameter name="description">Chinese</ae:parameter>
-		</available_locale>
-	 </available_locales>
-	 <!--
-		
-			This is quite important. If you're using an gettext translator, the domain
-			have to assembled of translator and text_domain:
-			
-			* icinga.default
-			
-		-->
+        <!-- Portugese -->
+        <available_locale identifier="pt">
+          <ae:parameter name="description">Portugese</ae:parameter>
+        </available_locale>
+        <!-- Brazilian Portugese -->
+        <available_locale identifier="pt_BR">
+          <ae:parameter name="description">Brazilian Portugese</ae:parameter>
+        </available_locale>
+        <!-- Bulgarian -->
+        <available_locale identifier="bg">
+          <ae:parameter name="description">Bulgarian</ae:parameter>
+        </available_locale>
+        <!-- Catalan -->
+        <available_locale identifier="ca">
+          <ae:parameter name="description">Catalan</ae:parameter>
+        </available_locale>
+        <!-- Danish -->
+        <available_locale identifier="da">
+          <ae:parameter name="description">Danish</ae:parameter>
+        </available_locale>
+        <!-- Greek -->
+        <available_locale identifier="el">
+          <ae:parameter name="description">Greek</ae:parameter>
+        </available_locale>
+        <!-- Finnish -->
+        <available_locale identifier="fi">
+          <ae:parameter name="description">Finnish</ae:parameter>
+        </available_locale>
+        <!-- French -->
+        <available_locale identifier="fr">
+          <ae:parameter name="description">French</ae:parameter>
+        </available_locale>
+        <!-- Hebrew -->
+        <available_locale identifier="he">
+          <ae:parameter name="description">Hebrew</ae:parameter>
+        </available_locale>
+        <!-- Croatian -->
+        <available_locale identifier="hr">
+          <ae:parameter name="description">Croatian</ae:parameter>
+        </available_locale>
+        <!-- Hungarian -->
+        <available_locale identifier="hu">
+          <ae:parameter name="description">Hungarian</ae:parameter>
+        </available_locale>
+        <!-- Italian -->
+        <available_locale identifier="it">
+          <ae:parameter name="description">Italian</ae:parameter>
+        </available_locale>
+        <!-- Japanese -->
+        <available_locale identifier="ja">
+          <ae:parameter name="description">Japanese</ae:parameter>
+        </available_locale>
+        <!-- Luxembourgish -->
+        <available_locale identifier="lb">
+          <ae:parameter name="description">Luxembourgish</ae:parameter>
+        </available_locale>
+        <!-- Bokmål -->
+        <available_locale identifier="nb">
+          <ae:parameter name="description">Bokmål</ae:parameter>
+        </available_locale>
+        <!-- Dutch -->
+        <available_locale identifier="nl">
+          <ae:parameter name="description">Dutch</ae:parameter>
+        </available_locale>
+        <!-- Norwegian -->
+        <available_locale identifier="nn">
+          <ae:parameter name="description">Norwegian</ae:parameter>
+        </available_locale>
+        <!-- Romanian -->
+        <available_locale identifier="ro">
+          <ae:parameter name="description">Romanian</ae:parameter>
+        </available_locale>
+        <!-- Russian -->
+        <available_locale identifier="ru">
+          <ae:parameter name="description">Russian</ae:parameter>
+        </available_locale>
+        <!-- Slovak -->
+        <available_locale identifier="sk">
+          <ae:parameter name="description">Slovak</ae:parameter>
+        </available_locale>
+        <!-- Swedish -->
+        <available_locale identifier="sv">
+          <ae:parameter name="description">Swedish</ae:parameter>
+        </available_locale>
+        <!-- Turkish -->
+        <available_locale identifier="tr">
+          <ae:parameter name="description">Turkish</ae:parameter>
+        </available_locale>
+        <!-- Chinese -->
+        <available_locale identifier="zh_CN">
+          <ae:parameter name="description">Chinese</ae:parameter>
+        </available_locale>
+     </available_locales>
+     <!--
+        
+            This is quite important. If you're using an gettext translator, the domain
+            have to assembled of translator and text_domain:
+            
+            * icinga.default
+            
+        -->
 
-		<translators default_domain="icinga.default">
-		
-			<translator domain="icinga">
-			
-					<!-- Text -->
-					<message_translator class="AppKitGettextTranslator">
-						<ae:parameter name="text_domains">
-							<ae:parameter name="default">%core.root_dir%/app/data/i18n/mo</ae:parameter>
-						</ae:parameter>
+        <translators default_domain="icinga.default">
+        
+            <translator domain="icinga">
+            
+                    <!-- Text -->
+                    <message_translator class="AppKitGettextTranslator">
+                        <ae:parameter name="text_domains">
+                            <ae:parameter name="default">%core.root_dir%/app/data/i18n/mo</ae:parameter>
+                        </ae:parameter>
                         <!-- pattern for automatic module domain detection -->
                         <ae:parameter name="text_domain_pattern">
                             %core.root_dir%/app/modules/${domain}/data/i18n/mo                       
                         </ae:parameter>
-					</message_translator>
-					
-					<!-- Date/time (also important for the validators) -->
-					<date_formatter>
-						<ae:parameter name="type">date</ae:parameter>
-						<ae:parameter name="format">full</ae:parameter>
-					</date_formatter>
-					
-			</translator>
+                    </message_translator>
+                    
+                    <!-- Date/time (also important for the validators) -->
+                    <date_formatter>
+                        <ae:parameter name="type">date</ae:parameter>
+                        <ae:parameter name="format">full</ae:parameter>
+                    </date_formatter>
+                    
+            </translator>
 
-			<!--
-				Date domains
-				* To handle specific formats
-			-->
-			<translator domain="date-short">
-				<date_formatter>
-					<ae:parameter name="type">date</ae:parameter>
-					<ae:parameter name="format">short</ae:parameter>
-				</date_formatter>
-			</translator>
+            <!--
+                Date domains
+                * To handle specific formats
+            -->
+            <translator domain="date-short">
+                <date_formatter>
+                    <ae:parameter name="type">date</ae:parameter>
+                    <ae:parameter name="format">short</ae:parameter>
+                </date_formatter>
+            </translator>
 
-			<translator domain="date-medium">
-				<date_formatter>
-					<ae:parameter name="type">date</ae:parameter>
-					<ae:parameter name="format">medium</ae:parameter>
-				</date_formatter>
-			</translator>
+            <translator domain="date-medium">
+                <date_formatter>
+                    <ae:parameter name="type">date</ae:parameter>
+                    <ae:parameter name="format">medium</ae:parameter>
+                </date_formatter>
+            </translator>
 
-			<translator domain="date-tstamp">
-				<date_formatter>
-					<ae:parameter name="type">date</ae:parameter>
-					<ae:parameter name="format">yyyy-MM-dd HH:mm:ss</ae:parameter>
-				</date_formatter>
-			</translator>
+            <translator domain="date-tstamp">
+                <date_formatter>
+                    <ae:parameter name="type">date</ae:parameter>
+                    <ae:parameter name="format">yyyy-MM-dd HH:mm:ss</ae:parameter>
+                </date_formatter>
+            </translator>
 
-		</translators>
-		
-	</ae:configuration>
+        </translators>
+        
+    </ae:configuration>
 
-	<!--  Try include the overwriting file -->
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/translation.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
-		<xi:fallback></xi:fallback>
-	</xi:include>
+    <!--  Try include the overwriting file -->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/translation.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
+        <xi:fallback></xi:fallback>
+    </xi:include>
 
 </ae:configurations>

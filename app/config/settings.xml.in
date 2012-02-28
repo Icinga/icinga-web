@@ -1,96 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/settings/1.0">
-	<ae:configuration>
-		<system_actions>
+    <ae:configuration>
+        <system_actions>
 
-			<system_action name="default">
-				<module>AppKit</module>
-				<action>Index</action>
-			</system_action>
+            <system_action name="default">
+                <module>AppKit</module>
+                <action>Index</action>
+            </system_action>
 
-			<system_action name="error_404">
-				<module>AppKit</module>
-				<action>Error404</action>
-			</system_action>
+            <system_action name="error_404">
+                <module>AppKit</module>
+                <action>Error404</action>
+            </system_action>
 
-			<system_action name="unavailable">
-				<module>AppKit</module>
-				<action>Unavailable</action>
-			</system_action>
+            <system_action name="unavailable">
+                <module>AppKit</module>
+                <action>Unavailable</action>
+            </system_action>
 
-			<system_action name="module_disabled">
-				<module>AppKit</module>
-				<action>ModuleDisabled</action>
-			</system_action>
+            <system_action name="module_disabled">
+                <module>AppKit</module>
+                <action>ModuleDisabled</action>
+            </system_action>
 
-			<system_action name="secure">
-				<module>AppKit</module>
-				<action>Secure</action>
-			</system_action>
+            <system_action name="secure">
+                <module>AppKit</module>
+                <action>Secure</action>
+            </system_action>
 
-			<system_action name="login">
-				<module>AppKit</module>
-				<action>Login.SilentAuth</action>
-			</system_action>
+            <system_action name="login">
+                <module>AppKit</module>
+                <action>Login.SilentAuth</action>
+            </system_action>
 
-		</system_actions>
+        </system_actions>
 
-		<settings>
-			<setting name="app_name">@app_name@</setting>
+        <settings>
+            <setting name="app_name">@app_name@</setting>
 
-			<setting name="available">true</setting>
-			
-			<setting name="debug">@flag_debug@</setting>
+            <setting name="available">true</setting>
+            
+            <setting name="debug">@flag_debug@</setting>
 
-			<setting name="use_database">true</setting>
-			<setting name="use_logging">true</setting>
-			<setting name="use_security">true</setting>
-			<setting name="use_translation">true</setting>
-		</settings>
+            <setting name="use_database">true</setting>
+            <setting name="use_logging">true</setting>
+            <setting name="use_security">true</setting>
+            <setting name="use_translation">true</setting>
+        </settings>
 
-		<settings>
-			<setting name="data_dir">%core.app_dir%/data</setting>
-			<setting name="log_dir">%core.data_dir%/log</setting>
-			<setting name="share_dir">%core.data_dir%/share</setting>
-		</settings>
-		
-		<!-- Include our icinga settings -->
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.xml"/>
-		
-		<!--  Try include the overwriting file -->
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/icinga.xml">
-			<xi:fallback />
-		</xi:include>
+        <settings>
+            <setting name="data_dir">%core.app_dir%/data</setting>
+            <setting name="log_dir">%core.data_dir%/log</setting>
+            <setting name="share_dir">%core.data_dir%/share</setting>
+        </settings>
+        
+        <!-- Include our icinga settings -->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="icinga.xml"/>
+        
+        <!--  Try include the overwriting file -->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/icinga.xml">
+            <xi:fallback />
+        </xi:include>
 
-	
+    
 
-		<exception_templates>
-			<!-- this is the exception template that's used by default unless one for a specific context has been defined, or for the current output type -->
-			<!-- note that exceptions that occur before a context is even fully initialized, or an exception that happens before the output types are loaded and determined, will use a template defined here -->
-			<!-- <exception_template>%core.agavi_dir%/exception/templates/shiny.php</exception_template> -->
-			<!-- an example for per-context exception templates -->
-			<!-- per-output-type templates can be set in output_types.xml -->
-			<exception_template>%core.template_dir%/exceptions/web.php</exception_template>
-			
-		</exception_templates>
+        <exception_templates>
+            <!-- this is the exception template that's used by default unless one for a specific context has been defined, or for the current output type -->
+            <!-- note that exceptions that occur before a context is even fully initialized, or an exception that happens before the output types are loaded and determined, will use a template defined here -->
+            <!-- <exception_template>%core.agavi_dir%/exception/templates/shiny.php</exception_template> -->
+            <!-- an example for per-context exception templates -->
+            <!-- per-output-type templates can be set in output_types.xml -->
+            <exception_template>%core.template_dir%/exceptions/web.php</exception_template>
+            
+        </exception_templates>
 
-	</ae:configuration>
+    </ae:configuration>
 
-	<ae:configuration environment="development.*">
-	</ae:configuration>
+    <ae:configuration environment="development.*">
+    </ae:configuration>
 
-	<ae:configuration environment="production.*">
-		<exception_templates>
-			<!-- a different exception template for production -->
-			<!-- it really doesn't do much -->
-			<exception_template>%core.template_dir%/exceptions/_default.php</exception_template>
-			<!-- for the web, we want one that returns a 500 status -->
-			<exception_template context="web">%core.template_dir%/exceptions/web.php</exception_template>
+    <ae:configuration environment="production.*">
+        <exception_templates>
+            <!-- a different exception template for production -->
+            <!-- it really doesn't do much -->
+            <exception_template>%core.template_dir%/exceptions/_default.php</exception_template>
+            <!-- for the web, we want one that returns a 500 status -->
+            <exception_template context="web">%core.template_dir%/exceptions/web.php</exception_template>
 
-		</exception_templates>
-	</ae:configuration>
+        </exception_templates>
+    </ae:configuration>
 
-	<!--  Try include the overwriting file -->
+    <!--  Try include the overwriting file -->
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/settings.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">
                 <xi:fallback></xi:fallback>
         </xi:include>
