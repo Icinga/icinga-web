@@ -79,16 +79,30 @@
                     <ae:parameter>%core.module_dir%/AppKit/config/menu.xml</ae:parameter>
                 </setting>
 
-				<setting name="agavi.include.routing">
-					<ae:parameter>%core.module_dir%/AppKit/config/routing.xml</ae:parameter>
-				</setting>
+                <setting name="agavi.include.routing">
+                	<ae:parameter>%core.module_dir%/AppKit/config/routing.xml</ae:parameter>
+                </setting>
+
+                <setting name="verbose">
+                    <!--  Debug output for db queries -->
+                    <!-- 
+                    <ae:parameter>Api_Store_LegacyLayer_IcingaApiModel</ae:parameter>
+                    -->
+                    
+                    <!--  Debug output for object search -->
+                    <!-- 
+                    <ae:parameter>Cronks_System_ObjectSearchResultModel</ae:parameter>
+                    -->
+            
+                    <!-- Debug output for Session handling via Doctrine-->
+                    <!-- 
+                    <ae:parameter>AppKitDoctrineSessionStorage</ae:parameter>
+                    -->
+                </setting>
 
             </settings>
     
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="auth.xml"/>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="debug.xml">
-                <xi:fallback></xi:fallback>
-            </xi:include>
         </module>
     </ae:configuration>
     <!--  Try include the overwriting file -->

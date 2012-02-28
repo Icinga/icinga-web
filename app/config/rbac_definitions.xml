@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configurations xmlns="http://agavi.org/agavi/1.0/config">
-	<configuration>
-		<roles>
-			<role name="guest">
+    <configuration>
+        <roles>
+            <role name="guest">
 
-				<permissions>
-					<permission>appkit.access</permission>
-				</permissions>
+                <permissions>
+                    <permission>appkit.access</permission>
+                </permissions>
 
-				<roles>
-					<role name="appkit_user">
-					
-						<permissions>
-							<permission>appkit.user.dummy</permission>
-						</permissions>
+                <roles>
+                    <role name="appkit_user">
+                    
+                        <permissions>
+                            <permission>appkit.user.dummy</permission>
+                        </permissions>
 
-						<roles>
-							<role name="appkit_admin">
-								<permissions>
-									<permission>appkit.admin</permission>
-									<permission>appkit.admin.users</permission>
-									<permission>appkit.admin.groups</permission>
-								</permissions>
-							</role>
-						</roles>
+                        <roles>
+                            <role name="appkit_admin">
+                                <permissions>
+                                    <permission>appkit.admin</permission>
+                                    <permission>appkit.admin.users</permission>
+                                    <permission>appkit.admin.groups</permission>
+                                </permissions>
+                            </role>
+                        </roles>
 
-					</role>
-					
-					<role name="icinga_user">
-						<permissions>
-							<permission>icinga.user</permission>
-						</permissions>
-					</role>
-					
-				</roles>
+                    </role>
+                    
+                    <role name="icinga_user">
+                        <permissions>
+                            <permission>icinga.user</permission>
+                        </permissions>
+                    </role>
+                    
+                </roles>
 
-			</role>
-		</roles>
-	</configuration>
+            </role>
+        </roles>
+    </configuration>
 </configurations>

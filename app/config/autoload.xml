@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.system_config_dir%/autoload.xml">
-	<ae:configuration>
-		
-		<!-- MVC base classes -->
-		<autoload name="IcingaBaseAction">%core.lib_dir%/action/IcingaBaseAction.class.php</autoload>
-		<autoload name="IcingaBaseModel">%core.lib_dir%/model/IcingaBaseModel.class.php</autoload>
-		<autoload name="IcingaBaseView">%core.lib_dir%/view/IcingaBaseView.class.php</autoload>
-		
-		<!-- Bootstrapping class -->
-		<autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
-		
-		<!-- Doctrine -->
-		<autoload name="Doctrine">%core.root_dir%/lib/doctrine/lib/Doctrine.php</autoload>
-	</ae:configuration>
+    <ae:configuration>
+        
+        <!-- MVC base classes -->
+        <autoload name="IcingaBaseAction">%core.lib_dir%/action/IcingaBaseAction.class.php</autoload>
+        <autoload name="IcingaBaseModel">%core.lib_dir%/model/IcingaBaseModel.class.php</autoload>
+        <autoload name="IcingaBaseView">%core.lib_dir%/view/IcingaBaseView.class.php</autoload>
+        
+        <!-- Bootstrapping class -->
+        <autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
+        
+        <!-- Doctrine -->
+        <autoload name="Doctrine">%core.root_dir%/lib/doctrine/lib/Doctrine.php</autoload>
+    </ae:configuration>
 </ae:configurations>
