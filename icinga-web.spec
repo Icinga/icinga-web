@@ -54,13 +54,34 @@ Requires: apache2-mod_php5
 Requires: php-spl
 Requires: pcre >= 7.6
 
+
+##############################
 %description
+##############################
 Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 
+##############################
+%package module-pnp
+##############################
+Summary: PNP Integration module for Icinga Web
+Group: Applications/System
+Requires: pnp4nagios
+Requires: %{name} = %{version}-%{release}
+
+##############################
+%description module-pnp
+##############################
+PNP Integration module for Icinga Web
+
+
+##############################
 %prep
+##############################
 %setup -n %{name}-%{version}
 
+##############################
 %build
+##############################
 %configure \
     --prefix="%{_datadir}/icinga-web" \
     --datadir="%{_datadir}/icinga-web" \
@@ -74,7 +95,9 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
     --with-cache-dir='%{cachedir}' \
     --with-web-apache-path=%{apacheconfdir}
 
+##############################
 %install
+##############################
 %{__rm} -rf %{buildroot}
 %{__mkdir} -p %{buildroot}/%{apacheconfdir}
 %{__mkdir} -p %{buildroot}/%{_bindir}
@@ -92,6 +115,9 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 
 # wipe the rest of bin/, we don't need prepackage stuff in installed envs
 %{__rm} -rf %{buildroot}%{_datadir}/icinga-web/bin
+
+# place the pnp templates for -module-pnp
+%{__cp} contrib/PNP_Integration/templateExtensions/* %{buildroot}%{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions/
 
 ##############################
 %pre
@@ -121,6 +147,13 @@ fi
 
 # clean config cache, e.g. after upgrading
 %{__rm} -rf %{cachedir}/config/*.php
+
+##############################
+%post module-pnp
+##############################
+
+# clean cronk template cache
+%{__rm} -rf %{cachedir}/CronkTemplates/*.php
 
 ##############################
 %clean
@@ -154,6 +187,15 @@ fi
 %{_bindir}/%{name}-clearcache
 
 ##############################
+%files module-pnp
+##############################
+# templates, experimental treatment as configs (noreplace)
+%doc contrib/PNP_Integration/README
+%defattr(-,root,root)
+%dir %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions
+%config(noreplace) %attr(644,-,-) %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions/*
+
+##############################
 %changelog
 ##############################
 * Wed Feb 29 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-2
@@ -162,6 +204,8 @@ fi
 - install clearcache.sh as {_bindir}/icinga-web-clearcache #2115
 - remove rest of bin/, won't be needed on package install #2116
 - add contrib/ and partly doc/ to docs section #2384
+- add experimental package icinga-web-module-pnp for automated pnp integration. use with caution and report bugs. #2385
+- add requires for module-pnp: icinga-web and pnp4nagios
 
 * Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
 - bump to 1.6.2
