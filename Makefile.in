@@ -235,9 +235,9 @@ install-siteconfig:
 install-log:
 	$(INSTALL) -m 755 $(INSTALL_OPTS_WEB) -d $(DESTDIR)$(LOGDIR)
 
-install-all: install-lib install-pub install-etc install-bin install-doc install-app install-log
+install-all: install-lib install-pub install-etc install-bin install-doc install-app install-log install-siteconfig
 
-install: install-all install-siteconfig install-done
+install: install-all install-done
 
 install-done:
 	@printf "\n\n"

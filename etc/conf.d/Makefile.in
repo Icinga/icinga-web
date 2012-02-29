@@ -14,5 +14,9 @@ install:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)/$(WEB_CFG_DIR)
 	@files=`find . -type f -name "*.xml"`; \
 	for file in $$files; do \
-		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(WEB_CFG_DIR)/"$$file"; \
+		TARGET_FILE=$(DESTDIR)$(WEB_CFG_DIR)/`basename $$file`; \
+		if test ! -e $$TARGET_FILE; then \
+			$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(WEB_CFG_DIR)/"$$file"; \
+			echo "Installing `basename $$TARGET_FILE` ... "; \
+		fi \
 	done
