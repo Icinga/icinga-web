@@ -3,6 +3,8 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
+%define revision 2
+
 %define logdir %{_localstatedir}/log/icinga-web
 %define cachedir %{_localstatedir}/cache/icinga-web
 
@@ -20,8 +22,8 @@
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
 Version: 1.6.2
-Release: 1%{?dist}
-License: GPLv2+
+Release: %{revision}%{?dist}
+License: GPLv2
 Group: Applications/System
 URL: http://www.icinga.org/
 BuildArch: noarch
@@ -63,7 +65,8 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
     --prefix="%{_datadir}/icinga-web" \
     --datadir="%{_datadir}/icinga-web" \
     --datarootdir="%{_datadir}/icinga-web" \
-    --with-conf-dir='%{_sysconfdir}/icinga-web' \
+    --sysconfdir="%{_sysconfdir}/icinga-web" \
+    --with-conf-dir='%{_sysconfdir}/icinga-web/conf.d' \
     --with-web-user='%{apacheuser}' \
     --with-web-group='%{apachegroup}' \
     --with-api-cmd-file='%{_localstatedir}/icinga/rw/icinga.cmd' \
@@ -74,6 +77,7 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 %install
 %{__rm} -rf %{buildroot}
 %{__mkdir} -p %{buildroot}/%{apacheconfdir}
+%{__mkdir} -p %{buildroot}/%{_bindir}
 %{__make} install \
     install-apache-config \
     DESTDIR="%{buildroot}" \
@@ -83,16 +87,26 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
     INSTALL_OPTS_CACHE="" \
     INIT_OPTS=""
 
-# copy icinga-web db schemas for upgrading
-%{__mkdir} -p %{buildroot}/%{_sysconfdir}/icinga-web/schema
-%{__cp} -r etc/schema/* %{buildroot}%{_sysconfdir}/icinga-web/schema
+# we only want clearcache.sh prefixed in {_bindir}, generated from configure
+%{__mv} %{buildroot}%{_datadir}/icinga-web/bin/clearcache.sh %{buildroot}%{_bindir}/%{name}-clearcache
+
+# wipe the rest of bin/, we don't need prepackage stuff in installed envs
+%{__rm} -rf %{buildroot}%{_datadir}/icinga-web/bin
 
 ##############################
 %pre
 ##############################
 
 # Add apacheuser in the icingacmd group
-/usr/sbin/usermod -a -G icingacmd %{apacheuser}
+# If the group exists, add the apacheuser in the icingacmd group.
+# It is not neccessary that icinga-web is installed on the same system as
+# icinga and only on systems with icinga installed the icingacmd
+# group exists. In all other cases the user used for ssh access has
+# to be added to the icingacmd group on the remote icinga server.
+getent group icingacmd > /dev/null
+if [ $? -eq 0 ]; then
+  /usr/sbin/usermod -a -G icingacmd %{apacheuser}
+fi
 
 # uncomment if building from git
 # %{__rm} -rf %{buildroot}%{_datadir}/icinga-web/.git
@@ -118,9 +132,9 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 %files
 ##############################
 # main dirs
+%doc etc/schema contrib doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.6 doc/CHANGELOG-1.x doc/LICENSE
 %defattr(-,root,root)
 %{_datadir}/icinga-web/app
-%{_datadir}/icinga-web/bin
 %{_datadir}/icinga-web/doc
 %{_datadir}/icinga-web/etc
 %{_datadir}/icinga-web/lib
@@ -128,27 +142,30 @@ Icinga Web for Icinga Core, uses Icinga IDOUtils DB as data source.
 # configs
 %defattr(-,root,root)
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
-%config(noreplace) %{_sysconfdir}/icinga-web/access.xml
-%config(noreplace) %{_sysconfdir}/icinga-web/auth.xml
-%config(noreplace) %{_sysconfdir}/icinga-web/cronks.xml
-%config(noreplace) %{_sysconfdir}/icinga-web/databases.xml
-%config(noreplace) %{_sysconfdir}/icinga-web/reporting.xml
-%config(noreplace) %{_sysconfdir}/icinga-web/translation.xml
-%config(noreplace) %{_sysconfdir}/icinga-web/sla.xml
-# sql schemas
-%{_sysconfdir}/icinga-web/schema
+%dir %{_sysconfdir}/icinga-web
+%dir %{_sysconfdir}/icinga-web/conf.d
+%config(noreplace) %attr(644,-,-) %{_sysconfdir}/icinga-web/conf.d/*
 # logs+cache
 %attr(2775,%{apacheuser},%{apachegroup}) %dir %{logdir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}/config
+# binaries
+%defattr(-,root,root)
+%{_bindir}/%{name}-clearcache
 
 ##############################
 %changelog
 ##############################
+* Wed Feb 29 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-2
+- move etc/schema sql scripts to docs (thx Michael Gruener) #2381
+- install etc/conf.d to {_sysconfdir}/icinga-web/conf.d saving main dir for other configs #2382
+- install clearcache.sh as {_bindir}/icinga-web-clearcache #2115
+- remove rest of bin/, won't be needed on package install #2116
+- add contrib/ and partly doc/ to docs section #2384
+
 * Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
 - bump to 1.6.2
-- copy schema files to /etc/icinga-web/schema
-- clean config cache in %post (important for upgrades)
+- clean config cache in %post (important for upgrades) #2217
 
 * Mon Dec 12 2011 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.1-1
 - bump to 1.6.1

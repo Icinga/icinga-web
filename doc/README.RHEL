@@ -1,0 +1,25 @@
+Icinga Web as package on RHEL
+-----------------------------
+
+For detailed information on
+
+* how to build a package with provided icinga-web.spec
+* how to proceed with setup after package install
+	- setup the icinga_web database
+	- configure the backend for IDOUtils and internal Web DB
+
+please locate the howtos in the Icinga wiki
+
+https://wiki.icinga.org/display/howtos/
+
+as well as the official docs for a more detailed introduction
+
+http://docs.icinga.org
+
+
+Special note:
+~~~~~~~~~~~~~
+Unless further notice the provided icinga-web.spec file
+is still a work in progress and can/will change things.
+
+Keep in mind to read the Changelog section at the bottom!
