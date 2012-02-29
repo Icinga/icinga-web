@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <module enabled="true">
+            <!-- Overwrite debuglog handling(verbosy) -->
+            <settings>
+            
+                <!-- Ajax default request timeout (ms), 4 minutes == 240000 -->
+                <setting name="ajax.timeout">240000</setting>
+            
+                <setting name="debug.verbose">
+                    <!--  Debug output for db queries -->
+                    <!-- 
+                    <ae:parameter>Api_Store_LegacyLayer_IcingaApiModel</ae:parameter>
+                    -->
+                    
+                    <!--  Debug output for object search -->
+                    <!-- 
+                    <ae:parameter>Cronks_System_ObjectSearchResultModel</ae:parameter>
+                    -->
+            
+                    <!-- Debug output for Session handling via Doctrine-->
+                    <!-- 
+                    <ae:parameter>AppKitDoctrineSessionStorage</ae:parameter>
+                    -->
+                </setting>
+            </settings>
+        </module>
+    </ae:configuration>
+</ae:configurations>
