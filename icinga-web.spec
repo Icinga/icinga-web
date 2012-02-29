@@ -95,6 +95,9 @@ PNP Integration module for Icinga Web
     --with-log-dir='%{logdir}' \
     --with-cache-dir='%{cachedir}' \
     --with-reporting-tmp-dir='%{reportingcachedir}' \
+    --with-icinga-bin='%{_bindir}/icinga' \
+    --with-icinga-cfg='%{_sysconfdir}/icinga/icinga.cfg' \
+    --with-icinga-objects-dir='%{_sysconfdir}/icinga/objects' \
     --with-web-apache-path=%{apacheconfdir}
 
 ##############################
@@ -209,6 +212,7 @@ fi
 - add experimental package icinga-web-module-pnp for automated pnp integration. use with caution and report bugs. #2385
 - add requires for module-pnp: icinga-web and pnp4nagios
 - set --with-reporting-tmp-dir= {_localstatedir}/cache/icinga-web/reporting
+- set configure for access.xml: --with-icinga-bin=,--with-icinga-cfg=,--with-icinga-objects= matching icinga rpm #2259
 
 * Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
 - bump to 1.6.2
