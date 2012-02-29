@@ -7,6 +7,7 @@
 
 %define logdir %{_localstatedir}/log/icinga-web
 %define cachedir %{_localstatedir}/cache/icinga-web
+%define reportingcachedir %{_localstatedir}/cache/icinga-web/reporting
 
 %if "%{_vendor}" == "suse"
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
@@ -93,6 +94,7 @@ PNP Integration module for Icinga Web
     --with-api-cmd-file='%{_localstatedir}/icinga/rw/icinga.cmd' \
     --with-log-dir='%{logdir}' \
     --with-cache-dir='%{cachedir}' \
+    --with-reporting-tmp-dir='%{reportingcachedir}' \
     --with-web-apache-path=%{apacheconfdir}
 
 ##############################
@@ -206,6 +208,7 @@ fi
 - add contrib/ and partly doc/ to docs section #2384
 - add experimental package icinga-web-module-pnp for automated pnp integration. use with caution and report bugs. #2385
 - add requires for module-pnp: icinga-web and pnp4nagios
+- set --with-reporting-tmp-dir= {_localstatedir}/cache/icinga-web/reporting
 
 * Mon Feb 20 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-1
 - bump to 1.6.2
