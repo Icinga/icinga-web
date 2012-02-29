@@ -25,7 +25,6 @@ CREATE UNIQUE INDEX cc_uid_UNIQUE ON cronk_category (cc_uid);
 CREATE INDEX pt_target_id_ix ON nsm_principal_target (pt_target_id);
 CREATE INDEX pt_principal_id_ix ON nsm_principal_target (pt_principal_id);
 CREATE UNIQUE INDEX user_name_unique ON nsm_user (user_name);
-CREATE UNIQUE INDEX user_email_unique ON nsm_user (user_email);
 CREATE INDEX user_search ON nsm_user (user_name, user_authsrc, user_authid, user_disabled);
 CREATE INDEX upref_search_key_idx ON nsm_user_preference (upref_key);
 CREATE INDEX principal_role_id_ix ON nsm_user_preference (upref_user_id);
