@@ -29,7 +29,7 @@ CREATE TABLE nsm_target (target_id NUMBER(10), target_name VARCHAR2(45) NOT NULL
 /
 CREATE TABLE nsm_target_value (tv_pt_id NUMBER(10), tv_key VARCHAR2(45), tv_val VARCHAR2(45) NOT NULL, PRIMARY KEY(tv_pt_id, tv_key))
 /
-CREATE TABLE nsm_user (user_id NUMBER(10), user_account NUMBER(10) DEFAULT 0 NOT NULL, user_name VARCHAR2(127) NOT NULL, user_lastname VARCHAR2(40) NOT NULL, user_firstname VARCHAR2(40) NOT NULL, user_password VARCHAR2(64) NOT NULL, user_salt VARCHAR2(64) NOT NULL, user_authsrc VARCHAR2(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR2(127), user_authkey VARCHAR2(64), user_email VARCHAR2(254) NOT NULL, user_disabled NUMBER(3) DEFAULT 1 NOT NULL, user_created DATE NOT NULL, user_modified DATE NOT NULL, PRIMARY KEY(user_id), CONSTRAINT user_unique UNIQUE (user_name), CONSTRAINT user_email_unique UNIQUE (user_email))
+CREATE TABLE nsm_user (user_id NUMBER(10), user_account NUMBER(10) DEFAULT 0 NOT NULL, user_name VARCHAR2(127) NOT NULL, user_lastname VARCHAR2(40) NOT NULL, user_firstname VARCHAR2(40) NOT NULL, user_password VARCHAR2(64) NOT NULL, user_salt VARCHAR2(64) NOT NULL, user_authsrc VARCHAR2(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR2(127), user_authkey VARCHAR2(64), user_email VARCHAR2(254) NOT NULL, user_disabled NUMBER(3) DEFAULT 1 NOT NULL, user_created DATE NOT NULL, user_modified DATE NOT NULL, PRIMARY KEY(user_id), CONSTRAINT user_unique UNIQUE (user_name))
 /
 CREATE TABLE nsm_user_preference (upref_id NUMBER(10), upref_user_id NUMBER(10) NOT NULL, upref_val VARCHAR2(100), upref_longval CLOB, upref_key VARCHAR2(50) NOT NULL, upref_created DATE NOT NULL, upref_modified DATE NOT NULL, PRIMARY KEY(upref_id))
 /
