@@ -41,7 +41,10 @@ Makefile
 config.log
 config.status
 etc/build.properties
-etc/conf.d/*.xml
+etc/conf.d/access.xml
+etc/conf.d/databases.xml
+etc/conf.d/Makefile
+etc/conf.d/sla.xml
 tests/phpunit/test.properties
 tests/php/results.xml
 etc/apache2/icinga-web.conf

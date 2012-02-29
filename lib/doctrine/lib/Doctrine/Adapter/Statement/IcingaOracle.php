@@ -251,7 +251,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
     private function createAliasMap(&$query) {
         $ctr = 0; 
         $matches = array();
-        $reg = "/AS +(?<alias>\w+)/";
+        $reg = "/\s+AS\s+(?<alias>\w+)(\s+|,)/";
         $this->aliasMap = array();
        
         preg_match_all($reg,$query,$matches);
@@ -261,6 +261,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
             $query = preg_replace("/(AS +)".$alias."/","AS f_".$ctr,$query,1);
             $this->aliasMap[("f_".($ctr++))] = $alias;
         }
+        
+        // AgaviContext::getInstance()->getLoggerManager()->log($query, AgaviLogger::DEBUG);
       
     }  
     /**

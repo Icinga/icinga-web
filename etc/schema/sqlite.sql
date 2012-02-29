@@ -94,7 +94,6 @@ CREATE TABLE nsm_user (
 	user_modified DATETIME NOT NULL
 );
 CREATE UNIQUE INDEX user_name_unique_idx ON nsm_user(user_name);
-CREATE UNIQUE INDEX user_email_unique_idx ON nsm_user(user_email);
 CREATE INDEX user_search_idx ON nsm_user(user_name, user_authsrc, user_authid, user_disabled);
 
 CREATE TABLE nsm_user_preference (

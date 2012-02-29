@@ -83,7 +83,7 @@
                 	<ae:parameter>%core.module_dir%/AppKit/config/routing.xml</ae:parameter>
                 </setting>
 
-                <setting name="verbose">
+                <setting name="debug.verbose">
                     <!--  Debug output for db queries -->
                     <!-- 
                     <ae:parameter>Api_Store_LegacyLayer_IcingaApiModel</ae:parameter>

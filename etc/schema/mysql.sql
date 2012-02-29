@@ -1,6 +1,6 @@
 /*****************************************************/
 /* Auto generated mysql SQL Schema file for icinga-web*/
-/* Creation date: 2011-09-12T14:53:22+02:00          */
+/* Creation date: 2012-02-29T10:20:14+01:00          */
 /****************************************************/
 
 
@@ -17,7 +17,7 @@ CREATE TABLE nsm_role (role_id INT AUTO_INCREMENT, role_name VARCHAR(40) NOT NUL
 CREATE TABLE nsm_session (session_entry_id INT AUTO_INCREMENT, session_id VARCHAR(255) NOT NULL, session_name VARCHAR(255) NOT NULL, session_data LONGTEXT NOT NULL, session_checksum VARCHAR(255) NOT NULL, session_created DATETIME NOT NULL, session_modified DATETIME NOT NULL, PRIMARY KEY(session_entry_id)) ENGINE = INNODB;
 CREATE TABLE nsm_target (target_id INT AUTO_INCREMENT, target_name VARCHAR(45) NOT NULL, target_description VARCHAR(100), target_class VARCHAR(80), target_type VARCHAR(45) NOT NULL, PRIMARY KEY(target_id)) ENGINE = INNODB;
 CREATE TABLE nsm_target_value (tv_pt_id INT, tv_key VARCHAR(45), tv_val VARCHAR(45) NOT NULL, PRIMARY KEY(tv_pt_id, tv_key)) ENGINE = INNODB;
-CREATE TABLE nsm_user (user_id INT AUTO_INCREMENT, user_account INT DEFAULT 0 NOT NULL, user_name VARCHAR(127) NOT NULL, user_lastname VARCHAR(40) NOT NULL, user_firstname VARCHAR(40) NOT NULL, user_password VARCHAR(64) NOT NULL, user_salt VARCHAR(64) NOT NULL, user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR(127), user_authkey VARCHAR(64), user_email VARCHAR(254) NOT NULL, user_disabled TINYINT DEFAULT '1' NOT NULL, user_created DATETIME NOT NULL, user_modified DATETIME NOT NULL, UNIQUE INDEX user_name_unique_idx (user_name), UNIQUE INDEX user_email_unique_idx (user_email), INDEX user_search_idx (user_name, user_authsrc, user_authid, user_disabled), PRIMARY KEY(user_id)) ENGINE = INNODB;
+CREATE TABLE nsm_user (user_id INT AUTO_INCREMENT, user_account INT DEFAULT 0 NOT NULL, user_name VARCHAR(127) NOT NULL, user_lastname VARCHAR(40) NOT NULL, user_firstname VARCHAR(40) NOT NULL, user_password VARCHAR(64) NOT NULL, user_salt VARCHAR(64) NOT NULL, user_authsrc VARCHAR(45) DEFAULT 'internal' NOT NULL, user_authid VARCHAR(127), user_authkey VARCHAR(64), user_email VARCHAR(254) NOT NULL, user_disabled TINYINT DEFAULT '1' NOT NULL, user_created DATETIME NOT NULL, user_modified DATETIME NOT NULL, UNIQUE INDEX user_name_unique_idx (user_name), INDEX user_search_idx (user_name, user_authsrc, user_authid, user_disabled), PRIMARY KEY(user_id)) ENGINE = INNODB;
 CREATE TABLE nsm_user_preference (upref_id INT AUTO_INCREMENT, upref_user_id INT NOT NULL, upref_val VARCHAR(100), upref_longval LONGTEXT, upref_key VARCHAR(50) NOT NULL, upref_created DATETIME NOT NULL, upref_modified DATETIME NOT NULL, INDEX upref_search_key_idx_idx (upref_key), INDEX principal_role_id_ix_idx (upref_user_id), PRIMARY KEY(upref_id)) ENGINE = INNODB;
 CREATE TABLE nsm_user_role (usro_user_id INT, usro_role_id INT, INDEX nsm_user_role_ix_idx (usro_role_id), PRIMARY KEY(usro_user_id, usro_role_id)) ENGINE = INNODB;
 ALTER TABLE cronk ADD CONSTRAINT cronk_cronk_user_id_nsm_user_user_id FOREIGN KEY (cronk_user_id) REFERENCES nsm_user(user_id);
