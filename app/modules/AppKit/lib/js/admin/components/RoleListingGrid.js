@@ -24,6 +24,22 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
     	this.store.on('load', function(store, records, o) {
     		this.counterLabel.update([store.getCount()]);
     	}, this);
+    	
+    	var model = this.getSelectionModel();
+    	if (model) {
+    	    /*
+    	     * Before this was bound to rowclick event. If we trigger injected selection
+    	     * rowclick was never fired, bind to rowselect is the better choice I think
+    	     */
+    	    model.on('rowselect', function(sm, rowIndex, r) {
+    	        var id = this.getStore().getAt(rowIndex).get("id");
+                Ext.getCmp('roleEditor').setDisabled(false);
+                Ext.getCmp('btn-save-group').setText(_('Save'));
+                Ext.getCmp('btn-save-group').setIconClass('icinga-icon-disk');
+                Ext.getCmp('progressbar-field').setValue();
+                AppKit.Admin.RoleEditForm.bindRole(id, this.roleProviderURI);
+    	    }, this);
+    	}
     },
     
     deleteSelected: function() {
@@ -101,22 +117,6 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
         }]
 
     },
-   
-    
-
-    listeners: {
-        rowclick: function(grid,index,_e) {
-            var id = grid.getStore().getAt(index).get("id");
-            Ext.getCmp('roleEditor').setDisabled(false);
-            Ext.getCmp('btn-save-group').setText(_('Save'));
-            Ext.getCmp('btn-save-group').setIconClass('icinga-icon-disk');
-            Ext.getCmp('progressbar-field').setValue();
-            AppKit.Admin.RoleEditForm.bindRole(id, grid.roleProviderURI);									
-        }
-      
-
-    },
-
 
     colModel: new Ext.grid.ColumnModel({
         defaults: {

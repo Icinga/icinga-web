@@ -19,7 +19,7 @@ Icinga.Api.RESTFilterComboBox = Ext.extend(Ext.ux.AutoComboBox,{
         cfg.displayField = cfg.targetField; 
         cfg.valueField = cfg.targetField; 
         this.storeFieldName = cfg.targetField;
-        AppKit.log(cfg);
+        // AppKit.log(cfg);
         cfg.store = store; 
         Ext.ux.AutoComboBox.prototype.constructor.call(this,cfg);
 
