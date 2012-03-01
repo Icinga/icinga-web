@@ -45,11 +45,16 @@ Cronk.grid.CommentColumnRenderer = new (function () {
         var ids = grid.commentIds;
         var throbber = grid.getEl().select('div[comment_source]');
         throbber.each(function(elem) {
-            if(ids.indexOf(elem.getAttribute("comment_source")) > -1)
+            if(ids.indexOf(elem.getAttribute("comment_source")) > -1) {
                 // elem.replaceClass('icinga-icon-throbber','icinga-icon-comment');
-                elem.addClass('icinga-icon-comment');
-            else 
+                try {
+                    elem.parent().parent().addClass('icinga-icon-comment');
+                } catch(e) {
+                    elem.addClass('icinga-icon-comment');
+                }
+            } else { 
                 elem.remove();
+            }
         });
     };
 
