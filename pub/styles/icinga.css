@@ -370,11 +370,17 @@ div#growl-msg-stack {
 }
 
 /** Info icon **/
+
+.object-info-icon-cell {
+    overflow: auto;
+}
+
 .x-icinga-info-icon {
     display: inline-block;
     width: 16px;
     height: 16px;
-    margin: 0 1px 0 0;
+    margin: 0 2px 0 0;
+    float: left;
 }
 
 /** Icinga status classes **/
