@@ -116,10 +116,7 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
                 continue;
             }
             
-            if ((!intval($record['a_has_been_checked']) && intval($record['a_should_be_scheduled'])) // is active check and has not been checked
-                    || (!$record['a_has_been_checked'] && (!$record['a_should_be_scheduled'])) // is passive check and has not been checked yet
-                ) {
-                
+            if ((!$record['a_has_been_checked'])) {
                 $state = IcingaConstants::HOST_PENDING;
             }
             
