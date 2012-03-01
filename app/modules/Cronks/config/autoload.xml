@@ -14,6 +14,11 @@
 		<autoload name="CronkGridTemplateLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateLayout.class.php</autoload>
 		<autoload name="CronkGridTemplateXmlReplace">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlReplace.class.php</autoload>
 		<autoload name="CronkGridTemplateXmlParser">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlParser.class.php</autoload>
-		<autoload name="CronkGridTemplateWorker">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorker.class.php</autoload>
+		<autoload name="CronkGridTemplateWorkerFactory">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorkerFactory.class.php</autoload>
+        <autoload name="CronkGridTemplateWorker">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorker.class.php</autoload>
+        <autoload name="GenericCronkTemplateWorker">%core.module_dir%/Cronks/lib/template/TemplateWorker/GenericCronkTemplateWorker.class.php</autoload>
+        <autoload name="DQLCronkTemplateWorker">%core.module_dir%/Cronks/lib/template/TemplateWorker/DQLCronkTemplateWorker.class.php</autoload>
+        
+
 	</ae:configuration>
 </ae:configurations>

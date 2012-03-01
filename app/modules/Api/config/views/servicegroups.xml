@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" 
+>
+    <ae:configuration>
+        <view:dql name="TARGET_SERVICEGROUP_SUMMARY" >
+            <view:raw>
+                <![CDATA[
+                SELECT DISTINCT
+                    o.name1 AS servicegroup_name,
+                    sg.alias AS servicegroup_alias,
+                    sg.servicegroup_id AS servicegroup_id,
+                    i.instance_id AS instance_id,
+                    i.instance_name AS instance_name,
+                    COUNT(ss.current_state) AS service_status_count,
+                    ss.current_state AS service_status,
+                    sg.servicegroup_id as servicegroup_id
+                FROM IcingaServicegroups sg
+                INNER JOIN sg.instance i
+                INNER JOIN sg.object o
+                INNER JOIN sg.members sgm
+                INNER JOIN sgm.status ss
+                INNER JOIN ss.service s
+
+
+                GROUP BY sg.servicegroup_id, ss.current_state, o.name1,
+                    sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name
+
+                ]]>
+                
+           </view:raw>
+
+           <view:credential name="IcingaServicegroup" type="custom">
+           <![CDATA[
+                WHERE  o.name1 IN (${credential_value})
+           ]]>
+           </view:credential>
+
+           <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    s.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="dql">
+                <innerjoin>
+                    s.host h
+                </innerjoin>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+            
+        </view:dql>
+
+    </ae:configuration>
+</ae:configurations>

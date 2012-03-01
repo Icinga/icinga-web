@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+    <!-- new template -->
+    
+    <type>DQL</type>
+
+    <!--
+        Meta description of the templates, that anybody
+        knows what the template is doing
+    -->
+    <meta>
+        <parameter name="name">Default servicegroup summary template</parameter>
+        <parameter name="description">Displays the summary of servicegroups</parameter>
+        <parameter name="author">icinga-web developers</parameter>
+    </meta>
+    
+    <!-- 
+        Options for the template. Change layout and view style to fit the type you
+        want to display
+    -->
+    <option>
+        <!-- 
+            Some layout modes:
+                - default: full featured view
+                - minimal: reduce space consumption (e.g. filters, pagers, ...)
+        -->
+        <parameter name="mode">default</parameter>
+        <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter>
+
+
+        
+        <!-- Special config for the EXTJS grid view (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridView) -->
+        <parameter name="Ext.grid.GridView">
+            <parameter name="headersDisabled">false</parameter>
+        </parameter>
+        
+        <!-- Special config for the EXTJS grid panel (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GridPanel) -->
+        <!-- 
+            !!! Attention: this options goes to the main grid panel, only change layout attributes, all other
+            will corrupt the auto build of the GridPanel
+        -->
+        <!-- <parameter name="Ext.grid.GridPanel">
+            <parameter name="disable">true</parameter>
+            <parameter name="hidden">false</parameter>
+        </parameter> -->
+        
+        <!-- 
+            Selection model of rows (checkbox/row). This is needed for
+            commands and maybe other user things ...
+        -->
+        <parameter name="selection_model">checkbox</parameter>
+        
+        <parameter name="commands">
+            <!-- 
+                Generally enabled od disabled
+            -->
+            <parameter name="enabled">true</parameter>
+        
+            <!--
+                Sourcefieldmapping
+                * Which field content comes from the template data source
+            -->
+            <parameter name="source">
+                <parameter name="IcingaApiConstants::COMMAND_SERVICEGROUP">servicegroup_name</parameter>
+                <parameter name="IcingaApiConstants::COMMAND_INSTANCE">instance_name</parameter>
+            </parameter>
+            
+            <parameter name="predefined">
+                <parameter name="IcingaApiConstants::COMMAND_AUTHOR">${xmlfn.author}</parameter>
+            <parameter name="IcingaApiConstants::COMMAND_FIXED">1</parameter>
+            </parameter>
+            
+            <!-- 
+                Which commands are available in this template and can charged
+                with template data
+            -->
+            <parameter name="items">
+                <parameter name="SCHEDULE_SERVICEGROUP_HOST_DOWNTIME">
+                    <parameter name="title">Schedule downtime for all hosts in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-downtime</parameter>
+                </parameter>
+                <parameter name="SCHEDULE_SERVICEGROUP_SVC_DOWNTIME">
+                    <parameter name="title">Schedule downtime for all services in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-downtime</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
+                    <parameter name="title">Enable notifications for all hosts in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify</parameter>
+                </parameter>
+                <parameter name="DISABLE_SERVICEGROUP_HOST_NOTIFICATIONS">
+                    <parameter name="title">Disable notifications for all hosts in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify-disabled</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
+                    <parameter name="title">Enable notifications for all services in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify</parameter>
+                </parameter>
+                <parameter name="DISABLE_SERVICEGROUP_SVC_NOTIFICATIONS">
+                    <parameter name="title">Disable notifications for all services in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-notify-disabled</parameter>
+                    <parameter name="seperator">true</parameter>
+                </parameter>
+                <parameter name="ENABLE_SERVICEGROUP_SVC_CHECKS">
+                    <parameter name="title">Enable active checks of all services in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-arrow-out</parameter>
+                </parameter>
+                <parameter name="DISABLE_SERVICEGROUP_SVC_CHECKS">
+                    <parameter name="title">Disable active checks of all services in this servicegroup</parameter>
+                    <parameter name="icon_class">icinga-icon-cross</parameter>
+                </parameter>
+            </parameter>
+            
+        </parameter>
+        
+    </option>
+    
+    <!-- 
+        What data to display? Define icinga data targets and countfields
+    -->
+    <datasource>
+        <parameter name="target">TARGET_SERVICEGROUP_SUMMARY</parameter>
+    </datasource>
+    
+    <!-- 
+        Paging record on its result
+    -->
+    <pager>
+        <parameter name="enabled">true</parameter>
+        <parameter name="start">0</parameter>
+    </pager>
+    
+    <grouping>
+        <parameter name="enabled">true</parameter>
+   
+        <parameter name="Ext.grid.GroupingView">
+            <parameter name="hideGroupedColumn">true</parameter>
+            <parameter name="startCollapsed">false</parameter>
+        </parameter>
+    </grouping>
+    
+    <!--
+        Field decleration: What to display and how
+    -->
+    <fields>
+
+        <field name="instance_name">
+            <datasource>
+                <parameter name="field">INSTANCE_NAME</parameter>
+            </datasource>
+
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">Instance</parameter>
+
+                <parameter name="width">60</parameter>
+
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">false</parameter>
+                </parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+
+                <!-- Operator type is needed because we don't know which type returned-->
+                <parameter name="operator_type">text</parameter>
+
+                <parameter name="api_target">instance</parameter>
+                <parameter name="api_keyfield">INSTANCE_NAME</parameter>
+                <parameter name="api_valuefield">INSTANCE_NAME</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+
+        <field name="servicegroup_id">
+            <datasource>
+                <parameter name="field">SERVICEGROUP_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">false</parameter>
+                <parameter name="label">ID</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field> 
+        
+        <field name="servicegroup_name">
+            <datasource>
+                <parameter name="field">SERVICEGROUP_NAME</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Servicegroup</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+            </order>
+        </field>
+        
+        <field name="servicegroup_alias">
+            <datasource>
+                <parameter name="field">SERVICEGROUP_ALIAS</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Alias</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.api</parameter>
+
+                <!-- Operator type is needed because we don't know which type returned-->
+                <parameter name="operator_type">text</parameter>
+
+                <parameter name="api_target">servicegroup</parameter>
+                <parameter name="api_keyfield">SERVICEGROUP_ALIAS</parameter>
+                <parameter name="api_valuefield">SERVICEGROUP_ALIAS</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field> 
+        
+        <field name="servicegroup_services_click">
+            <datasource>
+                <parameter name="field">SERVICEGROUP_ID</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label"></parameter>
+                <parameter name="icon">icinga-icon-cog</parameter>
+                <parameter name="width">16</parameter>
+                <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">columnImage</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="image">images/icons/cog.png</parameter>
+                            <parameter name="css">x-icinga-grid-link</parameter>
+                            <parameter name="attr">
+                                <parameter name="ext:qtip">Click here to display containing services</parameter>
+                            </parameter>
+                        </parameter>
+                    </parameter>
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
+                        <parameter name="function">subGrid</parameter>
+                        
+                        <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">cellclick</parameter>
+                        
+                        <parameter name="arguments">
+                            <parameter name="idPrefix">servicegroupServices</parameter>
+                            <parameter name="titlePrefix">Services in</parameter>
+                            <parameter name="targetTemplate">icinga-service-template</parameter>
+                            <parameter name="filterMap">
+                                <parameter name="servicegroup_name">servicegroup_name</parameter>
+                            </parameter>
+                            <parameter name="labelField">servicegroup_name</parameter>
+                        </parameter>
+                    </parameter>
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+        <field name="service_status">
+
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Status</parameter>
+                <parameter name="width">200</parameter>
+                
+                <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
+                <parameter name="Ext.grid.Column">
+                    <parameter name="fixed">true</parameter>
+                </parameter>
+                
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">serviceStatus</parameter>
+                        
+                    <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                    <parameter name="type">renderer</parameter>
+                </parameter>
+                
+            </display>
+            
+            <filter>
+                <parameter name="enabled">true</parameter>
+
+                <!-- Filter configuration -->
+                <parameter name="type">extjs</parameter>
+                <parameter name="subtype">appkit.ext.filter.servicestatus</parameter>
+
+                <parameter name="no_operator">false</parameter>
+            </filter>
+            
+            <order>
+                <parameter name="enabled">true</parameter>
+                <parameter name="default">true</parameter>
+            </order>
+        </field>
+        
+        <field name="service_status_count">
+            <datasource>
+                <parameter name="field">SERVICEGROUP_SUMMARY_COUNT</parameter>
+            </datasource>
+            
+            <display>
+                <parameter name="visible">true</parameter>
+                <parameter name="label">Count</parameter>
+            </display>
+            
+            <filter>
+                <parameter name="enabled">false</parameter>    
+            </filter>
+            
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
+        
+    </fields>
+    
+</template>

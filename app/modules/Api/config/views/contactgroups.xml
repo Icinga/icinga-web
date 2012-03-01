@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <view:dql name="TARGET_CONTACTGROUPS" >
+            <view:raw>
+                <![CDATA[
+                SELECT DISTINCT
+                    cg.alias,
+                    cg.contactgroup_id,
+                    cg.contactgroup_object_id
+                FROM IcingaContactgroups cg
+                INNER JOIN cg.members cgm
+                INNER JOIN cgm.object ocgm
+
+                WHERE ocgm.name1 = '${username}'
+
+                ]]>
+           </view:raw>
+           
+       </view:dql>
+   </ae:configuration>
+
+</ae:configurations>

@@ -10,10 +10,16 @@
             <handler pattern="%core.module_dir%/Api/config/access.xml" class="AccessConfigHandler">
 				<validation>%core.module_dir%/Api/lib/xml/xsd/access.xsd</validation>	
             </handler>
+
+            <handler pattern="%core.module_dir%/*/config/views.xml" class="DQLViewConfigHandler">
+            </handler>
             <!-- extend access.xml via xincludes -->
             <handler pattern="%core.module_dir%/*/config/access.xml" class="AccessConfigModuleHandler">
 				<validation>%core.module_dir%/Api/lib/xml/xsd/access-module.xsd</validation>	
-            </handler>           
-        </handlers>
+            </handler>
+
+
+
+         </handlers>
     </ae:configuration>
 </ae:configurations>
