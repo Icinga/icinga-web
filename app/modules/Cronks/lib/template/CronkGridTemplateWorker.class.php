@@ -499,7 +499,7 @@ class CronkGridTemplateWorker {
                                        'field'    => $new_field,
                                        'op'    => $new_op
                                    );
-
+        //print_r($this->conditions);
         return $id;
     }
 

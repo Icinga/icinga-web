@@ -59,7 +59,7 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
         
         $query = IcingaDoctrine_Query::create()
         ->select(
-            'a.current_state, '
+             'a.current_state, '
             . 'a.has_been_checked, '
             . 'a.should_be_scheduled, '
             . 'a.scheduled_downtime_depth, '
@@ -116,8 +116,10 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
                 continue;
             }
             
-            if ((!$record['a_has_been_checked'] && $record['a_should_be_scheduled']) || ($record['a_should_be_scheduled'] === null)
-                || ($record['a_should_be_scheduled'] == 0 && ! $record['a_should_be_scheduled'])) {
+            if ((!intval($record['a_has_been_checked']) && intval($record['a_should_be_scheduled'])) // is active check and has not been checked
+                    || (!$record['a_has_been_checked'] && (!$record['a_should_be_scheduled'])) // is passive check and has not been checked yet
+                ) {
+                
                 $state = IcingaConstants::HOST_PENDING;
             }
             
