@@ -180,9 +180,9 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 prepareData: Icinga.Cronks.System.StatusOverall.renderer.prepareInstanceData,
 
                 tpl: new Ext.XTemplate(
-                    '<div style="margin-left: 5px;">', 
+                    '<div style="margin-left: 5px;">',
                     '<tpl for=".">', 
-                    '<div>', 
+                    '<div style="overflow: auto;">', 
                     '<tpl if="id==0">', 
                     '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>', 
                     '</tpl>', 

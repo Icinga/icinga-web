@@ -640,7 +640,7 @@
                 <parameter name="label"></parameter>
                 <parameter name="icon">icinga-icon-comment</parameter>
 
-                <parameter name="width">26</parameter>
+                <parameter name="width">22</parameter>
 
                 <!-- Config for the AJAX grid (see http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.Column) -->
                 <parameter name="Ext.grid.Column">
