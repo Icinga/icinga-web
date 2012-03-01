@@ -112,8 +112,12 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
         foreach ($records as $record) {
             $state = $record['a_current_state'];
             
+            if (!is_numeric($state)) {
+                continue;
+            }
+            
             if ((!$record['a_has_been_checked'] && $record['a_should_be_scheduled']) || ($record['a_should_be_scheduled'] === null)
-                || $record['a_should_be_scheduled'] == 0) {
+                || ($record['a_should_be_scheduled'] == 0 && ! $record['a_should_be_scheduled'])) {
                 $state = IcingaConstants::HOST_PENDING;
             }
             
@@ -136,6 +140,8 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
                     } else {
                         $out[$state]['unacknowledged'] += $record['x_count'];
                     }
+                } else {
+                    $out[$state]['unacknowledged'] += $record['x_count'];
                 }
             }
             
@@ -152,7 +158,6 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             $out[$state]['count'] += $record['x_count'];
             
         }
-//         var_dump($out);
         foreach ($out as $state=>$array) {
             
             $out[$state]['working'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['disabled']) > 0 ? $g : 0;
@@ -164,7 +169,7 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             // $out[$state]['unacknowledged'] = ($g=(int)$out[$state]['count'] - (int)$out[$state]['acknowledged'] - (int)$out[$state]['handled']) > 0 ? $g : 0; 
             
         }
-//         var_dump($out);
+        
         $sum = $this->createStateDescriptor(100, 'TOTAL', $type);
         foreach ($out as $a) {
             foreach ($sum as $k=>&$b) {
