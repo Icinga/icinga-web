@@ -13,7 +13,6 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     private $template;
 
     private $user;
-    private $context;
     private $parser;
     private $offset = 0;
     private $limit = 0;
@@ -28,9 +27,9 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context) {
         $this->setTemplate($template);
         $this->setContext($context);
-        $this->user = $this->context->getUser()->getNsmUser();
+        $this->user = $context->getUser()->getNsmUser();
         $view = $this->readDataSourceDefinition();
-        $this->parser = $this->context->getModel("Views.ApiDQLView","Api",array(
+        $this->parser = $context->getModel("Views.ApiDQLView","Api",array(
             "view" => $view
         ));
         /**
@@ -40,9 +39,6 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
 
     }
     
-    public function setContext(AgaviContext $context) {
-        $this->context = $context;
-    }
 
     public function setTemplate(CronkGridTemplateXmlParser $template) {
         $this->template = $template;

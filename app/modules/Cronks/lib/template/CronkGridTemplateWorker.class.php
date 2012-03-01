@@ -1,10 +1,12 @@
 <?php
 
 abstract class CronkGridTemplateWorker {
+    /**
+     * @var AgaviContext
+     */
+    private $context         = null;
     
     abstract public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context);
-    
-    abstract public function setContext(AgaviContext $context);
 
     abstract public function setTemplate(CronkGridTemplateXmlParser $template);
 
@@ -35,6 +37,13 @@ abstract class CronkGridTemplateWorker {
      */
     abstract public function setCondition($field, $val, $op = null);
 
+    public function setContext(AgaviContext $context) {
+        $this->context = $context;
+    }
+
+    public function getContext() {
+        return $this->context;
+    }
     /**
      *
      * TODO: API CALL CHANGE
@@ -121,7 +130,7 @@ abstract class CronkGridTemplateWorker {
 
     protected function rewritePerClassMethod($model, $method, $data_val, array $params = array(), array $row = array()) {
         list($module, $model) = explode('.', $model, 2);
-        $modelObject = $this->context->getModel($model, $module);
+        $modelObject = $this->getContext()->getModel($model, $module);
         return $modelObject->$method($data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row));
     }
 
