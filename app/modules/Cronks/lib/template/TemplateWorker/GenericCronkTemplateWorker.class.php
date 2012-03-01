@@ -16,10 +16,7 @@ class GenericCronkTemplateWorker extends CronkGridTemplateWorker {
      */
     private $template        = null;
 
-    /**
-     * @var AgaviContext
-     */
-    private $context         = null;
+   
 
     /**
      * @var IcingaApiConnectionIdo
@@ -72,8 +69,8 @@ class GenericCronkTemplateWorker extends CronkGridTemplateWorker {
 
         if ($context) {
             $this->setContext($context);
-            $this->api = $this->context->getModel('Icinga.ApiContainer', 'Web')->getConnection();
-            $this->user= $this->context->getUser()->getNsmUser();
+            $this->api = $context->getModel('Icinga.ApiContainer', 'Web')->getConnection();
+            $this->user= $context->getUser()->getNsmUser();
         }
     }
 
@@ -81,9 +78,7 @@ class GenericCronkTemplateWorker extends CronkGridTemplateWorker {
         $this->template = $template;
     }
 
-    public function setContext(AgaviContext $context) {
-        $this->context = $context;
-    }
+   
 
     public function setApi(/*IcingaApi*/ $api) {
         $this->api = $api;
