@@ -187,7 +187,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'HOST_CUSTOMVARIABLE_NAME'         =>        'cvsh.varname',
             'HOST_CUSTOMVARIABLE_VALUE'        =>        'cvsh.varvalue',
             'HOST_CURRENT_PROBLEM_STATE'   =>  '(hs.current_state*(hs.problem_has_been_acknowledged-1)*(hs.scheduled_downtime_depth-1))',
-            'HOST_IS_PENDING'       =>        '(hs.passive_checks_enabled*-1)*(hs.has_been_checked-hs.should_be_scheduled)*-1',
+            'HOST_IS_PENDING'       =>        '(hs.has_been_checked-1)*-1',
             // Service data
 
             'SERVICE_ID'            =>        's.service_id',
@@ -246,7 +246,7 @@ class Api_Store_LegacyLayer_TargetModifierModel extends IcingaStoreTargetModifie
             'SERVICE_CUSTOMVARIABLE_VALUE'=>'cvss.varvalue',
             'SERVICE_STATE_COUNT'        => 'count(ss.current_state)',
             'SERVICE_CURRENT_PROBLEM_STATE'   =>  '(ss.current_state*(ss.problem_has_been_acknowledged-1)*(ss.scheduled_downtime_depth-1))',
-            'SERVICE_IS_PENDING'        =>  '(ss.passive_checks_enabled*-1)*(ss.has_been_checked-ss.should_be_scheduled)*-1',
+            'SERVICE_IS_PENDING'        =>  '(ss.has_been_checked-1)*-1',
 
             // Config vars
             'CONFIG_VAR_ID'             =>  'cfv.configfilevariable_id',
