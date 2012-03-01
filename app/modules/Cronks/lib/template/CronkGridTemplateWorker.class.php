@@ -41,7 +41,7 @@ abstract class CronkGridTemplateWorker {
      * @param IcingaApiResult$result
      * @return ArrayObject
      */
-    private function addAdditionalFieldResults(/*IcingaApiResult*/ $result) {
+    protected function addAdditionalFieldResults(/*IcingaApiResult*/ $result) {
         $out = new ArrayObject();
         $ds = $this->getTemplate()->getSection('datasource');
 
@@ -125,7 +125,7 @@ abstract class CronkGridTemplateWorker {
         return $modelObject->$method($data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row));
     }
 
-    private function getApiField($field_name) {
+    protected function getApiField($field_name) {
         return $this->getTemplate()->getFieldByName($field_name, 'datasource')->getParameter('field');
     }
 }
