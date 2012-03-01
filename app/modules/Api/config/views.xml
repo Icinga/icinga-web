@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"   xmlns="http://icinga.org/icinga/config/global/api/views/1.0">
+    <ae:configuration>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="views/contactgroups.xml"
+            xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)
+                xmlns(default=http://icinga.org/icinga/config/global/api/views/1.0)
+                xpointer(//ae:configurations//ae:configuration/node())"
+        />
+
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="views/servicegroups.xml"
+            xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)
+                xmlns(default=http://icinga.org/icinga/config/global/api/views/1.0)
+                xpointer(//ae:configurations//ae:configuration/node())"
+        />
+    </ae:configuration>
+</ae:configurations>
