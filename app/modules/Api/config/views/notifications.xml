@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <dql name="TARGET_NOTIFICATIONS" >
+            <raw>
+            <![CDATA[
+            SELECT
+            n.notification_id AS NOTIFICATION_ID,
+            n.notification_type AS NOTIFICATION_TYPE,
+            c.name1 AS NOTIFICATION_CONTACT,
+            o.name1 AS HOST_NAME,
+            o.name2 AS SERVICE_NAME,
+            n.state AS NOTIFICATION_STATE,
+            n.start_time  AS NOTIFICATION_STARTTIME,
+            n.output AS NOTIFICATION_OUTPUT,
+            cnc.command_line as COMMAND_NAME
+            FROM IcingaNotifications n
+            INNER JOIN n.object o
+            LEFT JOIN n.contactnotifications cn
+            LEFT JOIN cn.notificationmethod cnm
+            LEFT JOIN cnm.command cnc
+
+            LEFT JOIN cn.contactobject c
+            ORDER BY notification_id DESC
+            ]]>
+            </raw>
+            
+            <credential name="IcingaContactgroup" type="dql">
+                
+                <leftjoin>s.contactgroups sc</leftjoin>
+                <leftjoin>h.contactgroups hc</leftjoin>
+
+            </credential>
+
+            <credential name="IcingaContactgroup" type="custom">
+             <![CDATA[
+                WHERE  (
+                    hc.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR 
+                    sc.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                )
+            ]]>
+            </credential>
+            
+            <credential name="IcingaServicegroup" type="dql">
+                <leftjoin>o.service s</leftjoin>
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <leftjoin>sg.object sgo</leftjoin>
+                <andwhere>
+                    (o.objecttype_id = 1 OR sgo.name1 IN (${credential_value}))
+                </andwhere>
+            </credential>
+           
+           <credential name="IcingaHostgroup" type="dql">
+                <leftjoin>o.host h</leftjoin>
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>hg.object hgo</leftjoin>
+                <andwhere>
+                    (o.objecttype_id = 2 OR hgo.name1 IN (${credential_value}))
+                </andwhere>
+            </credential>
+            <!--
+            an alternative way could be: (which creates two queries)
+            <credential name="IcingaServicegroup" type="dql">
+                <andwhere>
+                    <![CDATA[
+                    o.objecttype_id = 1 OR o.object_id IN (${TARGET_SERVICEGROUP_SERVICES.service_object_id})
+                    ]]>
+                </andwhere>
+            </credential>-->
+
+
+            
+
+           
+
+            <credential name="IcingaHostCustomVariablePair" type="NotificationCustomVariable" >
+                <parameter name="alias">o</parameter>
+                
+            </credential>
+            <credential name="IcingaServiceCustomVariablePair" type="NotificationCustomVariable" >
+                <parameter name="alias">o</parameter>
+            </credential>
+
+
+
+        </dql>
+    </ae:configuration>
+</ae:configurations>

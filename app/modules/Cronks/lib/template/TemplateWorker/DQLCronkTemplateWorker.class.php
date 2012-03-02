@@ -17,6 +17,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     private $offset = 0;
     private $limit = 0;
     private $order = false;
+    private $resultMap = array();
     private $orderDir = "ASC";
     /**
      *
@@ -42,6 +43,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
 
     public function setTemplate(CronkGridTemplateXmlParser $template) {
         $this->template = $template;
+        $this->fetchResultMapFromTemplate();
     }
 
     public function getTemplate() {
@@ -49,7 +51,6 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     }
 
     public function buildAll() {
-    
     }
 
     public function fetchDataArray() {
@@ -60,8 +61,28 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         return $this->result;
     }
 
+    private function fetchResultMapFromTemplate() {
+        $this->resultMap = array();
+        $fields = $this->template->getFields();
+
+        foreach($fields as $id=>$subValues) {
+            if(isset($subValues["datasource"]) &&
+                isset($subValues["datasource"]["field"])) {
+                $rewrite = $subValues["datasource"]["field"];
+                
+                if(isset($this->resultMap[$rewrite]))
+                    $this->resultMap[$rewrite] = array($id);
+                else
+                    $this->resultMap[$rewrite][] = $id;
+            }
+        }
+
+    }
+
     protected function rewriteResultRow($result) {
+        
         foreach($result as $key=>$val) {
+
             $meta = $this->getTemplate()->getFieldByName($key, 'display');
 
             if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
@@ -78,10 +99,20 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
 
                     $result[$key] = $this->rewritePerClassMethod($param['model'], $param['method'], $val, $param['arguments'], (array)$raw);
                 }
+            }            
+        }
+        
+        $rewrittenResult = array();
+        foreach($result as $key=>$val) {
+            $rewrittenResult[$key] = $val;
+            if(isset($this->resultMap[$key])) {
+                foreach($this->resultMap[$key] as $rewritten) {
+                    $rewrittenResult[$rewritten] = $val;
+                }
             }
         }
 
-        return $result;
+        return $rewrittenResult;
     }
 
     /**
@@ -124,7 +155,21 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
                 $val = str_replace('*', '%', $val);
             }
         }
-
+        
+        $break = false;
+        foreach($this->resultMap as $fieldId=>$vals) {
+            foreach($vals as $datasource) {
+                if($datasource == $field) {
+                    $field = $fieldId;
+                    $break = true;
+                    break;
+                }
+            }
+            if($break) {
+                break;
+            }
+        }
+        
         $field = $this->getAliasedTableFromDQL($field);
         $val = str_replace("'","'",$val);
         $this->query->addWhere($field." $operator ".$this->query->getConnection()->quote($val));
@@ -132,8 +177,8 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
 
     private function getAliasedTableFromDQL($field) {
         $results = array();
-        
-        if(preg_match_all('/([A-Za-z_\.]+?) AS '.$field.'/i',$this->query->getDql(),$results)) {
+
+        if(preg_match_all('/([A-Za-z_\.1-9]+?) AS '.$field.'/i',$this->query->getDql(),$results)) {            
             return $results[1][0];
 
         } else return $field;

@@ -76,6 +76,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     private function validateTarget() {
         AppKitLogger::verbose("Template uses view %s for data retrieval",$this->view);
         if(!isset($this->dqlViews[$this->view])) {
+            $target = $this->view;
             AppKitLogger::fatal("Target %s not found in views, check your template or create a view %s in views.xml",$target,$target);
             throw new AgaviException("Target $target not found in views, check your template or create a view $target in views.xml");
         }
@@ -144,6 +145,8 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         return $this->currentQuery;
     }
 
+    private $dqlHistory = array();
+
     private function applyDQLCallCredential(IcingaDoctrine_Query $query,array $sequence, array $targetValues) {
 
         if(empty($targetValues))
@@ -151,9 +154,12 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         AppKitLogger::verbose("Applying dql sequence %s",$sequence);
 
         foreach($sequence as $call) {
+            if(in_array($call["arg"].$call["type"],$this->dqlHistory))
+                continue;
             $arg = $this->replaceCredentialTokens($call["arg"], $targetValues);
             AppKitLogger::verbose("Applying call query->%s(%s)",$call["type"],$arg);
-
+            $this->dqlHistory[] = $call["arg"].$call["type"];
+            
             switch($call["type"]) {
                 case 'innerjoin':
                 case 'join':
@@ -178,6 +184,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                 case 'groupby':
                     $query->addGroupBy($arg);
                     break;
+                
             }
         }
     }
