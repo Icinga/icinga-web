@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <dql name="TARGET_SERVICE" >
+            <query>
+            <![CDATA[
+            SELECT
+                s.icon_image AS SERVICE_ICON_IMAGE,
+                i.instance_name AS INSTANCE_NAME,
+                h.host_object_id AS HOST_OBJECT_ID,
+                s.service_object_id AS SERVICE_OBJECT_ID,
+                oh.name1 AS HOST_NAME,
+                h.alias AS HOST_ALIAS,
+                h.display_name AS HOST_DISPLAY_NAME,
+                os.name2 AS SERVICE_NAME,
+                s.display_name AS SERVICE_DISPLAY_NAME,
+                ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.last_check AS SERVICE_LAST_CHECK,
+                ss.output AS SERVICE_OUTPUT,
+                ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
+                ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
+                i.instance_id AS SERVICE_INSTANCE_ID,
+                s.service_id AS SERVICE_ID,
+                ss.notifications_enabled as notifications_enabled,
+                ss.problem_has_been_acknowledged as problem_acknowledged,
+                ss.scheduled_downtime_depth as scheduled_downtime_depth,
+                ss.has_been_checked as service_has_been_checked
+            FROM IcingaServices s
+            INNER JOIN s.instance i
+            INNER JOIN s.status ss
+            INNER JOIN s.host h
+            INNER JOIN h.object oh
+            INNER JOIN s.object os
+
+            ]]>
+            </query>
+
+            <credential name="IcingaServiceGroup" type="dql">
+                <innerjoin>s.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        osg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+           </credential>
+
+           <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    s.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+           
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+            </credential>
+
+            <!--
+                Additional fields that are used in cronk filtering
+            -->
+            <filter name="custom_variable_name" type="dql">
+                <join>s.customvariables cvs</join>
+                <select>cvs.varname AS custom_variable_name</select>
+            </filter>
+
+            <filter name="custom_variable_value" type="dql">
+                <join>s.customvariables cvs</join>
+                <select>cvs.varvalue AS custom_variable_value</select>
+            </filter>
+
+            <filter name="hostgroup_name" type="dql">
+                <join>h.hostgroups hg</join>
+                <join>hg.object ohg</join>
+                <select>ohg.name1 AS hostgroup_name</select>
+            </filter>
+
+            <filter name="servicegroup_name" type="dql">
+                <join>s.servicegroups sg</join>
+                <join>sg.object osg</join>
+                <select>osg.name1 AS servicegroup_name</select>
+            </filter>
+            
+            <filter name="service_is_pending" type="dql">
+                <resolve>((ss.has_been_checked-1)*-1)</resolve>
+                <select>(ss.has_been_checked-1)*-1 AS service_is_pending</select>
+            </filter>
+
+         </dql>
+
+         <dql name="TARGET_SERVICE_OPEN_PROBLEMS" base="TARGET_SERVICE" >
+             <query>
+            <![CDATA[
+            SELECT
+                s.icon_image AS SERVICE_ICON_IMAGE,
+                i.instance_name AS INSTANCE_NAME,
+                h.host_object_id AS HOST_OBJECT_ID,
+                s.service_object_id AS SERVICE_OBJECT_ID,
+                oh.name1 AS HOST_NAME,
+                h.alias AS HOST_ALIAS,
+                h.display_name AS HOST_DISPLAY_NAME,
+                os.name2 AS SERVICE_NAME,
+                s.display_name AS SERVICE_DISPLAY_NAME,
+                ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.last_check AS SERVICE_LAST_CHECK,
+                ss.output AS SERVICE_OUTPUT,
+                ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
+                ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
+                i.instance_id AS SERVICE_INSTANCE_ID,
+                s.service_id AS SERVICE_ID,
+                ss.notifications_enabled as notifications_enabled,
+                ss.problem_has_been_acknowledged as problem_acknowledged,
+                ss.scheduled_downtime_depth as scheduled_downtime_depth,
+                ss.has_been_checked as service_has_been_checked
+            FROM IcingaServices s
+            INNER JOIN s.instance i
+            INNER JOIN s.status ss
+            INNER JOIN s.host h
+            INNER JOIN h.object oh
+            INNER JOIN s.object os
+            WHERE
+                ss.scheduled_downtime_depth = 0 AND
+                ss.current_state != 0 AND
+                ss.problem_has_been_acknowledged != 1
+            ]]>
+            </query>
+
+         </dql>
+     </ae:configuration>
+</ae:configurations>

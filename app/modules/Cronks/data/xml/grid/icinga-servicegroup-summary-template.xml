@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
+    <!-- new template -->
     
-    <!-- 
+    <type>DQL</type>
+
+    <!--
         Meta description of the templates, that anybody
         knows what the template is doing
     -->
@@ -117,35 +120,7 @@
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApiConstants::TARGET_SERVICEGROUP_SUMMARY</parameter>
-        
-        <!-- Limit the result (LOAD) -->
-        <!-- <parameter name="limit">25</parameter> -->
-        
-        <!-- <parameter name="id">log_id</parameter> -->
-        
-        <!--
-            If the countmode is 'simple' countfields will be ignored always! To use with a pager
-            you have to use the 'field' mode to count all data independent from data
-        -->
-        <parameter name="countmode">field</parameter>
-        
-        <!-- 
-            If the counting differs from data result you can specify a field to count
-        -->
-        <parameter name="countfields">
-            <parameter>SERVICEGROUP_ID</parameter>
-            <parameter>SERVICE_CURRENT_STATE</parameter>
-        </parameter>
-        
-        <!-- Database group by -->
-        <parameter name="groupby">
-            <parameter>SERVICEGROUP_ID</parameter>
-            <parameter>SERVICEGROUP_NAME</parameter>
-            <parameter>SERVICEGROUP_ALIAS</parameter>
-            <parameter>SERVICE_CURRENT_STATE</parameter>
-            <parameter>SERVICE_IS_PENDING</parameter>
-        </parameter>
+        <parameter name="target">TARGET_SERVICEGROUP_SUMMARY</parameter>
     </datasource>
     
     <!-- 
@@ -158,18 +133,11 @@
     
     <grouping>
         <parameter name="enabled">true</parameter>
-        <parameter name="field">servicegroup_name</parameter>
-        
-        <!-- GroupingView options (http://www.extjs.com/deploy/dev/docs/?class=Ext.grid.GroupingView) -->
+   
         <parameter name="Ext.grid.GroupingView">
             <parameter name="hideGroupedColumn">true</parameter>
             <parameter name="startCollapsed">false</parameter>
         </parameter>
-        
-        <!-- Options for the store (http://www.extjs.com/deploy/dev/docs/?class=Ext.data.GroupingStore) -->
-        <!-- <parameter name="Ext.data.GroupingStore">
-            
-        </parameter> -->
     </grouping>
     
     <!--
@@ -177,9 +145,9 @@
     -->
     <fields>
 
-        <field name="instance_name">
+        <field name="instance_funky_name">
             <datasource>
-                <parameter name="field">INSTANCE_NAME</parameter>
+                <parameter name="field">instance_name</parameter>
             </datasource>
 
             <display>
@@ -216,7 +184,7 @@
 
         <field name="servicegroup_id">
             <datasource>
-                <parameter name="field">SERVICEGROUP_ID</parameter>
+                <parameter name="field">servicegroup_id</parameter>
             </datasource>
             
             <display>
@@ -236,7 +204,7 @@
         
         <field name="servicegroup_name">
             <datasource>
-                <parameter name="field">SERVICEGROUP_NAME</parameter>
+                <parameter name="field">servicegroup_name</parameter>
             </datasource>
             
             <display>
@@ -256,7 +224,7 @@
         
         <field name="servicegroup_alias">
             <datasource>
-                <parameter name="field">SERVICEGROUP_ALIAS</parameter>
+                <parameter name="field">servicegroup_alias</parameter>
             </datasource>
             
             <display>
@@ -286,10 +254,7 @@
         </field> 
         
         <field name="servicegroup_services_click">
-            <datasource>
-                <parameter name="field">SERVICEGROUP_ID</parameter>
-            </datasource>
-            
+ 
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label"></parameter>
@@ -342,11 +307,10 @@
             </order>
         </field>
         
-        <field name="host_status">
+        <field name="service_status">
             <datasource>
-                <parameter name="field">SERVICE_CURRENT_STATE</parameter>
+                <parameter name="field">service_status</parameter>
             </datasource>
-            
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Status</parameter>
@@ -383,9 +347,9 @@
             </order>
         </field>
         
-        <field name="host_status_count">
+        <field name="service_status_count">
             <datasource>
-                <parameter name="field">SERVICEGROUP_SUMMARY_COUNT</parameter>
+                <parameter name="field">service_status_count</parameter>
             </datasource>
             
             <display>

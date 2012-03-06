@@ -4,7 +4,7 @@
 >
     <ae:configuration>
         <dql name="TARGET_SERVICEGROUP_SERVICES" >
-            <raw>
+            <query>
             <![CDATA[
                 SELECT DISTINCT
                     sg.servicegroup_id AS servicegroup_id,
@@ -14,7 +14,7 @@
                     INNER JOIN sg.members sgm
 
             ]]>
-            </raw>
+            </query>
             <credential name="IcingaServicegroup" type="custom">
             <![CDATA[
                 WHERE  o.name1 IN (${credential_value})
@@ -23,7 +23,7 @@
         </dql>
 
         <dql name="TARGET_SERVICEGROUP_SUMMARY" >
-            <raw>
+            <query>
                 <![CDATA[
                 SELECT 
                     o.name1 AS servicegroup_name,
@@ -33,7 +33,8 @@
                     i.instance_name AS instance_name,
                     COUNT(ss.current_state) AS service_status_count,
                     ss.current_state AS service_status,
-                    sg.servicegroup_id as servicegroup_id
+                    sg.servicegroup_id as servicegroup_id,
+                    ss.has_been_checked as service_has_been_checked
                 FROM IcingaServicegroups sg
                 INNER JOIN sg.instance i
                 INNER JOIN sg.object o
@@ -42,10 +43,11 @@
                 INNER JOIN ss.service s
 
                 GROUP BY sg.servicegroup_id, ss.current_state, o.name1,
-                    sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name
+                    sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name,
+                    ss.has_been_checked
                 ]]>
                 
-           </raw>
+           </query>
 
            <credential name="IcingaServicegroup" type="custom">
            <![CDATA[

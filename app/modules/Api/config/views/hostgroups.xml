@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+
+
+        <dql name="TARGET_HOSTGROUP_SUMMARY" >
+            <query>
+                <![CDATA[
+                SELECT
+                    o.name1 AS hostgroup_name,
+                    hg.alias AS hostgroup_alias,
+                    hg.hostgroup_id AS hostgroup_id,
+                    i.instance_id AS instance_id,
+                    i.instance_name AS instance_name,
+                    COUNT(hs.current_state) AS host_status_count,
+                    hs.current_state AS host_current_state,
+                    hs.current_state AS host_status,
+                    hs.has_been_checked as host_has_been_checked
+                FROM IcingaHostgroups hg
+                INNER JOIN hg.instance i
+                INNER JOIN hg.object o
+                INNER JOIN hg.members hgm
+                INNER JOIN hgm.status hs
+                INNER JOIN hs.host h
+
+                GROUP BY  hs.current_state, o.name1,
+                    hg.alias, hg.hostgroup_id, i.instance_id, i.instance_name,
+                    hs.has_been_checked
+                ]]>
+
+           </query>
+
+
+           <credential name="IcingaHostgroup" type="dql">
+                <andwhere>
+                    <![CDATA[
+                        o.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+           </credential>
+
+           <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    h.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+
+        </dql>
+
+    </ae:configuration>
+</ae:configurations>

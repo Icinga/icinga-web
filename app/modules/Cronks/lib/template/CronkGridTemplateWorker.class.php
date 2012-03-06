@@ -5,7 +5,7 @@ abstract class CronkGridTemplateWorker {
      * @var AgaviContext
      */
     private $context         = null;
-    
+
     abstract public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context);
 
     abstract public function setTemplate(CronkGridTemplateXmlParser $template);
@@ -96,9 +96,9 @@ abstract class CronkGridTemplateWorker {
             $meta = $this->getTemplate()->getFieldByName($key, 'display');
 
             if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
-		if (!isset($param['model'])) {
-			continue;
-		}
+                if (!isset($param['model'])) {
+                    continue;
+                }
 
                 if ($param['model'] && $param['method']) {
                     if (!array_key_exists('arguments', $param) && !isset($param['arguments'])) {
@@ -114,6 +114,7 @@ abstract class CronkGridTemplateWorker {
 
         return $out;
     }
+    
 
     protected function getFieldData(&$row, $field) {
         $datasource = $this->getTemplate()->getFieldByName($field, 'datasource');
@@ -139,6 +140,8 @@ abstract class CronkGridTemplateWorker {
     }
 }
 
-class CronkGridTemplateWorkerException extends AppKitException { }
+class CronkGridTemplateWorkerException extends AppKitException {
+
+}
 
 ?>
