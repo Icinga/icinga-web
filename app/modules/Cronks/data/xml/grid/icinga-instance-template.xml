@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
+    <type>DQL</type>
     <meta>
         <parameter name="name">Default instance template</parameter>
         <parameter name="description">Shows instance summary</parameter>
@@ -111,12 +112,7 @@
         </parameter>
     </option>
     <datasource>
-        <parameter name="target">IcingaApiConstants::TARGET_INSTANCE</parameter>
-        <parameter name="id">instance_id</parameter>
-        <parameter name="countmode">none</parameter>
-        <parameter name="countfields">
-            <parameter>INSTANCE_ID</parameter>
-        </parameter>
+        <parameter name="target">TARGET_INSTANCE</parameter>  
     </datasource>
     <pager>
         <parameter name="enabled">true</parameter>

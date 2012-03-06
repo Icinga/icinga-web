@@ -4,7 +4,7 @@
 >
     <ae:configuration>
         <dql name="TARGET_NOTIFICATIONS" >
-            <raw>
+            <query>
             <![CDATA[
             SELECT
             n.notification_id AS NOTIFICATION_ID,
@@ -25,10 +25,12 @@
             LEFT JOIN cn.contactobject c
             ORDER BY notification_id DESC
             ]]>
-            </raw>
+            </query>
             
             <credential name="IcingaContactgroup" type="dql">
-                
+                <leftjoin>o.service s</leftjoin>
+                <leftjoin>o.host h</leftjoin>
+
                 <leftjoin>s.contactgroups sc</leftjoin>
                 <leftjoin>h.contactgroups hc</leftjoin>
 

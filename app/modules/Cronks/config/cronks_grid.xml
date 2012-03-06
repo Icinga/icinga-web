@@ -34,7 +34,7 @@
 				<ae:parameter name="image">cronks.Applications</ae:parameter>
 				<ae:parameter name="position">310</ae:parameter>
 				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-new-servicegroup-summary-template</ae:parameter>
+					<ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
 				</ae:parameter>
 			</cronk>
 	
@@ -161,7 +161,7 @@
 				<ae:parameter name="image">cronks.Bubble_1</ae:parameter>
 				<ae:parameter name="position">410</ae:parameter>
 				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-new-notification-template</ae:parameter>
+					<ae:parameter name="template">icinga-notification-template</ae:parameter>
 				</ae:parameter>
 			</cronk>
 			

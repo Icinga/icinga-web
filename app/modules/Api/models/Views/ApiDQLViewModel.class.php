@@ -32,12 +32,17 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
         parent::initialize($ctx, $parameters);
+
         $this->dqlViews = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/views.xml'));
         $this->view = $parameters["view"];
-        $this->connection = $ctx->getDatabaseConnection("icinga");
+        $this->validateTarget();
+        $connection = "icinga";
+        if($this->view["connection"])
+            $connection = $this->view["connection"];
+        $this->connection = $ctx->getDatabaseConnection($connection);
         $this->user = $this->getContext()->getUser()->getNsmUser();
 
-        $this->validateTarget();
+        
         $this->parseBaseDQL();
         $this->parseDependencies();
         
@@ -65,6 +70,30 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         return $normalizedResult;
     }
 
+    private function enableFilter($field) {
+        if(!isset($this->view["filter"][$field])) {
+            return $field;
+        }
+        $filterDefinition = $this->view["filter"][$field];
+        $this->applyDQLCalls($this->currentQuery,$filterDefinition["calls"]);
+        
+        foreach($filterDefinition["calls"] as $key=>$value) {
+            if($value["type"] == "resolve") {
+                $field = $value["arg"];
+            }
+        }
+        return $field;
+    }
+
+    public function addWhere($field,$operator,$value) {
+         $value = $this->connection->quote($value);
+
+         $field = $this->enableFilter($field);
+         $field = $this->getAliasedTableFromDQL($field);
+         $this->currentQuery->addWhere("$field $operator $value");
+         AppKitLogger::verbose("Query after addWhere extension %s ", $this->currentQuery->getSqlQuery());
+         
+    }
 
     private function applyMerger(&$result) {
         foreach($this->mergeDependencies as $merger) {
@@ -127,7 +156,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     );
                     break;
                 case "dql":
-                    $this->applyDQLCallCredential($query,$credentialDefinition["calls"],
+                    $this->applyDQLCalls($query,$credentialDefinition["calls"],
                         $this->getCredentialValues($credentialDefinition["name"]));
                    break;
                default:
@@ -140,6 +169,14 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $query->addFilter($filter);   
     }
 
+    public function getAliasedTableFromDQL($field) {
+        $results = array();
+
+        if(preg_match_all('/([A-Za-z_\.1-9]+?) AS '.$field.'/i',$this->currentQuery->getDql(),$results)) {
+            return $results[1][0];
+
+        } else return $field;
+    }
 
     public function getQuery() {
         return $this->currentQuery;
@@ -147,20 +184,27 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private $dqlHistory = array();
 
-    private function applyDQLCallCredential(IcingaDoctrine_Query $query,array $sequence, array $targetValues) {
+    private function applyDQLCalls(IcingaDoctrine_Query $query,array $sequence, $targetValues = null) {
 
-        if(empty($targetValues))
+        if($targetValues !== null && empty($targetValues))
             return;
         AppKitLogger::verbose("Applying dql sequence %s",$sequence);
 
         foreach($sequence as $call) {
             if(in_array($call["arg"].$call["type"],$this->dqlHistory))
                 continue;
-            $arg = $this->replaceCredentialTokens($call["arg"], $targetValues);
+
+            if($targetValues !== null)
+                $arg = $this->replaceCredentialTokens($call["arg"], $targetValues);
+            else
+                $arg = $call["arg"];
             AppKitLogger::verbose("Applying call query->%s(%s)",$call["type"],$arg);
             $this->dqlHistory[] = $call["arg"].$call["type"];
             
             switch($call["type"]) {
+                case 'select':
+                    $query->addSelect($arg);
+                    break;
                 case 'innerjoin':
                 case 'join':
                     $query->innerJoin($arg,null);
@@ -183,8 +227,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     break;
                 case 'groupby':
                     $query->addGroupBy($arg);
-                    break;
-                
+                    break;   
             }
         }
     }

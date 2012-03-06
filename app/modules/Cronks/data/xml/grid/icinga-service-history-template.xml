@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
-    <!-- 
-        Meta description of the templates, that anybody
-        knows what the template is doing
-    -->
+    <type>DQL</type>
+   
     <meta>
         <parameter name="name">Default icinga service history template</parameter>
         <parameter name="description">Displays status history about a service</parameter>
         <parameter name="author">icinga-web developers</parameter>
     </meta>
-    
-    <!-- 
-        Options for the template. Change layout and view style to fit the type you
-        want to display
-    -->
+   
     <option>
         <parameter name="mode">default</parameter>
         <parameter name="layout">CronkGridTemplateAjaxGridLayout</parameter> 
@@ -25,37 +18,10 @@
             <parameter>IcingaServiceCustomVariablePair</parameter>
         </parameter>
     </option>
-    
-    <!-- 
-        What data to display? Define icinga data targets and countfields
-    -->
+ 
     <datasource>
-        <parameter name="target">IcingaApiConstants::TARGET_SERVICE_STATUS_HISTORY</parameter>
-        
-        <parameter name="id">statehistory_id</parameter>
-        
-        <!--
-            If the countmode is 'simple' countfields will be ignored always! To use with a pager
-            you have to use the 'field' mode to count all data independent from data
-            
-            Type 'none' to disable sql counts
-        -->
-        <parameter name="countmode">none</parameter>
-        
-        <!-- 
-            If the counting differs from data result you can specify a field to count
-        -->
-        <parameter name="countfields">
-            <parameter>STATEHISTORY_ID</parameter>
-        </parameter>
-        
-        <!-- 
-            Additional fields we would like to work with it (append them on the datasource
-            without working the default structures, e.g. for user classes)
-        -->
-        <parameter name="additional_fields">
-            <parameter name="state_max_check_attempts">STATEHISTORY_MAX_CHECK_ATTEMPTS</parameter>
-        </parameter>
+        <parameter name="target">TARGET_SERVICE_STATUS_HISTORY</parameter>
+       
     </datasource>
     
     <!-- 

@@ -10,6 +10,8 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel imp
     public function extend(IcingaDoctrine_Query $query,array $params) {
         $target = $params["target"];
         $alias  = $params["alias"];
+        $joinType = isset($params["joinType"]) ? $params["joinType"] : "inner";
+        $whereAppendix = isset($params["where"]) ? $params["where"] : "";
         $isObject = isset($params["isObject"]);
         $objectTypeClause = $isObject ? " AND $alias.objecttype_id = " : "";
         $this->user = $this->getContext()->getUser()->getNsmUser();
@@ -31,7 +33,11 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel imp
         $targetVals = $this->user->getTargetValues($target)->toArray();
         if(empty($targetVals))
            return;
-        $query->innerJoin("$alias.customvariables ".$aliasAbbr);
+        if($joinType == "left")
+            $query->leftJoin("$alias.customvariables ".$aliasAbbr);
+        else
+            $query->innerJoin("$alias.customvariables ".$aliasAbbr);
+
         $keymap = array(
             "cv_name" => "varname",
             "cv_value" => "varvalue"
@@ -39,7 +45,7 @@ class Api_Views_Extender_CustomVariableExtenderModel extends IcingaBaseModel imp
         foreach($targetVals as $cvKeyValuePair) {
             $query->andWhere(
                 "($aliasAbbr.".$keymap[$cvKeyValuePair["tv_key"]]." = '".$cvKeyValuePair["tv_val"]."'
-                    $objectTypeClause )"
+                    $objectTypeClause  ".$whereAppendix.")"
             );
         }
     }
