@@ -18,7 +18,9 @@
                 hsh.state_time AS STATEHISTORY_STATE_TIME,
                 hsh.output AS STATEHISTORY_OUTPUT,
                 hsh.current_check_attempt AS STATEHISTORY_CURRENT_CHECK_ATTEMPT,
-                hsh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS
+                hsh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS,
+                hsh.current_check_attempt AS state_check_attempt,
+                hsh.max_check_attempts AS state_max_check_attempts
             FROM IcingaStatehistory hsh
             INNER JOIN hsh.object oh WITH oh.objecttype_id = 1
             INNER JOIN oh.host h
@@ -74,7 +76,9 @@
                 ssh.state_time AS STATEHISTORY_STATE_TIME,
                 ssh.output AS STATEHISTORY_OUTPUT,
                 ssh.current_check_attempt AS STATEHISTORY_CURRENT_CHECK_ATTEMPT,
-                ssh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS
+                ssh.max_check_attempts AS STATEHISTORY_MAX_CHECK_ATTEMPTS,
+                ssh.current_check_attempt AS state_check_attempt,
+                ssh.max_check_attempts AS state_max_check_attempts
             FROM IcingaStatehistory ssh
             INNER JOIN ssh.object os WITH os.objecttype_id = 2
             INNER JOIN os.service s

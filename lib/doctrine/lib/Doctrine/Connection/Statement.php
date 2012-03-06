@@ -244,6 +244,11 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
                 if ($params) {
                     $pos = 0;
                     foreach ($params as $key => $value) {
+
+                        if($value === null) {
+                            continue;
+                        }
+                        
                         $pos++;
                         $param = is_numeric($key) ?  $pos : $key;
                         if (is_resource($value)) {

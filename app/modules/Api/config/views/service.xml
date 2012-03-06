@@ -20,7 +20,7 @@
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.output AS SERVICE_OUTPUT,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
-                ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
+                ss.max_check_attempts AS service_max_attempt,
                 i.instance_id AS SERVICE_INSTANCE_ID,
                 s.service_id AS SERVICE_ID,
                 ss.notifications_enabled as notifications_enabled,
@@ -95,14 +95,14 @@
             </filter>
 
             <filter name="hostgroup_name" type="dql">
-                <join>h.hostgroups hg</join>
-                <join>hg.object ohg</join>
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
                 <select>ohg.name1 AS hostgroup_name</select>
             </filter>
 
             <filter name="servicegroup_name" type="dql">
-                <join>s.servicegroups sg</join>
-                <join>sg.object osg</join>
+                <innerjoin>s.servicegroups sg</innerjoin>
+                <innerjoin>sg.object osg</innerjoin>
                 <select>osg.name1 AS servicegroup_name</select>
             </filter>
             
