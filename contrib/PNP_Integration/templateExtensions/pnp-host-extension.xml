@@ -58,7 +58,7 @@
                             <parameter name="booleanConditionField">pnp4nagios_host_image_hover</parameter>
                             <parameter name="title">Image for
                                 {host_name}</parameter>
-                            <parameter name="url"><![CDATA[/pnp4nagios/image?host=C://test/test.html&srv=_HOST_&view=0]]></parameter>
+                            <parameter name="url"><![CDATA[/pnp4nagios/image?host={host_name}&srv=_HOST_&view=0]]></parameter>
                             <parameter name="width">400</parameter>
                             <parameter name="height">400</parameter>
                         </parameter>
