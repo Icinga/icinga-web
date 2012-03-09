@@ -36,10 +36,14 @@ class AppKit_Login_AjaxLoginAction extends AppKitBaseAction {
 
             try {
                 $user->doLogin($username, $password);
-                if(!$user->hasCredential("icinga.user")) {
-                    $user->doLogout();
-                    $this->setAttribute('authenticated', false);
-                }
+                /*
+                 * Behaviour for blocking whole access if no icinga access
+                 */
+                //if(!$user->hasCredential("icinga.user")) {
+                //    $user->doLogout();
+                //    $this->setAttribute('authenticated', false);
+                //}
+                
                 $this->setAttribute('authenticated', true);
             } catch (AgaviSecurityException $e) {
                 $this->setAttribute('authenticated', false);
