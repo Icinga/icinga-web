@@ -73,6 +73,21 @@ class AppKitArrayUtil {
 
         return $out;
     }
+    
+    /**
+     * Returns unique collection of a multidimensional
+     * array
+     * @param array $input
+     * @return array
+     */
+    public static function uniqueMultidimensional(array $input) {
+        $check = array();
+        array_multisort($input);
+        foreach ($input as $key=>$array) {
+            $check[md5(json_encode($array))] = $key;
+        }
+        return array_intersect_key($input, array_flip($check));
+    }
 
     /**
      * Splits a string into parts and respects spaces
