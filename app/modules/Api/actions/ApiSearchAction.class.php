@@ -50,9 +50,9 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
     }
 
     public function executeRead(AgaviRequestDataHolder $rd) {
-
+        
         if (!$this->context->getUser()->isAuthenticated() 
-            || $this->getContainer()->getAttribute('success', 'org.icinga.api.auth') !== true) {
+            || $this->getContainer()->getAttribute('success', 'org.icinga.api.auth', true) == false) {
             return array('Api', 'GenericError');
 	    }
         
