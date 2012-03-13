@@ -287,10 +287,10 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                     $data = $provider->getUserdata($username, false);
 
                     if (is_array($data)) {
-
+                        
                         $user = new NsmUser();
                         $user->fromArray($data, false);
-
+                        
                         $groups = $provider->getDefaultGroups();
 
                         if (is_array($groups)) {
@@ -304,7 +304,10 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                             }
                         }
                         
-                        if (!$user->NsmRole->Count) {
+                        if (count($user->NsmRole) > 0) {
+                            $user->save();
+                            $user->refresh(true);
+                        } else {
                             $this->log('Auth.Dispatch/import: No groups available for user, ABORT!', AgaviLogger::FATAL);
                             return null;
                         }
@@ -314,6 +317,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                             array(),
                             array()
                         );
+                        
                         $user->save();
 
                         $this->log(

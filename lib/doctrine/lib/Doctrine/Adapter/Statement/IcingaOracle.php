@@ -143,36 +143,36 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
      * @return string
      */
     private function fixOrdersInSubqueries(&$query) {
-        $m = array();
-        
         list($mainTable, $mainAlias) = $this->getTableParts($query);
         
-        if ($mainTable && $mainAlias) {
+        $m = array();
+        if (preg_match('/ORDER\s+BY\s+(.+)(;|$)/i', $query, $m)) {
+            $fields = AppKitArrayUtil::trimSplit($m[1]);
             
-            if (preg_match('/ORDER\s+BY\s+(.+)(;|$)/i', $query, $m)) {
-                $fields = AppKitArrayUtil::trimSplit($m[1]);
-                if (preg_match_all('/FROM\s+\(\s*(SELECT\s+[\w\.\,\s]+\s+FROM\s+'. $mainTable. '[^\)]+)\)/i', $query, $m, PREG_SET_ORDER)) {
-                    foreach ($m as $match) {
-                        $replaceMarker = $match[0];
-                        $subQuery = $match[1];
+            $pparse = new AppKitStringParanthesesParser($query, AppKitStringParanthesesParser::STRIP_PARANTHESES);
+            if ($pparse->count()) {
+                foreach ($pparse as $part) {
+                    $m = array();
+                    if (preg_match('/^\s*(SELECT\s+[\w\.\,\s]+\s+FROM\s+'. preg_quote($mainTable, '/'). '[^$]+)/', $part, $m)) {
+                        $subQuery = $m[0];
                         list($subTable, $subAlias) = $this->getTableParts($subQuery);
                         if ($subTable == $mainTable && !preg_match('/ORDER BY/i', $subQuery)) {
                             $orderParts = array();
+                            $newSub = $subQuery;
                             foreach ($fields as $field) {
                                 $newOrder = preg_replace('/^\w+\./', $subAlias. '.', $field);
                                 $newField = preg_replace('/\s+.+$/', '', $newOrder);
                                 $orderParts[] = $newOrder;
-                                $subQuery = preg_replace('/^\s*(SELECT\s+(DISTINCT)?\s*)'. $subAlias. '/i', '\1 '. $newField. ', '. $subAlias, $subQuery);
+                                $newSub = preg_replace('/^\s*(SELECT\s+(DISTINCT)?\s*)'. $subAlias. '/i', '\1 '. $newField. ', '. $subAlias, $subQuery);
                             }
-                            $newSub = ' FROM ( '. $subQuery. ' ORDER BY '. implode(', ', $orderParts). ' ) ';
-                            
-                            $query = preg_replace('/'. preg_quote($replaceMarker, '/'). '/', $newSub, $query);
+                            $newSub = $newSub. ' ORDER BY '. implode(', ', $orderParts);
+                            $query = preg_replace('/'. preg_quote($subQuery, '/'). '/', $newSub, $query);
                         }
+                        break;
                     }
                 }
             }
         }
-        
         return $query;
     }
     

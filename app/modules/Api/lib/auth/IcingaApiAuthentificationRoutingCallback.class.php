@@ -2,6 +2,8 @@
 
 class IcingaApiAuthentificationRoutingCallback extends AgaviRoutingCallback {
     
+    const INSUFFICIENT_MSG = 'User has insufficient rights to access the api';
+    
     /**
      * @var AppKitSecurityUser
      */
@@ -10,6 +12,19 @@ class IcingaApiAuthentificationRoutingCallback extends AgaviRoutingCallback {
     public function initialize(AgaviContext $context, array &$route) {
         parent::initialize($context, $route);
         $this->user = $this->context->getUser();
+    }
+    
+    private function checkAuthorisation() {
+        
+        if (!$this->user->isAuthenticated()) {
+            return false;
+        }
+        
+        if (!$this->user->hasCredential("appkit.api.access") && !$this->user->hasCredential("icinga.user")) {
+            return false;
+        }
+        
+        return true;
     }
     
     public function onMatched(array &$parameters, AgaviExecutionContainer $container) {
@@ -33,15 +48,22 @@ class IcingaApiAuthentificationRoutingCallback extends AgaviRoutingCallback {
             // PASS
         }
         
-        if (!$this->user->hasCredential("appkit.api.access") && !$this->user->hasCredential("icinga.user")) {
-            $errors[] = 'User has insufficient rights to access the api';
+        if ($this->checkAuthorisation() == false) {
+            $errors[] = self::INSUFFICIENT_MSG;
         }
         
         if (count($errors)) {
             $container->setAttributeByRef('errors', $errors, 'org.icinga.api.auth');
             $container->setAttribute('success', false, 'org.icinga.api.auth');
+            return false;
         }
-        $container->setAttribute('success', false, 'org.icinga.api.auth');
+        
+        $container->setAttribute('success', true, 'org.icinga.api.auth');
         return true;
+    }
+    
+    public function onNotMatched(AgaviExecutionContainer $container) {
+        $garbage = array();
+        return $this->onMatched($garbage, $container);
     }
 }

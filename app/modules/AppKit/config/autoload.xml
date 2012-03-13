@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<ae:configuration>
-		
-		<!-- MVC classes -->
-		<autoload name="AppKitBaseAction">%core.module_dir%/AppKit/lib/action/AppKitBaseAction.class.php</autoload>
-		<autoload name="AppKitBaseModel">%core.module_dir%/AppKit/lib/model/AppKitBaseModel.class.php</autoload>
-		<autoload name="AppKitBaseView">%core.module_dir%/AppKit/lib/view/AppKitBaseView.class.php</autoload>
-		<autoload name="Net_SSH2">%core.root_dir%/lib/phpseclib/Net/SSH2.php</autoload>
-
+    <ae:configuration>
+        
+        <!-- MVC classes -->
+        <autoload name="AppKitBaseAction">%core.module_dir%/AppKit/lib/action/AppKitBaseAction.class.php</autoload>
+        <autoload name="AppKitBaseModel">%core.module_dir%/AppKit/lib/model/AppKitBaseModel.class.php</autoload>
+        <autoload name="AppKitBaseView">%core.module_dir%/AppKit/lib/view/AppKitBaseView.class.php</autoload>
+        <autoload name="Net_SSH2">%core.root_dir%/lib/phpseclib/Net/SSH2.php</autoload>
 
         <!-- CONSTANTS -->
         <autoload name="AppKitIConstants">%core.module_dir%/AppKit/lib/constants/AppKitIConstants.interface.php</autoload>
         <autoload name="AppKitLogger">%core.module_dir%/AppKit/lib/logging/AppKitLogger.class.php</autoload>
-		<!-- Auth and auth providers -->
-		<autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
-		<autoload name="AppKitAuthProviderBaseModel">%core.module_dir%/AppKit/lib/auth/AppKitAuthProviderBaseModel.class.php</autoload>
-		<autoload name="AppKitPrincipalTarget">%core.module_dir%/AppKit/lib/auth/principal/AppKitPrincipalTarget.class.php</autoload>
-		<autoload name="AppKitUserPreferences">%core.module_dir%/AppKit/lib/auth/AppKitUserPreferences.interface.php</autoload>
-		<autoload name="AppKitSecurityUser">%core.module_dir%/AppKit/lib/auth/AppKitSecurityUser.class.php</autoload>
-		
-		<!-- AgaviContext -->
-		<autoload name="AppKitAgaviContext">%core.module_dir%/AppKit/lib/context/AppKitAgaviContext.class.php</autoload>
-		
-		<!-- AppKit itself -->
-		<autoload name="AppKit">%core.module_dir%/AppKit/lib/AppKit.class.php</autoload>
-		
-		<!-- Unsorted -->
-		<autoload name="AppKitArrayContainer">%core.module_dir%/AppKit/lib/class/AppKitArrayContainer.class.php</autoload>
+        <!-- Auth and auth providers -->
+        <autoload name="AppKitIAuthProvider">%core.module_dir%/AppKit/lib/auth/AppKitIAuthProvider.interface.php</autoload>
+        <autoload name="AppKitAuthProviderBaseModel">%core.module_dir%/AppKit/lib/auth/AppKitAuthProviderBaseModel.class.php</autoload>
+        <autoload name="AppKitPrincipalTarget">%core.module_dir%/AppKit/lib/auth/principal/AppKitPrincipalTarget.class.php</autoload>
+        <autoload name="AppKitUserPreferences">%core.module_dir%/AppKit/lib/auth/AppKitUserPreferences.interface.php</autoload>
+        <autoload name="AppKitSecurityUser">%core.module_dir%/AppKit/lib/auth/AppKitSecurityUser.class.php</autoload>
+        
+        <!-- AgaviContext -->
+        <autoload name="AppKitAgaviContext">%core.module_dir%/AppKit/lib/context/AppKitAgaviContext.class.php</autoload>
+        
+        <!-- AppKit itself -->
+        <autoload name="AppKit">%core.module_dir%/AppKit/lib/AppKit.class.php</autoload>
+        
+        <!-- Unsorted -->
+        <autoload name="AppKitArrayContainer">%core.module_dir%/AppKit/lib/class/AppKitArrayContainer.class.php</autoload>
 
-		<!-- The same -->
-		<autoload name="AppKitException">%core.module_dir%/AppKit/lib/exception/AppKitException.class.php</autoload>
-	    <autoload name="AppKitDoctrineDatabase">%core.module_dir%/AppKit/lib/database/AppKitDoctrineDatabase.class.php</autoload>	
-		<autoload name="AppKitSQLConstants">%core.module_dir%/AppKit/lib/database/AppKitSQLConstants.class.php</autoload>
-		<autoload name="AppKitDoctrineException">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineException.class.php</autoload>
-		<autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
-		<autoload name="AppKitModelException">%core.module_dir%/AppKit/lib/exception/AppKitModelException.class.php</autoload>
-	
-		<!-- JSON things -->
-		<autoload name="AppKitExtJsonDocument">%core.module_dir%/AppKit/lib/json/AppKitExtJsonDocument.class.php</autoload>
-		<autoload name="AppKitExtDataInterface">%core.module_dir%/AppKit/lib/json/AppKitExtDataInterface.class.php</autoload>
-		<autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
-		<autoload name="AppKitApacheLoggerFormat">%core.module_dir%/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php</autoload>
-		<autoload name="AppKitExceptionHandler">%core.module_dir%/AppKit/lib/logging/AppKitExceptionHandler.class.php</autoload>
-		<autoload name="AppKitDoctrineSessionStorage">%core.module_dir%/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php</autoload>
-		<autoload name="AppKitGettextTranslator">%core.module_dir%/AppKit/lib/translator/AppKitGettextTranslator.class.php</autoload>
-		<autoload name="AppKitTranslationManager">%core.module_dir%/AppKit/lib/translator/AppKitTranslationManager.class.php</autoload>
-		<autoload name="AppKitArrayUtil">%core.module_dir%/AppKit/lib/util/AppKitArrayUtil.class.php</autoload>
-		<autoload name="AppKitDoctrineUtil">%core.module_dir%/AppKit/lib/util/AppKitDoctrineUtil.class.php</autoload>
-       	<autoload name="AppKitLinkedList">%core.module_dir%/AppKit/lib/util/AppKitLinkedList.class.php</autoload>
-		<autoload name="AppKitClassUtil">%core.module_dir%/AppKit/lib/util/AppKitClassUtil.class.php</autoload>
-		<autoload name="AppKitRandomUtil">%core.module_dir%/AppKit/lib/util/AppKitRandomUtil.class.php</autoload>
-		<autoload name="AppKitStringUtil">%core.module_dir%/AppKit/lib/util/AppKitStringUtil.class.php</autoload>
-		<autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
-		<autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
-		<autoload name="AppKitFileUtil">%core.module_dir%/AppKit/lib/util/AppKitFileUtil.class.php</autoload>
-	
-		<!-- Custom validators -->
-		<autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
-		<autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
-		<autoload name="AppKitSoapFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitSoapFilterValidator.class.php</autoload>
-		<autoload name="AppKitJsonValidator">%core.module_dir%/AppKit/lib/validator/AppKitJsonValidator.class.php</autoload>
-		<autoload name="AppKitUriValidator">%core.module_dir%/AppKit/lib/validator/AppKitUriValidator.class.php</autoload>
-		
-		<autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
-	    <autoload name="AppKitXIncludeConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitXIncludeConfigHandler.class.php</autoload> 
-	    <autoload name="AppKitSubSettingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitSubSettingConfigHandler.class.php</autoload>
-	    <autoload name="AppKitResourceConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitResourceConfigHandler.class.php</autoload>
-	    <autoload name="AppKitIteratorUtil">%core.module_dir%/AppKit/lib/util/AppKitIteratorUtil.class.php</autoload>
-	
-		<!-- Agavi config file handler -->
-		<autoload name="AppKitRoutingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingConfigHandler.class.php</autoload>
-		<autoload name="AppKitMenuConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitMenuConfigHandler.class.php</autoload>
-	
-	    <!-- Classes for automatic clientside api creation -->
-		<autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>
-		<autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload>         
-		<autoload name="IAppKitDataStoreProviderAction">%core.module_dir%/AppKit/lib/action/IAppKitDataStoreProviderAction.php</autoload>
+        <!-- The same -->
+        <autoload name="AppKitException">%core.module_dir%/AppKit/lib/exception/AppKitException.class.php</autoload>
+        <autoload name="AppKitDoctrineDatabase">%core.module_dir%/AppKit/lib/database/AppKitDoctrineDatabase.class.php</autoload>   
+        <autoload name="AppKitSQLConstants">%core.module_dir%/AppKit/lib/database/AppKitSQLConstants.class.php</autoload>
+        <autoload name="AppKitDoctrineException">%core.module_dir%/AppKit/lib/doctrine/AppKitDoctrineException.class.php</autoload>
+        <autoload name="AppKitXmlTag">%core.module_dir%/AppKit/lib/html/AppKitXmlTag.class.php</autoload>
+        <autoload name="AppKitModelException">%core.module_dir%/AppKit/lib/exception/AppKitModelException.class.php</autoload>
+    
+        <!-- JSON things -->
+        <autoload name="AppKitExtJsonDocument">%core.module_dir%/AppKit/lib/json/AppKitExtJsonDocument.class.php</autoload>
+        <autoload name="AppKitExtDataInterface">%core.module_dir%/AppKit/lib/json/AppKitExtDataInterface.class.php</autoload>
+        <autoload name="AppKitDoctrineLoggerAppender">%core.module_dir%/AppKit/lib/logging/AppKitDoctrineLoggerAppender.class.php</autoload>
+        <autoload name="AppKitApacheLoggerFormat">%core.module_dir%/AppKit/lib/logging/AppKitApacheLoggerFormat.class.php</autoload>
+        <autoload name="AppKitExceptionHandler">%core.module_dir%/AppKit/lib/logging/AppKitExceptionHandler.class.php</autoload>
+        <autoload name="AppKitDoctrineSessionStorage">%core.module_dir%/AppKit/lib/storage/AppKitDoctrineSessionStorage.class.php</autoload>
+        <autoload name="AppKitGettextTranslator">%core.module_dir%/AppKit/lib/translator/AppKitGettextTranslator.class.php</autoload>
+        <autoload name="AppKitTranslationManager">%core.module_dir%/AppKit/lib/translator/AppKitTranslationManager.class.php</autoload>
+        <autoload name="AppKitArrayUtil">%core.module_dir%/AppKit/lib/util/AppKitArrayUtil.class.php</autoload>
+        <autoload name="AppKitDoctrineUtil">%core.module_dir%/AppKit/lib/util/AppKitDoctrineUtil.class.php</autoload>
+        <autoload name="AppKitLinkedList">%core.module_dir%/AppKit/lib/util/AppKitLinkedList.class.php</autoload>
+        <autoload name="AppKitClassUtil">%core.module_dir%/AppKit/lib/util/AppKitClassUtil.class.php</autoload>
+        <autoload name="AppKitRandomUtil">%core.module_dir%/AppKit/lib/util/AppKitRandomUtil.class.php</autoload>
+        <autoload name="AppKitStringUtil">%core.module_dir%/AppKit/lib/util/AppKitStringUtil.class.php</autoload>
+        <autoload name="AppKitFormatParserUtil">%core.module_dir%/AppKit/lib/util/AppKitFormatParserUtil.class.php</autoload>
+        <autoload name="AppKitAgaviUtil">%core.module_dir%/AppKit/lib/util/AppKitAgaviUtil.class.php</autoload>
+        <autoload name="AppKitFileUtil">%core.module_dir%/AppKit/lib/util/AppKitFileUtil.class.php</autoload>
+        <autoload name="AppKitStringParanthesesParser">%core.module_dir%/AppKit/lib/util/AppKitStringParanthesesParser.class.php</autoload>
+    
+        <!-- Custom validators -->
+        <autoload name="AppKitSplitValidator">%core.module_dir%/AppKit/lib/validator/AppKitSplitValidator.class.php</autoload>
+        <autoload name="AppKitURLFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitURLFilterValidator.class.php</autoload>
+        <autoload name="AppKitSoapFilterValidator">%core.module_dir%/AppKit/lib/validator/AppKitSoapFilterValidator.class.php</autoload>
+        <autoload name="AppKitJsonValidator">%core.module_dir%/AppKit/lib/validator/AppKitJsonValidator.class.php</autoload>
+        <autoload name="AppKitUriValidator">%core.module_dir%/AppKit/lib/validator/AppKitUriValidator.class.php</autoload>
+        
+        <autoload name="AppKitXmlUtil">%core.module_dir%/AppKit/lib/util/AppKitXmlUtil.class.php</autoload>
+        <autoload name="AppKitXIncludeConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitXIncludeConfigHandler.class.php</autoload> 
+        <autoload name="AppKitSubSettingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitSubSettingConfigHandler.class.php</autoload>
+        <autoload name="AppKitResourceConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitResourceConfigHandler.class.php</autoload>
+        <autoload name="AppKitIteratorUtil">%core.module_dir%/AppKit/lib/util/AppKitIteratorUtil.class.php</autoload>
+    
+        <!-- Agavi config file handler -->
+        <autoload name="AppKitRoutingConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitRoutingConfigHandler.class.php</autoload>
+        <autoload name="AppKitMenuConfigHandler">%core.module_dir%/AppKit/lib/config/AppKitMenuConfigHandler.class.php</autoload>
+    
+        <!-- Classes for automatic clientside api creation -->
+        <autoload name="AppKitValidatorArgumentExtractor">%core.module_dir%/AppKit/lib/config/AppKitValidatorArgumentExtractor.class.php</autoload>
+        <autoload name="AppKitApiProviderParser">%core.module_dir%/AppKit/lib/config/AppKitApiProviderParser.class.php</autoload>         
+        <autoload name="IAppKitDataStoreProviderAction">%core.module_dir%/AppKit/lib/action/IAppKitDataStoreProviderAction.php</autoload>
         <autoload name="IAppKitDispatchableAction">%core.module_dir%/AppKit/lib/action/IAppKitDispatchableAction.php</autoload>
-		<autoload name="AppKitExtJSDataStoreWriter">%core.module_dir%/AppKit/lib/config/AppKitExtJSDataStoreWriter.class.php</autoload>
-	</ae:configuration>
+        <autoload name="AppKitExtJSDataStoreWriter">%core.module_dir%/AppKit/lib/config/AppKitExtJSDataStoreWriter.class.php</autoload>
+    </ae:configuration>
 </ae:configurations>
