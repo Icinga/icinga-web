@@ -3,6 +3,8 @@
 class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     private $dqlViews;
     private $view;
+    private $viewParameters;
+
     /**
      *
      * @var NsmUser
@@ -35,15 +37,19 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
         $this->dqlViews = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/views.xml'));
         $this->view = $parameters["view"];
+        $this->viewParameters = isset($parameters["parameters"]) ? $parameters["parameters"] : array();
         $this->validateTarget();
         $connection = "icinga";
-        if($this->view["connection"])
+
+        if($this->view["connection"]) {
             $connection = $this->view["connection"];
+        }
         $this->connection = $ctx->getDatabaseConnection($connection);
         $this->user = $this->getContext()->getUser()->getNsmUser();
 
         
         $this->parseBaseDQL();
+        $this->parseDQLExtensions();
         $this->parseDependencies();
         
 
@@ -51,6 +57,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     public function getResult() {
         AppKitLogger::verbose("Processing query %s ",$this->currentQuery->getSqlQuery());
+
         $result = $this->currentQuery->execute(null,Doctrine_Core::HYDRATE_SCALAR);
         
         $normalizedResult = array();
@@ -64,6 +71,9 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         }
 
         self::$bufferedResults[$this->view["name"]] = $normalizedResult;
+        if($this->view["base"])
+            self::$bufferedResults[$this->view["base"]] = $normalizedResult;
+
         AppKitLogger::verbose("Result for view %s : %s",$this->view["name"],$normalizedResult);
         $this->applyMerger($normalizedResult);
 
@@ -117,16 +127,23 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $prefix = $this->connection->getPrefix();
         $query = $this->view["baseQuery"];
 
-        
         $query = $this->replaceTokens($query);
-
         $this->createDQL($query);
+    }
+
+    private function parseDQLExtensions() {
+        $prefix = $this->connection->getPrefix();
+        if(!empty($this->view["extend"])) {
+            foreach($this->view["extend"] as $extender) {
+                $this->applyDQLCalls($this->currentQuery, $extender["calls"]);
+            }
+        }
 
     }
 
     private function createDQL($dql) {
         $query = IcingaDoctrine_Query::create();
-
+        $query->setConnection($this->connection);
         AppKitLogger::verbose("Parsing DQL Query: %s ",$dql);
         $query->parseDqlQuery($dql);
 
@@ -197,10 +214,10 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
             if($targetValues !== null)
                 $arg = $this->replaceCredentialTokens($call["arg"], $targetValues);
             else
-                $arg = $call["arg"];
+                $arg = $this->replaceTokens($call["arg"]);
             AppKitLogger::verbose("Applying call query->%s(%s)",$call["type"],$arg);
             $this->dqlHistory[] = $call["arg"].$call["type"];
-            
+
             switch($call["type"]) {
                 case 'select':
                     $query->addSelect($arg);
@@ -288,12 +305,25 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private function resolveReferenceToken($token,$query) {
         $results = array();
-        preg_match_all("/(?P<view>[^\.\}]+)\.(?P<field>[^\}]+)/",$token,$results);
+        preg_match_all('/(?P<view>[^\.\}]+)\.(?P<field>[^\}]+)/',$token,$results);
         if(count($results["view"]) < 1) {
             AppKitLogger::warn("Invalid token %s found in view s%, ignoring",$token,$this->view["name"]);
             return;
         }
         for($i=0;$i<count($results["field"]);$i++) {
+            // Check if it's a paremeter token
+            if($results["view"][$i] == 'param') {
+                if(isset($this->viewParameters[$results["field"][$i]]))
+                    $replace = $this->viewParameters[$results["field"][$i]];
+                else {
+                    AppKitLogger::warn("Missing view parameter %s",$results["field"][$i]);
+                    $replace = "''";
+                }
+                $query = str_replace('${'.$token.'}',$replace,$query);
+
+                continue;
+            }
+            
             $field = $results["field"][$i];
             $view = $results["view"][$i];
             AppKitLogger::verbose(
