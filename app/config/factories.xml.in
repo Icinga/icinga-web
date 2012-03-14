@@ -36,6 +36,9 @@
             - https://dev.icinga.org/issues/2035
             - https://dev.icinga.org/issues/2054
             
+            NOTE: Make sure that your php.ini has the session.gc_maxlifetime parameter set
+            correctly, otherwise your users sessions will be deleted by the server before
+            their cookie has expired
         -->
         <storage class="AppKitDoctrineSessionStorage">
             <ae:parameter name="session_cookie_lifetime">0</ae:parameter>

@@ -11,20 +11,47 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
     private $views = array();
     public function execute(AgaviXmlConfigDomDocument $document) {
         $this->document = $document;
-        $this->setupXPath();
-
-        $this->fetchDQLViews();
+        
+        $this->fetchDQLViews($this->setupXPath($document));
+        $this->importModuleConfigurations();
         return $this->generate("return ".var_export($this->views,true));
     }
 
-    private function setupXPath() {
-        $this->xpath = new DOMXPath($this->document);
-        $this->xpath->registerNamespace("db","http://icinga.org/icinga/config/global/api/views/1.0");
-        $this->xpath->registerNamespace("ae","http://agavi.org/agavi/config/global/envelope/1.0");
+    private function importModuleXML($accessLocation) {
+        $document = new AgaviXmlConfigDomDocument();
+        $document->load(AgaviToolkit::expandDirectives($accessLocation));
+
+        $this->fetchDQLViews($this->setupXPath($document));
     }
 
-    private function fetchDQLViews() {
-        $dqlRoot = $this->xpath->query('//ae:configuration/node()');
+
+    private function importModuleConfigurations() {
+        $moduleDir = AgaviToolkit::literalize("%core.module_dir%");
+        $modules = scandir($moduleDir);
+        foreach($modules as $folder) {
+            $dir = $moduleDir;
+            if($folder == ".." || $folder == "." || $folder == "Api")
+                continue;
+            $dir = $dir."/".$folder."/";
+
+            if(!is_dir($dir) || !is_readable($dir))
+                continue;
+            $accessLocation = $dir."config/views.xml";
+            if(file_exists($accessLocation) && is_readable($accessLocation))
+                $this->importModuleXML($accessLocation);
+
+        }
+    }
+
+    private function setupXPath($document) {
+        $xpath = new DOMXPath($document);
+        $xpath->registerNamespace("db","http://icinga.org/icinga/config/global/api/views/1.0");
+        $xpath->registerNamespace("ae","http://agavi.org/agavi/config/global/envelope/1.0");
+        return $xpath;
+    }
+
+    private function fetchDQLViews(DOMXPath $xpath) {
+        $dqlRoot = $xpath->query('//ae:configuration/node()');
 
         foreach($dqlRoot as $node) {
             
@@ -45,6 +72,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
         }
 
     }
+
 
     private function parseSubSetting(array &$setting,$viewParam,$type) {
         switch($type) {
@@ -89,6 +117,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
             "filter" => array(),
             "merge" => array(),
             "base" => false,
+            "extend" => array(),
             "orderFields" => array()
         );
         if($node->attributes->getNamedItem('base')) {
@@ -105,6 +134,19 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
                         $dqlView["connection"] = $viewParam->attributes->getNamedItem('connection')->nodeValue;
                     }
                     
+                    break;
+                case 'extend':
+                    $extension = array("calls" => array());
+                    foreach($viewParam->childNodes as $childNode) {
+                        if($childNode->nodeType != XML_ELEMENT_NODE)
+                            continue;
+                        $extension["calls"][] = array(
+                            "type" => $childNode->nodeName,
+                            "arg" => $childNode->nodeValue
+                        );
+                    }
+                    $dqlView["extend"][] = $extension;
+
                     break;
                 case 'orderBy':
                     $dqlView["orderFields"][] = $viewParam->nodeValue;

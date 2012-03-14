@@ -14,11 +14,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
 
     private $user;
     private $parser;
-    private $offset = 0;
-    private $limit = 0;
-    private $order = false;
     private $resultMap = array();
-    private $orderDir = "ASC";
     /**
      *
      * @var IcingaDoctrine_Query
@@ -30,8 +26,10 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $this->setContext($context);
         $this->user = $context->getUser()->getNsmUser();
         $view = $this->readDataSourceDefinition();
+        $source = $template->getSection("datasource");
         $this->parser = $context->getModel("Views.ApiDQLView","Api",array(
-            "view" => $view
+            "view" => $view,
+            "parameters" => isset($source["parameters"]) ? $source["parameters"] : array()
         ));
         /**
          * @var IcingaDoctrine_Query
@@ -64,25 +62,23 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     private function fetchResultMapFromTemplate() {
         $this->resultMap = array();
         $fields = $this->template->getFields();
+        if(is_array($fields)) {
+            foreach($fields as $id=>$subValues) {
+                if(isset($subValues["datasource"]) &&
+                    isset($subValues["datasource"]["field"])) {
+                    $rewrite = $subValues["datasource"]["field"];
 
-        foreach($fields as $id=>$subValues) {
-            if(isset($subValues["datasource"]) &&
-                isset($subValues["datasource"]["field"])) {
-                $rewrite = $subValues["datasource"]["field"];
-                
-                if(!isset($this->resultMap[$rewrite]))
-                    $this->resultMap[$rewrite] = array($id);
-                else
-                    $this->resultMap[$rewrite][] = $id;
+                    if(!isset($this->resultMap[$rewrite]))
+                        $this->resultMap[$rewrite] = array($id);
+                    else
+                        $this->resultMap[$rewrite][] = $id;
+                }
             }
         }
-
     }
 
     protected function rewriteResultRow($result) {
 
-      
-        
         $rewrittenResult = array();
         foreach($result as $key=>$val) {
             $rewrittenResult[$key] = $val;
@@ -91,13 +87,10 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
                     $rewrittenResult[$rewritten] = $val;
                 }
             }
-
-
         }
         foreach($rewrittenResult as $key=>$val) {
 
             $meta = $this->getTemplate()->getFieldByName($key, 'display');
-
             if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
                 if (!isset($param['model'])) {
                     continue;
@@ -122,6 +115,9 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
      * @return integer
      */
     public function countResults() {
+        $ds = $this->template->getSection("datasource");
+        if(!isset($ds["countmode"]) || in_array($ds["countmode"],array("false","none","null")))
+            return;
         return $this->query->count();
     }
 
@@ -194,7 +190,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
             throw new AgaviException("Invalid template, no datasource target given");
         }
         $target = $source["target"];
-        
+
         return $target;
         
     }
