@@ -28,7 +28,7 @@ Ext.ns('Icinga.Cronks.System');
 
         initComponent: function () {
             Icinga.Cronks.System.CategoryEditorForm.superclass.initComponent.call(this);
-
+            
             this.addButton({
                 iconCls: 'icinga-action-icon-ok',
                 text: _('OK'),
@@ -551,6 +551,8 @@ Ext.ns('Icinga.Cronks.System');
             hideCollapseTool: true,
             fill: true
         },
+        
+        customCronkCredential: false,
 
         autoScroll: true,
         border: false,
@@ -613,6 +615,10 @@ Ext.ns('Icinga.Cronks.System');
             }]
         }],
 
+        initComponent: function() {
+            Icinga.Cronks.System.CronkListingPanel.superclass.initComponent.call(this);
+        },
+        
         applyState: function (state) {
             if (!Ext.isEmpty(state.active_tab) && state.active_tab >= 0) {
                 this.active_tab = state.active_tab;
@@ -747,7 +753,8 @@ Ext.ns('Icinga.Cronks.System');
 
             if (!Ext.isDefined(this.contextmenu)) {
                 var ctxMenu = new Ext.menu.Menu({
-
+                    customCronkCredential: this.customCronkCredential, // Copy attribute because scope is changing
+                
                     setItemData: function (view, index, node) {
                         this.ctxView = view;
                         this.ctxIndex = index;
@@ -824,12 +831,17 @@ Ext.ns('Icinga.Cronks.System');
 
                     listeners: {
                         show: function (ctxm) {
-                            if (this.getItemData().system === true || this.getItemData().owner === false) {
+                            if (this.customCronkCredential === true) {
+                                if (this.getItemData().system === true || this.getItemData().owner === false) {
+                                    this.items.get(idPrefix + '-button-edit').setDisabled(true);
+                                    this.items.get(idPrefix + '-button-delete').setDisabled(true);
+                                } else {
+                                    this.items.get(idPrefix + '-button-edit').setDisabled(false);
+                                    this.items.get(idPrefix + '-button-delete').setDisabled(false);
+                                }
+                            } else {
                                 this.items.get(idPrefix + '-button-edit').setDisabled(true);
                                 this.items.get(idPrefix + '-button-delete').setDisabled(true);
-                            } else {
-                                this.items.get(idPrefix + '-button-edit').setDisabled(false);
-                                this.items.get(idPrefix + '-button-delete').setDisabled(false);
                             }
                         }
                     }

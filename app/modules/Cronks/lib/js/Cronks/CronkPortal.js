@@ -20,6 +20,9 @@ Ext.ns('Icinga.Cronks.System');
 
         loadingMask: null,
 
+        // Credential for creating or modifying custom cronks (SaveAs ...)
+        customCronkCredential: false,
+
         constructor: function (config) {
             Icinga.Cronks.System.CronkPortal.superclass.constructor.call(this, config);
         },
@@ -67,7 +70,8 @@ Ext.ns('Icinga.Cronks.System');
                     id: 'cronk-tabs',
                     border: false,
                     stateful: true,
-                    stateId: 'cronk-tab-panel'
+                    stateId: 'cronk-tab-panel',
+                    customCronkCredential: this.customCronkCredential
                 },
                 border: true,
                 margins: '0 0'
