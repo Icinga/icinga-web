@@ -211,8 +211,32 @@ AppKit.util.Date = (function() {
            time.second = 1;
            time.minute = 60;
            time.hour = 3600;
-           time.day  = 86400;
+           time.day  = time.hour*24;
+           time.week  = time.day*7;
        return {
+
+           toDurationString: function(timestamp) {
+               if(timestamp == "NaN") {
+                   return "";
+               }
+               var s,m,h,d,w;
+
+               timestamp = (Date.now()-timestamp)/1000;
+
+               w = parseInt(timestamp/time.week);
+               d = parseInt(timestamp/time.day) % 7;
+               h = parseInt(timestamp/time.hour) % 24;
+               m = parseInt(timestamp/time.minute) % 60;
+               s = parseInt(timestamp/time.second) % 60;
+               var result =
+                    ((w > 0) ? w+"w " : "")+
+                    ((d > 0) ? d+"d " : "")+
+                    ((h > 0) ? h+"h " : "")+
+                    ((m > 0) ? m+"m " : "")+
+                    ((s > 0) ? s+"s " : "");
+                return result == "" ? "--" : result;
+           },
+
            getElapsedString: function(value) {
                 var now = new Date();
                 var valueDate = Date.parseDate(value,'Y-m-d H:i:s')

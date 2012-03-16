@@ -269,6 +269,15 @@ Ext.ns('Cronk.grid');
                     metaData.css += ' x-icinga-grid-cell-selectable';
                     return value;
                 };
+            },
+
+            durationField: function(cfg) {
+                return function (value, metaData, record, rowIndex, colIndex, store) {
+                    
+                    return AppKit.util.Date.toDurationString(
+                        Date.parse(record.json.DURATION_START)
+                    );
+                };
             }
     };
 

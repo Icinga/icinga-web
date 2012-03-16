@@ -17,6 +17,8 @@
                 os.name2 AS SERVICE_NAME,
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.current_state AS SERVICE_CURRENT_STATE,
+                COALESCE(ss.last_state_change,ps.program_start_time) AS DURATION_START,
+                ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.output AS SERVICE_OUTPUT,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
@@ -33,6 +35,7 @@
             INNER JOIN s.host h
             INNER JOIN h.object oh
             INNER JOIN s.object os
+            INNER JOIN i.programstatus as ps
 
             ]]>
             </query>

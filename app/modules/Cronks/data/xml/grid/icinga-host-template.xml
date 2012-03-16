@@ -1000,17 +1000,18 @@
         
         <field name="host_duration">
             <datasource>
-                <parameter name="field">HOST_OBJECT_ID</parameter>
+                <parameter name="field">COALESCE(hs.last_state_change,ps.program_start_time)</parameter>
             </datasource>
             
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
-                <parameter name="userFunc">
-                    <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
-                    <parameter name="method">durationString</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">durationField</parameter>
+                    <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                       <parameter name="type">host</parameter>
+                        <parameter name="type">host</parameter>
                     </parameter>
                 </parameter>
             </display>
@@ -1187,7 +1188,24 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+        <field name="max_attempt">
+            <datasource>
+                <parameter name="field">HOST_MAX_CHECK_ATTEMPT</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">false"</parameter>
+                <parameter name="label">Max attempt</parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
     </fields>
     
 </template>

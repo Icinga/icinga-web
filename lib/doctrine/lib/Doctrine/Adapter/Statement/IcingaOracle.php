@@ -203,8 +203,12 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $re = 0;
         
         preg_match_all('/ORDER\s+BY\s+([\w\.]+)\s*(ASC|DESC)?/i', $query, $matches, PREG_SET_ORDER);
-        
+        $flipped_alias = array_flip($this->aliasMap);
         foreach ($matches as $m) {
+            if(isset($flipped_alias[$m[1]])) {
+                $query = str_replace($m[1],$flipped_alias[$m[1]],$query);
+                continue;
+            }
             $re = sprintf('/SELECT\s+.*(%s).*FROM/i', preg_quote($m[1]));
             if (!preg_match($re, $query)) {
                 $query = str_replace($m[0], '', $query);
