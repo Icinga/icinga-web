@@ -1,4 +1,4 @@
-/*global Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
+/asglobal Ext: false, Icinga: false, AppKit: false, _: false, Cronk: false */
 Ext.ns('Icinga.Cronks.System.StatusOverall');
 
 (function () {
@@ -180,9 +180,9 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 prepareData: Icinga.Cronks.System.StatusOverall.renderer.prepareInstanceData,
 
                 tpl: new Ext.XTemplate(
-                    '<div style="margin-left: 5px;">',
+                    '<div style="margin-left: 5px;">', 
                     '<tpl for=".">', 
-                    '<div style="overflow: auto;">', 
+                    '<div>', 
                     '<tpl if="id==0">', 
                     '<div class="icinga-overall-status-icon-instance icinga-icon-application" ext:qtip="Instances running"></div>', 
                     '</tpl>', 
@@ -279,11 +279,12 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                         var cronk = {
                             parentid: id,
                             id: id + '-frame',
-                            stateuid: id + '-persistent',
+                            
                             title: String.format('{0}s {1}', d.type, Icinga.StatusData.simpleText(d.type, d.state_org).toLowerCase()),
                             crname: 'gridProc',
                             closable: true,
-                            params: params
+                            params: params,
+                            replace:true
                         };
 
                         dview.openCronkFn.delay(0, null, null, [cronk, filter]);

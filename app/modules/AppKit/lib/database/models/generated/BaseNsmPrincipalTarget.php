@@ -85,7 +85,10 @@ abstract class BaseNsmPrincipalTarget extends Doctrine_Record {
                    array('pt_id'=>'8','pt_principal_id'=>'3','pt_target_id'=>'15'),
                    array('pt_id'=>'9','pt_principal_id'=>'3','pt_target_id'=>'16'),
                    array('pt_id'=>'10','pt_principal_id'=>'3','pt_target_id'=>'17'),
-                   array('pt_id'=>'11','pt_principal_id'=>'3','pt_target_id'=>'18')
+                   array('pt_id'=>'11','pt_principal_id'=>'3','pt_target_id'=>'18'),
+                   
+                    // icinga.cronk.custom to icinga_user
+                   array('pt_id'=>'12','pt_principal_id'=>'4','pt_target_id'=>'20'),
                );
     }
 

@@ -49,8 +49,9 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
     public function dispatchCommands() {
         $dispatcher = $this->getContext()->getModel("Commands.CommandDispatcher","Api");
-
-        $this->selection = array_unique($this->selection);
+        $this->context->getLoggerManager()->log(print_r($this->selection, 1));
+        $this->selection = AppKitArrayUtil::uniqueMultidimensional($this->selection);
+        $this->context->getLoggerManager()->log(print_r($this->selection, 1));
         AppKitLogger::debug("Trying to send commands, targets: %s , data: %s ",json_encode($this->selection), json_encode($this->data));
         foreach($this->selection as $target) {
             $console = $this->getConsoleInstance($target['instance']);
