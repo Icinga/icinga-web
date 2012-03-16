@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
-    <!-- 
-        Meta description of the templates, that anybody
-        knows what the template is doing
-    -->
+    <type>DQL</type>
     <meta>
         <parameter name="name">Default logviewer template</parameter>
         <parameter name="description">Displays the process log</parameter>
@@ -46,24 +42,7 @@
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApiConstants::TARGET_LOG</parameter>
-        
-        <parameter name="id">log_id</parameter>
-        
-        <!--
-            If the countmode is 'simple' countfields will be ignored always! To use with a pager
-            you have to use the 'field' mode to count all data independent from data.
-            'none' disabled the counting completely
-        -->
-        <parameter name="countmode">none</parameter>
-        
-        <!-- 
-            If the counting differs from data result you can specify a field to count
-        -->
-        <parameter name="countfields">
-            <parameter>LOG_ID</parameter>
-        </parameter>
-         
+        <parameter name="target">TARGET_LOG</parameter>
     </datasource>
     
     <!-- 

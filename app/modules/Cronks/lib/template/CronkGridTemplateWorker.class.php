@@ -1,10 +1,12 @@
 <?php
 
 abstract class CronkGridTemplateWorker {
-    
+    /**
+     * @var AgaviContext
+     */
+    private $context         = null;
+
     abstract public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context);
-    
-    abstract public function setContext(AgaviContext $context);
 
     abstract public function setTemplate(CronkGridTemplateXmlParser $template);
 
@@ -35,13 +37,20 @@ abstract class CronkGridTemplateWorker {
      */
     abstract public function setCondition($field, $val, $op = null);
 
+    public function setContext(AgaviContext $context) {
+        $this->context = $context;
+    }
+
+    public function getContext() {
+        return $this->context;
+    }
     /**
      *
      * TODO: API CALL CHANGE
      * @param IcingaApiResult$result
      * @return ArrayObject
      */
-    private function addAdditionalFieldResults(/*IcingaApiResult*/ $result) {
+    protected function addAdditionalFieldResults(/*IcingaApiResult*/ $result) {
         $out = new ArrayObject();
         $ds = $this->getTemplate()->getSection('datasource');
 
@@ -87,9 +96,9 @@ abstract class CronkGridTemplateWorker {
             $meta = $this->getTemplate()->getFieldByName($key, 'display');
 
             if (($param = $meta->getParameter('userFunc')) || ($param = $meta->getParameter('phpFunc'))) {
-		if (!isset($param['model'])) {
-			continue;
-		}
+                if (!isset($param['model'])) {
+                    continue;
+                }
 
                 if ($param['model'] && $param['method']) {
                     if (!array_key_exists('arguments', $param) && !isset($param['arguments'])) {
@@ -105,6 +114,7 @@ abstract class CronkGridTemplateWorker {
 
         return $out;
     }
+    
 
     protected function getFieldData(&$row, $field) {
         $datasource = $this->getTemplate()->getFieldByName($field, 'datasource');
@@ -121,15 +131,17 @@ abstract class CronkGridTemplateWorker {
 
     protected function rewritePerClassMethod($model, $method, $data_val, array $params = array(), array $row = array()) {
         list($module, $model) = explode('.', $model, 2);
-        $modelObject = $this->context->getModel($model, $module);
+        $modelObject = $this->getContext()->getModel($model, $module);
         return $modelObject->$method($data_val, new AgaviParameterHolder($params), new AgaviParameterHolder($row));
     }
 
-    private function getApiField($field_name) {
+    protected function getApiField($field_name) {
         return $this->getTemplate()->getFieldByName($field_name, 'datasource')->getParameter('field');
     }
 }
 
-class CronkGridTemplateWorkerException extends AppKitException { }
+class CronkGridTemplateWorkerException extends AppKitException {
+
+}
 
 ?>

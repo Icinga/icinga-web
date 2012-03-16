@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <dql name="TARGET_HOST" >
+            <query>
+            <![CDATA[
+            SELECT
+                h.icon_image AS SERVICE_ICON_IMAGE,
+                i.instance_name AS INSTANCE_NAME,
+                h.host_object_id AS HOST_OBJECT_ID,
+                oh.name1 AS HOST_NAME,
+                h.alias AS HOST_ALIAS,
+                h.display_name AS HOST_DISPLAY_NAME,
+                hs.current_state AS HOST_CURRENT_STATE,
+                COALESCE(hs.last_state_change,ps.program_start_time) AS DURATION_START,
+                hs.last_check AS HOST_LAST_CHECK,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
+                hs.output AS HOST_OUTPUT,
+                hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
+                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
+                i.instance_id AS HOST_INSTANCE_ID,
+                h.host_id AS HOST_ID,
+                hs.notifications_enabled as notifications_enabled,
+                hs.problem_has_been_acknowledged as problem_acknowledged,
+                hs.scheduled_downtime_depth as scheduled_downtime_depth,
+                hs.has_been_checked as host_has_been_checked
+            FROM IcingaHosts h
+            INNER JOIN h.instance i
+            INNER JOIN h.status hs
+            INNER JOIN h.object oh
+            INNER JOIN i.programstatus as ps
+            ]]>
+            </query>
+
+
+            <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object ohg</innerjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        ohg.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+           </credential>
+
+           <credential name="IcingaContactgroup" type="dql">
+                <innerjoin>
+                    h.contactgroups cg
+                </innerjoin>
+                <andwhere>
+                    <![CDATA[
+                    cg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    ]]>
+                </andwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+            </credential>
+
+
+            <!--
+                Additional fields that are used in cronk filtering
+            -->
+            <filter name="custom_variable_name" type="dql">
+                <join>h.customvariables cvh</join>
+                <select>cvh.varname AS custom_variable_name</select>
+            </filter>
+
+            <filter name="custom_variable_value" type="dql">
+                <join>h.customvariables cvh</join>
+                <select>cvh.varvalue AS custom_variable_value</select>
+            </filter>
+
+            <filter name="hostgroup_name" type="dql">
+                <join>h.hostgroups hg</join>
+                <join>hg.object ohg</join>
+                <select>ohg.name1 AS hostgroup_name</select>
+            </filter>
+
+            <filter name="host_is_pending" type="dql">
+                <resolve>((hs.has_been_checked-1)*-1)</resolve>
+                <select>((hs.has_been_checked-1)*-1) AS host_is_pending</select>
+            </filter>
+         </dql>
+
+         <dql base="TARGET_HOST" name="TARGET_HOST_OPEN_PROBLEMS" >
+            <query>
+            <![CDATA[
+            SELECT DISTINCT
+                h.icon_image HOST_ICON_IMAGE,
+                i.instance_name AS INSTANCE_NAME,
+                h.host_object_id AS HOST_OBJECT_ID,
+                oh.name1 AS HOST_NAME,
+                h.alias AS HOST_ALIAS,
+                h.display_name AS HOST_DISPLAY_NAME,
+                hs.current_state AS HOST_CURRENT_STATE,
+                hs.last_check AS HOST_LAST_CHECK,
+                hs.output AS HOST_OUTPUT,
+                hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
+                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPTS,
+                i.instance_id AS HOST_INSTANCE_ID,
+                h.host_id AS HOST_ID,
+                hs.notifications_enabled as notifications_enabled,
+                hs.problem_has_been_acknowledged as problem_acknowledged,
+                hs.scheduled_downtime_depth as scheduled_downtime_depth,
+                hs.has_been_checked as host_has_been_checked
+            FROM IcingaHosts h
+            INNER JOIN h.instance i
+            INNER JOIN h.status hs WITH
+            (
+                hs.current_state != 0 AND
+                hs.problem_has_been_acknowledged = 0 AND
+                hs.scheduled_downtime_depth = 0
+            )
+            INNER JOIN h.object oh
+
+            ]]>
+            </query>
+
+         </dql>
+
+
+         <dql name="TARGET_OPEN_PROBLEMS" >
+            <query>
+            <![CDATA[
+            SELECT
+                o.object_id AS PROBLEMS_OBJECT_ID,
+                i.instance_id AS INSTANCE_ID,
+                i.instance_name AS INSTANCE_NAME,
+                o.name1 AS HOST_NAME,
+
+                o.name2 AS SERVICE_NAME,
+                h.icon_image AS HOST_ICON_IMAGE,
+                s.icon_image AS SERVICE_ICON_IMAGE,
+                hs.current_state AS HOST_CURRENT_STATE,
+                hs.output AS HOST_OUTPUT,
+                ss.current_state AS SERVICE_CURRENT_STATE,
+                ss.output AS SERVICE_OUTPUT,
+                hs.last_check AS HOST_LAST_CHECK,
+                ss.last_check AS SERVICE_LAST_CHECK
+            FROM IcingaObjects o
+            INNER JOIN o.instance i
+            LEFT JOIN o.host h
+            LEFT JOIN o.service s
+            LEFT JOIN h.status hs
+            LEFT JOIN s.status ss
+            WHERE o.is_active = 1 AND o.objecttype_id < 3
+            AND ((
+                o.objecttype_id = 1 AND
+                hs.current_state != 0 AND
+                hs.problem_has_been_acknowledged = 0 AND
+                hs.scheduled_downtime_depth = 0
+            ) OR (
+                o.objecttype_id = 2 AND
+                ss.current_state != 0 AND
+                ss.problem_has_been_acknowledged = 0 AND
+                ss.scheduled_downtime_depth = 0
+            ))
+
+            ]]>
+            </query>
+
+            <credential name="IcingaServiceGroup" type="dql">
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <leftjoin>sg.object osg</leftjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        
+                        (osg.name1 IN (${credential_value})
+                        OR o.objecttype_id = 1)
+                    ]]>
+                </andwhere>
+            </credential>
+-
+            <credential name="IcingaHostgroup" type="dql">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>s.host sh</leftjoin>
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>hg.object ohg</leftjoin>
+                <leftjoin>shg.object sohg</leftjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 2
+                        OR ohg.name1 IN (${credential_value}))
+                    ]]>
+                </andwhere>
+                <andwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 1
+                        OR sohg.name1 IN (${credential_value}))
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <andwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id}) 
+                    OR o.objecttype_id = 2
+
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <leftjoin>
+                    s.contactgroups scg
+                </leftjoin>
+                <andwhere>
+                    <![CDATA[
+                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1
+
+                    ]]>
+                </andwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+                <parameter name="joinType">left</parameter>
+                <parameter name="where">OR o.objecttype_id = 2</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+                <parameter name="joinType">left</parameter>
+                <parameter name="where">OR o.objecttype_id = 1</parameter>
+            </credential>
+
+         </dql>
+     </ae:configuration>
+</ae:configurations>
+
+

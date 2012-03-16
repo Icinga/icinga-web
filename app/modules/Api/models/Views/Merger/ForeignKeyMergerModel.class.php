@@ -45,14 +45,14 @@ class Api_Views_Merger_ForeignKeyMergerModel extends IcingaApiBaseModel {
             $splice = false;
             for($i=0;$i<count($mergeResult);$i++) {
                 $additional = $mergeResult[$i];
+
                 if($additional[$this->mergeField] == $id) {
                     $resultRow = array_merge($additional,$resultRow);
                     $splice = $i;
-                    break;
                 }
             }
             if($splice !== false)
-                array_splice($mergeResult,$splice);
+                array_splice($mergeResult,$splice,1);
         }
     }
 

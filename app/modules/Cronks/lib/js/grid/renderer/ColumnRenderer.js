@@ -222,8 +222,13 @@ Ext.ns('Cronk.grid');
 
             serviceStatus: function (cfg) {
                 return function (value, metaData, record, rowIndex, colIndex, store) {
+
                     if (Ext.isDefined(record.json.service_is_pending)) {
                         if (record.json.service_is_pending > 0) {
+                            value = 99;
+                        }
+                    } else if (Ext.isDefined(record.json.service_has_been_checked)) {
+                        if (record.json.service_has_been_checked == 0) {
                             value = 99;
                         }
                     }
@@ -263,6 +268,15 @@ Ext.ns('Cronk.grid');
                 return function (value, metaData, record, rowIndex, colIndex, store) {
                     metaData.css += ' x-icinga-grid-cell-selectable';
                     return value;
+                };
+            },
+
+            durationField: function(cfg) {
+                return function (value, metaData, record, rowIndex, colIndex, store) {
+                    
+                    return AppKit.util.Date.toDurationString(
+                        Date.parse(record.json.DURATION_START)
+                    );
                 };
             }
     };

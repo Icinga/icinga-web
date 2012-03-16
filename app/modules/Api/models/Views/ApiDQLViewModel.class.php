@@ -3,6 +3,8 @@
 class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     private $dqlViews;
     private $view;
+    private $viewParameters;
+
     /**
      *
      * @var NsmUser
@@ -32,13 +34,22 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     public function initialize(AgaviContext $ctx, array $parameters = array()) {
         parent::initialize($ctx, $parameters);
+
         $this->dqlViews = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/views.xml'));
         $this->view = $parameters["view"];
-        $this->connection = $ctx->getDatabaseConnection("icinga");
+        $this->viewParameters = isset($parameters["parameters"]) ? $parameters["parameters"] : array();
+        $this->validateTarget();
+        $connection = "icinga";
+
+        if($this->view["connection"]) {
+            $connection = $this->view["connection"];
+        }
+        $this->connection = $ctx->getDatabaseConnection($connection);
         $this->user = $this->getContext()->getUser()->getNsmUser();
 
-        $this->validateTarget();
+        
         $this->parseBaseDQL();
+        $this->parseDQLExtensions();
         $this->parseDependencies();
         
 
@@ -46,6 +57,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     public function getResult() {
         AppKitLogger::verbose("Processing query %s ",$this->currentQuery->getSqlQuery());
+
         $result = $this->currentQuery->execute(null,Doctrine_Core::HYDRATE_SCALAR);
         
         $normalizedResult = array();
@@ -59,12 +71,39 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         }
 
         self::$bufferedResults[$this->view["name"]] = $normalizedResult;
+        if($this->view["base"])
+            self::$bufferedResults[$this->view["base"]] = $normalizedResult;
+
         AppKitLogger::verbose("Result for view %s : %s",$this->view["name"],$normalizedResult);
         $this->applyMerger($normalizedResult);
 
         return $normalizedResult;
     }
 
+    private function enableFilter($field) {
+        if(!isset($this->view["filter"][$field])) {
+            return $field;
+        }
+        $filterDefinition = $this->view["filter"][$field];
+        $this->applyDQLCalls($this->currentQuery,$filterDefinition["calls"]);
+        
+        foreach($filterDefinition["calls"] as $key=>$value) {
+            if($value["type"] == "resolve") {
+                $field = $value["arg"];
+            }
+        }
+        return $field;
+    }
+
+    public function addWhere($field,$operator,$value) {
+         $value = $this->connection->quote($value);
+
+         $field = $this->enableFilter($field);
+         $field = $this->getAliasedTableFromDQL($field);
+         $this->currentQuery->addWhere("$field $operator $value");
+         AppKitLogger::verbose("Query after addWhere extension %s ", $this->currentQuery->getSqlQuery());
+         
+    }
 
     private function applyMerger(&$result) {
         foreach($this->mergeDependencies as $merger) {
@@ -76,6 +115,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     private function validateTarget() {
         AppKitLogger::verbose("Template uses view %s for data retrieval",$this->view);
         if(!isset($this->dqlViews[$this->view])) {
+            $target = $this->view;
             AppKitLogger::fatal("Target %s not found in views, check your template or create a view %s in views.xml",$target,$target);
             throw new AgaviException("Target $target not found in views, check your template or create a view $target in views.xml");
         }
@@ -87,16 +127,23 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $prefix = $this->connection->getPrefix();
         $query = $this->view["baseQuery"];
 
-        
         $query = $this->replaceTokens($query);
-
         $this->createDQL($query);
+    }
+
+    private function parseDQLExtensions() {
+        $prefix = $this->connection->getPrefix();
+        if(!empty($this->view["extend"])) {
+            foreach($this->view["extend"] as $extender) {
+                $this->applyDQLCalls($this->currentQuery, $extender["calls"]);
+            }
+        }
 
     }
 
     private function createDQL($dql) {
         $query = IcingaDoctrine_Query::create();
-
+        $query->setConnection($this->connection);
         AppKitLogger::verbose("Parsing DQL Query: %s ",$dql);
         $query->parseDqlQuery($dql);
 
@@ -126,7 +173,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     );
                     break;
                 case "dql":
-                    $this->applyDQLCallCredential($query,$credentialDefinition["calls"],
+                    $this->applyDQLCalls($query,$credentialDefinition["calls"],
                         $this->getCredentialValues($credentialDefinition["name"]));
                    break;
                default:
@@ -139,22 +186,42 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $query->addFilter($filter);   
     }
 
+    public function getAliasedTableFromDQL($field) {
+        $results = array();
+
+        if(preg_match_all('/([A-Za-z_\.1-9]+?) AS '.$field.'/i',$this->currentQuery->getDql(),$results)) {
+            return $results[1][0];
+
+        } else return $field;
+    }
 
     public function getQuery() {
         return $this->currentQuery;
     }
 
-    private function applyDQLCallCredential(IcingaDoctrine_Query $query,array $sequence, array $targetValues) {
+    private $dqlHistory = array();
 
-        if(empty($targetValues))
+    private function applyDQLCalls(IcingaDoctrine_Query $query,array $sequence, $targetValues = null) {
+
+        if($targetValues !== null && empty($targetValues))
             return;
         AppKitLogger::verbose("Applying dql sequence %s",$sequence);
 
         foreach($sequence as $call) {
-            $arg = $this->replaceCredentialTokens($call["arg"], $targetValues);
+            if(in_array($call["arg"].$call["type"],$this->dqlHistory))
+                continue;
+
+            if($targetValues !== null)
+                $arg = $this->replaceCredentialTokens($call["arg"], $targetValues);
+            else
+                $arg = $this->replaceTokens($call["arg"]);
             AppKitLogger::verbose("Applying call query->%s(%s)",$call["type"],$arg);
+            $this->dqlHistory[] = $call["arg"].$call["type"];
 
             switch($call["type"]) {
+                case 'select':
+                    $query->addSelect($arg);
+                    break;
                 case 'innerjoin':
                 case 'join':
                     $query->innerJoin($arg,null);
@@ -177,7 +244,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     break;
                 case 'groupby':
                     $query->addGroupBy($arg);
-                    break;
+                    break;   
             }
         }
     }
@@ -238,12 +305,25 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
     private function resolveReferenceToken($token,$query) {
         $results = array();
-        preg_match_all("/(?P<view>[^\.\}]+)\.(?P<field>[^\}]+)/",$token,$results);
+        preg_match_all('/(?P<view>[^\.\}]+)\.(?P<field>[^\}]+)/',$token,$results);
         if(count($results["view"]) < 1) {
             AppKitLogger::warn("Invalid token %s found in view s%, ignoring",$token,$this->view["name"]);
             return;
         }
         for($i=0;$i<count($results["field"]);$i++) {
+            // Check if it's a paremeter token
+            if($results["view"][$i] == 'param') {
+                if(isset($this->viewParameters[$results["field"][$i]]))
+                    $replace = $this->viewParameters[$results["field"][$i]];
+                else {
+                    AppKitLogger::warn("Missing view parameter %s",$results["field"][$i]);
+                    $replace = "''";
+                }
+                $query = str_replace('${'.$token.'}',$replace,$query);
+
+                continue;
+            }
+            
             $field = $results["field"][$i];
             $view = $results["view"][$i];
             AppKitLogger::verbose(

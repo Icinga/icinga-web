@@ -84,6 +84,8 @@ final class AppKitLogger {
 
         $msg = self::formatMessage(func_get_args());
         $log = self::getLogger();
+        if($log == null)
+            return;
 
         $msg = $caller["class"]."::".$caller["function"]."()@".(isset($caller["line"]) ? $caller["line"] : "?") ." : ".$msg ;
         
@@ -93,6 +95,8 @@ final class AppKitLogger {
     public static function debug() {
         $msg = self::formatMessage(func_get_args());
         $log = self::getLogger();
+        if($log == null)
+            return;
         if($caller = self::getCallerInfo()) {
             $msg .= " (".$caller["class"]."::".$caller["function"]."(), line ".(isset($caller["line"]) ? $caller["line"] : "?") .")";
         }
@@ -101,6 +105,8 @@ final class AppKitLogger {
     public static function fatal() {
         $msg = self::formatMessage(func_get_args());
         $log = self::getLogger();
+        if($log == null)
+            return;
         if($caller = self::getCallerInfo()) {
             $msg .= " (".$caller["class"]."::".$caller["function"]."(), line ".$caller["line"].")";
         }
@@ -109,11 +115,15 @@ final class AppKitLogger {
     public static function info() {
         $msg = self::formatMessage(func_get_args());
         $log = self::getLogger();
+        if($log == null)
+            return;
         $log->log($msg,AgaviLogger::INFO);
     }
     public static function warn() {
         $msg = self::formatMessage(func_get_args());
         $log = self::getLogger();
+        if($log == null)
+            return;
         if($caller = self::getCallerInfo()) {
             $msg .= " (".$caller["class"]."::".$caller["function"]."(), line ".$caller["line"].")";
         }
@@ -122,7 +132,9 @@ final class AppKitLogger {
     public static function error() {
         $msg = self::formatMessage(func_get_args());
         $log = self::getLogger();
-        
+        if($log == null)
+            return;
+
         if($caller = self::getCallerInfo()) {
             $msg .= " (".$caller["class"]."::".$caller["function"]."(), line ".$caller["line"].")";
         }

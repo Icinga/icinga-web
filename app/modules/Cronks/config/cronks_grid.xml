@@ -34,7 +34,7 @@
 				<ae:parameter name="image">cronks.Applications</ae:parameter>
 				<ae:parameter name="position">310</ae:parameter>
 				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-new-servicegroup-summary-template</ae:parameter>
+					<ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
 				</ae:parameter>
 			</cronk>
 	

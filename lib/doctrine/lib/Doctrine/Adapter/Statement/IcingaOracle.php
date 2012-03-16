@@ -83,7 +83,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
      */
     public function __construct( Doctrine_Adapter_IcingaOracle $connection, $query, $executeMode)
     {
-     
+
+        AppKitLogger::verbose("Oracle query input : %s",$query);
         $this->connection  = $connection->getConnection();
         $this->queryString  =$this->fixCrappyIcingaTables($query);
       
@@ -92,6 +93,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
 
     
         $this->parseQuery();
+        AppKitLogger::verbose("After parsing : %s",$this->queryString);
     }
     
     
@@ -107,7 +109,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $this->createAliasMap($query);
         $this->removeInvalidAliases($query);
         $this->fixOrderFields($query);
-        $this->fixOrdersInSubqueries($query);
+//        $this->fixOrdersInSubqueries($query);
         $this->addFieldConversion($query);
         
         if(substr_count($query,"(") != substr_count($query,")"))  
@@ -163,6 +165,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
                                 $newOrder = preg_replace('/^\w+\./', $subAlias. '.', $field);
                                 $newField = preg_replace('/\s+.+$/', '', $newOrder);
                                 $orderParts[] = $newOrder;
+                                
                                 $newSub = preg_replace('/^\s*(SELECT\s+(DISTINCT)?\s*)'. $subAlias. '/i', '\1 '. $newField. ', '. $subAlias, $subQuery);
                             }
                             $newSub = $newSub. ' ORDER BY '. implode(', ', $orderParts);
@@ -200,8 +203,12 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $re = 0;
         
         preg_match_all('/ORDER\s+BY\s+([\w\.]+)\s*(ASC|DESC)?/i', $query, $matches, PREG_SET_ORDER);
-        
+        $flipped_alias = array_flip($this->aliasMap);
         foreach ($matches as $m) {
+            if(isset($flipped_alias[$m[1]])) {
+                $query = str_replace($m[1],$flipped_alias[$m[1]],$query);
+                continue;
+            }
             $re = sprintf('/SELECT\s+.*(%s).*FROM/i', preg_quote($m[1]));
             if (!preg_match($re, $query)) {
                 $query = str_replace($m[0], '', $query);
@@ -298,6 +305,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         /**
          * need to store the value internally since binding is done by reference
          */
+        AppKitLogger::verbose("Binding %s=>%s",$param,$value);
         $this->bindParams[] = $value;
         $this->bindParam($param, $this->bindParams[count($this->bindParams) - 1], $type);
     }
@@ -330,6 +338,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
      */
     public function bindParam($column, &$variable, $type = null, $length = null, $driverOptions = array())
     {
+        AppKitLogger::verbose("Binding %s=>%s",$column,$variable);
         if ($driverOptions || $length ) {
             throw new Doctrine_Adapter_Exception('Unsupported parameters:$length, $driverOptions');
         }
@@ -438,6 +447,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
      */
     public function execute($params = null)
     {
+
         if (is_array($params)) {
             foreach ($params as $var => $value) {
                 $this->bindValue($var+1, $value);
@@ -445,7 +455,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         }
         
         $result = @oci_execute($this->statement , $this->executeMode );
-     
+        
         
         if ($result === false) {
             $this->handleError();
@@ -522,7 +532,7 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         }
         
         $result = $this->resolveAliases($result,$fetchStyle);
-        
+
         return $result; 
     }
     
@@ -802,9 +812,8 @@ class Doctrine_Adapter_Statement_IcingaOracle implements Doctrine_Adapter_Statem
         $bind_index = 1;
         // Replace ? bind-placeholders with :oci_b_var_ variables
         $query = preg_replace("/(\?)/e", '":oci_b_var_". $bind_index++' , $query);
-         
         $this->statement =  @oci_parse($this->connection, $query);
-
+     
         if ( $this->statement == false )
         {
             throw new Doctrine_Adapter_Exception($this->getOciError());

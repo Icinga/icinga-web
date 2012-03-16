@@ -111,6 +111,10 @@ abstract class BaseIcingaObjects extends Doctrine_Record {
                           'local' => 'object_id',
                           'foreign' => 'contactgroup_object_id'
                       ));
+        $this->hasOne('IcingaContacts as contact', array(
+                          'local' => 'object_id',
+                          'foreign' => 'contact_object_id'
+                      ));
         $this->hasOne('IcingaTimeperiods as timeperiod', array(
                           'local' => 'object_id',
                           'foreign' => 'timeperiod_object_id'
@@ -118,6 +122,11 @@ abstract class BaseIcingaObjects extends Doctrine_Record {
         $this->hasOne('IcingaNotifications as notification', array(
                           'local' => 'object_id',
                           'foreign' => 'notification_object_id'
+                      ));
+
+        $this->hasMany("IcingaCustomvariables as customvariables", array(
+                           "local" => "object_id",
+                           "foreign" => "object_id"
                       ));
         parent::setUp();
 

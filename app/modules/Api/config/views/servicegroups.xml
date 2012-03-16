@@ -3,10 +3,29 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" 
 >
     <ae:configuration>
-        <view:dql name="TARGET_SERVICEGROUP_SUMMARY" >
-            <view:raw>
-                <![CDATA[
+        <dql name="TARGET_SERVICEGROUP_SERVICES" >
+            <query>
+            <![CDATA[
                 SELECT DISTINCT
+                    sg.servicegroup_id AS servicegroup_id,
+                    sgm.service_object_id AS service_object_id
+                    FROM IcingaServicegroups sg
+                    INNER JOIN sg.object o
+                    INNER JOIN sg.members sgm
+
+            ]]>
+            </query>
+            <credential name="IcingaServicegroup" type="custom">
+            <![CDATA[
+                WHERE  o.name1 IN (${credential_value})
+            ]]>
+           </credential>
+        </dql>
+
+        <dql name="TARGET_SERVICEGROUP_SUMMARY" >
+            <query>
+                <![CDATA[
+                SELECT 
                     o.name1 AS servicegroup_name,
                     sg.alias AS servicegroup_alias,
                     sg.servicegroup_id AS servicegroup_id,
@@ -14,7 +33,8 @@
                     i.instance_name AS instance_name,
                     COUNT(ss.current_state) AS service_status_count,
                     ss.current_state AS service_status,
-                    sg.servicegroup_id as servicegroup_id
+                    sg.servicegroup_id as servicegroup_id,
+                    ss.has_been_checked as service_has_been_checked
                 FROM IcingaServicegroups sg
                 INNER JOIN sg.instance i
                 INNER JOIN sg.object o
@@ -22,19 +42,30 @@
                 INNER JOIN sgm.status ss
                 INNER JOIN ss.service s
 
-
                 GROUP BY sg.servicegroup_id, ss.current_state, o.name1,
-                    sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name
-
+                    sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name,
+                    ss.has_been_checked
                 ]]>
                 
-           </view:raw>
+           </query>
 
-           <view:credential name="IcingaServicegroup" type="custom">
+           <credential name="IcingaServicegroup" type="custom">
            <![CDATA[
                 WHERE  o.name1 IN (${credential_value})
            ]]>
-           </view:credential>
+           </credential>
+
+           <credential name="IcingaHostgroup" type="dql">
+                <innerjoin>s.host h</innerjoin>
+                <innerjoin>h.hostgroups hg</innerjoin>
+                <innerjoin>hg.object oh</innerjoin>
+                
+                <andwhere>
+                    <![CDATA[
+                        oh.name1 IN (${credential_value})
+                    ]]>
+                </andwhere>
+           </credential>
 
            <credential name="IcingaContactgroup" type="dql">
                 <innerjoin>
@@ -46,25 +77,23 @@
                     ]]>
                 </andwhere>
             </credential>
-
+            
             <credential name="IcingaHostCustomVariablePair" type="dql">
-                <innerjoin>
-                    s.host h
-                </innerjoin>
+                <innerjoin>s.host h</innerjoin>
             </credential>
-
+            
             <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
                 <parameter name="alias">h</parameter>
                 <parameter name="target">host</parameter>
             </credential>
-
+            
             <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
                 <parameter name="alias">s</parameter>
                 <parameter name="target">service</parameter>
             </credential>
 
             
-        </view:dql>
+        </dql>
 
     </ae:configuration>
 </ae:configurations>

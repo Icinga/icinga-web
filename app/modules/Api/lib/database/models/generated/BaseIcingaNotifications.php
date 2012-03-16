@@ -173,7 +173,7 @@ abstract class BaseIcingaNotifications extends Doctrine_Record {
                           'local' => 'object_id',
                           'foreign' => 'object_id'
                       ));
-
+      
         $this->hasOne("IcingaServices as services" ,array(
                           'local' => 'object_id',
                           'foreign' => 'service_object_id'
@@ -187,6 +187,10 @@ abstract class BaseIcingaNotifications extends Doctrine_Record {
                             'foreign' => 'contact_object_id',
                             'refClass' => 'IcingaContactnotifications',
                             'idField' => 'notification_id',
+        ));
+        $this->hasMany("IcingaContactnotifications as contactnotifications", array(
+                            'local' => 'notification_id',
+                            'foreign' => 'notification_id'
         ));
         
         $this->hasMany("IcingaContactnotificationmethods as notificationmethods", array(
