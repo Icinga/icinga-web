@@ -14,10 +14,12 @@
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
                 hs.current_state AS HOST_CURRENT_STATE,
+                COALESCE(hs.last_state_change,ps.program_start_time) AS DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
-                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPTS,
+                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
                 hs.notifications_enabled as notifications_enabled,
@@ -28,9 +30,10 @@
             INNER JOIN h.instance i
             INNER JOIN h.status hs
             INNER JOIN h.object oh
-
+            INNER JOIN i.programstatus as ps
             ]]>
             </query>
+
 
             <credential name="IcingaHostgroup" type="dql">
                 <innerjoin>h.hostgroups hg</innerjoin>

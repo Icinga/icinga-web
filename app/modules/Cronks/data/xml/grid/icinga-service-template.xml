@@ -836,7 +836,7 @@
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">serviceStatus</parameter>
-                        
+                       
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
                 </parameter>
@@ -887,26 +887,27 @@
         </field>
         
         <field name="service_duration">
-            <datasource>
-                <parameter name="field">SERVICE_OBJECT_ID</parameter>
+               <datasource>
+                <parameter name="field">COALESCE(ss.last_state_change,ps.program_start_time)</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
-                <parameter name="userFunc">
-                    <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
-                    <parameter name="method">durationString</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">durationField</parameter>
+                    <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                       <parameter name="type">service</parameter>
+                        <parameter name="type">service</parameter>
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>
