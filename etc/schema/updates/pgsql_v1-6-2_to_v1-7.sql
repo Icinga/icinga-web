@@ -1,0 +1,1 @@
+INSERT INTO nsm_target (target_name,target_description,target_class,target_type) VALUES ('icinga.cronk.custom','Allow user to create and modify custom cronks','','credential');
