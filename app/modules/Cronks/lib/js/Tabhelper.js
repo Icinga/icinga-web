@@ -233,6 +233,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                     tooltip: _("Reload the cronk (not the content)"), 
                     iconCls: 'icinga-icon-arrow-refresh',
                     handler: function() {
+                        ctxItem.removeAll();
                         ctxItem.getUpdater().refresh();
                     }
                 }, {
