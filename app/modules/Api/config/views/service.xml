@@ -134,6 +134,7 @@
                 ss.output AS SERVICE_OUTPUT,
                 ss.current_check_attempt AS SERVICE_CURRENT_CHECK_ATTEMPT,
                 ss.max_check_attempts AS SERVICE_MAX_CHECK_ATTEMPTS,
+                ss.max_check_attempts AS service_max_attempt,
                 i.instance_id AS SERVICE_INSTANCE_ID,
                 s.service_id AS SERVICE_ID,
                 ss.notifications_enabled as notifications_enabled,
