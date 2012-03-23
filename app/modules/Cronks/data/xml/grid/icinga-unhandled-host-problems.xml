@@ -1071,6 +1071,23 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
+        <field name="max_attempt">
+            <datasource>
+                <parameter name="field">HOST_MAX_CHECK_ATTEMPT</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">false"</parameter>
+                <parameter name="label">Max attempt</parameter>
+            </display>
 
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
     </fields>
 </template>

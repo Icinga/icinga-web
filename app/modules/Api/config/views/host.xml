@@ -20,6 +20,7 @@
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
+                hs.max_check_attempts AS max_attempt,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
                 hs.notifications_enabled as notifications_enabled,
@@ -93,17 +94,19 @@
             <query>
             <![CDATA[
             SELECT DISTINCT
-                h.icon_image HOST_ICON_IMAGE,
+                   h.icon_image AS SERVICE_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
                 oh.name1 AS HOST_NAME,
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
                 hs.current_state AS HOST_CURRENT_STATE,
+                COALESCE(hs.last_state_change,ps.program_start_time) AS DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
+                ps.program_start_time AS HOST_PROGRAM_START_TIME,
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
-                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPTS,
+                hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
                 hs.notifications_enabled as notifications_enabled,
@@ -119,7 +122,7 @@
                 hs.scheduled_downtime_depth = 0
             )
             INNER JOIN h.object oh
-
+            INNER JOIN i.programstatus as ps
             ]]>
             </query>
 
