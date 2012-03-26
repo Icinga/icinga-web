@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <dql name="CONTACTGROUP_SERVICES" >
+            <query>
+                <![CDATA[
+                
+                    SELECT DISTINCT
+                        s.service_object_id AS object_id
+                    FROM IcingaServices s
+                    INNER JOIN s.contactgroups cg
+                    INNER JOIN cg.members cgm
+                    INNER JOIN cgm.object ocgm
+                    WHERE ocgm.name1 = '${username}'
+                ]]>
+            </query>
+
+        </dql>
+
+        <dql name="CONTACTGROUP_HOSTS" >
+            <query>
+                <![CDATA[
+                SELECT DISTINCT
+                    h.host_object_id AS object_id
+                FROM IcingaHosts h
+                INNER JOIN h.contactgroups cg
+                INNER JOIN cg.members cgm
+                INNER JOIN cgm.object ocgm
+                WHERE ocgm.name1 = '${username}'
+                ]]>
+            </query>
+
+        </dql>
+
+        <dql name="TARGET_CONTACTGROUPS" >
+            <query>
+                <![CDATA[
+                SELECT DISTINCT
+                    cg.alias,
+                    cg.contactgroup_id,
+                    cg.contactgroup_object_id
+                FROM IcingaContactgroups cg
+                INNER JOIN cg.members cgm
+                INNER JOIN cgm.object ocgm
+
+                WHERE ocgm.name1 = '${username}'
+
+                ]]>
+           </query>
+           
+       </dql>
+   </ae:configuration>
+
+</ae:configurations>

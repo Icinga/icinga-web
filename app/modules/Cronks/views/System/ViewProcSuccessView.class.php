@@ -9,7 +9,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
     public function initialize(AgaviExecutionContainer $container) {
         parent::initialize($container);
-        $this->api = $this->getContext()->getModel('Icinga.ApiContainer', 'Web');
+        
     }
 
     private function getTemplateFile(AgaviRequestDataHolder $rd) {
@@ -31,8 +31,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
 
-            $worker = new CronkGridTemplateWorker($template, $this->getContext());
-            $worker->setApi($this->api->getConnection());
+            $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext());
 
             $layout_class = $template->getSectionParams('option')->getParameter('layout');
             $layout = AppKitClassUtil::createInstance($layout_class);
@@ -56,10 +55,7 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
             $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
 
-            $worker = new CronkGridTemplateWorker($template, $this->getContext());
-            $worker->setTemplate($template);
-            $worker->setApi($this->api->getConnection());
-            $worker->setUser($this->getContext()->getUser()->getNsmUser());
+            $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext());
 
             if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
                 $worker->setResultLimit($rd->getParameter('page_start'), $rd->getParameter('page_limit'));

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
+    <type>DQL</type>
     <!-- 
         Meta description of the templates, that anybody
         knows what the template is doing
@@ -257,48 +257,13 @@
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApiConstants::TARGET_SERVICE</parameter>
-        
-        <parameter name="id">service_object_id</parameter>
-        
-        <!--
-            If the countmode is 'simple' countfields will be ignored always! To use with a pager
-            you have to use the 'field' mode to count all data independent from data
-        -->
+        <parameter name="target">TARGET_SERVICE</parameter>
+
         <parameter name="countmode">field</parameter>
-        
-        <!-- 
-            If the counting differs from data result you can specify a field to count
-        -->
+
+
         <parameter name="countfields">
             <parameter>SERVICE_ID</parameter>
-        </parameter>
-        
-        <!-- 
-            Additional fields we would like to work with it (append them on the datasource
-            without working the default structures, e.g. for user classes)
-        -->
-        <parameter name="additional_fields">
-            <parameter name="service_max_attempt">SERVICE_MAX_CHECK_ATTEMPTS</parameter>
-            <parameter name="instance_id">SERVICE_INSTANCE_ID</parameter>
-            <parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
-        </parameter>
-        
-        <parameter name="additional_filter_fields">
-            <parameter name="servicegroup_object_id">SERVICEGROUP_OBJECT_ID</parameter>
-            <parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
-            <parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
-            <parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
-            <parameter name="custom_variable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
-            <parameter name="custom_variable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
-            <parameter name="notifications_enabled">SERVICE_NOTIFICATIONS_ENABLED</parameter>
-            <parameter name="problem_acknowledged">SERVICE_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
-            <parameter name="scheduled_downtime_depth">SERVICE_SCHEDULED_DOWNTIME_DEPTH</parameter>
-            <parameter name="service_is_pending">SERVICE_IS_PENDING</parameter>
-            
-            <!-- Stupid filter mapping -->
-            <parameter name="customvariable_name">SERVICE_CUSTOMVARIABLE_NAME</parameter>
-            <parameter name="customvariable_value">SERVICE_CUSTOMVARIABLE_VALUE</parameter>
         </parameter>
     </datasource>
     
@@ -851,67 +816,7 @@
                 <parameter name="enabled">false</parameter>
             </order>
         </field>
-        
-<!--
-        Preliminary example for adding grapher icon integration
-        <field name="service_graph_link">
-            <datasource>
-                    <parameter name="field">SERVICE_NAME</parameter>
-            </datasource>
 
-            <display>
-                <parameter name="visible">true</parameter>
-                <parameter name="label"></parameter>
-
-                <parameter name="width">22</parameter>
-
-    
-                <parameter name="Ext.grid.Column">
-                        <parameter name="menuDisabled">true</parameter>
-                        <parameter name="fixed">true</parameter>
-                </parameter>
-
-                <parameter name="jsFunc">
-
-                        <parameter>
-                                <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
-                                <parameter name="function">columnImage</parameter>
-
-                                <parameter name="type">renderer</parameter>
-
-                                <parameter name="arguments">
-                                                        <parameter name="image"><![CDATA[images/famfamfam/chart_line.png?host={host_name}&service={service_name}]]></parameter>
-                                                        <parameter name="css">x-icinga-grid-link</parameter>
-                                                        <parameter name="attr">
-                                                                <parameter name="ext:qtip">Click here for grapher</parameter>
-                                                        </parameter>
-                                </parameter>
-                        </parameter>
-
-                        <parameter>
-                                <parameter name="namespace">Cronk.grid.IcingaColumnRenderer</parameter>
-                                <parameter name="function">hyperLink</parameter>
-                                <parameter name="type">cellclick</parameter>
-
-                                <parameter name="arguments">
-                                    <parameter name="url"><![CDATA[/grapher/grapher/misc/ext/show?host={host_name}&service={service_name}]]></parameter>
-                                    <parameter name="newWindow">true</parameter>
-                                </parameter>
-                        </parameter>
-
-                </parameter>
-
-            </display>
-
-            <filter>
-                <parameter name="enabled">false</parameter>
-            </filter>
-
-            <order>
-                <parameter name="enabled">false</parameter>
-            </order>
-        </field>
-        -->
         <field name="service_status">
             <datasource>
                 <parameter name="field">SERVICE_CURRENT_STATE</parameter>
@@ -931,7 +836,7 @@
                 <parameter name="jsFunc">
                     <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
                     <parameter name="function">serviceStatus</parameter>
-                        
+                       
                     <!-- renderer/gridevent[cellclick|celldblclick|...] -->
                     <parameter name="type">renderer</parameter>
                 </parameter>
@@ -982,26 +887,27 @@
         </field>
         
         <field name="service_duration">
-            <datasource>
-                <parameter name="field">SERVICE_OBJECT_ID</parameter>
+               <datasource>
+                <parameter name="field">COALESCE(ss.last_state_change,ps.program_start_time)</parameter>
             </datasource>
-            
+
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
-                <parameter name="userFunc">
-                    <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
-                    <parameter name="method">durationString</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">durationField</parameter>
+                    <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                       <parameter name="type">service</parameter>
+                        <parameter name="type">service</parameter>
                     </parameter>
                 </parameter>
             </display>
-            
+
             <filter>
-                <parameter name="enabled">false</parameter>    
+                <parameter name="enabled">false</parameter>
             </filter>
-            
+
             <order>
                 <parameter name="enabled">true</parameter>
                 <parameter name="default">false</parameter>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <template>
-    
+    <type>DQL</type>
     <!-- 
         Meta description of the templates, that anybody
         knows what the template is doing
@@ -308,50 +308,8 @@
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">IcingaApiConstants::TARGET_HOST</parameter>
-        
-        <parameter name="id">service_object_id</parameter>
-        
-        <!--
-            If the countmode is 'simple' countfields will be ignored always! To use with a pager
-            you have to use the 'field' mode to count all data independent from data
-        -->
+        <parameter name="target">TARGET_HOST</parameter>
         <parameter name="countmode">field</parameter>
-        
-        <!-- 
-            If the counting differs from data result you can specify a field to count
-        -->
-        <parameter name="countfields">
-            <parameter>HOST_ID</parameter>
-        </parameter>
-        
-        <!-- 
-            Additional fields we would like to work with it (append them on the datasource
-            without working the default structures, e.g. for user classes)
-        -->
-        <parameter name="additional_fields">
-            <parameter name="max_attempt">HOST_MAX_CHECK_ATTEMPTS</parameter>
-            <parameter name="host_id">HOST_ID</parameter>
-            <parameter name="instance_id">HOST_INSTANCE_ID</parameter>
-            <parameter name="host_is_pending">HOST_IS_PENDING</parameter>
-        </parameter>
-        
-        <parameter name="additional_filter_fields">
-            <parameter name="host_is_pending">HOST_IS_PENDING</parameter>
-            <parameter name="hostgroup_object_id">HOSTGROUP_OBJECT_ID</parameter>
-            <parameter name="hostgroup_name">HOSTGROUP_NAME</parameter>
-            <parameter name="servicegroup_name">SERVICEGROUP_NAME</parameter>
-            <parameter name="custom_variable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
-            <parameter name="custom_variable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
-            <parameter name="notifications_enabled">HOST_NOTIFICATIONS_ENABLED</parameter>
-            <parameter name="problem_acknowledged">HOST_PROBLEM_HAS_BEEN_ACKNOWLEDGED</parameter>
-            <parameter name="scheduled_downtime_depth">HOST_SCHEDULED_DOWNTIME_DEPTH</parameter>
-            <parameter name="host_is_pending">HOST_IS_PENDING</parameter>
-            
-            <!-- Some mapping for stupid filters -->
-            <parameter name="customvariable_name">HOST_CUSTOMVARIABLE_NAME</parameter>
-            <parameter name="customvariable_value">HOST_CUSTOMVARIABLE_VALUE</parameter>
-        </parameter>
     </datasource>
     
     <!-- 
@@ -1042,17 +1000,18 @@
         
         <field name="host_duration">
             <datasource>
-                <parameter name="field">HOST_OBJECT_ID</parameter>
+                <parameter name="field">COALESCE(hs.last_state_change,ps.program_start_time)</parameter>
             </datasource>
             
             <display>
                 <parameter name="visible">true</parameter>
                 <parameter name="label">Duration</parameter>
-                <parameter name="userFunc">
-                    <parameter name="model">Cronks.ColumnDisplay.Duration</parameter>
-                    <parameter name="method">durationString</parameter>
+                <parameter name="jsFunc">
+                    <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                    <parameter name="function">durationField</parameter>
+                    <parameter name="type">renderer</parameter>
                     <parameter name="arguments">
-                       <parameter name="type">host</parameter>
+                        <parameter name="type">host</parameter>
                     </parameter>
                 </parameter>
             </display>
@@ -1229,7 +1188,24 @@
                 <parameter name="default">false</parameter>
             </order>
         </field>
-        
+        <field name="max_attempt">
+            <datasource>
+                <parameter name="field">HOST_MAX_CHECK_ATTEMPT</parameter>
+            </datasource>
+            <display>
+                <parameter name="visible">false"</parameter>
+                <parameter name="label">Max attempt</parameter>
+            </display>
+
+            <filter>
+                <parameter name="enabled">false</parameter>
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+                <parameter name="default">false</parameter>
+            </order>
+        </field>
     </fields>
     
 </template>

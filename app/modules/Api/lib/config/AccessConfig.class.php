@@ -68,8 +68,9 @@ final class AccessConfig {
         foreach($hosts as $host) {
             if(isset($host["r"][$file]) || isset($host["rw"][$file]))
                 continue;
+            $basedir = preg_replace("/([^\\\]) .*/","$1",$file);
             if(in_array($file,$host["r"]) || in_array($file,$host["rw"])
-                || in_array(dirname($file)."/*",$host["r"]) || in_array(dirname($file)."/*",$host["rw"]))
+                || in_array(dirname($basedir)."/*",$host["r"]) || in_array(dirname($basedir)."/*",$host["rw"]))
                 continue;
             return false;
         }
@@ -84,8 +85,9 @@ final class AccessConfig {
         foreach($hosts as $host) {
             if(isset($host["w"][$file]) || isset($host["rw"][$file]))
                 continue;
+            $basedir = preg_replace("/([^\\\]) .*/","$1",$file);
             if (in_array($file,$host["w"]) || in_array($file,$host["rw"])
-                || in_array(dirname($file)."/*",$host["w"]) || in_array(dirname($file)."/*",$host["rw"]))
+                || in_array(dirname($basedir)."/*",$host["w"]) || in_array(dirname($basedir)."/*",$host["rw"]))
                 continue;
             return false;
         }
@@ -99,7 +101,8 @@ final class AccessConfig {
         foreach($hosts as $host) {
             if(isset($host["x"][$file]))
                 continue;
-            if(in_array($file,$host["x"]) || in_array(dirname($file)."/*",$host["x"]))
+            $basedir = preg_replace("/([^\\\]) .*/","$1",$file);            
+            if(in_array($file,$host["x"]) || in_array(dirname($basedir)."/*",$host["x"]))
                 continue;
             return false;
         }

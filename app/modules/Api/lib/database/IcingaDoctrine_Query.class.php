@@ -78,6 +78,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         if ($this->_preQueried === false && $this->filterChain->canExecutePre()) {
             $this->filterChain->preQuery($this);
         }
+
         return parent::_preQuery($params);
     }
     
@@ -89,6 +90,7 @@ class IcingaDoctrine_Query extends Doctrine_Query {
         if ($this->filterChain->canExecutePost()) {
             $this->filterChain->postQuery($this);
         }
+        AppKitLogger::verbose("EXEC %s ",$params);
         return parent::_execute($params);
     }
     

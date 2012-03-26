@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:view="http://icinga.org/icinga/config/global/api/views/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <dql name="TARGET_INSTANCE" >
+            <query>
+            <![CDATA[
+                SELECT DISTINCT
+                    i.instance_id AS INSTANCE_ID,
+                    i.instance_name AS INSTANCE_NAME,
+                    ps.is_currently_running AS PROGRAMSTATUS_IS_CURRENTLY_RUNNING,
+                    ps.program_start_time AS PROGRAMSTATUS_PROGRAM_START_TIME,
+                    ps.program_end_time AS PROGRAMSTATUS_PROGRAM_END_TIME,
+                    ps.last_command_check AS PROGRAMSTATUS_LAST_COMMAND_CHECK,
+                    ps.process_id AS PROGRAMSTATUS_PROCESS_ID
+                    FROM IcingaInstances i
+                    INNER JOIN i.programstatus as ps
+            ]]>
+            </query>
+
+        </dql>
+
+        <dql name="TARGET_LOG" >
+            <query>
+            <![CDATA[
+                SELECT
+                    l.logentry_id AS LOG_ID,
+                    i.instance_name AS INSTANCE_NAME,
+                    l.logentry_time AS LOG_TIME,
+                    l.logentry_type AS LOG_TYPE,
+                    l.logentry_data AS LOG_DATA
+                FROM IcingaLogentries l
+                INNER JOIN l.instance AS i
+            ]]>
+            </query>
+        </dql>
+
+        <dql name="TARGET_DOWNTIME">
+            <query>
+            <![CDATA[
+                SELECT
+                    i.instance_name AS INSTANCE_NAME,
+                    d.downtimehistory_id   AS DOWNTIME_ID,
+                    d.internal_downtime_id AS DOWNTIME_INTERNAL_DOWNTIME_ID,
+                    d.downtime_type AS DOWNTIME_DOWNTIME_TYPE,
+                    h.host_object_id   AS HOST_OBJECT_ID,
+                    o.name1 AS HOST_NAME,
+                    hs.current_state AS HOST_CURRENT_STATE,
+                    s.service_object_id AS SERVICE_OBJECT_ID,
+                    o.name2 AS SERVICE_NAME,
+                    ss.current_state AS SERVICE_CURRENT_STATE,
+                    d.is_fixed AS DOWNTIME_IS_FIXED,
+                    d.scheduled_start_time AS DOWNTIME_SCHEDULED_START_TIME,
+                    d.scheduled_end_time AS DOWNTIME_SCHEDULED_END_TIME,
+                    d.author_name AS DOWNTIME_AUTHOR_NAME,
+                    d.comment_data AS DOWNTIME_COMMENT_DATA,
+                    d.was_started AS DOWNTIME_WAS_STARTED
+               FROM IcingaDowntimehistory d
+               INNER JOIN d.instance as i
+               INNER JOIN d.object as o
+               LEFT JOIN o.service as s
+               LEFT JOIN s.status as ss
+               LEFT JOIN o.host as h
+               LEFT JOIN h.status as hs
+            ]]>
+            </query>
+
+            <credential name="IcingaServiceGroup" type="dql">
+                <leftjoin>s.servicegroups sg</leftjoin>
+                <leftjoin>sg.object osg</leftjoin>
+
+                <andwhere>
+                    <![CDATA[
+
+                        (osg.name1 IN (${credential_value})
+                        OR o.objecttype_id = 1)
+                    ]]>
+                </andwhere>
+            </credential>
+-
+            <credential name="IcingaHostgroup" type="dql">
+                <leftjoin>h.hostgroups hg</leftjoin>
+                <leftjoin>s.host sh</leftjoin>
+                <leftjoin>sh.hostgroups shg</leftjoin>
+                <leftjoin>hg.object ohg</leftjoin>
+                <leftjoin>shg.object sohg</leftjoin>
+
+                <andwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 2
+                        OR ohg.name1 IN (${credential_value}))
+                    ]]>
+                </andwhere>
+                <andwhere>
+                    <![CDATA[
+                        (o.objecttype_id = 1
+                        OR sohg.name1 IN (${credential_value}))
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+
+                <leftjoin>
+                    h.contactgroups hcg
+                </leftjoin>
+                <andwhere>
+                    <![CDATA[
+                    hcg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 2
+
+                    ]]>
+                </andwhere>
+            </credential>
+
+            <credential name="IcingaContactgroup" type="dql">
+                <leftjoin>
+                    s.contactgroups scg
+                </leftjoin>
+                <andwhere>
+                    <![CDATA[
+                    scg.contactgroup_id  IN (${TARGET_CONTACTGROUPS.contactgroup_id})
+                    OR o.objecttype_id = 1
+
+                    ]]>
+                </andwhere>
+            </credential>
+
+
+            <credential name="IcingaHostCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">h</parameter>
+                <parameter name="target">host</parameter>
+                <parameter name="joinType">left</parameter>
+                <parameter name="where">OR o.objecttype_id = 2</parameter>
+            </credential>
+
+            <credential name="IcingaServiceCustomVariablePair" type="CustomVariable" >
+                <parameter name="alias">s</parameter>
+                <parameter name="target">service</parameter>
+                <parameter name="joinType">left</parameter>
+                <parameter name="where">OR o.objecttype_id = 1</parameter>
+            </credential>
+
+        </dql>
+
+
+
+    </ae:configuration>
+</ae:configurations>
