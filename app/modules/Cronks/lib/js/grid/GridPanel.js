@@ -6,7 +6,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	filter: {},
 	
 	initComponent : function() {
-		this.addEvents('autorefreshchange');	
+		this.addEvents('autorefreshchange','connectionmodify');
 		this.autoRefreshEnabled = null;
 		this.tbar = this.buildTopToolbar();
 		
@@ -32,8 +32,54 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				this.startRefreshTimer();
 			}
 		},this);
+        this.on("connectionmodify",function(value) {
+            if(this.connectionComboBox)
+                this.connectionComboBox.selectByValue(value);
+        },this)
 	
 	},
+    selectedConnection: 'icinga',
+
+    getConnectionComboBox: function() {
+        var connArr = this.initialConfig.meta.connections;
+        for(var i=0;i<connArr.length;i++)
+            connArr[i] = [connArr[i]];
+
+        this.connectionComboBox = new Ext.form.ComboBox({
+            store: new Ext.data.ArrayStore({
+                autoDestroy: true,
+                fields: ['connection'],
+                data : connArr
+            }),
+            displayField: 'connection',
+            typeAhead: true,
+            mode: 'local',
+            forceSelection: true,
+            defaultValue: this.selectedConnection,
+            triggerAction: 'all',
+            emptyText: this.selectedConnection,
+            selectOnFocus: true,
+            width: 135,
+            listeners: {
+                afterrender: function(me) {
+                   
+                },
+                select: function(me,record) {
+                    this.setConnection(record.get("connection"));
+
+                    this.getStore().setBaseParam("connection",this.selectedConnection);
+                    this.refreshGrid();
+                },
+                scope:this
+            },
+
+            getListParent: function() {
+                return this.el.up('.x-menu');
+            },
+            iconCls: 'no-icon' //use iconCls if placing within menu to shift to right side of menu
+        });
+        return this.connectionComboBox;
+    },
 
 	/*
 	 * Top toolbar of the grid
@@ -48,7 +94,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 				text: _('Refresh'),
 				iconCls: 'icinga-icon-arrow-refresh',
 				tooltip: _('Refresh the data in the grid'),
-				handler: function(oBtn, e) { this.store.load(); },
+				handler: function(oBtn, e) {this.store.load();},
 				scope: this
 			}, {
 				text: _('Settings'),
@@ -175,7 +221,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	
 	stateEvents: [
 	   'autorefreshchange','activate', 'columnmove ', 'columnresize', 
-	   'groupchange', 'sortchange', 'afterrender'
+	   'groupchange', 'sortchange', 'afterrender','connectionmodify'
 	],
 	
 	startRefreshTimer: function() {
@@ -260,7 +306,8 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
         if (Ext.isDefined(data.groupField) && Ext.isDefined(this.store.groupBy)) {
         	this.store.on('beforeload', function() {
 	            (function() {
-		            var dir = Ext.isEmpty(data.groupDir) ? 'ASC' : data.groupDir;
+                   
+                    var dir = Ext.isEmpty(data.groupDir) ? 'ASC' : data.groupDir;
 		            
 		            if (Ext.isDefined(data.groupOnSort)) {
 		                this.store.groupOnSort = data.groupOnSort 
@@ -270,9 +317,10 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		            this.store.reload();
 	            }).defer(50, this);
 	            return false;
-        	}, this, { single : true });
+        	}, this, {single : true});
         };
-        
+
+      
 
 	},
 	
@@ -295,6 +343,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	
 	getState: function() {
+
 		var store = this.getStore();
 		var aR = null;
 		if(this.autoRefreshEnabled === true)
@@ -310,14 +359,13 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
             sortToggle: store.sortToggle,
             sortInfo: store.sortInfo,
 			colModel: this.getPersistentColumnModel(),
-			autoRefresh: aR
+			autoRefresh: aR,
+            connection: this.store.baseParams["connection"]
 		};
-		
 		return o;
 	},
 	
 	applyState: function(state) {
-
 		if (!Ext.isObject(state)) {
 			return false;
 		}
@@ -363,18 +411,34 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
 		if (reload == true) {
 			this.refreshGrid();
 		}
+        
+        if (state.connection) {
+            this.setConnection(state.connection);
+
+        }
 		if(Ext.isObject(state.nativeState))
     		return Ext.grid.GridPanel.prototype.applyState.call(this,{columns: state.nativeState.columns});
         return true;
 	},
 	
+    setConnection: function(connection) {
+        this.selectedConnection = connection;
+        if(typeof this.connectionComboBox !== "undefined")
+            this.connectionComboBox.selectByValue(connection);
+
+        this.getStore().setBaseParam("connection",this.selectedConnection);
+        this.fireEvent("connectionmodified");
+    },
+
 	applyParamsToStore : function(params) {
 		for (var i in params) {
+            if(i == "connection") {
+                this.setConnection(params[i]);
+            }
 			this.store.setBaseParam(i, params[i]);
 		}
 	}
 	
-
 
 });
 

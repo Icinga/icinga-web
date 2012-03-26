@@ -6,7 +6,7 @@ abstract class CronkGridTemplateWorker {
      */
     private $context         = null;
 
-    abstract public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context);
+    abstract public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context, $connection = "icinga");
 
     abstract public function setTemplate(CronkGridTemplateXmlParser $template);
 
@@ -15,6 +15,7 @@ abstract class CronkGridTemplateWorker {
     abstract public function buildAll();
 
     abstract public function fetchDataArray();
+
 
     /**
      * Return the number of result rows.
@@ -44,6 +45,11 @@ abstract class CronkGridTemplateWorker {
     public function getContext() {
         return $this->context;
     }
+
+    public function setDefaultConnection() {
+        // ignored if not overwritten
+    }
+
     /**
      *
      * TODO: API CALL CHANGE

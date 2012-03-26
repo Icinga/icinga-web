@@ -10,8 +10,11 @@ class Cronks_System_StatusMapSuccessView extends CronksBaseView {
     }
 
     public function executeJson(AgaviRequestDataHolder $rd) {
+        $connection = $rd->getParameter("connection","icinga");
 
-        $model = $this->getContext()->getModel('System.StatusMap', 'Cronks');
+        $model = $this->getContext()->getModel('System.StatusMap', 'Cronks',array(
+            "connection"=> $connection
+        ));
 
         $jsonData = $model->getParentChildStructure();
 

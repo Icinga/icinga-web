@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/LConf/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+			<validator class="inarray" name="target" required="false">
+				<argument>target</argument>
+				<errors>
+					<error>No target provided</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="type">string</ae:parameter>
+					<ae:parameter name="case">true</ae:parameter>
+					<ae:parameter name="values">
+						<ae:parameter>users</ae:parameter>
+						<ae:parameter>groups</ae:parameter>
+					</ae:parameter>
+				</ae:parameters>
+			</validator>
+			
+			<validator class="number" name="connection_id" required="true">
+				<argument>connection_id</argument>
+				<errors>
+					<error>No connection provided</error>
+				</errors>
+			</validator>
+		
+		</validators>
+		
+		<validators method="write">
+			<validator class="string" name="users" required="false">
+				<argument>users</argument>
+			</validator>
+			
+			<validator class="string" name="groups" required="false">
+				<argument>groups</argument>
+			</validator>
+			
+			<validator class="inarray" name="xaction" required="false">
+				<argument>xaction</argument>
+				<ae:parameters>
+					<ae:parameter name="type">string</ae:parameter>
+					<ae:parameter name="case">true</ae:parameter>
+					<ae:parameter name="values">
+						<ae:parameter>create</ae:parameter>
+						<ae:parameter>destroy</ae:parameter>
+						<ae:parameter>read</ae:parameter>
+					</ae:parameter>
+				</ae:parameters>
+			</validator>
+			
+		</validators>
+	</ae:configuration>
+</ae:configurations>

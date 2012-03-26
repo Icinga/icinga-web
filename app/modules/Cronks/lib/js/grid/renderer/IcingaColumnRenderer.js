@@ -20,7 +20,7 @@ Cronk.grid.IcingaColumnRenderer = {
                     params: {
                         template: cfg.targetTemplate,
                         module: 'Cronks',
-                        action: 'System.ViewProc'
+                        action: 'System.ViewProc' 
                     }
                 };
                 
@@ -36,7 +36,7 @@ Cronk.grid.IcingaColumnRenderer = {
                     filter["f[" + cfg.targetField + "-value]"] = record.data[ cfg.sourceField ];
                     filter["f[" + cfg.targetField + "-operator]"] = 50;
                 }
-                
+                filter["connection"] = grid.selectedConnection;
                 Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
             }
         }
@@ -59,7 +59,7 @@ Cronk.grid.IcingaColumnRenderer = {
                     },
                     cfg.processedFilterData
                     );
-                
+
                 Icinga.util.SimpleDataProvider.createToolTip({
                     title: cfg.title,
                     target: e.getTarget(),
@@ -176,7 +176,8 @@ Cronk.grid.IcingaColumnRenderer = {
                     'title': title,
                     'crname': 'genericIFrame',
                     'params': {
-                        url:  encodeURI(url)
+                        url:  encodeURI(url),
+                        connection: grid.selectedConnection
                     },
                     'closable':true
                 });

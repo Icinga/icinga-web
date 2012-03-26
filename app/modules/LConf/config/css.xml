@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/icinga/config/global/resource/1.0">
+    <ae:configuration>
+        <css_import>
+            <ae:parameter>/modules/LConf/resources/styles/main.css</ae:parameter>
+        </css_import>
+    </ae:configuration>
+</ae:configurations>

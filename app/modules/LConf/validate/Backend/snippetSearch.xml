@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/LConf/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+			<validator class="string" name="connectionId" required="true">
+				<argument>connectionId</argument>
+				<errors>
+					<error>Validation of "connectionId" failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="search" required="true">
+				<argument>search</argument>
+				<errors>
+					<error>Validation of "search" failed!</error>
+				</errors>
+			</validator>
+			<validator class="string" name="uniqueResults" required="false">
+				<argument>uniqueResults</argument>
+				<errors>
+					<error>Validation of "uniqueResults" failed!</error>
+				</errors>
+			</validator>
+			<validator class="string" name="regexp" required="false">
+				<argument>regexp</argument>
+				<errors>
+					<error>Validation of "regexp" failed!</error>
+				</errors>
+			</validator>
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

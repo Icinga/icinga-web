@@ -15,34 +15,34 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
      */
 
     static public $defaultColumns = array(
-                                        "instance" => array("INSTANCE_ID",'INSTANCE_NAME','INSTANCE_DESCRIPTION'),
-                                        "host" => array("HOST_ID",'HOST_OBJECT_ID','HOST_INSTANCE_ID',"HOST_NAME","HOST_ALIAS","HOST_DISPLAY_NAME","HOST_ADDRESS","HOST_IS_ACTIVE"),
-                                        "service" => array("SERVICE_ID","SERVICE_OBJECT_ID","SERVICE_IS_ACTIVE","SERVICE_INSTANCE_ID","SERVICE_NAME","SERVICE_DISPLAY_NAME","SERVICE_OUTPUT","SERVICE_PERFDATA"),
-                                        "hostgroup" => array("HOSTGROUP_ID","HOSTGROUP_OBJECT_ID","HOSTGROUP_INSTANCE_ID","HOSTGROUP_NAME","HOSTGROUP_ALIAS"),
-                                        "servicegroup" => array("SERVICEGROUP_ID","SERVICEGROUP_OBJECT_ID","SERVICEGROUP_INSTANCE_ID","SERVICEGROUP_NAME","SERVICEGROUP_ALIAS"),
-                                        "customvariable" => array("CUSTOMVARIABLE_ID","CUSTOMVARIABLE_OBJECT_ID","CUSTOMVARIABLE_INSTANCE_ID","CUSTOMVARIABLE_NAME","CUSTOMVARIABLE_VALUE","CUSTOMVARIABLE_MODIFIED","CUSTOMVARIABLE_UPDATETIME"),
-                                        "contact" => array("CONTACT_NAME","CONTACT_CUSTOMVARIABLE_NAME","CONTACT_CUSTOMVARIABLE_VALUE"),
-                                        "contactgroup" => array("CONTACTGROUP_ID","CONTACTGROUP_OBJECT_ID","CONTACTGROUP_INSTANCE_ID","CONTACTGROUP_NAME","CONTACTGROUP_ALIAS"),
-                                        "timeperiod" => array("TIMEPERIOD_ID","TIMEPERIOD_OBJECT_ID","TIMEPERIOD_INSTANCE_ID","TIMEPERIOD_NAME","TIMEPERIOD_ALIAS","TIMEPERIOD_DAY","TIMEPERIOD_STARTTIME","TIMEPERIOD_ENDTIME"),
-                                        "hoststatus" => array(),
-                                        "servicestatus" => array(),
-                                        "hosttimes" => array(),
-                                        "servicetimes" => array(),
-                                        "config" => array("CONFIG_VAR_ID","CONFIG_VAR_INSTANCE_ID","CONFIG_VAR_NAME","CONFIG_VAR_VALUE"),
-                                        "program" => array(),
-                                        "log" => array("LOG_ID","LOG_INSTANCE_ID","LOG_TIME","LOG_ENTRY_TIME","LOG_ENTRY_TIME_USEC","LOG_TYPE","LOG_DATA","LOG_REALTIME_DATA","LOG_INFERRED_DATA"),
-                                        "host_status_summary" => array("HOST_ID",'HOST_STATUS_ALL','HOST_STATE','HOST_STATE_COUNT','HOST_LAST_CHECK'),
-                                        "service_status_summary" => array("SERVICE_ID",'SERVICE_STATUS_ALL','SERVICE_OUTPUT','SERVICE_LONG_OUTPUT','SERVICE_PERFDATA','SERVICE_LAST_CHECK'),
-                                        "host_status_history" => array("STATEHISTORY_ID","STATEHISTORY_INSTANCE_ID","STATEHISTORY_STATE_TIME","STATEHISTORY_OBJECT_ID","STATEHISTORY_STATE_CHANGE","STATEHISTORY_STATE","STATEHISTORY_OUTPUT","STATEHISTORY_LONG_OUTPUT"),
-                                        "service_status_history" => array("STATEHISTORY_ID","STATEHISTORY_INSTANCE_ID","STATEHISTORY_STATE_TIME","STATEHISTORY_OBJECT_ID","STATEHISTORY_STATE_CHANGE","STATEHISTORY_STATE","STATEHISTORY_OUTPUT","STATEHISTORY_LONG_OUTPUT"),
-                                        "host_parents" => array("HOST_ID",'HOST_OBJECT_ID',"HOST_NAME","HOST_PARENT_OBJECT_ID","HOST_PARENT_NAME"),
-                                        "notifications" => array("NOTIFICATION_ID","NOTIFICATION_TYPE","NOTIFICATION_REASON","NOTIFICATION_STARTTIME","NOTIFICATION_ENDTIME","NOTIFICATION_OUTPUT","NOTIFICATION_OBJECT_ID","NOTIFICATION_OBJECTTYPE_ID"),
-                                        "hostgroup_summary" => array('HOSTGROUP_SUMMARY_COUNT',"HOSTGROUP_ID","HOSTGROUP_OBJECT_ID","HOSTGROUP_NAME"),
-                                        "comment" => array('SERVICEGROUP_SUMMARY_COUNT',"SERVICEGROUP_ID","SERVICEGROUP_OBJECT_ID","SERVICEGROUP_NAME"),
-                                        "servicecomment" => array('SERVICE_NAME',"SERVICE_ID","COMMENT_ID","COMMENT_DATA"),
-                                        "hostcomment" => array('HOST_NAME',"HOST_ID","COMMENT_ID","COMMENT_DATA"),
-                                        "host_service" => array('HOST_NAME',"SERVICE_NAME")
-                                    );
+            "instance" => array("INSTANCE_ID",'INSTANCE_NAME','INSTANCE_DESCRIPTION'),
+            "host" => array("HOST_ID",'HOST_OBJECT_ID','HOST_INSTANCE_ID',"HOST_NAME","HOST_ALIAS","HOST_DISPLAY_NAME","HOST_ADDRESS","HOST_IS_ACTIVE"),
+            "service" => array("SERVICE_ID","SERVICE_OBJECT_ID","SERVICE_IS_ACTIVE","SERVICE_INSTANCE_ID","SERVICE_NAME","SERVICE_DISPLAY_NAME","SERVICE_OUTPUT","SERVICE_PERFDATA"),
+            "hostgroup" => array("HOSTGROUP_ID","HOSTGROUP_OBJECT_ID","HOSTGROUP_INSTANCE_ID","HOSTGROUP_NAME","HOSTGROUP_ALIAS"),
+            "servicegroup" => array("SERVICEGROUP_ID","SERVICEGROUP_OBJECT_ID","SERVICEGROUP_INSTANCE_ID","SERVICEGROUP_NAME","SERVICEGROUP_ALIAS"),
+            "customvariable" => array("CUSTOMVARIABLE_ID","CUSTOMVARIABLE_OBJECT_ID","CUSTOMVARIABLE_INSTANCE_ID","CUSTOMVARIABLE_NAME","CUSTOMVARIABLE_VALUE","CUSTOMVARIABLE_MODIFIED","CUSTOMVARIABLE_UPDATETIME"),
+            "contact" => array("CONTACT_NAME","CONTACT_CUSTOMVARIABLE_NAME","CONTACT_CUSTOMVARIABLE_VALUE"),
+            "contactgroup" => array("CONTACTGROUP_ID","CONTACTGROUP_OBJECT_ID","CONTACTGROUP_INSTANCE_ID","CONTACTGROUP_NAME","CONTACTGROUP_ALIAS"),
+            "timeperiod" => array("TIMEPERIOD_ID","TIMEPERIOD_OBJECT_ID","TIMEPERIOD_INSTANCE_ID","TIMEPERIOD_NAME","TIMEPERIOD_ALIAS","TIMEPERIOD_DAY","TIMEPERIOD_STARTTIME","TIMEPERIOD_ENDTIME"),
+            "hoststatus" => array(),
+            "servicestatus" => array(),
+            "hosttimes" => array(),
+            "servicetimes" => array(),
+            "config" => array("CONFIG_VAR_ID","CONFIG_VAR_INSTANCE_ID","CONFIG_VAR_NAME","CONFIG_VAR_VALUE"),
+            "program" => array(),
+            "log" => array("LOG_ID","LOG_INSTANCE_ID","LOG_TIME","LOG_ENTRY_TIME","LOG_ENTRY_TIME_USEC","LOG_TYPE","LOG_DATA","LOG_REALTIME_DATA","LOG_INFERRED_DATA"),
+            "host_status_summary" => array("HOST_ID",'HOST_STATUS_ALL','HOST_STATE','HOST_STATE_COUNT','HOST_LAST_CHECK'),
+            "service_status_summary" => array("SERVICE_ID",'SERVICE_STATUS_ALL','SERVICE_OUTPUT','SERVICE_LONG_OUTPUT','SERVICE_PERFDATA','SERVICE_LAST_CHECK'),
+            "host_status_history" => array("STATEHISTORY_ID","STATEHISTORY_INSTANCE_ID","STATEHISTORY_STATE_TIME","STATEHISTORY_OBJECT_ID","STATEHISTORY_STATE_CHANGE","STATEHISTORY_STATE","STATEHISTORY_OUTPUT","STATEHISTORY_LONG_OUTPUT"),
+            "service_status_history" => array("STATEHISTORY_ID","STATEHISTORY_INSTANCE_ID","STATEHISTORY_STATE_TIME","STATEHISTORY_OBJECT_ID","STATEHISTORY_STATE_CHANGE","STATEHISTORY_STATE","STATEHISTORY_OUTPUT","STATEHISTORY_LONG_OUTPUT"),
+            "host_parents" => array("HOST_ID",'HOST_OBJECT_ID',"HOST_NAME","HOST_PARENT_OBJECT_ID","HOST_PARENT_NAME"),
+            "notifications" => array("NOTIFICATION_ID","NOTIFICATION_TYPE","NOTIFICATION_REASON","NOTIFICATION_STARTTIME","NOTIFICATION_ENDTIME","NOTIFICATION_OUTPUT","NOTIFICATION_OBJECT_ID","NOTIFICATION_OBJECTTYPE_ID"),
+            "hostgroup_summary" => array('HOSTGROUP_SUMMARY_COUNT',"HOSTGROUP_ID","HOSTGROUP_OBJECT_ID","HOSTGROUP_NAME"),
+            "comment" => array('SERVICEGROUP_SUMMARY_COUNT',"SERVICEGROUP_ID","SERVICEGROUP_OBJECT_ID","SERVICEGROUP_NAME"),
+            "servicecomment" => array('SERVICE_NAME',"SERVICE_ID","COMMENT_ID","COMMENT_DATA"),
+            "hostcomment" => array('HOST_NAME',"HOST_ID","COMMENT_ID","COMMENT_DATA"),
+            "host_service" => array('HOST_NAME',"SERVICE_NAME")
+    );
 
 
     public function getDefaultViewName() {
@@ -50,17 +50,21 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
     }
 
     public function executeRead(AgaviRequestDataHolder $rd) {
-        
-        if (!$this->context->getUser()->isAuthenticated() 
-            || $this->getContainer()->getAttribute('success', 'org.icinga.api.auth', true) == false) {
+
+        if (!$this->context->getUser()->isAuthenticated()
+                || $this->getContainer()->getAttribute('success', 'org.icinga.api.auth', true) == false) {
             return array('Api', 'GenericError');
-	    }
-        
+        }
+
         $context = $this->getContext();
         $API = $context->getModel("Icinga.ApiContainer","Web");
         $target = $rd->getParameter("target");
-
-        $search = @$API->createSearch()->setSearchTarget($target);
+        $connection = $rd->getParameter("connection","icinga");
+        
+        $this->context->getModel("DBALMetaManager","Api")->switchIcingaDatabase($connection);
+        
+        $search = @$API->createSearch($connection)->setSearchTarget($target);
+        
         $this->addFilters($search,$rd);
 
         $this->setColumns($search,$rd);
@@ -71,9 +75,9 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         $search->setResultType(IcingaApiConstants::RESULT_ARRAY);
         // Adding security principal targets to the query
         IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
-        
-        $res = $search->fetch()->getAll();
 
+        $res = $search->fetch()->getAll();
+        
         //Setup count
         if ($rd->getParameter("countColumn")) {
             $search = @$API->createSearch()->setSearchTarget($target);
@@ -87,10 +91,10 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             $search->setSearchType(IcingaApiConstants::SEARCH_TYPE_COUNT);
 
             IcingaPrincipalTargetTool::applyApiSecurityPrincipals($search);
-           
+
             $rd->setParameter("searchCount",$search->fetch()->getAll());
         }
-        
+
         if($rd->getParameter("withSLA") && ($target == "host" || $target == "service")) {
             $slaDefaults = AgaviConfig::get("modules.api.sla_settings");
 
@@ -101,7 +105,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
                 $this->addSLAData($res,$ts);
             }
         }
-        
+
         $rd->setParameter("searchResult", $res);
 
         return $this->getDefaultViewName();
@@ -130,7 +134,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         }
         $filter = $this->getContext()->getModel("SLA.SLAFilter","Api");
         $filter->setObjectId($objIds);
-        
+
         $filter->setTimespan($timespan);
 
         $stmt = IcingaSlahistoryTable::getSummary(null, $filter);
@@ -141,16 +145,16 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             if(!isset($map[$oid]))
                 continue;
             $entry = &$result[$map[$oid]];
-            
+
             if(($state > 0 && $sla_entry->objecttype_id == 1) ||
-                ($state > 1 && $sla_entry->objecttype_id == 2))
+                    ($state > 1 && $sla_entry->objecttype_id == 2))
                 $entry["SLA_STATE_UNAVAILABLE"] += $sla_entry->percentage;
             else
                 $entry["SLA_STATE_AVAILABLE"] += $sla_entry->percentage;
             if(isset($entry["SLA_STATE_".$state]))
                 $entry["SLA_STATE_".$state] += $sla_entry->percentage;
 
-           
+
         }
 
     }
@@ -182,7 +186,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
         if (isset($filterdef["type"])) {
             $searchField = $filterdef["field"];
         }
-       
+
         $filterGroup = $search->createFilterGroup($filterdef["type"]);
         if(!is_array($searchField))
             $searchField = array($searchField);
@@ -235,7 +239,7 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             $search->setResultColumns($rd->getParameter("countColumn"));
             return true;
         }
-        
+
         $columns = $rd->getParameter("columns",null);
         if(!is_array($columns))
             $columns = array($columns);
@@ -246,11 +250,11 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
             if($column)
                 $columns_result[] = $column;
         }
-         
+
         if (!is_null($columns_result) && !empty($columns_result)) {
-            
+
             $search->setResultColumns($columns_result);
-        } else {            
+        } else {
             $search->setResultColumns(self::$defaultColumns[$rd->getParameter("target")]);
         }
     }

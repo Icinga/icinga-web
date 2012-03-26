@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	<ae:configuration>
+		
+		<autoload name="IcingaLConfBaseAction">%core.module_dir%/LConf/lib/action/IcingaLConfBaseAction.class.php</autoload>
+		<autoload name="IcingaLConfBaseModel">%core.module_dir%/LConf/lib/model/IcingaLConfBaseModel.class.php</autoload>
+		<autoload name="IcingaLConfBaseView">%core.module_dir%/LConf/lib/view/IcingaLConfBaseView.class.php</autoload>
+		<autoload name="LConf_LDAPClientModel">%core.module_dir%/LConf/models/LDAPClientModel.class.php</autoload>
+        <!-- ORM classes -->
+		<autoload name="LconfConnection">%core.module_dir%/LConf/lib/database/LconfConnection.php</autoload>
+		<autoload name="LconfDefaultconnection">%core.module_dir%/LConf/lib/database/LconfDefaultconnection.php</autoload>
+		<autoload name="LconfFilter">%core.module_dir%/LConf/lib/database/LconfFilter.php</autoload>
+		<autoload name="LconfPrincipal">%core.module_dir%/LConf/lib/database/LconfPrincipal.php</autoload>
+
+        
+        		
+	</ae:configuration>
+</ae:configurations>

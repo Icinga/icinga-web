@@ -9,12 +9,12 @@
  */
 class CronkGridTemplateWorkerFactory {
 
-    static public function createWorker(CronkGridTemplateXmlParser $template, AgaviContext $context) {
+    static public function createWorker(CronkGridTemplateXmlParser $template, AgaviContext $context, $connection = "icinga") {
         $sections = array_flip($template->getSections());
         
         if(isset($sections["type"]) && class_exists($template->getSection("type")."CronkTemplateWorker")) {
             $class = $template->getSection("type")."CronkTemplateWorker";
-            return new $class($template,$context);
+            return new $class($template,$context, $connection);
         }
         return new GenericCronkTemplateWorker($template, $context);
 

@@ -23,6 +23,7 @@
                 hs.max_check_attempts AS max_attempt,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
+                (hs.has_been_checked-1)*-1 as HOST_IS_PENDING,
                 hs.notifications_enabled as notifications_enabled,
                 hs.problem_has_been_acknowledged as problem_acknowledged,
                 hs.scheduled_downtime_depth as scheduled_downtime_depth,

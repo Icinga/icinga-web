@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<template match-pattern="icinga-(host|service)-template">
+    <fields>
+        <field name="host_ldap">
+            <preferPosition>after:comments</preferPosition>
+            <datasource>
+                <parameter name="field">HOST_OBJECT_ID</parameter>
+            </datasource>
+            <display>
+                
+                <parameter name="visible">true</parameter>
+                <parameter name="icon">lconf-logo</parameter>
+                
+                <parameter name="width">22</parameter>
+                <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">ldapColumn</parameter>
+                            
+                       <!-- renderer/gridevent[cellclick|celldblclick|...] -->
+                        <parameter name="type">renderer</parameter>
+                        <parameter name="arguments">
+                            <parameter name="target">host</parameter>
+                            <parameter name="target_field">HOST_ID</parameter>
+                            <parameter name="url">modules/lconf/cronk/dns</parameter>
+                            <parameter name="ldapRoute">modules/lconf/main</parameter>
+                            <parameter name="attr">
+								<parameter name="ext:qtip">Go to Event DB</parameter>
+							</parameter>
+                        </parameter>    
+                    </parameter>
+                </parameter>
+            </display>
+            <filter>
+                <parameter name="enabled">false</parameter>           
+            </filter>
+
+            <order>
+                <parameter name="enabled">false</parameter>
+            </order>
+        </field>
+    </fields>
+</template>

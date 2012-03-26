@@ -1,13 +1,6 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of LegacyCronkTemplateWorker
- *
- * @author jmosshammer
+ * @deprecated
  */
 class GenericCronkTemplateWorker extends CronkGridTemplateWorker {
 
@@ -61,7 +54,7 @@ class GenericCronkTemplateWorker extends CronkGridTemplateWorker {
      */
     private $user            = null;
 
-    public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context) {
+    public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context, $connection = "icinga") {
 
         if ($template) {
             $this->setTemplate($template);

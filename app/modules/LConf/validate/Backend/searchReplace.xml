@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/LConf/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+			<validator class="string" name="connectionId" required="true">
+				<argument>connectionId</argument>
+				<errors>
+					<error>Validation of "connectionId" failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="search" required="true">
+				<argument>search</argument>
+				<errors>
+					<error>Validation of "search" failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="fields" required="true">
+				<argument>fields</argument>
+				<errors>
+					<error>Validation of "fields" failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="replace" required="false">
+				<argument>replace</argument>
+				<errors>
+					<error>Validation of "replace" failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="filters" required="false">
+				<argument>filters</argument>
+				<errors>
+					<error>Validation of "filters" failed!</error>
+				</errors>
+			</validator>
+			
+			<validator class="string" name="sissyMode" required="false">
+				<argument>sissyMode</argument>
+				<errors>
+					<error>Validation of "sissyMode" failed!</error>
+				</errors>
+			</validator>
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

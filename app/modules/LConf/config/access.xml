@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ae:configurations xmlns="http://icinga.org/api/config/parts/access/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <instances>
+            
+        </instances>
+        <defaults>
+            <access>
+                <read>
+                    <files>
+                        <!--
+                            enable to allow parsing of resource.cfg for macro completion
+                            this will be done by the webservers user of your machine. If resource.cfg
+                            can't be parsed, it will be simply ignored.
+                        -->
+
+                        <resource name="lconf_test_resource">/usr/local/icinga/etc/resource.cfg</resource>
+
+                    </files>
+                </read>
+                <execute>
+                    <folders>
+                        <!--
+                            To be able to perform test runs of service checks, you must allow
+                            your icinga instance to access the plugins.
+                            
+                            Note - When used on a local machine:
+                            The user defined in the lconfTestCheckUser (LConf/config/module.xml) setting will be used
+                            via sudo (if set). The sudo setting must allow to sudo -u %user% without a password
+
+                            On a remote machine accessed via ssh the lconfTestCheckUser will be ignored
+                        -->
+
+                        <resource name="lconf_test_libexec">/usr/local/icinga/libexec/</resource>
+
+                    </folders>
+                    <files>
+                        <!--
+                            if you want to parse the resource.cfg, cat must be allowed
+                        -->
+
+                        <resource name="cat">/bin/cat</resource>
+                        <resource name="lconf_export">/usr/local/LConf/lconf_deploy.sh</resource>
+                    </files>
+                </execute>
+            </access>
+        </defaults>
+        <hosts>
+        </hosts>
+    </ae:configuration>     
+</ae:configurations>

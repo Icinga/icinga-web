@@ -20,7 +20,10 @@
  */
 abstract class BaseIcingaTimedeventqueue extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
+        $conn = $this->getTable()->getConnection();
+        if(!$conn)
+            $conn = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA);
+        $prefix = $conn->getPrefix();
         $this->setTableName($prefix.'timedeventqueue');
         $this->hasColumn('timedeventqueue_id', 'integer', 4, array(
                              'type' => 'integer',

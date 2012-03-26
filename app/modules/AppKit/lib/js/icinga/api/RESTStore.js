@@ -13,6 +13,7 @@ Ext.ns('Icinga.Api');
         orderColumn: null,
         orderDirection: null,
         limit: -1,
+        connection: 'icinga',
         offset: 0,
         groupBy: null,
         countColumn: null,
@@ -56,6 +57,7 @@ Ext.ns('Icinga.Api');
                 sort: 'order_col',
                 dir: 'order_dir'
             };
+            
             Ext.data.JsonStore.prototype.constructor.call(this, cfg);
 
         },
@@ -192,7 +194,8 @@ Ext.ns('Icinga.Api');
 
             var cfg = {
                 db: db,
-                target: target
+                target: target,
+                connection: this.connection
             };
 
             if (wSLA) {

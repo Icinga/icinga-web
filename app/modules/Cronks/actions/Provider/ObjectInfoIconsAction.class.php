@@ -13,7 +13,8 @@ class Cronks_Provider_ObjectInfoIconsAction extends CronksBaseAction implements 
         
         $model = $this->getContext()->getModel('Provider.ObjectInfoIcons', 'Cronks', array (
             'type' => $rd->getParameter('type'),
-            'oids' => $rd->getParameter('oids')
+            'oids' => $rd->getParameter('oids'),
+            'connection' => $rd->getParameter('connection','icinga')
         ));
         
         $this->setAttribute('info_data', $model->getData());

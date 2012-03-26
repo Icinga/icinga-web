@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+	parent="%core.module_dir%/LConf/config/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>
+			<validator class="string" name="commandline" required="true">
+				<argument>commandline</argument>
+				<errors>
+					<error>No commandline provided</error>
+				</errors>
+			</validator>
+			<validator class="string" name="tokens" required="false">
+				<argument>tokens</argument>
+				<errors>
+					<error>No tokens provided</error>
+				</errors>				
+			</validator>
+			<validator class="string" name="connectionId" required="true">
+				<argument>connectionId</argument>
+				<errors>
+					<error>No connectionId provided</error>
+				</errors>
+			</validator>
+	
+		</validators>
+		
+		<validators method="write">
+			<validator class="string" name="query" required="false">
+				<argument>query</argument>
+				<errors>
+					<error>No field provided</error>
+				</errors>
+			</validator>
+		</validators>
+	</ae:configuration>
+</ae:configurations>

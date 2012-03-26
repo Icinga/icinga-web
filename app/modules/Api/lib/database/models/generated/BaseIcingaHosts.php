@@ -72,7 +72,10 @@
  */
 abstract class BaseIcingaHosts extends Doctrine_Record {
     public function setTableDefinition() {
-        $prefix = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA)->getPrefix();
+        $conn = $this->getTable()->getConnection();
+        if(!$conn)
+            $conn = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA);
+        $prefix = $conn->getPrefix();
         $this->setTableName($prefix.'hosts');
         $this->hasColumn('host_id', 'integer', 4, array(
                              'type' => 'integer',
@@ -664,6 +667,12 @@ abstract class BaseIcingaHosts extends Doctrine_Record {
         $this->hasMany("IcingaHosts as parents", array(
                            'local' => 'host_id',
                            'foreign' => 'parent_host_object_id',
+                           'refClass' => 'IcingaHostParenthosts',
+                           'idField' => 'host_id'
+                       ));
+       $this->hasMany("IcingaHosts as childs", array(
+                           'local' => 'host_id',
+                           'foreign' => 'host_id',
                            'refClass' => 'IcingaHostParenthosts',
                            'idField' => 'host_id'
                        ));

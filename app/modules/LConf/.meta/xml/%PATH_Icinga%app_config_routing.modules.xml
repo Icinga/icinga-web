@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module_routes xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
+	<configuration context="web">
+		<route pattern="^/lconf" name="lconf" module="LConf">
+			<route name=".about" pattern="^/about$" action="Interface.About" output_type="simple"/>
+			<route name="lconfDNs" output_type="json" pattern="^/cronk/dns" action="Backend.Cronks.CustomVarDNCollector"/>
+			<route name=".main" pattern="^/$" action="Interface.ViewMainEditor"></route>
+
+			<route name=".startPoint" pattern="^/main/(connection:\d+)/(dn:.+)" action="Interface.ViewMainEditor"/>
+			<route name=".actionbar" pattern="^/actionbar" output_type="simple">
+				
+				<route name=".filtermanager" pattern="^/filtermanager$" action="Interface.ActionBar.filterList"/>
+			<route name=".connmanager" pattern="^/connmanager$" action="Interface.ActionBar.connectionList"/></route>
+			
+			<route name=".data" pattern="^/data" output_type="json">
+				<!-- Directory and Property listing  -->
+				<route name=".directoryprovider" pattern="^/directoryprovider$" action="Backend.listDirectory"/>
+				<route name=".propertyprovider" pattern="^/properties$" action="Backend.getProperties"/>					
+				<route name=".simplesearch" pattern="^/simplesearch$" action="Backend.snippetSearch"/>
+				
+				<route name=".filterlisting" pattern="^/filterprovider$" action="Backend.listFilters"/>
+				<route name=".modifyfilter" pattern="^/filtermodifier$" action="Backend.modifyFilter"/>
+						
+				<!-- Entry manipulation routes -->
+				<route name=".modifyproperty" pattern="^/propertymodifier(/{field:[\w_]+})?$" action="Backend.modifyEntry"/>
+				<route name=".modifynode" pattern="^/nodemodifier" action="Backend.modifyNode"/>
+				<route name=".searchreplace" pattern="^/searchreplace" action="Backend.searchReplace"/>
+
+				<!-- Connection specific routes -->
+				<route name=".connectionlisting" pattern="^/connections(/{connection_id:\d+})?$" action="Backend.connectionManager.connectionListing"/>
+				<route name=".connect" pattern="^/connect$" action="Backend.connectionManager.connect"/>
+				<route name=".principals" pattern="^/principals$" action="Backend.Principals"/>
+		
+				<!-- LDAP objects -->
+				<route name=".ldapmetaprovider" pattern="^/ldapmeta$" action="Backend.LDAPObjects"/>
+			</route>
+			<route name=".admin" pattern="^/admin" action="Interface.Admin.Main">
+				<route name=".principals" pattern="^/principals" action="Interface.Admin.Principals" output_type="simple"/>
+			</route>
+			<route name=".ldapeditor" pattern="^/editor">
+				<route name=".editorfielddefinitions" pattern="^/getfields" action="Interface.jsLDAPEditors" output_type="simple"/>
+				<route name=".editorwizard" pattern="^/wizard" action="PropertyEditor/PropertyWizard" output_type="simple"/>
+			</route>
+			
+		</route>
+  </configuration>
+</module_routes>

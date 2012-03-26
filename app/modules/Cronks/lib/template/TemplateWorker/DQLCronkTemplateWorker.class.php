@@ -21,7 +21,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
      */
     private $query;
 
-    public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context) {
+    public function __construct(CronkGridTemplateXmlParser $template, AgaviContext $context, $connection = "icinga") {
         $this->setTemplate($template);
         $this->setContext($context);
         $this->user = $context->getUser()->getNsmUser();
@@ -29,7 +29,8 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $source = $template->getSection("datasource");
         $this->parser = $context->getModel("Views.ApiDQLView","Api",array(
             "view" => $view,
-            "parameters" => isset($source["parameters"]) ? $source["parameters"] : array()
+            "parameters" => isset($source["parameters"]) ? $source["parameters"] : array(),
+            "connection" => $connection
         ));
         /**
          * @var IcingaDoctrine_Query

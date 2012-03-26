@@ -268,7 +268,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			'name' : '___LABEL' + meta.id + '-operator',
 			id : '___LABEL' + meta.id + '-operator',
 			
-			width : 110
+			width : 250
 		});
 		
 		// Set the default value after rendering
@@ -307,7 +307,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			valueField: 'fStatus',
 			displayField: 'fLabel',
 			
-			width: 150,
+			width: 250,
 			
 			hiddenName: meta.name + '-value',
 			hiddenId: meta.name + '-value'
@@ -325,7 +325,8 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			'name': meta.name + '-field',
 			'id': meta.name + '-field',
 			hiddenName: meta.name + '-value',
-			hiddenId: meta.name + '-value'
+			hiddenId: meta.name + '-value',
+            width:250
 		}, meta);
 	},
 	
@@ -387,7 +388,7 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			border: false,
 			style: 'padding: 2px;',
 			layout: 'column',
-			
+
 			defaults: {
 				border: false,
 				style: 'padding: 2px;'				
@@ -401,10 +402,10 @@ Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 			
 			// Adding the label
 			panel.add([
-				{items: this.getLabelComponent(meta), columnWidth: .19},
+				{items: this.getLabelComponent(meta), columnWidth: 2},
 				{items: this.getOperatorComponent(meta), columnWidth: .3},
-				{items: this.getFilterComponent(meta), columnWidth: .4},
-				{items: this.getRemoveComponent(meta), columnWidth: .1}
+				{items: this.getFilterComponent(meta), columnWidth: "250px"},
+				{items: this.getRemoveComponent(meta), columnWidth: "50px"}
 			]);
 			
 		}

@@ -19,7 +19,13 @@
 					<error>Validation of parentid failed!</error>
 				</errors>
 			</validator>
-		</validators>
+			<validator class="string" name="connection" required="false">
+				<argument>connection</argument>
+				<errors>
+					<error>Validation of connection failed!</error>
+				</errors>
+			</validator>
+        </validators>
 		
 	</ae:configuration>
 </ae:configurations>
