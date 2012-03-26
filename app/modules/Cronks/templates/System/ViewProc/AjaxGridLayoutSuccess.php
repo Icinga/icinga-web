@@ -117,7 +117,10 @@ Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, fun
 					// We need something to click on
 					cHandler.enhanceToolbar();
 				}
-			
+
+                var combo = this.getConnectionComboBox()
+                
+                this.topToolbar.add(["->",combo]);
 			}
 		});
 		

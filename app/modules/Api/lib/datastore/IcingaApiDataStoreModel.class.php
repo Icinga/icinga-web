@@ -172,8 +172,11 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
     protected function createRequestDescriptor() {
         $DBALMetaManager = AgaviContext::getInstance()->getModel("DBALMetaManager","Api");
         $DBALMetaManager->switchIcingaDatabase($this->connectionName);
-      //  $connection = Doctrine_Manager::getInstance()->getConnection($this->connectionName);
-        return IcingaDoctrine_Query::create(/*$connection*/);
+        $connection = $this->getContext()->getDatabaseConnection($this->connectionName);
+        $query = IcingaDoctrine_Query::create($connection);
+        $query->setConnection($connection);
+        
+        return $query;
     }
 
 }

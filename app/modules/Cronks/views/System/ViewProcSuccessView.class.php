@@ -52,16 +52,24 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
         try {
 
             $file = $this->getTemplateFile($rd);
+
             $template = new CronkGridTemplateXmlParser($file->getRealPath(), $this->getContext());
             $template->parseTemplate();
+            $connection = $rd->getParameter("connection","icinga");
 
-            $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext());
+            $worker = CronkGridTemplateWorkerFactory::createWorker($template, $this->getContext(), $connection);
 
+            
             if (is_numeric($rd->getParameter('page_start')) && is_numeric($rd->getParameter('page_limit'))) {
                 $worker->setResultLimit($rd->getParameter('page_start'), $rd->getParameter('page_limit'));
             } else {
                 $user = $this->context->getUser();
-                $worker->setResultLimit(0, $user->getPrefVal('org.icinga.grid.pagerMaxItems', AgaviConfig::get('modules.cronks.grid.pagerMaxItems', 25)));
+                $worker->setResultLimit(
+                    0,
+                    $user->getPrefVal('org.icinga.grid.pagerMaxItems',
+                        AgaviConfig::get('modules.cronks.grid.pagerMaxItems', 25)
+                    )
+                );
             }
 
 

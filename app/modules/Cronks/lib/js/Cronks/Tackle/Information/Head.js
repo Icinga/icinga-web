@@ -25,6 +25,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 throw ("config.type is needed: host or service!");
             }
             this.targetType = config.type;
+            this.connection = config.connection || "icinga";
             Icinga.Cronks.Tackle.Information.Head.superclass.constructor.call(this, config);
         },
 
@@ -58,7 +59,8 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 autoDestroy: true,
                 idIndex: 0,
                 target: this.targetType,
-                columns: this.fields
+                columns: this.fields,
+                connection: this.connection
             });
 
             this.store.on('load', this.updateSubComponents, this);
@@ -113,9 +115,9 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
             this.pluginPerfdataInfo.update(record.data);
         },
 
-        loadDataForObjectId: function (oid) {
+        loadDataForObjectId: function (oid,connection) {
             var field = String.format('{0}_OBJECT_ID', this.type.toUpperCase());
-
+            this.store.connection = connection;
             this.store.setFilter({
                 type: 'AND',
                 field: [{

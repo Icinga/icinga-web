@@ -4,6 +4,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     private $dqlViews;
     private $view;
     private $viewParameters;
+    private $defaultConnection = "icinga";
 
     /**
      *
@@ -37,22 +38,25 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
 
         $this->dqlViews = include AgaviConfigCache::checkConfig(AgaviToolkit::expandDirectives('%core.module_dir%/Api/config/views.xml'));
         $this->view = $parameters["view"];
+
         $this->viewParameters = isset($parameters["parameters"]) ? $parameters["parameters"] : array();
         $this->validateTarget();
-        $connection = "icinga";
 
+        $connection = $this->defaultConnection;
+        if(isset($parameters["connection"]))
+            $connection = $parameters["connection"];
         if($this->view["connection"]) {
             $connection = $this->view["connection"];
         }
+        AppKitLogger::verbose("Switching to connection %s",$connection);
         $this->connection = $ctx->getDatabaseConnection($connection);
+        if($this->connection != "icinga")
+            $ctx->getModel("DBALMetaManager","Api")->switchIcingaDatabase($connection);
         $this->user = $this->getContext()->getUser()->getNsmUser();
 
-        
         $this->parseBaseDQL();
         $this->parseDQLExtensions();
         $this->parseDependencies();
-        
-
     }
 
     public function getResult() {

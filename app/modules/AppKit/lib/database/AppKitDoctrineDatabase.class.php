@@ -3,9 +3,9 @@
 class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
     private static $doctrineloaded = false;
     private static $doctrineFile = array(
-                                       "debug" => "lib/Doctrine.php",
-                                       "compressed" => "Doctrine.compiled.php"
-                                   );
+            "debug" => "lib/Doctrine.php",
+            "compressed" => "Doctrine.compiled.php"
+    );
     public function initialize(AgaviDatabaseManager $databaseManager, array $parameters = array()) {
         if (!self::$doctrineloaded) {
             $this->initializeDoctrine();
@@ -93,20 +93,20 @@ class AppKitDoctrineDatabase extends AgaviDoctrineDatabase {
 
             case 'MEMCACHE':
                 if (!isset($param['memcache_host']) ||
-                    !isset($param['memcache_port'])) {
+                        !isset($param['memcache_port'])) {
                     return null;
                 }
 
                 $server = array(
-                              'host' => $param['memcache_host'],
-                              'port' => $param['memcache_port'],
-                              'persistent' => true
-                          );
+                        'host' => $param['memcache_host'],
+                        'port' => $param['memcache_port'],
+                        'persistent' => true
+                );
                 return new Doctrine_Cache_Memcache(array(
-                                                       'servers' => $server,
-                                                       'compression' => false
-                                                   ));
-
+                                'servers' => $server,
+                                'compression' => false
+                ));
+            
             default:
                 return null;
         }

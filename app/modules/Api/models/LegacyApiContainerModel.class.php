@@ -50,9 +50,9 @@ class Api_LegacyApiContainerModel extends IcingaWebBaseModel
      * @return IcingaApiSearch
      * @author mhein
      */
-    public function createSearch() {
+    public function createSearch($connection = "icinga") {
 
-        return $this->getContext()->getModel("Store.LegacyLayer.IcingaApi","Api",array("connection"=>"icinga"));
+        return $this->getContext()->getModel("Store.LegacyLayer.IcingaApi","Api",array("connectionName"=>$connection));
         ;
         throw new IcingaApiException("Could not create search (method not found)");
     }

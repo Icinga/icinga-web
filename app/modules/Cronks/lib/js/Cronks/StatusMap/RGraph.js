@@ -26,7 +26,7 @@ Icinga.Cronks.StatusMap.RGraph = function (config) {
 
 	this.config = {
 		url: false,
-		params: false,
+		params: {},
 		method: "GET",
 		timeout: 50000,
 		disableCaching: true,
@@ -158,6 +158,10 @@ Icinga.Cronks.StatusMap.RGraph = function (config) {
 	this.getRGraph = function() {
 		return rgraph;
 	}
+    
+    this.setConnection = function(connection) {
+        this.config.params["connection"] = connection;
+    }
 	
 	this.centerNodeByObjectId = function(oid) {
 		var centerFunction = (function() {
@@ -284,7 +288,7 @@ Icinga.Cronks.StatusMap.RGraph = function (config) {
         
         var root = rgraph.root;
         var node = this.findNodeById(this.jitJson, root);
-        
+
         Ext.Ajax.request({
             url : this.config.url,
             params : this.config.params,
@@ -337,6 +341,9 @@ Icinga.Cronks.StatusMap.RGraph = function (config) {
 		this.mask.hide();
 		this.mask.disable();
 	}
+
+
+
 
 	this.init(config);
 

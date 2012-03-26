@@ -5,9 +5,12 @@ Icinga.Cronks.StatusMap.Cronk = Ext.extend(Ext.Panel, {
 	url : null,
 	rgraph : null,
 	refreshTime : 300,
-	
+	connection: 'icinga',
+
+
 	constructor : function(config) {
 		Icinga.Cronks.StatusMap.Cronk.superclass.constructor.call(this, config);
+        
 	},
 	
 	initComponent : function() {		
@@ -35,14 +38,14 @@ Icinga.Cronks.StatusMap.Cronk = Ext.extend(Ext.Panel, {
 		this.rgraph = new Icinga.Cronks.StatusMap.RGraph({
 			url : this.url,
 			parentId : this.getId()
-		});
+       	});
 		
 		this.refreshTask = {
             run :  this.rgraph.reloadTree.createDelegate(this.rgraph),
             interval : (this.refreshTime * 1000)
         };
 	},
-	
+
 	getRGraph : function() {
 		return this.rgraph;
 	}

@@ -76,6 +76,13 @@
 				</errors>
 			</validator>
 
+            <validator class="string" name="connection" required="false">
+                <argument>connection</argument>
+                <errors>
+                    <error>Validation of 'connection' failed</error>
+                </errors>
+            </validator>
+
 			<validator class="string" name="state" required="false">
 				<argument>state</argument>
 
