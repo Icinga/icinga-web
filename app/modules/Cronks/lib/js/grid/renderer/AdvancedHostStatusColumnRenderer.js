@@ -74,7 +74,8 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
                         value: [0]
                     }]
                 }),
-                group: ['host_object_id']
+                group: ['host_object_id'],
+                connection: grid.selectedConnection
             }, 
             success: function(response) {
                 try {

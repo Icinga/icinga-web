@@ -221,7 +221,6 @@ Cronk.util.InterGridUtil = function(){
 				panel = Cronk.factory(config);					
 								
 				panel.on('add', function(p, c, i) {
-//					console.log('ADD', c.getXType());
 					applyParametersToGrid(baseParams, c);
 				});
 				

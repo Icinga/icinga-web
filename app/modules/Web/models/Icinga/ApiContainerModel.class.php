@@ -59,8 +59,8 @@ class Web_Icinga_ApiContainerModel extends IcingaWebBaseModel
      * @return IcingaApiSearch
      * @author mhein
      */
-    public function createSearch() {
-        return $this->model->createSearch(func_get_args());
+    public function createSearch($connection="icinga") {
+        return $this->model->createSearch($connection);
     }
     public function __set($key,$val) {
         $this->model-> {$key} = $val;

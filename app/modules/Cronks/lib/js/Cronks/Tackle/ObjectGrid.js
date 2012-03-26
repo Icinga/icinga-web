@@ -1,7 +1,7 @@
 /*global Ext: false, Icinga: false, _: false */
 Ext.ns('Icinga.Cronks.Tackle');
 
-Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.grid.GridPanel, {
+Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
     autoRefresh: true,
     events: ['hostSelected','serviceSelected'],
     viewConfig: {

@@ -38,7 +38,8 @@ Ext.ns('Cronk.grid');
             
             Ext.iterate(this.tabItems, function(k, v) {
                 v.information = new Icinga.Cronks.Tackle.Information.Head({
-                    type: k
+                    type: k,
+                    connection: this.connection
                 });
                 
                 // We do not want to call this explicit
@@ -87,12 +88,12 @@ Ext.ns('Cronk.grid');
         },
         
        // Private
-        onShowObjectInfo : function(type, oid) {
+        onShowObjectInfo : function(type, oid,connection) {
             this.type = type;
             
             Ext.iterate(this.tabItems[type], function(k, object) {
                 if (!Ext.isEmpty(object.loadDataForObjectId)) {
-                  object.loadDataForObjectId(oid);
+                  object.loadDataForObjectId(oid,connection);
                 } else {
                     throw("WHOO, loadDataForObjectId is not implemented!");
                 }
@@ -102,8 +103,8 @@ Ext.ns('Cronk.grid');
             
         },
         
-        showObjectInfo : function(type, oid) {
-            this.fireEvent('showobjectinfo', type, oid);
+        showObjectInfo : function(type, oid,connection) {
+            this.fireEvent('showobjectinfo', type, oid,connection);
         },
         
         infoColumn : function(cfg) {
@@ -127,7 +128,7 @@ Ext.ns('Cronk.grid');
                     var id = data[cfg.object_id];
                     var type = cfg.type;
                     
-                    Cronk.grid.ObjectInfoComponentRenderer.showObjectInfo(type, id);
+                    Cronk.grid.ObjectInfoComponentRenderer.showObjectInfo(type, id,grid.selectedConnection);
                 }
             };
         }

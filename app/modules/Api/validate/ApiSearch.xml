@@ -33,6 +33,13 @@
 				</errors>
 			</validator>
 			
+            <validator name="connection" class="string" required="false">
+				<argument>connection</argument>
+				<errors>
+					<error>Validation of connection failed!</error>
+				</errors>
+			</validator>
+
 			<validator name="authkey" class="string" required="false">
 				<argument>authkey</argument>
 				<errors>

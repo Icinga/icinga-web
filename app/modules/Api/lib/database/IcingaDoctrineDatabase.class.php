@@ -5,7 +5,9 @@ class IcingaDoctrineDatabase extends AppKitDoctrineDatabase {
     const CONNECTION_ICINGA = 'icinga';
 
     private $use_retained = false;
-    
+    public static $icingaConnections = array(
+        
+    );
     /**
      * When working with icinga objects and multiple addon databases
      * this method ensures that you're working on the right space!
@@ -16,7 +18,8 @@ class IcingaDoctrineDatabase extends AppKitDoctrineDatabase {
     
     public function initialize(AgaviDatabaseManager $databaseManager, array $parameters = array()) {
         parent::initialize($databaseManager, $parameters);
-        
+        self::$icingaConnections[] = $this->getName();
+
         if ($this->getParameter('use_retained')) {
             $this->use_retained = true;
         }

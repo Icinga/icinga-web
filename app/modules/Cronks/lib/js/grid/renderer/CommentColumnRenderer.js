@@ -71,7 +71,8 @@ Cronk.grid.CommentColumnRenderer = new (function () {
                 target: 'comment',
                 
                 filters_json: Ext.encode(buildIdFilter(field,ids)),
-                "columns[0]": field
+                "columns[0]": field,
+                connection: grid.selectedConnection
             }, 
             success: function(response) {
                 try {

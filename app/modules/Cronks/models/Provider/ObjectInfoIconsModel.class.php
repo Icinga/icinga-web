@@ -44,7 +44,7 @@ class Cronks_Provider_ObjectInfoIconsModel extends CronksBaseModel {
         
         $model = $this->getContext()->getModel("ApiDataRequest","Api");
         
-        $this->__request = $model->createRequestDescriptor();
+        $this->__request = $model->createRequestDescriptor($parameters["connection"]);
     }
     
     public function getData() {

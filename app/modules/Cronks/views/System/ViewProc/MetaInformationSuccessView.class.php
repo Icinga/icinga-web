@@ -23,7 +23,8 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
                                    'template'	=> $template->getTemplateData(),
                                    'fields'	=> $template->getFields(),
                                    'keys'		=> $template->getFieldKeys(),
-                                   'params'	=> $rd->getParameters()
+                                   'params'	=> $rd->getParameters(),
+                                   'connections' => IcingaDoctrineDatabase::$icingaConnections
                                ));
         } catch (AppKitFileUtilException $e) {
             $msg = 'Could not find template for '. $rd->getParameter('template');

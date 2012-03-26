@@ -258,9 +258,7 @@
     -->
     <datasource>
         <parameter name="target">TARGET_SERVICE</parameter>
-
         <parameter name="countmode">field</parameter>
-
 
         <parameter name="countfields">
             <parameter>SERVICE_ID</parameter>

@@ -75,8 +75,9 @@ Cronk.grid.InfoIconColumnRenderer = new (function () {
                     action : 'Provider.ObjectInfoIcons',
                     params : Ext.encode({
                         type : type,
-                        oids : oids.join(',')
-                    })
+                        oids : oids.join(','),
+                        connection: this.grid.selectedConnection
+                    }),
                 },
                 success : function(response, opts) {
                     //try {

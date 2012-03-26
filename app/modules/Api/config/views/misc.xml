@@ -144,7 +144,15 @@
 
         </dql>
 
-
+        <dql name="TARGET_STATUSMAP_HOST" base="TARGET_HOST">
+            <extend>
+                <select>COALESCE(hp.host_object_id,-1) HOST_PARENT_OBJECT_ID</select>
+                
+                <leftjoin>
+                    h.parents AS hp
+                </leftjoin>
+            </extend>
+        </dql>
 
     </ae:configuration>
 </ae:configurations>

@@ -273,11 +273,9 @@ Ext.ns('Icinga.Cronks.System');
 	           
 	        // Defered execution
 	        (function() {
-	        	AppKit.log(state);
 	            if (state.col) {
 	                Ext.each(state.col, function (item, index, arry) {
 	                    Ext.iterate(item, function (key, citem, o) {
-	                    	AppKit.log("APPLYSTATE", citem);
 	                        var c = citem;
 	                        c.tools = this.defaultTools;
 	                        c.id = Ext.id(); // create new id, otherwise it might get ugly

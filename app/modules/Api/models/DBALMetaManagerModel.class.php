@@ -66,7 +66,7 @@ class Api_DBALMetaManagerModel extends IcingaApiBaseModel {
     public function switchIcingaDatabase($connName) {
         $manager = Doctrine_Manager::getInstance();
         foreach(self::$icingaTableIdentifiers as $table)
-        $manager->bindComponent($table, $connName);
+            $manager->bindComponent($table, $connName);
     }
 
 }
