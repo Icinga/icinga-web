@@ -132,6 +132,7 @@
 .icinga-icon-world { background-image: url(../images/icons/globe.png) !important; background-repeat: no-repeat; }
 .icinga-icon-information { background-image: url(../images/icons/information-frame.png) !important; background-repeat: no-repeat; }
 .icinga-icon-star-plus { background-image: url(../images/icons/star--plus.png) !important; background-repeat: no-repeat; }
+.icinga-icon-star { background-image: url(../images/icons/star.png) !important; background-repeat: no-repeat; }
 .icinga-icon-execution-time { background-image: url(../images/icons/hourglass--exclamation.png) !important; background-repeat: no-repeat; }
 .icinga-icon-latency { background-image: url(../images/icons/hourglass--arrow.png) !important; background-repeat: no-repeat; }
 .icinga-icon-host { background-image: url(../images/icons/server.png) !important; background-repeat: no-repeat; background-position: center center; }

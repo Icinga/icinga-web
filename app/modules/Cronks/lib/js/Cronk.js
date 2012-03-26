@@ -96,7 +96,7 @@ Ext.ns('Cronk');
     ];
 
     /**
-     * Cronk Registry
+     * Cronk Registry (Currently used cronks)
      */
     (function () {
         Cronk.Registry = new(Ext.extend(Ext.util.MixedCollection, {
@@ -117,6 +117,11 @@ Ext.ns('Cronk');
             }
         }))();
     })();
+    
+    /**
+     * Cronk inventory (All available cronks to user)
+     */
+    Cronk.Inventory = new Ext.util.MixedCollection();
 
     /**
      * Cronk implementation as plugin

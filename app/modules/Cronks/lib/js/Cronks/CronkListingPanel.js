@@ -417,6 +417,11 @@ Ext.ns('Icinga.Cronks.System');
                 var store = CLP.stores[storeid];
 
                 store.loadData(data);
+                
+                // Building a collection of all cronks available
+                Ext.iterate(data.rows, function(val, key) {
+                    Cronk.Inventory.add(val.cronkid, val);
+                });
             };
 
         var createView = function (storeid, title) {

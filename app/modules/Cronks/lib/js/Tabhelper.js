@@ -162,7 +162,24 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
     },  
     
     contextMenu : function (myp, tab, e) {
+        
         if (!this.contextmenu) {
+
+            this.contextmenuSave = new Ext.menu.Item({
+                id: tp.id + '-save-custom',
+                text: _('Save Cronk'),
+                iconCls: 'icinga-icon-star',
+                handler: function() {
+                    var cb = Cronk.util.CronkBuilder.getInstance();
+                    var crdata = Cronk.Registry.get(ctxItem.getId());
+                    var data = Cronk.Inventory.get(crdata.crname);
+                    data.state = "";
+                    cb.show(ctxItem.getEl());
+                    cb.setCronkData(data);
+                    cb.updateState(crdata);
+                }
+            })
+
             this.contextmenu = new Ext.menu.Menu({
                 items: [{
                     text: _("Close"),
@@ -221,21 +238,36 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
                 }, {
                     xtype: 'menuseparator'
                 }, {
-                    text: _("Save Cronk"),
+                    text: _("Save Cronk as"),
                     tooltip: _("Save this view as new cronk"),
                     iconCls: 'icinga-icon-star-plus',
-                    id: tp.id + '-save-custom',
+                    id: tp.id + '-save-custom-as',
                     handler: function() {
                         var cb = Cronk.util.CronkBuilder.getInstance();
-                        cb.show(this.getEl());
+                        cb.show(ctxItem.getEl());
                         cb.setCurrentCronkId(ctxItem.getId());
                     }
                 }]
             });
+            
+            this.contextmenu.addItem(this.contextmenuSave);
         }
         
         ctxItem = tab;
-        this.contextmenu.items.get(myp.id + '-save-custom').setDisabled(!this.customCronkCredential);
+        
+        var crdata = Cronk.Registry.get(ctxItem.getId());
+        
+        if (Ext.isObject(crdata)) {
+            if (crdata.crname.match(/^CUSTOM-/)) {
+                this.contextmenuSave.setVisible(true);
+            } else {
+            	this.contextmenuSave.setVisible(false);
+            }
+        }
+        
+        this.contextmenuSave.setDisabled(!this.customCronkCredential);
+        
+        this.contextmenu.items.get(myp.id + '-save-custom-as').setDisabled(!this.customCronkCredential);
         this.contextmenu.items.get(myp.id + '-close').setDisabled(!tab.closable);
         this.contextmenu.items.get(myp.id + '-close-others').setDisabled(!tab.closable);
         this.contextmenu.items.get(myp.id + '-rename').setDisabled(!tab.closable);
