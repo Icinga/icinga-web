@@ -59,6 +59,7 @@ Cronk.grid.GridPanel = Ext.extend(Ext.grid.GridPanel, {
             triggerAction: 'all',
             emptyText: this.selectedConnection,
             selectOnFocus: true,
+            hidden: connArr.length < 2,
             width: 135,
             listeners: {
                 afterrender: function(me) {
