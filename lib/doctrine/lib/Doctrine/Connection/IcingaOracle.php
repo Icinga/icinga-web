@@ -30,7 +30,7 @@
  * @version     $Revision: 7664 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  */
-class Doctrine_Connection_IcingaOracle extends Doctrine_Connection_Common
+class Doctrine_Connection_IcingaOracle extends Doctrine_Connection_Oracle
 {
     /**
      * @var string $driverName                  the name of this connection driver
@@ -83,8 +83,12 @@ class Doctrine_Connection_IcingaOracle extends Doctrine_Connection_Common
     }
 
     public function connect() {
-        parent::connect();
-        parent::setDateFormat($this->dateFormat);
+        if(!$this->isConnected()) {
+            parent::connect();
+            $this->exec('ALTER SESSION SET NLS_DATE_FORMAT = "' . $this->dateFormat . '"');
+            $this->exec('ALTER SESSION SET NLS_TIMESTAMP_FORMAT = "' . $this->dateFormat . '"');
+    
+        }
     }
 
     /**
