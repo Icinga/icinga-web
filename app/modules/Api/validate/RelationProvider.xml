@@ -14,6 +14,14 @@
                     <error>Could not validate number for objectId</error>
                 </errors>
             </validator>
+
+            <validator class="string" name="connection" required="false">
+                <argument>connection</argument>
+                
+                <errors>
+                    <error>Could not validate connection</error>
+                </errors>
+            </validator>
         </validators>
 	</ae:configuration>
 	

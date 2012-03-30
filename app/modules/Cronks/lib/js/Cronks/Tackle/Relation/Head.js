@@ -13,7 +13,7 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
 	
 	objectId : null,
 	loaded : false,
-	
+	connection: 'icinga',
     constructor : function(config) {
     	if (Ext.isEmpty(config.type)) {
                 throw ("config.type is needed: host or service!");
@@ -159,7 +159,8 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
         this.doLayout();
     },
     
-    loadDataForObjectId : function(objectId) {
+    loadDataForObjectId : function(objectId,connection) {
+        this.connection = connection || "icinga";
     	if (Ext.isEmpty(objectId) === false && objectId === this.objectId) {
     		return;
     	}
@@ -185,7 +186,10 @@ Icinga.Cronks.Tackle.Relation.Head = Ext.extend(Ext.Panel, {
     	
     	Ext.Ajax.request({
     		url : String.format('{0}/web/api/relation/{1}', AppKit.util.Config.get('path'), id),
-    		success : function(response, opts) {
+    		params: {
+                connection: this.connection
+            },
+            success : function(response, opts) {
     			var data = Ext.decode(response.responseText);
     			var root = data.result;
     			Ext.each(this.stores, function(c) {

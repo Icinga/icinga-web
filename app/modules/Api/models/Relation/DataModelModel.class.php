@@ -1,9 +1,14 @@
 <?php
 
 class Api_Relation_DataModelModel extends IcingaApiBaseModel {
-    
+    private $connection = "icinga";
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
+        if(isset($parameters["connection"])) {
+            $this->connection = $parameters["connection"];
+        } else {
+            $this->connection = IcingaDoctrineDatabase::CONNECTION_ICINGA;
+        }
     }
     
     public function getRelationDataForObjectId($objectId) {
@@ -27,8 +32,9 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         } elseif ($objecttypeId == IcingaConstants::TYPE_SERVICE) {
             $type = 'service';
         }
-        
-        $records = IcingaDoctrine_Query::create()
+        $DBALManager = $this->getContext()->getModel("DBALMetaManager","Api");
+        $DBALManager->switchIcingaDatabase($this->connection);
+        $records = IcingaDoctrine_Query::create($this->connection)
         ->select('c.contact_id, c.alias as contact_alias, co.name1 as contact_name, c.email_address as contact_email_address, co.object_id as contact_object_id, NULL as contactgroup_name, NULL as contactgroup_object_id')
         ->from('IcingaContacts c')
         ->innerJoin('c.object co')
@@ -39,7 +45,7 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
             $out = $records;
         }
         
-        $records = IcingaDoctrine_Query::create()
+        $records = IcingaDoctrine_Query::create($this->connection)
         ->select('c.contact_id, c.alias as contact_alias, co.name1 as contact_name, c.email_address as contact_email_address, co.object_id as contact_object_id,  cg.alias as contactgroup_name, cg.contactgroup_object_id as contactgroup_object_id')
         ->from('IcingaContacts c')
         ->innerJoin('c.object co')
@@ -50,7 +56,7 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         if (count($records)) {
             $out = array_merge($out, $records);
         }
-        
+        $DBALManager->switchIcingaDatabase(IcingaDoctrineDatabase::CONNECTION_ICINGA);
         return $out;
     }
     
