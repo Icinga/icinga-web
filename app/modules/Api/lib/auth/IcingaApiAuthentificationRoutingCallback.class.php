@@ -33,6 +33,7 @@ class IcingaApiAuthentificationRoutingCallback extends AgaviRoutingCallback {
         $errors = array ();
         
         if (isset($parameters['authkey'])) {
+            $container->setAttribute('flag', true, 'org.icinga.api.auth');
             try {
                 $this->user->doAuthKeyLogin($parameters['authkey']);
             } catch (AgaviSecurityException $e) {
