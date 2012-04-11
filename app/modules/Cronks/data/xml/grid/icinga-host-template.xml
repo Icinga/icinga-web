@@ -487,6 +487,7 @@
                             <parameter name="filterMap">
                                 <parameter name="host_object_id">host_object_id</parameter>
                             </parameter>
+                            <parameter name="additonalSort">service_name</parameter>
                             <parameter name="labelField">host_name</parameter>
                         </parameter>
                     </parameter>

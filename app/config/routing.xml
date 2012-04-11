@@ -82,6 +82,8 @@
                         pattern="limit[({limit_start:\d*};)?(limit:\d*)]" />
                     <route name=".countcolumn" stop="false"
                         pattern="countColumn=(countColumn:\w*)" />
+                    <route name=".connection" stop="false"
+                        pattern="connection=(connection:\w*)" />
                     <route name=".withSLA" stop="false" pattern="withSLA=(withSLA:\d)" />
                     <route name=".withMeta" stop="false" pattern="withMeta=(withMeta:\d)" />
                     <route name=".output" stop="true" pattern="(output:json|xml|soap|rest)$"

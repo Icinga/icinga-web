@@ -19,7 +19,6 @@ class IcingaDoctrineDatabase extends AppKitDoctrineDatabase {
     public function initialize(AgaviDatabaseManager $databaseManager, array $parameters = array()) {
         parent::initialize($databaseManager, $parameters);
         self::$icingaConnections[] = $this->getName();
-
         if ($this->getParameter('use_retained')) {
             $this->use_retained = true;
         }

@@ -11,7 +11,9 @@ class Api_RelationProviderAction extends IcingaApiBaseAction {
 	
 	public function executeWrite(AgaviRequestDataHolder $rd) {
 	    
-	    $model = $this->context->getModel('Relation.DataModel', 'Api');
+	    $model = $this->context->getModel('Relation.DataModel', 'Api',
+            array("connection" => $rd->getParameter("connection","icinga"))
+        );
 	    
 	    try {
 	        $this->setAttribute('data', $model->getRelationDataForObjectId($rd->getParameter('objectId')));
