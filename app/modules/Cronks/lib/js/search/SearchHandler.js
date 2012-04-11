@@ -227,12 +227,14 @@ Icinga.Cronks.search.SearchHandler = (new (Ext.extend(Ext.util.Observable, {
             case 'host':
                 filter['f[host_object_id-value]'] = re.data.object_id;
                 filter['f[host_object_id-operator]'] = 50;
+                filter['additional_sort_field'] = 'service_name';
                 params['template'] = 'icinga-service-template';
             break;
             
             case 'service':
                 filter['f[service_object_id-value]'] = re.data.object_id;
                 filter['f[service_object_id-operator]'] = 50;
+                
                 params['template'] = 'icinga-service-template';
             break;
             
