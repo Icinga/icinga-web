@@ -15,6 +15,8 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     private $user;
     private $parser;
     private $resultMap = array();
+    private $connection;
+
     /**
      *
      * @var IcingaDoctrine_Query
@@ -25,8 +27,10 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $this->setTemplate($template);
         $this->setContext($context);
         $this->user = $context->getUser()->getNsmUser();
+        $this->connection = $connection;
         $view = $this->readDataSourceDefinition();
         $source = $template->getSection("datasource");
+
         $this->parser = $context->getModel("Views.ApiDQLView","Api",array(
             "view" => $view,
             "parameters" => isset($source["parameters"]) ? $source["parameters"] : array(),
@@ -119,6 +123,9 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
         $ds = $this->template->getSection("datasource");
         if(!isset($ds["countmode"]) || in_array($ds["countmode"],array("false","none","null")))
             return;
+        if($this->connection != "icinga")
+            $this->getContext()->getModel("DBALMetaManager","Api")
+                ->switchIcingaDatabase($this->connection);
         return $this->query->count();
     }
 
@@ -132,7 +139,7 @@ class DQLCronkTemplateWorker extends CronkGridTemplateWorker {
     }
 
     public function addOrderColumn($column, $direction = 'ASC') {
-        $this->query->orderBy($this->aliasToColumn($column)." ".$direction);
+        $this->query->addOrderBy($this->aliasToColumn($column)." ".$direction);
     }
 
     public function aliasToColumn($field) {

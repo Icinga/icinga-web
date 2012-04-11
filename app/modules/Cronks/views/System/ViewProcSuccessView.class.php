@@ -75,6 +75,10 @@ class Cronks_System_ViewProcSuccessView extends CronksBaseView {
 
             if ($rd->getParameter('sort_field', null) !== null) {
                 $worker->setOrderColumn($rd->getParameter('sort_field'), $rd->getParameter('sort_dir', 'ASC'));
+            
+                if($rd->getParameter('additional_sort_field',null) !== null) {
+                    $worker->addOrderColumn($rd->getParameter('additional_sort_field'), $rd->getParameter('sort_dir', 'ASC'));
+                }
             }
 
             // Apply the filter to our template worker
