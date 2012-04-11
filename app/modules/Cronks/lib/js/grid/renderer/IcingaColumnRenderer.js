@@ -36,6 +36,8 @@ Cronk.grid.IcingaColumnRenderer = {
                     filter["f[" + cfg.targetField + "-value]"] = record.data[ cfg.sourceField ];
                     filter["f[" + cfg.targetField + "-operator]"] = 50;
                 }
+                if(cfg.additionalSort)
+                    filter["additional_sort_field"] = cfg.additionalSort;
                 filter["connection"] = grid.selectedConnection;
                 Cronk.util.InterGridUtil.gridFilterLink(cronk, filter);
             }
