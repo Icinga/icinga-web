@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/filters/1.0">
+
+    <ae:configuration context="web">
+        <filters>
+
+            <filter name="AuthKeyLogoutFilter" class="IcingaApiAuthentificationLogoutFilter">
+            </filter>
+
+        </filters>
+    </ae:configuration>
+
+</ae:configurations>
