@@ -41,7 +41,7 @@ Ext.ns("AppKit.Admin");
                     name: 'disabled_icon',
                     mapping: 'disabled',
                     convert: function (v) {
-                        return '<div style="width:16px;height:16px;margin-left:25px" class="' + (v === 1 ? 'icinga-icon-cancel' : 'icinga-icon-accept') + '"></div>';
+                        return '<div style="width:16px;height:16px;margin-left:25px" class="' + (v == 1 ? 'icinga-icon-cancel' : 'icinga-icon-accept') + '"></div>';
                     }
                 }, {
                     name: 'created'

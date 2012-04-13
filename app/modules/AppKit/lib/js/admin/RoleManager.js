@@ -27,7 +27,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                 'description',
                 {name: 'active', type:'boolean'},
                 {name: 'disabled_icon',type:'boolean' , mapping:'active', convert: function(v) {
-                    return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v===0? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
+                    return '<div style="width:16px;height:16px;margin-left:25px" class="'+(v == 0 ? 'icinga-icon-cancel' : 'icinga-icon-accept')+'"></div>';
                 }},
                 {name: 'created'},
                 {name: 'modified'},
