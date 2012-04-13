@@ -9,4 +9,4 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
         tpl: new Ext.XTemplate('<tpl for=".">', '<div style="margin: 5px;">', '{object_output}', '</div>', '</tpl>')
     });
 
-})();
+})()    ;
