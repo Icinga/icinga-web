@@ -45,8 +45,6 @@
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/RoleEditForm.js</ae:parameter>
             <ae:parameter>%core.module_dir%/AppKit/lib/js/admin/RoleManager.js</ae:parameter>
 
-            <ae:parameter>%core.module_dir%/AppKit/lib/js/ux/SmartUpdateGrid.js</ae:parameter>
-            
             <!-- jsgettext -->
             <ae:parameter>%core.root_dir%/lib/jsgettext/lib/Gettext.js</ae:parameter>
         </javascript>
