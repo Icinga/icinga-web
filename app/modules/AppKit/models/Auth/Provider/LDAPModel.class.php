@@ -194,7 +194,9 @@ class AppKit_Auth_Provider_LDAPModel extends AppKitAuthProviderBaseModel impleme
             $bindpw = $this->getParameter('ldap_bindpw');
 
             $re = @ldap_bind($res, $binddn, $bindpw);
-
+            if($re != true && $this->getParameter('ldap_allow_anonymous',false)) {
+                $re = @ldap_bind($res);
+            }
             if ($re !== true) {
                 $this->log('Auth.Provider.LDAP Bind failed: (dn=%s)', $binddn, AgaviLogger::ERROR);
                 throw new AgaviSecurityException('Auth.Provider.LDAP: Bind failed');
