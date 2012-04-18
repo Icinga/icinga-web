@@ -28,8 +28,13 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 
     public function doAuthenticate(NsmUser $user, $password, $username=null, $authid=null) {
         $tuser = $this->loadUserByDQL($user->user_name);
-
-        if ($tuser && $tuser instanceof NsmUser && $user->user_name == $this->getAuthName()) {
+        $username = $user->user_name;
+        $authname = $this->getAuthName();
+        if($this->getParameter('auth_lowercase_username',false) == true) {
+            $username = strtolower($username);
+            $authname = strtolower($authname);
+        }
+        if ($tuser && $tuser instanceof NsmUser && $username == $authname) {
             return true;
         }
 
