@@ -46,7 +46,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
            
             if($onlySimple && !$command["isSimple"])
                 throw new Exception("Could not send command. Your user isn't allowed to send this command.");
-            
+            AppKitLogger::debug("Sending icinga-command %s",$string);
             $cmd = $this->getContext()->getModel($commandClass[0],$commandClass[1],
                                                  array(
                                                          "command" => "printf",
@@ -77,7 +77,7 @@ class Api_Commands_CommandDispatcherModel extends IcingaApiBaseModel implements 
             } else if (!isset($params[$vals["alias"]])) {
                 $str .= ";";
             } else {
-                $val = $params[$vals["alias"]];
+                $val = ($params[$vals["alias"]]);
                 $val = preg_replace("/\n/"," ",$val);
                     
                 switch ($vals["type"]) {

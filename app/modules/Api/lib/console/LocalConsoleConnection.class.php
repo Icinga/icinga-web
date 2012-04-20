@@ -7,6 +7,7 @@ class LocalConsoleConnection extends BaseConsoleConnection {
         $this->checkFileExistence($cmd);
         
         exec($cmdString,$out,$ret);
+        
         $cmd->setReturnCode($ret);
         $cmd->setOutput($out);
     }

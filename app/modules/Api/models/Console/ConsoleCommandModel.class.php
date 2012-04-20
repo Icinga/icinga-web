@@ -115,6 +115,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
     public function getCommandString() {
         $this->isValid(true);
         $cmd = $this->command;
+
         foreach($this->arguments as $name => $arg) {
             if (!is_int($name)) {
                 $cmd .= ' '.escapeshellcmd($name);
@@ -125,7 +126,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
             }
 
             if ($arg != '') {
-                $cmd .= ' '.escapeshellarg($arg);
+                $cmd .= ' '.$this->escapeshellarg($arg);
             }
         }
 
@@ -239,5 +240,13 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
 
         if(!AccessConfig::canWrite($errFile,$this->host))
             throw new ApiRestrictedCommandException($errFile." is not read enabled");
+    }
+    /**
+     * PHP's escapeshellarg function sometimes has problems with multibyte values like 'öäü',
+     * so it is redefined here based on PHPs source code (which is fortunately rather simple.
+     *
+     */
+    private function escapeshellarg($str) {
+       return "'".str_replace("'","\\'",$str)."'";
     }
 }

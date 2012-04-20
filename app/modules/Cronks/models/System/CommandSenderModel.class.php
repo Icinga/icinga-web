@@ -57,6 +57,7 @@ class Cronks_System_CommandSenderModel extends CronksBaseModel {
             $console = $this->getConsoleInstance($target['instance']);
             $dispatcher->setConsoleContext($console);
             AppKitLogger::debug("Submitting command %s to %s",$this->command,json_encode($target));
+
             $dispatcher->submitCommand($this->command,array_merge($target,$this->data));
             AppKitLogger::debug("Finished submitting command");
         }
