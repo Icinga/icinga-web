@@ -6,438 +6,446 @@
  */
 Cronk.IcingaApiComboBox = Ext.extend(Ext.form.ComboBox, {
 
-	def_webpath : '/modules/web/api/json',
-	def_sortorder : 'asc',
+    def_webpath : '/modules/web/api/json',
+    def_sortorder : 'asc',
 
-	constructor : function(cfg, meta) {
+    constructor : function(cfg, meta) {
 
-		var kf = meta.api_keyfield;		// ValueField
-		var vf = meta.api_valuefield;	// KeyField
+        var kf = meta.api_keyfield;		// ValueField
+        var vf = meta.api_valuefield;	// KeyField
 
-		var fields = [];
-		var cols = [];
+        var fields = [];
+        var cols = [];
 
-		var cfields = {};
-		cfields[kf] = true;
-		cfields[vf] = true;
+        var cfields = {};
+        cfields[kf] = true;
+        cfields[vf] = true;
 
-		if (meta.api_id) {
-			cfields[meta.api_id] = true;
-		}
+        if (meta.api_id) {
+            cfields[meta.api_id] = true;
+        }
 
-		// If we need more fields to work with
-		if (meta.api_additional) {
-			var i = meta.api_additional.split(',');
-			for (var k in i) {
-				if (Ext.isString(i[k])) {
-					cfields[i[k]] = true;
-				}
-			}
-		}
+        // If we need more fields to work with
+        if (meta.api_additional) {
+            var i = meta.api_additional.split(',');
+            for (var k in i) {
+                if (Ext.isString(i[k])) {
+                    cfields[i[k]] = true;
+                }
+            }
+        }
 
-		for (var f in cfields) {
-			cols.push(f);
-			fields.push({
-				name: f
-			});
-		}
+        for (var f in cfields) {
+            cols.push(f);
+            fields.push({
+                name: f
+            });
+        }
 
-		var apiStore = new Ext.data.JsonStore({
-			autoDestroy : true,
-			url : AppKit.c.path + this.def_webpath,
+        var apiStore = new Ext.data.JsonStore({
+            autoDestroy : true,
+            url : AppKit.c.path + this.def_webpath,
 
-			root : 'result',
+            root : 'result',
 
-			baseParams : {
-				target : meta.api_target,
-				order_col: (meta.api_order_col || meta.api_keyfield),
-				order_dir: (meta.api_order_dir || this.def_sortorder),
-				columns: cols
-			},
+            baseParams : {
+                target : meta.api_target,
+                order_col: (meta.api_order_col || meta.api_keyfield),
+                order_dir: (meta.api_order_dir || this.def_sortorder),
+                columns: cols
+            },
 
-			idProperty : (meta.api_id || meta.api_keyfield),
+            idProperty : (meta.api_id || meta.api_keyfield),
 
-			fields : fields,
+            fields : fields,
 			
-			listeners : {
-				beforeload : function(store, options) {
-					if (!Ext.isEmpty(store.baseParams.query)) {
-						store.baseParams.filters_json = Ext.util.JSON.encode({
-							type : 'AND',
-							field : [{
-								type : 'atom',
-								field : [vf],
-								method : ['like'],
-								value : [String.format('*{0}*', store.baseParams.query)]
-							}]
-						});
-					}
-				}
-			}
-		});
+            listeners : {
+                beforeload : function(store, options) {
+                    if (!Ext.isEmpty(store.baseParams.query)) {
+                        store.baseParams.filters_json = Ext.util.JSON.encode({
+                            type : 'AND',
+                            field : [{
+                                type : 'atom',
+                                field : [vf],
+                                method : ['like'],
+                                value : [String.format('*{0}*', store.baseParams.query)]
+                            }]
+                        });
+                    }
+                }
+            }
+        });
 		
-		apiStore.load();
+        apiStore.load();
 		
 		
 
-		cfg = Ext.apply(cfg || {}, {
-			store : apiStore,
-			displayField: vf,
-			valueField : vf,
-			keyField : kf
-		});
+        cfg = Ext.apply(cfg || {}, {
+            store : apiStore,
+            displayField: vf,
+            valueField : vf,
+            keyField : kf
+        });
 
-		// To display complex multi column layouts
-		if (meta.api_exttpl) {
-			cfg.tpl = '<tpl for="."><div class="x-combo-list-item">' + meta.api_exttpl + '</div></tpl>';
-		}
+        // To display complex multi column layouts
+        if (meta.api_exttpl) {
+            cfg.tpl = '<tpl for="."><div class="x-combo-list-item">' + meta.api_exttpl + '</div></tpl>';
+        }
 
-		// Notify the parent class
-		Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
+        // Notify the parent class
+        Cronk.IcingaApiComboBox.superclass.constructor.call(this, cfg);
 		
 		
-	}
+    }
 });
 
 // Our class
 Cronk.FilterHandler = function() {
-	Cronk.FilterHandler.superclass.constructor.call(this);
+    Cronk.FilterHandler.superclass.constructor.call(this);
 };
 
 // Extending
 Cronk.FilterHandler = Ext.extend(Ext.util.Observable, {
 	
-	oFilterOp : {
-		'appkit.ext.filter.text': 'text',
-		'appkit.ext.filter.number': 'number',
-		'appkit.ext.filter.servicestatus': 'number',
-		'appkit.ext.filter.hoststatus': 'number',
-		'appkit.ext.filter.bool': 'bool'
-	},
+    oFilterOp : {
+        'appkit.ext.filter.text': 'text',
+        'appkit.ext.filter.number': 'number',
+        'appkit.ext.filter.servicestatus': 'number',
+        'appkit.ext.filter.hoststatus': 'number',
+        'appkit.ext.filter.bool': 'bool'
+    },
 	
-	oOpList : {
-		text: [
-			[60, _('contain')],
-			[61, _('does not contain')],
-			[50, _('is')],
-			[51, _('is not')]
-		]	,
+    oOpList : {
+        text: [
+        [60, _('contain')],
+        [61, _('does not contain')],
+        [50, _('is')],
+        [51, _('is not')]
+        ]	,
 		
-		number: [
-			[50, _('is')],
-			[51, _('is not')],
-			[70, _('less than')],
-			[71, _('greater than')]
-		],
+        number: [
+        [50, _('is')],
+        [51, _('is not')],
+        [70, _('less than')],
+        [71, _('greater than')]
+        ],
 		
-		bool: [
-			[50, _('is')]
-		]
-	},
+        bool: [
+        [50, _('is')]
+        ]
+    },
 	
-	oOpDefault : {
-		number: 50,
-		text: 60,
-		bool: 50
-	},
+    oOpDefault : {
+        number: 50,
+        text: 60,
+        bool: 50
+    },
 	
-	meta : {},
-	config : {}, 
+    meta : {},
+    config : {},
 	
-	cList : {},
+    cList : {},
 	
-	constructor : function(config) {
+    constructor : function(config) {
 		
-		Ext.apply(this.config, config);
+        Ext.apply(this.config, config);
 		
-		if (this.config.meta) {
-			this.setMeta(this.config.meta);
-		}
+        if (this.config.meta) {
+            this.setMeta(this.config.meta);
+        }
 		
-		this.listener = {};
+        this.listener = {};
 		
-		this.addEvents({
-			'aftercompremove' : true,
-			'compremove' : true,
-			'aftercompadd' : true,
-			'compcreate' : true,
-			'aftercompcreate' : true,
-			'metaload' : true
-		});
+        this.addEvents({
+            'aftercompremove' : true,
+            'compremove' : true,
+            'aftercompadd' : true,
+            'compcreate' : true,
+            'aftercompcreate' : true,
+            'metaload' : true
+        });
 		
-		Cronk.FilterHandler.superclass.constructor.call();
-	},
+        Cronk.FilterHandler.superclass.constructor.call();
+    },
 	
-	setMeta : function (meta) {
-		if (tis.fireEvent('metaload', this, meta) !== false) {
-			this.meta = meta;
-		}
+    setMeta : function (meta) {
+        if (tis.fireEvent('metaload', this, meta) !== false) {
+            this.meta = meta;
+        }
 		
-		return true;
-	},
+        return true;
+    },
 	
-	getRemoveComponent : function(meta) {
-		var button = new Ext.Button({
-			xtype: 'button',
-			iconCls: 'icinga-icon-cross',
-			handler: function(b, e) {
-				this.removeComponent(meta);
-			},
+    getRemoveComponent : function(meta) {
+        var button = new Ext.Button({
+            xtype: 'button',
+            iconCls: 'icinga-icon-cross',
+            handler: function(b, e) {
+                this.removeComponent(meta);
+            },
+            anchor: '-5',
+            scope: this,
+            width:25,
+            columnWidth: '25px'
+        });
+		
+        return button;
+    },
+	
+    removeAllComponents : function() {
+        Ext.iterate(this.cList, function(k, v) {
+            this.removeComponent(v);
+        }, this);
+    },
+	
+    removeComponent : function(meta) {
+		
+        var cid = 'fco' + meta.id;
+		
+        // Retrieve the comp_id
+        var p = Ext.getCmp('fco' + meta.id);
 			
-			scope: this
-		});
-		
-		return button;
-	},
-	
-	removeAllComponents : function() {
-		Ext.iterate(this.cList, function(k, v) {
-			this.removeComponent(v);
-		}, this);
-	},
-	
-	removeComponent : function(meta) {
-		
-			var cid = 'fco' + meta.id;
-		
-			// Retrieve the comp_id
-			var p = Ext.getCmp('fco' + meta.id);
-			
-			// Removing the panel construct
-			if (this.fireEvent('compremove', this, p, meta) !== false) {
+        // Removing the panel construct
+        if (this.fireEvent('compremove', this, p, meta) !== false) {
 				
-				var form = p.findParentByType('form');
+            var form = p.findParentByType('form');
 				
-				if (form) {
-					form.remove(p, true).destroy();
-					delete this.cList[cid];
-				}
-			}
+            if (form) {
+                form.remove(p, true).destroy();
+                delete this.cList[cid];
+            }
+        }
 			
-			this.fireEvent('aftercompremove', this, p, meta);
+        this.fireEvent('aftercompremove', this, p, meta);
 
-			return true;
-	},
+        return true;
+    },
 	
-	getLabelComponent : function(meta) {
-		return new Ext.Panel({
-			html: meta['label'],
-			border: false
-		});
-	},
+    getLabelComponent : function(meta) {
+        return {
+            xtype: 'label',
+            html: meta['label'],
+            border: false,
+            width: "100px",
+            columWidth: "100px"
+        };
+    },
 	
-	getOperatorComponent : function(meta) {
-		var  type = null;
+    getOperatorComponent : function(meta) {
+        var  type = null;
 		
-		// Disable the operator
-		if (meta.no_operator && meta.no_operator == true) {
-			return new Ext.Panel({border: false});
-		} 
+        // Disable the operator
+        if (meta.no_operator && meta.no_operator == true) {
+            return new Ext.Panel({
+                border: false
+            });
+        }
 		
-		if (meta.operator_type) {
-			type = meta.operator_type;
-		}
+        if (meta.operator_type) {
+            type = meta.operator_type;
+        }
 		
-		if (!type) {
-			type = this.oFilterOp[meta.subtype];
-		}
+        if (!type) {
+            type = this.oFilterOp[meta.subtype];
+        }
 		
-		// this is our combo field
-		var oCombo = new Ext.form.ComboBox({
+        // this is our combo field
+        var oCombo = new Ext.form.ComboBox({
 			
-			store : new Ext.data.ArrayStore({
-				idIndex : 0,
-				fields : ['id', 'label'],
-				data : this.oOpList[type] || []
-			}),
+            store : new Ext.data.ArrayStore({
+                idIndex : 0,
+                fields : ['id', 'label'],
+                data : this.oOpList[type] || []
+            }),
 			
-			mode : 'local',
+            mode : 'local',
 			
-			typeAhead : true,
-			triggerAction : 'all',
-			forceSelection : true,
+            typeAhead : true,
+            triggerAction : 'all',
+            forceSelection : true,
 					
-			fieldLabel : "Operator",
+            fieldLabel : "Operator",
 			
-			valueField : 'id',
-			displayField : 'label',
+            valueField : 'id',
+            displayField : 'label',
 			
-			hiddenName : meta.id + '-operator',
-			hiddenId : meta.id + '-operator',
+            hiddenName : meta.id + '-operator',
+            hiddenId : meta.id + '-operator',
 			
-			'name' : '___LABEL' + meta.id + '-operator',
-			id : '___LABEL' + meta.id + '-operator',
-			
-			width : 250
-		});
-		
-		// Set the default value after rendering
-		oCombo.on('render', function(c) {
-			c.setValue(this.oOpDefault[type]);
-		}, this);
-		
-		// Pack all together in a container
-		// var p = new Ext.Panel({border: false});
-		// p.add(oCombo);
-		// return p;
-		
-		return oCombo;
-	},
-	
-	getComboComponent : function(data, meta) {
-		var def = {
-			store: new Ext.data.ArrayStore({
-				idIndex: 0,
-				fields: ['fId', 'fStatus', 'fLabel'],
-				data: data
-			}),
-			
-			'name': '__status_name_' + meta.name,
-			'id': '__status_name_' + meta.name,
-			// 'name': meta.name + '-value',
-			
-			mode: 'local',
-			typeAhead: true,
-			triggerAction: 'all',
-			forceSelection: true,
-			
-			
-			fieldLabel: 'Status',
-			
-			valueField: 'fStatus',
-			displayField: 'fLabel',
-			
-			width: 250,
-			
-			hiddenName: meta.name + '-value',
-			hiddenId: meta.name + '-value'
-		};
-		
-		return new Ext.form.ComboBox(def);
-		
-	},
+            'name' : '___LABEL' + meta.id + '-operator',
+            id : '___LABEL' + meta.id + '-operator',
+            columnWidth: .3
 
-	getApiCombo : function(meta) {
-		return new Cronk.IcingaApiComboBox({
-			typeAhead: false,
-			triggerAction: 'all',
-			forceSelection: false,
-			'name': meta.name + '-field',
-			'id': meta.name + '-field',
-			hiddenName: meta.name + '-value',
-			hiddenId: meta.name + '-value',
-            width:250
-		}, meta);
-	},
+			
+        });
+		
+        // Set the default value after rendering
+        oCombo.on('render', function(c) {
+            c.setValue(this.oOpDefault[type]);
+        }, this);
+		
+        // Pack all together in a container
+        // var p = new Ext.Panel({border: false});
+        // p.add(oCombo);
+        // return p;
+		
+        return oCombo;
+    },
 	
-	getFilterComponent : function(meta) {
-		var oDef = {
-			'name' : meta.name + '-value',
-			id : meta.name + '-value'
-		};
+    getComboComponent : function(data, meta) {
+        var def = {
+            store: new Ext.data.ArrayStore({
+                idIndex: 0,
+                fields: ['fId', 'fStatus', 'fLabel'],
+                data: data
+            }),
+			
+            'name': '__status_name_' + meta.name,
+            'id': '__status_name_' + meta.name,
+            // 'name': meta.name + '-value',
+			
+            mode: 'local',
+            typeAhead: true,
+            triggerAction: 'all',
+            forceSelection: true,
+			
+			
+            fieldLabel: 'Status',
+			
+            valueField: 'fStatus',
+            displayField: 'fLabel',
+			
+            hiddenName: meta.name + '-value',
+            hiddenId: meta.name + '-value',
+            columnWidth: .6
+        };
 		
-		switch (meta.subtype) {
-			
-			case 'appkit.ext.filter.servicestatus':
-				return this.getComboComponent([
-					['1', '0', 'OK'],
-					['2', '1', 'Warning'],
-					['3', '2', 'Critical'],
-					['4', '3', 'Unknown']
-				], meta);
-			break;
-			
-			case 'appkit.ext.filter.bool':
-				return this.getComboComponent([
-					['1', '1', _('Yes')],
-					['2', '0', _('No')]
-				], meta);
-			break;
-			
-			case 'appkit.ext.filter.hoststatus':
-				return this.getComboComponent([
-					['1', '0', 'UP'],
-					['2', '1', 'Down'],
-					['3', '2', 'Unreachable']
-				], meta);
-			break;
+        return new Ext.form.ComboBox(def);
+		
+    },
 
-			case 'appkit.ext.filter.api':
-				return this.getApiCombo(meta);
-			break;
-
-			default:
-				return new Ext.form.TextField(oDef);	
-			break;
-			
-		}
-		
-		
-	},
+    getApiCombo : function(meta) {
+        return new Cronk.IcingaApiComboBox({
+            typeAhead: false,
+            triggerAction: 'all',
+            forceSelection: false,
+            'name': meta.name + '-field',
+            'id': meta.name + '-field',
+            hiddenName: meta.name + '-value',
+            hiddenId: meta.name + '-value',
+            columnWidth: .6
+        }, meta);
+    },
 	
-	createComponent : function(meta) {
-			return this.componentDispatch(meta);
-	},
-	
-	componentDispatch : function(meta) {
+    getFilterComponent : function(meta) {
+        var oDef = {
+            'name' : meta.name + '-value',
+            id : meta.name + '-value',
+            columnWidth: .6,
+            bodyStyle:'padding:0 18px 0 0'
+        };
 		
-		var cid = 'fco' + meta.id;
-		
-		var panel = new Ext.Panel({
-			id: cid,
-			border: false,
-			style: 'padding: 2px;',
-			layout: 'column',
+        switch (meta.subtype) {
+			
+            case 'appkit.ext.filter.servicestatus':
+                return this.getComboComponent([
+                    ['1', '0', 'OK'],
+                    ['2', '1', 'Warning'],
+                    ['3', '2', 'Critical'],
+                    ['4', '3', 'Unknown']
+                    ], meta);
+                break;
+			
+            case 'appkit.ext.filter.bool':
+                return this.getComboComponent([
+                    ['1', '1', _('Yes')],
+                    ['2', '0', _('No')]
+                    ], meta);
+                break;
+			
+            case 'appkit.ext.filter.hoststatus':
+                return this.getComboComponent([
+                    ['1', '0', 'UP'],
+                    ['2', '1', 'Down'],
+                    ['3', '2', 'Unreachable']
+                    ], meta);
+                break;
 
-			defaults: {
-				border: false,
-				style: 'padding: 2px;'				
-			}
-		});
-		
-		// Before adding stage
-		if (this.fireEvent('compcreate', this, panel, meta) !== false) {
+            case 'appkit.ext.filter.api':
+                return this.getApiCombo(meta);
+                break;
+
+            default:
+                return new Ext.form.TextField(oDef);
+                break;
 			
-			this.cList[cid] = meta;
+        }
+		
+		
+    },
+	
+    createComponent : function(meta) {
+        return this.componentDispatch(meta);
+    },
+	
+    componentDispatch : function(meta) {
+		
+        var cid = 'fco' + meta.id;
+		
+        var panel = new Ext.Panel({
+            id: cid,
+            border: false,
+            layout: 'column',
+            padding:4,
+            defaults: {
+                border: false,
+                anchor: '100%'
+            }
+        });
+		
+        // Before adding stage
+        if (this.fireEvent('compcreate', this, panel, meta) !== false) {
 			
-			// Adding the label
-			panel.add([
-				{items: this.getLabelComponent(meta), columnWidth: 2},
-				{items: this.getOperatorComponent(meta), columnWidth: .3},
-				{items: this.getFilterComponent(meta), columnWidth: "250px"},
-				{items: this.getRemoveComponent(meta), columnWidth: "50px"}
-			]);
+            this.cList[cid] = meta;
 			
-		}
+            // Adding the label
+            panel.add([
+                this.getLabelComponent(meta),
+                this.getOperatorComponent(meta),
+                this.getFilterComponent(meta),
+                this.getRemoveComponent(meta)
+                ]);
+			
+        }
 		
-		// All panels there
-		this.fireEvent('aftercompcreate', this, panel, meta);
+        // All panels there
+        this.fireEvent('aftercompcreate', this, panel, meta);
 		
-		return panel;
+        return panel;
 		
-	}
+    }
 	
 });
 
 // Adding the blank events
 Ext.apply(Cronk.FilterHandler, {
-	afterCompRemove : function(fh, p, meta) {
-		return true;
-	},
+    afterCompRemove : function(fh, p, meta) {
+        return true;
+    },
 	
-	compRemove : function(fh, p, meta) {
-		return true;
-	},
+    compRemove : function(fh, p, meta) {
+        return true;
+    },
 	
-	afterCompCreate : function(fh, panel, meta) {
-		return true;
-	},
+    afterCompCreate : function(fh, panel, meta) {
+        return true;
+    },
 	
-	compCreate : function(fh, panel, meta) {
-		return true;
-	},
+    compCreate : function(fh, panel, meta) {
+        return true;
+    },
 	
-	metaLoad : function(fh, meta) {
-		return true;
-	}
+    metaLoad : function(fh, meta) {
+        return true;
+    }
 });
