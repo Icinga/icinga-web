@@ -263,15 +263,15 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                             filter['f[' + d.type + '_status-value]'] = d.state_org;
                             filter['f[' + d.type + '_status-operator]'] = 50;
                             // not pending
-                            filter['f[' + d.type + '_is_pending-value]'] = 0;
-                            filter['f[' + d.type + '_is_pending-operator]'] = 80;
+                            filter['f[' + d.type + '_has_been_checked-value]'] = 1;
+                            filter['f[' + d.type + '_has_been_checked-operator]'] = 50;
                         } else if (d.state_org === 99) { // check pending
                             // state ok
                             filter['f[' + d.type + '_status-value]'] = 0;
                             filter['f[' + d.type + '_status-operator]'] = 50;
                             // pending
-                            filter['f[' + d.type + '_is_pending-value]'] = 0;
-                            filter['f[' + d.type + '_is_pending-operator]'] = 71;
+                            filter['f[' + d.type + '_has_been_checked-value]'] = 0;
+                            filter['f[' + d.type + '_has_been_checked-operator]'] = 50;
                         }
 
                         var id = 'status-overall-grid' + d.type + '-' + d.state_org;
