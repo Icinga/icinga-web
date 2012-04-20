@@ -117,6 +117,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 
             this.stateInfo.setSource(record.data);
             this.pluginOutputInfo.update(record.data);
+            this.pluginLongOutputInfo.update(record.data);
             this.pluginPerfdataInfo.update(record.data);
         },
 
