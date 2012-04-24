@@ -80,7 +80,12 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                 flex: 1,
                 layout: 'fit'
             });
-
+            this.pluginLongOutputInfo = new Icinga.Cronks.Tackle.Information.LongPluginOutput({
+                // height : 40,
+                type: this.type,
+                flex: 1,
+                layout: 'fit'
+            });
             this.pluginPerfdataInfo = new Icinga.Cronks.Tackle.Information.Perfdata({
                 // height: 40,
                 type: this.type,
@@ -100,7 +105,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
                     pack: 'start'
                 },
                 
-                items: [this.pluginOutputInfo, this.pluginPerfdataInfo]
+                items: [this.pluginOutputInfo, this.pluginLongOutputInfo, this.pluginPerfdataInfo]
             });
 
             this.doLayout();
@@ -112,6 +117,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 
             this.stateInfo.setSource(record.data);
             this.pluginOutputInfo.update(record.data);
+            this.pluginLongOutputInfo.update(record.data);
             this.pluginPerfdataInfo.update(record.data);
         },
 

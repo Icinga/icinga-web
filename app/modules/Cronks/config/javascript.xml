@@ -53,7 +53,11 @@
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/Head.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/State.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/PluginOutput.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/LongPluginOutput.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Information/Perfdata.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ExternalReferences/Head.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ExternalReferences/UrlList.js</ae:parameter>
+            <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/ExternalReferences/PreviewFrame.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Command/Panel.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Command/BatchCommandWindow.js</ae:parameter>
             <ae:parameter>%core.module_dir%/Cronks/lib/js/Cronks/Tackle/Command/View.js</ae:parameter>

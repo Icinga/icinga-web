@@ -87,6 +87,7 @@ class Doctrine_Connection_IcingaOracle extends Doctrine_Connection_Oracle
             parent::connect();
             $this->exec('ALTER SESSION SET NLS_DATE_FORMAT = "' . $this->dateFormat . '"');
             $this->exec('ALTER SESSION SET NLS_TIMESTAMP_FORMAT = "' . $this->dateFormat . '"');
+    
         }
     }
 

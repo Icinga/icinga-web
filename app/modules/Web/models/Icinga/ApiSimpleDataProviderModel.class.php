@@ -211,7 +211,7 @@ class Web_Icinga_ApiSimpleDataProviderModel extends IcingaWebBaseModel {
                                  'val' => $this->rewriteColumn($key, $val)
                              );
                 } else {
-                    $tmp[$key] = $this->rewriteColumn($key, $val);
+                    $tmp[$key] = utf8_decode($this->rewriteColumn($key, $val));
                 }
             }
             $out[] = $tmp;

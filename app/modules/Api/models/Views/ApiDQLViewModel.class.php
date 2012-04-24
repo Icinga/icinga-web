@@ -22,6 +22,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
     private $currentQuery = null;
     private $mergeDependencies = array();
 
+    private $useRetained = false;
 
     private static $bufferedResults = array();
 
@@ -49,6 +50,8 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
             $connection = $this->view["connection"];
         }
         AppKitLogger::verbose("Switching to connection %s",$connection);
+        $db = $this->getContext()->getDatabaseManager()->getDatabase($connection);
+        $this->useRetained = $db->useRetained();
         $this->connection = $ctx->getDatabaseConnection($connection);
         if($this->connection != "icinga")
             $ctx->getModel("DBALMetaManager","Api")->switchIcingaDatabase($connection);
@@ -57,6 +60,8 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $this->parseBaseDQL();
         $this->parseDQLExtensions();
         $this->parseDependencies();
+        $this->currentQuery->andWhere("config_type= ?",$db->useRetained() ? "1" : "0");
+
     }
 
     public function getResult() {
@@ -105,6 +110,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
          $field = $this->enableFilter($field);
          $field = $this->getAliasedTableFromDQL($field);
          $this->currentQuery->addWhere("$field $operator $value");
+
          AppKitLogger::verbose("Query after addWhere extension %s ", $this->currentQuery->getSqlQuery());
          
     }

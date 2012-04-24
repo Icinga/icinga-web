@@ -11,10 +11,8 @@
         <autoload name="DQLViewConfigHandler">%core.module_dir%/Api/lib/config/DQLViewConfigHandler.class.php</autoload>
         <autoload name="DQLViewExtender">%core.module_dir%/Api/lib/database/DQLViewExtender.php</autoload>
         <autoload name="IcingaDoctrineDatabase">%core.module_dir%/Api/lib/database/IcingaDoctrineDatabase.class.php</autoload>
-
-		<autoload name="IcingaDoctrine_Query">%core.module_dir%/Api/lib/database/IcingaDoctrine_Query.class.php</autoload>
-		<autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
-
+        <autoload name="IcingaDoctrine_Query">%core.module_dir%/Api/lib/database/IcingaDoctrine_Query.class.php</autoload>
+        <autoload name="Icinga_Doctrine_Table">%core.module_dir%/Api/lib/database/IcingaDoctrineTable.class.php</autoload>
         <autoload name="IcingaDoctrineQueryFilterChain">%core.module_dir%/Api/lib/database/filter/IcingaDoctrineQueryFilterChain.class.php</autoload>
         <autoload name="IcingaDoctrineFilterMap">%core.module_dir%/Api/lib/database/filter/IcingaDoctrineFilterMap.class.php</autoload>
         <autoload name="IcingaApiBaseView">%core.module_dir%/Api/lib/view/IcingaApiBaseView.class.php</autoload>		

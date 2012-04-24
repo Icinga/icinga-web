@@ -12,7 +12,7 @@ Ext.ns('Cronk.grid');
         
         constructor : function() {
             this.addEvents({
-                "showobjectinfo" : true
+                "showobjectinfo": true
             });
             
             Ext.Window.prototype.constructor.call(this, {});
@@ -55,7 +55,10 @@ Ext.ns('Cronk.grid');
                 v.relation = new Icinga.Cronks.Tackle.Relation.Head({
                     type: k
                 });
-                
+                v.externalRefs = new Icinga.Cronks.Tackle.ExternalReferences.Head({
+                    type: k,
+                    connection: this.connection
+                });
                 Ext.iterate(v, function(k2, v2) {
                     this.tabs.add(v2)
                 }, this);
