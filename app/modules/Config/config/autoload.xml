@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	
+	<ae:configuration>
+		
+		<autoload name="IcingaConfigBaseAction">%core.module_dir%/Config/lib/action/IcingaConfigBaseAction.class.php</autoload>
+		<autoload name="IcingaConfigBaseModel">%core.module_dir%/Config/lib/model/IcingaConfigBaseModel.class.php</autoload>
+		<autoload name="IcingaConfigBaseView">%core.module_dir%/Config/lib/view/IcingaConfigBaseView.class.php</autoload>
+		
+	</ae:configuration>
+	
+</ae:configurations>

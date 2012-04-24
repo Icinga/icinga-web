@@ -44,7 +44,6 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
             throw new AgaviConfigurationException('Could not read XML_NAMESPACE from class: '. $refClass->getName());
         }
      
-     
         $modules = $this->getAvailableModules(); 
 
         $query = $this->getQuery();
@@ -83,7 +82,7 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
                 }
             }
         }
-      
+        
         // The confighandler behind this included definition
         return $configHandler->execute($document);
     }
@@ -159,12 +158,21 @@ class AppKitXIncludeConfigHandler extends AgaviXmlConfigHandler {
         $files = scandir($module_dir);
        
         foreach($files as $file) {
-            if($file == '.' || $file == '..' || $file == 'AppKit')
+            if($file == '.' || $file == '..' || $file == 'AppKit' 
+                || $file == 'Config') {
                 continue;
-            if(!is_dir($module_dir."/".$file) || !is_readable($module_dir."/".$file))
+            }
+            
+            if(!is_dir($module_dir."/".$file)
+                || !is_readable($module_dir."/".$file)) {
                 continue;
+            }
+            
             $modules[] = $file;
         }
+        
+        $modules[] = 'Config';
+        
         return $modules;
     }
 

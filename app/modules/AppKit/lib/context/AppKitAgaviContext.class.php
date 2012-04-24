@@ -5,8 +5,16 @@
  */
 class AppKitAgaviContext extends AgaviContext {
     
+    /**
+     * Static array of modules which are excluded if
+     * we're initializing the whole stack
+     * @var array
+     */
     private static $excludeModules = array (
-        'AppKit', 'TestDummy'
+        'AppKit',        // Base module, always included if we're here
+        'Config',        // Automatic inclusion at the end 
+                         // (to override settings)
+        'TestDummy'      // Example module you can safely ignore
     );
     
     /**
@@ -50,6 +58,7 @@ class AppKitAgaviContext extends AgaviContext {
         $files = scandir($module_dir);
        
         AppKitAgaviUtil::initializeModule('AppKit');
+        
         foreach($files as $file) {
             if($file == '.' || $file == '..')
                 continue;
@@ -67,6 +76,8 @@ class AppKitAgaviContext extends AgaviContext {
             
             }
         }
+        
+        AppKitAgaviUtil::initializeModule('Config');
     }
 
 

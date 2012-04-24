@@ -394,7 +394,7 @@ AC_CONFIG_FILES([
     app/modules/Api/config/module.xml
     app/modules/AppKit/config/module.xml
     app/modules/AppKit/config/auth.xml
-    app/modules/Cronks/config/module.xml
+    app/modules/Config/config/module.xml
     app/modules/Reporting/config/module.xml
     app/modules/Web/config/module.xml
     etc/build.properties
