@@ -5,9 +5,9 @@
 
 %define revision 2
 
-%define logdir %{_localstatedir}/log/icinga-web
-%define cachedir %{_localstatedir}/cache/icinga-web
-%define reportingcachedir %{_localstatedir}/cache/icinga-web/reporting
+%define logdir %{_localstatedir}/log/%{name}
+%define cachedir %{_localstatedir}/cache/%{name}
+%define reportingcachedir %{_localstatedir}/cache/%{name}/reporting
 
 %if "%{_vendor}" == "suse"
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
@@ -20,9 +20,17 @@
 %define apachegroup apache
 %endif
 
+%if "%{_vendor}" == "suse"
+%define extcmdfile %{_localstatedir}/icinga/rw/icinga.cmd
+%endif
+%if "%{_vendor}" == "redhat"
+%define extcmdfile %{_localstatedir}/spool/icinga/cmd/icinga.cmd
+%endif
+
+
 Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
-Version: 1.6.2
+Version: 1.7.0
 Release: %{revision}%{?dist}
 License: GPLv2
 Group: Applications/System
@@ -84,14 +92,14 @@ PNP Integration module for Icinga Web
 %build
 ##############################
 %configure \
-    --prefix="%{_datadir}/icinga-web" \
-    --datadir="%{_datadir}/icinga-web" \
-    --datarootdir="%{_datadir}/icinga-web" \
-    --sysconfdir="%{_sysconfdir}/icinga-web" \
-    --with-conf-dir='%{_sysconfdir}/icinga-web/conf.d' \
+    --prefix="%{_datadir}/%{name}" \
+    --datadir="%{_datadir}/%{name}" \
+    --datarootdir="%{_datadir}/%{name}" \
+    --sysconfdir="%{_sysconfdir}/%{name}" \
+    --with-conf-dir='%{_sysconfdir}/%{name}/conf.d' \
     --with-web-user='%{apacheuser}' \
     --with-web-group='%{apachegroup}' \
-    --with-api-cmd-file='%{_localstatedir}/icinga/rw/icinga.cmd' \
+    --with-api-cmd-file='%{extcmdfile}' \
     --with-log-dir='%{logdir}' \
     --with-cache-dir='%{cachedir}' \
     --with-reporting-tmp-dir='%{reportingcachedir}' \
@@ -116,13 +124,13 @@ PNP Integration module for Icinga Web
     INIT_OPTS=""
 
 # we only want clearcache.sh prefixed in {_bindir}, generated from configure
-%{__mv} %{buildroot}%{_datadir}/icinga-web/bin/clearcache.sh %{buildroot}%{_bindir}/%{name}-clearcache
+%{__mv} %{buildroot}%{_datadir}/%{name}/bin/clearcache.sh %{buildroot}%{_bindir}/%{name}-clearcache
 
 # wipe the rest of bin/, we don't need prepackage stuff in installed envs
-%{__rm} -rf %{buildroot}%{_datadir}/icinga-web/bin
+%{__rm} -rf %{buildroot}%{_datadir}/%{name}/bin
 
 # place the pnp templates for -module-pnp
-%{__cp} contrib/PNP_Integration/templateExtensions/* %{buildroot}%{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions/
+%{__cp} contrib/PNP_Integration/templateExtensions/* %{buildroot}%{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/
 
 ##############################
 %pre
@@ -135,8 +143,9 @@ PNP Integration module for Icinga Web
 # group exists. In all other cases the user used for ssh access has
 # to be added to the icingacmd group on the remote icinga server.
 getent group icingacmd > /dev/null
+
 if [ $? -eq 0 ]; then
-  /usr/sbin/usermod -a -G icingacmd %{apacheuser}
+%{_sbindir}/usermod -a -G icingacmd %{apacheuser}
 fi
 
 # uncomment if building from git
@@ -170,19 +179,19 @@ fi
 %files
 ##############################
 # main dirs
-%doc etc/schema contrib doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.6 doc/CHANGELOG-1.x doc/LICENSE
+%doc etc/schema contrib doc/README.RHEL doc/AUTHORS doc/CHANGELOG-1.7 doc/CHANGELOG-1.x doc/LICENSE
 %defattr(-,root,root)
-%{_datadir}/icinga-web/app
-%{_datadir}/icinga-web/doc
-%{_datadir}/icinga-web/etc
-%{_datadir}/icinga-web/lib
-%{_datadir}/icinga-web/pub
+%{_datadir}/%{name}/app
+%{_datadir}/%{name}/doc
+%{_datadir}/%{name}/etc
+%{_datadir}/%{name}/lib
+%{_datadir}/%{name}/pub
 # configs
 %defattr(-,root,root)
 %config(noreplace) %attr(-,root,root) %{apacheconfdir}/icinga-web.conf
-%dir %{_sysconfdir}/icinga-web
-%dir %{_sysconfdir}/icinga-web/conf.d
-%config(noreplace) %attr(644,-,-) %{_sysconfdir}/icinga-web/conf.d/*
+%dir %{_sysconfdir}/%{name}
+%dir %{_sysconfdir}/%{name}/conf.d
+%config(noreplace) %attr(644,-,-) %{_sysconfdir}/%{name}/conf.d/*
 # logs+cache
 %attr(2775,%{apacheuser},%{apachegroup}) %dir %{logdir}
 %attr(-,%{apacheuser},%{apachegroup}) %{cachedir}
@@ -198,11 +207,19 @@ fi
 %doc contrib/PNP_Integration/README
 %defattr(-,root,root)
 %dir %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions
-%config(noreplace) %attr(644,-,-) %{_datadir}/icinga-web/app/modules/Cronks/data/xml/extensions/*
+%config(noreplace) %attr(644,-,-) %{_datadir}/%{name}/app/modules/Cronks/data/xml/extensions/*
 
 ##############################
 %changelog
 ##############################
+* Tue Apr 24 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.7.0-1
+- bump to 1.7.0
+- use name macro instead of hardcoded
+- use _sbindir macro instead of hardcoded
+- define extcmdfile macro for suse and redhat
+- set extcmdfile to _localstatedir/spool/icinga/cmd/icinga.cmd for rhel as changed in icinga.spec
+- update Changelog for docs - this requires more generic addin
+
 * Wed Feb 29 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-2
 - move etc/schema sql scripts to docs (thx Michael Gruener) #2381
 - install etc/conf.d to {_sysconfdir}/icinga-web/conf.d saving main dir for other configs #2382
