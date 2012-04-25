@@ -62,27 +62,35 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
         $this->checkObjectType($type);
         
         $table = null;
+        $joinTable = null;
         $prefix = null;
         
         if ($type===IcingaConstants::TYPE_HOST) {
             $table = 'IcingaHoststatus';
+            $joinTable = 'host';
             $prefix = 'host';
         } else {
             $table = 'IcingaServicestatus';
+            $joinTable = 'service'; 
             $prefix = 'service';
         }
         
         $data = IcingaDoctrine_Query::create()
         ->from($table. ' '. $prefix)
-        ->select(sprintf('MIN(%1$s) as %1$s_min, MAX(%1$s) as %1$s_max, AVG(%1$s) as %1$s_avg', $field))
+        ->select(sprintf($prefix.'.active_checks_enabled, COUNT(%1$s) as count, SUM(%1$s) as sum,MAX(%1$s) as max,MIN(%1$s) as min',$field))
+        ->having($prefix.'.active_checks_enabled = ?','1')
+        ->innerJoin($prefix.".".$joinTable)
         ->disableAutoIdentifierFields(true)
         ->execute(array(), Doctrine::HYDRATE_SCALAR);
-        
+   
+        $result = array();
         if (is_array($data) && count($data) === 1) {
-            foreach ($data[0] as $k=>&$v) {
-                $v = sprintf('%.3f', $v);
-            }
-            return $data[0];
+            $data = $data[0];
+
+            $result[$prefix."_".$field."_min"] = sprintf('%.3f',$data[$prefix."_min"]);
+            $result[$prefix."_".$field."_avg"] = sprintf('%.3f',$data[$prefix."_sum"]/$data[$prefix."_count"]);
+            $result[$prefix."_".$field."_max"] = sprintf('%.3f',$data[$prefix."_max"]);
+            return $result;
         }
     }
     
