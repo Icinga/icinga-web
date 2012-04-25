@@ -60,7 +60,7 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
         $this->parseBaseDQL();
         $this->parseDQLExtensions();
         $this->parseDependencies();
-        $this->currentQuery->andWhere("config_type= ?",$db->useRetained() ? "1" : "0");
+       
 
     }
 
@@ -305,6 +305,9 @@ class API_Views_ApiDQLViewModel extends IcingaBaseModel {
                     break;
                 case 'username':
                     $query = str_replace('${username}', $this->user->user_name,$query);
+                    break;
+                case 'retained_flag':
+                    $query = str_replace('${retained_flag}', $this->useRetained,$query);
                     break;
                 default:
                     $query = $this->resolveReferenceToken($token,$query);

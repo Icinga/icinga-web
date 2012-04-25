@@ -15,10 +15,12 @@
 
             ]]>
             </query>
-            <credential name="IcingaServicegroup" type="custom">
-            <![CDATA[
-                WHERE  o.name1 IN (${credential_value})
-            ]]>
+            <credential name="IcingaServicegroup" type="dql">
+                <andwhere>
+                <![CDATA[
+                 o.name1 IN (${credential_value})
+                ]]>
+                </andwhere>
            </credential>
         </dql>
 
@@ -45,14 +47,17 @@
                 GROUP BY sg.servicegroup_id, ss.current_state, o.name1,
                     sg.alias, sg.servicegroup_id, i.instance_id, i.instance_name,
                     ss.has_been_checked
-                ]]>
                 
+                WHERE s.config_type = '${retained_flag}'
+                ]]>
            </query>
 
-           <credential name="IcingaServicegroup" type="custom">
-           <![CDATA[
-                WHERE  o.name1 IN (${credential_value})
-           ]]>
+           <credential name="IcingaServicegroup" type="dql">
+               <andwhere>
+               <![CDATA[
+               o.name1 IN (${credential_value})
+               ]]>
+               </andwhere>
            </credential>
 
            <credential name="IcingaHostgroup" type="dql">

@@ -76,8 +76,8 @@
         What data to display? Define icinga data targets and countfields
     -->
     <datasource>
-        <parameter name="target">TARGET_DOWNTIME</parameter>
-        
+        <parameter name="target">TARGET_DOWNTIME</parameter> 
+        <parameter name="countmode">field</parameter>
          
     </datasource>
     

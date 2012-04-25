@@ -28,6 +28,8 @@
                 GROUP BY  hs.current_state, o.name1,
                     hg.alias, hg.hostgroup_id, i.instance_id, i.instance_name,
                     hs.has_been_checked
+                
+                WHERE hg.config_type = '${retained_flag}'
                 ]]>
 
            </query>
