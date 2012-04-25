@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
+    <ae:configuration context="web">
+        <routes>
+            <route name=".config" pattern="^/config" module="Config">
+                <route name=".provider" pattern="^/provider" output_type="json">
+                    <route name=".configuration" pattern="^/configuration"
+                           action="Provider.Configuration" lala="din" />
+                </route>
+            </route>
+        </routes>
+    </ae:configuration>
+</ae:configurations>
