@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+	
+	<ae:configuration>
+		
+		<module enabled="true">
+			<settings>
+				<setting name="title">Config Module</setting>
+				<setting name="version">1.0</setting>
+                
+                <setting name="agavi.include.cronks">
+                    <ae:parameter>%core.module_dir%/Config/config/cronks.xml</ae:parameter>
+                    <ae:parameter>@web_conf_dir@/cronks.xml</ae:parameter>
+                </setting>
+			</settings>
+		</module>
+		
+	</ae:configuration>
+	
+</ae:configurations>
