@@ -25,6 +25,7 @@
             INNER JOIN hsh.object oh WITH oh.objecttype_id = 1
             INNER JOIN oh.host h
             INNER JOIN hsh.instance i
+            WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -85,6 +86,7 @@
             INNER JOIN s.host h
             INNER JOIN h.object oh
             INNER JOIN ssh.instance i
+            WHERE s.config_type = '${retained_flag}'
             ]]>
             </query>
 

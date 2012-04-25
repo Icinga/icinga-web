@@ -121,6 +121,7 @@
     -->
     <datasource>
         <parameter name="target">TARGET_SERVICEGROUP_SUMMARY</parameter>
+        <parameter name="countmode">field</parameter>
     </datasource>
     
     <!-- 

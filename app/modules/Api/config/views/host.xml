@@ -20,6 +20,7 @@
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
                 hs.max_check_attempts AS HOST_MAX_CHECK_ATTEMPT,
+                hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 hs.max_check_attempts AS max_attempt,
                 i.instance_id AS HOST_INSTANCE_ID,
                 h.host_id AS HOST_ID,
@@ -33,6 +34,7 @@
             INNER JOIN h.status hs
             INNER JOIN h.object oh
             INNER JOIN i.programstatus as ps
+            WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -102,6 +104,7 @@
                 h.alias AS HOST_ALIAS,
                 h.display_name AS HOST_DISPLAY_NAME,
                 hs.current_state AS HOST_CURRENT_STATE,
+                hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 COALESCE(hs.last_state_change,ps.program_start_time) AS DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
@@ -124,6 +127,7 @@
             )
             INNER JOIN h.object oh
             INNER JOIN i.programstatus as ps
+            WHERE h.config_type = '${retained_flag}'
             ]]>
             </query>
 
@@ -144,6 +148,7 @@
                 s.icon_image AS SERVICE_ICON_IMAGE,
                 hs.current_state AS HOST_CURRENT_STATE,
                 hs.output AS HOST_OUTPUT,
+                hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
                 ss.output AS SERVICE_OUTPUT,
                 hs.last_check AS HOST_LAST_CHECK,
@@ -155,12 +160,16 @@
             LEFT JOIN h.status hs
             LEFT JOIN s.status ss
             WHERE o.is_active = 1 AND o.objecttype_id < 3
+          
+            
             AND ((
+                h.config_type = '${retained_flag}' AND
                 o.objecttype_id = 1 AND
                 hs.current_state != 0 AND
                 hs.problem_has_been_acknowledged = 0 AND
                 hs.scheduled_downtime_depth = 0
             ) OR (
+                s.config_type = '${retained_flag}' AND 
                 o.objecttype_id = 2 AND
                 ss.current_state != 0 AND
                 ss.problem_has_been_acknowledged = 0 AND
