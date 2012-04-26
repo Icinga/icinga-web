@@ -13,7 +13,7 @@ CREATE TABLE cronk_category_cronk (ccc_cc_id NUMBER(10), ccc_cronk_id NUMBER(10)
 /
 CREATE TABLE cronk_principal_cronk (cpc_principal_id NUMBER(10), cpc_cronk_id NUMBER(10), PRIMARY KEY(cpc_principal_id, cpc_cronk_id))
 /
-CREATE TABLE nsm_db_version (vers_id NUMBER(10), version NUMBER(10), PRIMARY KEY(vers_id))
+CREATE TABLE nsm_db_version (id INT, version VARCHAR(32) NOT NULL, modified TIMESTAMP NOT NULL, created TIMESTAMP NOT NULL, PRIMARY KEY(id));
 /
 CREATE TABLE nsm_log (log_id NUMBER(10), log_level NUMBER(10) NOT NULL, log_message CLOB NOT NULL, log_created DATE NOT NULL, log_modified DATE NOT NULL, PRIMARY KEY(log_id))
 /
@@ -425,7 +425,7 @@ INSERT INTO nsm_target (target_id,target_name,target_description,target_class,ta
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('18','icinga.control.admin','Allow user to administrate the icinga process','','credential');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('19','IcingaCommandRestrictions','Disable critical commands for this user','IcingaDataCommandRestrictionPrincipalTarget','icinga');
 INSERT INTO nsm_user (user_id,user_account,user_name,user_firstname,user_lastname,user_password,user_salt,user_authsrc,user_email,user_disabled,user_created,user_modified) VALUES ('1','0','root','Enoch','Root','42bc5093863dce8c150387a5bb7e3061cf3ea67d2cf1779671e1b0f435e953a1','0c099ae4627b144f3a7eaa763ba43b10fd5d1caa8738a98f11bb973bebc52ccd','internal','root@localhost.local','0',sysdate,sysdate);
-INSERT INTO nsm_db_version (vers_id,version) VALUES ('1','2');
+INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.7.0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO nsm_principal (principal_id,principal_user_id,principal_type,principal_disabled) VALUES ('1','1','user','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('2','2','role','0');
 INSERT INTO nsm_principal (principal_id,principal_role_id,principal_type,principal_disabled) VALUES ('3','3','role','0');

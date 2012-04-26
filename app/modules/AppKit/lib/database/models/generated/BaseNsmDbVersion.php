@@ -9,27 +9,44 @@ abstract class BaseNsmDbVersion extends Doctrine_Record {
     public function setTableDefinition() {
 
         $this->setTableName('nsm_db_version');
-        $this->hasColumn("vers_id", 'integer', 4, array(
+        $this->hasColumn("id", 'integer', 4, array(
                              'type' => 'integer',
                              'length' => 4,
                              'fixed' => false,
                              'unsigned' => false,
                              'primary' => true,
                              'autoincrement' => false
-                         ));
-        $this->hasColumn("version", 'integer', 4, array(
-                             'type' => 'integer',
-                             'length' => 4,
+        ));
+        $this->hasColumn("version", 'string', 32, array(
+                             'type' => 'string',
+                             'length' => 32,
                              'fixed' => false,
                              'unsigned' => false,
+                             'autoincrement' => false,
+                             'notnull' => true
+        ));
+        $this->hasColumn('modified', 'timestamp', null, array(
+                             'type' => 'datetime',
+                             'fixed' => false,
+                             'unsigned' => false,
+                             'primary' => false,
+                             'notnull' => false,
                              'autoincrement' => false
-                         ));
+        ));
+        $this->hasColumn('created', 'timestamp', null, array(
+                             'type' => 'datetime',
+                             'fixed' => false,
+                             'unsigned' => false,
+                             'primary' => false,
+                             'notnull' => false,
+                             'autoincrement' => false
+        ));
     }
 
     public static function getInitialData() {
         return array(
-                   array('vers_id'=>'1','version'=>'2'),
-               );
+            array('id'=>'1','version'=>AgaviConfig::get('org.icinga.version.release'))
+        );
     }
 
     public function setUp() {

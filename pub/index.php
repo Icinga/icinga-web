@@ -25,7 +25,7 @@ require('../app/config.php');
 // | By default the 'development' environment sets Agavi into a debug mode.    |
 // | In debug mode among other things the cache is cleaned on every request.   |
 // +---------------------------------------------------------------------------+
-Agavi::bootstrap('development');
+Agavi::bootstrap('production');
 
 // Setting the running context to web ...
 AgaviConfig::set('core.default_context', 'web');
