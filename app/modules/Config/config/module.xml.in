@@ -8,9 +8,27 @@
 				<setting name="title">Config Module</setting>
 				<setting name="version">1.0</setting>
                 
+                <setting name="authors">
+                    <ae:parameter name="info@icinga.org">Icinga Development Team</ae:parameter>
+                </setting>
+                
+                <setting name="homepage">http://www.icinga.org</setting>
+                <setting name="update_url" />
+                <setting name="description">Configuration module</setting>
+                
+                <!-- Reporting Javascript libs -->
+                <setting name="agavi.include.javascript">
+                    <ae:parameter>%core.module_dir%/Config/config/javascript.xml</ae:parameter>
+                </setting>
+                
+                <!-- Reporting cronks -->
                 <setting name="agavi.include.cronks">
                     <ae:parameter>%core.module_dir%/Config/config/cronks.xml</ae:parameter>
-                    <ae:parameter>@web_conf_dir@/cronks.xml</ae:parameter>
+                </setting>
+                
+                <!-- Module routing table -->
+                <setting name="agavi.include.routing">
+                    <ae:parameter>%core.module_dir%/Config/config/routing.xml</ae:parameter>
                 </setting>
 			</settings>
 		</module>

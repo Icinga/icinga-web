@@ -36,6 +36,12 @@ class doctrineTask extends Task {
 		// include doctrine
 		require_once($this->icingaPath."lib/doctrine/lib/Doctrine.php");
 		spl_autoload_register("Doctrine::autoload");
+		
+		// include agavi (needed for configuration)
+		require ($this->icingaPath.'lib/agavi/src/agavi.php');
+		require ($this->icingaPath.'app/config.php');
+		Agavi::bootstrap('production');
+		AppKitAgaviContext::buildVersionString();
 	}
 	public function dropOnFinish($bool = false) {
 		$this->dropOnFinish = true;

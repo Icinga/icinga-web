@@ -30,7 +30,8 @@ class AppKitAgaviContext extends AgaviContext {
          * Make our settings ready
          * before run agavi
          */
-        $this->buildVersionString();
+        self::buildVersionString();
+        
         $this->initializePhpSettings();
 
         $this->initializeModules();
@@ -98,8 +99,11 @@ class AppKitAgaviContext extends AgaviContext {
 
     /**
      * Glue our version string together
+     * 
+     * Method is static and public to call from outside 
+     * if no context is needed (e.g. Phing::Task)
      */
-    private function buildVersionString() {
+    public static function buildVersionString() {
         if (AgaviConfig::get('org.icinga.version.extension', false) == false) {
             $version_format = "%s/v%d.%d.%d";
         } else {

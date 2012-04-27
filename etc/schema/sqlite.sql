@@ -5,7 +5,7 @@
 
 
 /*           SQL schema defintiion        */
-CREATE TABLE nsm_db_version (vers_id INTEGER, version INT, PRIMARY KEY (vers_id));
+CREATE TABLE nsm_db_version (id INT, version VARCHAR(32) NOT NULL, modified TIMESTAMP NOT NULL, created TIMESTAMP NOT NULL, PRIMARY KEY(id));
 
 CREATE TABLE nsm_log (
 	log_id INTEGER PRIMARY KEY AUTOINCREMENT ,
@@ -154,7 +154,7 @@ CREATE TABLE cronk_principal_cronk (
 
 /*          Initial data import              */
  
-INSERT INTO nsm_db_version (vers_id,version) VALUES ('1','2');
+INSERT INTO nsm_db_version VALUES ('1','icinga-web/v1.7.0', DATETIME('now'), DATETIME('now'));
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('1','IcingaHostgroup','Limit data access to specific hostgroups','IcingaDataHostgroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('2','IcingaServicegroup','Limit data access to specific servicegroups','IcingaDataServicegroupPrincipalTarget','icinga');
 INSERT INTO nsm_target (target_id,target_name,target_description,target_class,target_type) VALUES ('3','IcingaHostCustomVariablePair','Limit data access to specific custom variables','IcingaDataHostCustomVariablePrincipalTarget','icinga');

@@ -2,14 +2,6 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
     <ae:configuration>
         <cronks>
-        
-            <!--
-                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                Misc - [START]
-                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-                Just some column portlets and statusmap
-            -->
             <cronk name="icingaConfigTree">
                 <ae:parameter name="module">Config</ae:parameter>
                 <ae:parameter name="action">ShowConfiguration</ae:parameter>
@@ -19,6 +11,7 @@
                 <ae:parameter name="categories">misc</ae:parameter>
                 <ae:parameter name="image">cronks.Database</ae:parameter>
                 <ae:parameter name="position">500</ae:parameter>
+                <ae:parameter name="groupsonly">appkit_admin</ae:parameter>
                 <ae:parameter name="ae:parameter"></ae:parameter>
             </cronk>
          </cronks>
