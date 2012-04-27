@@ -9,6 +9,11 @@ header("Access-Control-Max-Age: 720000");
 // just make sure a default timezone exists
 if(!ini_get("date.timezone"))
 	ini_set("date.timezone","GMT");
+
+// check for xsl BEFORE loading agavi, otherwise an obsucure error will be thrown
+if(!extension_loaded('xsl')) {
+    die("Please install the php xsl extension, as this is required for icinga-web");    
+}
 // +---------------------------------------------------------------------------+
 // | An absolute filesystem path to the agavi/agavi.php script.                |
 // +---------------------------------------------------------------------------+
