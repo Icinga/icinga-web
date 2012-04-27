@@ -7,7 +7,7 @@
             <query>
             <![CDATA[
             SELECT
-                h.icon_image AS SERVICE_ICON_IMAGE,
+                h.icon_image AS HOST_ICON_IMAGE,
                 i.instance_name AS INSTANCE_NAME,
                 h.host_object_id AS HOST_OBJECT_ID,
                 oh.name1 AS HOST_NAME,
@@ -16,6 +16,7 @@
                 hs.current_state AS HOST_CURRENT_STATE,
                 COALESCE(hs.last_state_change,ps.program_start_time) AS DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
+                hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
@@ -107,6 +108,7 @@
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 COALESCE(hs.last_state_change,ps.program_start_time) AS DURATION_START,
                 hs.last_check AS HOST_LAST_CHECK,
+                hs.next_check AS HOST_NEXT_CHECK,
                 ps.program_start_time AS HOST_PROGRAM_START_TIME,
                 hs.output AS HOST_OUTPUT,
                 hs.current_check_attempt AS HOST_CURRENT_CHECK_ATTEMPT,
@@ -150,6 +152,8 @@
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
                 ss.output AS SERVICE_OUTPUT,
+                hs.next_check AS HOST_NEXT_CHECK,
+                ss.next_check AS SERVICE_NEXT_CHECK
                 hs.last_check AS HOST_LAST_CHECK,
                 ss.last_check AS SERVICE_LAST_CHECK
             FROM IcingaObjects o
