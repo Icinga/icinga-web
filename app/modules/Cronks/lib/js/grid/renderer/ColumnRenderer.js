@@ -246,6 +246,10 @@ Ext.ns('Cronk.grid');
                         if (record.json.host_is_pending > 0) {
                             value = 99;
                         }
+                    } else if (Ext.isDefined(record.json.host_has_been_checked)) {
+                        if (record.json.host_has_been_checked == 0) {
+                            value = 99;
+                        }
                     }
                     if (!Ext.isDefined(value)) {
                         return "";

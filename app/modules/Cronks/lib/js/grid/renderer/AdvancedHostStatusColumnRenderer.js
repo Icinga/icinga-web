@@ -112,8 +112,8 @@ Cronk.grid.AdvancedHostStatusColumnRenderer = new (function () {
     **/
     this.hostStatus = function() {
     	return function(value, metaData, record, rowIndex, colIndex, store) {
-			if(Ext.isDefined(record.json.host_is_pending)) {
-				if(record.json.host_is_pending > 0)
+			if(Ext.isDefined(record.json.host_has_been_checked)) {
+				if(record.json.host_has_been_checked == 0)
 					value=99;
 			}
 			if(!Ext.isDefined(value))
