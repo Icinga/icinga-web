@@ -108,7 +108,7 @@ IcingaCommandHandler.prototype = {
             width: 200,
             allowBlank: (o.fieldRequired == true) ? false : true
         };
-
+        AppKit.log(oDef);
         var form = o.form;
 
         switch (o.fieldType) {
@@ -454,7 +454,7 @@ IcingaCommandHandler.prototype = {
                         fieldLabel: item,
                         fieldName: item,
                         fieldType: o.types[item].type,
-                        fieldValue: this.command_options.predefined[item] || '',
+                        fieldValue: this.command_options.predefined[item] || o.types[item].defaultValue || "",
                         fieldRequired: o.types[item].required || false,
                         form: oForm
                     });
