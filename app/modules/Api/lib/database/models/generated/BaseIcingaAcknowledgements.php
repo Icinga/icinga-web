@@ -28,6 +28,7 @@
 abstract class BaseIcingaAcknowledgements extends Doctrine_Record {
     public function setTableDefinition() {
         $conn = $this->getTable()->getConnection();
+        
         if(!$conn)
             $conn = Doctrine_Manager::getInstance()->getConnection(IcingaDoctrineDatabase::CONNECTION_ICINGA);
         $prefix = $conn->getPrefix();

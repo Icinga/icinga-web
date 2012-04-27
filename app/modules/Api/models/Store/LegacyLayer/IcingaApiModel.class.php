@@ -95,7 +95,6 @@ class Api_Store_LegacyLayer_IcingaApiModel extends IcingaApiDataStoreModel imple
     }
 
     public function execRead() {
-
         $request = $this->createRequestDescriptor();
 
         $this->applyModifiers($request);

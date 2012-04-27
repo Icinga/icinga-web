@@ -175,7 +175,7 @@ class IcingaApiDataStoreModel extends AbstractDataStoreModel {
         $connection = $this->getContext()->getDatabaseConnection($this->connectionName);
         $query = IcingaDoctrine_Query::create($connection);
         $query->setConnection($connection);
-        
+        Doctrine_Manager::getInstance()->setCurrentConnection($this->connectionName);
         return $query;
     }
 
