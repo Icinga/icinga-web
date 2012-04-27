@@ -39,6 +39,7 @@ Ext.ns('Cronk.grid');
                 },
 
                 testBooleanCondition: function (field, record) {
+                    AppKit.log(field,record);
                     if (Ext.isEmpty(record.data[field]) === false) {
                         return Boolean(Ext.decode(record.data[field]));
                     }
@@ -275,7 +276,7 @@ Ext.ns('Cronk.grid');
                 return function (value, metaData, record, rowIndex, colIndex, store) {
                     
                     return AppKit.util.Date.toDurationString(
-                        Date.parse(record.json.DURATION_START)
+                        record.json.DURATION_START
                     );
                 };
             }

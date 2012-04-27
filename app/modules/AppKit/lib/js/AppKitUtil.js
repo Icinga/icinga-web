@@ -215,7 +215,10 @@ AppKit.util.Date = (function() {
            time.week  = time.day*7;
        return {
 
-           toDurationString: function(timestamp) {
+           toDurationString: function(timestampRaw) {
+               var timestamp = Date.parseDate(timestampRaw,'Y-m-d H:i:s')
+                    || Date.parseDate(timestampRaw,'Y-m-d H:i:sP')
+                    || Date.parseDate(timestampRaw+":00",'Y-m-d H:i:sP');
                if(timestamp == "NaN") {
                    return "";
                }
@@ -223,11 +226,11 @@ AppKit.util.Date = (function() {
 
                timestamp = (Date.now()-timestamp)/1000;
 
-               w = parseInt(timestamp/time.week);
-               d = parseInt(timestamp/time.day) % 7;
-               h = parseInt(timestamp/time.hour) % 24;
-               m = parseInt(timestamp/time.minute) % 60;
-               s = parseInt(timestamp/time.second) % 60;
+               w = parseInt(timestamp/time.week,10);
+               d = parseInt(timestamp/time.day,10) % 7;
+               h = parseInt(timestamp/time.hour,10) % 24;
+               m = parseInt(timestamp/time.minute,10) % 60;
+               s = parseInt(timestamp/time.second,10) % 60;
                var result =
                     ((w > 0) ? w+"w " : "")+
                     ((d > 0) ? d+"d " : "")+
