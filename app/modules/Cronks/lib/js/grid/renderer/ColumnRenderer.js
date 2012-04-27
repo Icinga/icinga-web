@@ -39,7 +39,7 @@ Ext.ns('Cronk.grid');
                 },
 
                 testBooleanCondition: function (field, record) {
-                    AppKit.log(field,record);
+                    
                     if (Ext.isEmpty(record.data[field]) === false) {
                         return Boolean(Ext.decode(record.data[field]));
                     }

@@ -108,7 +108,7 @@ IcingaCommandHandler.prototype = {
             width: 200,
             allowBlank: (o.fieldRequired == true) ? false : true
         };
-        AppKit.log(oDef);
+        
         var form = o.form;
 
         switch (o.fieldType) {
