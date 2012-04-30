@@ -5,15 +5,20 @@ CFGDIR=@sysconfdir@
 BINDIR=@bindir@
 CGIDIR=@sbindir@
 HTMLDIR=@datarootdir@
-
+CLEARCACHE_BIN_PATH=@clearcache_bin_path@
 INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
-install: installdirs
-	@files=`find . -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`; \
+install: installdirs install-clearcache
+	@files=`find . -mindepth 1 -type f ! -name "*.in" \
+    -and ! -name "Makefile" -and ! -name "clearcache.sh"`; \
 	for file in $$files; do \
 		$(INSTALL) -m 775 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/bin/"$$file"; \
 	done
+
+install-clearcache:
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(CLEARCACHE_BIN_PATH)
+	$(INSTALL) -m 775 $(INSTALL_OPTS) "clearcache.sh" "$(DESTDIR)$(CLEARCACHE_BIN_PATH)/clearcache.sh"
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/bin

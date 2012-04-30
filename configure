@@ -604,6 +604,7 @@ db_host
 db_type
 bin_group
 bin_user
+clearcache_bin_path
 web_apache_path
 web_absolute_path
 web_path
@@ -673,6 +674,7 @@ with_web_group
 with_web_path
 with_web_absolute_path
 with_web_apache_path
+with_clearcache_path
 with_bin_user
 with_bin_group
 with_db_type
@@ -1330,6 +1332,8 @@ Optional Packages:
                           absolute path to pub (default %core.root_dir%/pub)
   --with-web-apache-path=PATH
                           Include folder apache2 (default /etc/apache2/conf.d
+  --with-clearcache-path=PATH
+                          Path to install the clearcache script
   --with-bin-user=USER    user for all other files (default root)
   --with-bin-group=GROUP  group for all other files (default bin)
   --with-db-type=DBTYPE   Type of dbms (default mysql)
@@ -2366,6 +2370,16 @@ fi
 
 
 
+# Check whether --with-clearcache_path was given.
+if test "${with_clearcache_path+set}" = set; then :
+  withval=$with_clearcache_path; clearcache_bin_path=$withval
+else
+  clearcache_bin_path=$prefix/bin
+
+fi
+
+
+
 # Check whether --with-bin_user was given.
 if test "${with_bin_user+set}" = set; then :
   withval=$with_bin_user; bin_user=$withval
@@ -2898,6 +2912,7 @@ fi
 
 
 # Substitutions
+
 
 
 
