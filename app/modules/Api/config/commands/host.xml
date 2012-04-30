@@ -135,7 +135,7 @@
         </ic:parameters>
     </ic:command>
     <ic:command name="ACKNOWLEDGE_HOST_PROBLEM_EXPIRE">
-        <ic:definition>ACKNOWLEDGE_SVC_PROBLEM_EXPIRE</ic:definition>
+        <ic:definition>ACKNOWLEDGE_HOST_PROBLEM_EXPIRE</ic:definition>
         <ic:type>host</ic:type>
         <ic:iconCls>icinga-icon-bricks</ic:iconCls>
         <ic:label>Acknowledge problem (expiration)</ic:label>
