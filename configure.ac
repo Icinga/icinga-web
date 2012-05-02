@@ -385,6 +385,13 @@ AC_CONFIG_FILES([
     Makefile
     lib/Makefile
     lib/icingaScheduler/config.php
+    lib/icingaScheduler/Makefile
+    lib/jit/Makefile
+    lib/ext3/Makefile
+    lib/agavi/Makefile
+    lib/phpseclib/Makefile
+    lib/doctrine/Makefile
+    lib/jsgettext/Makefile
     pub/Makefile
     etc/Makefile
     bin/Makefile

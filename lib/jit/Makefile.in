@@ -1,0 +1,12 @@
+prefix=@prefix@
+INSTALL=@INSTALL@
+INSTALL_OPTS=@INSTALL_OPTS@
+
+install: installdirs
+	$(INSTALL) -m 644 $(INSTALL_OPTS) "./jit-yc.js" $(DESTDIR)$(prefix)/lib/jit/jit-yc.js
+	$(INSTALL) -m 644 $(INSTALL_OPTS) "./Extras/excanvas.js" $(DESTDIR)$(prefix)/lib/jit/Extras/excanvas.js
+
+installdirs:
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit 
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jit/Extras
+

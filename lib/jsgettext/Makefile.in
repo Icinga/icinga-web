@@ -1,0 +1,12 @@
+prefix=@prefix@
+INSTALL=@INSTALL@
+INSTALL_OPTS=@INSTALL_OPTS@
+
+install: installdirs
+	$(INSTALL) -m 644 $(INSTALL_OPTS) "lib/Gettext.js"  $(DESTDIR)$(prefix)/lib/jsgettext/lib/Gettext.js 
+
+installdirs:
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/lib
+	
+
