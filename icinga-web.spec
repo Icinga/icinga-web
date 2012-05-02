@@ -3,7 +3,7 @@
 # Upstream: The icinga devel team <icinga-devel at lists.sourceforge.net>
 # ExcludeDist: el4 el3
 
-%define revision 2
+%define revision 1
 
 %define logdir %{_localstatedir}/log/%{name}
 %define cachedir %{_localstatedir}/cache/%{name}
@@ -106,6 +106,7 @@ PNP Integration module for Icinga Web
     --with-icinga-bin='%{_bindir}/icinga' \
     --with-icinga-cfg='%{_sysconfdir}/icinga/icinga.cfg' \
     --with-icinga-objects-dir='%{_sysconfdir}/icinga/objects' \
+    --with-clearcache-path='%{_bindir}' \
     --with-web-apache-path=%{apacheconfdir}
 
 ##############################
@@ -124,7 +125,7 @@ PNP Integration module for Icinga Web
     INIT_OPTS=""
 
 # we only want clearcache.sh prefixed in {_bindir}, generated from configure
-%{__mv} %{buildroot}%{_datadir}/%{name}/bin/clearcache.sh %{buildroot}%{_bindir}/%{name}-clearcache
+%{__mv} %{buildroot}%{_bindir}/clearcache.sh %{buildroot}%{_bindir}/%{name}-clearcache
 
 # wipe the rest of bin/, we don't need prepackage stuff in installed envs
 %{__rm} -rf %{buildroot}%{_datadir}/%{name}/bin
@@ -219,6 +220,7 @@ fi
 - define extcmdfile macro for suse and redhat
 - set extcmdfile to _localstatedir/spool/icinga/cmd/icinga.cmd for rhel as changed in icinga.spec
 - update Changelog for docs - this requires more generic addin
+- use --with-clearcache-path, but still rename to be prefixed
 
 * Wed Feb 29 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-2
 - move etc/schema sql scripts to docs (thx Michael Gruener) #2381

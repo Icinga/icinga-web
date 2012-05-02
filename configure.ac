@@ -96,6 +96,12 @@ AC_ARG_WITH([web_apache_path],
     web_apache_path=ACICINGA_PATH_GUESS([/etc/httpd/conf.d /etc/apache2/conf.d /etc/apache/conf.d], [web_apache_path], [/etc/apache2/conf.d])
 )
 
+AC_ARG_WITH([clearcache_path],
+    AS_HELP_STRING([--with-clearcache-path=PATH], [Path to install the clearcache script]),
+    clearcache_bin_path=$withval,
+    clearcache_bin_path=$prefix/bin
+)
+
 AC_ARG_WITH([bin_user],
     AS_HELP_STRING([--with-bin-user=USER], [user for all other files (default root)]),
     bin_user=$withval,
@@ -326,6 +332,7 @@ AC_SUBST(web_group)
 AC_SUBST(web_path)
 AC_SUBST(web_absolute_path)
 AC_SUBST(web_apache_path)
+AC_SUBST(clearcache_bin_path)
 AC_SUBST(bin_user)
 AC_SUBST(bin_group)
 
