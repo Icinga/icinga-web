@@ -18,7 +18,7 @@
                 s.display_name AS SERVICE_DISPLAY_NAME,
                 ss.process_performance_data AS SERVICE_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
-                COALESCE(ss.last_state_change,ps.program_start_time) AS DURATION_START,
+                GREATEST(ss.last_state_change,ps.program_start_time) AS DURATION_START,
                 ps.program_start_time AS SERVICE_PROGRAM_START_TIME,
                 ss.last_check AS SERVICE_LAST_CHECK,
                 ss.next_check AS SERVICE_NEXT_CHECK,
