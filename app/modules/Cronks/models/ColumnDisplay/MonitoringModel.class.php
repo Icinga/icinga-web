@@ -31,12 +31,10 @@ class Cronks_ColumnDisplay_MonitoringModel extends CronksBaseModel implements Ag
         return sprintf('<div class="icon-16 %s"></div>', $classes[$val]);
     }
     
-    public function icingaDowntimeRunning($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
-        static $classes = array(
-        1	=> 'icinga-icon-status',
-        0	=> 'icinga-icon-status-busy'
-        );
-    
-        return sprintf('<div class="icon-16 %s"></div>', $classes[$val]);
-    }
+    /*
+     * Removed:
+     * icingaDowntimeRunning($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row)
+     * 
+     * Functionallity was moved to JS side
+     */
 }
