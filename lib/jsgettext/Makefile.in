@@ -7,5 +7,6 @@ install: installdirs
 
 installdirs:
 	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/jsgettext/lib
 	
 

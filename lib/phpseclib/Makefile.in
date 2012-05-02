@@ -12,11 +12,11 @@ INSTALL_OPTS=@INSTALL_OPTS@
 install: installdirs
 	@files=`find . -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`; \
 	for file in $$files; do \
-		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/lib/"$$file"; \
+		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/lib/phpseclib/"$$file"; \
 	done
 installdirs:
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib
+	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phpseclib
 	@dirs=`find . -mindepth 1 -type d`; \
 	for dir in $$dirs; do \
-		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/"$$dir"; \
+		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/phpseclib/"$$dir"; \
 	done
