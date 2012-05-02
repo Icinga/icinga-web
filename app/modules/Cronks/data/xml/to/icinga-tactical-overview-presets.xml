@@ -190,38 +190,7 @@
 				<h4>Performance</h4>
 				<div class="icinga-box-container">
 				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>Service Check Execution Time:</td>
-						<td>
-							<?php echo $t->dsCachedField('SERVICE_EXECUTION_TIME', 'SERVICE_EXECUTION_TIME_MIN'); ?> /
-							<?php echo $t->dsCachedField('SERVICE_EXECUTION_TIME', 'SERVICE_EXECUTION_TIME_MAX'); ?> /
-							<?php echo $t->dsCachedField('SERVICE_EXECUTION_TIME', 'SERVICE_EXECUTION_TIME_AVG'); ?> sec
-						</td>
-					</tr>
-					<tr>
-						<td>Service Check Latency:</td>
-						<td>
-							<?php echo $t->dsCachedField('SERVICE_LATENCY', 'SERVICE_LATENCY_MIN'); ?> /
-							<?php echo $t->dsCachedField('SERVICE_LATENCY', 'SERVICE_LATENCY_MAX'); ?> /
-							<?php echo $t->dsCachedField('SERVICE_LATENCY', 'SERVICE_LATENCY_AVG'); ?> sec
-						</td>
-					</tr>
-					<tr>
-						<td>Host Check Execution Time:</td>
-						<td>
-							<?php echo $t->dsCachedField('HOST_EXECUTION_TIME', 'HOST_EXECUTION_TIME_MIN'); ?> /
-							<?php echo $t->dsCachedField('HOST_EXECUTION_TIME', 'HOST_EXECUTION_TIME_MAX'); ?> /
-							<?php echo $t->dsCachedField('HOST_EXECUTION_TIME', 'HOST_EXECUTION_TIME_AVG'); ?> sec
-						</td>
-					</tr>
-					<tr>
-						<td>Host Check Latency:</td>
-						<td>
-							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MIN'); ?> /
-							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_MAX'); ?> /
-							<?php echo $t->dsCachedField('HOST_LATENCY', 'HOST_LATENCY_AVG'); ?> sec
-						</td>
-					</tr>
+					
 					<tr>
 						<td># Active Host / Service Checks:</td>
 						<td>
