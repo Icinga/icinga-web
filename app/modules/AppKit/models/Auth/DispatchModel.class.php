@@ -223,7 +223,7 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
             }
         }
 
-        $this->log('Auth.Dispatch: Delegate authentication, no providers found for %s (not_authoritative=%s)', $username, $ignore_provider, AgaviLogger::ERROR);
+        $this->log('Auth.Dispatch: Delegate authentication, no providers found for %s (not_authoritative=%s)', $username, $ignore_provider, AgaviLogger::DEBUG);
 
         return false;
     }
