@@ -82,14 +82,18 @@ class Cronks_Provider_SystemPerformanceModel extends CronksBaseModel {
         ->innerJoin($prefix.".".$joinTable)
         ->disableAutoIdentifierFields(true)
         ->execute(array(), Doctrine::HYDRATE_SCALAR);
-   
-        $result = array();
+               
         if (is_array($data) && count($data) === 1) {
             $data = $data[0];
 
             $result[$prefix."_".$field."_min"] = sprintf('%.3f',$data[$prefix."_min"]);
             $result[$prefix."_".$field."_avg"] = sprintf('%.3f',$data[$prefix."_sum"]/$data[$prefix."_count"]);
             $result[$prefix."_".$field."_max"] = sprintf('%.3f',$data[$prefix."_max"]);
+            return $result;
+        } else if (is_array($data) && count($data) === 0) {
+            $result[$prefix."_".$field."_min"] = "--";
+            $result[$prefix."_".$field."_avg"] = "--";
+            $result[$prefix."_".$field."_max"] = "--";
             return $result;
         }
     }

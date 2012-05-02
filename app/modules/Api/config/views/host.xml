@@ -147,7 +147,7 @@
                 o.name2 AS SERVICE_NAME,
                 h.icon_image AS HOST_ICON_IMAGE,
                 s.icon_image AS SERVICE_ICON_IMAGE,
-                GREATEST(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
+                COALESCE(hs.current_state,shs.current_state) AS HOST_CURRENT_STATE,
                 hs.output AS HOST_OUTPUT,
                 hs.process_performance_data AS HOST_PROCESS_PERFORMANCE_DATA,
                 ss.current_state AS SERVICE_CURRENT_STATE,
