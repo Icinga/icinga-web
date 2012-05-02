@@ -19,7 +19,6 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
         $data['customvariable'] = $this->getCustomVariables($objectId);
         $data['hostgroup'] = $this->getHostgroups($objectId);
         $data['servicegroup'] = $this->getServicegroups($objectId);
-        
         return $data;
     }
     
@@ -129,17 +128,18 @@ class Api_Relation_DataModelModel extends IcingaApiBaseModel {
     
     public function getHostgroups($objectId) {
         $records = IcingaDoctrine_Query::create()
-        ->select('hg.alias as alias, o.name1 as name, o.object_id as hostgroup_object_id')
+        ->select('hg.hostgroup_id, hg.alias as alias, o.name1 as name, o.object_id as hostgroup_object_id')
         ->from('IcingaHostgroups hg')
         ->innerJoin('hg.object o')
-        ->innerJoin('hg.members m with m.host_object_id=?', $objectId);
+        ->innerJoin('hg.members m')
+        ->where("m.host_object_id = ?",$objectId);
         
         return $records->execute(null, Doctrine::HYDRATE_ARRAY);
     }
     
     public function getServicegroups($objectId) {
         $records = IcingaDoctrine_Query::create()
-        ->select('sg.alias as alias, o.name1 as name, o.object_id as servicegroup_object_id')
+        ->select('sg.servicegroup_id, sg.alias as alias, o.name1 as name, o.object_id as servicegroup_object_id')
         ->from('IcingaServicegroups sg')
         ->innerJoin('sg.object o')
         ->innerJoin('sg.members m with m.service_object_id = ?', $objectId);
