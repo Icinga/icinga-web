@@ -607,10 +607,17 @@
                     <parameter name="fixed">true</parameter>
                 </parameter>
                 
-                <!-- Let the agavi translation manager transform the date -->
-                <parameter name="userFunc">
-                    <parameter name="model">Cronks.ColumnDisplay.Monitoring</parameter>
-                    <parameter name="method">icingaDowntimeRunning</parameter>
+                <parameter name="jsFunc">
+                    <parameter>
+                        <parameter name="namespace">Cronk.grid.ColumnRenderer</parameter>
+                        <parameter name="function">booleanImage</parameter>
+                            <parameter name="arguments">
+                                <parameter name="TrueImageClass">icinga-icon-status</parameter>
+                                <parameter name="TrueQtipText">Is running</parameter>
+                                <parameter name="FalseImageClass">icinga-icon-status-busy</parameter>
+                                <parameter name="FalseQtipText">Not running</parameter>
+                            </parameter>
+                    </parameter>
                 </parameter>
             </display>
             

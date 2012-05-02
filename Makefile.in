@@ -133,6 +133,8 @@ distclean:
 	app/modules/Config/config/module.xml \
 	app/modules/Reporting/config/module.xml \
 	app/modules/Web/config/module.xml \
+	lib/*/Makefile \
+	lib/Makefile \
 	etc/build.properties \
 	tests/phpunit/test.properties \
 	etc/apache2/icinga-web.conf \

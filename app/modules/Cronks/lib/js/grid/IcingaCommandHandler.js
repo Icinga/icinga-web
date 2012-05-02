@@ -225,7 +225,7 @@ IcingaCommandHandler.prototype = {
                     }
                 }, {
                     xtype: 'label',
-                    text: ':'
+                    text: _('hours')
                 }, {
                     xtype: 'numberfield',
                     name: o.fieldName + '-minute',
@@ -237,7 +237,7 @@ IcingaCommandHandler.prototype = {
                     }
                 }, {
                     xtype: 'label',
-                    text: _('(hh:ii)')
+                    text: _('minutes')
                 }, {
                     xtype: 'numberfield',
                     name: o.fieldName,
@@ -345,6 +345,7 @@ IcingaCommandHandler.prototype = {
 
                 var oWin = new Ext.Window({
                     title: String.format(_('{0} ({1} items)'), title, this.grid.getSelectionModel().getCount()),
+                    width: 380,
                     autoDestroy: true,
                     autoHeight: true,
                     closable: true,
