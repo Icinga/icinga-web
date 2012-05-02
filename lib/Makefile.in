@@ -9,14 +9,11 @@ HTMLDIR=@datarootdir@
 INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
-install: installdirs
-	@files=`find . -mindepth 1 -type f ! -name "*.in" -and ! -name "Makefile"`; \
-	for file in $$files; do \
-		$(INSTALL) -m 644 $(INSTALL_OPTS) "$$file" $(DESTDIR)$(prefix)/lib/"$$file"; \
-	done
-installdirs:
-	$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib
-	@dirs=`find . -mindepth 1 -type d`; \
-	for dir in $$dirs; do \
-		$(INSTALL) -m 755 $(INSTALL_OPTS) -d $(DESTDIR)$(prefix)/lib/"$$dir"; \
-	done
+install: 
+	cd jit && make install
+	cd ext3 && make install
+	cd icingaScheduler && make install
+	cd doctrine && make install
+	cd agavi && make install
+	cd phpseclib && make install
+	cd jsgettext && make install 
