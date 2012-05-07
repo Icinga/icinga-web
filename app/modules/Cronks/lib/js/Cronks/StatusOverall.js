@@ -10,7 +10,13 @@ Ext.ns('Icinga.Cronks.System.StatusOverall');
                 '{count}',
             "</tpl>",
             '<tpl if="state == 100">',
+                '<tpl if="type == \'service\'">',
                 "<span ext:qtip='All problem services / all services '>",
+                '</tpl>',
+                '<tpl if="type == \'host\'">',
+                "<span ext:qtip='All problem hosts / all hosts '>",
+                '</tpl>',
+
                     "{allProblems} / {count}",
                 "</span>",
             "</tpl>",

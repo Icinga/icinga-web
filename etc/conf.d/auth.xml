@@ -44,7 +44,7 @@
 			<ae:parameter name="ldap_filter_user"><![CDATA[(&(uid=__USERNAME__))]]></ae:parameter>
 		</ae:parameter>
 	-->
-	</setting>
+   	</setting>
 
 	<setting name="message">
 	<!--
