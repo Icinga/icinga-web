@@ -128,6 +128,16 @@ class NsmUser extends BaseNsmUser {
 
         return false;
     }
+    
+    /**
+     * Sets a random password for the user
+     * @return null really nothing
+     * @param integer $length
+     */
+    public function generateRandomPassword($length=10) {
+        $password = AppKitRandomUtil::genSimpleId($length, microtime(true));
+        $this->__updatePassword($password);
+    }
 
     /**
      * Sets a pref value
