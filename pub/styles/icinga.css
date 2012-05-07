@@ -121,14 +121,14 @@ dd {
     margin: 40px 20px 20px 20px;
 }
 
-.icinga-cronk-welcome-frame:hover {
+/* .icinga-cronk-welcome-frame:hover {
     -webkit-transform: scale(1) rotate(360deg) translate(0px);
     -webkit-transition-duration: 2s;
     -moz-transform: scale(1) rotate(360deg) translate(0px);
     -moz-transition-duration: 2s;
     transform: scale(1) rotate(360deg) translate(0px);
     transition-duration: 2s;
-}
+} */
 
 /** Message colors **/
 .icinga-message-success {

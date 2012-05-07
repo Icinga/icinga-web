@@ -13,7 +13,8 @@
                     ps.program_start_time AS PROGRAMSTATUS_PROGRAM_START_TIME,
                     ps.program_end_time AS PROGRAMSTATUS_PROGRAM_END_TIME,
                     ps.last_command_check AS PROGRAMSTATUS_LAST_COMMAND_CHECK,
-                    ps.process_id AS PROGRAMSTATUS_PROCESS_ID
+                    ps.process_id AS PROGRAMSTATUS_PROCESS_ID,
+                    ps.status_update_time AS PROGRAMSTATUS_STATUS_UPDATE_TIME
                     FROM IcingaInstances i
                     INNER JOIN i.programstatus as ps
             ]]>

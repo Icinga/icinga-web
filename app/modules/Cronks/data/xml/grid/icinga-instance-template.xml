@@ -302,7 +302,7 @@
         
         <field name="instance_update_duration">
             <datasource>
-                <parameter name="field">PROGRAMSTATUS_LAST_COMMAND_CHECK</parameter>
+                <parameter name="field">PROGRAMSTATUS_STATUS_UPDATE_TIME</parameter>
             </datasource>
             <display>
                 <parameter name="visible">true</parameter>
