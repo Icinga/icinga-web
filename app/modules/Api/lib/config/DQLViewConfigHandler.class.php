@@ -68,7 +68,7 @@ class DQLViewConfigHandler extends AgaviXmlConfigHandler {
                 continue;
             }
             $base = $this->views[$vals["base"]];
-            $vals = array_replace_recursive($base,$vals);
+            $vals = AppKitArrayUtil::replaceRecursive($base, $vals);
         }
 
     }
