@@ -32,7 +32,7 @@ Summary: Open Source host, service and network monitoring Web UI
 Name: icinga-web
 Version: 1.7.0
 Release: %{revision}%{?dist}
-License: GPLv2
+License: GPLv3
 Group: Applications/System
 URL: http://www.icinga.org/
 BuildArch: noarch
@@ -221,6 +221,7 @@ fi
 - set extcmdfile to _localstatedir/spool/icinga/cmd/icinga.cmd for rhel as changed in icinga.spec
 - update Changelog for docs - this requires more generic addin
 - use --with-clearcache-path, but still rename to be prefixed
+- correct license to gplv3
 
 * Wed Feb 29 2012 Michael Friedrich <michael.friedrich@univie.ac.at> - 1.6.2-2
 - move etc/schema sql scripts to docs (thx Michael Gruener) #2381
