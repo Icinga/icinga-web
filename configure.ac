@@ -41,10 +41,11 @@ AC_ARG_VAR([PHP],[php cli binary])
 ACICINGA_CHECK_BIN([PHP], [php])
 
 # Check for mysql
-AC_ARG_VAR([MYSQL],[mysql client binary])
-ACICINGA_CHECK_BIN([MYSQL], [mysql])
+# We don't need the client anymore, so this is commented out
+# AC_ARG_VAR([MYSQL],[mysql client binary])
+# ACICINGA_CHECK_BIN([MYSQL], [mysql])
 
-# Check for phing
+# Check for phing - not required in normal non-dev installations
 AC_ARG_VAR([PHING],[phing build tool])
 ACICINGA_CHECK_BIN([PHING], [phing])
 
@@ -286,7 +287,7 @@ AC_ARG_WITH([icinga_bin],
     icinga_bin=/usr/local/icinga/bin/icinga
 )
 
-ACICINGA_CHECK_BIN([icinga], [$icinga_bin])
+ACICINGA_RESOURCE_EXISTS([icinga], [$icinga_bin])
 
 AC_ARG_WITH([icinga_cfg],
     AS_HELP_STRING([--with-icinga-cfg=PATH], [Icinga core main configuration file]),
@@ -303,7 +304,7 @@ AC_ARG_WITH([phpunit],
     phpunit=phpunit
 )
 
-ACICINGA_CHECK_BIN([PHPUNIT], [$phpunit])
+#ACICINGA_CHECK_BIN([PHPUNIT], [$phpunit])
 
 AC_ARG_WITH([phpcs],
     AS_HELP_STRING([--with-phpcs=BINARY], [Path to phpcs script]),
@@ -311,7 +312,7 @@ AC_ARG_WITH([phpcs],
     phpcs=phpcs
 )
 
-ACICINGA_CHECK_BIN([PHPCS], [$phpcs])
+#ACICINGA_CHECK_BIN([PHPCS], [$phpcs])
 
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
