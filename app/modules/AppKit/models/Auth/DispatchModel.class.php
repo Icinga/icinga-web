@@ -290,7 +290,11 @@ class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISinglet
                         
                         $user = new NsmUser();
                         $user->fromArray($data, false);
-                        
+
+                        // Write a random password.
+                        // @todo Change this to let providers can do that later
+                        $user->generateRandomPassword();
+ 
                         $groups = $provider->getDefaultGroups();
 
                         if (is_array($groups)) {

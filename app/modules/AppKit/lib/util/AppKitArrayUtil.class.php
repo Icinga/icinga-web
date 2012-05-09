@@ -196,6 +196,59 @@ class AppKitArrayUtil {
             $array = $sect;
         }
     }
+    
+    /**
+     * replace_recursive proc function
+     * @param mixed $array
+     * @param mixed $array1
+     * @return array
+     */
+    private static function replaceRecursiveProc($array, $array1) {
+        foreach ($array1 as $key => $value) {
+            // create new key in $array, if it is empty or not an array
+            if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key]))) {
+                $array[$key] = array();
+            }
+
+            // overwrite the value in the base array
+            if (is_array($value)) {
+                $value = self::replaceRecursiveProc($array[$key], $value);
+            }
+            $array[$key] = $value;
+        }
+        return $array;
+    }
+    
+    /**
+     * PHP implementation of array_replace_recursive because it
+     * is only available PHP > 5.3
+     * 
+     * It slightly differs from PHP native implementation because
+     * it returns the replacement array
+     * 
+     * @see http://www.de.php.net/array_replace_recursive
+     * @author Gregor[at]der-meyer[dot]de
+     * @deprecated In flavour of PHP 5.3
+     * @param array $array
+     * @param array $array1
+     * @return array The replacement
+     */
+    public static function replaceRecursive($array, $array1) {
+        
+    
+        // handle the arguments, merge one by one
+        $args = func_get_args();
+        $array = $args[0];
+        if (!is_array($array)) {
+            return $array;
+        }
+        for ($i = 1; $i < count($args); $i++) {
+            if (is_array($args[$i])) {
+                $array = self::replaceRecursiveProc($array, $args[$i]);
+            }
+        }
+        return $array;
+    }
 }
 
 class AppKitArrayUtilException extends AppKitException {}

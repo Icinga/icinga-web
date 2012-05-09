@@ -188,7 +188,7 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
     
     protected function getDataForInstance() {
         $instances = IcingaDoctrine_Query::create()
-        ->select('p.programstatus_id, p.instance_id, p.last_command_check, i.instance_name')
+        ->select('p.programstatus_id, p.instance_id, p.status_update_time, i.instance_name')
         ->from('IcingaProgramstatus p')
         ->innerJoin('p.instance i')->execute();
     
@@ -202,7 +202,7 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
     
         foreach ($instances as $instance) {
     
-            $date = (int)strtotime($instance->last_command_check);
+            $date = (int)strtotime($instance->status_update_time);
             $diff = (time()-$date);
     
             if ($diff < $checkTime && $instance->is_currently_running) {
@@ -214,7 +214,7 @@ class Cronks_Provider_StatusSummaryModel extends CronksBaseModel {
             $out[] = array (
                         'instance' => $instance->instance->instance_name,
                         'status' => $status,
-                        'last_check' => $instance->last_command_check,
+                        'last_check' => $instance->status_update_time,
                         'start' => $instance->program_start_time,
                         'diff' => $diff,
                         'check' => $checkTime

@@ -171,7 +171,7 @@ Ext.ns('Cronk.grid');
 
             booleanImage: function (cfg) {
                 return function (value, metaData, record, rowIndex, colIndex, store) {
-                    var iconCls = 'icon-16';
+                    var iconCls = "icon-24 icon-centered";
                     var bVal = Boolean(Ext.decode(value));
 
                     var qtip = "";
@@ -200,8 +200,12 @@ Ext.ns('Cronk.grid');
                     if (qtip) {
                         metaData.attr = "ext:qtip='" + qtip + "'";
                     }
+                    
+                    metaData.css += ' ' + iconCls;
+                    
                     Cronk.grid.ColumnRendererUtil.applyXTemplateOnMetaData(metaData, store, rowIndex);
-                    return '<div class="' + iconCls + '"></div>';
+                    
+                    return '<div style="width: 24px; height: 24px;"></div>';
                 };
             },
 

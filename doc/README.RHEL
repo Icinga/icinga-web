@@ -5,8 +5,8 @@ For detailed information on
 
 * how to build a package with provided icinga-web.spec
 * how to proceed with setup after package install
-	- setup the icinga_web database
-	- configure the backend for IDOUtils and internal Web DB
+    - setup the icinga_web database
+    - configure the backend for IDOUtils and internal Web DB
 
 please locate the howtos in the Icinga wiki
 

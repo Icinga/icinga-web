@@ -1,26 +1,30 @@
 
 A list of foreign components and frameworks used by icinga-web:
 
-	* Agavi
-	  Pure MVC controller
-	  http://www.agavi.org/ (GPLv2)
-	  
-	* Doctrine
-	  PHP database relational mapper
-	  http://www.doctrine-project.org/ (LGPL)
-	  
-	* ExtJS
-	  Javascript widget and ajax library
-	  http://www.extjs.com/products/js/ (GPLv3)
+    * Agavi
+      Pure MVC controller
+      http://www.agavi.org/ (GPLv2)
+      
+    * Doctrine
+      PHP database relational mapper
+      http://www.doctrine-project.org/ (LGPL)
+      
+    * Sencha ExtJS 3
+      Javascript widget and ajax library
+      http://www.extjs.com/products/js/ (GPLv3)
 
-	* PHING
-	  PHP build platform, a Java ANT clone for PHP
-	  http://phing.info/trac/ (LGPL)
-	  
-	* JSGettext
-	  Pure javascript implementation of gettext with json base
-	  http://jsgettext.berlios.de/ (LGPL)
-	  
-	* JIT
-	  The JavaScript InfoVis Toolkit provides tools for creating Interactive Data Visualizations for the Web
-	  http://thejit.org/ (BSD License)
+    * PHING
+      PHP build platform, a Java ANT clone for PHP
+      http://phing.info/trac/ (LGPL)
+      
+    * JSGettext
+      Pure javascript implementation of gettext with json base
+      http://jsgettext.berlios.de/ (LGPL)
+      
+    * JIT
+      The JavaScript InfoVis Toolkit provides tools for creating Interactive Data Visualizations for the Web
+      http://thejit.org/ (BSD License)
+
+    * phpseclib
+      Secure communication with PHP
+      http://phpseclib.sourceforge.net/ (LGPL)
