@@ -245,7 +245,7 @@ install-done:
 	@printf "\n\n"
 	@printf "Installation if icinga-web succeeded.\n"
 	@printf "\n"
-	@printf	"Please check the new Apache2 configuration (etc/apache2/icinga-web.conf).\n"
+	@printf	"Please check the new Apache2 configuration ($(DESTDIR)$(WEB_APACHE_PATH)/icinga-web.conf).\n"
 	@printf "\n"
 	@printf "You can install it simply by invoking 'make install-apache-config'.\n"
 	@printf "\n"

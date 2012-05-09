@@ -573,6 +573,9 @@ flag_caching
 INSTALL_OPTS_CACHE
 INSTALL_OPTS_WEB
 INSTALL_OPTS
+PHPCS
+PHPUNIT
+MYSQL
 CFLAGS
 sla_default_timespan
 enable_sla
@@ -603,11 +606,7 @@ web_path
 web_group
 web_user
 app_name
-PHPCS
-PHPUNIT
-icinga
 PHING
-MYSQL
 PHP
 RELEASE_DATE
 VERSION_EXTEN
@@ -704,7 +703,6 @@ with_phpcs
 host_alias
 target_alias
 PHP
-MYSQL
 PHING'
 
 
@@ -1372,7 +1370,6 @@ Optional Packages:
 
 Some influential environment variables:
   PHP         php cli binary
-  MYSQL       mysql client binary
   PHING       phing build tool
 
 Use these variables to override the choices made by `configure' or to help
@@ -2136,59 +2133,11 @@ fi
 
 
 # Check for mysql
+# We don't need the client anymore, so this is commented out
+# AC_ARG_VAR([MYSQL],[mysql client binary])
+# ACICINGA_CHECK_BIN([MYSQL], [mysql])
 
-
-   # Extract the first word of "mysql", so it can be a program name with args.
-set dummy mysql; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_path_MYSQL+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  case $MYSQL in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_MYSQL="$MYSQL" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_path_MYSQL="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  test -z "$ac_cv_path_MYSQL" && ac_cv_path_MYSQL="not found"
-  ;;
-esac
-fi
-MYSQL=$ac_cv_path_MYSQL
-if test -n "$MYSQL"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $MYSQL" >&5
-$as_echo "$MYSQL" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-
-   if  test "XX${MYSQL}" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary mysql not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary mysql not found in PATH" >&2;}
-fi
-
-   test "XX${MYSQL}" == "XXnot found" && MYSQL=""
-
-
-# Check for phing
+# Check for phing - not required in normal non-dev installations
 
 
    # Extract the first word of "phing", so it can be a program name with args.
@@ -2674,54 +2623,15 @@ fi
 
 
 
-   # Extract the first word of "$icinga_bin", so it can be a program name with args.
-set dummy $icinga_bin; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_path_icinga+set}" = set; then :
-  $as_echo_n "(cached) " >&6
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking if resource $icinga_bin exists" >&5
+$as_echo_n "checking if resource $icinga_bin exists... " >&6; }
+    if  test -e $icinga_bin -a -r $icinga_bin ; then :
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: found" >&5
+$as_echo "found" >&6; }
 else
-  case $icinga in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_icinga="$icinga" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_path_icinga="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  test -z "$ac_cv_path_icinga" && ac_cv_path_icinga="not found"
-  ;;
-esac
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: not found" >&5
+$as_echo "$as_me: WARNING: not found" >&2;}
 fi
-icinga=$ac_cv_path_icinga
-if test -n "$icinga"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $icinga" >&5
-$as_echo "$icinga" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-
-   if  test "XX${icinga}" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary $icinga_bin not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary $icinga_bin not found in PATH" >&2;}
-fi
-
-   test "XX${icinga}" == "XXnot found" && icinga=""
 
 
 
@@ -2757,56 +2667,7 @@ else
 fi
 
 
-
-   # Extract the first word of "$phpunit", so it can be a program name with args.
-set dummy $phpunit; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_path_PHPUNIT+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  case $PHPUNIT in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_PHPUNIT="$PHPUNIT" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_path_PHPUNIT="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  test -z "$ac_cv_path_PHPUNIT" && ac_cv_path_PHPUNIT="not found"
-  ;;
-esac
-fi
-PHPUNIT=$ac_cv_path_PHPUNIT
-if test -n "$PHPUNIT"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PHPUNIT" >&5
-$as_echo "$PHPUNIT" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-
-   if  test "XX${PHPUNIT}" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary $phpunit not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary $phpunit not found in PATH" >&2;}
-fi
-
-   test "XX${PHPUNIT}" == "XXnot found" && PHPUNIT=""
-
+#ACICINGA_CHECK_BIN([PHPUNIT], [$phpunit])
 
 
 # Check whether --with-phpcs was given.
@@ -2818,56 +2679,7 @@ else
 fi
 
 
-
-   # Extract the first word of "$phpcs", so it can be a program name with args.
-set dummy $phpcs; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if test "${ac_cv_path_PHPCS+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  case $PHPCS in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_PHPCS="$PHPCS" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
-    ac_cv_path_PHPCS="$as_dir/$ac_word$ac_exec_ext"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-  test -z "$ac_cv_path_PHPCS" && ac_cv_path_PHPCS="not found"
-  ;;
-esac
-fi
-PHPCS=$ac_cv_path_PHPCS
-if test -n "$PHPCS"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PHPCS" >&5
-$as_echo "$PHPCS" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-
-
-   if  test "XX${PHPCS}" == "XXnot found" ; then :
-   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: binary $phpcs not found in PATH" >&5
-$as_echo "$as_me: WARNING: binary $phpcs not found in PATH" >&2;}
-fi
-
-   test "XX${PHPCS}" == "XXnot found" && PHPCS=""
-
+#ACICINGA_CHECK_BIN([PHPCS], [$phpcs])
 
 # Custom vars
 INSTALL_OPTS="-o $bin_user -g $bin_group"
