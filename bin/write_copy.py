@@ -47,6 +47,9 @@ def _add_copy(file, data, cfg, type, license):
     if type == "php" and re.match('<\?php', data[start]):
         start = 1
     
+    if type == "php" and re.match('<\?php', data[start]) == None:
+        add_stop_php = True
+    
     match = []
     for index, item in enumerate(data):
         if (re.match(_marker, item)):
@@ -82,6 +85,7 @@ def _add_copy(file, data, cfg, type, license):
     
     try:
         data.insert(start, "\n" * cfg['lines_after'])
+        start = start + cfg['lines_after']
     except (KeyError):
         pass
     
