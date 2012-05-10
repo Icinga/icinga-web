@@ -26,10 +26,29 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 (function () {
     "use strict";
 
-    Icinga.Cronks.Tackle.Information.Perfdata = Ext.extend(
-        Icinga.Cronks.Tackle.Information.OutputPanel, {
-        title: _("Perfdata"),
-        tplField: 'object_perfdata'
+    Icinga.Cronks.Tackle.Information.OutputPanel = Ext.extend(Ext.Panel, {
+        autoScroll: true,
+        
+        constructor: function(c) {
+            Icinga.Cronks.Tackle.Information
+                .OutputPanel.superclass.constructor.call(this, c);
+        },
+        
+        initComponent: function() {
+            
+            if (!Ext.isEmpty(this.tplField)) {
+                this.tpl = new Ext.XTemplate(
+                    '<tpl for=".">', 
+                    '<div style="margin: 5px;">', 
+                    '{' + this.tplField + '}', 
+                    '</div>', 
+                    '</tpl>'
+                );
+            }
+            
+            Icinga.Cronks.Tackle.Information
+                .OutputPanel.superclass.initComponent.call(this);
+        }
     });
 
 })();

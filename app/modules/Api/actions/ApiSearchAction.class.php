@@ -127,6 +127,15 @@ class Api_ApiSearchAction extends IcingaApiBaseAction {
                 $this->addSLAData($res,$ts);
             }
         }
+        
+        if ($target == 'host' || $target == 'service') {
+            
+            $rewrite = $this->getContext()->getModel('Result.OutputRewrite', 'Api', array(
+                    'target' => $target
+            ));
+            
+            $res = $rewrite->rewrite($res);
+        }
 
         $rd->setParameter("searchResult", $res);
 
