@@ -26,9 +26,10 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
 (function () {
     "use strict";
 
-    Icinga.Cronks.Tackle.Information.LongPluginOutput = Ext.extend(Ext.Panel, {
+    Icinga.Cronks.Tackle.Information.LongPluginOutput = Ext.extend(
+        Icinga.Cronks.Tackle.Information.OutputPanel, {
         title: _("Long plugin output"),
-        tpl: new Ext.XTemplate('<tpl for=".">', '<div style="margin: 5px;">', '{object_long_output}', '</div>', '</tpl>')
+        tplField: 'object_long_output'
     });
 
 })();

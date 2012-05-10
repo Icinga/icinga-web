@@ -84,14 +84,15 @@ class AppKit_BulkLoaderModel extends AppKitBaseModel implements AgaviISingletonM
         $files = array();
 
         foreach($this->getParameter('files') as $file) {
-            if (false !== ($file = realpath($file)) && @is_readable($file)) {
-                $files[] = $file;
+            if (false !== ($rfile = realpath($file)) && @is_readable($file)) {
+                $files[] = $rfile;
             } else {
-                AppKitAgaviUtil::log(sprintf(
-                                         '%s: File %s not readable.',
-                                         get_class($this),
-                                         $file
-                                     ), AgaviLogger::ERROR);
+                AppKitAgaviUtil::log(
+                        '%s: File %s not readable.',
+                        get_class($this),
+                        $file,
+                        AgaviLogger::ERROR
+                );
             }
         }
 
