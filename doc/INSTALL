@@ -1,3 +1,6 @@
-Please goto:
+Icinga web is installed via ./configure and make install.
+Database install and upgrade schemas can be found under etc/schema
+
+For a quickstart guide please goto:
 
 https://wiki.icinga.org/display/howtos/Setting+up+icinga-web+-+Quickstart
