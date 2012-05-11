@@ -50,8 +50,9 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
      */
     private static $rewriters = array(
             array(
-                    'regex' => '^(HOST|SERVICE)_(LONG_)?OUTPUT$',
-                    'method' => 'rewritePluginOutput'
+                    'regex'    => '^(HOST|SERVICE)_(LONG_)?OUTPUT$',
+                    'targets'  => array('host', 'service'),
+                    'method'   => 'rewritePluginOutput'
             )
     );
     
@@ -66,6 +67,13 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
             $record = $res[0];
             foreach ($record as $field=>$value) {
                 foreach (self::$rewriters as $rewriter) {
+                    
+                    if (in_array(
+                            $this->getParameter('target'), 
+                            $rewriter['targets']) === false) {
+                        continue;
+                    }
+                    
                     if (preg_match('@'. $rewriter['regex']. '@', $field)) {
                         
                         if (!isset($out[$field])) {
@@ -120,6 +128,14 @@ class Api_Result_OutputRewriteModel extends IcingaApiBaseModel {
         }
         
         return $new_val;
+    }
+    
+    public function initialize(AgaviContext $context, array $parameters = array()) {
+        parent::initialize($context, $parameters);
+        
+        if ($this->getParameter('target', false) === false) {
+            throw new AppKitModelException('Parameter "target" is mandatory!');
+        }
     }
     
     /**

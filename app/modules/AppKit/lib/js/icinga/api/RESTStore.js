@@ -40,6 +40,7 @@ Ext.ns('Icinga.Api');
         groupBy: null,
         countColumn: null,
         withSLA: false,
+        enableRewrite: false,
         constructor: function (cfg) {
             if (Ext.isEmpty(cfg.columns) === false) {   
                 /*
@@ -86,6 +87,10 @@ Ext.ns('Icinga.Api');
 
         setWithSLA: function (bool) {
             this.withSLA = bool;
+        },
+
+        setEnableRewrite: function(bool) {
+            this.enableRewrite = bool;
         },
 
         setColumns: function (cols) {
@@ -150,6 +155,10 @@ Ext.ns('Icinga.Api');
             return this.withSLA;
         },
 
+        getEnableRewrite : function() {
+            return this.enableRewrite;
+        },
+
         getTarget: function () {
             return this.target;
         },
@@ -174,7 +183,7 @@ Ext.ns('Icinga.Api');
             return this.countColumn;
         },
 
-        getLimit: function ()  {
+        getLimit: function () {
             if (this.limit < 0) {
                 return null;
             }
@@ -198,9 +207,7 @@ Ext.ns('Icinga.Api');
             return this.groupBy;
         },
         load: function (options) {
-            options = options  ||   {
-                params: {}
-            };
+            options = options || { params: {} };
             this.storeOptions(options);
             var cols = this.getColumns();
 
@@ -213,6 +220,7 @@ Ext.ns('Icinga.Api');
             var offset = this.getOffset();
             var db = this.getDB();
             var wSLA = this.getWithSLA();
+            var enableRewrite = this.getEnableRewrite();
 
             var cfg = {
                 db: db,
@@ -222,6 +230,10 @@ Ext.ns('Icinga.Api');
 
             if (wSLA) {
                 cfg.withSLA = true;
+            }
+
+            if (enableRewrite) {
+                cfg.enableRewrite = true;
             }
 
             if (filter !== 'null' && filter) {
