@@ -29,15 +29,15 @@
  */
 class Cronks_System_CommandSenderModel extends CronksBaseModel {
 
-    const TIME_KEY				= 'V2Pxq9J2GVt1dk6OO0x3'; // Please change this if you need more security!
-    const TIME_ALGO				= 'ripemd160';	// Please never change this!!!
-    const TIME_VALID			= 5;	// Key is valid 5 minutes
+    const TIME_KEY              = 'V2Pxq9J2GVt1dk6OO0x3'; // Please change this if you need more security!
+    const TIME_ALGO             = 'ripemd160';  // Please never change this!!!
+    const TIME_VALID            = 5;    // Key is valid 5 minutes
 
-    private $selection			= array();
-    private $data				= array();
-    private $command			= null;
+    private $selection          = array();
+    private $data               = array();
+    private $command            = null;
     private $instances           = array();
-    private $timeFields			= array("checktime","endtime","starttime");
+    private $timeFields         = array("checktime","endtime","starttime");
 
     public function  initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);

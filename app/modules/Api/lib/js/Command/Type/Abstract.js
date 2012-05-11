@@ -114,24 +114,24 @@ Ext.ns('Icinga.Api.Command.Type');
         },
 
         buildForm: function (o) {
-        	
-        	/**
-        	 * Just a information for the user that he
-        	 * doesn't need to take further actions
-        	 */
-        	if (this.countRealFields() === 0) {
-        		this.add({
-        			xtype : 'panel',
-        			border: false,
-        			html : _('No more fields required. Just press "Send" to commit.')
-        		});
-        	}
-        	
-        	if (this.errorLabel) {
-        		this.add(this.errorLabel);
-        	}
-        	
-        	this.doLayout();
+            
+            /**
+             * Just a information for the user that he
+             * doesn't need to take further actions
+             */
+            if (this.countRealFields() === 0) {
+                this.add({
+                    xtype : 'panel',
+                    border: false,
+                    html : _('No more fields required. Just press "Send" to commit.')
+                });
+            }
+            
+            if (this.errorLabel) {
+                this.add(this.errorLabel);
+            }
+            
+            this.doLayout();
         },
 
         registerHandlers: function () {
@@ -198,13 +198,13 @@ Ext.ns('Icinga.Api.Command.Type');
         },
         
         countRealFields : function() {
-        	var c = 0;
-        	Ext.iterate(this.command.parameters, function (key, value) {
-        		if (this.isSourceField(key) === false) {
-        			c++;
-        		}
-        	}, this);
-        	return c;
+            var c = 0;
+            Ext.iterate(this.command.parameters, function (key, value) {
+                if (this.isSourceField(key) === false) {
+                    c++;
+                }
+            }, this);
+            return c;
         }
     });
 })();

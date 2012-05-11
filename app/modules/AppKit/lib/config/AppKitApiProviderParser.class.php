@@ -32,7 +32,7 @@ class AppKitApiProviderParser  {
         /*
                 foreach($directProviders as $provider) {
                     $module = $provider['module'];
-            	    $action = $provider['action'];
+                    $action = $provider['action'];
                     $dom = $this->getValidatorXMLForAction($provider['module'],$provider['action']);
                     $paramList = $this->getRequestParams($module,$action,$dom);
                     $descriptor = $this->getJSDescriptor($module,$action);
@@ -91,12 +91,12 @@ class AppKitApiProviderParser  {
     * Fetches the Validation xml for the action/module combination and returns it as
     * an DOMDocument
     *
-    * @param    string	The module name
-    * @param    string	The action to get the validation xml for
+    * @param    string  The module name
+    * @param    string  The action to get the validation xml for
     * @return    AgaviXmlConfigDomDocument
     *
     * @author    Jannis Moßhammer<jannis.mosshammer@netways.de>
-    * @throws    AgaviConfigurationException 	when module or action does not exist
+    * @throws    AgaviConfigurationException    when module or action does not exist
     */
     protected function getValidatorXMLForAction($module,$action) {
         // get Module path

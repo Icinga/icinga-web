@@ -29,22 +29,22 @@
  */
 class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
-    const CACHE_DEFAULT				= 'data';
-    const TEMPLATE_MAIN				= 'MAIN';
-    const TEMPLATE_PRESET			= 'icinga-tactical-overview-presets';
-    const CSS_CLASS_LINK			= 'x-icinga-grid-link';
+    const CACHE_DEFAULT             = 'data';
+    const TEMPLATE_MAIN             = 'MAIN';
+    const TEMPLATE_PRESET           = 'icinga-tactical-overview-presets';
+    const CSS_CLASS_LINK            = 'x-icinga-grid-link';
 
-    private $tid					= null;
-    private $ts						= array();
-    private $ds						= array();
+    private $tid                    = null;
+    private $ts                     = array();
+    private $ds                     = array();
     private $chain                  = array();
     private $rparam                 = array();
-    private $args					= array();
-    private $js_code				= array();
+    private $args                   = array();
+    private $js_code                = array();
 
-    private static $tcache			= array();
-    private static $protected_vars	= array('t', 'a');
-    private static $idc				= 0;
+    private static $tcache          = array();
+    private static $protected_vars  = array('t', 'a');
+    private static $idc             = 0;
 
     public function initialize(AgaviContext $context, array $parameters = array()) {
         parent::initialize($context, $parameters);
@@ -265,25 +265,25 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
                 /*
                  * @todo Check if we can remove this
                  */
-                //			    if (array_key_exists('filters', $dataSource)) {
+                //              if (array_key_exists('filters', $dataSource)) {
                 //
-                //					foreach ($dataSource['filters'] as $filter) {
-                //					    $filter = $apiSearch->createFilter($filter['field'],
-                //					        $filter['value'],
-                //					        constant(isset($filter['match']) ? $filter['match'] : 'IcingaApiConstants::MATCH_LIKE')
-                //					    );
+                //                  foreach ($dataSource['filters'] as $filter) {
+                //                      $filter = $apiSearch->createFilter($filter['field'],
+                //                          $filter['value'],
+                //                          constant(isset($filter['match']) ? $filter['match'] : 'IcingaApiConstants::MATCH_LIKE')
+                //                      );
                 //
                 //                        $apiSearch->setSearchFilter($filter);
-                //					}
-                //				}
+                //                  }
+                //              }
                 //
-                //				if (count($filters)) {
-                //					foreach ($filters as $f) {
-                //						if (!isset($f[2])) $f[2] = IcingaApiConstants::MATCH_EXACT;
-                //						$f = $this->processDsFiltermap($dataSource, $f);
-                //						$apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
-                //					}
-                //				}
+                //              if (count($filters)) {
+                //                  foreach ($filters as $f) {
+                //                      if (!isset($f[2])) $f[2] = IcingaApiConstants::MATCH_EXACT;
+                //                      $f = $this->processDsFiltermap($dataSource, $f);
+                //                      $apiSearch->setSearchFilter($f[0], $f[1], $f[2]);
+                //                  }
+                //              }
 
                 $add_filters = $this->getDsFilters($name, $filters, $ignore_defined_filters);
                 foreach($add_filters as $f) {
@@ -431,8 +431,8 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
 
     public function linkFunctionWrapper($js_code, $uid) {
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_clickwrap', array(
-                                     'uid'		=> $uid,
-                                     'js_code'	=> $js_code
+                                     'uid'      => $uid,
+                                     'js_code'  => $js_code
                                  ));
 
         $this->jsAddCode($code);
@@ -444,10 +444,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         $uid = $this->getUid();
 
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_simplechart', array(
-                                     'data'		=> $data,
-                                     'uid'		=> $uid,
-                                     'config'	=> $config,
-                                     'type'		=> $type
+                                     'data'     => $data,
+                                     'uid'      => $uid,
+                                     'config'   => $config,
+                                     'type'     => $type
                                  ));
 
         $this->jsAddCode($code);
@@ -466,10 +466,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         }
 
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_link2to', array(
-                                     'uid'		=> $uid,
-                                     'template'	=> $template,
-                                     'toTitle'	=> $title,
-                                     'filterObj'	=> $fc
+                                     'uid'      => $uid,
+                                     'template' => $template,
+                                     'toTitle'  => $title,
+                                     'filterObj'    => $fc
                                  ));
 
         $this->jsAddCode($code);
@@ -493,10 +493,10 @@ class Cronks_System_StaticContentTemplateModel extends CronksBaseModel {
         }
 
         $code = $this->renderSub(self::TEMPLATE_PRESET, 'js_link2grid', array(
-                                     'uid'		=> $uid,
-                                     'template'	=> $template,
-                                     'gridTitle'		=> $title,
-                                     'filterObj'	=> $fc
+                                     'uid'      => $uid,
+                                     'template' => $template,
+                                     'gridTitle'        => $title,
+                                     'filterObj'    => $fc
                                  ));
 
         $this->jsAddCode($code);

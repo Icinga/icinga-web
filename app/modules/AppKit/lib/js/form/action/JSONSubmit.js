@@ -35,7 +35,7 @@ Ext.extend(Ext.form.Action.JSONSubmit, Ext.form.Action.Submit, {
         var json_ns = o.json_namespace || 'data';
         
         if (isPost) {
-        	this.options.params[json_ns] = Ext.util.JSON.encode(this.form.getValues(false)); 
+            this.options.params[json_ns] = Ext.util.JSON.encode(this.form.getValues(false)); 
         }
         
         if(o.clientValidation === false || this.form.isValid()){

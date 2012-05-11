@@ -39,8 +39,8 @@ class NsmLog extends BaseNsmLog {
         parent::setUp();
 
         $options = array(
-                       'created' =>  array('name'	=> 'log_created'),
-                       'updated' =>  array('name'	=> 'log_modified'),
+                       'created' =>  array('name'   => 'log_created'),
+                       'updated' =>  array('name'   => 'log_modified'),
                    );
 
         $this->actAs('Timestampable', $options);

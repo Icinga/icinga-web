@@ -39,9 +39,9 @@ class AppKit_DataProvider_IconProviderSuccessView extends AppKitBaseView {
         }
 
         $out = array(
-                   'success'	=> $success,
-                   'total'		=> 0,
-                   'rows'		=> array()
+                   'success'    => $success,
+                   'total'      => 0,
+                   'rows'       => array()
                );
 
         if ($success) {

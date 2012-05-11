@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/autoload/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<ae:configuration>
-		
-		<autoload name="CronksBaseAction">%core.module_dir%/Cronks/lib/action/CronksBaseAction.class.php</autoload>
-		<autoload name="CronksBaseModel">%core.module_dir%/Cronks/lib/model/CronksBaseModel.class.php</autoload>
-		<autoload name="CronksBaseView">%core.module_dir%/Cronks/lib/view/CronksBaseView.class.php</autoload>
-		<autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
-		<autoload name="CronkModuleConfigHandler">%core.module_dir%/Cronks/lib/config/CronkModuleConfigHandler.class.php</autoload>
-		<autoload name="TemplateExtenderConfigHandler">%core.module_dir%/Cronks/lib/config/TemplateExtenderConfigHandler.class.php</autoload>
-		
-		<!-- Classes for the grid templates -->
-		<autoload name="CronkGridTemplateAjaxGridLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateAjaxGridLayout.class.php</autoload>
-		<autoload name="CronkGridTemplateLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateLayout.class.php</autoload>
-		<autoload name="CronkGridTemplateXmlReplace">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlReplace.class.php</autoload>
-		<autoload name="CronkGridTemplateXmlParser">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlParser.class.php</autoload>
-		<autoload name="CronkGridTemplateWorkerFactory">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorkerFactory.class.php</autoload>
+    <ae:configuration>
+        
+        <autoload name="CronksBaseAction">%core.module_dir%/Cronks/lib/action/CronksBaseAction.class.php</autoload>
+        <autoload name="CronksBaseModel">%core.module_dir%/Cronks/lib/model/CronksBaseModel.class.php</autoload>
+        <autoload name="CronksBaseView">%core.module_dir%/Cronks/lib/view/CronksBaseView.class.php</autoload>
+        <autoload name="CronksRequestUtil">%core.module_dir%/Cronks/lib/cronk/CronksRequestUtil.class.php</autoload>
+        <autoload name="CronkModuleConfigHandler">%core.module_dir%/Cronks/lib/config/CronkModuleConfigHandler.class.php</autoload>
+        <autoload name="TemplateExtenderConfigHandler">%core.module_dir%/Cronks/lib/config/TemplateExtenderConfigHandler.class.php</autoload>
+        
+        <!-- Classes for the grid templates -->
+        <autoload name="CronkGridTemplateAjaxGridLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateAjaxGridLayout.class.php</autoload>
+        <autoload name="CronkGridTemplateLayout">%core.module_dir%/Cronks/lib/template/CronkGridTemplateLayout.class.php</autoload>
+        <autoload name="CronkGridTemplateXmlReplace">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlReplace.class.php</autoload>
+        <autoload name="CronkGridTemplateXmlParser">%core.module_dir%/Cronks/lib/template/CronkGridTemplateXmlParser.class.php</autoload>
+        <autoload name="CronkGridTemplateWorkerFactory">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorkerFactory.class.php</autoload>
         <autoload name="CronkGridTemplateWorker">%core.module_dir%/Cronks/lib/template/CronkGridTemplateWorker.class.php</autoload>
         <autoload name="GenericCronkTemplateWorker">%core.module_dir%/Cronks/lib/template/TemplateWorker/GenericCronkTemplateWorker.class.php</autoload>
         <autoload name="DQLCronkTemplateWorker">%core.module_dir%/Cronks/lib/template/TemplateWorker/DQLCronkTemplateWorker.class.php</autoload>
         
 
-	</ae:configuration>
+    </ae:configuration>
 </ae:configurations>

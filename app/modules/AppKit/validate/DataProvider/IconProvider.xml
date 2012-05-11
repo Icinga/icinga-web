@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/AppKit/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/AppKit/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators>
-		
-		<validator class="string" name="path" required="true">
-				<arguments>
-					<argument>path</argument>
-				</arguments>
-				<errors>
-					<error>Path validation failed</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="max">20</ae:parameter>
-					<ae:parameter name="min">1</ae:parameter>
-				</ae:parameters>
-		</validator>
-		
-		<validator class="string" name="query" required="false">
-				<arguments>
-					<argument>query</argument>
-				</arguments>
-				<errors>
-					<error>Query validation failed</error>
-				</errors>
-				<ae:parameters>
-					<ae:parameter name="max">20</ae:parameter>
-					<ae:parameter name="min">1</ae:parameter>
-				</ae:parameters>
-		</validator>
-		
-		</validators>
-		
-	</ae:configuration>
+    <ae:configuration>
+        
+        <validators>
+        
+        <validator class="string" name="path" required="true">
+                <arguments>
+                    <argument>path</argument>
+                </arguments>
+                <errors>
+                    <error>Path validation failed</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="max">20</ae:parameter>
+                    <ae:parameter name="min">1</ae:parameter>
+                </ae:parameters>
+        </validator>
+        
+        <validator class="string" name="query" required="false">
+                <arguments>
+                    <argument>query</argument>
+                </arguments>
+                <errors>
+                    <error>Query validation failed</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="max">20</ae:parameter>
+                    <ae:parameter name="min">1</ae:parameter>
+                </ae:parameters>
+        </validator>
+        
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

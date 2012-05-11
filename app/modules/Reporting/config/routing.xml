@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
-	<ae:configuration context="web">
-		<routes>
-			<route name=".reporting" pattern="^/reporting" stop="false" module="Reporting">
-				<route name=".provider" pattern="^/provider" stop="false" output_type="json">
-				
-					<route name=".reportfile" pattern="^/reportdata" action="Report.GetReportData" output_type="json" />
-				
-					<route pattern="^/(jasperconfig:([a-zA-Z\._-]+))" stop="false">
-						<route name=".jasperserver" pattern="^/jasperserver$" action="Provider.JasperServer" />
-						<route name=".treeloader" pattern="^/treeloader$" action="Provider.TreeLoader" />
-						<route name=".parameters" pattern="^/parameters$" action="Provider.ReportParameters" />
-						<route name=".generate" pattern="^/generate/(output_type:(\w+))" action="Report.Generate">
-							<defaults>
-								<!-- Do not change this. Its a marker for Javascript to change -->
-								<default for="output_type">OUTPUT_TYPE</default>
-							</defaults>
-						</route>
-						
-						<route name=".scheduler" pattern="^/scheduler/(action:(\w+))" action="Provider.Scheduler">
-							<defaults>
-								<default for="action">list</default>
-							</defaults>
-						</route>
-						
-						<route name=".content" pattern="^/content">
-							<route name=".meta" pattern="^/meta" action="Provider.ContentResource" />
-							<route name=".content" pattern="^/content" action="Provider.ContentResource" output_type="simple" />
-						</route>
-					</route>
-					
-					
-				</route>
-				
-			</route>
-		</routes>
-	</ae:configuration>
+    <ae:configuration context="web">
+        <routes>
+            <route name=".reporting" pattern="^/reporting" stop="false" module="Reporting">
+                <route name=".provider" pattern="^/provider" stop="false" output_type="json">
+                
+                    <route name=".reportfile" pattern="^/reportdata" action="Report.GetReportData" output_type="json" />
+                
+                    <route pattern="^/(jasperconfig:([a-zA-Z\._-]+))" stop="false">
+                        <route name=".jasperserver" pattern="^/jasperserver$" action="Provider.JasperServer" />
+                        <route name=".treeloader" pattern="^/treeloader$" action="Provider.TreeLoader" />
+                        <route name=".parameters" pattern="^/parameters$" action="Provider.ReportParameters" />
+                        <route name=".generate" pattern="^/generate/(output_type:(\w+))" action="Report.Generate">
+                            <defaults>
+                                <!-- Do not change this. Its a marker for Javascript to change -->
+                                <default for="output_type">OUTPUT_TYPE</default>
+                            </defaults>
+                        </route>
+                        
+                        <route name=".scheduler" pattern="^/scheduler/(action:(\w+))" action="Provider.Scheduler">
+                            <defaults>
+                                <default for="action">list</default>
+                            </defaults>
+                        </route>
+                        
+                        <route name=".content" pattern="^/content">
+                            <route name=".meta" pattern="^/meta" action="Provider.ContentResource" />
+                            <route name=".content" pattern="^/content" action="Provider.ContentResource" output_type="simple" />
+                        </route>
+                    </route>
+                    
+                    
+                </route>
+                
+            </route>
+        </routes>
+    </ae:configuration>
 </ae:configurations>

@@ -45,7 +45,7 @@ class Api_Console_ConsoleInterfaceModel extends IcingaApiBaseModel implements Ic
         $this->initConnection();
     }
 
-    public function exec(IcingaConsoleCommandInterface $cmd) 	{
+    public function exec(IcingaConsoleCommandInterface $cmd)    {
         if(empty($this->connections)) {
             return false;
         }

@@ -78,13 +78,13 @@ interface IcingaApiConstants {
     const TARGET_NOTIFICATIONS = 'notifications';
     const TARGET_HOSTGROUP_SUMMARY = 'hostgroup_summary';
     const TARGET_SERVICEGROUP_SUMMARY = 'servicegroup_summary';
-    const TARGET_COMMAND = 'command';	// livestatus only
+    const TARGET_COMMAND = 'command';   // livestatus only
     const TARGET_DOWNTIME = 'downtime';
     const TARGET_DOWNTIMEHISTORY = 'downtimehistory';
     const TARGET_COMMENT = 'comment';
     const TARGET_HOST_COMMENT = 'hostcomment';
     const TARGET_SERVICE_COMMENT = 'servicecomment';
-    const TARGET_STATUS = 'status';		// livestatus only
+    const TARGET_STATUS = 'status';     // livestatus only
     const TARGET_HOST_SERVICE = 'host_service';
     // SEARCH TYPES
     const SEARCH_TYPE_COUNT = 'count';

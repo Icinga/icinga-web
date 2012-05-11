@@ -46,8 +46,8 @@ class Cronks_ColumnDisplay_MonitoringModel extends CronksBaseModel implements Ag
     
     public function icingaDowntimeType($val, AgaviParameterHolder $method_params, AgaviParameterHolder $row) {
         static $classes = array(
-        1	=> 'icinga-icon-service',
-        2	=> 'icinga-icon-host'
+        1   => 'icinga-icon-service',
+        2   => 'icinga-icon-host'
         );
     
         return sprintf('<div class="icon-16 %s"></div>', $classes[$val]);

@@ -30,7 +30,7 @@
             <parameter>
                 <parameter name="type">viewready</parameter>
                 <parameter name="namespace">Cronk.grid.InfoIconColumnRenderer</parameter>
-               	<parameter name="function">init</parameter>
+                <parameter name="function">init</parameter>
 
                 <parameter name="arguments">
                     <parameter name="column_name">service_info_icons</parameter>

@@ -25,9 +25,9 @@
 class Cronks_ColumnDisplay_FormatModel extends CronksBaseModel implements AgaviISingletonModel {
 
     private static $duration_map = array(
-    'w'	=> 604800,
+    'w' => 604800,
     'd' => 86400,
-    'h'	=> 3600,
+    'h' => 3600,
     'm' => 60,
     's' => 1
     );

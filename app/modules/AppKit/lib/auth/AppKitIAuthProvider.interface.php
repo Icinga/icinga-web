@@ -38,9 +38,9 @@ interface AppKitIAuthProvider {
     const AUTH_MODE            = 'auth_mode';
     const AUTH_NAME            = 'name';
 
-    const MODE_DEFAULT			= 1;
-    const MODE_SILENT			= 2;
-    const MODE_BOTH				= 3;
+    const MODE_DEFAULT          = 1;
+    const MODE_SILENT           = 2;
+    const MODE_BOTH             = 3;
 
     /**
      * doAuthenticate

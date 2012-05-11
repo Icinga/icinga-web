@@ -2,8 +2,8 @@
 <template>
 
     <!--
-    	Meta description of the templates, that anybody
-    	knows what the template is doing
+        Meta description of the templates, that anybody
+        knows what the template is doing
     -->
     <meta>
         <parameter name="name">Tactical Overview iteration example</parameter>
@@ -11,46 +11,46 @@
         <parameter name="author">icinga-web developers</parameter>
     </meta>
 
-	<!--
-		data sources
-	-->
-	<datasources>
-		<datasource id="hosts">
-			<source_type>IcingaApi</source_type>
-			<target>IcingaApiConstants::TARGET_HOST</target>
-			<columns>HOST_NAME</columns>
-			<limit>10</limit>
-		</datasource>
-	</datasources>
+    <!--
+        data sources
+    -->
+    <datasources>
+        <datasource id="hosts">
+            <source_type>IcingaApi</source_type>
+            <target>IcingaApiConstants::TARGET_HOST</target>
+            <columns>HOST_NAME</columns>
+            <limit>10</limit>
+        </datasource>
+    </datasources>
 
-	<template_code>
+    <template_code>
 
-		<iteration_part>
-		<![CDATA[
-			<div>
-				<?php echo $count; ?>) <?php echo $HOST_NAME; ?><br />
-				<?php echo $t->link2Grid('New grid('. $HOST_NAME. ')', 'icinga-host-template', 'Newgrid'); ?>
-			</div>
-		]]>
-		</iteration_part>
+        <iteration_part>
+        <![CDATA[
+            <div>
+                <?php echo $count; ?>) <?php echo $HOST_NAME; ?><br />
+                <?php echo $t->link2Grid('New grid('. $HOST_NAME. ')', 'icinga-host-template', 'Newgrid'); ?>
+            </div>
+        ]]>
+        </iteration_part>
 
-		<iteration_template>
-		<![CDATA[
-			<h1>Iterate through datasource (<?php echo $ds_name; ?>)</h1>
+        <iteration_template>
+        <![CDATA[
+            <h1>Iterate through datasource (<?php echo $ds_name; ?>)</h1>
 
-			<?php echo $t->ds2Template($ds_name, 'iteration_part', 'count'); ?>
-		]]>
-		</iteration_template>
+            <?php echo $t->ds2Template($ds_name, 'iteration_part', 'count'); ?>
+        ]]>
+        </iteration_template>
 
-		<MAIN>
-		<![CDATA[
-			<?php echo $t->renderTemplate(
-				'iteration_template',
-				array('ds_name' => 'hosts')
-			); ?>
-		]]>
-		</MAIN>
+        <MAIN>
+        <![CDATA[
+            <?php echo $t->renderTemplate(
+                'iteration_template',
+                array('ds_name' => 'hosts')
+            ); ?>
+        ]]>
+        </MAIN>
 
-	</template_code>
+    </template_code>
 
 </template>

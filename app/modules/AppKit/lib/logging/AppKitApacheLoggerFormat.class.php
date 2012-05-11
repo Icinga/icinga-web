@@ -32,11 +32,11 @@ class AppKitApacheLoggerFormat extends AgaviLoggerLayout {
     const UNKNOWN_NAME = 'unknown';
 
     private static $severity_names = array(
-                                         AgaviLogger::DEBUG	=> 'debug',
-                                         AgaviLogger::ERROR	=> 'error',
-                                         AgaviLogger::FATAL	=> 'fatal',
-                                         AgaviLogger::INFO	=> 'info',
-                                         AgaviLogger::WARN	=> 'warn'
+                                         AgaviLogger::DEBUG => 'debug',
+                                         AgaviLogger::ERROR => 'error',
+                                         AgaviLogger::FATAL => 'fatal',
+                                         AgaviLogger::INFO  => 'info',
+                                         AgaviLogger::WARN  => 'warn'
                                      );
 
     public static function levenToString($level) {

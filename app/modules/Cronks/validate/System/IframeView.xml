@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.module_dir%/Web/config/validators.xml">
-	<ae:configuration>
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" parent="%core.module_dir%/Web/config/validators.xml">
+    <ae:configuration>
 
-		<validators>
+        <validators>
 
-			<validator class="string" name="parameterMap" required="false">
-				<arguments base="parameterMap[]">
-					<argument />
-				</arguments>
+            <validator class="string" name="parameterMap" required="false">
+                <arguments base="parameterMap[]">
+                    <argument />
+                </arguments>
 
-				<errors>
-					<error>Validation of parameterMap failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of parameterMap failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="url" required="true">
-				<argument>url</argument>
+            <validator class="string" name="url" required="true">
+                <argument>url</argument>
 
-				<errors>
-					<error>Validation of url failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of url failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="user" required="false">
-				<argument>user</argument>
+            <validator class="string" name="user" required="false">
+                <argument>user</argument>
 
-				<errors>
-					<error>Validation of user failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of user failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="password" required="false">
-				<argument>password</argument>
+            <validator class="string" name="password" required="false">
+                <argument>password</argument>
 
-				<errors>
-					<error>Validation of password failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of password failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="cmpid" required="false">
-				<argument>cmpid</argument>
+            <validator class="string" name="cmpid" required="false">
+                <argument>cmpid</argument>
 
-				<errors>
-					<error>Validation of htmlid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of htmlid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="parentid" required="false">
-				<argument>parentid</argument>
+            <validator class="string" name="parentid" required="false">
+                <argument>parentid</argument>
 
-				<errors>
-					<error>Validation of parentid failed!</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of parentid failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="stateuid" required="false">
-				<argument>stateuid</argument>
+            <validator class="string" name="stateuid" required="false">
+                <argument>stateuid</argument>
 
-				<errors>
-					<error>Validation of stateuid failed!</error>
-				</errors>
-			</validator>
-			
-			<!-- HEADER VALIDATORS -->
-			<validator class="string" name="http_referer" source="headers" required="false">
-				<argument>REFERER</argument>
-				
-				<errors>
-					<error>Could not validate HTTP_REFERER</error>
-				</errors>
-			</validator>
-			
-			<validator class="string" name="http_user_agent" source="headers" required="false">
-				<argument>USER_AGENT</argument>
-				
-				<errors>
-					<error>Could not validate HTTP_USER_AGENT</error>
-				</errors>
-			</validator>
+                <errors>
+                    <error>Validation of stateuid failed!</error>
+                </errors>
+            </validator>
+            
+            <!-- HEADER VALIDATORS -->
+            <validator class="string" name="http_referer" source="headers" required="false">
+                <argument>REFERER</argument>
+                
+                <errors>
+                    <error>Could not validate HTTP_REFERER</error>
+                </errors>
+            </validator>
+            
+            <validator class="string" name="http_user_agent" source="headers" required="false">
+                <argument>USER_AGENT</argument>
+                
+                <errors>
+                    <error>Could not validate HTTP_USER_AGENT</error>
+                </errors>
+            </validator>
 
-		</validators>
+        </validators>
 
-	</ae:configuration>
+    </ae:configuration>
 </ae:configurations>

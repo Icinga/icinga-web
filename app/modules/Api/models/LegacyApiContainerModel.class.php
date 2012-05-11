@@ -40,7 +40,7 @@ class Api_LegacyApiContainerModel extends IcingaWebBaseModel
      *
      * @var IcingaApiConnection
      */
-    private $apiData		= null;
+    private $apiData        = null;
 
     public function initialize(AgaviContext $c, array $p=array()) {
         parent::initialize($c, $p);

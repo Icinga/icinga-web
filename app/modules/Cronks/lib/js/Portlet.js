@@ -51,8 +51,8 @@ Ext.ux.Portlet = Ext.extend(Ext.Panel, {
         //2008.1.11 xm
         var createProxyProtoType=Ext.Element.prototype.createProxy;
         Ext.Element.prototype.createProxy=function(config){
-	        return Ext.DomHelper.append(this.dom, config, true);
-	    };
+            return Ext.DomHelper.append(this.dom, config, true);
+        };
 
         this.resizer = new Ext.Resizable(this.el, {
             animate: true,

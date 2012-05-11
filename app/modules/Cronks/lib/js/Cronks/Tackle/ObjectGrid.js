@@ -43,10 +43,10 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
     serviceInfoStore: null,
 
     constructor : function(config) {
-		this.id = Ext.id();
-		config = Ext.apply(config || {}, {
-			layout : 'fit'
-		});
+        this.id = Ext.id();
+        config = Ext.apply(config || {}, {
+            layout : 'fit'
+        });
 
         this.createDataHandler(config);
         config.tbar = new Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar({
@@ -56,7 +56,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
         this.updateFilter = config.tbar.updateFilter;
         this.getSVCFilter = config.tbar.getSVCFilter.createDelegate(config.tbar);
         Icinga.Cronks.Tackle.ObjectGrid.superclass.constructor.call(this, config);
-	},
+    },
 
     listeners: {
         rowclick: function(grid, idx, event ) {
@@ -67,7 +67,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
 
     
     createDataHandler: function(cfgRef) {
-		this.summaryStore = new Icinga.Api.RESTStore({
+        this.summaryStore = new Icinga.Api.RESTStore({
             target: 'service_status_summary',
             columns: [
                 'HOST_ID',
@@ -78,7 +78,7 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
             ]
             
         });
-		this.store = new Icinga.Api.RESTStore({
+        this.store = new Icinga.Api.RESTStore({
             target: 'host',
             limit: 50,
             offset: 0,
@@ -202,16 +202,16 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
         this.visibleServicePanels.length++;
     },
 
-	initComponent : function() {
-		
+    initComponent : function() {
+        
         this.on("render", function() {
             this.updateFilter();
         },this);
 
-		this.cm = new Ext.grid.ColumnModel({
-			columns : [
+        this.cm = new Ext.grid.ColumnModel({
+            columns : [
             {
-				dataIndex : 'HOST_CURRENT_STATE',
+                dataIndex : 'HOST_CURRENT_STATE',
                 columnWidth: 25,
                 width: 25,
                 resizable: false,
@@ -392,11 +392,11 @@ Icinga.Cronks.Tackle.ObjectGrid = Ext.extend(Ext.ux.grid.SmartUpdateGrid, {
                 menuDisabled: true,
                 width: 100
             }]
-		});
-		
-		Icinga.Cronks.Tackle.ObjectGrid.superclass.initComponent.call(this);
-	}
-	
+        });
+        
+        Icinga.Cronks.Tackle.ObjectGrid.superclass.initComponent.call(this);
+    }
+    
 });
 
 Ext.reg('cronks-tackle-objectgrid', Icinga.Cronks.Tackle.ObjectGrid);

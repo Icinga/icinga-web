@@ -42,10 +42,10 @@ class Cronks_System_ViewProc_MetaInformationSuccessView extends CronksBaseView {
             }
             
             return json_encode(array(
-                                   'template'	=> $template->getTemplateData(),
-                                   'fields'	=> $template->getFields(),
-                                   'keys'		=> $template->getFieldKeys(),
-                                   'params'	=> $rd->getParameters(),
+                                   'template'   => $template->getTemplateData(),
+                                   'fields' => $template->getFields(),
+                                   'keys'       => $template->getFieldKeys(),
+                                   'params' => $rd->getParameters(),
                                    'connections' => IcingaDoctrineDatabase::$icingaConnections
                                ));
         } catch (AppKitFileUtilException $e) {

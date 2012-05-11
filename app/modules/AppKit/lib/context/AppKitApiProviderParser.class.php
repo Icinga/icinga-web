@@ -55,12 +55,12 @@ class AppKitApiProviderParser  {
     * Fetches the Validation xml for the action/module combination and returns it as
     * an DOMDocument
     *
-    * @param	string	The module name
-    * @param	string	The action to get the validation xml for
-    * @return	AgaviXmlConfigDomDocument
+    * @param    string  The module name
+    * @param    string  The action to get the validation xml for
+    * @return   AgaviXmlConfigDomDocument
     *
-    * @author	Jannis Moßhammer<jannis.mosshammer@netways.de>
-    * @throws	AgaviConfigurationException 	when module or action does not exist
+    * @author   Jannis Moßhammer<jannis.mosshammer@netways.de>
+    * @throws   AgaviConfigurationException     when module or action does not exist
     */
     protected function getValidatorXMLForAction($module,$action) {
         // get Module path

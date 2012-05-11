@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
-	xmlns:icingaCommands_1_0="http://icinga.org/api/config/parts/icingacommands/1.0"
-	elementFormDefault="qualified"
-	targetNamespace="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
+    xmlns:icingaCommands_1_0="http://icinga.org/api/config/parts/icingacommands/1.0"
+    elementFormDefault="qualified"
+    targetNamespace="http://agavi.org/agavi/config/global/envelope/1.0"
 
    >
   <xs:import namespace="http://icinga.org/api/config/parts/icingacommands/1.0" 

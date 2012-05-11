@@ -28,20 +28,20 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
                                         self::AUTH_MODE => self::MODE_SILENT
                                     );
 
-    const DATASOURCE_NAME	= '_SERVER';
+    const DATASOURCE_NAME   = '_SERVER';
 
     private static $sources_list = array(
                                        '_SERVER'
                                    );
 
     private static $source_map = array(
-                                     'auth_name'	=> 'http_uservar',
-                                     'auth_type'	=> 'http_typevar'
+                                     'auth_name'    => 'http_uservar',
+                                     'auth_type'    => 'http_typevar'
                                  );
 
     private static $source_map_defaults = array(
-            'auth_name'	=> 'REMOTE_USER,PHP_AUTH_USER',
-            'auth_type'	=> 'AUTH_TYPE'
+            'auth_name' => 'REMOTE_USER,PHP_AUTH_USER',
+            'auth_type' => 'AUTH_TYPE'
                                           );
 
     private $auth_name = null;
@@ -69,11 +69,11 @@ class AppKit_Auth_Provider_HTTPBasicAuthenticationModel extends AppKitAuthProvid
 
     public function getUserdata($uid, $authid=false) {
         return array(
-                   'user_firstname'	=> $uid,
-                   'user_lastname'		=> $uid,
-                   'user_name'			=> $uid,
-                   'user_authsrc'		=> $this->getProviderName(),
-                   'user_disabled'		=> 0
+                   'user_firstname' => $uid,
+                   'user_lastname'      => $uid,
+                   'user_name'          => $uid,
+                   'user_authsrc'       => $this->getProviderName(),
+                   'user_disabled'      => 0
                );
     }
 

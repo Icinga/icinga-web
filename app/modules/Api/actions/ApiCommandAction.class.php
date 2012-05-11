@@ -34,8 +34,8 @@ class Api_ApiCommandAction extends IcingaApiBaseAction {
 
     public function executeWrite(AgaviRequestDataHolder $rd) {
         if (!$this->context->getUser()->isAuthenticated() || !$this->context->getUser()->hasCredential('icinga.user')) {
-	        return array('Api', 'GenericError');
-	    }
+            return array('Api', 'GenericError');
+        }
 
         $command = $rd->getParameter("command");
         

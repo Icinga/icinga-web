@@ -49,11 +49,11 @@ class AppKit_LogAdminModel extends AppKitBaseModel {
 
     public function getLoglevelMap() {
         return array(
-                   AgaviLogger::DEBUG	=> 'debug',
-                   AgaviLogger::ERROR	=> 'error',
-                   AgaviLogger::FATAL	=> 'fatal',
-                   AgaviLogger::INFO	=> 'info',
-                   AgaviLogger::WARN	=> 'warn',
+                   AgaviLogger::DEBUG   => 'debug',
+                   AgaviLogger::ERROR   => 'error',
+                   AgaviLogger::FATAL   => 'fatal',
+                   AgaviLogger::INFO    => 'info',
+                   AgaviLogger::WARN    => 'warn',
                );
     }
 

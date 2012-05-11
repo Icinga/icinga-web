@@ -1,185 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
-	<ae:configuration>
-		<cronks>
-			<!--
-				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-				Datagrids - [START]
-				++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-				Just some column portlets and statusmap
-			-->
-			<cronk name="gridHostgroupSummary">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Display hostgroup summary</ae:parameter>
-				<ae:parameter name="name">Hostgroups</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Dots</ae:parameter>
-				<ae:parameter name="position">300</ae:parameter>
-				<!-- <ae:parameter name="groupsonly">appkit_admin</ae:parameter> -->
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="gridServicegroupSummary">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Display service summary</ae:parameter>
-				<ae:parameter name="name">Servicegroups</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Applications</ae:parameter>
-				<ae:parameter name="position">310</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="gridHostView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Viewing host status in a grid</ae:parameter>
-				<ae:parameter name="name">HostStatus</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Computer</ae:parameter>
-				<ae:parameter name="position">100</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-host-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="gridHostHistoryView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Host status history information</ae:parameter>
-				<ae:parameter name="name">HostHistory</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Stats</ae:parameter>
-				<ae:parameter name="position">110</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-host-history-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="gridServiceView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Viewing service status in a grid</ae:parameter>
-				<ae:parameter name="name">ServiceStatus</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Stats2</ae:parameter>
-				<ae:parameter name="position">50</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-service-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-			
-			<cronk name="gridServiceHistoryView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Statushistory for services</ae:parameter>
-				<ae:parameter name="name">ServiceHistory</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Stats</ae:parameter>
-				<ae:parameter name="position">60</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-service-history-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-			
-			<cronk name="gridLogView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Display icinga process log</ae:parameter>
-				<ae:parameter name="name">LogView</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Info</ae:parameter>
-				<ae:parameter name="principalsonly">icinga.cronk.log</ae:parameter>
-				<ae:parameter name="position">500</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-log-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-		
+    <ae:configuration>
+        <cronks>
+            <!--
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                Datagrids - [START]
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+                Just some column portlets and statusmap
+            -->
+            <cronk name="gridHostgroupSummary">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display hostgroup summary</ae:parameter>
+                <ae:parameter name="name">Hostgroups</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Dots</ae:parameter>
+                <ae:parameter name="position">300</ae:parameter>
+                <!-- <ae:parameter name="groupsonly">appkit_admin</ae:parameter> -->
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-hostgroup-summary-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="gridServicegroupSummary">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display service summary</ae:parameter>
+                <ae:parameter name="name">Servicegroups</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Applications</ae:parameter>
+                <ae:parameter name="position">310</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-servicegroup-summary-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="gridHostView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Viewing host status in a grid</ae:parameter>
+                <ae:parameter name="name">HostStatus</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Computer</ae:parameter>
+                <ae:parameter name="position">100</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-host-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="gridHostHistoryView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Host status history information</ae:parameter>
+                <ae:parameter name="name">HostHistory</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Stats</ae:parameter>
+                <ae:parameter name="position">110</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-host-history-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="gridServiceView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Viewing service status in a grid</ae:parameter>
+                <ae:parameter name="name">ServiceStatus</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Stats2</ae:parameter>
+                <ae:parameter name="position">50</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-service-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            
+            <cronk name="gridServiceHistoryView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Statushistory for services</ae:parameter>
+                <ae:parameter name="name">ServiceHistory</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Stats</ae:parameter>
+                <ae:parameter name="position">60</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-service-history-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            
+            <cronk name="gridLogView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display icinga process log</ae:parameter>
+                <ae:parameter name="name">LogView</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Info</ae:parameter>
+                <ae:parameter name="principalsonly">icinga.cronk.log</ae:parameter>
+                <ae:parameter name="position">500</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-log-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+        
 
-			<cronk name="gridOpenProblemsView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Show summary of open problems</ae:parameter>
-				<ae:parameter name="name">Open problems</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Warning</ae:parameter>
-				<ae:parameter name="position">30</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-open-problems-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-    		<cronk name="gridUnhandledHostProblemsView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Show summary of unhandled host problems</ae:parameter>
-				<ae:parameter name="name">Unhandled host problems</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Warning</ae:parameter>
-				<ae:parameter name="position">20</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-unhandled-host-problems</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	  		<cronk name="gridUnhandledServiceProblemsView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Show summary of unhandled service problems</ae:parameter>
-				<ae:parameter name="name">Unhandled service problems</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Warning</ae:parameter>
-				<ae:parameter name="position">10</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-unhandled-service-problems</ae:parameter>
-				</ae:parameter>
-			</cronk>
-	
-			<cronk name="gridNotificationView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Display icinga notifications</ae:parameter>
-				<ae:parameter name="name">Notifications</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Bubble_1</ae:parameter>
-				<ae:parameter name="position">410</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-notification-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-			
-			<cronk name="gridDowntimeView">
-				<ae:parameter name="module">Cronks</ae:parameter>
-				<ae:parameter name="action">System.ViewProc</ae:parameter>
-				<ae:parameter name="hide">false</ae:parameter>
-				<ae:parameter name="description">Display icinga downtimes</ae:parameter>
-				<ae:parameter name="name">Downtimes</ae:parameter>
-				<ae:parameter name="categories">data</ae:parameter>
-				<ae:parameter name="image">cronks.Sleep</ae:parameter>
-				<ae:parameter name="position">400</ae:parameter>
-				<ae:parameter name="ae:parameter">
-					<ae:parameter name="template">icinga-downtime-template</ae:parameter>
-				</ae:parameter>
-			</cronk>
-			
-			<cronk name="gridInstanceStatus">
+            <cronk name="gridOpenProblemsView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Show summary of open problems</ae:parameter>
+                <ae:parameter name="name">Open problems</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Warning</ae:parameter>
+                <ae:parameter name="position">30</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-open-problems-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="gridUnhandledHostProblemsView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Show summary of unhandled host problems</ae:parameter>
+                <ae:parameter name="name">Unhandled host problems</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Warning</ae:parameter>
+                <ae:parameter name="position">20</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-unhandled-host-problems</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            <cronk name="gridUnhandledServiceProblemsView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Show summary of unhandled service problems</ae:parameter>
+                <ae:parameter name="name">Unhandled service problems</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Warning</ae:parameter>
+                <ae:parameter name="position">10</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-unhandled-service-problems</ae:parameter>
+                </ae:parameter>
+            </cronk>
+    
+            <cronk name="gridNotificationView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display icinga notifications</ae:parameter>
+                <ae:parameter name="name">Notifications</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Bubble_1</ae:parameter>
+                <ae:parameter name="position">410</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-notification-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            
+            <cronk name="gridDowntimeView">
+                <ae:parameter name="module">Cronks</ae:parameter>
+                <ae:parameter name="action">System.ViewProc</ae:parameter>
+                <ae:parameter name="hide">false</ae:parameter>
+                <ae:parameter name="description">Display icinga downtimes</ae:parameter>
+                <ae:parameter name="name">Downtimes</ae:parameter>
+                <ae:parameter name="categories">data</ae:parameter>
+                <ae:parameter name="image">cronks.Sleep</ae:parameter>
+                <ae:parameter name="position">400</ae:parameter>
+                <ae:parameter name="ae:parameter">
+                    <ae:parameter name="template">icinga-downtime-template</ae:parameter>
+                </ae:parameter>
+            </cronk>
+            
+            <cronk name="gridInstanceStatus">
                 <ae:parameter name="module">Cronks</ae:parameter>
                 <ae:parameter name="action">System.ViewProc</ae:parameter>
                 <ae:parameter name="hide">false</ae:parameter>
@@ -191,9 +191,9 @@
                 <ae:parameter name="ae:parameter">
                     <ae:parameter name="template">icinga-instance-template</ae:parameter>
                 </ae:parameter>
-			</cronk>
-			
-			<!-- Datagrids - [STOP] -->
-		</cronks>
-	</ae:configuration>
+            </cronk>
+            
+            <!-- Datagrids - [STOP] -->
+        </cronks>
+    </ae:configuration>
 </ae:configurations>

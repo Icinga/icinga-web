@@ -65,7 +65,7 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
                 target: 'comment',
                 columns: ['INSTANCE_NAME', 'COMMENT_ID', 'COMMENT_DATA', 'COMMENT_AUTHOR_NAME', 'COMMENT_TIME', 'COMMENT_OBJECT_ID', 'COMMENT_TYPE'],
                 listeners : {
-                	load : this.onStoreLoad.createDelegate(this)
+                    load : this.onStoreLoad.createDelegate(this)
                 }
             });
 
@@ -118,17 +118,17 @@ Ext.ns('Icinga.Cronks.Tackle.Comment');
         },
         
         onStoreLoad : function(store, records, options) {
-        	this.updateParentTitle(records.length);
+            this.updateParentTitle(records.length);
         },
         
         updateParentTitle : function(count) {
-        	if (this.parentCmp) {
-        		if (count > 0) {
-        			this.parentCmp.setTitle(String.format(_('Comments ({0})'), count));
-        		} else {
-        			this.parentCmp.setTitle(_('Comments'));
-        		}
-        	}
+            if (this.parentCmp) {
+                if (count > 0) {
+                    this.parentCmp.setTitle(String.format(_('Comments ({0})'), count));
+                } else {
+                    this.parentCmp.setTitle(_('Comments'));
+                }
+            }
         },
 
         onDeleteComment: function (renderer, grid, rowIndex, event) {

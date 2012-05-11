@@ -284,7 +284,7 @@ Cronk.util.CronkTabHelper = Ext.extend(Object, {
             if (crdata.crname.match(/^CUSTOM-/)) {
                 this.contextmenuSave.setVisible(true);
             } else {
-            	this.contextmenuSave.setVisible(false);
+                this.contextmenuSave.setVisible(false);
             }
         }
         

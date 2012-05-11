@@ -49,8 +49,8 @@ class NsmSession extends BaseNsmSession {
         parent::setUp();
 
         $options = array(
-                       'created' =>  array('name'	=> 'session_created'),
-                       'updated' =>  array('name'	=> 'session_modified'),
+                       'created' =>  array('name'   => 'session_created'),
+                       'updated' =>  array('name'   => 'session_modified'),
                    );
 
         $this->actAs('Timestampable', $options);

@@ -214,9 +214,9 @@ class IcingaStoreTargetModifierModel extends IcingaBaseModel implements IDataSto
     * @author Jannis Moßhammer <jannis.mosshammer@netways.de>
     **/
     public function setFields($fields, $useColumnAlias = false, $reset = false) {
-	if ($reset === true) {
-		$this->fields = array ();
-	}
+    if ($reset === true) {
+        $this->fields = array ();
+    }
         if (!is_array($fields)) {
             $fields = array($fields);
         }

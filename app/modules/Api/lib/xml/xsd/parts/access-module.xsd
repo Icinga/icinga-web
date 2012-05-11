@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
-	xmlns="http://icinga.org/api/config/parts/access/module/1.0"
-	targetNamespace="http://icinga.org/api/config/parts/access/module/1.0"
-	elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:envelope_1_0="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:types_1_0="http://agavi.org/agavi/config/global/types/1.0"
+    xmlns="http://icinga.org/api/config/parts/access/module/1.0"
+    targetNamespace="http://icinga.org/api/config/parts/access/module/1.0"
+    elementFormDefault="qualified"
 >
    
-	<xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
-	           schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_types.xsd" />
-	<xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
-	           schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_envelope.xsd" />
+    <xs:import namespace="http://agavi.org/agavi/config/global/types/1.0"
+               schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_types.xsd" />
+    <xs:import namespace="http://agavi.org/agavi/config/global/envelope/1.0"
+               schemaLocation="../../../../../../../lib/agavi/src/config/xsd/_envelope.xsd" />
 
     <xs:simpleType name="allowModuleOverwrites">
         <xs:restriction base="xs:boolean" />
@@ -140,12 +140,12 @@
     -->
     <xs:group name="configuration">
         <xs:all>
-			
-			<xs:element name="instances" type="instances" minOccurs="1" maxOccurs="1"></xs:element>	
-			<xs:element name="defaults" type="defaults" minOccurs="1" maxOccurs="1"></xs:element>	
-			<xs:element name="hosts" type="hosts" minOccurs="1" maxOccurs="1"></xs:element>	
-		</xs:all>
-	</xs:group>
+            
+            <xs:element name="instances" type="instances" minOccurs="1" maxOccurs="1"></xs:element> 
+            <xs:element name="defaults" type="defaults" minOccurs="1" maxOccurs="1"></xs:element>   
+            <xs:element name="hosts" type="hosts" minOccurs="1" maxOccurs="1"></xs:element> 
+        </xs:all>
+    </xs:group>
  
 
 </xs:schema>

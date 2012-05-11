@@ -27,9 +27,9 @@ class AppKit_ImageFileModel extends AppKitBaseModel
 
     private static $extensions = array('png', 'gif', 'jpg');
     private static $headers = array(
-                                  'png'	=> 'image/png',
-                                  'gif'	=> 'image/gif',
-                                  'jpg'	=> 'image/jpeg',
+                                  'png' => 'image/png',
+                                  'gif' => 'image/gif',
+                                  'jpg' => 'image/jpeg',
                               );
 
     private $image_string = null;

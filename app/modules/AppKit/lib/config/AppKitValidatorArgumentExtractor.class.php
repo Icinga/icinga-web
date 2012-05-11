@@ -24,7 +24,7 @@
 class AppKitValidatorArgumentExtractor {
     private $requestParams = array();
     static public $NsValidation = array("key"=>"val","ns"=>"http://agavi.org/agavi/config/parts/validators/1.0");
-    static public $NsEnvelope	= array("key"=>"ae","ns"=>"http://agavi.org/agavi/config/global/envelope/1.0");
+    static public $NsEnvelope   = array("key"=>"ae","ns"=>"http://agavi.org/agavi/config/global/envelope/1.0");
     private $currentDOM;
 
 

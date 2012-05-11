@@ -29,8 +29,8 @@
  */
 class Cronks_System_StaticContentModel extends CronksBaseModel {
 
-    private static $arrayNodes		= array('filter', 'filterchain');
-    private static $indexAttributes	= array('id', 'name');
+    private static $arrayNodes      = array('filter', 'filterchain');
+    private static $indexAttributes = array('id', 'name');
 
     private $api = null;
 
@@ -146,9 +146,9 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
     /**
      * checks whether XML node for child nodes
-     * @param	DOMElement		$element			element to check for child nodes
-     * @return	boolean								true if element has children otherwise false
-     * @author	Christian Doebler <christian.doebler@netways.de>
+     * @param   DOMElement      $element            element to check for child nodes
+     * @return  boolean                             true if element has children otherwise false
+     * @author  Christian Doebler <christian.doebler@netways.de>
      */
     private function hasChildren(DOMElement &$element) {
         $hasChildren = false;
@@ -187,10 +187,10 @@ class Cronks_System_StaticContentModel extends CronksBaseModel {
 
         if ($this->templateObject === null) {
             $this->templateObject = $this->getContext()->getModel('System.StaticContentTemplate', 'Cronks', array(
-                                        'templates'		=> $this->getTemplates(),
-                                        'datasources'	=> $this->getDatasources(),
-                                        'chain'			=> $this->getChain(),
-                                        'rparam'		=> $this->getParameter('rparam', array())
+                                        'templates'     => $this->getTemplates(),
+                                        'datasources'   => $this->getDatasources(),
+                                        'chain'         => $this->getChain(),
+                                        'rparam'        => $this->getParameter('rparam', array())
                                     ));
         }
 

@@ -138,7 +138,7 @@ class AppKit_DataProvider_GroupProviderAction extends AppKitBaseAction {
                 
                 return $this->getDefaultViewName();
 
-            } else {	//return list of all roles if no id is provided
+            } else {    //return list of all roles if no id is provided
 
                 if ($start === false || $limit === false) {
                    

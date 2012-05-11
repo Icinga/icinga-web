@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/Web/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Web/config/validators.xml"
 >
-	<ae:configuration>
-		
-		<validators>
+    <ae:configuration>
+        
+        <validators>
 
-			<validator class="string" name="src_id" required="true">
-				<argument>src_id</argument>
-				<errors>
-					<error>Validation of source id failed!</error>
-				</errors>
-			</validator>
+            <validator class="string" name="src_id" required="true">
+                <argument>src_id</argument>
+                <errors>
+                    <error>Validation of source id failed!</error>
+                </errors>
+            </validator>
 
-			<validator class="string" name="filter" required="false">
-				<arguments base="filter[]">
-					<argument/>
-				</arguments>
-				<errors>
-					<error>Validation of filter failed!</error>
-				</errors>
-			</validator>
+            <validator class="string" name="filter" required="false">
+                <arguments base="filter[]">
+                    <argument/>
+                </arguments>
+                <errors>
+                    <error>Validation of filter failed!</error>
+                </errors>
+            </validator>
 
-		</validators>
-		
-	</ae:configuration>
+        </validators>
+        
+    </ae:configuration>
 </ae:configurations>

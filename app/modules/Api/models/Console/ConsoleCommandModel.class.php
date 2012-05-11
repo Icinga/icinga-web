@@ -113,7 +113,7 @@ class Api_Console_ConsoleCommandModel extends IcingaApiBaseModel implements Icin
 
         return $this->output;
     }
-    public function getReturnCode()	{
+    public function getReturnCode() {
         return intval($this->returnCode);
     }
 

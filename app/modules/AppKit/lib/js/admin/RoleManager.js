@@ -36,7 +36,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
 
             baseParams: {
                 hideDisabled: false,
-		oldBehaviour : 0
+        oldBehaviour : 0
             },
             proxy: new Ext.data.HttpProxy({
                 api: {
@@ -147,7 +147,7 @@ AppKit.Admin.RoleManager = Ext.extend(Ext.Container, {
                     scope:this
                 }],
                 width: '30%'
-            }]	
+            }]  
         });
     }
 });

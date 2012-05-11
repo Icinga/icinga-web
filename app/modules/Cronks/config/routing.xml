@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
-	<ae:configuration context="web">
-		<routes>
+    xmlns="http://icinga.org/appkit/config/parts/routing/1.0">
+    <ae:configuration context="web">
+        <routes>
 
-			<!-- * Cronk module routes -->
-			<route pattern="^/cronks" name=".cronks" output_type="simple"
-				module="Cronks">
+            <!-- * Cronk module routes -->
+            <route pattern="^/cronks" name=".cronks" output_type="simple"
+                module="Cronks">
 
-				<!-- Cronk loader -->
-				<route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))"
-					action="System.CronkLoader" />
+                <!-- Cronk loader -->
+                <route name=".crloader" pattern="^/cloader/(cronk:([\w\.\-\_\s]+))"
+                    action="System.CronkLoader" />
 
-				<!-- Cronk listing -->
-				<route name=".crlisting.json" pattern="^/clisting/json"
-					output_type="json" action="System.CronkListing" />
+                <!-- Cronk listing -->
+                <route name=".crlisting.json" pattern="^/clisting/json"
+                    output_type="json" action="System.CronkListing" />
 
-				<!-- Searchbox datasource -->
-				<route name=".objectsearch.json" pattern="^/objectSearch/json"
-					output_type="json" action="System.ObjectSearch" />
+                <!-- Searchbox datasource -->
+                <route name=".objectsearch.json" pattern="^/objectSearch/json"
+                    output_type="json" action="System.ObjectSearch" />
 
-				<!-- Statussummary -->
-				<route name=".statusSummary.json" pattern="^/statusSummary/json"
-					output_type="json" action="System.StatusSummary" />
+                <!-- Statussummary -->
+                <route name=".statusSummary.json" pattern="^/statusSummary/json"
+                    output_type="json" action="System.StatusSummary" />
 
-				<!-- Status overall json provider -->
-				<route name=".statusOverall.json" pattern="^/statusOverall/json"
-					output_type="json" action="System.StatusOverall" />
+                <!-- Status overall json provider -->
+                <route name=".statusOverall.json" pattern="^/statusOverall/json"
+                    output_type="json" action="System.StatusOverall" />
 
-				<!-- JIT Status map -->
-				<route name=".statusMap.json" pattern="^/statusMap/json"
-					output_type="json" action="System.StatusMap" />
+                <!-- JIT Status map -->
+                <route name=".statusMap.json" pattern="^/statusMap/json"
+                    output_type="json" action="System.StatusMap" />
 
-				<!-- Content of the tactical overviews -->
-				<route name=".staticContent.content"
-					pattern="^/staticContent/(template:([\w\.\-\_\s]+))/content"
-					output_type="simple" action="System.StaticContent" />
+                <!-- Content of the tactical overviews -->
+                <route name=".staticContent.content"
+                    pattern="^/staticContent/(template:([\w\.\-\_\s]+))/content"
+                    output_type="simple" action="System.StaticContent" />
 
-				<!-- Monitoring performance data -->
-				<route name=".monitorPerformance.json" pattern="^/monitorPerformance/json"
-					output_type="json" action="System.MonitorPerformance" />
+                <!-- Monitoring performance data -->
+                <route name=".monitorPerformance.json" pattern="^/monitorPerformance/json"
+                    output_type="json" action="System.MonitorPerformance" />
 
-				<!-- Source of the grid processor -->
-				<route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
-					<route name=".json" pattern="^/json" output_type="json"
-						action="System.ViewProc">
-						<route name=".metaInfo" pattern="^/inf"
-							action="System.ViewProc.MetaInformation" />
-					</route>
-				</route>
+                <!-- Source of the grid processor -->
+                <route name=".viewProc" pattern="^/viewproc/(template:([\w\.\-\_\s]+))">
+                    <route name=".json" pattern="^/json" output_type="json"
+                        action="System.ViewProc">
+                        <route name=".metaInfo" pattern="^/inf"
+                            action="System.ViewProc.MetaInformation" />
+                    </route>
+                </route>
 
-				<!-- Commanddispatcher json interface -->
-				<route name=".commandProc" pattern="^/commandproc/(command:([\w_]+))/json"
-					output_type="json">
-					<route name=".metaInfo" pattern="^/inf"
-						action="System.ViewProc.CommandMetaInformation" />
-					<route name=".send" pattern="^/send" action="System.ViewProc.SendCommand" />
-				</route>
+                <!-- Commanddispatcher json interface -->
+                <route name=".commandProc" pattern="^/commandproc/(command:([\w_]+))/json"
+                    output_type="json">
+                    <route name=".metaInfo" pattern="^/inf"
+                        action="System.ViewProc.CommandMetaInformation" />
+                    <route name=".send" pattern="^/send" action="System.ViewProc.SendCommand" />
+                </route>
 
-				<!-- Provider -->
-				<route name=".provider" pattern="^/provider" output_type="json">
-					<route name=".cronks" pattern="^/cronks" action="Provider.Cronks" />
-					<route name=".categories" pattern="^/categories" action="Provider.Categories" />
-					<route name=".combined" pattern="^/combined" action="Provider.Combined" />
-				</route>
+                <!-- Provider -->
+                <route name=".provider" pattern="^/provider" output_type="json">
+                    <route name=".cronks" pattern="^/cronks" action="Provider.Cronks" />
+                    <route name=".categories" pattern="^/categories" action="Provider.Categories" />
+                    <route name=".combined" pattern="^/combined" action="Provider.Combined" />
+                </route>
 
-			</route>
-			<!-- END: Cronk -->
+            </route>
+            <!-- END: Cronk -->
 
-		</routes>
-	</ae:configuration>
+        </routes>
+    </ae:configuration>
 </ae:configurations>

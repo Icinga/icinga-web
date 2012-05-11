@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations
-	xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
-	xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
-	parent="%core.module_dir%/Web/config/validators.xml"
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Web/config/validators.xml"
 >
-	<ae:configuration>
-		<validators method="write">
-			<validator name="action" class="inarray">
-				<arguments base="action" />
-				<ae:parameters>
-					<ae:parameter name="type">string</ae:parameter>
-					<ae:parameter name="case">true</ae:parameter>
-					<ae:parameter name="values">
-						<ae:parameter>shutdown</ae:parameter>
-						<ae:parameter>restart</ae:parameter>
-					</ae:parameter>
-				</ae:parameters>
-			</validator>
-			<validator name="instance" class="string">
-				<arguments base="instance" />
-			</validator>
-		</validators>
-	</ae:configuration>
+    <ae:configuration>
+        <validators method="write">
+            <validator name="action" class="inarray">
+                <arguments base="action" />
+                <ae:parameters>
+                    <ae:parameter name="type">string</ae:parameter>
+                    <ae:parameter name="case">true</ae:parameter>
+                    <ae:parameter name="values">
+                        <ae:parameter>shutdown</ae:parameter>
+                        <ae:parameter>restart</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </validator>
+            <validator name="instance" class="string">
+                <arguments base="instance" />
+            </validator>
+        </validators>
+    </ae:configuration>
 
-</ae:configurations>	
+</ae:configurations>    

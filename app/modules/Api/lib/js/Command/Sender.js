@@ -35,9 +35,9 @@ Ext.ns('Icinga.Api.Command');
         autoReset: true,
         
         recordTargetMap : {
-        	HOST_NAME : 'host',
-        	SERVICE_NAME : 'service',
-        	INSTANCE_NAME : 'instance'
+            HOST_NAME : 'host',
+            SERVICE_NAME : 'service',
+            INSTANCE_NAME : 'instance'
         },
 
         constructor: function (config) {
@@ -93,30 +93,30 @@ Ext.ns('Icinga.Api.Command');
          * target values
          */
         prepareTargets : function(targets) {
-        	var outTargets = [];
-        	
-        	Ext.each(targets, function(o, index) {
-        		// Hack to detect a record
-        		if (Ext.isObject(o) && Ext.isObject(o.data)) {
-        			var tmp = {};
-        			Ext.iterate(this.recordTargetMap, function(k, v) {
-        				if (Ext.isEmpty(o.data[k]) === false) {
-        					tmp[v] = o.data[k];
-        				}
-        			}, this);
-        			outTargets.push(tmp);
-        		} else {
-        			outTargets.push(o);
-        		}
-        	}, this);
-        	
-        	return outTargets;
+            var outTargets = [];
+            
+            Ext.each(targets, function(o, index) {
+                // Hack to detect a record
+                if (Ext.isObject(o) && Ext.isObject(o.data)) {
+                    var tmp = {};
+                    Ext.iterate(this.recordTargetMap, function(k, v) {
+                        if (Ext.isEmpty(o.data[k]) === false) {
+                            tmp[v] = o.data[k];
+                        }
+                    }, this);
+                    outTargets.push(tmp);
+                } else {
+                    outTargets.push(o);
+                }
+            }, this);
+            
+            return outTargets;
         },
         
         send: function () {
-        	
-        	var targets = this.prepareTargets(this.targets);
-        	
+            
+            var targets = this.prepareTargets(this.targets);
+            
             var data = {
                 command: this.command,
                 target: targets,

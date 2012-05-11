@@ -25,8 +25,8 @@
 Cronk.util.initEnvironment(<?php CronksRequestUtil::echoJsonString($rd); ?>, function() {
     
     var statusmap = new Icinga.Cronks.StatusMap.Cronk({
-    	url: "<?php echo $ro->gen('modules.cronks.statusMap.json'); ?>",
-    	refreshTime : "<?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>"
+        url: "<?php echo $ro->gen('modules.cronks.statusMap.json'); ?>",
+        refreshTime : "<?php echo $us->getPrefVal('org.icinga.status.refreshTime', 60); ?>"
     });
 
 //    var map = new Icinga.Cronks.StatusMap.RGraph({

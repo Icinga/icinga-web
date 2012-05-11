@@ -32,7 +32,7 @@ class IcingaDataServicegroupPrincipalTarget extends IcingaDataPrincipalTarget {
         $this->setDefaultTarget('servicegroup');
 
         $this->setFields(array(
-                             'servicegroup'	=> 'The sql part of a servicegroup name'
+                             'servicegroup' => 'The sql part of a servicegroup name'
                          ));
 
         $this->setApiMappingFields(array(

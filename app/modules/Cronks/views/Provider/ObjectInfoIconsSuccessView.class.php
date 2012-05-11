@@ -23,11 +23,11 @@
 
 
 class Cronks_Provider_ObjectInfoIconsSuccessView extends CronksBaseView {
-	public function executeHtml(AgaviRequestDataHolder $rd) {
-		$this->setupHtml($rd);
-		
-		$this->setAttribute('_title', 'Provider.ObjectInfoIcons');
-	}
+    public function executeHtml(AgaviRequestDataHolder $rd) {
+        $this->setupHtml($rd);
+        
+        $this->setAttribute('_title', 'Provider.ObjectInfoIcons');
+    }
     
     public function executeJson(AgaviRequestDataHolder $rd) {
         

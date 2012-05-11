@@ -54,8 +54,8 @@ class NsmUserPreference extends BaseNsmUserPreference {
         parent::setUp();
 
         $this->actAs('Timestampable', array(
-                         'created' =>  array('name'	=> 'upref_created'),
-                         'updated' =>  array('name'	=> 'upref_modified'),
+                         'created' =>  array('name' => 'upref_created'),
+                         'updated' =>  array('name' => 'upref_modified'),
                      ));
     }
 

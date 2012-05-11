@@ -35,7 +35,7 @@ class AppKit_Ext_ApplicationStateSuccessView extends AppKitBaseView {
     public function executeJavascript(AgaviRequestDataHolder $rd) {
 
         $out = array(
-                   'data'	=> ''
+                   'data'   => ''
                );
 
         $cmd = $rd->getParameter('cmd', 'read');
@@ -79,30 +79,30 @@ class AppKit_Ext_ApplicationStateSuccessView extends AppKitBaseView {
 
         return json_encode($out);
 
-        //		$data = array ();
-        //		$cdata = '';
+        //      $data = array ();
+        //      $cdata = '';
         //
-        //		if ($this->getContext()->getUser()->isAuthenticated()) {
+        //      if ($this->getContext()->getUser()->isAuthenticated()) {
         //
-        //			$user = $this->getContext()->getUser();
+        //          $user = $this->getContext()->getUser();
         //
-        //			// To debug some session/cookie/user problems
-        //			$cdata .= sprintf('// User: %s (id=%d)', $user->getNsmUser()->user_name, $user->getNsmUser()->user_id). chr(10)
-        //			. sprintf('// Tstamp: %s', $this->getContext()->getTranslationManager()->_d(time())). chr(10)
-        //			. chr(10);
+        //          // To debug some session/cookie/user problems
+        //          $cdata .= sprintf('// User: %s (id=%d)', $user->getNsmUser()->user_name, $user->getNsmUser()->user_id). chr(10)
+        //          . sprintf('// Tstamp: %s', $this->getContext()->getTranslationManager()->_d(time())). chr(10)
+        //          . chr(10);
         //
-        //			$data = $this->getContext()->getUser()->getPrefVal(AppKitExtApplicationStateFilter::DATA_NAMESPACE, null, true);
+        //          $data = $this->getContext()->getUser()->getPrefVal(AppKitExtApplicationStateFilter::DATA_NAMESPACE, null, true);
         //
-        //			if ($data !== null) {
-        //				$data = unserialize(base64_decode($data));
-        //			}
-        //		}
+        //          if ($data !== null) {
+        //              $data = unserialize(base64_decode($data));
+        //          }
+        //      }
         //
-        //		return sprintf(
-        //			'%sExt.onReady(function() {'. "\n"
-        //			. "\t". 'AppKit.Ext.setAppState(%s);'. "\n"
-        //			. '});'. "\n", $cdata, json_encode($data)
-        //		);
+        //      return sprintf(
+        //          '%sExt.onReady(function() {'. "\n"
+        //          . "\t". 'AppKit.Ext.setAppState(%s);'. "\n"
+        //          . '});'. "\n", $cdata, json_encode($data)
+        //      );
 
     }
 }

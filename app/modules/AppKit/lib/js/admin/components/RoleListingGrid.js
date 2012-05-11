@@ -34,34 +34,34 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
     },
     
     initComponent: function() {
-    	this.bbar = [];
-    	
-    	AppKit.Admin.Components.RoleListingGrid.superclass.initComponent.call(this);
-    	
-    	this.counterLabel = this.getBottomToolbar().add({
-    		xtype : 'tbtext',
-    		tpl: new Ext.Template(_('{0} roles loaded.'))
-    	});
-    	
-    	this.store.on('load', function(store, records, o) {
-    		this.counterLabel.update([store.getCount()]);
-    	}, this);
-    	
-    	var model = this.getSelectionModel();
-    	if (model) {
-    	    /*
-    	     * Before this was bound to rowclick event. If we trigger injected selection
-    	     * rowclick was never fired, bind to rowselect is the better choice I think
-    	     */
-    	    model.on('rowselect', function(sm, rowIndex, r) {
-    	        var id = this.getStore().getAt(rowIndex).get("id");
+        this.bbar = [];
+        
+        AppKit.Admin.Components.RoleListingGrid.superclass.initComponent.call(this);
+        
+        this.counterLabel = this.getBottomToolbar().add({
+            xtype : 'tbtext',
+            tpl: new Ext.Template(_('{0} roles loaded.'))
+        });
+        
+        this.store.on('load', function(store, records, o) {
+            this.counterLabel.update([store.getCount()]);
+        }, this);
+        
+        var model = this.getSelectionModel();
+        if (model) {
+            /*
+             * Before this was bound to rowclick event. If we trigger injected selection
+             * rowclick was never fired, bind to rowselect is the better choice I think
+             */
+            model.on('rowselect', function(sm, rowIndex, r) {
+                var id = this.getStore().getAt(rowIndex).get("id");
                 Ext.getCmp('roleEditor').setDisabled(false);
                 Ext.getCmp('btn-save-group').setText(_('Save'));
                 Ext.getCmp('btn-save-group').setIconClass('icinga-icon-disk');
                 Ext.getCmp('progressbar-field').setValue();
                 AppKit.Admin.RoleEditForm.bindRole(id, this.roleProviderURI);
-    	    }, this);
-    	}
+            }, this);
+        }
     },
     
     deleteSelected: function() {
@@ -99,9 +99,9 @@ AppKit.Admin.Components.RoleListingGrid = Ext.extend(Ext.grid.GridPanel,{
             scope:this,
             text: 'Refresh',
             handler: function(c) {
-            	if (!Ext.isEmpty(c.ownerCt.ownerCt.store) && "reload" in c.ownerCt.ownerCt.store) {
+                if (!Ext.isEmpty(c.ownerCt.ownerCt.store) && "reload" in c.ownerCt.ownerCt.store) {
                     c.ownerCt.ownerCt.store.reload();
-            	}
+                }
             }
 
         },{

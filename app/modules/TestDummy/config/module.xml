@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
-	<ae:configuration>
-		
-		<module enabled="true">
-			<settings>
-				<setting name="title">TestDummy Module</setting>
-				<setting name="version">1.0</setting>
+    <ae:configuration>
+        
+        <module enabled="true">
+            <settings>
+                <setting name="title">TestDummy Module</setting>
+                <setting name="version">1.0</setting>
 
-				<setting name="authors">
-					<ae:parameter name="joe.cool@peanuts.com">Snoopy</ae:parameter>
-				</setting>
-				<setting name="homepage">http://www.icinga.org</setting>
-				<setting name="update_url" />
-				<setting name="description">TestModule to test module handling</setting>
+                <setting name="authors">
+                    <ae:parameter name="joe.cool@peanuts.com">Snoopy</ae:parameter>
+                </setting>
+                <setting name="homepage">http://www.icinga.org</setting>
+                <setting name="update_url" />
+                <setting name="description">TestModule to test module handling</setting>
 
-				<!-- 
-					Adding module specific routing configuration
-				-->
-				<setting name="agavi.include.routing">
-					<ae:parameter>%core.module_dir%/TestDummy/config/routing.xml</ae:parameter>
-				</setting>
-				
-				<!-- 
-					Adding module related databases
-				-->
-				<setting name="agavi.include.databases">
-					<ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
-				</setting>
-				
-				<!-- 
-					Adding module specific cronks
-				-->
-				<setting name="agavi.include.cronks">
-					<ae:parameter>%core.module_dir%/TestDummy/config/cronks.xml</ae:parameter>
-				</setting>
+                <!-- 
+                    Adding module specific routing configuration
+                -->
+                <setting name="agavi.include.routing">
+                    <ae:parameter>%core.module_dir%/TestDummy/config/routing.xml</ae:parameter>
+                </setting>
+                
+                <!-- 
+                    Adding module related databases
+                -->
+                <setting name="agavi.include.databases">
+                    <ae:parameter>%core.module_dir%/TestDummy/config/databases.xml</ae:parameter>
+                </setting>
+                
+                <!-- 
+                    Adding module specific cronks
+                -->
+                <setting name="agavi.include.cronks">
+                    <ae:parameter>%core.module_dir%/TestDummy/config/cronks.xml</ae:parameter>
+                </setting>
 
-				<setting name="agavi.include.translation">
-					<ae:parameter>%core.module_dir%/TestDummy/config/translation.xml</ae:parameter>
-				</setting>
+                <setting name="agavi.include.translation">
+                    <ae:parameter>%core.module_dir%/TestDummy/config/translation.xml</ae:parameter>
+                </setting>
 
-			</settings>
-		</module>
-		
-	</ae:configuration>
+            </settings>
+        </module>
+        
+    </ae:configuration>
 </ae:configurations>

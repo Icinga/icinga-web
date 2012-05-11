@@ -30,72 +30,72 @@
  */
 class IcingaConstantResolver {
 
-    const TEXT_NOT_FOUND	= '(null)';
+    const TEXT_NOT_FOUND    = '(null)';
 
     static private $state_type = array(
-                                     0	=> 'SOFT',
-                                     1	=> 'HARD',
+                                     0  => 'SOFT',
+                                     1  => 'HARD',
                                  );
 
     static private $active_check_type = array(
-                                            0	=> 'ACTIVE',
-                                            1	=> 'PASSIVE'
+                                            0   => 'ACTIVE',
+                                            1   => 'PASSIVE'
                                         );
 
     static private $boolean_states = array(
-                                         0	=> 'No',
-                                         1	=> 'Yes',
+                                         0  => 'No',
+                                         1  => 'Yes',
                                      );
 
     static private $notification_types = array(
-            0	=> 'Host',
-            1	=> 'Service'
+            0   => 'Host',
+            1   => 'Service'
                                          );
 
     static private $logentry_types = array(
-                                         IcingaConstants::NSLOG_RUNTIME_ERROR			=> "runtime error",
-                                         IcingaConstants::NSLOG_RUNTIME_WARNING			=> "runtime warning",
-                                         IcingaConstants::NSLOG_VERIFICATION_ERROR		=> "verify error",
-                                         IcingaConstants::NSLOG_VERIFICATION_WARNING		=> "verify warning",
-                                         IcingaConstants::NSLOG_CONFIG_ERROR				=> "config error",
-                                         IcingaConstants::NSLOG_CONFIG_WARNING			=> "config warning",
-                                         IcingaConstants::NSLOG_PROCESS_INFO				=> "process info",
-                                         IcingaConstants::NSLOG_EVENT_HANDLER			=> "event handler",
-                                         IcingaConstants::NSLOG_EXTERNAL_COMMAND			=> "external command",
-                                         IcingaConstants::NSLOG_HOST_UP					=> "host up",
-                                         IcingaConstants::NSLOG_HOST_DOWN				=> "host down",
-                                         IcingaConstants::NSLOG_HOST_UNREACHABLE			=> "host unreachable",
-                                         IcingaConstants::NSLOG_SERVICE_OK				=> "service OK",
-                                         IcingaConstants::NSLOG_SERVICE_UNKNOWN			=> "service unknown",
-                                         IcingaConstants::NSLOG_SERVICE_WARNING			=> "service warning",
-                                         IcingaConstants::NSLOG_SERVICE_CRITICAL			=> "service critical",
-                                         IcingaConstants::NSLOG_PASSIVE_CHECK			=> "passive check",
-                                         IcingaConstants::NSLOG_INFO_MESSAGE				=> "info message",
-                                         IcingaConstants::NSLOG_HOST_NOTIFICATION		=> "host notification",
-                                         IcingaConstants::NSLOG_SERVICE_NOTIFICATION		=> "service notification"
+                                         IcingaConstants::NSLOG_RUNTIME_ERROR           => "runtime error",
+                                         IcingaConstants::NSLOG_RUNTIME_WARNING         => "runtime warning",
+                                         IcingaConstants::NSLOG_VERIFICATION_ERROR      => "verify error",
+                                         IcingaConstants::NSLOG_VERIFICATION_WARNING        => "verify warning",
+                                         IcingaConstants::NSLOG_CONFIG_ERROR                => "config error",
+                                         IcingaConstants::NSLOG_CONFIG_WARNING          => "config warning",
+                                         IcingaConstants::NSLOG_PROCESS_INFO                => "process info",
+                                         IcingaConstants::NSLOG_EVENT_HANDLER           => "event handler",
+                                         IcingaConstants::NSLOG_EXTERNAL_COMMAND            => "external command",
+                                         IcingaConstants::NSLOG_HOST_UP                 => "host up",
+                                         IcingaConstants::NSLOG_HOST_DOWN               => "host down",
+                                         IcingaConstants::NSLOG_HOST_UNREACHABLE            => "host unreachable",
+                                         IcingaConstants::NSLOG_SERVICE_OK              => "service OK",
+                                         IcingaConstants::NSLOG_SERVICE_UNKNOWN         => "service unknown",
+                                         IcingaConstants::NSLOG_SERVICE_WARNING         => "service warning",
+                                         IcingaConstants::NSLOG_SERVICE_CRITICAL            => "service critical",
+                                         IcingaConstants::NSLOG_PASSIVE_CHECK           => "passive check",
+                                         IcingaConstants::NSLOG_INFO_MESSAGE                => "info message",
+                                         IcingaConstants::NSLOG_HOST_NOTIFICATION       => "host notification",
+                                         IcingaConstants::NSLOG_SERVICE_NOTIFICATION        => "service notification"
                                      );
 
     static private $logentry_type_icons = array(
-            IcingaConstants::NSLOG_RUNTIME_ERROR			=> "icons.gear--exclamation",
-            IcingaConstants::NSLOG_RUNTIME_WARNING			=> "icons.gear",
-            IcingaConstants::NSLOG_VERIFICATION_ERROR		=> "icons.flask--exclamation",
-            IcingaConstants::NSLOG_VERIFICATION_WARNING		=> "icons.flask",
-            IcingaConstants::NSLOG_CONFIG_ERROR				=> "icons.folder--exclamation",
-            IcingaConstants::NSLOG_CONFIG_WARNING			=> "icons.folder",
-            IcingaConstants::NSLOG_PROCESS_INFO				=> "icons.information",
-            IcingaConstants::NSLOG_EVENT_HANDLER			=> "icons.document-attribute-e",
-            IcingaConstants::NSLOG_EXTERNAL_COMMAND			=> "icons.drill--arrow",
-            IcingaConstants::NSLOG_HOST_UP					=> "icons.server",
-            IcingaConstants::NSLOG_HOST_DOWN				=> "icons.server--exclamation",
-            IcingaConstants::NSLOG_HOST_UNREACHABLE			=> "icons.server--exclamation",
-            IcingaConstants::NSLOG_SERVICE_OK				=> "icons.system-monitor",
-            IcingaConstants::NSLOG_SERVICE_UNKNOWN			=> "icons.system-monitor--exclamation",
-            IcingaConstants::NSLOG_SERVICE_WARNING			=> "icons.system-monitor--exclamation",
-            IcingaConstants::NSLOG_SERVICE_CRITICAL			=> "icons.system-monitor--exclamation",
-            IcingaConstants::NSLOG_PASSIVE_CHECK			=> "icons.socket--arrow",
-            IcingaConstants::NSLOG_INFO_MESSAGE				=> "icons.newspaper",
-            IcingaConstants::NSLOG_HOST_NOTIFICATION		=> "icons.bell",
-            IcingaConstants::NSLOG_SERVICE_NOTIFICATION		=> "icons.bell"
+            IcingaConstants::NSLOG_RUNTIME_ERROR            => "icons.gear--exclamation",
+            IcingaConstants::NSLOG_RUNTIME_WARNING          => "icons.gear",
+            IcingaConstants::NSLOG_VERIFICATION_ERROR       => "icons.flask--exclamation",
+            IcingaConstants::NSLOG_VERIFICATION_WARNING     => "icons.flask",
+            IcingaConstants::NSLOG_CONFIG_ERROR             => "icons.folder--exclamation",
+            IcingaConstants::NSLOG_CONFIG_WARNING           => "icons.folder",
+            IcingaConstants::NSLOG_PROCESS_INFO             => "icons.information",
+            IcingaConstants::NSLOG_EVENT_HANDLER            => "icons.document-attribute-e",
+            IcingaConstants::NSLOG_EXTERNAL_COMMAND         => "icons.drill--arrow",
+            IcingaConstants::NSLOG_HOST_UP                  => "icons.server",
+            IcingaConstants::NSLOG_HOST_DOWN                => "icons.server--exclamation",
+            IcingaConstants::NSLOG_HOST_UNREACHABLE         => "icons.server--exclamation",
+            IcingaConstants::NSLOG_SERVICE_OK               => "icons.system-monitor",
+            IcingaConstants::NSLOG_SERVICE_UNKNOWN          => "icons.system-monitor--exclamation",
+            IcingaConstants::NSLOG_SERVICE_WARNING          => "icons.system-monitor--exclamation",
+            IcingaConstants::NSLOG_SERVICE_CRITICAL         => "icons.system-monitor--exclamation",
+            IcingaConstants::NSLOG_PASSIVE_CHECK            => "icons.socket--arrow",
+            IcingaConstants::NSLOG_INFO_MESSAGE             => "icons.newspaper",
+            IcingaConstants::NSLOG_HOST_NOTIFICATION        => "icons.bell",
+            IcingaConstants::NSLOG_SERVICE_NOTIFICATION     => "icons.bell"
                                           );
 
     /**

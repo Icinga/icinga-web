@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/module/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     <ae:configuration>
-		
-		<module enabled="true">
-			<settings>
-				<setting name="title">Web Module</setting>
-				<setting name="version">1.0</setting>
+        
+        <module enabled="true">
+            <settings>
+                <setting name="title">Web Module</setting>
+                <setting name="version">1.0</setting>
 
                 <setting name="agavi.include.javascript">
                     <ae:parameter>%core.module_dir%/Web/config/javascript.xml</ae:parameter>
                 </setting>
 
-			</settings>
+            </settings>
 
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml" />
-			
-			<setting name="agavi.include.routing">
-				<ae:parameter>%core.module_dir%/Web/config/routing.xml</ae:parameter>
-			</setting>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple_data_provider.xml" />
+            
+            <setting name="agavi.include.routing">
+                <ae:parameter>%core.module_dir%/Web/config/routing.xml</ae:parameter>
+            </setting>
           
-				
-		</module>
-		
+                
+        </module>
+        
     </ae:configuration>
     <!--  Try include the overwriting file -->
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@web_conf_dir@/module_web.xml#xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0)xpointer(ae:configurations/node())">

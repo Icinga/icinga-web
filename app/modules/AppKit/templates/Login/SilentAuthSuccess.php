@@ -21,5 +21,5 @@
 // -----------------------------------------------------------------------------
 // {{{ICINGA_LICENSE_CODE}}}
 
-	// Just a placeholder
+    // Just a placeholder
 ?>

@@ -47,7 +47,7 @@ Cronk.grid.CommentColumnRenderer = new (function () {
         throbber.each(function(element) {
             element.remove();
         });
-    };	
+    };  
     
     var getIdsFromJSON = function(json, fieldname) {
         var ids = [];

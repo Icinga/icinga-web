@@ -46,8 +46,8 @@ class AppKit_DataProvider_IconProviderAction extends AppKitBaseAction {
     public function execute(AgaviRequestDataHolder $rd) {
 
         $model = $this->getContext()->getModel('IconFiles', 'AppKit', array(
-                'path'	=> $rd->getParameter('path'),
-                'query'	=> $rd->getParameter('query')
+                'path'  => $rd->getParameter('path'),
+                'query' => $rd->getParameter('query')
                                                ));
 
         $this->setAttributeByRef('filemodel', $model);

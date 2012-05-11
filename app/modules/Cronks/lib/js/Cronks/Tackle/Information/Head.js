@@ -160,7 +160,7 @@ Ext.ns('Icinga.Cronks.Tackle.Information');
         },
         
         getStore: function() {
-        	return this.store;
+            return this.store;
         }
     });
 

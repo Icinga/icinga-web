@@ -81,7 +81,7 @@ class Cronks_System_CronkPortalSuccessView extends CronksBaseView {
 
                     // @todo: Works better without, quickfix!
                     //if(!isset($result[$parts[1]]))
-                    //	$result[$parts[1]] = array();
+                    //  $result[$parts[1]] = array();
 
                     $result[$parts[1]."[".$parts[2]."]"] = $parts[3];
                 } else {

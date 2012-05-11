@@ -41,25 +41,25 @@ Ext.ns('Icinga.Api');
         countColumn: null,
         withSLA: false,
         constructor: function (cfg) {
-            if (Ext.isEmpty(cfg.columns) === false) {	
-            	/*
-            	 * Use default ext fields syntax for mapping or 
-            	 * special icinga column syntax for simple api
-            	 * queries 
-            	 */
-            	if (Ext.isArray(cfg.columns)) {
-            		if (Ext.isObject(cfg.columns[0])) {
-            			cfg.fields = cfg.columns;
-            			cfg.columns = [];
-            			Ext.each(cfg.fields, function(val, key) {
-            				cfg.columns.push( (Ext.isEmpty(val.mapping) === true) ? val.name : val.mapping );
-            			}, this);
-            		} else {
-            			cfg.fields = cfg.columns;
-            		}
-            	} else {
-            		cfg.fields = [cfg.columns];
-            	}
+            if (Ext.isEmpty(cfg.columns) === false) {   
+                /*
+                 * Use default ext fields syntax for mapping or 
+                 * special icinga column syntax for simple api
+                 * queries 
+                 */
+                if (Ext.isArray(cfg.columns)) {
+                    if (Ext.isObject(cfg.columns[0])) {
+                        cfg.fields = cfg.columns;
+                        cfg.columns = [];
+                        Ext.each(cfg.fields, function(val, key) {
+                            cfg.columns.push( (Ext.isEmpty(val.mapping) === true) ? val.name : val.mapping );
+                        }, this);
+                    } else {
+                        cfg.fields = cfg.columns;
+                    }
+                } else {
+                    cfg.fields = [cfg.columns];
+                }
             }
             
             if (cfg.withSLA) {

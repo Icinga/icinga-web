@@ -72,8 +72,8 @@ class AppKit_Login_AjaxLoginSuccessView extends AppKitBaseView {
         }
 
         return json_encode(array(
-                               'success'		=> $authenticated,
-                               'errors'		=> $errors
+                               'success'        => $authenticated,
+                               'errors'     => $errors
                            ));
 
     }

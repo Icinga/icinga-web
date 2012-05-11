@@ -40,9 +40,9 @@ class NsmPrincipal extends BaseNsmPrincipal {
         parent::setUp();
 
         $this->hasMany('Cronk', array(
-                           'local'		=> 'cpc_principal_id',
-                           'foreign'	=> 'cpc_cronk_id',
-                           'refClass'	=> 'CronkPrincipalCronk'
+                           'local'      => 'cpc_principal_id',
+                           'foreign'    => 'cpc_cronk_id',
+                           'refClass'   => 'CronkPrincipalCronk'
                        ));
     }
 

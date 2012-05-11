@@ -27,9 +27,9 @@
  */
 abstract class IcingaStateInfo {
 
-    const WRAP_LEFT		= '';
-    const WRAP_RIGHT	= '';
-    const UNKNOWN_TEXT	= 'NOT RECOGNIZED';
+    const WRAP_LEFT     = '';
+    const WRAP_RIGHT    = '';
+    const UNKNOWN_TEXT  = 'NOT RECOGNIZED';
 
     /**
      * The current state
@@ -55,7 +55,7 @@ abstract class IcingaStateInfo {
 
     /**
      * Generic constructor to create this object
-     * @param mixed	$type	The current status
+     * @param mixed $type   The current status
      * @return none
      */
     public function __construct($type) {
@@ -67,7 +67,7 @@ abstract class IcingaStateInfo {
     /**
      * Sets the state by an integer value
      * @param integer $id
-     * @return boolean	always true
+     * @return boolean  always true
      */
     public function setStateById($id) {
         $this->current_state = $id;

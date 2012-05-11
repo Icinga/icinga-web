@@ -167,11 +167,11 @@ Ext.ns('Icinga.Cronks.System');
             });
 
             return [
-	            this.clearButton, 
-	            this.textField, 
-	            this.searchButton, 
-	            this.reloadButton, 
-	            this.helpButton
+                this.clearButton, 
+                this.textField, 
+                this.searchButton, 
+                this.reloadButton, 
+                this.helpButton
             ];
         },
 

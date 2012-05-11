@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://icinga.org/cronks/config/parts/cronks/1.0">
-	<ae:configuration>
-	
-		<categories>
-		
-			<category name="core">
-				<ae:parameter name="title">Core components</ae:parameter>
-				<ae:parameter name="visible">false</ae:parameter>
-			</category>
-			
-			<category name="data">
-				<ae:parameter name="title">Data</ae:parameter>
-				<ae:parameter name="visible">true</ae:parameter>
-				<ae:parameter name="position">10</ae:parameter>
-				<!-- Activate first! -->
-				<ae:parameter name="active">true</ae:parameter>
-			</category>
-	
-			<category name="to">
-				<ae:parameter name="title">Tactical Overview</ae:parameter>
-				<ae:parameter name="visible">true</ae:parameter>
-				<ae:parameter name="position">20</ae:parameter>
-			</category>
-			
-			<category name="misc">
-				<ae:parameter name="title">Misc</ae:parameter>
-				<ae:parameter name="visible">true</ae:parameter>
-				<ae:parameter name="position">99</ae:parameter>
-			</category>
-			
-			<category name="my">
-				<ae:parameter name="title">My</ae:parameter>
-				<ae:parameter name="visible">true</ae:parameter>
-				<ae:parameter name="position">999</ae:parameter>
-			</category>
-	
-		</categories>
-	</ae:configuration>
+    <ae:configuration>
+    
+        <categories>
+        
+            <category name="core">
+                <ae:parameter name="title">Core components</ae:parameter>
+                <ae:parameter name="visible">false</ae:parameter>
+            </category>
+            
+            <category name="data">
+                <ae:parameter name="title">Data</ae:parameter>
+                <ae:parameter name="visible">true</ae:parameter>
+                <ae:parameter name="position">10</ae:parameter>
+                <!-- Activate first! -->
+                <ae:parameter name="active">true</ae:parameter>
+            </category>
+    
+            <category name="to">
+                <ae:parameter name="title">Tactical Overview</ae:parameter>
+                <ae:parameter name="visible">true</ae:parameter>
+                <ae:parameter name="position">20</ae:parameter>
+            </category>
+            
+            <category name="misc">
+                <ae:parameter name="title">Misc</ae:parameter>
+                <ae:parameter name="visible">true</ae:parameter>
+                <ae:parameter name="position">99</ae:parameter>
+            </category>
+            
+            <category name="my">
+                <ae:parameter name="title">My</ae:parameter>
+                <ae:parameter name="visible">true</ae:parameter>
+                <ae:parameter name="position">999</ae:parameter>
+            </category>
+    
+        </categories>
+    </ae:configuration>
 </ae:configurations>

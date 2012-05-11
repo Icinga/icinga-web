@@ -32,9 +32,9 @@ class Cronks_System_ViewProc_SendCommandSuccessView extends CronksBaseView {
     public function executeJson(AgaviRequestDataHolder $rd) {
 
         $out = array(
-                   'success'	=> $this->getAttribute('ok'),
-                   'errors'	=> array(
-                       'default'	=> $this->getAttribute('error')
+                   'success'    => $this->getAttribute('ok'),
+                   'errors' => array(
+                       'default'    => $this->getAttribute('error')
                    )
                );
 

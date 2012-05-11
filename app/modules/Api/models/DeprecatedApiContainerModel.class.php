@@ -40,47 +40,47 @@ class Api_DeprecatedApiContainerModel extends IcingaWebBaseModel
      * @var array
      */
     private static $configMap = array(
-                                    'modules.web.api.file'					=> 'apiFile',
-                                    'modules.web.api.class'					=> 'apiClass',
-                                    'modules.web.api.interfaces.data'		=> 'configData',
-                                    'modules.web.api.interfaces.command'	=> 'configCmd'
+                                    'modules.web.api.file'                  => 'apiFile',
+                                    'modules.web.api.class'                 => 'apiClass',
+                                    'modules.web.api.interfaces.data'       => 'configData',
+                                    'modules.web.api.interfaces.command'    => 'configCmd'
                                 );
 
     /**
      * File there the api resides
      * @var string
      */
-    private $apiFile		= null;
+    private $apiFile        = null;
 
     /**
      * Class name
      * @var string
      */
-    private $apiClass		= null;
+    private $apiClass       = null;
 
     /**
      * Configuration of the connection
      * @var array
      */
-    private $configData		= null;
+    private $configData     = null;
 
     /**
      * Configuration of command dispatchers
      * @var array
      */
-    private $configCmd		= null;
+    private $configCmd      = null;
 
     /**
      *
      * @var IcingaApiConnection
      */
-    private $apiData		= null;
+    private $apiData        = null;
 
     /**
      * Array of IcingaApiCommandDispatcher
      * @var array
      */
-    private $apiDispatcher	= array();
+    private $apiDispatcher  = array();
 
     private $instanceDispatcher = array();
 

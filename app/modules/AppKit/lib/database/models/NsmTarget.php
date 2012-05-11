@@ -34,7 +34,7 @@
  */
 class NsmTarget extends BaseNsmTarget {
 
-    const TYPE_DUMMY	= 'dummy';
+    const TYPE_DUMMY    = 'dummy';
 
     private $target_object = null;
 

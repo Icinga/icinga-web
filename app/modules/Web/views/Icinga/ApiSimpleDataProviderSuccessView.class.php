@@ -35,9 +35,9 @@ class Web_Icinga_ApiSimpleDataProviderSuccessView extends IcingaWebBaseView {
 
         // init
         $jsonData = array(
-                        'result'	=> array(
-                            'count'	=> 0,
-                            'data'	=> array(),
+                        'result'    => array(
+                            'count' => 0,
+                            'data'  => array(),
                         ),
                     );
         $model = $this->getContext()->getModel('Icinga.ApiSimpleDataProvider', 'Web');

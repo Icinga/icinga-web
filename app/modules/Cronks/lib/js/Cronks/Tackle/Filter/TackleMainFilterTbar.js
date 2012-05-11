@@ -32,7 +32,7 @@ Icinga.Cronks.Tackle.Filter.TackleMainFilterTbar = Ext.extend(Ext.Toolbar, {
         this.parentId = config.id;
         this.store = config.store;
         this.autoRefreshInterval = AppKit.getPrefVal('org.icinga.grid.refreshTime')*100 || 30000;
-		var filterUpdateTask = new Ext.util.DelayedTask(this.updateFilterImpl, this);
+        var filterUpdateTask = new Ext.util.DelayedTask(this.updateFilterImpl, this);
         this.updateFilter = function(t) {
             filterUpdateTask.delay(200,null);
         };

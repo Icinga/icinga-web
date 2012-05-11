@@ -202,7 +202,7 @@ Ext.ns('Cronk');
                 }
                 
                 if (this.cmp.getEl()) {
-                	this.setCronkDomAttributes();
+                    this.setCronkDomAttributes();
                 }
             },
 
@@ -286,10 +286,10 @@ Ext.ns('Cronk');
                 
                 var cParams = {};
                 Ext.iterate(this.cmp.cronkConfig.params, function(k, v) {
-                	// A very very small security check
-                	if (!k.match(/^pass/i)) {
-                	   cParams['cronkparam:' + k] = v;
-                	}
+                    // A very very small security check
+                    if (!k.match(/^pass/i)) {
+                       cParams['cronkparam:' + k] = v;
+                    }
                });
                
                el.set(cParams);

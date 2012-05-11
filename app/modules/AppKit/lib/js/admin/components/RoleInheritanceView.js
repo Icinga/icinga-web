@@ -55,13 +55,13 @@ Ext.ns("AppKit.Admin.Components");
         },
         
         initComponent : function() {
-        	
-        	AppKit.Admin.Components.RoleInheritanceView.superclass.initComponent.call(this);
-        	
-        	this.store.on("load", function () {
+            
+            AppKit.Admin.Components.RoleInheritanceView.superclass.initComponent.call(this);
+            
+            this.store.on("load", function () {
                 this.insertRoles();
             }, this);
-        	
+            
             this.getSelectionModel().on("selectionchange", function (model, node) {
                 if (!node) {
                     return true;
@@ -70,7 +70,7 @@ Ext.ns("AppKit.Admin.Components");
                 if (!Ext.isEmpty(this.grid)) {
                     this.grid.getSelectionModel().selectRecords(record);
                 } else {
-                	throw("<object>.grid configuration was not set!");
+                    throw("<object>.grid configuration was not set!");
                 }
 
             }, this);
@@ -95,7 +95,7 @@ Ext.ns("AppKit.Admin.Components");
             var selected = null;
             
             if (selected_node) {
-            	selected = selected_node.id;
+                selected = selected_node.id;
             }
             
             this.getRootNode().removeAll();
@@ -109,7 +109,7 @@ Ext.ns("AppKit.Admin.Components");
                     var parent = record.get("parent");
                     if (!this.inserted[id] && (!parent || (parent && this.inserted[parent]))) {
                         var node = new Ext.tree.TreeNode({
-                        	id: 'xrole-' + id,
+                            id: 'xrole-' + id,
                             text: name,
                             iconCls: 'icinga-icon-group'
                         });
@@ -129,9 +129,9 @@ Ext.ns("AppKit.Admin.Components");
             this.doLayout();
             
             if (selected) {
-            	selected_node = this.getNodeById(selected);
-            	this.expandPath(selected_node.getPath());
-            	this.getSelectionModel().select(selected_node);
+                selected_node = this.getNodeById(selected);
+                this.expandPath(selected_node.getPath());
+                this.getSelectionModel().select(selected_node);
             }
             
             return true;

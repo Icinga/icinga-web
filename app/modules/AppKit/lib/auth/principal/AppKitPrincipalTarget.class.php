@@ -29,9 +29,9 @@
  */
 abstract class AppKitPrincipalTarget {
 
-    protected $fields		= array();
-    protected $type			= null;
-    protected $description	= null;
+    protected $fields       = array();
+    protected $type         = null;
+    protected $description  = null;
 
     public function __construct() {
 

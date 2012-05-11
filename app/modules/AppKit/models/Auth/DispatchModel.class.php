@@ -24,14 +24,14 @@
 
 class AppKit_Auth_DispatchModel extends AppKitBaseModel implements AgaviISingletonModel {
 
-    const NS_PROVIDER		= 'modules.appkit.auth.provider';
-    const NS_DEFAULTS		= 'modules.appkit.auth.defaults';
+    const NS_PROVIDER       = 'modules.appkit.auth.provider';
+    const NS_DEFAULTS       = 'modules.appkit.auth.defaults';
 
-    private $config			= array();
-    private $config_def		= array();
+    private $config         = array();
+    private $config_def     = array();
 
-    private $provider		= array();
-    private $provider_keys	= array();
+    private $provider       = array();
+    private $provider_keys  = array();
     
     private $currentProvider = null;
 
